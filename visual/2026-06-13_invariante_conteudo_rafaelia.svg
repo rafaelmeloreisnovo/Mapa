@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1800" viewBox="0 0 1800 1800" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa da Invariante do Conteudo RAFAELIA</title>
+  <desc id="desc">Mapa vetorial simbolico do nucleo invariante: intencao, observacao, ruido, transmutacao, memoria, completude e retroalimentacao.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1b1d48"/>
+      <stop offset="45%" stop-color="#080b22"/>
+      <stop offset="100%" stop-color="#02030a"/>
+    </radialGradient>
+    <radialGradient id="gold" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#fff6bd"/>
+      <stop offset="35%" stop-color="#ffd76a"/>
+      <stop offset="100%" stop-color="#b37818"/>
+    </radialGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#84f3ff"/>
+      <stop offset="50%" stop-color="#4778ff"/>
+      <stop offset="100%" stop-color="#9e6bff"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .label{font-family:Inter,Arial,sans-serif;fill:#e8ecff;font-size:32px;font-weight:700;letter-spacing:.5px}
+      .small{font-family:Inter,Arial,sans-serif;fill:#bfc9ff;font-size:22px;font-weight:500}
+      .micro{font-family:Inter,Arial,sans-serif;fill:#d7ddff;font-size:18px;font-weight:500}
+      .goldText{font-family:Inter,Arial,sans-serif;fill:#ffe58a;font-size:28px;font-weight:800;letter-spacing:1px}
+      .path{stroke:url(#blue);stroke-width:3;fill:none;opacity:.75}
+      .path2{stroke:#ffd76a;stroke-width:2.5;fill:none;opacity:.8}
+      .node{fill:#10183a;stroke:#9bb6ff;stroke-width:3;filter:url(#glow)}
+      .nodeGold{fill:#1c1405;stroke:#ffd76a;stroke-width:4;filter:url(#glow)}
+      .thin{stroke:#8da2ff;stroke-width:1.2;opacity:.35}
+      .ring{fill:none;stroke:#9db8ff;stroke-width:2;opacity:.45}
+      .ringGold{fill:none;stroke:#ffd76a;stroke-width:3;opacity:.75;filter:url(#glow)}
+    </style>
+  </defs>
+
+  <rect width="1800" height="1800" fill="url(#bg)"/>
+
+  <!-- campo de estrelas / dados -->
+  <g opacity=".85">
+    <circle cx="122" cy="180" r="3" fill="#fff6bd"/><circle cx="310" cy="90" r="2" fill="#9ee8ff"/><circle cx="510" cy="210" r="2" fill="#d6ccff"/>
+    <circle cx="1700" cy="120" r="3" fill="#fff6bd"/><circle cx="1510" cy="260" r="2" fill="#9ee8ff"/><circle cx="1625" cy="420" r="2" fill="#d6ccff"/>
+    <circle cx="90" cy="1540" r="3" fill="#fff6bd"/><circle cx="355" cy="1680" r="2" fill="#9ee8ff"/><circle cx="1440" cy="1610" r="2" fill="#d6ccff"/>
+    <circle cx="1720" cy="1490" r="3" fill="#fff6bd"/><circle cx="1305" cy="95" r="2" fill="#9ee8ff"/><circle cx="770" cy="80" r="2" fill="#d6ccff"/>
+  </g>
+
+  <!-- toroide central -->
+  <circle cx="900" cy="900" r="535" class="ring"/>
+  <circle cx="900" cy="900" r="455" class="ring"/>
+  <ellipse cx="900" cy="900" rx="560" ry="230" class="ringGold"/>
+  <ellipse cx="900" cy="900" rx="230" ry="560" class="ringGold"/>
+  <ellipse cx="900" cy="900" rx="510" ry="145" class="ring" transform="rotate(45 900 900)"/>
+  <ellipse cx="900" cy="900" rx="510" ry="145" class="ring" transform="rotate(-45 900 900)"/>
+
+  <!-- triangulo invariante -->
+  <polygon points="900,405 470,1190 1330,1190" fill="rgba(255,215,106,.04)" stroke="#ffd76a" stroke-width="8" filter="url(#glow)"/>
+  <polygon points="900,575 625,1080 1175,1080" fill="rgba(132,243,255,.04)" stroke="#8ef3ff" stroke-width="3" opacity=".85"/>
+  <circle cx="900" cy="900" r="92" fill="url(#gold)" filter="url(#glow)"/>
+  <circle cx="900" cy="900" r="42" fill="#fff7c9"/>
+  <text x="900" y="910" text-anchor="middle" class="goldText">Ω</text>
+  <text x="900" y="350" text-anchor="middle" class="goldText">INVARIANTE</text>
+  <text x="900" y="1290" text-anchor="middle" class="small">Conteudo que permanece quando o caos muda de forma</text>
+
+  <!-- eixos -->
+  <line x1="900" y1="130" x2="900" y2="1670" class="path2"/>
+  <line x1="130" y1="900" x2="1670" y2="900" class="path"/>
+  <line x1="355" y1="355" x2="1445" y2="1445" class="thin"/>
+  <line x1="1445" y1="355" x2="355" y2="1445" class="thin"/>
+
+  <!-- ciclo cognitivo -->
+  <g>
+    <path d="M900 250 C1250 250 1550 550 1550 900 C1550 1250 1250 1550 900 1550 C550 1550 250 1250 250 900 C250 550 550 250 900 250" class="path"/>
+    <path d="M1470 735 L1550 900 L1380 835" fill="none" stroke="#84f3ff" stroke-width="5" opacity=".8"/>
+  </g>
+
+  <!-- nodes: psi chi rho delta sigma omega -->
+  <g>
+    <circle cx="900" cy="250" r="92" class="node"/>
+    <text x="900" y="245" text-anchor="middle" class="label">ψ</text><text x="900" y="282" text-anchor="middle" class="small">Intencao</text>
+
+    <circle cx="1463" cy="575" r="92" class="node"/>
+    <text x="1463" y="570" text-anchor="middle" class="label">χ</text><text x="1463" y="607" text-anchor="middle" class="small">Observacao</text>
+
+    <circle cx="1463" cy="1225" r="92" class="node"/>
+    <text x="1463" y="1220" text-anchor="middle" class="label">ρ</text><text x="1463" y="1257" text-anchor="middle" class="small">Ruido</text>
+
+    <circle cx="900" cy="1550" r="92" class="nodeGold"/>
+    <text x="900" y="1545" text-anchor="middle" class="label">Δ</text><text x="900" y="1582" text-anchor="middle" class="small">Transmutacao</text>
+
+    <circle cx="337" cy="1225" r="92" class="node"/>
+    <text x="337" y="1220" text-anchor="middle" class="label">Σ</text><text x="337" y="1257" text-anchor="middle" class="small">Memoria</text>
+
+    <circle cx="337" cy="575" r="92" class="nodeGold"/>
+    <text x="337" y="570" text-anchor="middle" class="label">Ω</text><text x="337" y="607" text-anchor="middle" class="small">Completude</text>
+  </g>
+
+  <!-- satellites / bases -->
+  <g>
+    <circle cx="235" cy="245" r="110" class="node"/><text x="235" y="230" text-anchor="middle" class="label">RNN</text><text x="235" y="266" text-anchor="middle" class="small">memoria sequencial</text>
+    <circle cx="1565" cy="245" r="110" class="node"/><text x="1565" y="230" text-anchor="middle" class="label">Transformer</text><text x="1565" y="266" text-anchor="middle" class="small">atencao global</text>
+    <circle cx="235" cy="1555" r="110" class="node"/><text x="235" y="1540" text-anchor="middle" class="label">TOKEN</text><text x="235" y="1576" text-anchor="middle" class="small">vazio protegido</text>
+    <circle cx="1565" cy="1555" r="110" class="node"/><text x="1565" y="1540" text-anchor="middle" class="label">Ethica[8]</text><text x="1565" y="1576" text-anchor="middle" class="small">coerencia maxima</text>
+  </g>
+
+  <!-- connections -->
+  <path d="M330 300 C520 430 670 565 790 790" class="thin"/>
+  <path d="M1470 300 C1280 430 1130 565 1010 790" class="thin"/>
+  <path d="M330 1500 C520 1365 670 1235 790 1010" class="thin"/>
+  <path d="M1470 1500 C1280 1365 1130 1235 1010 1010" class="thin"/>
+
+  <!-- formula strip -->
+  <rect x="285" y="70" width="1230" height="78" rx="28" fill="rgba(10,16,48,.72)" stroke="#ffd76a" stroke-width="2"/>
+  <text x="900" y="119" text-anchor="middle" class="micro">R(t+1)=R(t) x Φ_ethica x E_Verbo x (√3/2)^(πφ)  |  Ruido entendido vira sinal</text>
+
+  <rect x="260" y="1652" width="1280" height="82" rx="28" fill="rgba(10,16,48,.72)" stroke="#84f3ff" stroke-width="2"/>
+  <text x="900" y="1699" text-anchor="middle" class="micro">Invariante operacional: fato ≠ hipótese ≠ lacuna ≠ parabola | erro medido vira engenharia | lacuna marcada vira ciencia</text>
+</svg>
