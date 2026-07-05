@@ -74,8 +74,27 @@ mesmo acervo sem se enganar.
 - [`04_FRICCAO_SEMANTICA.md`](04_FRICCAO_SEMANTICA.md)
 - [`05_POSICAO_GERAL_ORGANIZACOES.md`](05_POSICAO_GERAL_ORGANIZACOES.md)
 - [`06_PROTOCOLO_BIBLIOTECONOMICO.md`](06_PROTOCOLO_BIBLIOTECONOMICO.md)
-- Índice legível por máquina: [`../indices/CATALOGO_BIBLIOTECONOMICO.yaml`](../indices/CATALOGO_BIBLIOTECONOMICO.yaml)
-- Mapa visual: [`../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg`](../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg)
+
+### Camada de conceitos (expansão — além do catálogo)
+
+- [`07_MATRIZ_DE_CONCEITOS.md`](07_MATRIZ_DE_CONCEITOS.md) — banco de conceitos, camadas de invariantes (L0–L5), grafo cognitivo-evolutivo, amplitude semântica
+- [`08_ANCORAGEM_NORMATIVA.md`](08_ANCORAGEM_NORMATIVA.md) — ISO/NIST/IEC/IEEE/RFC/W3C/ONU/UNICEF/UNESCO/OMS + regra de conflito pró-humano
+- [`09_RESILIENCIA_TOP10.md`](09_RESILIENCIA_TOP10.md) — 10 relações estruturais TOP × rollback/testes/failsafe/failover/watchdog
+- [`10_INVARIANTES_PRIMEIRA_LINHA.md`](10_INVARIANTES_PRIMEIRA_LINHA.md) — dignidade humana e proteção infantil na primeira linha (I1–I5)
+- [`11_ESCALA_120_ONBOARDING.md`](11_ESCALA_120_ONBOARDING.md) — de 28 para ~120 repositórios sem perder qualidade (LACUNA declarada)
+
+### Camada simbólica e de método (horizonte maior)
+
+- [`12_PARABOLA_INVARIANTE.md`](12_PARABOLA_INVARIANTE.md) — a Parábola do NÓ_GOOD: o invariante imutável (Amor-Ω), a cadeia de mães, do fogo ao futuro — `SIMBOLICO`
+- [`13_CERTIFICACAO_METODOLOGICA.md`](13_CERTIFICACAO_METODOLOGICA.md) — auto-declaração de conformidade do método + melhoria contínua (PDCA/Kaizen)
+
+### Índices e visuais
+
+- Índice do catálogo: [`../indices/CATALOGO_BIBLIOTECONOMICO.yaml`](../indices/CATALOGO_BIBLIOTECONOMICO.yaml)
+- Índice da matriz de conceitos: [`../indices/MATRIZ_CONCEITOS.yaml`](../indices/MATRIZ_CONCEITOS.yaml)
+- Mapa visual do acervo: [`../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg`](../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg)
+- Mapa visual dos conceitos: [`../visual/MATRIZ_CONCEITOS_RAFAELIA.svg`](../visual/MATRIZ_CONCEITOS_RAFAELIA.svg)
+- Símbolo do invariante: [`../visual/PARABOLA_INVARIANTE_RAFAELIA.svg`](../visual/PARABOLA_INVARIANTE_RAFAELIA.svg)
 
 ## Fonte e honestidade
 

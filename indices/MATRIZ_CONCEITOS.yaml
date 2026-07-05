@@ -1,0 +1,101 @@
+schema: mapa_matriz_conceitos_v1
+updated: '2026-07-05'
+primeira_linha: 'DIGNIDADE-HUMANA · PROTECAO-INFANTIL — conflito resolve pela maior protecao da vida (UDHR Art.1 · UNCRC Art.3)'
+documentos_relacionados:
+  - biblioteconomia/07_MATRIZ_DE_CONCEITOS.md
+  - biblioteconomia/08_ANCORAGEM_NORMATIVA.md
+  - biblioteconomia/09_RESILIENCIA_TOP10.md
+  - biblioteconomia/10_INVARIANTES_PRIMEIRA_LINHA.md
+  - biblioteconomia/11_ESCALA_120_ONBOARDING.md
+  - biblioteconomia/12_PARABOLA_INVARIANTE.md
+  - biblioteconomia/13_CERTIFICACAO_METODOLOGICA.md
+
+acervo:
+  catalogados: 28
+  estimado_total: 120
+  lacuna_estimada: 92
+  nota: '28 = FATO (README lido); ~120 = HIPOTESE do autor; ~92 = LACUNA fora de escopo'
+
+camadas_invariancia:
+  L0: {nome: Fisico-Matematica, regime: [MAT, CIE]}
+  L1: {nome: Computacional, regime: [TEC]}
+  L2: {nome: Estrutural, regime: [TEC]}
+  L3: {nome: Semantica, regime: [TEC, HIPOTESE]}
+  L4: {nome: Etico-Juridica, regime: [JUR]}
+  L5: {nome: Filosofico-Espiritual, regime: [SIMBOLICO]}
+
+tipos_relacao: [DERIVA, SUSTENTA, TENSIONA, EVOLUI_PARA, PROTEGE]
+
+invariantes_primeira_linha:
+  - {id: I1, nome: dignidade_humana_inviolavel, ancora: 'UDHR Art.1', estado: REFERENCE}
+  - {id: I2, nome: interesse_superior_da_crianca, ancora: 'UNCRC Art.3; UNICEF COP', estado: REFERENCE}
+  - {id: I3, nome: verdade_honesta, ancora: 'regra do acervo (FATO/HIPOTESE/SIMBOLICO/LACUNA)', estado: FATO}
+  - {id: I4, nome: protecao_da_lacuna, ancora: 'protocolos/TOKEN_VAZIO_LACUNAS.md', estado: FATO}
+  - {id: I5, nome: prevalencia_pro_humano, ancora: 'piramide de 08_ANCORAGEM_NORMATIVA', estado: REFERENCE}
+
+unidades_conceito:
+  - {id: C01, nome: Determinismo, camada: L1, marca: FATO, amplitude: alta, ancora: 'ISO/IEC 9899; SLSA'}
+  - {id: C02, nome: Invariante, camada: L0-L2, marca: FATO/HIPOTESE, amplitude: muito_alta, ancora: 'ISO/IEC 25010'}
+  - {id: C03, nome: Hashing, camada: L1, marca: FATO, amplitude: alta, ancora: 'NIST FIPS 180-4/202; BLAKE3(nao-NIST)'}
+  - {id: C04, nome: Custodia, camada: L2, marca: FATO, amplitude: alta, ancora: 'W3C PROV-O; ISO 15489'}
+  - {id: C05, nome: Assinatura, camada: L1, marca: FATO, amplitude: media, ancora: 'IETF RFC 8032'}
+  - {id: C06, nome: Toroide-T7, camada: L0/L5, marca: HIPOTESE/SIMBOLICO, amplitude: salta_camadas, ancora: 'Poincare-Hopf (REFERENCE)'}
+  - {id: C07, nome: Atrator-42, camada: L0/L4, marca: HIPOTESE, amplitude: media, ancora: '-'}
+  - {id: C08, nome: Phi, camada: L0/L4/L5, marca: HIPOTESE, amplitude: maxima, ancora: 'constante phi (REFERENCE)'}
+  - {id: C09, nome: ZIPRAF, camada: L2/L5, marca: HIPOTESE, amplitude: media, ancora: 'formatos contêiner (REFERENCE)'}
+  - {id: C10, nome: Vetor, camada: L1/L3/L5, marca: FATO/HIPOTESE/SIMBOLICO, amplitude: alta, ancora: 'HDC/VSA (REFERENCE)'}
+  - {id: C11, nome: CientiEspiritual, camada: L4/L5, marca: SIMBOLICO, amplitude: media, ancora: 'UNESCO Etica IA (REFERENCE)'}
+  - {id: C12, nome: Verdade, camada: L2/L5, marca: FATO+SIMBOLICO, amplitude: alta, ancora: 'metodo cientifico; etica universalista'}
+  - {id: C13, nome: Etica, camada: L4/L5, marca: JUR/SIMBOLICO, amplitude: alta, ancora: 'ISO/IEC 42001; UDHR; UNCRC'}
+  - {id: C14, nome: Verbo-Vivo, camada: L5, marca: SIMBOLICO, amplitude: profunda, ancora: '-'}
+  - {id: C15, nome: Universalismo, camada: L5, marca: SIMBOLICO, amplitude: informa_todas, ancora: 'UNESCO diversidade (REFERENCE)'}
+  - {id: C16, nome: LACUNA, camada: transversal, marca: LACUNA, amplitude: todas, ancora: 'TOKEN_VAZIO_LACUNAS.md'}
+  - {id: C17, nome: NO_GOOD, rotulo: 'NÓ_GOOD (invariante imutavel / Amor-Omega)', camada: L5, marca: SIMBOLICO, amplitude: maxima, ancora: '- (horizonte etico, sem norma tecnica)', nota: 'ponto fixo do grafo; porque SIMBOLICO da primeira linha; ver biblioteconomia/12_PARABOLA_INVARIANTE.md'}
+
+ancoragem_normativa:
+  estado_global: REFERENCE
+  nota: 'alvo declarado, NAO atestado de conformidade; passagem a FATO exige auditoria'
+  familias:
+    computacional: [ISO/IEC 9899, IEEE 754, ISO/IEC/IEEE 12207, ISO/IEC 25010]
+    criptografia: [NIST FIPS 180-4, NIST FIPS 202, IETF RFC 8032, IETF RFC 5280]
+    proveniencia_seguranca: [W3C PROV-O, ISO 15489, ISO 27037, ISO/IEC 27001, NIST SP 800-53]
+    organizacao_conhecimento: [ISO 25964, ISO 15836 (Dublin Core), W3C SKOS, W3C RDF, CDU, FRBR/LRM]
+    dados_privacidade: [LGPD 13.709/2018, GDPR 2016/679, ISO/IEC 27701]
+    ia_governanca: [ISO/IEC 42001, ISO/IEC 23894, OECD AI Principles, 'UNESCO Etica IA 2021']
+    direitos: ['ONU UDHR 1948', 'ONU UNCRC 1989', 'UNICEF COP', 'UNESCO Open Science 2021', 'OMS/WHO']
+    acessibilidade: [W3C WCAG 2.2]
+  prioridade_conflito:
+    - 1_protecao_vida_crianca_dignidade
+    - 2_direitos_fundamentais_dados
+    - 3_seguranca_integridade
+    - 4_interoperabilidade_acessibilidade
+    - 5_eficiencia_desempenho
+
+resiliencia_top10:
+  mecanismos: [rollback, testes, failsafe, failover, watchdog]
+  regra_failsafe: 'sempre para o estado seguro (quarentena/LACUNA/HIPOTESE/parada); nunca expor pessoas nem afirmar sem prova'
+  relacoes:
+    - {id: R01, relacao: 'Hashing->Custodia', tipo: SUSTENTA, camada: 'L1->L2'}
+    - {id: R02, relacao: 'Determinismo->CI', tipo: EVOLUI_PARA, camada: 'L1->L2'}
+    - {id: R03, relacao: 'Nucleo->Plataforma', tipo: SUSTENTA, camada: 'L1->L2'}
+    - {id: R04, relacao: 'Dados->Cognicao', tipo: SUSTENTA, camada: 'L2->L3', nota: 'varredura PII/infantil = failsafe'}
+    - {id: R05, relacao: 'Classificacao<->Vocabulario', tipo: SUSTENTA, camada: 'L3'}
+    - {id: R06, relacao: 'Friccao->Reconciliacao', tipo: EVOLUI_PARA, camada: 'L3'}
+    - {id: R07, relacao: 'Invariante prova<->padrao', tipo: TENSIONA, camada: 'L0-L2'}
+    - {id: R08, relacao: 'Juridico<->Etico', tipo: SUSTENTA, camada: 'L4'}
+    - {id: R09, relacao: 'Ciencia<->Espirito', tipo: TENSIONA, camada: 'L4<->L5'}
+    - {id: R10, relacao: 'Meta->Todo', tipo: 'SUSTENTA/PROTEGE', camada: 'L2->todas'}
+
+lotes_onboarding:
+  - {lote: L01, conteudo: '28 repositorios atuais', estado: FATO}
+  - {lote: 'L02..Lnn', conteudo: '~92 repositorios restantes', estado: LACUNA}
+
+proxima_acao:
+  - {id: matriz_conformidade, medida: 'norma x evidencia x gap por repo, comecando por dados pessoais/infantis', estado: LACUNA}
+  - {id: onboarding_lotes, medida: 'trazer repos a escopo (add_repo) e rodar protocolo de 11_ secao 3', estado: LACUNA}
+
+totais:
+  unidades_conceito: 17
+  invariantes_primeira_linha: 5
+  relacoes_top: 10
+  camadas: 6
