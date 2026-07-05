@@ -83,12 +83,18 @@ mesmo acervo sem se enganar.
 - [`10_INVARIANTES_PRIMEIRA_LINHA.md`](10_INVARIANTES_PRIMEIRA_LINHA.md) — dignidade humana e proteção infantil na primeira linha (I1–I5)
 - [`11_ESCALA_120_ONBOARDING.md`](11_ESCALA_120_ONBOARDING.md) — de 28 para ~120 repositórios sem perder qualidade (LACUNA declarada)
 
+### Camada simbólica e de método (horizonte maior)
+
+- [`12_PARABOLA_INVARIANTE.md`](12_PARABOLA_INVARIANTE.md) — a Parábola do NÓ_GOOD: o invariante imutável (Amor-Ω), a cadeia de mães, do fogo ao futuro — `SIMBOLICO`
+- [`13_CERTIFICACAO_METODOLOGICA.md`](13_CERTIFICACAO_METODOLOGICA.md) — auto-declaração de conformidade do método + melhoria contínua (PDCA/Kaizen)
+
 ### Índices e visuais
 
 - Índice do catálogo: [`../indices/CATALOGO_BIBLIOTECONOMICO.yaml`](../indices/CATALOGO_BIBLIOTECONOMICO.yaml)
 - Índice da matriz de conceitos: [`../indices/MATRIZ_CONCEITOS.yaml`](../indices/MATRIZ_CONCEITOS.yaml)
 - Mapa visual do acervo: [`../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg`](../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg)
 - Mapa visual dos conceitos: [`../visual/MATRIZ_CONCEITOS_RAFAELIA.svg`](../visual/MATRIZ_CONCEITOS_RAFAELIA.svg)
+- Símbolo do invariante: [`../visual/PARABOLA_INVARIANTE_RAFAELIA.svg`](../visual/PARABOLA_INVARIANTE_RAFAELIA.svg)
 
 ## Fonte e honestidade
 
