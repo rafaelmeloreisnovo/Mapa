@@ -1,0 +1,399 @@
+schema: mapa_catalogo_biblioteconomico_v1
+updated: '2026-07-05'
+fonte: leitura direta do README de cada repositorio
+regra_honestidade: separar prova de metafora (FATO/HIPOTESE/SIMBOLICO/LACUNA)
+documentos_relacionados:
+  - biblioteconomia/01_PLANO_DE_CLASSIFICACAO.md
+  - biblioteconomia/02_VOCABULARIO_CONTROLADO.md
+  - biblioteconomia/03_CATALOGO_REPOSITORIOS.md
+  - biblioteconomia/04_FRICCAO_SEMANTICA.md
+  - biblioteconomia/05_POSICAO_GERAL_ORGANIZACOES.md
+  - biblioteconomia/06_PROTOCOLO_BIBLIOTECONOMICO.md
+
+facetas:
+  P_dominio: [CRP, RTM, IAC, DAT, FIS, MTM, JUR, ESP, PLT, INF, ORG]
+  M_substrato: [C-ASM, RUST, PY, AND, JS, DOC, DAT, MIX]
+  E_operacao: [HASH, COMP, EXEC, EMUL, BUILD, ANALIS, PROV, PUBL, GOVERN, STORE, CATAL]
+  S_ambito:
+    conta: [RMN, IRF]
+    origem: [ORIG, FORK]
+    acesso: [PUB, PRIV]
+  T_maturidade: [CAN, ATV, PROT, SPEC, LAC]
+  D_dimensao: [CIE, MAT, TEC, JUR, ESP]
+
+notacao: 'RAF.<Dominio>.<Operacao>.<Dimensao>.<Maturidade>'
+
+registros:
+  - id: chipquantum
+    repo: rafaelmeloreisnovo/ChipQuantum
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: nucleo
+    notacao: RAF.CRP.EXEC.TEC.ATV
+    dimensao: [TEC, CIE]
+    descritores: [Criptografia, Determinismo, Toroide, Atrator-42, Hashing]
+    estado: ATV
+    fonte: ChipQuantum/README.md
+
+  - id: deepseek_rafcoder
+    repo: rafaelmeloreisnovo/DeepSeek-RafCoder
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: nucleo
+    notacao: RAF.RTM.EXEC.TEC.ATV
+    dimensao: [TEC]
+    descritores: [Runtime, Determinismo, Android-NDK, Assinatura]
+    estado: ATV
+    fonte: DeepSeek-RafCoder/README.md
+
+  - id: gaia_phi
+    repo: rafaelmeloreisnovo/GAIA_phi
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: nucleo
+    notacao: RAF.RTM.ANALIS.TEC.ATV
+    dimensao: [TEC, CIE]
+    descritores: [Determinismo, Hashing, Custodia, Dados]
+    estado: ATV
+    fonte: GAIA_phi/README.md
+
+  - id: blake3
+    repo: rafaelmeloreisnovo/BLAKE3
+    conta: RMN
+    origem: FORK
+    upstream: BLAKE3 oficial
+    acesso: PUB
+    estrato: nucleo
+    notacao: RAF.CRP.HASH.TEC.CAN
+    dimensao: [TEC, CIE]
+    descritores: [Hashing, Criptografia, Custodia, Fork]
+    estado: CAN
+    fonte: BLAKE3/README.md
+
+  - id: rafgittools
+    repo: rafaelmeloreisnovo/RafGitTools
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.PLT.BUILD.TEC.ATV
+    dimensao: [TEC, ESP]
+    descritores: [Determinismo, Android-NDK, Hashing, Invariante]
+    estado: ATV
+    fonte: RafGitTools/README.md
+
+  - id: vectras_vm_android
+    repo: instituto-Rafael/Vectras-VM-Android
+    conta: IRF
+    origem: ORIG
+    origem_nota: 'status fork nao afirmado no README [HIPOTESE]'
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.PLT.EMUL.TEC.CAN
+    dimensao: [TEC]
+    descritores: [Virtualizacao, Android-NDK, Build, Rastreabilidade]
+    estado: CAN
+    nota: exemplar de excelencia operacional (taxonomia de documentos)
+    fonte: Vectras-VM-Android/README.md
+
+  - id: termux_app_rafacodephi
+    repo: instituto-Rafael/termux-app-rafacodephi
+    conta: IRF
+    origem: FORK
+    upstream: termux/termux-app (GPLv3)
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.PLT.EXEC.TEC.ATV
+    dimensao: [TEC]
+    descritores: [Plataforma, Android-NDK, Fork]
+    estado: ATV
+    fonte: termux-app-rafacodephi/README.md
+
+  - id: termux_api_rafcodephi
+    repo: rafaelmeloreisnovo/termux-api_rafcodephi
+    conta: RMN
+    origem: FORK
+    upstream: termux/termux-api
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.PLT.EXEC.TEC.CAN
+    dimensao: [TEC]
+    descritores: [Plataforma, Android-NDK, Fork]
+    estado: CAN
+    fonte: termux-api_rafcodephi/README.md
+
+  - id: userland
+    repo: rafaelmeloreisnovo/UserLAnd
+    conta: RMN
+    origem: FORK
+    upstream: CypherpunkArmory/UserLAnd
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.PLT.EXEC.TEC.CAN
+    dimensao: [TEC]
+    descritores: [Plataforma, Virtualizacao, Fork]
+    estado: CAN
+    fonte: UserLAnd/README.md
+
+  - id: pcr_rafaelia_code_seed
+    repo: rafaelmeloreisnovo/PCR_Rafaelia_Code_seed
+    conta: RMN
+    origem: FORK
+    upstream: topjohnwu/Magisk
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.PLT.EXEC.TEC.ATV
+    dimensao: [TEC]
+    descritores: [Plataforma, Android-NDK, Fork, Determinismo]
+    estado: ATV
+    fonte: PCR_Rafaelia_Code_seed/README.MD
+
+  - id: qemu_rafaelia
+    repo: rafaelmeloreisnovo/qemu_rafaelia
+    conta: RMN
+    origem: FORK
+    upstream: QEMU
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.PLT.EMUL.TEC.CAN
+    dimensao: [TEC]
+    descritores: [Virtualizacao, Emulacao, Fork]
+    estado: CAN
+    fonte: qemu_rafaelia/README.rst
+
+  - id: actions
+    repo: rafaelmeloreisnovo/actions
+    conta: RMN
+    origem: FORK
+    upstream: gradle/actions
+    acesso: PUB
+    estrato: plataforma
+    notacao: RAF.INF.BUILD.TEC.CAN
+    dimensao: [TEC]
+    descritores: [Infraestrutura, Build, Fork]
+    estado: CAN
+    fonte: actions/README.md
+
+  - id: x0
+    repo: rafaelmeloreisnovo/X0
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: cognicao
+    notacao: RAF.IAC.ANALIS.TEC.ATV
+    dimensao: [TEC, CIE]
+    descritores: [Inteligencia-artificial, Fractal, Criptografia, Toroide]
+    estado: ATV
+    fonte: X0/README.md
+
+  - id: llamarafaelia
+    repo: rafaelmeloreisnovo/llamaRafaelia
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: cognicao
+    notacao: RAF.IAC.ANALIS.MAT.SPEC
+    dimensao: [MAT, CIE, TEC]
+    descritores: [Inteligencia-artificial, Matematica, Invariante]
+    estado: SPEC
+    fonte: llamaRafaelia/README.md
+
+  - id: conversations_chunks_private
+    repo: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE
+    conta: RMN
+    origem: ORIG
+    acesso: PRIV
+    estrato: cognicao
+    notacao: RAF.DAT.STORE.TEC.ATV
+    dimensao: [TEC]
+    descritores: [Dados, Custodia, Vetor]
+    estado: ATV
+    fonte: CONVERSATIONS_CHUNKS_PRIVATE/README.md
+
+  - id: home
+    repo: rafaelmeloreisnovo/home
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: cognicao
+    notacao: RAF.IAC.ANALIS.CIE.ATV
+    dimensao: [CIE, TEC]
+    descritores: [Analise, Documentacao-cientifica, Custodia]
+    estado: ATV
+    fonte: home/README.md
+
+  - id: relativity_living_light
+    repo: instituto-Rafael/relativity-living-light
+    conta: IRF
+    origem: ORIG
+    acesso: PUB
+    estrato: ciencia
+    notacao: RAF.FIS.PROV.CIE.CAN
+    dimensao: [CIE, MAT, ESP]
+    descritores: [Fisica, Cosmologia, Determinismo, Verbo-Vivo]
+    estado: CAN
+    doi: 10.5281/zenodo.17188137
+    fonte: relativity-living-light/README.md
+
+  - id: matematica
+    repo: rafaelmeloreisnovo/Matem-tica-
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: ciencia
+    notacao: RAF.MTM.PROV.MAT.ATV
+    dimensao: [MAT]
+    descritores: [Matematica, Invariante]
+    estado: ATV
+    nota: nome com acento normalizado (LACUNA de nome)
+    fonte: Matem-tica-/README.md
+
+  - id: papers
+    repo: rafaelmeloreisnovo/papers
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: ciencia
+    notacao: RAF.RTM.EXEC.TEC.SPEC
+    dimensao: [TEC, CIE, MAT]
+    descritores: [Runtime, Inteligencia-artificial, LACUNA]
+    estado: SPEC
+    lacuna_entrada: 'README.md e stub (8 bytes); conteudo real: exacordex_*, raefaelos_*, Rafael.md'
+    fonte: papers/README.md (stub) + observacao de papers/
+
+  - id: rafpolimata
+    repo: rafaelmeloreisnovo/RafPolimata
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: juridico
+    notacao: RAF.JUR.GOVERN.JUR.ATV
+    dimensao: [JUR, TEC, ESP]
+    descritores: [Direito, Governanca, Toroide, Atrator-42, Criptografia]
+    estado: ATV
+    fonte: RafPolimata/README.md
+
+  - id: rafaelia_private
+    repo: rafaelmeloreisnovo/Rafaelia_Private
+    conta: RMN
+    origem: ORIG
+    acesso: PRIV
+    estrato: juridico
+    notacao: RAF.RTM.GOVERN.TEC.ATV
+    dimensao: [TEC, JUR, ESP]
+    descritores: [Governanca, Etica, Determinismo, Assinatura]
+    estado: ATV
+    fonte: Rafaelia_Private/README.md
+
+  - id: lgpd_constituicoes
+    repo: instituto-Rafael/LGPD-Constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic
+    conta: IRF
+    origem: ORIG
+    acesso: PUB
+    estrato: juridico
+    notacao: RAF.JUR.GOVERN.JUR.ATV
+    dimensao: [JUR, ESP, CIE]
+    descritores: [Direito, Etica, CientiEspiritual, LACUNA]
+    estado: ATV
+    lacuna_entrada: 'sem README.md de topo; usar README_MASTER.md; proxima acao: criar README.md apontando para README_MASTER.md'
+    fonte: README_MASTER.md
+
+  - id: livrovivo_thisbooklives
+    repo: instituto-Rafael/LivroVivo_ThisBookLives
+    conta: IRF
+    origem: ORIG
+    acesso: PUB
+    estrato: espiritual
+    notacao: RAF.ESP.PUBL.ESP.CAN
+    dimensao: [ESP, CIE]
+    descritores: [Verbo-Vivo, Verdade, Assinatura, Universalismo, Vetor]
+    estado: CAN
+    doi: 10.5281/zenodo.17187966
+    fonte: LivroVivo_ThisBookLives/README.md
+
+  - id: blackhole
+    repo: instituto-Rafael/Blackhole
+    conta: IRF
+    origem: ORIG
+    acesso: PUB
+    estrato: espiritual
+    notacao: RAF.ESP.PUBL.ESP.SPEC
+    dimensao: [ESP, FIS]
+    descritores: [CientiEspiritual, Toroide, ZIPRAF, Verbo-Vivo]
+    estado: SPEC
+    fonte: Blackhole/README.md
+
+  - id: publicacientiespiritual
+    repo: instituto-Rafael/publicacientiespiritual
+    conta: IRF
+    origem: ORIG
+    acesso: PUB
+    estrato: espiritual
+    notacao: RAF.ESP.PUBL.ESP.CAN
+    dimensao: [ESP, CIE, JUR]
+    descritores: [CientiEspiritual, Verbo-Vivo, Universalismo]
+    estado: CAN
+    fonte: publicacientiespiritual/README.md
+
+  - id: zipraf_omega_full
+    repo: rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: espiritual
+    notacao: RAF.ESP.PUBL.ESP.ATV
+    dimensao: [ESP, TEC, CIE]
+    descritores: [Toroide, ZIPRAF, Etica, Fractal]
+    estado: ATV
+    fonte: ZIPRAF_OMEGA_FULL/README.md
+
+  - id: memrafcode
+    repo: rafaelmeloreisnovo/MemRafcode
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: meta
+    notacao: RAF.ORG.STORE.TEC.ATV
+    dimensao: [TEC]
+    descritores: [Custodia, Invariante, Rastreabilidade, LACUNA]
+    estado: ATV
+    fonte: MemRafcode/README.md
+
+  - id: mapa
+    repo: rafaelmeloreisnovo/Mapa
+    conta: RMN
+    origem: ORIG
+    acesso: PUB
+    estrato: meta
+    notacao: RAF.ORG.CATAL.TEC.ATV
+    dimensao: [TEC]
+    descritores: [Organizacao-do-conhecimento, Custodia, Invariante, LACUNA]
+    estado: ATV
+    nota: repositorio-alvo; hospeda esta camada biblioteconomica
+    fonte: Mapa/README.md
+
+totais:
+  registros: 28
+  por_estrato:
+    nucleo: 4
+    plataforma: 8
+    cognicao: 4
+    ciencia: 3
+    juridico: 3
+    espiritual: 4
+    meta: 2
+  forks: [blake3, termux_app_rafacodephi, termux_api_rafcodephi, userland, pcr_rafaelia_code_seed, qemu_rafaelia, actions]
+  lacunas_entrada: [papers, lgpd_constituicoes]
+
+proxima_acao:
+  - id: lgpd_readme_topo
+    objeto: LGPD-Constituicoes-...
+    medida: criar README.md de topo apontando para README_MASTER.md
+    estado: LACUNA
+  - id: papers_readme
+    objeto: papers
+    medida: expandir README.md descrevendo exacordex_/raefaelos_
+    estado: LACUNA
