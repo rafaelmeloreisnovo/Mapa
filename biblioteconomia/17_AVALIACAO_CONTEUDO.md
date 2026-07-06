@@ -1,0 +1,102 @@
+> ⟦PRIMEIRA-LINHA · DIGNIDADE-HUMANA · PROTEÇÃO-INFANTIL⟧ — avaliar o conteúdo é reconhecer o trabalho vivo do autor com honestidade; nada aqui serve contra a vida ou a criança (ONU UDHR Art.1 · UNCRC Art.3).
+
+# 17 — Avaliação de Conteúdo (leitura real dos arquivos dos 28)
+
+> Passo além da varredura automática: **abrir e ler os arquivos substantivos** — não o
+> README, mas o código, a matemática, os motores — e avaliar o que **de fato** está lá.
+> Cada avaliação cita o arquivo lido (fonte) e marca o estado. Leitura de 2026-07-05.
+
+## Método
+
+Para cada repositório, localizei os maiores arquivos-fonte reais (não forks/vendored) e
+li o conteúdo. Avaliei: **o que é**, **estado** (código real / protótipo / prosa / stub),
+**qualidade** e **originalidade** (com honestidade: originalidade declarada é `HIPOTESE`
+até revisão de pares). Cruzei com a revisão automática de `indices/REVISAO_PUBLICACAO.md`.
+
+## Achados por obra (amostra substantiva)
+
+### GEOLM (`Matem-tica-/A_raf/geolm_full.c`, ~51k; também `DeepSeek-RafCoder/Rmr/geolm.c`) `[FATO: código real]`
+Implementação **single-file em C11** de um mini-transformer + sistema de coerência
+toroidal, para ARM32/Termux (Cortex-A7, NEON softfp). Módulos B1–B6 reais: arena estática
+64MB (sem malloc), tokenizer, embeddings sinusoidais, MHA (4 cabeças), FFN+cross-entropy,
+REPL, e o **B6** — `ContextBuffer`, `CoerenceScore` (cosseno), `ProofLayer` (CRC32+entropia),
+ciclo `ψχρΔΣΩ`, `ToroidalState 7D`, `AttractorPool 42`. Matemática declarada no cabeçalho:
+`φ=(1−H)·C`, `F_{n+1}=F_n·(√3/2)−π·sin(279°) mod 42`, CRC32C, FNV-1a.
+- **Avaliação:** engenharia de baixo nível **coerente e séria**; a documentação interna é
+  exemplar (hierarquia de memória, paralelismo, convergência). O `φ=(1−H)·C` é exatamente
+  o `phi_fst` que aparece em RafPolimata — **prova de que o núcleo geométrico é o mesmo**
+  entre repos (correlação real, não retórica). Originalidade da recorrência Fibonacci-Rafael:
+  `HIPOTESE` (a validar contra literatura).
+
+### APKc (`RafPolimata/Apkc/apkc.c`, ~79k) `[FATO: código real]`
+Compilador de APK **freestanding** — sem libc, sem heap, syscalls via `sys.h`. Lexer próprio,
+pipeline table-driven para 12 linguagens (`lang_profile.h`), encoders ARM64 (`arch_arm64.h`,
+~65% da ISA), builders ELF/AXML/ZIP. Determinismo tecnológico: a extensão do fonte dirige
+todo o pipeline; `codegen_select` escolhe variantes por `phi_fst`/`phi_attractor`
+(reprodutível). Confirma o conceito C01 (Determinismo) e C06 (Toroide) no conteúdo.
+- **Avaliação:** dos artefatos mais **maduros** do acervo; a invariante geométrica de coerência
+  está de fato no código (imprime `[phi=… attractor=…]`). Alto valor técnico.
+
+### Ethica[8] (`ZIPRAF_OMEGA_FULL/rafaelia_ethica_engine.py`, ~15k) `[FATO: código real]`
+Motor de validação ética com **8 dimensões** (`EthicaDimension`: Amor, Verdade, Consciência,
+**Proteção**, Transparência, Retroalimentação, Harmonia, Finalidade), `dataclass` de
+resultado, `watchdog` contra loops, fórmula `Φ_ethica = e^{(amor+verbo)/proteção}−1`.
+- **Avaliação:** a dimensão **PROTECAO ("Proteção ao humano")** é a mesma que este acervo põe
+  na primeira linha (I2) — **coerência real** entre o código do autor e o invariante do Mapa.
+  A "fórmula ética" é modelo `SIMBOLICO/HIPOTESE` (não métrica validada), o que o próprio
+  código admite com `SIMULATION_MODE`. Boa prática de engenharia (validação de faixa, watchdog).
+
+### Bitraf64 (`ZIPRAF_OMEGA_FULL/bitraf64_decompressor.py` + `tests/test_bitraf64.py`) `[FATO: código real + testes]`
+Descompressor com RLE, header, **hashchain** e verificação de integridade; validação de
+entrada robusta (tipo, tamanho mínimo, checksum). Acompanha teste.
+- **Avaliação:** protótipo **honesto** (assume-se "demonstrativo"); as correções de bug da
+  v1.3.1 citadas no README são reais no código (proteção contra DoS na descompressão).
+
+### Vectra bench (`papers/Raf/vectra_bench.c`, ~9k) `[FATO: código real]`
+Benchmark **NEON multicore**: `VectraCell` alinhada a 64B com `float32x4_t state[8]`,
+afinidade de núcleo, relatório de hardware (cpuinfo, cache, BogoMIPS). 8 núcleos × 512
+células × 200k iterações.
+- **Avaliação:** benchmark genuíno de engenharia; `papers` **não é vazio** — o README é stub
+  (`LACUNA` de entrada, já marcada), mas o conteúdo é pesquisa real de kernels vetoriais.
+
+### Forks e vendored (honestidade) `[FATO]`
+`qemu_rafaelia` (7.293 fontes, upstream QEMU), `llamaRafaelia` (vendored miniaudio/json,
+base llama.cpp), `actions` (bundles `dist/*.js`), `UserLAnd`/`termux-*` (upstream) — **o peso
+de código está no upstream**; a contribuição RAFAELIA é a camada de custódia/integração.
+`home` tem muito vendored (`.cpan`, `.cargo`) — candidato a limpeza (`.gitignore`).
+
+### Obras de prosa/símbolo (`Blackhole`, `MemRafcode`, `LivroVivo`) `[SIMBOLICO / FATO-doc]`
+`Blackhole` e `MemRafcode` têm **0 arquivos-fonte** — são documento/símbolo, corretamente
+no estrato L5/meta. `LivroVivo` tem 2 scripts (catálogo/derivados) + doutrina em prosa.
+
+## Cruzamento com a revisão automática (achados que viraram teste)
+
+De `indices/REVISAO_PUBLICACAO.md` (declarado × evidenciado no conteúdo):
+
+| Repo | Declarado sem evidência textual | Leitura honesta |
+|---|---|---|
+| `blackhole` | C14 (Verbo-Vivo) | conteúdo é prosa/README, não código escaneado — coerente |
+| `livrovivo_thisbooklives` | C15 (Universalismo), C17 (NÓ_GOOD) | doutrina está no README/prosa, fora dos fontes escaneados |
+| `publicacientiespiritual` | C15 (Universalismo) | idem — eixo L5 vive na prosa |
+
+> Nenhum desses é erro: são obras do eixo `SIMBOLICO`, cujo conteúdo vive em prosa, não em
+> código. O achado correto é: **para o estrato L5, escanear também `.md`/prosa** (próxima
+> melhoria da varredura), não "rebaixar" a obra. C07 (Atrator-42) aparece como
+> `nao_escaneado` por opção (o termo "42" é ruidoso) — declarado honestamente.
+
+## Avaliação de conjunto
+
+- O acervo tem **núcleo de engenharia real e forte** (GEOLM, APKc, Ethica[8], Bitraf64,
+  vectra_bench) — não é só manifesto. A invariante geométrica `φ=(1−H)·C` é **literalmente
+  o mesmo código** em repos diferentes: a coerência que o autor afirma existe no material.
+- O eixo `SIMBOLICO` (LivroVivo, Blackhole, publicações) é prosa — honrado como tal, não
+  confundido com prova.
+- Forks são forks; o valor RAFAELIA neles é a custódia/integração, declarada.
+
+## Próxima ação (melhoria contínua, PDCA)
+
+1. Estender a varredura para escanear **prosa (`.md`)** no estrato L5 → resolver os 3 RISCOs
+   de `blackhole`/`livrovivo`/`publicacientiespiritual` sem baixar a régua.
+2. Adicionar termo-âncora de C07 qualificado (evitar ruído do "42").
+3. Propor `.gitignore` para o vendored de `home` (limpeza) — registrar como ação, não executar
+   fora de escopo.

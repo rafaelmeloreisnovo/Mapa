@@ -13,6 +13,10 @@ e `../biblioteconomia/14_SUBSTRATO_BASE2.md`. **Só stdlib, determinista, sem de
 | `test_ficha_de_entrada.py` | 11 testes de coerência (stdlib `unittest`) |
 | `varredura_conteudo.py` | lê os arquivos/conteúdo dos 28, **hashing triplo** (coerência·integridade·prova), conceitos evidenciados e correlações; gera `../indices/MANIFESTO_INTEGRIDADE.yaml` |
 | `test_varredura_conteudo.py` | 6 testes das funções deterministas (sem git) |
+| `revisao_publicacao.py` | cruza **declarado (ficha) × evidenciado (conteúdo)**; gera `../indices/REVISAO_PUBLICACAO.md` |
+| `test_revisao_publicacao.py` | 5 testes do cruzamento |
+
+Suite completa: **22 testes** (`python3 -m unittest discover codigo`).
 
 ## Rodar
 
