@@ -14,9 +14,11 @@ e `../biblioteconomia/14_SUBSTRATO_BASE2.md`. **Só stdlib, determinista, sem de
 | `varredura_conteudo.py` | lê os arquivos/conteúdo dos 28, **hashing triplo** (coerência·integridade·prova), conceitos evidenciados e correlações; gera `../indices/MANIFESTO_INTEGRIDADE.yaml` |
 | `test_varredura_conteudo.py` | 6 testes das funções deterministas (sem git) |
 | `revisao_publicacao.py` | cruza **declarado (ficha) × evidenciado (conteúdo)**; gera `../indices/REVISAO_PUBLICACAO.md` |
-| `test_revisao_publicacao.py` | 5 testes do cruzamento |
+| `marca_epistemica.py` | sugere reforço/rebaixamento de marca (`FATO`/`HIPOTESE`) por evidência+estrato; gera `../indices/MARCA_EPISTEMICA.md` |
+| `matriz_conformidade.py` | esqueleto **norma × evidência × gap** (`PENDENTE`); gera `../indices/MATRIZ_CONFORMIDADE.md` |
+| `test_*.py` | testes de coerência (revisão, passos futuros, …) |
 
-Suite completa: **26 testes** (`python3 -m unittest discover codigo`).
+Suite completa: **35 testes** (`python3 -m unittest discover codigo -p 'test_*.py'`).
 
 O manifesto distingue **evidência em código vs em prosa** (`evidencia_origem` por conceito):
 `codigo` = implementado (fonte), `prosa` = discutido (`.md`), `codigo+prosa` = ambos.

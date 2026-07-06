@@ -93,7 +93,9 @@ PRIORIDADE (do maior ao menor peso):
 
 - Estado global desta ancoragem: **`REFERENCE`** (alvos declarados, alinhamento
   pretendido). Nenhuma linha é declarada `FATO` sem auditoria.
-- **Próxima ação (LACUNA):** para cada repositório, produzir uma *matriz de conformidade*
-  (norma × evidência × gap) começando pelos de maior exposição a dados pessoais e a
-  público infantil (LGPD, GAIA_phi, home, CONVERSATIONS_CHUNKS). Registrar em
-  `indices/MATRIZ_CONCEITOS.yaml` conforme forem auditados.
+- **Matriz de conformidade (esqueleto): FEITO** — `codigo/matriz_conformidade.py` →
+  `indices/MATRIZ_CONFORMIDADE.md`: 153 linhas norma × evidência × gap, **todas `PENDENTE`**,
+  com prioridade ALTA nos 5 repos de dados pessoais (`conversations_chunks_private`, `home`,
+  `gaia_phi`, `x0`, `lgpd_constituicoes`).
+- **Próxima ação (LACUNA):** auditar `PENDENTE`→`CONFORME`/`GAP` por norma (exige critérios
+  de auditoria reais). Ver contabilidade em `18_ROADMAP_ESTADO.md`.
