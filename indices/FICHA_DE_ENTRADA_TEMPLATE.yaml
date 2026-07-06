@@ -1,0 +1,61 @@
+schema: mapa_ficha_de_entrada_v1
+updated: '2026-07-05'
+primeira_linha: 'DIGNIDADE-HUMANA · PROTECAO-INFANTIL (UDHR Art.1 · UNCRC Art.3)'
+proposito: 'molde de entrada para o autor mapear tudo em tudo por tudo, do substrato base-2 ao invariante Omega'
+escopo: 'somente o avesso dos 28 catalogados; 83 pendentes estacionados em BACKLOG_ACERVO.yaml'
+documentos_relacionados:
+  - biblioteconomia/14_SUBSTRATO_BASE2.md
+  - biblioteconomia/15_FICHA_DE_ENTRADA.md
+  - biblioteconomia/07_MATRIZ_DE_CONCEITOS.md
+
+# ---------- MOLDE (copie o bloco 'ficha' por item) ----------
+ficha:
+  id: ""
+  objeto: ""
+  origem: ""
+  substrato:
+    Lb0_base2: ""
+    Lb1_silicio: ""
+    Lb2_campo: ""
+    Lb3_foton_plasma: ""
+    Lb4_quimica: ""
+    Lb5_bio: ""
+  camada_L: ""            # L0..L5
+  conceitos: []           # C01..C17
+  notacao: ""             # RAF.<Dom>.<Op>.<Dim>.<Est>
+  descritores: []
+  no_grupo: ""            # NG1..NG7
+  relacoes: []            # DERIVA|SUSTENTA|TENSIONA|EVOLUI|PROTEGE -> id
+  friccao: ""
+  omega_coord: ""
+  marca: ""               # FATO|HIPOTESE|SIMBOLICO|LACUNA
+  ancora: ""              # REFERENCE
+  primeira_linha_ok: true
+  proxima_acao: ""
+
+# ---------- eixo vertical (referencia rapida) ----------
+substrato_Lb:
+  Lb0: 'base-2 (bit: conduz/nao conduz)'
+  Lb1: 'silicio/semicondutor (diodo, transistor B/C/E, current-leak, nm, R, C)'
+  Lb2: 'eletromagnetismo (Tesla, bobina linear/radial/toroidal, spin)'
+  Lb3: 'eletron/foton/plasma (corona, LED, UV, fotovoltaico, plasma-som, radiacao, SEU cosmico)'
+  Lb4: 'quimica (tabela periodica, ions, osmose, pH, tampao, Van de Graaff)'
+  Lb5: 'bio integrada (mitocondria, clorofila, bioeletricidade mV)'
+camadas_L: [L0, L1, L2, L3, L4, L5]
+topo: 'Omega — invariante geometrica coerente { multidimensional · fractal }'
+
+# ---------- grupamentos de no (os 28) ----------
+grupamentos_de_no:
+  - {id: NG1, nome: nucleo-deterministico, raio: interno, membros: [ChipQuantum, DeepSeek-RafCoder, GAIA_phi, BLAKE3]}
+  - {id: NG2, nome: plataforma-vm, raio: anel-tecnico, membros: [RafGitTools, Vectras-VM-Android, termux-app-rafacodephi, termux-api_rafcodephi, UserLAnd, PCR_Rafaelia_Code_seed, qemu_rafaelia, actions]}
+  - {id: NG3, nome: cognicao-dados, raio: anel-cognitivo, membros: [X0, llamaRafaelia, CONVERSATIONS_CHUNKS_PRIVATE, home]}
+  - {id: NG4, nome: ciencia-matematica, raio: anel-cientifico, membros: [relativity-living-light, Matem-tica-, papers]}
+  - {id: NG5, nome: juridico-etico, raio: anel-normativo, membros: [RafPolimata, Rafaelia_Private, LGPD-Constituicoes]}
+  - {id: NG6, nome: espiritual-publicacao, raio: borda-simbolica, membros: [LivroVivo_ThisBookLives, Blackhole, publicacientiespiritual, ZIPRAF_OMEGA_FULL]}
+  - {id: NG7, nome: meta-organizacao, raio: eixo-central, membros: [Mapa, MemRafcode]}
+
+totais:
+  grupamentos: 7
+  membros: 28
+  camadas_substrato: 6
+  camadas_L: 6
