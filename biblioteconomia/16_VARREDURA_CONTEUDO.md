@@ -115,5 +115,6 @@ só-prosa (a prosa **discute**). Totais do acervo: `codigo+prosa` 296, `prosa` 6
 
 - Cruzamento declarado × evidenciado: **codificado e rodando** em `codigo/revisao_publicacao.py`
   → `indices/REVISAO_PUBLICACAO.md`.
-- Usar `evidencia_origem` para reforçar a marca epistêmica: conceito só em `prosa` num repo de
-  código-núcleo é candidato a `HIPOTESE`; em `codigo` num repo simbólico, reforça `FATO`.
+- Usar `evidencia_origem` para reforçar a marca epistêmica: **feito** em
+  `codigo/marca_epistemica.py` → `indices/MARCA_EPISTEMICA.md` (32 reforços, 3 candidatos a
+  `HIPOTESE`). Ver o balanço geral em `18_ROADMAP_ESTADO.md`.

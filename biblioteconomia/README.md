@@ -92,6 +92,7 @@ mesmo acervo sem se enganar.
 - [`15_FICHA_DE_ENTRADA.md`](15_FICHA_DE_ENTRADA.md) — molde de entrada "tudo em tudo por tudo" + grupamentos de nó dos 28
 - [`16_VARREDURA_CONTEUDO.md`](16_VARREDURA_CONTEUDO.md) — leitura dos arquivos/conteúdo dos 28 + hashing triplo (coerência·integridade·prova) + correlação de conceitos por evidência
 - [`17_AVALIACAO_CONTEUDO.md`](17_AVALIACAO_CONTEUDO.md) — avaliação real (leitura dos arquivos substantivos: GEOLM, APKc, Ethica[8], Bitraf64…) + revisão declarado×evidenciado
+- [`18_ROADMAP_ESTADO.md`](18_ROADMAP_ESTADO.md) — contabilidade honesta dos passos futuros (feito × LACUNA-bloqueado) e o que desbloqueia cada um
 
 ### Índices e visuais
 
