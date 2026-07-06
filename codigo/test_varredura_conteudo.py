@@ -51,6 +51,28 @@ class TestPuro(unittest.TestCase):
         codigos = [k.split("_")[0] for k in V.CONCEITO_TERMOS]
         self.assertEqual(len(codigos), len(set(codigos)))
 
+    def test_classificar_origem(self):
+        self.assertEqual(V.classificar_origem(True, True), "codigo+prosa")
+        self.assertEqual(V.classificar_origem(True, False), "codigo")
+        self.assertEqual(V.classificar_origem(False, True), "prosa")
+        self.assertIsNone(V.classificar_origem(False, False))
+
+    def test_code_prose_ext_disjuntos(self):
+        self.assertFalse(V.CODE_EXT & V.PROSE_EXT)
+        self.assertTrue(V.PROSE_EXT.issubset(V.TEXT_EXT))
+
+    def test_origem_por_repo_conta(self):
+        r = {"evidencia_origem": {"C01": "codigo", "C11": "prosa",
+                                  "C04": "codigo+prosa"}}
+        cod, pro = V.origem_por_repo(r)
+        self.assertEqual((cod, pro), (2, 2))  # C01+C04 codigo; C11+C04 prosa
+
+    def test_resumo_origem(self):
+        res = [{"evidencia_origem": {"C01": "codigo", "C02": "prosa"}},
+               {"evidencia_origem": {"C01": "codigo+prosa"}}]
+        self.assertEqual(V.resumo_origem(res),
+                         {"codigo": 1, "prosa": 1, "codigo+prosa": 1})
+
 
 if __name__ == "__main__":
     unittest.main()

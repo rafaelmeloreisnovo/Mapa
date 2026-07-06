@@ -56,21 +56,40 @@ CONCEITO_TERMOS = {
     "C04_Custodia": ["custod", "provenance", "proveniencia", "manifest", "digest"],
     "C05_Assinatura": ["ed25519", "signature", "assinatur", "sigma-seal"],
     "C06_Toroide": ["toroid", "attractor", "atrator"],
+    # C07: qualificado (evita o ruido do "42" nu) -> ver 04_FRICCAO_SEMANTICA F1
+    "C07_Atrator42": ["attractorpool", "attractor_pool", "42 atratores",
+                      "42 attractors", "42 estagios", "42 stages", "pool 42",
+                      "atrator-42", "attractor-42"],
     "C08_Phi": ["phi_fst", "phi_attractor", "golden ratio", "razao aurea"],
     "C09_ZIPRAF": ["zipraf"],
     "C10_Vetor": ["hypervector", "hipervetor", "embedding", "vecdb"],
     "C11_CientiEspiritual": ["cientiespiritual", "cienti-espiritual", "cienti espiritual"],
     "C12_Verdade": ["verdade", "truth-"],
     "C13_Etica": ["ethica", "etica ", "ethics"],
-    "C14_VerboVivo": ["verbovivo", "verbo vivo", "verbum vivo", "living light"],
-    "C15_Universalismo": ["universalis"],
+    # C14/C15: termos afinados para PROSA do estrato L5 (17_ item 1)
+    "C14_VerboVivo": ["verbovivo", "verbo vivo", "verbo-vivo", "verbum vivo",
+                      "rafaelverbo", "living light", "living-light", "luz viva"],
+    "C15_Universalismo": ["universal"],
     "C16_LACUNA": ["lacuna", "token_vazio", "token vazio"],
-    "C17_NO_GOOD": ["no_good", "no good"],
+    "C17_NO_GOOD": ["no_good", "no good", "no-good", "no_good"],
 }
 
-TEXT_EXT = {".c", ".h", ".cpp", ".hpp", ".py", ".rs", ".java", ".kt", ".js", ".ts",
-            ".sh", ".md", ".rst", ".txt", ".yaml", ".yml", ".toml", ".cfg", ".tex",
-            ".html", ".json"}
+# evidencia em CODIGO (implementado) vs em PROSA (discutido) — granularidade 16_
+CODE_EXT = {".c", ".h", ".cpp", ".hpp", ".py", ".rs", ".java", ".kt", ".js", ".ts",
+            ".sh", ".yaml", ".yml", ".toml", ".cfg", ".json"}
+PROSE_EXT = {".md", ".rst", ".txt", ".tex", ".html"}
+TEXT_EXT = CODE_EXT | PROSE_EXT
+
+
+def classificar_origem(in_code: bool, in_prose: bool):
+    """codigo (implementado) vs prosa (discutido) vs ambos vs None."""
+    if in_code and in_prose:
+        return "codigo+prosa"
+    if in_code:
+        return "codigo"
+    if in_prose:
+        return "prosa"
+    return None
 
 
 def _git(repo_dir, *args, timeout=60):
@@ -108,22 +127,30 @@ def escanear(repo_id: str, base: str) -> dict:
     integridade = tree                                      # bytes (git tree SHA)
     prova = _blake(f"{repo_id}|{coerencia}|{integridade}|{head}")  # selo
 
-    # conceitos evidenciados por conteudo (git grep, bounded a arquivos de texto)
-    globs = [f"*{e}" for e in sorted(TEXT_EXT)]
-    evidenciados = []
-    for conceito, termos in CONCEITO_TERMOS.items():
+    # conceitos evidenciados: CODIGO (implementado) vs PROSA (discutido)
+    code_globs = [f"*{e}" for e in sorted(CODE_EXT)]
+    prose_globs = [f"*{e}" for e in sorted(PROSE_EXT)]
+
+    def _presente(termos, globs):
         args = ["grep", "-I", "-i", "-l"]
         for t in termos:
             args += ["-e", t]
-        hit = _git(d, *args, "--", *globs, timeout=40)
-        if hit.strip():
-            evidenciados.append(conceito.split("_")[0])  # so o codigo Cxx
+        return bool(_git(d, *args, "--", *globs, timeout=40).strip())
+
+    evidencia = {}   # Cxx -> "codigo" | "prosa" | "codigo+prosa"
+    for conceito, termos in CONCEITO_TERMOS.items():
+        cod = conceito.split("_")[0]
+        origem = classificar_origem(_presente(termos, code_globs),
+                                    _presente(termos, prose_globs))
+        if origem:
+            evidencia[cod] = origem
 
     return {
         "id": repo_id, "dir": REPOS[repo_id], "head": head, "arquivos": len(files),
         "conteudo_vivo": top_ext,
         "triple": {"coerencia": coerencia, "integridade": integridade, "prova": prova},
-        "conceitos_evidenciados": sorted(set(evidenciados)),
+        "conceitos_evidenciados": sorted(evidencia),
+        "evidencia_origem": evidencia,
         "estado": "FATO",
     }
 
@@ -143,6 +170,22 @@ def correlacoes(resultados) -> dict:
     return {c: sorted(v) for c, v in sorted(inv.items())}
 
 
+def origem_por_repo(r) -> tuple:
+    """(n_codigo, n_prosa) — conceitos com evidencia em codigo vs em prosa."""
+    org = r.get("evidencia_origem", {})
+    cod = sum(1 for v in org.values() if "codigo" in v)
+    pro = sum(1 for v in org.values() if "prosa" in v)
+    return cod, pro
+
+
+def resumo_origem(resultados) -> dict:
+    tot = Counter()
+    for r in resultados:
+        for v in r.get("evidencia_origem", {}).values():
+            tot[v] += 1
+    return dict(tot)
+
+
 def base_dir() -> str:
     env = os.environ.get("MAPA_ACERVO_BASE")
     if env:
@@ -159,13 +202,16 @@ def relatorio(resultados, base) -> str:
     L = [f"varredura de conteudo :: base={base}",
          f"repos: {len(resultados)}  |  selo do acervo (prova): {acervo_prova(resultados)}",
          ""]
-    L.append(f"{'id':<28} {'arq':>6}  {'prova':<16} conceitos evidenciados")
+    L.append(f"{'id':<28} {'arq':>6}  {'cod/pro':>8}  conceitos evidenciados")
     for r in resultados:
         if "triple" not in r:
-            L.append(f"{r['id']:<28} {'--':>6}  {'(sem git)':<16} {r.get('erro','')}")
+            L.append(f"{r['id']:<28} {'--':>6}  {'(sem git)':>8}  {r.get('erro','')}")
             continue
-        L.append(f"{r['id']:<28} {r['arquivos']:>6}  {r['triple']['prova']:<16} "
+        cod, pro = origem_por_repo(r)
+        L.append(f"{r['id']:<28} {r['arquivos']:>6}  {cod:>3}/{pro:<4}  "
                  + ",".join(r["conceitos_evidenciados"]))
+    L.append("")
+    L.append(f"evidencia por origem (conceito x repo): {resumo_origem(resultados)}")
     L.append("")
     L.append("correlacoes (conceito -> repos que o evidenciam no conteudo):")
     for c, repos in correlacoes(resultados).items():
@@ -184,6 +230,8 @@ def manifesto_yaml(resultados, base) -> str:
          f"selo_acervo_prova: {acervo_prova(resultados)}",
          "honestidade: 'conceitos_evidenciados = ocorrencia textual (FATO de ocorrencia), "
          "nao prova de implementacao correta'",
+         "evidencia_origem_legenda: 'codigo = termo em fonte (implementado/mais forte); "
+         "prosa = termo em .md/.txt/.tex (discutido); codigo+prosa = ambos'",
          "repos:"]
     for r in resultados:
         if "triple" not in r:
@@ -200,11 +248,16 @@ def manifesto_yaml(resultados, base) -> str:
             f"    integridade: {r['triple']['integridade']}",
             f"    prova: {r['triple']['prova']}",
             f"    conceitos_evidenciados: [{', '.join(r['conceitos_evidenciados'])}]",
+            "    evidencia_origem: {"
+            + ", ".join(f"{k}: {v}"
+                        for k, v in sorted(r.get("evidencia_origem", {}).items()))
+            + "}",
             f"    estado: FATO",
         ]
     L.append("correlacoes:")
     for c, repos in correlacoes(resultados).items():
         L.append(f"  {c}: [{', '.join(repos)}]")
+    L.append(f"evidencia_origem_totais: {resumo_origem(resultados)}")
     L.append(f"totais: {{repos: {len(resultados)}, "
              f"com_git: {sum(1 for r in resultados if 'triple' in r)}}}")
     return "\n".join(L) + "\n"
