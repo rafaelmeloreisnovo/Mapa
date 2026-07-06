@@ -88,8 +88,32 @@ conceitual, não textual — ver `17_`).
 > por repositório (coerência/integridade/prova derivam de `git ls-files`/tree, não do grep).
 > Lente semântica e prova de integridade são camadas independentes.
 
+## Evidência em código vs em prosa (granularidade aplicada)
+
+O manifesto agora distingue, por conceito e por repo, **onde** a evidência está:
+
+| origem | significado | força |
+|---|---|---|
+| `codigo` | termo em arquivo-fonte (`.c/.py/.rs/.sh/…`) | **implementado** (mais forte) |
+| `prosa` | termo em `.md/.rst/.txt/.tex` | **discutido** (mais fraco) |
+| `codigo+prosa` | ambos | implementado e documentado |
+
+Campo `evidencia_origem` por repo em `indices/MANIFESTO_INTEGRIDADE.yaml`.
+
+**Achado que valida os estratos** (`05_POSICAO_GERAL_ORGANIZACOES.md`): o núcleo evidencia
+mais em **código**; o eixo espiritual, mais em **prosa** — exatamente como a teoria previa.
+
+| Estrato | só-código | só-prosa | ambos |
+|---|---|---|---|
+| NG1 núcleo (ChipQuantum, DeepSeek, GAIA, BLAKE3) | 3 | 10 | 44 |
+| NG6 espiritual (LivroVivo, Blackhole, publica…, ZIPRAF) | 1 | 20 | 30 |
+
+O núcleo tem mais conceitos só-código (o código **prova**); o espiritual, o dobro de
+só-prosa (a prosa **discute**). Totais do acervo: `codigo+prosa` 296, `prosa` 68, `codigo` 25.
+
 ## Próxima ação
 
 - Cruzamento declarado × evidenciado: **codificado e rodando** em `codigo/revisao_publicacao.py`
   → `indices/REVISAO_PUBLICACAO.md`.
-- Distinguir, no manifesto, evidência em **código** vs em **prosa** (`.md`) — próxima granularidade.
+- Usar `evidencia_origem` para reforçar a marca epistêmica: conceito só em `prosa` num repo de
+  código-núcleo é candidato a `HIPOTESE`; em `codigo` num repo simbólico, reforça `FATO`.

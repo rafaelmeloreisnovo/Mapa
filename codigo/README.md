@@ -16,7 +16,10 @@ e `../biblioteconomia/14_SUBSTRATO_BASE2.md`. **Só stdlib, determinista, sem de
 | `revisao_publicacao.py` | cruza **declarado (ficha) × evidenciado (conteúdo)**; gera `../indices/REVISAO_PUBLICACAO.md` |
 | `test_revisao_publicacao.py` | 5 testes do cruzamento |
 
-Suite completa: **22 testes** (`python3 -m unittest discover codigo`).
+Suite completa: **26 testes** (`python3 -m unittest discover codigo`).
+
+O manifesto distingue **evidência em código vs em prosa** (`evidencia_origem` por conceito):
+`codigo` = implementado (fonte), `prosa` = discutido (`.md`), `codigo+prosa` = ambos.
 
 ## Rodar
 
