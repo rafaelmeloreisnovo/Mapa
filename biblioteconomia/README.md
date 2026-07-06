@@ -90,6 +90,7 @@ mesmo acervo sem se enganar.
 - [`13_CERTIFICACAO_METODOLOGICA.md`](13_CERTIFICACAO_METODOLOGICA.md) — auto-declaração de conformidade do método + melhoria contínua (PDCA/Kaizen)
 - [`14_SUBSTRATO_BASE2.md`](14_SUBSTRATO_BASE2.md) — camadas de invariantes até base-2: silício, elétron, fóton, plasma, tabela periódica, bio → Ω
 - [`15_FICHA_DE_ENTRADA.md`](15_FICHA_DE_ENTRADA.md) — molde de entrada "tudo em tudo por tudo" + grupamentos de nó dos 28
+- [`16_VARREDURA_CONTEUDO.md`](16_VARREDURA_CONTEUDO.md) — leitura dos arquivos/conteúdo dos 28 + hashing triplo (coerência·integridade·prova) + correlação de conceitos por evidência
 
 ### Índices e visuais
 
@@ -97,6 +98,7 @@ mesmo acervo sem se enganar.
 - Índice da matriz de conceitos: [`../indices/MATRIZ_CONCEITOS.yaml`](../indices/MATRIZ_CONCEITOS.yaml)
 - Backlog do acervo: [`../indices/BACKLOG_ACERVO.yaml`](../indices/BACKLOG_ACERVO.yaml)
 - Molde de entrada: [`../indices/FICHA_DE_ENTRADA_TEMPLATE.yaml`](../indices/FICHA_DE_ENTRADA_TEMPLATE.yaml)
+- Manifesto de integridade (hashing triplo dos 28): [`../indices/MANIFESTO_INTEGRIDADE.yaml`](../indices/MANIFESTO_INTEGRIDADE.yaml)
 - Mapa visual do acervo: [`../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg`](../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg)
 - Mapa visual dos conceitos: [`../visual/MATRIZ_CONCEITOS_RAFAELIA.svg`](../visual/MATRIZ_CONCEITOS_RAFAELIA.svg)
 - Símbolo do invariante: [`../visual/PARABOLA_INVARIANTE_RAFAELIA.svg`](../visual/PARABOLA_INVARIANTE_RAFAELIA.svg)
