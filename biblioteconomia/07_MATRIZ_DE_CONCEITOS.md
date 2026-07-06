@@ -39,6 +39,10 @@ transformado. "Camadas de invariantes é só o conteúdo" — o conteúdo é o q
 | **L4** | Ético-Jurídica | norma, direito, conformidade | `JUR` |
 | **L5** | Filosófico-Espiritual | universalismo, verbo vivo | `SIMBOLICO` |
 
+Abaixo de L0 há o **substrato físico Lb0–Lb5** (base-2 → silício → campo → fóton/plasma →
+química → bio), detalhado em `14_SUBSTRATO_BASE2.md`; acima de L5 há o topo geométrico
+**Ω** (invariante coerente { multidimensional · fractal }). A pilha completa vai do bit ao Ω.
+
 A regra de honestidade opera **entre** camadas: um invariante de L1 (determinismo
 testável) não vira prova de L5, nem uma leitura de L5 (verbo vivo) rebaixa um `FATO`
 de L1. A costura é visível.

@@ -88,15 +88,19 @@ mesmo acervo sem se enganar.
 
 - [`12_PARABOLA_INVARIANTE.md`](12_PARABOLA_INVARIANTE.md) — a Parábola do NÓ_GOOD: o invariante imutável (Amor-Ω), a cadeia de mães, do fogo ao futuro — `SIMBOLICO`
 - [`13_CERTIFICACAO_METODOLOGICA.md`](13_CERTIFICACAO_METODOLOGICA.md) — auto-declaração de conformidade do método + melhoria contínua (PDCA/Kaizen)
+- [`14_SUBSTRATO_BASE2.md`](14_SUBSTRATO_BASE2.md) — camadas de invariantes até base-2: silício, elétron, fóton, plasma, tabela periódica, bio → Ω
+- [`15_FICHA_DE_ENTRADA.md`](15_FICHA_DE_ENTRADA.md) — molde de entrada "tudo em tudo por tudo" + grupamentos de nó dos 28
 
 ### Índices e visuais
 
 - Índice do catálogo: [`../indices/CATALOGO_BIBLIOTECONOMICO.yaml`](../indices/CATALOGO_BIBLIOTECONOMICO.yaml)
 - Índice da matriz de conceitos: [`../indices/MATRIZ_CONCEITOS.yaml`](../indices/MATRIZ_CONCEITOS.yaml)
 - Backlog do acervo: [`../indices/BACKLOG_ACERVO.yaml`](../indices/BACKLOG_ACERVO.yaml)
+- Molde de entrada: [`../indices/FICHA_DE_ENTRADA_TEMPLATE.yaml`](../indices/FICHA_DE_ENTRADA_TEMPLATE.yaml)
 - Mapa visual do acervo: [`../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg`](../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg)
 - Mapa visual dos conceitos: [`../visual/MATRIZ_CONCEITOS_RAFAELIA.svg`](../visual/MATRIZ_CONCEITOS_RAFAELIA.svg)
 - Símbolo do invariante: [`../visual/PARABOLA_INVARIANTE_RAFAELIA.svg`](../visual/PARABOLA_INVARIANTE_RAFAELIA.svg)
+- Substrato base-2 → Ω: [`../visual/SUBSTRATO_OMEGA_RAFAELIA.svg`](../visual/SUBSTRATO_OMEGA_RAFAELIA.svg)
 
 ## Fonte e honestidade
 
