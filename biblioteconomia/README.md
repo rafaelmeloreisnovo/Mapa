@@ -82,6 +82,7 @@ mesmo acervo sem se enganar.
 - [`09_RESILIENCIA_TOP10.md`](09_RESILIENCIA_TOP10.md) — 10 relações estruturais TOP × rollback/testes/failsafe/failover/watchdog
 - [`10_INVARIANTES_PRIMEIRA_LINHA.md`](10_INVARIANTES_PRIMEIRA_LINHA.md) — dignidade humana e proteção infantil na primeira linha (I1–I5)
 - [`11_ESCALA_120_ONBOARDING.md`](11_ESCALA_120_ONBOARDING.md) — de 28 para ~120 repositórios sem perder qualidade (LACUNA declarada)
+- [`BACKLOG_ACERVO.md`](BACKLOG_ACERVO.md) — acervo real enumerado (111 conhecidos, 28 catalogados, 83 pendentes), fonte GitHub 2026-07-05
 
 ### Camada simbólica e de método (horizonte maior)
 
@@ -92,6 +93,7 @@ mesmo acervo sem se enganar.
 
 - Índice do catálogo: [`../indices/CATALOGO_BIBLIOTECONOMICO.yaml`](../indices/CATALOGO_BIBLIOTECONOMICO.yaml)
 - Índice da matriz de conceitos: [`../indices/MATRIZ_CONCEITOS.yaml`](../indices/MATRIZ_CONCEITOS.yaml)
+- Backlog do acervo: [`../indices/BACKLOG_ACERVO.yaml`](../indices/BACKLOG_ACERVO.yaml)
 - Mapa visual do acervo: [`../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg`](../visual/MAPA_BIBLIOTECONOMICO_RAFAELIA.svg)
 - Mapa visual dos conceitos: [`../visual/MATRIZ_CONCEITOS_RAFAELIA.svg`](../visual/MATRIZ_CONCEITOS_RAFAELIA.svg)
 - Símbolo do invariante: [`../visual/PARABOLA_INVARIANTE_RAFAELIA.svg`](../visual/PARABOLA_INVARIANTE_RAFAELIA.svg)

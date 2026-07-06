@@ -12,11 +12,17 @@
 
 ```
 FATO:      28 repositorios catalogados (03_CATALOGO_REPOSITORIOS.md), fonte = README real.
-HIPOTESE:  o acervo total gira em torno de ~120 repositorios (declarado pelo autor).
-LACUNA:    ~92 repositorios ainda NAO estao no escopo desta sessao; nao ha README lido.
+FATO:      107 repositorios descobertos por busca GitHub em 2026-07-05
+           (59 rafaelmeloreisnovo + 48 instituto-Rafael); metadado publico confirmado.
+HIPOTESE:  o acervo total gira em torno de ~120 (107 nao-fork + forks omitidos pela busca).
+LACUNA:    83 repositorios pendentes — conhecidos, mas sem README lido nesta sessao.
 RISCO:     tratar 28 como "o todo" resumiria o valor do material — proibido.
 ACAO:      onboarding incremental (secao 3), 1 repo = 1 ficha + 1 registro, sem atalho.
 ```
+
+> O backlog completo, enumerado e legivel por maquina, esta em
+> [`BACKLOG_ACERVO.md`](BACKLOG_ACERVO.md) e [`../indices/BACKLOG_ACERVO.yaml`](../indices/BACKLOG_ACERVO.yaml).
+> A LACUNA deixou de ser um numero estimado e virou uma lista de nomes protegida.
 
 > Por que não catalogo os 92 agora: eles não estão acessíveis nesta sessão. Inventar
 > fichas para eles violaria I3/I4 (verdade honesta, proteção da lacuna). A resposta
@@ -69,7 +75,7 @@ Sem ver os repositórios, a priorização é `HIPOTESE` orientada por risco e po
 | Lote | Conteúdo | Estado |
 |---|---|---|
 | L01 | 28 repositórios atuais | `FATO` (catalogado) |
-| L02..Lnn | ~92 repositórios restantes | `LACUNA` (aguardando escopo/acesso) |
+| L02..Lnn | 83 repositórios pendentes (enumerados em `BACKLOG_ACERVO.md`) | `LACUNA` (aguardando escopo/acesso) |
 
 ## 6. Próxima ação objetiva
 
