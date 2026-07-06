@@ -76,8 +76,20 @@ python3 -m unittest codigo/test_varredura_conteudo -v
 Estado verificado (2026-07-05): **28 repos lidos, 28 com git; manifesto determinista
 (idêntico em 2 execuções); selo do acervo estável**.
 
+## Léxico refinado (melhoria contínua aplicada)
+
+Após a primeira revisão (`17_AVALIACAO_CONTEUDO.md`), os termos-âncora foram afinados **sem
+baixar a régua**: `universalis`→`universal` (C15), `living-light` além de `living light`
+(C14), e C07 qualificado (`atrator`/`attractorpool`/`42 atratores`, evitando o "42" nu).
+Re-execução: RISCOs de declaração-sem-evidência caíram de **3 para 1** (o residual é um link
+conceitual, não textual — ver `17_`).
+
+> **Propriedade importante:** refinar a *lente* de conceitos **não altera** nenhum triple-hash
+> por repositório (coerência/integridade/prova derivam de `git ls-files`/tree, não do grep).
+> Lente semântica e prova de integridade são camadas independentes.
+
 ## Próxima ação
 
-- Cruzar `conceitos_evidenciados` (deste manifesto) com `conceitos` declarados nas fichas
-  (`codigo/ficha_de_entrada.py`) e registrar as divergências como revisão de publicação.
-- Refinar os termos-âncora ruidosos (ex.: reduzir falso-positivo de C17) — melhoria contínua.
+- Cruzamento declarado × evidenciado: **codificado e rodando** em `codigo/revisao_publicacao.py`
+  → `indices/REVISAO_PUBLICACAO.md`.
+- Distinguir, no manifesto, evidência em **código** vs em **prosa** (`.md`) — próxima granularidade.

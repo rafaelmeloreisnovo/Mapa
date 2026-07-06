@@ -56,16 +56,22 @@ CONCEITO_TERMOS = {
     "C04_Custodia": ["custod", "provenance", "proveniencia", "manifest", "digest"],
     "C05_Assinatura": ["ed25519", "signature", "assinatur", "sigma-seal"],
     "C06_Toroide": ["toroid", "attractor", "atrator"],
+    # C07: qualificado (evita o ruido do "42" nu) -> ver 04_FRICCAO_SEMANTICA F1
+    "C07_Atrator42": ["attractorpool", "attractor_pool", "42 atratores",
+                      "42 attractors", "42 estagios", "42 stages", "pool 42",
+                      "atrator-42", "attractor-42"],
     "C08_Phi": ["phi_fst", "phi_attractor", "golden ratio", "razao aurea"],
     "C09_ZIPRAF": ["zipraf"],
     "C10_Vetor": ["hypervector", "hipervetor", "embedding", "vecdb"],
     "C11_CientiEspiritual": ["cientiespiritual", "cienti-espiritual", "cienti espiritual"],
     "C12_Verdade": ["verdade", "truth-"],
     "C13_Etica": ["ethica", "etica ", "ethics"],
-    "C14_VerboVivo": ["verbovivo", "verbo vivo", "verbum vivo", "living light"],
-    "C15_Universalismo": ["universalis"],
+    # C14/C15: termos afinados para PROSA do estrato L5 (17_ item 1)
+    "C14_VerboVivo": ["verbovivo", "verbo vivo", "verbo-vivo", "verbum vivo",
+                      "rafaelverbo", "living light", "living-light", "luz viva"],
+    "C15_Universalismo": ["universal"],
     "C16_LACUNA": ["lacuna", "token_vazio", "token vazio"],
-    "C17_NO_GOOD": ["no_good", "no good"],
+    "C17_NO_GOOD": ["no_good", "no good", "no-good", "no_good"],
 }
 
 TEXT_EXT = {".c", ".h", ".cpp", ".hpp", ".py", ".rs", ".java", ".kt", ".js", ".ts",

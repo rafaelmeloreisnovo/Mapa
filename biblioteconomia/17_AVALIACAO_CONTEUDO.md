@@ -84,6 +84,30 @@ De `indices/REVISAO_PUBLICACAO.md` (declarado × evidenciado no conteúdo):
 > melhoria da varredura), não "rebaixar" a obra. C07 (Atrator-42) aparece como
 > `nao_escaneado` por opção (o termo "42" é ruidoso) — declarado honestamente.
 
+### Resolução (léxico refinado — melhoria contínua aplicada)
+
+Refinando os termos-âncora **sem baixar a régua** (`universalis`→`universal`; `living light`
+→ também `living-light`; C07 qualificado com `atrator`/`attractorpool`/`42 atratores`), a
+varredura foi re-executada. **RISCOs de 3 → 1:**
+
+| Repo | Antes | Depois | Como |
+|---|---|---|---|
+| `blackhole` | C14 sem texto | **confirmado** | "LIVING-LIGHT" no título (termo `living-light`) |
+| `publicacientiespiritual` | C15 sem texto | **confirmado** | "universal" na prosa |
+| `livrovivo_thisbooklives` | C15, C17 sem texto | **C15 confirmado; C17 residual** | "universal" presente; `no_good` ausente |
+| `chipquantum` / `rafpolimata` | C07 `nao_escaneado` | **confirmado** | "atrator"/"AttractorPool" no conteúdo |
+
+**Residual honesto (1):** `livrovivo` declara **C17 (NÓ_GOOD)**, mas o termo **nasce aqui no
+`Mapa`** (a parábola de `12_`), não no conteúdo de LivroVivo. É um **link conceitual
+`SIMBOLICO`** (a "Verdade como eixo imutável" de LivroVivo ≈ NÓ_GOOD/Amor-Ω), cuja evidência
+vive no `Mapa`, não em LivroVivo. Mantido e **declarado como conceitual, não textual** — em
+vez de forjar um casamento ou apagar a ligação. Isto é "sem baixar a régua".
+
+> Propriedade verificada: **o refino do léxico não altera nenhum triple-hash por repo**
+> (coerência/integridade/prova vêm de `git ls-files`/tree, não do grep). O `selo do acervo`
+> mudou apenas porque o próprio `Mapa` (membro auto-referente) avançou de commit — a lente
+> de conceitos e a prova de integridade são **camadas independentes**, como devem ser.
+
 ## Avaliação de conjunto
 
 - O acervo tem **núcleo de engenharia real e forte** (GEOLM, APKc, Ethica[8], Bitraf64,
@@ -95,8 +119,10 @@ De `indices/REVISAO_PUBLICACAO.md` (declarado × evidenciado no conteúdo):
 
 ## Próxima ação (melhoria contínua, PDCA)
 
-1. Estender a varredura para escanear **prosa (`.md`)** no estrato L5 → resolver os 3 RISCOs
-   de `blackhole`/`livrovivo`/`publicacientiespiritual` sem baixar a régua.
-2. Adicionar termo-âncora de C07 qualificado (evitar ruído do "42").
+1. ~~Escanear prosa (`.md`) no L5 e resolver os 3 RISCOs~~ — **feito**: léxico refinado,
+   RISCOs 3 → 1 (ver "Resolução" acima); o `.md` já era escaneado, o gargalo era o termo.
+2. ~~Termo-âncora de C07 qualificado~~ — **feito** (`atrator`/`attractorpool`/`42 atratores`).
 3. Propor `.gitignore` para o vendored de `home` (limpeza) — registrar como ação, não executar
    fora de escopo.
+4. O único RISCO residual (`livrovivo` C17) é **link conceitual `SIMBOLICO`**, não defeito —
+   mantido e declarado como tal.
