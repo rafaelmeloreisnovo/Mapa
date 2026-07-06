@@ -50,6 +50,11 @@ ficha_de_entrada:
 
 Molde legível por máquina: [`../indices/FICHA_DE_ENTRADA_TEMPLATE.yaml`](../indices/FICHA_DE_ENTRADA_TEMPLATE.yaml).
 
+**Codificação executável** (não só molde): o modelo está codificado, coerente e testado
+em [`../codigo/ficha_de_entrada.py`](../codigo/ficha_de_entrada.py) — com os 28 já
+preenchidos como exemplos, validador, coordenada Ω reprodutível e 11 testes
+(`../codigo/test_ficha_de_entrada.py`). Rode `python3 codigo/ficha_de_entrada.py`.
+
 ## Exemplo preenchido (item real dos 28)
 
 ```yaml
