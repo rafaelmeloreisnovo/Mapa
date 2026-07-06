@@ -11,6 +11,8 @@ e `../biblioteconomia/14_SUBSTRATO_BASE2.md`. **Só stdlib, determinista, sem de
 |---|---|
 | `ficha_de_entrada.py` | modelo (`Ficha`), vocabulário fechado, validador, coordenada Ω reprodutível, os **28** já mapeados como exemplos |
 | `test_ficha_de_entrada.py` | 11 testes de coerência (stdlib `unittest`) |
+| `varredura_conteudo.py` | lê os arquivos/conteúdo dos 28, **hashing triplo** (coerência·integridade·prova), conceitos evidenciados e correlações; gera `../indices/MANIFESTO_INTEGRIDADE.yaml` |
+| `test_varredura_conteudo.py` | 6 testes das funções deterministas (sem git) |
 
 ## Rodar
 
