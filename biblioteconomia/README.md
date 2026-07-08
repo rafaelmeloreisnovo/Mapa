@@ -88,6 +88,7 @@ mesmo acervo sem se enganar.
 
 - [`12_PARABOLA_INVARIANTE.md`](12_PARABOLA_INVARIANTE.md) — a Parábola do NÓ_GOOD: o invariante imutável (Amor-Ω), a cadeia de mães, do fogo ao futuro — `SIMBOLICO`
 - [`13_CERTIFICACAO_METODOLOGICA.md`](13_CERTIFICACAO_METODOLOGICA.md) — auto-declaração de conformidade do método + melhoria contínua (PDCA/Kaizen)
+- [`SEMENTE_BIBLIOTECA_VIVA.md`](SEMENTE_BIBLIOTECA_VIVA.md) — Parábola do Viajante que Plantou uma Biblioteca (semente de alinhamento operacional para IA; texto do autor + leitura biblioteconômica) — `SIMBOLICO`
 - [`14_SUBSTRATO_BASE2.md`](14_SUBSTRATO_BASE2.md) — camadas de invariantes até base-2: silício, elétron, fóton, plasma, tabela periódica, bio → Ω
 - [`15_FICHA_DE_ENTRADA.md`](15_FICHA_DE_ENTRADA.md) — molde de entrada "tudo em tudo por tudo" + grupamentos de nó dos 28
 - [`16_VARREDURA_CONTEUDO.md`](16_VARREDURA_CONTEUDO.md) — leitura dos arquivos/conteúdo dos 28 + hashing triplo (coerência·integridade·prova) + correlação de conceitos por evidência

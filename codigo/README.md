@@ -18,7 +18,10 @@ e `../biblioteconomia/14_SUBSTRATO_BASE2.md`. **Só stdlib, determinista, sem de
 | `matriz_conformidade.py` | esqueleto **norma × evidência × gap** (`PENDENTE`); gera `../indices/MATRIZ_CONFORMIDADE.md` |
 | `test_*.py` | testes de coerência (revisão, passos futuros, …) |
 
-Suite completa: **35 testes** (`python3 -m unittest discover codigo -p 'test_*.py'`).
+Suite completa: **37 testes** (`python3 -m unittest discover codigo -p 'test_*.py'`).
+
+A varredura agora inclui **métricas** por repo (`metricas`): `loc_codigo`, `kb_codigo/prosa/dados`,
+`arquivos_vendored`, `original_ratio` — no `../indices/MANIFESTO_INTEGRIDADE.yaml`.
 
 O manifesto distingue **evidência em código vs em prosa** (`evidencia_origem` por conceito):
 `codigo` = implementado (fonte), `prosa` = discutido (`.md`), `codigo+prosa` = ambos.

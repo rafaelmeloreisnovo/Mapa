@@ -2,8 +2,9 @@ schema: mapa_manifesto_integridade_v1
 primeira_linha: 'DIGNIDADE-HUMANA / PROTECAO-INFANTIL (UDHR Art.1; UNCRC Art.3)'
 gerado_por: codigo/varredura_conteudo.py
 metodo_triple: 'coerencia=blake2b(estrutura); integridade=git tree SHA; prova=blake2b(id|coerencia|integridade|head)'
-selo_acervo_prova: 5d288e0423c45157
+selo_acervo_prova: 7308425b53c0a998
 honestidade: 'conceitos_evidenciados = ocorrencia textual (FATO de ocorrencia), nao prova de implementacao correta'
+evidencia_origem_legenda: 'codigo = termo em fonte (implementado/mais forte); prosa = termo em .md/.txt/.tex (discutido); codigo+prosa = ambos'
 repos:
   - id: chipquantum
     dir: "ChipQuantum"
@@ -15,6 +16,7 @@ repos:
     prova: 433572c2a4c500af
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo, C09: codigo+prosa, C10: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 37337, kb_codigo: 1287, kb_prosa: 4812, kb_dados: 716, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: deepseek-rafcoder
     dir: "DeepSeek-RafCoder"
@@ -26,6 +28,7 @@ repos:
     prova: ea54a318f52d3f35
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: prosa, C08: codigo, C09: codigo+prosa, C10: codigo+prosa, C12: codigo+prosa, C13: prosa, C14: codigo+prosa, C15: codigo+prosa, C16: prosa}
+    metricas: {loc_codigo: 14929, kb_codigo: 25340, kb_prosa: 146, kb_dados: 21703, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: gaia_phi
     dir: "GAIA_phi"
@@ -37,6 +40,7 @@ repos:
     prova: 97cf42713e1f879f
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: prosa, C08: codigo, C09: codigo+prosa, C10: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 45057, kb_codigo: 1375, kb_prosa: 575, kb_dados: 8218, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: blake3
     dir: "BLAKE3"
@@ -48,6 +52,7 @@ repos:
     prova: d7db0319e37fe6b9
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C09, C12, C13, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: prosa, C09: prosa, C12: codigo+prosa, C13: prosa, C15: prosa, C16: prosa}
+    metricas: {loc_codigo: 26688, kb_codigo: 896, kb_prosa: 244, kb_dados: 2238, arquivos_vendored: 1, original_ratio: 0.996}
     estado: FATO
   - id: rafgittools
     dir: "RafGitTools"
@@ -59,6 +64,7 @@ repos:
     prova: d0c7391f78d7d397
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: prosa, C09: prosa, C10: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 58670, kb_codigo: 2054, kb_prosa: 3264, kb_dados: 2318, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: vectras-vm-android
     dir: "Vectras-VM-Android"
@@ -70,6 +76,7 @@ repos:
     prova: 20ef660694768613
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo+prosa, C09: codigo+prosa, C10: prosa, C11: codigo, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 189244, kb_codigo: 7078, kb_prosa: 4314, kb_dados: 88554, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: termux-app-rafacodephi
     dir: "termux-app-rafacodephi"
@@ -81,6 +88,7 @@ repos:
     prova: f95d182096e4b07d
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo+prosa, C09: codigo+prosa, C10: codigo+prosa, C11: codigo, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 145220, kb_codigo: 5427, kb_prosa: 3138, kb_dados: 5163, arquivos_vendored: 2, original_ratio: 0.999}
     estado: FATO
   - id: termux-api_rafcodephi
     dir: "termux-api_rafcodephi"
@@ -92,6 +100,7 @@ repos:
     prova: 71ef67cf7eecdd9c
     conceitos_evidenciados: [C02, C03, C04, C05, C06, C07, C11, C14]
     evidencia_origem: {C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo, C11: codigo, C14: codigo}
+    metricas: {loc_codigo: 12951, kb_codigo: 507, kb_prosa: 21, kb_dados: 623, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: userland
     dir: "UserLAnd"
@@ -103,6 +112,7 @@ repos:
     prova: c5fb72f715a305b3
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C08, C09, C10, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C08: codigo, C09: codigo+prosa, C10: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 115960, kb_codigo: 4037, kb_prosa: 650, kb_dados: 5621, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: pcr_rafaelia_code_seed
     dir: "PCR_Rafaelia_Code_seed"
@@ -114,6 +124,7 @@ repos:
     prova: a3352fb812c0dedb
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C08: codigo+prosa, C09: codigo+prosa, C10: prosa, C11: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: prosa}
+    metricas: {loc_codigo: 102036, kb_codigo: 3438, kb_prosa: 1789, kb_dados: 2781, arquivos_vendored: 21, original_ratio: 0.979}
     estado: FATO
   - id: qemu_rafaelia
     dir: "qemu_rafaelia"
@@ -125,6 +136,7 @@ repos:
     prova: 511dfbfaec53aa07
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C08, C09, C10, C12, C13, C14, C15, C16, C17]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C08: codigo+prosa, C09: codigo+prosa, C10: codigo, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa, C17: codigo+prosa}
+    metricas: {loc_codigo: 2492961, kb_codigo: 79219, kb_prosa: 2841, kb_dados: 59264, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: actions
     dir: "actions"
@@ -136,6 +148,7 @@ repos:
     prova: f9022295d6e90c10
     conceitos_evidenciados: [C01, C03, C04, C05, C10, C15, C17]
     evidencia_origem: {C01: codigo+prosa, C03: codigo+prosa, C04: codigo, C05: codigo+prosa, C10: codigo, C15: codigo, C17: codigo}
+    metricas: {loc_codigo: 20895, kb_codigo: 33279, kb_prosa: 106, kb_dados: 36694, arquivos_vendored: 11, original_ratio: 0.946}
     estado: FATO
   - id: x0
     dir: "X0"
@@ -147,6 +160,7 @@ repos:
     prova: cc3fcb34959dda7a
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C08: prosa, C09: codigo+prosa, C10: codigo+prosa, C11: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 556712, kb_codigo: 143462, kb_prosa: 86372, kb_dados: 101, arquivos_vendored: 10, original_ratio: 0.999}
     estado: FATO
   - id: llamarafaelia
     dir: "llamaRafaelia"
@@ -158,6 +172,7 @@ repos:
     prova: 2855864213067b5a
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16, C17]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo+prosa, C09: codigo+prosa, C10: codigo+prosa, C11: prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: prosa, C17: codigo}
+    metricas: {loc_codigo: 425690, kb_codigo: 22216, kb_prosa: 8944, kb_dados: 92766, arquivos_vendored: 7, original_ratio: 0.997}
     estado: FATO
   - id: conversations_chunks_private
     dir: "CONVERSATIONS_CHUNKS_PRIVATE"
@@ -169,6 +184,7 @@ repos:
     prova: 5471687ed4468e72
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16, C17]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: prosa, C08: codigo, C09: codigo+prosa, C10: codigo+prosa, C11: codigo, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa, C17: codigo}
+    metricas: {loc_codigo: 8906, kb_codigo: 758027, kb_prosa: 251, kb_dados: 679, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: home
     dir: "home"
@@ -180,6 +196,7 @@ repos:
     prova: 133dfe7fb22b3563
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C09, C10, C12, C13, C14, C15, C16, C17]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo, C09: codigo+prosa, C10: codigo+prosa, C12: codigo+prosa, C13: codigo, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa, C17: codigo}
+    metricas: {loc_codigo: 756301, kb_codigo: 34876, kb_prosa: 8816, kb_dados: 130193, arquivos_vendored: 2708, original_ratio: 0.46}
     estado: FATO
   - id: relativity-living-light
     dir: "relativity-living-light"
@@ -191,6 +208,7 @@ repos:
     prova: 800f95e80551bb6d
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: prosa, C09: codigo+prosa, C10: codigo+prosa, C11: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 85824, kb_codigo: 3215, kb_prosa: 3882, kb_dados: 35540, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: matem-tica-
     dir: "Matem-tica-"
@@ -202,6 +220,7 @@ repos:
     prova: a1498cd3ece5ad18
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: prosa, C02: codigo+prosa, C03: codigo+prosa, C04: prosa, C05: prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo, C09: prosa, C10: codigo+prosa, C11: prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: prosa, C16: prosa}
+    metricas: {loc_codigo: 3335, kb_codigo: 119, kb_prosa: 758, kb_dados: 2371, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: papers
     dir: "papers"
@@ -213,6 +232,7 @@ repos:
     prova: bb3ba8eb963fbe4f
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C09, C10, C12, C13, C15, C16]
     evidencia_origem: {C01: codigo, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C09: codigo+prosa, C10: codigo+prosa, C12: prosa, C13: prosa, C15: codigo, C16: prosa}
+    metricas: {loc_codigo: 8576, kb_codigo: 251, kb_prosa: 28, kb_dados: 130, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: rafpolimata
     dir: "RafPolimata"
@@ -224,6 +244,7 @@ repos:
     prova: a2eafccdaa158980
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo+prosa, C09: prosa, C10: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 29347, kb_codigo: 1176, kb_prosa: 706, kb_dados: 141, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: rafaelia_private
     dir: "Rafaelia_Private"
@@ -235,6 +256,7 @@ repos:
     prova: 8839d5481153571b
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: prosa, C08: codigo+prosa, C09: codigo+prosa, C10: codigo+prosa, C11: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 328031, kb_codigo: 33049, kb_prosa: 14091, kb_dados: 87504, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: lgpd_constituicoes
     dir: "LGPD-Constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic"
@@ -246,6 +268,7 @@ repos:
     prova: 5c4da8338a314b9d
     conceitos_evidenciados: [C02, C03, C04, C05, C06, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C02: prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: prosa, C09: prosa, C10: prosa, C11: prosa, C12: codigo+prosa, C13: prosa, C14: prosa, C15: prosa, C16: prosa}
+    metricas: {loc_codigo: 1462, kb_codigo: 27, kb_prosa: 706, kb_dados: 6036, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: livrovivo_thisbooklives
     dir: "LivroVivo_ThisBookLives"
@@ -257,6 +280,7 @@ repos:
     prova: 464895bbb5896763
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C08, C09, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: prosa, C02: prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: prosa, C08: codigo+prosa, C09: prosa, C11: codigo+prosa, C12: codigo+prosa, C13: prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 4603, kb_codigo: 211, kb_prosa: 339, kb_dados: 19, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: blackhole
     dir: "Blackhole"
@@ -268,6 +292,7 @@ repos:
     prova: cd46338866d79248
     conceitos_evidenciados: [C03, C04, C05, C09, C11, C14, C15]
     evidencia_origem: {C03: prosa, C04: prosa, C05: prosa, C09: prosa, C11: prosa, C14: prosa, C15: prosa}
+    metricas: {loc_codigo: 0, kb_codigo: 0, kb_prosa: 4, kb_dados: 0, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: publicacientiespiritual
     dir: "publicacientiespiritual"
@@ -279,6 +304,7 @@ repos:
     prova: 05499c3cfa12329d
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C08, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: prosa, C02: prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: prosa, C08: prosa, C09: codigo+prosa, C10: codigo+prosa, C11: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: prosa}
+    metricas: {loc_codigo: 32263, kb_codigo: 32321, kb_prosa: 3601, kb_dados: 355926, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: zipraf_omega_full
     dir: "ZIPRAF_OMEGA_FULL"
@@ -290,17 +316,19 @@ repos:
     prova: e04f95eabb943d6f
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C09, C10, C11, C12, C13, C14, C15, C16]
     evidencia_origem: {C01: codigo+prosa, C02: prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo, C09: codigo+prosa, C10: prosa, C11: prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa}
+    metricas: {loc_codigo: 36834, kb_codigo: 22635, kb_prosa: 560, kb_dados: 55320, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: mapa
     dir: "Mapa"
-    head: ed8102975c2a
-    arquivos: 65
-    conteudo_vivo: [.md:32, .png:13, .yaml:7, .py:6, .svg:5, <sem-ext>:2]
-    coerencia: 04e7c0e8327fc566
-    integridade: da483bedec246fc7
-    prova: 25e9f8bbc8640ed9
+    head: c2b63b1d1946
+    arquivos: 71
+    conteudo_vivo: [.md:35, .png:13, .py:9, .yaml:7, .svg:5, <sem-ext>:2]
+    coerencia: 3ff996ab84a53716
+    integridade: baf9735f22705eb2
+    prova: 2436d7dc9ecf3298
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16, C17]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo+prosa, C09: codigo+prosa, C10: codigo+prosa, C11: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa, C17: codigo+prosa}
+    metricas: {loc_codigo: 2594, kb_codigo: 116, kb_prosa: 174, kb_dados: 35092, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
   - id: memrafcode
     dir: "MemRafcode"
@@ -312,6 +340,7 @@ repos:
     prova: 767d009c83f5da4c
     conceitos_evidenciados: [C01, C02, C04, C12, C13, C16]
     evidencia_origem: {C01: prosa, C02: prosa, C04: prosa, C12: prosa, C13: prosa, C16: prosa}
+    metricas: {loc_codigo: 0, kb_codigo: 0, kb_prosa: 13, kb_dados: 0, arquivos_vendored: 0, original_ratio: 1.0}
     estado: FATO
 correlacoes:
   C01: [actions, blake3, chipquantum, conversations_chunks_private, deepseek-rafcoder, gaia_phi, home, livrovivo_thisbooklives, llamarafaelia, mapa, matem-tica-, memrafcode, papers, pcr_rafaelia_code_seed, publicacientiespiritual, qemu_rafaelia, rafaelia_private, rafgittools, rafpolimata, relativity-living-light, termux-app-rafacodephi, userland, vectras-vm-android, x0, zipraf_omega_full]
@@ -332,4 +361,5 @@ correlacoes:
   C16: [blake3, chipquantum, conversations_chunks_private, deepseek-rafcoder, gaia_phi, home, lgpd_constituicoes, livrovivo_thisbooklives, llamarafaelia, mapa, matem-tica-, memrafcode, papers, pcr_rafaelia_code_seed, publicacientiespiritual, qemu_rafaelia, rafaelia_private, rafgittools, rafpolimata, relativity-living-light, termux-app-rafacodephi, userland, vectras-vm-android, x0, zipraf_omega_full]
   C17: [actions, conversations_chunks_private, home, llamarafaelia, mapa, qemu_rafaelia]
 evidencia_origem_totais: {'codigo+prosa': 296, 'codigo': 25, 'prosa': 68}
+metricas_totais: {'loc_codigo': 5542426, 'kb_codigo': 1215638, 'kb_prosa': 151145, 'kb_dados': 1035711}
 totais: {repos: 28, com_git: 28}
