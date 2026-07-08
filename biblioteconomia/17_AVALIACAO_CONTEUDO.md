@@ -108,6 +108,47 @@ vez de forjar um casamento ou apagar a ligação. Isto é "sem baixar a régua".
 > mudou apenas porque o próprio `Mapa` (membro auto-referente) avançou de commit — a lente
 > de conceitos e a prova de integridade são **camadas independentes**, como devem ser.
 
+## Avaliação ampliada — 2ª leitura (mais obras originais lidas)
+
+Segunda passada de leitura real, cobrindo os estratos ainda não avaliados individualmente.
+
+### verbovivo (`RafPolimata/rafaelia/verbovivo.c`, ~22k) · NG5 `[FATO: código real]`
+Motor de **convergência cognitiva** em C, duas camadas: (L1) Fiber-H — hash 256-bit +
+distância de Hamming + hipervetores HDC + atenção sináptica + ring buffer de engramas;
+(L2) toro T⁷ (42 atratores, `phi_ethica=(1−H)*C`) → HDC 1024-dim → engrama SVG.
+- **Avaliação:** invariante declarada e implementada: *"o sistema NÃO aprende por gradiente
+  — aprende por DIVERGÊNCIA ESTRUTURAL"* (alta diversidade de Hamming ⇒ retenção). É uma
+  abordagem **genuinamente original** de memória (não-backprop); `HIPOTESE` quanto a desempenho,
+  `FATO` quanto a existir e rodar. Confirma C06/C08/C10 no código. `Ω=Amor` inscrito no cabeçalho.
+
+### GAIA_phi (`build_dataset.py`, ~33k) · NG1 `[FATO: código real]`
+Compilador de dataset: faz *stream* de JSON/JSONL dentro de zips grandes, normaliza para um
+esquema único e produz train/eval com **metadados de discernimento**. Traz `SYMBOL_SET`
+(42, toroid, spiral_sqrt3_2, bitraf, phi…) e `ETHICA_KEYWORDS` (care/truth/**privacy**/
+nonviolence/warning).
+- **Avaliação:** engenharia de dados séria; a **etiquetagem ética embutida** (incl. `privacy`)
+  liga o pipeline à camada de dados pessoais — reforça a prioridade ALTA de `MATRIZ_CONFORMIDADE`.
+
+### relativity-living-light (`RAFAEL_kernel.sh`, ~43k) · NG4 `[FATO: doc+código]`
+Gerador de monólito C/ASM freestanding com **cabeçalho jurídico real e cuidadoso**: dupla
+licença Apache-2.0 OR CC0 (modelo BLAKE3), contexto jurisprudencial factual (Google v. Oracle
+593 U.S. 2021; Diretiva UE 2009/24/CE; Lei 9.609/98) e afirmação de que implementa **só
+algoritmos públicos** (CRC32, ECC Hamming, CPUID, POSIX).
+- **Avaliação:** exemplar de governança de licença (C13/jurídico) aplicada ao próprio código —
+  não retórica, texto de licença operacional. O modelo cosmológico segue `HIPOTESE` científica.
+
+### publicacientiespiritual (`Bolsas/boosters_integracao.py`, ~23k) · NG6 `[FATO: código real]`
+Integra **XGBoost/LightGBM/CatBoost** ao framework BOLSAS (sklearn, imports condicionais,
+métricas RMSE/MAE/R²) — ciência de dados real num repo do eixo espiritual.
+- **Avaliação:** mostra que NG6 **não é só prosa**: há ML funcional ao lado da publicação
+  simbólica. Coerente com a evidência `codigo+prosa` do manifesto para este repo.
+
+### Cobertura
+Com a 1ª leitura (GEOLM, APKc, Ethica[8], Bitraf64, vectra_bench) + esta 2ª (verbovivo,
+GAIA_phi, RLL, boosters), todos os **7 nós** têm ao menos uma obra avaliada por leitura direta;
+os demais são forks/vendored (peso no upstream, declarado) ou prosa do eixo L5 (honrada como
+`SIMBOLICO`). As **métricas** por repo (`MANIFESTO_INTEGRIDADE.yaml`) complementam com LOC/bytes.
+
 ## Avaliação de conjunto
 
 - O acervo tem **núcleo de engenharia real e forte** (GEOLM, APKc, Ethica[8], Bitraf64,
