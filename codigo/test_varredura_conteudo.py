@@ -73,6 +73,19 @@ class TestPuro(unittest.TestCase):
         self.assertEqual(V.resumo_origem(res),
                          {"codigo": 1, "prosa": 1, "codigo+prosa": 1})
 
+    def test_resumo_metricas_soma(self):
+        res = [{"metricas": {"loc_codigo": 10, "kb_codigo": 2, "kb_prosa": 1,
+                             "kb_dados": 0}},
+               {"metricas": {"loc_codigo": 5, "kb_codigo": 3, "kb_prosa": 0,
+                             "kb_dados": 4}}]
+        self.assertEqual(V.resumo_metricas(res),
+                         {"loc_codigo": 15, "kb_codigo": 5, "kb_prosa": 1,
+                          "kb_dados": 4})
+
+    def test_vendored_heuristica(self):
+        self.assertIn("vendor/", V.VENDORED)
+        self.assertIn(".cargo/", V.VENDORED)
+
 
 if __name__ == "__main__":
     unittest.main()

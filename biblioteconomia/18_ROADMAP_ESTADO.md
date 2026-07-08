@@ -15,7 +15,9 @@
 | Conceitos & método | `07`–`13` (matriz C01–C17, ancoragem, resiliência, 1ª linha, escala, parábola, certificação) | ✅ FEITO |
 | Substrato & entrada | `14`–`15` (base-2→Ω, ficha, grupamentos de nó) | ✅ FEITO |
 | Conteúdo & evidência | `16`–`17` (varredura, hashing triplo, avaliação real, código vs prosa) | ✅ FEITO |
-| Código executável | `codigo/` — ficha, varredura, revisão, marca epistêmica, conformidade | ✅ FEITO (**35 testes**) |
+| Código executável | `codigo/` — ficha, varredura, revisão, marca epistêmica, conformidade | ✅ FEITO (**37 testes**) |
+| Métricas de conteúdo | LOC/bytes por bucket + vendored no manifesto (5,5 M LOC no acervo) | ✅ FEITO |
+| Semente para IA | `SEMENTE_BIBLIOTECA_VIVA.md` — parábola de alinhamento operacional (texto do autor) | ✅ FEITO |
 | Índices | catálogo, matriz, backlog(111), manifesto integridade, revisão, marca, conformidade | ✅ FEITO |
 
 ## Próximas ações — contabilidade

@@ -151,7 +151,51 @@ def escanear(repo_id: str, base: str) -> dict:
         "triple": {"coerencia": coerencia, "integridade": integridade, "prova": prova},
         "conceitos_evidenciados": sorted(evidencia),
         "evidencia_origem": evidencia,
+        "metricas": metricas(d, files),
         "estado": "FATO",
+    }
+
+
+# heuristica de vendored/gerado (peso que nao e contribuicao original)
+VENDORED = ("vendor/", "third_party/", "dist/", "node_modules/", ".cargo/",
+            ".cpan/", "site-packages/", "_deps/", "external/")
+
+
+def metricas(d: str, files: list) -> dict:
+    """Bytes por bucket (codigo/prosa/dados), LOC de codigo e razao original.
+    Bounded: nao le arquivos > 512KB para LOC (marca-os so por bytes)."""
+    bc = bp = bd = 0            # bytes codigo / prosa / dados
+    loc = 0                     # linhas de codigo (arquivos <= 512KB)
+    n_vend = 0
+    for f in files:
+        rel = f.strip('"')
+        low = rel.lower()
+        if any(v in low for v in VENDORED):
+            n_vend += 1
+        p = os.path.join(d, rel)
+        try:
+            sz = os.path.getsize(p)
+        except OSError:
+            continue
+        e = os.path.splitext(rel)[1].lower()
+        if e in CODE_EXT:
+            bc += sz
+            if sz <= 512 * 1024:
+                try:
+                    with open(p, "rb") as fh:
+                        loc += fh.read().count(b"\n")
+                except OSError:
+                    pass
+        elif e in PROSE_EXT:
+            bp += sz
+        else:
+            bd += sz
+    n = len(files) or 1
+    return {
+        "loc_codigo": loc,
+        "kb_codigo": bc // 1024, "kb_prosa": bp // 1024, "kb_dados": bd // 1024,
+        "arquivos_vendored": n_vend,
+        "original_ratio": round(1 - n_vend / n, 3),
     }
 
 
@@ -186,6 +230,14 @@ def resumo_origem(resultados) -> dict:
     return dict(tot)
 
 
+def resumo_metricas(resultados) -> dict:
+    loc = sum(r.get("metricas", {}).get("loc_codigo", 0) for r in resultados)
+    kbc = sum(r.get("metricas", {}).get("kb_codigo", 0) for r in resultados)
+    kbp = sum(r.get("metricas", {}).get("kb_prosa", 0) for r in resultados)
+    kbd = sum(r.get("metricas", {}).get("kb_dados", 0) for r in resultados)
+    return {"loc_codigo": loc, "kb_codigo": kbc, "kb_prosa": kbp, "kb_dados": kbd}
+
+
 def base_dir() -> str:
     env = os.environ.get("MAPA_ACERVO_BASE")
     if env:
@@ -212,6 +264,7 @@ def relatorio(resultados, base) -> str:
                  + ",".join(r["conceitos_evidenciados"]))
     L.append("")
     L.append(f"evidencia por origem (conceito x repo): {resumo_origem(resultados)}")
+    L.append(f"metricas totais: {resumo_metricas(resultados)}")
     L.append("")
     L.append("correlacoes (conceito -> repos que o evidenciam no conteudo):")
     for c, repos in correlacoes(resultados).items():
@@ -252,12 +305,16 @@ def manifesto_yaml(resultados, base) -> str:
             + ", ".join(f"{k}: {v}"
                         for k, v in sorted(r.get("evidencia_origem", {}).items()))
             + "}",
+            "    metricas: {"
+            + ", ".join(f"{k}: {v}" for k, v in r.get("metricas", {}).items())
+            + "}",
             f"    estado: FATO",
         ]
     L.append("correlacoes:")
     for c, repos in correlacoes(resultados).items():
         L.append(f"  {c}: [{', '.join(repos)}]")
     L.append(f"evidencia_origem_totais: {resumo_origem(resultados)}")
+    L.append(f"metricas_totais: {resumo_metricas(resultados)}")
     L.append(f"totais: {{repos: {len(resultados)}, "
              f"com_git: {sum(1 for r in resultados if 'triple' in r)}}}")
     return "\n".join(L) + "\n"
