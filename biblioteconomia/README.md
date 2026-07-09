@@ -66,6 +66,11 @@ mesmo acervo sem se enganar.
 4. Executa qualquer alteração seguindo `06_PROTOCOLO_BIBLIOTECONOMICO.md`, que se
    amarra ao ciclo de excelência de `protocolos/PROTOCOLO_EXECUCAO_EXCELENCIA.md`.
 
+## Porta de entrada
+
+Guia de navegação de todo o acervo (ordem de leitura, ferramentas, índices, estado):
+[`INDICE_GERAL.md`](INDICE_GERAL.md).
+
 ## Índice desta pasta
 
 - [`01_PLANO_DE_CLASSIFICACAO.md`](01_PLANO_DE_CLASSIFICACAO.md)

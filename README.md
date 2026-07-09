@@ -23,7 +23,11 @@ de biblioteconomia academica: classificacao facetada (notacao `RAF.*` com ponte 
 vocabulario controlado, fichas catalograficas, registro de friccao semantica e posicao
 geral de cada organizacao. Reconhece os dois eixos co-validos do acervo — o
 filosofico/espiritual universalista e a ciencia academica — aplicando a regra de
-honestidade `FATO / HIPOTESE / SIMBOLICO / LACUNA`. Entrada: `biblioteconomia/README.md`.
+honestidade `FATO / HIPOTESE / SIMBOLICO / LACUNA`.
+
+**Porta de entrada (guia do acervo):** [`biblioteconomia/INDICE_GERAL.md`](biblioteconomia/INDICE_GERAL.md)
+— ordem de leitura, mapa de todos os documentos, ferramentas, índices e estado atual.
+Manifesto da camada: `biblioteconomia/README.md`.
 
 ## Regra central
 
