@@ -152,7 +152,8 @@ def escanear(repo_id: str, base: str) -> dict:
         "conceitos_evidenciados": sorted(evidencia),
         "evidencia_origem": evidencia,
         "metricas": metricas(d, files),
-        "estado": "FATO",
+        # Mapa e auto-referente: seu selo muda a cada commit do proprio catalogo -> RUNTIME
+        "estado": "RUNTIME" if repo_id == "mapa" else "FATO",
     }
 
 
@@ -200,8 +201,11 @@ def metricas(d: str, files: list) -> dict:
 
 
 def acervo_prova(resultados) -> str:
-    """Selo do acervo: blake2b sobre as provas por repo, ordenadas (Merkle simples)."""
-    provas = sorted(r["triple"]["prova"] for r in resultados if "triple" in r)
+    """Selo do acervo: blake2b sobre as provas por repo, ordenadas (Merkle simples).
+    EXCLUI o proprio Mapa (id='mapa'): a entrada auto-referente e RUNTIME e mudaria
+    a cada commit do catalogo. Excluindo-a, o selo so muda se um dos OUTROS repos muda."""
+    provas = sorted(r["triple"]["prova"] for r in resultados
+                    if "triple" in r and r["id"] != "mapa")
     return _blake("|".join(provas))
 
 
@@ -281,6 +285,8 @@ def manifesto_yaml(resultados, base) -> str:
          "metodo_triple: 'coerencia=blake2b(estrutura); integridade=git tree SHA; "
          "prova=blake2b(id|coerencia|integridade|head)'",
          f"selo_acervo_prova: {acervo_prova(resultados)}",
+         "selo_nota: 'exclui a entrada auto-referente mapa (RUNTIME); estavel enquanto os "
+         "outros repos nao mudarem'",
          "honestidade: 'conceitos_evidenciados = ocorrencia textual (FATO de ocorrencia), "
          "nao prova de implementacao correta'",
          "evidencia_origem_legenda: 'codigo = termo em fonte (implementado/mais forte); "
@@ -308,7 +314,7 @@ def manifesto_yaml(resultados, base) -> str:
             "    metricas: {"
             + ", ".join(f"{k}: {v}" for k, v in r.get("metricas", {}).items())
             + "}",
-            f"    estado: FATO",
+            f"    estado: {r.get('estado', 'FATO')}",
         ]
     L.append("correlacoes:")
     for c, repos in correlacoes(resultados).items():

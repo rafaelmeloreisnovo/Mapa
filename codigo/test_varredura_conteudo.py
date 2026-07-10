@@ -22,11 +22,20 @@ class TestPuro(unittest.TestCase):
         self.assertEqual(len(set(V.REPOS.values())), 28)  # dirs unicos
 
     def test_acervo_prova_estavel_e_sensivel(self):
-        base = [{"triple": {"prova": "aa"}}, {"triple": {"prova": "bb"}}]
+        base = [{"id": "r1", "triple": {"prova": "aa"}},
+                {"id": "r2", "triple": {"prova": "bb"}}]
         p1 = V.acervo_prova(base)
         self.assertEqual(p1, V.acervo_prova(list(reversed(base))))  # ordem nao importa
-        mudou = [{"triple": {"prova": "aa"}}, {"triple": {"prova": "cc"}}]
+        mudou = [{"id": "r1", "triple": {"prova": "aa"}},
+                 {"id": "r2", "triple": {"prova": "cc"}}]
         self.assertNotEqual(p1, V.acervo_prova(mudou))  # muda se um repo muda
+
+    def test_acervo_prova_ignora_mapa_autoreferente(self):
+        a = [{"id": "r1", "triple": {"prova": "aa"}},
+             {"id": "mapa", "triple": {"prova": "X"}}]
+        b = [{"id": "r1", "triple": {"prova": "aa"}},
+             {"id": "mapa", "triple": {"prova": "Y"}}]  # mapa mudou
+        self.assertEqual(V.acervo_prova(a), V.acervo_prova(b))  # selo NAO muda
 
     def test_correlacoes_indice_invertido(self):
         res = [

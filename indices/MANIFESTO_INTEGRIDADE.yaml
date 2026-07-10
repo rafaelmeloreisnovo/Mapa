@@ -2,7 +2,8 @@ schema: mapa_manifesto_integridade_v1
 primeira_linha: 'DIGNIDADE-HUMANA / PROTECAO-INFANTIL (UDHR Art.1; UNCRC Art.3)'
 gerado_por: codigo/varredura_conteudo.py
 metodo_triple: 'coerencia=blake2b(estrutura); integridade=git tree SHA; prova=blake2b(id|coerencia|integridade|head)'
-selo_acervo_prova: 7308425b53c0a998
+selo_acervo_prova: 4e35d7c9f7bc8069
+selo_nota: 'exclui a entrada auto-referente mapa (RUNTIME); estavel enquanto os outros repos nao mudarem'
 honestidade: 'conceitos_evidenciados = ocorrencia textual (FATO de ocorrencia), nao prova de implementacao correta'
 evidencia_origem_legenda: 'codigo = termo em fonte (implementado/mais forte); prosa = termo em .md/.txt/.tex (discutido); codigo+prosa = ambos'
 repos:
@@ -320,16 +321,16 @@ repos:
     estado: FATO
   - id: mapa
     dir: "Mapa"
-    head: c2b63b1d1946
-    arquivos: 71
-    conteudo_vivo: [.md:35, .png:13, .py:9, .yaml:7, .svg:5, <sem-ext>:2]
-    coerencia: 3ff996ab84a53716
-    integridade: baf9735f22705eb2
-    prova: 2436d7dc9ecf3298
+    head: 2d1c7bb54888
+    arquivos: 73
+    conteudo_vivo: [.md:37, .png:13, .py:9, .yaml:7, .svg:5, <sem-ext>:2]
+    coerencia: aeb4d444b7947cbf
+    integridade: 080f3f1ad1864c8c
+    prova: cfc1493888b5a8d1
     conceitos_evidenciados: [C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16, C17]
     evidencia_origem: {C01: codigo+prosa, C02: codigo+prosa, C03: codigo+prosa, C04: codigo+prosa, C05: codigo+prosa, C06: codigo+prosa, C07: codigo+prosa, C08: codigo+prosa, C09: codigo+prosa, C10: codigo+prosa, C11: codigo+prosa, C12: codigo+prosa, C13: codigo+prosa, C14: codigo+prosa, C15: codigo+prosa, C16: codigo+prosa, C17: codigo+prosa}
-    metricas: {loc_codigo: 2594, kb_codigo: 116, kb_prosa: 174, kb_dados: 35092, arquivos_vendored: 0, original_ratio: 1.0}
-    estado: FATO
+    metricas: {loc_codigo: 2652, kb_codigo: 122, kb_prosa: 194, kb_dados: 35092, arquivos_vendored: 0, original_ratio: 1.0}
+    estado: RUNTIME
   - id: memrafcode
     dir: "MemRafcode"
     head: 8d629e3be976
@@ -361,5 +362,5 @@ correlacoes:
   C16: [blake3, chipquantum, conversations_chunks_private, deepseek-rafcoder, gaia_phi, home, lgpd_constituicoes, livrovivo_thisbooklives, llamarafaelia, mapa, matem-tica-, memrafcode, papers, pcr_rafaelia_code_seed, publicacientiespiritual, qemu_rafaelia, rafaelia_private, rafgittools, rafpolimata, relativity-living-light, termux-app-rafacodephi, userland, vectras-vm-android, x0, zipraf_omega_full]
   C17: [actions, conversations_chunks_private, home, llamarafaelia, mapa, qemu_rafaelia]
 evidencia_origem_totais: {'codigo+prosa': 296, 'codigo': 25, 'prosa': 68}
-metricas_totais: {'loc_codigo': 5542426, 'kb_codigo': 1215638, 'kb_prosa': 151145, 'kb_dados': 1035711}
+metricas_totais: {'loc_codigo': 5542484, 'kb_codigo': 1215644, 'kb_prosa': 151165, 'kb_dados': 1035711}
 totais: {repos: 28, com_git: 28}
