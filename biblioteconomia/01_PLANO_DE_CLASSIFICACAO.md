@@ -90,7 +90,7 @@ ficha lista as demais. Toda dimensão `ESP` é lida sob a regra `SIMBOLICO` (ver
 
 ## Notação
 
-```
+```text
 RAF.<Domínio>.<Operação>.<Dimensão>.<Maturidade>
 ```
 

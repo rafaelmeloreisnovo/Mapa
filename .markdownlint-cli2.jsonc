@@ -1,0 +1,18 @@
+// Config markdownlint do acervo Mapa.
+// Regras estruturais (headings, listas, linguagem de code block) permanecem ATIVAS
+// e foram corrigidas nos arquivos. Desligadas apenas as estilisticas/conflitantes
+// com as convencoes do acervo:
+{
+  "config": {
+    // line-length: prosa e tabelas passam de 80 col (o proprio README raiz tambem).
+    "MD013": false,
+    // table-column-style: o estilo compacto de tabela e o usado em todo o repo.
+    "MD060": false,
+    // first-line-heading: conflita com o SELO de primeira linha (biblioteconomia/10_).
+    "MD041": false,
+    // duplicate-heading: permitir headings iguais sob pais diferentes (CHANGELOG "### Added").
+    "MD024": { "siblings_only": true }
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules"]
+}

@@ -76,7 +76,7 @@ Sem norma técnica que a certifique — e isso é correto. A âncora aqui é **d
 Quando duas normas técnicas colidem (ex.: eficiência × privacidade; desempenho ×
 acessibilidade; automação × supervisão humana), a decisão **não** é técnica pura:
 
-```
+```text
 PRIORIDADE (do maior ao menor peso):
   1. Proteção da vida, da criança e da dignidade humana   (UDHR, UNCRC)  ← inviolável
   2. Direitos fundamentais e proteção de dados            (LGPD/GDPR)

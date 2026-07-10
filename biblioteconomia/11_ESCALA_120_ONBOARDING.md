@@ -10,7 +10,7 @@
 
 ## 1. Fato, hipótese e lacuna do tamanho do acervo
 
-```
+```text
 FATO:      28 repositorios catalogados (03_CATALOGO_REPOSITORIOS.md), fonte = README real.
 FATO:      107 repositorios descobertos por busca GitHub em 2026-07-05
            (59 rafaelmeloreisnovo + 48 instituto-Rafael); metadado publico confirmado.
@@ -23,7 +23,7 @@ ACAO:      onboarding incremental (secao 3), 1 repo = 1 ficha + 1 registro, sem 
 > O backlog completo, enumerado e legivel por maquina, esta em
 > [`BACKLOG_ACERVO.md`](BACKLOG_ACERVO.md) e [`../indices/BACKLOG_ACERVO.yaml`](../indices/BACKLOG_ACERVO.yaml).
 > A LACUNA deixou de ser um numero estimado e virou uma lista de nomes protegida.
-
+>
 > Por que não catalogo os 92 agora: eles não estão acessíveis nesta sessão. Inventar
 > fichas para eles violaria I3/I4 (verdade honesta, proteção da lacuna). A resposta
 > correta de biblioteconomia é **abrir o slot vazio e protegê-lo**, não preenchê-lo.
@@ -33,7 +33,7 @@ ACAO:      onboarding incremental (secao 3), 1 repo = 1 ficha + 1 registro, sem 
 A notação facetada `RAF.<Domínio>.<Operação>.<Dimensão>.<Maturidade>` (`01_`) já escala:
 não há teto de itens por faceta. Para IDs estáveis num acervo grande:
 
-```
+```text
 id  = <slug-do-repo>            # único, minúsculo, sem acento
 org = RMN | IRF | <futuras>     # conta/organização GitHub
 lote = L01..Lnn                 # lote de onboarding (28 atuais = L01)

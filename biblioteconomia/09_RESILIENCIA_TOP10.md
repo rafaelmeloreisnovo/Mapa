@@ -25,7 +25,9 @@ ao topo ético.
 ---
 
 ### R01 · Hashing → Custódia  (`SUSTENTA`)
+
 Sem hash correto, a cadeia de proveniência mente.
+
 - **rollback:** restaurar `DIGEST` do último manifesto assinado; recomputar e comparar.
 - **testes:** vetores de teste conhecidos (KAT) do hash; round-trip conteúdo→digest→conteúdo.
 - **failsafe:** digest divergente ⇒ marcar item `QUARENTENA`, não `FATO`; bloquear reuso.
@@ -33,7 +35,9 @@ Sem hash correto, a cadeia de proveniência mente.
 - **watchdog:** verificação periódica de integridade que reprocessa amostras e alerta desvio.
 
 ### R02 · Determinismo → Verificação/CI  (`EVOLUI→`)
+
 Build não reproduzível invalida toda alegação de determinismo.
+
 - **rollback:** fixar o último commit com build reproduzível verde; reverter mudança que quebrou.
 - **testes:** dupla compilação bit-a-bit; pinagem de toolchain; `diffoscope` sobre artefatos.
 - **failsafe:** divergência ⇒ marcar release `HIPOTESE`, nunca publicar como `FATO`.
@@ -41,7 +45,9 @@ Build não reproduzível invalida toda alegação de determinismo.
 - **watchdog:** job agendado que recompila e compara hash do artefato.
 
 ### R03 · Núcleo C/ASM → Plataforma Android  (`SUSTENTA`)
+
 O runtime nativo alimenta app, VM e ferramentas.
+
 - **rollback:** ABI/versão do `.so` anterior fixada; tags de release por arquitetura.
 - **testes:** testes por ABI (`armeabi-v7a`, `arm64-v8a`); smoke test JNI; limites de buffer.
 - **failsafe:** símbolo/ABI ausente ⇒ degradar para fallback C portável, não crashar.
@@ -49,7 +55,9 @@ O runtime nativo alimenta app, VM e ferramentas.
 - **watchdog:** monitor de crash/ANR por arquitetura; alarme de regressão de tamanho binário.
 
 ### R04 · Corpus/Dados → Cognição/IA  (`SUSTENTA`)
+
 Dados alimentam X0/llamaRafaelia; dado corrompido ou sensível contamina o modelo.
+
 - **rollback:** versão anterior do dataset (chunks imutáveis por digest); reverter ingest.
 - **testes:** validação de esquema; deduplicação; varredura de PII e de conteúdo infantil sensível **antes** do uso.
 - **failsafe:** dado sem proveniência ou com PII não tratada ⇒ **não ingerir** (estado seguro).
@@ -57,7 +65,9 @@ Dados alimentam X0/llamaRafaelia; dado corrompido ou sensível contamina o model
 - **watchdog:** monitor de qualidade/viés e de vazamento de PII nos vetores.
 
 ### R05 · Classificação ↔ Vocabulário Controlado  (`SUSTENTA`)
+
 Notação `RAF.*` depende do descritor preferido; termo solto quebra a busca.
+
 - **rollback:** versão anterior do tesauro (`02_`) e do catálogo; reverter renomeação.
 - **testes:** consistência referencial `02_/03_/04_/YAML`; nenhum descritor órfão; notação bem formada.
 - **failsafe:** termo novo sem autoridade ⇒ entra como candidato `LACUNA`, não como preferido.
@@ -65,7 +75,9 @@ Notação `RAF.*` depende do descritor preferido; termo solto quebra a busca.
 - **watchdog:** validador que relê os quatro arquivos e o YAML e acusa divergência (ver §Verificação de `06_`).
 
 ### R06 · Fricção Semântica → Reconciliação  (`EVOLUI→`)
+
 Termo em colisão (42, Φ, ZIPRAF, verdade) sem qualificação gera erro de execução.
+
 - **rollback:** posição geral anterior do verbete de fricção; histórico de sentidos.
 - **testes:** todo descritor polissêmico tem qualificador; nenhum sentido colapsado.
 - **failsafe:** ambiguidade não resolvida ⇒ marcar `HIPOTESE` e **pausar** ação sobre o termo.
@@ -73,7 +85,9 @@ Termo em colisão (42, Φ, ZIPRAF, verdade) sem qualificação gera erro de exec
 - **watchdog:** varredura que detecta uso não-qualificado de termo em fricção.
 
 ### R07 · Invariante-prova ↔ Invariante-padrão  (`TENSIONA`)
+
 Confundir os dois faz metáfora entrar no CI ou prova sair dele.
+
 - **rollback:** conjunto anterior de invariantes-prova versionado.
 - **testes:** só invariante-prova (checável por hash/teste) entra em CI; padrão fica na prosa.
 - **failsafe:** invariante não checável ⇒ jamais bloqueia merge; é documentação.
@@ -81,7 +95,9 @@ Confundir os dois faz metáfora entrar no CI ou prova sair dele.
 - **watchdog:** lint que sinaliza afirmação `SIMBOLICO` usada como gate técnico.
 
 ### R08 · Jurídico ↔ Ético-normativo  (`SUSTENTA`)
+
 RafPolimata/LGPD e Ethica[8] precisam concordar; conflito de norma trava conformidade.
+
 - **rollback:** matriz de conformidade anterior; reverter mudança que criou conflito.
 - **testes:** checklist LGPD/GDPR; mapeamento norma→evidência; teste de retenção/consentimento.
 - **failsafe:** conflito de normas ⇒ aplicar a regra de prioridade pró-humano de `08_` (nível 1 vence).
@@ -89,7 +105,9 @@ RafPolimata/LGPD e Ethica[8] precisam concordar; conflito de norma trava conform
 - **watchdog:** monitor de mudança regulatória e de gaps de conformidade abertos.
 
 ### R09 · Ciência ↔ Espírito (CientiEspiritual)  (`TENSIONA`)
+
 A costura que, se dissolvida, vira ou cientificismo vazio ou pseudo-prova.
+
 - **rollback:** versão anterior do registro de fricção F10; marcações epistêmicas prévias.
 - **testes:** toda asserção espiritual marcada `SIMBOLICO`; toda científica com fonte/`FATO`.
 - **failsafe:** afirmação híbrida sem marca ⇒ tratada como `SIMBOLICO` (não como prova).
@@ -97,7 +115,9 @@ A costura que, se dissolvida, vira ou cientificismo vazio ou pseudo-prova.
 - **watchdog:** revisão que procura `SIMBOLICO` apresentado como `FATO` e vice-versa.
 
 ### R10 · Meta/Organização → Todo o Acervo  (`SUSTENTA` · `PROTEGE`)
+
 Mapa cataloga tudo; se o catálogo diverge da realidade, todo o resto herda o erro.
+
 - **rollback:** commit anterior do `Mapa`; catálogo e YAML são versionados e reversíveis.
 - **testes:** contagem de registros = nº de repos; links resolvem; YAML válido; fichas com fonte.
 - **failsafe:** repo sem README/fonte ⇒ entra como `LACUNA`, nunca inventado.

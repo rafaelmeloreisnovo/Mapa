@@ -24,7 +24,7 @@ Para cada repositório, três selos com papéis distintos (todos reprodutíveis)
 
 | Selo | O que prova | Como é calculado |
 |---|---|---|
-| **coerência** | a **forma** (estrutura de arquivos) | `blake2b(lista ordenada de `git ls-files`)` |
+| **coerência** | a **forma** (estrutura de arquivos) | `blake2b(lista ordenada de git ls-files)` |
 | **integridade** | os **bytes** (conteúdo) | **git tree SHA** do HEAD — o próprio Merkle root do git |
 | **prova** | o **selo que amarra** forma + bytes | `blake2b(id \| coerência \| integridade \| head)` |
 

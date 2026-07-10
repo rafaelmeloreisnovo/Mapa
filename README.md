@@ -19,7 +19,7 @@ the entire RAFAELIA research corpus.
 
 ## Repository Map
 
-```
+```text
 Mapa/
 │
 ├── arquitetura/       Work structure design and architecture diagrams
