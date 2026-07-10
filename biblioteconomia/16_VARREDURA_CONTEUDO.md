@@ -28,9 +28,12 @@ Para cada repositório, três selos com papéis distintos (todos reprodutíveis)
 | **integridade** | os **bytes** (conteúdo) | **git tree SHA** do HEAD — o próprio Merkle root do git |
 | **prova** | o **selo que amarra** forma + bytes | `blake2b(id \| coerência \| integridade \| head)` |
 
-E um **selo do acervo**: `blake2b` sobre todas as provas ordenadas — um único hash que
-muda se **qualquer** repositório mudar. É o "sistema de coerência/integridade/prova"
-pedido, em três níveis (estrutura → conteúdo → vínculo → acervo).
+E um **selo do acervo**: `blake2b` sobre as provas ordenadas dos repositórios — muda se
+**qualquer** um deles mudar. **Exceção deliberada:** exclui a entrada auto-referente do
+próprio `Mapa` (marcada `RUNTIME`), cujo selo mudaria a cada commit do catálogo; sem ela,
+o selo do acervo é **estável** e só reflete mudanças reais no conteúdo catalogado. É o
+"sistema de coerência/integridade/prova" pedido, em três níveis (estrutura → conteúdo →
+vínculo → acervo).
 
 > Por que git tree SHA para integridade: o git **já** mantém um Merkle root do conteúdo
 > versionado. Reaproveitá-lo é honesto (é a integridade real do que está commitado),
