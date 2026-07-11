@@ -58,6 +58,7 @@ proposta:
 ## Invariante de encerramento
 
 Este ciclo **termina** o que era terminável dentro dos 28, com honestidade:
+
 - tudo `FATO` tem fonte e teste;
 - o eixo `SIMBOLICO` foi honrado como símbolo, não como prova;
 - as `LACUNA` (auditoria, onboarding dos 83) estão **mapeadas e protegidas**, com o passo

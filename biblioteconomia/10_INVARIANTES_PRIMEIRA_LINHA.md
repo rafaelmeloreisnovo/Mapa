@@ -11,7 +11,7 @@
 
 Todo documento estrutural desta camada começa com o selo:
 
-```
+```text
 ⟦PRIMEIRA-LINHA · DIGNIDADE-HUMANA · PROTEÇÃO-INFANTIL⟧
 ```
 
@@ -33,29 +33,34 @@ a primeira decisão".
 ## 3. Os invariantes de primeira linha (I1–I5)
 
 ### I1 · Dignidade humana inviolável `[REFERENCE: UDHR Art.1]`
+
 Nenhuma saída do acervo pode instrumentalizar, humilhar ou reduzir a pessoa a meio.
 Vale para código, dado, texto e classificação.
 
 ### I2 · Interesse superior da criança `[REFERENCE: UNCRC Art.3 · UNICEF]`
+
 Em qualquer decisão que afete crianças (dados, conteúdo, acesso), a proteção da criança
 vence — inclusive contra desempenho, engajamento ou receita. Varredura de conteúdo
 sensível infantil é `failsafe`, não opcional (ver `09_` R04).
 
 ### I3 · Verdade honesta `[FATO/HIPOTESE/SIMBOLICO/LACUNA]`
+
 Não inventar prova, não apagar lacuna, não confundir símbolo com fato. É a extensão
 epistêmica da dignidade: respeitar o leitor é não enganá-lo (ver `README.md`, `06_`).
 
 ### I4 · Proteção da lacuna `[REFERENCE: TOKEN_VAZIO]`
+
 A ausência é protegida, não preenchida com invenção. Vale para os ~92 repositórios ainda
 fora de escopo (ver `11_`) e para todo dado faltante.
 
-### I5 · Prevalência pró-humano em conflito de normas `[REFERENCE: pirâmide de `08_`]`
+### I5 · Prevalência pró-humano em conflito de normas `[REFERENCE: pirâmide de`08_`]`
+
 Quando normas técnicas colidem, decide a que mais protege a vida. O ganho técnico que
 exija ferir I1 ou I2 é **recusado por design**.
 
 ## 4. Ordem de precedência (a "constituição" do acervo)
 
-```
+```text
 I1 Dignidade humana        ─┐
 I2 Interesse da criança     │  invioláveis — vencem qualquer nível abaixo
                             ─┘

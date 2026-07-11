@@ -6,7 +6,7 @@
 
 ## Estratos do ecossistema
 
-```
+```text
                          ┌─────────────────────────────┐
                          │   META / ORGANIZAÇÃO (ORG)  │  Mapa · MemRafcode
                          └──────────────┬──────────────┘

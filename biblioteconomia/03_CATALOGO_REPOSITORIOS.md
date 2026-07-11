@@ -13,6 +13,7 @@
 ## Estrato: Núcleo determinístico (C/ASM baixo nível)
 
 ### 1. ChipQuantum
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.CRP.EXEC.TEC.ATV`
 - **Dimensão:** TEC (primária), CIE
@@ -23,6 +24,7 @@
 - **Fonte:** `ChipQuantum/README.md`
 
 ### 2. DeepSeek-RafCoder
+
 - **Âmbito:** RMN · ORIG (+legacy DeepSeek) · PUB
 - **Notação:** `RAF.RTM.EXEC.TEC.ATV`
 - **Dimensão:** TEC
@@ -33,6 +35,7 @@
 - **Fonte:** `DeepSeek-RafCoder/README.md`
 
 ### 3. GAIA_phi
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.RTM.ANALIS.TEC.ATV`
 - **Dimensão:** TEC (primária), CIE
@@ -43,6 +46,7 @@
 - **Fonte:** `GAIA_phi/README.md`
 
 ### 4. BLAKE3
+
 - **Âmbito:** RMN · FORK (upstream: BLAKE3 oficial) · PUB
 - **Notação:** `RAF.CRP.HASH.TEC.CAN`
 - **Dimensão:** TEC (primária), CIE
@@ -57,6 +61,7 @@
 ## Estrato: Plataforma / Android / virtualização
 
 ### 5. RafGitTools
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.PLT.BUILD.TEC.ATV`
 - **Dimensão:** TEC (primária), ESP (parábola)
@@ -67,6 +72,7 @@
 - **Fonte:** `RafGitTools/README.md`
 
 ### 6. Vectras-VM-Android
+
 - **Âmbito:** IRF · ORIG (status fork não afirmado no README `[HIPOTESE]`) · PUB
 - **Notação:** `RAF.PLT.EMUL.TEC.CAN`
 - **Dimensão:** TEC
@@ -77,6 +83,7 @@
 - **Fonte:** `Vectras-VM-Android/README.md`
 
 ### 7. termux-app-rafacodephi
+
 - **Âmbito:** IRF · FORK (upstream: `termux/termux-app`, GPLv3) · PUB
 - **Notação:** `RAF.PLT.EXEC.TEC.ATV`
 - **Dimensão:** TEC
@@ -87,6 +94,7 @@
 - **Fonte:** `termux-app-rafacodephi/README.md`
 
 ### 8. termux-api_rafcodephi
+
 - **Âmbito:** RMN · FORK (upstream: `termux/termux-api`) · PUB
 - **Notação:** `RAF.PLT.EXEC.TEC.CAN`
 - **Dimensão:** TEC
@@ -97,6 +105,7 @@
 - **Fonte:** `termux-api_rafcodephi/README.md`
 
 ### 9. UserLAnd
+
 - **Âmbito:** RMN · FORK (upstream: `CypherpunkArmory/UserLAnd`) · PUB
 - **Notação:** `RAF.PLT.EXEC.TEC.CAN`
 - **Dimensão:** TEC
@@ -107,6 +116,7 @@
 - **Fonte:** `UserLAnd/README.md`
 
 ### 10. PCR_Rafaelia_Code_seed
+
 - **Âmbito:** RMN · FORK (upstream: `topjohnwu/Magisk`) · PUB
 - **Notação:** `RAF.PLT.EXEC.TEC.ATV`
 - **Dimensão:** TEC
@@ -117,6 +127,7 @@
 - **Fonte:** `PCR_Rafaelia_Code_seed/README.MD`
 
 ### 11. qemu_rafaelia
+
 - **Âmbito:** RMN · FORK (upstream: QEMU) · PUB
 - **Notação:** `RAF.PLT.EMUL.TEC.CAN`
 - **Dimensão:** TEC
@@ -127,6 +138,7 @@
 - **Fonte:** `qemu_rafaelia/README.rst`
 
 ### 12. actions
+
 - **Âmbito:** RMN · FORK (upstream: `gradle/actions`) · PUB
 - **Notação:** `RAF.INF.BUILD.TEC.CAN`
 - **Dimensão:** TEC
@@ -141,6 +153,7 @@
 ## Estrato: Cognição / IA / dados
 
 ### 13. X0
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.IAC.ANALIS.TEC.ATV`
 - **Dimensão:** TEC (primária), CIE
@@ -151,6 +164,7 @@
 - **Fonte:** `X0/README.md`
 
 ### 14. llamaRafaelia
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.IAC.ANALIS.MAT.SPEC`
 - **Dimensão:** MAT (primária), CIE, TEC
@@ -161,6 +175,7 @@
 - **Fonte:** `llamaRafaelia/README.md`
 
 ### 15. CONVERSATIONS_CHUNKS_PRIVATE
+
 - **Âmbito:** RMN · ORIG · PRIV
 - **Notação:** `RAF.DAT.STORE.TEC.ATV`
 - **Dimensão:** TEC (primária), dados
@@ -171,6 +186,7 @@
 - **Fonte:** `CONVERSATIONS_CHUNKS_PRIVATE/README.md`
 
 ### 16. home
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.IAC.ANALIS.CIE.ATV`
 - **Dimensão:** CIE (primária), TEC
@@ -185,6 +201,7 @@
 ## Estrato: Ciência & matemática
 
 ### 17. relativity-living-light
+
 - **Âmbito:** IRF · ORIG · PUB
 - **Notação:** `RAF.FIS.PROV.CIE.CAN`
 - **Dimensão:** CIE (primária), MAT, ESP
@@ -195,6 +212,7 @@
 - **Fonte:** `relativity-living-light/README.md`
 
 ### 18. Matem-tica-
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.MTM.PROV.MAT.ATV`
 - **Dimensão:** MAT
@@ -205,6 +223,7 @@
 - **Fonte:** `Matem-tica-/README.md`
 
 ### 19. papers
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.RTM.EXEC.TEC.SPEC`
 - **Dimensão:** TEC (primária), CIE, MAT
@@ -219,6 +238,7 @@
 ## Estrato: Ética / jurídico / normativo
 
 ### 20. RafPolimata
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.JUR.GOVERN.JUR.ATV`
 - **Dimensão:** JUR (primária), TEC, ESP
@@ -229,6 +249,7 @@
 - **Fonte:** `RafPolimata/README.md`
 
 ### 21. Rafaelia_Private
+
 - **Âmbito:** RMN · ORIG · PRIV
 - **Notação:** `RAF.RTM.GOVERN.TEC.ATV`
 - **Dimensão:** TEC (primária), JUR, ESP
@@ -239,6 +260,7 @@
 - **Fonte:** `Rafaelia_Private/README.md`
 
 ### 22. LGPD-Constituicoes-planetaria-...-continents-geologic
+
 - **Âmbito:** IRF · ORIG · PUB
 - **Notação:** `RAF.JUR.GOVERN.JUR.ATV`
 - **Dimensão:** JUR (primária), ESP, CIE
@@ -253,6 +275,7 @@
 ## Estrato: Filosófico-espiritual / publicação
 
 ### 23. LivroVivo_ThisBookLives
+
 - **Âmbito:** IRF · ORIG · PUB
 - **Notação:** `RAF.ESP.PUBL.ESP.CAN`
 - **Dimensão:** ESP (primária), CIE (DOI)
@@ -263,6 +286,7 @@
 - **Fonte:** `LivroVivo_ThisBookLives/README.md`
 
 ### 24. Blackhole
+
 - **Âmbito:** IRF · ORIG · PUB
 - **Notação:** `RAF.ESP.PUBL.ESP.SPEC`
 - **Dimensão:** ESP (primária), FIS (simbólica)
@@ -273,6 +297,7 @@
 - **Fonte:** `Blackhole/README.md`
 
 ### 25. publicacientiespiritual
+
 - **Âmbito:** IRF · ORIG · PUB
 - **Notação:** `RAF.ESP.PUBL.ESP.CAN`
 - **Dimensão:** ESP (primária), CIE, JUR (patente)
@@ -283,6 +308,7 @@
 - **Fonte:** `publicacientiespiritual/README.md`
 
 ### 26. ZIPRAF_OMEGA_FULL
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.ESP.PUBL.ESP.ATV`
 - **Dimensão:** ESP (primária), TEC, CIE
@@ -297,6 +323,7 @@
 ## Estrato: Meta / organização do conhecimento
 
 ### 27. MemRafcode
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.ORG.STORE.TEC.ATV`
 - **Dimensão:** TEC
@@ -307,6 +334,7 @@
 - **Fonte:** `MemRafcode/README.md`
 
 ### 28. Mapa
+
 - **Âmbito:** RMN · ORIG · PUB
 - **Notação:** `RAF.ORG.CATAL.TEC.ATV`
 - **Dimensão:** TEC

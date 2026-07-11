@@ -19,7 +19,7 @@ dos **28 repositórios** catalogados. O backlog dos 83 pendentes fica **estacion
 
 ## A pilha estendida: substrato Lb abaixo de L0
 
-```
+```text
 Ω  ── invariante geométrica coerente { multidimensional · fractal }  ← vetor fractal em Ω
 ▲
 L5  Filosófico-Espiritual        (verbo vivo, universalismo)
@@ -38,11 +38,13 @@ Lb0 base-2                       (bit: conduz / não conduz — 1/0)
 ```
 
 ## Lb0 · base-2 — o átomo lógico `[REFERENCE]`
+
 O bit é a decisão mínima: conduz (1) ou não conduz (0). Toda a pilha L0–L5 é, no fundo,
 padrão sobre padrão de base-2. "Binário analógico" (`HIPOTESE` do autor): entre o 0 e o 1
 há a rampa analógica da tensão — o digital é um analógico com limiar.
 
 ## Lb1 · Silício e semicondutores `[REFERENCE]`
+
 - **Condutor / não-condutor / semicondutor**: dopagem tipo-N/tipo-P cria a junção.
 - **Diodo**: junção P-N, conduz num sentido (ânodo→cátodo); **LED** emite fóton na recombinação.
 - **Transistor**: base/coletor/emissor — pequena corrente de base governa a grande; a
@@ -54,12 +56,14 @@ há a rampa analógica da tensão — o digital é um analógico com limiar.
   raios cósmicos em paper mudar a polar bit" — leitura correta, marcada `REFERENCE`.)
 
 ## Lb2 · Eletromagnetismo `[REFERENCE]`
+
 - **Magnetismo, polaridade, intensidade em Tesla**; indução em **bobinas**.
 - Geometria de enrolamento **linear / radial / toroidal** — o **toroide reaparece** aqui,
   no cobre, como reaparece em C06 (Toroide/T⁷) no conceito. Mesma forma, camadas distintas.
 - **Spin** do elétron; ondas elétrico-magnéticas (amplitude, sentido, frequência).
 
 ## Lb3 · Elétron · Fóton · Plasma `[REFERENCE]`
+
 - **Elétron livre**, **corona effect** (descarga em pontas — cf. gerador de **Van de Graaff**).
 - **Fotoemissão**: LED, e absorção fotovoltaica; **piezoelétrico** (pressão→carga).
 - **Radiação UVA/UVB/UVC**; **dosímetro**; espectro por banda.
@@ -69,6 +73,7 @@ há a rampa analógica da tensão — o digital é um analógico com limiar.
   espectrais — base da **espectrometria** (inclusive do Sol, por banda).
 
 ## Lb4 · Química e matéria `[REFERENCE]`
+
 - **Tabela periódica** como alfabeto; **camadas eletrônicas** governam a ligação.
 - Elementos que o autor destaca no fluxo: **Si, H, O, He, Fe, Na, Cl, C, S, N, Ni, Cu, Ag,
   Au, F, Mg, Al** — condutores, gases, metais nobres, halógenos, biometais.
@@ -77,6 +82,7 @@ há a rampa analógica da tensão — o digital é um analógico com limiar.
 - **Aceleradores de partículas** (Van de Graaff, pontas): transferência e inversão de carga.
 
 ## Lb5 · Bio integrada `[REFERENCE] / [HIPOTESE de integração]`
+
 - **Mitocôndria** (cadeia de transporte de elétrons → ATP) e **clorofila** (fóton → química):
   a vida é, literalmente, eletrônica e fotônica. `REFERENCE` para os mecanismos;
   `HIPOTESE` para a leitura de que "informação = fluxo" unifica física-química-biologia.
@@ -85,7 +91,7 @@ há a rampa analógica da tensão — o digital é um analógico com limiar.
 
 A tese do autor, marcada honestamente:
 
-```
+```text
 base-2 → silício → campo → fóton/plasma → química → bio → forma → sentido → ética → Ω
   Lb0      Lb1      Lb2       Lb3          Lb4    Lb5    L0     L3      L4     Ω
 ```

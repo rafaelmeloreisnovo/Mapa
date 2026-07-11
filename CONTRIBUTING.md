@@ -29,7 +29,7 @@ Contributions should relate to the RAFAELIA Knowledge Organization System:
 
 ## Commit Convention
 
-```
+```text
 feat: add RAFAELIA repository index to indices/
 docs: update biblioteconomia with Vectras-VM-Android classification
 feat: add WORKFLOW_VALIDACAO_CRUZADA.md to workflows/

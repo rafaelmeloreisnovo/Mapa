@@ -56,7 +56,7 @@ Uma entrega está **conforme** quando satisfaz, com evidência:
 O método não é estático — ele "vai sendo executado em relação ao universo da expressão".
 Aplica-se o ciclo `REFERENCE: ISO 9001:2015 §10; Deming/PDCA; Kaizen`:
 
-```
+```text
 PLAN   → identificar lacuna/fricção/risco (estados do Mapa)
 DO     → executar a ação mínima verificável (06_ passo a passo)
 CHECK  → rodar a verificação (contagens, links, YAML, marcas, selo)
@@ -86,7 +86,7 @@ Indicadores objetivos (todos verificáveis por script):
 
 ## 5. Declaração de conformidade
 
-```
+```text
 DECLARACAO (self-declaration, REFERENCE: ISO 9001:2015 principios)
   objeto:   camada biblioteconomica do repositorio Mapa
   metodo:   documentos 01-13 + protocolos e indices do Mapa
