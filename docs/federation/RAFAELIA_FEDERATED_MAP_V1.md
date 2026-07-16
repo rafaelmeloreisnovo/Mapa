@@ -41,32 +41,50 @@ Each route is described by the vector:
 v = (evidence, reproducibility, runtime, formal_rigor, privacy, reversibility)
 ```
 
-Each coordinate uses an ordinal weight:
+Each coordinate uses an ordinal weight only after evidence collection:
 
-- `0`: absent / `TOKEN_VAZIO`;
+- `0`: directly established absence;
 - `1`: declared or structurally present;
-- `2`: locally tested;
-- `3`: independently reproducible or externally validated within its domain.
+- `2`: locally tested for a named commit/artifact;
+- `3`: independently reproduced or externally validated within its domain;
+- `TOKEN_VAZIO`: not measured, inaccessible or insufficiently specified.
 
 Weights are **status indicators**, not value judgments and not interchangeable across domains. A formal proof weight cannot substitute runtime evidence; a successful build cannot substitute scientific validation.
 
-## Repository vector expectations
+## Initial repository vectors
+
+No numeric baseline is assigned by documentation reading alone. Every coordinate begins as `TOKEN_VAZIO` until a measurement record identifies the repository commit, source path, command, artifact and timestamp.
 
 | Repository | Evidence | Reproducibility | Runtime | Formal rigor | Privacy | Reversibility |
-|---|---:|---:|---:|---:|---:|---:|
-| RafGitTools | 2 | 2 | 2 | 1 | 2 | 3 |
-| Vectras-VM-Android | 2 | 2 | 2 | 1 | 2 | 3 |
-| termux-app-rafacodephi | 2 | 2 | 1 | 1 | 2 | 3 |
-| RafPolimata | 2 | 2 | 1 | 2 | 2 | 3 |
-| GAIA_phi | 2 | 2 | 2 | 1 | 2 | 3 |
-| ZIPRAF_OMEGA_FULL | 2 | 2 | 1 | 1 | 2 | 3 |
-| llamaRafaelia | 1 | 1 | 1 | 1 | 2 | 2 |
-| Rafaelia_Private | 2 | 1 | 1 | 1 | 3 | 3 |
-| ChipQuantum | 2 | 2 | 2 | 2 | 2 | 3 |
-| Matem-tica- | 2 | 2 | 1 | 2 | 2 | 3 |
-| relativity-living-light | 2 | 2 | 1 | 2 | 2 | 3 |
+|---|---|---|---|---|---|---|
+| RafGitTools | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| Vectras-VM-Android | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| termux-app-rafacodephi | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| RafPolimata | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| GAIA_phi | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| ZIPRAF_OMEGA_FULL | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| llamaRafaelia | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| Rafaelia_Private | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| ChipQuantum | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| Matem-tica- | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| relativity-living-light | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
 
-These initial values are `DECLARED_MAP_BASELINE`. They must be regenerated from repository evidence before being called current. A missing measurement is reduced to `0`, never guessed upward.
+## Measurement record
+
+A coordinate may change from `TOKEN_VAZIO` only with a record containing:
+
+```yaml
+repository: owner/name
+commit: exact-sha
+coordinate: evidence | reproducibility | runtime | formal_rigor | privacy | reversibility
+weight: 0 | 1 | 2 | 3
+source_path: exact/path
+command_or_method: exact command or review method
+artifact: path/hash/URL identifier
+timestamp: ISO-8601
+limitations: explicit limits
+reviewer_or_runner: human, CI runner or device identity
+```
 
 ## Edge semantics
 
@@ -84,6 +102,7 @@ These initial values are `DECLARED_MAP_BASELINE`. They must be regenerated from 
 4. “Latest” requires commit/timestamp evidence.
 5. Missing source path/command/artifact is `TOKEN_VAZIO`.
 6. Public navigation never exposes private payloads.
+7. No coordinate receives a numeric weight from README language alone.
 
 ## Friendly operator path
 
@@ -93,7 +112,8 @@ These initial values are `DECLARED_MAP_BASELINE`. They must be regenerated from 
 3. Capture commit, path, command and expected artifact.
 4. Run the smallest gate.
 5. Record F_ok, F_gap, F_next and rollback_anchor.
-6. Update the control-plane manifest/status; regenerate this projection.
+6. Create the measurement record.
+7. Update the control-plane status and regenerate this projection.
 ```
 
 ## Rollback
