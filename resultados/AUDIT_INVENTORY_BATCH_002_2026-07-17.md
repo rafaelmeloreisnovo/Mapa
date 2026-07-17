@@ -80,6 +80,33 @@ baseline_unbatched_records = 11
 all_batches_fixed_points = true
 ```
 
+## Evidência remota
+
+```text
+Topology and Inventory Structural Validation
+run_id = 29600428757
+job_id = 87950938587
+conclusion = failure
+steps = 0
+logs = BlobNotFound
+
+CI geral
+run_id = 29600428798
+job_id = 87950938426
+conclusion = failure
+steps = 0
+logs = unavailable
+```
+
+Classificação:
+
+```text
+STARTUP_FAILURE_OR_INFRASTRUCTURE_FAILURE
+validator_execution_proven = false
+contract_failure_proven = false
+remote_PASS_proven = false
+```
+
 ## Limite
 
 O inventário permanece `PARTIAL`. A cadeia de lotes prova somente identidade, metadados do conector, integridade e ingestão determinística. Não prova maturidade funcional dos repositórios nem autoriza claims sobre seu conteúdo.
