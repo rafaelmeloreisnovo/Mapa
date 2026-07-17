@@ -1,0 +1,117 @@
+{
+  "schema": "rafaelia.vazio-toroidal-drive-route.v1",
+  "route_id": "VAZIO-TOROIDAL-DRIVE-20260717",
+  "claim_allowed": false,
+  "private_payload_copied": false,
+  "automatic_merge": false,
+  "drive": {
+    "folder_id": "1H7VtNdhcopTcT8mhJcJsnG-EkML7WxSe",
+    "document_id": "1wxi_LKwyl8D0XLatBbpyOfkfw5S3v1Rmt4XQFrlFF6I",
+    "spreadsheet_id": "1KY4_uaZTo9pbTan_K19jlwxvUP4RHnjpPSDyAfJBlOE",
+    "mode": "POINTER_ONLY"
+  },
+  "authorities": [
+    {
+      "node": "drive-corpus",
+      "authority": "source bodies, revisions and knowledge matrix",
+      "state": "VERIFIED_LIMITED"
+    },
+    {
+      "node": "rafgittools-control",
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "pull_request": 265,
+      "branch": "agent/epistemic-provenance-interop-v1-20260717",
+      "authority": "schema, security, validation, finite control-plane report",
+      "state": "DRAFT"
+    },
+    {
+      "node": "mathematical-authority",
+      "repository": "rafaelmeloreisnovo/Matem-tica-",
+      "pull_request": 3,
+      "branch": "feat/omega-cube42-formal-v1-20260717",
+      "authority": "typed-empty definitions, proofs and finite toroidal verifier",
+      "state": "DRAFT"
+    },
+    {
+      "node": "academic-synthesis",
+      "repository": "rafaelmeloreisnovo/papers",
+      "pull_request": 9,
+      "branch": "docs/omega-cube42-research-note-v1-20260717",
+      "authority": "research note, atomic claims, limitations and falsifiers",
+      "state": "DRAFT"
+    },
+    {
+      "node": "runtime-authority",
+      "repository": "rafaelmeloreisnovo/ChipQuantum",
+      "pull_request": 41,
+      "branch": "feat/omega-cube42-forest-v1-20260717",
+      "authority": "low-level C, fixed-point, ARM object and target KAT",
+      "state": "RELATED_EXISTING_DRAFT"
+    },
+    {
+      "node": "map-overlay",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pull_request": 25,
+      "branch": "map/omega-cube42-federation-v1-20260717",
+      "authority": "pointer-only navigation and rollout",
+      "state": "DRAFT"
+    }
+  ],
+  "relations": [
+    {
+      "from": "drive-corpus",
+      "relation": "PROVIDES_POINTERS_TO",
+      "to": "rafgittools-control"
+    },
+    {
+      "from": "rafgittools-control",
+      "relation": "ROUTES_FORMAL_DUTIES_TO",
+      "to": "mathematical-authority"
+    },
+    {
+      "from": "mathematical-authority",
+      "relation": "PRODUCES_FINITE_RESULT_FOR",
+      "to": "academic-synthesis"
+    },
+    {
+      "from": "academic-synthesis",
+      "relation": "DOES_NOT_REPLACE",
+      "to": "runtime-authority"
+    },
+    {
+      "from": "map-overlay",
+      "relation": "POINTS_TO",
+      "to": "drive-corpus"
+    }
+  ],
+  "security": {
+    "historical_drive_secret_detected": true,
+    "secret_value_copied": false,
+    "required_action": "revoke_or_rotate_and_redact_before_ingestion"
+  },
+  "boundaries": {
+    "token_vazio_is_pass": false,
+    "finite_verification_is_universal_proof": false,
+    "toroidal_graph_is_physical_universe_evidence": false,
+    "Voynich_decoded": false,
+    "ZFR_alias_ZRF": "TOKEN_VAZIO",
+    "OMINI_alias_OMNI": "TOKEN_VAZIO",
+    "semantics_888": "TOKEN_VAZIO"
+  },
+  "safe_state": {
+    "drive_failure": "retain_last_pointer_manifest_without_copying_payload",
+    "control_plane_failure": "claim_gate_remains_blocked",
+    "math_failure": "paper_keeps_result_as_TOKEN_VAZIO",
+    "runtime_failure": "no_device_claim",
+    "map_failure": "remove_overlay_without_touching_sources"
+  },
+  "rollout": [
+    "rotate exposed credential and scan/redact historical dump",
+    "review typed-empty and alias boundaries",
+    "run RafGitTools knowledge-antiderivative validator",
+    "reproduce Matem-tica- finite verifier",
+    "review paper claims and falsifiers",
+    "execute target ARM32 evidence where runtime claims are made",
+    "merge only after explicit review and real checks"
+  ]
+}
