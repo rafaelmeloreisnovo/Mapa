@@ -60,6 +60,35 @@ inventory digest = 1e9fa96ea2651e385fd095e2a72b3dfba7a675a6701c78f2ba63139b18395
 - alteração sem novo digest é rejeitada;
 - o aplicador nunca promove `COMPLETE` automaticamente.
 
+## Evidência remota
+
+```text
+Topology and Inventory Structural Validation
+run_id = 29599190375
+job_id = 87946917987
+conclusion = failure
+steps_observed = 0
+logs = BlobNotFound
+
+CI geral
+run_id = 29599191597
+job_id = 87946921819
+conclusion = failure
+steps_observed = 0
+logs = unavailable
+```
+
+Classificação:
+
+```text
+STARTUP_FAILURE_OR_INFRASTRUCTURE_FAILURE
+validator_execution_proven = false
+contract_failure_proven = false
+remote_pass_proven = false
+```
+
+A conclusão remota não prova falha do código porque nenhum step foi iniciado. O estado científico e operacional permanece `claim_allowed=false`.
+
 ## Regra de continuidade
 
 Cada próximo lote deve:
