@@ -1,0 +1,83 @@
+name: Topology Structural Validation
+
+on:
+  pull_request:
+    paths:
+      - "indices/GRAFO_DEPENDENCIAS_MAPA.yaml"
+      - "orquestrador/QUALITY_GATE_POLICY.md"
+      - "scripts/validate_mapa_topology.py"
+      - "tests/test_topology.py"
+      - ".github/workflows/topology-validation.yml"
+  push:
+    branches: [main]
+    paths:
+      - "indices/GRAFO_DEPENDENCIAS_MAPA.yaml"
+      - "orquestrador/QUALITY_GATE_POLICY.md"
+      - "scripts/validate_mapa_topology.py"
+      - "tests/test_topology.py"
+      - ".github/workflows/topology-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: topology-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile scripts/validate_mapa_topology.py
+          python3 -m py_compile tests/test_topology.py
+
+      - name: Run topology unit tests
+        run: python3 -m unittest tests/test_topology.py -v
+
+      - name: Validate canonical topology
+        run: |
+          python3 scripts/validate_mapa_topology.py \
+            --write-report topology-validation.json
+
+      - name: Check machine-readable artifacts
+        run: |
+          python3 -m json.tool topology-validation.json >/dev/null
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          raw = Path("indices/GRAFO_DEPENDENCIAS_MAPA.yaml").read_text(encoding="utf-8")
+          data = json.loads(raw[raw.find("{"):])
+          assert data["schema"] == "mapa_topology_v2"
+          assert data["declared_metrics"]["cycle_count"] == 0
+          assert data["declared_metrics"]["orphan_count"] == 0
+          PY
+
+      - name: Create checksums
+        run: |
+          sha256sum \
+            indices/GRAFO_DEPENDENCIAS_MAPA.yaml \
+            orquestrador/QUALITY_GATE_POLICY.md \
+            scripts/validate_mapa_topology.py \
+            tests/test_topology.py \
+            .github/workflows/topology-validation.yml \
+            > TOPOLOGY_CHECKSUMS.sha256
+
+      - name: Upload topology audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: mapa-topology-validation
+          path: |
+            topology-validation.json
+            TOPOLOGY_CHECKSUMS.sha256
+          if-no-files-found: error
+          retention-days: 30
