@@ -1,56 +1,65 @@
 {
   "accessible_total_observed": 126,
-  "claim_allowed": false,
-  "digest_blake2b_256": "204b310de7ecbfc0e4df316d126748b03cb4ed624a3e0eff8914a3a1e8018d48",
-  "errors": [],
-  "inventory_state": "PARTIAL",
-  "materialized_count": 41,
-  "schema": "repository_inventory_validation_report_v2",
-  "source_generated_at": "2026-07-17T18:25:00Z",
-  "status": "PASS",
-  "status_scope": "local_structural_validation_only",
-  "batch_chain": {
-    "batch_count": 3,
-    "batch_ids": [
-      "BATCH_001_2026-07-17",
-      "BATCH_002_2026-07-17",
-      "BATCH_003_2026-07-17"
-    ],
-    "total_batch_records": 30,
-    "baseline_unbatched_records": 11,
-    "all_batches_fixed_points": true,
-    "batch_003": {
-      "batch_digest_blake2b_256": "9dd4998d19c58273c8c7541a9871125eb3d46b466301e4015f7789b8910a4597",
-      "before_materialized_count": 31,
-      "added_count": 10,
-      "after_materialized_count": 41,
-      "remaining_token_vazio": 85,
-      "local_assertions_passed": 24,
-      "previous_official_digest_reproduced": true,
-      "automatic_complete_promotion": false
-    }
+  "batch_004": {
+    "added_count": 10,
+    "after_materialized_count": 51,
+    "batch_digest_blake2b_256": "9398980523037b7390717b4d65eaccc57fb5db54bf8dc1afa8a58d2dd116e151",
+    "before_materialized_count": 41,
+    "previous_official_digests_reproduced": true,
+    "remaining_token_vazio": 75
   },
+  "checkpoint": {
+    "all_historical_batches_fixed_points": true,
+    "baseline_unbatched_records": 11,
+    "digest_blake2b_256": "204b310de7ecbfc0e4df316d126748b03cb4ed624a3e0eff8914a3a1e8018d48",
+    "historical_batch_count": 3,
+    "historical_total_batch_records": 30,
+    "materialized_count": 41,
+    "path": "indices/REPOSITORY_INVENTORY.json"
+  },
+  "claim_allowed": false,
+  "digest_blake2b_256": "ac88b804985b79a1310e794b10294d83ac2e01e7f33bd7338bbb4aacea84d2a2",
+  "errors": [],
+  "head": {
+    "all_delta_batches_fixed_points": true,
+    "automatic_complete_promotion": false,
+    "delta_batch_count": 1,
+    "delta_batch_ids": [
+      "BATCH_004_2026-07-17"
+    ],
+    "head_digest_blake2b_256": "f30a5bc299e3d786b4e90099a9598273c1b965186da3665004225b6f4009824c",
+    "local_assertions_passed": 46,
+    "path": "indices/REPOSITORY_INVENTORY_HEAD.json",
+    "schema": "repository_inventory_head_v1"
+  },
+  "inventory_state": "PARTIAL",
+  "materialized_count": 51,
+  "remaining_token_vazio": 75,
   "remote_ci": {
-    "state": "TOKEN_VAZIO",
+    "billing_block_reported_by_owner": true,
+    "billing_message_artifact_captured": false,
+    "billing_scope_reported": "repositories under rafaelmeloreisnovo and instituto-Rafael except instituto-Rafael/relativity-living-light",
+    "classification_authority": "rafaelmeloreisnovo/RafGitTools@996ae2192f5011911d5b0fbd6d757777c546cef5",
+    "contract_failure_proven": false,
     "execution_classification": "ZERO_STEP_NO_LOGS",
     "legacy_classification_deprecated": "STARTUP_FAILURE_OR_INFRASTRUCTURE_FAILURE",
-    "billing_block_reported_by_owner": true,
-    "billing_scope_reported": "repositories under rafaelmeloreisnovo and instituto-Rafael except instituto-Rafael/relativity-living-light",
-    "billing_message_artifact_captured": false,
     "payment_refund_chronology_state": "DECLARED",
     "policy_block_proven": false,
-    "validator_execution_proven": false,
-    "contract_failure_proven": false,
     "remote_pass_proven_for_mapa": false,
+    "rll_exception_root_cause": "TOKEN_VAZIO",
     "rll_positive_control": {
+      "conclusion": "success",
+      "job_id": 87841176605,
       "repository_full_name": "instituto-Rafael/relativity-living-light",
       "run_id": 29566816023,
-      "job_id": 87841176605,
-      "conclusion": "success",
-      "steps_observed": 14,
-      "state": "VERIFIED"
+      "state": "VERIFIED",
+      "steps_observed": 14
     },
-    "rll_exception_root_cause": "TOKEN_VAZIO",
-    "classification_authority": "rafaelmeloreisnovo/RafGitTools@996ae2192f5011911d5b0fbd6d757777c546cef5"
-  }
+    "state": "TOKEN_VAZIO",
+    "validator_execution_proven": false
+  },
+  "schema": "repository_inventory_validation_report_v3",
+  "source_generated_at": "2026-07-17T19:03:45Z",
+  "status": "PASS",
+  "status_scope": "local_structural_validation_only"
 }
