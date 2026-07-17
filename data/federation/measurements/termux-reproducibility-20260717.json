@@ -1,0 +1,27 @@
+{
+  "schema": "mapa.measurement_record.v1",
+  "node_id": "termux",
+  "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+  "commit": "851ccef4fb6a058b5ceac90ac1b55a633a9e2576",
+  "coordinate": "reproducibility",
+  "weight": 2,
+  "source_path": "scripts/federation/collect_runtime_evidence.sh",
+  "command_or_method": "GitHub Actions abi-policy-consistency run 29550485275",
+  "artifact": {
+    "id": 8395534608,
+    "name": "termux-runtime-evidence-contract-29550485275",
+    "digest": "sha256:2d4836d9bee88b7aa1119dcb1eee4388a9fb9ef994a816e087c16a4425c90899",
+    "created_at": "2026-07-17T02:40:09Z",
+    "expires_at": "2026-08-16T02:40:09Z"
+  },
+  "runner": "GitHub Actions ubuntu-24.04",
+  "result": "TESTED_CI_CONTRACT",
+  "claim_allowed": false,
+  "limitations": [
+    "The evidence collector and validator executed on a Linux CI runner.",
+    "This does not prove the RAFCODEPHI APK installed or running on Android.",
+    "Device ABI, Android PREFIX and package backend remain TOKEN_VAZIO until device execution.",
+    "ARM32 compatibility remains unresolved because its enforcement gate failed."
+  ],
+  "rollback": "Revert the collector workflow commit and retain the previous APK/data backup; no device mutation was performed."
+}
