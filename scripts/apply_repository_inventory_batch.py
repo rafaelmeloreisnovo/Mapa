@@ -204,7 +204,13 @@ def apply_batch(
         by_id[repository_id] = record
         added.append(full_name)
 
-    output = recalculate_inventory(output, batch["observed_at"])
+    # Historical batches that add nothing are already fixed points. Preserve the
+    # current timestamp and digest instead of rewinding them to an older batch.
+    if added:
+        output = recalculate_inventory(output, batch["observed_at"])
+    else:
+        output = copy.deepcopy(inventory)
+
     output_errors = validate_inventory(output)
     if output_errors:
         raise ValueError(json.dumps({"output_errors": output_errors}, ensure_ascii=False))
