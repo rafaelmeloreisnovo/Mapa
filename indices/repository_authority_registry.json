@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-17T00:00:00-03:00",
+  "control_plane": "rafaelmeloreisnovo/Mapa",
+  "claim_allowed": false,
+  "state": "DRAFT_AUDITABLE",
+  "repositories": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "role": "control_plane",
+      "canonical_for": ["repository_catalog", "cross_repo_relationships", "federation_audit"],
+      "consumes": [],
+      "produces": ["authority_registry", "relationship_registry", "audit_reports"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/MemRafcode",
+      "role": "memory_custody",
+      "canonical_for": ["memory_route", "digest_state_reentry"],
+      "consumes": ["corpus", "logs", "artifacts"],
+      "produces": ["indexed_memory", "custody_routes"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/papers",
+      "role": "research_formulation",
+      "canonical_for": ["research_drafts", "experiment_design", "prototype_engines"],
+      "consumes": ["observations", "memory_fragments"],
+      "produces": ["hypotheses", "methods", "drafts"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Cosmos",
+      "role": "relational_knowledge",
+      "canonical_for": ["transdisciplinary_relationships", "knowledge_forest"],
+      "consumes": ["domain_documents", "relationship_candidates"],
+      "produces": ["typed_relationships", "gaps", "attention_registry"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/relativity-living-light",
+      "role": "rll_scientific_validation",
+      "canonical_for": ["rll_claim_state", "rll_baselines", "rll_falsifiers", "rll_result_artifacts"],
+      "consumes": ["rll_model", "observational_data", "priors", "seeds"],
+      "produces": ["claim_export", "reports", "checksums", "negative_results"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/llamaRafaelia",
+      "role": "inference_consumer",
+      "canonical_for": ["contextual_retrieval", "cti_memory_integration", "inference_runtime"],
+      "consumes": ["memory_indices", "producer_claim_exports"],
+      "produces": ["retrieval_results", "explanations", "runtime_metrics"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "role": "android_runtime_evidence",
+      "canonical_for": ["android_build_contract", "abi_policy", "device_runtime_evidence"],
+      "consumes": ["native_modules", "bootstrap_payloads", "runtime_contracts"],
+      "produces": ["apk", "device_logs", "runtime_evidence"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Rafaelia_Core",
+      "role": "deterministic_kernel",
+      "canonical_for": ["stable_deterministic_primitives", "multiarch_benchmarks"],
+      "consumes": ["verified_low_level_components"],
+      "produces": ["kernel_contracts", "benchmark_artifacts"],
+      "evidence_state": "DECLARED_BY_AUTHOR"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/ChipQuantum",
+      "role": "low_level_research_lab",
+      "canonical_for": ["t7_experiments", "lowfala_research", "crypto_scaffolding"],
+      "consumes": ["research_hypotheses", "architecture_contracts"],
+      "produces": ["prototypes", "tests", "candidate_components"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/CientiEspiritual",
+      "role": "didactic_translation",
+      "canonical_for": ["parabolic_didactics", "cross_cultural_explanation"],
+      "consumes": ["bounded_results", "method_documents"],
+      "produces": ["parables", "human_readable_explanations"],
+      "evidence_state": "VERIFIED_LIMITED"
+    }
+  ],
+  "global_invariants": [
+    "no_claim_without_owner",
+    "no_cross_repo_claim_copy_without_version_pin",
+    "token_vazio_on_missing_evidence",
+    "negative_results_are_preserved",
+    "metaphor_is_not_evidence",
+    "runtime_presence_is_not_runtime_execution",
+    "prototype_is_not_production"
+  ]
+}
