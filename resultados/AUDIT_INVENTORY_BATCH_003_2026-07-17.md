@@ -59,19 +59,45 @@ Depois, 24 asserções locais verificaram digest, unicidade, identidade lote↔i
 
 ## Correção de classificação da CI
 
-O rótulo causal amplo `STARTUP_FAILURE_OR_INFRASTRUCTURE_FAILURE` foi depreciado pela autoridade canônica `RafGitTools` no merge `2d013358fc4861cad46caf71ab48d2365abfa0b7`.
+> **Supersessão:** a interpretação anterior que tratava `instituto-Rafael/relativity-living-light` como o repositório afetado por pagamento estava invertida. A autoridade canônica foi corrigida no `RafGitTools` pelo merge `996ae2192f5011911d5b0fbd6d757777c546cef5`.
 
-Até aparecer mensagem causal explícita, o estado dos jobs observados no `Mapa` é:
+O estado técnico dos jobs observados no `Mapa` permanece:
 
 ```text
-ZERO_STEP_NO_LOGS
-billing_block_proven = false
-policy_block_proven = false
+execution_classification = ZERO_STEP_NO_LOGS
+validator_execution_proven = false
 workflow_code_failure_proven = false
+remote_PASS_proven_for_mapa = false
 ```
 
-A mensagem de pagamento informada para `instituto-Rafael/relativity-living-light` não é propagada por analogia aos demais repositórios.
+O escopo causal informado pelo responsável é:
+
+```text
+billing_block_reported_by_owner = true
+reported_scope = repositórios de rafaelmeloreisnovo e instituto-Rafael, exceto o RLL institucional
+billing_message_artifact_captured = false
+payment_refund_chronology_state = DECLARED
+```
+
+O controle positivo verificado é:
+
+```text
+repository = instituto-Rafael/relativity-living-light
+run_id = 29566816023
+job_id = 87841176605
+conclusion = success
+steps_observed = 14
+state = VERIFIED
+```
+
+Portanto, a invariante correta é:
+
+```text
+RLL é a exceção que continua executando CI.
+Ele não é o repositório bloqueado.
+A razão da exceção permanece TOKEN_VAZIO.
+```
 
 ## Limite
 
-Este lote prova identidade e metadados retornados pelo conector. Não prova conteúdo, autoria integral, maturidade, funcionamento, segurança ou valor científico dos repositórios materializados.
+Este lote prova identidade e metadados retornados pelo conector. Não prova conteúdo, autoria integral, maturidade, funcionamento, segurança ou valor científico dos repositórios materializados. A cronologia de pagamento e devolução é preservada como declaração do responsável até que comprovantes privados sejam correlacionados, sem publicação de dados financeiros sensíveis.
