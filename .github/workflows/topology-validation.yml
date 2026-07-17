@@ -12,9 +12,11 @@ on:
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
       - "scripts/apply_repository_inventory_batch.py"
+      - "scripts/validate_repository_inventory_batch_chain.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
+      - "tests/test_inventory_batch_chain.py"
       - ".github/workflows/topology-validation.yml"
   push:
     branches: [main]
@@ -28,9 +30,11 @@ on:
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
       - "scripts/apply_repository_inventory_batch.py"
+      - "scripts/validate_repository_inventory_batch_chain.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
+      - "tests/test_inventory_batch_chain.py"
       - ".github/workflows/topology-validation.yml"
   workflow_dispatch:
 
@@ -51,14 +55,16 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Compile stdlib validators, batch applicator and tests
+      - name: Compile stdlib validators, applicators and tests
         run: |
           python3 -m py_compile scripts/validate_mapa_topology.py
           python3 -m py_compile scripts/validate_repository_inventory.py
           python3 -m py_compile scripts/apply_repository_inventory_batch.py
+          python3 -m py_compile scripts/validate_repository_inventory_batch_chain.py
           python3 -m py_compile tests/test_topology.py
           python3 -m py_compile tests/test_repository_inventory.py
           python3 -m py_compile tests/test_inventory_batch.py
+          python3 -m py_compile tests/test_inventory_batch_chain.py
 
       - name: Run topology unit tests
         run: python3 -m unittest tests/test_topology.py -v
@@ -66,8 +72,12 @@ jobs:
       - name: Run inventory adversarial tests
         run: python3 -m unittest tests/test_repository_inventory.py -v
 
-      - name: Run inventory batch adversarial tests
-        run: python3 -m unittest tests/test_inventory_batch.py -v
+      - name: Run inventory batch and chain adversarial tests
+        run: |
+          python3 -m unittest \
+            tests/test_inventory_batch.py \
+            tests/test_inventory_batch_chain.py \
+            -v
 
       - name: Validate canonical topology
         run: |
@@ -79,69 +89,74 @@ jobs:
           python3 scripts/validate_repository_inventory.py \
             --write-report repository-inventory-validation.json
 
-      - name: Prove batch 001 is an idempotent fixed point
+      - name: Validate all committed inventory batches as fixed points
         run: |
-          python3 scripts/apply_repository_inventory_batch.py \
+          python3 scripts/validate_repository_inventory_batch_chain.py \
             --inventory indices/REPOSITORY_INVENTORY.json \
-            --batch indices/inventory_batches/BATCH_001_2026-07-17.json \
-            --output repository-inventory-replayed.json \
-            --write-audit inventory-batch-replay.json
-          cmp indices/REPOSITORY_INVENTORY.json repository-inventory-replayed.json
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-
-          audit = json.loads(Path("inventory-batch-replay.json").read_text(encoding="utf-8"))
-          assert audit["status"] == "PASS"
-          assert audit["added_count"] == 0
-          assert audit["skipped_idempotent_count"] == 10
-          assert audit["after_materialized_count"] == 21
-          assert audit["remaining_token_vazio"] == 105
-          assert audit["claim_allowed"] is False
-          PY
+            --batches-dir indices/inventory_batches \
+            --write-report inventory-batch-chain-validation.json
 
       - name: Check machine-readable artifacts and claim boundary
         run: |
           python3 -m json.tool topology-validation.json >/dev/null
           python3 -m json.tool repository-inventory-validation.json >/dev/null
-          python3 -m json.tool inventory-batch-replay.json >/dev/null
+          python3 -m json.tool inventory-batch-chain-validation.json >/dev/null
           python3 - <<'PY'
           from pathlib import Path
           import json
 
           raw = Path("indices/GRAFO_DEPENDENCIAS_MAPA.yaml").read_text(encoding="utf-8")
           topology = json.loads(raw[raw.find("{"):])
-          inventory = json.loads(Path("indices/REPOSITORY_INVENTORY.json").read_text(encoding="utf-8"))
-          report = json.loads(Path("repository-inventory-validation.json").read_text(encoding="utf-8"))
+          inventory = json.loads(
+              Path("indices/REPOSITORY_INVENTORY.json").read_text(encoding="utf-8")
+          )
+          inventory_report = json.loads(
+              Path("repository-inventory-validation.json").read_text(encoding="utf-8")
+          )
+          chain_report = json.loads(
+              Path("inventory-batch-chain-validation.json").read_text(encoding="utf-8")
+          )
 
+          materialized = inventory["scope"]["materialized_count"]
           assert topology["schema"] == "mapa_topology_v2"
           assert topology["declared_metrics"]["cycle_count"] == 0
           assert topology["declared_metrics"]["orphan_count"] == 0
           assert inventory["schema"] == "repository_inventory_v2"
           assert inventory["scope"]["state"] == "PARTIAL"
-          assert inventory["scope"]["materialized_count"] == 21
           assert inventory["scope"]["claim_allowed"] is False
-          assert report["status"] == "PASS"
-          assert report["claim_allowed"] is False
+          assert materialized == len(inventory["repositories"])
+          assert inventory_report["status"] == "PASS"
+          assert inventory_report["claim_allowed"] is False
+          assert chain_report["status"] == "PASS"
+          assert chain_report["all_batches_fixed_points"] is True
+          assert chain_report["claim_allowed"] is False
+          assert (
+              chain_report["total_batch_records"]
+              + chain_report["baseline_unbatched_records"]
+              == materialized
+          )
           PY
 
       - name: Create checksums
         run: |
-          sha256sum \
-            indices/GRAFO_DEPENDENCIAS_MAPA.yaml \
-            indices/REPOSITORY_INVENTORY.json \
-            indices/inventory_batches/BATCH_001_2026-07-17.json \
-            schemas/repository_inventory.schema.json \
-            schemas/repository_inventory_batch.schema.json \
-            orquestrador/QUALITY_GATE_POLICY.md \
-            scripts/validate_mapa_topology.py \
-            scripts/validate_repository_inventory.py \
-            scripts/apply_repository_inventory_batch.py \
-            tests/test_topology.py \
-            tests/test_repository_inventory.py \
-            tests/test_inventory_batch.py \
-            .github/workflows/topology-validation.yml \
-            > STRUCTURAL_CHECKSUMS.sha256
+          {
+            printf '%s\n' \
+              indices/GRAFO_DEPENDENCIAS_MAPA.yaml \
+              indices/REPOSITORY_INVENTORY.json \
+              schemas/repository_inventory.schema.json \
+              schemas/repository_inventory_batch.schema.json \
+              orquestrador/QUALITY_GATE_POLICY.md \
+              scripts/validate_mapa_topology.py \
+              scripts/validate_repository_inventory.py \
+              scripts/apply_repository_inventory_batch.py \
+              scripts/validate_repository_inventory_batch_chain.py \
+              tests/test_topology.py \
+              tests/test_repository_inventory.py \
+              tests/test_inventory_batch.py \
+              tests/test_inventory_batch_chain.py \
+              .github/workflows/topology-validation.yml
+            find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
+          } | LC_ALL=C sort | xargs sha256sum > STRUCTURAL_CHECKSUMS.sha256
 
       - name: Upload structural audit
         uses: actions/upload-artifact@v4
@@ -150,7 +165,7 @@ jobs:
           path: |
             topology-validation.json
             repository-inventory-validation.json
-            inventory-batch-replay.json
+            inventory-batch-chain-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30

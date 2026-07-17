@@ -25,11 +25,11 @@ class InventoryBatchTests(unittest.TestCase):
         cls.current = json.loads(
             (ROOT / "indices/REPOSITORY_INVENTORY.json").read_text(encoding="utf-8")
         )
-        cls.batch = json.loads(
-            (ROOT / "indices/inventory_batches/BATCH_001_2026-07-17.json").read_text(
-                encoding="utf-8"
-            )
-        )
+        cls.batch_paths = sorted((ROOT / "indices/inventory_batches").glob("*.json"))
+        cls.batches = [
+            json.loads(path.read_text(encoding="utf-8")) for path in cls.batch_paths
+        ]
+        cls.batch = cls.batches[-1]
         batch_names = {record["repository_full_name"] for record in cls.batch["records"]}
         baseline = copy.deepcopy(cls.current)
         baseline["repositories"] = [
@@ -37,25 +37,39 @@ class InventoryBatchTests(unittest.TestCase):
             for record in baseline["repositories"]
             if record["repository_full_name"] not in batch_names
         ]
-        cls.baseline = recalculate_inventory(baseline, "2026-07-17T16:47:07Z")
+        previous_time = (
+            cls.batches[-2]["observed_at"]
+            if len(cls.batches) > 1
+            else cls.batch["observed_at"]
+        )
+        cls.baseline = recalculate_inventory(baseline, previous_time)
 
-    def test_batch_contract_passes(self) -> None:
-        self.assertEqual(validate_batch(self.batch), [])
+    def test_all_batch_contracts_pass(self) -> None:
+        for batch in self.batches:
+            with self.subTest(batch=batch["batch_id"]):
+                self.assertEqual(validate_batch(batch), [])
 
-    def test_apply_adds_ten_records(self) -> None:
+    def test_latest_batch_reconstructs_canonical_inventory(self) -> None:
         output, audit = apply_batch(self.baseline, self.batch)
-        self.assertEqual(audit["added_count"], 10)
+        self.assertEqual(audit["added_count"], self.batch["record_count"])
         self.assertEqual(audit["skipped_idempotent_count"], 0)
-        self.assertEqual(output["scope"]["materialized_count"], 21)
-        self.assertEqual(output["absence_ledger"]["missing_materialized_records"], 105)
-        self.assertFalse(output["scope"]["claim_allowed"])
+        self.assertEqual(output, self.current)
         self.assertEqual(validate_inventory(output), [])
 
-    def test_canonical_inventory_is_batch_fixed_point(self) -> None:
-        output, audit = apply_batch(self.current, self.batch)
-        self.assertEqual(audit["added_count"], 0)
-        self.assertEqual(audit["skipped_idempotent_count"], 10)
-        self.assertEqual(output, self.current)
+    def test_every_committed_batch_is_current_fixed_point(self) -> None:
+        for batch in self.batches:
+            with self.subTest(batch=batch["batch_id"]):
+                output, audit = apply_batch(self.current, batch)
+                self.assertEqual(audit["added_count"], 0)
+                self.assertEqual(
+                    audit["skipped_idempotent_count"], batch["record_count"]
+                )
+                self.assertEqual(output, self.current)
+
+    def test_historical_replay_does_not_rewind_timestamp_or_digest(self) -> None:
+        output, _ = apply_batch(self.current, self.batches[0])
+        self.assertEqual(output["generated_at"], self.current["generated_at"])
+        self.assertEqual(output["integrity"]["digest"], self.current["integrity"]["digest"])
 
     def test_name_collision_is_rejected(self) -> None:
         bad = copy.deepcopy(self.batch)
@@ -82,7 +96,7 @@ class InventoryBatchTests(unittest.TestCase):
 
     def test_owner_count_mismatch_is_rejected(self) -> None:
         bad = copy.deepcopy(self.batch)
-        bad["owner_counts"]["instituto-Rafael"] = 4
+        bad["owner_counts"]["instituto-Rafael"] -= 1
         bad["integrity"]["digest"] = canonical_batch_digest(bad)
         self.assertTrue(any("owner_counts mismatch" in error for error in validate_batch(bad)))
 
@@ -99,15 +113,16 @@ class InventoryBatchTests(unittest.TestCase):
 
     def test_ingestion_never_auto_promotes_complete(self) -> None:
         baseline = copy.deepcopy(self.baseline)
-        baseline["scope"]["accessible_total_observed"] = 21
+        final_owner_counts = self.current["statistics"]["owner_counts"]
+        baseline["scope"]["accessible_total_observed"] = len(self.current["repositories"])
         for account in baseline["scope"]["included_accounts"]:
-            account["accessible_count_observed"] = (
-                11 if account["account"] == "rafaelmeloreisnovo" else 10
-            )
-        baseline = recalculate_inventory(baseline, "2026-07-17T16:47:07Z")
+            account["accessible_count_observed"] = final_owner_counts[account["account"]]
+        baseline = recalculate_inventory(baseline, self.baseline["generated_at"])
         baseline["integrity"]["digest"] = canonical_digest(baseline)
         output, _ = apply_batch(baseline, self.batch)
-        self.assertEqual(output["scope"]["materialized_count"], 21)
+        self.assertEqual(
+            output["scope"]["materialized_count"], len(self.current["repositories"])
+        )
         self.assertEqual(output["absence_ledger"]["missing_materialized_records"], 0)
         self.assertEqual(output["scope"]["state"], "PARTIAL")
         self.assertFalse(output["scope"]["claim_allowed"])
