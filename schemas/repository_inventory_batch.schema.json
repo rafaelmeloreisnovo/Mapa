@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "repository_inventory_batch.schema.v1",
+  "title": "Connector-backed repository inventory batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "batch_id",
+    "observed_at",
+    "source",
+    "record_count",
+    "owner_counts",
+    "records",
+    "integrity"
+  ],
+  "properties": {
+    "schema": {
+      "const": "repository_inventory_batch_v1"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "const": "github_connector.get_repo"
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "owner_counts": {
+      "type": "object",
+      "required": [
+        "rafaelmeloreisnovo",
+        "instituto-Rafael"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "rafaelmeloreisnovo": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "instituto-Rafael": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repository_full_name",
+          "repository_id",
+          "owner",
+          "repository_name",
+          "clone_url",
+          "default_branch",
+          "visibility",
+          "archived",
+          "size_kib",
+          "metadata_status",
+          "claim_scope",
+          "observed_via"
+        ],
+        "properties": {
+          "repository_full_name": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$"
+          },
+          "repository_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "owner": {
+            "enum": [
+              "rafaelmeloreisnovo",
+              "instituto-Rafael"
+            ]
+          },
+          "repository_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "clone_url": {
+            "type": "string",
+            "pattern": "^https://github\\.com/.+\\.git$"
+          },
+          "default_branch": {
+            "type": "string",
+            "minLength": 1
+          },
+          "visibility": {
+            "enum": [
+              "public",
+              "private"
+            ]
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "size_kib": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "metadata_status": {
+            "const": "FATO"
+          },
+          "claim_scope": {
+            "const": "repository_identity_and_connector_metadata_only"
+          },
+          "observed_via": {
+            "const": "github_connector.get_repo"
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "digest"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "blake2b-256"
+        },
+        "canonicalization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}
