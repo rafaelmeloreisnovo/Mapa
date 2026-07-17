@@ -2,7 +2,7 @@
 
 Data de referência: `2026-07-17`  
 Branch: `docs/federated-control-plane-20260717`  
-Estado: `IMPLEMENTED_NOT_MERGED / claim_allowed=false`
+Estado: `IMPLEMENTED_NOT_MERGED / CI_STARTUP_FAILURE / claim_allowed=false`
 
 ## Objetivo
 
@@ -16,7 +16,8 @@ Converter a leitura holística dos repositórios em contratos versionados, sem c
 4. quarentena de padrões inseguros encontrados em runtimes históricos;
 5. validador determinístico com biblioteca padrão;
 6. workflow CI com permissões mínimas, timeout, checksum e artifact;
-7. este ledger final de auditoria.
+7. ledger final de auditoria;
+8. registro do resultado real da CI.
 
 ## Artefatos
 
@@ -53,13 +54,30 @@ Mapa
   -> registra autoridade, pin e divergência
 ```
 
+## Estado observado da CI
+
+```text
+run_id = 29557273842
+workflow = Federated Authority Registry
+status = completed
+conclusion = failure
+job = validate
+steps_returned = 0
+logs = unavailable / BlobNotFound
+classification = STARTUP_FAILURE_OR_INFRASTRUCTURE_FAILURE
+validator_execution_proven = false
+claim_allowed = false
+```
+
+O workflow geral `CI` do mesmo commit também falhou com zero steps retornados. Como nenhum step foi iniciado e nenhum log de comando foi disponibilizado, não há evidência de falha específica do validador ou do conteúdo. Também não há prova de aprovação.
+
 ## Lacunas protegidas
 
 - o inventário ainda não cobre todos os repositórios existentes;
 - vários papéis estão em `VERIFIED_LIMITED` ou `DECLARED_BY_AUTHOR`;
 - não existe ainda sincronizador automático cross-repo;
 - não existe assinatura externa dos exports;
-- CI desta branch ainda precisa executar no GitHub;
+- a CI precisa ser reexecutada em runner funcional;
 - integração real de runtime/dispositivo depende de artefato do aparelho;
 - a classificação dos módulos legados é auditoria de segurança, não teste de cada arquivo histórico.
 
@@ -68,7 +86,7 @@ Mapa
 Este pacote só pode sair de `claim_allowed=false` após:
 
 ```text
-CI PASS
+CI PASS com steps e logs observáveis
 revisão dos proprietários dos repositórios
 verificação dos caminhos canônicos
 correção de autoridade ambígua
@@ -79,4 +97,4 @@ registro de rollback
 
 ## Resultado
 
-A federação deixou de ser apenas interpretação narrativa e passou a possuir uma primeira camada executável de governança: registro validável, CI, checksums, fronteiras de claim e trilha de auditoria. Isso organiza o ecossistema; não declara que todas as ligações já funcionam.
+A federação deixou de ser apenas interpretação narrativa e passou a possuir uma primeira camada executável de governança: registro validável, CI, checksums, fronteiras de claim e trilha de auditoria. A execução da CI permanece não provada por falha de inicialização/infraestrutura. Isso organiza o ecossistema; não declara que todas as ligações já funcionam.
