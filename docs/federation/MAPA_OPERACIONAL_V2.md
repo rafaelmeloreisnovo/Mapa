@@ -22,7 +22,15 @@ blob bc7ad055ae2e89bf474e5dc9eaf4de45489717e0
 
 ## Regra de pesos
 
-Todos os seis pesos continuam `TOKEN_VAZIO`. Um teste estrutural ou local não recebe automaticamente peso 1, 2 ou 3. Cada mudança exige registro de medição com commit, caminho, comando, artefato, timestamp, limites e executor.
+A primeira medição defensável foi registrada:
+
+```text
+ChipQuantum.runtime = 2
+```
+
+Ela aponta para commit, fonte C, comando, artefato JSON, SHA-256, ambiente e limitações. Significa somente **execução local x86_64 para a identidade do Paper 6**. Não significa ARM32, Android, reprodução independente ou validação física.
+
+Todos os demais pesos continuam `TOKEN_VAZIO`. Um teste apenas estrutural não recebe automaticamente peso 1, 2 ou 3. Cada mudança exige registro de medição com commit, caminho, comando, artefato, timestamp, limites e executor.
 
 ## Próxima sequência
 
