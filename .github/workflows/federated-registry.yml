@@ -1,0 +1,58 @@
+name: Federated Authority Registry
+
+on:
+  pull_request:
+    paths:
+      - "arquitetura/ARQUITETURA_FEDERADA_OMEGA3.md"
+      - "indices/repository_authority_registry.json"
+      - "protocolos/CLAIM_SYNC_CONTRACT.md"
+      - "protocolos/LEGACY_RUNTIME_SECURITY_BOUNDARY.md"
+      - "scripts/validate_federated_registry.py"
+      - ".github/workflows/federated-registry.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: federated-registry-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Compile validator
+        run: python3 -m py_compile scripts/validate_federated_registry.py
+
+      - name: Validate registry
+        run: python3 scripts/validate_federated_registry.py | tee federated-registry-validation.json
+
+      - name: Check JSON syntax
+        run: python3 -m json.tool indices/repository_authority_registry.json >/dev/null
+
+      - name: Create checksums
+        run: |
+          sha256sum \
+            arquitetura/ARQUITETURA_FEDERADA_OMEGA3.md \
+            indices/repository_authority_registry.json \
+            protocolos/CLAIM_SYNC_CONTRACT.md \
+            protocolos/LEGACY_RUNTIME_SECURITY_BOUNDARY.md \
+            scripts/validate_federated_registry.py \
+            > CHECKSUMS.sha256
+
+      - name: Upload audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: federated-authority-registry
+          path: |
+            federated-registry-validation.json
+            CHECKSUMS.sha256
+          if-no-files-found: error
+          retention-days: 30
