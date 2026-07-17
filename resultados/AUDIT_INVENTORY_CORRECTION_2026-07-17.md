@@ -53,6 +53,35 @@ py_compile = PASS
 digest = ea3fddc116e94be88deb1c2b477013ed49ab0d16f4d442ffd8f0469b9d7677da
 ```
 
+## Evidência remota
+
+```text
+Topology and Inventory Structural Validation
+run_id = 29597945148
+job_id = 87942811687
+conclusion = failure
+steps = 0
+logs = BlobNotFound
+
+CI geral
+run_id = 29597945190
+job_id = 87942811420
+conclusion = failure
+steps = 0
+logs = unavailable
+```
+
+Classificação:
+
+```text
+STARTUP_FAILURE_OR_INFRASTRUCTURE_FAILURE
+validator_execution_proven = false
+contract_failure_proven = false
+remote_PASS_proven = false
+```
+
+A falha remota ocorreu antes de qualquer etapa observável. Ela não é reinterpretada como falha do código nem como aprovação.
+
 ## Critério de saída da lacuna
 
 O inventário só poderá mudar para `COMPLETE` quando:
