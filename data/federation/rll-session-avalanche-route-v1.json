@@ -1,0 +1,66 @@
+{
+  "schema": "mapa.rll_session_avalanche.route.v1",
+  "route_id": "RLL_SESSION_AVALANCHE_20260718",
+  "state": "ACTIVE_POINTER_ROUTE",
+  "nodes": [
+    {
+      "id": "RLL_PHYSICS",
+      "repository": "instituto-Rafael/relativity-living-light",
+      "commit": "9c2494bde53931081e2b242a7c5a2e1c100d3008",
+      "role": "SOURCE_AUTHORITY",
+      "artifacts": [
+        "data/pipelines/strong_gravity/session_multiscale_avalanche.py",
+        "data/contracts/session_multiscale_avalanche.v1.json",
+        "data/results/strong_gravity/session_multiscale_avalanche_baseline.json",
+        "docs/strong_gravity/SESSION_MULTISCALE_AVALANCHE.md"
+      ]
+    },
+    {
+      "id": "RAFPOLIMATA_ORCHESTRATION",
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "commit": "184783e28385ac8dbe11af2648692d50834c8c21",
+      "role": "ORCHESTRATION_AUTHORITY",
+      "artifacts": [
+        "configs/rll-session-avalanche-route-v1.json",
+        "scripts/rll_session_avalanche_router.py",
+        "docs/RLL_SESSION_AVALANCHE_ORCHESTRATOR.md"
+      ]
+    },
+    {
+      "id": "RAFGITTOOLS_GOVERNANCE",
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "commit": "375f6d15a6af96c6a39e4b6f5fbd9cc2fc819739",
+      "role": "GOVERNANCE_AUTHORITY",
+      "artifacts": [
+        "configs/session-single-subtokenization-v1.json",
+        "scripts/federation/session_single_subtokenization.py",
+        "docs/federation/SESSION_SINGLE_SUBTOKENIZATION_V1.md"
+      ]
+    },
+    {
+      "id": "MAPA_POINTER",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "SELF_AFTER_MERGE",
+      "role": "POINTER_ONLY",
+      "artifacts": [
+        "data/federation/rll-session-avalanche-route-v1.json",
+        "workflows/RLL_SESSION_AVALANCHE_ROUTE.md"
+      ]
+    }
+  ],
+  "edges": [
+    {"from": "RLL_PHYSICS", "to": "RAFPOLIMATA_ORCHESTRATION", "relation": "PRODUCES_INPUT_FOR"},
+    {"from": "RAFGITTOOLS_GOVERNANCE", "to": "RAFPOLIMATA_ORCHESTRATION", "relation": "GOVERNS_INPUT_TO"},
+    {"from": "RLL_PHYSICS", "to": "MAPA_POINTER", "relation": "MAPPED_BY"},
+    {"from": "RAFPOLIMATA_ORCHESTRATION", "to": "MAPA_POINTER", "relation": "MAPPED_BY"},
+    {"from": "RAFGITTOOLS_GOVERNANCE", "to": "MAPA_POINTER", "relation": "MAPPED_BY"}
+  ],
+  "invariants": {
+    "map_is_source_authority": false,
+    "private_payload_copied": false,
+    "pinned_external_commits_required": true,
+    "automatic_cross_repo_write": false,
+    "automatic_merge": false,
+    "claim_allowed": false
+  }
+}
