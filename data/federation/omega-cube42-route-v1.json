@@ -1,0 +1,123 @@
+{
+  "schema": "mapa.omega_cube42_federated_route.v1",
+  "route_id": "OMEGA-CUBE42-20260717-001",
+  "generated_at": "2026-07-17T20:11:00Z",
+  "claim_allowed": false,
+  "purpose": "Map the session through formal mathematics, freestanding runtime and research synthesis without copying private payloads across authorities.",
+  "nodes": [
+    {
+      "id": "omega-cube42-runtime",
+      "repository": "rafaelmeloreisnovo/ChipQuantum",
+      "visibility": "private",
+      "authority": "freestanding_runtime_and_evidence",
+      "pull_request": 41,
+      "branch": "feat/omega-cube42-forest-v1-20260717",
+      "commit": "333c7458a1f164424b3d5997d4ca9a515c8a55e2",
+      "status": "TESTED_LOCAL_X86_64_AND_ARMV7_OBJECT",
+      "claim_gate": "BLOCKED_TARGET_RUNTIME"
+    },
+    {
+      "id": "omega-cube42-formal",
+      "repository": "rafaelmeloreisnovo/Matem-tica-",
+      "visibility": "private",
+      "authority": "formal_definition_proof_and_finite_verification",
+      "pull_request": 3,
+      "branch": "feat/omega-cube42-formal-v1-20260717",
+      "commit": "a51e0435c8af14548b409bb20650092b90d58be1",
+      "status": "PROVED_PLUS_TESTED_FINITE",
+      "claim_gate": "ALLOW_FORMAL_DOMAIN_ONLY"
+    },
+    {
+      "id": "omega-cube42-paper",
+      "repository": "rafaelmeloreisnovo/papers",
+      "visibility": "private",
+      "authority": "research_synthesis_claim_ledger_and_falsification_plan",
+      "pull_request": 9,
+      "branch": "docs/omega-cube42-research-note-v1-20260717",
+      "commit": "72264db770f8116d065afabc1ca8bc3a6feb5216",
+      "status": "DRAFT_DEFENSAVEL",
+      "claim_gate": "SUMMARY_ONLY_NO_PROMOTION"
+    },
+    {
+      "id": "omega-cube42-map",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "visibility": "private",
+      "authority": "cross_repository_navigation",
+      "pull_request": 25,
+      "branch": "map/omega-cube42-federation-v1-20260717",
+      "commit": "SELF_REFERENTIAL_HEAD_RESOLVED_BY_PULL_REQUEST",
+      "status": "DRAFT_OPEN",
+      "claim_gate": "NAVIGATION_ONLY"
+    }
+  ],
+  "relations": [
+    {
+      "producer": "omega-cube42-formal",
+      "consumer": "omega-cube42-runtime",
+      "type": "DEFINES_INVARIANTS_FOR",
+      "schema_version": "omega_cube42.v1",
+      "evidence_required": ["cardinality", "potential_order", "claim_boundary"],
+      "failure_behavior": "runtime claim remains blocked"
+    },
+    {
+      "producer": "omega-cube42-runtime",
+      "consumer": "omega-cube42-paper",
+      "type": "PRODUCES_COMPUTATIONAL_EVIDENCE_FOR",
+      "schema_version": "chipquantum.omega_cube42_result.v1",
+      "evidence_required": ["KAT", "source_digest", "environment", "limitations"],
+      "failure_behavior": "paper preserves TOKEN_VAZIO"
+    },
+    {
+      "producer": "omega-cube42-formal",
+      "consumer": "omega-cube42-paper",
+      "type": "SUPPLIES_PROOF_BOUNDARY_TO",
+      "schema_version": "matematica.omega_cube42_verification.v1",
+      "evidence_required": ["proof_class", "finite_verification", "canonical_sha256"],
+      "failure_behavior": "no formal claim promotion"
+    },
+    {
+      "producer": "omega-cube42-map",
+      "consumer": "human_and_agent_navigation",
+      "type": "INDEXES_POINTERS_ONLY",
+      "schema_version": "mapa.omega_cube42_federated_route.v1",
+      "evidence_required": ["repository", "branch", "commit", "pull_request", "status"],
+      "failure_behavior": "private bodies are never copied"
+    }
+  ],
+  "evidence_summary": {
+    "runtime_kat": {
+      "epoch": 96,
+      "selected": 37,
+      "active_sigma": 732,
+      "active_delta": 918,
+      "crc32c": "8A006829",
+      "status": "TESTED_LOCAL_X86_64"
+    },
+    "formal_verification": {
+      "attractors": 42,
+      "checked_parent_edges": 41748,
+      "root_count_min": 6,
+      "root_count_max": 6,
+      "canonical_sha256": "53cd54004a82dcdcf2b20cdc3d9776cdcb613de3df2a071d96971c3d75ce44a5",
+      "status": "PASS_FINITE_DECLARED_DOMAIN"
+    }
+  },
+  "token_vazio": [
+    "Android ARM32 execution",
+    "physical zero-jitter timing",
+    "dynamic basin-of-attraction measurement",
+    "comparative superiority over 36, 48 and 64 candidates",
+    "independent reproduction"
+  ],
+  "anti_inference": [
+    "The map is not a source of mathematical proof or runtime evidence.",
+    "A private pointer does not disclose or duplicate the private payload.",
+    "Compilation is not target execution.",
+    "Finite acyclicity is not a physical or quantum claim.",
+    "No numeric ecosystem weight is assigned by document presence."
+  ],
+  "rollback": {
+    "strategy": "remove this route overlay without modifying source authorities",
+    "source_repositories_untouched_by_map": true
+  }
+}
