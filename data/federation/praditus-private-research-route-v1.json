@@ -1,0 +1,87 @@
+{
+  "schema": "mapa.praditus_private_research_route.v1",
+  "route_id": "PRADITUS-PRIVATE-RESEARCH-20260719",
+  "claim_allowed": false,
+  "visibility": "PRIVATE",
+  "private_payload_copied": false,
+  "raw_screenshots_copied": false,
+  "direct_identifiers_copied": false,
+  "automatic_merge": false,
+  "canonical_source": {
+    "repository": "rafaelmeloreisnovo/papers",
+    "pull_request": 10,
+    "branch": "agent/praditus-self-report-methodology-20260719",
+    "documents": [
+      "docs/praditus-self-report-methodological-note.md",
+      "docs/praditus-private-low-stakes-administration-addendum.md",
+      "docs/praditus-private-provenance-manifest.json",
+      "docs/praditus-self-report-claims.json"
+    ],
+    "authority": "methodological synthesis, provenance, claim ledger, limits and falsifiers"
+  },
+  "map_authority": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "map/praditus-private-pointer-20260719",
+    "authority": "pointer-only navigation, privacy boundary and relationship mapping"
+  },
+  "relations": [
+    {
+      "from": "mapa-praditus-private-route",
+      "relation": "POINTS_TO_PRIVATE_CANONICAL_SOURCE",
+      "to": "papers-praditus-pr10"
+    },
+    {
+      "from": "papers-praditus-pr10",
+      "relation": "DOES_NOT_EXPORT",
+      "to": "raw-private-image-corpus"
+    },
+    {
+      "from": "visible-timing-metadata",
+      "relation": "SUPPORTS_LIMITED",
+      "to": "session-continuity"
+    },
+    {
+      "from": "participant-context-declaration",
+      "relation": "IS_NOT_EQUIVALENT_TO",
+      "to": "independent-observation"
+    }
+  ],
+  "status_separation": {
+    "visual_timing_context": "VERIFIED_IN_PRIVATE_CORPUS",
+    "private_personal_use": "DECLARED_BY_PARTICIPANT",
+    "reduced_strategic_faking": "SUPPORTED_PLAUSIBLE_INFERENCE",
+    "physical_solitude": "NOT_ESTABLISHED_BY_TIME_ALONE",
+    "individual_psychometric_validity": "NOT_ESTABLISHED",
+    "identity_definition": "NOT_AUTHORIZED"
+  },
+  "privacy_contract": {
+    "cross_repository_mode": "POINTER_ONLY",
+    "allowed_metadata": [
+      "repository",
+      "pull request",
+      "branch",
+      "document paths",
+      "epistemic states",
+      "privacy gates"
+    ],
+    "forbidden_replication": [
+      "screenshots",
+      "item-level responses",
+      "direct names",
+      "clinical interpretations",
+      "personal narrative beyond the canonical method note"
+    ]
+  },
+  "safe_state": {
+    "canonical_source_unavailable": "retain opaque pointer and do not reconstruct private content",
+    "privacy_boundary_violation": "remove route files and preserve source PR draft",
+    "claim_overreach": "block claim and preserve TOKEN_VAZIO",
+    "merge_without_review": "forbidden"
+  },
+  "rollout": [
+    "review the private papers pull request",
+    "verify that no raw image or direct identifier is present in either repository",
+    "keep both pull requests draft until explicit review",
+    "merge the canonical source before or together with the pointer route only after authorization"
+  ]
+}
