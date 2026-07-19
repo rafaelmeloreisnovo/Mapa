@@ -1,0 +1,196 @@
+schema: rafaelia_federated_group_extension_v1
+schema_version: 1.0.0
+generated_at: '2026-07-19'
+parent_group: GROUP_ENVIRONMENTAL_PLANETARY_PLASMA_RLL
+state: PARTIAL
+claim_allowed: false
+
+extension_id: GEO_TRANS_OBSERVER_01
+name: geophysical transduction, radiation, time and observer
+
+purpose: >-
+  Add solid-state and geophysical transduction to the environmental-planetary
+  group without forcing quartz piezoelectricity, seismic waves or triboluminescence
+  into the plasma or cosmological authorities.
+
+canonical_invariant:
+  expression: >-
+    boundary condition -> stress/gradient -> relative motion/deformation ->
+    transduction -> wave/reaction -> damping -> signal -> medium -> instrument ->
+    observer/model
+  promotion_requirements:
+    - carrier
+    - medium
+    - scale
+    - material_phase
+    - source_of_free_energy
+    - coupling_operator
+    - units
+    - conservation_laws
+    - rate_or_timescale
+    - damping_or_loss
+    - observable
+    - instrument_transfer
+    - uncertainty
+    - baseline
+    - falsifier
+  missing_policy: TOKEN_VAZIO
+
+added_authority:
+  repository: rafaelmeloreisnovo/Fisica
+  role: canonical_solid_state_and_radiation_taxonomy_authority
+  owns:
+    - solid mechanics and damped oscillators
+    - quartz piezoelectric constitutive relations
+    - fracture/contact electrification and triboluminescence boundaries
+    - radiation taxonomy alpha beta gamma UVC X-ray
+    - reaction-regime hierarchy
+    - observer and measurement transfer chain at physics-foundation level
+  does_not_own:
+    - RLL cosmological likelihood
+    - plasma-specific Ohm/MHD closure
+    - ecosystem authority graph
+    - editorial publication state
+  canonical_artifact: docs/GEOPHYSICAL_PIEZOELECTRIC_TRIBOLUMINESCENCE_RADIATION_INVARIANT.md
+
+federated_authorities:
+  - repository: rafaelmeloreisnovo/Fisica
+    authority: solid_state_geophysical_physics
+    projection: complete_physical_taxonomy
+  - repository: instituto-Rafael/PlamaticGravity-
+    authority: solid_fluid_plasma_phase_boundary
+    projection: plasma_translation_only
+    canonical_artifact: docs/SOLID_TO_PLASMA_TRANSDUCTION_BOUNDARY.md
+  - repository: instituto-Rafael/relativity-living-light
+    authority: scientific_test_and_observation_operator
+    projection: B10_context_baselines_falsifiers
+    canonical_artifacts:
+      - docs/science/RLL_B10_GEOPHYSICAL_TRANSDUCTION_OBSERVER_PATHWAYS_20260719.md
+      - data/registries/rll_b10_geophysical_transduction_registry.json
+  - repository: rafaelmeloreisnovo/Cosmos
+    authority: multiscale_semantics_and_relations
+    projection: ontology_only
+    canonical_artifact: docs/navigation/TIME_OBSERVER_WAVE_RADIATION_MULTISCALE_MATRIX.md
+  - repository: rafaelmeloreisnovo/papers
+    authority: private_editorial_packet_and_sources
+    projection: complete_session_preservation
+    canonical_artifact: knowledge_packets/2026-07-19/02_geophysical_piezoelectric_radiation_observer_packet.md
+  - repository: rafaelmeloreisnovo/Mapa
+    authority: federation_pointers_and_drift
+    projection: pointer_only
+
+relation_types_added:
+  - TRANSDUCES_TO
+  - DAMPENS
+  - RELAXES_TO
+  - IS_MEASURED_BY
+  - IS_INFERRED_BY
+  - REQUIRES_PHASE
+  - CHANGES_CONSTITUTIVE_LAW_AT
+  - COMPETES_WITH_MECHANISM
+
+canonical_edges:
+  - source: tectonic_stress
+    relation: TRANSDUCES_TO
+    target: quartz_piezoelectric_polarization
+    state: VERIFIED_STANDARD_CONDITIONAL
+    authority: rafaelmeloreisnovo/Fisica
+  - source: quartz_piezoelectric_polarization
+    relation: MAY_COUPLE_TO
+    target: hydrothermal_gold_deposition
+    state: EXPERIMENTALLY_SUPPORTED_SPECIFIC
+    authority: rafaelmeloreisnovo/Fisica
+    boundary: deposition_from_gold_bearing_fluid_not_transmutation
+  - source: seismic_event
+    relation: CORRELATES_WITH
+    target: electromagnetic_anomaly
+    state: CONTESTED_AND_MECHANISM_DEPENDENT
+    authority: instituto-Rafael/relativity-living-light
+  - source: tape_stick_slip_in_moderate_vacuum
+    relation: TRANSDUCES_TO
+    target: nanosecond_xray_pulse
+    state: EXPERIMENTALLY_SUPPORTED_SPECIFIC
+    authority: rafaelmeloreisnovo/Fisica
+  - source: crystal_lattice_loss
+    relation: CHANGES_CONSTITUTIVE_LAW_AT
+    target: plasma_transport
+    state: PHYSICAL_BOUNDARY
+    authority: instituto-Rafael/PlamaticGravity-
+  - source: local_geophysical_signal
+    relation: DOES_NOT_ESTABLISH
+    target: rll_cosmological_background
+    state: CLAIM_BLOCKED
+    authority: instituto-Rafael/relativity-living-light
+  - source: physical_event
+    relation: IS_MEASURED_BY
+    target: instrument_observer_chain
+    state: VERIFIED_STANDARD
+    authority: rafaelmeloreisnovo/Fisica
+  - source: elementary_particle
+    relation: DOES_NOT_SCALE_AS
+    target: giant_intrinsic_particle_volume
+    state: CONTRADICTION
+    authority: rafaelmeloreisnovo/Fisica
+  - source: microscopic_ensemble
+    relation: COARSE_GRAINS_TO
+    target: macroscopic_collective_field
+    state: VERIFIED_FRAMEWORK
+    authority: instituto-Rafael/relativity-living-light
+
+radiation_classification:
+  alpha:
+    carrier: helium_nucleus_particle
+  beta:
+    carrier: electron_or_positron_particle
+  gamma:
+    carrier: photon
+  xray:
+    carrier: photon
+  uvc:
+    carrier: photon
+  invariant: alpha_beta_are_not_EM_frequency_bands
+
+mechanism_competition:
+  seismic_electromagnetic_signals:
+    candidates:
+      - quartz_piezoelectricity
+      - electrokinetic_streaming
+      - mineral_defect_charge
+      - contact_electrification
+      - electromagnetic_induction
+      - infrastructure_arcing
+      - atmospheric_ionospheric_source
+      - instrumentation_artifact
+    universal_winner: TOKEN_VAZIO
+
+anti_duplication:
+  rule: >-
+    Store complete derivations only in the owning repository. Other repositories
+    retain typed pointers, domain projection and claim boundary.
+  same_text_copied_across_repositories: false
+
+blocked_promotions:
+  - quartz_as_universal_earthquake_predictor
+  - earthquake_light_as_confirmed_single_mechanism
+  - alpha_beta_as_photon_frequency_bands
+  - tape_xray_without_vacuum_boundary
+  - local_geophysics_as_RLL_cosmology
+  - elementary_particle_intrinsic_volume_becomes_cosmological
+  - observer_as_unmodelled_physical_force
+
+next_tests:
+  - id: GT01
+    description: quartz orientation and non-piezoelectric control under matched cyclic stress
+    state: TOKEN_VAZIO
+  - id: GT02
+    description: synchronize seismic, electric, magnetic, weather and geomagnetic instruments
+    state: TOKEN_VAZIO
+  - id: GT03
+    description: reproduce tape X-ray boundary with pressure and material sweep
+    state: TOKEN_VAZIO
+  - id: GT04
+    description: derive observer/instrument transfer manifest for B10 datasets
+    state: TOKEN_VAZIO
+  - id: GT05
+    description: preregister cross-scale residual that differs from standard physics
+    state: TOKEN_VAZIO
