@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "generated_at": "2026-07-19",
   "state": "IMPLEMENTED_WITHOUT_PHYSICAL_CLAIM",
   "claim_allowed": false,
@@ -9,29 +9,59 @@
     {
       "repository": "rafaelmeloreisnovo/Fisica",
       "role": "canonical producer and physical mechanism tournament",
-      "merge_commit": "97f0b96ade391f746125144ce4cc936d76dd2ff7",
+      "merge_commit": "a765486980e0616204ae46979ef9ac3399199c12",
+      "commit_lineage": [
+        {
+          "commit": "97f0b96ade391f746125144ce4cc936d76dd2ff7",
+          "scope": "geophysical transduction DOI gate"
+        },
+        {
+          "commit": "a765486980e0616204ae46979ef9ac3399199c12",
+          "scope": "solid-Earth hum, deep hydrology, mineral-water and radiation-scale extension"
+        }
+      ],
       "canonical_artifacts": [
         "src/geophysical_transduction.py",
         "data/literature/geophysical_transduction_sources.json",
         "configs/geophysical_transduction_experiment.example.json",
         "tests/test_geophysical_transduction.py",
+        "src/solid_earth_hydrology.py",
+        "data/literature/solid_earth_hydrology_sources.json",
+        "tests/test_solid_earth_hydrology.py",
+        "docs/SOLID_EARTH_HUM_DEEP_WATER_AND_SCALE_BOUNDARIES.md",
         ".github/workflows/geophysical-transduction.yml"
       ],
       "observed_validation": {
-        "workflow_run_id": 29676719015,
+        "workflow_run_id": 29677297877,
         "conclusion": "success",
-        "scope": "compile, DOI registry, empty manifest and adversarial tests"
+        "scope": "compile two modules, validate two source registries, evaluate empty manifest, classify an Earth-hum period and run 26 adversarial tests"
       }
     },
     {
       "repository": "instituto-Rafael/relativity-living-light",
       "role": "fail-closed B10 consumer",
-      "merge_commit": "f85e999268e41c50576663b9be20f10021424df8",
+      "merge_commit": "b51bb845fa7dc30f0c35c4923ca8d647db3c9ca4",
+      "commit_lineage": [
+        {
+          "commit": "f85e999268e41c50576663b9be20f10021424df8",
+          "scope": "initial geophysical transduction consumer"
+        },
+        {
+          "commit": "b51bb845fa7dc30f0c35c4923ca8d647db3c9ca4",
+          "scope": "solid-Earth hum, hydrology and scale-boundary pin update"
+        }
+      ],
       "canonical_artifacts": [
         "src/rll/geophysical_transduction_adapter.py",
         "data/registries/rll_b10_geophysical_transduction_consumer.json",
         "tests/test_geophysical_transduction_adapter.py"
       ],
+      "observed_validation": {
+        "python_tests": "success",
+        "convention_consistency": "success",
+        "formulas_artifacts": "success",
+        "scientific_validation": "success"
+      },
       "allowed_classifications": [
         "BLOCKED",
         "CONTEXT_ONLY",
@@ -67,23 +97,33 @@
     "ready_for_test != causal winner",
     "quartz-bearing signal != quartz-dominated mechanism",
     "local geophysics != cosmological-background evidence",
+    "Twins artwork != seismometer or direct solid-Earth vibration detector",
+    "bulk quartz SiO2 != bulk source of hydrogen or water",
+    "fluid inclusions or OH defects in quartz != water manufactured from pure silica",
+    "Hamza regional porous flow != a channelized underground river larger than the Amazon",
+    "optical or radio fracture emission != demonstrated X-ray emission",
+    "larger rocky planet != linear amplification of quartz piezoelectric output",
+    "planetary water != universal Earth-like salinity",
     "a non-empty winner requires preregistration, uncertainty, baselines, falsifiers and raw-data hashes",
-    "source registry includes counterevidence",
+    "source registries include counterevidence and claim limits",
     "TOKEN_VAZIO is not converted to zero or PASS"
   ],
   "physical_validation_state": "TOKEN_VAZIO",
   "missing_real_experiment": [
+    "ground-vibration or seismometer time series",
     "stressed quartz-bearing sample",
     "quartz-free material control",
     "synchronized mechanical, acoustic, electric and magnetic channels",
-    "temperature and conductivity measurements",
+    "energy-resolved radiation detector with calibration and background control",
+    "temperature, pressure and conductivity measurements",
+    "porosity, permeability and fluid chemistry for hydrology tests",
     "blind event windows",
     "raw waveform hashes",
     "preregistered uncertainty and falsifier rules"
   ],
   "next_gate": {
-    "id": "G_REAL_DATA_001",
+    "id": "G_REAL_DATA_002",
     "state": "TOKEN_VAZIO",
-    "exit_criteria": "One reproducible controlled run with raw data, calibrations, uncertainties, controls and hashes."
+    "exit_criteria": "One reproducible synchronized ground-vibration experiment with quartz-bearing and quartz-free controls, calibrated multisensor data, radiation spectrum, uncertainties and hashes."
   }
 }
