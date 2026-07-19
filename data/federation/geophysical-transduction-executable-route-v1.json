@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-19",
+  "state": "IMPLEMENTED_WITHOUT_PHYSICAL_CLAIM",
+  "claim_allowed": false,
+  "route_id": "ROUTE_GEOPHYSICAL_TRANSDUCTION_V1",
+  "purpose": "Map the executable DOI-to-test-to-consumer chain without duplicating canonical content.",
+  "authorities": [
+    {
+      "repository": "rafaelmeloreisnovo/Fisica",
+      "role": "canonical producer and physical mechanism tournament",
+      "merge_commit": "97f0b96ade391f746125144ce4cc936d76dd2ff7",
+      "canonical_artifacts": [
+        "src/geophysical_transduction.py",
+        "data/literature/geophysical_transduction_sources.json",
+        "configs/geophysical_transduction_experiment.example.json",
+        "tests/test_geophysical_transduction.py",
+        ".github/workflows/geophysical-transduction.yml"
+      ],
+      "observed_validation": {
+        "workflow_run_id": 29676719015,
+        "conclusion": "success",
+        "scope": "compile, DOI registry, empty manifest and adversarial tests"
+      }
+    },
+    {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "role": "fail-closed B10 consumer",
+      "merge_commit": "f85e999268e41c50576663b9be20f10021424df8",
+      "canonical_artifacts": [
+        "src/rll/geophysical_transduction_adapter.py",
+        "data/registries/rll_b10_geophysical_transduction_consumer.json",
+        "tests/test_geophysical_transduction_adapter.py"
+      ],
+      "allowed_classifications": [
+        "BLOCKED",
+        "CONTEXT_ONLY",
+        "RESIDUAL_TEST_READY"
+      ],
+      "default_classification": "CONTEXT_ONLY"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "role": "authority and provenance pointer",
+      "content_policy": "POINTER_ONLY"
+    }
+  ],
+  "relations": [
+    {
+      "from": "rafaelmeloreisnovo/Fisica",
+      "to": "instituto-Rafael/relativity-living-light",
+      "type": "PRODUCES_VERSIONED_EVIDENCE_FOR",
+      "boundary": "Local geophysical evidence is environmental context or a null model, not background-cosmology evidence."
+    },
+    {
+      "from": "rafaelmeloreisnovo/Mapa",
+      "to": "rafaelmeloreisnovo/Fisica",
+      "type": "POINTS_TO_AUTHORITY"
+    },
+    {
+      "from": "rafaelmeloreisnovo/Mapa",
+      "to": "instituto-Rafael/relativity-living-light",
+      "type": "TRACKS_CONSUMER_PIN"
+    }
+  ],
+  "invariants": [
+    "ready_for_test != causal winner",
+    "quartz-bearing signal != quartz-dominated mechanism",
+    "local geophysics != cosmological-background evidence",
+    "a non-empty winner requires preregistration, uncertainty, baselines, falsifiers and raw-data hashes",
+    "source registry includes counterevidence",
+    "TOKEN_VAZIO is not converted to zero or PASS"
+  ],
+  "physical_validation_state": "TOKEN_VAZIO",
+  "missing_real_experiment": [
+    "stressed quartz-bearing sample",
+    "quartz-free material control",
+    "synchronized mechanical, acoustic, electric and magnetic channels",
+    "temperature and conductivity measurements",
+    "blind event windows",
+    "raw waveform hashes",
+    "preregistered uncertainty and falsifier rules"
+  ],
+  "next_gate": {
+    "id": "G_REAL_DATA_001",
+    "state": "TOKEN_VAZIO",
+    "exit_criteria": "One reproducible controlled run with raw data, calibrations, uncertainties, controls and hashes."
+  }
+}
