@@ -1,0 +1,222 @@
+schema: rafaelia_repository_group_v1
+schema_version: "1.0.0"
+group_id: GRP_ENV_PLANETARY_PLASMA_RLL
+generated_at: "2026-07-19"
+state: PARTIAL
+claim_allowed: false
+authority:
+  repository: rafaelmeloreisnovo/Mapa
+  role: canonical_federation_registry
+
+purpose: >-
+  Organize the repositories that describe planetary environments, plasma,
+  magnetism, atmospheric and oceanic electrodynamics, chemical phase changes,
+  propagation effects and their bounded relation to RLL. The group records
+  authority, typed relations and expansion routes; it does not promote a
+  cross-scale analogy into physical identity or causality.
+
+canonical_invariant:
+  id: I_ENV_CONTEXT_01
+  expression: >-
+    possibility -> {carrier, medium, scale, state, conservation, rate,
+    observable, uncertainty, baseline, falsifier} -> testable claim
+  system_state: >-
+    X=(M,R,Omega_rot,a_star,F_star,B,E,g,T,P,rho,x_chem,x_e,sigma,
+    atmosphere,ocean,crust,time)
+  observation_operator: >-
+    O_obs = T_instrument o T_environment[X,nu,t] o T_cosmology[H(z),z]
+    (O_source) + N
+  reaction_graph: >-
+    G_reaction=(V_species,E_reactions), with charge, baryon/nucleon,
+    energy-momentum and declared-rate conservation gates
+  rule: >-
+    Similar geometry, frequency or vocabulary across scales is a contextual
+    relation only. It becomes a physical bridge only after the carrier,
+    coupling, units, boundary conditions and discriminating observable exist.
+
+mandatory_gates:
+  - carrier
+  - medium
+  - spatial_and_temporal_scale
+  - state_variables_and_units
+  - boundary_and_initial_conditions
+  - conservation_laws
+  - constitutive_or_rate_equation
+  - source_and_provenance
+  - instrument_or_simulation
+  - uncertainty_and_covariance
+  - standard_baseline
+  - falsifier
+  - reproduction_artifact_and_checksum
+
+relation_types:
+  STANDARD_MECHANISM: established mechanism used as a baseline
+  MODULATES: changes amplitude, phase, rate or boundary conditions
+  COUPLES: explicit mathematical interaction with units and carrier
+  CORRELATES_WITH: statistical association without causal promotion
+  CONTEXTUALIZES: provides domain meaning without equation equivalence
+  SCALE_BRIDGE_HYPOTHESIS: proposed micro-meso-astro-cosmo bridge awaiting proof
+  ANALOGY_ONLY: didactic or geometric similarity only
+  REQUIRES: hard dependency for execution or claim promotion
+  PRODUCES_ARTIFACT_FOR: versioned producer-consumer relation
+  CONTRADICTS: incompatible statements preserved for resolution
+  FALSIFIES: observation or test capable of rejecting a claim
+  PROJECTS_TO_REPOSITORY: domain-specific projection of the canonical invariant
+
+repositories:
+  - repository_full_name: rafaelmeloreisnovo/Mapa
+    repository_id: 1267885874
+    visibility: private
+    authority_role: federation_registry
+    owns:
+      - repository_membership
+      - typed_relations
+      - authority_and_drift
+      - expansion_state
+    must_not_claim:
+      - physical_validity
+      - observational_detection
+
+  - repository_full_name: instituto-Rafael/relativity-living-light
+    repository_id: 1046495816
+    visibility: public
+    authority_role: scientific_claim_and_falsifier_owner
+    owns:
+      - cosmological_background_boundary
+      - propagation_null_models
+      - observable_and_falsifier_design
+      - claim_language
+    must_not_claim:
+      - local_environment_equals_cosmological_sector
+      - nonstandard_signal_without_standard_baseline
+
+  - repository_full_name: instituto-Rafael/PlamaticGravity-
+    repository_id: 1064330431
+    visibility: private
+    authority_role: plasma_gravity_domain_projection
+    owns:
+      - plasma_and_mhd_mechanisms
+      - charge_current_and_field_separation
+      - planetary_and_strong_gravity_contexts
+      - safety_and_scale_boundaries
+    must_not_claim:
+      - laboratory_control_of_gravity_without_evidence
+      - symbolic_intention_as_physical_field
+
+  - repository_full_name: rafaelmeloreisnovo/Cosmos
+    repository_id: 1019311420
+    visibility: public
+    authority_role: transdisciplinary_context_ontology
+    owns:
+      - context_graph
+      - cross_domain_vocabulary
+      - scale_separation
+      - reading_paths
+    must_not_claim:
+      - semantic_similarity_as_causality
+      - ontology_as_experimental_proof
+
+  - repository_full_name: rafaelmeloreisnovo/papers
+    repository_id: 1207572176
+    visibility: private
+    authority_role: editorial_and_provenance_packet
+    owns:
+      - long_form_synthesis
+      - source_and_claim_ledger
+      - manuscript_candidates
+      - publication_boundary
+    must_not_claim:
+      - peer_review
+      - independent_replication
+
+relations:
+  - from: rafaelmeloreisnovo/Mapa
+    to: instituto-Rafael/relativity-living-light
+    type: PROJECTS_TO_REPOSITORY
+    state: IMPLEMENTED_BY_THIS_GROUP
+    meaning: Mapa routes scientific claims and falsifiers to RLL.
+
+  - from: rafaelmeloreisnovo/Mapa
+    to: instituto-Rafael/PlamaticGravity-
+    type: PROJECTS_TO_REPOSITORY
+    state: IMPLEMENTED_BY_THIS_GROUP
+    meaning: Mapa routes plasma, MHD and gravity-domain mechanisms here.
+
+  - from: rafaelmeloreisnovo/Mapa
+    to: rafaelmeloreisnovo/Cosmos
+    type: PROJECTS_TO_REPOSITORY
+    state: IMPLEMENTED_BY_THIS_GROUP
+    meaning: Mapa routes contextual and cross-scale ontology here.
+
+  - from: rafaelmeloreisnovo/Mapa
+    to: rafaelmeloreisnovo/papers
+    type: PROJECTS_TO_REPOSITORY
+    state: IMPLEMENTED_BY_THIS_GROUP
+    meaning: Mapa routes long-form synthesis and provenance here.
+
+  - from: instituto-Rafael/PlamaticGravity-
+    to: instituto-Rafael/relativity-living-light
+    type: PRODUCES_ARTIFACT_FOR
+    state: HYPOTHESIS_BOUND
+    artifact_class: environmental_transfer_or_null_model
+    boundary: Local plasma mechanisms do not establish an RLL cosmological term.
+
+  - from: rafaelmeloreisnovo/Cosmos
+    to: instituto-Rafael/relativity-living-light
+    type: CONTEXTUALIZES
+    state: ACTIVE
+    boundary: Context and vocabulary do not alter likelihoods or observations.
+
+  - from: rafaelmeloreisnovo/papers
+    to: instituto-Rafael/relativity-living-light
+    type: REQUIRES
+    state: ACTIVE
+    requirement: Scientific statements must resolve to RLL evidence state.
+
+  - from: instituto-Rafael/relativity-living-light
+    to: rafaelmeloreisnovo/papers
+    type: PRODUCES_ARTIFACT_FOR
+    state: ACTIVE
+    artifact_class: claims_results_falsifiers_and_negative_results
+
+expansion_candidates:
+  - repository_full_name: rafaelmeloreisnovo/Fisica
+    proposed_role: standard_physics_reference_projection
+    state: TOKEN_VAZIO
+    exit_criteria: domain file, source baseline and explicit ownership accepted
+
+  - repository_full_name: instituto-Rafael/Particula-Omega-
+    proposed_role: particle_and_ionization_projection
+    state: TOKEN_VAZIO
+    exit_criteria: species/isotope schema and reaction conservation tests
+
+  - repository_full_name: rafaelmeloreisnovo/Catalogo-cosmologico
+    proposed_role: planetary_and_astronomical_object_catalog_provider
+    state: TOKEN_VAZIO
+    exit_criteria: versioned object fields, provenance and query contract
+
+  - repository_full_name: rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca
+    proposed_role: solar_geometry_context_provider
+    state: TOKEN_VAZIO
+    exit_criteria: physical ephemeris separated from cultural interpretation
+
+  - repository_full_name: rafaelmeloreisnovo/RafPolimata
+    proposed_role: schema_validation_and_execution_router
+    state: TOKEN_VAZIO
+    exit_criteria: compiler contract, typed schema and deterministic validation
+
+anti_duplication_policy:
+  canonical_registry: rafaelmeloreisnovo/Mapa
+  scientific_equations_and_claims: instituto-Rafael/relativity-living-light
+  domain_plasma_projection: instituto-Rafael/PlamaticGravity-
+  ontology_projection: rafaelmeloreisnovo/Cosmos
+  editorial_projection: rafaelmeloreisnovo/papers
+  rule: >-
+    Repositories reference the canonical object and add only domain-owned
+    material. They do not copy mutable evidence, redefine another authority's
+    claim state or silently fork equations.
+
+R_3:
+  F_ok: five authorities and typed relations are declared
+  F_gap: expansion candidates and empirical datasets remain TOKEN_VAZIO
+  F_next: add validators and version-pinned cross-repository receipts
