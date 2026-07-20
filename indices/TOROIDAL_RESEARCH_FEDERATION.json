@@ -1,7 +1,7 @@
 {
   "schema": "mapa.toroidal-research-federation.v1",
   "version": "1.0.0",
-  "generated_at": "2026-07-20T12:30:00Z",
+  "generated_at": "2026-07-20T13:30:00Z",
   "canonical_contract": {
     "repository": "rafaelmeloreisnovo/RafGitTools",
     "commit": "bed562a2a38218bc001d44484effcbdee7eafdbc",
@@ -39,39 +39,37 @@
       "role": "MAP",
       "state": "ACTIVE",
       "artifact_path": "indices/TOROIDAL_RESEARCH_FEDERATION.json",
-      "evidence_locator": "this registry and validator",
-      "depends_on": ["R-GOV"],
+      "evidence_locator": "PR #33 branch registry, validator and tests",
+      "depends_on": [
+        "R-GOV"
+      ],
       "exit_criteria": []
     },
     {
       "id": "R-SCI",
       "full_name": "instituto-Rafael/relativity-living-light",
       "role": "SCIENCE",
-      "state": "ADAPTER_PLANNED",
+      "state": "ACTIVE",
       "artifact_path": "data/contracts/toroidal_research_cycle_adapter.v1.json",
-      "evidence_locator": "TOKEN_VAZIO",
-      "depends_on": ["R-GOV", "R-MAP"],
-      "exit_criteria": [
-        "adapter file exists",
-        "domain formulas and claims point to existing RLL evidence",
-        "tests pass",
-        "claim_allowed remains false until source-specific evidence closes gaps"
-      ]
+      "evidence_locator": "PR #583 / merge 8251a7fc71c16ffcc236f981598d4c6684cbdded / 4 remote gates PASS",
+      "depends_on": [
+        "R-GOV",
+        "R-MAP"
+      ],
+      "exit_criteria": []
     },
     {
       "id": "R-ORCH",
       "full_name": "rafaelmeloreisnovo/RafPolimata",
       "role": "ORCHESTRATION",
-      "state": "ADAPTER_PLANNED",
+      "state": "ACTIVE",
       "artifact_path": "contracts/toroidal_research_router.v1.json",
-      "evidence_locator": "TOKEN_VAZIO",
-      "depends_on": ["R-GOV", "R-MAP"],
-      "exit_criteria": [
-        "router contract exists",
-        "repository roles are preserved",
-        "formula routing is deterministic",
-        "tests pass"
-      ]
+      "evidence_locator": "PR #152 / merge 2a3d1534909c687d36fd6a0d3a3986066bb0435c / 13 local tests PASS / remote ZERO_STEP_NO_LOGS",
+      "depends_on": [
+        "R-GOV",
+        "R-MAP"
+      ],
+      "exit_criteria": []
     },
     {
       "id": "R-RUNTIME",
@@ -80,7 +78,10 @@
       "state": "TOKEN_VAZIO",
       "artifact_path": "TOKEN_VAZIO",
       "evidence_locator": "TOKEN_VAZIO",
-      "depends_on": ["R-GOV", "R-ORCH"],
+      "depends_on": [
+        "R-GOV",
+        "R-ORCH"
+      ],
       "exit_criteria": [
         "Android or Termux adapter exists",
         "device identity is recorded",
@@ -94,7 +95,11 @@
       "state": "TOKEN_VAZIO",
       "artifact_path": "TOKEN_VAZIO",
       "evidence_locator": "TOKEN_VAZIO",
-      "depends_on": ["R-GOV", "R-MAP", "R-SCI"],
+      "depends_on": [
+        "R-GOV",
+        "R-MAP",
+        "R-SCI"
+      ],
       "exit_criteria": [
         "consumer adapter exists",
         "claim pins are versioned",
@@ -103,19 +108,51 @@
     }
   ],
   "edges": [
-    {"from": "R-GOV", "to": "R-MAP", "relation": "governs-contract-reference"},
-    {"from": "R-GOV", "to": "R-SCI", "relation": "governs-adapter-shape"},
-    {"from": "R-MAP", "to": "R-SCI", "relation": "maps-authority-and-maturity"},
-    {"from": "R-GOV", "to": "R-ORCH", "relation": "governs-router-shape"},
-    {"from": "R-MAP", "to": "R-ORCH", "relation": "maps-authority-and-maturity"},
-    {"from": "R-ORCH", "to": "R-RUNTIME", "relation": "routes-device-execution"},
-    {"from": "R-SCI", "to": "R-MEM", "relation": "produces-bounded-claims"},
-    {"from": "R-MAP", "to": "R-MEM", "relation": "maps-source-authority"}
+    {
+      "from": "R-GOV",
+      "to": "R-MAP",
+      "relation": "governs-contract-reference"
+    },
+    {
+      "from": "R-GOV",
+      "to": "R-SCI",
+      "relation": "governs-adapter-shape"
+    },
+    {
+      "from": "R-MAP",
+      "to": "R-SCI",
+      "relation": "maps-authority-and-maturity"
+    },
+    {
+      "from": "R-GOV",
+      "to": "R-ORCH",
+      "relation": "governs-router-shape"
+    },
+    {
+      "from": "R-MAP",
+      "to": "R-ORCH",
+      "relation": "maps-authority-and-maturity"
+    },
+    {
+      "from": "R-ORCH",
+      "to": "R-RUNTIME",
+      "relation": "routes-device-execution"
+    },
+    {
+      "from": "R-SCI",
+      "to": "R-MEM",
+      "relation": "produces-bounded-claims"
+    },
+    {
+      "from": "R-MAP",
+      "to": "R-MEM",
+      "relation": "maps-source-authority"
+    }
   ],
   "derived": {
     "repository_count": 6,
-    "active_count": 2,
-    "adapter_planned_count": 2,
+    "active_count": 4,
+    "adapter_planned_count": 0,
     "token_vazio_count": 2,
     "edge_count": 8,
     "cycle_count": 0,
@@ -123,6 +160,6 @@
   },
   "integrity": {
     "algorithm": "blake2b-256",
-    "digest": "1793cae42b8d7384c428b291d6c28ae5ab2bec94092d0657f5fd2b02401bc96f"
+    "digest": "5a784eaa8ff7b0fbcc2c90fa87f576c87b1502c4e95b4306c82a38d602a7f644"
   }
 }
