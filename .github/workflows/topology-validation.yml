@@ -8,12 +8,15 @@ on:
       - "indices/REPOSITORY_INVENTORY_HEAD.json"
       - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
       - "indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json"
+      - "indices/ISO_OPERATIONAL_READINESS_BASELINE.json"
       - "indices/inventory_batches/**"
       - "indices/inventory_deltas/**"
       - "schemas/repository_inventory.schema.json"
       - "schemas/repository_inventory_batch.schema.json"
       - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
       - "biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md"
+      - "biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md"
+      - "resultados/ISO_OPERATIONAL_READINESS_GAP_LEDGER_2026-07-20.md"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
@@ -22,6 +25,7 @@ on:
       - "scripts/validate_repository_inventory_head.py"
       - "scripts/validate_toroidal_research_federation.py"
       - "scripts/validate_platform_assurance_pointer.py"
+      - "scripts/validate_iso_operational_readiness.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
@@ -29,6 +33,7 @@ on:
       - "tests/test_inventory_head.py"
       - "tests/test_toroidal_research_federation.py"
       - "tests/test_platform_assurance_pointer.py"
+      - "tests/test_iso_operational_readiness.py"
       - ".github/workflows/topology-validation.yml"
   push:
     branches: [main]
@@ -38,12 +43,15 @@ on:
       - "indices/REPOSITORY_INVENTORY_HEAD.json"
       - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
       - "indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json"
+      - "indices/ISO_OPERATIONAL_READINESS_BASELINE.json"
       - "indices/inventory_batches/**"
       - "indices/inventory_deltas/**"
       - "schemas/repository_inventory.schema.json"
       - "schemas/repository_inventory_batch.schema.json"
       - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
       - "biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md"
+      - "biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md"
+      - "resultados/ISO_OPERATIONAL_READINESS_GAP_LEDGER_2026-07-20.md"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
@@ -52,6 +60,7 @@ on:
       - "scripts/validate_repository_inventory_head.py"
       - "scripts/validate_toroidal_research_federation.py"
       - "scripts/validate_platform_assurance_pointer.py"
+      - "scripts/validate_iso_operational_readiness.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
@@ -59,6 +68,7 @@ on:
       - "tests/test_inventory_head.py"
       - "tests/test_toroidal_research_federation.py"
       - "tests/test_platform_assurance_pointer.py"
+      - "tests/test_iso_operational_readiness.py"
       - ".github/workflows/topology-validation.yml"
   workflow_dispatch:
 
@@ -88,6 +98,7 @@ jobs:
           python3 -m py_compile scripts/validate_repository_inventory_head.py
           python3 -m py_compile scripts/validate_toroidal_research_federation.py
           python3 -m py_compile scripts/validate_platform_assurance_pointer.py
+          python3 -m py_compile scripts/validate_iso_operational_readiness.py
           python3 -m py_compile tests/test_topology.py
           python3 -m py_compile tests/test_repository_inventory.py
           python3 -m py_compile tests/test_inventory_batch.py
@@ -95,6 +106,7 @@ jobs:
           python3 -m py_compile tests/test_inventory_head.py
           python3 -m py_compile tests/test_toroidal_research_federation.py
           python3 -m py_compile tests/test_platform_assurance_pointer.py
+          python3 -m py_compile tests/test_iso_operational_readiness.py
 
       - name: Run topology unit tests
         run: python3 -m unittest tests/test_topology.py -v
@@ -117,6 +129,9 @@ jobs:
 
       - name: Run platform assurance pointer adversarial tests
         run: python3 -m unittest tests/test_platform_assurance_pointer.py -v
+
+      - name: Run ISO operational readiness adversarial tests
+        run: python3 -m unittest tests/test_iso_operational_readiness.py -v
 
       - name: Validate canonical topology
         run: |
@@ -151,6 +166,11 @@ jobs:
           python3 scripts/validate_platform_assurance_pointer.py \
             --write-report platform-assurance-pointer-validation.json
 
+      - name: Validate ISO operational readiness baseline
+        run: |
+          python3 scripts/validate_iso_operational_readiness.py \
+            --write-report iso-operational-readiness-validation.json
+
       - name: Check machine-readable artifacts and claim boundary
         run: |
           python3 -m json.tool topology-validation.json >/dev/null
@@ -159,6 +179,7 @@ jobs:
           python3 -m json.tool repository-inventory-head-validation.json >/dev/null
           python3 -m json.tool toroidal-federation-validation.json >/dev/null
           python3 -m json.tool platform-assurance-pointer-validation.json >/dev/null
+          python3 -m json.tool iso-operational-readiness-validation.json >/dev/null
           python3 - <<'PY'
           from pathlib import Path
           import json
@@ -191,6 +212,12 @@ jobs:
           )
           assurance_pointer = json.loads(
               Path("indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json").read_text(encoding="utf-8")
+          )
+          iso_report = json.loads(
+              Path("iso-operational-readiness-validation.json").read_text(encoding="utf-8")
+          )
+          iso_baseline = json.loads(
+              Path("indices/ISO_OPERATIONAL_READINESS_BASELINE.json").read_text(encoding="utf-8")
           )
 
           checkpoint_count = checkpoint["scope"]["materialized_count"]
@@ -244,6 +271,18 @@ jobs:
           assert assurance_report["claim_allowed"] is False
           assert assurance_pointer["producer"]["merge_commit"] == "356c11749fa423bcb458ca399ff39f0155557aa5"
           assert assurance_pointer["producer"]["index_digest"] == "e2da04fec6a7334b698a87676c095aba62596a7bdd7777a66f211cccd9621b31"
+          assert iso_report["status"] == "PASS"
+          assert iso_report["heuristic_count"] == 30
+          assert iso_report["heuristic_category_count"] >= 12
+          assert iso_report["gap_count"] == 25
+          assert iso_report["gap_priority_counts"] == {"P0": 8, "P1": 11, "P2": 5, "P3": 1}
+          assert iso_report["baseline_roles"] == 14
+          assert iso_report["core_hours_min"] == 10300
+          assert iso_report["core_hours_max"] == 15800
+          assert iso_report["claim_allowed"] is False
+          assert iso_report["certification_claim"] is False
+          assert iso_baseline["observed_state"]["assurance_open_blockers"] == 9
+          assert iso_baseline["derived"]["recommended_strategy"] == "DELTA_FIRST_RISK_BASED_WAVES"
           PY
 
       - name: Create checksums
@@ -255,10 +294,13 @@ jobs:
               indices/REPOSITORY_INVENTORY_HEAD.json \
               indices/TOROIDAL_RESEARCH_FEDERATION.json \
               indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json \
+              indices/ISO_OPERATIONAL_READINESS_BASELINE.json \
               schemas/repository_inventory.schema.json \
               schemas/repository_inventory_batch.schema.json \
               biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md \
               biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md \
+              biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md \
+              resultados/ISO_OPERATIONAL_READINESS_GAP_LEDGER_2026-07-20.md \
               orquestrador/QUALITY_GATE_POLICY.md \
               scripts/validate_mapa_topology.py \
               scripts/validate_repository_inventory.py \
@@ -267,6 +309,7 @@ jobs:
               scripts/validate_repository_inventory_head.py \
               scripts/validate_toroidal_research_federation.py \
               scripts/validate_platform_assurance_pointer.py \
+              scripts/validate_iso_operational_readiness.py \
               tests/test_topology.py \
               tests/test_repository_inventory.py \
               tests/test_inventory_batch.py \
@@ -274,6 +317,7 @@ jobs:
               tests/test_inventory_head.py \
               tests/test_toroidal_research_federation.py \
               tests/test_platform_assurance_pointer.py \
+              tests/test_iso_operational_readiness.py \
               .github/workflows/topology-validation.yml
             find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
             find indices/inventory_deltas -maxdepth 1 -type f -name '*.json' -print
@@ -290,6 +334,7 @@ jobs:
             repository-inventory-head-validation.json
             toroidal-federation-validation.json
             platform-assurance-pointer-validation.json
+            iso-operational-readiness-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
