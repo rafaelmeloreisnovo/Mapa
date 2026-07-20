@@ -6,21 +6,25 @@ on:
       - "indices/GRAFO_DEPENDENCIAS_MAPA.yaml"
       - "indices/REPOSITORY_INVENTORY.json"
       - "indices/REPOSITORY_INVENTORY_HEAD.json"
+      - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
       - "indices/inventory_batches/**"
       - "indices/inventory_deltas/**"
       - "schemas/repository_inventory.schema.json"
       - "schemas/repository_inventory_batch.schema.json"
+      - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
       - "scripts/apply_repository_inventory_batch.py"
       - "scripts/validate_repository_inventory_batch_chain.py"
       - "scripts/validate_repository_inventory_head.py"
+      - "scripts/validate_toroidal_research_federation.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
       - "tests/test_inventory_batch_chain.py"
       - "tests/test_inventory_head.py"
+      - "tests/test_toroidal_research_federation.py"
       - ".github/workflows/topology-validation.yml"
   push:
     branches: [main]
@@ -28,21 +32,25 @@ on:
       - "indices/GRAFO_DEPENDENCIAS_MAPA.yaml"
       - "indices/REPOSITORY_INVENTORY.json"
       - "indices/REPOSITORY_INVENTORY_HEAD.json"
+      - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
       - "indices/inventory_batches/**"
       - "indices/inventory_deltas/**"
       - "schemas/repository_inventory.schema.json"
       - "schemas/repository_inventory_batch.schema.json"
+      - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
       - "scripts/apply_repository_inventory_batch.py"
       - "scripts/validate_repository_inventory_batch_chain.py"
       - "scripts/validate_repository_inventory_head.py"
+      - "scripts/validate_toroidal_research_federation.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
       - "tests/test_inventory_batch_chain.py"
       - "tests/test_inventory_head.py"
+      - "tests/test_toroidal_research_federation.py"
       - ".github/workflows/topology-validation.yml"
   workflow_dispatch:
 
@@ -70,11 +78,13 @@ jobs:
           python3 -m py_compile scripts/apply_repository_inventory_batch.py
           python3 -m py_compile scripts/validate_repository_inventory_batch_chain.py
           python3 -m py_compile scripts/validate_repository_inventory_head.py
+          python3 -m py_compile scripts/validate_toroidal_research_federation.py
           python3 -m py_compile tests/test_topology.py
           python3 -m py_compile tests/test_repository_inventory.py
           python3 -m py_compile tests/test_inventory_batch.py
           python3 -m py_compile tests/test_inventory_batch_chain.py
           python3 -m py_compile tests/test_inventory_head.py
+          python3 -m py_compile tests/test_toroidal_research_federation.py
 
       - name: Run topology unit tests
         run: python3 -m unittest tests/test_topology.py -v
@@ -91,6 +101,9 @@ jobs:
 
       - name: Run atomic inventory head adversarial tests
         run: python3 -m unittest tests/test_inventory_head.py -v
+
+      - name: Run toroidal federation adversarial tests
+        run: python3 -m unittest tests/test_toroidal_research_federation.py -v
 
       - name: Validate canonical topology
         run: |
@@ -115,12 +128,18 @@ jobs:
             --head indices/REPOSITORY_INVENTORY_HEAD.json \
             --write-report repository-inventory-head-validation.json
 
+      - name: Validate toroidal research federation registry
+        run: |
+          python3 scripts/validate_toroidal_research_federation.py \
+            --write-report toroidal-federation-validation.json
+
       - name: Check machine-readable artifacts and claim boundary
         run: |
           python3 -m json.tool topology-validation.json >/dev/null
           python3 -m json.tool repository-inventory-validation.json >/dev/null
           python3 -m json.tool inventory-batch-chain-validation.json >/dev/null
           python3 -m json.tool repository-inventory-head-validation.json >/dev/null
+          python3 -m json.tool toroidal-federation-validation.json >/dev/null
           python3 - <<'PY'
           from pathlib import Path
           import json
@@ -141,6 +160,9 @@ jobs:
           )
           head_report = json.loads(
               Path("repository-inventory-head-validation.json").read_text(encoding="utf-8")
+          )
+          federation_report = json.loads(
+              Path("toroidal-federation-validation.json").read_text(encoding="utf-8")
           )
 
           checkpoint_count = checkpoint["scope"]["materialized_count"]
@@ -172,6 +194,13 @@ jobs:
           assert head_report["remaining_token_vazio"] == 75
           assert head_report["all_delta_batches_fixed_points"] is True
           assert head_report["claim_allowed"] is False
+          assert federation_report["status"] == "PASS"
+          assert federation_report["repository_count"] == 6
+          assert federation_report["active_count"] == 4
+          assert federation_report["adapter_planned_count"] == 0
+          assert federation_report["token_vazio_count"] == 2
+          assert federation_report["cycle_count"] == 0
+          assert federation_report["claim_allowed"] is False
           PY
 
       - name: Create checksums
@@ -181,19 +210,23 @@ jobs:
               indices/GRAFO_DEPENDENCIAS_MAPA.yaml \
               indices/REPOSITORY_INVENTORY.json \
               indices/REPOSITORY_INVENTORY_HEAD.json \
+              indices/TOROIDAL_RESEARCH_FEDERATION.json \
               schemas/repository_inventory.schema.json \
               schemas/repository_inventory_batch.schema.json \
+              biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md \
               orquestrador/QUALITY_GATE_POLICY.md \
               scripts/validate_mapa_topology.py \
               scripts/validate_repository_inventory.py \
               scripts/apply_repository_inventory_batch.py \
               scripts/validate_repository_inventory_batch_chain.py \
               scripts/validate_repository_inventory_head.py \
+              scripts/validate_toroidal_research_federation.py \
               tests/test_topology.py \
               tests/test_repository_inventory.py \
               tests/test_inventory_batch.py \
               tests/test_inventory_batch_chain.py \
               tests/test_inventory_head.py \
+              tests/test_toroidal_research_federation.py \
               .github/workflows/topology-validation.yml
             find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
             find indices/inventory_deltas -maxdepth 1 -type f -name '*.json' -print
@@ -208,6 +241,7 @@ jobs:
             repository-inventory-validation.json
             inventory-batch-chain-validation.json
             repository-inventory-head-validation.json
+            toroidal-federation-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
