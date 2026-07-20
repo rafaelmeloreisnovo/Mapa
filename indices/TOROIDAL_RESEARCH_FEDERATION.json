@@ -1,7 +1,7 @@
 {
   "schema": "mapa.toroidal-research-federation.v1",
-  "version": "1.0.0",
-  "generated_at": "2026-07-20T13:30:00Z",
+  "version": "1.1.0",
+  "generated_at": "2026-07-20T13:15:00Z",
   "canonical_contract": {
     "repository": "rafaelmeloreisnovo/RafGitTools",
     "commit": "bed562a2a38218bc001d44484effcbdee7eafdbc",
@@ -12,14 +12,15 @@
   "governance": {
     "authority_repository": "rafaelmeloreisnovo/Mapa",
     "claim_allowed": false,
-    "inventory_state": "PARTIAL",
+    "inventory_state": "ACTIVE_ADAPTERS_WITH_OPEN_EVIDENCE_GAP",
     "rules": [
       "one canonical contract; adapters reference it and do not fork it",
       "each repository has one authority role in this federation registry",
-      "ACTIVE requires an observed artifact path and evidence locator",
-      "ADAPTER_PLANNED and TOKEN_VAZIO require exit criteria",
+      "ACTIVE describes an observed adapter artifact and evidence locator, not universal downstream proof",
+      "ADAPTER_PLANNED and TOKEN_VAZIO repository states require exit criteria",
       "scientific claims remain owned by the SCIENCE repository",
-      "device claims remain TOKEN_VAZIO until device execution evidence exists"
+      "device claims remain TOKEN_VAZIO until DEVICE_RECEIPT_COMPLETE exists",
+      "memory consumption never elevates producer state and must detect producer drift"
     ]
   },
   "repositories": [
@@ -39,7 +40,7 @@
       "role": "MAP",
       "state": "ACTIVE",
       "artifact_path": "indices/TOROIDAL_RESEARCH_FEDERATION.json",
-      "evidence_locator": "PR #33 branch registry, validator and tests",
+      "evidence_locator": "PR #33 / merge 674e88ecd317c009b9b269a65b0372ec6caf8388 / registry validator and tests",
       "depends_on": [
         "R-GOV"
       ],
@@ -75,36 +76,37 @@
       "id": "R-RUNTIME",
       "full_name": "rafaelmeloreisnovo/termux-app-rafacodephi",
       "role": "RUNTIME",
-      "state": "TOKEN_VAZIO",
-      "artifact_path": "TOKEN_VAZIO",
-      "evidence_locator": "TOKEN_VAZIO",
+      "state": "ACTIVE",
+      "artifact_path": "tools/collect_runtime_receipt_v2.py",
+      "evidence_locator": "PR #293 / merge 016158c66c1f426aa3b85f23feb456c76c61df3c / 7 local tests PASS / remote ZERO_STEP_NO_LOGS",
+      "device_evidence_state": "TOKEN_VAZIO",
+      "device_evidence_exit_criteria": [
+        "run collector on the exact target Android device",
+        "pin the exact producer commit and APK SHA-256",
+        "record successful termux-info, ABI, kernel and bounded command probes",
+        "validate with --require-device-complete"
+      ],
       "depends_on": [
         "R-GOV",
         "R-ORCH"
       ],
-      "exit_criteria": [
-        "Android or Termux adapter exists",
-        "device identity is recorded",
-        "command input output hashes and environment are recorded"
-      ]
+      "exit_criteria": []
     },
     {
       "id": "R-MEM",
       "full_name": "rafaelmeloreisnovo/llamaRafaelia",
       "role": "MEMORY",
-      "state": "TOKEN_VAZIO",
-      "artifact_path": "TOKEN_VAZIO",
-      "evidence_locator": "TOKEN_VAZIO",
+      "state": "ACTIVE",
+      "artifact_path": "data/governance/rll_federated_claim_bundle.v2.json",
+      "evidence_locator": "PR #89 / merge 68b637fba72d6a8daef65c678615fdfe003ddcae / 10 local tests PASS / remote ZERO_STEP_NO_LOGS",
+      "latest_state_observation": "SYNCED_BOUNDED",
+      "producer_head_observed": "8251a7fc71c16ffcc236f981598d4c6684cbdded",
       "depends_on": [
         "R-GOV",
         "R-MAP",
         "R-SCI"
       ],
-      "exit_criteria": [
-        "consumer adapter exists",
-        "claim pins are versioned",
-        "stale producer claims are blocked"
-      ]
+      "exit_criteria": []
     }
   ],
   "edges": [
@@ -149,17 +151,32 @@
       "relation": "maps-source-authority"
     }
   ],
+  "open_evidence_gaps": [
+    {
+      "id": "G-RUNTIME-DEVICE-001",
+      "repository_id": "R-RUNTIME",
+      "state": "TOKEN_VAZIO",
+      "description": "The runtime receipt adapter exists, but no DEVICE_RECEIPT_COMPLETE from the target Android device and exact APK has been attached.",
+      "exit_criteria": [
+        "device receipt state is DEVICE_RECEIPT_COMPLETE",
+        "receipt_sha256 validates",
+        "producer commit and APK SHA-256 are immutable pins",
+        "device identity and termux-info are present"
+      ]
+    }
+  ],
   "derived": {
     "repository_count": 6,
-    "active_count": 4,
+    "active_count": 6,
     "adapter_planned_count": 0,
-    "token_vazio_count": 2,
+    "token_vazio_count": 0,
     "edge_count": 8,
     "cycle_count": 0,
+    "open_evidence_gap_count": 1,
     "claim_allowed": false
   },
   "integrity": {
     "algorithm": "blake2b-256",
-    "digest": "5a784eaa8ff7b0fbcc2c90fa87f576c87b1502c4e95b4306c82a38d602a7f644"
+    "digest": "d5fd6e3c9e802c04f0d62186a4cf3541e05a26a794d109efaa8f666587670993"
   }
 }
