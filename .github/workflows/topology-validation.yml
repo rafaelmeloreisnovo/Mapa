@@ -164,6 +164,9 @@ jobs:
           federation_report = json.loads(
               Path("toroidal-federation-validation.json").read_text(encoding="utf-8")
           )
+          registry = json.loads(
+              Path("indices/TOROIDAL_RESEARCH_FEDERATION.json").read_text(encoding="utf-8")
+          )
 
           checkpoint_count = checkpoint["scope"]["materialized_count"]
           assert topology["schema"] == "mapa_topology_v2"
@@ -196,10 +199,17 @@ jobs:
           assert head_report["claim_allowed"] is False
           assert federation_report["status"] == "PASS"
           assert federation_report["repository_count"] == 6
-          assert federation_report["active_count"] == 4
+          assert federation_report["active_count"] == 6
           assert federation_report["adapter_planned_count"] == 0
-          assert federation_report["token_vazio_count"] == 2
+          assert federation_report["token_vazio_count"] == 0
           assert federation_report["cycle_count"] == 0
+          assert federation_report["open_evidence_gap_count"] == 1
+          runtime = next(item for item in registry["repositories"] if item["role"] == "RUNTIME")
+          memory = next(item for item in registry["repositories"] if item["role"] == "MEMORY")
+          assert runtime["state"] == "ACTIVE"
+          assert runtime["device_evidence_state"] == "TOKEN_VAZIO"
+          assert memory["state"] == "ACTIVE"
+          assert memory["latest_state_observation"] == "SYNCED_BOUNDED"
           assert federation_report["claim_allowed"] is False
           PY
 
