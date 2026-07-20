@@ -7,11 +7,13 @@ on:
       - "indices/REPOSITORY_INVENTORY.json"
       - "indices/REPOSITORY_INVENTORY_HEAD.json"
       - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
+      - "indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json"
       - "indices/inventory_batches/**"
       - "indices/inventory_deltas/**"
       - "schemas/repository_inventory.schema.json"
       - "schemas/repository_inventory_batch.schema.json"
       - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
+      - "biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
@@ -19,12 +21,14 @@ on:
       - "scripts/validate_repository_inventory_batch_chain.py"
       - "scripts/validate_repository_inventory_head.py"
       - "scripts/validate_toroidal_research_federation.py"
+      - "scripts/validate_platform_assurance_pointer.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
       - "tests/test_inventory_batch_chain.py"
       - "tests/test_inventory_head.py"
       - "tests/test_toroidal_research_federation.py"
+      - "tests/test_platform_assurance_pointer.py"
       - ".github/workflows/topology-validation.yml"
   push:
     branches: [main]
@@ -33,11 +37,13 @@ on:
       - "indices/REPOSITORY_INVENTORY.json"
       - "indices/REPOSITORY_INVENTORY_HEAD.json"
       - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
+      - "indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json"
       - "indices/inventory_batches/**"
       - "indices/inventory_deltas/**"
       - "schemas/repository_inventory.schema.json"
       - "schemas/repository_inventory_batch.schema.json"
       - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
+      - "biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/validate_mapa_topology.py"
       - "scripts/validate_repository_inventory.py"
@@ -45,12 +51,14 @@ on:
       - "scripts/validate_repository_inventory_batch_chain.py"
       - "scripts/validate_repository_inventory_head.py"
       - "scripts/validate_toroidal_research_federation.py"
+      - "scripts/validate_platform_assurance_pointer.py"
       - "tests/test_topology.py"
       - "tests/test_repository_inventory.py"
       - "tests/test_inventory_batch.py"
       - "tests/test_inventory_batch_chain.py"
       - "tests/test_inventory_head.py"
       - "tests/test_toroidal_research_federation.py"
+      - "tests/test_platform_assurance_pointer.py"
       - ".github/workflows/topology-validation.yml"
   workflow_dispatch:
 
@@ -79,12 +87,14 @@ jobs:
           python3 -m py_compile scripts/validate_repository_inventory_batch_chain.py
           python3 -m py_compile scripts/validate_repository_inventory_head.py
           python3 -m py_compile scripts/validate_toroidal_research_federation.py
+          python3 -m py_compile scripts/validate_platform_assurance_pointer.py
           python3 -m py_compile tests/test_topology.py
           python3 -m py_compile tests/test_repository_inventory.py
           python3 -m py_compile tests/test_inventory_batch.py
           python3 -m py_compile tests/test_inventory_batch_chain.py
           python3 -m py_compile tests/test_inventory_head.py
           python3 -m py_compile tests/test_toroidal_research_federation.py
+          python3 -m py_compile tests/test_platform_assurance_pointer.py
 
       - name: Run topology unit tests
         run: python3 -m unittest tests/test_topology.py -v
@@ -104,6 +114,9 @@ jobs:
 
       - name: Run toroidal federation adversarial tests
         run: python3 -m unittest tests/test_toroidal_research_federation.py -v
+
+      - name: Run platform assurance pointer adversarial tests
+        run: python3 -m unittest tests/test_platform_assurance_pointer.py -v
 
       - name: Validate canonical topology
         run: |
@@ -133,6 +146,11 @@ jobs:
           python3 scripts/validate_toroidal_research_federation.py \
             --write-report toroidal-federation-validation.json
 
+      - name: Validate platform assurance authority pointer
+        run: |
+          python3 scripts/validate_platform_assurance_pointer.py \
+            --write-report platform-assurance-pointer-validation.json
+
       - name: Check machine-readable artifacts and claim boundary
         run: |
           python3 -m json.tool topology-validation.json >/dev/null
@@ -140,6 +158,7 @@ jobs:
           python3 -m json.tool inventory-batch-chain-validation.json >/dev/null
           python3 -m json.tool repository-inventory-head-validation.json >/dev/null
           python3 -m json.tool toroidal-federation-validation.json >/dev/null
+          python3 -m json.tool platform-assurance-pointer-validation.json >/dev/null
           python3 - <<'PY'
           from pathlib import Path
           import json
@@ -166,6 +185,12 @@ jobs:
           )
           registry = json.loads(
               Path("indices/TOROIDAL_RESEARCH_FEDERATION.json").read_text(encoding="utf-8")
+          )
+          assurance_report = json.loads(
+              Path("platform-assurance-pointer-validation.json").read_text(encoding="utf-8")
+          )
+          assurance_pointer = json.loads(
+              Path("indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json").read_text(encoding="utf-8")
           )
 
           checkpoint_count = checkpoint["scope"]["materialized_count"]
@@ -211,6 +236,14 @@ jobs:
           assert memory["state"] == "ACTIVE"
           assert memory["latest_state_observation"] == "SYNCED_BOUNDED"
           assert federation_report["claim_allowed"] is False
+          assert assurance_report["status"] == "PASS"
+          assert assurance_report["pointer_state"] == "ACTIVE_CONTROL_PLANE_WITH_OPEN_BLOCKERS"
+          assert assurance_report["p0_routes"] == 5
+          assert assurance_report["open_blocking_count"] == 9
+          assert assurance_report["promotion_ready_count"] == 0
+          assert assurance_report["claim_allowed"] is False
+          assert assurance_pointer["producer"]["merge_commit"] == "356c11749fa423bcb458ca399ff39f0155557aa5"
+          assert assurance_pointer["producer"]["index_digest"] == "e2da04fec6a7334b698a87676c095aba62596a7bdd7777a66f211cccd9621b31"
           PY
 
       - name: Create checksums
@@ -221,9 +254,11 @@ jobs:
               indices/REPOSITORY_INVENTORY.json \
               indices/REPOSITORY_INVENTORY_HEAD.json \
               indices/TOROIDAL_RESEARCH_FEDERATION.json \
+              indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json \
               schemas/repository_inventory.schema.json \
               schemas/repository_inventory_batch.schema.json \
               biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md \
+              biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md \
               orquestrador/QUALITY_GATE_POLICY.md \
               scripts/validate_mapa_topology.py \
               scripts/validate_repository_inventory.py \
@@ -231,12 +266,14 @@ jobs:
               scripts/validate_repository_inventory_batch_chain.py \
               scripts/validate_repository_inventory_head.py \
               scripts/validate_toroidal_research_federation.py \
+              scripts/validate_platform_assurance_pointer.py \
               tests/test_topology.py \
               tests/test_repository_inventory.py \
               tests/test_inventory_batch.py \
               tests/test_inventory_batch_chain.py \
               tests/test_inventory_head.py \
               tests/test_toroidal_research_federation.py \
+              tests/test_platform_assurance_pointer.py \
               .github/workflows/topology-validation.yml
             find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
             find indices/inventory_deltas -maxdepth 1 -type f -name '*.json' -print
@@ -252,6 +289,7 @@ jobs:
             inventory-batch-chain-validation.json
             repository-inventory-head-validation.json
             toroidal-federation-validation.json
+            platform-assurance-pointer-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
