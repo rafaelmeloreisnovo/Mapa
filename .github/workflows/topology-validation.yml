@@ -6,9 +6,11 @@ on:
       - "indices/**"
       - "schemas/**"
       - "biblioteconomia/**"
+      - "docs/**"
       - "resultados/**"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/**"
+      - "tools/**"
       - "tests/**"
       - ".github/workflows/topology-validation.yml"
   push:
@@ -17,9 +19,11 @@ on:
       - "indices/**"
       - "schemas/**"
       - "biblioteconomia/**"
+      - "docs/**"
       - "resultados/**"
       - "orquestrador/QUALITY_GATE_POLICY.md"
       - "scripts/**"
+      - "tools/**"
       - "tests/**"
       - ".github/workflows/topology-validation.yml"
   workflow_dispatch:
@@ -34,7 +38,7 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - name: Checkout without persisted credentials
         uses: actions/checkout@v4
@@ -57,6 +61,9 @@ jobs:
             scripts/validate_claim_review_chain.py \
             scripts/validate_claim_review_residual.py \
             scripts/validate_claim_discovery_precision.py \
+            scripts/validate_g006_auxiliary_receipt.py \
+            scripts/run_g006_local_gate.py \
+            tools/materialize_github_blob.py \
             tests/test_topology.py \
             tests/test_repository_inventory.py \
             tests/test_inventory_batch.py \
@@ -69,7 +76,10 @@ jobs:
             tests/test_claim_contradiction_ledger.py \
             tests/test_claim_review_chain.py \
             tests/test_claim_review_residual.py \
-            tests/test_claim_discovery_precision.py
+            tests/test_claim_discovery_precision.py \
+            tests/test_github_blob_materializer.py \
+            tests/test_g006_local_gate.py \
+            tests/test_g006_auxiliary_receipt.py
 
       - name: Run positive and adversarial tests
         run: |
@@ -86,7 +96,10 @@ jobs:
             tests/test_claim_contradiction_ledger.py \
             tests/test_claim_review_chain.py \
             tests/test_claim_review_residual.py \
-            tests/test_claim_discovery_precision.py
+            tests/test_claim_discovery_precision.py \
+            tests/test_github_blob_materializer.py \
+            tests/test_g006_local_gate.py \
+            tests/test_g006_auxiliary_receipt.py
 
       - name: Validate topology and inventory
         run: |
@@ -132,6 +145,10 @@ jobs:
             --root . \
             --policy indices/CLAIM_VOCABULARY_POLICY.json \
             --write-report claim-discovery-precision-validation.json
+          python3 scripts/validate_g006_auxiliary_receipt.py \
+            --receipt resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json \
+            --root . \
+            --write-report g006-auxiliary-receipt-validation.json
 
       - name: Check machine-readable contracts and boundaries
         run: |
@@ -147,7 +164,8 @@ jobs:
             claim-contradiction-ledger-validation.json \
             claim-review-chain-validation.json \
             claim-review-residual-validation.json \
-            claim-discovery-precision-validation.json
+            claim-discovery-precision-validation.json \
+            g006-auxiliary-receipt-validation.json
           do
             python3 -m json.tool "$report" >/dev/null
           done
@@ -172,6 +190,7 @@ jobs:
               "claim_chain": read("claim-review-chain-validation.json"),
               "claim_residual": read("claim-review-residual-validation.json"),
               "claim_precision": read("claim-discovery-precision-validation.json"),
+              "auxiliary_receipt": read("g006-auxiliary-receipt-validation.json"),
           }
 
           assert reports["topology"]["ok"] is True
@@ -247,6 +266,19 @@ jobs:
           assert reports["claim_precision"]["portfolio_exit_criteria_met"] is False
           assert reports["claim_precision"]["claim_allowed"] is False
           assert reports["claim_precision"]["certification_claim"] is False
+
+          assert reports["auxiliary_receipt"]["compiled_file_count"] == 4
+          assert reports["auxiliary_receipt"]["tests_run"] == 15
+          assert reports["auxiliary_receipt"]["tests_passed"] == 15
+          assert reports["auxiliary_receipt"]["file_hashes_match"] is True
+          assert reports["auxiliary_receipt"]["environment_noise_preserved"] is True
+          assert reports["auxiliary_receipt"]["full_repository_suite_executed"] is False
+          assert reports["auxiliary_receipt"]["claim_control_plane_suite_executed"] is False
+          assert reports["auxiliary_receipt"]["git_commit_bound_receipt"] is False
+          assert reports["auxiliary_receipt"]["remote_runner_receipt"] is False
+          assert reports["auxiliary_receipt"]["portfolio_exit_criteria_met"] is False
+          assert reports["auxiliary_receipt"]["claim_allowed"] is False
+          assert reports["auxiliary_receipt"]["certification_claim"] is False
           PY
 
       - name: Create structural checksums
@@ -272,8 +304,10 @@ jobs:
               biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md \
               biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md \
               biblioteconomia/22_CLAIM_VOCABULARY_AND_CONTRADICTION_GATE.md \
+              docs/G006_LOCAL_EXECUTION.md \
               resultados/ISO_OPERATIONAL_READINESS_GAP_LEDGER_2026-07-20.md \
               resultados/P0_G006_CLAIM_CONTRADICTION_BASELINE_2026-07-20.md \
+              resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json \
               orquestrador/QUALITY_GATE_POLICY.md \
               scripts/validate_mapa_topology.py \
               scripts/validate_repository_inventory.py \
@@ -288,6 +322,9 @@ jobs:
               scripts/validate_claim_review_chain.py \
               scripts/validate_claim_review_residual.py \
               scripts/validate_claim_discovery_precision.py \
+              scripts/validate_g006_auxiliary_receipt.py \
+              scripts/run_g006_local_gate.py \
+              tools/materialize_github_blob.py \
               tests/test_topology.py \
               tests/test_repository_inventory.py \
               tests/test_inventory_batch.py \
@@ -301,6 +338,9 @@ jobs:
               tests/test_claim_review_chain.py \
               tests/test_claim_review_residual.py \
               tests/test_claim_discovery_precision.py \
+              tests/test_github_blob_materializer.py \
+              tests/test_g006_local_gate.py \
+              tests/test_g006_auxiliary_receipt.py \
               .github/workflows/topology-validation.yml
             find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
             find indices/inventory_deltas -maxdepth 1 -type f -name '*.json' -print
@@ -324,6 +364,7 @@ jobs:
             claim-review-chain-validation.json
             claim-review-residual-validation.json
             claim-discovery-precision-validation.json
+            g006-auxiliary-receipt-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
