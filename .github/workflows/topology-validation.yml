@@ -164,9 +164,14 @@ jobs:
               "claim_residual": read("claim-review-residual-validation.json"),
           }
 
-          assert all(report["status"] == "PASS" for report in reports.values())
-          assert reports["topology"]["cycle_count"] == 0
-          assert reports["topology"]["orphan_count"] == 0
+          assert reports["topology"]["ok"] is True
+          assert all(
+              report["status"] == "PASS"
+              for name, report in reports.items()
+              if name != "topology"
+          )
+          assert reports["topology"]["derived_metrics"]["cycle_count"] == 0
+          assert reports["topology"]["derived_metrics"]["orphan_count"] == 0
 
           assert reports["inventory"]["inventory_state"] == "PARTIAL"
           assert reports["inventory"]["claim_allowed"] is False
