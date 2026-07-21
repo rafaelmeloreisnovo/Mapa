@@ -43,7 +43,7 @@ jobs:
           # Verify WORKFLOW_VARREDURA_OPERACIONAL.md exists and defines the required fields
           wf="workflows/WORKFLOW_VARREDURA_OPERACIONAL.md"
           [ -f "$wf" ] || { echo "MISSING: $wf"; exit 1; }
-          required=("id" "origem" "tipo" "estado" "acao" "resultado")
+          required=("id" "origem" "tipo" "estado" "ação" "resultado")
           for field in "${required[@]}"; do
             grep -q "$field" "$wf" || { echo "MISSING field '$field' in $wf"; exit 1; }
           done
