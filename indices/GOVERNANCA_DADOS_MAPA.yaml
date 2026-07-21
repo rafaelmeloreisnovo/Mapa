@@ -1,0 +1,80 @@
+schema: mapa_governanca_dados_v1
+id: GOV-CUSTODY-6SIGMA
+repository: rafaelmeloreisnovo/Mapa
+branch: codex/governanca-cadeia-custodia-6sigma
+status: PILOT
+claim_allowed: false
+
+invariants:
+  - id: INV-01
+    rule: "Toda conclusao exige evidencia referenciada."
+    enforcement: scripts/validate_chain_of_custody.py
+  - id: INV-02
+    rule: "TOKEN_VAZIO exige claim_allowed=false e proximo passo verificavel."
+    enforcement: scripts/validate_chain_of_custody.py
+  - id: INV-03
+    rule: "Correcao cria novo evento; historico nao e apagado."
+    enforcement: review
+  - id: INV-04
+    rule: "Caminhos sao relativos ao repositorio e sem traversal."
+    enforcement: scripts/validate_chain_of_custody.py
+  - id: INV-05
+    rule: "Nivel sigma nao e declarado antes de universo, oportunidades e defeitos medidos."
+    enforcement: review
+
+assets:
+  policy:
+    path: governanca/CADEIA_DE_CUSTODIA_DADOS.md
+    state: FATO
+  schema:
+    path: schemas/cadeia_custodia_evento.schema.json
+    state: FATO
+  ledger:
+    path: indices/CADEIA_CUSTODIA_EVENTOS.jsonl
+    state: FATO
+    mutation_policy: append-only
+  validator:
+    path: scripts/validate_chain_of_custody.py
+    state: FATO
+    dependencies: python-standard-library
+  tests:
+    path: tests/test_validate_chain_of_custody.py
+    state: FATO
+  roadmap:
+    path: roadmaps/ROADMAP_GOVERNANCA_DADOS_6SIGMA.md
+    state: FATO
+
+quality_gates:
+  - id: GATE-STRUCTURE
+    command: "python3 scripts/validate_chain_of_custody.py indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
+    blocks_claim_on_failure: true
+  - id: GATE-REGRESSION
+    command: "python3 -m unittest tests/test_validate_chain_of_custody.py"
+    blocks_claim_on_failure: true
+  - id: GATE-EVIDENCE
+    command: TOKEN_VAZIO
+    reason: "Revisao humana e verificacao dos commits ainda nao automatizadas como gate unico."
+    next_verifiable_step: "Executar revisao do PR e registrar o resultado no ledger."
+
+metrics:
+  completeness: TOKEN_VAZIO
+  traceability: TOKEN_VAZIO
+  integrity: TOKEN_VAZIO
+  reproducibility: TOKEN_VAZIO
+  token_vazio_resolution: TOKEN_VAZIO
+  dpmo: TOKEN_VAZIO
+  sigma_level: TOKEN_VAZIO
+
+rollout:
+  wave_1: Mapa
+  wave_2:
+    - termux-app-rafacodephi
+    - RafGitTools
+    - Vectras-VM-Android
+    - qemu_rafaelia
+  wave_3:
+    - relativity-living-light
+    - papers
+  wave_4:
+    - CientiEspiritual
+    - philosophical-symbolic-corpus
