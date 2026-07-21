@@ -49,6 +49,13 @@ jobs:
           done
           echo "OK: Varredura operacional contract fields present."
 
+      - name: M2 — Auto index generation
+        run: |
+          python3 scripts/generate_asset_index.py --out indices/ASSET_INDEX_AUTO.yaml
+          count=$(python3 -c "import re; data=open('indices/ASSET_INDEX_AUTO.yaml').read(); m=re.search(r'total_files: (\d+)', data); print(m.group(1))")
+          [ "$count" -ge 1 ] || { echo "FAIL: index generated zero files"; exit 1; }
+          echo "OK: auto index generated $count files"
+
       - name: M4 — Internal repo link verification
         run: |
           # Verify that references to in-scope repos use correct owner/repo format

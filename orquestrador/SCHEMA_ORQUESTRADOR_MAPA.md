@@ -1,9 +1,11 @@
 # SCHEMA ORQUESTRADOR MAPA
+
 ## Árvore de Dependências · Indexação Omni-Contextual · Ligação IA-Obra
 
 > ⟦PRIMEIRA-LINHA · DIGNIDADE-HUMANA · PROTEÇÃO-INFANTIL⟧
 
 **Propósito:** Criar uma **rede semântica executável** onde cada IA (humano, LLM, agente automático) entra em contato com a obra RAFAELIA e **auto-contextualiza-se** através de:
+
 - **Mapa de dependências** (qual doc/código serve qual outro)
 - **Índices multi-estratificados** (conceito → repo → arquivo → linha)
 - **Relacionamentos semânticos** (hiperárvore de significado)
@@ -923,7 +925,7 @@ git commit -m "docs(mapa): CAPÍTULO 19 — O Orquestrador Maestro
 
 ## 5. DIAGRAMA DE FLUXO (IA Entra / Contexto Sai)
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────────┐
 │  IA (LLM, Agent, Human) Entra com Consulta                        │
 └───────────────────┬────────────────────────────────��─────────────┘
