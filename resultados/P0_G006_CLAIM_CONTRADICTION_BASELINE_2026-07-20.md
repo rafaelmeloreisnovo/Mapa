@@ -1,75 +1,138 @@
-# P0 G006 — baseline do gate de linguagem e contradição
+# P0 G006 — baseline máxima do gate de linguagem e contradição
 
 Data: 2026-07-20  
 Autoridade: `rafaelmeloreisnovo/Mapa`  
-Escopo executado: implementação isolada, testes adversariais locais e integração no gate estrutural  
-Escopo não executado: varredura integral do branch por runner remoto
+Branch: `governance/p0-g006-claim-vocabulary-v1-20260720`
 
-## Entregas
+## Objetivo
+
+Impedir que `COMPLETE`, `COMPLIANT`, `ALIGNED` ou `CERTIFIED` sejam usados
+como promoção de estado quando implementação, execução, evidência, escopo ou
+autoridade ainda estiverem ausentes.
+
+## Control plane materializado
 
 ```text
 indices/CLAIM_VOCABULARY_POLICY.json
+indices/CLAIM_CONTRADICTION_LEDGER.json
+indices/CLAIM_CONTRADICTION_HEAD.json
+indices/CLAIM_REVIEW_RESIDUAL.json
+indices/claim_review_batches/CLAIM_REVIEW_BATCH_001_2026-07-20.json
+indices/claim_review_batches/CLAIM_REVIEW_BATCH_002_2026-07-20.json
+schemas/claim-contradiction-ledger.schema.json
 scripts/validate_claim_vocabulary.py
+scripts/validate_claim_contradiction_ledger.py
+scripts/validate_claim_review_chain.py
+scripts/validate_claim_review_residual.py
 tests/test_claim_vocabulary.py
-biblioteconomia/22_CLAIM_VOCABULARY_AND_CONTRADICTION_GATE.md
+tests/test_claim_contradiction_ledger.py
+tests/test_claim_review_chain.py
+tests/test_claim_review_residual.py
 .github/workflows/topology-validation.yml
 ```
 
-## Validação local
+## Snapshot delimitado
+
+A busca indexada por `COMPLETE` no commit
+`4016c51e024573a3875457fceb6d05926e07a07b` produziu 36 arquivos candidatos.
+O ledger declara expressamente que a busca de código pode ser incompleta ou
+desatualizada e não equivale a uma varredura byte a byte do repositório.
 
 ```text
-policy integrity         = PASS
-py_compile validator     = PASS
-py_compile tests         = PASS
-adversarial tests        = 10/10 PASS
-workflow YAML parse      = PASS
-stdlib-only              = true
-external dependencies    = 0
+candidate_count          = 36
+base reviewed safe       = 6
+batch 001 decisions      = 14
+batch 002 decisions      = 15
+reviewed safe final      = 35
+reviewed blocking final  = 0
+TOKEN_VAZIO final        = 1
+review completion        = 35/36 = 0.972222222222
+claim_allowed            = false
+certification_claim      = false
 ```
 
-## Integração estrutural
-
-O gate existente foi estendido sem criar workflow concorrente. Quando houver
-uma execução observável, ele deverá:
+## Arquitetura append-only
 
 ```text
-compilar validator e testes
-→ executar testes adversariais
-→ escanear o repositório
-→ exigir explicit_claim_error_count = 0
-→ preservar portfolio_exit_criteria_met = false
-→ verificar claim_allowed = false
-→ selar os arquivos em STRUCTURAL_CHECKSUMS.sha256
-→ publicar claim-vocabulary-validation.json
+ledger-base imutável
+  ↓
+review batch 001 — 14 transições pinadas
+  ↓
+review batch 002 — 15 transições pinadas
+  ↓
+HEAD atômico — deriva 35 safe / 0 blocking / 1 TOKEN_VAZIO
+  ↓
+residual exato — CC028
 ```
 
-O commit de integração é `72d15c7198c4c194e217a4bfbd76c7f32cf24fd7`.
-Como o branch não possui PR e o gatilho `push` está restrito a `main`, essa
-integração não foi tratada como execução remota.
+Cada decisão exige caminho, commit, disposição semântica, justificativa,
+revisor e `claim_allowed=false`. Um arquivo não lido integralmente não pode ser
+marcado como seguro.
 
-## Cobertura adversarial
-
-- `COMPLETE` com cadeia completa é aceito apenas como claim local delimitado;
-- ausência de ponteiro de execução é rejeitada;
-- `TOKEN_VAZIO` como ponteiro é rejeitado;
-- `COMPLIANT` sem autoridade é rejeitado;
-- `CERTIFIED` é rejeitado;
-- `ALIGNED` exige base e escopo, sem implicar conformidade;
-- contradição em prosa vira candidato, não promoção;
-- claim explícito incompleto falha fechado;
-- adulteração da política é rejeitada.
-
-## Limite epistêmico
+## Residual CC028
 
 ```text
-controle implementado no branch     = true
-integração no workflow existente    = IMPLEMENTED_NOT_EXECUTED
-scanner integral do repositório     = TOKEN_VAZIO
-runner remoto observável            = TOKEN_VAZIO
-portfolio G006 fechado              = false
-claim_allowed                       = false
-certification_claim                 = false
+id        = CC028
+path      = indices/REPOSITORY_INVENTORY.json
+blob      = b43554096f00c0918997dd9f9b11787cec4d4e52
+state     = TOKEN_VAZIO
+reason    = CONNECTOR_RESPONSE_TRUNCATED_AT_LINE_BOUNDARY
+attempt 1 = GitHub.fetch_file → TRUNCATED_RESPONSE
+attempt 2 = GitHub.fetch_blob → TRUNCATED_RESPONSE
 ```
 
-A implementação reduz risco, mas não substitui a execução real sobre o corpus
-completo nem fecha contradições fora do `Mapa`.
+O início observado mostra `PARTIAL` e `claim_allowed=false`, mas isso não é
+suficiente para classificar todas as ocorrências no arquivo completo de uma
+linha. A classificação semântica permanece proibida até materialização
+byte-idêntica e leitura integral.
+
+## Cobertura adversarial preparada
+
+Os testes versionados cobrem, entre outros:
+
+- promoção de claim e certificação;
+- ponteiro `TOKEN_VAZIO` usado como evidência;
+- adulteração de digests;
+- contagens derivadas falsas;
+- repetição de lote ou transição;
+- caminho ou commit divergente;
+- justificativa insuficiente;
+- residual omitido ou trocado;
+- falsa alegação de conteúdo integral;
+- tentativa de dispensar automaticamente candidato não lido.
+
+## Workflow único
+
+O workflow estrutural existente foi ampliado; nenhum YAML concorrente foi
+criado. Quando houver execução observável, ele deverá compilar, testar,
+escanear, validar ledger/cadeia/residual, verificar invariantes, produzir
+checksums e publicar onze relatórios estruturais.
+
+## Estado de execução
+
+```text
+artefatos versionados                  = true
+integridades canônicas construídas     = true
+workflow integrado                     = IMPLEMENTED_NOT_EXECUTED
+execução da suíte no clone integral    = TOKEN_VAZIO
+scanner integral observável            = TOKEN_VAZIO
+runner remoto observável               = TOKEN_VAZIO
+portfolio G006 fechado                 = false
+claim_allowed                          = false
+certification_claim                    = false
+```
+
+Nenhum teste não executado foi convertido em `PASS`. O máximo seguro atingido
+neste ambiente é 35/36 candidatos revisados, com o único vazio identificado,
+pinado, explicado e protegido por critério de saída executável.
+
+## Próximo gate
+
+```text
+MATERIALIZE_FULL_CC028_AND_OBSERVABLE_SCANNER_RECEIPT
+```
+
+O fechamento exige materializar o blob completo, verificar sua identidade,
+ler todas as ocorrências, anexar novo lote e produzir um recibo observável do
+scanner. Mesmo após isso, o fechamento do `Mapa` não fecha automaticamente os
+126 repositórios do portfólio.
