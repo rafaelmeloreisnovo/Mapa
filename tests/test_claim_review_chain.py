@@ -2,18 +2,21 @@ from __future__ import annotations
 
 import copy
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.validate_claim_review_chain import (
+ROOT = Path.cwd()
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from validate_claim_review_chain import (
     ChainValidationError,
     canonical_digest,
     load_json,
     validate_chain,
 )
 
-ROOT = Path.cwd()
 HEAD = Path("indices/CLAIM_CONTRADICTION_HEAD.json")
 
 
