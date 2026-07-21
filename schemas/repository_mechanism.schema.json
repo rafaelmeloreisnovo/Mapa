@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/repository_mechanism.schema.json",
+  "title": "Repository Mechanism Profile v1",
+  "description": "Evidence-bounded description of how one repository operates. Missing knowledge is represented as TOKEN_VAZIO, never inferred from the repository name.",
+  "type": "object",
+  "required": [
+    "schema",
+    "schema_version",
+    "repository_full_name",
+    "profile_source",
+    "mechanisms"
+  ],
+  "properties": {
+    "schema": { "const": "repository_mechanism_profile_v1" },
+    "schema_version": { "const": "1.0.0" },
+    "repository_full_name": { "type": "string", "pattern": "^[^/]+/[^/]+$" },
+    "profile_source": { "type": "string", "minLength": 1 },
+    "mechanisms": {
+      "type": "object",
+      "properties": {
+        "purpose": { "$ref": "#/$defs/epistemicCell" },
+        "inputs": { "$ref": "#/$defs/epistemicCell" },
+        "transformations": { "$ref": "#/$defs/epistemicCell" },
+        "outputs": { "$ref": "#/$defs/epistemicCell" },
+        "interfaces": { "$ref": "#/$defs/epistemicCell" },
+        "invariants": { "$ref": "#/$defs/epistemicCell" },
+        "quality_controls": { "$ref": "#/$defs/epistemicCell" },
+        "risks": { "$ref": "#/$defs/epistemicCell" },
+        "relations": { "$ref": "#/$defs/epistemicCell" },
+        "philosophical_context": { "$ref": "#/$defs/epistemicCell" },
+        "visual_model": { "$ref": "#/$defs/epistemicCell" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["kind", "locator", "claim_scope"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "locator": { "type": "string", "minLength": 1 },
+        "claim_scope": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "resolvedCell": {
+      "type": "object",
+      "required": ["state", "value", "evidence"],
+      "properties": {
+        "state": { "enum": ["FATO", "HIPOTESE", "PARABOLA"] },
+        "value": true,
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidence" }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "emptyCell": {
+      "type": "object",
+      "required": ["state", "reason", "next_action", "exit_criteria"],
+      "properties": {
+        "state": { "const": "TOKEN_VAZIO" },
+        "reason": { "type": "string", "minLength": 1 },
+        "next_action": { "type": "string", "minLength": 1 },
+        "exit_criteria": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "epistemicCell": {
+      "oneOf": [
+        { "$ref": "#/$defs/resolvedCell" },
+        { "$ref": "#/$defs/emptyCell" }
+      ]
+    }
+  },
+  "x-validation-note": "The executable contract is implemented by scripts/build_living_system_index.py and scripts/validate_living_system_index.py using only Python stdlib."
+}
