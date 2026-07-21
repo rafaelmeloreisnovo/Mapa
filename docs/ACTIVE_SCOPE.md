@@ -59,6 +59,7 @@ mas não têm CI automático integrado nesta sessão de desenvolvimento:
 ## Por que apenas 6?
 
 A sessão atual de desenvolvimento (gaps-audit) opera com acesso concedido a:
+
 - 6 repositórios via GitHub App instalado em `rafaelmeloreisnovo`
 - CI configurado via `claude/vectra-vm-gaps-audit-pvtiki` em cada um
 
