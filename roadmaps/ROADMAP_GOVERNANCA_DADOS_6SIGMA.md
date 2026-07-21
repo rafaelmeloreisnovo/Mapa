@@ -109,13 +109,13 @@ sem diminuir auditabilidade.
 | M1 | Completude estrutural | eventos válidos / eventos | `1.0` |
 | M2 | Rastreabilidade | eventos com evidência / eventos | `1.0` |
 | M3 | Integridade | hashes verificados / hashes declarados | `1.0` |
-| M4 | Reprodutibilidade | eventos com controle verificado / eventos | `1.0` |
+| M4 | Reprodutibilidade | eventos com controle verificado / eventos | `0.666667` |
 | M5 | Resolução de lacunas | vazios resolvidos / vazios totais | `TOKEN_VAZIO` |
 | M6 | Lead time de vazio | resolução − abertura | `TOKEN_VAZIO` |
 | M7 | DPMO observado | defeitos / oportunidades × 1.000.000 | `0.0` |
 | M8 | Nível sigma | convenção aprovada sobre processo estável | `TOKEN_VAZIO` |
 
-Os valores M1–M4 e M7 pertencem apenas ao snapshot piloto auditado. Não são
+Os valores M1–M4 e M7 pertencem apenas ao checkpoint auditado de 12 eventos e 96 oportunidades. Não são
 generalizados para outros repositórios nem equivalem a certificação Six Sigma.
 
 ## Mapa de riscos
