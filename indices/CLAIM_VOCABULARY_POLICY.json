@@ -1,0 +1,138 @@
+{
+  "authority_repository": "rafaelmeloreisnovo/Mapa",
+  "certification_claim": false,
+  "claim_allowed": false,
+  "contradiction_tokens": [
+    "TOKEN_VAZIO",
+    "PENDING",
+    "TODO",
+    "TBD",
+    "STUB",
+    "PLACEHOLDER",
+    "BLOCKED",
+    "ZERO_STEP_NO_LOGS",
+    "NOASSERTION"
+  ],
+  "descriptive_states": [
+    "TOKEN_VAZIO",
+    "DOCUMENTED",
+    "IMPLEMENTED",
+    "EXECUTED",
+    "EVIDENCED",
+    "INDEPENDENTLY_ASSURED",
+    "PARTIAL",
+    "BLOCKED",
+    "STALE"
+  ],
+  "excluded_paths": [
+    ".git",
+    ".github",
+    "build",
+    "dist",
+    "node_modules",
+    "third_party",
+    "upstream",
+    "vendor",
+    "__pycache__",
+    "indices/CLAIM_VOCABULARY_POLICY.json",
+    "scripts/validate_claim_vocabulary.py",
+    "tests/test_claim_vocabulary.py",
+    "biblioteconomia/22_CLAIM_VOCABULARY_AND_CONTRADICTION_GATE.md",
+    "resultados/P0_G006_CLAIM_CONTRADICTION_BASELINE_2026-07-20.md",
+    "claim-vocabulary-validation.json"
+  ],
+  "forbidden_states": [
+    "CERTIFIED"
+  ],
+  "gap_id": "G006",
+  "generated_on": "2026-07-20",
+  "integrity": {
+    "algorithm": "blake2b-256",
+    "canonicalization": "json-sort-keys-utf8; integrity.digest blanked",
+    "digest": "17a292618d23661c42323a29a8db20b15da427e13cfc53d066ac24160b515932"
+  },
+  "invalid_pointer_values": [
+    "",
+    "TOKEN_VAZIO",
+    "PENDING",
+    "TODO",
+    "TBD",
+    "STUB",
+    "PLACEHOLDER",
+    "BLOCKED",
+    "ZERO_STEP_NO_LOGS",
+    "NONE",
+    "NULL"
+  ],
+  "rollout_mode": "REPORT_PROSE_FAIL_EXPLICIT",
+  "rules": [
+    {
+      "id": "CV01",
+      "rule": "documentation does not imply implementation"
+    },
+    {
+      "id": "CV02",
+      "rule": "implementation does not imply execution"
+    },
+    {
+      "id": "CV03",
+      "rule": "execution does not imply preserved evidence"
+    },
+    {
+      "id": "CV04",
+      "rule": "COMPLETE requires implementation, execution and evidence pointers"
+    },
+    {
+      "id": "CV05",
+      "rule": "COMPLIANT additionally requires bounded criteria, scope and assessment authority"
+    },
+    {
+      "id": "CV06",
+      "rule": "ALIGNED is a bounded crosswalk statement and never implies conformity"
+    },
+    {
+      "id": "CV07",
+      "rule": "CERTIFIED is forbidden without an external certification authority and is globally disabled in this baseline"
+    },
+    {
+      "id": "CV08",
+      "rule": "TOKEN_VAZIO, BLOCKED and ZERO_STEP_NO_LOGS cannot satisfy evidence pointers"
+    },
+    {
+      "id": "CV09",
+      "rule": "prose contradictions are reported during rollout; explicit machine claims fail closed"
+    }
+  ],
+  "scan_extensions": [
+    ".json",
+    ".md",
+    ".yaml",
+    ".yml"
+  ],
+  "schema": "mapa.claim-vocabulary-policy.v1",
+  "strong_states": [
+    "ALIGNED",
+    "COMPLETE",
+    "COMPLIANT",
+    "CERTIFIED"
+  ],
+  "terminal_requirements": {
+    "ALIGNED": [
+      "alignment_basis_pointer",
+      "alignment_scope"
+    ],
+    "COMPLETE": [
+      "implementation_pointer",
+      "execution_pointer",
+      "evidence_pointer"
+    ],
+    "COMPLIANT": [
+      "implementation_pointer",
+      "execution_pointer",
+      "evidence_pointer",
+      "criteria_pointer",
+      "scope_pointer",
+      "assessment_authority"
+    ]
+  }
+}
