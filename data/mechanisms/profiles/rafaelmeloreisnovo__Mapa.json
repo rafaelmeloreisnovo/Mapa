@@ -1,0 +1,85 @@
+{
+  "schema": "repository_mechanism_profile_v1",
+  "schema_version": "1.0.0",
+  "repository_full_name": "rafaelmeloreisnovo/Mapa",
+  "profile_source": "manual evidence review of Mapa main at 6c91ef218986f335c7b7931a10262a9b73780bd0",
+  "mechanisms": {
+    "purpose": {
+      "state": "FATO",
+      "value": "Organize, trace, classify, cross-reference, and visually map the RAFAELIA knowledge corpus without promoting absent evidence into claims.",
+      "evidence": [{"kind":"repository_file","locator":"README.md#objective","claim_scope":"declared purpose of the Mapa repository"}]
+    },
+    "inputs": {
+      "state": "FATO",
+      "value": ["connector-backed repository identity","files and documentation","images and visual assets","indices and inventory deltas","results and audit records","federated routes"],
+      "evidence": [
+        {"kind":"repository_file","locator":"README.md#objective","claim_scope":"declared input classes"},
+        {"kind":"repository_file","locator":"indices/ASSET_INDEX_AUTO.yaml","claim_scope":"materialized repository asset categories"}
+      ]
+    },
+    "transformations": {
+      "state": "FATO",
+      "value": ["biblioteconomic classification","deterministic inventory merging","topological validation","epistemic marking","mechanism-profile normalization","gap preservation as TOKEN_VAZIO"],
+      "evidence": [
+        {"kind":"repository_file","locator":"biblioteconomia/06_PROTOCOLO_BIBLIOTECONOMICO.md","claim_scope":"classification procedure"},
+        {"kind":"repository_file","locator":"scripts/validate_mapa_topology.py","claim_scope":"deterministic topology validation"},
+        {"kind":"repository_file","locator":"scripts/build_living_system_index.py","claim_scope":"mechanism-profile normalization introduced by this refactor"}
+      ]
+    },
+    "outputs": {
+      "state": "FATO",
+      "value": ["machine-readable indices","auditable reports","visual concept maps","federated routes","explicit gap ledgers"],
+      "evidence": [
+        {"kind":"repository_file","locator":"README.md#repository-map","claim_scope":"declared output directories"},
+        {"kind":"repository_file","locator":"indices/ASSET_INDEX_AUTO.yaml","claim_scope":"observed output asset classes"}
+      ]
+    },
+    "interfaces": {
+      "state": "FATO",
+      "value": ["GitHub connector inventory","JSON and JSON-compatible YAML","Python 3 command-line tools using the standard library","Markdown and Mermaid visual navigation"],
+      "evidence": [
+        {"kind":"repository_file","locator":"schemas/repository_inventory.schema.json","claim_scope":"inventory interface contract"},
+        {"kind":"repository_file","locator":"scripts/validate_mapa_topology.py","claim_scope":"stdlib command-line validation interface"},
+        {"kind":"repository_file","locator":"visual/SISTEMA_VIVO.md","claim_scope":"human-readable visual interface introduced by this refactor"}
+      ]
+    },
+    "invariants": {
+      "state": "FATO",
+      "value": ["human dignity and child protection precede automation","active claims require evidence","planned or unread knowledge remains an explicit lacuna","derived metrics and integrity hashes are recalculated","global claim_allowed remains false while inventory and mechanism knowledge are partial"],
+      "evidence": [
+        {"kind":"repository_file","locator":"orquestrador/QUALITY_GATE_POLICY.md#invariantes-bloqueantes","claim_scope":"blocking quality invariants"},
+        {"kind":"repository_file","locator":"protocolos/TOKEN_VAZIO_LACUNAS.md","claim_scope":"lacuna-preservation policy"}
+      ]
+    },
+    "quality_controls": {
+      "state": "FATO",
+      "value": ["schema-bounded profiles","fail-closed source-count checks","duplicate identity detection","deterministic BLAKE2b-256 digest","derived completeness statistics","unit tests for evidence and TOKEN_VAZIO boundaries"],
+      "evidence": [
+        {"kind":"repository_file","locator":"schemas/repository_mechanism.schema.json","claim_scope":"profile data contract"},
+        {"kind":"repository_file","locator":"tests/test_living_system_index.py","claim_scope":"executable boundary tests introduced by this refactor"}
+      ]
+    },
+    "risks": {
+      "state": "HIPOTESE",
+      "confidence": 0.85,
+      "value": ["fragmented indices may describe the same concept with different authority","repository identity can be mistaken for knowledge of repository behavior","visual abundance can obscure evidence quality","planned files that already exist can remain incorrectly marked as lacuna"],
+      "evidence": [
+        {"kind":"structural_analysis","locator":"indices/ASSET_INDEX_AUTO.yaml","claim_scope":"risk hypothesis derived from the coexistence of multiple index and visual layers"},
+        {"kind":"structural_analysis","locator":"indices/GRAFO_DEPENDENCIAS_MAPA.yaml","claim_scope":"risk hypothesis derived from planned nodes whose paths may already exist"}
+      ]
+    },
+    "philosophical_context": {
+      "state": "FATO",
+      "value": "Philosophical and symbolic RAFAELIA texts are preserved as knowledge context while epistemic marks keep parable, hypothesis, and fact distinct.",
+      "evidence": [
+        {"kind":"repository_file","locator":"biblioteconomia/12_PARABOLA_INVARIANTE.md","claim_scope":"presence of explicitly parabolic material"},
+        {"kind":"repository_file","locator":"indices/MARCA_EPISTEMICA.md","claim_scope":"separation of epistemic classes"}
+      ]
+    },
+    "visual_model": {
+      "state": "FATO",
+      "value": "A layered flow from observed identity through mechanism cells, evidence gates, derived indices, and human-readable visual maps.",
+      "evidence": [{"kind":"repository_file","locator":"visual/SISTEMA_VIVO.md","claim_scope":"visual model introduced by this refactor"}]
+    }
+  }
+}
