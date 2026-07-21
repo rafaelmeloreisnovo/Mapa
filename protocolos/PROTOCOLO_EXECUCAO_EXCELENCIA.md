@@ -53,10 +53,12 @@ Toda alteração material deve produzir ou referenciar um evento conforme:
 - `governanca/CADEIA_DE_CUSTODIA_DADOS.md`;
 - `schemas/cadeia_custodia_evento.schema.json`;
 - `indices/CADEIA_CUSTODIA_EVENTOS.jsonl`;
-- `scripts/validate_chain_of_custody.py`.
+- `scripts/validate_chain_of_custody.py`;
+- `scripts/measure_custody_baseline.py`.
 
-Correções são append-only: um novo evento corrige o anterior sem apagar o
-histórico.
+`previous_event_id` preserva o encadeamento linear entre eventos válidos.
+Correções são append-only e usam `supersedes_event_id` para apontar o evento
+corrigido sem apagar o histórico.
 
 ## Six Sigma / DMAIC
 
@@ -68,8 +70,9 @@ DMAIC é usado como método de melhoria, não como certificação automática:
 - **Improve:** mudança mínima, teste e rollback;
 - **Control:** gate, métrica, amostragem e revisão.
 
-DPMO ou nível sigma permanecem `TOKEN_VAZIO` enquanto universo, janela,
-oportunidades e defeitos não estiverem definidos e medidos.
+DPMO observado pode ser medido em um snapshot piloto. Nível sigma e certificação
+permanecem `TOKEN_VAZIO` até existir estabilidade do processo, janelas repetidas
+e convenção estatística aprovada.
 
 ## Critério de excelência
 
@@ -89,9 +92,16 @@ Uma saída só pode ser considerada completa quando responde:
 ## Gates mínimos
 
 ```bash
-python3 scripts/validate_chain_of_custody.py indices/CADEIA_CUSTODIA_EVENTOS.jsonl
-python3 -m unittest tests/test_validate_chain_of_custody.py
+python3 -S scripts/validate_chain_of_custody.py \
+  indices/CADEIA_CUSTODIA_EVENTOS.jsonl --repo-root .
+
+python3 -S -m unittest discover -s tests -p 'test_*.py'
+
+python3 -S scripts/measure_custody_baseline.py \
+  indices/CADEIA_CUSTODIA_EVENTOS.jsonl --repo-root .
 ```
 
-Falha em gate bloqueia claim, não apaga o trabalho: registra defeito ou
-`TOKEN_VAZIO`, preserva o contexto e direciona a correção.
+A execução observada deve ser registrada em
+`auditoria/PR39_EXECUTION_EVIDENCE.json`. Falha em gate bloqueia claim, não apaga
+o trabalho: registra defeito ou `TOKEN_VAZIO`, preserva o contexto e direciona a
+correção.
