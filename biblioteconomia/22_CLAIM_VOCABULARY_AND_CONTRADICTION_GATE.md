@@ -104,7 +104,7 @@ O ledger-base não é reescrito para simular progresso. Cada lote precisa:
 O `HEAD` rejeita lote repetido, transição repetida, drift de caminho/commit,
 contagem falsa, digest divergente e próximo gate obsoleto.
 
-## Estado delimitado atual
+## Estado delimitado da baseline
 
 ```text
 snapshot commit          = 4016c51e024573a3875457fceb6d05926e07a07b
@@ -118,8 +118,8 @@ review completion ratio  = 1.0
 ```
 
 Isso significa que os 36 candidatos da baseline indexada foram classificados.
-Não significa que o repositório atual ou os 126 repositórios do portfólio já
-foram varridos com recibo observável.
+Não significa que o branch atual ou os 126 repositórios do portfólio já foram
+varridos com recibo observável.
 
 ## Residual histórico e resolução CC028
 
@@ -164,6 +164,27 @@ SAFE_EXACT_TOKEN_ABSENCE
 A resolução não apaga o residual: falha histórica e conhecimento atual coexistem
 como eventos distintos da cadeia.
 
+## Contrato independente da resolução
+
+```text
+scripts/validate_claim_resolution_contract.py
+schemas/claim-review-resolution.schema.json
+tests/test_claim_resolution_contract.py
+```
+
+O validador executável exige:
+
+- as seis fronteiras da resolução presentes e iguais a `false`;
+- SHA Git, SHA-256, tamanho e faixas Base64 exatos;
+- parse e digest canônico coerentes;
+- zero tokens fortes exatos;
+- falso positivo ligado a `completeness_ratio`;
+- histórico residual preservado;
+- residual atual igual a zero;
+- próximo gate não promovido.
+
+O schema é descritivo e não substitui o validador nem prova identidade de bytes.
+
 ## Precisão de descoberta
 
 ```text
@@ -177,7 +198,9 @@ O auditor `validate_claim_discovery_precision.py` mede separadamente:
 - quantidade de substrings;
 - quantidade de tokens exatos;
 - falsos positivos lexicais;
-- arquivos afetados;
+- todos os caminhos com token exato;
+- truncamento da lista;
+- arquivos ilegíveis ou ignorados por tamanho;
 - resolução conhecida do `CC028`.
 
 A busca ampla é triagem. A fronteira semântica é o token exato:
@@ -186,89 +209,103 @@ A busca ampla é triagem. A fronteira semântica é o token exato:
 (?<![A-Z0-9_])TOKEN(?![A-Z0-9_])
 ```
 
-## Execução local prevista
+## Refresh do escopo atual
 
-O procedimento operacional completo e seguro para Termux/Linux está em:
+```text
+scripts/build_claim_scope_refresh.py
+tests/test_claim_scope_refresh.py
+```
+
+O construtor recebe a baseline, o `HEAD`, o scanner, o relatório de precisão e o
+commit atual. Ele separa:
+
+```text
+sinais atuais já conhecidos
+candidatos novos após o snapshot
+entradas históricas sem sinal no scan filtrado
+```
+
+Caminhos novos recebem ID determinístico:
+
+```text
+NCC-<12HEX>
+```
+
+E são preservados como:
+
+```text
+state = TOKEN_VAZIO
+owner_role = R12
+claim_allowed = false
+```
+
+Nenhum arquivo novo é considerado seguro por pertencer a `scripts/`, `tests/`,
+`docs/`, `indices/` ou `.github/`. Ausência de sinal no scan filtrado também não
+significa resolução ou autorização de remoção.
+
+O refresh nunca declara que o scan filtrado é varredura byte a byte. Seu
+`status=PASS` significa apenas que o delta foi construído sem perda silenciosa.
+
+## Execução local
+
+A rota completa e segura para Termux/Linux está em:
 
 ```text
 docs/G006_LOCAL_EXECUTION.md
 ```
 
-Comandos nucleares do control plane:
+Ela oferece:
 
-```bash
-python3 -m py_compile \
-  scripts/validate_claim_vocabulary.py \
-  scripts/validate_claim_contradiction_ledger.py \
-  scripts/validate_claim_review_chain.py \
-  scripts/validate_claim_review_residual.py \
-  scripts/validate_claim_discovery_precision.py \
-  scripts/validate_g006_auxiliary_receipt.py \
-  scripts/run_g006_local_gate.py \
-  tools/materialize_github_blob.py
+- materialização GitHub Base64 com verificação de objeto Git;
+- token por variável de ambiente, sem eco em argumentos ou recibos;
+- escrita atômica em modo `0600`;
+- runner pinado ao commit e árvore limpa;
+- logs separados por comando;
+- checksums dos controles;
+- contrato independente da resolução;
+- refresh posterior explícito;
+- recibo agregado fail-closed.
 
-python3 -m unittest -v \
-  tests/test_claim_vocabulary.py \
-  tests/test_claim_contradiction_ledger.py \
-  tests/test_claim_review_chain.py \
-  tests/test_claim_review_residual.py \
-  tests/test_claim_discovery_precision.py \
-  tests/test_github_blob_materializer.py \
-  tests/test_g006_local_gate.py \
-  tests/test_g006_auxiliary_receipt.py
-```
-
-Validações materializadas:
-
-```bash
-python3 scripts/validate_claim_vocabulary.py \
-  --root . \
-  --policy indices/CLAIM_VOCABULARY_POLICY.json \
-  --write-report claim-vocabulary-validation.json
-
-python3 scripts/validate_claim_contradiction_ledger.py \
-  --write-report claim-contradiction-ledger-validation.json
-
-python3 scripts/validate_claim_review_chain.py \
-  --write-report claim-review-chain-validation.json
-
-python3 scripts/validate_claim_review_residual.py \
-  --residual indices/CLAIM_REVIEW_RESIDUAL.json \
-  --resolution indices/CLAIM_REVIEW_RESOLUTION_CC028.json \
-  --head indices/CLAIM_CONTRADICTION_HEAD.json \
-  --write-report claim-review-residual-validation.json
-
-python3 scripts/validate_claim_discovery_precision.py \
-  --root . \
-  --policy indices/CLAIM_VOCABULARY_POLICY.json \
-  --write-report claim-discovery-precision-validation.json
-
-python3 scripts/validate_g006_auxiliary_receipt.py \
-  --receipt resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json \
-  --root . \
-  --write-report g006-auxiliary-receipt-validation.json
-```
-
-## Evidência auxiliar realmente executada
-
-No ambiente de preparação foram executadas, de modo autocontido:
+## Evidência auxiliar executada
 
 ```text
 py_compile de materializador/runner e testes = 4/4 PASS
 suítes dos componentes auxiliares            = 15/15 PASS
 suíte do validador do recibo auxiliar        = 6/6 PASS
+contrato da resolução — py_compile           = PASS
+contrato da resolução — validação canônica   = PASS
+contrato da resolução — mutações rejeitadas  = 10/10
 ```
 
-O ruído de inicialização do runtime de planilhas do ambiente foi preservado no
-recibo; os processos retornaram `0` e o ruído não alterou o resultado dos testes.
+O ruído externo de aquecimento do runtime de planilhas foi preservado nos
+recibos; os processos retornaram `0` e o ruído não alterou os resultados.
 
-Essas execuções demonstram somente os componentes auxiliares ligados pelos
-hashes do recibo. Elas não equivalem à suíte integral do control plane, não são
-recibo pinado ao commit do branch e não constituem execução remota.
+Essas execuções são delimitadas. Elas não constituem a suíte integral do branch,
+recibo pinado ao commit do clone ou execução remota.
 
-Os demais comandos estão versionados no workflow, mas sua execução conjunta
-ainda requer um clone integral ou runner observável. Código presente não é
-recibo de execução.
+## Workflow único
+
+O workflow estrutural existente foi ampliado; nenhum YAML concorrente foi
+criado. Quando houver execução observável, ele deverá:
+
+```text
+compilar validadores e testes
+→ executar suítes positivas e adversariais
+→ validar os controles estruturais anteriores
+→ executar scanner de claims
+→ validar ledger-base e três lotes
+→ validar residual histórico e resolução CC028
+→ medir precisão lexical
+→ validar contrato independente da resolução
+→ construir refresh do escopo atual
+→ verificar as fronteiras fail-closed
+→ validar recibo auxiliar contra hashes
+→ produzir checksums
+→ publicar 15 relatórios e o manifesto de checksums
+```
+
+O workflow não exige zero candidatos novos. Ele exige que qualquer candidato
+novo esteja explicitamente enumerado como `TOKEN_VAZIO`.
 
 ## Estado do gap
 
@@ -280,8 +317,10 @@ historical residual preserved       = CC028
 CC028 materialization               = VERIFIED
 auxiliary component tests           = 15/15 PASS
 auxiliary receipt-validator tests   = 6/6 PASS
+resolution contract targeted checks = 10/10 rejected
 observable full scanner receipt     = TOKEN_VAZIO
-scope refresh after snapshot        = TOKEN_VAZIO
+current-commit scope refresh         = TOKEN_VAZIO
+full-byte repository receipt        = TOKEN_VAZIO
 portfolio exit criteria             = false
 claim_allowed                       = false
 certification_claim                 = false
@@ -290,12 +329,13 @@ certification_claim                 = false
 ## Próximo gate
 
 ```text
-OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH
+EXECUTE_OBSERVABLE_SCANNER_AND_SCOPE_REFRESH
 ```
 
-O próximo passo é executar o controle em um clone integral observável, gerar os
-13 relatórios e checksums e atualizar o escopo contra o head vigente. Candidatos
-novos entram em lote append-only; não reabrem nem apagam a história anterior.
+O próximo passo é executar o controle em clone integral e limpo, produzir os 15
+relatórios e checksums, observar os candidatos novos reais e revisar cada um por
+lote append-only. Depois ainda será necessário produzir evidência byte a byte do
+escopo não coberto pelo filtro.
 
 O P0 não é fechado para os 126 repositórios até que cada autoridade execute o
 scanner, trate seus candidatos e produza recibos reproduzíveis. O presente
