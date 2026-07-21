@@ -23,11 +23,14 @@ indices/claim_review_batches/CLAIM_REVIEW_BATCH_001_2026-07-20.json
 indices/claim_review_batches/CLAIM_REVIEW_BATCH_002_2026-07-20.json
 indices/claim_review_batches/CLAIM_REVIEW_BATCH_003_2026-07-21.json
 schemas/claim-contradiction-ledger.schema.json
+schemas/claim-review-resolution.schema.json
 scripts/validate_claim_vocabulary.py
 scripts/validate_claim_contradiction_ledger.py
 scripts/validate_claim_review_chain.py
 scripts/validate_claim_review_residual.py
 scripts/validate_claim_discovery_precision.py
+scripts/validate_claim_resolution_contract.py
+scripts/build_claim_scope_refresh.py
 scripts/validate_g006_auxiliary_receipt.py
 scripts/run_g006_local_gate.py
 tools/materialize_github_blob.py
@@ -36,15 +39,18 @@ tests/test_claim_contradiction_ledger.py
 tests/test_claim_review_chain.py
 tests/test_claim_review_residual.py
 tests/test_claim_discovery_precision.py
+tests/test_claim_resolution_contract.py
+tests/test_claim_scope_refresh.py
 tests/test_github_blob_materializer.py
 tests/test_g006_local_gate.py
 tests/test_g006_auxiliary_receipt.py
 resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json
+resultados/G006_RESOLUTION_CONTRACT_LOCAL_VALIDATION_2026-07-21.json
 docs/G006_LOCAL_EXECUTION.md
 .github/workflows/topology-validation.yml
 ```
 
-## Snapshot delimitado
+## Baseline indexada delimitada
 
 A busca indexada por `COMPLETE` no commit
 `4016c51e024573a3875457fceb6d05926e07a07b` produziu 36 arquivos candidatos.
@@ -65,9 +71,9 @@ claim_allowed            = false
 certification_claim      = false
 ```
 
-A revisão integral da baseline indexada não fecha automaticamente o G006 no
-portfólio. Ela fecha somente a classificação semântica dos 36 candidatos do
-snapshot pinado.
+A revisão integral da baseline indexada fecha somente a classificação semântica
+dos 36 candidatos do snapshot pinado. Não fecha o scan do branch atual nem o
+portfólio de 126 repositórios.
 
 ## Arquitetura append-only
 
@@ -94,7 +100,7 @@ tentados, o blob observado e o estado de conhecimento daquele momento.
 
 O arquivo `indices/REPOSITORY_INVENTORY.json` é um JSON em uma única linha.
 A resposta UTF-8 e a leitura direta do blob foram truncadas. A rota alternativa
-usou o conteúdo Base64 do GitHub dividido em seis intervalos alinhados:
+usou conteúdo Base64 do GitHub dividido em seis intervalos alinhados:
 
 ```text
 1–80
@@ -149,20 +155,31 @@ COMPLETE substrings     = 1
 false-positive source   = completeness_ratio
 ```
 
-Portanto, `CC028` foi classificado como `SAFE_EXACT_TOKEN_ABSENCE`. Isso não é
-uma dispensa por nome: é uma resolução ligada a bytes, hashes, parse, digest,
-contagem lexical e commit pinado.
+Portanto, `CC028` foi classificado como `SAFE_EXACT_TOKEN_ABSENCE`. A resolução
+está ligada a bytes, hashes, parse, digest, contagem lexical e commit pinado.
 
-## Prevenção de recorrência
+## Contrato independente da resolução
 
-Foi adicionado um auditor independente de precisão de descoberta:
+O arquivo `scripts/validate_claim_resolution_contract.py` verifica de forma
+independente:
 
 ```text
-scripts/validate_claim_discovery_precision.py
-tests/test_claim_discovery_precision.py
+seis fronteiras obrigatórias = false
+identidade Git exata
+SHA-256 exato
+seis faixas Base64
+437 linhas codificadas
+19,542 bytes decodificados
+digests canônicos coincidentes
+zero tokens fortes exatos
+histórico residual preservado
+TOKEN_VAZIO atual = 0
 ```
 
-Ele separa:
+O schema `schemas/claim-review-resolution.schema.json` é descritivo. Ele não
+substitui a validação executável nem prova identidade criptográfica por si só.
+
+## Precisão de descoberta
 
 ```text
 substring occurrence
@@ -170,9 +187,88 @@ substring occurrence
 != explicit machine claim
 ```
 
-A busca ampla permanece útil para triagem, mas não pode decidir a classificação
-semântica. O relatório registra totais de substring, tokens exatos e falsos
-positivos lexicais por arquivo.
+O auditor `validate_claim_discovery_precision.py` registra:
+
+- totais de substring;
+- totais de tokens exatos;
+- falsos positivos lexicais;
+- caminhos de todos os arquivos com token exato;
+- truncamento ou ausência de cobertura;
+- resolução conhecida do `CC028`.
+
+A busca ampla permanece triagem; o token com fronteira é a unidade que alimenta
+o refresh de escopo.
+
+## Refresh fail-closed do escopo atual
+
+O arquivo `scripts/build_claim_scope_refresh.py` consome:
+
+```text
+ledger-base
+HEAD da baseline
+claim-vocabulary-validation.json
+claim-discovery-precision-validation.json
+commit atual observado
+```
+
+Ele deriva três conjuntos:
+
+```text
+sinais atuais já conhecidos na baseline
+candidatos novos após o snapshot
+entradas antigas sem sinal no scan filtrado
+```
+
+Qualquer caminho novo recebe ID estável:
+
+```text
+NCC-<12HEX>
+```
+
+E nasce obrigatoriamente como:
+
+```text
+state = TOKEN_VAZIO
+owner_role = R12
+claim_allowed = false
+```
+
+Não existe allowlist automática para novos arquivos de governança, scripts,
+testes ou documentação. A ausência de sinal atual também não transforma uma
+entrada histórica em resolvida.
+
+O refresh declara sempre:
+
+```text
+filtered_scope_refresh_complete = false
+full_byte_repository_scan_proven = false
+portfolio_exit_criteria_met = false
+claim_allowed = false
+certification_claim = false
+```
+
+Seu `status=PASS` comprova construção coerente do delta; não comprova zero
+candidatos novos.
+
+## Evidência auxiliar realmente executada
+
+No ambiente de preparação foram executados:
+
+```text
+py_compile de materializador/runner e testes = 4/4 PASS
+suítes dos componentes auxiliares            = 15/15 PASS
+suíte do validador do recibo auxiliar        = 6/6 PASS
+contrato independente — py_compile           = PASS
+contrato independente — validação canônica   = PASS
+contrato independente — mutações rejeitadas  = 10/10
+```
+
+Houve ruído de inicialização do runtime de planilhas do ambiente. O ruído foi
+preservado nos recibos; os processos retornaram `0` e os resultados acima não
+foram afetados.
+
+Essas execuções são autocontidas e não equivalem à suíte integral do branch, não
+são recibo pinado ao commit do clone e não constituem execução remota.
 
 ## Cobertura adversarial preparada
 
@@ -191,7 +287,13 @@ Os testes versionados cobrem, entre outros:
 - reescrita da falha histórica como sucesso;
 - reaparecimento silencioso do residual;
 - confusão entre `completeness_ratio` e token `COMPLETE`;
-- tentativa de promover o portfólio a partir da revisão do snapshot.
+- fronteira ausente ou promovida na resolução;
+- lista de tokens exatos truncada;
+- lista de contradições truncada;
+- arquivo ilegível durante refresh;
+- candidato novo dispensado automaticamente;
+- ausência de sinal antigo tratada como resolução;
+- tentativa de promover o portfólio a partir do snapshot.
 
 ## Workflow único
 
@@ -201,16 +303,21 @@ criado. Quando houver execução observável, ele deverá:
 ```text
 compilar validadores e testes
 → executar suítes positivas e adversariais
-→ validar os controles estruturais anteriores
+→ validar controles estruturais anteriores
 → executar scanner de claims
 → validar ledger-base e três lotes
 → validar residual histórico e resolução CC028
 → medir precisão lexical
-→ verificar invariantes 36/36
+→ validar contrato independente da resolução
+→ construir refresh do escopo atual
+→ verificar invariantes fail-closed
+→ validar recibo auxiliar contra hashes dos arquivos
 → produzir checksums
-→ validar o recibo auxiliar contra hashes dos arquivos
-→ publicar 13 relatórios e o manifesto de checksums
+→ publicar 15 relatórios e o manifesto de checksums
 ```
+
+O gate aceita candidatos novos somente quando eles estiverem explicitamente
+enumerados como `TOKEN_VAZIO`; não exige uma falsa contagem zero.
 
 ## Estado de execução
 
@@ -223,37 +330,35 @@ classificação da baseline indexada      = 36/36
 auxiliary py_compile                    = 4/4 PASS executado
 auxiliary component tests               = 15/15 PASS executado
 auxiliary receipt validator tests       = 6/6 PASS executado
-auxiliary receipt file hashes           = VERIFIED
+resolution contract targeted checks     = 10/10 rejeitados
 artefatos e testes versionados          = true
 workflow integrado                      = IMPLEMENTED_NOT_EXECUTED
+scope refresh builder                   = IMPLEMENTED_NOT_EXECUTED
 execução da suíte no clone integral     = TOKEN_VAZIO
 scanner integral observável do branch   = TOKEN_VAZIO
+refresh do commit atual                 = TOKEN_VAZIO
 runner remoto observável                = TOKEN_VAZIO
-scope refresh posterior ao snapshot     = TOKEN_VAZIO
+full-byte repository receipt            = TOKEN_VAZIO
 portfolio G006 fechado                  = false
 claim_allowed                           = false
 certification_claim                     = false
 ```
 
-A materialização e as verificações do CC028 foram executadas. Também foram
-executadas as suítes autocontidas do materializador, runner e validador do
-recibo. Essas execuções auxiliares não equivalem à suíte integral do control
-plane, não estão pinadas ao commit do branch e não constituem recibo remoto.
-
-A suíte completa do branch e o workflow remoto continuam não executados; nenhum
-teste apenas versionado foi convertido em `PASS`.
+Nenhum teste apenas versionado foi convertido em `PASS`. Nenhum refresh ainda
+não executado foi interpretado como ausência de candidatos novos.
 
 ## Próximo gate
 
 ```text
-OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH
+EXECUTE_OBSERVABLE_SCANNER_AND_SCOPE_REFRESH
 ```
 
 O próximo fechamento delimitado exige:
 
-1. executar a suíte em um clone integral observável;
-2. produzir os 13 relatórios e checksums;
-3. atualizar a busca para o head vigente e medir drift desde o snapshot pinado;
-4. tratar qualquer candidato novo pela mesma cadeia append-only;
-5. manter `claim_allowed=false` até decisão separada;
-6. não interpretar o fechamento do `Mapa` como fechamento dos 126 repositórios.
+1. executar a suíte em um clone integral e limpo, pinado ao commit;
+2. produzir os 15 relatórios e checksums;
+3. observar o número real de candidatos novos no refresh;
+4. revisar cada candidato novo por lote append-only;
+5. produzir recibo byte a byte do escopo não coberto pelo filtro;
+6. manter `claim_allowed=false` até decisão separada;
+7. não interpretar o fechamento do `Mapa` como fechamento dos 126 repositórios.
