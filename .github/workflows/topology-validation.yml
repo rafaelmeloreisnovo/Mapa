@@ -61,6 +61,7 @@ jobs:
             scripts/validate_claim_review_chain.py \
             scripts/validate_claim_review_residual.py \
             scripts/validate_claim_discovery_precision.py \
+            scripts/validate_claim_resolution_contract.py \
             scripts/validate_g006_auxiliary_receipt.py \
             scripts/run_g006_local_gate.py \
             tools/materialize_github_blob.py \
@@ -77,6 +78,7 @@ jobs:
             tests/test_claim_review_chain.py \
             tests/test_claim_review_residual.py \
             tests/test_claim_discovery_precision.py \
+            tests/test_claim_resolution_contract.py \
             tests/test_github_blob_materializer.py \
             tests/test_g006_local_gate.py \
             tests/test_g006_auxiliary_receipt.py
@@ -97,6 +99,7 @@ jobs:
             tests/test_claim_review_chain.py \
             tests/test_claim_review_residual.py \
             tests/test_claim_discovery_precision.py \
+            tests/test_claim_resolution_contract.py \
             tests/test_github_blob_materializer.py \
             tests/test_g006_local_gate.py \
             tests/test_g006_auxiliary_receipt.py
@@ -145,6 +148,9 @@ jobs:
             --root . \
             --policy indices/CLAIM_VOCABULARY_POLICY.json \
             --write-report claim-discovery-precision-validation.json
+          python3 scripts/validate_claim_resolution_contract.py \
+            --path indices/CLAIM_REVIEW_RESOLUTION_CC028.json \
+            --write-report claim-resolution-contract-validation.json
           python3 scripts/validate_g006_auxiliary_receipt.py \
             --receipt resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json \
             --root . \
@@ -165,6 +171,7 @@ jobs:
             claim-review-chain-validation.json \
             claim-review-residual-validation.json \
             claim-discovery-precision-validation.json \
+            claim-resolution-contract-validation.json \
             g006-auxiliary-receipt-validation.json
           do
             python3 -m json.tool "$report" >/dev/null
@@ -190,6 +197,7 @@ jobs:
               "claim_chain": read("claim-review-chain-validation.json"),
               "claim_residual": read("claim-review-residual-validation.json"),
               "claim_precision": read("claim-discovery-precision-validation.json"),
+              "claim_resolution": read("claim-resolution-contract-validation.json"),
               "auxiliary_receipt": read("g006-auxiliary-receipt-validation.json"),
           }
 
@@ -267,6 +275,21 @@ jobs:
           assert reports["claim_precision"]["claim_allowed"] is False
           assert reports["claim_precision"]["certification_claim"] is False
 
+          assert reports["claim_resolution"]["entry_id"] == "CC028"
+          assert reports["claim_resolution"]["boundary_count"] == 6
+          assert reports["claim_resolution"]["all_boundaries_false"] is True
+          assert reports["claim_resolution"]["decoded_size_bytes"] == 19542
+          assert reports["claim_resolution"]["encoded_line_count"] == 437
+          assert reports["claim_resolution"]["git_blob_sha1"] == "b43554096f00c0918997dd9f9b11787cec4d4e52"
+          assert reports["claim_resolution"]["sha256"] == "b19d27084e5be35a2597f07346450745abfd7084c0a831b48e0eef4c57058e02"
+          assert reports["claim_resolution"]["exact_strong_token_count"] == 0
+          assert reports["claim_resolution"]["complete_substring_count"] == 1
+          assert reports["claim_resolution"]["historical_residual_preserved"] is True
+          assert reports["claim_resolution"]["current_token_vazio_count"] == 0
+          assert reports["claim_resolution"]["portfolio_exit_criteria_met"] is False
+          assert reports["claim_resolution"]["claim_allowed"] is False
+          assert reports["claim_resolution"]["certification_claim"] is False
+
           assert reports["auxiliary_receipt"]["compiled_file_count"] == 4
           assert reports["auxiliary_receipt"]["tests_run"] == 15
           assert reports["auxiliary_receipt"]["tests_passed"] == 15
@@ -300,6 +323,7 @@ jobs:
               schemas/repository_inventory_batch.schema.json \
               schemas/repository-gap-map.schema.json \
               schemas/claim-contradiction-ledger.schema.json \
+              schemas/claim-review-resolution.schema.json \
               biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md \
               biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md \
               biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md \
@@ -322,6 +346,7 @@ jobs:
               scripts/validate_claim_review_chain.py \
               scripts/validate_claim_review_residual.py \
               scripts/validate_claim_discovery_precision.py \
+              scripts/validate_claim_resolution_contract.py \
               scripts/validate_g006_auxiliary_receipt.py \
               scripts/run_g006_local_gate.py \
               tools/materialize_github_blob.py \
@@ -338,6 +363,7 @@ jobs:
               tests/test_claim_review_chain.py \
               tests/test_claim_review_residual.py \
               tests/test_claim_discovery_precision.py \
+              tests/test_claim_resolution_contract.py \
               tests/test_github_blob_materializer.py \
               tests/test_g006_local_gate.py \
               tests/test_g006_auxiliary_receipt.py \
@@ -364,6 +390,7 @@ jobs:
             claim-review-chain-validation.json
             claim-review-residual-validation.json
             claim-discovery-precision-validation.json
+            claim-resolution-contract-validation.json
             g006-auxiliary-receipt-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
