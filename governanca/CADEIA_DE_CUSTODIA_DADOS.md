@@ -47,22 +47,27 @@ O contrato canônico está em:
 
 - `schemas/cadeia_custodia_evento.schema.json`;
 - `indices/CADEIA_CUSTODIA_EVENTOS.jsonl`;
-- `scripts/validate_chain_of_custody.py`.
+- `scripts/validate_chain_of_custody.py`;
+- `scripts/measure_custody_baseline.py`.
 
-Cada linha do ledger JSONL representa um evento imutável. Correções não apagam
-o evento anterior: produzem novo evento `CORRECT`, ligado por
-`previous_event_id`.
+Cada linha do ledger JSONL representa um evento imutável. O
+`previous_event_id` aponta para o evento válido imediatamente anterior e forma a
+cadeia linear. Uma correção usa `operation=CORRECT` e
+`supersedes_event_id` para indicar qual evento está sendo corrigido, sem apagar o
+histórico.
 
 ### Campos essenciais
 
 | Campo | Função |
 |---|---|
 | `event_id` | identidade única e ordenável do evento |
-| `timestamp_utc` | tempo normalizado em UTC |
+| `timestamp_utc` | tempo UTC estrito, encerrado em `Z` |
 | `repository` / `branch` | localização operacional |
 | `actor` | responsável humano, serviço ou automação |
 | `operation` | ação realizada |
 | `object` | caminho, tipo, tamanho e hashes disponíveis |
+| `previous_event_id` | elo com o evento válido imediatamente anterior |
+| `supersedes_event_id` | alvo explícito de uma operação `CORRECT` |
 | `epistemic_state` | `FATO`, `HIPOTESE`, `SIMBOLICO` ou `TOKEN_VAZIO` |
 | `claim_allowed` | trava explícita contra afirmação sem evidência |
 | `evidence` | commits, arquivos, hashes, logs, medições ou revisão |
@@ -96,12 +101,15 @@ informação parcial.
 - Hash ausente deve ser `null`, nunca inventado.
 - `event_hash_sha256`, quando presente, cobre o JSON canônico do evento sem o
   próprio campo de hash.
+- `--repo-root` ativa recomputação de tamanho e SHA-256 dos objetos declarados.
 
 ### 5.2 Rastreabilidade
 
 - toda referência deve apontar para commit, arquivo, log, medição ou fonte;
-- caminhos devem ser relativos ao repositório e não podem conter `..`;
-- um evento que depende de outro deve usar `previous_event_id`;
+- caminhos devem ser relativos ao repositório, sem `..`, barra invertida ou
+  escape após resolução;
+- `previous_event_id` deve apontar para o evento válido imediatamente anterior;
+- evento inválido não se torna âncora para eventos posteriores;
 - exclusões lógicas usam `RETIRE`; o histórico permanece preservado.
 
 ### 5.3 Reprodutibilidade
@@ -109,7 +117,8 @@ informação parcial.
 - registrar método, entrada, versão e ambiente quando relevantes;
 - preferir validadores determinísticos e dependências mínimas;
 - diferenciar validação estrutural de validação científica;
-- não declarar conformidade, certificação ou desempenho sem teste reproduzível.
+- não declarar conformidade, certificação ou desempenho sem teste reproduzível;
+- executar a suíte por descoberta para cobrir todos os testes `test_*.py`.
 
 ### 5.4 Confidencialidade e minimização
 
@@ -139,29 +148,33 @@ Neste repositório, “6Sigma” significa uso disciplinado de **DMAIC**, defini
 defeito, linha de base, alvo e controle. Não significa certificação externa nem
 afirmação automática de nível sigma.
 
-### Defeitos mensuráveis iniciais
+### Oportunidades de qualidade do piloto
 
-- evento sem origem;
-- afirmação liberada sem evidência;
-- hash declarado inválido;
-- caminho inseguro;
-- `TOKEN_VAZIO` sem próximo passo;
-- quebra de encadeamento;
-- objeto sem classificação ou dono operacional.
+Cada evento possui oito oportunidades mensuradas:
+
+1. estrutura obrigatória;
+2. identidade e unicidade;
+3. tempo UTC e monotonicidade;
+4. caminho seguro;
+5. coerência entre evidência e claim;
+6. coerência dos controles;
+7. integridade do elo da cadeia;
+8. integridade de tamanho e hash declarados.
 
 ### Métricas
 
 ```text
-completude = campos_validos / campos_obrigatorios
+completude = eventos_validos / eventos_totais
 rastreabilidade = eventos_com_evidencia / eventos_totais
 integridade = hashes_verificados / hashes_declarados
+reprodutibilidade = eventos_com_controle_verificado / eventos_totais
 resolucao_vazio = TOKEN_VAZIO_resolvidos / TOKEN_VAZIO_totais
-DPMO = defeitos / oportunidades × 1_000_000
+DPMO_observado = defeitos / oportunidades × 1_000_000
 ```
 
-O nível sigma só pode ser calculado quando oportunidades, universo, janela e
-critério de defeito estiverem definidos e medidos. Antes disso, registrar
-`TOKEN_VAZIO`.
+Um DPMO observado em amostra piloto não equivale a capacidade de processo. O
+nível sigma permanece `TOKEN_VAZIO` enquanto não houver convenção estatística
+aprovada, estabilidade do processo e janelas repetidas suficientes.
 
 ## 8. Responsabilidades mínimas
 
@@ -183,9 +196,21 @@ executada e a evidência correspondente.
 3. importar legado apenas quando houver origem verificável;
 4. medir defeitos antes de otimizar;
 5. automatizar somente regras estáveis;
-6. manter revisão humana para semântica, risco e autorização de claim.
+6. manter revisão humana para semântica, risco e autorização de claim;
+7. manter os corpos nos repositórios responsáveis e registrar no `Mapa` apenas
+   referências, commits, PRs, estados e fronteiras.
 
-## 10. Estado de tecnologias futuras
+## 10. Evidência operacional
+
+A execução do piloto é registrada em:
+
+- `auditoria/PR39_EXECUTION_EVIDENCE.json`;
+- `auditoria/BASELINE_CADEIA_CUSTODIA_2026-07-21.json`.
+
+Esses artefatos distinguem execução local observada de GitHub Actions. Nenhuma
+Action remota é necessária para este ciclo e nenhum resultado de CI é inferido.
+
+## 11. Estado de tecnologias futuras
 
 Merkle DAG, assinatura digital, transparência verificável e armazenamento
 content-addressed são caminhos coerentes, mas permanecem `TOKEN_VAZIO` até que o
