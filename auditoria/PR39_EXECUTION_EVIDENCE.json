@@ -1,0 +1,72 @@
+{
+  "schema": "mapa.execution-evidence.v1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 39,
+  "branch": "codex/governanca-cadeia-custodia-6sigma",
+  "executed_at_utc": "2026-07-21T13:02:48Z",
+  "execution_mode": "local_no_github_actions",
+  "environment": {
+    "runtime": "OpenAI execution sandbox",
+    "python": "3.13.5 (main, May  5 2026, 21:05:52)",
+    "platform": "Linux-4.4.0-x86_64-with-glibc2.41"
+  },
+  "commands": [
+    {
+      "command": "python3 -S scripts/validate_chain_of_custody.py indices/CADEIA_CUSTODIA_EVENTOS.jsonl --repo-root .",
+      "exit_code": 0,
+      "normalized_stdout": "OK: 12 custody event(s) validated; chain semantics preserved"
+    },
+    {
+      "command": "python3 -S -m unittest discover -s tests -p 'test_*.py'",
+      "exit_code": 0,
+      "tests_run": 19,
+      "normalized_result": "OK"
+    },
+    {
+      "command": "python3 -S scripts/measure_custody_baseline.py indices/CADEIA_CUSTODIA_EVENTOS.jsonl --repo-root .",
+      "exit_code": 0,
+      "normalized_metrics": {
+        "event_count": 12,
+        "total_opportunities": 96,
+        "defect_count": 0,
+        "dpmo_observed": 0.0,
+        "sigma_level": "TOKEN_VAZIO"
+      }
+    }
+  ],
+  "observed": {
+    "architecture": "IMPLEMENTADA",
+    "schema": "IMPLEMENTADO_E_ENDURECIDO",
+    "ledger": "IMPLEMENTADO_E_VALIDADO",
+    "validator": "IMPLEMENTADO_E_EXECUTADO",
+    "tests_code": "IMPLEMENTADOS",
+    "tests_execution": "PASS_19_OF_19",
+    "baseline_6sigma": "MEASURED_PILOT",
+    "sigma_level": "TOKEN_VAZIO",
+    "github_actions": "NOT_RUN_BY_POLICY",
+    "merge": "NOT_PERFORMED",
+    "main_modified": false
+  },
+  "unresolved": [
+    {
+      "item": "human_review_and_merge_decision",
+      "state": "TOKEN_VAZIO",
+      "next_verifiable_step": "Review the complete PR diff and record the decision without automatic merge."
+    },
+    {
+      "item": "sigma_level",
+      "state": "TOKEN_VAZIO",
+      "next_verifiable_step": "Collect repeated windows, approve the statistical convention, and evaluate process stability."
+    },
+    {
+      "item": "other_repository_rollout",
+      "state": "ROADMAP",
+      "next_verifiable_step": "Select one repository only after the Mapa pilot review is accepted."
+    }
+  ],
+  "checkpoint": {
+    "last_event_id": "COC-20260721T130133Z-EXECUTION_EVIDENCE",
+    "event_count": 12,
+    "note": "Append-only governance corrections may follow this measured checkpoint."
+  }
+}
