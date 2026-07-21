@@ -188,21 +188,39 @@ A busca ampla é triagem. A fronteira semântica é o token exato:
 
 ## Execução local prevista
 
+O procedimento operacional completo e seguro para Termux/Linux está em:
+
+```text
+docs/G006_LOCAL_EXECUTION.md
+```
+
+Comandos nucleares do control plane:
+
 ```bash
 python3 -m py_compile \
   scripts/validate_claim_vocabulary.py \
   scripts/validate_claim_contradiction_ledger.py \
   scripts/validate_claim_review_chain.py \
   scripts/validate_claim_review_residual.py \
-  scripts/validate_claim_discovery_precision.py
+  scripts/validate_claim_discovery_precision.py \
+  scripts/validate_g006_auxiliary_receipt.py \
+  scripts/run_g006_local_gate.py \
+  tools/materialize_github_blob.py
 
 python3 -m unittest -v \
   tests/test_claim_vocabulary.py \
   tests/test_claim_contradiction_ledger.py \
   tests/test_claim_review_chain.py \
   tests/test_claim_review_residual.py \
-  tests/test_claim_discovery_precision.py
+  tests/test_claim_discovery_precision.py \
+  tests/test_github_blob_materializer.py \
+  tests/test_g006_local_gate.py \
+  tests/test_g006_auxiliary_receipt.py
+```
 
+Validações materializadas:
+
+```bash
 python3 scripts/validate_claim_vocabulary.py \
   --root . \
   --policy indices/CLAIM_VOCABULARY_POLICY.json \
@@ -224,11 +242,33 @@ python3 scripts/validate_claim_discovery_precision.py \
   --root . \
   --policy indices/CLAIM_VOCABULARY_POLICY.json \
   --write-report claim-discovery-precision-validation.json
+
+python3 scripts/validate_g006_auxiliary_receipt.py \
+  --receipt resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json \
+  --root . \
+  --write-report g006-auxiliary-receipt-validation.json
 ```
 
-Esses comandos estão versionados no workflow, mas sua execução conjunta ainda
-requer um clone integral ou runner observável. Código presente não é recibo de
-execução.
+## Evidência auxiliar realmente executada
+
+No ambiente de preparação foram executadas, de modo autocontido:
+
+```text
+py_compile de materializador/runner e testes = 4/4 PASS
+suítes dos componentes auxiliares            = 15/15 PASS
+suíte do validador do recibo auxiliar        = 6/6 PASS
+```
+
+O ruído de inicialização do runtime de planilhas do ambiente foi preservado no
+recibo; os processos retornaram `0` e o ruído não alterou o resultado dos testes.
+
+Essas execuções demonstram somente os componentes auxiliares ligados pelos
+hashes do recibo. Elas não equivalem à suíte integral do control plane, não são
+recibo pinado ao commit do branch e não constituem execução remota.
+
+Os demais comandos estão versionados no workflow, mas sua execução conjunta
+ainda requer um clone integral ou runner observável. Código presente não é
+recibo de execução.
 
 ## Estado do gap
 
@@ -238,6 +278,8 @@ bounded indexed semantic review     = 36/36
 current indexed residual            = 0
 historical residual preserved       = CC028
 CC028 materialization               = VERIFIED
+auxiliary component tests           = 15/15 PASS
+auxiliary receipt-validator tests   = 6/6 PASS
 observable full scanner receipt     = TOKEN_VAZIO
 scope refresh after snapshot        = TOKEN_VAZIO
 portfolio exit criteria             = false
@@ -252,7 +294,7 @@ OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH
 ```
 
 O próximo passo é executar o controle em um clone integral observável, gerar os
-12 relatórios e checksums e atualizar o escopo contra o head vigente. Candidatos
+13 relatórios e checksums e atualizar o escopo contra o head vigente. Candidatos
 novos entram em lote append-only; não reabrem nem apagam a história anterior.
 
 O P0 não é fechado para os 126 repositórios até que cada autoridade execute o
