@@ -1,0 +1,200 @@
+{
+  "authority_repository": "rafaelmeloreisnovo/Mapa",
+  "batch_id": "CLAIM_REVIEW_BATCH_001_2026-07-20",
+  "boundaries": {
+    "automatic_dismissal": false,
+    "automatic_rewrite": false,
+    "certification_claim": false,
+    "claim_allowed": false,
+    "portfolio_exit_criteria_met": false,
+    "token_vazio_is_zero": false,
+    "unread_file_can_be_reviewed_safe": false
+  },
+  "decisions": [
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_VALIDATOR_LITERAL",
+      "entry_id": "CC001",
+      "evidence_pointer": "tools/repository_gap_mapper.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "tools/repository_gap_mapper.py",
+      "rationale": "The complete file was read in two contiguous ranges; COMPLETE appears only as hash-status and closure-warning vocabulary, with claim_allowed=false.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_BOUNDED_CONTEXT",
+      "entry_id": "CC003",
+      "evidence_pointer": "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md",
+      "rationale": "The document explicitly states ACTIVE does not mean complete domain evidence and preserves the device gap as TOKEN_VAZIO.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_VALIDATOR_LITERAL",
+      "entry_id": "CC004",
+      "evidence_pointer": "scripts/validate_repository_inventory.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "scripts/validate_repository_inventory.py",
+      "rationale": "COMPLETE is a controlled inventory state accepted only when every accessible record is materialized; PARTIAL requires claim_allowed=false.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_NEGATION",
+      "entry_id": "CC006",
+      "evidence_pointer": "resultados/AUDIT_INVENTORY_CORRECTION_2026-07-17.md@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "resultados/AUDIT_INVENTORY_CORRECTION_2026-07-17.md",
+      "rationale": "The report documents prior overstatement, remains PARTIAL, and defines strict criteria before COMPLETE.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_MACHINE_BOUNDARY",
+      "entry_id": "CC009",
+      "evidence_pointer": "indices/TOROIDAL_RESEARCH_FEDERATION.json@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "indices/TOROIDAL_RESEARCH_FEDERATION.json",
+      "rationale": "The registry separates ACTIVE adapter state from DEVICE_RECEIPT_COMPLETE and preserves one TOKEN_VAZIO evidence gap.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_NEGATIVE_CONTROL",
+      "entry_id": "CC011",
+      "evidence_pointer": "resultados/BATCH_004_LOCAL_VALIDATION.json@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "resultados/BATCH_004_LOCAL_VALIDATION.json",
+      "rationale": "The local receipt records automatic_complete_promotion=false and remaining_token_vazio=75.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_ORGANIZATIONAL_LABEL",
+      "entry_id": "CC015",
+      "evidence_pointer": "README.md@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "README.md",
+      "rationale": "The occurrence is an organizational directory label for completed work, not a machine claim state or certification assertion.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_POLICY_REFERENCE",
+      "entry_id": "CC016",
+      "evidence_pointer": "scripts/validate_iso_operational_readiness.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "scripts/validate_iso_operational_readiness.py",
+      "rationale": "The validator encodes G006 as a gap and forbids claim, conformity and certification promotion.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_VALIDATOR_LITERAL",
+      "entry_id": "CC021",
+      "evidence_pointer": "scripts/validate_repository_inventory_head.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "scripts/validate_repository_inventory_head.py",
+      "rationale": "The file derives inventory state and always reports claim_allowed=false; COMPLETE is not used as an unbounded promotion.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_VALIDATOR_LITERAL",
+      "entry_id": "CC024",
+      "evidence_pointer": "scripts/validate_platform_assurance_pointer.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "scripts/validate_platform_assurance_pointer.py",
+      "rationale": "The validator recognizes blocked and TOKEN_VAZIO routes, requires zero promotion-ready items, and keeps claim_allowed=false.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_SCHEMA_LITERAL",
+      "entry_id": "CC025",
+      "evidence_pointer": "schemas/repository_inventory.schema.json@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "schemas/repository_inventory.schema.json",
+      "rationale": "The schema is explicitly descriptive and states that it is not proof by itself.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_TEST_FIXTURE",
+      "entry_id": "CC033",
+      "evidence_pointer": "tests/test_repository_inventory.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "tests/test_repository_inventory.py",
+      "rationale": "COMPLETE occurs only in an adversarial test proving incomplete inventory cannot be promoted.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_TEST_FIXTURE",
+      "entry_id": "CC034",
+      "evidence_pointer": "tests/test_inventory_batch.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "tests/test_inventory_batch.py",
+      "rationale": "COMPLETE occurs only in a test asserting ingestion never auto-promotes and claim_allowed remains false.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    },
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_TEST_FIXTURE",
+      "entry_id": "CC035",
+      "evidence_pointer": "tests/test_repository_gap_mapper.py@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "tests/test_repository_gap_mapper.py",
+      "rationale": "The file is a bounded scanner fixture; TOKEN_VAZIO is deliberately injected to verify incomplete-document detection.",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    }
+  ],
+  "derived": {
+    "blocking_transitions": 0,
+    "certification_claim": false,
+    "claim_allowed": false,
+    "decision_count": 14,
+    "next_gate": "CLAIM_REVIEW_BATCH_002_AND_OBSERVABLE_SCANNER_RECEIPT",
+    "portfolio_exit_criteria_met": false,
+    "result_reviewed_blocking_count": 0,
+    "result_reviewed_safe_count": 20,
+    "result_token_vazio_count": 16,
+    "safe_transitions": 14
+  },
+  "gap_id": "G006",
+  "generated_on": "2026-07-20",
+  "integrity": {
+    "algorithm": "blake2b-256",
+    "canonicalization": "json-sort-keys-utf8; integrity.digest blanked",
+    "digest": "607a1e7a072edc5a638b3f3713839b26ad20c558739a27b98d4d98468733e2da"
+  },
+  "review_method": "CONTIGUOUS_FILE_REVIEW_AT_PINNED_GIT_COMMIT",
+  "reviewer_role": "R12",
+  "schema": "mapa.claim-review-batch.v1",
+  "source_commit": "4016c51e024573a3875457fceb6d05926e07a07b",
+  "source_ledger": {
+    "candidate_count": 36,
+    "digest_blake2b_256": "104f932bb901c6f51ba65630f219597d7cf234fd49b6c3ca01f559d32c04cb82",
+    "path": "indices/CLAIM_CONTRADICTION_LEDGER.json",
+    "reviewed_blocking_count": 0,
+    "reviewed_safe_count": 6,
+    "token_vazio_count": 30
+  }
+}
