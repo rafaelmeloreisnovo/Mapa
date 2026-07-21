@@ -4,16 +4,22 @@
 [![Domain](https://img.shields.io/badge/Domain-Biblioteconomia%20%7C%20Rastreabilidade-purple)](biblioteconomia/)
 [![Research](https://img.shields.io/badge/Research-RAFAELIA%20Ecosystem-orange)](https://github.com/rafaelmeloreisnovo/ChipQuantum)
 
-> Central repository for organization, traceability, and knowledge mapping of the
-> RAFAELIA ecosystem — cataloging 28+ repositories as a living biblionomic system.
+> Central repository for organization, traceability, mechanism recognition, and visual knowledge mapping of the RAFAELIA ecosystem.
 
 ---
 
 ## Objective
 
-Transform files, images, conversations, indices, and results into a clear work tree —
-a **biblioteconomic knowledge system (KOS)** that classifies, catalogs, and cross-references
-the entire RAFAELIA research corpus.
+Transform files, images, conversations, indices, repository identities, mechanisms, and results into a clear work tree: a **living biblioteconomic knowledge system** that classifies, catalogs, cross-references, validates, and visually develops the RAFAELIA corpus.
+
+The repository is deliberately fail-closed:
+
+```text
+observed identity = FATO
+unread behavior   = TOKEN_VAZIO
+```
+
+A repository name never proves how that repository works.
 
 ---
 
@@ -21,46 +27,62 @@ the entire RAFAELIA research corpus.
 
 ```text
 Mapa/
-│
-├── arquitetura/       Work structure design and architecture diagrams
-├── biblioteconomia/   KOS: catalogs and classifies the 28-repo RAFAELIA acervo
-├── protocolos/        Execution rules and gap analysis
-├── indices/           Asset lists and source tracking
-├── resultados/        Delivery groupings and completed work
-│
-├── visual/            Conceptual maps (SVG), architecture images, screenshots
-│   ├── MAPA_BIBLIOTECONOMICO_RAFAELIA.svg
-│   ├── MATRIZ_CONCEITOS_RAFAELIA.svg
-│   ├── 2026-06-13_invariante_conteudo_rafaelia.svg
-│   └── file_*.png                      (captured screenshots)
-│
-├── workflows/         Operational validation and sweep workflows
-│   ├── WORKFLOW_VARREDURA_OPERACIONAL.md
-│   ├── ARQUITETURA_TRABALHO_IA_TRIPLA.md
-│   └── TORRE_DA_INFORMACAO.md
-│
+├── arquitetura/       Work structure and living-system architecture
+├── biblioteconomia/   KOS: classification, vocabulary, catalog, method
+├── protocolos/        Execution, integrity, claim, and gap contracts
+├── indices/           Inventories, graphs, generated indices, provenance
+├── data/              Federated routes and evidence-bounded mechanism profiles
+├── schemas/           Machine-readable data contracts
+├── scripts/           Deterministic builders and validators
+├── codigo/            Biblioteconomic tools retained from the original layer
+├── tests/             Executable invariants and adversarial boundaries
+├── resultados/        Audits, validations, and delivery records
+├── visual/            Human-readable concept maps and development views
+├── workflows/         Operational routes and sweep procedures
 ├── docs/              Supplementary documentation
-│   └── TESTE_CONECTOR.md
-│
-├── .github/           GitHub governance (ISSUE_TEMPLATE, workflows/CI, CODEOWNERS)
-│
-├── README.md          This file
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── CODE_OF_CONDUCT.md
-└── LICENSE
+└── .github/           GitHub governance and workflows
 ```
+
+---
+
+## Living System of Mechanisms
+
+The living-system layer represents each inventoried repository through eleven common questions:
+
+`purpose · inputs · transformations · outputs · interfaces · invariants · quality_controls · risks · relations · philosophical_context · visual_model`
+
+Each answer is explicitly marked as `FATO`, `HIPOTESE`, `PARABOLA`, or `TOKEN_VAZIO`. Resolved cells require evidence. Empty cells require a reason, next action, and exit criterion.
+
+Core files:
+
+- [`arquitetura/ARQUITETURA_SISTEMA_VIVO.md`](arquitetura/ARQUITETURA_SISTEMA_VIVO.md)
+- [`schemas/repository_mechanism.schema.json`](schemas/repository_mechanism.schema.json)
+- [`data/mechanisms/`](data/mechanisms/)
+- [`scripts/build_living_system_index.py`](scripts/build_living_system_index.py)
+- [`scripts/validate_living_system_index.py`](scripts/validate_living_system_index.py)
+- [`visual/SISTEMA_VIVO.md`](visual/SISTEMA_VIVO.md)
+
+```bash
+python3 scripts/build_living_system_index.py --write
+python3 scripts/build_living_system_index.py --check
+python3 scripts/validate_living_system_index.py
+python3 -m unittest tests/test_living_system_index.py -v
+```
+
+The generated `indices/LIVING_SYSTEM_INDEX.json` is deterministic and integrity-protected with BLAKE2b-256.
 
 ---
 
 ## Biblioteconomic Layer
 
-This repository implements a **library science classification system** for the RAFAELIA ecosystem:
+This repository implements a library-science classification system for the RAFAELIA ecosystem:
 
-- **cataloging**: each repository classified by domain, maturity, and interconnections
-- **indexing**: `indices/` tracks all assets and their origins
-- **navigation**: `biblioteconomia/` provides cross-repository reading paths
-- **visual maps**: `visual/` contains SVG concept maps and architecture diagrams
+- **cataloging**: repositories classified by identity, domain, maturity, and evidence status;
+- **indexing**: `indices/` tracks assets, sources, topology, inventory, and generated knowledge views;
+- **navigation**: `biblioteconomia/` and `visual/` provide cross-repository reading paths;
+- **mechanism recognition**: `data/mechanisms/` records how a repository works only after evidence review;
+- **lacuna preservation**: missing knowledge remains a valid, actionable `TOKEN_VAZIO`;
+- **validation**: stdlib-only tools derive metrics, detect conflicts, and fail closed.
 
 ---
 
@@ -70,12 +92,14 @@ This repository implements a **library science classification system** for the R
 |---|---|
 | [`ChipQuantum`](https://github.com/rafaelmeloreisnovo/ChipQuantum) | T⁷ toroidal cryptographic pipeline |
 | [`Cosmos`](https://github.com/rafaelmeloreisnovo/Cosmos) | Cosmological RAFAELIA framework |
-| [`papers`](https://github.com/rafaelmeloreisnovo/papers) | Exacordex and raefaelos research engine |
+| [`papers`](https://github.com/rafaelmeloreisnovo/papers) | Research and publication artifacts |
 | [`TeoremasTesesTeorias`](https://github.com/rafaelmeloreisnovo/TeoremasTesesTeorias) | Formal theorems and prior art |
 | [`GEOMETRIA_SOLAR_Maia_Inca`](https://github.com/rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca) | Solar geometry |
 | [`Catalogo-cosmologico`](https://github.com/rafaelmeloreisnovo/Catalogo-cosmologico) | Astronomical catalog |
 | [`llamaRafaelia`](https://github.com/rafaelmeloreisnovo/llamaRafaelia) | LLM inference framework |
 | [`Vectras-VM-Android`](https://github.com/rafaelmeloreisnovo/Vectras-VM-Android) | Android VM runtime |
+
+The table is navigational, not a substitute for the connector-backed inventory or mechanism evidence.
 
 ---
 
