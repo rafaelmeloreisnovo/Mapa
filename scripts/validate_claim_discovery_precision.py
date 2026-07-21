@@ -94,7 +94,7 @@ def scan_discovery_precision(
     files_skipped_by_size = 0
     unreadable_files: list[dict[str, str]] = []
     lexical_rows: list[dict[str, Any]] = []
-    exact_file_count = 0
+    exact_rows: list[dict[str, Any]] = []
     token_totals = {
         token: {
             "substring_count": 0,
@@ -127,18 +127,23 @@ def scan_discovery_precision(
             continue
 
         files_scanned += 1
-        file_exact = False
+        exact_tokens: dict[str, int] = {}
         false_tokens: dict[str, dict[str, int]] = {}
         for token in tokens:
             counts = token_counts(text, token)
             for key, value in counts.items():
                 token_totals[token][key] += value
             if counts["exact_count"]:
-                file_exact = True
+                exact_tokens[token] = counts["exact_count"]
             if counts["lexical_false_positive_count"]:
                 false_tokens[token] = counts
-        if file_exact:
-            exact_file_count += 1
+        if exact_tokens:
+            exact_rows.append(
+                {
+                    "path": relative.as_posix(),
+                    "tokens": exact_tokens,
+                }
+            )
         if false_tokens:
             lexical_rows.append(
                 {
@@ -163,11 +168,13 @@ def scan_discovery_precision(
         "unreadable_files": unreadable_files[:100],
         "strong_tokens": tokens,
         "token_totals": token_totals,
-        "files_with_exact_strong_token": exact_file_count,
+        "files_with_exact_strong_token": len(exact_rows),
+        "exact_token_files": exact_rows[:250],
+        "exact_token_files_truncated": len(exact_rows) > 250,
         "files_with_lexical_false_positive": len(lexical_rows),
         "lexical_false_positive_count": false_positive_total,
-        "lexical_false_positives": lexical_rows[:100],
-        "lexical_false_positives_truncated": len(lexical_rows) > 100,
+        "lexical_false_positives": lexical_rows[:250],
+        "lexical_false_positives_truncated": len(lexical_rows) > 250,
         "known_resolution": known,
         "discovery_rule": "substring discovery is triage only; exact boundary token controls semantic review",
         "portfolio_exit_criteria_met": False,
