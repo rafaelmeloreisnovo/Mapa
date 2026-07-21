@@ -225,13 +225,7 @@ candidatos novos após o snapshot
 entradas históricas sem sinal no scan filtrado
 ```
 
-Caminhos novos recebem ID determinístico:
-
-```text
-NCC-<12HEX>
-```
-
-E são preservados como:
+Caminhos novos recebem ID determinístico `NCC-<12HEX>` e são preservados como:
 
 ```text
 state = TOKEN_VAZIO
@@ -245,6 +239,27 @@ significa resolução ou autorização de remoção.
 
 O refresh nunca declara que o scan filtrado é varredura byte a byte. Seu
 `status=PASS` significa apenas que o delta foi construído sem perda silenciosa.
+
+## Validação independente do refresh
+
+```text
+scripts/validate_claim_scope_refresh.py
+tests/test_claim_scope_refresh_validation.py
+```
+
+O verificador recalcula:
+
+- IDs determinísticos dos candidatos novos;
+- unicidade e disjunção dos caminhos;
+- cobertura dos 36 IDs históricos;
+- aritmética dos conjuntos atuais e históricos;
+- estado `TOKEN_VAZIO` de toda novidade;
+- necessidade de revisão;
+- próximo gate condicionado à existência de candidatos;
+- sete fronteiras obrigatórias iguais a `false`;
+- digest BLAKE2b-256 do relatório.
+
+Assim, o construtor do refresh não valida sozinho a própria saída.
 
 ## Execução local
 
@@ -264,6 +279,7 @@ Ela oferece:
 - checksums dos controles;
 - contrato independente da resolução;
 - refresh posterior explícito;
+- verificação independente do refresh;
 - recibo agregado fail-closed.
 
 ## Evidência auxiliar executada
@@ -298,10 +314,11 @@ compilar validadores e testes
 → medir precisão lexical
 → validar contrato independente da resolução
 → construir refresh do escopo atual
+→ validar independentemente o refresh
 → verificar as fronteiras fail-closed
 → validar recibo auxiliar contra hashes
 → produzir checksums
-→ publicar 15 relatórios e o manifesto de checksums
+→ publicar 16 relatórios e o manifesto de checksums
 ```
 
 O workflow não exige zero candidatos novos. Ele exige que qualquer candidato
@@ -320,10 +337,11 @@ auxiliary receipt-validator tests   = 6/6 PASS
 resolution contract targeted checks = 10/10 rejected
 observable full scanner receipt     = TOKEN_VAZIO
 current-commit scope refresh         = TOKEN_VAZIO
-full-byte repository receipt        = TOKEN_VAZIO
-portfolio exit criteria             = false
-claim_allowed                       = false
-certification_claim                 = false
+scope refresh independent check      = TOKEN_VAZIO
+full-byte repository receipt         = TOKEN_VAZIO
+portfolio exit criteria              = false
+claim_allowed                        = false
+certification_claim                  = false
 ```
 
 ## Próximo gate
@@ -332,10 +350,10 @@ certification_claim                 = false
 EXECUTE_OBSERVABLE_SCANNER_AND_SCOPE_REFRESH
 ```
 
-O próximo passo é executar o controle em clone integral e limpo, produzir os 15
-relatórios e checksums, observar os candidatos novos reais e revisar cada um por
-lote append-only. Depois ainda será necessário produzir evidência byte a byte do
-escopo não coberto pelo filtro.
+O próximo passo é executar o controle em clone integral e limpo, produzir os 16
+relatórios e checksums, observar os candidatos novos reais, validar o refresh e
+revisar cada novidade por lote append-only. Depois ainda será necessário produzir
+evidência byte a byte do escopo não coberto pelo filtro.
 
 O P0 não é fechado para os 126 repositórios até que cada autoridade execute o
 scanner, trate seus candidatos e produza recibos reproduzíveis. O presente
