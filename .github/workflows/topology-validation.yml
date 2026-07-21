@@ -55,6 +55,7 @@ jobs:
             scripts/validate_claim_vocabulary.py \
             scripts/validate_claim_contradiction_ledger.py \
             scripts/validate_claim_review_chain.py \
+            scripts/validate_claim_review_residual.py \
             tests/test_topology.py \
             tests/test_repository_inventory.py \
             tests/test_inventory_batch.py \
@@ -65,7 +66,8 @@ jobs:
             tests/test_iso_operational_readiness.py \
             tests/test_claim_vocabulary.py \
             tests/test_claim_contradiction_ledger.py \
-            tests/test_claim_review_chain.py
+            tests/test_claim_review_chain.py \
+            tests/test_claim_review_residual.py
 
       - name: Run positive and adversarial tests
         run: |
@@ -80,7 +82,8 @@ jobs:
             tests/test_iso_operational_readiness.py \
             tests/test_claim_vocabulary.py \
             tests/test_claim_contradiction_ledger.py \
-            tests/test_claim_review_chain.py
+            tests/test_claim_review_chain.py \
+            tests/test_claim_review_residual.py
 
       - name: Validate topology and inventory
         run: |
@@ -117,6 +120,10 @@ jobs:
           python3 scripts/validate_claim_review_chain.py \
             --head indices/CLAIM_CONTRADICTION_HEAD.json \
             --write-report claim-review-chain-validation.json
+          python3 scripts/validate_claim_review_residual.py \
+            --residual indices/CLAIM_REVIEW_RESIDUAL.json \
+            --head indices/CLAIM_CONTRADICTION_HEAD.json \
+            --write-report claim-review-residual-validation.json
 
       - name: Check machine-readable contracts and boundaries
         run: |
@@ -130,7 +137,8 @@ jobs:
             iso-operational-readiness-validation.json \
             claim-vocabulary-validation.json \
             claim-contradiction-ledger-validation.json \
-            claim-review-chain-validation.json
+            claim-review-chain-validation.json \
+            claim-review-residual-validation.json
           do
             python3 -m json.tool "$report" >/dev/null
           done
@@ -153,6 +161,7 @@ jobs:
               "claim_scan": read("claim-vocabulary-validation.json"),
               "claim_ledger": read("claim-contradiction-ledger-validation.json"),
               "claim_chain": read("claim-review-chain-validation.json"),
+              "claim_residual": read("claim-review-residual-validation.json"),
           }
 
           assert all(report["status"] == "PASS" for report in reports.values())
@@ -187,6 +196,7 @@ jobs:
           assert reports["claim_ledger"]["reviewed_safe_count"] == 6
           assert reports["claim_ledger"]["token_vazio_count"] == 30
           assert reports["claim_ledger"]["portfolio_exit_criteria_met"] is False
+
           assert reports["claim_chain"]["review_batch_count"] == 2
           assert reports["claim_chain"]["review_decision_count"] == 29
           assert reports["claim_chain"]["reviewed_safe_count"] == 35
@@ -197,6 +207,15 @@ jobs:
           assert reports["claim_chain"]["portfolio_exit_criteria_met"] is False
           assert reports["claim_chain"]["claim_allowed"] is False
           assert reports["claim_chain"]["certification_claim"] is False
+
+          assert reports["claim_residual"]["residual_count"] == 1
+          assert reports["claim_residual"]["token_vazio_ids"] == ["CC028"]
+          assert reports["claim_residual"]["materialization_attempt_count"] == 2
+          assert reports["claim_residual"]["full_content_observed"] is False
+          assert reports["claim_residual"]["semantic_disposition_allowed"] is False
+          assert reports["claim_residual"]["portfolio_exit_criteria_met"] is False
+          assert reports["claim_residual"]["claim_allowed"] is False
+          assert reports["claim_residual"]["certification_claim"] is False
           PY
 
       - name: Create structural checksums
@@ -212,6 +231,7 @@ jobs:
               indices/CLAIM_VOCABULARY_POLICY.json \
               indices/CLAIM_CONTRADICTION_LEDGER.json \
               indices/CLAIM_CONTRADICTION_HEAD.json \
+              indices/CLAIM_REVIEW_RESIDUAL.json \
               schemas/repository_inventory.schema.json \
               schemas/repository_inventory_batch.schema.json \
               schemas/repository-gap-map.schema.json \
@@ -234,6 +254,7 @@ jobs:
               scripts/validate_claim_vocabulary.py \
               scripts/validate_claim_contradiction_ledger.py \
               scripts/validate_claim_review_chain.py \
+              scripts/validate_claim_review_residual.py \
               tests/test_topology.py \
               tests/test_repository_inventory.py \
               tests/test_inventory_batch.py \
@@ -245,6 +266,7 @@ jobs:
               tests/test_claim_vocabulary.py \
               tests/test_claim_contradiction_ledger.py \
               tests/test_claim_review_chain.py \
+              tests/test_claim_review_residual.py \
               .github/workflows/topology-validation.yml
             find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
             find indices/inventory_deltas -maxdepth 1 -type f -name '*.json' -print
@@ -266,6 +288,7 @@ jobs:
             claim-vocabulary-validation.json
             claim-contradiction-ledger-validation.json
             claim-review-chain-validation.json
+            claim-review-residual-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
