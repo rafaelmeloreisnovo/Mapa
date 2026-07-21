@@ -114,7 +114,7 @@ observar commit e limpeza Git
 → emitir recibo agregado BLAKE2b-256
 ```
 
-## Saídas
+## Saídas do runner
 
 ```text
 claim-vocabulary-validation.json
@@ -129,6 +129,69 @@ g006-local-gate-receipt.json
 ```
 
 Os arquivos são escritos em modo `0600` pelo runner.
+
+## Contrato independente da resolução CC028
+
+O contrato das seis fronteiras e das identidades criptográficas pode ser
+validado separadamente:
+
+```bash
+python3 scripts/validate_claim_resolution_contract.py \
+  --path indices/CLAIM_REVIEW_RESOLUTION_CC028.json \
+  --write-report ".evidence/g006/${EXPECTED_COMMIT}/claim-resolution-contract-validation.json"
+```
+
+Esse validador exige simultaneamente:
+
+```text
+seis fronteiras = false
+Git blob SHA-1 exato
+SHA-256 exato
+seis faixas Base64 completas
+437 linhas codificadas
+19,542 bytes decodificados
+BLAKE2b-256 declarado = calculado
+zero tokens fortes exatos
+histórico truncado preservado
+TOKEN_VAZIO atual = 0
+```
+
+## Refresh do escopo atual
+
+O runner preserva sua interface testada. O refresh é uma etapa posterior
+explícita que consome os relatórios do mesmo diretório e o commit observado:
+
+```bash
+python3 scripts/build_claim_scope_refresh.py \
+  --ledger indices/CLAIM_CONTRADICTION_LEDGER.json \
+  --head indices/CLAIM_CONTRADICTION_HEAD.json \
+  --claim-scan ".evidence/g006/${EXPECTED_COMMIT}/claim-vocabulary-validation.json" \
+  --precision ".evidence/g006/${EXPECTED_COMMIT}/claim-discovery-precision-validation.json" \
+  --current-commit "${EXPECTED_COMMIT}" \
+  --write-report ".evidence/g006/${EXPECTED_COMMIT}/claim-scope-refresh-validation.json"
+```
+
+O refresh compara o scan atual com os 36 caminhos da baseline. Para cada caminho
+novo, ele cria um identificador estável `NCC-<12HEX>` e preserva:
+
+```text
+state = TOKEN_VAZIO
+owner_role = R12
+claim_allowed = false
+```
+
+Não existe allowlist automática para arquivos novos de governança, scripts,
+testes ou documentação. Um arquivo novo escrito pelo próprio projeto continua
+precisando de revisão contextual.
+
+A ausência de um sinal atual também não significa que uma entrada antiga foi
+resolvida ou deve ser apagada. O relatório mantém separadamente:
+
+- sinais conhecidos da baseline;
+- candidatos novos;
+- entradas antigas sem sinal no scan filtrado;
+- limitações do filtro de política;
+- necessidade de varredura byte a byte.
 
 ## Validação do recibo auxiliar já existente
 
@@ -150,20 +213,36 @@ Ele não afirma execução da suíte integral do control plane. O validador do
 recibo possui ainda uma suíte adversarial própria, executada separadamente com
 6/6 testes PASS no ambiente de preparação.
 
+O contrato independente da resolução foi exercitado separadamente com:
+
+```text
+py_compile                 = PASS
+validação canônica         = PASS
+mutações adversariais      = 10/10 rejeitadas
+```
+
+Essas execuções não são substitutas do recibo pinado ao commit do clone.
+
 ## Critérios do recibo local válido
 
 ```text
 commit observado = commit esperado
 working tree dirty = false
 todos os comandos returncode = 0
-cinco relatórios status = PASS
-reviewed safe = 36
-reviewed blocking = 0
-current residual = 0
+cinco relatórios do runner status = PASS
+contrato independente status = PASS
+scope refresh status = PASS
+reviewed safe da baseline = 36
+reviewed blocking da baseline = 0
+residual atual da baseline = 0
+candidatos novos = enumerados como TOKEN_VAZIO
 CC028 exact strong tokens = 0
 claim_allowed = false
 certification_claim = false
 ```
+
+`scope refresh status=PASS` significa que o refresh foi calculado de forma
+íntegra. Não significa que o número de candidatos novos seja zero.
 
 ## Limites
 
@@ -172,12 +251,15 @@ Ele não demonstra:
 
 - execução em GitHub Actions;
 - revisão independente;
-- ausência de candidatos posteriores ao snapshot sem scope refresh;
+- ausência de candidatos posteriores não cobertos pelo scan filtrado;
+- varredura byte a byte integral de todo o repositório;
 - conformidade ou certificação;
 - fechamento dos 126 repositórios.
 
 ```text
 local PASS != remote PASS
+scope-refresh PASS != zero new candidates
+filtered scan != full byte scan
 snapshot review != current portfolio scan
 Mapa closure != portfolio closure
 ```
@@ -194,6 +276,7 @@ novo commit
 → nova execução
 → novo diretório de evidência
 → novo recibo
+→ novo refresh de escopo
 ```
 
 Nunca reutilize um recibo anterior depois de alterar qualquer arquivo ligado aos
