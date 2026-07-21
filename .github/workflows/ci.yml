@@ -37,3 +37,51 @@ jobs:
             echo "ERROR: Hash-named PNGs at root (should be in visual/):"; echo "$loose"; exit 1
           fi
           echo "Root is clean."
+
+      - name: M3 — Varredura operacional contract check
+        run: |
+          # Verify WORKFLOW_VARREDURA_OPERACIONAL.md exists and defines the required fields
+          wf="workflows/WORKFLOW_VARREDURA_OPERACIONAL.md"
+          [ -f "$wf" ] || { echo "MISSING: $wf"; exit 1; }
+          required=("id" "origem" "tipo" "estado" "acao" "resultado")
+          for field in "${required[@]}"; do
+            grep -q "$field" "$wf" || { echo "MISSING field '$field' in $wf"; exit 1; }
+          done
+          echo "OK: Varredura operacional contract fields present."
+
+      - name: M4 — Internal repo link verification
+        run: |
+          # Verify that references to in-scope repos use correct owner/repo format
+          # and flag references to out-of-scope repos for manual review
+          python3 - <<'EOF'
+          import re, sys, pathlib
+
+          in_scope = {
+            "rafaelmeloreisnovo/Mapa",
+            "rafaelmeloreisnovo/Vectras-VM-Android",
+            "rafaelmeloreisnovo/qemu_rafaelia",
+            "rafaelmeloreisnovo/termux-app-rafacodephi",
+            "rafaelmeloreisnovo/RafGitTools",
+            "rafaelmeloreisnovo/androidx_RmR",
+          }
+
+          repo_pattern = re.compile(r"rafaelmeloreisnovo/([A-Za-z0-9_\-\.]+)")
+          out_of_scope = set()
+
+          for md in pathlib.Path(".").rglob("*.md"):
+              if ".git" in md.parts or "node_modules" in md.parts:
+                  continue
+              text = md.read_text(errors="replace")
+              for m in repo_pattern.finditer(text):
+                  ref = f"rafaelmeloreisnovo/{m.group(1)}"
+                  if ref not in in_scope:
+                      out_of_scope.add(ref)
+
+          if out_of_scope:
+              print("INFO: References to out-of-scope repos (require manual link verification):")
+              for r in sorted(out_of_scope):
+                  print(f"  {r}")
+              print("These repos are outside the active CI scope. Verify links manually.")
+          else:
+              print("OK: All repo references are within active scope.")
+          EOF
