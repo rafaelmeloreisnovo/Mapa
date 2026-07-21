@@ -1,0 +1,98 @@
+{
+  "authority_repository": "rafaelmeloreisnovo/Mapa",
+  "boundaries": {
+    "automatic_claim_promotion": false,
+    "automatic_portfolio_closure": false,
+    "certification_claim": false,
+    "claim_allowed": false,
+    "portfolio_exit_criteria_met": false,
+    "remote_runner_pass_inferred": false
+  },
+  "decision": {
+    "certification_claim": false,
+    "claim_allowed": false,
+    "disposition": "SAFE_EXACT_TOKEN_ABSENCE",
+    "from_state": "TOKEN_VAZIO",
+    "rationale": "The complete Git blob was reconstructed byte-for-byte from six aligned Base64 ranges. Git blob SHA-1, SHA-256, JSON parse and canonical BLAKE2b-256 all match. The only COMPLETE substring is the non-claim key completeness_ratio; no exact strong claim token exists.",
+    "to_state": "REVIEWED_SAFE"
+  },
+  "derived": {
+    "certification_claim": false,
+    "claim_allowed": false,
+    "current_token_vazio_count": 0,
+    "next_gate": "OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH",
+    "portfolio_exit_criteria_met": false,
+    "resolved_count": 1
+  },
+  "entry_id": "CC028",
+  "gap_id": "G006",
+  "generated_on": "2026-07-21",
+  "historical_residual": {
+    "digest_blake2b_256": "e345bf4687e0553d5da0589d73a86cfc75e08215bbc26be4ac82f07e5aead9bf",
+    "path": "indices/CLAIM_REVIEW_RESIDUAL.json",
+    "state": "HISTORICAL_RESIDUAL_PRESERVED"
+  },
+  "integrity": {
+    "algorithm": "blake2b-256",
+    "canonicalization": "json-sort-keys-utf8; integrity.digest blanked",
+    "digest": "ba2bcebf2aa746d4ab5405cde0da2c3333bf5e7a4076a9d26a91ad07249c2eef"
+  },
+  "materialization": {
+    "absence_state": "TOKEN_VAZIO",
+    "calculated_canonical_blake2b_256": "204b310de7ecbfc0e4df316d126748b03cb4ed624a3e0eff8914a3a1e8018d48",
+    "canonical_digest_match": true,
+    "claim_allowed": false,
+    "decoded_size_bytes": 19542,
+    "declared_canonical_blake2b_256": "204b310de7ecbfc0e4df316d126748b03cb4ed624a3e0eff8914a3a1e8018d48",
+    "encoded_line_count": 437,
+    "encoding": "base64",
+    "git_blob_sha1": "b43554096f00c0918997dd9f9b11787cec4d4e52",
+    "identity_verified": true,
+    "json_parse_status": "PASS",
+    "line_ranges": [
+      [1, 80],
+      [81, 160],
+      [161, 240],
+      [241, 320],
+      [321, 400],
+      [401, 437]
+    ],
+    "method": "GITHUB_CONTENT_BASE64_RANGED_RECONSTRUCTION",
+    "repository_count": 41,
+    "scope_state": "PARTIAL",
+    "sha256": "b19d27084e5be35a2597f07346450745abfd7084c0a831b48e0eef4c57058e02",
+    "top_level_keys": [
+      "schema",
+      "schema_version",
+      "generated_at",
+      "inventory_source",
+      "collection_method",
+      "scope",
+      "statistics",
+      "repositories",
+      "absence_ledger",
+      "integrity"
+    ]
+  },
+  "path": "indices/REPOSITORY_INVENTORY.json",
+  "schema": "mapa.claim-review-resolution.v1",
+  "source_commit": "4016c51e024573a3875457fceb6d05926e07a07b",
+  "token_scan": {
+    "boundary_regex": "(?<![A-Z0-9_])TOKEN(?![A-Z0-9_])",
+    "exact_claim_token_absent": true,
+    "false_positive_source": "completeness_ratio",
+    "normalization": "unicode text decoded as UTF-8 then uppercased",
+    "pending_token_counts": {
+      "TOKEN_VAZIO": 1
+    },
+    "strong_token_counts": {
+      "ALIGNED": 0,
+      "CERTIFIED": 0,
+      "COMPLETE": 0,
+      "COMPLIANT": 0
+    },
+    "substring_occurrences": {
+      "COMPLETE": 1
+    }
+  }
+}
