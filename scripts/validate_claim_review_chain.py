@@ -11,7 +11,6 @@ from typing import Any
 
 from validate_claim_contradiction_ledger import (
     LedgerValidationError,
-    canonical_digest as ledger_digest,
     load as load_ledger,
     validate as validate_ledger,
 )
@@ -19,7 +18,6 @@ from validate_claim_contradiction_ledger import (
 HEAD_SCHEMA = "mapa.claim-contradiction-head.v1"
 BATCH_SCHEMA = "mapa.claim-review-batch.v1"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
-HEX64 = re.compile(r"^[0-9a-f]{64}$")
 SAFE_DISPOSITIONS = {
     "SAFE_NEGATION",
     "SAFE_BOUNDED_CONTEXT",
@@ -37,6 +35,7 @@ BLOCKING_DISPOSITIONS = {
     "AMBIGUOUS_PROMOTIONAL_LANGUAGE",
     "CONTRADICTS_PENDING_STATE",
 }
+NEXT_GATE = "MATERIALIZE_FULL_CC028_AND_OBSERVABLE_SCANNER_RECEIPT"
 
 
 class ChainValidationError(ValueError):
@@ -86,6 +85,14 @@ def _validate_boundaries(boundaries: Any, *, head: bool) -> None:
     if head:
         require(boundaries.get("base_ledger_is_immutable") is True, "base ledger must be immutable")
         require(boundaries.get("batches_are_append_only") is True, "review batches must be append-only")
+
+
+def _state_counts(states: dict[str, str]) -> dict[str, int]:
+    return {
+        "reviewed_safe_count": sum(state == "REVIEWED_SAFE" for state in states.values()),
+        "reviewed_blocking_count": sum(state == "REVIEWED_BLOCKING" for state in states.values()),
+        "token_vazio_count": sum(state == "TOKEN_VAZIO" for state in states.values()),
+    }
 
 
 def validate_batch(
@@ -149,11 +156,16 @@ def validate_batch(
             raise ChainValidationError(f"{entry_id}: invalid transition target")
         states[entry_id] = to_state
 
+    counts = _state_counts(states)
     derived = batch.get("derived")
     require(isinstance(derived, dict), "batch derived required")
     require(derived.get("decision_count") == len(decisions), "batch decision count mismatch")
     require(derived.get("safe_transitions") == safe, "batch safe transition count mismatch")
     require(derived.get("blocking_transitions") == blocking, "batch blocking transition count mismatch")
+    require(derived.get("result_reviewed_safe_count") == counts["reviewed_safe_count"], "batch resulting safe count mismatch")
+    require(derived.get("result_reviewed_blocking_count") == counts["reviewed_blocking_count"], "batch resulting blocking count mismatch")
+    require(derived.get("result_token_vazio_count") == counts["token_vazio_count"], "batch resulting TOKEN_VAZIO count mismatch")
+    require(isinstance(derived.get("next_gate"), str) and derived["next_gate"], "batch next gate required")
     require(derived.get("portfolio_exit_criteria_met") is False, "batch cannot close portfolio")
     require(derived.get("claim_allowed") is False, "batch derived claim boundary mismatch")
     require(derived.get("certification_claim") is False, "batch derived certification boundary mismatch")
@@ -168,6 +180,7 @@ def validate_batch(
         "decision_count": len(decisions),
         "safe_transitions": safe,
         "blocking_transitions": blocking,
+        **counts,
         "integrity_digest": expected,
     }
 
@@ -216,11 +229,7 @@ def validate_chain(root: Path, head: dict[str, Any]) -> dict[str, Any]:
         require(ref.get("decision_count") == report["decision_count"], f"{batch_id}: reference decision count mismatch")
         batch_reports.append(report)
 
-    counts = {
-        "reviewed_safe_count": sum(state == "REVIEWED_SAFE" for state in states.values()),
-        "reviewed_blocking_count": sum(state == "REVIEWED_BLOCKING" for state in states.values()),
-        "token_vazio_count": sum(state == "TOKEN_VAZIO" for state in states.values()),
-    }
+    counts = _state_counts(states)
     candidate_count = len(states)
     require(sum(counts.values()) == candidate_count, "head state arithmetic mismatch")
 
@@ -238,7 +247,7 @@ def validate_chain(root: Path, head: dict[str, Any]) -> dict[str, Any]:
         "portfolio_exit_criteria_met": False,
         "claim_allowed": False,
         "certification_claim": False,
-        "next_gate": "CLAIM_REVIEW_BATCH_002_AND_OBSERVABLE_SCANNER_RECEIPT",
+        "next_gate": NEXT_GATE,
     }
     require(derived == expected_derived, "head derived state mismatch")
 
@@ -258,6 +267,7 @@ def validate_chain(root: Path, head: dict[str, Any]) -> dict[str, Any]:
         **counts,
         "review_completion_ratio": expected_derived["review_completion_ratio"],
         "batch_reports": batch_reports,
+        "next_gate": NEXT_GATE,
         "portfolio_exit_criteria_met": False,
         "claim_allowed": False,
         "certification_claim": False,
