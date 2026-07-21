@@ -28,11 +28,19 @@ scripts/validate_claim_contradiction_ledger.py
 scripts/validate_claim_review_chain.py
 scripts/validate_claim_review_residual.py
 scripts/validate_claim_discovery_precision.py
+scripts/validate_g006_auxiliary_receipt.py
+scripts/run_g006_local_gate.py
+tools/materialize_github_blob.py
 tests/test_claim_vocabulary.py
 tests/test_claim_contradiction_ledger.py
 tests/test_claim_review_chain.py
 tests/test_claim_review_residual.py
 tests/test_claim_discovery_precision.py
+tests/test_github_blob_materializer.py
+tests/test_g006_local_gate.py
+tests/test_g006_auxiliary_receipt.py
+resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json
+docs/G006_LOCAL_EXECUTION.md
 .github/workflows/topology-validation.yml
 ```
 
@@ -200,7 +208,8 @@ compilar validadores e testes
 → medir precisão lexical
 → verificar invariantes 36/36
 → produzir checksums
-→ publicar 12 relatórios e o manifesto de checksums
+→ validar o recibo auxiliar contra hashes dos arquivos
+→ publicar 13 relatórios e o manifesto de checksums
 ```
 
 ## Estado de execução
@@ -211,6 +220,10 @@ identidade Git do CC028                 = VERIFIED
 parse e digest canônico do CC028        = VERIFIED
 varredura exata do CC028                = EXECUTED
 classificação da baseline indexada      = 36/36
+auxiliary py_compile                    = 4/4 PASS executado
+auxiliary component tests               = 15/15 PASS executado
+auxiliary receipt validator tests       = 6/6 PASS executado
+auxiliary receipt file hashes           = VERIFIED
 artefatos e testes versionados          = true
 workflow integrado                      = IMPLEMENTED_NOT_EXECUTED
 execução da suíte no clone integral     = TOKEN_VAZIO
@@ -222,9 +235,13 @@ claim_allowed                           = false
 certification_claim                     = false
 ```
 
-A materialização e as verificações do CC028 foram executadas. A suíte completa
-do branch e o workflow remoto continuam não executados; nenhum teste apenas
-versionado foi convertido em `PASS`.
+A materialização e as verificações do CC028 foram executadas. Também foram
+executadas as suítes autocontidas do materializador, runner e validador do
+recibo. Essas execuções auxiliares não equivalem à suíte integral do control
+plane, não estão pinadas ao commit do branch e não constituem recibo remoto.
+
+A suíte completa do branch e o workflow remoto continuam não executados; nenhum
+teste apenas versionado foi convertido em `PASS`.
 
 ## Próximo gate
 
@@ -235,7 +252,7 @@ OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH
 O próximo fechamento delimitado exige:
 
 1. executar a suíte em um clone integral observável;
-2. produzir os 12 relatórios e checksums;
+2. produzir os 13 relatórios e checksums;
 3. atualizar a busca para o head vigente e medir drift desde o snapshot pinado;
 4. tratar qualquer candidato novo pela mesma cadeia append-only;
 5. manter `claim_allowed=false` até decisão separada;
