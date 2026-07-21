@@ -6,8 +6,10 @@
 programa: GOV-CUSTODY-6SIGMA
 repositorio_piloto: rafaelmeloreisnovo/Mapa
 modo: incremental
-claim_allowed: false
+estado: PILOT_MEASURED
+claim_allowed_programa: false
 certificacao_six_sigma: TOKEN_VAZIO
+nivel_sigma: TOKEN_VAZIO
 principio: medir antes de afirmar
 ```
 
@@ -24,6 +26,7 @@ saída, evidência e critério de interrupção.
 - [x] estados epistêmicos, incluindo `TOKEN_VAZIO`;
 - [x] regra `claim_allowed=false` sem evidência suficiente;
 - [x] definição inicial de defeitos;
+- [x] oito oportunidades de qualidade por evento piloto;
 - [ ] responsáveis formais por domínio — `TOKEN_VAZIO`;
 - [ ] classificação de dados por sensibilidade em todos os repositórios — `TOKEN_VAZIO`.
 
@@ -35,12 +38,22 @@ saída, evidência e critério de interrupção.
 
 - [x] ledger JSONL append-only;
 - [x] validador local sem dependências externas;
-- [ ] inventário de eventos dos fluxos P0;
-- [ ] contagem de oportunidades por tipo de evento;
-- [ ] baseline de completude, rastreabilidade e integridade;
-- [ ] idade mediana dos `TOKEN_VAZIO`.
+- [x] inventário do ledger piloto;
+- [x] contagem de oportunidades por tipo de evento;
+- [x] baseline piloto de completude, rastreabilidade, integridade e
+  reprodutibilidade;
+- [x] DPMO observado do snapshot piloto;
+- [ ] idade mediana dos `TOKEN_VAZIO` — `TOKEN_VAZIO`;
+- [ ] convenção estatística para capacidade e nível sigma — `TOKEN_VAZIO`;
+- [ ] estabilidade em janelas repetidas — `TOKEN_VAZIO`.
 
-**Gate:** nenhuma taxa ou nível sigma é publicado sem universo e janela definidos.
+**Evidência:**
+
+- `auditoria/PR39_EXECUTION_EVIDENCE.json`;
+- `auditoria/BASELINE_CADEIA_CUSTODIA_2026-07-21.json`.
+
+**Gate:** nenhuma certificação ou taxa de capacidade sigma é publicada sem
+processo estável, convenção estatística aprovada e janelas repetidas.
 
 ## P1 — Diagnóstico e priorização
 
@@ -91,15 +104,19 @@ sem diminuir auditabilidade.
 
 ## Métricas canônicas
 
-| ID | Métrica | Fórmula | Estado inicial |
+| ID | Métrica | Fórmula | Snapshot piloto |
 |---|---|---|---|
-| M1 | Completude estrutural | eventos sem defeito estrutural / eventos | `TOKEN_VAZIO` |
-| M2 | Rastreabilidade | eventos com evidência válida / eventos | `TOKEN_VAZIO` |
-| M3 | Integridade | hashes verificados / hashes declarados | `TOKEN_VAZIO` |
-| M4 | Reprodutibilidade | validações repetíveis / validações | `TOKEN_VAZIO` |
+| M1 | Completude estrutural | eventos válidos / eventos | `1.0` |
+| M2 | Rastreabilidade | eventos com evidência / eventos | `1.0` |
+| M3 | Integridade | hashes verificados / hashes declarados | `1.0` |
+| M4 | Reprodutibilidade | eventos com controle verificado / eventos | `1.0` |
 | M5 | Resolução de lacunas | vazios resolvidos / vazios totais | `TOKEN_VAZIO` |
 | M6 | Lead time de vazio | resolução − abertura | `TOKEN_VAZIO` |
-| M7 | DPMO | defeitos / oportunidades × 1.000.000 | `TOKEN_VAZIO` |
+| M7 | DPMO observado | defeitos / oportunidades × 1.000.000 | `0.0` |
+| M8 | Nível sigma | convenção aprovada sobre processo estável | `TOKEN_VAZIO` |
+
+Os valores M1–M4 e M7 pertencem apenas ao snapshot piloto auditado. Não são
+generalizados para outros repositórios nem equivalem a certificação Six Sigma.
 
 ## Mapa de riscos
 
@@ -109,7 +126,8 @@ sem diminuir auditabilidade.
 | alteração sem origem | campos obrigatórios | auditoria do ledger | bloquear publicação |
 | hash falso ou inválido | formato estrito | recomputação local | evento `CORRECT` |
 | exposição de segredo | minimização | varredura de conteúdo | revogar e retirar acesso |
-| cadeia quebrada | `previous_event_id` | validação sequencial | reparar por evento corretivo |
+| cadeia quebrada | predecessor imediato | validação sequencial | reparar por evento corretivo |
+| evento inválido como âncora | aceitação somente sem defeitos | teste regressivo | rejeitar elo posterior |
 | excesso de burocracia | ação mínima verificável | métrica de lead time | simplificar controle |
 | automação sem benefício | hipótese mensurável | comparação antes/depois | rollback |
 
@@ -117,26 +135,30 @@ sem diminuir auditabilidade.
 
 ### Onda 1 — `Mapa`
 
-- governança, biblioteconomia, índices e scripts;
+- governança, biblioteconomia, índices, validadores e baseline;
+- estado: piloto medido, PR ainda em draft;
 - objetivo: provar o método no repositório orquestrador.
 
 ### Onda 2 — repositórios de infraestrutura
 
 - Termux, RafGitTools, Vectras/QEMU;
-- foco: build, artefato, versão, proveniência e segurança.
+- foco: build, artefato, versão, proveniência e segurança;
+- estado: `ROADMAP`, sem expansão automática nesta etapa.
 
 ### Onda 3 — repositórios científicos
 
 - RLL, papers e datasets;
-- foco: fonte, experimento, parâmetros, resultado, falsificadores e claim.
+- foco: fonte, experimento, parâmetros, resultado, falsificadores e claim;
+- estado: `ROADMAP`.
 
 ### Onda 4 — acervo filosófico e simbólico
 
 - CientiEspiritual, Livro Vivo e correlatos;
-- foco: autoria, versão, remissivas e marca `SIMBOLICO`, sem falsa equivalência experimental.
+- foco: autoria, versão, remissivas e marca `SIMBOLICO`, sem falsa equivalência experimental;
+- estado: `ROADMAP`.
 
 ## Próximo passo verificável
 
-Executar o validador sobre o ledger piloto, registrar o primeiro baseline e abrir
-um evento por defeito observado. Qualquer métrica ainda não medida permanece
-`TOKEN_VAZIO`.
+Repetir a medição em janelas futuras do ledger, registrar defeitos reais como
+eventos, aprovar a convenção estatística e somente então avaliar capacidade do
+processo. O PR permanece em draft e `main` não é alterada nesta etapa.
