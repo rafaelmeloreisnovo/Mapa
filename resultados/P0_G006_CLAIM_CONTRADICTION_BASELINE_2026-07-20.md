@@ -31,6 +31,7 @@ scripts/validate_claim_review_residual.py
 scripts/validate_claim_discovery_precision.py
 scripts/validate_claim_resolution_contract.py
 scripts/build_claim_scope_refresh.py
+scripts/validate_claim_scope_refresh.py
 scripts/validate_g006_auxiliary_receipt.py
 scripts/run_g006_local_gate.py
 tools/materialize_github_blob.py
@@ -41,6 +42,7 @@ tests/test_claim_review_residual.py
 tests/test_claim_discovery_precision.py
 tests/test_claim_resolution_contract.py
 tests/test_claim_scope_refresh.py
+tests/test_claim_scope_refresh_validation.py
 tests/test_github_blob_materializer.py
 tests/test_g006_local_gate.py
 tests/test_g006_auxiliary_receipt.py
@@ -201,17 +203,8 @@ o refresh de escopo.
 
 ## Refresh fail-closed do escopo atual
 
-O arquivo `scripts/build_claim_scope_refresh.py` consome:
-
-```text
-ledger-base
-HEAD da baseline
-claim-vocabulary-validation.json
-claim-discovery-precision-validation.json
-commit atual observado
-```
-
-Ele deriva três conjuntos:
+O construtor `scripts/build_claim_scope_refresh.py` consome a baseline, o `HEAD`,
+os relatórios do scanner e o commit atual. Ele deriva:
 
 ```text
 sinais atuais já conhecidos na baseline
@@ -219,13 +212,7 @@ candidatos novos após o snapshot
 entradas antigas sem sinal no scan filtrado
 ```
 
-Qualquer caminho novo recebe ID estável:
-
-```text
-NCC-<12HEX>
-```
-
-E nasce obrigatoriamente como:
+Qualquer caminho novo recebe ID estável `NCC-<12HEX>` e nasce como:
 
 ```text
 state = TOKEN_VAZIO
@@ -249,6 +236,23 @@ certification_claim = false
 
 Seu `status=PASS` comprova construção coerente do delta; não comprova zero
 candidatos novos.
+
+## Validação independente do refresh
+
+O arquivo `scripts/validate_claim_scope_refresh.py` recalcula:
+
+- ID determinístico de cada candidato novo;
+- unicidade e disjunção de caminhos;
+- cobertura dos 36 IDs históricos;
+- aritmética `conhecidos + ausentes = 36`;
+- aritmética `conhecidos + novos = candidatos atuais`;
+- estado `TOKEN_VAZIO` de toda novidade;
+- necessidade de revisão;
+- próximo gate condicionado à existência de novidades;
+- sete fronteiras obrigatoriamente falsas;
+- digest BLAKE2b-256 do relatório.
+
+Assim, o construtor não é a única autoridade sobre a validade da própria saída.
 
 ## Evidência auxiliar realmente executada
 
@@ -288,11 +292,13 @@ Os testes versionados cobrem, entre outros:
 - reaparecimento silencioso do residual;
 - confusão entre `completeness_ratio` e token `COMPLETE`;
 - fronteira ausente ou promovida na resolução;
-- lista de tokens exatos truncada;
-- lista de contradições truncada;
+- lista de tokens exatos ou contradições truncada;
 - arquivo ilegível durante refresh;
 - candidato novo dispensado automaticamente;
+- ID de candidato não determinístico;
+- sobreposição entre conhecidos, novos e ausentes;
 - ausência de sinal antigo tratada como resolução;
+- próximo gate incompatível com candidatos novos;
 - tentativa de promover o portfólio a partir do snapshot.
 
 ## Workflow único
@@ -310,10 +316,11 @@ compilar validadores e testes
 → medir precisão lexical
 → validar contrato independente da resolução
 → construir refresh do escopo atual
+→ validar independentemente o refresh
 → verificar invariantes fail-closed
 → validar recibo auxiliar contra hashes dos arquivos
 → produzir checksums
-→ publicar 15 relatórios e o manifesto de checksums
+→ publicar 16 relatórios e o manifesto de checksums
 ```
 
 O gate aceita candidatos novos somente quando eles estiverem explicitamente
@@ -334,6 +341,7 @@ resolution contract targeted checks     = 10/10 rejeitados
 artefatos e testes versionados          = true
 workflow integrado                      = IMPLEMENTED_NOT_EXECUTED
 scope refresh builder                   = IMPLEMENTED_NOT_EXECUTED
+scope refresh independent validator     = IMPLEMENTED_NOT_EXECUTED
 execução da suíte no clone integral     = TOKEN_VAZIO
 scanner integral observável do branch   = TOKEN_VAZIO
 refresh do commit atual                 = TOKEN_VAZIO
@@ -356,9 +364,10 @@ EXECUTE_OBSERVABLE_SCANNER_AND_SCOPE_REFRESH
 O próximo fechamento delimitado exige:
 
 1. executar a suíte em um clone integral e limpo, pinado ao commit;
-2. produzir os 15 relatórios e checksums;
+2. produzir os 16 relatórios e checksums;
 3. observar o número real de candidatos novos no refresh;
-4. revisar cada candidato novo por lote append-only;
-5. produzir recibo byte a byte do escopo não coberto pelo filtro;
-6. manter `claim_allowed=false` até decisão separada;
-7. não interpretar o fechamento do `Mapa` como fechamento dos 126 repositórios.
+4. validar independentemente o relatório de refresh;
+5. revisar cada candidato novo por lote append-only;
+6. produzir recibo byte a byte do escopo não coberto pelo filtro;
+7. manter `claim_allowed=false` até decisão separada;
+8. não interpretar o fechamento do `Mapa` como fechamento dos 126 repositórios.
