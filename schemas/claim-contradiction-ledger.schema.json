@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/claim-contradiction-ledger.schema.json",
+  "title": "RAFAELIA Claim Contradiction Ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "authority_repository",
+    "gap_id",
+    "assessment_type",
+    "source_snapshot",
+    "review_policy",
+    "derived",
+    "entries",
+    "integrity",
+    "claim_allowed",
+    "certification_claim"
+  ],
+  "properties": {
+    "schema": {"const": "mapa.claim-contradiction-ledger.v1"},
+    "authority_repository": {"const": "rafaelmeloreisnovo/Mapa"},
+    "gap_id": {"const": "G006"},
+    "generated_on": {"type": "string", "format": "date"},
+    "assessment_type": {"const": "BOUNDED_GITHUB_CODE_SEARCH_SNAPSHOT_NOT_FULL_REPOSITORY_SCAN"},
+    "claim_allowed": {"const": false},
+    "certification_claim": {"const": false},
+    "source_snapshot": {
+      "type": "object",
+      "required": ["repository", "commit", "query", "candidate_count", "exhaustive", "limitations"],
+      "properties": {
+        "repository": {"const": "rafaelmeloreisnovo/Mapa"},
+        "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "query": {"type": "string", "minLength": 1},
+        "search_surface": {"type": "string", "minLength": 1},
+        "candidate_count": {"type": "integer", "minimum": 0},
+        "exhaustive": {"const": false},
+        "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "review_policy": {"type": "object"},
+    "derived": {
+      "type": "object",
+      "required": ["candidate_count", "reviewed_safe_count", "reviewed_blocking_count", "token_vazio_count", "portfolio_exit_criteria_met", "claim_allowed", "certification_claim"],
+      "properties": {
+        "candidate_count": {"type": "integer", "minimum": 0},
+        "reviewed_safe_count": {"type": "integer", "minimum": 0},
+        "reviewed_blocking_count": {"type": "integer", "minimum": 0},
+        "token_vazio_count": {"type": "integer", "minimum": 0},
+        "portfolio_exit_criteria_met": {"const": false},
+        "claim_allowed": {"const": false},
+        "certification_claim": {"const": false},
+        "next_gate": {"type": "string", "minLength": 1}
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "review_state", "disposition", "rationale", "owner_role", "claim_allowed"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^CC[0-9]{3}$"},
+          "path": {"type": "string", "minLength": 1},
+          "review_state": {"enum": ["REVIEWED_SAFE", "REVIEWED_BLOCKING", "TOKEN_VAZIO"]},
+          "disposition": {"type": "string", "minLength": 1},
+          "rationale": {"type": "string", "minLength": 1},
+          "evidence_pointer": {"type": "string", "minLength": 1},
+          "exit_criteria": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "owner_role": {"type": "string", "minLength": 1},
+          "claim_allowed": {"const": false}
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["algorithm", "canonicalization", "digest"],
+      "properties": {
+        "algorithm": {"const": "blake2b-256"},
+        "canonicalization": {"type": "string", "minLength": 1},
+        "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
