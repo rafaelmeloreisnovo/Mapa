@@ -1,0 +1,62 @@
+{
+  "authority_repository": "rafaelmeloreisnovo/Mapa",
+  "batch_id": "CLAIM_REVIEW_BATCH_003_2026-07-21",
+  "boundaries": {
+    "automatic_dismissal": false,
+    "automatic_rewrite": false,
+    "certification_claim": false,
+    "claim_allowed": false,
+    "portfolio_exit_criteria_met": false,
+    "token_vazio_is_zero": false,
+    "unread_file_can_be_reviewed_safe": false
+  },
+  "decisions": [
+    {
+      "claim_allowed": false,
+      "disposition": "SAFE_EXACT_TOKEN_ABSENCE",
+      "entry_id": "CC028",
+      "evidence_pointer": "indices/REPOSITORY_INVENTORY.json@4016c51e024573a3875457fceb6d05926e07a07b",
+      "from_state": "TOKEN_VAZIO",
+      "path": "indices/REPOSITORY_INVENTORY.json",
+      "rationale": "The byte-identical Git blob was reconstructed from all 437 Base64 lines. Exact-token scanning found zero COMPLETE, COMPLIANT, ALIGNED or CERTIFIED tokens; the index hit was only the key completeness_ratio.",
+      "resolution_pointer": "indices/CLAIM_REVIEW_RESOLUTION_CC028.json",
+      "reviewer_role": "R12",
+      "to_state": "REVIEWED_SAFE"
+    }
+  ],
+  "derived": {
+    "blocking_transitions": 0,
+    "certification_claim": false,
+    "claim_allowed": false,
+    "decision_count": 1,
+    "next_gate": "OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH",
+    "portfolio_exit_criteria_met": false,
+    "result_reviewed_blocking_count": 0,
+    "result_reviewed_safe_count": 36,
+    "result_token_vazio_count": 0,
+    "safe_transitions": 1
+  },
+  "gap_id": "G006",
+  "generated_on": "2026-07-21",
+  "integrity": {
+    "algorithm": "blake2b-256",
+    "canonicalization": "json-sort-keys-utf8; integrity.digest blanked",
+    "digest": "5ab1100c6d7ae78bc501fb28e70e9103ea67b8d5416721d4a0348ff6a339aacf"
+  },
+  "materialization_receipt": {
+    "digest_blake2b_256": "ba2bcebf2aa746d4ab5405cde0da2c3333bf5e7a4076a9d26a91ad07249c2eef",
+    "path": "indices/CLAIM_REVIEW_RESOLUTION_CC028.json"
+  },
+  "review_method": "RANGED_BASE64_RECONSTRUCTION_AT_PINNED_GIT_BLOB",
+  "reviewer_role": "R12",
+  "schema": "mapa.claim-review-batch.v1",
+  "source_commit": "4016c51e024573a3875457fceb6d05926e07a07b",
+  "source_ledger": {
+    "candidate_count": 36,
+    "digest_blake2b_256": "104f932bb901c6f51ba65630f219597d7cf234fd49b6c3ca01f559d32c04cb82",
+    "path": "indices/CLAIM_CONTRADICTION_LEDGER.json",
+    "reviewed_blocking_count": 0,
+    "reviewed_safe_count": 6,
+    "token_vazio_count": 30
+  }
+}
