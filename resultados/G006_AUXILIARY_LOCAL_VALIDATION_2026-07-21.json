@@ -1,0 +1,54 @@
+{
+  "boundaries": {
+    "certification_claim": false,
+    "claim_allowed": false,
+    "claim_control_plane_suite_executed": false,
+    "full_repository_suite_executed": false,
+    "git_commit_bound_receipt": false,
+    "portfolio_exit_criteria_met": false,
+    "remote_runner_receipt": false
+  },
+  "commands": [
+    {
+      "file_count": 4,
+      "name": "py_compile",
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "unittest",
+      "reported_duration_seconds": 0.021,
+      "returncode": 0,
+      "status": "PASS",
+      "test_count": 15
+    }
+  ],
+  "environment": "assistant_local_python_runtime",
+  "environment_noise": {
+    "affected_test_result": false,
+    "observed": true,
+    "process_returncodes_remained_zero": true,
+    "source": "artifact_tool spreadsheet runtime warmup during Python startup"
+  },
+  "files_sha256": {
+    "scripts/run_g006_local_gate.py": "83e3e564aa6ce875e0ba01be45bb2d17e4e80eb27db3103b6c951d0e0210f8ea",
+    "tests/test_g006_local_gate.py": "8c5cdd60577072e67293ffcfbcaa99f0110c5eb9cd7c86f70565ceb10381fae5",
+    "tests/test_github_blob_materializer.py": "904170c6ddd457d765f47d07480e0cdeafd9e8cae7aa001fda8304c743468026",
+    "tools/materialize_github_blob.py": "a6fe5926509a1f8e69c7db35ebdcb352a528040942015a348507690d167fc2b7"
+  },
+  "generated_on": "2026-07-21",
+  "integrity": {
+    "algorithm": "blake2b-256",
+    "canonicalization": "json-sort-keys-utf8; integrity.digest blanked",
+    "digest": "b25745393baf1a51fdacc7035b90ef2e00a5c837ee718ab801bc4368f69fd027"
+  },
+  "results": {
+    "compile_status": "PASS",
+    "tests_errored": 0,
+    "tests_failed": 0,
+    "tests_passed": 15,
+    "tests_run": 15
+  },
+  "schema": "mapa.g006-auxiliary-local-validation.v1",
+  "scope": "auxiliary_materializer_and_local_gate_runner_only"
+}
