@@ -1,0 +1,46 @@
+{
+  "schema": "mapa.custody-baseline.v1",
+  "measured_at_utc": "2026-07-21T13:01:30Z",
+  "ledger": "indices/CADEIA_CUSTODIA_EVENTOS.jsonl",
+  "repo_root_verification": true,
+  "window": {
+    "type": "final_pr39_ledger_snapshot",
+    "event_count": 12,
+    "quality_opportunities_per_event": 8,
+    "opportunity_definitions": [
+      "required_structure",
+      "identity_and_uniqueness",
+      "utc_time_and_monotonicity",
+      "safe_repository_path",
+      "evidence_and_claim_consistency",
+      "control_state_consistency",
+      "chain_link_integrity",
+      "declared_hash_and_size_integrity"
+    ],
+    "total_opportunities": 96
+  },
+  "observed": {
+    "valid_events": 12,
+    "defective_events": 0,
+    "defect_count": 0,
+    "defects": [],
+    "completeness": 1.0,
+    "traceability": 1.0,
+    "integrity": 1.0,
+    "declared_sha256": 8,
+    "verified_sha256": 8,
+    "reproducibility": 0.666667,
+    "token_vazio_events": 0,
+    "token_vazio_resolution": "TOKEN_VAZIO",
+    "dpmo_observed": 0.0
+  },
+  "six_sigma": {
+    "baseline_status": "MEASURED_PILOT",
+    "sigma_level": "TOKEN_VAZIO",
+    "certification": "TOKEN_VAZIO",
+    "reason": "A finite pilot snapshot does not establish process stability, a confidence-bound convention, or an approved sigma conversion.",
+    "next_verifiable_step": "Collect repeated windows, approve the statistical convention, and evaluate process stability before estimating sigma level."
+  },
+  "claim_allowed": true,
+  "scope_note": "Metrics apply only to PR #39 branch snapshot and do not generalize to other repositories."
+}
