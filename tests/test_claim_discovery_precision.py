@@ -77,6 +77,38 @@ class ClaimDiscoveryPrecisionTests(unittest.TestCase):
             self.assertGreaterEqual(complete["substring_count"], 2)
             self.assertGreaterEqual(complete["exact_count"], 1)
             self.assertGreaterEqual(complete["lexical_false_positive_count"], 1)
+            exact_by_path = {
+                row["path"]: row["tokens"] for row in result["exact_token_files"]
+            }
+            self.assertEqual(exact_by_path["exact.md"]["COMPLETE"], 1)
+            self.assertNotIn("ratio.json", exact_by_path)
+            self.assertFalse(result["exact_token_files_truncated"])
+
+    def test_multiple_exact_tokens_are_reported_per_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "indices").mkdir()
+            (root / "indices" / "CLAIM_REVIEW_RESOLUTION_CC028.json").write_text(
+                (ROOT / "indices/CLAIM_REVIEW_RESOLUTION_CC028.json").read_text(
+                    encoding="utf-8"
+                ),
+                encoding="utf-8",
+            )
+            (root / "claims.md").write_text(
+                "COMPLETE COMPLIANT ALIGNED CERTIFIED",
+                encoding="utf-8",
+            )
+            policy = copy.deepcopy(self.policy)
+            policy["excluded_paths"] = []
+            result = scan_discovery_precision(root, policy)
+            row = next(
+                item for item in result["exact_token_files"]
+                if item["path"] == "claims.md"
+            )
+            self.assertEqual(
+                row["tokens"],
+                {"ALIGNED": 1, "CERTIFIED": 1, "COMPLETE": 1, "COMPLIANT": 1},
+            )
 
     def test_missing_resolution_is_fail_closed(self):
         with tempfile.TemporaryDirectory() as tmp:
