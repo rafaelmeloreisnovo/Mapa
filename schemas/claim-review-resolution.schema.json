@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/claim-review-resolution.schema.json",
+  "title": "Mapa G006 claim review resolution",
+  "description": "Descriptive shape for a byte-identified claim-review resolution. The authoritative executable validator is scripts/validate_claim_resolution_contract.py.",
+  "type": "object",
+  "required": [
+    "schema",
+    "authority_repository",
+    "gap_id",
+    "entry_id",
+    "path",
+    "source_commit",
+    "generated_on",
+    "boundaries",
+    "decision",
+    "historical_residual",
+    "materialization",
+    "token_scan",
+    "derived",
+    "integrity"
+  ],
+  "properties": {
+    "schema": {"const": "mapa.claim-review-resolution.v1"},
+    "authority_repository": {"const": "rafaelmeloreisnovo/Mapa"},
+    "gap_id": {"const": "G006"},
+    "entry_id": {"type": "string", "pattern": "^CC[0-9]{3}$"},
+    "path": {"type": "string", "minLength": 1},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "generated_on": {"type": "string", "format": "date"},
+    "boundaries": {
+      "type": "object",
+      "required": [
+        "automatic_claim_promotion",
+        "automatic_portfolio_closure",
+        "certification_claim",
+        "claim_allowed",
+        "portfolio_exit_criteria_met",
+        "remote_runner_pass_inferred"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "automatic_claim_promotion": {"const": false},
+        "automatic_portfolio_closure": {"const": false},
+        "certification_claim": {"const": false},
+        "claim_allowed": {"const": false},
+        "portfolio_exit_criteria_met": {"const": false},
+        "remote_runner_pass_inferred": {"const": false}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "from_state",
+        "to_state",
+        "disposition",
+        "rationale",
+        "claim_allowed",
+        "certification_claim"
+      ],
+      "properties": {
+        "from_state": {"const": "TOKEN_VAZIO"},
+        "to_state": {"const": "REVIEWED_SAFE"},
+        "disposition": {"const": "SAFE_EXACT_TOKEN_ABSENCE"},
+        "rationale": {"type": "string", "minLength": 120},
+        "claim_allowed": {"const": false},
+        "certification_claim": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "historical_residual": {
+      "type": "object",
+      "required": ["path", "digest_blake2b_256", "state"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "digest_blake2b_256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "state": {"const": "HISTORICAL_RESIDUAL_PRESERVED"}
+      },
+      "additionalProperties": false
+    },
+    "materialization": {
+      "type": "object",
+      "required": [
+        "method",
+        "encoding",
+        "encoded_line_count",
+        "line_ranges",
+        "decoded_size_bytes",
+        "git_blob_sha1",
+        "sha256",
+        "identity_verified",
+        "json_parse_status",
+        "repository_count",
+        "scope_state",
+        "claim_allowed",
+        "absence_state",
+        "top_level_keys",
+        "declared_canonical_blake2b_256",
+        "calculated_canonical_blake2b_256",
+        "canonical_digest_match"
+      ],
+      "properties": {
+        "method": {"const": "GITHUB_CONTENT_BASE64_RANGED_RECONSTRUCTION"},
+        "encoding": {"const": "base64"},
+        "encoded_line_count": {"type": "integer", "minimum": 1},
+        "line_ranges": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {"type": "integer", "minimum": 1},
+              {"type": "integer", "minimum": 1}
+            ],
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "decoded_size_bytes": {"type": "integer", "minimum": 1},
+        "git_blob_sha1": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "identity_verified": {"const": true},
+        "json_parse_status": {"const": "PASS"},
+        "repository_count": {"type": "integer", "minimum": 0},
+        "scope_state": {"const": "PARTIAL"},
+        "claim_allowed": {"const": false},
+        "absence_state": {"const": "TOKEN_VAZIO"},
+        "top_level_keys": {"type": "array", "items": {"type": "string"}},
+        "declared_canonical_blake2b_256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "calculated_canonical_blake2b_256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "canonical_digest_match": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "token_scan": {
+      "type": "object",
+      "required": [
+        "boundary_regex",
+        "normalization",
+        "strong_token_counts",
+        "pending_token_counts",
+        "substring_occurrences",
+        "false_positive_source",
+        "exact_claim_token_absent"
+      ],
+      "properties": {
+        "boundary_regex": {"type": "string", "minLength": 1},
+        "normalization": {"type": "string", "minLength": 1},
+        "strong_token_counts": {"type": "object"},
+        "pending_token_counts": {"type": "object"},
+        "substring_occurrences": {"type": "object"},
+        "false_positive_source": {"type": "string", "minLength": 1},
+        "exact_claim_token_absent": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "derived": {
+      "type": "object",
+      "required": [
+        "resolved_count",
+        "current_token_vazio_count",
+        "next_gate",
+        "portfolio_exit_criteria_met",
+        "claim_allowed",
+        "certification_claim"
+      ],
+      "properties": {
+        "resolved_count": {"const": 1},
+        "current_token_vazio_count": {"const": 0},
+        "next_gate": {"const": "OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH"},
+        "portfolio_exit_criteria_met": {"const": false},
+        "claim_allowed": {"const": false},
+        "certification_claim": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["algorithm", "canonicalization", "digest"],
+      "properties": {
+        "algorithm": {"const": "blake2b-256"},
+        "canonicalization": {"type": "string", "minLength": 1},
+        "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "x-validation-note": "The executable validator enforces exact values, hashes, boundaries and semantic invariants; this schema is descriptive and cannot prove byte identity by itself."
+}
