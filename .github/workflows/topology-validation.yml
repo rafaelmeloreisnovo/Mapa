@@ -56,6 +56,7 @@ jobs:
             scripts/validate_claim_contradiction_ledger.py \
             scripts/validate_claim_review_chain.py \
             scripts/validate_claim_review_residual.py \
+            scripts/validate_claim_discovery_precision.py \
             tests/test_topology.py \
             tests/test_repository_inventory.py \
             tests/test_inventory_batch.py \
@@ -67,7 +68,8 @@ jobs:
             tests/test_claim_vocabulary.py \
             tests/test_claim_contradiction_ledger.py \
             tests/test_claim_review_chain.py \
-            tests/test_claim_review_residual.py
+            tests/test_claim_review_residual.py \
+            tests/test_claim_discovery_precision.py
 
       - name: Run positive and adversarial tests
         run: |
@@ -83,7 +85,8 @@ jobs:
             tests/test_claim_vocabulary.py \
             tests/test_claim_contradiction_ledger.py \
             tests/test_claim_review_chain.py \
-            tests/test_claim_review_residual.py
+            tests/test_claim_review_residual.py \
+            tests/test_claim_discovery_precision.py
 
       - name: Validate topology and inventory
         run: |
@@ -122,8 +125,13 @@ jobs:
             --write-report claim-review-chain-validation.json
           python3 scripts/validate_claim_review_residual.py \
             --residual indices/CLAIM_REVIEW_RESIDUAL.json \
+            --resolution indices/CLAIM_REVIEW_RESOLUTION_CC028.json \
             --head indices/CLAIM_CONTRADICTION_HEAD.json \
             --write-report claim-review-residual-validation.json
+          python3 scripts/validate_claim_discovery_precision.py \
+            --root . \
+            --policy indices/CLAIM_VOCABULARY_POLICY.json \
+            --write-report claim-discovery-precision-validation.json
 
       - name: Check machine-readable contracts and boundaries
         run: |
@@ -138,7 +146,8 @@ jobs:
             claim-vocabulary-validation.json \
             claim-contradiction-ledger-validation.json \
             claim-review-chain-validation.json \
-            claim-review-residual-validation.json
+            claim-review-residual-validation.json \
+            claim-discovery-precision-validation.json
           do
             python3 -m json.tool "$report" >/dev/null
           done
@@ -162,6 +171,7 @@ jobs:
               "claim_ledger": read("claim-contradiction-ledger-validation.json"),
               "claim_chain": read("claim-review-chain-validation.json"),
               "claim_residual": read("claim-review-residual-validation.json"),
+              "claim_precision": read("claim-discovery-precision-validation.json"),
           }
 
           assert reports["topology"]["ok"] is True
@@ -202,25 +212,41 @@ jobs:
           assert reports["claim_ledger"]["token_vazio_count"] == 30
           assert reports["claim_ledger"]["portfolio_exit_criteria_met"] is False
 
-          assert reports["claim_chain"]["review_batch_count"] == 2
-          assert reports["claim_chain"]["review_decision_count"] == 29
-          assert reports["claim_chain"]["reviewed_safe_count"] == 35
+          assert reports["claim_chain"]["review_batch_count"] == 3
+          assert reports["claim_chain"]["review_decision_count"] == 30
+          assert reports["claim_chain"]["reviewed_safe_count"] == 36
           assert reports["claim_chain"]["reviewed_blocking_count"] == 0
-          assert reports["claim_chain"]["token_vazio_count"] == 1
-          assert reports["claim_chain"]["review_completion_ratio"] == 0.972222222222
-          assert reports["claim_chain"]["next_gate"] == "MATERIALIZE_FULL_CC028_AND_OBSERVABLE_SCANNER_RECEIPT"
+          assert reports["claim_chain"]["token_vazio_count"] == 0
+          assert reports["claim_chain"]["review_completion_ratio"] == 1.0
+          assert reports["claim_chain"]["exact_absence_resolution_count"] == 1
+          assert reports["claim_chain"]["next_gate"] == "OBSERVABLE_SCANNER_RECEIPT_AND_SCOPE_REFRESH"
           assert reports["claim_chain"]["portfolio_exit_criteria_met"] is False
           assert reports["claim_chain"]["claim_allowed"] is False
           assert reports["claim_chain"]["certification_claim"] is False
 
-          assert reports["claim_residual"]["residual_count"] == 1
-          assert reports["claim_residual"]["token_vazio_ids"] == ["CC028"]
-          assert reports["claim_residual"]["materialization_attempt_count"] == 2
-          assert reports["claim_residual"]["full_content_observed"] is False
-          assert reports["claim_residual"]["semantic_disposition_allowed"] is False
+          assert reports["claim_residual"]["historical_residual_count"] == 1
+          assert reports["claim_residual"]["historical_token_vazio_ids"] == ["CC028"]
+          assert reports["claim_residual"]["historical_attempt_count"] == 2
+          assert reports["claim_residual"]["resolved_count"] == 1
+          assert reports["claim_residual"]["resolved_ids"] == ["CC028"]
+          assert reports["claim_residual"]["current_residual_count"] == 0
+          assert reports["claim_residual"]["current_token_vazio_ids"] == []
+          assert reports["claim_residual"]["full_content_observed"] is True
+          assert reports["claim_residual"]["semantic_disposition_allowed"] is True
+          assert reports["claim_residual"]["decoded_size_bytes"] == 19542
+          assert reports["claim_residual"]["exact_strong_token_count"] == 0
+          assert reports["claim_residual"]["false_positive_source"] == "completeness_ratio"
           assert reports["claim_residual"]["portfolio_exit_criteria_met"] is False
           assert reports["claim_residual"]["claim_allowed"] is False
           assert reports["claim_residual"]["certification_claim"] is False
+
+          assert reports["claim_precision"]["known_resolution"]["entry_id"] == "CC028"
+          assert reports["claim_precision"]["known_resolution"]["false_positive_source"] == "completeness_ratio"
+          assert reports["claim_precision"]["known_resolution"]["substring_complete_count"] == 1
+          assert reports["claim_precision"]["known_resolution"]["exact_complete_count"] == 0
+          assert reports["claim_precision"]["portfolio_exit_criteria_met"] is False
+          assert reports["claim_precision"]["claim_allowed"] is False
+          assert reports["claim_precision"]["certification_claim"] is False
           PY
 
       - name: Create structural checksums
@@ -237,6 +263,7 @@ jobs:
               indices/CLAIM_CONTRADICTION_LEDGER.json \
               indices/CLAIM_CONTRADICTION_HEAD.json \
               indices/CLAIM_REVIEW_RESIDUAL.json \
+              indices/CLAIM_REVIEW_RESOLUTION_CC028.json \
               schemas/repository_inventory.schema.json \
               schemas/repository_inventory_batch.schema.json \
               schemas/repository-gap-map.schema.json \
@@ -260,6 +287,7 @@ jobs:
               scripts/validate_claim_contradiction_ledger.py \
               scripts/validate_claim_review_chain.py \
               scripts/validate_claim_review_residual.py \
+              scripts/validate_claim_discovery_precision.py \
               tests/test_topology.py \
               tests/test_repository_inventory.py \
               tests/test_inventory_batch.py \
@@ -272,6 +300,7 @@ jobs:
               tests/test_claim_contradiction_ledger.py \
               tests/test_claim_review_chain.py \
               tests/test_claim_review_residual.py \
+              tests/test_claim_discovery_precision.py \
               .github/workflows/topology-validation.yml
             find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
             find indices/inventory_deltas -maxdepth 1 -type f -name '*.json' -print
@@ -294,6 +323,7 @@ jobs:
             claim-contradiction-ledger-validation.json
             claim-review-chain-validation.json
             claim-review-residual-validation.json
+            claim-discovery-precision-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
