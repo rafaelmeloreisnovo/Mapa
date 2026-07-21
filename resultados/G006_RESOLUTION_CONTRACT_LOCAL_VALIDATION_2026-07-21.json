@@ -1,0 +1,56 @@
+{
+  "boundaries": {
+    "certification_claim": false,
+    "claim_allowed": false,
+    "full_repository_suite_executed": false,
+    "git_commit_bound_receipt": false,
+    "portfolio_exit_criteria_met": false,
+    "remote_runner_receipt": false
+  },
+  "commands": [
+    {
+      "file_count": 1,
+      "name": "py_compile",
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "canonical_validator_cli",
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "direct_validate",
+      "status": "PASS"
+    },
+    {
+      "mutation_count": 10,
+      "name": "adversarial_mutations",
+      "rejected_count": 10,
+      "status": "PASS"
+    }
+  ],
+  "environment": "assistant_local_python_runtime",
+  "environment_noise": {
+    "affected_validator_result": false,
+    "observed": true,
+    "process_returncodes_remained_zero": true,
+    "source": "artifact_tool spreadsheet runtime warmup during Python startup"
+  },
+  "evidence": {
+    "boundary_count": 6,
+    "decoded_size_bytes": 19542,
+    "entry_id": "CC028",
+    "exact_strong_token_count": 0,
+    "false_positive_source": "completeness_ratio",
+    "resolution_integrity_digest": "ba2bcebf2aa746d4ab5405cde0da2c3333bf5e7a4076a9d26a91ad07249c2eef"
+  },
+  "generated_on": "2026-07-21",
+  "integrity": {
+    "algorithm": "blake2b-256",
+    "canonicalization": "json-sort-keys-utf8; integrity.digest blanked",
+    "digest": "8538ce3ba3761f1e255f7bd54819d300bc8a4ee8d4b612dd9f2e7e58511f00c3"
+  },
+  "schema": "mapa.g006-resolution-contract-local-validation.v1",
+  "scope": "claim_resolution_contract_validator_and_canonical_cc028_fixture"
+}
