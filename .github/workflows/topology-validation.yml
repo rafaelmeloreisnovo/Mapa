@@ -187,10 +187,13 @@ jobs:
           assert reports["claim_ledger"]["reviewed_safe_count"] == 6
           assert reports["claim_ledger"]["token_vazio_count"] == 30
           assert reports["claim_ledger"]["portfolio_exit_criteria_met"] is False
-          assert reports["claim_chain"]["reviewed_safe_count"] == 20
+          assert reports["claim_chain"]["review_batch_count"] == 2
+          assert reports["claim_chain"]["review_decision_count"] == 29
+          assert reports["claim_chain"]["reviewed_safe_count"] == 35
           assert reports["claim_chain"]["reviewed_blocking_count"] == 0
-          assert reports["claim_chain"]["token_vazio_count"] == 16
-          assert reports["claim_chain"]["review_completion_ratio"] == 0.555555555556
+          assert reports["claim_chain"]["token_vazio_count"] == 1
+          assert reports["claim_chain"]["review_completion_ratio"] == 0.972222222222
+          assert reports["claim_chain"]["next_gate"] == "MATERIALIZE_FULL_CC028_AND_OBSERVABLE_SCANNER_RECEIPT"
           assert reports["claim_chain"]["portfolio_exit_criteria_met"] is False
           assert reports["claim_chain"]["claim_allowed"] is False
           assert reports["claim_chain"]["certification_claim"] is False
