@@ -63,6 +63,7 @@ jobs:
             scripts/validate_claim_discovery_precision.py \
             scripts/validate_claim_resolution_contract.py \
             scripts/build_claim_scope_refresh.py \
+            scripts/validate_claim_scope_refresh.py \
             scripts/validate_g006_auxiliary_receipt.py \
             scripts/run_g006_local_gate.py \
             tools/materialize_github_blob.py \
@@ -81,6 +82,7 @@ jobs:
             tests/test_claim_discovery_precision.py \
             tests/test_claim_resolution_contract.py \
             tests/test_claim_scope_refresh.py \
+            tests/test_claim_scope_refresh_validation.py \
             tests/test_github_blob_materializer.py \
             tests/test_g006_local_gate.py \
             tests/test_g006_auxiliary_receipt.py
@@ -103,6 +105,7 @@ jobs:
             tests/test_claim_discovery_precision.py \
             tests/test_claim_resolution_contract.py \
             tests/test_claim_scope_refresh.py \
+            tests/test_claim_scope_refresh_validation.py \
             tests/test_github_blob_materializer.py \
             tests/test_g006_local_gate.py \
             tests/test_g006_auxiliary_receipt.py
@@ -161,6 +164,9 @@ jobs:
             --precision claim-discovery-precision-validation.json \
             --current-commit "${GITHUB_SHA}" \
             --write-report claim-scope-refresh-validation.json
+          python3 scripts/validate_claim_scope_refresh.py \
+            --path claim-scope-refresh-validation.json \
+            --write-report claim-scope-refresh-contract-validation.json
           python3 scripts/validate_g006_auxiliary_receipt.py \
             --receipt resultados/G006_AUXILIARY_LOCAL_VALIDATION_2026-07-21.json \
             --root . \
@@ -183,6 +189,7 @@ jobs:
             claim-discovery-precision-validation.json \
             claim-resolution-contract-validation.json \
             claim-scope-refresh-validation.json \
+            claim-scope-refresh-contract-validation.json \
             g006-auxiliary-receipt-validation.json
           do
             python3 -m json.tool "$report" >/dev/null
@@ -211,6 +218,7 @@ jobs:
               "claim_precision": read("claim-discovery-precision-validation.json"),
               "claim_resolution": read("claim-resolution-contract-validation.json"),
               "scope_refresh": read("claim-scope-refresh-validation.json"),
+              "scope_refresh_contract": read("claim-scope-refresh-contract-validation.json"),
               "auxiliary_receipt": read("g006-auxiliary-receipt-validation.json"),
           }
 
@@ -323,6 +331,17 @@ jobs:
               for candidate in reports["scope_refresh"]["new_candidates"]
           )
 
+          assert reports["scope_refresh_contract"]["baseline_candidate_count"] == 36
+          assert reports["scope_refresh_contract"]["new_candidate_count"] == reports["scope_refresh"]["derived"]["new_candidate_count"]
+          assert reports["scope_refresh_contract"]["new_candidate_ids_deterministic"] is True
+          assert reports["scope_refresh_contract"]["all_new_candidates_token_vazio"] is True
+          assert reports["scope_refresh_contract"]["review_required"] is reports["scope_refresh"]["derived"]["review_required"]
+          assert reports["scope_refresh_contract"]["filtered_scope_refresh_complete"] is False
+          assert reports["scope_refresh_contract"]["full_byte_repository_scan_proven"] is False
+          assert reports["scope_refresh_contract"]["portfolio_exit_criteria_met"] is False
+          assert reports["scope_refresh_contract"]["claim_allowed"] is False
+          assert reports["scope_refresh_contract"]["certification_claim"] is False
+
           assert reports["auxiliary_receipt"]["compiled_file_count"] == 4
           assert reports["auxiliary_receipt"]["tests_run"] == 15
           assert reports["auxiliary_receipt"]["tests_passed"] == 15
@@ -382,6 +401,7 @@ jobs:
               scripts/validate_claim_discovery_precision.py \
               scripts/validate_claim_resolution_contract.py \
               scripts/build_claim_scope_refresh.py \
+              scripts/validate_claim_scope_refresh.py \
               scripts/validate_g006_auxiliary_receipt.py \
               scripts/run_g006_local_gate.py \
               tools/materialize_github_blob.py \
@@ -400,6 +420,7 @@ jobs:
               tests/test_claim_discovery_precision.py \
               tests/test_claim_resolution_contract.py \
               tests/test_claim_scope_refresh.py \
+              tests/test_claim_scope_refresh_validation.py \
               tests/test_github_blob_materializer.py \
               tests/test_g006_local_gate.py \
               tests/test_g006_auxiliary_receipt.py \
@@ -428,6 +449,7 @@ jobs:
             claim-discovery-precision-validation.json
             claim-resolution-contract-validation.json
             claim-scope-refresh-validation.json
+            claim-scope-refresh-contract-validation.json
             g006-auxiliary-receipt-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
