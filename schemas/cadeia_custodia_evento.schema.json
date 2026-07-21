@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/cadeia_custodia_evento.schema.json",
+  "title": "Evento de Cadeia de Custodia RAFAELIA",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "timestamp_utc",
+    "repository",
+    "branch",
+    "actor",
+    "operation",
+    "object",
+    "epistemic_state",
+    "claim_allowed",
+    "evidence",
+    "controls",
+    "sigma",
+    "next_verifiable_step"
+  ],
+  "properties": {
+    "schema_version": {"const": "mapa.custody-event.v1"},
+    "event_id": {
+      "type": "string",
+      "pattern": "^COC-[0-9]{8}T[0-9]{6}Z-[A-Z0-9_-]{4,64}$"
+    },
+    "timestamp_utc": {"type": "string", "format": "date-time"},
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "branch": {"type": "string", "minLength": 1},
+    "source_ref": {"type": ["string", "null"]},
+    "previous_event_id": {"type": ["string", "null"]},
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id"],
+      "properties": {
+        "type": {"enum": ["human", "automation", "service"]},
+        "id": {"type": "string", "minLength": 1}
+      }
+    },
+    "operation": {
+      "enum": [
+        "INGEST",
+        "CLASSIFY",
+        "TRANSFORM",
+        "VALIDATE",
+        "TRANSFER",
+        "PUBLISH",
+        "CORRECT",
+        "RETIRE",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "media_type"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "media_type": {"type": "string", "minLength": 1},
+        "size_bytes": {"type": ["integer", "null"], "minimum": 0},
+        "sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "blake3": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "epistemic_state": {
+      "enum": ["FATO", "HIPOTESE", "SIMBOLICO", "TOKEN_VAZIO"]
+    },
+    "claim_allowed": {"type": "boolean"},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "reference"],
+        "properties": {
+          "kind": {
+            "enum": ["commit", "file", "hash", "log", "measurement", "source", "review"]
+          },
+          "reference": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["integrity", "traceability", "reproducibility"],
+      "properties": {
+        "integrity": {"enum": ["verified", "partial", "TOKEN_VAZIO"]},
+        "traceability": {"enum": ["verified", "partial", "TOKEN_VAZIO"]},
+        "reproducibility": {"enum": ["verified", "partial", "TOKEN_VAZIO"]},
+        "confidentiality": {"enum": ["public", "internal", "restricted"]}
+      }
+    },
+    "sigma": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase", "defect_definition", "metric", "baseline", "target"],
+      "properties": {
+        "phase": {"enum": ["DEFINE", "MEASURE", "ANALYZE", "IMPROVE", "CONTROL"]},
+        "defect_definition": {"type": "string", "minLength": 1},
+        "metric": {"type": "string", "minLength": 1},
+        "baseline": {"type": ["number", "string", "null"]},
+        "target": {"type": ["number", "string", "null"]}
+      }
+    },
+    "next_verifiable_step": {"type": "string", "minLength": 1},
+    "event_hash_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"epistemic_state": {"const": "TOKEN_VAZIO"}},
+        "required": ["epistemic_state"]
+      },
+      "then": {
+        "properties": {"claim_allowed": {"const": false}}
+      }
+    },
+    {
+      "if": {
+        "properties": {"claim_allowed": {"const": true}},
+        "required": ["claim_allowed"]
+      },
+      "then": {
+        "properties": {"evidence": {"minItems": 1}}
+      }
+    }
+  ]
+}
