@@ -1,0 +1,70 @@
+{
+  "authority_repository": "rafaelmeloreisnovo/Mapa",
+  "certification_claim": false,
+  "claim_allowed": false,
+  "derived": {
+    "certification_claim": false,
+    "claim_allowed": false,
+    "next_gate": "MATERIALIZE_FULL_CC028_AND_OBSERVABLE_SCANNER_RECEIPT",
+    "portfolio_exit_criteria_met": false,
+    "residual_count": 1,
+    "token_vazio_ids": [
+      "CC028"
+    ]
+  },
+  "gap_id": "G006",
+  "generated_on": "2026-07-20",
+  "integrity": {
+    "algorithm": "blake2b-256",
+    "canonicalization": "json-sort-keys-utf8; integrity.digest blanked",
+    "digest": "e345bf4687e0553d5da0589d73a86cfc75e08215bbc26be4ac82f07e5aead9bf"
+  },
+  "portfolio_exit_criteria_met": false,
+  "residuals": [
+    {
+      "attempts": [
+        {
+          "blob_sha": "b43554096f00c0918997dd9f9b11787cec4d4e52",
+          "method": "GitHub.fetch_file",
+          "result": "TRUNCATED_RESPONSE"
+        },
+        {
+          "blob_sha": "b43554096f00c0918997dd9f9b11787cec4d4e52",
+          "method": "GitHub.fetch_blob",
+          "result": "TRUNCATED_RESPONSE"
+        }
+      ],
+      "claim_allowed": false,
+      "exit_criteria": [
+        "materialize the full byte-identical blob without connector truncation",
+        "verify the materialized blob identity against Git blob b43554096f00c0918997dd9f9b11787cec4d4e52",
+        "read the complete file at pinned commit 4016c51e024573a3875457fceb6d05926e07a07b",
+        "classify every strong-token occurrence and preserve evidence pointers",
+        "append a new review batch and execute an observable scanner receipt"
+      ],
+      "id": "CC028",
+      "observed_boundary": {
+        "claim_allowed_false_observed": true,
+        "full_content_observed": false,
+        "partial_state_observed": true,
+        "root_fields_observed": [
+          "schema",
+          "schema_version",
+          "generated_at",
+          "inventory_source",
+          "collection_method",
+          "scope",
+          "statistics",
+          "repositories"
+        ],
+        "semantic_disposition_allowed": false
+      },
+      "owner_role": "R12",
+      "path": "indices/REPOSITORY_INVENTORY.json",
+      "reason": "CONNECTOR_RESPONSE_TRUNCATED_AT_LINE_BOUNDARY",
+      "state": "TOKEN_VAZIO"
+    }
+  ],
+  "schema": "mapa.claim-review-residual.v1",
+  "source_commit": "4016c51e024573a3875457fceb6d05926e07a07b"
+}
