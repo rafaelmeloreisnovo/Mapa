@@ -2,25 +2,33 @@ schema: mapa_governanca_dados_v1
 id: GOV-CUSTODY-6SIGMA
 repository: rafaelmeloreisnovo/Mapa
 branch: codex/governanca-cadeia-custodia-6sigma
-status: PILOT
-claim_allowed: false
+status: PILOT_MEASURED
+claim_allowed_programa: false
+merge_allowed: false
+remote_ci_required_this_cycle: false
 
 invariants:
   - id: INV-01
     rule: "Toda conclusao exige evidencia referenciada."
     enforcement: scripts/validate_chain_of_custody.py
   - id: INV-02
-    rule: "TOKEN_VAZIO exige claim_allowed=false e proximo passo verificavel."
+    rule: "TOKEN_VAZIO exige operation=TOKEN_VAZIO, claim_allowed=false e proximo passo verificavel."
     enforcement: scripts/validate_chain_of_custody.py
   - id: INV-03
-    rule: "Correcao cria novo evento; historico nao e apagado."
-    enforcement: review
-  - id: INV-04
-    rule: "Caminhos sao relativos ao repositorio e sem traversal."
+    rule: "previous_event_id referencia o evento valido imediatamente anterior."
     enforcement: scripts/validate_chain_of_custody.py
+  - id: INV-04
+    rule: "CORRECT usa supersedes_event_id e nao apaga historico."
+    enforcement: schema+validator+review
   - id: INV-05
-    rule: "Nivel sigma nao e declarado antes de universo, oportunidades e defeitos medidos."
-    enforcement: review
+    rule: "Caminhos sao relativos, sem traversal ou barra invertida."
+    enforcement: scripts/validate_chain_of_custody.py
+  - id: INV-06
+    rule: "Evento invalido nao se torna ancora da cadeia."
+    enforcement: scripts/validate_chain_of_custody.py
+  - id: INV-07
+    rule: "Nivel sigma nao e declarado antes de estabilidade e convencao estatistica aprovadas."
+    enforcement: scripts/measure_custody_baseline.py+review
 
 assets:
   policy:
@@ -37,8 +45,20 @@ assets:
     path: scripts/validate_chain_of_custody.py
     state: FATO
     dependencies: python-standard-library
+  baseline_measurement:
+    path: scripts/measure_custody_baseline.py
+    state: FATO
+    dependencies: python-standard-library
   tests:
-    path: tests/test_validate_chain_of_custody.py
+    paths:
+      - tests/test_validate_chain_of_custody.py
+      - tests/test_measure_custody_baseline.py
+    state: FATO
+  execution_evidence:
+    path: auditoria/PR39_EXECUTION_EVIDENCE.json
+    state: FATO
+  baseline_report:
+    path: auditoria/BASELINE_CADEIA_CUSTODIA_2026-07-21.json
     state: FATO
   roadmap:
     path: roadmaps/ROADMAP_GOVERNANCA_DADOS_6SIGMA.md
@@ -46,35 +66,54 @@ assets:
 
 quality_gates:
   - id: GATE-STRUCTURE
-    command: "python3 scripts/validate_chain_of_custody.py indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
+    command: "python3 -S scripts/validate_chain_of_custody.py indices/CADEIA_CUSTODIA_EVENTOS.jsonl --repo-root ."
+    observed_result: PASS
     blocks_claim_on_failure: true
   - id: GATE-REGRESSION
-    command: "python3 -m unittest tests/test_validate_chain_of_custody.py"
+    command: "python3 -S -m unittest discover -s tests -p 'test_*.py'"
+    observed_result: "PASS: 19 tests"
     blocks_claim_on_failure: true
-  - id: GATE-EVIDENCE
+  - id: GATE-BASELINE
+    command: "python3 -S scripts/measure_custody_baseline.py indices/CADEIA_CUSTODIA_EVENTOS.jsonl --repo-root ."
+    observed_result: PASS
+    blocks_claim_on_failure: true
+  - id: GATE-HUMAN-REVIEW
     command: TOKEN_VAZIO
-    reason: "Revisao humana e verificacao dos commits ainda nao automatizadas como gate unico."
-    next_verifiable_step: "Executar revisao do PR e registrar o resultado no ledger."
+    reason: "Revisao humana final e decisao de merge ainda nao executadas."
+    next_verifiable_step: "Revisar o diff completo do PR e registrar decisao sem merge automatico."
 
 metrics:
-  completeness: TOKEN_VAZIO
-  traceability: TOKEN_VAZIO
-  integrity: TOKEN_VAZIO
-  reproducibility: TOKEN_VAZIO
+  scope: bootstrap_ledger_snapshot
+  event_count: 4
+  opportunities_per_event: 8
+  total_opportunities: 32
+  completeness: 1.0
+  traceability: 1.0
+  integrity: 1.0
+  reproducibility: 1.0
   token_vazio_resolution: TOKEN_VAZIO
-  dpmo: TOKEN_VAZIO
+  dpmo_observed: 0.0
   sigma_level: TOKEN_VAZIO
+  certification_six_sigma: TOKEN_VAZIO
 
 rollout:
-  wave_1: Mapa
+  wave_1:
+    repository: Mapa
+    state: PILOT_MEASURED
   wave_2:
-    - termux-app-rafacodephi
-    - RafGitTools
-    - Vectras-VM-Android
-    - qemu_rafaelia
+    state: ROADMAP
+    repositories:
+      - termux-app-rafacodephi
+      - RafGitTools
+      - Vectras-VM-Android
+      - qemu_rafaelia
   wave_3:
-    - relativity-living-light
-    - papers
+    state: ROADMAP
+    repositories:
+      - relativity-living-light
+      - papers
   wave_4:
-    - CientiEspiritual
-    - philosophical-symbolic-corpus
+    state: ROADMAP
+    repositories:
+      - CientiEspiritual
+      - philosophical-symbolic-corpus
