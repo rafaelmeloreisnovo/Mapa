@@ -44,9 +44,10 @@ class G006IsolatedWrapperTests(unittest.TestCase):
         for path in (git_script, python_script):
             path.chmod(path.stat().st_mode | stat.S_IXUSR)
 
+        inherited_path = os.environ.get("PATH", "")
         env = {
             **os.environ,
-            "PATH": str(fake_bin),
+            "PATH": str(fake_bin) + os.pathsep + inherited_path,
             "TMPDIR": str(tmp / "external-tmp"),
         }
         return fake_repo, capture, env
