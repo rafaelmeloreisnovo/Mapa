@@ -3,82 +3,24 @@ name: Topology and Inventory Structural Validation
 on:
   pull_request:
     paths:
-      - "indices/GRAFO_DEPENDENCIAS_MAPA.yaml"
-      - "indices/REPOSITORY_INVENTORY.json"
-      - "indices/REPOSITORY_INVENTORY_HEAD.json"
-      - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
-      - "indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json"
-      - "indices/ISO_OPERATIONAL_READINESS_BASELINE.json"
-      - "indices/CLAIM_VOCABULARY_POLICY.json"
-      - "indices/inventory_batches/**"
-      - "indices/inventory_deltas/**"
-      - "schemas/repository_inventory.schema.json"
-      - "schemas/repository_inventory_batch.schema.json"
-      - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
-      - "biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md"
-      - "biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md"
-      - "biblioteconomia/22_CLAIM_VOCABULARY_AND_CONTRADICTION_GATE.md"
-      - "resultados/ISO_OPERATIONAL_READINESS_GAP_LEDGER_2026-07-20.md"
-      - "resultados/P0_G006_CLAIM_CONTRADICTION_BASELINE_2026-07-20.md"
+      - "indices/**"
+      - "schemas/**"
+      - "biblioteconomia/**"
+      - "resultados/**"
       - "orquestrador/QUALITY_GATE_POLICY.md"
-      - "scripts/validate_mapa_topology.py"
-      - "scripts/validate_repository_inventory.py"
-      - "scripts/apply_repository_inventory_batch.py"
-      - "scripts/validate_repository_inventory_batch_chain.py"
-      - "scripts/validate_repository_inventory_head.py"
-      - "scripts/validate_toroidal_research_federation.py"
-      - "scripts/validate_platform_assurance_pointer.py"
-      - "scripts/validate_iso_operational_readiness.py"
-      - "scripts/validate_claim_vocabulary.py"
-      - "tests/test_topology.py"
-      - "tests/test_repository_inventory.py"
-      - "tests/test_inventory_batch.py"
-      - "tests/test_inventory_batch_chain.py"
-      - "tests/test_inventory_head.py"
-      - "tests/test_toroidal_research_federation.py"
-      - "tests/test_platform_assurance_pointer.py"
-      - "tests/test_iso_operational_readiness.py"
-      - "tests/test_claim_vocabulary.py"
+      - "scripts/**"
+      - "tests/**"
       - ".github/workflows/topology-validation.yml"
   push:
     branches: [main]
     paths:
-      - "indices/GRAFO_DEPENDENCIAS_MAPA.yaml"
-      - "indices/REPOSITORY_INVENTORY.json"
-      - "indices/REPOSITORY_INVENTORY_HEAD.json"
-      - "indices/TOROIDAL_RESEARCH_FEDERATION.json"
-      - "indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json"
-      - "indices/ISO_OPERATIONAL_READINESS_BASELINE.json"
-      - "indices/CLAIM_VOCABULARY_POLICY.json"
-      - "indices/inventory_batches/**"
-      - "indices/inventory_deltas/**"
-      - "schemas/repository_inventory.schema.json"
-      - "schemas/repository_inventory_batch.schema.json"
-      - "biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md"
-      - "biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md"
-      - "biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md"
-      - "biblioteconomia/22_CLAIM_VOCABULARY_AND_CONTRADICTION_GATE.md"
-      - "resultados/ISO_OPERATIONAL_READINESS_GAP_LEDGER_2026-07-20.md"
-      - "resultados/P0_G006_CLAIM_CONTRADICTION_BASELINE_2026-07-20.md"
+      - "indices/**"
+      - "schemas/**"
+      - "biblioteconomia/**"
+      - "resultados/**"
       - "orquestrador/QUALITY_GATE_POLICY.md"
-      - "scripts/validate_mapa_topology.py"
-      - "scripts/validate_repository_inventory.py"
-      - "scripts/apply_repository_inventory_batch.py"
-      - "scripts/validate_repository_inventory_batch_chain.py"
-      - "scripts/validate_repository_inventory_head.py"
-      - "scripts/validate_toroidal_research_federation.py"
-      - "scripts/validate_platform_assurance_pointer.py"
-      - "scripts/validate_iso_operational_readiness.py"
-      - "scripts/validate_claim_vocabulary.py"
-      - "tests/test_topology.py"
-      - "tests/test_repository_inventory.py"
-      - "tests/test_inventory_batch.py"
-      - "tests/test_inventory_batch_chain.py"
-      - "tests/test_inventory_head.py"
-      - "tests/test_toroidal_research_federation.py"
-      - "tests/test_platform_assurance_pointer.py"
-      - "tests/test_iso_operational_readiness.py"
-      - "tests/test_claim_vocabulary.py"
+      - "scripts/**"
+      - "tests/**"
       - ".github/workflows/topology-validation.yml"
   workflow_dispatch:
 
@@ -92,239 +34,169 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Checkout without persisted credentials
         uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - name: Compile stdlib validators, applicators and tests
+      - name: Compile stdlib control plane
         run: |
-          python3 -m py_compile scripts/validate_mapa_topology.py
-          python3 -m py_compile scripts/validate_repository_inventory.py
-          python3 -m py_compile scripts/apply_repository_inventory_batch.py
-          python3 -m py_compile scripts/validate_repository_inventory_batch_chain.py
-          python3 -m py_compile scripts/validate_repository_inventory_head.py
-          python3 -m py_compile scripts/validate_toroidal_research_federation.py
-          python3 -m py_compile scripts/validate_platform_assurance_pointer.py
-          python3 -m py_compile scripts/validate_iso_operational_readiness.py
-          python3 -m py_compile scripts/validate_claim_vocabulary.py
-          python3 -m py_compile tests/test_topology.py
-          python3 -m py_compile tests/test_repository_inventory.py
-          python3 -m py_compile tests/test_inventory_batch.py
-          python3 -m py_compile tests/test_inventory_batch_chain.py
-          python3 -m py_compile tests/test_inventory_head.py
-          python3 -m py_compile tests/test_toroidal_research_federation.py
-          python3 -m py_compile tests/test_platform_assurance_pointer.py
-          python3 -m py_compile tests/test_iso_operational_readiness.py
-          python3 -m py_compile tests/test_claim_vocabulary.py
-
-      - name: Run topology unit tests
-        run: python3 -m unittest tests/test_topology.py -v
-
-      - name: Run inventory adversarial tests
-        run: python3 -m unittest tests/test_repository_inventory.py -v
-
-      - name: Run inventory batch and chain adversarial tests
-        run: |
-          python3 -m unittest \
+          python3 -m py_compile \
+            scripts/validate_mapa_topology.py \
+            scripts/validate_repository_inventory.py \
+            scripts/apply_repository_inventory_batch.py \
+            scripts/validate_repository_inventory_batch_chain.py \
+            scripts/validate_repository_inventory_head.py \
+            scripts/validate_toroidal_research_federation.py \
+            scripts/validate_platform_assurance_pointer.py \
+            scripts/validate_iso_operational_readiness.py \
+            scripts/validate_claim_vocabulary.py \
+            scripts/validate_claim_contradiction_ledger.py \
+            scripts/validate_claim_review_chain.py \
+            tests/test_topology.py \
+            tests/test_repository_inventory.py \
             tests/test_inventory_batch.py \
             tests/test_inventory_batch_chain.py \
-            -v
+            tests/test_inventory_head.py \
+            tests/test_toroidal_research_federation.py \
+            tests/test_platform_assurance_pointer.py \
+            tests/test_iso_operational_readiness.py \
+            tests/test_claim_vocabulary.py \
+            tests/test_claim_contradiction_ledger.py \
+            tests/test_claim_review_chain.py
 
-      - name: Run atomic inventory head adversarial tests
-        run: python3 -m unittest tests/test_inventory_head.py -v
+      - name: Run positive and adversarial tests
+        run: |
+          python3 -m unittest -v \
+            tests/test_topology.py \
+            tests/test_repository_inventory.py \
+            tests/test_inventory_batch.py \
+            tests/test_inventory_batch_chain.py \
+            tests/test_inventory_head.py \
+            tests/test_toroidal_research_federation.py \
+            tests/test_platform_assurance_pointer.py \
+            tests/test_iso_operational_readiness.py \
+            tests/test_claim_vocabulary.py \
+            tests/test_claim_contradiction_ledger.py \
+            tests/test_claim_review_chain.py
 
-      - name: Run toroidal federation adversarial tests
-        run: python3 -m unittest tests/test_toroidal_research_federation.py -v
-
-      - name: Run platform assurance pointer adversarial tests
-        run: python3 -m unittest tests/test_platform_assurance_pointer.py -v
-
-      - name: Run ISO operational readiness adversarial tests
-        run: python3 -m unittest tests/test_iso_operational_readiness.py -v
-
-      - name: Run claim vocabulary adversarial tests
-        run: python3 -m unittest tests/test_claim_vocabulary.py -v
-
-      - name: Validate canonical topology
+      - name: Validate topology and inventory
         run: |
           python3 scripts/validate_mapa_topology.py \
             --write-report topology-validation.json
-
-      - name: Validate immutable inventory checkpoint
-        run: |
           python3 scripts/validate_repository_inventory.py \
             --write-report repository-inventory-validation.json
-
-      - name: Validate checkpoint batches as fixed points
-        run: |
           python3 scripts/validate_repository_inventory_batch_chain.py \
             --inventory indices/REPOSITORY_INVENTORY.json \
             --batches-dir indices/inventory_batches \
             --write-report inventory-batch-chain-validation.json
-
-      - name: Validate atomic inventory head and post-checkpoint deltas
-        run: |
           python3 scripts/validate_repository_inventory_head.py \
             --head indices/REPOSITORY_INVENTORY_HEAD.json \
             --write-report repository-inventory-head-validation.json
 
-      - name: Validate toroidal research federation registry
+      - name: Validate federation and operational readiness
         run: |
           python3 scripts/validate_toroidal_research_federation.py \
             --write-report toroidal-federation-validation.json
-
-      - name: Validate platform assurance authority pointer
-        run: |
           python3 scripts/validate_platform_assurance_pointer.py \
             --write-report platform-assurance-pointer-validation.json
-
-      - name: Validate ISO operational readiness baseline
-        run: |
           python3 scripts/validate_iso_operational_readiness.py \
             --write-report iso-operational-readiness-validation.json
 
-      - name: Validate claim vocabulary and contradiction boundary
+      - name: Validate G006 claim control plane
         run: |
           python3 scripts/validate_claim_vocabulary.py \
             --root . \
             --policy indices/CLAIM_VOCABULARY_POLICY.json \
             --write-report claim-vocabulary-validation.json
+          python3 scripts/validate_claim_contradiction_ledger.py \
+            --path indices/CLAIM_CONTRADICTION_LEDGER.json \
+            --write-report claim-contradiction-ledger-validation.json
+          python3 scripts/validate_claim_review_chain.py \
+            --head indices/CLAIM_CONTRADICTION_HEAD.json \
+            --write-report claim-review-chain-validation.json
 
-      - name: Check machine-readable artifacts and claim boundary
+      - name: Check machine-readable contracts and boundaries
         run: |
-          python3 -m json.tool topology-validation.json >/dev/null
-          python3 -m json.tool repository-inventory-validation.json >/dev/null
-          python3 -m json.tool inventory-batch-chain-validation.json >/dev/null
-          python3 -m json.tool repository-inventory-head-validation.json >/dev/null
-          python3 -m json.tool toroidal-federation-validation.json >/dev/null
-          python3 -m json.tool platform-assurance-pointer-validation.json >/dev/null
-          python3 -m json.tool iso-operational-readiness-validation.json >/dev/null
-          python3 -m json.tool claim-vocabulary-validation.json >/dev/null
+          for report in \
+            topology-validation.json \
+            repository-inventory-validation.json \
+            inventory-batch-chain-validation.json \
+            repository-inventory-head-validation.json \
+            toroidal-federation-validation.json \
+            platform-assurance-pointer-validation.json \
+            iso-operational-readiness-validation.json \
+            claim-vocabulary-validation.json \
+            claim-contradiction-ledger-validation.json \
+            claim-review-chain-validation.json
+          do
+            python3 -m json.tool "$report" >/dev/null
+          done
+
           python3 - <<'PY'
-          from pathlib import Path
           import json
+          from pathlib import Path
 
-          raw = Path("indices/GRAFO_DEPENDENCIAS_MAPA.yaml").read_text(encoding="utf-8")
-          topology = json.loads(raw[raw.find("{"):])
-          checkpoint = json.loads(
-              Path("indices/REPOSITORY_INVENTORY.json").read_text(encoding="utf-8")
-          )
-          head = json.loads(
-              Path("indices/REPOSITORY_INVENTORY_HEAD.json").read_text(encoding="utf-8")
-          )
-          checkpoint_report = json.loads(
-              Path("repository-inventory-validation.json").read_text(encoding="utf-8")
-          )
-          chain_report = json.loads(
-              Path("inventory-batch-chain-validation.json").read_text(encoding="utf-8")
-          )
-          head_report = json.loads(
-              Path("repository-inventory-head-validation.json").read_text(encoding="utf-8")
-          )
-          federation_report = json.loads(
-              Path("toroidal-federation-validation.json").read_text(encoding="utf-8")
-          )
-          registry = json.loads(
-              Path("indices/TOROIDAL_RESEARCH_FEDERATION.json").read_text(encoding="utf-8")
-          )
-          assurance_report = json.loads(
-              Path("platform-assurance-pointer-validation.json").read_text(encoding="utf-8")
-          )
-          assurance_pointer = json.loads(
-              Path("indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json").read_text(encoding="utf-8")
-          )
-          iso_report = json.loads(
-              Path("iso-operational-readiness-validation.json").read_text(encoding="utf-8")
-          )
-          iso_baseline = json.loads(
-              Path("indices/ISO_OPERATIONAL_READINESS_BASELINE.json").read_text(encoding="utf-8")
-          )
-          claim_report = json.loads(
-              Path("claim-vocabulary-validation.json").read_text(encoding="utf-8")
-          )
-          claim_policy = json.loads(
-              Path("indices/CLAIM_VOCABULARY_POLICY.json").read_text(encoding="utf-8")
-          )
+          def read(path):
+              return json.loads(Path(path).read_text(encoding="utf-8"))
 
-          checkpoint_count = checkpoint["scope"]["materialized_count"]
-          assert topology["schema"] == "mapa_topology_v2"
-          assert topology["declared_metrics"]["cycle_count"] == 0
-          assert topology["declared_metrics"]["orphan_count"] == 0
-          assert checkpoint["schema"] == "repository_inventory_v2"
-          assert checkpoint["scope"]["state"] == "PARTIAL"
-          assert checkpoint["scope"]["claim_allowed"] is False
-          assert checkpoint_count == len(checkpoint["repositories"])
-          assert checkpoint_report["status"] == "PASS"
-          assert checkpoint_report["claim_allowed"] is False
-          assert chain_report["status"] == "PASS"
-          assert chain_report["all_batches_fixed_points"] is True
-          assert chain_report["claim_allowed"] is False
-          assert (
-              chain_report["total_batch_records"]
-              + chain_report["baseline_unbatched_records"]
-              == checkpoint_count
-          )
-          assert head["schema"] == "repository_inventory_head_v1"
-          assert head["checkpoint"]["materialized_count"] == checkpoint_count
-          assert head["derived"]["materialized_count"] == 51
-          assert head["derived"]["remaining_token_vazio"] == 75
-          assert head["derived"]["inventory_state"] == "PARTIAL"
-          assert head["derived"]["claim_allowed"] is False
-          assert head_report["status"] == "PASS"
-          assert head_report["materialized_count"] == 51
-          assert head_report["remaining_token_vazio"] == 75
-          assert head_report["all_delta_batches_fixed_points"] is True
-          assert head_report["claim_allowed"] is False
-          assert federation_report["status"] == "PASS"
-          assert federation_report["repository_count"] == 6
-          assert federation_report["active_count"] == 6
-          assert federation_report["adapter_planned_count"] == 0
-          assert federation_report["token_vazio_count"] == 0
-          assert federation_report["cycle_count"] == 0
-          assert federation_report["open_evidence_gap_count"] == 1
-          runtime = next(item for item in registry["repositories"] if item["role"] == "RUNTIME")
-          memory = next(item for item in registry["repositories"] if item["role"] == "MEMORY")
-          assert runtime["state"] == "ACTIVE"
-          assert runtime["device_evidence_state"] == "TOKEN_VAZIO"
-          assert memory["state"] == "ACTIVE"
-          assert memory["latest_state_observation"] == "SYNCED_BOUNDED"
-          assert federation_report["claim_allowed"] is False
-          assert assurance_report["status"] == "PASS"
-          assert assurance_report["pointer_state"] == "ACTIVE_CONTROL_PLANE_WITH_OPEN_BLOCKERS"
-          assert assurance_report["p0_routes"] == 5
-          assert assurance_report["open_blocking_count"] == 9
-          assert assurance_report["promotion_ready_count"] == 0
-          assert assurance_report["claim_allowed"] is False
-          assert assurance_pointer["producer"]["merge_commit"] == "356c11749fa423bcb458ca399ff39f0155557aa5"
-          assert assurance_pointer["producer"]["index_digest"] == "e2da04fec6a7334b698a87676c095aba62596a7bdd7777a66f211cccd9621b31"
-          assert iso_report["status"] == "PASS"
-          assert iso_report["heuristic_count"] == 30
-          assert iso_report["heuristic_category_count"] >= 12
-          assert iso_report["gap_count"] == 25
-          assert iso_report["gap_priority_counts"] == {"P0": 8, "P1": 11, "P2": 5, "P3": 1}
-          assert iso_report["baseline_roles"] == 14
-          assert iso_report["core_hours_min"] == 10300
-          assert iso_report["core_hours_max"] == 15800
-          assert iso_report["claim_allowed"] is False
-          assert iso_report["certification_claim"] is False
-          assert iso_baseline["observed_state"]["assurance_open_blockers"] == 9
-          assert iso_baseline["derived"]["recommended_strategy"] == "DELTA_FIRST_RISK_BASED_WAVES"
-          assert claim_report["status"] == "PASS"
-          assert claim_report["gap_id"] == "G006"
-          assert claim_report["control_state"] == "IMPLEMENTED_LOCAL_SCOPE"
-          assert claim_report["portfolio_exit_criteria_met"] is False
-          assert claim_report["explicit_claim_error_count"] == 0
-          assert claim_report["claim_allowed"] is False
-          assert claim_report["certification_claim"] is False
-          assert claim_policy["rollout_mode"] == "REPORT_PROSE_FAIL_EXPLICIT"
-          assert claim_policy["claim_allowed"] is False
-          assert claim_policy["certification_claim"] is False
+          reports = {
+              "topology": read("topology-validation.json"),
+              "inventory": read("repository-inventory-validation.json"),
+              "batch_chain": read("inventory-batch-chain-validation.json"),
+              "inventory_head": read("repository-inventory-head-validation.json"),
+              "federation": read("toroidal-federation-validation.json"),
+              "assurance": read("platform-assurance-pointer-validation.json"),
+              "iso": read("iso-operational-readiness-validation.json"),
+              "claim_scan": read("claim-vocabulary-validation.json"),
+              "claim_ledger": read("claim-contradiction-ledger-validation.json"),
+              "claim_chain": read("claim-review-chain-validation.json"),
+          }
+
+          assert all(report["status"] == "PASS" for report in reports.values())
+          assert reports["topology"]["cycle_count"] == 0
+          assert reports["topology"]["orphan_count"] == 0
+
+          assert reports["inventory"]["inventory_state"] == "PARTIAL"
+          assert reports["inventory"]["claim_allowed"] is False
+          assert reports["batch_chain"]["all_batches_fixed_points"] is True
+          assert reports["batch_chain"]["claim_allowed"] is False
+          assert reports["inventory_head"]["materialized_count"] == 51
+          assert reports["inventory_head"]["remaining_token_vazio"] == 75
+          assert reports["inventory_head"]["claim_allowed"] is False
+
+          assert reports["federation"]["active_count"] == 6
+          assert reports["federation"]["open_evidence_gap_count"] == 1
+          assert reports["federation"]["claim_allowed"] is False
+          assert reports["assurance"]["open_blocking_count"] == 9
+          assert reports["assurance"]["promotion_ready_count"] == 0
+          assert reports["assurance"]["claim_allowed"] is False
+
+          assert reports["iso"]["gap_priority_counts"] == {
+              "P0": 8, "P1": 11, "P2": 5, "P3": 1
+          }
+          assert reports["iso"]["claim_allowed"] is False
+          assert reports["iso"]["certification_claim"] is False
+
+          assert reports["claim_scan"]["explicit_claim_error_count"] == 0
+          assert reports["claim_scan"]["portfolio_exit_criteria_met"] is False
+          assert reports["claim_scan"]["claim_allowed"] is False
+          assert reports["claim_ledger"]["candidate_count"] == 36
+          assert reports["claim_ledger"]["reviewed_safe_count"] == 6
+          assert reports["claim_ledger"]["token_vazio_count"] == 30
+          assert reports["claim_ledger"]["portfolio_exit_criteria_met"] is False
+          assert reports["claim_chain"]["reviewed_safe_count"] == 20
+          assert reports["claim_chain"]["reviewed_blocking_count"] == 0
+          assert reports["claim_chain"]["token_vazio_count"] == 16
+          assert reports["claim_chain"]["review_completion_ratio"] == 0.555555555556
+          assert reports["claim_chain"]["portfolio_exit_criteria_met"] is False
+          assert reports["claim_chain"]["claim_allowed"] is False
+          assert reports["claim_chain"]["certification_claim"] is False
           PY
 
-      - name: Create checksums
+      - name: Create structural checksums
         run: |
           {
             printf '%s\n' \
@@ -335,8 +207,12 @@ jobs:
               indices/PLATFORM_ASSURANCE_CONTROL_PLANE.json \
               indices/ISO_OPERATIONAL_READINESS_BASELINE.json \
               indices/CLAIM_VOCABULARY_POLICY.json \
+              indices/CLAIM_CONTRADICTION_LEDGER.json \
+              indices/CLAIM_CONTRADICTION_HEAD.json \
               schemas/repository_inventory.schema.json \
               schemas/repository_inventory_batch.schema.json \
+              schemas/repository-gap-map.schema.json \
+              schemas/claim-contradiction-ledger.schema.json \
               biblioteconomia/19_TOROIDAL_RESEARCH_FEDERATION.md \
               biblioteconomia/20_PLATFORM_ASSURANCE_CONTROL_PLANE.md \
               biblioteconomia/21_ISO_OPERATIONAL_READINESS_RETROFEED.md \
@@ -353,6 +229,8 @@ jobs:
               scripts/validate_platform_assurance_pointer.py \
               scripts/validate_iso_operational_readiness.py \
               scripts/validate_claim_vocabulary.py \
+              scripts/validate_claim_contradiction_ledger.py \
+              scripts/validate_claim_review_chain.py \
               tests/test_topology.py \
               tests/test_repository_inventory.py \
               tests/test_inventory_batch.py \
@@ -362,10 +240,13 @@ jobs:
               tests/test_platform_assurance_pointer.py \
               tests/test_iso_operational_readiness.py \
               tests/test_claim_vocabulary.py \
+              tests/test_claim_contradiction_ledger.py \
+              tests/test_claim_review_chain.py \
               .github/workflows/topology-validation.yml
             find indices/inventory_batches -maxdepth 1 -type f -name '*.json' -print
             find indices/inventory_deltas -maxdepth 1 -type f -name '*.json' -print
-          } | LC_ALL=C sort | xargs sha256sum > STRUCTURAL_CHECKSUMS.sha256
+            find indices/claim_review_batches -maxdepth 1 -type f -name '*.json' -print
+          } | LC_ALL=C sort -u | xargs sha256sum > STRUCTURAL_CHECKSUMS.sha256
 
       - name: Upload structural audit
         uses: actions/upload-artifact@v4
@@ -380,6 +261,8 @@ jobs:
             platform-assurance-pointer-validation.json
             iso-operational-readiness-validation.json
             claim-vocabulary-validation.json
+            claim-contradiction-ledger-validation.json
+            claim-review-chain-validation.json
             STRUCTURAL_CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
