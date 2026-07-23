@@ -15,6 +15,7 @@ on:
       - "configs/00_CANONICAL_RESEARCH_INTAKE.xml"
       - "schemas/research-intake.xsd"
       - "scripts/canonical_research_intake.py"
+      - "scripts/research_intake/**"
       - "tests/test_canonical_research_intake.py"
       - "tests/fixtures/research_intake_fixture.json"
       - "data/research_intake/review_ledger.v1.jsonl"
@@ -43,7 +44,7 @@ jobs:
           python-version: "3.11"
       - name: Compile and test
         run: |
-          python3 -m py_compile scripts/canonical_research_intake.py tests/test_canonical_research_intake.py
+          python3 -m py_compile scripts/canonical_research_intake.py scripts/research_intake/*.py tests/test_canonical_research_intake.py
           python3 -m unittest tests/test_canonical_research_intake.py -v
       - name: Generate deterministic numbered artifacts
         run: |
