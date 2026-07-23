@@ -1,0 +1,64 @@
+name: Canonical Private Research Intake
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "fixture only; network collection remains a reviewed local/manual gate"
+        required: true
+        type: choice
+        options: [fixture]
+        default: fixture
+  pull_request:
+    branches: [main]
+    paths:
+      - "configs/00_CANONICAL_RESEARCH_INTAKE.xml"
+      - "schemas/research-intake.xsd"
+      - "scripts/canonical_research_intake.py"
+      - "tests/test_canonical_research_intake.py"
+      - "tests/fixtures/research_intake_fixture.json"
+      - "data/research_intake/review_ledger.v1.jsonl"
+      - "data/research_intake/id_registry.v1.json"
+      - "docs/CI_CANONICA_INGESTAO_CIENTIFICA_PRIVADA.md"
+      - "biblioteconomia/22_RESEARCH_INTAKE_AUTHORITY_CONTROL.md"
+      - ".github/workflows/research-intake-canonical.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mapa-research-intake-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  canonical-fixture-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile and test
+        run: |
+          python3 -m py_compile scripts/canonical_research_intake.py tests/test_canonical_research_intake.py
+          python3 -m unittest tests/test_canonical_research_intake.py -v
+      - name: Generate deterministic numbered artifacts
+        run: |
+          python3 scripts/canonical_research_intake.py \
+            --config configs/00_CANONICAL_RESEARCH_INTAKE.xml \
+            --input-fixture tests/fixtures/research_intake_fixture.json \
+            --review-ledger data/research_intake/review_ledger.v1.jsonl \
+            --id-registry data/research_intake/id_registry.v1.json \
+            --output build/research-intake \
+            --generated-at 2026-07-23T00:00:00Z
+          test "$(python3 -c 'import json; print(json.load(open("build/research-intake/00_MANIFEST.json"))["claim_allowed"])')" = "False"
+      - name: Upload private validation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mapa-research-intake-${{ github.run_id }}
+          path: build/research-intake/
+          retention-days: 30
+          if-no-files-found: error
