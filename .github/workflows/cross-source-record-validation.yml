@@ -1,0 +1,114 @@
+name: Cross-Source Record Validation
+
+on:
+  pull_request:
+    paths:
+      - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
+      - "schemas/cross-source-record.schema.json"
+      - "scripts/validate_cross_source_records.py"
+      - "tests/test_cross_source_records.py"
+      - "tests/fixtures/cross_source/**"
+      - ".github/workflows/cross-source-record-validation.yml"
+  push:
+    branches: [main]
+    paths:
+      - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
+      - "schemas/cross-source-record.schema.json"
+      - "scripts/validate_cross_source_records.py"
+      - "tests/test_cross_source_records.py"
+      - "tests/fixtures/cross_source/**"
+      - ".github/workflows/cross-source-record-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cross-source-record-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile scripts/validate_cross_source_records.py
+          python3 -m py_compile tests/test_cross_source_records.py
+
+      - name: Parse schema and fixtures as JSON
+        run: |
+          python3 -m json.tool schemas/cross-source-record.schema.json >/dev/null
+          for fixture in tests/fixtures/cross_source/valid/*.json; do
+            python3 -m json.tool "$fixture" >/dev/null
+          done
+          for fixture in tests/fixtures/cross_source/invalid/*.json; do
+            python3 -m json.tool "$fixture" >/dev/null
+          done
+
+      - name: Check canonical schema boundary
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          schema = json.loads(
+              Path("schemas/cross-source-record.schema.json").read_text(encoding="utf-8")
+          )
+          assert schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
+          assert schema["properties"]["schema_version"]["const"] == (
+              "rafaelia.cross-source-record/v1"
+          )
+          assert schema["additionalProperties"] is False
+          required = set(schema["required"])
+          assert {
+              "record_id",
+              "canonical_owner",
+              "source",
+              "version",
+              "classification",
+              "evidence_refs",
+              "relations",
+              "custody",
+              "next_verifiable_step",
+          } <= required
+          PY
+
+      - name: Run adversarial unit tests
+        run: python3 -m unittest tests/test_cross_source_records.py -v
+
+      - name: Validate fixture polarity
+        run: |
+          python3 scripts/validate_cross_source_records.py \
+            --write-report cross-source-record-validation.json
+
+      - name: Enforce non-promotion boundary
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(
+              Path("cross-source-record-validation.json").read_text(encoding="utf-8")
+          )
+          assert report["status"] == "PASS"
+          assert report["valid_fixture_count"] >= 2
+          assert report["invalid_fixture_count"] >= 1
+          assert report["unexpected_failures"] == 0
+          assert report["unexpected_passes"] == 0
+          assert report["claim_allowed"] is False
+          PY
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-source-record-validation
+          path: cross-source-record-validation.json
+          if-no-files-found: error
+          retention-days: 14
