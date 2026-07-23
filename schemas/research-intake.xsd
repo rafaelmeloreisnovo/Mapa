@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:simpleType name="nonEmptyString"><xs:restriction base="xs:string"><xs:minLength value="1"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="sourceMode"><xs:restriction base="xs:string"><xs:enumeration value="api"/><xs:enumeration value="oai_pmh"/><xs:enumeration value="manual_only"/></xs:restriction></xs:simpleType>
+  <xs:simpleType name="stateCode"><xs:restriction base="xs:string">
+    <xs:enumeration value="UNREVIEWED"/><xs:enumeration value="HYPOTHESIS_CANDIDATE"/>
+    <xs:enumeration value="UNLIKELY_UNDER_CURRENT_EVIDENCE"/><xs:enumeration value="CONFLICTED"/>
+    <xs:enumeration value="REVIEWED_EVIDENCE"/><xs:enumeration value="TOKEN_VAZIO"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="researchIntake">
+    <xs:complexType><xs:sequence>
+      <xs:element name="authority"><xs:complexType><xs:attribute name="repository" type="nonEmptyString" use="required"/><xs:attribute name="visibility" use="required" fixed="private"/></xs:complexType></xs:element>
+      <xs:element name="boundary"><xs:complexType><xs:sequence>
+        <xs:element name="rawMetadataPrivate" type="xs:boolean"/><xs:element name="automaticPublicPush" type="xs:boolean"/>
+        <xs:element name="automaticClaimPromotion" type="xs:boolean"/><xs:element name="unknownIsZero" type="xs:boolean"/>
+      </xs:sequence></xs:complexType></xs:element>
+      <xs:element name="sequence"><xs:complexType><xs:attribute name="prefix" type="nonEmptyString" use="required"/><xs:attribute name="width" type="xs:positiveInteger" use="required"/></xs:complexType></xs:element>
+      <xs:element name="synthesisTrigger"><xs:complexType><xs:attribute name="policy" use="required" fixed="HEURISTIC_TRIGGER_NOT_PROMOTION"/><xs:attribute name="volumeStep" type="xs:positiveInteger" use="required"/><xs:attribute name="minimumReviewed" type="xs:nonNegativeInteger" use="required"/><xs:attribute name="minimumDomains" type="xs:positiveInteger" use="required"/></xs:complexType></xs:element>
+      <xs:element name="sources"><xs:complexType><xs:sequence><xs:element name="source" minOccurs="1" maxOccurs="unbounded"><xs:complexType>
+        <xs:attribute name="number" type="nonEmptyString" use="required"/><xs:attribute name="id" type="nonEmptyString" use="required"/>
+        <xs:attribute name="mode" type="sourceMode" use="required"/><xs:attribute name="enabled" type="xs:boolean" use="required"/>
+        <xs:attribute name="domain" type="nonEmptyString" use="required"/><xs:attribute name="endpoint" type="nonEmptyString" use="required"/>
+      </xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element>
+      <xs:element name="states"><xs:complexType><xs:sequence><xs:element name="state" minOccurs="6" maxOccurs="6"><xs:complexType><xs:attribute name="code" type="stateCode" use="required"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element>
+    </xs:sequence><xs:attribute name="schema" use="required" fixed="mapa.research-intake/v1"/><xs:attribute name="version" type="nonEmptyString" use="required"/><xs:attribute name="claimAllowed" type="xs:boolean" use="required" fixed="false"/></xs:complexType>
+  </xs:element>
+</xs:schema>
