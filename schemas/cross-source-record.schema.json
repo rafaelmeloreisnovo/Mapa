@@ -1,0 +1,720 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/cross-source-record.schema.json",
+  "title": "RAFAELIA Cross-Source Record",
+  "description": "Registro mínimo auditável para relacionar GitHub, Google Drive, Termux e contexto de sessão sem promover lacunas a fatos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "node_type",
+    "canonical_owner",
+    "source",
+    "version",
+    "classification",
+    "evidence_refs",
+    "relations",
+    "custody",
+    "next_verifiable_step"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.cross-source-record/v1"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^rec:[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+    },
+    "node_type": {
+      "enum": [
+        "repository",
+        "file",
+        "document",
+        "folder",
+        "commit",
+        "pr",
+        "workflow",
+        "dataset",
+        "log",
+        "claim",
+        "action",
+        "session"
+      ]
+    },
+    "canonical_owner": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "account_scope",
+        "locator",
+        "observed_at"
+      ],
+      "properties": {
+        "provider": {
+          "enum": [
+            "github",
+            "google_drive",
+            "termux",
+            "session"
+          ]
+        },
+        "account_scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "repository_full_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "drive_file_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 3
+        },
+        "termux_path": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "not": {
+                "pattern": "(^|/)\\.\\.(/|$)"
+              }
+            }
+          ]
+        },
+        "session_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "const": "github"
+              }
+            },
+            "required": [
+              "provider"
+            ]
+          },
+          "then": {
+            "required": [
+              "repository_full_name",
+              "path"
+            ],
+            "properties": {
+              "repository_full_name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "drive_file_id": {
+                "type": "null"
+              },
+              "termux_path": {
+                "type": "null"
+              },
+              "session_id": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "const": "google_drive"
+              }
+            },
+            "required": [
+              "provider"
+            ]
+          },
+          "then": {
+            "required": [
+              "drive_file_id"
+            ],
+            "properties": {
+              "repository_full_name": {
+                "type": "null"
+              },
+              "path": {
+                "type": "null"
+              },
+              "drive_file_id": {
+                "type": "string"
+              },
+              "termux_path": {
+                "type": "null"
+              },
+              "session_id": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "const": "termux"
+              }
+            },
+            "required": [
+              "provider"
+            ]
+          },
+          "then": {
+            "required": [
+              "termux_path"
+            ],
+            "properties": {
+              "repository_full_name": {
+                "type": "null"
+              },
+              "path": {
+                "type": "null"
+              },
+              "drive_file_id": {
+                "type": "null"
+              },
+              "termux_path": {
+                "type": "string"
+              },
+              "session_id": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "const": "session"
+              }
+            },
+            "required": [
+              "provider"
+            ]
+          },
+          "then": {
+            "required": [
+              "session_id"
+            ],
+            "properties": {
+              "repository_full_name": {
+                "type": "null"
+              },
+              "path": {
+                "type": "null"
+              },
+              "drive_file_id": {
+                "type": "null"
+              },
+              "termux_path": {
+                "type": "null"
+              },
+              "session_id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "git_ref",
+        "commit_sha",
+        "blob_sha",
+        "drive_revision_id",
+        "content_hash"
+      ],
+      "properties": {
+        "git_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit_sha": {
+          "anyOf": [
+            {
+              "const": "TOKEN_VAZIO"
+            },
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            }
+          ]
+        },
+        "blob_sha": {
+          "anyOf": [
+            {
+              "const": "TOKEN_VAZIO"
+            },
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            }
+          ]
+        },
+        "drive_revision_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "algorithm",
+            "value"
+          ],
+          "properties": {
+            "algorithm": {
+              "enum": [
+                "sha256",
+                "blake3",
+                "TOKEN_VAZIO"
+              ]
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "const": "TOKEN_VAZIO"
+                },
+                {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "algorithm": {
+                    "const": "TOKEN_VAZIO"
+                  }
+                },
+                "required": [
+                  "algorithm"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "value": {
+                    "const": "TOKEN_VAZIO"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "algorithm": {
+                    "enum": [
+                      "sha256",
+                      "blake3"
+                    ]
+                  }
+                },
+                "required": [
+                  "algorithm"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "epistemic_state",
+        "evidence_mode",
+        "claim_allowed",
+        "sensitivity"
+      ],
+      "properties": {
+        "domain": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "epistemic_state": {
+          "enum": [
+            "FATO",
+            "VERIFIED_LIMITED",
+            "CONVENCAO",
+            "HIPOTESE",
+            "SIMBOLICO",
+            "TOKEN_VAZIO",
+            "CONTRADICTION"
+          ]
+        },
+        "evidence_mode": {
+          "enum": [
+            "DEMONSTRACAO",
+            "CONVENCAO",
+            "HIPOTESE",
+            "PARABOLA",
+            "VAZIO"
+          ]
+        },
+        "claim_allowed": {
+          "type": "boolean"
+        },
+        "sensitivity": {
+          "enum": [
+            "PUBLIC",
+            "PRIVATE",
+            "RESTRICTED",
+            "EXCLUDED"
+          ]
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "kind",
+          "reference"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^ev:[A-Za-z0-9][A-Za-z0-9._:-]{3,127}$"
+          },
+          "kind": {
+            "enum": [
+              "commit",
+              "blob",
+              "file",
+              "document",
+              "revision",
+              "hash",
+              "log",
+              "measurement",
+              "test",
+              "review",
+              "source"
+            ]
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "anchor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 2048
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "predicate",
+          "target_id",
+          "evidence_id",
+          "weight_q16",
+          "state"
+        ],
+        "properties": {
+          "predicate": {
+            "enum": [
+              "IMPLEMENTS",
+              "EVIDENCES",
+              "DERIVES_FROM",
+              "INDEXES",
+              "VALIDATES",
+              "CONTRADICTS",
+              "SUPERSEDES",
+              "MIRRORS",
+              "REQUIRES",
+              "PRODUCES",
+              "BLOCKS",
+              "MENTIONS"
+            ]
+          },
+          "target_id": {
+            "type": "string",
+            "pattern": "^rec:[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+          },
+          "evidence_id": {
+            "anyOf": [
+              {
+                "const": "TOKEN_VAZIO"
+              },
+              {
+                "type": "string",
+                "pattern": "^ev:[A-Za-z0-9][A-Za-z0-9._:-]{3,127}$"
+              }
+            ]
+          },
+          "weight_q16": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535
+          },
+          "state": {
+            "enum": [
+              "OBSERVED",
+              "DECLARED",
+              "INFERRED",
+              "TOKEN_VAZIO"
+            ]
+          }
+        }
+      }
+    },
+    "custody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "previous_event_id",
+        "actor",
+        "operation"
+      ],
+      "properties": {
+        "event_id": {
+          "anyOf": [
+            {
+              "const": "TOKEN_VAZIO"
+            },
+            {
+              "type": "string",
+              "pattern": "^evt:[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+            }
+          ]
+        },
+        "previous_event_id": {
+          "anyOf": [
+            {
+              "const": "TOKEN_VAZIO"
+            },
+            {
+              "type": "string",
+              "pattern": "^evt:[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+            }
+          ]
+        },
+        "actor": {
+          "enum": [
+            "human",
+            "assistant",
+            "workflow",
+            "script"
+          ]
+        },
+        "operation": {
+          "enum": [
+            "READ",
+            "CREATE",
+            "UPDATE",
+            "VALIDATE",
+            "TOKEN_VAZIO"
+          ]
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean",
+          "null"
+        ]
+      },
+      "properties": {
+        "is_fixture": {
+          "type": "boolean"
+        }
+      }
+    },
+    "next_verifiable_step": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "classification": {
+            "properties": {
+              "epistemic_state": {
+                "const": "TOKEN_VAZIO"
+              }
+            },
+            "required": [
+              "epistemic_state"
+            ]
+          }
+        },
+        "required": [
+          "classification"
+        ]
+      },
+      "then": {
+        "properties": {
+          "classification": {
+            "properties": {
+              "claim_allowed": {
+                "const": false
+              },
+              "evidence_mode": {
+                "const": "VAZIO"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "classification": {
+            "properties": {
+              "claim_allowed": {
+                "const": true
+              }
+            },
+            "required": [
+              "claim_allowed"
+            ]
+          }
+        },
+        "required": [
+          "classification"
+        ]
+      },
+      "then": {
+        "properties": {
+          "classification": {
+            "properties": {
+              "epistemic_state": {
+                "enum": [
+                  "FATO",
+                  "VERIFIED_LIMITED"
+                ]
+              },
+              "evidence_mode": {
+                "const": "DEMONSTRACAO"
+              }
+            }
+          },
+          "evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "custody": {
+            "properties": {
+              "operation": {
+                "const": "TOKEN_VAZIO"
+              }
+            },
+            "required": [
+              "operation"
+            ]
+          }
+        },
+        "required": [
+          "custody"
+        ]
+      },
+      "then": {
+        "properties": {
+          "custody": {
+            "properties": {
+              "event_id": {
+                "const": "TOKEN_VAZIO"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
