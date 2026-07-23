@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<researchIntake schema="mapa.research-intake/v1" version="1.0.0" claimAllowed="false">
+  <authority repository="rafaelmeloreisnovo/Mapa" visibility="private" />
+  <boundary>
+    <rawMetadataPrivate>true</rawMetadataPrivate>
+    <automaticPublicPush>false</automaticPublicPush>
+    <automaticClaimPromotion>false</automaticClaimPromotion>
+    <unknownIsZero>false</unknownIsZero>
+  </boundary>
+  <sequence prefix="LIT" width="8" />
+  <synthesisTrigger policy="HEURISTIC_TRIGGER_NOT_PROMOTION" volumeStep="25" minimumReviewed="3" minimumDomains="2" />
+  <sources>
+    <source number="01" id="crossref" mode="api" enabled="true" domain="multidisciplinary" endpoint="https://api.crossref.org/works" />
+    <source number="02" id="openalex" mode="api" enabled="true" domain="multidisciplinary_graph" endpoint="https://api.openalex.org/works" />
+    <source number="03" id="semantic_scholar" mode="api" enabled="true" domain="citation_semantics" endpoint="https://api.semanticscholar.org/graph/v1/paper/search" />
+    <source number="04" id="europe_pmc" mode="api" enabled="true" domain="biomedicine" endpoint="https://www.ebi.ac.uk/europepmc/webservices/rest/search" />
+    <source number="05" id="arxiv" mode="api" enabled="true" domain="physics_math_cs" endpoint="https://export.arxiv.org/api/query" />
+    <source number="06" id="scielo_books" mode="oai_pmh" enabled="true" domain="latin_america_open_science" endpoint="https://oai.books.scielo.org/oai-pmh" />
+    <source number="07" id="google_scholar" mode="manual_only" enabled="false" domain="broad_discovery" endpoint="TOKEN_VAZIO_NO_OFFICIAL_PUBLIC_API" />
+  </sources>
+  <states>
+    <state code="UNREVIEWED" />
+    <state code="HYPOTHESIS_CANDIDATE" />
+    <state code="UNLIKELY_UNDER_CURRENT_EVIDENCE" />
+    <state code="CONFLICTED" />
+    <state code="REVIEWED_EVIDENCE" />
+    <state code="TOKEN_VAZIO" />
+  </states>
+</researchIntake>
