@@ -136,6 +136,7 @@ python3 scripts/operational_ontology_engine.py \
   --ontology data/ontology/rafaelia-operational-ontology.v1.json \
   --output-json build/ontology/report.json \
   --output-md build/ontology/report.md \
+  --generated-at 2026-07-23T00:00:00Z \
   --strict
 ```
 
