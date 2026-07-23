@@ -5,15 +5,16 @@
 [![Research](https://img.shields.io/badge/Research-RAFAELIA%20Ecosystem-orange)](https://github.com/rafaelmeloreisnovo/ChipQuantum)
 
 > Central repository for organization, traceability, and knowledge mapping of the
-> RAFAELIA ecosystem — cataloging 28+ repositories as a living biblionomic system.
+> RAFAELIA ecosystem — cataloging repositories, claims, evidence and gaps as a living
+> biblioteconomic and operational knowledge system.
 
 ---
 
 ## Objective
 
-Transform files, images, conversations, indices, and results into a clear work tree —
-a **biblioteconomic knowledge system (KOS)** that classifies, catalogs, and cross-references
-the entire RAFAELIA research corpus.
+Transform files, images, conversations, indices, results, claims and unresolved gaps into a
+clear work tree — a **biblioteconomic knowledge organization system (KOS)** that classifies,
+catalogs, cross-references and audits the RAFAELIA research corpus.
 
 ---
 
@@ -23,34 +24,21 @@ the entire RAFAELIA research corpus.
 Mapa/
 │
 ├── arquitetura/       Work structure design and architecture diagrams
-├── biblioteconomia/   KOS: catalogs and classifies the RAFAELIA acervo
+├── biblioteconomia/   KOS, controlled vocabulary and authority control
 ├── protocolos/        Execution rules, gap analysis and operational governance
 │   └── HOMEOSTASE_OPERACIONAL_MELHORIA_CONTINUA.md
-├── indices/           Asset lists, source tracking and cross-repository manifests
-│   └── NEUROCIENCIA_HOMEOSTASE_OPERACIONAL.md
-├── resultados/        Delivery groupings and completed work
-│
-├── visual/            Conceptual maps (SVG), architecture images, screenshots
-│   ├── MAPA_BIBLIOTECONOMICO_RAFAELIA.svg
-│   ├── MATRIZ_CONCEITOS_RAFAELIA.svg
-│   ├── 2026-06-13_invariante_conteudo_rafaelia.svg
-│   └── file_*.png                      (captured screenshots)
-│
-├── workflows/         Operational validation and sweep workflows
-│   ├── WORKFLOW_VARREDURA_OPERACIONAL.md
-│   ├── ARQUITETURA_TRABALHO_IA_TRIPLA.md
-│   └── TORRE_DA_INFORMACAO.md
-│
-├── docs/              Supplementary documentation
-│   └── TESTE_CONECTOR.md
-│
-├── .github/           GitHub governance (ISSUE_TEMPLATE, workflows/CI, CODEOWNERS)
-│
-├── README.md          This file
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── CODE_OF_CONDUCT.md
-└── LICENSE
+├── schemas/           Machine-readable contracts
+│   └── operational-ontology.schema.json
+├── data/ontology/     Canonical operational ontology records
+├── scripts/           Custody, validation and ontology engines
+├── tools/             Repository and artifact gap mappers
+├── tests/             Deterministic positive and negative tests
+├── indices/           Asset, source and cross-repository manifests
+├── auditoria/         Execution evidence and conservative validation records
+├── resultados/        Generated baselines and reviewed outputs
+├── workflows/         Operational reading and validation routes
+├── visual/            Conceptual maps and architecture images
+└── docs/              Architecture, heuristics and supplementary documentation
 ```
 
 ---
@@ -59,11 +47,44 @@ Mapa/
 
 This repository implements a **library science classification system** for the RAFAELIA ecosystem:
 
-- **cataloging**: each repository classified by domain, maturity, and interconnections;
+- **cataloging**: each object is identified by domain, version, maturity and interconnections;
+- **authority control**: `biblioteconomia/` distinguishes preferred terms, aliases and semantic collisions;
 - **indexing**: `indices/` tracks assets, origins, hashes, branches and review states;
-- **navigation**: `biblioteconomia/` provides cross-repository reading paths;
+- **provenance**: claims can be linked to sources, datasets, runs, commits and evidence;
 - **operational governance**: `protocolos/` preserves baselines, risks, falsifiers and rollback;
-- **visual maps**: `visual/` contains SVG concept maps and architecture diagrams.
+- **gap preservation**: unresolved information remains `TOKEN_VAZIO`, never silently converted to zero;
+- **visual navigation**: `visual/` contains SVG concept maps and architecture diagrams.
+
+---
+
+## Operational Ontology
+
+The executable ontology adds a semantic and epistemic layer above the existing physical
+repository gap mapper:
+
+| Artifact | Function |
+|---|---|
+| `data/ontology/rafaelia-operational-ontology.v1.json` | Canonical records for concepts, trajectories, editorial states and useful gaps |
+| `schemas/operational-ontology.schema.json` | External structural contract |
+| `scripts/operational_ontology_engine.py` | Validation, conservative heuristics, graph and trajectory analysis |
+| `tests/test_operational_ontology_engine.py` | Positive and negative invariants |
+| `docs/ONTOLOGIA_OPERACIONAL_RAFAELIA.md` | Architecture and limits |
+| `docs/HEURISTICAS_DINAMICAS_E_VAZIOS.md` | Heuristics for abandoned, ignored, potential, suggested and withheld themes |
+| `indices/ONTOLOGIA_OPERACIONAL_RAFAELIA.md` | Authority and integration map |
+
+Core invariants:
+
+```text
+TOKEN_VAZIO != 0
+heuristic != proof
+not found != censored
+methodological bridge != physical equivalence
+claim_allowed=false until evidence closes the corresponding gate
+```
+
+The existing `tools/repository_gap_mapper.py` remains responsible for files, builds,
+binaries and unresolved source markers. The ontology engine maps claims, concepts,
+relations, operators, trajectories and epistemic gaps. Neither replaces the other.
 
 ---
 
@@ -71,15 +92,13 @@ This repository implements a **library science classification system** for the R
 
 | Artifact | Function | Status |
 |---|---|---|
-| `protocolos/HOMEOSTASE_OPERACIONAL_MELHORIA_CONTINUA.md` | Continual improvement across a complex process network, with baseline, risk, evidence and rollback | `NORMATIVE_METAMODEL_DRAFT` |
-| `indices/NEUROCIENCIA_HOMEOSTASE_OPERACIONAL.md` | GitHub ↔ Drive provenance for the neuroscience paper, claims ledger and governance protocol | `CROSS_REPOSITORY_INDEX_DRAFT` |
+| `protocolos/HOMEOSTASE_OPERACIONAL_MELHORIA_CONTINUA.md` | Continual improvement across a complex process network | `NORMATIVE_METAMODEL_DRAFT` |
+| `indices/NEUROCIENCIA_HOMEOSTASE_OPERACIONAL.md` | GitHub ↔ Drive provenance for neuroscience and governance artifacts | `MERGED_BASELINE` |
+| `docs/ONTOLOGIA_OPERACIONAL_RAFAELIA.md` | Executable KOS and epistemic-gap architecture | `DRAFT_AUDITABLE` |
 
 The operational-homeostasis protocol treats standards as controlled baselines rather than
 frozen ceilings. A proposed improvement must preserve applicable requirements, state its
 delta, measure benefit, control risk, support rollback and maintain traceability.
-
-Unknown values, unexecuted tests and unresolved causes remain `TOKEN_VAZIO`; they are not
-silently converted to zero, failure or success.
 
 ---
 
@@ -88,7 +107,7 @@ silently converted to zero, failure or success.
 ```text
 papers / scientific claim
   ↓
-Mapa / provenance and governance
+Mapa / provenance, ontology and governance
   ↓
 Google Drive / editorial review copy
   ↓
@@ -97,15 +116,31 @@ review gate
 merge | correction | TOKEN_VAZIO
 ```
 
-Current linked review:
+Merged baselines:
 
 - [`papers` PR #19](https://github.com/rafaelmeloreisnovo/papers/pull/19) — recurrence, myelin, electrophysiology and falsifiability;
 - [`Mapa` PR #41](https://github.com/rafaelmeloreisnovo/Mapa/pull/41) — operational homeostasis and continual improvement;
 - [Drive provenance folder](https://drive.google.com/drive/folders/1n74otSJEGsmI9I2W7-hg2mYec6d-6Sl5).
 
-Both pull requests remain drafts until human review. A commit proves the existence and
-history of an artifact; it does not by itself prove execution, scientific validity or
-operational performance.
+A commit proves existence and history of an artifact; it does not by itself prove execution,
+scientific validity, causality or operational performance.
+
+---
+
+## Local Validation
+
+```bash
+python3 -m unittest -v tests/test_operational_ontology_engine.py
+
+python3 scripts/operational_ontology_engine.py \
+  --ontology data/ontology/rafaelia-operational-ontology.v1.json \
+  --output-json build/ontology/report.json \
+  --output-md build/ontology/report.md \
+  --strict
+```
+
+No automatic workflow is enabled by this package. Remote execution remains a separate,
+reviewed decision.
 
 ---
 
