@@ -6,12 +6,15 @@ on:
       - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
       - "schemas/cross-source-record.schema.json"
       - "indices/CROSS_SOURCE_REGISTRY.jsonl"
+      - "indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
       - "scripts/validate_cross_source_records.py"
       - "scripts/validate_cross_source_registry.py"
+      - "scripts/validate_chain_of_custody.py"
       - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
       - "tests/test_cross_source_local_gate_contract.py"
+      - "tests/test_validate_chain_of_custody.py"
       - "tests/fixtures/cross_source/**"
       - ".github/workflows/cross-source-record-validation.yml"
   push:
@@ -20,12 +23,15 @@ on:
       - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
       - "schemas/cross-source-record.schema.json"
       - "indices/CROSS_SOURCE_REGISTRY.jsonl"
+      - "indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
       - "scripts/validate_cross_source_records.py"
       - "scripts/validate_cross_source_registry.py"
+      - "scripts/validate_chain_of_custody.py"
       - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
       - "tests/test_cross_source_local_gate_contract.py"
+      - "tests/test_validate_chain_of_custody.py"
       - "tests/fixtures/cross_source/**"
       - ".github/workflows/cross-source-record-validation.yml"
   workflow_dispatch:
@@ -68,10 +74,11 @@ jobs:
               (root / "LOCAL_GATE_STATUS.json").read_text(encoding="utf-8")
           )
           assert manifest["status"] == "PASS"
-          assert manifest["test_count_expected"] == 22
-          assert manifest["report_count"] == 2
+          assert manifest["test_count_expected"] == 38
+          assert manifest["report_count"] == 3
           assert manifest["claim_allowed"] is False
           assert manifest["remote_ci_substituted"] is False
+          assert (root / "chain-of-custody-validation.json").is_file()
           assert (root / "CHECKSUMS.sha256").is_file()
           PY
 
