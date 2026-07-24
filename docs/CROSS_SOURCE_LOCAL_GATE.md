@@ -1,291 +1,263 @@
 # Gate Local Cross-Source — Termux e Python 3
 
 ```yaml
-schema: rafaelia.cross-source-local-gate-guide/v2
+schema: rafaelia.cross-source-local-gate-guide/v3
 mode: OFFLINE
 network_required: false
 third_party_python_dependencies: false
 quality_model: growth_safe_floor
+required_test_files: 7
+required_tests_discovered: 58
+required_tests_executed: 58
 claim_allowed: false
 remote_ci_substituted: false
 ```
 
-## Finalidade
+## 1. Finalidade
 
-Este gate reproduz localmente as validações estruturais da camada GitHub ↔ Google Drive e da cadeia de custódia, sem acessar rede, Drive ou GitHub durante a execução.
+O gate reproduz localmente as validações estruturais da camada GitHub ↔ Google Drive ↔ Termux ↔ sessão e da cadeia de custódia.
 
-Ele verifica somente os artefatos já versionados no checkout atual:
+Ele usa somente arquivos versionados e Python standard library. Não acessa GitHub, Google Drive ou qualquer outra rede durante a execução.
 
-- JSON Schema do registro cross-source;
-- fixtures válidas e inválida;
-- registry cross-source JSONL;
-- ledger append-only de cadeia de custódia;
-- invariantes semânticas de `TOKEN_VAZIO`;
-- integridade do grafo e encadeamento temporal;
-- contrato de segurança do próprio executor local;
-- quantidade de testes realmente executada;
-- piso de não regressão versionado.
+O resultado local é evidência de reprodução estrutural. Ele não substitui o GitHub Actions e não autoriza merge sozinho.
 
-O resultado local é evidência de reprodução estrutural. Ele **não substitui** o GitHub Actions e não autoriza merge sozinho.
+## 2. Regra de crescimento
 
-## Problema que o piso resolve
+O piso versionado está em:
 
-Um gate não pode congelar um mapa vivo em números exatos. Por exemplo, exigir sempre exatamente dez registros faria uma expansão válida para onze registros falhar.
-
-O arquivo `indices/CROSS_SOURCE_GATE_FLOOR.json` registra mínimos aceitos a partir do último snapshot fundido e validado:
-
-```yaml
-comparison: observed >= minimum
-minimums:
-  tests_run: 38
-  valid_fixtures: 2
-  invalid_fixtures: 1
-  registry_records: 10
-  provider_counts:
-    github: 2
-    google_drive: 8
-  custody_events: 13
+```text
+indices/CROSS_SOURCE_GATE_FLOOR.json
 ```
 
-Assim:
+A regra geral é:
 
-- crescimento append-only é aceito;
-- redução silenciosa é bloqueada;
-- o número de testes é medido, não escrito manualmente;
-- qualquer redução deliberada do piso exige revisão em mudança separada;
-- `claim_allowed=false` permanece obrigatório.
+```text
+observado >= mínimo versionado
+```
 
-## Execução no Termux
+Para a suíte de testes, há uma regra adicional:
 
-A partir da raiz do repositório:
+```text
+tests_run == tests_discovered
+```
+
+Portanto, o gate exige simultaneamente:
+
+```yaml
+test_file_count: ">= 7"
+tests_discovered: ">= 58"
+tests_run: ">= 58"
+complete_execution: true
+tests_run_equals_tests_discovered: true
+failures: 0
+errors: 0
+```
+
+Os 58 testes representam a superfície governada declarada na PR #48. Enquanto o gate integral não for executado, esse número é uma exigência a provar, não uma afirmação de PASS.
+
+```yaml
+full_gate_execution: TOKEN_VAZIO
+claim_allowed: false
+```
+
+## 3. Execução no Termux
+
+Na raiz do repositório:
 
 ```sh
 sh scripts/run_cross_source_gate.sh
 ```
 
-Diretório de saída padrão:
+Saída padrão:
 
 ```text
 .artifacts/cross-source-local/
 ```
 
-Também é possível escolher outro diretório:
+Saída personalizada:
 
 ```sh
-sh scripts/run_cross_source_gate.sh "$HOME/storage/shared/RAFAELIA_EVIDENCE/cross-source"
+sh scripts/run_cross_source_gate.sh \
+  "$HOME/storage/shared/RAFAELIA_EVIDENCE/cross-source-local"
 ```
 
-## Etapas executadas
+## 4. Etapas
 
 ```text
-1. py_compile dos validadores, avaliadores e testes
-2. parse do schema, piso e fixtures JSON
-3. parse integral dos dois arquivos JSONL
-4. execução e medição da suíte canônica
-5. geração dos relatórios cross-source
-6. validação e relatório da cadeia de custódia
-7. comparação dos resultados com o piso de não regressão
-8. verificação da fronteira claim_allowed=false
-9. geração de manifesto e checksums SHA-256
+1. compilar validadores, avaliadores, comparador e testes
+2. validar schema, piso e fixtures JSON
+3. validar parse dos registries JSONL
+4. descobrir, contar e executar a suíte governada
+5. gerar relatórios de records e registry
+6. validar a cadeia de custódia append-only
+7. comparar resultados com o piso v2
+8. exigir execução completa e bloquear promoção indevida
+9. selar cinco relatórios, manifesto e checksums SHA-256
 ```
 
-O bytecode Python é redirecionado para o diretório de artefatos, evitando alteração acidental da árvore versionada.
+## 5. Pacote produzido
 
-## Artefatos produzidos
+```text
+cross-source-test-validation.json
+cross-source-record-validation.json
+cross-source-registry-validation.json
+chain-of-custody-validation.json
+quality-floor-validation.json
+LOCAL_GATE_STATUS.json
+CHECKSUMS.sha256
+```
 
-### `cross-source-test-validation.json`
-
-Evidência medida da suíte canônica:
+### Relatório de testes
 
 ```yaml
+schema_version: rafaelia.cross-source-test-report/v3
 status: PASS
-tests_run: valor_observado
+test_file_count: ">= 7"
+tests_discovered: ">= 58"
+tests_run: ">= 58"
+complete_execution: true
 failures: 0
 errors: 0
 claim_allowed: false
 remote_ci_substituted: false
 ```
 
-O gate exige:
+### Relatório do registry
 
-```text
-tests_run >= CROSS_SOURCE_GATE_FLOOR.minimums.tests_run
-```
-
-Adicionar testes não exige editar um número fixo no executor.
-
-### `cross-source-record-validation.json`
-
-Validação das fixtures positivas e negativa.
-
-Critérios essenciais:
+O caminho é normalizado para permitir hashes idênticos em checkouts diferentes:
 
 ```yaml
+registry: indices/CROSS_SOURCE_REGISTRY.jsonl
 status: PASS
-valid_fixture_count: >= piso
-invalid_fixture_count: >= piso
-unexpected_failures: 0
-unexpected_passes: 0
-claim_allowed: false
-```
-
-### `cross-source-registry-validation.json`
-
-Validação do grafo completo.
-
-Critérios essenciais:
-
-```yaml
-status: PASS
-record_count: >= 10
+record_count: ">= 10"
 provider_counts:
-  github: >= 2
-  google_drive: >= 8
+  github: ">= 2"
+  google_drive: ">= 8"
 defect_count: 0
 claim_allowed: false
 ```
 
-Esses valores são o piso atual, não um teto. Novos repositórios, documentos e relações podem ser anexados sem quebrar o gate.
-
-### `chain-of-custody-validation.json`
-
-Validação do ledger append-only:
+### Relatório da cadeia de custódia
 
 ```yaml
 status: PASS
-event_count: >= 13
+event_count: ">= 13"
 defect_count: 0
 claim_allowed: false
 ```
 
-O relatório exige:
-
-- IDs de evento únicos;
-- timestamps UTC monotônicos;
-- `previous_event_id` apontando para o evento válido imediatamente anterior;
-- hash canônico correto quando declarado;
-- objeto versionado existente;
-- `TOKEN_VAZIO` sem promoção de claim.
-
-### `quality-floor-validation.json`
-
-Compara os quatro relatórios anteriores com o piso versionado.
+### Avaliação do piso
 
 ```yaml
+schema_version: rafaelia.cross-source-gate-evaluation/v2
 status: PASS
 failed_check_count: 0
-comparison: observed_greater_than_or_equal_to_minimum
 promotion_state: LOCAL_PASS_REMOTE_TOKEN_VAZIO
 claim_allowed: false
 remote_ci_substituted: false
 ```
 
-`LOCAL_PASS_REMOTE_TOKEN_VAZIO` significa:
-
-- a reprodução local passou;
-- o piso de não regressão foi preservado;
-- a confirmação remota independente continua ausente;
-- nenhuma promoção de claim foi autorizada.
-
-### `LOCAL_GATE_STATUS.json`
-
-Manifesto do ambiente e dos relatórios:
+### Manifesto selado
 
 ```yaml
-schema_version: rafaelia.cross-source-local-gate/v2
+schema_version: rafaelia.cross-source-local-gate/v3
 status: PASS
-test_count_observed: valor_medido
-minimum_test_count: 38
+test_file_count: valor_observado
+minimum_test_file_count: 7
+test_count_discovered: valor_descoberto
+test_count_observed: valor_executado
+minimum_test_count: 58
+complete_test_execution: true
 report_count: 5
+quality_floor:
+  path: indices/CROSS_SOURCE_GATE_FLOOR.json
+  schema_version: rafaelia.cross-source-gate-floor/v2
+  sha256: valor_calculado
+  status: PASS
 quality_floor_status: PASS
 promotion_state: LOCAL_PASS_REMOTE_TOKEN_VAZIO
 claim_allowed: false
 remote_ci_substituted: false
 ```
 
-O manifesto também registra o SHA-256 do piso usado, impedindo ambiguidade sobre qual baseline governou a execução.
-
-### `CHECKSUMS.sha256`
-
-Hashes SHA-256 dos cinco relatórios principais.
-
-Verificação manual:
-
-```sh
-cd .artifacts/cross-source-local
-sha256sum -c CHECKSUMS.sha256
-```
-
-## Segurança
-
-O script é protegido por testes estáticos que rejeitam comandos de:
-
-- rede (`curl`, `wget`);
-- mutação Git (`git push`, `git commit`, `git reset`);
-- exclusão ampla (`rm -rf`);
-- privilégio (`sudo`);
-- GitHub CLI (`gh`).
-
-Ele não altera:
-
-- Google Drive;
-- branches;
-- commits;
-- pull requests;
-- configurações da conta;
-- arquivos versionados.
-
-Somente o diretório de saída é criado ou atualizado.
-
-## Interpretação
+## 6. O que o PASS local significa
 
 ```yaml
-local_status_PASS:
-  significa:
-    - estrutura e custódia reproduzidas localmente
-    - testes medidos acima do piso
-    - mapa livre para crescer sem redução silenciosa
-  nao_significa:
-    - CI remota aprovada
-    - sincronizacao automatica implementada
-    - claim cientifico validado
-    - merge autorizado
-remote_status_TOKEN_VAZIO:
-  acao: preservar contexto e corrigir o bloqueio do runner
+significa:
+  - sete ou mais arquivos de teste governados descobertos
+  - cinquenta_e_oito ou mais testes descobertos
+  - todos os testes descobertos executados
+  - zero falhas e zero erros
+  - registry e custódia acima do piso
+  - cinco relatórios selados
+  - nenhum claim promovido
+nao_significa:
+  - CI remota aprovada
+  - executor remoto autenticado pelo hash
+  - sincronização automática implementada
+  - certificação externa
+  - merge autorizado
 ```
 
-## Alteração legítima do piso
+## 7. Segurança
 
-O piso não deve ser reduzido no mesmo commit que remove registros, provedores, eventos ou testes.
+O executor local é protegido contra:
 
-Uma alteração legítima exige:
+- comandos de rede;
+- mutação Git;
+- `sudo`;
+- `rm -rf`;
+- GitHub CLI;
+- escrita fora do diretório de artefatos;
+- bytecode Python na árvore versionada;
+- redução silenciosa do piso;
+- execução parcial apresentada como completa.
 
-1. justificativa explícita;
-2. diff isolado de `CROSS_SOURCE_GATE_FLOOR.json`;
-3. evidência de que a redução não apagou custódia ou conhecimento;
-4. revisão humana;
-5. novo evento append-only, quando aplicável.
+## 8. Comparação Termux ↔ Actions
 
-Sem isso, a redução é tratada como regressão.
+Depois de existir artifact remoto real:
 
-## Próximo passo depois do PASS local
+```sh
+python3 scripts/compare_cross_source_evidence.py \
+  --left .artifacts/cross-source-local \
+  --right .artifacts/cross-source-remote \
+  --write-report .artifacts/cross-source-comparison.json
+```
 
-1. preservar `LOCAL_GATE_STATUS.json` e `CHECKSUMS.sha256`;
-2. restaurar a inicialização do GitHub Actions em repositórios privados;
-3. executar `Actions Runner Smoke` até aparecer `RUNNER_STARTED=true`;
-4. executar `Cross-Source Record Validation`;
-5. comparar os cinco relatórios locais e remotos;
-6. anexar um novo evento `VALIDATE` à cadeia, sem reescrever o evento de merge;
-7. somente então avaliar a saída de `DRAFT`.
+Exigir:
+
+```yaml
+status: PASS
+matching_report_count: 5
+quality_floor_sha256_match: true
+claim_allowed: false
+```
+
+Sem artifact remoto:
+
+```yaml
+remote_bundle: TOKEN_VAZIO
+comparison: TOKEN_VAZIO
+claim_allowed: false
+```
+
+## 9. Próximo passo verificável
+
+1. executar o gate no checkout integral do Termux;
+2. confirmar sete arquivos e 58/58 testes ou mais;
+3. preservar os cinco relatórios, manifesto e checksums;
+4. restaurar o início do runner privado;
+5. obter artifact remoto associado ao commit exato;
+6. comparar os pacotes;
+7. anexar evento `VALIDATE` à cadeia;
+8. somente então avaliar saída de `DRAFT`.
 
 ---
 
 ```text
-Piso = memória mínima verificável
-Crescimento = permitido
-Regressão silenciosa = bloqueada
-Local = reprodução
-Custódia = história imutável
-Remoto = confirmação independente
-Merge = decisão governada
+Piso = memória mínima
+Descoberto = superfície reconhecida
+Executado = superfície realmente percorrida
+Descoberto == Executado = completude operacional
+Tempo sem evidência = TOKEN_VAZIO
 ```
