@@ -50,15 +50,21 @@ def build_bundle(
         encoding="utf-8",
     )
     manifest = {
-        "schema_version": "rafaelia.cross-source-local-gate/v2",
+        "schema_version": "rafaelia.cross-source-local-gate/v3",
         "generated_at": f"2026-07-24T00:00:0{environment_marker == 'remote'}Z",
         "platform": environment_marker,
         "status": "PASS",
+        "test_file_count": 7,
+        "minimum_test_file_count": 7,
+        "test_count_discovered": 58,
+        "test_count_observed": 58,
+        "minimum_test_count": 58,
+        "complete_test_execution": True,
         "report_count": len(comparator.REPORT_NAMES),
         "checksums": checksums,
         "quality_floor": {
             "path": "indices/CROSS_SOURCE_GATE_FLOOR.json",
-            "schema_version": "rafaelia.cross-source-gate-floor/v1",
+            "schema_version": "rafaelia.cross-source-gate-floor/v2",
             "sha256": "a" * 64,
             "status": "PASS",
         },
@@ -125,14 +131,21 @@ class CrossSourceEvidenceComparatorTests(unittest.TestCase):
         self.assertTrue(any("checksum mismatch" in item for item in report["defects"]))
 
     def test_claim_promotion_in_manifest_is_rejected(self) -> None:
-        with tempfile.TemporaryDirectory() as root:
-            left = Path(root) / "left"
-            right = Path(root) / "right"
-            build_bundle(left)
-            build_bundle(right, manifest_overrides={"claim_allowed": True})
-            report = comparator.compare_bundles(left, right)
-        self.assertEqual(report["status"], "FAIL")
-        self.assertTrue(any("claim_allowed" in item for item in report["defects"]))
+        overrides = (
+            {"claim_allowed": True},
+            {"complete_test_execution": False},
+            {"test_count_observed": 57},
+            {"test_file_count": 6},
+        )
+        for override in overrides:
+            with self.subTest(override=override):
+                with tempfile.TemporaryDirectory() as root:
+                    left = Path(root) / "left"
+                    right = Path(root) / "right"
+                    build_bundle(left)
+                    build_bundle(right, manifest_overrides=override)
+                    report = comparator.compare_bundles(left, right)
+                self.assertEqual(report["status"], "FAIL")
 
     def test_quality_floor_mismatch_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as root:
@@ -144,7 +157,7 @@ class CrossSourceEvidenceComparatorTests(unittest.TestCase):
                 manifest_overrides={
                     "quality_floor": {
                         "path": "indices/CROSS_SOURCE_GATE_FLOOR.json",
-                        "schema_version": "rafaelia.cross-source-gate-floor/v1",
+                        "schema_version": "rafaelia.cross-source-gate-floor/v2",
                         "sha256": "b" * 64,
                         "status": "PASS",
                     }
