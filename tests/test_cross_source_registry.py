@@ -46,7 +46,25 @@ class CrossSourceRegistryTests(unittest.TestCase):
         self.assertEqual(report["record_count"], 10)
         self.assertEqual(report["provider_counts"], {"github": 2, "google_drive": 8})
         self.assertEqual(report["token_vazio_count"], 1)
+        self.assertEqual(report["registry"], "indices/CROSS_SOURCE_REGISTRY.jsonl")
         self.assertFalse(report["claim_allowed"])
+
+    def test_reports_are_identical_across_external_checkout_paths(self) -> None:
+        records = load_registry()
+        with tempfile.TemporaryDirectory() as left_directory:
+            with tempfile.TemporaryDirectory() as right_directory:
+                left = validator.build_report(write_registry(left_directory, records))
+                right = validator.build_report(write_registry(right_directory, records))
+        self.assertEqual(left, right)
+        self.assertEqual(left["registry"], "external://registry.jsonl")
+
+    def test_missing_external_path_does_not_leak_host_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "missing.jsonl"
+            report = validator.build_report(path)
+        rendered = json.dumps(report, sort_keys=True)
+        self.assertEqual(report["registry"], "external://missing.jsonl")
+        self.assertNotIn(directory, rendered)
 
     def test_duplicate_record_id_is_rejected(self) -> None:
         records = load_registry()
