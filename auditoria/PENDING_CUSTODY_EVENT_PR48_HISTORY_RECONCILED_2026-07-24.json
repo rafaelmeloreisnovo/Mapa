@@ -1,0 +1,90 @@
+{
+  "schema_version": "rafaelia.pending-custody-event/v1",
+  "status": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "target_ledger": "indices/CADEIA_CUSTODIA_EVENTOS.jsonl",
+  "expected_previous_event_id": "COC-20260724T201318Z-PR48_SEMANTIC_BINDING_TOKEN_VAZIO",
+  "reason": "The original append-only commit became unreachable after PR 48 was merged and the feature branch reference was reset. The active main ledger still contains 15 events. Manual reconstruction of the entire ledger through the connector was rejected to avoid accidental historical corruption.",
+  "evidence": {
+    "pr48_merge_commit": "f376ddd2b6adb06325ecaeff5a300a6c41821d38",
+    "pr49_history_merge_commit": "f387baef70e1788ea1c64c533c968174732c174c",
+    "history_report": {
+      "path": "resultados/PR48_HISTORY_RECONCILIATION_2026-07-24.json",
+      "size_bytes": 1218,
+      "sha256": "48ab686355785530b93b50823f6b483f4a6ba86526215d289e3854e1815ba48c"
+    },
+    "post_merge_state": {
+      "ahead_of_main_before_merge": 69,
+      "behind_main_after_history_reconciliation": 0,
+      "history_pr_changed_files": 0,
+      "history_pr_additions": 0,
+      "history_pr_deletions": 0,
+      "main_modified_directly": false
+    }
+  },
+  "proposed_event": {
+    "schema_version": "mapa.custody-event.v1",
+    "event_id": "COC-20260724T202610Z-PR48_HISTORY_RECONCILED",
+    "timestamp_utc": "2026-07-24T20:26:10Z",
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "main",
+    "source_ref": "f376ddd2b6adb06325ecaeff5a300a6c41821d38",
+    "previous_event_id": "COC-20260724T201318Z-PR48_SEMANTIC_BINDING_TOKEN_VAZIO",
+    "actor": {
+      "type": "service",
+      "id": "openai-chatgpt-github-connector"
+    },
+    "operation": "VALIDATE",
+    "object": {
+      "path": "resultados/PR48_HISTORY_RECONCILIATION_2026-07-24.json",
+      "media_type": "application/json",
+      "size_bytes": 1218,
+      "sha256": "48ab686355785530b93b50823f6b483f4a6ba86526215d289e3854e1815ba48c",
+      "blake3": null
+    },
+    "epistemic_state": "FATO",
+    "claim_allowed": false,
+    "evidence": [
+      {
+        "kind": "review",
+        "reference": "PR-49-history-only-merged"
+      },
+      {
+        "kind": "commit",
+        "reference": "f387baef70e1788ea1c64c533c968174732c174c"
+      },
+      {
+        "kind": "commit",
+        "reference": "f376ddd2b6adb06325ecaeff5a300a6c41821d38"
+      },
+      {
+        "kind": "file",
+        "reference": "resultados/PR48_HISTORY_RECONCILIATION_2026-07-24.json"
+      }
+    ],
+    "controls": {
+      "integrity": "verified",
+      "traceability": "verified",
+      "reproducibility": "verified",
+      "confidentiality": "internal"
+    },
+    "sigma": {
+      "phase": "CONTROL",
+      "defect_definition": "reconciliacao historica comprovada sem evento ativo no ledger apos merge da PR48",
+      "metric": "behind_main igual a zero e evento VALIDATE append-only",
+      "baseline": 1,
+      "target": 0
+    },
+    "next_verifiable_step": "Append this exact proposed_event as the sixteenth JSONL line only after confirming the active ledger still ends at the expected predecessor, then run the custody validator without rewriting prior lines.",
+    "event_hash_sha256": "c5b8a346b04384109655f120e6972bf210953a2fb6990cdd415fb9db0e53f134"
+  },
+  "append_preconditions": [
+    "Active ledger contains exactly 15 non-empty events.",
+    "Last active event_id equals expected_previous_event_id.",
+    "History report size and SHA-256 match the values above.",
+    "Only one JSONL line is added; no previous line changes.",
+    "scripts/validate_chain_of_custody.py returns zero defects."
+  ],
+  "next_verifiable_step": "Review this pending artifact, append the proposed event in a normal checkout, validate the full ledger, and replace TOKEN_VAZIO with an append-only VALIDATE result."
+}
