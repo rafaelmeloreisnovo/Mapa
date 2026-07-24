@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "run_cross_source_gate.sh"
+FLOOR = ROOT / "indices" / "CROSS_SOURCE_GATE_FLOOR.json"
 
 
 class CrossSourceLocalGateContractTests(unittest.TestCase):
@@ -35,27 +36,52 @@ class CrossSourceLocalGateContractTests(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertNotIn(token, self.text)
 
-    def test_script_runs_cross_source_and_custody_validators(self) -> None:
-        self.assertIn("scripts/validate_cross_source_records.py", self.text)
-        self.assertIn("scripts/validate_cross_source_registry.py", self.text)
-        self.assertIn("scripts/validate_chain_of_custody.py", self.text)
-        self.assertIn("tests/test_cross_source_records.py", self.text)
-        self.assertIn("tests/test_cross_source_registry.py", self.text)
-        self.assertIn("tests/test_validate_chain_of_custody.py", self.text)
+    def test_script_runs_validators_measured_tests_and_floor_evaluator(self) -> None:
+        required = (
+            "scripts/validate_cross_source_records.py",
+            "scripts/validate_cross_source_registry.py",
+            "scripts/validate_chain_of_custody.py",
+            "scripts/run_cross_source_tests.py",
+            "scripts/evaluate_cross_source_gate.py",
+            "tests/test_cross_source_records.py",
+            "tests/test_cross_source_registry.py",
+            "tests/test_cross_source_gate_evaluator.py",
+            "tests/test_validate_chain_of_custody.py",
+        )
+        for path in required:
+            with self.subTest(path=path):
+                self.assertIn(path, self.text)
 
-    def test_script_seals_three_reports_with_sha256(self) -> None:
+    def test_script_seals_five_reports_with_sha256(self) -> None:
         self.assertIn("hashlib.sha256", self.text)
+        self.assertIn("cross-source-test-validation.json", self.text)
         self.assertIn("chain-of-custody-validation.json", self.text)
+        self.assertIn("quality-floor-validation.json", self.text)
         self.assertIn("CHECKSUMS.sha256", self.text)
         self.assertIn("LOCAL_GATE_STATUS.json", self.text)
 
     def test_script_preserves_claim_and_remote_ci_boundaries(self) -> None:
         self.assertIn('"claim_allowed": False', self.text)
         self.assertIn('"remote_ci_substituted": False', self.text)
-        self.assertIn('"test_count_expected": 38', self.text)
+        self.assertIn("LOCAL_PASS_REMOTE_TOKEN_VAZIO", self.text)
         self.assertIn("Restore GitHub Actions runner startup", self.text)
 
-    def test_default_output_is_untracked_artifact_directory(self) -> None:
+    def test_gate_measures_tests_instead_of_declaring_fixed_count(self) -> None:
+        self.assertIn('"test_count_observed": tests["tests_run"]', self.text)
+        self.assertIn('tests["tests_run"] >= minimums["tests_run"]', self.text)
+        self.assertNotIn('"test_count_expected": 38', self.text)
+
+    def test_gate_allows_append_only_growth_without_freezing_registry(self) -> None:
+        self.assertTrue(FLOOR.is_file())
+        self.assertIn('registry["record_count"] >= minimums["registry_records"]', self.text)
+        self.assertNotIn('registry["record_count"] == 10', self.text)
+        self.assertNotIn(
+            'registry["provider_counts"] == {"github": 2, "google_drive": 8}',
+            self.text,
+        )
+
+    def test_pycache_is_redirected_to_untracked_output(self) -> None:
+        self.assertIn("PYTHONPYCACHEPREFIX", self.text)
         self.assertIn('.artifacts/cross-source-local', self.text)
 
 
