@@ -39,6 +39,10 @@ def build_floor(root: Path) -> Path:
             },
             "invariants": {
                 "complete_execution": True,
+                "clean_outcomes": True,
+                "skipped": 0,
+                "expected_failures": 0,
+                "unexpected_successes": 0,
                 "claim_allowed": False,
                 "remote_ci_substituted": False,
             },
@@ -83,6 +87,7 @@ def build_bundle(
         "test_count_observed": 58,
         "minimum_test_count": 58,
         "complete_test_execution": True,
+        "clean_test_outcomes": True,
         "report_count": len(comparator.REPORT_NAMES),
         "checksums": checksums,
         "quality_floor": {
@@ -165,6 +170,7 @@ class CrossSourceEvidenceComparatorTests(unittest.TestCase):
         overrides = (
             {"claim_allowed": True},
             {"complete_test_execution": False},
+            {"clean_test_outcomes": False},
             {"test_count_observed": 57},
             {"test_file_count": 6},
         )
