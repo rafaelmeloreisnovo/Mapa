@@ -8,8 +8,10 @@ on:
       - "indices/CROSS_SOURCE_REGISTRY.jsonl"
       - "scripts/validate_cross_source_records.py"
       - "scripts/validate_cross_source_registry.py"
+      - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
+      - "tests/test_cross_source_local_gate_contract.py"
       - "tests/fixtures/cross_source/**"
       - ".github/workflows/cross-source-record-validation.yml"
   push:
@@ -20,8 +22,10 @@ on:
       - "indices/CROSS_SOURCE_REGISTRY.jsonl"
       - "scripts/validate_cross_source_records.py"
       - "scripts/validate_cross_source_registry.py"
+      - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
+      - "tests/test_cross_source_local_gate_contract.py"
       - "tests/fixtures/cross_source/**"
       - ".github/workflows/cross-source-record-validation.yml"
   workflow_dispatch:
@@ -35,6 +39,7 @@ concurrency:
 
 jobs:
   validate:
+    name: Run canonical offline gate
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -43,119 +48,36 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Compile validators and tests
+      - name: Execute the same gate used by Termux
+        shell: bash
         run: |
-          python3 -m py_compile scripts/validate_cross_source_records.py
-          python3 -m py_compile scripts/validate_cross_source_registry.py
-          python3 -m py_compile tests/test_cross_source_records.py
-          python3 -m py_compile tests/test_cross_source_registry.py
+          set -euo pipefail
+          sh scripts/run_cross_source_gate.sh "$RUNNER_TEMP/cross-source-local"
 
-      - name: Parse schema, fixtures and registry
+      - name: Verify sealed evidence boundary
+        shell: bash
         run: |
-          python3 -m json.tool schemas/cross-source-record.schema.json >/dev/null
-          for fixture in tests/fixtures/cross_source/valid/*.json; do
-            python3 -m json.tool "$fixture" >/dev/null
-          done
-          for fixture in tests/fixtures/cross_source/invalid/*.json; do
-            python3 -m json.tool "$fixture" >/dev/null
-          done
+          set -euo pipefail
           python3 - <<'PY'
           import json
+          import os
           from pathlib import Path
 
-          path = Path("indices/CROSS_SOURCE_REGISTRY.jsonl")
-          count = 0
-          for line_number, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-              if not raw.strip():
-                  continue
-              value = json.loads(raw)
-              assert isinstance(value, dict), line_number
-              count += 1
-          assert count >= 1
-          PY
-
-      - name: Check canonical schema boundary
-        run: |
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-
-          schema = json.loads(
-              Path("schemas/cross-source-record.schema.json").read_text(encoding="utf-8")
+          root = Path(os.environ["RUNNER_TEMP"]) / "cross-source-local"
+          manifest = json.loads(
+              (root / "LOCAL_GATE_STATUS.json").read_text(encoding="utf-8")
           )
-          assert schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
-          assert schema["properties"]["schema_version"]["const"] == (
-              "rafaelia.cross-source-record/v1"
-          )
-          assert schema["additionalProperties"] is False
-          required = set(schema["required"])
-          assert {
-              "record_id",
-              "canonical_owner",
-              "source",
-              "version",
-              "classification",
-              "evidence_refs",
-              "relations",
-              "custody",
-              "next_verifiable_step",
-          } <= required
-          PY
-
-      - name: Run adversarial unit tests
-        run: |
-          python3 -m unittest \
-            tests/test_cross_source_records.py \
-            tests/test_cross_source_registry.py \
-            -v
-
-      - name: Validate fixture polarity
-        run: |
-          python3 scripts/validate_cross_source_records.py \
-            --write-report cross-source-record-validation.json
-
-      - name: Validate cross-source registry graph
-        run: |
-          python3 scripts/validate_cross_source_registry.py \
-            --write-report cross-source-registry-validation.json
-
-      - name: Enforce non-promotion boundary
-        run: |
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-
-          records_report = json.loads(
-              Path("cross-source-record-validation.json").read_text(encoding="utf-8")
-          )
-          registry_report = json.loads(
-              Path("cross-source-registry-validation.json").read_text(encoding="utf-8")
-          )
-
-          assert records_report["status"] == "PASS"
-          assert records_report["valid_fixture_count"] >= 2
-          assert records_report["invalid_fixture_count"] >= 1
-          assert records_report["unexpected_failures"] == 0
-          assert records_report["unexpected_passes"] == 0
-          assert records_report["claim_allowed"] is False
-
-          assert registry_report["status"] == "PASS"
-          assert registry_report["record_count"] == 10
-          assert registry_report["provider_counts"] == {
-              "github": 2,
-              "google_drive": 8,
-          }
-          assert registry_report["token_vazio_count"] == 1
-          assert registry_report["defect_count"] == 0
-          assert registry_report["claim_allowed"] is False
+          assert manifest["status"] == "PASS"
+          assert manifest["report_count"] == 2
+          assert manifest["claim_allowed"] is False
+          assert manifest["remote_ci_substituted"] is False
+          assert (root / "CHECKSUMS.sha256").is_file()
           PY
 
       - name: Upload validation evidence
         uses: actions/upload-artifact@v4
         with:
           name: cross-source-validation
-          path: |
-            cross-source-record-validation.json
-            cross-source-registry-validation.json
+          path: ${{ runner.temp }}/cross-source-local/
           if-no-files-found: error
           retention-days: 14
