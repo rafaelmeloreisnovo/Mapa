@@ -86,6 +86,7 @@ jobs:
 
           repository = Path.cwd()
           root = Path(os.environ["RUNNER_TEMP"]) / "cross-source-local"
+          floor_path = repository / "indices" / "CROSS_SOURCE_GATE_FLOOR.json"
           comparator_path = repository / "scripts" / "compare_cross_source_evidence.py"
           spec = importlib.util.spec_from_file_location(
               "cross_source_evidence_comparator",
@@ -95,7 +96,7 @@ jobs:
           comparator = importlib.util.module_from_spec(spec)
           spec.loader.exec_module(comparator)
 
-          bundle = comparator.validate_bundle(root)
+          bundle = comparator.validate_bundle(root, floor_path)
           assert bundle["status"] == "PASS", bundle["defects"]
 
           manifest = json.loads(
@@ -113,8 +114,10 @@ jobs:
           assert manifest["test_count_observed"] >= manifest["minimum_test_count"]
           assert manifest["test_count_observed"] == manifest["test_count_discovered"]
           assert manifest["complete_test_execution"] is True
+          assert manifest["clean_test_outcomes"] is True
           assert manifest["report_count"] == 5
           assert manifest["quality_floor"]["schema_version"] == "rafaelia.cross-source-gate-floor/v2"
+          assert manifest["quality_floor"]["sha256"] == comparator.sha256_file(floor_path)
           assert manifest["quality_floor_status"] == "PASS"
           assert manifest["promotion_state"] == "LOCAL_PASS_REMOTE_TOKEN_VAZIO"
           assert manifest["claim_allowed"] is False
