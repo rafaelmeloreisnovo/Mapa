@@ -1,58 +1,49 @@
 # Comparação de Evidências Cross-Source — Termux ↔ GitHub Actions
 
 ```yaml
-schema: rafaelia.cross-source-evidence-comparison-guide/v1
+schema: rafaelia.cross-source-evidence-comparison-guide/v2
 mode: deterministic_offline_comparison
+manifest_required: rafaelia.cross-source-local-gate/v3
+floor_required: rafaelia.cross-source-gate-floor/v2
 network_required: false
 claim_allowed: false
 remote_ci_substituted: false
 ```
 
-## Finalidade
+## 1. Finalidade
 
 Este protocolo compara dois pacotes produzidos pelo mesmo gate canônico:
 
 1. pacote local, normalmente executado no Termux;
 2. pacote remoto, produzido pelo GitHub Actions e baixado como artifact.
 
-A comparação responde a uma pergunta restrita e verificável:
+A pergunta respondida é restrita:
 
-> Os cinco relatórios governados possuem exatamente os mesmos bytes e foram selados pelo mesmo piso de qualidade?
+> Os cinco relatórios governados possuem os mesmos bytes, usam o mesmo piso e demonstram execução completa da mesma superfície de testes?
 
-Ela não afirma identidade humana, certificação externa, segurança absoluta ou autoria criptográfica.
+A comparação não afirma identidade humana, certificação externa, segurança absoluta ou autoria criptográfica.
 
-## Correção de reprodutibilidade
+## 2. Normalização entre ambientes
 
-O relatório do registry anteriormente podia registrar o caminho absoluto do checkout. O mesmo conteúdo poderia gerar, por exemplo:
-
-```text
-/data/data/com.termux/files/home/Mapa/indices/CROSS_SOURCE_REGISTRY.jsonl
-/home/runner/work/Mapa/Mapa/indices/CROSS_SOURCE_REGISTRY.jsonl
-```
-
-Esses caminhos eram semanticamente equivalentes, mas produziam hashes diferentes.
-
-A representação canônica agora é:
+O registry é registrado como:
 
 ```text
 indices/CROSS_SOURCE_REGISTRY.jsonl
 ```
 
-Para fixtures externas ao repositório:
+Arquivos externos são representados por:
 
 ```text
 external://<basename>
 ```
 
-Isso evita:
+Isso remove a localização física do checkout do conteúdo selado e evita:
 
-- divergência causada apenas pelo local do checkout;
-- vazamento de usuário, diretório pessoal ou raiz temporária;
-- falso negativo na comparação Termux ↔ Actions.
+- falso negativo entre Termux e Actions;
+- vazamento de diretórios locais;
+- hashes diferentes causados apenas pelo nome da raiz.
 
-## Pacote obrigatório
-
-Cada diretório comparado deve conter:
+## 3. Pacote obrigatório
 
 ```text
 cross-source-test-validation.json
@@ -64,19 +55,34 @@ LOCAL_GATE_STATUS.json
 CHECKSUMS.sha256
 ```
 
-Os cinco primeiros arquivos são comparados byte a byte por SHA-256.
+Os cinco relatórios são comparados byte a byte por SHA-256.
 
-`LOCAL_GATE_STATUS.json` pode variar somente nos metadados ambientais, como:
+## 4. Manifesto v3 obrigatório
+
+Metadados ambientais podem variar:
 
 - `generated_at`;
 - `python_version`;
 - `platform`.
 
-Mesmo assim, seus campos governados são validados:
+Os campos governados não podem variar semanticamente:
 
 ```yaml
+schema_version: rafaelia.cross-source-local-gate/v3
 status: PASS
+test_file_count: ">= minimum_test_file_count"
+minimum_test_file_count: 7
+test_count_discovered: ">= minimum_test_count"
+test_count_observed: ">= minimum_test_count"
+minimum_test_count: 58
+test_count_observed_equals_discovered: true
+complete_test_execution: true
 report_count: 5
+quality_floor:
+  path: indices/CROSS_SOURCE_GATE_FLOOR.json
+  schema_version: rafaelia.cross-source-gate-floor/v2
+  sha256: sha256_valido
+  status: PASS
 quality_floor_status: PASS
 promotion_state: LOCAL_PASS_REMOTE_TOKEN_VAZIO
 claim_allowed: false
@@ -84,7 +90,9 @@ remote_ci_substituted: false
 checksums: correspondentes_aos_cinco_relatorios
 ```
 
-## Execução
+Um pacote com 58 testes descobertos e somente 57 executados é inválido, mesmo que os 57 tenham passado.
+
+## 5. Execução
 
 ```sh
 python3 scripts/compare_cross_source_evidence.py \
@@ -95,9 +103,10 @@ python3 scripts/compare_cross_source_evidence.py \
 
 A execução é offline e usa somente Python standard library.
 
-## Resultado `PASS`
+## 6. Resultado `PASS`
 
 ```yaml
+schema_version: rafaelia.cross-source-evidence-comparison/v2
 status: PASS
 left_bundle_status: PASS
 right_bundle_status: PASS
@@ -110,36 +119,40 @@ remote_ci_substituted: false
 
 Um `PASS` demonstra:
 
-- integridade interna dos dois pacotes;
-- checksums coerentes com os arquivos presentes;
+- checksums internos válidos;
 - cinco relatórios byte a byte idênticos;
-- mesmo SHA-256 do piso de qualidade;
-- ausência de promoção local de claim;
-- ausência de substituição artificial da CI remota.
+- mesmo SHA-256 do piso v2;
+- sete ou mais arquivos governados;
+- 58 ou mais testes descobertos;
+- todos os testes descobertos executados;
+- ausência de promoção local de claim.
 
-## Resultado `FAIL`
+## 7. Resultado `FAIL`
 
-O comparador bloqueia, entre outros casos:
+O comparador bloqueia:
 
 - relatório ausente;
-- dois relatórios ausentes no mesmo caminho;
+- ausência simultânea tratada falsamente como igualdade;
 - checksum inválido ou desatualizado;
-- conteúdo diferente mesmo após novo selamento;
+- conteúdo diferente, mesmo depois de reseal;
+- manifest anterior à versão v3;
 - quantidade de relatórios divergente;
+- menos de sete arquivos de teste;
+- menos de 58 testes descobertos ou executados;
+- contagem executada diferente da contagem descoberta;
+- `complete_test_execution=false`;
 - `claim_allowed=true`;
 - `remote_ci_substituted=true`;
-- piso de qualidade ausente ou diferente;
+- piso ausente, inválido ou diferente;
 - relatório individual com `status != PASS`.
 
-A ausência simultânea nunca conta como correspondência:
-
 ```text
-None == None  → proibido como evidência de igualdade
+None == None → nunca é evidência de igualdade
 ```
 
-## Estados epistêmicos
+## 8. Estados epistêmicos
 
-### Antes de existir artifact remoto
+### Sem artifact remoto
 
 ```yaml
 local_bundle: POSSIVEL_PASS
@@ -148,17 +161,17 @@ comparison: TOKEN_VAZIO
 claim_allowed: false
 ```
 
-### Depois de artifact remoto válido e idêntico
+### Artifact remoto válido e idêntico
 
 ```yaml
 local_bundle: PASS
 remote_bundle: PASS
 comparison: PASS
-next_step: append_VALIDATION_custody_event
+next_step: append_VALIDATE_custody_event
 claim_allowed: false
 ```
 
-### Quando os pacotes divergem
+### Pacotes divergentes
 
 ```yaml
 comparison: FAIL
@@ -167,31 +180,34 @@ preserve_both_bundles: true
 next_step: identify_first_divergent_report
 ```
 
-## Limites
+## 9. Limites
 
-SHA-256 fornece verificação de integridade e identidade de bytes. Isoladamente, ele não prova:
+SHA-256 verifica integridade e identidade de bytes. Isoladamente, não prova:
 
 - quem executou o gate;
-- que o ambiente não estava comprometido;
-- que o artifact foi produzido pelo runner declarado;
+- integridade do ambiente;
+- vínculo criptográfico entre artifact e executor;
 - assinatura digital ou não repúdio;
 - conformidade ou certificação externa.
 
-Por isso, a promoção final exige também:
+A promoção final exige também:
 
-1. artifact remoto associado ao run observável;
-2. run com steps e logs reais;
-3. referência ao commit exato;
-4. preservação dos dois pacotes;
-5. evento `VALIDATE` append-only na cadeia de custódia.
+1. run remoto com steps e logs observáveis;
+2. artifact associado ao commit exato;
+3. preservação dos dois pacotes;
+4. comparação 5/5;
+5. evento `VALIDATE` append-only.
 
-## Provas adversariais implementadas
+## 10. Provas adversariais
 
 ```yaml
 identical_reports_different_environment_metadata: PASS_expected
 resealed_content_difference: FAIL_expected
 unsealed_tampering: FAIL_expected
 claim_promotion: FAIL_expected
+incomplete_test_execution: FAIL_expected
+discovered_executed_mismatch: FAIL_expected
+test_file_floor_regression: FAIL_expected
 quality_floor_mismatch: FAIL_expected
 equal_absence: FAIL_expected
 ```
@@ -200,7 +216,8 @@ equal_absence: FAIL_expected
 
 ```text
 Hash igual = bytes iguais
-Bytes iguais ≠ executor autenticado
-Artifact observável + commit + custódia = evidência ampliada
+Descoberto = superfície reconhecida
+Executado = superfície percorrida
+Descoberto == Executado = completude
 Tempo sem artifact = TOKEN_VAZIO útil e auditável
 ```
