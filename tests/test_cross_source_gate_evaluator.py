@@ -40,6 +40,10 @@ def baseline() -> tuple[
             "unexpected_passes": 0,
             "defect_count": 0,
             "complete_execution": True,
+            "clean_outcomes": True,
+            "skipped": 0,
+            "expected_failures": 0,
+            "unexpected_successes": 0,
             "claim_allowed": False,
             "remote_ci_substituted": False,
         },
@@ -71,8 +75,12 @@ def baseline() -> tuple[
         "tests_discovered": 58,
         "tests_run": 58,
         "complete_execution": True,
+        "clean_outcomes": True,
         "failures": 0,
         "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
         "claim_allowed": False,
         "remote_ci_substituted": False,
     }
@@ -115,6 +123,10 @@ class CrossSourceGateEvaluatorTests(unittest.TestCase):
             ("tests_discovered", 57, "tests.tests_discovered"),
             ("tests_run", 57, "tests.tests_run"),
             ("complete_execution", False, "tests.complete_execution"),
+            ("clean_outcomes", False, "tests.clean_outcomes"),
+            ("skipped", 1, "tests.skipped"),
+            ("expected_failures", 1, "tests.expected_failures"),
+            ("unexpected_successes", 1, "tests.unexpected_successes"),
         )
         for field, value, expected_failure in cases:
             with self.subTest(field=field):
