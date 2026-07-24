@@ -60,10 +60,18 @@ def run_suite(verbosity: int = 2) -> tuple[unittest.TestResult, dict[str, object
     suite = build_suite()
     tests_discovered = suite.countTestCases()
     result = unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    skipped = len(getattr(result, "skipped", []))
+    expected_failures = len(getattr(result, "expectedFailures", []))
+    unexpected_successes = len(getattr(result, "unexpectedSuccesses", []))
     complete_execution = result.testsRun == tests_discovered
-    successful = result.wasSuccessful() and complete_execution
+    clean_outcomes = (
+        skipped == 0
+        and expected_failures == 0
+        and unexpected_successes == 0
+    )
+    successful = result.wasSuccessful() and complete_execution and clean_outcomes
     report: dict[str, object] = {
-        "schema_version": "rafaelia.cross-source-test-report/v3",
+        "schema_version": "rafaelia.cross-source-test-report/v4",
         "status": "PASS" if successful else "FAIL",
         "test_patterns": list(TEST_PATTERNS),
         "test_files": list(TEST_FILES),
@@ -71,17 +79,18 @@ def run_suite(verbosity: int = 2) -> tuple[unittest.TestResult, dict[str, object
         "tests_discovered": tests_discovered,
         "tests_run": result.testsRun,
         "complete_execution": complete_execution,
+        "clean_outcomes": clean_outcomes,
         "failures": len(result.failures),
         "errors": len(result.errors),
-        "skipped": len(getattr(result, "skipped", [])),
-        "expected_failures": len(getattr(result, "expectedFailures", [])),
-        "unexpected_successes": len(getattr(result, "unexpectedSuccesses", [])),
+        "skipped": skipped,
+        "expected_failures": expected_failures,
+        "unexpected_successes": unexpected_successes,
         "claim_allowed": False,
         "remote_ci_substituted": False,
         "next_verifiable_step": (
             "Evaluate the measured test result against the versioned quality floor."
             if successful
-            else "Correct failures, errors or incomplete execution before sealing evidence."
+            else "Correct failures, errors, skipped or expected outcomes, or incomplete execution before sealing evidence."
         ),
     }
     return result, report
