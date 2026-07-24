@@ -139,7 +139,7 @@ python3 scripts/evaluate_cross_source_gate.py \
   --test-report "$OUTPUT_DIR/cross-source-test-validation.json" \
   --write-report "$OUTPUT_DIR/quality-floor-validation.json"
 
-printf '%s\n' "[8/9] Enforce non-promotion, complete execution and append-only boundaries"
+printf '%s\n' "[8/9] Enforce non-promotion, clean execution and append-only boundaries"
 OUTPUT_DIR="$OUTPUT_DIR" python3 - <<'PY'
 import json
 import os
@@ -189,8 +189,12 @@ assert tests["tests_discovered"] >= minimums["tests_discovered"]
 assert tests["tests_run"] >= minimums["tests_run"]
 assert tests["tests_run"] == tests["tests_discovered"]
 assert tests["complete_execution"] is True
+assert tests["clean_outcomes"] is True
 assert tests["failures"] == 0
 assert tests["errors"] == 0
+assert tests["skipped"] == 0
+assert tests["expected_failures"] == 0
+assert tests["unexpected_successes"] == 0
 assert tests["claim_allowed"] is False
 assert tests["remote_ci_substituted"] is False
 
@@ -246,6 +250,7 @@ manifest = {
     "test_count_observed": tests["tests_run"],
     "minimum_test_count": floor["minimums"]["tests_run"],
     "complete_test_execution": tests["complete_execution"],
+    "clean_test_outcomes": tests["clean_outcomes"],
     "report_count": len(checksums),
     "checksums": checksums,
     "quality_floor": {
