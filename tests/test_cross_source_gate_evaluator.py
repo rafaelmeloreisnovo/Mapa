@@ -24,9 +24,11 @@ def baseline() -> tuple[
     dict[str, Any],
 ]:
     floor = {
-        "schema_version": "rafaelia.cross-source-gate-floor/v1",
+        "schema_version": "rafaelia.cross-source-gate-floor/v2",
         "minimums": {
-            "tests_run": 38,
+            "test_files": 7,
+            "tests_discovered": 58,
+            "tests_run": 58,
             "valid_fixtures": 2,
             "invalid_fixtures": 1,
             "registry_records": 10,
@@ -37,6 +39,7 @@ def baseline() -> tuple[
             "unexpected_failures": 0,
             "unexpected_passes": 0,
             "defect_count": 0,
+            "complete_execution": True,
             "claim_allowed": False,
             "remote_ci_substituted": False,
         },
@@ -64,7 +67,10 @@ def baseline() -> tuple[
     }
     tests = {
         "status": "PASS",
-        "tests_run": 38,
+        "test_file_count": 7,
+        "tests_discovered": 58,
+        "tests_run": 58,
+        "complete_execution": True,
         "failures": 0,
         "errors": 0,
         "claim_allowed": False,
@@ -87,7 +93,9 @@ class CrossSourceGateEvaluatorTests(unittest.TestCase):
         registry["record_count"] = 27
         registry["provider_counts"] = {"github": 12, "google_drive": 15}
         custody["event_count"] = 31
-        tests["tests_run"] = 52
+        tests["test_file_count"] = 9
+        tests["tests_discovered"] = 72
+        tests["tests_run"] = 72
         report = EVALUATOR.evaluate(floor, records, registry, custody, tests)
         self.assertEqual(report["status"], "PASS")
 
@@ -101,11 +109,25 @@ class CrossSourceGateEvaluatorTests(unittest.TestCase):
         }
         self.assertIn("registry.record_count", failed_names)
 
-    def test_test_count_regression_is_blocked(self) -> None:
-        floor, records, registry, custody, tests = baseline()
-        tests["tests_run"] = 37
-        report = EVALUATOR.evaluate(floor, records, registry, custody, tests)
-        self.assertEqual(report["status"], "FAIL")
+    def test_test_surface_regressions_are_blocked(self) -> None:
+        cases = (
+            ("test_file_count", 6, "tests.test_file_count"),
+            ("tests_discovered", 57, "tests.tests_discovered"),
+            ("tests_run", 57, "tests.tests_run"),
+            ("complete_execution", False, "tests.complete_execution"),
+        )
+        for field, value, expected_failure in cases:
+            with self.subTest(field=field):
+                floor, records, registry, custody, tests = baseline()
+                tests[field] = value
+                report = EVALUATOR.evaluate(floor, records, registry, custody, tests)
+                self.assertEqual(report["status"], "FAIL")
+                failed_names = {
+                    check["name"]
+                    for check in report["checks"]
+                    if not check["passed"]
+                }
+                self.assertIn(expected_failure, failed_names)
 
     def test_claim_promotion_inside_local_gate_is_blocked(self) -> None:
         floor, records, registry, custody, tests = baseline()
