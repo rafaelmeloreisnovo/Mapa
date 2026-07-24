@@ -82,7 +82,41 @@ def evaluate(
         "eq",
         invariants.get("remote_ci_substituted"),
     )
-    add_check(checks, "tests.tests_run", tests.get("tests_run"), "ge", minimums.get("tests_run"))
+    add_check(
+        checks,
+        "tests.complete_execution",
+        tests.get("complete_execution"),
+        "eq",
+        invariants.get("complete_execution"),
+    )
+    add_check(
+        checks,
+        "tests.test_file_count",
+        tests.get("test_file_count"),
+        "ge",
+        minimums.get("test_files"),
+    )
+    add_check(
+        checks,
+        "tests.tests_discovered",
+        tests.get("tests_discovered"),
+        "ge",
+        minimums.get("tests_discovered"),
+    )
+    add_check(
+        checks,
+        "tests.tests_run",
+        tests.get("tests_run"),
+        "ge",
+        minimums.get("tests_run"),
+    )
+    add_check(
+        checks,
+        "tests.run_matches_discovery",
+        tests.get("tests_run"),
+        "eq",
+        tests.get("tests_discovered"),
+    )
     add_check(checks, "tests.failures", tests.get("failures"), "eq", 0)
     add_check(checks, "tests.errors", tests.get("errors"), "eq", 0)
 
@@ -161,7 +195,7 @@ def evaluate(
     failed = [check for check in checks if not check["passed"]]
     status = "PASS" if not failed else "FAIL"
     return {
-        "schema_version": "rafaelia.cross-source-gate-evaluation/v1",
+        "schema_version": "rafaelia.cross-source-gate-evaluation/v2",
         "status": status,
         "floor_schema_version": floor.get("schema_version"),
         "comparison": "observed_greater_than_or_equal_to_minimum",
