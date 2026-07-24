@@ -49,6 +49,7 @@ class CrossSourceLocalGateContractTests(unittest.TestCase):
     def test_script_preserves_claim_and_remote_ci_boundaries(self) -> None:
         self.assertIn('"claim_allowed": False', self.text)
         self.assertIn('"remote_ci_substituted": False', self.text)
+        self.assertIn('"test_count_expected": 22', self.text)
         self.assertIn("Restore GitHub Actions runner startup", self.text)
 
     def test_default_output_is_untracked_artifact_directory(self) -> None:
