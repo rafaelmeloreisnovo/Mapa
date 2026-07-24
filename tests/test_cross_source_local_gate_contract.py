@@ -35,21 +35,24 @@ class CrossSourceLocalGateContractTests(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertNotIn(token, self.text)
 
-    def test_script_runs_both_semantic_validators(self) -> None:
+    def test_script_runs_cross_source_and_custody_validators(self) -> None:
         self.assertIn("scripts/validate_cross_source_records.py", self.text)
         self.assertIn("scripts/validate_cross_source_registry.py", self.text)
+        self.assertIn("scripts/validate_chain_of_custody.py", self.text)
         self.assertIn("tests/test_cross_source_records.py", self.text)
         self.assertIn("tests/test_cross_source_registry.py", self.text)
+        self.assertIn("tests/test_validate_chain_of_custody.py", self.text)
 
-    def test_script_seals_reports_with_sha256(self) -> None:
+    def test_script_seals_three_reports_with_sha256(self) -> None:
         self.assertIn("hashlib.sha256", self.text)
+        self.assertIn("chain-of-custody-validation.json", self.text)
         self.assertIn("CHECKSUMS.sha256", self.text)
         self.assertIn("LOCAL_GATE_STATUS.json", self.text)
 
     def test_script_preserves_claim_and_remote_ci_boundaries(self) -> None:
         self.assertIn('"claim_allowed": False', self.text)
         self.assertIn('"remote_ci_substituted": False', self.text)
-        self.assertIn('"test_count_expected": 22', self.text)
+        self.assertIn('"test_count_expected": 38', self.text)
         self.assertIn("Restore GitHub Actions runner startup", self.text)
 
     def test_default_output_is_untracked_artifact_directory(self) -> None:
