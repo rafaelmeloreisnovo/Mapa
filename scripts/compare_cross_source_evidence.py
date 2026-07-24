@@ -21,6 +21,18 @@ CHECKSUMS_NAME = "CHECKSUMS.sha256"
 HEX = set("0123456789abcdef")
 
 
+def is_int(value: Any) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(char in HEX for char in value)
+    )
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
@@ -50,7 +62,7 @@ def parse_checksum_file(path: Path) -> tuple[dict[str, str], list[str]]:
             defects.append(f"{CHECKSUMS_NAME} line {line_number}: invalid format")
             continue
         digest, name = parts
-        if len(digest) != 64 or any(char not in HEX for char in digest):
+        if not is_sha256(digest):
             defects.append(f"{CHECKSUMS_NAME} line {line_number}: invalid sha256")
             continue
         if name not in REPORT_NAMES:
@@ -65,6 +77,69 @@ def parse_checksum_file(path: Path) -> tuple[dict[str, str], list[str]]:
     if missing:
         defects.append("checksum entries missing: " + ", ".join(missing))
     return entries, defects
+
+
+def validate_manifest(
+    manifest: dict[str, Any],
+    expected_checksums: list[dict[str, str]],
+) -> list[str]:
+    defects: list[str] = []
+    exact_checks = (
+        ("schema_version", manifest.get("schema_version"), "rafaelia.cross-source-local-gate/v3"),
+        ("status", manifest.get("status"), "PASS"),
+        ("complete_test_execution", manifest.get("complete_test_execution"), True),
+        ("report_count", manifest.get("report_count"), len(REPORT_NAMES)),
+        ("quality_floor_status", manifest.get("quality_floor_status"), "PASS"),
+        ("promotion_state", manifest.get("promotion_state"), "LOCAL_PASS_REMOTE_TOKEN_VAZIO"),
+        ("claim_allowed", manifest.get("claim_allowed"), False),
+        ("remote_ci_substituted", manifest.get("remote_ci_substituted"), False),
+        ("checksums", manifest.get("checksums"), expected_checksums),
+    )
+    for field, observed, required in exact_checks:
+        if observed != required:
+            defects.append(
+                f"manifest {field}: observed {observed!r}; required {required!r}"
+            )
+
+    integer_fields = (
+        "test_file_count",
+        "minimum_test_file_count",
+        "test_count_discovered",
+        "test_count_observed",
+        "minimum_test_count",
+    )
+    values: dict[str, int] = {}
+    for field in integer_fields:
+        observed = manifest.get(field)
+        if not is_int(observed) or observed < 0:
+            defects.append(f"manifest {field}: must be a non-negative integer")
+        else:
+            values[field] = observed
+
+    if len(values) == len(integer_fields):
+        if values["test_file_count"] < values["minimum_test_file_count"]:
+            defects.append("manifest test_file_count is below minimum_test_file_count")
+        if values["test_count_discovered"] < values["minimum_test_count"]:
+            defects.append("manifest test_count_discovered is below minimum_test_count")
+        if values["test_count_observed"] < values["minimum_test_count"]:
+            defects.append("manifest test_count_observed is below minimum_test_count")
+        if values["test_count_observed"] != values["test_count_discovered"]:
+            defects.append("manifest observed test count differs from discovered test count")
+
+    floor = manifest.get("quality_floor")
+    if not isinstance(floor, dict):
+        defects.append("manifest quality_floor must be an object")
+    else:
+        if floor.get("path") != "indices/CROSS_SOURCE_GATE_FLOOR.json":
+            defects.append("manifest quality_floor.path is not canonical")
+        if floor.get("schema_version") != "rafaelia.cross-source-gate-floor/v2":
+            defects.append("manifest quality_floor.schema_version must be v2")
+        if not is_sha256(floor.get("sha256")):
+            defects.append("manifest quality_floor.sha256 is invalid")
+        if floor.get("status") != "PASS":
+            defects.append("manifest quality_floor.status must be PASS")
+
+    return defects
 
 
 def validate_bundle(directory: Path) -> dict[str, Any]:
@@ -106,20 +181,7 @@ def validate_bundle(directory: Path) -> dict[str, Any]:
             for name in REPORT_NAMES
             if name in report_hashes
         ]
-        checks = (
-            ("status", manifest.get("status"), "PASS"),
-            ("report_count", manifest.get("report_count"), len(REPORT_NAMES)),
-            ("quality_floor_status", manifest.get("quality_floor_status"), "PASS"),
-            ("promotion_state", manifest.get("promotion_state"), "LOCAL_PASS_REMOTE_TOKEN_VAZIO"),
-            ("claim_allowed", manifest.get("claim_allowed"), False),
-            ("remote_ci_substituted", manifest.get("remote_ci_substituted"), False),
-            ("checksums", manifest.get("checksums"), expected_manifest_checksums),
-        )
-        for field, observed, required in checks:
-            if observed != required:
-                defects.append(
-                    f"manifest {field}: observed {observed!r}; required {required!r}"
-                )
+        defects.extend(validate_manifest(manifest, expected_manifest_checksums))
 
     for name, report in reports.items():
         if report.get("status") != "PASS":
@@ -166,7 +228,7 @@ def compare_bundles(left_directory: Path, right_directory: Path) -> dict[str, An
 
     status = "PASS" if not defects else "FAIL"
     return {
-        "schema_version": "rafaelia.cross-source-evidence-comparison/v1",
+        "schema_version": "rafaelia.cross-source-evidence-comparison/v2",
         "status": status,
         "left_bundle_status": left["status"],
         "right_bundle_status": right["status"],
