@@ -12,13 +12,29 @@ from pathlib import Path
 from types import ModuleType
 
 ROOT = Path(__file__).resolve().parents[1]
-TEST_FILES = (
-    "tests/test_cross_source_records.py",
-    "tests/test_cross_source_registry.py",
-    "tests/test_cross_source_local_gate_contract.py",
-    "tests/test_cross_source_gate_evaluator.py",
-    "tests/test_validate_chain_of_custody.py",
+TEST_ROOT = ROOT / "tests"
+TEST_PATTERNS = (
+    "test_cross_source*.py",
+    "test_compare_cross_source_evidence.py",
+    "test_validate_chain_of_custody.py",
 )
+
+
+def discover_test_files() -> tuple[str, ...]:
+    """Discover the governed test surface deterministically.
+
+    The patterns are explicit enough to avoid unrelated repository tests while
+    allowing new cross-source tests to enter the measured suite without editing
+    a hard-coded file tuple.
+    """
+
+    paths: set[Path] = set()
+    for pattern in TEST_PATTERNS:
+        paths.update(path for path in TEST_ROOT.glob(pattern) if path.is_file())
+    return tuple(path.relative_to(ROOT).as_posix() for path in sorted(paths))
+
+
+TEST_FILES = discover_test_files()
 
 
 def load_module(path: Path, index: int) -> ModuleType:
@@ -33,6 +49,8 @@ def load_module(path: Path, index: int) -> ModuleType:
 
 
 def build_suite() -> unittest.TestSuite:
+    if not TEST_FILES:
+        raise RuntimeError("canonical cross-source test discovery returned no files")
     loader = unittest.TestLoader()
     suite = unittest.TestSuite()
     for index, relative_path in enumerate(TEST_FILES):
@@ -47,9 +65,11 @@ def run_suite(verbosity: int = 2) -> tuple[unittest.TestResult, dict[str, object
     suite = build_suite()
     result = unittest.TextTestRunner(verbosity=verbosity).run(suite)
     report: dict[str, object] = {
-        "schema_version": "rafaelia.cross-source-test-report/v1",
+        "schema_version": "rafaelia.cross-source-test-report/v2",
         "status": "PASS" if result.wasSuccessful() else "FAIL",
+        "test_patterns": list(TEST_PATTERNS),
         "test_files": list(TEST_FILES),
+        "test_file_count": len(TEST_FILES),
         "tests_run": result.testsRun,
         "failures": len(result.failures),
         "errors": len(result.errors),
