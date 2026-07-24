@@ -81,7 +81,7 @@ for path_text in (
     print(f"{path_text}={count}")
 PY
 
-printf '%s\n' "[4/9] Run and measure canonical adversarial tests"
+printf '%s\n' "[4/9] Discover, run and measure canonical adversarial tests"
 python3 scripts/run_cross_source_tests.py \
   --write-report "$OUTPUT_DIR/cross-source-test-validation.json"
 
@@ -139,7 +139,7 @@ python3 scripts/evaluate_cross_source_gate.py \
   --test-report "$OUTPUT_DIR/cross-source-test-validation.json" \
   --write-report "$OUTPUT_DIR/quality-floor-validation.json"
 
-printf '%s\n' "[8/9] Enforce non-promotion and append-only boundaries"
+printf '%s\n' "[8/9] Enforce non-promotion, complete execution and append-only boundaries"
 OUTPUT_DIR="$OUTPUT_DIR" python3 - <<'PY'
 import json
 import os
@@ -184,7 +184,11 @@ assert custody["defect_count"] == 0
 assert custody["claim_allowed"] is False
 
 assert tests["status"] == "PASS"
+assert tests["test_file_count"] >= minimums["test_files"]
+assert tests["tests_discovered"] >= minimums["tests_discovered"]
 assert tests["tests_run"] >= minimums["tests_run"]
+assert tests["tests_run"] == tests["tests_discovered"]
+assert tests["complete_execution"] is True
 assert tests["failures"] == 0
 assert tests["errors"] == 0
 assert tests["claim_allowed"] is False
@@ -231,14 +235,17 @@ quality = json.loads(
     (output_dir / "quality-floor-validation.json").read_text(encoding="utf-8")
 )
 manifest = {
-    "schema_version": "rafaelia.cross-source-local-gate/v2",
+    "schema_version": "rafaelia.cross-source-local-gate/v3",
     "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     "python_version": sys.version.split()[0],
     "platform": platform.platform(),
     "status": "PASS",
-    "test_count_observed": tests["tests_run"],
     "test_file_count": tests["test_file_count"],
+    "minimum_test_file_count": floor["minimums"]["test_files"],
+    "test_count_discovered": tests["tests_discovered"],
+    "test_count_observed": tests["tests_run"],
     "minimum_test_count": floor["minimums"]["tests_run"],
+    "complete_test_execution": tests["complete_execution"],
     "report_count": len(checksums),
     "checksums": checksums,
     "quality_floor": {
