@@ -149,10 +149,12 @@ def compare_bundles(left_directory: Path, right_directory: Path) -> dict[str, An
 
     hash_matches: dict[str, bool] = {}
     for name in REPORT_NAMES:
-        matches = left["report_hashes"].get(name) == right["report_hashes"].get(name)
+        left_hash = left["report_hashes"].get(name)
+        right_hash = right["report_hashes"].get(name)
+        matches = bool(left_hash) and left_hash == right_hash
         hash_matches[name] = matches
         if not matches:
-            defects.append(f"report differs: {name}")
+            defects.append(f"report differs or is absent: {name}")
 
     left_floor = left["manifest"].get("quality_floor", {})
     right_floor = right["manifest"].get("quality_floor", {})
