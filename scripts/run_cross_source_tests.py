@@ -21,12 +21,7 @@ TEST_PATTERNS = (
 
 
 def discover_test_files() -> tuple[str, ...]:
-    """Discover the governed test surface deterministically.
-
-    The patterns are explicit enough to avoid unrelated repository tests while
-    allowing new cross-source tests to enter the measured suite without editing
-    a hard-coded file tuple.
-    """
+    """Discover the governed test surface deterministically."""
 
     paths: set[Path] = set()
     for pattern in TEST_PATTERNS:
@@ -63,14 +58,19 @@ def build_suite() -> unittest.TestSuite:
 
 def run_suite(verbosity: int = 2) -> tuple[unittest.TestResult, dict[str, object]]:
     suite = build_suite()
+    tests_discovered = suite.countTestCases()
     result = unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    complete_execution = result.testsRun == tests_discovered
+    successful = result.wasSuccessful() and complete_execution
     report: dict[str, object] = {
-        "schema_version": "rafaelia.cross-source-test-report/v2",
-        "status": "PASS" if result.wasSuccessful() else "FAIL",
+        "schema_version": "rafaelia.cross-source-test-report/v3",
+        "status": "PASS" if successful else "FAIL",
         "test_patterns": list(TEST_PATTERNS),
         "test_files": list(TEST_FILES),
         "test_file_count": len(TEST_FILES),
+        "tests_discovered": tests_discovered,
         "tests_run": result.testsRun,
+        "complete_execution": complete_execution,
         "failures": len(result.failures),
         "errors": len(result.errors),
         "skipped": len(getattr(result, "skipped", [])),
@@ -80,8 +80,8 @@ def run_suite(verbosity: int = 2) -> tuple[unittest.TestResult, dict[str, object
         "remote_ci_substituted": False,
         "next_verifiable_step": (
             "Evaluate the measured test result against the versioned quality floor."
-            if result.wasSuccessful()
-            else "Correct the failing canonical tests before producing promotion evidence."
+            if successful
+            else "Correct failures, errors or incomplete execution before sealing evidence."
         ),
     }
     return result, report
@@ -96,14 +96,14 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    result, report = run_suite(verbosity=0 if args.quiet else 2)
+    _, report = run_suite(verbosity=0 if args.quiet else 2)
     rendered = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     if args.write_report:
         args.write_report.parent.mkdir(parents=True, exist_ok=True)
         args.write_report.write_text(rendered, encoding="utf-8")
     else:
         print(rendered, end="")
-    return 0 if result.wasSuccessful() else 1
+    return 0 if report["status"] == "PASS" else 1
 
 
 if __name__ == "__main__":
