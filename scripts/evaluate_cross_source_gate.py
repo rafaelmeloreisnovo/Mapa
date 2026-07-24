@@ -91,6 +91,13 @@ def evaluate(
     )
     add_check(
         checks,
+        "tests.clean_outcomes",
+        tests.get("clean_outcomes"),
+        "eq",
+        invariants.get("clean_outcomes"),
+    )
+    add_check(
+        checks,
         "tests.test_file_count",
         tests.get("test_file_count"),
         "ge",
@@ -117,8 +124,15 @@ def evaluate(
         "eq",
         tests.get("tests_discovered"),
     )
-    add_check(checks, "tests.failures", tests.get("failures"), "eq", 0)
-    add_check(checks, "tests.errors", tests.get("errors"), "eq", 0)
+    for field in (
+        "failures",
+        "errors",
+        "skipped",
+        "expected_failures",
+        "unexpected_successes",
+    ):
+        required = invariants.get(field, 0)
+        add_check(checks, f"tests.{field}", tests.get(field), "eq", required)
 
     add_check(
         checks,
@@ -195,7 +209,7 @@ def evaluate(
     failed = [check for check in checks if not check["passed"]]
     status = "PASS" if not failed else "FAIL"
     return {
-        "schema_version": "rafaelia.cross-source-gate-evaluation/v2",
+        "schema_version": "rafaelia.cross-source-gate-evaluation/v3",
         "status": status,
         "floor_schema_version": floor.get("schema_version"),
         "comparison": "observed_greater_than_or_equal_to_minimum",
