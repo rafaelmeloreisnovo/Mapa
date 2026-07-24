@@ -13,11 +13,14 @@ on:
       - "scripts/validate_chain_of_custody.py"
       - "scripts/run_cross_source_tests.py"
       - "scripts/evaluate_cross_source_gate.py"
+      - "scripts/compare_cross_source_evidence.py"
       - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
       - "tests/test_cross_source_local_gate_contract.py"
       - "tests/test_cross_source_gate_evaluator.py"
+      - "tests/test_cross_source_test_runner.py"
+      - "tests/test_compare_cross_source_evidence.py"
       - "tests/test_validate_chain_of_custody.py"
       - "tests/fixtures/cross_source/**"
       - ".github/workflows/cross-source-record-validation.yml"
@@ -34,11 +37,14 @@ on:
       - "scripts/validate_chain_of_custody.py"
       - "scripts/run_cross_source_tests.py"
       - "scripts/evaluate_cross_source_gate.py"
+      - "scripts/compare_cross_source_evidence.py"
       - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
       - "tests/test_cross_source_local_gate_contract.py"
       - "tests/test_cross_source_gate_evaluator.py"
+      - "tests/test_cross_source_test_runner.py"
+      - "tests/test_compare_cross_source_evidence.py"
       - "tests/test_validate_chain_of_custody.py"
       - "tests/fixtures/cross_source/**"
       - ".github/workflows/cross-source-record-validation.yml"
@@ -73,25 +79,42 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
+          import importlib.util
           import json
           import os
           from pathlib import Path
 
+          repository = Path.cwd()
           root = Path(os.environ["RUNNER_TEMP"]) / "cross-source-local"
+          comparator_path = repository / "scripts" / "compare_cross_source_evidence.py"
+          spec = importlib.util.spec_from_file_location(
+              "cross_source_evidence_comparator",
+              comparator_path,
+          )
+          assert spec and spec.loader
+          comparator = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(comparator)
+
+          bundle = comparator.validate_bundle(root)
+          assert bundle["status"] == "PASS", bundle["defects"]
+
           manifest = json.loads(
               (root / "LOCAL_GATE_STATUS.json").read_text(encoding="utf-8")
           )
+          registry = json.loads(
+              (root / "cross-source-registry-validation.json").read_text(
+                  encoding="utf-8"
+              )
+          )
           assert manifest["status"] == "PASS"
           assert manifest["test_count_observed"] >= manifest["minimum_test_count"]
+          assert manifest["test_file_count"] >= 1
           assert manifest["report_count"] == 5
           assert manifest["quality_floor_status"] == "PASS"
           assert manifest["promotion_state"] == "LOCAL_PASS_REMOTE_TOKEN_VAZIO"
           assert manifest["claim_allowed"] is False
           assert manifest["remote_ci_substituted"] is False
-          assert (root / "cross-source-test-validation.json").is_file()
-          assert (root / "chain-of-custody-validation.json").is_file()
-          assert (root / "quality-floor-validation.json").is_file()
-          assert (root / "CHECKSUMS.sha256").is_file()
+          assert registry["registry"] == "indices/CROSS_SOURCE_REGISTRY.jsonl"
           PY
 
       - name: Upload validation evidence
