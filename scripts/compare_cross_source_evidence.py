@@ -75,8 +75,16 @@ def load_floor(path: Path) -> tuple[dict[str, Any], str, list[str]]:
         value = minimums.get(field)
         if not is_int(value) or value <= 0:
             defects.append(f"quality floor minimums.{field} must be a positive integer")
-    if invariants.get("complete_execution") is not True:
-        defects.append("quality floor must require complete_execution=true")
+    for field in ("complete_execution", "clean_outcomes"):
+        if invariants.get(field) is not True:
+            defects.append(f"quality floor must require {field}=true")
+    for field in (
+        "skipped",
+        "expected_failures",
+        "unexpected_successes",
+    ):
+        if invariants.get(field) != 0:
+            defects.append(f"quality floor must require {field}=0")
     if invariants.get("claim_allowed") is not False:
         defects.append("quality floor must require claim_allowed=false")
     if invariants.get("remote_ci_substituted") is not False:
@@ -130,6 +138,7 @@ def validate_manifest(
         ("schema_version", manifest.get("schema_version"), "rafaelia.cross-source-local-gate/v3"),
         ("status", manifest.get("status"), "PASS"),
         ("complete_test_execution", manifest.get("complete_test_execution"), True),
+        ("clean_test_outcomes", manifest.get("clean_test_outcomes"), True),
         ("minimum_test_file_count", manifest.get("minimum_test_file_count"), minimums.get("test_files")),
         ("minimum_test_count", manifest.get("minimum_test_count"), minimums.get("tests_run")),
         ("report_count", manifest.get("report_count"), len(REPORT_NAMES)),
