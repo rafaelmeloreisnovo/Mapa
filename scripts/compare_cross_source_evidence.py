@@ -18,6 +18,11 @@ REPORT_NAMES = (
     "chain-of-custody-validation.json",
     "quality-floor-validation.json",
 )
+TEST_REPORT = REPORT_NAMES[0]
+RECORD_REPORT = REPORT_NAMES[1]
+REGISTRY_REPORT = REPORT_NAMES[2]
+CUSTODY_REPORT = REPORT_NAMES[3]
+QUALITY_REPORT = REPORT_NAMES[4]
 MANIFEST_NAME = "LOCAL_GATE_STATUS.json"
 CHECKSUMS_NAME = "CHECKSUMS.sha256"
 HEX = set("0123456789abcdef")
@@ -52,13 +57,12 @@ def load_object(path: Path) -> dict[str, Any]:
 
 def load_floor(path: Path) -> tuple[dict[str, Any], str, list[str]]:
     defects: list[str] = []
-    floor: dict[str, Any] = {}
     if not path.is_file():
-        return floor, "", [f"quality floor not found: {path}"]
+        return {}, "", [f"quality floor not found: {path}"]
     try:
         floor = load_object(path)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
-        return floor, "", [f"quality floor: {exc}"]
+        return {}, "", [f"quality floor: {exc}"]
 
     if floor.get("schema_version") != "rafaelia.cross-source-gate-floor/v2":
         defects.append("quality floor schema_version must be v2")
@@ -71,14 +75,33 @@ def load_floor(path: Path) -> tuple[dict[str, Any], str, list[str]]:
         defects.append("quality floor invariants must be an object")
         invariants = {}
 
-    for field in ("test_files", "tests_discovered", "tests_run"):
+    for field in (
+        "test_files",
+        "tests_discovered",
+        "tests_run",
+        "valid_fixtures",
+        "invalid_fixtures",
+        "registry_records",
+        "custody_events",
+    ):
         value = minimums.get(field)
-        if not is_int(value) or value <= 0:
-            defects.append(f"quality floor minimums.{field} must be a positive integer")
+        if not is_int(value) or value < 0:
+            defects.append(f"quality floor minimums.{field} must be a non-negative integer")
+    providers = minimums.get("provider_counts")
+    if not isinstance(providers, dict) or not providers:
+        defects.append("quality floor minimums.provider_counts must be a non-empty object")
+    else:
+        for provider, value in providers.items():
+            if not isinstance(provider, str) or not is_int(value) or value < 0:
+                defects.append("quality floor provider counts must be non-negative integers")
+
     for field in ("complete_execution", "clean_outcomes"):
         if invariants.get(field) is not True:
             defects.append(f"quality floor must require {field}=true")
     for field in (
+        "unexpected_failures",
+        "unexpected_passes",
+        "defect_count",
         "skipped",
         "expected_failures",
         "unexpected_successes",
@@ -124,6 +147,26 @@ def parse_checksum_file(path: Path) -> tuple[dict[str, str], list[str]]:
     return entries, defects
 
 
+def require_equal(
+    defects: list[str],
+    name: str,
+    observed: Any,
+    required: Any,
+) -> None:
+    if observed != required:
+        defects.append(f"{name}: observed {observed!r}; required {required!r}")
+
+
+def require_minimum(
+    defects: list[str],
+    name: str,
+    observed: Any,
+    required: Any,
+) -> None:
+    if not is_int(observed) or not is_int(required) or observed < required:
+        defects.append(f"{name}: observed {observed!r}; minimum {required!r}")
+
+
 def validate_manifest(
     manifest: dict[str, Any],
     expected_checksums: list[dict[str, str]],
@@ -134,64 +177,280 @@ def validate_manifest(
     minimums = floor.get("minimums")
     minimums = minimums if isinstance(minimums, dict) else {}
 
-    exact_checks = (
-        ("schema_version", manifest.get("schema_version"), "rafaelia.cross-source-local-gate/v3"),
-        ("status", manifest.get("status"), "PASS"),
-        ("complete_test_execution", manifest.get("complete_test_execution"), True),
-        ("clean_test_outcomes", manifest.get("clean_test_outcomes"), True),
-        ("minimum_test_file_count", manifest.get("minimum_test_file_count"), minimums.get("test_files")),
-        ("minimum_test_count", manifest.get("minimum_test_count"), minimums.get("tests_run")),
-        ("report_count", manifest.get("report_count"), len(REPORT_NAMES)),
-        ("quality_floor_status", manifest.get("quality_floor_status"), "PASS"),
-        ("promotion_state", manifest.get("promotion_state"), "LOCAL_PASS_REMOTE_TOKEN_VAZIO"),
-        ("claim_allowed", manifest.get("claim_allowed"), False),
-        ("remote_ci_substituted", manifest.get("remote_ci_substituted"), False),
-        ("checksums", manifest.get("checksums"), expected_checksums),
-    )
-    for field, observed, required in exact_checks:
-        if observed != required:
-            defects.append(
-                f"manifest {field}: observed {observed!r}; required {required!r}"
-            )
+    for field, required in (
+        ("schema_version", "rafaelia.cross-source-local-gate/v3"),
+        ("status", "PASS"),
+        ("complete_test_execution", True),
+        ("clean_test_outcomes", True),
+        ("minimum_test_file_count", minimums.get("test_files")),
+        ("minimum_test_count", minimums.get("tests_run")),
+        ("report_count", len(REPORT_NAMES)),
+        ("quality_floor_status", "PASS"),
+        ("promotion_state", "LOCAL_PASS_REMOTE_TOKEN_VAZIO"),
+        ("claim_allowed", False),
+        ("remote_ci_substituted", False),
+        ("checksums", expected_checksums),
+    ):
+        require_equal(defects, f"manifest {field}", manifest.get(field), required)
 
-    integer_fields = (
-        "test_file_count",
-        "minimum_test_file_count",
-        "test_count_discovered",
-        "test_count_observed",
-        "minimum_test_count",
+    require_minimum(
+        defects,
+        "manifest test_file_count",
+        manifest.get("test_file_count"),
+        minimums.get("test_files"),
     )
-    values: dict[str, int] = {}
-    for field in integer_fields:
-        observed = manifest.get(field)
-        if not is_int(observed) or observed < 0:
-            defects.append(f"manifest {field}: must be a non-negative integer")
-        else:
-            values[field] = observed
-
-    if len(values) == len(integer_fields):
-        if values["test_file_count"] < minimums.get("test_files", -1):
-            defects.append("manifest test_file_count is below versioned floor")
-        if values["test_count_discovered"] < minimums.get("tests_discovered", -1):
-            defects.append("manifest test_count_discovered is below versioned floor")
-        if values["test_count_observed"] < minimums.get("tests_run", -1):
-            defects.append("manifest test_count_observed is below versioned floor")
-        if values["test_count_observed"] != values["test_count_discovered"]:
-            defects.append("manifest observed test count differs from discovered test count")
+    require_minimum(
+        defects,
+        "manifest test_count_discovered",
+        manifest.get("test_count_discovered"),
+        minimums.get("tests_discovered"),
+    )
+    require_minimum(
+        defects,
+        "manifest test_count_observed",
+        manifest.get("test_count_observed"),
+        minimums.get("tests_run"),
+    )
+    require_equal(
+        defects,
+        "manifest observed test count versus discovered test count",
+        manifest.get("test_count_observed"),
+        manifest.get("test_count_discovered"),
+    )
 
     floor_meta = manifest.get("quality_floor")
     if not isinstance(floor_meta, dict):
         defects.append("manifest quality_floor must be an object")
     else:
-        expected_path = "indices/CROSS_SOURCE_GATE_FLOOR.json"
-        if floor_meta.get("path") != expected_path:
-            defects.append("manifest quality_floor.path is not canonical")
-        if floor_meta.get("schema_version") != floor.get("schema_version"):
-            defects.append("manifest quality_floor.schema_version differs from floor file")
-        if floor_meta.get("sha256") != floor_sha256:
-            defects.append("manifest quality_floor.sha256 differs from floor file")
-        if floor_meta.get("status") != "PASS":
-            defects.append("manifest quality_floor.status must be PASS")
+        require_equal(
+            defects,
+            "manifest quality_floor.path",
+            floor_meta.get("path"),
+            "indices/CROSS_SOURCE_GATE_FLOOR.json",
+        )
+        require_equal(
+            defects,
+            "manifest quality_floor.schema_version",
+            floor_meta.get("schema_version"),
+            floor.get("schema_version"),
+        )
+        require_equal(
+            defects,
+            "manifest quality_floor.sha256",
+            floor_meta.get("sha256"),
+            floor_sha256,
+        )
+        require_equal(
+            defects,
+            "manifest quality_floor.status",
+            floor_meta.get("status"),
+            "PASS",
+        )
+    return defects
+
+
+def validate_report_semantics(
+    reports: dict[str, dict[str, Any]],
+    manifest: dict[str, Any],
+    floor: dict[str, Any],
+) -> list[str]:
+    """Bind every sealed report to the manifest and versioned quality floor."""
+
+    defects: list[str] = []
+    minimums = floor.get("minimums")
+    invariants = floor.get("invariants")
+    minimums = minimums if isinstance(minimums, dict) else {}
+    invariants = invariants if isinstance(invariants, dict) else {}
+
+    tests = reports.get(TEST_REPORT)
+    if isinstance(tests, dict):
+        require_equal(
+            defects,
+            "test report schema_version",
+            tests.get("schema_version"),
+            "rafaelia.cross-source-test-report/v4",
+        )
+        require_equal(defects, "test report status", tests.get("status"), "PASS")
+        require_minimum(
+            defects,
+            "test report test_file_count",
+            tests.get("test_file_count"),
+            minimums.get("test_files"),
+        )
+        require_minimum(
+            defects,
+            "test report tests_discovered",
+            tests.get("tests_discovered"),
+            minimums.get("tests_discovered"),
+        )
+        require_minimum(
+            defects,
+            "test report tests_run",
+            tests.get("tests_run"),
+            minimums.get("tests_run"),
+        )
+        for field, required in (
+            ("complete_execution", True),
+            ("clean_outcomes", True),
+            ("failures", 0),
+            ("errors", 0),
+            ("skipped", invariants.get("skipped", 0)),
+            ("expected_failures", invariants.get("expected_failures", 0)),
+            ("unexpected_successes", invariants.get("unexpected_successes", 0)),
+            ("claim_allowed", False),
+            ("remote_ci_substituted", False),
+        ):
+            require_equal(defects, f"test report {field}", tests.get(field), required)
+        require_equal(
+            defects,
+            "test report executed versus discovered",
+            tests.get("tests_run"),
+            tests.get("tests_discovered"),
+        )
+        test_files = tests.get("test_files")
+        if not isinstance(test_files, list) or any(
+            not isinstance(item, str) or not item.startswith("tests/")
+            for item in test_files
+        ):
+            defects.append("test report test_files must be repository-relative test paths")
+        else:
+            require_equal(
+                defects,
+                "test report test_file_count versus test_files",
+                tests.get("test_file_count"),
+                len(test_files),
+            )
+            if test_files != sorted(set(test_files)):
+                defects.append("test report test_files must be sorted and unique")
+
+        for manifest_field, report_field in (
+            ("test_file_count", "test_file_count"),
+            ("test_count_discovered", "tests_discovered"),
+            ("test_count_observed", "tests_run"),
+            ("complete_test_execution", "complete_execution"),
+            ("clean_test_outcomes", "clean_outcomes"),
+        ):
+            require_equal(
+                defects,
+                f"manifest {manifest_field} versus test report {report_field}",
+                manifest.get(manifest_field),
+                tests.get(report_field),
+            )
+
+    records = reports.get(RECORD_REPORT)
+    if isinstance(records, dict):
+        require_equal(
+            defects,
+            "record report schema_version",
+            records.get("schema_version"),
+            "rafaelia.cross-source-record/v1",
+        )
+        require_minimum(
+            defects,
+            "record report valid_fixture_count",
+            records.get("valid_fixture_count"),
+            minimums.get("valid_fixtures"),
+        )
+        require_minimum(
+            defects,
+            "record report invalid_fixture_count",
+            records.get("invalid_fixture_count"),
+            minimums.get("invalid_fixtures"),
+        )
+        for field in ("unexpected_failures", "unexpected_passes"):
+            require_equal(
+                defects,
+                f"record report {field}",
+                records.get(field),
+                invariants.get(field, 0),
+            )
+
+    registry = reports.get(REGISTRY_REPORT)
+    if isinstance(registry, dict):
+        require_equal(
+            defects,
+            "registry report schema_version",
+            registry.get("schema_version"),
+            "rafaelia.cross-source-registry-report/v1",
+        )
+        require_equal(
+            defects,
+            "registry report registry path",
+            registry.get("registry"),
+            "indices/CROSS_SOURCE_REGISTRY.jsonl",
+        )
+        require_minimum(
+            defects,
+            "registry report record_count",
+            registry.get("record_count"),
+            minimums.get("registry_records"),
+        )
+        require_equal(
+            defects,
+            "registry report defect_count",
+            registry.get("defect_count"),
+            invariants.get("defect_count", 0),
+        )
+        providers = registry.get("provider_counts")
+        providers = providers if isinstance(providers, dict) else {}
+        required_providers = minimums.get("provider_counts")
+        required_providers = (
+            required_providers if isinstance(required_providers, dict) else {}
+        )
+        for provider, required in sorted(required_providers.items()):
+            require_minimum(
+                defects,
+                f"registry report provider_counts.{provider}",
+                providers.get(provider),
+                required,
+            )
+
+    custody = reports.get(CUSTODY_REPORT)
+    if isinstance(custody, dict):
+        require_equal(
+            defects,
+            "custody report schema_version",
+            custody.get("schema_version"),
+            "rafaelia.custody-validation-report/v1",
+        )
+        require_minimum(
+            defects,
+            "custody report event_count",
+            custody.get("event_count"),
+            minimums.get("custody_events"),
+        )
+        require_equal(
+            defects,
+            "custody report defect_count",
+            custody.get("defect_count"),
+            invariants.get("defect_count", 0),
+        )
+
+    quality = reports.get(QUALITY_REPORT)
+    if isinstance(quality, dict):
+        for field, required in (
+            ("schema_version", "rafaelia.cross-source-gate-evaluation/v3"),
+            ("status", "PASS"),
+            ("floor_schema_version", floor.get("schema_version")),
+            ("comparison", "observed_greater_than_or_equal_to_minimum"),
+            ("failed_check_count", 0),
+            ("promotion_state", "LOCAL_PASS_REMOTE_TOKEN_VAZIO"),
+            ("claim_allowed", False),
+            ("remote_ci_substituted", False),
+        ):
+            require_equal(defects, f"quality report {field}", quality.get(field), required)
+        checks = quality.get("checks")
+        if not isinstance(checks, list):
+            defects.append("quality report checks must be an array")
+        else:
+            require_equal(
+                defects,
+                "quality report check_count versus checks",
+                quality.get("check_count"),
+                len(checks),
+            )
+            if any(not isinstance(check, dict) or check.get("passed") is not True for check in checks):
+                defects.append("quality report requires every check.passed=true")
 
     return defects
 
@@ -248,6 +507,8 @@ def validate_bundle(
                 floor_sha256,
             )
         )
+    if manifest and len(reports) == len(REPORT_NAMES) and not floor_defects:
+        defects.extend(validate_report_semantics(reports, manifest, floor))
 
     for name, report in reports.items():
         if report.get("status") != "PASS":
@@ -293,6 +554,7 @@ def compare_bundles(
     floor_matches = (
         bool(left["floor_sha256"])
         and left["floor_sha256"] == right["floor_sha256"]
+        and floor_path.is_file()
         and left["floor_sha256"] == sha256_file(floor_path)
     )
     if not floor_matches:
@@ -300,7 +562,7 @@ def compare_bundles(
 
     status = "PASS" if not defects else "FAIL"
     return {
-        "schema_version": "rafaelia.cross-source-evidence-comparison/v3",
+        "schema_version": "rafaelia.cross-source-evidence-comparison/v4",
         "status": status,
         "floor_path": floor_path.as_posix(),
         "floor_sha256": left["floor_sha256"],
