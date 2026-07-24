@@ -68,6 +68,7 @@ jobs:
               (root / "LOCAL_GATE_STATUS.json").read_text(encoding="utf-8")
           )
           assert manifest["status"] == "PASS"
+          assert manifest["test_count_expected"] == 22
           assert manifest["report_count"] == 2
           assert manifest["claim_allowed"] is False
           assert manifest["remote_ci_substituted"] is False
