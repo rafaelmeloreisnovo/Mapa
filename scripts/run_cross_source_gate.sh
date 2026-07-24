@@ -32,17 +32,20 @@ do
   fi
 done
 
-printf '%s\n' "[1/9] Compile validators, evaluators and tests"
+printf '%s\n' "[1/9] Compile validators, evaluators, comparator and tests"
 python3 -m py_compile \
   scripts/validate_cross_source_records.py \
   scripts/validate_cross_source_registry.py \
   scripts/validate_chain_of_custody.py \
   scripts/run_cross_source_tests.py \
   scripts/evaluate_cross_source_gate.py \
+  scripts/compare_cross_source_evidence.py \
   tests/test_cross_source_records.py \
   tests/test_cross_source_registry.py \
   tests/test_cross_source_local_gate_contract.py \
   tests/test_cross_source_gate_evaluator.py \
+  tests/test_cross_source_test_runner.py \
+  tests/test_compare_cross_source_evidence.py \
   tests/test_validate_chain_of_custody.py
 
 printf '%s\n' "[2/9] Parse schema, floor and fixtures"
@@ -234,6 +237,7 @@ manifest = {
     "platform": platform.platform(),
     "status": "PASS",
     "test_count_observed": tests["tests_run"],
+    "test_file_count": tests["test_file_count"],
     "minimum_test_count": floor["minimums"]["tests_run"],
     "report_count": len(checksums),
     "checksums": checksums,
@@ -248,7 +252,8 @@ manifest = {
     "claim_allowed": False,
     "remote_ci_substituted": False,
     "next_verifiable_step": (
-        "Restore GitHub Actions runner startup and reproduce the same sealed PASS remotely."
+        "Restore the remote runner, then compare both bundles with "
+        "scripts/compare_cross_source_evidence.py."
     ),
 }
 (output_dir / "LOCAL_GATE_STATUS.json").write_text(
