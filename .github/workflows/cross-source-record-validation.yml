@@ -106,10 +106,15 @@ jobs:
                   encoding="utf-8"
               )
           )
+          assert manifest["schema_version"] == "rafaelia.cross-source-local-gate/v3"
           assert manifest["status"] == "PASS"
+          assert manifest["test_file_count"] >= manifest["minimum_test_file_count"]
+          assert manifest["test_count_discovered"] >= manifest["minimum_test_count"]
           assert manifest["test_count_observed"] >= manifest["minimum_test_count"]
-          assert manifest["test_file_count"] >= 1
+          assert manifest["test_count_observed"] == manifest["test_count_discovered"]
+          assert manifest["complete_test_execution"] is True
           assert manifest["report_count"] == 5
+          assert manifest["quality_floor"]["schema_version"] == "rafaelia.cross-source-gate-floor/v2"
           assert manifest["quality_floor_status"] == "PASS"
           assert manifest["promotion_state"] == "LOCAL_PASS_REMOTE_TOKEN_VAZIO"
           assert manifest["claim_allowed"] is False
