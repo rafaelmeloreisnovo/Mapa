@@ -122,6 +122,7 @@ manifest = {
     "python_version": sys.version.split()[0],
     "platform": platform.platform(),
     "status": "PASS",
+    "test_count_expected": 22,
     "report_count": len(checksums),
     "checksums": checksums,
     "claim_allowed": False,
