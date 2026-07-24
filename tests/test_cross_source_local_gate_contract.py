@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
@@ -19,6 +20,7 @@ class CrossSourceLocalGateContractTests(unittest.TestCase):
         cls.text = SCRIPT.read_text(encoding="utf-8")
         cls.runner_text = TEST_RUNNER.read_text(encoding="utf-8")
         cls.comparator_text = COMPARATOR.read_text(encoding="utf-8")
+        cls.floor = json.loads(FLOOR.read_text(encoding="utf-8"))
 
     def test_script_is_explicitly_offline_and_posix(self) -> None:
         self.assertTrue(self.text.startswith("#!/usr/bin/env sh\n"))
@@ -65,12 +67,15 @@ class CrossSourceLocalGateContractTests(unittest.TestCase):
         self.assertIn('"test_compare_cross_source_evidence.py"', self.runner_text)
         self.assertIn("glob(pattern)", self.runner_text)
         self.assertIn('"test_file_count": len(TEST_FILES)', self.runner_text)
+        self.assertIn('"tests_discovered": tests_discovered', self.runner_text)
+        self.assertIn('"complete_execution": complete_execution', self.runner_text)
 
     def test_comparator_verifies_reports_checksums_and_floor(self) -> None:
         self.assertIn("REPORT_NAMES", self.comparator_text)
         self.assertIn("CHECKSUMS.sha256", self.comparator_text)
         self.assertIn("checksum mismatch", self.comparator_text)
         self.assertIn("quality floor sha256 differs or is absent", self.comparator_text)
+        self.assertIn("manifest observed test count differs", self.comparator_text)
         self.assertIn('"claim_allowed": False', self.comparator_text)
         self.assertIn('"remote_ci_substituted": False', self.comparator_text)
 
@@ -89,9 +94,18 @@ class CrossSourceLocalGateContractTests(unittest.TestCase):
         self.assertIn("compare_cross_source_evidence.py", self.text)
 
     def test_gate_measures_tests_instead_of_declaring_fixed_count(self) -> None:
+        minimums = self.floor["minimums"]
+        self.assertEqual(self.floor["schema_version"], "rafaelia.cross-source-gate-floor/v2")
+        self.assertEqual(minimums["test_files"], 7)
+        self.assertEqual(minimums["tests_discovered"], 58)
+        self.assertEqual(minimums["tests_run"], 58)
+        self.assertIn('"test_count_discovered": tests["tests_discovered"]', self.text)
         self.assertIn('"test_count_observed": tests["tests_run"]', self.text)
-        self.assertIn('"test_file_count": tests["test_file_count"]', self.text)
+        self.assertIn('"minimum_test_file_count": floor["minimums"]["test_files"]', self.text)
+        self.assertIn('tests["tests_discovered"] >= minimums["tests_discovered"]', self.text)
         self.assertIn('tests["tests_run"] >= minimums["tests_run"]', self.text)
+        self.assertIn('tests["tests_run"] == tests["tests_discovered"]', self.text)
+        self.assertIn('tests["complete_execution"] is True', self.text)
         self.assertNotIn('"test_count_expected": 38', self.text)
 
     def test_gate_allows_append_only_growth_without_freezing_registry(self) -> None:
