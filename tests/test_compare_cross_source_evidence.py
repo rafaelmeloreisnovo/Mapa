@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import importlib.util
 import json
 import tempfile
@@ -95,9 +94,23 @@ class CrossSourceEvidenceComparatorTests(unittest.TestCase):
             report = comparator.compare_bundles(left, right)
         self.assertEqual(report["status"], "FAIL")
         self.assertIn(
-            "report differs: cross-source-registry-validation.json",
+            "report differs or is absent: cross-source-registry-validation.json",
             report["defects"],
         )
+
+    def test_equal_absence_never_counts_as_a_hash_match(self) -> None:
+        missing = "cross-source-record-validation.json"
+        with tempfile.TemporaryDirectory() as root:
+            left = Path(root) / "left"
+            right = Path(root) / "right"
+            build_bundle(left)
+            build_bundle(right)
+            (left / missing).unlink()
+            (right / missing).unlink()
+            report = comparator.compare_bundles(left, right)
+        self.assertEqual(report["status"], "FAIL")
+        self.assertFalse(report["report_hash_matches"][missing])
+        self.assertEqual(report["matching_report_count"], 4)
 
     def test_unsealed_tampering_is_detected(self) -> None:
         with tempfile.TemporaryDirectory() as root:
