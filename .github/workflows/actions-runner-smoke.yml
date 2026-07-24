@@ -1,0 +1,52 @@
+name: Actions Runner Smoke
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/actions-runner-smoke.yml"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: actions-runner-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Zero-dependency runner smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Prove runner startup
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "RUNNER_STARTED=true"
+          echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
+          echo "GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME"
+          echo "GITHUB_SHA=$GITHUB_SHA"
+          uname -a
+
+      - name: Prove bundled Python runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import platform
+          import sys
+
+          evidence = {
+              "schema_version": "rafaelia.actions-runner-smoke/v1",
+              "runner_started": True,
+              "python_version": sys.version.split()[0],
+              "platform": platform.platform(),
+              "claim_allowed": False,
+              "next_verifiable_step": (
+                  "If this job succeeds, diagnose checkout/action policy separately; "
+                  "if it fails before steps, inspect account, runner and Actions policy."
+              ),
+          }
+          print(json.dumps(evidence, indent=2, sort_keys=True))
+          PY

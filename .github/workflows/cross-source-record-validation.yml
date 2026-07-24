@@ -1,0 +1,83 @@
+name: Cross-Source Record Validation
+
+on:
+  pull_request:
+    paths:
+      - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
+      - "schemas/cross-source-record.schema.json"
+      - "indices/CROSS_SOURCE_REGISTRY.jsonl"
+      - "scripts/validate_cross_source_records.py"
+      - "scripts/validate_cross_source_registry.py"
+      - "scripts/run_cross_source_gate.sh"
+      - "tests/test_cross_source_records.py"
+      - "tests/test_cross_source_registry.py"
+      - "tests/test_cross_source_local_gate_contract.py"
+      - "tests/fixtures/cross_source/**"
+      - ".github/workflows/cross-source-record-validation.yml"
+  push:
+    branches: [main]
+    paths:
+      - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
+      - "schemas/cross-source-record.schema.json"
+      - "indices/CROSS_SOURCE_REGISTRY.jsonl"
+      - "scripts/validate_cross_source_records.py"
+      - "scripts/validate_cross_source_registry.py"
+      - "scripts/run_cross_source_gate.sh"
+      - "tests/test_cross_source_records.py"
+      - "tests/test_cross_source_registry.py"
+      - "tests/test_cross_source_local_gate_contract.py"
+      - "tests/fixtures/cross_source/**"
+      - ".github/workflows/cross-source-record-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cross-source-record-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Run canonical offline gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Execute the same gate used by Termux
+        shell: bash
+        run: |
+          set -euo pipefail
+          sh scripts/run_cross_source_gate.sh "$RUNNER_TEMP/cross-source-local"
+
+      - name: Verify sealed evidence boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "cross-source-local"
+          manifest = json.loads(
+              (root / "LOCAL_GATE_STATUS.json").read_text(encoding="utf-8")
+          )
+          assert manifest["status"] == "PASS"
+          assert manifest["report_count"] == 2
+          assert manifest["claim_allowed"] is False
+          assert manifest["remote_ci_substituted"] is False
+          assert (root / "CHECKSUMS.sha256").is_file()
+          PY
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-source-validation
+          path: ${{ runner.temp }}/cross-source-local/
+          if-no-files-found: error
+          retention-days: 14
