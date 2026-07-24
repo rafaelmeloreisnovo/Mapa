@@ -28,12 +28,28 @@ SPEC.loader.exec_module(record_validator)
 DEFAULT_REGISTRY = ROOT / "indices" / "CROSS_SOURCE_REGISTRY.jsonl"
 
 
+def canonical_report_path(path: Path) -> str:
+    """Return a host-independent path label suitable for sealed evidence.
+
+    Files inside the repository are represented relative to the repository root.
+    External fixtures retain only their basename so temporary directory names,
+    usernames and checkout locations cannot change report hashes or leak local
+    paths into artifacts.
+    """
+
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return f"external://{path.name}"
+
+
 def load_jsonl(path: Path) -> tuple[list[dict[str, Any]], list[str]]:
     records: list[dict[str, Any]] = []
     errors: list[str] = []
 
     if not path.is_file():
-        return [], [f"registry not found: {path}"]
+        return [], [f"registry not found: {canonical_report_path(path)}"]
 
     for line_number, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not raw.strip():
@@ -177,7 +193,7 @@ def build_report(path: Path) -> dict[str, Any]:
     status = "PASS" if not errors else "FAIL"
     return {
         "schema_version": "rafaelia.cross-source-registry-report/v1",
-        "registry": path.as_posix(),
+        "registry": canonical_report_path(path),
         "status": status,
         "record_count": len(records),
         "provider_counts": dict(sorted(providers.items())),

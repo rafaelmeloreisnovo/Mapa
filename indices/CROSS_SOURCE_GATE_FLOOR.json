@@ -1,0 +1,55 @@
+{
+  "schema_version": "rafaelia.cross-source-gate-floor/v2",
+  "established_on": "2026-07-24",
+  "source": {
+    "merged_baseline": {
+      "pull_request": 46,
+      "merge_commit": "bf578bca782cdf244f7885864eaa1deadc256af7",
+      "tests_run_observed": 38
+    },
+    "pr48_governed_surface_inventory": {
+      "pull_request": 48,
+      "test_files_declared": 7,
+      "test_methods_declared": 58,
+      "inventory_method": "deterministic discovery plus unittest method inventory",
+      "full_gate_execution": "TOKEN_VAZIO",
+      "claim_allowed": false
+    },
+    "rationale": "Preserve the merged 38-test evidence while requiring the expanded PR48 governed surface to prove at least seven discovered files and 58 discovered and executed tests before any PASS can be sealed. The value 58 is a required floor, not an assertion that the full gate has already passed."
+  },
+  "minimums": {
+    "test_files": 7,
+    "tests_discovered": 58,
+    "tests_run": 58,
+    "valid_fixtures": 2,
+    "invalid_fixtures": 1,
+    "registry_records": 10,
+    "provider_counts": {
+      "github": 2,
+      "google_drive": 8
+    },
+    "custody_events": 13
+  },
+  "invariants": {
+    "unexpected_failures": 0,
+    "unexpected_passes": 0,
+    "defect_count": 0,
+    "complete_execution": true,
+    "clean_outcomes": true,
+    "skipped": 0,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "claim_allowed": false,
+    "remote_ci_substituted": false
+  },
+  "semantics": {
+    "comparison": "observed_greater_than_or_equal_to_minimum",
+    "test_execution": "tests_run_must_equal_tests_discovered",
+    "test_outcomes": "no_skips_no_expected_failures_no_unexpected_successes",
+    "test_surface": "discovered_files_and_tests_must_not_shrink",
+    "registry_and_custody": "append_only",
+    "decrease_policy": "FAIL_UNLESS_FLOOR_IS_REVIEWED_IN_A_SEPARATE_COMMIT",
+    "unproved_requirement_state": "TOKEN_VAZIO",
+    "claim_allowed": false
+  }
+}

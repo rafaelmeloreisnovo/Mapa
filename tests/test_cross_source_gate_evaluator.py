@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Tests for the growth-safe cross-source gate evaluator."""
+
+from __future__ import annotations
+
+import importlib.util
+import unittest
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+MODULE_PATH = ROOT / "scripts" / "evaluate_cross_source_gate.py"
+SPEC = importlib.util.spec_from_file_location("cross_source_gate_evaluator", MODULE_PATH)
+assert SPEC and SPEC.loader
+EVALUATOR = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(EVALUATOR)
+
+
+def baseline() -> tuple[
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    floor = {
+        "schema_version": "rafaelia.cross-source-gate-floor/v2",
+        "minimums": {
+            "test_files": 7,
+            "tests_discovered": 58,
+            "tests_run": 58,
+            "valid_fixtures": 2,
+            "invalid_fixtures": 1,
+            "registry_records": 10,
+            "provider_counts": {"github": 2, "google_drive": 8},
+            "custody_events": 13,
+        },
+        "invariants": {
+            "unexpected_failures": 0,
+            "unexpected_passes": 0,
+            "defect_count": 0,
+            "complete_execution": True,
+            "clean_outcomes": True,
+            "skipped": 0,
+            "expected_failures": 0,
+            "unexpected_successes": 0,
+            "claim_allowed": False,
+            "remote_ci_substituted": False,
+        },
+    }
+    records = {
+        "status": "PASS",
+        "valid_fixture_count": 2,
+        "invalid_fixture_count": 1,
+        "unexpected_failures": 0,
+        "unexpected_passes": 0,
+        "claim_allowed": False,
+    }
+    registry = {
+        "status": "PASS",
+        "record_count": 10,
+        "provider_counts": {"github": 2, "google_drive": 8},
+        "defect_count": 0,
+        "claim_allowed": False,
+    }
+    custody = {
+        "status": "PASS",
+        "event_count": 13,
+        "defect_count": 0,
+        "claim_allowed": False,
+    }
+    tests = {
+        "status": "PASS",
+        "test_file_count": 7,
+        "tests_discovered": 58,
+        "tests_run": 58,
+        "complete_execution": True,
+        "clean_outcomes": True,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "claim_allowed": False,
+        "remote_ci_substituted": False,
+    }
+    return floor, records, registry, custody, tests
+
+
+class CrossSourceGateEvaluatorTests(unittest.TestCase):
+    def test_floor_snapshot_passes(self) -> None:
+        report = EVALUATOR.evaluate(*baseline())
+        self.assertEqual(report["status"], "PASS")
+        self.assertEqual(report["failed_check_count"], 0)
+        self.assertEqual(report["promotion_state"], "LOCAL_PASS_REMOTE_TOKEN_VAZIO")
+        self.assertFalse(report["claim_allowed"])
+
+    def test_append_only_growth_passes_without_editing_floor(self) -> None:
+        floor, records, registry, custody, tests = baseline()
+        records["valid_fixture_count"] = 5
+        registry["record_count"] = 27
+        registry["provider_counts"] = {"github": 12, "google_drive": 15}
+        custody["event_count"] = 31
+        tests["test_file_count"] = 9
+        tests["tests_discovered"] = 72
+        tests["tests_run"] = 72
+        report = EVALUATOR.evaluate(floor, records, registry, custody, tests)
+        self.assertEqual(report["status"], "PASS")
+
+    def test_registry_shrink_is_blocked(self) -> None:
+        floor, records, registry, custody, tests = baseline()
+        registry["record_count"] = 9
+        report = EVALUATOR.evaluate(floor, records, registry, custody, tests)
+        self.assertEqual(report["status"], "FAIL")
+        failed_names = {
+            check["name"] for check in report["checks"] if not check["passed"]
+        }
+        self.assertIn("registry.record_count", failed_names)
+
+    def test_test_surface_regressions_are_blocked(self) -> None:
+        cases = (
+            ("test_file_count", 6, "tests.test_file_count"),
+            ("tests_discovered", 57, "tests.tests_discovered"),
+            ("tests_run", 57, "tests.tests_run"),
+            ("complete_execution", False, "tests.complete_execution"),
+            ("clean_outcomes", False, "tests.clean_outcomes"),
+            ("skipped", 1, "tests.skipped"),
+            ("expected_failures", 1, "tests.expected_failures"),
+            ("unexpected_successes", 1, "tests.unexpected_successes"),
+        )
+        for field, value, expected_failure in cases:
+            with self.subTest(field=field):
+                floor, records, registry, custody, tests = baseline()
+                tests[field] = value
+                report = EVALUATOR.evaluate(floor, records, registry, custody, tests)
+                self.assertEqual(report["status"], "FAIL")
+                failed_names = {
+                    check["name"]
+                    for check in report["checks"]
+                    if not check["passed"]
+                }
+                self.assertIn(expected_failure, failed_names)
+
+    def test_claim_promotion_inside_local_gate_is_blocked(self) -> None:
+        floor, records, registry, custody, tests = baseline()
+        registry["claim_allowed"] = True
+        report = EVALUATOR.evaluate(floor, records, registry, custody, tests)
+        self.assertEqual(report["status"], "FAIL")
+        self.assertEqual(report["promotion_state"], "BLOCKED")
+
+
+if __name__ == "__main__":
+    unittest.main()
