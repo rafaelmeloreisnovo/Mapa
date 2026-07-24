@@ -79,8 +79,15 @@ class CrossSourceLocalGateContractTests(unittest.TestCase):
         self.assertIn("CHECKSUMS.sha256", self.comparator_text)
         self.assertIn("checksum mismatch", self.comparator_text)
         self.assertIn("quality floor sha256 differs or is absent", self.comparator_text)
-        self.assertIn("manifest observed test count differs", self.comparator_text)
-        self.assertIn("manifest quality_floor.sha256 differs from floor file", self.comparator_text)
+        self.assertIn("validate_report_semantics", self.comparator_text)
+        self.assertIn(
+            "manifest test_count_observed versus test report tests_run",
+            self.comparator_text,
+        )
+        self.assertIn("registry report registry path", self.comparator_text)
+        self.assertIn("quality report requires every check.passed=true", self.comparator_text)
+        self.assertIn("manifest quality_floor.sha256", self.comparator_text)
+        self.assertIn('"rafaelia.cross-source-evidence-comparison/v4"', self.comparator_text)
         self.assertIn('"clean_test_outcomes"', self.comparator_text)
         self.assertIn('"claim_allowed": False', self.comparator_text)
         self.assertIn('"remote_ci_substituted": False', self.comparator_text)
