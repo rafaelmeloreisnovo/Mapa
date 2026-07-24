@@ -1,10 +1,11 @@
 # Comparação de Evidências Cross-Source — Termux ↔ GitHub Actions
 
 ```yaml
-schema: rafaelia.cross-source-evidence-comparison-guide/v2
+schema: rafaelia.cross-source-evidence-comparison-guide/v3
 mode: deterministic_offline_comparison
 manifest_required: rafaelia.cross-source-local-gate/v3
 floor_required: rafaelia.cross-source-gate-floor/v2
+comparison_report: rafaelia.cross-source-evidence-comparison/v3
 network_required: false
 claim_allowed: false
 remote_ci_substituted: false
@@ -12,38 +13,18 @@ remote_ci_substituted: false
 
 ## 1. Finalidade
 
-Este protocolo compara dois pacotes produzidos pelo mesmo gate canônico:
+O protocolo compara dois pacotes produzidos pelo mesmo gate:
 
-1. pacote local, normalmente executado no Termux;
-2. pacote remoto, produzido pelo GitHub Actions e baixado como artifact.
+1. pacote local, normalmente do Termux;
+2. pacote remoto, baixado do GitHub Actions.
 
-A pergunta respondida é restrita:
+Pergunta verificável:
 
-> Os cinco relatórios governados possuem os mesmos bytes, usam o mesmo piso e demonstram execução completa da mesma superfície de testes?
+> Os cinco relatórios possuem os mesmos bytes, foram produzidos com execução completa e limpa e estão vinculados ao arquivo real do mesmo piso versionado?
 
-A comparação não afirma identidade humana, certificação externa, segurança absoluta ou autoria criptográfica.
+Não é prova de identidade humana, assinatura digital, segurança absoluta ou certificação externa.
 
-## 2. Normalização entre ambientes
-
-O registry é registrado como:
-
-```text
-indices/CROSS_SOURCE_REGISTRY.jsonl
-```
-
-Arquivos externos são representados por:
-
-```text
-external://<basename>
-```
-
-Isso remove a localização física do checkout do conteúdo selado e evita:
-
-- falso negativo entre Termux e Actions;
-- vazamento de diretórios locais;
-- hashes diferentes causados apenas pelo nome da raiz.
-
-## 3. Pacote obrigatório
+## 2. Pacote obrigatório
 
 ```text
 cross-source-test-validation.json
@@ -57,7 +38,26 @@ CHECKSUMS.sha256
 
 Os cinco relatórios são comparados byte a byte por SHA-256.
 
-## 4. Manifesto v3 obrigatório
+## 3. Piso real, não apenas declarado
+
+O comparador recebe ou localiza:
+
+```text
+indices/CROSS_SOURCE_GATE_FLOOR.json
+```
+
+Para cada pacote, ele exige:
+
+```yaml
+manifest.quality_floor.path: indices/CROSS_SOURCE_GATE_FLOOR.json
+manifest.quality_floor.schema_version: igual_ao_arquivo_real
+manifest.quality_floor.sha256: igual_ao_sha256_do_arquivo_real
+manifest.quality_floor.status: PASS
+```
+
+Assim, dois pacotes não podem concordar entre si sobre um SHA inventado e serem aceitos. Ambos precisam concordar com o piso realmente versionado no checkout usado para a comparação.
+
+## 4. Manifesto v3
 
 Metadados ambientais podem variar:
 
@@ -65,24 +65,20 @@ Metadados ambientais podem variar:
 - `python_version`;
 - `platform`.
 
-Os campos governados não podem variar semanticamente:
+Campos governados:
 
 ```yaml
 schema_version: rafaelia.cross-source-local-gate/v3
 status: PASS
-test_file_count: ">= minimum_test_file_count"
+test_file_count: ">= 7"
 minimum_test_file_count: 7
-test_count_discovered: ">= minimum_test_count"
-test_count_observed: ">= minimum_test_count"
+test_count_discovered: ">= 58"
+test_count_observed: ">= 58"
 minimum_test_count: 58
 test_count_observed_equals_discovered: true
 complete_test_execution: true
+clean_test_outcomes: true
 report_count: 5
-quality_floor:
-  path: indices/CROSS_SOURCE_GATE_FLOOR.json
-  schema_version: rafaelia.cross-source-gate-floor/v2
-  sha256: sha256_valido
-  status: PASS
 quality_floor_status: PASS
 promotion_state: LOCAL_PASS_REMOTE_TOKEN_VAZIO
 claim_allowed: false
@@ -90,23 +86,46 @@ remote_ci_substituted: false
 checksums: correspondentes_aos_cinco_relatorios
 ```
 
-Um pacote com 58 testes descobertos e somente 57 executados é inválido, mesmo que os 57 tenham passado.
+`clean_test_outcomes=true` significa:
 
-## 5. Execução
+```yaml
+skipped: 0
+expected_failures: 0
+unexpected_successes: 0
+```
+
+## 5. Normalização entre ambientes
+
+O registry é registrado como:
+
+```text
+indices/CROSS_SOURCE_REGISTRY.jsonl
+```
+
+Arquivos externos usam:
+
+```text
+external://<basename>
+```
+
+A raiz física do checkout não entra no relatório e não altera o hash.
+
+## 6. Execução
 
 ```sh
 python3 scripts/compare_cross_source_evidence.py \
   --left .artifacts/cross-source-local \
   --right .artifacts/cross-source-remote \
+  --floor indices/CROSS_SOURCE_GATE_FLOOR.json \
   --write-report .artifacts/cross-source-comparison.json
 ```
 
-A execução é offline e usa somente Python standard library.
+A opção `--floor` possui o arquivo versionado como padrão, mas é mantida explícita nos procedimentos de auditoria.
 
-## 6. Resultado `PASS`
+## 7. PASS
 
 ```yaml
-schema_version: rafaelia.cross-source-evidence-comparison/v2
+schema_version: rafaelia.cross-source-evidence-comparison/v3
 status: PASS
 left_bundle_status: PASS
 right_bundle_status: PASS
@@ -117,40 +136,41 @@ claim_allowed: false
 remote_ci_substituted: false
 ```
 
-Um `PASS` demonstra:
+Demonstra:
 
 - checksums internos válidos;
-- cinco relatórios byte a byte idênticos;
-- mesmo SHA-256 do piso v2;
+- cinco relatórios idênticos;
+- mesmo piso real;
 - sete ou mais arquivos governados;
-- 58 ou mais testes descobertos;
-- todos os testes descobertos executados;
+- 58 ou mais testes descobertos e executados;
+- contagens descoberta e executada iguais;
+- zero skips e resultados esperados especiais;
 - ausência de promoção local de claim.
 
-## 7. Resultado `FAIL`
+## 8. FAIL
 
 O comparador bloqueia:
 
 - relatório ausente;
-- ausência simultânea tratada falsamente como igualdade;
-- checksum inválido ou desatualizado;
-- conteúdo diferente, mesmo depois de reseal;
-- manifest anterior à versão v3;
-- quantidade de relatórios divergente;
-- menos de sete arquivos de teste;
-- menos de 58 testes descobertos ou executados;
-- contagem executada diferente da contagem descoberta;
-- `complete_test_execution=false`;
+- ausência dupla usada como falsa igualdade;
+- checksum inválido;
+- conteúdo diferente depois de reseal;
+- manifest anterior à v3;
+- menos de sete arquivos;
+- menos de 58 testes;
+- execução parcial;
+- `clean_test_outcomes=false`;
 - `claim_allowed=true`;
 - `remote_ci_substituted=true`;
-- piso ausente, inválido ou diferente;
-- relatório individual com `status != PASS`.
+- piso ausente ou inválido;
+- SHA declarado diferente do arquivo real;
+- relatório individual diferente de PASS.
 
 ```text
-None == None → nunca é evidência de igualdade
+None == None → nunca é evidência
 ```
 
-## 8. Estados epistêmicos
+## 9. Estados epistêmicos
 
 ### Sem artifact remoto
 
@@ -161,17 +181,16 @@ comparison: TOKEN_VAZIO
 claim_allowed: false
 ```
 
-### Artifact remoto válido e idêntico
+### Artifact válido e idêntico
 
 ```yaml
 local_bundle: PASS
 remote_bundle: PASS
 comparison: PASS
 next_step: append_VALIDATE_custody_event
-claim_allowed: false
 ```
 
-### Pacotes divergentes
+### Divergência
 
 ```yaml
 comparison: FAIL
@@ -180,44 +199,44 @@ preserve_both_bundles: true
 next_step: identify_first_divergent_report
 ```
 
-## 9. Limites
+## 10. Limites
 
-SHA-256 verifica integridade e identidade de bytes. Isoladamente, não prova:
+SHA-256 verifica identidade de bytes. Não prova sozinho:
 
-- quem executou o gate;
-- integridade do ambiente;
-- vínculo criptográfico entre artifact e executor;
-- assinatura digital ou não repúdio;
-- conformidade ou certificação externa.
+- executor humano ou serviço;
+- ambiente não comprometido;
+- vínculo criptográfico do artifact;
+- não repúdio;
+- certificação externa.
 
-A promoção final exige também:
+Promoção exige também:
 
-1. run remoto com steps e logs observáveis;
+1. run com steps e logs observáveis;
 2. artifact associado ao commit exato;
-3. preservação dos dois pacotes;
-4. comparação 5/5;
+3. preservação dos pacotes;
+4. comparação 5/5 contra o piso real;
 5. evento `VALIDATE` append-only.
 
-## 10. Provas adversariais
+## 11. Provas adversariais
 
 ```yaml
-identical_reports_different_environment_metadata: PASS_expected
+identical_reports_different_environment: PASS_expected
 resealed_content_difference: FAIL_expected
 unsealed_tampering: FAIL_expected
 claim_promotion: FAIL_expected
-incomplete_test_execution: FAIL_expected
+incomplete_execution: FAIL_expected
+unclean_test_outcomes: FAIL_expected
 discovered_executed_mismatch: FAIL_expected
-test_file_floor_regression: FAIL_expected
-quality_floor_mismatch: FAIL_expected
+test_file_regression: FAIL_expected
+real_floor_changed_after_seal: FAIL_expected
 equal_absence: FAIL_expected
 ```
 
 ---
 
 ```text
-Hash igual = bytes iguais
-Descoberto = superfície reconhecida
-Executado = superfície percorrida
-Descoberto == Executado = completude
-Tempo sem artifact = TOKEN_VAZIO útil e auditável
+Pacotes iguais + piso falso = rejeitado
+Pacotes iguais + piso real = comparável
+Comparável ≠ executor autenticado
+Tempo sem artifact = TOKEN_VAZIO
 ```
