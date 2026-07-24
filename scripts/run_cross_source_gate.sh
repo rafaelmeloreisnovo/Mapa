@@ -22,7 +22,8 @@ python3 -m py_compile \
   scripts/validate_cross_source_records.py \
   scripts/validate_cross_source_registry.py \
   tests/test_cross_source_records.py \
-  tests/test_cross_source_registry.py
+  tests/test_cross_source_registry.py \
+  tests/test_cross_source_local_gate_contract.py
 
 printf '%s\n' "[2/7] Parse schema and fixtures"
 python3 -m json.tool schemas/cross-source-record.schema.json >/dev/null
@@ -52,10 +53,11 @@ if count == 0:
 print(f"registry_records={count}")
 PY
 
-printf '%s\n' "[4/7] Run adversarial tests"
+printf '%s\n' "[4/7] Run adversarial and local-gate tests"
 python3 -m unittest \
   tests/test_cross_source_records.py \
   tests/test_cross_source_registry.py \
+  tests/test_cross_source_local_gate_contract.py \
   -v
 
 printf '%s\n' "[5/7] Produce deterministic validation reports"
