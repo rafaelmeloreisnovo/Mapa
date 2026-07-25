@@ -1,0 +1,349 @@
+{
+  "schema_version": "rafaelia.operational-workflow/v1",
+  "workflow_id": "wf:rafaelia-operational-control-plane-v1",
+  "title": "RAFAELIA Operational Control Plane",
+  "owner": "rafaelmeloreisnovo/Mapa",
+  "objective": "Unificar fontes, estruturação, interpretação, execução e prova por contratos auditáveis, sem transformar estágios planejados em capacidade existente.",
+  "claim_allowed": false,
+  "external_inputs": [
+    "source_artifact",
+    "source_policy"
+  ],
+  "terminal_outputs": [
+    "custody_record",
+    "published_result"
+  ],
+  "policy": {
+    "immutable_sources": true,
+    "token_vazio_is_valid": true,
+    "human_review_for_execute_publish": true,
+    "max_active_stage_timeout_seconds": 1800
+  },
+  "stages": [
+    {
+      "id": "ingest_source",
+      "symbolic_stage": "ψ",
+      "operational_name": "Canonical source intake",
+      "phase": "ingest",
+      "state": "active",
+      "epistemic_state": "VERIFIED_LIMITED",
+      "claim_allowed": true,
+      "executor": "workflow",
+      "human_review_required": false,
+      "depends_on": [],
+      "inputs": ["source_artifact", "source_policy"],
+      "transformation": "Read a bounded fixture or reviewed source reference, preserve the original and generate deterministic intake metadata.",
+      "outputs": ["intake_manifest"],
+      "success_criteria": [
+        "source remains immutable",
+        "manifest is deterministic",
+        "private network collection is not silently enabled"
+      ],
+      "evidence_requirements": ["artifact", "test", "log"],
+      "failure_modes": [
+        "source identity missing",
+        "policy missing",
+        "unreviewed network collection requested"
+      ],
+      "rollback": "Discard generated intake artifacts; never modify the source object.",
+      "resource_limits": {"timeout_seconds": 900, "max_memory_mb": 512},
+      "implementation_refs": [
+        "configs/00_CANONICAL_RESEARCH_INTAKE.xml",
+        "scripts/canonical_research_intake.py",
+        ".github/workflows/research-intake-canonical.yml"
+      ],
+      "next_verifiable_step": "Attach the deterministic intake manifest and its workflow log to the custody record."
+    },
+    {
+      "id": "validate_source",
+      "symbolic_stage": "χ",
+      "operational_name": "Cross-source structural and epistemic validation",
+      "phase": "validate",
+      "state": "active",
+      "epistemic_state": "VERIFIED_LIMITED",
+      "claim_allowed": true,
+      "executor": "workflow",
+      "human_review_required": false,
+      "depends_on": ["ingest_source"],
+      "inputs": ["intake_manifest"],
+      "transformation": "Validate provider-specific identity, version, evidence, relations, custody and TOKEN_VAZIO invariants.",
+      "outputs": ["validated_records"],
+      "success_criteria": [
+        "valid fixtures pass",
+        "invalid fixtures fail",
+        "claim promotion requires evidence"
+      ],
+      "evidence_requirements": ["schema", "test", "artifact"],
+      "failure_modes": [
+        "unknown provider",
+        "invalid evidence reference",
+        "TOKEN_VAZIO promoted to claim"
+      ],
+      "rollback": "Reject the record set and preserve the original intake manifest for correction.",
+      "resource_limits": {"timeout_seconds": 600, "max_memory_mb": 512},
+      "implementation_refs": [
+        "schemas/cross-source-record.schema.json",
+        "scripts/validate_cross_source_records.py",
+        ".github/workflows/cross-source-record-validation.yml"
+      ],
+      "next_verifiable_step": "Persist the validation report and reference it from the next normalization event."
+    },
+    {
+      "id": "normalize_records",
+      "symbolic_stage": "ρ→Δ",
+      "operational_name": "Operational ontology normalization",
+      "phase": "normalize",
+      "state": "active",
+      "epistemic_state": "VERIFIED_LIMITED",
+      "claim_allowed": true,
+      "executor": "script",
+      "human_review_required": false,
+      "depends_on": ["validate_source"],
+      "inputs": ["validated_records"],
+      "transformation": "Normalize concepts, authority terms, relations, epistemic states and useful gaps without equating analogy with mechanism.",
+      "outputs": ["normalized_records"],
+      "success_criteria": [
+        "identifiers remain unique",
+        "epistemic state is explicit",
+        "heuristic is not promoted to proof"
+      ],
+      "evidence_requirements": ["schema", "test", "artifact"],
+      "failure_modes": [
+        "semantic collision without authority control",
+        "duplicate identifier",
+        "unclassified gap"
+      ],
+      "rollback": "Restore the validated records and quarantine the normalization delta.",
+      "resource_limits": {"timeout_seconds": 900, "max_memory_mb": 1024},
+      "implementation_refs": [
+        "schemas/operational-ontology.schema.json",
+        "scripts/operational_ontology_engine.py",
+        "data/ontology/rafaelia-operational-ontology.v1.json"
+      ],
+      "next_verifiable_step": "Generate the normalized ontology report and compare its identifiers with the source records."
+    },
+    {
+      "id": "index_relations",
+      "symbolic_stage": "Σ",
+      "operational_name": "Relation and provenance indexing",
+      "phase": "index",
+      "state": "active",
+      "epistemic_state": "VERIFIED_LIMITED",
+      "claim_allowed": true,
+      "executor": "script",
+      "human_review_required": false,
+      "depends_on": ["normalize_records"],
+      "inputs": ["normalized_records"],
+      "transformation": "Build bounded relation, provenance and gap indexes while preserving source identity separately from location.",
+      "outputs": ["relation_index"],
+      "success_criteria": [
+        "all indexed relations resolve",
+        "source identity remains content-addressable",
+        "unresolved relations remain TOKEN_VAZIO"
+      ],
+      "evidence_requirements": ["artifact", "checksum", "test"],
+      "failure_modes": [
+        "dangling relation",
+        "duplicate content counted as independent evidence",
+        "source and location collapsed"
+      ],
+      "rollback": "Delete only the derived index and retain normalized records and source manifests.",
+      "resource_limits": {"timeout_seconds": 1200, "max_memory_mb": 2048},
+      "implementation_refs": [
+        "data/ontology/rafaelia-operational-ontology.v1.json",
+        "scripts/operational_ontology_engine.py",
+        "indices/ONTOLOGIA_OPERACIONAL_RAFAELIA.md"
+      ],
+      "next_verifiable_step": "Publish index checksums and unresolved-relation counts without promoting them to scientific claims."
+    },
+    {
+      "id": "interpret_context",
+      "symbolic_stage": "OWLψ",
+      "operational_name": "Governed semantic interpretation",
+      "phase": "analyze",
+      "state": "planned",
+      "epistemic_state": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "executor": "model",
+      "human_review_required": true,
+      "depends_on": ["index_relations"],
+      "inputs": ["relation_index"],
+      "transformation": "Interpret only indexed segments, provenance and evidence; never use raw private sources as an implicit model memory.",
+      "outputs": ["semantic_hypotheses"],
+      "success_criteria": [
+        "every hypothesis references indexed evidence",
+        "uncertainty is explicit",
+        "private source text is not exposed"
+      ],
+      "evidence_requirements": ["artifact", "review", "test"],
+      "failure_modes": [
+        "unsupported inference",
+        "privacy boundary violation",
+        "hypothesis stored as fact"
+      ],
+      "rollback": "Discard the interpretation packet and preserve the relation index unchanged.",
+      "resource_limits": {"timeout_seconds": 900, "max_memory_mb": 4096},
+      "implementation_refs": [],
+      "next_verifiable_step": "Define a private fixture, a redaction policy and negative tests before implementing model access."
+    },
+    {
+      "id": "epistemic_gate",
+      "symbolic_stage": "Ethica[8]",
+      "operational_name": "Topology and epistemic promotion gate",
+      "phase": "decide",
+      "state": "active",
+      "epistemic_state": "FATO",
+      "claim_allowed": true,
+      "executor": "workflow",
+      "human_review_required": false,
+      "depends_on": ["index_relations"],
+      "inputs": ["relation_index"],
+      "transformation": "Derive a topological order and reject cycles, missing artifacts, false active states and claims without evidence.",
+      "outputs": ["gated_packet"],
+      "success_criteria": [
+        "dependency graph is acyclic",
+        "active nodes are evidence-backed",
+        "planned nodes remain marked as gaps"
+      ],
+      "evidence_requirements": ["test", "artifact", "checksum"],
+      "failure_modes": [
+        "cycle",
+        "missing required artifact",
+        "planned capability promoted as active"
+      ],
+      "rollback": "Reject promotion and retain the last valid topology and evidence packet.",
+      "resource_limits": {"timeout_seconds": 600, "max_memory_mb": 512},
+      "implementation_refs": [
+        "orquestrador/QUALITY_GATE_POLICY.md",
+        "scripts/validate_mapa_topology.py",
+        ".github/workflows/topology-validation.yml"
+      ],
+      "next_verifiable_step": "Bind the gate report and checksum to a custody event before any execution request."
+    },
+    {
+      "id": "execute_operation",
+      "symbolic_stage": "E↔C",
+      "operational_name": "Policy-authorized operation execution",
+      "phase": "execute",
+      "state": "planned",
+      "epistemic_state": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "executor": "hybrid",
+      "human_review_required": true,
+      "depends_on": ["interpret_context", "epistemic_gate"],
+      "inputs": ["semantic_hypotheses", "gated_packet"],
+      "transformation": "Execute a bounded operation only after policy, evidence, resource and human-review gates are satisfied.",
+      "outputs": ["execution_artifact"],
+      "success_criteria": [
+        "operation matches the approved packet",
+        "resource limits are enforced",
+        "exit code and logs are captured"
+      ],
+      "evidence_requirements": ["artifact", "log", "review"],
+      "failure_modes": [
+        "operation differs from approved packet",
+        "resource limit exceeded",
+        "credentials exposed to model"
+      ],
+      "rollback": "Stop the operation, revoke temporary capability and restore the last verified artifact.",
+      "resource_limits": {"timeout_seconds": 1800, "max_memory_mb": 4096},
+      "implementation_refs": [],
+      "next_verifiable_step": "Implement one no-network fixture operation with an explicit approval record and rollback test."
+    },
+    {
+      "id": "verify_artifact",
+      "symbolic_stage": "Ω-check",
+      "operational_name": "Independent artifact verification",
+      "phase": "verify",
+      "state": "planned",
+      "epistemic_state": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "executor": "workflow",
+      "human_review_required": false,
+      "depends_on": ["execute_operation"],
+      "inputs": ["execution_artifact"],
+      "transformation": "Recompute checksums, rerun deterministic tests and compare observed output with declared success criteria.",
+      "outputs": ["verification_report"],
+      "success_criteria": [
+        "artifact checksum is reproducible",
+        "tests pass in the declared environment",
+        "claims do not exceed observed evidence"
+      ],
+      "evidence_requirements": ["checksum", "test", "measurement"],
+      "failure_modes": [
+        "checksum mismatch",
+        "non-reproducible result",
+        "success criterion not measured"
+      ],
+      "rollback": "Mark the execution artifact rejected and preserve it only as negative evidence.",
+      "resource_limits": {"timeout_seconds": 1800, "max_memory_mb": 4096},
+      "implementation_refs": [],
+      "next_verifiable_step": "Freeze a fixture and reproduce the same result in a second independent environment."
+    },
+    {
+      "id": "custody_control",
+      "symbolic_stage": "Stack42H",
+      "operational_name": "Append-only custody control",
+      "phase": "control",
+      "state": "active",
+      "epistemic_state": "VERIFIED_LIMITED",
+      "claim_allowed": false,
+      "executor": "script",
+      "human_review_required": true,
+      "depends_on": ["epistemic_gate"],
+      "inputs": ["gated_packet"],
+      "transformation": "Record source, operation, evidence, state, controls and next step in an append-only custody chain.",
+      "outputs": ["custody_record"],
+      "success_criteria": [
+        "previous event link is valid",
+        "prior events remain unchanged",
+        "TOKEN_VAZIO events prohibit claims"
+      ],
+      "evidence_requirements": ["artifact", "checksum", "test"],
+      "failure_modes": [
+        "historical line rewritten",
+        "invalid predecessor",
+        "evidence-free claim allowed"
+      ],
+      "rollback": "Do not append an invalid event; preserve a pending TOKEN_VAZIO record for manual reconciliation.",
+      "resource_limits": {"timeout_seconds": 600, "max_memory_mb": 512},
+      "implementation_refs": [
+        "governanca/CADEIA_DE_CUSTODIA_DADOS.md",
+        "scripts/validate_chain_of_custody.py",
+        "indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
+      ],
+      "next_verifiable_step": "Validate the complete ledger after each append and attach the report to the review surface."
+    },
+    {
+      "id": "publish_result",
+      "symbolic_stage": "Ω",
+      "operational_name": "Reviewed result publication",
+      "phase": "publish",
+      "state": "planned",
+      "epistemic_state": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "executor": "human",
+      "human_review_required": true,
+      "depends_on": ["verify_artifact", "custody_control"],
+      "inputs": ["verification_report", "custody_record"],
+      "transformation": "Publish only the reviewed result, its limits, provenance, evidence and unresolved gaps.",
+      "outputs": ["published_result"],
+      "success_criteria": [
+        "publication matches verification report",
+        "privacy classification is respected",
+        "limitations and TOKEN_VAZIO are visible"
+      ],
+      "evidence_requirements": ["review", "artifact", "commit"],
+      "failure_modes": [
+        "unreviewed publication",
+        "private material exposed",
+        "limitations omitted"
+      ],
+      "rollback": "Withdraw the publication, append a correction event and preserve the superseded record.",
+      "resource_limits": {"timeout_seconds": 900, "max_memory_mb": 1024},
+      "implementation_refs": [],
+      "next_verifiable_step": "Define the publication packet and complete one reviewed fixture from source to ledger."
+    }
+  ],
+  "next_verifiable_step": "Run the contract validator in CI, attach the report and checksums, then implement only interpret_context as the next bounded vertical."
+}
