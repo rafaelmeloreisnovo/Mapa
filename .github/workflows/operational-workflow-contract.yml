@@ -1,0 +1,76 @@
+name: Operational Workflow Contract
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "schemas/operational-workflow.schema.json"
+      - "data/workflows/rafaelia-operational-workflow.v1.json"
+      - "scripts/validate_operational_workflow.py"
+      - "tests/test_operational_workflow.py"
+      - "docs/EXCELENCIA_OPERACIONAL_WORKFLOW_CANONICO.md"
+      - ".github/workflows/operational-workflow-contract.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mapa-operational-workflow-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  contract-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile deterministic gate
+        run: |
+          python3 -m py_compile \
+            scripts/validate_operational_workflow.py \
+            tests/test_operational_workflow.py
+
+      - name: Validate JSON syntax
+        run: |
+          python3 -m json.tool schemas/operational-workflow.schema.json >/dev/null
+          python3 -m json.tool data/workflows/rafaelia-operational-workflow.v1.json >/dev/null
+
+      - name: Run positive and negative invariants
+        run: python3 -m unittest tests/test_operational_workflow.py -v
+
+      - name: Validate canonical workflow and active implementation references
+        run: |
+          mkdir -p build/operational-workflow
+          python3 scripts/validate_operational_workflow.py \
+            data/workflows/rafaelia-operational-workflow.v1.json \
+            --repo-root . \
+            --write-report build/operational-workflow/report.json
+          test "$(python3 -c 'import json; print(json.load(open("build/operational-workflow/report.json"))["status"])')" = "PASS"
+
+      - name: Generate integrity evidence
+        run: |
+          sha256sum \
+            schemas/operational-workflow.schema.json \
+            data/workflows/rafaelia-operational-workflow.v1.json \
+            scripts/validate_operational_workflow.py \
+            tests/test_operational_workflow.py \
+            build/operational-workflow/report.json \
+            > build/operational-workflow/SHA256SUMS
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: mapa-operational-workflow-${{ github.run_id }}
+          path: build/operational-workflow/
+          retention-days: 30
+          if-no-files-found: error
