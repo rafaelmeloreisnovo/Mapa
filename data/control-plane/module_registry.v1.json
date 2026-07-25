@@ -1,0 +1,139 @@
+{
+  "schema_version": "rafaelia.live-module-registry/v1",
+  "registry_id": "modules:rafaelia-observed-20260725",
+  "observation_date": "2026-07-25",
+  "claim_allowed": false,
+  "modules": [
+    {
+      "module_id": "MOD-MAPA-CONTROL",
+      "name": "Mapa Federated Control Plane",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "main",
+      "observed_ref": "eb9cb679d42f64da6e4e4e09abcb96848aae2a8f",
+      "plane": "governance_index",
+      "state": "VERIFIED_LIMITED",
+      "capabilities": [
+        "inventory",
+        "ontology",
+        "workflow_gate",
+        "operational_triage",
+        "custody",
+        "next_action_routing"
+      ],
+      "evidence_ids": [
+        "EVID-MAPA-PR51-MERGE",
+        "EVID-MAPA-PR52-MERGE",
+        "EVID-MAPA-PR54-MERGE"
+      ],
+      "gaps": [
+        "Remote private-repository workflow startup remains TOKEN_VAZIO_RUNNER.",
+        "Live registry drift detection is introduced by this package but not yet remotely executed."
+      ],
+      "next_action": "Run the live-control-plane validator in an observable checkout and attach the report."
+    },
+    {
+      "module_id": "MOD-RAF-CONTROL",
+      "name": "RafGitTools Control Plane",
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "branch": "feat/termux-health-loopback-v1",
+      "observed_ref": "24c3bf6f0bb98dbc80fb35cd37dbff0b0ae9d4b5",
+      "plane": "control",
+      "state": "PARTIAL_DRAFT",
+      "capabilities": [
+        "git.status",
+        "git.diff",
+        "termux.health"
+      ],
+      "evidence_ids": [
+        "EVID-RAFGITTOOLS-PR297"
+      ],
+      "gaps": [
+        "PR 297 is open draft.",
+        "Android Gradle/JUnit and device evidence remain TOKEN_VAZIO."
+      ],
+      "next_action": "Review and validate PR 297 without promoting the draft transport to default-branch capability."
+    },
+    {
+      "module_id": "MOD-TERMUX-RUNTIME",
+      "name": "Termux RAFCODEΦ Runtime",
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "branch": "feat/readonly-health-server-v1",
+      "observed_ref": "d62153f377c9e6cb6d9ff4ab23efc66d1392de71",
+      "plane": "runtime",
+      "state": "PARTIAL_DRAFT",
+      "capabilities": [
+        "health.readonly"
+      ],
+      "evidence_ids": [
+        "EVID-TERMUX-PR308"
+      ],
+      "gaps": [
+        "PR 308 is open draft.",
+        "ARM32, ARM64 and autostart policy remain TOKEN_VAZIO."
+      ],
+      "next_action": "Validate the read-only server on Android devices before any mutating command is designed."
+    },
+    {
+      "module_id": "MOD-RAFPOLIMATA-EVIDENCE",
+      "name": "RafPolimata Evidence Producer",
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "branch": "main",
+      "observed_ref": "5a0551eb73845cb0ea6e6882854ec03f01a2a3b3",
+      "plane": "evidence",
+      "state": "VERIFIED_LIMITED",
+      "capabilities": [
+        "bounded_conversation_index",
+        "ecosystem_build_doctor",
+        "report_contract"
+      ],
+      "evidence_ids": [
+        "EVID-RAFPOLIMATA-BUILD-DOCTOR"
+      ],
+      "gaps": [
+        "No complete federated doctor report across all registered modules is attached."
+      ],
+      "next_action": "Consume this live registry as the bounded input for the first federated read-only doctor run."
+    },
+    {
+      "module_id": "MOD-VECTRAS-RUNTIME",
+      "name": "Vectras VM Android Runtime",
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "branch": "main",
+      "observed_ref": "4c461538e1e62faab4d4754101675f1340466a72",
+      "plane": "virtualization",
+      "state": "VERIFIED_LIMITED",
+      "capabilities": [
+        "vm_runtime",
+        "cmake_language_contract",
+        "rmr_cache_selftest"
+      ],
+      "evidence_ids": [
+        "EVID-VECTRAS-CMAKE-CONTRACT"
+      ],
+      "gaps": [
+        "QEMU TCG RMR shadow callsite and Android device evidence remain open."
+      ],
+      "next_action": "Keep RMR in shadow-first design and attach byte-equivalence evidence before productive reuse."
+    },
+    {
+      "module_id": "MOD-LLAMA-INTERPRET",
+      "name": "LlamaRafaelia Interpretive Plane",
+      "repository": "rafaelmeloreisnovo/llamaRafaelia",
+      "branch": "master",
+      "observed_ref": "4800636abb6b5cdc8e78da60c90dd0d8a25c5c46",
+      "plane": "interpretation",
+      "state": "PARTIAL",
+      "capabilities": [
+        "context_retrieval",
+        "rmrcti_structural_features"
+      ],
+      "evidence_ids": [
+        "EVID-LLAMA-RMRCTI-MERGE"
+      ],
+      "gaps": [
+        "Private-source redaction, ambiguity abstention and governed semantic packet execution remain TOKEN_VAZIO."
+      ],
+      "next_action": "Do not connect raw private sources; implement the privacy fixture and abstention gate first."
+    }
+  ]
+}
