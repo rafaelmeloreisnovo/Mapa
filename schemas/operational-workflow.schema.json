@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/operational-workflow.schema.json",
+  "title": "RAFAELIA Operational Workflow Contract",
+  "description": "Contrato auditável para workflows com entradas, saídas, critérios, evidências, limites, rollback e preservação de TOKEN_VAZIO.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "workflow_id",
+    "title",
+    "owner",
+    "objective",
+    "claim_allowed",
+    "external_inputs",
+    "terminal_outputs",
+    "policy",
+    "stages",
+    "next_verifiable_step"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.operational-workflow/v1"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf:[a-z0-9][a-z0-9._:-]{4,127}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "claim_allowed": {
+      "type": "boolean"
+    },
+    "external_inputs": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "terminal_outputs": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "immutable_sources",
+        "token_vazio_is_valid",
+        "human_review_for_execute_publish",
+        "max_active_stage_timeout_seconds"
+      ],
+      "properties": {
+        "immutable_sources": {
+          "const": true
+        },
+        "token_vazio_is_valid": {
+          "const": true
+        },
+        "human_review_for_execute_publish": {
+          "const": true
+        },
+        "max_active_stage_timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/stage"
+      }
+    },
+    "next_verifiable_step": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "$defs": {
+    "uniqueStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "symbolic_stage",
+        "operational_name",
+        "phase",
+        "state",
+        "epistemic_state",
+        "claim_allowed",
+        "executor",
+        "human_review_required",
+        "depends_on",
+        "inputs",
+        "transformation",
+        "outputs",
+        "success_criteria",
+        "evidence_requirements",
+        "failure_modes",
+        "rollback",
+        "resource_limits",
+        "implementation_refs",
+        "next_verifiable_step"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{2,63}$"
+        },
+        "symbolic_stage": {
+          "type": ["string", "null"],
+          "maxLength": 64
+        },
+        "operational_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "phase": {
+          "enum": [
+            "ingest",
+            "validate",
+            "normalize",
+            "index",
+            "analyze",
+            "decide",
+            "execute",
+            "verify",
+            "publish",
+            "control"
+          ]
+        },
+        "state": {
+          "enum": ["active", "planned", "blocked", "retired"]
+        },
+        "epistemic_state": {
+          "enum": ["FATO", "VERIFIED_LIMITED", "HIPOTESE", "TOKEN_VAZIO"]
+        },
+        "claim_allowed": {
+          "type": "boolean"
+        },
+        "executor": {
+          "enum": ["script", "workflow", "human", "model", "hybrid"]
+        },
+        "human_review_required": {
+          "type": "boolean"
+        },
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{2,63}$"
+          }
+        },
+        "inputs": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "transformation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "outputs": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "success_criteria": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "evidence_requirements": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "artifact",
+              "checksum",
+              "commit",
+              "log",
+              "measurement",
+              "review",
+              "schema",
+              "test"
+            ]
+          }
+        },
+        "failure_modes": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "rollback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "resource_limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["timeout_seconds", "max_memory_mb"],
+          "properties": {
+            "timeout_seconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 86400
+            },
+            "max_memory_mb": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65536
+            }
+          }
+        },
+        "implementation_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "not": {
+              "pattern": "(^/|(^|/)\\.\\.(/|$))"
+            }
+          }
+        },
+        "next_verifiable_step": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "active"
+              }
+            },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "epistemic_state": {
+                "enum": ["FATO", "VERIFIED_LIMITED"]
+              },
+              "implementation_refs": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "planned"
+              }
+            },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "epistemic_state": {
+                "const": "TOKEN_VAZIO"
+              },
+              "claim_allowed": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "phase": {
+                "enum": ["execute", "publish"]
+              }
+            },
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "human_review_required": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
