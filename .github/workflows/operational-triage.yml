@@ -1,0 +1,62 @@
+name: Operational Triage and Equivalence
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "schemas/operational-triage.schema.json"
+      - "data/triage/rafaelia-operational-triage.v1.json"
+      - "scripts/validate_operational_triage.py"
+      - "tests/test_operational_triage.py"
+      - "docs/INVARIANTES_NECESSIDADE_URGENCIA_GRUPAMENTOS.md"
+      - ".github/workflows/operational-triage.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mapa-operational-triage-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  triage-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile and validate JSON
+        run: |
+          python3 -m py_compile scripts/validate_operational_triage.py tests/test_operational_triage.py
+          python3 -m json.tool schemas/operational-triage.schema.json >/dev/null
+          python3 -m json.tool data/triage/rafaelia-operational-triage.v1.json >/dev/null
+      - name: Run positive and negative invariants
+        run: python3 -m unittest tests/test_operational_triage.py -v
+      - name: Generate triage report
+        run: |
+          mkdir -p build/operational-triage
+          python3 scripts/validate_operational_triage.py \
+            data/triage/rafaelia-operational-triage.v1.json \
+            --repo-root . \
+            --write-report build/operational-triage/report.json
+          test "$(python3 -c 'import json; print(json.load(open("build/operational-triage/report.json"))["status"])')" = "PASS"
+      - name: Generate integrity evidence
+        run: |
+          sha256sum \
+            schemas/operational-triage.schema.json \
+            data/triage/rafaelia-operational-triage.v1.json \
+            scripts/validate_operational_triage.py \
+            tests/test_operational_triage.py \
+            build/operational-triage/report.json \
+            > build/operational-triage/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mapa-operational-triage-${{ github.run_id }}
+          path: build/operational-triage/
+          retention-days: 30
+          if-no-files-found: error
