@@ -1,0 +1,115 @@
+{
+  "schema_version": "rafaelia.live-product-graph/v1",
+  "graph_id": "products:rafaelia-observed-20260725",
+  "observation_date": "2026-07-25",
+  "claim_allowed": false,
+  "products": [
+    {
+      "product_id": "PDT-CONTROL-PLANE",
+      "name": "RAFAELIA Operational Control Plane",
+      "producer_modules": [
+        "MOD-MAPA-CONTROL"
+      ],
+      "state": "VERIFIED_LIMITED",
+      "evidence_ids": [
+        "EVID-MAPA-WORKFLOW-LOCAL",
+        "EVID-MAPA-TRIAGE-LOCAL"
+      ],
+      "gaps": [
+        "Remote checkout execution remains TOKEN_VAZIO_RUNNER.",
+        "Live drift monitoring has not completed a first run."
+      ],
+      "next_action": "Execute the live-control-plane validator and preserve the report as a new evidence pointer."
+    },
+    {
+      "product_id": "PDT-UNIVERSAL-DOCTOR",
+      "name": "Universal Doctor",
+      "producer_modules": [
+        "MOD-MAPA-CONTROL",
+        "MOD-RAFPOLIMATA-EVIDENCE"
+      ],
+      "state": "PARTIAL",
+      "evidence_ids": [
+        "EVID-RAFPOLIMATA-BUILD-DOCTOR"
+      ],
+      "gaps": [
+        "No complete multi-module run exists.",
+        "Environment manifest and per-module observed capability report are pending."
+      ],
+      "next_action": "Run read-only probes against this registry and produce a content-addressed report."
+    },
+    {
+      "product_id": "PDT-TERMUX-HEALTH",
+      "name": "RafGitTools ↔ Termux Read-only Health Bridge",
+      "producer_modules": [
+        "MOD-RAF-CONTROL",
+        "MOD-TERMUX-RUNTIME"
+      ],
+      "state": "VERIFIED_LIMITED_DRAFT",
+      "evidence_ids": [
+        "EVID-RAFGITTOOLS-PR297",
+        "EVID-TERMUX-PR308",
+        "EVID-TERMUX-HEALTH-LOCAL-E2E"
+      ],
+      "gaps": [
+        "Both producer implementations remain in draft PRs.",
+        "Android ARM32/ARM64 and autostart are not established."
+      ],
+      "next_action": "Review both PRs as one bounded bridge while preserving independent repository ownership."
+    },
+    {
+      "product_id": "PDT-SEMANTIC-INTERPRETATION",
+      "name": "Governed Semantic Interpretation",
+      "producer_modules": [
+        "MOD-MAPA-CONTROL",
+        "MOD-LLAMA-INTERPRET"
+      ],
+      "state": "TOKEN_VAZIO",
+      "evidence_ids": [],
+      "gaps": [
+        "No raw-source exclusion test.",
+        "No deterministic redaction fixture.",
+        "No ambiguity abstention gate."
+      ],
+      "next_action": "Implement ITM-001 privacy fixtures before any model access."
+    },
+    {
+      "product_id": "PDT-RAFMEDIA-VERTICAL",
+      "name": "RAFMEDIA PNG + WAV Scientific Vertical",
+      "producer_modules": [
+        "MOD-MAPA-CONTROL"
+      ],
+      "state": "PARTIAL",
+      "evidence_ids": [
+        "EVID-RAFMEDIA-CANONICAL"
+      ],
+      "gaps": [
+        "Complete decode, golden/adversarial corpus and fuzzing remain pending."
+      ],
+      "next_action": "Keep the vertical bounded to bytes → decode → features → report before codec expansion."
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "REL-CP-001",
+      "from": "PDT-CONTROL-PLANE",
+      "to": "PDT-UNIVERSAL-DOCTOR",
+      "type": "GOVERNS",
+      "state": "VERIFIED_LIMITED"
+    },
+    {
+      "relation_id": "REL-CP-002",
+      "from": "PDT-TERMUX-HEALTH",
+      "to": "PDT-UNIVERSAL-DOCTOR",
+      "type": "PROVIDES_PROBE",
+      "state": "VERIFIED_LIMITED_DRAFT"
+    },
+    {
+      "relation_id": "REL-CP-003",
+      "from": "PDT-SEMANTIC-INTERPRETATION",
+      "to": "PDT-CONTROL-PLANE",
+      "type": "BLOCKED_BY_PRIVACY_GATE",
+      "state": "TOKEN_VAZIO"
+    }
+  ]
+}
