@@ -1,0 +1,35 @@
+{
+  "schema_version": "rafaelia.live-control-plane-snapshot/v1",
+  "snapshot_id": "snapshot:mapa-live-control-plane-20260725",
+  "observation_date": "2026-07-25",
+  "source_repository": "rafaelmeloreisnovo/Mapa",
+  "source_branch": "main",
+  "source_head": "eb9cb679d42f64da6e4e4e09abcb96848aae2a8f",
+  "claim_allowed": false,
+  "registries": {
+    "evidence": "data/control-plane/evidence_pointer_registry.v1.json",
+    "modules": "data/control-plane/module_registry.v1.json",
+    "products": "data/control-plane/product_graph.v1.json",
+    "merge_decisions": "data/control-plane/merge_decisions.v1.json",
+    "procedure_state": "data/control-plane/procedure_state.v1.json"
+  },
+  "derived": {
+    "module_count": 6,
+    "product_count": 5,
+    "merge_decision_count": 3,
+    "evidence_pointer_count": 12,
+    "procedure_state_count": 3,
+    "remote_runner_state": "TOKEN_VAZIO_RUNNER",
+    "semantic_interpretation_state": "TOKEN_VAZIO",
+    "termux_health_bridge_state": "VERIFIED_LIMITED_DRAFT"
+  },
+  "invariants": [
+    "fixture_is_not_live_state",
+    "merge_does_not_imply_remote_gate_pass",
+    "cross_repository_evidence_is_typed",
+    "private_raw_source_does_not_cross_to_model",
+    "token_vazio_is_valid_and_non_promotable",
+    "claim_allowed_remains_false"
+  ],
+  "next_verifiable_step": "Run the live-control-plane validator, attach its report, then execute the first read-only federated doctor pass."
+}

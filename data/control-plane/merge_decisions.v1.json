@@ -1,0 +1,55 @@
+{
+  "schema_version": "rafaelia.merge-decision-ledger/v1",
+  "ledger_id": "merge-decisions:mapa-20260725",
+  "append_only": true,
+  "claim_allowed": false,
+  "decisions": [
+    {
+      "decision_id": "DEC-MAPA-PR51",
+      "pr_number": 51,
+      "merge_commit": "81cd6bccba88c34b8ab7d4176f4da4623bea95b1",
+      "observed_state": "MERGED_WITH_LIMITED_EVIDENCE",
+      "local_validation": "PASS_RECORDED",
+      "remote_validation": "TOKEN_VAZIO_RUNNER",
+      "human_override": true,
+      "decision_type": "HUMAN_OVERRIDE_LIMITED",
+      "claim_promotion": false,
+      "evidence_ids": [
+        "EVID-MAPA-PR51-MERGE"
+      ],
+      "next_verifiable_step": "Execute orchestrator preflight in an observable checkout and append a validation decision."
+    },
+    {
+      "decision_id": "DEC-MAPA-PR52",
+      "pr_number": 52,
+      "merge_commit": "76e529ba8943d4da211dcb666c00ae7c96b47bdc",
+      "observed_state": "MERGED_WITH_LIMITED_EVIDENCE",
+      "local_validation": "PASS_18_OF_18",
+      "remote_validation": "TOKEN_VAZIO_RUNNER",
+      "human_override": true,
+      "decision_type": "HUMAN_OVERRIDE_LIMITED",
+      "claim_promotion": false,
+      "evidence_ids": [
+        "EVID-MAPA-PR52-MERGE",
+        "EVID-MAPA-WORKFLOW-LOCAL"
+      ],
+      "next_verifiable_step": "Run the operational workflow contract on a working runner and append remote evidence without rewriting this decision."
+    },
+    {
+      "decision_id": "DEC-MAPA-PR54",
+      "pr_number": 54,
+      "merge_commit": "d578a74118d303bade01f71029b277f21ba88503",
+      "observed_state": "MERGED_WITH_LIMITED_EVIDENCE",
+      "local_validation": "PASS_16_OF_16",
+      "remote_validation": "TOKEN_VAZIO_RUNNER",
+      "human_override": true,
+      "decision_type": "HUMAN_OVERRIDE_LIMITED",
+      "claim_promotion": false,
+      "evidence_ids": [
+        "EVID-MAPA-PR54-MERGE",
+        "EVID-MAPA-TRIAGE-LOCAL"
+      ],
+      "next_verifiable_step": "Execute operational triage remotely after runner recovery and append the report as new evidence."
+    }
+  ]
+}

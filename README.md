@@ -1,133 +1,160 @@
-# Mapa — RAFAELIA Knowledge Organization System
+# Mapa — RAFAELIA Knowledge Organization & Federated Control Plane
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Domain](https://img.shields.io/badge/Domain-Biblioteconomia%20%7C%20Rastreabilidade-purple)](biblioteconomia/)
+[![Domain](https://img.shields.io/badge/Domain-KOS%20%7C%20Governance%20%7C%20Control%20Plane-purple)](biblioteconomia/)
 [![Research](https://img.shields.io/badge/Research-RAFAELIA%20Ecosystem-orange)](https://github.com/rafaelmeloreisnovo/ChipQuantum)
 
-> Central repository for organization, traceability, and knowledge mapping of the
-> RAFAELIA ecosystem — cataloging repositories, claims, evidence and gaps as a living
-> biblioteconomic and operational knowledge system.
+> Central repository for organization, authority mapping, provenance, epistemic state,
+> operational contracts and cross-repository routing across the RAFAELIA ecosystem.
 
----
+## Mission
 
-## Objective
-
-Transform files, images, conversations, indices, results, claims and unresolved gaps into a
-clear work tree — a **biblioteconomic knowledge organization system (KOS)** that classifies,
-catalogs, cross-references and audits the RAFAELIA research corpus.
-
----
-
-## Repository Map
+`Mapa` is not the executor of every project. It is the federated control and knowledge plane that records:
 
 ```text
-Mapa/
-│
-├── arquitetura/       Work structure design and architecture diagrams
-├── biblioteconomia/   KOS, controlled vocabulary and authority control
-├── protocolos/        Execution rules, gap analysis and operational governance
-│   └── HOMEOSTASE_OPERACIONAL_MELHORIA_CONTINUA.md
-├── schemas/           Machine-readable contracts
-│   └── operational-ontology.schema.json
-├── data/ontology/     Canonical operational ontology records
-├── scripts/           Custody, validation and ontology engines
-├── tools/             Repository and artifact gap mappers
-├── tests/             Deterministic positive and negative tests
-├── indices/           Asset, source and cross-repository manifests
-├── auditoria/         Execution evidence and conservative validation records
-├── resultados/        Generated baselines and reviewed outputs
-├── workflows/         Operational reading and validation routes
-├── visual/            Conceptual maps and architecture images
-└── docs/              Architecture, heuristics and supplementary documentation
+identity
+→ canonical owner
+→ observed version
+→ relations and dependencies
+→ evidence and limitations
+→ allowed transition
+→ next verifiable step
 ```
 
----
+The technical truth remains in each producer repository. `Mapa` identifies where that truth is, which immutable revision was observed, what the evidence supports and which gaps remain open.
 
-## Biblioteconomic Layer
+## Five layers
 
-This repository implements a **library science classification system** for the RAFAELIA ecosystem:
-
-- **cataloging**: each object is identified by domain, version, maturity and interconnections;
-- **authority control**: `biblioteconomia/` distinguishes preferred terms, aliases and semantic collisions;
-- **indexing**: `indices/` tracks assets, origins, hashes, branches and review states;
-- **provenance**: claims can be linked to sources, datasets, runs, commits and evidence;
-- **operational governance**: `protocolos/` preserves baselines, risks, falsifiers and rollback;
-- **gap preservation**: unresolved information remains `TOKEN_VAZIO`, never silently converted to zero;
-- **visual navigation**: `visual/` contains SVG concept maps and architecture diagrams.
-
----
-
-## Operational Ontology
-
-The executable ontology adds a semantic and epistemic layer above the existing physical
-repository gap mapper:
-
-| Artifact | Function |
+| Layer | Responsibility |
 |---|---|
-| `data/ontology/rafaelia-operational-ontology.v1.json` | Canonical records for concepts, trajectories, editorial states and useful gaps |
-| `schemas/operational-ontology.schema.json` | External structural contract |
-| `scripts/operational_ontology_engine.py` | Validation, conservative heuristics, graph and trajectory analysis |
-| `tests/test_operational_ontology_engine.py` | Positive and negative invariants |
-| `docs/ONTOLOGIA_OPERACIONAL_RAFAELIA.md` | Architecture and limits |
-| `docs/HEURISTICAS_DINAMICAS_E_VAZIOS.md` | Heuristics for abandoned, ignored, potential, suggested and withheld themes |
-| `indices/ONTOLOGIA_OPERACIONAL_RAFAELIA.md` | Authority and integration map |
+| Biblioteconomic KOS | cataloging, controlled vocabulary, authority control and semantic collisions |
+| Operational ontology | concepts, relations, trajectories, heuristics and epistemic gaps |
+| Federated control plane | modules, products, procedures, gates, workflows and next-action routing |
+| Evidence and custody | typed pointers, checksums, runs, correction history and append-only records |
+| Visual and human navigation | diagrams, indices, reports and review surfaces |
 
-Core invariants:
+## Core invariants
 
 ```text
 TOKEN_VAZIO != 0
+fixture != live state
 heuristic != proof
-not found != censored
-methodological bridge != physical equivalence
-claim_allowed=false until evidence closes the corresponding gate
+analogy != mechanism
+commit != execution
+merge != remote gate PASS
+local path != cross-repository evidence
+claim_allowed=false until the corresponding evidence gate closes
 ```
 
-The existing `tools/repository_gap_mapper.py` remains responsible for files, builds,
-binaries and unresolved source markers. The ontology engine maps claims, concepts,
-relations, operators, trajectories and epistemic gaps. Neither replaces the other.
-
----
-
-## Active Governance Artifacts
-
-| Artifact | Function | Status |
-|---|---|---|
-| `protocolos/HOMEOSTASE_OPERACIONAL_MELHORIA_CONTINUA.md` | Continual improvement across a complex process network | `NORMATIVE_METAMODEL_DRAFT` |
-| `indices/NEUROCIENCIA_HOMEOSTASE_OPERACIONAL.md` | GitHub ↔ Drive provenance for neuroscience and governance artifacts | `MERGED_BASELINE` |
-| `docs/ONTOLOGIA_OPERACIONAL_RAFAELIA.md` | Executable KOS and epistemic-gap architecture | `DRAFT_AUDITABLE` |
-
-The operational-homeostasis protocol treats standards as controlled baselines rather than
-frozen ceilings. A proposed improvement must preserve applicable requirements, state its
-delta, measure benefit, control risk, support rollback and maintain traceability.
-
----
-
-## Cross-repository Research Path
+## Repository map
 
 ```text
-papers / scientific claim
-  ↓
-Mapa / provenance, ontology and governance
-  ↓
-Google Drive / editorial review copy
-  ↓
-review gate
-  ↓
-merge | correction | TOKEN_VAZIO
+Mapa/
+├── arquitetura/          Federated architecture and responsibility boundaries
+├── biblioteconomia/      KOS, controlled vocabulary and authority control
+├── protocolos/           Operational governance, homeostasis and rollback
+├── orquestrador/         Contracts, fixtures and frontline orchestration design
+├── schemas/              Machine-readable structural contracts
+├── data/
+│   ├── ontology/         Canonical operational ontology
+│   ├── workflows/        Canonical workflow DAGs
+│   ├── triage/           Priority, grouping and equivalence registry
+│   └── control-plane/    Live observed state, typed evidence and reconciliation
+├── scripts/              Deterministic validators and engines
+├── tools/                Repository, artifact and gap mappers
+├── tests/                Positive and adversarial tests
+├── indices/              Asset, source, inventory and dependency manifests
+├── governanca/           Custody and data-governance rules
+├── auditoria/            Bounded local and remote evidence records
+├── resultados/           Reviewed reports, baselines and limitations
+├── workflows/            Human-readable operational routes
+├── visual/               Concept maps and diagrams
+└── docs/                 Architecture, methods and implementation boundaries
 ```
 
-Merged baselines:
+## Active executable governance
 
-- [`papers` PR #19](https://github.com/rafaelmeloreisnovo/papers/pull/19) — recurrence, myelin, electrophysiology and falsifiability;
-- [`Mapa` PR #41](https://github.com/rafaelmeloreisnovo/Mapa/pull/41) — operational homeostasis and continual improvement;
-- [Drive provenance folder](https://drive.google.com/drive/folders/1n74otSJEGsmI9I2W7-hg2mYec6d-6Sl5).
+| Package | Purpose | Boundary |
+|---|---|---|
+| Operational ontology | validate concepts, relations, trajectories and useful gaps | heuristic is not proof |
+| Topology and inventory | preserve dependency DAG, repository inventory and fixed-point batches | inventory remains partial |
+| Cross-source records | type source identity, version, custody and comparability | duplicate content is not independent evidence |
+| Operational workflow | validate input → transform → output → evidence → rollback | planned stages remain `TOKEN_VAZIO` |
+| Operational triage | derive priority and distinguish analogy, dependency and exact equivalence | same group is not same situation |
+| Procedure ledger | separate plan, condition, execution, result and supersession | `PASS` requires run and evidence |
+| Live control plane | reconcile current modules, products, merges and evidence pointers | observed state does not rewrite history |
 
-A commit proves existence and history of an artifact; it does not by itself prove execution,
-scientific validity, causality or operational performance.
+## Live control-plane state
 
----
+The live layer is intentionally separate from `orquestrador/fixtures/`:
 
-## Local Validation
+```text
+data/control-plane/
+├── current_state_snapshot.v1.json
+├── module_registry.v1.json
+├── product_graph.v1.json
+├── evidence_pointer_registry.v1.json
+├── merge_decisions.v1.json
+└── procedure_state.v1.json
+```
+
+Current bounded states include:
+
+```yaml
+control_plane: VERIFIED_LIMITED
+universal_doctor: PARTIAL
+termux_health_bridge: VERIFIED_LIMITED_DRAFT
+semantic_interpretation: TOKEN_VAZIO
+remote_private_runner: TOKEN_VAZIO_RUNNER
+claim_allowed: false
+```
+
+See [`docs/LIVE_CONTROL_PLANE_RECONCILIATION.md`](docs/LIVE_CONTROL_PLANE_RECONCILIATION.md).
+
+## Federated responsibility
+
+| Plane | Primary authority | Does not prove alone |
+|---|---|---|
+| Control and catalog | `Mapa` | scientific truth or real execution |
+| Control routing | `RafGitTools` | runtime success |
+| Local runtime | `termux-app-rafacodephi` | scientific validity |
+| Evidence production | `RafPolimata` | universal generalization |
+| Interpretation | `llamaRafaelia` | permission to expose raw private sources |
+| Scientific validation | `relativity-living-light` / `papers` | production readiness |
+| Virtualization | `Vectras-VM-Android` / `qemu_rafaelia` | performance superiority without benchmark |
+
+A relation becomes a real integration only when it records:
+
+```text
+owner repository
+source path
+input and output contracts
+immutable version
+reproduction command
+result artifact
+checksum
+failure mode
+rollback
+claim boundary
+```
+
+## Local validation
+
+### Live control plane
+
+```bash
+python3 -m py_compile \
+  scripts/validate_live_control_plane.py \
+  tests/test_live_control_plane.py
+
+python3 -m unittest -v tests/test_live_control_plane.py
+
+python3 scripts/validate_live_control_plane.py \
+  --repo-root . \
+  --write-report build/live-control-plane/report.json
+```
+
+### Operational ontology
 
 ```bash
 python3 -m unittest -v tests/test_operational_ontology_engine.py
@@ -140,26 +167,47 @@ python3 scripts/operational_ontology_engine.py \
   --strict
 ```
 
-No automatic workflow is enabled by this package. Remote execution remains a separate,
-reviewed decision.
+## Workflows and remote evidence
 
----
+The repository contains focused GitHub Actions for CI, topology, inventory, cross-source records, research intake, operational workflow, triage and live control-plane validation.
+
+A workflow file existing in the repository is not evidence that a remote runner executed it. When a private-repository job terminates before the first observable step, the state remains:
+
+```text
+TOKEN_VAZIO_RUNNER
+```
+
+Local evidence may be recorded as `VERIFIED_LIMITED`, but it does not silently become remote `PASS`.
+
+## Cross-repository research path
+
+```text
+producer repository / scientific claim
+  ↓ immutable evidence pointer
+Mapa / provenance, authority, state and route
+  ↓ reviewed packet
+Drive / editorial copy or durable report
+  ↓ review gate
+merge | correction | contradiction | TOKEN_VAZIO
+```
+
+A commit proves existence and history of an artifact. It does not by itself prove execution, causality, performance, safety or scientific validity.
 
 ## Ecosystem
 
-| Repository | Domain |
+| Repository | Primary domain |
 |---|---|
-| [`ChipQuantum`](https://github.com/rafaelmeloreisnovo/ChipQuantum) | T⁷ toroidal cryptographic pipeline |
-| [`Cosmos`](https://github.com/rafaelmeloreisnovo/Cosmos) | Cosmological RAFAELIA framework |
-| [`papers`](https://github.com/rafaelmeloreisnovo/papers) | Exacordex, raefaelos and evidence-bounded research notes |
-| [`TeoremasTesesTeorias`](https://github.com/rafaelmeloreisnovo/TeoremasTesesTeorias) | Formal theorems and prior art |
-| [`GEOMETRIA_SOLAR_Maia_Inca`](https://github.com/rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca) | Solar geometry |
-| [`Catalogo-cosmologico`](https://github.com/rafaelmeloreisnovo/Catalogo-cosmologico) | Astronomical catalog |
-| [`llamaRafaelia`](https://github.com/rafaelmeloreisnovo/llamaRafaelia) | LLM inference framework |
-| [`Vectras-VM-Android`](https://github.com/rafaelmeloreisnovo/Vectras-VM-Android) | Android VM runtime |
-
----
+| `RafGitTools` | governed control plane and Android operator surface |
+| `RafPolimata` | parsing, normalization, indexing and evidence production |
+| `termux-app-rafacodephi` | Android local runtime |
+| `llamaRafaelia` | contextual retrieval and interpretation |
+| `Vectras-VM-Android` | Android VM runtime |
+| `qemu_rafaelia` | QEMU integration and low-level runtime |
+| `relativity-living-light` | falsifiable scientific validation |
+| `papers` | manuscripts, claims, references and research protocols |
+| `ChipQuantum` | C/ASM, geometry, cryptography and compiler experiments |
+| `Cosmos` | transdisciplinary relations and cosmological maps |
 
 ## License
 
-**License:** MIT — see [`LICENSE`](LICENSE).
+**MIT** — see [`LICENSE`](LICENSE).

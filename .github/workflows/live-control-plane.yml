@@ -1,0 +1,79 @@
+name: Live Control Plane Reconciliation
+
+on:
+  pull_request:
+    paths:
+      - "data/control-plane/**"
+      - "scripts/validate_live_control_plane.py"
+      - "tests/test_live_control_plane.py"
+      - "docs/LIVE_CONTROL_PLANE_RECONCILIATION.md"
+      - "README.md"
+      - ".github/workflows/live-control-plane.yml"
+  push:
+    branches: [main]
+    paths:
+      - "data/control-plane/**"
+      - "scripts/validate_live_control_plane.py"
+      - "tests/test_live_control_plane.py"
+      - "docs/LIVE_CONTROL_PLANE_RECONCILIATION.md"
+      - "README.md"
+      - ".github/workflows/live-control-plane.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-control-plane-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile scripts/validate_live_control_plane.py
+          python3 -m py_compile tests/test_live_control_plane.py
+
+      - name: Run positive and adversarial tests
+        run: python3 -m unittest -v tests/test_live_control_plane.py
+
+      - name: Validate live control-plane state
+        run: |
+          mkdir -p build/live-control-plane
+          python3 scripts/validate_live_control_plane.py \
+            --repo-root . \
+            --write-report build/live-control-plane/report.json
+          python3 -m json.tool build/live-control-plane/report.json >/dev/null
+
+      - name: Enforce epistemic boundary
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("build/live-control-plane/report.json").read_text())
+          assert report["status"] == "PASS"
+          assert report["claim_allowed"] is False
+          assert report["states"]["remote_runner"] == "TOKEN_VAZIO_RUNNER"
+          assert report["states"]["semantic_interpretation"] == "TOKEN_VAZIO"
+          assert report["states"]["termux_health_bridge"] == "VERIFIED_LIMITED_DRAFT"
+          PY
+
+      - name: Create checksums
+        run: |
+          cd build/live-control-plane
+          sha256sum report.json > SHA256SUMS
+
+      - name: Upload bounded evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-control-plane-validation
+          path: build/live-control-plane/
+          if-no-files-found: error

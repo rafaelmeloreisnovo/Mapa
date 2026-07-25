@@ -1,0 +1,45 @@
+{
+  "schema_version": "rafaelia.procedure-state/v1",
+  "state_id": "procedure-state:mapa-20260725",
+  "source_ledger": "orquestrador/fixtures/procedure_ledger.valid.json",
+  "claim_allowed": false,
+  "procedures": [
+    {
+      "proc_id": "PROC-ORQ-001",
+      "source_version": "1.0.0",
+      "observed_version": "1.1.0",
+      "previous_state": "RUNNING",
+      "observed_state": "MERGED_WITH_LIMITED_EVIDENCE",
+      "decision_id": "DEC-MAPA-PR51",
+      "evidence_ids": [
+        "EVID-MAPA-PR51-MERGE"
+      ],
+      "claim_allowed": false,
+      "next_verifiable_step": "Execute the dependency-free preflight and bind its report to the observed commit and environment."
+    },
+    {
+      "proc_id": "PROC-ORQ-002",
+      "source_version": "1.0.0",
+      "observed_version": "1.0.1",
+      "previous_state": "READY",
+      "observed_state": "READY",
+      "decision_id": null,
+      "evidence_ids": [],
+      "claim_allowed": false,
+      "next_verifiable_step": "Run python3 scripts/validate_orchestrator_contracts.py and attach the JSON report."
+    },
+    {
+      "proc_id": "PROC-ORQ-004",
+      "source_version": "1.0.0",
+      "observed_version": "1.0.1",
+      "previous_state": "DECLARED",
+      "observed_state": "PARTIAL",
+      "decision_id": null,
+      "evidence_ids": [
+        "EVID-RAFPOLIMATA-BUILD-DOCTOR"
+      ],
+      "claim_allowed": false,
+      "next_verifiable_step": "Execute the first federated multi-module read-only doctor run from the live registry."
+    }
+  ]
+}
