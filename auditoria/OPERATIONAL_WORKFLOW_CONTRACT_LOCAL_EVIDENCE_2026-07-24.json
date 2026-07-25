@@ -1,0 +1,43 @@
+{
+  "schema_version": "mapa.operational-workflow-local-evidence/v1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "codex/operational-workflow-contract-v1",
+  "executed_at_utc": "2026-07-24T23:50:00Z",
+  "execution_scope": "local_patch_with_synthetic_repo_root_for_reference_existence",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux x86_64"
+  },
+  "commands": [
+    {
+      "command": "python3 -m py_compile scripts/validate_operational_workflow.py tests/test_operational_workflow.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest tests/test_operational_workflow.py -v",
+      "exit_code": 0,
+      "tests_run": 18,
+      "result": "PASS_18_OF_18"
+    },
+    {
+      "command": "python3 scripts/validate_operational_workflow.py data/workflows/rafaelia-operational-workflow.v1.json --repo-root SYNTHETIC_MIRROR --write-report build/operational-workflow/report.json",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "observed": {
+    "stages_total": 10,
+    "active_stages": 6,
+    "planned_stages": 4,
+    "edge_count": 11,
+    "defects": [],
+    "real_repository_reference_check": "TOKEN_VAZIO_UNTIL_GITHUB_ACTIONS"
+  },
+  "claim_allowed": false,
+  "limitations": [
+    "The local patch did not contain the complete private repository checkout.",
+    "Active implementation references were checked against a synthetic mirror for validator behavior only.",
+    "The pull-request GitHub Action must verify real repository paths and publish report.json plus SHA256SUMS."
+  ],
+  "next_verifiable_step": "Require the Operational Workflow Contract job to validate the real checkout before merge."
+}
