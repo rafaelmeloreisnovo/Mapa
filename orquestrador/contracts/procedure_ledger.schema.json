@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/orchestrator/procedure_ledger.schema.json",
+  "title": "RAFAELIA Procedure Ledger",
+  "description": "Append-only registry for procedures, temporal conditions, dependencies, executions, evidence and R3. A planned procedure is never equivalent to an executed run.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "generated_at", "claim_allowed", "procedures"],
+  "properties": {
+    "schema": {"const": "rafaelia.procedure-ledger.v1"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "claim_allowed": {"const": false},
+    "procedures": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/procedure"}
+    }
+  },
+  "$defs": {
+    "nonEmpty": {"type": "string", "minLength": 1},
+    "refArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gap_id", "field", "reason", "context_preserved", "next_verifiable_step"],
+      "properties": {
+        "gap_id": {"type": "string", "pattern": "^GAP-[A-Za-z0-9._:-]{3,200}$"},
+        "field": {"$ref": "#/$defs/nonEmpty"},
+        "reason": {"$ref": "#/$defs/nonEmpty"},
+        "context_preserved": {"$ref": "#/$defs/nonEmpty"},
+        "next_verifiable_step": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["condition_id", "type", "expression", "source_of_truth", "required_state", "actual_state", "evidence_refs", "on_false", "on_unknown"],
+      "properties": {
+        "condition_id": {"type": "string", "pattern": "^COND-[A-Za-z0-9._:-]{3,200}$"},
+        "type": {"enum": ["gate", "event", "time", "resource", "human_decision", "artifact", "evidence"]},
+        "expression": {"$ref": "#/$defs/nonEmpty"},
+        "source_of_truth": {"$ref": "#/$defs/nonEmpty"},
+        "required_state": {"$ref": "#/$defs/nonEmpty"},
+        "evaluated_at": {"type": ["string", "null"], "format": "date-time"},
+        "actual_state": {"$ref": "#/$defs/nonEmpty"},
+        "evidence_refs": {"$ref": "#/$defs/refArray"},
+        "on_false": {"enum": ["BLOCKED", "FAIL", "DEFER", "MANUAL_REVIEW"]},
+        "on_unknown": {"enum": ["TOKEN_VAZIO", "BLOCKED"]}
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step_id", "order", "action", "executor", "mode", "inputs", "command_or_method", "expected_output", "timeout_seconds", "retry_policy", "checkpoint", "rollback", "status", "evidence_refs"],
+      "properties": {
+        "step_id": {"type": "string", "pattern": "^STEP-[A-Za-z0-9._:-]{3,200}$"},
+        "order": {"type": "integer", "minimum": 1},
+        "action": {"$ref": "#/$defs/nonEmpty"},
+        "executor": {"$ref": "#/$defs/nonEmpty"},
+        "mode": {"enum": ["read_only", "diagnostic", "build", "mutating", "runtime"]},
+        "inputs": {"$ref": "#/$defs/refArray"},
+        "command_or_method": {"$ref": "#/$defs/nonEmpty"},
+        "expected_output": {"$ref": "#/$defs/nonEmpty"},
+        "timeout_seconds": {"type": ["integer", "string"], "minimum": 1},
+        "retry_policy": {"$ref": "#/$defs/nonEmpty"},
+        "checkpoint": {"$ref": "#/$defs/nonEmpty"},
+        "rollback": {"$ref": "#/$defs/nonEmpty"},
+        "status": {"enum": ["DECLARED", "READY", "RUNNING", "PASS", "PASS_LIMITED", "FAIL", "BLOCKED", "SKIP", "TOKEN_VAZIO"]},
+        "evidence_refs": {"$ref": "#/$defs/refArray"}
+      }
+    },
+    "r3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["F_ok", "F_gap", "F_next"],
+      "properties": {
+        "F_ok": {"$ref": "#/$defs/nonEmpty"},
+        "F_gap": {"$ref": "#/$defs/nonEmpty"},
+        "F_next": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "procedure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proc_id", "version", "title", "purpose", "owner", "responsible_plane",
+        "executor_modules", "product_ids", "created_at", "updated_at", "timing_mode",
+        "trigger", "preconditions", "depends_on", "inputs", "steps", "expected_outputs",
+        "evidence_required", "acceptance_criteria", "risk_class", "privacy_class",
+        "resource_budget", "safe_state", "rollback", "current_state", "state_reason",
+        "run_ids", "artifact_refs", "evidence_refs", "token_vazio", "r3",
+        "supersedes", "superseded_by"
+      ],
+      "properties": {
+        "proc_id": {"type": "string", "pattern": "^PROC-[A-Z0-9][A-Z0-9_-]{2,127}$"},
+        "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "title": {"$ref": "#/$defs/nonEmpty"},
+        "purpose": {"$ref": "#/$defs/nonEmpty"},
+        "owner": {"$ref": "#/$defs/nonEmpty"},
+        "responsible_plane": {"enum": ["intent", "control", "execution", "evidence", "virtualization", "data-ingestion", "data-index", "memory", "governance-index", "observability", "multi-plane"]},
+        "executor_modules": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^MOD-[A-Z0-9][A-Z0-9_-]{2,127}$"}
+        },
+        "product_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^PDT-[0-9]{2,4}$"}
+        },
+        "created_at": {"type": "string", "format": "date-time"},
+        "updated_at": {"type": "string", "format": "date-time"},
+        "timing_mode": {"enum": ["NOW", "AFTER_GATE", "WHEN_CONDITION", "MANUAL_DECISION", "SCHEDULED", "RECURRING_EXPLICIT", "ON_DEMAND", "BLOCKED", "TOKEN_VAZIO_TIME"]},
+        "trigger": {"$ref": "#/$defs/nonEmpty"},
+        "preconditions": {"type": "array", "items": {"$ref": "#/$defs/condition"}},
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^PROC-[A-Z0-9][A-Z0-9_-]{2,127}$"}
+        },
+        "inputs": {"$ref": "#/$defs/refArray"},
+        "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "expected_outputs": {"$ref": "#/$defs/refArray"},
+        "evidence_required": {"$ref": "#/$defs/refArray"},
+        "acceptance_criteria": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/nonEmpty"}},
+        "risk_class": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+        "privacy_class": {"enum": ["public", "internal", "restricted", "secret"]},
+        "resource_budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["timeout_seconds", "max_memory_bytes", "network_allowed", "mutation_allowed"],
+          "properties": {
+            "timeout_seconds": {"type": ["integer", "string"], "minimum": 1},
+            "max_memory_bytes": {"type": ["integer", "string"], "minimum": 1048576},
+            "network_allowed": {"type": "boolean"},
+            "mutation_allowed": {"type": "boolean"}
+          }
+        },
+        "safe_state": {"$ref": "#/$defs/nonEmpty"},
+        "rollback": {"$ref": "#/$defs/nonEmpty"},
+        "current_state": {"enum": ["DRAFT", "DECLARED", "READY", "QUEUED", "RUNNING", "CHECKPOINTED", "PASS", "PASS_LIMITED", "FAIL", "DEGRADED", "BLOCKED", "CANCELLED", "SUPERSEDED", "TOKEN_VAZIO"]},
+        "state_reason": {"$ref": "#/$defs/nonEmpty"},
+        "run_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^RUN-[A-Za-z0-9._:-]{8,200}$"}
+        },
+        "artifact_refs": {"$ref": "#/$defs/refArray"},
+        "evidence_refs": {"$ref": "#/$defs/refArray"},
+        "token_vazio": {"type": "array", "items": {"$ref": "#/$defs/gap"}},
+        "r3": {"$ref": "#/$defs/r3"},
+        "supersedes": {"type": ["string", "null"], "pattern": "^PROC-[A-Z0-9][A-Z0-9_-]{2,127}@[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "superseded_by": {"type": ["string", "null"], "pattern": "^PROC-[A-Z0-9][A-Z0-9_-]{2,127}@[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    }
+  }
+}

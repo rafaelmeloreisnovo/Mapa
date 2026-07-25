@@ -1,0 +1,129 @@
+{
+  "schema": "rafaelia.product-graph.v1",
+  "generated_at": "2026-07-24T21:00:00-03:00",
+  "nodes": [
+    {
+      "id": "REPO-RafGitTools",
+      "kind": "repository",
+      "name": "rafaelmeloreisnovo/RafGitTools",
+      "description": "Governed control plane and Android operator surface.",
+      "authority": "Git repository at observed commit",
+      "state": "PARTIAL",
+      "source_refs": ["repo:RafGitTools@5b56daed60db2c73a79a1f7f367ba7fa30cc3e27"],
+      "gaps": ["Runtime transport to Termux is not proved end to end."],
+      "metadata": {"plane": "control"}
+    },
+    {
+      "id": "MOD-RAF-CONTROL",
+      "kind": "module",
+      "name": "RafGitTools Control Plane",
+      "authority": "ModuleRegistry",
+      "state": "CONTRACTED",
+      "source_refs": ["repo:RafGitTools:ToolRouter.kt"],
+      "gaps": ["EventEnvelope JSONL adapter is absent."],
+      "metadata": {"module_id": "MOD-RAF-CONTROL"}
+    },
+    {
+      "id": "CAP-module.health",
+      "kind": "capability",
+      "name": "Module health inspection",
+      "authority": "Universal Doctor contract",
+      "state": "DECLARED",
+      "source_refs": ["contract:module_registry.schema.json"],
+      "gaps": ["Unified probe runner is not implemented."],
+      "metadata": {"read_only": true}
+    },
+    {
+      "id": "PDT-07",
+      "kind": "product",
+      "name": "Universal Doctor",
+      "authority": "Orchestrator frontline architecture",
+      "state": "PARTIAL",
+      "source_refs": ["drive:G13:ORCHESTRATOR_MODULES"],
+      "gaps": ["No complete multi-module run exists."],
+      "metadata": {"priority": 1}
+    },
+    {
+      "id": "FRUIT-doctor-report",
+      "kind": "fruit",
+      "name": "Capability health report",
+      "authority": "Doctor result envelope",
+      "state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gaps": ["The first real report has not been executed."],
+      "metadata": {"states": ["PASS", "PASS_LIMITED", "FAIL", "BLOCKED", "TOKEN_VAZIO"]}
+    },
+    {
+      "id": "EVID-doctor-environment",
+      "kind": "evidence",
+      "name": "Doctor environment manifest",
+      "authority": "EvidenceEnvelope",
+      "state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gaps": ["Environment manifest is not yet generated."],
+      "metadata": {}
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "EDGE-repo-module-control",
+      "from": "REPO-RafGitTools",
+      "to": "MOD-RAF-CONTROL",
+      "relation": "contains",
+      "direction": "directed",
+      "strength": 1.0,
+      "evidence_refs": ["repo:RafGitTools:ToolRouter.kt"],
+      "state": "VERIFIED",
+      "constraint": "Repository membership does not prove all declared capabilities.",
+      "next_verifiable_step": "Resolve current module commit through Universal Doctor."
+    },
+    {
+      "edge_id": "EDGE-module-capability-health",
+      "from": "MOD-RAF-CONTROL",
+      "to": "CAP-module.health",
+      "relation": "provides",
+      "direction": "directed",
+      "strength": 0.5,
+      "evidence_refs": [],
+      "state": "DECLARED",
+      "constraint": "Capability remains read-only and must not mutate repositories.",
+      "next_verifiable_step": "Implement probe runner and record ResultEnvelope."
+    },
+    {
+      "edge_id": "EDGE-capability-product-doctor",
+      "from": "CAP-module.health",
+      "to": "PDT-07",
+      "relation": "supports",
+      "direction": "directed",
+      "strength": 1.0,
+      "evidence_refs": ["contract:module_registry.schema.json"],
+      "state": "DECLARED",
+      "constraint": "Product cannot report PASS from file presence alone.",
+      "next_verifiable_step": "Run health probes against registered modules."
+    },
+    {
+      "edge_id": "EDGE-product-fruit-report",
+      "from": "PDT-07",
+      "to": "FRUIT-doctor-report",
+      "relation": "produces",
+      "direction": "directed",
+      "strength": 1.0,
+      "evidence_refs": [],
+      "state": "TOKEN_VAZIO",
+      "constraint": "Fruit does not exist until a real run completes.",
+      "next_verifiable_step": "Execute first read-only doctor run."
+    },
+    {
+      "edge_id": "EDGE-fruit-evidence-environment",
+      "from": "FRUIT-doctor-report",
+      "to": "EVID-doctor-environment",
+      "relation": "evidences",
+      "direction": "directed",
+      "strength": 1.0,
+      "evidence_refs": [],
+      "state": "TOKEN_VAZIO",
+      "constraint": "A report without environment and source refs is PASS_LIMITED at most.",
+      "next_verifiable_step": "Generate and hash an environment manifest."
+    }
+  ]
+}

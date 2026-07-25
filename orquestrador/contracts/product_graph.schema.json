@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/orchestrator/product_graph.schema.json",
+  "title": "RAFAELIA Product Graph",
+  "description": "Links repositories and modules to capabilities, products, fruits, artifacts and evidence without merging their authority boundaries.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "generated_at", "nodes", "edges"],
+  "properties": {
+    "schema": {"const": "rafaelia.product-graph.v1"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/node"}
+    },
+    "edges": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/edge"}
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "name", "authority", "state", "source_refs", "gaps"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^(REPO|MOD|CAP|PDT|FRUIT|ART|EVID|CLAIM|GAP)-[A-Za-z0-9._:-]{2,200}$"},
+        "kind": {"enum": ["repository", "module", "capability", "product", "fruit", "artifact", "evidence", "claim", "gap"]},
+        "name": {"type": "string", "minLength": 1},
+        "description": {"type": "string"},
+        "authority": {"type": "string", "minLength": 1},
+        "state": {
+          "enum": [
+            "DISCOVERED",
+            "DECLARED",
+            "CONTRACTED",
+            "BUILDABLE",
+            "TESTED_LOCAL",
+            "TESTED_DEVICE",
+            "INTEGRATED",
+            "PASS",
+            "PASS_LIMITED",
+            "PARTIAL",
+            "DEGRADED",
+            "BLOCKED",
+            "CONTRADICTION",
+            "TOKEN_VAZIO",
+            "RETIRED"
+          ]
+        },
+        "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "gaps": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "metadata": {"type": "object", "additionalProperties": true}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edge_id", "from", "to", "relation", "direction", "strength", "evidence_refs", "state"],
+      "properties": {
+        "edge_id": {"type": "string", "pattern": "^EDGE-[A-Za-z0-9._:-]{3,200}$"},
+        "from": {"type": "string", "minLength": 1},
+        "to": {"type": "string", "minLength": 1},
+        "relation": {
+          "enum": [
+            "owns",
+            "contains",
+            "implements",
+            "provides",
+            "requires",
+            "routes_to",
+            "consumes",
+            "produces",
+            "validates",
+            "observes",
+            "indexes",
+            "caches",
+            "virtualizes",
+            "supports",
+            "fails_over_to",
+            "rolls_back_to",
+            "evidences",
+            "contradicts",
+            "has_gap"
+          ]
+        },
+        "direction": {"const": "directed"},
+        "strength": {"type": "number", "minimum": 0, "maximum": 1},
+        "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "state": {"enum": ["VERIFIED", "DECLARED", "PARTIAL", "CONTRADICTION", "TOKEN_VAZIO"]},
+        "constraint": {"type": "string"},
+        "next_verifiable_step": {"type": "string"}
+      }
+    }
+  }
+}

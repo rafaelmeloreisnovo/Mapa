@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.event.v1",
+  "event_id": "EVT-RUN-20260724-TERMUX-0001-abcd1234",
+  "emitted_at": "2026-07-24T21:00:00-03:00",
+  "timestamp_monotonic_ms": 240,
+  "run_id": "RUN-20260724T210000-TERMUX-abcd1234",
+  "trace_id": "TRACE-inventory-abcd1234",
+  "span_id": "SPAN-termux-0003",
+  "parent_span_id": "SPAN-control-0002",
+  "job_id": "JOB-INVENTORY-20260724-abcd1234",
+  "intent_id": "INTENT-INVENTORY-20260724-abcd1234",
+  "source_module": "MOD-TERMUX-EXEC",
+  "source_repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+  "source_commit": "d605f448b2224c08d93324eb71d6c04074870e34",
+  "plane": "execution",
+  "host": "android-termux",
+  "arch": "armv7l",
+  "event_type": "RESULT_EMITTED",
+  "status": "PASS_LIMITED",
+  "severity": "NOTICE",
+  "action": "inventory_source",
+  "target": "$HOME",
+  "detail": "Inventário concluído no escopo; cobertura integral de hashes não foi demonstrada.",
+  "privacy": "restricted",
+  "evidence_refs": ["EVID-INVENTORY-001"],
+  "artifact_refs": ["ART-local_inventory.json", "ART-run_manifest.json"],
+  "payload_hash": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "retry_count": 0,
+  "error_class": null,
+  "token_vazio": [
+    {
+      "gap_id": "GAP-INVENTORY-HASH-001",
+      "field": "full_hash_coverage",
+      "reason": "Nem todos os tipos ou backends forneceram hash comparável.",
+      "context_preserved": "Inventário, tamanhos, caminhos e hashes disponíveis foram mantidos.",
+      "next_verifiable_step": "Executar check no lote piloto e registrar quais objetos não oferecem hash."
+    }
+  ],
+  "measurements": {
+    "items": 42,
+    "bytes": 1048576,
+    "duration_ms": 240
+  },
+  "tags": ["#tipo:evento", "#estado:pass-limited", "#projeto:orchestrator"],
+  "state_before": "JOB_STARTED",
+  "state_after": "RESULT_EMITTED",
+  "r3": {
+    "F_ok": "Inventário piloto produzido e manifestado.",
+    "F_gap": "Cobertura integral de hashes permanece TOKEN_VAZIO.",
+    "F_next": "Executar check controlado e anexar o relatório de cobertura."
+  }
+}

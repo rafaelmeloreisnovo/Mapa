@@ -1,0 +1,56 @@
+{
+  "schema": "rafaelia.module-registry.v1",
+  "generated_at": "2026-07-24T21:00:00-03:00",
+  "claim_allowed": false,
+  "modules": [
+    {
+      "module_id": "MOD-RAF-CONTROL",
+      "name": "RafGitTools Control Plane",
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "path": "app/src/main/kotlin/com/rafgittools/kernel/ToolRouter.kt",
+      "branch": "main",
+      "observed_ref": "5b56daed60db2c73a79a1f7f367ba7fa30cc3e27",
+      "plane": "control",
+      "role": "Apply governance gates and route typed capabilities",
+      "capabilities": ["git.status", "git.diff", "module.health"],
+      "product_ids": ["PDT-01", "PDT-07"],
+      "inputs": ["IntentIR", "ModuleRegistry"],
+      "outputs": ["GateDecision", "JobEnvelope"],
+      "commands": [
+        {"command_id": "git.status", "mode": "read_only", "allowlisted": true},
+        {"command_id": "git.diff", "mode": "read_only", "allowlisted": true}
+      ],
+      "read_only_default": true,
+      "network_default": false,
+      "health_probe": "Universal Doctor read-only probe",
+      "safe_state": "read-only-status",
+      "rollback": "draft PR plus git revert",
+      "cache_policy": {
+        "tier": "C1",
+        "key_fields": ["schema_version", "module_id", "observed_ref", "source_revision", "policy_hash"],
+        "invalidation": ["commit_changed", "schema_changed", "policy_changed", "source_revision_changed"]
+      },
+      "syslog_adapter": {
+        "human_log": "partial",
+        "event_jsonl": "absent"
+      },
+      "privacy_classes": ["public", "internal", "restricted"],
+      "resource_profile": {
+        "architectures": ["armeabi-v7a", "arm64-v8a"],
+        "max_memory_bytes": "TOKEN_VAZIO",
+        "timeout_seconds": 60
+      },
+      "state": "PARTIAL",
+      "evidence_refs": [
+        "repo:RafGitTools:ToolRouter.kt",
+        "repo:RafGitTools:runtime-lock.json"
+      ],
+      "known_gaps": [
+        "termux.health returns TOKEN_VAZIO",
+        "generic runtime transport is not installed"
+      ],
+      "next_action": "Implement Universal Doctor and EventEnvelope JSONL writer",
+      "owner": "∆RafaelVerboΩ"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/orchestrator/event_envelope.schema.json",
+  "title": "RAFAELIA Event Envelope",
+  "description": "Append-only event contract shared by control, execution, evidence, data and virtualization planes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "event_id",
+    "emitted_at",
+    "timestamp_monotonic_ms",
+    "run_id",
+    "trace_id",
+    "span_id",
+    "source_module",
+    "source_repository",
+    "source_commit",
+    "plane",
+    "host",
+    "arch",
+    "event_type",
+    "status",
+    "severity",
+    "action",
+    "target",
+    "detail",
+    "privacy",
+    "evidence_refs",
+    "artifact_refs",
+    "retry_count",
+    "token_vazio"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.event.v1"},
+    "event_id": {"type": "string", "pattern": "^EVT-[A-Za-z0-9._:-]{8,200}$"},
+    "emitted_at": {"type": "string", "format": "date-time"},
+    "replayed_at": {"type": "string", "format": "date-time"},
+    "timestamp_monotonic_ms": {"type": "integer", "minimum": 0},
+    "run_id": {"type": "string", "pattern": "^RUN-[A-Za-z0-9._:-]{8,200}$"},
+    "trace_id": {"type": "string", "pattern": "^TRACE-[A-Za-z0-9._:-]{4,200}$"},
+    "span_id": {"type": "string", "pattern": "^SPAN-[A-Za-z0-9._:-]{4,200}$"},
+    "parent_span_id": {
+      "oneOf": [
+        {"type": "string", "pattern": "^SPAN-[A-Za-z0-9._:-]{4,200}$"},
+        {"type": "null"}
+      ]
+    },
+    "job_id": {"type": "string", "minLength": 1},
+    "intent_id": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "response_id": {"type": "string", "minLength": 1},
+    "vm_id": {"type": "string", "minLength": 1},
+    "source_module": {"type": "string", "pattern": "^MOD-[A-Z0-9][A-Z0-9_-]{2,127}$"},
+    "source_repository": {"type": "string", "minLength": 1},
+    "source_commit": {
+      "oneOf": [
+        {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        {"type": "string", "pattern": "^TOKEN_VAZIO_[A-Z0-9_]+$"},
+        {"const": "NOT_APPLICABLE"}
+      ]
+    },
+    "plane": {
+      "enum": [
+        "intent",
+        "control",
+        "execution",
+        "evidence",
+        "virtualization",
+        "virtualization-engine",
+        "data-ingestion",
+        "data-index",
+        "memory",
+        "governance-index",
+        "observability"
+      ]
+    },
+    "host": {"type": "string", "minLength": 1},
+    "arch": {"type": "string", "minLength": 1},
+    "event_type": {
+      "enum": [
+        "INTENT_RECEIVED",
+        "INTENT_NORMALIZED",
+        "INTENT_REJECTED",
+        "GATE_EVALUATED",
+        "GATE_ALLOWED",
+        "GATE_BLOCKED",
+        "MODULE_DISCOVERED",
+        "MODULE_SELECTED",
+        "MODULE_UNHEALTHY",
+        "JOB_CREATED",
+        "JOB_VALIDATED",
+        "JOB_QUARANTINED",
+        "JOB_ACCEPTED",
+        "JOB_STARTED",
+        "STEP_STARTED",
+        "STEP_COMPLETED",
+        "COMMAND_PREPARED",
+        "COMMAND_EXECUTED",
+        "CACHE_HIT",
+        "CACHE_MISS",
+        "CACHE_INVALIDATED",
+        "CHECKPOINT_WRITTEN",
+        "CHECKPOINT_RESTORED",
+        "ARTIFACT_CREATED",
+        "ARTIFACT_VERIFIED",
+        "HASH_COMPUTED",
+        "EVIDENCE_ATTACHED",
+        "VM_PREFLIGHT",
+        "VM_STARTED",
+        "VM_READY",
+        "VM_STOPPED",
+        "VM_FAILED",
+        "ROLLBACK_STARTED",
+        "ROLLBACK_COMPLETED",
+        "RESULT_EMITTED",
+        "JOB_COMPLETED",
+        "JOB_FAILED",
+        "TOKEN_VAZIO_RECORDED",
+        "R3_CLOSED"
+      ]
+    },
+    "status": {
+      "enum": [
+        "STEP",
+        "INFO",
+        "WARN",
+        "AUDIT",
+        "PASS",
+        "PASS_LIMITED",
+        "FAIL",
+        "SKIP",
+        "PENDING",
+        "RUNTIME",
+        "REFERENCE",
+        "HASH",
+        "DONE",
+        "DEGRADED",
+        "BLOCKED",
+        "TOKEN_VAZIO",
+        "CONTRADICTION"
+      ]
+    },
+    "severity": {"enum": ["TRACE", "DEBUG", "INFO", "NOTICE", "WARNING", "ERROR", "CRITICAL", "ALERT"]},
+    "action": {"type": "string", "minLength": 1},
+    "target": {"type": "string"},
+    "detail": {"type": "string", "minLength": 1, "maxLength": 4096},
+    "privacy": {"enum": ["public", "internal", "restricted", "secret"]},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "artifact_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "payload_hash": {
+      "oneOf": [
+        {"type": "string", "pattern": "^(sha256|blake3|crc32):[A-Fa-f0-9]+$"},
+        {"const": "TOKEN_VAZIO_HASH"},
+        {"type": "null"}
+      ]
+    },
+    "retry_count": {"type": "integer", "minimum": 0},
+    "error_class": {
+      "oneOf": [
+        {
+          "enum": [
+            "INPUT_INVALID",
+            "SCHEMA_MISMATCH",
+            "GATE_DENIED",
+            "CAPABILITY_NOT_FOUND",
+            "MODULE_UNHEALTHY",
+            "RUNTIME_TRANSPORT_MISSING",
+            "COMMAND_NOT_ALLOWLISTED",
+            "TIMEOUT",
+            "RESOURCE_LIMIT",
+            "NETWORK_UNAVAILABLE",
+            "AUTH_REQUIRED",
+            "ARTIFACT_MISSING",
+            "HASH_MISMATCH",
+            "CHECK_FAILED",
+            "CACHE_STALE",
+            "CHECKPOINT_CORRUPT",
+            "ROLLBACK_FAILED",
+            "VM_PREFLIGHT_FAILED",
+            "QEMU_BINARY_MISSING",
+            "PROOT_START_FAILED",
+            "TOKEN_VAZIO_EVIDENCE",
+            "UNKNOWN"
+          ]
+        },
+        {"type": "null"}
+      ]
+    },
+    "token_vazio": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/gap"}
+    },
+    "measurements": {
+      "type": "object",
+      "additionalProperties": {"type": ["number", "integer", "string", "boolean", "null"]}
+    },
+    "tags": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "state_before": {"type": ["object", "array", "string", "number", "boolean", "null"]},
+    "state_after": {"type": ["object", "array", "string", "number", "boolean", "null"]},
+    "r3": {"$ref": "#/$defs/r3"}
+  },
+  "$defs": {
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gap_id", "field", "reason", "context_preserved", "next_verifiable_step"],
+      "properties": {
+        "gap_id": {"type": "string", "pattern": "^GAP-[A-Za-z0-9._:-]{3,200}$"},
+        "field": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "context_preserved": {"type": "string", "minLength": 1},
+        "next_verifiable_step": {"type": "string", "minLength": 1}
+      }
+    },
+    "r3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["F_ok", "F_gap", "F_next"],
+      "properties": {
+        "F_ok": {"type": "string", "minLength": 1},
+        "F_gap": {"type": "string", "minLength": 1},
+        "F_next": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
