@@ -1,0 +1,76 @@
+{
+  "schema_version": "mapa.operational-triage-local-evidence/v1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "executed_at_utc": "2026-07-25T01:40:00Z",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41"
+  },
+  "commands": [
+    {
+      "command": "python3 -m py_compile scripts/validate_operational_triage.py tests/test_operational_triage.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest tests/test_operational_triage.py -v",
+      "exit_code": 0,
+      "tests_run": 16,
+      "result": "PASS_16_OF_16"
+    },
+    {
+      "command": "python3 scripts/validate_operational_triage.py data/triage/rafaelia-operational-triage.v1.json --write-report build/operational-triage/report.json",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "observed": {
+    "groups": 4,
+    "items": 8,
+    "priority_counts": {
+      "P0_CRITICAL": 1,
+      "P1_URGENT": 2,
+      "P2_NECESSARY": 5,
+      "P3_IMPORTANT": 0,
+      "P4_BACKLOG": 0
+    },
+    "relations": 5,
+    "ungrouped_items": 0
+  },
+  "queue_head": [
+    {
+      "item_id": "ITM-001",
+      "next_action": "Criar fixture sintética de redação e teste bloqueante de reidentificação.",
+      "priority": "P0_CRITICAL",
+      "score": 95,
+      "status": "READY"
+    },
+    {
+      "item_id": "ITM-004",
+      "next_action": "Implementar fixture privada sintética, redação e gate de abstinência.",
+      "priority": "P1_URGENT",
+      "score": 84,
+      "status": "BLOCKED"
+    },
+    {
+      "item_id": "ITM-002",
+      "next_action": "Verificar billing, Actions General e entitlement; executar runner smoke.",
+      "priority": "P1_URGENT",
+      "score": 56,
+      "status": "BLOCKED"
+    },
+    {
+      "item_id": "ITM-008",
+      "next_action": "Selecionar exportação de 150–300 MB, hashear chunks e gerar manifesto.",
+      "priority": "P2_NECESSARY",
+      "score": 54,
+      "status": "READY"
+    }
+  ],
+  "claim_allowed": false,
+  "remote_execution": "TOKEN_VAZIO_UNTIL_GITHUB_ACTIONS",
+  "limitations": [
+    "A execução local não substitui revisão humana nem execução remota no checkout do GitHub.",
+    "Referências a outros repositórios podem aparecer como warnings no checkout do Mapa."
+  ],
+  "next_verifiable_step": "Abrir PR draft e exigir o gate Operational Triage and Equivalence; se o runner privado não iniciar, preservar TOKEN_VAZIO_RUNNER."
+}
