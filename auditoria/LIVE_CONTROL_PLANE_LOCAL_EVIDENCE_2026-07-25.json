@@ -1,0 +1,40 @@
+{
+  "schema_version": "rafaelia.local-validation-evidence/v1",
+  "evidence_id": "EVID-MAPA-LIVE-CONTROL-PLANE-LOCAL-20260725",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_head": "eb9cb679d42f64da6e4e4e09abcb96848aae2a8f",
+  "branch": "codex/live-control-plane-reconciliation-v1",
+  "observation_date": "2026-07-25",
+  "claim_allowed": false,
+  "commands": [
+    "python3 -m py_compile scripts/validate_live_control_plane.py tests/test_live_control_plane.py",
+    "python3 -m unittest -v tests/test_live_control_plane.py",
+    "python3 scripts/validate_live_control_plane.py --repo-root . --write-report /tmp/live-report.json"
+  ],
+  "results": {
+    "py_compile": "PASS",
+    "unit_tests": "PASS_13_OF_13",
+    "semantic_validation": "PASS",
+    "errors": 0,
+    "warnings": 0,
+    "metrics": {
+      "evidence_pointers": 12,
+      "modules": 6,
+      "products": 5,
+      "relations": 3,
+      "merge_decisions": 3,
+      "procedure_states": 3
+    }
+  },
+  "preserved_states": {
+    "remote_runner": "TOKEN_VAZIO_RUNNER",
+    "semantic_interpretation": "TOKEN_VAZIO",
+    "termux_health_bridge": "VERIFIED_LIMITED_DRAFT"
+  },
+  "limitations": [
+    "Local validation does not replace GitHub Actions execution.",
+    "External GitHub pointers are structurally checked but not downloaded by the validator.",
+    "No Android device, VM or mutating cross-repository operation was executed."
+  ],
+  "next_verifiable_step": "Run the workflow in an observable runner and attach report.json plus SHA256SUMS."
+}
