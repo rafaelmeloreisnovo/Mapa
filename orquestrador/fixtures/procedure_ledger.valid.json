@@ -1,0 +1,460 @@
+{
+  "schema": "rafaelia.procedure-ledger.v1",
+  "generated_at": "2026-07-24T22:15:00-03:00",
+  "claim_allowed": false,
+  "procedures": [
+    {
+      "proc_id": "PROC-ORQ-001",
+      "version": "1.0.0",
+      "title": "Review and freeze orchestrator contracts in PR 51",
+      "purpose": "Verify that module, event and product graph contracts are coherent, non-duplicative and remain fail-closed before runtime validation.",
+      "owner": "∆RafaelVerboΩ",
+      "responsible_plane": "governance-index",
+      "executor_modules": ["MOD-MAPA-TOPOLOGY"],
+      "product_ids": ["PDT-08"],
+      "created_at": "2026-07-24T22:15:00-03:00",
+      "updated_at": "2026-07-24T22:15:00-03:00",
+      "timing_mode": "MANUAL_DECISION",
+      "trigger": "PR 51 is open as draft and contains the initial contracts.",
+      "preconditions": [
+        {
+          "condition_id": "COND-ORQ-001-PR-OPEN",
+          "type": "artifact",
+          "expression": "PR 51 state is open and draft",
+          "source_of_truth": "GitHub pull request metadata",
+          "required_state": "OPEN_DRAFT",
+          "evaluated_at": "2026-07-24T22:15:00-03:00",
+          "actual_state": "OPEN_DRAFT",
+          "evidence_refs": ["github:Mapa:pr:51"],
+          "on_false": "BLOCKED",
+          "on_unknown": "TOKEN_VAZIO"
+        }
+      ],
+      "depends_on": [],
+      "inputs": [
+        "orquestrador/contracts/module_registry.schema.json",
+        "orquestrador/contracts/event_envelope.schema.json",
+        "orquestrador/contracts/product_graph.schema.json",
+        "orquestrador/fixtures/module_registry.valid.json",
+        "orquestrador/fixtures/event_envelope.valid.json",
+        "orquestrador/fixtures/product_graph.valid.json"
+      ],
+      "steps": [
+        {
+          "step_id": "STEP-ORQ-001-REVIEW",
+          "order": 1,
+          "action": "Review the diff and compare contract boundaries with existing IntentIR and runtime job schemas.",
+          "executor": "human-review-plus-Mapa",
+          "mode": "read_only",
+          "inputs": ["github:Mapa:pr:51"],
+          "command_or_method": "Pull request diff review and source comparison",
+          "expected_output": "Review decision with corrections, freeze note or explicit gaps",
+          "timeout_seconds": 3600,
+          "retry_policy": "manual retry after corrections",
+          "checkpoint": "review comment and current head SHA",
+          "rollback": "keep PR draft and revert branch commits if necessary",
+          "status": "RUNNING",
+          "evidence_refs": ["github:Mapa:pr:51"]
+        }
+      ],
+      "expected_outputs": ["contract review decision", "updated draft PR"],
+      "evidence_required": ["PR diff", "review note", "source commit references"],
+      "acceptance_criteria": [
+        "No duplicated IntentIR or runtime job authority",
+        "Unknown evidence remains TOKEN_VAZIO or BLOCKED",
+        "claim_allowed remains false"
+      ],
+      "risk_class": "LOW",
+      "privacy_class": "internal",
+      "resource_budget": {
+        "timeout_seconds": 3600,
+        "max_memory_bytes": 134217728,
+        "network_allowed": true,
+        "mutation_allowed": false
+      },
+      "safe_state": "PR remains draft and no main branch mutation occurs",
+      "rollback": "Revert branch commits or create a superseding contract version",
+      "current_state": "RUNNING",
+      "state_reason": "Contracts exist in draft PR; formal review and executable validation are pending.",
+      "run_ids": [],
+      "artifact_refs": ["github:Mapa:pr:51"],
+      "evidence_refs": ["github:Mapa:pr:51:head:cbc0ab19a4cd77fd67f55073e2ac1ca3ef2d62d6"],
+      "token_vazio": [
+        {
+          "gap_id": "GAP-ORQ-001-FULL-VALIDATION",
+          "field": "full_schema_validation",
+          "reason": "Draft 2020-12 validation has not been executed.",
+          "context_preserved": "Schemas, fixtures, branch and PR metadata are preserved.",
+          "next_verifiable_step": "Execute PROC-ORQ-002 after review stabilizes the contracts."
+        }
+      ],
+      "r3": {
+        "F_ok": "Contracts, fixtures and draft PR are materialized.",
+        "F_gap": "Formal review and executable validation remain pending.",
+        "F_next": "Finish contract review and keep the PR draft until preflight evidence exists."
+      },
+      "supersedes": null,
+      "superseded_by": null
+    },
+    {
+      "proc_id": "PROC-ORQ-002",
+      "version": "1.0.0",
+      "title": "Execute dependency-free orchestrator preflight",
+      "purpose": "Produce a real structural validation report without claiming Android, Termux, VM or cross-repository runtime coverage.",
+      "owner": "∆RafaelVerboΩ",
+      "responsible_plane": "governance-index",
+      "executor_modules": ["MOD-MAPA-TOPOLOGY"],
+      "product_ids": ["PDT-07"],
+      "created_at": "2026-07-24T22:15:00-03:00",
+      "updated_at": "2026-07-24T22:15:00-03:00",
+      "timing_mode": "AFTER_GATE",
+      "trigger": "PROC-ORQ-001 review declares contracts stable enough for execution.",
+      "preconditions": [
+        {
+          "condition_id": "COND-ORQ-002-CONTRACT-STABLE",
+          "type": "gate",
+          "expression": "PROC-ORQ-001 reaches READY or PASS",
+          "source_of_truth": "Procedure Ledger and PR review",
+          "required_state": "READY_OR_PASS",
+          "evaluated_at": null,
+          "actual_state": "TOKEN_VAZIO",
+          "evidence_refs": [],
+          "on_false": "DEFER",
+          "on_unknown": "BLOCKED"
+        }
+      ],
+      "depends_on": ["PROC-ORQ-001"],
+      "inputs": ["scripts/validate_orchestrator_contracts.py", "orquestrador/contracts", "orquestrador/fixtures"],
+      "steps": [
+        {
+          "step_id": "STEP-ORQ-002-RUN",
+          "order": 1,
+          "action": "Run the dependency-free structural preflight and capture stdout, stderr, exit code and environment.",
+          "executor": "Mapa CI or authorized local runtime",
+          "mode": "diagnostic",
+          "inputs": ["scripts/validate_orchestrator_contracts.py"],
+          "command_or_method": "python3 scripts/validate_orchestrator_contracts.py",
+          "expected_output": "rafaelia.orchestrator-preflight.v1 JSON report",
+          "timeout_seconds": 300,
+          "retry_policy": "retry only after code or fixture correction",
+          "checkpoint": "report JSON and tested commit SHA",
+          "rollback": "not applicable; read-only procedure",
+          "status": "READY",
+          "evidence_refs": []
+        }
+      ],
+      "expected_outputs": ["preflight report JSON", "exit code", "environment manifest"],
+      "evidence_required": ["executed command", "tested commit", "stdout report", "runtime environment"],
+      "acceptance_criteria": ["checks_failed equals zero", "limitations remain explicit", "no runtime coverage is implied"],
+      "risk_class": "LOW",
+      "privacy_class": "internal",
+      "resource_budget": {
+        "timeout_seconds": 300,
+        "max_memory_bytes": 134217728,
+        "network_allowed": false,
+        "mutation_allowed": false
+      },
+      "safe_state": "No repository or source mutation",
+      "rollback": "not applicable",
+      "current_state": "READY",
+      "state_reason": "Code exists, but no executed report has been attached.",
+      "run_ids": [],
+      "artifact_refs": ["repo:Mapa:scripts/validate_orchestrator_contracts.py"],
+      "evidence_refs": [],
+      "token_vazio": [
+        {
+          "gap_id": "GAP-ORQ-002-RUNTIME",
+          "field": "actual_preflight_execution",
+          "reason": "No execution log or report is attached.",
+          "context_preserved": "Validator code, fixtures and expected command are known.",
+          "next_verifiable_step": "Run the command in CI or an authorized local checkout and attach the JSON report."
+        }
+      ],
+      "r3": {
+        "F_ok": "Preflight code and inputs are present.",
+        "F_gap": "Actual execution is TOKEN_VAZIO_RUNTIME.",
+        "F_next": "Execute and attach a report bound to a commit and environment."
+      },
+      "supersedes": null,
+      "superseded_by": null
+    },
+    {
+      "proc_id": "PROC-ORQ-003",
+      "version": "1.0.0",
+      "title": "Create malformed contract corpus and prove rejection",
+      "purpose": "Demonstrate that invalid identifiers, states, references and incomplete gaps are rejected for the expected reason.",
+      "owner": "∆RafaelVerboΩ",
+      "responsible_plane": "governance-index",
+      "executor_modules": ["MOD-MAPA-TOPOLOGY"],
+      "product_ids": ["PDT-07"],
+      "created_at": "2026-07-24T22:15:00-03:00",
+      "updated_at": "2026-07-24T22:15:00-03:00",
+      "timing_mode": "AFTER_GATE",
+      "trigger": "PROC-ORQ-002 produces a PASS report.",
+      "preconditions": [
+        {
+          "condition_id": "COND-ORQ-003-PREFLIGHT-PASS",
+          "type": "evidence",
+          "expression": "PROC-ORQ-002 final report status equals PASS",
+          "source_of_truth": "Preflight report JSON",
+          "required_state": "PASS",
+          "evaluated_at": null,
+          "actual_state": "TOKEN_VAZIO",
+          "evidence_refs": [],
+          "on_false": "BLOCKED",
+          "on_unknown": "BLOCKED"
+        }
+      ],
+      "depends_on": ["PROC-ORQ-002"],
+      "inputs": ["valid fixtures", "negative mutation plan"],
+      "steps": [
+        {
+          "step_id": "STEP-ORQ-003-GENERATE",
+          "order": 1,
+          "action": "Generate malformed fixtures from the valid baseline.",
+          "executor": "Mapa test tooling",
+          "mode": "build",
+          "inputs": ["orquestrador/fixtures"],
+          "command_or_method": "Create deterministic invalid fixture variants",
+          "expected_output": "Versioned malformed corpus",
+          "timeout_seconds": 600,
+          "retry_policy": "fix fixture generation and rerun",
+          "checkpoint": "corpus manifest and hashes",
+          "rollback": "revert test-only branch files",
+          "status": "DECLARED",
+          "evidence_refs": []
+        },
+        {
+          "step_id": "STEP-ORQ-003-REJECT",
+          "order": 2,
+          "action": "Validate every malformed fixture and assert the expected rejection class.",
+          "executor": "Mapa validation runtime",
+          "mode": "diagnostic",
+          "inputs": ["malformed corpus"],
+          "command_or_method": "Run negative contract tests",
+          "expected_output": "Rejection report with zero unexpected accepts",
+          "timeout_seconds": 600,
+          "retry_policy": "correct schema or test expectation and rerun",
+          "checkpoint": "negative test report",
+          "rollback": "not applicable; tests are read-only",
+          "status": "DECLARED",
+          "evidence_refs": []
+        }
+      ],
+      "expected_outputs": ["malformed fixture corpus", "rejection report"],
+      "evidence_required": ["fixture hashes", "expected error classes", "test log"],
+      "acceptance_criteria": ["Every malformed case is rejected", "No valid fixture is rejected", "Error reasons are machine-readable"],
+      "risk_class": "LOW",
+      "privacy_class": "internal",
+      "resource_budget": {
+        "timeout_seconds": 1200,
+        "max_memory_bytes": 268435456,
+        "network_allowed": false,
+        "mutation_allowed": true
+      },
+      "safe_state": "Test-only changes remain on draft branch",
+      "rollback": "Revert malformed fixtures and test commits",
+      "current_state": "DECLARED",
+      "state_reason": "Negative corpus and rejection tests have not been implemented.",
+      "run_ids": [],
+      "artifact_refs": [],
+      "evidence_refs": [],
+      "token_vazio": [
+        {
+          "gap_id": "GAP-ORQ-003-CORPUS",
+          "field": "malformed_corpus",
+          "reason": "Negative fixtures do not exist yet.",
+          "context_preserved": "Required invalid classes and dependency on preflight are defined.",
+          "next_verifiable_step": "Create deterministic negative fixtures after PROC-ORQ-002 passes."
+        }
+      ],
+      "r3": {
+        "F_ok": "Negative validation objective and acceptance rules are declared.",
+        "F_gap": "Corpus and executed rejection report are absent.",
+        "F_next": "Generate invalid fixtures only after the positive preflight passes."
+      },
+      "supersedes": null,
+      "superseded_by": null
+    },
+    {
+      "proc_id": "PROC-ORQ-004",
+      "version": "1.0.0",
+      "title": "Implement Universal Doctor read-only",
+      "purpose": "Measure module health and observed capabilities before any mutating orchestration is enabled.",
+      "owner": "∆RafaelVerboΩ",
+      "responsible_plane": "control",
+      "executor_modules": ["MOD-RAF-CONTROL"],
+      "product_ids": ["PDT-07"],
+      "created_at": "2026-07-24T22:15:00-03:00",
+      "updated_at": "2026-07-24T22:15:00-03:00",
+      "timing_mode": "AFTER_GATE",
+      "trigger": "O0 and O1 are supported by executed evidence.",
+      "preconditions": [
+        {
+          "condition_id": "COND-ORQ-004-O0-O1",
+          "type": "gate",
+          "expression": "O0 MODULE_REGISTERED and O1 CONTRACT_VALID are satisfied",
+          "source_of_truth": "ORCHESTRATION_GATES plus executed validation reports",
+          "required_state": "PASS_OR_PASS_LIMITED",
+          "evaluated_at": null,
+          "actual_state": "TOKEN_VAZIO",
+          "evidence_refs": [],
+          "on_false": "BLOCKED",
+          "on_unknown": "BLOCKED"
+        }
+      ],
+      "depends_on": ["PROC-ORQ-002", "PROC-ORQ-003"],
+      "inputs": ["ModuleRegistry", "health probe allowlist", "repository locators"],
+      "steps": [
+        {
+          "step_id": "STEP-ORQ-004-DESIGN",
+          "order": 1,
+          "action": "Implement a read-only probe runner and honest state classifier in RafGitTools.",
+          "executor": "MOD-RAF-CONTROL",
+          "mode": "build",
+          "inputs": ["module registry", "probe contracts"],
+          "command_or_method": "Kotlin implementation and unit fixtures",
+          "expected_output": "Doctor report model and probe runner",
+          "timeout_seconds": 7200,
+          "retry_policy": "iterate on a draft PR",
+          "checkpoint": "RafGitTools draft PR head SHA",
+          "rollback": "disable feature flag or revert the implementation commit",
+          "status": "DECLARED",
+          "evidence_refs": []
+        },
+        {
+          "step_id": "STEP-ORQ-004-PILOT",
+          "order": 2,
+          "action": "Execute the Doctor against a bounded initial registry without mutation.",
+          "executor": "MOD-RAF-CONTROL",
+          "mode": "diagnostic",
+          "inputs": ["initial module registry"],
+          "command_or_method": "Read-only module health run",
+          "expected_output": "PASS, PASS_LIMITED, FAIL, BLOCKED or TOKEN_VAZIO per module",
+          "timeout_seconds": 900,
+          "retry_policy": "rerun only after probe or environment correction",
+          "checkpoint": "Doctor report and environment manifest",
+          "rollback": "not applicable; read-only run",
+          "status": "BLOCKED",
+          "evidence_refs": []
+        }
+      ],
+      "expected_outputs": ["Doctor report", "environment manifest", "module events"],
+      "evidence_required": ["probe command or method", "source commit", "host", "architecture", "output and exit state"],
+      "acceptance_criteria": ["File presence never produces PASS", "Every uncertain result contains TOKEN_VAZIO with a next step", "No mutating command is enabled"],
+      "risk_class": "MEDIUM",
+      "privacy_class": "restricted",
+      "resource_budget": {
+        "timeout_seconds": 8100,
+        "max_memory_bytes": 536870912,
+        "network_allowed": true,
+        "mutation_allowed": true
+      },
+      "safe_state": "Diagnostic-only; no repository, Drive or device mutation",
+      "rollback": "Disable feature flag and revert draft PR commits",
+      "current_state": "BLOCKED",
+      "state_reason": "Contracts require executed validation before implementation can be treated as ready.",
+      "run_ids": [],
+      "artifact_refs": [],
+      "evidence_refs": ["repo:RafGitTools:ToolRouter.kt"],
+      "token_vazio": [
+        {
+          "gap_id": "GAP-ORQ-004-RUNNER",
+          "field": "universal_doctor_runner",
+          "reason": "No unified read-only probe runner exists.",
+          "context_preserved": "ToolRouter, governance gate and module roles are mapped.",
+          "next_verifiable_step": "Open a separate RafGitTools draft PR after O0 and O1 evidence exists."
+        }
+      ],
+      "r3": {
+        "F_ok": "Universal Doctor is selected as the first functional product.",
+        "F_gap": "Runner, reports and real probe evidence are absent.",
+        "F_next": "Implement in a separate read-only RafGitTools draft PR after contract validation."
+      },
+      "supersedes": null,
+      "superseded_by": null
+    },
+    {
+      "proc_id": "PROC-DATA-001",
+      "version": "1.0.0",
+      "title": "Execute G12 rclone inventory-only run",
+      "purpose": "Create the first real bounded inventory manifest without altering local or Drive originals.",
+      "owner": "∆RafaelVerboΩ",
+      "responsible_plane": "data-ingestion",
+      "executor_modules": ["MOD-DRIVE-RCLONE"],
+      "product_ids": ["PDT-04", "PDT-07"],
+      "created_at": "2026-07-24T22:15:00-03:00",
+      "updated_at": "2026-07-24T22:15:00-03:00",
+      "timing_mode": "ON_DEMAND",
+      "trigger": "The authorized user starts the G12 runbook in MODE=inventory on Termux.",
+      "preconditions": [
+        {
+          "condition_id": "COND-DATA-001-RCLONE",
+          "type": "resource",
+          "expression": "rclone remote and local source are available with reviewed filters",
+          "source_of_truth": "Termux runtime and rclone configuration",
+          "required_state": "AVAILABLE_AND_REVIEWED",
+          "evaluated_at": null,
+          "actual_state": "TOKEN_VAZIO",
+          "evidence_refs": [],
+          "on_false": "BLOCKED",
+          "on_unknown": "BLOCKED"
+        }
+      ],
+      "depends_on": [],
+      "inputs": ["G12 runbook", "local root", "Google Drive remote", "filter rules"],
+      "steps": [
+        {
+          "step_id": "STEP-DATA-001-INVENTORY",
+          "order": 1,
+          "action": "Generate local and remote lsjson inventories, sizes, logs and a run manifest.",
+          "executor": "MOD-DRIVE-RCLONE",
+          "mode": "read_only",
+          "inputs": ["MODE=inventory", "EXECUTE=0"],
+          "command_or_method": "$HOME/rafaelia_rclone_catalogo_v1.sh with inventory defaults",
+          "expected_output": "RUN_ID directory with local/remote inventories and manifest",
+          "timeout_seconds": 7200,
+          "retry_policy": "resume by creating a new RUN_ID after reviewing the failure",
+          "checkpoint": "run directory and JSON log",
+          "rollback": "remove derived local run only after preserving required evidence",
+          "status": "READY",
+          "evidence_refs": ["drive:G12:runbook"]
+        }
+      ],
+      "expected_outputs": ["RUN_ID", "local inventory JSON", "remote inventory JSON", "size report", "manifest", "JSON log"],
+      "evidence_required": ["executed command profile", "run manifest", "logs", "hash coverage status"],
+      "acceptance_criteria": ["Originals remain unchanged", "Run is finite", "Missing hashes become TOKEN_VAZIO_HASH", "No sync or deletion occurs"],
+      "risk_class": "LOW",
+      "privacy_class": "restricted",
+      "resource_budget": {
+        "timeout_seconds": 7200,
+        "max_memory_bytes": 536870912,
+        "network_allowed": true,
+        "mutation_allowed": false
+      },
+      "safe_state": "Inventory-only; copy and sync disabled",
+      "rollback": "Remove only derived local run artifacts after archival decision",
+      "current_state": "READY",
+      "state_reason": "Runbook is implementable, but no real Termux run has been supplied.",
+      "run_ids": [],
+      "artifact_refs": ["drive:G12:00_LEIA-ME", "drive:G12:01_RUNBOOK"],
+      "evidence_refs": ["drive:G12:architecture", "drive:G12:matrix"],
+      "token_vazio": [
+        {
+          "gap_id": "GAP-DATA-001-FIRST-RUN",
+          "field": "first_real_run_id",
+          "reason": "No inventory execution output has been received from the device.",
+          "context_preserved": "Runbook, remote root, filters, states and expected outputs are defined.",
+          "next_verifiable_step": "Run MODE=inventory on Termux and attach the generated manifest and JSON log."
+        }
+      ],
+      "r3": {
+        "F_ok": "The inventory procedure is bounded and non-destructive.",
+        "F_gap": "The first real RUN_ID remains TOKEN_VAZIO.",
+        "F_next": "Execute on the authorized Termux device and register the resulting manifest."
+      },
+      "supersedes": null,
+      "superseded_by": null
+    }
+  ]
+}
