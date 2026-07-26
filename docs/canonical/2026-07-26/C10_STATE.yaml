@@ -1,0 +1,106 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C10
+name: claim_promotion_benchmark_papers_and_doi
+created_at: '2026-07-26'
+state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS_PUBLICATION_BLOCKED
+claim_allowed: false
+repository: rafaelmeloreisnovo/papers
+base_commit: cf7b4a697e44f251ab3b9000b00d0bf1d72fcec6
+implementation:
+  pull_request: 25
+  branch: c10/claim-promotion-benchmark-2026-07-26
+  head_commit: 7438106ea54f375ebe011fe09450fc06fd3b6a33
+  files:
+    - schemas/c10-claim-ledger.schema.json
+    - governance/c10/C10_CLAIM_LEDGER.json
+    - governance/c10/C10_BENCHMARK_PROTOCOL.json
+    - tools/validate_c10_claim_gate.py
+    - tests/test_c10_claim_gate.py
+    - docs/governance/C10_CLAIM_PROMOTION_AND_BENCHMARK.md
+    - .github/workflows/c10-claim-promotion.yml
+claim_ledger:
+  schema: raf.c10-claim-ledger.v1
+  claim_count: 11
+  paper_reuse_allowed_count: 0
+  global_claim_allowed: false
+  publication_state: BLOCKED
+  doi: TOKEN_VAZIO_C10_PACKAGE_NOT_DEPOSITED
+  states_present:
+    - DECLARED
+    - TOKEN_VAZIO
+    - BLOCKED
+  claims_cover:
+    - repository_identity
+    - rafpolimata_local_truth
+    - segment_v1_abi
+    - apkc_structural_artifact
+    - vectras_freestanding_link
+    - provenance_and_quarantine
+    - vectras_termux_contract
+    - physical_guest_boot
+    - real_omega42_descriptor_ingestion
+    - measured_result
+    - paper_and_doi_readiness
+benchmark_protocol:
+  schema: raf.c10-benchmark-protocol.v1
+  state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  warmup_iterations: 15
+  measured_iterations_minimum: 30
+  independent_runs_minimum: 3
+  required_percentiles: [p50, p95, p99]
+  required_device_classes:
+    - host_x86_64_for_tooling_only
+    - android_armv7_physical
+    - android_aarch64_physical
+  cross_architecture_aggregation_forbidden: true
+  result_count: 0
+  replication: TOKEN_VAZIO
+language_boundary:
+  superiority_language_allowed: false
+  validated_language_allowed: false
+  partial_real_language_allowed: false
+  allowed_current_language:
+    - implemented_not_executed
+    - contract_present_receipt_empty
+    - synthetic_test_does_not_promote_real_corpus
+    - result_blocked_by_missing_artifact_or_execution
+publication_boundary:
+  existing_ecosystem_doi_reuse: FORBIDDEN_WITHOUT_EXACT_PACKAGE_IDENTITY
+  required_before_deposit:
+    - final_claim_ledger
+    - negative_results_ledger
+    - artifact_manifest
+    - benchmark_raw_measurements
+    - replication_receipt
+    - references
+    - internal_review_receipt
+execution_observation:
+  workflow_name: C10 Claim Promotion Gate
+  workflow_run_id: 30196802863
+  job_id: 89779632480
+  job_name: claim-gate
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+  code_execution_observed: false
+  unit_tests_executed: false
+  claim_validator_executed: false
+  report_generated: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+token_vazio:
+  - upstream_local_execution_receipts
+  - apk_and_link_artifacts
+  - physical_device_receipts
+  - real_descriptor_artifact_receipt
+  - benchmark_raw_measurements
+  - benchmark_results
+  - independent_replication
+  - internal_review_receipt
+  - c10_doi
+promotion_boundary:
+  pass_blocked_claims: ONLY_AFTER_VALIDATOR_EXECUTION
+  measured_result: TOKEN_VAZIO
+  scientific_claim: BLOCKED
+  public_deposit: BLOCKED
+  claim_allowed: false
+next_action: execute C10 validator locally then fill upstream evidence only by immutable hashed receipts without deleting negative results
