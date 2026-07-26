@@ -1,144 +1,174 @@
-# RAFAELIA Anchor Loop — autoridade e indexação transversal
+# RAFAELIA Anchor Mesh — autoridade e indexação transversal
 
-**Data da consolidação:** 2026-07-26  
-**Estado:** `MERGED_CODE_AND_HISTORY / TOKEN_VAZIO_RUNTIME_DEVICE`
+**Data da correção:** 2026-07-26  
+**Estado:** `IMPLEMENTED_BRANCHES / TOKEN_VAZIO_RUNTIME_DEVICE`
 
-## Correção de interpretação
+## Correção canônica
 
-A classificação anterior “quatro loops sem controle” descrevia corretamente riscos de implementação, mas comprimia indevidamente a função arquitetural.
-
-A interpretação canônica é:
-
-```text
-quatro loops históricos
-= quatro órgãos de uma âncora de continuidade
-```
-
-Os órgãos eram:
+A interpretação anterior reconheceu corretamente que os quatro loops eram intencionais, mas ainda os fundiu em uma instância supervisionada. A autoridade atual é:
 
 ```text
 PULSAR
-⊕ SENTINEL
-⊕ MEMORY_STREAM
-⊕ ACTION_ORCHESTRATOR
+→ SENTINEL
+→ MEMORY
+→ ACTION
+→ PULSAR
 ```
 
-A permanência era intencional. O problema não era o loop infinito; eram a falta de supervisor comum, PID/lock, commit, rollback, retenção e separação entre dado JSON e comando shell.
+Os quatro são ciclos íntegros e permanentes. A supervisão acontece entre pares. `runit` é mecanismo de recuperação hospedada, não autoridade de estado.
+
+```text
+4 ciclos × 2 testemunhos = 8 gates
+8 gates + assinatura comum + avanço dos 4 ciclos
+→ quinto estado derivado
+```
+
+O quinto estado não é um daemon, uma task adicional ou um supervisor central.
 
 ## Autoridades
 
 | Plano | Autoridade | Estado |
 |---|---|---|
 | Fonte histórica | Google Drive — `RAFAELIA_MASTER_BOOT.sh` | `OBSERVED_HASHED` |
-| Arqueologia e preservação | `rafaelmeloreisnovo/X0` — `fb0410cde68ef33f6a07b486b1a9cf91c36feb59` | `MERGED` |
-| Runtime operacional | `rafaelmeloreisnovo/home` — `4006e633c510bdea7e900158cf65ba65ea42d578` | `MERGED` |
-| Catálogo, significado e gate | `rafaelmeloreisnovo/Mapa` | `CANONICAL_CONTROL_RECORD` |
-| Execução física no Android | Moto E7 Power / Termux | `TOKEN_VAZIO_RUNTIME_DEVICE` |
+| Arqueologia | `rafaelmeloreisnovo/X0` | `CORRECTED_BRANCH` |
+| Matemática | `rafaelmeloreisnovo/papers` | `FORMULATED_BRANCH` |
+| Núcleo C sem heap | `rafaelmeloreisnovo/RafPolimata` — `M062` | `EXECUTA_PASS_LOCAL_BRANCH` |
+| Runtime hospedado | `rafaelmeloreisnovo/home` | `PASS_LOCAL_BRANCH` |
+| Catálogo e gates | `rafaelmeloreisnovo/Mapa` | `CANONICAL_CONTROL_RECORD` |
+| Execução física | Moto E7 Power / ARM32 / Termux | `TOKEN_VAZIO_RUNTIME_DEVICE` |
 
 ## Fonte histórica
 
 - nome: `RAFAELIA_MASTER_BOOT.sh`;
 - tamanho: 2.782 bytes;
 - SHA-256: `856334d57a3ca801a69cc78bc7e4b962ee5f4875c05da5b3203d7a4bc79db8e0`;
-- conteúdo observado: geração e disparo de quatro scripts persistentes;
-- risco confirmado: `eval` de `.next_action`, processos destacados, ausência de estado transacional comum.
+- conteúdo: quatro scripts persistentes;
+- riscos observados: `eval`, processos destacados, duplicação possível do pulsar e ausência de contrato explícito de oito gates.
 
-## Contrato atual
+## Quatro órgãos
+
+| Órgão | Gate próprio | Testemunha |
+|---|---:|---|
+| `PULSAR` | integridade e publicação | `SENTINEL` |
+| `SENTINEL` | integridade e publicação | `MEMORY` |
+| `MEMORY` | integridade e publicação | `ACTION` |
+| `ACTION` | integridade e publicação | `PULSAR` |
+
+Cada órgão mantém PID, contador, assinatura, gate próprio, gate do par e classe de variação.
+
+## Oito gates
+
+\[
+G_8=\prod_{i=0}^{3}g_{i,self}g_{i,peer}.
+\]
+
+Promoção:
+
+\[
+X_5^{n+1}=\Phi(C_0,C_1,C_2,C_3)
+\]
+
+somente quando:
+
+1. `G8 = 1`;
+2. as quatro assinaturas de entrada são iguais;
+3. os quatro contadores avançaram desde o compromisso anterior.
+
+## Ruído não é erro imediato
+
+Estados registrados:
+
+- `NOMINAL`;
+- `ACCELERATION_OBSERVED`;
+- `LATENCY_OR_NOISE`;
+- `INPUT_TRANSITION_OR_NOISE`;
+- `RESTART_OR_NOISE`;
+- `FAULT_CANDIDATE_STALLED`;
+- `FAULT_CANDIDATE_ABSENT`;
+- `FAULT_CANDIDATE_REGRESSION`.
+
+O candidato a falha exige persistência em ciclos. O relógio pode ser telemetria, mas não é autoridade do estado.
+
+## Relação com as 60 formulações
+
+A síntese aponta para:
+
+| Grau | Itens | Estrutura |
+|---:|---|---|
+| 10 | 2, 4, 5 | dinâmica epistêmica, ordem quatro e transporte de memória |
+| 9 | 12 | cadeia de oito operadores |
+| 8 | 21, 23 | memória 42×4 e quatro fases |
+| 6 | 40 | fechamento multiplicativo |
+| 4 | 54 | fechamento epistêmico |
+
+A síntese não cria uma 61ª formulação canônica. Ela relaciona formulações existentes.
+
+## Distinção `M059` / `M062`
+
+- `M059`: scheduler cooperativo com quatro slots; as oito invocações do selftest são `2 tarefas × 4 rodadas`;
+- `M062`: âncora quaternária, quatro órgãos, oito gates e quinto estado derivado.
+
+## Artefatos operacionais
+
+### `home`
 
 ```text
-LOAD
-→ OBSERVE
-→ VERIFY
-→ SNAPSHOT
-→ PLAN
-→ COMMIT
-→ WAIT
+RAFAELIA_ANCHOR_ORGAN.sh
+RAFAELIA_ANCHOR_LOOP.sh
+RAFAELIA_MASTER_BOOT.sh
+.termux/services/rafaelia-pulsar/run
+.termux/services/rafaelia-sentinel/run
+.termux/services/rafaelia-memory/run
+.termux/services/rafaelia-action/run
 ```
 
-Invariantes:
+O serviço único `.termux/services/rafaelia-anchor/run` foi removido.
 
-1. `COMMIT`, não tempo transcorrido, autoriza o próximo ciclo;
-2. `WAIT` é pacing e não clock de estado;
-3. uma única instância é mantida por lock e `runit`;
-4. PID e status são observáveis;
-5. snapshot ocorre somente por mudança e possui retenção limitada;
-6. falha em verificação mantém o ciclo canônico anterior;
-7. JSON nunca é executado como shell;
-8. `next_action` legado é preservado como evidência, mas não executado;
-9. `next_action_id` é apenas plano até existir allowlist versionada;
-10. `TOKEN_VAZIO` pode ser commitado como observação válida;
-11. a primeira leitura fixa a baseline do estado já existente;
-12. assinatura diferente da baseline entra em `pending_review`;
-13. promoção exige aprovação do SHA-256 exato e nova verificação;
-14. auto-commit é desligado por padrão e exige opt-in explícito.
+Parada normal é recusada; parada emergencial exige `RAFAELIA_EMERGENCY_STOP=1`.
 
-## Fronteira fechada
-
-O significado de “fechado” é:
+### `RafPolimata`
 
 ```text
-entrada pode ser observada
-→ mudança fica em quarentena
-→ assinatura exata precisa ser aprovada
-→ fonte é relida e verificada
-→ somente então COMMIT
+RAF_062_quaternary_anchor_eight_gate.c
+scripts/test_m062_anchor.sh
 ```
 
-Isso preserva a intenção original de impedir entrada direta “lá em cima”, sem transformar o sistema num processo opaco ou impossível de encerrar.
+Núcleo com arrays estáticos, sem heap e selftest C11 estrito.
 
-A aprovação operacional é:
-
-```bash
-bash ~/RAFAELIA_ANCHOR_LOOP.sh approve <SHA256_DO_CANDIDATO>
-```
-
-A aprovação não executa comando nem altera o estado imediatamente; apenas autoriza o próximo ciclo a verificar a mesma assinatura.
-
-## Relações
+### `papers`
 
 ```text
-X0 / história e cópias
-        ↓
-home / serviço executável
-        ↓
-Mapa / autoridade, estado e gate
-        ↓
-Drive / proveniência e cópia editorial
+docs/matematica_autoral/ANCORA_QUATERNARIA_OITO_GATES_QUINTO_ESTADO.md
 ```
 
-Também se relaciona com:
+## Evidência
 
-- `SIGIL_SOCKET/.verbo.sock` como canal IPC local;
-- `BUFFER/ULTIMO_COMANDO.txt` como memória curta;
-- `AUTOCOGNICAO` e triggers como entrada de eventos;
-- Omega Kernel como modelo `VERIFY → COMMIT/ROLLBACK`.
+- shell: quatro serviços, oito gates, ruído antes de falha e não execução de JSON — `PASS_LOCAL`;
+- C estático `M062` com `-Wall -Wextra -Werror -pedantic` — `PASS_LOCAL`;
+- runner remoto — `PENDING`;
+- Android/ARM32 real — `TOKEN_VAZIO_RUNTIME_DEVICE`;
+- temporização bare-metal — `TOKEN_VAZIO`;
+- consumo e estabilidade prolongada — `TOKEN_VAZIO_BENCHMARK`;
+- replicação independente — `TOKEN_VAZIO`.
 
-## Evidência disponível
-
-- `bash -n` e `sh -n`: `PASS_LOCAL`;
-- teste funcional com HOME temporário: baseline, heartbeat sem novo snapshot, quarentena, aprovação exata, commit posterior e não execução de `next_action`: `PASS_LOCAL`;
-- workflow remoto: `TOKEN_VAZIO_RUNNER` — terminou antes de qualquer etapa observável e o log retornou `BlobNotFound`;
-- serviço real via Termux/runit: `TOKEN_VAZIO_RUNTIME_DEVICE`;
-- consumo energético e estabilidade prolongada: `TOKEN_VAZIO_BENCHMARK`;
-- integração real com socket histórico: `TOKEN_VAZIO_PROTOCOL`.
-
-## Próximo gate verificável
+## Gate físico seguinte
 
 No aparelho:
 
 ```text
-sv up rafaelia-anchor
-sv status rafaelia-anchor
+sv up rafaelia-pulsar
+sv up rafaelia-sentinel
+sv up rafaelia-memory
+sv up rafaelia-action
 bash ~/RAFAELIA_ANCHOR_LOOP.sh status
 ```
 
-Depois observar:
+Verificar:
 
-- um único PID;
-- incremento de ciclo apenas após commit;
-- ausência de filhos órfãos;
-- snapshot novo somente quando FUSION/DECISION mudarem;
-- mudança isolada como `pending_review`;
-- commit somente após aprovação da assinatura exata;
-- rollback se a fonte mudar durante a cópia ou antes do commit;
-- memória, bateria e wakeups por período prolongado.
+- quatro PIDs distintos;
+- nenhuma quinta task de autoridade;
+- oito gates antes do quinto estado;
+- divergência transitória sem falso defeito;
+- detecção de estagnação por ciclos;
+- reinício isolado sem interromper os outros três;
+- uso de CPU, wakeups, memória, bateria e jitter.
