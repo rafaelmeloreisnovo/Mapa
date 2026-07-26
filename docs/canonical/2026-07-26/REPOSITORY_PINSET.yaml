@@ -49,12 +49,22 @@ repositories:
     state: HOST_AND_ARTIFACT_EVIDENCE_PARTIAL
 external_dependencies:
   chunks_producer:
-    canonical_repository: TOKEN_VAZIO_REPOSITORY_RESOLUTION
-    contracts: [RAF1, RDC1, descriptor_size_64]
-    artifact_path: TOKEN_VAZIO
+    identity_state: RESOLVED_CONTRACTUAL_NOT_FETCHED
+    canonical_repository: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE
+    commit: 0ee3e75d8c2a045c1f0dd764ad51c6f173d75741
+    descriptor_header_path: enterprise/chunk_export/include/raf_chunk_export.h
+    descriptor_header_git_blob_sha1: 8627b46a3ee7de0015bde3a36824943c1d5d1b33
+    contracts: [RAF1, RDC1, descriptor_size_64, little_endian]
+    authority_pointer:
+      repository: rafaelmeloreisnovo/Rafaelia_Private
+      base_commit: cebabd2178000d063aa147a4fe68521b192254a1
+      path: native/omega42_chunk_bridge/contracts/corpus_pointer.json
+    repository_content_observed_directly: false
+    artifact_path: TOKEN_VAZIO_PRIVATE_CONTEXT
     sha256: TOKEN_VAZIO
     blake3: TOKEN_VAZIO
-    count: TOKEN_VAZIO
+    descriptor_count: TOKEN_VAZIO
+    source_chunk_set_sha256: TOKEN_VAZIO
 invariants:
   - exact_commit_required_in_every_receipt
   - no_runtime_claim_from_unpinned_head
@@ -62,10 +72,13 @@ invariants:
   - blake3_absence_must_be_explicit
   - physical_runtime_requires_device_manifest_and_exit_status
   - private_body_must_not_enter_public_receipts
+  - contractual_repository_identity_does_not_prove_direct_access
+  - producer_attested_source_hash_is_not_consumer_recomputation
 closure:
-  cycle: C01
+  cycle: C09
   identity: PASS_DOCUMENTARY
   commit_pinning: PASS_DOCUMENTARY
+  chunks_producer_identity: RESOLVED_CONTRACTUAL_NOT_FETCHED
   artifacts: TOKEN_VAZIO_UNTIL_MATERIALIZED
   physical_receipts: TOKEN_VAZIO
   overall: PASS_DOCUMENTARY_WITH_TOKEN_VAZIO
