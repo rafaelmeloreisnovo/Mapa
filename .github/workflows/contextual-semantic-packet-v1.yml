@@ -1,0 +1,40 @@
+name: Contextual Semantic Packet v1
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "contracts/contextual-semantic-packet.v1.json"
+      - "examples/contextual-semantic-packet.wine-formula.json"
+      - "scripts/validate_contextual_semantic_packet.py"
+      - "tests/test_contextual_semantic_packet.py"
+      - "docs/CONTEXTUAL_SEMANTIC_EXECUTION_PROTOCOL_V1.md"
+      - ".github/workflows/contextual-semantic-packet-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Validate packet
+        run: |
+          mkdir -p artifacts
+          python3 scripts/validate_contextual_semantic_packet.py \
+            examples/contextual-semantic-packet.wine-formula.json \
+            --report artifacts/contextual-semantic-validation.json
+      - name: Run negative tests
+        run: python3 -m unittest tests.test_contextual_semantic_packet
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contextual-semantic-packet-v1
+          if-no-files-found: error
+          path: artifacts/contextual-semantic-validation.json
