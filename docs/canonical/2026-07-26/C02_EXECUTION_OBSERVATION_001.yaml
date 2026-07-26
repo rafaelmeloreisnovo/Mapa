@@ -11,14 +11,23 @@ workflow:
   run_number: 1
   status: completed
   conclusion: failure
-job:
-  id: 89767890981
-  name: local-truth
-  status: completed
-  conclusion: failure
-  steps_observed: 0
-  logs_available: false
-  log_fetch_result: HTTP_404_BLOB_NOT_FOUND
+attempts:
+  - attempt: 1
+    job_id: 89767890981
+    job_name: local-truth
+    status: completed
+    conclusion: failure
+    steps_observed: 0
+    logs_available: false
+    log_fetch_result: HTTP_404_BLOB_NOT_FOUND
+  - attempt: 2
+    trigger: rerun_failed_jobs
+    job_id: 89768503826
+    job_name: local-truth
+    status: completed
+    conclusion: failure
+    steps_observed: 0
+    logs_available: false
 corroboration:
   workflow: CI
   run_id: 30192393811
@@ -26,7 +35,8 @@ corroboration:
   job_name: Semantic coherence and falsifiability gates
   steps_observed: 0
 interpretation:
-  state: BLOCKED_INFRA_NO_JOB_STEPS
+  state: BLOCKED_INFRA_REPRODUCED_ZERO_JOB_STEPS
+  infrastructure_observation_repeated: true
   code_execution_observed: false
   runtime_truth_gate_executed: false
   build_doctor_executed: false
@@ -36,12 +46,13 @@ forbidden_inference:
   - workflow_failure_implies_compiler_failure
   - zero_steps_implies_test_failure
   - missing_logs_implies_code_error
+  - repeated_zero_steps_implies_repeated_code_failure
 next_actions:
   - preserve PR and instrumentation
   - execute receipt wrapper in local Linux or Termux checkout
-  - retry Actions after runner startup is available
+  - do not repeat Actions until runner startup conditions change
   - require uploaded artifact before promotion
 r3:
-  f_ok: workflow registration and run creation proven
+  f_ok: workflow registration and repeated infrastructure behavior proven
   f_gap: runner startup command execution logs and receipts absent
-  f_next: local execution or infrastructure-enabled rerun
+  f_next: local execution in Linux or Termux checkout
