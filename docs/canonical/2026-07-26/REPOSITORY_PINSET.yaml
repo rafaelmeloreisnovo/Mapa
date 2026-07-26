@@ -1,0 +1,91 @@
+schema: rafaelia.repository-pinset.v1
+created_at: '2026-07-26'
+state: PINNED_DOCUMENTARY
+claim_allowed: false
+scope:
+  purpose: congelar identidade, branch e commit antes de qualquer execução ou promoção de claim
+  mutation_policy: novos commits exigem nova revisão do pinset; este arquivo nunca acompanha HEAD implicitamente
+  hash_policy:
+    git_commit_sha1: REQUIRED
+    artifact_sha256: REQUIRED_WHEN_ARTIFACT_EXISTS
+    artifact_blake3: TOKEN_VAZIO_UNTIL_TOOL_OR_RECEIPT
+repositories:
+  mapa:
+    repository: rafaelmeloreisnovo/Mapa
+    canonical_role: control_plane_and_knowledge_map
+    branch: main
+    commit: 81732c94c14edfd74180fca0e02f6252ce0ca4af
+    verification_basis: github_repository_and_canonical_index_inspection
+    execution_state: DOCUMENTARY_PINNED
+    claim_allowed: false
+  rafpolimata:
+    repository: rafaelmeloreisnovo/RafPolimata
+    canonical_role: parser_compiler_evidence_and_apkc
+    branch: main
+    commit: b230f79b4519f398d6a0f32c2235527966f14a36
+    verification_basis: runtime_state_readme_segment_v1_and_apkc_inspection
+    execution_state: LOCAL_IMPLEMENTATION_EVIDENCE_PRESENT
+    local_full_validation: TOKEN_VAZIO
+    claim_allowed: false
+  vectras:
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+    canonical_role: android_vm_qemu_carrier_and_isolation
+    branch: master
+    commit: a29392e65948463ab9cb6dbfefe64eb060e23a07
+    verification_basis: all_gaps_registry_and_freestanding_link_probe_inspection
+    execution_state: HOST_PROBE_PRESENT_DEVICE_PENDING
+    device_execution: TOKEN_VAZIO
+    claim_allowed: false
+  rafaelia_private:
+    repository: rafaelmeloreisnovo/Rafaelia_Private
+    canonical_role: private_runtime_rafaelia_zero_omega42
+    branch: main
+    commit: cebabd2178000d063aa147a4fe68521b192254a1
+    verification_basis: rafaelia_zero_and_omega42_status_inspection
+    execution_state: TESTED_SYNTHETIC_LOCAL
+    real_corpus_ingestion: TOKEN_VAZIO
+    device_execution: TOKEN_VAZIO
+    claim_allowed: false
+  termux:
+    repository: rafaelmeloreisnovo/termux-app-rafacodephi
+    canonical_role: android_local_runtime_dispatch_and_build_environment
+    branch: master
+    commit: 508efb3d01594cc20d51b7fb01d5f2a790169bf2
+    verification_basis: repository_integration_and_runtime_claim_boundary_inspection
+    execution_state: IMPLEMENTATION_PRESENT_PHYSICAL_RECEIPT_PENDING
+    physical_dispatch: TOKEN_VAZIO
+    claim_allowed: false
+  qemu:
+    repository: rafaelmeloreisnovo/qemu_rafaelia
+    canonical_role: guest_execution_engine
+    branch: master
+    commit: d4b3ef09956fa1abaeacba61dca3965f591c3a6a
+    verification_basis: repository_and_matrix_documentation_inspection
+    execution_state: HOST_AND_ARTIFACT_EVIDENCE_PARTIAL
+    android_guest_boot: TOKEN_VAZIO
+    claim_allowed: false
+external_dependencies:
+  chunks_producer:
+    canonical_repository: TOKEN_VAZIO_REPOSITORY_RESOLUTION
+    required_contracts:
+      - RAF1
+      - RDC1
+      - descriptor_size_64
+    descriptor_artifact_path: TOKEN_VAZIO
+    descriptor_sha256: TOKEN_VAZIO
+    descriptor_blake3: TOKEN_VAZIO
+    descriptor_count: TOKEN_VAZIO
+invariants:
+  - exact_commit_must_be_recorded_in_every_receipt
+  - no_runtime_claim_from_repository_head_without_pin
+  - no_artifact_claim_without_sha256
+  - blake3_absence_is_recorded_not_silently_replaced
+  - physical_runtime_requires_device_manifest_and_exit_status
+  - private_corpus_body_must_not_be_copied_into_public_receipts
+closure:
+  cycle: C01
+  repository_identity: PASS_DOCUMENTARY
+  commit_pinning: PASS_DOCUMENTARY
+  artifact_hashes: TOKEN_VAZIO_UNTIL_ARTIFACTS
+  physical_receipts: TOKEN_VAZIO
+  overall: PARTIAL_DOCUMENTARY
