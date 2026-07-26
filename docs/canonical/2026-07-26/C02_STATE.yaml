@@ -2,7 +2,7 @@ schema: rafaelia.cycle-state.v1
 cycle_id: C02
 name: rafpolimata_local_truth
 created_at: '2026-07-26'
-state: ACTIVE_BLOCKED_INFRA_NO_JOB_STEPS
+state: ACTIVE_BLOCKED_INFRA_REPRODUCED_ZERO_JOB_STEPS
 claim_allowed: false
 base_repository: rafaelmeloreisnovo/RafPolimata
 base_commit: b230f79b4519f398d6a0f32c2235527966f14a36
@@ -20,10 +20,16 @@ existing_gate:
   content_blob_sha1: be4e5c05af1a955d29ce766f066e9de067ae8920
 execution_observation:
   workflow_run_id: 30192393839
-  job_id: 89767890981
+  attempts:
+    - job_id: 89767890981
+      steps_observed: 0
+      logs_available: false
+    - job_id: 89768503826
+      trigger: rerun_failed_jobs
+      steps_observed: 0
+      logs_available: false
   workflow_conclusion: failure
-  steps_observed: 0
-  logs_available: false
+  infrastructure_observation_repeated: true
   code_execution_observed: false
   code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
 closure_outputs_required:
@@ -48,4 +54,4 @@ promotion_target:
   build_doctor: VERIFIED_BY_EXECUTION
   android_build: TOKEN_VAZIO
   claim_allowed: false
-next_action: execute receipt wrapper in local Linux or Termux checkout, or rerun when Actions starts job steps
+next_action: execute receipt wrapper in local Linux or Termux checkout; do not repeat Actions until runner startup conditions change
