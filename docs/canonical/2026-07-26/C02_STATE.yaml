@@ -1,0 +1,41 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C02
+name: rafpolimata_local_truth
+created_at: '2026-07-26'
+state: ACTIVE_EXECUTION_PENDING
+claim_allowed: false
+base_repository: rafaelmeloreisnovo/RafPolimata
+base_commit: b230f79b4519f398d6a0f32c2235527966f14a36
+discovered_existing_gate:
+  path: scripts/validate_runtime_truth_local.sh
+  steps: 9
+  content_blob_sha1: be4e5c05af1a955d29ce766f066e9de067ae8920
+  result_at_current_inspection: NOT_EXECUTED_IN_THIS_CYCLE
+existing_build_doctor_workflow:
+  path: .github/workflows/ecosystem-build-doctor.yml
+  content_blob_sha1: 7879df8fdfee0dba33d87db1b4138dc34732e84f
+  scope: build_doctor_only
+  full_runtime_truth_gate: false
+closure_outputs_required:
+  - runtime_truth_receipt.json
+  - build-doctor.json
+  - build-doctor.md
+  - toolchain_manifest.json
+  - runtime-truth.stdout.log
+  - runtime-truth.stderr.log
+token_vazio:
+  - current_full_gate_exit_code
+  - current_execution_transcript
+  - current_toolchain_manifest
+  - current_artifact_sha256
+  - current_artifact_blake3
+  - current_build_doctor_persisted_report
+  - android_build
+  - apk_install
+  - physical_runtime
+promotion_target:
+  full_repository_local_validation: VERIFIED_BY_EXECUTION
+  build_doctor: VERIFIED_BY_EXECUTION
+  android_build: TOKEN_VAZIO
+  claim_allowed: false
+next_action: create receipt-preserving wrapper and workflow in RafPolimata
