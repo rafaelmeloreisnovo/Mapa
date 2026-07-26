@@ -1,7 +1,7 @@
 # RAFAELIA Anchor Mesh — autoridade e indexação transversal
 
 **Data da correção:** 2026-07-26  
-**Estado:** `MERGED_MATH_CORE_RUNTIME_HISTORY / TOKEN_VAZIO_RUNTIME_DEVICE`
+**Estado:** `MERGED_MATH_CORE_RUNTIME_HISTORY_MAPA / TOKEN_VAZIO_RUNTIME_DEVICE`
 
 ## Correção canônica
 
@@ -30,7 +30,7 @@ O quinto estado não é daemon, task adicional nem ponto único de falha.
 | Matemática | `rafaelmeloreisnovo/papers` | `1e2ce959482659f58aa909b11ada17f621f8d64f` | `MERGED` |
 | Núcleo C sem heap | `rafaelmeloreisnovo/RafPolimata` — `M062` | `146c0b549878e95644c2d5523e86e00d86662d1b` | `MERGED / PASS_LOCAL` |
 | Runtime hospedado | `rafaelmeloreisnovo/home` | `bb777eac8e94532243cc31dfc989c14a64e89c68` | `MERGED / PASS_LOCAL` |
-| Catálogo e gates | `rafaelmeloreisnovo/Mapa` | esta PR | `CANONICAL_CONTROL_RECORD` |
+| Catálogo e gates | `rafaelmeloreisnovo/Mapa` | `34148185afa5d407a77169780392959817335f80` | `CANONICAL_CONTROL_RECORD_MERGED` |
 | Execução física | Moto E7 Power / ARM32 / Termux | — | `TOKEN_VAZIO_RUNTIME_DEVICE` |
 
 ## Fonte histórica
