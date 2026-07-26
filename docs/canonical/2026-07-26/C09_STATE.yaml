@@ -1,0 +1,97 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C09
+name: omega42_real_descriptor_artifact
+created_at: '2026-07-26'
+state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS_REAL_ARTIFACT_PENDING
+claim_allowed: false
+consumer:
+  repository: rafaelmeloreisnovo/Rafaelia_Private
+  base_commit: cebabd2178000d063aa147a4fe68521b192254a1
+  branch: c09/real-descriptor-artifact-closure-2026-07-26
+  pull_request: 191
+  head_commit: fc90aea1932b6114b8bd0e76599e18b46cad322f
+producer:
+  identity_state: RESOLVED_CONTRACTUAL_NOT_FETCHED
+  repository: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE
+  commit: 0ee3e75d8c2a045c1f0dd764ad51c6f173d75741
+  descriptor_header_path: enterprise/chunk_export/include/raf_chunk_export.h
+  descriptor_header_git_blob_sha1: 8627b46a3ee7de0015bde3a36824943c1d5d1b33
+  descriptor_abi: RAF1_RDC1_64
+  repository_content_observed_in_this_cycle: false
+implementation:
+  canonical_encoding: little-endian
+  descriptor_bytes: 64
+  streaming_memory_bound_bytes: 64
+  new_apis:
+    - raf_o42_decode_descriptor_le
+    - raf_o42_ingest_descriptor_le
+  strict_rejections:
+    - unknown_flag_bits
+    - private_body_flag
+    - nonzero_reserved_words
+    - wrong_magic_version_size_or_abi
+    - sequence_gap
+    - offset_gap
+    - invalid_window
+    - data_after_final
+    - partial_record
+  files:
+    - native/omega42_chunk_bridge/include/raf_omega42_bridge.h
+    - native/omega42_chunk_bridge/src/raf_omega42_bridge.c
+    - native/omega42_chunk_bridge/tests/real_artifact_hosted.c
+    - native/omega42_chunk_bridge/tools/validate_descriptor_artifact.py
+    - native/omega42_chunk_bridge/tests/test_descriptor_artifact.py
+    - native/omega42_chunk_bridge/tests/generate_synthetic_artifact.py
+    - native/omega42_chunk_bridge/schemas/descriptor_artifact_manifest.schema.json
+    - native/omega42_chunk_bridge/contracts/descriptor_artifact_manifest.example.json
+    - native/omega42_chunk_bridge/docs/C09_REAL_DESCRIPTOR_ARTIFACT_CLOSURE_20260726.md
+    - .github/workflows/c09-omega42-descriptor-artifact.yml
+privacy_boundary:
+  descriptor_only: true
+  private_body_read: false
+  raw_message_text_read: false
+  private_source_path_recorded: false
+  source_crc32c: PRODUCER_ATTESTED_NOT_RECOMPUTED
+  fingerprints: PRODUCER_ATTESTED_NOT_RECOMPUTED
+  source_chunk_set_sha256: PRODUCER_ATTESTED_NOT_RECOMPUTED_BY_CONSUMER
+artifact_contract:
+  manifest_schema: raf.omega42-descriptor-artifact-manifest.v1
+  receipt_schema: raf.omega42-descriptor-artifact-receipt.v1
+  positive_states:
+    - PASS_DESCRIPTOR_ARTIFACT_STRUCTURAL
+    - PASS_DESCRIPTOR_ARTIFACT_WITH_BLAKE3_TOKEN_VAZIO
+  sha256: REQUIRED
+  blake3: REQUIRED_OR_EXPLICIT_B3SUM_ABSENT_TOKEN
+execution_observation:
+  workflow_name: C09 OMEGA42 Descriptor Artifact
+  workflow_run_id: 30196355807
+  job_id: 89778484283
+  job_name: descriptor-contract
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+  code_execution_observed: false
+  hosted_tests_executed: false
+  python_falsifiers_executed: false
+  synthetic_runner_executed: false
+  armv7_cross_compile_executed: false
+  aarch64_cross_compile_executed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+token_vazio:
+  - real_descriptor_artifact_path
+  - real_descriptor_artifact_sha256
+  - real_descriptor_artifact_blake3
+  - real_descriptor_count
+  - real_source_chunk_set_sha256
+  - real_host_result
+  - real_consumer_receipt
+  - android_execution
+  - armv7_physical_execution
+  - aarch64_physical_execution
+promotion_boundary:
+  descriptor_structure: VERIFIED_ONLY_AFTER_REAL_RECEIPT
+  corpus_body_semantics: NOT_READ_NOT_AUTHORIZED
+  semantic_inference: TOKEN_VAZIO_NOT_AUTHORIZED
+  performance_claim: FORBIDDEN_OUT_OF_SCOPE
+  claim_allowed: false
+next_action: execute static and synthetic gates locally then materialize descriptor-only artifact in private producer context and run real-artifact-test
