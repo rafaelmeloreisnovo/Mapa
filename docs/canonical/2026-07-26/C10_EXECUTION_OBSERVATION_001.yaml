@@ -1,0 +1,53 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C10
+observation_id: C10-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/papers
+pull_request: 25
+head_commit: 7438106ea54f375ebe011fe09450fc06fd3b6a33
+workflow:
+  name: C10 Claim Promotion Gate
+  run_id: 30196802863
+  run_number: 1
+  status: completed
+  conclusion: failure
+job:
+  id: 89779632480
+  name: claim-gate
+  status: completed
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+intended_steps_not_observed:
+  - checkout
+  - python_and_json_syntax
+  - claim_gate_falsifier_tests
+  - canonical_blocked_claims_receipt
+  - publication_and_language_boundary
+  - file_hash_materialization
+  - artifact_upload
+interpretation:
+  state: BLOCKED_INFRA_ZERO_JOB_STEPS
+  code_execution_observed: false
+  claim_gate_executed: false
+  benchmark_executed: false
+  replication_executed: false
+  paper_package_deposited: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  claim_allowed: false
+forbidden_inference:
+  - workflow_failure_implies_claim_validator_failure
+  - ledger_presence_proves_claims_verified
+  - benchmark_protocol_presence_proves_measurement
+  - pass_blocked_claims_design_proves_validator_execution
+  - existing_ecosystem_doi_identifies_c10_package
+next_actions:
+  - execute validator and tests locally
+  - materialize file hashes
+  - keep all upstream claims blocked until hashed receipts exist
+  - preserve negative results during every promotion
+  - deposit only the exact reviewed package after replication
+r3:
+  f_ok: schema ledger protocol validator tests workflow documentation and PR implemented
+  f_gap: no test report benchmark data replication review or DOI observed
+  f_next: local claim-gate execution then evidence-driven ledger updates
