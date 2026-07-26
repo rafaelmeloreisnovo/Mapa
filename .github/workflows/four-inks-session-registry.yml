@@ -1,0 +1,78 @@
+name: Four Inks Session Registry
+
+on:
+  push:
+    branches: [main, "integration/**", "claude/**"]
+    paths:
+      - "docs/canonical/2026-07-26/C09_FOUR_INKS_SESSION_VECTOR_CONTRACT.md"
+      - "workflows/FOUR_INKS_SESSION_FEDERATED_ROUTE.md"
+      - "roadmaps/ROADMAP_FOUR_INKS_SESSION_MEMORY_DMAIC.md"
+      - "indices/SESSION_VECTOR_FOUR_INKS_REGISTRY.v1.jsonl"
+      - "schemas/session_vector_pointer.v1.schema.json"
+      - "scripts/validate_four_inks_session_registry.py"
+      - "tests/test_four_inks_session_registry.py"
+      - ".github/workflows/four-inks-session-registry.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/canonical/2026-07-26/C09_FOUR_INKS_SESSION_VECTOR_CONTRACT.md"
+      - "workflows/FOUR_INKS_SESSION_FEDERATED_ROUTE.md"
+      - "roadmaps/ROADMAP_FOUR_INKS_SESSION_MEMORY_DMAIC.md"
+      - "indices/SESSION_VECTOR_FOUR_INKS_REGISTRY.v1.jsonl"
+      - "schemas/session_vector_pointer.v1.schema.json"
+      - "scripts/validate_four_inks_session_registry.py"
+      - "tests/test_four_inks_session_registry.py"
+      - ".github/workflows/four-inks-session-registry.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-four-inks-registry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Validate control-plane pointers
+        run: |
+          mkdir -p artifacts/four-inks-session
+          python scripts/validate_four_inks_session_registry.py \
+            --report artifacts/four-inks-session/REGISTRY_VALIDATION_REPORT.json
+
+      - name: Run fail-closed tests
+        run: python -m pytest -q tests/test_four_inks_session_registry.py
+
+      - name: Seal registry inputs
+        run: |
+          sha256sum \
+            docs/canonical/2026-07-26/C09_FOUR_INKS_SESSION_VECTOR_CONTRACT.md \
+            workflows/FOUR_INKS_SESSION_FEDERATED_ROUTE.md \
+            roadmaps/ROADMAP_FOUR_INKS_SESSION_MEMORY_DMAIC.md \
+            indices/SESSION_VECTOR_FOUR_INKS_REGISTRY.v1.jsonl \
+            schemas/session_vector_pointer.v1.schema.json \
+            scripts/validate_four_inks_session_registry.py \
+            tests/test_four_inks_session_registry.py \
+            > artifacts/four-inks-session/FILES.sha256
+          printf '%s\n' \
+            'CLAIM_ALLOWED=false' \
+            'PRODUCER=rafaelmeloreisnovo/papers' \
+            'CONTROL_PLANE=rafaelmeloreisnovo/Mapa' \
+            'PARABLE_PROVES_SCIENCE=false' \
+            'SIGMA_LEVEL=TOKEN_VAZIO' \
+            'SOURCE_SHA256=TOKEN_VAZIO_UNTIL_PRODUCER_CHECKOUT' \
+            'DEVICE_EXECUTION=TOKEN_VAZIO' \
+            > artifacts/four-inks-session/BOUNDARY.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: four-inks-session-registry
+          path: artifacts/four-inks-session/
+          retention-days: 30
