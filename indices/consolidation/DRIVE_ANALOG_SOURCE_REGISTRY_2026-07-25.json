@@ -1,0 +1,143 @@
+{
+  "schema": "rafaelia.drive.analog-source-registry.v1",
+  "generated_at": "2026-07-25T00:00:00-03:00",
+  "policy": {
+    "analog_is_canonical_replacement": false,
+    "same_name_is_same_content": false,
+    "promotion_requires_hash_and_contract_review": true,
+    "unknown_state": "TOKEN_VAZIO"
+  },
+  "runtime_targets": [
+    {
+      "expected_path": "$HOME/RAFAELIA_MASTER_BOOT.sh",
+      "expected_name": "RAFAELIA_MASTER_BOOT.sh",
+      "drive_match": {
+        "id": "1fuRSNwy52W8IBU3ZsjfNc_SBaAR2eP6p",
+        "size_bytes": 2782,
+        "sha256": "856334d57a3ca801a69cc78bc7e4b962ee5f4875c05da5b3203d7a4bc79db8e0"
+      },
+      "relation": "EXACT_NAME_HISTORICAL_PROVENANCE",
+      "canonical_runtime": false,
+      "mitigation": "RECONSTRUCTED_FAIL_CLOSED_IN_HOME_PR_5"
+    },
+    {
+      "expected_path": "$HOME/RAFAELIA_CORE/INDEX/rafaelia_scan.sh",
+      "expected_name": "rafaelia_scan.sh",
+      "drive_match": null,
+      "analog_sources": [
+        {
+          "id": "1LZaQaFsUaJ36yaB-tlYHIRzx2tCbqm9e",
+          "title": "RAFAELIA_SCAN_ABSOLUTO.sh",
+          "size_bytes": 759
+        },
+        {
+          "id": "1WR-emmV5GnCo7o64nlZmDJJJsxNgdeWT",
+          "title": "RAFAELIA_MATRIX_SCAN.md"
+        }
+      ],
+      "relation": "ANALOG_ONLY",
+      "canonical_runtime": false,
+      "state": "TOKEN_VAZIO: exact executable not located"
+    },
+    {
+      "expected_path": "$HOME/RAFAELIA_CORE/INDEX/rafaelia_delta.sh",
+      "expected_name": "rafaelia_delta.sh",
+      "drive_match": null,
+      "analog_sources": [
+        {
+          "id": "13HTUGHFI_S-rAhMnh5zyaWb9Nha2EQKm",
+          "title": "RAFAELIA_DELTA_FINAL"
+        },
+        {
+          "id": "1QU4nYp79uvWrcJDOghkLSzExhYvc7rck",
+          "title": "RAFAELIA_DELTA_HYPER_0CORE"
+        }
+      ],
+      "relation": "ANALOG_ONLY",
+      "canonical_runtime": false,
+      "state": "TOKEN_VAZIO: exact executable not located"
+    },
+    {
+      "expected_path": "$HOME/RAFAELIA_CORE/INDEX/zrf_zrfmap.py",
+      "expected_name": "zrf_zrfmap.py",
+      "drive_match": null,
+      "mentioned_by": [
+        {
+          "id": "1TItRqxrq-JetFKLvEusGTYrN4qBtio2A",
+          "title": "INVENTARIO_20251012_042645.txt"
+        }
+      ],
+      "relation": "INVENTORY_MENTION_ONLY",
+      "canonical_runtime": false,
+      "state": "TOKEN_VAZIO: content object not located"
+    },
+    {
+      "expected_path": "$HOME/RAFAELIA_CORE/INDEX/export_metrics.sh",
+      "expected_name": "export_metrics.sh",
+      "drive_match": null,
+      "mentioned_by": [
+        {
+          "id": "1TItRqxrq-JetFKLvEusGTYrN4qBtio2A",
+          "title": "INVENTARIO_20251012_042645.txt"
+        }
+      ],
+      "relation": "INVENTORY_MENTION_ONLY",
+      "canonical_runtime": false,
+      "state": "TOKEN_VAZIO: content object not located"
+    }
+  ],
+  "knowledge_and_inventory_analogs": [
+    {
+      "id": "1zjGj9sUkI8zfoj9_gqTzGLgySBR5Y4dB",
+      "title": "Dossie_Unificado_RAFAELIA.md",
+      "observed_claims": {
+        "files_total": 969,
+        "size_total": "445.1 MB"
+      },
+      "class": "HISTORICAL_DOSSIER"
+    },
+    {
+      "id": "1AY-CzaNxmvM03g_huADgdwH_236rOEZt",
+      "title": "Dossie_Unificado_RAFAELIA.md",
+      "relation": "DUPLICATE_NAME_CANDIDATE",
+      "class": "HISTORICAL_DOSSIER"
+    },
+    {
+      "id": "1FMuZ-WVvuI7qbQJ8E5LjfHOKShI83VMsJfGB2zyWHgE",
+      "title": "01_MATRIZ_DE_RASTREABILIDADE__INVARIANTES_E_MATRIX",
+      "class": "TRACEABILITY_MATRIX"
+    },
+    {
+      "id": "1tdTtvVMt4Jz2fnBYgJRZz2u_Q4sdBHg69LVk8XDyVjI",
+      "title": "02_MATRIZ__MODULOS_REPOSITORIOS_PRODUTOS_E_FRUTOS_V1",
+      "class": "MODULE_PRODUCT_MATRIX"
+    },
+    {
+      "id": "1SE9G93CWJVMepIwnG2xmGYFBlpRA05PG",
+      "title": "relatorio_simbiotico.txt",
+      "observed_reference": "ALL_CONVERSATIONS.json 543M and Termux home listing",
+      "class": "HOME_SNAPSHOT_REPORT"
+    },
+    {
+      "id": "1K-KrHWv43RpPjlRaUxz3XjaPB2Qa8neq",
+      "title": "lista_total_raiz.txt",
+      "observed_reference": "root listing around 1.3G",
+      "class": "HOME_LISTING"
+    },
+    {
+      "id": "1KFSmM7y6zn7HIKC2riUzUc-6wtIvkrXP",
+      "title": "raiz.txt",
+      "observed_reference": "root listing around 2.0G",
+      "class": "HOME_LISTING"
+    }
+  ],
+  "promotion_gate": [
+    "fetch complete bytes",
+    "calculate SHA-256 and BLAKE3",
+    "compare input/output contract",
+    "scan secrets and dangerous commands",
+    "run syntax/build tests in isolation",
+    "record canonical authority and rollback",
+    "only then change runtime path"
+  ]
+}
