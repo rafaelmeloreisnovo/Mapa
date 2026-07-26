@@ -20,7 +20,7 @@ Foram calculados, para cada anexo bruto, `MD5`, `SHA-256` e `BLAKE3-256`.
 
 - `MD5` é mantido somente para compatibilidade e comparação legada; não é prova adversarial.
 - `SHA-256` é o digest geral de custódia deste lote.
-- `BLAKE3-256` foi calculado com a implementação C contida no snapshot BLAKE3 recebido. O snapshot exigiu uma definição de compatibilidade de compilação para `BLAKE3_LIKELY`; após isso, a saída da entrada vazia coincidiu com o vetor BLAKE3 conhecido `af1349…f3262`.
+- `BLAKE3-256` foi calculado com a implementação C contida no snapshot BLAKE3 recebido. O snapshot exigiu uma definição de compatibilidade de compilação para `BLAKE3_LIKELY`; após isso, os vetores BLAKE3 de 0, 1, 64 e 1.024 bytes coincidiram com os vetores fornecidos no próprio snapshot.
 - Essa validação comprova o procedimento de digest deste lote; ela **não** certifica, por si só, build integral do fork, desempenho, segurança do RMR ou equivalência total com o upstream.
 
 Os comentários internos dos ZIPs que parecem SHA Git foram registrados apenas como `archive_comment_candidate_commit`: não são tratados como commits verificados sem consulta/replay do repositório correspondente.
