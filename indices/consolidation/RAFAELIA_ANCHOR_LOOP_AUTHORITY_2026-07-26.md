@@ -1,7 +1,7 @@
 # RAFAELIA Anchor Loop — autoridade e indexação transversal
 
 **Data da consolidação:** 2026-07-26  
-**Estado:** `IMPLEMENTED_BRANCH / TOKEN_VAZIO_RUNTIME_DEVICE`
+**Estado:** `MERGED_CODE_AND_HISTORY / TOKEN_VAZIO_RUNTIME_DEVICE`
 
 ## Correção de interpretação
 
@@ -30,8 +30,8 @@ A permanência era intencional. O problema não era o loop infinito; eram a falt
 | Plano | Autoridade | Estado |
 |---|---|---|
 | Fonte histórica | Google Drive — `RAFAELIA_MASTER_BOOT.sh` | `OBSERVED_HASHED` |
-| Arqueologia e preservação | `rafaelmeloreisnovo/X0` | `DOCUMENTED_BRANCH` |
-| Runtime operacional | `rafaelmeloreisnovo/home` | `IMPLEMENTED_BRANCH` |
+| Arqueologia e preservação | `rafaelmeloreisnovo/X0` — `fb0410cde68ef33f6a07b486b1a9cf91c36feb59` | `MERGED` |
+| Runtime operacional | `rafaelmeloreisnovo/home` — `4006e633c510bdea7e900158cf65ba65ea42d578` | `MERGED` |
 | Catálogo, significado e gate | `rafaelmeloreisnovo/Mapa` | `CANONICAL_CONTROL_RECORD` |
 | Execução física no Android | Moto E7 Power / Termux | `TOKEN_VAZIO_RUNTIME_DEVICE` |
 
@@ -117,6 +117,7 @@ Também se relaciona com:
 
 - `bash -n` e `sh -n`: `PASS_LOCAL`;
 - teste funcional com HOME temporário: baseline, heartbeat sem novo snapshot, quarentena, aprovação exata, commit posterior e não execução de `next_action`: `PASS_LOCAL`;
+- workflow remoto: `TOKEN_VAZIO_RUNNER` — terminou antes de qualquer etapa observável e o log retornou `BlobNotFound`;
 - serviço real via Termux/runit: `TOKEN_VAZIO_RUNTIME_DEVICE`;
 - consumo energético e estabilidade prolongada: `TOKEN_VAZIO_BENCHMARK`;
 - integração real com socket histórico: `TOKEN_VAZIO_PROTOCOL`.
