@@ -14,7 +14,9 @@
       "observed_occurrences": 8916,
       "scope": "programmatic inventory excluding .git and node_modules",
       "role": "monorepository_archive",
-      "branch": "security/consolidate-home-drive"
+      "branch": "security/consolidate-home-drive",
+      "pull_request": 33,
+      "observed_head": "2c0aa96883301ae941b9acddc0e5be7efb7c7af5"
     },
     {
       "source": "github",
@@ -22,7 +24,9 @@
       "observed_occurrences": 1524,
       "scope": "read-only audit with maximum depth 5 and excluded reproducible directories",
       "role": "termux_operational_home_snapshot",
-      "branch": "security/consolidate-home-x0-drive"
+      "branch": "security/consolidate-home-x0-drive",
+      "pull_request": 5,
+      "observed_head": "e89d2bfc7942121f2a68ea349a09d554218e2028"
     },
     {
       "source": "google_drive",
@@ -43,13 +47,40 @@
     "home_fail_closed_boot": "IMPLEMENTED_BRANCH",
     "home_index_service_supervision": "IMPLEMENTED_BRANCH",
     "home_sensitive_gitignore": "IMPLEMENTED_BRANCH",
-    "home_empty_document_reconstruction": "IMPLEMENTED_BRANCH",
+    "home_historical_corpus_preserved": true,
+    "home_non_destructive_inventory_index": "IMPLEMENTED_BRANCH",
     "x0_local_api_loopback": "IMPLEMENTED_BRANCH",
     "x0_bearer_authentication": "IMPLEMENTED_BRANCH",
     "x0_arbitrary_shell_removed": "IMPLEMENTED_BRANCH",
     "x0_security_contract_tests": "LOCAL_PASS_5_OF_5",
     "git_history_secret_purge": "TOKEN_VAZIO_REQUIRES_ROTATION_AND_HISTORY_REWRITE",
     "android_runtime_proof": "TOKEN_VAZIO"
+  },
+  "remote_gates": {
+    "home_pr_5": {
+      "workflow": "Home security contract",
+      "reported_conclusion": "failure",
+      "observable_steps": 0,
+      "state": "TOKEN_VAZIO_RUNNER"
+    },
+    "x0_pr_33": {
+      "workflow": "Local API security",
+      "reported_conclusion": "failure",
+      "observable_steps": 0,
+      "state": "TOKEN_VAZIO_RUNNER"
+    },
+    "mapa_pr_61": {
+      "workflow": "CI",
+      "reported_conclusion": "failure",
+      "observable_steps": 0,
+      "state": "TOKEN_VAZIO_RUNNER"
+    }
+  },
+  "drive_consolidation": {
+    "folder_id": "1boJdnfYunsDbXGQmWzdFPcBX9QiysVuW",
+    "report_document_id": "1sdoQq0IcD6dB1QXJuLIRYuaOPRrV7knCuSu_LIZ8QYg",
+    "manifest_document_id": "1xK1-vWHv8upJq-Dqh9IpL8Jf_KSKTveUZbAAOwGJJLc",
+    "analog_registry_document_id": "1KxF4Nr7TWVH7douOV_JYlbRrzWQVY-FHiusGBCAB7Z0"
   },
   "next_gate": {
     "artifact": "X0_HOME_DRIVE_MANIFEST.jsonl",
