@@ -1,0 +1,60 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C08
+observation_id: C08-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/Vectras-VM-Android
+pull_request: 1071
+head_commit: edcdc292166a41c257e5712d2c1cd0bde27c7f83
+workflow:
+  name: C08 Device Evidence Contract
+  run_id: 30195704070
+  run_number: 1
+  status: completed
+  conclusion: failure
+job:
+  id: 89776751627
+  name: static-contract
+  status: completed
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+intended_steps_not_observed:
+  - checkout
+  - python_and_shell_syntax
+  - device_validator_unit_tests
+  - static_contract_receipt
+  - android_kotlin_compile
+  - no_physical_claim_assertion
+  - artifact_upload
+interpretation:
+  state: BLOCKED_INFRA_ZERO_JOB_STEPS
+  code_execution_observed: false
+  static_contract_executed: false
+  kotlin_compile_executed: false
+  device_collection_executed: false
+  guest_marker_executed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  claim_allowed: false
+cross_cycle_corroboration:
+  c02_zero_steps: true
+  c03_zero_steps: true
+  c04_zero_steps: true
+  c05_zero_steps: true
+  c06_zero_steps: true
+forbidden_inference:
+  - workflow_failure_implies_kotlin_compile_failure
+  - zero_steps_implies_guest_evidence_validator_failure
+  - branch_presence_implies_physical_device_execution
+  - marker_emitter_presence_implies_guest_boot
+  - nonce_contract_presence_implies_nonce_observed
+next_actions:
+  - preserve PR and static contracts
+  - execute static verifier locally
+  - compile debug Vectras APK
+  - execute nonce-bound guest on device
+  - collect request and receipt by run-as
+  - require closure receipt before any device promotion
+r3:
+  f_ok: nonce contract collector validator tests workflow and PR implemented
+  f_gap: no static step Kotlin compile device package hash request receipt or marker observed
+  f_next: local static execution followed by one-device physical collection
