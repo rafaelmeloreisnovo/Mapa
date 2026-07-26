@@ -1,0 +1,71 @@
+schema: rafaelia.repository-pinset.v1
+created_at: '2026-07-26'
+state: PINNED_DOCUMENTARY
+claim_allowed: false
+scope:
+  purpose: congelar identidade, branch e commit antes de execução ou promoção de claim
+  mutation_policy: novos commits exigem nova revisão; nunca acompanhar HEAD implicitamente
+  hash_policy:
+    git_commit_sha1: REQUIRED
+    artifact_sha256: REQUIRED_WHEN_ARTIFACT_EXISTS
+    artifact_blake3: TOKEN_VAZIO_UNTIL_TOOL_OR_RECEIPT
+repositories:
+  mapa:
+    repository: rafaelmeloreisnovo/Mapa
+    role: control_plane_and_knowledge_map
+    branch: main
+    commit: a0603752a8d8af36cd241b670f1779f597269a9b
+    state: DOCUMENTARY_PINNED
+  rafpolimata:
+    repository: rafaelmeloreisnovo/RafPolimata
+    role: parser_compiler_evidence_and_apkc
+    branch: main
+    commit: b230f79b4519f398d6a0f32c2235527966f14a36
+    state: LOCAL_IMPLEMENTATION_EVIDENCE_PRESENT
+    full_local_validation: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  vectras:
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+    role: android_vm_qemu_carrier_and_isolation
+    branch: master
+    commit: a29392e65948463ab9cb6dbfefe64eb060e23a07
+    state: HOST_PROBE_PRESENT_DEVICE_PENDING
+  rafaelia_private:
+    repository: rafaelmeloreisnovo/Rafaelia_Private
+    role: private_runtime_rafaelia_zero_omega42
+    branch: main
+    commit: cebabd2178000d063aa147a4fe68521b192254a1
+    state: TESTED_SYNTHETIC_LOCAL
+  termux:
+    repository: rafaelmeloreisnovo/termux-app-rafacodephi
+    role: android_local_runtime_dispatch_and_build_environment
+    branch: master
+    commit: 508efb3d01594cc20d51b7fb01d5f2a790169bf2
+    state: IMPLEMENTATION_PRESENT_PHYSICAL_RECEIPT_PENDING
+  qemu:
+    repository: rafaelmeloreisnovo/qemu_rafaelia
+    role: guest_execution_engine
+    branch: master
+    commit: d4b3ef09956fa1abaeacba61dca3965f591c3a6a
+    state: HOST_AND_ARTIFACT_EVIDENCE_PARTIAL
+external_dependencies:
+  chunks_producer:
+    canonical_repository: TOKEN_VAZIO_REPOSITORY_RESOLUTION
+    contracts: [RAF1, RDC1, descriptor_size_64]
+    artifact_path: TOKEN_VAZIO
+    sha256: TOKEN_VAZIO
+    blake3: TOKEN_VAZIO
+    count: TOKEN_VAZIO
+invariants:
+  - exact_commit_required_in_every_receipt
+  - no_runtime_claim_from_unpinned_head
+  - no_artifact_claim_without_sha256
+  - blake3_absence_must_be_explicit
+  - physical_runtime_requires_device_manifest_and_exit_status
+  - private_body_must_not_enter_public_receipts
+closure:
+  cycle: C01
+  identity: PASS_DOCUMENTARY
+  commit_pinning: PASS_DOCUMENTARY
+  artifacts: TOKEN_VAZIO_UNTIL_MATERIALIZED
+  physical_receipts: TOKEN_VAZIO
+  overall: PASS_DOCUMENTARY_WITH_TOKEN_VAZIO
