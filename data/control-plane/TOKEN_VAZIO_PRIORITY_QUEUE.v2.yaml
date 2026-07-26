@@ -1,0 +1,129 @@
+schema: rafaelia.token-vazio-priority-queue.v2
+generated_at: '2026-07-26'
+claim_allowed: false
+ordering_rule: dependency_then_risk_then_information_gain
+items:
+- priority: 1
+  id: TV-C02-C03-HOST-RECEIPTS
+  state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  scope:
+  - RafPolimata
+  depends_on: []
+  action: executar validators host C02/C03 e preservar receipts ligados ao commit
+  expected_artifacts:
+  - runtime_truth_receipt.json
+  - segment_v1_abi_report.json
+  promotion_gate: receipts parseaveis, hashes conferidos e sem zero-step
+- priority: 2
+  id: TV-C04-C06-BUILD-RECEIPTS
+  state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  scope:
+  - RafPolimata
+  - Vectras-VM-Android
+  depends_on:
+  - TV-C02-C03-HOST-RECEIPTS
+  action: produzir APK dual ABI, executar matriz NDK e fechar proveniencia/SBOM
+  expected_artifacts:
+  - apkc-structural-closure.json
+  - c05-freestanding-closure.json
+  - provenance_closure_report.json
+  promotion_gate: artefatos reais, hashes, toolchain e licencas registrados
+- priority: 3
+  id: TV-C07-C08-ANDROID-RUNTIME
+  state: TOKEN_VAZIO_PHYSICAL_DEVICE
+  scope:
+  - Vectras-VM-Android
+  - termux-app-rafacodephi
+  depends_on:
+  - TV-C04-C06-BUILD-RECEIPTS
+  action: validar IPC e executar transacoes nonce-bound separadas em ARMv7 e AArch64
+  expected_artifacts:
+  - vectras-termux-ipc-v3.json
+  - termux-provider-v3.json
+  - c08_device_evidence_receipt.json
+  promotion_gate: request, APKs, nonce, marcadores e output ligados por hashes
+- priority: 4
+  id: TV-C09-REAL-CORPUS
+  state: TOKEN_VAZIO_REAL_ARTIFACT_NOT_OBSERVED
+  scope:
+  - Rafaelia_Private
+  - CONVERSATIONS_CHUNKS_PRIVATE
+  depends_on: []
+  action: materializar descriptor-only privado e gerar receipt sem expor corpo
+  expected_artifacts:
+  - raf.omega42-descriptor-artifact-receipt.v1
+  promotion_gate: SHA-256 obrigatorio, BLAKE3 ou token explicito, count e origem pinada
+- priority: 5
+  id: TV-BITRAF-FEC
+  state: TOKEN_VAZIO_FEC_VALIDATED
+  scope:
+  - RafPolimata
+  - papers
+  - Clay-Maths
+  depends_on: []
+  action: corrigir inicializacao e implementar suite FEC com erros, erasures e fronteiras
+  expected_artifacts:
+  - fec_vectors.jsonl
+  - fec_receipt.json
+  - formal_capacity_note.md
+  promotion_gate: condicao 2t+e<d, posto e vetores adversariais reproduzidos
+- priority: 6
+  id: TV-SQMEDIAN-QEMU-SOURCE
+  state: TOKEN_VAZIO_QEMU_SOURCE_BUILT
+  scope:
+  - qemu_rafaelia
+  - Vectras-VM-Android
+  - papers
+  - Mapa
+  depends_on: []
+  action: concluir qemu-i386/qemu-x86_64 source-built e depois definir IPC v4 linux-user
+  expected_artifacts:
+  - qemu-linux-user-source-receipt.json
+  - ipc-v4-profile-contract.json
+  - android-dispatch-receipt.json
+  promotion_gate: QEMU source-built executa ELF32/ELF64 e IPC nao amplia allowlist implicitamente
+- priority: 7
+  id: TV-ORCID-RLL-REAL-SYNC
+  state: TOKEN_VAZIO_ORCID_REAL_SYNC
+  scope:
+  - relativity-living-light
+  depends_on: []
+  action: executar primeira sincronizacao somente leitura com credencial efemera
+  expected_artifacts:
+  - orcid_sync_receipt.v1.json
+  promotion_gate: idempotencia, conflitos, cadeia SHA-256 e ausencia de secrets
+- priority: 8
+  id: TV-DRIVE-FULL-COVERAGE-RCLONE
+  state: TOKEN_VAZIO_FULL_DRIVE_COVERAGE
+  scope:
+  - Google Drive
+  - Termux
+  - Mapa
+  depends_on: []
+  action: inventariar Drive paginado e executar rclone somente copy/read-back
+  expected_artifacts:
+  - drive_registry.full.jsonl
+  - rclone_concepts_receipt.v1.json
+  promotion_gate: sem sync/delete/purge/move; deduplicacao por hash e rollback preservados
+- priority: 9
+  id: TV-C10-BENCHMARK-PUBLICATION
+  state: TOKEN_VAZIO_PUBLICATION_BLOCKED
+  scope:
+  - papers
+  - Mapa
+  depends_on:
+  - TV-C02-C03-HOST-RECEIPTS
+  - TV-C04-C06-BUILD-RECEIPTS
+  - TV-C07-C08-ANDROID-RUNTIME
+  - TV-C09-REAL-CORPUS
+  action: executar claim gate, benchmark pre-registrado, replicacao e somente depois preparar DOI
+  expected_artifacts:
+  - claim-gate-report.json
+  - benchmark_raw.jsonl
+  - replication_receipt.json
+  - doi_deposit_receipt.json
+  promotion_gate: p50/p95/p99, correctness, failure rate, baseline equivalente e revisao interna
+r3:
+  f_ok: fila ordenada por dependencia e artefato esperado
+  f_gap: nenhum item de execucao foi artificialmente promovido
+  f_next: iniciar pelo primeiro item executavel no ambiente disponivel e registrar resultado negativo ou positivo

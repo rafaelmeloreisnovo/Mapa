@@ -1,0 +1,88 @@
+schema: rafaelia.repository-memory-map-reconciliation.v2
+generated_at: '2026-07-26'
+claim_allowed: false
+control_plane:
+  repository: rafaelmeloreisnovo/Mapa
+  base_branch: main
+  observed_main_commit: 39c51d83008267fc23d8143555940ce79b6f17ca
+  working_branch: consolidation/repos-memory-map-v2-20260726
+  canonical_owner: Mapa
+authority_model:
+  Google_Drive: memoria editorial, fontes, revisoes e snapshots
+  GitHub: verdade versionada, codigo, schemas, testes, PRs e CI
+  Mapa: catalogo de autoridades, grafo de estados, gates, ledger e roteamento
+  session_memory: contexto temporario; nao substitui artefato ou commit
+merged_packets:
+- pr: 58
+  state: MERGED
+  scope: indice canonico com 101 referencias, 99 HEADs e 2258 fontes hasheadas
+- pr: 59
+  state: MERGED
+  scope: gate de reconstrucao semantica contextual
+- pr: 60
+  state: MERGED
+  scope: integracao de 16 fontes anexas, 7 corpos e 9 aliases
+- pr: 61
+  state: MERGED
+  scope: consolidacao X0 + home + Drive; 10440 ocorrencias brutas
+- pr: 66
+  state: MERGED
+  scope: auditoria pronto/gaps/TOKEN_VAZIO e plano de 10 ciclos
+- pr: 68
+  state: MERGED
+  scope: C08-C10 canonicos e estado mestre C01-C10
+- pr: 69
+  state: MERGED
+  scope: memoria cientifica, quatro tintas, coesao e drift
+- pr: 70
+  state: MERGED
+  scope: proveniencia e claims BLAKE3
+- pr: 71
+  state: MERGED
+  scope: BITRAF perda, erasure, sindrome e vetor
+open_packets:
+- pr: 72
+  state: OPEN_MERGEABLE
+  scope: PoC square-median x32/x64
+  head: d06c0458a8cdcbc08cad870ddf449c3aa9bd9a3b
+  gates:
+  - source_built_qemu_i386
+  - source_built_qemu_x86_64
+  - vectras_linux_user_profile
+  - android_dispatch
+completed_backlog:
+  P0.3:
+    state: PASS
+    evidence:
+    - 'rafaelmeloreisnovo/papers PR #25'
+    - 'papers PR #27'
+    - 'papers PR #28'
+  P0.4:
+    state: PASS_IN_BRANCH
+    artifact: schemas/latent-artifact.schema.json
+  P0.5:
+    state: PASS_IN_BRANCH
+    artifacts:
+    - schemas/paper-claim-ledger.schema.json
+    - data/latents/latents.index.jsonl
+    - data/claims/paper_claims.index.jsonl
+invariants:
+- concept_is_not_implementation
+- implementation_is_not_execution
+- execution_is_not_artifact_identity
+- token_vazio_is_not_zero_or_failure
+- parable_is_not_physical_evidence
+- vector_similarity_is_not_ecc
+- workflow_created_is_not_steps_executed
+- merged_documentation_is_not_physical_runtime
+priority_queue_ref: data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v2.yaml
+validation:
+  schema_parse: PASS_LOCAL
+  latent_records: 6
+  claim_records: 6
+  claim_allowed_true_count: 0
+  validator: scripts/validate_latents_papers_registry.py
+r3:
+  f_ok: repositorios, memoria editorial, Mapa e papers receberam uma camada unica de reconciliacao; schemas e ledgers minimos foram materializados
+  f_gap: execucao fisica, corpus real, cobertura integral do Drive, rclone atual, FEC validado, QEMU source-built, sync ORCID real e benchmarks permanecem abertos
+  f_next: executar a fila por dependencia e anexar receipts imutaveis antes de promover qualquer claim
