@@ -1,0 +1,1 @@
+Receipt instrumentation is implementation; only a completed run is proof.
