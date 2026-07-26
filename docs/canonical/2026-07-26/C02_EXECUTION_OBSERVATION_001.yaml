@@ -4,30 +4,36 @@ observation_id: C02-GHA-20260726-001
 observed_at: '2026-07-26'
 repository: rafaelmeloreisnovo/RafPolimata
 pull_request: 167
-head_commit: e175c5c4752244a80a8dfa60d932bd10b6003862
+head_commit: 55b057e22633c4e43814b40d6684315d1911ff50
 workflow:
   name: Runtime Truth Receipt
-  run_id: 30192393839
-  run_number: 1
+  latest_run_id: 30193239120
   status: completed
   conclusion: failure
 attempts:
   - attempt: 1
+    run_id: 30192393839
     job_id: 89767890981
-    job_name: local-truth
-    status: completed
-    conclusion: failure
+    trigger: pull_request
     steps_observed: 0
     logs_available: false
     log_fetch_result: HTTP_404_BLOB_NOT_FOUND
   - attempt: 2
-    trigger: rerun_failed_jobs
+    run_id: 30192393839
     job_id: 89768503826
-    job_name: local-truth
-    status: completed
-    conclusion: failure
+    trigger: rerun_failed_jobs
     steps_observed: 0
     logs_available: false
+  - attempt: 3
+    run_id: 30193239120
+    job_id: 89770111984
+    trigger: path_normalization_fix_commit
+    steps_observed: 0
+    logs_available: false
+implementation_fix_between_attempts:
+  commit: 55b057e22633c4e43814b40d6684315d1911ff50
+  change: normalize relative receipt output against repository root
+  execution_observed: false
 corroboration:
   workflow: CI
   run_id: 30192393811
@@ -40,6 +46,7 @@ interpretation:
   code_execution_observed: false
   runtime_truth_gate_executed: false
   build_doctor_executed: false
+  path_fix_executed: false
   code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
   claim_allowed: false
 forbidden_inference:
@@ -47,12 +54,13 @@ forbidden_inference:
   - zero_steps_implies_test_failure
   - missing_logs_implies_code_error
   - repeated_zero_steps_implies_repeated_code_failure
+  - implementation_fix_commit_implies_fix_verified
 next_actions:
   - preserve PR and instrumentation
   - execute receipt wrapper in local Linux or Termux checkout
   - do not repeat Actions until runner startup conditions change
   - require uploaded artifact before promotion
 r3:
-  f_ok: workflow registration and repeated infrastructure behavior proven
-  f_gap: runner startup command execution logs and receipts absent
+  f_ok: workflow registration three infrastructure observations and path fix implementation proven
+  f_gap: runner startup command execution logs receipts and fix verification absent
   f_next: local execution in Linux or Termux checkout
