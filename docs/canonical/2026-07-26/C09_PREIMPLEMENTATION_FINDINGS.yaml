@@ -1,0 +1,46 @@
+schema: rafaelia.preimplementation-findings.v1
+cycle_id: C09
+observed_at: '2026-07-26'
+consumer_repository: rafaelmeloreisnovo/Rafaelia_Private
+consumer_commit: cebabd2178000d063aa147a4fe68521b192254a1
+producer_contract:
+  repository: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE
+  commit: 0ee3e75d8c2a045c1f0dd764ad51c6f173d75741
+  descriptor_header_path: enterprise/chunk_export/include/raf_chunk_export.h
+  descriptor_header_git_blob_sha1: 8627b46a3ee7de0015bde3a36824943c1d5d1b33
+  abi: RAF1_RDC1_64
+findings:
+  - id: C09-F01
+    state: GAP_CONFIRMED
+    description: consumer accepts native struct pointer but has no canonical little-endian byte decoder for a real artifact
+    risk: host endianness alignment or producer serialization assumptions could be hidden
+  - id: C09-F02
+    state: GAP_CONFIRMED
+    description: reserved descriptor words are not explicitly rejected when nonzero
+    risk: undeclared extension semantics could enter the consumer
+  - id: C09-F03
+    state: GAP_CONFIRMED
+    description: unknown descriptor flag bits are not explicitly rejected
+    risk: future or malicious flags could be silently aggregated
+  - id: C09-F04
+    state: GAP_CONFIRMED
+    description: no streaming hosted runner consumes one real 64-byte descriptor at a time
+    risk: synthetic struct tests do not prove artifact decoding
+  - id: C09-F05
+    state: TOKEN_VAZIO
+    description: descriptor artifact path hash count and source chunk-set hash remain absent
+privacy_boundary:
+  private_body_copied: false
+  descriptor_only_artifact: required
+  public_receipts_may_contain:
+    - hashes
+    - counts
+    - offsets
+    - ABI identifiers
+    - state digest
+  public_receipts_must_not_contain:
+    - conversation body
+    - raw message text
+    - private source path
+claim_allowed: false
+next_action: add canonical decoder strict flags and reserved validation streaming hosted runner manifest validator and synthetic falsifier tests

@@ -3,7 +3,7 @@ created_at: '2026-07-26'
 state: CANONICAL_DRAFT
 claim_allowed: false
 policy:
-  accepted_states: [RESOLVED_EXACT, RESOLVED_CONTEXTUAL, PROVISIONAL, TOKEN_VAZIO_ALIAS_RESOLUTION]
+  accepted_states: [RESOLVED_EXACT, RESOLVED_CONTEXTUAL, RESOLVED_CONTRACTUAL_NOT_FETCHED, PROVISIONAL, TOKEN_VAZIO_ALIAS_RESOLUTION]
   prohibition: alias provisório não substitui identidade de repositório em build, hash, receipt ou claim
 aliases:
   - alias: Rafa22
@@ -48,23 +48,38 @@ aliases:
     repository: rafaelmeloreisnovo/qemu_rafaelia
   - alias: CONVERSATIONS_CHUNKS_PRIVATE
     normalized: conversations_chunks_private
-    state: TOKEN_VAZIO_ALIAS_RESOLUTION
-    repository: TOKEN_VAZIO_REPOSITORY_RESOLUTION
-    known_role: produtor ou armazenamento privado de chunks e descritores
-    required_evidence:
-      - repository_or_drive_identity
-      - producer_commit
-      - descriptor_contract_version
-      - artifact_path_and_hashes
+    state: RESOLVED_CONTRACTUAL_NOT_FETCHED
+    repository: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE
+    commit: 0ee3e75d8c2a045c1f0dd764ad51c6f173d75741
+    known_role: produtor privado de chunks e descritores RAF1/RDC1/64
+    contractual_evidence:
+      consumer_repository: rafaelmeloreisnovo/Rafaelia_Private
+      consumer_base_commit: cebabd2178000d063aa147a4fe68521b192254a1
+      corpus_pointer: native/omega42_chunk_bridge/contracts/corpus_pointer.json
+      implementation_status: native/omega42_chunk_bridge/docs/IMPLEMENTATION_STATUS_20260720.md
+      descriptor_header_path: enterprise/chunk_export/include/raf_chunk_export.h
+      descriptor_header_git_blob_sha1: 8627b46a3ee7de0015bde3a36824943c1d5d1b33
+      descriptor_abi: RAF1/RDC1/64
+    repository_content_observed_directly: false
+    artifact_evidence_still_missing:
+      - descriptor_artifact_private_path
+      - descriptor_artifact_sha256
+      - descriptor_artifact_blake3
+      - descriptor_count
+      - source_chunk_set_sha256
+    rule: identidade contratual permite pin e contrato; não permite declarar artifact, conteúdo ou execução observados
 validation_rules:
   - aliases_do_not_change_repository_full_name
   - aliases_cannot_be_source_commit
   - provisional_alias_requires_token_vazio_in_manifests
   - contextual_resolution_is_navigation_not_cryptographic_identity
+  - contractual_not_fetched_resolution_requires_exact_consumer_pointer_commit_and_header_blob
+  - contractual_not_fetched_resolution_does_not_prove_repository_access_or_artifact_materialization
 closure:
-  cycle: C01
+  cycle: C09
   exact_aliases: PASS_DOCUMENTARY
   contextual_aliases: PASS_DOCUMENTARY
   rafa22: TOKEN_VAZIO_ALIAS_RESOLUTION
-  chunks_private: TOKEN_VAZIO_REPOSITORY_RESOLUTION
+  chunks_private_identity: RESOLVED_CONTRACTUAL_NOT_FETCHED
+  chunks_private_artifact: TOKEN_VAZIO_NOT_MATERIALIZED
   overall: PASS_DOCUMENTARY_WITH_TOKEN_VAZIO

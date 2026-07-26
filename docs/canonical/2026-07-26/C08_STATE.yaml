@@ -1,0 +1,95 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C08
+name: device_and_guest_boot_evidence
+created_at: '2026-07-26'
+state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS
+claim_allowed: false
+repository: rafaelmeloreisnovo/Vectras-VM-Android
+stack_base:
+  branch: c07/vectras-termux-qemu-receipt-2026-07-26
+  base_commit: 0fed85a4f5ce140f430fb03aabbef4edcf00ffee
+implementation:
+  pull_request: 1071
+  branch: c08/device-evidence-closure-2026-07-26
+  head_commit: edcdc292166a41c257e5712d2c1cd0bde27c7f83
+  changed_files: 12
+  files:
+    - app/src/main/java/com/vectras/vm/integration/GuestBootEvidenceContract.kt
+    - app/src/main/java/com/vectras/vm/integration/VectrasTermuxIpcContract.kt
+    - app/src/main/java/com/vectras/vm/integration/VectrasTermuxBridge.kt
+    - app/src/main/java/com/vectras/vm/integration/VectrasTermuxReceiptStore.kt
+    - app/src/main/java/com/vectras/vm/integration/VectrasTermuxResultReceiver.kt
+    - tools/device/c08_guest_marker.sh
+    - tools/device/c08_collect_device_evidence.sh
+    - tools/device/c08_validate_device_evidence.py
+    - tools/device/c08_verify_static_contract.py
+    - tests/test_c08_validate_device_evidence.py
+    - docs/active/C08_DEVICE_EVIDENCE_CLOSURE_2026-07-26.md
+    - .github/workflows/c08-device-evidence-contract.yml
+challenge_contract:
+  schema: raf.guest-boot-evidence.v1
+  nonce_source: SecureRandom_32_BYTES
+  nonce_encoding: lowercase_hex_64
+  bound_to_request_hash: true
+  guest_argument_prefix: rafaelia.boot_nonce=
+  required_markers:
+    - RAFAELIA_GUEST_BOOT_V1
+    - RAFAELIA_GUEST_USERSPACE_V1
+    - RAFAELIA_GUEST_SHUTDOWN_V1
+  required_order: boot_before_userspace_before_shutdown
+  positive_state: COMPLETE_ORDERED_EXIT_ZERO
+physical_collector:
+  schema: raf.android-device-manifest.v1
+  closure_schema: raf.c08-device-evidence-closure.v1
+  positive_state: PASS_DEVICE_EVIDENCE_LIMITED
+  collection_method: adb_exec_out_run_as
+  root_required: false
+  logcat_cleared: false
+  logcat_primary_evidence: false
+  exported_test_component: false
+  raw_serial_persisted: false
+  raw_fingerprint_persisted: false
+  raw_apk_paths_retained: false
+  raw_dumpsys_retained: false
+  raw_run_as_diagnostics_retained: false
+required_physical_outputs:
+  - collector_status.json
+  - device_manifest.json
+  - request.json
+  - receipt.json
+  - c08_device_evidence_receipt.json
+execution_observation:
+  workflow_name: C08 Device Evidence Contract
+  workflow_run_id: 30195704070
+  job_id: 89776751627
+  job_name: static-contract
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+  code_execution_observed: false
+  python_checks_executed: false
+  shell_checks_executed: false
+  kotlin_compile_executed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+token_vazio:
+  - static_contract_receipt
+  - kotlin_compile_result
+  - validator_test_result
+  - physical_device_manifest
+  - installed_vectras_apk_hashes
+  - installed_termux_apk_hashes
+  - run_command_permission_receipt
+  - real_request
+  - real_termux_result_bundle
+  - real_guest_markers
+  - arm32_device_execution
+  - arm64_device_execution
+promotion_boundary:
+  one_device_one_transaction: VERIFIED_LIMITED_ONLY_AFTER_PHYSICAL_PASS
+  other_devices: TOKEN_VAZIO
+  other_images: TOKEN_VAZIO
+  other_qemu_builds: TOKEN_VAZIO
+  vm_correctness_beyond_markers: TOKEN_VAZIO
+  performance_claim: FORBIDDEN_OUT_OF_SCOPE
+  claim_allowed: false
+next_action: execute static contract locally, build debug APKs, run nonce-bound guest and collect internal request/receipt through run-as
