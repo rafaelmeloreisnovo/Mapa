@@ -6,6 +6,7 @@ Esta área registra leituras que cruzam múltiplas fontes sem confundir soma bru
 
 - [`X0_HOME_DRIVE_CONSOLIDATION_2026-07-25.md`](X0_HOME_DRIVE_CONSOLIDATION_2026-07-25.md): análise, mitigação e riscos remanescentes.
 - [`X0_HOME_DRIVE_MANIFEST_2026-07-25.json`](X0_HOME_DRIVE_MANIFEST_2026-07-25.json): estado legível por máquina, fontes, contagens, gates e `TOKEN_VAZIO`.
+- [`DRIVE_ANALOG_SOURCE_REGISTRY_2026-07-25.json`](DRIVE_ANALOG_SOURCE_REGISTRY_2026-07-25.json): nomes exatos, fontes análogas, menções de inventário e gate de promoção sem substituição automática.
 
 ## Invariante de contagem
 
@@ -15,6 +16,16 @@ ocorrência observada
 ≠ artefato canônico
 ≠ componente executável
 ≠ capacidade validada
+```
+
+## Invariante de proveniência
+
+```text
+nome análogo
+≠ mesmo conteúdo
+≠ mesmo contrato
+≠ autoridade canônica
+≠ permissão de executar
 ```
 
 Toda consolidação deve preservar:
