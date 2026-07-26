@@ -1,0 +1,69 @@
+name: Memory Cohesion Registry
+
+on:
+  push:
+    branches: [main, "integration/**", "claude/**"]
+    paths:
+      - "indices/MEMORY_COHESION_REGISTRY.v1.jsonl"
+      - "schemas/federated_memory_pointer.v1.schema.json"
+      - "scripts/validate_memory_cohesion_registry.py"
+      - "tests/test_memory_cohesion_registry.py"
+      - "workflows/PAPERS_MEMORY_COHESION_ROUTE.md"
+      - ".github/workflows/memory-cohesion-registry.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "indices/MEMORY_COHESION_REGISTRY.v1.jsonl"
+      - "schemas/federated_memory_pointer.v1.schema.json"
+      - "scripts/validate_memory_cohesion_registry.py"
+      - "tests/test_memory_cohesion_registry.py"
+      - "workflows/PAPERS_MEMORY_COHESION_ROUTE.md"
+      - ".github/workflows/memory-cohesion-registry.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-memory-registry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Validate pointer registry
+        run: |
+          mkdir -p artifacts/memory-cohesion-map
+          python scripts/validate_memory_cohesion_registry.py \
+            --report artifacts/memory-cohesion-map/VALIDATION_REPORT.json
+
+      - name: Run fail-closed tests
+        run: python -m pytest -q tests/test_memory_cohesion_registry.py
+
+      - name: Seal control-plane inputs
+        run: |
+          sha256sum \
+            schemas/federated_memory_pointer.v1.schema.json \
+            indices/MEMORY_COHESION_REGISTRY.v1.jsonl \
+            scripts/validate_memory_cohesion_registry.py \
+            tests/test_memory_cohesion_registry.py \
+            > artifacts/memory-cohesion-map/FILES.sha256
+          printf '%s\n' \
+            'CONTROL_PLANE=rafaelmeloreisnovo/Mapa' \
+            'PRODUCER=rafaelmeloreisnovo/papers' \
+            'CLAIM_ALLOWED=false' \
+            'SOURCE_SHA256=TOKEN_VAZIO' \
+            'DEVICE_EVIDENCE=TOKEN_VAZIO' \
+            > artifacts/memory-cohesion-map/BOUNDARY.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: memory-cohesion-map
+          path: artifacts/memory-cohesion-map/
+          retention-days: 30
