@@ -1,0 +1,108 @@
+{
+  "schema_version": "rafaelia.cross-repo-evidence-packet/v1",
+  "packet_id": "evidence:square-median-x3264-20260726",
+  "title": "Median-contact square rotations and bounded x86-32/x86-64 proof of concept",
+  "source_request": {
+    "repository": "rafaelmeloreisnovo/papers",
+    "pull_request": 26,
+    "issue_comment_id": 5085010125,
+    "state": "AUTHORIAL_SOURCE"
+  },
+  "authorities": {
+    "scientific": "rafaelmeloreisnovo/papers",
+    "execution": "rafaelmeloreisnovo/qemu_rafaelia",
+    "android_consumer": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "control_plane": "rafaelmeloreisnovo/Mapa"
+  },
+  "pointers": [
+    {
+      "evidence_id": "EVID-SMR-PAPERS-PR28",
+      "provider": "github",
+      "kind": "pull_request",
+      "repository": "rafaelmeloreisnovo/papers",
+      "pr_number": 28,
+      "ref": "9bdf03839d5249c592894ad17f44f4276a8a52d6",
+      "path": "papers/square_median_rotation_x3264_v1/paper.md",
+      "state": "OPEN_UNMERGED_VERIFIED_LOCAL",
+      "supports": ["SMR-MATHEMATICS", "SMR-CLAIMS-LEDGER"],
+      "limitations": ["Remote workflow receipt is not yet observed.", "Open PR is not default-branch authority."],
+      "claim_allowed": false
+    },
+    {
+      "evidence_id": "EVID-SMR-QEMU-PR65",
+      "provider": "github",
+      "kind": "pull_request",
+      "repository": "rafaelmeloreisnovo/qemu_rafaelia",
+      "pr_number": 65,
+      "ref": "97e1e4efaf706818d74448155ee1adb494e84475",
+      "path": "tests/tcg/multiarch/rafaelia-square-median.c",
+      "state": "OPEN_UNMERGED_LOCAL_RECEIPT",
+      "supports": ["SMR-X86-32-BUILD", "SMR-X86-64-NATIVE", "SMR-TCG-INTEGRATION", "SMR-DETERMINANT-AREA-GATE"],
+      "limitations": ["Source-built qemu-i386 execution remains TOKEN_VAZIO.", "Source-built qemu-x86_64 execution remains TOKEN_VAZIO.", "Full-system guest boot is outside this PoC."],
+      "claim_allowed": false
+    },
+    {
+      "evidence_id": "EVID-SMR-QEMU-LOCAL-RECEIPT",
+      "provider": "github",
+      "kind": "file",
+      "repository": "rafaelmeloreisnovo/qemu_rafaelia",
+      "ref": "97e1e4efaf706818d74448155ee1adb494e84475",
+      "path": "tests/rafaelia/receipts/2026-07-26-square-median-local.json",
+      "state": "VERIFIED_LOCAL_BOUNDED",
+      "supports": ["SMR-EXACT-REFERENCE", "SMR-DETERMINANT-AREA-GATE", "SMR-X86-32-BUILD", "SMR-X86-64-NATIVE"],
+      "limitations": ["x86-32 native execution returned Exec format error.", "QEMU executor was unavailable locally.", "Exact checkout SHA-256 awaits workflow sealing."],
+      "claim_allowed": false
+    },
+    {
+      "evidence_id": "EVID-SMR-VECTRAS-PR1072",
+      "provider": "github",
+      "kind": "pull_request",
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "pr_number": 1072,
+      "ref": "f74ad1ed5475df74f1d24c045bab9ecd5f4c0d6e",
+      "path": "docs/contracts/VECTRAS_X3264_SQUARE_MEDIAN_POC_V1.json",
+      "state": "OPEN_UNMERGED_BLOCKED_PROFILE_MISMATCH",
+      "supports": ["SMR-VECTRAS-CONSUMER-BOUNDARY"],
+      "limitations": ["IPC v3 is a qemu-system profile, not a qemu linux-user profile.", "Android dispatch is blocked until typed IPC v4 exists."],
+      "claim_allowed": false
+    }
+  ],
+  "relations": [
+    {
+      "from": "EVID-SMR-PAPERS-PR28",
+      "relation": "specifies",
+      "to": "EVID-SMR-QEMU-PR65"
+    },
+    {
+      "from": "EVID-SMR-QEMU-LOCAL-RECEIPT",
+      "relation": "bounded_evidence_for",
+      "to": "EVID-SMR-QEMU-PR65"
+    },
+    {
+      "from": "EVID-SMR-VECTRAS-PR1072",
+      "relation": "consumer_boundary_for",
+      "to": "EVID-SMR-QEMU-PR65"
+    }
+  ],
+  "gates": {
+    "exact_mathematics": "VERIFIED_LOCAL",
+    "determinant_area_gate": "VERIFIED_LOCAL",
+    "claims_ledger": "VERIFIED_LOCAL",
+    "elf32_build": "VERIFIED_LOCAL",
+    "elf64_native_execution": "VERIFIED_LOCAL",
+    "source_built_qemu_i386": "TOKEN_VAZIO_PENDING_WORKFLOW",
+    "source_built_qemu_x86_64": "TOKEN_VAZIO_PENDING_WORKFLOW",
+    "vectras_linux_user_profile": "TOKEN_VAZIO_NOT_IMPLEMENTED",
+    "android_dispatch": "TOKEN_VAZIO",
+    "full_system_guest_boot": "NOT_IN_SCOPE",
+    "ecc_or_physical_memory_application": "TOKEN_VAZIO_NO_EXPERIMENT"
+  },
+  "next_actions": [
+    "Observe qemu_rafaelia PR 65 workflow steps and artifacts.",
+    "Record qemu-i386 and qemu-x86_64 exit codes and binary hashes.",
+    "Implement Vectras IPC v4 with separate SYSTEM_VM and LINUX_USER profiles.",
+    "Update pointers to immutable merge commits after review.",
+    "Keep performance and ECC claims blocked until dedicated experiments exist."
+  ],
+  "claim_allowed": false
+}
