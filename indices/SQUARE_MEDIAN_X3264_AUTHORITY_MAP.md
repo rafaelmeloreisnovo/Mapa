@@ -19,13 +19,14 @@ Mapa
 
 | Object | Canonical repository | Current pointer | State |
 |---|---|---|---|
-| Mathematical definitions and proofs | `papers` | PR #28 / `c9360ec4...` | `OPEN_UNMERGED_VERIFIED_LOCAL` |
+| Mathematical definitions and proofs | `papers` | PR #28 / `9bdf0383...` | `OPEN_UNMERGED_VERIFIED_LOCAL` |
 | Claims and falsifiers | `papers` | `claims.jsonl` in PR #28 | `VERIFIED_LOCAL` |
-| Exact executable kernel | `qemu_rafaelia` | PR #65 / `edc5e6fa...` | `OPEN_UNMERGED_LOCAL_RECEIPT` |
+| Exact executable kernel | `qemu_rafaelia` | PR #65 / `97e1e4ef...` | `OPEN_UNMERGED_LOCAL_RECEIPT` |
+| Determinant and area gate | `qemu_rafaelia` | C + rational reference | `VERIFIED_LOCAL` |
 | x86-64 native execution | `qemu_rafaelia` receipt | exit `0` | `VERIFIED_LOCAL` |
 | x86-32 ELF construction | `qemu_rafaelia` receipt | ELF32 i386 | `VERIFIED_LOCAL_BUILD_ONLY` |
 | source-built QEMU i386/x86_64 execution | `qemu_rafaelia` workflow | PR #65 | `TOKEN_VAZIO_PENDING_WORKFLOW` |
-| Android consumer profile | `Vectras-VM-Android` | PR #1072 | `BLOCKED_PROFILE_MISMATCH` |
+| Android consumer profile | `Vectras-VM-Android` | PR #1072 / `f74ad1ed...` | `BLOCKED_PROFILE_MISMATCH` |
 | Cross-repository custody | `Mapa` | evidence packet V1 | `ACTIVE_DRAFT` |
 
 ## Mathematical invariant
@@ -40,6 +41,7 @@ side midpoints, and satisfy:
 
 ```text
 T±ᵀT± = (1/2)I
+det(T±) = 1/2
 T+T- = T-T+ = (1/2)I
 T-⁴ = -(1/4)I
 T-⁸ = (1/16)I
