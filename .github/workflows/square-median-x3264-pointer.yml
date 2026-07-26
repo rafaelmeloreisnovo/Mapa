@@ -1,0 +1,58 @@
+name: Square Median x3264 Pointer
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "data/control-plane/evidence_pointer_square_median_x3264.v1.json"
+      - "indices/SQUARE_MEDIAN_X3264_AUTHORITY_MAP.md"
+      - "scripts/validate_square_median_x3264_pointer.py"
+      - "tests/test_square_median_x3264_pointer.py"
+      - ".github/workflows/square-median-x3264-pointer.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-cross-repo-packet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python syntax
+        run: |
+          python3 -m py_compile \
+            scripts/validate_square_median_x3264_pointer.py \
+            tests/test_square_median_x3264_pointer.py
+
+      - name: Pointer tests
+        run: python3 -m unittest -v tests/test_square_median_x3264_pointer.py
+
+      - name: Emit control-plane report
+        run: |
+          python3 scripts/validate_square_median_x3264_pointer.py \
+            --repo-root . \
+            --output artifacts/square-median-x3264/pointer-report.json
+
+      - name: Seal packet
+        run: |
+          sha256sum \
+            data/control-plane/evidence_pointer_square_median_x3264.v1.json \
+            indices/SQUARE_MEDIAN_X3264_AUTHORITY_MAP.md \
+            scripts/validate_square_median_x3264_pointer.py \
+            tests/test_square_median_x3264_pointer.py \
+            > artifacts/square-median-x3264/FILES.sha256
+          printf '%s\n' \
+            'cross_repo_pointer=PASS_STATIC' \
+            'qemu_source_runtime=TOKEN_VAZIO_PENDING_WORKFLOW' \
+            'vectras_linux_user_profile=TOKEN_VAZIO_NOT_IMPLEMENTED' \
+            'android_dispatch=TOKEN_VAZIO' \
+            'claim_allowed=false' \
+            > artifacts/square-median-x3264/BOUNDARY.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: square-median-x3264-pointer-${{ github.sha }}
+          path: artifacts/square-median-x3264/
+          retention-days: 30
