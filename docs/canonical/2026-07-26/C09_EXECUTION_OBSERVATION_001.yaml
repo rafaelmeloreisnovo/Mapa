@@ -1,0 +1,55 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C09
+observation_id: C09-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/Rafaelia_Private
+pull_request: 191
+head_commit: fc90aea1932b6114b8bd0e76599e18b46cad322f
+workflow:
+  name: C09 OMEGA42 Descriptor Artifact
+  run_id: 30196355807
+  run_number: 1
+  status: completed
+  conclusion: failure
+job:
+  id: 89778484283
+  name: descriptor-contract
+  status: completed
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+intended_steps_not_observed:
+  - checkout
+  - python_and_json_syntax
+  - hosted_core_contract_tests
+  - descriptor_falsifier_tests
+  - synthetic_fixture_generation
+  - canonical_decoder_hosted_run
+  - aarch64_cross_compile
+  - armv7_cross_compile
+  - static_receipt_generation
+  - artifact_upload
+interpretation:
+  state: BLOCKED_INFRA_ZERO_JOB_STEPS
+  code_execution_observed: false
+  code_failure_demonstrated: false
+  real_artifact_observed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  claim_allowed: false
+forbidden_inference:
+  - workflow_failure_implies_decoder_failure
+  - synthetic_contract_implementation_proves_real_artifact
+  - producer_identity_contract_proves_repository_access
+  - descriptor_manifest_example_proves_materialization
+  - cross_compile_commands_present_prove_arm_execution
+next_actions:
+  - execute make all locally
+  - execute synthetic hosted runner locally
+  - materialize real descriptor-only artifact in producer authority context
+  - record real manifest hashes and counts
+  - run make real-artifact-test in private consumer context
+  - preserve only descriptor receipt and no private body
+r3:
+  f_ok: producer contract decoder runner manifest validator tests workflow and PR implemented
+  f_gap: no step log object artifact hash count or real receipt observed
+  f_next: local synthetic execution then private real artifact materialization
