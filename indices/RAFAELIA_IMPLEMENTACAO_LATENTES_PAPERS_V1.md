@@ -235,3 +235,17 @@ status = TOKEN_VAZIO
 `F_next`: criar schemas mínimos e ledger inicial para iniciar ingestão de latentes.
 
 FIAT LUX — Mapear, conectar, compreender, transformar, transcender.
+
+
+## 11. Integração de fontes anexas
+
+O lote RAFAELIA-INT-SOURCES-20260725 foi consolidado como 7 corpos-fonte e 9 aliases byte-idênticos do Atlas; o material bruto recebeu MD5, SHA-256 e BLAKE3-256. A identidade de arquivo não promove a validade de seu conteúdo: todo claim continua com claim_allowed=false até evidência, métrica, limite e falsificador específicos.
+
+```text
+indices/source-integrations/2026-07-25/
+  RAFAELIA_INTEGRACAO_FONTES_ANEXAS_2026-07-25.md
+  RAFAELIA_FONTES_ANEXAS_CUSTODY_2026-07-25.jsonl
+  RAFAELIA_INTEGRACAO_FONTES_ANEXAS_RECEIPT_2026-07-25.json
+```
+
+O registro mantém como TOKEN_VAZIO as execuções e validações pendentes de Tora, BLAKE3/RMR, Atlas, Termux, RLL e RAFBROWSER.
