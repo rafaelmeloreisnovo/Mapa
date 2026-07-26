@@ -1,0 +1,253 @@
+schema: rafaelia.gap-closure-manifest.v1
+created_at: '2026-07-26'
+state: CANONICAL_DRAFT
+claim_allowed: false
+
+identity:
+  rafa22:
+    canonical_repository: TOKEN_VAZIO_ALIAS_RESOLUTION
+    provisional_candidate: rafaelmeloreisnovo/Rafaelia_Private
+    candidate_subsystems:
+      - RAFAELIA_ZERO
+      - OMEGA42
+  rafpolimata:
+    canonical_repository: rafaelmeloreisnovo/RafPolimata
+  lectra:
+    canonical_repository: rafaelmeloreisnovo/Vectras-VM-Android
+    interpretation: Vectras-VM-Android
+
+pinset:
+  mapa:
+    repository: rafaelmeloreisnovo/Mapa
+    branch: main
+    commit: 81732c94c14edfd74180fca0e02f6252ce0ca4af
+  rafpolimata:
+    repository: rafaelmeloreisnovo/RafPolimata
+    branch: main
+    commit: b230f79b4519f398d6a0f32c2235527966f14a36
+  vectras:
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+    branch: master
+    commit: a29392e65948463ab9cb6dbfefe64eb060e23a07
+  rafaelia_private:
+    repository: rafaelmeloreisnovo/Rafaelia_Private
+    branch: main
+    commit: cebabd2178000d063aa147a4fe68521b192254a1
+  termux:
+    repository: rafaelmeloreisnovo/termux-app-rafacodephi
+    branch: master
+    commit: 508efb3d01594cc20d51b7fb01d5f2a790169bf2
+  qemu:
+    repository: rafaelmeloreisnovo/qemu_rafaelia
+    branch: master
+    commit: d4b3ef09956fa1abaeacba61dca3965f591c3a6a
+
+status_summary:
+  rafaelia_private:
+    implemented:
+      - freestanding_core
+      - caller_owned_memory
+      - rfz1_fixed_frames
+      - crc32c
+      - omega42_static_matrix
+      - synthetic_hosted_tests
+      - private_body_fail_closed
+    token_vazio:
+      - alias_resolution
+      - real_descriptor_artifact
+      - descriptor_sha256
+      - descriptor_blake3
+      - descriptor_count
+      - real_corpus_ingestion
+      - armv7_device_execution
+      - aarch64_device_execution
+      - semantic_index
+      - temporal_index
+      - privacy_receipt
+      - physical_runtime_receipt
+
+  rafpolimata:
+    implemented:
+      - epistemic_state_model
+      - formal_proof_gates
+      - runtime_state_registry
+      - segment_v1_header
+      - segment_v1_record_reader
+      - strict_c11_host_tests
+      - armv7_cross_compile
+      - aarch64_cross_compile
+      - apkc_structural_route
+    token_vazio:
+      - full_repository_local_validation
+      - streaming_conversation_extractor
+      - atomic_segment_writer
+      - checkpoint_resume
+      - blake3_record_identity
+      - real_export_ingestion
+      - accelerator_enumeration
+      - reproducible_apk
+      - apk_signature
+      - apk_install
+      - apk_launch
+      - clean_logcat
+      - termux_transport_e2e
+      - qemu_job_receipt
+
+  vectras:
+    gap_registry:
+      total: 64
+      closed: 38
+      partial: 14
+      open: 0
+      blocked_hw: 5
+      blocked_secret: 2
+      blocked_infra: 3
+      not_applicable: 2
+    implemented:
+      - canonical_build_status
+      - termux_jni_boundary
+      - zipraf_direct_runtime
+      - qemu_argv_safety
+      - spdx_baseline
+      - legal_gate
+      - hardened_apk_dex_elf_audit
+      - freestanding_host_final_link_probe
+    token_vazio:
+      - release_artifact_hashes
+      - complete_sbom
+      - device_smoke_test
+      - libxlorie_source_license
+      - rootfs_url_version_hash
+      - firmware_hashes
+      - image_distribution_decision
+      - incoming_c_asm_promotion
+      - firebase_release_secret
+      - release_pinning
+      - omega_msgs_real_seed
+      - asset_provenance
+      - rafaelia_ttl_provenance
+      - arm32_ndk_final_link_receipt
+      - arm64_ndk_final_link_receipt
+      - blake3_elf_hashes
+      - apk_install_device_receipt
+      - termux_qemu_physical_dispatch
+      - guest_boot_receipt
+
+cycles:
+  - id: C01
+    name: canonical_identity_and_pinset
+    depends_on: []
+    outputs:
+      - REPOSITORY_PINSET.yaml
+      - ALIAS_REGISTRY.yaml
+      - SOURCE_OF_TRUTH.md
+    status: ACTIVE
+
+  - id: C02
+    name: rafpolimata_local_truth
+    depends_on: [C01]
+    outputs:
+      - runtime_truth_receipt.json
+      - build_doctor_receipt.json
+      - toolchain_manifest.json
+    status: PLANNED
+
+  - id: C03
+    name: conversation_indexer
+    depends_on: [C01, C02]
+    outputs:
+      - segment_manifest.json
+      - ingestion_receipt.json
+      - checkpoint_schema.json
+    status: PLANNED
+
+  - id: C04
+    name: apkc_artifact_closure
+    depends_on: [C01, C02]
+    outputs:
+      - apk_manifest.json
+      - dex_manifest.json
+      - elf_manifests
+      - reproducibility_report.json
+    status: PLANNED
+
+  - id: C05
+    name: vectras_ndk_final_link
+    depends_on: [C01]
+    outputs:
+      - armv7_link_manifest.json
+      - aarch64_link_manifest.json
+    status: PLANNED
+
+  - id: C06
+    name: provenance_sbom_licenses
+    depends_on: [C01]
+    outputs:
+      - SBOM.spdx.json
+      - PROVENANCE_LEDGER.jsonl
+      - QUARANTINE_MANIFEST.json
+    status: PLANNED
+
+  - id: C07
+    name: vectras_termux_qemu_bridge
+    depends_on: [C01, C02, C05]
+    outputs:
+      - dispatch_request.json
+      - dispatch_receipt.json
+    status: PLANNED
+
+  - id: C08
+    name: physical_arm32_arm64_execution
+    depends_on: [C04, C05, C06, C07]
+    outputs:
+      - install_receipt.json
+      - launch_receipt.json
+      - device_manifest.json
+      - guest_boot_receipt.json
+    status: BLOCKED_HW
+
+  - id: C09
+    name: rafaelia_private_real_corpus
+    depends_on: [C03, C08]
+    outputs:
+      - descriptor_manifest.json
+      - omega42_ingestion_receipt.json
+      - privacy_receipt.json
+    status: PLANNED
+
+  - id: C10
+    name: benchmark_papers_claims
+    depends_on: [C02, C08, C09]
+    outputs:
+      - benchmark_protocol.yaml
+      - raw_results
+      - claims.jsonl
+      - contradictions.jsonl
+      - gaps.jsonl
+      - final_report.md
+    status: PLANNED
+
+promotion_rule:
+  required_fields:
+    - gate_id
+    - source_commit
+    - command_or_procedure
+    - environment
+    - exit_code
+    - artifact_path
+    - sha256
+    - receipt
+    - falsifier
+  optional_until_available:
+    - blake3
+  forbidden_inference:
+    - code_presence_implies_execution
+    - compilation_implies_device_runtime
+    - merge_implies_validation
+    - synthetic_data_implies_real_corpus
+    - documentation_implies_proof
+
+r3:
+  f_ok: arquitetura código contratos e provas locais reutilizáveis
+  f_gap: artefato atual dispositivo corpus real proveniência boot guest e recibo E2E
+  f_next: concluir C01 e iniciar C02 sobre commits congelados
