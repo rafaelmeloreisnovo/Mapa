@@ -5,7 +5,7 @@
   "interpretation": {
     "historical_intent": "continuity_anchor",
     "historical_implementation": "four_detached_persistent_organs",
-    "correction": "infinite_loop_is_valid_when_supervised_transactional_and_stoppable"
+    "correction": "infinite_loop_is_valid_when_supervised_transactional_stoppable_and_closed_by_signature"
   },
   "authorities": {
     "historical_source": {
@@ -18,19 +18,20 @@
     "historical_archaeology": {
       "repository": "rafaelmeloreisnovo/X0",
       "branch": "docs/anchor-loop-historical-contract",
-      "head_observed": "6fcfd863ad8a53e974d685a36f6e1623bbb59beb",
+      "head_observed": "b8825df1fe24edf2c5ab4ae2c2baca625505a6a8",
       "state": "DOCUMENTED_BRANCH"
     },
     "operational_runtime": {
       "repository": "rafaelmeloreisnovo/home",
       "branch": "feat/rafaelia-anchor-loop-v2",
-      "head_observed": "3436b563e2db6392becb649cc832aecf2d1ec6f1",
+      "head_observed": "bda58fbcdfd0ec46def4ea0a55f19e71e42d5390",
       "state": "IMPLEMENTED_BRANCH",
       "entrypoint": "RAFAELIA_ANCHOR_LOOP.sh",
       "service": ".termux/services/rafaelia-anchor/run"
     },
     "control_plane": {
       "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "consolidation/anchor-loop-authority",
       "state": "CANONICAL_CONTROL_RECORD"
     }
   },
@@ -60,11 +61,16 @@
     "rollback_without_cycle_advance": true,
     "json_to_shell": false,
     "legacy_next_action_execution": false,
-    "next_action_id_execution": false
+    "next_action_id_execution": false,
+    "baseline_policy": "bootstrap_existing_state_once",
+    "changed_state_default": "pending_review",
+    "promotion_gate": "exact_sha256_approval_then_reverify",
+    "auto_commit_default": false,
+    "auto_commit_opt_in_env": "RAFAELIA_ANCHOR_AUTO_COMMIT=1"
   },
   "evidence": {
     "syntax_tests": "PASS_LOCAL",
-    "functional_temp_home_test": "PASS_LOCAL",
+    "functional_temp_home_test": "PASS_LOCAL_BASELINE_HEARTBEAT_PENDING_APPROVE_COMMIT",
     "device_runtime": "TOKEN_VAZIO_RUNTIME_DEVICE",
     "long_run_stability": "TOKEN_VAZIO_BENCHMARK",
     "socket_protocol_integration": "TOKEN_VAZIO_PROTOCOL"
