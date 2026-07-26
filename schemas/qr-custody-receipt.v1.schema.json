@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/qr-custody-receipt.v1.schema.json",
+  "title": "QR Custody Receipt V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "receipt_id",
+    "edition_id",
+    "epoch_id",
+    "manifest_sha256",
+    "canonical_root_sha256",
+    "projection_root_sha256",
+    "source_registry_root_sha256",
+    "recipient_scope_commitment",
+    "issued_at",
+    "nonce",
+    "authentication_method",
+    "authenticator",
+    "claim_allowed"
+  ],
+  "properties": {
+    "version": {"const": "QR-CUSTODY-RECEIPT.v1"},
+    "receipt_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._:-]{7,127}$"},
+    "edition_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "epoch_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "canonical_root_sha256": {"$ref": "#/$defs/sha256"},
+    "projection_root_sha256": {"$ref": "#/$defs/sha256"},
+    "source_registry_root_sha256": {"$ref": "#/$defs/sha256"},
+    "recipient_scope_commitment": {"$ref": "#/$defs/sha256"},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": ["string", "null"], "format": "date-time"},
+    "nonce": {"type": "string", "pattern": "^[A-Za-z0-9_-]{16,128}$"},
+    "authentication_method": {
+      "enum": ["HMAC-SHA-256-LAB", "ED25519-REVIEW-REQUIRED"]
+    },
+    "key_id": {"type": ["string", "null"], "maxLength": 128},
+    "authenticator": {"type": "string", "pattern": "^[A-Za-z0-9_-]{32,256}$"},
+    "claim_allowed": {"const": false},
+    "limitations": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
