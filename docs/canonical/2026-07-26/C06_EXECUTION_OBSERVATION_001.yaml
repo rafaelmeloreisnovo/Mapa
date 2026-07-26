@@ -1,0 +1,44 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C06
+observation_id: C06-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/Vectras-VM-Android
+pull_request: 1069
+head_commit: 93611a24ca1229663a780b158682024ff50d298b
+workflow:
+  name: Legal Compliance Gate
+  run_id: 30193136808
+  status: completed
+  conclusion: failure
+job:
+  id: 89769847033
+  name: Legal / Provenance Gate
+  status: completed
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+interpretation:
+  state: BLOCKED_INFRA_ZERO_JOB_STEPS
+  code_execution_observed: false
+  unit_tests_executed: false
+  existing_legal_gate_executed: false
+  provenance_report_executed: false
+  artifact_uploaded: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  claim_allowed: false
+cross_cycle_corroboration:
+  c02_rafpolimata_zero_steps: true
+  c05_vectras_matrix_zero_steps: true
+forbidden_inference:
+  - workflow_failure_implies_provenance_report_failure
+  - no_report_implies_unregistered_asset
+  - implementation_of_quarantine_proves_current_inventory_control
+next_actions:
+  - preserve PR and static contracts
+  - execute report in local checkout
+  - do not promote PASS_WITH_QUARANTINE before report artifact exists
+  - reconcile qemu pin only through explicit source decision
+r3:
+  f_ok: provenance closure contract and job registration proven
+  f_gap: no scan test report summary or artifact observed
+  f_next: local execution and receipt validation

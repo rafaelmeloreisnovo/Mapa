@@ -1,0 +1,70 @@
+schema: rafaelia.alias-registry.v1
+created_at: '2026-07-26'
+state: CANONICAL_DRAFT
+claim_allowed: false
+policy:
+  accepted_states: [RESOLVED_EXACT, RESOLVED_CONTEXTUAL, PROVISIONAL, TOKEN_VAZIO_ALIAS_RESOLUTION]
+  prohibition: alias provisório não substitui identidade de repositório em build, hash, receipt ou claim
+aliases:
+  - alias: Rafa22
+    normalized: rafa22
+    state: TOKEN_VAZIO_ALIAS_RESOLUTION
+    provisional_candidate:
+      repository: rafaelmeloreisnovo/Rafaelia_Private
+      subsystems: [RAFAELIA_ZERO, OMEGA42]
+    missing_evidence:
+      - declaração autoral explícita de equivalência
+      - arquivo canônico contendo o alias
+      - significado formal do número 22
+    rule: usar sempre o repository_full_name real em execução e receipt
+  - alias: RafaPolimata
+    normalized: rafpolimata
+    state: RESOLVED_EXACT
+    repository: rafaelmeloreisnovo/RafPolimata
+  - alias: Rafa Polimata
+    normalized: rafpolimata
+    state: RESOLVED_CONTEXTUAL
+    repository: rafaelmeloreisnovo/RafPolimata
+  - alias: Lectra
+    normalized: vectras
+    state: RESOLVED_CONTEXTUAL
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+    interpretation: variação oral ou de transcrição de Vectras
+  - alias: Vectra
+    normalized: vectras
+    state: RESOLVED_CONTEXTUAL
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+  - alias: Vectras
+    normalized: vectras
+    state: RESOLVED_EXACT
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+  - alias: Termux RAFCODEPhi
+    normalized: termux_rafacodephi
+    state: RESOLVED_CONTEXTUAL
+    repository: rafaelmeloreisnovo/termux-app-rafacodephi
+  - alias: QEMU Rafaelia
+    normalized: qemu_rafaelia
+    state: RESOLVED_EXACT
+    repository: rafaelmeloreisnovo/qemu_rafaelia
+  - alias: CONVERSATIONS_CHUNKS_PRIVATE
+    normalized: conversations_chunks_private
+    state: TOKEN_VAZIO_ALIAS_RESOLUTION
+    repository: TOKEN_VAZIO_REPOSITORY_RESOLUTION
+    known_role: produtor ou armazenamento privado de chunks e descritores
+    required_evidence:
+      - repository_or_drive_identity
+      - producer_commit
+      - descriptor_contract_version
+      - artifact_path_and_hashes
+validation_rules:
+  - aliases_do_not_change_repository_full_name
+  - aliases_cannot_be_source_commit
+  - provisional_alias_requires_token_vazio_in_manifests
+  - contextual_resolution_is_navigation_not_cryptographic_identity
+closure:
+  cycle: C01
+  exact_aliases: PASS_DOCUMENTARY
+  contextual_aliases: PASS_DOCUMENTARY
+  rafa22: TOKEN_VAZIO_ALIAS_RESOLUTION
+  chunks_private: TOKEN_VAZIO_REPOSITORY_RESOLUTION
+  overall: PASS_DOCUMENTARY_WITH_TOKEN_VAZIO

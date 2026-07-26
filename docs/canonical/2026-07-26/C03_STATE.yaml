@@ -1,0 +1,66 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C03
+name: conversation_indexer_and_segment_contract
+created_at: '2026-07-26'
+state: CONTRACT_RECONCILED_BLOCKED_INFRA_ZERO_JOB_STEPS
+claim_allowed: false
+repository: rafaelmeloreisnovo/RafPolimata
+stack_base:
+  branch: c02/runtime-truth-receipt-2026-07-26
+  commit: 55b057e22633c4e43814b40d6684315d1911ff50
+implementation:
+  pull_request: 168
+  branch: c03/segment-v1-abi-reconciliation-2026-07-26
+  head_commit: e7c58f614acb6531a6f78d6de95e3aa7ea957eeb
+  files:
+    - runtime/conversation_indexer/SEGMENT_V1_ABI_CONTRACT.json
+    - scripts/validate_segment_v1_abi_contract.py
+    - tests/test_segment_v1_abi_contract.py
+    - docs/C03_SEGMENT_V1_ABI_RECONCILIATION.md
+    - .github/workflows/segment-v1-abi-contract.yml
+canonical_decision:
+  segment_v1: PRESERVE_CURRENT_CODEC_AND_WIRE_LAYOUT
+  task_02_32_byte_identity_layout: RECLASSIFY_AS_SEGMENT_V2_CANDIDATE
+  in_place_role_renumbering: FORBIDDEN
+  in_place_record_relayout: FORBIDDEN
+frozen_v1:
+  header_bytes: 64
+  conversation_record_bytes: 96
+  message_record_bytes: 128
+  identity: OPAQUE_CALLER_SUPPLIED_128
+  roles:
+    UNKNOWN: 0
+    USER: 1
+    ASSISTANT: 2
+    SYSTEM: 3
+    TOOL: 4
+observed_conflicts:
+  - full_32_byte_identity_vs_opaque_128
+  - role_numbering_conflict
+  - conversation_message_count_width_conflict
+  - source_start_end_vs_offset_length
+  - message_record_field_semantics_conflict
+execution_observation:
+  workflow_run_id: 30193442690
+  job_id: 89770649845
+  job_name: abi-contract
+  conclusion: failure
+  steps_observed: 0
+  code_execution_observed: false
+  report_generated: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+token_vazio:
+  - abi_reconciliation_report_execution
+  - streaming_json_event_interface
+  - conversation_extractor
+  - atomic_segment_writer
+  - checkpoint_resume
+  - blake3_crypto_gate
+  - real_conversations_export_ingestion
+promotion_boundary:
+  contract_reconciliation: IMPLEMENTED_NOT_EXECUTED
+  segment_v1_wire_layout: FROZEN_BY_DECISION
+  extractor: TOKEN_VAZIO
+  writer: TOKEN_VAZIO
+  claim_allowed: false
+next_action: execute ABI validator locally then implement bounded event stream without changing v1 wire layout

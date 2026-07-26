@@ -1,0 +1,60 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C06
+name: provenance_sbom_and_quarantine
+created_at: '2026-07-26'
+state: ACTIVE_BLOCKED_INFRA_ZERO_JOB_STEPS
+claim_allowed: false
+base_repository: rafaelmeloreisnovo/Vectras-VM-Android
+base_commit: a29392e65948463ab9cb6dbfefe64eb060e23a07
+implementation:
+  pull_request: 1069
+  branch: c06/provenance-closure-2026-07-26
+  head_commit: 93611a24ca1229663a780b158682024ff50d298b
+  files:
+    - tools/ci/build_provenance_closure_report.py
+    - tests/test_build_provenance_closure_report.py
+    - .github/workflows/legal-compliance-gate.yml
+    - docs/active/C06_PROVENANCE_SBOM_CLOSURE_2026-07-26.md
+contracts_crossed:
+  - resources/compliance/ASSET_PROVENANCE_REGISTER.csv
+  - sbom/SBOM.spdx.json
+  - legal/LEGAL_SCOPE_MAP.yaml
+  - tools/qemu_rafaelia_assets.lock.yml
+  - repository_binary_inventory
+states_supported:
+  - PASS
+  - PASS_WITH_QUARANTINE
+  - FAIL
+known_pin_divergence:
+  canonical_qemu_commit: d4b3ef09956fa1abaeacba61dca3965f591c3a6a
+  asset_lock_qemu_commit: 46d994ba6a3b3a9b8a0590238666f19d800c1abc
+  intended_state: PASS_WITH_QUARANTINE_UNTIL_RECONCILED
+execution_observation:
+  workflow_run_id: 30193136808
+  job_id: 89769847033
+  job_name: Legal / Provenance Gate
+  conclusion: failure
+  steps_observed: 0
+  code_execution_observed: false
+  report_generated: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+token_vazio:
+  - current_register_scan_result
+  - current_binary_inventory_result
+  - current_hash_match_report
+  - current_sbom_unresolved_count
+  - current_quarantine_receipt
+  - libxlorie_author_source_license
+  - rafaelia_ttl_source_build_license
+  - rootfs_exact_path_version_hash_license
+  - firmware_release_and_hashes
+  - bios_vectras_origin_and_license
+  - qemu_pin_reconciliation
+promotion_target:
+  registered_asset_inventory: VERIFIED_BY_EXECUTION
+  known_critical_assets_controlled: VERIFIED_BY_EXECUTION
+  all_provenance_resolved: false_until_direct_evidence
+  public_release_allowed: false
+  binary_distribution_allowed: false
+  claim_allowed: false
+next_action: execute provenance report locally or with runner steps and preserve artifact

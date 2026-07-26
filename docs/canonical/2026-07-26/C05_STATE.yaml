@@ -1,0 +1,68 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C05
+name: vectras_ndk_final_link
+created_at: '2026-07-26'
+state: ACTIVE_BLOCKED_INFRA_ZERO_JOB_STEPS
+claim_allowed: false
+base_repository: rafaelmeloreisnovo/Vectras-VM-Android
+base_commit: a29392e65948463ab9cb6dbfefe64eb060e23a07
+implementation:
+  pull_request: 1068
+  branch: c05/freestanding-closure-receipt-2026-07-26
+  head_commit: 135a3306aaa0adb780cef305437b930b772f0b77
+  files:
+    - tools/ci/aggregate_freestanding_ndk_receipts.py
+    - tests/test_aggregate_freestanding_ndk_receipts.py
+    - .github/workflows/cmake-language-link-contract.yml
+    - docs/active/C05_FREESTANDING_CLOSURE_RECEIPT_2026-07-26.md
+existing_probe:
+  audit_script: tools/ci/audit_freestanding_link_probe.py
+  probe_schema: vectra.freestanding-link-probe.v1
+  workflow: .github/workflows/cmake-language-link-contract.yml
+  abis:
+    - host-x86_64
+    - armeabi-v7a
+    - arm64-v8a
+execution_observation:
+  workflow_run_id: 30192878285
+  workflow_name: CMake Language and Link Contract
+  jobs:
+    - id: 89769155627
+      name: static-contract
+      steps_observed: 0
+    - id: 89769155634
+      name: host-probe
+      steps_observed: 0
+    - id: 89769155621
+      name: android-ndk-probe (armeabi-v7a)
+      steps_observed: 0
+    - id: 89769155625
+      name: android-ndk-probe (arm64-v8a)
+      steps_observed: 0
+    - id: 89769158729
+      name: c05-closure-receipt
+      steps_observed: 0
+  code_execution_observed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+closure_outputs_required:
+  - host_manifest.json
+  - armeabi-v7a_manifest.json
+  - arm64-v8a_manifest.json
+  - c05_closure_receipt.json
+token_vazio:
+  - host_final_link_current_commit
+  - arm32_ndk_final_link_current_commit
+  - arm64_ndk_final_link_current_commit
+  - elf_sha256_current_commit
+  - elf_blake3_current_commit
+  - reproducibility_receipts_current_commit
+  - device_runtime
+  - apk_install
+  - guest_boot
+promotion_target:
+  host_final_link: VERIFIED_BY_EXECUTION
+  arm32_ndk_final_link: VERIFIED_BY_EXECUTION
+  arm64_ndk_final_link: VERIFIED_BY_EXECUTION
+  device_runtime: TOKEN_VAZIO
+  claim_allowed: false
+next_action: execute workflow when runner starts steps or run equivalent pinned NDK matrix in local Linux environment

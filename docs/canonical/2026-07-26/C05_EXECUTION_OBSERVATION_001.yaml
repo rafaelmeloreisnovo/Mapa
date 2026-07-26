@@ -1,0 +1,63 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C05
+observation_id: C05-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/Vectras-VM-Android
+pull_request: 1068
+head_commit: 135a3306aaa0adb780cef305437b930b772f0b77
+workflow:
+  name: CMake Language and Link Contract
+  run_id: 30192878285
+  status_initial: queued
+  status_observed: completed
+jobs:
+  - id: 89769155627
+    name: static-contract
+    conclusion: failure
+    steps_observed: 0
+  - id: 89769155634
+    name: host-probe
+    conclusion: failure
+    steps_observed: 0
+  - id: 89769155621
+    name: android-ndk-probe (armeabi-v7a)
+    conclusion: failure
+    steps_observed: 0
+  - id: 89769155625
+    name: android-ndk-probe (arm64-v8a)
+    conclusion: failure
+    steps_observed: 0
+  - id: 89769158729
+    name: c05-closure-receipt
+    conclusion: failure
+    steps_observed: 0
+interpretation:
+  state: BLOCKED_INFRA_ZERO_JOB_STEPS
+  job_graph_created: true
+  code_execution_observed: false
+  static_contract_executed: false
+  host_probe_executed: false
+  arm32_probe_executed: false
+  arm64_probe_executed: false
+  aggregator_executed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  claim_allowed: false
+cross_repository_corroboration:
+  rafpolimata_c02:
+    workflow_run_id: 30192393839
+    attempts: 2
+    zero_steps: true
+forbidden_inference:
+  - five_failed_job_conclusions_imply_five_code_failures
+  - matrix_creation_implies_compilation
+  - workflow_failure_implies_ndk_link_failure
+  - zero_steps_implies_aggregator_test_failure
+next_actions:
+  - preserve PR and workflow implementation
+  - avoid rerun until runner startup condition changes
+  - execute pinned matrix in suitable local Linux environment when available
+  - require three manifests and closure receipt before promotion
+r3:
+  f_ok: job graph and intended host ARM32 ARM64 closure topology proven
+  f_gap: no command step logs artifact or manifest observed
+  f_next: runner-enabled execution or equivalent local NDK matrix

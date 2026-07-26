@@ -1,0 +1,53 @@
+schema: rafaelia.runtime-truth-artifact-contract.v1
+cycle_id: C02
+claim_allowed: false
+required_artifacts:
+  runtime_truth_receipt.json:
+    required_fields:
+      - schema
+      - state
+      - source_repository
+      - source_commit
+      - implementation_base_commit
+      - started_at
+      - finished_at
+      - runtime_truth_exit_code
+      - build_doctor_exit_code
+      - claim_boundary
+      - artifacts
+      - falsifiers
+  toolchain_manifest.json:
+    required_fields:
+      - schema
+      - source_commit
+      - os
+      - uname
+      - python
+      - cc
+      - clang
+      - make
+      - git
+  build-doctor.json:
+    required_schema: raf.ecosystem-build-doctor-report.v1
+  runtime-truth.stdout.log:
+    sha256_required: true
+  runtime-truth.stderr.log:
+    sha256_required: true
+hash_policy:
+  sha256: REQUIRED
+  blake3: TOKEN_VAZIO_ALLOWED_WHEN_B3SUM_ABSENT
+claim_boundary:
+  static_and_local_execution: promotable_when_all_required_artifacts_pass
+  android_build: TOKEN_VAZIO
+  apk_install: TOKEN_VAZIO
+  device_runtime: TOKEN_VAZIO
+  performance_claim: FORBIDDEN
+failure_policy:
+  nonzero_runtime_gate: FAIL
+  nonzero_build_doctor: FAIL
+  missing_required_artifact: INCOMPLETE
+  missing_source_commit: INVALID_RECEIPT
+  missing_sha256: INVALID_RECEIPT
+  workflow_not_started: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  workflow_zero_steps: BLOCKED_INFRA_NO_JOB_STEPS
+  workflow_no_credit: OUT_OF_SCOPE_INFRA_NOT_CODE_FAIL

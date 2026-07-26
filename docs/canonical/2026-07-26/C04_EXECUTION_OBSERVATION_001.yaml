@@ -1,0 +1,52 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C04
+observation_id: C04-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/RafPolimata
+pull_request: 169
+head_commit: 26fd0f85f1b318266f3175e9d9a3d60530a02763
+workflow:
+  name: ApkC First Part Closure
+  run_id: 30194066530
+  run_number: 4
+  status: completed
+  conclusion: failure
+job:
+  id: 89772327875
+  name: apkc-first-part
+  status: completed
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+intended_steps_not_observed:
+  - checkout
+  - qemu_aarch64_tooling
+  - syntax_validation
+  - unit_tests
+  - source_to_binary_proof
+  - dual_abi_apk_generation
+  - source_hardening_proof
+  - first_part_reconciliation
+  - browser_and_runtime_contracts
+  - structural_closure_receipt
+  - artifact_upload
+interpretation:
+  state: BLOCKED_INFRA_ZERO_JOB_STEPS
+  code_execution_observed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  apkc_failure_observed: false
+  apk_artifact_observed: false
+  claim_allowed: false
+forbidden_inference:
+  - workflow_failure_implies_apkc_compilation_failure
+  - missing_apk_after_zero_steps_implies_generator_failure
+  - qemu_route_implementation_proves_qemu_execution
+  - structural_wrapper_presence_proves_pass_structural
+next_actions:
+  - preserve PR and route implementation
+  - execute with runner startup or equivalent local AArch64 QEMU environment
+  - require apk source proof validator report and receipt before promotion
+r3:
+  f_ok: production route scoped claim and fail-closed receipt implemented
+  f_gap: no command compiler APK report hash or artifact observed
+  f_next: execute pinned structural route and inspect receipt

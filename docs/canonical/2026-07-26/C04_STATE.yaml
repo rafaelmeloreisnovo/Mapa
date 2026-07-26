@@ -1,0 +1,63 @@
+schema: rafaelia.cycle-state.v1
+cycle_id: C04
+name: apkc_structural_artifact_closure
+created_at: '2026-07-26'
+state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS
+claim_allowed: false
+repository: rafaelmeloreisnovo/RafPolimata
+stack_base:
+  branch: c02/runtime-truth-receipt-2026-07-26
+  commit: 55b057e22633c4e43814b40d6684315d1911ff50
+implementation:
+  pull_request: 169
+  branch: c04/apkc-structural-closure-2026-07-26
+  head_commit: 26fd0f85f1b318266f3175e9d9a3d60530a02763
+  files:
+    - scripts/apkc_structural_closure_receipt.py
+    - tests/test_apkc_structural_closure_receipt.py
+    - docs/C04_APKC_STRUCTURAL_CLOSURE.md
+    - .github/workflows/apkc-first-part.yml
+artifact_route:
+  - build_reproducible_apkc_aarch64_twice
+  - build_reproducible_apkc_arm32_object_twice
+  - execute_aarch64_apkc_with_qemu_user_mode
+  - generate_dual_abi_apk_atomically
+  - validate_zip_dex_elf32_elf64
+  - aggregate_source_proof_first_part_preflight_and_apk
+claim_boundary:
+  global_claim_allowed: false
+  structural_claim: APK_ZIP_DEX_ELF_AND_DUAL_ABI_STRUCTURE_ONLY
+  apk_signed: TOKEN_VAZIO
+  apk_installed: TOKEN_VAZIO
+  package_launched: TOKEN_VAZIO
+  device_arm32: TOKEN_VAZIO
+  device_arm64: TOKEN_VAZIO
+execution_observation:
+  workflow_run_id: 30194066530
+  job_id: 89772327875
+  job_name: apkc-first-part
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+  code_execution_observed: false
+  qemu_tooling_executed: false
+  source_proof_executed: false
+  apk_generated: false
+  receipt_generated: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+token_vazio:
+  - current_source_to_binary_receipt
+  - current_apkc_aarch64_binary
+  - current_apkc_arm32_object
+  - current_dual_abi_apk
+  - current_zip_dex_elf_validation
+  - current_structural_closure_receipt
+  - apk_signing
+  - apk_install
+  - package_launch
+  - device_logcat
+promotion_target:
+  structural_state: PASS_STRUCTURAL
+  structural_claim_allowed: true_scoped_only
+  claim_allowed: false
+next_action: execute workflow with runner steps or reproduce pinned AArch64-QEMU route locally
