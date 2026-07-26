@@ -1,0 +1,159 @@
+{
+  "schema": "rafaelia.session-source.v1",
+  "source_id": "RAFAELIA_SESSION_SOURCE_2026-07-25_V1",
+  "language": "pt-BR",
+  "purpose": "Memória de decisão e semente de ingestão auditável para IA.",
+  "evidence_classes": {
+    "E1_ARTEFATO_LIDO": "Artefato, arquivo, código ou resultado lido diretamente.",
+    "E2_CONVERSA_REGISTRADA": "Afirmação ou decisão da conversa, ainda sem reexecução nesta consolidação.",
+    "E3_CONTEXTO_RECUPERADO": "Registro anterior relevante que exige reconfirmação para publicação.",
+    "E4_HIPOTESE": "Modelo, analogia ou proposta sem teste suficiente.",
+    "E5_NEGATIVO_OU_LIMITE": "Resultado limitante, contradição ou condição que restringe claim.",
+    "TOKEN_VAZIO": "Lacuna válida com próximo teste explícito."
+  },
+  "canonical_fact_tuple": [
+    "source",
+    "identity",
+    "occurrence",
+    "coordinate",
+    "concept",
+    "claim",
+    "evidence",
+    "state"
+  ],
+  "session_events": [
+    {
+      "id": "S01",
+      "topic": "diferencial de mercado",
+      "claim": "O diferencial deve ser memória auditável e execução governada, não apenas um LLM geral.",
+      "state": "E2_CONVERSA_REGISTRADA"
+    },
+    {
+      "id": "S02",
+      "topic": "escopo corrigido",
+      "claim": "RafGitTools, RafPolimata, Vectra e o Universo são camadas essenciais da avaliação.",
+      "state": "E2_CONVERSA_REGISTRADA"
+    },
+    {
+      "id": "S03",
+      "topic": "corpus Universo",
+      "claim": "O corpus foi relatado como 1.920.947 entradas e dezenas de milhares de arquivos.",
+      "state": "E2_CONVERSA_REGISTRADA",
+      "next": "Revarrer e emitir manifesto reproduzível."
+    },
+    {
+      "id": "S04",
+      "topic": "RAFSEG1",
+      "claim": "Formato binário relatado com cabeçalho de 64 B, conversa 96 B e mensagem 128 B.",
+      "state": "E2_CONVERSA_REGISTRADA",
+      "next": "Test vectors, reader/writer e ingestão streaming."
+    },
+    {
+      "id": "S05",
+      "topic": "BLAKE3 e RMR",
+      "claim": "A cadeia de custódia deve usar digest criptográfico e recibos, não somente CRC/FNV.",
+      "state": "E1_ARTEFATO_LIDO",
+      "next": "Provar RMR→BLAKE3→hashchain→assinatura em um fluxo E2E."
+    },
+    {
+      "id": "S06",
+      "topic": "Vectra multi-ISA",
+      "claim": "Host ABI, ISA de guest, cross-target e boot comprovado são camadas distintas.",
+      "state": "E2_CONVERSA_REGISTRADA",
+      "next": "Construir matriz de boot e workloads por ISA."
+    }
+  ],
+  "components": [
+    {
+      "id": "universe",
+      "role": "Acervo e memória editorial.",
+      "state": "E2_CONVERSA_REGISTRADA",
+      "output": ["inventário", "origem", "versões"],
+      "gap": "Manifesto e contagem precisam de reprodução atual."
+    },
+    {
+      "id": "rafpolimata",
+      "role": "Estruturador determinístico e segmentação.",
+      "state": "E2_CONVERSA_REGISTRADA",
+      "output": ["RAFSEG1", "índices", "timeline"],
+      "gap": "Ingestão E2E ainda TOKEN_VAZIO."
+    },
+    {
+      "id": "rmr_cti_llama",
+      "role": "Memória operacional e interpretação ancorada.",
+      "state": "E3_CONTEXTO_RECUPERADO",
+      "output": ["contexto recuperado", "resposta", "TOKEN_VAZIO"],
+      "gap": "Benchmark de grounding e caminho de sampling."
+    },
+    {
+      "id": "rmr_bitraf_blake3",
+      "role": "Integridade binária, governança e custódia.",
+      "state": "E1_ARTEFATO_LIDO",
+      "output": ["checksum", "digest", "checkpoint", "auditoria"],
+      "gap": "Recibo criptográfico persistente de ponta a ponta."
+    },
+    {
+      "id": "vectra_qemu",
+      "role": "Execução e comparação multi-ISA.",
+      "state": "E2_CONVERSA_REGISTRADA",
+      "output": ["boot", "telemetria", "resultado"],
+      "gap": "Matriz real de guest/ABI/workload."
+    },
+    {
+      "id": "termux_rafcodephi",
+      "role": "Runtime Android/Termux e módulos nativos.",
+      "state": "E1_ARTEFATO_LIDO",
+      "output": ["JNI", "NDK", "módulos rafaelia/rmr"],
+      "gap": "Build atual e validação em dispositivos."
+    },
+    {
+      "id": "rafgittools",
+      "role": "Plano de controle e auditoria de ferramentas.",
+      "state": "E3_CONTEXTO_RECUPERADO",
+      "output": ["autorização", "status", "diff", "recibo"],
+      "gap": "E2E de política e interface."
+    },
+    {
+      "id": "rll",
+      "role": "Linha científica de cosmologia e falsificabilidade.",
+      "state": "E1_ARTEFATO_LIDO",
+      "output": ["pipelines", "dados", "comparação de modelos"],
+      "gap": "Validação real completa, covariância e Bayes factor."
+    }
+  ],
+  "critical_distinctions": [
+    "CRC/FNV/misturas operacionais não substituem digest criptográfico adversarial.",
+    "BLAKE3 upstream e RMR autoral são separados por proveniência e licença.",
+    "Catálogo multi-ISA não prova boot ou execução de guest.",
+    "Código presente não prova build, teste ou integração pelo caminho principal.",
+    "Imagem, metáfora ou consistência interna não equivalem a validação científica.",
+    "Resultados RLL de execuções/datasets diferentes não podem ser agregados sem proveniência completa."
+  ],
+  "priority_gaps": [
+    "TV-01: Universo para RAFSEG1 com manifesto e erro auditável.",
+    "TV-02: RMR para BLAKE3/hashchain/assinatura/recibo.",
+    "TV-03: recuperação híbrida com benchmark de relevância.",
+    "TV-04: resposta Llama ancorada em fonte ou TOKEN_VAZIO.",
+    "TV-05: boot multi-ISA com matriz de evidências.",
+    "TV-06: validação RLL real e reprodutível.",
+    "TV-07: segurança e vetores RFC do RAFBROWSER."
+  ],
+  "attachments": [
+    {"name": "01-Tora-main-1-.zip", "entries": 233, "sha256": "d43acb6bae08683976c1eb649bba0c15f9fe2aa9e0bd95478b4c4d09e4254e36"},
+    {"name": "02-04_BIOLOGIA_BIOENGENHARIA.md", "sha256": "9cad40b2703e1178af3dad48c6c709811ab1ab131449bc0cf19aa58c02ebc517"},
+    {"name": "03-01_MATEMATICA_GEOMETRIA_SAGRADA.md", "sha256": "61318e9c4cd969e5810aa9d4d7b032ef53506ffcaa20917a5de950c03fdb8817"},
+    {"name": "04-BLAKE3-master-2-.zip", "entries": 245, "sha256": "57584671f4157eabbcb7ae2c5a57616efdb80f8742a6ce3c6da2e32b97fcaead"},
+    {"name": "05-atlas_rafaelia_cosmos.zip", "entries": 12, "sha256": "f263393cce963b86819be072b5630a8608c44a779e4fc8059f6eed32c5625641"},
+    {"name": "06-07_IA_COMPUTACAO.md", "sha256": "558fbe73ceb8e7bd3ff90b98461a1bc50c54397a3681869a28e6acfb673ea860"},
+    {"name": "07-03_FISICA_QUANTICA_TOPOLOGIA.md", "sha256": "a23673327ea0fe3d3865370d14cb68732799c3ccfaf108a37e5c7e1fa83eedd4"},
+    {"name": "08-08_MATEMATICA_SIMBOLICA.md", "sha256": "48d82894391884c251854d46fecc15096e21c97543df068c10f390d0e3664b0c"},
+    {"name": "09-06_CONSCIENCIA_ESPIRITUALIDADE.md", "sha256": "31a28d6d46a21908cb40d3108a57e16a1aaf799059e941921e9a30afedc9e3f7"},
+    {"name": "10-05_ENGENHARIA_ELETROMAGNETISMO.md", "sha256": "784341dcfa8ce67eeb0b4e3addc35ba8097200f4b670b58751a2dbeb1ec37238"},
+    {"name": "11-10_GEOMETRIA_CAMPOS_ATRATORES.md", "sha256": "8b7b5c20ed511da91a69e64873e343dab26c1efa95b22732514cc5b8697d99ab"},
+    {"name": "12-09_TERMODINAMICA_SISTEMAS.md", "sha256": "7c41ff675c1a9487a636a34b6826842a3a04aca489cbf50e050d60c6489264bc"},
+    {"name": "13-termux-app-rafacodephi-master-1-.zip", "entries": 1447, "sha256": "527ca623c438f552ff19a371a7fabd92ba731178de15fcb2fd2efd2b43240729"},
+    {"name": "14-relativity-living-light-main-16-.zip", "entries": 491, "sha256": "a9d436ce24a31824924b0d6262f894f9830a3716e7f9239bf66b1ba3cd7b10a4"},
+    {"name": "15-RAFBROWSER_Enterprise_v1.0.zip", "entries": 17, "sha256": "d9f84fa06891d66a5932b9a7e1aff6b82fca11ff4241f02f52cb25dc890e02ca"},
+    {"name": "16-RAFBROWSER-enterprise.zip", "entries": 31, "sha256": "b2c84f4e4b8a6d229b6fbe387dfd6532f711f5015f0c3467ac8f55a8a3a1a303"}
+  ]
+}
