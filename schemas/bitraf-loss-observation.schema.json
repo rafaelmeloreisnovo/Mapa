@@ -1,0 +1,86 @@
+{
+  "$id": "urn:rafaelia:schema:bitraf-loss-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "known_erasure": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observed": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "description": "Audit record for a bit-state observation. Zero, erasure, missing observation and TOKEN_VAZIO are distinct.",
+  "properties": {
+    "coord": {
+      "additionalProperties": false,
+      "properties": {
+        "t": {"minimum": 0, "type": "integer"},
+        "x": {"minimum": 0, "type": "integer"},
+        "y": {"minimum": 0, "type": "integer"},
+        "z": {"minimum": 0, "type": "integer"}
+      },
+      "required": ["x", "y", "z", "t"],
+      "type": "object"
+    },
+    "expected": {"enum": [0, 1, null], "type": ["integer", "null"]},
+    "known_erasure": {"default": false, "type": "boolean"},
+    "latency_ns": {"minimum": 0, "type": ["number", "null"]},
+    "linear_index": {"default": 0, "minimum": 0, "type": "integer"},
+    "matrix_id": {"minLength": 1, "type": "string"},
+    "notes": {"default": "", "type": "string"},
+    "observation_id": {"minLength": 1, "type": "string"},
+    "observed": {"enum": [0, 1, null], "type": ["integer", "null"]},
+    "parity_memberships": {
+      "default": [],
+      "items": {"minimum": 0, "type": "integer"},
+      "type": "array",
+      "uniqueItems": true
+    },
+    "run_id": {"minLength": 1, "type": "string"},
+    "schema_version": {"const": "rafaelia.bitraf-loss-observation/v1"},
+    "shard": {"default": 0, "minimum": 0, "type": "integer"},
+    "source": {
+      "additionalProperties": true,
+      "properties": {
+        "commit": {"minLength": 1, "type": "string"},
+        "line": {"minimum": 1, "type": ["integer", "null"]},
+        "path": {"minLength": 1, "type": "string"},
+        "repo": {"minLength": 1, "type": "string"}
+      },
+      "required": ["repo", "commit", "path"],
+      "type": "object"
+    },
+    "stripe": {"default": 0, "minimum": 0, "type": "integer"},
+    "syndrome": {
+      "default": [],
+      "items": {"enum": [0, 1], "type": "integer"},
+      "type": "array"
+    },
+    "temperature_c": {"type": ["number", "null"]},
+    "voltage_v": {"type": ["number", "null"]}
+  },
+  "required": [
+    "schema_version",
+    "observation_id",
+    "matrix_id",
+    "run_id",
+    "coord",
+    "expected",
+    "observed",
+    "known_erasure",
+    "source"
+  ],
+  "title": "RAFAELIA Bitraf Loss Observation v1",
+  "type": "object"
+}
