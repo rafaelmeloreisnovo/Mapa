@@ -1,0 +1,47 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C02
+observation_id: C02-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/RafPolimata
+pull_request: 167
+head_commit: e175c5c4752244a80a8dfa60d932bd10b6003862
+workflow:
+  name: Runtime Truth Receipt
+  run_id: 30192393839
+  run_number: 1
+  status: completed
+  conclusion: failure
+job:
+  id: 89767890981
+  name: local-truth
+  status: completed
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+  log_fetch_result: HTTP_404_BLOB_NOT_FOUND
+corroboration:
+  workflow: CI
+  run_id: 30192393811
+  job_id: 89767890788
+  job_name: Semantic coherence and falsifiability gates
+  steps_observed: 0
+interpretation:
+  state: BLOCKED_INFRA_NO_JOB_STEPS
+  code_execution_observed: false
+  runtime_truth_gate_executed: false
+  build_doctor_executed: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  claim_allowed: false
+forbidden_inference:
+  - workflow_failure_implies_compiler_failure
+  - zero_steps_implies_test_failure
+  - missing_logs_implies_code_error
+next_actions:
+  - preserve PR and instrumentation
+  - execute receipt wrapper in local Linux or Termux checkout
+  - retry Actions after runner startup is available
+  - require uploaded artifact before promotion
+r3:
+  f_ok: workflow registration and run creation proven
+  f_gap: runner startup command execution logs and receipts absent
+  f_next: local execution or infrastructure-enabled rerun
