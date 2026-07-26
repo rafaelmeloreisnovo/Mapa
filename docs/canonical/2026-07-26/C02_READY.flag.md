@@ -1,0 +1,1 @@
+C02 instrumentation readiness marker. This is not an execution receipt.
