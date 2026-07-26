@@ -1,0 +1,74 @@
+{
+  "schema": "rafaelia.anchor.authority.v1",
+  "generated_at": "2026-07-26T00:00:00-03:00",
+  "canonical_name": "RAFAELIA Anchor Loop",
+  "interpretation": {
+    "historical_intent": "continuity_anchor",
+    "historical_implementation": "four_detached_persistent_organs",
+    "correction": "infinite_loop_is_valid_when_supervised_transactional_and_stoppable"
+  },
+  "authorities": {
+    "historical_source": {
+      "plane": "google_drive",
+      "artifact": "RAFAELIA_MASTER_BOOT.sh",
+      "size_bytes": 2782,
+      "sha256": "856334d57a3ca801a69cc78bc7e4b962ee5f4875c05da5b3203d7a4bc79db8e0",
+      "state": "OBSERVED_HASHED"
+    },
+    "historical_archaeology": {
+      "repository": "rafaelmeloreisnovo/X0",
+      "branch": "docs/anchor-loop-historical-contract",
+      "head_observed": "6fcfd863ad8a53e974d685a36f6e1623bbb59beb",
+      "state": "DOCUMENTED_BRANCH"
+    },
+    "operational_runtime": {
+      "repository": "rafaelmeloreisnovo/home",
+      "branch": "feat/rafaelia-anchor-loop-v2",
+      "head_observed": "3436b563e2db6392becb649cc832aecf2d1ec6f1",
+      "state": "IMPLEMENTED_BRANCH",
+      "entrypoint": "RAFAELIA_ANCHOR_LOOP.sh",
+      "service": ".termux/services/rafaelia-anchor/run"
+    },
+    "control_plane": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "state": "CANONICAL_CONTROL_RECORD"
+    }
+  },
+  "historical_organs": [
+    "PULSAR_SUPREMO",
+    "SENTINEL_SUPREMO",
+    "MEMORY_STREAM",
+    "ACTION_ORCHESTRATOR"
+  ],
+  "current_cycle": [
+    "LOAD",
+    "OBSERVE",
+    "VERIFY",
+    "SNAPSHOT",
+    "PLAN",
+    "COMMIT",
+    "WAIT"
+  ],
+  "invariants": {
+    "cycle_authority": "COMMIT",
+    "wait_is_state_clock": false,
+    "single_instance": true,
+    "pid_and_lock": true,
+    "atomic_state_write": true,
+    "snapshot_on_change": true,
+    "bounded_retention": true,
+    "rollback_without_cycle_advance": true,
+    "json_to_shell": false,
+    "legacy_next_action_execution": false,
+    "next_action_id_execution": false
+  },
+  "evidence": {
+    "syntax_tests": "PASS_LOCAL",
+    "functional_temp_home_test": "PASS_LOCAL",
+    "device_runtime": "TOKEN_VAZIO_RUNTIME_DEVICE",
+    "long_run_stability": "TOKEN_VAZIO_BENCHMARK",
+    "socket_protocol_integration": "TOKEN_VAZIO_PROTOCOL"
+  },
+  "claim_allowed": false,
+  "claim_boundary": "Branch implementation and local tests do not prove Android runtime stability or historical runtime health."
+}
