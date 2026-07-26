@@ -1,0 +1,49 @@
+{
+  "ontology_id": "qr-custody-receipt.v1",
+  "status": "CANONICAL_DRAFT",
+  "claim_allowed": false,
+  "concepts": [
+    {
+      "id": "QR_CUSTODY_RECEIPT",
+      "kind": "portable_evidence_pointer",
+      "definition": "Transporte compacto autenticado que referencia uma edição e suas raízes criptográficas sem carregar o dataset."
+    },
+    {
+      "id": "RECIPIENT_SCOPE_COMMITMENT",
+      "kind": "privacy_preserving_commitment",
+      "definition": "Compromisso hash do escopo de destinatário; não é identidade pública nem prova isolada."
+    },
+    {
+      "id": "QR_SCAN_EVENT",
+      "kind": "audit_event",
+      "definition": "Evento append-only com scanner, instante, versão do verificador e resultado limitado."
+    },
+    {
+      "id": "QR_RECEIPT_LEDGER",
+      "kind": "custody_registry",
+      "definition": "Registro de emissão, revogação e verificação dos receipt_id."
+    }
+  ],
+  "relations": [
+    {"from": "QR_CUSTODY_RECEIPT", "type": "REFERENCES", "to": "EPOCH_MANIFEST"},
+    {"from": "QR_CUSTODY_RECEIPT", "type": "COMMITS_TO", "to": "RECIPIENT_SCOPE_COMMITMENT"},
+    {"from": "QR_SCAN_EVENT", "type": "VERIFIES", "to": "QR_CUSTODY_RECEIPT"},
+    {"from": "QR_RECEIPT_LEDGER", "type": "REGISTERS", "to": "QR_CUSTODY_RECEIPT"},
+    {"from": "QR_CUSTODY_RECEIPT", "type": "DOES_NOT_CONTAIN", "to": "CANONICAL_DATASET"},
+    {"from": "QR_CUSTODY_RECEIPT", "type": "DOES_NOT_PROVE_ALONE", "to": "LEGAL_ATTRIBUTION"}
+  ],
+  "state_rules": [
+    "VALID_AUTHENTICATOR != KNOWN_RECEIPT",
+    "KNOWN_RECEIPT != ROOTS_MATCH",
+    "ROOTS_MATCH != LEGAL_ATTRIBUTION",
+    "UNKNOWN != INVALID",
+    "TOKEN_VAZIO != ZERO"
+  ],
+  "authority": {
+    "protocol": "Mapa/docs/QR_CUSTODY_RECEIPT_V1.md",
+    "schema": "Mapa/schemas/qr-custody-receipt.v1.schema.json",
+    "evidence_producer": "RafPolimata",
+    "operator_surface": "RafGitTools",
+    "scientific_analysis": "papers"
+  }
+}
