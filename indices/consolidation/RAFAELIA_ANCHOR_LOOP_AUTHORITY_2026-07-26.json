@@ -1,0 +1,79 @@
+{
+  "schema": "rafaelia.anchor.authority.v1",
+  "generated_at": "2026-07-26T00:00:00-03:00",
+  "canonical_name": "RAFAELIA Anchor Loop",
+  "interpretation": {
+    "historical_intent": "continuity_anchor",
+    "historical_implementation": "four_detached_persistent_organs",
+    "correction": "infinite_loop_is_valid_when_supervised_transactional_stoppable_and_closed_by_signature"
+  },
+  "authorities": {
+    "historical_source": {
+      "plane": "google_drive",
+      "artifact": "RAFAELIA_MASTER_BOOT.sh",
+      "size_bytes": 2782,
+      "sha256": "856334d57a3ca801a69cc78bc7e4b962ee5f4875c05da5b3203d7a4bc79db8e0",
+      "state": "OBSERVED_HASHED"
+    },
+    "historical_archaeology": {
+      "repository": "rafaelmeloreisnovo/X0",
+      "merge_commit": "fb0410cde68ef33f6a07b486b1a9cf91c36feb59",
+      "state": "MERGED"
+    },
+    "operational_runtime": {
+      "repository": "rafaelmeloreisnovo/home",
+      "merge_commit": "4006e633c510bdea7e900158cf65ba65ea42d578",
+      "state": "MERGED",
+      "entrypoint": "RAFAELIA_ANCHOR_LOOP.sh",
+      "service": ".termux/services/rafaelia-anchor/run"
+    },
+    "control_plane": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "consolidation/anchor-loop-authority",
+      "state": "CANONICAL_CONTROL_RECORD"
+    }
+  },
+  "historical_organs": [
+    "PULSAR_SUPREMO",
+    "SENTINEL_SUPREMO",
+    "MEMORY_STREAM",
+    "ACTION_ORCHESTRATOR"
+  ],
+  "current_cycle": [
+    "LOAD",
+    "OBSERVE",
+    "VERIFY",
+    "SNAPSHOT",
+    "PLAN",
+    "COMMIT",
+    "WAIT"
+  ],
+  "invariants": {
+    "cycle_authority": "COMMIT",
+    "wait_is_state_clock": false,
+    "single_instance": true,
+    "pid_and_lock": true,
+    "atomic_state_write": true,
+    "snapshot_on_change": true,
+    "bounded_retention": true,
+    "rollback_without_cycle_advance": true,
+    "json_to_shell": false,
+    "legacy_next_action_execution": false,
+    "next_action_id_execution": false,
+    "baseline_policy": "bootstrap_existing_state_once",
+    "changed_state_default": "pending_review",
+    "promotion_gate": "exact_sha256_approval_then_reverify",
+    "auto_commit_default": false,
+    "auto_commit_opt_in_env": "RAFAELIA_ANCHOR_AUTO_COMMIT=1"
+  },
+  "evidence": {
+    "syntax_tests": "PASS_LOCAL",
+    "functional_temp_home_test": "PASS_LOCAL_BASELINE_HEARTBEAT_PENDING_APPROVE_COMMIT",
+    "remote_workflow": "TOKEN_VAZIO_RUNNER_NO_OBSERVABLE_STEPS_BLOB_NOT_FOUND",
+    "device_runtime": "TOKEN_VAZIO_RUNTIME_DEVICE",
+    "long_run_stability": "TOKEN_VAZIO_BENCHMARK",
+    "socket_protocol_integration": "TOKEN_VAZIO_PROTOCOL"
+  },
+  "claim_allowed": false,
+  "claim_boundary": "Merged implementation and local tests do not prove Android runtime stability or historical runtime health."
+}
