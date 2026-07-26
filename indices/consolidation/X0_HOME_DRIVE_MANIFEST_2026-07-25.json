@@ -1,0 +1,103 @@
+{
+  "schema": "rafaelia.consolidation.manifest.v1",
+  "generated_at": "2026-07-25T00:00:00-03:00",
+  "epistemic_policy": {
+    "file_presence_is_runtime_proof": false,
+    "hash_equality_is_functional_proof": false,
+    "claim_allowed": false,
+    "unknown_state": "TOKEN_VAZIO"
+  },
+  "sources": [
+    {
+      "source": "github",
+      "repository": "rafaelmeloreisnovo/X0",
+      "observed_occurrences": 8916,
+      "scope": "programmatic inventory excluding .git and node_modules",
+      "role": "monorepository_archive",
+      "pull_request": 33,
+      "merged_commit": "a39b30f724ab1b3ceb64a096a202bc1605362704"
+    },
+    {
+      "source": "github",
+      "repository": "rafaelmeloreisnovo/home",
+      "observed_occurrences": 1524,
+      "scope": "read-only audit with maximum depth 5 and excluded reproducible directories",
+      "role": "termux_operational_home_snapshot",
+      "pull_request": 5,
+      "merged_commit": "c53720d943f607b5a51119881edb57d08c593caa"
+    },
+    {
+      "source": "google_drive",
+      "drive_file_id": "1fuRSNwy52W8IBU3ZsjfNc_SBaAR2eP6p",
+      "title": "RAFAELIA_MASTER_BOOT.sh",
+      "size_bytes": 2782,
+      "sha256": "856334d57a3ca801a69cc78bc7e4b962ee5f4875c05da5b3203d7a4bc79db8e0",
+      "role": "historical_provenance",
+      "canonical_runtime": false
+    }
+  ],
+  "counts": {
+    "observed_occurrences_raw_sum": 10440,
+    "unique_objects": null,
+    "unique_objects_state": "TOKEN_VAZIO: cross-source SHA-256/BLAKE3 manifest not completed"
+  },
+  "mitigations": {
+    "home_fail_closed_boot": "MERGED",
+    "home_index_service_supervision": "MERGED",
+    "home_sensitive_gitignore": "MERGED",
+    "home_historical_corpus_preserved": true,
+    "home_non_destructive_inventory_index": "MERGED",
+    "x0_local_api_loopback": "MERGED",
+    "x0_bearer_authentication": "MERGED",
+    "x0_arbitrary_shell_removed": "MERGED",
+    "x0_security_contract_tests": "LOCAL_PASS_5_OF_5",
+    "git_history_secret_purge": "TOKEN_VAZIO_REQUIRES_ROTATION_AND_HISTORY_REWRITE",
+    "android_runtime_proof": "TOKEN_VAZIO"
+  },
+  "remote_gates": {
+    "home_pr_5": {
+      "workflow": "Home security contract",
+      "reported_conclusion": "failure",
+      "observable_steps": 0,
+      "state": "TOKEN_VAZIO_RUNNER"
+    },
+    "x0_pr_33": {
+      "workflow": "Local API security",
+      "reported_conclusion": "failure",
+      "observable_steps": 0,
+      "state": "TOKEN_VAZIO_RUNNER"
+    },
+    "mapa_pr_61": {
+      "workflow": "CI",
+      "reported_conclusion": "failure",
+      "observable_steps": 0,
+      "state": "TOKEN_VAZIO_RUNNER"
+    }
+  },
+  "drive_consolidation": {
+    "folder_id": "1boJdnfYunsDbXGQmWzdFPcBX9QiysVuW",
+    "report_document_id": "1sdoQq0IcD6dB1QXJuLIRYuaOPRrV7knCuSu_LIZ8QYg",
+    "manifest_document_id": "1xK1-vWHv8upJq-Dqh9IpL8Jf_KSKTveUZbAAOwGJJLc",
+    "analog_registry_document_id": "1KxF4Nr7TWVH7douOV_JYlbRrzWQVY-FHiusGBCAB7Z0"
+  },
+  "next_gate": {
+    "artifact": "X0_HOME_DRIVE_MANIFEST.jsonl",
+    "required_fields": [
+      "source",
+      "path",
+      "size",
+      "sha256",
+      "blake3",
+      "git_commit_or_drive_id",
+      "class",
+      "canonical_authority",
+      "duplicate_of",
+      "sensitive",
+      "executable",
+      "build_proof",
+      "runtime_proof",
+      "epistemic_class",
+      "token_vazio_reason"
+    ]
+  }
+}
