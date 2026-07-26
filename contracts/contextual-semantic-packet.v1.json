@@ -1,0 +1,52 @@
+{
+  "schema_version": "rafaelia.contextual-semantic-packet/v1",
+  "purpose": "Governar recuperação, memória, relações, camadas, hipóteses e abstinência antes de responder ou executar.",
+  "model_internal_weights_mutable": false,
+  "required_sections": [
+    "query",
+    "sources",
+    "memory_claims",
+    "entities",
+    "relations",
+    "layers",
+    "invariants",
+    "gaps",
+    "hypotheses",
+    "retrieval_plan",
+    "answer_gate",
+    "F_ok",
+    "F_gap",
+    "F_next"
+  ],
+  "allowed_layers": [
+    "literal",
+    "technical",
+    "mathematical",
+    "statistical",
+    "historical",
+    "economic",
+    "symbolic",
+    "ethical",
+    "operational"
+  ],
+  "allowed_gap_classes": [
+    "TV-DEF",
+    "TV-SOURCE",
+    "TV-ACCESS",
+    "TV-DATA",
+    "TV-UNIT",
+    "TV-BOUNDARY",
+    "TV-CODE",
+    "TV-TEST",
+    "TV-ENV",
+    "TV-INDEPENDENCE",
+    "TV-IRREDUCIBLE"
+  ],
+  "promotion_rules": {
+    "memory_without_observed_source": "HIPOTESE",
+    "metaphor_without_mechanism": "PARABOLA_ONLY",
+    "blocking_gap_present": "ANSWER_LIMITED",
+    "write_or_execute": "HUMAN_REVIEW_REQUIRED",
+    "claim_allowed_default": false
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "rafaelia.contextual-semantic-packet/v1",
+  "packet_id": "csp:wine-formula-v1",
+  "query": {
+    "raw": "Tenho um pedaço chamado fórmula vinho; recupere o significado antes de calcular.",
+    "normalized": "Reconstruir a arquitetura semântica da expressão Fórmula Vinho, suas fontes, mediações e limites antes de estimar safra ou preço.",
+    "task_type": "analyze"
+  },
+  "sources": [
+    {
+      "source_id": "src:current-user-description",
+      "source_type": "human_statement",
+      "locator": "conversation://current",
+      "observed": true,
+      "authorization": "authorized",
+      "required": true,
+      "epistemic_state": "FATO"
+    },
+    {
+      "source_id": "src:project-origin-wine-formula",
+      "source_type": "conversation",
+      "locator": "project://formula-vinho/origin",
+      "observed": false,
+      "authorization": "authorized",
+      "required": true,
+      "epistemic_state": "TOKEN_VAZIO"
+    },
+    {
+      "source_id": "src:public-viticulture-literature",
+      "source_type": "paper",
+      "locator": "public://viticulture-agrometeorology-market",
+      "observed": false,
+      "authorization": "public",
+      "required": true,
+      "epistemic_state": "TOKEN_VAZIO"
+    }
+  ],
+  "memory_claims": [
+    {
+      "claim_id": "claim:wine-formula-fragment",
+      "text": "Fórmula Vinho é um fragmento nominal dependente de memória anterior.",
+      "source_refs": ["src:current-user-description"],
+      "epistemic_state": "FATO"
+    }
+  ],
+  "entities": [
+    {"entity_id": "ent:wine-formula", "label": "Fórmula Vinho", "layer": "literal"},
+    {"entity_id": "ent:climate", "label": "Clima", "layer": "technical"},
+    {"entity_id": "ent:weather", "label": "Meteorologia", "layer": "technical"},
+    {"entity_id": "ent:phenology", "label": "Fenologia da videira", "layer": "technical"},
+    {"entity_id": "ent:yield", "label": "Rendimento", "layer": "statistical"},
+    {"entity_id": "ent:quality", "label": "Qualidade", "layer": "statistical"},
+    {"entity_id": "ent:market", "label": "Mercado", "layer": "economic"},
+    {"entity_id": "ent:price", "label": "Preço da safra", "layer": "economic"}
+  ],
+  "relations": [
+    {"subject": "ent:climate", "predicate": "influences_candidate", "object": "ent:phenology", "source_refs": [], "epistemic_state": "HIPOTESE"},
+    {"subject": "ent:phenology", "predicate": "mediates_candidate", "object": "ent:yield", "source_refs": [], "epistemic_state": "HIPOTESE"},
+    {"subject": "ent:yield", "predicate": "contributes_candidate", "object": "ent:price", "source_refs": [], "epistemic_state": "HIPOTESE"},
+    {"subject": "ent:quality", "predicate": "contributes_candidate", "object": "ent:price", "source_refs": [], "epistemic_state": "HIPOTESE"},
+    {"subject": "ent:market", "predicate": "mediates_candidate", "object": "ent:price", "source_refs": [], "epistemic_state": "HIPOTESE"}
+  ],
+  "layers": ["literal", "technical", "statistical", "economic", "operational"],
+  "invariants": [
+    "O rótulo não é a definição.",
+    "Clima não pode ser confundido diretamente com preço.",
+    "Mediações agronômicas, temporais e econômicas devem ser explícitas.",
+    "Memória sem fonte observada permanece hipótese.",
+    "Nenhum número sem local, período, variedade, unidade, alvo e dados."
+  ],
+  "gaps": [
+    {"gap_id": "gap:definition", "gap_class": "TV-DEF", "reason": "Definição original não recuperada.", "blocking": true, "next_gate": "Recuperar a conversa ou documento de origem."},
+    {"gap_id": "gap:sources", "gap_class": "TV-SOURCE", "reason": "Bibliografia ainda não observada.", "blocking": true, "next_gate": "Registrar fontes acadêmicas adequadas."},
+    {"gap_id": "gap:data", "gap_class": "TV-DATA", "reason": "Dados de clima, safra, qualidade e mercado ausentes.", "blocking": true, "next_gate": "Definir dataset e variável-alvo."},
+    {"gap_id": "gap:units", "gap_class": "TV-UNIT", "reason": "Unidades e escalas indefinidas.", "blocking": true, "next_gate": "Criar dicionário de dados."}
+  ],
+  "hypotheses": [
+    {
+      "hypothesis_id": "hyp:relational-chain",
+      "text": "A expressão pode representar uma cadeia clima/meteorologia → fenologia → rendimento/qualidade → mercado → preço.",
+      "source_refs": ["src:current-user-description"],
+      "entity_refs": ["ent:wine-formula", "ent:climate", "ent:weather", "ent:phenology", "ent:yield", "ent:quality", "ent:market", "ent:price"],
+      "confidence": 0.35,
+      "counterevidence": ["A origem pode definir outra arquitetura."],
+      "epistemic_state": "HIPOTESE"
+    }
+  ],
+  "retrieval_plan": [
+    {"order": 1, "action": "Recuperar a origem literal no projeto.", "source_refs": ["src:project-origin-wine-formula"], "success_criterion": "Definição, data e contexto recuperados."},
+    {"order": 2, "action": "Resolver entidades e relações no Mapa.", "source_refs": [], "success_criterion": "Relações internas e autoridade identificadas."},
+    {"order": 3, "action": "Buscar literatura pública adequada.", "source_refs": ["src:public-viticulture-literature"], "success_criterion": "Fontes observadas e classificadas."},
+    {"order": 4, "action": "Definir dados, unidades, baseline e falsificador.", "source_refs": [], "success_criterion": "Protocolo testável pré-registrado."}
+  ],
+  "answer_gate": {
+    "allowed": false,
+    "reasons": [
+      "A arquitetura candidata pode ser descrita, mas a fórmula original não foi recuperada.",
+      "Estimativa numérica bloqueada por fontes, dados e unidades ausentes."
+    ]
+  },
+  "claim_allowed": false,
+  "F_ok": ["Fragmento reconhecido como dependente de contexto.", "Camadas separadas."],
+  "F_gap": ["Origem, bibliografia, dados e unidades permanecem TOKEN_VAZIO."],
+  "F_next": ["Recuperar primeiro a fonte original."]
+}
