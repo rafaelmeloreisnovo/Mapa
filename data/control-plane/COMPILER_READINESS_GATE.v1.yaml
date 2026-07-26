@@ -1,0 +1,71 @@
+schema: rafaelia.compiler-readiness-gate.v1
+generated_at: '2026-07-26'
+claim_allowed: false
+rule:
+  statement: no remaining application may run before one compiler target closes with an artifact receipt
+  install_before_gate: FORBIDDEN
+  launch_before_gate: FORBIDDEN
+compiler_authority:
+  repository: rafaelmeloreisnovo/RafPolimata
+  pull_request: 174
+  branch: compiler/three-target-gate-v1-20260726
+  observed_head: 271aa0a6eadb15a225b2285aa322ee3f5cc24f96
+  base_commit: 76f26bdfabea2a4d0373ff03001d9a8deeaedf7c
+  state: OPEN_DRAFT_EXECUTION_RECEIPT_PENDING
+predecessor:
+  pull_request: 173
+  merge_commit: 76f26bdfabea2a4d0373ff03001d9a8deeaedf7c
+  state: MERGED_COMPILER_COUPLING_STRUCTURE
+  remote_execution: TOKEN_VAZIO_ZERO_STEPS
+targets:
+- id: rafpolimata-apkc-native
+  level: NATIVE_BOOTSTRAP_APK
+  state: REGISTERED_BUILD_RECEIPT_PENDING
+- id: rafgittools-full-dev-debug
+  level: FULL_ANDROID_APPLICATION
+  state: REGISTERED_BUILD_RECEIPT_PENDING
+- id: vectras-full-debug
+  level: FULL_ANDROID_APPLICATION
+  state: REGISTERED_BUILD_RECEIPT_PENDING
+- id: vectras-release-unsigned
+  level: FULL_ANDROID_APPLICATION
+  state: REGISTERED_BUILD_RECEIPT_PENDING
+readiness_contract:
+  compiler_core: PASS_REQUIRED
+  unit_tests: PASS_REQUIRED
+  target_preflight: PASS_REQUIRED
+  target_build: PASS_REQUIRED
+  artifact_count: '>=1'
+  android_structure: PASS_REQUIRED
+  sha256: PRESENT_REQUIRED
+  source_commit: PRESENT_REQUIRED
+  dirty_worktree: false
+  receipt: PRESENT_REQUIRED
+  install_executed: false
+  launch_executed: false
+blake3_boundary:
+  github_repository: rafaelmeloreisnovo/BLAKE3
+  repository_visibility_observed: PUBLIC
+  access_from_connected_github: VERIFIED
+  default_branch: master
+  latest_governance_merge: 16cc71a2c7a61516a718f67e52fd1842099ab534
+  compiler_dependency: false
+  sha256: REQUIRED
+  blake3: OPTIONAL_LOCAL_TOOL_WITH_PROVENANCE
+  missing_local_b3sum: TOKEN_VAZIO_B3SUM_NOT_AVAILABLE
+execution_release:
+  state: BLOCKED_UNTIL_RECEIPT
+  first_allowed_candidate:
+  - rafpolimata-apkc-native
+  - rafgittools-full-dev-debug
+  - vectras-full-debug
+invariants:
+- bootstrap_is_not_full_application
+- compiled_artifact_is_not_installed_application
+- installed_application_is_not_observed_runtime
+- remote_failure_with_zero_steps_is_not_code_failure
+- compiler_does_not_depend_on_gemini_or_remote_blake_access
+r3:
+  f_ok: compiler targets and no-run policy are versioned and linked to the control plane
+  f_gap: no target has emitted a real build receipt in an authorized local environment
+  f_next: execute exactly one available target without install or launch, review its receipt, then promote or preserve TOKEN_VAZIO
