@@ -1,0 +1,203 @@
+schema: rafaelia.c01-c10-master-state.v1
+created_at: '2026-07-26'
+state: IMPLEMENTATION_PACKETS_PRESENT_EXECUTION_CHAIN_OPEN
+claim_allowed: false
+control_plane:
+  repository: rafaelmeloreisnovo/Mapa
+  branch: docs/c01-c02-canonical-2026-07-26
+  pull_request: 67
+invariant:
+  - concept_is_not_implementation
+  - implementation_is_not_execution
+  - execution_is_not_artifact_identity
+  - artifact_identity_is_not_installation
+  - installation_is_not_physical_runtime
+  - process_exit_is_not_guest_boot
+  - guest_boot_is_not_general_vm_correctness
+  - synthetic_descriptor_is_not_real_corpus
+  - benchmark_protocol_is_not_measured_result
+  - paper_draft_is_not_validated_science
+  - ecosystem_doi_is_not_c10_package_doi
+  - token_vazio_is_not_zero_or_failure
+cycles:
+  C01:
+    name: canonical_identity_and_source_of_truth
+    state: PASS_DOCUMENTARY_WITH_TOKEN_VAZIO
+    repository: rafaelmeloreisnovo/Mapa
+    dependencies: []
+    outputs:
+      - REPOSITORY_PINSET.yaml
+      - ALIAS_REGISTRY.yaml
+      - SOURCE_OF_TRUTH.md
+      - C01_CLOSURE_RECEIPT.yaml
+    execution_required: false
+    claim_allowed: false
+  C02:
+    name: rafpolimata_local_truth
+    state: IMPLEMENTED_BLOCKED_INFRA_REPRODUCED_ZERO_JOB_STEPS
+    repository: rafaelmeloreisnovo/RafPolimata
+    pull_request: 167
+    dependencies: [C01]
+    required_receipt: runtime_truth_receipt.json
+    receipt_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    claim_allowed: false
+  C03:
+    name: segment_v1_abi_reconciliation
+    state: CONTRACT_RECONCILED_BLOCKED_INFRA_ZERO_JOB_STEPS
+    repository: rafaelmeloreisnovo/RafPolimata
+    pull_request: 168
+    dependencies: [C01, C02]
+    required_receipt: segment_v1_abi_report.json
+    receipt_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    claim_allowed: false
+  C04:
+    name: apkc_structural_artifact
+    state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS
+    repository: rafaelmeloreisnovo/RafPolimata
+    pull_request: 169
+    dependencies: [C01, C02]
+    required_receipt: apkc-structural-closure.json
+    receipt_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    claim_allowed: false
+  C05:
+    name: vectras_freestanding_final_link
+    state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+    pull_request: 1068
+    dependencies: [C01]
+    required_receipt: c05-freestanding-closure.json
+    receipt_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    claim_allowed: false
+  C06:
+    name: provenance_sbom_and_quarantine
+    state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+    pull_request: 1069
+    dependencies: [C01]
+    required_receipt: provenance_closure_report.json
+    receipt_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    claim_allowed: false
+  C07:
+    name: vectras_termux_qemu_bridge
+    state: IMPLEMENTED_STATIC_EXECUTION_PENDING
+    repositories:
+      - rafaelmeloreisnovo/Vectras-VM-Android
+      - rafaelmeloreisnovo/termux-app-rafacodephi
+    branches:
+      - c07/vectras-termux-qemu-receipt-2026-07-26
+      - c07/vectras-provider-contract-2026-07-26
+    dependencies: [C01, C05, C06]
+    required_receipts:
+      - vectras-termux-ipc-v3.json
+      - termux-provider-v3.json
+      - android-runtime-receipt.v2
+    receipt_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    claim_allowed: false
+  C08:
+    name: nonce_bound_physical_guest_evidence
+    state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS
+    repository: rafaelmeloreisnovo/Vectras-VM-Android
+    pull_request: 1071
+    dependencies: [C07]
+    required_receipt: c08_device_evidence_receipt.json
+    receipt_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    claim_allowed: false
+  C09:
+    name: omega42_real_descriptor_artifact
+    state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS_REAL_ARTIFACT_PENDING
+    repository: rafaelmeloreisnovo/Rafaelia_Private
+    pull_request: 191
+    dependencies: [C01]
+    producer:
+      repository: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE
+      identity_state: RESOLVED_CONTRACTUAL_NOT_FETCHED
+      commit: 0ee3e75d8c2a045c1f0dd764ad51c6f173d75741
+    required_receipt: raf.omega42-descriptor-artifact-receipt.v1
+    receipt_state: TOKEN_VAZIO_REAL_ARTIFACT_NOT_OBSERVED
+    claim_allowed: false
+  C10:
+    name: claims_benchmark_papers_and_doi
+    state: IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS_PUBLICATION_BLOCKED
+    repository: rafaelmeloreisnovo/papers
+    pull_request: 25
+    dependencies: [C01, C02, C03, C04, C05, C06, C07, C08, C09]
+    required_receipt: claim-gate-report.json
+    publication_state: BLOCKED
+    benchmark_state: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+    doi: TOKEN_VAZIO_C10_PACKAGE_NOT_DEPOSITED
+    claim_allowed: false
+summary:
+  cycle_count: 10
+  documentary_cycle_pass_count: 1
+  implementation_packet_count: 10
+  observed_positive_execution_count: 0
+  observed_physical_device_pass_count: 0
+  observed_real_corpus_pass_count: 0
+  measured_benchmark_result_count: 0
+  paper_reuse_allowed_claim_count: 0
+  publication_ready_count: 0
+  zero_step_workflow_cycles: [C02, C03, C04, C05, C06, C08, C09, C10]
+  no_workflow_execution_observed: [C07]
+critical_token_vazio:
+  identity:
+    - rafa22_exact_alias
+  local_execution:
+    - rafpolimata_full_gate
+    - segment_v1_abi_validator
+  artifacts:
+    - apkc_dual_abi_apk
+    - vectras_host_armv7_aarch64_link_manifests
+    - provenance_report
+    - omega42_real_descriptor_artifact
+  physical:
+    - vectras_apk_install
+    - termux_apk_install
+    - run_command_permission
+    - real_ipc_dispatch
+    - nonce_bound_guest_boot_armv7
+    - nonce_bound_guest_boot_aarch64
+  corpus:
+    - descriptor_artifact_sha256
+    - descriptor_artifact_blake3
+    - descriptor_count
+    - source_chunk_set_sha256
+  publication:
+    - benchmark_raw_measurements
+    - independent_replication
+    - internal_review_receipt
+    - c10_doi
+execution_order:
+  - step: 1
+    cycles: [C02, C03]
+    action: execute local host validators and preserve receipts
+  - step: 2
+    cycles: [C04]
+    action: produce and structurally validate the dual-ABI ApkC artifact
+  - step: 3
+    cycles: [C05, C06]
+    action: execute NDK final-link matrix and provenance closure
+  - step: 4
+    cycles: [C07]
+    action: execute provider-consumer static validators and build both APKs
+  - step: 5
+    cycles: [C08]
+    action: perform one nonce-bound physical guest transaction then repeat separately on ARMv7 and AArch64
+  - step: 6
+    cycles: [C09]
+    action: materialize descriptor-only artifact privately and produce consumer receipt
+  - step: 7
+    cycles: [C10]
+    action: execute claim gate then benchmark and replication only after upstream receipts close
+merge_policy:
+  auto_merge: false
+  draft_prs_preserved: true
+  merge_requires:
+    - reviewed_diff
+    - observed_gate_or_explicit_documentary_scope
+    - no_claim_promotion
+    - no_private_body_leak
+    - no_negative_result_deletion
+r3:
+  f_ok: ten cycle contracts and implementation packets are indexed
+  f_gap: execution artifacts physical device real corpus benchmark replication and DOI remain open
+  f_next: execute the ordered receipt chain without changing scope or deleting negative evidence
