@@ -8,6 +8,22 @@ Esta área registra leituras que cruzam múltiplas fontes sem confundir soma bru
 - [`X0_HOME_DRIVE_MANIFEST_2026-07-25.json`](X0_HOME_DRIVE_MANIFEST_2026-07-25.json): estado legível por máquina, fontes, contagens, gates e `TOKEN_VAZIO`.
 - [`DRIVE_ANALOG_SOURCE_REGISTRY_2026-07-25.json`](DRIVE_ANALOG_SOURCE_REGISTRY_2026-07-25.json): nomes exatos, fontes análogas, menções de inventário e gate de promoção sem substituição automática.
 
+## RAFAELIA Anchor Loop — 2026-07-26
+
+- [`RAFAELIA_ANCHOR_LOOP_AUTHORITY_2026-07-26.md`](RAFAELIA_ANCHOR_LOOP_AUTHORITY_2026-07-26.md): correção canônica da intenção histórica, fronteira fechada, ciclo e gates.
+- [`RAFAELIA_ANCHOR_LOOP_AUTHORITY_2026-07-26.json`](RAFAELIA_ANCHOR_LOOP_AUTHORITY_2026-07-26.json): autoridades por plano, commits observados, invariantes e lacunas runtime.
+
+Invariante específica:
+
+```text
+loop infinito intencional
+≠ busy loop
+≠ processo órfão
+≠ execução sem gate
+```
+
+O próximo ciclo é autorizado por `COMMIT`, não pelo tempo de espera.
+
 ## Invariante de contagem
 
 ```text
