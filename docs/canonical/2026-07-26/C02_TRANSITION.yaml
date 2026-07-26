@@ -1,0 +1,11 @@
+schema: rafaelia.cycle-transition.v1
+from: C01_PASS_DOCUMENTARY_WITH_TOKEN_VAZIO
+to: C02_ACTIVE_EXECUTION_PENDING
+authorized: true
+claim_allowed: false
+reason: repository identity and source-of-truth gates completed; receipt instrumentation may proceed
+blocking_before_execution:
+  - no receipt wrapper on pinned RafPolimata base
+  - no persistent full-gate transcript
+  - no current toolchain manifest
+  - no current build-doctor artifact retained
