@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/federated_memory_pointer.v1.schema.json",
+  "title": "RAFAELIA Federated Memory Pointer v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "map_record_id",
+    "control_plane",
+    "producer",
+    "producer_ref",
+    "producer_path",
+    "producer_blob_sha",
+    "source_digest",
+    "unit_id",
+    "relation_class",
+    "source_state",
+    "map_state",
+    "authority",
+    "required_next",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "federated-memory-pointer.v1"},
+    "map_record_id": {"type": "string", "pattern": "^MAP-RMU-[0-9]{3}$"},
+    "control_plane": {"const": "rafaelmeloreisnovo/Mapa"},
+    "producer": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+    "producer_ref": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "producer_path": {"type": "string", "minLength": 1},
+    "producer_blob_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_digest": {"type": "string", "pattern": "^(sha256:[0-9a-f]{64}|TOKEN_VAZIO)$"},
+    "unit_id": {"type": "string", "pattern": "^RMU-[A-Z0-9_-]+-[0-9]{3}$"},
+    "relation_class": {
+      "enum": ["authority_pointer", "dependency", "contradiction", "test_route", "summary_pointer"]
+    },
+    "source_state": {
+      "enum": ["DOCUMENTED", "IMPLEMENTED", "TESTED_LOCAL", "ARTIFACT_VERIFIED", "VERIFIED_DEVICE", "REPLICATED", "TOKEN_VAZIO", "CONTRADICTION"]
+    },
+    "map_state": {"enum": ["PINNED", "STALE", "TOKEN_VAZIO", "CONTRADICTION"]},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation", "research_memory", "control_plane", "execution"],
+      "properties": {
+        "implementation": {"type": "string"},
+        "research_memory": {"type": "string"},
+        "control_plane": {"type": "string"},
+        "execution": {"type": "string"}
+      }
+    },
+    "risk": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "required_next": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1
+    },
+    "claim_allowed": {"const": false}
+  }
+}
