@@ -66,7 +66,11 @@ Invariantes:
 7. JSON nunca é executado como shell;
 8. `next_action` legado é preservado como evidência, mas não executado;
 9. `next_action_id` é apenas plano até existir allowlist versionada;
-10. `TOKEN_VAZIO` pode ser commitado como observação válida.
+10. `TOKEN_VAZIO` pode ser commitado como observação válida;
+11. a primeira leitura fixa a baseline do estado já existente;
+12. assinatura diferente da baseline entra em `pending_review`;
+13. promoção exige aprovação do SHA-256 exato e nova verificação;
+14. auto-commit é desligado por padrão e exige opt-in explícito.
 
 ## Fronteira fechada
 
@@ -74,11 +78,21 @@ O significado de “fechado” é:
 
 ```text
 entrada pode ser observada
-mas não pode alterar o estado canônico
-sem VERIFY + COMMIT
+→ mudança fica em quarentena
+→ assinatura exata precisa ser aprovada
+→ fonte é relida e verificada
+→ somente então COMMIT
 ```
 
 Isso preserva a intenção original de impedir entrada direta “lá em cima”, sem transformar o sistema num processo opaco ou impossível de encerrar.
+
+A aprovação operacional é:
+
+```bash
+bash ~/RAFAELIA_ANCHOR_LOOP.sh approve <SHA256_DO_CANDIDATO>
+```
+
+A aprovação não executa comando nem altera o estado imediatamente; apenas autoriza o próximo ciclo a verificar a mesma assinatura.
 
 ## Relações
 
@@ -102,7 +116,7 @@ Também se relaciona com:
 ## Evidência disponível
 
 - `bash -n` e `sh -n`: `PASS_LOCAL`;
-- teste funcional com HOME temporário: três commits de ciclo, snapshot apenas por mudança e não execução de `next_action`: `PASS_LOCAL`;
+- teste funcional com HOME temporário: baseline, heartbeat sem novo snapshot, quarentena, aprovação exata, commit posterior e não execução de `next_action`: `PASS_LOCAL`;
 - serviço real via Termux/runit: `TOKEN_VAZIO_RUNTIME_DEVICE`;
 - consumo energético e estabilidade prolongada: `TOKEN_VAZIO_BENCHMARK`;
 - integração real com socket histórico: `TOKEN_VAZIO_PROTOCOL`.
@@ -123,5 +137,7 @@ Depois observar:
 - incremento de ciclo apenas após commit;
 - ausência de filhos órfãos;
 - snapshot novo somente quando FUSION/DECISION mudarem;
-- rollback se a fonte mudar durante a cópia;
+- mudança isolada como `pending_review`;
+- commit somente após aprovação da assinatura exata;
+- rollback se a fonte mudar durante a cópia ou antes do commit;
 - memória, bateria e wakeups por período prolongado.
