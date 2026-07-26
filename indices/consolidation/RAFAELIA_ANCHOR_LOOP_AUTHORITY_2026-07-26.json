@@ -1,11 +1,12 @@
 {
-  "schema": "rafaelia.anchor.authority.v1",
+  "schema": "rafaelia.anchor.authority.v2",
   "generated_at": "2026-07-26T00:00:00-03:00",
-  "canonical_name": "RAFAELIA Anchor Loop",
+  "canonical_name": "RAFAELIA Anchor Mesh",
   "interpretation": {
-    "historical_intent": "continuity_anchor",
+    "historical_intent": "quaternary_continuity_anchor",
     "historical_implementation": "four_detached_persistent_organs",
-    "correction": "infinite_loop_is_valid_when_supervised_transactional_stoppable_and_closed_by_signature"
+    "canonical_correction": "four_organs_remain_integral_and_witness_each_other",
+    "single_supervisor_is_state_authority": false
   },
   "authorities": {
     "historical_source": {
@@ -17,63 +18,100 @@
     },
     "historical_archaeology": {
       "repository": "rafaelmeloreisnovo/X0",
-      "merge_commit": "fb0410cde68ef33f6a07b486b1a9cf91c36feb59",
+      "merge_commit": "089d7140de083201cda21f8828ccd9ae93b391a2",
+      "artifact": "docs/architecture/RAFAELIA_ANCHOR_LOOP_HISTORICAL_RECONSTRUCTION.md",
       "state": "MERGED"
     },
-    "operational_runtime": {
+    "mathematical_authority": {
+      "repository": "rafaelmeloreisnovo/papers",
+      "merge_commit": "1e2ce959482659f58aa909b11ada17f621f8d64f",
+      "artifact": "docs/matematica_autoral/ANCORA_QUATERNARIA_OITO_GATES_QUINTO_ESTADO.md",
+      "state": "MERGED"
+    },
+    "static_core": {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "merge_commit": "146c0b549878e95644c2d5523e86e00d86662d1b",
+      "artifact": "RAF_062_quaternary_anchor_eight_gate.c",
+      "method": "M062",
+      "state": "MERGED_PASS_LOCAL"
+    },
+    "hosted_runtime": {
       "repository": "rafaelmeloreisnovo/home",
-      "merge_commit": "4006e633c510bdea7e900158cf65ba65ea42d578",
-      "state": "MERGED",
-      "entrypoint": "RAFAELIA_ANCHOR_LOOP.sh",
-      "service": ".termux/services/rafaelia-anchor/run"
+      "merge_commit": "bb777eac8e94532243cc31dfc989c14a64e89c68",
+      "worker": "RAFAELIA_ANCHOR_ORGAN.sh",
+      "services": [
+        ".termux/services/rafaelia-pulsar/run",
+        ".termux/services/rafaelia-sentinel/run",
+        ".termux/services/rafaelia-memory/run",
+        ".termux/services/rafaelia-action/run"
+      ],
+      "service_file_mode": "100755",
+      "state": "MERGED_PASS_LOCAL"
     },
     "control_plane": {
       "repository": "rafaelmeloreisnovo/Mapa",
-      "branch": "consolidation/anchor-loop-authority",
-      "state": "CANONICAL_CONTROL_RECORD"
+      "branch": "consolidation/four-cycle-eight-gate-anchor",
+      "state": "CANONICAL_CONTROL_RECORD_PENDING_MERGE"
     }
   },
-  "historical_organs": [
-    "PULSAR_SUPREMO",
-    "SENTINEL_SUPREMO",
-    "MEMORY_STREAM",
-    "ACTION_ORCHESTRATOR"
+  "organs": ["PULSAR", "SENTINEL", "MEMORY", "ACTION"],
+  "peer_ring": {
+    "PULSAR": "SENTINEL",
+    "SENTINEL": "MEMORY",
+    "MEMORY": "ACTION",
+    "ACTION": "PULSAR"
+  },
+  "gate_contract": {
+    "self_gates": 4,
+    "peer_gates": 4,
+    "total": 8,
+    "closure": "product_all_gates_equals_one",
+    "requires_common_signature": true,
+    "requires_all_sequences_advanced": true
+  },
+  "fifth_state": {
+    "kind": "derived_state",
+    "is_daemon": false,
+    "is_supervisor": false,
+    "is_single_point_of_failure": false
+  },
+  "noise_policy": {
+    "transient_variation_is_fault": false,
+    "fault_candidate_requires_cycle_persistence": true,
+    "classes": [
+      "NOMINAL",
+      "ACCELERATION_OBSERVED",
+      "LATENCY_OR_NOISE",
+      "INPUT_TRANSITION_OR_NOISE",
+      "RESTART_OR_NOISE",
+      "FAULT_CANDIDATE_STALLED",
+      "FAULT_CANDIDATE_ABSENT",
+      "FAULT_CANDIDATE_REGRESSION"
+    ]
+  },
+  "formula_inventory_links": [
+    {"item": 2, "degree": 10},
+    {"item": 4, "degree": 10},
+    {"item": 5, "degree": 10},
+    {"item": 12, "degree": 9},
+    {"item": 21, "degree": 8},
+    {"item": 23, "degree": 8},
+    {"item": 40, "degree": 6},
+    {"item": 54, "degree": 4}
   ],
-  "current_cycle": [
-    "LOAD",
-    "OBSERVE",
-    "VERIFY",
-    "SNAPSHOT",
-    "PLAN",
-    "COMMIT",
-    "WAIT"
-  ],
-  "invariants": {
-    "cycle_authority": "COMMIT",
-    "wait_is_state_clock": false,
-    "single_instance": true,
-    "pid_and_lock": true,
-    "atomic_state_write": true,
-    "snapshot_on_change": true,
-    "bounded_retention": true,
-    "rollback_without_cycle_advance": true,
-    "json_to_shell": false,
-    "legacy_next_action_execution": false,
-    "next_action_id_execution": false,
-    "baseline_policy": "bootstrap_existing_state_once",
-    "changed_state_default": "pending_review",
-    "promotion_gate": "exact_sha256_approval_then_reverify",
-    "auto_commit_default": false,
-    "auto_commit_opt_in_env": "RAFAELIA_ANCHOR_AUTO_COMMIT=1"
+  "method_distinction": {
+    "M059": "four-slot cooperative scheduler; selftest total eight is two tasks times four rounds",
+    "M062": "quaternary anchor with four integral organs, eight gates and a derived fifth state"
   },
   "evidence": {
-    "syntax_tests": "PASS_LOCAL",
-    "functional_temp_home_test": "PASS_LOCAL_BASELINE_HEARTBEAT_PENDING_APPROVE_COMMIT",
-    "remote_workflow": "TOKEN_VAZIO_RUNNER_NO_OBSERVABLE_STEPS_BLOB_NOT_FOUND",
+    "hosted_shell_tests": "PASS_LOCAL",
+    "static_c_tests": "PASS_LOCAL_STRICT_C11",
+    "remote_workflows": "TOKEN_VAZIO_RUNNER_NO_CHECKOUT_OR_ARTIFACT",
     "device_runtime": "TOKEN_VAZIO_RUNTIME_DEVICE",
+    "bare_metal_timing": "TOKEN_VAZIO",
     "long_run_stability": "TOKEN_VAZIO_BENCHMARK",
-    "socket_protocol_integration": "TOKEN_VAZIO_PROTOCOL"
+    "independent_replication": "TOKEN_VAZIO"
   },
   "claim_allowed": false,
-  "claim_boundary": "Merged implementation and local tests do not prove Android runtime stability or historical runtime health."
+  "claim_boundary": "Merged local architecture and tests do not prove bare-metal timing, Android long-run stability or physical infallibility."
 }
