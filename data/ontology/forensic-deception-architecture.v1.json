@@ -1,0 +1,50 @@
+{
+  "schema_version": "rafaelia-operational-ontology.extension.v1",
+  "extension_id": "forensic-deception-architecture.v1",
+  "status": "REFERENCE",
+  "claim_allowed": false,
+  "authority": {
+    "control_plane": "rafaelmeloreisnovo/Mapa",
+    "research": "rafaelmeloreisnovo/papers",
+    "evidence_producer": "rafaelmeloreisnovo/RafPolimata",
+    "operator_surface": "rafaelmeloreisnovo/RafGitTools"
+  },
+  "concepts": [
+    {"id": "CANONICAL_DATA_PLANE", "kind": "PLANE", "definition": "Operational and legally relevant truth."},
+    {"id": "DECEPTION_DATA_PLANE", "kind": "PLANE", "definition": "Synthetic isolated records and surfaces for defensive observation."},
+    {"id": "FINGERPRINT_PLANE", "kind": "PLANE", "definition": "Recipient-specific structural projection and redundant codeword carriers."},
+    {"id": "RUNTIME_PROTECTION_PLANE", "kind": "PLANE", "definition": "Ephemeral buffers, encryption boundaries and minimized plaintext lifetime."},
+    {"id": "AUDIT_CUSTODY_PLANE", "kind": "PLANE", "definition": "Events, roots, manifests, checkpoints, receipts and rollback pointers."},
+    {"id": "CANONICAL_ID", "kind": "IDENTITY", "definition": "Stable identity used for business semantics and interoperability."},
+    {"id": "FORENSIC_PROJECTED_ID", "kind": "IDENTITY", "definition": "Context-specific local projection that never replaces legal identity."},
+    {"id": "EPOCH_ROTATION", "kind": "ACTIVITY", "definition": "Audited transition between fingerprint generations."},
+    {"id": "DECOY_TOUCH_EVENT", "kind": "EVENT", "definition": "Observation that an instrumented synthetic entity was accessed."},
+    {"id": "CODEWORD_CARRIER", "kind": "STRUCTURE", "definition": "A bounded channel carrying one or more redundant fingerprint symbols."},
+    {"id": "ATTRIBUTION_CANDIDATE", "kind": "STATE", "definition": "Scored source hypothesis that is not a legal or final attribution."}
+  ],
+  "relations": [
+    {"subject": "DECEPTION_DATA_PLANE", "predicate": "MUST_NOT_WRITE", "object": "CANONICAL_DATA_PLANE"},
+    {"subject": "FORENSIC_PROJECTED_ID", "predicate": "PROJECTS", "object": "CANONICAL_ID"},
+    {"subject": "EPOCH_ROTATION", "predicate": "EMITS", "object": "AUDIT_CUSTODY_PLANE"},
+    {"subject": "DECOY_TOUCH_EVENT", "predicate": "IS_RECORDED_BY", "object": "AUDIT_CUSTODY_PLANE"},
+    {"subject": "CODEWORD_CARRIER", "predicate": "BELONGS_TO", "object": "FINGERPRINT_PLANE"},
+    {"subject": "ATTRIBUTION_CANDIDATE", "predicate": "REQUIRES_INDEPENDENT_EVIDENCE_FROM", "object": "AUDIT_CUSTODY_PLANE"}
+  ],
+  "invariants": [
+    "TOKEN_VAZIO != 0",
+    "DECOY != CANONICAL",
+    "FINGERPRINT != FINAL_ATTRIBUTION",
+    "COMMIT != SECURITY_PROOF",
+    "LOCAL_TEST != PRODUCTION_VALIDATION",
+    "BUSINESS_QUERY_CANONICAL == BUSINESS_QUERY_PROJECTED_WITHOUT_DECOYS"
+  ],
+  "open_gaps": [
+    "COLLUSION_RESISTANT_CODE",
+    "CORRELATION_ATTACK_BASELINE",
+    "FALSE_POSITIVE_BASELINE",
+    "PRODUCTION_CRYPTOGRAPHY",
+    "INTERBASE_INTEGRATION",
+    "RUNTIME_MEMORY_PROTECTION",
+    "LEGAL_REVIEW"
+  ]
+}
