@@ -1,0 +1,27 @@
+# Índices de consolidação transversal
+
+Esta área registra leituras que cruzam múltiplas fontes sem confundir soma bruta, objeto único, autoridade canônica e capacidade executada.
+
+## X0 + home + Google Drive — 2026-07-25
+
+- [`X0_HOME_DRIVE_CONSOLIDATION_2026-07-25.md`](X0_HOME_DRIVE_CONSOLIDATION_2026-07-25.md): análise, mitigação e riscos remanescentes.
+- [`X0_HOME_DRIVE_MANIFEST_2026-07-25.json`](X0_HOME_DRIVE_MANIFEST_2026-07-25.json): estado legível por máquina, fontes, contagens, gates e `TOKEN_VAZIO`.
+
+## Invariante de contagem
+
+```text
+ocorrência observada
+≠ objeto único
+≠ artefato canônico
+≠ componente executável
+≠ capacidade validada
+```
+
+Toda consolidação deve preservar:
+
+- fonte e revisão observada;
+- hash quando disponível;
+- papel arquitetural;
+- risco de sensibilidade;
+- prova de build e runtime separadas;
+- motivo explícito para cada `TOKEN_VAZIO`.
