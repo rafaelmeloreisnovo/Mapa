@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/session_vector_pointer.v1.schema.json",
+  "title": "RAFAELIA Federated Four-Inks Session Vector Pointer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pointer_id",
+    "producer",
+    "source_path",
+    "source_ref",
+    "source_blob_sha",
+    "source_digest",
+    "selector",
+    "authority",
+    "state",
+    "scope",
+    "not_claimed",
+    "next_action",
+    "drift_policy",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "session-vector-pointer.v1"},
+    "pointer_id": {"enum": ["MAP-SV-PARABLE", "MAP-SV-CONVENTION", "MAP-SV-DEMONSTRATION", "MAP-SV-HYPOTHESIS", "MAP-SV-TOKEN-VAZIO"]},
+    "producer": {"const": "rafaelmeloreisnovo/papers"},
+    "source_path": {"const": "data/memory/session_vectors_four_inks.v1.jsonl"},
+    "source_ref": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_blob_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_digest": {"anyOf": [{"const": "TOKEN_VAZIO"}, {"type": "string", "pattern": "^[0-9a-f]{64}$"}]},
+    "selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ink", "expected_count"],
+      "properties": {
+        "ink": {"enum": ["PARABLE", "CONVENTION", "DEMONSTRATION", "HYPOTHESIS", "TOKEN_VAZIO"]},
+        "expected_count": {"type": "integer", "minimum": 1}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_owner", "scientific_owner", "control_plane", "execution_owner"],
+      "properties": {
+        "source_owner": {"const": "rafaelmeloreisnovo/papers"},
+        "scientific_owner": {"const": "rafaelmeloreisnovo/papers"},
+        "control_plane": {"const": "rafaelmeloreisnovo/Mapa"},
+        "execution_owner": {"const": "receipt-producing environment"}
+      }
+    },
+    "state": {"enum": ["SYNCHRONIZED_PRIVATE", "STALE_CONSUMER", "CONTRADICTION", "BLOCKED_BEFORE_STEPS"]},
+    "scope": {"type": "string", "minLength": 12},
+    "not_claimed": {"type": "array", "items": {"type": "string", "minLength": 4}, "minItems": 1, "uniqueItems": true},
+    "next_action": {"type": "string", "minLength": 8},
+    "drift_policy": {"const": "ref_or_blob_change_requires_resynchronization"},
+    "claim_allowed": {"const": false}
+  }
+}
