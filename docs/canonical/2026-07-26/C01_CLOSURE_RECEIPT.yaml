@@ -1,0 +1,57 @@
+schema: rafaelia.cycle-closure-receipt.v1
+cycle_id: C01
+cycle_name: canonical_identity_and_pinset
+created_at: '2026-07-26'
+state: PASS_DOCUMENTARY_WITH_TOKEN_VAZIO
+claim_allowed: false
+source_branch: docs/fechamento-gaps-2026-07-26
+source_base_commit: 81732c94c14edfd74180fca0e02f6252ce0ca4af
+artifacts:
+  - path: docs/canonical/2026-07-26/REPOSITORY_PINSET.yaml
+    content_blob_sha1: 318b4b97bed94fc553f2da0a8d04624ccf8ec29d
+    creation_commit: e4f515e841b88ede7a6895368e3190c492f3804a
+    gate: repository_identity_and_commit_pinning
+    status: PASS_DOCUMENTARY
+  - path: docs/canonical/2026-07-26/ALIAS_REGISTRY.yaml
+    content_blob_sha1: 347b07f7f909c2757ca76e6e0d90b02b7830d276
+    creation_commit: c550fcbaf0fb5bb050f50e1ed798f5ca2903783d
+    gate: alias_resolution_and_ambiguity_preservation
+    status: PASS_DOCUMENTARY_WITH_TOKEN_VAZIO
+  - path: docs/canonical/2026-07-26/SOURCE_OF_TRUTH.md
+    content_blob_sha1: 67c876398457ae44b505c0f9df7188d948e8c907
+    creation_commit: af54e75e95606359cb6cd41da8bf2134aeb57c33
+    gate: evidence_hierarchy_and_promotion_rules
+    status: PASS_DOCUMENTARY
+repositories_pinned:
+  mapa: 81732c94c14edfd74180fca0e02f6252ce0ca4af
+  rafpolimata: b230f79b4519f398d6a0f32c2235527966f14a36
+  vectras: a29392e65948463ab9cb6dbfefe64eb060e23a07
+  rafaelia_private: cebabd2178000d063aa147a4fe68521b192254a1
+  termux: 508efb3d01594cc20d51b7fb01d5f2a790169bf2
+  qemu: d4b3ef09956fa1abaeacba61dca3965f591c3a6a
+token_vazio_preserved:
+  - rafa22_exact_identity
+  - conversations_chunks_private_canonical_repository
+  - chunks_producer_commit
+  - real_descriptor_artifact_path
+  - artifact_sha256_for_not_yet_materialized_outputs
+  - artifact_blake3_for_not_yet_materialized_outputs
+  - physical_device_receipts
+  - full_rafpolimata_local_validation
+falsifiers:
+  - any repository commit differing from the pinset invalidates downstream receipt reuse
+  - direct evidence mapping Rafa22 to another repository invalidates the provisional candidate
+  - receipt without exact source commit cannot promote a gate
+  - documentation alone cannot promote runtime status
+exit_gate:
+  c01_outputs_present: true
+  identities_pinned: true
+  ambiguity_preserved: true
+  evidence_hierarchy_defined: true
+  physical_runtime_proven: false
+  next_cycle_authorized: C02
+  next_cycle_name: rafpolimata_local_truth
+r3:
+  f_ok: identity pinning aliases and truth hierarchy documented
+  f_gap: exact Rafa22 identity private producer artifacts and physical evidence
+  f_next: run RafPolimata local truth gates on the pinned commit
