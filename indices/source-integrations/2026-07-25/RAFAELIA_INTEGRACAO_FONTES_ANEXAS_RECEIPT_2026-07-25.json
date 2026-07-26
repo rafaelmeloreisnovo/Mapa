@@ -1,0 +1,45 @@
+{
+  "receipt_type": "RAFAELIA_SOURCE_INTEGRATION_RECEIPT",
+  "receipt_id": "RAFAELIA-INT-SOURCES-20260725-R1",
+  "generated_on": "2026-07-25",
+  "mode": "READ_ONLY_INGEST",
+  "claim_allowed": false,
+  "input_batch": {
+    "received_attachments": 16,
+    "semantic_source_objects": 7,
+    "byte_identical_aliases": 9,
+    "input_hashes": ["md5", "sha256", "blake3-256"]
+  },
+  "verification": {
+    "jsonl_parse": "PASS",
+    "atlas_alias_comparisons": "9/9 IDENTICAL",
+    "blake3_test_vectors": "PASS: input lengths 0, 1, 64 and 1024",
+    "blake3_digest_0": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262",
+    "blake3_scope_note": "The supplied C snapshot was locally compiled only for digest calculation with a compatibility macro for BLAKE3_LIKELY. This is not a full fork build or security certification."
+  },
+  "artifacts": [
+    {
+      "path": "RAFAELIA_INTEGRACAO_FONTES_ANEXAS_2026-07-25.md",
+      "bytes": 10072,
+      "md5": "a93f571a89d4fb660878d45259dbb8a3",
+      "sha256": "cfc7fe1d41aeafa75f16c601bfa908aeff040e01f7324b4d07d483efd07e8afc",
+      "blake3_256": "540ce88de4efd8863fee03abfed0a4744998205bd638b864dd4a47529faf183f"
+    },
+    {
+      "path": "RAFAELIA_FONTES_ANEXAS_CUSTODY_2026-07-25.jsonl",
+      "bytes": 12804,
+      "md5": "2874d56e517c39638c88065214a23c45",
+      "sha256": "c9c3bdaeed2adf2e635cd9f1afb663832fef4b2d5f88b83865775754275aa734",
+      "blake3_256": "35d11eda34fca0091e4fdca96ae786fff0c99830dc80c004e9b4aafcbf5c4301"
+    }
+  ],
+  "non_promotion_rule": "A matching digest establishes file identity only. All implementation, performance, scientific and security claims remain separately gated by evidence and falsifiers.",
+  "open_gaps": [
+    "GAP-B3-001",
+    "GAP-TORA-001",
+    "GAP-ATLAS-001",
+    "GAP-TERMUX-001",
+    "GAP-RLL-001",
+    "GAP-RAFBROWSER-001"
+  ]
+}
