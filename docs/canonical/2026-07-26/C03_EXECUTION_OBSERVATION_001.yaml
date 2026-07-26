@@ -1,0 +1,41 @@
+schema: rafaelia.execution-observation.v1
+cycle_id: C03
+observation_id: C03-GHA-20260726-001
+observed_at: '2026-07-26'
+repository: rafaelmeloreisnovo/RafPolimata
+pull_request: 168
+head_commit: e7c58f614acb6531a6f78d6de95e3aa7ea957eeb
+workflow:
+  name: Segment V1 ABI Contract
+  run_id: 30193442690
+  status: completed
+  conclusion: failure
+job:
+  id: 89770649845
+  name: abi-contract
+  status: completed
+  conclusion: failure
+  steps_observed: 0
+  logs_available: false
+interpretation:
+  state: BLOCKED_INFRA_ZERO_JOB_STEPS
+  code_execution_observed: false
+  syntax_check_executed: false
+  unit_tests_executed: false
+  abi_validator_executed: false
+  report_generated: false
+  code_result: TOKEN_VAZIO_EXECUTION_NOT_OBSERVED
+  claim_allowed: false
+forbidden_inference:
+  - workflow_failure_implies_abi_contract_failure
+  - same_record_size_implies_same_semantics
+  - contract_file_presence_proves_codec_alignment
+  - stacked_pr_presence_proves_c02_or_c03_execution
+next_actions:
+  - execute validator in local checkout
+  - inspect generated report before extractor implementation
+  - preserve v1 ABI and version future 32-byte layout as v2
+r3:
+  f_ok: contradiction identified version decision and validator implementation proven
+  f_gap: validator tests report extractor writer and crypto gate not executed
+  f_next: local ABI report then bounded event stream implementation
