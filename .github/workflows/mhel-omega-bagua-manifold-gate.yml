@@ -1,0 +1,150 @@
+name: MHEL Omega Bagua Manifold Gate
+
+on:
+  push:
+    branches:
+      - hotfix/mhel-omega-bagua-manifold-v13-20260727
+    paths:
+      - 'docs/canonical/2026-07-27/MHEL_OMEGA_V1_3_BAGUA_MANIFOLD_HOTFIX.md'
+      - 'configs/mhel_omega_bagua_manifold.v1.yaml'
+      - 'schemas/mhel-omega-manifold-receipt.schema.json'
+      - 'scripts/validate_mhel_omega_bagua_manifold.py'
+      - 'tests/test_validate_mhel_omega_bagua_manifold.py'
+      - 'data/receipts/mhel_omega_v13_fixture.json'
+      - '.github/workflows/mhel-omega-bagua-manifold-gate.yml'
+  pull_request:
+    paths:
+      - 'docs/canonical/2026-07-27/MHEL_OMEGA_V1_3_BAGUA_MANIFOLD_HOTFIX.md'
+      - 'configs/mhel_omega_bagua_manifold.v1.yaml'
+      - 'schemas/mhel-omega-manifold-receipt.schema.json'
+      - 'scripts/validate_mhel_omega_bagua_manifold.py'
+      - 'tests/test_validate_mhel_omega_bagua_manifold.py'
+      - 'data/receipts/mhel_omega_v13_fixture.json'
+      - '.github/workflows/mhel-omega-bagua-manifold-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mhel-omega-bagua-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deterministic-contract:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.12', '3.13']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile scripts/validate_mhel_omega_bagua_manifold.py
+          python -m py_compile tests/test_validate_mhel_omega_bagua_manifold.py
+
+      - name: Validate JSON syntax
+        run: |
+          python -m json.tool schemas/mhel-omega-manifold-receipt.schema.json >/dev/null
+          python -m json.tool data/receipts/mhel_omega_v13_fixture.json >/dev/null
+
+      - name: Validate canonical YAML contract without external dependencies
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('configs/mhel_omega_bagua_manifold.v1.yaml')
+          text = p.read_text(encoding='utf-8')
+          required = [
+              'schema_version: mhel-omega-bagua-manifold-v1',
+              'trigram_count: 8',
+              'hexagram_count: 64',
+              'sequence: [4, 8, 3, 5, 2, 4, 8, 6]',
+              'method: DMAIC',
+              'maximum_margin_of_error_when_applicable: 0.03',
+              'claim_allowed: false',
+          ]
+          missing = [item for item in required if item not in text]
+          if missing:
+              raise SystemExit(f'missing YAML contract invariants: {missing}')
+          print('PASS: YAML contract invariants present')
+          PY
+
+      - name: Run unit tests
+        run: python -m unittest -v tests/test_validate_mhel_omega_bagua_manifold.py
+
+      - name: Validate canonical fixture through CLI
+        run: |
+          python scripts/validate_mhel_omega_bagua_manifold.py \
+            data/receipts/mhel_omega_v13_fixture.json | tee mhel-omega-gate.txt
+
+      - name: Build execution receipt
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import platform
+          from pathlib import Path
+
+          files = [
+              'docs/canonical/2026-07-27/MHEL_OMEGA_V1_3_BAGUA_MANIFOLD_HOTFIX.md',
+              'configs/mhel_omega_bagua_manifold.v1.yaml',
+              'schemas/mhel-omega-manifold-receipt.schema.json',
+              'scripts/validate_mhel_omega_bagua_manifold.py',
+              'tests/test_validate_mhel_omega_bagua_manifold.py',
+              'data/receipts/mhel_omega_v13_fixture.json',
+          ]
+          hashes = {}
+          for filename in files:
+              payload = Path(filename).read_bytes()
+              hashes[filename] = hashlib.sha256(payload).hexdigest()
+
+          receipt = {
+              'schema_version': 'mhel-omega-gate-receipt-v1',
+              'state': 'PASS_IF_JOB_SUCCESS',
+              'claim_allowed': False,
+              'commit': os.environ.get('GITHUB_SHA'),
+              'ref': os.environ.get('GITHUB_REF'),
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'python': platform.python_version(),
+              'files_sha256': hashes,
+              'checks': {
+                  'py_compile': 'PASS',
+                  'json_syntax': 'PASS',
+                  'yaml_contract': 'PASS',
+                  'unit_tests': 6,
+                  'fixture_cli': 'PASS',
+              },
+              'boundaries': {
+                  'bagua_is_physical_proof': False,
+                  'alpha_k_is_thermal_claim': False,
+                  'six_sigma_achieved': False,
+                  'real_baseline': 'TOKEN_VAZIO_QUANTIFICADO',
+              },
+          }
+          Path('mhel-omega-execution-receipt.json').write_text(
+              json.dumps(receipt, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          PY
+
+      - name: Upload execution receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: mhel-omega-bagua-receipt-py${{ matrix.python-version }}
+          path: |
+            mhel-omega-gate.txt
+            mhel-omega-execution-receipt.json
+          if-no-files-found: error
+          retention-days: 30
