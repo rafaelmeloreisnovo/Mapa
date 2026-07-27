@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/mhel-omega-manifold-receipt.schema.json",
+  "title": "MHEL-Ω Bagua Manifold Receipt",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "source_hash",
+    "previous_event_hash",
+    "window_thirds",
+    "material_group",
+    "manifold_coordinates",
+    "epistemic_state",
+    "dmaic_stage",
+    "sample_statistics",
+    "token_vazio",
+    "next_test",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "mhel-omega-manifold-receipt-v1"},
+    "receipt_id": {"type": "string", "minLength": 1},
+    "source_hash": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "previous_event_hash": {
+      "oneOf": [
+        {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        {"const": "GENESIS"}
+      ]
+    },
+    "observed_at": {"type": "string", "format": "date-time"},
+    "author_original": {"type": "string"},
+    "interpreter": {"type": "string"},
+    "window_thirds": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {"$ref": "#/$defs/windowThird"},
+        {"$ref": "#/$defs/windowThird"},
+        {"$ref": "#/$defs/windowThird"}
+      ],
+      "items": false
+    },
+    "material_group": {
+      "enum": [
+        "TEXT_LANGUAGE",
+        "MATHEMATICS_GEOMETRY",
+        "CODE_BINARY",
+        "STORAGE_FORENSICS",
+        "SCIENCE_MEASUREMENT",
+        "SYMBOL_PARABLE",
+        "LEGAL_AUTHORSHIP",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "trigram_state": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["id", "bits"],
+          "properties": {
+            "id": {"enum": ["QIAN", "DUI", "LI", "ZHEN", "XUN", "KAN", "GEN", "KUN"]},
+            "bits": {"type": "string", "pattern": "^[01]{3}$"}
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "hexagram_state": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["bits", "lower_trigram", "upper_trigram"],
+          "properties": {
+            "bits": {"type": "string", "pattern": "^[01]{6}$"},
+            "lower_trigram": {"type": "string", "pattern": "^[01]{3}$"},
+            "upper_trigram": {"type": "string", "pattern": "^[01]{3}$"}
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "manifold_coordinates": {
+      "type": "object",
+      "required": ["source", "syntax", "semantics", "dynamics", "evidence", "uncertainty", "time", "scale"],
+      "properties": {
+        "source": {},
+        "syntax": {},
+        "semantics": {},
+        "dynamics": {},
+        "evidence": {},
+        "uncertainty": {"type": "number", "minimum": 0, "maximum": 1},
+        "time": {},
+        "scale": {}
+      },
+      "additionalProperties": true
+    },
+    "yin_yang_pair": {
+      "type": ["object", "null"],
+      "properties": {
+        "pole_a": {},
+        "pole_b": {},
+        "center": {},
+        "mode": {"enum": ["EXACT_EQUIDISTANCE", "WEIGHTED_EQUIDISTANCE", "BOUNDED_EQUIDISTANCE"]},
+        "epsilon": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": true
+    },
+    "five_phase_transition": {
+      "type": ["object", "null"],
+      "properties": {
+        "from": {"enum": ["WOOD", "FIRE", "EARTH", "METAL", "WATER"]},
+        "to": {"enum": ["WOOD", "FIRE", "EARTH", "METAL", "WATER"]},
+        "reason": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "alpha_k": {
+      "type": ["object", "null"],
+      "properties": {
+        "initial_radius": {"type": "number", "exclusiveMinimum": 0},
+        "delta_demand": {"type": "number", "not": {"const": 0}},
+        "delta_radius": {"type": "number"},
+        "value": {"type": "number"},
+        "state": {"enum": ["MEASURED", "ZERO_TEXT_ONLY", "OVEREXPANSION_BLOCKED", "TOKEN_VAZIO_QUANTIFICADO"]}
+      },
+      "additionalProperties": true
+    },
+    "epistemic_state": {
+      "enum": ["KNOWS", "FELTS", "TOKEN_VAZIO", "TOKEN_VAZIO_QUANTIFICADO", "CONTRADICTED", "REFUTED", "UNKNOWN_UNKNOWN"]
+    },
+    "dmaic_stage": {"enum": ["DEFINE", "MEASURE", "ANALYZE", "IMPROVE", "CONTROL"]},
+    "sample_statistics": {"$ref": "#/$defs/sampleStatistics"},
+    "process_capability": {
+      "type": ["object", "null"],
+      "properties": {
+        "stable_process": {"type": "boolean"},
+        "defects": {"type": "integer", "minimum": 0},
+        "units": {"type": "integer", "minimum": 1},
+        "opportunities_per_unit": {"type": "integer", "minimum": 1},
+        "dpo": {"type": "number", "minimum": 0},
+        "dpmo": {"type": "number", "minimum": 0},
+        "mean": {"type": "number"},
+        "sample_stddev": {"type": "number", "exclusiveMinimum": 0},
+        "lsl": {"type": "number"},
+        "usl": {"type": "number"},
+        "cp": {"type": "number"},
+        "cpk": {"type": "number"}
+      },
+      "additionalProperties": true
+    },
+    "token_vazio": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "missing_information", "uncertainty", "required_test"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "missing_information": {"type": "string"},
+          "uncertainty": {"type": "number", "minimum": 0, "maximum": 1},
+          "validation_probability": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "closure_cost": {"type": ["number", "null"], "minimum": 0},
+          "required_test": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "next_test": {"type": "string", "minLength": 1},
+    "forbidden_promotions": {"type": "array", "items": {"type": "string"}},
+    "claim_allowed": {"const": false}
+  },
+  "$defs": {
+    "windowThird": {
+      "type": "object",
+      "required": ["role", "start", "middle", "end"],
+      "properties": {
+        "role": {"enum": ["ORIGIN_INPUT", "TRANSFORM_MIDDLE", "RECEIPT_OUTPUT"]},
+        "start": {},
+        "middle": {},
+        "end": {},
+        "comprehension_state": {"enum": ["COMPREHENSIBLE", "PARTIAL", "INCOMPREHENSIBLE", "TOKEN_VAZIO"]}
+      },
+      "additionalProperties": true
+    },
+    "sampleStatistics": {
+      "type": "object",
+      "required": ["n", "n_effective", "design_effect", "margin_of_error", "confidence_level"],
+      "properties": {
+        "n": {"type": "integer", "minimum": 0},
+        "n_effective": {"type": "number", "minimum": 0},
+        "design_effect": {"type": "number", "minimum": 1},
+        "margin_of_error": {"type": ["number", "null"], "minimum": 0},
+        "confidence_level": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "ground_truth_available": {"type": "boolean"},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    }
+  }
+}
