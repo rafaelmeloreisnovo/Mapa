@@ -1,0 +1,71 @@
+{
+  "schema": "sementeira.context-local-validation/v2",
+  "supersedes": "auditoria/SEMENTEIRA_SOURCE_BASELINE_2026-07-27.json",
+  "correction_reason": "The engine was compacted before repository commit; this receipt records the hashes of the exact committed implementation and the final re-executed baseline without deleting the earlier receipt.",
+  "executed_at": "2026-07-27T20:00:00-03:00",
+  "environment": {
+    "python": "3.13.5",
+    "implementation": "CPython",
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41"
+  },
+  "checks": {
+    "py_compile": "PASS",
+    "unittest": {"status": "PASS", "tests": 12, "failures": 0, "errors": 0},
+    "engine_execution": "PASS",
+    "source_count_verified": 12,
+    "source_bytes_verified": 111625,
+    "source_lines_verified": 3995,
+    "events": 1211,
+    "relations_capped": 500,
+    "paradox_candidates": 5,
+    "blocking_findings": 0,
+    "plane_counts": {
+      "BRAINSTORM_CANDIDATE": 735,
+      "EVIDENCE_CANDIDATE": 67,
+      "GAP": 61,
+      "HYPOTHESIS_CANDIDATE": 89,
+      "IMPLEMENTATION_CANDIDATE": 41,
+      "METRIC_CANDIDATE": 12,
+      "MODEL_CANDIDATE": 119,
+      "PARABLE_SYMBOLIC": 42,
+      "PROTOCOL_CANDIDATE": 45
+    },
+    "gap_counts": {"TOKEN_VAZIO": 61, "TV-BOUNDARY": 12, "TV-TEST": 86}
+  },
+  "hashes": {
+    "source_manifest_sha256": "718dd9aa49bc883264cc00c873484962fdcba7a2e5c2b11df8067f32c79576c8",
+    "full_generated_baseline_sha256": "067704038378b30a35ecdbd4ffd0831795e9dd959ea17bfe6ed13b7821701ac8",
+    "engine_sha256": "cd25419f7b8b96541336fb177bf6367c160c8dcb863dc6befe34fb550b26159f",
+    "tests_sha256": "9ddd7d68ae02bf85e8baa3112e16448155524288a4cda619ff7bd5e3c40e225f"
+  },
+  "statistics_contract": {
+    "sampling_frame": "complete census of supplied local source snapshots",
+    "semantic_accuracy": "TOKEN_VAZIO_GROUND_TRUTH",
+    "confidence_interval": null,
+    "margin_of_error": null,
+    "reason": "no independently labeled semantic ground truth"
+  },
+  "limits": [
+    "source files are GPT Project exports/snapshots, not direct access to Transformer internal state",
+    "heuristic classifications are not claims",
+    "correlation relations are FELTS and not causal",
+    "full generated event report remains a rebuildable output and is not committed as canonical source"
+  ],
+  "F_ok": [
+    "sources verified by SHA-256 and size",
+    "literal blocks preserved by source coordinates and fragment hashes",
+    "derivative signatures computed",
+    "antiderivative provenance roundtrips checked",
+    "correlations emitted only as FELTS",
+    "hypotheses without falsifiers emit TV-TEST"
+  ],
+  "F_gap": [
+    "independent semantic ground truth",
+    "human review of candidate planes and paradoxes",
+    "calibrated similarity thresholds",
+    "cross-project source API for native GPT Project memory",
+    "longitudinal delta across future source snapshots"
+  ],
+  "F_next": "Review false positives, freeze a labeled calibration set, then compare the next Project snapshot as an append-only delta.",
+  "claim_allowed": false
+}

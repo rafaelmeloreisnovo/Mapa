@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://instituto-rafael.example/schemas/sementeira-context-event.schema.json",
+  "title": "Sementeira Context Event",
+  "type": "object",
+  "required": ["schema", "event_id", "project", "source", "state", "plane", "literal_preserved_by_pointer", "derivative", "antiderivative", "token_vazio", "forbidden_promotions", "claim_allowed"],
+  "properties": {
+    "schema": {"const": "sementeira.context-event/v1"},
+    "event_id": {"type": "string", "pattern": "^sem-[0-9a-f]{20}$"},
+    "project": {"const": "Sementeira"},
+    "source": {
+      "type": "object",
+      "required": ["source_id", "title", "path_hint", "source_sha256", "line_start", "line_end", "fragment_sha256"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "path_hint": {"type": "string", "minLength": 1},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "line_start": {"type": "integer", "minimum": 1},
+        "line_end": {"type": "integer", "minimum": 1},
+        "fragment_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "state": {"const": "BRAINSTORM_CANDIDATE"},
+    "plane": {"enum": ["BRAINSTORM_CANDIDATE", "EVIDENCE_CANDIDATE", "GAP", "HYPOTHESIS_CANDIDATE", "IMPLEMENTATION_CANDIDATE", "METRIC_CANDIDATE", "MODEL_CANDIDATE", "PARABLE_SYMBOLIC", "PROTOCOL_CANDIDATE"]},
+    "literal_preserved_by_pointer": {"const": true},
+    "token_count": {"type": "integer", "minimum": 0},
+    "unique_token_count": {"type": "integer", "minimum": 0},
+    "top_terms": {"type": "array", "items": {"type": "string"}, "maxItems": 16},
+    "classification_cues": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "invariants": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "derivative": {
+      "type": "object",
+      "required": ["operator", "third_sizes", "third_entropies", "transitions", "interpretation"],
+      "properties": {
+        "operator": {"const": "DERIVATIVE_LOCAL_DELTA"},
+        "third_sizes": {"type": "array", "prefixItems": [{"type": "integer", "minimum": 0}, {"type": "integer", "minimum": 0}, {"type": "integer", "minimum": 0}], "minItems": 3, "maxItems": 3},
+        "third_entropies": {"type": "array", "prefixItems": [{"type": "number", "minimum": 0}, {"type": "number", "minimum": 0}, {"type": "number", "minimum": 0}], "minItems": 3, "maxItems": 3},
+        "transitions": {"type": "array", "minItems": 2, "maxItems": 2},
+        "interpretation": {"type": "string", "pattern": "not causal proof"}
+      },
+      "additionalProperties": false
+    },
+    "antiderivative": {
+      "type": "object",
+      "required": ["operator", "reconstructs", "content_reconstruction_claimed", "roundtrip_state"],
+      "properties": {
+        "operator": {"const": "ANTIDERIVATIVE_PROVENANCE_RETURN"},
+        "reconstructs": {"type": "array", "items": {"type": "string"}},
+        "content_reconstruction_claimed": {"const": false},
+        "roundtrip_state": {"enum": ["PENDING_VALIDATION", "PASS_SOURCE_COORDINATE_HASH"]}
+      },
+      "additionalProperties": false
+    },
+    "paradox_candidate": {"type": "boolean"},
+    "falsifier_present": {"type": "boolean"},
+    "token_vazio": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["class", "reason", "required_test"],
+        "properties": {
+          "class": {"enum": ["TOKEN_VAZIO", "TV-TEST", "TV-BOUNDARY"]},
+          "reason": {"type": "string", "minLength": 1},
+          "required_test": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "forbidden_promotions": {"type": "array", "contains": {"const": "BRAINSTORM_TO_VALIDATED_MEMORY"}},
+    "claim_allowed": {"const": false}
+  },
+  "additionalProperties": false
+}
