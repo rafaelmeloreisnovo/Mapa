@@ -1,0 +1,80 @@
+{
+  "schema_version": "mhel-omega-manifold-receipt-v1",
+  "receipt_id": "MHEL-OMEGA-V13-FIXTURE-001",
+  "source_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "previous_event_hash": "GENESIS",
+  "observed_at": "2026-07-27T19:30:00Z",
+  "author_original": "Rafael Melo Reis — ∆RafaelVerboΩ",
+  "interpreter": "MHEL-Ω V1.3 fixture",
+  "window_thirds": [
+    {"role": "ORIGIN_INPUT", "start": 0, "middle": 1, "end": 2, "comprehension_state": "COMPREHENSIBLE"},
+    {"role": "TRANSFORM_MIDDLE", "start": 3, "middle": 4, "end": 5, "comprehension_state": "PARTIAL"},
+    {"role": "RECEIPT_OUTPUT", "start": 6, "middle": 7, "end": 8, "comprehension_state": "COMPREHENSIBLE"}
+  ],
+  "material_group": "MATHEMATICS_GEOMETRY",
+  "trigram_state": {"id": "LI", "bits": "101"},
+  "hexagram_state": {"bits": "101010", "lower_trigram": "101", "upper_trigram": "010"},
+  "manifold_coordinates": {
+    "source": "fixture",
+    "syntax": "binary-lines",
+    "semantics": "test-only",
+    "dynamics": "one-line-change",
+    "evidence": "unit-test",
+    "uncertainty": 0.2,
+    "time": "t0",
+    "scale": 1
+  },
+  "yin_yang_pair": {
+    "pole_a": 0,
+    "pole_b": 1,
+    "center": 0.5,
+    "mode": "EXACT_EQUIDISTANCE",
+    "epsilon": 0
+  },
+  "five_phase_transition": {"from": "WOOD", "to": "FIRE", "reason": "fixture"},
+  "alpha_k": {
+    "initial_radius": 2.0,
+    "delta_demand": 4.0,
+    "delta_radius": 2.0,
+    "value": 0.25,
+    "state": "MEASURED"
+  },
+  "epistemic_state": "TOKEN_VAZIO_QUANTIFICADO",
+  "dmaic_stage": "MEASURE",
+  "sample_statistics": {
+    "n": 120,
+    "n_effective": 80.0,
+    "design_effect": 1.5,
+    "margin_of_error": 0.03,
+    "confidence_level": 0.95,
+    "ground_truth_available": false,
+    "limitations": ["fixture only"]
+  },
+  "process_capability": {
+    "stable_process": true,
+    "defects": 1,
+    "units": 100,
+    "opportunities_per_unit": 10,
+    "dpo": 0.001,
+    "dpmo": 1000.0,
+    "mean": 5.0,
+    "sample_stddev": 1.0,
+    "lsl": 0.0,
+    "usl": 10.0,
+    "cp": 1.6666666666666667,
+    "cpk": 1.6666666666666667
+  },
+  "token_vazio": [
+    {
+      "id": "TV-BASELINE-001",
+      "missing_information": "real baseline",
+      "uncertainty": 0.8,
+      "validation_probability": null,
+      "closure_cost": null,
+      "required_test": "execute measured pilot"
+    }
+  ],
+  "next_test": "execute measured pilot",
+  "forbidden_promotions": ["BAGUA_TO_PHYSICAL_PROOF"],
+  "claim_allowed": false
+}
