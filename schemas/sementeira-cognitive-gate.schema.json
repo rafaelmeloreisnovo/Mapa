@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/sementeira-cognitive-gate.schema.json",
+  "title": "Sementeira Cognitive Gate 5x7 V1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["protocol_version", "event_id", "variables", "directions", "evidence", "claims", "claim_allowed"],
+  "properties": {
+    "protocol_version": {"const": "SEMENTEIRA-5X7-V1"},
+    "event_id": {"type": "string", "minLength": 1},
+    "variables": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 5,
+      "maxProperties": 5,
+      "required": ["intention", "evidence", "human_state", "execution_capacity", "next_falsifiable_gate"],
+      "properties": {
+        "intention": {"type": "string", "minLength": 1},
+        "evidence": {"type": "string", "minLength": 1},
+        "human_state": {"type": "string", "minLength": 1},
+        "execution_capacity": {"type": "string", "minLength": 1},
+        "next_falsifiable_gate": {"type": "string", "minLength": 1}
+      }
+    },
+    "directions": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 7,
+      "maxProperties": 7,
+      "required": ["fact", "gap", "invariant", "variant", "proof_or_falsifier", "parable", "feedback"],
+      "properties": {
+        "fact": {"type": "string", "minLength": 1},
+        "gap": {"type": "string", "minLength": 1},
+        "invariant": {"type": "string", "minLength": 1},
+        "variant": {"type": "string", "minLength": 1},
+        "proof_or_falsifier": {"type": "string", "minLength": 1},
+        "parable": {"type": "string", "minLength": 1},
+        "feedback": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "locator", "sha256"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["SOURCE", "METHOD", "TEST_RECEIPT", "REPLICATION"]},
+          "locator": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"}
+        }
+      }
+    },
+    "claims": {"type": "array", "items": {"type": "object"}},
+    "claim_allowed": {"const": false}
+  }
+}
