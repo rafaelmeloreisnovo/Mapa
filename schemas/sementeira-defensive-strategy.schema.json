@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/sementeira-defensive-strategy.schema.json",
+  "title": "Sementeira Defensive Strategy Registry",
+  "type": "object",
+  "required": ["schema", "version", "status", "purpose", "priority_method", "normative_order", "claim_allowed", "strategies"],
+  "properties": {
+    "schema": {"const": "sementeira.defensive-strategy-registry/v1"},
+    "version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["CANONICAL_DRAFT", "REVIEWED", "SUPERSEDED"]},
+    "purpose": {"type": "string", "minLength": 1},
+    "priority_method": {"type": "string", "minLength": 1},
+    "normative_order": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "claim_allowed": {"const": false},
+    "strategies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/strategy"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "score": {"type": "integer", "minimum": 0, "maximum": 5},
+    "stringArray": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "strategy": {
+      "type": "object",
+      "required": [
+        "strategy_id", "title", "origin_vectors", "security_posture", "knowledge_tier",
+        "adoption_risk", "omission_risk", "defensive_value", "evidence_strength",
+        "observability", "reversibility", "dignity_risk", "abuse_transferability",
+        "authorization_required", "human_oversight_required", "allowed_outputs",
+        "forbidden_outputs", "controls", "normative_conflicts", "falsifier",
+        "next_gate", "claim_allowed"
+      ],
+      "properties": {
+        "strategy_id": {"type": "string", "pattern": "^STRAT-[0-9]{3}-[A-Z0-9-]+$"},
+        "title": {"type": "string", "minLength": 1},
+        "origin_vectors": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["OBSERVED", "LATENT", "LATERAL", "FORGOTTEN", "DISREGARDED", "OBVIOUS_MISSED", "MODEL_INHIBITION_CANDIDATE"]}
+        },
+        "security_posture": {"const": "WHITE_HAT_DEFENSIVE"},
+        "knowledge_tier": {"enum": ["K0_PUBLIC_CONCEPT", "K1_DETECTION_MITIGATION", "K2_SAFE_SIMULATION", "K3_RESTRICTED_AUTHORIZED_LAB", "K4_PROHIBITED_HIGH_RISK_DETAIL"]},
+        "high_risk_detail_present": {"type": "boolean"},
+        "adoption_risk": {"$ref": "#/$defs/score"},
+        "omission_risk": {"$ref": "#/$defs/score"},
+        "defensive_value": {"$ref": "#/$defs/score"},
+        "evidence_strength": {"$ref": "#/$defs/score"},
+        "observability": {"$ref": "#/$defs/score"},
+        "reversibility": {"$ref": "#/$defs/score"},
+        "dignity_risk": {"$ref": "#/$defs/score"},
+        "abuse_transferability": {"$ref": "#/$defs/score"},
+        "authorization_required": {"const": true},
+        "human_oversight_required": {"const": true},
+        "allowed_outputs": {"$ref": "#/$defs/stringArray"},
+        "forbidden_outputs": {
+          "allOf": [
+            {"$ref": "#/$defs/stringArray"},
+            {"contains": {"const": "CAT-HR-01"}},
+            {"contains": {"const": "CAT-HR-02"}},
+            {"contains": {"const": "CAT-HR-03"}},
+            {"contains": {"const": "CAT-HR-04"}},
+            {"contains": {"const": "CAT-HR-05"}},
+            {"contains": {"const": "CAT-HR-06"}}
+          ]
+        },
+        "controls": {"$ref": "#/$defs/stringArray"},
+        "normative_conflicts": {"$ref": "#/$defs/stringArray"},
+        "falsifier": {"type": "string", "minLength": 1},
+        "next_gate": {"type": "string", "minLength": 1},
+        "claim_allowed": {"const": false}
+      },
+      "additionalProperties": false
+    }
+  }
+}

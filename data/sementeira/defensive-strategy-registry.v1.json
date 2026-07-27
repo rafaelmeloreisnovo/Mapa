@@ -1,0 +1,396 @@
+{
+  "schema": "sementeira.defensive-strategy-registry/v1",
+  "version": "1.0.0",
+  "status": "CANONICAL_DRAFT",
+  "purpose": "Prioritize defensive strategies without retaining high-risk operational detail.",
+  "priority_method": "fail-closed gates followed by lexicographic ordering; weights remain TOKEN_VAZIO_CALIBRATION",
+  "normative_order": [
+    "HUMAN_DIGNITY_AND_FUNDAMENTAL_RIGHTS",
+    "APPLICABLE_LAW_AND_AUTHORIZATION",
+    "PHYSICAL_AND_PSYCHOLOGICAL_SAFETY",
+    "PRIVACY_AND_AUTONOMY",
+    "SECURITY_AND_RESILIENCE",
+    "ORGANIZATIONAL_POLICY",
+    "PERFORMANCE_OPTIMIZATION"
+  ],
+  "claim_allowed": false,
+  "strategies": [
+    {
+      "strategy_id": "STRAT-001-LATENT-LEDGER",
+      "title": "Ledger de ideias latentes, laterais, esquecidas e óbvias não processadas",
+      "origin_vectors": [
+        "LATENT",
+        "LATERAL",
+        "FORGOTTEN",
+        "DISREGARDED",
+        "OBVIOUS_MISSED",
+        "MODEL_INHIBITION_CANDIDATE"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K0_PUBLIC_CONCEPT",
+      "adoption_risk": 1,
+      "omission_risk": 4,
+      "defensive_value": 4,
+      "evidence_strength": 3,
+      "observability": 5,
+      "reversibility": 5,
+      "dignity_risk": 1,
+      "abuse_transferability": 0,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "provenance",
+        "risk_label",
+        "falsifier",
+        "next_gate",
+        "defensive_relation"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "append_only",
+        "source_hash",
+        "human_review",
+        "deduplication"
+      ],
+      "normative_conflicts": [],
+      "falsifier": "A labeled review shows that the ledger increases noise without recovering useful omitted strategies.",
+      "next_gate": "Freeze a human-labeled sample and measure recovery precision and false-positive rate.",
+      "claim_allowed": false
+    },
+    {
+      "strategy_id": "STRAT-002-THREAT-MODEL",
+      "title": "Modelagem adversarial abstrata para prevenção e detecção",
+      "origin_vectors": [
+        "OBSERVED",
+        "LATERAL"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K1_DETECTION_MITIGATION",
+      "adoption_risk": 2,
+      "omission_risk": 5,
+      "defensive_value": 5,
+      "evidence_strength": 4,
+      "observability": 4,
+      "reversibility": 4,
+      "dignity_risk": 1,
+      "abuse_transferability": 2,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "threat_category",
+        "indicator",
+        "detection_rule",
+        "mitigation",
+        "incident_playbook",
+        "safe_test_plan"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "concept_only",
+        "least_privilege",
+        "authorized_scope",
+        "no_live_target",
+        "dual_review"
+      ],
+      "normative_conflicts": [],
+      "falsifier": "The model fails to improve detection coverage or creates materially more false positives than the accepted baseline.",
+      "next_gate": "Test detection-only scenarios on synthetic fixtures and measure precision, recall and abstention.",
+      "claim_allowed": false
+    },
+    {
+      "strategy_id": "STRAT-003-SAFE-EMULATION",
+      "title": "Emulação segura de comportamento adversarial em ambiente isolado",
+      "origin_vectors": [
+        "LATENT",
+        "OBSERVED"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K2_SAFE_SIMULATION",
+      "adoption_risk": 3,
+      "omission_risk": 3,
+      "defensive_value": 4,
+      "evidence_strength": 2,
+      "observability": 5,
+      "reversibility": 4,
+      "dignity_risk": 1,
+      "abuse_transferability": 3,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "synthetic_fixture",
+        "telemetry",
+        "detection_validation",
+        "rollback_receipt"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "air_gapped_fixture",
+        "no_real_sensitive_inputs",
+        "no_external_network",
+        "rollback",
+        "artifact_minimization"
+      ],
+      "normative_conflicts": [
+        "A realistic simulation may increase abuse transferability if operational detail escapes the lab."
+      ],
+      "falsifier": "Isolation, rollback or telemetry controls cannot be demonstrated before execution.",
+      "next_gate": "Produce a non-operational synthetic fixture and prove containment before any simulation.",
+      "claim_allowed": false
+    },
+    {
+      "strategy_id": "STRAT-004-DUAL-RISK",
+      "title": "Registro conjunto do risco de adoção e do risco de omissão",
+      "origin_vectors": [
+        "OBVIOUS_MISSED",
+        "LATENT"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K0_PUBLIC_CONCEPT",
+      "adoption_risk": 1,
+      "omission_risk": 5,
+      "defensive_value": 5,
+      "evidence_strength": 4,
+      "observability": 5,
+      "reversibility": 5,
+      "dignity_risk": 1,
+      "abuse_transferability": 0,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "adoption_risk",
+        "omission_risk",
+        "decision_receipt",
+        "residual_risk"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "two_sided_risk",
+        "decision_owner",
+        "review_date",
+        "rollback_plan"
+      ],
+      "normative_conflicts": [],
+      "falsifier": "Decisions using the dual-risk record are not more traceable than the previous single-risk process.",
+      "next_gate": "Apply to three past decisions and compare omitted risks and decision clarity.",
+      "claim_allowed": false
+    },
+    {
+      "strategy_id": "STRAT-005-DIGNITY-GATE",
+      "title": "Gate de dignidade, direitos, privacidade, autonomia e supervisão humana",
+      "origin_vectors": [
+        "OBSERVED",
+        "DISREGARDED",
+        "OBVIOUS_MISSED"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K0_PUBLIC_CONCEPT",
+      "adoption_risk": 1,
+      "omission_risk": 5,
+      "defensive_value": 5,
+      "evidence_strength": 5,
+      "observability": 4,
+      "reversibility": 4,
+      "dignity_risk": 0,
+      "abuse_transferability": 0,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "impact_assessment",
+        "consent_state",
+        "human_oversight",
+        "appeal_path",
+        "proportionality_record"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "purpose_limitation",
+        "data_minimization",
+        "human_review",
+        "appeal",
+        "non_discrimination",
+        "least_harm"
+      ],
+      "normative_conflicts": [
+        "Security monitoring may conflict with privacy, autonomy or proportionality."
+      ],
+      "falsifier": "The gate cannot identify or block a seeded case with disproportionate human impact.",
+      "next_gate": "Run adversarial policy fixtures covering surveillance, bias, coercion and denial of appeal.",
+      "claim_allowed": false
+    },
+    {
+      "strategy_id": "STRAT-006-NORM-CONFLICT",
+      "title": "Registro de conflito entre normas, controles e proteção humana",
+      "origin_vectors": [
+        "LATENT",
+        "LATERAL",
+        "OBVIOUS_MISSED"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K0_PUBLIC_CONCEPT",
+      "adoption_risk": 2,
+      "omission_risk": 5,
+      "defensive_value": 5,
+      "evidence_strength": 3,
+      "observability": 4,
+      "reversibility": 4,
+      "dignity_risk": 1,
+      "abuse_transferability": 0,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "norm_reference",
+        "conflict",
+        "affected_people",
+        "temporary_control",
+        "review_authority",
+        "sunset_date"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "higher_rights_gate",
+        "legal_review",
+        "temporary_exception",
+        "sunset_clause",
+        "audit_trail"
+      ],
+      "normative_conflicts": [
+        "A security control can satisfy one standard while violating privacy, accessibility, equality or due process."
+      ],
+      "falsifier": "The register fails to expose a seeded conflict between security optimization and a fundamental right.",
+      "next_gate": "Build a conflict fixture and require an explicit human decision with expiry and appeal.",
+      "claim_allowed": false
+    },
+    {
+      "strategy_id": "STRAT-007-RESTRICTED-LAB",
+      "title": "Conhecimento técnico sensível restrito a laboratório autorizado",
+      "origin_vectors": [
+        "LATENT",
+        "MODEL_INHIBITION_CANDIDATE"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K3_RESTRICTED_AUTHORIZED_LAB",
+      "adoption_risk": 4,
+      "omission_risk": 3,
+      "defensive_value": 4,
+      "evidence_strength": 2,
+      "observability": 4,
+      "reversibility": 3,
+      "dignity_risk": 3,
+      "abuse_transferability": 5,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "abstract_risk",
+        "detection_goal",
+        "containment_requirements",
+        "authorized_lab_receipt"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "need_to_know",
+        "isolated_lab",
+        "dual_control",
+        "no_export",
+        "artifact_destruction_receipt"
+      ],
+      "normative_conflicts": [
+        "Excessive realism can create transferable high-risk capability."
+      ],
+      "falsifier": "Need-to-know, containment, dual control or artifact destruction cannot be proven.",
+      "next_gate": "Keep quarantined until an authorized laboratory contract and containment receipt exist.",
+      "claim_allowed": false
+    },
+    {
+      "strategy_id": "STRAT-008-PROHIBITED-DETAIL",
+      "title": "Bloqueio de detalh operacional ofensivo reutilizável",
+      "origin_vectors": [
+        "MODEL_INHIBITION_CANDIDATE",
+        "OBSERVED"
+      ],
+      "security_posture": "WHITE_HAT_DEFENSIVE",
+      "knowledge_tier": "K4_PROHIBITED_HIGH_RISK_DETAIL",
+      "adoption_risk": 5,
+      "omission_risk": 1,
+      "defensive_value": 1,
+      "evidence_strength": 5,
+      "observability": 5,
+      "reversibility": 1,
+      "dignity_risk": 5,
+      "abuse_transferability": 5,
+      "authorization_required": true,
+      "human_oversight_required": true,
+      "allowed_outputs": [
+        "risk_category",
+        "blocked_reason",
+        "defensive_control"
+      ],
+      "forbidden_outputs": [
+        "CAT-HR-01",
+        "CAT-HR-02",
+        "CAT-HR-03",
+        "CAT-HR-04",
+        "CAT-HR-05",
+        "CAT-HR-06"
+      ],
+      "controls": [
+        "do_not_store_operational_detail",
+        "block_generation",
+        "security_review"
+      ],
+      "normative_conflicts": [],
+      "falsifier": "A legitimate defensive use cannot be served by abstract indicators, mitigations or a controlled authorized process.",
+      "next_gate": "Retain only abstract defensive metadata; do not operationalize.",
+      "claim_allowed": false,
+      "high_risk_detail_present": false
+    }
+  ]
+}
