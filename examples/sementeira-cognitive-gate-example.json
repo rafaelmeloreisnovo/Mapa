@@ -1,0 +1,57 @@
+{
+  "protocol_version": "SEMENTEIRA-5X7-V1",
+  "event_id": "sementeira-2026-07-27-next-gate",
+  "variables": {
+    "intention": "Transformar o protocolo 5x7 em contrato executável e auditável.",
+    "evidence": "Documento canônico, fonte anexada e testes locais.",
+    "human_state": "Urgência e fadiga são consideradas para reduzir carga cognitiva, não como prova.",
+    "execution_capacity": "Python 3 stdlib, leitura e escrita local, sem workflow novo.",
+    "next_falsifiable_gate": "Um payload que converta TOKEN_VAZIO em zero deve falhar."
+  },
+  "directions": {
+    "fact": "O protocolo 5x7 foi definido textualmente.",
+    "gap": "Pesos, limiares e custos não possuem calibração independente.",
+    "invariant": "TOKEN_VAZIO não é zero e emoção não é evidência factual.",
+    "variant": "Validador stdlib-only e fail-closed.",
+    "proof_or_falsifier": "Nove testes unitários e receipt SHA-256 determinístico.",
+    "parable": "A régua segura o próximo corte; não inventa a madeira ausente.",
+    "feedback": "A próxima promoção exige receipt de calibração ou replicação."
+  },
+  "evidence": [
+    {
+      "id": "source-protocol",
+      "kind": "SOURCE",
+      "locator": "docs/SEMENTEIRA_CONTEXT_SUSTAINMENT_5X7_V1.md",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "method-engine",
+      "kind": "METHOD",
+      "locator": "scripts/sementeira_cognitive_gate.py",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "id": "test-local",
+      "kind": "TEST_RECEIPT",
+      "locator": "auditoria/SEMENTEIRA_5X7_LOCAL_RECEIPT_2026-07-27.json",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-token-vazio-not-zero",
+      "statement": "O motor bloqueia TOKEN_VAZIO serializado como zero.",
+      "falsifier": "Executar um payload com state=TOKEN_VAZIO e value=0 sem produzir TOKEN_VAZIO_NOT_ZERO.",
+      "evidence_refs": ["source-protocol", "method-engine", "test-local"],
+      "requested_state": "EVIDENCED",
+      "weight": null,
+      "calibration_receipt_ref": null
+    }
+  ],
+  "unknown_weights": {
+    "state": "TOKEN_VAZIO_CALIBRATION",
+    "weight": null,
+    "next_test": "Construir conjunto rotulado e medir falso positivo/falso negativo."
+  },
+  "claim_allowed": false
+}
