@@ -1,0 +1,143 @@
+{
+  "claim_allowed": false,
+  "cognitive_payload": {
+    "claim_allowed": false,
+    "claims": [
+      {
+        "calibration_receipt_ref": null,
+        "evidence_refs": [
+          "source-tree",
+          "method-resolver",
+          "tests-resolver"
+        ],
+        "falsifier": "Qualquer evidence_ref ausente, divergente, não resolvido, bloqueado ou com hash diferente.",
+        "id": "claim-locator-evidence-linkage",
+        "requested_state": "EVIDENCED",
+        "statement": "Cada evidência usada pelo claim corresponde aos bytes declarados e observados.",
+        "weight": null
+      }
+    ],
+    "directions": {
+      "fact": "O locator receipt registra três HASH_MATCH.",
+      "feedback": "Claims íntegros seguem apenas para revisão específica do domínio.",
+      "gap": "Identidade dos bytes não demonstra verdade científica.",
+      "invariant": "Todo evidence_ref deve apontar para o mesmo locator e o mesmo SHA observado.",
+      "parable": "O selo confirma o pergaminho; não confirma sozinho o ensinamento.",
+      "proof_or_falsifier": "Mutação de byte, locator, hash, ref ou receipt deve produzir bloqueio.",
+      "variant": "Gate composto cognitivo e de identidade de artefatos."
+    },
+    "event_id": "sementeira-2026-07-28-cognitive-locator-link",
+    "evidence": [
+      {
+        "id": "source-tree",
+        "kind": "SOURCE",
+        "locator": "docs/SEMENTEIRA_TREE_OF_SUSTAINMENT_TRADITIONS_V1.md",
+        "sha256": "db8b5a6539e3506cf2c3d5d919ccfa022f8dc2fc73c67dcaced17651069a7aad"
+      },
+      {
+        "id": "method-resolver",
+        "kind": "METHOD",
+        "locator": "scripts/sementeira_locator_resolver.py",
+        "sha256": "c8e27601ff701f91a2a38c651270a57f09864e96c77ba367475c0d4c1b98cae7"
+      },
+      {
+        "id": "tests-resolver",
+        "kind": "TEST_RECEIPT",
+        "locator": "tests/test_sementeira_locator_resolver.py",
+        "sha256": "950c48009c6bf6c5e413b7d0573f9fd82d6e636e7420e428987fb225a8d72c66"
+      }
+    ],
+    "protocol_version": "SEMENTEIRA-5X7-V1",
+    "variables": {
+      "evidence": "Três artefatos locais resolvidos e conferidos por SHA-256.",
+      "execution_capacity": "Python 3 stdlib, leitura local e receipts determinísticos.",
+      "human_state": "Carga cognitiva reduzida; estado humano orienta comunicação, não prova.",
+      "intention": "Vincular cada evidência do claim aos bytes realmente observados.",
+      "next_falsifiable_gate": "Alterar um byte, locator ou receipt deve bloquear o claim."
+    }
+  },
+  "cognitive_receipt": {
+    "blocking_findings": [],
+    "claim_allowed": false,
+    "claims": [
+      {
+        "claim_allowed": false,
+        "evidence_kinds": [
+          "METHOD",
+          "SOURCE",
+          "TEST_RECEIPT"
+        ],
+        "id": "claim-locator-evidence-linkage",
+        "inferred_state": "LOCAL_EVIDENCE_CANDIDATE"
+      }
+    ],
+    "gaps": [],
+    "input_sha256": "b50986a71c62610b0e2104c82beba2ba0cbd1486680e482ac650ab0228a5cc3f",
+    "protocol_version": "SEMENTEIRA-5X7-V1",
+    "r3": {
+      "F_gap": "No blocking findings.",
+      "F_next": "Attach locator receipt and verify each evidence identity.",
+      "F_ok": "Five variables and seven directions validated."
+    },
+    "receipt_sha256": "d830dcb6e7f04b6162fc9bac629c4951dfcfd013e531ea711d08c6a4dd8a9263",
+    "structural_pass": true
+  },
+  "locator_receipt": {
+    "all_referenced_hashes_match": true,
+    "artifact_identity_gate": "PASS",
+    "blocking_findings": [],
+    "claim_allowed": false,
+    "epistemic_promotion_allowed": false,
+    "gaps": [],
+    "input_sha256": "9b17bce5eaabd40fdaa2e1dcaf8d85adbc3885f9011134de1f63754d39b3b5ff",
+    "protocol_version": "SEMENTEIRA-LOCATOR-RESOLVER-V1",
+    "r3": {
+      "F_gap": "Identity verified only at observed-byte layer; truth and replication remain outside this resolver.",
+      "F_next": "Pass this receipt to the cognitive/scientific gate; never promote a claim from hash identity alone.",
+      "F_ok": "Referenced artifact bytes match declared hashes."
+    },
+    "receipt_sha256": "461f4702a3a1556b3a4f23fefe2ccda5accdc660e6d6e1de4fcf96ae11c27869",
+    "referenced_evidence_ids": [
+      "method-resolver",
+      "source-tree",
+      "tests-resolver"
+    ],
+    "results": [
+      {
+        "actual_sha256": "db8b5a6539e3506cf2c3d5d919ccfa022f8dc2fc73c67dcaced17651069a7aad",
+        "bytes": 6000,
+        "evidence_id": "source-tree",
+        "expected_sha256": "db8b5a6539e3506cf2c3d5d919ccfa022f8dc2fc73c67dcaced17651069a7aad",
+        "locator": "docs/SEMENTEIRA_TREE_OF_SUSTAINMENT_TRADITIONS_V1.md",
+        "reason": null,
+        "referenced_by_claim": true,
+        "resolved_relative_path": "docs/SEMENTEIRA_TREE_OF_SUSTAINMENT_TRADITIONS_V1.md",
+        "status": "HASH_MATCH"
+      },
+      {
+        "actual_sha256": "c8e27601ff701f91a2a38c651270a57f09864e96c77ba367475c0d4c1b98cae7",
+        "bytes": 10477,
+        "evidence_id": "method-resolver",
+        "expected_sha256": "c8e27601ff701f91a2a38c651270a57f09864e96c77ba367475c0d4c1b98cae7",
+        "locator": "scripts/sementeira_locator_resolver.py",
+        "reason": null,
+        "referenced_by_claim": true,
+        "resolved_relative_path": "scripts/sementeira_locator_resolver.py",
+        "status": "HASH_MATCH"
+      },
+      {
+        "actual_sha256": "950c48009c6bf6c5e413b7d0573f9fd82d6e636e7420e428987fb225a8d72c66",
+        "bytes": 5054,
+        "evidence_id": "tests-resolver",
+        "expected_sha256": "950c48009c6bf6c5e413b7d0573f9fd82d6e636e7420e428987fb225a8d72c66",
+        "locator": "tests/test_sementeira_locator_resolver.py",
+        "reason": null,
+        "referenced_by_claim": true,
+        "resolved_relative_path": "tests/test_sementeira_locator_resolver.py",
+        "status": "HASH_MATCH"
+      }
+    ],
+    "root_policy": "AUTHORIZED_REPOSITORY_ROOT_READ_ONLY"
+  },
+  "protocol_version": "SEMENTEIRA-COGNITIVE-LOCATOR-GATE-V1"
+}
