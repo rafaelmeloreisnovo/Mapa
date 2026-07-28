@@ -1,0 +1,32 @@
+{
+  "schema": "rafaelia.domain-authority-registry/v1",
+  "policy": "EXPLICIT_DOMAIN_ONLY_NO_SEMANTIC_INFERENCE",
+  "claim_allowed": false,
+  "epistemic_promotion_allowed": false,
+  "domains": {
+    "COMPUTATIONAL": {
+      "gate_id": "gate.computational.v1",
+      "allowed_claim_types": ["IMPLEMENTATION_STATE", "BUILD_RESULT", "LOCAL_TEST_RESULT", "BYTE_IDENTITY", "ALGORITHM_BEHAVIOR", "PERFORMANCE_MEASUREMENT"],
+      "allowed_input_states": ["SOURCE_LINKED", "BYTE_IDENTITY_VERIFIED", "LOCAL_TEST_RECEIPT", "TOKEN_VAZIO_TYPED"],
+      "forbidden_promotions": ["SCIENTIFIC_TRUTH", "LEGAL_VALIDITY", "ETHICAL_APPROVAL"]
+    },
+    "SCIENTIFIC": {
+      "gate_id": "gate.scientific.v1",
+      "allowed_claim_types": ["EMPIRICAL_OBSERVATION", "MODEL_FIT", "CAUSAL_HYPOTHESIS", "REPLICATION_RESULT", "MEASUREMENT_RESULT"],
+      "allowed_input_states": ["SOURCE_LINKED", "BYTE_IDENTITY_VERIFIED", "OBSERVATION_RECEIPT", "TOKEN_VAZIO_TYPED"],
+      "forbidden_promotions": ["COMPUTATIONAL_PASS_AS_SCIENTIFIC_PROOF", "LEGAL_VALIDITY", "ETHICAL_APPROVAL"]
+    },
+    "LEGAL": {
+      "gate_id": "gate.legal.v1",
+      "allowed_claim_types": ["LEGAL_INTERPRETATION", "COMPLIANCE_ASSERTION", "LICENSE_ASSERTION", "PRIVACY_ASSERTION"],
+      "allowed_input_states": ["SOURCE_LINKED", "DOCUMENT_IDENTITY_VERIFIED", "TOKEN_VAZIO_TYPED"],
+      "forbidden_promotions": ["COMPUTATIONAL_PASS_AS_LEGAL_VALIDITY", "SCIENTIFIC_RESULT_AS_LEGAL_VALIDITY", "ETHICAL_APPROVAL"]
+    },
+    "ETHICAL": {
+      "gate_id": "gate.ethical.v1",
+      "allowed_claim_types": ["ETHICAL_ASSESSMENT", "RISK_ASSESSMENT", "CONSENT_ASSERTION", "HARM_BOUNDARY"],
+      "allowed_input_states": ["SOURCE_LINKED", "POLICY_LINKED", "TOKEN_VAZIO_TYPED"],
+      "forbidden_promotions": ["COMPUTATIONAL_PASS_AS_ETHICAL_APPROVAL", "SCIENTIFIC_RESULT_AS_ETHICAL_APPROVAL", "LEGAL_VALIDITY"]
+    }
+  }
+}
