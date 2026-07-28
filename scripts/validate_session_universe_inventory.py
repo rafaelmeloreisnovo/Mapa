@@ -31,16 +31,20 @@ def validate(data: dict[str, Any]) -> list[str]:
     require(data.get("event_id") == "SESSION-UNIVERSE-456-20260728", "wrong event_id")
     require(data["governance"]["claim_allowed"] is False, "global claim gate must be false")
     require(data["governance"]["review_policy"] == "ONE_BY_ONE", "review policy must be ONE_BY_ONE")
+    require(data["governance"]["missing_data_policy"] == "TOKEN_VAZIO", "missing data policy must be TOKEN_VAZIO")
     checks.append("governance")
 
-    atoms = data["atomic_entities"]
-    require(len(atoms) == 416, "atomic entity count must be 416")
+    registry = data["atomic_registry"]
+    atom_ids = registry["ids"]
+    default = registry["default"]
     expected_ids = [f"ATOM-{i:03d}" for i in range(1, 417)]
-    require([item["id"] for item in atoms] == expected_ids, "atomic IDs not contiguous")
-    require(all(item["name"] is None for item in atoms), "missing atom names must stay null")
-    require(all(item["reviewed"] is False for item in atoms), "atoms cannot be pre-reviewed")
-    require(all(item["state"] == "TOKEN_VAZIO_SOURCE_ENUMERATION_PENDING" for item in atoms), "wrong atom state")
-    require(all(item["claim_allowed"] is False for item in atoms), "atom claim gate opened")
+    require(len(atom_ids) == 416, "atomic entity count must be 416")
+    require(atom_ids == expected_ids, "atomic IDs not contiguous")
+    require(len(set(atom_ids)) == 416, "atomic IDs must be unique")
+    require(default["name"] is None, "missing atom names must stay null")
+    require(default["reviewed"] is False, "atoms cannot be pre-reviewed")
+    require(default["state"] == "TOKEN_VAZIO_SOURCE_ENUMERATION_PENDING", "wrong atom state")
+    require(default["claim_allowed"] is False, "atom claim gate opened")
     checks.append("416_atomic_slots")
 
     require(len(data["clusters"]) == 8, "cluster count must be 8")
@@ -79,7 +83,7 @@ def validate(data: dict[str, Any]) -> list[str]:
     checks.append("combinatorics")
 
     queue_expected = (
-        len(atoms)
+        len(atom_ids)
         + len(data["results"])
         + len(data["operators"])
         + len(data["transformer_seeds"])
@@ -88,10 +92,12 @@ def validate(data: dict[str, Any]) -> list[str]:
     require(queue_expected == 449, "review queue arithmetic mismatch")
     require(data["review_queue"]["pending"] == queue_expected, "review queue pending mismatch")
     require(data["review_queue"]["completed"] == 0, "review queue must start at zero")
+    require(data["review_queue"]["current_cursor"] == "ATOM-001", "review cursor must start at ATOM-001")
     checks.append("review_queue")
 
     for family in ("results", "operators", "transformer_seeds", "meta_syntheses"):
         require(all(item["claim_allowed"] is False for item in data[family]), f"{family} claim gate opened")
+    require(data["exhaustiveness_claim"]["claim_allowed"] is False, "exhaustiveness claim gate opened")
     checks.append("global_fail_closed")
     return checks
 
