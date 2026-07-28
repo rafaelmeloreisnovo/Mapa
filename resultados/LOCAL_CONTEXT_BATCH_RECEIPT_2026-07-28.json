@@ -1,0 +1,68 @@
+{
+  "audit_id": "RLCB-20260728",
+  "claim_allowed": false,
+  "counts": {
+    "bytes": 152698,
+    "explicit_claim_allowed_fields": 0,
+    "filecite_markers": 189,
+    "files": 20,
+    "hex40_identifiers": 16,
+    "lines": 6666,
+    "raw_urls": 5,
+    "remote_identifier_verification": "16/16 PASS",
+    "remote_objects_verified": 16,
+    "unique_sha256": 20,
+    "zero_byte_files": 0
+  },
+  "cross_repo_dedup": {
+    "manifest_blob_sha": "25f057e00508fdc44934e1f51b19118480203af0",
+    "omega_v32_placements": 14,
+    "omega_v32_unique_content_blobs": 2,
+    "readme_blob_sha": "ffe75dfa53fae914ac1f80dbe757ecb4df892258"
+  },
+  "findings": [
+    {
+      "finding": "189 session-scoped filecite markers are not durable external provenance.",
+      "id": "F-01",
+      "severity": "HIGH"
+    },
+    {
+      "finding": "No local document contains an explicit claim_allowed field; all are held at claim_allowed=false by this audit.",
+      "id": "F-02",
+      "severity": "HIGH"
+    },
+    {
+      "finding": "All 20 local files are secondary/derived text for external claims, even when the document identity itself is proven by SHA-256.",
+      "id": "F-03",
+      "severity": "MEDIUM"
+    },
+    {
+      "finding": "20/20 local files have unique SHA-256; no exact duplicates and no zero-byte files in the current mounted batch.",
+      "id": "F-04",
+      "severity": "PASS"
+    },
+    {
+      "finding": "All 16 explicit 40-hex identifiers were remotely reconciled: 14 Ω v3.2 commit/path placements, one RafGitTools merge commit, one X0 blob.",
+      "id": "F-05",
+      "severity": "PASS"
+    },
+    {
+      "finding": "The 30% ± 5% progress figure is a heuristic status estimate, not a measured operational result.",
+      "id": "F-06",
+      "severity": "INFO"
+    },
+    {
+      "finding": "BLAKE3 hashes were not computed because a BLAKE3 implementation is unavailable in the current runtime.",
+      "id": "F-07",
+      "severity": "TOKEN_VAZIO"
+    }
+  ],
+  "generated_at": "2026-07-28T06:11:28-03:00",
+  "manifest": {
+    "path": "LOCAL_CONTEXT_BATCH_MANIFEST_2026-07-28.jsonl",
+    "sha256": "942941bc78bd6ed36723d87f1657861db84cf5293171f2af7b2a1c014254fed5"
+  },
+  "next_gate": "replace session-scoped citations with durable source locators; add per-claim ledger; compute BLAKE3 in a controlled runtime; continue cross-source SHA-256 deduplication",
+  "schema": "rafaelia.local_context_batch_receipt.v1",
+  "scope": "/mnt/data/*.txt only; read-only content audit plus remote verification of explicit 40-hex identifiers"
+}
