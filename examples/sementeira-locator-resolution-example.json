@@ -1,0 +1,55 @@
+{
+  "claim_allowed": false,
+  "claims": [
+    {
+      "evidence_refs": [
+        "source-tree",
+        "method-resolver",
+        "tests-resolver"
+      ],
+      "falsifier": "Modificar um byte referenciado sem produzir HASH_MISMATCH, ou aceitar traversal/symlink fora da raiz.",
+      "id": "claim-locator-byte-identity",
+      "requested_state": "LOCAL_EVIDENCE_CANDIDATE",
+      "statement": "O resolver detecta correspondência, divergência, ausência e escape de locator sem promover claims.",
+      "weight": null
+    }
+  ],
+  "directions": {
+    "fact": "O gate 5x7 anterior validava formato de locator e SHA-256.",
+    "feedback": "Hash coincidente abre o próximo gate, mas não prova a verdade do claim.",
+    "gap": "A correspondência física dos bytes ainda não era relida.",
+    "invariant": "Origem, confinamento, leitura read-only e claim_allowed=false.",
+    "parable": "O bibliotecário não aceita apenas o endereço escrito; ele abre a estante e confere o selo.",
+    "proof_or_falsifier": "Doze testes locais e receipt determinístico.",
+    "variant": "Resolver local stdlib-only com streaming e bloqueio de traversal/symlink."
+  },
+  "event_id": "sementeira-2026-07-28-locator-resolution",
+  "evidence": [
+    {
+      "id": "source-tree",
+      "kind": "SOURCE",
+      "locator": "docs/SEMENTEIRA_TREE_OF_SUSTAINMENT_TRADITIONS_V1.md",
+      "sha256": "db8b5a6539e3506cf2c3d5d919ccfa022f8dc2fc73c67dcaced17651069a7aad"
+    },
+    {
+      "id": "method-resolver",
+      "kind": "METHOD",
+      "locator": "scripts/sementeira_locator_resolver.py",
+      "sha256": "c8e27601ff701f91a2a38c651270a57f09864e96c77ba367475c0d4c1b98cae7"
+    },
+    {
+      "id": "tests-resolver",
+      "kind": "TEST_RECEIPT",
+      "locator": "tests/test_sementeira_locator_resolver.py",
+      "sha256": "950c48009c6bf6c5e413b7d0573f9fd82d6e636e7420e428987fb225a8d72c66"
+    }
+  ],
+  "protocol_version": "SEMENTEIRA-5X7-V1",
+  "variables": {
+    "evidence": "Arquivos locais confinados à raiz autorizada.",
+    "execution_capacity": "Python stdlib, leitura em streaming, sem rede e sem escrita nos artefatos.",
+    "human_state": "Carga cognitiva reduzida por mapa cronológico; emoção não sustenta claim.",
+    "intention": "Recalcular hashes dos artefatos antes de qualquer promoção epistemológica.",
+    "next_falsifiable_gate": "Alterar um byte de qualquer artefato referenciado deve produzir HASH_MISMATCH."
+  }
+}
