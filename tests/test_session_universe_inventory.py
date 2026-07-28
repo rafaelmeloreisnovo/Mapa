@@ -30,13 +30,18 @@ class SessionUniverseInventoryTests(unittest.TestCase):
         self.assertEqual(len(checks), 8)
 
     def test_all_416_atom_ids_are_contiguous(self) -> None:
-        ids = [item["id"] for item in self.data["atomic_entities"]]
+        ids = self.data["atomic_registry"]["ids"]
         self.assertEqual(ids[0], "ATOM-001")
         self.assertEqual(ids[-1], "ATOM-416")
+        self.assertEqual(len(ids), 416)
         self.assertEqual(len(set(ids)), 416)
 
     def test_missing_atom_names_are_not_invented(self) -> None:
-        self.assertTrue(all(item["name"] is None for item in self.data["atomic_entities"]))
+        default = self.data["atomic_registry"]["default"]
+        self.assertIsNone(default["name"])
+        self.assertFalse(default["reviewed"])
+        self.assertFalse(default["claim_allowed"])
+        self.assertEqual(default["state"], "TOKEN_VAZIO_SOURCE_ENUMERATION_PENDING")
 
     def test_alleged_closures_remain_blocked(self) -> None:
         for result in self.data["results"][:8]:
