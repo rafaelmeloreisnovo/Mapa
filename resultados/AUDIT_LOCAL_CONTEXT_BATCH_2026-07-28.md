@@ -110,8 +110,10 @@ O runtime local desta sessão não contém implementação BLAKE3. Nenhum digest
 
 - `indices/consolidation/LOCAL_CONTEXT_BATCH_MANIFEST_2026-07-28.jsonl`
 - `resultados/LOCAL_CONTEXT_BATCH_RECEIPT_2026-07-28.json`
+- `indices/consolidation/OMEGA_V32_SOURCE_LOCATORS_2026-07-28.jsonl`
 - SHA-256 do manifesto: `942941bc78bd6ed36723d87f1657861db84cf5293171f2af7b2a1c014254fed5`
-- SHA-256 do receipt: `86edf0ebd3de01fabbc1534df586dcc5ad378648d4e83fc0beda39f1ba5387b3`
+- SHA-256 do receipt: `e13276a6c9b70de906e74a000f63e24436bdf8a99f9f9ebc949bb3211ee3d0df`
+- SHA-256 dos locators Ω v3.2: `43430dc2642e68708813777b377da29f5fea74da65064bc035aac2c2a1d088ad`
 
 ## 5. Gate seguinte
 
