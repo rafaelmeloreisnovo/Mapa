@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/sementeira-cognitive-locator-gate.schema.json",
+  "title": "Sementeira Cognitive Locator Composite Gate V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "cognitive_payload", "cognitive_receipt", "locator_receipt", "claim_allowed"],
+  "properties": {
+    "protocol_version": {"const": "SEMENTEIRA-COGNITIVE-LOCATOR-GATE-V1"},
+    "cognitive_payload": {"type": "object"},
+    "cognitive_receipt": {
+      "type": "object",
+      "required": ["input_sha256", "structural_pass", "claim_allowed", "claims", "receipt_sha256"]
+    },
+    "locator_receipt": {
+      "type": "object",
+      "required": ["artifact_identity_gate", "all_referenced_hashes_match", "claim_allowed", "epistemic_promotion_allowed", "results", "receipt_sha256"]
+    },
+    "claim_allowed": {"const": false}
+  }
+}
