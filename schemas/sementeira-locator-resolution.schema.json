@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://instituto-rafael.invalid/schemas/sementeira-locator-resolution.schema.json",
+  "title": "Sementeira Locator Resolution Receipt V1",
+  "type": "object",
+  "required": [
+    "protocol_version",
+    "input_sha256",
+    "root_policy",
+    "results",
+    "all_referenced_hashes_match",
+    "artifact_identity_gate",
+    "epistemic_promotion_allowed",
+    "claim_allowed",
+    "receipt_sha256"
+  ],
+  "properties": {
+    "protocol_version": {"const": "SEMENTEIRA-LOCATOR-RESOLVER-V1"},
+    "input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "root_policy": {"const": "AUTHORIZED_REPOSITORY_ROOT_READ_ONLY"},
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["evidence_id", "locator", "status", "referenced_by_claim"],
+        "properties": {
+          "evidence_id": {"type": "string"},
+          "locator": {"type": "string"},
+          "status": {
+            "enum": ["HASH_MATCH", "HASH_MISMATCH", "TOKEN_VAZIO_UNRESOLVED", "BLOCKED_LOCATOR"]
+          },
+          "expected_sha256": {"type": ["string", "null"]},
+          "actual_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "bytes": {"type": "integer", "minimum": 0},
+          "referenced_by_claim": {"type": "boolean"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "all_referenced_hashes_match": {"type": "boolean"},
+    "artifact_identity_gate": {"enum": ["PASS", "FAIL"]},
+    "epistemic_promotion_allowed": {"const": false},
+    "claim_allowed": {"const": false},
+    "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "additionalProperties": true
+}
