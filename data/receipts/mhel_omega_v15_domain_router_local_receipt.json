@@ -1,0 +1,49 @@
+{
+  "ci_remote": "TOKEN_VAZIO_NOT_OBSERVED_FOR_FINAL_HEAD",
+  "claim_allowed": false,
+  "cross_domain_promotion_allowed": false,
+  "epistemic_promotion_allowed": false,
+  "external_dependencies": 0,
+  "gate_batches": {
+    "gate.computational.v1": ["claim-vector-hotfix-local-tests"],
+    "gate.ethical.v1": ["claim-parable-boundary-no-promotion"]
+  },
+  "local_validation": "PASS",
+  "next_gate": "Execute each gate independently; never reuse one domain result as another domain authority.",
+  "py_compile": "PASS",
+  "route_count": 2,
+  "routes": [
+    {
+      "claim_allowed": false,
+      "claim_id": "claim-vector-hotfix-local-tests",
+      "declared_domain": "COMPUTATIONAL",
+      "epistemic_promotion_allowed": false,
+      "forbidden_promotions": ["SCIENTIFIC_TRUTH", "LEGAL_VALIDITY", "ETHICAL_APPROVAL"],
+      "gate_id": "gate.computational.v1",
+      "resulting_epistemic_state": "READY_FOR_DOMAIN_SPECIFIC_REVIEW",
+      "routing_state": "ROUTED_FOR_DOMAIN_REVIEW"
+    },
+    {
+      "claim_allowed": false,
+      "claim_id": "claim-parable-boundary-no-promotion",
+      "declared_domain": "ETHICAL",
+      "epistemic_promotion_allowed": false,
+      "forbidden_promotions": ["COMPUTATIONAL_PASS_AS_ETHICAL_APPROVAL", "SCIENTIFIC_RESULT_AS_ETHICAL_APPROVAL", "LEGAL_VALIDITY"],
+      "gate_id": "gate.ethical.v1",
+      "resulting_epistemic_state": "READY_FOR_DOMAIN_SPECIFIC_REVIEW",
+      "routing_state": "ROUTED_FOR_DOMAIN_REVIEW"
+    }
+  ],
+  "routing_id": "route-mhel-v15-parable-vector-20260728",
+  "schema": "rafaelia.domain-routing-receipt/v1",
+  "semantic_domain_inference_used": false,
+  "stacked_on_pr": 80,
+  "state": "PASS",
+  "unit_tests_discovered": 17,
+  "unit_tests_executed": 17,
+  "unit_tests_failed": 0,
+  "unit_tests_passed": 17,
+  "vector_canonical_sha256": "5fc2a7ff51d7dd21c76e212a6db56cdadfc585207122ff4a4777108bd252e000",
+  "vector_id": "rafvec1-parable-semeador-map-silent-bell",
+  "workflow_yaml_added": 0
+}
