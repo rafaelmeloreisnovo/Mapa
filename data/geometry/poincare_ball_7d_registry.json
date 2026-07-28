@@ -1,0 +1,100 @@
+{
+  "schema": "rafaelia.map.poincare_ball_7d.registry.v1",
+  "created_at": "2026-07-28T22:06:00Z",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "concept_id": "GEOM-PB7-20260728",
+  "title": "Projecao H7 para B7 da matriz C[8][8]",
+  "claim_allowed": false,
+  "source": {
+    "kind": "session_code_and_mathematical_claim",
+    "matrix": "C[8][8] = A[8][8] * B[8][8]",
+    "drive_document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "drive_document_title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1"
+  },
+  "dimensional_contract": {
+    "raw_matrix_shape": [8, 8],
+    "candidate_vectors": 8,
+    "candidate_signature": [1, 7],
+    "forbidden_interpretation": "flatten rows 1..7 as one 7D vector",
+    "reason": "7 rows x 8 columns = 56 spatial scalars"
+  },
+  "mathematical_states": {
+    "finite_matrix_multiplication": "PASS",
+    "raw_hyperboloid_membership": "FAIL_PRECONDITION_SPACELIKE",
+    "strict_projection_output": "TOKEN_VAZIO_INPUT_NOT_TIMELIKE",
+    "canonical_hyperboloid_lift": "PASS_COMPUTATIONAL_EMBEDDING",
+    "poincare_ball_membership": "PASS",
+    "physical_stability": "TOKEN_VAZIO",
+    "cosmological_interpretation": "PROHIBITED_BY_SCOPE"
+  },
+  "validation": {
+    "checks": "8/8 PASS",
+    "strict_timelike_columns": 0,
+    "canonical_lift_columns": 8,
+    "matrix_scale": 3472.0,
+    "radius_min": 0.14217227697372437,
+    "radius_max": 0.5960178971290588
+  },
+  "repositories": [
+    {
+      "role": "low_level_producer",
+      "repository": "rafaelmeloreisnovo/ChipQuantum",
+      "branch": "feat/poincare-ball-7d-aarch64",
+      "pr": 46,
+      "head_sha": "ab60a685cde7d7d5f44b5d13fffe4bc62932fd9d",
+      "state": "DRAFT_OPEN"
+    },
+    {
+      "role": "scientific_validator",
+      "repository": "instituto-Rafael/relativity-living-light",
+      "branch": "feat/poincare-ball-7d-validation-paper",
+      "pr": 606,
+      "head_sha": "121e96b5ec7efd51a3fec1c9ae15a87dc0d5a88e",
+      "state": "DRAFT_OPEN"
+    },
+    {
+      "role": "publication_package",
+      "repository": "rafaelmeloreisnovo/papers",
+      "branch": "feat/poincare-ball-7d-paper",
+      "pr": 29,
+      "head_sha": "914b9f980430a164d2f627806f862dd722249886",
+      "state": "DRAFT_OPEN"
+    }
+  ],
+  "evidence_hashes": {
+    "c_source_sha256": "242c146c04b9cafacca03e9688e7af2704add182bc12432462ddbdb08e12840b",
+    "aarch64_elf_sha256": "c4106174a4061305c9d3618fc8b57a3e81a9997862069c4585cf437515505f81",
+    "validator_sha256": "a76e40cec0d4d347389aab5c48015c9004e19ca1ffee83ab81577702cd82b484",
+    "validation_report_sha256": "8c08014a0431a3635bedbf8701d64730b6425e0f04cb38b9549d70e50028f3ac"
+  },
+  "gates": [
+    {
+      "id": "PB7-G1",
+      "description": "native Termux AArch64 execution receipt",
+      "state": "TOKEN_VAZIO",
+      "next_evidence": ["receipt.json", "stdout", "binary sha256", "device ABI"]
+    },
+    {
+      "id": "PB7-G2",
+      "description": "bitwise comparison native output versus independent validator",
+      "state": "TOKEN_VAZIO",
+      "depends_on": ["PB7-G1"]
+    },
+    {
+      "id": "PB7-G3",
+      "description": "strict timelike fixture activates mode T and preserves unit hyperboloid",
+      "state": "TODO"
+    },
+    {
+      "id": "PB7-G4",
+      "description": "Lorentz boost invariance and hyperbolic geodesic distance",
+      "state": "TODO"
+    }
+  ],
+  "guards": [
+    "Poincare ball != Poincare section != recurrence theorem != Poincare conjecture",
+    "radius less than one != physical stability",
+    "computational embedding != physical measurement",
+    "quaternions alone do not parameterize arbitrary rotations in seven dimensions"
+  ]
+}
