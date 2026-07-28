@@ -1,0 +1,132 @@
+{
+  "schema": "rafaelia.longitudinal-vector-evolution/v1",
+  "vector_id": "rafvec1-parable-semeador-map-silent-bell",
+  "revision": 1,
+  "previous_revision": null,
+  "previous_event_hash": "TOKEN_VAZIO_CANONICAL_EVENT_HASH_NOT_MATERIALIZED",
+  "source": {
+    "source_id": "session-parable-2026-07-28",
+    "source_type": "SESSION_PARABLE_MULTI_VIEW",
+    "source_pointer": "conversation://sementeira/parable-semeador-mapa-sino-silencioso",
+    "observed_at": "2026-07-28T20:00:00-03:00",
+    "source_sha256": "TOKEN_VAZIO_SOURCE_BYTES_NOT_CANONICALLY_EXPORTED",
+    "hidden_model_access": false
+  },
+  "layers": {
+    "hexagonal": {
+      "origin": {"state": "OBSERVED", "value": "Parábola solicitada pelo autor na sessão Sementeira", "source_ref": "session-parable-2026-07-28"},
+      "readability": {"state": "OBSERVED", "value": "Narrativa em português com mestre, sementes, oficinas, mapa e sino", "source_ref": "session-parable-2026-07-28"},
+      "semantics": {"state": "INTERPRETED", "value": "Custódia, especialização de autoridades, lacuna honesta e construção local sem CI", "source_ref": "view-technical"},
+      "dynamics": {"state": "DERIVED", "value": "Fonte para cápsula multi-view e vetor longitudinal versionado", "source_ref": "hotfix-v14"},
+      "synergy": {"state": "DERIVED", "value": "Liga MHEL-Ω, Mapa, Termux, RafPolimata e RLL sem fusão de autoridade", "source_ref": "hotfix-v14"},
+      "custody": {"state": "TOKEN_VAZIO", "value": "Hash canônico da mensagem ainda não materializado", "source_ref": "TOKEN_VAZIO_SOURCE_BYTES_NOT_CANONICALLY_EXPORTED"}
+    },
+    "polysemic": [
+      {
+        "view_id": "view-literal",
+        "view_type": "LITERAL",
+        "state": "OBSERVED",
+        "content": "Um semeador organiza sementes, oficinas e um sino silencioso.",
+        "source_ref": "session-parable-2026-07-28",
+        "forbidden_promotions": ["PHYSICAL_PROOF", "HISTORICAL_EQUIVALENCE"]
+      },
+      {
+        "view_id": "view-technical",
+        "view_type": "TECHNICAL_MAPPING",
+        "state": "DERIVED",
+        "content": {
+          "seeds": "claims, artifacts and gaps",
+          "map": "operational ontology",
+          "silent_bell": "remote CI unavailable",
+          "workshops": "repositories with separated authority"
+        },
+        "source_ref": "session-parable-2026-07-28",
+        "forbidden_promotions": ["CLAIM_PROMOTION_BY_ANALOGY"]
+      },
+      {
+        "view_id": "view-parable",
+        "view_type": "PARABLE",
+        "state": "INTERPRETED",
+        "content": "A floresta cresce quando cada semente mantém origem, solo, tempo e testemunha.",
+        "source_ref": "session-parable-2026-07-28",
+        "forbidden_promotions": ["PARABLE_AS_EVIDENCE", "SYMBOLIC_AS_PHYSICAL"]
+      }
+    ],
+    "operational": {
+      "input": "parábola e memória longitudinal canônica",
+      "transform": "decompor em camadas, dimensões, relações, lacunas e gates",
+      "output": "vetor longitudinal versionado",
+      "test": "validação estrutural e adversarial stdlib-only",
+      "receipt": "TOKEN_VAZIO_UNTIL_LOCAL_VALIDATION_RECEIPT"
+    },
+    "epistemic": {
+      "status": "TOKEN_VAZIO_QUANTIFICADO",
+      "confidence": null,
+      "typed_gaps": [
+        "TOKEN_VAZIO_SOURCE_BYTES_NOT_CANONICALLY_EXPORTED",
+        "TOKEN_VAZIO_CALIBRATION"
+      ],
+      "falsifier": "Falha se uma dimensão nova não possuir semântica, tipo, fonte e estado, ou se analogia promover claim."
+    },
+    "relational": [
+      {"from": "view-technical", "type": "DERIVED_FROM", "to": "view-literal", "source_ref": "session-parable-2026-07-28"},
+      {"from": "rafvec1-parable-semeador-map-silent-bell", "type": "RETURNS_TO", "to": "session-parable-2026-07-28", "source_ref": "hotfix-v14"},
+      {"from": "rafvec1-parable-semeador-map-silent-bell", "type": "EVOLVES_INTO", "to": "domain-specific-vector-capsules", "source_ref": "hotfix-v14"}
+    ],
+    "temporal": {
+      "first_observed_at": "2026-07-28T20:00:00-03:00",
+      "current_observed_at": "2026-07-28T20:00:00-03:00",
+      "lineage": ["session-parable-2026-07-28", "mhel-omega-v14-hotfix"]
+    }
+  },
+  "delta": {
+    "added_dimensions": [
+      {
+        "name": "vector_evolution_gate",
+        "data_type": "object",
+        "semantics": "Gate composto que autoriza crescimento somente com proveniência, delta identificável, coerência, lacuna tipada ou evidência e reversibilidade.",
+        "source_ref": "mhel-omega-v14-hotfix",
+        "initial_state": "DERIVED"
+      },
+      {
+        "name": "parable_multiview_capsule",
+        "data_type": "object",
+        "semantics": "Preserva narrativa literal, mapeamento técnico, interpretação, proibições e retorno à fonte sem colapso semântico.",
+        "source_ref": "session-parable-2026-07-28",
+        "initial_state": "DERIVED"
+      }
+    ],
+    "changed_dimensions": [],
+    "preserved_dimensions": ["origin", "readability", "semantics", "dynamics", "synergy", "custody"],
+    "removed_dimensions": [],
+    "supersession_receipt": null
+  },
+  "invariants": [
+    "source_is_not_interpretation",
+    "parable_is_not_physical_proof",
+    "token_vazio_is_not_zero",
+    "new_dimension_requires_semantics_type_source_and_state",
+    "weights_require_calibration_and_evidence",
+    "no_hidden_model_state_claim",
+    "append_never_silently_overwrites_ancestor",
+    "relation_requires_type_and_source"
+  ],
+  "gates": {
+    "provenance": true,
+    "delta_identity": true,
+    "semantic_consistency": true,
+    "evidence_or_typed_gap": true,
+    "reversibility": true
+  },
+  "weights": [
+    {
+      "name": "semantic_importance",
+      "status": "TOKEN_VAZIO_CALIBRATION",
+      "value": null,
+      "evidence_refs": []
+    }
+  ],
+  "state": "EVOLVED_LOCAL",
+  "claim_allowed": false,
+  "next_gate": "Materializar hash canônico da parábola e rotear a cápsula ao gate de domínio sem promoção cruzada."
+}
