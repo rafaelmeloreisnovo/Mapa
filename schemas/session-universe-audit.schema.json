@@ -10,7 +10,7 @@
     "declared_counts",
     "counting_convention",
     "clusters",
-    "atomic_entities",
+    "atomic_registry",
     "results",
     "operators",
     "transformer_seeds",
@@ -29,11 +29,28 @@
         "missing_data_policy": {"const": "TOKEN_VAZIO"}
       }
     },
-    "atomic_entities": {
-      "type": "array",
-      "minItems": 416,
-      "maxItems": 416,
-      "items": {"$ref": "#/$defs/entity"}
+    "atomic_registry": {
+      "type": "object",
+      "required": ["ids", "default"],
+      "properties": {
+        "ids": {
+          "type": "array",
+          "minItems": 416,
+          "maxItems": 416,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^ATOM-[0-9]{3}$"}
+        },
+        "default": {
+          "type": "object",
+          "required": ["name", "reviewed", "state", "claim_allowed"],
+          "properties": {
+            "name": {"const": null},
+            "reviewed": {"const": false},
+            "state": {"const": "TOKEN_VAZIO_SOURCE_ENUMERATION_PENDING"},
+            "claim_allowed": {"const": false}
+          }
+        }
+      }
     },
     "clusters": {"type": "array", "minItems": 8, "maxItems": 8},
     "results": {"type": "array", "minItems": 24, "maxItems": 24, "items": {"$ref": "#/$defs/entity"}},
