@@ -1,0 +1,33 @@
+{
+  "schema": "rafaelia.domain-routing-envelope/v1",
+  "routing_id": "route-mhel-v15-parable-vector-20260728",
+  "vector": {
+    "path": "examples/longitudinal-vector-evolution.v1.json",
+    "vector_id": "rafvec1-parable-semeador-map-silent-bell",
+    "revision": 1,
+    "canonical_sha256": "5fc2a7ff51d7dd21c76e212a6db56cdadfc585207122ff4a4777108bd252e000"
+  },
+  "claims": [
+    {
+      "claim_id": "claim-vector-hotfix-local-tests",
+      "claim_type": "LOCAL_TEST_RESULT",
+      "declared_domain": "COMPUTATIONAL",
+      "input_state": "LOCAL_TEST_RECEIPT",
+      "source_refs": ["data/receipts/mhel_omega_v14_vector_hotfix_local_receipt.json"],
+      "requested_transition": "READY_FOR_DOMAIN_SPECIFIC_REVIEW",
+      "claim_allowed": false
+    },
+    {
+      "claim_id": "claim-parable-boundary-no-promotion",
+      "claim_type": "HARM_BOUNDARY",
+      "declared_domain": "ETHICAL",
+      "input_state": "POLICY_LINKED",
+      "source_refs": ["docs/canonical/2026-07-28/MHEL_OMEGA_V1_4_VECTOR_EVOLUTION_HOTFIX.md"],
+      "requested_transition": "READY_FOR_DOMAIN_SPECIFIC_REVIEW",
+      "claim_allowed": false
+    }
+  ],
+  "cross_domain_promotion_allowed": false,
+  "semantic_domain_inference_allowed": false,
+  "claim_allowed": false
+}
