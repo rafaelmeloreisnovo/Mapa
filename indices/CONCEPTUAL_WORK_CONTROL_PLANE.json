@@ -1,0 +1,103 @@
+{
+  "schema": "conceptual_work_control_plane_v1",
+  "generated_at": "2026-07-29T20:41:00Z",
+  "authority": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "role": "FEDERATED_CONTROL_AND_KNOWLEDGE_PLANE"
+  },
+  "scope": {
+    "title": "Camadas de conceitos, provas operacionais e livro vivo rastreável",
+    "state": "VERIFIED_STRUCTURE_LOCAL_EXECUTION_PENDING_REMOTE",
+    "claim_allowed": false,
+    "certification_claim": false,
+    "legal_compliance_claim": false
+  },
+  "invariants": [
+    "concept != implementation",
+    "implementation != execution",
+    "execution != evidence",
+    "evidence != universal claim",
+    "symbol != mechanism",
+    "image != proof",
+    "hash != truth",
+    "belief != coercion",
+    "reference_to_rights != legal_compliance",
+    "TOKEN_VAZIO != zero"
+  ],
+  "promotion_ladder": [
+    {"level":"P0","name":"CONCEPT_CAPTURED","requires":["source_identity","genre"]},
+    {"level":"P1","name":"ASSET_SEALED","requires":["sha256","bytes","media_type_or_text_encoding"]},
+    {"level":"P2","name":"METADATA_COMPLETE","requires":["rights_state","concept_layers","claim_boundary"]},
+    {"level":"P3","name":"VALIDATED_STRUCTURE","requires":["validator_receipt","adversarial_tests"]},
+    {"level":"P4","name":"EXECUTED_BOUNDED","requires":["command","environment","exit_code","outputs","checksums"]},
+    {"level":"P5","name":"INDEPENDENTLY_REVIEWED","requires":["reviewer","review_scope","review_result"]},
+    {"level":"P6","name":"PUBLIC_CLAIM_ALLOWED","requires":["all_mandatory_layers_closed","human_approval","no_open_blocker"]}
+  ],
+  "layers": [
+    {"id":"L01","name":"SOURCE_IDENTITY","purpose":"Origem, autor declarado, data, canal e revisão imutável.","mandatory":true},
+    {"id":"L02","name":"MEDIA_INTEGRITY","purpose":"Hash, tamanho, formato real, dimensões e cadeia de custódia.","mandatory":true},
+    {"id":"L03","name":"RIGHTS_AND_CONSENT","purpose":"Titularidade, licença, consentimento e restrições de uso.","mandatory":true},
+    {"id":"L04","name":"GENRE","purpose":"Distingue ciência, documento técnico, biografia, testemunho, parábola, arte e liturgia.","mandatory":true},
+    {"id":"L05","name":"SYMBOLIC_SEMANTICS","purpose":"Registra símbolos, mandalas, geometria sagrada e leituras culturais sem promovê-los a mecanismos físicos.","mandatory":true},
+    {"id":"L06","name":"HISTORICAL_CONTEXT","purpose":"Separa referência histórica, arqueoastronomia e tradição de evidência causal.","mandatory":true},
+    {"id":"L07","name":"SCIENTIFIC_CORRESPONDENCE","purpose":"Liga uma intuição a conceitos científicos existentes sem declarar equivalência.","mandatory":true},
+    {"id":"L08","name":"FORMAL_MODEL","purpose":"Define variáveis, domínio, unidades, equações, limites e contraprovas.","mandatory":true},
+    {"id":"L09","name":"IMPLEMENTATION","purpose":"Aponta código, configuração, dados de entrada e versão executável.","mandatory":true},
+    {"id":"L10","name":"EXECUTION","purpose":"Registra comando, ambiente, início, fim, saída, erro e código de retorno.","mandatory":true},
+    {"id":"L11","name":"EVIDENCE","purpose":"Preserva receipt, logs, artefatos, checksums e cobertura observada.","mandatory":true},
+    {"id":"L12","name":"FALSIFIER","purpose":"Declara o resultado que reduziria ou refutaria a afirmação.","mandatory":true},
+    {"id":"L13","name":"ETHICAL_IMPACT","purpose":"Analisa proporcionalidade, não dano, justiça, inclusão e supervisão humana.","mandatory":true},
+    {"id":"L14","name":"CHILD_SAFEGUARD","purpose":"Aplica melhor interesse, minimização, privacidade, consentimento adequado e proibição de exploração infantil.","mandatory":true},
+    {"id":"L15","name":"HUMAN_DIGNITY","purpose":"Impede objetificação, manipulação, discriminação e subordinação de pessoas.","mandatory":true},
+    {"id":"L16","name":"FREEDOM_OF_BELIEF","purpose":"Protege crença, não crença e expressão espiritual sem coerção ou falsa autoridade científica.","mandatory":true},
+    {"id":"L17","name":"CULTURAL_DIVERSITY","purpose":"Preserva pluralidade cultural, linguagem, tradição e atribuição sem apropriação indevida.","mandatory":true},
+    {"id":"L18","name":"DECISION_LEDGER","purpose":"Registra decisão, alternativas, justificativa, evidência, responsável e possibilidade de reversão.","mandatory":true},
+    {"id":"L19","name":"INCIDENT_AND_ROLLBACK","purpose":"Descreve sintoma, domínio da falha, contexto, impacto, rollback, reparo e aprendizado.","mandatory":true},
+    {"id":"L20","name":"PUBLICATION_AND_PRESERVATION","purpose":"Controla versão, hash, DOI/arquivo, supersessão, revisão humana e fronteira do claim.","mandatory":true}
+  ],
+  "decisions": [
+    {"id":"D001","title":"Símbolo não é evidência","decision":"Geometria sagrada, mandalas, dragões, corujas, pirâmides, espirais e glifos entram como linguagem simbólica/cultural até formalização e teste.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D002","title":"Imagem não é prova operacional","decision":"Uma imagem demonstra a existência do artefato visual; não demonstra mecanismo, execução, causalidade ou validade histórica.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D003","title":"Hz exige cadeia acústica","decision":"Qualquer referência a 1008 Hz, canto gregoriano ou frequência precisa de áudio-fonte, taxa de amostragem, janela, FFT, calibração e incerteza. Efeito espiritual/terapêutico permanece TOKEN_VAZIO sem estudo apropriado.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D004","title":"Parábola é didática","decision":"Parábolas podem orientar decisões e ensinar invariantes, mas não substituem norma, experimento ou prova.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D005","title":"Biografia e testemunho têm autoridade própria","decision":"Relato pessoal é preservado como testemunho datado; não é convertido em evidência universal.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D006","title":"Crença universalista sem coerção","decision":"A obra pode professar crença e diálogo inter-religioso, preservando igualmente o direito de crer, não crer e discordar.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D007","title":"Proteção infantil é bloqueador","decision":"Qualquer dado, imagem, inferência, produto ou decisão envolvendo crianças exige finalidade legítima, minimização, revisão humana e avaliação do melhor interesse.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D008","title":"Dignidade humana é invariante","decision":"Nenhuma pessoa pode ser tratada como recurso, alvo manipulável, material de treinamento não autorizado ou meio descartável.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D009","title":"Missão anti-exploração vira controle","decision":"Intenção ética só é operacional quando possui ameaça definida, controle, dono, teste, evidência, remediação e canal de contestação.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D010","title":"Hash prova integridade, não verdade","decision":"Hash e metadados mostram identidade e alteração; não provam autoria exclusiva, correção científica, execução ou conformidade legal.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D011","title":"Metadados narram o processo","decision":"Além da linha que falhou, registrar estado anterior, dependências, ambiente, decisão, sintoma, impacto, rollback e resíduo.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D012","title":"Tela azul é modelo de incidente","decision":"A analogia Windows 3.11/BSOD representa falha visível sem diagnóstico suficiente. Só vira caso real quando logs, versão, hardware e reprodução são observados.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D013","title":"Livro que se escreve por dentro é append-only","decision":"Autoescrita significa eventos versionados, assinados, revisáveis e reversíveis; nunca atualização silenciosa do passado.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D014","title":"Promoção é não compensatória","decision":"Boa estética, muitos hashes ou documentação extensa não compensam execução, fonte, licença, falsificador ou revisão ausentes.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D015","title":"Direitos humanos são referência, não selo","decision":"UDHR, CRC, ICCPR e UNESCO orientam o desenho; o repositório não declara conformidade jurídica automática.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D016","title":"Arqueoastronomia requer dupla leitura","decision":"Alinhamentos, calendários e monumentos devem separar medição astronômica verificável de interpretação cultural e hipótese histórica.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D017","title":"Ciência espiritual mantém duas colunas","decision":"Correspondência científica e significado espiritual são preservados lado a lado, sem uma validar automaticamente a outra.","state":"ACTIVE","claim_allowed":false},
+    {"id":"D018","title":"Claim público exige revisão humana","decision":"Nenhum mecanismo físico, benefício terapêutico, conformidade legal ou eficácia social é liberado automaticamente pelo pipeline.","state":"ACTIVE","claim_allowed":false}
+  ],
+  "journal_contract": {
+    "append_only": true,
+    "required_fields": ["event_id","effective_at","recorded_at","actor","object_id","action","reason","evidence_pointers","result","residual","next_action","previous_event_sha256","event_sha256"],
+    "incident_fields": ["symptom","fault_domain","environment","impact","reproduction_state","rollback","repair","lesson"],
+    "forbidden_substitutions": ["TOKEN_VAZIO->0","missing_log->PASS","commit->execution","hash->truth","symbol->science"]
+  },
+  "domain_routes": [
+    {"domain":"sacred_geometry_mandalas_parables","producer":"instituto-Rafael/LivroVivo_ThisBookLives","mapa_role":"catalog_and_claim_boundary"},
+    {"domain":"science_spirituality_ethics","producer":"rafaelmeloreisnovo/CientiEspiritual","mapa_role":"authority_and_evidence_routing"},
+    {"domain":"scientific_physical_claims","producer":"instituto-Rafael/relativity-living-light or papers","mapa_role":"pointer_only"},
+    {"domain":"privacy_child_dignity_human_rights","producer":"specialist legal/ethics repositories","mapa_role":"control_and_gap_ledger"}
+  ],
+  "references": [
+    {"id":"REF-UDHR","title":"Universal Declaration of Human Rights","authority":"OHCHR","purpose":"human dignity, equality and freedom","url":"https://www.ohchr.org/en/human-rights/universal-declaration/translations/english","claim":"REFERENCE_ONLY"},
+    {"id":"REF-ICCPR18","title":"International Covenant on Civil and Political Rights, Article 18","authority":"OHCHR","purpose":"freedom of thought, conscience, religion or belief","url":"https://2covenants.ohchr.org/About-ICCPR.html","claim":"REFERENCE_ONLY"},
+    {"id":"REF-CRC3","title":"Convention on the Rights of the Child, Article 3 / General Comment 14","authority":"OHCHR","purpose":"best interests of the child as primary consideration","url":"https://www.ohchr.org/en/documents/general-comments-and-recommendations/general-comment-no-14-2013-right-child-have-his-or-her","claim":"REFERENCE_ONLY"},
+    {"id":"REF-UNESCO-AI","title":"Recommendation on the Ethics of Artificial Intelligence","authority":"UNESCO","purpose":"human dignity, privacy, oversight, diversity, accountability and lifecycle governance","url":"https://www.unesco.org/en/legal-affairs/recommendation-ethics-artificial-intelligence","claim":"REFERENCE_ONLY"}
+  ],
+  "open_blockers": [
+    {"id":"GAP-01","state":"TOKEN_VAZIO_RIGHTS_OF_UPLOADED_IMAGES","exit":"record creator/license/consent for each asset"},
+    {"id":"GAP-02","state":"TOKEN_VAZIO_REMOTE_CI","exit":"observe remote workflow steps and artifacts"},
+    {"id":"GAP-03","state":"TOKEN_VAZIO_INDEPENDENT_REVIEW","exit":"independent reviewer signs bounded review"},
+    {"id":"GAP-04","state":"TOKEN_VAZIO_AUDIO_EVIDENCE","exit":"provide audio source and spectral receipt for Hz claims"},
+    {"id":"GAP-05","state":"TOKEN_VAZIO_LEGAL_REVIEW","exit":"qualified legal review for jurisdiction-specific compliance"}
+  ]
+}
