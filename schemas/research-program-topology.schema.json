@@ -4,10 +4,11 @@
   "title": "RAFAELIA Research Program Topology",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "event_id", "governance", "authorities", "modules", "riemann_program", "nodes", "edges", "invariants"],
+  "required": ["schema_version", "event_id", "source_document", "governance", "authorities", "modules", "riemann_program", "nodes", "edges", "invariants"],
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "event_id": {"const": "AUDIT-OMEGA-ACCEPTED-7D-TOPOLOGY-V1-20260728"},
+    "source_document": {"type": "string", "format": "uri"},
     "governance": {
       "type": "object",
       "additionalProperties": false,
