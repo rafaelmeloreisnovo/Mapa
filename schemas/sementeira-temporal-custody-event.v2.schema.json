@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sementeira.local/schemas/sementeira-temporal-custody-event.v2.schema.json",
+  "title": "Sementeira Temporal Custody Event V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "event_id",
+    "sequence",
+    "parents",
+    "timestamps",
+    "temporal_gap",
+    "hashes",
+    "anchors",
+    "claim_allowed",
+    "merge_authorized"
+  ],
+  "properties": {
+    "schema": {"const": "sementeira.temporal_custody_event.v2"},
+    "event_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 1},
+    "parents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["git_parent_sha", "custody_parent_sha", "merge_base_sha", "relationship"],
+      "properties": {
+        "git_parent_sha": {"$ref": "#/$defs/gitSha"},
+        "custody_parent_sha": {"$ref": "#/$defs/gitSha"},
+        "merge_base_sha": {"$ref": "#/$defs/gitSha"},
+        "relationship": {"enum": ["DIRECT_ANCESTOR", "DIVERGED", "UNKNOWN"]}
+      }
+    },
+    "timestamps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["custody_parent_at", "observed_at", "drive_anchored_at", "committed_at", "post_observed_at", "canonical_timezone", "display_timezone"],
+      "properties": {
+        "custody_parent_at": {"$ref": "#/$defs/dateTime"},
+        "observed_at": {"$ref": "#/$defs/dateTime"},
+        "drive_anchored_at": {"$ref": "#/$defs/dateTime"},
+        "committed_at": {"$ref": "#/$defs/dateTime"},
+        "post_observed_at": {"$ref": "#/$defs/dateTime"},
+        "canonical_timezone": {"const": "UTC"},
+        "display_timezone": {"const": "America/Sao_Paulo"},
+        "precision_notes": {"type": "string"}
+      }
+    },
+    "temporal_gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["seconds", "nanoseconds_integer", "monotonic_gate_pass"],
+      "properties": {
+        "seconds": {"type": "number", "minimum": 0},
+        "nanoseconds_integer": {"type": "integer", "minimum": 0},
+        "monotonic_gate_pass": {"type": "boolean"}
+      }
+    },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha3_256", "blake3_256", "md5_legacy"],
+      "properties": {
+        "sha3_256": {"$ref": "#/$defs/digest256"},
+        "blake3_256": {"$ref": "#/$defs/digest256"},
+        "md5_legacy": {"$ref": "#/$defs/md5"}
+      }
+    },
+    "anchors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "branch", "drive_document_id"],
+      "properties": {
+        "repository": {"const": "rafaelmeloreisnovo/Mapa"},
+        "branch": {"type": "string", "minLength": 1},
+        "pr_number": {"type": ["integer", "null"], "minimum": 1},
+        "drive_document_id": {"type": "string", "minLength": 1},
+        "drive_revision_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "claim_allowed": {"const": false},
+    "merge_authorized": {"const": false},
+    "not_public_blockchain": {"const": true}
+  },
+  "$defs": {
+    "gitSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "dateTime": {"type": "string", "format": "date-time"},
+    "digest256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "md5": {"type": "string", "pattern": "^[0-9a-f]{32}$"}
+  }
+}
