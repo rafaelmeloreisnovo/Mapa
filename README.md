@@ -227,7 +227,6 @@ Quality levels:
 | [termux-app-rafacodephi](https://github.com/rafaelmeloreisnovo/termux-app-rafacodephi) | Bom | No change |
 | [gaia_phi](https://github.com/rafaelmeloreisnovo/gaia_phi) | Bom | No change |
 | [Cosmos](https://github.com/rafaelmeloreisnovo/Cosmos) | Bom | No change |
-| [MemRafcode](https://github.com/rafaelmeloreisnovo/MemRafcode) | Bom | No change |
 | [cientiespiritual](https://github.com/rafaelmeloreisnovo/cientiespiritual) | Bom | No change |
 | [ZIPRAF_OMEGA_FULL](https://github.com/rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL) | Bom | No change |
 | [catalogo-cosmologico](https://github.com/rafaelmeloreisnovo/catalogo-cosmologico) | Bom | No change |
@@ -243,7 +242,8 @@ Quality levels:
 | [Seguran-a-informacional-](https://github.com/rafaelmeloreisnovo/Seguran-a-informacional-) | Expandido | Created from scratch: Lídia DVD 8-mechanism protection table |
 | [MemRa](https://github.com/rafaelmeloreisnovo/MemRa) | Expandido | 23-file research archive catalog with states |
 | [ZIPRAF_CORE](https://github.com/rafaelmeloreisnovo/ZIPRAF_CORE) | Expandido | ZRF-C library structure, API, and TOKEN_VAZIO gates |
-| [rafaelia-core-enterprise](https://github.com/rafaelmeloreisnovo/rafaelia-core-enterprise) | Expandido | 81 C-file Vectra/GeoLM pipeline description |
+| [MemRafcode](https://github.com/rafaelmeloreisnovo/MemRafcode) | Expandido | 8-stage pipeline, chain invariant, 17-file structure table and truth rules added |
+| [rafaelia-core-enterprise](https://github.com/rafaelmeloreisnovo/rafaelia-core-enterprise) | Expandido | 50+ C Vectra variants, GeoLM geodesic, Voynich pipeline described |
 | [qemu_rafaelia](https://github.com/rafaelmeloreisnovo/qemu_rafaelia) | Expandido | Created from scratch — no prior root README existed |
 | [RafaelCiencias](https://github.com/rafaelmeloreisnovo/RafaelCiencias) | Expandido | Scientific domain table + internal document links added |
 
