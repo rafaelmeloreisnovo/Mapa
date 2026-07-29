@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/research-program-topology.schema.json",
+  "title": "RAFAELIA Research Program Topology",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "governance", "authorities", "modules", "riemann_program", "nodes", "edges", "invariants"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "event_id": {"const": "AUDIT-OMEGA-ACCEPTED-7D-TOPOLOGY-V1-20260728"},
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_allowed", "append_only", "edge_typed", "axis_specific_gates", "prior_art_complete", "patent_status"],
+      "properties": {
+        "claim_allowed": {"const": false},
+        "append_only": {"const": true},
+        "edge_typed": {"const": true},
+        "axis_specific_gates": {"const": true},
+        "prior_art_complete": {"const": false},
+        "patent_status": {"const": "TOKEN_VAZIO_IP"}
+      }
+    },
+    "authorities": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string"}},
+    "modules": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"$ref": "#/$defs/module"}},
+    "riemann_program": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module_id", "candidate_operator", "identity_target", "gates", "claim_allowed"],
+      "properties": {
+        "module_id": {"const": "UTM-194"},
+        "candidate_operator": {"type": "string", "minLength": 1},
+        "identity_target": {"const": "det_reg(H - s(1-s)) = C(s) xi(s)"},
+        "gates": {"type": "array", "minItems": 11, "maxItems": 11, "items": {"$ref": "#/$defs/gate"}},
+        "claim_allowed": {"const": false}
+      }
+    },
+    "nodes": {"type": "array", "minItems": 20, "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "minItems": 20, "items": {"$ref": "#/$defs/edge"}},
+    "invariants": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string", "minLength": 3}}
+  },
+  "$defs": {
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "problem", "previous_state", "current_state", "gap", "claim_allowed", "source_refs"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^UTM-[A-Z0-9-]+$"},
+        "problem": {"type": "string", "minLength": 3},
+        "previous_state": {"type": "string", "minLength": 1},
+        "current_state": {"enum": ["PROGRAMA_CONJECTURAL", "REFUTED_AS_SAME_EQUATION", "REFUTED_UNIVERSALITY"]},
+        "gap": {"type": "string", "minLength": 3},
+        "claim_allowed": {"const": false},
+        "source_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "state", "next", "claim_allowed"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^R(10|[0-9])$"},
+        "name": {"type": "string", "minLength": 3},
+        "state": {"enum": ["DEFINED", "TOKEN_VAZIO"]},
+        "next": {"type": ["string", "null"], "pattern": "^R(10|[0-9])$"},
+        "claim_allowed": {"const": false}
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "state", "claim_allowed"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["SOURCE", "MODULE", "DEFINITION", "OPERATOR", "DOMAIN", "HYPOTHESIS", "EQUIVALENCE", "GATE", "EVIDENCE", "REVIEW", "DECISION", "MEMORY_EVENT", "AUTHORITY"]},
+        "state": {"type": "string", "minLength": 1},
+        "claim_allowed": {"const": false}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "from", "to", "type", "claim_allowed"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "from": {"type": "string", "minLength": 1},
+        "to": {"type": "string", "minLength": 1},
+        "type": {"enum": ["derived_from", "defines", "acts_on", "conjectures_equivalence_with", "requires_gate", "supported_by", "contradicted_by", "falsified_by", "implemented_by", "executed_by", "reviewed_by", "supersedes_state", "next_gate", "routes_to"]},
+        "claim_allowed": {"const": false}
+      }
+    }
+  }
+}
