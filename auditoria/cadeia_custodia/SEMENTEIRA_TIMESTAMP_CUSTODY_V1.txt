@@ -1,0 +1,137 @@
+SEMENTEIRA — TIMESTAMP HASH-CHAINED DE COMMIT E MATRIZES — V1
+
+NATUREZA: ledger append-only verificável; NÃO é blockchain pública nem prova de consenso distribuído.
+POLÍTICA: no_tail=true; no_shadow=true; full_coverage=true; claim_allowed=false
+
+COMMIT-ÂNCORA
+repository: rafaelmeloreisnovo/Mapa
+sha: 596ceaff5c5b1932c3649bd44af5f03468075f04
+message: Merge pull request #88 from rafaelmeloreisnovo/audit/session-universe-456-20260728
+
+audit(sementeira): inventário 416+40 com revisão unitária e TOKEN_VAZIO
+created_at_utc: 2026-07-29T01:40:23Z
+author_login: rafaelmeloreisnovo
+committer_login: web-flow
+url: https://github.com/rafaelmeloreisnovo/Mapa/commit/596ceaff5c5b1932c3649bd44af5f03468075f04
+
+CADEIA ANTES → DURANTE → DEPOIS LOCAL
+BEFORE: bytes=1511
+  SHA3-256: cf7d77ea785fbc1a60612f36651b4f680f0655f96393b27c6782c7168887fe43
+  BLAKE3-256: fcb215780fdc3bc4ce6b91777829fc4676345d3284d7d1c42d7d73eb9431a73b
+  MD5-legacy: f7816cd831fb79030facdd02f63fcfe6
+DURING: bytes=2292
+  SHA3-256: e8ae60a7d007fe0337e8ac96e7f54bebc208db7431b03c0427ad8e4de7a40606
+  BLAKE3-256: 2f8d4488ca1a93bc7f0800b940cad90cdbb8976184ac09a7b744705f713f2cac
+  MD5-legacy: 2eb3d535be5f3fdc18fa3335880dff59
+AFTER_LOCAL: bytes=2817
+  SHA3-256: 83688dcb6cc6f9de304ca273e390ee624492ed24b5700dd03018f67350036d1b
+  BLAKE3-256: c1a506940adecae72e72187e38b8c420164077d9f3ae04187fbf3134c9bce11f
+  MD5-legacy: cbdbe933f2e23f6ff1894d2d992e2890
+
+EXECUÇÃO BINÁRIA
+clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034fe318f3d56c83bddb6572593a8bb0)
+clang -std=c11 -O2 -Wall -Wextra -Werror -fno-strict-aliasing -fno-omit-frame-pointer matrix_kernel.c -o matrix_kernel
+matrix_kernel 596ceaff5c5b1932c3649bd44af5f03468075f04
+BLAKE3_KAT_PASS=2/2
+MATRIZES: 2x2, 4x4, 8x5, 10x10, 18x10; total=340 células; base20=0-9+A-J; XOR=ativado
+RESULTADO: LOCAL_PASS; 5/5 matrizes; 340/340 células; roundtrip base20 PASS
+
+HASHES DOS ARTEFATOS
+01_BEFORE.json:
+  bytes=2134
+  sha3_256=405aab4db4c8b39f2c1652ec1665cfbeb637e9e27f158895d403341b644f44d6
+  blake3_256=041b3a3a0e67f93f683fcc67322aea45536d235ab6e54d793c83bddbe9fbcfd8
+  md5_legacy=e3658a09c936c52c9d5ac0fab453b676
+02_DURING.json:
+  bytes=3299
+  sha3_256=18d9a227ba1205d79cfd7d376ab9dfaac8af172b4b350016f7fa2c84556b5314
+  blake3_256=042a472e18b86c8ad0d274d8606da8a3c55564dff64f42c6c359545c0a48b172
+  md5_legacy=57e6aeae15a6b17d2b41c6a11deaad3b
+matrix_kernel.c:
+  bytes=2951
+  sha3_256=b88bd6039a96ab9855a7bf3673cb66db4f617ec839a515cb612b8374ae282328
+  blake3_256=8fa0de75f16196d95b99393b4a066de25c8bdd56fa70fdc457340959a21204ff
+  md5_legacy=34bcfa6f91eb8643e737fdf7a670281c
+matrix_kernel:
+  bytes=16376
+  sha3_256=82291ff8a6381d0aabcb276a9a1129abb484b47188d4d232e578939239a479f3
+  blake3_256=a50da38280c5d87e2785380643d1f8a93371fe382bef0106be22ef0031152205
+  md5_legacy=97d2b8e71ccb7aebbf53acf28d30a8c0
+matrix_output.txt:
+  bytes=2092
+  sha3_256=2f0438d63f5610e030bb3e9a3767835234c622a58c4c543d881a4a39019312d0
+  blake3_256=f170298e8612fb1817e8d5f0730e3182bcfcd40941d70591ec222f4269e7d467
+  md5_legacy=7abacdae03f1b8df7f54782cb70295e4
+blake3_pure.py:
+  bytes=4957
+  sha3_256=e7b3d649369b1785a7e87172c1750e889576033bab0375328cb1c952bcd4e111
+  blake3_256=925bc762ada75559d8b2618825c8151379208eb40b7c162010877ff5e37e0834
+  md5_legacy=692fa7997aa306b1e0f49ea3df9ea901
+
+SAÍDA COMPLETA DO NÚCLEO (SEM TAIL)
+KERNEL=SEMENTEIRA_CUSTODY_MATRIX_V1
+POLICY=no_tail,no_shadow,full_coverage,static_storage,xor_enabled,base20_roundtrip
+MATRIX M2x2 rows=2 cols=2 count=4 base=20
+ROW 00 34,C6
+ROW 01 D6,93
+CHECK M2x2 coverage=4/4 sum=759 weighted=2086 xor=0x0000003c status=PASS
+MATRIX M4x4 rows=4 cols=4 count=16 base=20
+ROW 00 3A,C6,E2,AH
+ROW 01 F9,45,CG,8I
+ROW 02 09,BJ,0D,G2
+ROW 03 BJ,C0,HJ,57
+CHECK M4x4 coverage=16/16 sum=3171 weighted=27589 xor=0x00050368 status=PASS
+MATRIX M8x5 rows=8 cols=5 count=40 base=20
+ROW 00 39,C6,EJ,B1,GE
+ROW 01 48,CI,8H,23,EE
+ROW 02 02,G6,D2,C2,00
+ROW 03 56,A8,G8,HI,C1
+ROW 04 HE,2C,66,C4,C0
+ROW 05 AI,A2,5C,CJ,06
+ROW 06 2J,G2,1D,75,5B
+ROW 07 DJ,8B,DE,53,G3
+CHECK M8x5 coverage=40/40 sum=7735 weighted=155613 xor=0x001fd2b2 status=PASS
+MATRIX M10x10 rows=10 cols=10 count=100 base=20
+ROW 00 3C,D2,F4,BH,HB,69,F2,BE,5B,GJ
+ROW 01 29,I8,E7,F6,0J,8H,DI,05,2I,HI
+ROW 02 C3,J8,81,E2,F1,93,G2,77,DF,7B
+ROW 03 H8,AG,H8,3B,1G,B8,67,HF,39,F8
+ROW 04 34,HA,JC,G5,2F,BD,DI,GI,BB,GB
+ROW 05 7D,48,DJ,I2,63,E1,HA,3H,5E,0E
+ROW 06 GB,24,AH,GI,H1,B3,I2,97,GB,8F
+ROW 07 10,E8,04,67,4C,F0,9J,JF,65,I4
+ROW 08 FC,9I,C0,8D,E7,35,3I,8A,0F,77
+ROW 09 HD,DC,4F,AA,B7,J5,92,F9,BE,6E
+CHECK M10x10 coverage=100/100 sum=21792 weighted=1083371 xor=0x0001c773 status=PASS
+MATRIX M18x10 rows=18 cols=10 count=180 base=20
+ROW 00 3C,D2,F4,BH,HB,69,F2,BE,5B,GJ
+ROW 01 2H,IG,EF,FE,17,95,E6,0D,36,I6
+ROW 02 CJ,04,8H,EI,FH,9J,GI,83,EB,87
+ROW 03 IC,C0,IC,4F,30,CC,7B,IJ,4D,GC
+ROW 04 4G,J2,14,HH,47,D5,FA,IA,D3,I3
+ROW 05 9D,68,FJ,02,83,G1,JA,5H,7E,2E
+ROW 06 IJ,4C,D5,J6,J9,DB,0A,BF,IJ,B3
+ROW 07 3G,H4,30,93,78,HG,CF,2B,91,10
+ROW 08 IG,D2,F4,BH,HB,69,72,BE,3J,AB
+ROW 09 15,H4,87,E2,EJ,2H,CE,J1,F6,A6
+ROW 10 G3,04,41,A2,B1,9J,C2,83,G3,1J
+ROW 11 04,DC,04,67,4C,E4,93,97,F1,70
+ROW 12 GG,CE,EG,B9,HJ,6H,7A,C2,53,BF
+ROW 13 1D,I8,9B,F6,F7,35,EE,11,GA,BA
+ROW 14 CB,I4,21,82,85,73,96,57,E3,1B
+ROW 15 J0,C8,I4,47,2C,D0,7J,CJ,5H,HG
+ROW 16 I0,7A,F4,65,BJ,0H,F2,BE,JJ,B7
+ROW 17 H5,IG,93,A2,FF,95,8E,F1,36,I6
+CHECK M18x10 coverage=180/180 sum=38954 weighted=3513057 xor=0x000eedc4 status=PASS
+FINAL status=PASS matrices=5 cells=340
+
+LIMITES
+- MD5 é somente compatibilidade histórica; não é usado como prova criptográfica forte.
+- A importação para Google Drive deve preservar o TXT original; a conversão em Google Docs mudaria os bytes.
+- A cadeia prova integridade e ordem dos artefatos observados; não prova autoria jurídica absoluta nem consenso público.
+
+REMOTE ANCHOR — GOOGLE DRIVE FIRST
+file_id: 1D9lQ4C8yC6kpNcyJeT95WR7llsd_bhz4aLCXqvHeAgY
+revision_id: AIroW36qknkx8qWSnRuA5i7IvczhgU-bAP6QlAv9za9sgNHqwk61JUP2lkyQ6qCLpBWF69p8qYPAp27Gxw8DYSLybzzYGEqQLvzt0jXapzY
+url: https://docs.google.com/document/d/1D9lQ4C8yC6kpNcyJeT95WR7llsd_bhz4aLCXqvHeAgY
+storage_note: Google Docs native content; semantic/content anchor, not byte-identical TXT storage.
