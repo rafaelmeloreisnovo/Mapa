@@ -1,0 +1,69 @@
+{
+  "canonical_payload": {
+    "schema": "sementeira.temporal_gap_custody.v2",
+    "event_id": "TG2-20260729T041846024360Z",
+    "stage": "PRE_DRIVE_PRECOMMIT_REVIEW",
+    "observed_at_utc": "2026-07-29T04:18:46.024360Z",
+    "observed_at_local": "2026-07-29T01:18:46.024360-03:00",
+    "timezone": "America/Sao_Paulo",
+    "clock_source": "container_system_clock_observed_in_current_execution",
+    "clock_precision": "microseconds_recorded; upstream connector timestamps may be seconds or milliseconds",
+    "sequence": 2,
+    "previous_anchor": {
+      "custody_commit_sha": "14e3ce20b4ab445ac65381222205566e5352a30f",
+      "custody_commit_time_utc": "2026-07-29T04:06:26Z",
+      "event_hashes": {
+        "sha3_256": "2838bf358f47fa3dd39d03d0c73a77b9f42df8db6600a760fe1ef63934cc14ed",
+        "blake3_256": "4442f0916446522166160733177d190e4f5eb4d592b2324fcd2e0c16282d7101",
+        "md5_legacy": "c639e73783e100e722b03d00d8c533e9"
+      },
+      "drive_file_id": "1D9lQ4C8yC6kpNcyJeT95WR7llsd_bhz4aLCXqvHeAgY",
+      "source_commit_sha": "596ceaff5c5b1932c3649bd44af5f03468075f04"
+    },
+    "git_base": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "git_parent_sha": "84cb0b2e752761211ed81a8a13895a6206265d44",
+      "git_parent_time_utc": "2026-07-29T04:05:04Z",
+      "merge_base_with_custody_parent": "596ceaff5c5b1932c3649bd44af5f03468075f04",
+      "relationship_to_custody_parent": "DIVERGED_AHEAD_2_BEHIND_4"
+    },
+    "temporal_gap": {
+      "from_utc": "2026-07-29T04:06:26Z",
+      "to_utc": "2026-07-29T04:18:46.024360Z",
+      "seconds": 740.02436,
+      "nanoseconds_integer": 740024360000,
+      "base_commit_relative_to_previous_custody_seconds": -82.0
+    },
+    "drive_anchor": {
+      "folder_id": "1kweK_UZGcNph3eLjEcDJr7JqVPULUuNA",
+      "document_id": "1bp7h468s_W1VXs7ACvcH0ZBewY3QTZwRk5_IX39JMeU",
+      "document_revision_precommit": "AIroW34MM10NbjFhxJylXO1sxpx57_mKXrQ0jZdCHN1bqXN_-Jlp1vhHr0w353Wywr7YjhXF_V7t3tLsSkgfrj_8k26ukLzJ7xie907-H6bN",
+      "canonical_memory_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "canonical_memory_revision_after_append": "AIroW379ybDEEJXl4EvqfiOob3bCjcQM0Y2wUn2ZcWc1fngIRad-C4mdM1kyVkZMe7D4quj9fLxf6704QbGcWeqf9XZnoxjOC49Y-yDJRk0"
+    },
+    "review_findings": [
+      {"id":"MAP-TIME-01","priority":"P0","state":"CONFIRMED_GAP","finding":"A linha de custódia V1 divergiu da main; o próximo evento precisa de git_parent e custody_parent separados."},
+      {"id":"MAP-TIME-02","priority":"P0","state":"SCHEMA_GAP","finding":"Falta um contrato canônico para observed_at, drive_anchored_at, committed_at e post_observed_at."},
+      {"id":"MAP-TIME-03","priority":"P1","state":"CLOCK_POLICY_GAP","finding":"UTC deve ser a régua canônica; America/Sao_Paulo é projeção humana; precisão e fonte do relógio devem ser declaradas."},
+      {"id":"MAP-TIME-04","priority":"P1","state":"REGISTRY_GAP","finding":"Falta um índice único ligando evento, hashes, Drive file/revision, branch, PR e commits."},
+      {"id":"MAP-TIME-05","priority":"P1","state":"TERMINOLOGY_CORRECTION","finding":"O objeto é ledger timestamp hash-chained; blockchain pública, consenso distribuído e autoridade jurídica permanecem não reivindicados."}
+    ],
+    "mathematical_contract": {
+      "temporal_gap": "Δt_n = t_observed_n - t_custody_parent",
+      "event": "E_n = CanonicalJSON(git_parent,custody_parent,Δt_n,source_digests,review_digest,drive_anchor,sequence)",
+      "chain": "C_n^a = H_a(C_(n-1)^a || H_a(E_n) || encode_u128(Δt_ns) || sequence)",
+      "monotonic_gate": "t_custody_parent <= t_observed <= t_drive_anchor <= t_precommit <= t_commit <= t_post_observed",
+      "dual_parent": "P_n = <git_parent, custody_parent>"
+    },
+    "claim_allowed": false,
+    "merge_authorized": false,
+    "not_public_blockchain": true
+  },
+  "integrity": {
+    "actual_file_bytes": 4891,
+    "actual_file_sha3_256": "5c7a37e37f93cdc28e48c6c3ee2e9cba093370845878663a2f72099fa2b3e968",
+    "actual_file_blake3_256": "986896b8d5543fa6853ae1172b0b6f8a9fa586e78c696e6e81c6a24dc2a4b97c",
+    "actual_file_md5_legacy": "0e494f6c3fc1b98c6640ba14d32332bd"
+  },
+  "integrity_scope": "local UTF-8 file bytes before GitHub contents API"
+}

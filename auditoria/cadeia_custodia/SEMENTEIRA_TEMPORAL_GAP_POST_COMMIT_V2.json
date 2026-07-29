@@ -1,0 +1,85 @@
+{
+  "canonical_payload": {
+    "anchors": {
+      "branch": "custody/longitudinal-temporal-gap-v2-20260729",
+      "canonical_memory_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "canonical_memory_revision_after_append": "AIroW379ybDEEJXl4EvqfiOob3bCjcQM0Y2wUn2ZcWc1fngIRad-C4mdM1kyVkZMe7D4quj9fLxf6704QbGcWeqf9XZnoxjOC49Y-yDJRk0",
+      "commits": [
+        {"at":"2026-07-29T04:22:38Z","role":"PRE_DRIVE_EVENT_COMMIT","sha":"2a3c94853d4e5017b3d81ad13fb62a2e67d34143"},
+        {"at":"2026-07-29T04:23:07Z","role":"LONGITUDINAL_REVIEW_COMMIT","sha":"27f8532c91c9757395eaa443a49753e366e84339"},
+        {"at":"2026-07-29T04:23:32Z","role":"TEMPORAL_SCHEMA_COMMIT","sha":"5e3576820012104886a1754004801fb04e3e5b56"}
+      ],
+      "drive_document_id": "1bp7h468s_W1VXs7ACvcH0ZBewY3QTZwRk5_IX39JMeU",
+      "drive_document_revision_precommit": "AIroW34MM10NbjFhxJylXO1sxpx57_mKXrQ0jZdCHN1bqXN_-Jlp1vhHr0w353Wywr7YjhXF_V7t3tLsSkgfrj_8k26ukLzJ7xie907-H6bN",
+      "drive_folder_id": "1kweK_UZGcNph3eLjEcDJr7JqVPULUuNA",
+      "pr_number": 89,
+      "pr_url": "https://github.com/rafaelmeloreisnovo/Mapa/pull/89",
+      "repository": "rafaelmeloreisnovo/Mapa"
+    },
+    "claim_allowed": false,
+    "event_id": "TG2-20260729T041846024360Z-POSTCOMMIT",
+    "merge_authorized": false,
+    "monotonic_gate": {
+      "expression": "t_custody <= t_observed <= t_drive <= t_canonical_memory <= t_commit1 <= t_commit2 <= t_commit3 <= t_pr <= t_post",
+      "pass": true
+    },
+    "not_public_blockchain": true,
+    "parents": {
+      "custody_parent_sha": "14e3ce20b4ab445ac65381222205566e5352a30f",
+      "git_parent_sha": "84cb0b2e752761211ed81a8a13895a6206265d44",
+      "merge_base_sha": "596ceaff5c5b1932c3649bd44af5f03468075f04",
+      "relationship": "DIVERGED"
+    },
+    "previous_chain_hashes": {
+      "blake3_256": "4442f0916446522166160733177d190e4f5eb4d592b2324fcd2e0c16282d7101",
+      "md5_legacy": "c639e73783e100e722b03d00d8c533e9",
+      "sha3_256": "2838bf358f47fa3dd39d03d0c73a77b9f42df8db6600a760fe1ef63934cc14ed"
+    },
+    "review_summary": {
+      "P0": ["dual-parent custody contract","typed timestamp schema"],
+      "P1": ["UTC clock policy","federated event registry","blockchain terminology correction"],
+      "claim_allowed": false,
+      "merge_authorized": false,
+      "not_public_blockchain": true
+    },
+    "schema": "sementeira.temporal_custody_event.v2",
+    "sequence": 2,
+    "state": "POST_COMMIT_PRE_FINAL_SEAL",
+    "temporal_gaps_seconds": {
+      "canonical_memory_to_first_commit": 40.582,
+      "custody_to_observed": 740.02436,
+      "custody_to_pr": 1041.0,
+      "custody_to_schema_commit": 1026.0,
+      "drive_to_canonical_memory_append": 162.446,
+      "first_to_review_commit": 29.0,
+      "observed_to_drive": 28.94764,
+      "pr_to_post_observation": 80.116213,
+      "review_to_schema_commit": 25.0,
+      "schema_commit_to_pr": 15.0
+    },
+    "timestamps": {
+      "canonical_memory_modified_at": "2026-07-29T04:21:57.418Z",
+      "canonical_timezone": "UTC",
+      "custody_parent_at": "2026-07-29T04:06:26Z",
+      "display_timezone": "America/Sao_Paulo",
+      "drive_anchored_at": "2026-07-29T04:19:14.972Z",
+      "first_commit_at": "2026-07-29T04:22:38Z",
+      "observed_at": "2026-07-29T04:18:46.024360Z",
+      "post_observed_at": "2026-07-29T04:25:07.116213Z",
+      "pr_created_at": "2026-07-29T04:23:47Z",
+      "precision_notes": "local observation microseconds; GitHub commit/PR seconds; Drive milliseconds",
+      "review_commit_at": "2026-07-29T04:23:07Z",
+      "schema_commit_at": "2026-07-29T04:23:32Z"
+    }
+  },
+  "integrity": {
+    "canonical_blake3_256": "96c95f0f85074f9e3fdf93165f974349aead5703b7136302591de16b51b269ad",
+    "canonical_bytes": 3044,
+    "canonical_md5_legacy": "af28a23932cbfd2aa706dc1301f3a593",
+    "canonical_sha3_256": "62f2c698b744c560f1089a44442b0cefb4ee618595e7b234de797a28e72d77cd",
+    "chain_blake3_256": "972b810d3feb094cb319582d697d44c89b4f2b7ccc9cfd08f653d592880bc5db",
+    "chain_md5_legacy": "93392429d616c7d6a05201d74ff42e8d",
+    "chain_sha3_256": "ba4f5ecd656516c376936aa15b9a48e783881098c42db9e08c2bff666f21fbcc"
+  },
+  "integrity_scope": "canonical_payload sorted compact UTF-8; chain input includes previous SHA3 and BLAKE3 anchors"
+}
