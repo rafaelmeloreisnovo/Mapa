@@ -29,6 +29,22 @@ ALLOWED_EDGE_TYPES = {
     "next_gate",
     "routes_to",
 }
+EDGE_KIND_CONTRACTS = {
+    "derived_from": ({"SOURCE", "MEMORY_EVENT"}, {"MEMORY_EVENT", "SOURCE"}),
+    "defines": ({"MODULE", "DEFINITION"}, {"DEFINITION", "OPERATOR"}),
+    "acts_on": ({"OPERATOR"}, {"DOMAIN"}),
+    "conjectures_equivalence_with": ({"HYPOTHESIS"}, {"EQUIVALENCE"}),
+    "requires_gate": ({"MODULE", "HYPOTHESIS", "EQUIVALENCE"}, {"GATE"}),
+    "supported_by": ({"MODULE", "HYPOTHESIS", "EQUIVALENCE"}, {"EVIDENCE"}),
+    "contradicted_by": ({"MODULE", "HYPOTHESIS", "EQUIVALENCE"}, {"EVIDENCE", "DECISION"}),
+    "falsified_by": ({"MODULE", "HYPOTHESIS", "EQUIVALENCE"}, {"EVIDENCE"}),
+    "implemented_by": ({"OPERATOR", "MODULE"}, {"EVIDENCE", "AUTHORITY"}),
+    "executed_by": ({"OPERATOR", "MODULE"}, {"EVIDENCE"}),
+    "reviewed_by": ({"MODULE", "HYPOTHESIS", "EQUIVALENCE"}, {"REVIEW"}),
+    "supersedes_state": ({"MEMORY_EVENT"}, {"MODULE", "HYPOTHESIS", "EQUIVALENCE"}),
+    "next_gate": ({"GATE"}, {"GATE"}),
+    "routes_to": ({"MEMORY_EVENT", "MODULE", "DECISION"}, {"AUTHORITY", "DECISION", "MEMORY_EVENT"}),
+}
 REQUIRED_INVARIANTS = {
     "APPEND_ONLY",
     "CLAIM_FAIL_CLOSED",
@@ -68,6 +84,7 @@ def validate(payload: dict[str, Any]) -> dict[str, int]:
         payload.get("event_id") == "AUDIT-OMEGA-ACCEPTED-7D-TOPOLOGY-V1-20260728",
         "unexpected event_id",
     )
+    _require(bool(payload.get("source_document")), "source_document is required")
 
     governance = payload.get("governance")
     _require(isinstance(governance, dict), "governance must be an object")
@@ -114,16 +131,24 @@ def validate(payload: dict[str, Any]) -> dict[str, int]:
     _require(len(node_ids) == len(nodes) and len(set(node_ids)) == len(node_ids), "node ids must be unique")
     _require(all(n.get("claim_allowed") is False for n in nodes), "all nodes must be fail-closed")
     node_set = set(node_ids)
+    node_kind = {node["id"]: node["kind"] for node in nodes}
 
     edges = payload.get("edges")
     _require(isinstance(edges, list) and edges, "edges are required")
     edge_ids = [e.get("id") for e in edges if isinstance(e, dict)]
     _require(len(edge_ids) == len(edges) and len(set(edge_ids)) == len(edge_ids), "edge ids must be unique")
     for edge in edges:
-        _require(edge.get("claim_allowed") is False, f"{edge.get('id')}: claim_allowed must be false")
-        _require(edge.get("type") in ALLOWED_EDGE_TYPES, f"{edge.get('id')}: untyped/unknown relation")
-        _require(edge.get("from") in node_set, f"{edge.get('id')}: missing source node")
-        _require(edge.get("to") in node_set, f"{edge.get('id')}: missing target node")
+        edge_id = edge.get("id")
+        edge_type = edge.get("type")
+        source = edge.get("from")
+        target = edge.get("to")
+        _require(edge.get("claim_allowed") is False, f"{edge_id}: claim_allowed must be false")
+        _require(edge_type in ALLOWED_EDGE_TYPES, f"{edge_id}: untyped/unknown relation")
+        _require(source in node_set, f"{edge_id}: missing source node")
+        _require(target in node_set, f"{edge_id}: missing target node")
+        allowed_sources, allowed_targets = EDGE_KIND_CONTRACTS[edge_type]
+        _require(node_kind[source] in allowed_sources, f"{edge_id}: invalid source kind for {edge_type}")
+        _require(node_kind[target] in allowed_targets, f"{edge_id}: invalid target kind for {edge_type}")
 
     observed = {(e["from"], e["to"], e["type"]) for e in edges}
     required_gate_edges = {("UTM-194", f"R{i}", "requires_gate") for i in range(11)}
