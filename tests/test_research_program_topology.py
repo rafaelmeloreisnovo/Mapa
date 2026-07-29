@@ -24,6 +24,8 @@ class ResearchProgramTopologyTests(unittest.TestCase):
         summary = validator.validate(self.payload)
         self.assertEqual(summary["modules"], 8)
         self.assertEqual(summary["gates"], 11)
+        self.assertEqual(summary["nodes"], 35)
+        self.assertEqual(summary["edges"], 43)
         self.assertEqual(summary["claim_allowed_true"], 0)
 
     def test_claim_promotion_fails_closed(self) -> None:
@@ -41,6 +43,13 @@ class ResearchProgramTopologyTests(unittest.TestCase):
     def test_missing_edge_endpoint_is_rejected(self) -> None:
         bad = copy.deepcopy(self.payload)
         bad["edges"][0]["to"] = "MISSING-NODE"
+        with self.assertRaises(validator.ValidationError):
+            validator.validate(bad)
+
+    def test_reversed_semantic_edge_is_rejected(self) -> None:
+        bad = copy.deepcopy(self.payload)
+        edge = next(item for item in bad["edges"] if item["id"] == "E014")
+        edge["from"], edge["to"] = edge["to"], edge["from"]
         with self.assertRaises(validator.ValidationError):
             validator.validate(bad)
 
