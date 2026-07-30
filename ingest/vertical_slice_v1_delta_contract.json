@@ -1,0 +1,22 @@
+{
+  "schema": "rafaelia_selective_ingest_delta_v1",
+  "event_id": "RAFAELIA-VERTICAL-SLICE-V1-20260730T041200Z",
+  "delta_rule": "current_sha256 != indexed_sha256 OR source_id_not_indexed",
+  "tiers": ["HOT", "WARM", "COLD", "ARCHIVE"],
+  "current_scope": {
+    "tier": "HOT",
+    "source_count": 9,
+    "full_rescan_required": false
+  },
+  "invalidation": {
+    "by": ["source_id", "sha256", "revision", "dependency"],
+    "reverse_dependency_update": true,
+    "unaffected_records_preserved": true
+  },
+  "fail_closed_states": {
+    "missing_source": "TOKEN_VAZIO_SOURCE_UNAVAILABLE",
+    "hash_conflict": "TOKEN_VAZIO_SOURCE_HASH_CONFLICT",
+    "authority_conflict": "TOKEN_VAZIO_AUTHORITY_CONFLICT"
+  },
+  "claim_allowed": false
+}
