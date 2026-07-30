@@ -1,0 +1,55 @@
+{
+  "schema": "rafaelia_vertical_slice_registry_v1",
+  "event_id": "RAFAELIA-VERTICAL-SLICE-V1-20260730T041200Z",
+  "created_at": "2026-07-30T04:12:00Z",
+  "claim_allowed": false,
+  "sources": [
+    {"id":"SRC-20260730-APK-001","filename":"com.termux_1002 (1).apk","kind":"APK","sha256":"e6265a57eb5ca363808488e3b01955958bed93bc0c8a0d281849b363b11027ec","tier":"HOT"},
+    {"id":"SRC-20260730-ZIP-001","filename":"d6e9db90fbd5ffb1158e68518e6f46005d1c78dbaef56427bb8a934c8f466c0a-2025-10-06-21-49-49-edd15254776a4346b05570a99e6d418f.zip","kind":"CHAT_EXPORT_ZIP","sha256":"53fbfbc52d110d5815024ca851868555d23c3180cd73bb5433dd5f5bade9d93f","tier":"HOT"},
+    {"id":"SRC-20260730-IMG-001","filename":"fractal_unificado_visual.png","kind":"PNG","sha256":"34b34fb6db90eb47ff206c013ea1264055af205296f380766749f7c835e14264","tier":"HOT"},
+    {"id":"SRC-20260730-IMG-002","filename":"RAFAELIA_FRACTAL_Ω_0001_hybrid.png","kind":"PNG","sha256":"09ce438287465ed76f3b4cc607dac5a5d915096b07a7c1cec5dac419b5d6e185","tier":"HOT"},
+    {"id":"SRC-20260730-IMG-003","filename":"RAFAELIA_FRACTAL_Ω_0002_voynich.png","kind":"PNG","sha256":"15e9752115e79967066e6409a0b8e0f51265feac963f8970829ac54b8c6778a8","tier":"HOT"},
+    {"id":"SRC-20260730-IMG-004","filename":"RAFAELIA_FRACTAL_Ω_0003_fibonacci.png","kind":"PNG","sha256":"ab9af9253e1985a02b7731e775c6ea83891c79470a336efca8976eb88939beee","tier":"HOT"},
+    {"id":"SRC-20260730-IMG-005","filename":"RAFAELIA_FRACTAL_Ω_0004_delta.png","kind":"PNG","sha256":"b3cabd090f54da28dab569951238d99013eeb1ca5a6d328726c24333a32ceb5d","tier":"HOT"},
+    {"id":"SRC-20260730-IMG-006","filename":"RAFAELIA_FRACTAL_Ω_0005_tag14.png","kind":"PNG","sha256":"c6c34c72ecd7cb78e2b3217d1320e98a46f34e039b4b59e067db2dbecb1f5f3a","tier":"HOT"},
+    {"id":"SRC-20260730-IMG-007","filename":"RAFAELIA_FRACTAL_Ω_0006_cheio.png","kind":"PNG","sha256":"b4bbb92f475870d3a673bc45ffa97acc1eb02842e18610a55f2fdb3d9465c033","tier":"HOT"}
+  ],
+  "claims": [
+    {
+      "id": "CLAIM-APK-ABI-001",
+      "state_before_run": "HIPOTESE",
+      "statement": "The APK contains libtermux.so and libtermux-bootstrap.so for four ABIs.",
+      "source_ids": ["SRC-20260730-APK-001"],
+      "falsifier": "any expected ZIP entry is absent"
+    },
+    {
+      "id": "CLAIM-EXPORT-ROOT-001",
+      "state_before_run": "HIPOTESE",
+      "statement": "The chat export ZIP exposes the five expected root files and passes archive integrity checking.",
+      "source_ids": ["SRC-20260730-ZIP-001"],
+      "falsifier": "root entry set differs or ZIP integrity check reports a bad member"
+    },
+    {
+      "id": "CLAIM-PNG-CORPUS-001",
+      "state_before_run": "HIPOTESE",
+      "statement": "All seven visuals are PNG containers with matching hashes and readable IHDR dimensions.",
+      "source_ids": ["SRC-20260730-IMG-001","SRC-20260730-IMG-002","SRC-20260730-IMG-003","SRC-20260730-IMG-004","SRC-20260730-IMG-005","SRC-20260730-IMG-006","SRC-20260730-IMG-007"],
+      "falsifier": "hash mismatch, invalid PNG signature or unreadable IHDR"
+    }
+  ],
+  "expected": {
+    "apk_entries": [
+      "lib/arm64-v8a/libtermux-bootstrap.so","lib/arm64-v8a/libtermux.so",
+      "lib/armeabi-v7a/libtermux-bootstrap.so","lib/armeabi-v7a/libtermux.so",
+      "lib/x86/libtermux-bootstrap.so","lib/x86/libtermux.so",
+      "lib/x86_64/libtermux-bootstrap.so","lib/x86_64/libtermux.so"
+    ],
+    "chat_export_root_entries": ["chat.html","conversations.json","message_feedback.json","shared_conversations.json","user.json"]
+  },
+  "gates": {
+    "require_hash_match": true,
+    "require_falsifier": true,
+    "require_receipt": true,
+    "require_human_review_for_promotion": true
+  }
+}
