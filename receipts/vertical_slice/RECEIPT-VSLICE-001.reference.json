@@ -1,0 +1,80 @@
+{
+  "schema": "rafaelia_operational_record_v1",
+  "id": "RECEIPT-VSLICE-001",
+  "record_type": "RECEIPT",
+  "state": "EVIDENCIADO",
+  "claim_allowed": false,
+  "created_at": "2026-07-30T04:18:06.626359Z",
+  "event_id": "RAFAELIA-VERTICAL-SLICE-V1-20260730T041200Z",
+  "run_id": "RUN-VSLICE-001",
+  "runtime_class": "CONTAINER_REFERENCE",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "implementation": "CPython"
+  },
+  "commit": "TOKEN_VAZIO_GIT_COMMIT_NOT_BOUND_AT_REFERENCE_RUN",
+  "device": "REFERENCE_CONTAINER",
+  "architecture": "x86_64",
+  "compiler": "GCC 14.2.0 compatible CPython build",
+  "flags": [],
+  "input_hash": "2c133a7bb67a01c9c57f167c56db5f113f164ffb4952a59e2be899625bcbe84c",
+  "command": "python3 scripts/run_vertical_slice.py --source-root /mnt/data --bundle-root /mnt/data/RAFAELIA_VERTICAL_SLICE_V1 --runtime-class CONTAINER_REFERENCE",
+  "exit_code": 0,
+  "stdout_hash": "3ace335bc1821706feed89aaf7a544fb677ba5a57eddee2d07b571b61b130959",
+  "stderr_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "output_hash": "93de7bf37aa544480f989caa2cb17dc13b1189e7931dc9ad5dcc6676c8fc046b",
+  "artifact_receipt_sha256": "56621b76527eb626b7b2d93074cf1c0a589d836b9b5934a7e35811904ce6e77c",
+  "bundle_zip_sha256": "89067a5503d4b06a74026a79abb1fafa915cfbba54e81e8e02f65eff7189819b",
+  "provenance": {
+    "origin": "local_vertical_slice_execution",
+    "sha256": "93de7bf37aa544480f989caa2cb17dc13b1189e7931dc9ad5dcc6676c8fc046b"
+  },
+  "falsifier": "any source hash mismatch, absent expected entry, corrupt ZIP, invalid PNG signature or unreadable IHDR",
+  "next_verifiable_step": "execute the same bundle in Android Termux, bind the generated receipt to an exact Git commit and obtain independent human review",
+  "result": {
+    "overall_pass": true,
+    "sources_total": 9,
+    "sources_observed": 9,
+    "missing_sources": [],
+    "hash_failures": [],
+    "claims": {
+      "CLAIM-APK-ABI-001": {
+        "pass": true,
+        "apk_entry_count": 738,
+        "expected_native_entries_observed": 8,
+        "missing_entries": []
+      },
+      "CLAIM-EXPORT-ROOT-001": {
+        "pass": true,
+        "root_entries": [
+          "chat.html",
+          "conversations.json",
+          "message_feedback.json",
+          "shared_conversations.json",
+          "user.json"
+        ],
+        "first_bad_entry": null
+      },
+      "CLAIM-PNG-CORPUS-001": {
+        "pass": true,
+        "images": [
+          {"id":"SRC-20260730-IMG-001","width":956,"height":900},
+          {"id":"SRC-20260730-IMG-002","width":1024,"height":1024},
+          {"id":"SRC-20260730-IMG-003","width":900,"height":900},
+          {"id":"SRC-20260730-IMG-004","width":840,"height":840},
+          {"id":"SRC-20260730-IMG-005","width":1100,"height":1100},
+          {"id":"SRC-20260730-IMG-006","width":950,"height":950},
+          {"id":"SRC-20260730-IMG-007","width":1024,"height":1024}
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "reference runtime is not Android Termux",
+    "human review is pending",
+    "no production readiness or scientific validity is inferred",
+    "visual semantics were not inferred from PNG container validation"
+  ]
+}
