@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/orquestrador-omega-excellence-v1.schema.json",
+  "title": "Orquestrador Omega Excellence V1",
+  "type": "object",
+  "required": ["schema", "event_id", "sustaining_invariant", "needs", "vectors", "matrix_contract", "cell_defaults", "global_state", "R3"],
+  "properties": {
+    "schema": {"const": "orquestrador_omega_excellence_v1"},
+    "event_id": {"type": "string", "minLength": 1},
+    "needs": {"type": "array", "minItems": 12, "maxItems": 12, "uniqueItems": true},
+    "vectors": {"type": "array", "minItems": 12, "maxItems": 12, "uniqueItems": true},
+    "matrix_contract": {
+      "type": "object",
+      "required": ["rows", "columns", "expected_cells", "non_compensatory", "generation"],
+      "properties": {
+        "rows": {"const": 12},
+        "columns": {"const": 12},
+        "expected_cells": {"const": 144},
+        "non_compensatory": {"const": true},
+        "generation": {"const": "cartesian_product(needs.id, vectors.id)"}
+      }
+    },
+    "cell_defaults": {"type": "object", "required": ["state", "authority", "F_ok", "F_gap", "F_next"]},
+    "global_state": {"type": "object", "required": ["claim_allowed"], "properties": {"claim_allowed": {"const": false}}}
+  },
+  "additionalProperties": true
+}
