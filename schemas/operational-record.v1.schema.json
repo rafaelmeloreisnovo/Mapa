@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/operational-record.v1.schema.json",
+  "title": "RAFAELIA Operational Record V1",
+  "type": "object",
+  "required": [
+    "schema",
+    "id",
+    "record_type",
+    "state",
+    "claim_allowed",
+    "created_at",
+    "provenance",
+    "falsifier",
+    "next_verifiable_step"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia_operational_record_v1"},
+    "id": {"type": "string", "pattern": "^[A-Z]+-[A-Z0-9-]+$"},
+    "record_type": {
+      "enum": ["SOURCE", "CLAIM", "RUN", "RECEIPT", "DECISION", "ENTITY", "RELATION", "GAP"]
+    },
+    "state": {
+      "enum": ["PROVADO", "EVIDENCIADO", "HIPOTESE", "MODELO_ANALOGICO", "PARABOLA", "REFUTADO", "TOKEN_VAZIO"]
+    },
+    "claim_allowed": {"const": false},
+    "created_at": {"type": "string", "format": "date-time"},
+    "provenance": {
+      "type": "object",
+      "required": ["origin", "sha256"],
+      "properties": {
+        "origin": {"type": "string"},
+        "sha256": {"type": ["string", "null"]}
+      }
+    },
+    "falsifier": {"type": ["string", "object"]},
+    "next_verifiable_step": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}
