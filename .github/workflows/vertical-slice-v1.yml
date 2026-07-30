@@ -1,0 +1,46 @@
+name: Vertical Slice V1
+
+on:
+  pull_request:
+    paths:
+      - 'docs/canonical/2026-07-30/RAFAELIA_VERTICAL_SLICE_OPERACIONAL_V1.md'
+      - 'governance/AUTHORITY_MATRIX_V1.yaml'
+      - 'schemas/operational-record.v1.schema.json'
+      - 'data/vertical_slice_v1/**'
+      - 'scripts/run_vertical_slice_v1.py'
+      - 'tests/test_vertical_slice_v1.py'
+      - 'gates/vertical_slice_v1_gate.py'
+      - 'receipts/vertical_slice/**'
+      - 'mapa/vertical_slice_v1/**'
+      - 'observability/vertical_slice_v1_metrics.json'
+      - 'resultados/RAFAELIA_VERTICAL_SLICE_STATUS_V1.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile executor and gate
+        run: python -m py_compile scripts/run_vertical_slice_v1.py gates/vertical_slice_v1_gate.py tests/test_vertical_slice_v1.py
+      - name: Run fail-closed gate
+        run: python gates/vertical_slice_v1_gate.py
+      - name: Run standard-library tests
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          p=Path('tests/test_vertical_slice_v1.py')
+          spec=importlib.util.spec_from_file_location('t',p)
+          m=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(m)
+          for name in sorted(x for x in dir(m) if x.startswith('test_')):
+              getattr(m,name)()
+              print('PASS',name)
+          PY
