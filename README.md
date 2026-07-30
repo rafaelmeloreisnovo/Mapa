@@ -193,6 +193,84 @@ merge | correction | contradiction | TOKEN_VAZIO
 
 A commit proves existence and history of an artifact. It does not by itself prove execution, causality, performance, safety or scientific validity.
 
+## README Quality Index — Ecosystem Repositories
+
+**Sprint:** 2026-07 · **Branch:** `claude/readme-analise-refatoracao-vl6t6l`
+
+Quality levels:
+- **Alto** — Complete, technically precise, no changes needed
+- **Bom** — Good original quality; minor cleanup or no changes required
+- **Refatorado** — Content separated: philosophical/spiritual/legal text moved to dedicated auxiliary files; README = technical entry point
+- **Expandido** — Stub or missing README expanded with full technical structure
+
+> **Preservation principle:** All pre-existing content is preserved 100%. Philosophical, spiritual, legal and academic texts are moved to dedicated named files (`LITURGIA.md`, `MANIFESTO_LEGAL.md`, `DISSERTATION.md`, etc.) and explicitly referenced from the README. Nothing was deleted.
+
+### rafaelmeloreisnovo/
+
+| Repository | Level | Action |
+|---|---|---|
+| [BLAKE3](https://github.com/rafaelmeloreisnovo/BLAKE3) | Alto | No change — original README complete |
+| [ChipQuantum](https://github.com/rafaelmeloreisnovo/ChipQuantum) | Alto | No change — original README complete |
+| [Vectras-VM-Android](https://github.com/rafaelmeloreisnovo/Vectras-VM-Android) | Alto | No change — original README complete |
+| [androidx_RmR](https://github.com/rafaelmeloreisnovo/androidx_RmR) | Alto | No change — original README complete |
+| [openssl](https://github.com/rafaelmeloreisnovo/openssl) | Alto | No change — original README complete |
+| [Clima](https://github.com/rafaelmeloreisnovo/Clima) | Alto | No change — original README complete |
+| [Fisica](https://github.com/rafaelmeloreisnovo/Fisica) | Alto | No change — original README complete |
+| [GEOMETRIA_SOLAR_Maia_Inca](https://github.com/rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca) | Alto | No change — original README complete |
+| [termux-api_rafcodephi](https://github.com/rafaelmeloreisnovo/termux-api_rafcodephi) | Alto | No change — original README complete |
+| [Mapa](https://github.com/rafaelmeloreisnovo/Mapa) | Bom | Updated — added this README quality index |
+| [Matem-tica-](https://github.com/rafaelmeloreisnovo/Matem-tica-) | Bom | No change |
+| [RafPolimata](https://github.com/rafaelmeloreisnovo/RafPolimata) | Bom | 14 internal READMEs standardized with canonical state headers and cross-references |
+| [TeoremasTesesTeorias](https://github.com/rafaelmeloreisnovo/TeoremasTesesTeorias) | Bom | No change |
+| [X0](https://github.com/rafaelmeloreisnovo/X0) | Bom | No change |
+| [papers](https://github.com/rafaelmeloreisnovo/papers) | Bom | No change |
+| [termux-app-rafacodephi](https://github.com/rafaelmeloreisnovo/termux-app-rafacodephi) | Bom | No change |
+| [gaia_phi](https://github.com/rafaelmeloreisnovo/gaia_phi) | Bom | No change |
+| [Cosmos](https://github.com/rafaelmeloreisnovo/Cosmos) | Bom | No change |
+| [cientiespiritual](https://github.com/rafaelmeloreisnovo/cientiespiritual) | Bom | No change |
+| [ZIPRAF_OMEGA_FULL](https://github.com/rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL) | Bom | No change |
+| [catalogo-cosmologico](https://github.com/rafaelmeloreisnovo/catalogo-cosmologico) | Bom | No change |
+| [CONVERSATIONS_CHUNKS_PRIVATE](https://github.com/rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE) | Bom | No change |
+| [Geral](https://github.com/rafaelmeloreisnovo/Geral) | Bom | No change |
+| [home](https://github.com/rafaelmeloreisnovo/home) | Bom | No change |
+| [teoremas](https://github.com/rafaelmeloreisnovo/teoremas) | Refatorado | Full thesis moved to `TEORIA_ATRACTOR_42.md`; README = navigation entry point |
+| [RafGitTools](https://github.com/rafaelmeloreisnovo/RafGitTools) | Refatorado | 80-line philosophy manifesto moved to `MANIFESTO.md` |
+| [Rafaelia_Private](https://github.com/rafaelmeloreisnovo/Rafaelia_Private) | Refatorado | Post-doctoral dissertation moved to `DISSERTATION.md` |
+| [privadoFazendo](https://github.com/rafaelmeloreisnovo/privadoFazendo) | Refatorado | Theoretical context moved to `CONTEXTO_TEORICO.md`; 18 MVPs in tabular form |
+| [llamaRafaelia](https://github.com/rafaelmeloreisnovo/llamaRafaelia) | Refatorado | Cross-system analysis essay moved to `ANALISE_CRUZADA.md` |
+| [templo-vivo-arcs](https://github.com/rafaelmeloreisnovo/templo-vivo-arcs) | Refatorado | Liturgical prayer (54 KB) moved to `LITURGIA.md`; README = architecture + TOKEN_VAZIO gates |
+| [Seguran-a-informacional-](https://github.com/rafaelmeloreisnovo/Seguran-a-informacional-) | Expandido | Created from scratch: Lídia DVD 8-mechanism protection table |
+| [MemRa](https://github.com/rafaelmeloreisnovo/MemRa) | Expandido | 23-file research archive catalog with states |
+| [ZIPRAF_CORE](https://github.com/rafaelmeloreisnovo/ZIPRAF_CORE) | Expandido | ZRF-C library structure, API, and TOKEN_VAZIO gates |
+| [MemRafcode](https://github.com/rafaelmeloreisnovo/MemRafcode) | Expandido | 8-stage pipeline, chain invariant, 17-file structure table and truth rules added |
+| [rafaelia-core-enterprise](https://github.com/rafaelmeloreisnovo/rafaelia-core-enterprise) | Expandido | 50+ C Vectra variants, GeoLM geodesic, Voynich pipeline described |
+| [qemu_rafaelia](https://github.com/rafaelmeloreisnovo/qemu_rafaelia) | Expandido | Created from scratch — no prior root README existed |
+| [RafaelCiencias](https://github.com/rafaelmeloreisnovo/RafaelCiencias) | Expandido | Scientific domain table + internal document links added |
+
+### instituto-Rafael/
+
+| Repository | Level | Action |
+|---|---|---|
+| [relativity-living-light](https://github.com/instituto-Rafael/relativity-living-light) | Alto | No change — original README complete |
+| [Eletron-efeitos-qu-ntico](https://github.com/instituto-Rafael/Eletron-efeitos-qu-ntico) | Bom | No change |
+| [Bitraf-Bit-quantum](https://github.com/instituto-Rafael/Bitraf-Bit-quantum) | Bom | No change |
+| [publicacientiespiritual](https://github.com/instituto-Rafael/publicacientiespiritual) | Bom | No change |
+| [LivroVivo_ThisBookLives](https://github.com/instituto-Rafael/LivroVivo_ThisBookLives) | Refatorado | Interdimensional parable moved to `PARABOLA.md`; README = navigation index |
+| [Firewall](https://github.com/instituto-Rafael/Firewall) | Refatorado | License text (entire README) moved to `LICENSE.md`; README = technical description |
+| [QUANTUM_source_code](https://github.com/instituto-Rafael/QUANTUM_source_code) | Refatorado | Spiritual/legal declaration moved to `SPIRITUAL_CONTEXT.md`; README = technical pipeline |
+| [Clay-Maths](https://github.com/instituto-Rafael/Clay-Maths) | Refatorado | AI chat artifact removed; `# Clay-Maths` heading added; bilingual Clay Problems analysis preserved |
+| [QUANTUM_auth_certificate](https://github.com/instituto-Rafael/QUANTUM_auth_certificate) | Refatorado | Legal manifest (R$ 50k–50M fines table) moved to `MANIFESTO_LEGAL.md` |
+| [PlamaticGravity-](https://github.com/instituto-Rafael/PlamaticGravity-) | Refatorado | Risk analysis chat artifact removed; 4 risk sections moved to `RISCOS_GRAVIDADE_PLASMATICA.md` |
+| [apk-ethics-rafaelia](https://github.com/instituto-Rafael/apk-ethics-rafaelia) | Expandido | Technical structure (purpose, build, TOKEN_VAZIO gates) added |
+| [apk-guardian-rafaelia](https://github.com/instituto-Rafael/apk-guardian-rafaelia) | Expandido | Technical structure added |
+| [apk-privacy-rafaelia](https://github.com/instituto-Rafael/apk-privacy-rafaelia) | Expandido | Technical structure added |
+| [apk-antitrust-rafaelia](https://github.com/instituto-Rafael/apk-antitrust-rafaelia) | Expandido | Technical structure added |
+| [apk-gboard-insight](https://github.com/instituto-Rafael/apk-gboard-insight) | Expandido | Technical structure added |
+| [apk-js-zrf-privacy](https://github.com/instituto-Rafael/apk-js-zrf-privacy) | Expandido | Technical structure added |
+| [RAFAELIA_CORE](https://github.com/instituto-Rafael/RAFAELIA_CORE) | Expandido | Σ_pipeline architecture, Ethica[8], Voynich analysis, GeoLM described |
+| [LGPD-Constituicoes-planetaria-...](https://github.com/instituto-Rafael/lgpd-constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic) | Expandido | Created from scratch — no prior root README; 10 data files + 10 dirs cataloged |
+| [BIOSINTETICOS](https://github.com/instituto-Rafael/BIOSINTETICOS) | Expandido | Heading syntax error fixed (`# #` → `#`); structure table and TOKEN_VAZIO gates added |
+
 ## Ecosystem
 
 | Repository | Primary domain |
