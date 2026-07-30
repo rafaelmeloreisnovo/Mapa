@@ -1,0 +1,21 @@
+{
+  "schema": "rafaelia_orchestrator_state_machine_v1",
+  "event_id": "RAFAELIA-VERTICAL-SLICE-V1-20260730T041200Z",
+  "states": ["INGEST", "VALIDATE", "EXECUTE", "TEST", "RECEIPT", "DECIDE", "INDEX"],
+  "initial_state": "INGEST",
+  "terminal_state": "INDEX",
+  "transitions": [
+    {"from":"INGEST","to":"VALIDATE","requires":["source_id","source_hash","authority_route"]},
+    {"from":"VALIDATE","to":"EXECUTE","requires":["schema_valid","falsifier_present","claim_allowed_false"]},
+    {"from":"EXECUTE","to":"TEST","requires":["runtime_environment","command","exit_code"]},
+    {"from":"TEST","to":"RECEIPT","requires":["test_result","stdout_hash","stderr_hash","output_hash"]},
+    {"from":"RECEIPT","to":"DECIDE","requires":["immutable_receipt","limitations","next_verifiable_step"]},
+    {"from":"DECIDE","to":"INDEX","requires":["human_review_state","entities","relations","gaps"]}
+  ],
+  "failure_transition": {
+    "target": "TOKEN_VAZIO",
+    "preserve_context": true,
+    "automatic_promotion": false
+  },
+  "claim_allowed": false
+}
