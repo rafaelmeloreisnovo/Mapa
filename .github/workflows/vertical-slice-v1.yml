@@ -1,46 +1,71 @@
 name: Vertical Slice V1
 
-on:
+"on":
   pull_request:
     paths:
-      - 'docs/canonical/2026-07-30/RAFAELIA_VERTICAL_SLICE_OPERACIONAL_V1.md'
-      - 'governance/AUTHORITY_MATRIX_V1.yaml'
-      - 'schemas/operational-record.v1.schema.json'
-      - 'data/vertical_slice_v1/**'
-      - 'scripts/run_vertical_slice_v1.py'
-      - 'tests/test_vertical_slice_v1.py'
-      - 'gates/vertical_slice_v1_gate.py'
-      - 'receipts/vertical_slice/**'
-      - 'mapa/vertical_slice_v1/**'
-      - 'observability/vertical_slice_v1_metrics.json'
-      - 'resultados/RAFAELIA_VERTICAL_SLICE_STATUS_V1.json'
+      - "docs/canonical/2026-07-30/RAFAELIA_VERTICAL_SLICE_OPERACIONAL_V1.md"
+      - "governance/AUTHORITY_MATRIX_V1.yaml"
+      - "schemas/operational-record.v1.schema.json"
+      - "data/vertical_slice_v1/**"
+      - "scripts/run_vertical_slice_v1.py"
+      - "tests/test_vertical_slice_v1.py"
+      - "gates/vertical_slice_v1_gate.py"
+      - "receipts/vertical_slice/**"
+      - "mapa/vertical_slice_v1/**"
+      - "observability/vertical_slice_v1_metrics.json"
+      - "resultados/RAFAELIA_VERTICAL_SLICE_STATUS_V1.json"
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: vertical-slice-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   contract:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          python-version: '3.12'
-      - name: Compile executor and gate
-        run: python -m py_compile scripts/run_vertical_slice_v1.py gates/vertical_slice_v1_gate.py tests/test_vertical_slice_v1.py
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile executor, gate, and tests
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            scripts/run_vertical_slice_v1.py \
+            gates/vertical_slice_v1_gate.py \
+            tests/test_vertical_slice_v1.py
+
       - name: Run fail-closed gate
-        run: python gates/vertical_slice_v1_gate.py
+        run: |
+          set -euo pipefail
+          python gates/vertical_slice_v1_gate.py
+
       - name: Run standard-library tests
         run: |
+          set -euo pipefail
           python - <<'PY'
           import importlib.util
           from pathlib import Path
-          p=Path('tests/test_vertical_slice_v1.py')
-          spec=importlib.util.spec_from_file_location('t',p)
-          m=importlib.util.module_from_spec(spec)
-          spec.loader.exec_module(m)
-          for name in sorted(x for x in dir(m) if x.startswith('test_')):
-              getattr(m,name)()
-              print('PASS',name)
+
+          path = Path("tests/test_vertical_slice_v1.py")
+          spec = importlib.util.spec_from_file_location("vertical_slice_tests", path)
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+          tests = sorted(name for name in dir(module) if name.startswith("test_"))
+          for name in tests:
+              getattr(module, name)()
+              print("PASS", name)
+          print(f"PASS total={len(tests)}")
           PY
