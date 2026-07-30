@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/conversation-custody-index.schema.json",
+  "title": "FAROL Sigma Conversation Custody Manifest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "schema_version", "source_id", "source_parts",
+    "logical_source_bytes", "logical_source_sha256", "ordered_concatenation",
+    "source_modified", "boundary", "privacy", "claim_allowed"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.conversation-custody-manifest.v1"},
+    "schema_version": {"const": "1.0.0"},
+    "source_id": {"type": "string", "minLength": 1},
+    "source_parts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["order", "name", "size_bytes", "sha256"],
+        "properties": {
+          "order": {"type": "integer", "minimum": 1},
+          "name": {"type": "string", "minLength": 1},
+          "size_bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "logical_source_bytes": {"type": "integer", "minimum": 0},
+    "logical_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "ordered_concatenation": {"const": true},
+    "source_modified": {"const": false},
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "first_non_whitespace", "last_non_whitespace",
+        "starts_with_json_array", "ends_with_json_array"
+      ],
+      "properties": {
+        "first_non_whitespace": {"type": ["string", "null"], "maxLength": 1},
+        "last_non_whitespace": {"type": ["string", "null"], "maxLength": 1},
+        "starts_with_json_array": {"type": "boolean"},
+        "ends_with_json_array": {"type": "boolean"}
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_titles_in_index", "raw_message_bodies_in_index", "opaque_ids_included"],
+      "properties": {
+        "raw_titles_in_index": {"const": false},
+        "raw_message_bodies_in_index": {"const": false},
+        "opaque_ids_included": {"type": "boolean"}
+      }
+    },
+    "claim_allowed": {"const": false}
+  }
+}
