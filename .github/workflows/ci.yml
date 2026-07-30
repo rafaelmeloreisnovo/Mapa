@@ -1,6 +1,6 @@
 name: CI
 
-on:
+"on":
   push:
     branches: [main, "claude/**"]
   pull_request:
@@ -10,12 +10,18 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     name: Validate Repository Structure
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
 
       - name: Install markdownlint
         run: npm install -g markdownlint-cli2
@@ -34,13 +40,14 @@ jobs:
         run: |
           loose=$(find . -maxdepth 1 -name "file_*.png" 2>/dev/null || true)
           if [ -n "$loose" ]; then
-            echo "ERROR: Hash-named PNGs at root (should be in visual/):"; echo "$loose"; exit 1
+            echo "ERROR: Hash-named PNGs at root (should be in visual/):"
+            echo "$loose"
+            exit 1
           fi
           echo "Root is clean."
 
       - name: M3 — Varredura operacional contract check
         run: |
-          # Verify WORKFLOW_VARREDURA_OPERACIONAL.md exists and defines the required fields
           wf="workflows/WORKFLOW_VARREDURA_OPERACIONAL.md"
           [ -f "$wf" ] || { echo "MISSING: $wf"; exit 1; }
           required=("id" "origem" "tipo" "estado" "ação" "resultado")
@@ -52,43 +59,38 @@ jobs:
       - name: M2 — Auto index generation
         run: |
           python3 scripts/generate_asset_index.py --out indices/ASSET_INDEX_AUTO.yaml
-          count=$(python3 -c "import re; data=open('indices/ASSET_INDEX_AUTO.yaml').read(); m=re.search(r'total_files: (\d+)', data); print(m.group(1))")
+          count=$(python3 -c "import re; data=open('indices/ASSET_INDEX_AUTO.yaml').read(); m=re.search(r'total_files: (\\d+)', data); print(m.group(1))")
           [ "$count" -ge 1 ] || { echo "FAIL: index generated zero files"; exit 1; }
           echo "OK: auto index generated $count files"
 
       - name: M4 — Internal repo link verification
         run: |
-          # Verify that references to in-scope repos use correct owner/repo format
-          # and flag references to out-of-scope repos for manual review
           python3 - <<'EOF'
-          import re, sys, pathlib
+          import pathlib
+          import re
 
           in_scope = {
-            "rafaelmeloreisnovo/Mapa",
-            "rafaelmeloreisnovo/Vectras-VM-Android",
-            "rafaelmeloreisnovo/qemu_rafaelia",
-            "rafaelmeloreisnovo/termux-app-rafacodephi",
-            "rafaelmeloreisnovo/RafGitTools",
-            "rafaelmeloreisnovo/androidx_RmR",
+              "rafaelmeloreisnovo/Mapa",
+              "rafaelmeloreisnovo/Vectras-VM-Android",
+              "rafaelmeloreisnovo/qemu_rafaelia",
+              "rafaelmeloreisnovo/termux-app-rafacodephi",
+              "rafaelmeloreisnovo/RafGitTools",
+              "rafaelmeloreisnovo/androidx_RmR",
           }
-
-          repo_pattern = re.compile(r"rafaelmeloreisnovo/([A-Za-z0-9_\-\.]+)")
+          repo_pattern = re.compile(r"rafaelmeloreisnovo/([A-Za-z0-9_\-.]+)")
           out_of_scope = set()
-
-          for md in pathlib.Path(".").rglob("*.md"):
-              if ".git" in md.parts or "node_modules" in md.parts:
+          for markdown in pathlib.Path(".").rglob("*.md"):
+              if ".git" in markdown.parts or "node_modules" in markdown.parts:
                   continue
-              text = md.read_text(errors="replace")
-              for m in repo_pattern.finditer(text):
-                  ref = f"rafaelmeloreisnovo/{m.group(1)}"
-                  if ref not in in_scope:
-                      out_of_scope.add(ref)
-
+              text = markdown.read_text(errors="replace")
+              for match in repo_pattern.finditer(text):
+                  reference = f"rafaelmeloreisnovo/{match.group(1)}"
+                  if reference not in in_scope:
+                      out_of_scope.add(reference)
           if out_of_scope:
-              print("INFO: References to out-of-scope repos (require manual link verification):")
-              for r in sorted(out_of_scope):
-                  print(f"  {r}")
-              print("These repos are outside the active CI scope. Verify links manually.")
+              print("INFO: References to out-of-scope repos (manual verification required):")
+              for reference in sorted(out_of_scope):
+                  print(f"  {reference}")
           else:
               print("OK: All repo references are within active scope.")
           EOF

@@ -1,0 +1,58 @@
+{
+  "schema": "rafaelia_vertical_slice_status_v1",
+  "event_id": "RAFAELIA-VERTICAL-SLICE-V1-20260730T041200Z",
+  "policy": {
+    "append_only": true,
+    "claim_allowed": false
+  },
+  "steps": {
+    "01_authority_matrix": "IMPLEMENTED",
+    "02_unique_inventory": "IMPLEMENTED_CURRENT_SCOPE_9_SOURCES",
+    "03_epistemic_states": "IMPLEMENTED",
+    "04_common_schema": "IMPLEMENTED",
+    "05_selective_ingest": "IMPLEMENTED_HASH_DELTA_CURRENT_SCOPE",
+    "06_provenance": "IMPLEMENTED_SHA256_APPEND_ONLY",
+    "07_reproducible_environment": "REFERENCE_RUNTIME_EXECUTED_TERMUX_PENDING",
+    "08_central_orchestrator": "IMPLEMENTED_LOCAL",
+    "09_fail_closed_gates": "IMPLEMENTED",
+    "10_rafpolimata_lab": "ADAPTER_PENDING_REMOTE_REPOSITORY",
+    "11_rll_falsification": "ADAPTER_PENDING_NO_SCIENTIFIC_CLAIM",
+    "12_navigable_memory": "ENTITIES_RELATIONS_GENERATED_IN_BUNDLE",
+    "13_human_review": "TOKEN_VAZIO_HUMAN_REVIEW_PENDING",
+    "14_maturity_release": "S4_REFERENCE_RECEIPT",
+    "15_observability": "METRICS_GENERATED",
+    "16_selective_feedback": "R3_GENERATED"
+  },
+  "metrics": {
+    "sources_total": 9,
+    "sources_observed": 9,
+    "hash_match_rate": 1.0,
+    "claims_total": 3,
+    "claims_with_falsifier": 3,
+    "claims_evidenced": 3,
+    "token_vazio_rate_current_scope": 0.0,
+    "valid_receipts": 1,
+    "human_reviews_complete": 0,
+    "maturity": "S4_RECEIPT_REPRODUCIBLE_REFERENCE",
+    "termux_replication": "TOKEN_VAZIO_RUNTIME_NOT_EXECUTED"
+  },
+  "R3": {
+    "F_ok": [
+      "authority matrix materialized",
+      "nine current-session sources inventoried",
+      "three bounded claims tested",
+      "receipt and graph bundle generated"
+    ],
+    "F_gap": [
+      "Termux/Android replication",
+      "independent human review",
+      "remote CI observation",
+      "merge into canonical repositories"
+    ],
+    "F_next": [
+      "publish role adapters",
+      "append event and hashes to the Drive canonical document",
+      "replicate on Android and bind receipt to exact commit"
+    ]
+  }
+}

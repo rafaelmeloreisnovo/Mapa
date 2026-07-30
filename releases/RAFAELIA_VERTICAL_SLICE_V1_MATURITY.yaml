@@ -1,0 +1,33 @@
+schema: rafaelia_maturity_v1
+module: RAFAELIA_VERTICAL_SLICE_V1
+current_level: S4
+levels:
+  S0:
+    name: seed_registered
+    status: PASS
+  S1:
+    name: schema_defined
+    status: PASS
+  S2:
+    name: minimum_implementation
+    status: PASS
+  S3:
+    name: local_tests
+    status: PASS
+  S4:
+    name: reproducible_reference_receipt
+    status: PASS
+    evidence: RECEIPT-VSLICE-001
+  S5:
+    name: independent_review
+    status: TOKEN_VAZIO_HUMAN_REVIEW_PENDING
+  S6:
+    name: operational_integration
+    status: TOKEN_VAZIO_RUNTIME_NOT_EXECUTED
+  S7:
+    name: stable_release
+    status: TOKEN_VAZIO_RELEASE_CRITERIA_NOT_MET
+promotion:
+  automatic: false
+  requires_human_authority: true
+  claim_allowed: false
