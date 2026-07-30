@@ -1,0 +1,44 @@
+schema: rafaelia_authority_matrix_v1
+version: 1.0.0
+policy:
+  append_only: true
+  destructive_writes: false
+  claim_allowed_default: false
+  token_vazio_is_valid_state: true
+invariant: "SOURCE != IMPLEMENTATION != EXECUTION != EVIDENCE != CLAIM"
+authorities:
+  google_drive:
+    role: LONGITUDINAL_EDITORIAL_MEMORY
+    canonical_root: RAFAELIA_DATA_NAVIGATOR
+    canonical_document: "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1"
+    may_authorize: [memory_event, source_custody, editorial_context]
+    may_not_authorize: [runtime_success, scientific_validity, production_readiness]
+  mapa:
+    role: ONTOLOGY_STATE_AUTHORITY
+    repository: rafaelmeloreisnovo/Mapa
+    may_authorize: [identity, relation, state, dependency, authority_route]
+  rafgittools:
+    role: CONTROL_PLANE_AND_AUDIT
+    repository: rafaelmeloreisnovo/RafGitTools
+    may_authorize: [preflight, routing, dry_run, human_authorization_request]
+  rafpolimata:
+    role: DETERMINISTIC_EVIDENCE_LAB
+    repository: rafaelmeloreisnovo/RafPolimata
+    may_authorize: [test_result, metric, receipt, errata]
+  rll:
+    role: SCIENTIFIC_FALSIFICATION_DOMAIN
+    repository: instituto-Rafael/relativity-living-light
+    may_authorize: [scientific_experiment, baseline_comparison, falsifier_result]
+    may_not_authorize: [unreplicated_publication_claim]
+  papers:
+    role: SCIENTIFIC_SYNTHESIS_AND_LIMITS
+    repository: rafaelmeloreisnovo/papers
+    may_authorize: [paper_draft, claim_ledger, limitations, references]
+  termux:
+    role: ANDROID_LOCAL_RUNTIME
+    repository: rafaelmeloreisnovo/termux-app-rafacodephi
+    may_authorize: [local_execution_receipt, device_environment]
+conflict_resolution:
+  rule: "higher_scope_authority_does_not_override_missing_evidence"
+  divergent_versions: TOKEN_VAZIO_AUTHORITY_CONFLICT
+  missing_runtime: TOKEN_VAZIO_RUNTIME_NOT_EXECUTED
