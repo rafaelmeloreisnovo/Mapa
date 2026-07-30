@@ -1,0 +1,118 @@
+{
+  "schema": "rafaelia.semantic-carrier-policy.v1",
+  "version": "1.0.0",
+  "claim_allowed": false,
+  "authorities": [
+    {"name": "Google Drive", "role": "editorial_source_and_longitudinal_memory", "mutable": true},
+    {"name": "GitHub", "role": "versioned_execution_and_receipts", "mutable": true},
+    {"name": "Mapa", "role": "ontology_catalog_indexes_and_authority", "mutable": true},
+    {"name": "RafGitTools", "role": "control_plane_and_bounded_jobs", "mutable": true},
+    {"name": "RafPolimata", "role": "evidence_producer_and_validators", "mutable": true},
+    {"name": "RLL", "role": "falsifiable_scientific_domain", "mutable": true},
+    {"name": "source_bytes", "role": "immutable_reconstruction_authority", "mutable": false}
+  ],
+  "tiers": [
+    {"id": "HOT", "ttl_seconds": 900, "event_invalidates": true, "polling": true},
+    {"id": "WARM", "ttl_seconds": 10800, "event_invalidates": true, "polling": true},
+    {"id": "COLD", "ttl_seconds": 86400, "event_invalidates": true, "polling": true},
+    {"id": "ARCHIVE", "ttl_seconds": null, "event_invalidates": true, "polling": false}
+  ],
+  "carrier_types": [
+    "SOURCE_CARRIER",
+    "WORKFLOW_CARRIER",
+    "DEPENDENCY_CARRIER",
+    "CLAIM_CARRIER",
+    "EVIDENCE_CARRIER",
+    "SEMANTIC_CARRIER",
+    "GAP_CARRIER",
+    "HUMAN_CONTEXT_CARRIER"
+  ],
+  "indexes": [
+    "content_index",
+    "temporal_index",
+    "workflow_path_index",
+    "dependency_index",
+    "claim_index",
+    "evidence_index",
+    "gap_index",
+    "semantic_sense_index",
+    "authority_index",
+    "contradiction_index"
+  ],
+  "invalidation": {
+    "signals": [
+      "provider_revision_changed",
+      "content_hash_changed",
+      "head_sha_changed",
+      "path_match_changed",
+      "dependency_changed",
+      "schema_version_changed"
+    ],
+    "full_scan_allowed_only_when": [
+      "manifest_missing",
+      "state_lost_or_inconsistent",
+      "schema_migration",
+      "explicit_repair_audit",
+      "chain_validation_failure"
+    ],
+    "conditional_fetch": true
+  },
+  "statistics": {
+    "strata": [
+      "repository_family",
+      "domain",
+      "scale",
+      "architecture",
+      "risk",
+      "epistemic_state",
+      "human_need"
+    ],
+    "robust_estimators": [
+      "median",
+      "median_absolute_deviation",
+      "quantiles",
+      "effective_sample_size",
+      "tail_metrics"
+    ],
+    "global_mean_policy": "FORBIDDEN_WITHOUT_DISTRIBUTION_AND_COMPARABILITY_JUSTIFICATION"
+  },
+  "semantic_identity": {
+    "required_fields": [
+      "language",
+      "script",
+      "locale",
+      "dialect",
+      "surface",
+      "lemma",
+      "sense_id",
+      "cultural_context",
+      "domain",
+      "source_authority",
+      "translation_relation",
+      "phonetic_relation",
+      "state"
+    ],
+    "homophone_policy": "DISTINCT_NODES_UNLESS_EXPLICITLY_PROVEN_EQUIVALENT",
+    "translation_policy": "TYPED_EDGE_NOT_IDENTITY",
+    "human_review": true
+  },
+  "prime_facets": {
+    "domain": 2,
+    "authority": 3,
+    "evidence": 5,
+    "time": 7,
+    "language_locale": 11,
+    "architecture": 13,
+    "risk": 17,
+    "gap": 19,
+    "human_context": 23
+  },
+  "safety": {
+    "source_immutable": true,
+    "append_only": true,
+    "fail_closed": true,
+    "auto_merge": false,
+    "auto_delete": false,
+    "private_text_in_carrier": false
+  }
+}

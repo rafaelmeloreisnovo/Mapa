@@ -1,0 +1,76 @@
+name: Semantic Carrier Index Contract
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "docs/architecture/RAFAELIA_SEMANTIC_VACUUM_REINDEX_CARRIER_V1.md"
+      - "schemas/semantic-carrier-index.schema.json"
+      - "data/indexes/semantic-carrier-policy.v1.json"
+      - "scripts/validate_semantic_carrier_policy.py"
+      - "tests/test_semantic_carrier_policy.py"
+      - ".github/workflows/semantic-carrier-index.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-carrier-index-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile \
+            scripts/validate_semantic_carrier_policy.py \
+            tests/test_semantic_carrier_policy.py
+
+      - name: Validate JSON syntax
+        run: |
+          python3 -m json.tool schemas/semantic-carrier-index.schema.json >/dev/null
+          python3 -m json.tool data/indexes/semantic-carrier-policy.v1.json >/dev/null
+
+      - name: Run positive and negative invariants
+        run: python3 -m unittest tests/test_semantic_carrier_policy.py -v
+
+      - name: Validate canonical policy
+        run: |
+          mkdir -p build/semantic-carrier
+          python3 scripts/validate_semantic_carrier_policy.py \
+            data/indexes/semantic-carrier-policy.v1.json \
+            --report build/semantic-carrier/report.json
+          test "$(python3 -c 'import json; print(json.load(open("build/semantic-carrier/report.json"))["status"])')" = "PASS"
+
+      - name: Generate deterministic checksums
+        run: |
+          sha256sum \
+            docs/architecture/RAFAELIA_SEMANTIC_VACUUM_REINDEX_CARRIER_V1.md \
+            schemas/semantic-carrier-index.schema.json \
+            data/indexes/semantic-carrier-policy.v1.json \
+            scripts/validate_semantic_carrier_policy.py \
+            tests/test_semantic_carrier_policy.py \
+            build/semantic-carrier/report.json \
+            > build/semantic-carrier/SHA256SUMS
+
+      - name: Upload contract evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-carrier-index-${{ github.run_id }}
+          path: build/semantic-carrier/
+          retention-days: 30
+          if-no-files-found: error

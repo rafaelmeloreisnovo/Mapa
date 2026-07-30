@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/semantic-carrier-index.schema.json",
+  "title": "RAFAELIA Semantic Carrier Policy V1",
+  "type": "object",
+  "required": [
+    "schema", "version", "claim_allowed", "authorities", "tiers",
+    "carrier_types", "indexes", "invalidation", "statistics",
+    "semantic_identity", "prime_facets", "safety"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.semantic-carrier-policy.v1"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "claim_allowed": {"const": false},
+    "authorities": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "role", "mutable"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "role": {"type": "string", "minLength": 1},
+          "mutable": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "tiers": {
+      "type": "array", "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "ttl_seconds", "event_invalidates", "polling"],
+        "properties": {
+          "id": {"enum": ["HOT", "WARM", "COLD", "ARCHIVE"]},
+          "ttl_seconds": {"type": ["integer", "null"], "minimum": 0},
+          "event_invalidates": {"const": true},
+          "polling": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "carrier_types": {
+      "type": "array", "minItems": 7,
+      "items": {"type": "string", "pattern": "^[A-Z_]+_CARRIER$"},
+      "uniqueItems": true
+    },
+    "indexes": {
+      "type": "array", "minItems": 8,
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+      "uniqueItems": true
+    },
+    "invalidation": {
+      "type": "object",
+      "required": ["signals", "full_scan_allowed_only_when", "conditional_fetch"],
+      "properties": {
+        "signals": {"type": "array", "minItems": 3, "items": {"type": "string"}, "uniqueItems": true},
+        "full_scan_allowed_only_when": {"type": "array", "minItems": 3, "items": {"type": "string"}, "uniqueItems": true},
+        "conditional_fetch": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "statistics": {
+      "type": "object",
+      "required": ["strata", "robust_estimators", "global_mean_policy"],
+      "properties": {
+        "strata": {"type": "array", "minItems": 5, "items": {"type": "string"}, "uniqueItems": true},
+        "robust_estimators": {"type": "array", "minItems": 3, "items": {"type": "string"}, "uniqueItems": true},
+        "global_mean_policy": {"const": "FORBIDDEN_WITHOUT_DISTRIBUTION_AND_COMPARABILITY_JUSTIFICATION"}
+      },
+      "additionalProperties": false
+    },
+    "semantic_identity": {
+      "type": "object",
+      "required": ["required_fields", "homophone_policy", "translation_policy", "human_review"],
+      "properties": {
+        "required_fields": {"type": "array", "minItems": 8, "items": {"type": "string"}, "uniqueItems": true},
+        "homophone_policy": {"const": "DISTINCT_NODES_UNLESS_EXPLICITLY_PROVEN_EQUIVALENT"},
+        "translation_policy": {"const": "TYPED_EDGE_NOT_IDENTITY"},
+        "human_review": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "prime_facets": {
+      "type": "object",
+      "minProperties": 5,
+      "additionalProperties": {"type": "integer", "minimum": 2}
+    },
+    "safety": {
+      "type": "object",
+      "required": ["source_immutable", "append_only", "fail_closed", "auto_merge", "auto_delete", "private_text_in_carrier"],
+      "properties": {
+        "source_immutable": {"const": true},
+        "append_only": {"const": true},
+        "fail_closed": {"const": true},
+        "auto_merge": {"const": false},
+        "auto_delete": {"const": false},
+        "private_text_in_carrier": {"const": false}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
