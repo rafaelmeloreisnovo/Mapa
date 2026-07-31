@@ -29,6 +29,7 @@ PROFILE_PATTERN = re.compile(r"^[a-z][a-z0-9-]{1,63}$")
 ALLOWED_PROFILE_MODES = {"DOCUMENTATION", "COMMANDS"}
 TEMPLATE_TOKENS = {"{{OUT}}", "{{SOURCE}}", "{{REPO}}"}
 SHELL_EXECUTABLES = {"sh", "bash", "dash", "zsh", "fish", "busybox"}
+ADAPTER_CHOICES = ("rafpolimata-compiler-gate",)
 
 
 class FoundationError(RuntimeError):
@@ -49,6 +50,11 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def sha256_text(value: str) -> str:
+    """Return a stable digest without retaining potentially sensitive text."""
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
 def write_json(path: Path, data: Any) -> None:
@@ -79,6 +85,59 @@ def safe_repo_file(repo_root: Path, relative: str, field: str) -> Path:
     if target != root and root not in target.parents:
         raise FoundationError(f"{field} escapes repository root")
     return target
+
+
+def captured_command(argv: list[str], cwd: Path) -> tuple[int, str] | None:
+    """Run a small local observation command without invoking a shell."""
+    try:
+        result = subprocess.run(
+            argv,
+            cwd=cwd,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            check=False,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    return result.returncode, result.stdout.strip()
+
+
+def repository_identity(repo_root: Path) -> dict[str, Any]:
+    """Observe local Git identity only; no fetch, config, or mutation is used."""
+    if shutil.which("git") is None:
+        return {
+            "state": "TOKEN_VAZIO_GIT_UNAVAILABLE",
+            "next_verifiable_step": "Install or expose local git, then rerun the exact profile.",
+        }
+
+    inside = captured_command(["git", "rev-parse", "--is-inside-work-tree"], repo_root)
+    if inside is None or inside[0] != 0 or inside[1] != "true":
+        return {
+            "state": "TOKEN_VAZIO_GIT_CHECKOUT_UNOBSERVED",
+            "next_verifiable_step": "Run from a Git checkout with the source commit present.",
+        }
+
+    head = captured_command(["git", "rev-parse", "HEAD"], repo_root)
+    status = captured_command(["git", "status", "--porcelain=v1", "--untracked-files=all"], repo_root)
+    branch = captured_command(["git", "symbolic-ref", "--quiet", "--short", "HEAD"], repo_root)
+    if head is None or head[0] != 0 or status is None or status[0] != 0:
+        return {
+            "state": "TOKEN_VAZIO_GIT_IDENTITY_INCOMPLETE",
+            "next_verifiable_step": "Repair local Git metadata, then rerun the exact profile.",
+        }
+
+    status_lines = [line for line in status[1].splitlines() if line]
+    return {
+        "state": "BOUND",
+        "head_sha": head[1],
+        "branch": branch[1] if branch is not None and branch[0] == 0 and branch[1] else "DETACHED",
+        "worktree_clean": not status_lines,
+        "worktree_entry_count": len(status_lines),
+        "worktree_state_sha256": sha256_text(status[1]),
+    }
 
 
 def read_manifest(repo_root: Path) -> tuple[dict[str, Any], Path]:
@@ -223,22 +282,58 @@ def create_run_directory(repo_root: Path) -> tuple[str, Path, str]:
     return run_id, run_dir, Path("COMPILA", run_id).as_posix()
 
 
-def environment_record() -> dict[str, Any]:
+def executable_identity(command: str, repo_root: Path) -> dict[str, Any]:
+    """Record the resolved executable without executing version probes."""
+    path: Path | None
+    if "/" in command:
+        local_command = command[2:] if command.startswith("./") else command
+        path = safe_repo_file(repo_root, local_command, "command executable")
+    else:
+        located = shutil.which(command)
+        path = Path(located).resolve() if located else None
+    record: dict[str, Any] = {
+        "requested": command,
+        "available": bool(path and path.is_file() and os.access(path, os.X_OK)),
+    }
+    if path and path.is_file():
+        record["path"] = path.as_posix()
+        try:
+            record["sha256"] = sha256_file(path)
+            record["size_bytes"] = path.stat().st_size
+        except OSError:
+            record["sha256"] = "TOKEN_VAZIO_EXECUTABLE_UNREADABLE"
+    return record
+
+
+def environment_record(repo_root: Path, commands: list[list[str]]) -> dict[str, Any]:
+    observed_tools: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for command in commands:
+        if command and command[0] not in seen:
+            seen.add(command[0])
+            observed_tools.append(executable_identity(command[0], repo_root))
     return {
         "captured_at": utc_now(),
         "runtime_class": "ANDROID_TERMUX_LOCAL",
         "python": sys.version.split()[0],
+        "python_executable": sys.executable,
         "implementation": platform.python_implementation(),
         "platform": platform.platform(),
         "machine": platform.machine(),
         "termux_prefix_present": bool(os.environ.get("PREFIX")),
+        "termux_prefix": os.environ.get("PREFIX", "TOKEN_VAZIO_TERMUX_PREFIX"),
+        "observed_tools": observed_tools,
         "claim_allowed": False,
         "network_required": False,
     }
 
 
 def input_manifest(repo_root: Path, manifest_path: Path, manifest: dict[str, Any], profile: dict[str, Any]) -> list[dict[str, Any]]:
-    paths = [".rafaelia/foundation.yaml"]
+    paths = [
+        ".rafaelia/foundation.yaml",
+        ".rafaelia/tools/rafaelia_foundation.py",
+        ".rafaelia/tools/gate_computational_v1.py",
+    ]
     source = manifest["inputs"].get("source")
     if source:
         paths.append(source)
@@ -315,6 +410,27 @@ def finish_receipt(run_dir: Path, receipt: dict[str, Any]) -> Path:
     return receipt_path
 
 
+def collect_artifacts(repo_root: Path, run_dir: Path) -> list[dict[str, Any]]:
+    """Hash every regular output in a run, rejecting symlink-based escapes."""
+    records: list[dict[str, Any]] = []
+    excluded = {"receipt.json", "receipt.sha256"}
+    for path in sorted(run_dir.rglob("*"), key=lambda item: item.as_posix()):
+        if path.name in excluded:
+            continue
+        if path.is_symlink():
+            raise FoundationError(
+                f"run artifact cannot be a symlink: {path.relative_to(repo_root).as_posix()}"
+            )
+        if not path.is_file():
+            continue
+        records.append({
+            "path": path.relative_to(repo_root).as_posix(),
+            "sha256": sha256_file(path),
+            "size_bytes": path.stat().st_size,
+        })
+    return records
+
+
 def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> int:
     repo_root = repo_root.resolve()
     run_id, run_dir, out_rel = create_run_directory(repo_root)
@@ -329,7 +445,7 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
         validate_manifest(manifest)
         profile = profile_for(manifest, profile_name or "documentation")
         receipt["profile"] = profile_name or "documentation"
-        write_json(run_dir / "environment.json", environment_record())
+        receipt["repository_identity"] = repository_identity(repo_root)
 
         if operation == "plan":
             source = manifest["inputs"].get("source")
@@ -337,6 +453,7 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
                 [substitute(argument, source, out_rel) for argument in command]
                 for command in profile.get("commands", [])
             ]
+            write_json(run_dir / "environment.json", environment_record(repo_root, planned))
             write_json(run_dir / "plan.json", {
                 "schema": "rafaelia.foundation.plan/v1",
                 "profile": receipt["profile"],
@@ -356,6 +473,7 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
                 "claim_allowed": False,
             })
             commands = preflight(repo_root, manifest, receipt["profile"], profile, out_rel)
+            write_json(run_dir / "environment.json", environment_record(repo_root, commands))
             if operation == "verify":
                 write_json(run_dir / "plan.json", {
                     "schema": "rafaelia.foundation.plan/v1",
@@ -430,14 +548,17 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
     receipt["exit_code"] = exit_code
     receipt["commands_executed"] = len(command_records)
     receipt["commands"] = command_records
-    for name in ("environment.json", "input_manifest.json", "plan.json", "commands.jsonl", "stdout.log", "stderr.log"):
-        path = run_dir / name
-        if path.is_file():
-            receipt.setdefault("artifacts", []).append({
-                "path": Path("COMPILA", run_id, name).as_posix(),
-                "sha256": sha256_file(path),
-                "size_bytes": path.stat().st_size,
-            })
+    try:
+        receipt["artifacts"] = collect_artifacts(repo_root, run_dir)
+    except FoundationError as exc:
+        if status.startswith("PASS") or status == "PLAN_ONLY":
+            status = "FAIL"
+            exit_code = 1
+            receipt["status"] = status
+            receipt["exit_code"] = exit_code
+            receipt["error"] = str(exc)
+            receipt["next_verifiable_step"] = "Remove the unsafe artifact and rerun the exact profile."
+        receipt.setdefault("artifact_collection_gap", str(exc))
     receipt_path = finish_receipt(run_dir, receipt)
     print(f"STATUS={status}")
     print(f"RECEIPT={receipt_path.relative_to(repo_root).as_posix()}")
@@ -504,12 +625,85 @@ def profile_definition(profile: str, source: str | None) -> dict[str, Any]:
     return result
 
 
+def adapter_definition(adapter: str, project_id: str) -> tuple[dict[str, Any], list[tuple[Path, str]]]:
+    """Return a versioned, explicit adapter; no repository is autodetected."""
+    if adapter != "rafpolimata-compiler-gate":
+        raise FoundationError(f"unknown adapter {adapter!r}")
+    source = Path(__file__).resolve().parents[1] / "adapters" / "rafpolimata" / "rafpolimata_foundation_compiler_gate.py"
+    if not source.is_file():
+        raise FoundationError(f"adapter source is missing: {source}")
+    documentation = {
+        "mode": "DOCUMENTATION",
+        "requires_source": False,
+        "required_paths": ["README.md"],
+        "commands": [],
+        "description": "Validate RafPolimata's declared document boundary without executing a build.",
+    }
+    manifest = {
+        "schema": MANIFEST_SCHEMA,
+        "version": FOUNDATION_VERSION,
+        "project": {
+            "id": project_id,
+            "kind": "rafpolimata-compiler-gate",
+            "repository": "rafaelmeloreisnovo/RafPolimata",
+            "adapter": "rafpolimata-compiler-gate/v1",
+        },
+        "governance": {
+            "claim_allowed": False,
+            "network_required": False,
+            "destructive_operations": False,
+            "remote_ci_substituted": False,
+            "token_vazio_is_valid": True,
+        },
+        "runtime": {
+            "class": "ANDROID_TERMUX_LOCAL",
+            "output_directory": "COMPILA",
+            "append_only_receipts": True,
+        },
+        "inputs": {
+            "source": "raf_main.c",
+            "required_paths": [
+                "README.md",
+                "raf_compile.h",
+                "raf_main.c",
+                "raf_frontend.c",
+                "raf_cpu.c",
+                "raf_asm_emit.c",
+                "raf_precomp.c",
+                "scripts/validate_runtime_truth_local.sh",
+                "scripts/rafpolimata_foundation_compiler_gate.py",
+            ],
+        },
+        "profiles": {
+            "documentation": documentation,
+            "compiler-local-gate": {
+                "mode": "COMMANDS",
+                "requires_source": True,
+                "required_paths": [
+                    "scripts/validate_runtime_truth_local.sh",
+                    "scripts/rafpolimata_foundation_compiler_gate.py",
+                ],
+                "commands": [[
+                    "python3",
+                    "scripts/rafpolimata_foundation_compiler_gate.py",
+                    "--out",
+                    "{{OUT}}/test-summary.json",
+                ]],
+                "description": "Execute RafPolimata's tracked nine-block compiler gate and emit explicit test accounting.",
+            },
+        },
+    }
+    validate_manifest(manifest)
+    return manifest, [(source, "scripts/rafpolimata_foundation_compiler_gate.py")]
+
+
 def autoexec_text() -> str:
     return """#!/data/data/com.termux/files/usr/bin/bash
 set -euo pipefail
 
 ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 RUNNER="$ROOT/.rafaelia/tools/rafaelia_foundation.py"
+GATE="$ROOT/.rafaelia/tools/gate_computational_v1.py"
 
 command -v python3 >/dev/null 2>&1 || {
   printf '%s\\n' "TOKEN_VAZIO_TOOL_MISSING: python3" >&2
@@ -519,6 +713,15 @@ command -v python3 >/dev/null 2>&1 || {
   printf '%s\\n' "TOKEN_VAZIO_MANIFEST_MISSING: run Foundation init from Mapa first" >&2
   exit 2
 }
+
+if [ "${1:-}" = "gate" ]; then
+  shift
+  [ -f "$GATE" ] || {
+    printf '%s\\n' "TOKEN_VAZIO_GATE_MISSING: run Foundation init from Mapa first" >&2
+    exit 2
+  }
+  exec python3 "$GATE" --repo-root "$ROOT" "$@"
+fi
 
 exec python3 "$RUNNER" "$@" --repo-root "$ROOT"
 """
@@ -537,65 +740,89 @@ under COMPILA is append-only local evidence; it does not promote a claim.
 """
 
 
-def initialize(repo_root: Path, project_id: str, profile: str, source: str | None) -> None:
+def initialize(
+    repo_root: Path,
+    project_id: str,
+    profile: str,
+    source: str | None,
+    adapter: str | None = None,
+) -> None:
     repo_root = repo_root.resolve()
     if not repo_root.is_dir():
         raise FoundationError(f"repository root does not exist: {repo_root}")
     if not PROJECT_ID_PATTERN.fullmatch(project_id):
         raise FoundationError("--project-id must be a stable identifier")
-    if source is not None:
-        relative_path(source, "--source")
-    profiles = profile_definition(profile, source)
+    adapter_files: list[tuple[Path, str]] = []
+    if adapter is not None:
+        if profile != "documentation" or source is not None:
+            raise FoundationError("--adapter is exclusive with --profile and --source")
+        manifest, adapter_files = adapter_definition(adapter, project_id)
+    else:
+        if source is not None:
+            relative_path(source, "--source")
+        profiles = profile_definition(profile, source)
+        manifest = {
+            "schema": MANIFEST_SCHEMA,
+            "version": FOUNDATION_VERSION,
+            "project": {
+                "id": project_id,
+                "kind": profile,
+                "repository": "LOCAL_CHECKOUT_UNPINNED",
+            },
+            "governance": {
+                "claim_allowed": False,
+                "network_required": False,
+                "destructive_operations": False,
+                "remote_ci_substituted": False,
+                "token_vazio_is_valid": True,
+            },
+            "runtime": {
+                "class": "ANDROID_TERMUX_LOCAL",
+                "output_directory": "COMPILA",
+                "append_only_receipts": True,
+            },
+            "inputs": {
+                "source": source,
+                "required_paths": ["README.md"],
+            },
+            "profiles": profiles,
+        }
     targets = [
         repo_root / ".rafaelia" / "foundation.yaml",
         repo_root / ".rafaelia" / "tools" / "rafaelia_foundation.py",
+        repo_root / ".rafaelia" / "tools" / "gate_computational_v1.py",
         repo_root / ".rafaelia" / "README.md",
         repo_root / "termux" / "autoexec-rafaelia.sh",
     ]
+    targets.extend(repo_root / destination for _, destination in adapter_files)
     existing = [path.relative_to(repo_root).as_posix() for path in targets if path.exists()]
     if existing:
         raise FoundationError("refusing to overwrite existing Foundation paths: " + ", ".join(existing))
-    manifest = {
-        "schema": MANIFEST_SCHEMA,
-        "version": FOUNDATION_VERSION,
-        "project": {
-            "id": project_id,
-            "kind": profile,
-            "repository": "LOCAL_CHECKOUT_UNPINNED",
-        },
-        "governance": {
-            "claim_allowed": False,
-            "network_required": False,
-            "destructive_operations": False,
-            "remote_ci_substituted": False,
-            "token_vazio_is_valid": True,
-        },
-        "runtime": {
-            "class": "ANDROID_TERMUX_LOCAL",
-            "output_directory": "COMPILA",
-            "append_only_receipts": True,
-        },
-        "inputs": {
-            "source": source,
-            "required_paths": ["README.md"],
-        },
-        "profiles": profiles,
-    }
     validate_manifest(manifest)
     targets[1].parent.mkdir(parents=True, exist_ok=True)
     write_json(targets[0], manifest)
     shutil.copy2(Path(__file__).resolve(), targets[1])
-    targets[2].write_text(project_readme_text(), encoding="utf-8")
-    targets[3].parent.mkdir(parents=True, exist_ok=True)
-    targets[3].write_text(autoexec_text(), encoding="utf-8")
-    targets[3].chmod(targets[3].stat().st_mode | 0o111)
+    gate_source = Path(__file__).resolve().with_name("gate_computational_v1.py")
+    if not gate_source.is_file():
+        raise FoundationError(f"gate source is missing beside runner: {gate_source}")
+    shutil.copy2(gate_source, targets[2])
+    targets[3].write_text(project_readme_text(), encoding="utf-8")
+    targets[4].parent.mkdir(parents=True, exist_ok=True)
+    targets[4].write_text(autoexec_text(), encoding="utf-8")
+    targets[4].chmod(targets[4].stat().st_mode | 0o111)
+    for adapter_source, destination in adapter_files:
+        target = repo_root / destination
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(adapter_source, target)
     compile_ignore = repo_root / "COMPILA" / ".gitignore"
     compile_ignore.parent.mkdir(parents=True, exist_ok=True)
     if not compile_ignore.exists():
         compile_ignore.write_text("# Local Foundation receipts are reviewed before explicit publication.\n*\n!.gitignore\n", encoding="utf-8")
     print(f"FOUNDATION_INITIALIZED={repo_root}")
     print(f"MANIFEST={targets[0].relative_to(repo_root).as_posix()}")
-    print(f"AUTOEXEC={targets[3].relative_to(repo_root).as_posix()}")
+    print(f"AUTOEXEC={targets[4].relative_to(repo_root).as_posix()}")
+    if adapter is not None:
+        print(f"ADAPTER={adapter}")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -607,6 +834,7 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--project-id", required=True)
     init.add_argument("--profile", choices=("documentation", "python", "freestanding-object", "make", "cmake"), default="documentation")
     init.add_argument("--source", help="Repository-relative source file required by source-oriented profiles.")
+    init.add_argument("--adapter", choices=ADAPTER_CHOICES, help="Install one explicit target adapter instead of a generic profile.")
 
     for command in ("plan", "verify"):
         item = subparsers.add_parser(command)
@@ -622,7 +850,7 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "init":
         try:
-            initialize(args.repo_root, args.project_id, args.profile, args.source)
+            initialize(args.repo_root, args.project_id, args.profile, args.source, args.adapter)
         except FoundationGap as exc:
             print(str(exc), file=sys.stderr)
             return 2
