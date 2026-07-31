@@ -68,6 +68,25 @@ They are not inferred or silently attempted on Termux. A project that has a
 validated host may add an explicit argv profile to its manifest; the receipt
 still remains local evidence until linked to a repository state and reviewed.
 
+## Explicit target adapters
+
+The initializer also accepts a named adapter only where its source paths and
+test contract are frozen in this package. The first adapter is:
+
+| Adapter | Target | Profile | Bound local test |
+|---|---|---|---|
+| `rafpolimata-compiler-gate` | `rafaelmeloreisnovo/RafPolimata` | `compiler-local-gate` | `scripts/validate_runtime_truth_local.sh` |
+
+Use it without automatic repository inference:
+
+    python3 foundation/scripts/rafaelia_foundation.py init \
+      --repo-root ../RafPolimata \
+      --project-id rafpolimata-local \
+      --adapter rafpolimata-compiler-gate
+
+The detailed boundary and Termux route are in
+[`adapters/rafpolimata/README.md`](adapters/rafpolimata/README.md).
+
 ## Receipt contract
 
 Each plan, verification or execution creates a new directory:
@@ -110,8 +129,7 @@ profile that runs tests must write a `rafaelia.test-summary/v1` document inside
 its own `{{OUT}}` directory, with its discovered/executed/passed/failed/skipped
 counts, each test result, and explicit exercised falsifiers. Then run:
 
-    python3 foundation/scripts/gate_computational_v1.py \
-      --repo-root /caminho/do/checkout \
+    bash termux/autoexec-rafaelia.sh gate \
       --receipt COMPILA/<run-id>/receipt.json \
       --test-summary COMPILA/<run-id>/test-summary.json \
       --expected-profile <profile-explícito>
