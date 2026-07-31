@@ -1,0 +1,115 @@
+schema: rafaelia_cross_source_record_v1
+record_id: rec:rafgittools-client-interop-v1
+node_type: integration
+canonical_owner: rafaelmeloreisnovo/Mapa
+status: IMPLEMENTED_PARTIAL
+claim_allowed: false
+observed_at: 2026-07-31T02:47:35-03:00
+
+intention: >-
+  Unificar Tampermonkey, WebExtension, futuro web UI loopback, APK e CLI
+  sob um contrato de cliente consent-first, sem automação oculta e sem ampliar
+  autoridade por superfície.
+
+root_question: >-
+  Como maximizar velocidade de deploy e interoperabilidade preservando
+  autorização, proveniência, limites contratuais e separação entre interface,
+  transporte, adaptador e executor?
+
+canonical_method:
+  provider: google_drive
+  file_id: 1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
+  title: RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1
+  url: https://docs.google.com/document/d/1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
+  relation: GOVERNS_METHOD
+
+implementation:
+  provider: github
+  repository: rafaelmeloreisnovo/RafGitTools
+  pull_request: 318
+  url: https://github.com/rafaelmeloreisnovo/RafGitTools/pull/318
+  head_branch: feat/rafaelia-client-interop-v1
+  head_sha: 43b6dddd41132113f42ff93687e0d9672ab640cf
+  relation: IMPLEMENTS
+
+artifacts:
+  - locator: rafaelmeloreisnovo/RafGitTools:contracts/raf-client-envelope-v1.schema.json
+    relation: DEFINES_CONTRACT
+    state: OBSERVED
+  - locator: rafaelmeloreisnovo/RafGitTools:userscripts/raf-client.user.js
+    relation: IMPLEMENTS_CLIENT
+    state: OBSERVED
+  - locator: rafaelmeloreisnovo/RafGitTools:app/src/main/java/com/rafgittools/bridge/RafBridgeContract.java
+    relation: ENFORCES_POLICY
+    state: OBSERVED
+  - locator: rafaelmeloreisnovo/RafGitTools:docs/architecture/RAFAELIA_CLIENT_INTEROPERABILITY_ROADMAP_V1.md
+    relation: DOCUMENTS_ROADMAP
+    state: OBSERVED
+
+invariants:
+  - frontend_is_not_transport
+  - client_is_not_authority
+  - interoperability_is_not_unauthorized_access
+  - consent_is_per_request
+  - page_metadata_excluded_by_default
+  - conversation_is_not_command_execution
+  - canonical_source_is_not_mirrored_as_new_authority
+
+scope:
+  current_capability:
+    - LOCAL_CHAT
+    - READ_SELECTION
+  future_bounded_capabilities:
+    - READ_GITHUB_PUBLIC
+    - READ_GITHUB_AUTHORIZED
+    - READ_DRIVE_AUTHORIZED
+    - VALIDATE_ARTIFACT
+  excluded:
+    - hidden_dom_scraping
+    - credential_extraction
+    - access_control_bypass
+    - silent_git_write
+    - silent_drive_write
+    - autonomous_shell
+
+validation:
+  static_diff_observed: true
+  android_build: TOKEN_VAZIO
+  device_smoke: TOKEN_VAZIO
+  tampermonkey_runtime: TOKEN_VAZIO
+  end_to_end_receipt: TOKEN_VAZIO
+
+relations:
+  - predicate: IMPLEMENTS
+    target_id: rec:rafgittools-client-interop-v1
+    evidence_id: ev:github-pr-318
+    state: OBSERVED
+  - predicate: DERIVES_FROM
+    target_id: drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
+    evidence_id: ev:drive-canonical-method
+    state: DECLARED
+  - predicate: REQUIRES
+    target_id: rec:target-device-validation
+    evidence_id: TOKEN_VAZIO
+    state: TOKEN_VAZIO
+
+custody:
+  actor: assistant
+  operation: UPDATE
+  source_refs:
+    - github:rafaelmeloreisnovo/RafGitTools@43b6dddd41132113f42ff93687e0d9672ab640cf
+    - github:rafaelmeloreisnovo/RafGitTools#318
+    - drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
+  destructive_action: false
+
+retroalimentacao:
+  F_ok:
+    - contrato de cliente criado
+    - userscript consent-first criado
+    - gate do APK generalizado
+    - roadmap ordenado por impacto criado
+  F_gap:
+    - build e smoke locais não executados
+    - receipt e replay protection ainda não implementados
+  F_next:
+    - executar matriz P0 no dispositivo alvo e registrar hashes
