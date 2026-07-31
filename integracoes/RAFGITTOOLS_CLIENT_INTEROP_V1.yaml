@@ -4,7 +4,7 @@ node_type: integration
 canonical_owner: rafaelmeloreisnovo/Mapa
 status: IMPLEMENTED_PARTIAL
 claim_allowed: false
-observed_at: 2026-07-31T02:44:18-03:00
+observed_at: 2026-07-31T02:47:35-03:00
 
 intention: >-
   Unificar Tampermonkey, WebExtension, futuro web UI loopback, APK e CLI
@@ -26,9 +26,9 @@ canonical_method:
 implementation:
   provider: github
   repository: rafaelmeloreisnovo/RafGitTools
-  pull_request: 317
-  url: https://github.com/rafaelmeloreisnovo/RafGitTools/pull/317
-  head_branch: feat/raffaelia-client-interop-v1
+  pull_request: 318
+  url: https://github.com/rafaelmeloreisnovo/RafGitTools/pull/318
+  head_branch: feat/rafaelia-client-interop-v1
   head_sha: 43b6dddd41132113f42ff93687e0d9672ab640cf
   relation: IMPLEMENTS
 
@@ -82,7 +82,7 @@ validation:
 relations:
   - predicate: IMPLEMENTS
     target_id: rec:rafgittools-client-interop-v1
-    evidence_id: ev:github-pr-317
+    evidence_id: ev:github-pr-318
     state: OBSERVED
   - predicate: DERIVES_FROM
     target_id: drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
@@ -95,9 +95,10 @@ relations:
 
 custody:
   actor: assistant
-  operation: CREATE
+  operation: UPDATE
   source_refs:
     - github:rafaelmeloreisnovo/RafGitTools@43b6dddd41132113f42ff93687e0d9672ab640cf
+    - github:rafaelmeloreisnovo/RafGitTools#318
     - drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
   destructive_action: false
 
