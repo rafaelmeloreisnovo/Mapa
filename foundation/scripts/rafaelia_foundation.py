@@ -29,6 +29,7 @@ PROFILE_PATTERN = re.compile(r"^[a-z][a-z0-9-]{1,63}$")
 ALLOWED_PROFILE_MODES = {"DOCUMENTATION", "COMMANDS"}
 TEMPLATE_TOKENS = {"{{OUT}}", "{{SOURCE}}", "{{REPO}}"}
 SHELL_EXECUTABLES = {"sh", "bash", "dash", "zsh", "fish", "busybox"}
+ADAPTER_CHOICES = ("rafpolimata-compiler-gate",)
 
 
 class FoundationError(RuntimeError):
@@ -331,6 +332,7 @@ def input_manifest(repo_root: Path, manifest_path: Path, manifest: dict[str, Any
     paths = [
         ".rafaelia/foundation.yaml",
         ".rafaelia/tools/rafaelia_foundation.py",
+        ".rafaelia/tools/gate_computational_v1.py",
     ]
     source = manifest["inputs"].get("source")
     if source:
@@ -623,12 +625,85 @@ def profile_definition(profile: str, source: str | None) -> dict[str, Any]:
     return result
 
 
+def adapter_definition(adapter: str, project_id: str) -> tuple[dict[str, Any], list[tuple[Path, str]]]:
+    """Return a versioned, explicit adapter; no repository is autodetected."""
+    if adapter != "rafpolimata-compiler-gate":
+        raise FoundationError(f"unknown adapter {adapter!r}")
+    source = Path(__file__).resolve().parents[1] / "adapters" / "rafpolimata" / "rafpolimata_foundation_compiler_gate.py"
+    if not source.is_file():
+        raise FoundationError(f"adapter source is missing: {source}")
+    documentation = {
+        "mode": "DOCUMENTATION",
+        "requires_source": False,
+        "required_paths": ["README.md"],
+        "commands": [],
+        "description": "Validate RafPolimata's declared document boundary without executing a build.",
+    }
+    manifest = {
+        "schema": MANIFEST_SCHEMA,
+        "version": FOUNDATION_VERSION,
+        "project": {
+            "id": project_id,
+            "kind": "rafpolimata-compiler-gate",
+            "repository": "rafaelmeloreisnovo/RafPolimata",
+            "adapter": "rafpolimata-compiler-gate/v1",
+        },
+        "governance": {
+            "claim_allowed": False,
+            "network_required": False,
+            "destructive_operations": False,
+            "remote_ci_substituted": False,
+            "token_vazio_is_valid": True,
+        },
+        "runtime": {
+            "class": "ANDROID_TERMUX_LOCAL",
+            "output_directory": "COMPILA",
+            "append_only_receipts": True,
+        },
+        "inputs": {
+            "source": "raf_main.c",
+            "required_paths": [
+                "README.md",
+                "raf_compile.h",
+                "raf_main.c",
+                "raf_frontend.c",
+                "raf_cpu.c",
+                "raf_asm_emit.c",
+                "raf_precomp.c",
+                "scripts/validate_runtime_truth_local.sh",
+                "scripts/rafpolimata_foundation_compiler_gate.py",
+            ],
+        },
+        "profiles": {
+            "documentation": documentation,
+            "compiler-local-gate": {
+                "mode": "COMMANDS",
+                "requires_source": True,
+                "required_paths": [
+                    "scripts/validate_runtime_truth_local.sh",
+                    "scripts/rafpolimata_foundation_compiler_gate.py",
+                ],
+                "commands": [[
+                    "python3",
+                    "scripts/rafpolimata_foundation_compiler_gate.py",
+                    "--out",
+                    "{{OUT}}/test-summary.json",
+                ]],
+                "description": "Execute RafPolimata's tracked nine-block compiler gate and emit explicit test accounting.",
+            },
+        },
+    }
+    validate_manifest(manifest)
+    return manifest, [(source, "scripts/rafpolimata_foundation_compiler_gate.py")]
+
+
 def autoexec_text() -> str:
     return """#!/data/data/com.termux/files/usr/bin/bash
 set -euo pipefail
 
 ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 RUNNER="$ROOT/.rafaelia/tools/rafaelia_foundation.py"
+GATE="$ROOT/.rafaelia/tools/gate_computational_v1.py"
 
 command -v python3 >/dev/null 2>&1 || {
   printf '%s\\n' "TOKEN_VAZIO_TOOL_MISSING: python3" >&2
@@ -638,6 +713,15 @@ command -v python3 >/dev/null 2>&1 || {
   printf '%s\\n' "TOKEN_VAZIO_MANIFEST_MISSING: run Foundation init from Mapa first" >&2
   exit 2
 }
+
+if [ "${1:-}" = "gate" ]; then
+  shift
+  [ -f "$GATE" ] || {
+    printf '%s\\n' "TOKEN_VAZIO_GATE_MISSING: run Foundation init from Mapa first" >&2
+    exit 2
+  }
+  exec python3 "$GATE" --repo-root "$ROOT" "$@"
+fi
 
 exec python3 "$RUNNER" "$@" --repo-root "$ROOT"
 """
@@ -656,65 +740,89 @@ under COMPILA is append-only local evidence; it does not promote a claim.
 """
 
 
-def initialize(repo_root: Path, project_id: str, profile: str, source: str | None) -> None:
+def initialize(
+    repo_root: Path,
+    project_id: str,
+    profile: str,
+    source: str | None,
+    adapter: str | None = None,
+) -> None:
     repo_root = repo_root.resolve()
     if not repo_root.is_dir():
         raise FoundationError(f"repository root does not exist: {repo_root}")
     if not PROJECT_ID_PATTERN.fullmatch(project_id):
         raise FoundationError("--project-id must be a stable identifier")
-    if source is not None:
-        relative_path(source, "--source")
-    profiles = profile_definition(profile, source)
+    adapter_files: list[tuple[Path, str]] = []
+    if adapter is not None:
+        if profile != "documentation" or source is not None:
+            raise FoundationError("--adapter is exclusive with --profile and --source")
+        manifest, adapter_files = adapter_definition(adapter, project_id)
+    else:
+        if source is not None:
+            relative_path(source, "--source")
+        profiles = profile_definition(profile, source)
+        manifest = {
+            "schema": MANIFEST_SCHEMA,
+            "version": FOUNDATION_VERSION,
+            "project": {
+                "id": project_id,
+                "kind": profile,
+                "repository": "LOCAL_CHECKOUT_UNPINNED",
+            },
+            "governance": {
+                "claim_allowed": False,
+                "network_required": False,
+                "destructive_operations": False,
+                "remote_ci_substituted": False,
+                "token_vazio_is_valid": True,
+            },
+            "runtime": {
+                "class": "ANDROID_TERMUX_LOCAL",
+                "output_directory": "COMPILA",
+                "append_only_receipts": True,
+            },
+            "inputs": {
+                "source": source,
+                "required_paths": ["README.md"],
+            },
+            "profiles": profiles,
+        }
     targets = [
         repo_root / ".rafaelia" / "foundation.yaml",
         repo_root / ".rafaelia" / "tools" / "rafaelia_foundation.py",
+        repo_root / ".rafaelia" / "tools" / "gate_computational_v1.py",
         repo_root / ".rafaelia" / "README.md",
         repo_root / "termux" / "autoexec-rafaelia.sh",
     ]
+    targets.extend(repo_root / destination for _, destination in adapter_files)
     existing = [path.relative_to(repo_root).as_posix() for path in targets if path.exists()]
     if existing:
         raise FoundationError("refusing to overwrite existing Foundation paths: " + ", ".join(existing))
-    manifest = {
-        "schema": MANIFEST_SCHEMA,
-        "version": FOUNDATION_VERSION,
-        "project": {
-            "id": project_id,
-            "kind": profile,
-            "repository": "LOCAL_CHECKOUT_UNPINNED",
-        },
-        "governance": {
-            "claim_allowed": False,
-            "network_required": False,
-            "destructive_operations": False,
-            "remote_ci_substituted": False,
-            "token_vazio_is_valid": True,
-        },
-        "runtime": {
-            "class": "ANDROID_TERMUX_LOCAL",
-            "output_directory": "COMPILA",
-            "append_only_receipts": True,
-        },
-        "inputs": {
-            "source": source,
-            "required_paths": ["README.md"],
-        },
-        "profiles": profiles,
-    }
     validate_manifest(manifest)
     targets[1].parent.mkdir(parents=True, exist_ok=True)
     write_json(targets[0], manifest)
     shutil.copy2(Path(__file__).resolve(), targets[1])
-    targets[2].write_text(project_readme_text(), encoding="utf-8")
-    targets[3].parent.mkdir(parents=True, exist_ok=True)
-    targets[3].write_text(autoexec_text(), encoding="utf-8")
-    targets[3].chmod(targets[3].stat().st_mode | 0o111)
+    gate_source = Path(__file__).resolve().with_name("gate_computational_v1.py")
+    if not gate_source.is_file():
+        raise FoundationError(f"gate source is missing beside runner: {gate_source}")
+    shutil.copy2(gate_source, targets[2])
+    targets[3].write_text(project_readme_text(), encoding="utf-8")
+    targets[4].parent.mkdir(parents=True, exist_ok=True)
+    targets[4].write_text(autoexec_text(), encoding="utf-8")
+    targets[4].chmod(targets[4].stat().st_mode | 0o111)
+    for adapter_source, destination in adapter_files:
+        target = repo_root / destination
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(adapter_source, target)
     compile_ignore = repo_root / "COMPILA" / ".gitignore"
     compile_ignore.parent.mkdir(parents=True, exist_ok=True)
     if not compile_ignore.exists():
         compile_ignore.write_text("# Local Foundation receipts are reviewed before explicit publication.\n*\n!.gitignore\n", encoding="utf-8")
     print(f"FOUNDATION_INITIALIZED={repo_root}")
     print(f"MANIFEST={targets[0].relative_to(repo_root).as_posix()}")
-    print(f"AUTOEXEC={targets[3].relative_to(repo_root).as_posix()}")
+    print(f"AUTOEXEC={targets[4].relative_to(repo_root).as_posix()}")
+    if adapter is not None:
+        print(f"ADAPTER={adapter}")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -726,6 +834,7 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--project-id", required=True)
     init.add_argument("--profile", choices=("documentation", "python", "freestanding-object", "make", "cmake"), default="documentation")
     init.add_argument("--source", help="Repository-relative source file required by source-oriented profiles.")
+    init.add_argument("--adapter", choices=ADAPTER_CHOICES, help="Install one explicit target adapter instead of a generic profile.")
 
     for command in ("plan", "verify"):
         item = subparsers.add_parser(command)
@@ -741,7 +850,7 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "init":
         try:
-            initialize(args.repo_root, args.project_id, args.profile, args.source)
+            initialize(args.repo_root, args.project_id, args.profile, args.source, args.adapter)
         except FoundationGap as exc:
             print(str(exc), file=sys.stderr)
             return 2
