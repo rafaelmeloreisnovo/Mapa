@@ -51,6 +51,11 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def sha256_text(value: str) -> str:
+    """Return a stable digest without retaining potentially sensitive text."""
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -79,6 +84,59 @@ def safe_repo_file(repo_root: Path, relative: str, field: str) -> Path:
     if target != root and root not in target.parents:
         raise FoundationError(f"{field} escapes repository root")
     return target
+
+
+def captured_command(argv: list[str], cwd: Path) -> tuple[int, str] | None:
+    """Run a small local observation command without invoking a shell."""
+    try:
+        result = subprocess.run(
+            argv,
+            cwd=cwd,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            check=False,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    return result.returncode, result.stdout.strip()
+
+
+def repository_identity(repo_root: Path) -> dict[str, Any]:
+    """Observe local Git identity only; no fetch, config, or mutation is used."""
+    if shutil.which("git") is None:
+        return {
+            "state": "TOKEN_VAZIO_GIT_UNAVAILABLE",
+            "next_verifiable_step": "Install or expose local git, then rerun the exact profile.",
+        }
+
+    inside = captured_command(["git", "rev-parse", "--is-inside-work-tree"], repo_root)
+    if inside is None or inside[0] != 0 or inside[1] != "true":
+        return {
+            "state": "TOKEN_VAZIO_GIT_CHECKOUT_UNOBSERVED",
+            "next_verifiable_step": "Run from a Git checkout with the source commit present.",
+        }
+
+    head = captured_command(["git", "rev-parse", "HEAD"], repo_root)
+    status = captured_command(["git", "status", "--porcelain=v1", "--untracked-files=all"], repo_root)
+    branch = captured_command(["git", "symbolic-ref", "--quiet", "--short", "HEAD"], repo_root)
+    if head is None or head[0] != 0 or status is None or status[0] != 0:
+        return {
+            "state": "TOKEN_VAZIO_GIT_IDENTITY_INCOMPLETE",
+            "next_verifiable_step": "Repair local Git metadata, then rerun the exact profile.",
+        }
+
+    status_lines = [line for line in status[1].splitlines() if line]
+    return {
+        "state": "BOUND",
+        "head_sha": head[1],
+        "branch": branch[1] if branch is not None and branch[0] == 0 and branch[1] else "DETACHED",
+        "worktree_clean": not status_lines,
+        "worktree_entry_count": len(status_lines),
+        "worktree_state_sha256": sha256_text(status[1]),
+    }
 
 
 def read_manifest(repo_root: Path) -> tuple[dict[str, Any], Path]:
@@ -223,22 +281,57 @@ def create_run_directory(repo_root: Path) -> tuple[str, Path, str]:
     return run_id, run_dir, Path("COMPILA", run_id).as_posix()
 
 
-def environment_record() -> dict[str, Any]:
+def executable_identity(command: str, repo_root: Path) -> dict[str, Any]:
+    """Record the resolved executable without executing version probes."""
+    path: Path | None
+    if "/" in command:
+        local_command = command[2:] if command.startswith("./") else command
+        path = safe_repo_file(repo_root, local_command, "command executable")
+    else:
+        located = shutil.which(command)
+        path = Path(located).resolve() if located else None
+    record: dict[str, Any] = {
+        "requested": command,
+        "available": bool(path and path.is_file() and os.access(path, os.X_OK)),
+    }
+    if path and path.is_file():
+        record["path"] = path.as_posix()
+        try:
+            record["sha256"] = sha256_file(path)
+            record["size_bytes"] = path.stat().st_size
+        except OSError:
+            record["sha256"] = "TOKEN_VAZIO_EXECUTABLE_UNREADABLE"
+    return record
+
+
+def environment_record(repo_root: Path, commands: list[list[str]]) -> dict[str, Any]:
+    observed_tools: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for command in commands:
+        if command and command[0] not in seen:
+            seen.add(command[0])
+            observed_tools.append(executable_identity(command[0], repo_root))
     return {
         "captured_at": utc_now(),
         "runtime_class": "ANDROID_TERMUX_LOCAL",
         "python": sys.version.split()[0],
+        "python_executable": sys.executable,
         "implementation": platform.python_implementation(),
         "platform": platform.platform(),
         "machine": platform.machine(),
         "termux_prefix_present": bool(os.environ.get("PREFIX")),
+        "termux_prefix": os.environ.get("PREFIX", "TOKEN_VAZIO_TERMUX_PREFIX"),
+        "observed_tools": observed_tools,
         "claim_allowed": False,
         "network_required": False,
     }
 
 
 def input_manifest(repo_root: Path, manifest_path: Path, manifest: dict[str, Any], profile: dict[str, Any]) -> list[dict[str, Any]]:
-    paths = [".rafaelia/foundation.yaml"]
+    paths = [
+        ".rafaelia/foundation.yaml",
+        ".rafaelia/tools/rafaelia_foundation.py",
+    ]
     source = manifest["inputs"].get("source")
     if source:
         paths.append(source)
@@ -315,6 +408,27 @@ def finish_receipt(run_dir: Path, receipt: dict[str, Any]) -> Path:
     return receipt_path
 
 
+def collect_artifacts(repo_root: Path, run_dir: Path) -> list[dict[str, Any]]:
+    """Hash every regular output in a run, rejecting symlink-based escapes."""
+    records: list[dict[str, Any]] = []
+    excluded = {"receipt.json", "receipt.sha256"}
+    for path in sorted(run_dir.rglob("*"), key=lambda item: item.as_posix()):
+        if path.name in excluded:
+            continue
+        if path.is_symlink():
+            raise FoundationError(
+                f"run artifact cannot be a symlink: {path.relative_to(repo_root).as_posix()}"
+            )
+        if not path.is_file():
+            continue
+        records.append({
+            "path": path.relative_to(repo_root).as_posix(),
+            "sha256": sha256_file(path),
+            "size_bytes": path.stat().st_size,
+        })
+    return records
+
+
 def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> int:
     repo_root = repo_root.resolve()
     run_id, run_dir, out_rel = create_run_directory(repo_root)
@@ -329,7 +443,7 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
         validate_manifest(manifest)
         profile = profile_for(manifest, profile_name or "documentation")
         receipt["profile"] = profile_name or "documentation"
-        write_json(run_dir / "environment.json", environment_record())
+        receipt["repository_identity"] = repository_identity(repo_root)
 
         if operation == "plan":
             source = manifest["inputs"].get("source")
@@ -337,6 +451,7 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
                 [substitute(argument, source, out_rel) for argument in command]
                 for command in profile.get("commands", [])
             ]
+            write_json(run_dir / "environment.json", environment_record(repo_root, planned))
             write_json(run_dir / "plan.json", {
                 "schema": "rafaelia.foundation.plan/v1",
                 "profile": receipt["profile"],
@@ -356,6 +471,7 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
                 "claim_allowed": False,
             })
             commands = preflight(repo_root, manifest, receipt["profile"], profile, out_rel)
+            write_json(run_dir / "environment.json", environment_record(repo_root, commands))
             if operation == "verify":
                 write_json(run_dir / "plan.json", {
                     "schema": "rafaelia.foundation.plan/v1",
@@ -430,14 +546,17 @@ def run_operation(repo_root: Path, operation: str, profile_name: str | None) -> 
     receipt["exit_code"] = exit_code
     receipt["commands_executed"] = len(command_records)
     receipt["commands"] = command_records
-    for name in ("environment.json", "input_manifest.json", "plan.json", "commands.jsonl", "stdout.log", "stderr.log"):
-        path = run_dir / name
-        if path.is_file():
-            receipt.setdefault("artifacts", []).append({
-                "path": Path("COMPILA", run_id, name).as_posix(),
-                "sha256": sha256_file(path),
-                "size_bytes": path.stat().st_size,
-            })
+    try:
+        receipt["artifacts"] = collect_artifacts(repo_root, run_dir)
+    except FoundationError as exc:
+        if status.startswith("PASS") or status == "PLAN_ONLY":
+            status = "FAIL"
+            exit_code = 1
+            receipt["status"] = status
+            receipt["exit_code"] = exit_code
+            receipt["error"] = str(exc)
+            receipt["next_verifiable_step"] = "Remove the unsafe artifact and rerun the exact profile."
+        receipt.setdefault("artifact_collection_gap", str(exc))
     receipt_path = finish_receipt(run_dir, receipt)
     print(f"STATUS={status}")
     print(f"RECEIPT={receipt_path.relative_to(repo_root).as_posix()}")
