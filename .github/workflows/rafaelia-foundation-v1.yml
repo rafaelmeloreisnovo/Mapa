@@ -5,11 +5,13 @@ name: RAFAELIA Foundation V1 Contract
     paths:
       - "foundation/**"
       - "docs/canonical/2026-07-31/RAFAELIA_TERMUX_FOUNDATION_V1.md"
+      - "docs/canonical/2026-07-31/GATE_COMPUTATIONAL_V1.md"
       - ".github/workflows/rafaelia-foundation-v1.yml"
   push:
     paths:
       - "foundation/**"
       - "docs/canonical/2026-07-31/RAFAELIA_TERMUX_FOUNDATION_V1.md"
+      - "docs/canonical/2026-07-31/GATE_COMPUTATIONAL_V1.md"
       - ".github/workflows/rafaelia-foundation-v1.yml"
   workflow_dispatch:
 
@@ -40,6 +42,7 @@ jobs:
           set -euo pipefail
           python -m py_compile \
             foundation/scripts/rafaelia_foundation.py \
+            foundation/scripts/gate_computational_v1.py \
             foundation/tests/test_rafaelia_foundation.py
 
       - name: Validate manifest and local receipt semantics
