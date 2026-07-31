@@ -28,6 +28,7 @@ PROJECT_ID_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._-]{2,127}$")
 PROFILE_PATTERN = re.compile(r"^[a-z][a-z0-9-]{1,63}$")
 ALLOWED_PROFILE_MODES = {"DOCUMENTATION", "COMMANDS"}
 TEMPLATE_TOKENS = {"{{OUT}}", "{{SOURCE}}", "{{REPO}}"}
+SHELL_EXECUTABLES = {"sh", "bash", "dash", "zsh", "fish", "busybox"}
 
 
 class FoundationError(RuntimeError):
@@ -105,6 +106,11 @@ def validate_command(command: Any, location: str) -> list[str]:
         raise FoundationError(f"{location} must be a non-empty argv list")
     if not all(isinstance(item, str) and item and "\x00" not in item and "\n" not in item for item in command):
         raise FoundationError(f"{location} contains an invalid argument")
+    executable = Path(command[0]).name
+    if executable in SHELL_EXECUTABLES:
+        raise FoundationError(f"{location} cannot invoke a shell interpreter")
+    if executable == "env" and any(Path(argument).name in SHELL_EXECUTABLES for argument in command[1:]):
+        raise FoundationError(f"{location} cannot route through env to a shell interpreter")
     for argument in command:
         for token in re.findall(r"\{\{[^}]+\}\}", argument):
             if token not in TEMPLATE_TOKENS:
