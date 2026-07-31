@@ -1,0 +1,48 @@
+name: RAFAELIA Foundation V1 Contract
+
+"on":
+  pull_request:
+    paths:
+      - "foundation/**"
+      - "docs/canonical/2026-07-31/RAFAELIA_TERMUX_FOUNDATION_V1.md"
+      - ".github/workflows/rafaelia-foundation-v1.yml"
+  push:
+    paths:
+      - "foundation/**"
+      - "docs/canonical/2026-07-31/RAFAELIA_TERMUX_FOUNDATION_V1.md"
+      - ".github/workflows/rafaelia-foundation-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafaelia-foundation-v1
+  cancel-in-progress: false
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile Foundation sources
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            foundation/scripts/rafaelia_foundation.py \
+            foundation/tests/test_rafaelia_foundation.py
+
+      - name: Validate manifest and local receipt semantics
+        run: |
+          set -euo pipefail
+          python foundation/tests/test_rafaelia_foundation.py
