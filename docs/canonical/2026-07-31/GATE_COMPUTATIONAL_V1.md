@@ -79,8 +79,7 @@ ou checkout diferente.
 Após um profile que produza `test-summary.json`:
 
 ```sh
-python3 foundation/scripts/gate_computational_v1.py \
-  --repo-root /caminho/do/checkout \
+bash termux/autoexec-rafaelia.sh gate \
   --receipt COMPILA/<run-id>/receipt.json \
   --test-summary COMPILA/<run-id>/test-summary.json \
   --expected-profile <profile-explícito>
