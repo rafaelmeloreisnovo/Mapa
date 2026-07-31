@@ -1,0 +1,62 @@
+{
+  "schema": "rafaelia.foundation.manifest/v1",
+  "version": "1.0.0",
+  "project": {
+    "id": "example-project",
+    "kind": "freestanding-object",
+    "repository": "LOCAL_CHECKOUT_UNPINNED"
+  },
+  "governance": {
+    "claim_allowed": false,
+    "network_required": false,
+    "destructive_operations": false,
+    "remote_ci_substituted": false,
+    "token_vazio_is_valid": true
+  },
+  "runtime": {
+    "class": "ANDROID_TERMUX_LOCAL",
+    "output_directory": "COMPILA",
+    "append_only_receipts": true
+  },
+  "inputs": {
+    "source": "src/entry.c",
+    "required_paths": [
+      "README.md"
+    ]
+  },
+  "profiles": {
+    "documentation": {
+      "mode": "DOCUMENTATION",
+      "requires_source": false,
+      "required_paths": [
+        "README.md"
+      ],
+      "commands": [],
+      "description": "Only inspect the declared document and input boundary."
+    },
+    "freestanding-object": {
+      "mode": "COMMANDS",
+      "requires_source": true,
+      "required_paths": [
+        "README.md"
+      ],
+      "commands": [
+        [
+          "clang",
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-ffreestanding",
+          "-fno-builtin",
+          "-fno-stack-protector",
+          "-fno-pic",
+          "-c",
+          "{{SOURCE}}",
+          "-o",
+          "{{OUT}}/freestanding.o"
+        ]
+      ],
+      "description": "Compile an object only. A linked executable needs a separate, explicit project contract."
+    }
+  }
+}
