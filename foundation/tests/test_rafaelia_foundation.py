@@ -34,6 +34,12 @@ class RafaeliaFoundationTests(unittest.TestCase):
         with self.assertRaises(FOUNDATION.FoundationError):
             FOUNDATION.relative_path("../outside.c", "inputs.source")
 
+    def test_shell_profile_is_rejected(self) -> None:
+        manifest = json.loads((ROOT / "templates" / "foundation.example.yaml").read_text(encoding="utf-8"))
+        manifest["profiles"]["freestanding-object"]["commands"] = [["sh", "-c", "echo unsafe"]]
+        with self.assertRaises(FOUNDATION.FoundationError):
+            FOUNDATION.validate_manifest(manifest)
+
     def test_init_verify_and_run_python_profile(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             repo = Path(temp) / "project"
