@@ -58,6 +58,14 @@ integridade de hashes, ambiente observado, pares completos de eventos de
 comando e um `test-summary.json` hasheado. A única decisão positiva é
 `READY_FOR_DOMAIN_SPECIFIC_REVIEW`; ela não promove nenhum claim.
 
+## Primeiro adapter executável
+
+O adapter explícito
+[`rafpolimata-compiler-gate`](../../../foundation/adapters/rafpolimata/README.md)
+configura o primeiro alvo de compilação. Ele usa o teste local já rastreado do
+RafPolimata, gera contagem honesta dos seus nove blocos e preserva qualquer
+falha ou bloco não executado no `test-summary.json`.
+
 ## Próximo passo verificável
 
 Inicializar a Foundation em um checkout concreto, executar primeiro `plan` e
