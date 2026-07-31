@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import importlib.util
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -63,6 +64,23 @@ class RafaeliaFoundationTests(unittest.TestCase):
             FOUNDATION.initialize(repo, "docs-project", "documentation", None)
             with self.assertRaises(FOUNDATION.FoundationError):
                 FOUNDATION.initialize(repo, "docs-project", "documentation", None)
+
+    def test_generated_autoexec_routes_to_copied_runner(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp) / "project"
+            repo.mkdir()
+            (repo / "README.md").write_text("# test\n", encoding="utf-8")
+            FOUNDATION.initialize(repo, "autoexec-project", "documentation", None)
+
+            completed = subprocess.run(
+                ["bash", str(repo / "termux" / "autoexec-rafaelia.sh"), "run", "documentation"],
+                cwd=repo,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            self.assertIn("STATUS=PASS_STRUCTURE_ONLY", completed.stdout)
 
 
 if __name__ == "__main__":
