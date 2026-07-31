@@ -103,6 +103,10 @@ class RafaeliaFoundationTests(unittest.TestCase):
             self.assertEqual(manifest["project"]["repository"], "rafaelmeloreisnovo/RafPolimata")
             self.assertIn("compiler-local-gate", manifest["profiles"])
             self.assertTrue((repo / "scripts" / "rafpolimata_foundation_compiler_gate.py").is_file())
+            verify_code = FOUNDATION.run_operation(repo, "verify", "compiler-local-gate")
+            self.assertEqual(verify_code, 0)
+            receipt = json.loads(next((repo / "COMPILA").glob("*/receipt.json")).read_text(encoding="utf-8"))
+            self.assertEqual(receipt["status"], "PASS_PREFLIGHT_ONLY")
             with self.assertRaises(FOUNDATION.FoundationError):
                 FOUNDATION.initialize(repo, "rafpolimata-local", "documentation", None, "rafpolimata-compiler-gate")
 
