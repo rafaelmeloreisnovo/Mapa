@@ -1,6 +1,6 @@
 # RAFAELIA — Foundation Local Termux V1
 
-**Estado:** `IMPLEMENTED_LOCAL_CONTRACT_PENDING_REPOSITORY_RECEIPT`  
+**Estado:** `IMPLEMENTED_LOCAL_GATE_PENDING_REPOSITORY_TERMUX_RECEIPT`  
 **Autoridade de ontologia:** `rafaelmeloreisnovo/Mapa`  
 **Autoridade de execução:** repositório-alvo + Termux local  
 **Claim permitido:** `false`  
@@ -23,11 +23,13 @@ reproduzível e auditável.
 2. A seleção de perfil nunca é inferida por extensão ou nome de arquivo.
 3. O executor aceita somente vetores de argumentos; não invoca shell.
 4. Cada operação cria um diretório novo em `COMPILA`.
-5. O receipt inclui ambiente, inputs com SHA-256, comandos observados e
-   estado de decisão.
+5. O receipt inclui ambiente, inputs e artefatos com SHA-256, comandos
+   observados, `HEAD` Git local e estado de decisão.
 6. `claim_allowed=false` é requisito de schema, não comentário.
 7. GitHub Actions pode checar o contrato do pacote, mas não substitui receipt
    Termux de um checkout nem prova dispositivo/SDK/ELF/APK.
+8. `gate.computational.v1` só passa quando testes descobertos, executados e
+   passados coincidem, com zero falhas/skips e falsificadores exercitados.
 
 ## Fronteira freestanding
 
@@ -48,6 +50,14 @@ Termux de bare metal.
 | Runtime Android | Termux | Ambiente e saída local observados |
 | Ciência falsificável | RLL | Apenas inputs/execuções científicos explicitamente declarados |
 
+## Gate computacional
+
+O gate [`GATE_COMPUTATIONAL_V1.md`](GATE_COMPUTATIONAL_V1.md) transforma o
+receipt local numa decisão limitada e auditável. Ele exige `HEAD` limpo,
+integridade de hashes, ambiente observado, pares completos de eventos de
+comando e um `test-summary.json` hasheado. A única decisão positiva é
+`READY_FOR_DOMAIN_SPECIFIC_REVIEW`; ela não promove nenhum claim.
+
 ## Próximo passo verificável
 
 Inicializar a Foundation em um checkout concreto, executar primeiro `plan` e
@@ -56,10 +66,10 @@ revisado contra o commit do checkout antes de entrar em `Mapa/auditoria`.
 
 ## R3
 
-`F_ok`: existe um núcleo reutilizável para documento, pré-voo, execução local e
-recibo sem API ou CI privada.  
-`F_gap`: nenhum repositório-alvo foi promovido por esta documentação; SDK,
+`F_ok`: existe um núcleo reutilizável para documento, pré-voo, execução local,
+receipt com identidade e gate computacional sem API ou CI privada.  
+`F_gap`: nenhum receipt Termux de repositório-alvo foi observado; SDK,
 compiladores, links freestanding e dispositivos continuam dependentes de
-receipts próprios.  
-`F_next`: aplicar em um checkout alvo de perfil único e registrar seu primeiro
-receipt imutável.
+evidência própria.  
+`F_next`: aplicar o profile explícito de compilação do RafPolimata no checkout
+do commit exato e registrar primeiro receipt + gate imutáveis.
