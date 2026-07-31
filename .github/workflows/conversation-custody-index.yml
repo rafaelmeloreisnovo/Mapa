@@ -1,0 +1,52 @@
+name: Conversation Custody Index Contract
+
+"on":
+  pull_request:
+    paths:
+      - "docs/architecture/FAROL_SIGMA_CONVERSATION_CUSTODY_V1.md"
+      - "schemas/conversation-custody-index.schema.json"
+      - "data/indexes/conversation-custody-policy.v1.json"
+      - "scripts/index_conversations_export.py"
+      - "tests/test_index_conversations_export.py"
+      - "indices/canonical/2026-07-30/CONVERSATION_CUSTODY_FIRST_LAYER_V1.md"
+      - "auditoria/CONVERSATION_CUSTODY_LOCAL_RECEIPT_20260730.json"
+      - ".github/workflows/conversation-custody-index.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: conversation-custody-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/index_conversations_export.py tests/test_index_conversations_export.py
+
+      - name: Validate JSON syntax
+        run: |
+          set -euo pipefail
+          python -m json.tool schemas/conversation-custody-index.schema.json >/dev/null
+          python -m json.tool data/indexes/conversation-custody-policy.v1.json >/dev/null
+
+      - name: Run standard-library tests
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p "test_index_conversations_export.py" -v
