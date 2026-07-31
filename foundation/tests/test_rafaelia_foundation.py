@@ -23,6 +23,11 @@ GATE_SPEC = importlib.util.spec_from_file_location("gate_computational_v1", GATE
 assert GATE_SPEC is not None and GATE_SPEC.loader is not None
 GATE = importlib.util.module_from_spec(GATE_SPEC)
 GATE_SPEC.loader.exec_module(GATE)
+RAFPOLIMATA_ADAPTER_PATH = ROOT / "adapters" / "rafpolimata" / "rafpolimata_foundation_compiler_gate.py"
+RAFPOLIMATA_ADAPTER_SPEC = importlib.util.spec_from_file_location("rafpolimata_foundation_compiler_gate", RAFPOLIMATA_ADAPTER_PATH)
+assert RAFPOLIMATA_ADAPTER_SPEC is not None and RAFPOLIMATA_ADAPTER_SPEC.loader is not None
+RAFPOLIMATA_ADAPTER = importlib.util.module_from_spec(RAFPOLIMATA_ADAPTER_SPEC)
+RAFPOLIMATA_ADAPTER_SPEC.loader.exec_module(RAFPOLIMATA_ADAPTER)
 
 
 class RafaeliaFoundationTests(unittest.TestCase):
@@ -81,6 +86,35 @@ class RafaeliaFoundationTests(unittest.TestCase):
             FOUNDATION.initialize(repo, "docs-project", "documentation", None)
             with self.assertRaises(FOUNDATION.FoundationError):
                 FOUNDATION.initialize(repo, "docs-project", "documentation", None)
+
+    def test_rafpolimata_adapter_is_explicit_and_non_destructive(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp) / "RafPolimata"
+            repo.mkdir()
+            (repo / "README.md").write_text("# RafPolimata\n", encoding="utf-8")
+            for name in ("raf_compile.h", "raf_main.c", "raf_frontend.c", "raf_cpu.c", "raf_asm_emit.c", "raf_precomp.c"):
+                (repo / name).write_text("/* fixture */\n", encoding="utf-8")
+            (repo / "scripts").mkdir()
+            (repo / "scripts" / "validate_runtime_truth_local.sh").write_text("#!/usr/bin/env bash\n", encoding="utf-8")
+
+            FOUNDATION.initialize(repo, "rafpolimata-local", "documentation", None, "rafpolimata-compiler-gate")
+
+            manifest = json.loads((repo / ".rafaelia" / "foundation.yaml").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["project"]["repository"], "rafaelmeloreisnovo/RafPolimata")
+            self.assertIn("compiler-local-gate", manifest["profiles"])
+            self.assertTrue((repo / "scripts" / "rafpolimata_foundation_compiler_gate.py").is_file())
+            with self.assertRaises(FOUNDATION.FoundationError):
+                FOUNDATION.initialize(repo, "rafpolimata-local", "documentation", None, "rafpolimata-compiler-gate")
+
+    def test_rafpolimata_adapter_accounts_for_success_and_failure(self) -> None:
+        successful_log = "\n".join(f"[{index}/9] step" for index in range(1, 10)) + "\nPASS rafpolimata-runtime-truth-local\n"
+        success = RAFPOLIMATA_ADAPTER.summary_for(0, successful_log)
+        self.assertEqual(success["counts"], {"discovered": 9, "executed": 9, "passed": 9, "failed": 0, "skipped": 0})
+        self.assertTrue(all(item["status"] == "EXERCISED" for item in success["falsifiers"]))
+
+        failed = RAFPOLIMATA_ADAPTER.summary_for(1, "[1/9] step\n[2/9] step\n[3/9] step\n")
+        self.assertEqual(failed["counts"], {"discovered": 9, "executed": 3, "passed": 2, "failed": 1, "skipped": 6})
+        self.assertTrue(all(item["status"] == "NOT_EXERCISED" for item in failed["falsifiers"]))
 
     def test_generated_autoexec_routes_to_copied_runner(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -156,13 +190,13 @@ class RafaeliaFoundationTests(unittest.TestCase):
             )
             self.assertEqual(report["COMPUTATIONAL_REVIEW_RESULT"], "READY_FOR_DOMAIN_SPECIFIC_REVIEW")
             self.assertFalse(report["claim_allowed"])
+            self.assertTrue((repo / ".rafaelia" / "tools" / "gate_computational_v1.py").is_file())
 
             gate_run = subprocess.run(
                 [
-                    "python3",
-                    str(GATE_PATH),
-                    "--repo-root",
-                    str(repo),
+                    "bash",
+                    str(repo / "termux" / "autoexec-rafaelia.sh"),
+                    "gate",
                     "--receipt",
                     receipt_path.relative_to(repo).as_posix(),
                     "--test-summary",
