@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/rafaelia-test-summary.v1.schema.json",
+  "title": "RAFAELIA Test Summary V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "counts",
+    "tests",
+    "falsifiers"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.test-summary/v1"
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "discovered",
+        "executed",
+        "passed",
+        "failed",
+        "skipped"
+      ],
+      "properties": {
+        "discovered": {"type": "integer", "minimum": 0},
+        "executed": {"type": "integer", "minimum": 0},
+        "passed": {"type": "integer", "minimum": 0},
+        "failed": {"type": "integer", "minimum": 0},
+        "skipped": {"type": "integer", "minimum": 0}
+      }
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "result"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "result": {"enum": ["PASS", "FAIL", "SKIPPED", "NOT_EXECUTED"]}
+        }
+      }
+    },
+    "falsifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "condition", "status"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "condition": {"type": "string", "minLength": 1},
+          "status": {"enum": ["EXERCISED", "NOT_EXERCISED"]}
+        }
+      }
+    }
+  }
+}
