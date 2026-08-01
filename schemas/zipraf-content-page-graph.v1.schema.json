@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/zipraf-content-page-graph.v1.schema.json",
+  "title": "ZIPRAF Content Page Graph V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "observed_at",
+    "claim_allowed",
+    "compatibility_shell",
+    "invariants",
+    "sources",
+    "blocks",
+    "edges",
+    "dma_irq_policy",
+    "scheduling",
+    "ledger",
+    "claims"
+  ],
+  "properties": {
+    "schema_version": {"const": "zipraf-content-page-graph.v1"},
+    "status": {"enum": ["CANONICAL_DRAFT", "REFERENCE_MODEL", "VERIFIED_LIMITED"]},
+    "observed_at": {"type": "string", "format": "date"},
+    "claim_allowed": {"const": false},
+    "compatibility_shell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "authority", "authorial_storage_layer", "direct_map_rule", "compressed_entry_rule"],
+      "properties": {
+        "format": {"const": "ZIP"},
+        "authority": {"type": "string", "minLength": 1},
+        "authorial_storage_layer": {"const": "ZIPRAF_PAGE_GRAPH"},
+        "direct_map_rule": {"const": "STORE_ALIGNED_IMMUTABLE_DIGEST_VERIFIED"},
+        "compressed_entry_rule": {"const": "MATERIALIZE_BEFORE_LOGICAL_ACCESS"}
+      }
+    },
+    "invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_identity",
+        "address",
+        "unchanged_block_reuse",
+        "absolute_pointer_reuse_across_epoch",
+        "magic_grants_execution",
+        "hash_is_clock_measurement",
+        "system_attribute_is_pinning"
+      ],
+      "properties": {
+        "content_identity": {"type": "string", "minLength": 1},
+        "address": {"type": "string", "minLength": 1},
+        "unchanged_block_reuse": {"const": true},
+        "absolute_pointer_reuse_across_epoch": {"const": false},
+        "magic_grants_execution": {"const": false},
+        "hash_is_clock_measurement": {"const": false},
+        "system_attribute_is_pinning": {"const": false}
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["repo", "path", "state"],
+        "properties": {
+          "repo": {"type": "string", "minLength": 3},
+          "path": {"type": "string", "minLength": 1},
+          "state": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/block"}
+    },
+    "edges": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/edge"}
+    },
+    "dma_irq_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lease_fields", "irq_accept_requires", "remap_sequence"],
+      "properties": {
+        "lease_fields": {"type": "array", "minItems": 8, "items": {"type": "string"}, "uniqueItems": true},
+        "irq_accept_requires": {"type": "array", "minItems": 4, "items": {"type": "string"}, "uniqueItems": true},
+        "remap_sequence": {"type": "array", "prefixItems": [
+          {"const": "QUIESCE"}, {"const": "VERIFY"}, {"const": "REMAP"},
+          {"const": "EPOCH_INCREMENT"}, {"const": "RESUME"}
+        ], "items": false}
+      }
+    },
+    "scheduling": {"type": "object"},
+    "ledger": {"type": "object"},
+    "claims": {"type": "object"}
+  },
+  "$defs": {
+    "redundancy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "recovery_claim_ppm", "erasure_positions_known", "external_proof"],
+      "properties": {
+        "profile": {"enum": ["NONE", "PARITY2_OBSERVE", "ECC32_MASKED_OBSERVE", "XOR_SHARD1", "MDS_EXTERNAL_PROOF"]},
+        "recovery_claim_ppm": {"type": "integer", "minimum": 0, "maximum": 1000000},
+        "erasure_positions_known": {"type": "boolean"},
+        "external_proof": {"type": "boolean"}
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_id", "archive_offset", "stored_size", "logical_size", "alignment",
+        "compression_method", "digest_kind", "digest", "immutable",
+        "direct_map_candidate", "execution_candidate", "platform_loader_authorized",
+        "magic_kind", "redundancy"
+      ],
+      "properties": {
+        "block_id": {"type": "string", "minLength": 1},
+        "archive_offset": {"type": "integer", "minimum": 0},
+        "stored_size": {"type": "integer", "minimum": 1},
+        "logical_size": {"type": "integer", "minimum": 1},
+        "alignment": {"type": "integer", "minimum": 1},
+        "compression_method": {"enum": ["STORE", "DEFLATE"]},
+        "digest_kind": {"enum": ["SHA256", "BLAKE3"]},
+        "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "immutable": {"type": "boolean"},
+        "direct_map_candidate": {"type": "boolean"},
+        "execution_candidate": {"type": "boolean"},
+        "platform_loader_authorized": {"const": false},
+        "magic_kind": {"enum": ["UNKNOWN", "ZIP", "PE_MZ", "ELF"]},
+        "redundancy": {"$ref": "#/$defs/redundancy"}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module_id", "block_id", "offset", "length", "access", "core_mask", "phase"],
+      "properties": {
+        "module_id": {"type": "string", "minLength": 1},
+        "block_id": {"type": "string", "minLength": 1},
+        "offset": {"type": "integer", "minimum": 0},
+        "length": {"type": "integer", "minimum": 1},
+        "access": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["READ", "WRITE", "EXEC_CANDIDATE"]}},
+        "core_mask": {"type": "integer", "minimum": 1},
+        "phase": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}
