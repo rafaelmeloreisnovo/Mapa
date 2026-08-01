@@ -1,0 +1,405 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/tof-namespace-allocation-fault.v1.schema.json",
+  "title": "RAFAELIA TOF Namespace Allocation Fault Invariant V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "observed_at",
+    "status",
+    "claim_allowed",
+    "object_state_model",
+    "namespace",
+    "allocation",
+    "fault_overlay",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "tof-namespace-allocation-fault.v1"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "CANONICAL_DRAFT",
+        "VERIFIED_LIMITED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "object_state_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axes",
+        "axis_states",
+        "composite_state",
+        "semantic_state"
+      ],
+      "properties": {
+        "axes": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "INDEX" },
+            { "const": "NAME" },
+            { "const": "BLOCK" }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "axis_states": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ZERO",
+              "POSITIVE",
+              "NEGATIVE"
+            ]
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "composite_state": {
+          "type": "string",
+          "pattern": "^\\(I[0+-],N[0+-],B[0+-]\\)$"
+        },
+        "semantic_state": {
+          "enum": [
+            "NORMAL",
+            "EMPTY_FILE",
+            "PAYLOAD_FAULT",
+            "NAME_FAULT",
+            "ORPHANED_OBJECT",
+            "RESIDUAL_BLOCKS",
+            "TOMBSTONE",
+            "ABSENT",
+            "TOKEN_VAZIO"
+          ]
+        }
+      }
+    },
+    "namespace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object_id",
+        "parent_id",
+        "generation",
+        "object_type",
+        "name_encoding",
+        "name_hex",
+        "logical_size"
+      ],
+      "properties": {
+        "object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "object_type": {
+          "enum": [
+            "FILE",
+            "DIRECTORY",
+            "CONTAINER",
+            "SYMLINK",
+            "OTHER"
+          ]
+        },
+        "name_encoding": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name_hex": {
+          "type": "string",
+          "pattern": "^(?:[0-9A-Fa-f]{2})*$"
+        },
+        "logical_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "metadata_checksum": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "content_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "allocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mapping_epoch",
+        "logical_extents"
+      ],
+      "properties": {
+        "mapping_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "logical_extents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "logical_offset",
+              "length",
+              "physical_location",
+              "state"
+            ],
+            "properties": {
+              "logical_offset": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "length": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "physical_location": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "state": {
+                "enum": [
+                  "ALLOCATED",
+                  "SPARSE",
+                  "BAD",
+                  "REMAPPED",
+                  "TOKEN_VAZIO"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "fault_overlay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "representation",
+        "events"
+      ],
+      "properties": {
+        "representation": {
+          "const": "SPARSE_APPEND_ONLY"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event_id",
+              "device_id",
+              "block",
+              "epoch",
+              "state_after",
+              "evidence_refs",
+              "claim_allowed"
+            ],
+            "properties": {
+              "event_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "device_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "channel": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "bank": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "block": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "word": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "lane": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "bit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "epoch": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "state_before": {
+                "enum": [
+                  null,
+                  "GOOD_OBSERVED",
+                  "CORRECTED",
+                  "SUSPECT",
+                  "BAD",
+                  "REMAPPED",
+                  "POISONED",
+                  "ABSENT",
+                  "TOKEN_VAZIO"
+                ]
+              },
+              "state_after": {
+                "enum": [
+                  "GOOD_OBSERVED",
+                  "CORRECTED",
+                  "SUSPECT",
+                  "BAD",
+                  "REMAPPED",
+                  "POISONED",
+                  "ABSENT",
+                  "TOKEN_VAZIO"
+                ]
+              },
+              "syndrome": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "corrected_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "replacement_location": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "previous_event_hash": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "event_hash": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "claim_allowed": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation_state",
+        "runtime_evidence",
+        "ecc_profile",
+        "physical_media_profile",
+        "limitations"
+      ],
+      "properties": {
+        "implementation_state": {
+          "enum": [
+            "TOKEN_VAZIO",
+            "PARTIAL",
+            "VERIFIED_LIMITED"
+          ]
+        },
+        "runtime_evidence": {
+          "enum": [
+            "TOKEN_VAZIO",
+            "VERIFIED_LIMITED"
+          ]
+        },
+        "ecc_profile": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "physical_media_profile": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

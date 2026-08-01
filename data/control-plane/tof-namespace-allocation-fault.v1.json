@@ -1,0 +1,76 @@
+{
+  "schema_version": "tof-namespace-allocation-fault.v1",
+  "record_id": "TOF-FAULT-INVARIANT-20260801-V1",
+  "observed_at": "2026-08-01T10:19:00Z",
+  "status": "CANONICAL_DRAFT",
+  "claim_allowed": false,
+  "object_state_model": {
+    "axes": [
+      "INDEX",
+      "NAME",
+      "BLOCK"
+    ],
+    "axis_states": [
+      "POSITIVE",
+      "POSITIVE",
+      "ZERO"
+    ],
+    "composite_state": "(I+,N+,B0)",
+    "semantic_state": "EMPTY_FILE"
+  },
+  "namespace": {
+    "object_id": "example-empty-file",
+    "parent_id": "example-directory",
+    "generation": 1,
+    "object_type": "FILE",
+    "name_encoding": "UTF-8",
+    "name_hex": "726567697374726F2E747874",
+    "logical_size": 0,
+    "metadata_checksum": null,
+    "content_hash": null
+  },
+  "allocation": {
+    "mapping_epoch": 0,
+    "logical_extents": []
+  },
+  "fault_overlay": {
+    "representation": "SPARSE_APPEND_ONLY",
+    "events": [
+      {
+        "event_id": "FAULT-TOKEN-VAZIO-0001",
+        "device_id": "TOKEN_VAZIO",
+        "channel": null,
+        "bank": null,
+        "block": 0,
+        "page": null,
+        "word": null,
+        "lane": null,
+        "bit": null,
+        "epoch": 0,
+        "state_before": null,
+        "state_after": "TOKEN_VAZIO",
+        "syndrome": null,
+        "corrected_count": 0,
+        "replacement_location": null,
+        "evidence_refs": [
+          "docs/TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1.md"
+        ],
+        "previous_event_hash": null,
+        "event_hash": null,
+        "claim_allowed": false
+      }
+    ]
+  },
+  "claim_boundary": {
+    "implementation_state": "TOKEN_VAZIO",
+    "runtime_evidence": "TOKEN_VAZIO",
+    "ecc_profile": null,
+    "physical_media_profile": null,
+    "limitations": [
+      "Modelo conceitual ainda sem filesystem-alvo declarado.",
+      "Nenhuma mídia física foi testada por este registro.",
+      "Nenhum perfil ECC ou política BBT foi validado.",
+      "A instância demonstra apenas a distinção entre arquivo vazio e objeto ausente."
+    ]
+  }
+}

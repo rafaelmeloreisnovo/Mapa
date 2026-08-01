@@ -1,0 +1,50 @@
+name: TOF Fault Invariant
+
+on:
+  push:
+    paths:
+      - "docs/TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1.md"
+      - "schemas/tof-namespace-allocation-fault.v1.schema.json"
+      - "data/control-plane/tof-namespace-allocation-fault.v1.json"
+      - "scripts/validate_tof_fault_invariant.py"
+      - "tests/test_tof_fault_invariant.py"
+      - ".github/workflows/tof-fault-invariant.yml"
+  pull_request:
+    paths:
+      - "docs/TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1.md"
+      - "schemas/tof-namespace-allocation-fault.v1.schema.json"
+      - "data/control-plane/tof-namespace-allocation-fault.v1.json"
+      - "scripts/validate_tof_fault_invariant.py"
+      - "tests/test_tof_fault_invariant.py"
+      - ".github/workflows/tof-fault-invariant.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile \
+            scripts/validate_tof_fault_invariant.py \
+            tests/test_tof_fault_invariant.py
+      - name: Run adversarial tests
+        run: python3 -m unittest -v tests/test_tof_fault_invariant.py
+      - name: Validate canonical record
+        run: |
+          python3 scripts/validate_tof_fault_invariant.py \
+            data/control-plane/tof-namespace-allocation-fault.v1.json \
+            --write-report build/tof-fault-invariant/report.json
+      - name: Upload bounded evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: tof-fault-invariant-report
+          path: build/tof-fault-invariant/report.json
+          if-no-files-found: error
