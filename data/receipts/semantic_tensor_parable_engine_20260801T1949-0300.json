@@ -29,6 +29,17 @@
     "PRESERVED_AS_CONFESSION_NOT_DOMAIN_CLAIM": 1,
     "TOKEN_VAZIO": 1
   },
+  "observed_external_boundary": {
+    "source_workflow": "Live Control Plane Reconciliation",
+    "run_id": 30722442356,
+    "job_id": 91428309303,
+    "validator_tests": "PASS_13_OF_13",
+    "live_state_validation": "PASS",
+    "epistemic_boundary": "PASS",
+    "checksum_creation": "PASS",
+    "artifact_upload": "BLOCKED_STORAGE_QUOTA",
+    "interpretation": "validation success is distinct from artifact transport failure"
+  },
   "decision": {
     "state": "READY_FOR_CI_AND_HUMAN_REVIEW",
     "claim_allowed": false,
@@ -56,6 +67,11 @@
       "id": "TOKEN_VAZIO_PHYSICAL_INDEPENDENT_RUNTIME",
       "reason": "The test execution was local to the construction environment and is not an independent physical reproduction.",
       "next_step": "Reproduce the exact commit in CI and, later, in a clean Termux or second environment."
+    },
+    {
+      "id": "TOKEN_VAZIO_GITHUB_ARTIFACT_QUOTA",
+      "reason": "GitHub Actions validation succeeded but artifact upload was blocked because repository artifact storage quota was exhausted.",
+      "next_step": "Retain local receipt verification as blocking, make transport quota-aware, and reattempt artifact persistence after quota recalculation or cleanup."
     }
   ],
   "invariant": "entropy_measured -> coherence_structured -> falsifiability -> feedback -> receipt"
