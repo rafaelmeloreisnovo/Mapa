@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/zipraf-static-layout-runtime.v2.schema.json",
+  "title": "RAFAELIA ZIPRAF Static Layout Runtime Evidence V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "observed_at",
+    "claim_allowed",
+    "source",
+    "invariant",
+    "manifest_identity",
+    "runtime_changes",
+    "gates",
+    "claims"
+  ],
+  "properties": {
+    "schema_version": {"const": "zipraf-static-layout-runtime.v2"},
+    "record_id": {"type": "string", "minLength": 1},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "claim_allowed": {"const": false},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "pull_request", "head_sha", "merge_sha"],
+      "properties": {
+        "repository": {"const": "rafaelmeloreisnovo/Vectras-VM-Android"},
+        "pull_request": {"const": 1075},
+        "head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "merge_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+      }
+    },
+    "invariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["equation", "base_policy", "fixed_offset_is_physical"],
+      "properties": {
+        "equation": {"const": "ADDRESS=ZIP_PAYLOAD_BASE+REGION_OFFSET+LOCAL_OFFSET"},
+        "base_policy": {"const": "BASE_RELATIVE"},
+        "fixed_offset_is_physical": {"const": false}
+      }
+    },
+    "manifest_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "byte_order", "value_hex", "c_kotlin_match", "cryptographic"],
+      "properties": {
+        "algorithm": {"const": "FNV1A64"},
+        "byte_order": {"const": "LITTLE_ENDIAN_FIELDS"},
+        "value_hex": {"const": "dc16075f7047df36"},
+        "c_kotlin_match": {"const": true},
+        "cryptographic": {"const": false}
+      }
+    },
+    "runtime_changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "whole_payload_map_on_open",
+        "bounded_l2_mapping_cache",
+        "mapping_reuse",
+        "caller_owned_crc_scratch",
+        "sha256_direct_bytebuffer",
+        "latency_percentiles"
+      ],
+      "properties": {
+        "whole_payload_map_on_open": {"const": false},
+        "bounded_l2_mapping_cache": {"const": true},
+        "mapping_reuse": {"const": true},
+        "caller_owned_crc_scratch": {"const": true},
+        "sha256_direct_bytebuffer": {"const": true},
+        "latency_percentiles": {
+          "type": "array",
+          "prefixItems": [{"const": "p50"}, {"const": "p95"}, {"const": "p99"}],
+          "items": false
+        }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host", "android"],
+      "properties": {
+        "host": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["run_id", "conclusion", "checks", "artifact_id", "artifact_sha256"],
+          "properties": {
+            "run_id": {"const": 30712981749},
+            "conclusion": {"const": "success"},
+            "checks": {"const": 31},
+            "artifact_id": {"const": 8822466423},
+            "artifact_sha256": {"const": "daaaedfef2363fd4c0d95c543c5c63a91752bb315f40f36f0683af4e8c6a8d03"}
+          }
+        },
+        "android": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "run_id", "blocker", "device_runtime"],
+          "properties": {
+            "state": {"const": "BLOCKED_EXTERNAL_BEFORE_COMPILE"},
+            "run_id": {"const": 30712981865},
+            "blocker": {"const": "qemu_rafaelia pinned commit 2346c30c2ba77881c2930add83523ea903b173fe not found on remote"},
+            "device_runtime": {"const": "TOKEN_VAZIO"}
+          }
+        }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "host_reference",
+        "android_compile",
+        "android_device",
+        "fixed_physical",
+        "zip64",
+        "real_payload_over_2gib",
+        "independent_reproduction"
+      ],
+      "properties": {
+        "host_reference": {"const": "VERIFIED_LIMITED"},
+        "android_compile": {"const": "BLOCKED_EXTERNAL"},
+        "android_device": {"const": "TOKEN_VAZIO"},
+        "fixed_physical": {"const": "REJECTED_BY_POLICY"},
+        "zip64": {"const": "TOKEN_VAZIO"},
+        "real_payload_over_2gib": {"const": "TOKEN_VAZIO"},
+        "independent_reproduction": {"const": "TOKEN_VAZIO"}
+      }
+    }
+  }
+}
