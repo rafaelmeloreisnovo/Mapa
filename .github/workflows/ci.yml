@@ -22,11 +22,49 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       - name: Install markdownlint
         run: npm install -g markdownlint-cli2
 
-      - name: Lint Markdown
+      - name: Lint changed Markdown — blocking regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            base_branch="${{ github.base_ref }}"
+            git fetch --no-tags origin \
+              "$base_branch:refs/remotes/origin/$base_branch"
+            base="origin/$base_branch"
+            range="$base...HEAD"
+          else
+            before="${{ github.event.before }}"
+            zero="0000000000000000000000000000000000000000"
+            if [ -z "$before" ] || [ "$before" = "$zero" ] || \
+               ! git cat-file -e "$before^{commit}" 2>/dev/null; then
+              base="HEAD^"
+            else
+              base="$before"
+            fi
+            range="$base..HEAD"
+          fi
+
+          mapfile -t markdown_files < <(
+            git diff --name-only --diff-filter=ACMR "$range" -- '*.md'
+          )
+
+          if [ "${#markdown_files[@]}" -eq 0 ]; then
+            echo "OK: no Markdown files changed in $range"
+            exit 0
+          fi
+
+          printf 'Markdown regression gate (%s):\n' "$range"
+          printf '  %s\n' "${markdown_files[@]}"
+          markdownlint-cli2 "${markdown_files[@]}"
+
+      - name: Historical Markdown debt report — non-blocking
+        continue-on-error: true
         run: markdownlint-cli2 "**/*.md" "#node_modules"
 
       - name: Check required root files
