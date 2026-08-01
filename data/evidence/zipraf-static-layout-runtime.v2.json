@@ -1,0 +1,56 @@
+{
+  "schema_version": "zipraf-static-layout-runtime.v2",
+  "record_id": "ZIPRAF-STATIC-LAYOUT-RUNTIME-20260801-V2",
+  "observed_at": "2026-08-01T18:41:30Z",
+  "claim_allowed": false,
+  "source": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "pull_request": 1075,
+    "head_sha": "4138a0bf2a190d5eacb000dd22ffb6106c9c62c0",
+    "merge_sha": "e83836f5227afeeab99f474991fea9502067973d"
+  },
+  "invariant": {
+    "equation": "ADDRESS=ZIP_PAYLOAD_BASE+REGION_OFFSET+LOCAL_OFFSET",
+    "base_policy": "BASE_RELATIVE",
+    "fixed_offset_is_physical": false
+  },
+  "manifest_identity": {
+    "algorithm": "FNV1A64",
+    "byte_order": "LITTLE_ENDIAN_FIELDS",
+    "value_hex": "dc16075f7047df36",
+    "c_kotlin_match": true,
+    "cryptographic": false
+  },
+  "runtime_changes": {
+    "whole_payload_map_on_open": false,
+    "bounded_l2_mapping_cache": true,
+    "mapping_reuse": true,
+    "caller_owned_crc_scratch": true,
+    "sha256_direct_bytebuffer": true,
+    "latency_percentiles": ["p50", "p95", "p99"]
+  },
+  "gates": {
+    "host": {
+      "run_id": 30712981749,
+      "conclusion": "success",
+      "checks": 31,
+      "artifact_id": 8822466423,
+      "artifact_sha256": "daaaedfef2363fd4c0d95c543c5c63a91752bb315f40f36f0683af4e8c6a8d03"
+    },
+    "android": {
+      "state": "BLOCKED_EXTERNAL_BEFORE_COMPILE",
+      "run_id": 30712981865,
+      "blocker": "qemu_rafaelia pinned commit 2346c30c2ba77881c2930add83523ea903b173fe not found on remote",
+      "device_runtime": "TOKEN_VAZIO"
+    }
+  },
+  "claims": {
+    "host_reference": "VERIFIED_LIMITED",
+    "android_compile": "BLOCKED_EXTERNAL",
+    "android_device": "TOKEN_VAZIO",
+    "fixed_physical": "REJECTED_BY_POLICY",
+    "zip64": "TOKEN_VAZIO",
+    "real_payload_over_2gib": "TOKEN_VAZIO",
+    "independent_reproduction": "TOKEN_VAZIO"
+  }
+}
