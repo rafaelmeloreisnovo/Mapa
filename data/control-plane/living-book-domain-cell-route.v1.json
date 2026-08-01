@@ -1,0 +1,120 @@
+{
+  "schema": "rafaelia.map.living-book-domain-route/v1",
+  "route_id": "MAP-LIVING-BOOK-DOMAIN-CELL-0001",
+  "observed_at": "2026-08-01T13:06:04-03:00",
+  "producer": {
+    "repository": "instituto-Rafael/LivroVivo_ThisBookLives",
+    "pull_request": 9,
+    "branch": "feature/living-book-domain-cell-v1-20260801",
+    "head_sha": "6e51364d43642cdd65d6d4d50d52c7124394b07a",
+    "state": "OPEN_DRAFT",
+    "mergeability": "TOKEN_VAZIO_RECHECK_REQUIRED"
+  },
+  "object": {
+    "cell_id": "LBC-MUSIC-0001",
+    "epistemic_state": "STRUCTURE_VALIDATED_LOCAL",
+    "claim_allowed": false,
+    "digests": {
+      "sha256": "c2dba442fb9efedb33b4ecc40b38d2f594b7bd0e343051be93087c26724fc9c7",
+      "sha3_256": "cfbc142cafba40b9e31bdcd4b0f4dbdd2ea3258ea3014c59e02ff8ab35a25b05",
+      "blake2b_256": "bbe51280f4a16110ef081bc155ee7c9b3bff5a1cb7d6772af8060262a7abf224"
+    }
+  },
+  "authority_matrix": [
+    {
+      "surface": "domain_seed_human_ai_mirrors",
+      "owner": "instituto-Rafael/LivroVivo_ThisBookLives",
+      "authority": "PRODUCER"
+    },
+    {
+      "surface": "semantic_map_relations_claim_boundary",
+      "owner": "rafaelmeloreisnovo/Mapa",
+      "authority": "CONTROL_AND_KNOWLEDGE_PLANE"
+    },
+    {
+      "surface": "procedure_ir_validation",
+      "owner": "rafaelmeloreisnovo/RafPolimata",
+      "authority": "COMPILER_AND_VALIDATOR"
+    },
+    {
+      "surface": "bundle_transport_diff_receipts",
+      "owner": "rafaelmeloreisnovo/RafGitTools",
+      "authority": "TRANSPORT_AND_EVIDENCE_BUS"
+    },
+    {
+      "surface": "android_termux_bounded_execution",
+      "owner": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "authority": "LOCAL_RUNTIME_AND_COCKPIT"
+    },
+    {
+      "surface": "private_sources_longitudinal_custody",
+      "owner": "Google Drive RAFAELIA",
+      "authority": "PRIVATE_CORPUS_AND_LONGITUDINAL_CUSTODY"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "name": "LOCAL_STRUCTURE",
+      "state": "PASS",
+      "evidence": "validator + 8/8 local adversarial tests"
+    },
+    {
+      "id": "G1",
+      "name": "PRODUCER_REVIEW_AND_MERGE",
+      "state": "TOKEN_VAZIO_HUMAN_REVIEW"
+    },
+    {
+      "id": "G2",
+      "name": "MAP_ROUTE",
+      "state": "MATERIALIZED_IN_THIS_BRANCH"
+    },
+    {
+      "id": "G3",
+      "name": "RAFPOLIMATA_PROCEDURE_ADAPTER",
+      "state": "TOKEN_VAZIO_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G4",
+      "name": "RAFGITTOOLS_BUNDLE_ADAPTER",
+      "state": "TOKEN_VAZIO_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "G5",
+      "name": "TERMUX_MENU_AND_RUNTIME_RECEIPT",
+      "state": "TOKEN_VAZIO_RUNTIME_NOT_EXECUTED"
+    },
+    {
+      "id": "G6",
+      "name": "INDEPENDENT_PRIVACY_AND_SECURITY_REVIEW",
+      "state": "TOKEN_VAZIO_INDEPENDENT_REVIEW"
+    }
+  ],
+  "audit_questions": [
+    "Quem possui autoridade final sobre o sentido deste domínio?",
+    "A fonte privada foi resumida sem publicar texto bruto?",
+    "A pessoa consegue usar o domínio sem conhecer matemática ou programação?",
+    "Cada saída auxiliar retorna à linguagem do domínio?",
+    "A aprovação humana está vinculada ao digest exato do objeto?",
+    "Existe prova de execução, ambiente, saída, rollback e receipt?",
+    "O que continua TOKEN_VAZIO e qual gate pode fechá-lo?"
+  ],
+  "privacy_security": {
+    "raw_private_text_present": false,
+    "credentials_present": false,
+    "public_export_default": "DENY",
+    "untrusted_execution": "FORBIDDEN",
+    "ai_self_approval": "FORBIDDEN"
+  },
+  "decision": {
+    "state": "ROUTED_NOT_PROMOTED",
+    "claim_allowed": false,
+    "automatic_merge": false,
+    "automatic_execution": false
+  },
+  "R3": {
+    "F_ok": "producer cell, mirrors, governance, privacy, digest and local structural proof routed",
+    "F_gap": "compiler, transport, Termux runtime and independent review",
+    "F_next": "implement one bounded procedure adapter in RafPolimata only after producer review"
+  }
+}
