@@ -1,6 +1,6 @@
 # Ω Static Address, Relocation and ZIPRAF Invariant V1
 
-Status: `CANONICAL_DRAFT`  
+Status: `CANONICAL_DRAFT / REFERENCE_GATE_PASS`  
 Data de observação: `2026-08-01`  
 Claim global: `claim_allowed=false`
 
@@ -34,7 +34,15 @@ Existem arenas bump, contratos `NoMalloc`, emissores ELF executáveis delimitado
 
 ### Vectras/RMR
 
-Existem pools estáticos, arena BSS, rollback por marca, ZIPRAF STORE validado, mapeamento por extent/janelas e uma nova implementação de referência `rmr_static_layout` para manifesto imutável, binding de base e resolução por offset.
+Existem pools estáticos, arena BSS, rollback por marca, ZIPRAF STORE validado, mapeamento por extent/janelas e a implementação de referência `rmr_static_layout` para manifesto imutável, binding de base e resolução por offset.
+
+A implementação foi integrada por squash na PR `Vectras-VM-Android#1074`, commit:
+
+```text
+8f54f929460c5f33ed5b1a7856460499b4439eef
+```
+
+O gate focal `RMR Static Layout Invariant` passou no head testado `c6af39cda44d838123b785b4d75d7ac0103b7cc5`, run `30697373545`. Falhas de workflows gerais não foram promovidas como evidência desta unidade delimitada.
 
 ### GAIA
 
@@ -191,14 +199,14 @@ Uma região `FAULT`, `ABSENT` ou `TOKEN_VAZIO` não pode ser resolvida como payl
 | Termux | `docs/APKC_EXECUTABLE_ELF_CONTRACT.md` | `VERIFIED_LIMITED` |
 | Vectras | `engine/rmr/include/rmr_vectra_os.h` | `SOURCE_PRESENT` |
 | Vectras | `app/.../ZiprafDirectRuntime.kt` | `SOURCE_AND_TESTS_PRESENT` |
-| Vectras | `engine/rmr/include/rmr_static_layout.h` | `PR_PENDING` |
-| Vectras | `engine/rmr/src/rmr_static_layout.c` | `PR_PENDING` |
+| Vectras | `engine/rmr/include/rmr_static_layout.h` | `VERIFIED_LIMITED @ 8f54f929` |
+| Vectras | `engine/rmr/src/rmr_static_layout.c` | `VERIFIED_LIMITED @ 8f54f929` |
 | GAIA | `native/rafaelia_omega_v32/README.md` | `VERIFIED_LIMITED` |
 | Mapa | `TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1.md` | `CANONICAL_DRAFT` |
 
 ## 11. Gates
 
-A camada federada deve rejeitar:
+A camada federada rejeita:
 
 - `FIXED_OFFSET` promovido como endereço físico;
 - `SYSTEM` promovido como pinning;
@@ -208,11 +216,22 @@ A camada federada deve rejeitar:
 - região `FAULT` exposta como válida;
 - `TOKEN_VAZIO` com `claim_allowed=true`.
 
+Evidência desta versão:
+
+```text
+Vectras focal run: 30697373545 = success
+Mapa focal run inicial: 30697464194 = success
+Mapa reconciliation: 30697464230 = success
+Mapa CI inicial: 30697464214 = success
+```
+
+As atualizações de reconciliação após o merge do Vectras exigem novo gate sobre o head final antes da integração desta PR.
+
 ## 12. Limites
 
 ```yaml
-relative_layout_reference: IMPLEMENTED_IN_VECTRAS_PR
-host_gate: PENDING
+relative_layout_reference: VERIFIED_LIMITED
+host_gate: PASS
 android_aslr_fixed_virtual: TOKEN_VAZIO
 physical_address_fixed: TOKEN_VAZIO
 zipraf_end_to_end_zero_copy: TOKEN_VAZIO
@@ -220,6 +239,8 @@ zipraf_zero_allocation_runtime: false_for_current_java_path
 independent_reproduction: TOKEN_VAZIO
 claim_allowed: false
 ```
+
+O `PASS` confirma o contrato C delimitado em host. Não confirma pinning físico, estabilidade virtual Android ou ausência global de cópias/alocações.
 
 ## R3
 
@@ -232,6 +253,6 @@ F_gap:
   prova física, ASLR, linker geral, ZIPRAF >2GiB e medição independente
 
 F_next:
-  gate CI → integrar manifesto ao ZIPRAF → medir mappings/page faults/cópias
+  integrar manifesto ao ZIPRAF → medir mappings/page faults/cópias
   → executar em Android e QEMU com receipts separados
 ```
