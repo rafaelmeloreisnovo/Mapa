@@ -1,0 +1,116 @@
+{
+  "schema": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260801T060244-0300",
+  "started_at": "2026-08-01T06:02:44-03:00",
+  "mode": "NON_DESTRUCTIVE_INCREMENTAL_APPEND_ONLY",
+  "claim_allowed": false,
+  "canonical_reference": {
+    "system": "GOOGLE_DRIVE",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT"
+  },
+  "previous_cycle": {
+    "cycle_id": "CAT-20260801T040341-0300",
+    "github_commit": "aa6dd6122c40eb2e2c4b1d0f9270ff09846194d3",
+    "checkpoint_path": "data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0403-0300.json"
+  },
+  "cut": {
+    "after": "2026-08-01T04:03:41-03:00",
+    "drive_filter_utc": "modifiedTime > 2026-08-01T07:03:41Z"
+  },
+  "observed_changes": [
+    {
+      "kind": "GITHUB_MEMORY_DOCUMENT",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "b20de20178255b96e372a08ebebbd3ebaf05719a",
+      "path": "docs/memorias/ai_mode/2026-08-01/RAFAELIA_AI_MODE_SHARED_LINK_MEMORY_V1.md",
+      "classification": "EVIDENCIADO"
+    },
+    {
+      "kind": "GITHUB_PROVENANCE_DOCUMENT",
+      "repository": "instituto-Rafael/relativity-living-light",
+      "commit": "8861990d35b46aed7c6231f04f9cee2b475d3606",
+      "path": "docs/provenance/external_inputs/2026-08-01/AI_MODE_SHARED_LINK_TOKEN_VAZIO_V1.md",
+      "classification": "EVIDENCIADO"
+    },
+    {
+      "kind": "GITHUB_ETHICAL_MEMORY_DOCUMENT",
+      "repository": "rafaelmeloreisnovo/CientiEspiritual",
+      "commit": "472e23166d777251e35837fff57762784d256ad7",
+      "classification": "EVIDENCIADO"
+    },
+    {
+      "kind": "DRIVE_MEMORY_COPY",
+      "file_id": "1Mo737ffjzOjOIgi7_cc--OCDOymMTNu-S8_-O9BOE9Q",
+      "title": "RAFAELIA_AI_MODE_MEMORY_V1_COPY_04_OF_05",
+      "parent_id": "1LTDF5lXI3J1vHxBl8IPXHzQtu0ZdgICi",
+      "classification": "EVIDENCIADO"
+    },
+    {
+      "kind": "DRIVE_TOKEN_VAZIO_LEDGER",
+      "file_id": "1Omr_IfuxHHhuTQVUrbcnjL7QlmxLeMfRZRX8E9JzNgw",
+      "title": "RAFAELIA_AI_MODE_TOKEN_VAZIO_LEDGER_V1_COPY_05_OF_05",
+      "parent_id": "1LTDF5lXI3J1vHxBl8IPXHzQtu0ZdgICi",
+      "classification": "EVIDENCIADO"
+    },
+    {
+      "kind": "DRIVE_FOLDER",
+      "file_id": "1LTDF5lXI3J1vHxBl8IPXHzQtu0ZdgICi",
+      "title": "RAFAELIA_AI_MODE_MEMORY_20260801",
+      "classification": "EVIDENCIADO"
+    }
+  ],
+  "incremental_result": {
+    "new_repositories": 0,
+    "modified_repositories": 3,
+    "new_drive_documents": 2,
+    "new_drive_folders": 1,
+    "new_datasets": 0,
+    "new_papers": 0,
+    "new_workflows": 0,
+    "new_code_artifacts": 0,
+    "new_receipts": 1,
+    "duplicate_records_written": 0
+  },
+  "claim_classification_delta": {
+    "PROVADO": 4,
+    "EVIDENCIADO": 6,
+    "HIPOTESE": 1,
+    "MODELO_ANALOGICO": 0,
+    "PARABOLA": 0,
+    "REFUTADO": 4,
+    "TOKEN_VAZIO": 3
+  },
+  "tokens_vazios": [
+    {
+      "token": "TOKEN_VAZIO_AI_MODE_CORPUS",
+      "reason": "O link compartilhado não expôs pergunta, resposta, fontes, imagens ou anexos em forma auditável.",
+      "next_gate": "Materializar RAW_TEXT, capturas completas, exportação ou URL publicamente legível; então atomizar claims e validar fontes primárias."
+    },
+    {
+      "token": "TOKEN_VAZIO_DRIVE_CONTENT_HASHES",
+      "reason": "A busca do Drive expôs metadados, mas não forneceu hash de conteúdo das duas cópias.",
+      "next_gate": "Exportar ou obter revisões/conteúdo das cópias e calcular hash com receipt."
+    }
+  ],
+  "writes": {
+    "github": [
+      "data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0602-0300.json",
+      "indices/catalog-runs/README.md"
+    ],
+    "drive": [],
+    "reason_no_drive_write": "As cópias 04/05 e 05/05 já existiam no delta; nova gravação seria duplicação."
+  },
+  "not_executed": [
+    "Nenhuma promoção científica",
+    "Nenhuma alteração em datasets, papers, workflows ou código",
+    "Nenhuma reconstrução imaginativa do conteúdo do AI Mode",
+    "Nenhuma duplicação das cópias existentes no Drive"
+  ],
+  "R3": {
+    "F_ok": "Delta posterior ao checkpoint identificado, catalogado e ligado por proveniência entre Mapa, RLL, CientiEspiritual e Drive.",
+    "F_gap": "Corpus do AI Mode e hashes de conteúdo das cópias Drive permanecem indisponíveis.",
+    "F_next": "Materializar o conteúdo compartilhado, gerar hashes/receipts e executar atomização e verificação das fontes sem promover claims antes do gate."
+  }
+}
