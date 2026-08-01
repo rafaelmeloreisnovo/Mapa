@@ -1,0 +1,33 @@
+name: ZIPRAF Content Page Graph
+
+on:
+  push:
+    paths:
+      - 'docs/ZIPRAF_CONTENT_PAGE_EXECUTION_GRAPH_V1.md'
+      - 'schemas/zipraf-content-page-graph.v1.schema.json'
+      - 'data/control-plane/zipraf-content-page-graph.v1.json'
+      - 'scripts/validate_zipraf_content_page_graph.py'
+      - 'tests/test_zipraf_content_page_graph.py'
+      - '.github/workflows/zipraf-content-page-graph.yml'
+  pull_request:
+    paths:
+      - 'docs/ZIPRAF_CONTENT_PAGE_EXECUTION_GRAPH_V1.md'
+      - 'schemas/zipraf-content-page-graph.v1.schema.json'
+      - 'data/control-plane/zipraf-content-page-graph.v1.json'
+      - 'scripts/validate_zipraf_content_page_graph.py'
+      - 'tests/test_zipraf_content_page_graph.py'
+      - '.github/workflows/zipraf-content-page-graph.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  zipraf-content-page-graph-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate canonical control plane
+        run: python3 scripts/validate_zipraf_content_page_graph.py
+      - name: Run adversarial tests
+        run: python3 -m unittest tests/test_zipraf_content_page_graph.py -v
