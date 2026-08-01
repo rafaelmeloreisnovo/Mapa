@@ -1,16 +1,31 @@
 {
   "schema_version": "zipraf-real-archive-binding.v2",
   "observed_at": "2026-08-01",
-  "status": "PR_OPEN_REMOTE_GATE_PENDING",
+  "status": "PRODUCER_REMOTE_GATE_PASS_PR_OPEN",
   "claim_allowed": false,
   "producer": {
     "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
     "pull_request": 1078,
     "branch": "main_01_zipraf-real-archive-v2",
-    "head_sha": "8c1dfb24735d17ea7efc74ea2c9a6cc85c6be447",
+    "head_sha": "53288cfd324011fc7a032269ddee75a7fdf6503f",
     "base_branch": "master",
     "merged": false,
-    "remote_gate": "PENDING"
+    "remote_gate": "PASS",
+    "remote_gate_name": "ZIPRAF Real Archive Binding",
+    "remote_gate_run": 30721583063,
+    "supporting_gates": {
+      "zipraf_static_layout_runtime": "PASS@30721583077",
+      "legal_provenance": "PASS@30721583090",
+      "audit_benchmark_contract": "PASS@30721583104"
+    },
+    "artifact_state": "STORAGE_QUOTA_BLOCKED_RECEIPT_VALIDATED_HASHED_IN_LOG"
+  },
+  "federation": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "lane": "main_05_evidencias",
+    "pull_request": 123,
+    "automatic_merge": false,
+    "superseded_pull_request": 122
   },
   "compatibility": {
     "envelope": "ZIP_CLASSIC",
@@ -38,6 +53,7 @@
   "host_kat": {
     "verification_count": 37,
     "local_result": "PASS",
+    "remote_result": "PASS",
     "covers": [
       "EOCD_CENTRAL_LOCAL_BOUNDS",
       "DATA_DESCRIPTOR_BINDING",
@@ -75,7 +91,7 @@
     "reject_encrypted_binding": true
   },
   "urgency": [
-    {"order": "U0", "path": "REAL_ZIP_PAYLOAD_SPANS", "state": "IMPLEMENTED_HOST", "next_gate": "REMOTE_KAT_GREEN"},
+    {"order": "U0", "path": "REAL_ZIP_PAYLOAD_SPANS", "state": "REMOTE_HOST_GATE_PASS", "next_gate": "HUMAN_REVIEW_NO_AUTO_MERGE"},
     {"order": "U1", "path": "PAYLOAD_SHA256_BLAKE3", "state": "INTERFACE_READY", "next_gate": "KNOWN_ANSWER_VECTORS"},
     {"order": "U2", "path": "REAL_ZIP_APK_CORPUS", "state": "TOKEN_VAZIO", "next_gate": "PER_ENTRY_RECEIPTS"},
     {"order": "U3", "path": "TERMUX_ANDROID_MMAP", "state": "TOKEN_VAZIO", "next_gate": "P50_P95_P99_AND_FAULTS"},
@@ -86,9 +102,9 @@
     {"order": "U8", "path": "LEDGER_MERKLE_AUTHORITY", "state": "TOKEN_VAZIO", "next_gate": "AUTHORITY_REPLICATION_POLICY"}
   ],
   "claims": {
-    "real_zip_parser": "HOST_REFERENCE",
-    "real_payload_binding": "HOST_KAT_PASS_LOCAL",
-    "host_mmap_store": "VERIFIED_LIMITED_LOCAL",
+    "real_zip_parser": "HOST_REFERENCE_REMOTE_GATE_PASS",
+    "real_payload_binding": "HOST_KAT_PASS_REMOTE",
+    "host_mmap_store": "VERIFIED_LIMITED_REMOTE",
     "compressed_zero_copy": false,
     "android_mmap": "TOKEN_VAZIO",
     "pe_elf_direct_execution": "TOKEN_VAZIO",
