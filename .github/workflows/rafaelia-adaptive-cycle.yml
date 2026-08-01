@@ -125,6 +125,24 @@ jobs:
           assert 1 <= len(index['latest_four']) <= 4
           PY
 
+      - name: Publish navigable receipt and index in run summary
+        run: |
+          {
+            echo "# RAFAELIA Adaptive Cycle"
+            echo
+            cat artifacts/rafaelia-index/microcycle_index.md
+            echo
+            echo "<details><summary>Receipt JSON completo do microciclo atual</summary>"
+            echo
+            echo '```json'
+            cat artifacts/rafaelia-cycle/cycle_receipt.json
+            echo '```'
+            echo
+            echo "</details>"
+            echo
+            echo "> O resumo do run é a superfície navegável primária. Artifact e cache têm retenção limitada."
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Prepare next immutable cache generation
         run: |
           rm -rf artifacts/index-cache
@@ -138,6 +156,8 @@ jobs:
           key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Upload cycle receipt with navigation copy
+        id: upload-cycle
+        continue-on-error: true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: rafaelia-adaptive-cycle-${{ github.run_id }}
@@ -148,9 +168,35 @@ jobs:
           retention-days: 30
 
       - name: Upload immutable append-only index
+        id: upload-index
+        if: steps.upload-cycle.outcome == 'success'
+        continue-on-error: true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: rafaelia-microcycle-index
           path: artifacts/rafaelia-index/
           if-no-files-found: error
           retention-days: 90
+
+      - name: Record optional artifact archival state
+        if: always()
+        env:
+          CYCLE_UPLOAD_OUTCOME: ${{ steps.upload-cycle.outcome }}
+          INDEX_UPLOAD_OUTCOME: ${{ steps.upload-index.outcome }}
+        run: |
+          if [ "$CYCLE_UPLOAD_OUTCOME" = "success" ] && [ "$INDEX_UPLOAD_OUTCOME" = "success" ]; then
+            state="AVAILABLE"
+          else
+            state="TOKEN_VAZIO_ARTIFACT_STORAGE_QUOTA_OR_UPLOAD"
+          fi
+          {
+            echo
+            echo "## Estado do arquivo opcional"
+            echo
+            echo "- cycle artifact: \`$CYCLE_UPLOAD_OUTCOME\`"
+            echo "- index artifact: \`$INDEX_UPLOAD_OUTCOME\`"
+            echo "- archival_state: \`$state\`"
+            echo "- claim_allowed: \`false\`"
+            echo
+            echo "A indisponibilidade do artifact não apaga o receipt já publicado no resumo nem a geração imutável usada para continuidade."
+          } >> "$GITHUB_STEP_SUMMARY"
