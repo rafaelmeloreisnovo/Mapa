@@ -1,0 +1,86 @@
+name: Branch Topology Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+      - "main_*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: branch-topology-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: branch-topology / validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Extract immutable event context
+        id: event
+        shell: bash
+        run: |
+          mkdir -p artifacts/branch-topology
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text())
+          repository = event.get("repository") or {}
+          pull_request = event.get("pull_request") or {}
+          base = pull_request.get("base") or {}
+          head = pull_request.get("head") or {}
+
+          body = pull_request.get("body") or ""
+          Path("artifacts/branch-topology/pr_body.txt").write_text(body, encoding="utf-8")
+
+          values = {
+              "default_branch": repository.get("default_branch", "main"),
+              "base_ref": (base.get("ref") or ""),
+              "head_ref": (head.get("ref") or ""),
+          }
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              for key, value in values.items():
+                  output.write(f"{key}={value}\n")
+          PY
+
+      - name: Contract tests
+        run: python -m unittest -v tests.test_branch_topology
+
+      - name: Validate manifest and event
+        run: |
+          python scripts/validate_branch_topology.py \
+            --default-branch "${{ steps.event.outputs.default_branch }}" \
+            --base-ref "${{ steps.event.outputs.base_ref }}" \
+            --head-ref "${{ steps.event.outputs.head_ref }}" \
+            --pr-body-file artifacts/branch-topology/pr_body.txt
+
+      - name: Emit audit summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Branch Topology Gate"
+            echo
+            echo "- Default branch: \`${{ steps.event.outputs.default_branch }}\`"
+            echo "- Base: \`${{ steps.event.outputs.base_ref }}\`"
+            echo "- Head: \`${{ steps.event.outputs.head_ref }}\`"
+            echo "- Automatic merge: disabled by contract"
+            echo "- Main rename: forbidden by contract"
+          } >> "$GITHUB_STEP_SUMMARY"
