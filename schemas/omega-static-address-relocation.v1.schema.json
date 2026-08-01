@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/omega-static-address-relocation.v1.schema.json",
+  "title": "RAFAELIA Omega Static Address Relocation V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "claim_allowed",
+    "address_model",
+    "reuse_contract",
+    "regions",
+    "sources",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "omega-static-address-relocation.v1"},
+    "record_id": {"type": "string", "minLength": 1},
+    "claim_allowed": {"const": false},
+    "address_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["equation", "offset_space", "virtual_space", "physical_space", "base_policy", "mapping_epoch"],
+      "properties": {
+        "equation": {"const": "ADDRESS=BASE+STABLE_OFFSET"},
+        "offset_space": {"enum": ["VERIFIED_LIMITED", "PARTIAL", "TOKEN_VAZIO"]},
+        "virtual_space": {"enum": ["VERIFIED_LIMITED", "PARTIAL", "TOKEN_VAZIO"]},
+        "physical_space": {"enum": ["VERIFIED_LIMITED", "PARTIAL", "TOKEN_VAZIO"]},
+        "base_policy": {"enum": ["BASE_RELATIVE", "FIXED_VIRTUAL", "FIXED_PHYSICAL", "TOKEN_VAZIO"]},
+        "mapping_epoch": {"type": "integer", "minimum": 0}
+      }
+    },
+    "reuse_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["offset_table", "absolute_pointer"],
+      "properties": {
+        "offset_table": {"const": "SAME_MANIFEST_SIGNATURE"},
+        "absolute_pointer": {"const": "SAME_MANIFEST_SIGNATURE_AND_BASE_AND_MAPPING_EPOCH"}
+      }
+    },
+    "regions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["region_id", "offset", "size", "alignment", "mobility", "semantic_state"],
+        "properties": {
+          "region_id": {"type": "integer", "minimum": 0},
+          "offset": {"type": "integer", "minimum": 0},
+          "size": {"type": "integer", "minimum": 0},
+          "alignment": {"type": "integer", "minimum": 1},
+          "mobility": {"enum": ["MOVABLE_BASE", "FIXED_OFFSET", "PINNED_RUNTIME", "REMAP_ONLY", "PHYSICAL_FIXED", "TOKEN_VAZIO"]},
+          "semantic_state": {"enum": ["ABSENT", "EMPTY", "PRESENT", "FAULT", "TOKEN_VAZIO"]}
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["repository", "path", "evidence_state"],
+        "properties": {
+          "repository": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "ref": {"type": "string"},
+          "evidence_state": {"enum": ["DOCUMENTED_ROADMAP", "SOURCE_PRESENT", "SOURCE_AND_TESTS_PRESENT", "VERIFIED_LIMITED", "PR_PENDING", "TOKEN_VAZIO"]}
+        }
+      }
+    },
+    "semantic_guards": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "system_attribute_is_pinning": {"const": false},
+        "fixed_offset_is_fixed_physical": {"const": false},
+        "fragmentation_free_arena_is_fragmentation_free_system": {"const": false}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation_state", "host_gate", "android_runtime", "physical_runtime", "independent_reproduction", "limitations"],
+      "properties": {
+        "implementation_state": {"enum": ["PARTIAL", "VERIFIED_LIMITED", "TOKEN_VAZIO"]},
+        "host_gate": {"enum": ["PASS", "FAIL", "PENDING", "TOKEN_VAZIO"]},
+        "android_runtime": {"enum": ["VERIFIED_LIMITED", "PENDING", "TOKEN_VAZIO"]},
+        "physical_runtime": {"enum": ["VERIFIED_LIMITED", "PENDING", "TOKEN_VAZIO"]},
+        "independent_reproduction": {"enum": ["VERIFIED_LIMITED", "PENDING", "TOKEN_VAZIO"]},
+        "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}
