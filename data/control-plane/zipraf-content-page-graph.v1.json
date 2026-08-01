@@ -1,0 +1,105 @@
+{
+  "schema_version": "zipraf-content-page-graph.v1",
+  "status": "CANONICAL_DRAFT",
+  "observed_at": "2026-08-01",
+  "claim_allowed": false,
+  "compatibility_shell": {
+    "format": "ZIP",
+    "authority": "PKWARE_APPNOTE_COMPATIBILITY_TARGET",
+    "authorial_storage_layer": "ZIPRAF_PAGE_GRAPH",
+    "direct_map_rule": "STORE_ALIGNED_IMMUTABLE_DIGEST_VERIFIED",
+    "compressed_entry_rule": "MATERIALIZE_BEFORE_LOGICAL_ACCESS"
+  },
+  "invariants": {
+    "content_identity": "digest_kind+digest+logical_size",
+    "address": "archive_base+entry_payload_offset+block_local_offset",
+    "unchanged_block_reuse": true,
+    "absolute_pointer_reuse_across_epoch": false,
+    "magic_grants_execution": false,
+    "hash_is_clock_measurement": false,
+    "system_attribute_is_pinning": false
+  },
+  "sources": [
+    {"repo": "rafaelmeloreisnovo/Vectras-VM-Android", "path": "engine/rmr/src/rmr_zipraf_core.c", "state": "SOURCE_PRESENT"},
+    {"repo": "rafaelmeloreisnovo/Vectras-VM-Android", "path": "engine/rmr/src/rmr_zipraf_page_graph.c", "state": "PR_1076_PENDING"},
+    {"repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "path": "rafaelia/src/main/cpp/rafaelia_bitraf_core.c", "state": "SOURCE_PRESENT"},
+    {"repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "path": "docs/RAFCODEPHI_ECC32_MASKED_PROOF.md", "state": "VERIFIED_LIMITED"},
+    {"repo": "rafaelmeloreisnovo/Mapa", "path": "indices/BITRAF_LOSS_VECTOR_MODEL_V1.md", "state": "CANONICAL_DRAFT"},
+    {"repo": "rafaelmeloreisnovo/Mapa", "path": "docs/OMEGA_STATIC_ADDRESS_RELOCATION_INVARIANT_V1.md", "state": "REFERENCE_GATE_PASS"},
+    {"repo": "rafaelmeloreisnovo/GAIA_phi", "path": "dados/mmap_nexus.c", "state": "SOURCE_PRESENT"}
+  ],
+  "blocks": [
+    {
+      "block_id": "B-CODE-0001",
+      "archive_offset": 4096,
+      "stored_size": 4096,
+      "logical_size": 4096,
+      "alignment": 4096,
+      "compression_method": "STORE",
+      "digest_kind": "SHA256",
+      "digest": "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20",
+      "immutable": true,
+      "direct_map_candidate": true,
+      "execution_candidate": true,
+      "platform_loader_authorized": false,
+      "magic_kind": "PE_MZ",
+      "redundancy": {
+        "profile": "ECC32_MASKED_OBSERVE",
+        "recovery_claim_ppm": 0,
+        "erasure_positions_known": false,
+        "external_proof": false
+      }
+    },
+    {
+      "block_id": "B-RESOURCE-0002",
+      "archive_offset": 8192,
+      "stored_size": 2048,
+      "logical_size": 4096,
+      "alignment": 512,
+      "compression_method": "DEFLATE",
+      "digest_kind": "BLAKE3",
+      "digest": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+      "immutable": true,
+      "direct_map_candidate": false,
+      "execution_candidate": false,
+      "platform_loader_authorized": false,
+      "magic_kind": "UNKNOWN",
+      "redundancy": {
+        "profile": "NONE",
+        "recovery_claim_ppm": 0,
+        "erasure_positions_known": false,
+        "external_proof": false
+      }
+    }
+  ],
+  "edges": [
+    {"module_id": "M-CLICK-X", "block_id": "B-CODE-0001", "offset": 0, "length": 1024, "access": ["READ", "EXEC_CANDIDATE"], "core_mask": 1, "phase": 0},
+    {"module_id": "M-CLICK-Z", "block_id": "B-CODE-0001", "offset": 1024, "length": 1024, "access": ["READ"], "core_mask": 2, "phase": 0},
+    {"module_id": "M-RESOURCE", "block_id": "B-RESOURCE-0002", "offset": 0, "length": 4096, "access": ["READ"], "core_mask": 4, "phase": 1}
+  ],
+  "dma_irq_policy": {
+    "lease_fields": ["transaction_id", "block_id", "owner_core_mask", "mapping_epoch", "dma_address", "length", "expires_tick", "state"],
+    "irq_accept_requires": ["IN_FLIGHT", "TRANSACTION_MATCH", "EPOCH_MATCH", "TTL_VALID"],
+    "remap_sequence": ["QUIESCE", "VERIFY", "REMAP", "EPOCH_INCREMENT", "RESUME"]
+  },
+  "scheduling": {
+    "model": "LOGICAL_DAG_PHASES",
+    "clock_harmonic_claim": "TOKEN_VAZIO",
+    "octa_core_runtime_evidence": "TOKEN_VAZIO",
+    "measurements_required": ["cycles", "instructions", "cache_misses", "page_faults", "copied_bytes", "p50", "p95", "p99"]
+  },
+  "ledger": {
+    "mode": "APPEND_ONLY_HASH_CHAIN",
+    "blockchain_consensus": "TOKEN_VAZIO",
+    "hash_scope": "CONTENT_AND_MANIFEST_IDENTITY_NOT_CLOCK"
+  },
+  "claims": {
+    "zip_compatibility": "SUPPORTED_BY_DESIGN",
+    "store_direct_map_reference": "HOST_REFERENCE_PENDING_REMOTE_GATE",
+    "compressed_zero_copy": false,
+    "pe_direct_execution": "TOKEN_VAZIO",
+    "dma_irq_hardware": "TOKEN_VAZIO",
+    "bitflip_35_45_recovery": "NOT_AUTHORIZED",
+    "multicore_harmonic_execution": "TOKEN_VAZIO"
+  }
+}
