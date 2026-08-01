@@ -9,13 +9,14 @@ navegáveis sem conceder permissão de escrita ao workflow.
 
 ```text
 receipt atual
-  + último index artifact da mesma branch
+  + último cache imutável da mesma branch
   → validação do receipt
   → validação do índice anterior
   → append de uma única entrada
   → cadeia previous_entry_sha256
   → novo microcycle_index.json/.md
-  → novo artifact imutável rafaelia-microcycle-index
+  → novo cache imutável por run
+  → novo artifact navegável rafaelia-microcycle-index
 ```
 
 ## Onde navegar
@@ -29,6 +30,19 @@ Em cada execução do workflow, o artifact `rafaelia-microcycle-index` contém:
 
 O artifact individual `rafaelia-adaptive-cycle-<run_id>` passa a carregar também
 uma cópia do índice vigente, mantendo receipt e navegação no mesmo pacote.
+
+## Transporte de continuidade
+
+A continuidade entre runs usa `actions/cache/restore` e `actions/cache/save`,
+fixados no commit da versão 4.2.0. Cada run usa uma chave nova:
+
+```text
+rafaelia-microcycle-index-<branch>-<run_id>
+```
+
+Caches existentes são imutáveis. O restore por prefixo recupera a geração mais
+recente visível à mesma branch; o run atual cria outra geração, nunca altera a
+anterior. O artifact continua sendo a superfície humana de navegação.
 
 ## Semântica append-only
 
@@ -62,17 +76,15 @@ Adulteração do índice ou quebra da cadeia também bloqueia.
 
 Estados válidos:
 
-- `FOUND_VERIFIED_TRANSPORT`: índice anterior recuperado do artifact mais
+- `FOUND_IMMUTABLE_CACHE`: índice anterior restaurado da geração imutável mais
   recente da mesma branch;
-- `TOKEN_VAZIO_NO_PREVIOUS_INDEX`: primeiro ciclo observável daquela branch,
-  iniciando um novo segmento;
-- `BLOCKED_PREVIOUS_INDEX_RETRIEVAL`: havia necessidade de recuperar o índice,
-  mas API, autorização, transporte ou ZIP falhou; não é permitido reiniciar a
-  cadeia silenciosamente.
+- `TOKEN_VAZIO_NO_PREVIOUS_INDEX`: primeiro ciclo observável daquela branch ou
+  cache anterior já indisponível, iniciando um novo segmento explicitamente.
 
-Artifacts possuem retenção limitada. Logo:
+Cache e artifact possuem retenção/evicção limitada. Logo:
 
 ```text
+cache append-only != arquivo permanente
 artifact append-only != arquivo permanente
 ```
 
@@ -84,7 +96,6 @@ canônico, sempre por PR revisável e nunca por commit automático do cron.
 ```yaml
 permissions:
   contents: read
-  actions: read
 claim_allowed: false
 automatic_mutation: false
 automatic_merge: false
