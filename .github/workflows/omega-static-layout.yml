@@ -1,0 +1,41 @@
+name: Omega Static Address Control Plane
+
+on:
+  push:
+    paths:
+      - 'docs/OMEGA_STATIC_ADDRESS_RELOCATION_INVARIANT_V1.md'
+      - 'schemas/omega-static-address-relocation.v1.schema.json'
+      - 'data/control-plane/omega-static-address-relocation.v1.json'
+      - 'scripts/validate_omega_static_layout.py'
+      - 'tests/test_omega_static_layout.py'
+      - '.github/workflows/omega-static-layout.yml'
+  pull_request:
+    paths:
+      - 'docs/OMEGA_STATIC_ADDRESS_RELOCATION_INVARIANT_V1.md'
+      - 'schemas/omega-static-address-relocation.v1.schema.json'
+      - 'data/control-plane/omega-static-address-relocation.v1.json'
+      - 'scripts/validate_omega_static_layout.py'
+      - 'tests/test_omega_static_layout.py'
+      - '.github/workflows/omega-static-layout.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile validator
+        run: python3 -m py_compile scripts/validate_omega_static_layout.py tests/test_omega_static_layout.py
+      - name: Validate canonical record
+        run: python3 scripts/validate_omega_static_layout.py --write-report artifacts/omega-static-layout-report.json
+      - name: Run adversarial tests
+        run: python3 -m unittest -v tests/test_omega_static_layout.py
+      - name: Upload deterministic report
+        uses: actions/upload-artifact@v4
+        with:
+          name: omega-static-layout-report
+          path: artifacts/omega-static-layout-report.json
+          if-no-files-found: error
