@@ -1,0 +1,78 @@
+{
+  "schema_version": "zipraf-payload-digest-u1.v1",
+  "observed_at": "2026-08-01",
+  "status": "REMOTE_KAT_PASS_PR_OPEN",
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "pull_request": 1078,
+    "branch": "main_01_zipraf-real-archive-v2",
+    "head_sha": "7183b770f8a484868f16d6cbee38677081adffee",
+    "merged": false,
+    "gate_name": "ZIPRAF Payload Digest U1",
+    "gate_run": 30721856193,
+    "gate_result": "PASS"
+  },
+  "providers": {
+    "sha256": {
+      "implementation": "RMR_PORTABLE_C",
+      "digest_bytes": 32,
+      "known_answer_vectors": ["EMPTY", "ABC"]
+    },
+    "blake3": {
+      "repository": "rafaelmeloreisnovo/BLAKE3",
+      "commit": "ff6991d8b13f5b4b16dc311b5acc9c63ae835152",
+      "c_api_version": "1.8.2",
+      "backend": "PORTABLE_C_SIMD_DISABLED",
+      "digest_bytes": 32,
+      "known_answer_vectors": ["EMPTY", "ABC"]
+    }
+  },
+  "digest_scopes": {
+    "STORED_BYTES": "EXACT_ARCHIVE_PAYLOAD_SPAN",
+    "LOGICAL_BYTES_STORE": "STORED_EQUALS_LOGICAL",
+    "LOGICAL_BYTES_DEFLATE": "MATERIALIZATION_REQUIRED"
+  },
+  "receipt": {
+    "gate": "ZIPRAF_PAYLOAD_DIGEST_U1_V1",
+    "status": "PASS",
+    "checks": 17,
+    "sha256": "5c02f528713539e33d0cfabf6c99fa6d03b619c16d645b6c3ef099b0c93b2cb4",
+    "scope": "STORED_BYTES_AND_STORE_LOGICAL_BYTES_NO_DEFLATE_MATERIALIZATION",
+    "artifact_storage": "QUOTA_BLOCKED_RECEIPT_VALIDATED_HASHED_IN_LOG"
+  },
+  "promotion_invariants": {
+    "crc32_is_cryptographic_identity": false,
+    "stored_digest_equals_deflate_logical_digest": false,
+    "digest_grants_execution": false,
+    "digest_grants_dma": false,
+    "digest_proves_authorship": false,
+    "digest_is_signature": false,
+    "digest_is_clock_measurement": false,
+    "unpinned_provider_is_authorized": false
+  },
+  "formula_ci_repair": {
+    "state": "PASS",
+    "run": 30721856200,
+    "canonical_source": "engine/model.py",
+    "compatibility_bridge": "formula_ci/model.py",
+    "formula_logic_duplicated": false,
+    "scientific_claim": false
+  },
+  "next_dependency": {
+    "order": "U2",
+    "path": "REAL_ZIP_APK_CORPUS",
+    "state": "TOKEN_VAZIO",
+    "required_output": "PER_ENTRY_DIGEST_RECEIPTS_AND_REJECTION_REPORT"
+  },
+  "claims": {
+    "sha256_payload_stored": "REMOTE_KAT_PASS",
+    "sha256_payload_store_logical": "REMOTE_KAT_PASS",
+    "blake3_payload_stored": "REMOTE_KAT_PASS_PINNED_PROVIDER",
+    "blake3_payload_store_logical": "REMOTE_KAT_PASS_PINNED_PROVIDER",
+    "deflate_logical_digest": "MATERIALIZATION_REQUIRED",
+    "signature_or_authorship": "NOT_PROVIDED_BY_DIGEST",
+    "android_runtime": "TOKEN_VAZIO",
+    "claim_allowed": false
+  }
+}
