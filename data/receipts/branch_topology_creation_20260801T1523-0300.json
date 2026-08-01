@@ -1,0 +1,46 @@
+{
+  "schema_version": "rafaelia.branch-topology-receipt.v1",
+  "cycle_id": "BRANCH-TOPOLOGY-20260801T1523-0300",
+  "observed_at": "2026-08-01T15:23:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "default_branch_observed": "main",
+  "base_commit_observed": "d05a6bad499e747eb89733a151b1a425fa720155",
+  "execution": "NON_DESTRUCTIVE_BRANCH_CREATION",
+  "created_branches": [
+    "main_00_governanca",
+    "main_01_intake_fontes",
+    "main_02_normalizacao",
+    "main_03_modelagem_semantica",
+    "main_04_validacao",
+    "main_05_evidencias",
+    "main_06_integracao",
+    "main_07_seguranca_conformidade",
+    "main_08_observabilidade_release",
+    "main_09_memoria_arquivo"
+  ],
+  "verification": {
+    "expected_count": 10,
+    "observed_count": 10,
+    "all_expected_names_observed": true,
+    "default_branch_changed": false,
+    "main_content_mutated": false
+  },
+  "decision": {
+    "state": "BRANCH_LANES_CREATED_PENDING_GOVERNANCE_PR",
+    "claim_allowed": false,
+    "automatic_merge": false,
+    "human_authorization_required_for_main": true
+  },
+  "token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_RULESETS_NOT_APPLIED_20260801T1523",
+      "reason": "Branch creation does not prove that GitHub rulesets or branch protections were applied.",
+      "next_verifiable_step": "Apply rulesets to main and main_[0-9][0-9]_* and verify observable enforcement."
+    },
+    {
+      "id": "TOKEN_VAZIO_CI_NOT_EXECUTED_20260801T1523",
+      "reason": "The topology workflow is proposed on a review branch and has not yet executed from main.",
+      "next_verifiable_step": "Review the architecture PR, observe workflow checks, and merge only with explicit authorization."
+    }
+  ]
+}
