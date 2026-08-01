@@ -70,8 +70,10 @@ jobs:
         run: |
           cd build/live-control-plane
           sha256sum report.json > SHA256SUMS
+          cat SHA256SUMS
 
       - name: Upload bounded evidence
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: live-control-plane-validation
