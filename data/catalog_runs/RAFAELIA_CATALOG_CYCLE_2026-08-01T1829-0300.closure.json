@@ -1,0 +1,73 @@
+{
+  "schema": "rafaelia.catalog-closure.v1",
+  "closure_id": "CLOSE-CAT-20260801T182900-0300-MYCAT-001",
+  "cycle_id": "CAT-20260801T182900-0300-MYCAT",
+  "closed_at": "2026-08-01T18:38:48-03:00",
+  "mode": "APPEND_ONLY_CORRECTION",
+  "claim_allowed": false,
+  "supersedes_operational_states_only": [
+    "TOKEN_VAZIO_FORK_PR_MERGE",
+    "TOKEN_VAZIO_CONNECTOR_SAFETY_BLOCK"
+  ],
+  "resolved": {
+    "fork_pull_request": {
+      "repository": "rafaelmeloreisnovo/myCat-iahelpsus",
+      "number": 1,
+      "head_commit": "71c1feca2e5b4a2e951e4a2d895d5079f683d036",
+      "merge_commit": "a638e035f0487004936d1c1e06dba22190c20da4",
+      "state": "MERGED"
+    },
+    "mapa_pull_request": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "number": 118,
+      "head_commit": "b3a42042daf97f407d7d82b7e869995ecb802d4a",
+      "merge_commit": "157b7627ffc6604fd2046c9f757d9c3f1a0317ee",
+      "state": "MERGED"
+    }
+  },
+  "post_application_relation": {
+    "status": "diverged",
+    "ahead_by": 6,
+    "behind_by": 179,
+    "merge_base_commit": "e9fba63be25bfd61cf0518016fd63e5a4b4ad964",
+    "upstream_head_commit": "5d9a79c6ab3dcced021d57dd04a1e08445ebf871",
+    "fork_head_commit": "a638e035f0487004936d1c1e06dba22190c20da4",
+    "local_only_files": [
+      ".github/workflows/provenance-audit.yml",
+      "PROVENANCE.md",
+      "docs/UPSTREAM_PROVENANCE_AUDIT_2026-08-01.md",
+      "provenance/upstream_snapshot_2026-08-01.json",
+      "scripts/verify_provenance_snapshot.py"
+    ]
+  },
+  "invariants": {
+    "merge_base_preserved": true,
+    "automatic_upstream_sync": false,
+    "upstream_code_ingested": false,
+    "claims_reclassified": false,
+    "identity_accusation_added": false,
+    "history_rewritten": false
+  },
+  "unresolved": [
+    {
+      "token": "TOKEN_VAZIO_FORK_ACTIONS_EXECUTION",
+      "reason": "Nenhum status de Actions foi retornado pelos endpoints consultados para o merge commit.",
+      "next_gate": "Confirmar a execução do workflow Provenance Audit pela interface do repositório ou por run ID observável."
+    },
+    {
+      "token": "TOKEN_VAZIO_ACCOUNT_AUTONOMY",
+      "reason": "Os merges não alteram a ausência de prova sobre autonomia integral da conta upstream.",
+      "next_gate": "Manter a classificação TOKEN_VAZIO até evidência inequívoca."
+    },
+    {
+      "token": "TOKEN_VAZIO_FOLLOW_TIMELINE",
+      "reason": "Os merges não produzem histórico completo de follow/unfollow.",
+      "next_gate": "Preservar somente snapshots públicos legítimos e datados."
+    }
+  ],
+  "R3": {
+    "F_ok": "PR #1 do fork e PR #118 do Mapa foram mesclados; o merge-base permaneceu intacto e nenhum código upstream foi ingerido.",
+    "F_gap": "A execução do workflow ainda não possui status observável; claims de autonomia e follow permanecem TOKEN_VAZIO.",
+    "F_next": "Observar a primeira execução do Provenance Audit e emitir novo closure somente se houver run ID e conclusão verificáveis."
+  }
+}
