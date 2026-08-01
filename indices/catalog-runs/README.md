@@ -21,6 +21,8 @@ Este diretório contém checkpoints incrementais e não destrutivos da indexaç�
 | `2026-08-01T08:02-03:00` | `TOF namespace/allocation/fault delta` | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T0802-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0802-0300.json) | — | embedded bounded classification | `EXECUTED / TOKEN_VAZIO_CI` |
 | `2026-08-01T08:51-03:00` | `Ω static layout / relocation / ZIPRAF delta` | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T0851-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0851-0300.json) | — | embedded bounded classification | `EXECUTED / TOKEN_VAZIO_CI_AND_PHYSICAL` |
 | `2026-08-01T09:08-03:00` | [`RAFAELIA_CONVERGENCIA_MULTIFILAMENTO_OMEGA_V1.md`](../../docs/canonicos/RAFAELIA_CONVERGENCIA_MULTIFILAMENTO_OMEGA_V1.md) | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T0908-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0908-0300.json) | semantic registry embedded | bounded classification | `EXECUTED / TOKEN_VAZIO_RUNTIME_AND_FAILOVER` |
+| `2026-08-01T09:25-03:00` | `RafPolimata → Vectras runtime handoff topology` | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T0925-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0925-0300.json) | — | bounded classification | `EXECUTED / TOKEN_VAZIO_RUNTIME` |
+| `2026-08-01T10:04-03:00` | `CFE + MTRE revision and draft-PR delta` | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T1004-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T1004-0300.json) | — | embedded bounded classification | `EXECUTED / TOKEN_VAZIO_BENCHMARK_AND_REPLICATION` |
 
 ## Consolidação
 
