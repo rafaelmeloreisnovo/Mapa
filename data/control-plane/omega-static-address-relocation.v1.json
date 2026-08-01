@@ -1,0 +1,133 @@
+{
+  "schema_version": "omega-static-address-relocation.v1",
+  "record_id": "OMEGA-STATIC-ADDRESS-20260801-V1",
+  "claim_allowed": false,
+  "address_model": {
+    "equation": "ADDRESS=BASE+STABLE_OFFSET",
+    "offset_space": "VERIFIED_LIMITED",
+    "virtual_space": "PARTIAL",
+    "physical_space": "TOKEN_VAZIO",
+    "base_policy": "BASE_RELATIVE",
+    "mapping_epoch": 1
+  },
+  "reuse_contract": {
+    "offset_table": "SAME_MANIFEST_SIGNATURE",
+    "absolute_pointer": "SAME_MANIFEST_SIGNATURE_AND_BASE_AND_MAPPING_EPOCH"
+  },
+  "regions": [
+    {
+      "region_id": 1,
+      "offset": 0,
+      "size": 512,
+      "alignment": 64,
+      "mobility": "FIXED_OFFSET",
+      "semantic_state": "PRESENT"
+    },
+    {
+      "region_id": 2,
+      "offset": 512,
+      "size": 1024,
+      "alignment": 64,
+      "mobility": "MOVABLE_BASE",
+      "semantic_state": "PRESENT"
+    },
+    {
+      "region_id": 3,
+      "offset": 1536,
+      "size": 0,
+      "alignment": 64,
+      "mobility": "FIXED_OFFSET",
+      "semantic_state": "EMPTY"
+    },
+    {
+      "region_id": 4,
+      "offset": 2048,
+      "size": 512,
+      "alignment": 256,
+      "mobility": "REMAP_ONLY",
+      "semantic_state": "PRESENT"
+    }
+  ],
+  "sources": [
+    {
+      "repository": "rafaelmeloreisnovo/PCR_Rafaelia_Code_seed",
+      "path": "BAREMETAL_ARCHITECTURE_ANALYSIS.md",
+      "ref": "master",
+      "evidence_state": "DOCUMENTED_ROADMAP"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "path": "bootstrap_rafaelia/raf_arena.h",
+      "ref": "master",
+      "evidence_state": "SOURCE_PRESENT"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "path": "app/src/main/cpp/lowlevel/baremetal_nomalloc.h",
+      "ref": "master",
+      "evidence_state": "SOURCE_PRESENT"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "path": "docs/APKC_EXECUTABLE_ELF_CONTRACT.md",
+      "ref": "master",
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "path": "engine/rmr/include/rmr_vectra_os.h",
+      "ref": "master",
+      "evidence_state": "SOURCE_PRESENT"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "path": "app/src/main/java/com/vectras/vm/vectra/ZiprafDirectRuntime.kt",
+      "ref": "master",
+      "evidence_state": "SOURCE_AND_TESTS_PRESENT"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "path": "engine/rmr/include/rmr_static_layout.h",
+      "ref": "master@8f54f929460c5f33ed5b1a7856460499b4439eef",
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "path": "engine/rmr/src/rmr_static_layout.c",
+      "ref": "master@8f54f929460c5f33ed5b1a7856460499b4439eef",
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/GAIA_phi",
+      "path": "native/rafaelia_omega_v32/README.md",
+      "ref": "main",
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "docs/TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1.md",
+      "ref": "main",
+      "evidence_state": "VERIFIED_LIMITED"
+    }
+  ],
+  "semantic_guards": {
+    "system_attribute_is_pinning": false,
+    "fixed_offset_is_fixed_physical": false,
+    "fragmentation_free_arena_is_fragmentation_free_system": false
+  },
+  "claim_boundary": {
+    "implementation_state": "VERIFIED_LIMITED",
+    "host_gate": "PASS",
+    "android_runtime": "TOKEN_VAZIO",
+    "physical_runtime": "TOKEN_VAZIO",
+    "independent_reproduction": "TOKEN_VAZIO",
+    "limitations": [
+      "Android ASLR and virtual-base stability have not been demonstrated",
+      "Physical-address stability has not been demonstrated",
+      "The current Java ZIPRAF CRC path allocates a ByteBuffer",
+      "The current ZIPRAF mapping path retains declared size and mapping limits",
+      "A fragmentation-free arena does not prove a fragmentation-free filesystem or device",
+      "The passing host gate proves the delimited C reference contract, not Android or physical-address stability"
+    ]
+  }
+}
