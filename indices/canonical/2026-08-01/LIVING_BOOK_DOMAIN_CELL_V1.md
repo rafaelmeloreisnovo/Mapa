@@ -2,9 +2,9 @@
 
 ## Objeto observado
 
-O repositório produtor `instituto-Rafael/LivroVivo_ThisBookLives` abriu o PR draft **#9** com a primeira célula de domínio operacional: `LBC-MUSIC-0001`.
+O `instituto-Rafael/LivroVivo_ThisBookLives` PR draft **#9** produz a primeira célula de domínio operacional: `LBC-MUSIC-0001`.
 
-A célula não obriga o participante musical a aprender programação ou matemática. Esses conhecimentos entram como módulos paralelos de apoio e devem traduzir suas saídas novamente para a linguagem da música.
+A pessoa entra pela música. Matemática, código, IA e segurança são módulos paralelos de apoio e precisam devolver sua saída na linguagem musical, sem exigir conhecimento técnico do usuário.
 
 ```text
 semente humana
@@ -19,7 +19,7 @@ semente humana
 
 ## Denominador comum
 
-O denominador não é “todo mundo saber tudo”. É todo módulo declarar o mesmo contrato mínimo:
+O denominador não é “todo mundo saber tudo”. É cada módulo declarar:
 
 ```text
 origem
@@ -37,54 +37,87 @@ receipt
 retorno
 ```
 
-Assim, músico, agricultor, advogado, programador ou pesquisador podem usar interfaces próprias enquanto a infraestrutura preserva governança e prova.
+Assim, músico, agricultor, advogado, artesão, programador ou pesquisador podem usar interfaces próprias enquanto a infraestrutura preserva governança e prova.
 
 ## Espelhos humano e IA
 
 ```text
 espelho humano
-= sentido + consentimento + correção + autoridade final
+= sentido + consentimento + correção + revogação + autoridade final
 
 espelho IA
-= organização + relação + tradução + proposta + marcação de lacuna
+= organização + relação + tradução + proposta + TOKEN_VAZIO
 ```
 
-A IA não pode aprovar a própria saída, publicar, promover claim, revelar conteúdo privado ou executar entrada não confiável.
+A IA não pode aprovar a própria saída, publicar, promover claim, revelar conteúdo privado, executar entrada não confiável ou sobrescrever a semente.
 
-## Autoridades federadas
+## Cadeia federada materializada
 
-| Superfície | Autoridade |
-|---|---|
-| Domínio, semente e narrativa | `LivroVivo_ThisBookLives` |
-| Índice, relações e fronteira de claim | `Mapa` |
-| Compilação de procedimento e validação | `RafPolimata` |
-| Transporte, bundles, diff e receipts | `RafGitTools` |
-| Menu Android e execução Termux limitada | `termux-app-rafacodephi` |
-| Fontes privadas e memória longitudinal | Google Drive RAFAELIA |
+| Corpo | PR | Estado | Função | Prova local delimitada |
+|---|---:|---|---|---|
+| `LivroVivo_ThisBookLives` | #9 | draft, mergeável | domínio, semente, espelhos e ledger | 8/8 em fonte equivalente |
+| `Mapa` | #108 | draft | autoridade, relações, gates e índice | rota materializada |
+| `RafPolimata` | #193 | draft, mergeável | compilar IR não executável | 8/8 em fonte equivalente |
+| `RafGitTools` | #320 | draft, mergeável | bundle descriptor-only | 9/9 em fonte equivalente |
+| `termux-app-rafacodephi` | #316 | draft, mergeável | cockpit inspect-only | 9/9 em fonte equivalente |
+| Google Drive RAFAELIA | evento longitudinal | append-only | fontes privadas e memória | evento localizado na revisão |
 
-Nenhum repositório deve copiar o núcleo dos outros. Cada um mantém um adaptador pequeno e um ponteiro para a autoridade correta.
+Nenhum repositório copia o núcleo dos outros. Cada um mantém adaptador pequeno e ponteiro para sua autoridade.
 
-## Gates observados
+## Fluxo alcançado
+
+```text
+texto-semente resumido
+→ célula de domínio
+→ espelhos humano/IA
+→ mapa de autoridade
+→ IR não executável
+→ bundle descriptor-only
+→ cockpit Termux inspect-only
+→ template de receipt
+```
+
+Ainda não ocorreu:
+
+```text
+merge
+checkout exato testado
+aprovação humana por digest
+UI Android ligada
+bundle despachado
+execução física Termux
+publicação
+revisão independente de privacidade
+```
+
+## Gates
 
 | Gate | Estado |
 |---|---|
-| Estrutura local | `PASS` — validador e 8/8 testes |
-| Revisão do produtor | `TOKEN_VAZIO_HUMAN_REVIEW` |
-| Rota no Mapa | materializada nesta branch |
-| Adaptador RafPolimata | `TOKEN_VAZIO_NOT_IMPLEMENTED` |
-| Adaptador RafGitTools | `TOKEN_VAZIO_NOT_IMPLEMENTED` |
-| Menu/receipt Termux | `TOKEN_VAZIO_RUNTIME_NOT_EXECUTED` |
-| Revisão independente de privacidade | `TOKEN_VAZIO_INDEPENDENT_REVIEW` |
+| G0 — estrutura produtora | `PASS_EQUIVALENT_SOURCE` |
+| G1 — revisão humana dos drafts | `TOKEN_VAZIO_HUMAN_REVIEW` |
+| G2 — rota no Mapa | `MATERIALIZED_DRAFT` |
+| G3 — IR RafPolimata | `MATERIALIZED_DRAFT_8_OF_8` |
+| G4 — bundle RafGitTools | `MATERIALIZED_DRAFT_9_OF_9` |
+| G5 — cockpit Termux | `MATERIALIZED_DRAFT_9_OF_9` |
+| G5b — UI Android | `TOKEN_VAZIO_NOT_IMPLEMENTED` |
+| G5c — execução física | `TOKEN_VAZIO_NOT_EXECUTED` |
+| G6 — revisão independente | `TOKEN_VAZIO_INDEPENDENT_REVIEW` |
 
-## Perguntas obrigatórias de auditoria
+## Segurança e privacidade
 
-1. Quem possui autoridade final sobre o sentido do domínio?
-2. A fonte privada foi resumida sem publicação do texto bruto?
-3. A pessoa consegue operar sem linguagem técnica auxiliar?
-4. O módulo auxiliar devolveu a saída na linguagem do domínio?
-5. A aprovação humana aponta para o digest exato?
-6. A ação possui ambiente, procedimento, testes, saída, rollback e receipt?
-7. Qual `TOKEN_VAZIO` continua aberto e qual gate pode fechá-lo?
+```text
+raw_private_text_present=false
+transport_mode=DESCRIPTOR_ONLY
+public_export_default=DENY
+credentials_and_secrets=FORBIDDEN
+untrusted_execution=FORBIDDEN
+AI_self_approval=FORBIDDEN
+dispatch=BLOCKED
+execution=BLOCKED
+publication=BLOCKED
+claim=BLOCKED
+```
 
 ## Digest do objeto musical
 
@@ -94,39 +127,30 @@ SHA3-256     cfbc142cafba40b9e31bdcd4b0f4dbdd2ea3258ea3014c59e02ff8ab35a25b05
 BLAKE2b-256  bbe51280f4a16110ef081bc155ee7c9b3bff5a1cb7d6772af8060262a7abf224
 ```
 
-Os hashes demonstram identidade do payload canônico; não demonstram verdade musical, execução Android nem eficácia da IA.
+Os hashes demonstram identidade e alteração do payload canônico. Não demonstram verdade musical, consentimento, execução ou eficácia da IA.
 
-## Próximo passo com menor risco
+## Perguntas obrigatórias de auditoria
 
-O próximo adaptador coerente pertence ao `RafPolimata`, mas só deve compilar um **procedimento limitado**, sem transportar fontes privadas e sem executar nada. A saída esperada é uma IR de trabalho contendo:
+1. Quem possui autoridade final sobre o sentido do domínio?
+2. A fonte privada foi resumida sem publicar texto bruto?
+3. A pessoa consegue operar sem programação ou matemática?
+4. O módulo auxiliar devolveu a saída na linguagem do domínio?
+5. A aprovação humana aponta para o digest exato?
+6. A ação possui ambiente, procedimento, saída, rollback e receipt?
+7. Qual `TOKEN_VAZIO` continua aberto e qual gate pode fechá-lo?
 
-```text
-intent_id
-cell_id
-module_id
-action
-inputs por digest
-capabilities requeridas
-policy gates
-human approval requirement
-expected receipt
-rollback
-```
-
-Depois disso, o `RafGitTools` poderá transportar o bundle e o Termux poderá materializá-lo apenas após autorização vinculada ao hash.
-
-## Estado
+## Estado final desta fatia
 
 ```text
+state=END_TO_END_DRAFT_CHAIN_MATERIALIZED_NOT_EXECUTED
 claim_allowed=false
-automatic_execution=false
 automatic_merge=false
-raw_private_text_present=false
-state=ROUTED_NOT_PROMOTED
+automatic_dispatch=false
+automatic_execution=false
 ```
 
 ### R₃
 
-- **F_ok:** célula produtora e matriz de autoridade possuem artefatos concretos.
-- **F_gap:** compilador, transporte, runtime físico e revisão independente.
-- **F_next:** um adaptador RafPolimata limitado, somente após revisão do PR produtor.
+- **F_ok:** produtor, mapa, IR, bundle, cockpit e custódia foram materializados.
+- **F_gap:** testes dos checkouts exatos, revisão humana, UI Android, execução física e auditoria independente.
+- **F_next:** revisar os cinco drafts e executar validadores nos checkouts exatos antes de qualquer merge.
