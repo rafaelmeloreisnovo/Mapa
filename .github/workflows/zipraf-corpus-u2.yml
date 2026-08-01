@@ -1,0 +1,31 @@
+name: ZIPRAF Corpus U2 Federation
+
+on:
+  push:
+    paths:
+      - 'data/control-plane/zipraf-corpus-u2.v1.json'
+      - 'scripts/validate_zipraf_corpus_u2.py'
+      - 'tests/test_zipraf_corpus_u2.py'
+      - 'docs/ZIPRAF_CORPUS_U2_FEDERATION.md'
+      - '.github/workflows/zipraf-corpus-u2.yml'
+  pull_request:
+    paths:
+      - 'data/control-plane/zipraf-corpus-u2.v1.json'
+      - 'scripts/validate_zipraf_corpus_u2.py'
+      - 'tests/test_zipraf_corpus_u2.py'
+      - 'docs/ZIPRAF_CORPUS_U2_FEDERATION.md'
+      - '.github/workflows/zipraf-corpus-u2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  federated-corpus-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate U2 receipt and corpus boundaries
+        run: python scripts/validate_zipraf_corpus_u2.py
+      - name: Run adversarial corpus promotion tests
+        run: python -m unittest tests.test_zipraf_corpus_u2 -v
