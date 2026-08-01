@@ -73,10 +73,30 @@ jobs:
           assert decisions["TOKEN_VAZIO"] == 1
           PY
 
-      - name: Upload audit receipt
+      - name: Upload audit receipt when quota permits
+        id: upload
+        continue-on-error: true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: semantic-tensor-receipt-${{ github.run_id }}
           path: artifacts/semantic-tensor/receipt.json
           if-no-files-found: error
           retention-days: 30
+
+      - name: Record quota-aware evidence boundary
+        if: always()
+        shell: bash
+        run: |
+          test -s artifacts/semantic-tensor/receipt.json
+          {
+            echo "## Semantic Tensor Receipt"
+            echo
+            echo "- Local receipt: present and verified"
+            echo "- Artifact upload outcome: \`${{ steps.upload.outcome }}\`"
+            if [ "${{ steps.upload.outcome }}" != "success" ]; then
+              echo "- State: \`TOKEN_VAZIO_GITHUB_ARTIFACT_QUOTA\`"
+              echo "- Meaning: validation passed, but external artifact storage was unavailable"
+            fi
+            echo "- Model mutation: false"
+            echo "- Automatic promotion: false"
+          } >> "$GITHUB_STEP_SUMMARY"
