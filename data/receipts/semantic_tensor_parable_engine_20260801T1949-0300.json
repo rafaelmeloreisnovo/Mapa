@@ -1,0 +1,62 @@
+{
+  "schema_version": "rafaelia.semantic-tensor-implementation-receipt.v1",
+  "cycle_id": "SEMANTIC-TENSOR-20260801T1949-0300",
+  "observed_at": "2026-08-01T19:49:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_commit": "de6804ed336dd259ad74c0fa31d3900d7a66feaa",
+  "branch": "feature/semantic-tensor-parable-engine-v1-20260801",
+  "execution_mode": "NON_DESTRUCTIVE_REVIEW_BRANCH",
+  "implemented": {
+    "control_plane": true,
+    "tensor_dimensions": 9,
+    "weights_sum": 1.0,
+    "parable_mechanisms": 42,
+    "registry_shards": 4,
+    "deterministic_engine": true,
+    "receipt_schema": true,
+    "workflow": true,
+    "local_tests": 15,
+    "local_tests_passed": 15,
+    "model_mutation": false,
+    "tokenizer_mutation": false,
+    "training_data_mutation": false
+  },
+  "fixture_decisions": {
+    "PARABLE_ANALOGY_NO_FACT_PROMOTION": 1,
+    "BLOCKED_TOKEN_VAZIO": 1,
+    "READY_FOR_HUMAN_REVIEW": 1,
+    "BLOCKED_UNSOURCED_CULTURAL_ATTRIBUTION": 1,
+    "PRESERVED_AS_CONFESSION_NOT_DOMAIN_CLAIM": 1,
+    "TOKEN_VAZIO": 1
+  },
+  "decision": {
+    "state": "READY_FOR_CI_AND_HUMAN_REVIEW",
+    "claim_allowed": false,
+    "automatic_promotion": false,
+    "traditional_sources_verified": false,
+    "human_review_required": true
+  },
+  "token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_TRADITION_SOURCE_VERIFICATION",
+      "reason": "Traditional references are declared but were not independently verified in this execution.",
+      "next_step": "Review each named tradition against a primary or critical source and preserve edition and translation metadata."
+    },
+    {
+      "id": "TOKEN_VAZIO_REAL_CORPUS_PILOT",
+      "reason": "The engine passed deterministic fixtures but has not been calibrated on a representative real corpus.",
+      "next_step": "Run a bounded corpus pilot, inspect false positives and false negatives, and seal a calibration receipt."
+    },
+    {
+      "id": "TOKEN_VAZIO_INDEPENDENT_CULTURAL_REVIEW",
+      "reason": "No independent specialist or community-specific review was performed.",
+      "next_step": "Request qualified review before promoting culture-specific mappings."
+    },
+    {
+      "id": "TOKEN_VAZIO_PHYSICAL_INDEPENDENT_RUNTIME",
+      "reason": "The test execution was local to the construction environment and is not an independent physical reproduction.",
+      "next_step": "Reproduce the exact commit in CI and, later, in a clean Termux or second environment."
+    }
+  ],
+  "invariant": "entropy_measured -> coherence_structured -> falsifiability -> feedback -> receipt"
+}
