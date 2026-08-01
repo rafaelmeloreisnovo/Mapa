@@ -17,6 +17,7 @@ Este diretório contém checkpoints incrementais e não destrutivos da indexaç�
 | `2026-07-31T23:44-03:00` | [`RAFAELIA_CATALOG_CYCLE_2026-07-31T2344-0300.md`](RAFAELIA_CATALOG_CYCLE_2026-07-31T2344-0300.md) | [`data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-07-31T2344-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-07-31T2344-0300.json) | [`latents.2026-07-31T2344-0300.jsonl`](../../data/latents/deltas/latents.2026-07-31T2344-0300.jsonl) | [`paper_claims.2026-07-31T2344-0300.jsonl`](../../data/claims/deltas/paper_claims.2026-07-31T2344-0300.jsonl) | `EXECUTED / REVIEW_REQUIRED` |
 | `2026-08-01T04:03-03:00` | `NOOP checkpoint` | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T0403-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0403-0300.json) | — | — | `EXECUTED / NO_DOMAIN_DELTA` |
 | `2026-08-01T06:02-03:00` | `AI Mode provenance delta` | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T0602-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0602-0300.json) | — | embedded classification summary | `EXECUTED / TOKEN_VAZIO_CORPUS` |
+| `2026-08-01T07:01-03:00` | `NOOP incremental checkpoint` | [`RAFAELIA_CATALOG_CYCLE_2026-08-01T0701-0300.json`](../../data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0701-0300.json) | — | — | `EXECUTED / NO_DOMAIN_DELTA` |
 
 ## Consolidação
 
