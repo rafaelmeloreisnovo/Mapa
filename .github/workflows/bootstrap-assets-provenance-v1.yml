@@ -1,0 +1,29 @@
+name: Bootstrap Assets Provenance Federation
+
+on:
+  push:
+    paths:
+      - 'data/control-plane/bootstrap-assets-provenance.v1.json'
+      - 'scripts/validate_bootstrap_assets_provenance.py'
+      - 'tests/test_bootstrap_assets_provenance.py'
+      - 'docs/BOOTSTRAP_ASSETS_PROVENANCE_FEDERATION.md'
+      - '.github/workflows/bootstrap-assets-provenance-v1.yml'
+  pull_request:
+    paths:
+      - 'data/control-plane/bootstrap-assets-provenance.v1.json'
+      - 'scripts/validate_bootstrap_assets_provenance.py'
+      - 'tests/test_bootstrap_assets_provenance.py'
+      - 'docs/BOOTSTRAP_ASSETS_PROVENANCE_FEDERATION.md'
+      - '.github/workflows/bootstrap-assets-provenance-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  blocked-state-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/validate_bootstrap_assets_provenance.py
+      - run: python -m unittest tests.test_bootstrap_assets_provenance -v
