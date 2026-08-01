@@ -1,0 +1,97 @@
+{
+  "cycle_id": "CAT-20260801T080246-0300",
+  "executed_at": "2026-08-01T08:02:46-03:00",
+  "mode": "NON_DESTRUCTIVE_INCREMENTAL_APPEND_ONLY",
+  "baseline": {
+    "previous_cycle": "CAT-20260801T070120-0300",
+    "previous_index_commit": "04bf02da870af2b204afcde9748df56284eb931d",
+    "cutoff_utc": "2026-08-01T10:01:20Z"
+  },
+  "authority": {
+    "drive_file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "state": "CANONICAL_DRAFT",
+    "claim_allowed": false,
+    "current_revision": "104",
+    "previous_revision": "103",
+    "modified_at_utc": "2026-08-01T10:30:11.556Z"
+  },
+  "delta": {
+    "repositories_changed": 1,
+    "drive_documents_new": 1,
+    "drive_documents_modified": 1,
+    "core_fcea": 0,
+    "datasets": 0,
+    "papers": 0,
+    "workflows": 1,
+    "code_files": 2,
+    "schemas": 1,
+    "control_plane_records": 1,
+    "canonical_documents": 1,
+    "receipts_created_by_cycle": 1,
+    "duplicates_written": 0
+  },
+  "github": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "source_commit": "ae92aff698715c6d68eeac7bb10032058157a740",
+    "source_commit_time_utc": "2026-08-01T10:28:26Z",
+    "files": [
+      {"path": ".github/workflows/tof-fault-invariant.yml", "git_blob_sha": "b66a30a94f1b30a84a9aed0c282ce1cabae18821", "kind": "workflow"},
+      {"path": "data/control-plane/tof-namespace-allocation-fault.v1.json", "git_blob_sha": "2d0696615719a5ee3136759c28bf97fb2a971f6f", "kind": "control_plane_record"},
+      {"path": "docs/TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1.md", "git_blob_sha": "9938f32511665e202bfd4119afe4fa262537be0b", "kind": "canonical_document"},
+      {"path": "schemas/tof-namespace-allocation-fault.v1.schema.json", "git_blob_sha": "3c96e10492b15cc1a1d63ab3fba5bd658e24f04d", "kind": "schema"},
+      {"path": "scripts/validate_tof_fault_invariant.py", "git_blob_sha": "62e8c1b8ed4c68ff096a73c60b7efcaaffdc5919", "kind": "validator"},
+      {"path": "tests/test_tof_fault_invariant.py", "git_blob_sha": "a48117d4e3874b0da465669e42cf4922c14d7f0d", "kind": "adversarial_tests"}
+    ],
+    "ci": {
+      "workflow_runs_observed": 0,
+      "combined_status_entries": 0,
+      "state": "TOKEN_VAZIO_CI_NOT_OBSERVED",
+      "next_step": "Consultar novamente os runs do commit ae92aff ou executar o workflow focal e preservar o relatório publicado com hash."
+    }
+  },
+  "drive": {
+    "new_document": {
+      "id": "1KKsOdFzDgFrz_aCkzs3NLVIUfsXvsUYWekmrnDkv8p0",
+      "title": "RAFAELIA — TOF Namespace Allocation Fault Invariant V1 — 2026-08-01",
+      "created_at_utc": "2026-08-01T10:26:27.217Z",
+      "modified_at_utc": "2026-08-01T10:27:00.048Z",
+      "content_hash": "TOKEN_VAZIO",
+      "reason": "O conector forneceu texto e metadados, mas não um digest de conteúdo canônico."
+    }
+  },
+  "claims": {
+    "PROVADO": [
+      "O commit ae92aff adicionou exatamente seis arquivos no repositório Mapa.",
+      "A instância canônica mantém claim_allowed=false.",
+      "O documento editorial TOF existe no Drive e o documento canônico correspondente existe no GitHub."
+    ],
+    "EVIDENCIADO": [
+      "Existe materialização parcial do modelo TOF como documento, schema, registro, validador, testes e workflow.",
+      "O modelo separa identidade lógica, alocação e fault overlay e distingue EMPTY_FILE de ABSENT."
+    ],
+    "HIPÓTESE": [],
+    "MODELO_ANALÓGICO": [
+      "A geometria TOF base 9 e suas 27 combinações são um modelo estrutural ainda não demonstrado como comportamento de filesystem específico."
+    ],
+    "PARÁBOLA": [],
+    "REFUTADO": [
+      "A existência dos arquivos não prova validação em mídia física, ECC, BBT ou recuperação real de dados."
+    ],
+    "TOKEN_VAZIO": [
+      "Execução remota do workflow e relatório CI.",
+      "Hash de conteúdo do documento TOF no Google Drive.",
+      "Filesystem-alvo, perfil ECC, política BBT e evidência em mídia física."
+    ]
+  },
+  "actions_not_executed": [
+    "Nenhum dataset, paper ou diretório Core/FCEA foi alterado.",
+    "Nenhum claim científico foi promovido.",
+    "Nenhum arquivo do Drive foi duplicado ou regravado.",
+    "Nenhum resultado de teste foi inventado na ausência de CI observável.",
+    "Nenhum histórico existente foi reescrito."
+  ],
+  "F_ok": "Delta TOF identificado, deduplicado, classificado e registrado com proveniência Drive ↔ GitHub e hashes Git dos seis arquivos.",
+  "F_gap": "CI remoto, hash do documento Drive, filesystem-alvo, ECC/BBT e evidência física permanecem TOKEN_VAZIO.",
+  "F_next": "Executar ou observar o workflow focal, capturar o relatório com digest e só então promover implementation_state de TOKEN_VAZIO para VERIFIED_LIMITED, sem alterar claim_allowed=false para claims físicos."
+}
