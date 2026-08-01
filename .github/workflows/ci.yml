@@ -33,8 +33,8 @@ jobs:
           set -euo pipefail
 
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-            base_branch="${{ github.base_ref }}"
-            base="origin/$base_branch"
+            base="origin/${{ github.base_ref }}"
+            git cat-file -e "$base^{commit}"
             range="$base...HEAD"
           else
             before="${{ github.event.before }}"
@@ -59,7 +59,7 @@ jobs:
 
           printf 'Markdown regression gate (%s):\n' "$range"
           printf '  %s\n' "${markdown_files[@]}"
-          markdownlint-cli2 "${markdown_files[@]}"
+          markdownlint-cli2 --no-globs "${markdown_files[@]}"
 
       - name: Historical Markdown debt report — non-blocking
         continue-on-error: true
