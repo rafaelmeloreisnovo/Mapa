@@ -18,14 +18,23 @@ typedef unsigned int       raf_u32;
 typedef unsigned long long raf_u64;
 typedef signed int         raf_i32;
 
+#if defined(__UINTPTR_TYPE__)
+typedef __UINTPTR_TYPE__ raf_uptr;
+#else
+typedef unsigned long raf_uptr;
+#endif
+
 typedef char raf_assert_u8_is_1[(sizeof(raf_u8) == 1u) ? 1 : -1];
 typedef char raf_assert_u16_is_2[(sizeof(raf_u16) == 2u) ? 1 : -1];
 typedef char raf_assert_u32_is_4[(sizeof(raf_u32) == 4u) ? 1 : -1];
 typedef char raf_assert_u64_is_8[(sizeof(raf_u64) == 8u) ? 1 : -1];
+typedef char raf_assert_uptr_matches_pointer[
+    (sizeof(raf_uptr) == sizeof(void *)) ? 1 : -1];
 
 #define RAF_ABI_VERSION_V1          0x00010000u
 #define RAF_FLAG_SCHEMA_VERSION_V1  0x00010000u
 #define RAF_U64_MAX_VALUE           (~(raf_u64)0u)
+#define RAF_UPTR_MAX_VALUE          (~(raf_uptr)0u)
 #define RAF_BIT64(n)                ((raf_u64)1u << (n))
 
 /* Errors are causal status values, never combinable capability flags. */
@@ -244,11 +253,17 @@ static inline raf_status_v1 raf_ro_take_v1(
     raf_ro_cursor_v1 *cursor, raf_u64 length, const raf_u8 **out)
 {
     raf_status_v1 status;
-    if (!cursor || !out || (!cursor->base && cursor->size != 0u))
-        return RAF_E_ARGUMENT;
+    if (!cursor || !out) return RAF_E_ARGUMENT;
+    if (cursor->size > (raf_u64)RAF_UPTR_MAX_VALUE) return RAF_E_LIMIT;
+    if (!cursor->base) {
+        if (cursor->size != 0u || cursor->off != 0u || length != 0u)
+            return RAF_E_ARGUMENT;
+        *out = cursor->base;
+        return RAF_OK;
+    }
     status = raf_range_check_u64(cursor->off, length, cursor->size);
     if (status != RAF_OK) return status;
-    *out = cursor->base + cursor->off;
+    *out = cursor->base + (raf_uptr)cursor->off;
     cursor->off += length;
     return RAF_OK;
 }
