@@ -1,0 +1,95 @@
+{
+  "schema_version": "rafaelia.branch-topology.v1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "default_branch": "main",
+  "topology": "HUB_AND_SPOKE_PROCEDURAL",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "automatic_default_branch_change": false,
+  "promotion_target": "main",
+  "required_promotion_fields": [
+    "source",
+    "claim_state",
+    "evidence",
+    "falsifier",
+    "rollback",
+    "decision"
+  ],
+  "lanes": [
+    {
+      "order": 0,
+      "branch": "main_00_governanca",
+      "purpose": "authority_scope_claim_policy",
+      "minimum_output": "decision_contract"
+    },
+    {
+      "order": 1,
+      "branch": "main_01_intake_fontes",
+      "purpose": "source_intake_provenance_quarantine",
+      "minimum_output": "identified_source"
+    },
+    {
+      "order": 2,
+      "branch": "main_02_normalizacao",
+      "purpose": "naming_schema_metadata_deduplication",
+      "minimum_output": "normalized_object"
+    },
+    {
+      "order": 3,
+      "branch": "main_03_modelagem_semantica",
+      "purpose": "ontology_relations_knowledge_routes",
+      "minimum_output": "navigable_model"
+    },
+    {
+      "order": 4,
+      "branch": "main_04_validacao",
+      "purpose": "lint_schema_positive_adversarial_tests_falsifiers",
+      "minimum_output": "validation_report"
+    },
+    {
+      "order": 5,
+      "branch": "main_05_evidencias",
+      "purpose": "hashes_receipts_environment_reproducibility",
+      "minimum_output": "evidence_package"
+    },
+    {
+      "order": 6,
+      "branch": "main_06_integracao",
+      "purpose": "cross_module_cross_repository_contracts",
+      "minimum_output": "integration_candidate"
+    },
+    {
+      "order": 7,
+      "branch": "main_07_seguranca_conformidade",
+      "purpose": "threat_privacy_dependencies_compliance",
+      "minimum_output": "risk_opinion"
+    },
+    {
+      "order": 8,
+      "branch": "main_08_observabilidade_release",
+      "purpose": "metrics_artifacts_regression_release_candidate",
+      "minimum_output": "release_decision"
+    },
+    {
+      "order": 9,
+      "branch": "main_09_memoria_arquivo",
+      "purpose": "catalog_retention_append_only_restore",
+      "minimum_output": "longitudinal_checkpoint"
+    }
+  ],
+  "invariants": [
+    "main_remains_default",
+    "all_lanes_derive_from_main",
+    "number_is_method_order_not_git_ancestry",
+    "lane_to_main_requires_pull_request",
+    "no_automatic_promotion",
+    "token_vazio_is_auditable",
+    "force_push_and_deletion_should_be_blocked",
+    "lane_must_sync_with_main_before_promotion"
+  ],
+  "external_settings": {
+    "ruleset_application": "TOKEN_VAZIO_EXTERNAL_SETTING",
+    "required_status_check": "branch-topology / validate",
+    "next_verifiable_step": "Apply and observe GitHub rulesets for main and main_[0-9][0-9]_*."
+  }
+}
