@@ -1,0 +1,99 @@
+{
+  "schema_version": "zipraf-real-archive-binding.v2",
+  "observed_at": "2026-08-01",
+  "status": "PR_OPEN_REMOTE_GATE_PENDING",
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "pull_request": 1078,
+    "branch": "main_01_zipraf-real-archive-v2",
+    "head_sha": "8c1dfb24735d17ea7efc74ea2c9a6cc85c6be447",
+    "base_branch": "master",
+    "merged": false,
+    "remote_gate": "PENDING"
+  },
+  "compatibility": {
+    "envelope": "ZIP_CLASSIC",
+    "zip64": "EXPLICITLY_UNSUPPORTED_V2",
+    "multidisk": "REJECTED",
+    "central_local_binding": true,
+    "data_descriptor_binding": true
+  },
+  "entry_actions": [
+    "DIRECT_MAP_LAYOUT",
+    "COPY_STORE",
+    "DECOMPRESS",
+    "REJECT"
+  ],
+  "promotion_invariants": {
+    "layout_mappable_grants_digest": false,
+    "layout_mappable_grants_execution": false,
+    "layout_mappable_grants_dma": false,
+    "magic_grants_execution": false,
+    "crc32_is_content_identity": false,
+    "hash_is_clock_measurement": false,
+    "deflate_is_direct_map": false,
+    "unsafe_name_can_bind": false
+  },
+  "host_kat": {
+    "verification_count": 37,
+    "local_result": "PASS",
+    "covers": [
+      "EOCD_CENTRAL_LOCAL_BOUNDS",
+      "DATA_DESCRIPTOR_BINDING",
+      "OVERLAP_AND_DUPLICATE_REJECTION",
+      "PORTABLE_PATH_POLICY",
+      "STORE_ALIGNMENT",
+      "DEFLATE_MATERIALIZATION",
+      "PAGE_GRAPH_BINDING",
+      "DETERMINISTIC_CORE_PHASE_PLAN"
+    ]
+  },
+  "mmap_receipt_contract": {
+    "gate": "ZIPRAF_HOST_MMAP_V1",
+    "expected_status": "PASS",
+    "payload_offset_must_be_page_aligned": true,
+    "explicit_user_copy_bytes": 0,
+    "scope": "HOST_MMAP_LAYOUT_NOT_ANDROID_DMA_OR_EXECUTION",
+    "kernel_or_hardware_zero_copy_claim": false
+  },
+  "scheduling": {
+    "core_selection": "NTH_SET_BIT_CORE_MASK_ROUND_ROBIN",
+    "phase_rule": "FLOOR_ENTRY_INDEX_DIV_POPCOUNT",
+    "direction_rule": "ALTERNATE_FORWARD_REVERSE_BY_PHASE",
+    "physical_clock_harmonic": "TOKEN_VAZIO",
+    "octa_core_runtime": "TOKEN_VAZIO"
+  },
+  "security_policy": {
+    "reject_absolute_paths": true,
+    "reject_parent_traversal": true,
+    "reject_empty_segments": true,
+    "reject_trailing_dot_or_space": true,
+    "reject_reserved_devices": true,
+    "reject_portable_name_collisions": true,
+    "reject_symlink_binding": true,
+    "reject_encrypted_binding": true
+  },
+  "urgency": [
+    {"order": "U0", "path": "REAL_ZIP_PAYLOAD_SPANS", "state": "IMPLEMENTED_HOST", "next_gate": "REMOTE_KAT_GREEN"},
+    {"order": "U1", "path": "PAYLOAD_SHA256_BLAKE3", "state": "INTERFACE_READY", "next_gate": "KNOWN_ANSWER_VECTORS"},
+    {"order": "U2", "path": "REAL_ZIP_APK_CORPUS", "state": "TOKEN_VAZIO", "next_gate": "PER_ENTRY_RECEIPTS"},
+    {"order": "U3", "path": "TERMUX_ANDROID_MMAP", "state": "TOKEN_VAZIO", "next_gate": "P50_P95_P99_AND_FAULTS"},
+    {"order": "U4", "path": "BOUNDED_DEFLATE_MATERIALIZER", "state": "TOKEN_VAZIO", "next_gate": "OUTPUT_DIGEST_AND_MEMORY_LIMIT"},
+    {"order": "U5", "path": "SCHEDULER_1_2_4_8_CORES", "state": "LOGICAL_PLAN_ONLY", "next_gate": "AFFINITY_CACHE_AND_LATENCY_BENCH"},
+    {"order": "U6", "path": "BITRAFA_FEC_35_45", "state": "NOT_AUTHORIZED", "next_gate": "ERROR_MODEL_PROOF_AND_FAULT_INJECTION"},
+    {"order": "U7", "path": "DMA_IOMMU_IRQ_RUNTIME", "state": "TOKEN_VAZIO", "next_gate": "PHYSICAL_STALE_IRQ_TEST"},
+    {"order": "U8", "path": "LEDGER_MERKLE_AUTHORITY", "state": "TOKEN_VAZIO", "next_gate": "AUTHORITY_REPLICATION_POLICY"}
+  ],
+  "claims": {
+    "real_zip_parser": "HOST_REFERENCE",
+    "real_payload_binding": "HOST_KAT_PASS_LOCAL",
+    "host_mmap_store": "VERIFIED_LIMITED_LOCAL",
+    "compressed_zero_copy": false,
+    "android_mmap": "TOKEN_VAZIO",
+    "pe_elf_direct_execution": "TOKEN_VAZIO",
+    "dma_iommu_irq_hardware": "TOKEN_VAZIO",
+    "bitflip_35_45_recovery": "NOT_AUTHORIZED",
+    "blockchain_consensus": "TOKEN_VAZIO"
+  }
+}
