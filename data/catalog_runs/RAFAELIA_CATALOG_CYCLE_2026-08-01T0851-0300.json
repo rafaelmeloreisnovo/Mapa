@@ -1,0 +1,152 @@
+{
+  "schema_version": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260801T085100-0300",
+  "executed_at": "2026-08-01T08:51:00-03:00",
+  "mode": "NON_DESTRUCTIVE_INCREMENTAL_APPEND_ONLY",
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT",
+    "claim_allowed": false
+  },
+  "previous_checkpoint": {
+    "cycle_id": "CAT-20260801T080246-0300",
+    "cutoff_utc": "2026-08-01T11:02:46Z"
+  },
+  "delta": {
+    "drive": [
+      {
+        "file_id": "1Gi26dgv1rqMa_81uE0WApZxXnArEX0FbbfgzV-PKXMc",
+        "title": "RAFAELIA — Ω Static Layout, Relocation e ZIPRAF — 2026-08-01",
+        "created_time": "2026-08-01T11:19:52.129Z",
+        "modified_time": "2026-08-01T11:20:24.082Z",
+        "classification": "EVIDENCIADO",
+        "claim_allowed": false,
+        "content_hash": "TOKEN_VAZIO",
+        "next_verifiable_step": "Exportar revisão canônica e calcular SHA-256/BLAKE3 com receipt."
+      },
+      {
+        "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+        "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+        "change": "MODIFIED_AFTER_CUTOFF",
+        "classification": "EVIDENCIADO"
+      }
+    ],
+    "github": [
+      {
+        "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+        "commit": "8f54f929460c5f33ed5b1a7856460499b4439eef",
+        "title": "RMR Ω static layout: offsets imutáveis, rebind e ZIPRAF (#1074)",
+        "classification": "EVIDENCIADO",
+        "artifacts": [
+          "engine/rmr/include/rmr_static_layout.h",
+          "engine/rmr/src/rmr_static_layout.c",
+          "demo_cli/src/rmr_static_layout_selftest.c",
+          "tools/test_rmr_static_layout.sh",
+          "engine/rmr/OMEGA_STATIC_LAYOUT_INVARIANT_V1.md",
+          ".github/workflows/rmr-static-layout.yml"
+        ]
+      },
+      {
+        "repository": "rafaelmeloreisnovo/Mapa",
+        "commit": "9fd615b45951a9c35e844b75792ea3fb8c7b5db6",
+        "title": "Ω static address control plane: offsets, relocation e ZIPRAF (#106)",
+        "classification": "EVIDENCIADO",
+        "control_plane_blob_sha": "7d213c8f75f7ed53d69f947527d4dbad43b1c0a7",
+        "artifacts": [
+          "docs/OMEGA_STATIC_ADDRESS_RELOCATION_INVARIANT_V1.md",
+          "schemas/omega-static-address-relocation.v1.schema.json",
+          "data/control-plane/omega-static-address-relocation.v1.json",
+          "scripts/validate_omega_static_layout.py",
+          "tests/test_omega_static_layout.py",
+          ".github/workflows/omega-static-layout.yml"
+        ]
+      }
+    ]
+  },
+  "semantic_index": {
+    "keywords": [
+      "RAFAELIA", "Omega static layout", "stable offset", "base relative", "mapping epoch", "relocation", "ZIPRAF", "RMR", "TOF", "fault overlay", "arena", "no malloc", "ASLR", "manifest signature", "control plane"
+    ],
+    "hashtags": [
+      "#RAFAELIA", "#OmegaStaticLayout", "#ZIPRAF", "#RMR", "#StableOffset", "#BaseRelative", "#MappingEpoch", "#TOKEN_VAZIO"
+    ],
+    "dependencies": [
+      "PCR_Rafaelia_Code_seed",
+      "termux-app-rafacodephi",
+      "Vectras-VM-Android",
+      "GAIA_phi",
+      "Mapa/TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1"
+    ]
+  },
+  "claim_classification": {
+    "PROVADO": [
+      "Os dois commits produtores existem nos repositórios indicados.",
+      "O control-plane Mapa mantém claim_allowed=false.",
+      "FIXED_OFFSET é explicitamente separado de FIXED_VIRTUAL e FIXED_PHYSICAL."
+    ],
+    "EVIDENCIADO": [
+      "Há implementação de referência C, selftest, workflow, documento, schema, validador e control-plane.",
+      "O documento Drive referencia os mesmos commits e limites epistemológicos."
+    ],
+    "HIPOTESE": [],
+    "MODELO_ANALOGICO": [
+      "A composição federada Address=Base+StableOffset é modelo estrutural aplicável ao ecossistema, limitada aos artefatos observados."
+    ],
+    "PARABOLA": [],
+    "REFUTADO": [
+      "A existência do layout relativo não prova endereço físico fixo.",
+      "Arena sem fragmentação externa não prova sistema ou filesystem sem fragmentação.",
+      "O caminho Java ZIPRAF atual não é zero-allocation end-to-end."
+    ],
+    "TOKEN_VAZIO": [
+      {
+        "id": "TOKEN_VAZIO_MAPA_OMEGA_STATIC_CI",
+        "reason": "Nenhum status combinado ou workflow run foi retornado para o commit Mapa 9fd615b4.",
+        "next_step": "Consultar Actions pelo workflow omega-static-layout e preservar run ID, conclusão e artifact digest."
+      },
+      {
+        "id": "TOKEN_VAZIO_ANDROID_ASLR_FIXED_VIRTUAL",
+        "reason": "Não há execução Android observada demonstrando estabilidade de base virtual sob ASLR.",
+        "next_step": "Executar amostras multi-processo no Android e registrar bases, epochs e distribuição."
+      },
+      {
+        "id": "TOKEN_VAZIO_PHYSICAL_ADDRESS_FIXED",
+        "reason": "Não há memory map, linker script e execução física específica suficientes.",
+        "next_step": "Definir plataforma, mapa físico, linker script e receipt de execução."
+      },
+      {
+        "id": "TOKEN_VAZIO_DRIVE_CONTENT_HASH",
+        "reason": "O conector retornou texto e metadados, mas não hash criptográfico do conteúdo da revisão.",
+        "next_step": "Exportar a revisão e calcular SHA-256/BLAKE3."
+      }
+    ]
+  },
+  "counts": {
+    "repositories_with_delta": 2,
+    "drive_documents_new": 1,
+    "drive_documents_modified": 1,
+    "datasets": 0,
+    "papers": 0,
+    "workflows": 2,
+    "code_artifacts": 5,
+    "documents": 3,
+    "schemas": 1,
+    "control_plane_records": 1,
+    "receipts_created": 1,
+    "duplicates_created": 0
+  },
+  "actions_not_executed": [
+    "Nenhum claim científico foi promovido.",
+    "Nenhum dataset ou paper foi alterado.",
+    "Nenhum conteúdo foi duplicado no Google Drive.",
+    "Nenhum resultado CI foi inventado.",
+    "Nenhum histórico append-only foi reescrito."
+  ],
+  "R3": {
+    "F_ok": "Delta Drive↔GitHub identificado, ligado a dois commits produtores, classificado e registrado com proveniência e hash Git do control-plane.",
+    "F_gap": "CI do commit Mapa, hash criptográfico da revisão Drive, Android/ASLR, endereço físico e reprodução independente permanecem não comprovados.",
+    "F_next": "Capturar runs e artifacts dos workflows, exportar/hash da revisão Drive e executar gates Android multi-epoch antes de qualquer promoção adicional."
+  },
+  "claim_allowed": false
+}
