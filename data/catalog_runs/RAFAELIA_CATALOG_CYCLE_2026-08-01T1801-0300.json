@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "cycle_id": "CAT-20260801T1801-0300",
+  "mode": "incremental_append_only",
+  "reference": {
+    "provider": "Google Drive",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT"
+  },
+  "cutoff": {
+    "previous_persisted_commit": "25209048d2e28439c243c68823dc5185075e0f22",
+    "previous_time_utc": "2026-08-01T19:02:35Z",
+    "current_time_local": "2026-08-01T18:01:55-03:00"
+  },
+  "drive_delta": [
+    {
+      "id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "classification": "EVIDENCIADO",
+      "content_digest": "TOKEN_VAZIO",
+      "next_step": "exportar revisão estável e calcular SHA-256/BLAKE3"
+    },
+    {
+      "id": "1njGMsC2K-ZSsU54Scyt3kNcbf6mzyjvcuRm_fhBakQw",
+      "title": "RAFAELIA — 7 Arcos de Fluxo — RafAlign, RafConvert e RafDisk — V1",
+      "classification": "MODELO_ANALOGICO",
+      "state": "DESIGN_MATERIALIZED_IMPLEMENTATION_PENDING",
+      "content_digest": "TOKEN_VAZIO"
+    },
+    {
+      "id": "1DgR8YaykII-KmAcYsLblnhph6YnUdi9AEwi_LEx7Jxc",
+      "title": "RAFAELIA — ZIPRAF Content-Page Graph, BitRafa e DMA Epoch — 2026-08-01",
+      "classification": "MODELO_ANALOGICO",
+      "state": "CANONICAL_DRAFT_REFERENCE_MODEL",
+      "content_digest": "TOKEN_VAZIO"
+    }
+  ],
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "merge_commit": "2a56aead5db6887ed5cad66a980466e0b54c6f2d",
+      "pr": 1076,
+      "domain": "ZIPRAF_PAGE_GRAPH",
+      "key_file": "engine/rmr/src/rmr_zipraf_page_graph.c",
+      "key_file_blob_sha": "5ac156d95762890b2737b33c713934085957889b",
+      "evidence": "HOST_GATE_PASS_RUN_30716676219",
+      "limits": ["not_android_runtime", "not_physical_dma", "not_arbitrary_execution"]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "merge_commit": "57781f253ec2f529737aa798d27af1d4c27f109f",
+      "pr": 115,
+      "domain": "ZIPRAF_CONTROL_PLANE_RECONCILIATION",
+      "path": "data/control-plane/zipraf-content-page-graph.v1.json",
+      "state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/papers",
+      "merge_commit": "5aadddc9babbd29687678c0ee4d19e6cd6a9aead",
+      "pr": 36,
+      "path": "drafts/RARE_SURVIVAL_EVIDENCE_FRAMEWORK_V1.md",
+      "state": "HYPOTHESIS_METHODOLOGY_DRAFT",
+      "claim_allowed": false
+    },
+    {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "merge_commit": "952d9f666c65a292914d007876eb8f6589eee6d2",
+      "pr": 635,
+      "paths": [
+        "data/knowledge_forest/rare_events_claim_registry_v1.yml",
+        "docs/canonicos/PROTOCOLO_EVENTOS_RAROS_EVIDENCIA_V1.md"
+      ],
+      "claim_allowed": false,
+      "publication_ready": false
+    }
+  ],
+  "dependencies": [
+    "Drive reference model -> Mapa control-plane contract",
+    "Vectras ZIPRAF producer -> Mapa federated evidence",
+    "RLL rare-events registry -> papers methodology draft",
+    "platform loader authorization remains external",
+    "primary forensic sources remain external"
+  ],
+  "claims": {
+    "PROVADO": [
+      "four merge commits and named repository paths exist",
+      "ZIPRAF page-graph C source exists with blob SHA 5ac156d95762890b2737b33c713934085957889b"
+    ],
+    "EVIDENCIADO": [
+      "host gate is recorded as PASS run 30716676219",
+      "page graph validates immutable blocks, digest identity, write conflicts and mapping epochs"
+    ],
+    "HIPOTESE": [
+      "content-addressed immutable page graphs may reduce rematerialization",
+      "rare-event multilevel reconstruction may improve separation of fact, uncertainty and interpretation"
+    ],
+    "MODELO_ANALOGICO": [
+      "BitRafa redundancy and seven-flow arcs are architectural models, not physical proof"
+    ],
+    "PARABOLA": [],
+    "REFUTADO": [
+      "MZ or ELF magic alone authorizes execution",
+      "host gate proves Android runtime or physical DMA",
+      "absence of complete explanation proves violation of physics or mandatory supernatural causation"
+    ],
+    "TOKEN_VAZIO": [
+      "Android/device ZIPRAF execution",
+      "physical DMA/IRQ integration",
+      "PE/ELF loader authorization and security policy",
+      "independent replication",
+      "final forensic reconstruction for rare events",
+      "stable cryptographic digests for the three Drive documents"
+    ]
+  },
+  "actions_not_executed": [
+    "no Drive content was rewritten",
+    "no Android or physical device run was performed",
+    "no DMA hardware claim was promoted",
+    "no forensic conclusion was generated",
+    "no scientific or spiritual interpretation was promoted to causal proof"
+  ],
+  "R3": {
+    "F_ok": "ZIPRAF page graph and rare-events evidence protocol were linked to canonical commits, paths, a key blob SHA, host evidence and explicit claim boundaries.",
+    "F_gap": "Android/device, physical DMA, independent replication, final forensic sources and stable Drive content digests remain absent.",
+    "F_next": "run the ZIPRAF gate on Android/device with receipts and repair external dependencies; export and hash Drive revisions; ingest primary forensic sources before revising rare-event claims."
+  }
+}
