@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/rafaelia-semantic-tensor.v1.schema.json",
+  "title": "RAFAELIA Semantic Tensor Receipt V1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "execution_mode",
+    "model_mutation",
+    "claim_allowed",
+    "automatic_promotion",
+    "input_sha256",
+    "record_count",
+    "decision_counts",
+    "records",
+    "invariant"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.semantic-tensor-receipt.v1"
+    },
+    "execution_mode": {
+      "const": "DETERMINISTIC_GOVERNANCE_OVERLAY"
+    },
+    "model_mutation": {
+      "const": false
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "automatic_promotion": {
+      "const": false
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "decision_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "claim_class",
+          "tradition",
+          "source_state",
+          "token_count",
+          "unique_token_count",
+          "token_sha256",
+          "tensor",
+          "normalized_token_entropy",
+          "contradiction_penalty",
+          "unsupported_cultural_attribution",
+          "quality_score",
+          "decision",
+          "reasons"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim_class": {
+            "type": "string"
+          },
+          "tradition": {
+            "type": "string"
+          },
+          "source_state": {
+            "type": "string"
+          },
+          "token_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "unique_token_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "token_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "tensor": {
+            "type": "object",
+            "required": [
+              "source_provenance",
+              "evidence_strength",
+              "falsifiability",
+              "coherence",
+              "contextual_integrity",
+              "cultural_provenance",
+              "reproducibility",
+              "ethical_safety",
+              "epistemic_humility"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "source_provenance": {"type":"number","minimum":0,"maximum":1},
+              "evidence_strength": {"type":"number","minimum":0,"maximum":1},
+              "falsifiability": {"type":"number","minimum":0,"maximum":1},
+              "coherence": {"type":"number","minimum":0,"maximum":1},
+              "contextual_integrity": {"type":"number","minimum":0,"maximum":1},
+              "cultural_provenance": {"type":"number","minimum":0,"maximum":1},
+              "reproducibility": {"type":"number","minimum":0,"maximum":1},
+              "ethical_safety": {"type":"number","minimum":0,"maximum":1},
+              "epistemic_humility": {"type":"number","minimum":0,"maximum":1}
+            }
+          },
+          "normalized_token_entropy": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "contradiction_penalty": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "unsupported_cultural_attribution": {
+            "type": "boolean"
+          },
+          "quality_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "decision": {
+            "enum": [
+              "READY_FOR_HUMAN_REVIEW",
+              "BLOCKED_TOKEN_VAZIO",
+              "BLOCKED_UNSOURCED_CULTURAL_ATTRIBUTION",
+              "PARABLE_ANALOGY_NO_FACT_PROMOTION",
+              "PRESERVED_AS_CONFESSION_NOT_DOMAIN_CLAIM",
+              "TOKEN_VAZIO"
+            ]
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "invariant": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

@@ -29,13 +29,14 @@ concurrency:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - name: Checkout without persisted credentials
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+          fetch-depth: 1
 
       - name: Compile validator and tests
         run: |
@@ -58,7 +59,10 @@ jobs:
           python3 - <<'PY'
           import json
           from pathlib import Path
-          report = json.loads(Path("build/live-control-plane/report.json").read_text())
+
+          report = json.loads(
+              Path("build/live-control-plane/report.json").read_text()
+          )
           assert report["status"] == "PASS"
           assert report["claim_allowed"] is False
           assert report["states"]["remote_runner"] == "TOKEN_VAZIO_RUNNER"
@@ -72,10 +76,31 @@ jobs:
           sha256sum report.json > SHA256SUMS
           cat SHA256SUMS
 
-      - name: Upload bounded evidence
+      - name: Upload bounded evidence when quota permits
+        id: upload
         continue-on-error: true
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: live-control-plane-validation
+          name: live-control-plane-validation-${{ github.run_id }}
           path: build/live-control-plane/
           if-no-files-found: error
+          retention-days: 30
+
+      - name: Record quota-aware boundary
+        if: always()
+        shell: bash
+        run: |
+          test -s build/live-control-plane/report.json
+          test -s build/live-control-plane/SHA256SUMS
+          {
+            echo "## Live Control Plane Reconciliation"
+            echo
+            echo "- Validation report: present"
+            echo "- SHA-256 receipt: present"
+            echo "- Artifact upload outcome: \`${{ steps.upload.outcome }}\`"
+            if [ "${{ steps.upload.outcome }}" != "success" ]; then
+              echo "- State: \`TOKEN_VAZIO_GITHUB_ARTIFACT_QUOTA\`"
+              echo "- Meaning: validation passed, but artifact transport was unavailable"
+            fi
+            echo "- Claim allowed: false"
+          } >> "$GITHUB_STEP_SUMMARY"

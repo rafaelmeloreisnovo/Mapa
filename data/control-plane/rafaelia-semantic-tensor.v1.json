@@ -1,0 +1,167 @@
+{
+  "schema_version": "rafaelia.semantic-tensor-control.v1",
+  "title": "RAFAELIA Semantic Tensor and Parable Engine",
+  "model_boundary": {
+    "changes_model_weights": false,
+    "changes_tokenizer": false,
+    "changes_training_data": false,
+    "mode": "DETERMINISTIC_GOVERNANCE_OVERLAY",
+    "statement": "The engine scores and routes content; it does not modify an AI model."
+  },
+  "claim_allowed": false,
+  "automatic_promotion": false,
+  "tensor_dimensions": [
+    {
+      "id": "S",
+      "name": "source_provenance",
+      "weight": 0.16
+    },
+    {
+      "id": "E",
+      "name": "evidence_strength",
+      "weight": 0.16
+    },
+    {
+      "id": "F",
+      "name": "falsifiability",
+      "weight": 0.14
+    },
+    {
+      "id": "C",
+      "name": "coherence",
+      "weight": 0.14
+    },
+    {
+      "id": "X",
+      "name": "contextual_integrity",
+      "weight": 0.12
+    },
+    {
+      "id": "P",
+      "name": "cultural_provenance",
+      "weight": 0.1
+    },
+    {
+      "id": "R",
+      "name": "reproducibility",
+      "weight": 0.08
+    },
+    {
+      "id": "G",
+      "name": "ethical_safety",
+      "weight": 0.06
+    },
+    {
+      "id": "H",
+      "name": "epistemic_humility",
+      "weight": 0.04
+    }
+  ],
+  "penalties": {
+    "normalized_token_entropy_factor": 0.35,
+    "contradiction_factor": 0.5,
+    "unsupported_attribution_factor": 1.0
+  },
+  "thresholds": {
+    "ready_for_human_review": 0.72,
+    "minimum_factual_source": 0.4,
+    "minimum_factual_evidence": 0.4,
+    "minimum_factual_falsifiability": 0.4
+  },
+  "epistemic_states": [
+    "PROVADO",
+    "EVIDENCIADO",
+    "HIPOTESE",
+    "MODELO_ANALOGICO",
+    "PARABOLA",
+    "CONFISSAO_ESPIRITUAL",
+    "REFUTADO",
+    "TOKEN_VAZIO"
+  ],
+  "vacuum_ladder": [
+    {
+      "state": "ZERO_UNOBSERVED",
+      "meaning": "No observation has been performed."
+    },
+    {
+      "state": "TOKEN_VAZIO_MISSING_REQUIRED",
+      "meaning": "A required source, evidence or falsifier is missing."
+    },
+    {
+      "state": "VACUUM_SEARCHED_NO_SIGNAL",
+      "meaning": "A bounded search was executed and found no signal."
+    },
+    {
+      "state": "NADA_NEGATIVE_RESULT",
+      "meaning": "A reproducible negative result was observed."
+    },
+    {
+      "state": "ALEM_OUT_OF_SCOPE",
+      "meaning": "The question exceeds the declared scope or available method."
+    }
+  ],
+  "cultural_integrity": {
+    "no_silent_attribution": true,
+    "no_tradition_homogenization": true,
+    "source_required_for_named_tradition": true,
+    "authorial_parable_must_be_labeled": true,
+    "translation_is_not_original_source": true,
+    "community_specific_claims_require_community_specific_source": true
+  },
+  "lane_route": [
+    {
+      "branch": "main_00_governanca",
+      "role": "weights, thresholds, claim policy"
+    },
+    {
+      "branch": "main_01_intake_fontes",
+      "role": "source and tradition provenance"
+    },
+    {
+      "branch": "main_02_normalizacao",
+      "role": "tokenization and metadata normalization"
+    },
+    {
+      "branch": "main_03_modelagem_semantica",
+      "role": "tensor and parable graph"
+    },
+    {
+      "branch": "main_04_validacao",
+      "role": "tests, contradictions and falsifiers"
+    },
+    {
+      "branch": "main_05_evidencias",
+      "role": "receipts, hashes and evidence packages"
+    },
+    {
+      "branch": "main_06_integracao",
+      "role": "cross-module routing"
+    },
+    {
+      "branch": "main_07_seguranca_conformidade",
+      "role": "cultural integrity, privacy and ethics"
+    },
+    {
+      "branch": "main_08_observabilidade_release",
+      "role": "metrics and promotion decision"
+    },
+    {
+      "branch": "main_09_memoria_arquivo",
+      "role": "append-only checkpoint"
+    }
+  ],
+  "symbolic_records": {
+    "YACTO_DO_PAI": {
+      "origin": "USER_AUTHORED",
+      "classification": "PARABOLA",
+      "execution": "NON_EXECUTABLE",
+      "claim_policy": "PRESERVE_AS_SYMBOLIC_LANGUAGE_NO_FACT_PROMOTION"
+    },
+    "ARVORE_CONHECIMENTO_INFINITO_BARRO_SOPRO": {
+      "origin": "USER_SYNTHESIS_WITH_SCRIPTURAL_MOTIFS",
+      "classification": "PARABOLA",
+      "execution": "NON_EXECUTABLE",
+      "claim_policy": "SOURCE_MOTIFS_SEPARATELY_BEFORE_TRADITIONAL_ATTRIBUTION"
+    }
+  }
+}
