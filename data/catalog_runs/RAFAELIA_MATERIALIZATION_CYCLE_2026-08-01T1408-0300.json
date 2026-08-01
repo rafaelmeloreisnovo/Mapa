@@ -1,0 +1,29 @@
+{
+  "cycle_id": "MAT-20260801T1408-0300",
+  "state": "IMPLEMENTED_NOT_YET_EXECUTED",
+  "claim_allowed": false,
+  "append_only": true,
+  "topology": "RafPolimata producer -> signed/hash envelope -> Vectras quarantine consumer",
+  "created": [
+    {"repository":"rafaelmeloreisnovo/RafPolimata","path":"contracts/rafaelia-handoff-envelope.v1.schema.json","commit":"edb4e3320f0132ce8ce266883ce95123fd4536f0","role":"schema"},
+    {"repository":"rafaelmeloreisnovo/RafPolimata","path":"scripts/validate_rafaelia_handoff.py","commit":"a6365e3cd67dca6097bf4125c45c651c6e267c46","role":"producer_validator"},
+    {"repository":"rafaelmeloreisnovo/RafPolimata","path":"tests/test_validate_rafaelia_handoff.py","commit":"777c86cf8d38bf401064774e887f63de9536aeaa","role":"adversarial_tests"},
+    {"repository":"rafaelmeloreisnovo/RafPolimata","path":".github/workflows/rafaelia-handoff-gate.yml","commit":"e6699c316e1382b9df69a0c76fadaf03907481f5","role":"ci_gate"},
+    {"repository":"rafaelmeloreisnovo/Vectras-VM-Android","path":"tools/ci/validate_rafaelia_handoff_ingestion.py","commit":"66b46f946cf92a6eb106dd12dac41d2d05256ea5","role":"quarantine_validator"},
+    {"repository":"rafaelmeloreisnovo/Vectras-VM-Android","path":"tools/ci/test_validate_rafaelia_handoff_ingestion.py","commit":"75b3b9a8314ee1c5e210dbd92ce815631b4fd7fe","role":"negative_tests"}
+  ],
+  "gates": ["schema_exact_fields","sha256_integrity","path_confinement","abi_allowlist","network_denied","resource_bounds","claim_fail_closed","rollback_declared"],
+  "claims": {
+    "PROVADO": ["six source artifacts were committed"],
+    "EVIDENCIADO": ["validators implement fail-closed checks in Python stdlib"],
+    "HIPÓTESE": ["the common envelope reduces handoff ambiguity"],
+    "MODELO_ANALÓGICO": ["producer-consumer multifilament bridge"],
+    "PARÁBOLA": [],
+    "REFUTADO": ["source presence does not prove CI, device runtime, failover, or rollback"],
+    "TOKEN_VAZIO": ["exact CI results","physical Android runtime","controlled rollback test","controlled failover test","p50_p95_p99"]
+  },
+  "not_executed": ["workflow run observation","artifact generation","APK/ELF launch","watchdog activation","rollback rehearsal","failover rehearsal","performance measurement"],
+  "F_ok": "common fail-closed envelope, producer validator, consumer quarantine validator, tests and workflow materialized",
+  "F_gap": "execution receipts and physical runtime evidence absent",
+  "F_next": "observe CI, fix failures if any, create a real bounded artifact and envelope, ingest into quarantine and preserve receipts"
+}
