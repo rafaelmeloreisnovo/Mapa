@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "cycle_id": "RAFAELIA-CATALOG-2026-08-01T1600-0300",
+  "observed_at": "2026-08-01T16:00:57-03:00",
+  "previous_persisted_cutoff": "2026-08-01T18:03:21Z",
+  "mode": "INCREMENTAL_APPEND_ONLY",
+  "claim_allowed": false,
+  "reference": {
+    "provider": "Google Drive",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT"
+  },
+  "drive_delta": [
+    {
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "state": "MODIFIED_AFTER_CUTOFF",
+      "content_digest": "TOKEN_VAZIO"
+    },
+    {
+      "title": "RAFAELIA — Ω Static Layout, Relocation e ZIPRAF — 2026-08-01",
+      "document_id": "1Gi26dgv1rqMa_81uE0WApZxXnArEX0FbbfgzV-PKXMc",
+      "state": "MODIFIED_AFTER_CUTOFF",
+      "content_digest": "TOKEN_VAZIO"
+    }
+  ],
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "d05a6bad499e747eb89733a151b1a425fa720155",
+      "kind": "workflow_control_plane_tests_docs_formula_registry",
+      "summary": "Adaptive Fibonacci-Rafael read-only microcycle with scheduled receipts",
+      "claims": {
+        "implementation_present": "PROVADO",
+        "automatic_mutation": "REFUTADO_BY_CONTRACT",
+        "automatic_merge": "REFUTADO_BY_CONTRACT",
+        "scheduled_run_success": "TOKEN_VAZIO"
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "commit": "e83836f5227afeeab99f474991fea9502067973d",
+      "pull_request": 1075,
+      "kind": "code_tests_docs_workflow_runtime",
+      "summary": "ZIPRAF static layout V2 with bounded mapping reuse, CRC scratch reuse, direct ByteBuffer SHA-256 and runtime metrics",
+      "claims": {
+        "host_reference": "EVIDENCIADO",
+        "android_compile": "TOKEN_VAZIO_BLOCKED_EXTERNAL",
+        "android_device": "TOKEN_VAZIO",
+        "physical_address_stability": "REFUTADO_BY_POLICY"
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "70b04d81d15733d6f9f423db43a51d05c9dc07a3",
+      "kind": "federated_control_plane_receipt_schema_validator_tests_docs_workflow",
+      "summary": "Federates ZIPRAF V2 without duplicating the executable Kotlin/C runtime"
+    }
+  ],
+  "evidence": {
+    "host_run_id": 30712981749,
+    "host_conclusion": "success",
+    "host_checks": 31,
+    "artifact_id": 8822466423,
+    "artifact_sha256": "daaaedfef2363fd4c0d95c543c5c63a91752bb315f40f36f0683af4e8c6a8d03",
+    "canonical_receipt_path": "data/evidence/zipraf-static-layout-runtime.v2.json",
+    "canonical_receipt_git_blob_sha": "29630069b9c2f4c0e3c70fd59d5eae5ab80efa94",
+    "android_run_id": 30712981865,
+    "android_state": "BLOCKED_EXTERNAL_BEFORE_COMPILE",
+    "android_blocker": "qemu_rafaelia pinned commit 2346c30c2ba77881c2930add83523ea903b173fe not found on remote"
+  },
+  "dependencies": [
+    {
+      "from": "rafaelmeloreisnovo/Mapa@70b04d81d15733d6f9f423db43a51d05c9dc07a3",
+      "to": "rafaelmeloreisnovo/Vectras-VM-Android@e83836f5227afeeab99f474991fea9502067973d",
+      "relation": "FEDERATES_EXECUTABLE_SOURCE"
+    },
+    {
+      "from": "Vectras Android build",
+      "to": "qemu_rafaelia@2346c30c2ba77881c2930add83523ea903b173fe",
+      "relation": "BLOCKED_EXTERNAL_MISSING_PIN"
+    }
+  ],
+  "epistemic_summary": {
+    "PROVADO": [
+      "three canonical commits exist",
+      "adaptive cycle contract is read-only and fail-closed",
+      "ZIPRAF V2 receipt exists with a Git blob SHA"
+    ],
+    "EVIDENCIADO": [
+      "host run 30712981749 concluded success with 31 checks",
+      "C and Kotlin FNV-1a manifest identity matched at dc16075f7047df36"
+    ],
+    "HIPOTESE": [
+      "bounded mapping reuse may improve memory behavior for large STORE archives"
+    ],
+    "MODELO_ANALOGICO": [
+      "Fibonacci-Rafael phases modulate priority but do not constitute truth claims"
+    ],
+    "PARABOLA": [],
+    "REFUTADO": [
+      "fixed offset is not a physical address",
+      "host success does not prove Android compile or device runtime",
+      "FNV-1a identity is not cryptographic authentication"
+    ],
+    "TOKEN_VAZIO": [
+      "Android compile after dependency repair",
+      "Android device runtime",
+      "real ZIP64 payload above 2 GiB",
+      "independent reproduction",
+      "scheduled adaptive-cycle run receipt",
+      "stable content digests for modified Drive documents"
+    ]
+  },
+  "actions_not_executed": [
+    "No Android build was promoted to PASS",
+    "No device runtime was inferred",
+    "No Drive content was rewritten",
+    "No scientific or performance claim was promoted",
+    "No automatic merge or mutation was performed"
+  ],
+  "R3": {
+    "F_ok": "Adaptive read-only cycle and ZIPRAF V2 federation were identified with commits, host evidence, artifact digest and dependency boundary.",
+    "F_gap": "Android dependency pin is missing; device runtime, ZIP64 >2 GiB, independent reproduction, adaptive scheduled receipt and Drive content digests remain absent.",
+    "F_next": "Restore or repin qemu_rafaelia, rerun Android compile, then execute a bounded device test and preserve environment, logs, artifact hashes and p50/p95/p99 without promoting host metrics as device benchmarks."
+  }
+}
