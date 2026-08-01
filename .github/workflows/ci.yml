@@ -34,8 +34,6 @@ jobs:
 
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
             base_branch="${{ github.base_ref }}"
-            git fetch --no-tags origin \
-              "$base_branch:refs/remotes/origin/$base_branch"
             base="origin/$base_branch"
             range="$base...HEAD"
           else
