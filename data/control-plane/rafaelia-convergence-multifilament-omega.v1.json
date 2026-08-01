@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "RAFAELIA-CONVERGENCE-MULTIFILAMENT-OMEGA-V1",
+  "created_at": "2026-08-01T09:08:23-03:00",
+  "state": "CANONICAL_DRAFT",
+  "claim_allowed": false,
+  "append_only": true,
+  "authority": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+  "canonical_document": "docs/canonicos/RAFAELIA_CONVERGENCIA_MULTIFILAMENTO_OMEGA_V1.md",
+  "repositories": [
+    {"name":"Mapa","full_name":"rafaelmeloreisnovo/Mapa","role":"catalog_and_route_authority","default_branch":"main","status":"EVIDENCIADO"},
+    {"name":"RafPolimata","full_name":"rafaelmeloreisnovo/RafPolimata","role":"compiler_ir_elf","default_branch":"main","status":"EVIDENCIADO_LIMITADO"},
+    {"name":"Vectras-VM-Android","full_name":"rafaelmeloreisnovo/Vectras-VM-Android","role":"android_qemu_runtime","default_branch":"master","status":"TOKEN_VAZIO_RUNTIME_ATUAL"}
+  ],
+  "threads": [
+    "F_SOURCE","F_BUILD","F_RUNTIME","F_EPISTEMIC","F_SAFETY","F_MEMORY","F_SEMANTIC"
+  ],
+  "hash_policy": ["sha256","sha3-256","sha3-512","blake3","crc32c","git_blob_sha","git_tree_sha","git_commit_sha","etag","revision","timestamp"],
+  "safety": {
+    "rollback": "required",
+    "failsafe": "fail_closed",
+    "failover_order": ["canonical_source","verified_replica","hash_verified_cache","TOKEN_VAZIO"],
+    "watchdog_signals": ["hash_divergence","revision_without_receipt","missing_dependency","workflow_without_status","runtime_without_log","claim_without_source","broken_index_target"],
+    "circuit_breaker": ["schema_failure","hash_mismatch","authority_conflict","unknown_runtime_environment","narrative_only_evidence"]
+  },
+  "epistemic_counts": {
+    "PROVADO": 1,
+    "EVIDENCIADO": 3,
+    "HIPOTESE": 1,
+    "MODELO_ANALOGICO": 6,
+    "PARABOLA": 2,
+    "REFUTADO": 1,
+    "TOKEN_VAZIO": 6
+  },
+  "keywords": ["RAFAELIA","RAFCODE","RafPolimata","Vectras-VM-Android","RafGitTools","Mapa","RLL","FCEA","Core","LongitudinalMemory","KnowledgeGraph","KnowledgeForest","SemanticIndex","Provenance","Receipt","AppendOnly","Rollback","FailSafe","Failover","Watchdog","CircuitBreaker","TOKEN_VAZIO","SHA256","SHA3","BLAKE3","CRC32C","ELF","QEMU","Android","Termux","Freestanding","Ontology","Transdisciplinary","Multifilament","Omega"],
+  "hashtags": ["#RAFAELIA","#RAFCODE","#RafPolimata","#VectrasVMAndroid","#RafGitTools","#RLL","#FCEA","#KnowledgeGraph","#LongitudinalMemory","#Provenance","#AppendOnly","#Rollback","#FailSafe","#Failover","#Watchdog","#TOKEN_VAZIO","#BLAKE3","#SHA3","#QEMU","#Termux"],
+  "token_vazio": [
+    {"id":"TOKEN_VAZIO_RUNTIME_CURRENT","next_step":"capture runtime receipts for RafPolimata and Vectras-VM-Android"},
+    {"id":"TOKEN_VAZIO_FAILOVER_TEST","next_step":"execute controlled source outage and verify ordered fallback"},
+    {"id":"TOKEN_VAZIO_WATCHDOG_ACTIVE","next_step":"implement and run watchdog with bounded alerts"},
+    {"id":"TOKEN_VAZIO_ROLLBACK_PROOF","next_step":"perform reversible test commit and validate restoration"},
+    {"id":"TOKEN_VAZIO_PERFORMANCE","next_step":"measure p50 p95 p99 latency and recovery time"},
+    {"id":"TOKEN_VAZIO_FULL_DEPENDENCY_GRAPH","next_step":"resolve exact commit and artifact edges across all canonical repositories"}
+  ]
+}
