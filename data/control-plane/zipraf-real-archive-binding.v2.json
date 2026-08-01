@@ -1,0 +1,128 @@
+{
+  "schema_version": "zipraf-real-archive-binding.v2",
+  "observed_at": "2026-08-01",
+  "status": "U0_U1_REMOTE_GATES_PASS_PR_OPEN",
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "pull_request": 1078,
+    "branch": "main_01_zipraf-real-archive-v2",
+    "head_sha": "7183b770f8a484868f16d6cbee38677081adffee",
+    "base_branch": "master",
+    "merged": false,
+    "remote_gate": "PASS",
+    "remote_gate_name": "ZIPRAF Real Archive Binding",
+    "remote_gate_run": 30721856198,
+    "supporting_gates": {
+      "payload_digest_u1": "PASS@30721856193",
+      "zipraf_static_layout_runtime": "PASS@30721856206",
+      "formula_validation": "PASS@30721856200",
+      "legal_provenance": "PASS@30721856224",
+      "audit_benchmark_contract": "PASS@30721856204"
+    },
+    "artifact_state": "STORAGE_QUOTA_BLOCKED_RECEIPTS_VALIDATED_HASHED_IN_LOG"
+  },
+  "federation": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "lane": "main_05_evidencias",
+    "pull_request": 123,
+    "automatic_merge": false,
+    "superseded_pull_request": 122,
+    "u1_evidence": "data/control-plane/zipraf-payload-digest-u1.v1.json"
+  },
+  "compatibility": {
+    "envelope": "ZIP_CLASSIC",
+    "zip64": "EXPLICITLY_UNSUPPORTED_V2",
+    "multidisk": "REJECTED",
+    "central_local_binding": true,
+    "data_descriptor_binding": true
+  },
+  "entry_actions": [
+    "DIRECT_MAP_LAYOUT",
+    "COPY_STORE",
+    "DECOMPRESS",
+    "REJECT"
+  ],
+  "promotion_invariants": {
+    "layout_mappable_grants_digest": false,
+    "layout_mappable_grants_execution": false,
+    "layout_mappable_grants_dma": false,
+    "magic_grants_execution": false,
+    "crc32_is_content_identity": false,
+    "hash_is_clock_measurement": false,
+    "deflate_is_direct_map": false,
+    "unsafe_name_can_bind": false
+  },
+  "host_kat": {
+    "verification_count": 37,
+    "local_result": "PASS",
+    "remote_result": "PASS",
+    "covers": [
+      "EOCD_CENTRAL_LOCAL_BOUNDS",
+      "DATA_DESCRIPTOR_BINDING",
+      "OVERLAP_AND_DUPLICATE_REJECTION",
+      "PORTABLE_PATH_POLICY",
+      "STORE_ALIGNMENT",
+      "DEFLATE_MATERIALIZATION",
+      "PAGE_GRAPH_BINDING",
+      "DETERMINISTIC_CORE_PHASE_PLAN"
+    ]
+  },
+  "mmap_receipt_contract": {
+    "gate": "ZIPRAF_HOST_MMAP_V1",
+    "expected_status": "PASS",
+    "payload_offset_must_be_page_aligned": true,
+    "explicit_user_copy_bytes": 0,
+    "scope": "HOST_MMAP_LAYOUT_NOT_ANDROID_DMA_OR_EXECUTION",
+    "kernel_or_hardware_zero_copy_claim": false
+  },
+  "payload_identity": {
+    "state": "REMOTE_KAT_PASS",
+    "gate_run": 30721856193,
+    "checks": 17,
+    "sha256_backend": "RMR_PORTABLE_C",
+    "blake3_provider": "rafaelmeloreisnovo/BLAKE3@ff6991d8b13f5b4b16dc311b5acc9c63ae835152",
+    "receipt_sha256": "5c02f528713539e33d0cfabf6c99fa6d03b619c16d645b6c3ef099b0c93b2cb4",
+    "deflate_logical_digest": "MATERIALIZATION_REQUIRED"
+  },
+  "scheduling": {
+    "core_selection": "NTH_SET_BIT_CORE_MASK_ROUND_ROBIN",
+    "phase_rule": "FLOOR_ENTRY_INDEX_DIV_POPCOUNT",
+    "direction_rule": "ALTERNATE_FORWARD_REVERSE_BY_PHASE",
+    "physical_clock_harmonic": "TOKEN_VAZIO",
+    "octa_core_runtime": "TOKEN_VAZIO"
+  },
+  "security_policy": {
+    "reject_absolute_paths": true,
+    "reject_parent_traversal": true,
+    "reject_empty_segments": true,
+    "reject_trailing_dot_or_space": true,
+    "reject_reserved_devices": true,
+    "reject_portable_name_collisions": true,
+    "reject_symlink_binding": true,
+    "reject_encrypted_binding": true
+  },
+  "urgency": [
+    {"order": "U0", "path": "REAL_ZIP_PAYLOAD_SPANS", "state": "REMOTE_HOST_GATE_PASS", "next_gate": "HUMAN_REVIEW_NO_AUTO_MERGE"},
+    {"order": "U1", "path": "PAYLOAD_SHA256_BLAKE3", "state": "REMOTE_KAT_PASS", "next_gate": "U2_REAL_CORPUS"},
+    {"order": "U2", "path": "REAL_ZIP_APK_CORPUS", "state": "TOKEN_VAZIO", "next_gate": "PER_ENTRY_RECEIPTS"},
+    {"order": "U3", "path": "TERMUX_ANDROID_MMAP", "state": "TOKEN_VAZIO", "next_gate": "P50_P95_P99_AND_FAULTS"},
+    {"order": "U4", "path": "BOUNDED_DEFLATE_MATERIALIZER", "state": "TOKEN_VAZIO", "next_gate": "OUTPUT_DIGEST_AND_MEMORY_LIMIT"},
+    {"order": "U5", "path": "SCHEDULER_1_2_4_8_CORES", "state": "LOGICAL_PLAN_ONLY", "next_gate": "AFFINITY_CACHE_AND_LATENCY_BENCH"},
+    {"order": "U6", "path": "BITRAFA_FEC_35_45", "state": "NOT_AUTHORIZED", "next_gate": "ERROR_MODEL_PROOF_AND_FAULT_INJECTION"},
+    {"order": "U7", "path": "DMA_IOMMU_IRQ_RUNTIME", "state": "TOKEN_VAZIO", "next_gate": "PHYSICAL_STALE_IRQ_TEST"},
+    {"order": "U8", "path": "LEDGER_MERKLE_AUTHORITY", "state": "TOKEN_VAZIO", "next_gate": "AUTHORITY_REPLICATION_POLICY"}
+  ],
+  "claims": {
+    "real_zip_parser": "HOST_REFERENCE_REMOTE_GATE_PASS",
+    "real_payload_binding": "HOST_KAT_PASS_REMOTE",
+    "host_mmap_store": "VERIFIED_LIMITED_REMOTE",
+    "payload_digest_u1": "REMOTE_KAT_PASS_PINNED_PROVIDER",
+    "compressed_zero_copy": false,
+    "android_mmap": "TOKEN_VAZIO",
+    "pe_elf_direct_execution": "TOKEN_VAZIO",
+    "dma_iommu_irq_hardware": "TOKEN_VAZIO",
+    "bitflip_35_45_recovery": "NOT_AUTHORIZED",
+    "blockchain_consensus": "TOKEN_VAZIO"
+  }
+}
