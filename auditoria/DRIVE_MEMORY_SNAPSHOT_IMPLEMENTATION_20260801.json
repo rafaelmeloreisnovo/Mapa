@@ -1,0 +1,44 @@
+{
+  "schema_version": "mapa.implementation-receipt.v1",
+  "receipt_id": "RCP-20260801T220900Z-DRIVE-MEMORY-SNAPSHOT-V1",
+  "timestamp_utc": "2026-08-01T22:09:00Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "target_branch": "main_09_memoria_arquivo_drive_snapshots_v1",
+  "state": "LOCAL_PASS",
+  "claim_allowed": false,
+  "privacy_boundary": "metadata_only",
+  "drive_mirror": {
+    "folder_id": "1LvCpSISN8UXSs6z2H2IAdCLABd6Tpgpm",
+    "document_id": "13OVLaO6H922KZKsTyCG0EEohN8sHKHbq__KLeriClWE",
+    "spreadsheet_id": "1Kj2apQdS4_Ss-W6wlL2NZSvNvhavsNyf1BemqHZiZQE"
+  },
+  "checks": {
+    "validator": {
+      "status": "PASS",
+      "command": "python3 scripts/validate_drive_snapshot_catalog.py",
+      "snapshots": 7,
+      "open_gates": 3
+    },
+    "tests": {
+      "status": "PASS",
+      "command": "python3 -m unittest -v tests/test_drive_snapshot_catalog.py",
+      "passed": 5,
+      "failed": 0
+    }
+  },
+  "artifacts": [
+    {"path": "docs/canonical/2026-08-01/MEMORIA_LONGITUDINAL_DRIVE_SNAPSHOTS_V1.md", "sha256": "81ccace5569db99e175c7688d8b442a6159864219c2d4290e88064b2879333a4", "size_bytes": 4813},
+    {"path": "schemas/drive_memory_snapshot_catalog.schema.json", "sha256": "2b311be3a37e985738047483d0f4ecb43a476114b7a57c5c4a244068cb014fc8", "size_bytes": 5762},
+    {"path": "indices/memoria-longitudinal/README.md", "sha256": "f77fd1196786eb0f2e11a43b3a787c3e4218302fb572b643e4eb8767a1a7eb11", "size_bytes": 585},
+    {"path": "indices/memoria-longitudinal/drive_snapshot_catalog.v1.json", "sha256": "d70764c05dd41a5ed9f887c1aeee6e4418d874c1e7b87db94b17ed75ec259c4c", "size_bytes": 6695},
+    {"path": "scripts/validate_drive_snapshot_catalog.py", "sha256": "3d54f5be8c24bfda610b8a408a33956784a5eafbd82f655f933b36df892770cb", "size_bytes": 7619},
+    {"path": "tests/test_drive_snapshot_catalog.py", "sha256": "374f415d4c87efec7ec0e731be293f69414b9d1b8c1af36d248602d946f6e72d", "size_bytes": 2036},
+    {"path": "auditoria/drive_snapshot_validation_report.json", "sha256": "8beac22fbcb2ce05304ab6b51a4429f67086e274f7ae1565a8b438bed7db6902", "size_bytes": 211}
+  ],
+  "limitations": [
+    "Hashes of the original Drive exports were not computed in this cycle.",
+    "Asset-pointer reconciliation remains incomplete.",
+    "js334 and json17 remain duplicate candidates, not proven duplicates."
+  ],
+  "next_verifiable_step": "Compute streaming SHA-256 for complete exports and append results without rewriting source history."
+}
