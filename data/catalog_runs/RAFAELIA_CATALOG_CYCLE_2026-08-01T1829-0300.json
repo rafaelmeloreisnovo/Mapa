@@ -1,0 +1,99 @@
+{
+  "schema": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260801T182900-0300-MYCAT",
+  "started_at": "2026-08-01T18:29:00-03:00",
+  "mode": "NON_DESTRUCTIVE_INCREMENTAL",
+  "claim_allowed": false,
+  "scope": "GITHUB_UPSTREAM_PROVENANCE_AND_AUTOMATION_CLASSIFICATION",
+  "sources_checked": [
+    "rafaelmeloreisnovo/myCat-iahelpsus",
+    "yumiaura/myCat",
+    "yumiaura/myCat PR #43",
+    "yumiaura/myCat PR #89"
+  ],
+  "evidence": {
+    "path": "data/evidence/github/mycat-upstream-provenance-2026-08-01.json",
+    "sha256": "34a313a5548880d1321ee5558c79153131dc3bf71cbab5805619d5a579605b3f"
+  },
+  "fork_application": {
+    "repository": "rafaelmeloreisnovo/myCat-iahelpsus",
+    "branch": "audit/upstream-provenance-20260801",
+    "pull_request": 1,
+    "head_commit": "71c1feca2e5b4a2e951e4a2d895d5079f683d036",
+    "snapshot_sha256": "7440fb968b26ab2513744fffc3694193ba2bf629da319509e3acd030220c8e51",
+    "state": "IMPLEMENTED_ON_BRANCH_MERGE_PENDING",
+    "validation": "PASS_LOCAL_SCHEMA_AND_FAIL_CLOSED_RULES",
+    "github_actions": "NO_STATUS_REPORTED_AT_OBSERVATION",
+    "merge": "TOKEN_VAZIO_CONNECTOR_SAFETY_BLOCK"
+  },
+  "verified_facts": {
+    "upstream_repository": "yumiaura/myCat",
+    "pre_application_status": "behind",
+    "pre_application_ahead_by": 0,
+    "pre_application_behind_by": 179,
+    "merge_base_commit": "e9fba63be25bfd61cf0518016fd63e5a4b4ad964",
+    "upstream_head_commit": "5d9a79c6ab3dcced021d57dd04a1e08445ebf871",
+    "automation_present": true,
+    "external_contribution_present": true
+  },
+  "classification_summary": [
+    {
+      "id": "CLM-MYCAT-UPSTREAM-RELATION-001",
+      "state": "PROVADO",
+      "claim_allowed": false
+    },
+    {
+      "id": "CLM-MYCAT-AUTOMATION-001",
+      "state": "PROVADO",
+      "claim_allowed": false
+    },
+    {
+      "id": "CLM-MYCAT-HYBRID-OPERATION-001",
+      "state": "EVIDENCIADO",
+      "claim_allowed": false
+    },
+    {
+      "id": "CLM-MYCAT-AUTONOMOUS-BOT-001",
+      "state": "TOKEN_VAZIO",
+      "claim_allowed": false
+    },
+    {
+      "id": "CLM-MYCAT-FOLLOW-EVENT-001",
+      "state": "TOKEN_VAZIO",
+      "claim_allowed": false
+    }
+  ],
+  "controls": {
+    "automatic_upstream_sync": false,
+    "public_metadata_only": true,
+    "identity_accusation_forbidden": true,
+    "manual_supply_chain_gate_required": true
+  },
+  "tokens_vazios": [
+    {
+      "token": "TOKEN_VAZIO_ACCOUNT_AUTONOMY",
+      "next_gate": "Obter declaração verificável ou evidência técnica inequívoca de autonomia integral."
+    },
+    {
+      "token": "TOKEN_VAZIO_FOLLOW_TIMELINE",
+      "next_gate": "Preservar snapshots públicos datados de follow/unfollow sem coletar dados privados."
+    },
+    {
+      "token": "TOKEN_VAZIO_DELETED_BRANCH_OR_FORCE_PUSH",
+      "next_gate": "Comparar archives, clones e reflogs locais legítimos disponíveis."
+    },
+    {
+      "token": "TOKEN_VAZIO_FORK_PR_MERGE",
+      "next_gate": "Revisar e mesclar o PR #1 pelo fluxo normal do GitHub; não mover main à força."
+    },
+    {
+      "token": "TOKEN_VAZIO_FORK_ACTIONS_EXECUTION",
+      "next_gate": "Confirmar execução do workflow Provenance Audit após o merge ou disparo manual."
+    }
+  ],
+  "R3": {
+    "F_ok": "Proveniência, automação verificável, colaboração externa, snapshot e gate recorrente foram implementados em branch e PR.",
+    "F_gap": "Merge e execução de Actions ainda não estão comprovados; autonomia integral e causalidade de follow permanecem não demonstradas.",
+    "F_next": "Mesclar PR #1 pelo fluxo autorizado, observar Actions, emitir closure receipt e manter sincronização upstream desativada."
+  }
+}
