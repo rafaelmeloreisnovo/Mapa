@@ -1,0 +1,33 @@
+{
+  "schema": "rafaelia.catalog-cycle-validation.v1",
+  "cycle_id": "CAT-20260731T234400-0300",
+  "validation_scope": "SESSION_STRUCTURAL_PRE_PR",
+  "results": {
+    "receipt_json_parse": "PASS",
+    "latents_jsonl_parse": "PASS",
+    "claims_jsonl_parse": "PASS",
+    "latent_record_count": 2,
+    "claim_record_count": 2,
+    "latent_ids_unique_in_delta": true,
+    "claim_ids_unique_in_delta": true,
+    "id_patterns": "PASS",
+    "claim_allowed_fail_closed": "PASS",
+    "branch_compare": {
+      "status": "ahead",
+      "ahead_by_before_validation_commit": 5,
+      "behind_by": 0,
+      "files_added_before_validation_commit": 5
+    }
+  },
+  "content_sha256": {
+    "data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-07-31T2344-0300.json": "bcc089a37728bdd43e8eb164d257140e962632c05d21954fcd557be25b06227d",
+    "data/latents/deltas/latents.2026-07-31T2344-0300.jsonl": "87593503feda85398a7add8b4ba195b8ab5d4a2ed6329e32dc9c24bcb34346e9",
+    "data/claims/deltas/paper_claims.2026-07-31T2344-0300.jsonl": "29710257f6850a5fad04935dcdfb2f5eac36b412639e41c83dff42aba4c08ca9"
+  },
+  "limits": [
+    "This validation checks JSON syntax, record counts, ID uniqueness inside the delta, ID patterns and fail-closed claim_allowed state.",
+    "It does not constitute independent scientific reproduction or external artifact verification.",
+    "Repository CI status remains separate from this session validation."
+  ],
+  "claim_allowed": false
+}
