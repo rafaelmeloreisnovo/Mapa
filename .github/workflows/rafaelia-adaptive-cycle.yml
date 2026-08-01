@@ -53,7 +53,7 @@ jobs:
         uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57
         with:
           path: artifacts/index-cache
-          key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}
+          key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-
 
@@ -135,7 +135,7 @@ jobs:
         uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57
         with:
           path: artifacts/index-cache
-          key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}
+          key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Upload cycle receipt with navigation copy
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
