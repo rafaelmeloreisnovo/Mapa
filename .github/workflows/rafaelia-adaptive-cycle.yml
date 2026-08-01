@@ -1,0 +1,68 @@
+name: RAFAELIA Adaptive Cycle
+
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "data/control-plane/RAFAELIA_ADAPTIVE_CYCLE.v1.json"
+      - "data/formulas/RAFAELIA_FORMULA_REGISTRY.v1.json"
+      - "scripts/run_rafaelia_adaptive_cycle.py"
+      - "tests/test_rafaelia_adaptive_cycle.py"
+      - "docs/architecture/RAFAELIA_ADAPTIVE_CYCLE_FIBONACCI_V1.md"
+      - ".github/workflows/rafaelia-adaptive-cycle.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafaelia-adaptive-cycle-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  cycle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Contract tests
+        run: python -m unittest -v tests.test_rafaelia_adaptive_cycle
+
+      - name: Execute read-only microcycle
+        run: |
+          python scripts/run_rafaelia_adaptive_cycle.py \
+            --root . \
+            --output-dir artifacts/rafaelia-cycle
+
+      - name: Verify receipt boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt = json.loads(Path('artifacts/rafaelia-cycle/cycle_receipt.json').read_text())
+          assert receipt['decision'] == 'EXECUTED_READ_ONLY'
+          assert receipt['claim_allowed'] is False
+          assert receipt['automatic_mutation'] is False
+          assert receipt['automatic_merge'] is False
+          assert len(receipt['toroidal_state']) == 7
+          assert receipt['formula_evaluation']['formula_count'] == 50
+          PY
+
+      - name: Upload cycle receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rafaelia-adaptive-cycle-${{ github.run_id }}
+          path: artifacts/rafaelia-cycle/
+          if-no-files-found: error
+          retention-days: 30
