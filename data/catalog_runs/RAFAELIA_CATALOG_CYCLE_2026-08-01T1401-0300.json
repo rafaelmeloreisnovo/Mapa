@@ -1,0 +1,117 @@
+{
+  "schema": "rafaelia.catalog-cycle/v1",
+  "cycle_id": "CAT-20260801T1401-0300",
+  "observed_at": "2026-08-01T14:01:23-03:00",
+  "cutoff_previous": "2026-08-01T16:02:00Z",
+  "mode": "NON_DESTRUCTIVE_INCREMENTAL_APPEND_ONLY",
+  "claim_allowed": false,
+  "authority": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+  "drive": {
+    "reference_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "reference_state": "CANONICAL_DRAFT",
+    "delta_query": "modifiedTime > 2026-08-01T16:02:00Z AND keyword RAFAELIA",
+    "observed_delta": ["reference_document_modified"],
+    "full_pagination_proven": false,
+    "content_digest_proven": false
+  },
+  "canonical_promotions": [
+    {
+      "repository": "instituto-Rafael/LivroVivo_ThisBookLives",
+      "merge_commit": "2b743990cb6d9e2b97e6b70ddea3c393815a52cb",
+      "subject": "domain cell, human/AI mirrors and auditable ledger V1",
+      "classification": ["PROVADO", "EVIDENCIADO"],
+      "limits": ["claim_allowed=false", "human authority required", "private raw text forbidden"]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "merge_commit": "d1e6d88461fd47c8447a912e177dd68a5e143d92",
+      "subject": "living-book domain route and federated authority matrix V1",
+      "classification": ["PROVADO", "EVIDENCIADO", "MODELO_ANALOGICO"],
+      "object_digests": {
+        "sha256": "c2dba442fb9efedb33b4ecc40b38d2f594b7bd0e343051be93087c26724fc9c7",
+        "sha3_256": "cfbc142cafba40b9e31bdcd4b0f4dbdd2ea3258ea3014c59e02ff8ab35a25b05",
+        "blake2b_256": "bbe51280f4a16110ef081bc155ee7c9b3bff5a1cb7d6772af8060262a7abf224"
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "merge_commit": "895f58dd17985e406365536eb6491fe03a830c0c",
+      "subject": "non-executable Living Book domain IR V1",
+      "classification": ["PROVADO", "EVIDENCIADO"],
+      "local_equivalent_tests": "8/8 PASS",
+      "exact_branch_runtime": "TOKEN_VAZIO_NOT_EXECUTED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "merge_commit": "c3c74595c391010d0c0c6173b4579641a072a5a2",
+      "subject": "descriptor-only IR bundle V1",
+      "classification": ["PROVADO", "EVIDENCIADO"],
+      "dispatch_allowed": false
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "merge_commit": "86c854132cb4a5ac5f2fe6c87f6d815ff0505533",
+      "subject": "inspect-only Living Book cockpit V1",
+      "classification": ["PROVADO", "EVIDENCIADO"],
+      "physical_runtime": "TOKEN_VAZIO_NOT_EXECUTED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "merge_commit": "71edb2209de5701f16e251bd7ac89820f389774c",
+      "subject": "incremental semantic runtime receipt and full-scan equivalence gate",
+      "classification": ["PROVADO", "EVIDENCIADO"],
+      "ci_status_observed": "TOKEN_VAZIO_NO_COMBINED_STATUS"
+    },
+    {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "merge_commit": "ebecd942b439cef887dc0f9a1437fff1fe009590",
+      "subject": "fail-closed scientific cycle closure with Bayes and replication gates",
+      "classification": ["PROVADO", "EVIDENCIADO"],
+      "scientific_gate_default": "BLOCKED",
+      "token_vazio": ["TOKEN_VAZIO_REAL_BAYES_RECEIPT", "TOKEN_VAZIO_INDEPENDENT_REPLICATION"]
+    }
+  ],
+  "dependency_topology": [
+    "LivroVivo_ThisBookLives -> Mapa authority route",
+    "Mapa route -> RafPolimata non-executable IR",
+    "RafPolimata IR -> RafGitTools descriptor-only bundle",
+    "RafGitTools bundle -> Termux inspect-only cockpit",
+    "Mapa semantic runtime -> incremental catalog receipt",
+    "RLL scientific closure -> verified Bayes receipt + independent replication receipt"
+  ],
+  "epistemic_summary": {
+    "PROVADO": 7,
+    "EVIDENCIADO": 7,
+    "HIPOTESE": 1,
+    "MODELO_ANALOGICO": 1,
+    "PARABOLA": 0,
+    "REFUTADO": 2,
+    "TOKEN_VAZIO": 6
+  },
+  "claims": [
+    {"class": "HIPOTESE", "text": "a cadeia federada reduz inferência silenciosa e custo de reconciliação; métricas comparativas ainda faltam"},
+    {"class": "REFUTADO", "text": "merge e teste em fonte equivalente não provam execução física Termux"},
+    {"class": "REFUTADO", "text": "workflow e contrato científico não provam Bayes real nem replicação independente"}
+  ],
+  "token_vazio": [
+    {"id": "TOKEN_VAZIO_EXACT_CHECKOUT_TESTS", "next_step": "executar validadores nos commits canônicos exatos e preservar stdout stderr ambiente e digests"},
+    {"id": "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME", "next_step": "executar cockpit inspect-only em dispositivo Termux identificado e gerar receipt"},
+    {"id": "TOKEN_VAZIO_ANDROID_UI_WIRING", "next_step": "implementar e testar ligação UI sem ampliar permissões"},
+    {"id": "TOKEN_VAZIO_REAL_BAYES_RECEIPT", "next_step": "materializar status Bayes VERIFIED com evidence_path e digest"},
+    {"id": "TOKEN_VAZIO_INDEPENDENT_REPLICATION", "next_step": "executar replicação independente com mesmos inputs contrato e tolerância"},
+    {"id": "TOKEN_VAZIO_FULL_DRIVE_PAGINATION_AND_DIGEST", "next_step": "paginar inventário Drive por modifiedTime e calcular digests de exportações estáveis"}
+  ],
+  "actions_not_executed": [
+    "no Drive write capability exposed",
+    "no physical Termux or Android runtime executed",
+    "no independent scientific replication executed",
+    "no real Bayes receipt materialized",
+    "no claim promoted",
+    "no history rewritten"
+  ],
+  "R3": {
+    "F_ok": "sete promoções canônicas e a cadeia federada Livro Vivo até gates semântico e científico foram indexadas com commits e digests observáveis",
+    "F_gap": "paginação e digest integral do Drive, testes em checkouts exatos, runtime físico, UI Android, Bayes real e replicação independente",
+    "F_next": "executar gates nos commits canônicos exatos e anexar receipts antes de qualquer promoção de execução ou ciência"
+  }
+}
