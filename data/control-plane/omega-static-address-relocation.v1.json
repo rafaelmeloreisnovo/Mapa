@@ -1,6 +1,6 @@
 {
   "schema_version": "omega-static-address-relocation.v1",
-  "record_id": "OMEGA-STATIC-ADDRESS-20260801-V1",
+  "record_id": "OMEGA-STATIC-ADDRESS-20260801-V2",
   "claim_allowed": false,
   "address_model": {
     "equation": "ADDRESS=BASE+STABLE_OFFSET",
@@ -8,7 +8,7 @@
     "virtual_space": "PARTIAL",
     "physical_space": "TOKEN_VAZIO",
     "base_policy": "BASE_RELATIVE",
-    "mapping_epoch": 1
+    "mapping_epoch": 2
   },
   "reuse_contract": {
     "offset_table": "SAME_MANIFEST_SIGNATURE",
@@ -82,8 +82,20 @@
     {
       "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
       "path": "app/src/main/java/com/vectras/vm/vectra/ZiprafDirectRuntime.kt",
-      "ref": "master",
-      "evidence_state": "SOURCE_AND_TESTS_PRESENT"
+      "ref": "master@e83836f5227afeeab99f474991fea9502067973d",
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "path": "app/src/main/java/com/vectras/vm/vectra/ZiprafStaticLayout.kt",
+      "ref": "master@e83836f5227afeeab99f474991fea9502067973d",
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "path": "docs/architecture/ZIPRAF_STATIC_LAYOUT_RUNTIME_V2.md",
+      "ref": "master@e83836f5227afeeab99f474991fea9502067973d",
+      "evidence_state": "VERIFIED_LIMITED"
     },
     {
       "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
@@ -108,6 +120,12 @@
       "path": "docs/TOF_NAMESPACE_ALLOCATION_FAULT_INVARIANT_V1.md",
       "ref": "main",
       "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "data/evidence/zipraf-static-layout-runtime.v2.json",
+      "ref": "main",
+      "evidence_state": "VERIFIED_LIMITED"
     }
   ],
   "semantic_guards": {
@@ -122,12 +140,14 @@
     "physical_runtime": "TOKEN_VAZIO",
     "independent_reproduction": "TOKEN_VAZIO",
     "limitations": [
-      "Android ASLR and virtual-base stability have not been demonstrated",
-      "Physical-address stability has not been demonstrated",
-      "The current Java ZIPRAF CRC path allocates a ByteBuffer",
-      "The current ZIPRAF mapping path retains declared size and mapping limits",
-      "A fragmentation-free arena does not prove a fragmentation-free filesystem or device",
-      "The passing host gate proves the delimited C reference contract, not Android or physical-address stability"
+      "The ZIPRAF V2 host KAT passed, but Android compilation was blocked before Gradle by a missing pinned qemu_rafaelia commit",
+      "Android device execution, ASLR behavior and virtual-base stability have not been demonstrated",
+      "Physical-address stability has not been demonstrated and is rejected by the ZIPRAF BASE_RELATIVE adapter",
+      "The default CRC path creates one scratch array per verification; callers may provide and reuse their own scratch array",
+      "The runtime now maps bounded L2 spans instead of the full payload, but a real archive above 2 GiB has not been executed",
+      "Mapping p50/p95/p99 values from shared host runners are observational and are not Android hardware benchmarks",
+      "A fragmentation-free arena does not prove a fragmentation-free filesystem or storage device",
+      "Independent reproduction remains TOKEN_VAZIO"
     ]
   }
 }
