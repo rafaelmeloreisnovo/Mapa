@@ -4,18 +4,28 @@ on:
   push:
     paths:
       - 'docs/OMEGA_STATIC_ADDRESS_RELOCATION_INVARIANT_V1.md'
+      - 'docs/ZIPRAF_STATIC_LAYOUT_RUNTIME_V2_FEDERATION.md'
       - 'schemas/omega-static-address-relocation.v1.schema.json'
+      - 'schemas/zipraf-static-layout-runtime.v2.schema.json'
       - 'data/control-plane/omega-static-address-relocation.v1.json'
+      - 'data/evidence/zipraf-static-layout-runtime.v2.json'
       - 'scripts/validate_omega_static_layout.py'
+      - 'scripts/validate_zipraf_static_layout_runtime_v2.py'
       - 'tests/test_omega_static_layout.py'
+      - 'tests/test_zipraf_static_layout_runtime_v2.py'
       - '.github/workflows/omega-static-layout.yml'
   pull_request:
     paths:
       - 'docs/OMEGA_STATIC_ADDRESS_RELOCATION_INVARIANT_V1.md'
+      - 'docs/ZIPRAF_STATIC_LAYOUT_RUNTIME_V2_FEDERATION.md'
       - 'schemas/omega-static-address-relocation.v1.schema.json'
+      - 'schemas/zipraf-static-layout-runtime.v2.schema.json'
       - 'data/control-plane/omega-static-address-relocation.v1.json'
+      - 'data/evidence/zipraf-static-layout-runtime.v2.json'
       - 'scripts/validate_omega_static_layout.py'
+      - 'scripts/validate_zipraf_static_layout_runtime_v2.py'
       - 'tests/test_omega_static_layout.py'
+      - 'tests/test_zipraf_static_layout_runtime_v2.py'
       - '.github/workflows/omega-static-layout.yml'
 
 permissions:
@@ -27,15 +37,26 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Compile validator
-        run: python3 -m py_compile scripts/validate_omega_static_layout.py tests/test_omega_static_layout.py
-      - name: Validate canonical record
+      - name: Compile validators
+        run: |
+          python3 -m py_compile \
+            scripts/validate_omega_static_layout.py \
+            scripts/validate_zipraf_static_layout_runtime_v2.py \
+            tests/test_omega_static_layout.py \
+            tests/test_zipraf_static_layout_runtime_v2.py
+      - name: Validate canonical control plane
         run: python3 scripts/validate_omega_static_layout.py --write-report artifacts/omega-static-layout-report.json
+      - name: Validate ZIPRAF V2 evidence receipt
+        run: python3 scripts/validate_zipraf_static_layout_runtime_v2.py --write-report artifacts/zipraf-static-layout-runtime-v2-report.json
       - name: Run adversarial tests
-        run: python3 -m unittest -v tests/test_omega_static_layout.py
-      - name: Upload deterministic report
+        run: |
+          python3 -m unittest -v \
+            tests/test_omega_static_layout.py \
+            tests/test_zipraf_static_layout_runtime_v2.py
+      - name: Upload deterministic reports
         uses: actions/upload-artifact@v4
         with:
-          name: omega-static-layout-report
-          path: artifacts/omega-static-layout-report.json
+          name: omega-static-layout-reports
+          path: artifacts/*.json
           if-no-files-found: error
+          retention-days: 30
