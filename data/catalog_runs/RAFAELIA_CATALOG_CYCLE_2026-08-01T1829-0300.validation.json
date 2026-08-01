@@ -1,0 +1,40 @@
+{
+  "schema": "rafaelia.catalog-validation.v1",
+  "cycle_id": "CAT-20260801T182900-0300-MYCAT",
+  "validated_at": "2026-08-01T18:33:00-03:00",
+  "state": "PASS_LOCAL_REVIEW_REQUIRED",
+  "checks": {
+    "evidence_json_parse": "PASS",
+    "receipt_json_parse": "PASS",
+    "latent_jsonl_parse": "PASS_2_RECORDS",
+    "claim_jsonl_parse": "PASS_5_RECORDS",
+    "unique_latent_ids": "PASS",
+    "unique_claim_ids": "PASS",
+    "all_claim_allowed_false": "PASS",
+    "automatic_upstream_sync_false": "PASS",
+    "public_metadata_only": "PASS",
+    "identity_accusation_fail_closed": "PASS",
+    "fork_snapshot_sha256": "PASS"
+  },
+  "fork_snapshot_sha256": "7440fb968b26ab2513744fffc3694193ba2bf629da319509e3acd030220c8e51",
+  "evidence_sha256": "34a313a5548880d1321ee5558c79153131dc3bf71cbab5805619d5a579605b3f",
+  "git_blob_shas": {
+    "evidence": "c338d5994a297d6ffb46f4f6fdadb161bc978505",
+    "receipt": "c20d811a4062b95d32b3bd826131e9e3a6fe0276",
+    "latents": "cd841d75facc1fc85fcc620930415ddba7ce4666",
+    "claims": "26b923df997200e2d3cc1d7f01035e925f7bb68b",
+    "report": "5dbc1495e55def2243e099535892e74100e1a0c1"
+  },
+  "external_execution": {
+    "fork_pull_request": 1,
+    "fork_head_commit": "71c1feca2e5b4a2e951e4a2d895d5079f683d036",
+    "github_actions_status": "TOKEN_VAZIO_NO_STATUS_REPORTED",
+    "merge_status": "TOKEN_VAZIO_CONNECTOR_SAFETY_BLOCK"
+  },
+  "limitations": [
+    "A validação local confirma estrutura e regras fail-closed, não substitui execução do GitHub Actions.",
+    "O PR do fork permanece aberto e não foi promovido a main.",
+    "A classificação EVIDENCIADO não deve ser convertida em identidade ou acusação."
+  ],
+  "claim_allowed": false
+}
