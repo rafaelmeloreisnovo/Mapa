@@ -1,0 +1,31 @@
+{
+  "schema_version": "rafaelia.branch-lane-promotion.v1",
+  "base_required": "main",
+  "head_pattern": "^main_[0-9]{2}_[a-z0-9_]+$",
+  "automatic_merge": false,
+  "required_fields": {
+    "source": "string_or_reference",
+    "claim_state": [
+      "PROVADO",
+      "EVIDENCIADO",
+      "HIPOTESE",
+      "MODELO_ANALOGICO",
+      "PARABOLA",
+      "REFUTADO",
+      "TOKEN_VAZIO"
+    ],
+    "evidence": "reference_or_TOKEN_VAZIO",
+    "falsifier": "test_or_condition_or_TOKEN_VAZIO",
+    "rollback": "reversible_action",
+    "decision": [
+      "READY_FOR_HUMAN_REVIEW",
+      "REJECTED",
+      "BLOCKED_TOKEN_VAZIO"
+    ]
+  },
+  "required_checks": [
+    "branch-topology / validate"
+  ],
+  "human_authorization_required": true,
+  "post_merge_checkpoint_lane": "main_09_memoria_arquivo"
+}
