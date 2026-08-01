@@ -1,0 +1,130 @@
+{
+  "schema": "rafaelia.adaptive-cycle.v1",
+  "claim_allowed": false,
+  "publication_ready": false,
+  "automatic_mutation": false,
+  "automatic_merge": false,
+  "source_mode": "READ_ONLY",
+  "pipeline": [
+    "source",
+    "index",
+    "semantic_token",
+    "claim",
+    "evidence",
+    "falsifier",
+    "decision",
+    "artifact"
+  ],
+  "cadence": {
+    "microcycle_minutes": 15,
+    "github_cron": "7,22,37,52 * * * *",
+    "consolidation_microcycles": 4,
+    "period": 42,
+    "note": "GitHub microcycles produce read-only artifacts; human-facing consolidation may occur hourly."
+  },
+  "cycle": {
+    "phases": ["psi", "chi", "rho", "delta", "sigma", "omega"],
+    "phase_meanings": {
+      "psi": "intention",
+      "chi": "observation",
+      "rho": "noise_measurement",
+      "delta": "ethical_transmutation",
+      "sigma": "coherent_memory",
+      "omega": "bounded_completion"
+    },
+    "state_fields": ["u", "v", "psi", "chi", "rho", "delta", "sigma"],
+    "state_domain": "[0,1)^7",
+    "alpha": 0.25,
+    "phi_metric": "(1-H)*C",
+    "initial_C": 0.8660254037844386,
+    "initial_H": 0.6180339887498948
+  },
+  "fibonacci_rafael": {
+    "a": 0.8660254037844386,
+    "theta_degrees": 279.0,
+    "initial": 1.0,
+    "horizon": 42,
+    "variants": {
+      "canonical_plus_sin": "F[n+1] = a*F[n] + pi*sin(theta)",
+      "listed_minus_sin": "F[n+1] = a*F[n] - pi*sin(theta)"
+    },
+    "conflict_policy": "COMPUTE_BOTH_NO_SILENT_SELECTION",
+    "scheduling_use": "priority_modulation_only_not_truth_claim"
+  },
+  "required_paths": [
+    "README.md",
+    "data/control-plane",
+    "docs",
+    "scripts",
+    "tests"
+  ],
+  "formula_registry": "data/formulas/RAFAELIA_FORMULA_REGISTRY.v1.json",
+  "tasks": [
+    {
+      "id": "MAPA_DRIVE_CORPUS_THRESHOLD_CALIBRATION",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "state": "TOKEN_VAZIO",
+      "base_priority": 100,
+      "preferred_phase": "chi",
+      "automation_allowed": false,
+      "next_step": "Execute semantic incremental runtime against a real Drive corpus at multiple corpus sizes and seal latency/coverage receipts.",
+      "proof_required": "federated Drive corpus receipt with hashes and full-scan equivalence"
+    },
+    {
+      "id": "RLL_REAL_BAYES_INFERENCE",
+      "authority": "instituto-Rafael/relativity-living-light",
+      "state": "TOKEN_VAZIO",
+      "base_priority": 95,
+      "preferred_phase": "delta",
+      "automation_allowed": false,
+      "next_step": "Run real MCMC or nested sampling under the frozen real-data contract and emit a hash-bound inference receipt.",
+      "proof_required": "real Bayesian evidence artifact; BIC proxy is insufficient"
+    },
+    {
+      "id": "RLL_INDEPENDENT_REPLICATION",
+      "authority": "instituto-Rafael/relativity-living-light",
+      "state": "TOKEN_VAZIO",
+      "base_priority": 90,
+      "preferred_phase": "omega",
+      "automation_allowed": false,
+      "next_step": "Reproduce the frozen input contract on a second machine or independent implementation and compare numerical tolerances.",
+      "proof_required": "independent receipt bound to inputs, environment and tolerances"
+    },
+    {
+      "id": "RLL_EXTERNAL_DEPENDENCY_GRAPH",
+      "authority": "instituto-Rafael/relativity-living-light",
+      "state": "TOKEN_VAZIO_EXTERNAL_SETTING",
+      "base_priority": 88,
+      "preferred_phase": "rho",
+      "automation_allowed": false,
+      "next_step": "Enable and verify GitHub Dependency Graph, then rerun dependency review on the integration edge.",
+      "proof_required": "observable GitHub dependency-review check"
+    },
+    {
+      "id": "TERMUX_PHYSICAL_RUNTIME_RECEIPT",
+      "authority": "local/Termux",
+      "state": "TOKEN_VAZIO",
+      "base_priority": 80,
+      "preferred_phase": "sigma",
+      "automation_allowed": false,
+      "next_step": "Execute the exact clean checkout locally in Termux and seal environment, command, output and hash receipts.",
+      "proof_required": "physical Android/Termux receipt"
+    },
+    {
+      "id": "FORMULA_REGISTRY_STRUCTURAL_AUDIT",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "state": "EXECUTABLE",
+      "base_priority": 70,
+      "preferred_phase": "psi",
+      "automation_allowed": true,
+      "next_step": "Validate all 50 formula records, execute safe KATs and preserve undefined or conflicting expressions without promotion.",
+      "proof_required": "cycle artifact with formula counts, KAT values and registry SHA-256"
+    }
+  ],
+  "decision_policy": {
+    "successful_cycle": "EXECUTED_READ_ONLY",
+    "missing_required_input": "BLOCKED_TOKEN_VAZIO",
+    "maximum_automatic_promotion": "READY_FOR_HUMAN_REVIEW",
+    "claim_allowed_after_cycle": false
+  }
+}
