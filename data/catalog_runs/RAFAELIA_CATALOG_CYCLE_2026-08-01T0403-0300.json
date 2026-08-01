@@ -1,0 +1,91 @@
+{
+  "schema": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260801T040341-0300",
+  "started_at": "2026-08-01T04:03:41-03:00",
+  "mode": "NON_DESTRUCTIVE_INCREMENTAL_NOOP_CHECKPOINT",
+  "claim_allowed": false,
+  "canonical_reference": {
+    "system": "GOOGLE_DRIVE",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "current_revision_id": "103",
+    "previous_revision_id": "101",
+    "modified_time": "2026-08-01T03:05:34.758Z"
+  },
+  "previous_cycle": {
+    "cycle_id": "CAT-20260731T234400-0300",
+    "drive_checkpoint_file_id": "13e76nVZ-Qr_GzkBDCFiFhPNnWFVzvtx5fkWI259_nvY",
+    "github_commit": "6a671268cb6180bfd2bce5549842b7fbc3edcf50",
+    "github_commit_time": "2026-08-01T03:03:58Z",
+    "classification": "EVIDENCIADO",
+    "reason": "Commit e revisões Drive foram observados diretamente; o conteúdo representa o ciclo imediatamente anterior, não um novo delta de domínio."
+  },
+  "sources_checked": [
+    "rafaelmeloreisnovo/Mapa",
+    "rafaelmeloreisnovo/RafGitTools",
+    "rafaelmeloreisnovo/RafPolimata",
+    "rafaelmeloreisnovo/papers",
+    "instituto-Rafael/relativity-living-light",
+    "Google Drive modifiedTime > 2026-08-01T02:44:00Z"
+  ],
+  "incremental_result": {
+    "new_domain_repositories": 0,
+    "new_domain_documents": 0,
+    "new_datasets": 0,
+    "new_papers": 0,
+    "new_workflows": 0,
+    "new_code_artifacts": 0,
+    "new_receipts": 0,
+    "new_claims": 0,
+    "duplicate_records_written": 0,
+    "catalog_checkpoint_written": 1
+  },
+  "observed_changes": [
+    {
+      "kind": "CATALOG_COMMIT",
+      "location": "rafaelmeloreisnovo/Mapa@6a671268cb6180bfd2bce5549842b7fbc3edcf50",
+      "state": "EVIDENCIADO",
+      "claim_allowed": false
+    },
+    {
+      "kind": "DRIVE_CANONICAL_REVISION",
+      "location": "Google Drive file 1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88 revision 103",
+      "state": "EVIDENCIADO",
+      "claim_allowed": false
+    },
+    {
+      "kind": "DRIVE_CYCLE_CHECKPOINT",
+      "location": "Google Drive file 13e76nVZ-Qr_GzkBDCFiFhPNnWFVzvtx5fkWI259_nvY",
+      "state": "EVIDENCIADO",
+      "claim_allowed": false
+    }
+  ],
+  "claim_classification_delta": {
+    "PROVADO": 0,
+    "EVIDENCIADO": 3,
+    "HIPOTESE": 0,
+    "MODELO_ANALOGICO": 0,
+    "PARABOLA": 0,
+    "REFUTADO": 0,
+    "TOKEN_VAZIO": 1
+  },
+  "tokens_vazios": [
+    {
+      "token": "TOKEN_VAZIO_CI_STATUS_MAPA_6A671268",
+      "reason": "A consulta de status combinado não retornou checks associados ao commit.",
+      "next_gate": "Consultar runs do GitHub Actions ou reexecutar o workflow de validação do catálogo sem alterar claims."
+    }
+  ],
+  "writes": {
+    "github": [
+      "data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-01T0403-0300.json"
+    ],
+    "drive": [],
+    "reason_no_drive_write": "Não houve novo conteúdo de domínio; uma nova cópia editorial duplicaria o checkpoint anterior."
+  },
+  "R3": {
+    "F_ok": "Incremento verificado contra o corte anterior; artefatos do ciclo precedente reconhecidos e checkpoint append-only criado sem duplicar latentes ou claims.",
+    "F_gap": "Status CI do commit 6a671268 não foi exposto pela consulta combinada; cobertura integral paginada do Drive continua fora deste delta horário.",
+    "F_next": "No próximo ciclo, comparar apenas objetos posteriores a este checkpoint e promover somente deltas de domínio com origem, hash e destino canônico verificáveis."
+  }
+}
