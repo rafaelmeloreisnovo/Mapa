@@ -1,0 +1,41 @@
+name: Semantic Runtime Receipt
+
+on:
+  pull_request:
+    paths:
+      - "scripts/semantic_incremental_runtime_receipt.py"
+      - "tests/test_semantic_incremental_runtime_receipt.py"
+      - ".github/workflows/semantic-runtime-receipt.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runtime-receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Tests
+        run: python -m pytest -q tests/test_semantic_incremental_runtime_receipt.py
+      - name: Materialize baseline receipt
+        run: |
+          mkdir -p artifacts/semantic-runtime
+          python scripts/semantic_incremental_runtime_receipt.py docs \
+            --out-index artifacts/semantic-runtime/index.json \
+            --receipt artifacts/semantic-runtime/receipt.json
+      - name: Re-run incrementally and compare
+        run: |
+          python scripts/semantic_incremental_runtime_receipt.py docs \
+            --previous-index artifacts/semantic-runtime/index.json \
+            --out-index artifacts/semantic-runtime/index.incremental.json \
+            --receipt artifacts/semantic-runtime/receipt.incremental.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semantic-runtime-receipt
+          path: artifacts/semantic-runtime/
