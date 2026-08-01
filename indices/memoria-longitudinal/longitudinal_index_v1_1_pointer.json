@@ -1,0 +1,57 @@
+{
+  "schema_version": "mapa.longitudinal-index-pointer.v1",
+  "pointer_id": "LONGITUDINAL-INDEX-V1-1-20260801",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/MemRafcode",
+    "branch": "main_09_memoria_longitudinal",
+    "path": "longitudinal_index/",
+    "pull_request": 2,
+    "head_sha": "7d8c94012ce25ec8485790dfe375ca5f2976d11f",
+    "authority": "engine_schemas_tests_policies_receipts"
+  },
+  "control_plane": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pull_request": 121,
+    "authority": "federated_pointer_state_dependency_and_promotion_route"
+  },
+  "drive_distribution": {
+    "root_folder_id": "1cwL1d-4KpVHkbYDtZwCyDzExOYYOFxzV",
+    "index_folder_id": "1fBSbYDIB0_3vNJHaOVTV7QBhDViRLPsf",
+    "audit_folder_id": "1MM4Uv0dfTt7zmKAIHJL5I7nHQrbWI9zM",
+    "upload_receipt_id": "1S3_JQowqD7NpfZh2aZvPu9VISAttsHsc",
+    "producer_head_ci_receipt_id": "1wSTEpgCeeNmif5Hc17JWMljwKDuBuOWS",
+    "zip_id": "1ASybEetThm5TKDttrED2MHSBJcS5vheC",
+    "database_gzip_id": "1BfcZNjmxRuAJisuaytroDUAj7KLu5bJe",
+    "manifest_id": "1qeaHdPmDFgpQ5rflUdQmlFGefX47VGjN",
+    "schema_id": "1OvcPxExPudaMdFMz1cxwIhlDCu58rTGq"
+  },
+  "observed_metrics": {
+    "sources": 15,
+    "entities": 51581,
+    "observations": 52271,
+    "edges": 44611,
+    "global_root": "1716cc075b5a68110c299a567524c884385fadc5722d4001839721596620c41e",
+    "ledger_tip": "bfdeeed21fcc35270eb49c57082261b6002355734ad6fcb387476930795ca2bb"
+  },
+  "evidence_state": {
+    "local_compile": "PASS",
+    "local_unit_tests": "PASS",
+    "sqlite_integrity": "PASS",
+    "drive_mirror": "PASS",
+    "remote_ci": "PASS",
+    "remote_ci_run_id": 30721360791,
+    "remote_ci_job_id": 91425604709,
+    "independent_reproduction": "TOKEN_VAZIO",
+    "physical_termux_execution": "TOKEN_VAZIO",
+    "full_cold_expansion": "TOKEN_VAZIO"
+  },
+  "boundaries": [
+    "Mapa does not duplicate the producer engine or the heavy SQLite database.",
+    "Hash and Merkle roots attest integrity, not semantic or scientific truth.",
+    "Expired historical credentials remain excluded from repository and Drive derivatives.",
+    "The raw SQLite file exceeded the connector upload boundary and is distributed as gzip and inside ZIP with uncompressed SHA-256."
+  ],
+  "next_verifiable_step": "Reproduce the CORE build on an exact second-device checkout and compare deterministic roots; then execute the physical Termux runner."
+}
