@@ -1,0 +1,93 @@
+{
+  "schema": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260731T234400-0300",
+  "started_at": "2026-07-31T23:44:00-03:00",
+  "mode": "NON_DESTRUCTIVE_INCREMENTAL",
+  "claim_allowed": false,
+  "canonical_reference": {
+    "system": "GOOGLE_DRIVE",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "drive_checkpoint": {
+    "title": "RAFAELIA — Catálogo Operacional — Ciclo 2026-07-31 23h44 BRT",
+    "file_id": "13e76nVZ-Qr_GzkBDCFiFhPNnWFVzvtx5fkWI259_nvY"
+  },
+  "github_target": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "automation/catalog-cycle-20260731-2344",
+    "base": "main"
+  },
+  "sources_checked": [
+    "rafaelmeloreisnovo/Mapa",
+    "rafaelmeloreisnovo/RafGitTools",
+    "rafaelmeloreisnovo/RafPolimata",
+    "rafaelmeloreisnovo/papers",
+    "instituto-Rafael/relativity-living-light"
+  ],
+  "deltas": [
+    {
+      "id": "RLL-PR-627",
+      "state": "PASS_OPERATIONAL",
+      "merge_state": "MERGED",
+      "merge_commit": "dc5fcfb3b786bf59d32ebfa22ad6f4eed15f738e",
+      "claim_allowed": false,
+      "custody": {
+        "covariance_sha256": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc",
+        "result_sha256": "e23066e8445f940cf28b651a29c49789d8a3cdd1d492c00afe63a5247b9ce5ba",
+        "receipt_sha256": "9756233073dac1b7fcba266604f655e5823e22119513880cf0fd8d41d98754c7",
+        "semantic_sha256": "d7681b6426a106953a834b33d45e9b64c29272fb41c3a7d7cbbce16343de00cf"
+      },
+      "metrics_candidate_minus_baseline": {
+        "delta_chi2": 4.547473508864641e-13,
+        "delta_aic": 6.000000000000455,
+        "delta_aicc": 6.036390034648093,
+        "delta_bic": 22.23829205228003
+      },
+      "limits": [
+        "ONE_LIKELIHOOD_BLOCK_ONLY",
+        "NO_EXTERNAL_VALIDATION",
+        "NO_INDEPENDENT_REPLICATION",
+        "NO_JOINT_REAL_BAYES"
+      ]
+    },
+    {
+      "id": "RLL-PR-628",
+      "state": "PARTIAL_DRAFT",
+      "merge_state": "OPEN_DRAFT",
+      "head_commit": "79ec35f5fdb275645e89d3a685d9b44a6bb6f45d",
+      "run_id": 30658727866,
+      "artifact_id": 8804497381,
+      "artifact_sha256": "65806334cea799f77977dbf040eb7a32819f9d28bb5189d30751a4b1aaaf51b4",
+      "manifest_files": 107,
+      "steps": {
+        "ok": 38,
+        "token_vazio": 1,
+        "fail": 0
+      },
+      "scientific_gate": "BLOCKED",
+      "publication_ready": false,
+      "real_bayes_inference": "TOKEN_VAZIO",
+      "claim_allowed": false
+    }
+  ],
+  "tokens_vazios": [
+    {
+      "token": "TOKEN_VAZIO_INDEPENDENT_REPLICATION",
+      "next_gate": "Reexecutar o receipt em segunda máquina e implementação independente."
+    },
+    {
+      "token": "TOKEN_VAZIO_JOINT_REAL_BAYES",
+      "next_gate": "Executar MCMC/nested sampling real na likelihood conjunta com priors e convergência declarados."
+    },
+    {
+      "token": "TOKEN_VAZIO_FULL_DRIVE_COVERAGE",
+      "next_gate": "Gerar inventário read-only paginado e deduplicado de todos os objetos acessíveis no Drive."
+    }
+  ],
+  "R3": {
+    "F_ok": "Fontes canônicas localizadas e delta RLL reconciliado com commits, hashes, receipts e limites.",
+    "F_gap": "PR 628 não mesclada; reprodução independente, Bayes real conjunto e cobertura integral do Drive ausentes.",
+    "F_next": "Revisar o PR de catálogo, revisar PR 628 e reproduzir a cadeia sem sobrescrever históricos."
+  }
+}
