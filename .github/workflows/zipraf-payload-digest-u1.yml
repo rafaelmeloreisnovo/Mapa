@@ -1,0 +1,31 @@
+name: ZIPRAF Payload Digest U1 Federation
+
+on:
+  push:
+    paths:
+      - 'data/control-plane/zipraf-payload-digest-u1.v1.json'
+      - 'scripts/validate_zipraf_payload_digest_u1.py'
+      - 'tests/test_zipraf_payload_digest_u1.py'
+      - 'docs/ZIPRAF_PAYLOAD_DIGEST_U1_FEDERATION.md'
+      - '.github/workflows/zipraf-payload-digest-u1.yml'
+  pull_request:
+    paths:
+      - 'data/control-plane/zipraf-payload-digest-u1.v1.json'
+      - 'scripts/validate_zipraf_payload_digest_u1.py'
+      - 'tests/test_zipraf_payload_digest_u1.py'
+      - 'docs/ZIPRAF_PAYLOAD_DIGEST_U1_FEDERATION.md'
+      - '.github/workflows/zipraf-payload-digest-u1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  federated-digest-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pinned providers and receipt
+        run: python scripts/validate_zipraf_payload_digest_u1.py
+      - name: Run adversarial promotion tests
+        run: python -m unittest tests.test_zipraf_payload_digest_u1 -v
