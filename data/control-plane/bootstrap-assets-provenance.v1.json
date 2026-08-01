@@ -1,0 +1,73 @@
+{
+  "schema_version": "bootstrap-assets-provenance.v1",
+  "observed_at": "2026-08-01",
+  "status": "PRODUCER_GATE_PASS_BETA_BLOCKED",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "pull_request": 1080,
+    "branch": "main_03_bootstrap-provenance-v1",
+    "base_pull_request": 1078,
+    "head_sha": "94f114b5674d10395159103cef9c3f0269b25aa4",
+    "merged": false,
+    "gate_name": "Bootstrap Assets Provenance V1",
+    "gate_run": 30723165995,
+    "gate_result": "PASS"
+  },
+  "observed_reality": {
+    "loader_apk_generated_in_ci": true,
+    "architecture_tar_count_required": 4,
+    "architecture_tar_count_present": 0,
+    "missing": [
+      "arm64-v8a.tar",
+      "armeabi-v7a.tar",
+      "x86.tar",
+      "x86_64.tar"
+    ],
+    "android_ci_state": "BETA_BLOCKED_MISSING_BOOTSTRAP_ASSETS"
+  },
+  "authority_separation": {
+    "loader_apk_is_complete_bootstrap": false,
+    "apk_build_is_device_runtime": false,
+    "digest_is_provenance": false,
+    "drive_copy_is_original_source": false,
+    "documentation_claim_is_file_presence": false,
+    "blocked_contract_is_release_permission": false
+  },
+  "required_per_asset": [
+    "ABI",
+    "EXACT_FILENAME",
+    "SOURCE_URI",
+    "IMMUTABLE_SOURCE_REF",
+    "LICENSE_OR_PROVENANCE",
+    "SHA256",
+    "SIZE_BYTES",
+    "SAFE_READABLE_TAR"
+  ],
+  "promotion_sequence": [
+    "SOURCE_IDENTIFIED",
+    "LICENSE_RECORDED",
+    "FOUR_FILES_SUPPLIED",
+    "OFFLINE_VALIDATION_PASS",
+    "ATOMIC_MATERIALIZATION",
+    "ANDROID_BUILD_PASS",
+    "APK_SIGNATURE_RECEIPT",
+    "DEVICE_BOOTSTRAP_RECEIPT",
+    "SEPARATE_RELEASE_DECISION"
+  ],
+  "privacy_and_storage": {
+    "network_download_by_materializer": false,
+    "drive_may_store_verified_copy": true,
+    "drive_replaces_source_provenance": false,
+    "private_source_may_be_published_by_default": false
+  },
+  "claims": {
+    "official_bootstrap_assets_present": false,
+    "beta_installable": false,
+    "android_runtime_verified": false,
+    "device_bootstrap_verified": false,
+    "release_allowed": false,
+    "claim_allowed": false
+  }
+}

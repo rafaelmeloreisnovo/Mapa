@@ -9,8 +9,11 @@ on:
       - "data/control-plane/RAFAELIA_ADAPTIVE_CYCLE.v1.json"
       - "data/formulas/RAFAELIA_FORMULA_REGISTRY.v1.json"
       - "scripts/run_rafaelia_adaptive_cycle.py"
+      - "scripts/append_microcycle_index.py"
       - "tests/test_rafaelia_adaptive_cycle.py"
+      - "tests/test_microcycle_append_index.py"
       - "docs/architecture/RAFAELIA_ADAPTIVE_CYCLE_FIBONACCI_V1.md"
+      - "indices/microcycles/README.md"
       - ".github/workflows/rafaelia-adaptive-cycle.yml"
 
 permissions:
@@ -19,6 +22,9 @@ permissions:
 concurrency:
   group: rafaelia-adaptive-cycle-${{ github.ref }}
   cancel-in-progress: false
+
+env:
+  INDEX_BRANCH: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   cycle:
@@ -36,8 +42,37 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Contract tests
-        run: python -m unittest -v tests.test_rafaelia_adaptive_cycle
+      - name: Contract and append-only tests
+        run: |
+          python -m unittest -v \
+            tests.test_rafaelia_adaptive_cycle \
+            tests.test_microcycle_append_index
+
+      - name: Restore previous immutable index cache
+        id: restore-index
+        uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57
+        with:
+          path: artifacts/index-cache
+          key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-
+
+      - name: Record continuity observation
+        run: |
+          mkdir -p artifacts/index-cache
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          previous = Path('artifacts/index-cache/microcycle_index.json')
+          state = {
+              'state': 'FOUND_IMMUTABLE_CACHE' if previous.is_file() else 'TOKEN_VAZIO_NO_PREVIOUS_INDEX',
+              'transport': 'GITHUB_ACTIONS_CACHE_V2',
+              'claim_allowed': False,
+          }
+          Path('artifacts/index-cache/fetch_state.json').write_text(
+              json.dumps(state, indent=2, sort_keys=True) + '\n', encoding='utf-8'
+          )
+          PY
 
       - name: Execute read-only microcycle
         run: |
@@ -59,10 +94,109 @@ jobs:
           assert receipt['formula_evaluation']['formula_count'] == 50
           PY
 
-      - name: Upload cycle receipt
+      - name: Append current receipt to navigable index
+        run: |
+          python scripts/append_microcycle_index.py \
+            --current-receipt artifacts/rafaelia-cycle/cycle_receipt.json \
+            --previous-index artifacts/index-cache/microcycle_index.json \
+            --fetch-state artifacts/index-cache/fetch_state.json \
+            --output-dir artifacts/rafaelia-index \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            --repository "$GITHUB_REPOSITORY" \
+            --head-branch "$INDEX_BRANCH" \
+            --head-sha "$GITHUB_SHA" \
+            --artifact-name "rafaelia-adaptive-cycle-$GITHUB_RUN_ID"
+
+      - name: Verify index non-promotion and latest-four view
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          index = json.loads(Path('artifacts/rafaelia-index/microcycle_index.json').read_text())
+          assert index['schema'] == 'rafaelia.microcycle-index.v1'
+          assert index['source_mode'] == 'ARTIFACT_APPEND_ONLY'
+          assert index['claim_allowed'] is False
+          assert index['automatic_mutation'] is False
+          assert index['automatic_merge'] is False
+          assert index['entry_count'] == len(index['entries'])
+          assert index['latest_four'] == index['entries'][-4:]
+          assert 1 <= len(index['latest_four']) <= 4
+          PY
+
+      - name: Publish navigable receipt and index in run summary
+        run: |
+          {
+            echo "# RAFAELIA Adaptive Cycle"
+            echo
+            cat artifacts/rafaelia-index/microcycle_index.md
+            echo
+            echo "<details><summary>Receipt JSON completo do microciclo atual</summary>"
+            echo
+            echo '```json'
+            cat artifacts/rafaelia-cycle/cycle_receipt.json
+            echo '```'
+            echo
+            echo "</details>"
+            echo
+            echo "> O resumo do run é a superfície navegável primária. Artifact e cache têm retenção limitada."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prepare next immutable cache generation
+        run: |
+          rm -rf artifacts/index-cache
+          mkdir -p artifacts/index-cache
+          cp artifacts/rafaelia-index/microcycle_index.json artifacts/index-cache/
+
+      - name: Save immutable index cache generation
+        uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57
+        with:
+          path: artifacts/index-cache
+          key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Upload cycle receipt with navigation copy
+        id: upload-cycle
+        continue-on-error: true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: rafaelia-adaptive-cycle-${{ github.run_id }}
-          path: artifacts/rafaelia-cycle/
+          path: |
+            artifacts/rafaelia-cycle/
+            artifacts/rafaelia-index/
           if-no-files-found: error
           retention-days: 30
+
+      - name: Upload immutable append-only index
+        id: upload-index
+        if: steps.upload-cycle.outcome == 'success'
+        continue-on-error: true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rafaelia-microcycle-index
+          path: artifacts/rafaelia-index/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Record optional artifact archival state
+        if: always()
+        env:
+          CYCLE_UPLOAD_OUTCOME: ${{ steps.upload-cycle.outcome }}
+          INDEX_UPLOAD_OUTCOME: ${{ steps.upload-index.outcome }}
+        run: |
+          if [ "$CYCLE_UPLOAD_OUTCOME" = "success" ] && [ "$INDEX_UPLOAD_OUTCOME" = "success" ]; then
+            state="AVAILABLE"
+          else
+            state="TOKEN_VAZIO_ARTIFACT_STORAGE_QUOTA_OR_UPLOAD"
+          fi
+          {
+            echo
+            echo "## Estado do arquivo opcional"
+            echo
+            echo "- cycle artifact: \`$CYCLE_UPLOAD_OUTCOME\`"
+            echo "- index artifact: \`$INDEX_UPLOAD_OUTCOME\`"
+            echo "- archival_state: \`$state\`"
+            echo "- claim_allowed: \`false\`"
+            echo
+            echo "A indisponibilidade do artifact não apaga o receipt já publicado no resumo nem a geração imutável usada para continuidade."
+          } >> "$GITHUB_STEP_SUMMARY"

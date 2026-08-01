@@ -1,0 +1,31 @@
+name: ZIPRAF Real Archive Binding V2
+
+on:
+  push:
+    paths:
+      - 'data/control-plane/zipraf-real-archive-binding.v2.json'
+      - 'scripts/validate_zipraf_real_archive_binding.py'
+      - 'tests/test_zipraf_real_archive_binding.py'
+      - 'docs/ZIPRAF_REAL_ARCHIVE_CONTROL_PLANE_V2.md'
+      - '.github/workflows/zipraf-real-archive-binding-v2.yml'
+  pull_request:
+    paths:
+      - 'data/control-plane/zipraf-real-archive-binding.v2.json'
+      - 'scripts/validate_zipraf_real_archive_binding.py'
+      - 'tests/test_zipraf_real_archive_binding.py'
+      - 'docs/ZIPRAF_REAL_ARCHIVE_CONTROL_PLANE_V2.md'
+      - '.github/workflows/zipraf-real-archive-binding-v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  federated-evidence-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate canonical control-plane instance
+        run: python scripts/validate_zipraf_real_archive_binding.py
+      - name: Run adversarial promotion tests
+        run: python -m unittest tests.test_zipraf_real_archive_binding -v

@@ -1,0 +1,131 @@
+{
+  "schema_version": "zipraf-corpus-u2.v1",
+  "observed_at": "2026-08-01",
+  "status": "HARNESS_REMOTE_GATE_PASS_EXTERNAL_CORPUS_TOKEN_VAZIO",
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "pull_request": 1079,
+    "branch": "main_02_zipraf-corpus-u2",
+    "base_branch": "main_01_zipraf-real-archive-v2",
+    "head_sha": "11c54ed091905d269e95857e6131491e08ba769f",
+    "merged": false,
+    "gate_name": "ZIPRAF Corpus U2",
+    "gate_run": 30722482763,
+    "gate_result": "PASS"
+  },
+  "dependency": {
+    "u0_real_zip_spans": "REMOTE_GATE_PASS",
+    "u1_payload_identity": "REMOTE_GATE_PASS",
+    "stacked_on_pull_request": 1078
+  },
+  "harness": {
+    "gate": "ZIPRAF_CORPUS_U2_HARNESS_V1",
+    "archive_total": 3,
+    "parsed_archives": 2,
+    "parse_failures": 1,
+    "entry_total": 6,
+    "entry_rejected": 0,
+    "extraction_performed": false,
+    "execution_authorized": false,
+    "manifest_sha256": "a92f5e288a596972289a6cff843d2fd5d9bff326964daa71902c56d5ad1635f5",
+    "artifact_storage": "QUOTA_BLOCKED_RECEIPT_VALIDATED_HASHED_IN_LOG"
+  },
+  "fixtures": [
+    {
+      "name": "sample.zip",
+      "kind": "ZIP_DETERMINISTIC_FIXTURE",
+      "entries": ["readme.txt:STORE", "packed.txt:DEFLATE"],
+      "expected_state": "PARSED"
+    },
+    {
+      "name": "sample.apk",
+      "kind": "APK_STRUCTURAL_CANDIDATE_FIXTURE",
+      "entries": [
+        "AndroidManifest.xml:STORE",
+        "classes.dex:STORE",
+        "resources.arsc:DEFLATE",
+        "assets/data.bin:STORE"
+      ],
+      "expected_state": "PARSED",
+      "signed_production_apk": false
+    },
+    {
+      "name": "malformed.zip",
+      "kind": "TRUNCATED_NEGATIVE_FIXTURE",
+      "entries": [],
+      "expected_state": "PARSE_REJECTED"
+    }
+  ],
+  "manifest_contract": {
+    "archive_fields": [
+      "input_name",
+      "input_path",
+      "container_kind",
+      "mapping_epoch",
+      "archive_bytes",
+      "archive_sha256",
+      "archive_blake3",
+      "parse_state",
+      "layout_fingerprint64",
+      "apk_markers"
+    ],
+    "entry_fields": [
+      "entry_id",
+      "name",
+      "local_header_offset",
+      "payload_offset",
+      "stored_size",
+      "logical_size",
+      "method",
+      "crc32",
+      "action",
+      "state_flags",
+      "stored_sha256",
+      "stored_blake3",
+      "logical_digest_state",
+      "execution_authorized",
+      "dma_authorized"
+    ],
+    "blake3_provider": "rafaelmeloreisnovo/BLAKE3@ff6991d8b13f5b4b16dc311b5acc9c63ae835152",
+    "max_archive_bytes": 268435456,
+    "max_entries_v2": 64
+  },
+  "promotion_invariants": {
+    "fixture_is_external_independent_corpus": false,
+    "apk_extension_proves_apk_validity": false,
+    "apk_markers_prove_signature": false,
+    "apk_markers_grant_installation": false,
+    "manifest_grants_execution": false,
+    "manifest_grants_dma": false,
+    "stored_deflate_digest_is_logical_digest": false,
+    "scanner_extracts_entries": false,
+    "scanner_executes_entries": false,
+    "private_corpus_may_be_published_by_default": false
+  },
+  "privacy": {
+    "public_corpus_requires": [
+      "SOURCE_URI_OR_REPOSITORY",
+      "SOURCE_COMMIT_OR_RELEASE",
+      "FILE_SHA256",
+      "LICENSE_OR_PROVENANCE",
+      "SIZE_LIMIT",
+      "EXPECTED_PARSER_STATE"
+    ],
+    "private_corpus_policy": "RUN_LOCAL_AND_FEDERATE_SANITIZED_RECEIPTS_ONLY"
+  },
+  "next_dependency": {
+    "order": "U2_REAL_CORPUS",
+    "state": "TOKEN_VAZIO",
+    "required_output": "PINNED_PUBLIC_CORPUS_OR_SANITIZED_PRIVATE_RECEIPTS"
+  },
+  "claims": {
+    "u2_harness": "REMOTE_GATE_PASS",
+    "deterministic_manifest": "REMOTE_GATE_PASS",
+    "real_external_zip_apk_corpus": "TOKEN_VAZIO",
+    "signed_production_apk": "TOKEN_VAZIO",
+    "android_installation": "TOKEN_VAZIO",
+    "entry_execution": false,
+    "claim_allowed": false
+  }
+}

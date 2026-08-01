@@ -74,6 +74,7 @@ jobs:
         run: |
           cd build/live-control-plane
           sha256sum report.json > SHA256SUMS
+          cat SHA256SUMS
 
       - name: Upload bounded evidence when quota permits
         id: upload

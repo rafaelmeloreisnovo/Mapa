@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/drive_memory_snapshot_catalog.schema.json",
+  "title": "RAFAELIA Drive Memory Snapshot Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at_utc",
+    "source_scope",
+    "privacy_boundary",
+    "canonical_snapshot_id",
+    "content_claim_allowed",
+    "active_context",
+    "invariants",
+    "snapshots",
+    "open_gates"
+  ],
+  "properties": {
+    "schema_version": {"const": "mapa.drive-memory-snapshot-catalog.v1"},
+    "generated_at_utc": {"type": "string", "format": "date-time", "pattern": "Z$"},
+    "source_scope": {"const": "google_drive_private"},
+    "privacy_boundary": {"const": "metadata_only"},
+    "canonical_snapshot_id": {"type": "string", "minLength": 1},
+    "content_claim_allowed": {"const": false},
+    "active_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_snapshot", "historical_checkpoint", "duplicate_candidate_group", "asset_route", "open_gate"],
+      "properties": {
+        "canonical_snapshot": {"type": "string", "minLength": 1},
+        "historical_checkpoint": {"type": "string", "minLength": 1},
+        "duplicate_candidate_group": {"type": "string", "minLength": 1},
+        "asset_route": {"type": "string", "minLength": 1},
+        "open_gate": {"type": "string", "minLength": 1}
+      }
+    },
+    "invariants": {"type": "array", "minItems": 5, "items": {"type": "string", "minLength": 1}},
+    "snapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["snapshot_id", "folder_name", "folder_id", "container_type", "status", "observed_modified_at_utc", "supersedes", "privacy", "metadata_state", "evidence", "next_verifiable_step"],
+        "properties": {
+          "snapshot_id": {"type": "string", "minLength": 1},
+          "folder_name": {"type": "string", "pattern": "^(json|js)[0-9]+$"},
+          "folder_id": {"type": "string", "minLength": 10},
+          "container_type": {"enum": ["complete_export", "asset_pool", "conversation_asset_tree"]},
+          "status": {"enum": ["CANONICAL_RAW", "HISTORICAL_CHECKPOINT", "ASSET_POOL", "DUPLICATE_CANDIDATE", "TOKEN_VAZIO"]},
+          "observed_modified_at_utc": {"type": ["string", "null"]},
+          "conversations_json": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["file_id", "size_bytes", "modified_at_utc", "conversation_count", "sha256"],
+            "properties": {
+              "file_id": {"type": "string", "minLength": 10},
+              "size_bytes": {"type": "integer", "minimum": 1},
+              "modified_at_utc": {"type": "string", "pattern": "Z$"},
+              "conversation_count": {"type": ["integer", "null"], "minimum": 0},
+              "sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+            }
+          },
+          "supersedes": {"type": "array", "items": {"type": "string"}},
+          "observed_delta_to_canonical": {"type": "object"},
+          "duplicate_candidate_group": {"type": "string"},
+          "privacy": {"const": "restricted"},
+          "metadata_state": {"enum": ["FATO", "TOKEN_VAZIO"]},
+          "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "next_verifiable_step": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "open_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["gate_id", "state", "claim_allowed", "condition"],
+        "properties": {
+          "gate_id": {"type": "string", "minLength": 1},
+          "state": {"const": "TOKEN_VAZIO"},
+          "claim_allowed": {"const": false},
+          "condition": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
