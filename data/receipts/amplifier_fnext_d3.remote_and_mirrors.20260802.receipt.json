@@ -1,0 +1,58 @@
+{
+  "schema": "rafaelia.amplifier-fnext-remote-mirror-receipt.v1",
+  "receipt_id": "RAF-AMPLIFIER-FNEXT-D3-REMOTE-MIRRORS-20260802T1836-0300",
+  "observed_at": "2026-08-02T18:36:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "rafaelia/source-gap-delta-20260802",
+  "parent_receipt": "data/receipts/amplifier_fnext_d3.20260802.receipt.json",
+  "remote_gate": {
+    "workflow": "amplifier-contract",
+    "run_id": 30768218873,
+    "run_number": 2,
+    "job_id": 91550644637,
+    "run_status": "completed",
+    "run_conclusion": "failure",
+    "observable_step_count": 0,
+    "logs_state": "BLOB_NOT_FOUND_404",
+    "classification": "REMOTE_GATE_BLOCKED_BEFORE_STEPS",
+    "code_failure_established": false,
+    "claim_allowed": false
+  },
+  "local_gate": {
+    "state": "PASS_LIMITED_LOCAL",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0
+  },
+  "mirrors": [
+    {
+      "surface": "GOOGLE_DRIVE",
+      "file_id": "1xQzfedWZ9lLjABi-Y_Cu_fM0WDMuVPU8-W9-_JHSWq4",
+      "title": "RAFAELIA — Sete Parábolas e F_NEXT D3 — 2026-08-02 18h30 BRT",
+      "state": "CREATED_AND_POPULATED",
+      "content_hash": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+    },
+    {
+      "surface": "CHATGPT_LIBRARY",
+      "file_id": "file_000000006d98820eb83e46fe322259ba",
+      "library_file_id": "libfile_50ca6484aa688191ad8046375ed5347b",
+      "path": "/EXPLORAR/SETE_PARABOLAS_DO_AMPLIFICADOR_E_FNEXT_V1_20260802T1830-0300.md",
+      "sha256": "2afd44ec3b217af2758ace6646c05f80266b3f67359d428a9aaa9e8bb47c5e62",
+      "state": "UPLOADED"
+    },
+    {
+      "surface": "CHATGPT_LIBRARY",
+      "file_id": "file_00000000da14820ea5ef4358e3c1307c",
+      "library_file_id": "libfile_58c07dc11d3481919e0af23310e38150",
+      "path": "/EXPLORAR/AMPLIFIER_FNEXT_D3_RECEIPT_20260802T1830-0300.json",
+      "state": "UPLOADED_STALE_REMOTE_STATE_CORRECTED_BY_THIS_RECEIPT"
+    }
+  ],
+  "decision": {
+    "state": "LOCAL_PASS_REMOTE_UNOBSERVABLE_MIRRORS_ESTABLISHED",
+    "next_gate": "Obter runner com steps/logs observáveis ou reproduzir no Termux físico.",
+    "claim_allowed": false,
+    "scientific_promotion": false,
+    "production_promotion": false
+  }
+}
