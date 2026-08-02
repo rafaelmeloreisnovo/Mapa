@@ -1,0 +1,44 @@
+{
+  "schema": "raf.prm08-prm09.l3-remote-gate-receipt.v1",
+  "observed_at": "2026-08-01T23:00:00-03:00",
+  "executor_layer": "L3",
+  "environment_identity": "github-actions/ubuntu-latest",
+  "repository": "rafaelmeloreisnovo/RafPolimata",
+  "pull_request": 196,
+  "source_commit": "90cabaf458718fc5c058f2b9d7e22d1feb71d579",
+  "workflow": {
+    "name": "PRM-08 PRM-09 focused gate",
+    "run_id": 30728381142,
+    "run_number": 9,
+    "status": "completed",
+    "conclusion": "failure",
+    "job": {
+      "id": 91444145721,
+      "name": "focused-math-gate",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": []
+    }
+  },
+  "classification": "L3_BLOCKED_BEFORE_STEPS",
+  "interpretation": {
+    "workflow_file_recognized": true,
+    "runner_label": "ubuntu-latest",
+    "script_started": false,
+    "tests_started": false,
+    "runtime_receipt_generated": false,
+    "code_failure_proven": false,
+    "remote_pass_proven": false
+  },
+  "preserved_evidence": {
+    "L2_local_tests": "17/17_PASS_BY_LOCAL_RECEIPT",
+    "promotion_to_L3": false,
+    "demotion_due_to_L3_infrastructure": false
+  },
+  "next_gate": "resolve the pre-step GitHub Actions infrastructure or account gate, then rerun exact source commit",
+  "boundaries": {
+    "claim_allowed": false,
+    "physical_termux_execution_L4": "TOKEN_VAZIO",
+    "independent_replication_L5": "TOKEN_VAZIO"
+  }
+}
