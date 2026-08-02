@@ -1,0 +1,58 @@
+{
+  "cycle_id": "CAT-20260801T2258-0300",
+  "mode": "incremental_append_only_non_destructive",
+  "claim_allowed": false,
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "PROVADO"
+  },
+  "cutoff": {
+    "last_indexed_github_commit": "688f423fa8812cf5349c13ff95b05da446c98655",
+    "last_indexed_time_utc": "2026-08-02T01:03:20Z"
+  },
+  "delta": {
+    "google_drive": [
+      {
+        "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+        "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+        "change": "modified_after_cutoff",
+        "content_delta": "TOKEN_VAZIO",
+        "content_digest": "TOKEN_VAZIO",
+        "next_step": "exportar a revisão anterior e a atual, calcular SHA-256 e produzir diff semântico"
+      }
+    ],
+    "github": {
+      "repositories_checked": [
+        "rafaelmeloreisnovo/Mapa",
+        "rafaelmeloreisnovo/RafGitTools",
+        "rafaelmeloreisnovo/RafPolimata",
+        "rafaelmeloreisnovo/papers",
+        "instituto-Rafael/relativity-living-light",
+        "rafaelmeloreisnovo/Vectras-VM-Android"
+      ],
+      "new_commits_after_cutoff": [],
+      "state": "EVIDENCIADO_LIMITADO"
+    }
+  },
+  "claims": [
+    {"class": "PROVADO", "claim": "o documento-mestre do Drive foi localizado e apareceu modificado após o corte"},
+    {"class": "EVIDENCIADO", "claim": "nenhum commit posterior ao último índice foi retornado nos seis repositórios consultados"},
+    {"class": "REFUTADO", "claim": "modificação de metadados não prova alteração semântica"},
+    {"class": "TOKEN_VAZIO", "claim": "diff textual e digest dos bytes exportados"}
+  ],
+  "excluded": {
+    "myCat": "historical_analysis_only_not_component_not_dependency"
+  },
+  "actions_not_executed": [
+    "nenhum documento do Drive foi reescrito",
+    "nenhum workflow foi executado ou reexecutado",
+    "nenhum hash Drive foi inventado",
+    "nenhum claim científico ou de runtime foi promovido"
+  ],
+  "R3": {
+    "F_ok": "delta mínimo de metadados Drive registrado com proveniência e cobertura GitHub explícita",
+    "F_gap": "conteúdo diferencial e digest da revisão Drive não disponíveis",
+    "F_next": "exportar revisões, calcular hashes e produzir diff semântico antes de classificar a mudança"
+  }
+}
