@@ -1,0 +1,40 @@
+{
+  "schema": "rafaelia.sequence_family_registry.v1",
+  "registry_id": "O7-SEQUENCE-FAMILIES-123-20260802",
+  "claim_allowed": false,
+  "families": [
+    {
+      "family_id": "SEED_123",
+      "order": 0,
+      "seed_raw": "123",
+      "seed_values": [1, 2, 3],
+      "seed_policy": "LITERAL_CHARACTERS",
+      "operator": "IDENTITY_LITERAL",
+      "domain": "TEXT",
+      "modulus": null,
+      "evidence_state": "EVIDENCIADO_LIMITADO"
+    },
+    {
+      "family_id": "FIB_FROM_123",
+      "order": 2,
+      "seed_raw": "123",
+      "seed_values": [1, 2, 3],
+      "seed_policy": "PREFIX_ORDER_VALUES",
+      "operator": "SUM_LAST_2",
+      "domain": "INTEGER",
+      "modulus": null,
+      "evidence_state": "CONVENTION"
+    },
+    {
+      "family_id": "TRIB_FROM_123",
+      "order": 3,
+      "seed_raw": "123",
+      "seed_values": [1, 2, 3],
+      "seed_policy": "ALL_VALUES",
+      "operator": "SUM_LAST_3",
+      "domain": "INTEGER",
+      "modulus": null,
+      "evidence_state": "CONVENTION"
+    }
+  ]
+}
