@@ -1,0 +1,95 @@
+{
+  "receipt_id": "IGC-CR-20260802-RECEIPT-V2-LOCAL-REPRO",
+  "timestamp_brt": "2026-08-02T04:55:17-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "provenance": {
+    "derived_from_pr": 128,
+    "source_head_sha": "1363847887a9a48add2930155d984dacdc67f1d1",
+    "source_pr_state_at_verification": "merged_without_this_receipt"
+  },
+  "execution_layers": {
+    "L0_text": "source and contract inspected",
+    "L1_connector": "PR head/files/CI metadata fetched through GitHub connector",
+    "L2_ephemeral_runtime": {
+      "status": "PASS_LIMITED",
+      "environment": "workspace sandbox; Python 3.x",
+      "py_compile": "PASS",
+      "positive_fixtures": {
+        "igc_valid_torus.json": "PASS",
+        "igc_valid_triangle_similarity.json": "PASS"
+      },
+      "negative_fixture": {
+        "igc_invalid_affine_angle.json": "REJECTED_AS_EXPECTED",
+        "reason": "invariant 'angle' is not permitted for AFFINE"
+      },
+      "jsonl_syntax": "PASS (2 records)"
+    },
+    "L3_remote_ci": {
+      "status": "REMOTE_GATE_BLOCKED_BEFORE_STEPS",
+      "runs": [
+        {
+          "run_id": 30737598216,
+          "workflow": "Geometric invariant contract",
+          "conclusion": "failure",
+          "jobs": 1,
+          "steps_observed": 0
+        },
+        {
+          "run_id": 30737598208,
+          "workflow": "CI",
+          "conclusion": "failure",
+          "jobs": 1,
+          "steps_observed": 0
+        },
+        {
+          "run_id": 30737598246,
+          "workflow": "Branch Topology Gate",
+          "conclusion": "failure",
+          "jobs": 1,
+          "steps_observed": 0
+        }
+      ],
+      "controlled_rerun": {
+        "job_id": 91469136943,
+        "requested": true,
+        "observable_new_run": false
+      }
+    },
+    "L4_physical_termux": "TOKEN_VAZIO",
+    "L5_independent_reproduction": "TOKEN_VAZIO"
+  },
+  "remote_blob_sha": {
+    "tools/validate_geometric_invariant_contract.py": "d8339e790bfdad2fbad28451e9f87a984249c494",
+    "schemas/geometric-invariant-contract.schema.json": "b5d73ad125747d32bd111e20ebdf51cca669c13c",
+    "tests/geometry/fixtures/igc_valid_torus.json": "4a6194d45a2ca03e59d861210d02adb082c5c08f",
+    "tests/geometry/fixtures/igc_valid_triangle_similarity.json": "b9c7bc2d05920d2ac1a5bee7a4220f2367448e82",
+    "tests/geometry/fixtures/igc_invalid_affine_angle.json": "1295643605e1b05d844c11aea081f7570ea06655",
+    "data/geometry/geometric_invariants.index.jsonl": "548bd8a358d26b5a209e386ec01dfdc2e7c8c88a"
+  },
+  "local_reproduction_sha256": {
+    "validate_geometric_invariant_contract.py": "66499e8fc7b22cd43210161097abce2d6eb0a572d135c48adf9bde6179611290",
+    "igc_valid_torus.json": "700b4ffbdb79e93fa91220261cfc95fdc815e07fdac019c01ab73d7446835787",
+    "igc_valid_triangle_similarity.json": "38e93106167396ded6f9e2f2fec9ec70f970e5f9ecf721a08b250d1e5a370899",
+    "igc_invalid_affine_angle.json": "dadb3aac938994abcea351f5cf9c3ad10b3b1d0da29190d192a9c4930e77200d",
+    "geometric_invariants.index.jsonl": "f8214abcc9fb3d7c6ce1b2059dec102c19711037448aeb53dd4318536a71628c"
+  },
+  "claim_allowed": false,
+  "f_ok": [
+    "Geometric contract and fail-closed validator were fetched from exact PR head.",
+    "Local compile and positive/negative gate reproduced.",
+    "JSONL index syntax validated.",
+    "CI runs and zero-step state independently rechecked.",
+    "Receipt preserved append-only on a new branch after PR #128 merged without it."
+  ],
+  "f_gap": [
+    "Remote CI runner/platform did not expose executable steps; no code-level CI conclusion.",
+    "Exact glue map for the double trihedral pyramid remains TOKEN_VAZIO.",
+    "Physical Termux/Android execution remains TOKEN_VAZIO.",
+    "Independent reproduction and external mathematical review remain TOKEN_VAZIO."
+  ],
+  "f_next": [
+    "Obtain a remote run with observable steps or execute the same head on physical Termux.",
+    "Resolve the trihedral glue model with explicit vertices, edges, faces and junction map.",
+    "Repeat the validator in a second independent environment and attach its receipt."
+  ]
+}
