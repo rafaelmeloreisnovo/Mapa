@@ -1,0 +1,36 @@
+name: amplifier-contract
+
+on:
+  pull_request:
+    paths:
+      - 'schemas/amplified-expression.schema.json'
+      - 'schemas/rapport-edge.schema.json'
+      - 'tools/parse_amplified_expression.py'
+      - 'tools/build_amplifier_fixture.py'
+      - 'data/fixtures/amplifier_d3.v1.json'
+      - 'tests/amplifier/**'
+      - '.github/workflows/amplifier-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout pinned commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Run amplifier contract tests
+        run: python -m unittest discover -s tests/amplifier -p 'test_*.py' -v
+      - name: Emit deterministic AST sample
+        run: >-
+          python tools/parse_amplified_expression.py
+          'AMP{D=3;N=0;DELTA_ROLE=SHIFT;DELTA_VALUE=1;OMEGA_NUM=GEOMETRIC_MEAN;OMEGA_EPI=TERNARY_FAIL_CLOSED;PI_ROLE=CIRCULAR_CONSTANT;PHI_ROLE=GOLDEN_RATIO;EQUIV=NUMERIC_EQUAL;FUNCTION=F_TRANSITION}'
+      - name: Build D3 fixture
+        run: python tools/build_amplifier_fixture.py data/fixtures/amplifier_d3.v1.json /tmp/amplifier_d3.generated.json

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/amplified-expression.schema.json",
+  "title": "RAFAELIA Amplified Expression AST",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "arity",
+    "iteration",
+    "delta",
+    "omega",
+    "pi_role",
+    "phi_role",
+    "equivalence",
+    "function",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.amplified-expression.v1"
+    },
+    "arity": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 7
+    },
+    "iteration": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "delta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "value"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "ARITY",
+            "SHIFT",
+            "DIFFERENCE",
+            "GRADIENT",
+            "MUTATION"
+          ]
+        },
+        "value": {
+          "type": "number"
+        }
+      }
+    },
+    "omega": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "numeric",
+        "epistemic"
+      ],
+      "properties": {
+        "numeric": {
+          "enum": [
+            "GEOMETRIC_MEAN",
+            "PRODUCT",
+            "DISABLED"
+          ]
+        },
+        "epistemic": {
+          "enum": [
+            "TERNARY_FAIL_CLOSED"
+          ]
+        }
+      }
+    },
+    "pi_role": {
+      "enum": [
+        "CIRCULAR_CONSTANT",
+        "PHASE",
+        "SYMBOLIC"
+      ]
+    },
+    "phi_role": {
+      "enum": [
+        "GOLDEN_RATIO",
+        "WEIGHT",
+        "SYMBOLIC"
+      ]
+    },
+    "equivalence": {
+      "enum": [
+        "SYNTACTIC_IDENTITY",
+        "NUMERIC_EQUAL",
+        "APPROX_EQUAL",
+        "RELATIONAL_EQUIVALENCE"
+      ]
+    },
+    "function": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "signature"
+      ],
+      "properties": {
+        "name": {
+          "const": "F_TRANSITION"
+        },
+        "signature": {
+          "const": "F(input_state,parameters,evidence_context)->transition_result"
+        }
+      }
+    },
+    "claim_allowed": {
+      "const": false
+    }
+  }
+}

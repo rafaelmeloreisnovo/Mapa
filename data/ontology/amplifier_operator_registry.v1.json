@@ -1,0 +1,142 @@
+{
+  "schema": "rafaelia.amplifier-operator-registry.v1",
+  "registry_id": "RAF-AMP-OPERATORS-20260802T1818-0300",
+  "observed_at": "2026-08-02T18:18:00-03:00",
+  "mode": "APPEND_ONLY_NON_DESTRUCTIVE",
+  "claim_allowed": false,
+  "session_root_id": "RAF-AMP-HIDDEN-SESSION-20260802T1818-0300",
+  "operators": [
+    {
+      "token": "∆",
+      "canonical_roles": ["D_n", "delta_n", "Delta_f", "grad_f", "mutation_n"],
+      "state": "OVERLOADED_REQUIRES_TYPING",
+      "gap_token": "TOKEN_VAZIO_OPERATOR_ROLE"
+    },
+    {
+      "token": "Ω",
+      "canonical_roles": ["Omega_num", "Omega_epi"],
+      "state": "SPLIT_CONTRACT_PROPOSED",
+      "invariant": "Omega_num != Omega_epi"
+    },
+    {
+      "token": "Π",
+      "canonical_roles": ["finite_product", "aggregation_family"],
+      "state": "TOKEN_VAZIO_DOMAIN_AND_BOUNDS",
+      "gap_token": "TOKEN_VAZIO_PRODUCT_DOMAIN"
+    },
+    {
+      "token": "π",
+      "canonical_roles": ["circle_constant", "phase_parameter", "symbolic_marker"],
+      "state": "TOKEN_VAZIO_ROLE",
+      "gap_token": "TOKEN_VAZIO_PI_ROLE"
+    },
+    {
+      "token": "phi",
+      "canonical_roles": ["golden_ratio", "weight_parameter", "symbolic_marker"],
+      "state": "TOKEN_VAZIO_ROLE",
+      "gap_token": "TOKEN_VAZIO_PHI_ROLE"
+    },
+    {
+      "token": "===",
+      "canonical_roles": ["syntactic_identity", "strict_equality", "equivalence_relation"],
+      "state": "TOKEN_VAZIO_EQUIVALENCE_TYPE",
+      "gap_token": "TOKEN_VAZIO_EQUIVALENCE_TYPE"
+    },
+    {
+      "token": "F",
+      "canonical_roles": ["state_transition", "generating_function", "feedback_function"],
+      "state": "TOKEN_VAZIO_SIGNATURE",
+      "gap_token": "TOKEN_VAZIO_FUNCTION_SIGNATURE"
+    },
+    {
+      "token": "n",
+      "canonical_roles": ["longitudinal_cycle", "sequence_index"],
+      "domain": "N_0_OR_N_POSITIVE_REQUIRES_DECLARATION",
+      "gap_token": "TOKEN_VAZIO_INDEX_DOMAIN"
+    },
+    {
+      "token": "x:y",
+      "canonical_roles": ["independent_coordinates", "matrix_cell", "barycentric_projection"],
+      "state": "FORMALIZED_PARTIAL",
+      "dependent_coordinate": "z=1-x-y"
+    },
+    {
+      "token": "TOKEN_VAZIO",
+      "canonical_roles": ["unknown", "not_observed", "not_applicable_requires_subtype", "blocked"],
+      "state": "VALID_AUDITABLE_STATE",
+      "invariants": ["TOKEN_VAZIO != 0", "TOKEN_VAZIO != FAIL", "TOKEN_VAZIO != PASS"]
+    }
+  ],
+  "token_classes": [
+    "OPERATOR",
+    "INDEX",
+    "COORDINATE",
+    "NUMBER",
+    "SEQUENCE_SOURCE",
+    "TRANSFORMATION",
+    "RELATION",
+    "INVARIANT",
+    "EVIDENCE",
+    "FALSIFIER",
+    "METAPHOR",
+    "AUTHORITY",
+    "PRIVACY",
+    "LICENSE",
+    "UNKNOWN"
+  ],
+  "ast": {
+    "root": "AmplifiedExpression",
+    "children": [
+      "BranchingSpec",
+      "CoordinateSpec",
+      "ShiftSpec",
+      "PolynomialGenerator",
+      "RelationGraph",
+      "OmegaNumeric",
+      "OmegaEpistemic",
+      "FeedbackCycle",
+      "Custody"
+    ]
+  },
+  "state_tensor": {
+    "index": ["d", "v", "l", "c", "x", "y", "n"],
+    "expression": "S[d,v,l,c,x,y,n]",
+    "branch_cell_count": "D_n^4",
+    "d7_cells": 2401,
+    "d7_complete_undirected_edges": 2881200,
+    "required_graph_mode": "SPARSE_K_NEIGHBORS"
+  },
+  "rapport": {
+    "expression": "R_ij=w_s*S_ij+w_t*T_ij+w_e*E_ij-w_c*C_ij",
+    "states": {
+      "positive": "SYNERGY",
+      "negative": "ANTAGONISM",
+      "zero": "MEASURED_NEUTRALITY",
+      "unknown": "TOKEN_VAZIO_RELATION_UNMEASURED"
+    }
+  },
+  "omega_contract": {
+    "numeric": "exp(sum_i(w_i*log(epsilon+q_i))/sum_i(w_i))",
+    "epistemic_precedence": ["FAIL", "TOKEN_VAZIO_OR_PARTIAL", "PASS"],
+    "rule": "NUMERIC_SCORE_NEVER_PROMOTES_EPISTEMIC_STATE"
+  },
+  "feedback_cycle": ["psi", "chi", "rho", "Delta", "Sigma", "Omega", "psi_prime"],
+  "lateral_lanes": [
+    "L1_SEMANTICA",
+    "L2_MATEMATICA",
+    "L3_RELACIONAL",
+    "L4_MEMORIA",
+    "L5_EXECUCAO",
+    "L6_CIENCIA",
+    "L7_ETICA_GOVERNANCA"
+  ],
+  "fail_closed_rules": [
+    "observed != inferred",
+    "inferred != demonstrated",
+    "simulated != physical_runtime",
+    "metaphor != mathematical_model",
+    "mathematical_model != proof",
+    "valid_hash != true_claim",
+    "byte_reconstruction != semantic_reconstruction"
+  ]
+}

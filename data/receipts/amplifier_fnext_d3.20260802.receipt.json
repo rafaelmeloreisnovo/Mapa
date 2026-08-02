@@ -1,0 +1,94 @@
+{
+  "schema": "rafaelia.amplifier-fnext-receipt.v1",
+  "receipt_id": "RAF-AMPLIFIER-FNEXT-D3-20260802T1830-0300",
+  "observed_at": "2026-08-02T18:30:00-03:00",
+  "mode": "APPEND_ONLY_NON_DESTRUCTIVE",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "rafaelia/source-gap-delta-20260802",
+  "local_execution": {
+    "runtime": "Python 3 stdlib sandbox",
+    "command": "python -m unittest discover -s tests/amplifier -p test_*.py -v",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "state": "PASS_LIMITED_LOCAL"
+  },
+  "generated_contract": {
+    "arity": 3,
+    "structural_cell_count": 81,
+    "directed_edge_count": 324,
+    "neighbors_per_cell": 4,
+    "coordinate_invariant": "x+y+z=1",
+    "claim_allowed": false
+  },
+  "artifacts": [
+    {
+      "path": "docs/canonical/2026-08-02/SETE_PARABOLAS_DO_AMPLIFICADOR_E_FNEXT_V1.md",
+      "sha256": "2afd44ec3b217af2758ace6646c05f80266b3f67359d428a9aaa9e8bb47c5e62",
+      "commit_sha": "05c9fe14c5da25322b905426ed530f765a5c27ed"
+    },
+    {
+      "path": "schemas/amplified-expression.schema.json",
+      "sha256": "5b85a1d9e47775a37b08be9b1e8db266b9b1653bc110d4063fbf9d821a623e8a",
+      "commit_sha": "8312bbc3252dd1bd517f8d372a021e70528ef222"
+    },
+    {
+      "path": "schemas/rapport-edge.schema.json",
+      "sha256": "132d580cfebe106440ca4603faacc166bfa9ae5d5a3d8417f6e468d7672dd2ed",
+      "commit_sha": "8e2c0bc18372a5df22cd03a2581e92b859aafda4"
+    },
+    {
+      "path": "tools/parse_amplified_expression.py",
+      "sha256": "aa79312ef3d8f194bafe0acb8f8dcba9c42eac6b270e464ffd2e0785ba01e071",
+      "commit_sha": "aaed798c1ded85876dd94f18948b56c55418d900"
+    },
+    {
+      "path": "tools/build_amplifier_fixture.py",
+      "sha256": "a7ced49e11fc3b901f5a9e7ed2b46575112773dd267e255e683fd2b928c8f108",
+      "commit_sha": "9dcc063d3aad3c8c72c99507019a6ee3c9bbdbb1"
+    },
+    {
+      "path": "data/fixtures/amplifier_d3.v1.json",
+      "sha256": "a941388bd41247aa06d178101b4a94c5f2379ee51f12da0ef6f396365073ac89",
+      "commit_sha": "e7ec513bb32edc89c9721a1710bbbb10bae0bbdd"
+    },
+    {
+      "path": "tests/amplifier/test_amplifier_contract.py",
+      "sha256": "fed51ab001bf0b09c12bfbefa0fd693c4f52428623ed92373a41aba2a167abb0",
+      "commit_sha": "6325c2aad1712cc02b691fc513639dede1cad115"
+    },
+    {
+      "path": ".github/workflows/amplifier-contract.yml",
+      "sha256": "929fc8161e236bb5dcc4112449ad1153429d8ff752c66730033639d207adaa75",
+      "commit_sha": "236650c9e3d80f6a7348f9e3d7ade393b62513a6"
+    }
+  ],
+  "closed_or_reduced_gaps": [
+    "FGAP-001_REDUCED_BY_TYPED_DELTA_ROLE",
+    "FGAP-002_REDUCED_BY_SEPARATE_OMEGA_FIELDS",
+    "FGAP-003_REDUCED_BY_TYPED_PI_ROLE",
+    "FGAP-004_REDUCED_BY_TYPED_PHI_ROLE",
+    "FGAP-005_REDUCED_BY_TYPED_EQUIVALENCE",
+    "FGAP-006_REDUCED_BY_F_TRANSITION_SIGNATURE",
+    "FGAP-015_REDUCED_BY_K4_SPARSE_POLICY",
+    "FGAP-025_REDUCED_BY_EXPRESSION_SCHEMA",
+    "FGAP-026_REDUCED_BY_PARSER_AST",
+    "FGAP-027_REDUCED_BY_D3_FIXTURE",
+    "FGAP-028_REDUCED_BY_SIX_TESTS"
+  ],
+  "remaining_gaps": [
+    "TOKEN_VAZIO_REMOTE_CI_RESULT",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_ANDROID_APK_RUNTIME",
+    "TOKEN_VAZIO_INDEPENDENT_REPRODUCTION",
+    "TOKEN_VAZIO_D7_SCALE_VALIDATION",
+    "TOKEN_VAZIO_RAPPORT_CALIBRATION",
+    "TOKEN_VAZIO_FULL_JSON_SCHEMA_VALIDATION"
+  ],
+  "decision": {
+    "state": "F_NEXT_MINIMUM_CIRCUIT_MATERIALIZED_LOCAL_PASS",
+    "claim_allowed": false,
+    "scientific_promotion": false,
+    "production_promotion": false
+  }
+}
