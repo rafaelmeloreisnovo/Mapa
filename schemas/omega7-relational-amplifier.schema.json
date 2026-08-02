@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/omega7-relational-amplifier.schema.json",
+  "title": "RAFAELIA Omega7 Relational Amplifier",
+  "description": "A fail-closed coordinate contract for a sparse 7x7x7x7 relation space. It indexes possible observations; it does not assert that every coordinate is true, populated, causal, or executed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "amplifier_id",
+    "status",
+    "claim_allowed",
+    "axes",
+    "semantic_top",
+    "coordinate_space",
+    "relation_policy",
+    "source_registry",
+    "token_vazio",
+    "r3"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.omega7-relational-amplifier.v1"
+    },
+    "amplifier_id": {
+      "type": "string",
+      "pattern": "^OMEGA7-[A-Z0-9-]+$"
+    },
+    "status": {
+      "enum": [
+        "CANONICAL_DRAFT",
+        "VERIFIED_LIMITED",
+        "BLOCKED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "axes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["direction", "vertent", "line", "condition"],
+      "properties": {
+        "direction": {"$ref": "#/$defs/seven_unique_labels"},
+        "vertent": {"$ref": "#/$defs/seven_unique_labels"},
+        "line": {"$ref": "#/$defs/seven_unique_labels"},
+        "condition": {"$ref": "#/$defs/seven_unique_labels"}
+      }
+    },
+    "semantic_top": {
+      "$ref": "#/$defs/seven_unique_labels"
+    },
+    "coordinate_space": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arity",
+        "dimensions",
+        "addressable_cells",
+        "materialized_cells",
+        "runtime_status",
+        "promotion_gate"
+      ],
+      "properties": {
+        "arity": {"const": 7},
+        "dimensions": {"const": 4},
+        "addressable_cells": {"const": 2401},
+        "materialized_cells": {"type": "integer", "minimum": 0, "maximum": 2401},
+        "runtime_status": {"type": "string"},
+        "promotion_gate": {"type": "string", "minLength": 1}
+      }
+    },
+    "relation_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edge_types", "terminal_outcomes", "causality", "sparsity"],
+      "properties": {
+        "edge_types": {"$ref": "#/$defs/seven_unique_labels"},
+        "terminal_outcomes": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "enum": ["COERENTE", "PARADOXO", "ANOMALIA", "TOKEN_VAZIO"]
+          }
+        },
+        "causality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["default_state", "promotion_requirements"],
+          "properties": {
+            "default_state": {"const": "TOKEN_VAZIO_CAUSALITY"},
+            "promotion_requirements": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "sparsity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["policy", "semantic_edges_materialized"],
+          "properties": {
+            "policy": {"type": "string", "minLength": 1},
+            "semantic_edges_materialized": {"const": 0}
+          }
+        }
+      }
+    },
+    "source_registry": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "token_vazio": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/gap"}
+    },
+    "r3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["f_ok", "f_gap", "f_next"],
+      "properties": {
+        "f_ok": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "f_gap": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "f_next": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    }
+  },
+  "$defs": {
+    "seven_unique_labels": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "surface", "role", "state", "claim_allowed"],
+      "properties": {
+        "source_id": {"type": "string", "pattern": "^SRC-[A-Z0-9-]+$"},
+        "surface": {"enum": ["GITHUB", "GOOGLE_DRIVE", "SITES", "TEMPLATE", "PETS", "WEB"]},
+        "role": {"type": "string", "minLength": 1},
+        "state": {"type": "string", "minLength": 1},
+        "locator": {"type": "string", "minLength": 1},
+        "source_url": {"type": "string", "format": "uri"},
+        "claim_allowed": {"const": false}
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gap_id", "state", "observation", "next_gate", "claim_allowed"],
+      "properties": {
+        "gap_id": {"type": "string", "pattern": "^TV-OMEGA7-[A-Z0-9-]+$"},
+        "state": {"type": "string", "pattern": "^(TOKEN_VAZIO|BLOCKED)_[A-Z0-9_]+$"},
+        "observation": {"type": "string", "minLength": 1},
+        "next_gate": {"type": "string", "minLength": 1},
+        "claim_allowed": {"const": false}
+      }
+    }
+  }
+}
