@@ -77,4 +77,10 @@ F_{next}:\ \text{receipts, mapa de fórmulas e calibração separada}
 \rangle.
 \]
 
+## Persistência desta ocorrência
+
+- GitHub: `rafaelmeloreisnovo/Mapa`, PR draft #132, branch `audit/poincare-audio-em-cross-20260802`.
+- Google Drive: `1H7G89qtQTgaTy58-mj3pdAxA9pAc005s` — cópia editorial deste mesmo evento.
+- Regra de leitura: as duas cópias registram a auditoria; nenhuma delas altera os limites de claim das fontes auditadas.
+
 **Fecho:** som, campo e geometria podem conversar por relações matemáticas; só viram uma mesma teoria quando compartilham domínio, unidades, mecanismo, dados e falsificador. ♥φ
