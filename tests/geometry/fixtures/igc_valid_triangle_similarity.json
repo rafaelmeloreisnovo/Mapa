@@ -1,0 +1,42 @@
+{
+  "contract_id": "IGC-EQUILATERAL-TRIANGLE-SIMILARITY-V1",
+  "object_id": "EQUILATERAL_TRIANGLE",
+  "representation": "three non-collinear vertices with equal pairwise side lengths",
+  "transformation_family": "SIMILARITY",
+  "orientation_preserving": null,
+  "invariants": [
+    {
+      "key": "angle",
+      "expected": [60, 60, 60],
+      "metric": "degrees",
+      "status": "PASS"
+    },
+    {
+      "key": "normalized_distance_ratio",
+      "expected": [1, 1, 1],
+      "status": "PASS"
+    },
+    {
+      "key": "shape_class",
+      "expected": "equilateral",
+      "status": "PASS"
+    }
+  ],
+  "tolerance": 1e-12,
+  "sample_or_proof": "exact similarity theorem; tolerance applies only to numerical fixtures",
+  "source_pointers": [
+    "docs/canonical/2026-08-02/INVARIANTE_GEOMETRICA_COERENTE_E_COESAO_REAL_V1.md"
+  ],
+  "evidence_pointers": [
+    "proof-pointer:triangle-similarity"
+  ],
+  "falsifiers": [
+    "non-uniform scaling or an affine shear changes angle/shape class"
+  ],
+  "limitations": [
+    "absolute side length and area are not similarity invariants"
+  ],
+  "epistemic_state": "MATH_FORMAL",
+  "execution_level": "L0_TEXT",
+  "claim_allowed": false
+}
