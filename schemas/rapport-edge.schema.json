@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/rapport-edge.schema.json",
+  "title": "RAFAELIA RAPPORT Edge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source",
+    "target",
+    "edge_type",
+    "score",
+    "distance",
+    "rank"
+  ],
+  "properties": {
+    "source": {
+      "type": "string",
+      "pattern": "^C-[0-9]{4}$"
+    },
+    "target": {
+      "type": "string",
+      "pattern": "^C-[0-9]{4}$"
+    },
+    "edge_type": {
+      "enum": [
+        "PROXIMITY",
+        "SYNERGY",
+        "DEPENDENCY",
+        "COMPETITION",
+        "CONTRADICTION",
+        "FALSIFIER"
+      ]
+    },
+    "score": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1
+    },
+    "distance": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "rank": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 16
+    }
+  }
+}
