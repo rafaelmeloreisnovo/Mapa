@@ -1,0 +1,54 @@
+{
+  "receipt_id": "IGC-CR-20260802-RECEIPT-V1",
+  "timestamp_brt": "2026-08-02T04:19:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 128,
+  "head_sha_before_receipt": "8dad0bda7794927d66bf02a9a7ec2202c30e8cab",
+  "local_sandbox": {
+    "environment": {
+      "python": "3.13.5",
+      "platform": "Linux 6.12.13 x86_64 glibc 2.41"
+    },
+    "positive_fixtures": {
+      "igc_valid_torus.json": "PASS",
+      "igc_valid_triangle_similarity.json": "PASS"
+    },
+    "negative_fixture": {
+      "igc_invalid_affine_angle.json": "REJECTED_AS_EXPECTED",
+      "reason": "angle is not permitted as an invariant for AFFINE"
+    },
+    "status": "VERIFIED_LIMITED_LOCAL"
+  },
+  "remote_runs": [
+    {
+      "run_id": 30737540026,
+      "workflow": "Geometric invariant contract",
+      "conclusion": "failure",
+      "jobs": 1,
+      "steps_observed": 0,
+      "logs_recoverable": false
+    },
+    {
+      "run_id": 30737539990,
+      "workflow": "Branch Topology Gate",
+      "conclusion": "failure",
+      "jobs": 1,
+      "steps_observed": 0,
+      "logs_recoverable": false
+    },
+    {
+      "run_id": 30737539966,
+      "workflow": "CI",
+      "conclusion": "failure",
+      "jobs": 1,
+      "steps_observed": 0,
+      "logs_recoverable": false
+    }
+  ],
+  "remote_gate": "TOKEN_VAZIO_RUNNER_OR_PLATFORM",
+  "inference": "Because all three workflows ended without observable steps and without recoverable logs, the runs do not establish a code-level failure.",
+  "physical_termux": "TOKEN_VAZIO",
+  "independent_reproduction": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "next_gate": "obtain a workflow run with observable steps or reproduce on physical Termux"
+}
