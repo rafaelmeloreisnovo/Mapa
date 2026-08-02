@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/rafaelia/sequence_family_registry.v1.schema.json",
+  "title": "RAFAELIA Sequence Family Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "registry_id", "claim_allowed", "families"],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.sequence_family_registry.v1"
+    },
+    "registry_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "families": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "family_id",
+          "order",
+          "seed_raw",
+          "seed_values",
+          "seed_policy",
+          "operator",
+          "domain",
+          "modulus",
+          "evidence_state"
+        ],
+        "properties": {
+          "family_id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "seed_raw": {
+            "type": "string",
+            "minLength": 1
+          },
+          "seed_values": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "seed_policy": {
+            "type": "string",
+            "enum": [
+              "LITERAL_CHARACTERS",
+              "PREFIX_ORDER_VALUES",
+              "ALL_VALUES"
+            ]
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "IDENTITY_LITERAL",
+              "SUM_LAST_2",
+              "SUM_LAST_3"
+            ]
+          },
+          "domain": {
+            "type": "string",
+            "enum": ["TEXT", "INTEGER"]
+          },
+          "modulus": {
+            "type": ["integer", "null"],
+            "minimum": 2
+          },
+          "evidence_state": {
+            "type": "string",
+            "enum": [
+              "EVIDENCIADO_LIMITADO",
+              "CONVENTION",
+              "HYPOTHESIS",
+              "TOKEN_VAZIO"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
