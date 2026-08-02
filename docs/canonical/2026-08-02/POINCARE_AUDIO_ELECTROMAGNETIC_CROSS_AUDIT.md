@@ -83,4 +83,8 @@ F_{next}:\ \text{receipts, mapa de fórmulas e calibração separada}
 - Google Drive: `1H7G89qtQTgaTy58-mj3pdAxA9pAc005s` — cópia editorial deste mesmo evento.
 - Regra de leitura: as duas cópias registram a auditoria; nenhuma delas altera os limites de claim das fontes auditadas.
 
+## Cobertura repo-native de áudio
+
+Uma busca dirigida em RLL, Papers, Matemática, ChipQuantum, Mapa, Teoremas e QUANTUM não encontrou artefato dedicado de Ambisonics, Ambiophonics ou TrueRTA. Os hits literais de `VST` e `ASIO` não se qualificam como implementação de áudio: `vst1.8` é instrução ARM/NEON de *vector store* e a ocorrência de `ASIO` veio de correspondência textual incidental. Portanto, drivers ASIO, hosts/plugins VST e decoder espacial permanecem `TOKEN_VAZIO_AUDIO_RUNTIME_ARTIFACT`, não ausência convertida em zero.
+
 **Fecho:** som, campo e geometria podem conversar por relações matemáticas; só viram uma mesma teoria quando compartilham domínio, unidades, mecanismo, dados e falsificador. ♥φ
