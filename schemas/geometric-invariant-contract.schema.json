@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/geometric-invariant-contract.schema.json",
+  "title": "RAFAELIA Geometric Invariant Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_id",
+    "object_id",
+    "representation",
+    "transformation_family",
+    "invariants",
+    "tolerance",
+    "source_pointers",
+    "falsifiers",
+    "epistemic_state",
+    "execution_level",
+    "claim_allowed"
+  ],
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "pattern": "^IGC-[A-Z0-9][A-Z0-9._-]*$"
+    },
+    "object_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "representation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "transformation_family": {
+      "enum": [
+        "EUCLIDEAN_ISOMETRY",
+        "SIMILARITY",
+        "AFFINE",
+        "PROJECTIVE",
+        "HOMEOMORPHISM",
+        "DISCRETE_GLUE",
+        "NUMERICAL_SIMULATION"
+      ]
+    },
+    "orientation_preserving": {
+      "type": ["boolean", "null"]
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "expected", "status"],
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected": {},
+          "metric": {
+            "type": "string"
+          },
+          "tolerance_override": {
+            "type": "number",
+            "minimum": 0
+          },
+          "status": {
+            "enum": ["DRAFT", "PASS", "FAIL", "TOKEN_VAZIO", "BLOCKED"]
+          }
+        }
+      }
+    },
+    "tolerance": {
+      "type": "number",
+      "minimum": 0
+    },
+    "sample_or_proof": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_pointers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_pointers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "falsifiers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "epistemic_state": {
+      "enum": [
+        "DRAFT",
+        "MATH_FORMAL",
+        "VERIFIED_LIMITED",
+        "FAIL",
+        "TOKEN_VAZIO",
+        "BLOCKED"
+      ]
+    },
+    "execution_level": {
+      "enum": [
+        "L0_TEXT",
+        "L1_CONNECTOR",
+        "L2_EPHEMERAL_RUNTIME",
+        "L3_REMOTE_CI",
+        "L4_PHYSICAL_TERMUX",
+        "L5_INDEPENDENT_REPRODUCTION"
+      ]
+    },
+    "l8_pointer": {
+      "type": "string"
+    },
+    "k6_pointer": {
+      "type": "string"
+    },
+    "claim_allowed": {
+      "type": "boolean"
+    }
+  }
+}
