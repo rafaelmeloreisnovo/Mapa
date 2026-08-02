@@ -1,0 +1,59 @@
+name: Geometric invariant contract
+
+on:
+  pull_request:
+    paths:
+      - "docs/canonical/**/INVARIANTE_GEOMETRICA_COERENTE_E_COESAO_REAL_V1.md"
+      - "schemas/geometric-invariant-contract.schema.json"
+      - "tools/validate_geometric_invariant_contract.py"
+      - "tests/geometry/fixtures/*.json"
+      - "data/geometry/geometric_invariants.index.jsonl"
+      - ".github/workflows/geometric-invariant-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile validator
+        run: python -m py_compile tools/validate_geometric_invariant_contract.py
+      - name: Validate positive fixtures
+        run: |
+          python tools/validate_geometric_invariant_contract.py \
+            tests/geometry/fixtures/igc_valid_torus.json \
+            tests/geometry/fixtures/igc_valid_triangle_similarity.json
+      - name: Require rejection of invalid affine-angle claim
+        shell: bash
+        run: |
+          if python tools/validate_geometric_invariant_contract.py \
+            tests/geometry/fixtures/igc_invalid_affine_angle.json; then
+            echo "negative fixture was incorrectly accepted"
+            exit 1
+          fi
+          echo "negative fixture rejected as expected"
+      - name: Validate JSON and JSONL syntax
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          json.loads(Path("schemas/geometric-invariant-contract.schema.json").read_text())
+          for path in Path("tests/geometry/fixtures").glob("*.json"):
+              json.loads(path.read_text())
+          for number, line in enumerate(
+              Path("data/geometry/geometric_invariants.index.jsonl")
+              .read_text()
+              .splitlines(),
+              start=1,
+          ):
+              if line.strip():
+                  json.loads(line)
+          print("JSON/JSONL syntax PASS")
+          PY
