@@ -1,0 +1,71 @@
+{
+  "cycle_id": "CAT-20260801T2201-0300",
+  "mode": "incremental_append_only",
+  "claim_allowed": false,
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT"
+  },
+  "cutoff_previous": "2026-08-01T20:58:00-03:00",
+  "drive_delta": [],
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "commit": "fd2b9925c6cbde730741117ec3c6dd979db9b25e",
+      "kind": "BITRAF_MATRIX_8000_4096",
+      "claims": {
+        "PROVADO": ["merge e arquivos existem"],
+        "EVIDENCIADO": ["receipt local declara 4/4 testes Python, roundtrips 8000/8000 e 4096/4096, compiladores clang/gcc e hashes SHA-256"],
+        "HIPÓTESE": ["o carrier pode servir como adaptador não destrutivo para AllStar Matrix"],
+        "REFUTADO": ["teste x86_64 local não prova execução ARM física"],
+        "TOKEN_VAZIO": ["Termux ARMv7/AArch64", "calibração semântica independente", "workflow run observável"]
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "commit": "13c22fdba5cb858b7150a69768a8246c2d3ad761",
+      "kind": "QEMU_PIN_REPAIR_AND_ANDROID_GATE",
+      "claims": {
+        "PROVADO": ["merge e workflows de contrato existem"],
+        "EVIDENCIADO": ["resolve e ABI contract gate passaram no run posterior"],
+        "REFUTADO": ["reparo do pin não resultou em build Android aprovado"],
+        "TOKEN_VAZIO": ["fonte externa coerente", "APK compilado", "runtime Android"]
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "commit": "22019ff33bbfe7e436c86c6b9eccaae649d2cc1d",
+      "kind": "ZIPRAF_REAL_ARCHIVE_V2",
+      "dependencies": ["rafaelmeloreisnovo/BLAKE3@ff6991d8b13f5b4b16dc311b5acc9c63ae835152", "qemu_rafaelia pinned source contract"],
+      "workflow_runs": [
+        {"id": 30724642602, "name": "audit-benchmark-contract", "conclusion": "success"},
+        {"id": 30724642674, "name": "android-ci", "conclusion": "failure", "failed_step": "Validate external integration sources (androidx_RmR/qemu_rafaelia)"}
+      ],
+      "claims": {
+        "PROVADO": ["merge, workflows, código e contratos existem"],
+        "EVIDENCIADO": ["audit-benchmark-contract concluiu success", "resolve e ABI gate do android-ci passaram"],
+        "REFUTADO": ["ZIPRAF host e upload best-effort não provam build Android, DMA ou execução"],
+        "TOKEN_VAZIO": ["android-ci completo", "APK", "device runtime", "DMA/IRQ físico"]
+      }
+    }
+  ],
+  "policy": {
+    "myCat": "historical_analysis_only_not_component_not_dependency",
+    "deduplication": "commit_sha_and_cycle_id",
+    "provenance": "preserved",
+    "automatic_promotion": false
+  },
+  "actions_not_executed": [
+    "nenhuma escrita no Google Drive",
+    "nenhum rerun de workflow",
+    "nenhum build ou runtime físico",
+    "nenhuma promoção científica ou de desempenho",
+    "nenhum hash Drive inventado"
+  ],
+  "r3": {
+    "F_ok": "BITRAF 8000/4096 e ZIPRAF Real Archive V2 foram catalogados com commits, receipts, hashes declarados, dependências e resultados CI observáveis.",
+    "F_gap": "O android-ci falhou na validação das fontes externas; faltam execução ARM, APK e runtime físico.",
+    "F_next": "Corrigir e verificar o contrato androidx_RmR/qemu_rafaelia, repetir o android-ci e preservar receipt de build antes de qualquer promoção de runtime."
+  }
+}
