@@ -1,0 +1,134 @@
+{
+  "schema": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260802T1858-0300",
+  "observed_at": "2026-08-02T18:58:05-03:00",
+  "mode": "INCREMENTAL_APPEND_ONLY_NON_DESTRUCTIVE",
+  "claim_allowed": false,
+  "reference": {
+    "surface": "GOOGLE_DRIVE",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "LOCATED_AND_HYDRATED",
+    "export_sha256": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+  },
+  "cutoff": {
+    "previous_catalog_event": "RAF-SOURCE-GAP-DELTA-20260802T1715-0300",
+    "previous_map_base": "ed0028efd0cbbe455bf94d28bbbc6f66b60b6b66"
+  },
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pull_request": 129,
+      "state": "MERGED",
+      "merge_commit": "a8d9adb6cce3ada46c7195baa2031904f8ff0db3",
+      "title": "receipt(geometry): local reproduction for invariant contract",
+      "artifacts": [
+        "receipts/geometry/IGC_CR_20260802_RECEIPT_V2_LOCAL_REPRO.json"
+      ],
+      "evidence": {
+        "local_compile": "PASS",
+        "positive_fixtures": 2,
+        "negative_fixture": "REJECTED_AS_EXPECTED",
+        "jsonl_records_parsed": 2,
+        "remote_ci": "REMOTE_GATE_BLOCKED_BEFORE_STEPS"
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pull_request": 130,
+      "state": "MERGED",
+      "merge_commit": "a15ffa1c0a3153f2967568789021ab83198cc92a",
+      "title": "docs: reduzir F_GAP das fontes e registrar F_NEXT",
+      "artifacts": [
+        "indices/catalog-runs/RAFAELIA_SOURCE_GAP_DELTA_2026-08-02T1715-0300.md",
+        "data/sources/source_registry.delta.20260802.jsonl",
+        "data/sources/source_registry.mirrors.20260802.jsonl",
+        "data/sources/source_registry.amplifier_session.20260802.jsonl",
+        "data/ontology/amplifier_operator_registry.v1.json",
+        "data/gaps/fgap_total_current_scope.20260802.jsonl",
+        "data/memory/longitudinal_lateral_index.20260802.jsonl",
+        "data/memory/longitudinal_lateral_index.corrections.20260802.jsonl",
+        "data/memory/longitudinal_lateral_index.fnext.20260802.jsonl",
+        "schemas/amplified-expression.schema.json",
+        "schemas/rapport-edge.schema.json",
+        "tools/parse_amplified_expression.py",
+        "tools/build_amplifier_fixture.py",
+        "data/fixtures/amplifier_d3.v1.json",
+        "tests/amplifier/test_amplifier_contract.py",
+        ".github/workflows/amplifier-contract.yml",
+        "data/receipts/amplifier_hidden_session.20260802.receipt.json",
+        "data/receipts/amplifier_fnext_d3.20260802.receipt.json",
+        "data/receipts/amplifier_fnext_d3.remote_and_mirrors.20260802.receipt.json"
+      ],
+      "counts": {
+        "f_gap_records": 42,
+        "lateral_lanes": 7,
+        "derivations": 7,
+        "d3_cells": 81,
+        "d3_directed_edges": 324,
+        "local_tests_passed": 6,
+        "local_tests_failed": 0
+      },
+      "remote_gate": {
+        "workflow": "amplifier-contract",
+        "run_id": 30768218873,
+        "job_id": 91550644637,
+        "conclusion": "failure",
+        "observable_steps": 0,
+        "classification": "REMOTE_GATE_BLOCKED_BEFORE_STEPS",
+        "code_failure_established": false
+      }
+    }
+  ],
+  "drive_delta": [
+    {
+      "file_id": "1GakkGtZdvnx6TpGJ86n_43jzgHzZcb06b9khtFRW-hw",
+      "title": "RAFAELIA — Amplificador Oculto, Tokenização, Vazios e F_GAP Total — Sessão V1 — 2026-08-02 18h18 BRT",
+      "state": "EVIDENCIADO_BY_MERGED_RECEIPT",
+      "export_sha256": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+    },
+    {
+      "file_id": "1xQzfedWZ9lLjABi-Y_Cu_fM0WDMuVPU8-W9-_JHSWq4",
+      "title": "RAFAELIA — Sete Parábolas e F_NEXT D3 — 2026-08-02 18h30 BRT",
+      "state": "EVIDENCIADO_BY_MERGED_RECEIPT",
+      "export_sha256": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+    },
+    {
+      "file_id": "1QKdVfhlGv-gcQFEb4ObzzAMv6p-ZyRl5I70BszFr6e8",
+      "title": "RAFAELIA — Delta de Fontes, Redução de F_GAP e F_NEXT — 2026-08-02 17h15 BRT",
+      "state": "LOCATED_AND_HYDRATED",
+      "export_sha256": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+    }
+  ],
+  "claims": [
+    {"class": "PROVADO", "statement": "PRs 129 and 130 are merged and their merge commits exist."},
+    {"class": "EVIDENCIADO", "statement": "The D3 amplifier receipt records 81 cells, 324 directed edges and 6/6 local tests."},
+    {"class": "HIPÓTESE", "statement": "Typed operators and sparse RAPPORT may reduce semantic ambiguity and graph explosion."},
+    {"class": "MODELO_ANALÓGICO", "statement": "Seven parables translate operational contracts without evidentiary promotion."},
+    {"class": "PARÁBOLA", "statement": "Seven didactic parables are cataloged as a non-probative layer."},
+    {"class": "REFUTADO", "statement": "A remote workflow conclusion=failure with zero observable steps does not establish code failure."},
+    {"class": "TOKEN_VAZIO", "statement": "Drive export hashes, physical Termux/Android runtime, independent reproduction, D7 scale validation and RAPPORT calibration remain open."}
+  ],
+  "dependencies": [
+    "reference Drive document -> source registry -> operator ontology -> schemas -> parser/AST -> D3 fixture -> sparse graph -> tests -> receipt -> remote gate -> physical runtime -> independent reproduction"
+  ],
+  "writes": {
+    "google_drive": "NOT_EXECUTED_AVOID_DUPLICATE_EXISTING_CANONICAL_DESTINATIONS",
+    "github_receipt": "THIS_FILE",
+    "github_index": "indices/catalog-runs/deltas/CATALOG_RUN_INDEX_2026-08-02T1858-0300.md"
+  },
+  "not_executed": [
+    "No Google Drive content was rewritten.",
+    "No workflow was started or rerun.",
+    "No physical Termux or Android execution occurred.",
+    "No missing hash was invented.",
+    "No scientific, physical, legal or commercial claim was promoted.",
+    "No global coverage of all repositories, branches or Drive objects was claimed.",
+    "No myCat component, dependency or automation was integrated."
+  ],
+  "r3": {
+    "F_ok": "Merged source federation, geometric local reproduction, typed amplifier grammar, D3 fixture, sparse graph, tests, receipts and longitudinal indexes are now canonical on main.",
+    "F_gap": "Remote CI remains unobservable before steps; Drive export hashes, physical runtime, independent reproduction, D7 scale and RAPPORT calibration remain absent.",
+    "F_next": "Recover a runner with observable steps for the exact merge head, then replay the D3 contract on physical Termux ARMv7/ARM64 with commit-bound hashes before scaling to D7."
+  }
+}
