@@ -1,0 +1,39 @@
+{
+  "schema": "rafaelia.sequence_graph.receipt.v1",
+  "receipt_id": "O7-123-FIB-TRIB-GRAPH-20260802-V1",
+  "claim_allowed": false,
+  "status": "PASS_LIMITED_LOCAL",
+  "registry_sha256": "a80efab418ec310a79bdeb3a8be1989cb75edcd32471ffa0f3f9965e8ece5c63",
+  "graph_sha256": "cac6169b89ac88d04c2381d372578e875a54c39e40f27807c44efca2d7b44b08",
+  "node_count": 27,
+  "edge_count": 26,
+  "families": [
+    {
+      "family_id": "SEED_123",
+      "evidence_state": "EVIDENCIADO_LIMITADO"
+    },
+    {
+      "family_id": "FIB_FROM_123",
+      "evidence_state": "CONVENTION"
+    },
+    {
+      "family_id": "TRIB_FROM_123",
+      "evidence_state": "CONVENTION"
+    }
+  ],
+  "tests": {
+    "raw_seed_preserved": true,
+    "endpoints_exist": true,
+    "claim_boundary_preserved": true,
+    "recurrence_order_declared": true
+  },
+  "rejected_iteration": {
+    "issue": "lexical node ordering placed 144 before 3",
+    "classification": "INDEXING_DEFECT",
+    "correction": "canonical order is (family_id, sequence_index)",
+    "retest": "PASS"
+  },
+  "F_ok": "deterministic typed graph generated locally from explicit registry",
+  "F_gap": "remote CI, Termux/ARM, independent reproduction and physical interpretation",
+  "F_next": "run the same graph builder in a second environment and compare graph_sha256"
+}
