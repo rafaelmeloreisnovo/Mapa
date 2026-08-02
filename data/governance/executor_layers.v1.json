@@ -1,0 +1,67 @@
+{
+  "schema": "raf.executor-layers.v1",
+  "cutoff": "2026-08-01",
+  "invariant": "results from different executor layers must not be promoted as equivalent without a dedicated receipt",
+  "layers": [
+    {
+      "id": "L0",
+      "name": "GPT_PROJECT_WORKFLOW_LAYOUT",
+      "authority": "context_orchestration",
+      "proves": ["project_context", "artifact_routing", "connector_intent"],
+      "does_not_prove": ["physical_runtime", "github_actions_success", "independent_replication"]
+    },
+    {
+      "id": "L1",
+      "name": "CONNECTOR_EXECUTION",
+      "authority": "remote_write_or_read_returned_by_connector",
+      "proves": ["successful_connector_action_when_returned_success"],
+      "does_not_prove": ["code_runtime", "scientific_validity"]
+    },
+    {
+      "id": "L2",
+      "name": "OPENAI_CONTAINER",
+      "authority": "isolated_local_execution",
+      "proves": ["local_test_result", "local_artifact_hash"],
+      "does_not_prove": ["termux_equivalence", "independent_replication"]
+    },
+    {
+      "id": "L3",
+      "name": "GITHUB_ACTIONS",
+      "authority": "github_runner_run_job_step",
+      "proves": ["remote_ci_result_for_exact_head_when_steps_execute"],
+      "does_not_prove": ["android_physical_runtime", "peer_review"]
+    },
+    {
+      "id": "L4",
+      "name": "TERMUX_ANDROID_PHYSICAL",
+      "authority": "user_device_runtime",
+      "proves": ["physical_android_execution_for_recorded_device"],
+      "does_not_prove": ["independent_replication"]
+    },
+    {
+      "id": "L5",
+      "name": "INDEPENDENT_REPLICATION",
+      "authority": "third_party_or_independent_environment",
+      "proves": ["independent_reproduction_with_frozen_inputs_and_tolerances"],
+      "does_not_prove": ["universal_validity"]
+    }
+  ],
+  "required_receipt_fields": [
+    "executor_layer",
+    "environment_identity",
+    "source_commit",
+    "run_or_receipt_id",
+    "exit_code",
+    "artifacts_hash",
+    "claim_allowed"
+  ],
+  "current_state": {
+    "L0": "ACTIVE",
+    "L1": "OBSERVED_SUCCESS_FOR_RECORDED_CONNECTOR_WRITES",
+    "L2": "LOCAL_PASS_BY_RECEIPTS",
+    "L3": "MIXED_QUEUED_OR_BLOCKED_BY_HEAD",
+    "L4": "TOKEN_VAZIO",
+    "L5": "TOKEN_VAZIO"
+  },
+  "claim_allowed": false
+}

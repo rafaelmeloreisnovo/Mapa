@@ -1,0 +1,98 @@
+{
+  "schema": "raf.peer-review-math-7d-remote-gate-receipt.v1",
+  "observed_at": "2026-08-01T22:41:17-03:00",
+  "classification": "REMOTE_GATE_BLOCKED_BEFORE_STEPS",
+  "interpretation": {
+    "workflow_conclusion": "failure",
+    "job_steps_observed": 0,
+    "code_or_assertion_executed": false,
+    "code_failure_proven": false,
+    "remote_pass_proven": false,
+    "retry_without_infrastructure_change_recommended": false
+  },
+  "repositories": [
+    {
+      "repository": "rafaelmeloreisnovo/papers",
+      "pr": 38,
+      "head": "a8ea2c40729476b64f735e359f123b52e24b1f8c",
+      "runs": [
+        {
+          "run_id": 30727383653,
+          "workflow": "CI",
+          "conclusion": "failure",
+          "jobs": [
+            {"job_id": 91441480088, "name": "Validate Session Packet Chain", "steps": []},
+            {"job_id": 91441480103, "name": "Validate Documentation", "steps": []},
+            {"job_id": 91441480112, "name": "Build C Sources (x86_64)", "steps": []}
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 195,
+      "head": "3da96527b8f6760b3609310d9418bb8c195d555f",
+      "runs": [
+        {
+          "run_id": 30727438055,
+          "workflow": "Formal Science Orchestrator",
+          "conclusion": "failure",
+          "jobs": [
+            {"job_id": 91441631458, "name": "Units, evidence, statistics and time gates", "steps": []}
+          ]
+        },
+        {
+          "run_id": 30727438039,
+          "workflow": "CI",
+          "conclusion": "failure",
+          "jobs": [
+            {"job_id": 91441631594, "name": "Semantic coherence and falsifiability gates", "steps": []}
+          ]
+        },
+        {
+          "run_id": 30727438041,
+          "workflow": "Document Governance",
+          "conclusion": "failure",
+          "jobs": [
+            {"job_id": 91441631405, "name": "document-governance", "steps": []}
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pr": 126,
+      "head": "e4c870c58cf1a5d81b9efc1cc77960bb8ef5e5ec",
+      "runs": [
+        {
+          "run_id": 30727412156,
+          "workflow": "CI",
+          "conclusion": "failure",
+          "jobs": [
+            {"job_id": 91441558849, "name": "Validate Repository Structure", "steps": []}
+          ]
+        },
+        {
+          "run_id": 30727412162,
+          "workflow": "Branch Topology Gate",
+          "conclusion": "failure",
+          "jobs": [
+            {"job_id": 91441558855, "name": "branch-topology / validate", "steps": []}
+          ]
+        }
+      ]
+    }
+  ],
+  "local_evidence": {
+    "triangle_atlas_tests": "10/10 PASS_IN_PRIOR_LOCAL_RECEIPT",
+    "math_7d_validator_tests": "11/11 PASS_OPENAI_CONTAINER",
+    "manifest_validation": "PASS_OPENAI_CONTAINER"
+  },
+  "next_gate": "restore or enable a runner capable of starting steps, then rerun the exact heads without changing claims",
+  "boundaries": {
+    "physical_termux_execution": "TOKEN_VAZIO",
+    "independent_replication": "TOKEN_VAZIO",
+    "publication_ready": false,
+    "claim_allowed": false
+  }
+}
