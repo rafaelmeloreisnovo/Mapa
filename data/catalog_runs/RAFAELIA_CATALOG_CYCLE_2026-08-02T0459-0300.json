@@ -1,0 +1,114 @@
+{
+  "cycle_id": "CAT-20260802T0459-0300",
+  "mode": "incremental_append_only_non_destructive",
+  "claim_allowed": false,
+  "cutoff_previous": "2026-08-02T03:59:00-03:00",
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "status": "PROVADO_LOCALIZADO"
+  },
+  "drive_delta": [
+    {
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "classification": "PROVADO_MODIFIED_METADATA",
+      "content_digest": "TOKEN_VAZIO_DRIVE_EXPORTED_BYTES"
+    },
+    {
+      "title": "RAFAELIA — Invariante Geométrica Coerente e Coesão Real — V1 — 2026-08-02",
+      "drive_id": "1eGLmUTXAgcm4M9hJNCXoB5OLnc9ZSGMqTXvsFJasags",
+      "classification": "PROVADO_NEW_OR_MODIFIED",
+      "content_digest": "TOKEN_VAZIO_DRIVE_EXPORTED_BYTES"
+    }
+  ],
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "merge_commit": "6c60b1df49760f5867d173f24da44ef524b9435b",
+      "pull_request": 128,
+      "title": "Geometria: contrato de invariância coerente e coesão real V1",
+      "artifacts": [
+        ".github/workflows/geometric-invariant-contract.yml",
+        "docs/canonical/2026-08-02/INVARIANTE_GEOMETRICA_COERENTE_E_COESAO_REAL_V1.md",
+        "schemas/geometric-invariant-contract.schema.json",
+        "tools/validate_geometric_invariant_contract.py",
+        "tests/geometry/fixtures/igc_valid_torus.json",
+        "tests/geometry/fixtures/igc_valid_triangle_similarity.json",
+        "tests/geometry/fixtures/igc_invalid_affine_angle.json",
+        "data/geometry/geometric_invariants.index.jsonl",
+        "indices/geometry/INVARIANTE_GEOMETRICA_COERENTE_E_COESAO_REAL_V1.md",
+        "data/geometry/receipts/IGC_CR_20260802_RECEIPT_V1.json"
+      ],
+      "local_receipt": {
+        "status": "VERIFIED_LIMITED_LOCAL",
+        "positive_fixtures": 2,
+        "negative_fixtures_rejected": 1,
+        "environment": "Linux x86_64 / Python 3.13.5"
+      },
+      "remote_ci": "TOKEN_VAZIO_NO_ASSOCIATED_RUNS_ON_MERGE_SHA"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "d15454c6c5fa342f7d69c5bf20e85b742156bddd",
+      "title": "ativar índice longitudinal contextual e overlays tensoriais V1",
+      "classification": "PROVADO_COMMIT_EXISTS"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "be8826a2506e4d168d6b5e13981055e6c4469664",
+      "title": "indexar ativação contextual e overlays tensoriais",
+      "classification": "PROVADO_COMMIT_EXISTS"
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Invariância exige objeto, representação, família de transformação, propriedade e tolerância declarados em conjunto",
+      "classification": "EVIDENCIADO",
+      "basis": "contrato, schema, validador e fixtures materializados"
+    },
+    {
+      "claim": "O toro padrão T2 possui beta0=1, beta1=2 e característica de Euler 0 sob o modelo declarado",
+      "classification": "PROVADO",
+      "scope": "matemática formal condicionada ao toro padrão"
+    },
+    {
+      "claim": "Ângulo é invariante sob transformação afim",
+      "classification": "REFUTADO",
+      "basis": "fixture negativa rejeitada pelo validador"
+    },
+    {
+      "claim": "A pirâmide triédrica dupla possui mapa exato de colagem identificado",
+      "classification": "TOKEN_VAZIO",
+      "next_step": "marcar vértices, arestas e faces e decidir G1, G2, G3 ou quarto modelo"
+    },
+    {
+      "claim": "A camada de coesão real é uma nova lei geométrica",
+      "classification": "REFUTADO",
+      "basis": "o documento a define como gate operacional"
+    },
+    {
+      "claim": "O contrato pode reduzir promoções indevidas entre analogia visual e identidade geométrica",
+      "classification": "HIPÓTESE"
+    },
+    {
+      "claim": "Coesão real como composição de gates G_S..G_C",
+      "classification": "MODELO_ANALÓGICO"
+    }
+  ],
+  "dependencies": [
+    "reference Drive document -> canonical geometry contract",
+    "canonical contract -> schema -> validator -> fixtures -> ledger -> workflow -> receipt",
+    "piramide triedrica memory -> geometric invariants ledger"
+  ],
+  "exclusions": {
+    "myCat": "HISTORICAL_ANALYSIS_ONLY_NOT_COMPONENT",
+    "drive_writes": "NOT_EXECUTED",
+    "workflow_reruns": "NOT_EXECUTED",
+    "physical_termux": "NOT_EXECUTED",
+    "independent_reproduction": "NOT_EXECUTED"
+  },
+  "F_ok": "Contrato geométrico, schema, validador, fixtures, ledger, índice e receipt local catalogados com proveniência.",
+  "F_gap": "CI remoto associado ao merge, hashes dos bytes exportados do Drive, Termux físico e reprodução independente continuam ausentes.",
+  "F_next": "Executar o workflow no head exato, preservar run_id/logs/artefatos, exportar e selar os documentos Drive e formalizar o mapa de colagem da pirâmide triédrica dupla."
+}
