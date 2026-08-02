@@ -20,6 +20,7 @@ Esta pasta contém catálogos minimizados, auditáveis e ponteiros federados. O 
 |---|---|
 | `drive_snapshot_catalog.v1.json` | catálogo privado minimizado dos exports e pools de assets |
 | `longitudinal_index_v1_1_pointer.json` | ponteiro federado para o motor no `MemRafcode` e a distribuição no Drive |
+| `../../docs/canonical/2026-08-02/MEMORIA_LONGITUDINAL_CONTEXTUAL_RECORRENTE_E_INDICE_DE_TRABALHO_V1.md` | ativação contextual, índice W0–W9 e overlays tensoriais V9⊕L8⊕E6⊕K6 |
 
 ## Relação de autoridade
 
