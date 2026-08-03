@@ -83,9 +83,20 @@ jobs:
   promotion:
     name: integral-gate / promotion
     needs: contract
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Deny promotion when contract did not succeed
+        env:
+          CONTRACT_RESULT: ${{ needs.contract.result }}
+        run: |
+          set -euo pipefail
+          if [ "$CONTRACT_RESULT" != "success" ]; then
+            echo "promotion denied: contract result=$CONTRACT_RESULT"
+            exit 1
+          fi
+
       - name: Checkout without persistent credentials
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
