@@ -1,0 +1,29 @@
+{
+  "cycle_id":"CAT-FEDERATED-REFERENCE-20260803T0515-0300",
+  "mode":"APPEND_ONLY_NON_DESTRUCTIVE_FAIL_CLOSED",
+  "claim_allowed":false,
+  "reference_drive_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+  "t7_drive_folder_id":"1HlBedJvhjj1WO4yQszwcSRRlHY7lhSgt",
+  "created":[
+    "schemas/federated-reference-matrix.v1.schema.json",
+    "data/control-plane/federated-reference-matrix.v1.json",
+    "tools/validate_federated_reference_matrix.py",
+    "tests/test_federated_reference_matrix.py",
+    "indices/FEDERATED_REFERENCE_MATRIX_V1.md",
+    "data/memory/federated-context-events.20260803.jsonl"
+  ],
+  "matrix":{"nodes":10,"edges":12,"contexts":6},
+  "claims":{
+    "PROVADO":["Os seis arquivos foram criados no Mapa."],
+    "EVIDENCIADO":["A matriz separa autoridades, superfícies, relações e contextos."],
+    "HIPÓTESE":["A navegação tipada pode reduzir deriva semântica e escolha incorreta de autoridade."],
+    "MODELO_ANALÓGICO":["A matriz representa o ecossistema como grafo federado de superfícies."],
+    "PARÁBOLA":[],
+    "REFUTADO":["Referência, pasta ou relação declarada provam integração ou runtime."],
+    "TOKEN_VAZIO":["TOKEN_VAZIO_LOCAL_TEST_RUN","TOKEN_VAZIO_REMOTE_CI","TOKEN_VAZIO_ADAPTER_PAYLOADS","TOKEN_VAZIO_DRIVE_EXPORT_HASHES"]
+  },
+  "actions_not_executed":["local test run","remote CI","Drive write","runtime execution","cross-repository adapter mutation"],
+  "F_ok":"Schema, matriz, índice, contextos, validador, testes e memória append-only foram materializados.",
+  "F_gap":"Validador e testes ainda não possuem receipt de execução; adaptadores e hashes Drive permanecem vazios.",
+  "F_next":"Executar os gates no head exato e materializar manifestos de adaptador por repositório com source_ref, hashes, inputs, outputs, rollback e receipt."
+}
