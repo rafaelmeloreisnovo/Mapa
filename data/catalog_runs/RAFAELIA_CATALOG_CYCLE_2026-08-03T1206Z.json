@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0.0",
+  "cycle_id": "CAT-20260803T1206Z",
+  "created_at": "2026-08-03T12:06:00Z",
+  "mode": ["incremental", "append-only", "non-destructive", "fail-closed"],
+  "claim_allowed": false,
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "e7d9d94aeba6496c1cfb0cec4f50f4910db08bbb",
+    "observed_at": "2026-08-03T11:02:00Z"
+  },
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "provider": "google_drive",
+    "id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "github_delta": {
+    "repositories_checked": [
+      "rafaelmeloreisnovo/Mapa",
+      "rafaelmeloreisnovo/RafGitTools",
+      "rafaelmeloreisnovo/RafPolimata",
+      "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "rafaelmeloreisnovo/papers",
+      "instituto-Rafael/relativity-living-light"
+    ],
+    "new_commits_after_checkpoint": [],
+    "state": "EVIDENCIADO_LIMITADO_NO_NEW_GITHUB_DELTA"
+  },
+  "drive_delta": [
+    {
+      "kind": "folder",
+      "title": "RMRCTI_HOTFIX_2026-08-03_PR98",
+      "id": "1mOeKzpWbYlW8fmHUXZKr33SVJ2rlo2QZ",
+      "parent_id": "1bBUICPOZSONP84tQ5ZpxxmxBRJ5aXgV_",
+      "epistemic_state": "PROVADO",
+      "content_hash": "TOKEN_VAZIO_HASH_NOT_EXPOSED"
+    },
+    {
+      "kind": "document",
+      "title": "RMRCTI HOTFIX 2026-08-03 — Registro Longitudinal PR98",
+      "id": "1Hr_OiwadJaNntqkkz3QfqP9YTI0GzkA1nI_XUxjzpvk",
+      "parent_id": "1mOeKzpWbYlW8fmHUXZKr33SVJ2rlo2QZ",
+      "epistemic_state": "PROVADO",
+      "content_hash": "TOKEN_VAZIO_HASH_NOT_EXPOSED",
+      "observed_claims": [
+        {
+          "claim": "O registro declara base master ccfcd069ab3c645ebbae1ded0c3cb868187f86b2, branch hotfix/rmrcti-execution-integrity-20260803, PR 98 draft e head iniciado por ceaff1b0f7649984.",
+          "classification": "EVIDENCIADO",
+          "limitation": "Metadados declarados no documento Drive; PR e commit não foram resolvidos pelo conector GitHub neste ciclo."
+        },
+        {
+          "claim": "O documento descreve quatro rotas operacionais e afirma que build_termux.sh atual não depende de quatro fontes históricas ausentes.",
+          "classification": "EVIDENCIADO",
+          "limitation": "Conteúdo recuperado parcialmente por best-effort fetch; código e execução não auditados neste ciclo."
+        },
+        {
+          "claim": "O hotfix está implementado e validado no repositório produtor.",
+          "classification": "TOKEN_VAZIO",
+          "next_step": "Resolver o repositório exato, abrir PR 98, comparar base/head, inspecionar arquivos e executar os gates declarados."
+        }
+      ]
+    }
+  ],
+  "categories": {
+    "core_fcea": "NO_NEW_DISTINCT_OBJECT_OBSERVED",
+    "datasets": "NO_NEW_DISTINCT_OBJECT_OBSERVED",
+    "papers": "NO_NEW_DISTINCT_OBJECT_OBSERVED",
+    "workflows": "TOKEN_VAZIO_NOT_RESOLVED",
+    "code": "TOKEN_VAZIO_NOT_RESOLVED",
+    "artifacts": "TOKEN_VAZIO_NOT_RESOLVED",
+    "receipts": "DRIVE_LONGITUDINAL_RECORD_OBSERVED",
+    "dependencies": "TOKEN_VAZIO_NOT_AUDITED"
+  },
+  "actions_not_executed": [
+    "No Google Drive write was performed because the available connector exposes search/read only.",
+    "No workflow was started or re-run.",
+    "No PR state was changed.",
+    "No Drive hash was invented.",
+    "No runtime, Termux or Android command was executed.",
+    "No claim was promoted beyond the recovered evidence."
+  ],
+  "F_ok": [
+    "Incremental checkpoint preserved.",
+    "New Drive folder and longitudinal document identified with parent-child provenance.",
+    "Declared base, branch, PR and head were captured without promotion.",
+    "No duplicate index or destructive action was created."
+  ],
+  "F_gap": [
+    "Exact producer repository was not resolved by the GitHub connector.",
+    "PR 98, base commit and head commit were not independently verified.",
+    "Document and folder content hashes are unavailable.",
+    "Four operational routes, dependencies and tests were not audited."
+  ],
+  "F_next": [
+    "Resolve the exact RMRCTI repository and PR 98.",
+    "Compare ccfcd069ab3c645ebbae1ded0c3cb868187f86b2 against the full PR head.",
+    "Inventory changed code, workflows, dependencies, artifacts and receipts.",
+    "Run deterministic local gates and append a successor receipt with hashes."
+  ]
+}
