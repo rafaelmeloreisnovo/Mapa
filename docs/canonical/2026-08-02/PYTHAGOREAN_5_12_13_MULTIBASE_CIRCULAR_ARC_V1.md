@@ -330,7 +330,9 @@ tools/generate_pythagorean_multibase_arc.py
 tests/geometry/test_pythagorean_multibase_arc.py
 data/geometry/pythagorean_5_12_13_multibase_arc.v1.jsonl
 data/geometry/geometric_invariants.delta.20260802.pythagorean_multibase_arc.jsonl
+data/geometry/geometric_invariants.index.jsonl (registro anexado)
 data/latents/deltas/latents.20260802.pythagorean_multibase_arc.jsonl
+data/latents/latents.index.jsonl (registro anexado)
 receipts/geometry/PYTHAGOREAN_MULTIBASE_ARC_20260802_RECEIPT_V1.json
 ```
 
