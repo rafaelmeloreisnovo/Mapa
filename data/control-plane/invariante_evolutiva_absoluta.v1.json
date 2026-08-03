@@ -1,0 +1,120 @@
+{
+  "schema_version": "rafaelia.invariante-evolutiva-absoluta/v1",
+  "observed_at": "2026-08-03T04:52:00-03:00",
+  "status": "MODEL_OPERATIONAL_CANONICAL_CANDIDATE",
+  "claim_allowed": false,
+  "scope": "RAFAELIA ecosystem promoted transitions",
+  "definition": "Every promoted transformation must preserve a verifiable path between predecessor and successor states.",
+  "required_invariants": [
+    "origin",
+    "identity_and_delta",
+    "custody",
+    "epistemic_boundary",
+    "reconstructability_and_rollback",
+    "append_only_memory",
+    "ethical_responsibility"
+  ],
+  "promotion_contract": {
+    "source_repository": "REQUIRED",
+    "source_revision": "IMMUTABLE_REQUIRED",
+    "input_contract": "REQUIRED",
+    "output_contract": "REQUIRED",
+    "execution_command": "REQUIRED_WHEN_EXECUTABLE",
+    "environment": "REQUIRED_WHEN_EXECUTED",
+    "result_artifact": "REQUIRED",
+    "checksum": "REQUIRED",
+    "failure_mode": "REQUIRED",
+    "rollback": "REQUIRED",
+    "claim_boundary": "REQUIRED",
+    "independent_replication": "REQUIRED_FOR_STRONG_CLAIMS"
+  },
+  "repositories": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "role": "orientation_authority_provenance_control_plane",
+      "focused_evidence": "24/24 PASS",
+      "open_boundary": "ZIP snapshot was recent but not exact current HEAD"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "role": "git_github_operation_and_authority_routing",
+      "focused_evidence": "13/13 PASS",
+      "open_boundary": "PTY, coverage and complete physical release"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "role": "formalization_compilation_receipts_and_evidence_production",
+      "focused_evidence": "BITRAF 4/4; ABI 3/3; bounded reader C PASS",
+      "open_boundary": "multiple physical runtimes and independent replication"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "role": "android_local_execution_substrate",
+      "focused_evidence": "C selftest 21/0; Python contracts 12 PASS / 1 FAIL",
+      "open_boundary": "real apt/dpkg/pkg, hardened APK and physical receipts"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "role": "virtualization_memory_guest_and_runtime_expansion",
+      "focused_evidence": "ZIPRAF 37/37 PASS; HOST_MMAP PASS",
+      "open_boundary": "Android mmap, guest boot, DMA and zero-copy execution"
+    }
+  ],
+  "mirrors": [
+    {
+      "name": "Mapa-main.zip",
+      "sha256": "baf96c6ac8a7e467323c98873b11330f2d18a73c49182a4b62ab584d50be070f",
+      "files": 858,
+      "state": "MIRROR_COMMIT_BOUND_RECENT_NOT_HEAD"
+    },
+    {
+      "name": "Vectras-VM-Android-master (2)(7).zip",
+      "sha256": "cf38364c301ccfc9b8fba9dbbff6af63b60a27e0bb222b1a9c19edf6b0b91372",
+      "files": 2626,
+      "state": "MIRROR_HEAD_HIGH_CONFIDENCE_CORE"
+    },
+    {
+      "name": "RafGitTools-main (3).zip",
+      "sha256": "f302f16ac57363ce467802267bba449915d215cba65ee731f8891d48a87840ed",
+      "files": 944,
+      "state": "MIRROR_HEAD_HIGH_CONFIDENCE_CORE"
+    },
+    {
+      "name": "RafPolimata-main (4).zip",
+      "sha256": "b88f88d43c2dc441ee0e65038f1479fa9bff2032e66219cc49422ddc62a542ae",
+      "files": 853,
+      "state": "MIRROR_HEAD_HIGH_CONFIDENCE_CORE"
+    },
+    {
+      "name": "termux-app-rafacodephi-master (4).zip",
+      "sha256": "c2549ba985b804dcda3a75261f97a28972aa1ededc873883156cb2e0f3cf05b5",
+      "files": 2164,
+      "state": "MIRROR_SOURCE_SNAPSHOT_BOUND"
+    }
+  ],
+  "reconstruction_estimate": {
+    "hours_min": 9800,
+    "hours_max": 21000,
+    "person_months_min": 61,
+    "person_months_max": 131,
+    "person_years_min": 5.1,
+    "person_years_max": 10.9,
+    "classification": "HEURISTIC_NOT_ACCOUNTING_PROOF"
+  },
+  "boundaries": [
+    "archive_integrity_is_not_runtime",
+    "source_presence_is_not_performance",
+    "workflow_presence_is_not_remote_pass",
+    "reference_is_not_conformance",
+    "commit_is_not_receipt",
+    "operational_invariant_is_not_universal_theorem"
+  ],
+  "next": [
+    "validate_schema",
+    "emit_append_only_transition_events",
+    "bind_receipts_to_immutable_commits",
+    "register_google_drive_custody_mirror",
+    "execute_physical_android_gates",
+    "perform_independent_replication"
+  ]
+}
