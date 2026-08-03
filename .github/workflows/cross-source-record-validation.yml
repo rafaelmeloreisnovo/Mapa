@@ -5,10 +5,15 @@ on:
     paths:
       - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
       - "schemas/cross-source-record.schema.json"
+      - "schemas/directive-event.schema.json"
       - "indices/CROSS_SOURCE_REGISTRY.jsonl"
+      - "indices/DIRECTIVE_EVENTS_INDEX_V1.md"
+      - "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md"
+      - "data/directives/**"
       - "indices/CROSS_SOURCE_GATE_FLOOR.json"
       - "indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
       - "scripts/validate_cross_source_records.py"
+      - "scripts/validate_directive_events.py"
       - "scripts/validate_cross_source_registry.py"
       - "scripts/validate_chain_of_custody.py"
       - "scripts/run_cross_source_tests.py"
@@ -17,6 +22,7 @@ on:
       - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
+      - "tests/directives/**"
       - "tests/test_cross_source_local_gate_contract.py"
       - "tests/test_cross_source_gate_evaluator.py"
       - "tests/test_cross_source_test_runner.py"
@@ -29,10 +35,15 @@ on:
     paths:
       - "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md"
       - "schemas/cross-source-record.schema.json"
+      - "schemas/directive-event.schema.json"
       - "indices/CROSS_SOURCE_REGISTRY.jsonl"
+      - "indices/DIRECTIVE_EVENTS_INDEX_V1.md"
+      - "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md"
+      - "data/directives/**"
       - "indices/CROSS_SOURCE_GATE_FLOOR.json"
       - "indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
       - "scripts/validate_cross_source_records.py"
+      - "scripts/validate_directive_events.py"
       - "scripts/validate_cross_source_registry.py"
       - "scripts/validate_chain_of_custody.py"
       - "scripts/run_cross_source_tests.py"
@@ -41,6 +52,7 @@ on:
       - "scripts/run_cross_source_gate.sh"
       - "tests/test_cross_source_records.py"
       - "tests/test_cross_source_registry.py"
+      - "tests/directives/**"
       - "tests/test_cross_source_local_gate_contract.py"
       - "tests/test_cross_source_gate_evaluator.py"
       - "tests/test_cross_source_test_runner.py"
@@ -124,6 +136,18 @@ jobs:
           assert manifest["remote_ci_substituted"] is False
           assert registry["registry"] == "indices/CROSS_SOURCE_REGISTRY.jsonl"
           PY
+
+      - name: Validate scoped non-retroactive directive events
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover \
+            -s tests/directives \
+            -p 'test_directive_events.py' \
+            -v
+          python3 scripts/validate_directive_events.py \
+            --events data/directives/directive_events.20260803.jsonl \
+            --report "$RUNNER_TEMP/cross-source-local/directive-event-validation.json"
 
       - name: Upload validation evidence
         uses: actions/upload-artifact@v4
