@@ -1,0 +1,111 @@
+name: RAFAELIA Integral Gate V1
+
+"on":
+  pull_request:
+    paths:
+      - "data/control-plane/integral-gate.v1.json"
+      - "tools/verify_integral_gate.py"
+      - "tests/test_integral_gate.py"
+      - "data/receipts/gates/integral-gate-*.json"
+      - "data/receipts/gates/integral-gate-*.sha256"
+      - "data/manifests/integral-gate-*.json"
+      - "docs/canonical/2026-08-03/RAFAELIA_INTEGRAL_GATE_EXECUTION_*.md"
+      - ".github/workflows/integral-gate-v1.yml"
+  push:
+    paths:
+      - "data/control-plane/integral-gate.v1.json"
+      - "tools/verify_integral_gate.py"
+      - "tests/test_integral_gate.py"
+      - "data/receipts/gates/integral-gate-*.json"
+      - "data/receipts/gates/integral-gate-*.sha256"
+      - "data/manifests/integral-gate-*.json"
+      - "docs/canonical/2026-08-03/RAFAELIA_INTEGRAL_GATE_EXECUTION_*.md"
+      - ".github/workflows/integral-gate-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafaelia-integral-gate-v1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  contract:
+    name: integral-gate / contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile validator and tests
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            tools/verify_integral_gate.py \
+            tests/test_integral_gate.py
+
+      - name: Run positive, negative and adversarial fixtures
+        run: |
+          set -euo pipefail
+          python tests/test_integral_gate.py
+
+      - name: Validate append-only audit receipt
+        run: |
+          set -euo pipefail
+          python tools/verify_integral_gate.py \
+            data/receipts/gates/integral-gate-execution.20260803T1238-0300.json \
+            --policy data/control-plane/integral-gate.v1.json \
+            | tee integral-gate-result.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          receipt = Path("data/receipts/gates/integral-gate-execution.20260803T1238-0300.json")
+          expected = Path(str(receipt) + ".sha256").read_text(encoding="utf-8").split()[0]
+          actual = hashlib.sha256(receipt.read_bytes()).hexdigest()
+          if actual != expected:
+              raise SystemExit(f"receipt SHA-256 mismatch: expected={expected} actual={actual}")
+          result = json.loads(Path("integral-gate-result.json").read_text(encoding="utf-8"))
+          if result.get("receipt_valid") is not True:
+              raise SystemExit("integral gate receipt is structurally invalid")
+          PY
+
+  promotion:
+    name: integral-gate / promotion
+    needs: contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Enforce fail-closed promotion decision
+        run: |
+          set -euo pipefail
+          python tools/verify_integral_gate.py \
+            data/receipts/gates/integral-gate-execution.20260803T1238-0300.json \
+            --policy data/control-plane/integral-gate.v1.json \
+            > integral-gate-result.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(Path("integral-gate-result.json").read_text(encoding="utf-8"))
+          if result.get("computed_result") != "READY_FOR_DOMAIN_REVIEW":
+              blockers = ", ".join(result.get("blocking_criteria", []))
+              raise SystemExit(
+                  "promotion denied by RAFAELIA Integral Gate V1; blockers: " + blockers
+              )
+          PY
