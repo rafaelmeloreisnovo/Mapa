@@ -43,8 +43,11 @@ class CrossSourceRegistryTests(unittest.TestCase):
     def test_canonical_registry_passes(self) -> None:
         report = validator.build_report(REGISTRY)
         self.assertEqual(report["status"], "PASS")
-        self.assertEqual(report["record_count"], 10)
-        self.assertEqual(report["provider_counts"], {"github": 2, "google_drive": 8})
+        self.assertEqual(report["record_count"], 12)
+        self.assertEqual(
+            report["provider_counts"],
+            {"github": 3, "google_drive": 8, "session": 1},
+        )
         self.assertEqual(report["token_vazio_count"], 1)
         self.assertEqual(report["registry"], "indices/CROSS_SOURCE_REGISTRY.jsonl")
         self.assertFalse(report["claim_allowed"])
