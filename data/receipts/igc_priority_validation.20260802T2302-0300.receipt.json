@@ -1,0 +1,77 @@
+{
+  "schema": "rafaelia.igc-priority-validation-receipt.v1",
+  "receipt_id": "IGC-PRIORITY-VALIDATION-20260802T2302-0300",
+  "observed_at": "2026-08-02T23:02:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 136,
+  "issue": 135,
+  "branch": "governance/igc-priority-fgap-fnext-20260802",
+  "head_before_receipt": "74d9094af02b640f55fa7e6b1ea0037c4e1cc9c7",
+  "source_binding": {
+    "mode": "CONNECTOR_READBACK_RECONSTRUCTION",
+    "validator_blob_sha": "daea182e7928e5ee7dac98922ad799f6c2b55ab0",
+    "tests_blob_sha": "422432906ce86db777e826b90ecea960cdb909ff",
+    "workflow_blob_sha": "ed651f0bb6320436fa896f6701e80c18c9a5d4cf",
+    "gaps_blob_sha": "851436bc11408021db958655627454578479472b",
+    "geometry_blob_sha": "79676c5987e1468e76b96bacb4096457224b2274",
+    "questions_blob_sha": "cb177ffbbc87bad0e90b8ba0ff479564dccb43ff",
+    "memory_blob_sha": "5f7bc30bc199d7130b6c3360d5c94a0863949f51",
+    "exact_git_checkout": false
+  },
+  "local_validation": {
+    "runtime": "Python 3 sandbox",
+    "command_validator": "python tools/validate_igc_priority_delta.py --root <reconstructed-root>",
+    "command_tests": "python -m unittest discover -s tests/geometry -p test_igc_priority_delta.py -v",
+    "validator_exit_code": 0,
+    "tests_run": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "state": "PASS_LIMITED_CONNECTOR_READBACK_RECONSTRUCTION",
+    "validated_counts": {
+      "gaps": 12,
+      "p0_gaps": 7,
+      "p1_gaps": 5,
+      "geometry_records": 4,
+      "questions": 15,
+      "p0_questions": 11,
+      "memory_events": 6
+    },
+    "sha256": {
+      "gaps": "1b6844fab9211e007257a261557d823740626767f574e2ab1828122d0aea8532",
+      "geometry": "7e4918281252fe60c6cd9674aa1d83718d347cc0942524d0c60bbd8a29e64eea",
+      "questions": "832a2bf740513c2d942710fdfc6e29f7bbb1de759556692864bf56dcf72d6f67",
+      "memory": "c3a9cc1f7a8f952feb17f5807712eda8ece36329224edf9e9f69c386fe9c4062"
+    },
+    "adversarial_checks": [
+      "claim_allowed=true rejected",
+      "missing transformation_family rejected",
+      "unknown gap dependency rejected",
+      "P0 question without TOKEN_VAZIO/FAIL state rejected"
+    ]
+  },
+  "remote_validation": {
+    "workflow": "igc-priority-contract",
+    "run_id": 30778263433,
+    "run_number": 3,
+    "job_id": 91577822770,
+    "status": "completed",
+    "conclusion": "failure",
+    "observable_steps": 0,
+    "classification": "REMOTE_GATE_BLOCKED_BEFORE_STEPS",
+    "code_failure_established": false,
+    "remote_pass_established": false
+  },
+  "google_drive": {
+    "priority_document_id": "1CHLyTnvkbCFm5m1MeUVVfpKnT1r39Xjh8_YNyNww1AE",
+    "traceability_matrix_id": "1FMuZ-WVvuI7qbQJ8E5LjfHOKShI83VMsJfGB2zyWHgE",
+    "export_hash": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+  },
+  "decision": {
+    "state": "LOCAL_VALIDATION_PASS_REMOTE_UNOBSERVABLE",
+    "claim_allowed": false,
+    "automatic_merge": false,
+    "physical_runtime": "TOKEN_VAZIO",
+    "independent_reproduction": "TOKEN_VAZIO"
+  },
+  "f_next": "Obter checkout Git exato e CI observável; depois executar Termux ARMv7/ARM64."
+}
