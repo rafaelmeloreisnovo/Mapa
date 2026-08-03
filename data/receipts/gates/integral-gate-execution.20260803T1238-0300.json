@@ -1,0 +1,209 @@
+{
+  "schema": "rafaelia.integral-gate-receipt/v1",
+  "receipt_id": "RAFAELIA-INTEGRAL-GATE-20260803T1238-0300",
+  "observed_at": "2026-08-03T12:38:00-03:00",
+  "scope": "first_integral_gate_control_plane_pilot",
+  "source": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "main",
+    "commit_sha": "25f710a3c702997db1be783d2aceb09faa7118e3",
+    "worktree_clean": false,
+    "binding": "GITHUB_COMMIT_OBJECT_OBSERVED; LOCAL_WORKTREE_TOKEN_VAZIO"
+  },
+  "artifacts": [
+    {
+      "path": "LICENSE",
+      "git_blob_sha1": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "verified": true
+    },
+    {
+      "path": "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md",
+      "git_blob_sha1": "46bc4991aaff162c20c266a5a00d9a889e2248b2",
+      "verified": true
+    },
+    {
+      "path": "docs/canonical/2026-07-31/GATE_COMPUTATIONAL_V1.md",
+      "git_blob_sha1": "3f241e6563c48842aa5ed9d4eab9957b0a164342",
+      "verified": true
+    },
+    {
+      "path": "data/control-plane/proof-custody-gate.v1.json",
+      "git_blob_sha1": "5e87947366479a9af00eb4aa546cb5c7104d7128",
+      "verified": true
+    },
+    {
+      "path": "tools/verify_proof_custody.py",
+      "git_blob_sha1": "177e9d1277fd0553f461c95da61c3286e2c56406",
+      "verified": true
+    },
+    {
+      "path": "data/receipts/proof-custody-manifest-binding.20260802.json",
+      "git_blob_sha1": "3ac1d190d616714d80c4c31ddb7ea7af24da64ce",
+      "verified": true
+    }
+  ],
+  "criteria": {
+    "hash_valid": {
+      "status": "PASS",
+      "evidence": [
+        "Six repository objects were fetched from main and matched their Git blob SHA-1 identities.",
+        "No semantic equivalence was treated as byte identity."
+      ]
+    },
+    "authorship_identified": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "Merge commit author observed: rafaelmeloreisnovo; committer observed: web-flow.",
+        "File-level authorship and contributor attestations were not closed for every audited artifact."
+      ],
+      "next_verifiable_step": "Bind each artifact to commit history, author identity, role and an append-only authorship receipt."
+    },
+    "license_known": {
+      "status": "PASS",
+      "evidence": [
+        "Root LICENSE exists and contains GNU General Public License version 3 text.",
+        "LICENSE Git blob SHA-1: f288702d2fa16d3cdf0035b15a9fcbc552cd88e7."
+      ],
+      "license": {
+        "spdx": "GPL-3.0-only",
+        "path": "LICENSE",
+        "git_blob_sha1": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+      }
+    },
+    "build_reproducible": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "No two clean, pinned replays with matching output SHA-256 were recovered for the integrated head."
+      ],
+      "next_verifiable_step": "Run the frozen build twice in clean environments and bind commands, toolchain, inputs and output hashes to receipts."
+    },
+    "tests_executed": {
+      "status": "FAIL",
+      "evidence": [
+        "PR #143 head ad17e5e14abf4b9393905e910956dc5977193f8f had Branch Topology Gate run 30825747620 conclusion=failure.",
+        "The same head had CI run 30825747617 conclusion=failure.",
+        "Job step details were not recoverable through the connector and remain a narrower TOKEN_VAZIO cause."
+      ],
+      "next_verifiable_step": "Correct the first observable job failure, rerun both workflows and store job/step receipts bound to the new head SHA."
+    },
+    "receipt_stored": {
+      "status": "PASS",
+      "evidence": [
+        "Existing append-only manifest binding receipt is stored under data/receipts and is Git-blob-bound on current main.",
+        "A local byte replay of the fetched JSON produced SHA-256 9a90ec3ed8295407e484bec4999eb8e850b748fd4b9fd88d3f539b286c3ad52e."
+      ],
+      "receipt": {
+        "path": "data/receipts/proof-custody-manifest-binding.20260802.json",
+        "sha256": "9a90ec3ed8295407e484bec4999eb8e850b748fd4b9fd88d3f539b286c3ad52e",
+        "append_only": true,
+        "commit_bound": true
+      }
+    },
+    "claim_compatible": {
+      "status": "PASS",
+      "evidence": [
+        "Canonical documents preserve claim_allowed=false.",
+        "The observed state is evidence-limited and does not claim runtime, scientific or production promotion."
+      ],
+      "claim": {
+        "classification": "EVIDENCIADO",
+        "claim_allowed": false,
+        "statement": "The control-plane artifacts and identified failures exist at the observed commits; ecosystem promotion is not authorized."
+      }
+    },
+    "source_commit_bound": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "GitHub commit object 25f710a3c702997db1be783d2aceb09faa7118e3 is observed.",
+        "A clean local checkout receipt for that exact commit was not executed in this audit."
+      ],
+      "next_verifiable_step": "Checkout the exact commit in Termux/CI, prove git status clean, and store HEAD plus worktree-state receipt."
+    },
+    "dependency_provenance": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "Foundation workflow pins actions by commit and Python 3.12, but ecosystem-wide lockfile and source closure were not reconciled."
+      ],
+      "next_verifiable_step": "Generate a dependency graph with pinned versions/commits, hashes, licenses and source URLs for every executed component."
+    },
+    "falsifiers_exercised": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "Adversarial tests exist in the repository, but no successful current-head execution receipt was recovered."
+      ],
+      "next_verifiable_step": "Execute positive, negative and tamper fixtures on the exact head and bind the test summary to the receipt."
+    },
+    "privacy_secret_scan": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "No commit-bound zero-finding privacy/secret scan receipt was recovered for the integrated head."
+      ],
+      "next_verifiable_step": "Run a read-only secret/privacy scan with sanitized output and store a zero-or-findings receipt without exposing secret values."
+    },
+    "promotion_control": {
+      "status": "FAIL",
+      "evidence": [
+        "PR #143 declared automatic_merge=false and requested draft/human review until the next gate.",
+        "PR #143 was merged at 2026-08-03T15:17:23Z.",
+        "Its final head had two completed workflow runs with conclusion=failure and no requested reviewers were recorded."
+      ],
+      "next_verifiable_step": "Install an enforceable required check/ruleset and prove with a negative fixture that merge is rejected on FAIL or blocking TOKEN_VAZIO."
+    },
+    "physical_runtime_receipt": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "No physical Termux/Android receipt for the exact integrated head was produced in this audit."
+      ],
+      "next_verifiable_step": "Execute the smallest gate on the physical Android/Termux target and record environment, commands, outputs, exit codes and hashes."
+    },
+    "independent_reproduction": {
+      "status": "TOKEN_VAZIO",
+      "evidence": [
+        "No second independent environment receipt with matching deterministic roots was recovered."
+      ],
+      "next_verifiable_step": "Replay the frozen contract in an independent environment and compare output roots and bounded metrics."
+    }
+  },
+  "four_critical_receipts": {
+    "dependency_graph": "TOKEN_VAZIO",
+    "bayes_real_frozen_contract": "TOKEN_VAZIO",
+    "independent_reproduction": "TOKEN_VAZIO",
+    "physical_termux_runtime": "TOKEN_VAZIO"
+  },
+  "decision": {
+    "result": "BLOCKED_FAIL",
+    "blocking_criteria": [
+      "authorship_identified",
+      "build_reproducible",
+      "tests_executed",
+      "source_commit_bound",
+      "dependency_provenance",
+      "falsifiers_exercised",
+      "privacy_secret_scan",
+      "promotion_control",
+      "physical_runtime_receipt",
+      "independent_reproduction"
+    ],
+    "claim_allowed": false,
+    "automatic_merge": false,
+    "promotion": "DENIED",
+    "publication": "AUDIT_DRAFT_ONLY"
+  },
+  "f_ok": [
+    "Architecture, classifications, kernels, partial indexes and repositories exist.",
+    "Git object identity is verified for the audited control-plane artifacts.",
+    "Root license is known and an append-only receipt is already stored.",
+    "Claim boundary remains compatible with EVIDENCIADO and claim_allowed=false."
+  ],
+  "f_gap": [
+    "Promotion control failed against an actually merged PR whose head had failed workflows.",
+    "Current-head clean checkout, reproducible build, successful tests, falsifiers, privacy scan, physical runtime and independent reproduction are unclosed.",
+    "File-level authorship and complete dependency provenance remain TOKEN_VAZIO."
+  ],
+  "f_next": [
+    "Land the integral gate validator and CI workflow on a review branch.",
+    "Fix the first observable CI/job failure and require the integral gate as a protected check.",
+    "Run the exact commit in physical Termux and then reproduce independently.",
+    "Only after those receipts close, execute Bayes on the frozen RLL contract."
+  ]
+}

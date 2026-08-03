@@ -1,0 +1,70 @@
+{
+  "schema": "rafaelia.integral-gate-delta-manifest/v1",
+  "manifest_id": "IGM-20260803T1238-0300",
+  "created_at": "2026-08-03T12:38:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "governance/integral-gate-v1-20260803T1238-0300",
+  "base_commit_sha": "25f710a3c702997db1be783d2aceb09faa7118e3",
+  "pre_manifest_head_sha": "3a3bd82fc6af23666e95f46762e07e9f671fde91",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "decision": "BLOCKED_FAIL",
+  "files": [
+    {
+      "path": "data/control-plane/integral-gate.v1.json",
+      "git_blob_sha1": "2f0bf9f2bea75dada82d8ef026abda62fb50bfea",
+      "role": "fail_closed_integral_policy"
+    },
+    {
+      "path": "tools/verify_integral_gate.py",
+      "git_blob_sha1": "44a82a4e19e3bf5678f359c66fbf4bd46f9c4e1d",
+      "role": "stdlib_only_validator"
+    },
+    {
+      "path": "tests/test_integral_gate.py",
+      "git_blob_sha1": "eafca60c602a041f0575cc73904efe82ff94223a",
+      "role": "positive_negative_adversarial_fixtures"
+    },
+    {
+      "path": "data/receipts/gates/integral-gate-execution.20260803T1238-0300.json",
+      "git_blob_sha1": "4b8e3da8735dec6160600f81c8e363f6f003631d",
+      "sha256": "bb81fbd30651879aba1a3c513d90dbbb7aaf1448b04471b6f75046e02e51b320",
+      "role": "executed_gate_receipt"
+    },
+    {
+      "path": "data/receipts/gates/integral-gate-execution.20260803T1238-0300.json.sha256",
+      "git_blob_sha1": "93f16105771bfaa09e6cfd9c3f5bc466e640a6ad",
+      "role": "receipt_sha256_sidecar"
+    },
+    {
+      "path": ".github/workflows/integral-gate-v1.yml",
+      "git_blob_sha1": "0878a3bfe9d4a8d79e6c5ca1d6e0a19d431e8f8d",
+      "role": "contract_and_promotion_workflow"
+    },
+    {
+      "path": "docs/canonical/2026-08-03/RAFAELIA_INTEGRAL_GATE_EXECUTION_20260803T1238-0300.md",
+      "git_blob_sha1": "90b79f7ebe1c94bd0c615524ea709d6c4a60c529",
+      "role": "canonical_audit_report"
+    }
+  ],
+  "local_validation": {
+    "python": "3.x",
+    "tests_discovered": 6,
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "validator_exit_code": 0,
+    "receipt_valid": true,
+    "computed_result": "BLOCKED_FAIL"
+  },
+  "manifest_self_binding": {
+    "method": "Git commit tree binds this manifest after creation",
+    "self_blob_sha1": "TOKEN_VAZIO_UNTIL_POST_COMMIT_READ",
+    "next_gate": "Fetch the manifest from the resulting branch head and append a separate binding receipt without rewriting this manifest."
+  },
+  "four_critical_receipts": {
+    "dependency_graph": "TOKEN_VAZIO",
+    "bayes_real_frozen_contract": "TOKEN_VAZIO",
+    "independent_reproduction": "TOKEN_VAZIO",
+    "physical_termux_runtime": "TOKEN_VAZIO"
+  }
+}

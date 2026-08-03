@@ -1,0 +1,53 @@
+{
+  "schema": "rafaelia.integral-gate-policy/v1",
+  "version": "1.0.0",
+  "mode": "FAIL_CLOSED_APPEND_ONLY",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "required_criteria": [
+    "hash_valid",
+    "authorship_identified",
+    "license_known",
+    "build_reproducible",
+    "tests_executed",
+    "receipt_stored",
+    "claim_compatible",
+    "source_commit_bound",
+    "dependency_provenance",
+    "falsifiers_exercised",
+    "privacy_secret_scan",
+    "promotion_control",
+    "physical_runtime_receipt",
+    "independent_reproduction"
+  ],
+  "promotion_blockers": [
+    "hash_valid",
+    "authorship_identified",
+    "license_known",
+    "build_reproducible",
+    "tests_executed",
+    "receipt_stored",
+    "claim_compatible",
+    "source_commit_bound",
+    "dependency_provenance",
+    "falsifiers_exercised",
+    "privacy_secret_scan",
+    "promotion_control",
+    "physical_runtime_receipt",
+    "independent_reproduction"
+  ],
+  "decision_order": [
+    "BLOCKED_FAIL",
+    "BLOCKED_TOKEN_VAZIO",
+    "READY_FOR_DOMAIN_REVIEW"
+  ],
+  "invariants": [
+    "absence_is_TOKEN_VAZIO_not_PASS",
+    "merge_is_not_proof",
+    "repository_presence_is_not_truth",
+    "claim_allowed_remains_false",
+    "automatic_merge_remains_false",
+    "every_non_pass_has_next_verifiable_step",
+    "all_receipts_are_append_only_and_commit_bound"
+  ]
+}
