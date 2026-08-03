@@ -1,0 +1,209 @@
+{
+  "schema_version": "rafaelia.catalog-cycle/v1",
+  "cycle_id": "CAT-20260803T1602Z",
+  "generated_at_utc": "2026-08-03T16:02:40Z",
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "6af36865094947b37f38ebbc6a6b8283e7fc2b26",
+    "observed_at_utc": "2026-08-03T13:02:13Z"
+  },
+  "priority_reference": {
+    "provider": "google_drive",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT"
+  },
+  "github_delta": [
+    {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "commit": "d5103fac4d5f1c4067d6da9eeadb7ab54b8fc363",
+      "pr": 641,
+      "kind": "DATASET_MANIFEST_AND_METHODOLOGY",
+      "artifacts": [
+        "data/manifests/dados_reais_fundamentais_v1.json",
+        "docs/canonicos/METODOLOGIA_COERENTE_RLL.md",
+        "rll_route_forest_blueprint.json",
+        "rll_equation_registry.yml",
+        "datasets_config.json"
+      ],
+      "observed_claims": {
+        "dataset_nodes_declared_verified": "EVIDENCIADO",
+        "pantheon_full_covariance": "TOKEN_VAZIO",
+        "mcmc_convergence_receipts": "TOKEN_VAZIO",
+        "independent_replication": "TOKEN_VAZIO"
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "commit": "b6ef75ced9325c4fd3332677ed7cf3b3f42d5c1f",
+      "pr": 1087,
+      "kind": "RUNTIME_BUGFIX",
+      "files": ["app/src/main/java/com/vectras/vm/vectra/VectraCore.kt"],
+      "changes": [
+        "record header size corrected from 32 to 36 bytes",
+        "CRC offset fixed at byte 28",
+        "CRC coverage expanded to full pre-CRC header plus payload",
+        "timer payload buffer reused"
+      ],
+      "classification": "PROVADO_SOURCE_CHANGE",
+      "runtime_execution": "TOKEN_VAZIO"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "commit": "2c71166748744ab037f92b5cbf2b7a4b26b3f4be",
+      "pr": 1086,
+      "kind": "ZIP64_TEST_EXPANSION",
+      "changes": [
+        "missing test imports corrected",
+        "ZIP64 entry-count sentinel rejection test added",
+        "ZIP64 central-directory-size sentinel rejection test added",
+        "repeated open-close test added"
+      ],
+      "tests_written": "PROVADO",
+      "tests_executed_this_cycle": "TOKEN_VAZIO"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "commit": "c764299f79198c3ddd1528ba3be0844dc2db9499",
+      "pr": 326,
+      "kind": "READ_ONLY_GIT_PROVENANCE",
+      "artifacts": [
+        "tools/forensic_git_provenance/forensic_git.py",
+        "schemas/forensic-git-evidence-run-v1.schema.json",
+        "configs/forensic-git-provenance-contract.v1.json",
+        "tests/test_forensic_git_provenance.py",
+        "auditoria/FORENSIC_GIT_PROVENANCE_LOCAL_RECEIPT_20260803.json"
+      ],
+      "local_receipt": {
+        "tests": "6/6 PASS",
+        "remote_ci": "TOKEN_VAZIO_NOT_RUN",
+        "android_runtime": "TOKEN_VAZIO_NOT_RUN"
+      },
+      "classification": "EVIDENCIADO_LOCAL_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "commit": "da8aa30e97f84f165da27f658e679247d456df63",
+      "pr": 327,
+      "kind": "PENDING_AUDIT",
+      "declared_coverage": "32/33",
+      "remaining": "P33-05 hunk-level staging",
+      "classification": "EVIDENCIADO_BY_REPOSITORY_AUDIT"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/llamaRafaelia",
+      "commit": "ceacf4be5ccf3889b864288423258dbf823a07ad",
+      "pr": 99,
+      "kind": "TEST_DISCOVERY_PORTABILITY",
+      "changes": [
+        "rmrCti/tests/conftest.py added",
+        "sys.path initialization corrected in hardening tests"
+      ],
+      "classification": "PROVADO_SOURCE_CHANGE",
+      "test_run_this_cycle": "TOKEN_VAZIO"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "commit": "0d91b1191660fd4c4e3ac51baf083a47525054ae",
+      "pr": 325,
+      "kind": "QUALITY_AND_TEST_FIXTURE",
+      "changes": [
+        "changelog typo corrected",
+        "manifest fixture migrated to pytest parametrization"
+      ],
+      "classification": "PROVADO_SOURCE_CHANGE",
+      "android_execution": "TOKEN_VAZIO"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "25f710a3c702997db1be783d2aceb09faa7118e3",
+      "pr": 143,
+      "kind": "FGAP_FNEXT_AUTOCOHERENCE",
+      "classification": "PROVADO_MERGE"
+    }
+  ],
+  "drive_delta": [
+    {
+      "id": "1UAORAsSbfTJydRB466e4jn-GaFjNCgVn9C3q_bkeUWw",
+      "title": "RAFAELIA — Primeiro Gate Integral — Execução 2026-08-03 12h38 BRT",
+      "state": "EXECUTED_BLOCKED_FAIL",
+      "observed_failures": [
+        "Branch Topology Gate run 30825747620 failure",
+        "CI run 30825747617 failure"
+      ],
+      "automatic_merge": false,
+      "classification": "EVIDENCIADO_BY_DRIVE_RECORD",
+      "full_logs_revalidated_this_cycle": "TOKEN_VAZIO"
+    },
+    {
+      "id": "19EZxirK63AsX6hssvLjkDvWBfx7oboUED2quwBXoQvc",
+      "title": "RAFAELIA — F_GAP F_NEXT — Mapa Evolutivo Autocoerente — Ciclo 2026-08-03 10h48 BRT",
+      "classification": "EVIDENCIADO_APPEND_ONLY_CONTEXT"
+    }
+  ],
+  "core_fcea_delta": "TOKEN_VAZIO_NO_DISTINCT_NEW_OBJECT",
+  "papers_delta": "TOKEN_VAZIO_NO_DISTINCT_NEW_PAPER",
+  "drive_export_hashes": "TOKEN_VAZIO_EXPORT_NOT_AVAILABLE",
+  "classification_summary": {
+    "PROVADO": [
+      "listed GitHub commits and source diffs exist",
+      "Vectras header and CRC source corrections exist",
+      "new test and manifest files exist"
+    ],
+    "EVIDENCIADO": [
+      "RafGitTools local forensic receipt records 6/6 PASS",
+      "RLL manifest declares six observational data families and methodology",
+      "Drive gate record reports blocked failure"
+    ],
+    "HIPÓTESE": [
+      "the new manifests and forensic collector may reduce provenance and research-routing gaps after independent reproduction"
+    ],
+    "MODELO_ANALÓGICO": [
+      "seven-region route forest is an operational navigation model, not a physical proof"
+    ],
+    "PARÁBOLA": [],
+    "REFUTADO": [
+      "merge alone proves runtime execution",
+      "dataset manifest alone proves scientific conclusion",
+      "tests written alone prove tests passed"
+    ],
+    "TOKEN_VAZIO": [
+      "remote CI closure",
+      "Android and Termux physical execution",
+      "Pantheon full covariance",
+      "MCMC convergence receipts",
+      "independent replication",
+      "Drive export hashes"
+    ]
+  },
+  "f_ok": [
+    "incremental GitHub and Drive deltas identified",
+    "source changes separated from execution evidence",
+    "blocked integral gate preserved without promotion",
+    "provenance and limitations recorded append-only"
+  ],
+  "f_gap": [
+    "workflow logs were not revalidated end-to-end",
+    "new tests were not executed independently in this cycle",
+    "no physical Android or Termux receipt",
+    "no Drive export SHA-256",
+    "no new Core/FCEA object distinguished"
+  ],
+  "f_next": [
+    "inspect failed workflow jobs and bind logs to exact SHAs",
+    "run Vectras ZIP64 and CRC tests on the merged commits",
+    "run llamaRafaelia RMRCTI suite from repository root and alternate CWD",
+    "validate RLL dataset manifest hashes and execute the canonical likelihood profile",
+    "emit successor receipts with environment, command, stdout, stderr, artifacts and SHA-256"
+  ],
+  "actions_not_executed": [
+    "no Google Drive write",
+    "no workflow rerun",
+    "no PR merge or state change",
+    "no Android or Termux execution",
+    "no destructive deduplication",
+    "no claim promotion"
+  ]
+}
