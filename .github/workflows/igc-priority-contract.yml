@@ -1,0 +1,33 @@
+name: igc-priority-contract
+
+on:
+  pull_request:
+    paths:
+      - 'docs/canonical/2026-08-02/IGC_FGAP_FNEXT_PRIORITY_AND_MAP_V1.md'
+      - 'data/gaps/igc_priority_fgap.20260802T2250-0300.jsonl'
+      - 'data/geometry/geometric_invariants.delta.20260802T2250-0300.jsonl'
+      - 'data/questions/igc_urgent_questions.20260802T2250-0300.jsonl'
+      - 'data/memory/longitudinal_igc_priority.20260802T2250-0300.jsonl'
+      - 'tools/validate_igc_priority_delta.py'
+      - 'tests/geometry/test_igc_priority_delta.py'
+      - '.github/workflows/igc-priority-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout pinned action
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Run IGC priority tests
+        run: python -m unittest tests.geometry.test_igc_priority_delta -v
+      - name: Validate current registries
+        run: python tools/validate_igc_priority_delta.py
