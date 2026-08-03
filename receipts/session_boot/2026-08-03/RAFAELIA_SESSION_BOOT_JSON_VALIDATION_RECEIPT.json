@@ -1,0 +1,48 @@
+{
+  "receipt_id": "RAFAELIA-SESSION-BOOT-JSON-VALIDATION-20260803T131100-0300",
+  "receipt_version": "1.0.0",
+  "created_at": "2026-08-03T13:11:00-03:00",
+  "operation": "JSON_JSONL_SYNTAX_VALIDATION",
+  "validator": {
+    "runtime": "Python",
+    "method": "json.loads",
+    "scope": "syntax_only"
+  },
+  "inputs": [
+    {
+      "path": "data/session_boot/session_boot.events.jsonl",
+      "records_checked": 2,
+      "result": "PASS"
+    },
+    {
+      "path": "receipts/session_boot/2026-08-03/RAFAELIA_SESSION_BOOT_FGAP_FNEXT_RECEIPT.json",
+      "records_checked": 1,
+      "result": "PASS"
+    },
+    {
+      "path": "receipts/session_boot/2026-08-03/RAFAELIA_SESSION_BOOT_PR_DRIVE_RECEIPT.json",
+      "records_checked": 1,
+      "result": "PASS"
+    }
+  ],
+  "summary": {
+    "json_objects_checked": 4,
+    "passed": 4,
+    "failed": 0,
+    "result": "PASS"
+  },
+  "limitations": [
+    "A validação confirma apenas sintaxe JSON/JSONL.",
+    "Não substitui validação por JSON Schema.",
+    "Não comprova semântica, autoria externa, licença, merge ou execução pós-merge."
+  ],
+  "gates": {
+    "json_syntax": "PASS",
+    "jsonl_syntax": "PASS",
+    "schema_validation": "TOKEN_VAZIO",
+    "semantic_validation": "TOKEN_VAZIO",
+    "merged_to_main": "TOKEN_VAZIO"
+  },
+  "claim_allowed": false,
+  "status": "PASS_SYNTAX_ONLY"
+}

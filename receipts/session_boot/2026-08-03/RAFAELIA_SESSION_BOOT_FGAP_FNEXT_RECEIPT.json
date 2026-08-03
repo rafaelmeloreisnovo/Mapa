@@ -1,0 +1,69 @@
+{
+  "receipt_id": "RAFAELIA-SESSION-BOOT-FGAP-FNEXT-20260803T130200-0300",
+  "receipt_version": "1.0.0",
+  "created_at": "2026-08-03T13:02:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "method/session-boot-fgap-fnext-20260803",
+  "operation": "FORMALIZE_AND_APPLY_SESSION_BOOT_FGAP_FNEXT",
+  "execution_mode": "NON_DESTRUCTIVE_APPEND_ONLY",
+  "operator_intent": "Transformar a metodologia inicial de sessão em contrato canônico versionado e conectar F_gap, F_next, evento e receipt.",
+  "inputs": [
+    {
+      "type": "github_file",
+      "path": "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md",
+      "ref": "main",
+      "blob_sha": "46bc4991aaff162c20c266a5a00d9a889e2248b2"
+    },
+    {
+      "type": "google_drive_document",
+      "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "role": "editorial_master"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "docs/methodology/RAFAELIA_SESSION_BOOT_V1.md",
+      "status": "CREATED",
+      "commit_sha": "eb0a9d3ad0b605c72a01f899507378910ab20f3a"
+    },
+    {
+      "path": "data/session_boot/session_boot.events.jsonl",
+      "status": "CREATED",
+      "commit_sha": "6654f1773ceadcb899abd621cb84d617461d7e24"
+    },
+    {
+      "path": "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md",
+      "status": "PENDING_UPDATE"
+    },
+    {
+      "type": "pull_request",
+      "status": "TOKEN_VAZIO"
+    },
+    {
+      "type": "google_drive_append",
+      "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "status": "TOKEN_VAZIO"
+    }
+  ],
+  "gates": {
+    "authorship_identified": "PASS",
+    "source_identified": "PASS",
+    "versioned_artifact": "PASS",
+    "append_only_event": "PASS",
+    "machine_readable_receipt": "PASS",
+    "license_known": "TOKEN_VAZIO",
+    "automated_json_validation": "TOKEN_VAZIO",
+    "pull_request_open": "TOKEN_VAZIO",
+    "drive_cross_source_confirmation": "TOKEN_VAZIO",
+    "merged_to_main": "TOKEN_VAZIO",
+    "post_merge_hash_recorded": "TOKEN_VAZIO"
+  },
+  "boundaries": {
+    "claim_allowed": false,
+    "destructive_actions": false,
+    "automatic_merge": false,
+    "retroactive_rewrite": false
+  },
+  "status": "PARTIAL",
+  "next_verifiable_action": "Atualizar o índice canônico, abrir PR, anexar a referência ao Drive e emitir receipt pós-merge."
+}

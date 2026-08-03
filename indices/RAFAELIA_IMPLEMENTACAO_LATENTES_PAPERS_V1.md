@@ -140,7 +140,6 @@ indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md
 schemas/latent-artifact.schema.json
 schemas/paper-claim-ledger.schema.json
 data/latents/latents.index.jsonl
-data/claims/paper_claims.index.jsonl
 workflows/latents_to_papers.md
 ```
 
@@ -236,7 +235,6 @@ status = TOKEN_VAZIO
 
 FIAT LUX — Mapear, conectar, compreender, transformar, transcender.
 
-
 ## 11. Integração de fontes anexas
 
 O lote RAFAELIA-INT-SOURCES-20260725 foi consolidado como 7 corpos-fonte e 9 aliases byte-idênticos do Atlas; o material bruto recebeu MD5, SHA-256 e BLAKE3-256. A identidade de arquivo não promove a validade de seu conteúdo: todo claim continua com claim_allowed=false até evidência, métrica, limite e falsificador específicos.
@@ -272,3 +270,23 @@ sendo conteúdo potencial ainda não consolidado.
 
 Fronteiras: `retroactive=false`, `automatic_merge=false`,
 `destructive_actions=false`, `claim_allowed=false`.
+
+## 14. Evento append-only — RAFAELIA_SESSION_BOOT_V1 — 2026-08-03
+
+A metodologia inicial da sessão foi consolidada como contrato único para reconstrução do estado verdadeiro antes de interpretação, alteração ou promoção de claims.
+
+```text
+intenção → contexto longitudinal → fontes → fronteiras
+→ F_ok/F_gap/F_next → gate → execução → receipt → retroalimentação
+```
+
+Artefatos:
+
+- manifesto: `docs/methodology/RAFAELIA_SESSION_BOOT_V1.md`;
+- evento: `data/session_boot/session_boot.events.jsonl`;
+- receipt: `receipts/session_boot/2026-08-03/RAFAELIA_SESSION_BOOT_FGAP_FNEXT_RECEIPT.json`;
+- branch: `method/session-boot-fgap-fnext-20260803`.
+
+Gates já materializados: autoria, fonte, manifesto versionado, evento append-only e receipt legível por máquina. Permanecem `TOKEN_VAZIO`: licença específica, validação automatizada de JSON/JSONL, número e head SHA do PR, confirmação de escrita no Drive, merge na `main` e receipt pós-merge.
+
+Fronteiras: `automatic_merge=false`, `destructive_actions=false`, `retroactive_rewrite=false`, `claim_allowed=false`.
