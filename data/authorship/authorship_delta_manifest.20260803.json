@@ -1,0 +1,96 @@
+{
+  "schema_version": "rafaelia.authorship-delta-manifest/v1",
+  "manifest_id": "AUTH-PROV-MANIFEST-20260803T0145-0300",
+  "created_at": "2026-08-03T01:45:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 139,
+  "branch": "governance/authorship-provenance-invariant-20260803",
+  "base_commit_sha": "fd956bf35e16ad97a5e03e315f71b782f9a0d73b",
+  "pre_manifest_head_sha": "1d9bb2bf5e0b567d74e80bfb92d9ae0ee4d8947e",
+  "identity_algorithm": "git_blob_sha1",
+  "claim_allowed": false,
+  "files": [
+    {
+      "path": ".github/workflows/authorship-provenance.yml",
+      "git_blob_sha1": "57a45a41268d826035795b93b2a975047f6a8302",
+      "role": "continuous_validation_workflow"
+    },
+    {
+      "path": "AUTHORS_RAFAELIA.md",
+      "git_blob_sha1": "b85906cbc7623db158a00aec53c8e6aa9406a876",
+      "role": "human_readable_authorship_index"
+    },
+    {
+      "path": "data/authorship/authorship_registry.delta.20260803.jsonl",
+      "git_blob_sha1": "afcce21704dc452d996ab95b19ae1c761c8d4ec1",
+      "role": "primary_authorship_registry_delta"
+    },
+    {
+      "path": "data/authorship/authorship_registry.drive.delta.20260803.jsonl",
+      "git_blob_sha1": "8e6338e7617272e74636cffe54cc5e657e1ef393",
+      "role": "drive_mirror_authorship_registry_delta"
+    },
+    {
+      "path": "data/control-plane/authorship-provenance-policy.v1.json",
+      "git_blob_sha1": "c3805a0dedbe250eca3f20b7962f03c9f96a1ae0",
+      "role": "fail_closed_authorship_policy"
+    },
+    {
+      "path": "docs/governance/AUTHORSHIP_PROVENANCE_INVARIANT_V1.md",
+      "git_blob_sha1": "05a6dcb3f20a077181e0991cb8ca9185e334856d",
+      "role": "canonical_draft_governance_document"
+    },
+    {
+      "path": "indices/catalog-runs/deltas/AUTHORSHIP_PROVENANCE_DELTA_2026-08-03T0145-0300.md",
+      "git_blob_sha1": "a13f88f7d285051238d699b7ee2bc24559577b8f",
+      "role": "navigable_append_only_delta_index"
+    },
+    {
+      "path": "schemas/authorship-provenance-record.schema.json",
+      "git_blob_sha1": "c3cbaa513a139e7714cc7012d9ea7607f4333b11",
+      "role": "record_shape_contract"
+    },
+    {
+      "path": "tests/test_authorship_provenance.py",
+      "git_blob_sha1": "6e095e046112780f87d7f6888ecfe1684e13ecca",
+      "role": "positive_negative_and_adversarial_tests"
+    },
+    {
+      "path": "tools/verify_authorship_provenance.py",
+      "git_blob_sha1": "98ca0cea840a3766473bad25861f32038f1dc911",
+      "role": "stdlib_only_fail_closed_validator"
+    }
+  ],
+  "drive_mirror": {
+    "file_id": "1s1W8wpEeDsSwTylgijU-LnybF_ijnf4grFo768JdHig",
+    "revision_id": "AIroW37DiIf7kWn7w9UCzvzxjf8TT3jJxkPuYFAfUfv0J1tGL0ixFvI_IJ6oqwTexMfCl6AIibOWMiMAgUAUE6LAYn0QNEu9tMQidxhgAyA",
+    "export_mime_type": "text/plain",
+    "export_bytes": 4214,
+    "export_sha256": "db5f860ae2bcd3333eb7e029eb59672216836385ddff92e44501bab05bca342a",
+    "byte_identity_with_github": "TOKEN_VAZIO_DIFFERENT_REPRESENTATIONS"
+  },
+  "duplicate_empty_drive_objects": [
+    {
+      "file_id": "1FPMO-GfxrBuO9J40avtFcPWxPHCG5xl-AtOdZlWrehg",
+      "state": "DUPLICATE_EMPTY_TOKEN_VAZIO",
+      "action": "RENAMED_AND_PRESERVED"
+    },
+    {
+      "file_id": "1Cq8iQN8DxEfr8V3XiKWH1kJVnT8PfjUoTV2kXNG4HbI",
+      "state": "DUPLICATE_EMPTY_TOKEN_VAZIO",
+      "action": "PRESERVED_WITH_EXPLICIT_TITLE"
+    }
+  ],
+  "manifest_self_binding": {
+    "method": "The Git commit tree binds this file after creation.",
+    "self_blob_sha1": "TOKEN_VAZIO_UNTIL_POST_COMMIT_READ",
+    "next_gate": "Read the manifest from the resulting head and append a separate post-commit receipt without rewriting this manifest."
+  },
+  "blocking_token_vazio": [
+    "TOKEN_VAZIO_INDEPENDENT_REVIEW",
+    "TOKEN_VAZIO_LICENSE_RECONCILIATION",
+    "TOKEN_VAZIO_COMPLETE_HISTORICAL_AUTHOR_MAP",
+    "TOKEN_VAZIO_REQUIRED_STATUS_CHECKS",
+    "TOKEN_VAZIO_POST_REVIEW_RECEIPT"
+  ]
+}

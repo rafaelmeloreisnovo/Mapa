@@ -1,0 +1,64 @@
+{
+  "schema_version": "rafaelia.authorship-ci-observation/v1",
+  "observation_id": "AUTH-PROV-CI-OBS-20260803T0158-0300",
+  "observed_at": "2026-08-03T01:58:12-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 139,
+  "observed_head_sha": "e4bc08f0a0f4ec8ed5d497c7315fc04d0f35ba6d",
+  "workflow_runs": [
+    {
+      "run_id": 30785831735,
+      "name": "Branch Topology Gate",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "run_id": 30785831743,
+      "name": "Live Control Plane Reconciliation",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "run_id": 30785831727,
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "failure",
+      "job_id": 91599074446,
+      "job_steps_observed": []
+    },
+    {
+      "run_id": 30785831732,
+      "name": "authorship-provenance",
+      "status": "completed",
+      "conclusion": "failure",
+      "job_id": 91599074336,
+      "job_steps_observed": []
+    }
+  ],
+  "diagnostic": {
+    "classification": "TOKEN_VAZIO_RUNNER_PRE_STEP_DIAGNOSTIC",
+    "code_defect_proven": false,
+    "workflow_logic_pass_proven": false,
+    "logs_recoverable": false,
+    "prior_log_fetch_result": "HTTP_404_BLOB_NOT_FOUND",
+    "inference": "Multiple workflows failing with no observable job steps suggests an execution or runner-level problem, but the cause is not proven without logs."
+  },
+  "decision": {
+    "promotion_allowed": false,
+    "claim_allowed": false,
+    "automatic_rerun": false,
+    "automatic_merge": false
+  },
+  "blocking_token_vazio": [
+    "TOKEN_VAZIO_REMOTE_RUNNER_DIAGNOSTIC",
+    "TOKEN_VAZIO_EXECUTED_TEST_RECEIPT",
+    "TOKEN_VAZIO_REQUIRED_STATUS_CHECKS",
+    "TOKEN_VAZIO_INDEPENDENT_REVIEW"
+  ],
+  "next_gate": [
+    "Inspect GitHub Actions availability, permissions, billing or runner provisioning outside this receipt.",
+    "Re-run only after the infrastructure cause is observable.",
+    "Capture job steps, logs, test report and exact reviewed head SHA."
+  ],
+  "boundary": "This record preserves the remote failure state. It does not attribute the failure to the validator, tests, repository code, GitHub infrastructure or user configuration without observable evidence."
+}
