@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "matrix_id": "FRM-RAFAELIA-T7-V1",
+  "claim_allowed": false,
+  "nodes": [
+    {"id":"N-MAPA","surface":"GITHUB","authority_role":"ONTOLOGY","locator":"rafaelmeloreisnovo/Mapa","state":"CANONICAL","keywords":["catalog","index","ontology","provenance","memory"]},
+    {"id":"N-RAFGITTOOLS","surface":"GITHUB","authority_role":"CONTROL_PLANE","locator":"rafaelmeloreisnovo/RafGitTools","state":"CANONICAL","keywords":["automation","repository","doctor","control-plane"]},
+    {"id":"N-RAFPOLIMATA","surface":"GITHUB","authority_role":"EVIDENCE","locator":"rafaelmeloreisnovo/RafPolimata","state":"CANONICAL","keywords":["compiler","semantics","claims","falsifier","receipts"]},
+    {"id":"N-TERMUX","surface":"RUNTIME","authority_role":"RUNTIME","locator":"rafaelmeloreisnovo/termux-app-rafacodephi","state":"IMPLEMENTED","keywords":["android","termux","arm32","arm64","bootstrap"]},
+    {"id":"N-VECTRAS","surface":"RUNTIME","authority_role":"RUNTIME","locator":"rafaelmeloreisnovo/Vectras-VM-Android","state":"IMPLEMENTED","keywords":["android","qemu","vm","isolation","runtime"]},
+    {"id":"N-DRIVE-MASTER","surface":"GOOGLE_DRIVE","authority_role":"CUSTODY","locator":"drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","state":"CANONICAL","keywords":["memory","latents","papers","custody","editorial"]},
+    {"id":"N-DRIVE-T7","surface":"GOOGLE_DRIVE","authority_role":"INDEX","locator":"drive:1HlBedJvhjj1WO4yQszwcSRRlHY7lhSgt","state":"REFERENCE","keywords":["T7","federation","matrix","adapters"]},
+    {"id":"N-RLL","surface":"GITHUB","authority_role":"RESEARCH","locator":"instituto-Rafael/relativity-living-light","state":"CANONICAL","keywords":["science","bayes","replication","claims"]},
+    {"id":"N-PAPERS","surface":"GITHUB","authority_role":"PUBLICATION","locator":"rafaelmeloreisnovo/papers","state":"CANONICAL","keywords":["papers","drafts","publication","review"]},
+    {"id":"N-CORE-FCEA","surface":"MEMORY","authority_role":"RESEARCH","locator":"drive:15-0RnzqzFYH0FJJhw9I3zhSTlRvW2PPdSTobFw1pM8Y","state":"REFERENCE","keywords":["Core","FCEA","non-ordinal-memory","research"]}
+  ],
+  "edges": [
+    {"id":"E-MAPA-DRIVE","from":"N-MAPA","to":"N-DRIVE-MASTER","relation":"INDEXES","evidence_state":"EVIDENCIADO","receipt_locator":"indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md"},
+    {"id":"E-DRIVE-MAPA","from":"N-DRIVE-MASTER","to":"N-MAPA","relation":"REFERENCES","evidence_state":"PROVADO","receipt_locator":"drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"},
+    {"id":"E-MAPA-RGT","from":"N-MAPA","to":"N-RAFGITTOOLS","relation":"GOVERNS","evidence_state":"MODELO_ANALÓGICO","receipt_locator":null},
+    {"id":"E-RGT-RP","from":"N-RAFGITTOOLS","to":"N-RAFPOLIMATA","relation":"PRODUCES","evidence_state":"HIPÓTESE","receipt_locator":null},
+    {"id":"E-RP-TERMUX","from":"N-RAFPOLIMATA","to":"N-TERMUX","relation":"PRODUCES","evidence_state":"EVIDENCIADO","receipt_locator":"docs/RAFAELIA_MULTIFILAMENT_EXECUTION_CONTRACT_V1.md"},
+    {"id":"E-TERMUX-VECTRAS","from":"N-TERMUX","to":"N-VECTRAS","relation":"DEPENDS_ON","evidence_state":"HIPÓTESE","receipt_locator":null},
+    {"id":"E-VECTRAS-RP","from":"N-VECTRAS","to":"N-RAFPOLIMATA","relation":"CONSUMES","evidence_state":"EVIDENCIADO","receipt_locator":"docs/active/VECTRA_RAFAELIA_MULTIFILAMENT_RUNTIME_INGESTION_V1.md"},
+    {"id":"E-RLL-PAPERS","from":"N-RLL","to":"N-PAPERS","relation":"PRODUCES","evidence_state":"HIPÓTESE","receipt_locator":null},
+    {"id":"E-MAPA-RLL","from":"N-MAPA","to":"N-RLL","relation":"INDEXES","evidence_state":"EVIDENCIADO","receipt_locator":null},
+    {"id":"E-MAPA-PAPERS","from":"N-MAPA","to":"N-PAPERS","relation":"INDEXES","evidence_state":"EVIDENCIADO","receipt_locator":null},
+    {"id":"E-DRIVE-COREFCEA","from":"N-DRIVE-MASTER","to":"N-CORE-FCEA","relation":"REFERENCES","evidence_state":"EVIDENCIADO","receipt_locator":"drive:15-0RnzqzFYH0FJJhw9I3zhSTlRvW2PPdSTobFw1pM8Y"},
+    {"id":"E-T7-MAPA","from":"N-DRIVE-T7","to":"N-MAPA","relation":"REFERENCES","evidence_state":"PROVADO","receipt_locator":"indices/catalog-runs/deltas/CATALOG_RUN_INDEX_2026-08-03_T7_DELTA_001.md"}
+  ],
+  "contexts": [
+    {"context_id":"CTX-HUMAN-START","audience":"HUMAN","entry_nodes":["N-MAPA","N-DRIVE-MASTER"],"question":"Onde começar para entender o ecossistema?","next_gate":"Ler o índice canônico do Mapa e depois a fonte editorial correspondente no Drive."},
+    {"context_id":"CTX-AI-ROUTING","audience":"AI","entry_nodes":["N-MAPA","N-RAFGITTOOLS","N-RAFPOLIMATA"],"question":"Como rotear uma tarefa sem confundir autoridade?","next_gate":"Escolher o nó pela authority_role e exigir receipt_locator antes de promover qualquer claim."},
+    {"context_id":"CTX-ENGINEERING-RUNTIME","audience":"ENGINEERING","entry_nodes":["N-RAFPOLIMATA","N-TERMUX","N-VECTRAS"],"question":"Como uma especificação vira execução?","next_gate":"Congelar fonte, hash, ABI, envelope, quarentena, teste e receipt físico."},
+    {"context_id":"CTX-RESEARCH","audience":"RESEARCH","entry_nodes":["N-RLL","N-PAPERS","N-CORE-FCEA"],"question":"Como uma hipótese vira resultado revisável?","next_gate":"Exigir dataset, método, falsificador, incerteza, Bayes quando aplicável e replicação independente."},
+    {"context_id":"CTX-AUDIT","audience":"AUDIT","entry_nodes":["N-MAPA","N-DRIVE-MASTER","N-RLL"],"question":"Como verificar proveniência e cadeia de custódia?","next_gate":"Comparar locators, revisões, hashes, commits, receipts e limites epistemológicos."},
+    {"context_id":"CTX-OPERATIONS","audience":"OPERATIONS","entry_nodes":["N-RAFGITTOOLS","N-TERMUX","N-VECTRAS"],"question":"Como executar com rollback e fail-safe?","next_gate":"Executar somente artefatos validados, registrar watchdog, rollback, failover e estado TOKEN_VAZIO em falhas."}
+  ]
+}
