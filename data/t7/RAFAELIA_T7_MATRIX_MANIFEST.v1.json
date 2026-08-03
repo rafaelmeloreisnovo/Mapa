@@ -1,0 +1,75 @@
+{
+  "schema": "RAFAELIA_T7_SPARSE_MATRIX/v1",
+  "generated_at": "2026-08-03T04:10:00-03:00",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "mode": "READ_ONLY_ANALYSIS_APPEND_ONLY_WRITES",
+  "definition": {
+    "dimension_count": 7,
+    "axis_cardinality": 7,
+    "theoretical_cells": 823543,
+    "storage": "SPARSE_ONLY",
+    "rule": "unoccupied_cell=TOKEN_VAZIO, not false or zero"
+  },
+  "axes": {
+    "authority": ["GOVERNANCE","CONTROL","EVIDENCE","RUNTIME","VIRTUALIZATION","MEMORY","RESEARCH"],
+    "direction": ["IDENTITY","STRUCTURE","SEMANTICS","EVIDENCE","DEPENDENCY","TEMPORAL","GOVERNANCE"],
+    "vertente": ["CODE","DATA","DOCS","RUNTIME","SECURITY","RESEARCH","MEMORY"],
+    "analytic_line": ["DIRECT","INVERSE","RECURSIVE","COMPARATIVE","ANOMALOUS","FALSIFIABLE","GENERATIVE"],
+    "condition": ["PROVADO","EVIDENCIADO","HIPOTESE","MODELO","PARABOLA","REFUTADO","TOKEN_VAZIO"],
+    "urgency": ["U0_SECURITY","U1_INTEGRITY","U2_GATE","U3_RUNTIME","U4_INDEX","U5_RESEARCH","U6_ARCHIVE"],
+    "lifecycle": ["SOURCE","INDEX","CONTRACT","VALIDATE","EXECUTE","OBSERVE","CLOSE"]
+  },
+  "sources": [
+    {"repository":"Mapa","archive":"Mapa-main.zip","bytes":37295806,"sha256":"baf96c6ac8a7e467323c98873b11330f2d18a73c49182a4b62ab584d50be070f","integrity":"ZIP_CRC_PASS"},
+    {"repository":"Vectras-VM-Android","archive":"Vectras-VM-Android-master (2)(7).zip","bytes":83259178,"sha256":"cf38364c301ccfc9b8fba9dbbff6af63b60a27e0bb222b1a9c19edf6b0b91372","integrity":"ZIP_CRC_PASS"},
+    {"repository":"RafGitTools","archive":"RafGitTools-main (3).zip","bytes":4455373,"sha256":"f302f16ac57363ce467802267bba449915d215cba65ee731f8891d48a87840ed","integrity":"ZIP_CRC_PASS"},
+    {"repository":"RafPolimata","archive":"RafPolimata-main (4).zip","bytes":2143157,"sha256":"b88f88d43c2dc441ee0e65038f1479fa9bff2032e66219cc49422ddc62a542ae","integrity":"ZIP_CRC_PASS"},
+    {"repository":"termux-app-rafacodephi","archive":"termux-app-rafacodephi-master (4).zip","bytes":5368186,"sha256":"c2549ba985b804dcda3a75261f97a28972aa1ededc873883156cb2e0f3cf05b5","integrity":"ZIP_CRC_PASS"}
+  ],
+  "repository_stats": {
+    "RafGitTools":{"files":944,"bytes":9668927,"workflow_count":25},
+    "RafPolimata":{"files":853,"bytes":6427922,"workflow_count":20},
+    "termux-app-rafacodephi":{"files":2164,"bytes":15882809,"workflow_count":42},
+    "Vectras-VM-Android":{"files":2626,"bytes":106335579,"workflow_count":37},
+    "Mapa":{"files":858,"bytes":41472598,"workflow_count":35}
+  },
+  "products": [
+    {"id":"T7-P01","name":"Federated Control Plane & KOS","owner":"Mapa","supports":["RafGitTools","RafPolimata","Vectras-VM-Android","termux-app-rafacodephi"],"authority":"GOVERNANCE","purpose":"autoridade, catálogo, rotas, decisão, governança e mapa longitudinal","gates":["O0","O1","O8","O11","O12"]},
+    {"id":"T7-P02","name":"Universal Doctor & Control Deck","owner":"RafGitTools","supports":["Mapa"],"authority":"CONTROL","purpose":"diagnóstico read-only por capacidade e roteamento governado","gates":["O0","O1","O2","O3","O8"]},
+    {"id":"T7-P03","name":"Evidence Console & Claims/Falsifier","owner":"RafPolimata","supports":["Mapa"],"authority":"EVIDENCE","purpose":"validar claims, receipts, testes adversariais e limites","gates":["O1","O3","O7","O8","O11","O12"]},
+    {"id":"T7-P04","name":"Physical Runtime & Terminal Bridge","owner":"termux-app-rafacodephi","supports":["RafGitTools","RafPolimata"],"authority":"RUNTIME","purpose":"execução Android/Termux, pacote, device smoke e receipt físico","gates":["O1","O2","O3","O4","O6","O7","O9"]},
+    {"id":"T7-P05","name":"Workspace VM & Isolation","owner":"Vectras-VM-Android","supports":["termux-app-rafacodephi","RafPolimata"],"authority":"VIRTUALIZATION","purpose":"isolamento QEMU/VM, boot, snapshot, preflight e rollback","gates":["O6","O7","O9","O10"]},
+    {"id":"T7-P06","name":"Cross-Surface Custody & Memory Phoenix","owner":"Mapa","supports":["RafPolimata","RafGitTools"],"authority":"MEMORY","purpose":"identidade cross-surface, aliases, append-only, lineage e deduplicação lógica","gates":["O3","O5","O6","O7","O11","O12"]},
+    {"id":"T7-P07","name":"Research, Benchmark & Independent Replication","owner":"RafPolimata","supports":["Vectras-VM-Android","termux-app-rafacodephi","Mapa"],"authority":"RESEARCH","purpose":"benchmark reproduzível, p50/p95/p99, falsificação e replicação independente","gates":["O1","O7","O8","O11"]}
+  ],
+  "populated_cell_count": 64,
+  "relation_node_count": 12,
+  "relation_edge_count": 33,
+  "exact_cross_repo_duplicate_groups": 93,
+  "roadmap": [
+    {"rank":1,"id":"T7-R01","priority":"P0","title":"Segredos e superfícies RCE","owner":"Mapa + produtores","gate":"O6","acceptance":"segredos rotacionados; endpoints autenticados/allowlist; testes sintéticos de redaction"},
+    {"rank":2,"id":"T7-R02","priority":"P0","title":"Backup íntegro e manifesto comparável","owner":"Mapa/Drive","gate":"O12","acceptance":"novo archive CRC PASS; hash; contagem; delta contra snapshot truncado"},
+    {"rank":3,"id":"T7-R03","priority":"P0","title":"Receipts físicos ARM32 e ARM64","owner":"termux-app-rafacodephi","gate":"O7","acceptance":"dois devices distintos; APK/hash; ambiente; transcript; matriz dual-arm"},
+    {"rank":4,"id":"T7-R04","priority":"P0","title":"Gate T⁷ schema + fixtures negativas","owner":"Mapa/RafPolimata","gate":"O1/O12","acceptance":"axes 7x; IDs únicos; falsas identidades rejeitadas; receipt PASS_LIMITED"},
+    {"rank":5,"id":"T7-R05","priority":"P1","title":"Universal TraceEnvelope","owner":"RafGitTools","gate":"O3","acceptance":"trace_id atravessa Mapa→controle→runtime→evidência→R3"},
+    {"rank":6,"id":"T7-R06","priority":"P1","title":"Registry content-addressed de aliases","owner":"Mapa","gate":"O5/O12","acceptance":"93 grupos revisados; sem duplicação de autoridade; aliases resolvíveis"},
+    {"rank":7,"id":"T7-R07","priority":"P1","title":"SBOM + proveniência de build","owner":"Mapa/produtores","gate":"O7","acceptance":"CycloneDX/SPDX por artefato; provenance SLSA; assinatura/verification policy quando disponível"},
+    {"rank":8,"id":"T7-R08","priority":"P1","title":"VM preflight e rollback reproduzível","owner":"Vectras-VM-Android","gate":"O9/O10","acceptance":"WorkspaceManifest, boot smoke, snapshot, rollback hashes"},
+    {"rank":9,"id":"T7-R09","priority":"P2","title":"Benchmark estatístico comparável","owner":"RafPolimata","gate":"O7/O8","acceptance":"baseline, flags, raw logs, n, warmup, p50/p95/p99, tolerâncias"},
+    {"rank":10,"id":"T7-R10","priority":"P2","title":"Replicação independente","owner":"RafPolimata + segundo executor","gate":"O8/O11","acceptance":"segundo ambiente/implementação; divergências e tolerâncias registradas"},
+    {"rank":11,"id":"T7-R11","priority":"P2","title":"Knowledge Navigator T⁷","owner":"Mapa","gate":"O5/O12","acceptance":"consulta por produto, eixo, gate, evidência, alias, predecessor e F_next"},
+    {"rank":12,"id":"T7-R12","priority":"P3","title":"Quarentena e compactação de legado","owner":"Mapa/produtores","gate":"O11","acceptance":"snapshots preservados; autoridade ativa única; remoção só após revisão humana"}
+  ],
+  "state": "EVIDENCIADO_PARCIAL",
+  "f_ok": ["5 ZIPs CRC PASS","7445 files inventoried","7 canonical products","T7 sparse matrix materialized","93 exact cross-repository alias groups identified"],
+  "f_gap": ["credentials rotation not evidenced","truncated prior backup unresolved","physical ARM32/ARM64 receipts absent","remote CI evidence not closed","independent replication absent"],
+  "f_next": ["T7-R01","T7-R02","T7-R03","T7-R04","T7-R05"],
+  "standards_profile": {
+    "NIST_SSDF":"1.1 final; 1.2 draft tracked",
+    "SLSA":"1.2 current target profile",
+    "CycloneDX":"1.7 current target profile",
+    "SPDX":"3.0.1 current target profile",
+    "Sigstore":"in-toto attestation verification optional future gate"
+  }
+}
