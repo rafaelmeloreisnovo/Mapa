@@ -1,0 +1,117 @@
+{
+  "schema_version": "rafaelia.catalog-cycle/v1",
+  "cycle_id": "CAT-20260803T0202-0300",
+  "observed_at": "2026-08-03T02:02:07-03:00",
+  "mode": ["incremental", "append-only", "non-destructive", "fail-closed"],
+  "claim_allowed": false,
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "14987fee28fa281ff0aa3b17939a3f62a6bcba24",
+    "committed_at": "2026-08-03T04:02:05Z"
+  },
+  "priority_reference": {
+    "provider": "google_drive",
+    "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "content_hash": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+  },
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "merge_commit": "fd956bf35e16ad97a5e03e315f71b782f9a0d73b",
+      "pr": 138,
+      "domain": "directive_event_and_cross_source",
+      "artifacts": [
+        "schemas/directive-event.schema.json",
+        "data/directives/directive_events.20260803.jsonl",
+        "scripts/validate_directive_events.py",
+        "indices/DIRECTIVE_EVENTS_INDEX_V1.md",
+        "data/receipts/directive_crosswalk.20260803T003524-0300.json"
+      ],
+      "local_validation": "28/28 PASS",
+      "remote_ci": "TOKEN_VAZIO_NOT_RUN"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "merge_commit": "13ec075085fbeca67740fae0943746d683d9e93e",
+      "pr": 322,
+      "domain": "workflow_authority_crosswalk_and_normative_registry",
+      "artifacts": [
+        "configs/workflow-master-index.crosswalk.v1.json",
+        "configs/normative-reference-registry.v1.json",
+        "scripts/federation/validate_workflow_master_crosswalk.py",
+        "scripts/federation/validate_normative_reference_registry.py"
+      ],
+      "local_validation": "13/13 PASS",
+      "remote_ci": "TOKEN_VAZIO_NOT_RUN",
+      "conformance_claim": false,
+      "certification_claim": false
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "merge_commit": "e45cc4ef1f2ebc85e8ce00a60448abbebd5c7aee",
+      "pr": 198,
+      "domain": "bitraf_termux_receipt_runner",
+      "state": "READY_FOR_PHYSICAL_EXECUTION",
+      "source_merge_commit": "fd2b9925c6cbde730741117ec3c6dd979db9b25e",
+      "artifacts": [
+        "docs/BITRAF_TERMUX_PHYSICAL_RECEIPT_V1.md",
+        "scripts/run_bitraf_termux_receipt.sh"
+      ],
+      "physical_execution_receipt": "TOKEN_VAZIO_NOT_EXECUTED_ON_DEVICE"
+    }
+  ],
+  "drive_delta": [
+    {
+      "file_id": "1s1W8wpEeDsSwTylgijU-LnybF_ijnf4grFo768JdHig",
+      "title": "RAFAELIA — Invariante de Autoria, Origem e Proveniência — V1 — 2026-08-03",
+      "classification": "EVIDENCIADO_DOCUMENT_CONTENT_HYDRATED",
+      "export_hash": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+    },
+    {
+      "file_id": "1Cq8iQN8DxEfr8V3XiKWH1kJVnT8PfjUoTV2kXNG4HbI",
+      "title": "RAFAELIA — Invariante de Autoria, Origem e Proveniência — V1 — 2026-08-03 — DUPLICATE_EMPTY_TOKEN_VAZIO",
+      "classification": "TOKEN_VAZIO_DUPLICATE_EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "file_id": "1FPMO-GfxrBuO9J40avtFcPWxPHCG5xl-AtOdZlWrehg",
+      "title": "RAFAELIA — DUPLICATE EMPTY — TOKEN_VAZIO — 2026-08-03 — 01",
+      "classification": "TOKEN_VAZIO_DUPLICATE_EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "folder_id": "1K3CQl7DYA_pbCsgigSGvvUcs39D9pCBv",
+      "title": "RAFAELIA_OMEGA7_AUDITORIA_CUSTODIA_2026-08-03T0156-0300",
+      "children_observed": [
+        "RAFAELIA_OMEGA7_SUMMARY.xlsx",
+        "RAFAELIA_OMEGA7_REPORT.md",
+        "RAFAELIA_OMEGA7_AUDIT_PACKAGE.sha256",
+        "QUERY_GUIDE.md"
+      ],
+      "declared_package_sha256": "74fd4f5f45925d946676e1b146d688379587c971af9ba31c86f8d99cb62d3934",
+      "package_bytes_recomputed": false,
+      "classification": "EVIDENCIADO_BY_SIDECAR_DIGEST_NOT_RECOMPUTED"
+    }
+  ],
+  "epistemic_classification": {
+    "PROVADO": ["three merge commits exist", "Drive objects and custody folder exist", "sidecar digest text exists"],
+    "EVIDENCIADO": ["local validation results are recorded in merged receipts", "workflow authority profiles are explicitly separated", "Termux runner freezes source hashes before execution"],
+    "HIPÓTESE": ["cross-source directive typing may reduce semantic drift"],
+    "MODELO_ANALÓGICO": ["authority crosswalk as a routing map between semantic and control planes"],
+    "PARÁBOLA": ["bridge-marking parable remains didactic only"],
+    "REFUTADO": ["prepared Termux runner equals physical execution", "sidecar digest equals independently verified package identity", "normative reference equals conformity or certification"],
+    "TOKEN_VAZIO": ["remote CI runs", "physical Android receipt", "independent reproduction", "Drive export hashes", "duplicate-empty canonical disposition"]
+  },
+  "core_fcea": "TOKEN_VAZIO_NO_DISTINCT_NEW_CORE_FCEA_OBJECT_OBSERVED",
+  "actions_not_executed": [
+    "no Google Drive write",
+    "no workflow dispatch or rerun",
+    "no Termux or Android execution",
+    "no package download and digest recomputation",
+    "no duplicate deletion or mutation",
+    "no claim promotion",
+    "no global coverage assertion"
+  ],
+  "F_ok": "Authorship/provenance documents, Omega7 custody package, directive-event contract, authority crosswalk, normative registry and BITRAF Termux runner were cataloged with locators and boundaries.",
+  "F_gap": "Remote CI, physical execution receipt, independent package hash verification, Drive export hashes and canonical treatment of empty duplicates remain absent.",
+  "F_next": "Download and recompute the Omega7 package digest; execute the frozen BITRAF runner on the physical Termux device; preserve receipt commit, environment and hashes; then review empty duplicates without destructive action."
+}
