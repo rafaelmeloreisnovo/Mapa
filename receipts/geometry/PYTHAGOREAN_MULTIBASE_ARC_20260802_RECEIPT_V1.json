@@ -1,0 +1,131 @@
+{
+  "receipt_id": "PYTHAGOREAN-MULTIBASE-ARC-20260802-RECEIPT-V1",
+  "timestamp_brt": "2026-08-02T22:16:24-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "research/pythagorean-multibase-arc-20260802",
+  "provenance": {
+    "base_ref": "main",
+    "base_sha": "b32c9a16c7947763c992e19b95bdf068edb66bf2",
+    "artifact_head_before_receipt": "92830c9c0253c968145461a51b6fbfe6ec36d683",
+    "parent_contract": "IGC-CR-20260802-V1",
+    "prior_cycle_reference": "rafaelmeloreisnovo/RafPolimata:docs/ANEXO_CICLO_60_BASES_144_0_1HZ.md",
+    "session_origin": "EXPLORAR / 2026-08-02 / correction 5-12-15 to 5-12-13 and multibase circular positions"
+  },
+  "execution_layers": {
+    "L0_math": {
+      "status": "PASS_EXACT",
+      "identities": [
+        "5^2 + 12^2 = 13^2 = 169",
+        "13^2 - 12^2 = 169 - 144 = 25 = 5^2",
+        "15^2 - 5^2 - 12^2 = 56",
+        "rho = 56/(2*5*12) = 7/15 under the correlated-uncertainty model",
+        "theta_60(144) = 144 degrees"
+      ]
+    },
+    "L1_deterministic_generator": {
+      "status": "PASS",
+      "materialized_bases": {
+        "min": 1,
+        "max": 225,
+        "count": 225
+      },
+      "jsonl_records": 229,
+      "tracked_values": [
+        5,
+        12,
+        13,
+        15,
+        25,
+        144,
+        169,
+        225
+      ],
+      "corrected_identity_failure_bases": [],
+      "proposed_15_false_positive_modular_bases": [
+        2,
+        4,
+        7,
+        8,
+        14,
+        28,
+        56
+      ]
+    },
+    "L2_ephemeral_runtime": {
+      "status": "PASS_LIMITED",
+      "environment": "workspace sandbox; Linux 6.12.13 x86_64; Python 3.12.13",
+      "py_compile": "PASS",
+      "unittest": "11/11 PASS",
+      "deterministic_regeneration": "BYTE_EXACT_PASS",
+      "jsonl_parse": "PASS: 229 + 1 + 1 records",
+      "scope": "local ephemeral reproduction; no physical-device inference"
+    },
+    "L3_remote_repository": {
+      "status": "PASS_BLOB_EQUIVALENCE",
+      "method": "local git hash-object compared with GitHub blob SHA after upload",
+      "mismatches": [],
+      "remote_ci": "TOKEN_VAZIO_NOT_RUN_AT_RECEIPT_TIME"
+    },
+    "L4_physical_termux": "TOKEN_VAZIO",
+    "L5_independent_reproduction": "TOKEN_VAZIO"
+  },
+  "remote_blob_sha": {
+    "docs/canonical/2026-08-02/PYTHAGOREAN_5_12_13_MULTIBASE_CIRCULAR_ARC_V1.md": "ccad9a656800d8b70265e7531e17880b53ec5997",
+    "tools/generate_pythagorean_multibase_arc.py": "4abdbd64645e970c6ae673911ea38c0e6483a9e7",
+    "tests/geometry/test_pythagorean_multibase_arc.py": "f678a650cec47ddd4d98e90f9b06abe88dd0a788",
+    "data/geometry/pythagorean_5_12_13_multibase_arc.v1.jsonl": "13a1b213a6ff965aa9a51f0f7dd23b9e6295b43c",
+    "data/geometry/geometric_invariants.delta.20260802.pythagorean_multibase_arc.jsonl": "67ad1b071eb83580e67f447bf6fb6f1dbebc9140",
+    "data/latents/deltas/latents.20260802.pythagorean_multibase_arc.jsonl": "7bd9e2625d74bcb20d065d894846afc6494e4025",
+    "indices/geometry/PYTHAGOREAN_MULTIBASE_ARC_INDEX_V1.md": "f2d73f3b7e0d5b9b0915606788354bc73e40f2b6",
+    "data/geometry/geometric_invariants.index.jsonl": "36eb8bd73cbbce7e69e70d546131e586d3c031c9",
+    "data/latents/latents.index.jsonl": "855b28d6bf403221167d4c88ff0bf64c9a32773e"
+  },
+  "sha256": {
+    "docs/canonical/2026-08-02/PYTHAGOREAN_5_12_13_MULTIBASE_CIRCULAR_ARC_V1.md": "5e5e67febbca5e17e08959e9a252db20218c0b85160630fc0d5fcc12df2b5b94",
+    "tools/generate_pythagorean_multibase_arc.py": "aeb7ed430485844099ff5c7215846fc674518153be53762f8494355739997474",
+    "tests/geometry/test_pythagorean_multibase_arc.py": "a30ec5ace648da5ebf29b763e4d403a1132a5d039be90230800d3b2beeb24048",
+    "data/geometry/pythagorean_5_12_13_multibase_arc.v1.jsonl": "205722876aa2b311d2822426872368bdfdf29d60a39552f97617415ef2f41ede",
+    "data/geometry/geometric_invariants.delta.20260802.pythagorean_multibase_arc.jsonl": "873dbae14a28868857cac93ed49542df564ff95a95d3797907f095c2eb7b0fed",
+    "data/latents/deltas/latents.20260802.pythagorean_multibase_arc.jsonl": "070218fe53873c06b6cad35fc77c2f7b9f2ef73ba72a6f4d54b57887261ff642",
+    "indices/geometry/PYTHAGOREAN_MULTIBASE_ARC_INDEX_V1.md": "fb72cbaa6dd9ca975629e219f346994ff314461cd1078e3ed72a372b1f601f93"
+  },
+  "epistemic_partition": {
+    "PROVADO": [
+      "Pythagorean identity 5-12-13",
+      "consecutive-square gap 144 -> 169 equals 25",
+      "modular alias bases are exactly the nontrivial divisors of 56",
+      "base-7 triple alias",
+      "clock-60 fixed marker 144"
+    ],
+    "MODELO": [
+      "rho=7/15 correlated uncertainty",
+      "sqrt(56) hidden orthogonal component",
+      "observer/channel interpretation of projection aliasing"
+    ],
+    "TOKEN_VAZIO": [
+      "physical interpretation",
+      "negative/balanced/non-integer/complex radix extension",
+      "physical Termux receipt",
+      "independent reproduction"
+    ]
+  },
+  "claim_allowed": false,
+  "f_ok": [
+    "The 144 -> 169 square relation and the 5-12-13 correction were formalized exactly.",
+    "All positive integer bases 1 through 225 were materialized; b>=2 remains parametric.",
+    "The incorrect 15 was preserved as a model and its modular false-positive bases were enumerated.",
+    "Local files and remote GitHub blobs matched exactly.",
+    "Geometry and longitudinal records were appended to their canonical indexes."
+  ],
+  "f_gap": [
+    "Remote CI had not run when this receipt was created.",
+    "Physical Android/Termux execution remains TOKEN_VAZIO.",
+    "Independent reproduction remains TOKEN_VAZIO.",
+    "No physical or perceptual dataset is attached."
+  ],
+  "f_next": [
+    "Run repository checks on the draft PR and preserve their status without overclaiming.",
+    "Reproduce generator and tests on the author's physical Termux environment.",
+    "Only then connect the circular alias model to a measured emitter-channel-receiver experiment."
+  ]
+}
