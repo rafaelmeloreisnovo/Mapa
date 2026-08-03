@@ -1,0 +1,123 @@
+{
+  "schema_version": "rafaelia.authorship-provenance-policy/v1",
+  "policy_id": "AUTH-PROV-IGC-V1",
+  "effective_from": "2026-08-03T01:45:00-03:00",
+  "mode": "APPEND_ONLY_FAIL_CLOSED_NON_DESTRUCTIVE",
+  "principle": "AUTHORSHIP_IS_INDISPENSABLE",
+  "claim_allowed": false,
+  "purpose": "Preserve origin, authorship, contribution, rights, transformations and accountability for every promotable knowledge artifact without erasing prior authors or converting unknown origin into assumed ownership.",
+  "authorship_invariant": {
+    "name": "IGC_AUTHORSHIP_PROVENANCE",
+    "formula": "VALID_ATTRIBUTION(a)=IDENTITY(a) AND CONTRIBUTION(a) AND ORIGIN_CHAIN(a) AND RIGHTS_STATE(a) AND ACCOUNTABILITY(a) AND NOT BLOCKING_UNCERTAINTY(a)",
+    "invariants": [
+      "origin is never silently replaced by the latest transmitter",
+      "derivation preserves every known upstream author and source revision",
+      "authors, contributors, editors, translators, curators, reviewers and tools remain distinct roles",
+      "unknown or disputed authorship is TOKEN_VAZIO_AUTHORSHIP, never project ownership by default",
+      "corrections supersede records but do not delete historical attribution",
+      "citation does not transfer authorship",
+      "implementation of a prior concept does not erase the concept source",
+      "independent contribution may be credited without claiming ownership of upstream material",
+      "AI-assisted systems are disclosed as tools or assistance and are not accountable human authors",
+      "promotion is blocked when attribution, permission or source identity is materially unresolved"
+    ]
+  },
+  "role_types": [
+    "AUTHOR",
+    "COAUTHOR",
+    "SOURCE_AUTHOR",
+    "CONTRIBUTOR",
+    "SOFTWARE_DEVELOPER",
+    "DATA_COLLECTOR",
+    "EDITOR",
+    "TRANSLATOR",
+    "CURATOR",
+    "REVIEWER",
+    "PROJECT_CREATOR",
+    "MAINTAINER",
+    "INSTITUTION",
+    "AI_ASSISTED_TOOL",
+    "UNKNOWN"
+  ],
+  "origin_relations": [
+    "CREATED_BY",
+    "DERIVED_FROM",
+    "CITES",
+    "ADAPTS",
+    "TRANSLATES",
+    "IMPLEMENTS",
+    "REVIEWS",
+    "CURATES",
+    "REPRODUCES",
+    "INSPIRED_BY",
+    "GENERATED_WITH",
+    "SUPERSEDES_WITHOUT_ERASURE"
+  ],
+  "originality_states": [
+    "ORIGINAL_EXPRESSION",
+    "DERIVATIVE_WITH_ATTRIBUTION",
+    "COMPILATION_WITH_SOURCE_MAP",
+    "PUBLIC_DOMAIN_SOURCE_IDENTIFIED",
+    "COMMON_KNOWLEDGE_WITH_DOMAIN_JUSTIFICATION",
+    "TOKEN_VAZIO_ORIGIN",
+    "DISPUTED_AUTHORSHIP",
+    "PLAGIARISM_RISK_BLOCKED"
+  ],
+  "minimum_record": [
+    "record_id",
+    "artifact_locator",
+    "artifact_revision",
+    "content_digest_or_token_vazio",
+    "roles",
+    "origin_chain",
+    "originality_state",
+    "rights_state",
+    "citation_or_source_anchors",
+    "decision",
+    "blocking_token_vazio"
+  ],
+  "anti_plagiarism_gates": {
+    "block_when": [
+      "substantial words, results, data, code, figures or distinctive structure are used without an adequate source anchor",
+      "another person's contribution is presented as solely created by the current project",
+      "a source is cited but the copied or adapted portion is not distinguishable",
+      "a translation, adaptation, compilation or implementation hides the upstream work",
+      "an author is added without a documented contribution or accountability basis",
+      "an eligible author is omitted",
+      "permission or license required for reuse is unresolved",
+      "the origin is unknown and the artifact is nevertheless promoted as original"
+    ],
+    "not_automatically_plagiarism": [
+      "honest error preserved and corrected append-only",
+      "independent creation supported by evidence",
+      "common knowledge with domain justification",
+      "use of ideas, methods or mathematical concepts with appropriate scholarly attribution where ethically required, while preserving the distinction between an idea and its protected expression",
+      "short conventional technical phrases that do not materially misrepresent contribution"
+    ],
+    "automatic_result": "TOKEN_VAZIO_OR_BLOCKED_PENDING_REVIEW"
+  },
+  "perpetual_preservation": {
+    "project_retention_target": "PERPETUAL_APPEND_ONLY",
+    "deletion_of_authorship_history": false,
+    "correction_method": "append a superseding record linked by previous_record_id",
+    "minimum_survival_fields": [
+      "author_or_unknown_state",
+      "source_locator",
+      "revision",
+      "contribution",
+      "relation",
+      "timestamp",
+      "digest",
+      "rights_state"
+    ]
+  },
+  "promotion_gate": {
+    "authorship_record_required": true,
+    "source_anchor_required": true,
+    "contribution_statement_required": true,
+    "rights_state_required": true,
+    "blocking_uncertainty_must_be_empty": true,
+    "self_declared_originality_is_sufficient": false,
+    "result_on_failure": "claim_allowed=false"
+  }
+}
