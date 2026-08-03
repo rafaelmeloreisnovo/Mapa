@@ -19,7 +19,9 @@
 | teste | `tests/geometry/test_pythagorean_multibase_arc.py` |
 | bases 1..225 | `data/geometry/pythagorean_5_12_13_multibase_arc.v1.jsonl` |
 | delta geométrico | `data/geometry/geometric_invariants.delta.20260802.pythagorean_multibase_arc.jsonl` |
+| índice geométrico global | `data/geometry/geometric_invariants.index.jsonl` |
 | delta longitudinal | `data/latents/deltas/latents.20260802.pythagorean_multibase_arc.jsonl` |
+| índice longitudinal global | `data/latents/latents.index.jsonl` |
 | receipt | `receipts/geometry/PYTHAGOREAN_MULTIBASE_ARC_20260802_RECEIPT_V1.json` |
 
 ## Ordem de leitura
