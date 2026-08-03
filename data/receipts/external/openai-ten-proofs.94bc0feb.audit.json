@@ -1,0 +1,89 @@
+{
+  "schema": "rafaelia.proof-custody-receipt.v1",
+  "receipt_id": "PCR-OPENAI-TEN-PROOFS-94BC0FEB-20260802T2235-0300",
+  "observed_at": "2026-08-02T22:35:00-03:00",
+  "observer_mode": "CONNECTED_GITHUB_READ_ONLY",
+  "source": {
+    "repository": "openai/ten-proofs",
+    "default_branch": "main",
+    "commit_sha": "94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6",
+    "commit_time": "2026-08-02T00:22:31Z",
+    "visibility": "public"
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "blob_sha": "3b8381257d1ee2edd7912323cb4ceaa719572257",
+      "role": "project_map_and_build_instructions"
+    },
+    {
+      "path": "formalization.yaml",
+      "blob_sha": "63d31d019f0bcff6052191d3aac71d4191f34131",
+      "role": "declared_formalization_manifest",
+      "declared_properties": {
+        "sorry_count": 0,
+        "sorry_in_definitions": 0,
+        "review_status": "agent-reviewed",
+        "axioms": ["propext", "Classical.choice", "Quot.sound"]
+      }
+    },
+    {
+      "path": "ComparatorChallenges/README.md",
+      "blob_sha": "2a21e1ceac78e1ad47b7c29b4cb05920f7cf4a9a",
+      "role": "independent_checker_instructions"
+    },
+    {
+      "path": "lean-toolchain",
+      "blob_sha": "94b9f495baff80fd9cb44aad8f4762cb3b2066fe",
+      "role": "pinned_toolchain_declaration",
+      "declared_properties": {"toolchain": "leanprover/lean4:v4.32.0"}
+    }
+  ],
+  "verification": {
+    "hash_bound": true,
+    "build": {
+      "status": "TOKEN_VAZIO_NOT_EXECUTED_THIS_AUDIT",
+      "executed_in_this_audit": false,
+      "pass": false,
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "commands": ["lake exe cache get", "lake build All"],
+      "receipt": null
+    },
+    "independent_checker": {
+      "status": "TOKEN_VAZIO_NOT_EXECUTED_THIS_AUDIT",
+      "executed_in_this_audit": false,
+      "pass": false,
+      "toolchain": "landrun + lean4export + nanoda_bin + Comparator",
+      "commands": ["lake exe comparator ComparatorChallenges/A_SpherePacking.json"],
+      "receipt": null
+    }
+  },
+  "governance": {
+    "pull_requests_observed": 0,
+    "reviews_observed": 0,
+    "combined_status_checks": [],
+    "independent_review_approved": false,
+    "merged_on_protected_edge": false,
+    "required_checks_pass": false
+  },
+  "decision": {
+    "classification": "EVIDENCED_REPOSITORY_STRUCTURE_ONLY",
+    "token_valid": false,
+    "claim_allowed": false,
+    "receipt_digest_present": false,
+    "blocking_token_vazio": [
+      "TOKEN_VAZIO_LOCAL_BUILD_RECEIPT",
+      "TOKEN_VAZIO_COMPARATOR_RECEIPT",
+      "TOKEN_VAZIO_INDEPENDENT_HUMAN_REVIEW",
+      "TOKEN_VAZIO_REQUIRED_STATUS_CHECKS",
+      "TOKEN_VAZIO_PROTECTED_PROMOTION_EDGE",
+      "TOKEN_VAZIO_RECEIPT_DIGEST"
+    ],
+    "notes": [
+      "The manifest declares zero sorries for solution modules; this audit records the declaration but did not independently execute Lean.",
+      "Comparator challenge skeletons may contain sorry placeholders by design; they are not themselves the solution modules.",
+      "Repository presence, publisher identity and agent-reviewed metadata do not satisfy RAFAELIA promotion gates.",
+      "A commit or merge is necessary provenance, not sufficient epistemic approval."
+    ]
+  }
+}
