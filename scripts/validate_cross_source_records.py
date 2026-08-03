@@ -17,7 +17,7 @@ SCHEMA_VERSION = "rafaelia.cross-source-record/v1"
 PROVIDERS = {"github", "google_drive", "termux", "session"}
 NODE_TYPES = {
     "repository", "file", "document", "folder", "commit", "pr", "workflow",
-    "dataset", "log", "claim", "action", "session",
+    "dataset", "log", "claim", "action", "session", "directive",
 }
 EPISTEMIC_STATES = {
     "FATO", "VERIFIED_LIMITED", "CONVENCAO", "HIPOTESE", "SIMBOLICO",
