@@ -1,0 +1,66 @@
+{
+  "schema": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260803T2101Z",
+  "generated_at": "2026-08-03T21:01:11Z",
+  "mode": ["incremental", "append-only", "non-destructive", "fail-closed"],
+  "claim_allowed": false,
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "4d6b9bc6ee10ea2ed41cb229e65d731ce8151520"
+  },
+  "priority_reference": {
+    "provider": "google-drive",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT",
+    "claim_allowed": false
+  },
+  "drive_delta": {
+    "cutoff": "2026-08-03T20:01:00Z",
+    "query": "modifiedTime > cutoff and trashed = false",
+    "objects": [],
+    "state": "EVIDENCIADO_LIMITADO_NO_NEW_DRIVE_DELTA"
+  },
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "base_commit": "032c253742aaa3e5fdd67536c7d413813e0567a5",
+      "head_commit": "dbd104e69e0b627d0a5c37a1d03b8bbabdb9f69e",
+      "pull_request": 202,
+      "commits_ahead": 6,
+      "relation": "FEDERATED_B7_EVIDENCE_GATE",
+      "files": [
+        {"path": "docs/RAFAELIA_B7_FEDERATED_RUNTIME.md", "git_blob_sha": "5d92f75f88d834c18135ecce69b02f2c22cbc8f8"},
+        {"path": "runtime/b7/Makefile", "git_blob_sha": "c7e17b5eda22f9eb1332c331c6f340c0fa65908e"},
+        {"path": "runtime/b7/raf_b7_orchestrator.c", "git_blob_sha": "b3fc1e444882556b3a85a16d83b7a93e0bcd516d"},
+        {"path": "runtime/b7/raf_b7_orchestrator.h", "git_blob_sha": "ff1efae203a46798f2aba2b33f480b84fb3b115c"},
+        {"path": "runtime/b7/selftest.c", "git_blob_sha": "363c81e37b71279772d6bfbb7e4cbbf316f316b6"}
+      ],
+      "observed_capabilities": [
+        "caller-provided aligned memory region",
+        "three rotating banks",
+        "16 deterministic lanes",
+        "CRC32C scalar and conditional ARM hardware path",
+        "conditional NEON path",
+        "optional Vulkan/OpenCL adapter callbacks",
+        "64-entry in-memory receipt ring",
+        "explicit attestation before claim promotion"
+      ],
+      "dependencies": ["C11 compiler", "stdint.h", "stddef.h", "optional ARM NEON intrinsics", "optional ARM CRC intrinsics", "make for local gate"],
+      "declared_host_vector": "PASS bytes=8192 crc32c=caf1abc5 caps=00000009 receipts=4",
+      "claims": [
+        {"class": "PROVADO", "statement": "PR #202, merge commit and five B7 files exist at immutable Git references."},
+        {"class": "EVIDENCIADO", "statement": "Source implements the documented triple-bank, CRC32C, lane partition, receipt and attestation contracts."},
+        {"class": "HIPÓTESE", "statement": "RafPolimata can act as the federated equivalence gate for B7 implementations after cross-runtime reproduction."},
+        {"class": "MODELO_ANALÓGICO", "statement": "The three rotating banks model INGEST, COMPUTE and EGRESS; this is not proof of universal performance."},
+        {"class": "REFUTADO", "statement": "The existence of the host self-test source proves ARM, Android, NEON, GPU or physical persistence execution."},
+        {"class": "TOKEN_VAZIO", "statement": "Independent host run, ARMv7/ARM64 equivalence, Android device run, hardware CRC use, Vulkan/OpenCL execution, p50/p95/p99 and thermal evidence."}
+      ]
+    }
+  ],
+  "no_distinct_delta": ["Core/FCEA", "datasets", "papers", "workflows with new observed execution", "APKs", "releases", "physical receipts"],
+  "f_ok": ["Drive cutoff applied without duplication", "RafPolimata delta resolved to immutable merge", "all five B7 paths and Git blob hashes cataloged", "claim boundaries preserved"],
+  "f_gap": ["self-test not independently executed in this cycle", "no ARMv7/ARM64 or Android receipt", "no SHA-256 Drive export", "no physical GPU, disk persistence or performance evidence"],
+  "f_next": ["rebuild and run the frozen host gate", "run identical vector on ARMv7 and ARM64", "compare CRC, output and receipt sequence with Vectras, Termux and RafGitTools B7", "store commands, environment, binaries and hashes in successor receipts"],
+  "not_executed": ["Google Drive write", "workflow rerun", "producer source modification", "Android or Termux execution", "destructive deduplication", "claim promotion"]
+}
