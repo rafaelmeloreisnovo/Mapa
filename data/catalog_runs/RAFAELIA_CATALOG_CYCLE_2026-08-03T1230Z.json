@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "cycle_id": "CAT-20260803T1230Z",
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT"
+  },
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "3fce47708ca333d56cb01f9b6d66c899f2988eb5",
+    "observed_at": "2026-08-03T12:06:55Z"
+  },
+  "drive_delta": {
+    "filter": "modifiedTime > 2026-08-03T12:06:55Z and trashed=false",
+    "results": 0,
+    "state": "EVIDENCIADO_LIMITADO_NO_NEW_DRIVE_DELTA",
+    "write_performed": false
+  },
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "commit": "032c253742aaa3e5fdd67536c7d413813e0567a5",
+      "pr": 201,
+      "created_at": "2026-08-03T12:28:28Z",
+      "file": "docs/federation/RMRCTI_HOTFIX_PR98_POINTER.md",
+      "change_type": "FEDERATED_POINTER_ADDED",
+      "classification": "PROVADO"
+    }
+  ],
+  "source_reconciliation": {
+    "producer_repository": "rafaelmeloreisnovo/llamaRafaelia",
+    "producer_pr": 98,
+    "base_sha": "ccfcd069ab3c645ebbae1ded0c3cb868187f86b2",
+    "head_sha": "5d60e6cbbaeea09f0751f5c227c3774630611bb9",
+    "merge_commit_sha": "0f0070ccf5278a7d28a732237cff260506d24322",
+    "current_state": "MERGED",
+    "draft": false,
+    "pointer_declared_state": "OPEN_DRAFT_NOT_MERGED",
+    "state_assessment": "REFUTADO_BY_CURRENT_PR_METADATA",
+    "rule": "Historical pointer is preserved; successor receipt records the later observed state."
+  },
+  "identified_elements": {
+    "code_scope": [
+      "rmrCti/omega_metrics.py",
+      "rmrCti/omega_frames_export.c",
+      "rmrCti/omega_nav.c"
+    ],
+    "graph": "rmrCti/RMRCTI_EXECUTION_GRAPH_V1.json",
+    "tests": "rmrCti/tests/test_rmrcti_execution_integrity.py",
+    "receipts": [
+      "docs/rafaelia/longitudinal/RMRCTI_HOTFIX_2026-08-03_PR98_RECEIPT.md",
+      "docs/rafaelia/longitudinal/RMRCTI_HOTFIX_2026-08-03_PR98_CI_INFRA_RECEIPT.md",
+      "docs/rafaelia/longitudinal/RMRCTI_HOTFIX_2026-08-03_FEDERATION_RECEIPT.md"
+    ],
+    "dependencies_observed": ["python3", "C compiler", "ncurses for real TUI link/runtime"],
+    "physical_artifacts": [],
+    "datasets": [],
+    "core_fcea_delta": []
+  },
+  "epistemic_classification": {
+    "PROVADO": [
+      "RafPolimata commit and pointer file exist",
+      "llamaRafaelia PR 98 is closed and merged",
+      "base, head and merge commit SHAs are exposed by GitHub metadata"
+    ],
+    "EVIDENCIADO": [
+      "The hotfix scope and local 5/5 test result are documented in the producer PR"
+    ],
+    "HIPOTESE": [
+      "The hotfix may reduce silent data loss and shell-command interpretation after independent runtime verification"
+    ],
+    "MODELO_ANALOGICO": [],
+    "PARABOLA": [],
+    "REFUTADO": [
+      "The new RafPolimata pointer accurately represents the current state of llamaRafaelia PR 98 as open, draft and unmerged",
+      "Merge alone proves physical Termux execution or remote CI success"
+    ],
+    "TOKEN_VAZIO": [
+      "remote CI with observable executed steps",
+      "physical Termux receipt",
+      "real ncurses link and TUI execution",
+      "independent recomputation of local 5/5 tests",
+      "SHA-256 exports for Drive objects"
+    ]
+  },
+  "files_written": [
+    "data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-03T1230Z.json",
+    "indices/catalog-runs/deltas/CATALOG_RUN_INDEX_2026-08-03T1230Z.md"
+  ],
+  "actions_not_executed": [
+    "No Google Drive write",
+    "No source repository modification",
+    "No workflow rerun",
+    "No Termux or Android execution",
+    "No destructive deduplication",
+    "No claim promotion"
+  ],
+  "F_ok": [
+    "Incremental checkpoint preserved",
+    "New RafPolimata federated pointer cataloged",
+    "Producer PR resolved and merge state verified",
+    "Historical pointer preserved and corrected through successor evidence"
+  ],
+  "F_gap": [
+    "Pointer file is stale relative to current producer PR state",
+    "CI and physical runtime evidence remain absent",
+    "No independent test reproduction or artifact hashes"
+  ],
+  "F_next": [
+    "Create a successor pointer or state event in RafPolimata referencing merge commit 0f0070ccf5278a7d28a732237cff260506d24322",
+    "Run deterministic tests at the exact producer merge commit",
+    "Execute build and TUI gate on physical Termux and append receipts",
+    "Record observable CI steps before any PASS promotion"
+  ]
+}
