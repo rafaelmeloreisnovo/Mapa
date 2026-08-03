@@ -1,0 +1,78 @@
+{
+  "schema": "rafaelia.catalog-cycle/v1",
+  "cycle_id": "CAT-20260803T2001Z",
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "1cdcab6e79450f90bd0751c9a01a6fdaf24ee0d3"
+  },
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT"
+  },
+  "drive_delta": {
+    "cutoff": "2026-08-03T19:01:00Z",
+    "result": "EVIDENCIADO_LIMITADO_NO_NEW_DRIVE_DELTA",
+    "export_sha256": null
+  },
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "base": "da8aa30e97f84f165da27f658e679247d456df63",
+      "head": "0de5bb7666a14729eb2960fc84abd44f7151e6a3",
+      "ahead_by": 17,
+      "scope": [
+        "RAFYML restricted compiler",
+        "freestanding C runtime",
+        "generated example and custody hashes",
+        "tests and CI validator",
+        "remote failure receipt",
+        "B7 native integration"
+      ],
+      "artifacts": [
+        {"path":"docs/RAFYML_FREESTANDING_V1.md","git_blob_sha":"0226155c5ee6bff154653f9106d39336256048a1"},
+        {"path":"examples/rafyml/generated/config.receipt.json","git_blob_sha":"d824cf4d54f0a7ed1a442ded6c0c6e8df34a49b8"},
+        {"path":"auditoria/RAFYML_FREESTANDING_REMOTE_RECEIPT_20260803.json","git_blob_sha":"3e9e986e6807b8dd80d1a57588b7e89ec6a5b569"}
+      ],
+      "hashes": {
+        "input_sha256":"9b7224237421fc80d1f2df16c6941c34c0e7266efb88b07f0d9e5b6c54b7d07f",
+        "canonical_sha256":"241473eaeb9802e636888a4e10aa3eb1629f64fc67cbcaf3669acbe8fad912c6",
+        "header_sha256":"f649d6ca79ca43d2015fc2c1aca63ad5316ccb649724c7a1a4b948da417273cc",
+        "source_sha256":"b1edac6067bc17c0653079972082815a9bf3bb454a147120c068b01bbc906fcf"
+      },
+      "dependencies": ["Python 3 standard library on host", "C11 compiler for compile gate"],
+      "claims": [
+        {"class":"PROVADO","text":"Compiler, runtime, workflow, tests, generated C and receipts exist in the producer repository."},
+        {"class":"EVIDENCIADO","text":"The generated receipt records deterministic custody hashes and state GENERATED_REQUIRES_COMPILE_GATE."},
+        {"class":"HIPÓTESE","text":"The restricted profile can provide a stable configuration bridge to Termux and Vectras after architecture-specific reproduction."},
+        {"class":"REFUTADO","text":"The remote workflow failure proves a RAFYML code failure."},
+        {"class":"TOKEN_VAZIO","text":"Remote step execution, physical ARM32/ARM64 runtime, Android receipt and cross-repository consumption."}
+      ],
+      "remote_gate": {
+        "pull_request": 328,
+        "head_sha": "68095be6f42f5dde8f2e39ef2f1e30c86d432d55",
+        "run_id": 30831790832,
+        "job_id": 91747274308,
+        "conclusion": "failure",
+        "steps_observed": 0,
+        "state": "BLOCKED_EXTERNAL_NO_STEPS"
+      }
+    }
+  ],
+  "unchanged_verified": [
+    {"repository":"rafaelmeloreisnovo/Mapa","commit":"1cdcab6e79450f90bd0751c9a01a6fdaf24ee0d3"},
+    {"repository":"rafaelmeloreisnovo/Vectras-VM-Android","commit":"dca59d023fe432560a833e41af887a53d2f19fb7"},
+    {"repository":"rafaelmeloreisnovo/termux-app-rafacodephi","commit":"0e4330273375344042eba8ff17de47c5bc8af573"}
+  ],
+  "claim_allowed": false,
+  "actions_not_executed": [
+    "No Google Drive write",
+    "No workflow rerun",
+    "No compiler or runtime execution in this cycle",
+    "No Android or Termux physical test",
+    "No destructive deduplication"
+  ],
+  "f_ok": "Incremental RafGitTools delta indexed with immutable commits, blob hashes, generated SHA-256 values and remote-gate boundary.",
+  "f_gap": "Remote jobs exposed zero steps; ARM/Android execution and consumer integration remain unverified.",
+  "f_next": "Freeze producer head, run validator and compile gate, execute generated object on host then ARM32/ARM64, preserve logs and hashes, and emit a successor receipt."
+}
