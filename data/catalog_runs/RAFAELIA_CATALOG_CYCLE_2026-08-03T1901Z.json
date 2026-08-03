@@ -1,0 +1,167 @@
+{
+  "schema": "RAFAELIA_CATALOG_CYCLE_V1",
+  "cycle_id": "CAT-20260803T1901Z",
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "5138828775058f2bf1650cf6f4b3e640e3f158a9",
+    "cutoff_utc": "2026-08-03T18:01:00Z"
+  },
+  "priority_reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "role": "METHODOLOGICAL_AUTHORITY"
+  },
+  "drive_delta": [
+    {
+      "title": "RAFAELIA_B7_ORCHESTRATION_RECEIPT_2026-08-03",
+      "drive_id": "1vm0Uo0Rj_1Do_614Bznn89VRppMpJAKDzS1sXeASLZY",
+      "created_at": "2026-08-03T18:02:48.480Z",
+      "updated_at": "2026-08-03T18:03:06.735Z",
+      "classification": "EVIDENCIADO",
+      "declared_state": "IMPLEMENTED / LOCAL_HOST_PASS / CI_INFRA_FAIL_PRESTEP / DEVICE_TOKEN_VAZIO",
+      "export_sha256": null,
+      "limitations": [
+        "Drive document is a receipt pointer, not independent runtime reproduction",
+        "export bytes and SHA-256 were unavailable"
+      ]
+    }
+  ],
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "pr": 1088,
+      "base_sha": "b6ef75ced9325c4fd3332677ed7cf3b3f42d5c1f",
+      "head_sha": "e933dd30bf8f2255f8a26dfbbe3adffaeb7e2dc7",
+      "merge_commit": "dca59d023fe432560a833e41af887a53d2f19fb7",
+      "state": "MERGED",
+      "classification": "PROVADO",
+      "scope": [
+        "caller-provided no-heap region",
+        "three 64-byte aligned banks",
+        "16-lane CRC32C and scratch cache",
+        "deterministic matrix16 transform",
+        "NEON and scalar paths",
+        "optional probed Vulkan/OpenCL callbacks",
+        "append-only stage receipts",
+        "standalone self-test"
+      ],
+      "declared_local_vector": "PASS bytes=8192 crc32c=caf1abc5 caps=00000009 receipts=4",
+      "runtime_state": "TOKEN_VAZIO_DEVICE_AND_ACCELERATORS"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "pr": 326,
+      "base_sha": "0d91b1191660fd4c4e3ac51baf083a47525054ae",
+      "head_sha": "48bebb59744a6b5ed745d3bd4a43867ceb9f4fdf",
+      "merge_commit": "0e4330273375344042eba8ff17de47c5bc8af573",
+      "state": "MERGED",
+      "classification": "PROVADO",
+      "paths": [
+        "rmr/Rrr/raf_b7_orchestrator.c",
+        "rmr/Rrr/raf_b7_orchestrator.h",
+        "rmr/Rrr/Android_nomalloc.mk",
+        "scripts/run_raf_b7_selftest.sh",
+        "tools/raf_b7_orchestrator_selftest.c"
+      ],
+      "integration": "librafaelia_core nomalloc; historical orchestrator preserved",
+      "declared_reference_crc32c": "caf1abc5",
+      "runtime_state": "TOKEN_VAZIO_NDK_TERMUX_NEON_GPU"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "base_sha": "5138828775058f2bf1650cf6f4b3e640e3f158a9",
+      "observed_head": "1ff6b9877c73214045029ca72f940ca3e878a365",
+      "ahead_by": 23,
+      "classification": "PROVADO",
+      "new_surfaces": [
+        ".github/workflows/integral-gate-v1.yml",
+        "data/control-plane/integral-gate.v1.json",
+        "data/manifests/integral-gate-delta.20260803T1238-0300.json",
+        "data/receipts/gates/integral-gate-execution.20260803T1238-0300.json",
+        "data/receipts/gates/integral-gate-execution.20260803T1238-0300.json.sha256",
+        "tools/verify_integral_gate.py",
+        "tests/test_integral_gate.py",
+        "docs/methodology/RAFAELIA_SESSION_BOOT_V1.md",
+        "data/session_boot/session_boot.events.jsonl",
+        "data/memory/fgap_fnext_autocoherence.20260803T1500-0300.jsonl"
+      ],
+      "governance_observation": {
+        "classification": "EVIDENCIADO",
+        "statement": "PR 143 was merged despite descriptive automatic_merge=false and human-review constraints",
+        "causal_actor_or_rule": "TOKEN_VAZIO",
+        "next_receipt": "promotion_control_negative_test.receipt.json"
+      }
+    }
+  ],
+  "federated_relationships": [
+    {
+      "from": "Vectras-VM-Android@dca59d023fe432560a833e41af887a53d2f19fb7",
+      "to": "termux-app-rafacodephi@0e4330273375344042eba8ff17de47c5bc8af573",
+      "relation": "PARALLEL_INTEGRATION_OF_SHARED_B7_CONTRACT",
+      "classification": "EVIDENCIADO",
+      "boundary": "source similarity and matching host vector do not prove binary identity or device equivalence"
+    },
+    {
+      "from": "Drive:1vm0Uo0Rj_1Do_614Bznn89VRppMpJAKDzS1sXeASLZY",
+      "to": "GitHub B7 merges",
+      "relation": "DOCUMENTS",
+      "classification": "EVIDENCIADO"
+    }
+  ],
+  "epistemic_classes": {
+    "PROVADO": [
+      "Drive object exists with observed timestamps",
+      "Vectras PR 1088 is merged at dca59d023fe432560a833e41af887a53d2f19fb7",
+      "Termux PR 326 is merged at 0e4330273375344042eba8ff17de47c5bc8af573",
+      "Mapa advanced 23 commits from the checkpoint and added integral-gate/session-boot surfaces"
+    ],
+    "EVIDENCIADO": [
+      "B7 host/scalar PASS vector is declared consistently",
+      "B7 is integrated as parallel producer-specific surfaces",
+      "Mapa records a promotion-control governance divergence"
+    ],
+    "HIPÓTESE": [
+      "shared B7 contract may support cross-surface equivalence after deterministic comparison"
+    ],
+    "MODELO_ANALÓGICO": [
+      "triple-buffer INGEST-COMPUTE-EGRESS is an operational pipeline model, not proof of universal performance"
+    ],
+    "PARÁBOLA": [],
+    "REFUTADO": [
+      "a host PASS proves Android, ARM NEON, hardware CRC or GPU execution",
+      "matching source structure alone proves byte-for-byte equivalence",
+      "descriptive merge policy alone enforces promotion blocking"
+    ],
+    "TOKEN_VAZIO": [
+      "Drive export SHA-256",
+      "Android physical run",
+      "Termux physical run",
+      "ARMv7 and ARM64 equivalence receipts",
+      "hardware CRC receipt",
+      "Vulkan/OpenCL receipt",
+      "CI first-step logs",
+      "binary and receipt comparison across both B7 surfaces",
+      "branch ruleset and promotion negative test"
+    ]
+  },
+  "categories_without_distinct_delta": [
+    "Core/FCEA",
+    "scientific datasets",
+    "new scientific papers",
+    "APK or release artifacts",
+    "independent physical receipts"
+  ],
+  "actions_not_executed": [
+    "no Google Drive write",
+    "no workflow rerun",
+    "no Android or Termux execution",
+    "no destructive deduplication",
+    "no claim promotion",
+    "no producer repository modification"
+  ],
+  "F_ok": "B7 Drive receipt, two merged executable surfaces, and Mapa governance/control-plane delta were reconciled with immutable identifiers.",
+  "F_gap": "Device, accelerator, CI-step, Drive-export and cross-surface equivalence evidence remain absent.",
+  "F_next": "Freeze both merge commits, run the same deterministic vector on host ARMv7 ARM64 and Android, compare outputs and receipt streams, then execute the promotion-control negative test and emit append-only receipts."
+}
