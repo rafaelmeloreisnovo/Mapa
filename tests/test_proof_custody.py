@@ -38,16 +38,59 @@ class ProofCustodyTests(unittest.TestCase):
         result = validate_receipt(receipt, self.policy)
         self.assertFalse(result["receipt_valid"])
 
-    def test_all_gates_produce_token_valid(self) -> None:
+    def test_pass_boolean_without_receipt_fails_closed(self) -> None:
         receipt = copy.deepcopy(self.receipt)
         receipt["verification"]["build"]["pass"] = True
-        receipt["verification"]["independent_checker"]["pass"] = True
+        result = validate_receipt(receipt, self.policy)
+        self.assertFalse(result["receipt_valid"])
+        self.assertFalse(result["predicate"]["build_pass"])
+
+    def test_review_without_exact_sha_fails_closed(self) -> None:
+        receipt = copy.deepcopy(self.receipt)
+        receipt["governance"]["reviews_observed"] = 1
+        receipt["governance"]["reviewer_identity"] = "independent-reviewer"
+        receipt["governance"]["reviewed_commit_sha"] = "0" * 40
+        receipt["governance"]["approval_receipt"] = "review://approval/1"
         receipt["governance"]["independent_review_approved"] = True
-        receipt["governance"]["merged_on_protected_edge"] = True
-        receipt["governance"]["required_checks_pass"] = True
-        receipt["decision"]["receipt_digest_present"] = True
-        receipt["decision"]["blocking_token_vazio"] = []
-        receipt["decision"]["token_valid"] = True
+        result = validate_receipt(receipt, self.policy)
+        self.assertFalse(result["receipt_valid"])
+        self.assertFalse(result["predicate"]["independent_review_approved"])
+
+    def test_all_evidence_bound_gates_produce_token_valid(self) -> None:
+        receipt = copy.deepcopy(self.receipt)
+
+        receipt["verification"]["build"].update({
+            "status": "PASS",
+            "executed_in_this_audit": True,
+            "pass": True,
+            "receipt": "receipt://build/sha256-example",
+        })
+        receipt["verification"]["independent_checker"].update({
+            "status": "PASS",
+            "executed_in_this_audit": True,
+            "pass": True,
+            "receipt": "receipt://checker/sha256-example",
+        })
+
+        receipt["governance"].update({
+            "reviews_observed": 1,
+            "combined_status_checks": ["proof-custody-tests"],
+            "reviewer_identity": "independent-reviewer",
+            "reviewed_commit_sha": receipt["source"]["commit_sha"],
+            "approval_receipt": "review://approval/sha256-example",
+            "merge_commit_sha": "1" * 40,
+            "independent_review_approved": True,
+            "merged_on_protected_edge": True,
+            "required_checks_pass": True,
+        })
+
+        receipt["decision"].update({
+            "receipt_digest_present": True,
+            "receipt_payload_sha256": "2" * 64,
+            "blocking_token_vazio": [],
+            "token_valid": True,
+        })
+
         result = validate_receipt(receipt, self.policy)
         self.assertTrue(result["receipt_valid"], result["errors"])
         self.assertTrue(result["token_valid"])
