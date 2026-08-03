@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "cycle_id": "CAT-20260803T0759-0300",
+  "generated_at": "2026-08-03T10:59:42Z",
+  "mode": ["incremental", "append-only", "non-destructive", "fail-closed"],
+  "claim_allowed": false,
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "61b96ab8820606fd47eed51bfc6167839de5c2b8",
+    "committed_at": "2026-08-03T08:19:04Z"
+  },
+  "drive_delta": {
+    "query": "modifiedTime > 2026-08-03T08:19:04Z and trashed=false",
+    "results": 0,
+    "state": "EVIDENCIADO_LIMITADO_NO_NEW_DRIVE_DELTA"
+  },
+  "github_delta": [
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "commit": "dbcd0894a1584e9510dabeb8f027e2238b200efa",
+      "pr": 325,
+      "changed_files": [
+        "app/src/main/kotlin/com/rafgittools/di/AppModule.kt",
+        "app/src/main/kotlin/com/rafgittools/kernel/ToolRouter.kt",
+        "app/src/main/kotlin/com/rafgittools/security/GpgKeyManager.kt",
+        "app/src/test/kotlin/com/rafgittools/ui/screens/auth/AuthViewModelTest.kt"
+      ],
+      "observed_changes": [
+        "GovernanceGate dependency injection binding",
+        "git.diff routing correction",
+        "detached GPG signature verification",
+        "obsolete test dependency cleanup"
+      ],
+      "hashes": {
+        "commit_sha": "dbcd0894a1584e9510dabeb8f027e2238b200efa",
+        "GpgKeyManager_blob_sha1": "46f4fe763a3698c211d1f6a9fba06135d1df821e"
+      },
+      "classification": "EVIDENCIADO",
+      "limitations": [
+        "no combined status checks were returned",
+        "GPG verification was not executed in this cycle",
+        "runtime keyring and gpg binary remain environment-dependent"
+      ]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "commit": "12028652460fd8b76490c4d8150adddf2586bdc6",
+      "pr": 324,
+      "changed_files": ["README.md"],
+      "observed_changes": [
+        "canonical state header added",
+        "README build and documentation sections substantially reduced or rewritten"
+      ],
+      "classification": "EVIDENCIADO",
+      "refuted": "commit title describes only a header addition, but the diff has broader editorial scope",
+      "limitations": ["no functional code changed", "removed README explanations were not independently checked against canonical docs"]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/papers",
+      "commit": "0c2f62f2dd835e700c62848674dc19681dc035dd",
+      "pr": 40,
+      "changed_files": ["README.md"],
+      "observed_changes": ["state REFERENCE", "logical owner research-governance", "canonical repository pointer"],
+      "classification": "PROVADO"
+    },
+    {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "commit": "9c46fd6757d403d65a582b3d078a091b4a0f1eb9",
+      "pr": 640,
+      "changed_files": ["README.md"],
+      "observed_changes": [
+        "canonical state header added",
+        "unrelated textual changes introduced malformed words including elegaância, sãoaturações, helioférico and rastreabeis"
+      ],
+      "classification": "EVIDENCIADO",
+      "refuted": "the merge is not a header-only change",
+      "next_step": "restore the unintended wording changes in a corrective append-only commit without removing the canonical header"
+    }
+  ],
+  "category_summary": {
+    "repositories": 4,
+    "core_fcea": "TOKEN_VAZIO_NO_NEW_DISTINCT_OBJECT",
+    "documents": 3,
+    "datasets": "TOKEN_VAZIO_NO_NEW_DELTA",
+    "papers": 1,
+    "workflows": "TOKEN_VAZIO_NO_NEW_DELTA",
+    "code": 3,
+    "artifacts": "TOKEN_VAZIO_NO_NEW_BUILD_ARTIFACT",
+    "receipts": 1,
+    "dependencies": ["GovernanceGate DI", "system gpg/gpg2", "local GPG keyring"],
+    "claims_promoted": 0
+  },
+  "epistemic": {
+    "PROVADO": ["four merge commits exist", "papers README received the declared canonical header"],
+    "EVIDENCIADO": ["RafGitTools source implements the observed changes", "Termux and RLL README diffs exceed their merge-title scope"],
+    "HIPÓTESE": ["GPG verification may close a prior authenticity gap after device and adversarial tests"],
+    "MODELO_ANALÓGICO": [],
+    "PARÁBOLA": [],
+    "REFUTADO": ["Termux and RLL merges are header-only changes", "merged source alone proves runtime GPG verification"],
+    "TOKEN_VAZIO": ["remote CI status", "device execution", "GPG good/bad/missing-key test receipts", "semantic review of removed Termux README material"]
+  },
+  "F_ok": [
+    "incremental checkpoint preserved",
+    "four GitHub deltas cataloged",
+    "RafGitTools security and governance changes typed",
+    "README scope divergences recorded without silent approval",
+    "no Drive delta duplicated"
+  ],
+  "F_gap": [
+    "no CI status returned for RafGitTools head",
+    "GPG verification not physically tested",
+    "RLL README contains apparent textual regressions",
+    "Termux README reductions require canonical-document cross-check"
+  ],
+  "F_next": [
+    "run GPG verification tests for valid, invalid and unknown-key signatures",
+    "correct RLL README malformed words while retaining the canonical header",
+    "compare removed Termux README passages with docs/ canonical destinations",
+    "emit successor receipts tied to exact commits and environments"
+  ],
+  "not_executed": [
+    "no Google Drive write",
+    "no workflow rerun",
+    "no Android or Termux execution",
+    "no claim promotion",
+    "no destructive edit or deduplication"
+  ]
+}
