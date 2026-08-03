@@ -1,0 +1,79 @@
+{
+  "schema": "RAFAELIA_CROSS_SOURCE_CUSTODY_EVENT/v1",
+  "timestamp": "2026-08-03T03:55:00-03:00",
+  "event_type": "RELATION_OPTIMIZATION_INDEXED",
+  "artifact_id": "rafaelia:omega7:audit:2026-08-03T0156-0300",
+  "previous_event_id": "sha256:c8dd183e38ea4d487faaac4ab300fa66e52d0dd4e5190df8dace0f47cfb3012d",
+  "derived_from": [
+    "sha256:c8dd183e38ea4d487faaac4ab300fa66e52d0dd4e5190df8dace0f47cfb3012d",
+    "sha256:a31385c62315a006191bf91089f434b89654e7bfa08f02baefe19f28cf4ed67e"
+  ],
+  "supersedes_snapshot": {
+    "sha256": "28887db8fc693b73798323b92966ff80e11de7277f717c0321c6b6985eba30cb",
+    "drive_file_id": "1Xz9CPPqvCb7y4G93adwNGGAqeqmaa2ha",
+    "reason": "stale PR state; preserved as historical snapshot"
+  },
+  "observations": {
+    "pr_140": {
+      "state": "MERGED",
+      "merged_at": "2026-08-03T05:20:05Z",
+      "merge_commit_sha": "24b25596402a9d6a6494d98ecc4a8f6762e9e18e"
+    },
+    "pr_141": {
+      "state": "OPEN_DRAFT",
+      "url": "https://github.com/rafaelmeloreisnovo/Mapa/pull/141",
+      "head_observed_before_event_append": "de0645bd5e2e98111e2d99c627e87f572e4df9bd"
+    },
+    "claim_allowed": false,
+    "automatic_merge": false,
+    "privacy_class": "PRIVATE_RESTRICTED"
+  },
+  "drive": {
+    "custody_folder_id": "1K3CQl7DYA_pbCsgigSGvvUcs39D9pCBv",
+    "corrected_manifest": {
+      "id": "1tiBdIkOchCebX3AvUZo8-ERzm82dPypP",
+      "sha256": "a31385c62315a006191bf91089f434b89654e7bfa08f02baefe19f28cf4ed67e"
+    },
+    "optimization_map": {
+      "id": "17gQI1UElInasUi3_O8tyMjErO-1hecQt",
+      "sha256": "6606b064813c312abd27d2012f9fb4f3ca9557809b6ab19ee5458453d2ce566b"
+    },
+    "successor_event_file_id": "1GVLcN69rH4uAUv1xt8YY3pRqLWb0yoBq"
+  },
+  "matrix": {
+    "spreadsheet_id": "1FMuZ-WVvuI7qbQJ8E5LjfHOKShI83VMsJfGB2zyWHgE",
+    "anchors": [
+      {"sheet": "PRODUCT_GRAPH", "row": 10, "key": "PDT-09"},
+      {"sheet": "PROCEDURE_LEDGER", "row": 13, "key": "PROC-OMEGA7-001"},
+      {"sheet": "PROCEDURE_LEDGER", "row": 14, "key": "PROC-OMEGA7-002"},
+      {"sheet": "ORCHESTRATION_GATES", "row": 14, "key": "O12"},
+      {"sheet": "R3_LOG", "row": 24, "key": "OMEGA7-RELATION-OPT-002"}
+    ]
+  },
+  "identity_contract": {
+    "physical_key": "source_locator + source_revision + content_sha256",
+    "logical_key": "artifact_id + semantic_role + authority",
+    "event_key": "event_id + previous_event_id + timestamp",
+    "false_identity_policy": "reject title-only, filename-only, hashtag-only and semantic-similarity-only identity"
+  },
+  "f_ok": [
+    "PR #140 provider state corrected",
+    "PR #141 opened draft from post-merge main",
+    "corrected manifest and map stored in Drive",
+    "PDT-09, procedures, O12 and R3 indexed",
+    "stale snapshot preserved and superseded"
+  ],
+  "f_gap": [
+    "PR #140 merge-gate evidence TOKEN_VAZIO",
+    "O12 schema and negative-fixture receipt absent",
+    "credential rotation absent",
+    "truncated backup replacement absent",
+    "universal trace envelope, CI and Termux physical receipts absent"
+  ],
+  "f_next": [
+    "append canonical Docs memory",
+    "implement dependency-free schema validator and false-identity fixtures",
+    "keep PR #141 draft until O1/O6/O12 review"
+  ],
+  "event_id": "sha256:006f074e008b69b6233f7a87af489710acf09791176943b665b9446d6867f3a0"
+}
