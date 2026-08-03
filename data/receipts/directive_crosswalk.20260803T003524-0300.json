@@ -1,0 +1,56 @@
+{
+  "schema_version": "rafaelia.directive-crosswalk-local-validation/v1",
+  "observed_at": "2026-08-03T00:35:24-03:00",
+  "source_request": {
+    "sha256": "506c65f9c79e64f101a06b29d40c5295001074faad0b677512c468c6f42a4244",
+    "byte_length": 126
+  },
+  "upstream_control": {
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "draft_pr": 322,
+    "head_commit": "223b26a691b67c864b230abeaceeaf7d84e19c2f",
+    "crosswalk_blob": "f8bc5c96b7800efcf414eeb4dddb9aae8535776c",
+    "crosswalk_sha256": "937b8bf39f2e349774eaa31d92d2f1b0fe1ecd64ac8a089724512f74b7669b1b"
+  },
+  "validation": {
+    "environment": "ChatGPT Work sandbox; Python standard library",
+    "unit_tests": {
+      "directive_events": "9/9 PASS",
+      "cross_source_records": "10/10 PASS",
+      "cross_source_registry": "9/9 PASS",
+      "total": "28/28 PASS"
+    },
+    "directive_report": {
+      "status": "PASS",
+      "event_count": 1,
+      "file_sha256": "e8c75b59a8328ba5949b32bd03b128097ac82ec606a73a6b6e26889685d9a933"
+    },
+    "cross_source_registry_report": {
+      "status": "PASS",
+      "record_count": 12,
+      "provider_counts": {
+        "github": 3,
+        "google_drive": 8,
+        "session": 1
+      },
+      "token_vazio_count": 1,
+      "defect_count": 0
+    },
+    "yaml_parse": "PASS",
+    "jsonl_parse": "PASS"
+  },
+  "file_sha256": {
+    "schemas/directive-event.schema.json": "d2e810c9d5b830eb7ce53026b018407894497c328b931650570ff88cf75ba080",
+    "data/directives/directive_events.20260803.jsonl": "e8c75b59a8328ba5949b32bd03b128097ac82ec606a73a6b6e26889685d9a933",
+    "scripts/validate_directive_events.py": "36393160ba71f6acd7c8c23af6a09329698db6226790f6d71431c2b45c3d307f",
+    "indices/CROSS_SOURCE_REGISTRY.jsonl": "5d231192b31736d32b05df74c38ce6aee1a38f3874b6e7def53e72ff853e9c5a",
+    "indices/DIRECTIVE_EVENTS_INDEX_V1.md": "9d91dd0c2951c847d7e3c9544bf4f0446a3cca00497a20c378927149ef418147"
+  },
+  "remote_ci": "TOKEN_VAZIO_NOT_RUN",
+  "drive_revision": "TOKEN_VAZIO_UNTIL_FINAL_APPEND",
+  "retroactive": false,
+  "automatic_merge": false,
+  "destructive_actions": false,
+  "claim_allowed": false,
+  "boundary": "Local validation and remote blob identity do not establish GitHub Actions execution, independent review, conformity, certification, or scientific truth."
+}

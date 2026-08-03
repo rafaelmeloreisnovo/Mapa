@@ -256,3 +256,19 @@ O registro mantém como TOKEN_VAZIO as execuções e validações pendentes de T
 - Latente indexado: `LAT-POINCARE-AUDIO-EM-CROSS-20260802` em `data/latents/latents.index.jsonl`.
 - Estado: `PARTIAL / claim_allowed=false`.
 - Limites: embedding computacional \(8×8→H^7→B^7\) não é solução da Conjectura de Poincare; runtime AArch64, reconciliação 64→486 e dataset acústico permanecem `TOKEN_VAZIO`.
+
+## 13. Evento append-only — DIRECTIVE_EVENT e crosswalk v1↔v2 — 2026-08-03
+
+`DIRECTIVE_EVENT` não é um oitavo tipo `LAT-*`. Uma diretiva é uma instrução
+explícita, com escopo, efeito, autorização e tempo de vigência; um latente continua
+sendo conteúdo potencial ainda não consolidado.
+
+- índice: `indices/DIRECTIVE_EVENTS_INDEX_V1.md`;
+- schema: `schemas/directive-event.schema.json`;
+- eventos: `data/directives/directive_events.20260803.jsonl`;
+- cross-source: dois registros append-only em `indices/CROSS_SOURCE_REGISTRY.jsonl`;
+- plano de controle: RafGitTools draft PR #322, head
+  `223b26a691b67c864b230abeaceeaf7d84e19c2f`.
+
+Fronteiras: `retroactive=false`, `automatic_merge=false`,
+`destructive_actions=false`, `claim_allowed=false`.

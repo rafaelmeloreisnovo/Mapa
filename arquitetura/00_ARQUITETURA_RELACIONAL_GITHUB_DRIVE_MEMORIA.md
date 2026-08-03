@@ -557,3 +557,38 @@ Drive preserva o corpus e as provas documentais.
 Mapa relaciona, governa e impede a mistura das tintas.
 A sessão seleciona e executa o próximo passo — sem fingir completude.
 ```
+
+---
+
+## 19. Correção append-only — implementação cross-source observada em 2026-08-03
+
+A seção 16 preserva o estado histórico da primeira arquitetura. Desde então foram
+observados no repositório:
+
+- `schemas/cross-source-record.schema.json`;
+- `indices/CROSS_SOURCE_REGISTRY.jsonl`;
+- validadores de registro, grafo, custódia, comparação e gate;
+- fixtures adversariais e testes;
+- workflow de validação local/CI.
+
+Assim, os campos históricos `schema_executavel` e `testes_cross_source` não devem
+ser lidos como estado atual. O estado corrigido é:
+
+```yaml
+schema_executavel: VERIFIED_LIMITED
+registro_cross_source: VERIFIED_LIMITED
+testes_cross_source: LOCAL_PASS_LIMITED
+sincronizacao_automatica: TOKEN_VAZIO
+inventario_total_drive: TOKEN_VAZIO
+inventario_total_github: TOKEN_VAZIO
+claim_allowed: false
+```
+
+Também passa a existir o nó `directive`. Seu contrato detalhado é
+`schemas/directive-event.schema.json`: diretivas possuem escopo e autorização, mas
+não reescrevem o passado, não autorizam destruição, não fazem merge automático e não
+promovem claims.
+
+O crosswalk operacional complementar está fixado na draft PR RafGitTools #322,
+commit `223b26a691b67c864b230abeaceeaf7d84e19c2f`. Até merge e gates remotos
+observáveis, ele permanece `VERIFIED_LIMITED / claim_allowed=false`.

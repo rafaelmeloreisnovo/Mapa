@@ -39,6 +39,14 @@ INVALID_TOKEN_CLAIM = (
     / "invalid"
     / "token_vazio_claim_allowed_true.json"
 )
+VALID_DIRECTIVE = (
+    ROOT
+    / "tests"
+    / "fixtures"
+    / "cross_source"
+    / "valid"
+    / "session_directive_record.json"
+)
 
 
 def load(path: Path) -> dict:
@@ -51,6 +59,9 @@ class CrossSourceRecordTests(unittest.TestCase):
 
     def test_valid_drive_token_vazio_fixture_passes(self) -> None:
         self.assertEqual(validator.validate_record(load(VALID_DRIVE_TOKEN)), [])
+
+    def test_valid_session_directive_fixture_passes(self) -> None:
+        self.assertEqual(validator.validate_record(load(VALID_DIRECTIVE)), [])
 
     def test_token_vazio_cannot_allow_claim(self) -> None:
         errors = validator.validate_record(load(INVALID_TOKEN_CLAIM))
