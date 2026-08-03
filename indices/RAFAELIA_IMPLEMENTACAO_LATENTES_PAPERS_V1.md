@@ -249,3 +249,10 @@ indices/source-integrations/2026-07-25/
 ```
 
 O registro mantém como TOKEN_VAZIO as execuções e validações pendentes de Tora, BLAKE3/RMR, Atlas, Termux, RLL e RAFBROWSER.
+
+## 12. Evento append-only — Poincare H7/B7, áudio espacial e eletromagnetismo — 2026-08-02
+
+- Documento canônico: `docs/canonical/2026-08-02/POINCARE_AUDIO_ELECTROMAGNETIC_CROSS_AUDIT.md`.
+- Latente indexado: `LAT-POINCARE-AUDIO-EM-CROSS-20260802` em `data/latents/latents.index.jsonl`.
+- Estado: `PARTIAL / claim_allowed=false`.
+- Limites: embedding computacional \(8×8→H^7→B^7\) não é solução da Conjectura de Poincare; runtime AArch64, reconciliação 64→486 e dataset acústico permanecem `TOKEN_VAZIO`.
