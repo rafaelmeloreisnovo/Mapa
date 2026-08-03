@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/authorship-provenance-record.schema.json",
+  "title": "RAFAELIA Authorship and Provenance Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "recorded_at",
+    "artifact",
+    "roles",
+    "origin_chain",
+    "originality_state",
+    "rights_state",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {"const": "rafaelia.authorship-provenance-record/v1"},
+    "record_id": {"type": "string", "minLength": 8},
+    "previous_record_id": {"type": ["string", "null"]},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "locator", "revision", "media_type", "content_digest"],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 3},
+        "locator": {"type": "string", "minLength": 3},
+        "revision": {"type": "string", "minLength": 1},
+        "media_type": {"type": "string", "minLength": 3},
+        "content_digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": {"type": "string", "enum": ["sha256", "sha3-256", "blake3", "git_blob_sha1", "TOKEN_VAZIO"]},
+            "value": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["actor_id", "display_name", "role", "contribution", "accountable", "identity_state"],
+        "properties": {
+          "actor_id": {"type": "string", "minLength": 2},
+          "display_name": {"type": "string", "minLength": 1},
+          "role": {
+            "type": "string",
+            "enum": [
+              "AUTHOR", "COAUTHOR", "SOURCE_AUTHOR", "CONTRIBUTOR", "SOFTWARE_DEVELOPER",
+              "DATA_COLLECTOR", "EDITOR", "TRANSLATOR", "CURATOR", "REVIEWER",
+              "PROJECT_CREATOR", "MAINTAINER", "INSTITUTION", "AI_ASSISTED_TOOL", "UNKNOWN"
+            ]
+          },
+          "contribution": {"type": "string", "minLength": 3},
+          "accountable": {"type": "boolean"},
+          "identity_state": {"type": "string", "enum": ["VERIFIED", "DECLARED", "PSEUDONYMOUS", "TOKEN_VAZIO", "DISPUTED"]},
+          "identifier": {"type": ["string", "null"]},
+          "consent_state": {"type": "string", "enum": ["CONFIRMED", "DECLARED", "NOT_REQUIRED", "TOKEN_VAZIO", "DISPUTED"]}
+        }
+      }
+    },
+    "origin_chain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relation", "source_locator", "source_revision", "source_author_state", "scope_used"],
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "CREATED_BY", "DERIVED_FROM", "CITES", "ADAPTS", "TRANSLATES", "IMPLEMENTS",
+              "REVIEWS", "CURATES", "REPRODUCES", "INSPIRED_BY", "GENERATED_WITH", "SUPERSEDES_WITHOUT_ERASURE"
+            ]
+          },
+          "source_locator": {"type": "string", "minLength": 3},
+          "source_revision": {"type": "string", "minLength": 1},
+          "source_author_state": {"type": "string", "enum": ["IDENTIFIED", "PSEUDONYMOUS", "INSTITUTIONAL", "TOKEN_VAZIO", "DISPUTED"]},
+          "source_author": {"type": ["string", "null"]},
+          "scope_used": {"type": "string", "minLength": 3},
+          "source_digest": {"type": ["string", "null"]},
+          "citation_anchor": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "originality_state": {
+      "type": "string",
+      "enum": [
+        "ORIGINAL_EXPRESSION",
+        "DERIVATIVE_WITH_ATTRIBUTION",
+        "COMPILATION_WITH_SOURCE_MAP",
+        "PUBLIC_DOMAIN_SOURCE_IDENTIFIED",
+        "COMMON_KNOWLEDGE_WITH_DOMAIN_JUSTIFICATION",
+        "TOKEN_VAZIO_ORIGIN",
+        "DISPUTED_AUTHORSHIP",
+        "PLAGIARISM_RISK_BLOCKED"
+      ]
+    },
+    "rights_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["license", "permission_state", "moral_rights_preserved", "attribution_required"],
+      "properties": {
+        "license": {"type": "string", "minLength": 1},
+        "rights_holder": {"type": ["string", "null"]},
+        "permission_state": {"type": "string", "enum": ["CONFIRMED", "NOT_REQUIRED", "TOKEN_VAZIO", "DENIED", "DISPUTED"]},
+        "moral_rights_preserved": {"type": "boolean"},
+        "attribution_required": {"type": "boolean"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authorship_complete", "attribution_complete", "plagiarism_risk", "promotion_allowed", "claim_allowed", "blocking_token_vazio"],
+      "properties": {
+        "authorship_complete": {"type": "boolean"},
+        "attribution_complete": {"type": "boolean"},
+        "plagiarism_risk": {"type": "string", "enum": ["NONE_OBSERVED", "LOW", "MEDIUM", "HIGH", "TOKEN_VAZIO"]},
+        "promotion_allowed": {"type": "boolean"},
+        "claim_allowed": {"type": "boolean"},
+        "blocking_token_vazio": {"type": "array", "items": {"type": "string", "pattern": "^TOKEN_VAZIO"}}
+      }
+    }
+  }
+}
