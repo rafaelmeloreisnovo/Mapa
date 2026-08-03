@@ -1,0 +1,96 @@
+{
+  "schema": "rafaelia.igc-priority-cycle-receipt.v1",
+  "receipt_id": "IGC-PRIORITY-RECEIPT-20260802T2250-0300",
+  "observed_at": "2026-08-02T22:50:00-03:00",
+  "mode": "APPEND_ONLY_NON_DESTRUCTIVE_FAIL_CLOSED",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_commit": "b32c9a16c7947763c992e19b95bdf068edb66bf2",
+  "branch": "governance/igc-priority-fgap-fnext-20260802",
+  "github_artifacts": [
+    {
+      "path": "docs/canonical/2026-08-02/IGC_FGAP_FNEXT_PRIORITY_AND_MAP_V1.md",
+      "commit_sha": "7c86e0b3b22e9fbdfc4de1a65b053fd24bef6c93"
+    },
+    {
+      "path": "data/gaps/igc_priority_fgap.20260802T2250-0300.jsonl",
+      "commit_sha": "52d0db3ab03f3ca775c61a34c4e809d3a41d1012",
+      "record_count": 12
+    },
+    {
+      "path": "data/geometry/geometric_invariants.delta.20260802T2250-0300.jsonl",
+      "commit_sha": "1e626b0f9aaf15add128207ea9b828bc24094c44",
+      "record_count": 4
+    },
+    {
+      "path": "data/questions/igc_urgent_questions.20260802T2250-0300.jsonl",
+      "commit_sha": "64feee45152c943c595736cfaf3dab5856b7182a",
+      "record_count": 15
+    },
+    {
+      "path": "data/memory/longitudinal_igc_priority.20260802T2250-0300.jsonl",
+      "commit_sha": "a4c83f8bf369fccc8734effa5d512af8221299c3",
+      "record_count": 6
+    },
+    {
+      "path": "indices/IGC_FGAP_FNEXT_PRIORITY_AND_MAP_V1.md",
+      "commit_sha": "315f78e8f3c70ddcf399ba95745450d9adecd07c"
+    }
+  ],
+  "google_drive": {
+    "priority_document": {
+      "file_id": "1CHLyTnvkbCFm5m1MeUVVfpKnT1r39Xjh8_YNyNww1AE",
+      "title": "RAFAELIA — IGC F_GAP, F_NEXT, Prioridades e Mapa — V1 — 2026-08-02 22h50 BRT",
+      "state": "CREATED_AND_POPULATED",
+      "export_hash": "TOKEN_VAZIO_DRIVE_EXPORT_HASH"
+    },
+    "igc_editorial_document": {
+      "file_id": "1eGLmUTXAgcm4M9hJNCXoB5OLnc9ZSGMqTXvsFJasags",
+      "state": "APPEND_POINTER_WRITTEN"
+    },
+    "master_document": {
+      "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "state": "LONGITUDINAL_EVENT_APPENDED"
+    },
+    "traceability_matrix": {
+      "file_id": "1FMuZ-WVvuI7qbQJ8E5LjfHOKShI83VMsJfGB2zyWHgE",
+      "sheets_updated": ["RASTREABILIDADE", "R3_LOG"],
+      "rows_appended": 6,
+      "state": "UPDATED_APPEND_ONLY"
+    }
+  },
+  "priority_summary": {
+    "p0_gaps": 7,
+    "p1_gaps": 5,
+    "mandatory_questions": 15,
+    "geometry_delta_records": 4,
+    "longitudinal_events": 6
+  },
+  "p0_order": [
+    "IGC-GAP-007_GLOBAL_CLAIM_GATE",
+    "IGC-GAP-002_EXACT_GLUE_MAP",
+    "IGC-GAP-003_CANONICAL_REPRESENTATION",
+    "IGC-GAP-004_POINCARE_PROVENANCE",
+    "IGC-GAP-005_DRIVE_EXPORT_HASH",
+    "IGC-GAP-001_OBSERVABLE_CI",
+    "IGC-GAP-006_TERMUX_ARM_RUNTIME"
+  ],
+  "verification": {
+    "github_files_created": true,
+    "drive_document_created": true,
+    "drive_pointers_appended": true,
+    "spreadsheet_rows_appended": true,
+    "jsonl_schema_validation": "TOKEN_VAZIO_NOT_EXECUTED_THIS_CYCLE",
+    "drive_export_hash": "TOKEN_VAZIO_NOT_EXECUTED",
+    "remote_ci": "TOKEN_VAZIO_NOT_EXECUTED_FOR_THIS_BRANCH",
+    "physical_termux": "TOKEN_VAZIO_NOT_EXECUTED",
+    "independent_reproduction": "TOKEN_VAZIO_NOT_EXECUTED"
+  },
+  "decision": {
+    "state": "IGC_PRIORITY_MAP_MATERIALIZED_PENDING_REVIEW",
+    "claim_allowed": false,
+    "automatic_merge": false,
+    "scientific_promotion": false,
+    "physical_equivalence_promotion": false
+  },
+  "f_next": "claim gate → exact object/glue → Poincare provenance → Drive export/hash → observable CI → Termux ARMv7/ARM64"
+}
