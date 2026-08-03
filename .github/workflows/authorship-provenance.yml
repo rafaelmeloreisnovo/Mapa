@@ -32,13 +32,23 @@ jobs:
       - name: Run authorship tests
         run: python -m unittest tests.test_authorship_provenance -v
 
-      - name: Validate policy, schema and registry
+      - name: Validate primary authorship registry
         run: >-
           python tools/verify_authorship_provenance.py
           --policy data/control-plane/authorship-provenance-policy.v1.json
           --schema schemas/authorship-provenance-record.schema.json
           --registry data/authorship/authorship_registry.delta.20260803.jsonl
-          --report /tmp/authorship-provenance-validation.json
+          --report /tmp/authorship-provenance-primary.json
 
-      - name: Expose validation boundary
-        run: cat /tmp/authorship-provenance-validation.json
+      - name: Validate Drive authorship registry
+        run: >-
+          python tools/verify_authorship_provenance.py
+          --policy data/control-plane/authorship-provenance-policy.v1.json
+          --schema schemas/authorship-provenance-record.schema.json
+          --registry data/authorship/authorship_registry.drive.delta.20260803.jsonl
+          --report /tmp/authorship-provenance-drive.json
+
+      - name: Expose validation boundaries
+        run: |
+          cat /tmp/authorship-provenance-primary.json
+          cat /tmp/authorship-provenance-drive.json
