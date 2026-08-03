@@ -1,0 +1,47 @@
+{
+  "schema": "rafaelia.integral-gate-ci-observation/v1",
+  "receipt_id": "IGCI-20260803T1257-0300",
+  "observed_at": "2026-08-03T12:57:35-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 144,
+  "branch": "governance/integral-gate-v1-20260803T1238-0300",
+  "observed_head_sha": "56bfd037c56b893739abb027cf5f7609bf6476c6",
+  "workflow": {
+    "id": 326341000,
+    "name": "RAFAELIA Integral Gate V1",
+    "run_id": 30829875404,
+    "run_number": 5,
+    "status": "completed",
+    "conclusion": "failure"
+  },
+  "jobs": [
+    {
+      "id": 91740860694,
+      "name": "integral-gate / contract",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps_recovered": 0,
+      "log_recovery": "BLOB_NOT_FOUND"
+    },
+    {
+      "id": 91740872112,
+      "name": "integral-gate / promotion",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps_recovered": 0
+    }
+  ],
+  "classification": {
+    "contract_result": "FAIL_OBSERVED",
+    "contract_cause": "TOKEN_VAZIO_RUNNER_OR_STARTUP",
+    "code_failure_established": false,
+    "promotion_performed": false,
+    "claim_allowed": false,
+    "automatic_merge": false
+  },
+  "corrective_delta": {
+    "commit_sha": "fd03e42eb456cb4b426eb9a226e065ae5056946b",
+    "change": "promotion job now uses always() and explicitly denies promotion when the contract result is not success"
+  },
+  "next_verifiable_step": "Observe the workflow on the corrective head and recover the first available job step or preserve infrastructure cause as TOKEN_VAZIO."
+}
