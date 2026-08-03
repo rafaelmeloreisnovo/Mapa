@@ -28,6 +28,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run IGC priority tests
-        run: python -m unittest tests.geometry.test_igc_priority_delta -v
+        run: python -m unittest discover -s tests/geometry -p 'test_igc_priority_delta.py' -v
       - name: Validate current registries
         run: python tools/validate_igc_priority_delta.py
