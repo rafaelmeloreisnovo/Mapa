@@ -1,0 +1,69 @@
+{
+  "schema": "rafaelia.receipt.v1",
+  "event_id": "OMEGA7-NEXUS-20260802-LOCAL-001",
+  "timestamp": "2026-08-02T20:11:39-03:00",
+  "mode": "APPEND_ONLY_NON_DESTRUCTIVE",
+  "claim_allowed": false,
+  "subject": "Omega7 Relational Amplifier Nexus V1",
+  "inputs": {
+    "canonical_control_plane": "rafaelmeloreisnovo/Mapa",
+    "canonical_editorial_memory": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "external_method_anchors": [
+      "W3C PROV-DM",
+      "NIST SP 800-218 SSDF",
+      "Unicode core specification",
+      "GitHub artifact attestations"
+    ]
+  },
+  "checks": [
+    {
+      "name": "contract-validator",
+      "result": "PASS_LIMITED_SCHEMA_AND_CONTRACT",
+      "detail": "2401 addressable cells; 0 semantic edges materialized; 6 surfaces; 4 protected gaps"
+    },
+    {
+      "name": "unit-tests",
+      "result": "PASS_LIMITED_LOCAL_6_OF_6",
+      "detail": "valid contract plus five fail-closed rejection cases"
+    },
+    {
+      "name": "json-and-python-compile",
+      "result": "PASS_LIMITED_LOCAL",
+      "detail": "both JSON documents parse and Python sources compile"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "schemas/omega7-relational-amplifier.schema.json",
+      "sha256": "478e8aba503c28d47901531579bcc27bcbad9bf78c9afc3c384bcc01a95f7ad7"
+    },
+    {
+      "path": "data/control-plane/omega7-relational-amplifier.v1.json",
+      "sha256": "e091b6914c8f956e3b6ef4d6727eb72b596623b771ed626f48ba162786b446ed"
+    },
+    {
+      "path": "docs/canonical/2026-08-02/OMEGA7_RELATIONAL_AMPLIFIER_NEXUS_V1.md",
+      "sha256": "0ad9ee365b30217ca64a2c1cc9e14fcff9228afd744eef3cd73dcc83cca14b0f"
+    },
+    {
+      "path": "tools/validate_omega7_relational_amplifier.py",
+      "sha256": "fe49ff70635732d2bc925d86d981e2449438c04b7644ace2d1ca8c202d307cce"
+    },
+    {
+      "path": "tests/test_omega7_relational_amplifier.py",
+      "sha256": "8ac3177c2396214df9776dc8752ea31bca68eede8d673af308277ffc15156066"
+    }
+  ],
+  "limits": [
+    "D7 runtime is not executed or promoted.",
+    "No causal relation is promoted.",
+    "No lossless multichannel codec is claimed.",
+    "No remote CI result is inferred from local tests.",
+    "No external Templates connector was available in this runtime."
+  ],
+  "r3": {
+    "f_ok": "typed sparse frame and local fail-closed checks",
+    "f_gap": "physical runtime, remote CI, independent replication, semantic codec and causal evidence",
+    "f_next": "publish the versioned contract to Mapa and append an editorial pointer to the canonical Drive document"
+  }
+}
