@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "cycle_id": "RAFAELIA-TERMUX-ZIP-READ-MINBUILD-20260803T0322-0300",
+  "created_at": "2026-08-03T03:22:00-03:00",
+  "mode": "READ_FIRST_NON_DESTRUCTIVE_APPEND_ONLY",
+  "claim_allowed": false,
+  "source": {
+    "kind": "uploaded_zip",
+    "name": "termux-app-rafacodephi-master (4).zip",
+    "sha256": "c2549ba985b804dcda3a75261f97a28972aa1ededc873883156cb2e0f3cf05b5",
+    "entries_observed": 2461
+  },
+  "reading": {
+    "markdown_text_files_observed": 347,
+    "key_files_read": [
+      "AGENTS.md",
+      "README.md",
+      "RAFAELIA_AUDIT_CURRENT_REPO.md",
+      "RAFAELIA_TERMUX_AGENT_AUDIT.md",
+      "RAFAELIA_MODULE_ORGANIZATION.md",
+      "INDICE_DOCUMENTACAO.md",
+      "COERENCIA_DE_ESTADOS.md",
+      "RAFCODEPHI_BOOTSTRAP_CONTRACT.md",
+      "build.sh",
+      "build_termux.sh",
+      "Makefile",
+      "bootstrap_rafaelia/Makefile",
+      "scripts/verify_bootstrap_contract.sh",
+      "scripts/build_apk_matrix.sh",
+      "settings.gradle",
+      "build.gradle",
+      "gradle.properties"
+    ]
+  },
+  "local_evidence": {
+    "command": "./build_termux.sh",
+    "environment": "Linux x86_64 / clang",
+    "result": "ok=21 fail=0",
+    "state": "PASS_LOCAL_LIMITED",
+    "minimal_binary_sha256": "55cb3e65ca794b81292364fe50215882141a7f0cbd436da7df8ceabfedb5beac"
+  },
+  "github_changes": [
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "path": "scripts/build_minimal_selftest.sh",
+      "commit": "b5d885c04f6c2ad8c927579482d8cb72b170df9e",
+      "role": "minimal_dependency_build"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "path": "docs/MINIMAL_SELFTEST_BUILD.md",
+      "commit": "2c397133331e479ad094c5171c2657fa01930044",
+      "role": "human_ai_documentation"
+    }
+  ],
+  "epistemic": {
+    "PROVADO": [
+      "ZIP opened and inventoried",
+      "minimal script and documentation committed",
+      "local x86_64 self-test returned zero failures"
+    ],
+    "EVIDENCIADO": [
+      "bootstrap_rafaelia is a coherent low-dependency compilation nucleus",
+      "repository contains extensive Android, bootstrap, RMR, documentation and CI surfaces"
+    ],
+    "HIPOTESE": [
+      "the minimal path can reduce onboarding and diagnostic friction for engineering teams"
+    ],
+    "MODELO_ANALOGICO": [],
+    "PARABOLA": [],
+    "REFUTADO": [
+      "a local host self-test proves APK, apt/dpkg backend, Android runtime or ARM execution"
+    ],
+    "TOKEN_VAZIO": [
+      "ARM32 physical execution",
+      "ARM64 physical execution",
+      "APK build",
+      "APK install and launch",
+      "real pkg/apt/dpkg backend",
+      "remote CI for the new script",
+      "independent replication",
+      "Google Drive write mirror"
+    ]
+  },
+  "f_ok": "Memory, Markdown, code and build routes were read; a minimal shell build was executed and committed with explicit limits.",
+  "f_gap": "The full 347-document corpus and all source modules were not exhaustively reviewed; physical ARM, APK and package-manager functionality remain unproved.",
+  "f_next": "Run the minimal script on Termux ARM32 and ARM64, preserve receipts, then audit bootstrap payload functionality and only afterward attempt the full APK matrix."
+}
