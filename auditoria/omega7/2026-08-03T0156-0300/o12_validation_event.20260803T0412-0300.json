@@ -1,0 +1,68 @@
+{
+  "schema": "RAFAELIA_CROSS_SOURCE_CUSTODY_EVENT/v1",
+  "timestamp": "2026-08-03T04:12:00-03:00",
+  "event_type": "O12_LOCAL_VALIDATION_EXECUTED",
+  "artifact_id": "rafaelia:omega7:audit:2026-08-03T0156-0300",
+  "previous_event_id": "sha256:006f074e008b69b6233f7a87af489710acf09791176943b665b9446d6867f3a0",
+  "derived_from": [
+    "sha256:006f074e008b69b6233f7a87af489710acf09791176943b665b9446d6867f3a0",
+    "sha256:a31385c62315a006191bf91089f434b89654e7bfa08f02baefe19f28cf4ed67e"
+  ],
+  "validation": {
+    "gate": "O12",
+    "decision": "PASS_LIMITED_LOCAL",
+    "total_errors": 0,
+    "fixtures_passed": 5,
+    "fixtures_total": 5,
+    "validator_mode": "DEPENDENCY_FREE_STANDARD_LIBRARY",
+    "scientific_claim_promotion": false
+  },
+  "github": {
+    "pull_request": 141,
+    "state": "OPEN_DRAFT",
+    "head_before_event_append": "14280050a39e99660b7c863947abc1712ff5fa41",
+    "files": {
+      "schema": "schemas/rafaelia-relation-optimization-manifest.v1.schema.json",
+      "validator": "tools/validate_omega7_relation_manifest.py",
+      "fixtures": "tests/fixtures/omega7_relation_identity_cases.v1.json",
+      "receipt": "receipts/omega7/omega7_o12_validation_receipt.20260803T0405-0300.json"
+    }
+  },
+  "drive": {
+    "custody_folder_id": "1K3CQl7DYA_pbCsgigSGvvUcs39D9pCBv",
+    "schema": {
+      "id": "1d7Ig6HPNCBxrxH9gzRbjCoqlwqjl2psg",
+      "sha256": "f62b93f54fe3bac09c8141ee607c53665845c1d43ce12855a024350ed07803d3"
+    },
+    "validator": {
+      "id": "16RSafb4sSNIb5-ikS1r093nwcnkhcY3r",
+      "sha256": "c3c4487c445d7e215a1cadb2a7566bbbd8d213f31428db49a08d1caa79fc963b"
+    },
+    "fixtures": {
+      "id": "1YAQxiXQOlDFqBWvkqGf67vUGeAqBi_M5",
+      "sha256": "04ce6b0151ea39371075c1e13135192b06f37b3670381dacd6c41d82e6248c71"
+    },
+    "receipt": {
+      "id": "1q9n7-Rf3h-FiZQWriQJabJSbDc6u1cB5",
+      "sha256": "84d7adbbf8dee4b3393dd6febb36e1346b083b499dfb20bdebab62563c16af3a"
+    }
+  },
+  "f_ok": [
+    "schema materialized",
+    "dependency-free validator executed",
+    "five adversarial identity fixtures passed",
+    "receipt preserved in GitHub and Drive"
+  ],
+  "f_gap": [
+    "provider-state attestation remains external",
+    "credential rotation evidence absent",
+    "truncated backup replacement absent",
+    "CI and physical Termux receipts absent"
+  ],
+  "f_next": [
+    "update O12 and procedure ledger",
+    "append validation memory",
+    "keep PR #141 draft until O6 and external receipts"
+  ],
+  "event_id": "sha256:c1916b4116a28651ceeb401e8aa123ae7b1edd4cb9e3a127f846a6220dec31ac"
+}

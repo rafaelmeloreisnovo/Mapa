@@ -1,0 +1,74 @@
+{
+  "schema": "RAFAELIA_IDENTITY_FIXTURES/v1",
+  "cases": [
+    {
+      "id": "CASE-SAME-HASH-DIFFERENT-LOCATOR",
+      "title": "same bytes across Drive and GitHub pointers",
+      "a": {
+        "source_locator": "drive:file:A",
+        "source_revision": "r1",
+        "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "title": "Report"
+      },
+      "b": {
+        "source_locator": "github:blob:B",
+        "source_revision": "r2",
+        "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "title": "Report copy"
+      },
+      "expected": "ALIAS_ALLOWED"
+    },
+    {
+      "id": "CASE-SAME-TITLE-DIFFERENT-HASH",
+      "title": "same title cannot collapse distinct bytes",
+      "a": {
+        "source_locator": "drive:file:C",
+        "source_revision": "r1",
+        "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "title": "README.md"
+      },
+      "b": {
+        "source_locator": "github:blob:D",
+        "source_revision": "r1",
+        "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "title": "README.md"
+      },
+      "expected": "SEPARATE_OBJECTS"
+    },
+    {
+      "id": "CASE-HASHTAG-ONLY",
+      "title": "hashtags are navigation, not identity",
+      "a": {
+        "hashtags": [
+          "#OMEGA7"
+        ],
+        "title": "Object A"
+      },
+      "b": {
+        "hashtags": [
+          "#OMEGA7"
+        ],
+        "title": "Object B"
+      },
+      "expected": "REJECT_IDENTITY"
+    },
+    {
+      "id": "CASE-SEMANTIC-SIMILARITY",
+      "title": "semantic similarity only creates relation",
+      "a": {
+        "semantic_signature": "custody audit relation map"
+      },
+      "b": {
+        "semantic_signature": "audit custody relational mapping"
+      },
+      "expected": "RELATION_ONLY"
+    },
+    {
+      "id": "CASE-STALE-PROVIDER-STATE",
+      "title": "provider state overrides stale narrative without deleting history",
+      "declared_state": "OPEN_DRAFT",
+      "provider_state": "MERGED",
+      "expected": "STALE_STATE_EVENT_REQUIRED"
+    }
+  ]
+}

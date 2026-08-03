@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/rafaelia-relation-optimization-manifest.v1.schema.json",
+  "title": "RAFAELIA Relation Optimization Manifest V1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "manifest_version",
+    "timestamp",
+    "artifact_id",
+    "previous_event_id",
+    "derived_from",
+    "claim_allowed",
+    "privacy_class",
+    "automatic_merge",
+    "automatic_mutation",
+    "observed_state",
+    "canonical_identity",
+    "nodes",
+    "edges",
+    "gate_alignment",
+    "optimization",
+    "f_ok",
+    "f_gap",
+    "f_next"
+  ],
+  "properties": {
+    "schema": {
+      "const": "RAFAELIA_RELATION_OPTIMIZATION_MANIFEST/v1"
+    },
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 20
+    },
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previous_event_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "derived_from": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      }
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "privacy_class": {
+      "const": "PRIVATE_RESTRICTED"
+    },
+    "automatic_merge": {
+      "const": false
+    },
+    "automatic_mutation": {
+      "const": false
+    },
+    "canonical_identity": {
+      "type": "object",
+      "required": [
+        "physical_key",
+        "logical_key",
+        "event_key",
+        "alias_rule",
+        "dedupe_rule"
+      ],
+      "properties": {
+        "physical_key": {
+          "const": "source_locator + source_revision + content_sha256"
+        },
+        "logical_key": {
+          "const": "artifact_id + semantic_role + authority"
+        },
+        "event_key": {
+          "const": "event_id + previous_event_id + timestamp"
+        },
+        "alias_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dedupe_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "state"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "type"
+        ],
+        "properties": {
+          "from": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          }
+        }
+      }
+    },
+    "gate_alignment": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gate",
+          "state",
+          "reason"
+        ],
+        "properties": {
+          "gate": {
+            "type": "string",
+            "pattern": "^O[0-9]+$"
+          },
+          "state": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "f_ok": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "f_gap": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "f_next": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

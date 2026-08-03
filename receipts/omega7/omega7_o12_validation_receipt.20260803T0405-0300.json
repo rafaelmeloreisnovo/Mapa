@@ -1,0 +1,79 @@
+{
+  "schema": "RAFAELIA_O12_VALIDATION_RECEIPT/v1",
+  "validator_mode": "DEPENDENCY_FREE_STANDARD_LIBRARY",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "inputs": {
+    "manifest": {
+      "path": "/mnt/data/rafaelia_omega7_optimization/RAFAELIA_OMEGA7_RELATION_OPTIMIZATION_MANIFEST_V1_1_20260803T0347-0300.json",
+      "sha256": "a31385c62315a006191bf91089f434b89654e7bfa08f02baefe19f28cf4ed67e"
+    },
+    "schema": {
+      "path": "/mnt/data/rafaelia_omega7_validator/schemas/rafaelia-relation-optimization-manifest.v1.schema.json",
+      "sha256": "f62b93f54fe3bac09c8141ee607c53665845c1d43ce12855a024350ed07803d3"
+    },
+    "fixtures": {
+      "path": "/mnt/data/rafaelia_omega7_validator/tests/fixtures/omega7_relation_identity_cases.v1.json",
+      "sha256": "04ce6b0151ea39371075c1e13135192b06f37b3670381dacd6c41d82e6248c71"
+    },
+    "validator": {
+      "path": "/mnt/data/rafaelia_omega7_validator/tools/validate_omega7_relation_manifest.py",
+      "sha256": "c3c4487c445d7e215a1cadb2a7566bbbd8d213f31428db49a08d1caa79fc963b"
+    }
+  },
+  "checks": {
+    "manifest_errors": [],
+    "fixture_errors": [],
+    "fixture_results": [
+      {
+        "id": "CASE-SAME-HASH-DIFFERENT-LOCATOR",
+        "expected": "ALIAS_ALLOWED",
+        "actual": "ALIAS_ALLOWED"
+      },
+      {
+        "id": "CASE-SAME-TITLE-DIFFERENT-HASH",
+        "expected": "SEPARATE_OBJECTS",
+        "actual": "SEPARATE_OBJECTS"
+      },
+      {
+        "id": "CASE-HASHTAG-ONLY",
+        "expected": "REJECT_IDENTITY",
+        "actual": "REJECT_IDENTITY"
+      },
+      {
+        "id": "CASE-SEMANTIC-SIMILARITY",
+        "expected": "RELATION_ONLY",
+        "actual": "RELATION_ONLY"
+      },
+      {
+        "id": "CASE-STALE-PROVIDER-STATE",
+        "expected": "STALE_STATE_EVENT_REQUIRED",
+        "actual": "STALE_STATE_EVENT_REQUIRED"
+      }
+    ],
+    "total_errors": 0
+  },
+  "gate": {
+    "id": "O12",
+    "decision": "PASS_LIMITED",
+    "limitations": [
+      "Structural/local validation only.",
+      "Provider state, credential rotation, CI, backup replacement and Termux runtime are not proven.",
+      "Scientific claims remain blocked."
+    ]
+  },
+  "f_ok": [
+    "Manifest structure checked without third-party packages.",
+    "Node and edge identity constraints checked.",
+    "Five false-identity fixtures executed."
+  ],
+  "f_gap": [
+    "Provider-state attestation remains external.",
+    "O6 credential-rotation evidence absent.",
+    "CI and physical Termux receipts absent."
+  ],
+  "f_next": [
+    "Commit validator, schema, fixtures and receipt to PR #141.",
+    "Keep PR #141 draft until O6 and external receipts exist."
+  ]
+}
