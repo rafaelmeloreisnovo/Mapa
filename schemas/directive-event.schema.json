@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/directive-event.schema.json",
+  "title": "RAFAELIA Directive Event v1",
+  "description": "Explicit, non-retroactive instruction event. It may route scoped work but cannot silently promote claims, merge, delete, or rewrite history.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_type",
+    "directive_id",
+    "declared_by",
+    "declared_at",
+    "source",
+    "summary",
+    "scope",
+    "effects",
+    "authorization",
+    "target_surfaces",
+    "effective_from",
+    "retroactive",
+    "supersedes",
+    "classification",
+    "invariants",
+    "f_gap",
+    "f_next"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.directive-event/v1"
+    },
+    "record_type": {
+      "const": "DIRECTIVE_EVENT"
+    },
+    "directive_id": {
+      "type": "string",
+      "pattern": "^dir:[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+    },
+    "declared_by": {
+      "const": "USER"
+    },
+    "declared_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "locator",
+        "content_sha256",
+        "byte_length"
+      ],
+      "properties": {
+        "system": {
+          "const": "SESSION"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 3
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 1024
+    },
+    "scope": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "TURN",
+          "SESSION",
+          "PROJECT",
+          "REPOSITORY",
+          "CROSS_SOURCE"
+        ]
+      }
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "INTERPRET",
+          "ROUTE",
+          "WRITE",
+          "BLOCK"
+        ]
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "github_read",
+        "github_write",
+        "drive_read",
+        "drive_write",
+        "destructive_actions",
+        "automatic_merge",
+        "claim_promotion",
+        "external_messages"
+      ],
+      "properties": {
+        "github_read": {
+          "type": "boolean"
+        },
+        "github_write": {
+          "type": "boolean"
+        },
+        "drive_read": {
+          "type": "boolean"
+        },
+        "drive_write": {
+          "type": "boolean"
+        },
+        "destructive_actions": {
+          "const": false
+        },
+        "automatic_merge": {
+          "const": false
+        },
+        "claim_promotion": {
+          "const": false
+        },
+        "external_messages": {
+          "const": false
+        }
+      }
+    },
+    "target_surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "system",
+          "locator",
+          "operation"
+        ],
+        "properties": {
+          "system": {
+            "enum": [
+              "GITHUB",
+              "GOOGLE_DRIVE"
+            ]
+          },
+          "locator": {
+            "type": "string",
+            "minLength": 3
+          },
+          "operation": {
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "APPEND"
+            ]
+          }
+        }
+      }
+    },
+    "effective_from": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "retroactive": {
+      "const": false
+    },
+    "supersedes": {
+      "anyOf": [
+        {
+          "const": "TOKEN_VAZIO"
+        },
+        {
+          "type": "string",
+          "pattern": "^dir:[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+        }
+      ]
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "epistemic_state",
+        "claim_allowed"
+      ],
+      "properties": {
+        "epistemic_state": {
+          "const": "DECLARED_BY_AUTHOR"
+        },
+        "claim_allowed": {
+          "const": false
+        }
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "f_gap": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "f_next": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    }
+  }
+}
