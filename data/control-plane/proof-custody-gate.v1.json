@@ -1,0 +1,80 @@
+{
+  "schema": "rafaelia.proof-custody-gate.v1",
+  "version": "1.0.0",
+  "claim_allowed": false,
+  "mode": "FAIL_CLOSED_APPEND_ONLY",
+  "purpose": "Promote a file-bound claim only through an auditable chain of custody. A merged commit is necessary but not sufficient for TOKEN_VALIDO.",
+  "node_types": [
+    "SOURCE",
+    "FILE",
+    "CLAIM",
+    "FORMAL_OBJECT",
+    "BUILD",
+    "CHECK",
+    "REVIEW",
+    "COMMIT",
+    "RELEASE",
+    "TOKEN_VAZIO"
+  ],
+  "states": [
+    {"state": "OBSERVED", "rank": 0, "requires": []},
+    {"state": "HASH_BOUND", "rank": 1, "requires": ["source_uri", "source_revision", "file_path", "content_digest"]},
+    {"state": "BUILD_VERIFIED", "rank": 2, "requires": ["pinned_toolchain", "build_command", "build_receipt", "build_pass"]},
+    {"state": "CHECKER_VERIFIED", "rank": 3, "requires": ["independent_checker", "checker_receipt", "checker_pass"]},
+    {"state": "REVIEW_APPROVED", "rank": 4, "requires": ["reviewer_identity", "reviewed_commit_sha", "approval_receipt", "independent_review"]},
+    {"state": "MERGED_PROTECTED", "rank": 5, "requires": ["merge_commit_sha", "required_checks_pass", "protected_promotion_edge"]},
+    {"state": "CANONICAL_TOKEN_VALID", "rank": 6, "requires": ["release_or_catalog_receipt", "no_blocking_token_vazio"]}
+  ],
+  "promotion_rules": {
+    "no_state_skipping": true,
+    "self_approval_satisfies_independent_review": false,
+    "merge_without_review_is_token_valid": false,
+    "repository_presence_is_evidence_of_truth": false,
+    "declared_metadata_requires_external_verification": true,
+    "unresolved_blocking_uncertainty": "TOKEN_VAZIO",
+    "negative_results_are_preserved": true,
+    "history_rewrite_allowed": false
+  },
+  "token_valid_predicate": {
+    "all_required": [
+      "hash_bound",
+      "build_pass",
+      "checker_pass",
+      "independent_review_approved",
+      "merged_on_protected_edge",
+      "required_checks_pass",
+      "receipt_digest_present",
+      "no_blocking_token_vazio"
+    ],
+    "result_when_false": "TOKEN_VAZIO_OR_NOT_PROMOTED"
+  },
+  "geometric_invariant": {
+    "name": "IGC_CUSTODY",
+    "graph": "G=(V,E), with typed nodes and typed, digest-bound edges",
+    "invariants": [
+      "identity: equal bytes imply equal content digest under the declared hash algorithm",
+      "lineage: every derivative has a path to an identified source revision",
+      "closure: every evidence edge resolves to an existing node or an explicit TOKEN_VAZIO",
+      "monotonic promotion: epistemic rank cannot increase without the next gate receipt",
+      "uncertainty conservation: unresolved uncertainty remains explicit and cannot be erased by merge",
+      "replay: identical pinned inputs and commands reproduce the declared output or bounded tolerance"
+    ]
+  },
+  "reference_pattern": {
+    "repository": "openai/ten-proofs",
+    "observed_commit": "94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6",
+    "adopted_elements": [
+      "result-to-declaration-to-file mapping",
+      "declared permitted axioms",
+      "zero-sorry declaration for solution modules",
+      "pinned Lean toolchain and dependency manifest",
+      "independent Comparator challenge configuration"
+    ],
+    "not_inherited_as_proof": [
+      "publisher reputation",
+      "repository visibility",
+      "agent-reviewed label",
+      "merge or commit existence without independent receipts"
+    ]
+  }
+}
