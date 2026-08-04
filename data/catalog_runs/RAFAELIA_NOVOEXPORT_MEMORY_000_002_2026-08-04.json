@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0.0",
+  "cycle_id": "NOVOEXPORT-MEMORY-000-002-20260804",
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "privacy": "PUBLIC_SAFE_AGGREGATE_PRIVATE_LOCATORS_WITHHELD",
+  "scope": {
+    "source_family": "NOVOexport/conversations-NNN.json",
+    "closed_chunks": ["000", "001", "002"],
+    "total_chunks_observed": 51,
+    "pending_chunks": 48,
+    "next_chunk": "003"
+  },
+  "coverage": {
+    "conversation_records": 300,
+    "unique_conversation_ids": 300,
+    "unique_message_ids": 20059,
+    "mapping_node_occurrences": 20359,
+    "unique_mapping_node_ids": 20175,
+    "mapping_node_duplicate_occurrences": 184
+  },
+  "source_fingerprints": {
+    "conversations-000.json": "27b3ebe900dcf811e648f0bcb8da02cc5e1e1230049567cdd1a83a6df317ee06",
+    "conversations-001.json": "44c3cc8f298cacb809319558ee07c5737051e5ef6c0ad88cb33997ae31ddc6f1",
+    "conversations-002.json": "2af58ace3177b0e669c0ba8867f43eec11ee11e90a5bfef482c7cee1e032da80"
+  },
+  "custody": {
+    "private_package_count": 8,
+    "drive_locators_published": false,
+    "raw_titles_published": false,
+    "raw_message_bodies_published": false,
+    "package_roundtrip": "6_INDEX_CUSTODY_PACKAGES_PLUS_2_RECONCILIATIONS_BYTE_IDENTICAL_PASS",
+    "direct_zip_transport": "TOKEN_VAZIO_CONNECTOR_SAFETY_BLOCK",
+    "fallback": "RFC4648_BASE64_PRIVATE_ENVELOPE"
+  },
+  "adjacent_reconciliation": [
+    {
+      "chunks": ["000", "001"],
+      "conversation_id_overlap": 0,
+      "message_id_overlap": 0,
+      "mapping_node_id_overlap": 1,
+      "mapping_overlap_class": "REUSED_NON_MESSAGE_NULL_ROOT_SENTINEL",
+      "title_hash_overlap": 0,
+      "structural_hash_overlap": 0,
+      "content_hash_overlap": 46,
+      "temporal_gap_seconds": 131.602216
+    },
+    {
+      "chunks": ["001", "002"],
+      "conversation_id_overlap": 0,
+      "message_id_overlap": 0,
+      "mapping_node_id_overlap": 1,
+      "mapping_overlap_class": "REUSED_NON_MESSAGE_NULL_ROOT_SENTINEL",
+      "title_hash_overlap": 1,
+      "structural_hash_overlap": 0,
+      "content_hash_overlap": 39,
+      "temporal_gap_seconds": 274.34068
+    }
+  ],
+  "epistemic_classification": {
+    "PROVADO": [
+      "three source chunks were byte-hashed and parsed as 100-record arrays",
+      "300 conversation IDs and 20059 message IDs are unique across chunks 000-002",
+      "private packages passed Drive retrieval, Base64 decode, SHA-256 and byte comparison",
+      "two shared mapping node IDs across adjacent boundaries were non-message null-root sentinels"
+    ],
+    "EVIDENCIADO": [
+      "adjacent creation-time boundaries are ordered",
+      "exact content hashes recur across adjacent chunks"
+    ],
+    "HIPOTESE": [
+      "recurring hashes may represent recurring structures, boilerplate, tools or concepts"
+    ],
+    "REFUTADO": [
+      "a repeated mapping-node ID necessarily means duplicate conversation or message",
+      "temporal adjacency proves export completeness",
+      "hash recurrence alone proves semantic equivalence"
+    ],
+    "TOKEN_VAZIO": [
+      "semantic classification of recurring hashes",
+      "chunks 003-050",
+      "21 Codex chunks",
+      "asset manifest, img and chat.html reconciliation",
+      "independent external recomputation",
+      "observable CI runner steps and physical ARM receipt"
+    ]
+  },
+  "F_ok": [
+    "longitudinal private coverage advanced to 3/51 chunks",
+    "legacy-compatible and anonymized custody indexes coexist",
+    "cross-chunk graph chain 000→001→002 materialized",
+    "private Drive locators remain withheld from this public catalog"
+  ],
+  "F_gap": [
+    "48 conversation chunks remain",
+    "Codex, assets, images and chat remain outside the closed chain",
+    "semantic recurrence and execution evidence remain TOKEN_VAZIO"
+  ],
+  "F_next": [
+    "catalogue conversations-003.json privately",
+    "extend identity and recurrence reconciliation 002↔003",
+    "append only public-safe aggregate deltas without private locators"
+  ]
+}
