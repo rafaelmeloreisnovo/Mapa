@@ -28,12 +28,23 @@ Foram reconciliados:
 | IDs únicos de nós | 20.175 |
 | Lotes pendentes | 48 |
 
-Cada lote fechado possui duas formas privadas:
+Os lotes `001` e `002` possuem duas formas privadas:
 
 1. índice compatível com o contrato legado;
 2. índice de custódia anonimizado, sem títulos ou corpos crus.
 
-Os seis pacotes de índice e as duas reconciliações adjacentes passaram por recuperação no Drive, decodificação Base64, SHA-256 e comparação byte a byte.
+O lote `000` mantém, neste estado, somente o índice legado. Sua forma de custódia anonimizada permanece `TOKEN_VAZIO`.
+
+Os **cinco pacotes de índice/custódia** materializados e as **duas reconciliações adjacentes** passaram por recuperação no Drive, decodificação Base64, SHA-256 e comparação byte a byte. Total: **7 envelopes privados verificados**.
+
+## Correção append-only
+
+Uma contagem anterior registrava incorretamente seis pacotes de índice/custódia. Ela incluía implicitamente um pacote anonimizado do lote `000` que não foi materializado. A contagem foi corrigida antes do merge, sem apagar o evento privado histórico:
+
+- índices/custódia materializados: `5`;
+- reconciliações materializadas: `2`;
+- envelopes privados totais: `7`;
+- custódia anonimizada do lote `000`: `TOKEN_VAZIO`.
 
 ## Limites entre lotes
 
@@ -73,6 +84,7 @@ Os hashes de origem são usados somente como fingerprints de custódia.
 
 ## F_gap
 
+- a custódia anonimizada do lote `000` ainda não foi materializada;
 - `48` lotes de conversa ainda não foram fechados;
 - `21` lotes Codex permanecem sem ingestão;
 - manifest de assets, `img/` e `chat.html` ainda não foram reconciliados;
@@ -84,7 +96,8 @@ Os hashes de origem são usados somente como fingerprints de custódia.
 1. Catalogar `conversations-003.json` privadamente.
 2. Gerar os dois índices e testar a recuperação.
 3. Reconciliar `002 ↔ 003`.
-4. Publicar somente o agregado sanitizado sucessor.
+4. Opcionalmente materializar a custódia anonimizada do lote `000` em delta separado e verificável.
+5. Publicar somente o agregado sanitizado sucessor.
 
 ## Autoridade
 
