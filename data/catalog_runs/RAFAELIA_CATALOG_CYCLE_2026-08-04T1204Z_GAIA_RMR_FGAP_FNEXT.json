@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0.0",
+  "cycle_id": "CAT-20260804T1204Z-GAIA-RMR-FGAP-FNEXT",
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "privacy_class": "PRIVATE_DEFAULT_DENY",
+  "reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "state": "CANONICAL_DRAFT"
+  },
+  "source_delta": {
+    "repository": "rafaelmeloreisnovo/GAIA_phi",
+    "baseline_commit": "19332219d47292a6100f43d79840269ecff94805",
+    "source_path": "rmr/rmr_engine/engine.py",
+    "source_blob_sha1": "7beb89f2018b5ec41138f9f4bba62ccdddd1b72c",
+    "source_sha256": "6ba1375ca96f6e29c78fd15aea972f61b3d146a992fcc2ea78d58f0771dfc002",
+    "source_bytes": 4306,
+    "normalized_event": "WORKER-B-NORMALIZED-20260804T085014-0300-0002",
+    "normalized_event_hash": "6be90d6f5c8e3cdebfed95c61393f86164a0739835b1d036a0acfae77c08721b"
+  },
+  "execution_delta": {
+    "branch": "audit/rmr-engine-fgap-fnext-20260804",
+    "head_commit": "ec92c8ac0714b8b950ec7867d852b1f019451e1a",
+    "pull_request": 55,
+    "pull_request_state": "OPEN_DRAFT",
+    "changed_files": 3,
+    "local_test_framework": "python unittest",
+    "local_tests": 10,
+    "local_passed": 10,
+    "local_failed": 0,
+    "github_ci_runs_observed": 0,
+    "physical_termux_receipt": false
+  },
+  "defects": [
+    {
+      "id": "EMPTY_CONTEXT_DISCARDED",
+      "state_before": "PROVADO",
+      "state_after": "CLOSED_IN_DRAFT_PR_LOCAL_PASS",
+      "change": "preserve caller-owned context when it is an empty dict"
+    },
+    {
+      "id": "EVOLVE_RESETS_CREATED_AT",
+      "state_before": "PROVADO",
+      "state_after": "CLOSED_IN_DRAFT_PR_LOCAL_PASS",
+      "change": "preserve created_at across node evolution"
+    },
+    {
+      "id": "GRAPH_STATE_ENUM_NOT_JSON_SERIALIZABLE",
+      "state_before": "PROVADO",
+      "state_after": "CLOSED_IN_DRAFT_PR_LOCAL_PASS",
+      "change": "serialize RMRState by textual value in graph to_dict"
+    }
+  ],
+  "drive_append_only_events": {
+    "graph": {
+      "title": "GRAPH-WORKER-C-20260804T090401-0300-0002",
+      "file_id": "1RVfsPznEs6nYON0Z9H9Gq4kh8au7lhQEhPNWVpqnjvE",
+      "event_hash": "a6bae779b51cb041610f5c6f97a37d140625ebc09c35b27e6fd28697381028bc"
+    },
+    "test_receipt": {
+      "title": "RECEIPT-WORKER-D-20260804T090401-0300-0001",
+      "file_id": "1fgH9PL8QFhaL3mKzizjviP5SjW0x7bvQDgee5G0o0ic",
+      "event_hash": "ccb67a454522932eb93b82c1752faaebb5b6859768cbd01121323165cb71bc1c"
+    },
+    "memory": {
+      "title": "MEMORY-WORKER-E-20260804T090401-0300-0002",
+      "file_id": "1XAfKzelHOV9rzySWBz9psc5fzRN5c8HOfS8ohqJgBTQ",
+      "event_hash": "6f59066c383698ca1177463a9093a40b9c5e1878ca6bd52b41f16b9055c025b7"
+    },
+    "checkpoint": {
+      "title": "CHECKPOINT-WORKER-E-20260804T090401-0300-0003",
+      "file_id": "1A6ScjSEc0JGz3WploKbbwIs4DB4vY9qjDVejTowIygc",
+      "event_hash": "faecd415b0bdbce5ff3a08923f71d2f092edfe31f9825bdbdb926d20020aa669"
+    }
+  },
+  "epistemic_classification": {
+    "PROVADO": [
+      "the pinned engine source was independently reconstructed with matching SHA-256",
+      "three defects were reproduced against the pinned source",
+      "a draft PR exists with three commits and three changed files",
+      "the patched regression suite passed 10/10 locally"
+    ],
+    "EVIDENCIADO": [
+      "basic retrieval paths for module registry and graph neighbors pass in the isolated test environment"
+    ],
+    "HIPOTESE": [
+      "the changes should improve receipt custody and graph export interoperability after independent CI and device confirmation"
+    ],
+    "REFUTADO": [
+      "local sandbox PASS is equivalent to GitHub CI or physical Termux execution",
+      "the delta proves durable persistence, training, checkpoints, metrics or L5 evolution"
+    ],
+    "TOKEN_VAZIO": [
+      "observable GitHub Actions run",
+      "physical Termux ARMv7/ARM64 receipt",
+      "durable persistence",
+      "retrieval benchmark metrics",
+      "edge endpoint validation compatibility",
+      "training/checkpoint/metrics",
+      "L5 evolution"
+    ]
+  },
+  "global_coverage": {
+    "conversations_total": 51,
+    "conversations_private_indexed": 1,
+    "conversations_pending": 50,
+    "codex_total": 21,
+    "codex_ingested": 0,
+    "assets_and_chat_reconciliation": "INCOMPLETE"
+  },
+  "files_written": [
+    "data/catalog_runs/RAFAELIA_CATALOG_CYCLE_2026-08-04T1204Z_GAIA_RMR_FGAP_FNEXT.json",
+    "indices/catalog-runs/deltas/CATALOG_RUN_INDEX_2026-08-04T1204Z_GAIA_RMR_FGAP_FNEXT.md"
+  ],
+  "actions_not_executed": [
+    "No merge into GAIA_phi main",
+    "No merge into Mapa main",
+    "No GitHub Actions run observed",
+    "No Termux or Android physical execution",
+    "No training or checkpoint update",
+    "No claim promotion",
+    "No destructive corpus modification"
+  ],
+  "F_ok": [
+    "Stage 2 normalized record advanced through graph, local test receipt, draft code correction and longitudinal memory",
+    "Drive append-only chain materialized with four linked events",
+    "GAIA_phi PR 55 created as draft",
+    "Mapa pointer prepared on an isolated catalog branch"
+  ],
+  "F_gap": [
+    "CI and physical execution receipts remain absent",
+    "50 conversation files and 21 Codex files remain outside the closed ingestion path",
+    "assets, chat.html and global cross-chunk reconciliation remain incomplete",
+    "durable persistence and retrieval benchmark remain unproven"
+  ],
+  "F_next": [
+    "observe or trigger CI for GAIA_phi PR 55",
+    "run the regression gate on Termux ARMv7/ARM64 and append a device receipt",
+    "ingest conversations-001.json",
+    "reconcile recurrence across conversations-000 and conversations-001",
+    "evaluate edge endpoint validation as a separate compatibility-safe delta"
+  ]
+}
