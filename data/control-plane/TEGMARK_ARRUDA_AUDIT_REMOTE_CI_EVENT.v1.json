@@ -1,0 +1,49 @@
+{
+  "append_only": true,
+  "claim_allowed": false,
+  "classification": "TOKEN_VAZIO_RUNNER_OR_STARTUP",
+  "code_failure_established": false,
+  "comparison_context": {
+    "prior_observation": "same zero-step plus BlobNotFound pattern was already recorded",
+    "prior_pr": 144
+  },
+  "decision": "Do not patch content or workflows without a step-level or log-level cause.",
+  "event_sha256": "4853a7b04b9d270ea34cec0096195692d54ba9db351070a4240bf0096649c057",
+  "generated_at": "2026-08-04T01:00:27-03:00",
+  "head_sha": "f1f1bcdbbb5a564b1c589160310b55e8e2a8b038",
+  "next_gate": "Re-observe jobs/logs or run validators in an independently observable environment.",
+  "predecessor_event_sha256": "73e397a57237bf11d3ece9e5cabf850b98165c4721e5acbb34c21dbe16d6447f",
+  "pull_request": 147,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "rollback": {
+    "deletion_allowed": false,
+    "mode": "COMPENSATING_EVENT_ONLY"
+  },
+  "schema": "rafaelia.longitudinal-ci-observation-event.v1",
+  "workflow_observations": [
+    {
+      "conclusion": "failure",
+      "job_id": 91888357906,
+      "log_fetch": "BlobNotFound",
+      "run_id": 30876304406,
+      "steps_observed": 0,
+      "workflow": "Branch Topology Gate"
+    },
+    {
+      "conclusion": "failure",
+      "job_id": 91888357598,
+      "log_fetch": "NOT_RECOVERED",
+      "run_id": 30876304382,
+      "steps_observed": 0,
+      "workflow": "CI"
+    },
+    {
+      "conclusion": "failure",
+      "job_id": 91888357643,
+      "log_fetch": "NOT_RECOVERED",
+      "run_id": 30876304378,
+      "steps_observed": 0,
+      "workflow": "Live Control Plane Reconciliation"
+    }
+  ]
+}
