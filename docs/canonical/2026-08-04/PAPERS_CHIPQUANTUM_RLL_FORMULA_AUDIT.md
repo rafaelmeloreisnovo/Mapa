@@ -1,7 +1,7 @@
 # Papers × ChipQuantum × RLL — Auditoria de Fórmulas e Autoridades
 
 **Data:** 2026-08-04  
-**Evento:** `6612b91f06ae1499cccf0553c8546595db5f76755e90644516d86e616217cfdb`  
+**Evento:** `4f9c857b2573f67b72dd213d568a6ce7c0505b84bfd4336505815fd38967a92e`  
 **Predecessor:** `4853a7b04b9d270ea34cec0096195692d54ba9db351070a4240bf0096649c057`  
 **Estado:** `EVIDENCIADO_PARCIAL / claim_allowed=false / APPEND_ONLY`
 
