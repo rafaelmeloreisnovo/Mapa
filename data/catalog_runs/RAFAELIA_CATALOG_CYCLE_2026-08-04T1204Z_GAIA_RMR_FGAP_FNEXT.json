@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.0.1",
   "cycle_id": "CAT-20260804T1204Z-GAIA-RMR-FGAP-FNEXT",
   "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
   "claim_allowed": false,
@@ -10,6 +10,7 @@
   },
   "source_delta": {
     "repository": "rafaelmeloreisnovo/GAIA_phi",
+    "source_visibility": "PRIVATE",
     "baseline_commit": "19332219d47292a6100f43d79840269ecff94805",
     "source_path": "rmr/rmr_engine/engine.py",
     "source_blob_sha1": "7beb89f2018b5ec41138f9f4bba62ccdddd1b72c",
@@ -52,33 +53,44 @@
     }
   ],
   "drive_append_only_events": {
+    "privacy_rule": "NO_DRIVE_FILE_IDS_IN_PUBLIC_CATALOG",
     "graph": {
       "title": "GRAPH-WORKER-C-20260804T090401-0300-0002",
-      "file_id": "1RVfsPznEs6nYON0Z9H9Gq4kh8au7lhQEhPNWVpqnjvE",
-      "event_hash": "a6bae779b51cb041610f5c6f97a37d140625ebc09c35b27e6fd28697381028bc"
+      "event_hash": "a6bae779b51cb041610f5c6f97a37d140625ebc09c35b27e6fd28697381028bc",
+      "locator": "WITHHELD_PRIVATE_DEFAULT_DENY"
     },
     "test_receipt": {
       "title": "RECEIPT-WORKER-D-20260804T090401-0300-0001",
-      "file_id": "1fgH9PL8QFhaL3mKzizjviP5SjW0x7bvQDgee5G0o0ic",
-      "event_hash": "ccb67a454522932eb93b82c1752faaebb5b6859768cbd01121323165cb71bc1c"
+      "event_hash": "ccb67a454522932eb93b82c1752faaebb5b6859768cbd01121323165cb71bc1c",
+      "locator": "WITHHELD_PRIVATE_DEFAULT_DENY"
     },
     "memory": {
       "title": "MEMORY-WORKER-E-20260804T090401-0300-0002",
-      "file_id": "1XAfKzelHOV9rzySWBz9psc5fzRN5c8HOfS8ohqJgBTQ",
-      "event_hash": "6f59066c383698ca1177463a9093a40b9c5e1878ca6bd52b41f16b9055c025b7"
+      "event_hash": "6f59066c383698ca1177463a9093a40b9c5e1878ca6bd52b41f16b9055c025b7",
+      "locator": "WITHHELD_PRIVATE_DEFAULT_DENY"
     },
     "checkpoint": {
       "title": "CHECKPOINT-WORKER-E-20260804T090401-0300-0003",
-      "file_id": "1A6ScjSEc0JGz3WploKbbwIs4DB4vY9qjDVejTowIygc",
-      "event_hash": "faecd415b0bdbce5ff3a08923f71d2f092edfe31f9825bdbdb926d20020aa669"
+      "event_hash": "faecd415b0bdbce5ff3a08923f71d2f092edfe31f9825bdbdb926d20020aa669",
+      "locator": "WITHHELD_PRIVATE_DEFAULT_DENY"
     }
+  },
+  "privacy_hardening": {
+    "applied_at_utc": "2026-08-04T12:39:00Z",
+    "removed_public_fields": [
+      "drive_append_only_events.*.file_id"
+    ],
+    "private_content_copied": false,
+    "private_locator_exposed": false,
+    "classification": "PROVADO_METADATA_REDACTION"
   },
   "epistemic_classification": {
     "PROVADO": [
       "the pinned engine source was independently reconstructed with matching SHA-256",
       "three defects were reproduced against the pinned source",
       "a draft PR exists with three commits and three changed files",
-      "the patched regression suite passed 10/10 locally"
+      "the patched regression suite passed 10/10 locally",
+      "private Drive file identifiers were removed from the public catalog delta"
     ],
     "EVIDENCIADO": [
       "basic retrieval paths for module registry and graph neighbors pass in the isolated test environment"
@@ -119,13 +131,15 @@
     "No Termux or Android physical execution",
     "No training or checkpoint update",
     "No claim promotion",
-    "No destructive corpus modification"
+    "No destructive corpus modification",
+    "No private Drive file identifier retained in the public catalog"
   ],
   "F_ok": [
     "Stage 2 normalized record advanced through graph, local test receipt, draft code correction and longitudinal memory",
-    "Drive append-only chain materialized with four linked events",
+    "Drive append-only chain materialized with four linked private events",
     "GAIA_phi PR 55 created as draft",
-    "Mapa pointer prepared on an isolated catalog branch"
+    "Mapa pointer prepared on an isolated catalog branch",
+    "public catalog metadata hardened by removing private Drive locators"
   ],
   "F_gap": [
     "CI and physical execution receipts remain absent",
