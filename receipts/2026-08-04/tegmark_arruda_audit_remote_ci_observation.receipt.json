@@ -1,0 +1,45 @@
+{
+  "claim_allowed": false,
+  "code_failure_established": false,
+  "event_sha256": "4853a7b04b9d270ea34cec0096195692d54ba9db351070a4240bf0096649c057",
+  "head_sha": "f1f1bcdbbb5a564b1c589160310b55e8e2a8b038",
+  "limitations": [
+    "A workflow conclusion of failure with zero observed steps does not identify a repository-content defect.",
+    "One log fetch returned BlobNotFound and the other logs were not recoverable in this observation.",
+    "No rerun was requested because the cause was not established."
+  ],
+  "observed_at": "2026-08-04T01:00:27-03:00",
+  "pull_request": 147,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "result": "TOKEN_VAZIO_RUNNER_OR_STARTUP",
+  "runs": [
+    {
+      "conclusion": "failure",
+      "job": "branch-topology / validate",
+      "job_id": 91888357906,
+      "logs": "BlobNotFound",
+      "name": "Branch Topology Gate",
+      "run_id": 30876304406,
+      "steps": []
+    },
+    {
+      "conclusion": "failure",
+      "job": "Validate Repository Structure",
+      "job_id": 91888357598,
+      "logs": "TOKEN_VAZIO",
+      "name": "CI",
+      "run_id": 30876304382,
+      "steps": []
+    },
+    {
+      "conclusion": "failure",
+      "job": "validate",
+      "job_id": 91888357643,
+      "logs": "TOKEN_VAZIO",
+      "name": "Live Control Plane Reconciliation",
+      "run_id": 30876304378,
+      "steps": []
+    }
+  ],
+  "schema": "rafaelia.remote-ci-observation-receipt.v1"
+}

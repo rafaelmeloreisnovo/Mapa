@@ -1,0 +1,143 @@
+{
+  "schema": "rafaelia.formula-authority-event.v1",
+  "generated_at": "2026-08-04T01:16:00-03:00",
+  "event_sha256": "4f9c857b2573f67b72dd213d568a6ce7c0505b84bfd4336505815fd38967a92e",
+  "predecessor_event_sha256": "4853a7b04b9d270ea34cec0096195692d54ba9db351070a4240bf0096649c057",
+  "append_only": true,
+  "claim_allowed": false,
+  "repositories": {
+    "papers": {
+      "repository": "rafaelmeloreisnovo/papers",
+      "head": "0c2f62f2dd835e700c62848674dc19681dc035dd",
+      "role": "academic_synthesis_and_claim_ledgers"
+    },
+    "chipquantum": {
+      "repository": "rafaelmeloreisnovo/ChipQuantum",
+      "head": "6f12d7c83ff4e3a592750d3bc416e8bb32fae72c",
+      "role": "runtime_and_computational_formalization"
+    },
+    "rll": {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "head": "d5103fac4d5f1c4067d6da9eeadb7ab54b8fc363",
+      "role": "cosmological_model_data_likelihood_and_falsification"
+    }
+  },
+  "formula_records": [
+    {
+      "id": "PAP-F01",
+      "source": "papers/src/asm/RAFAELIA_MATH_FORMULAS.md",
+      "formula": "F_Love symbolic limit",
+      "class": "SYMBOLIC_PARABLE",
+      "state": "PARABLE_ONLY"
+    },
+    {
+      "id": "PAP-F02",
+      "source": "papers/src/asm/RAFAELIA_MATH_FORMULAS.md",
+      "formula": "F_R(n)=F(n-1)+F(n-2)+Delta_Rafael",
+      "class": "AUTHORIAL_RECURRENCE",
+      "state": "INCOMPLETE_DEFINITION"
+    },
+    {
+      "id": "PAP-F03",
+      "source": "papers/src/asm/RAFAELIA_MATH_FORMULAS.md",
+      "formula": "D=lim log N(epsilon)/log(1/epsilon)",
+      "class": "CLASSICAL_DEFINITION",
+      "state": "REFERENCE_VALID_NO_LOCAL_ESTIMATE"
+    },
+    {
+      "id": "PAP-F04",
+      "source": "papers/docs/omega-cube42-research-note.md",
+      "formula": "C(4,2)*7=42",
+      "class": "FINITE_COMBINATORICS",
+      "state": "PROVED_AND_TESTED_LIMITED"
+    },
+    {
+      "id": "CHIP-F01",
+      "source": "ChipQuantum/src/toroidal_engine.py",
+      "formula": "C_next=(1-alpha)C+alpha*C_in; H_next=(1-alpha)H+alpha*H_in; phi=(1-H)C",
+      "class": "EXECUTABLE_AUTHOR_MODEL",
+      "state": "IMPLEMENTED"
+    },
+    {
+      "id": "CHIP-F02",
+      "source": "ChipQuantum/src/toroidal_engine.py; src/toroidal_engine_baremetal.py",
+      "formula": "state_next=(state+phi*bias) mod 1; route=accumulator mod 42",
+      "class": "ROUTING_CONVENTION",
+      "state": "IMPLEMENTED_NOT_ATTRACTOR_PROOF"
+    },
+    {
+      "id": "CHIP-F03",
+      "source": "ChipQuantum/experiments/paper6_quadratic_deficit_geometry/validate_paper6.py",
+      "formula": "M^2=(9/16)I; M^-1=(16/9)M; D_theta=-2ab cos(theta); D_Q=-Delta/(4A)",
+      "class": "FORMAL_IDENTITIES",
+      "state": "VERIFIED_FINITE"
+    },
+    {
+      "id": "CHIP-F04",
+      "source": "ChipQuantum/README.md; src/kernel/main.c; PR #41",
+      "formula": "repository-wide freestanding/no-libc claim",
+      "class": "REPOSITORY_LEVEL_CLAIM",
+      "state": "REFUTED_GLOBALLY_VALID_FOR_ISOLATED_CORES"
+    },
+    {
+      "id": "RLL-F01",
+      "source": "RLL/docs/canonicos/14_MODELO_COSMOLOGICO_RLL.md",
+      "formula": "E2_RLL background equation",
+      "class": "AUTHORIAL_COSMOLOGICAL_BACKGROUND",
+      "state": "IMPLEMENTED_HYPOTHESIS"
+    },
+    {
+      "id": "RLL-F02",
+      "source": "RLL/docs/canonicos/14_MODELO_COSMOLOGICO_RLL.md",
+      "formula": "f(z)=1/(1+exp((z-z_t)/w_t))",
+      "class": "AUTHORIAL_TRANSITION_FUNCTION",
+      "state": "IMPLEMENTED_HYPOTHESIS"
+    },
+    {
+      "id": "RLL-F03",
+      "source": "RLL/rll_equation_registry.yml; rll_vs_lcdm.py",
+      "formula": "Omega_s0=Omega_B0=Omega_P0=0 => E2_RLL=E2_LCDM",
+      "class": "ANALYTIC_NULL_LIMIT",
+      "state": "VERIFIED"
+    },
+    {
+      "id": "RLL-F04",
+      "source": "RLL/rll_vs_lcdm.py",
+      "formula": "AIC=chi2+2k; BIC=chi2+k ln n; Bayes factor by BIC approximation",
+      "class": "KNOWN_STATISTICS_WITH_APPROXIMATION",
+      "state": "IMPLEMENTED_LIMITED"
+    },
+    {
+      "id": "RLL-F05",
+      "source": "RLL/results/rll_fase20_mcmc_bayes.json",
+      "formula": "Omega_s0,95%<0.001777; ln(B10)=-6.190+-0.691",
+      "class": "COMMITTED_STATISTICAL_RESULT",
+      "state": "EVIDENCE_FAVORS_LCDM"
+    },
+    {
+      "id": "RLL-F06",
+      "source": "RLL/docs/science/RLL_COSMOLOGY_GAP_AUDIT_20260717.md",
+      "formula": "covariant effective-sector closure",
+      "class": "REQUIRED_PHYSICAL_CLOSURE",
+      "state": "OPEN_GAP"
+    }
+  ],
+  "decisions": [
+    "papers formula compendium is a typed seed catalog, not one homogeneous mathematical authority",
+    "ChipQuantum freestanding claims are artifact-scoped",
+    "T7 and 42 remain computational codomains until topology and dynamics are measured",
+    "RLL null limit and negative Bayes result are preserved as central scientific evidence",
+    "RLL physical claims remain blocked pending covariant closure and independent reproduction"
+  ],
+  "next_gates": [
+    "type every papers formula",
+    "add artifact-level ChipQuantum manifests",
+    "run T1 and T2 controls before T7",
+    "unify RLL covariance and posterior routes",
+    "independently reproduce FASE20"
+  ],
+  "rollback": {
+    "mode": "COMPENSATING_EVENT_ONLY",
+    "deletion_allowed": false
+  }
+}
