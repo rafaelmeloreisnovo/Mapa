@@ -10,6 +10,7 @@
 - **Local gate:** `10/10 unittest PASS`
 - **GitHub CI:** `TOKEN_VAZIO` — zero runs observed
 - **Physical Termux receipt:** `TOKEN_VAZIO`
+- **Privacy:** `PRIVATE_DEFAULT_DENY`; localizadores e IDs do Drive não são publicados
 
 ## Delta fechado
 
@@ -34,9 +35,12 @@ Stage 2 NORMALIZED
 - as três correções estão isoladas em draft PR;
 - o gate de regressão passou `10/10`;
 - quatro eventos privados foram gravados no Drive em cadeia append-only;
-- nenhum corpo de conversa ou asset privado foi copiado para o catálogo.
+- nenhum corpo de conversa ou asset privado foi copiado para o catálogo;
+- identificadores privados do Google Drive foram removidos do delta público.
 
 ## Cadeia privada
+
+Somente títulos e hashes de evento são expostos. Os localizadores privados permanecem retidos por `PRIVATE_DEFAULT_DENY`.
 
 | Evento | Hash |
 |---|---|
