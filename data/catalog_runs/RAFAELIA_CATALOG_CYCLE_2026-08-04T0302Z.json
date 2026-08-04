@@ -1,0 +1,87 @@
+{
+  "schema": "rafaelia.catalog-cycle.v1",
+  "cycle_id": "CAT-20260804T0302Z",
+  "mode": ["incremental", "append-only", "non-destructive", "fail-closed"],
+  "claim_allowed": false,
+  "checkpoint": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "e847c19e3df57aacfdc0f75b4098602f6570ab29",
+    "cutoff_utc": "2026-08-03T21:01:00Z"
+  },
+  "priority_reference": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1.txt",
+    "drive_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "state": "CANONICAL_DRAFT",
+    "rule": "Fonte → índice → token semântico → claim → evidência → falsificador → decisão → paper/artefato"
+  },
+  "drive_delta": [
+    {
+      "drive_id": "11-Omhx78ueOaFY2xT2PDJXX63COlLO6X",
+      "title": "Tegmark, Arruda, and the Complex Networks-Machine Learning Inter.md",
+      "kind": "LAT-PAPER / research-report",
+      "topics": ["Max Tegmark", "Henrique F. de Arruda", "complex networks", "machine learning", "mechanistic interpretability", "opinion dynamics", "symbolic regression"],
+      "provenance": "Google Drive object returned by modifiedTime cutoff and fetched as Markdown text",
+      "export_sha256": null,
+      "classification": {
+        "object_exists": "PROVADO",
+        "report_contains_citations_and_claim_boundaries": "EVIDENCIADO",
+        "cross-domain_unification": "MODELO_ANALÓGICO",
+        "direct_Tegmark_Arruda_citation_link": "TOKEN_VAZIO",
+        "RLL_constants_correspond_to_established_literature": "REFUTADO_OR_TOKEN_VAZIO_AS_STATED",
+        "independent_bibliographic_revalidation_this_cycle": "TOKEN_VAZIO"
+      },
+      "next_step": "Exportar versão imutável, calcular SHA-256, validar DOI/arXiv e separar fatos bibliográficos, interpretações e relações analógicas em claims tipados."
+    }
+  ],
+  "github_scope": [
+    "rafaelmeloreisnovo/Mapa",
+    "rafaelmeloreisnovo/RafGitTools",
+    "rafaelmeloreisnovo/RafPolimata",
+    "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "rafaelmeloreisnovo/papers",
+    "instituto-Rafael/relativity-living-light",
+    "rafaelmeloreisnovo/llamaRafaelia",
+    "rafaelmeloreisnovo/Vectras-VM-Android"
+  ],
+  "github_delta": {
+    "state": "EVIDENCIADO_LIMITADO_NO_NEW_COMMIT_AFTER_CHECKPOINT",
+    "latest_observed_checkpoint_commit": "e847c19e3df57aacfdc0f75b4098602f6570ab29",
+    "coverage_limit": "Eight tracked repositories and returned default/search refs only"
+  },
+  "categories": {
+    "Core_FCEA": "TOKEN_VAZIO_NO_DISTINCT_NEW_OBJECT",
+    "datasets": "TOKEN_VAZIO_NO_DISTINCT_NEW_OBJECT",
+    "papers": "EVIDENCIADO_NEW_RESEARCH_REPORT",
+    "workflows": "TOKEN_VAZIO_NO_NEW_EXECUTION",
+    "code": "TOKEN_VAZIO_NO_NEW_COMMIT",
+    "artifacts": "TOKEN_VAZIO_NO_IMMUTABLE_EXPORT",
+    "receipts": "THIS_RECEIPT",
+    "hashes": "TOKEN_VAZIO_DRIVE_EXPORT_HASH",
+    "dependencies": ["DOI", "arXiv", "publisher pages", "researcher publication records"]
+  },
+  "F_ok": [
+    "Priority reference reread",
+    "Drive delta isolated by cutoff",
+    "Research report indexed without promotion to scientific proof",
+    "No previously cataloged GitHub commit relabeled as new"
+  ],
+  "F_gap": [
+    "No immutable Drive export hash",
+    "No independent DOI/arXiv revalidation in this cycle",
+    "No semantic diff against an earlier revision",
+    "No distinct Core/FCEA, dataset, workflow, code, APK, release or physical receipt delta"
+  ],
+  "F_next": [
+    "Export Markdown object and calculate SHA-256",
+    "Normalize bibliography into source records",
+    "Create claim ledger separating FATO, RELATO, MODELO_ANALÓGICO and TOKEN_VAZIO",
+    "Route publishable synthesis to papers only after source validation"
+  ],
+  "not_executed": [
+    "No Google Drive write",
+    "No workflow rerun",
+    "No producer repository modification",
+    "No scientific claim promotion",
+    "No destructive deduplication"
+  ]
+}
