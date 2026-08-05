@@ -1,0 +1,27 @@
+{
+  "default_decision": "DENIED",
+  "deny_body_patterns": [
+    "\\bpromotion\\s*=\\s*DENIED\\b",
+    "\"promotion\"\\s*:\\s*\"DENIED\"",
+    "\\bREADY_FOR_GRAPH\\s*=\\s*false\\b",
+    "\\bmanter (?:esta )?PR (?:em )?draft\\b",
+    "\\bn[aã]o mesclar\\b",
+    "\\bdo not merge\\b",
+    "\\bkeep (?:this )?PR draft\\b"
+  ],
+  "human_review_required_patterns": [
+    "\\bhuman_review_required\\s*=\\s*true\\b",
+    "\\brevis[aã]o humana obrigat[oó]ria\\b",
+    "\\bhuman review required\\b"
+  ],
+  "ignore_bot_login_suffix": "[bot]",
+  "invariants": {
+    "automatic_merge": false,
+    "claim_allowed": false,
+    "fail_closed": true,
+    "manual_merge_only": true
+  },
+  "required_independent_approvals": 1,
+  "schema": "rafaelia.promotion-control/v1",
+  "version": 1
+}
