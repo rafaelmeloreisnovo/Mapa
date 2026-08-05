@@ -1,0 +1,65 @@
+{
+  "schema": "rafaelia.longitudinal.integration.delta.v1",
+  "event_id": "sha256:d5dcc113a61cf0c737b98dce76369b5c1c887b41abc56229eba0fc5a99f872a7",
+  "timestamp": "2026-08-05T13:23:00-03:00",
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "privacy_class": "PUBLIC_SANITIZED_POINTERS_ONLY",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "integration_scope": {
+    "master_index": "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md",
+    "memory_pr": 151,
+    "memory_branch": "catalog/novoexport-000-002-20260804",
+    "memory_head_observed_before_delta": "d3553309492346e89ab53e347d14793b88f53ed2",
+    "gaia_rmr_pr": 150,
+    "gaia_rmr_head_observed": "ff5bd4c30b65be24a41c7ad3aacd94f99400448f",
+    "gaia_phi_pr": 55,
+    "next_private_cursor": "conversations-003.json"
+  },
+  "relations": [
+    {
+      "from": "NOVOEXPORT_MEMORY_000_002",
+      "to": "GAIA_RMR_FGAP_FNEXT",
+      "type": "SUPPLIES_SANITIZED_LONGITUDINAL_CONTEXT",
+      "identity_equivalence": false
+    },
+    {
+      "from": "GAIA_RMR_FGAP_FNEXT",
+      "to": "RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1",
+      "type": "CATALOGED_EXECUTION_DELTA",
+      "identity_equivalence": false
+    }
+  ],
+  "f_ok": [
+    "NOVOexport conversations-000..002 cataloged as 300 conversations and 20059 unique message IDs",
+    "Seven private envelopes reported byte-verified in the source delta",
+    "GAIA/RMR local regression gate reported 10/10 PASS",
+    "Public integration contains no Drive IDs, message bodies, conversation titles, asset names or private URLs"
+  ],
+  "f_gap": [
+    "PR150 and PR151 remain draft and unmerged",
+    "48 conversation lots and 21 Codex lots remain pending",
+    "conversations-003 private catalog and 002-to-003 reconciliation are pending",
+    "GitHub CI with observable steps remains TOKEN_VAZIO",
+    "Physical Termux ARMv7/ARM64 and Android receipts remain TOKEN_VAZIO",
+    "Cross-surface byte identity and full Drive/Library/GitHub coverage remain TOKEN_VAZIO",
+    "Credential rotation and secret-scan closure remain externally required and unverified",
+    "Independent reproduction remains TOKEN_VAZIO"
+  ],
+  "f_next": [
+    "Keep PR151 as the integration spine and preserve draft state",
+    "Catalog conversations-003 privately and publish only a sanitized successor delta",
+    "Reconcile conversations-002 to conversations-003",
+    "Materialize anonymized custody for lot 000 as a separate verifiable delta",
+    "Observe CI without treating zero-step runner failures as code defects",
+    "Produce physical Termux receipts before any runtime promotion",
+    "Merge only after human review and a post-merge receipt"
+  ],
+  "gates": {
+    "automatic_merge": false,
+    "human_review_required": true,
+    "destructive_actions": false,
+    "retroactive_rewrite": false,
+    "promotion": "DENIED_WHILE_BLOCKERS_EXIST"
+  }
+}
