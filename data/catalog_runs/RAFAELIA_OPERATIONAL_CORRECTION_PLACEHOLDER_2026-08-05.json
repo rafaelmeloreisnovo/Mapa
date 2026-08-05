@@ -1,0 +1,22 @@
+{
+  "schema": "rafaelia.operational-correction.v1",
+  "timestamp": "2026-08-05T14:12:00-03:00",
+  "mode": "APPEND_ONLY_FAIL_CLOSED",
+  "affected_path": "data/catalog_runs/RAFAELIA_NOVOEXPORT_MEMORY_003_GRAPH_RECONCILED_2026-08-05.json",
+  "incorrect_commit": "edcb2dc396ee46c3fe5664274fa6552eb63ccd4c",
+  "incorrect_content": "placeholder",
+  "correction_commit": "6d585933fbb60fa90e90a0d9d964772b386c4e22",
+  "final_event_id": "sha256:96a12751ea6bd27897b7b308971b8080981a4edc865419a37c90c4ad261a86cf",
+  "impact": {
+    "data_loss": false,
+    "private_data_exposed": false,
+    "claim_promoted": false,
+    "training_executed": false,
+    "final_path_corrected": true
+  },
+  "classification": "CORRECTED_OPERATIONAL_WRITE",
+  "F_ok": "placeholder replaced by the complete sanitized receipt at the same path",
+  "F_gap": "the transient incorrect commit remains visible in immutable Git history",
+  "F_next": "retain this correction receipt and require branch existence checks before future writes",
+  "claim_allowed": false
+}
