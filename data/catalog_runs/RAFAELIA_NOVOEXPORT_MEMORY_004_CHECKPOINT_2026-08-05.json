@@ -1,0 +1,119 @@
+{
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "checkpoint": {
+    "conversations": 100,
+    "duplicate_exact_records": 604,
+    "global_state": "PARTIAL_PERSISTENCE",
+    "mapping_nodes": 9413,
+    "messages": 9313,
+    "micro_batches": 4,
+    "non_message_nodes": 100,
+    "token_vazio_classifications": 252,
+    "training_executed": false
+  },
+  "claim_allowed": false,
+  "event_id": "sha256:dc341b30151ad5ae9a6818457774a44bcf31016e6edfedd8da479f47df9460c5",
+  "f_gap": [
+    "Historical CHUNKS/NORMALIZED outputs are not present as durable private objects",
+    "Historical payload byte identity cannot be established from checkpoint hashes alone",
+    "Shard is not READY_FOR_GRAPH",
+    "Reconciliation 003-to-004 is not yet demonstrated",
+    "Training remains disabled"
+  ],
+  "f_next": [
+    "Build deterministic V2 CHUNKS/NORMALIZED correction for batch 0001",
+    "Upload the first pair through connector-native file references",
+    "Download and require byte-identical SHA-256 round-trip",
+    "Repeat batches 0002-0004 only after the first pair closes",
+    "Build graph and reconcile conversations-003 to conversations-004"
+  ],
+  "f_ok": [
+    "Source recovered through a connector-native file reference and SHA-256 fixed",
+    "Four historical Stage-2 checkpoints form a predecessor chain covering conversation indices 0-99",
+    "Raw source mapping counts independently reproduce all four checkpoint item totals",
+    "Exact source counts are 100 conversations, 9413 mapping nodes and 9313 messages"
+  ],
+  "gates": {
+    "automatic_merge": false,
+    "derived_jsonl_materialized": false,
+    "destructive_actions": false,
+    "human_review_required": true,
+    "ready_for_graph": false,
+    "source_hash_verified": true,
+    "source_materialized": true,
+    "stage2_checkpoint_chain_verified": true,
+    "training_executed": false
+  },
+  "micro_batches": [
+    {
+      "batch": 1,
+      "chunk_bytes": 5942907,
+      "chunk_sha256": "d0cdaa170996eaffd94672eada864f58937d6a566aaa8db8b6eda3580cab8bb7",
+      "conversation_end": 24,
+      "conversation_start": 0,
+      "duplicate_exact": 169,
+      "event_hash": "3199cabfd6ee1548ed57b2484a96a9e713e098f8400ebe375bec3a08aec769a7",
+      "items": 2610,
+      "messages": 2585,
+      "non_message_nodes": 25,
+      "normalized_bytes": 9943609,
+      "normalized_sha256": "8d71508acf2788fe54ae2b8a0e92322d64a0a4f3422bbe7ea019206be70b8602",
+      "token_vazio_classifications": 83
+    },
+    {
+      "batch": 2,
+      "chunk_bytes": 5102577,
+      "chunk_sha256": "dfeb9bae88c200af27a244a130412b83242f041e20d38cfc974a09574fd0b88a",
+      "conversation_end": 49,
+      "conversation_start": 25,
+      "duplicate_exact": 129,
+      "event_hash": "486eda141f85cf058b4d2adf1d7cf2a5563e7dfec26db051b45f222aa9c37d3b",
+      "items": 2291,
+      "messages": 2266,
+      "non_message_nodes": 25,
+      "normalized_bytes": 8506419,
+      "normalized_sha256": "9147131d4f726f8c52f5f3ca1f2b13301488e88f8f11b3f4c2d002814c8decf3",
+      "token_vazio_classifications": 68
+    },
+    {
+      "batch": 3,
+      "chunk_bytes": 5791510,
+      "chunk_sha256": "8c31fdc8a1c3b0d25c9deb46fb500d138b3ff9ca6943b569ac24ba8efc86515f",
+      "conversation_end": 74,
+      "conversation_start": 50,
+      "duplicate_exact": 193,
+      "event_hash": "f9dec119d42e596ef4d022db29274bc87d777812ae5c3954d3a899c55fd02033",
+      "items": 2813,
+      "messages": 2788,
+      "non_message_nodes": 25,
+      "normalized_bytes": 9488391,
+      "normalized_sha256": "afea0a845b6bbad2548b1be888ef5d6e432e1c6e5a4fe22106b5b078ce564aa3",
+      "token_vazio_classifications": 44
+    },
+    {
+      "batch": 4,
+      "chunk_bytes": 3811557,
+      "chunk_sha256": "934a364e639259f55ee712e484204f3ffaaade60baefdffaaea0ffbc00339923",
+      "conversation_end": 99,
+      "conversation_start": 75,
+      "duplicate_exact": 113,
+      "event_hash": "ca58a2bcb10fcb3810ed3919b46e9cc48efa9202f3eb98784e91b575b87ca8ce",
+      "items": 1699,
+      "messages": 1674,
+      "non_message_nodes": 25,
+      "normalized_bytes": 6361554,
+      "normalized_sha256": "ab2852fba6b182812c7899e9aed4e1068698d69580a8a17d5809d60bfaa0375a",
+      "token_vazio_classifications": 57
+    }
+  ],
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "previous_event_id": "sha256:96a12751ea6bd27897b7b308971b8080981a4edc865419a37c90c4ad261a86cf",
+  "privacy_class": "PUBLIC_SANITIZED_POINTERS_ONLY",
+  "schema": "rafaelia.novoexport.memory.checkpoint.public.v1",
+  "source": {
+    "bytes": 21320257,
+    "logical_path": "NOVOexport/conversations-004.json",
+    "sha256": "477f650a94d535b76f0ce9283b22429df229cf93d44f11d9209be2ffd435a8c5"
+  },
+  "timestamp": "2026-08-05T14:16:56-03:00"
+}
