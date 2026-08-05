@@ -1,0 +1,40 @@
+{
+  "schema": "rafaelia.local-receipt.v1",
+  "event_id": "OPCORE94-20260805T1943-0300",
+  "timestamp_local": "2026-08-05T19:43:00-03:00",
+  "environment": {
+    "kind": "CONTAINER_REFERENCE",
+    "python": "python3",
+    "android_termux_executed": false
+  },
+  "commands": [
+    "python3 scripts/validate_operational_core_94.py data/core/operational-core-94.v1.json",
+    "python3 -m unittest discover -s tests -p test_operational_core_94.py -v"
+  ],
+  "result": {
+    "validator": "PASS",
+    "tests": "4/4 PASS",
+    "expected_total": 94,
+    "identified_count": 16,
+    "unitemized_count": 78,
+    "claim_allowed": false
+  },
+  "sha256": {
+    "data/core/operational-core-94.v1.json": "5af5fd6c4bf771a6e51fc23386a625110e0f79327d56e0c4a55475853373f408",
+    "schemas/operational-core-94.schema.json": "0cebc33fd645e993fab124c1812e49bdb38b380a0153ef1b545e1300f410a369",
+    "scripts/validate_operational_core_94.py": "cf50cdd0fc8acc8f342d974e3604c45ae03da0d50cd39407445fc6426fab833b",
+    "tests/test_operational_core_94.py": "c3b003d1d91702d1194018ad38ab350a9eb5f01c3d9a32ebe6e5822365185507",
+    "docs/OPERATIONAL_CORE_94_GOVERNED_PRIORITY_V1.md": "249a9847631bb59be713141bdf4ae3172df9f490a81390ca69ec6eedda6fcd2f"
+  },
+  "limits": [
+    "reported set of 94 not fully itemized",
+    "78 entries remain TOKEN_VAZIO_ITEMIZATION_PENDING",
+    "no Android or Termux physical execution",
+    "no independent scientific validation",
+    "no merge or publication"
+  ],
+  "f_ok": ["registry", "validator", "four tests", "hashes", "priority boundary"],
+  "f_gap": ["source artifact for all 94", "P2 provider IDs", "Termux receipt", "independent review"],
+  "f_next": ["anchor in Mapa draft PR", "locate original 94 itemization source", "close P0 before duplicates"],
+  "claim_allowed": false
+}
