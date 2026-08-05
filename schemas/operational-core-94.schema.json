@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/operational-core-94.schema.json",
+  "title": "RAFAELIA Operational Core 94",
+  "type": "object",
+  "required": ["schema", "event_id", "claim_allowed", "expected_total", "identified_count", "unitemized_count", "items", "unitemized_range", "f_ok", "f_gap", "f_next"],
+  "properties": {
+    "schema": {"const": "rafaelia.operational-core-94.v1"},
+    "event_id": {"type": "string", "minLength": 1},
+    "claim_allowed": {"const": false},
+    "expected_total": {"const": 94},
+    "identified_count": {"type": "integer", "minimum": 0, "maximum": 94},
+    "unitemized_count": {"type": "integer", "minimum": 0, "maximum": 94},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "priority", "source", "test", "environment", "receipt", "ecosystem_function", "claim_allowed"],
+        "properties": {
+          "id": {"pattern": "^OC94-[0-9]{3}$"},
+          "title": {"type": "string", "minLength": 1},
+          "priority": {"enum": ["P0", "P1", "P2", "TV"]},
+          "source": {"type": "object"},
+          "test": {"type": "object"},
+          "environment": {"type": "object"},
+          "receipt": {"type": "object"},
+          "ecosystem_function": {"type": "object"},
+          "claim_allowed": {"const": false}
+        },
+        "additionalProperties": true
+      }
+    },
+    "unitemized_range": {
+      "type": "object",
+      "required": ["first_id", "last_id", "count", "state", "promotion_rule"]
+    }
+  },
+  "additionalProperties": true
+}
