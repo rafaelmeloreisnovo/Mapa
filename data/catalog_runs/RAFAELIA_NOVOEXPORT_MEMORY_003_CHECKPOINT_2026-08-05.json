@@ -1,0 +1,62 @@
+{
+  "schema": "rafaelia.novoexport.memory.checkpoint.public.v1",
+  "event_id": "sha256:f00bc1cf6fcb4ca82f6ed692edf3b2fc2b51edacf59b0b4bbdeca1b79388b8da",
+  "timestamp": "2026-08-05T13:33:00-03:00",
+  "mode": "INCREMENTAL_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "privacy_class": "PUBLIC_SANITIZED_POINTERS_ONLY",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "source": {
+    "logical_path": "NOVOexport/conversations-003.json",
+    "sha256": "8544e29a071bfa80a21ebc25719ec5d0462cff289d8ce27f9dbed778e7fefc38",
+    "bytes": 20065953
+  },
+  "checkpoint": {
+    "global_state": "PARTIAL_PERSISTENCE",
+    "micro_batches": 4,
+    "conversations": 100,
+    "nodes": 9533,
+    "messages": 9433,
+    "duplicate_exact_records": 568,
+    "orphan_parent_edges": 0,
+    "token_vazio_nodes": 100,
+    "pipeline_state_checkpoints": 4,
+    "training_executed": false
+  },
+  "adapters": {
+    "GAIA_phi": [
+      "L1_raw",
+      "L2_parsed",
+      "L3_indexed"
+    ],
+    "Rafaelia_Private": [
+      "RMRALPHA"
+    ],
+    "RMRIA": "HOLD"
+  },
+  "f_ok": [
+    "Source hash fixed",
+    "Extraction, normalization and exact-record deduplication completed in four private micro-batches",
+    "Four append-only checkpoints persisted"
+  ],
+  "f_gap": [
+    "Private JSONL transport to CHUNKS_PRIVATE and NORMALIZED_PRIVATE blocked by file-reference rejection",
+    "002-to-003 reconciliation not verified",
+    "Shard not READY_FOR_GRAPH",
+    "Unique cross-lot message count remains TOKEN_VAZIO",
+    "No training executed"
+  ],
+  "f_next": [
+    "Retry transport using connector-native file references",
+    "Verify the four private JSONL pairs after transport",
+    "Reconcile conversations-002 to conversations-003",
+    "Only then promote the shard to READY_FOR_GRAPH",
+    "Publish only sanitized aggregate metadata"
+  ],
+  "gates": {
+    "ready_for_graph": false,
+    "automatic_merge": false,
+    "human_review_required": true,
+    "destructive_actions": false
+  }
+}
