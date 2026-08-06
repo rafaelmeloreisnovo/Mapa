@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "record_id": "RAFAELIA-ACC-V3-20260806",
+  "title": "Advanced Cognitive Cell V3",
+  "observed_at": "2026-08-06T10:30:00-03:00",
+  "epistemic_state": "VERIFIED_LIMITED_LOCAL",
+  "claim_allowed": false,
+  "canonical_authorities": {
+    "implementation": {
+      "repository": "rafaelmeloreisnovo/GAIA_phi",
+      "pull_request": 71,
+      "branch": "feat/advanced-cognitive-cell-v3-20260806",
+      "head_sha": "271c2ff4599737a61840d185096ecefd24bdfc78",
+      "paths": [
+        "dados/cognitive_memory/advanced_cognitive_cell_v3.py",
+        "dados/cognitive_memory/__init__.py",
+        "tests/test_advanced_cognitive_cell_v3.py",
+        "docs/ADVANCED_COGNITIVE_CELL_V3.md",
+        "docs/ADVANCED_COGNITIVE_CELL_V3_CLAIMS.json"
+      ]
+    },
+    "evidence": {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "pull_request": 204,
+      "head_sha": "7d38dba483de1798266854d734a8431b9d65589e",
+      "paths": [
+        "reports/evidence_runs/advanced_cognitive_cell_v3/README.md",
+        "reports/evidence_runs/advanced_cognitive_cell_v3/local_receipt.json"
+      ]
+    },
+    "research_interpretation": {
+      "repository": "rafaelmeloreisnovo/papers",
+      "pull_request": 44,
+      "head_sha": "86878b4bcc832d0fd535d8c385155fc5b0a58514",
+      "paths": [
+        "docs/ai_cognitive/ADVANCED_COGNITIVE_CELL_V3_RESEARCH_NOTE.md",
+        "docs/ai_cognitive/ADVANCED_COGNITIVE_CELL_V3_RESEARCH_CLAIMS.json"
+      ]
+    }
+  },
+  "drive_custody": {
+    "navigator_root_id": "1cwL1d-4KpVHkbYDtZwCyDzExOYYOFxzV",
+    "export_folder_id": "1cUjQzbCaEBS_t723530G617g4zBaBHIu",
+    "zip_snapshot_id": "1l01K7midie4o4OF42nkrq0M_5wkvODsz",
+    "implementation_id": "1m2QYDzYfIT4XCMy1gt6VUcx-Zda_DZS0",
+    "test_id": "17iNluPEeUI6fZr4sP5eLHW-4gCNfLkj6",
+    "claims_id": "1qLpfOMyb5siv__2CVhbOoFjczy2MeR8j",
+    "manifest_id": "1VgyhrZw_3NX7O5hnl66WgqiJ2ixYvRQk",
+    "report_id": "1m59RE6nrH5kGEs3u_Oz6gDverlqgCGyB",
+    "local_receipt_id": "10Y26vtL3yHi4zxgDS3Y74E-M0LTuwmc3",
+    "index_id": "14YRqWcImQg6q4LkkYENSVYkBbmLhwa-0"
+  },
+  "observed_gates": {
+    "shape_gradient_finiteness": "PASS_LOCAL",
+    "causal_prefix_isolation": "PASS_LOCAL",
+    "explicit_state_purity": "PASS_LOCAL",
+    "invalid_state_rejection": "PASS_LOCAL",
+    "remote_ci": "TOKEN_VAZIO",
+    "training_convergence": "TOKEN_VAZIO",
+    "baseline_superiority": "TOKEN_VAZIO",
+    "ablation_support": "TOKEN_VAZIO",
+    "production_readiness": "TOKEN_VAZIO",
+    "android_termux_deployment": "TOKEN_VAZIO"
+  },
+  "semantic_boundaries": {
+    "xi_current_meaning": "evidence-conditioned retention/write gating",
+    "memory_compression_claim": "REFUTED_FOR_CURRENT_IMPLEMENTATION",
+    "reason": "The recurrent state remains full B×S×D and no storage reduction mechanism is implemented.",
+    "sota_claim": "TOKEN_VAZIO"
+  },
+  "relations": [
+    {
+      "from": "GAIA_phi#71",
+      "type": "PRODUCES_IMPLEMENTATION",
+      "to": "RAFAELIA-ACC-V3-20260806"
+    },
+    {
+      "from": "RafPolimata#204",
+      "type": "RECORDS_BOUNDED_EVIDENCE_FOR",
+      "to": "GAIA_phi#71"
+    },
+    {
+      "from": "papers#44",
+      "type": "INTERPRETS_WITHOUT_REPLACING",
+      "to": "GAIA_phi#71"
+    },
+    {
+      "from": "Drive:14YRqWcImQg6q4LkkYENSVYkBbmLhwa-0",
+      "type": "EDITORIAL_INDEX_FOR",
+      "to": "RAFAELIA-ACC-V3-20260806"
+    }
+  ],
+  "next_verifiable_step": {
+    "action": "Create and run a deterministic benchmark harness with matched baselines and component ablations.",
+    "required_outputs": [
+      "raw metrics per seed",
+      "environment receipt",
+      "baseline and ablation matrix",
+      "p50/p95 latency and peak memory",
+      "immutable source and result hashes"
+    ]
+  }
+}
