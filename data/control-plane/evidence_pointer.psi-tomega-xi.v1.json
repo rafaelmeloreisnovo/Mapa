@@ -1,0 +1,89 @@
+{
+  "schema": "rafaelia.evidence-pointer.v1",
+  "id": "RAFCODE-PSI-TOMEGA-XI-SCAN-V2-20260806",
+  "observed_at": "2026-08-06T13:45:47Z",
+  "claim_allowed": false,
+  "authorities": [
+    {
+      "role": "runtime",
+      "repository": "rafaelmeloreisnovo/GAIA_phi",
+      "pull_request": 70,
+      "branch": "feat/psi-tomega-feedback-v1-20260806",
+      "head_sha": "27ec3e208793c79bf690cfa9a0edf6120313f123",
+      "state": "OPEN_MERGEABLE"
+    },
+    {
+      "role": "mathematical_epistemic",
+      "repository": "rafaelmeloreisnovo/papers",
+      "pull_request": 43,
+      "branch": "docs/psi-tomega-feedback-v1-20260806",
+      "head_sha": "a6c2aace7499013a8763240a227a25964831cee9",
+      "state": "OPEN_MERGEABLE"
+    }
+  ],
+  "drive": {
+    "document_id": "1It5dDGCudbhZljhjtQd26KIm5HVEcpdNpJ1HFC9mhYs",
+    "state": "APPEND_ONLY_UPDATED",
+    "revision_id": "AIroW3646Mowsk2sAopL8Bp9jW6BdKB6gtnjpeh4QZcP_LvWJn9mg6YZDLT41zzC2v_uqaD2LLN-xENkXHD087Kg_4hG-T1IljMl9Q7PPbE"
+  },
+  "evidence": {
+    "local_tests": {
+      "result": "19_PASS",
+      "environment": "Python 3.13.5; PyTorch 2.10.0 CPU; Linux x86_64"
+    },
+    "synthetic_benchmark": {
+      "seed": 42,
+      "steps": 50,
+      "baseline_final_loss": 0.4470159411430359,
+      "candidate_final_loss": 0.5456559658050537,
+      "baseline_latency_p50_ms": 0.1496725,
+      "candidate_latency_p50_ms": 0.482482,
+      "result": "BASELINE_BETTER_IN_THIS_RUN",
+      "architecture_advantage": "NOT_ESTABLISHED"
+    }
+  },
+  "scan_contract": {
+    "structural": [
+      "README",
+      "TREE",
+      "BRANCHES_PRS",
+      "FILES",
+      "SHA256",
+      "CONTROLLED_TERMS"
+    ],
+    "epistemic": [
+      "CLAIM",
+      "SOURCE",
+      "EVIDENCE",
+      "FALSIFIER",
+      "STATE",
+      "AUTHORITY",
+      "NEXT_TEST"
+    ],
+    "invariants": [
+      "NAME_NE_CONTENT",
+      "METADATA_NE_FULL_READ",
+      "KEYWORD_NE_EVIDENCE",
+      "COMMIT_NE_EXECUTION",
+      "TOKEN_VAZIO_NE_ZERO",
+      "NEGATIVE_RESULT_MUST_BE_RETAINED"
+    ]
+  },
+  "gaps": [
+    "TOKEN_VAZIO_TARGET_DATASET",
+    "TOKEN_VAZIO_MULTI_SEED",
+    "TOKEN_VAZIO_BUDGET_MATCH",
+    "TOKEN_VAZIO_REPRODUCTION",
+    "TOKEN_VAZIO_PLATFORM_GPU_MIXED_PRECISION",
+    "TOKEN_VAZIO_PLATFORM_ANDROID_TERMUX",
+    "TOKEN_VAZIO_HEAD_AWARE",
+    "TOKEN_VAZIO_PRODUCTION"
+  ],
+  "not_claimed": [
+    "COGNITIVE_SEMANTICS",
+    "NEUROBIOLOGICAL_CORRESPONDENCE",
+    "PHYSICAL_FIELD_CORRESPONDENCE",
+    "GENERAL_SUPERIORITY"
+  ],
+  "next": "MULTI_SEED_BUDGET_MATCHED_REAL_TASK_ABLATION"
+}
