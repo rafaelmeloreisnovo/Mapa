@@ -1,0 +1,45 @@
+name: Cognitive operator invariant
+
+on:
+  pull_request:
+    paths:
+      - "data/ontology/cognitive-operators.v1.json"
+      - "data/ontology/cognitive-operators/**"
+      - "scripts/validate_cognitive_operators.py"
+      - "tests/test_cognitive_operators.py"
+      - "docs/COGNITIVE_OPERATOR_INVARIANT_V1.md"
+      - ".github/workflows/cognitive-operator-gate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "data/ontology/cognitive-operators.v1.json"
+      - "data/ontology/cognitive-operators/**"
+      - "scripts/validate_cognitive_operators.py"
+      - "tests/test_cognitive_operators.py"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: python -m py_compile scripts/validate_cognitive_operators.py tests/test_cognitive_operators.py
+      - name: Unit tests
+        run: python -m unittest -v tests/test_cognitive_operators.py
+      - name: Registry audit
+        run: |
+          python scripts/validate_cognitive_operators.py \
+            --manifest data/ontology/cognitive-operators.v1.json \
+            --output build/cognitive-operators/audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cognitive-operator-audit
+          path: build/cognitive-operators/audit.json
+          if-no-files-found: error
