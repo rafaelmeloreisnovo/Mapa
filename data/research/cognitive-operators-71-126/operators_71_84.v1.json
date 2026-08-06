@@ -1,0 +1,23 @@
+{
+  "schema": "raf.cognitive-operators-part.v1",
+  "part": 1,
+  "range": [71, 84],
+  "count": 14,
+  "claim_allowed": false,
+  "operators": [
+    {"id":71,"name":"Distância espectral de Connes","domain":"geometria não comutativa","class":"ADAPTED_STANDARD","bindings":["Xi","Omega_infty"],"expression":"d(\\varphi,\\psi)=\\sup_{a\\in\\mathcal A}\\{|\\varphi(a)-\\psi(a)|:\\|[D,a]\\|\\le 1\\},\\quad D=D_0+\\Xi","claim_allowed":false},
+    {"id":72,"name":"Distância de Gromov–Hausdorff","domain":"geometria métrica","class":"ADAPTED_STANDARD","bindings":["Xi","Psi_v"],"expression":"d_{GH}(X,Y)=\\inf_{Z,f,g}d_H^Z(f(X),g(Y))=\\tfrac12\\inf_R\\operatorname{dis}(R)","claim_allowed":false},
+    {"id":73,"name":"Homologia persistente de tokens","domain":"topologia de dados","class":"ADAPTED_STANDARD","bindings":["Xi","Psi_v","Omega_b"],"expression":"\\beta_k(t)=\\dim H_k(K_t),\\quad K_t=\\mathrm{Filtration}(\\Xi,t)","claim_allowed":false},
+    {"id":74,"name":"Projeção Mori–Zwanzig da memória","domain":"dinâmica reduzida","class":"ADAPTED_STANDARD","bindings":["Psi_v","B_psi","T_Omega"],"expression":"\\frac{d}{dt}P\\Psi_v=PLP\\Psi_v+\\int_0^tK(s)P\\Psi_v(t-s)\\,ds+F(t)","claim_allowed":false},
+    {"id":75,"name":"Dinâmica competitiva de padrões","domain":"biologia de sistemas","class":"MODEL_ANALOGY","bindings":["Psi_v","Omega_b"],"expression":"\\dot\\varphi_i=\\varphi_i(r_i-\\sum_j\\alpha_{ij}\\varphi_j)","claim_allowed":false},
+    {"id":76,"name":"Sincronização de fases atencionais","domain":"dinâmica não linear","class":"ADAPTED_STANDARD","bindings":["T_Omega","Psi_v"],"expression":"\\dot\\theta_k=\\omega_k+\\frac{K}{N}\\sum_j\\sin(\\theta_j-\\theta_k),\\quad r e^{i\\psi}=\\frac1N\\sum_je^{i\\theta_j}","claim_allowed":false},
+    {"id":77,"name":"Processo de Hawkes para rajadas de atenção","domain":"processos pontuais","class":"ADAPTED_STANDARD","bindings":["B_psi","Psi_v"],"expression":"\\lambda(t)=\\mu+\\sum_{t_i<t}\\alpha e^{-\\beta(t-t_i)},\\quad \\alpha/\\beta<1","claim_allowed":false},
+    {"id":78,"name":"Reação–difusão de mapas cognitivos","domain":"morfogênese","class":"ADAPTED_STANDARD","bindings":["Psi_v","Omega_b"],"expression":"\\partial_\\tau\\mathbf u=\\mathbf D\\nabla^2\\mathbf u+\\mathbf f(\\mathbf u),\\quad \\mathbf u=(\\Psi_v,\\Omega_b)","claim_allowed":false},
+    {"id":79,"name":"Modelo de pilha de areia BTW","domain":"criticalidade auto-organizada","class":"CORRECTED_STANDARD","bindings":["Xi","Omega_b"],"expression":"z_i\\ge z_c\\Rightarrow z_i\\leftarrow z_i-q_i,\\quad z_j\\leftarrow z_j+1\\ (j\\sim i)","claim_allowed":false},
+    {"id":80,"name":"Equilíbrio de Nash de codificação","domain":"teoria dos jogos","class":"ADAPTED_STANDARD","bindings":["Xi","B_psi"],"expression":"u_i(s_i^*,s_{-i}^*)\\ge u_i(s_i,s_{-i}^*)\\quad\\forall i,s_i","claim_allowed":false},
+    {"id":81,"name":"Valor de Shapley dos módulos","domain":"jogos cooperativos","class":"ADAPTED_STANDARD","bindings":["Psi_v","Xi","Omega_b"],"expression":"\\phi_i(v)=\\sum_{S\\subseteq N\\setminus\\{i\\}}\\frac{|S|!(n-|S|-1)!}{n!}[v(S\\cup\\{i\\})-v(S)]","claim_allowed":false},
+    {"id":82,"name":"Filtro de Kalman da coerência","domain":"estimação bayesiana","class":"ADAPTED_STANDARD","bindings":["Xi","Omega_b"],"expression":"\\hat x_{t|t}=\\hat x_{t|t-1}+K_t(y_t-H_t\\hat x_{t|t-1})","claim_allowed":false},
+    {"id":83,"name":"Equação de Bellman para compressão","domain":"decisão sequencial","class":"ADAPTED_STANDARD","bindings":["Xi","B_psi"],"expression":"V(s)=\\min_a\\{c(s,a)+\\gamma\\mathbb E[V(s')|s,a]\\}","claim_allowed":false},
+    {"id":84,"name":"Princípio do máximo de Pontryagin","domain":"controle ótimo","class":"ADAPTED_STANDARD","bindings":["Xi","T_Omega"],"expression":"\\mathcal H(x,u,\\lambda)=\\ell(x,u)+\\lambda^\\top f(x,u),\\quad \\dot\\lambda=-\\partial_x\\mathcal H","claim_allowed":false}
+  ]
+}
