@@ -1,0 +1,19 @@
+{
+  "schema":"raf.cognitive-operators-part.v1","part":2,"range":[85,98],"count":14,"claim_allowed":false,
+  "operators":[
+    {"id":85,"name":"Entropia e q-log de Tsallis","domain":"mecânica estatística não extensiva","class":"ADAPTED_STANDARD","bindings":["Xi","Omega_infty"],"expression":"S_q=\\frac{1-\\sum_i p_i^q}{q-1},\\quad \\log_qx=\\frac{x^{1-q}-1}{1-q}","claim_allowed":false},
+    {"id":86,"name":"Espectro de entropias de Rényi","domain":"teoria da informação","class":"ADAPTED_STANDARD","bindings":["Xi"],"expression":"H_\\alpha(p)=\\frac1{1-\\alpha}\\log\\sum_ip_i^\\alpha","claim_allowed":false},
+    {"id":87,"name":"Equação mestra de difusão com saltos","domain":"processos de salto","class":"ADAPTED_STANDARD","bindings":["Xi","Psi_v"],"expression":"\\partial_tp=-\\nabla\\cdot(vp)+\\nabla^2(Dp)+\\int[w(\\theta'\\to\\theta)p(\\theta')-w(\\theta\\to\\theta')p(\\theta)]d\\theta'","claim_allowed":false},
+    {"id":88,"name":"Sensibilidade de Malliavin","domain":"cálculo estocástico","class":"ADAPTED_STANDARD","bindings":["T_Omega"],"expression":"\\mathbb D^2_{t,s}T_\\Omega=\\delta^2T_\\Omega/(\\delta W_t\\delta W_s)","claim_allowed":false},
+    {"id":89,"name":"Operadores de Hida em ruído branco","domain":"análise de ruído branco","class":"CORRECTED_STANDARD","bindings":["Xi","B_psi"],"expression":"a_tF=D_tF,\\quad a_t^\\dagger F=\\text{criação dual de }D_t","claim_allowed":false},
+    {"id":90,"name":"Ação de grandes desvios","domain":"grandes desvios","class":"ADAPTED_STANDARD","bindings":["Omega_b","Psi_v"],"expression":"\\mathbb P(X^\\varepsilon\\approx\\phi)\\asymp e^{-I_{0T}(\\phi)/\\varepsilon}","claim_allowed":false},
+    {"id":91,"name":"Funtor entre categorias de janelas","domain":"teoria de categorias","class":"FORMAL_SPECIFICATION","bindings":["Xi","Psi_v"],"expression":"\\mathcal F:\\mathbf{Window}_A\\to\\mathbf{Window}_B,\\quad \\mathcal F(g\\circ f)=\\mathcal F(g)\\circ\\mathcal F(f)","claim_allowed":false},
+    {"id":92,"name":"Transformação natural entre modelos","domain":"teoria de categorias","class":"FORMAL_SPECIFICATION","bindings":["Xi","Psi_v"],"expression":"\\eta:\\mathcal F\\Rightarrow\\mathcal G,\\quad \\eta_Y\\circ\\mathcal F(f)=\\mathcal G(f)\\circ\\eta_X","claim_allowed":false},
+    {"id":93,"name":"Homotopia entre representações","domain":"topologia","class":"FORMAL_SPECIFICATION","bindings":["Xi"],"expression":"H:X\\times[0,1]\\to Y,\\quad H(x,0)=\\Xi_0(x),\\ H(x,1)=\\Xi_1(x)","claim_allowed":false},
+    {"id":94,"name":"Grupo fundamental de coerência","domain":"topologia algébrica","class":"MODEL_ANALOGY","bindings":["Psi_v","Omega_b"],"expression":"\\pi_1(\\mathcal M,\\Psi_{v,0})=\\{\\text{loops baseados}\\}/\\text{homotopia}","claim_allowed":false},
+    {"id":95,"name":"Feixe de contextos","domain":"teoria de feixes","class":"FORMAL_SPECIFICATION","bindings":["Xi","Psi_v"],"expression":"\\mathcal F(U)=\\{\\text{seções locais em }U\\},\\quad \\text{restrição + colagem}","claim_allowed":false},
+    {"id":96,"name":"Cohomologia de Čech de contextos","domain":"cohomologia","class":"ADAPTED_STANDARD","bindings":["Xi","B_psi"],"expression":"\\check H^k(\\mathcal U,\\mathcal F)=\\ker\\delta^k/\\operatorname{im}\\delta^{k-1}","claim_allowed":false},
+    {"id":97,"name":"Índice de operador elíptico cognitivo","domain":"teoria do índice","class":"MODEL_ANALOGY","bindings":["Xi","Omega_infty"],"expression":"\\operatorname{ind}(D)=\\int_{\\mathcal M}\\hat A(T\\mathcal M)\\wedge\\operatorname{ch}(E)","claim_allowed":false},
+    {"id":98,"name":"Teoria de Morse para paisagem de Xi","domain":"topologia diferencial","class":"ADAPTED_STANDARD","bindings":["Xi"],"expression":"C_k=\\#\\{x:\\nabla\\Xi(x)=0,\\ \\operatorname{index}\\operatorname{Hess}\\Xi(x)=k\\}","claim_allowed":false}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema":"raf.cognitive-operators-part.v1","part":4,"range":[113,126],"count":14,"claim_allowed":false,
+  "operators":[
+    {"id":113,"name":"Hierarquia de Schwinger–Dyson","domain":"teoria quântica de campos","class":"MODEL_ANALOGY","bindings":["T_Omega","Psi_v"],"expression":"\\left\\langle\\frac{\\delta S}{\\delta\\theta(x)}\\mathcal O\\right\\rangle=-i\\left\\langle\\frac{\\delta\\mathcal O}{\\delta\\theta(x)}\\right\\rangle","claim_allowed":false},
+    {"id":114,"name":"Quasiprobabilidade de Wigner","domain":"mecânica quântica em espaço de fase","class":"MODEL_ANALOGY","bindings":["Psi_v","Omega_b"],"expression":"W(q,p)=\\frac1{2\\pi\\hbar}\\int dy\\,e^{-ipy/\\hbar}\\langle q+y/2|\\rho|q-y/2\\rangle","claim_allowed":false},
+    {"id":115,"name":"Função Q de Husimi","domain":"espaço de fase quântico","class":"MODEL_ANALOGY","bindings":["Psi_v","Omega_b"],"expression":"Q(\\alpha)=\\pi^{-1}\\langle\\alpha|\\rho|\\alpha\\rangle","claim_allowed":false},
+    {"id":116,"name":"Fase geométrica","domain":"geometria quântica","class":"MODEL_ANALOGY","bindings":["Psi_v","T_Omega"],"expression":"\\gamma=i\\oint\\langle\\Psi(\\lambda)|\\nabla_\\lambda\\Psi(\\lambda)\\rangle\\cdot d\\lambda","claim_allowed":false},
+    {"id":117,"name":"Fase Aharonov–Casher","domain":"fase topológica","class":"MODEL_ANALOGY","bindings":["T_Omega"],"expression":"\\Delta\\phi_{AC}=\\frac1{\\hbar c^2}\\oint(\\boldsymbol\\mu\\times\\mathbf E)\\cdot d\\mathbf l","claim_allowed":false},
+    {"id":118,"name":"Modo zero de Majorana","domain":"matéria topológica","class":"CORRECTED_STANDARD","bindings":["Psi_v"],"expression":"\\gamma=\\gamma^\\dagger,\\quad\\{\\gamma_i,\\gamma_j\\}=2\\delta_{ij}","claim_allowed":false},
+    {"id":119,"name":"Código tórico de Kitaev","domain":"correção quântica/topological order","class":"MODEL_ANALOGY","bindings":["Omega_b","B_psi"],"expression":"H=-J\\sum_sA_s-K\\sum_pB_p,\\quad A_s=\\prod_{j\\in s}\\sigma_j^x,\\ B_p=\\prod_{j\\in p}\\sigma_j^z","claim_allowed":false},
+    {"id":120,"name":"Lei de Torricelli para fluxo informacional","domain":"mecânica dos fluidos","class":"MODEL_ANALOGY","bindings":["Omega_infty"],"expression":"v=\\sqrt{2g\\Delta h}","claim_allowed":false},
+    {"id":121,"name":"Relação Gibbs–Thomson","domain":"capilaridade","class":"ADAPTED_STANDARD","bindings":["Omega_b","Xi"],"expression":"\\Delta\\mu\\approx\\gamma\\Omega_m\\kappa\\quad(\\kappa=2/R\\ \\text{para esfera})","claim_allowed":false},
+    {"id":122,"name":"Relações lineares de Onsager","domain":"termodinâmica irreversível","class":"ADAPTED_STANDARD","bindings":["B_psi","T_Omega"],"expression":"J_i=\\sum_jL_{ij}X_j,\\quad L_{ij}=\\epsilon_i\\epsilon_jL_{ji}(B\\to-B)","claim_allowed":false},
+    {"id":123,"name":"Princípio de mínima produção de entropia","domain":"termodinâmica de não equilíbrio","class":"CORRECTED_STANDARD","bindings":["Xi","Omega_b"],"expression":"\\sigma=\\sum_iJ_iX_i\\ge0,\\quad \\delta\\sigma=0\\ \\text{no estado estacionário linear sob vínculos}","claim_allowed":false},
+    {"id":124,"name":"Igualdade de Jarzynski","domain":"termodinâmica estocástica","class":"ADAPTED_STANDARD","bindings":["Xi","T_Omega"],"expression":"\\langle e^{-\\beta W}\\rangle=e^{-\\beta\\Delta F}","claim_allowed":false},
+    {"id":125,"name":"Teorema de flutuação de Crooks","domain":"termodinâmica estocástica","class":"ADAPTED_STANDARD","bindings":["Xi","T_Omega"],"expression":"\\frac{P_F(W)}{P_R(-W)}=e^{\\beta(W-\\Delta F)}","claim_allowed":false},
+    {"id":126,"name":"Limite de Landauer","domain":"termodinâmica da informação","class":"ADAPTED_STANDARD","bindings":["Xi","B_psi"],"expression":"Q_{\\min}\\ge k_BT\\ln2\\ \\text{por bit apagado logicamente irreversível}","claim_allowed":false}
+  ]
+}

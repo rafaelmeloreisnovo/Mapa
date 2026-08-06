@@ -1,0 +1,19 @@
+{
+  "schema":"raf.cognitive-operators-part.v1","part":3,"range":[99,112],"count":14,"claim_allowed":false,
+  "operators":[
+    {"id":99,"name":"Potencial de catástrofe cusp/fold","domain":"teoria de catástrofes","class":"ADAPTED_STANDARD","bindings":["Omega_b"],"expression":"V(x)=\\tfrac14x^4+\\tfrac12ax^2+bx","claim_allowed":false},
+    {"id":100,"name":"Dinâmica gradiente de catástrofe","domain":"sistemas dinâmicos","class":"MODEL_ANALOGY","bindings":["Psi_v"],"expression":"\\dot\\Psi_v=-\\partial_{\\Psi_v}V,\\quad V=\\tfrac13\\Psi_v^3+a\\Psi_v","claim_allowed":false},
+    {"id":101,"name":"Complexo de Floer de trajetórias","domain":"topologia simplética","class":"RESEARCH_AGENDA_ONLY","bindings":["Psi_v","T_Omega"],"expression":"\\partial_F[\\gamma]=\\sum_{\\gamma'}\\#\\mathcal M(\\gamma,\\gamma')[\\gamma']","claim_allowed":false},
+    {"id":102,"name":"Invariantes de Gromov–Witten","domain":"geometria simplética","class":"RESEARCH_AGENDA_ONLY","bindings":["Omega_infty","Psi_v"],"expression":"\\langle\\tau_{a_1}(\\alpha_1)\\cdots\\tau_{a_n}(\\alpha_n)\\rangle_{g,\\beta}","claim_allowed":false},
+    {"id":103,"name":"Funcional de Chern–Simons","domain":"teoria de campos topológica","class":"MODEL_ANALOGY","bindings":["Omega_infty","T_Omega"],"expression":"CS(A)=\\frac{k}{4\\pi}\\int_{M^3}\\operatorname{Tr}(A\\wedge dA+\\tfrac23A\\wedge A\\wedge A)","claim_allowed":false},
+    {"id":104,"name":"Equação de Yang–Mills semântica","domain":"teoria de gauge","class":"MODEL_ANALOGY","bindings":["T_Omega","Psi_v"],"expression":"D_\\mu F^{\\mu\\nu}=J^\\nu","claim_allowed":false},
+    {"id":105,"name":"Campo escalar com quebra espontânea","domain":"teoria de campos","class":"MODEL_ANALOGY","bindings":["Omega_b","T_Omega"],"expression":"\\mathcal L=|D_\\mu\\phi|^2-\\lambda(|\\phi|^2-v^2)^2","claim_allowed":false},
+    {"id":106,"name":"Equações de Seiberg–Witten","domain":"geometria diferencial","class":"RESEARCH_AGENDA_ONLY","bindings":["T_Omega","Omega_b"],"expression":"D_A\\sigma=0,\\quad F_A^+=q(\\sigma)","claim_allowed":false},
+    {"id":107,"name":"Equação de Dirac não linear","domain":"PDE não linear","class":"MODEL_ANALOGY","bindings":["Psi_v"],"expression":"i\\gamma^\\mu\\partial_\\mu\\Psi_v-m\\Psi_v+g(\\bar\\Psi_v\\Psi_v)\\Psi_v=0","claim_allowed":false},
+    {"id":108,"name":"Sistema Maxwell–Bloch","domain":"óptica quântica","class":"MODEL_ANALOGY","bindings":["Psi_v","Omega_b","T_Omega"],"expression":"\\dot P=-\\gamma_\\perp P+gED,\\quad \\dot D=-\\gamma_\\parallel(D-D_0)-2g\\Re(E^*P),\\quad \\partial_tE=\\mathcal M(E,P)","claim_allowed":false},
+    {"id":109,"name":"Equação mestra de Lindblad","domain":"sistemas quânticos abertos","class":"MODEL_ANALOGY","bindings":["Psi_v","Omega_b"],"expression":"\\dot\\rho=-\\frac{i}{\\hbar}[H,\\rho]+\\sum_k(L_k\\rho L_k^\\dagger-\\tfrac12\\{L_k^\\dagger L_k,\\rho\\})","claim_allowed":false},
+    {"id":110,"name":"Entropia de von Neumann","domain":"informação quântica","class":"MODEL_ANALOGY","bindings":["Psi_v","Xi"],"expression":"S(\\rho_A)=-\\operatorname{Tr}(\\rho_A\\log\\rho_A),\\quad \\rho_A=\\operatorname{Tr}_B\\rho_{AB}","claim_allowed":false},
+    {"id":111,"name":"Funcional de influência Feynman–Vernon","domain":"sistemas quânticos abertos","class":"MODEL_ANALOGY","bindings":["T_Omega","Xi"],"expression":"\\mathcal F[q,q']=\\exp\\{iS_{IF}[q,q']\\}","claim_allowed":false},
+    {"id":112,"name":"Funções de Green em contorno de Keldysh","domain":"não equilíbrio","class":"MODEL_ANALOGY","bindings":["Xi","T_Omega"],"expression":"G^R(t,t')=-i\\Theta(t-t')\\langle[\\Xi(t),\\Xi(t')]\\rangle","claim_allowed":false}
+  ]
+}
