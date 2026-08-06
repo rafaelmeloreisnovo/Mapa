@@ -1,0 +1,124 @@
+{
+  "schema": "rafaelia.sementeira.custody_event.v1",
+  "event_id": "TERMUX-MANIFEST-PROVENANCE-GATE-20260806-V1",
+  "generated_at": "2026-08-06T08:39:53Z",
+  "append_only": true,
+  "claim_allowed": false,
+  "release_allowed": false,
+  "scope": "termux package builder, runtime authority and physical promotion gates",
+  "origins": [
+    {
+      "repository": "rafaelmeloreisnovo/termux-packages",
+      "ref": "main",
+      "commit": "cde7ed15e5c529847f9e27904a4d454f166bcb8f",
+      "state": "HOST_HELLO_WORLD_REAL_PAYLOAD_OBSERVED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-packages",
+      "pull_request": 4,
+      "ref": "fix/manifest-gate-provenance-20260806",
+      "commit": "e111c2f81b13ee9b30cb5cc0d675c37b9feec659",
+      "state": "OPEN_DRAFT_EXPERIMENTAL_MANIFEST_GATE"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "ref": "master",
+      "commit": "ff500183d1b3dafcda9e15807c05bc9390fa2712",
+      "state": "R3_2_NDK_BLOCKED_PRIOR_LOCK"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "pull_request": 331,
+      "ref": "audit/reconcile-termux-packages-lock-20260806",
+      "commit": "e84fd9a578de83426314087db5cf24512b7f4b1a",
+      "state": "OPEN_DRAFT_AUTHORITY_RECONCILIATION"
+    },
+    {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "commit": "2edd4bb9e32d0de19a7185e0eed10d329086b460",
+      "state": "PASS_POSTMERGE_FULL_SUITE_RECEIPT",
+      "tests_passed": 924,
+      "workflows_success": 7,
+      "next_gate": "RLL-P0-TERMUX-PHYSICAL-REPLAY"
+    }
+  ],
+  "seven_directions": {
+    "fato": [
+      "the termux-packages fork is no longer empty",
+      "PR #4 consumes and validates the binary manifest before package execution",
+      "PR #331 preserves upstream as production reference and the fork as experimental builder",
+      "RLL software/governance integration has a 924-test and 7-workflow receipt"
+    ],
+    "lacuna": [
+      "NDK 26.3.11579264 is not installed on the verified host",
+      "ARMv7 and AArch64 physical package receipts do not exist",
+      "source fetching and SHA-256 verification are not implemented in the experimental builder",
+      "patch execution and dependency closure are incomplete",
+      "TAR versus deb/apt/dpkg distribution authority is undecided"
+    ],
+    "invariante": [
+      "upstream production reference cannot be silently replaced",
+      "experimental progress cannot bypass toolchain and device receipts",
+      "absence of evidence remains TOKEN_VAZIO",
+      "every promotion must point to source, toolchain, package hash, installation, execution and rollback"
+    ],
+    "variante": [
+      "retain upstream as source while using fork only as experimental compiler",
+      "promote individual packages after per-ABI receipts rather than promoting the whole fork",
+      "introduce a manifest v2 if the v1 dependency bound cannot represent the corpus losslessly"
+    ],
+    "prova_falsificador": [
+      "manifest malformed or package missing must stop before build",
+      "configure non-zero must remain non-zero",
+      "empty prefix must block package creation",
+      "legacy /data/data/com.termux/files/usr occurrence must block promotion",
+      "device install or rollback failure must block release"
+    ],
+    "parabola": "The upstream is the public road; the fork is the experimental bridge. The bridge may be promising, but traffic is not diverted until its pillars are tested on both banks.",
+    "retroalimentacao": {
+      "F_ok": "manifest and authority gates materialized in draft PRs; RLL software receipt preserved",
+      "F_gap": "NDK, source acquisition, two ABI builds, distribution contract and device receipts",
+      "F_next": "execute toolchain verification, build ARMv7/AArch64, scan prefix, decide package format and seal install/exec/rollback receipts"
+    }
+  },
+  "authority_graph": [
+    {
+      "from": "termux/termux-packages@eb124b51a949c7a0943275a18f94371e69756449",
+      "relation": "PRODUCTION_REFERENCE_FOR",
+      "to": "termux-app-rafacodephi:R3"
+    },
+    {
+      "from": "rafaelmeloreisnovo/termux-packages#4",
+      "relation": "EXPERIMENTAL_BUILDER_FOR",
+      "to": "termux-app-rafacodephi#331"
+    },
+    {
+      "from": "termux-app-rafacodephi#331",
+      "relation": "REQUIRES_BEFORE_PROMOTION",
+      "to": "NDK+ARMV7+AARCH64+PREFIX_SCAN+DEVICE_RECEIPTS"
+    },
+    {
+      "from": "RLL@2edd4bb9e32d0de19a7185e0eed10d329086b460",
+      "relation": "REQUIRES_NEXT",
+      "to": "TERMUX_PHYSICAL_REPLAY"
+    }
+  ],
+  "token_vazio": [
+    "TOKEN_VAZIO_TOOLCHAIN_RECEIPT",
+    "TOKEN_VAZIO_SOURCE_FETCH",
+    "TOKEN_VAZIO_PATCH_EXECUTION",
+    "TOKEN_VAZIO_MANIFEST_V2_REQUIRED",
+    "TOKEN_VAZIO_DEPENDENCY_CLOSURE",
+    "TOKEN_VAZIO_DEB_APT_DPKG_CONTRACT",
+    "TOKEN_VAZIO_ARMV7_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_AARCH64_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_INSTALL_EXEC_ROLLBACK_RECEIPT",
+    "TOKEN_VAZIO_RLL_TERMUX_PHYSICAL_REPLAY"
+  ],
+  "decision": {
+    "production_promotion": "BLOCKED_FAIL_CLOSED",
+    "merge_authorization": false,
+    "automatic_release": false,
+    "next_authority": "physical evidence from verified build hosts and devices"
+  }
+}
