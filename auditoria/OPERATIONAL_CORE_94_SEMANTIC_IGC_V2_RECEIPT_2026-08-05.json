@@ -1,0 +1,67 @@
+{
+  "schema": "rafaelia.operational-core-94.semantic-igc.receipt.v2",
+  "event_id": "OPCORE94-SEMIGC-20260805T2000-0300",
+  "timestamp_local": "2026-08-05T20:00:00-03:00",
+  "claim_allowed": false,
+  "mode": ["append-only", "non-destructive", "fail-closed", "evidence-first"],
+  "github": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pr": 155,
+    "branch": "audit/operational-core-94-governed-20260805",
+    "head_before_receipt": "d9d5592b453654358f46a1a175ebcf2ab8c9bb52",
+    "merge_executed": false
+  },
+  "predecessor": {"event_id": "OPCORE94-20260805T1943-0300", "v1_blob_sha": "95520fb8e16b10cde997e9c8833103d4faad0140", "v1_preserved": true},
+  "environment": {"class": "CONTAINER_REFERENCE", "python": "3.13.5", "platform": "Linux-6.18.35-x86_64-with-glibc2.41", "termux_physical": false},
+  "execution": {
+    "json_schema_draft_2020_12": "PASS",
+    "semantic_validator": "PASS",
+    "adversarial_tests": "9/9 PASS",
+    "python_compile": "PASS",
+    "nodes": 16,
+    "typed_paths": 37,
+    "anchors_read_complete": "6/6",
+    "p2_provider_sha_resolved": "7/7",
+    "generator_lineage_resolved": "6/7",
+    "unitemized": 78,
+    "physical_execution_verified": 0,
+    "independent_scientific_validation_verified": 0
+  },
+  "generated_artifacts": {
+    "data/core/operational-core-94.semantic-igc.v2.json": {"sha256": "9a6d83f3ecb6d7abf988b77299ebbb6ebbc58a8c546ccdf8e3678ef3f82a4aeb", "bytes": 8049},
+    "data/core/shards/operational-core-94.nodes-001-008.v2.json": {"sha256": "172674294981a4c36854d0efbb48fbc3fd28e58932d215ba35a849c93c7409ab", "bytes": 9017},
+    "data/core/shards/operational-core-94.nodes-009-016.v2.json": {"sha256": "a5687edcbe6d43a9afb6150c551661e6e54f09979f4e61ea2dec973e1545644f", "bytes": 14494},
+    "data/core/shards/operational-core-94.paths-001-019.v2.json": {"sha256": "e5cf2d538597054970c3b281adcf358fa9f107f7a85afa6c8f2b31204e538c95", "bytes": 8686},
+    "data/core/shards/operational-core-94.paths-020-037.v2.json": {"sha256": "7f565c5438375a5fa816089fef03a2c1dad26705db8fae9eb1b322b66a8e12d8", "bytes": 8622},
+    "schemas/operational-core-94-semantic-igc-v2.schema.json": {"sha256": "87392793160d22a52bb530be4e83f48ad8995eeb7586285ec946421bfab9dd65", "bytes": 2581},
+    "scripts/validate_operational_core_94_semantic_igc_v2.py": {"sha256": "8fc31c9a1b57824e6cdb1bfc0f07e2ad5caad67c7aae859b264c3a27e4fe3aba", "bytes": 7837},
+    "tests/test_operational_core_94_semantic_igc_v2.py": {"sha256": "352705018216349b7ebbe16f7e3f7d33117341b561a1b0bc7aa6032c57ee71e8", "bytes": 3440},
+    "docs/canonical/2026-08-05/OPERATIONAL_CORE_94_SEMANTIC_IGC_V2.md": {"sha256": "5a1f617965d5c165100591317dec470a7d5a13a13127787f0944b81711685977", "bytes": 4199}
+  },
+  "source_byte_receipts": {
+    "omega_hot_rank.txt": {"sha256": "b20a0492f882f383235b5c2f4ead7ad5c9ee507f94e6a244c31d0815563b0f46", "bytes": 2658},
+    "omega_metrics_abc.txt": {"sha256": "a388b353f67406389b7e56d3677b678e1bb6960e99f53f9b092a6ab545111855", "bytes": 3516},
+    "omega_threads_rank.txt": {"sha256": "14965fded09af53a74fbc6be417a0b0e9b696a322f025ab1facf9a9ac2f5174f", "bytes": 4395},
+    "zone_conv_streaks.txt": {"sha256": "a06f6304f6fb5317165a82e74e20e6fc2cd7d9fe5d4236763c4d78dadc72e777", "bytes": 783},
+    "omega_export_jsonlite_report.md": {"sha256": "03723575be0ad84cdf2149d5739bc652f05a0e1af5d1e9ea90e92041272cda81", "bytes": 270},
+    "omega_export_docs_report.md": {"sha256": "03723575be0ad84cdf2149d5739bc652f05a0e1af5d1e9ea90e92041272cda81", "bytes": 270}
+  },
+  "duplicate_preservation": {
+    "members": ["OC94-014", "OC94-015"],
+    "same_sha256": "03723575be0ad84cdf2149d5739bc652f05a0e1af5d1e9ea90e92041272cda81",
+    "distinct_provider_ids": ["1HnTJGoEX4l9ey0xJe7qYfl5DI4U8BsQv", "10vdRWXAdlnT6d7e_URY8ZldQXlsMmXeM"],
+    "action": "PRESERVE_BOTH_NO_DESTRUCTIVE_DEDUP"
+  },
+  "token_vazio": [
+    "original artifact that itemizes 94 not located",
+    "zone53.txt generator/role not established",
+    "generator outputs not regenerated",
+    "Termux physical execution not run",
+    "independent scientific review not run"
+  ],
+  "not_executed": ["merge", "main write", "destructive deduplication", "claim promotion", "Termux physical run", "independent scientific validation"],
+  "event_hash_sha256": "bfce43279fc3d9a81e45900bdbff805d0612172c7d2f44bbf5f81aae28f1be61",
+  "F_ok": ["sharded semantic graph validates", "9/9 adversarial tests pass", "6 anchors read", "7 outputs provider/hash bound", "6 generator lineages pinned", "37 paths pass static-limited IGC gates"],
+  "F_gap": ["original itemized 94 source", "output regeneration", "zone53 generator role", "Termux receipt", "independent metrics"],
+  "F_next": ["reproduce OC94-010..015 from pinned generators and inputs", "compare SHA-256 and record negative/positive results", "repeat minimal slice on physical Termux", "append successor receipt without rewriting V1/V2"]
+}

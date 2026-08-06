@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/operational-core-94-semantic-igc-v2.schema.json",
+  "title": "RAFAELIA Operational Core 94 Semantic IGC V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "event_id",
+    "timestamp_local",
+    "mode",
+    "claim_allowed",
+    "predecessor",
+    "authorities",
+    "boundary",
+    "semantic_method",
+    "external_references",
+    "path_metrics",
+    "resolved_deltas",
+    "F_ok",
+    "F_gap",
+    "F_next",
+    "node_shards",
+    "path_shards",
+    "shard_policy"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.operational-core-94.semantic-igc.v2"},
+    "event_id": {"type": "string", "pattern": "^OPCORE94-SEMIGC-"},
+    "timestamp_local": {"type": "string"},
+    "mode": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string"}},
+    "claim_allowed": {"const": false},
+    "predecessor": {"type": "object"},
+    "authorities": {"type": "object", "minProperties": 4},
+    "boundary": {
+      "type": "object",
+      "required": ["expected_total", "identified_count", "unitemized_count", "unitemized_range", "original_itemizing_artifact"],
+      "properties": {
+        "expected_total": {"const": 94},
+        "identified_count": {"type": "integer", "minimum": 0, "maximum": 94},
+        "unitemized_count": {"type": "integer", "minimum": 0, "maximum": 94},
+        "unitemized_range": {"type": "object"},
+        "original_itemizing_artifact": {"const": "TOKEN_VAZIO_NOT_LOCATED_AFTER_DRIVE_AND_GITHUB_SEARCH"}
+      }
+    },
+    "semantic_method": {"type": "object"},
+    "external_references": {"type": "array"},
+    "path_metrics": {"type": "object"},
+    "resolved_deltas": {"type": "object"},
+    "F_ok": {"type": "array"},
+    "F_gap": {"type": "array"},
+    "F_next": {"type": "array"},
+    "node_shards": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+    "path_shards": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+    "shard_policy": {"type": "string"}
+  }
+}

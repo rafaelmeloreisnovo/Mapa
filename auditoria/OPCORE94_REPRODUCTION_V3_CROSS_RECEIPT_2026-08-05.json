@@ -1,0 +1,72 @@
+{
+  "schema": "rafaelia.opcore94.reproduction-cross-receipt.v3",
+  "event_id": "OPCORE94-REPRO-V3-20260805T2040-0300",
+  "predecessor": "OPCORE94-SEMIGC-PR156-20260805T2028-0300",
+  "claim_allowed": false,
+  "authorities": {
+    "mapa_pr": 156,
+    "rmrcti_repository": "rafaelmeloreisnovo/llamaRafaelia",
+    "rmrcti_pr": 101,
+    "rmrcti_head": "9c51242fbf8fc88e831b5216578d7417ecbbbb88",
+    "full_receipt_path": "rmrCti/evidence/opcore94/OPCORE94_REPRODUCTION_SUCCESSOR_V3_2026-08-05.json",
+    "local_receipt_sha256": "6182402be0101cb886042219adec2fb4f8fbb99b0e87088208221d367965fe34"
+  },
+  "resolved": {
+    "OC94-010": "BYTE_IDENTICAL_PASS_REPEAT_2",
+    "OC94-011": "BYTE_IDENTICAL_PASS_REPEAT_2",
+    "OC94-012": "BYTE_IDENTICAL_PASS_REPEAT_2",
+    "OC94-014": "REPORT_BYTE_IDENTICAL_FROM_COMPANION_SUMMARY",
+    "OC94-015": "REPORT_BYTE_IDENTICAL_FROM_COMPANION_SUMMARY",
+    "zone_conv_streaks_generator_chain": "RESOLVED_TWO_STAGE",
+    "zone53_txt": "ORPHAN_ZERO_BYTE_PRESERVED",
+    "zone53_jsonl": "810_VALID_PLUS_INTERRUPTED_LINE_811",
+    "itemization_origin": "LOCATED_FILE_INVENTORY_CSV_JSONL_SQLITE"
+  },
+  "metrics": {
+    "direct_outputs_reproduced": 3,
+    "direct_repeats": 2,
+    "direct_outputs_byte_identical": 3,
+    "omega_index_valid_rows": 3572,
+    "omega_index_invalid_rows": 0,
+    "reports_derived_byte_identical": 2,
+    "original_session_tensor_zip_scans_reproduced": 0,
+    "zone_outputs_reproduced": 0,
+    "itemization_rows_promoted": 0,
+    "termux_physical_verified": 0,
+    "independent_validation_verified": 0
+  },
+  "token_vazio": {
+    "itemization_extraction": "RAW_FILE_LIBRARY_STREAM_NOT_MOUNTED",
+    "session_tensor_source": "export1gb.zip NOT LOCATED",
+    "zone_map_input": "omega_msgs.jsonl PRIVATE INPUT ABSENT",
+    "zone53_line_811": "NO CONFIRMED SOURCE FOR RECONSTRUCTION",
+    "remote_ci": "RUNNER_NOT_STARTED_OR_LOG_UNAVAILABLE",
+    "termux": "NOT_EXECUTED",
+    "independent_review": "NOT_EXECUTED"
+  },
+  "invariants": [
+    "94 boundary is preserved until the inventory query is reproduced",
+    "same bytes do not collapse provider identity",
+    "negative results remain evidence",
+    "no source bytes were rewritten",
+    "claim_allowed remains false"
+  ],
+  "F_ok": [
+    "three P2 generators reproduced twice with historical byte identity",
+    "two reports verified against companion summaries",
+    "zone pipeline and zone53 family separated by actual producer contracts",
+    "source artifacts behind the count 94 located"
+  ],
+  "F_gap": [
+    "extract and materialize all 94 unique SHA-256 records",
+    "authorized export1gb.zip",
+    "authorized omega_msgs.jsonl regeneration",
+    "Termux and independent receipts"
+  ],
+  "F_next": [
+    "query file_inventory by the original Ω7 filter and emit OC94 itemization V4",
+    "repeat the three direct generators in physical Termux",
+    "rebuild the zone chain only after authorized private input exists",
+    "preserve zone53 line 811 until an explicit drop-or-regenerate decision"
+  ]
+}
