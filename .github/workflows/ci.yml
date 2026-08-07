@@ -24,6 +24,23 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: Parse every GitHub Actions YAML
+        shell: bash
+        run: |
+          set -euo pipefail
+          ruby - <<'RUBY'
+          require "psych"
+
+          files = Dir[".github/workflows/*.{yml,yaml}"].sort
+          abort "No workflow YAML files found" if files.empty?
+
+          files.each do |path|
+            Psych.parse_file(path)
+            puts "OK: #{path}"
+          end
+          puts "Parsed #{files.length} workflow YAML files."
+          RUBY
+
       - name: Install markdownlint
         run: npm install -g markdownlint-cli2
 
