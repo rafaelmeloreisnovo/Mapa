@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.closure-receipt.v1",
+  "receipt_id": "RAFAELIA-CLOSURE-RECEIPT-20260807T1626-0300",
+  "observed_at": "2026-08-07T16:26:00-03:00",
+  "mode": ["APPEND_ONLY", "FAIL_CLOSED", "NON_DESTRUCTIVE"],
+  "claim_allowed": false,
+  "github": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "governance/closure-contract-20260807",
+    "contract_path": "contracts/RAFAELIA_CLOSURE_CONTRACT_V1_20260807.md",
+    "contract_create_commit": "eb9183a055b64279dc25d575b87cbd3de68c5728",
+    "contract_blob_sha": "5c90749710bf3115c4e2970a3ba56126c06522cf",
+    "ledger_path": "data/gaps/closure_ledger.20260807.jsonl",
+    "ledger_create_commit": "f3d7e70fa8e3a569a7b6f3be68d8b082c1f55eb9",
+    "ledger_blob_sha": "f26bce3acf21a785287b5d6df65f2b5ae00fa1b0"
+  },
+  "drive": {
+    "audit_document_id": "1WBdpinwjKsynnrR5KW6vDYi3rt1X5HfnQMsG7EWJS8E",
+    "audit_folder_id": "1FZ3gnajkNDwUttw5UUVcIti8YENj0fK6",
+    "audit_folder_name": "04_AUDIT",
+    "master_document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "igc_priority_document_id": "1CHLyTnvkbCFm5m1MeUVVfpKnT1r39Xjh8_YNyNww1AE"
+  },
+  "resolved_or_reduced": [
+    "GLOBAL-REPO-INVENTORY=CLOSED_PROVEN_SCOPED:131",
+    "IGC-GAP-001=REDUCED_RUN_IDENTIFIED_LOGS_UNAVAILABLE",
+    "IGC-GAP-005=REDUCED_DRIVE_SIDE_HASHED_GITHUB_OBJECT_IDENTIFIED",
+    "IGC-GAP-007=REDUCED_GOVERNANCE_CONTRACT_MATERIALIZED"
+  ],
+  "blocked_or_open": [
+    "IGC-GAP-002",
+    "IGC-GAP-003",
+    "IGC-GAP-004",
+    "IGC-GAP-006",
+    "IGC-GAP-008",
+    "IGC-GAP-009",
+    "IGC-GAP-010",
+    "IGC-GAP-011",
+    "IGC-GAP-012",
+    "GLOBAL-MARKET-VALUE",
+    "GLOBAL-PHYSICAL-CLAIMS"
+  ],
+  "ci_observation": {
+    "pr": 128,
+    "head_sha": "1363847887a9a48add2930155d984dacdc67f1d1",
+    "workflow_run": 30737598216,
+    "workflow_conclusion": "failure",
+    "job": 91472021219,
+    "job_conclusion": "failure",
+    "steps_observed": 0,
+    "log_fetch": "404 BlobNotFound"
+  },
+  "igc_cross_surface": {
+    "drive_export_bytes": 7017,
+    "drive_export_sha256": "a492b803c10ce32abc82c90a825502ae0f2e1a86129d5ff501f173542cc18c63",
+    "github_canonical_path": "docs/canonical/2026-08-02/INVARIANTE_GEOMETRICA_COERENTE_E_COESAO_REAL_V1.md",
+    "github_blob_sha": "7af2c18c87b7c64666b0fa2bf481a5601e6ff398",
+    "github_raw_sha256": "TOKEN_VAZIO_TYPED_RAW_SHA256",
+    "normalized_cross_surface_comparison": "TOKEN_VAZIO_TYPED_NORMALIZED_DIFF"
+  },
+  "closure_rule": "TOKEN_VAZIO_TYPED is a valid auditable terminal state for governance, but never CLOSED_PROVEN for the underlying scientific/technical claim.",
+  "next_gate": "claim gate enforcement -> cross-surface reconciliation -> observable CI -> geometry/Poincare -> physical ARM/corpus receipts"
+}

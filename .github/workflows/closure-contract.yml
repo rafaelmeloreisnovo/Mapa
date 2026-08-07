@@ -1,0 +1,43 @@
+name: RAFAELIA closure contract
+
+on:
+  pull_request:
+    paths:
+      - "contracts/RAFAELIA_CLOSURE_CONTRACT_V1_20260807.md"
+      - "data/gaps/closure_ledger.20260807.jsonl"
+      - "data/receipts/closure_contract.20260807T1626-0300.receipt.json"
+      - "tools/validate_closure_ledger.py"
+      - ".github/workflows/closure-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-closure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile closure validator
+        run: python -m py_compile tools/validate_closure_ledger.py
+      - name: Validate typed closure ledger
+        run: python tools/validate_closure_ledger.py
+      - name: Verify required artifacts exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s contracts/RAFAELIA_CLOSURE_CONTRACT_V1_20260807.md
+          test -s data/gaps/closure_ledger.20260807.jsonl
+          test -s data/receipts/closure_contract.20260807T1626-0300.receipt.json
+      - name: Reject untyped raw TOKEN_VAZIO states in closure ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -E '"state":"TOKEN_VAZIO"([,}])' data/gaps/closure_ledger.20260807.jsonl; then
+            echo "raw TOKEN_VAZIO state found; use TOKEN_VAZIO_TYPED_*"
+            exit 1
+          fi
+          echo "typed TOKEN_VAZIO policy PASS"
