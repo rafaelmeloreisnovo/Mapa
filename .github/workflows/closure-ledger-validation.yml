@@ -1,0 +1,71 @@
+name: RAFAELIA Closure Ledger Gate V1
+
+"on":
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+      - ready_for_review
+    paths:
+      - "contracts/RAFAELIA_CLOSURE_CONTRACT_V1_20260807.md"
+      - "data/gaps/closure_ledger.20260807.jsonl"
+      - "data/gaps/closure_ledger.corrections.20260807.jsonl"
+      - "tools/validate_closure_ledger.py"
+      - ".github/workflows/closure-ledger-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafaelia-closure-ledger-v1-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: closure-ledger / validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Compile validator
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/validate_closure_ledger.py
+
+      - name: Validate canonical closure ledger
+        run: |
+          set -euo pipefail
+          python tools/validate_closure_ledger.py | tee closure-ledger-validation.json
+
+      - name: Adversarial fail-closed mutation
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import importlib.util
+          import json
+          from pathlib import Path
+
+          module_path = Path("tools/validate_closure_ledger.py")
+          spec = importlib.util.spec_from_file_location("closure_validator", module_path)
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+
+          records, _ = module.load()
+          mutated = [dict(item) for item in records]
+          mutated[0]["claim_allowed"] = True
+          mutated[0]["state"] = "TOKEN_VAZIO_TYPED_FORCED_TRUE"
+          try:
+              module.validate(mutated)
+          except module.ValidationError:
+              print(json.dumps({"state":"PASS","negative_case":"forced_true_on_unproven_record_rejected"}, sort_keys=True))
+          else:
+              raise SystemExit("FAIL: validator accepted forced claim_allowed=true")
+          PY
