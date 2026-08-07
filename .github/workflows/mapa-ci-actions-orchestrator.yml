@@ -13,6 +13,10 @@ name: Mapa CI Actions Orchestrator
         required: true
         default: "30"
         type: string
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/mapa-ci-actions-orchestrator.yml"
 
 permissions:
   contents: read
@@ -28,8 +32,8 @@ jobs:
     timeout-minutes: 40
     env:
       GH_TOKEN: ${{ github.token }}
-      TARGET_REF: ${{ inputs.target_ref }}
-      WAIT_MINUTES: ${{ inputs.wait_minutes }}
+      TARGET_REF: ${{ inputs.target_ref || github.head_ref || github.ref_name }}
+      WAIT_MINUTES: ${{ inputs.wait_minutes || '30' }}
 
     steps:
       - name: Checkout target ref
