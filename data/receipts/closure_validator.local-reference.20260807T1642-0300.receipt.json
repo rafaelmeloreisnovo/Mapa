@@ -1,0 +1,41 @@
+{
+  "schema": "rafaelia.local-reference-validation-receipt.v1",
+  "receipt_id": "CLOSURE-VALIDATOR-LOCAL-REFERENCE-20260807T1642-0300",
+  "observed_at": "2026-08-07T16:42:00-03:00",
+  "environment_class": "CONTAINER_REFERENCE_NOT_PHYSICAL_TERMUX",
+  "claim_allowed_scope": "validator_integrity_only",
+  "github_exact_byte_verification": {
+    "ledger_path": "data/gaps/closure_ledger.20260807.jsonl",
+    "ledger_bytes": 6385,
+    "ledger_blob_sha_expected": "f26bce3acf21a785287b5d6df65f2b5ae00fa1b0",
+    "ledger_blob_sha_reconstructed": "f26bce3acf21a785287b5d6df65f2b5ae00fa1b0",
+    "ledger_sha256": "8d0a058519a32d996cf0be1df34148f7d597ffba89e4c857218c2effedbe765a",
+    "validator_path": "tools/validate_closure_ledger.py",
+    "validator_bytes": 4725,
+    "validator_blob_sha_expected": "63f29c8be5e76a4b850ac647ceec91dc3c6abe0d",
+    "validator_blob_sha_reconstructed": "63f29c8be5e76a4b850ac647ceec91dc3c6abe0d",
+    "validator_sha256": "27feeee548807b93ffbe5bb479c94beafa939feefcba8fc2fcd3c56c5275929f"
+  },
+  "execution": {
+    "command": "python tools/validate_closure_ledger.py",
+    "exit_code": 0,
+    "stdout_json": {
+      "igc_gap_coverage": "12/12",
+      "ledger_sha256": "8d0a058519a32d996cf0be1df34148f7d597ffba89e4c857218c2effedbe765a",
+      "records": 15,
+      "schema": "rafaelia.closure-ledger-validation.v1",
+      "scoped_claims_allowed": 1,
+      "state": "PASS"
+    },
+    "stderr_note": "host Python emitted an unrelated spreadsheet-runtime warmup warning; process exit remained 0 and validator stdout was PASS"
+  },
+  "limits": [
+    "not GitHub Actions CI proof",
+    "not physical Termux ARMv7/ARM64 proof",
+    "not independent reproduction",
+    "does not promote any scientific or physical claim"
+  ],
+  "decision": "PASS_LOCAL_REFERENCE_EXACT_BYTES",
+  "claim_allowed": false,
+  "next_gate": "obtain observable CI or independent/physical replay receipt"
+}
