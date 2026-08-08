@@ -1,0 +1,60 @@
+{
+  "schema": "rafaelia.bitraf64.toroidal.claims.v1",
+  "date": "2026-08-08",
+  "state": "OBSERVED_LIMITED",
+  "claim_allowed": false,
+  "production_ready": false,
+  "policy": {
+    "evidence_first": true,
+    "fail_closed": true,
+    "absence_of_evidence_is_pass": false,
+    "missing_state": "TOKEN_VAZIO"
+  },
+  "exact": {
+    "gcd_6000_2057": 1,
+    "gcd_42_60": 6,
+    "r_corr_formula_phi_sum1to5_over_pi42": 0.18394150528588712,
+    "declared_r_corr_target": 0.963999,
+    "r_corr_target_derivation_state": "TOKEN_VAZIO",
+    "redundancy_bits": 53,
+    "payload_bytes": 1024,
+    "redundancy_bit_per_byte": 0.0517578125,
+    "redundancy_percent_of_payload_bits": 0.64697265625,
+    "canonical_fibonacci_ln_phi": 0.48121182505960347,
+    "spiral_distinct_exponents_for_10_cube": 28
+  },
+  "claims": [
+    {"id":"BTR-01","state":"TOKEN_VAZIO","claim":"actual BITRAF64 spatial transitions wrap modulo 10 on all axes","gate":"boundary fixtures on executable implementation"},
+    {"id":"BTR-02","state":"TOKEN_VAZIO","claim":"all actual GF(2) transforms are invertible","gate":"full rank/zero kernel plus round-trip for every transform"},
+    {"id":"BTR-03","state":"TOKEN_VAZIO","claim":"ECC corrects every single-bit error over 1024 bytes","gate":"d_min>=3 or unique nonzero syndrome plus exhaustive 8192-error injection"},
+    {"id":"BTR-04","state":"TOKEN_VAZIO","claim":"psi-chi-rho-delta-sigma-omega loop is bounded/stable","gate":"executable recurrence plus perturbation/stability receipt"},
+    {"id":"BTR-05","state":"TOKEN_VAZIO","claim":"0.963999 has the declared golden-ratio derivation","gate":"recover explicit derivation/provenance"},
+    {"id":"BTR-06","state":"TOKEN_VAZIO","claim":"entropy and white-noise behavior are empirically verified","gate":"raw dataset/seed plus estimator and autocorrelation/whiteness receipts"},
+    {"id":"BTR-07","state":"TOKEN_VAZIO","claim":"SIMD/cache/LUT yields 4-8x speedup","gate":"homogeneous physical-device benchmark"},
+    {"id":"BTR-08","state":"TOKEN_VAZIO","claim":"Termux package DAG has a BITRAF64 toroidal alignment","gate":"explicit graph embedding plus preserved-invariant metric"}
+  ],
+  "prohibited_inferences": [
+    "GF2_linearity_implies_invertibility",
+    "positive_ln_phi_implies_chaos_or_boundedness",
+    "full_rank_33x33_alone_implies_single_error_correction",
+    "discrete_lane_index_is_fractal_dimension",
+    "deterministic_output_implies_white_noise",
+    "structural_similarity_implies_graph_isomorphism"
+  ],
+  "promotion_order": [
+    "GF2_RANK_AND_ROUNDTRIP",
+    "ECC_SYNDROME_EXHAUSTION",
+    "LOOP_STABILITY",
+    "STATISTICAL_CHARACTERIZATION",
+    "PHYSICAL_BENCHMARK",
+    "OPTIONAL_PACKAGE_GRAPH_EMBEDDING",
+    "INDEPENDENT_REVIEW"
+  ],
+  "anchors": {
+    "rll_repository": "instituto-Rafael/relativity-living-light",
+    "rll_branch": "audit/bitraf64-toroidal-coherence-20260808",
+    "rll_ledger": "PapersPub/08_multiscale_validation_methods/bitraf64_toroidal_claim_ledger_v1.md",
+    "rll_validator": "PapersPub/08_multiscale_validation_methods/scripts/validate_bitraf64_toroidal_claims.py",
+    "mapa_document": "docs/canonical/2026-08-08/BITRAF64_TOROIDAL_EVIDENCE_GATE_V1.md"
+  }
+}
