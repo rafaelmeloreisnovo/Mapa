@@ -1,0 +1,31 @@
+name: Open Work Execution Contract
+
+on:
+  pull_request:
+    paths:
+      - "data/gaps/open_work_execution_contract.20260808.v1.json"
+      - "tools/validate_open_work_execution_contract.py"
+      - "tests/test_open_work_execution_contract.py"
+      - ".github/workflows/open-work-execution-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Validate contract fail-closed
+        run: python tools/validate_open_work_execution_contract.py
+      - name: Run contract tests
+        run: python -m unittest -v tests.test_open_work_execution_contract
