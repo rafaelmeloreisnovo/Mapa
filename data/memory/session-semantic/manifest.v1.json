@@ -1,0 +1,54 @@
+{
+  "schema_version": "rafaelia.session-semantic-ledger-manifest/v1",
+  "event_id": "SSL-CLAREAMENTO-20260807T2152-0300",
+  "timestamp_local": "2026-08-07T21:52:00-03:00",
+  "mode": ["append-only", "non-destructive", "fail-closed", "provenance-first", "semantic-blocks", "typed-token-vazio", "claim-gate-false"],
+  "claim_allowed": false,
+  "scope": {
+    "project": "Clareamento",
+    "surface": "GPT project conversation context exposed in the current workflow",
+    "observed_session_count": 13,
+    "provider_ids_resolved": 0,
+    "source_limitation": "Project context exposes session titles/times/content summaries but not durable provider-owned session/message IDs or a byte-complete export for these records."
+  },
+  "shards": {
+    "forests": "data/memory/session-semantic/forests.v1.json",
+    "concepts": "data/memory/session-semantic/concepts.v1.jsonl",
+    "sessions": "data/memory/session-semantic/sessions.v1.jsonl",
+    "relations": "data/memory/session-semantic/relations.v1.jsonl"
+  },
+  "assembled_schema": "schemas/session-semantic-ledger.v1.schema.json",
+  "invariants": [
+    "session != longitudinal memory != evidence",
+    "title similarity != source identity",
+    "semantic relation != scientific equivalence",
+    "chronological order != validity",
+    "TOKEN_VAZIO blocks promotion but preserves the observation",
+    "source -> index -> semantic token -> claim -> evidence/falsifier -> decision -> artifact/receipt",
+    "refactoring may change wording but must preserve provenance, epistemic state and lineage"
+  ],
+  "coverage": {
+    "sessions": 13,
+    "semantic_blocks": 13,
+    "concepts": 15,
+    "relations": 12,
+    "typed_gaps": 13,
+    "provider_id_gaps": 13,
+    "claim_allowed_true": 0
+  },
+  "F_ok": [
+    "13 observed project sessions mapped into seven semantic forests",
+    "one high-value semantic block preserved per session in the seed",
+    "15 normalized concepts and 12 typed relations form the initial navigation graph",
+    "claim_allowed=false and provider IDs were not fabricated"
+  ],
+  "F_gap": [
+    "provider-owned session/message IDs remain TV-SOURCE",
+    "message-level byte hashes and complete export coordinates are not yet bound"
+  ],
+  "F_next": [
+    "bind sessions to export/provider IDs and message/chunk coordinates",
+    "append message-level blocks with hashes; never rewrite this seed",
+    "feed verified blocks into contextual-semantic-packet and ordinal forest gates"
+  ]
+}
