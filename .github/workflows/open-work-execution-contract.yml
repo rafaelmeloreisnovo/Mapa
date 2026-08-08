@@ -4,8 +4,11 @@ on:
   pull_request:
     paths:
       - "data/gaps/open_work_execution_contract.20260808.v1.json"
+      - "data/gaps/open_work_execution_contract.delta.20260808.v2.json"
       - "tools/validate_open_work_execution_contract.py"
+      - "tools/validate_open_work_execution_contract_v2_delta.py"
       - "tests/test_open_work_execution_contract.py"
+      - "tests/test_open_work_execution_contract_v2_delta.py"
       - ".github/workflows/open-work-execution-contract.yml"
   workflow_dispatch:
 
@@ -25,7 +28,11 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Validate contract fail-closed
+      - name: Validate V1 release-authority contract fail-closed
         run: python tools/validate_open_work_execution_contract.py
-      - name: Run contract tests
+      - name: Run V1 contract tests
         run: python -m unittest -v tests.test_open_work_execution_contract
+      - name: Validate append-only V2 lab delta fail-closed
+        run: python tools/validate_open_work_execution_contract_v2_delta.py
+      - name: Run V2 delta tests
+        run: python -m unittest -v tests.test_open_work_execution_contract_v2_delta
