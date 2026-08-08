@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/urgent-memory-node.v1.schema.json",
+  "title": "RAFAELIA Urgent Memory Node V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "urgent_id",
+    "priority",
+    "priority_basis",
+    "state",
+    "source_state",
+    "category",
+    "problem",
+    "risk",
+    "next_gate",
+    "claim_allowed",
+    "provenance",
+    "source_memory_ids",
+    "source_ordinal_paths",
+    "longitudinal_refs",
+    "closure_contract",
+    "created_at",
+    "last_checked_at",
+    "revision"
+  ],
+  "properties": {
+    "schema_version": {"const": "urgent-memory-node.v1"},
+    "urgent_id": {"type": "string", "minLength": 3},
+    "priority": {"enum": ["P0", "P1", "P2", "P3", "P4"]},
+    "priority_basis": {"enum": ["SOURCE_DECLARED", "COMPUTED", "GOVERNANCE_OVERRIDE"]},
+    "state": {"enum": ["OPEN", "TESTABLE", "RUNNING", "BLOCKED_EXTERNAL", "CLOSED_PASS", "CLOSED_FAIL", "ARCHIVED"]},
+    "source_state": {"type": "string", "minLength": 1},
+    "category": {"enum": ["SECURITY", "MEASUREMENT", "INTEGRITY", "TOKEN_ACCOUNTING", "RECEIPT", "MULTIMODAL_JOIN", "PROVENANCE", "EXECUTION_EVIDENCE", "REPRODUCIBILITY", "OTHER"]},
+    "problem": {"type": "string", "minLength": 3},
+    "risk": {"type": "string", "minLength": 3},
+    "next_gate": {"type": "string", "minLength": 3},
+    "claim_allowed": {"type": "boolean"},
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "locator", "authority"],
+        "properties": {
+          "kind": {"enum": ["github", "drive_private_sanitized", "receipt", "other"]},
+          "locator": {"type": "string", "minLength": 1},
+          "authority": {"enum": ["OBSERVED", "SOURCE_REPORTED", "PUBLIC_RECEIPT", "BYTE_HASHED", "BYTE_PARSED"]},
+          "blob_sha": {"type": ["string", "null"]},
+          "sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"}
+        }
+      }
+    },
+    "source_memory_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "source_ordinal_paths": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          {"type": "integer", "minimum": 0},
+          {"type": "integer", "minimum": 0},
+          {"type": "integer", "minimum": 0},
+          {"type": "integer", "minimum": 0},
+          {"type": "integer", "minimum": 0},
+          {"type": "integer", "minimum": 0}
+        ],
+        "minItems": 6,
+        "maxItems": 6
+      }
+    },
+    "longitudinal_refs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "urgency_score": {"type": ["integer", "null"], "minimum": 0, "maximum": 100},
+    "measurement_basis": {"type": "object", "additionalProperties": {"type": "string"}},
+    "closure_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expected_evidence", "closure_test", "receipt_required"],
+      "properties": {
+        "expected_evidence": {"type": "string", "minLength": 3},
+        "closure_test": {"type": "string", "minLength": 3},
+        "receipt_required": {"type": "boolean"}
+      }
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "last_checked_at": {"type": "string", "format": "date-time"},
+    "revision": {"type": "integer", "minimum": 0}
+  }
+}
