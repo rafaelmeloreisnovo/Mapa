@@ -37,5 +37,14 @@ jobs:
       - name: Parse schema JSON
         run: python3 -m json.tool schemas/ordinal-memory-node.schema.json >/dev/null
 
-      - name: Validate ordinal seed
-        run: python3 tools/validate_ordinal_memory.py data/memory/ordinal-memory.seed.v1.jsonl
+      - name: Validate every ordinal memory JSONL
+        run: |
+          set -euo pipefail
+          found=0
+          for f in data/memory/ordinal-memory*.jsonl; do
+            [ -e "$f" ] || continue
+            found=1
+            echo "validating $f"
+            python3 tools/validate_ordinal_memory.py "$f"
+          done
+          test "$found" -eq 1
