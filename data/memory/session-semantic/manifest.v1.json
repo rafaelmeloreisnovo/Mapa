@@ -17,6 +17,20 @@
     "sessions": "data/memory/session-semantic/sessions.v1.jsonl",
     "relations": "data/memory/session-semantic/relations.v1.jsonl"
   },
+  "derived_views": {
+    "semantic_chain_policy": "data/memory/session-semantic/chain-policy.v1.json",
+    "identity_bindings": "data/memory/session-semantic/identity-bindings.v1.json",
+    "semantic_chain_schema": "schemas/session-semantic-chain.v1.schema.json",
+    "builder_resolver": "tools/session_semantic_chain.py",
+    "materialization": "deterministic one row per semantic block x concept occurrence"
+  },
+  "identity_reconciliation": {
+    "status": "TV-SOURCE",
+    "resolved": 0,
+    "method": "EXACT_PROVIDER_EXPORT only",
+    "local_fingerprint_role": "deduplication/navigation only; never provider identity",
+    "promotion_default": "DENY"
+  },
   "assembled_schema": "schemas/session-semantic-ledger.v1.schema.json",
   "invariants": [
     "session != longitudinal memory != evidence",
@@ -25,6 +39,8 @@
     "chronological order != validity",
     "TOKEN_VAZIO blocks promotion but preserves the observation",
     "source -> index -> semantic token -> claim -> evidence/falsifier -> decision -> artifact/receipt",
+    "session -> block -> concept -> occurrence -> relation -> claim -> evidence -> state -> artifact",
+    "1:1 projected semantic coverage != byte-complete raw export coverage",
     "refactoring may change wording but must preserve provenance, epistemic state and lineage"
   ],
   "coverage": {
@@ -40,15 +56,19 @@
     "13 observed project sessions mapped into seven semantic forests",
     "one high-value semantic block preserved per session in the seed",
     "15 normalized concepts and 12 typed relations form the initial navigation graph",
+    "deterministic 1:1 semantic-chain builder covers every block x concept occurrence in the projection",
+    "exact provider identity is isolated in a dedicated append-only binding registry",
     "claim_allowed=false and provider IDs were not fabricated"
   ],
   "F_gap": [
     "provider-owned session/message IDs remain TV-SOURCE",
-    "message-level byte hashes and complete export coordinates are not yet bound"
+    "message-level byte hashes and complete export coordinates are not yet bound",
+    "raw export coverage cannot be inferred from 100% coverage of the current semantic projection"
   ],
   "F_next": [
-    "bind sessions to export/provider IDs and message/chunk coordinates",
-    "append message-level blocks with hashes; never rewrite this seed",
+    "bind sessions to exact export/provider IDs and message/chunk coordinates",
+    "append source SHA-256 bindings after exact reconciliation",
+    "promote only exact-bound occurrences into non-ordinal memory",
     "feed verified blocks into contextual-semantic-packet and ordinal forest gates"
   ]
 }
