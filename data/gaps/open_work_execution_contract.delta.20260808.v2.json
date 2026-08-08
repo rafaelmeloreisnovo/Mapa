@@ -1,0 +1,68 @@
+{
+  "schema": "rafaelia.open_work_execution_contract_delta.v2",
+  "generated_at": "2026-08-08T05:20:00Z",
+  "append_only": true,
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "predecessor": "data/gaps/open_work_execution_contract.20260808.v1.json",
+  "source": {
+    "repository": "instituto-Rafael/relativity-living-light",
+    "lab_pr": 691,
+    "lab_merge_commit": "512bf1f65191d4581b05918e70d0768c5955597e",
+    "lab_v2_input_tokens": 33,
+    "lab_v2_terminal_resolved": 10,
+    "lab_v2_reduced": 9,
+    "lab_v2_open": 14,
+    "ci_harness_successor_pr": 694,
+    "ci_harness_successor_scope": "test and compatibility repair only; no scientific state transition"
+  },
+  "authority_boundary": {
+    "rll_lab_v2_observed": true,
+    "rll_release_v2_promoted": false,
+    "rll_main_v2_promoted": false,
+    "release_authority_mutated_by_this_delta": false,
+    "rule": "A merged lab reconciliation is evidence of lab state, not release/main authority. Canonical promotion must still follow rll/lab -> rll/integration -> rll/release -> main."
+  },
+  "counts": {
+    "release_authoritative_open_tokens": 14,
+    "lab_v2_open_tokens": 14,
+    "frozen_diverged_ref_cohort": 35,
+    "patch_equivalent_refs": 3,
+    "unique_patch_semantic_review_refs": 32
+  },
+  "transitions": [
+    {
+      "predecessor_token": "TOKEN_VAZIO_ACT_DR6_CMBONLY_MATERIALIZATION_REPRODUCTION",
+      "lab_state": "RESOLVED_SCOPED_MATERIALIZATION_ONLY",
+      "successor_token": "TOKEN_VAZIO_ACT_DR6_LCDM_POSTERIOR_CHAIN_REPRODUCTION",
+      "successor_state": "OPEN_INTERNAL",
+      "boundary": "ACT materialization/reference predicates are not posterior-chain reproduction and do not validate RLL CMB."
+    },
+    {
+      "predecessor_token": "TOKEN_VAZIO_H0_RD_FULL_BOLTZMANN_REPRODUCTION",
+      "lab_state": "REDUCED",
+      "successor_token": "TOKEN_VAZIO_H0_RD_FULL_BOLTZMANN_INFERENCE_INTEGRATION",
+      "successor_state": "OPEN_INTERNAL",
+      "boundary": "CLASS/CAMB r_drag cross-check and measured approximation error do not mean the formal 6x4 inference uses the full-Boltzmann route."
+    },
+    {
+      "predecessor_token": "TOKEN_VAZIO_NOT_YET_CLASSIFIED_ALL_582_REFS",
+      "lab_state": "REDUCED_TO_TOPOLOGY_COMPLETE_FOR_FROZEN_CENSUS",
+      "successor_token": "TOKEN_VAZIO_DIVERGED_OR_DESCENDANT_REF_SEMANTIC_REVIEW",
+      "successor_state": "OPEN_INTERNAL",
+      "frozen_cohort": 35,
+      "patch_equivalent": 3,
+      "unique_patch_review": 32,
+      "boundary": "Patch equivalence is not semantic equivalence; the 32 remaining refs require content, lineage, test and applicability review."
+    }
+  ],
+  "invariants": [
+    "TOKEN_VAZIO != zero",
+    "lab merge != release promotion",
+    "patch equivalence != semantic equivalence",
+    "standard CLASS/CAMB agreement != RLL perturbation validation",
+    "measured approximation error != validated replacement inference",
+    "claim_allowed remains false"
+  ],
+  "next_gate": "After RLL V2 is promoted through integration and release to main with passing gates, emit a new append-only successor that may update release authority; do not rewrite V1 or this delta."
+}
