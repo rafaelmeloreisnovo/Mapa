@@ -1,0 +1,41 @@
+name: ordinal-memory-forest
+
+on:
+  pull_request:
+    paths:
+      - 'indices/canonical/**/RAFAELIA_ORDINAL_MEMORY_FOREST_*.md'
+      - 'schemas/ordinal-memory-node.schema.json'
+      - 'data/memory/ordinal-memory*.jsonl'
+      - 'tools/validate_ordinal_memory.py'
+      - '.github/workflows/ordinal-memory-forest.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'indices/canonical/**/RAFAELIA_ORDINAL_MEMORY_FOREST_*.md'
+      - 'schemas/ordinal-memory-node.schema.json'
+      - 'data/memory/ordinal-memory*.jsonl'
+      - 'tools/validate_ordinal_memory.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ordinal-memory-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python version
+        run: python3 --version
+
+      - name: Parse schema JSON
+        run: python3 -m json.tool schemas/ordinal-memory-node.schema.json >/dev/null
+
+      - name: Validate ordinal seed
+        run: python3 tools/validate_ordinal_memory.py data/memory/ordinal-memory.seed.v1.jsonl
