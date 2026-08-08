@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/session-semantic-chain.v1.schema.json",
+  "title": "RAFAELIA Session Semantic Chain Row V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "session_id", "block_id", "concept_id", "occurrence_id",
+    "relation_id", "claim_id", "evidence_id", "state_id", "artifact_id",
+    "observation_fingerprint", "identity_status", "claim_kind", "claim_allowed",
+    "evidence_state", "promotion_state", "promotion_allowed", "source_locator"
+  ],
+  "properties": {
+    "schema_version": {"const": "rafaelia.session-semantic-chain-row/v1"},
+    "session_id": {"type": "string", "minLength": 3},
+    "block_id": {"type": "string", "minLength": 3},
+    "concept_id": {"type": "string", "pattern": "^concept:"},
+    "occurrence_id": {"type": "string", "pattern": "^occurrence:"},
+    "relation_id": {"type": "string", "pattern": "^chain-relation:"},
+    "claim_id": {"type": "string", "pattern": "^trace-claim:"},
+    "evidence_id": {"type": "string", "pattern": "^chain-evidence:"},
+    "state_id": {"type": "string", "pattern": "^chain-state:"},
+    "artifact_id": {"type": "string", "pattern": "^chain-artifact:"},
+    "observation_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "identity_status": {"enum": ["UNRESOLVED_PROVIDER_ID", "EXACT_PROVIDER_BOUND"]},
+    "provider_session_id": {"type": ["string", "null"]},
+    "provider_message_id": {"type": ["string", "null"]},
+    "export_artifact_id": {"type": ["string", "null"]},
+    "chunk_coordinate": {"type": ["string", "null"]},
+    "source_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "source_locator": {"type": "string", "minLength": 1},
+    "claim_kind": {"const": "TRACEABILITY_CLAIM"},
+    "claim_allowed": {"type": "boolean"},
+    "evidence_state": {"enum": ["PROJECTED_CONTEXT_ONLY", "BOUND_EXACT"]},
+    "promotion_state": {"enum": ["IDENTITY_PENDING", "EVIDENCE_BOUND", "PROMOTABLE"]},
+    "promotion_allowed": {"type": "boolean"}
+  }
+}
