@@ -1,0 +1,82 @@
+{
+  "schema": "rafaelia.geometry.candidate-fixtures.v1",
+  "object_id": "PIRAMIDE_TRIEDRICA_DUPLA",
+  "claim_allowed": false,
+  "purpose": "Materialize falsifiable combinatorial reference fixtures without selecting the author's exact glue map without source evidence.",
+  "source_refs": [
+    "docs/canonical/2026-08-02/MEMORIA_LONGITUDINAL_PG_OMEGA7_PIRAMIDE_TRIEDRICA_DUPLA_V1.md",
+    "data/geometry/geometric_invariants.index.jsonl",
+    "data/gaps/closure_ledger.20260807.jsonl"
+  ],
+  "selection_state": "TOKEN_VAZIO_TYPED_EXACT_GLUE_SELECTION_REQUIRES_SOURCE_EVIDENCE",
+  "canonical_test_fixture": "G1",
+  "canonical_test_fixture_is_authorial_selection": false,
+  "fixtures": [
+    {
+      "id": "G1",
+      "name": "base-base triangular bipyramid",
+      "state": "COMBINATORIAL_REFERENCE_FIXTURE",
+      "vertices": {
+        "A": [1, 0, 0],
+        "B": [0, 1, 0],
+        "C": [-1, -1, 0],
+        "U": [0, 0, 1],
+        "D": [0, 0, -1]
+      },
+      "edges": [
+        ["A", "B"], ["B", "C"], ["C", "A"],
+        ["U", "A"], ["U", "B"], ["U", "C"],
+        ["D", "A"], ["D", "B"], ["D", "C"]
+      ],
+      "oriented_faces": [
+        ["U", "A", "B"], ["U", "B", "C"], ["U", "C", "A"],
+        ["D", "B", "A"], ["D", "C", "B"], ["D", "A", "C"]
+      ],
+      "central_junction": {
+        "type": "INTERNAL_SHARED_TRIANGLE",
+        "vertices": ["A", "B", "C"]
+      },
+      "expected_counts": {"V": 5, "E": 9, "F_external": 6},
+      "expected_euler_external_surface": 2
+    },
+    {
+      "id": "G2",
+      "name": "apex-apex point-glued tetrahedral pair",
+      "state": "COMBINATORIAL_REFERENCE_FIXTURE",
+      "vertices": {
+        "O": [0, 0, 0],
+        "A": [1, 0, 1], "B": [0, 1, 1], "C": [-1, -1, 1],
+        "D": [1, 0, -1], "E": [0, 1, -1], "F": [-1, -1, -1]
+      },
+      "edges": [
+        ["O", "A"], ["O", "B"], ["O", "C"], ["A", "B"], ["B", "C"], ["C", "A"],
+        ["O", "D"], ["O", "E"], ["O", "F"], ["D", "E"], ["E", "F"], ["F", "D"]
+      ],
+      "oriented_faces": [
+        ["O", "A", "B"], ["O", "B", "C"], ["O", "C", "A"], ["A", "C", "B"],
+        ["O", "E", "D"], ["O", "F", "E"], ["O", "D", "F"], ["D", "E", "F"]
+      ],
+      "central_junction": {"type": "SHARED_VERTEX", "vertices": ["O"]},
+      "expected_counts": {"V": 7, "E": 12, "F": 8},
+      "expected_topology_note": "two closed tetrahedral surfaces joined at one point; not a 2-manifold at O"
+    },
+    {
+      "id": "G3",
+      "name": "folded-face eight-panel candidate",
+      "state": "TOKEN_VAZIO_TYPED_ABSTRACT_ONLY",
+      "known": {"panel_count": 8, "narrowing_parameter": "epsilon"},
+      "missing": ["exact_vertices", "exact_edges", "oriented_faces", "central_junction_incidence"],
+      "promotion_condition": "source evidence must determine the fold/glue incidence before V/E/F is invented"
+    }
+  ],
+  "negative_fixture": {
+    "id": "NEG-DANGLING-EDGE",
+    "vertices": {"A": [0, 0, 0], "B": [1, 0, 0], "C": [0, 1, 0], "X": [2, 2, 2]},
+    "edges": [["A", "B"], ["B", "C"], ["C", "A"], ["A", "X"]],
+    "oriented_faces": [["A", "B", "C"]],
+    "expected_validation": "FAIL_DANGLING_EDGE_NOT_BOUNDING_ANY_FACE"
+  },
+  "F_ok": "G1 and G2 now have explicit V/E/F, orientation, coordinates and central-junction semantics; a negative fixture exists.",
+  "F_gap": "The authorial selection among G1/G2/G3/fourth model and G3 exact incidence remain unobserved.",
+  "F_next": "Use source image/measurement evidence to select or reject a candidate; do not infer exact_glue_map from the test fixture."
+}
