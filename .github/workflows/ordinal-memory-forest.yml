@@ -4,17 +4,27 @@ on:
   pull_request:
     paths:
       - 'indices/canonical/**/RAFAELIA_ORDINAL_MEMORY_FOREST_*.md'
+      - 'indices/canonical/**/RAFAELIA_SESSION_SEMANTIC_LEDGER_*.md'
       - 'schemas/ordinal-memory-node.schema.json'
+      - 'schemas/session-semantic-ledger.v1.schema.json'
       - 'data/memory/ordinal-memory*.jsonl'
+      - 'data/memory/session-semantic/**'
       - 'tools/validate_ordinal_memory.py'
+      - 'tools/validate_session_semantic_ledger.py'
+      - 'tests/test_session_semantic_ledger.py'
       - '.github/workflows/ordinal-memory-forest.yml'
   push:
     branches: [main]
     paths:
       - 'indices/canonical/**/RAFAELIA_ORDINAL_MEMORY_FOREST_*.md'
+      - 'indices/canonical/**/RAFAELIA_SESSION_SEMANTIC_LEDGER_*.md'
       - 'schemas/ordinal-memory-node.schema.json'
+      - 'schemas/session-semantic-ledger.v1.schema.json'
       - 'data/memory/ordinal-memory*.jsonl'
+      - 'data/memory/session-semantic/**'
       - 'tools/validate_ordinal_memory.py'
+      - 'tools/validate_session_semantic_ledger.py'
+      - 'tests/test_session_semantic_ledger.py'
 
 permissions:
   contents: read
@@ -35,7 +45,11 @@ jobs:
         run: python3 --version
 
       - name: Parse schema JSON
-        run: python3 -m json.tool schemas/ordinal-memory-node.schema.json >/dev/null
+        run: |
+          python3 -m json.tool schemas/ordinal-memory-node.schema.json >/dev/null
+          python3 -m json.tool schemas/session-semantic-ledger.v1.schema.json >/dev/null
+          python3 -m json.tool data/memory/session-semantic/manifest.v1.json >/dev/null
+          python3 -m json.tool data/memory/session-semantic/forests.v1.json >/dev/null
 
       - name: Validate every ordinal memory JSONL
         run: |
@@ -48,3 +62,9 @@ jobs:
             python3 tools/validate_ordinal_memory.py "$f"
           done
           test "$found" -eq 1
+
+      - name: Validate session semantic ledger
+        run: python3 tools/validate_session_semantic_ledger.py
+
+      - name: Test session semantic ledger
+        run: python3 -m unittest tests.test_session_semantic_ledger
