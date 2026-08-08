@@ -7,11 +7,14 @@ on:
       - 'indices/canonical/**/RAFAELIA_SESSION_SEMANTIC_LEDGER_*.md'
       - 'schemas/ordinal-memory-node.schema.json'
       - 'schemas/session-semantic-ledger.v1.schema.json'
+      - 'schemas/session-semantic-chain.v1.schema.json'
       - 'data/memory/ordinal-memory*.jsonl'
       - 'data/memory/session-semantic/**'
       - 'tools/validate_ordinal_memory.py'
       - 'tools/validate_session_semantic_ledger.py'
+      - 'tools/session_semantic_chain.py'
       - 'tests/test_session_semantic_ledger.py'
+      - 'tests/test_session_semantic_chain.py'
       - '.github/workflows/ordinal-memory-forest.yml'
   push:
     branches: [main]
@@ -20,11 +23,14 @@ on:
       - 'indices/canonical/**/RAFAELIA_SESSION_SEMANTIC_LEDGER_*.md'
       - 'schemas/ordinal-memory-node.schema.json'
       - 'schemas/session-semantic-ledger.v1.schema.json'
+      - 'schemas/session-semantic-chain.v1.schema.json'
       - 'data/memory/ordinal-memory*.jsonl'
       - 'data/memory/session-semantic/**'
       - 'tools/validate_ordinal_memory.py'
       - 'tools/validate_session_semantic_ledger.py'
+      - 'tools/session_semantic_chain.py'
       - 'tests/test_session_semantic_ledger.py'
+      - 'tests/test_session_semantic_chain.py'
 
 permissions:
   contents: read
@@ -44,12 +50,15 @@ jobs:
       - name: Python version
         run: python3 --version
 
-      - name: Parse schema JSON
+      - name: Parse governance JSON and schemas
         run: |
           python3 -m json.tool schemas/ordinal-memory-node.schema.json >/dev/null
           python3 -m json.tool schemas/session-semantic-ledger.v1.schema.json >/dev/null
+          python3 -m json.tool schemas/session-semantic-chain.v1.schema.json >/dev/null
           python3 -m json.tool data/memory/session-semantic/manifest.v1.json >/dev/null
           python3 -m json.tool data/memory/session-semantic/forests.v1.json >/dev/null
+          python3 -m json.tool data/memory/session-semantic/chain-policy.v1.json >/dev/null
+          python3 -m json.tool data/memory/session-semantic/identity-bindings.v1.json >/dev/null
 
       - name: Validate every ordinal memory JSONL
         run: |
@@ -66,5 +75,11 @@ jobs:
       - name: Validate session semantic ledger
         run: python3 tools/validate_session_semantic_ledger.py
 
+      - name: Build and validate 1:1 semantic chain
+        run: |
+          set -euo pipefail
+          python3 tools/session_semantic_chain.py --emit /tmp/session-semantic-chain.v1.jsonl
+          test -s /tmp/session-semantic-chain.v1.jsonl
+
       - name: Test session semantic ledger
-        run: python3 -m unittest tests.test_session_semantic_ledger
+        run: python3 -m unittest tests.test_session_semantic_ledger tests.test_session_semantic_chain
