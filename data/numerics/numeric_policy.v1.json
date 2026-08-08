@@ -1,0 +1,71 @@
+{
+  "schema": "rafaelia.numeric-policy.v1",
+  "claim_allowed": false,
+  "policy_state": "ENGINEERING_POLICY_MATERIALIZED_NOT_PHYSICAL_EVIDENCE",
+  "principles": [
+    "exact combinatorial identities use exact arithmetic when possible",
+    "floating comparisons require declared absolute and relative tolerances",
+    "non-finite results fail closed",
+    "domain violations are errors and are not silently clamped unless the contract explicitly declares a projection",
+    "rounding policy is explicit per backend",
+    "overflow or loss of representable range is a validation failure"
+  ],
+  "policies": [
+    {
+      "policy_id": "NUM-EXACT-COMBINATORIAL-V1",
+      "applies_to": ["PIRAMIDE_TRIEDRICA_DUPLA.VEF", "graph_incidence", "integer_cardinality"],
+      "backend": "integer_exact",
+      "units": "NOT_APPLICABLE",
+      "abs_epsilon": 0,
+      "rel_epsilon": 0,
+      "rounding": "NONE",
+      "overflow": "FAIL_CLOSED",
+      "non_finite": "NOT_APPLICABLE"
+    },
+    {
+      "policy_id": "NUM-FLOAT64-GEOMETRY-V1",
+      "applies_to": ["poincare_ball_membership", "euclidean_norm", "geometry_coordinates_float64"],
+      "backend": "IEEE754_BINARY64",
+      "units": "dimensionless_unless_object_contract_overrides",
+      "abs_epsilon": 1e-12,
+      "rel_epsilon": 1e-10,
+      "rounding": "ROUND_TO_NEAREST_TIES_TO_EVEN",
+      "overflow": "FAIL_CLOSED_ON_NONFINITE",
+      "domain_rules": ["poincare_ball requires norm < 1", "boundary equality is not interior membership"]
+    },
+    {
+      "policy_id": "NUM-FLOAT32-ARM-V1",
+      "applies_to": ["geometry_coordinates_float32", "future_ARMv7_ARM64_numeric_replay"],
+      "backend": "IEEE754_BINARY32",
+      "units": "dimensionless_unless_object_contract_overrides",
+      "abs_epsilon": 1e-6,
+      "rel_epsilon": 1e-5,
+      "rounding": "ROUND_TO_NEAREST_TIES_TO_EVEN_WHEN_TOOLCHAIN_CONFORMS",
+      "overflow": "FAIL_CLOSED_ON_NONFINITE",
+      "note": "These are engineering comparison defaults, not physical measurement uncertainties. Physical receipts must declare their own uncertainty model."
+    },
+    {
+      "policy_id": "NUM-FIXED-Q16-V1",
+      "applies_to": ["Q16_or_equivalent_fixed_point_when_explicitly_selected"],
+      "backend": "SIGNED_FIXED_POINT",
+      "fraction_bits": 16,
+      "quantization": "round(x * 2^16)",
+      "dequantization": "q / 2^16",
+      "rounding": "EXPLICIT_CALLER_POLICY_REQUIRED",
+      "overflow": "FAIL_CLOSED_NO_WRAPAROUND_UNLESS_TEST_VECTOR_EXPLICITLY_REQUIRES_MODULAR_ARITHMETIC",
+      "abs_epsilon": 0.0000152587890625,
+      "rel_epsilon": "OBJECT_DEPENDENT"
+    }
+  ],
+  "required_per_numeric_object": [
+    "object_id",
+    "policy_id",
+    "units_or_NOT_APPLICABLE",
+    "expected_domain",
+    "negative_case",
+    "falsifier"
+  ],
+  "F_ok": "A deterministic default policy now exists for exact combinatorics, float64 geometry, float32 ARM replay and Q16-style fixed point.",
+  "F_gap": "Object-specific physical measurement uncertainties and backend-specific deviations remain outside this engineering default.",
+  "F_next": "Attach a policy_id to every numeric object; physical experiments must override engineering epsilon with measured uncertainty."
+}

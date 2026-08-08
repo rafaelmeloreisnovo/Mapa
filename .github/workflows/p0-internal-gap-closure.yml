@@ -1,0 +1,32 @@
+name: P0 Internal Gap Closure
+
+on:
+  pull_request:
+    paths:
+      - 'data/geometry/piramide_triedrica_dupla_candidates.v1.json'
+      - 'data/numerics/numeric_policy.v1.json'
+      - 'data/provenance/poincare_formula_provenance.v1.json'
+      - 'data/corpus/corpus_manifest_p0.v1.json'
+      - 'data/reconciliation/cross_surface_reconciliation_p0.v1.jsonl'
+      - 'tools/validate_p0_internal_gap_closure.py'
+      - 'tests/test_p0_internal_gap_closure.py'
+      - '.github/workflows/p0-internal-gap-closure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Validate five P0 internal gaps
+        run: python tools/validate_p0_internal_gap_closure.py

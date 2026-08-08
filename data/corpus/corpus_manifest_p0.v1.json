@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.corpus-manifest-p0.v1",
+  "claim_allowed": false,
+  "scope_id": "OMEGA7_AUDIT_20260803_PLUS_P0_CANONICAL_SOURCES",
+  "global_drive_complete_claim": false,
+  "scope_boundary": "This manifest closes governance for the evidenced Omega7 audit corpus and the canonical P0 source set. It does not assert that every object in the user's entire Drive has been fetched or hashed.",
+  "omega7_audit": {
+    "drive_folder_id": "1K3CQl7DYA_pbCsgigSGvvUcs39D9pCBv",
+    "source_receipt_sha256": "66dfdbabc26872731257a4d3ccc37e43cc6d905d046acb908a61d15c0f7ea773",
+    "files_observed": 62822,
+    "files_with_hash": 62821,
+    "hash_coverage_ratio": 0.9999840820094871,
+    "inventory_csv": {
+      "drive_file_id": "14UYcpsYd-wBO_l4eX6Av-hFf2JV0plJE",
+      "bytes": 40325076,
+      "sha256": "ef8c56f50e5668fa6d91fd8391784df340b71f6d4288f1330a19e3f598b94be9"
+    },
+    "relation_graph": {
+      "drive_file_id": "15fNtCFs3yOYPatQgYqOWIPh0w6dOo9F9",
+      "bytes": 54753392,
+      "sha256": "74dc48ee7239c60579af4d1e4bcda7197cbd5ae87597b70e406945e6facd8dbd"
+    },
+    "sqlite_audit": {
+      "drive_file_id": "1ceVpOz0pGcLkRKK7JqhIErMz2q2wQO8P",
+      "bytes": 71983104,
+      "sha256": "134b0096b38d8a8e879b81020d2bcc9f2947fbd46addc8a5e5bfa4ba8d53a454"
+    },
+    "known_residuals": [
+      "ONE_OBSERVED_FILE_WITHOUT_HASH_IN_RECORDED_AUDIT_COUNT",
+      "TRUNCATED_SOURCE_ARCHIVE_REQUIRES_REPLACEMENT",
+      "AGGREGATE_ZIP_UPLOAD_BLOCKED_BY_CONNECTOR_SAFETY_CLASSIFICATION",
+      "LICENSE_STATE_TOKEN_VAZIO_FOR_AGGREGATE_PRIVATE_CORPUS"
+    ]
+  },
+  "canonical_p0_sources": [
+    {"id":"SRC-P0-001","kind":"GOOGLE_DOC","provider_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","role":"MASTER_LONGITUDINAL_MEMORY","privacy":"PRIVATE_OR_ACCESS_CONTROLLED_BY_PROVIDER","license":"AUTHORIAL_OR_PROVIDER_CONTEXT_REQUIRES_PER_OBJECT_CHECK","derived_from":"SOURCE_SELF"},
+    {"id":"SRC-P0-002","kind":"GOOGLE_DOC","provider_id":"1WBdpinwjKsynnrR5KW6vDYi3rt1X5HfnQMsG7EWJS8E","role":"CLOSURE_CONTRACT_EDITORIAL_MIRROR","privacy":"ACCESS_CONTROLLED_BY_PROVIDER","license":"AUTHORIAL_DOCUMENT","derived_from":"RAFAELIA-CLOSURE-V1-20260807T1626-0300"},
+    {"id":"SRC-P0-003","kind":"GOOGLE_SHEET","provider_id":"1FMuZ-WVvuI7qbQJ8E5LjfHOKShI83VMsJfGB2zyWHgE","role":"TRACEABILITY_MATRIX","privacy":"ACCESS_CONTROLLED_BY_PROVIDER","license":"TOKEN_VAZIO_TYPED_PER_ROW_AUTHORITY","derived_from":"MULTI_SOURCE_TRACEABILITY"},
+    {"id":"SRC-P0-004","kind":"GITHUB_PRIVATE_FILE","repository":"rafaelmeloreisnovo/papers","path":"knowledge_packets/2026-07-16/00_raw_relational_formula_dump.md","commit":"120f0917a782474ed5375402ab05d784896908de","blob_sha":"29712a26ea100d9380aa30f0cb839f8737f24971","role":"RAW_FORMULA_SOURCE","privacy":"PRIVATE_RESEARCH_PACKET","license":"AUTHORIAL_PRIVATE_RESEARCH_CONTEXT","derived_from":"LIVRO-VIVO-20260716"},
+    {"id":"SRC-P0-005","kind":"GITHUB_PUBLIC_FILE","repository":"instituto-Rafael/relativity-living-light","path":"data/formulas/FORMULAS_ARTIFACTS_MANIFEST.json","blob_sha":"f722d57bc04e62e2ccde33b0a4518dbf3d5aae89","role":"FORMULA_ARTIFACT_MANIFEST","privacy":"PUBLIC_REPOSITORY","license":"REPOSITORY_LICENSE_SCOPE_REQUIRES_FILE_LEVEL_CONFIRMATION","derived_from":"RLL_FORMULA_EXTRACTION_PIPELINE"},
+    {"id":"SRC-P0-006","kind":"GITHUB_PUBLIC_FILE","repository":"rafaelmeloreisnovo/Mapa","path":"auditoria/omega7/2026-08-03T0156-0300/custody_event.json","blob_sha":"15bb08935505063d42f86ef729042f3aaf3b254c","role":"CROSS_SOURCE_CUSTODY_EVENT","privacy":"PUBLIC_POINTERS_TO_PRIVATE_RESTRICTED_CORPUS","license":"TOKEN_VAZIO_TYPED_AGGREGATE_LICENSE_STATE","derived_from":"sha256:d65a421331c7971ba6d72b60a15baae60a4f6b16219c458c9269c6bee7c18964"}
+  ],
+  "mandatory_fields_policy": ["origin","provider_or_repository_locator","version_or_commit","privacy","license_or_authority","hash_or_typed_hash_gap","derived_from","F_next"],
+  "residual_classification": {
+    "missing_hash_count_in_omega7_audit": 1,
+    "state": "TOKEN_VAZIO_TYPED_SINGLE_HASH_RESIDUAL_PLUS_EXTERNAL_SOURCE_REPLACEMENT",
+    "anonymous_gap_count_for_listed_p0_sources": 0
+  },
+  "F_ok": "The large Omega7 corpus has an evidenced inventory, relation graph, audit DB and 62821 recorded hashes; all P0 canonical sources have explicit locators and authority/privacy states.",
+  "F_gap": "One recorded file hash is absent in the Omega7 count, one source archive is truncated, aggregate license remains unresolved, and this scope is not the whole Drive.",
+  "F_next": "Resolve the single missing hash by exact inventory row, replace the truncated archive, classify license per source, and extend by append-only manifests rather than claiming total Drive coverage."
+}
