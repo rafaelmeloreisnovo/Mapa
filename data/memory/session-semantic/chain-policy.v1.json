@@ -1,0 +1,61 @@
+{
+  "schema_version": "rafaelia.session-semantic-chain-policy/v1",
+  "source_sessions": "data/memory/session-semantic/sessions.v1.jsonl",
+  "identity_bindings": "data/memory/session-semantic/identity-bindings.v1.json",
+  "derived_chain_schema": "schemas/session-semantic-chain.v1.schema.json",
+  "materialization": "deterministic-derived-view",
+  "chain": [
+    "session",
+    "block",
+    "concept",
+    "occurrence",
+    "relation",
+    "claim",
+    "evidence",
+    "state",
+    "artifact"
+  ],
+  "coverage_contract": {
+    "unit": "one row for every semantic block x concept_ref pair",
+    "projected_semantic_coverage_target": 1.0,
+    "raw_export_coverage_state": "TOKEN_VAZIO until byte-complete provider/export bindings exist",
+    "forbidden_shortcut": "Do not infer full corpus coverage from projected ledger coverage."
+  },
+  "identity_contract": {
+    "local_fingerprint": "sha256(canonical JSON of session_id, observed_time_label, observed_title, source_locator)",
+    "provider_identity_required_for_promotion": true,
+    "accepted_match_basis": ["EXACT_PROVIDER_EXPORT"],
+    "required_binding_fields": [
+      "session_id",
+      "provider_session_id",
+      "provider_message_id",
+      "export_artifact_id",
+      "chunk_coordinate",
+      "source_sha256",
+      "match_basis",
+      "verified"
+    ],
+    "title_similarity_is_identity": false
+  },
+  "promotion_states": [
+    "EPISODIC_OBSERVED",
+    "IDENTITY_PENDING",
+    "NON_ORDINAL_CANDIDATE",
+    "EVIDENCE_BOUND",
+    "PROMOTABLE",
+    "PROMOTED"
+  ],
+  "promotion_gate": {
+    "requires_exact_provider_binding": true,
+    "requires_source_sha256": true,
+    "requires_message_coordinate": true,
+    "requires_claim_allowed": true,
+    "requires_evidence_state": "BOUND_EXACT",
+    "default": "DENY"
+  },
+  "epistemic_boundary": {
+    "generated_claim_kind": "TRACEABILITY_CLAIM",
+    "scientific_claim_promotion": "out of scope unless independently evidenced",
+    "TOKEN_VAZIO": "preserve unresolved identity/evidence instead of fabricating closure"
+  }
+}

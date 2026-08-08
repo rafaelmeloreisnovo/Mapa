@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/ordinal-memory-node.schema.json",
+  "title": "RAFAELIA Ordinal Memory Node V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "semantic_id",
+    "ordinal_path",
+    "node_class",
+    "primary_parent",
+    "source_refs",
+    "status",
+    "claim_allowed",
+    "vector",
+    "measurement_basis",
+    "created_at",
+    "revision"
+  ],
+  "properties": {
+    "schema_version": {"const": "ordinal-memory-node.v1"},
+    "semantic_id": {"type": "string", "minLength": 3},
+    "ordinal_path": {
+      "type": "array",
+      "prefixItems": [
+        {"type": "integer", "minimum": 0},
+        {"type": "integer", "minimum": 0},
+        {"type": "integer", "minimum": 0},
+        {"type": "integer", "minimum": 0},
+        {"type": "integer", "minimum": 0},
+        {"type": "integer", "minimum": 0}
+      ],
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "node_class": {
+      "enum": ["ROOT", "TRUNK", "BRANCH", "NODE", "LEAF", "SEED", "FRUIT"]
+    },
+    "primary_parent": {"type": ["string", "null"]},
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "locator"],
+        "properties": {
+          "kind": {"enum": ["github", "drive", "file", "dataset", "receipt", "paper", "other"]},
+          "locator": {"type": "string", "minLength": 1},
+          "sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
+          "blob_sha": {"type": ["string", "null"]},
+          "observed_at": {"type": ["string", "null"], "format": "date-time"}
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "SOURCE_CLAIM",
+        "CANONICAL_DRAFT",
+        "PARTIAL",
+        "PASS",
+        "FAIL",
+        "BLOCKED",
+        "TOKEN_VAZIO",
+        "TOKEN_VAZIO_LINEAGE",
+        "TOKEN_VAZIO_METRIC",
+        "CLOSED_PASS",
+        "CLOSED_FAIL",
+        "ARCHIVED"
+      ]
+    },
+    "claim_allowed": {"type": "boolean"},
+    "claim_text": {"type": ["string", "null"]},
+    "vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provenance",
+        "semantics",
+        "evidence",
+        "reproducibility",
+        "dependency",
+        "contradiction",
+        "security",
+        "freshness",
+        "uncertainty",
+        "urgency"
+      ],
+      "properties": {
+        "provenance": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "semantics": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "evidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "reproducibility": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "dependency": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "contradiction": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "security": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "freshness": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "uncertainty": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "urgency": {"type": ["integer", "null"], "minimum": 0, "maximum": 100}
+      }
+    },
+    "measurement_basis": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string"}
+    },
+    "token_vazio": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "token_vazio_id",
+        "reason",
+        "blocked_claims",
+        "missing_object",
+        "expected_evidence",
+        "closure_test",
+        "owner_domain",
+        "priority",
+        "state"
+      ],
+      "properties": {
+        "token_vazio_id": {"type": "string", "minLength": 3},
+        "reason": {"type": "string", "minLength": 3},
+        "blocked_claims": {"type": "array", "items": {"type": "string"}},
+        "missing_object": {"type": "string", "minLength": 1},
+        "expected_evidence": {"type": "string", "minLength": 1},
+        "closure_test": {"type": "string", "minLength": 1},
+        "owner_domain": {"type": "string", "minLength": 1},
+        "priority": {"enum": ["P0", "P1", "P2", "P3", "P4"]},
+        "state": {"enum": ["OPEN", "TESTABLE", "RUNNING", "CLOSED_PASS", "CLOSED_FAIL", "BLOCKED_EXTERNAL"]}
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "target", "confidence", "source", "observed_at"],
+        "properties": {
+          "type": {
+            "enum": ["DERIVED_FROM", "DUPLICATES", "ALIASES", "DEPENDS_ON", "SUPPORTS", "FALSIFIES", "CONTRADICTS", "REPLACES", "EXECUTED_BY", "PRODUCES", "BLOCKED_BY", "CLOSES_TOKEN_VAZIO"]
+          },
+          "target": {"type": "string", "minLength": 1},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "source": {"type": "string", "minLength": 1},
+          "observed_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "last_checked_at": {"type": ["string", "null"], "format": "date-time"},
+    "revision": {"type": "integer", "minimum": 0}
+  }
+}
