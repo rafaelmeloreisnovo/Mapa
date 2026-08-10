@@ -53,11 +53,11 @@ jobs:
               (3, "rafpolimata-handoff", "RafPolimata",
                "rafaelmeloreisnovo/RafPolimata",
                ".github/workflows/rafaelia-handoff-gate.yml",
-               "976a8e313c3d88ed648e9576167bd223b9391f44"),
+               "d66fb90cda11a1838bbbbc754840a8ece005d864"),
               (4, "rafcodephi-e2e-contract", "Termux RAFCODEPHI",
                "rafaelmeloreisnovo/termux-app-rafacodephi",
                ".github/workflows/rafaelia_e2e_product_proof.yml",
-               "bd75bfacbe701c5eaf8dea33265c6129ec68ece0"),
+               "ff28a71bd06895cd0ae7e4be2b21781edc6a7393"),
           ]
           observed = [
               (
@@ -72,15 +72,15 @@ jobs:
               raise SystemExit("claim_allowed must remain false")
           if data.get("automatic_merge") is not False:
               raise SystemExit("automatic_merge must remain false")
-          if data.get("state") != "DRAFT_SOURCE_LOCKED":
-              raise SystemExit("TORRE state must remain DRAFT_SOURCE_LOCKED")
+          if data.get("state") != "DEFAULT_BRANCH_LOCKED":
+              raise SystemExit("TORRE state must remain DEFAULT_BRANCH_LOCKED")
           if data.get("promotion") != "BLOCKED":
               raise SystemExit("TORRE promotion must remain BLOCKED")
           expected_resolution = {
               "mapa": "21baebae22508350f693da0c2d9927417b1ded7d",
               "rafgittools": "09833d0f7f398109f1c4c2075173ad3a994dd683",
-              "rafpolimata": "TOKEN_VAZIO_MERGE_COMMIT_SHA",
-              "rafcodephi": "TOKEN_VAZIO_MERGE_COMMIT_SHA",
+              "rafpolimata": "d66fb90cda11a1838bbbbc754840a8ece005d864",
+              "rafcodephi": "ff28a71bd06895cd0ae7e4be2b21781edc6a7393",
           }
           if data.get("promotion_ref_resolution") != expected_resolution:
               raise SystemExit("default-branch merge SHA resolution must remain explicit")
@@ -147,7 +147,7 @@ jobs:
     name: "03 RafPolimata — Handoff Gate"
     if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: rafgittools_federated_runtime
-    uses: rafaelmeloreisnovo/RafPolimata/.github/workflows/rafaelia-handoff-gate.yml@976a8e313c3d88ed648e9576167bd223b9391f44
+    uses: rafaelmeloreisnovo/RafPolimata/.github/workflows/rafaelia-handoff-gate.yml@d66fb90cda11a1838bbbbc754840a8ece005d864
     with:
       torre_correlation_id: "torre-${{ github.run_id }}-03"
 
@@ -155,7 +155,7 @@ jobs:
     name: "04 Termux RAFCODEPHI — E2E Contract"
     if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: rafpolimata_handoff
-    uses: rafaelmeloreisnovo/termux-app-rafacodephi/.github/workflows/rafaelia_e2e_product_proof.yml@bd75bfacbe701c5eaf8dea33265c6129ec68ece0
+    uses: rafaelmeloreisnovo/termux-app-rafacodephi/.github/workflows/rafaelia_e2e_product_proof.yml@ff28a71bd06895cd0ae7e4be2b21781edc6a7393
     with:
       torre_correlation_id: "torre-${{ github.run_id }}-04"
 
