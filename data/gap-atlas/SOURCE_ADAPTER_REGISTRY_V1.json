@@ -1,0 +1,63 @@
+{
+  "schema": "RAFAELIA_SOURCE_ADAPTER_REGISTRY_V1",
+  "generated_at": "2026-08-10T15:32:00-03:00",
+  "claim_allowed": false,
+  "adapters": [
+    {
+      "adapter_id": "REPOSITORY_GAP_MAP_V1",
+      "source": "rafaelmeloreisnovo/Mapa: tools/repository_gap_mapper.py",
+      "mode": "repository-gap-map",
+      "implementation": "tools/rafaelia_gap_discovery_adapter.py",
+      "state": "IMPLEMENTED_DISCOVERY_ONLY",
+      "output_state": ["MAPPED", "UNMAPPED_REQUIRES_GAP_ID"]
+    },
+    {
+      "adapter_id": "RLL_EPISTEMIC_VOID_V1",
+      "source": "instituto-Rafael/relativity-living-light: data/epistemic_void/rll_epistemic_void.json",
+      "mode": "rll-json",
+      "implementation": "tools/rafaelia_specialized_ledger_adapter.py",
+      "state": "IMPLEMENTED_DISCOVERY_ONLY",
+      "authority_boundary": "RLL records are extracted as candidates; no state is terminally promoted by this adapter."
+    },
+    {
+      "adapter_id": "OPCORE94_TOKEN_KV_V1",
+      "source": "rafaelmeloreisnovo/Mapa: auditoria/OPCORE94_V2_TOKEN_VAZIO_LEDGER.txt",
+      "mode": "token-kv",
+      "implementation": "tools/rafaelia_specialized_ledger_adapter.py",
+      "state": "IMPLEMENTED_DISCOVERY_ONLY"
+    },
+    {
+      "adapter_id": "TERMUX_APP_STATUS_MARKDOWN_V1",
+      "source": "rafaelmeloreisnovo/termux-app-rafacodephi: docs/STATUS.md",
+      "mode": "markdown-states",
+      "implementation": "tools/rafaelia_specialized_ledger_adapter.py",
+      "state": "IMPLEMENTED_LIMITED_DISCOVERY",
+      "limitation": "Explicit state-marker extraction only; surrounding prose still requires review."
+    },
+    {
+      "adapter_id": "RAFGITTOOLS_STATUS_MARKDOWN_V1",
+      "source": "rafaelmeloreisnovo/RafGitTools: docs/STATUS_REPORT.md",
+      "mode": "markdown-states",
+      "implementation": "tools/rafaelia_specialized_ledger_adapter.py",
+      "state": "IMPLEMENTED_LIMITED_DISCOVERY",
+      "limitation": "Table/line marker extraction is not component semantic equivalence."
+    },
+    {
+      "adapter_id": "RAFPOLIMATA_APKC_GAPS_V1",
+      "source": "rafaelmeloreisnovo/RafPolimata: Apkc/proofs/GAPS.md",
+      "mode": "markdown-states",
+      "implementation": "tools/rafaelia_specialized_ledger_adapter.py",
+      "state": "IMPLEMENTED_LIMITED_DISCOVERY"
+    },
+    {
+      "adapter_id": "DRIVE_GOVERNANCE_CONNECTOR_V1",
+      "source": "Google Drive: RAFAELIA_GOVERNANCE_PROVENANCE_URGENT_LEDGER_V1 + Master Navigation Registry",
+      "mode": "provider-connector",
+      "implementation": "Google Drive connector bounded listing/search + PROVIDER_COVERAGE_V1.json receipt",
+      "state": "EXTERNAL_CONNECTOR_BOUND",
+      "limitation": "Not recursively complete; provider IDs and bounded scopes must be declared per execution."
+    }
+  ],
+  "global_boundary": "ADAPTER_OUTPUT_IS_DISCOVERY_NOT_RESOLUTION",
+  "next_gate": "Run each implemented adapter against a pinned source snapshot, map candidates to gap_id, and record stale/unmapped deltas append-only."
+}
