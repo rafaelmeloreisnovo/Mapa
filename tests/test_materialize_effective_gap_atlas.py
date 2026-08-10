@@ -16,7 +16,7 @@ OVERRIDES = ROOT / "data/gap-atlas/GAP_STATE_OVERRIDES_V1.json"
 
 
 class EffectiveAtlasTests(unittest.TestCase):
-    def test_current_materialization_has_27_records_and_reduced_meta_gap(self):
+    def test_current_materialization_has_31_records_and_reduced_meta_gap(self):
         with tempfile.TemporaryDirectory() as td:
             out = Path(td) / "effective.json"
             proc = subprocess.run(
@@ -28,14 +28,18 @@ class EffectiveAtlasTests(unittest.TestCase):
             self.assertEqual(proc.returncode, 0, proc.stderr)
             data = json.loads(out.read_text(encoding="utf-8"))
             self.assertEqual(data["counts"]["seed_records"], 26)
-            self.assertEqual(data["counts"]["appended_records"], 1)
-            self.assertEqual(data["counts"]["effective_records"], 27)
+            self.assertEqual(data["counts"]["appended_records"], 5)
+            self.assertEqual(data["counts"]["effective_records"], 31)
             self.assertFalse(data["claim_allowed"])
             self.assertFalse(data["publication_ready"])
             by_id = {record["gap_id"]: record for record in data["records"]}
             self.assertEqual(by_id["GAP-META-INVENTORY-001"]["base_state"], "TOKEN_VAZIO")
             self.assertEqual(by_id["GAP-META-INVENTORY-001"]["effective_state"], "REDUCED")
             self.assertEqual(by_id["GAP-CONVERSATIONS-018-027-CUSTODY-001"]["effective_state"], "TOKEN_VAZIO")
+            self.assertEqual(by_id["GAP-CONVERSATIONS-TOKENIZER-001"]["effective_state"], "TOKEN_VAZIO")
+            self.assertEqual(by_id["GAP-CONVERSATIONS-ASSET-JOIN-001"]["effective_state"], "TOKEN_VAZIO")
+            self.assertEqual(by_id["GAP-DRIVE-GITHUB-PROVENANCE-001"]["effective_state"], "TOKEN_VAZIO")
+            self.assertEqual(by_id["GAP-TRAINING-EVIDENCE-001"]["effective_state"], "NOT_MEASURED")
 
     def test_duplicate_appended_gap_fails_closed(self):
         with tempfile.TemporaryDirectory() as td:
