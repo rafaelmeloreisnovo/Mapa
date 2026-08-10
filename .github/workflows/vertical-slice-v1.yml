@@ -1,5 +1,7 @@
 name: Vertical Slice V1
 
+run-name: "TORRE / Mapa Vertical Slice / ${{ inputs.torre_correlation_id || github.run_id }}"
+
 "on":
   pull_request:
     paths:
@@ -15,13 +17,23 @@ name: Vertical Slice V1
       - "observability/vertical_slice_v1_metrics.json"
       - "resultados/RAFAELIA_VERTICAL_SLICE_STATUS_V1.json"
   workflow_dispatch:
+    inputs:
+      torre_correlation_id:
+        description: Correlation ID supplied by the TORRE controller
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
+  group: torre-unit-mapa-vertical-slice-${{ github.ref }}
+  cancel-in-progress: false
+
+concurrency:
   group: vertical-slice-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   contract:
