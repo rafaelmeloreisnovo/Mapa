@@ -1,0 +1,33 @@
+{
+  "schema": "RAFAELIA_GAP_STATE_OVERRIDES_V1",
+  "generated_at": "2026-08-10T15:34:00-03:00",
+  "mode": "APPEND_ONLY_OVERRIDE",
+  "claim_allowed": false,
+  "overrides": [
+    {
+      "gap_id": "GAP-META-INVENTORY-001",
+      "from_state": "TOKEN_VAZIO",
+      "target_state": "REDUCED",
+      "evidence": ["data/gap-atlas/PROVIDER_COVERAGE_V1.json"],
+      "assertions": [
+        "github_authority_registry.expected=14",
+        "github_authority_registry.observed=14",
+        "drive_branch_registry.expected_scopes=7",
+        "drive_branch_registry.observed_scopes=7",
+        "claim_allowed=false"
+      ],
+      "closed_scope": [
+        "existence/metadata coverage for the 14 repositories declared by the authority registry",
+        "direct-child listing for the seven Drive branch_registry roots"
+      ],
+      "remaining_scope": [
+        "recursive Drive coverage below the seven roots",
+        "all-Drive account inventory outside those roots",
+        "all GitHub repositories/refs outside the authority registry denominator",
+        "repository-content semantic/gap coverage"
+      ],
+      "next_gate": "Materialize recursive Drive branch coverage and broader GitHub installation/account enumeration with explicit pagination and denominators.",
+      "claim_allowed": false
+    }
+  ]
+}
