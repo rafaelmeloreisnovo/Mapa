@@ -1,0 +1,51 @@
+{
+  "schema": "rafaelia.torre.reusable-sequence/v2",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "private_workflow_access": {
+    "required": true,
+    "setting": "Accessible from repositories owned by rafaelmeloreisnovo"
+  },
+  "units": [
+    {
+      "order": 1,
+      "id": "mapa-vertical-slice",
+      "label": "Mapa Vertical Slice",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "workflow": ".github/workflows/vertical-slice-v1.yml",
+      "commit": "16de299f36c814d1a95d36fa1e3fbd6af4f05e97"
+    },
+    {
+      "order": 2,
+      "id": "rafgittools-federated-runtime",
+      "label": "RafGitTools",
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "workflow": ".github/workflows/federated-runtime-contract-v1.yml",
+      "commit": "e9888cf228a7debc55bdaa070a40b83e2ded6bf5"
+    },
+    {
+      "order": 3,
+      "id": "rafpolimata-handoff",
+      "label": "RafPolimata",
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "workflow": ".github/workflows/rafaelia-handoff-gate.yml",
+      "commit": "976a8e313c3d88ed648e9576167bd223b9391f44"
+    },
+    {
+      "order": 4,
+      "id": "rafcodephi-e2e-contract",
+      "label": "Termux RAFCODEPHI",
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "workflow": ".github/workflows/rafaelia_e2e_product_proof.yml",
+      "commit": "bd75bfacbe701c5eaf8dea33265c6129ec68ece0"
+    }
+  ],
+  "state": "DRAFT_SOURCE_LOCKED",
+  "promotion": "BLOCKED",
+  "promotion_ref_resolution": "TOKEN_VAZIO_MERGE_COMMIT_SHA",
+  "r3": {
+    "F_ok": "Four TORRE units are source-locked by full commit SHA.",
+    "F_gap": "External reusable workflow pins are draft-head commits until their PRs merge.",
+    "F_next": "After child PR review, bind these units to observed default-branch merge SHAs before promotion."
+  }
+}
