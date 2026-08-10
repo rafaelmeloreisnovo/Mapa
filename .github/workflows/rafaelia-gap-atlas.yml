@@ -144,7 +144,7 @@ jobs:
           assert effective['counts']['effective_records'] == 31
           by_id = {r['gap_id']: r for r in effective['records']}
           assert by_id['GAP-META-INVENTORY-001']['effective_state'] == 'REDUCED'
-          assert by_id['GAP-CONVERSATIONS-018-027-CUSTODY-001']['effective_state'] == 'TOKEN_VAZIO'
+          assert by_id['GAP-CONVERSATIONS-018-027-CUSTODY-001']['effective_state'] == 'REDUCED'
           assert by_id['GAP-CONVERSATIONS-TOKENIZER-001']['effective_state'] == 'TOKEN_VAZIO'
           assert by_id['GAP-CONVERSATIONS-ASSET-JOIN-001']['effective_state'] == 'TOKEN_VAZIO'
           assert by_id['GAP-DRIVE-GITHUB-PROVENANCE-001']['effective_state'] == 'TOKEN_VAZIO'
