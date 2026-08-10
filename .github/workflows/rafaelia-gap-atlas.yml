@@ -8,8 +8,10 @@ on:
       - "schemas/rafaelia_gap_atlas.v1.schema.json"
       - "tools/validate_rafaelia_gap_atlas.py"
       - "tools/rafaelia_gap_discovery_adapter.py"
+      - "tools/rafaelia_specialized_ledger_adapter.py"
       - "tools/repository_gap_mapper.py"
       - "tests/test_rafaelia_gap_atlas.py"
+      - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "indices/repository_authority_registry.json"
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
@@ -21,8 +23,10 @@ on:
       - "schemas/rafaelia_gap_atlas.v1.schema.json"
       - "tools/validate_rafaelia_gap_atlas.py"
       - "tools/rafaelia_gap_discovery_adapter.py"
+      - "tools/rafaelia_specialized_ledger_adapter.py"
       - "tools/repository_gap_mapper.py"
       - "tests/test_rafaelia_gap_atlas.py"
+      - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "indices/repository_authority_registry.json"
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
@@ -46,17 +50,21 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Compile validators, adapter and tests
+      - name: Compile validators, adapters and tests
         run: |
           python3 -m py_compile tools/validate_rafaelia_gap_atlas.py
           python3 -m py_compile tools/rafaelia_gap_discovery_adapter.py
+          python3 -m py_compile tools/rafaelia_specialized_ledger_adapter.py
           python3 -m py_compile tools/repository_gap_mapper.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
+          python3 -m py_compile tests/test_rafaelia_specialized_ledger_adapter.py
           python3 -m py_compile scripts/validate_federated_registry.py
 
       - name: Validate JSON syntax
         run: |
           python3 -m json.tool data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json >/dev/null
+          python3 -m json.tool data/gap-atlas/PROVIDER_COVERAGE_V1.json >/dev/null
+          python3 -m json.tool data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json >/dev/null
           python3 -m json.tool schemas/rafaelia_gap_atlas.v1.schema.json >/dev/null
           python3 -m json.tool indices/repository_authority_registry.json >/dev/null
           while IFS= read -r line; do
@@ -73,7 +81,9 @@ jobs:
             | tee gap-atlas-validation.json
 
       - name: Run fail-closed regression tests
-        run: python3 -m unittest -v tests/test_rafaelia_gap_atlas.py
+        run: |
+          python3 -m unittest -v tests/test_rafaelia_gap_atlas.py
+          python3 -m unittest -v tests/test_rafaelia_specialized_ledger_adapter.py
 
       - name: Generate bounded repository gap map
         run: |
@@ -94,7 +104,7 @@ jobs:
             --output artifacts/gap-atlas/discovery_candidates.json \
             | tee gap-discovery-summary.json
 
-      - name: Guard claim boundary
+      - name: Guard coverage and claim boundary
         run: |
           python3 - <<'PY'
           import json
@@ -102,12 +112,19 @@ jobs:
           atlas = json.loads(Path('data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json').read_text())
           report = json.loads(Path('artifacts/gap-atlas/validation_report.json').read_text())
           discovery = json.loads(Path('artifacts/gap-atlas/discovery_candidates.json').read_text())
+          coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
+          adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
           assert atlas['claim_allowed'] is False
           assert report['claim_allowed'] is False
           assert report['publication_ready'] is False
           assert report['p0_open'] > 0
           assert discovery['claim_allowed'] is False
-          print('claim boundary preserved: validation/discovery cannot promote open gaps')
+          assert coverage['claim_allowed'] is False
+          assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
+          assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
+          assert adapters['claim_allowed'] is False
+          assert adapters['global_boundary'] == 'ADAPTER_OUTPUT_IS_DISCOVERY_NOT_RESOLUTION'
+          print('claim boundary preserved: bounded coverage/adapters cannot promote open gaps')
           PY
 
       - name: Create checksum receipt
@@ -115,10 +132,14 @@ jobs:
           sha256sum \
             data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json \
             data/gap-atlas/RAFAELIA_GAP_EVENTS_V1.jsonl \
+            data/gap-atlas/PROVIDER_COVERAGE_V1.json \
+            data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json \
             schemas/rafaelia_gap_atlas.v1.schema.json \
             tools/validate_rafaelia_gap_atlas.py \
             tools/rafaelia_gap_discovery_adapter.py \
+            tools/rafaelia_specialized_ledger_adapter.py \
             tests/test_rafaelia_gap_atlas.py \
+            tests/test_rafaelia_specialized_ledger_adapter.py \
             indices/repository_authority_registry.json \
             artifacts/gap-atlas/repository_gap_map.json \
             artifacts/gap-atlas/discovery_candidates.json \
