@@ -140,11 +140,15 @@ jobs:
           assert effective['claim_allowed'] is False
           assert effective['publication_ready'] is False
           assert effective['counts']['seed_records'] == 26
-          assert effective['counts']['appended_records'] == 1
-          assert effective['counts']['effective_records'] == 27
+          assert effective['counts']['appended_records'] == 5
+          assert effective['counts']['effective_records'] == 31
           by_id = {r['gap_id']: r for r in effective['records']}
           assert by_id['GAP-META-INVENTORY-001']['effective_state'] == 'REDUCED'
           assert by_id['GAP-CONVERSATIONS-018-027-CUSTODY-001']['effective_state'] == 'TOKEN_VAZIO'
+          assert by_id['GAP-CONVERSATIONS-TOKENIZER-001']['effective_state'] == 'TOKEN_VAZIO'
+          assert by_id['GAP-CONVERSATIONS-ASSET-JOIN-001']['effective_state'] == 'TOKEN_VAZIO'
+          assert by_id['GAP-DRIVE-GITHUB-PROVENANCE-001']['effective_state'] == 'TOKEN_VAZIO'
+          assert by_id['GAP-TRAINING-EVIDENCE-001']['effective_state'] == 'NOT_MEASURED'
           assert discovery['claim_allowed'] is False
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
