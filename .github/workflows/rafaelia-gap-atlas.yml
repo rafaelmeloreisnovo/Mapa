@@ -1,0 +1,139 @@
+name: RAFAELIA Gap Atlas V1
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "data/gap-atlas/**"
+      - "schemas/rafaelia_gap_atlas.v1.schema.json"
+      - "tools/validate_rafaelia_gap_atlas.py"
+      - "tools/rafaelia_gap_discovery_adapter.py"
+      - "tools/repository_gap_mapper.py"
+      - "tests/test_rafaelia_gap_atlas.py"
+      - "indices/repository_authority_registry.json"
+      - "scripts/validate_federated_registry.py"
+      - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
+      - ".github/workflows/rafaelia-gap-atlas.yml"
+  push:
+    branches: [main]
+    paths:
+      - "data/gap-atlas/**"
+      - "schemas/rafaelia_gap_atlas.v1.schema.json"
+      - "tools/validate_rafaelia_gap_atlas.py"
+      - "tools/rafaelia_gap_discovery_adapter.py"
+      - "tools/repository_gap_mapper.py"
+      - "tests/test_rafaelia_gap_atlas.py"
+      - "indices/repository_authority_registry.json"
+      - "scripts/validate_federated_registry.py"
+      - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
+      - ".github/workflows/rafaelia-gap-atlas.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafaelia-gap-atlas-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Compile validators, adapter and tests
+        run: |
+          python3 -m py_compile tools/validate_rafaelia_gap_atlas.py
+          python3 -m py_compile tools/rafaelia_gap_discovery_adapter.py
+          python3 -m py_compile tools/repository_gap_mapper.py
+          python3 -m py_compile tests/test_rafaelia_gap_atlas.py
+          python3 -m py_compile scripts/validate_federated_registry.py
+
+      - name: Validate JSON syntax
+        run: |
+          python3 -m json.tool data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json >/dev/null
+          python3 -m json.tool schemas/rafaelia_gap_atlas.v1.schema.json >/dev/null
+          python3 -m json.tool indices/repository_authority_registry.json >/dev/null
+          while IFS= read -r line; do
+            [ -z "$line" ] || printf '%s\n' "$line" | python3 -m json.tool >/dev/null
+          done < data/gap-atlas/RAFAELIA_GAP_EVENTS_V1.jsonl
+
+      - name: Validate federated authority registry
+        run: python3 scripts/validate_federated_registry.py | tee federated-authority-validation.json
+
+      - name: Validate Gap Atlas
+        run: |
+          python3 tools/validate_rafaelia_gap_atlas.py \
+            --write-report artifacts/gap-atlas/validation_report.json \
+            | tee gap-atlas-validation.json
+
+      - name: Run fail-closed regression tests
+        run: python3 -m unittest -v tests/test_rafaelia_gap_atlas.py
+
+      - name: Generate bounded repository gap map
+        run: |
+          mkdir -p artifacts/gap-atlas
+          python3 tools/repository_gap_mapper.py \
+            --root Mapa=. \
+            --exclude generated \
+            --exclude artifacts \
+            --output-json artifacts/gap-atlas/repository_gap_map.json \
+            --output-md artifacts/gap-atlas/repository_gap_map.md \
+            --fail-on none
+
+      - name: Convert unmapped observations into discovery candidates
+        run: |
+          python3 tools/rafaelia_gap_discovery_adapter.py \
+            --gap-map artifacts/gap-atlas/repository_gap_map.json \
+            --atlas data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json \
+            --output artifacts/gap-atlas/discovery_candidates.json \
+            | tee gap-discovery-summary.json
+
+      - name: Guard claim boundary
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          atlas = json.loads(Path('data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json').read_text())
+          report = json.loads(Path('artifacts/gap-atlas/validation_report.json').read_text())
+          discovery = json.loads(Path('artifacts/gap-atlas/discovery_candidates.json').read_text())
+          assert atlas['claim_allowed'] is False
+          assert report['claim_allowed'] is False
+          assert report['publication_ready'] is False
+          assert report['p0_open'] > 0
+          assert discovery['claim_allowed'] is False
+          print('claim boundary preserved: validation/discovery cannot promote open gaps')
+          PY
+
+      - name: Create checksum receipt
+        run: |
+          sha256sum \
+            data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json \
+            data/gap-atlas/RAFAELIA_GAP_EVENTS_V1.jsonl \
+            schemas/rafaelia_gap_atlas.v1.schema.json \
+            tools/validate_rafaelia_gap_atlas.py \
+            tools/rafaelia_gap_discovery_adapter.py \
+            tests/test_rafaelia_gap_atlas.py \
+            indices/repository_authority_registry.json \
+            artifacts/gap-atlas/repository_gap_map.json \
+            artifacts/gap-atlas/discovery_candidates.json \
+            > GAP_ATLAS_CHECKSUMS.sha256
+
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rafaelia-gap-atlas-${{ github.sha }}
+          path: |
+            gap-atlas-validation.json
+            federated-authority-validation.json
+            gap-discovery-summary.json
+            artifacts/gap-atlas/
+            GAP_ATLAS_CHECKSUMS.sha256
+          if-no-files-found: warn
+          retention-days: 30
