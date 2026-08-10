@@ -1,13 +1,9 @@
 name: TORRE Sequential Fail-Closed
 
+run-name: "TORRE / ${{ github.event_name }} / ${{ github.run_id }}"
+
 "on":
   workflow_dispatch:
-    inputs:
-      wait_minutes:
-        description: Maximum observation time for each TORRE unit (1-30)
-        required: true
-        default: "15"
-        type: string
   pull_request:
     branches: [main]
     paths:
@@ -23,7 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  validate-sequence:
+  validate_sequence:
     name: Validate immutable TORRE sequence
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -34,7 +30,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
 
-      - name: Validate schema, order, and targets
+      - name: Validate declared immutable workflow sources
         shell: bash
         run: |
           set -euo pipefail
@@ -47,32 +43,39 @@ jobs:
           )
           expected = [
               (1, "mapa-vertical-slice", "Mapa Vertical Slice",
-               "rafaelmeloreisnovo/Mapa", "vertical-slice-v1.yml", "main"),
+               "rafaelmeloreisnovo/Mapa",
+               ".github/workflows/vertical-slice-v1.yml",
+               "16de299f36c814d1a95d36fa1e3fbd6af4f05e97"),
               (2, "rafgittools-federated-runtime", "RafGitTools",
                "rafaelmeloreisnovo/RafGitTools",
-               "federated-runtime-contract-v1.yml", "main"),
+               ".github/workflows/federated-runtime-contract-v1.yml",
+               "e9888cf228a7debc55bdaa070a40b83e2ded6bf5"),
               (3, "rafpolimata-handoff", "RafPolimata",
                "rafaelmeloreisnovo/RafPolimata",
-               "rafaelia-handoff-gate.yml", "main"),
+               ".github/workflows/rafaelia-handoff-gate.yml",
+               "976a8e313c3d88ed648e9576167bd223b9391f44"),
               (4, "rafcodephi-e2e-contract", "Termux RAFCODEPHI",
                "rafaelmeloreisnovo/termux-app-rafacodephi",
-               "rafaelia_e2e_product_proof.yml", "master"),
+               ".github/workflows/rafaelia_e2e_product_proof.yml",
+               "bd75bfacbe701c5eaf8dea33265c6129ec68ece0"),
           ]
           observed = [
               (
                   unit.get("order"), unit.get("id"), unit.get("label"),
-                  unit.get("repository"), unit.get("workflow"), unit.get("ref"),
+                  unit.get("repository"), unit.get("workflow"), unit.get("commit"),
               )
               for unit in data.get("units", [])
           ]
-          if data.get("schema") != "rafaelia.torre.sequence/v1":
+          if data.get("schema") != "rafaelia.torre.reusable-sequence/v2":
               raise SystemExit("invalid TORRE schema")
           if data.get("claim_allowed") is not False:
               raise SystemExit("claim_allowed must remain false")
           if data.get("automatic_merge") is not False:
               raise SystemExit("automatic_merge must remain false")
+          if data.get("private_workflow_access", {}).get("required") is not True:
+              raise SystemExit("private reusable-workflow access must remain explicit")
           if observed != expected:
-              raise SystemExit("TORRE sequence differs from reviewed immutable targets")
+              raise SystemExit("TORRE sequence differs from reviewed immutable sources")
           print(json.dumps({
               "decision": "PASS",
               "units": len(observed),
@@ -81,193 +84,110 @@ jobs:
           }, sort_keys=True))
           PY
 
-  execute-sequence:
-    name: Execute TORRE units one at a time
+  mapa_vertical_slice:
+    name: "01 Mapa — Vertical Slice"
     if: ${{ github.event_name == 'workflow_dispatch' }}
-    needs: validate-sequence
-    runs-on: ubuntu-24.04
-    timeout-minutes: 70
-    env:
-      GH_TOKEN: ${{ secrets.TORRE_ORCHESTRATOR_TOKEN }}
-      WAIT_MINUTES: ${{ inputs.wait_minutes }}
-    steps:
-      - name: Checkout controller definition
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-          fetch-depth: 1
+    needs: validate_sequence
+    uses: ./.github/workflows/vertical-slice-v1.yml
+    with:
+      torre_correlation_id: "torre-${{ github.run_id }}-01"
 
-      - name: Dispatch and observe units sequentially
+  rafgittools_federated_runtime:
+    name: "02 RafGitTools — Federated Runtime"
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: mapa_vertical_slice
+    uses: rafaelmeloreisnovo/RafGitTools/.github/workflows/federated-runtime-contract-v1.yml@e9888cf228a7debc55bdaa070a40b83e2ded6bf5
+    with:
+      torre_correlation_id: "torre-${{ github.run_id }}-02"
+
+  rafpolimata_handoff:
+    name: "03 RafPolimata — Handoff Gate"
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: rafgittools_federated_runtime
+    uses: rafaelmeloreisnovo/RafPolimata/.github/workflows/rafaelia-handoff-gate.yml@976a8e313c3d88ed648e9576167bd223b9391f44
+    with:
+      torre_correlation_id: "torre-${{ github.run_id }}-03"
+
+  rafcodephi_e2e_contract:
+    name: "04 Termux RAFCODEPHI — E2E Contract"
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: rafpolimata_handoff
+    uses: rafaelmeloreisnovo/termux-app-rafacodephi/.github/workflows/rafaelia_e2e_product_proof.yml@bd75bfacbe701c5eaf8dea33265c6129ec68ece0
+    with:
+      torre_correlation_id: "torre-${{ github.run_id }}-04"
+
+  write_receipt:
+    name: Write bounded TORRE receipt
+    if: ${{ always() && github.event_name == 'workflow_dispatch' }}
+    needs:
+      - validate_sequence
+      - mapa_vertical_slice
+      - rafgittools_federated_runtime
+      - rafpolimata_handoff
+      - rafcodephi_e2e_contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      VALIDATION_RESULT: ${{ needs.validate_sequence.result }}
+      MAPA_RESULT: ${{ needs.mapa_vertical_slice.result }}
+      RAFGITTOOLS_RESULT: ${{ needs.rafgittools_federated_runtime.result }}
+      RAFPOLIMATA_RESULT: ${{ needs.rafpolimata_handoff.result }}
+      RAFCODEPHI_RESULT: ${{ needs.rafcodephi_e2e_contract.result }}
+    steps:
+      - name: Emit result-only receipt
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p build/torre
           python3 - <<'PY'
           import json
           import os
-          import subprocess
-          import sys
-          import time
-          from collections import Counter
           from datetime import datetime, timezone
           from pathlib import Path
 
-          base = Path("build/torre")
-          snapshots = base / "snapshots"
-          base.mkdir(parents=True, exist_ok=True)
-          snapshots.mkdir(parents=True, exist_ok=True)
-          events = []
-          terminal_error = None
-
-          def emit(unit, state, correlation_id, detail="", run=None):
-              event = {
-                  "observed_at": datetime.now(timezone.utc).isoformat(),
-                  "order": unit.get("order"),
-                  "unit_id": unit.get("id"),
-                  "repository": unit.get("repository"),
-                  "workflow": unit.get("workflow"),
-                  "ref": unit.get("ref"),
-                  "correlation_id": correlation_id,
-                  "state": state,
-                  "detail": detail,
-                  "run_id": None if run is None else run.get("id"),
-                  "conclusion": None if run is None else run.get("conclusion"),
-                  "run_url": None if run is None else run.get("html_url"),
-              }
-              events.append(event)
-              print(json.dumps(event, sort_keys=True), flush=True)
-
-          def api(*args):
-              result = subprocess.run(
-                  ["gh", "api", *args],
-                  text=True,
-                  capture_output=True,
-                  check=False,
-              )
-              if result.returncode != 0:
-                  detail = (result.stderr or result.stdout).replace("\n", " ")[:1200]
-                  raise RuntimeError(detail or "gh api returned a nonzero exit status")
-              return result.stdout
-
-          try:
-              wait_minutes = os.environ.get("WAIT_MINUTES", "")
-              if not wait_minutes.isdigit() or not 1 <= int(wait_minutes) <= 30:
-                  raise RuntimeError("wait_minutes must be an integer between 1 and 30")
-              if not os.environ.get("GH_TOKEN"):
-                  raise RuntimeError(
-                      "TOKEN_VAZIO_TORRE_ORCHESTRATOR_TOKEN: secret is required"
-                  )
-              api("user", "--jq", ".login")
-
-              data = json.loads(
-                  Path("data/torre/torre-sequence.v1.json").read_text(encoding="utf-8")
-              )
-              for unit in data["units"]:
-                  order = unit["order"]
-                  correlation_id = f"torre-{os.environ['GITHUB_RUN_ID']}-{order}"
-                  expected_title = f"TORRE / {unit['label']} / {correlation_id}"
-                  emit(unit, "DISPATCHING", correlation_id)
-
-                  try:
-                      api(
-                          "--method", "POST",
-                          f"repos/{unit['repository']}/actions/workflows/{unit['workflow']}/dispatches",
-                          "-f", f"ref={unit['ref']}",
-                          "-f", f"inputs[torre_correlation_id]={correlation_id}",
-                      )
-                  except RuntimeError as exc:
-                      emit(unit, "DISPATCH_REJECTED", correlation_id, str(exc))
-                      raise RuntimeError(
-                          f"first blocked unit is {unit['id']}; later units were not started"
-                      ) from exc
-
-                  deadline = time.monotonic() + int(wait_minutes) * 60
-                  while True:
-                      raw = api(
-                          "--method", "GET",
-                          f"repos/{unit['repository']}/actions/workflows/{unit['workflow']}/runs"
-                          f"?event=workflow_dispatch&branch={unit['ref']}&per_page=100",
-                      )
-                      (snapshots / f"{order}.json").write_text(raw, encoding="utf-8")
-                      runs = json.loads(raw).get("workflow_runs", [])
-                      matches = [
-                          run for run in runs
-                          if run.get("display_title") == expected_title
-                      ]
-                      matches.sort(key=lambda run: run.get("created_at", ""), reverse=True)
-                      run = matches[0] if matches else None
-
-                      if run and run.get("status") == "completed":
-                          if run.get("conclusion") == "success":
-                              emit(unit, "PASS", correlation_id, run=run)
-                              break
-                          emit(
-                              unit, "RED", correlation_id,
-                              "Child workflow completed without success.", run,
-                          )
-                          raise RuntimeError(
-                              f"first red unit is {unit['id']}; later units were not started"
-                          )
-
-                      if time.monotonic() >= deadline:
-                          state = "TOKEN_VAZIO_NOT_COMPLETED" if run else "TOKEN_VAZIO_RUN_ID"
-                          detail = (
-                              "Observation window elapsed before completion."
-                              if run else
-                              "No correlated workflow run became observable."
-                          )
-                          emit(unit, state, correlation_id, detail, run)
-                          raise RuntimeError(
-                              f"first unresolved unit is {unit['id']}; later units were not started"
-                          )
-                      time.sleep(10)
-          except RuntimeError as exc:
-              terminal_error = str(exc)
-              print(f"FAIL: {terminal_error}", file=sys.stderr)
-          finally:
-              terminal = [event for event in events if event["state"] != "DISPATCHING"]
-              failures = [event for event in terminal if event["state"] != "PASS"]
-              receipt = {
-                  "schema": "rafaelia.torre-receipt/v1",
-                  "generated_at": datetime.now(timezone.utc).isoformat(),
-                  "repository": os.environ["GITHUB_REPOSITORY"],
-                  "controller_run_id": os.environ["GITHUB_RUN_ID"],
-                  "claim_allowed": False,
-                  "automatic_merge": False,
-                  "decision": "PASS" if terminal_error is None else "BLOCKED",
-                  "terminal_counts": dict(
-                      sorted(Counter(event["state"] for event in terminal).items())
+          order = [
+              ("validate_sequence", os.environ["VALIDATION_RESULT"]),
+              ("mapa_vertical_slice", os.environ["MAPA_RESULT"]),
+              ("rafgittools_federated_runtime", os.environ["RAFGITTOOLS_RESULT"]),
+              ("rafpolimata_handoff", os.environ["RAFPOLIMATA_RESULT"]),
+              ("rafcodephi_e2e_contract", os.environ["RAFCODEPHI_RESULT"]),
+          ]
+          first_non_success = next(
+              (name for name, result in order if result != "success"),
+              None,
+          )
+          receipt = {
+              "schema": "rafaelia.torre-reusable-receipt/v1",
+              "generated_at": datetime.now(timezone.utc).isoformat(),
+              "claim_allowed": False,
+              "automatic_merge": False,
+              "result_by_unit": dict(order),
+              "decision": "PASS" if first_non_success is None else "BLOCKED",
+              "first_non_success": first_non_success,
+              "r3": {
+                  "F_ok": "A later unit is callable only after its direct dependency succeeds.",
+                  "F_gap": (
+                      "none" if first_non_success is None else
+                      f"first non-success unit: {first_non_success}"
                   ),
-                  "events": events,
-                  "r3": {
-                      "F_ok": f"{sum(event['state'] == 'PASS' for event in terminal)} units passed",
-                      "F_gap": f"{len(failures)} red or unresolved unit(s)",
-                      "F_next": "Repair the first non-PASS unit before any later dispatch.",
-                  },
-              }
-              (base / "events.json").write_text(
-                  json.dumps(events, indent=2, sort_keys=True) + "\n",
-                  encoding="utf-8",
-              )
-              (base / "receipt.json").write_text(
-                  json.dumps(receipt, indent=2, sort_keys=True) + "\n",
-                  encoding="utf-8",
-              )
-              with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
-                  out.write("## TORRE sequential receipt\n\n")
-                  out.write(f"Decision: {receipt['decision']}\n\n")
-                  out.write(f"Terminal states: {receipt['terminal_counts']}\n\n")
-                  out.write("Claim allowed: false\n\n")
-                  out.write("Automatic merge: false\n\n")
-                  out.write("Rule: first non-PASS unit blocks all later units.\n")
-          if terminal_error is not None:
-              raise SystemExit(1)
+                  "F_next": (
+                      "Observe the immutable run receipt before promotion."
+                      if first_non_success is None else
+                      f"Repair {first_non_success}; downstream units were not invoked."
+                  ),
+              },
+          }
+          Path("build/torre/receipt.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(receipt, sort_keys=True))
           PY
 
-      - name: Upload bounded TORRE evidence
-        if: always()
+      - name: Upload bounded TORRE receipt
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: torre-sequential-${{ github.run_id }}
-          path: build/torre/
+          name: torre-reusable-receipt-${{ github.run_id }}
+          path: build/torre/receipt.json
           if-no-files-found: error
           retention-days: 30
