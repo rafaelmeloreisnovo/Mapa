@@ -1,0 +1,28 @@
+name: F_GAP Ledger Gate
+
+on:
+  pull_request:
+    paths:
+      - 'data/governance/f_gap_ledger.v1.json'
+      - 'schema/f_gap_ledger.v1.schema.json'
+      - 'scripts/validate_f_gap_ledger.py'
+      - 'docs/governance/F_GAP_LEDGER_20260810.md'
+  push:
+    paths:
+      - 'data/governance/f_gap_ledger.v1.json'
+      - 'schema/f_gap_ledger.v1.schema.json'
+      - 'scripts/validate_f_gap_ledger.py'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate F_GAP ledger
+        run: python scripts/validate_f_gap_ledger.py data/governance/f_gap_ledger.v1.json
