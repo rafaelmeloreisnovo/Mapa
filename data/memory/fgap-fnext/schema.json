@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"RAFAELIA F_gap F_next Graph Record",
+  "type":"object",
+  "required":["id","state","claim_allowed"],
+  "properties":{
+    "id":{"type":"string","minLength":1},
+    "type":{"type":"string"},
+    "state":{"type":"string","minLength":1},
+    "claim_allowed":{"type":"boolean"},
+    "priority":{"enum":["P0","P1","P2","TV"]},
+    "source":{"type":"string"},
+    "next":{"type":"string"}
+  },
+  "additionalProperties":true,
+  "allOf":[
+    {"if":{"properties":{"state":{"pattern":"^(TOKEN_VAZIO|BLOCKED|UNVERIFIED)"}}},"then":{"properties":{"claim_allowed":{"const":false}}}}
+  ]
+}
