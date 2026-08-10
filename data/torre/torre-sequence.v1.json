@@ -1,0 +1,39 @@
+{
+  "schema": "rafaelia.torre.sequence/v1",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "units": [
+    {
+      "order": 1,
+      "id": "mapa-vertical-slice",
+      "label": "Mapa Vertical Slice",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "workflow": "vertical-slice-v1.yml",
+      "ref": "main"
+    },
+    {
+      "order": 2,
+      "id": "rafgittools-federated-runtime",
+      "label": "RafGitTools",
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "workflow": "federated-runtime-contract-v1.yml",
+      "ref": "main"
+    },
+    {
+      "order": 3,
+      "id": "rafpolimata-handoff",
+      "label": "RafPolimata",
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "workflow": "rafaelia-handoff-gate.yml",
+      "ref": "main"
+    },
+    {
+      "order": 4,
+      "id": "rafcodephi-e2e-contract",
+      "label": "Termux RAFCODEPHI",
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "workflow": "rafaelia_e2e_product_proof.yml",
+      "ref": "master"
+    }
+  ]
+}
