@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-17T00:00:00-03:00",
+  "generated_at": "2026-08-10T15:07:00-03:00",
   "control_plane": "rafaelmeloreisnovo/Mapa",
   "claim_allowed": false,
   "state": "DRAFT_AUDITABLE",
@@ -8,9 +8,9 @@
     {
       "repository": "rafaelmeloreisnovo/Mapa",
       "role": "control_plane",
-      "canonical_for": ["repository_catalog", "cross_repo_relationships", "federation_audit"],
-      "consumes": [],
-      "produces": ["authority_registry", "relationship_registry", "audit_reports"],
+      "canonical_for": ["repository_catalog", "cross_repo_relationships", "federation_audit", "gap_atlas"],
+      "consumes": ["specialized_gap_ledgers", "provider_inventory_receipts"],
+      "produces": ["authority_registry", "relationship_registry", "audit_reports", "federated_gap_atlas"],
       "evidence_state": "VERIFIED_LIMITED"
     },
     {
@@ -38,11 +38,43 @@
       "evidence_state": "VERIFIED_LIMITED"
     },
     {
-      "repository": "rafaelmeloreisnovo/relativity-living-light",
+      "repository": "instituto-Rafael/relativity-living-light",
       "role": "rll_scientific_validation",
       "canonical_for": ["rll_claim_state", "rll_baselines", "rll_falsifiers", "rll_result_artifacts"],
       "consumes": ["rll_model", "observational_data", "priors", "seeds"],
-      "produces": ["claim_export", "reports", "checksums", "negative_results"],
+      "produces": ["claim_export", "reports", "checksums", "negative_results", "token_vazio_reconciliation"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/relativity-living-light",
+      "role": "rll_parallel_or_legacy_candidate",
+      "canonical_for": [],
+      "consumes": [],
+      "produces": ["historical_or_parallel_rll_material"],
+      "evidence_state": "TOKEN_VAZIO"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "role": "git_tooling_runtime",
+      "canonical_for": ["rafgittools_runtime_state", "typed_git_jobs"],
+      "consumes": ["github_api", "git_repositories", "termux_runtime"],
+      "produces": ["git_operations", "runtime_state", "typed_jobs"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "role": "polimata_compiler_research",
+      "canonical_for": ["rafpolimata_apkc_state", "polimata_language_matrix"],
+      "consumes": ["source_languages", "compiler_contracts", "android_toolchain"],
+      "produces": ["lowered_kernels", "apkc_artifacts", "gap_ledgers"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-packages",
+      "role": "rafcodephi_package_delivery",
+      "canonical_for": ["rafcodephi_package_delivery", "termux_package_real_layer"],
+      "consumes": ["package_recipes", "toolchains", "runtime_contracts"],
+      "produces": ["deb_artifacts", "repository_metadata", "bootstrap_payloads", "receipts", "real_layer_audits"],
       "evidence_state": "VERIFIED_LIMITED"
     },
     {
@@ -93,6 +125,8 @@
     "negative_results_are_preserved",
     "metaphor_is_not_evidence",
     "runtime_presence_is_not_runtime_execution",
-    "prototype_is_not_production"
+    "prototype_is_not_production",
+    "gap_resolution_must_preserve_predecessor_and_successor_lineage",
+    "unmapped_discovery_must_create_or_link_a_gap_id"
   ]
 }
