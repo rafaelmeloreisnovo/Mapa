@@ -89,7 +89,7 @@ scanner em autoridade sem revisão.
 
 ## 4. Snapshot inicial
 
-O seed V1 registra 22 gaps cobrindo:
+O seed V1 registra 26 gaps cobrindo:
 
 - meta-inventário Drive/GitHub;
 - FCEA: canonicalidade órfã e segredo exposto;
