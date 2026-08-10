@@ -21,7 +21,7 @@
       "label": "RafGitTools",
       "repository": "rafaelmeloreisnovo/RafGitTools",
       "workflow": ".github/workflows/federated-runtime-contract-v1.yml",
-      "commit": "e9888cf228a7debc55bdaa070a40b83e2ded6bf5"
+      "commit": "09833d0f7f398109f1c4c2075173ad3a994dd683"
     },
     {
       "order": 3,
@@ -42,10 +42,15 @@
   ],
   "state": "DRAFT_SOURCE_LOCKED",
   "promotion": "BLOCKED",
-  "promotion_ref_resolution": "TOKEN_VAZIO_MERGE_COMMIT_SHA",
+  "promotion_ref_resolution": {
+    "mapa": "21baebae22508350f693da0c2d9927417b1ded7d",
+    "rafgittools": "09833d0f7f398109f1c4c2075173ad3a994dd683",
+    "rafpolimata": "TOKEN_VAZIO_MERGE_COMMIT_SHA",
+    "rafcodephi": "TOKEN_VAZIO_MERGE_COMMIT_SHA"
+  },
   "r3": {
-    "F_ok": "Four TORRE units are source-locked by full commit SHA.",
-    "F_gap": "External reusable workflow pins are draft-head commits until their PRs merge.",
-    "F_next": "After child PR review, bind these units to observed default-branch merge SHAs before promotion."
+    "F_ok": "Mapa and RafGitTools are bound to observed default-branch merge commits.",
+    "F_gap": "RafPolimata and Termux RAFCODEPHI still have draft-head source locks; promotion remains blocked.",
+    "F_next": "Bind observed RafPolimata and Termux merge SHAs, then review a separate promotion PR."
   }
 }
