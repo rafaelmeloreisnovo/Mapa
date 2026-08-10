@@ -1,0 +1,67 @@
+{
+  "schema": "RAFAELIA_PROVIDER_COVERAGE_V1",
+  "coverage_id": "RGA-COVERAGE-20260810-V1",
+  "observed_at": "2026-08-10T15:30:00-03:00",
+  "claim_allowed": false,
+  "scope_semantics": {
+    "github": "Only repositories declared in indices/repository_authority_registry.json are the denominator in this receipt.",
+    "drive": "Only direct children of the seven branch_registry folders declared by RAFAELIA Master Navigation Registry V1 are counted. This is not recursive Drive coverage."
+  },
+  "github_authority_registry": {
+    "expected": 14,
+    "observed": 14,
+    "coverage": "14/14",
+    "archived": 0,
+    "visibility": {"private": 9, "public": 5},
+    "default_branch": {"main": 12, "master": 2},
+    "repositories": [
+      {"repository":"rafaelmeloreisnovo/Mapa","provider_id":"1267885874","visibility":"private","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/MemRafcode","provider_id":"1270231934","visibility":"private","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/papers","provider_id":"1207572176","visibility":"private","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/Cosmos","provider_id":"1019311420","visibility":"public","default_branch":"main","archived":false},
+      {"repository":"instituto-Rafael/relativity-living-light","provider_id":"1046495816","visibility":"public","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/relativity-living-light","provider_id":"1227211130","visibility":"public","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/RafGitTools","provider_id":"1131213900","visibility":"private","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/RafPolimata","provider_id":"1226864918","visibility":"private","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/termux-packages","provider_id":"1324848257","visibility":"public","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/llamaRafaelia","provider_id":"1089390152","visibility":"private","default_branch":"master","archived":false},
+      {"repository":"rafaelmeloreisnovo/termux-app-rafacodephi","provider_id":"1082194563","visibility":"private","default_branch":"master","archived":false},
+      {"repository":"rafaelmeloreisnovo/Rafaelia_Core","provider_id":"1250596447","visibility":"private","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/ChipQuantum","provider_id":"1249866012","visibility":"private","default_branch":"main","archived":false},
+      {"repository":"rafaelmeloreisnovo/CientiEspiritual","provider_id":"1004292676","visibility":"public","default_branch":"main","archived":false}
+    ],
+    "state": "BOUNDED_REGISTRY_COVERAGE_COMPLETE",
+    "not_proven": ["all GitHub repositories owned by or accessible to the user", "repository content completeness", "branch/ref completeness", "CI/runtime correctness"]
+  },
+  "drive_branch_registry": {
+    "expected_scopes": 7,
+    "observed_scopes": 7,
+    "coverage": "7/7_DIRECT_LEVEL",
+    "total_direct_children_observed": 7,
+    "scopes": [
+      {"name":"CONVERSATIONS_LONGITUDINAL","provider_id":"1ajAu5LwfVDGvC8dbOenKk1DXnOVk55ax","direct_children":7,"state":"OBSERVED_DIRECT_LEVEL"},
+      {"name":"DRIVE_CORPUS_ASSETS","provider_id":"1ces1kcrbr6bQqk6FJUUoijlnWdExeZy7","direct_children":0,"state":"OBSERVED_DIRECT_LEVEL_EMPTY"},
+      {"name":"GITHUB_REPOSITORIES_COMMITS_PRS","provider_id":"1hx0Bz-nRdaWKZ-Za-ywuV3k5WvvycjP0","direct_children":0,"state":"OBSERVED_DIRECT_LEVEL_EMPTY"},
+      {"name":"PAPERS_DATASETS_VALIDATION","provider_id":"1Kxwam8i3DzLqa20uqqMsjysB2T5uMyp-","direct_children":0,"state":"OBSERVED_DIRECT_LEVEL_EMPTY"},
+      {"name":"RLL_COSMOLOGY_EVIDENCE","provider_id":"16qY2Q5nvhuyAMuf-8ihKwpjXMisDXn3f","direct_children":0,"state":"OBSERVED_DIRECT_LEVEL_EMPTY"},
+      {"name":"TERMUX_RAFCODEPHI_RUNTIME","provider_id":"1iuB5h6eQxGR_uQ1PoL6i0mUD0yslXWG0","direct_children":0,"state":"OBSERVED_DIRECT_LEVEL_EMPTY"},
+      {"name":"GAIA_RMRCTI_MEMORY_BRIDGE","provider_id":"1ytBGvDrFNh9dZT4XNc-41z5lD2QSJmK2","direct_children":0,"state":"OBSERVED_DIRECT_LEVEL_EMPTY"}
+    ],
+    "conversations_longitudinal_children": [
+      {"provider_id":"1BO8ZobsGskV7NcsAKEZvg4IT2GpmI0pk","title":"BATCH_038_040_HASH_CLOSURE","kind":"folder"},
+      {"provider_id":"1LDEtc8-aH5c3Lngz__r9_hDeKq1_cAFy","title":"BATCH_033_037_BYTE_VERIFIED","kind":"folder"},
+      {"provider_id":"1Na0dGN8JKA4px_UW13epJsqHjmbWWKAc","title":"BATCH_028_032_BYTE_VERIFIED","kind":"folder"},
+      {"provider_id":"1f995FRD4UevE2dD9bl_FRT_cIm5DRHIX","title":"BATCH_013_017_BYTE_VERIFIED","kind":"folder"},
+      {"provider_id":"1dcBNA_w3gOKiHWzYEhXY0MzcVDjqLslF","title":"BATCH_008_012_BYTE_VERIFIED","kind":"folder"},
+      {"provider_id":"1kLSyTWBn5eSrRzkJRdA4__Dvqxs5c0ol","title":"BATCH_001_007_BYTE_VERIFIED","kind":"folder"},
+      {"provider_id":"1vxlwtgRTfQYEI3kvxlEMd6pXiKMhDc4I","title":"RECEIPTS_APPEND_ONLY","kind":"folder"}
+    ],
+    "state": "BOUNDED_DIRECT_LEVEL_COVERAGE_COMPLETE",
+    "not_proven": ["recursive folder coverage", "all Drive files", "content/hash coverage of child folders", "semantic completeness"]
+  },
+  "gap_effect": {
+    "GAP-META-INVENTORY-001": "REDUCED_NOT_RESOLVED",
+    "reason": "The declared authority-registry GitHub denominator and the seven declared Drive branch roots now have bounded coverage receipts, but account-wide GitHub and recursive/all-Drive coverage remain open.",
+    "next_gate": "Recursively inventory declared Drive branches and enumerate the broader GitHub installation/account scope with explicit pagination/denominators."
+  }
+}
