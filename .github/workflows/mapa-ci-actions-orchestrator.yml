@@ -1,358 +1,273 @@
-name: Mapa CI Actions Orchestrator
+name: TORRE Sequential Fail-Closed
 
 "on":
   workflow_dispatch:
     inputs:
-      target_ref:
-        description: Git ref executed by child workflows
-        required: true
-        default: main
-        type: string
       wait_minutes:
-        description: Maximum observation window
+        description: Maximum observation time for each TORRE unit (1-30)
         required: true
-        default: "30"
+        default: "15"
         type: string
   pull_request:
     branches: [main]
     paths:
       - ".github/workflows/mapa-ci-actions-orchestrator.yml"
+      - ".github/workflows/vertical-slice-v1.yml"
+      - "data/torre/torre-sequence.v1.json"
 
 permissions:
   contents: read
-  actions: write
 
 concurrency:
-  group: mapa-ci-actions-orchestrator-${{ inputs.target_ref }}
+  group: torre-sequential-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  orchestrate:
+  validate-sequence:
+    name: Validate immutable TORRE sequence
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
-    env:
-      GH_TOKEN: ${{ github.token }}
-      TARGET_REF: ${{ inputs.target_ref || github.head_ref || github.ref_name }}
-      WAIT_MINUTES: ${{ inputs.wait_minutes || '30' }}
-
+    timeout-minutes: 5
     steps:
-      - name: Checkout target ref
+      - name: Checkout without persistent credentials
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          ref: ${{ env.TARGET_REF }}
           persist-credentials: false
           fetch-depth: 1
 
-      - name: Inventory workflows
+      - name: Validate schema, order, and targets
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p build/mapa-ci-orchestrator
           python3 - <<'PY'
           import json
-          import re
           from pathlib import Path
 
-          root = Path(".github/workflows")
-          self_name = "mapa-ci-actions-orchestrator.yml"
-          dispatch_re = re.compile(
-              r'(?m)^\s*(?:"workflow_dispatch"|\'workflow_dispatch\'|workflow_dispatch)\s*:'
+          data = json.loads(
+              Path("data/torre/torre-sequence.v1.json").read_text(encoding="utf-8")
           )
-
-          rows = []
-          for path in sorted([*root.glob("*.yml"), *root.glob("*.yaml")]):
-              text = path.read_text(encoding="utf-8", errors="replace")
-              dispatchable = path.name != self_name and bool(dispatch_re.search(text))
-              rows.append({
-                  "path": path.as_posix(),
-                  "file": path.name,
-                  "dispatchable": dispatchable,
-                  "state": (
-                      "READY_TO_DISPATCH" if dispatchable else
-                      "ORCHESTRATOR_SELF" if path.name == self_name else
-                      "TRIGGER_ONLY"
-                  ),
-              })
-
-          payload = {
-              "schema": "mapa.ci-actions-inventory/v1",
+          expected = [
+              (1, "mapa-vertical-slice", "Mapa Vertical Slice",
+               "rafaelmeloreisnovo/Mapa", "vertical-slice-v1.yml", "main"),
+              (2, "rafgittools-federated-runtime", "RafGitTools",
+               "rafaelmeloreisnovo/RafGitTools",
+               "federated-runtime-contract-v1.yml", "main"),
+              (3, "rafpolimata-handoff", "RafPolimata",
+               "rafaelmeloreisnovo/RafPolimata",
+               "rafaelia-handoff-gate.yml", "main"),
+              (4, "rafcodephi-e2e-contract", "Termux RAFCODEPHI",
+               "rafaelmeloreisnovo/termux-app-rafacodephi",
+               "rafaelia_e2e_product_proof.yml", "master"),
+          ]
+          observed = [
+              (
+                  unit.get("order"), unit.get("id"), unit.get("label"),
+                  unit.get("repository"), unit.get("workflow"), unit.get("ref"),
+              )
+              for unit in data.get("units", [])
+          ]
+          if data.get("schema") != "rafaelia.torre.sequence/v1":
+              raise SystemExit("invalid TORRE schema")
+          if data.get("claim_allowed") is not False:
+              raise SystemExit("claim_allowed must remain false")
+          if data.get("automatic_merge") is not False:
+              raise SystemExit("automatic_merge must remain false")
+          if observed != expected:
+              raise SystemExit("TORRE sequence differs from reviewed immutable targets")
+          print(json.dumps({
+              "decision": "PASS",
+              "units": len(observed),
               "claim_allowed": False,
-              "workflow_count": len(rows),
-              "dispatchable_count": sum(x["dispatchable"] for x in rows),
-              "workflows": rows,
-          }
-          Path("build/mapa-ci-orchestrator/inventory.json").write_text(
-              json.dumps(payload, indent=2, sort_keys=True) + "\n"
-          )
-          print(json.dumps({
-              "workflow_count": payload["workflow_count"],
-              "dispatchable_count": payload["dispatchable_count"],
-          }))
-          if payload["dispatchable_count"] == 0:
-              raise SystemExit("No manually dispatchable workflows found")
-          PY
-
-      - name: Dispatch each manually executable workflow
-        shell: bash
-        run: |
-          set -euo pipefail
-          case "$WAIT_MINUTES" in
-            ''|*[!0-9]*) echo "wait_minutes must be an integer" >&2; exit 2 ;;
-          esac
-          [ "$WAIT_MINUTES" -ge 1 ] && [ "$WAIT_MINUTES" -le 35 ] || {
-            echo "wait_minutes must be between 1 and 35" >&2
-            exit 2
-          }
-
-          date -u +'%Y-%m-%dT%H:%M:%SZ' > build/mapa-ci-orchestrator/global-start.txt
-          : > build/mapa-ci-orchestrator/dispatches.jsonl
-
-          mapfile -t workflows < <(
-            python3 - <<'PY'
-          import json
-          data = json.load(open("build/mapa-ci-orchestrator/inventory.json"))
-          for row in data["workflows"]:
-              if row["dispatchable"]:
-                  print(row["path"])
-          PY
-          )
-
-          for path in "${workflows[@]}"; do
-            file="${path##*/}"
-            err="$(mktemp)"
-            rc=0
-
-            if [ "$file" = "research-intake-canonical.yml" ]; then
-              gh api --method POST \
-                "repos/${GITHUB_REPOSITORY}/actions/workflows/${file}/dispatches" \
-                -f ref="$TARGET_REF" \
-                -f 'inputs[mode]=fixture' 2>"$err" || rc=$?
-            else
-              gh api --method POST \
-                "repos/${GITHUB_REPOSITORY}/actions/workflows/${file}/dispatches" \
-                -f ref="$TARGET_REF" 2>"$err" || rc=$?
-            fi
-
-            if [ "$rc" -eq 0 ]; then
-              status=DISPATCHED
-              error=""
-            else
-              status=TOKEN_VAZIO_DISPATCH_FAILED
-              error="$(tr '\n' ' ' < "$err" | head -c 1500)"
-            fi
-            rm -f "$err"
-
-            PATH_VALUE="$path" FILE_VALUE="$file" STATUS_VALUE="$status" ERROR_VALUE="$error" \
-              python3 - <<'PY' >> build/mapa-ci-orchestrator/dispatches.jsonl
-          import json
-          import os
-          print(json.dumps({
-              "path": os.environ["PATH_VALUE"],
-              "file": os.environ["FILE_VALUE"],
-              "dispatch_status": os.environ["STATUS_VALUE"],
-              "dispatch_error": os.environ["ERROR_VALUE"],
+              "automatic_merge": False,
           }, sort_keys=True))
           PY
-            echo "$status $file"
-          done
 
-      - name: Observe child runs
-        shell: bash
-        run: |
-          set -euo pipefail
-          deadline=$(( $(date +%s) + WAIT_MINUTES * 60 ))
-          start="$(cat build/mapa-ci-orchestrator/global-start.txt)"
+  execute-sequence:
+    name: Execute TORRE units one at a time
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: validate-sequence
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    env:
+      GH_TOKEN: ${{ secrets.TORRE_ORCHESTRATOR_TOKEN }}
+      WAIT_MINUTES: ${{ inputs.wait_minutes }}
+    steps:
+      - name: Checkout controller definition
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
 
-          while :; do
-            gh api --method GET \
-              "repos/${GITHUB_REPOSITORY}/actions/runs" \
-              -f event=workflow_dispatch \
-              -f branch="$TARGET_REF" \
-              -f per_page=100 \
-              > build/mapa-ci-orchestrator/runs-snapshot.json
-
-            START_VALUE="$start" python3 - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          base = Path("build/mapa-ci-orchestrator")
-          dispatches = [
-              json.loads(line)
-              for line in (base / "dispatches.jsonl").read_text().splitlines()
-              if line.strip()
-          ]
-          snapshot = json.loads((base / "runs-snapshot.json").read_text())
-          runs = snapshot.get("workflow_runs", [])
-          start = os.environ["START_VALUE"]
-
-          rows = []
-          for item in dispatches:
-              row = dict(item)
-              candidates = [
-                  run for run in runs
-                  if run.get("path") == item["path"]
-                  and run.get("event") == "workflow_dispatch"
-                  and run.get("created_at", "") >= start
-              ]
-              candidates.sort(key=lambda run: run.get("created_at", ""))
-              run = candidates[0] if candidates else None
-              if run:
-                  row.update({
-                      "run_id": run["id"],
-                      "run_url": run.get("html_url"),
-                      "status": run.get("status"),
-                      "conclusion": run.get("conclusion"),
-                  })
-              else:
-                  row.update({
-                      "run_id": None,
-                      "run_url": None,
-                      "status": (
-                          "TOKEN_VAZIO_RUN_ID"
-                          if item["dispatch_status"] == "DISPATCHED"
-                          else item["dispatch_status"]
-                      ),
-                      "conclusion": None,
-                  })
-              rows.append(row)
-
-          (base / "observed.json").write_text(
-              json.dumps(rows, indent=2, sort_keys=True) + "\n"
-          )
-          PY
-
-            remaining="$(python3 - <<'PY'
-          import json
-          rows = json.load(open("build/mapa-ci-orchestrator/observed.json"))
-          print(sum(
-              1 for row in rows
-              if row["dispatch_status"] == "DISPATCHED"
-              and (row["run_id"] is None or row["status"] != "completed")
-          ))
-          PY
-            )"
-
-            if [ "$remaining" -eq 0 ]; then
-              break
-            fi
-            if [ "$(date +%s)" -ge "$deadline" ]; then
-              echo "Observation deadline reached with $remaining unresolved workflows."
-              break
-            fi
-            echo "Waiting on $remaining workflows..."
-            sleep 15
-          done
-
-      - name: Build aggregate receipt
+      - name: Dispatch and observe units sequentially
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import hashlib
           import json
           import os
+          import subprocess
+          import sys
+          import time
           from collections import Counter
           from datetime import datetime, timezone
           from pathlib import Path
 
-          base = Path("build/mapa-ci-orchestrator")
-          inventory = json.loads((base / "inventory.json").read_text())
-          rows = json.loads((base / "observed.json").read_text())
+          base = Path("build/torre")
+          snapshots = base / "snapshots"
+          base.mkdir(parents=True, exist_ok=True)
+          snapshots.mkdir(parents=True, exist_ok=True)
+          events = []
+          terminal_error = None
 
-          failures = [
-              row for row in rows
-              if row["dispatch_status"] != "DISPATCHED"
-              or row["run_id"] is None
-              or row["status"] != "completed"
-              or row["conclusion"] != "success"
-          ]
-          counts = Counter(
-              row["conclusion"] or row["status"] or row["dispatch_status"]
-              for row in rows
-          )
-          receipt = {
-              "schema": "mapa.ci-actions-orchestrator-receipt/v1",
-              "generated_at": datetime.now(timezone.utc).isoformat(),
-              "repository": os.environ["GITHUB_REPOSITORY"],
-              "orchestrator_run_id": os.environ["GITHUB_RUN_ID"],
-              "target_ref": os.environ["TARGET_REF"],
-              "claim_allowed": False,
-              "automatic_merge": False,
-              "workflow_count": inventory["workflow_count"],
-              "dispatchable_count": inventory["dispatchable_count"],
-              "trigger_only_count": sum(
-                  1 for row in inventory["workflows"]
-                  if row["state"] == "TRIGGER_ONLY"
-              ),
-              "failed_or_unresolved_count": len(failures),
-              "result_counts": dict(sorted(counts.items())),
-              "workflows": rows,
-              "r3": {
-                  "F_ok": (
-                      f"{len(rows) - len(failures)} manually executable workflows "
-                      "completed successfully"
-                  ),
-                  "F_gap": (
-                      f"{len(failures)} workflows failed, timed out, or remain unresolved"
-                  ),
-                  "F_next": (
-                      "Inspect the failed/unresolved run URLs, repair the smallest "
-                      "blocking contract, then rerun this orchestrator"
-                  ),
-              },
-          }
+          def emit(unit, state, correlation_id, detail="", run=None):
+              event = {
+                  "observed_at": datetime.now(timezone.utc).isoformat(),
+                  "order": unit.get("order"),
+                  "unit_id": unit.get("id"),
+                  "repository": unit.get("repository"),
+                  "workflow": unit.get("workflow"),
+                  "ref": unit.get("ref"),
+                  "correlation_id": correlation_id,
+                  "state": state,
+                  "detail": detail,
+                  "run_id": None if run is None else run.get("id"),
+                  "conclusion": None if run is None else run.get("conclusion"),
+                  "run_url": None if run is None else run.get("html_url"),
+              }
+              events.append(event)
+              print(json.dumps(event, sort_keys=True), flush=True)
 
-          raw = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
-          (base / "receipt.json").write_text(raw)
-          (base / "SHA256SUMS").write_text(
-              hashlib.sha256(raw.encode()).hexdigest() + "  receipt.json\n"
-          )
-          (base / "failed-count.txt").write_text(str(len(failures)) + "\n")
+          def api(*args):
+              result = subprocess.run(
+                  ["gh", "api", *args],
+                  text=True,
+                  capture_output=True,
+                  check=False,
+              )
+              if result.returncode != 0:
+                  detail = (result.stderr or result.stdout).replace("\n", " ")[:1200]
+                  raise RuntimeError(detail or "gh api returned a nonzero exit status")
+              return result.stdout
 
-          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
-              summary.write("## Mapa CI Actions Orchestrator\n\n")
-              summary.write(f"- Workflows: `{receipt['workflow_count']}`\n")
-              summary.write(f"- Dispatchable: `{receipt['dispatchable_count']}`\n")
-              summary.write(f"- Trigger-only: `{receipt['trigger_only_count']}`\n")
-              summary.write(f"- Failed/unresolved: `{len(failures)}`\n")
-              summary.write("- Claim allowed: `false`\n")
-              summary.write("- Automatic merge: `false`\n\n")
-              summary.write("### R3\n")
-              for key, value in receipt["r3"].items():
-                  summary.write(f"- **{key}**: {value}\n")
+          try:
+              wait_minutes = os.environ.get("WAIT_MINUTES", "")
+              if not wait_minutes.isdigit() or not 1 <= int(wait_minutes) <= 30:
+                  raise RuntimeError("wait_minutes must be an integer between 1 and 30")
+              if not os.environ.get("GH_TOKEN"):
+                  raise RuntimeError(
+                      "TOKEN_VAZIO_TORRE_ORCHESTRATOR_TOKEN: secret is required"
+                  )
+              api("user", "--jq", ".login")
+
+              data = json.loads(
+                  Path("data/torre/torre-sequence.v1.json").read_text(encoding="utf-8")
+              )
+              for unit in data["units"]:
+                  order = unit["order"]
+                  correlation_id = f"torre-{os.environ['GITHUB_RUN_ID']}-{order}"
+                  expected_title = f"TORRE / {unit['label']} / {correlation_id}"
+                  emit(unit, "DISPATCHING", correlation_id)
+
+                  try:
+                      api(
+                          "--method", "POST",
+                          f"repos/{unit['repository']}/actions/workflows/{unit['workflow']}/dispatches",
+                          "-f", f"ref={unit['ref']}",
+                          "-f", f"inputs[torre_correlation_id]={correlation_id}",
+                      )
+                  except RuntimeError as exc:
+                      emit(unit, "DISPATCH_REJECTED", correlation_id, str(exc))
+                      raise RuntimeError(
+                          f"first blocked unit is {unit['id']}; later units were not started"
+                      ) from exc
+
+                  deadline = time.monotonic() + int(wait_minutes) * 60
+                  while True:
+                      raw = api(
+                          "--method", "GET",
+                          f"repos/{unit['repository']}/actions/workflows/{unit['workflow']}/runs"
+                          f"?event=workflow_dispatch&branch={unit['ref']}&per_page=100",
+                      )
+                      (snapshots / f"{order}.json").write_text(raw, encoding="utf-8")
+                      runs = json.loads(raw).get("workflow_runs", [])
+                      matches = [
+                          run for run in runs
+                          if run.get("display_title") == expected_title
+                      ]
+                      matches.sort(key=lambda run: run.get("created_at", ""), reverse=True)
+                      run = matches[0] if matches else None
+
+                      if run and run.get("status") == "completed":
+                          if run.get("conclusion") == "success":
+                              emit(unit, "PASS", correlation_id, run=run)
+                              break
+                          emit(
+                              unit, "RED", correlation_id,
+                              "Child workflow completed without success.", run,
+                          )
+                          raise RuntimeError(
+                              f"first red unit is {unit['id']}; later units were not started"
+                          )
+
+                      if time.monotonic() >= deadline:
+                          state = "TOKEN_VAZIO_NOT_COMPLETED" if run else "TOKEN_VAZIO_RUN_ID"
+                          detail = (
+                              "Observation window elapsed before completion."
+                              if run else
+                              "No correlated workflow run became observable."
+                          )
+                          emit(unit, state, correlation_id, detail, run)
+                          raise RuntimeError(
+                              f"first unresolved unit is {unit['id']}; later units were not started"
+                          )
+                      time.sleep(10)
+          except RuntimeError as exc:
+              terminal_error = str(exc)
+              print(f"FAIL: {terminal_error}", file=sys.stderr)
+          finally:
+              terminal = [event for event in events if event["state"] != "DISPATCHING"]
+              failures = [event for event in terminal if event["state"] != "PASS"]
+              receipt = {
+                  "schema": "rafaelia.torre-receipt/v1",
+                  "generated_at": datetime.now(timezone.utc).isoformat(),
+                  "repository": os.environ["GITHUB_REPOSITORY"],
+                  "controller_run_id": os.environ["GITHUB_RUN_ID"],
+                  "claim_allowed": False,
+                  "automatic_merge": False,
+                  "decision": "PASS" if terminal_error is None else "BLOCKED",
+                  "terminal_counts": dict(
+                      sorted(Counter(event["state"] for event in terminal).items())
+                  ),
+                  "events": events,
+                  "r3": {
+                      "F_ok": f"{sum(event['state'] == 'PASS' for event in terminal)} units passed",
+                      "F_gap": f"{len(failures)} red or unresolved unit(s)",
+                      "F_next": "Repair the first non-PASS unit before any later dispatch.",
+                  },
+              }
+              (base / "events.json").write_text(
+                  json.dumps(events, indent=2, sort_keys=True) + "\n",
+                  encoding="utf-8",
+              )
+              (base / "receipt.json").write_text(
+                  json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+                  encoding="utf-8",
+              )
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
+                  out.write("## TORRE sequential receipt\n\n")
+                  out.write(f"Decision: {receipt['decision']}\n\n")
+                  out.write(f"Terminal states: {receipt['terminal_counts']}\n\n")
+                  out.write("Claim allowed: false\n\n")
+                  out.write("Automatic merge: false\n\n")
+                  out.write("Rule: first non-PASS unit blocks all later units.\n")
+          if terminal_error is not None:
+              raise SystemExit(1)
           PY
 
-      - name: Upload aggregate evidence
-        id: upload
-        continue-on-error: true
+      - name: Upload bounded TORRE evidence
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: mapa-ci-actions-orchestrator-${{ github.run_id }}
-          path: build/mapa-ci-orchestrator/
+          name: torre-sequential-${{ github.run_id }}
+          path: build/torre/
           if-no-files-found: error
           retention-days: 30
-
-      - name: Record evidence transport boundary
-        if: always()
-        shell: bash
-        run: |
-          {
-            echo
-            echo "### Evidence transport"
-            echo "- Artifact upload: \`${{ steps.upload.outcome }}\`"
-            if [ "${{ steps.upload.outcome }}" != "success" ]; then
-              echo "- State: \`TOKEN_VAZIO_GITHUB_ARTIFACT_QUOTA_OR_TRANSPORT\`"
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Enforce aggregate result
-        shell: bash
-        run: |
-          set -euo pipefail
-          failed="$(cat build/mapa-ci-orchestrator/failed-count.txt)"
-          [ "$failed" -eq 0 ] || {
-            echo "FAIL: $failed child workflows failed, timed out, or remain unresolved."
-            exit 1
-          }
-          echo "PASS: all manually executable workflows completed successfully."
