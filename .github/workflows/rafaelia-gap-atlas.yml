@@ -9,9 +9,11 @@ on:
       - "tools/validate_rafaelia_gap_atlas.py"
       - "tools/rafaelia_gap_discovery_adapter.py"
       - "tools/rafaelia_specialized_ledger_adapter.py"
+      - "tools/materialize_effective_gap_atlas.py"
       - "tools/repository_gap_mapper.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
+      - "tests/test_materialize_effective_gap_atlas.py"
       - "indices/repository_authority_registry.json"
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
@@ -24,9 +26,11 @@ on:
       - "tools/validate_rafaelia_gap_atlas.py"
       - "tools/rafaelia_gap_discovery_adapter.py"
       - "tools/rafaelia_specialized_ledger_adapter.py"
+      - "tools/materialize_effective_gap_atlas.py"
       - "tools/repository_gap_mapper.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
+      - "tests/test_materialize_effective_gap_atlas.py"
       - "indices/repository_authority_registry.json"
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
@@ -55,9 +59,11 @@ jobs:
           python3 -m py_compile tools/validate_rafaelia_gap_atlas.py
           python3 -m py_compile tools/rafaelia_gap_discovery_adapter.py
           python3 -m py_compile tools/rafaelia_specialized_ledger_adapter.py
+          python3 -m py_compile tools/materialize_effective_gap_atlas.py
           python3 -m py_compile tools/repository_gap_mapper.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
           python3 -m py_compile tests/test_rafaelia_specialized_ledger_adapter.py
+          python3 -m py_compile tests/test_materialize_effective_gap_atlas.py
           python3 -m py_compile scripts/validate_federated_registry.py
 
       - name: Validate JSON syntax
@@ -65,29 +71,40 @@ jobs:
           python3 -m json.tool data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json >/dev/null
           python3 -m json.tool data/gap-atlas/PROVIDER_COVERAGE_V1.json >/dev/null
           python3 -m json.tool data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json >/dev/null
+          python3 -m json.tool data/gap-atlas/GAP_STATE_OVERRIDES_V1.json >/dev/null
           python3 -m json.tool schemas/rafaelia_gap_atlas.v1.schema.json >/dev/null
           python3 -m json.tool indices/repository_authority_registry.json >/dev/null
           while IFS= read -r line; do
             [ -z "$line" ] || printf '%s\n' "$line" | python3 -m json.tool >/dev/null
           done < data/gap-atlas/RAFAELIA_GAP_EVENTS_V1.jsonl
+          while IFS= read -r line; do
+            [ -z "$line" ] || printf '%s\n' "$line" | python3 -m json.tool >/dev/null
+          done < data/gap-atlas/RAFAELIA_GAP_RECORD_APPEND_V1.jsonl
 
       - name: Validate federated authority registry
         run: python3 scripts/validate_federated_registry.py | tee federated-authority-validation.json
 
-      - name: Validate Gap Atlas
+      - name: Validate immutable Gap Atlas seed
         run: |
           python3 tools/validate_rafaelia_gap_atlas.py \
             --write-report artifacts/gap-atlas/validation_report.json \
             | tee gap-atlas-validation.json
 
+      - name: Materialize effective append-only atlas
+        run: |
+          mkdir -p artifacts/gap-atlas
+          python3 tools/materialize_effective_gap_atlas.py \
+            --output artifacts/gap-atlas/effective_gap_atlas.json \
+            | tee effective-gap-atlas-counts.json
+
       - name: Run fail-closed regression tests
         run: |
           python3 -m unittest -v tests/test_rafaelia_gap_atlas.py
           python3 -m unittest -v tests/test_rafaelia_specialized_ledger_adapter.py
+          python3 -m unittest -v tests/test_materialize_effective_gap_atlas.py
 
       - name: Generate bounded repository gap map
         run: |
-          mkdir -p artifacts/gap-atlas
           python3 tools/repository_gap_mapper.py \
             --root Mapa=. \
             --exclude generated \
@@ -104,43 +121,60 @@ jobs:
             --output artifacts/gap-atlas/discovery_candidates.json \
             | tee gap-discovery-summary.json
 
-      - name: Guard coverage and claim boundary
+      - name: Guard coverage, effective state and claim boundary
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
           atlas = json.loads(Path('data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json').read_text())
           report = json.loads(Path('artifacts/gap-atlas/validation_report.json').read_text())
+          effective = json.loads(Path('artifacts/gap-atlas/effective_gap_atlas.json').read_text())
           discovery = json.loads(Path('artifacts/gap-atlas/discovery_candidates.json').read_text())
           coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
           adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
+          overrides = json.loads(Path('data/gap-atlas/GAP_STATE_OVERRIDES_V1.json').read_text())
           assert atlas['claim_allowed'] is False
           assert report['claim_allowed'] is False
           assert report['publication_ready'] is False
           assert report['p0_open'] > 0
+          assert effective['claim_allowed'] is False
+          assert effective['publication_ready'] is False
+          assert effective['counts']['seed_records'] == 26
+          assert effective['counts']['appended_records'] == 1
+          assert effective['counts']['effective_records'] == 27
+          by_id = {r['gap_id']: r for r in effective['records']}
+          assert by_id['GAP-META-INVENTORY-001']['effective_state'] == 'REDUCED'
+          assert by_id['GAP-CONVERSATIONS-018-027-CUSTODY-001']['effective_state'] == 'TOKEN_VAZIO'
           assert discovery['claim_allowed'] is False
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
           assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
+          assert coverage['drive_branch_registry']['level2_receipts_observed'] == 7
           assert adapters['claim_allowed'] is False
           assert adapters['global_boundary'] == 'ADAPTER_OUTPUT_IS_DISCOVERY_NOT_RESOLUTION'
-          print('claim boundary preserved: bounded coverage/adapters cannot promote open gaps')
+          assert overrides['claim_allowed'] is False
+          print('claim boundary preserved: seed+append+override materialization cannot promote open gaps')
           PY
 
       - name: Create checksum receipt
         run: |
           sha256sum \
             data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json \
+            data/gap-atlas/RAFAELIA_GAP_RECORD_APPEND_V1.jsonl \
             data/gap-atlas/RAFAELIA_GAP_EVENTS_V1.jsonl \
             data/gap-atlas/PROVIDER_COVERAGE_V1.json \
             data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json \
+            data/gap-atlas/GAP_STATE_OVERRIDES_V1.json \
             schemas/rafaelia_gap_atlas.v1.schema.json \
             tools/validate_rafaelia_gap_atlas.py \
             tools/rafaelia_gap_discovery_adapter.py \
             tools/rafaelia_specialized_ledger_adapter.py \
+            tools/materialize_effective_gap_atlas.py \
             tests/test_rafaelia_gap_atlas.py \
             tests/test_rafaelia_specialized_ledger_adapter.py \
+            tests/test_materialize_effective_gap_atlas.py \
             indices/repository_authority_registry.json \
+            artifacts/gap-atlas/effective_gap_atlas.json \
             artifacts/gap-atlas/repository_gap_map.json \
             artifacts/gap-atlas/discovery_candidates.json \
             > GAP_ATLAS_CHECKSUMS.sha256
@@ -154,6 +188,7 @@ jobs:
             gap-atlas-validation.json
             federated-authority-validation.json
             gap-discovery-summary.json
+            effective-gap-atlas-counts.json
             artifacts/gap-atlas/
             GAP_ATLAS_CHECKSUMS.sha256
           if-no-files-found: warn
