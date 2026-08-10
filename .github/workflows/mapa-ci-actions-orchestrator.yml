@@ -49,7 +49,7 @@ jobs:
               (2, "rafgittools-federated-runtime", "RafGitTools",
                "rafaelmeloreisnovo/RafGitTools",
                ".github/workflows/federated-runtime-contract-v1.yml",
-               "e9888cf228a7debc55bdaa070a40b83e2ded6bf5"),
+               "09833d0f7f398109f1c4c2075173ad3a994dd683"),
               (3, "rafpolimata-handoff", "RafPolimata",
                "rafaelmeloreisnovo/RafPolimata",
                ".github/workflows/rafaelia-handoff-gate.yml",
@@ -76,8 +76,14 @@ jobs:
               raise SystemExit("TORRE state must remain DRAFT_SOURCE_LOCKED")
           if data.get("promotion") != "BLOCKED":
               raise SystemExit("TORRE promotion must remain BLOCKED")
-          if data.get("promotion_ref_resolution") != "TOKEN_VAZIO_MERGE_COMMIT_SHA":
-              raise SystemExit("default-branch merge SHA must remain an explicit gate")
+          expected_resolution = {
+              "mapa": "21baebae22508350f693da0c2d9927417b1ded7d",
+              "rafgittools": "09833d0f7f398109f1c4c2075173ad3a994dd683",
+              "rafpolimata": "TOKEN_VAZIO_MERGE_COMMIT_SHA",
+              "rafcodephi": "TOKEN_VAZIO_MERGE_COMMIT_SHA",
+          }
+          if data.get("promotion_ref_resolution") != expected_resolution:
+              raise SystemExit("default-branch merge SHA resolution must remain explicit")
           if data.get("private_workflow_access", {}).get("required") is not True:
               raise SystemExit("private reusable-workflow access must remain explicit")
           if observed != expected:
@@ -90,10 +96,41 @@ jobs:
           }, sort_keys=True))
           PY
 
+  execution_gate:
+    name: Block manual execution until source promotion is reconciled
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: validate_sequence
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout promotion manifest
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Enforce promotion boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(
+              Path("data/torre/torre-sequence.v1.json").read_text(encoding="utf-8")
+          )
+          if data.get("promotion") != "READY":
+              raise SystemExit(
+                  "TORRE manual execution is BLOCKED until all default-branch "
+                  "merge SHAs are observed and reviewed."
+              )
+          PY
+
   mapa_vertical_slice:
     name: "01 Mapa — Vertical Slice"
     if: ${{ github.event_name == 'workflow_dispatch' }}
-    needs: validate_sequence
+    needs: execution_gate
     uses: ./.github/workflows/vertical-slice-v1.yml
     with:
       torre_correlation_id: "torre-${{ github.run_id }}-01"
@@ -102,7 +139,7 @@ jobs:
     name: "02 RafGitTools — Federated Runtime"
     if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: mapa_vertical_slice
-    uses: rafaelmeloreisnovo/RafGitTools/.github/workflows/federated-runtime-contract-v1.yml@e9888cf228a7debc55bdaa070a40b83e2ded6bf5
+    uses: rafaelmeloreisnovo/RafGitTools/.github/workflows/federated-runtime-contract-v1.yml@09833d0f7f398109f1c4c2075173ad3a994dd683
     with:
       torre_correlation_id: "torre-${{ github.run_id }}-02"
 
@@ -127,6 +164,7 @@ jobs:
     if: ${{ always() && github.event_name == 'workflow_dispatch' }}
     needs:
       - validate_sequence
+      - execution_gate
       - mapa_vertical_slice
       - rafgittools_federated_runtime
       - rafpolimata_handoff
@@ -135,6 +173,7 @@ jobs:
     timeout-minutes: 5
     env:
       VALIDATION_RESULT: ${{ needs.validate_sequence.result }}
+      EXECUTION_GATE_RESULT: ${{ needs.execution_gate.result }}
       MAPA_RESULT: ${{ needs.mapa_vertical_slice.result }}
       RAFGITTOOLS_RESULT: ${{ needs.rafgittools_federated_runtime.result }}
       RAFPOLIMATA_RESULT: ${{ needs.rafpolimata_handoff.result }}
@@ -153,6 +192,7 @@ jobs:
 
           order = [
               ("validate_sequence", os.environ["VALIDATION_RESULT"]),
+              ("execution_gate", os.environ["EXECUTION_GATE_RESULT"]),
               ("mapa_vertical_slice", os.environ["MAPA_RESULT"]),
               ("rafgittools_federated_runtime", os.environ["RAFGITTOOLS_RESULT"]),
               ("rafpolimata_handoff", os.environ["RAFPOLIMATA_RESULT"]),
