@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/rafaelia_gap_atlas.v1.schema.json",
+  "title": "RAFAELIA Gap Atlas V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "atlas_id", "mode", "claim_allowed", "generated_at", "invariant", "records"],
+  "properties": {
+    "schema": {"const": "RAFAELIA_GAP_ATLAS_V1"},
+    "atlas_id": {"type": "string", "minLength": 1},
+    "mode": {"const": "APPEND_ONLY_FEDERATED"},
+    "claim_allowed": {"const": false},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "invariant": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"enum": ["IDENTITY", "PROVENANCE", "SEMANTICS", "EXECUTION", "EVIDENCE", "GOVERNANCE", "LINEAGE"]}
+    },
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/gapRecord"}
+    }
+  },
+  "$defs": {
+    "gapRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gap_id", "artifact_id", "provider", "scope", "gap_class", "priority", "state",
+        "known", "unknown", "authority_required", "evidence_required", "acceptance_criterion",
+        "predecessors", "successors", "next_gate", "source_refs", "claim_allowed"
+      ],
+      "properties": {
+        "gap_id": {"type": "string", "pattern": "^GAP-[A-Z0-9_-]+$"},
+        "artifact_id": {"type": "string", "minLength": 1},
+        "provider": {"enum": ["GitHub", "Google Drive", "Android/Termux", "External Scientific Source", "Human Review", "Cross-Provider"]},
+        "scope": {"type": "string", "minLength": 1},
+        "gap_class": {"enum": ["INVENTORY", "IDENTITY", "PROVENANCE", "SEMANTIC", "IMPLEMENTATION", "EXECUTION", "EVIDENCE", "DATA", "SECURITY", "GOVERNANCE", "INTEGRATION", "PROMOTION", "STALE", "ORPHAN", "DUPLICATE", "ACCEPTED_LIMITATION", "CONTRADICTION"]},
+        "priority": {"enum": ["P0", "P1", "P2", "P3"]},
+        "state": {"enum": ["DISCOVERED", "TOKEN_VAZIO", "READY_FOR_TEST", "REDUCED", "RESOLVED", "RESOLVED_NEGATIVE", "BLOCKED", "NOT_MEASURED", "STALE", "ORPHAN", "UNSAFE", "CONTRADICTED", "STUB", "ACCEPTED_LIMITATION"]},
+        "known": {"type": "array", "items": {"type": "string"}},
+        "unknown": {"type": "array", "items": {"type": "string"}},
+        "contradictions": {"type": "array", "items": {"type": "string"}, "default": []},
+        "authority_required": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "evidence_required": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "falsifier": {"type": ["string", "null"]},
+        "acceptance_criterion": {"type": "string", "minLength": 1},
+        "predecessors": {"type": "array", "items": {"type": "string"}},
+        "successors": {"type": "array", "items": {"type": "string"}},
+        "next_gate": {"type": "string", "minLength": 1},
+        "source_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "source_observed_at": {"type": ["string", "null"], "format": "date-time"},
+        "resolution_evidence": {"type": "array", "items": {"type": "string"}, "default": []},
+        "claim_allowed": {"const": false}
+      }
+    }
+  }
+}
