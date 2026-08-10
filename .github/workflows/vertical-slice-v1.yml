@@ -3,6 +3,13 @@ name: Vertical Slice V1
 run-name: "TORRE / Mapa Vertical Slice / ${{ inputs.torre_correlation_id || github.run_id }}"
 
 "on":
+  workflow_call:
+    inputs:
+      torre_correlation_id:
+        description: Correlation ID supplied by the TORRE controller
+        required: false
+        default: ""
+        type: string
   pull_request:
     paths:
       - "docs/canonical/2026-07-30/RAFAELIA_VERTICAL_SLICE_OPERACIONAL_V1.md"
@@ -26,10 +33,6 @@ run-name: "TORRE / Mapa Vertical Slice / ${{ inputs.torre_correlation_id || gith
 
 permissions:
   contents: read
-
-concurrency:
-  group: torre-unit-mapa-vertical-slice-${{ github.ref }}
-  cancel-in-progress: false
 
 concurrency:
   group: vertical-slice-${{ github.workflow }}-${{ github.ref }}
