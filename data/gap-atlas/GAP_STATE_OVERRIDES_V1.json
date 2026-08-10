@@ -1,6 +1,6 @@
 {
   "schema": "RAFAELIA_GAP_STATE_OVERRIDES_V1",
-  "generated_at": "2026-08-10T15:34:00-03:00",
+  "generated_at": "2026-08-10T16:02:00-03:00",
   "mode": "APPEND_ONLY_OVERRIDE",
   "claim_allowed": false,
   "overrides": [
@@ -27,6 +27,37 @@
         "repository-content semantic/gap coverage"
       ],
       "next_gate": "Materialize recursive Drive branch coverage and broader GitHub installation/account enumeration with explicit pagination and denominators.",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-CONVERSATIONS-018-027-CUSTODY-001",
+      "from_state": "TOKEN_VAZIO",
+      "target_state": "REDUCED",
+      "evidence": [
+        "Google Drive temp.locate.txt provider_id=18Hv8UOPL70HFMXHviW7vHFxPhOoSz7bM",
+        "Google Drive export_manifest.json provider_id=13xMqjbn1O5nc1Q3gC3ZjnUdLLW5qneWk",
+        "Google Drive receipt 013-017 provider_id=1_-tX4izNPeOw_3K6zWAeV9w8vJsslGN9rHQsKS4yvIw",
+        "Google Drive receipt 038-040 provider_id=1thLyBG9hPvLsq-glAl1GBxhS3GVNj-C0Sxhljjbfz6Q"
+      ],
+      "assertions": [
+        "export_manifest contains logical paths NOVOexport/conversations-018.json through conversations-027.json",
+        "temp.locate contains the same logical shard names with explicit byte sizes",
+        "receipt 013-017 carries F_next=PROCESS_CONVERSATIONS_018_022",
+        "receipt 038-040 carries F_next=RESOLVE_SOURCE_PROVIDER_IDS_AND_PROCESS_CONVERSATIONS_018_027",
+        "claim_allowed=false"
+      ],
+      "closed_scope": [
+        "logical source existence for conversations-018.json through conversations-027.json in the historical export manifest",
+        "expected byte size for each logical shard 018-027",
+        "proof that processing/custody of 018-027 was explicitly carried forward as unfinished work"
+      ],
+      "remaining_scope": [
+        "current Google Drive provider ID/blob mapping for each logical shard 018-027",
+        "hash binding from logical source to current opaque Drive blobs",
+        "processing/receipt chain for 018-027",
+        "historical provider-ID staleness/migration reconciliation; a provider ID recorded for conversations-028.json returned 404 in the current provider state"
+      ],
+      "next_gate": "Resolve logical-shard-to-current-provider mapping using export manifest size/hash signatures and upload/index metadata, then process or explicitly disposition 018-027 with append-only receipts.",
       "claim_allowed": false
     }
   ]
