@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/session-bootstrap-v1.schema.json",
+  "title": "RAFAELIA Session Bootstrap V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "theme",
+    "objective",
+    "question_root",
+    "routes",
+    "source_ids",
+    "artifact_ids",
+    "claim_states",
+    "gap_ids",
+    "receipts",
+    "F_ok",
+    "F_gap",
+    "F_next",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "SESSION_BOOTSTRAP_V1"},
+    "session_id": {"type": "string", "minLength": 1},
+    "theme": {"type": "string", "minLength": 1},
+    "objective": {"type": "string", "minLength": 1},
+    "question_root": {"type": "string", "minLength": 1},
+    "routes": {"type": "array", "items": {"type": "string"}},
+    "source_ids": {"type": "array", "items": {"type": "string"}},
+    "artifact_ids": {"type": "array", "items": {"type": "string"}},
+    "claim_states": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "PROVADO",
+          "EVIDENCIADO",
+          "HIPOTESE",
+          "MODELO_ANALOGICO",
+          "PARABOLA",
+          "REFUTADO",
+          "TOKEN_VAZIO"
+        ]
+      }
+    },
+    "gap_ids": {"type": "array", "items": {"type": "string"}},
+    "receipts": {"type": "array", "items": {"type": "string"}},
+    "F_ok": {"type": "array", "items": {"type": "string"}},
+    "F_gap": {"type": "array", "items": {"type": "string"}},
+    "F_next": {"type": "array", "items": {"type": "string"}},
+    "claim_allowed": {"type": "boolean"},
+    "predecessor_session_id": {"type": ["string", "null"]},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}
