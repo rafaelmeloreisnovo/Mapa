@@ -74,6 +74,30 @@
       "type": "json-parse",
       "result": "PASS",
       "exit_code": 0
+    },
+    {
+      "type": "github-remote-fetch",
+      "result": "PASS",
+      "exit_code": 0,
+      "blob_sha": "d30044fd4d0b6c67014ace2ba24fb75c907c5f4f"
+    },
+    {
+      "type": "github-compare-base-head",
+      "result": "PASS_APPEND_ONLY",
+      "exit_code": 0,
+      "before": "main@eba2d9f13ae5d6c454f56dc3ef3e4472eb7bf4b1",
+      "after": "branch@e0fa777fce60dc4a14d04ff5f04532ab373d112a",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "changed_files": 1,
+      "additions": 128,
+      "deletions": 0
+    },
+    {
+      "type": "github-ci-status",
+      "result": "TOKEN_VAZIO_NO_STATUS_CONTEXTS",
+      "exit_code": 0,
+      "status_context_count": 0
     }
   ],
   "regressions_before": 0,
@@ -124,5 +148,13 @@
     "generator lineage remains unresolved",
     "hash/receipt for intended output remains unresolved"
   ],
-  "F_next": "Inspect the two candidate parent folders and match sibling outputs/generator lineage; promote exactly one provider_id only if the lineage discriminates uniquely."
+  "F_next": "Inspect the two candidate parent folders and match sibling outputs/generator lineage; promote exactly one provider_id only if the lineage discriminates uniquely.",
+  "git_materialization": {
+    "branch": "audit/oc94-010-provider-ambiguity-20260811",
+    "first_material_commit": "e0fa777fce60dc4a14d04ff5f04532ab373d112a",
+    "pull_request": 187,
+    "pull_request_state": "OPEN_DRAFT",
+    "default_branch_touched": false,
+    "merge_performed": false
+  }
 }
