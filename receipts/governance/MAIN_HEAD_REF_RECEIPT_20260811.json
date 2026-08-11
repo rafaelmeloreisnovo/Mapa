@@ -1,0 +1,69 @@
+{
+  "schema": "RAFAELIA_MAIN_HEAD_REF_RECEIPT_V1",
+  "cycle_id": "OMEGA-ANTI-REGRESSION-20260811T1859-0300",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "reason_code": "CLOSE_TOKEN_VAZIO_MAIN_HEAD_REF_RECEIPT",
+  "source_pointer": {
+    "drive_method_provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "origin_cycle_receipt_provider_id": "1Wzv-I_XTvFddYIxDeUIawYPkKZEOZMoiZ82TO-CwtqE",
+    "predecessor_receipt_provider_id": "1_63emuNjSG1x1CKTKYjSpdZKz4AQu1R69T31satens0"
+  },
+  "owner_repo": "rafaelmeloreisnovo/Mapa",
+  "observed_default_branch": "main",
+  "observed_main_head": "e6940ff97930f61ec19560f9ca602166e1a9a1dc",
+  "observed_main_head_message": "Merge pull request #185 from rafaelmeloreisnovo/feat/session-bootstrap-protocol-v1-20260811",
+  "observed_artifacts": [
+    {
+      "path": "data/governance/provenance_topology.v1.json",
+      "blob_sha": "355c8e569cc7ea078c3feadbb6dd0896bae22cf5",
+      "expected_from_prior_cycle": true,
+      "match": true
+    },
+    {
+      "path": "schemas/provenance-topology.v1.schema.json",
+      "blob_sha": "659ef05a5cca1861a9d9af181fee2aa34d5ff284",
+      "expected_from_prior_cycle": true,
+      "match": true
+    },
+    {
+      "path": "scripts/validate_provenance_topology.py",
+      "blob_sha": "616d9ba986206e105d1f5cb7ad5cded168abe4b0",
+      "expected_from_prior_cycle": true,
+      "match": true
+    }
+  ],
+  "baseline": {
+    "gap_before": "TOKEN_VAZIO_MAIN_HEAD_REF_RECEIPT",
+    "evidence_boundary_before": "DERIVED_EXACT_BLOBS_NOT_CLEAN_CHECKOUT",
+    "protected_branch_modified": false,
+    "topology_claim_allowed": false
+  },
+  "closure_gate": {
+    "head_resolved": true,
+    "default_branch_resolved": true,
+    "all_prior_blobs_match_at_observed_head": true,
+    "receipt_versioned_on_non_default_branch": true,
+    "claim_promotion": false,
+    "result": "PASS"
+  },
+  "blocking_dependency": null,
+  "evidence_needed": "Resolve default branch HEAD and demonstrate that the prior-cycle topology/schema/validator blob identities are reachable at that exact HEAD.",
+  "falsifier": "Any observed artifact blob differs at the recorded HEAD, the recorded HEAD is not on the observed default branch, or this receipt is treated as proof of content SHA-256/runtime reproduction beyond its stated boundary.",
+  "next_probe": "Compute immutable raw-content SHA-256 for the bound artifacts and append those digests without rewriting this receipt.",
+  "urgency_score": 9,
+  "risk_score": 3,
+  "contract_invariant": "source -> identity -> claim -> evidence -> execution -> receipt -> gate; missing proof remains TOKEN_VAZIO; protected/default branch is not directly modified",
+  "provenance": {
+    "observation_mode": "GitHub connector exact-ref fetch",
+    "observed_at": "2026-08-11T18:59:00-03:00",
+    "branch_created_from": "e6940ff97930f61ec19560f9ca602166e1a9a1dc",
+    "working_branch": "audit/main-head-ref-receipt-20260811"
+  },
+  "limitations": [
+    "Does not compute raw-content SHA-256.",
+    "Does not prove a clean local checkout reproduction.",
+    "Does not close FG006_CHAIN_CUSTODY or FG033_SEMANTIC_INDEX.",
+    "Does not change claim_allowed=false."
+  ]
+}
