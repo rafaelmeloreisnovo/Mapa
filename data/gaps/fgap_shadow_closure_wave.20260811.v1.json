@@ -1,0 +1,196 @@
+{
+  "schema": "RAFAELIA_FGAP_SHADOW_CLOSURE_WAVE_V1",
+  "generated_at": "2026-08-11T12:54:00-03:00",
+  "mode": "APPEND_ONLY_DELTA",
+  "claim_allowed": false,
+  "base_commit": "a454a31da5cbc3319dff9cdf4d050ab12c4c954a",
+  "purpose": "Governar lacunas latentes, negligenciadas, nao verbalizadas e cross-layer sem reescrever evidencias anteriores.",
+  "promotion_rule": "TOKEN_VAZIO so pode ser promovido por evidencia verificavel, reproduzivel e ligada a origem/versao/execucao/receipt.",
+  "states": ["TOKEN_VAZIO", "OBSERVED", "TESTED", "EVIDENCED", "RELEASED", "BLOCKED"],
+  "groups": [
+    {
+      "id": "SG1_IDENTITY_PROVENANCE",
+      "name": "Identidade, autoria e proveniencia",
+      "governance_gap": "CLOSED_BY_THIS_DELTA",
+      "items": [
+        {
+          "gap_id": "SG1-01",
+          "edge": "artefato -> transformacao -> fonte@revisao -> autor/titular",
+          "urgency": "P0",
+          "state": "TOKEN_VAZIO",
+          "risk": "origem ausente pode contaminar claims e derivacoes",
+          "evidence_required": ["source_revision", "content_digest", "authorship_or_TOKEN_VAZIO_AUTHORSHIP"],
+          "next_action": "resolver autoria/origem por artefato; se ausente preservar TOKEN_VAZIO_AUTHORSHIP"
+        },
+        {
+          "gap_id": "SG1-02",
+          "edge": "Drive provider_id <-> GitHub path@commit",
+          "urgency": "P0",
+          "state": "OBSERVED",
+          "risk": "mesmo conceito pode divergir entre provedores",
+          "evidence_required": ["provider_id", "git_commit", "sha256", "derivation_relation"],
+          "next_action": "emitir cross-source receipt por objeto promovido"
+        }
+      ]
+    },
+    {
+      "id": "SG2_REPRO_DEVICE",
+      "name": "Reprodutibilidade e execucao fisica",
+      "governance_gap": "CLOSED_BY_THIS_DELTA",
+      "items": [
+        {
+          "gap_id": "SG2-01",
+          "edge": "GitHub commit -> clean checkout -> build -> artifact",
+          "urgency": "P0",
+          "state": "TOKEN_VAZIO",
+          "risk": "codigo presente nao prova build reproduzivel",
+          "evidence_required": ["clean_checkout_commit", "toolchain_manifest", "build_command", "artifact_sha256"],
+          "next_action": "executar gate de checkout limpo e comparar digests"
+        },
+        {
+          "gap_id": "SG2-02",
+          "edge": "artifact -> Android/Termux real -> execution receipt",
+          "urgency": "P0",
+          "state": "TOKEN_VAZIO",
+          "risk": "CI/container nao substitui prova em dispositivo alvo",
+          "evidence_required": ["device_model", "android_version", "abi", "exit_code", "stdout_digest", "artifact_digest"],
+          "next_action": "gerar receipt fisico por ABI e workload"
+        }
+      ]
+    },
+    {
+      "id": "SG3_SUPPLY_CHAIN",
+      "name": "Supply-chain, dependencias, segredos e deprecacoes",
+      "governance_gap": "CLOSED_BY_THIS_DELTA",
+      "items": [
+        {
+          "gap_id": "SG3-01",
+          "edge": "source -> dependency set -> build",
+          "urgency": "P0",
+          "state": "TOKEN_VAZIO",
+          "risk": "dependencia mutavel ou nao inventariada reduz reprodutibilidade",
+          "evidence_required": ["dependency_inventory_or_SBOM", "versions", "source_locations"],
+          "next_action": "congelar inventario minimo de dependencias por release/build"
+        },
+        {
+          "gap_id": "SG3-02",
+          "edge": "repository -> secret/deprecated/zombie scanner -> disposition",
+          "urgency": "P0",
+          "state": "OBSERVED",
+          "risk": "segredos, codigo zombie e deprecated podem persistir fora do caminho feliz",
+          "evidence_required": ["scanner_receipt", "finding_id", "disposition", "false_positive_reason_if_any"],
+          "next_action": "rodar varredura fail-closed e registrar remocao/quarentena/aceite"
+        }
+      ]
+    },
+    {
+      "id": "SG4_PRIVACY_CUSTODY",
+      "name": "Privacidade, minimizacao e cadeia de custodia de corpus",
+      "governance_gap": "CLOSED_BY_THIS_DELTA",
+      "items": [
+        {
+          "gap_id": "SG4-01",
+          "edge": "conversation corpus -> chunk/index -> downstream artifact",
+          "urgency": "P0",
+          "state": "TOKEN_VAZIO",
+          "risk": "corpus de conversas pode propagar dados alem do necessario",
+          "evidence_required": ["data_classification", "minimization_rule", "retention_rule", "access_boundary"],
+          "next_action": "classificar corpus e impedir promocao publica sem gate de privacidade"
+        },
+        {
+          "gap_id": "SG4-02",
+          "edge": "raw source -> derived chunk -> index -> claim",
+          "urgency": "P1",
+          "state": "OBSERVED",
+          "risk": "derivacao sem lineage suficiente impede auditoria e remocao seletiva",
+          "evidence_required": ["source_id", "chunk_id", "derivation_hash", "index_id"],
+          "next_action": "tornar lineage obrigatorio para novos chunks"
+        }
+      ]
+    },
+    {
+      "id": "SG5_OBSERVABILITY_METRICS",
+      "name": "Observabilidade, benchmark e comportamento inesperado",
+      "governance_gap": "CLOSED_BY_THIS_DELTA",
+      "items": [
+        {
+          "gap_id": "SG5-01",
+          "edge": "execution -> latency/RAM/energy/temperature -> receipt",
+          "urgency": "P1",
+          "state": "TOKEN_VAZIO",
+          "risk": "PASS funcional pode esconder regressao de custo ou estabilidade",
+          "evidence_required": ["latency", "peak_rss", "temperature_or_TOKEN_VAZIO", "energy_or_TOKEN_VAZIO", "cold_start"],
+          "next_action": "adotar baseline por dispositivo e detectar regressao"
+        },
+        {
+          "gap_id": "SG5-02",
+          "edge": "unexpected behavior -> reproduction -> root cause -> regression test",
+          "urgency": "P0",
+          "state": "TOKEN_VAZIO",
+          "risk": "falhas intermitentes podem virar ruino acumulado",
+          "evidence_required": ["reproduction_case", "environment", "failure_signature", "regression_test"],
+          "next_action": "converter cada break real em fixture/teste reproduzivel"
+        }
+      ]
+    },
+    {
+      "id": "SG6_RECOVERY_ROLLBACK",
+      "name": "Recuperacao, rollback e continuidade",
+      "governance_gap": "CLOSED_BY_THIS_DELTA",
+      "items": [
+        {
+          "gap_id": "SG6-01",
+          "edge": "canonical state -> backup/snapshot -> restore -> digest comparison",
+          "urgency": "P1",
+          "state": "TOKEN_VAZIO",
+          "risk": "backup nao testado e apenas hipotese de recuperacao",
+          "evidence_required": ["snapshot_id", "restore_procedure", "restore_result", "digest_comparison"],
+          "next_action": "executar restore drill de um conjunto pequeno e auditavel"
+        },
+        {
+          "gap_id": "SG6-02",
+          "edge": "release/change -> rollback target -> rollback execution",
+          "urgency": "P1",
+          "state": "TOKEN_VAZIO",
+          "risk": "mudanca correta sem caminho de retorno aumenta blast radius",
+          "evidence_required": ["previous_known_good", "rollback_command", "rollback_receipt"],
+          "next_action": "ligar cada release governada a known-good anterior"
+        }
+      ]
+    },
+    {
+      "id": "SG7_CROSS_LAYER_HUMAN",
+      "name": "Trace ponta a ponta, revisao humana e claims",
+      "governance_gap": "CLOSED_BY_THIS_DELTA",
+      "items": [
+        {
+          "gap_id": "SG7-01",
+          "edge": "concept_id -> source_commit/provider_id -> trace_id -> artifact -> gate -> receipt",
+          "urgency": "P0",
+          "state": "TOKEN_VAZIO",
+          "risk": "ilhas localmente corretas podem nao formar uma prova ponta a ponta",
+          "evidence_required": ["concept_id", "source_ref", "trace_id", "artifact_digest", "gate_result", "receipt_id"],
+          "next_action": "fazer um objeto atravessar todas as camadas sem trocar identidade"
+        },
+        {
+          "gap_id": "SG7-02",
+          "edge": "machine evidence -> human review -> claim promotion",
+          "urgency": "P1",
+          "state": "TOKEN_VAZIO",
+          "risk": "automacao pode validar forma sem validar interpretacao material",
+          "evidence_required": ["reviewer", "review_scope", "review_timestamp", "decision"],
+          "next_action": "exigir revisao humana para promocao de claims de alto impacto"
+        }
+      ]
+    }
+  ],
+  "invariants": [
+    "absence_of_evidence_is_not_evidence_of_absence",
+    "code_present_does_not_imply_built_or_tested",
+    "catalogued_does_not_imply_executed",
+    "crc_or_fnv_does_not_replace_adversarial_digest",
+    "internal_integrity_does_not_imply_authenticity",
+    "no_token_vazio_promotion_without_evidence",
+    "append_only_history_no_rewrite"
+  ]
+}
