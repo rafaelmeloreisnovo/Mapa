@@ -1,0 +1,294 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-11T03:40:00-03:00",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "invariant": "source → identity → claim → evidence → execution → receipt → gate, with time as an independent axis; missing proof remains TOKEN_VAZIO and future plans never imply F_OK",
+  "vector_axes": [
+    "source",
+    "identity",
+    "claim",
+    "evidence",
+    "execution",
+    "receipt",
+    "gate",
+    "time"
+  ],
+  "nodes": [
+    {
+      "id": "DRIVE_METHOD_V1",
+      "kind": "SOURCE",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "state": "CONFIRMED_SOURCE",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "GOOGLE_DRIVE",
+        "id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+        "path": null,
+        "ref": null,
+        "blob_sha": null,
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "BOUNDED",
+        "evidence": "DOCUMENTED",
+        "execution": "NOT_APPLICABLE",
+        "receipt": "TOKEN_VAZIO",
+        "gate": "F_GAP",
+        "time": "PAST_RECORDED"
+      },
+      "sigil": "ΣΩΔΦ::DRIVE_METHOD_V1",
+      "falsifier": "Drive provider ID fails to resolve or content no longer contains the canonical source→index→claim→evidence rule.",
+      "next_verifiable_step": "Export immutable bytes, compute SHA-256, and append a Drive snapshot receipt."
+    },
+    {
+      "id": "MAPA_FGAP_SCHEMA",
+      "kind": "ARTIFACT",
+      "title": "schema/f_gap_ledger.v1.schema.json",
+      "state": "CONFIRMED_SOURCE",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "GITHUB",
+        "id": null,
+        "path": "schema/f_gap_ledger.v1.schema.json",
+        "ref": "main",
+        "blob_sha": "c069a794365368d8a56be39c9dff1c4eaba7b879",
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "BOUNDED",
+        "evidence": "DOCUMENTED",
+        "execution": "NOT_APPLICABLE",
+        "receipt": "NOT_APPLICABLE",
+        "gate": "F_GAP",
+        "time": "OBSERVED"
+      },
+      "sigil": "ΣΩΔΦ::MAPA_FGAP_SCHEMA",
+      "falsifier": "Schema no longer requires evidence, provenance, acceptance_test and receipt for CLOSED gaps.",
+      "next_verifiable_step": "Bind the blob to a commit SHA and compute raw-content SHA-256 in a reproducible checkout."
+    },
+    {
+      "id": "MAPA_OP_RECORD_SCHEMA",
+      "kind": "ARTIFACT",
+      "title": "schemas/operational-record.v1.schema.json",
+      "state": "CONFIRMED_SOURCE",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "GITHUB",
+        "id": null,
+        "path": "schemas/operational-record.v1.schema.json",
+        "ref": "main",
+        "blob_sha": "6c98cac53c70d02d0091d2e1ceb6c0fe439a13b5",
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "BOUNDED",
+        "evidence": "DOCUMENTED",
+        "execution": "NOT_APPLICABLE",
+        "receipt": "NOT_APPLICABLE",
+        "gate": "F_GAP",
+        "time": "OBSERVED"
+      },
+      "sigil": "ΣΩΔΦ::MAPA_OP_RECORD_SCHEMA",
+      "falsifier": "Operational record schema ceases to require provenance, falsifier or next_verifiable_step.",
+      "next_verifiable_step": "Cross-link operational records to this topology by stable node ID."
+    },
+    {
+      "id": "VSLICE_RECEIPT_REF",
+      "kind": "RECEIPT",
+      "title": "RECEIPT-VSLICE-001.reference.json",
+      "state": "EVIDENCED_LIMITED",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "GITHUB",
+        "id": null,
+        "path": "receipts/vertical_slice/RECEIPT-VSLICE-001.reference.json",
+        "ref": "main",
+        "blob_sha": "2f85afd8b1ed5125fe9894bb199c78b959f5de68",
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "BOUNDED",
+        "evidence": "EXECUTED",
+        "execution": "EXECUTED",
+        "receipt": "PRESENT",
+        "gate": "F_GAP",
+        "time": "PAST_RECORDED"
+      },
+      "sigil": "ΣΩΔΦ::VSLICE_RECEIPT_REF",
+      "falsifier": "Receipt hashes do not reproduce, expected source entries are absent, or the recorded command/exit status cannot be replayed.",
+      "next_verifiable_step": "Replay on Android Termux and bind the receipt to an exact Git commit; preserve independent review."
+    },
+    {
+      "id": "FG006_CHAIN_CUSTODY",
+      "kind": "GAP",
+      "title": "FG-006 — single artifact-level chain of custody across session, Drive and GitHub",
+      "state": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "GITHUB",
+        "id": null,
+        "path": "docs/governance/F_GAP_LEDGER_20260810.md",
+        "ref": "main",
+        "blob_sha": "d3cc0b640e0cc2ca577bfdc404bb60266eeee9c2",
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "DECLARED",
+        "evidence": "DOCUMENTED",
+        "execution": "TOKEN_VAZIO",
+        "receipt": "TOKEN_VAZIO",
+        "gate": "F_GAP",
+        "time": "OBSERVED"
+      },
+      "sigil": "ΣΩΔΦ::FG006_CHAIN_CUSTODY",
+      "falsifier": "A complete immutable manifest already spans provider, path/id, hash, timestamp, generator, parent, execution and receipt for the same artifacts.",
+      "next_verifiable_step": "Use this topology as the index layer, then materialize byte hashes and execution receipts per node; do not mark FG-006 CLOSED yet."
+    },
+    {
+      "id": "FG033_SEMANTIC_INDEX",
+      "kind": "GAP",
+      "title": "FG-033 — navigable semantic index across Drive/GitHub/session",
+      "state": "IMPLEMENTED_UNVERIFIED",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "GITHUB",
+        "id": null,
+        "path": "docs/governance/F_GAP_LEDGER_20260810.md",
+        "ref": "main",
+        "blob_sha": "d3cc0b640e0cc2ca577bfdc404bb60266eeee9c2",
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "DECLARED",
+        "evidence": "DOCUMENTED",
+        "execution": "PLANNED",
+        "receipt": "TOKEN_VAZIO",
+        "gate": "F_GAP",
+        "time": "OBSERVED"
+      },
+      "sigil": "ΣΩΔΦ::FG033_SEMANTIC_INDEX",
+      "falsifier": "Queries cannot traverse concept→artifact→claim→evidence→gap→next test deterministically, or duplicate IDs yield ambiguous paths.",
+      "next_verifiable_step": "Validate this graph, add query tooling, and ingest the remaining canonical concepts without collapsing provenance."
+    },
+    {
+      "id": "FASE2_PLAN_20260812",
+      "kind": "PLAN",
+      "title": "PLANO_EXECUCAO_FASE_2_FORMAL.md",
+      "state": "PLANNED_FUTURE",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "CHATGPT_LIBRARY",
+        "id": "file_00000000fc50820ebf64c0369bbcc1f3",
+        "path": "PLANO_EXECUCAO_FASE_2_FORMAL.md",
+        "ref": null,
+        "blob_sha": null,
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "DECLARED",
+        "evidence": "DOCUMENTED",
+        "execution": "PLANNED",
+        "receipt": "TOKEN_VAZIO",
+        "gate": "F_GAP",
+        "time": "FUTURE_PLANNED"
+      },
+      "sigil": "ΣΩΔΦ::FASE2_PLAN_20260812",
+      "falsifier": "The scheduled run has occurred and produced independently inspectable receipts bound to exact artifacts.",
+      "next_verifiable_step": "After 2026-08-12 execution, append observed runs/receipts as new nodes; never rewrite this plan node into proof."
+    },
+    {
+      "id": "FASE3_HANDOFF_20260813",
+      "kind": "PLAN",
+      "title": "FASE_3_HANDOFF_PREPARACAO.md",
+      "state": "PLANNED_FUTURE",
+      "claim_allowed": false,
+      "anchor": {
+        "provider": "CHATGPT_LIBRARY",
+        "id": "file_000000009b30820ea4bfc7c6cccd232f",
+        "path": "FASE_3_HANDOFF_PREPARACAO.md",
+        "ref": null,
+        "blob_sha": null,
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "DECLARED",
+        "evidence": "DOCUMENTED",
+        "execution": "PLANNED",
+        "receipt": "TOKEN_VAZIO",
+        "gate": "F_GAP",
+        "time": "FUTURE_PLANNED"
+      },
+      "sigil": "ΣΩΔΦ::FASE3_HANDOFF_20260813",
+      "falsifier": "All predecessor Fase 2 receipts exist with observed timestamps, exact identities and accepted gates before the handoff date.",
+      "next_verifiable_step": "Keep as forecast/template until predecessor receipts exist; reconcile ALTO IDs before execution."
+    }
+  ],
+  "edges": [
+    {
+      "from": "DRIVE_METHOD_V1",
+      "to": "FG006_CHAIN_CUSTODY",
+      "type": "REFERENCES",
+      "note": "Canonical Drive↔GitHub method supplies the provenance rule."
+    },
+    {
+      "from": "MAPA_FGAP_SCHEMA",
+      "to": "FG006_CHAIN_CUSTODY",
+      "type": "REFERENCES",
+      "note": "CLOSED gaps already require evidence/provenance/test/receipt."
+    },
+    {
+      "from": "MAPA_OP_RECORD_SCHEMA",
+      "to": "VSLICE_RECEIPT_REF",
+      "type": "REFERENCES",
+      "note": "Reference receipt uses rafaelia_operational_record_v1."
+    },
+    {
+      "from": "VSLICE_RECEIPT_REF",
+      "to": "FG006_CHAIN_CUSTODY",
+      "type": "EVIDENCES",
+      "note": "Demonstrates a receipt pattern, but commit binding remains TOKEN_VAZIO."
+    },
+    {
+      "from": "FG006_CHAIN_CUSTODY",
+      "to": "FG033_SEMANTIC_INDEX",
+      "type": "BLOCKS",
+      "note": "Semantic navigation without stable artifact identity cannot be authoritative."
+    },
+    {
+      "from": "DRIVE_METHOD_V1",
+      "to": "FG033_SEMANTIC_INDEX",
+      "type": "INDEXES",
+      "note": "Source→index→token→claim→evidence rule is represented as graph traversal."
+    },
+    {
+      "from": "FASE2_PLAN_20260812",
+      "to": "FASE3_HANDOFF_20260813",
+      "type": "BLOCKS",
+      "note": "Fase 3 handoff depends on observed Fase 2 receipts, not future declarations."
+    }
+  ],
+  "summary": {
+    "nodes": 8,
+    "edges": 7,
+    "f_ok": 0,
+    "token_vazio": 5,
+    "future_planned": 2
+  }
+}
