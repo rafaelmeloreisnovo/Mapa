@@ -1,0 +1,39 @@
+{
+  "receipt_type": "SESSION_BOOTSTRAP_V1_SCHEMA_VALIDATION",
+  "date": "2026-08-11",
+  "environment": {
+    "runtime": "ChatGPT container reference",
+    "python": "3.13.5",
+    "jsonschema": "4.26.0",
+    "platform": "Linux x86_64"
+  },
+  "artifacts": {
+    "schema_path": "schemas/session-bootstrap-v1.schema.json",
+    "schema_git_blob_sha1": "ac424fbe898801a07e9d0c85bb60e39b2cd132b7",
+    "schema_sha256": "bd89b6d2a55a21b317c6176befaf99b86da045e9ed9afd67eee5dd911e575da5",
+    "example_path": "data/templates/session-bootstrap-v1.example.json",
+    "example_git_blob_sha1": "42900e8e04de65d7d54921dc54ed1ddba2aeb5fa",
+    "example_sha256": "576eb5a0ebf68bb446c0393b5b2b91971dd81806d6a54f6547bacfa960e6d026"
+  },
+  "checks": {
+    "git_blob_sha_matches_github_schema": true,
+    "git_blob_sha_matches_github_example": true,
+    "draft202012_schema_check": "PASS",
+    "example_validation": "PASS"
+  },
+  "scope": "REFERENCE_ENVIRONMENT_ONLY",
+  "device_physical_termux": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "F_ok": [
+    "schema bytes matched GitHub blob SHA",
+    "example bytes matched GitHub blob SHA",
+    "Draft 2020-12 schema check passed",
+    "example validates against schema"
+  ],
+  "F_gap": [
+    "physical Termux validation not executed"
+  ],
+  "F_next": [
+    "run same validator on physical Termux when this contract becomes runtime-critical"
+  ]
+}
