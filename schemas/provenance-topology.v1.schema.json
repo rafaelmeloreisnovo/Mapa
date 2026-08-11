@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/provenance-topology.v1.schema.json",
+  "title": "RAFAELIA Provenance Receipt Topology V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "state",
+    "claim_allowed",
+    "invariant",
+    "vector_axes",
+    "nodes",
+    "edges",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "generated_at": {"type": "string", "minLength": 1},
+    "state": {"enum": ["GOVERNED_PARTIAL", "VERIFIED_LIMITED", "VERIFIED"]},
+    "claim_allowed": {"const": false},
+    "invariant": {"type": "string", "minLength": 1},
+    "vector_axes": {"const": ["source", "identity", "claim", "evidence", "execution", "receipt", "gate", "time"]},
+    "nodes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "edges", "f_ok", "token_vazio", "future_planned"],
+      "properties": {
+        "nodes": {"type": "integer", "minimum": 0},
+        "edges": {"type": "integer", "minimum": 0},
+        "f_ok": {"type": "integer", "minimum": 0},
+        "token_vazio": {"type": "integer", "minimum": 0},
+        "future_planned": {"type": "integer", "minimum": 0}
+      }
+    }
+  },
+  "$defs": {
+    "anchor": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["provider"],
+      "properties": {
+        "provider": {"enum": ["GOOGLE_DRIVE", "GITHUB", "CHATGPT_LIBRARY", "LOCAL", "OTHER"]},
+        "id": {"type": ["string", "null"]},
+        "path": {"type": ["string", "null"]},
+        "ref": {"type": ["string", "null"]},
+        "blob_sha": {"type": ["string", "null"]},
+        "content_sha256": {"type": ["string", "null"]}
+      }
+    },
+    "vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "identity", "claim", "evidence", "execution", "receipt", "gate", "time"],
+      "properties": {
+        "source": {"enum": ["PRESENT", "TOKEN_VAZIO"]},
+        "identity": {"enum": ["BOUND", "PARTIAL", "TOKEN_VAZIO"]},
+        "claim": {"enum": ["NONE", "DECLARED", "BOUNDED"]},
+        "evidence": {"enum": ["NONE", "DOCUMENTED", "EXECUTED", "REPRODUCED", "TOKEN_VAZIO"]},
+        "execution": {"enum": ["NOT_APPLICABLE", "PLANNED", "EXECUTED", "TOKEN_VAZIO"]},
+        "receipt": {"enum": ["NOT_APPLICABLE", "PRESENT", "TOKEN_VAZIO"]},
+        "gate": {"enum": ["F_OK", "F_GAP", "TOKEN_VAZIO"]},
+        "time": {"enum": ["OBSERVED", "PAST_RECORDED", "FUTURE_PLANNED", "TOKEN_VAZIO"]}
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "title", "state", "claim_allowed", "anchor", "vector", "sigil", "next_verifiable_step"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]{2,}$"},
+        "kind": {"enum": ["SOURCE", "ARTIFACT", "CLAIM", "RUN", "RECEIPT", "DECISION", "GAP", "PLAN", "INDEX"]},
+        "title": {"type": "string", "minLength": 1},
+        "state": {"enum": ["CONFIRMED_SOURCE", "DOCUMENTED", "EVIDENCED_LIMITED", "IMPLEMENTED_UNVERIFIED", "TOKEN_VAZIO", "PLANNED_FUTURE", "CLOSED"]},
+        "claim_allowed": {"const": false},
+        "anchor": {"$ref": "#/$defs/anchor"},
+        "vector": {"$ref": "#/$defs/vector"},
+        "sigil": {"type": "string", "pattern": "^ΣΩΔΦ::[A-Z0-9_-]+$"},
+        "falsifier": {"type": ["string", "null"]},
+        "next_verifiable_step": {"type": "string", "minLength": 1}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "type"],
+      "properties": {
+        "from": {"type": "string"},
+        "to": {"type": "string"},
+        "type": {"enum": ["DERIVES_FROM", "REFERENCES", "EVIDENCES", "EXECUTES", "RECEIPTS", "BLOCKS", "SUPERSEDES", "INDEXES"]},
+        "note": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
