@@ -1,0 +1,128 @@
+{
+  "schema": "rafaelia.gap-closure-cycle.v1",
+  "cycle_id": "OMEGA-ANTI-REGRESSION-20260811T200337-0300",
+  "predecessor_receipt": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "path": "data/core/operational-core-94.v1.json",
+    "blob_sha": "95520fb8e16b10cde997e9c8833103d4faad0140",
+    "main_head": "eba2d9f13ae5d6c454f56dc3ef3e4472eb7bf4b1"
+  },
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "selected_gap": {
+    "id": "OC94-010",
+    "title": "omega_hot_rank.txt",
+    "reason_code": "TOKEN_VAZIO_PROVIDER_ID_PENDING",
+    "source_pointer": "data/core/operational-core-94.v1.json#OC94-010",
+    "owner_repo": "rafaelmeloreisnovo/Mapa",
+    "blocking_dependency": "unique Google Drive object identity for observed output",
+    "evidence_needed": "one unambiguous provider_id bound to the intended output plus generator lineage",
+    "falsifier": "two or more plausible same-title Drive objects with unresolved lineage",
+    "next_probe": "compare candidate parent folders and surrounding sibling outputs against generator/receipt lineage before assigning provider_id",
+    "urgency_score": 8,
+    "risk_score": 8,
+    "contract_invariant": [
+      "append-only",
+      "provenance-strict",
+      "fail-closed",
+      "no invented identity",
+      "claim_allowed=false until evidence"
+    ],
+    "closure_gate": "exact intended Drive object identified and linked to generator/receipt evidence",
+    "provenance": [
+      {
+        "provider": "GOOGLE_DRIVE",
+        "title": "omega_hot_rank.txt",
+        "provider_id": "1ZjPTZLjKMSspEP7T-_p8MfF9t061BWQw",
+        "parent_id": "16satSm_ivsJvCEb0riO9XeL_df-Qp68R"
+      },
+      {
+        "provider": "GOOGLE_DRIVE",
+        "title": "omega_hot_rank.txt",
+        "provider_id": "1Q4mQXxXbp9PG83ZlpzeU7LeRgxqYkt3m",
+        "parent_id": "1FlA2nQuJHkBruoKJZ6zVACavQxHpz7OL"
+      }
+    ]
+  },
+  "baseline": {
+    "before_state": "TOKEN_VAZIO_PROVIDER_ID_PENDING",
+    "identified_candidates": 0,
+    "ambiguity_recorded": false
+  },
+  "material_change": {
+    "after_state": "TOKEN_VAZIO_PROVIDER_AMBIGUOUS",
+    "identified_candidates": 2,
+    "ambiguity_recorded": true,
+    "promotion_performed": false,
+    "note": "No provider_id was promoted because duplicate plausible Drive objects falsify uniqueness."
+  },
+  "tests_executed": [
+    {
+      "type": "drive_exact-title-discovery",
+      "query": "omega_hot_rank",
+      "result": "PASS_PROBE",
+      "exit_code": 0,
+      "observed_candidates": 2
+    },
+    {
+      "type": "negative-control",
+      "assertion": "a unique provider_id can be assigned from title alone",
+      "result": "FALSIFIED",
+      "exit_code": 0
+    },
+    {
+      "type": "json-parse",
+      "result": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "regressions_before": 0,
+  "regressions_after": 0,
+  "tvs_resolved": [],
+  "tvs_created": [
+    {
+      "token": "TOKEN_VAZIO_PROVIDER_AMBIGUOUS",
+      "scope": "OC94-010",
+      "reason": "multiple plausible same-title Drive objects"
+    }
+  ],
+  "gaps_closed": [],
+  "gaps_opened_or_refined": [
+    {
+      "gap": "OC94-010 provider identity",
+      "before": "unknown",
+      "after": "two explicit candidates; uniqueness unresolved"
+    }
+  ],
+  "uncertainty_delta": {
+    "direction": "REDUCED",
+    "before": "provider identity unknown",
+    "after": "candidate set cardinality=2 with parent-folder discriminants",
+    "closure_claim": false
+  },
+  "contracts_strengthened": [
+    "provenance-strict",
+    "fail-closed identity assignment",
+    "append-only evidence preservation"
+  ],
+  "contracts_threatened": [],
+  "top_5_residual_urgencies": [
+    "OC94-010 disambiguate provider lineage for omega_hot_rank.txt",
+    "OC94-011..015 resolve provider IDs and generator lineage for remaining P2 outputs",
+    "OC94-017..094 locate original source artifact for 78 unitemized objects",
+    "RMR-CTI P1 anchors reproduce tests/environment/receipts",
+    "bind Android/Termux physical replication receipt to canonical vertical slice"
+  ],
+  "F_ok": [
+    "two Drive candidates for omega_hot_rank.txt materially identified",
+    "ambiguity falsifier executed",
+    "no unsupported provider identity promoted",
+    "baseline Core-94 record preserved unchanged"
+  ],
+  "F_gap": [
+    "intended omega_hot_rank.txt instance remains unresolved",
+    "generator lineage remains unresolved",
+    "hash/receipt for intended output remains unresolved"
+  ],
+  "F_next": "Inspect the two candidate parent folders and match sibling outputs/generator lineage; promote exactly one provider_id only if the lineage discriminates uniquely."
+}
