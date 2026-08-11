@@ -1,0 +1,24 @@
+name: fgap-shadow-closure-wave
+
+on:
+  pull_request:
+    paths:
+      - 'data/gaps/fgap_shadow_closure_wave.20260811.v1.json'
+      - 'tools/validate_fgap_shadow_closure_wave.py'
+      - '.github/workflows/fgap-shadow-closure-wave.yml'
+  push:
+    paths:
+      - 'data/gaps/fgap_shadow_closure_wave.20260811.v1.json'
+      - 'tools/validate_fgap_shadow_closure_wave.py'
+      - '.github/workflows/fgap-shadow-closure-wave.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate governed shadow-gap delta
+        run: python3 tools/validate_fgap_shadow_closure_wave.py
