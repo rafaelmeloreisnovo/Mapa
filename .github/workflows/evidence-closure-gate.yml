@@ -1,0 +1,78 @@
+name: evidence-closure-gate
+
+on:
+  pull_request:
+    paths:
+      - 'schemas/evidence-closure-record.v1.schema.json'
+      - 'data/governance/evidence-closure*.json*'
+      - 'tools/validate_evidence_closure.py'
+      - 'tests/test_evidence_closure.py'
+      - 'docs/governance/RAFAELIA_CROSS_TECH_EVIDENCE_CLOSURE_V1.md'
+      - '.github/workflows/evidence-closure-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'schemas/evidence-closure-record.v1.schema.json'
+      - 'data/governance/evidence-closure*.json*'
+      - 'tools/validate_evidence_closure.py'
+      - 'tests/test_evidence_closure.py'
+      - 'docs/governance/RAFAELIA_CROSS_TECH_EVIDENCE_CLOSURE_V1.md'
+      - '.github/workflows/evidence-closure-gate.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evidence-closure-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse schema
+        run: python3 -m json.tool schemas/evidence-closure-record.v1.schema.json >/dev/null
+
+      - name: Validate append-only closure ledger
+        run: |
+          set -euo pipefail
+          python3 tools/validate_evidence_closure.py data/governance/evidence-closure.public.v1.jsonl | tee /tmp/evidence-closure-summary.json
+
+      - name: Run adversarial contract tests
+        run: python3 -m unittest -v tests.test_evidence_closure
+
+      - name: Emit deterministic CI receipt
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          paths = [
+              Path("schemas/evidence-closure-record.v1.schema.json"),
+              Path("tools/validate_evidence_closure.py"),
+              Path("tests/test_evidence_closure.py"),
+              Path("data/governance/evidence-closure.public.v1.jsonl"),
+          ]
+          payload = {
+              "schema_version": "evidence-closure-ci-receipt.v1",
+              "claim_allowed": False,
+              "github_sha": "${{ github.sha }}",
+              "artifacts": [
+                  {
+                      "path": str(path),
+                      "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                  }
+                  for path in paths
+              ],
+              "boundary": "CI receipt proves this workflow execution only; it does not promote runtime/device/scientific/reproducibility axes.",
+          }
+          out = Path("/tmp/evidence-closure-ci-receipt.json")
+          out.write_text(json.dumps(payload, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+          print(out.read_text(encoding="utf-8"))
+          PY
