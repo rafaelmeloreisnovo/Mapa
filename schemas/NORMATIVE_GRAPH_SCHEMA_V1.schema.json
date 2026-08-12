@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/NORMATIVE_GRAPH_SCHEMA_V1.schema.json",
+  "title": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "type": "object",
+  "required": ["schema_version", "claim_allowed", "atoms", "conflicts", "provenance"],
+  "properties": {
+    "schema_version": {"const": "NORMATIVE_GRAPH_SCHEMA_V1"},
+    "claim_allowed": {"type": "boolean", "const": false},
+    "atoms": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/NormativeAtom"}
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/NormativeConflict"}
+    },
+    "provenance": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/Provenance"}
+    }
+  },
+  "$defs": {
+    "NormativeAtom": {
+      "type": "object",
+      "required": ["id", "source_type", "authority", "jurisdiction", "binding_force", "scope", "temporal", "epistemic_state", "provenance_ref"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "source_type": {
+          "enum": ["CONSTITUTION", "LAW", "REGULATION", "TREATY", "TREATY_PROMULGATION", "COURT_DECISION", "CONTRACT", "MANDATORY_STANDARD", "VOLUNTARY_STANDARD", "TECHNICAL_STANDARD", "RFC", "GUIDELINE", "RECOMMENDATION", "BEST_PRACTICE", "ETHICAL_PRINCIPLE", "CULTURAL_NORM", "DECLARATION", "OTHER"]
+        },
+        "authority": {"type": "string"},
+        "jurisdiction": {
+          "type": "object",
+          "properties": {
+            "country": {"type": ["string", "null"]},
+            "state": {"type": ["string", "null"]},
+            "municipality": {"type": ["string", "null"]},
+            "international": {"type": "boolean"},
+            "sector": {"type": ["string", "null"]},
+            "actor": {"type": ["string", "null"]},
+            "data_subject": {"type": ["string", "null"]},
+            "processing_location": {"type": ["string", "null"]}
+          },
+          "additionalProperties": true
+        },
+        "binding_force": {
+          "enum": ["BINDING_CONSTITUTION", "BINDING_LAW", "BINDING_REGULATION", "BINDING_TREATY", "BINDING_CONTRACT", "BINDING_IF_INCORPORATED", "VOLUNTARY_STANDARD", "TECHNICAL_REFERENCE", "DECLARATIVE_REFERENCE", "CULTURAL_CONTEXT", "UNKNOWN"]
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "subjects": {"type": "array", "items": {"type": "string"}},
+            "actions": {"type": "array", "items": {"type": "string"}},
+            "data_types": {"type": "array", "items": {"type": "string"}},
+            "exceptions": {"type": "array", "items": {"type": "string"}}
+          },
+          "additionalProperties": true
+        },
+        "deontic": {
+          "type": "object",
+          "properties": {
+            "obligations": {"type": "array", "items": {"type": "string"}},
+            "prohibitions": {"type": "array", "items": {"type": "string"}},
+            "permissions": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "protected_subjects": {
+          "type": "array",
+          "items": {"enum": ["child", "adolescent", "elderly", "employee", "consumer", "patient", "student", "person_with_disability", "data_subject", "public_official", "other"]}
+        },
+        "semantic_context": {
+          "type": "object",
+          "properties": {
+            "language": {"type": ["string", "null"]},
+            "dialect": {"type": ["string", "null"]},
+            "culture": {"type": ["string", "null"]},
+            "translation_state": {"enum": ["LITERAL_TRANSLATION", "IDIOMATIC_TRANSLATION", "CULTURAL_EQUIVALENT", "LEGAL_EQUIVALENT", "NO_SAFE_EQUIVALENT", "AMBIGUOUS", "NOT_APPLICABLE", "TOKEN_VAZIO"]}
+          }
+        },
+        "temporal": {
+          "type": "object",
+          "required": ["retrieved_at"],
+          "properties": {
+            "published_at": {"type": ["string", "null"]},
+            "effective_from": {"type": ["string", "null"]},
+            "effective_until": {"type": ["string", "null"]},
+            "amended_at": {"type": ["string", "null"]},
+            "superseded_by": {"type": ["string", "null"]},
+            "retrieved_at": {"type": "string"}
+          }
+        },
+        "epistemic_state": {
+          "enum": ["REFERENCE", "APPLICABILITY_REVIEW_REQUIRED", "PASS", "FAIL", "PARTIAL", "NOT_APPLICABLE", "CONFLICT", "TOKEN_VAZIO", "SUPERSEDED", "HUMAN_REVIEW"]
+        },
+        "provenance_ref": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "NormativeConflict": {
+      "type": "object",
+      "required": ["id", "type", "atom_refs", "state"],
+      "properties": {
+        "id": {"type": "string"},
+        "type": {"enum": ["DIRECT_CONTRADICTION", "JURISDICTION_COLLISION", "RIGHTS_COLLISION", "STANDARD_VS_LAW", "PRIVACY_VS_RETENTION", "TRANSPARENCY_VS_CONFIDENTIALITY", "FREE_EXPRESSION_VS_PROTECTION", "PARENTAL_AUTHORITY_VS_CHILD_AUTONOMY", "AUTHORITY_CLASS_COLLISION", "SEMANTIC_TRANSLATION_COLLISION", "OTHER"]},
+        "atom_refs": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "state": {"enum": ["CONFLICT", "HUMAN_REVIEW", "RESOLVED_BY_EVIDENCE", "TOKEN_VAZIO"]},
+        "possible_resolution_rules": {"type": "array", "items": {"type": "string"}},
+        "human_review_required": {"type": "boolean"}
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "required": ["id", "source_pointer", "retrieved_at", "source_class"],
+      "properties": {
+        "id": {"type": "string"},
+        "source_pointer": {"type": "string"},
+        "repo": {"type": ["string", "null"]},
+        "ref": {"type": ["string", "null"]},
+        "path": {"type": ["string", "null"]},
+        "blob_sha": {"type": ["string", "null"]},
+        "retrieved_at": {"type": "string"},
+        "source_class": {"enum": ["PRIMARY_OFFICIAL", "PRIMARY_REPOSITORY", "SECONDARY_OFFICIAL", "SECONDARY", "INFERENCE"]}
+      }
+    }
+  }
+}
