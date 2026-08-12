@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 import argparse
+import fcntl
 import json
 import os
+import socket
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 REQUIRED = ("cycle_id", "artifact_role", "provider_id")
+LOCK_VERSION = 2
 
 
 def _nonempty(value):
@@ -72,6 +76,37 @@ def _atomic_write_json(path: Path, doc):
         raise
 
 
+def _write_lock_metadata(lock_file):
+    owner = {
+        "version": LOCK_VERSION,
+        "pid": os.getpid(),
+        "hostname": socket.gethostname(),
+        "acquired_unix_ns": time.time_ns(),
+    }
+    lock_file.seek(0)
+    lock_file.truncate(0)
+    json.dump(owner, lock_file, sort_keys=True, separators=(",", ":"))
+    lock_file.write("\n")
+    lock_file.flush()
+    os.fsync(lock_file.fileno())
+
+
+def _acquire_lock(lock: Path):
+    lock.parent.mkdir(parents=True, exist_ok=True)
+    lock_file = lock.open("a+", encoding="utf-8", newline="\n")
+    try:
+        try:
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            lock_file.close()
+            return None
+        _write_lock_metadata(lock_file)
+        return lock_file
+    except Exception:
+        lock_file.close()
+        raise
+
+
 def allocate(registry: Path, cycle_id: str, artifact_role: str, provider_id: str):
     values = {"cycle_id": cycle_id, "artifact_role": artifact_role, "provider_id": provider_id}
     missing = [k for k, v in values.items() if not _nonempty(v)]
@@ -79,11 +114,10 @@ def allocate(registry: Path, cycle_id: str, artifact_role: str, provider_id: str
         return 2, f"REJECT missing/empty: {','.join(missing)}"
 
     lock = registry.with_name(registry.name + ".lock")
-    lock_fd = None
+    lock_file = None
     try:
-        try:
-            lock_fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-        except FileExistsError:
+        lock_file = _acquire_lock(lock)
+        if lock_file is None:
             return 3, "REJECT lock-busy"
 
         doc = _load_registry(registry)
@@ -106,14 +140,11 @@ def allocate(registry: Path, cycle_id: str, artifact_role: str, provider_id: str
     except OSError as exc:
         return 6, f"REJECT io-error: {exc}"
     finally:
-        if lock_fd is not None:
+        if lock_file is not None:
             try:
-                os.close(lock_fd)
+                fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
             finally:
-                try:
-                    os.unlink(lock)
-                except FileNotFoundError:
-                    pass
+                lock_file.close()
 
 
 def main(argv=None):
