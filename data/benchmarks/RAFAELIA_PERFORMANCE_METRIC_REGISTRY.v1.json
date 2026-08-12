@@ -1,0 +1,155 @@
+{
+  "schema": "RAFAELIA_PERFORMANCE_METRIC_REGISTRY_V1",
+  "date": "2026-08-12",
+  "mode": "APPEND_ONLY",
+  "global_state": "VERIFIED_MIXED_EVIDENCE",
+  "claim_allowed": false,
+  "epistemic_classes": [
+    "MEASURED_WITH_RECEIPT",
+    "HISTORICAL_RUN_OUTPUT",
+    "MEASUREMENT_PATH_IMPLEMENTED",
+    "DOCUMENTED_BENCHMARK_UNBOUND",
+    "ESTIMATE_CODE_ANALYSIS",
+    "EXPECTED_REFERENCE_RANGE",
+    "OPERATIONAL_THRESHOLD",
+    "TOKEN_VAZIO"
+  ],
+  "unit_families": {
+    "time": ["ns", "ns/op", "ns/sector", "us", "us/op", "ms", "s"],
+    "rate": ["ops/s", "MOPS", "GOPS", "sectors/s", "chunks/s", "files/s", "transitions/s", "audits/s", "IOPS"],
+    "bandwidth": ["MB/s", "MiB/s", "GB/s", "Mbps", "Gbps"],
+    "compute": ["GFLOPS", "GOPS/W", "cycles", "cycles/op", "host_cycles/guest_instruction"],
+    "quality": ["percent", "ratio", "p50", "p95", "p99", "jitter", "stability_score"],
+    "footprint": ["bytes", "KiB", "MiB", "GiB"]
+  },
+  "observations": [
+    {
+      "id": "METRIC-CI-TOP56-001",
+      "epistemic_class": "MEASURED_WITH_RECEIPT",
+      "source": {"provider":"Google Drive","id":"13ww5-v9HleRhGZ8JHiHXb253XZR8Q0E5","title":"benchmark_top56.md"},
+      "scope": "CI_RUNNER_RELATIVE",
+      "environment": {"os":"Linux","machine":"x86_64","compiler":"clang","cflags":"-O2 -Wall -Wextra -Werror"},
+      "artifact_sha256": "e473670485b752db029e39a30bb7f4816b0daae34defc7ab0a1b77b0a412f90a",
+      "metrics": {
+        "best_ns_per_sector": 594.881,
+        "best_sectors_per_second": 1681007.421,
+        "worst_ns_per_sector": 603.280,
+        "median_ns_per_sector": 599.707,
+        "mean_ns_per_sector": 599.265,
+        "throughput_spread_ratio": 1.014119,
+        "timing_stability_score": 99.208,
+        "sample_count": 30,
+        "matrix_cases": 6,
+        "largest_iterations": 2048,
+        "large_to_small_time_ratio": 2049.168,
+        "large_to_small_ns_per_sector_ratio": 1.000571,
+        "binary_size_bytes": 16432
+      },
+      "deterministic_snapshots": true,
+      "claim_boundary": "runner-relative regression measurement only"
+    },
+    {
+      "id": "METRIC-EDGEV7-ARM32-001",
+      "epistemic_class": "HISTORICAL_RUN_OUTPUT",
+      "source": {"provider":"Google Drive","id":"1XFoJOYSCdN7WzgGVvDWHbD-ZhEDT_DjqErnp1RtCV1s","raw_parent":"conversations-047.json"},
+      "config": {"arch":"ARM32","buffer_kib":256,"rounds":72,"discard_low":8,"discard_high":8},
+      "variants": [
+        {"name":"BASE","trimmed_avg_ns":1477804,"throughput_mb_s":338.34,"winner":true},
+        {"name":"UNROLL4","trimmed_avg_ns":2052718,"throughput_mb_s":243.58,"penalty_vs_base":0.389},
+        {"name":"UNROLL8","trimmed_avg_ns":2132431,"throughput_mb_s":234.47,"penalty_vs_base":0.443}
+      ],
+      "negative_evidence_preserved": true
+    },
+    {
+      "id": "METRIC-ARM32-CPU-MEM-001",
+      "epistemic_class": "HISTORICAL_RUN_OUTPUT",
+      "source": {"provider":"Google Drive","id":"1XFoJOYSCdN7WzgGVvDWHbD-ZhEDT_DjqErnp1RtCV1s"},
+      "threads_detected": 8,
+      "cpu_mean_mops_previous": 110.745,
+      "cpu_mean_mops_corrected": 111.956,
+      "memory_mean_gb_s_previous": 1.615,
+      "memory_mean_gb_s_corrected": 1.522,
+      "latency_ns_corrected_examples": {"l1ish_16k":7.01,"l2ish_256k":130.05,"later_points":[260,267]},
+      "superseded_latency_candidate_ns": [0.51,0.51,0.51,0.60]
+    },
+    {
+      "id": "METRIC-ARMV7-LOCAL-THROUGHPUT-001",
+      "epistemic_class": "MEASURED_WITH_RECEIPT",
+      "source": {"provider":"Google Drive","id":"1RQTJ50PcQEn8_u2EIEepZBjN6b5z2wJ2xI7dcfM1RtI","title":"CATALOGO_MESTRE_RMR_LIVROS_ARQUIVOS_AMBIENTES"},
+      "environment": "Moto E7 ARMv7",
+      "neon_median_mib_s": 163.450,
+      "portable_median_mib_s": 132.313,
+      "ratio": 1.235,
+      "improvement_percent": 23.53,
+      "repeats": 5,
+      "workload_mib": 512,
+      "digest_pass": true,
+      "scope": "independent throughput/integrity family"
+    },
+    {
+      "id": "SURFACE-VECTRA-79-001",
+      "epistemic_class": "MEASUREMENT_PATH_IMPLEMENTED",
+      "source": {"repository":"rafaelmeloreisnovo/Vectras-VM-Android","commit":"21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d","path":"app/src/main/java/com/vectras/vm/benchmark/VectraBenchmark.java","blob_sha":"e86c56e7f6b3680cf37e20a9f3b78ef1bf12b5e5"},
+      "metric_count": 79,
+      "ranges": {"cpu_single":"0-19","cpu_multi":"20-29","memory":"30-44","storage":"45-59","integrity":"60-69","emulation":"70-78"},
+      "supported_units_declared": ["ns","us","ms","MB/s","GFLOPS","IOPS"]
+    },
+    {
+      "id": "SURFACE-PERFMON-001",
+      "epistemic_class": "MEASUREMENT_PATH_IMPLEMENTED",
+      "source": {"repository":"rafaelmeloreisnovo/Vectras-VM-Android","commit":"21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d","path":"app/src/main/java/com/vectras/vm/core/PerformanceMonitor.java","blob_sha":"0d851fb37935c1ed003f548b1b61225c12b530c8"},
+      "measures": ["boot_time","input_latency","sequential_read_MBps","sequential_write_MBps","random_4k_read_IOPS","random_4k_write_IOPS","memory_usage"],
+      "random_io_ops": 1000,
+      "random_seed": 42,
+      "result_value_state": "TOKEN_VAZIO_DISK_BENCHMARK_DEVICE_RECEIPT"
+    },
+    {
+      "id": "DOC-VECTRA-BENCH-001",
+      "epistemic_class": "DOCUMENTED_BENCHMARK_UNBOUND",
+      "source": {"provider":"Google Drive","id":"1nR1qyB9tBbkzdeN922A8Z4kkOqH0Iyfo","title":"VECTRA_VM_BENCHMARKS.md"},
+      "contains_units": ["ops/s","ns","GB/s","ms","MB/s","GFLOPS","us","cycles"],
+      "raw_run_binding": "TOKEN_VAZIO_DOCUMENTED_VECTRA_BENCH_RAW_BINDING"
+    },
+    {
+      "id": "DOC-CODE-ESTIMATE-001",
+      "epistemic_class": "ESTIMATE_CODE_ANALYSIS",
+      "source": {"provider":"Google Drive","id":"1DMyuhCKmNii7EvAwXzxyQATuSd8ChFw9","title":"COMPARACAO_UPSTREAM_VS_OTIMIZADO.md"},
+      "methodology": "source-code analysis + performance estimates",
+      "contains_units": ["ns","ms","G-ops/s","IOPS","MB/s","GB/s","percent"],
+      "claim_allowed": false
+    },
+    {
+      "id": "DOC-FULL-METRICS-001",
+      "epistemic_class": "ESTIMATE_CODE_ANALYSIS",
+      "source": {"provider":"Google Drive","id":"1-1VcxoaRP-y-_FyRIUMXdeDEevBGdH2Q","title":"vectras_full_metrics.jsx.txt"},
+      "contains_units": ["GOPS","GB/s","ns","us","ms","chunks/s","files/s","audits/s","Mbps","cycles"],
+      "row_level_reclassification": "TOKEN_VAZIO_FULL_METRICS_ROW_CLASSIFICATION"
+    },
+    {
+      "id": "REF-EXPECTED-IOPS-001",
+      "epistemic_class": "EXPECTED_REFERENCE_RANGE",
+      "source": {"provider":"Google Drive","id":"1Tacc0AYxA6H4jK1Srla9U080vJlT-5JB","title":"PERFORMANCE_INTEGRITY.md"},
+      "example": {"device_class":"high-end","sequential_read":"greater_than_500_MB_s","sequential_write":"greater_than_400_MB_s","random_read":"greater_than_10000_IOPS","random_write":"greater_than_8000_IOPS"},
+      "measured": false
+    },
+    {
+      "id": "THRESHOLD-IOPS-TOROIDAL-001",
+      "epistemic_class": "OPERATIONAL_THRESHOLD",
+      "source": {"provider":"Google Drive","id":"1NUv54bq9y7YDg8tZq-eyltFIujJ3GFsf","title":"OPERATIONS.md"},
+      "saturation_rule": "writeIops + readIops >= 4096",
+      "recollapse_rule": "abs(writeIops - readIops) <= 192 outside saturation",
+      "measured": false
+    }
+  ],
+  "open_tokens": [
+    "TOKEN_VAZIO_RAW_RESULT_VECTRA_79_CURRENT_DEVICE",
+    "TOKEN_VAZIO_DISK_BENCHMARK_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_DOCUMENTED_VECTRA_BENCH_RAW_BINDING",
+    "TOKEN_VAZIO_FULL_METRICS_ROW_CLASSIFICATION",
+    "TOKEN_VAZIO_048_050_RAW_METRIC_EXTRACTION",
+    "TOKEN_VAZIO_METRIC_DEDUP_SAME_RUN",
+    "TOKEN_VAZIO_UNIT_NORMALIZATION_SCHEMA",
+    "TOKEN_VAZIO_DEVICE_BUILD_WORKLOAD_JOIN"
+  ],
+  "next_verifiable_step": "Implement MetricObservationV1 ingestion with epistemic class, SI/unit normalization, config/workload/environment/artifact/log identities and fail-closed promotion rules."
+}
