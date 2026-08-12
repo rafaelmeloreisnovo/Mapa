@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "date": "2026-08-12",
+  "authority": "GAIA_phi/docs/federation/COUPLING_CLASS_EXAMPLES_V1.json",
+  "claim_allowed": false,
+  "records": [
+    {"class":"SIDECAR","example_id":"GAIA-SIDECAR-MANIFEST-001","status":"IMPLEMENTATION_DECLARED","priority":"P0","next":"replay against representative external upstream"},
+    {"class":"ADAPTER","example_id":"GAIA-ADAPTER-ENGINE-001","status":"REFERENCE","priority":"P1","next":"add external producer round-trip fixture"},
+    {"class":"WRAPPER","example_id":"GAIA-WRAPPER-GUARD-001","status":"IMPLEMENTATION_DECLARED","priority":"P0","next":"prove wrapper-disabled behavior equivalence"},
+    {"class":"PATCH_UPSTREAM","example_id":"GAIA-PATCH-UPSTREAM-001","status":"TOKEN_VAZIO","priority":"P0","next":"identify one bounded candidate patch and prove clean revert before any promotion"},
+    {"class":"HARD_DEPENDENCY","example_id":"GAIA-HARD-DEPENDENCY-001","status":"TOKEN_VAZIO","priority":"P1","next":"identify a real candidate and require fallback/migration contract"},
+    {"class":"TOKEN_VAZIO","example_id":"GAIA-TOKEN-VAZIO-001","status":"TOKEN_VAZIO","priority":"P0","next":"resolve edge identity/source/target before classification"}
+  ],
+  "anti_regression": [
+    "GAIA_OFF => upstream unchanged remains a target until tested",
+    "no TOKEN_VAZIO may be converted to PASS without evidence pointer",
+    "direct upstream mutation is never inferred from repository naming or documentation alone"
+  ]
+}
