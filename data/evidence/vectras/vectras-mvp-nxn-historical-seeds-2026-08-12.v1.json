@@ -1,0 +1,197 @@
+{
+  "schema": "RAFAELIA_MVP_NXN_HISTORICAL_SEEDS_V1",
+  "record_id": "EVID-MVP-NXN-20260812-001",
+  "mode": "APPEND_ONLY",
+  "state": "VERIFIED_LIMITED_HISTORICAL",
+  "claim_allowed": false,
+  "configuration_space": {
+    "generic_cardinality": "product_i(k_i)",
+    "symmetric_special_case": "N^N",
+    "symmetric_identity": "N^N = exp(N*ln(N))",
+    "meaning": "configuration-space cardinality only; not physical core/thread/lane count",
+    "valid_space": "Omega_valid = {x in Omega_raw : G(x)=PASS}"
+  },
+  "target_corpus": {
+    "range": "conversations-046.json..conversations-050.json",
+    "stage1_authority_provider_id": "1ccOoYooH-STuDvrPQQSihtg4nqpmifd7QQ8w25nIr1w",
+    "aggregate": {
+      "bytes": 149966081,
+      "conversations": 454,
+      "messages": 25848,
+      "user_messages": 3079,
+      "assistant_messages": 22769,
+      "characters": 25628397,
+      "textless_messages": 16030
+    },
+    "raw_content_read_this_pass": [
+      {
+        "file": "conversations-046.json",
+        "provider_id": "1ENIyZ-FpAbJqU46q6xSfmiXlBWbIeH2E",
+        "sha256": "daef888aee856833c4f26c3c0af804826a2043c775f2d3c543d1135f27ee8e75",
+        "sha_matches_stage1": true
+      },
+      {
+        "file": "conversations-047.json",
+        "provider_id": "1tFmjzyQy1h7BSWw8SHwcCFoBV5Xgl4Vt",
+        "sha256": "dd133d11f02d757036eb3b9228a35e9734dc4b5984b1002f4f40c6b7260598d5",
+        "sha_matches_stage1": true
+      }
+    ],
+    "raw_content_open_tokens": [
+      "TOKEN_VAZIO_RAW_CONTENT_048_CURRENT_ACCESS",
+      "TOKEN_VAZIO_RAW_CONTENT_049_CURRENT_ACCESS",
+      "TOKEN_VAZIO_RAW_CONTENT_050_CURRENT_ACCESS"
+    ]
+  },
+  "excluded_benchmark_axes": [
+    {
+      "name": "BLAKE/BLAKE3",
+      "reason": "explicitly excluded from the MVP benchmark lattice scope; may remain an integrity/receipt primitive"
+    }
+  ],
+  "historical_seeds": [
+    {
+      "mvp_id": "MVP-SEED-001",
+      "family": "ARM32_EDGE_SELECTOR",
+      "source_file": "conversations-047.json",
+      "conversation_title": "Diagnóstico Operacional e Tradução",
+      "conversation_id": "6a447820-3ebc-83e9-a282-394148ecd482",
+      "message_id": "bbb21aa7-791f-4dfa-bc49-734eb875faf7",
+      "state": "MVP_BENCHMARKED_HISTORICAL",
+      "config_observed": {
+        "arch": "ARM32",
+        "buffer_kb": 256,
+        "rounds": 72,
+        "discard_low": 8,
+        "discard_high": 8,
+        "variants": ["BASE", "UNROLL4", "UNROLL8"]
+      },
+      "metrics": {
+        "BASE": {"trimmed_avg_ns": 1477804, "trimmed_avg_MBps": 338.34},
+        "UNROLL4": {"trimmed_avg_ns": 2052718, "trimmed_avg_MBps": 243.58, "penalty_vs_base": 0.389},
+        "UNROLL8": {"trimmed_avg_ns": 2132431, "trimmed_avg_MBps": 234.47, "penalty_vs_base": 0.443}
+      },
+      "selector": {"winner": "BASE", "rollback": 0, "stuck": 0, "coherence": 1.0},
+      "claim_allowed": true,
+      "claim_scope": "historical terminal-output comparison only"
+    },
+    {
+      "mvp_id": "MVP-SEED-002",
+      "family": "ARM32_CPU_MEMORY_CACHE",
+      "source_file": "conversations-046.json",
+      "conversation_title": "Benchmark industrial ARM32",
+      "conversation_id": "6a434132-1394-83e9-acfa-55068f9d3450",
+      "state": "MVP_BENCHMARKED_HISTORICAL_WITH_SUPERSEDED_MEASUREMENT",
+      "observed_threads": 8,
+      "runs": [
+        {
+          "message_id": "bbb216c6-066a-492a-ab2c-6920ecc31e06",
+          "cpu_mean_MOPS": 110.745,
+          "memory_mean_GBps": 1.615,
+          "latency_ns_per_access": {"L1_16KB": 0.51, "L2_256KB": 0.51, "RAM_4096KB": 0.51, "RAM_16384KB": 0.60},
+          "state": "SUPERSEDED_MEASUREMENT_CANDIDATE"
+        },
+        {
+          "message_id": "bbb21b7b-634a-443e-98c6-2ba8c4336668",
+          "cpu_mean_MOPS": 111.956,
+          "memory_mean_GBps": 1.522,
+          "latency_ns_per_access": {"L1_16KB": 7.01, "L2_256KB": 130.05, "RAM_4096KB": 260.08, "RAM_16384KB": 266.81},
+          "state": "CORRECTED_HISTORICAL_MEASUREMENT"
+        }
+      ],
+      "claim_allowed": true,
+      "claim_scope": "historical terminal outputs; earlier latency series must not be averaged into corrected series"
+    },
+    {
+      "mvp_id": "MVP-SEED-003",
+      "family": "MEMORY_CPU_INDIRECT_ACCESS",
+      "source_file": "conversations-047.json",
+      "conversation_title": "Estrutura ASCII e Grafos",
+      "conversation_id": "6a483fd5-d72c-83e9-9083-7f755876f87d",
+      "state": "MVP_BENCHMARKED_HISTORICAL",
+      "runs": [
+        {
+          "message_id": "bbb21a9d-d2af-4f0c-9735-7ec55fe4553e",
+          "memory": {"mean_ns": 5604.63, "median_ns": 5615, "min_ns": 5538, "max_ns": 8385},
+          "cpu": {"mean_ns": 33403.85, "median_ns": 30846, "min_ns": 30769, "max_ns": 280692}
+        },
+        {
+          "message_id": "bbb21aa1-8899-49fd-bf1c-923eeb330584",
+          "memory": {"median_ns": 3384, "avg_ns": 3418},
+          "cpu": {"median_ns": 78154, "avg_ns": 80636},
+          "indirect": {"median_ns": 3385, "avg_ns": 3469}
+        }
+      ],
+      "claim_allowed": true,
+      "claim_scope": "historical terminal-output observations"
+    },
+    {
+      "mvp_id": "MVP-SEED-004",
+      "family": "STATE_MATRIX_8X8",
+      "source_file": "conversations-047.json",
+      "conversation_title": "Estrutura ASCII e Grafos",
+      "conversation_id": "6a483fd5-d72c-83e9-9083-7f755876f87d",
+      "message_id": "bbb21dc8-6272-468c-97f1-177078670198",
+      "state": "MVP_EXECUTED_HISTORICAL",
+      "observed": {"matrix_shape": "8x8", "total_time_ms": 1.642},
+      "claim_allowed": false,
+      "open_tokens": ["TOKEN_VAZIO_MATRIX_WORKLOAD_SEMANTICS", "TOKEN_VAZIO_MATRIX_REPETITION_POLICY"]
+    },
+    {
+      "mvp_id": "MVP-SEED-005",
+      "family": "COMPLEX_TOROIDAL_SIMULATION",
+      "source_file": "conversations-047.json",
+      "conversation_title": "Diagnóstico Operacional e Tradução",
+      "conversation_id": "6a447820-3ebc-83e9-a282-394148ecd482",
+      "message_id": "bbb2100c-3003-404b-bead-512c38007075",
+      "state": "MVP_EXECUTED_SIMULATION_HISTORICAL",
+      "observed": {
+        "rafael_complex": {"seed": 3487639414, "Htotal_mean_window": 5.915541, "Htotal_var_window": 0.000015, "program_classification": "attractor detected (low variance in final window)"},
+        "toroidal": {"initial_energy": 104.011673, "final_energy": 44.801323, "final_conflicts": 52, "final_linking": -1.610164}
+      },
+      "claim_allowed": false,
+      "claim_boundary": "simulation output != physical-science proof or hardware-equivalence evidence"
+    },
+    {
+      "mvp_id": "MVP-SEED-006",
+      "family": "HPC_OMEGA_SPECTRAL_CLUSTERING",
+      "source_file": "conversations-047.json",
+      "conversation_title": "Script monolito sh",
+      "message_id": "bbb214a2-ac28-4696-abd2-f8b41cdaaf98",
+      "state": "MVP_EXECUTED_HISTORICAL_WITH_SUSPECT_STATISTIC",
+      "observed": {
+        "lambda1": 1.301484,
+        "lambda2": 1.205818,
+        "spectral_gap": 0.095666,
+        "fiedler_modularity_Q": -0.0536,
+        "kmeans_modularity_Q": -0.0001,
+        "reported_best": "kmeans",
+        "null_model": {"N": 3000, "mu": 0.0, "sigma": 0.0}
+      },
+      "suspect_metric": "derived enormous Z under sigma=0",
+      "suspect_metric_state": "SUSPECT_METRIC_NULL_MODEL_DEGENERATE",
+      "claim_allowed": false
+    }
+  ],
+  "evidence_state_ladder": [
+    "MVP_DESIGN",
+    "MVP_COMPILED",
+    "MVP_EXECUTED",
+    "MVP_BENCHMARKED",
+    "MVP_REPRODUCED",
+    "MVP_PROMOTED"
+  ],
+  "open_tokens": [
+    "TOKEN_VAZIO_RAW_CONTENT_048_CURRENT_ACCESS",
+    "TOKEN_VAZIO_RAW_CONTENT_049_CURRENT_ACCESS",
+    "TOKEN_VAZIO_RAW_CONTENT_050_CURRENT_ACCESS",
+    "TOKEN_VAZIO_MVP_CONFIG_SCHEMA_COMPLETE",
+    "TOKEN_VAZIO_HISTORICAL_RAW_LOG_HASHES_PER_MVP",
+    "TOKEN_VAZIO_MVP_DEDUP_ACROSS_CONVERSATIONS",
+    "TOKEN_VAZIO_MVP_ARTIFACT_SOURCE_HASH_BINDING",
+    "TOKEN_VAZIO_MVP_REPLAY_CURRENT_DEVICE",
+    "TOKEN_VAZIO_VALID_SPACE_CARDINALITY",
+    "TOKEN_VAZIO_DIMENSION_DEPENDENCY_GRAPH"
+  ],
+  "next_verifiable_step": "Complete raw recovery for 048-050; normalize/deduplicate historical MVP configuration vectors; replay representative historical seeds on a pinned device/build; then generate a constrained N^N coverage frontier."
+}
