@@ -1,0 +1,318 @@
+{
+  "schema_version": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch_id": "NORMATIVE_GRAPH_FEDERATED_BATCH_004",
+  "predecessor_merge_commit": "f06f859d0981a01539f2b45d16b93307981874a1",
+  "generated_at": "2026-08-12T20:42:12-03:00",
+  "mode": "evidence-first",
+  "claim_allowed": false,
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "README != compliance evidence",
+    "technical standard != universal law",
+    "cryptographic implementation name != conformance to named standard",
+    "missing license != permission inferred",
+    "research claim != physical measurement != certification",
+    "TOKEN_VAZIO is auditable"
+  ],
+  "repositories": [
+    {
+      "repository": "rafaelmeloreisnovo/MemRafcode",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE (not found in this probe)"],
+      "declared_role": "longitudinal memory, routing, custody and verified contextual reentry",
+      "normative_atoms": [
+        {
+          "type": "PROJECT_GOVERNANCE_POLICY",
+          "source": "README.md",
+          "authority": "repository governance",
+          "binding_force": "internal project governance",
+          "obligations": ["preserve custody chain", "do not infer missing fields", "retain gaps as auditable state"],
+          "provenance": "MemRafcode/README.md@7e973879acdae1d97554f21f2c0f9322ae02979f"
+        }
+      ],
+      "license_status": "TOKEN_VAZIO_ROOT_LICENSE_NOT_FOUND",
+      "jurisdiction": "TOKEN_VAZIO_DEPLOYMENT_AND_DATA_SUBJECT",
+      "semantic_intercultural": "contextual reentry and memory can cross language/culture; legal/semantic equivalence remains TOKEN_VAZIO",
+      "protected_subjects": ["data_subject_contextual", "child_contextual_TOKEN_VAZIO"],
+      "privacy_data": "full SQLite/ZIP distribution is stated to exist in Google Drive; categories of personal data, legal bases, retention, deletion and child-data presence are not established by README",
+      "security": "digest/custody/integrity controls are declared and some local gates are PASS; confidentiality/access-control posture for full external memory corpus remains TOKEN_VAZIO",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C004-MEM-001",
+          "type": "LICENSE_AUTHORITY_GAP",
+          "statement": "Repository is operational and public but no root LICENSE was found in this probe.",
+          "finding": "Reuse/distribution permissions must not be inferred without authoritative licensing evidence.",
+          "status": "TOKEN_VAZIO",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C004-MEM-002",
+          "type": "PRIVACY_SCOPE_GAP",
+          "statement": "Longitudinal memory and external SQLite/ZIP corpus are part of the system.",
+          "finding": "Data inventory, data-subject jurisdiction, lawful basis, retention and protected-child applicability remain unverified.",
+          "status": "HUMAN_REVIEW"
+        }
+      ],
+      "evidence_gate": "PARTIAL",
+      "f_next": "inventory external-memory data classes and authoritative license; map each personal-data class to jurisdiction/legal-basis/retention/child-protection gates"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/rafaelia-core-enterprise",
+      "ref": "fcea-auto-sync",
+      "paths": ["README.md", "LICENSE (not found in this probe)"],
+      "declared_role": "README only states an intent to refactor dispersed content into 15 operational macro-areas",
+      "normative_atoms": [
+        {
+          "type": "PROJECT_INTENT_REFERENCE",
+          "source": "README.md",
+          "authority": "repository documentation",
+          "binding_force": "non-normative project intent",
+          "provenance": "rafaelia-core-enterprise/README.md@8817a72ee2dd2eb8dfe6f4d6c2dd381ac6334794"
+        }
+      ],
+      "license_status": "TOKEN_VAZIO_ROOT_LICENSE_NOT_FOUND",
+      "jurisdiction": "TOKEN_VAZIO",
+      "semantic_intercultural": "TOKEN_VAZIO",
+      "protected_subjects": ["TOKEN_VAZIO_CONTEXTUAL"],
+      "privacy_data": "TOKEN_VAZIO_INVENTORY_REQUIRED",
+      "security": "TOKEN_VAZIO_INVENTORY_REQUIRED",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C004-FCEA-001",
+          "type": "DOCUMENTATION_INSUFFICIENCY",
+          "statement": "Repository name and historical context suggest enterprise/core functionality.",
+          "finding": "Current README does not establish concrete normative surfaces; name-based inference is prohibited.",
+          "status": "TOKEN_VAZIO",
+          "human_review_required": false
+        },
+        {
+          "id": "NG-C004-FCEA-002",
+          "type": "LICENSE_AUTHORITY_GAP",
+          "statement": "No root LICENSE was found in this probe.",
+          "finding": "Distribution/reuse obligations and permissions remain unverified.",
+          "status": "TOKEN_VAZIO",
+          "human_review_required": true
+        }
+      ],
+      "evidence_gate": "TOKEN_VAZIO",
+      "f_next": "perform bounded file inventory before assigning legal/privacy/security standards; locate authoritative licensing source"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/BLAKE3",
+      "ref": "master",
+      "paths": ["README.md", "LICENSE_A2", "LICENSE_A2LLVM", "LICENSE_CC0"],
+      "declared_role": "fork/distribution of BLAKE3 with build orchestration, custody and RAFAELIA integration layers",
+      "normative_atoms": [
+        {
+          "type": "SOFTWARE_LICENSE_SET",
+          "source": "LICENSE_A2 | LICENSE_A2LLVM | LICENSE_CC0",
+          "authority": "upstream/project copyright licensing",
+          "binding_force": "copyright/license terms for covered code and chosen licensing path",
+          "jurisdiction": "copyright-law effect jurisdiction-dependent",
+          "obligations": ["follow selected license terms and preserve required notices where applicable"],
+          "provenance": "BLAKE3 root license files observed in repository listing"
+        },
+        {
+          "type": "CRYPTOGRAPHIC_SPECIFICATION_REFERENCE",
+          "source": "official BLAKE3 implementation/specification",
+          "authority": "BLAKE3 project authors",
+          "binding_force": "technical reference, not legislation",
+          "provenance": "https://github.com/BLAKE3-team/BLAKE3"
+        }
+      ],
+      "jurisdiction": "TOKEN_VAZIO_DEPLOYMENT",
+      "semantic_intercultural": "NOT_PRIMARY_SCOPE",
+      "protected_subjects": [],
+      "privacy_data": "hashing/custody may process arbitrary content; digest generation does not remove underlying privacy obligations; actual data categories remain contextual",
+      "security": "cryptographic compatibility requires official test vectors; performance/security superiority must remain evidence-scoped",
+      "accessibility": "NOT_PRIMARY_SCOPE",
+      "conflicts": [
+        {
+          "id": "NG-C004-B3-001",
+          "type": "LICENSE_PATH_SELECTION_GAP",
+          "statement": "Fork contains CC0, Apache-2.0 and Apache-2.0-with-LLVM-exception license paths consistent with upstream.",
+          "finding": "Per-file additions/RMR layers still require provenance to establish which licensing path covers each added work.",
+          "status": "HUMAN_REVIEW",
+          "human_review_required": true
+        }
+      ],
+      "evidence_gate": "PARTIAL",
+      "f_next": "inventory SPDX/license provenance for fork-only files and verify cryptographic compatibility against official BLAKE3 vectors independently of RAFAELIA metadata"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/ChipQuantum",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE", "src/crypto/raf_pq.h"],
+      "declared_role": "freestanding cryptographic/computational framework with T7 pipeline, crypto primitives, AI, compiler and research artifacts",
+      "normative_atoms": [
+        {
+          "type": "SOFTWARE_LICENSE",
+          "source": "LICENSE",
+          "authority": "repository copyright holder",
+          "binding_force": "MIT copyright license for covered software",
+          "jurisdiction": "copyright-law effect jurisdiction-dependent",
+          "obligations": ["include copyright and permission notice in copies or substantial portions"],
+          "provenance": "ChipQuantum/LICENSE@ea1d7526c4cf388433880b4dd6303a4eb0f22aee"
+        },
+        {
+          "type": "MANDATORY_STANDARD_CONTEXTUAL",
+          "source": "FIPS 197 (AES), updated 2023-05-09",
+          "authority": "NIST / U.S. Department of Commerce",
+          "binding_force": "U.S. Federal Information Processing Standard in its applicable federal scope; otherwise technical/contractual reference unless incorporated",
+          "jurisdiction": "United States federal scope / contextual elsewhere",
+          "provenance": "https://csrc.nist.gov/pubs/fips/197/final"
+        },
+        {
+          "type": "RFC",
+          "source": "RFC 8439 (ChaCha20/Poly1305)",
+          "authority": "RFC Editor / IRTF",
+          "binding_force": "Informational technical reference, not legislation",
+          "jurisdiction": "international technical ecosystem",
+          "provenance": "https://www.rfc-editor.org/rfc/rfc8439.html"
+        },
+        {
+          "type": "RFC",
+          "source": "RFC 7748 (X25519/X448)",
+          "authority": "RFC Editor / IRTF",
+          "binding_force": "Informational technical reference, not legislation",
+          "jurisdiction": "international technical ecosystem",
+          "provenance": "https://www.rfc-editor.org/info/rfc7748/"
+        },
+        {
+          "type": "CRYPTOGRAPHIC_STANDARD_CURRENT",
+          "source": "FIPS 203 ML-KEM and FIPS 204 ML-DSA",
+          "authority": "NIST / U.S. Department of Commerce",
+          "binding_force": "FIPS within applicable U.S. federal scope; technical reference elsewhere unless incorporated",
+          "effective_from": "2024-08-13",
+          "provenance": "https://csrc.nist.gov/pubs/fips/203/final | https://csrc.nist.gov/pubs/fips/204/final"
+        }
+      ],
+      "jurisdiction": "TOKEN_VAZIO_DEPLOYMENT",
+      "semantic_intercultural": "research and documentation may be multilingual/contextual; no legal-equivalence claim established",
+      "protected_subjects": ["TOKEN_VAZIO_CONTEXTUAL"],
+      "privacy_data": "cryptographic/AI modules may process arbitrary data; concrete personal-data flows are not established by README",
+      "security": "high-impact cryptographic claims require algorithm-specific KATs, side-channel analysis and exact-standard conformance; README alone is insufficient",
+      "accessibility": "TOKEN_VAZIO_FOR_UI_OR_TOOLING",
+      "conflicts": [
+        {
+          "id": "NG-C004-CQ-001",
+          "type": "OUTDATED_STANDARD_TAXONOMY",
+          "statement": "README labels raf_pq.h as Kyber/Dilithium scaffolding tied to NIST PQC Round 3 and describes the framework as post-quantum ready.",
+          "finding": "Current NIST standards are ML-KEM (FIPS 203) and ML-DSA (FIPS 204), finalized 2024-08-13; legacy submission names/round status are not the current conformance target.",
+          "status": "CORRECTION_OR_EVIDENCE_REQUIRED",
+          "human_review_required": false
+        },
+        {
+          "id": "NG-C004-CQ-002",
+          "type": "CRYPTO_CONFORMANCE_GAP",
+          "statement": "raf_pq.h exposes functions and constants named after Kyber512/Dilithium2 and custom XOF/hash helpers.",
+          "finding": "Naming and structural similarity do not establish FIPS 203/204 conformance. No FIPS KAT/conformance evidence was established in this batch.",
+          "status": "HUMAN_REVIEW",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C004-CQ-003",
+          "type": "RFC_AUTHORITY_CLASSIFICATION",
+          "statement": "README table presents RFC 8439 and RFC 7748 under a generic Standard column.",
+          "finding": "Both are Informational RFCs, useful technical references but not laws or IETF Standards Track obligations by themselves.",
+          "status": "RESOLVED_BY_EVIDENCE",
+          "human_review_required": false
+        }
+      ],
+      "evidence_gate": "PARTIAL",
+      "f_next": "replace legacy PQC status language with current ML-KEM/ML-DSA taxonomy and add KAT/conformance gates before any post-quantum-ready security claim"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Fisica",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE (not found in this probe)"],
+      "declared_role": "physics documentation, models, simulations and experimental protocols with explicit evidence-state separation",
+      "normative_atoms": [
+        {
+          "type": "PROJECT_RESEARCH_GOVERNANCE",
+          "source": "README.md",
+          "authority": "repository research governance",
+          "binding_force": "internal epistemic/research policy",
+          "obligations": ["separate reference/hypothesis/simulation/measurement", "do not promote synthetic fixture to physical evidence", "do not equate IP candidate with granted patent"],
+          "provenance": "Fisica/README.md@1a54f660c92b13f26152a0354782c7029ff122ec"
+        }
+      ],
+      "license_status": "TOKEN_VAZIO_ROOT_LICENSE_NOT_FOUND",
+      "jurisdiction": "TOKEN_VAZIO_EXPERIMENT_LOCATION_AND_DEPLOYMENT",
+      "semantic_intercultural": "scientific terminology should preserve reference/hypothesis/measurement distinctions across translations; legal equivalence TOKEN_VAZIO",
+      "protected_subjects": ["TOKEN_VAZIO_IF_HUMAN_SUBJECT_OR_PUBLIC_DEPLOYMENT"],
+      "privacy_data": "no personal-data processing is established by README; experiment receipts may contain operator/device/location metadata depending future implementation",
+      "security": "physical experiments may create safety/radiation/electrical/environmental obligations depending apparatus and jurisdiction; no universal rule is inferred without experiment manifest",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C004-FIS-001",
+          "type": "LICENSE_AUTHORITY_GAP",
+          "statement": "README states authorship and external attribution, but no root LICENSE was found in this probe.",
+          "finding": "Copyright/reuse permission cannot be inferred from authorship statement alone.",
+          "status": "TOKEN_VAZIO",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C004-FIS-002",
+          "type": "EXPERIMENTAL_LEGALITY_CONTEXT_GAP",
+          "statement": "Repository defines protocols for future physical measurement and engineering experimentation.",
+          "finding": "Applicable occupational, electrical, radiation, environmental, spectrum, facility or human-subject requirements depend on actual apparatus/location/actors and remain TOKEN_VAZIO until a concrete experiment manifest exists.",
+          "status": "HUMAN_REVIEW",
+          "human_review_required": true
+        }
+      ],
+      "evidence_gate": "PARTIAL",
+      "f_next": "attach jurisdiction/safety/data/license fields to each executable experiment manifest before physical execution or external claim promotion"
+    }
+  ],
+  "external_source_updates": [
+    {
+      "source": "FIPS 197",
+      "delta": "updated edition published 2023-05-09 with no technical algorithm change"
+    },
+    {
+      "source": "NIST PQC",
+      "delta": "current standardized names are ML-KEM/FIPS 203 and ML-DSA/FIPS 204, final 2024-08-13; legacy Kyber/Dilithium Round-3 language is historical taxonomy"
+    },
+    {
+      "source": "RFC 8439",
+      "delta": "Informational RFC / IRTF technical reference"
+    },
+    {
+      "source": "RFC 7748",
+      "delta": "Informational RFC / IRTF technical reference"
+    },
+    {
+      "source": "BLAKE3 upstream",
+      "delta": "official project exposes CC0 1.0, Apache-2.0 and Apache-2.0 with LLVM exceptions licensing alternatives"
+    }
+  ],
+  "coverage": {
+    "batch_repo_count": 5,
+    "cumulative_repo_count": 20,
+    "new_conflicts_or_refined_gaps": 10,
+    "token_vazio_closed": 4,
+    "token_vazio_created_or_refined": 15
+  },
+  "uncertainty_delta": "reduced for BLAKE3 license set, ChipQuantum MIT license, current NIST PQC taxonomy, FIPS 197 temporal status and RFC authority classes; uncertainty explicitly increased where licensing, experiment jurisdiction, data inventory or crypto conformance cannot be established",
+  "conflict_delta": "+10 typed conflicts/gaps; 1 RFC authority-class issue resolved by evidence; 2 ChipQuantum PQC/security claims narrowed",
+  "F_ok": [
+    "5 additional repositories indexed",
+    "predecessor merge recorded without rewriting history",
+    "BLAKE3 upstream/fork license alternatives grounded",
+    "ChipQuantum current NIST PQC baseline grounded",
+    "missing-license cases preserved as TOKEN_VAZIO instead of inferred",
+    "Fisica research-state discipline preserved while future experiment legality remains contextual"
+  ],
+  "F_gap": [
+    "MemRafcode external memory data inventory/legal bases/child-data applicability unresolved",
+    "rafaelia-core-enterprise current README insufficient for normative assignment and root license absent",
+    "BLAKE3 per-file fork-addition license provenance incomplete",
+    "ChipQuantum FIPS 203/204 conformance/KAT evidence absent for raf_pq.h",
+    "Fisica root license and concrete experiment jurisdiction/safety matrix unresolved"
+  ],
+  "F_next": "continue cursor with GEOMETRIA_SOLAR_Maia_Inca -> Matem-tica- -> TeoremasTesesTeorias -> Cosmos -> cientiespiritual, prioritizing license authority, scientific-claim boundaries, cultural/semantic translation and protected-subject applicability"
+}

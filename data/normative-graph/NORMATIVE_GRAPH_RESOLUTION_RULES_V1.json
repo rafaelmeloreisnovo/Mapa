@@ -1,0 +1,64 @@
+{
+  "version": "NORMATIVE_GRAPH_RESOLUTION_RULES_V1",
+  "claim_allowed": false,
+  "purpose": "Operational rules for jurisdiction, authority, semantics, conflict, protected-subject, evidence, temporal and provenance resolution without universal-compliance overclaim.",
+  "functions": {
+    "resolve_jurisdiction": {
+      "inputs": ["country", "state", "municipality", "sector", "actor", "data_subject", "processing_location", "deployment_location", "contractual_choice_of_law"],
+      "outputs": ["applicable_candidates", "basis_per_candidate", "excluded_candidates", "TOKEN_VAZIO_fields"],
+      "rule": "Never collapse multiple plausible jurisdictions to one without an applicability basis. A repository location or author nationality alone does not establish the governing law of every use."
+    },
+    "resolve_authority_hierarchy": {
+      "inputs": ["source_type", "issuing_authority", "jurisdiction", "incorporation_reference", "contract_reference", "temporal_status"],
+      "outputs": ["binding_force", "authority_class", "incorporated_by", "supersedes", "superseded_by"],
+      "rule": "Constitution/law/regulation/treaty/contract/standard/RFC/guideline must remain distinct. Technical or voluntary material becomes binding only through an applicable legal, contractual, procurement or certification route where demonstrated."
+    },
+    "semantic_contextualize": {
+      "inputs": ["text", "language", "dialect", "culture", "speaker_role", "audience", "relationship", "intent", "venue", "time"],
+      "outputs": ["literal_meaning", "contextual_meaning", "normative_risk", "translation_state"],
+      "rule": "Token presence alone does not establish harassment, illegality, consent, discrimination or acceptability. Preserve contextual ambiguity when evidence is insufficient."
+    },
+    "cross_cultural_semantic_diff": {
+      "inputs": ["source_context", "target_context", "translation", "legal_terms"],
+      "outputs": ["LITERAL_TRANSLATION", "IDIOMATIC_TRANSLATION", "CULTURAL_EQUIVALENT", "LEGAL_EQUIVALENT", "NO_SAFE_EQUIVALENT", "AMBIGUOUS", "TOKEN_VAZIO"],
+      "rule": "Never promote cultural similarity to legal equivalence without authoritative mapping for the jurisdictions involved."
+    },
+    "detect_normative_conflict": {
+      "inputs": ["atom_A", "atom_B", "scope_overlap", "temporal_overlap", "jurisdiction_overlap"],
+      "outputs": ["conflict_type", "state", "possible_resolution_rules", "human_review_required"],
+      "rule": "Do not average incompatible obligations. First test whether both atoms are simultaneously applicable; then evaluate hierarchy, lex specialis, lex posterior, contractual scope and rights balancing as jurisdiction permits."
+    },
+    "protected_subject_gate": {
+      "inputs": ["subject_class", "age", "vulnerability", "sector", "action", "jurisdiction"],
+      "outputs": ["additional_atoms", "enhanced_controls", "human_review_required", "TOKEN_VAZIO_fields"],
+      "rule": "Child/adolescent status triggers dedicated protection analysis where applicable; best-interests and child-rights principles are not encoded as an automatic override of every competing right or rule."
+    },
+    "evidence_and_conformance_gate": {
+      "inputs": ["requirement", "control", "test", "evidence", "scope", "version"],
+      "outputs": ["PASS", "FAIL", "PARTIAL", "NOT_APPLICABLE", "CONFLICT", "TOKEN_VAZIO", "SUPERSEDED", "HUMAN_REVIEW"],
+      "rule": "Citation, README text, badge or checklist does not prove conformance. PASS requires scope-specific evidence tied to the exact requirement/version."
+    },
+    "temporal_validity": {
+      "inputs": ["published_at", "effective_from", "effective_until", "amended_at", "withdrawn_at", "superseded_by", "retrieved_at"],
+      "outputs": ["CURRENT", "DRAFT", "SUPERSEDED", "OBSOLETE", "WITHDRAWN", "TOKEN_VAZIO"],
+      "rule": "A newer upload timestamp never makes old normative bytes current. Temporal status follows the issuing authority/source record."
+    },
+    "provenance_chain": {
+      "inputs": ["claim", "interpretation", "requirement", "article_or_clause", "source", "authority", "version", "retrieval"],
+      "outputs": ["navigable_chain", "missing_edges", "source_class", "digest_or_blob_sha"],
+      "rule": "Every promoted conclusion must be reversible to an authoritative source plus the repository observation that triggered applicability. Missing edges remain TOKEN_VAZIO."
+    }
+  },
+  "anti_regression_invariants": [
+    "Universalidade != Uniformidade",
+    "authority != applicability",
+    "applicability != conformance",
+    "conformance != certification",
+    "implementation name != standard conformance",
+    "guideline != law",
+    "RFC != law",
+    "internal ethical policy != universal conflict-of-laws rule",
+    "child protection requires dedicated gate and cannot be silently weakened",
+    "negative evidence and contradictions are append-only"
+  ]
+}
