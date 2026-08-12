@@ -1,0 +1,60 @@
+{
+  "schema": "RAFAELIA_VECTRAS_8CORE_760_LAYER_EVIDENCE_V1",
+  "record_id": "EVID-VECTRAS-8X760-20260812-001",
+  "mode": "APPEND_ONLY",
+  "observed_at": "2026-08-12T18:06:00-03:00",
+  "state": "VERIFIED_LIMITED_STATIC",
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "ref": "master",
+    "commit": "21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d"
+  },
+  "control_plane": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "base_ref": "main",
+    "base_commit": "8789f29f257af1e958e59cd25e1d30dea10cde98"
+  },
+  "source_evidence": [
+    {
+      "path": "Rafaelia/rafaelia_bitwalk.h",
+      "blob_sha": "00831ffdca39b0b3ee5820e6d39825b4a33fdae7",
+      "supports": ["logical_color_layers_can_exceed_760", "default_reference_760", "layer_color_stride", "same_container_ghost_view"]
+    },
+    {
+      "path": "Rafaelia/rafaelia_orchestrator.c",
+      "blob_sha": "1184686b6fca4d620afd2da93193a67ad316656c",
+      "supports": ["explicit_N_VCPU_8", "static_2MiB_arena", "memory_hierarchy_design"]
+    },
+    {
+      "path": "app/src/main/java/com/vectras/vm/core/BareMetalProfile.java",
+      "blob_sha": "665bb90d7f8f06a9ece1d2442a6c50ee02c66379",
+      "supports": ["runtime_core_detection", "multi_core_capability", "bounded_recommended_parallelism", "8plus_core_work_block_adjustment"]
+    }
+  ],
+  "drive_evidence": {
+    "document_title": "RAFAELIA_METRICS_STAGE1_CONVERSATIONS_043_050",
+    "provider_id": "1ccOoYooH-STuDvrPQQSihtg4nqpmifd7QQ8w25nIr1w",
+    "parser_contract": "SHA-256 over exact downloaded byte stream",
+    "shards": [
+      {"file":"conversations-048.json","bytes":36771626,"conversations":100,"messages":6543,"sha256":"ed19ea07f8763a8a4d87204d80c817694ce4d6c339c71b1d2a1b955a8c125256"},
+      {"file":"conversations-049.json","bytes":47806754,"conversations":100,"messages":7196,"sha256":"608e45449809a47f5931f86328b96dab2b2b86a5abf21a8dfe1c7da6834a2f1a"},
+      {"file":"conversations-050.json","bytes":17115060,"conversations":54,"messages":3647,"sha256":"c5058bf25f682de12de68b54029d13b07e836cd519416752fbc5e4fa320b4979"}
+    ],
+    "aggregate": {"bytes":101693440,"conversations":254,"messages":17386,"user_messages":1277,"assistant_messages":16109,"characters":13782241,"textless":12339,"token_count":"TOKEN_VAZIO_TOKENIZER_NOT_FIXED"}
+  },
+  "claims": [
+    {"id":"C-VECTRAS-LAYERSPACE-001","statement":"color_layers >= 760 is representable in pinned source","state":"EVIDENCED_STATIC","scope":"source_code_only","claim_allowed":true},
+    {"id":"C-VECTRAS-8VCPU-001","statement":"an explicit N_VCPU=8 orchestrator path exists in pinned source","state":"EVIDENCED_STATIC","scope":"source_code_only","claim_allowed":true},
+    {"id":"C-VECTRAS-8x760-EXEC-001","statement":"8 cores execute as 760 physical cores","state":"TOKEN_VAZIO_RUNTIME_8x760_RECEIPT","scope":"runtime_performance_or_physical_equivalence","claim_allowed":false},
+    {"id":"C-VECTRAS-8x760-LOGICAL-001","statement":"a smaller execution substrate can traverse a larger logical layer/view space","state":"SUPPORTED_BY_DESIGN","scope":"architectural_design","claim_allowed":false}
+  ],
+  "gaps": [
+    "TOKEN_VAZIO_RUNTIME_8x760_RECEIPT",
+    "TOKEN_VAZIO_PARALLELISM_SEMANTICS",
+    "TOKEN_VAZIO_PERFORMANCE_SCALING",
+    "TOKEN_VAZIO_NOVOEXPORT_VERSION_RECONCILIATION",
+    "TOKEN_VAZIO_DEVICE_RECEIPT_CURRENT"
+  ],
+  "next_verifiable_step": "Run a fixed-workload layer sweep at 8,64,128,760,1536 logical layers with pinned Vectras commit and produce device/build/workload/performance/log hashes and a receipt."
+}
