@@ -6,29 +6,38 @@
   "required": ["schema_version", "claim_allowed", "atoms", "conflicts", "provenance"],
   "properties": {
     "schema_version": {"const": "NORMATIVE_GRAPH_SCHEMA_V1"},
-    "claim_allowed": {"type": "boolean", "const": false},
-    "atoms": {
-      "type": "array",
-      "items": {"$ref": "#/$defs/NormativeAtom"}
-    },
-    "conflicts": {
-      "type": "array",
-      "items": {"$ref": "#/$defs/NormativeConflict"}
-    },
-    "provenance": {
-      "type": "array",
-      "items": {"$ref": "#/$defs/Provenance"}
-    }
+    "claim_allowed": {"type": "boolean", "default": false},
+    "evidence_gate": {"$ref": "#/$defs/EvidenceGate"},
+    "atoms": {"type": "array", "items": {"$ref": "#/$defs/NormativeAtom"}},
+    "conflicts": {"type": "array", "items": {"$ref": "#/$defs/NormativeConflict"}},
+    "provenance": {"type": "array", "items": {"$ref": "#/$defs/Provenance"}}
   },
+  "allOf": [
+    {
+      "if": {"properties": {"claim_allowed": {"const": true}}, "required": ["claim_allowed"]},
+      "then": {
+        "required": ["evidence_gate"],
+        "properties": {
+          "evidence_gate": {
+            "type": "object",
+            "required": ["status", "evidence_refs", "scope_specific"],
+            "properties": {
+              "status": {"const": "PASS"},
+              "evidence_refs": {"type": "array", "minItems": 1},
+              "scope_specific": {"const": true}
+            }
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
     "NormativeAtom": {
       "type": "object",
       "required": ["id", "source_type", "authority", "jurisdiction", "binding_force", "scope", "temporal", "epistemic_state", "provenance_ref"],
       "properties": {
         "id": {"type": "string", "minLength": 1},
-        "source_type": {
-          "enum": ["CONSTITUTION", "LAW", "REGULATION", "TREATY", "TREATY_PROMULGATION", "COURT_DECISION", "CONTRACT", "MANDATORY_STANDARD", "VOLUNTARY_STANDARD", "TECHNICAL_STANDARD", "RFC", "GUIDELINE", "RECOMMENDATION", "BEST_PRACTICE", "ETHICAL_PRINCIPLE", "CULTURAL_NORM", "DECLARATION", "OTHER"]
-        },
+        "source_type": {"enum": ["CONSTITUTION", "LAW", "REGULATION", "TREATY", "TREATY_PROMULGATION", "COURT_DECISION", "CONTRACT", "MANDATORY_STANDARD", "VOLUNTARY_STANDARD", "TECHNICAL_STANDARD", "RFC", "GUIDELINE", "RECOMMENDATION", "BEST_PRACTICE", "ETHICAL_PRINCIPLE", "CULTURAL_NORM", "DECLARATION", "OTHER"]},
         "authority": {"type": "string"},
         "jurisdiction": {
           "type": "object",
@@ -44,9 +53,7 @@
           },
           "additionalProperties": true
         },
-        "binding_force": {
-          "enum": ["BINDING_CONSTITUTION", "BINDING_LAW", "BINDING_REGULATION", "BINDING_TREATY", "BINDING_CONTRACT", "BINDING_IF_INCORPORATED", "VOLUNTARY_STANDARD", "TECHNICAL_REFERENCE", "DECLARATIVE_REFERENCE", "CULTURAL_CONTEXT", "UNKNOWN"]
-        },
+        "binding_force": {"enum": ["BINDING_CONSTITUTION", "BINDING_LAW", "BINDING_REGULATION", "BINDING_TREATY", "BINDING_CONTRACT", "BINDING_IF_INCORPORATED", "VOLUNTARY_STANDARD", "TECHNICAL_REFERENCE", "DECLARATIVE_REFERENCE", "CULTURAL_CONTEXT", "UNKNOWN"]},
         "scope": {
           "type": "object",
           "properties": {
@@ -65,10 +72,7 @@
             "permissions": {"type": "array", "items": {"type": "string"}}
           }
         },
-        "protected_subjects": {
-          "type": "array",
-          "items": {"enum": ["child", "adolescent", "elderly", "employee", "consumer", "patient", "student", "person_with_disability", "data_subject", "public_official", "other"]}
-        },
+        "protected_subjects": {"type": "array", "items": {"enum": ["child", "adolescent", "elderly", "employee", "consumer", "patient", "student", "person_with_disability", "data_subject", "public_official", "other"]}},
         "semantic_context": {
           "type": "object",
           "properties": {
@@ -90,9 +94,7 @@
             "retrieved_at": {"type": "string"}
           }
         },
-        "epistemic_state": {
-          "enum": ["REFERENCE", "APPLICABILITY_REVIEW_REQUIRED", "PASS", "FAIL", "PARTIAL", "NOT_APPLICABLE", "CONFLICT", "TOKEN_VAZIO", "SUPERSEDED", "HUMAN_REVIEW"]
-        },
+        "epistemic_state": {"enum": ["REFERENCE", "APPLICABILITY_REVIEW_REQUIRED", "PASS", "FAIL", "PARTIAL", "NOT_APPLICABLE", "CONFLICT", "TOKEN_VAZIO", "SUPERSEDED", "HUMAN_REVIEW"]},
         "provenance_ref": {"type": "string"}
       },
       "additionalProperties": true
@@ -121,6 +123,16 @@
         "blob_sha": {"type": ["string", "null"]},
         "retrieved_at": {"type": "string"},
         "source_class": {"enum": ["PRIMARY_OFFICIAL", "PRIMARY_REPOSITORY", "SECONDARY_OFFICIAL", "SECONDARY", "INFERENCE"]}
+      }
+    },
+    "EvidenceGate": {
+      "type": "object",
+      "properties": {
+        "status": {"enum": ["PASS", "FAIL", "PARTIAL", "TOKEN_VAZIO", "HUMAN_REVIEW"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "scope_specific": {"type": "boolean"},
+        "tested_at": {"type": ["string", "null"]},
+        "falsifier": {"type": ["string", "null"]}
       }
     }
   }
