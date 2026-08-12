@@ -1,0 +1,135 @@
+{
+  "schema": "rafaelia.formula-registry.v2",
+  "generated_at": "2026-08-12T14:22:00-03:00",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "publication_ready": false,
+  "automatic_promotion": false,
+  "mode": "APPEND_ONLY_BY_REFERENCE",
+  "mother_invariant": "formula != implementation != execution != evidence != physical claim",
+  "extends": {
+    "path": "data/formulas/RAFAELIA_FORMULA_REGISTRY.v1.json",
+    "git_blob_sha": "ef50ec7aa9866343a4f11d61e23d47d97e600a18",
+    "record_count": 50,
+    "policy": "preserve v1 verbatim; never rewrite historical classifications silently"
+  },
+  "session_snapshot": {
+    "path": "docs/canonical/2026-08-12/RAFAELIA_FORMULA_SESSION_REGISTRY_V1.md",
+    "git_blob_sha": "eb0e4c97cedddfe0c6b8404aa4a2ea1683c2fe6f",
+    "record_count": 122,
+    "scope": "current Theory_all/RAFAELIA session plus attached AETHER/coexistence source formulas",
+    "content_sha256": "TOKEN_VAZIO_RAW_CONTENT_SHA256_NOT_COMPUTED_FROM_GIT_BLOB"
+  },
+  "counts": {
+    "v1_records": 50,
+    "session_snapshot_records": 122,
+    "canonical_union_unique_records": "TOKEN_VAZIO_DEDUP_AND_SEMANTIC_EQUIVALENCE_REQUIRED"
+  },
+  "canonical_resolutions": [
+    {
+      "topic": "Rafaeliana recurrence for target sequence 2,4,7,12,20,33,54,88,143,232,...",
+      "canonical": "R[n+1] = R[n] + R[n-1] + 1",
+      "derived": [
+        "R[n] = F[n+3] - 1",
+        "DeltaR[n] = F[n+1]"
+      ],
+      "superseded_preserved": [
+        "R[n+1] = R[n] + R[n-2] + 1",
+        "R[n] = R[n-1] + R[n-3] + 1"
+      ],
+      "state": "EVIDENCED_MATH_AND_SESSION_KAT",
+      "claim_allowed": false
+    },
+    {
+      "topic": "modulo-9 / 3-6-9",
+      "canonical": "R[n] mod 9 = (F[n+3]-1) mod 9",
+      "observation": "session run produced residues 0..8",
+      "privileged_369_state": "TOKEN_VAZIO_EMPIRICAL"
+    },
+    {
+      "topic": "IRP",
+      "canonical": "IRP[n] = 1 - sigma[n]/abs(DeltaR[n])",
+      "current_evidence": "synthetic-session-only",
+      "external_predictive_validity": "TOKEN_VAZIO_EMPIRICAL"
+    }
+  ],
+  "source_anchors": [
+    {
+      "name": "aether_hybrid_core.py",
+      "provider": "CHATGPT_UPLOAD",
+      "sha256": "94888889767b1dc62798baf900f83ab55704785696c5dc1576ec05fcb9fd2158",
+      "state": "OBSERVED_UPLOAD_BYTES"
+    },
+    {
+      "name": "aether_hybrid_web.py",
+      "provider": "CHATGPT_UPLOAD",
+      "sha256": "45fdaea1dae1969466597596942fb36029658204692afe00f2cb069849ae6bbf",
+      "state": "OBSERVED_UPLOAD_BYTES"
+    },
+    {
+      "name": "raf_coexist_v2.c",
+      "provider": "CHATGPT_UPLOAD",
+      "sha256": "46891f4551974f5605d283a01d2ea19160a7ca63c2b12a86c027b8fbb437e4cb",
+      "state": "OBSERVED_UPLOAD_BYTES"
+    },
+    {
+      "name": "raf_coexist_quintic.c",
+      "provider": "CHATGPT_UPLOAD",
+      "sha256": "6b5eda0d15c3759c6a203bb78c82c0995c545eea21bbc8112aed28fc4bdda699",
+      "state": "OBSERVED_UPLOAD_BYTES"
+    },
+    {
+      "name": "raf_coexist_mixed.c",
+      "provider": "CHATGPT_UPLOAD",
+      "sha256": "bbd4fc708c77a299f496deb37bf1af4993f881b522e5f792220a430c8775eb52",
+      "state": "OBSERVED_UPLOAD_BYTES",
+      "portability_gap": "M_PI may be undefined under strict C11"
+    },
+    {
+      "name": "raf_coexist_mixed_pipelines.c",
+      "provider": "CHATGPT_UPLOAD",
+      "sha256": "d6ab8c0d4ac433b1e835f6c3e525f48ed42049a7ec52ef41724cc3bdd4f9e5e2",
+      "state": "OBSERVED_UPLOAD_BYTES",
+      "portability_gap": "M_PI may be undefined under strict C11"
+    },
+    {
+      "name": "rafaeliana_proof.py",
+      "provider": "SESSION_TEXT_TERMUX_OUTPUT",
+      "sha256": "TOKEN_VAZIO_EXACT_BYTES",
+      "state": "EXECUTION_OUTPUT_OBSERVED_BYTES_NOT_FROZEN"
+    }
+  ],
+  "priority_queue": [
+    {
+      "priority": "P0",
+      "id": "FRZ-RAFAELIANA-PROOF-BYTES",
+      "state": "TOKEN_VAZIO",
+      "next_verifiable_step": "Freeze exact rafaeliana_proof.py bytes, compute SHA-256, run N=30 and N=1000 KATs, emit receipt."
+    },
+    {
+      "priority": "P0",
+      "id": "IRP-EXTERNAL-BASELINES",
+      "state": "TOKEN_VAZIO_EMPIRICAL",
+      "next_verifiable_step": "Compare IRP against at least two baselines on real external series; preserve negative results and uncertainty."
+    },
+    {
+      "priority": "P1",
+      "id": "C-MIXED-MPI-PORTABILITY",
+      "state": "IMPLEMENTED_SOURCE_WITH_PORTABILITY_GAP",
+      "next_verifiable_step": "Define M_PI portably or replace with an internal constant; compile and run on Android Termux; seal receipt."
+    },
+    {
+      "priority": "P1",
+      "id": "MOD9-369-SIGNIFICANCE",
+      "state": "TOKEN_VAZIO_EMPIRICAL",
+      "next_verifiable_step": "Test whether residues 3/6/9 have statistically privileged behavior beyond the ordinary periodic residue structure."
+    },
+    {
+      "priority": "P2",
+      "id": "THEORY-ALL-FALSIFIERS",
+      "state": "TOKEN_VAZIO",
+      "next_verifiable_step": "Attach explicit falsifiers and measurable observables to BIOEM, 42-node and tesseract/orbital claims before promotion."
+    }
+  ],
+  "next_index": "indices/RAFAELIA_FORMULA_INDEX_V2.md"
+}
