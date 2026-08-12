@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "RAFAELIA_CYCLE_ARTIFACT_IDENTITY",
+  "claim_allowed": false,
+  "identity_key": [
+    "cycle_id",
+    "artifact_role"
+  ],
+  "provider_key": "provider_id",
+  "rules": {
+    "distinct_roles_same_cycle": "ALLOW",
+    "same_cycle_role_same_provider": "ALLOW_IDEMPOTENT_ALIAS",
+    "same_cycle_role_conflicting_provider": "REJECT",
+    "missing_cycle_id": "REJECT",
+    "missing_artifact_role": "REJECT",
+    "missing_provider_id": "REJECT"
+  },
+  "records": [
+    {
+      "cycle_id": "OMEGA-ANTI-REGRESSION-C32",
+      "artifact_role": "EXECUTIVE_RECEIPT",
+      "provider_id": "1LPV76jXmGCGry7i_jLeMeyTvno6Ghfv2V6eGpydAg-Q"
+    },
+    {
+      "cycle_id": "OMEGA-ANTI-REGRESSION-C33",
+      "artifact_role": "EXECUTIVE_RECEIPT",
+      "provider_id": "1gYS2JdkPBg_z9QXymO38Ftgj9gPxD1c0VN5x93RSSR0"
+    },
+    {
+      "cycle_id": "OMEGA-ANTI-REGRESSION-C33",
+      "artifact_role": "EXTERNAL_RECEIPT_FOR_IMMUTABLE_SEALED_ROOT",
+      "provider_id": "1Jf_zjBUH2nHuGxhg4m9KLYJ5SllpGW7UH6GRUFdiOqY"
+    },
+    {
+      "cycle_id": "OMEGA-ANTI-REGRESSION-C34",
+      "artifact_role": "INDEPENDENT_REVERIFY_MASTER_PROPAGATION",
+      "provider_id": "13UUW3YspM21eCRk34u5xB-7kNm7jLhWgTa2GiBCVdWk"
+    },
+    {
+      "cycle_id": "OMEGA-ANTI-REGRESSION-C35",
+      "artifact_role": "EXECUTIVE_RECEIPT",
+      "provider_id": "10yWdAHH0Gfgp17RWHvtyD7_wTg7ZnBWc5uim4_PzdWg"
+    },
+    {
+      "cycle_id": "OMEGA-ANTI-REGRESSION-C36",
+      "artifact_role": "EXECUTIVE_RECEIPT",
+      "provider_id": "1YjT0sktvw30pl3Vzb5QukZL5ftZC8QUZ0nI1eBk9BeI"
+    }
+  ]
+}
