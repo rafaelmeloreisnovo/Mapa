@@ -1,0 +1,144 @@
+{
+  "schema": "rafaelia.provenance-delta.v1",
+  "generated_at": "2026-08-12T14:22:00-03:00",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "extends_topology": "data/governance/provenance_topology.v1.json",
+  "invariant": "source → identity → claim → evidence → execution → receipt → gate; time is independent; formula presence never implies domain truth",
+  "branch": "audit/formula-registry-session-20260812",
+  "head_commit_at_creation": "f89c398dc5c8a5aedc10d1a11d9254ddf2e850be",
+  "nodes": [
+    {
+      "id": "FORMULA_SESSION_REGISTRY_20260812",
+      "kind": "ARTIFACT",
+      "title": "RAFAELIA Formula Session Registry V1",
+      "anchor": {
+        "provider": "GITHUB",
+        "path": "docs/canonical/2026-08-12/RAFAELIA_FORMULA_SESSION_REGISTRY_V1.md",
+        "ref": "audit/formula-registry-session-20260812",
+        "blob_sha": "eb0e4c97cedddfe0c6b8404aa4a2ea1683c2fe6f",
+        "content_sha256": "TOKEN_VAZIO_RAW_CONTENT_SHA256_NOT_COMPUTED"
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "BOUNDED",
+        "evidence": "DOCUMENTED",
+        "execution": "NOT_APPLICABLE",
+        "receipt": "NOT_APPLICABLE",
+        "gate": "F_GAP",
+        "time": "OBSERVED"
+      },
+      "falsifier": "The artifact does not enumerate 122 session relations, silently removes conflicting recurrences, or promotes empirical claims as proven facts.",
+      "next_verifiable_step": "Compute raw-content SHA-256 from a clean checkout and bind the final merge commit."
+    },
+    {
+      "id": "FORMULA_REGISTRY_V2_20260812",
+      "kind": "INDEX_ARTIFACT",
+      "title": "RAFAELIA Formula Registry V2",
+      "anchor": {
+        "provider": "GITHUB",
+        "path": "data/formulas/RAFAELIA_FORMULA_REGISTRY.v2.json",
+        "ref": "audit/formula-registry-session-20260812",
+        "blob_sha": "a51e0f96e52533a59e3b73c11cf33566a243a687",
+        "content_sha256": "TOKEN_VAZIO_RAW_CONTENT_SHA256_NOT_COMPUTED"
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "BOUNDED",
+        "evidence": "DOCUMENTED",
+        "execution": "NOT_APPLICABLE",
+        "receipt": "NOT_APPLICABLE",
+        "gate": "F_GAP",
+        "time": "OBSERVED"
+      },
+      "falsifier": "V2 rewrites V1 rather than extending it by reference, or loses the explicit TOKEN_VAZIO states and source anchors.",
+      "next_verifiable_step": "Run JSON parse/schema checks, compute raw-content SHA-256 and bind final merge commit."
+    },
+    {
+      "id": "FORMULA_INDEX_V2_20260812",
+      "kind": "SEMANTIC_INDEX",
+      "title": "RAFAELIA Formula Index V2",
+      "anchor": {
+        "provider": "GITHUB",
+        "path": "indices/RAFAELIA_FORMULA_INDEX_V2.md",
+        "ref": "audit/formula-registry-session-20260812",
+        "blob_sha": "c1ee6286a1fb67eb0379109cb9f15cef8ce8d1f2",
+        "content_sha256": "TOKEN_VAZIO_RAW_CONTENT_SHA256_NOT_COMPUTED"
+      },
+      "vector": {
+        "source": "PRESENT",
+        "identity": "PARTIAL",
+        "claim": "BOUNDED",
+        "evidence": "DOCUMENTED",
+        "execution": "NOT_APPLICABLE",
+        "receipt": "NOT_APPLICABLE",
+        "gate": "F_GAP",
+        "time": "OBSERVED"
+      },
+      "falsifier": "The index cannot route a formula family to the session registry and evidence state unambiguously.",
+      "next_verifiable_step": "Add deterministic query coverage and bind final merge commit."
+    },
+    {
+      "id": "RAFAELIANA_PROOF_EXACT_BYTES",
+      "kind": "GAP",
+      "title": "Freeze exact rafaeliana_proof.py bytes",
+      "anchor": {
+        "provider": "SESSION_TERMUX",
+        "path": "~/fiber/rafarliana_proof.py",
+        "ref": null,
+        "blob_sha": null,
+        "content_sha256": null
+      },
+      "vector": {
+        "source": "SESSION_OUTPUT_PRESENT",
+        "identity": "TOKEN_VAZIO",
+        "claim": "BOUNDED",
+        "evidence": "EXECUTION_OUTPUT_OBSERVED",
+        "execution": "EXECUTED_USER_REPORTED",
+        "receipt": "TOKEN_VAZIO_EXACT_FILE_RECEIPT",
+        "gate": "F_GAP",
+        "time": "PAST_RECORDED"
+      },
+      "falsifier": "An exact immutable proof-script artifact with SHA-256 and matching output receipt is already bound in a repository.",
+      "next_verifiable_step": "Copy the exact file without editing, hash it, commit it, rerun N=30/N=1000 and seal stdout/stderr/exit/environment."
+    }
+  ],
+  "edges": [
+    {
+      "from": "FORMULA_SESSION_REGISTRY_20260812",
+      "to": "FORMULA_REGISTRY_V2_20260812",
+      "type": "INDEXED_BY"
+    },
+    {
+      "from": "FORMULA_REGISTRY_V2_20260812",
+      "to": "FORMULA_INDEX_V2_20260812",
+      "type": "NAVIGATED_BY"
+    },
+    {
+      "from": "RAFAELIANA_PROOF_EXACT_BYTES",
+      "to": "FORMULA_SESSION_REGISTRY_20260812",
+      "type": "BLOCKS_PROMOTION_OF"
+    },
+    {
+      "from": "FORMULA_INDEX_V2_20260812",
+      "to": "FG033_SEMANTIC_INDEX",
+      "type": "CONTRIBUTES_TO"
+    }
+  ],
+  "filled_uncertainties": [
+    "AETHER and coexistence uploaded source identities now have observed SHA-256 anchors in Formula Registry V2.",
+    "Canonical Rafael recurrence is explicitly separated from two superseded historical variants.",
+    "Modulo-9 run is bounded to what was observed: residues 0..8; privileged 3/6/9 remains empirical TOKEN_VAZIO.",
+    "IRP evidence is explicitly bounded to synthetic data only."
+  ],
+  "remaining_token_vazio": [
+    "raw-content SHA-256 for the newly committed GitHub artifacts",
+    "final merge commit identity",
+    "exact immutable bytes of rafaeliana_proof.py",
+    "external IRP validation",
+    "physical/domain evidence for BIOEM, tesseract and 42-node claims",
+    "Android Termux receipts for mixed C after portability fix"
+  ]
+}
