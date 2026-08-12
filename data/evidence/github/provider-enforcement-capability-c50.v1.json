@@ -1,0 +1,59 @@
+{
+  "after": "ENFORCEMENT_MISSING_CAUSE_SPLIT_PLAN_CAPABILITY_BLOCK_PLUS_INTEGRATION_PERMISSION_BLOCK",
+  "baseline_branch_protected": false,
+  "baseline_main_sha": "8789f29f257af1e958e59cd25e1d30dea10cde98",
+  "before": "ENFORCEMENT_MISSING_CAUSE_PARTIALLY_UNTYPED",
+  "blocking_dependency": "provider plan capability and/or integration permission required for provider-side enforcement",
+  "claim_allowed": false,
+  "closure_gate": "do not close FG_GOV_DEFAULT_BRANCH_UNPROTECTED until provider confirms protection/ruleset active",
+  "contract_invariant": "detection != enforcement; provider-side protection claim requires provider-observed active enforcement",
+  "cycle_id": "OMEGA-ANTI-REGRESSION-C50",
+  "date": "2026-08-12",
+  "default_branch": "main",
+  "evidence_needed": "provider ruleset or branch-protection endpoint becomes readable/writable and post-read reports enforcement active",
+  "falsifier": "a later authenticated provider read shows rulesets available or branch protection accessible/enabled",
+  "next_probe": "after provider capability/permission changes, refetch rulesets and main protection endpoint and require active enforcement before closure",
+  "observations": [
+    {
+      "classification": "PROVIDER_PLAN_CAPABILITY_BLOCK",
+      "probe": "GET /repos/rafaelmeloreisnovo/Mapa/rulesets",
+      "provider_message": "Upgrade to GitHub Pro or make this repository public to enable this feature.",
+      "status": 403
+    },
+    {
+      "classification": "INTEGRATION_PERMISSION_SURFACE_BLOCK",
+      "probe": "GET /repos/rafaelmeloreisnovo/Mapa/branches/main/protection",
+      "provider_message": "Resource not accessible by integration",
+      "status": 403
+    },
+    {
+      "authenticated_permissions": {
+        "admin": true,
+        "maintain": true,
+        "pull": true,
+        "push": true,
+        "triage": true
+      },
+      "classification": "REPO_PRIVATE_WITH_ADMIN_REPO_PERMISSION",
+      "probe": "GET repository metadata",
+      "visibility": "private"
+    }
+  ],
+  "owner_repo": "rafaelmeloreisnovo/Mapa",
+  "provenance": "live GitHub connector observations on 2026-08-12",
+  "reason_code": "FG_GOV_PROVIDER_ENFORCEMENT_CAPABILITY_BLOCK",
+  "regressions_after": "0_ACTIVE_UNCONTAINED",
+  "regressions_before": "0_ACTIVE_UNCONTAINED",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "risk_score": 9,
+  "schema": "RAFAELIA_PROVIDER_ENFORCEMENT_CAPABILITY_OBSERVATION_V1",
+  "source_pointer": [
+    "GitHub branches/main API",
+    "GitHub repository rulesets API",
+    "GitHub branch protection API",
+    "GitHub repository metadata API"
+  ],
+  "state": "VERIFIED_LIMITED",
+  "uncertainty_delta": "REDUCED",
+  "urgency_score": 10
+}
