@@ -1,0 +1,154 @@
+{
+  "schema_version": "NORMATIVE_GRAPH_SCHEMA_V1-draft",
+  "batch_id": "NG-FED-001-20260812",
+  "generated_at": "2026-08-12T16:46:00-03:00",
+  "claim_allowed": false,
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "norma_encontrada != norma_aplicavel != obrigacao != conformidade_provada",
+    "REFERENCE != FATO",
+    "guideline != law",
+    "standard != law",
+    "RFC != law",
+    "TOKEN_VAZIO is auditable"
+  ],
+  "official_source_anchors": [
+    {
+      "id": "BR-CF88",
+      "type": "CONSTITUTION",
+      "authority": "Republica Federativa do Brasil",
+      "binding_force": "BINDING_NATIONAL_CONSTITUTION",
+      "source": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "observed_points": ["Art.1 III dignidade da pessoa humana", "Art.4 II prevalencia dos direitos humanos", "Art.227 absoluta prioridade da crianca/adolescente/jovem"],
+      "retrieved_at": "2026-08-12"
+    },
+    {
+      "id": "BR-LGPD-13709",
+      "type": "LAW",
+      "authority": "Republica Federativa do Brasil",
+      "binding_force": "BINDING_NATIONAL_LAW_WITH_SCOPE_RULES",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "observed_points": ["tratamento de dados pessoais", "liberdade", "privacidade", "livre desenvolvimento da personalidade"],
+      "retrieved_at": "2026-08-12"
+    },
+    {
+      "id": "BR-CRC-D99710",
+      "type": "TREATY_PROMULGATION",
+      "authority": "Republica Federativa do Brasil",
+      "binding_force": "BINDING_FOR_BRAZIL_SUBJECT_TO_INTERPRETIVE_HIERARCHY",
+      "source": "https://www.planalto.gov.br/ccivil_03/decreto/1990-1994/d99710.htm",
+      "observed_points": ["Convencao sobre os Direitos da Crianca promulgada", "Art.3 interesse maior da crianca como consideracao primordial", "Art.16 privacidade da crianca"],
+      "retrieved_at": "2026-08-12"
+    },
+    {
+      "id": "UN-UDHR",
+      "type": "DECLARATION",
+      "authority": "United Nations General Assembly",
+      "binding_force": "DECLARATION_NOT_TREATY; NORMATIVE_HUMAN_RIGHTS_REFERENCE",
+      "source": "https://europe.ohchr.org/universal-declaration-human-rights",
+      "observed_points": ["dignidade", "igualdade", "direitos humanos universais"],
+      "retrieved_at": "2026-08-12"
+    },
+    {
+      "id": "W3C-WCAG22",
+      "type": "TECHNICAL_STANDARD",
+      "authority": "W3C",
+      "binding_force": "VOLUNTARY_STANDARD_UNLESS_INCORPORATED_BY_LAW_POLICY_OR_CONTRACT",
+      "source": "https://www.w3.org/TR/WCAG22/",
+      "observed_points": ["W3C Recommendation", "testable accessibility success criteria", "conformance levels A/AA/AAA"],
+      "retrieved_at": "2026-08-12"
+    }
+  ],
+  "repository_coverage": [
+    {
+      "repo": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "ref": "main",
+      "path": "README.md",
+      "source_blob": "ed7283c6a9f9768337a82ff2f5b88535bab93471",
+      "normative_atoms": [
+        {"domain":"privacy_data","candidate_sources":["BR-LGPD-13709"],"state":"APPLICABILITY_REVIEW_REQUIRED","reason":"README declares custody/indexing of conversation corpus and private repository; actual data-subject/location/purpose/base must be resolved."},
+        {"domain":"human_dignity","candidate_sources":["BR-CF88","UN-UDHR"],"state":"REFERENCE"},
+        {"domain":"child_protection","candidate_sources":["BR-CF88","BR-CRC-D99710"],"state":"CONDITIONAL","reason":"activate only if corpus includes persons under 18 or actions concerning children; age field not established here."}
+      ],
+      "gaps": ["TOKEN_VAZIO_DATA_SUBJECT_JURISDICTION", "TOKEN_VAZIO_LEGAL_BASIS", "TOKEN_VAZIO_RETENTION_RULE", "TOKEN_VAZIO_CHILD_PRESENCE"],
+      "urgency": "P0"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/GAIA_phi",
+      "ref": "main",
+      "path": "README.md + docs/federation/REPOSITORY_CONTRACT_V1.md",
+      "normative_atoms": [
+        {"domain":"provenance_integrity","state":"IMPLEMENTATION_REFERENCE","reason":"deterministic indexing and evidence manifests are declared; they do not establish legal compliance."},
+        {"domain":"privacy_data","candidate_sources":["BR-LGPD-13709"],"state":"CONDITIONAL","reason":"GAIA may index evidence from other repositories; applicability follows the indexed payload and actors, not GAIA name alone."},
+        {"domain":"accessibility","candidate_sources":["W3C-WCAG22"],"state":"CONDITIONAL","reason":"applies to web/UI surfaces when such surfaces are in scope."}
+      ],
+      "gaps": ["TOKEN_VAZIO_REPO_BY_REPO_DATA_CLASSIFICATION", "TOKEN_VAZIO_UI_SCOPE"],
+      "urgency": "P0"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/home",
+      "ref": "dev-rafaelia/backup-manager",
+      "path": "README.md",
+      "source_blob": "a3ec010c7ede2a6f733461690c2d35f051f9c4df",
+      "normative_atoms": [
+        {"domain":"license","state":"REFERENCE","observed":"README badge declares MIT; LICENSE bytes not audited in this batch."},
+        {"domain":"privacy_data","candidate_sources":["BR-LGPD-13709"],"state":"TOKEN_VAZIO","reason":"README describes analysis/extraction but this batch did not establish whether personal data are processed in the observed ref."},
+        {"domain":"scientific_claims","state":"HUMAN_REVIEW","reason":"documentation claims must remain separated from evidence/reproduction."}
+      ],
+      "gaps": ["TOKEN_VAZIO_DEFAULT_BRANCH_SEMANTICS", "TOKEN_VAZIO_PERSONAL_DATA_SCOPE", "TOKEN_VAZIO_LICENSE_FILE_MATCH"],
+      "urgency": "P1"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/X0",
+      "ref": "main",
+      "path": "README.md",
+      "source_blob": "dcad106f827eb3abc8b346c0a3c8ad267a21408e",
+      "normative_atoms": [
+        {"domain":"ai_governance","state":"REFERENCE","reason":"README declares AI ecosystem; specific legal duties depend on deployment jurisdiction/use case."},
+        {"domain":"security","state":"REFERENCE","reason":"cryptographic/security-by-design claims require independent conformance tests before promotion."},
+        {"domain":"privacy_data","candidate_sources":["BR-LGPD-13709"],"state":"CONDITIONAL","reason":"7+ APK/security/privacy components are declared, but personal-data processing is not established by README alone."},
+        {"domain":"accessibility","candidate_sources":["W3C-WCAG22"],"state":"CONDITIONAL","reason":"only web/UI surfaces in scope."}
+      ],
+      "gaps": ["TOKEN_VAZIO_APK_DATA_FLOW", "TOKEN_VAZIO_DEPLOYMENT_JURISDICTION", "TOKEN_VAZIO_ACCESSIBILITY_SURFACE"],
+      "urgency": "P1"
+    },
+    {
+      "repo": "instituto-Rafael/LGPD-Constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic",
+      "ref": "main",
+      "path": "README.md",
+      "source_blob": "6994492c71560f632b23992a8a262c3984b31fd0",
+      "normative_atoms": [
+        {"domain":"legal_corpus","state":"P0_AUDIT_TARGET","reason":"README itself declares LGPD validation against primary legislative sources as TOKEN_VAZIO."},
+        {"domain":"human_rights","candidate_sources":["BR-CF88","UN-UDHR","BR-CRC-D99710"],"state":"REFERENCE"},
+        {"domain":"cross_jurisdiction","state":"HUMAN_REVIEW","reason":"constitutions and rights instruments cannot be flattened into a universal hierarchy."}
+      ],
+      "gaps": ["TOKEN_VAZIO_PRIMARY_SOURCE_VALIDATION", "TOKEN_VAZIO_JURISDICTION_HIERARCHY", "TOKEN_VAZIO_TEMPORAL_VERSIONING", "TOKEN_VAZIO_TRANSLATION_EQUIVALENCE"],
+      "urgency": "P0"
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "NG-CONFLICT-001",
+      "type": "AUTHORITY_CLASS_COLLISION",
+      "description": "Existing anchor mixes Constitution/treaty/law with technical standards in one priority stack; preserve human-protection policy as project design invariant but do not treat every conflict as a legal hierarchy rule.",
+      "state": "HUMAN_REVIEW"
+    },
+    {
+      "id": "NG-CONFLICT-002",
+      "type": "CHILD_BEST_INTERESTS_NOT_ABSOLUTE_AUTOMATIC_TRUMP",
+      "description": "Child best interests have high/primary consideration in applicable contexts, but conflict resolution remains context-sensitive; do not encode a universal automatic override of every other right.",
+      "state": "CORRECTION_REQUIRED"
+    }
+  ],
+  "cursor": {
+    "catalog_total_known": 28,
+    "repos_processed_this_batch": 5,
+    "next_priority": ["termux-app-rafacodephi", "RafGitTools", "Vectras-VM-Android", "llamaRafaelia", "papers"],
+    "coverage_status": "INCOMPLETE"
+  },
+  "F_ok": ["5 repositories anchored by current README/ref", "5 official-source anchors recorded", "binding-force classes separated", "2 normative conflicts explicitly typed"],
+  "F_gap": ["23+ catalogued repositories remain for later batches", "repo-specific data flows not yet audited", "international jurisdiction matrices not yet populated"],
+  "F_next": "Audit the next five repositories by current README/ref and extract license/privacy/accessibility/data-flow atoms before expanding to additional countries.",
+  "uncertainty_delta": "REDUCED: authority classes and five repo scopes are now explicit; unresolved applicability remains typed",
+  "conflict_delta": "+2 explicit conflicts, none silently resolved"
+}
