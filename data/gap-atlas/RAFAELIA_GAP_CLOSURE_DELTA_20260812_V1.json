@@ -1,0 +1,123 @@
+{
+  "schema": "rafaelia.gap-closure-delta.v1",
+  "delta_id": "RAFAELIA-GAP-CLOSURE-20260812-V1",
+  "generated_at": "2026-08-12T05:40:00-03:00",
+  "mode": "APPEND_ONLY_FEDERATED",
+  "claim_allowed": false,
+  "automatic_promotion": false,
+  "parent_refs": [
+    "data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json",
+    "data/gap-atlas/PROVIDER_COVERAGE_V1.json",
+    "data/control-plane/RAFAELIA_TOP30_OPERATIONAL_EXCELLENCE.v1.json"
+  ],
+  "invariants": [
+    "source_present != runtime_proven",
+    "ci_cross_build != physical_android",
+    "missing evidence remains TOKEN_VAZIO",
+    "every open gap has executable next_gate",
+    "every promoted state requires evidence_refs",
+    "private raw corpus never copied into public artifacts"
+  ],
+  "nodes": [
+    {
+      "id": "NOVOEXPORT_RMRCTI_BRIDGE",
+      "systems": ["Google Drive/NOVOexport", "rafaelmeloreisnovo/llamaRafaelia", "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE"],
+      "role": "memory source -> deterministic identity/extraction -> bounded assistant retrieval",
+      "state": "NAVIGABLE_PARTIAL",
+      "closed_now": ["Assistant Bridge contract exists and is merged", "raw/private text boundary is explicit", "append-only/TOKEN_VAZIO/provenance invariants are machine-readable", "source-level hash gaps for export_manifest.json and library_files.json were previously closed in Drive ledger"],
+      "open_gaps": ["terminal provider pagination and complete provider ID map", "full per-object hash coverage", "full source-bound omega_msgs coverage", "real-corpus CTI off/on causal test with negative control", "HDN7 physical ARM runtime", "HDN8 integrated runtime/privacy verification"],
+      "next_gate": "Run the bounded ten-query retrieval suite and bind every positive result back to source_ref; separately close provider/hash gaps one source at a time.",
+      "promotion_gate": "NAVIGABLE_VERIFIED requires ten-query suite PASS with reversible source refs; COVERAGE_VERIFIED additionally requires terminal provider enumeration and per-object identities/hashes."
+    },
+    {
+      "id": "RAFAELIA_PRIVATE_BODY",
+      "systems": ["rafaelmeloreisnovo/Rafaelia_Private"],
+      "role": "private operational body, provenance/key-policy vault, C/Python runtime, B7 and HD cache",
+      "state": "IMPLEMENTED_ADVANCED_RUNTIME_GATED",
+      "closed_now": ["pointer-only custody and key separation are implemented", "isolated B7 runtime exists", "HD Cache Phase 1 C11 implementation exists", "reference execution reports LZ4/CRC32C/thread-pool/cache/ASan/UBSan PASS"],
+      "open_gaps": ["physical ARM64 SIMD receipt", "1.2 GB ingestion performance target", "2-4x throughput matched-baseline claim", "60 percent I/O reduction on real corpus", "direct ABI/parity with Python OptimizedEngine", "independent reproduction"],
+      "next_gate": "Execute Makefile.phase1 and runtime/b7 gates on target ARM device/corpus with environment, commit, command, exit code and output hashes.",
+      "promotion_gate": "No performance/runtime promotion without same-environment baseline + physical receipt."
+    },
+    {
+      "id": "RAFGITTOOLS_CONTROL_PLANE",
+      "systems": ["rafaelmeloreisnovo/RafGitTools"],
+      "role": "Git/GitHub control plane, auth, typed mutations, readiness and local evidence gate",
+      "state": "SOURCE_FUNCTIONAL_RUNTIME_GATED",
+      "closed_now": ["P33 source roadmap is 33/33 source-functional", "private HTTPS credential mapping fixed", "force-with-lease fail-closed implementation merged", "interactive hunk staging merged", "capability-aware token rotation merged", "deterministic source-gap audit merged", "historical Android+CMake dual-ABI package build proven"],
+      "open_gaps": ["full build/test of current main head", "current-head APK + SHA256", "physical device install/start smoke", "private Git remote fixtures on device", "OAuth refresh rotation against real configured GitHub App", "GPG/LFS/worktree/bisect runtime fixtures"],
+      "next_gate": "Run scripts/rafgittools_full_readiness_gate.sh on a current clean checkout; if APK/device is available, run device smoke and private fixture matrix.",
+      "promotion_gate": "claim_allowed=true only when current-head tests + APK/SHA256 + device smoke pass in one evidence chain."
+    },
+    {
+      "id": "RAFPOLIMATA_EVIDENCE_PRODUCER",
+      "systems": ["rafaelmeloreisnovo/RafPolimata"],
+      "role": "evidence producer, clean proof runs, compiler/foundation gates and falsifiers",
+      "state": "IMPLEMENTED_PARTIAL_REMOTE_EVIDENCE",
+      "closed_now": ["clean proof-run tool exists", "compiler three-target gate exists", "foundation computational gate exists", "federated role adapter exists"],
+      "open_gaps": ["single canonical receipt schema shared across producers", "remote runner reliability/step observability for all critical gates", "device-bound evidence for target-specific claims"],
+      "next_gate": "Adopt the federated receipt schema from this delta, emit one normalized receipt per proof run, and refuse claim promotion when runner/device evidence is absent.",
+      "promotion_gate": "Evidence is promotable only if input SHA, environment, command, exit, outputs and falsifier are all bound."
+    },
+    {
+      "id": "TERMUX_PACKAGES_RAFCODEPHI_FACTORY",
+      "systems": ["rafaelmeloreisnovo/termux-packages"],
+      "role": "source build/package factory and ARM32/AArch64 compilation transit",
+      "state": "ARM_CROSS_GRAPH_PROVEN_PHYSICAL_GATED",
+      "closed_now": ["full default graph cross-build PASS on ARM32 and AArch64", "ELF identity checks PASS", "G6 negative receipt-write failure contract proven", "install without PREFIX now fails closed", "GCC/Clang compilation hygiene established", "D10 physical Termux gate is implemented", "GitHub Actions used for bootstrap source build are SHA-pinned"],
+      "open_gaps": ["D10 execution on physical Android/Bionic", "persistent trust-root physical proof", "work_stealing uint64 atomic width correctness on ARM32", "unified_orchestrator wall_time_phases bounds", "perf_profiler numeric uint64 comparator"],
+      "next_gate": "Fix the three source-level follow-ups with dedicated regressions, then execute D10 on physical Termux and ingest the resulting checksum-bound receipt.",
+      "promotion_gate": "Cross-build/QEMU never substitutes for physical Android/Bionic."
+    },
+    {
+      "id": "RAFCODEPHI_ANDROID_RUNTIME",
+      "systems": ["rafaelmeloreisnovo/termux-app-rafacodephi"],
+      "role": "Android/Termux application runtime, APKC/ELF/DEX experiments and device evidence capture",
+      "state": "IMPLEMENTED_PARTIAL_PHYSICAL_GATED",
+      "closed_now": ["historical ARM32/ARM64/universal APK build criteria are registered as proven", "RAFAELIA zero runtime instrumentation and installed-APK capture contracts exist", "APKC fixed DEX fixture and fixed ARM32/ARM64 ELF executable stubs exist", "loose-artifact inventory/hash/dedup policy exists"],
+      "open_gaps": ["physical ARM32 bundle", "physical ARM64 bundle", "dual-device proof", "functional loader and Android security receipt", "APKC fields/classes completeness, debug info, multidex and ART runtime", "general linker/dynamic linking", "browser host/device reproducibility and TLS implementation", "canonical destination/license/author graph for loose corpus"],
+      "next_gate": "Prioritize physical bundle receipts first; keep APKC/browser expansion behind explicit capability gates rather than labeling prototypes complete.",
+      "promotion_gate": "Physical/device and production-release claims require device-bound receipts; prototype domains remain claim_allowed=false."
+    },
+    {
+      "id": "VECTRAS_VM_EXECUTION_SANDBOX",
+      "systems": ["rafaelmeloreisnovo/Vectras-VM-Android"],
+      "role": "VM/QEMU/sandbox, B7 runtime, ZIPRAF validation and performance experimentation",
+      "state": "IMPLEMENTED_ADVANCED_CI_PARTIAL",
+      "closed_now": ["B7 triple-buffer runtime merged with host scalar self-test", "ZIPRAF archive work merged", "industrial statistics contract now rejects mixed-metric reproducibility claims", "fresh CI probe identified bootstrap materialization as a concrete Android blocker rather than unknown root cause"],
+      "open_gaps": ["canonical Android lane bootstrap_assets_source manifest repair", "Android APK build after bootstrap repair", "ARMv7/ARM64 NEON physical receipts", "Vulkan/OpenCL physical capability receipts", "homogeneous repeated-series benchmark wiring in UI"],
+      "next_gate": "Repair the declared bootstrap source manifest first; rerun Android lane; only then execute device/NEON/GPU and repeated-series benchmark gates.",
+      "promotion_gate": "No industrial/reproducibility/performance claim from heterogeneous metric aggregates."
+    },
+    {
+      "id": "GAIA_EVOLUTION_LAB",
+      "systems": ["rafaelmeloreisnovo/GAIA_phi"],
+      "role": "evolution/training/academic custody laboratory",
+      "state": "EVIDENCE_PRESENT_SCOPE_PARTIAL",
+      "closed_now": ["academic custody gate exists", "dataset/training receipts exist", "RAFAELIA cycle implementation exists"],
+      "open_gaps": ["unified current-state receipt tied to exact training dataset identities/hashes", "independent validation of training/evolution claims", "cross-link from GAIA receipts back to Mapa gap IDs"],
+      "next_gate": "Emit a current GAIA receipt that names exact input IDs/hashes, code commit, command/environment and links each unresolved item to this gap delta.",
+      "promotion_gate": "Training/evolution claim requires dataset lineage + reproducible run + independent review."
+    },
+    {
+      "id": "MAPA_CANONICAL_INDEX",
+      "systems": ["rafaelmeloreisnovo/Mapa"],
+      "role": "canonical ontology/index/gap atlas and promotion topology",
+      "state": "CANONICAL_PARTIAL",
+      "closed_now": ["Gap Atlas V1 exists", "Provider Coverage V1 exists", "Top-30 operational controls exist", "cross-source and quality gates exist"],
+      "open_gaps": ["Gap Atlas coverage is not account-wide/arbitrary-depth", "repo-local states can drift from central status", "closure aging/recurrence metric not yet computed across cycles"],
+      "next_gate": "Treat this delta as append-only closure overlay; add a validator and require future repo adapters to carry gap_id + evidence_ref + next_gate.",
+      "promotion_gate": "Central state never overrides stronger repo-local evidence without exact ref and receipt."
+    },
+    {
+      "id": "FEDERATED_TOPOLOGY",
+      "systems": ["NOVOexport", "llamaRafaelia", "Rafaelia_Private", "Mapa", "RafGitTools", "RafPolimata", "GAIA_phi", "termux-app-rafacodephi", "termux-packages", "Vectras-VM-Android"],
+      "role": "end-to-end memory -> map -> control -> evidence -> runtime -> receipt feedback loop",
+      "state": "TOPOLOGY_CLOSED_EXECUTION_PARTIAL",
+      "closed_now": ["roles are now explicitly non-overlapping", "each major subsystem has an authority role and promotion boundary", "every listed open gap has a concrete next_gate"],
+      "open_gaps": ["no single end-to-end receipt yet traverses all nodes for one real workload", "physical-device gates remain unresolved where hardware is required"],
+      "next_gate": "Choose one real workload and execute source_ref -> Mapa gap -> RafGitTools job -> RafPolimata proof -> Termux/package or Vectras runtime -> receipt -> Mapa closure update.",
+      "promotion_gate": "FEDERATED_VERIFIED requires one end-to-end reversible receipt chain with no inferred PASS."
+    }
+  ]
+}
