@@ -1,0 +1,114 @@
+{
+  "schema": "rafaelia.gap-closure-execution.v1",
+  "execution_id": "RAFAELIA-GAP-CLOSURE-EXEC-20260812-V1",
+  "parent_delta": "data/gap-atlas/RAFAELIA_GAP_CLOSURE_DELTA_20260812_V1.json",
+  "observed_at": "2026-08-12T06:06:00-03:00",
+  "claim_allowed": false,
+  "records": [
+    {
+      "gap_node": "TERMUX_PACKAGES_RAFCODEPHI_FACTORY",
+      "repo": "rafaelmeloreisnovo/termux-packages",
+      "change_ref": "PR#77",
+      "head_sha": "3319746a747c71f572ff0b95910dcb1f2653455b",
+      "closures": [
+        "work_stealing uint64 counters use width-correct _Atomic uint64_t instead of atomic_ulong pointer casts",
+        "unified_orchestrator wall_time_phases storage covers all 9 traversed phases",
+        "perf_profiler qsort uses a numeric uint64_t comparator instead of strcmp"
+      ],
+      "regression_guard": "core/tests/test_arch_safety_followups.py",
+      "remote_evidence": {
+        "workflow": "RAFCODEPHI Full ARM Cross Graph",
+        "run_id": 31580525384,
+        "conclusion": "success",
+        "jobs": [
+          {"name": "Full default graph arm64", "conclusion": "success", "compile_complete_default_graph": "PASS", "elf_identity": "PASS"},
+          {"name": "Full default graph arm32", "conclusion": "success", "compile_complete_default_graph": "PASS", "elf_identity": "PASS"},
+          {"name": "Full ARM cross graph transit", "conclusion": "success", "fail_closed_transit": "PASS"}
+        ]
+      },
+      "state_after": "SOURCE_GAPS_CLOSED_IN_PR_DUAL_ARM_CROSS_GRAPH_PASS",
+      "remaining": ["merge/review PR#77", "D10 physical Android/Bionic receipt", "persistent trust-root physical proof"]
+    },
+    {
+      "gap_node": "VECTRAS_VM_EXECUTION_SANDBOX",
+      "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "change_ref": "PR#1092",
+      "head_sha": "6b9f78f30364fdddae54c2683516706cf7e597aa",
+      "closures": [
+        "official upstream bootstrap source URIs identified for all four ABIs",
+        "GitHub release id 360367639 and per-asset IDs bound",
+        "source .tar.gz SHA-256 and byte sizes bound in source_ref",
+        "provenance-only licensing boundary recorded without claiming third-party clearance",
+        "new sourced-but-unmaterialized state prevents false VERIFIED promotion"
+      ],
+      "source_release": {
+        "repo": "AnBui2004/Vectras-VM-Emu-Android",
+        "tag": "4.4.7",
+        "release_id": 360367639,
+        "release_immutable_flag": false,
+        "assets": [
+          {"abi": "arm64-v8a", "asset_id": 491352765, "archive_sha256": "9691a28b89e5084900e9ebc6483acd9c2c1acbc0a077046da0f7eb5bdc0429bf", "archive_size": 154321067},
+          {"abi": "armeabi-v7a", "asset_id": 491353676, "archive_sha256": "f3804e3da9499d65d02e1951e95984d2e03b18c7865c648b0d2b65ee73f5ec99", "archive_size": 150530176},
+          {"abi": "x86", "asset_id": 491353338, "archive_sha256": "43ea9b395943aadac409011cadab4c3bf9ac030728c90aa11646b31a5d77ef6b", "archive_size": 137392607},
+          {"abi": "x86_64", "asset_id": 491353008, "archive_sha256": "f5de43d8bef55a14d62c13a5c82ed4f406885bf2c87c177b8121077f2fbeaefa", "archive_size": 156523123}
+        ]
+      },
+      "remote_evidence": {
+        "workflow": "Bootstrap Assets Provenance V1",
+        "run_id": 31581002089,
+        "conclusion": "failure",
+        "job_steps": null,
+        "classification": "RUNNER_PRESTEP_FAILURE_OBSERVED",
+        "application_validation_executed": false
+      },
+      "state_after": "SOURCES_IDENTIFIED_NOT_MATERIALIZED_REMOTE_GATE_TOKEN_VAZIO_RUNNER",
+      "remaining": ["retrieve four source archives", "verify source digest and size against release metadata", "decompress to canonical TAR names", "compute target TAR SHA-256 and sizes", "run TAR safety validation", "rerun Android build", "physical device bootstrap receipt"]
+    },
+    {
+      "gap_node": "MAPA_CANONICAL_INDEX",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "change_ref": "PR#189",
+      "head_sha": "b6b438bd0fa83b57ee77558f555bbc3bdafe02dd",
+      "closures": [
+        "10-system federated closure delta materialized append-only",
+        "fail-closed validator materialized",
+        "positive and adversarial unittest suite materialized",
+        "pinned checkout CI workflow materialized"
+      ],
+      "local_evidence": {
+        "unittest_cases": 5,
+        "expected_behavior": "PASS",
+        "adversarial_cases": ["duplicate node id", "missing next_gate", "claim_allowed promotion", "false physical VERIFIED"]
+      },
+      "remote_evidence": {
+        "workflow": "Gap Closure Delta V1",
+        "run_id": 31580547415,
+        "conclusion": "failure",
+        "job_steps": null,
+        "classification": "RUNNER_PRESTEP_FAILURE_OBSERVED",
+        "application_validation_executed": false
+      },
+      "state_after": "LOCAL_VALIDATION_PASS_REMOTE_GATE_TOKEN_VAZIO_RUNNER",
+      "remaining": ["observable remote runner execution", "merge/review PR#189", "account-wide arbitrary-depth provider coverage", "closure aging/recurrence metric"]
+    },
+    {
+      "gap_node": "RAFGITTOOLS_CONTROL_PLANE",
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "main_sha": "95667d6137be7e1ddfecedbc4dcee683ab866127",
+      "closures": ["source-level fixes through PR#344 are merged to main"],
+      "remote_evidence": {
+        "current_main_workflow_runs": 0,
+        "historical_build_ref": "PR#334",
+        "historical_android_cmake_dual_abi_build": "PASS",
+        "current_main_build": "TOKEN_VAZIO"
+      },
+      "state_after": "SOURCE_FUNCTIONAL_CURRENT_HEAD_RUNTIME_TOKEN_VAZIO",
+      "remaining": ["current-main Gradle/Kotlin tests", "current-main APK and SHA-256", "physical device install/start smoke", "private Git fixture matrix", "real configured OAuth refresh rotation"]
+    }
+  ],
+  "R3": {
+    "F_ok": "three source-level termux gaps closed with dual-ARM cross-build evidence; Vectras source identity gap reduced from unknown to exact release assets; federated Mapa overlay materialized",
+    "F_gap": "physical Android/Bionic, target TAR materialization, current RafGitTools head build, and pre-step runner failures remain unproven",
+    "F_next": "merge only after review/gates; execute physical/device gates separately; never substitute source or cross-build evidence for device evidence"
+  }
+}

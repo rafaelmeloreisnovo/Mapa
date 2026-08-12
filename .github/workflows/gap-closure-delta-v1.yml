@@ -1,0 +1,24 @@
+name: Gap Closure Delta V1
+
+on:
+  pull_request:
+    paths:
+      - 'data/gap-atlas/RAFAELIA_GAP_CLOSURE_DELTA_20260812_V1.json'
+      - 'scripts/validate_gap_closure_delta_v1.py'
+      - 'tests/test_gap_closure_delta_v1.py'
+      - '.github/workflows/gap-closure-delta-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pinned
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Validate canonical delta
+        run: python3 scripts/validate_gap_closure_delta_v1.py data/gap-atlas/RAFAELIA_GAP_CLOSURE_DELTA_20260812_V1.json
+      - name: Run adversarial tests
+        run: python3 -m unittest discover -s tests -p 'test_gap_closure_delta_v1.py' -v
