@@ -1,0 +1,41 @@
+{
+  "schema": "rafaelia.crossrepo-ci-observation.v1",
+  "date": "2026-08-12",
+  "claim_allowed": false,
+  "subject": "Fibonacci inverse/reverse jump ruler cross-repo integration",
+  "observations": [
+    {
+      "repo": "rafaelmeloreisnovo/Matem-tica-",
+      "pr": 13,
+      "head": "3ad73932b8ddde36cf54e3131d4ff9ee896404d6",
+      "workflow_runs_observed": 0,
+      "state": "TOKEN_VAZIO_CI_NOT_OBSERVED",
+      "next_step": "Run or observe repository CI; reference Python execution is separate and remains EVIDENCED_LIMITED."
+    },
+    {
+      "repo": "rafaelmeloreisnovo/papers",
+      "pr": 48,
+      "head_at_initial_ci": "36fdb6c4bcd896c30f882324e64e7c1af193b7d8",
+      "workflow_run": 31624549666,
+      "state": "RUNNER_OR_STARTUP_FAILURE_NO_STEPS_OBSERVED",
+      "jobs": [
+        "Build C Sources (x86_64)",
+        "Validate Documentation",
+        "Validate Session Packet Chain"
+      ],
+      "note": "Inspected jobs returned no executed steps; one log fetch returned HTTP 404 BlobNotFound."
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 194,
+      "head": "69129f9ab9efc6027dfd95753516540627db5401",
+      "workflow_runs": [31624630195, 31624598915, 31624599026, 31624598960],
+      "state": "RUNNER_OR_STARTUP_FAILURE_REPEATED",
+      "inspected_run": 31624599026,
+      "inspected_job": "Validate Repository Structure",
+      "steps_observed": 0
+    }
+  ],
+  "boundary": "CI startup failure != formula failure; absence of CI execution != PASS.",
+  "next_step": "Rerun/observe CI when runners are available and append a new receipt rather than rewriting this observation."
+}

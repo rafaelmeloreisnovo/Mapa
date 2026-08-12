@@ -1,0 +1,50 @@
+{
+  "schema": "rafaelia.github-actions-observation.v1",
+  "observed_at": "2026-08-12T14:28:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 194,
+  "head_sha": "bbbbffb1dad1b10a7e0243be3c4b452e9a12e02a",
+  "claim_allowed": false,
+  "classification": "RUNNER_DID_NOT_START_STEPS",
+  "runs": [
+    {
+      "run_id": 31622809360,
+      "workflow": "CI",
+      "job_id": 94201604547,
+      "job": "Validate Repository Structure",
+      "conclusion": "failure",
+      "steps_count": 0,
+      "runner_id": 0,
+      "runner_name": "",
+      "rerun_failed_jobs_requested": true,
+      "rerun_request_result": "ACCEPTED"
+    },
+    {
+      "run_id": 31622809558,
+      "workflow": "Branch Topology Gate",
+      "job_id": 94201605065,
+      "job": "branch-topology / validate",
+      "conclusion": "failure",
+      "steps_count": 0,
+      "runner_id": 0,
+      "runner_name": "",
+      "rerun_failed_jobs_requested": true,
+      "rerun_request_result": "TOKEN_VAZIO_TOOL_SAFETY_BLOCKED"
+    },
+    {
+      "run_id": 31622809430,
+      "workflow": "RAFAELIA Promotion Control V1",
+      "job_id": 94201604564,
+      "job": "promotion-control / negative-tests",
+      "conclusion": "failure",
+      "steps_count": 0,
+      "runner_id": 0,
+      "runner_name": "",
+      "downstream_enforce": "skipped",
+      "rerun_failed_jobs_requested": false
+    }
+  ],
+  "interpretation": "The observed jobs did not execute workflow steps. This observation does not establish that repository validation logic failed; it establishes a runner/startup-level failure state for these attempts.",
+  "falsifier": "A job log from the same attempt shows executed validation steps and a code/content assertion failure.",
+  "next_verifiable_step": "Inspect the accepted CI rerun outcome; when Actions runner execution is available, rerun Branch Topology and Promotion Control and preserve job-step logs. Do not merge while required gates remain failed/unobserved."
+}
