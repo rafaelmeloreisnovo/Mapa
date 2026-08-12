@@ -1,5 +1,5 @@
 {
-  "schema_version": "NORMATIVE_GRAPH_SCHEMA_V1-draft",
+  "schema_version": "NORMATIVE_GRAPH_FEDERATED_BATCH_V1",
   "batch_id": "NG-FED-002-20260812",
   "generated_at": "2026-08-12T16:46:00-03:00",
   "predecessor_batch": "NG-FED-001-20260812",
@@ -21,7 +21,11 @@
       "authority": "Free Software Foundation",
       "binding_force": "COPYRIGHT_LICENSE_CONDITIONS_WHEN_APPLICABLE",
       "source": "https://www.gnu.org/licenses/gpl-3.0.en.html",
-      "observed_points": ["GPL version 3", "copyleft license", "distribution/source obligations depend on use/distribution facts"],
+      "observed_points": [
+        "GPL version 3",
+        "copyleft license",
+        "distribution/source obligations depend on use/distribution facts"
+      ],
       "retrieved_at": "2026-08-12"
     },
     {
@@ -30,7 +34,11 @@
       "authority": "Open Source Initiative reference text",
       "binding_force": "COPYRIGHT_LICENSE_CONDITIONS_WHEN_APPLICABLE",
       "source": "https://opensource.org/license/mit",
-      "observed_points": ["MIT approved license", "permission grant", "copyright and permission notice condition"],
+      "observed_points": [
+        "MIT approved license",
+        "permission grant",
+        "copyright and permission notice condition"
+      ],
       "retrieved_at": "2026-08-12"
     },
     {
@@ -39,7 +47,12 @@
       "authority": "IETF",
       "binding_force": "INTERNET_STANDARD_TRACK_TECHNICAL_SPECIFICATION_NOT_STATUTE",
       "source": "https://datatracker.ietf.org/doc/html/rfc8628",
-      "observed_points": ["OAuth 2.0 Device Authorization Grant", "limited-input device use case", "native capable devices should follow RFC 8252 practices", "TLS requirements"],
+      "observed_points": [
+        "OAuth 2.0 Device Authorization Grant",
+        "limited-input device use case",
+        "native capable devices should follow RFC 8252 practices",
+        "TLS requirements"
+      ],
       "retrieved_at": "2026-08-12"
     },
     {
@@ -48,7 +61,11 @@
       "authority": "W3C",
       "binding_force": "W3C_RECOMMENDATION_UNLESS_INCORPORATED_BY_LAW_POLICY_OR_CONTRACT",
       "source": "https://www.w3.org/TR/WCAG22/",
-      "observed_points": ["W3C Recommendation", "accessibility success criteria", "A/AA/AAA conformance model"],
+      "observed_points": [
+        "W3C Recommendation",
+        "accessibility success criteria",
+        "A/AA/AAA conformance model"
+      ],
       "retrieved_at": "2026-08-12"
     }
   ],
@@ -59,14 +76,46 @@
       "path": "README.md",
       "source_blob": "README_FETCHED_CURRENT",
       "normative_atoms": [
-        {"domain":"license","candidate_sources":["GNU-GPL-3.0"],"state":"APPLICABILITY_CONFIRMED_AT_README_LEVEL","reason":"README declares fork of Termux and GPLv3 base/additions, while exceptions and component-level notices remain to be reconciled."},
-        {"domain":"upstream_attribution","state":"REFERENCE","reason":"README identifies original Termux project/authors/license and RAFCODE fork identity."},
-        {"domain":"privacy_data","state":"CONDITIONAL","reason":"terminal/app functionality can handle arbitrary user data, but repo README alone does not establish controller/processor role, telemetry, collection, transfer, retention or jurisdiction."},
-        {"domain":"security_release","state":"IMPLEMENTATION_REFERENCE","reason":"signing, BLAKE3 bootstrap verification and ABI policy are declared; this is not legal or security certification."},
-        {"domain":"accessibility","candidate_sources":["W3C-WCAG22"],"state":"TOKEN_VAZIO","reason":"Android-native UI accessibility requires platform-specific testing; WCAG may inform web/content surfaces but is not automatically the sole app accessibility rule."}
+        {
+          "domain": "license",
+          "candidate_sources": [
+            "GNU-GPL-3.0"
+          ],
+          "state": "APPLICABILITY_CONFIRMED_AT_README_LEVEL",
+          "reason": "README declares fork of Termux and GPLv3 base/additions, while exceptions and component-level notices remain to be reconciled."
+        },
+        {
+          "domain": "upstream_attribution",
+          "state": "REFERENCE",
+          "reason": "README identifies original Termux project/authors/license and RAFCODE fork identity."
+        },
+        {
+          "domain": "privacy_data",
+          "state": "CONDITIONAL",
+          "reason": "terminal/app functionality can handle arbitrary user data, but repo README alone does not establish controller/processor role, telemetry, collection, transfer, retention or jurisdiction."
+        },
+        {
+          "domain": "security_release",
+          "state": "IMPLEMENTATION_REFERENCE",
+          "reason": "signing, BLAKE3 bootstrap verification and ABI policy are declared; this is not legal or security certification."
+        },
+        {
+          "domain": "accessibility",
+          "candidate_sources": [
+            "W3C-WCAG22"
+          ],
+          "state": "TOKEN_VAZIO",
+          "reason": "Android-native UI accessibility requires platform-specific testing; WCAG may inform web/content surfaces but is not automatically the sole app accessibility rule."
+        }
       ],
-      "gaps": ["TOKEN_VAZIO_COMPONENT_LICENSE_MATRIX", "TOKEN_VAZIO_LICENSE_EXCEPTIONS_RECONCILIATION", "TOKEN_VAZIO_APP_DATA_FLOW", "TOKEN_VAZIO_PRIVACY_ROLE_JURISDICTION", "TOKEN_VAZIO_ACCESSIBILITY_TEST_SURFACE"],
-      "urgency":"P0"
+      "gaps": [
+        "TOKEN_VAZIO_COMPONENT_LICENSE_MATRIX",
+        "TOKEN_VAZIO_LICENSE_EXCEPTIONS_RECONCILIATION",
+        "TOKEN_VAZIO_APP_DATA_FLOW",
+        "TOKEN_VAZIO_PRIVACY_ROLE_JURISDICTION",
+        "TOKEN_VAZIO_ACCESSIBILITY_TEST_SURFACE"
+      ],
+      "urgency": "P0"
     },
     {
       "repo": "rafaelmeloreisnovo/RafGitTools",
@@ -74,17 +123,59 @@
       "path": "README.md",
       "source_blob": "README_FETCHED_CURRENT",
       "normative_atoms": [
-        {"domain":"license","candidate_sources":["GNU-GPL-3.0"],"state":"HUMAN_REVIEW","reason":"README declares GPL-3.0 for project and cites inspiration/dependencies with GPL-3.0 and Apache-2.0; component-level provenance and compatibility must be verified before distribution claim."},
-        {"domain":"oauth","candidate_sources":["IETF-RFC8628"],"state":"TECHNICAL_CONFORMANCE_TARGET","reason":"README explicitly declares OAuth Device Flow RFC 8628; runtime behavior must be tested against protocol/security requirements."},
-        {"domain":"privacy_data","state":"CLAIM_REVIEW_REQUIRED","reason":"README states Security & Privacy framework 'GDPR/CCPA compliant'; this is a legal/compliance claim that cannot be promoted from README or feature completion percentage alone."},
-        {"domain":"credentials_security","state":"P0_AUDIT_TARGET","reason":"PAT, OAuth, SSH keys, offline queue and repository sync imply sensitive credential/repository data flows requiring storage, logging, export and deletion review."},
-        {"domain":"accessibility","candidate_sources":["W3C-WCAG22"],"state":"PENDING","reason":"README lists accessibility as planned support while UI is implemented; applicable native Android accessibility requirements and test evidence remain unresolved."}
+        {
+          "domain": "license",
+          "candidate_sources": [
+            "GNU-GPL-3.0"
+          ],
+          "state": "HUMAN_REVIEW",
+          "reason": "README declares GPL-3.0 for project and cites inspiration/dependencies with GPL-3.0 and Apache-2.0; component-level provenance and compatibility must be verified before distribution claim."
+        },
+        {
+          "domain": "oauth",
+          "candidate_sources": [
+            "IETF-RFC8628"
+          ],
+          "state": "TECHNICAL_CONFORMANCE_TARGET",
+          "reason": "README explicitly declares OAuth Device Flow RFC 8628; runtime behavior must be tested against protocol/security requirements."
+        },
+        {
+          "domain": "privacy_data",
+          "state": "CLAIM_REVIEW_REQUIRED",
+          "reason": "README states Security & Privacy framework 'GDPR/CCPA compliant'; this is a legal/compliance claim that cannot be promoted from README or feature completion percentage alone."
+        },
+        {
+          "domain": "credentials_security",
+          "state": "P0_AUDIT_TARGET",
+          "reason": "PAT, OAuth, SSH keys, offline queue and repository sync imply sensitive credential/repository data flows requiring storage, logging, export and deletion review."
+        },
+        {
+          "domain": "accessibility",
+          "candidate_sources": [
+            "W3C-WCAG22"
+          ],
+          "state": "PENDING",
+          "reason": "README lists accessibility as planned support while UI is implemented; applicable native Android accessibility requirements and test evidence remain unresolved."
+        }
       ],
-      "conflicts":[
-        {"id":"NG-CONFLICT-003","type":"COMPLIANCE_CLAIM_WITHOUT_SCOPE_GATE","description":"README promotes GDPR/CCPA compliance while repo-level jurisdiction, data inventory, lawful basis, rights handling, retention, transfer and evidence gates are not established in this batch.","state":"CORRECTION_OR_EVIDENCE_REQUIRED"}
+      "conflicts": [
+        {
+          "id": "NG-CONFLICT-003",
+          "type": "COMPLIANCE_CLAIM_WITHOUT_SCOPE_GATE",
+          "description": "README promotes GDPR/CCPA compliance while repo-level jurisdiction, data inventory, lawful basis, rights handling, retention, transfer and evidence gates are not established in this batch.",
+          "state": "CORRECTION_OR_EVIDENCE_REQUIRED"
+        }
       ],
-      "gaps": ["TOKEN_VAZIO_PROVIDER_DATA_FLOW", "TOKEN_VAZIO_CREDENTIAL_STORAGE_MAP", "TOKEN_VAZIO_GDPR_SCOPE_GATE", "TOKEN_VAZIO_CCPA_SCOPE_GATE", "TOKEN_VAZIO_LICENSE_COMPONENT_MATRIX", "TOKEN_VAZIO_RFC8628_RUNTIME_CONFORMANCE", "TOKEN_VAZIO_ACCESSIBILITY_NATIVE_TESTS"],
-      "urgency":"P0"
+      "gaps": [
+        "TOKEN_VAZIO_PROVIDER_DATA_FLOW",
+        "TOKEN_VAZIO_CREDENTIAL_STORAGE_MAP",
+        "TOKEN_VAZIO_GDPR_SCOPE_GATE",
+        "TOKEN_VAZIO_CCPA_SCOPE_GATE",
+        "TOKEN_VAZIO_LICENSE_COMPONENT_MATRIX",
+        "TOKEN_VAZIO_RFC8628_RUNTIME_CONFORMANCE",
+        "TOKEN_VAZIO_ACCESSIBILITY_NATIVE_TESTS"
+      ],
+      "urgency": "P0"
     },
     {
       "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
@@ -92,14 +183,43 @@
       "path": "README.md",
       "source_blob": "3948bac4776dc43dcba2a539de085e07388cddc5",
       "normative_atoms": [
-        {"domain":"release_governance","state":"STRONG_REFERENCE","reason":"README separates official signed release from internal unsigned/debug tracks and requires evidence ledger."},
-        {"domain":"secrets","state":"P0_AUDIT_TARGET","reason":"release secrets are explicitly named; workflow/log masking, secret retention and provenance must be verified."},
-        {"domain":"license","state":"TOKEN_VAZIO","reason":"README excerpt audited here does not establish complete app/engine/upstream license matrix."},
-        {"domain":"privacy_data","state":"CONDITIONAL","reason":"VM app may access VM images/files/network, but data processing facts and jurisdictions require code/config review."},
-        {"domain":"accessibility","candidate_sources":["W3C-WCAG22"],"state":"CONDITIONAL","reason":"navigation includes compliance audience but no accessibility conformance evidence is established by README."}
+        {
+          "domain": "release_governance",
+          "state": "STRONG_REFERENCE",
+          "reason": "README separates official signed release from internal unsigned/debug tracks and requires evidence ledger."
+        },
+        {
+          "domain": "secrets",
+          "state": "P0_AUDIT_TARGET",
+          "reason": "release secrets are explicitly named; workflow/log masking, secret retention and provenance must be verified."
+        },
+        {
+          "domain": "license",
+          "state": "TOKEN_VAZIO",
+          "reason": "README excerpt audited here does not establish complete app/engine/upstream license matrix."
+        },
+        {
+          "domain": "privacy_data",
+          "state": "CONDITIONAL",
+          "reason": "VM app may access VM images/files/network, but data processing facts and jurisdictions require code/config review."
+        },
+        {
+          "domain": "accessibility",
+          "candidate_sources": [
+            "W3C-WCAG22"
+          ],
+          "state": "CONDITIONAL",
+          "reason": "navigation includes compliance audience but no accessibility conformance evidence is established by README."
+        }
       ],
-      "gaps": ["TOKEN_VAZIO_LICENSE_MATRIX", "TOKEN_VAZIO_VM_DATA_FLOW", "TOKEN_VAZIO_SECRET_HANDLING_EVIDENCE", "TOKEN_VAZIO_ACCESSIBILITY_GATE", "TOKEN_VAZIO_DISTRIBUTION_JURISDICTION"],
-      "urgency":"P1"
+      "gaps": [
+        "TOKEN_VAZIO_LICENSE_MATRIX",
+        "TOKEN_VAZIO_VM_DATA_FLOW",
+        "TOKEN_VAZIO_SECRET_HANDLING_EVIDENCE",
+        "TOKEN_VAZIO_ACCESSIBILITY_GATE",
+        "TOKEN_VAZIO_DISTRIBUTION_JURISDICTION"
+      ],
+      "urgency": "P1"
     },
     {
       "repo": "rafaelmeloreisnovo/llamaRafaelia",
@@ -107,14 +227,43 @@
       "path": "README.md",
       "source_blob": "7f07a60cce3bc653a6c6b040f1f0f449de947155",
       "normative_atoms": [
-        {"domain":"license","candidate_sources":["OSI-MIT"],"state":"APPLICABILITY_CONFIRMED_AT_README_LEVEL","reason":"README declares llama.cpp fork under MIT and identifies RAFAELIA additions; actual notices/source boundaries still require file-level reconciliation."},
-        {"domain":"ai_governance","state":"TOKEN_VAZIO","reason":"runtime/LLM integration exists, but deployment purpose, users, data, jurisdictions and model behavior are not established by README."},
-        {"domain":"privacy_data","state":"CONDITIONAL","reason":"potential inference inputs may be personal data; no data-flow facts are established in this batch."},
-        {"domain":"ethics_contract","state":"IMPLEMENTATION_GAP","reason":"README explicitly says raf_ethica contracts remain JSON-only and C implementation pending."},
-        {"domain":"upstream_integrity","state":"P0_AUDIT_TARGET","reason":"fork boundary is declared; opt-in/off behavior and minimal upstream mutation should be tested rather than inferred."}
+        {
+          "domain": "license",
+          "candidate_sources": [
+            "OSI-MIT"
+          ],
+          "state": "APPLICABILITY_CONFIRMED_AT_README_LEVEL",
+          "reason": "README declares llama.cpp fork under MIT and identifies RAFAELIA additions; actual notices/source boundaries still require file-level reconciliation."
+        },
+        {
+          "domain": "ai_governance",
+          "state": "TOKEN_VAZIO",
+          "reason": "runtime/LLM integration exists, but deployment purpose, users, data, jurisdictions and model behavior are not established by README."
+        },
+        {
+          "domain": "privacy_data",
+          "state": "CONDITIONAL",
+          "reason": "potential inference inputs may be personal data; no data-flow facts are established in this batch."
+        },
+        {
+          "domain": "ethics_contract",
+          "state": "IMPLEMENTATION_GAP",
+          "reason": "README explicitly says raf_ethica contracts remain JSON-only and C implementation pending."
+        },
+        {
+          "domain": "upstream_integrity",
+          "state": "P0_AUDIT_TARGET",
+          "reason": "fork boundary is declared; opt-in/off behavior and minimal upstream mutation should be tested rather than inferred."
+        }
       ],
-      "gaps": ["TOKEN_VAZIO_LICENSE_NOTICE_RECONCILIATION", "TOKEN_VAZIO_MODEL_DATA_FLOW", "TOKEN_VAZIO_DEPLOYMENT_JURISDICTION", "TOKEN_VAZIO_RAF_ETHICA_RUNTIME", "TOKEN_VAZIO_UPSTREAM_OFF_EQUIVALENCE"],
-      "urgency":"P1"
+      "gaps": [
+        "TOKEN_VAZIO_LICENSE_NOTICE_RECONCILIATION",
+        "TOKEN_VAZIO_MODEL_DATA_FLOW",
+        "TOKEN_VAZIO_DEPLOYMENT_JURISDICTION",
+        "TOKEN_VAZIO_RAF_ETHICA_RUNTIME",
+        "TOKEN_VAZIO_UPSTREAM_OFF_EQUIVALENCE"
+      ],
+      "urgency": "P1"
     },
     {
       "repo": "rafaelmeloreisnovo/papers",
@@ -122,29 +271,64 @@
       "path": "README.md",
       "source_blob": "414d5f9d577823d2c9d3e1bdd788bb1957d1ff20",
       "normative_atoms": [
-        {"domain":"license","candidate_sources":["OSI-MIT"],"state":"APPLICABILITY_CONFIRMED_AT_README_LEVEL","reason":"README declares MIT; full artifact/source third-party provenance remains separate."},
-        {"domain":"research_integrity","state":"STRONG_REFERENCE","reason":"README explicitly separates external literature, local evidence, claims and TOKEN_VAZIO for active notes."},
-        {"domain":"privacy_data","state":"P0_AUDIT_TARGET","reason":"README references private self-report methodological material and says direct identifiers/raw screenshots/item answers are not copied; verify pointer-only policy and repository contents."},
-        {"domain":"health_neuroscience","state":"HUMAN_REVIEW","reason":"neuroscience/psychophysiology documents can intersect health/biomedical norms, but README explicitly blocks clinical claims; WHO/medical-research applicability must not be assumed without study/intervention context."},
-        {"domain":"child_protection","state":"TOKEN_VAZIO","reason":"no subject age established for research/self-report material; protected-subject gate activates only with evidence."}
+        {
+          "domain": "license",
+          "candidate_sources": [
+            "OSI-MIT"
+          ],
+          "state": "APPLICABILITY_CONFIRMED_AT_README_LEVEL",
+          "reason": "README declares MIT; full artifact/source third-party provenance remains separate."
+        },
+        {
+          "domain": "research_integrity",
+          "state": "STRONG_REFERENCE",
+          "reason": "README explicitly separates external literature, local evidence, claims and TOKEN_VAZIO for active notes."
+        },
+        {
+          "domain": "privacy_data",
+          "state": "P0_AUDIT_TARGET",
+          "reason": "README references private self-report methodological material and says direct identifiers/raw screenshots/item answers are not copied; verify pointer-only policy and repository contents."
+        },
+        {
+          "domain": "health_neuroscience",
+          "state": "HUMAN_REVIEW",
+          "reason": "neuroscience/psychophysiology documents can intersect health/biomedical norms, but README explicitly blocks clinical claims; WHO/medical-research applicability must not be assumed without study/intervention context."
+        },
+        {
+          "domain": "child_protection",
+          "state": "TOKEN_VAZIO",
+          "reason": "no subject age established for research/self-report material; protected-subject gate activates only with evidence."
+        }
       ],
-      "gaps": ["TOKEN_VAZIO_PRIVATE_POINTER_CONTENT_AUDIT", "TOKEN_VAZIO_RESEARCH_SUBJECT_CLASSIFICATION", "TOKEN_VAZIO_HEALTH_RESEARCH_APPLICABILITY", "TOKEN_VAZIO_CHILD_SUBJECT_PRESENCE", "TOKEN_VAZIO_THIRD_PARTY_PROVENANCE"],
-      "urgency":"P0"
+      "gaps": [
+        "TOKEN_VAZIO_PRIVATE_POINTER_CONTENT_AUDIT",
+        "TOKEN_VAZIO_RESEARCH_SUBJECT_CLASSIFICATION",
+        "TOKEN_VAZIO_HEALTH_RESEARCH_APPLICABILITY",
+        "TOKEN_VAZIO_CHILD_SUBJECT_PRESENCE",
+        "TOKEN_VAZIO_THIRD_PARTY_PROVENANCE"
+      ],
+      "urgency": "P0"
     }
   ],
   "conflicts": [
     {
-      "id":"NG-CONFLICT-003",
-      "type":"COMPLIANCE_CLAIM_WITHOUT_SCOPE_GATE",
-      "repo":"rafaelmeloreisnovo/RafGitTools",
-      "state":"CORRECTION_OR_EVIDENCE_REQUIRED"
+      "id": "NG-CONFLICT-003",
+      "type": "COMPLIANCE_CLAIM_WITHOUT_SCOPE_GATE",
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "state": "CORRECTION_OR_EVIDENCE_REQUIRED"
     }
   ],
   "cursor": {
     "repos_processed_total_in_normative_batches": 10,
     "repos_processed_this_batch": 5,
-    "coverage_status":"INCOMPLETE",
-    "next_priority":["Rafaelia_Private","RafPolimata","qemu_rafaelia","ZIPRAF_OMEGA_FULL","termux-api_rafcodephi"]
+    "coverage_status": "INCOMPLETE",
+    "next_priority": [
+      "Rafaelia_Private",
+      "RafPolimata",
+      "qemu_rafaelia",
+      "ZIPRAF_OMEGA_FULL",
+      "termux-api_rafcodephi"
+    ]
   },
   "F_ok": [
     "5 additional repositories anchored by current README/ref",
