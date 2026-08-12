@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/NORMATIVE_GRAPH_FEDERATED_BATCH_V1.schema.json",
+  "title": "NORMATIVE_GRAPH_FEDERATED_BATCH_V1",
+  "description": "Append-only envelope for evidence-first federated normative-graph repository batches. It does not promote legal applicability or compliance.",
+  "type": "object",
+  "required": ["schema_version", "batch_id", "generated_at", "claim_allowed", "invariants", "F_ok", "F_gap", "F_next"],
+  "properties": {
+    "schema_version": {"const": "NORMATIVE_GRAPH_FEDERATED_BATCH_V1"},
+    "batch_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "minLength": 1},
+    "predecessor_batch": {"type": "string", "minLength": 1},
+    "mode": {"type": "string"},
+    "claim_allowed": {"const": false},
+    "invariants": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "official_source_anchors": {"type": "array", "items": {"$ref": "#/$defs/OfficialSourceAnchor"}},
+    "repository_coverage": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/CoverageRepository"}},
+    "repositories": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/FindingRepository"}},
+    "conflicts": {"type": "array", "items": {"type": "object"}},
+    "external_source_updates": {"type": "array", "items": {"type": "object"}},
+    "coverage": {"type": "object"},
+    "cursor": {"type": "object"},
+    "F_ok": {"type": "array", "items": {"type": "string"}},
+    "F_gap": {"type": "array", "items": {"type": "string"}},
+    "F_next": {"type": "string", "minLength": 1},
+    "uncertainty_delta": {"type": "string"},
+    "conflict_delta": {"type": "string"}
+  },
+  "oneOf": [
+    {"required": ["repository_coverage"], "not": {"required": ["repositories"]}},
+    {"required": ["repositories"], "not": {"required": ["repository_coverage"]}}
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "OfficialSourceAnchor": {
+      "type": "object",
+      "required": ["id", "type", "authority", "binding_force", "source", "retrieved_at"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"type": "string", "minLength": 1},
+        "authority": {"type": "string", "minLength": 1},
+        "binding_force": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "retrieved_at": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    },
+    "CoverageRepository": {
+      "type": "object",
+      "required": ["repo", "ref", "normative_atoms", "gaps"],
+      "properties": {
+        "repo": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+        "ref": {"type": "string", "minLength": 1},
+        "path": {"type": "string"},
+        "source_blob": {"type": "string"},
+        "normative_atoms": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+        "conflicts": {"type": "array", "items": {"type": "object"}},
+        "gaps": {"type": "array", "items": {"type": "string"}},
+        "urgency": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "FindingRepository": {
+      "type": "object",
+      "required": ["repository", "ref", "normative_atoms", "evidence_gate", "f_next"],
+      "properties": {
+        "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+        "ref": {"type": "string", "minLength": 1},
+        "paths": {"type": "array", "items": {"type": "string"}},
+        "normative_atoms": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+        "conflicts": {"type": "array", "items": {"type": "object"}},
+        "evidence_gate": {"enum": ["PASS", "FAIL", "PARTIAL", "TOKEN_VAZIO", "HUMAN_REVIEW"]},
+        "f_next": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    }
+  }
+}
