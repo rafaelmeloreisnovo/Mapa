@@ -29,19 +29,35 @@ def expect(name, doc, ok):
 
 def main():
     expect("valid-public-reviewed", manifest(), True)
+
     x = manifest(); x["default_policy"] = "ALLOW"
     expect("default-allow-rejected", x, False)
+
     x = manifest(); x["items"][0]["visibility"] = "PRIVATE"
     expect("private-release-rejected", x, False)
+
     x = manifest(); x["items"][0]["review_receipt"] = ""
     expect("release-without-review-rejected", x, False)
+
     x = manifest(); x["items"][0]["release_allowed"] = False
     expect("explicit-deny-accepted", x, True)
+
     x = manifest(); x["claim_allowed"] = True
     expect("claim-allowed-true-rejected", x, False)
+
     x = manifest(); x["items"].append(dict(x["items"][0]))
     expect("duplicate-path-rejected", x, False)
-    print("PASS 7/7")
+
+    for name, bad_path in [
+        ("parent-traversal-rejected", "../secret.txt"),
+        ("absolute-path-rejected", "/etc/passwd"),
+        ("dot-segment-rejected", "docs/public/../private/secret.txt"),
+        ("backslash-path-rejected", r"..\secret.txt"),
+    ]:
+        x = manifest(); x["items"][0]["path"] = bad_path
+        expect(name, x, False)
+
+    print("PASS 11/11")
 
 if __name__ == "__main__":
     main()
