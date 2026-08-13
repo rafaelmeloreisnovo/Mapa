@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "ULAM-RAFAEL-CROSSREPO-2026-08-12-V1",
+  "timestamp_context": "2026-08-12T23:15:00-03:00",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "branch": "audit/ulam-rafael-prime-20260812",
+  "artifacts": [
+    {
+      "repo": "rafaelmeloreisnovo/Matem-tica-",
+      "path": "docs/formal/RAFAELIANA_PRIME_FACTOR_THEOREM_V1.md",
+      "commit": "f7a2ca57a64c44c4c832346f59e832a8bd7adbba",
+      "role": "formal_math"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Matem-tica-",
+      "path": "src/verify_rafaeliana_prime_factor.py",
+      "commit": "a60de567f841b58123f047b26793929e41ae0c04",
+      "role": "finite_verifier"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/papers",
+      "path": "docs/matematica_autoral/ULAM_RAF_SAMPLER_RESEARCH_PROTOCOL_V1.md",
+      "commit": "a6ef3e700cda77b0ba18be32360c013136216059",
+      "role": "research_protocol"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/papers",
+      "path": "src/experiments/ulam_raf_sampler.py",
+      "commit": "0949eb5a7d6332f2053e7e49ed296d88e5114739",
+      "github_blob_sha": "602dc593bc155def9cdb49ef3efe0b49af9abf79",
+      "role": "reference_implementation"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/papers",
+      "path": "tests/test_ulam_raf_sampler.py",
+      "commit": "493812cf714a383f3123b6cf64197e11839f9444",
+      "role": "test_contract"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "path": "data/formulas/RAFAELIA_FORMULA_ULAM_DELTA_2026-08-12.v1.json",
+      "commit": "9d06e8cebf9c7b782c0989a2b59166538d3c213c",
+      "role": "formula_delta"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "path": "indices/ULAM_RAFAEL_PRIME_CROSSREPO_V1.md",
+      "commit": "723bee0e079149734f2852ef4705f5fad93714d7",
+      "role": "crossrepo_index"
+    }
+  ],
+  "execution": {
+    "formal_identity_check_in_assistant_reference_environment": "PASS",
+    "exact_git_branch_runtime": "TOKEN_VAZIO_NOT_EXECUTED",
+    "github_actions": "TOKEN_VAZIO_NOT_EXECUTED",
+    "android_termux": "TOKEN_VAZIO_NOT_EXECUTED",
+    "independent_replication": "TOKEN_VAZIO"
+  },
+  "observed_reference_metrics_not_promoted": {
+    "parameters": {
+      "limit": 10000,
+      "steps": 128,
+      "seed": 20260812,
+      "start": 1
+    },
+    "note": "Logic-equivalent reference replay in assistant Python environment; not an exact-byte Git branch execution receipt.",
+    "walk_prime_hit_rate": {
+      "fine_fibonacci": 0.0546875,
+      "gap_fibonacci": 0.203125,
+      "rafaeliana": 0.1328125,
+      "prime_jumps": 0.1796875,
+      "uniform_random": 0.09375
+    },
+    "claim": "DESCRIPTIVE_ONLY"
+  },
+  "invariants": [
+    "formula != implementation != execution != evidence != claim",
+    "TOKEN_VAZIO is preserved when exact execution is absent",
+    "historical prime/spiral named kernels are not silently reclassified as algorithms",
+    "bibliographic novelty remains unclaimed"
+  ]
+}
