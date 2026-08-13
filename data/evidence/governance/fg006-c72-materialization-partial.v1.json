@@ -1,0 +1,29 @@
+{
+  "schema": "RAFAELIA_FG006_C72_PARTIAL_MATERIALIZATION_V1",
+  "claim_allowed": false,
+  "cycle_id": "OMEGA-ANTI-REGRESSION-C73",
+  "predecessor_cycle": "C72",
+  "owner_repo": "rafaelmeloreisnovo/Mapa",
+  "branch": "audit/cross-provider-chain-c72-20260813",
+  "base_sha": "6c2df5fbf341f9c8bb3eb4c879ca93518facee91",
+  "materialized": [
+    {
+      "path": "data/governance/cross-provider-chain-c70.v1.json",
+      "commit_sha": "6c812507859390814701307a0157a110b504f62e",
+      "git_blob_sha1": "558dacf641d0dfb7a8012470d6ed1f8307d95add",
+      "expected_sha256_from_c72": "66ba5924bc9e33585eab43de8fecdb68ef471533768196223d34e159f7ebe38d"
+    }
+  ],
+  "blocked": [
+    {
+      "path": "tools/validate_cross_provider_chain.py",
+      "state": "BLOCKED_BY_CONNECTOR_SAFETY_CONTROL_BEFORE_MUTATION"
+    },
+    {
+      "path": "tests/test_cross_provider_chain.py",
+      "state": "TOKEN_VAZIO_NOT_MATERIALIZED"
+    }
+  ],
+  "closure_boundary": "This record proves partial GitHub materialization only. It does not close FG-006, validator materialization, test materialization, or provider-side execution.",
+  "next_probe": "Materialize validator and tests on the same isolated branch, refetch all three artifacts, and require 8/8 PASS before opening or promoting any broad FG006 claim."
+}
