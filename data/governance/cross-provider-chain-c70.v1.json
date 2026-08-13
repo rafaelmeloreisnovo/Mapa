@@ -1,0 +1,100 @@
+{
+  "chain_id": "FG006-C70-CROSS-PROVIDER-001",
+  "claim_allowed": false,
+  "closure_scope": "FG006_SINGLE_CHAIN_MICROGAP_ONLY",
+  "edges": [
+    {
+      "from": "github-c70-commit",
+      "to": "github-c70-workflow",
+      "type": "CONTAINS"
+    },
+    {
+      "from": "github-c70-commit",
+      "to": "github-c70-negative-fixture",
+      "type": "CONTAINS"
+    },
+    {
+      "from": "github-c70-workflow",
+      "to": "drive-c70-receipt",
+      "type": "EVIDENCED_BY"
+    },
+    {
+      "from": "github-c70-negative-fixture",
+      "to": "drive-c70-receipt",
+      "type": "EVIDENCED_BY"
+    }
+  ],
+  "limitations": [
+    "This proves one bounded cross-provider chain only.",
+    "It does not close FG-006 repository-wide.",
+    "Google Docs export-byte identity is not asserted; the Drive node uses the embedded receipt_body_sha256."
+  ],
+  "nodes": [
+    {
+      "generator": "GitHub git provider",
+      "hash": {
+        "algorithm": "GIT_COMMIT_SHA1",
+        "value": "2a17e2db651e0a69816661aa60ccf35e755184de"
+      },
+      "id": "github-c70-commit",
+      "observed_at": "2026-08-13T16:00:00Z",
+      "parent_ids": [],
+      "path": null,
+      "provider": "GITHUB",
+      "provider_id": "rafaelmeloreisnovo/Mapa@2a17e2db651e0a69816661aa60ccf35e755184de",
+      "ref": "2a17e2db651e0a69816661aa60ccf35e755184de"
+    },
+    {
+      "generator": "GitHub contents provider",
+      "hash": {
+        "algorithm": "GIT_BLOB_SHA1",
+        "value": "24d8fc4c96e39b40d93aefb1032a9896cf2da778"
+      },
+      "id": "github-c70-workflow",
+      "observed_at": "2026-08-13T16:00:00Z",
+      "parent_ids": [
+        "github-c70-commit"
+      ],
+      "path": ".github/workflows/release-boundary-gate.yml",
+      "provider": "GITHUB",
+      "provider_id": "rafaelmeloreisnovo/Mapa@2a17e2db651e0a69816661aa60ccf35e755184de:.github/workflows/release-boundary-gate.yml",
+      "ref": "2a17e2db651e0a69816661aa60ccf35e755184de"
+    },
+    {
+      "generator": "GitHub contents provider",
+      "hash": {
+        "algorithm": "GIT_BLOB_SHA1",
+        "value": "8793e9459ec4ebfa8e9e29ddd1cf7d242531b705"
+      },
+      "id": "github-c70-negative-fixture",
+      "observed_at": "2026-08-13T16:00:00Z",
+      "parent_ids": [
+        "github-c70-commit"
+      ],
+      "path": "data/governance/fixtures/release-boundary-deny-negative.v1.json",
+      "provider": "GITHUB",
+      "provider_id": "rafaelmeloreisnovo/Mapa@2a17e2db651e0a69816661aa60ccf35e755184de:data/governance/fixtures/release-boundary-deny-negative.v1.json",
+      "ref": "2a17e2db651e0a69816661aa60ccf35e755184de"
+    },
+    {
+      "generator": "RAFAELIA executive cycle C70",
+      "hash": {
+        "algorithm": "SHA256_RECEIPT_BODY",
+        "value": "92c5240a27eef475178ab14b9ab2649d06ed6093eb7219401f5c3d7add99289b"
+      },
+      "id": "drive-c70-receipt",
+      "observed_at": "2026-08-13T16:09:07Z",
+      "parent_ids": [
+        "github-c70-workflow",
+        "github-c70-negative-fixture"
+      ],
+      "path": "RAFAELIA — Receipt Executivo C70 — 2026-08-13",
+      "provider": "GOOGLE_DRIVE",
+      "provider_id": "1MX-eS08Ft5g4Jj9y1iAwl1AVxOY6Hc4CTvP31OmRyeE",
+      "ref": null
+    }
+  ],
+  "schema": "RAFAELIA_CROSS_PROVIDER_CHAIN_V1",
+  "scope": "bounded C70 release-boundary evidence chain only",
+  "version": 1
+}
