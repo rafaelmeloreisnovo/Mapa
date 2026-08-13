@@ -1,0 +1,22 @@
+{
+  "schema_version":"NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch":17,
+  "date":"2026-08-13",
+  "claim_allowed":false,
+  "coverage_before":80,
+  "coverage_after":85,
+  "invariants":["Universalidade != Uniformidade","upstream license != local fork license proof","implementation != execution != evidence != conformance != certification","TOKEN_VAZIO closes only by evidence"],
+  "repos":[
+    {"repo":"rafaelmeloreisnovo/androidRom","ref":"lineage-23.0","anchors":["README.mkdn@aa420694436e5755f6c2562cafeb137ecabc92e2","default.xml@feb0766fd401ce18a8634c4113dea7855f511660"],"role":"LineageOS repository manifest","license_state":"TOKEN_VAZIO_REPO_WIDE","finding":"manifest identity does not prove component licenses or a successful ROM build","next_gate":"project inventory -> immutable revisions -> component licenses/notices -> local overrides"},
+    {"repo":"rafaelmeloreisnovo/ROM-emulator","ref":"main","anchors":["README.md@612017ab455520dc594c3373b92815166aea8d72","LICENSE@258c60ea49d6d62540d2df307bceebd9d3fbd417"],"role":"Arduino ROM/RAM emulator hardware/firmware/tools","license_state":"BSD-2-Clause OBSERVED","finding":"hardware v1.3 is documented as testing; this is not safety certification","next_gate":"BOM/provenance + controlled hardware test receipt"},
+    {"repo":"rafaelmeloreisnovo/UserLAnd2","ref":"master","anchors":["README.md@a32711f36652a27b4c8737a4aa7e3dbc208f2e59","LICENSE@7e951d445341a81d767cba862133b3ddb040ca40"],"role":"Android Linux environment without root","license_state":"GPLv3 project + Apache-2.0 derived component; external assets unresolved","finding":"root license cannot be silently extended to distro/application assets hosted separately","next_gate":"asset source/version/license/hash matrix + fork data-flow audit"},
+    {"repo":"rafaelmeloreisnovo/gradle","ref":"master","anchors":["README.md@453e42dc3efc6712a0fc897c390f7c945248a127","LICENSE@f433b1a53f5b830a205fd2df78e2b34974656c7b"],"role":"Gradle build automation tree","license_state":"Apache-2.0 OBSERVED","finding":"build-tool presence does not prove downstream reproducibility, security or license compliance","next_gate":"upstream ancestry/local diff + NOTICE/third-party inventory + reproducible build receipt"},
+    {"repo":"rafaelmeloreisnovo/arxiv-docs","ref":"develop","anchors":["README.md@1028cad56b015ab8b062146f6270959b1e44b493","LICENSE@7e8ff6ea772d9f661fa704930f001ff19aca4b81"],"role":"public arXiv documentation source/deployment workflow","license_state":"MIT OBSERVED","finding":"documentation review/deployment governance is not scientific validation of deposited works","next_gate":"fork ancestry/local diff + third-party docs/assets inventory"}
+  ],
+  "function_refinements":{"resolve_jurisdiction":"derive scope from actor/distribution/data/deployment, not repository name","resolve_authority_hierarchy":"license, project governance and platform policy remain distinct authorities","semantic_contextualize":"buildable/tested/no-root/public/supported stay scoped to documented conditions","detect_normative_conflict":"flag repo-wide license assumptions when components/assets are mixed or unknown","evidence_and_conformance_gate":"require exact source/ref, delivered artifact mapping, license/notice chain and relevant test evidence","temporal_validity":"bind conclusions to observed refs/blobs","provenance_chain":"repo/ref/path/blob -> role -> normative atom -> applicability -> obligation -> evidence -> status"},
+  "uncertainty_delta":{"reduced":9,"created_or_refined":8},
+  "conflict_delta":["androidRom upstream identity != repo-wide license proof","UserLAnd2 mixed licenses/assets require component resolution","arxiv-docs publication workflow != scientific validation"],
+  "F_ok":"85 repositories cumulatively covered; five new repositories anchored",
+  "F_gap":"component/asset license graphs, fork diffs, delivered-artifact obligations and runtime evidence remain open",
+  "F_next":"continue next unprocessed federated cursor prioritizing upstream forks, binary distribution, missing/conflicting licenses and compliance claims"
+}

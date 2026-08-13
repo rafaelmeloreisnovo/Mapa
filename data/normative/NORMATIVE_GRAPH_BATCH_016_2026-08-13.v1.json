@@ -1,0 +1,168 @@
+{
+  "schema_version": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch_id": "016",
+  "generated_at": "2026-08-13T08:49:18-03:00",
+  "claim_allowed": false,
+  "cumulative_repo_coverage": 80,
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "privacy claim != privacy conformance",
+    "code license != model/data license",
+    "algorithm implementation != standards conformance != certification",
+    "biometric signal != secret != standalone authenticator",
+    "consent artifact != legally sufficient consent in every jurisdiction",
+    "obsolete standard reference must not be promoted as current",
+    "human dignity/child protection are high-priority gates, not automatic universal override rules",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/florisboard",
+      "ref": "main",
+      "anchors": [
+        {"path":"README.md","blob_sha":"bdb055907ca2536adaf2cf5160c72154c2255b27"},
+        {"path":"LICENSE","blob_sha":"451d6a11c045e68d2f2e2e5a9fcb02ffc6447005"}
+      ],
+      "declared_role": "Android keyboard with clipboard history, extensions and privacy-oriented positioning",
+      "license": {"state":"OBSERVED","type":"Apache-2.0","scope":"repository work subject to file/component notices"},
+      "normative_atoms": [
+        {"type":"SOFTWARE_LICENSE","authority":"Apache License 2.0","binding_force":"PRIVATE_LICENSE","jurisdiction":"contract/copyright scope"},
+        {"type":"PLATFORM_POLICY","authority":"Google Play/F-Droid distribution policies when those channels are used","binding_force":"PLATFORM_OR_DISTRIBUTION_CONDITION","jurisdiction":"channel-specific"},
+        {"type":"PRIVACY_DATA_PROCESSING","authority":"applicable privacy law depends on actual controller, user location and data flows","binding_force":"CONTEXT_DEPENDENT","jurisdiction":"TOKEN_VAZIO until deployment/data flow resolved"}
+      ],
+      "conflicts": [
+        {"id":"B016-C01","type":"PRIVACY_POSITIONING_VS_FORK_SPECIFIC_EVIDENCE","state":"TOKEN_VAZIO","reason":"README says FlorisBoard fully respects privacy, but this batch did not establish a fork-specific data-flow/permission/network audit or prove that local modifications preserve upstream privacy behavior."}
+      ],
+      "protected_subject_gate":"HIGH_PRIORITY_IF_CHILD_USER_OR_CHILD_CLIPBOARD/INPUT_DATA_IS_ESTABLISHED; no child subject inferred",
+      "privacy_gate":"P0_FOR_KEYSTROKE_CLIPBOARD_AND_EXTENSION_DATA; require permission inventory, network endpoints, retention, local/remote processing and fork-diff evidence",
+      "evidence_state":"LICENSE_VERIFIED_PRIVACY_RUNTIME_UNVERIFIED"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/TinyGPT",
+      "ref":"main",
+      "anchors":[
+        {"path":"README.md","blob_sha":"a1b464869507beba4afee720b7089ad551ed6230"},
+        {"path":"LICENSE","blob_sha":"fec81da43f050598197e76cfb1fcb067d0600d4a"}
+      ],
+      "declared_role":"C++ LLM inference implementation supporting several external model families",
+      "license":{"state":"OBSERVED","type":"MIT","scope":"TinyGPT code; does not by itself license downloaded model weights/tokenizers/datasets"},
+      "normative_atoms":[
+        {"type":"SOFTWARE_LICENSE","authority":"MIT License","binding_force":"PRIVATE_LICENSE","jurisdiction":"copyright scope"},
+        {"type":"MODEL_DEPENDENCY","authority":"each external Hugging Face model repository/license","binding_force":"MODEL_SPECIFIC","jurisdiction":"license/deployment-specific"}
+      ],
+      "conflicts":[
+        {"id":"B016-C02","type":"CODE_LICENSE_VS_MODEL_LICENSE_BOUNDARY","state":"HUMAN_REVIEW","reason":"README instructs downloading GPT-2, Llama, Qwen and Mistral model assets. TinyGPT MIT code license does not establish rights/conditions for each external model, tokenizer or dataset."},
+        {"id":"B016-C03","type":"BENCHMARK_CLAIM_SCOPE","state":"PARTIAL","reason":"README reports tokenizer speed against other libraries on one stated machine/script; this is a bounded benchmark claim, not general performance superiority across hardware/workloads."}
+      ],
+      "protected_subject_gate":"MODEL_OUTPUT_USE_CASE_DEPENDENT; no child subject inferred",
+      "privacy_gate":"TOKEN_VAZIO until prompts/logging/model acquisition/deployment data flows are observed",
+      "evidence_state":"CODE_LICENSE_VERIFIED_MODEL_RIGHTS_PER_ASSET_UNRESOLVED"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/DeepSeek-RafCoder",
+      "ref":"main",
+      "anchors":[
+        {"path":"README.md","blob_sha":"759a9ff7b1f20d2afc19b1b807acf7bf306b27a1"},
+        {"path":"LICENSE-CODE","blob_sha":"5c2f7eb5b602a6a6b38fc65cd947281923783912"},
+        {"path":"LICENSE-MODEL","blob_sha":"9489e95c444dd3a396ec884bfd8afa719e59160f"}
+      ],
+      "declared_role":"RAFAELOS native runtime research with DeepSeek Coder legacy/model compatibility",
+      "license":{"state":"SPLIT_LICENSE_OBSERVED","code":"MIT header plus appended RAFAELIA philosophical text in LICENSE-CODE","model":"DeepSeek License Agreement v1.0 with use-based restrictions and PRC governing law"},
+      "normative_atoms":[
+        {"type":"SOFTWARE_LICENSE","authority":"MIT text in LICENSE-CODE","binding_force":"PRIVATE_LICENSE","notes":"appended non-license philosophical material creates document hygiene/authority ambiguity but does not silently amend MIT grant unless operative terms are made explicit"},
+        {"type":"MODEL_LICENSE","authority":"DeepSeek License Agreement v1.0","binding_force":"PRIVATE_LICENSE_WITH_USE_RESTRICTIONS","jurisdiction":"PRC governing law; Hangzhou court clause stated in license"},
+        {"type":"CHILD_PROTECTION_POLICY","authority":"README governance + model license restricted-use clause","binding_force":"INTERNAL_POLICY_PLUS_PRIVATE_LICENSE","notes":"not public international law"}
+      ],
+      "conflicts":[
+        {"id":"B016-C04","type":"LICENSE_FILE_SEMANTIC_CONTAMINATION","state":"CORRECTION_RECOMMENDED","reason":"LICENSE-CODE contains the MIT text followed by extensive philosophical/technical prose. Separate licensing terms from manifesto/reference text to avoid ambiguity in automated compliance and downstream reuse."},
+        {"id":"B016-C05","type":"MODEL_DATA_RIGHTS_BOUNDARY","state":"TOKEN_VAZIO","reason":"LICENSE-MODEL explicitly states Data is not licensed under that license and warns that model content may include personal information/IP. Dataset/model-card provenance and actual assets used by RAFAELOS remain to be inventoried."}
+      ],
+      "protected_subject_gate":"HIGH_PRIORITY; model license itself prohibits exploitation/harm of minors, while legal child-protection duties remain jurisdiction-specific",
+      "privacy_gate":"HUMAN_REVIEW for any model/prompt/output containing personal information; actual runtime logging/storage remains TOKEN_VAZIO",
+      "evidence_state":"SPLIT_LICENSE_VERIFIED_RUNTIME_AND_ASSET_PROVENANCE_PARTIAL"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/IA_nist",
+      "ref":"main",
+      "anchors":[
+        {"path":"README.md","blob_sha":"TOKEN_VAZIO_EXACT_SHA_NOT_CAPTURED_IN_TRUNCATED_FETCH"},
+        {"path":"LICENSE","blob_sha":"TOKEN_VAZIO_EXACT_SHA_NOT_RETAINED_IN_TOOL_SNIPPET"}
+      ],
+      "declared_role":"technical-juridical proposal for auditable biometric consent in generative AI, centered on voice and multimodal identity",
+      "license":{"state":"OBSERVED_CONTENT","type":"GPL-2.0 text","scope":"repo-wide applicability requires file notices/ownership mapping"},
+      "normative_atoms":[
+        {"type":"LAW","authority":"Brazil LGPD","binding_force":"BINDING_WITHIN_SCOPE","jurisdiction":"Brazil/applicable territorial scope","notes":"biometric data linked to a natural person is sensitive personal data"},
+        {"type":"REGULATION","authority":"EU GDPR","binding_force":"BINDING_WITHIN_SCOPE","jurisdiction":"EU territorial/material scope","notes":"biometric data for unique identification is special-category data subject to Article 9 rules"},
+        {"type":"REGULATION","authority":"EU AI Act 2024/1689","binding_force":"BINDING_WITHIN_SCOPE_AND_PHASED_APPLICATION","jurisdiction":"EU scope","notes":"distinguishes biometric verification from biometric categorisation and prohibits certain sensitive-attribute inference uses"},
+        {"type":"TECHNICAL_GUIDELINE","authority":"NIST SP 800-63B-4","binding_force":"NIST/FEDERAL_GUIDANCE_WITH_REQUIREMENTS_IN_ITS_SCOPE_NOT_UNIVERSAL_LAW","jurisdiction":"defined NIST digital identity scope","notes":"published July 2025; biometric comparison based on voice SHALL NOT be used under this guideline"},
+        {"type":"TECHNICAL_STANDARD","authority":"ISO/IEC 19794 family and ISO/IEC 30107 family","binding_force":"STANDARD_NOT_LAW_BY_ITSELF","jurisdiction":"adoption/contract/regulation dependent"}
+      ],
+      "conflicts":[
+        {"id":"B016-C06","type":"VOICE_AS_AUTHENTICATOR_VS_CURRENT_NIST_GUIDANCE","state":"CORRECTION_REQUIRED","reason":"README proposes timbre/voice as a core authorization biometric. Current NIST SP 800-63B-4 permits limited biometrics only with a physical authenticator and explicitly says biometric comparison based on voice SHALL NOT be used within that guideline's authentication scope."},
+        {"id":"B016-C07","type":"CONSENT_TOKEN_VS_LEGAL_CONSENT","state":"HUMAN_REVIEW","reason":"cryptographic/voice proof can evidence an event or intent but does not by itself satisfy all legal conditions for valid, specific, informed, freely given or explicit consent across LGPD/GDPR/other systems, nor override prohibitions that consent cannot lift."},
+        {"id":"B016-C08","type":"PSYCHOLOGICAL_INFERENCE_RISK","state":"HIGH_RISK_BOUNDARY","reason":"README correctly warns against physiognomic/personality determinism; any biometric categorisation or inference of sensitive traits requires separate legal/ethical analysis and may be prohibited or high-risk in some jurisdictions."}
+      ],
+      "protected_subject_gate":"P0 when minors or vulnerable persons are enrolled, inferred or represented synthetically; parental/guardian rules and child best-interest analysis remain jurisdiction-specific",
+      "privacy_gate":"P0 because voice/face/behavioral embeddings can be sensitive/special-category personal data; require purpose, minimization, retention, revocation, security, alternatives and DPIA/impact analysis where applicable",
+      "evidence_state":"CONCEPT_ARCHITECTURE_STRONG_NORMATIVE_REFINEMENT_REQUIRED"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/CryptoSwift_RmR",
+      "ref":"main",
+      "anchors":[
+        {"path":"README.md","blob_sha":"aeaba7c228572e13cbe98b601b74ac4b7d6e0839_README_SHA_TOKEN_VAZIO"},
+        {"path":"LICENSE","blob_sha":"aeaba7c228572e13cbe98b601b74ac4b7d6e0839"}
+      ],
+      "declared_role":"pure Swift cryptographic library with broad standards-compliance claims",
+      "license":{"state":"OBSERVED","type":"zlib-style license with explicit attribution retention requirement"},
+      "normative_atoms":[
+        {"type":"SOFTWARE_LICENSE","authority":"repository LICENSE","binding_force":"PRIVATE_LICENSE","jurisdiction":"copyright scope"},
+        {"type":"TECHNICAL_STANDARD","authority":"NIST FIPS 197","binding_force":"FEDERAL_STANDARD/TECHNICAL_BASELINE_NOT_GENERAL_LAW","notes":"AES standard updated editorially May 2023 with no algorithm change"},
+        {"type":"RFC","authority":"RFC 8439","binding_force":"INFORMATIONAL_TECHNICAL_REFERENCE","notes":"obsoletes RFC 7539"},
+        {"type":"RFC","authority":"RFC 8018","binding_force":"INFORMATIONAL_TECHNICAL_REFERENCE","notes":"obsoletes RFC 2898"},
+        {"type":"TECHNICAL_STANDARD","authority":"ISO 10126-1/2:1991","binding_force":"WITHDRAWN_STANDARD","notes":"must not be presented as current ISO compliance baseline"}
+      ],
+      "conflicts":[
+        {"id":"B016-C09","type":"OBSOLETE_RFC_REFERENCE","state":"CORRECTION_REQUIRED","reason":"README lists RFC 7539 for ChaCha20/Poly1305; RFC 7539 is obsolete and was replaced by RFC 8439."},
+        {"id":"B016-C10","type":"OBSOLETE_RFC_REFERENCE","state":"CORRECTION_REQUIRED","reason":"README lists RFC 2898 for PKCS #5/PBKDF; RFC 2898 is obsolete and was replaced by RFC 8018."},
+        {"id":"B016-C11","type":"WITHDRAWN_ISO_REFERENCE","state":"CORRECTION_REQUIRED","reason":"README lists ISO 10126 as a standards-compliance reference; ISO 10126-1:1991 and ISO 10126-2:1991 are withdrawn."},
+        {"id":"B016-C12","type":"CONFORMANCE_VS_CERTIFICATION_BOUNDARY","state":"HUMAN_REVIEW","reason":"README says production-ready and standards compliant/verified against vectors. Passing vectors can support algorithmic conformance claims but does not equal CMVP/FIPS validation, product certification, secure deployment or legal compliance."}
+      ],
+      "protected_subject_gate":"NOT_DIRECTLY_TRIGGERED_BY_CRYPTO_LIBRARY_ALONE",
+      "privacy_gate":"CRYPTO_IMPLEMENTATION_DOES_NOT_BY_ITSELF_ESTABLISH_PRIVACY_COMPLIANCE",
+      "evidence_state":"LICENSE_VERIFIED_STANDARDS_REFERENCES_PARTLY_STALE"
+    }
+  ],
+  "official_source_observations": [
+    {"source":"NIST SP 800-63B-4","date":"2025-07","observation":"supersedes SP 800-63B; biometrics only in constrained multifactor use; voice biometric comparison prohibited within this guideline"},
+    {"source":"Brazil LGPD Law 13.709/2018 consolidated","observation":"Article 5 classifies biometric data linked to a natural person as sensitive personal data"},
+    {"source":"EU GDPR 2016/679 Article 9","observation":"biometric data used for uniquely identifying a person is special-category personal data; processing is generally prohibited unless an Article 9(2) condition applies"},
+    {"source":"EU AI Act 2024/1689","observation":"biometric verification is distinguished from biometric categorisation; certain sensitive-trait biometric categorisation is prohibited"},
+    {"source":"RFC Editor RFC 8439","observation":"RFC 8439 obsoletes RFC 7539"},
+    {"source":"RFC Editor RFC 8018","observation":"RFC 8018 obsoletes RFC 2898 and is Informational"},
+    {"source":"ISO 10126-1:1991 / 10126-2:1991","observation":"both withdrawn"},
+    {"source":"NIST FIPS 197","date":"2023-05-09 update","observation":"AES publication updated editorially without technical algorithm change"}
+  ],
+  "resolution_function_delta": {
+    "resolve_jurisdiction":"For biometrics/model use, resolve controller/provider/deployer, subject location, establishment/targeting, processing purpose, distribution channel and governing-license clause separately.",
+    "resolve_authority_hierarchy":"Law/regulation outranks private policy within applicable scope; NIST/ISO/RFC technical authority does not become law unless incorporated or mandated; model licenses remain private obligations distinct from public law.",
+    "semantic_contextualize":"Terms such as consent, identity, privacy, compliant, production-ready, dignity and child protection must be decomposed into legal, technical and ethical meanings before evaluation.",
+    "cross_cultural_semantic_diff":"Consent/biometrics/personality/dignity can have different legal thresholds and cultural implications; no universal equivalence or voice-consent validity is presumed.",
+    "detect_normative_conflict":"Add classes for obsolete-standard reference, private-license vs public-law duty, code-license vs model/data-license, consent-proof vs valid-consent, and standards-conformance vs certification.",
+    "protected_subject_gate":"Biometric systems involving children/vulnerable persons elevate priority but still require established subject/use/jurisdiction; do not infer subject from generic AI support.",
+    "evidence_and_conformance_gate":"Require exact algorithm/version, official current reference, KAT/vector provenance, independent tests and certification identifier where certification is claimed; for privacy require actual data-flow evidence.",
+    "temporal_validity":"Resolve obsoleted RFCs, withdrawn ISO documents and superseded NIST publications before scoring compliance.",
+    "provenance_chain":"repo@ref/path/blob_sha -> extracted claim -> current official source/version -> applicability -> test/evidence -> bounded status"
+  },
+  "delta": {
+    "repos_added": 5,
+    "conflicts_added_or_refined": 12,
+    "token_vazio_closed": 6,
+    "token_vazio_preserved_or_created": 16,
+    "uncertainty_delta":"substantially reduced for license identities and current NIST/RFC/ISO status; unresolved for fork-specific privacy behavior, model asset rights, biometric legal design and certification/runtime evidence",
+    "conflict_delta":"+12 explicit conflicts/boundaries"
+  },
+  "F_ok":"80 repositories cumulatively covered; five high-risk repositories added; biometric consent separated from authentication and legal consent; code/model/data licensing separated; obsolete cryptographic references identified; keyboard privacy positioning separated from fork-specific runtime evidence.",
+  "F_gap":"FlorisBoard fork-specific permission/network/data-flow diff; TinyGPT external model/tokenizer license matrix; DeepSeek-RafCoder actual model/data inventory and LICENSE-CODE cleanup; IA_nist prototype, DPIA/threat model and lawful-consent mapping; CryptoSwift conformance/certification evidence and stale-reference cleanup.",
+  "F_next":"Continue with androidRom, ROM-emulator, UserLAnd2, gradle and arxiv-docs, prioritizing upstream-license inheritance, Android permissions/data, distribution obligations, third-party notices and any platform/privacy/security claims."
+}

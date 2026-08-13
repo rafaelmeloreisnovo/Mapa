@@ -1,0 +1,245 @@
+{
+  "schema_version": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch_id": "NORMATIVE_GRAPH_BATCH_014_2026-08-13",
+  "generated_at": "2026-08-13",
+  "predecessor_pr": "rafaelmeloreisnovo/Mapa#212",
+  "predecessor_head": "57c81cbafb008e0f35d874f2bf1701e8dfe7446d",
+  "claim_allowed": false,
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "repository_name != normative_role",
+    "README_claim != implementation != execution != evidence != external_recognition",
+    "license_label != complete_license_text",
+    "private_license_term != public_law",
+    "legal_hypothesis != accusation_proven != conviction",
+    "article_reference != applicability != remedy",
+    "mathematical_candidate != accepted_proof",
+    "absence_of_evidence != evidence_of_absence",
+    "TOKEN_VAZIO is auditable and must not be silently filled"
+  ],
+  "coverage_before": 63,
+  "repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/RafaelIA_Solucoes_Clay",
+      "ref": "main",
+      "anchors": [
+        {"path": "README.md", "blob_sha": "764d72ecab5a5ed3d71ec83698a94213b4b2a9b5"},
+        {"path": "proof_PvsNP.md", "blob_sha": "908cd65a3a79c60631495e95a1991b29e2fb9361"},
+        {"path": "LICENSE", "blob_sha": "4066046b6efba229b68b67281ef7f711ff0b617b"}
+      ],
+      "declared_role": "repository claiming complete solutions to fundamental mathematics and Millennium Prize Problems",
+      "jurisdiction": ["TOKEN_VAZIO for private licensing enforcement", "global scientific-community recognition is not a legal jurisdiction"],
+      "authority": [
+        {"source": "Clay Mathematics Institute", "type": "SCIENTIFIC_PRIZE_AUTHORITY", "binding_force": "rules governing its own Millennium Prize recognition process"}
+      ],
+      "temporal_state": "CMI official pages observed 2026-08-13 list P vs NP among unsolved Millennium Prize Problems; only Poincare is listed solved",
+      "license_state": "CONTRADICTION_OR_INCOMPLETE_LICENSE",
+      "license_observation": "root file begins 'MIT License' but adds consent/attribution restrictions and does not contain the standard MIT grant/disclaimer text; do not classify as canonical MIT without correction",
+      "semantic_state": "CORRECTION_REQUIRED",
+      "conflicts": [
+        {
+          "type": "README_VS_ARTIFACT",
+          "severity": "P0_EPISTEMIC",
+          "observation": "README says complete solutions; proof_PvsNP.md contains only a heading and placeholder text",
+          "resolution": "preserve as candidate/placeholder until a complete proof artifact exists and passes mathematical review"
+        },
+        {
+          "type": "LOCAL_CLAIM_VS_EXTERNAL_STATUS",
+          "severity": "P0_EPISTEMIC",
+          "observation": "CMI still classifies P vs NP as unsolved",
+          "resolution": "external recognition remains NOT_ESTABLISHED"
+        }
+      ],
+      "protected_subjects": [],
+      "privacy_data": "no personal-data processing claim established from inspected anchors",
+      "security": "NOT_APPLICABLE_FROM_OBSERVED_SCOPE",
+      "accessibility": "TOKEN_VAZIO",
+      "official_sources": [
+        "Clay Mathematics Institute — The Millennium Prize Problems",
+        "Clay Mathematics Institute — P vs NP",
+        "Clay Mathematics Institute — Rules for the Millennium Prize Problems"
+      ],
+      "evidence_gate": "FAIL_FOR_COMPLETE_SOLUTION_CLAIM",
+      "token_vazio": ["complete proof bytes", "qualifying publication", "two-year elapsed condition after qualifying publication", "general acceptance in global mathematics community", "canonical license text"],
+      "F_next": "replace placeholder with versioned proof artifact or reclassify README claim to candidate; then run independent formal/peer review"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/rafaelia_privado",
+      "ref": "main",
+      "anchors": [],
+      "declared_role": "repository metadata describes a private RAFAELIA backup, but repository content endpoint reports empty",
+      "jurisdiction": ["TOKEN_VAZIO"],
+      "authority": [],
+      "temporal_state": "EMPTY_REPOSITORY_OBSERVED_2026-08-13",
+      "license_state": "TOKEN_VAZIO",
+      "semantic_state": "NO_CONTENT_NO_INFERENCE",
+      "conflicts": [],
+      "protected_subjects": ["TOKEN_VAZIO"],
+      "privacy_data": "TOKEN_VAZIO; name/description alone does not prove backup contents or personal data",
+      "security": "TOKEN_VAZIO",
+      "accessibility": "NOT_APPLICABLE_FROM_OBSERVED_SCOPE",
+      "evidence_gate": "TOKEN_VAZIO",
+      "token_vazio": ["content", "license", "data inventory", "retention", "encryption/access-control evidence"],
+      "F_next": "revisit only when material content appears; do not infer from repository name"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafNet-Core",
+      "ref": "main",
+      "anchors": [
+        {"path": "README.md", "blob_sha": "95e6b6b15674e1584e82f83eb3593635c88aa640"},
+        {"path": "LICENSE", "blob_sha": "d1e1072ee5e1d109c15b6fd18756aedc2a401840"}
+      ],
+      "declared_role": "minimal symbolic RAFNET core declaration only",
+      "jurisdiction": ["TOKEN_VAZIO"],
+      "authority": [],
+      "temporal_state": "CURRENT_REF_OBSERVED_2026-08-13",
+      "license_state": "INCOMPLETE_LICENSE_TEXT",
+      "license_observation": "LICENSE contains only the words 'MIT License'; standard MIT permissions/conditions/disclaimer are absent",
+      "semantic_state": "MINIMAL_REFERENCE",
+      "conflicts": [],
+      "protected_subjects": [],
+      "privacy_data": "TOKEN_VAZIO",
+      "security": "TOKEN_VAZIO",
+      "accessibility": "TOKEN_VAZIO",
+      "evidence_gate": "TOKEN_VAZIO",
+      "token_vazio": ["functional scope", "code/runtime evidence", "complete license terms", "data flows", "dependencies"],
+      "F_next": "inventory tracked files and establish a canonical README/license before assigning normative obligations"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RAIAREIS_FRAMEWORK",
+      "ref": "main",
+      "anchors": [
+        {"path": "README.md", "blob_sha": "e0b8cd126f5341ee6ea46f29b8358e87efa0d286"}
+      ],
+      "declared_role": "minimal symbolic framework declaration only",
+      "jurisdiction": ["TOKEN_VAZIO"],
+      "authority": [],
+      "temporal_state": "CURRENT_REF_OBSERVED_2026-08-13",
+      "license_state": "TOKEN_VAZIO_LICENSE_NOT_FOUND_AT_ROOT",
+      "semantic_state": "MINIMAL_REFERENCE",
+      "conflicts": [],
+      "protected_subjects": [],
+      "privacy_data": "TOKEN_VAZIO",
+      "security": "TOKEN_VAZIO",
+      "accessibility": "TOKEN_VAZIO",
+      "evidence_gate": "TOKEN_VAZIO",
+      "token_vazio": ["functional scope", "license", "implementation", "tests", "data flows", "dependencies"],
+      "F_next": "inventory material files before any compliance/legal classification"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RAFNATIONS_CORE",
+      "ref": "main",
+      "anchors": [
+        {"path": "README.md", "blob_sha": "8849bf85a6f056987fdf96c271df8aea300b9078"}
+      ],
+      "declared_role": "minimal symbolic RAFNATIONS core declaration only",
+      "jurisdiction": ["TOKEN_VAZIO; repository name must not be interpreted as interstate/international-law scope"],
+      "authority": [],
+      "temporal_state": "CURRENT_REF_OBSERVED_2026-08-13",
+      "license_state": "TOKEN_VAZIO_LICENSE_NOT_FOUND_AT_ROOT",
+      "semantic_state": "NO_NATION_STATE_AUTHORITY_INFERRED",
+      "conflicts": [],
+      "protected_subjects": [],
+      "privacy_data": "TOKEN_VAZIO",
+      "security": "TOKEN_VAZIO",
+      "accessibility": "TOKEN_VAZIO",
+      "evidence_gate": "TOKEN_VAZIO",
+      "token_vazio": ["functional scope", "license", "jurisdiction mapping", "implementation", "tests", "data flows"],
+      "F_next": "inventory material files; require explicit country/source/version before creating any jurisdiction edge"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Judicial-",
+      "ref": "main",
+      "anchors": [
+        {"path": "README.md", "blob_sha": "OBSERVED_CURRENT_README_VIA_CONNECTOR"}
+      ],
+      "declared_role": "personal legal-case research and hypothesis corpus concerning Brazilian criminal procedure",
+      "jurisdiction": ["Brazil", "case-specific court/state jurisdiction TOKEN_VAZIO until authoritative case metadata is verified"],
+      "authority": [
+        {"source": "Constituicao Federal / STF", "type": "CONSTITUTIONAL_AND_BINDING_PRECEDENT", "binding_force": "within Brazilian legal order and scope"},
+        {"source": "Codigo de Processo Penal", "type": "LAW", "binding_force": "binding within applicable Brazilian criminal procedure"},
+        {"source": "Lei 11.343/2006", "type": "LAW", "binding_force": "binding within applicable Brazilian drug-law scope"}
+      ],
+      "temporal_state": "LEGAL_REFERENCES_REQUIRE_ARTICLE_BY_ARTICLE_CURRENT_TEXT_CHECK",
+      "license_state": "TOKEN_VAZIO_LICENSE_NOT_FOUND_AT_ROOT",
+      "semantic_state": "HIGH_RISK_HYPOTHESIS_CORPUS_REQUIRING_CORRECTION",
+      "conflicts": [
+        {
+          "type": "ARTICLE_MISATTRIBUTION",
+          "severity": "P0_LEGAL",
+          "observation": "README describes CPP art. 396 as a rule for exhibition of intelligence report/bodycam; current CPP art. 396 governs citation and written response to accusation, while evidentiary requests are not accurately summarized by that attribution",
+          "resolution": "CORRECTION_REQUIRED"
+        },
+        {
+          "type": "ARTICLE_MISATTRIBUTION",
+          "severity": "P0_LEGAL",
+          "observation": "README describes Lei 11.343/2006 art. 44 as toxicological expertise; current drug-law materiality/constatation and preservation of sample for definitive report are addressed notably in art. 50 and related provisions, not by the summarized attribution",
+          "resolution": "CORRECTION_REQUIRED"
+        },
+        {
+          "type": "HYPOTHESIS_AS_PERSON_SPECIFIC_CRIME_MAP",
+          "severity": "P0_RIGHTS_AND_DUE_PROCESS",
+          "observation": "README assigns possible crimes and aggregate penalties to categories of judges, prosecutors, police and experts without verified fact pattern for each legal element",
+          "resolution": "preserve only as allegations/hypotheses; require source evidence, element-by-element legal analysis, right of reply/contradictory evidence, and qualified legal review"
+        }
+      ],
+      "protected_subjects": ["accused persons", "public officials named or identifiable", "witnesses", "possible minors if any case file contains them: TOKEN_VAZIO"],
+      "human_rights": ["human dignity", "due process", "presumption of innocence", "contradictory proceedings/full defense", "privacy and reputation"],
+      "privacy_data": "P0; legal case corpus may contain sensitive/high-impact personal data and allegations. Minimize identifiers and avoid reproducing unverified accusations outside necessary private legal context.",
+      "security": "P0 confidentiality/access-control/provenance required for case documents, bodycam, financial and investigative materials",
+      "accessibility": "TOKEN_VAZIO",
+      "official_sources": [
+        "Planalto — Decreto-Lei 3.689/1941, Codigo de Processo Penal, current compiled text",
+        "Planalto — Lei 11.343/2006, current compiled text",
+        "STF — Sumula Vinculante 11"
+      ],
+      "evidence_gate": "HUMAN_REVIEW_REQUIRED",
+      "token_vazio": ["authoritative case numbers/court metadata", "complete official records", "verified identities", "element-by-element fact evidence", "current jurisprudence for each thesis", "license", "data-retention/access policy"],
+      "F_next": "build a private article-by-article correction ledger mapping each thesis to current official text, case evidence, contrary evidence and qualified legal review; do not publish accusation-level claims as facts"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/GAIA-PDS-PHI",
+      "ref": "main",
+      "anchors": [
+        {"path": "README.md", "blob_sha": "0262b576aa04d5b87206737561214f3b3a1376b1"},
+        {"path": "MANIFESTO.md", "blob_sha": "8dde2aa8d63a43bfe6091220d9e8c28b28fdddc4"}
+      ],
+      "declared_role": "Geo-Algoritmo de Inteligencia Autopoetica em Phi; observed material is manifesto-level",
+      "jurisdiction": ["TOKEN_VAZIO"],
+      "authority": [],
+      "temporal_state": "CURRENT_REF_OBSERVED_2026-08-13",
+      "license_state": "TOKEN_VAZIO_LICENSE_NOT_FOUND_AT_ROOT",
+      "semantic_state": "SYMBOLIC_MANIFESTO_NOT_RUNTIME_PROOF",
+      "conflicts": [],
+      "protected_subjects": [],
+      "privacy_data": "TOKEN_VAZIO",
+      "security": "TOKEN_VAZIO",
+      "accessibility": "TOKEN_VAZIO",
+      "evidence_gate": "REFERENCE_ONLY",
+      "token_vazio": ["implementation", "runtime", "tests", "license", "data flows", "jurisdiction"],
+      "F_next": "do not derive scientific, legal or runtime claims from manifesto language; inventory executable material first"
+    }
+  ],
+  "coverage_after": 70,
+  "coverage_delta": 7,
+  "uncertainty_delta": {
+    "reduced": [
+      "RafaelIA_Solucoes_Clay complete-solution claim confronted with placeholder proof artifact and official CMI status",
+      "Judicial- CPP art. 396 attribution corrected against official compiled CPP",
+      "Judicial- drug-law toxicology/materiality attribution redirected to current Lei 11.343 art. 50 context",
+      "rafaelia_privado confirmed empty at observed ref",
+      "RafNet-Core root license text classified as incomplete rather than assumed MIT"
+    ],
+    "increased_or_new": [
+      "several newly discovered repositories have minimal READMEs and missing/incomplete licenses",
+      "Judicial- requires privacy, defamation/reputation, due-process and case-specific evidence controls"
+    ]
+  },
+  "conflict_delta": {
+    "new": 5,
+    "types": ["README_VS_ARTIFACT", "LOCAL_CLAIM_VS_EXTERNAL_STATUS", "ARTICLE_MISATTRIBUTION", "HYPOTHESIS_AS_PERSON_SPECIFIC_CRIME_MAP", "INCOMPLETE_LICENSE_TEXT"]
+  },
+  "F_ok": "70 repositories cumulatively classified; seven added in this batch; evidence gaps preserved; high-risk legal and mathematical overclaims downgraded without deleting history",
+  "F_gap": "federated inventory still contains additional repositories not yet covered; minimal repositories need file-level inventory; Judicial- needs private evidence/provenance correction; Clay candidate needs complete proof and external review",
+  "F_next": "continue with newly discovered unprocessed repositories from installed inventory: CientiEspiritual-tiEs-, IaFcea, fcea-originum, verbum-vivo, Espiritual-espirualidade, then prioritize Judicial- correction ledger if a safe private branch is available"
+}

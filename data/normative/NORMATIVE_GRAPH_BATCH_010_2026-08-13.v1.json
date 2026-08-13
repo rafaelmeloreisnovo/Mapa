@@ -1,0 +1,223 @@
+{
+  "schema": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch": "010",
+  "date": "2026-08-13",
+  "claim_allowed": false,
+  "predecessor": {
+    "pr": 212,
+    "head_before": "da516066999401ed0597e7a4882dcd371b974e23",
+    "batch": "009"
+  },
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "platform_policy != statute",
+    "security mechanism != legal anti-piracy right",
+    "intentional defect != secure design",
+    "scientific note != validated scientific result",
+    "religious or symbolic statement != biomedical evidence",
+    "accessibility aspiration != WCAG conformance",
+    "technical format used in privacy research != proof of exfiltration",
+    "repository README != package-by-package license authority",
+    "TOKEN_VAZIO closes only by scoped evidence"
+  ],
+  "official_normative_anchors": [
+    {
+      "id": "BR-LGPD-13709-COMPILED-2026",
+      "type": "LAW",
+      "authority": "Presidencia da Republica do Brasil",
+      "jurisdiction": "BR_WITH_STATUTORY_SCOPE",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "observed_points": ["purpose", "adequacy", "necessity", "transparency", "security", "prevention", "accountability"]
+    },
+    {
+      "id": "GOOGLE-PLAY-USER-DATA-POLICY-2026",
+      "type": "PLATFORM_POLICY",
+      "authority": "Google Play",
+      "jurisdiction": "GOOGLE_PLAY_DISTRIBUTION",
+      "binding_force": "CONTRACTUAL_PLATFORM_POLICY_FOR_IN_SCOPE_DISTRIBUTION_NOT_STATUTE",
+      "url": "https://support.google.com/googleplay/android-developer/answer/10144311",
+      "observed_points": ["transparent data handling", "disclosure of collection/use/sharing", "purpose limitation", "secure handling", "privacy policy", "consent where required by policy"]
+    },
+    {
+      "id": "GOOGLE-PLAY-DATA-SAFETY-2026",
+      "type": "PLATFORM_POLICY",
+      "authority": "Google Play",
+      "jurisdiction": "GOOGLE_PLAY_DISTRIBUTION",
+      "binding_force": "DISCLOSURE_REQUIREMENT_FOR_PUBLISHED_APPS_NOT_GENERAL_LAW",
+      "url": "https://support.google.com/googleplay/android-developer/answer/10787469",
+      "observed_points": ["developers declare collected/shared data", "developers declare security practices", "store listing disclosure"]
+    },
+    {
+      "id": "NIST-SP-800-218-SSDF-1.1",
+      "type": "TECHNICAL_GUIDANCE",
+      "authority": "NIST",
+      "jurisdiction": "TECHNICAL_GUIDANCE_SUBJECT_TO_ADOPTION_OR_CONTRACT",
+      "binding_force": "RECOMMENDATION_NOT_UNIVERSAL_LAW",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "observed_points": ["secure software development practices", "vulnerability risk mitigation", "common vocabulary for software security"]
+    },
+    {
+      "id": "W3C-WCAG-2.2-CURRENT",
+      "type": "TECHNICAL_STANDARD",
+      "authority": "W3C",
+      "jurisdiction": "WEB_ACCESSIBILITY_STANDARD_SUBJECT_TO_ADOPTION",
+      "binding_force": "W3C_RECOMMENDATION_NOT_AUTOMATIC_STATUTE",
+      "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+      "observed_points": ["perceivable", "operable", "understandable", "robust", "testable success criteria", "A/AA/AAA conformance levels"]
+    },
+    {
+      "id": "WHO-AI-HEALTH-ETHICS-2021",
+      "type": "GUIDELINE",
+      "authority": "World Health Organization",
+      "jurisdiction": "GLOBAL_HEALTH_GUIDANCE",
+      "binding_force": "GUIDANCE_NOT_UNIVERSAL_LAW",
+      "url": "https://www.who.int/publications/i/item/9789240029200",
+      "observed_points": ["ethics and human rights", "accountability", "safety", "inclusiveness", "health governance"]
+    },
+    {
+      "id": "WIPO-BERNE-CURRENT",
+      "type": "TREATY",
+      "authority": "WIPO",
+      "jurisdiction": "CONTRACTING_PARTIES",
+      "binding_force": "TREATY_OBLIGATIONS_FOR_PARTIES_WITH_DOMESTIC_IMPLEMENTATION_CONTEXT",
+      "url": "https://www.wipo.int/en/web/treaties/ip/berne/index",
+      "observed_points": ["copyright protection of works", "minimum protection", "national treatment"]
+    }
+  ],
+  "repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/termux-packages",
+      "ref": "main",
+      "source_paths": ["README.md", "LICENSE.md"],
+      "declared_role": "Termux package build tree adapted for Google Play requirements",
+      "material_observation": "README explicitly says this tree targets the Google Play build and regularly merges upstream Termux changes; LICENSE.md makes package build scripts/patches follow each package's own license while build infrastructure outside package trees is Apache-2.0.",
+      "normative_atoms": [
+        {"topic": "distribution_policy", "status": "GOOGLE_PLAY_POLICY_APPLIES_WHEN_DISTRIBUTED_THROUGH_PLAY", "anchors": ["GOOGLE-PLAY-USER-DATA-POLICY-2026", "GOOGLE-PLAY-DATA-SAFETY-2026"]},
+        {"topic": "license", "status": "MIXED_LICENSE_TREE_REQUIRES_PACKAGE_LEVEL_RESOLUTION", "detail": "build infrastructure outside package trees is Apache-2.0; package patches/scripts inherit each package license"},
+        {"topic": "upstream", "status": "FORK_OR_DERIVATIVE_TREE_REQUIRES_UPSTREAM_LICENSE_PRESERVATION"}
+      ],
+      "conflicts": [],
+      "protected_subject_gate": {"status": "CONDITIONAL", "detail": "child/family policy only if an in-scope published app/service is directed to or accessible under relevant Google Play Families rules; not inferred from package repository alone"},
+      "evidence_gate": "PARTIAL_DOCUMENTED",
+      "token_vazio": ["package-by-package SPDX/license inventory", "actual published package set", "Play Console Data safety declarations for consuming app", "personal-data flows introduced by package patches", "security review of third-party package updates"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/MemRa",
+      "ref": "main",
+      "source_paths": ["README.md"],
+      "declared_role": "scientific research notebook covering mathematics, astronomy, geodesy, cosmology and experimental physics",
+      "material_observation": "README explicitly separates conversational calculation from validated calculation and marks geodesy, calendar cross-checks and 52 formulas as TOKEN_VAZIO pending external validation.",
+      "normative_atoms": [
+        {"topic": "scientific_claims", "status": "REFERENCE_OR_HYPOTHESIS_UNTIL_VALIDATED"},
+        {"topic": "personal_or_location_data", "status": "HUMAN_REVIEW_IF_PERSONAL_CALENDAR_OR_PRECISE_LOCATION_DATA_IDENTIFY_A_PERSON", "anchors": ["BR-LGPD-13709-COMPILED-2026"]},
+        {"topic": "research_safety", "status": "CONDITIONAL_ON_EXPERIMENTAL_APPARATUS_OR_HUMAN_SUBJECTS"}
+      ],
+      "conflicts": [],
+      "license": {"status": "TOKEN_VAZIO", "evidence": "authoritative root license not established in this cycle"},
+      "evidence_gate": "REFERENCE_WITH_OPEN_VALIDATION_GATES",
+      "token_vazio": ["authoritative license", "external datasets and terms", "GPS/IBGE/JPL/USNO exact sources and versions", "human-subject involvement", "experimental safety protocol", "claim-by-claim falsifiers"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/ZIPRAF_CORE",
+      "ref": "main",
+      "source_paths": ["README.md"],
+      "declared_role": "C core for ZipRAF/ZRF compression, traceability and package-data coding",
+      "material_observation": "README states the library is used in privacy/exfiltration research but simultaneously marks clean build, CI tests, documented API and integration as TOKEN_VAZIO.",
+      "normative_atoms": [
+        {"topic": "privacy_research", "status": "FORMAT_OR_DETECTOR_EXISTENCE_DOES_NOT_PROVE_PERSONAL_DATA_EXFILTRATION", "anchors": ["BR-LGPD-13709-COMPILED-2026"]},
+        {"topic": "software_security", "status": "NIST_SSDF_IS_RELEVANT_GUIDANCE_NOT_CONFORMANCE_PROOF", "anchors": ["NIST-SP-800-218-SSDF-1.1"]},
+        {"topic": "license", "status": "TOKEN_VAZIO"}
+      ],
+      "conflicts": [
+        {"type": "DECLARED_USE_VS_EVIDENCE_GATE", "detail": "README describes use for exfiltration/traceability analysis while all core build/test/integration gates remain TOKEN_VAZIO; downstream privacy conclusions cannot inherit proof from this repository yet"}
+      ],
+      "evidence_gate": "TOKEN_VAZIO_RUNTIME",
+      "token_vazio": ["license", "build receipt", "unit test results", "format specification", "round-trip test vectors", "negative controls", "false-positive/false-negative measurements", "downstream integration receipt"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Seguran-a-informacional-",
+      "ref": "main",
+      "source_paths": ["README.md"],
+      "declared_role": "security documentation for intentional environment-dependent failure and anti-copy mechanisms",
+      "material_observation": "README documents intentionally invalid seeds, syscall mismatches, architecture-only flags, silent non-convergence and rollback loops, while source-code verification and controlled anti-piracy tests remain TOKEN_VAZIO.",
+      "normative_atoms": [
+        {"topic": "software_security", "status": "INTENTIONAL_DEFECT_OR_FAIL_SILENTLY_PATTERN_REQUIRES_THREAT_MODEL_AND_SAFETY_REVIEW", "anchors": ["NIST-SP-800-218-SSDF-1.1"]},
+        {"topic": "copyright_or_anti_copy", "status": "TECHNICAL_ANTI_COPY_MECHANISM_DOES_NOT_CREATE_COPYRIGHT_OR_ENFORCEMENT_RIGHTS", "anchors": ["WIPO-BERNE-CURRENT"]},
+        {"topic": "license", "status": "TOKEN_VAZIO"}
+      ],
+      "conflicts": [
+        {"type": "SECURITY_VS_RELIABILITY", "detail": "deliberate compile/link/runtime failures may obstruct unauthorized copying but can also create availability, diagnosability, portability and safety failures; security benefit is unproven without threat model and controlled tests"}
+      ],
+      "evidence_gate": "TOKEN_VAZIO_SECURITY_EFFECTIVENESS",
+      "token_vazio": ["authoritative license", "source-path verification", "threat model", "authorized-user failure analysis", "rollback proof", "negative controls", "availability impact", "security effectiveness measurement"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/templo-vivo-arcs",
+      "ref": "main",
+      "source_paths": ["README.md"],
+      "declared_role": "Android/Flutter/data/research corpus combining technical, legal, scientific, financial and spiritual layers",
+      "material_observation": "README explicitly labels 144000 Hz as metaphor in one section but elsewhere contains broad biomedical, epigenetic, particle/cosmos and frequency-effect assertions; it also declares LGPD/ONU/Marco Civil anchors, universal accessibility aspirations, market datasets and a custom scientific-spiritual license.",
+      "normative_atoms": [
+        {"topic": "health_and_biomedical_claims", "status": "HYPOTHESIS_OR_UNSUPPORTED_CAUSAL_CLAIM_UNTIL EVIDENCE; WHO_GUIDANCE_DOES_NOT_VALIDATE_EFFECT", "anchors": ["WHO-AI-HEALTH-ETHICS-2021"]},
+        {"topic": "accessibility", "status": "ASPIRATION_NOT_CONFORMANCE", "anchors": ["W3C-WCAG-2.2-CURRENT"]},
+        {"topic": "privacy_data", "status": "APPLICABILITY_REQUIRES_ACTUAL_PERSONAL_DATA_FLOW_AND_SCOPE", "anchors": ["BR-LGPD-13709-COMPILED-2026"]},
+        {"topic": "copyright", "status": "CUSTOM_LICENSE_ASSERTION_DOES_NOT_EXPAND_TREATY_RIGHTS", "anchors": ["WIPO-BERNE-CURRENT"]},
+        {"topic": "financial_market_data", "status": "PROVENANCE_AND_REUSE_RIGHTS_REQUIRED_PER_DATA_SOURCE"}
+      ],
+      "conflicts": [
+        {"type": "METAPHOR_VS_BIOMEDICAL_CAUSALITY", "detail": "README calls 144000 Hz metaphor but later states or implies physiological, genetic, immune, particle and magnetic effects without local measurement/evidence chain"},
+        {"type": "ACCESSIBILITY_CLAIM_SCOPE", "detail": "conversion to Braille/voice/pulses/dance/vibration/image is an accessibility aspiration; no WCAG or other conformance test is demonstrated"},
+        {"type": "LAW_AND_SYMBOLIC_LICENSE_COLLISION", "detail": "Constitution/Berne/LGPD/UN references can supply real normative anchors only within their actual scopes; symbolic eternal-pact or innate-spiritual-right language is not independently a source of international law"}
+      ],
+      "protected_subject_gate": {"status": "HIGH_PRIORITY_IF_HEALTH_CHILD_OR_VULNERABLE_SUBJECT_DATA_APPEARS", "detail": "no child or patient status is inferred merely from spiritual/health vocabulary"},
+      "license": {"status": "PARTIAL_CUSTOM_DECLARATION_REQUIRES_AUTHORITATIVE_SCOPE_FILE"},
+      "evidence_gate": "CONFLICT_AND_HUMAN_REVIEW",
+      "token_vazio": ["authoritative license scope", "health claim evidence and falsifiers", "market data provider terms", "actual personal-data inventory", "accessibility test results", "APK data-safety disclosures", "scientific-vs-parable claim ledger"]
+    }
+  ],
+  "coverage": {
+    "previous_cumulative_repositories": 44,
+    "new_repositories": 5,
+    "cumulative_repositories": 49,
+    "new_conflicts_or_refinements": 4,
+    "token_vazio_closed_by_evidence": 3,
+    "closed_items": [
+      "termux-packages build-infrastructure license = Apache-2.0 while package scripts/patches inherit package licenses",
+      "termux-packages purpose is explicitly Google Play adaptation, making Play policy a real distribution-policy anchor when used for that channel",
+      "templo-vivo-arcs explicitly distinguishes 144000 Hz as metaphor in one canonical README section, preventing silent promotion of that symbol as measurement"
+    ]
+  },
+  "uncertainty_delta": {
+    "direction": "DECREASED_LOCALLY_INCREASED_EXPLICITLY_WHERE_CONFLICT_DISCOVERED",
+    "notes": "license and platform-policy scope improved for termux-packages; health/accessibility/security conflicts were made explicit rather than silently resolved"
+  },
+  "conflict_delta": {
+    "new": 4,
+    "resolved": 0,
+    "preserved": true
+  },
+  "F_ok": [
+    "49 repositories cumulatively indexed in the federated normative sequence",
+    "five new repositories classified from material README/license evidence",
+    "Google Play platform policy separated from law",
+    "NIST SSDF separated from mandatory legal compliance",
+    "WCAG conformance separated from accessibility aspiration",
+    "WHO health guidance separated from biomedical proof",
+    "anti-copy mechanism separated from legal copyright authority"
+  ],
+  "F_gap": [
+    "package-by-package license matrix for termux-packages",
+    "MemRa external dataset provenance and research validation",
+    "ZIPRAF_CORE runtime/build/test/spec evidence",
+    "Seguran-a-informacional threat model and controlled effectiveness tests",
+    "templo-vivo-arcs health/accessibility/data/license claim-by-claim evidence"
+  ],
+  "F_next": "Continue from the next unprocessed repositories in the federated inventory, prioritizing health, children, privacy, security, accessibility, licensing contradictions and repositories that claim standards/compliance or universal legal effect.",
+  "state": "VERIFIED_LIMITED_DOCUMENTARY",
+  "provenance": {
+    "github_pr": 212,
+    "branch": "audit/normative-graph-federated-batch-007-20260813",
+    "sources": "repository READMEs/LICENSE files plus official primary normative/technical sources observed on 2026-08-13"
+  }
+}

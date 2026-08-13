@@ -1,0 +1,107 @@
+{
+  "schema":"NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch_id":"BATCH_021_2026-08-13",
+  "predecessor_head":"74ebd1e92dcfbdc3baecb7dd44ad6b4cf4ff280d",
+  "claim_allowed":false,
+  "coverage_before":102,
+  "coverage_after":106,
+  "invariants":[
+    "Universalidade != Uniformidade",
+    "technical_capability != authorized_use != lawful_use",
+    "metadata_only != no_privacy_obligations",
+    "root_license != complete_file_level_license_map",
+    "security_feature != secure_configuration != certification",
+    "upstream_license != local_fork_diff_provenance",
+    "code_license != trademark_or_asset_permission",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "repositories":[
+    {
+      "repo":"rafaelmeloreisnovo/frida-desktop",
+      "ref":"main",
+      "paths":[
+        ["README.md","7c8d1bafb30218e6b5d2355069e57900e2442e7a"],
+        ["COPYING","b01d49c670e55dbff638eb294ac1a52416fb32e8"],
+        ["docs/runtime-stability-recorder.md","1545a3c5dbb281cf2b677e09013eab3d3b30e89f"]
+      ],
+      "role":"dynamic instrumentation toolkit plus opt-in local diagnostics",
+      "jurisdiction":"TOKEN_VAZIO_UNTIL_TARGET_OPERATOR_DEPLOYMENT_AUTHORIZATION_DATA_SUBJECTS",
+      "license":"PARTIAL_UNRESOLVED_REPO_WIDE",
+      "atoms":[
+        ["AUTHORIZED_USE","HUMAN_REVIEW","third-party target use requires evidenced scope and authorization"],
+        ["METADATA_PRIVACY","PARTIAL","absence of payload storage reduces scope but does not eliminate privacy analysis when metadata is linkable"],
+        ["INTERNAL_SECURITY_BOUNDARY","PARTIAL_POSITIVE","local recorder documentation expressly limits itself to metadata and rejects bypass-based interpretations"],
+        ["EVIDENCE_BOUNDARY","TOKEN_VAZIO","standalone structural self-test is not target-runtime evidence"]
+      ],
+      "conflicts":["ROOT_COPYING_NOT_SUFFICIENT_FOR_REPO_WIDE_LICENSE","AUTHORIZED_EXTERNAL_TARGET_CONTEXT_NOT_MATERIALIZED"],
+      "next_gate":"ancestry/file-license map plus authorized-target governance receipt and data-field inventory"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/linuxkernel",
+      "ref":"master",
+      "paths":[["README","e6549b2a7aac3785cc6f25aabe3a63f158ac5ed1"],["COPYING","a635a38ef9405fdfcfe97f3a435393c1e9cae971"]],
+      "role":"Linux kernel source-tree fork",
+      "license":"OBSERVED_GPL_2_0_ONLY_WITH_LINUX_SYSCALL_NOTE_AND_FILE_LEVEL_EXCEPTIONS",
+      "atoms":[
+        ["LICENSE_AUTHORITY","PASS_BOUNDARY","root license is material; exact files remain governed by SPDX and exceptions"],
+        ["SYSCALL_EXCEPTION_BOUNDARY","PASS_BOUNDARY","user-space interface boundary must not be conflated with copied or modified kernel source"],
+        ["FORK_PROVENANCE","TOKEN_VAZIO","exact upstream base and changed-file SPDX provenance not reconstructed"],
+        ["SECURITY_CLAIM_BOUNDARY","PARTIAL","security documentation does not prove downstream secure configuration or certification"]
+      ],
+      "next_gate":"upstream base -> changed files -> SPDX/exception -> contributor provenance -> distribution obligations"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/LuaJIT",
+      "ref":"v2.1",
+      "paths":[["README","0406567df9ea0a6ed56619607471d40a29396613"],["COPYRIGHT","955d0d1e7526706d0cc778ed91bc24089f6b7ee4"]],
+      "role":"LuaJIT 2.1 runtime/compiler fork surface",
+      "license":"OBSERVED_COMPONENT_TOPOLOGY_MIT_LUA_MIT_DLMALLOC_PUBLIC_DOMAIN",
+      "atoms":[
+        ["COMPONENT_LICENSE_TOPOLOGY","PARTIAL_POSITIVE","component-specific terms are materially present and must remain attributable"],
+        ["FORK_ANCESTRY","TOKEN_VAZIO","local ancestry and changed-file impact not reconstructed"],
+        ["RUNTIME_SECURITY_BOUNDARY","HUMAN_REVIEW","runtime capability alone does not establish sandboxing, code-origin trust or certification"]
+      ],
+      "next_gate":"resolve ancestry/diff and third-party component map; document downstream sandbox boundary when embedded"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/Shizuku",
+      "ref":"master",
+      "paths":[["README.md","bd564a44e885f40a2017e405762cc99b23f89439"],["LICENSE","7a4a3ea2424c09fbe48d455aed1eaa94d9124835"]],
+      "role":"Android privilege-mediation framework",
+      "jurisdiction":"DEPLOYMENT_AND_DOWNSTREAM_USE_DEPENDENT",
+      "license":"OBSERVED_APACHE_2_0_CODE_WITH_SEPARATE_TRADEMARK_ASSET_BOUNDARY",
+      "atoms":[
+        ["PRIVILEGE_MEDIATION","HUMAN_REVIEW","higher-privilege capability is a security property, not automatic legal violation or blanket authorization"],
+        ["ANDROID_SANDBOX_PERMISSION_BOUNDARY","PARTIAL","downstream use requires explicit permission/use analysis against platform security model"],
+        ["PACKAGE_VISIBILITY_PRIVACY","TOKEN_VAZIO","capability to access system information does not prove collection; actual downstream calls and data use must be observed"],
+        ["LICENSE_TRADEMARK_BOUNDARY","PASS_BOUNDARY","Apache-2.0 code rights remain separate from product-name, mark and image constraints"]
+      ],
+      "conflicts":["PRIVILEGE_CAPABILITY_DOES_NOT_ESTABLISH_AUTHORIZED_DOWNSTREAM_USE"],
+      "next_gate":"downstream caller -> permission -> system resource/data -> user authorization -> platform policy -> retention/disclosure"
+    }
+  ],
+  "official_anchors":[
+    ["Linux Kernel Documentation","https://docs.kernel.org/6.9/process/license-rules.html","file-level SPDX and Linux-syscall-note govern exact licensing boundaries"],
+    ["AOSP App Security","https://source.android.com/docs/security/overview/app-security","apps are isolated and sensitive APIs/resources are permission protected"],
+    ["AOSP App Sandbox","https://source.android.com/docs/security/app-sandbox","normal apps use UID/process isolation by default"],
+    ["Android Package Visibility","https://developer.android.com/training/package-visibility","minimal package visibility is the platform baseline and broad visibility has privacy/policy implications"],
+    ["Android Data Use","https://developer.android.com/privacy-and-security/declare-data-use","actual data collection/use determines declaration and privacy analysis"]
+  ],
+  "resolution_refinements":{
+    "resolve_jurisdiction":"resolve target/operator/device/deployment/distribution/data subjects before law; capability alone yields TOKEN_VAZIO",
+    "resolve_authority_hierarchy":"official OS/license authority > material license/SPDX > local README/control > narrative",
+    "semantic_contextualize":"technical terms for instrumentation, privileged access and runtime compilation are capability descriptors, not conclusions of illegality or maliciousness",
+    "cross_cultural_semantic_diff":"security vocabulary may map differently across jurisdictions; legal equivalence remains AMBIGUOUS until actual conduct/rule is resolved",
+    "detect_normative_conflict":"flag heterogeneous license topology and any leap from capability to authorized/lawful use",
+    "protected_subject_gate":"enhanced review activates only when actual processing touches children, health, biometrics or other protected/sensitive subjects",
+    "evidence_and_conformance_gate":"selftest/security feature/documentation validates only its scoped gate; runtime authorization, privacy compliance and certification remain separate",
+    "temporal_validity":"bind conclusions to repo/ref/path/blob and relevant OS/policy version",
+    "provenance_chain":"repo/ref/path/blob -> capability -> target/deployment -> authority/license -> data/resource -> NormativeAtom -> evidence -> status"
+  },
+  "delta":{"repos_added":4,"uncertainty_reduced":4,"conflict_delta":5},
+  "R3":{
+    "F_ok":"106 repository surfaces cumulatively covered; four new technical surfaces classified without capability-to-legality inference",
+    "F_gap":"authorization/deployment and downstream data flows remain unresolved; fork ancestry/file-level license maps remain incomplete",
+    "F_next":"continue remaining uncatalogued repositories; prioritize ancestry/license maps and downstream privilege/data-flow inventories"
+  }
+}

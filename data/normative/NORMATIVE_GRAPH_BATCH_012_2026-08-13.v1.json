@@ -1,0 +1,195 @@
+{
+  "schema": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch": "012",
+  "date": "2026-08-13",
+  "claim_allowed": false,
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "upstream_license_baseline != local_file_license_proof",
+    "NOTICE_observed != complete_file_level_license_map",
+    "implementation_claim != FIPS_validation",
+    "technical_guidance != law",
+    "climate_model != operational_forecast_authority",
+    "TOKEN_VAZIO closes only by scoped evidence"
+  ],
+  "repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/android_frameworks_base_rafaelia",
+      "ref": "lineage-23.0",
+      "kind": "REFINEMENT",
+      "sources": ["repository root listing", "NOTICE"],
+      "normative_atoms": [
+        {
+          "type": "SOFTWARE_LICENSE_NOTICE",
+          "authority": "AOSP/Apache and listed third parties",
+          "binding_force": "LICENSE_CONDITIONS_FOR_COVERED_COMPONENTS",
+          "jurisdiction": "contract/copyright context; not universal public law",
+          "temporal_state": "OBSERVED_AT_REF",
+          "evidence": "NOTICE contains Apache-2.0 text plus Android, Apache Commons, Nuance, PacketVideo, Apple/mDNSResponder, TagSoup, VisualOn, NXP and Unicode notices"
+        }
+      ],
+      "state": "PARTIAL_PROVENANCE_RESOLVED",
+      "uncertainty_reduction": [
+        "root NOTICE exists and materially establishes Apache-2.0 plus multiple third-party notices",
+        "repository root is a large Android framework tree on lineage-23.0"
+      ],
+      "gaps": [
+        "upstream base commit and Lineage fork ancestry not yet proven",
+        "RAFAELIA-specific additions not isolated",
+        "file-level license/SPDX map not complete",
+        "build/runtime evidence not evaluated"
+      ],
+      "closure_gate": "derive bounded diff/ancestry + classify changed files by retained/new license headers"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/androidx_RmR",
+      "ref": "androidx-main",
+      "sources": ["README.md", "LICENSE.txt"],
+      "normative_atoms": [
+        {
+          "type": "SOFTWARE_LICENSE",
+          "authority": "Apache Software Foundation license text as adopted by AndroidX",
+          "binding_force": "LICENSE_CONDITIONS_FOR_COVERED_WORK",
+          "jurisdiction": "copyright/license obligations",
+          "temporal_state": "CURRENT_REF_OBSERVED",
+          "evidence": "LICENSE.txt is Apache License 2.0"
+        },
+        {
+          "type": "CONTRIBUTION_POLICY",
+          "authority": "AndroidX project workflow",
+          "binding_force": "PROJECT_CONTRIBUTION_POLICY_NOT_PUBLIC_LAW",
+          "evidence": "README references contributor agreement, reviews and tests"
+        }
+      ],
+      "state": "LICENSE_OBSERVED_LOCAL_CHANGE_RISK_DECLARED",
+      "conflicts": [
+        "README identifies a mass-reduced kotlin-js-store/yarn.lock; deterministic dependency resolution requires before/after build evidence"
+      ],
+      "gaps": [
+        "transitive dependency license inventory after lockfile rewrite",
+        "before/after Kotlin-JS reproducibility receipt",
+        "security/SCA delta for removed resolutions"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/openssl",
+      "ref": "master",
+      "sources": ["README.md", "LICENSE.txt"],
+      "normative_atoms": [
+        {
+          "type": "SOFTWARE_LICENSE",
+          "authority": "OpenSSL Project",
+          "binding_force": "APACHE_2_0_FOR_OPENSSL_3_PLUS_AND_MASTER",
+          "temporal_state": "CURRENT_MASTER_BASELINE",
+          "evidence": "local LICENSE.txt Apache-2.0; official OpenSSL license page confirms 3.0+ and master use Apache-2.0"
+        },
+        {
+          "type": "TECHNICAL_STANDARD",
+          "authority": "NIST/OpenSSL validated module process",
+          "binding_force": "CONFORMANCE_SCOPE_SPECIFIC_NOT_GENERAL_LAW",
+          "evidence": "OpenSSL documentation distinguishes FIPS provider use/validation from generic OpenSSL builds"
+        },
+        {
+          "type": "RFC",
+          "authority": "IETF",
+          "binding_force": "TECHNICAL_SPECIFICATION_NOT_STATUTE",
+          "references": ["RFC 8446", "RFC 9000"]
+        }
+      ],
+      "state": "UPSTREAM_REFERENCE_WITH_FIPS_BOUNDARY",
+      "conflicts": [
+        "README phrase 'included cryptographic module validated to conform with FIPS standards' must not be inherited by an arbitrary fork/build without validated-provider identity and security-policy-compliant build/use"
+      ],
+      "gaps": [
+        "fork delta from official OpenSSL upstream",
+        "whether this exact build uses a validated FIPS provider",
+        "certificate/security-policy identity for any claimed FIPS deployment",
+        "export-control applicability is jurisdiction/use dependent"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Clima",
+      "ref": "main",
+      "sources": ["README.md"],
+      "normative_atoms": [
+        {
+          "type": "SCIENTIFIC_TECHNICAL_GUIDANCE",
+          "authority": "WMO",
+          "binding_force": "GUIDANCE_NOT_UNIVERSAL_LAW",
+          "scope": "climate prediction/projection verification and uncertainty practice"
+        }
+      ],
+      "license": "TOKEN_VAZIO_ROOT_LICENSE_NOT_FOUND",
+      "state": "EXPERIMENTAL_CLIMATE_MODEL_LICENSE_AND_VALIDATION_OPEN",
+      "conflicts": [
+        "README calls the system a climate modelling framework but does not establish operational forecast authority or validated physical model status"
+      ],
+      "gaps": [
+        "authoritative license",
+        "dataset provenance and redistribution rights",
+        "physical-model validation against accepted baselines",
+        "uncertainty/calibration evidence",
+        "operational-use disclaimer if outputs are exposed as forecasts"
+      ]
+    }
+  ],
+  "official_anchors": [
+    {
+      "id": "AOSP-LICENSE-HEADERS-2026",
+      "authority": "Android Open Source Project",
+      "kind": "UPSTREAM_LICENSE_GUIDANCE",
+      "binding_force": "PROJECT_LICENSE_GUIDANCE",
+      "source": "source.android.com/docs/setup/contribute/licenses",
+      "observed": "2026-08-13"
+    },
+    {
+      "id": "OPENSSL-LICENSE",
+      "authority": "OpenSSL Project",
+      "kind": "SOFTWARE_LICENSE_GUIDANCE",
+      "binding_force": "LICENSE_SCOPE_REFERENCE",
+      "source": "openssl-library.org/source/license/",
+      "observed": "2026-08-13"
+    },
+    {
+      "id": "OPENSSL-FIPS-PROVIDER",
+      "authority": "OpenSSL Project / accredited FIPS validation context",
+      "kind": "TECHNICAL_CONFORMANCE_GUIDANCE",
+      "binding_force": "SCOPE_SPECIFIC_CONFORMANCE",
+      "source": "docs.openssl.org/*/man7/OSSL_PROVIDER-FIPS/",
+      "observed": "2026-08-13"
+    },
+    {
+      "id": "WMO-CLIMATE-PREDICTION-GUIDANCE",
+      "authority": "World Meteorological Organization",
+      "kind": "TECHNICAL_GUIDANCE",
+      "binding_force": "GUIDANCE_NOT_STATUTE",
+      "source": "wmo.int/files/cst-climate-prediction",
+      "observed": "2026-08-13"
+    }
+  ],
+  "coverage": {
+    "previous": 55,
+    "new_repositories": 3,
+    "refined_repositories": 1,
+    "cumulative": 58,
+    "token_vazio_closed_by_evidence": 3,
+    "token_vazio_preserved_or_created": 14
+  },
+  "uncertainty_delta": "DECREASED_FOR_ANDROID_NOTICE_ANDROIDX_LICENSE_OPENSSL_LICENSE_AND_FIPS_BOUNDARY; PRESERVED_FOR_FORK_DIFF_CLIMATE_VALIDATION_AND_DATA_RIGHTS",
+  "conflict_delta": "4_SCOPED_CONFLICTS_OR_OVERCLAIM_RISKS_MADE_EXPLICIT",
+  "F_ok": [
+    "58 repositories cumulatively indexed",
+    "android framework NOTICE materially observed and no longer treated as total license absence",
+    "AndroidX Apache-2.0 root license observed",
+    "OpenSSL Apache-2.0 and FIPS scope boundary anchored to primary sources",
+    "WMO climate guidance classified as technical guidance rather than law"
+  ],
+  "F_gap": [
+    "android fork ancestry and local diff",
+    "AndroidX lockfile reproducibility and transitive license delta",
+    "OpenSSL exact fork/build FIPS identity",
+    "Clima license, dataset provenance and scientific validation"
+  ],
+  "F_next": "Continue next unprocessed repositories, prioritizing forks with large upstream surfaces and repositories whose outputs could affect health, children, privacy, safety, accessibility or public decision-making; for android_frameworks_base_rafaelia, next bounded probe is ancestry/diff rather than repo-wide license conclusion.",
+  "closure_state": "VERIFIED_LIMITED"
+}

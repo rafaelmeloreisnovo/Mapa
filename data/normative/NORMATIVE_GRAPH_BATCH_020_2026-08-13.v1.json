@@ -1,0 +1,255 @@
+{
+  "schema": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch_id": "BATCH_020_2026-08-13",
+  "predecessor_head": "3b7b63c124bfaff65fa10618e32f88709f0a523b",
+  "claim_allowed": false,
+  "coverage_cumulative_surfaces": 102,
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "repo_name != role != authority",
+    "copyright != patent != ownership_of_idea_or_method",
+    "README_license_claim != material_license_file",
+    "source_code_rewrite != extinction_of_upstream_license_obligations",
+    "local_validation != external_certification",
+    "research_prose != model_training_execution",
+    "AI_generated_or_conversation_derived_text != primary_source",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "official_normative_anchors": [
+    {
+      "authority": "WIPO",
+      "type": "COPYRIGHT_GUIDANCE",
+      "url": "https://www.wipo.int/en/web/copyright/protection",
+      "observed_rule": "copyright protects expression, not ideas, procedures, methods of operation or mathematical concepts; protection is generally automatic for qualifying works"
+    },
+    {
+      "authority": "WIPO",
+      "type": "BERNE_TREATY_SUMMARY",
+      "url": "https://www.wipo.int/en/web/treaties/ip/berne/summary_berne",
+      "observed_rule": "national treatment, automatic protection and independence of protection are treaty principles; implementation remains territorial"
+    },
+    {
+      "authority": "WIPO",
+      "type": "TRADITIONAL_KNOWLEDGE_GUIDANCE",
+      "url": "https://www.wipo.int/en/web/traditional-knowledge",
+      "observed_rule": "traditional knowledge and traditional cultural expressions raise distinct IP, cultural heritage and community-rights questions; documentation requires provenance and risk assessment"
+    },
+    {
+      "authority": "AOSP",
+      "type": "UPSTREAM_LICENSE_GUIDANCE",
+      "url": "https://source.android.com/docs/setup/contribute/licenses",
+      "observed_rule": "Apache-2.0 is preferred for AOSP but exceptions exist; existing copyright and license headers must be preserved"
+    }
+  ],
+  "repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/CreFeBerna",
+      "ref": "main",
+      "paths": [
+        {"path": "README.md", "blob_sha": "2112a99c1b2b3d15a35ce0735399e0b08d7a3604"},
+        {"path": "Important.md", "blob_sha": "f2ea418dd67d991c8a6602b6978e55456164f1c0"}
+      ],
+      "declared_or_observed_role": "conversation-derived RAFAELIA portfolio analysis plus VQF-33X archaeological/astronomical modeling narrative",
+      "license": {"status": "TOKEN_VAZIO", "evidence": "root LICENSE not found"},
+      "normative_atoms": [
+        {
+          "type": "COPYRIGHT_PATENT_BOUNDARY",
+          "authority": "WIPO",
+          "binding_force": "GUIDANCE_SUMMARIZING_IP_LAW",
+          "status": "CORRECTION_REQUIRED",
+          "finding": "README labels formulas/methods as implicit patents/patentable assets; no patent grant, application number, claims, jurisdiction or examination evidence was observed. Copyright may protect authored expression but not the underlying idea, method or mathematical concept as such."
+        },
+        {
+          "type": "TRADITIONAL_CULTURAL_PROVENANCE",
+          "authority": "WIPO_TK_TCE",
+          "binding_force": "GUIDANCE_AND_JURISDICTION_DEPENDENT_RIGHTS",
+          "status": "HUMAN_REVIEW",
+          "finding": "claims connect Maya, Inca, Aztec, Egyptian and other cultural/archaeological materials to predictive models; source/community provenance and rights/attribution must be tracked claim-by-claim rather than absorbed into a private ownership claim"
+        },
+        {
+          "type": "SCIENTIFIC_CLAIM_BOUNDARY",
+          "authority": "RESEARCH_METHOD",
+          "binding_force": "EPISTEMIC",
+          "status": "TOKEN_VAZIO",
+          "finding": "predictions about unknown comets, ancient observations and future astronomical windows are not promoted without datasets, model code, uncertainty model, falsifier and reproducible receipt"
+        }
+      ],
+      "conflicts": [
+        "IMPLICIT_PATENT_LANGUAGE_WITHOUT_PATENT_AUTHORITY",
+        "PREDICTIVE_SCIENTIFIC_LANGUAGE_WITHOUT_REPRODUCIBLE_EVIDENCE"
+      ],
+      "protected_subjects": ["indigenous_and_local_communities_if_specific_TK_TCE_is_used"],
+      "next_gate": "build claim-level source matrix: assertion -> primary archaeological/astronomical source -> community/cultural provenance -> model input -> falsifier -> evidence"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/GaiaPhiRafcode",
+      "ref": "main",
+      "paths": [
+        {"path": "README.md", "blob_sha": "819c6251320bf2ab669d76db7b2a0306fb9625b6"},
+        {"path": "docs/02_DATA_GOVERNANCE_AND_ETHICS.md", "blob_sha": "7ef7190f3f34a11d832a8db6af83a88bb8157dc1"},
+        {"path": "docs/10_COLLECTION_ORIGIN_TRACE_MATRIX.md", "blob_sha": "202ed1b4956efa9f1116a0574c0f3b6dce71d549"}
+      ],
+      "declared_or_observed_role": "auditable information reorganization, legacy collection governance and provenance tracing",
+      "license": {"status": "TOKEN_VAZIO", "evidence": "root LICENSE not found"},
+      "normative_atoms": [
+        {
+          "type": "PRIVATE_USE_POLICY",
+          "authority": "REPOSITORY_GOVERNANCE",
+          "binding_force": "PRIVATE_POLICY_NOT_UNIVERSAL_LAW",
+          "status": "HUMAN_REVIEW",
+          "finding": "repository states commercial use requires explicit written authorization, but no root license instrument was observed; the exact enforceable grant/restriction therefore remains jurisdiction- and rights-holder-dependent"
+        },
+        {
+          "type": "PROVENANCE_REQUIREMENT",
+          "authority": "INTERNAL_GOVERNANCE",
+          "binding_force": "PROJECT_CONTRACT",
+          "status": "PARTIAL",
+          "finding": "origin trace matrix correctly preserves PRECISA_ORIGEM/PRECISA_TESTE/PRECISA_SCHEMA and AI/conversation-derived material as non-primary until provenance is reconstructed"
+        },
+        {
+          "type": "DATA_PRIVACY_SURFACE",
+          "authority": "JURISDICTION_DEPENDENT",
+          "binding_force": "TOKEN_VAZIO_UNTIL_DATA_SUBJECT_AND_DEPLOYMENT_RESOLVED",
+          "status": "TOKEN_VAZIO",
+          "finding": "legacy collection and browser orchestration may contain or expose user-generated material; data categories, subjects, retention, disclosure and lawful basis are not inferred from file names"
+        }
+      ],
+      "conflicts": ["COMMERCIAL_RESTRICTION_DECLARED_WITHOUT_CANONICAL_ROOT_LICENSE"],
+      "next_gate": "inventory collection rights: file -> origin -> author/provider -> license/terms -> personal-data class -> retention/disclosure -> evidence"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Tora",
+      "ref": "main",
+      "paths": [
+        {"path": "README.md", "blob_sha": "2c88d830b276367e1c03d495457a21eb04e0fd0f"}
+      ],
+      "declared_or_observed_role": "Android/native C/ASM conversion and multi-repository code unification",
+      "license": {"status": "CONTRADICTION", "evidence": "README declares MIT and points to LICENSE, but root LICENSE was not found"},
+      "normative_atoms": [
+        {
+          "type": "LICENSE_PROVENANCE",
+          "authority": "SOURCE_PROJECT_LICENSES",
+          "binding_force": "LICENSE_CONDITIONS",
+          "status": "P0_HUMAN_REVIEW",
+          "finding": "README states code is unified/refactored from Termux, QEMU, AndroidX and other projects. Converting or rewriting code into ASM does not by itself erase copyright/license obligations where protected source expression is copied or adapted."
+        },
+        {
+          "type": "ANDROID_UPSTREAM_LICENSE",
+          "authority": "AOSP",
+          "binding_force": "UPSTREAM_LICENSE_BASELINE_WITH_EXCEPTIONS",
+          "status": "PARTIAL",
+          "finding": "AOSP commonly uses Apache-2.0 but exceptions exist; each imported/adapted source path must preserve its actual upstream header/license rather than inherit a repo-wide MIT assumption"
+        },
+        {
+          "type": "RUNTIME_CLAIM",
+          "authority": "EVIDENCE_GATE",
+          "binding_force": "EPISTEMIC",
+          "status": "TOKEN_VAZIO",
+          "finding": "README calls APK fully functional and conversion equivalent; current build, APK hash, ABI matrix, equivalence tests and device receipts were not executed in this normative pass"
+        }
+      ],
+      "conflicts": [
+        "README_MIT_VS_MISSING_LICENSE_FILE",
+        "REPO_WIDE_LICENSE_CANNOT_OVERRIDE_SOURCE_COMPONENT_LICENSES"
+      ],
+      "next_gate": "source-to-assembly ledger: source repo/ref/path/blob/license -> transformed Tora path/blob -> transformation method -> equivalence test -> attribution/NOTICE obligation"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/treinarModelos",
+      "ref": "main",
+      "paths": [
+        {"path": "README.md", "blob_sha": "READ_BY_CONNECTOR_CONTENT_AVAILABLE_SHA_NOT_RELIABLY_EXTRACTED_IN_THIS_BATCH"},
+        {"path": "LICENSE", "blob_sha": "f2a2f9fd2d04b99cd3126731640edcea3fea326b"}
+      ],
+      "declared_or_observed_role": "research prose on ICL/implicit optimization and contextual adaptation",
+      "license": {"status": "OBSERVED_MIT", "evidence": "material MIT text in root LICENSE"},
+      "normative_atoms": [
+        {
+          "type": "RESEARCH_CLAIM_BOUNDARY",
+          "authority": "EVIDENCE_GATE",
+          "binding_force": "EPISTEMIC",
+          "status": "PARTIAL",
+          "finding": "README distinguishes simplified linear-attention/regression constructions from realistic NLP extrapolation; repository name and prose do not prove that persistent model weights were trained"
+        },
+        {
+          "type": "THIRD_PARTY_RESEARCH_RIGHTS",
+          "authority": "COPYRIGHT_LICENSE",
+          "binding_force": "SOURCE_SPECIFIC",
+          "status": "TOKEN_VAZIO",
+          "finding": "MIT grant for this repository does not automatically relicense external papers, model weights, datasets, figures or third-party text referenced by the research narrative"
+        }
+      ],
+      "conflicts": [],
+      "next_gate": "separate paper citations and any model/data assets from repository-authored material; require dataset/model/version/checkpoint/metric receipt before TRAINING_EXECUTED"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Semente",
+      "ref": "main",
+      "paths": [
+        {"path": "README.md", "blob_sha": "03b1041541d1af16bb3048d11673518aa9534704"},
+        {"path": "RAFAELIA_ARM32_VALIDATION_STATUS.md", "blob_sha": "e827c40792d27dfdc0fe16dc75f0df205f9821db"}
+      ],
+      "declared_or_observed_role": "seed/evidence repository with ARM32 validation status, benchmark/evidence ZIPs and image assets",
+      "license": {"status": "TOKEN_VAZIO", "evidence": "root LICENSE not found"},
+      "normative_atoms": [
+        {
+          "type": "LOCAL_COMPUTATIONAL_EVIDENCE",
+          "authority": "REPOSITORY_RECEIPT",
+          "binding_force": "EPISTEMIC_LOCAL",
+          "status": "PARTIAL_POSITIVE",
+          "finding": "ARM32 status document reports concrete local PASS counts, device context, package hashes and explicitly disclaims external certification; this supports bounded local execution claims only"
+        },
+        {
+          "type": "CERTIFICATION_BOUNDARY",
+          "authority": "EVIDENCE_GATE",
+          "binding_force": "EPISTEMIC",
+          "status": "PASS_BOUNDARY",
+          "finding": "local validation != external certification; no external certification is promoted"
+        },
+        {
+          "type": "IMAGE_ASSET_RIGHTS_AND_PRIVACY",
+          "authority": "JURISDICTION_DEPENDENT",
+          "binding_force": "TOKEN_VAZIO",
+          "status": "HUMAN_REVIEW",
+          "finding": "root contains multiple large image assets; filename alone does not establish authorship, generation source, license, depicted persons, consent, cultural provenance or redistribution rights"
+        }
+      ],
+      "conflicts": [],
+      "next_gate": "inspect evidence ZIP manifests/hashes without treating filenames as proof; separately build image asset provenance/privacy ledger before any publication or reuse"
+    }
+  ],
+  "resolution_function_refinements": {
+    "resolve_jurisdiction": "repository hosting alone never resolves legal jurisdiction; require actor, deployment, rights-holder/data-subject and distribution context",
+    "resolve_authority_hierarchy": "official statute/treaty/regulator source > authoritative upstream license > local license instrument > README claim > narrative",
+    "semantic_contextualize": "cultural/archaeological references require provenance context; symbolic analogy cannot silently become factual historical attribution",
+    "cross_cultural_semantic_diff": "traditional cultural expressions and community-linked concepts may lack safe one-to-one legal/cultural equivalence; preserve AMBIGUOUS/TOKEN_VAZIO",
+    "detect_normative_conflict": "flag README license claims that lack or contradict the material license instrument and any transformed-source license inheritance conflict",
+    "protected_subject_gate": "activate indigenous/local-community provenance gate when specific traditional knowledge/TCE is used; do not infer community ownership from generic cultural references",
+    "evidence_and_conformance_gate": "local PASS validates only the declared local gate; certification, patent status, scientific generalization and legal compliance require independent scoped evidence",
+    "temporal_validity": "bind every conclusion to repo/ref/path/blob and retrieved/observed date; later README language cannot rewrite prior evidence",
+    "provenance_chain": "repo/ref/path/blob -> content role -> rights/source authority -> NormativeAtom -> applicability -> evidence -> status -> correction history"
+  },
+  "delta": {
+    "repos_added": 5,
+    "coverage_before": 97,
+    "coverage_after": 102,
+    "uncertainty_reduced": [
+      "Semente local ARM32 evidence boundary is materially documented",
+      "treinarModelos root MIT text is materially observed",
+      "GaiaPhiRafcode legacy collection already carries explicit provenance-gap states"
+    ],
+    "uncertainty_opened_or_preserved": [
+      "CreFeBerna license and claim-level archaeological/cultural provenance",
+      "GaiaPhiRafcode canonical license and personal-data/rights inventory",
+      "Tora source-license inheritance and runtime equivalence",
+      "treinarModelos third-party paper/model/data rights and actual training execution",
+      "Semente image provenance/privacy and evidence-bundle replay"
+    ],
+    "conflict_delta": 5
+  },
+  "R3": {
+    "F_ok": "102 repository surfaces cumulatively covered; five new repositories classified without name-based inference; copyright/patent, cultural provenance, source-license inheritance, training-execution and local-certification boundaries strengthened",
+    "F_gap": "canonical licenses absent in four of five surfaces; Tora needs source-by-source license ledger; CreFeBerna scientific/cultural claims need primary sources and falsifiers; Semente assets/evidence bundles need provenance/replay; model/data rights remain separate",
+    "F_next": "continue from remaining uncatalogued repositories, prioritizing license/provenance conflicts, model/dataset training claims, image/person/cultural assets, and same-name/fork ancestry; next high-information probe is Tora source->transform->license mapping"
+  }
+}

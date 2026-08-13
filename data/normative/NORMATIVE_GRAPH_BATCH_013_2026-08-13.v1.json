@@ -1,0 +1,293 @@
+{
+  "schema_version": "NORMATIVE_GRAPH_BATCH_V1",
+  "batch_id": "013",
+  "generated_at": "2026-08-13T05:45:00-03:00",
+  "predecessor": {
+    "pr": "rafaelmeloreisnovo/Mapa#212",
+    "head_before": "ce5c21589206f5dd7719bfa0eaca9931d472ccdf",
+    "cumulative_repositories_before": 58
+  },
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "source_name != legal_authority",
+    "private_license_term != public-law sanction",
+    "copyright != monopoly over ideas/procedures/mathematical concepts",
+    "guideline_or_model_framework != statute",
+    "scientific_documentation != scientific_validation",
+    "health_or_implant_claim != medical-device approval",
+    "spiritual_semantics != biomedical mechanism",
+    "claim_allowed=false without scoped evidence"
+  ],
+  "resolution_refinements": {
+    "resolve_jurisdiction": "Require actor, subject, establishment/market location, conduct, data flow, physical deployment and dispute forum before attaching jurisdiction. GDPR territorial reach is evaluated by Article 3 conditions rather than repo language or global publication alone.",
+    "resolve_authority_hierarchy": "Treat constitutions/laws/treaties/regulations, private licenses/contracts, technical standards/guidance and scientific literature as distinct authority classes. A private document cannot self-promote to supraconstitutional or jus-cogens status.",
+    "semantic_contextualize": "Separate symbolic/spiritual language from technical, biomedical and legal propositions. Terms such as universal, sacred, quantum, living, neural signature and protection require domain-specific interpretation before any normative effect is assigned.",
+    "cross_cultural_semantic_diff": "Preserve multilingual text as authored expression but do not infer legal equivalence across translations. LEGAL_EQUIVALENT remains TOKEN_VAZIO unless jurisdiction-specific review establishes it.",
+    "detect_normative_conflict": "Create conflicts when README evidence gates contradict license assertions, or when a private license asserts automatic global sanctions, universal jurisdiction, ICJ access, public-law crimes, or mandatory effect unsupported by external authority.",
+    "protected_subject_gate": "Any actual human health, implant, neural, mental-health or child-facing deployment activates enhanced safety/privacy review; repository wording alone does not establish that protected subjects were actually involved.",
+    "evidence_and_conformance_gate": "Requirement -> control -> test -> evidence -> scoped status. Publication, DOI, hash, README, license or CI alone does not prove legal compliance, medical-device approval or scientific validity.",
+    "temporal_validity": "External normative sources are pinned to retrieved/current official versions where possible; repo statements without effective date remain temporally bounded to the observed commit/ref.",
+    "provenance_chain": "Every conclusion must retain repo/ref/path plus external official authority; unknown license or runtime remains TOKEN_VAZIO rather than inferred from adjacent repositories."
+  },
+  "repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/teoremas",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE"],
+      "declared_role": "formal mathematics, invariants and reference implementation",
+      "normative_atoms": [
+        {
+          "type": "LICENSE",
+          "authority": "private copyright license",
+          "instrument": "MIT License",
+          "binding_force": "contractual/copyright permission subject to applicable law",
+          "jurisdiction": "not fixed by license text",
+          "status": "OBSERVED"
+        },
+        {
+          "type": "SCIENTIFIC_EPISTEMIC_POLICY",
+          "authority": "repository governance",
+          "instrument": "README truth-state rules",
+          "binding_force": "internal research policy",
+          "status": "OBSERVED"
+        }
+      ],
+      "findings": [
+        "README explicitly distinguishes historical record, conditional theorem, finite test and universal proof.",
+        "MIT license text is materially present at repository root.",
+        "Theorem 1 is FAIL_AS_WRITTEN with a conditioned variant; theorem 2 and ECC/universal claims preserve TOKEN_VAZIO rather than being promoted."
+      ],
+      "conflicts": [],
+      "token_vazio": [
+        "proof obligations for theorem 2",
+        "defined ECC code/syndrome/minimum distance for theorem 4",
+        "autonomous-orbit proof for theorem 5",
+        "dependency closure for theorem 6",
+        "physical/universal validation"
+      ],
+      "claim_allowed": false,
+      "next_gate": "Keep mathematical proof obligations separate from software tests; close each theorem only with its declared proof/falsifier."
+    },
+    {
+      "repo": "instituto-Rafael/relativity-living-light",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE.md"],
+      "declared_role": "falsifiable cosmology/research program with real-data validation infrastructure",
+      "normative_atoms": [
+        {
+          "type": "PRIVATE_LICENSE",
+          "authority": "author-defined license text",
+          "instrument": "RAFCODE-Φ vΩ-EXTENDED",
+          "binding_force": "PRIVATE_TERM_ONLY_UNTIL_JURISDICTIONAL_VALIDITY_REVIEW",
+          "jurisdiction": "TOKEN_VAZIO / jurisdiction-specific",
+          "status": "CONFLICT_REQUIRES_REVIEW"
+        },
+        {
+          "type": "SCIENTIFIC_GOVERNANCE",
+          "authority": "repository research policy",
+          "instrument": "claim-gated workflow and VERIFIED/DECLARED/TOKEN_VAZIO/CONTRADICTION states",
+          "binding_force": "internal research policy",
+          "status": "OBSERVED"
+        },
+        {
+          "type": "INTERNATIONAL_COURT_REFERENCE",
+          "authority": "International Court of Justice",
+          "instrument": "ICJ contentious jurisdiction rules",
+          "binding_force": "public international-law institutional rule",
+          "status": "OFFICIAL_EXTERNAL_BASELINE"
+        }
+      ],
+      "findings": [
+        "README is evidence-bounded and explicitly states that documentary priority does not prove physical truth or statistical victory.",
+        "LICENSE.md asserts supraconstitutional status, jus cogens protection, universal nullity, automatic submission by access, crimes-against-humanity language, automatic sanctions and arbitration via the ICJ/WIPO.",
+        "Official ICJ material states that only States may be parties in contentious cases and jurisdiction depends on State consent; private persons, NGOs and corporations cannot institute contentious proceedings before the ICJ.",
+        "WIPO official copyright guidance states copyright protects expression, not ideas, procedures, methods of operation or mathematical concepts as such."
+      ],
+      "conflicts": [
+        {
+          "type": "PRIVATE_LICENSE_VS_PUBLIC_INTERNATIONAL_LAW",
+          "severity": "P0",
+          "description": "License language presents private terms as universally supraconstitutional/jus-cogens and invokes ICJ enforcement beyond the Court's official contentious-jurisdiction model.",
+          "status": "CORRECTION_OR_JURISDICTION_SPECIFIC_LEGAL_REVIEW_REQUIRED"
+        },
+        {
+          "type": "COPYRIGHT_SCOPE_OVERREACH",
+          "severity": "P1",
+          "description": "License purports to protect formulas, hypotheses, concepts and methods as an indivisible universal copyright-like body; copyright authority does not extend protection to underlying ideas/procedures/mathematical concepts as such.",
+          "status": "SCOPE_CORRECTION_REQUIRED"
+        }
+      ],
+      "token_vazio": [
+        "jurisdiction-by-jurisdiction enforceability of custom license clauses",
+        "valid forum/arbitration clauses for private disputes",
+        "independent cosmological validation",
+        "scoped evidence for any GDPR/LGPD applicability claim"
+      ],
+      "claim_allowed": false,
+      "next_gate": "Split scientific provenance license from symbolic/ethical manifesto and map enforceable IP/contract clauses jurisdiction-by-jurisdiction."
+    },
+    {
+      "repo": "instituto-Rafael/RAFAELIA_CORE",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE (not found)"],
+      "declared_role": "central ethical-validation pipeline and governance documentation",
+      "normative_atoms": [
+        {
+          "type": "ETHICAL_POLICY",
+          "authority": "repository governance",
+          "instrument": "Ethica[8]/Σ-Ω pipeline",
+          "binding_force": "internal technical/ethical policy",
+          "status": "DECLARED"
+        },
+        {
+          "type": "LICENSE",
+          "authority": "TOKEN_VAZIO",
+          "instrument": "root LICENSE not found",
+          "binding_force": "UNKNOWN",
+          "status": "TOKEN_VAZIO"
+        }
+      ],
+      "findings": [
+        "README explicitly leaves pipeline execution, local ethical-validation PASS and documentation indexing as TOKEN_VAZIO.",
+        "No root LICENSE was observed at the queried ref; licensing must not be inherited from related repositories by name or ecosystem association."
+      ],
+      "conflicts": [],
+      "token_vazio": [
+        "authoritative license",
+        "runtime receipt for Σ pipeline",
+        "defined Ethica[8] control semantics",
+        "false-positive/false-negative tests for ethical decisions",
+        "jurisdictional applicability if ethical output is presented as legal compliance"
+      ],
+      "claim_allowed": false,
+      "next_gate": "Resolve authoritative license, then execute bounded synthetic-fixture tests separating ethical policy output from legal conclusions."
+    },
+    {
+      "repo": "instituto-Rafael/BIOSINTETICOS",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE"],
+      "declared_role": "proposed biofractal/biosynthetic photonic metamaterial research concept",
+      "normative_atoms": [
+        {
+          "type": "PRIVATE_LICENSE",
+          "authority": "author-defined text",
+          "instrument": "CIENTIESPIRITUAL ∞ license",
+          "binding_force": "PRIVATE_TERM_ONLY_UNTIL_VALIDITY_REVIEW",
+          "status": "CONFLICT_REQUIRES_REVIEW"
+        },
+        {
+          "type": "HEALTH_TECH_GUIDANCE",
+          "authority": "World Health Organization",
+          "instrument": "WHO medical-device regulatory framework/guidance",
+          "binding_force": "technical/model guidance for Member States; not universal statute",
+          "status": "OFFICIAL_EXTERNAL_BASELINE"
+        }
+      ],
+      "findings": [
+        "README proposes applications including implants and effects on mental/emotional state while prototype composition, biosynthesis methodology and electromagnetic-shielding tests remain TOKEN_VAZIO.",
+        "WHO materials treat medical-device regulation as implemented by national/regional regulatory authorities and provide model/guidance rather than one self-executing universal device law.",
+        "LICENSE contains symbolic/spiritual language, asserted global application through UDHR/LGPD/GDPR and a private US$10 billion minimum indemnity; these are not external public-law sanctions by mere declaration.",
+        "The LICENSE also embeds large amounts of speculative technical/biomedical content, so license text and scientific specification are not cleanly separated."
+      ],
+      "conflicts": [
+        {
+          "type": "HEALTH_CLAIM_WITHOUT_DEVICE_EVIDENCE",
+          "severity": "P0",
+          "description": "Implant/mental-health/neural effects are described while measurable prototype, safety/performance evidence and applicable regulatory classification remain absent.",
+          "status": "TOKEN_VAZIO + HUMAN_REVIEW"
+        },
+        {
+          "type": "PRIVATE_SANCTION_PRESENTED_AS_GLOBAL",
+          "severity": "P1",
+          "description": "Private license states a global multibillion-dollar indemnity and broad legal coverage without jurisdiction-specific legal basis.",
+          "status": "CORRECTION_OR_JURISDICTION_SPECIFIC_REVIEW_REQUIRED"
+        },
+        {
+          "type": "SPIRITUAL_SEMANTICS_VS_BIOMEDICAL_MECHANISM",
+          "severity": "P1",
+          "description": "Neural/spiritual/biofield terminology is presented alongside biomedical/implant use without validated mechanism or measurement model.",
+          "status": "SEMANTIC_SEPARATION_REQUIRED"
+        }
+      ],
+      "protected_subjects": ["potential patient/user", "implant recipient", "mental-health user if ever deployed"],
+      "token_vazio": [
+        "material composition and manufacturing protocol",
+        "medical-device classification by target jurisdiction",
+        "biocompatibility/electrical/EM safety testing",
+        "human-subject protocol if humans are studied",
+        "privacy model for any real neural/physiological data",
+        "authoritative reusable license terms separated from manifesto"
+      ],
+      "claim_allowed": false,
+      "next_gate": "Before any human/implant claim, freeze a non-human bench prototype specification and jurisdiction-specific device/safety classification; preserve spiritual language as non-mechanistic semantics unless separately evidenced."
+    },
+    {
+      "repo": "instituto-Rafael/omega-rafaelia",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE (not found)"],
+      "declared_role": "not established from repository material",
+      "normative_atoms": [
+        {
+          "type": "REPOSITORY_IDENTITY",
+          "authority": "GitHub repository state",
+          "instrument": "README containing only repository heading",
+          "binding_force": "none",
+          "status": "MINIMAL_MATERIAL"
+        },
+        {
+          "type": "LICENSE",
+          "authority": "TOKEN_VAZIO",
+          "instrument": "root LICENSE not found",
+          "binding_force": "UNKNOWN",
+          "status": "TOKEN_VAZIO"
+        }
+      ],
+      "findings": [
+        "Repository exists and is accessible, but README material observed is only a heading.",
+        "No function, legal authority, compliance claim, data flow, protected subject or license can be inferred safely from the name."
+      ],
+      "conflicts": [],
+      "token_vazio": ["purpose", "license", "code/content inventory", "data categories", "jurisdiction", "normative dependencies"],
+      "claim_allowed": false,
+      "next_gate": "Inventory versioned files before assigning any federated role or normative atom beyond repository identity."
+    }
+  ],
+  "external_authority_anchors": [
+    {
+      "authority": "International Court of Justice",
+      "source": "Contentious Jurisdiction / How the Court Works",
+      "observed_rule": "Only States may be parties in contentious cases; contentious jurisdiction depends on State consent.",
+      "authority_class": "INTERNATIONAL_COURT_INSTITUTIONAL_RULE"
+    },
+    {
+      "authority": "WIPO",
+      "source": "Copyright protection guidance / WIPO Copyright Treaty Article 2",
+      "observed_rule": "Copyright protects expression, not ideas, procedures, methods of operation or mathematical concepts as such.",
+      "authority_class": "INTERNATIONAL_IP_AUTHORITY_GUIDANCE_TREATY_TEXT"
+    },
+    {
+      "authority": "World Health Organization",
+      "source": "WHO global model regulatory framework for medical devices",
+      "observed_rule": "Medical-device regulation is implemented through regulatory authorities and jurisdictional systems; WHO provides model guidance and regulatory support rather than one universal self-executing device statute.",
+      "authority_class": "INTERNATIONAL_HEALTH_TECH_GUIDANCE"
+    },
+    {
+      "authority": "European Union",
+      "source": "GDPR Article 3",
+      "observed_rule": "Territorial scope depends on establishment in the Union or specified offering/monitoring of persons in the Union, among other defined conditions.",
+      "authority_class": "BINDING_REGULATION_WITH_DEFINED_SCOPE"
+    }
+  ],
+  "coverage": {
+    "repositories_added": 5,
+    "cumulative_repositories_after": 63,
+    "new_conflicts": 5,
+    "token_vazio_reduced": 3,
+    "token_vazio_created_or_refined": 22,
+    "uncertainty_delta": "NEGATIVE: authoritative license resolved for teoremas; ICJ/copyright scope clarified for RLL; health-device authority class clarified for BIOSINTETICOS. Remaining uncertainty is more precisely typed.",
+    "conflict_delta": "+5 explicit conflicts rather than silent overreach",
+    "F_ok": "63 repositories cumulatively indexed; five new/revisited surfaces classified with provenance and authority separation.",
+    "F_gap": "RLL custom-license enforceability, BIOSINTETICOS health/implant evidence, RAFAELIA_CORE and omega-rafaelia licenses/runtime/purpose, and remaining unprocessed repositories.",
+    "F_next": "Continue from remaining federated inventory, prioritizing repositories with health/biological claims, child-facing content, privacy/data flows, security enforcement, missing/conflicting licenses or universal-compliance language."
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "schema":"NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch":"019",
+  "date":"2026-08-13",
+  "mode":"evidence-first",
+  "claim_allowed":false,
+  "predecessor_head":"def9668fc55ace6a9217a439f041ef7c1083814e",
+  "invariants":[
+    "Universalidade != Uniformidade",
+    "repo_name != role != authority",
+    "license_file != license_compliance",
+    "code_license != dataset_license != model_license != asset_license",
+    "offensive_token != unlawful_conduct",
+    "upstream_reference != fork_identity_proof",
+    "implementation != execution != evidence != claim",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "repositories":[
+    {
+      "repo":"rafaelmeloreisnovo/V79-1",
+      "ref":"main",
+      "anchors":[{"path":"README.md","blob_sha":"e69de29bb2d1d6434b8b29ae775ad8c2e48c5391","observed":"empty file"}],
+      "declared_role":"TOKEN_VAZIO",
+      "license":"TOKEN_VAZIO",
+      "jurisdiction":"TOKEN_VAZIO",
+      "normative_state":"INSUFFICIENT_MATERIAL",
+      "gaps":["repository purpose","license","data/subject scope","runtime/evidence"],
+      "F_next":"inventory tracked files before inferring function"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/new",
+      "ref":"main",
+      "anchors":[{"path":"<repository>","observed":"GitHub contents reports repository empty"}],
+      "declared_role":"TOKEN_VAZIO",
+      "license":"TOKEN_VAZIO",
+      "jurisdiction":"TOKEN_VAZIO",
+      "normative_state":"EMPTY_REPOSITORY",
+      "gaps":["all functional and normative attributes"],
+      "F_next":"do not infer from repository name; revisit only after material appears"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/Img",
+      "ref":"main",
+      "anchors":[{"path":"README.md","blob_sha":"b7309f78b7120c980959fa04408b754e74f32194","observed":"title only"}],
+      "declared_role":"TOKEN_VAZIO",
+      "license":"TOKEN_VAZIO",
+      "privacy_data":"TOKEN_VAZIO",
+      "normative_state":"MINIMAL_METADATA_ONLY",
+      "gaps":["image/source inventory","copyright/provenance","persons/biometrics if any","license"],
+      "F_next":"enumerate versioned assets and classify third-party/person-identifiable material"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/Graditao",
+      "ref":"main",
+      "anchors":[
+        {"path":"README.md","blob_sha":"02eecfd9d0a2af75fa9de4a1f44c4f590db1bbc9:README.md","observed":"creative/profane literary corpus plus technical fragments"},
+        {"path":"LICENSE","observed":"GNU GPL v3 full license text"}
+      ],
+      "declared_role":"creative corpus / mixed notes",
+      "license":{"type":"GPL-3.0","binding_force":"private copyright license","scope":"covered copyrightable material; exact file-by-file scope needs inventory"},
+      "semantic_context":{"languages":["pt"],"registers":["profane","satirical","literary","technical"],"rule":"token offensiveness alone does not establish illegality, harassment, discrimination or protected-subject harm"},
+      "protected_subject_gate":"TOKEN_VAZIO until actual subject/audience/context is identified",
+      "normative_state":"PARTIAL",
+      "gaps":["authorship/provenance of mixed inserted text","license scope across non-code prose","audience/context for any conduct claim"],
+      "F_next":"separate creative expression, technical code and imported/generated passages by provenance"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/myCat-iahelpsus",
+      "ref":"main",
+      "anchors":[{"path":"README.md","blob_sha":"ec6f959871518f147f3eeb8852de9c34ec8e4354","observed":"Desktop Cat QT overlay; README points to yumiaura/mycat and external image assets"}],
+      "declared_role":"desktop overlay application fork/copy candidate",
+      "license":"TOKEN_VAZIO (root LICENSE not observed)",
+      "provenance":{"upstream_reference":"yumiaura/mycat / yumiaura assets","fork_identity":"TOKEN_VAZIO"},
+      "normative_state":"PROVENANCE_AND_LICENSE_REVIEW_REQUIRED",
+      "gaps":["upstream ancestry","license terms","image/GIF rights","PyPI package identity","local modifications"],
+      "F_next":"resolve upstream commit/tree and asset licenses before redistribution claim"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/actions",
+      "ref":"main",
+      "anchors":[
+        {"path":"README.md","blob_sha":"cf81c6b223eb0f0e0176d5d30ffe1fe7edfafb17","observed":"Gradle GitHub Actions, setup/dependency submission/wrapper validation"},
+        {"path":"LICENSE","blob_sha":"b0c1c5227c57a4ffa546d29eece43e55e21db513","observed":"MIT License, copyright Gradle Inc."}
+      ],
+      "declared_role":"GitHub Actions for Gradle builds",
+      "license":{"type":"MIT","binding_force":"private copyright license","obligations":["preserve copyright and permission notice in copies/substantial portions"]},
+      "security":{"wrapper_validation":"implementation/documented capability, not universal supply-chain assurance","dependency_submission":"repository dependency metadata path, not vulnerability-free proof"},
+      "provenance":"appears derived from gradle/actions; exact ancestry/local diff TOKEN_VAZIO",
+      "normative_state":"LICENSE_RESOLVED_PROVENANCE_PARTIAL",
+      "gaps":["upstream ancestry","local diff","third-party actions/dependency terms","actual workflow execution receipts"],
+      "F_next":"compare fork to canonical gradle/actions revision and classify local changes"
+    },
+    {
+      "repo":"rafaelmeloreisnovo/nanoGPT",
+      "ref":"master",
+      "anchors":[
+        {"path":"README.md","observed":"fork declares performance/Unicode enhancements; upstream nanoGPT deprecated; references GPT-2/OpenWebText/Hugging Face assets"},
+        {"path":"LICENSE","blob_sha":"329db5e33310fd5d98343e2bca690bfb07317526","observed":"MIT License, copyright Andrej Karpathy"}
+      ],
+      "declared_role":"GPT training/finetuning research code fork",
+      "license":{"code":"MIT","binding_force":"private copyright license"},
+      "asset_rule":"code MIT does not determine model/checkpoint/tokenizer/dataset licenses or privacy provenance",
+      "claims":{"performance":"README-declared; benchmark receipt for local fork TOKEN_VAZIO","backward_compatibility":"README-declared; conformance test TOKEN_VAZIO"},
+      "privacy_data":"training data provenance and personal-data status depend on selected datasets; TOKEN_VAZIO repo-wide",
+      "normative_state":"CODE_LICENSE_RESOLVED_ASSET_AND_BENCHMARK_GAPS",
+      "gaps":["model/checkpoint licenses","OpenWebText/data provenance and terms","personal/sensitive data assessment for selected corpus","benchmark reproduction","fork ancestry/local diff"],
+      "F_next":"build asset provenance matrix and reproduce one enhancement benchmark with receipt"
+    }
+  ],
+  "function_refinements":{
+    "resolve_jurisdiction":"return TOKEN_VAZIO when no actor, deployment, data subject or territorial nexus is observable; repository hosting alone is insufficient",
+    "resolve_authority_hierarchy":"source bytes and explicit license/contract outrank names, badges and inferred upstream identity; upstream authority does not erase local-fork obligations",
+    "semantic_contextualize":"classify register, target, relationship, audience and act before legal/harassment labels; profanity is a semantic signal, not a legal finding",
+    "cross_cultural_semantic_diff":"preserve AMBIGUOUS/NO_SAFE_EQUIVALENT when idiom, satire or profanity lacks stable legal/cultural equivalence",
+    "detect_normative_conflict":"flag license/provenance mismatch, code-vs-asset license mismatch, README claim-vs-receipt gap, and upstream-vs-local authority collisions",
+    "protected_subject_gate":"activate enhanced review only when a child/vulnerable/person-identifiable subject or credible risk is evidenced; do not infer subject from words alone",
+    "evidence_and_conformance_gate":"license text proves terms exist, not that redistribution complies; README performance/security claims remain DECLARED until reproducible evidence",
+    "temporal_validity":"bind each conclusion to owner/repo/ref/path/blob and observation date; deprecated upstream status does not erase preserved historical code",
+    "provenance_chain":"owner/repo/ref/path/blob -> material role -> normative atom -> applicability -> obligation -> evidence -> status"
+  },
+  "deltas":{
+    "coverage_before":90,
+    "coverage_after":97,
+    "new_surfaces":7,
+    "uncertainty_delta":"reduced for code/license identity on Graditao/actions/nanoGPT; increased explicitly for upstream/assets where previously untyped",
+    "conflict_delta":["mixed creative/technical provenance in Graditao","myCat upstream/asset license unresolved","actions upstream ancestry unresolved","nanoGPT code-license vs model/data-license separation"]
+  },
+  "F_ok":["7 new repository surfaces typed","3 root license states materially resolved","empty/minimal repositories preserved without invented role","semantic profanity rule made explicit","AI code vs model/data asset licensing separated"],
+  "F_gap":["remaining accessible repositories not yet covered","upstream ancestry and local diffs","asset/dataset/model licenses","runtime/benchmark receipts","privacy/subject applicability where no concrete data flow is yet observed"],
+  "F_next":"continue inventory with CreFeBerna and remaining unprocessed accessible repositories; prioritize license/provenance collisions, personal-data/image repositories, AI datasets/models and upstream forks"
+}

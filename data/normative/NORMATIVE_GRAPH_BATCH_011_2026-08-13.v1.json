@@ -1,0 +1,33 @@
+{
+  "schema":"NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch":"011",
+  "date":"2026-08-13",
+  "claim_allowed":false,
+  "invariants":[
+    "Universalidade != Uniformidade",
+    "upstream_license_baseline != local_file_license_proof",
+    "README_claim != execution_evidence",
+    "primitive_name != standards_conformance",
+    "TOKEN_VAZIO closes only by scoped evidence"
+  ],
+  "repositories":[
+    {"repo":"rafaelmeloreisnovo/privadoFazendo","ref":"master","sources":["README.md","LICENSE"],"license":"MIT_ROOT_TEXT_OBSERVED","state":"REFERENCE_PLUS_LICENSE_OBSERVED","gaps":["MVP dataset provenance","component licenses","runtime evidence"]},
+    {"repo":"rafaelmeloreisnovo/PCR_Rafaelia_Code_seed","ref":"master","sources":["README.md","LICENSE"],"license":"GPL_3_ROOT_TEXT_OBSERVED","state":"DOCUMENTARY_CUSTODY_RUNTIME_NOT_EXECUTED","gaps":["file-level exceptions","C08 return gate","external review"]},
+    {"repo":"rafaelmeloreisnovo/Rafaelia","ref":"main","sources":["README.md","LICENSE"],"license":"CC0_1_0_ROOT_TEXT_OBSERVED","state":"LICENSE_ONLY","gaps":["technical role","source inventory","third-party provenance"]},
+    {"repo":"rafaelmeloreisnovo/Rafaelia_Core","ref":"main","sources":["README.md"],"license":"TOKEN_VAZIO_ROOT_LICENSE_NOT_FOUND","state":"IMPLEMENTATION_DECLARED_CURRENT_RUNTIME_EVIDENCE_REQUIRED","gaps":["authoritative license","current CI receipts","crypto KAT/conformance","multi-architecture reproduction"]},
+    {"repo":"rafaelmeloreisnovo/android_frameworks_base_rafaelia","ref":"lineage-23.0","sources":["repository metadata"],"license":"TOKEN_VAZIO_LOCAL_FORK_LICENSE_NOT_OBSERVED","state":"TOKEN_VAZIO_LOCAL_FORK_PROVENANCE","gaps":["file-level license map","upstream base commit","Lineage provenance","local diff","build evidence"]},
+    {"repo":"rafaelmeloreisnovo/Geral","ref":"main","sources":["README.md"],"license":"TOKEN_VAZIO_ROOT_LICENSE_NOT_FOUND","state":"IMPLEMENTATION_DECLARED_CURRENT_TEST_EVIDENCE_REQUIRED","gaps":["authoritative license","current make test receipt","rollback adversarial evidence"]}
+  ],
+  "official_anchors":[
+    {"id":"GNU-GPL-3.0","authority":"GNU/FSF","kind":"SOFTWARE_LICENSE","url":"https://www.gnu.org/licenses/gpl-3.0.html"},
+    {"id":"CC0-1.0","authority":"Creative Commons","kind":"PUBLIC_DOMAIN_TOOL","url":"https://creativecommons.org/publicdomain/zero/1.0/legalcode.en"},
+    {"id":"AOSP-LICENSE-BASELINE","authority":"Android Open Source Project","kind":"UPSTREAM_LICENSE_GUIDANCE","url":"https://source.android.com/docs/setup/contribute/licenses"}
+  ],
+  "coverage":{"previous":49,"new":6,"cumulative":55,"token_vazio_closed_by_evidence":4},
+  "uncertainty_delta":"DECREASED_FOR_THREE_LICENSES; LARGE_FORK_PROVENANCE_GAP_MADE_EXPLICIT",
+  "conflict_delta":"2_REFINEMENTS_PRESERVED",
+  "F_ok":["55 repositories cumulatively indexed","three root license states materially resolved","upstream baseline separated from local-fork authority"],
+  "F_gap":["large-fork provenance","missing root licenses","current runtime/test receipts","file-level component licensing"],
+  "F_next":"Continue next unprocessed repositories; first perform bounded provenance/license mapping for android_frameworks_base_rafaelia before any repo-wide claim.",
+  "closure_state":"VERIFIED_LIMITED"
+}
