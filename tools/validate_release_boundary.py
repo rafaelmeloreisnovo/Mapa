@@ -1,9 +1,23 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import argparse, json
-from pathlib import Path
+from pathlib import PurePosixPath, Path
 
 ALLOWED_VISIBILITY = {"PUBLIC", "PRIVATE"}
+
+def _valid_release_path(value: str) -> bool:
+    if not isinstance(value, str):
+        return False
+    value = value.strip()
+    if not value or "\\" in value:
+        return False
+    p = PurePosixPath(value)
+    if p.is_absolute():
+        return False
+    parts = p.parts
+    if any(part in {"", ".", ".."} for part in parts):
+        return False
+    return p.as_posix() == value
 
 def validate(doc):
     errors = []
@@ -27,6 +41,8 @@ def validate(doc):
         path = item.get("path")
         if not isinstance(path, str) or not path.strip():
             errors.append(f"{p}.path required")
+        elif not _valid_release_path(path):
+            errors.append(f"{p}.path must be normalized repository-relative POSIX path")
         elif path in seen:
             errors.append(f"{p}.path duplicate:{path}")
         else:
