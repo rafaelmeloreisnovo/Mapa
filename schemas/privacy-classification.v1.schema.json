@@ -1,0 +1,27 @@
+{
+  "$id": "https://rafaelia.local/schemas/privacy-classification.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claim_allowed": {"const": false},
+    "items": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "access_roles": {"items": {"minLength": 1, "type": "string"}, "type": "array", "uniqueItems": true},
+          "classification": {"enum": ["PUBLIC", "INTERNAL", "CONFIDENTIAL", "RESTRICTED"]},
+          "contains": {"items": {"enum": ["NONE", "IDENTITY", "SENSOR_IDENTITY", "PERSONAL", "SENSITIVE"]}, "type": "array", "uniqueItems": true},
+          "id": {"minLength": 1, "type": "string"},
+          "public_representation": {"additionalProperties": false, "properties": {"path": {"type": "string"}, "redacted": {"type": "boolean"}}, "required": ["redacted"], "type": "object"}
+        },
+        "required": ["id", "classification", "contains", "access_roles", "public_representation"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "version": {"const": 1}
+  },
+  "required": ["version", "claim_allowed", "items"],
+  "title": "RAFAELIA Privacy Classification V1",
+  "type": "object"
+}
