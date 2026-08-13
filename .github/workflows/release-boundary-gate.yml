@@ -1,0 +1,41 @@
+name: RAFAELIA Release Boundary Gate
+
+on:
+  pull_request:
+    paths:
+      - "tools/validate_release_boundary.py"
+      - "tests/test_release_boundary.py"
+      - "data/governance/release-boundary.v1.json"
+      - "data/governance/fixtures/release-boundary-deny-negative.v1.json"
+      - ".github/workflows/release-boundary-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-release-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile release-boundary validator
+        run: python -m py_compile tools/validate_release_boundary.py
+      - name: Run release-boundary regression suite
+        run: python tests/test_release_boundary.py
+      - name: Validate deny-by-default release manifest
+        run: python tools/validate_release_boundary.py data/governance/release-boundary.v1.json
+      - name: Prove prohibited release is blocked
+        shell: bash
+        run: |
+          set +e
+          python tools/validate_release_boundary.py data/governance/fixtures/release-boundary-deny-negative.v1.json
+          rc=$?
+          set -e
+          if [ "$rc" -ne 1 ]; then
+            echo "Expected semantic rejection exit=1 for prohibited PRIVATE release; got exit=$rc"
+            exit 1
+          fi
+          echo "PASS prohibited release blocked with semantic exit=1"
