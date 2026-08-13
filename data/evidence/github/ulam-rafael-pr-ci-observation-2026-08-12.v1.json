@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "ULAM-RAFAEL-PR-CI-OBSERVATION-2026-08-12-V1",
+  "state": "OBSERVED_GITHUB",
+  "claim_allowed": false,
+  "pull_requests": [
+    {
+      "repo": "rafaelmeloreisnovo/Matem-tica-",
+      "pr": 14,
+      "head_sha": "a60de567f841b58123f047b26793929e41ae0c04",
+      "draft": true,
+      "mergeable": true,
+      "changed_files": 2,
+      "additions": 188,
+      "deletions": 0,
+      "workflow_runs": [],
+      "ci_state": "TOKEN_VAZIO_NO_PR_WORKFLOW_RUNS_OBSERVED"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/papers",
+      "pr": 49,
+      "head_sha": "493812cf714a383f3123b6cf64197e11839f9444",
+      "draft": true,
+      "mergeable": true,
+      "changed_files": 3,
+      "additions": 472,
+      "deletions": 0,
+      "workflow_runs": [
+        {
+          "run_id": 31660600435,
+          "name": "CI",
+          "conclusion": "failure",
+          "classification": "RUNNER_STARTUP_FAILURE",
+          "evidence": "3 jobs; all steps=[]; runner_id=0; runner_name empty"
+        }
+      ],
+      "ci_state": "FAIL_BEFORE_STEPS_NOT_CONTENT_FAILURE"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 211,
+      "head_sha": "664f60232a94b78845c528daee3b1395927500a0",
+      "draft": true,
+      "mergeable": true,
+      "changed_files": 3,
+      "additions": 229,
+      "deletions": 0,
+      "workflow_runs": [
+        {
+          "run_id": 31660609259,
+          "name": "CI",
+          "conclusion": "failure",
+          "classification": "RUNNER_STARTUP_FAILURE",
+          "evidence": "Validate Repository Structure: steps=[]; runner_id=0; runner_name empty"
+        },
+        {
+          "run_id": 31660609282,
+          "name": "Branch Topology Gate",
+          "conclusion": "failure",
+          "classification": "TOKEN_VAZIO_JOB_DETAILS_NOT_INSPECTED"
+        },
+        {
+          "run_id": 31660609237,
+          "name": "RAFAELIA Promotion Control V1",
+          "conclusion": "failure",
+          "classification": "TOKEN_VAZIO_JOB_DETAILS_NOT_INSPECTED"
+        }
+      ],
+      "ci_state": "PARTIAL_RUNNER_STARTUP_EVIDENCE"
+    }
+  ],
+  "boundary": "A GitHub run conclusion=failure with no executed steps and runner_id=0 is not evidence that repository content failed validation.",
+  "next": [
+    "rerun when runner capacity/credits are available",
+    "execute exact branch bytes locally or in Android Termux",
+    "bind runtime receipt to exact Git blob/commit"
+  ]
+}
