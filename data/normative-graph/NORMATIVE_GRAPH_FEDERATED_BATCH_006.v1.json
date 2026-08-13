@@ -1,0 +1,412 @@
+{
+  "schema_version": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch_id": "NORMATIVE_GRAPH_FEDERATED_BATCH_006",
+  "predecessor_merge_commit": "09f08a9e44ad235eab09abdefdd7682cb5f1cb8e",
+  "generated_at": "2026-08-12T22:44:49-03:00",
+  "mode": "evidence-first",
+  "claim_allowed": false,
+  "coverage_accumulated_repositories": 30,
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "repository declaration != external legal authority",
+    "README license label != authoritative license file",
+    "copyright license covers only rights the licensor has authority to license",
+    "third-party scientific data != automatically relicensable under repository license",
+    "mathematical analogy != solution of an open problem",
+    "patentability statement != patent grant",
+    "personal-data presence != lawful publication by default",
+    "symbolic/spiritual declaration != supraconstitutional legal force",
+    "TOKEN_VAZIO is auditable"
+  ],
+  "repositories": [
+    {
+      "repository": "rafaelmeloreisnovo/Catalogo-cosmologico",
+      "ref": "main",
+      "paths": ["README.md", "LICENSE.md", "data/", "docs/", "scripts/"],
+      "declared_role": "astronomical catalog combining MPC/JPL/ESA-NASA observations with RAFAELIA symbolic interpretation",
+      "source_anchors": {
+        "README.md": "ef275e6651f0e2ae3b4394d6ad890d4be619807b",
+        "LICENSE.md": "338df813315a55b42743c5e42eddeb5bcd84c751"
+      },
+      "normative_atoms": [
+        {
+          "type": "LICENSE_CONFLICT",
+          "source": "README.md vs LICENSE.md",
+          "authority": "repository documentation",
+          "binding_force": "unresolved",
+          "finding": "README declares MIT while LICENSE.md declares CC-BY-SA 4.0",
+          "status": "CONTRADICTION"
+        },
+        {
+          "type": "CREATIVE_COMMONS_LICENSE",
+          "source": "CC BY-SA 4.0 official legal code",
+          "authority": "Creative Commons public license",
+          "binding_force": "license terms for material the licensor has authority to license",
+          "obligations": ["attribution", "indicate modifications", "ShareAlike for adapted material", "no additional restrictions"],
+          "limitations": ["does not license patent/trademark rights", "does not grant rights in third-party material beyond licensor authority"]
+        },
+        {
+          "type": "ASTRONOMY_DATA_AUTHORITY",
+          "source": "IAU / Minor Planet Center",
+          "authority": "International Astronomical Union recognized MPC role",
+          "binding_force": "scientific authority/provenance, not a repository copyright license",
+          "finding": "MPC is the recognized center for collection/checking/dissemination of astrometric observations and designations"
+        },
+        {
+          "type": "NASA_JPL_MEDIA_POLICY",
+          "source": "NASA/JPL official media policies",
+          "authority": "NASA / JPL-Caltech",
+          "binding_force": "source-specific usage conditions, attribution and non-endorsement constraints",
+          "finding": "NASA material is generally reusable under NASA guidelines; JPL media may require credit and third-party items retain separate rights"
+        }
+      ],
+      "jurisdiction": ["Brazil-project-context", "United States source-material context", "international astronomy data ecosystem"],
+      "semantic_intercultural": "science/symbolism boundary must remain explicit; symbolic comet interpretation is not an MPC/JPL/NASA finding",
+      "protected_subjects": ["authors/data contributors; age/status TOKEN_VAZIO"],
+      "privacy_data": "no repository-wide personal-data inventory observed in this probe",
+      "security": "not primary",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C006-CAT-001",
+          "type": "LICENSE_FILE_MISMATCH",
+          "statement": "README says MIT; LICENSE.md says CC-BY-SA 4.0.",
+          "status": "CONTRADICTION",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C006-CAT-002",
+          "type": "THIRD_PARTY_DATA_RELICENSING_GAP",
+          "statement": "Repository aggregates data attributed to MPC/JPL/ESA/NASA.",
+          "finding": "Repository-level license cannot silently override source-specific rights, credits, database rights or third-party restrictions.",
+          "status": "HUMAN_REVIEW"
+        },
+        {
+          "id": "NG-C006-CAT-003",
+          "type": "SCIENTIFIC_SOURCE_SEPARATION",
+          "statement": "README mixes real observations and symbolic interpretation.",
+          "status": "PARTIAL",
+          "closure_gate": "each observation/derived claim has source authority + transformation provenance + epistemic class"
+        }
+      ],
+      "evidence_gate": "PARTIAL_WITH_CONTRADICTION",
+      "f_next": "select one authoritative repository license and add source-rights/provenance metadata per external dataset/object"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafaelCiencias",
+      "ref": "main",
+      "paths": ["README.md", "docs/PORTFOLIO_DEFENSAVEL_DEEPRafa2.md", "rafaelia_image_json_learn.py", "scan_png_home_rafaelia.sh", "rafaelia_memory.json"],
+      "declared_role": "transversal scientific portfolio catalog with evidence-state separation and experimental image/JSON learning pipeline",
+      "source_anchors": {"README.md": "67a31858513cf53471d149d3c3cf0d01ea2dc341"},
+      "normative_atoms": [
+        {
+          "type": "INTERNAL_EVIDENCE_GOVERNANCE",
+          "source": "README.md",
+          "authority": "repository research governance",
+          "binding_force": "internal epistemic policy",
+          "obligations": ["concept != model != simulation != prototype != measurement != replication != patent application != granted patent", "preserve TOKEN_VAZIO"]
+        },
+        {
+          "type": "COPYRIGHT_LICENSE_GAP",
+          "source": "root LICENSE probe",
+          "authority": "repository",
+          "binding_force": "TOKEN_VAZIO",
+          "finding": "No root LICENSE was found in this probe"
+        },
+        {
+          "type": "PERSONAL_DATA_CONTEXTUAL",
+          "source": "image scanning / image+JSON pipeline",
+          "authority": "applicable privacy law determined by actual data subjects and processing",
+          "binding_force": "activity-specific",
+          "finding": "Image metadata or identifiable persons can create privacy obligations; actual dataset content and legal basis remain unobserved"
+        }
+      ],
+      "jurisdiction": "TOKEN_VAZIO_BY_DATASET_AND_DEPLOYMENT",
+      "semantic_intercultural": "scientific, market, valuation and IP language must preserve evidence class through summaries/translations",
+      "protected_subjects": ["image subjects TOKEN_VAZIO", "research participants TOKEN_VAZIO"],
+      "privacy_data": "POTENTIAL: local PNG scans, web images and persistent memory; data inventory/legal basis/retention not established",
+      "security": "TOKEN_VAZIO_DATA_PIPELINE",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C006-RC-001",
+          "type": "LICENSE_AUTHORITY_GAP",
+          "status": "TOKEN_VAZIO",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C006-RC-002",
+          "type": "PATENT_STATUS_BOUNDARY",
+          "finding": "Portfolio/patentability discussion cannot be promoted to granted-patent status without patent-office evidence.",
+          "status": "RESOLVED_BY_INTERNAL_INVARIANT"
+        },
+        {
+          "id": "NG-C006-RC-003",
+          "type": "IMAGE_DATA_PRIVACY_GAP",
+          "status": "TOKEN_VAZIO",
+          "closure_gate": "dataset manifest + data-subject class + source terms + lawful-basis/exception analysis + retention/security controls"
+        }
+      ],
+      "evidence_gate": "PARTIAL",
+      "f_next": "inventory images/JSON sources and licensing/privacy classes before validating or distributing trained/derived artifacts"
+    },
+    {
+      "repository": "instituto-Rafael/Clay-Maths",
+      "ref": "main",
+      "paths": ["README.md", "License.md", "docs/analysis/", "core_fractal_universe.py"],
+      "declared_role": "research mapping between RAFAELIA and Clay Millennium Prize Problems with bilingual documentation and code",
+      "source_anchors": {
+        "README.md": "c7c9308667493a2e34c61978153258a1cf150f47",
+        "License.md": "84ea3a58a1026c224e967cd429fc4e8bc2211f5e"
+      },
+      "normative_atoms": [
+        {
+          "type": "CLAY_SCIENTIFIC_AUTHORITY",
+          "source": "Clay Mathematics Institute Millennium Prize Problems and Rules",
+          "authority": "Clay Mathematics Institute",
+          "binding_force": "prize/research authority, not law",
+          "finding": "Only Poincare is solved; the other six remain unsolved. Prize consideration requires qualifying publication, two-year passage and general acceptance under CMI rules."
+        },
+        {
+          "type": "CUSTOM_LICENSE",
+          "source": "License.md",
+          "authority": "repository author subject to applicable law and upstream rights",
+          "binding_force": "custom terms require jurisdiction-specific enforceability review",
+          "finding": "License invokes AGPL, Berne, TRIPS, WIPO, LGPD, GDPR and symbolic/spiritual terms without a single machine-resolvable grant"
+        },
+        {
+          "type": "PRIVACY_LGPD",
+          "source": "public License.md contains direct identifying/civil-registration and birth-related personal information",
+          "authority": "Brazil LGPD contextual if processing falls within material/territorial scope",
+          "binding_force": "law when applicable",
+          "finding": "Public personal-data exposure requires purpose, necessity, legal-basis/exception and security review; exact identifiers are intentionally not replicated in this ledger"
+        }
+      ],
+      "jurisdiction": ["Brazil-contextual", "international publication/research context"],
+      "semantic_intercultural": "VERY_HIGH: mathematical conjecture, cosmology, symbolic language, spiritual claims and legal claims coexist in bilingual material",
+      "protected_subjects": ["identified natural person in License.md", "health-related readers if medical sections are relied upon"],
+      "privacy_data": "P0_REVIEW: publicly embedded identifying and birth-related data in License.md; do not replicate values downstream",
+      "security": "P0: minimize replication of personal identifiers in indexes, logs and training corpora",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C006-CLAY-001",
+          "type": "LICENSE_PATH_MISMATCH",
+          "statement": "README points to LICENSE_RAFCODE.md, but that path was not found; a different License.md exists.",
+          "status": "CONTRADICTION",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C006-CLAY-002",
+          "type": "MILLENNIUM_PROBLEM_SCOPE",
+          "finding": "Repository describes correspondences/suggestions; these are not CMI-recognized solutions. Six prize problems remain officially unsolved.",
+          "status": "RESOLVED_BY_EVIDENCE"
+        },
+        {
+          "id": "NG-C006-CLAY-003",
+          "type": "PUBLIC_PERSONAL_DATA_EXPOSURE",
+          "status": "P0_HUMAN_REVIEW",
+          "closure_gate": "public-safe redaction/minimization decision + historical preservation strategy + privacy/legal-basis review"
+        },
+        {
+          "id": "NG-C006-CLAY-004",
+          "type": "NORMATIVE_OVERBREADTH",
+          "finding": "Private license assertions that treaties, privacy laws, UN materials or symbolic status create universal/supranational private authority are not supported merely by citation.",
+          "status": "CORRECTION_OR_EVIDENCE_REQUIRED"
+        }
+      ],
+      "evidence_gate": "PARTIAL_WITH_P0_PRIVACY_AND_LICENSE_CONFLICT",
+      "f_next": "create public-safe redaction/remediation proposal for personal identifiers and normalize one authoritative license path while preserving historical text append-only"
+    },
+    {
+      "repository": "instituto-Rafael/Bitraf-Bit-quantum",
+      "ref": "main",
+      "paths": ["README.md", "License.md", "docs/", "scripts/", "references/"],
+      "declared_role": "research on Bitraf, Rafaelian numbers, multidimensional fractal structures and proposed applications",
+      "source_anchors": {
+        "README.md": "f3e40e9c0e0cf458ca6e39ade511e0cc8b1440e4",
+        "License.md": "d0d6fe29cb3dbb3f621863e92432433c7377514a"
+      },
+      "normative_atoms": [
+        {
+          "type": "LICENSE_CONFLICT",
+          "source": "README.md vs License.md",
+          "authority": "repository documentation",
+          "binding_force": "unresolved",
+          "finding": "README says MIT; License.md is RAFCODE-vOmega custom text with restrictions, sanctions and supraconstitutional claims",
+          "status": "CONTRADICTION"
+        },
+        {
+          "type": "COPYRIGHT_SCOPE",
+          "source": "WIPO copyright guidance",
+          "authority": "WIPO informational authority",
+          "binding_force": "copyright is territorial through national law/treaties; protection covers expression, not ideas, procedures, methods or mathematical concepts as such",
+          "finding": "A repository license can authorize rights actually held by the licensor; it cannot by declaration convert mathematical concepts or all downstream ideas into universally owned subject matter"
+        },
+        {
+          "type": "PRIVATE_NORMATIVE_ASSERTION",
+          "source": "License.md",
+          "authority": "repository author",
+          "binding_force": "project declaration only unless recognized by applicable law/contract",
+          "finding": "Claims of supraconstitutional status, erga omnes effect, jus cogens coverage, automatic criminal classification, ICJ/WIPO compulsory forum and universal retroactive penalties are not promoted as law"
+        }
+      ],
+      "jurisdiction": "MULTI_JURISDICTIONAL_ASSERTIONS_UNRESOLVED",
+      "semantic_intercultural": "VERY_HIGH: legal terminology is translated across languages but legal equivalence is not demonstrated; translations cannot inherit universal legal force from wording alone",
+      "protected_subjects": ["general public/users; no special class established by README"],
+      "privacy_data": "not primary in README probe",
+      "security": "post-quantum/crypto-resistance claims require algorithm/KAT/standard-specific evidence; naming does not establish conformance",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C006-BBQ-001",
+          "type": "LICENSE_FILE_MISMATCH",
+          "statement": "README declares MIT while License.md imposes materially different RAFCODE custom terms.",
+          "status": "CONTRADICTION",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C006-BBQ-002",
+          "type": "SUPRACONSTITUTIONAL_PRIVATE_AUTHORITY_CLAIM",
+          "status": "CORRECTION_OR_EVIDENCE_REQUIRED",
+          "finding": "Citation of constitutions, UN, UNESCO, WIPO, GDPR/LGPD/DPDP/PIPL or jus cogens does not establish a private license as law above constitutions."
+        },
+        {
+          "id": "NG-C006-BBQ-003",
+          "type": "AUTOMATIC_PENALTY_FORUM_CLAIM",
+          "status": "HUMAN_REVIEW",
+          "finding": "Penalty, forum, retroactivity and contract-formation assertions require jurisdiction/contract-specific analysis and cannot be treated as universally self-executing."
+        }
+      ],
+      "evidence_gate": "PARTIAL_WITH_CONTRADICTION",
+      "f_next": "separate symbolic manifesto from enforceable software/content license and choose one authoritative licensing grant with jurisdiction/rights scope"
+    },
+    {
+      "repository": "instituto-Rafael/publicacientiespiritual",
+      "ref": "main",
+      "paths": ["README.md", "License.md", "DOCUMENTACAO_ACADEMICA/", "Database/", "Maia/", "Bolsas/"],
+      "declared_role": "large interdisciplinary publication/archive spanning mathematics, computing, physics, spirituality, ancestral knowledge, finance and research artifacts",
+      "source_anchors": {
+        "README.md": "0984d970f743eb6c5b9bd50f51507ec82536d74c",
+        "License.md": "7492e31b220d835c1343534c18d532b53877a6e1"
+      },
+      "normative_atoms": [
+        {
+          "type": "CUSTOM_RESTRICTIVE_LICENSE",
+          "source": "License.md",
+          "authority": "repository author subject to applicable law and upstream rights",
+          "binding_force": "custom/private terms; enforceability and scope jurisdiction-specific",
+          "finding": "License prohibits copying/redistribution/derivation but mixes legal, spiritual, scientific and valuation language without a clean rights grant"
+        },
+        {
+          "type": "COPYRIGHT_SCOPE",
+          "source": "WIPO copyright guidance",
+          "authority": "WIPO informational authority",
+          "binding_force": "territorial copyright framework implemented through national law/treaties",
+          "finding": "copyright protects qualifying expression; ideas, procedures, methods of operation and mathematical concepts as such are not copyright subject matter"
+        },
+        {
+          "type": "CULTURAL_PROVENANCE_GATE",
+          "source": "README ancestral/indigenous/sacred knowledge directories",
+          "authority": "source-community, heritage and applicable-law context must be resolved per item",
+          "binding_force": "TOKEN_VAZIO_ITEM_LEVEL",
+          "finding": "repository authorship does not itself establish ownership of pre-existing ancestral/traditional knowledge"
+        },
+        {
+          "type": "DOMAIN_SPECIFIC_REGULATION_GATE",
+          "source": "finance/health/AI sections in repository",
+          "authority": "applicable regulator/law determined by actual deployment and jurisdiction",
+          "binding_force": "activity-specific",
+          "finding": "research code or documentation does not itself establish authorization for regulated financial, health or AI deployment"
+        }
+      ],
+      "jurisdiction": "MULTI_DOMAIN_MULTI_JURISDICTION_TOKEN_VAZIO",
+      "semantic_intercultural": "EXTREME: science, spirituality, ancestral traditions, finance, legal terminology and symbolic claims coexist; semantic class must survive extraction/translation",
+      "protected_subjects": ["health readers/patients contextual", "financial consumers/investors contextual", "indigenous/traditional communities contextual", "children contextual TOKEN_VAZIO"],
+      "privacy_data": "large heterogeneous archive; file-level personal-data inventory not yet established",
+      "security": "large archive/scripts/databases require file-level secrets/PII/security scan before public or training reuse",
+      "accessibility": "TOKEN_VAZIO",
+      "conflicts": [
+        {
+          "id": "NG-C006-PCS-001",
+          "type": "LICENSE_SEMANTIC_AMBIGUITY",
+          "statement": "License contains internally ambiguous wording about whether the repository contains private technical data and mixes spiritual/legal sanctions with copyright restrictions.",
+          "status": "CONTRADICTION",
+          "human_review_required": true
+        },
+        {
+          "id": "NG-C006-PCS-002",
+          "type": "IP_PATENTABILITY_OVERBREADTH",
+          "finding": "README labels some items patentable/potentially patentable; this is not evidence of novelty, inventive step, industrial applicability, filing or grant.",
+          "status": "CORRECTION_OR_EVIDENCE_REQUIRED"
+        },
+        {
+          "id": "NG-C006-PCS-003",
+          "type": "REGULATED_DOMAIN_BOUNDARY",
+          "finding": "Finance/health/AI materials require activity-specific regulatory gates before production use or claims of compliance/safety.",
+          "status": "HUMAN_REVIEW"
+        },
+        {
+          "id": "NG-C006-PCS-004",
+          "type": "ANCESTRAL_KNOWLEDGE_PROVENANCE_GAP",
+          "status": "TOKEN_VAZIO",
+          "closure_gate": "item-level source/community/provenance/rights classification distinct from repository copyright"
+        }
+      ],
+      "evidence_gate": "PARTIAL_WITH_CONTRADICTION",
+      "f_next": "run file-level provenance/privacy/license/domain-risk census and split symbolic manifesto from operational legal license"
+    }
+  ],
+  "resolution_function_refinements": {
+    "resolve_jurisdiction": "derive jurisdiction from concrete processing/publication/deployment/source-material facts; repository owner location alone is insufficient",
+    "resolve_authority_hierarchy": "private license < applicable mandatory law; treaty/standard/guidance force must be typed; README wording cannot elevate private text to jus cogens or supraconstitutional law",
+    "semantic_contextualize": "preserve SCIENTIFIC, SYMBOLIC, SPIRITUAL, LEGAL, FINANCIAL, HEALTH and CULTURAL classes separately through indexing and translation",
+    "cross_cultural_semantic_diff": "multilingual legal wording is not LEGAL_EQUIVALENT until jurisdiction-specific meaning is validated",
+    "detect_normative_conflict": "flag license-label mismatches, rights-overbreadth, third-party relicensing gaps, public-personal-data exposure and regulated-domain claims",
+    "protected_subject_gate": "activate contextually for identifiable persons, children, patients, investors/consumers, research participants and indigenous/traditional communities",
+    "evidence_and_conformance_gate": "PASS requires source/version + applicability + concrete control/test/evidence; documentation alone remains REFERENCE/PARTIAL",
+    "temporal_validity": "external authorities and policies must carry retrieved/effective/version dates; older claims remain historical rather than silently current",
+    "provenance_chain": "conclusion -> interpretation -> repository path@blob -> external authority/version -> applicability rationale -> evidence gate -> correction history"
+  },
+  "external_official_sources_observed": [
+    "Creative Commons CC BY-SA 4.0 legal code",
+    "WIPO Copyright FAQ",
+    "NASA Images and Media Usage Guidelines updated 2026-06-23",
+    "NASA JPL Image Use Policy",
+    "International Astronomical Union Minor Planet Center role pages",
+    "Clay Mathematics Institute Millennium Prize Problems and 2018 Prize Rules",
+    "Brazil LGPD consolidated law and ANPD materials on personal data/security"
+  ],
+  "delta": {
+    "repositories_added": 5,
+    "coverage_before": 25,
+    "coverage_after": 30,
+    "new_or_refined_conflicts": 16,
+    "token_vazio_opened_or_refined": 12,
+    "uncertainty_delta": "REDUCED on license/source authority and Clay problem status; INCREASED_EXPLICITLY on personal-data exposure, source-data rights and heterogeneous archive provenance",
+    "conflict_delta": "PLUS license contradictions in Catalogo-cosmologico and Bitraf-Bit-quantum; Clay license-path/privacy conflict; publicacientiespiritual semantic/license conflict"
+  },
+  "priority_gaps": [
+    {"priority": "P0", "id": "NG-C006-CLAY-003", "reason": "public personal identifiers embedded in a public license file", "next_probe": "prepare public-safe redaction/minimization proposal without copying identifiers into downstream ledgers"},
+    {"priority": "P1", "id": "NG-C006-CAT-001", "reason": "conflicting MIT vs CC-BY-SA licensing signals", "next_probe": "authoritative-license decision + third-party data rights matrix"},
+    {"priority": "P1", "id": "NG-C006-BBQ-001", "reason": "MIT vs custom RAFCODE license contradiction", "next_probe": "split manifesto from operational license"},
+    {"priority": "P1", "id": "NG-C006-PCS-004", "reason": "ancestral/traditional knowledge provenance unresolved", "next_probe": "item-level source/community provenance census"},
+    {"priority": "P2", "id": "NG-C006-RC-003", "reason": "image/JSON dataset privacy and source terms unresolved", "next_probe": "dataset manifest and lawful-basis/source-license classification"}
+  ],
+  "F_ok": [
+    "coverage extended from 25 to 30 repositories",
+    "two new license contradictions preserved rather than normalized away",
+    "Clay official problem status and prize-rule authority separated from repository analogies",
+    "public personal-data exposure recorded without replicating exact identifiers",
+    "NASA/JPL/MPC third-party-source provenance separated from repository license",
+    "copyright expression separated from ideas/methods/mathematical concepts"
+  ],
+  "F_gap": [
+    "authoritative license unresolved in Catalogo-cosmologico, Clay-Maths, Bitraf-Bit-quantum and publicacientiespiritual",
+    "RafaelCiencias root license not found",
+    "file-level third-party-data rights matrix not yet complete",
+    "publicacientiespiritual file-level PII/secrets/cultural-provenance census not yet complete",
+    "regulated finance/health/AI deployment applicability remains activity-specific TOKEN_VAZIO"
+  ],
+  "F_next": "continue cursor with solvedClayMaths -> Eletron-efeitos-qu-ntico -> PlamaticGravity- -> QUANTUM_source_code -> QUANTUM_auth_certificate, while opening a separate public-safe remediation proposal for Clay-Maths personal-data exposure if still present at next verification"
+}
