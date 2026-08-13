@@ -1,0 +1,270 @@
+{
+  "schema": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch": "009",
+  "date": "2026-08-13",
+  "claim_allowed": false,
+  "predecessor": {
+    "pr": 212,
+    "head_before": "c4e7da52450880d96b4022d717316a396a9e8908",
+    "batch": "008"
+  },
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "declared_proof != evidence",
+    "product_documentation != independent runtime proof",
+    "data_processing_exists != alleged hidden exfiltration proven",
+    "advocacy != legal finding",
+    "DOI != universal legal protection",
+    "treaty membership != automatic private enforcement in every jurisdiction",
+    "repository license declaration != complete license scope",
+    "local metadata collection != network tracking",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "official_normative_anchors": [
+    {
+      "id": "GOOGLE-GBOARD-LEARNING-2026-OBSERVED",
+      "type": "OFFICIAL_PRODUCT_DOCUMENTATION",
+      "authority": "Google Gboard Help",
+      "jurisdiction": "PRODUCT_DOCUMENTATION_NOT_LAW",
+      "binding_force": "PRODUCT_DISCLOSURE_NOT_STATUTE",
+      "url": "https://support.google.com/gboard/answer/12373137?hl=pt",
+      "observed_points": [
+        "federated learning can be enabled by default and disabled by user",
+        "optional audio donation may send and store audio snippets at Google",
+        "shared audio snippets are stated not to be associated with the account",
+        "conventional-learning audio retention stated as no more than 18 months"
+      ]
+    },
+    {
+      "id": "GOOGLE-GBOARD-ADVANCED-VOICE-2026-OBSERVED",
+      "type": "OFFICIAL_PRODUCT_DOCUMENTATION",
+      "authority": "Google Gboard Help",
+      "jurisdiction": "PRODUCT_DOCUMENTATION_NOT_LAW",
+      "binding_force": "PRODUCT_DISCLOSURE_NOT_STATUTE",
+      "url": "https://support.google.com/gboard/answer/11197787?hl=pt-br",
+      "observed_points": [
+        "advanced voice typing is primarily on-device",
+        "detailed correction/edit commands may send command transcript and full text field to Google servers for processing",
+        "page states those text/audio data are not stored on Google servers for that operation"
+      ]
+    },
+    {
+      "id": "BR-LGPD-13709-COMPILED",
+      "type": "LAW",
+      "authority": "Presidencia da Republica do Brasil",
+      "jurisdiction": "BR_WITH_STATUTORY_SCOPE",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "observed_points": ["purpose", "adequacy", "necessity", "transparency", "security", "accountability"]
+    },
+    {
+      "id": "EU-GDPR-2016-679-ART5",
+      "type": "REGULATION",
+      "authority": "European Union",
+      "jurisdiction": "EU_EEA_WITH_SCOPE_RULES",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      "observed_points": ["lawfulness fairness transparency", "purpose limitation", "data minimisation", "accuracy"]
+    },
+    {
+      "id": "EU-DSA-2022-2065",
+      "type": "REGULATION",
+      "authority": "European Union",
+      "jurisdiction": "EU_WITH_STATUTORY_SCOPE",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://eur-lex.europa.eu/eli/reg/2022/2065",
+      "observed_points": [
+        "Article 27 recommender-system transparency",
+        "Article 28 high level of privacy safety and security for minors on platforms accessible to minors",
+        "scope and provider classification must be established before applicability"
+      ]
+    },
+    {
+      "id": "CC-BY-SA-4.0",
+      "type": "PUBLIC_LICENSE",
+      "authority": "Creative Commons",
+      "jurisdiction": "INTERNATIONAL_PUBLIC_LICENSE_SUBJECT_TO_APPLICABLE_LAW",
+      "binding_force": "LICENSE_CONDITIONS_WHEN VALIDLY APPLIED TO LICENSED MATERIAL",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/legalcode",
+      "observed_points": ["attribution", "ShareAlike", "no additional downstream restrictions", "only rights licensor has authority to license"]
+    },
+    {
+      "id": "WIPO-BERNE-CURRENT-MEMBERS-2026-08",
+      "type": "TREATY_MEMBERSHIP_REGISTRY",
+      "authority": "WIPO Lex",
+      "jurisdiction": "BERNE_CONTRACTING_PARTIES",
+      "binding_force": "TREATY_OBLIGATIONS_FOR_PARTIES; DOMESTIC EFFECT AND PRIVATE REMEDIES DEPEND ON APPLICABLE LAW",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?search_what=C&treaty_id=15",
+      "observed_points": ["WIPO registry observed total members: 182", "Brazil listed as contracting party"]
+    },
+    {
+      "id": "ZENODO-DOI-GENERAL",
+      "type": "REPOSITORY_POLICY_GUIDANCE",
+      "authority": "Zenodo",
+      "jurisdiction": "RESEARCH_REPOSITORY_SERVICE",
+      "binding_force": "PERSISTENT_IDENTIFIER_POLICY_NOT_COPYRIGHT_OR_LEGAL_VALIDITY",
+      "url": "https://support.zenodo.org/help/en-gb/18-general/216-what-is-a-doi",
+      "observed_points": ["DOI is a globally unique persistent identifier for a record", "DOI improves citation/discovery", "DOI does not itself establish universal legal rights"]
+    }
+  ],
+  "repositories": [
+    {
+      "repo": "instituto-Rafael/apk-gboard-insight",
+      "ref": "main",
+      "source_paths": ["README.md", "pages/analise_simbio_apk-gboard-insight.md"],
+      "declared_role": "privacy research on Gboard using NetRAF/Smali/ZipRAF/ZRF concepts",
+      "material_observation": "README marks traffic capture, Smali pattern analysis and policy correlation TOKEN_VAZIO, while analysis page labels behavioral/location/hidden-flow assertions as proof of real execution without attached capture, APK digest, trace, command or receipt",
+      "normative_atoms": [
+        {
+          "topic": "gboard_data_processing",
+          "status": "PARTIALLY_DOCUMENTED_BY_VENDOR",
+          "anchors": ["GOOGLE-GBOARD-LEARNING-2026-OBSERVED", "GOOGLE-GBOARD-ADVANCED-VOICE-2026-OBSERVED"]
+        },
+        {
+          "topic": "privacy_law",
+          "status": "APPLICABILITY_REQUIRES_DATA_SUBJECT_CONTROLLER_PURPOSE_LOCATION_AND_SCOPE",
+          "anchors": ["BR-LGPD-13709-COMPILED", "EU-GDPR-2016-679-ART5"]
+        }
+      ],
+      "conflicts": [
+        {
+          "type": "INTERNAL_EVIDENCE_CONTRADICTION",
+          "detail": "README preserves core runtime claims as TOKEN_VAZIO but pages/ analysis calls them real execution proof"
+        },
+        {
+          "type": "VENDOR_DISCLOSURE_VS_LOCAL_ALLEGATION",
+          "detail": "official Gboard documentation confirms some on-device learning and some feature-specific server transfer, but does not establish the repository claims of hidden cross-package location profiling, TrojanHorse behavior, ZipRAF/ZRF exfiltration or secret flows"
+        }
+      ],
+      "license": {"status": "TOKEN_VAZIO", "evidence": "root LICENSE not found at observed ref"},
+      "evidence_gate": "CONTRADICTION_AND_TOKEN_VAZIO",
+      "token_vazio": [
+        "exact Gboard APK version and SHA-256",
+        "capture command and pcap/trace digest",
+        "network endpoints with reproducible packet evidence",
+        "Smali paths and bytecode hashes",
+        "control device/baseline",
+        "mapping from observed behavior to Google disclosure",
+        "jurisdiction and actual data-subject facts",
+        "authoritative repository license"
+      ]
+    },
+    {
+      "repo": "instituto-Rafael/apk-js-zrf-privacy",
+      "ref": "main",
+      "source_paths": ["README.md", "pages/analise_simbio_apk-js-zrf-privacy.md"],
+      "declared_role": "privacy research on Android WebView/JavaScript and alleged ZRF/ZipRAF data-exfiltration patterns",
+      "material_observation": "README keeps reference traffic and Smali evidence TOKEN_VAZIO; analysis page contains the same symptom/proof wording as apk-gboard-insight, including keyboard/location language despite this repo claiming a distinct JavaScript/WebView vector",
+      "normative_atoms": [
+        {"topic": "webview_or_javascript_data_processing", "status": "TECHNICAL_CONTEXT_REQUIRES_REFERENCE_APP_AND_RUNTIME_FLOW"},
+        {"topic": "privacy_law", "status": "NO_LEGAL_FINDING_WITHOUT_ACTUAL_PERSONAL_DATA_PROCESSING_AND_SCOPE", "anchors": ["BR-LGPD-13709-COMPILED", "EU-GDPR-2016-679-ART5"]}
+      ],
+      "conflicts": [
+        {"type": "INTERNAL_EVIDENCE_CONTRADICTION", "detail": "analysis page declares proof while README evidence gates are TOKEN_VAZIO"},
+        {"type": "SEMANTIC_COPY_OR_SCOPE_COLLISION", "detail": "analysis page is materially parallel to Gboard page and includes keyboard/location assertions, weakening claimed differentiation until app-specific evidence exists"}
+      ],
+      "license": {"status": "TOKEN_VAZIO", "evidence": "root LICENSE not found at observed ref"},
+      "evidence_gate": "CONTRADICTION_AND_TOKEN_VAZIO",
+      "token_vazio": ["reference APK identity/hash", "WebView/JS trace", "Smali/source paths", "ZRF/ZipRAF signature specification used for detection", "network capture", "negative control", "false-positive rate", "license"]
+    },
+    {
+      "repo": "instituto-Rafael/manifesto-antioligopolio-rafaelia",
+      "ref": "main",
+      "source_paths": ["README.md"],
+      "declared_role": "public advocacy manifesto against technological concentration and algorithmic manipulation",
+      "material_observation": "repository metadata reports size 0 and no declared GitHub license; README says scripts/logs/models/real complaints will be contained, but observed material is manifesto text rather than an enforcement or measurement system",
+      "normative_atoms": [
+        {"topic": "competition_or_market_power", "status": "ADVOCACY_DOES_NOT_ESTABLISH_ANTITRUST_INFRINGEMENT"},
+        {"topic": "recommender_transparency_EU", "status": "DSA_ART27_IS_A_REAL_BINDING_RULE_ONLY_FOR_IN_SCOPE_ONLINE_PLATFORMS", "anchors": ["EU-DSA-2022-2065"]},
+        {"topic": "minor_protection_EU", "status": "DSA_ART28_ONLY_IF_PLATFORM_SCOPE_AND_ACCESSIBILITY_TO_MINORS_ARE_MET", "anchors": ["EU-DSA-2022-2065"]}
+      ],
+      "conflicts": [
+        {"type": "DECLARED_FUTURE_ARTIFACTS_VS_OBSERVED_STATE", "detail": "README promises tracking scripts, behavioral logs and complaints, but no material evidence for those bodies was observed in this repository state"}
+      ],
+      "license": {"status": "TOKEN_VAZIO", "evidence": "GitHub repository metadata license=null and root LICENSE not found"},
+      "evidence_gate": "REFERENCE_ADVOCACY_ONLY",
+      "token_vazio": ["measured platform dataset", "algorithm/recommender methodology", "market definition", "causal evidence", "specific provider/jurisdiction", "license"]
+    },
+    {
+      "repo": "instituto-Rafael/LivroVivo_ThisBookLives",
+      "ref": "main",
+      "source_paths": ["README.md", "PARABOLA.md"],
+      "declared_role": "living documentation/research corpus with symbolic, scientific and juridical layers",
+      "material_observation": "README declares CC BY-SA 4.0 by default and optional CC0 for specific excerpts but root LICENSE was not found; README hash field is placeholder '<Github hash>'; PARABOLA contains legal metaphors and broad claims of automatic recognition/cross-jurisdiction coverage",
+      "normative_atoms": [
+        {"topic": "license_default", "status": "DECLARED_CC_BY_SA_4_0_BUT_ROOT_SCOPE_MANIFEST_MISSING", "anchors": ["CC-BY-SA-4.0"]},
+        {"topic": "optional_CC0", "status": "TOKEN_VAZIO_SCOPE", "detail": "specific CC0 excerpts are not enumerated in the observed README"},
+        {"topic": "berne", "status": "TREATY_FRAMEWORK_NOT_UNIVERSAL_PRIVATE_CERTIFICATE", "anchors": ["WIPO-BERNE-CURRENT-MEMBERS-2026-08"]},
+        {"topic": "doi", "status": "PERSISTENT_IDENTIFIER_NOT_LEGAL_VALIDATION", "anchors": ["ZENODO-DOI-GENERAL"]}
+      ],
+      "conflicts": [
+        {"type": "OUTDATED_OR_INCORRECT_JURISDICTION_COUNT", "detail": "PARABOLA states automatic recognition in 186 jurisdictions; WIPO's current Berne registry observed in August 2026 lists 182 contracting parties, and treaty membership is not equivalent to identical private enforcement in every legal system"},
+        {"type": "DOI_AND_PUBLICATION_OVERREACH", "detail": "GitHub/Zenodo/DOI can establish publication/provenance signals but do not by themselves create universal legal coverage or scientific validation"},
+        {"type": "PARABLE_VS_NORMATIVE_AUTHORITY", "detail": "the Treaty of the Guardians and intergalactic code are symbolic/parabolic material, not international-law sources"
+      ],
+      "protected_subject_gate": {
+        "vulnerable_subjects": true,
+        "status": "ETHICAL_HIGH_PRIORITY_INTERNAL_POLICY",
+        "legal_effect": "requires context-specific applicable law; internal protective policy may be stricter than legal minimum"
+      },
+      "license": {"status": "PARTIAL_DECLARATION_WITH_SCOPE_GAP", "declared": "CC BY-SA 4.0 default + CC0 option for specific excerpts", "evidence": "README declaration present; root LICENSE and exact CC0 scope not found"},
+      "evidence_gate": "PARTIAL_WITH_CORRECTION_REQUIRED",
+      "token_vazio": ["authoritative license file", "CC0 excerpt manifest", "resolved repository content hash", "DOI record verification at record level", "claim-by-claim separation of parable/history/law/science"]
+    },
+    {
+      "repo": "instituto-Rafael/QUANTUM_auth_certificate",
+      "ref": "main",
+      "source_paths": ["First on C.sh", "README.md", "LICENSE.md", "MANIFESTO_LEGAL.md", "Manifest.md"],
+      "declared_role": "authorship/authentication and legal-manifest corpus",
+      "material_observation": "First on C.sh generates C code that reads uname fields, hostname, UID, time, PID, /dev/urandom and optional Z0_SESSION_ID, computes CRC32C and prints selected local metadata and entropy imprint to stdout; observed root has no network client or persistence artifact proving fork/clone/access tracking",
+      "normative_atoms": [
+        {"topic": "device_or_user_metadata", "status": "POTENTIALLY_PERSONAL_OR_DEVICE_LINKABLE_DATA_DEPENDING_ON_CONTEXT", "anchors": ["BR-LGPD-13709-COMPILED", "EU-GDPR-2016-679-ART5"]},
+        {"topic": "tracking_claim", "status": "PARTIAL_TECHNICAL_COLLECTION_PROVEN_IN_SOURCE_BUT_NETWORK_OR_GLOBAL_TRACKING_NOT_PROVEN"}
+      ],
+      "conflicts": [
+        {"type": "TRACKING_SCOPE_OVERREACH", "detail": "license/manifest language about access, fork, clone, device or network tracking exceeds the observed implementation, which only demonstrates local environment metadata collection and stdout output"}
+      ],
+      "evidence_gate": "PARTIAL_IMPLEMENTATION_OBSERVED_RUNTIME_STILL_TOKEN_VAZIO",
+      "token_vazio": ["actual execution receipt", "persistence destination", "network transmission", "server/controller identity", "retention", "access controls", "fork/clone correlation mechanism", "notice/legal basis when personal-data law applies"]
+    }
+  ],
+  "resolver_refinements": {
+    "resolve_jurisdiction": "product or repository global reach does not create universal law; derive scope from establishment, service, affected persons, processing and effects",
+    "resolve_authority_hierarchy": "vendor documentation may describe product behavior but ranks below applicable law for legal obligations and below reproducible local evidence for independent technical claims",
+    "semantic_contextualize": "terms such as hidden, TrojanHorse, exfiltration, manipulation and proof must be classified as allegation, technical pattern, measured behavior or legal finding rather than treated as synonyms",
+    "cross_cultural_semantic_diff": "manifesto, parable and spiritual-juridical language must preserve symbolic meaning while preventing automatic translation into public-law authority",
+    "detect_normative_conflict": "add INTERNAL_EVIDENCE_CONTRADICTION and DECLARED_FUTURE_ARTIFACTS_VS_OBSERVED_STATE as first-class conflict types",
+    "protected_subject_gate": "a repository may adopt stricter internal protection for vulnerable persons; this does not imply the same legal hierarchy in every jurisdiction",
+    "evidence_and_conformance_gate": "vendor disclosure can close existence-of-feature uncertainty but cannot close an independent allegation of hidden behavior; independent claim still needs reproducible trace/receipt",
+    "temporal_validity": "product help pages, treaty membership counts and platform regulations require retrieval dates/version context",
+    "provenance_chain": "claim -> local source/path/blob -> declared gate -> independent runtime artifact or official product disclosure -> applicable normative source -> scope -> status"
+  },
+  "deltas": {
+    "repos_added": 4,
+    "repos_revisited": 1,
+    "coverage_total_assuming_prior_batches": 44,
+    "uncertainty_delta": "REDUCED_ON_GBOARD_DECLARED_PROCESSING_AND_QUANTUM_LOCAL_METADATA_COLLECTION; INCREASED_PRECISION_ON_LICENSE_AND_EVIDENCE_CONTRADICTIONS",
+    "conflict_delta": 10,
+    "token_vazio_created_or_refined": 34,
+    "token_vazio_closed": 2,
+    "token_vazio_closed_detail": [
+      "Gboard: existence of some product-documented learning/server-transfer behaviors",
+      "QUANTUM_auth_certificate: existence of source-level local environment metadata collection"
+    ]
+  },
+  "F_ok": [
+    "Gboard official documentation anchored without using vendor disclosure as proof of every local allegation",
+    "two APK research repos now carry explicit README-vs-analysis evidence contradictions",
+    "anti-oligopoly manifesto separated from measurement/enforcement and linked to DSA only conditionally",
+    "LivroVivo Berne/DOI/license overreach bounded and symbolic treaty separated from law",
+    "QUANTUM_auth_certificate source-level metadata collection identified precisely without inventing network tracking"
+  ],
+  "F_gap": [
+    "reproducible APK/network/Smali evidence for Gboard and JS/ZRF allegations",
+    "authoritative licenses for the two APK research repos and manifesto",
+    "measurement corpus for algorithmic manipulation/market claims",
+    "LivroVivo authoritative license scope, CC0 manifest and resolved hash",
+    "QUANTUM runtime, persistence, transmission, retention and controller evidence"
+  ],
+  "F_next": "continue repository census from the next unprocessed federated cursor; prioritize repos with privacy/child/health/security claims, conflicting or missing licenses, and standards-compliance language; do not revisit closed atoms unless new evidence appears"
+}
