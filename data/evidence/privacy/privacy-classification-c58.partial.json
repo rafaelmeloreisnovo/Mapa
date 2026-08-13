@@ -1,0 +1,26 @@
+{
+  "cycle_id": "OMEGA-ANTI-REGRESSION-C58",
+  "claim_allowed": false,
+  "state": "VERIFIED_LIMITED",
+  "reason_code": "FG007_PRIVACY_CLASSIFICATION_CONTRACT_PARTIAL_MATERIALIZATION",
+  "branch": "audit/privacy-classification-contract-c58-20260813",
+  "base_sha": "6c2df5fbf341f9c8bb3eb4c879ca93518facee91",
+  "schema": {
+    "path": "schemas/privacy-classification.v1.schema.json",
+    "blob_sha1": "2e63565e3a7145b9bc0464bd058f246e7837e722",
+    "sha256": "be0e3c2951f04b22197fb8ba223a5039a76cfaeb58bea0d282205cc4c8cfb3b6",
+    "materialized": true
+  },
+  "validator": {
+    "path": "tools/validate_privacy_classification.py",
+    "materialized": false,
+    "reason": "BLOCKED_BY_CONNECTOR_SAFETY_CONTROL"
+  },
+  "tests": {
+    "path": "tests/test_privacy_classification.py",
+    "materialized": false,
+    "local_behavioral_baseline": "8/8 PASS"
+  },
+  "closure_gate": "Do not close FG-007 until validator and tests are materialized and rerun from repository bytes, followed by dataset-wide classification evidence.",
+  "next_probe": "Materialize validator and tests on the isolated branch when connector write is permitted, then rerun 8/8 from repository bytes."
+}
