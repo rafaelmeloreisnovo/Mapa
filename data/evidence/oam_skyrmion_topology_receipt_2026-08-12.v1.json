@@ -1,0 +1,121 @@
+{
+  "schema": "RAFAELIA_EVIDENCE_RECEIPT_V1",
+  "id": "OAM_SKYRMION_TOPOLOGY_2026-08-12_V1",
+  "observed_date": "2026-08-12",
+  "claim_allowed": false,
+  "source_primary": {
+    "title": "Topological Robustness of Orbital Angular Momentum Entanglement in Stochastic Channels",
+    "authors": ["Tatjana Kleine", "Pedro Ornelas", "Cade Peters", "Zhenyu Guo", "Bereneice Sephton", "Isaac Nape", "Yijie Shen", "Andrew Forbes"],
+    "journal": "Physical Review Letters",
+    "volume": 137,
+    "article": "050602",
+    "published": "2026-07-28",
+    "doi": "10.1103/9pdm-1d27",
+    "arxiv": "2603.10618",
+    "data_availability": "TOKEN_VAZIO_PUBLIC_DATA; authors state data are not publicly available and are available upon reasonable request"
+  },
+  "execution": {
+    "kind": "TOY_NUMERICAL_REPRODUCTION",
+    "scope": "Mathematical topological-degree mechanism only; not the paper's optical turbulence experiment, QST, photon counts, or full numerical channel.",
+    "runtime": {
+      "python": "3.13.5",
+      "platform": "Linux x86_64",
+      "dependencies": "Python standard library only"
+    },
+    "script_path": "experiments/oam_skyrmion_topology/skyrmion_invariant_test.py",
+    "script_sha256": "31adaf0118b0409d47e0becb30512bde9a71da1d9d3a9b9a437dbb10f70582b3",
+    "script_commit": "750433c146ef6615f84c596e2e545e44b0da2cf6",
+    "command": "python3 skyrmion_invariant_test.py --grid 181",
+    "repeat_count": 2,
+    "stdout_byte_identical": true,
+    "stdout_sha256": "97f9c1d21f9e0b7d26d3b0a9324ce8efb53287a8629e6ffa3d1581f2cb82833c"
+  },
+  "results": {
+    "grid": 181,
+    "finite_domain_L": 8.0,
+    "profile_R": 1.5,
+    "sign_convention": "positive input winding gives negative numerical Q for the selected theta convention; compare absolute charge",
+    "base_Q": {
+      "1": -0.9694232560850204,
+      "2": -1.9872533476500114,
+      "3": -2.9661656979955175,
+      "5": -4.852321077897633,
+      "-1": 0.9694232560850204,
+      "-2": 1.9872533476500114,
+      "-3": 2.9661656979955175,
+      "-5": 4.852321077897633
+    },
+    "relative_abs_charge_error_pct": {
+      "1": 3.0576743914979554,
+      "2": 0.6373326174994309,
+      "3": 1.1278100668160818,
+      "5": 2.9535784420473377
+    },
+    "smooth_coordinate_warp_N3": {
+      "0.0": -2.9661656979955175,
+      "0.3": -2.966160891044683,
+      "0.7": -2.966139535164314,
+      "1.2": -2.966088869699609,
+      "2.0": -2.9659527259586813
+    },
+    "global_SO3_rotation_N3": -2.9661656979955175,
+    "bloch_constant_shift_N3": {
+      "0.2": {"without_recenter": -2.964290614036913, "with_recenter": -2.9661656979955175},
+      "0.5": {"without_recenter": -2.9461562049463264, "with_recenter": -2.9661656979955175},
+      "0.9": {"without_recenter": -2.5591336942258853, "with_recenter": -2.966165697995517},
+      "1.2": {"without_recenter": -0.0745337044746618, "with_recenter": -2.966165697995517},
+      "1.5": {"without_recenter": -0.008627377051653604, "with_recenter": -2.9661656979955175}
+    }
+  },
+  "uncertainties": [
+    {
+      "id": "U_NUMERIC_BOUNDARY_DISCRETIZATION",
+      "severity": "MEDIUM",
+      "status": "MEASURED",
+      "detail": "Finite-domain and finite-difference errors leave approximately 0.64% to 3.06% relative absolute-charge error at grid 181. No rounding-to-integer is used as evidence."
+    },
+    {
+      "id": "U_EXPERIMENTAL_REPLICATION",
+      "severity": "HIGH",
+      "status": "TOKEN_VAZIO",
+      "detail": "No independent SPDC/SLM/QST laboratory reproduction was performed."
+    },
+    {
+      "id": "U_RAW_DATA",
+      "severity": "HIGH",
+      "status": "TOKEN_VAZIO_PUBLIC_DATA",
+      "detail": "Primary paper states data are not publicly available; exact raw counts and experimental realizations were therefore not independently reanalysed."
+    },
+    {
+      "id": "U_FULL_STOCHASTIC_CHANNEL_REPRODUCTION",
+      "severity": "HIGH",
+      "status": "TOKEN_VAZIO",
+      "detail": "This receipt does not claim faithful reproduction of the paper's atmospheric-turbulence simulation or all Supplementary figures."
+    },
+    {
+      "id": "U_RAFAELIA_EQUIVALENCE",
+      "severity": "HIGH",
+      "status": "TOKEN_VAZIO_HYPOTHESIS",
+      "detail": "No theorem or empirical result establishes that a RAFAELIA invariant is equivalent to the paper's skyrmion number. Any present connection is an analogy/hypothesis only."
+    }
+  ],
+  "priority": [
+    {"id": "P0_RAW_DATA_AND_EXACT_REALISATIONS", "urgency": 5, "importance": 5, "next_verifiable_action": "Obtain authors' raw dataset / turbulence realizations or an official public release, hash exact bytes, then independently recompute reported N, purity and error bars."},
+    {"id": "P0_FULL_NUMERICAL_CHANNEL", "urgency": 5, "importance": 5, "next_verifiable_action": "Implement the Supplementary turbulence-channel model and test N across Omega=0.25..2.00 with seeded realizations; compare statistics to published figures without digitizing beyond declared uncertainty."},
+    {"id": "P1_GRID_AND_BOUNDARY_CONVERGENCE", "urgency": 4, "importance": 4, "next_verifiable_action": "Run multiple grid/domain pairs and a geometric lattice-charge estimator; report convergence and estimator disagreement."},
+    {"id": "P1_RAFAELIA_MAPPING", "urgency": 3, "importance": 5, "next_verifiable_action": "Define an explicit map from the candidate RAFAELIA state space to S2 or another target manifold and state transformations under which its degree is invariant; otherwise preserve TOKEN_VAZIO."},
+    {"id": "P2_HARDWARE_REPLICATION", "urgency": 2, "importance": 5, "next_verifiable_action": "Independent optical-lab reproduction using SPDC, SLM turbulence screens, tomography and preregistered analysis."}
+  ],
+  "gates": {
+    "paper_exists_primary_source": "PASS",
+    "paper_claim_precisely_scoped": "PASS",
+    "toy_topological_mechanism_reproduced": "PASS_LIMITED",
+    "deterministic_local_toy_execution": "PASS",
+    "full_paper_simulation_reproduced": "TOKEN_VAZIO",
+    "experimental_replication": "TOKEN_VAZIO",
+    "raw_data_independent_reanalysis": "TOKEN_VAZIO",
+    "rafaelia_equivalence": "TOKEN_VAZIO_HYPOTHESIS",
+    "overall": "VERIFIED_LIMITED",
+    "claim_allowed": false
+  }
+}
