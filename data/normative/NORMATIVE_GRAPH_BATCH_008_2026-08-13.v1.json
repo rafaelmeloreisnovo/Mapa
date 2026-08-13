@@ -1,0 +1,199 @@
+{
+  "schema": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch": "008",
+  "date": "2026-08-13",
+  "claim_allowed": false,
+  "predecessor": {
+    "pr": 212,
+    "head_before": "8cda8d0857c922653d652614adcab39bc07772ff"
+  },
+  "invariants": [
+    "Universalidade != Uniformidade",
+    "keyword_match != conduct != violation != legal finding",
+    "static_analysis != runtime_behavior",
+    "technical_security_control != legal_compliance",
+    "repository_license != international_law",
+    "guideline_or_standard != law unless incorporated by applicable authority",
+    "child_protection = high_priority_gate, not automatic universal override",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "official_normative_anchors": [
+    {
+      "id": "BR-LGPD-13709-COMPILED",
+      "type": "LAW",
+      "authority": "Presidencia da Republica do Brasil",
+      "jurisdiction": "BR",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "observed_points": ["purpose", "adequacy", "necessity", "legal bases", "security/accountability context"]
+    },
+    {
+      "id": "EU-GDPR-2016-679",
+      "type": "REGULATION",
+      "authority": "European Union",
+      "jurisdiction": "EU_EEA_WITH_SCOPE_RULES",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+    },
+    {
+      "id": "UN-CRC-GC13",
+      "type": "UN_TREATY_BODY_INTERPRETIVE_GUIDANCE",
+      "authority": "UN Committee on the Rights of the Child",
+      "jurisdiction": "STATE_PARTIES_INTERPRETIVE_CONTEXT",
+      "binding_force": "INTERPRETIVE_GUIDANCE_NOT_STANDALONE_DOMESTIC_LAW",
+      "url": "https://docstore.ohchr.org/",
+      "observed_points": ["article 19 protection from violence and abuse", "dignity", "best interests consistent with whole Convention"]
+    },
+    {
+      "id": "UN-CRC-GC14",
+      "type": "UN_TREATY_BODY_INTERPRETIVE_GUIDANCE",
+      "authority": "UN Committee on the Rights of the Child",
+      "jurisdiction": "STATE_PARTIES_INTERPRETIVE_CONTEXT",
+      "binding_force": "INTERPRETIVE_GUIDANCE_NOT_STANDALONE_DOMESTIC_LAW",
+      "url": "https://docstore.ohchr.org/",
+      "observed_points": ["best interests as substantive right, interpretive principle and procedural rule", "primary consideration", "case-specific assessment"]
+    },
+    {
+      "id": "BR-COMPETITION-12529",
+      "type": "LAW",
+      "authority": "Presidencia da Republica do Brasil",
+      "jurisdiction": "BR_AND_EFFECTS_IN_BR",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm"
+    },
+    {
+      "id": "EU-DMA-2022-1925",
+      "type": "REGULATION",
+      "authority": "European Union",
+      "jurisdiction": "EU_EEA_WITH_GATEKEEPER_SCOPE",
+      "binding_force": "BINDING_WITHIN_SCOPE",
+      "url": "https://eur-lex.europa.eu/eli/reg/2022/1925/oj"
+    },
+    {
+      "id": "WIPO-BERNE-1979",
+      "type": "TREATY",
+      "authority": "WIPO / Berne Union",
+      "jurisdiction": "CONTRACTING_PARTIES_PER_IMPLEMENTATION",
+      "binding_force": "TREATY_OBLIGATIONS_FOR_PARTIES; PRIVATE_ENFORCEMENT_DEPENDS_APPLICABLE_LAW",
+      "url": "https://www.wipo.int/wipolex/en/treaties/textdetails/12214"
+    }
+  ],
+  "repositories": [
+    {
+      "repo": "instituto-Rafael/apk-ethics-rafaelia",
+      "ref": "main",
+      "source_paths": ["README.md", "detect_apk.sh"],
+      "declared_role": "static Smali inspector for ethical/privacy-risk patterns",
+      "material_observation": "regex keyword scanning after apktool decompilation",
+      "normative_atoms": [
+        {"topic":"privacy","status":"APPLICABILITY_DEPENDS_ON_ACTUAL_PROCESSING_AND_JURISDICTION","anchors":["BR-LGPD-13709-COMPILED","EU-GDPR-2016-679"]},
+        {"topic":"child_protection","status":"HIGH_PRIORITY_GATE","anchors":["UN-CRC-GC13","UN-CRC-GC14"]}
+      ],
+      "conflicts": [
+        {"type":"SEMANTIC_OVERREACH_RISK","detail":"terms such as children/porn/nude/location/analytics are indicators only; they do not prove abuse, illegality, consent failure or statutory violation"}
+      ],
+      "license": {"status":"TOKEN_VAZIO","evidence":"root LICENSE not found at observed ref"},
+      "evidence_gate": "PARTIAL",
+      "token_vazio": ["reference APK fixtures", "false-positive/false-negative rates", "manifest-permission correlation", "data-flow confirmation", "jurisdiction/application facts"]
+    },
+    {
+      "repo": "instituto-Rafael/apk-privacy-rafaelia",
+      "ref": "main",
+      "source_paths": ["README.md", "detect_apk.sh"],
+      "declared_role": "static privacy-leak/tracking inspector",
+      "material_observation": "grep-based Smali keyword detector; no proven runtime data-flow analysis in observed script",
+      "normative_atoms": [
+        {"topic":"personal_data","status":"LEGAL_FINDING_REQUIRES_CONTROLLER_PROCESSING_PURPOSE_BASIS_AND_SCOPE","anchors":["BR-LGPD-13709-COMPILED","EU-GDPR-2016-679"]}
+      ],
+      "conflicts": [
+        {"type":"README_VS_EVIDENCE_BOUNDARY","detail":"README frames focus as LGPD/GDPR violations, while observed implementation only locates textual/code indicators"}
+      ],
+      "license": {"status":"TOKEN_VAZIO","evidence":"root LICENSE not found at observed ref"},
+      "evidence_gate": "PARTIAL_WITH_CORRECTION_REQUIRED",
+      "token_vazio": ["permission/API graph", "SDK identification accuracy", "runtime exfiltration proof", "purpose/legal basis", "territorial scope", "benchmark corpus"]
+    },
+    {
+      "repo": "instituto-Rafael/apk-guardian-rafaelia",
+      "ref": "main",
+      "source_paths": ["README.md", "detect_apk_abuse.sh", "LICENSE"],
+      "declared_role": "static abuse/child-protection focused inspector",
+      "material_observation": "focused regex scan for abuse-related terms",
+      "protected_subject_gate": {"minor":true,"priority":"P0_WHEN_REAL_CHILD_DATA_OR_RISK_IS_INVOLVED","automatic_legal_conclusion":false},
+      "license": {"status":"CONTRADICTION_OR_INCOMPLETE_LICENSE_TEXT","declared":"MIT","observed":"root LICENSE contains only abbreviated MIT wording, not full standard grant/disclaimer text"},
+      "conflicts": [
+        {"type":"PROTECTION_SIGNAL_VS_PROOF","detail":"presence of age/children/explicit terms is not proof of child abuse or exploitation"}
+      ],
+      "evidence_gate": "PARTIAL",
+      "token_vazio": ["golden positive/negative APK fixtures", "false-positive rate", "context-sensitive classifier", "human review protocol", "complete authoritative license text"]
+    },
+    {
+      "repo": "instituto-Rafael/apk-antitrust-rafaelia",
+      "ref": "main",
+      "source_paths": ["README.md", "pages/*"],
+      "declared_role": "research/documentation on digital market concentration and alternatives",
+      "material_observation": "analytical/documentary repository; README itself says not automatic enforcement tool",
+      "normative_atoms": [
+        {"topic":"competition_BR","status":"BINDING_ONLY_WHERE_LEI_12529_SCOPE_IS_MET","anchors":["BR-COMPETITION-12529"]},
+        {"topic":"digital_markets_EU","status":"DMA_APPLIES_ONLY_TO_STATUTORY_SCOPE_AND_DESIGNATED_GATEKEEPER_CONTEXT","anchors":["EU-DMA-2022-1925"]}
+      ],
+      "conflicts": [
+        {"type":"DATA_FRESHNESS","detail":"README names sources including Alexa Rank; source currency and methodology are TOKEN_VAZIO until versioned dataset receipts exist"},
+        {"type":"CONCENTRATION_VS_ILLEGALITY","detail":"market concentration metric alone does not establish an antitrust infringement"}
+      ],
+      "license": {"status":"TOKEN_VAZIO","evidence":"root LICENSE not found at observed ref"},
+      "evidence_gate": "REFERENCE_PARTIAL",
+      "token_vazio": ["versioned source snapshots", "market definition", "jurisdiction/effects", "methodology", "causal claims", "license"]
+    },
+    {
+      "repo": "instituto-Rafael/Firewall",
+      "ref": "main",
+      "source_paths": ["README.md", "License.md"],
+      "declared_role": "iptables rules and network monitoring for rooted Termux/Android",
+      "material_observation": "security configuration requiring root; runtime gates remain TOKEN_VAZIO in README",
+      "normative_atoms": [
+        {"topic":"security_control","status":"TECHNICAL_CONTROL_NOT_LEGAL_COMPLIANCE"},
+        {"topic":"network_logs","status":"MAY_BECOME_PERSONAL_OR_DEVICE_DATA_DEPENDING_ON_FIELDS_AND_CONTEXT","anchors":["BR-LGPD-13709-COMPILED","EU-GDPR-2016-679"]},
+        {"topic":"license","status":"PRIVATE_LICENSE_TERMS; ENFORCEABILITY_AND_REMEDIES_DEPEND_ON_APPLICABLE_LAW","anchors":["WIPO-BERNE-1979"]}
+      ],
+      "conflicts": [
+        {"type":"PRIVATE_SANCTION_VS_PUBLIC_AUTHORITY","detail":"USD 100,000 minimum penalty stated in private license is not recorded as an automatic universal statutory sanction"},
+        {"type":"USER_DEVICE_CONSTRAINT","detail":"root requirement conflicts with no-root environments and must not be represented as generally deployable Android protection"}
+      ],
+      "evidence_gate": "PARTIAL",
+      "token_vazio": ["runtime device receipt", "log field inventory", "retention/access controls", "threat model", "rollback test", "jurisdiction/contract formation facts for license remedies"]
+    }
+  ],
+  "resolver_refinements": {
+    "resolve_jurisdiction": "derive from actor, processing location, establishment, effects, data subjects and statutory scope; repo owner location alone is insufficient",
+    "resolve_authority_hierarchy": "separate treaty/statute/regulation/private license/standard/guidance; private terms cannot self-elevate to public-law authority",
+    "semantic_contextualize": "classify keyword hits as SIGNAL until code context, behavior and affected subject are established",
+    "cross_cultural_semantic_diff": "preserve AMBIGUOUS/NO_SAFE_EQUIVALENT where abuse or sexual-content terminology does not map safely across language/culture",
+    "detect_normative_conflict": "distinguish apparent ethical conflict, legal conflict, source contradiction, evidence gap and private-policy conflict",
+    "protected_subject_gate": "child-related signals trigger enhanced review and minimization; do not auto-label a person as minor or a package as abusive",
+    "evidence_and_conformance_gate": "Requirement -> Applicability -> Control -> Test -> Evidence -> Status; regex hit cannot skip Applicability or Evidence",
+    "temporal_validity": "record retrieved/version/effective state; external market datasets and regulatory designations require refresh",
+    "provenance_chain": "conclusion -> interpretation -> observed code/data -> normative source -> version/date -> jurisdiction -> evidence receipt"
+  },
+  "deltas": {
+    "repos_added": 5,
+    "coverage_total_assuming_prior_batches": 40,
+    "uncertainty_delta": "REDUCED_ON_IMPLEMENTATION_SEMANTICS; NEW_LICENSE_AND_RUNTIME_GAPS_EXPLICIT",
+    "conflict_delta": 8,
+    "token_vazio_created_or_refined": 25,
+    "token_vazio_closed": 0
+  },
+  "F_ok": [
+    "regex inspectors reclassified as signal generators rather than legal adjudicators",
+    "LGPD/GDPR/CRC/competition/DMA authority classes separated",
+    "Firewall private license sanctions separated from public-law authority",
+    "child protection elevated to high-priority evidence gate without universal automatic override"
+  ],
+  "F_gap": [
+    "runtime and benchmark evidence for APK inspectors",
+    "authoritative licenses for ethics/privacy/antitrust repos",
+    "complete MIT license text or correction for guardian repo",
+    "fresh versioned antitrust datasets and market definitions",
+    "Firewall runtime/log privacy/rollback evidence"
+  ],
+  "F_next": "apk-gboard-insight -> apk-js-zrf-privacy -> manifesto-antioligopolio-rafaelia -> LivroVivo_ThisBookLives -> QUANTUM_auth_certificate follow-up if tracking evidence appears"
+}
