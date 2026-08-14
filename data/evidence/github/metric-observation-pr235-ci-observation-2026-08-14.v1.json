@@ -1,0 +1,42 @@
+{
+  "schema": "RAFAELIA_CI_OBSERVATION_V1",
+  "record_id": "CI-METRIC-OBSERVATION-PR235-20260814-001",
+  "observed_at": "2026-08-14T01:13:43-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 235,
+  "head_branch": "audit/metric-observation-v1-20260814",
+  "head_sha_observed": "9c0cea7b258747f4894603f962c956c92e82476e",
+  "workflow": {
+    "name": "RAFAELIA Promotion Control V1",
+    "run_id": 31769207753,
+    "status": "completed",
+    "conclusion": "failure"
+  },
+  "jobs": [
+    {
+      "job_id": 94671401434,
+      "name": "promotion-control / negative-tests",
+      "conclusion": "failure",
+      "runner_id": 0,
+      "runner_name": "",
+      "steps_observed": 0,
+      "classification": "RUNNER_STARTUP_FAILURE"
+    },
+    {
+      "job_id": 94671407310,
+      "name": "promotion-control / enforce",
+      "conclusion": "skipped",
+      "runner_id": null,
+      "steps_observed": 0,
+      "classification": "UPSTREAM_DEPENDENCY_SKIPPED"
+    }
+  ],
+  "logical_test_failure_observed": false,
+  "test_execution_observed": false,
+  "claim_allowed": false,
+  "open_tokens": [
+    "TOKEN_VAZIO_METRIC_OBSERVATION_TEST_RECEIPT",
+    "TOKEN_VAZIO_CI_RUNNER_EXECUTION_PR235"
+  ],
+  "next_verifiable_step": "Obtain an executing runner or run the documented unittest/validator commands in a pinned runtime; preserve stdout, exit code, environment and source SHA as receipt."
+}
