@@ -1,0 +1,81 @@
+{
+  "schema": "rafaelia.rafnet-termux-source-presence/v1",
+  "generated_at": "2026-08-14T09:58:00-03:00",
+  "policy": {
+    "append_only": true,
+    "evidence_first": true,
+    "source_presence_not_execution": true,
+    "textual_mpls_reference_not_active_mpls": true,
+    "claim_allowed": false
+  },
+  "observations": [
+    {
+      "id": "RAFNET-TERMUX-SOURCE-001",
+      "provider": "Google Drive",
+      "provider_id": "1jeS-x1Q-_McLKNuPb2z87cv2CJXQOSL9",
+      "title": "0.txt",
+      "observed_source_paths": [
+        "/data/data/com.termux/files/home/RAFAELIA_CORE/RAFNET_CORE/modules/emissor.sh",
+        "/data/data/com.termux/files/home/RAFAELIA_CORE/RAFNET_CORE/modules/receptor.sh"
+      ],
+      "observed_content": "The file records a scanner/reader traversing the historical RafNet shell sources and reproduces their escaped-variable lines.",
+      "classification": "TERMUX_FILESYSTEM_SOURCE_PRESENCE_DERIVED_LOG",
+      "execution_success": "TOKEN_VAZIO",
+      "boundary": "Reading/analyzing a script at a Termux filesystem path is evidence that the source path existed in that captured environment; it is not evidence that the sender/receiver completed a successful network exchange."
+    },
+    {
+      "id": "RAFNET-TERMUX-SOURCE-002",
+      "provider": "Google Drive",
+      "provider_id": "13V5LuPCAHr4rdPLbA2lAXDnobGRKBVE1",
+      "title": "0.txt",
+      "observed_source_paths": [
+        "/data/data/com.termux/files/home/RAFAELIA_CORE/RAFNET_CORE/modules/emissor.sh",
+        "/data/data/com.termux/files/home/RAFAELIA_CORE/RAFNET_CORE/modules/receptor.sh"
+      ],
+      "classification": "DUPLICATE_OR_MIRROR_TERMUX_SOURCE_PRESENCE_LOG",
+      "independence": false,
+      "execution_success": "TOKEN_VAZIO"
+    },
+    {
+      "id": "RAFNET-MPLS-TEXT-001",
+      "provider": "Google Drive",
+      "provider_id": "1uTP6Imwb9jIiwtSIxBW6I-Daoz3MOWTq",
+      "title": "net.cfg",
+      "content_observed": "net::protocolo = GHOST_GATEWAY // spoofed DNS, MPLS, VLAN",
+      "classification": "MPLS_TEXTUAL_CONFIGURATION_REFERENCE_ONLY",
+      "active_mpls": "TOKEN_VAZIO",
+      "label_binding": "TOKEN_VAZIO",
+      "lsp": "TOKEN_VAZIO",
+      "boundary": "The string MPLS in a configuration/narrative file does not demonstrate kernel MPLS capability, label distribution, LFIB state, an LSP, or packet forwarding."
+    }
+  ],
+  "search_negatives": [
+    {
+      "query_class": "SUCCESSFUL_RAFNET_RUNTIME_OUTPUT",
+      "searched_markers": [
+        "ultima_invocacao.rfl",
+        "VETOR SIMBIÓTICO VALIDADO",
+        "RAFCODE_𝚽|PKT-1",
+        "nc 127.0.0.1 8888"
+      ],
+      "result": "NO_DIRECT_SUCCESS_RECEIPT_RESOLVED_IN_CURRENT_DRIVE_SEARCH_SURFACE",
+      "absence_proven": false
+    }
+  ],
+  "state_progression": {
+    "historical_source_on_termux_path": "OBSERVED_DERIVED_LOG",
+    "historical_v1_successful_runtime": "TOKEN_VAZIO",
+    "v2_reference_loopback": "PASS_SEPARATE_EVIDENCE",
+    "v2_physical_termux": "TOKEN_VAZIO",
+    "mpls_text_reference": "OBSERVED",
+    "mpls_active_runtime": "TOKEN_VAZIO"
+  },
+  "anti_regression": [
+    "source path presence != execution",
+    "duplicated backup != independent replication",
+    "MPLS textual reference != active MPLS",
+    "negative search != proof of absence",
+    "historical v1 source != v2 physical runtime"
+  ],
+  "claim_allowed": false
+}

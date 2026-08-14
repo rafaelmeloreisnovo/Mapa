@@ -1,0 +1,51 @@
+{
+  "delta": "rafaelia.concept-anteriority-batch/v1.4",
+  "extends_effective": "v1 + v1.1.delta + v1.2.delta + v1.3.delta",
+  "generated_at": "2026-08-14T08:56:00-03:00",
+  "policy": "APPEND_ONLY_SOURCE_CUSTODY_BINDING",
+  "claim_allowed": false,
+  "source_shards_appended": [
+    {
+      "source_path": "NOVOexport/conversations-000.json",
+      "provider": "Google Drive",
+      "provider_id": "1VfP3u2BUBJ7aByrHh-PUfo4cW1jj3SBZ",
+      "mime": "text/x-json",
+      "bytes": 28152659,
+      "created_at_utc": "2026-08-04T06:12:34.549Z",
+      "modified_at_utc": "2026-08-03T08:24:18.000Z",
+      "visibility": "PRIVATE_NOT_SHARED",
+      "sha256": "27b3ebe900dcf811e648f0bcb8da02cc5e1e1230049567cdd1a83a6df317ee06",
+      "hash_scope": "SOURCE_BYTE_STREAM",
+      "integrity_status": "BYTE_VERIFIED",
+      "receipt_document_provider_id": "1ZXBm73jw9AltLNwpPyTHNqxWii5bfsMljgY0PU2yqGg",
+      "receipt_schema": "RAFAELIA_CONVERSATION_SHARD_RECEIPT_V1",
+      "receipt_event_hash": "d64f487560ccb986e1f205bb16ebb58b8943a2d2e4c27d34fc1e6db9011b30db",
+      "metrics": {
+        "conversations": 100,
+        "messages_interactions_user_assistant": 9850,
+        "user_messages": 4761,
+        "assistant_messages": 5089,
+        "text_characters": 17189116,
+        "messages_without_simple_text": 254,
+        "observed_create_update_min_utc": "2025-02-12T00:08:06.258886+00:00",
+        "observed_create_update_max_utc": "2026-07-14T14:14:43.136283+00:00",
+        "token_count_exact": "TOKEN_VAZIO_TOKENIZER_NOT_FIXED"
+      },
+      "authority": {
+        "source": "PRIMARY_EXPORT_SOURCE",
+        "metrics": "BYTE_PARSED",
+        "hash": "BYTE_HASHED"
+      },
+      "state": "E2_SOURCE_SHARD_CONTENT_FINGERPRINTED",
+      "real_anteriority_event_extraction": "TOKEN_VAZIO_NOT_EXECUTED_BY_V1_EXTRACTOR_IN_THIS_DELTA"
+    }
+  ],
+  "invariants": [
+    "receipt/provider/hash resolves source custody but does not substitute for per-message anteriority extraction",
+    "shard created/modified metadata is not the creation time of every contained message",
+    "message event time must come from the message record itself",
+    "assistant messages are excluded from user-authorship anteriority events",
+    "claim_allowed=false"
+  ],
+  "next_verifiable_step": "Obtain the source bytes through the recorded provider_id, execute the exact extractor blob, verify the source SHA-256 equals the receipt value, and freeze per-family first events."
+}

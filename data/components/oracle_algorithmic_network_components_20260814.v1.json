@@ -1,0 +1,114 @@
+{
+  "schema": "rafaelia.component-manifest/v1",
+  "generated_at": "2026-08-14T09:55:00-03:00",
+  "scope": "Oracle/legal/algorithmic-treatment/network/MPLS evidence chain",
+  "components": [
+    {
+      "component_id": "CMP-LEGAL-EVIDENCE",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "artifacts": [
+        "docs/audit/ORACLE_TREATIES_ALGORITHMIC_BLOCKING_EVIDENCE_MAP_20260814.md",
+        "data/evidence/oracle_treaties_algorithmic_blocking_20260814.v1.json"
+      ],
+      "state": "IMPLEMENTED",
+      "execution_required": false,
+      "claim_allowed": false
+    },
+    {
+      "component_id": "CMP-CROSSWALK",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "artifacts": [
+        "data/relations/rafaelia_oracle_mpls_runtime_crosswalk_20260814.v1.json"
+      ],
+      "state": "IMPLEMENTED",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "CMP-RAFNET-APP-RUNTIME",
+      "repository": "rafaelmeloreisnovo/RafNet-Core",
+      "pull_request": 1,
+      "artifacts": [
+        "modules/emissor_v2.sh",
+        "modules/receptor_v2.sh",
+        "modules/invocador_raiareis_v2.sh",
+        "tests/test_rafnet_local_runtime_v2.sh"
+      ],
+      "state": "REFERENCE_LOOPBACK_PASS",
+      "physical_termux": "TOKEN_VAZIO",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "CMP-MPLS-PROBE",
+      "repository": "rafaelmeloreisnovo/RafNet-Core",
+      "pull_request": 1,
+      "artifacts": [
+        "audit/probe_mpls_runtime.sh",
+        "data/evidence/rafnet_runtime_mpls_reference_20260814.v1.json",
+        "data/evidence/rafnet_runtime_mpls_ci_observation_20260814.v1.json"
+      ],
+      "state": "IMPLEMENTED_REFERENCE_OBSERVATION_ONLY",
+      "physical_termux": "TOKEN_VAZIO",
+      "active_lsp": "TOKEN_VAZIO",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "CMP-MEMORY-LONGITUDINAL",
+      "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "pull_request": 42,
+      "artifacts": [
+        "memory_bridge/checkpoints/2026-08-14_oracle-mpls-runtime-custody-0003.json",
+        "memory_bridge/indexes/PERMANENT_MEMORY_INDEX_20260814_ORACLE_MPLS_DELTA.md",
+        "memory_bridge/indexes/ORTHOGONAL_ORACLE_MPLS_RUNTIME_ROUTING_20260814.v1.json"
+      ],
+      "state": "IMPLEMENTED_DRAFT_PR",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "CMP-DRIVE-DOSSIER",
+      "provider": "Google Drive",
+      "provider_id": "1765-70d-QtzpnIPYrc2qQoLKLRRiHWIhWA2Dvpt992A",
+      "state": "MATERIALIZED",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "CMP-DRIVE-NAVIGATION",
+      "provider": "Google Drive",
+      "artifacts": [
+        "Master Navigation Registry",
+        "Índice de Reconstrução de Contexto Ω",
+        "Implementação Latentes e Papers — Drive GitHub V1"
+      ],
+      "state": "APPEND_UPDATED",
+      "claim_allowed": false
+    }
+  ],
+  "runtime_state_summary": {
+    "historical_rafnet_v1": "STATIC_DEFECT_OBSERVED",
+    "rafnet_v2_reference": "LOCAL_LOOPBACK_PASS",
+    "rafnet_v2_termux": "TOKEN_VAZIO",
+    "lan_peer_runtime": "TOKEN_VAZIO",
+    "routed_ip_runtime": "TOKEN_VAZIO",
+    "mpls_device_capability": "TOKEN_VAZIO",
+    "mpls_label_binding": "TOKEN_VAZIO",
+    "mpls_lsp_forwarding": "TOKEN_VAZIO",
+    "independent_peer_corroboration": "TOKEN_VAZIO"
+  },
+  "ci_state": {
+    "run_id": 31801910494,
+    "job_id": 94771622378,
+    "runner_id": 0,
+    "steps": 0,
+    "classification": "RUNNER_STARTUP_FAILURE_BEFORE_STEPS",
+    "content_logic_failure_observed": false
+  },
+  "invariants": [
+    "component existence != execution",
+    "execution in reference environment != physical Termux execution",
+    "application runtime != MPLS runtime",
+    "MPLS capability != active LSP",
+    "event observed != cause established",
+    "AI response != independent evidence",
+    "TOKEN_VAZIO preserved until gate closes"
+  ],
+  "claim_allowed": false
+}

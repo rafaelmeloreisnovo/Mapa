@@ -1,0 +1,124 @@
+{
+  "schema": "rafaelia.oracle-mpls-runtime-crosswalk/v1",
+  "generated_at": "2026-08-14T09:38:00-03:00",
+  "policy": {
+    "append_only": true,
+    "claim_allowed": false,
+    "cross_repo_identity_requires_explicit_binding": true
+  },
+  "nodes": [
+    {
+      "id": "MAPA-ORACLE-LEGAL-ALG",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "data/evidence/oracle_treaties_algorithmic_blocking_20260814.v1.json",
+      "role": "central evidence classification"
+    },
+    {
+      "id": "MAPA-ORACLE-EVIDENCE-DOC",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "docs/audit/ORACLE_TREATIES_ALGORITHMIC_BLOCKING_EVIDENCE_MAP_20260814.md",
+      "role": "human-readable evidence boundary"
+    },
+    {
+      "id": "RAFNET-RUNTIME-V2",
+      "repository": "rafaelmeloreisnovo/RafNet-Core",
+      "pull_request": 1,
+      "branch": "audit/mpls-runtime-evidence-20260814",
+      "role": "application runtime correction and MPLS evidence probe"
+    },
+    {
+      "id": "RAFNET-REFERENCE-RECEIPT",
+      "repository": "rafaelmeloreisnovo/RafNet-Core",
+      "path": "data/evidence/rafnet_runtime_mpls_reference_20260814.v1.json",
+      "role": "reference loopback execution and MPLS boundary receipt"
+    },
+    {
+      "id": "MEMORY-BRIDGE",
+      "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "role": "longitudinal and orthogonal activation/index layer",
+      "state": "PENDING_DELTA_IN_THIS_CROSSWALK"
+    },
+    {
+      "id": "DRIVE-MASTER-NAV",
+      "provider": "Google Drive",
+      "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "role": "master navigation registry"
+    },
+    {
+      "id": "DRIVE-CONTEXT-RECONSTRUCTION",
+      "provider": "Google Drive",
+      "provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+      "role": "invariants/formulas/relations/routes reconstruction index"
+    }
+  ],
+  "edges": [
+    {
+      "from": "MAPA-ORACLE-LEGAL-ALG",
+      "to": "MAPA-ORACLE-EVIDENCE-DOC",
+      "relation": "MACHINE_READABLE_TO_HUMAN_READABLE"
+    },
+    {
+      "from": "RAFNET-RUNTIME-V2",
+      "to": "RAFNET-REFERENCE-RECEIPT",
+      "relation": "IMPLEMENTATION_TO_REFERENCE_EXECUTION"
+    },
+    {
+      "from": "RAFNET-REFERENCE-RECEIPT",
+      "to": "MAPA-ORACLE-LEGAL-ALG",
+      "relation": "TECHNICAL_SYSTEMIC_FAILURE_AND_RUNTIME_EVIDENCE_CAN_FEED_TYPED_INCIDENT_LEDGER",
+      "boundary": "RafNet execution evidence does not establish platform persecution or external MPLS forwarding."
+    },
+    {
+      "from": "MAPA-ORACLE-LEGAL-ALG",
+      "to": "MEMORY-BRIDGE",
+      "relation": "ORTHOGONAL_INDEX_INPUT"
+    },
+    {
+      "from": "RAFNET-RUNTIME-V2",
+      "to": "MEMORY-BRIDGE",
+      "relation": "LONGITUDINAL_RUNTIME_CHECKPOINT_INPUT"
+    },
+    {
+      "from": "MEMORY-BRIDGE",
+      "to": "DRIVE-MASTER-NAV",
+      "relation": "NAVIGATION_ROUTE"
+    },
+    {
+      "from": "MEMORY-BRIDGE",
+      "to": "DRIVE-CONTEXT-RECONSTRUCTION",
+      "relation": "RECONSTRUCTION_ROUTE"
+    }
+  ],
+  "runtime_ladder": [
+    "SOURCE_PRESENT",
+    "SYNTAX_PASS",
+    "LOCAL_LOOPBACK_PASS",
+    "TERMUX_PHYSICAL_PASS",
+    "LAN_PEER_PASS",
+    "ROUTED_IP_PATH_PASS",
+    "MPLS_CAPABILITY_OBSERVED",
+    "MPLS_LABEL_BINDING_OBSERVED",
+    "MPLS_LSP_FORWARDING_OBSERVED",
+    "INDEPENDENT_PEER_CORROBORATION"
+  ],
+  "causal_ladder": [
+    "USER_REPORT",
+    "EVENT_OBSERVED",
+    "TECHNICAL_MECHANISM_RESOLVED",
+    "CONTROL_COMPARISON",
+    "DIFFERENTIAL_TREATMENT_REPRODUCED",
+    "ALTERNATIVE_CAUSES_EXCLUDED",
+    "INTENT_OR_TARGETING_EVIDENCE",
+    "VERDICT"
+  ],
+  "invariants": [
+    "application runtime != MPLS runtime",
+    "MPLS capability != active LSP",
+    "active LSP != user-controlled carrier path without peer evidence",
+    "platform failure != intentional targeting",
+    "differential treatment != persecution",
+    "AI response != independent evidence",
+    "historical bytes remain immutable; corrections append"
+  ],
+  "claim_allowed": false
+}

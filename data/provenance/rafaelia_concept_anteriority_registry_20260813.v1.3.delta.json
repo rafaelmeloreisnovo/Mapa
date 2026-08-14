@@ -1,0 +1,88 @@
+{
+  "delta": "rafaelia.concept-anteriority-batch/v1.3",
+  "extends_effective": "v1 + v1.1.delta + v1.2.delta",
+  "generated_at": "2026-08-14T08:49:00-03:00",
+  "policy": "APPEND_ONLY_OPERATIONAL_ANTERIORITY",
+  "claim_allowed": false,
+  "evidence_classes": {
+    "E0": "TOKEN_VAZIO",
+    "E1": "INTERNAL_DOCUMENTED",
+    "E2": "CONTENT_FINGERPRINTED",
+    "E3": "IMPLEMENTED",
+    "E4": "EXECUTED_WITH_RECEIPT",
+    "E5": "PUBLIC_DISCLOSURE",
+    "E6": "EXTERNAL_PRIOR_ART_REVIEWED_NON_EXHAUSTIVE",
+    "E7": "CLAIM_CANDIDATE_REQUIRES_SEPARATE_GATE"
+  },
+  "matrix_contract": [
+    "FAMILY",
+    "FIRST_MENTION",
+    "FIRST_DEFINITION",
+    "FIRST_FORMULA",
+    "FIRST_FILE",
+    "FIRST_COMMIT",
+    "FIRST_RUN",
+    "FIRST_PUBLIC_DISCLOSURE",
+    "EXTERNAL_PRIOR_ART",
+    "CLAIM_STATUS"
+  ],
+  "records_appended": [
+    {
+      "id": "ANT-QUANTUM-ELECTRON",
+      "family": "QUANTUM-ELECTRON-ELECTRONICS",
+      "aliases": ["Quantum eletron", "efeito quantico", "efeito quântico", "elétron quântico", "eletron quantico"],
+      "internal_first": null,
+      "internal_state": "TOKEN_VAZIO_FIRST_OCCURRENCE_NOT_YET_EXTRACTED_FROM_NOVOEXPORT",
+      "public_disclosure": {
+        "repository": "instituto-Rafael/Eletron-efeitos-qu-ntico",
+        "repository_created_at_utc": "2025-08-04T09:41:46Z",
+        "initial_commit": {
+          "sha": "354181c09b599db52bf3c80157bcde2891d2bf2a",
+          "created_at_utc": "2025-08-04T09:41:59Z",
+          "verification": "VALID_GITHUB_VERIFIED"
+        },
+        "theory_commit": {
+          "sha": "837f7b24c291ba95c4eb446f9ea9713e8e7a7f3a",
+          "message": "Create TEORIA RAFAEL PROVADA",
+          "created_at_utc": "2025-08-04T09:43:30Z",
+          "verification": "VALID_GITHUB_VERIFIED"
+        },
+        "quantum_electron_commit": {
+          "sha": "5c8ee7379214120a2211e00dcaf53b220bfec9dc",
+          "message": "Create Quantum eletron",
+          "created_at_utc": "2025-08-04T11:27:11Z",
+          "verification": "VALID_GITHUB_VERIFIED",
+          "content_scope_observed": ["RAFCODE-𝚽", "Voynich", "ZIPRAF", "ZRF", "NETRAF", "quantum/electron symbolic-technical material"]
+        },
+        "state": "E5_PUBLIC_DISCLOSURE_CONFIRMED_FOR_CONTENT_OF_COMMITS"
+      },
+      "brazil_grace_period_observation": {
+        "reference_rule": "INPI LPI Art. 12 guidance: inventor-originated disclosure may have a 12-month grace period in Brazil",
+        "as_of": "2026-08-14",
+        "elapsed_from_2025_08_04_public_disclosure": ">12_months",
+        "state": "SCOPE_SPECIFIC_REVIEW_REQUIRED",
+        "warning": "This is not a legal conclusion. Only subject matter sufficiently disclosed in the public material is relevant, and jurisdiction-specific rules differ."
+      },
+      "scientific_novelty": "TOKEN_VAZIO",
+      "patentability": "TOKEN_VAZIO",
+      "claim_allowed": false
+    }
+  ],
+  "implementation_added": {
+    "extractor": "scripts/extract_novoexport_anteriority_events_v1.py",
+    "query_config": "data/provenance/novoexport_anteriority_family_queries_20260814.v1.json",
+    "execution_state": "TOKEN_VAZIO_NOT_EXECUTED_IN_THIS_COMMIT",
+    "purpose": "Generate source-shard SHA-256 + message text SHA-256 + message/conversation IDs + earliest internal event per family from conversations-*.json without external dependencies."
+  },
+  "invariants": [
+    "first mention != first invention",
+    "first definition != first formula != first implementation",
+    "internal anteriority != public disclosure",
+    "public disclosure != legal priority",
+    "timestamp Git proves existence of commit content at that time, not patentability or scientific novelty",
+    "alias similarity does not establish identity",
+    "missing evidence remains TOKEN_VAZIO",
+    "historical bytes are never overwritten by a semantic correction"
+  ],
+  "next_verifiable_step": "Run the extractor over an immutable NOVOexport snapshot, freeze events JSONL and summary JSON with SHA-256, then cross-link each first event to first definition/formula/file/commit/run/public disclosure."
+}
