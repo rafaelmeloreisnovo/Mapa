@@ -1,0 +1,62 @@
+name: Branch Evolution Anti-Regression V2
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "data/governance/branch_evolution_anti_regression_v2.json"
+      - "scripts/validate_branch_evolution_anti_regression_v2.py"
+      - "tests/test_branch_evolution_anti_regression_v2.py"
+      - "data/receipts/branch_evolution_anti_regression_v2_local_20260814.json"
+      - "docs/governance/BRANCH_EVOLUTION_ANTI_REGRESSION_V2.md"
+      - ".github/workflows/branch-evolution-anti-regression-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: branch-evolution-v2-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: branch-evolution-v2 / validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile V2 validator and tests
+        run: |
+          python -m py_compile scripts/validate_branch_evolution_anti_regression_v2.py
+          python -m py_compile tests/test_branch_evolution_anti_regression_v2.py
+
+      - name: Validate V2 snapshot
+        run: python scripts/validate_branch_evolution_anti_regression_v2.py
+
+      - name: Run adversarial unit tests
+        run: python -m unittest -v tests.test_branch_evolution_anti_regression_v2
+
+      - name: Emit bounded audit summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Branch Evolution Anti-Regression V2"
+            echo
+            echo "- Snapshot gate only; no live branch mutation"
+            echo "- Automatic merge: false"
+            echo "- claim_allowed: false"
+            echo "- Exhaustive semantic reconciliation: TOKEN_VAZIO"
+          } >> "$GITHUB_STEP_SUMMARY"

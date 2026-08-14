@@ -1,0 +1,52 @@
+{
+  "schema": "RAFAELIA_BRANCH_EVOLUTION_ANTI_REGRESSION_V2_LOCAL_RECEIPT",
+  "receipt_id": "BEAR-V2-LOCAL-20260814-001",
+  "observation_date_brt": "2026-08-14",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "source_branch": "governance/branch-evolution-anti-regression-v2-20260814",
+  "base_main_sha": "f2e489423044c906f5a385fd5ec2b61eba363c58",
+  "environment": {
+    "class": "EPHEMERAL_ASSISTANT_RUNTIME",
+    "python": "3.13.5",
+    "physical_termux": "TOKEN_VAZIO",
+    "independent_reproduction": "TOKEN_VAZIO"
+  },
+  "execution": {
+    "validator_command": "python scripts/validate_branch_evolution_anti_regression_v2.py",
+    "validator_exit": 0,
+    "validator_result": "PASS branch-evolution-v2 branches_observed=231 sampled_relations=7 claim_allowed=false automatic_merge=false",
+    "unit_test_command": "python -m unittest -v tests.test_branch_evolution_anti_regression_v2",
+    "unit_test_exit": 0,
+    "unit_tests": {
+      "passed": 10,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "sha256_before_repository_write": {
+    "data/governance/branch_evolution_anti_regression_v2.json": "523b6e2b7240e1e1841f209713dc0b8e808da9d2efa0e5c0a32231d7b9f8205b",
+    "scripts/validate_branch_evolution_anti_regression_v2.py": "212b3cc48fead018704d815fdff6c03688999e562cd383cb84c2437451a65b32",
+    "tests/test_branch_evolution_anti_regression_v2.py": "7802fe6868b22ec31ab60d9d90ab9dfaa35a6a89da892136a305d5348788fe4e",
+    "docs/governance/BRANCH_EVOLUTION_ANTI_REGRESSION_V2.md": "969ff220a3b8672421f7babf1cec45c9e90992e32bfa7220190c0a33ae8dc185",
+    ".github/workflows/branch-evolution-anti-regression-v2.yml": "fd2607ba1ff7d26f67af963f2324c43204c37058029d185a9a192fdd00f0d162"
+  },
+  "claim_allowed": false,
+  "repository_wide_closed": false,
+  "f_ok": [
+    "V2 static snapshot validator passed.",
+    "Ten adversarial unit tests passed.",
+    "V1 branch-topology artifacts were not modified.",
+    "New branch started identical to observed main."
+  ],
+  "f_gap": [
+    "Remote provider CI for V2 has not run yet.",
+    "Exhaustive semantic reconciliation of all 231 branches remains TOKEN_VAZIO.",
+    "Physical Termux execution remains TOKEN_VAZIO.",
+    "Complete set of merged-noncanonical PRs remains TOKEN_VAZIO."
+  ],
+  "f_next": [
+    "Push the V2 package to the new governance branch and open a draft PR to main.",
+    "Observe provider CI without promoting zero-step failures to code failures.",
+    "Enumerate noncanonical merged PRs for separate canonicalization candidates."
+  ]
+}
