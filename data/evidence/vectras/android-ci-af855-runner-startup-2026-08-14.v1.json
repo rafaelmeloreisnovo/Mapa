@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "RECEIPT-VECTRAS-ANDROID-CI-AF855-20260814-001",
+  "subject": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "head_sha": "af85550ac43ab9ef1aed5a1ff508229d5c79b0c6",
+    "workflow": "android-ci",
+    "run_id": 31774425497
+  },
+  "jobs_observed": [
+    {
+      "job_id": 94686826193,
+      "name": "Resolve wrapper inputs",
+      "conclusion": "failure",
+      "runner_id": 0,
+      "runner_name": "",
+      "steps": [],
+      "classification": "RUNNER_STARTUP_FAILURE"
+    },
+    {
+      "job_id": 94686826534,
+      "name": "Compile Matrix (adaptive gate)",
+      "conclusion": "skipped"
+    },
+    {
+      "job_id": 94686833300,
+      "name": "Adaptive Gates",
+      "conclusion": "failure",
+      "execution_interpretation": "downstream/wrapper outcome; not evidence of Android build execution"
+    },
+    {
+      "job_id": 94686833764,
+      "name": "Android CI (canonical)",
+      "conclusion": "skipped"
+    }
+  ],
+  "artifacts": [],
+  "evidence_boundary": {
+    "wrapper_resolution_executed": false,
+    "canonical_android_ci_executed": false,
+    "bootstrap_source_fix_tested_by_this_run": false,
+    "android_build_executed": false,
+    "android_tests_executed": false,
+    "vectra79_runtime_executed": false,
+    "raw_vectra79_artifact_produced": false
+  },
+  "token_vazio": [
+    "TOKEN_VAZIO_ANDROID_CI_REAL_RUNNER_EXECUTION_AF855",
+    "TOKEN_VAZIO_BOOTSTRAP_SOURCE_POSTFIX_RUNTIME_VALIDATION",
+    "TOKEN_VAZIO_RAW_RESULT_VECTRA_79_CURRENT_DEVICE",
+    "TOKEN_VAZIO_ANDROID_BUILD_TEST_RECEIPT_AF855"
+  ],
+  "next_verifiable_step": "Do not blind-rerun. Obtain a run with runner_id != 0 and actual steps, or an independently controlled device/local execution receipt, before interpreting bootstrap/build/benchmark status.",
+  "claim_allowed": false
+}
