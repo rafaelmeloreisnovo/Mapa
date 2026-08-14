@@ -1,0 +1,48 @@
+{
+  "schema":"RAFAELIA_CI_LINEAGE_V1",
+  "record_id":"CI-VECTRA-NATIVE-SMOKE-LINEAGE-20260429-001",
+  "state":"NO_SMOKE_EXECUTION_RECEIPT_FOUND",
+  "claim_allowed":false,
+  "producer_introduction":{
+    "commit":"abb87cd1b47de034ebfe10e79edc857a7948cc9f",
+    "merge_commit":"29c93c5f327e3e39785f34c5a93fbd1cde602f05",
+    "feature":"core_benchmark_smoke.c + host-ci make run-core-bench-smoke"
+  },
+  "actions_observed":{
+    "merge_head_total_runs":5,
+    "host_ci":{
+      "workflow_id":264120066,
+      "runs_on_merge_head":0,
+      "successful_runs_all_history_observed":0,
+      "historical_total_runs_current_query":202,
+      "interpretation":"workflow exists and has run many times, but no successful host-ci run was returned by the success-filter query; no benchmark_smoke raw line was bound in this evidence pass"
+    },
+    "android_native_ci":{
+      "workflow_id":268530216,
+      "run_id":25128576018,
+      "head_sha":"29c93c5f327e3e39785f34c5a93fbd1cde602f05",
+      "conclusion":"failure",
+      "jobs":[
+        {"job_id":73648338056,"name":"Android release • official_arm64","runner_id":0,"steps":0,"classification":"RUNNER_STARTUP_FAILURE"},
+        {"job_id":73648338069,"name":"Android debug • official_arm32_arm64","runner_id":0,"steps":0,"classification":"RUNNER_STARTUP_FAILURE"},
+        {"job_id":73648338084,"name":"Android release • official_arm32_arm64","runner_id":0,"steps":0,"classification":"RUNNER_STARTUP_FAILURE"},
+        {"job_id":73648338093,"name":"Android debug • official_arm64","runner_id":0,"steps":0,"classification":"RUNNER_STARTUP_FAILURE"}
+      ]
+    },
+    "android_ci_wrapper":{"run_id":25128576009,"conclusion":"failure","benchmark_execution_observed":false,"reason":"wrapper/adaptive gates failed or skipped before canonical Android CI"}
+  },
+  "negative_evidence":true,
+  "invariants":[
+    "smoke source existence != smoke execution",
+    "workflow existence != successful job",
+    "runner_id=0 + steps=[] != benchmark logic failure",
+    "host CI smoke != Android physical-device benchmark"
+  ],
+  "open_tokens":[
+    "TOKEN_VAZIO_NATIVE_SMOKE_RAW_LOG",
+    "TOKEN_VAZIO_NATIVE_SMOKE_FIRST_EXECUTING_RUN",
+    "TOKEN_VAZIO_NATIVE_SMOKE_BINARY_SHA256",
+    "TOKEN_VAZIO_NATIVE_SMOKE_ENVIRONMENT_RECEIPT"
+  ],
+  "next_verifiable_step":"Search later workflow/job logs and Drive artifacts for an actual `benchmark_smoke:` line; if none exists, execute the pinned smoke locally/CI with a functioning runner and preserve raw log + binary/source/environment hashes."
+}

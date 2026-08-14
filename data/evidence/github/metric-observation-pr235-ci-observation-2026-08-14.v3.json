@@ -1,0 +1,20 @@
+{
+  "schema":"RAFAELIA_CI_OBSERVATION_V1",
+  "record_id":"CI-METRIC-OBSERVATION-PR235-20260814-003",
+  "state":"RUNNER_STARTUP_FAILURE_PERSISTENT",
+  "claim_allowed":false,
+  "repository":"rafaelmeloreisnovo/Mapa",
+  "pull_request":235,
+  "head_branch":"audit/metric-observation-v1-20260814",
+  "head_sha":"e647e996279c735df3c4bd8f61b6378068763d92",
+  "workflow":{"name":"RAFAELIA Promotion Control V1","run_id":31771477902,"run_number":338,"conclusion":"failure"},
+  "jobs":[
+    {"job_id":94678153934,"name":"promotion-control / negative-tests","conclusion":"failure","runner_id":0,"steps_observed":0,"classification":"RUNNER_STARTUP_FAILURE"},
+    {"job_id":94678163605,"name":"promotion-control / enforce","conclusion":"skipped","steps_observed":0,"classification":"UPSTREAM_DEPENDENCY_SKIPPED"}
+  ],
+  "test_execution_observed":false,
+  "logical_test_failure_observed":false,
+  "historical_context":"V1/V2 and later branch heads observed the same runner_id=0 / steps=[] pattern. This record extends the append-only CI lineage to run 338; it does not replace prior receipts.",
+  "open_tokens":["TOKEN_VAZIO_METRIC_OBSERVATION_TEST_RECEIPT","TOKEN_VAZIO_CI_RUNNER_EXECUTION_PR235"],
+  "next_verifiable_step":"Execute tests in a pinned functioning runtime or observe a GitHub runner with steps actually started; preserve stdout, exit code, environment, source SHA and receipt."
+}

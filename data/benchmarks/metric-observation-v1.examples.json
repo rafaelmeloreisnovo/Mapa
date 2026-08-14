@@ -1,0 +1,106 @@
+[
+  {
+    "schema": "RAFAELIA_METRIC_OBSERVATION_V1",
+    "observation_id": "METRIC-CI-TOP56-BEST-NS-SECTOR-001",
+    "observed_at": null,
+    "metric_name": "best_ns_per_sector",
+    "category": "TIME",
+    "value_state": "MEASURED",
+    "epistemic_class": "MEASURED_WITH_RECEIPT",
+    "observed_value": 594.881,
+    "original_unit": "ns/sector",
+    "normalization": {
+      "status": "NORMALIZED",
+      "canonical_value": 5.94881e-7,
+      "canonical_unit": "s/sector",
+      "dimension": "time_per_sector",
+      "rule_id": "UNIT_NSSECTOR_TO_SSECTOR_V1"
+    },
+    "statistic": {"kind": "BEST", "sample_count": 30, "repeats": null, "confidence": null},
+    "direction": "LOWER_IS_BETTER",
+    "scope": "CI_RUNNER_RELATIVE",
+    "source_refs": [
+      {"provider": "Google Drive", "id": "13ww5-v9HleRhGZ8JHiHXb253XZR8Q0E5", "title": "benchmark_top56.md"}
+    ],
+    "environment": {"os": "Linux", "machine": "x86_64", "compiler": "clang", "cflags": "-O2 -Wall -Wextra -Werror"},
+    "workload": {"matrix_cases": 6, "largest_iterations": 2048},
+    "config": {},
+    "evidence": {
+      "artifact_sha256": "e473670485b752db029e39a30bb7f4816b0daae34defc7ab0a1b77b0a412f90a",
+      "receipt_refs": [],
+      "raw_result_refs": ["benchmark_matrix.csv", "benchmark_snapshots.json"],
+      "digest_verified": null
+    },
+    "negative_evidence": false,
+    "supersedes": [],
+    "token_vazio": ["TOKEN_VAZIO_FIXED_HARDWARE_REPLICATION"],
+    "promotion_gate": {"status": "NOT_REQUESTED", "reviewer": null, "receipt_ref": null},
+    "claim_allowed": false,
+    "notes": "Runner-relative regression evidence; not a universal hardware claim.",
+    "next_verifiable_step": "Replicate on pinned physical hardware with cold/warm runs and competitor baseline."
+  },
+  {
+    "schema": "RAFAELIA_METRIC_OBSERVATION_V1",
+    "observation_id": "METRIC-ARMV7-NEON-MIBS-001",
+    "observed_at": "2026-07-26",
+    "metric_name": "armv7_neon_median_throughput",
+    "category": "BANDWIDTH",
+    "value_state": "MEASURED",
+    "epistemic_class": "MEASURED_WITH_RECEIPT",
+    "observed_value": 163.45,
+    "original_unit": "MiB/s",
+    "normalization": {
+      "status": "NORMALIZED",
+      "canonical_value": 171389747.2,
+      "canonical_unit": "B/s",
+      "dimension": "byte_bandwidth",
+      "rule_id": "UNIT_MIBS_TO_BPS_V1"
+    },
+    "statistic": {"kind": "MEDIAN", "sample_count": 5, "repeats": 5, "confidence": null},
+    "direction": "HIGHER_IS_BETTER",
+    "scope": "PHYSICAL_ARMV7_LOCAL",
+    "source_refs": [
+      {"provider": "Google Drive", "id": "1RQTJ50PcQEn8_u2EIEepZBjN6b5z2wJ2xI7dcfM1RtI", "title": "CATALOGO_MESTRE_RMR_LIVROS_ARQUIVOS_AMBIENTES"}
+    ],
+    "environment": {"device": "Moto E7", "arch": "ARMv7"},
+    "workload": {"size_mib": 512},
+    "config": {"variant": "fork_NEON", "comparison": "fork_portable"},
+    "evidence": {"artifact_sha256": null, "receipt_refs": ["VERIFIED_LOCAL_MEASUREMENT"], "raw_result_refs": [], "digest_verified": true},
+    "negative_evidence": false,
+    "supersedes": [],
+    "token_vazio": ["TOKEN_VAZIO_EXACT_RAW_LOG_PROVIDER_ID"],
+    "promotion_gate": {"status": "NOT_REQUESTED", "reviewer": null, "receipt_ref": null},
+    "claim_allowed": false,
+    "notes": "Portable median was 132.313 MiB/s; observed improvement 23.53% in the recorded environment.",
+    "next_verifiable_step": "Bind exact raw log bytes/hash and rerun on the same device/toolchain."
+  },
+  {
+    "schema": "RAFAELIA_METRIC_OBSERVATION_V1",
+    "observation_id": "METRIC-VECTRA-DISK-IOPS-CURRENT-001",
+    "observed_at": null,
+    "metric_name": "random_4k_read_iops_current_device",
+    "category": "STORAGE",
+    "value_state": "TOKEN_VAZIO",
+    "epistemic_class": "TOKEN_VAZIO",
+    "observed_value": null,
+    "original_unit": "IOPS",
+    "normalization": {"status": "TOKEN_VAZIO", "canonical_value": null, "canonical_unit": "IOPS", "dimension": "io_operation_rate", "rule_id": "TOKEN_VAZIO_NO_MEASUREMENT"},
+    "statistic": {"kind": "UNKNOWN", "sample_count": null, "repeats": null, "confidence": null},
+    "direction": "HIGHER_IS_BETTER",
+    "scope": "CURRENT_DEVICE",
+    "source_refs": [
+      {"repository": "rafaelmeloreisnovo/Vectras-VM-Android", "commit": "21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d", "path": "app/src/main/java/com/vectras/vm/core/PerformanceMonitor.java", "blob_sha": "0d851fb37935c1ed003f548b1b61225c12b530c8"}
+    ],
+    "environment": {},
+    "workload": {"block_bytes": 4096, "operations": 1000, "seed": 42},
+    "config": {},
+    "evidence": {"artifact_sha256": null, "receipt_refs": [], "raw_result_refs": [], "digest_verified": null},
+    "negative_evidence": false,
+    "supersedes": [],
+    "token_vazio": ["TOKEN_VAZIO_DISK_BENCHMARK_DEVICE_RECEIPT", "TOKEN_VAZIO_DEVICE_BUILD_WORKLOAD_JOIN"],
+    "promotion_gate": {"status": "BLOCKED", "reviewer": null, "receipt_ref": null},
+    "claim_allowed": false,
+    "notes": "Measurement path exists; current physical value is intentionally absent.",
+    "next_verifiable_step": "Execute PerformanceMonitor disk benchmark on the target device and capture raw result + build identity."
+  }
+]
