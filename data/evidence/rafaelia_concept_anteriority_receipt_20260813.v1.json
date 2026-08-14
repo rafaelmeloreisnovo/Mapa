@@ -1,0 +1,34 @@
+{
+  "receipt": "rafaelia.concept-anteriority-batch-receipt/v1",
+  "generated_at": "2026-08-13T22:52:00-03:00",
+  "source_export": {
+    "archive_sha256": "53fbfbc52d110d5815024ca851868555d23c3180cd73bb5433dd5f5bade9d93f",
+    "conversations_json_sha256": "d2db8b130ed968b1b94768d98f6e1fcdba52233dc846b9b94a63749cee14b7cf",
+    "export_cutoff": "2025-10-06",
+    "scan_scope": "user messages only"
+  },
+  "record_count": 24,
+  "github_materialization": {
+    "branch": "audit/concept-anteriority-batch-20260813",
+    "markdown_commit": "5a6337ece5049053dbddbcd06f4fe37a296303d8",
+    "registry_v1_commit": "43b7373a73b90f0cf2b25106290d94feb733ef9f",
+    "correction_delta_v1_1_commit": "56efe9f6a1d69fa05027e53132d9ff673537bea2",
+    "effective_registry": "v1 + v1.1.delta"
+  },
+  "states": {
+    "internal_search": "COMPLETED_EXPORT_THROUGH_2025-10-06",
+    "external_prior_art": "PARTIAL_NONEXHAUSTIVE",
+    "legal_priority": "TOKEN_VAZIO",
+    "novelty": "TOKEN_VAZIO_COMBINATION_LEVEL",
+    "zfr_internal_before_cutoff": "TOKEN_VAZIO",
+    "claim_allowed": false
+  },
+  "invariants": [
+    "first mention != first invention",
+    "alias != identity",
+    "internal anteriority != legal priority",
+    "established building block != novelty of a specific composition",
+    "historical correction is append-only"
+  ],
+  "route": "RAW_JSON -> MESSAGE_ID -> MESSAGE_SHA256 -> FAMILY -> ALIAS_GRAPH -> EXTERNAL_PRIOR_ART -> IMPLEMENTATION -> TEST -> CLAIM_GATE"
+}

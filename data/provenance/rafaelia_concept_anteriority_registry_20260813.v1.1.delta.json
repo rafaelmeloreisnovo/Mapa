@@ -1,0 +1,19 @@
+{
+  "delta": "rafaelia.concept-anteriority-batch/v1.1",
+  "extends": "data/provenance/rafaelia_concept_anteriority_registry_20260813.v1.json",
+  "policy": "APPEND_ONLY_CORRECTION",
+  "claim_allowed": false,
+  "patches": [
+    {
+      "record_id": "ANT-HYPERFORMA",
+      "field": "internal_first.conversation_id",
+      "superseded_value": "68369b89-13d4-800d-b5e4-a8766777bea4c1",
+      "correct_value": "68369b89-13d4-800d-b5e4-a8766777bea4",
+      "message_id": "bbb21de4-1df1-4c47-b349-36ba27aba4c1",
+      "message_sha256": "ef4717e79487d5eaf8b5a639ae6d3da01d7b8040f022df0dd77c13e176ee66ae",
+      "reason": "transcription-field-boundary error detected by comparison with normalized source export",
+      "effective_status": "CORRECTED_BY_APPEND_ONLY_DELTA"
+    }
+  ],
+  "invariant": "historical bytes preserved; effective canonical view = v1 + ordered deltas"
+}
