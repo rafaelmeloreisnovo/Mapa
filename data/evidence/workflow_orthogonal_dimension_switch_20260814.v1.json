@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "event": "WORKFLOW_ORTHOGONAL_DIMENSION_SWITCH_20260814",
+  "claim_allowed": false,
+  "predecessor": "workflow_orthogonal_gapfill_018_027_20260814.v1.json",
+  "historical_full_parse_anti_regression": {
+    "MESSAGES-00018": {"provider_id":"1v74y4bxSbI5BzeLRwDl24X1xO19UCZZM","bytes":11565170,"sha256":"c93246a397ad9636e8e48e74ac65c44b8289c34cb347c20f9c0a58627f67b33c","records":5000,"source_path_distribution":{"conversations-012.json":5000}},
+    "MESSAGES-00019": {"provider_id":"1UDmL96bPnmtj9wpftYQnwJ-tmN5hNcCj","bytes":2789273,"sha256":"31956f3f1555dc0106673a0fce412ebd653242ce4825307c600422ce7294ad44","records":1232,"source_path_distribution":{"conversations-012.json":1232}},
+    "NODES-00018": {"provider_id":"1QxwkE2Up_mCYTkkup_ur4cdfk-YpTzFh","bytes":1985931,"sha256":"a79b69de50125ade26812c01b25431d67bda3aa1152e5d8e3a4e994d6766f686","records":5000,"source_path_distribution":{"conversations-011.json":518,"conversations-012.json":4482}},
+    "NODES-00019": {"provider_id":"1IoeperZqxQOJNyeuOMRV9SPDGbtRJ_Fx","bytes":887486,"sha256":"4bec48ac1abbbd77fedaee3149fbf233e070982ef3d5736bc57c54f60ba42684","records":2232,"source_path_distribution":{"conversations-012.json":2232}},
+    "derived_suffix_equals_source_shard": "REJECTED_FOR_00018_00019"
+  },
+  "temporal_continuation": {
+    "parent_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+    "inherited_cursor": "2026-08-03T10:40:00Z",
+    "intervals": [
+      {"start":"2026-08-03T10:40:00Z","end":"2026-08-03T11:40:00Z","result":"EMPTY_PROVIDER_RESULT_FOR_THIS_PARENT_TIME_INTERVAL_ONLY"},
+      {"start":"2026-08-03T11:40:00Z","end":"2026-08-03T13:40:00Z","result":"EMPTY_PROVIDER_RESULT_FOR_THIS_PARENT_TIME_INTERVAL_ONLY"},
+      {"start":"2026-08-03T13:40:00Z","end":"2026-08-03T17:40:00Z","result":"EMPTY_PROVIDER_RESULT_FOR_THIS_PARENT_TIME_INTERVAL_ONLY"}
+    ],
+    "global_absence": false
+  },
+  "dimension_switch": {
+    "from": "TEMPORAL_METADATA_SCAN",
+    "to": "EXACT_TUPLE_OBJECT_MAP_CUSTODY_RECEIPT",
+    "reason": "exact path,size,ordinal,span_pointer are known for 018-027; repeated temporal negatives have lower expected information gain",
+    "evidence_authority_change": false
+  },
+  "open_tokens": ["RAW_SHARD_PROVIDER_ID_018_027","RAW_SHARD_SHA256_018_027","RAW_SHARD_RECEIPT_018_027","PRODUCER_TO_DERIVED_BINDING"],
+  "next_cursor": "EXACT_TUPLE_STAGE1_CUSTODY_OBJECTMAP_SEARCH_018_027_THEN_PAIR00007_FALLBACK"
+}
