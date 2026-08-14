@@ -1,0 +1,33 @@
+{
+  "schema": "rafaelia.evidence.novoexport-anteriority-extractor-synthetic-reference/v1",
+  "observed_at": "2026-08-14T08:49:00-03:00",
+  "environment": "CONTAINER_REFERENCE",
+  "target_repository_file": "scripts/extract_novoexport_anteriority_events_v1.py",
+  "target_repository_blob_sha": "d392969cfd56205905b7ec2efcb8a56f2b8c8fe8",
+  "execution_scope": "LOGIC_EQUIVALENT_LOCAL_RECONSTRUCTION_ON_SYNTHETIC_FIXTURE",
+  "exact_remote_bytes_executed": false,
+  "reason_exact_remote_bytes_not_executed": "Connector content was inspected, but the synthetic execution used a locally reconstructed equivalent script; therefore this receipt does not claim byte-identical execution of the GitHub blob.",
+  "synthetic_fixture": {
+    "shards": 1,
+    "user_messages": 1,
+    "matched_families_expected": 3,
+    "missing_family_expected_state": "TOKEN_VAZIO_IN_SCANNED_INPUT"
+  },
+  "observations": {
+    "py_compile": "PASS",
+    "stdout": "PASS shards=1 events=3 claim_allowed=false",
+    "assertions": "PASS",
+    "events_total": 3,
+    "claim_allowed_preserved_false": true,
+    "token_vazio_for_missing_family": true
+  },
+  "local_reference_hashes": {
+    "logic_equivalent_script_sha256": "0aad6d70a58403ea61f133ebb711ab5c408cc7831ce54975c0634d42fac73e21",
+    "synthetic_events_jsonl_sha256": "cf48b1cdc0fa6059053bae56720a7e6c746dfd6a8cb20fee58a7cc016ee738e2",
+    "synthetic_summary_json_sha256": "2082daafaf90fec977ef99a1b8a9b0dc01558c3c733df0c0dcb6bd6420665aac"
+  },
+  "state": "PASS_LIMITED_SYNTHETIC_REFERENCE",
+  "claim_allowed": false,
+  "falsifier": "Any run where assistant messages are emitted as user evidence, missing families are promoted from TOKEN_VAZIO, hashes are omitted, or claim_allowed becomes true must fail the gate.",
+  "next_gate": "Execute the exact GitHub blob against an immutable NOVOexport snapshot and freeze source-shard hashes, events JSONL, summary JSON and runtime receipt."
+}
