@@ -1,0 +1,49 @@
+{
+  "schema": "rafaelia.omega-context-route-registry.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-08-14T12:59:00-03:00",
+  "state": "VERIFIED_LIMITED_NONTERMINAL",
+  "claim_allowed": false,
+  "routes": [
+    {
+      "route_id": "OMEGA-ROUTE-BOOTSTRAP",
+      "intent": "Reconstruct the minimum governed context for a new or resumed RAFAELIA task.",
+      "entry_node_ids": ["OMEGA-NODE-SUPER-ROOT-V1"],
+      "required_node_ids": ["OMEGA-NODE-MAPA-MAIN", "OMEGA-NODE-DRIVE-MASTER-NAV"],
+      "optional_node_ids": ["OMEGA-NODE-TRACEABILITY", "OMEGA-NODE-HYP-INDEX-V8"],
+      "read_policy": {"default_mode": "READ_ONLY", "open_minimum_subgraph": true, "historical_state_is_current": false, "max_default_nodes": 7},
+      "stop_conditions": ["enough current authority and invariants are loaded to answer or select the next executable gate", "additional nodes do not materially reduce uncertainty"],
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "claim_allowed": false}
+    },
+    {
+      "route_id": "OMEGA-ROUTE-HYPOTHESIS",
+      "intent": "Recover hypothesis identity, current checkpoint, evidence gaps, falsifiers and next gate without asserting global completeness.",
+      "entry_node_ids": ["OMEGA-NODE-SUPER-ROOT-V1"],
+      "required_node_ids": ["OMEGA-NODE-HYP-INDEX-V8"],
+      "optional_node_ids": ["OMEGA-NODE-DRIVE-MASTER-NAV", "OMEGA-NODE-TRACEABILITY"],
+      "read_policy": {"default_mode": "READ_ONLY", "open_minimum_subgraph": true, "historical_state_is_current": false, "max_default_nodes": 6},
+      "stop_conditions": ["requested family resolves to a current checkpoint and explicit gaps", "global count remains TOKEN_VAZIO unless a terminality gate is independently satisfied"],
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "claim_allowed": false}
+    },
+    {
+      "route_id": "OMEGA-ROUTE-NOVOEXPORT-READONLY",
+      "intent": "Inspect NOVOexport as immutable source and build only bounded catalogs, identities and relations before any transformation.",
+      "entry_node_ids": ["OMEGA-NODE-SUPER-ROOT-V1"],
+      "required_node_ids": ["OMEGA-NODE-NOVOEXPORT"],
+      "optional_node_ids": ["OMEGA-NODE-DRIVE-MASTER-NAV", "OMEGA-NODE-TRACEABILITY"],
+      "read_policy": {"default_mode": "READ_ONLY", "open_minimum_subgraph": true, "historical_state_is_current": false, "max_default_nodes": 5},
+      "stop_conditions": ["catalog scope is sufficient for the requested task", "no recursive full-corpus read is required by the task"],
+      "state": {"epistemic_status": "DOCUMENTED", "claim_allowed": false}
+    },
+    {
+      "route_id": "OMEGA-ROUTE-STATE-RECONCILIATION",
+      "intent": "Resolve conflicts between historical snapshots and current provider state without rewriting history.",
+      "entry_node_ids": ["OMEGA-NODE-SUPER-ROOT-V1"],
+      "required_node_ids": ["OMEGA-NODE-PR243-CURRENT", "OMEGA-NODE-PR243-HISTORICAL"],
+      "optional_node_ids": ["OMEGA-NODE-TRACEABILITY", "OMEGA-NODE-DRIVE-MASTER-NAV"],
+      "read_policy": {"default_mode": "READ_ONLY", "open_minimum_subgraph": true, "historical_state_is_current": false, "max_default_nodes": 6},
+      "stop_conditions": ["current provider state is identified", "historical state is preserved and linked with SUPERSEDES_WITHOUT_ERASING"],
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "claim_allowed": false}
+    }
+  ]
+}
