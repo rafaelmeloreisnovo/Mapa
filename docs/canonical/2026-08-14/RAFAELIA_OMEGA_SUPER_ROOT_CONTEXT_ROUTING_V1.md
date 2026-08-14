@@ -1,6 +1,6 @@
 # RAFAELIA Ω — SUPER_ROOT + UNIVERSAL_NODE + CONTEXT_ROUTE + DELTA/ATA — V1
 
-**Estado:** `GOVERNED_PARTIAL / CLAIM_ALLOWED=false`  
+**Estado:** `GOVERNED_PARTIAL_PILOT_EXECUTED / CLAIM_ALLOWED=false`  
 **Delta:** `OMEGA-SUPER-ROOT-ROUTING-20260814-0001`  
 **Regra:** evoluir estruturas existentes por referência; não copiar payloads nem reescrever snapshots históricos.
 
@@ -105,6 +105,27 @@ CURRENT_PROVIDER_STATE
 
 Logo `HISTORICAL_STATE != CURRENT_STATE`, sem que um invalide retroativamente o outro.
 
+## Piloto bounded 0001 — PR #243
+
+Receipt: `data/evidence/routing/OMEGA_SUPER_ROOT_PILOT_PR243_20260814.v1.json`.
+
+Objetivo: resolver o aparente conflito `OPEN_DRAFT_UNMERGED` histórico versus `closed+merged` atual sem apagar ATA e sem carregar contexto irrelevante.
+
+Resultado:
+
+```text
+context_pages_opened = 2
+historical_receipt    = CKPT_0002
+current_authority     = GitHub PR #243
+classification        = TEMPORAL_STATE_DIFFERENCE_NOT_LOGICAL_CONTRADICTION
+stop_condition        = SATISFIED
+state                 = PASS_RECONSTRUCTION_LIMITED
+```
+
+Não foram paginados `SEMANTICA_DINAMICA`, Procedure Ledger, histórico completo do Drive nem o corpus global de hipóteses, pois não acrescentariam evidência capaz de alterar a decisão do objetivo bounded.
+
+Isso é prova limitada de `CURRENT pequeno + HISTORY por rota`; não prova cobertura global do SUPER_ROOT.
+
 ## TOKEN_VAZIO
 
 A meta não é `TOKEN_VAZIO=0`.
@@ -142,6 +163,7 @@ Safety, claim gate, privacidade e fail-closed têm precedência sobre a pontuaç
 - memória longitudinal/ortogonal e Ω router reutilizados;
 - `SEMANTICA_DINAMICA` e Procedure Ledger montados, não copiados;
 - PR #243 virou primeiro state-transition receipt do overlay;
+- primeiro piloto bounded passou com apenas duas páginas e stop condition explícita;
 - um único contrato de composição cobre SUPER_ROOT, UNIVERSAL_NODE, CONTEXT_ROUTE e DELTA/ATA.
 
 ## F_gap
@@ -152,4 +174,4 @@ Safety, claim gate, privacidade e fail-closed têm precedência sobre a pontuaç
 
 ## F_next
 
-Executar **um piloto bounded** pelo `SUPER_ROOT` usando um P0/P1 de alto `UnlockValue`; registrar páginas/contextos efetivamente abertos, autoridades consultadas, gaps resolvidos, stop condition e receipt da rota. Só depois avaliar expansão do mount table.
+Executar um **segundo piloto bounded, de família distinta e alto `UnlockValue`**, preferencialmente exigindo outra autoridade ortogonal como Procedure Ledger ou `SEMANTICA_DINAMICA`. Comparar páginas abertas, gaps resolvidos e stop condition com o piloto 0001. Só depois avaliar qualquer expansão global do mount table.
