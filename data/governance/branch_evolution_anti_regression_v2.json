@@ -1,0 +1,183 @@
+{
+  "schema_version": "rafaelia.branch-evolution-anti-regression.v2",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "observation_date_brt": "2026-08-14",
+  "base": {
+    "branch": "main",
+    "sha": "f2e489423044c906f5a385fd5ec2b61eba363c58",
+    "role": "CANONICAL"
+  },
+  "branch_count_observed": 231,
+  "branch_count_scope": "CONNECTOR_BRANCH_NAME_ENUMERATION",
+  "claim_allowed": false,
+  "repository_wide_closed": false,
+  "automatic_merge": false,
+  "canonicalization_requires_new_pr_to_main": true,
+  "invariants": [
+    "git_ahead_does_not_imply_semantic_novelty",
+    "merged_pr_does_not_imply_main_presence",
+    "main_path_presence_does_not_imply_byte_identity",
+    "supersession_preserves_source_pointer",
+    "stale_ancestor_is_provenance_not_merge_source",
+    "active_or_merged_noncanonical_trails_are_not_silently_replayed",
+    "token_vazio_is_auditable"
+  ],
+  "decision_classes": {
+    "ANCESTOR_ONLY": {
+      "rule": "ahead_by == 0 and behind_by > 0",
+      "default_action": "PRESERVE_REFERENCE_DO_NOT_MERGE"
+    },
+    "SHADOWED_BY_MAIN_ENHANCED": {
+      "rule": "branch reports unique delta but the same logical artifact exists in main in a provenance-richer or superseding form",
+      "default_action": "PRESERVE_REFERENCE_NO_TRANSFER"
+    },
+    "MERGED_NONCANONICAL_BASE_PENDING_CANONICALIZATION": {
+      "rule": "source PR merged into a base other than main and at least one source artifact is absent from main",
+      "default_action": "SEPARATE_REVIEWED_PR_TO_MAIN"
+    },
+    "DIVERGED_UNRECONCILED": {
+      "rule": "ahead_by > 0 and behind_by > 0 without enough evidence to prove shadowing or canonicalization",
+      "default_action": "TOKEN_VAZIO_REVIEW"
+    }
+  },
+  "observations": [
+    {
+      "branch": "main_00_governanca",
+      "relation_to_main": {
+        "status": "behind",
+        "ahead_by": 0,
+        "behind_by": 963,
+        "observed_head_or_merge_base_sha": "d05a6bad499e747eb89733a151b1a425fa720155"
+      },
+      "classification": "ANCESTOR_ONLY",
+      "transfer_required": false,
+      "merge_to_main_authorized": false,
+      "evidence_note": "Numbered governance lane is an ancestor of current main; use as procedural/provenance reference."
+    },
+    {
+      "branch": "main_01_intake_fontes",
+      "relation_to_main": {
+        "status": "behind",
+        "ahead_by": 0,
+        "behind_by": 963,
+        "observed_head_or_merge_base_sha": "d05a6bad499e747eb89733a151b1a425fa720155"
+      },
+      "classification": "ANCESTOR_ONLY",
+      "transfer_required": false,
+      "merge_to_main_authorized": false,
+      "evidence_note": "Numbered intake lane is an ancestor of current main."
+    },
+    {
+      "branch": "main_06_integracao",
+      "relation_to_main": {
+        "status": "behind",
+        "ahead_by": 0,
+        "behind_by": 963,
+        "observed_head_or_merge_base_sha": "d05a6bad499e747eb89733a151b1a425fa720155"
+      },
+      "classification": "ANCESTOR_ONLY",
+      "transfer_required": false,
+      "merge_to_main_authorized": false,
+      "evidence_note": "Numbered integration lane is an ancestor of current main."
+    },
+    {
+      "branch": "main_09_memoria_arquivo",
+      "relation_to_main": {
+        "status": "behind",
+        "ahead_by": 0,
+        "behind_by": 963,
+        "observed_head_or_merge_base_sha": "d05a6bad499e747eb89733a151b1a425fa720155"
+      },
+      "classification": "ANCESTOR_ONLY",
+      "transfer_required": false,
+      "merge_to_main_authorized": false,
+      "evidence_note": "Numbered memory/archive lane is an ancestor of current main."
+    },
+    {
+      "branch": "governance/invariante-evolutiva-absoluta-v1-20260803",
+      "relation_to_main": {
+        "status": "behind",
+        "ahead_by": 0,
+        "behind_by": 643,
+        "observed_head_or_merge_base_sha": "c2f2b02d8e97b4dfd4f1689923e85fdab3c6d2d6"
+      },
+      "classification": "ANCESTOR_ONLY",
+      "transfer_required": false,
+      "merge_to_main_authorized": false,
+      "evidence_note": "IEA source branch has no exclusive commits relative to current main; the canonical document is already in main."
+    },
+    {
+      "branch": "research/invariante-geometrica-coerente-v1-20260802",
+      "relation_to_main": {
+        "status": "diverged",
+        "ahead_by": 1,
+        "behind_by": 799,
+        "observed_head_or_merge_base_sha": "TOKEN_VAZIO_HEAD_SHA_POST_MERGE"
+      },
+      "source_pr": {
+        "number": 128,
+        "state": "closed",
+        "merged": true,
+        "base": "main",
+        "merged_head_sha": "1363847887a9a48add2930155d984dacdc67f1d1"
+      },
+      "artifact_equivalence": {
+        "path": "receipts/geometry/IGC_CR_20260802_RECEIPT_V2_LOCAL_REPRO.json",
+        "branch_blob_sha1": "efe29b8cb274969257432a52b50ffd382a49cb49",
+        "main_blob_sha1": "8913ad3cac77ecd3a6e226fe5d6c22753d78ede8",
+        "main_state": "PRESENT_PROVENANCE_ENHANCED",
+        "byte_identical": false
+      },
+      "classification": "SHADOWED_BY_MAIN_ENHANCED",
+      "transfer_required": false,
+      "merge_to_main_authorized": false,
+      "evidence_note": "Git ahead=1 is not a missing canonical artifact: main contains the same receipt identity/path in a provenance-richer form."
+    },
+    {
+      "branch": "audit/fg006-c84-cycle-identity-content-20260814",
+      "relation_to_main": {
+        "status": "diverged",
+        "ahead_by": 3,
+        "behind_by": 99,
+        "observed_head_or_merge_base_sha": "8b41468caf281b06b98b7b143be45e55d5e1ca09"
+      },
+      "source_pr": {
+        "number": 228,
+        "state": "closed",
+        "merged": true,
+        "base": "audit/fg006-repository-coverage-c81-20260814",
+        "head_sha": "8b41468caf281b06b98b7b143be45e55d5e1ca09"
+      },
+      "main_presence": {
+        "checked_paths": [
+          "data/governance/fg006-repository-coverage-c84-reconciliation.v1.json",
+          "tools/validate_fg006_repository_coverage_c84.py"
+        ],
+        "missing_in_main": [
+          "data/governance/fg006-repository-coverage-c84-reconciliation.v1.json",
+          "tools/validate_fg006_repository_coverage_c84.py"
+        ],
+        "all_present": false
+      },
+      "classification": "MERGED_NONCANONICAL_BASE_PENDING_CANONICALIZATION",
+      "transfer_required": "REVIEW_REQUIRED",
+      "merge_to_main_authorized": false,
+      "evidence_note": "PR #228 merged into an audit base, not main; checked C84 ledger and validator are absent from main."
+    }
+  ],
+  "token_vazio": {
+    "open": [
+      "TOKEN_VAZIO_EXHAUSTIVE_SEMANTIC_DIFF_ALL_231_BRANCHES",
+      "TOKEN_VAZIO_POST_MERGE_HEAD_SHA_RESEARCH_IGC",
+      "TOKEN_VAZIO_ALL_NONCANONICAL_MERGED_PRS_CANONICALIZATION_SET",
+      "TOKEN_VAZIO_REMOTE_CI_FOR_V2_UNTIL_PR_RUN"
+    ],
+    "rule": "Unresolved branch semantics remain explicit; absence is never coerced into novelty, mergeability or safety."
+  },
+  "next_actions": [
+    "Validate this snapshot locally and in provider CI.",
+    "Enumerate merged PRs whose base is not main and test artifact presence in main.",
+    "Open separate canonicalization PRs only for evidence-preserving deltas not already superseded in main.",
+    "Do not synchronize stale numbered lanes by force; recreate/sync only when they are actively used as control points."
+  ]
+}
