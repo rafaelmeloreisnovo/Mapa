@@ -1,0 +1,62 @@
+{
+  "schema": "RAFAELIA_APPEND_ONLY_ACTIVATION_SETTLEMENT_PUBLIC/V1",
+  "settlement_id": "SETTLEMENT-OMEGA-MEM-ACT-20260814-0001-PUBLIC",
+  "checkpoint_id": "OMEGA-MEM-ACT-20260814-0001",
+  "source_receipt_sha256": "77807381adc5333f11feadedf787e01fe5a48fcd1e3a2b247152a5de52dad87a",
+  "observed_at": "2026-08-14T06:23:00-03:00",
+  "state": "MATERIALIZED_CROSS_SYSTEM",
+  "epistemic_status": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "append_only": true,
+  "privacy_scope": "PUBLIC_MINIMIZED",
+  "outputs": [
+    {
+      "role": "human_navigation_checkpoint",
+      "sha256": "bff5ccaefb647a1f3f347b923543e14574d6b87c903d4802de309e9ab81c655e",
+      "bytes": 9442
+    },
+    {
+      "role": "machine_readable_orthogonal_index",
+      "sha256": "01e1cfbd9847438522e4cde49ad93fa786d0f464aefc80006cdd267860f6a380",
+      "bytes": 13867
+    },
+    {
+      "role": "append_only_activation_receipt",
+      "sha256": "77807381adc5333f11feadedf787e01fe5a48fcd1e3a2b247152a5de52dad87a",
+      "bytes": 2779
+    }
+  ],
+  "custody": {
+    "private_sidecar": "MATERIALIZED",
+    "drive": "MATERIALIZED_4_OF_4_AND_METADATA_READBACK_VERIFIED",
+    "library": "MATERIALIZED_4_OF_4",
+    "private_identifiers_published": false
+  },
+  "github": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "audit/longitudinal-orthogonal-memory-20260814",
+    "base": "main",
+    "draft_pr": 241,
+    "promotion_performed": false,
+    "merge_performed": false
+  },
+  "verification": {
+    "json_syntax": "PASS",
+    "local_sha256": "PASS",
+    "drive_readback_count": 4,
+    "drive_sizes_match_local": true,
+    "public_payload_minimized": true
+  },
+  "F_ok": [
+    "longitudinal checkpoint persisted",
+    "orthogonal machine index persisted",
+    "four private-custody files verified",
+    "public change contains no private custody identifiers"
+  ],
+  "F_gap": [
+    "draft PR is not merged",
+    "physical container and runtime gaps remain open",
+    "symbolic visual layer remains evidence_weight=0"
+  ],
+  "F_next": "review the draft PR, then independently re-export and validate the complete APK and conversation archive before any claim promotion"
+}
