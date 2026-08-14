@@ -1,0 +1,27 @@
+{
+  "schema": "RAFAELIA_BITRAF_PHYSICAL_OBSERVATION_LOCAL_EXECUTION_V1",
+  "date": "2026-08-13",
+  "scope": "software scaffold with simulated observations only",
+  "execution_environment": "CONTAINER_REFERENCE",
+  "source_kind": "SIMULATED",
+  "observed": {
+    "unit_tests": "2/2 PASS_LOCAL",
+    "schema_fixture_validation": "7/7 PASS_LOCAL",
+    "candidate_state": "BJT_SATURATION"
+  },
+  "materialized_on_branch": [
+    "indices/BITRAF_PHYSICAL_EXECUTION_RESIDUE_MANIFOLD_V1.md",
+    "schemas/bitraf-physical-residue-observation.schema.json",
+    "data/contracts/bitraf_physical_residue_experiment.v1.json",
+    "scripts/bitraf_physical_residue_inference.py",
+    "tests/fixtures/bitraf_physical_residue_simulated.v1.jsonl"
+  ],
+  "blocked_by_connector_before_mutation": [
+    "tests/test_bitraf_physical_residue_inference.py",
+    "data/evidence/bitraf_physical_residue_simulated_output_20260813.json"
+  ],
+  "physical_measurement": "TOKEN_VAZIO",
+  "causal_mechanism": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "closure_boundary": "This receipt proves only local execution of the simulated software scaffold and partial GitHub materialization. It does not prove a physical leakage mechanism, physical path localization, or causal reconstruction."
+}
