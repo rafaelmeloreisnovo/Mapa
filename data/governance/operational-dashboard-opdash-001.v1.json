@@ -1,0 +1,59 @@
+{
+  "schema":"rafaelia.operational-dashboard/v1",
+  "trail_id":"OPERATIONAL_DASHBOARD",
+  "trail_seq":1,
+  "cycle_uid":"OPERATIONAL_DASHBOARD-001-20260814T015917Z-7f377447",
+  "legacy_local_cycle":"C83",
+  "identity_rule":"legacy numeric cycle labels are trail-local metadata, never globally unique identifiers",
+  "state":"VERIFIED_LIMITED",
+  "claim_allowed":false,
+  "scope":"C80_BOUNDED_WORK_ITEMS_ONLY",
+  "authority_model":"VIEW_DERIVED_FROM_LEDGER_AND_TRANSITION_EVENTS",
+  "source_main_sha":"b577012a55aedf00ca648d4888d039acc1223426",
+  "source_artifacts":[
+    "data/governance/operational-work-items.c80.v1.json",
+    "data/governance/operational-work-item-transitions.c80.v1.json",
+    "docs/receipts/RAFAELIA_OPERATIONAL_WORK_ITEM_LATTICE_C81_20260813.md",
+    "docs/receipts/RAFAELIA_WORK_ITEM_TRANSITION_LEDGER_C82_20260813.md"
+  ],
+  "local_workbook":{
+    "filename":"RAFAELIA_OPERATIONAL_PENDING_MAP_C82.xlsx",
+    "sha256":"f787c3f2c1b3d227bddf613f8c8a6e61666b8092c52fdfed0e6ff74396802b08",
+    "formula_error_scan":"PASS_ZERO_MATCHES"
+  },
+  "drive":{
+    "provider_id":"1JUSbJlHlVWznJJ5O1vzQwdd3yPc_J8faUcXA_ov0kkk",
+    "title":"RAFAELIA — Mapa Operacional de Pendências Ω — OPDASH-001 — 2026-08-13",
+    "native_sheet":true,
+    "timezone":"Etc/UTC",
+    "sheets":["Dashboard","Work Items","Transition Ledger","Contracts","Sources"],
+    "readback":"PASS_BOUNDED"
+  },
+  "observed_kpis":{
+    "work_items":3,
+    "open_or_token_vazio_closure":3,
+    "must_or_important":3,
+    "provenance_partial_or_missing":2,
+    "contract_not_satisfied":3,
+    "transition_events":3,
+    "claim_allowed_true":0
+  },
+  "token_delta":{
+    "TOKEN_VAZIO_OPERATIONAL_DASHBOARD":"RESOLVED_BOUNDED_C80_DASHBOARD",
+    "created":["TOKEN_VAZIO_GLOBAL_OPERATIONAL_DASHBOARD","TOKEN_VAZIO_DASHBOARD_AUTO_REGENERATION_GATE"]
+  },
+  "invariants":[
+    "dashboard_is_view_not_authority",
+    "ledger_and_transition_events_remain_authority",
+    "bounded_scope_does_not_imply_global_coverage",
+    "numeric_cycle_label_is_not_global_identity",
+    "no_claim_promotion",
+    "append_only"
+  ],
+  "f_next":[
+    "ingest one bounded historical Gap Atlas batch into work-item lattice",
+    "append transition events only where temporal evidence exists",
+    "regenerate dashboard from versioned ledger rather than manual edits",
+    "keep future dashboard identities under trail_id plus cycle_uid instead of global C-number"
+  ]
+}
