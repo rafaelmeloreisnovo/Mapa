@@ -1,0 +1,81 @@
+{
+  "schema": "rafaelia.delta-star-micro-omega-lifecycle-receipt/v1",
+  "cycle_id": "OMEGA-OPERATIONAL-COHERENCE-C83",
+  "observed_at_local": "2026-08-13T22:43:00-03:00",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "audit/omega-operational-coherence-20260813",
+  "pr": 223,
+  "provider_bound_artifacts": [
+    {
+      "path": "data/governance/RAFAELIA_DELTA_STAR_MICRO_OMEGA_LIFECYCLE_V1.json",
+      "git_blob_sha1": "cf25c21cb42be7510c2ee77b3b99eb551b7018af",
+      "sha256": "2a7b40a046dfa899511c784837ffc260829cd984c72d8e0c7acedb6595e69489"
+    },
+    {
+      "path": "tools/validate_delta_star_micro_omega_lifecycle.py",
+      "git_blob_sha1": "132f71c4fb02791bf244b0389390116eb2596454",
+      "sha256": "4eec7af0a5e237ba2e9e1f672127f57a3720b4b5e74363ca8ff3ef7f371ff24c"
+    },
+    {
+      "path": "tests/test_delta_star_micro_omega_lifecycle.py",
+      "git_blob_sha1": "1ae4e9b03d827ec71511e281967f9f8cc840b514",
+      "sha256": "7d2dd31e0b6d7118ac17f8eb00086ac049e769b920e6b50c143001f136ee5356"
+    }
+  ],
+  "execution": {
+    "environment": "container reference runtime",
+    "provider_byte_identity_verified_by_git_blob_sha1": true,
+    "validator_exit": 0,
+    "validator_result": "PASS delta-star-micro-omega lifecycle fail-closed contract",
+    "adversarial_tests": "12/12 PASS",
+    "negative_controls": [
+      "claim-promotion rejected",
+      "broken cycle rejected",
+      "TOKEN_VAZIO omission rejected",
+      "absolute OMEGA rejected",
+      "unmeasured sigma claim rejected",
+      "missing regression metric rejected",
+      "urgency-only priority rejected",
+      "silent history overwrite rejected",
+      "TOKEN_VAZIO-to-zero coercion rejected",
+      "parallel architecture rejected",
+      "missing F_next rejected"
+    ]
+  },
+  "first_real_route": {
+    "gap_id": "GAP-RAFCODEPHI-APK-BUILD",
+    "DELTA": {
+      "before": "TOKEN_VAZIO_ARTIFACT",
+      "observed_delta": "build artifact recovered but physical installed/runtime identity remains unobserved",
+      "labels": ["important", "urgent", "provenance", "necessary", "TOKEN_VAZIO"]
+    },
+    "STAR": {
+      "primary_window": "W2_BUILD_RUNTIME",
+      "supporting_window": "W4_EVIDENCE_PROVENANCE",
+      "route": "source commit -> workflow run -> workflow artifact -> exact APK hash -> physical install -> installed hash -> launch/workload receipt"
+    },
+    "MICRO_PER_MILLE": {
+      "completed_change": "artifact absence reclassified to exact build-bound static artifact",
+      "result": "BUILD_ARTIFACT_BOUND_VERIFIED_STATIC",
+      "regression": "none claimed; physical runtime state not promoted",
+      "evidence": "source/workflow/artifact/APK hashes already bound in parent operational coherence ledger"
+    },
+    "OMEGA": {
+      "scope": "static build-artifact identity only",
+      "F_ok": "exact APK identities and producing workflow/source are bound",
+      "F_gap": "physical installation, installed base.apk identity, launch/workload and independent reproduction remain TOKEN_VAZIO",
+      "F_next": "install exact ARM32 APK and emit device-bound receipt",
+      "plateau": "VERIFIED_STATIC_ONLY",
+      "reopens_DELTA": true
+    }
+  },
+  "boundary": [
+    "FORMALIZED != PHYSICALLY_EXECUTED",
+    "STATIC_ARTIFACT_IDENTITY != INSTALLED_RUNTIME_PROOF",
+    "OMEGA = bounded plateau, not absolute completion",
+    "discovery labels != evidence",
+    "claim_allowed=false"
+  ]
+}
