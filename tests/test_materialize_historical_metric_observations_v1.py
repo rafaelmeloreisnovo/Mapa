@@ -38,9 +38,10 @@ def test_source_shard_hashes_are_bound():
     assert "dd133d11f02d757036eb3b9228a35e9734dc4b5984b1002f4f40c6b7260598d5" in hashes
 
 
-def test_ns_access_is_preserved_not_guessed():
+def test_ns_access_is_normalized_without_losing_original_unit():
     records = {r["observation_id"]: r for r in histmat.materialize(load_seed())}
     lat = records["METRIC-ARM32-CPUMEM-046-001-LAT_16K"]
     assert lat["original_unit"] == "ns/access"
-    assert lat["normalization"]["status"] == "PRESERVED_SEMANTIC"
-    assert lat["normalization"]["canonical_unit"] == "ns/access"
+    assert lat["normalization"]["status"] == "NORMALIZED"
+    assert lat["normalization"]["canonical_unit"] == "s/access"
+    assert abs(lat["normalization"]["canonical_value"] - 7.01e-9) < 1e-20
