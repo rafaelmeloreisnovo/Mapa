@@ -1,0 +1,50 @@
+{
+  "artifacts": [
+    {
+      "classification": "PROVIDER_MATERIALIZED_SEMANTICALLY_OBSERVED_EXACT_LOCAL_BYTE_IDENTITY_NOT_ESTABLISHED",
+      "exact_local_provider_match": false,
+      "local_expected_git_blob_sha1": "017f02657e4429817ce0dfb2996b21e566b7bda9",
+      "local_sha256": "64a3f66ff59a32241a4d16d6e5219209bb24904a976bad2dd186508f7f0793ab",
+      "path": "data/governance/fg006-repository-coverage-c82.v2.json",
+      "provider_git_blob_sha1": "8e6bf5360e018d1ee60c768e9b595ba28e1af3d3"
+    },
+    {
+      "classification": "EXACT_GIT_BLOB_IDENTITY_MATCH",
+      "exact_local_provider_match": true,
+      "local_expected_git_blob_sha1": "3e1461e37a3facad0b2cbffd7c52c2bd14481206",
+      "local_sha256": "f5efcaf3bbed78577c047fbc259d7d6ac56e0b7f3924c7161b1926636bf8ad82",
+      "path": "tools/validate_fg006_repository_coverage_c82.py",
+      "provider_git_blob_sha1": "3e1461e37a3facad0b2cbffd7c52c2bd14481206"
+    },
+    {
+      "classification": "EXACT_GIT_BLOB_IDENTITY_MATCH",
+      "exact_local_provider_match": true,
+      "local_expected_git_blob_sha1": "6da649eabc28904fb28ab3b41c34b208286c3205",
+      "local_sha256": "3e29fc0cebfd79c75f99c288cd000dc52b7f9700af1bd94ad12da8304f450734",
+      "path": "tests/test_fg006_repository_coverage_c82.py",
+      "provider_git_blob_sha1": "6da649eabc28904fb28ab3b41c34b208286c3205"
+    }
+  ],
+  "branch": "audit/fg006-repository-coverage-c81-20260814",
+  "claim_allowed": false,
+  "cycle_id": "OMEGA-ANTI-REGRESSION-C82",
+  "head_after_tests": "3ea0655e7a460733468a91624de1bc1254e83a54",
+  "limitations": [
+    "The provider ledger blob differs from the local ledger Git-blob expectation; no byte-identical provider-ledger execution claim is made.",
+    "The complete recursive-tree JSON payload was not exported as exact bytes into the local runtime.",
+    "30 remains a proven lower bound, not an exhaustive repository-wide denominator."
+  ],
+  "local_execution": {
+    "classification": "LOCAL_BYTES_EXECUTED",
+    "tests": "12/12 PASS",
+    "tests_exit_code": 0,
+    "validator": "PASS fg006-c82 lower_bound=30 delta=7 closed=false",
+    "validator_exit_code": 0
+  },
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "schema": "RAFAELIA_FG006_C82_PROVIDER_MATERIALIZATION_EVIDENCE_V1",
+  "token_vazio": [
+    "TOKEN_VAZIO_FG006_C82_LEDGER_EXACT_LOCAL_PROVIDER_BYTE_IDENTITY",
+    "TOKEN_VAZIO_FG006_TREE_PAYLOAD_MACHINE_EXTRACTION_C82"
+  ]
+}
