@@ -1,0 +1,27 @@
+{
+  "schema": "rafaelia.state-reconciliation-delta.v1",
+  "delta_id": "DELTA-PR243-CURRENT-VS-HISTORICAL-20260814",
+  "observed_at": "2026-08-14T12:59:00-03:00",
+  "subject": "rafaelmeloreisnovo/Mapa#243",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "historical_snapshot": {
+    "source": "Google Drive — RAFAELIA F_gap Hypothesis Registry V1",
+    "provider_id": "1-7qZzlykhfoJFdkO4tCTPhaq0JScXrjiF1rihb3JU2U",
+    "recorded_state": "draft / not merged",
+    "state_class": "HISTORICAL_SNAPSHOT"
+  },
+  "current_provider": {
+    "source": "GitHub provider",
+    "state": "closed",
+    "merged": true,
+    "draft": false,
+    "merge_commit_sha": "a0a0e6c333493d69283d399472eb3321d6fd7ebd",
+    "state_class": "CURRENT_PROVIDER_STATE"
+  },
+  "relation": "CURRENT_PROVIDER_STATE SUPERSEDES HISTORICAL_SNAPSHOT WITHOUT_ERASING",
+  "invariant": "historical documentation remains valid as evidence of what was observed then, but it must not be reused as current state after a fresher provider observation",
+  "F_ok": "current GitHub state and historical Drive state are both preserved",
+  "F_gap": "other stale status snapshots may still exist elsewhere",
+  "F_next": "apply the same current-vs-historical reconciliation rule whenever a status-bearing source is reused"
+}
