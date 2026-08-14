@@ -1,0 +1,147 @@
+{
+  "schema": "rafaelia.formula-registry.v3",
+  "generated_at": "2026-08-14T03:46:00-03:00",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "publication_ready": false,
+  "automatic_promotion": false,
+  "mode": "APPEND_ONLY_BY_REFERENCE",
+  "mother_invariant": "formula != implementation != execution != evidence != claim != novelty",
+  "extends": {
+    "path": "data/formulas/RAFAELIA_FORMULA_REGISTRY.v2.json",
+    "git_blob_sha": "a51e0f96e52533a59e3b73c11cf33566a243a687",
+    "policy": "preserve v2 verbatim; record only audited delta and corrections"
+  },
+  "math_session_audit": {
+    "path": "docs/canonical/2026-08-14/RAFAELIA_MATH_SESSION_AUDIT_V1.md",
+    "git_blob_sha": "f958a2b319c0287b96e31ff817f41c7c5984d166",
+    "scope": "session-level mathematical genealogy and claim correction",
+    "families_treated_session_local": 13,
+    "known_or_equivalent": 6,
+    "corrected_refuted_or_token_vazio": 4,
+    "m2_survivors": 3,
+    "m3": 0,
+    "m4": 0,
+    "novelty_proven": 0
+  },
+  "canonical_resolutions_delta": [
+    {
+      "topic": "Rafaeliana recurrence target sequence 2,4,7,12,20,33,54,...",
+      "resolution": "a[n]=F[n+3]-1",
+      "classification": "M0_M1",
+      "state": "EQUIVALENCE_DEMONSTRATED",
+      "claim_allowed": false,
+      "note": "preserve as redescription/independent rediscovery; not a new independent recurrence"
+    },
+    {
+      "topic": "affine recurrence with coefficient sqrt(3)/2",
+      "resolution": "x[n+1]=a*x[n]+b has x*=b/(1-a); |a|<1 gives contraction",
+      "classification": "M0_M1",
+      "state": "KNOWN_AFFINE_DYNAMICS",
+      "claim_allowed": false
+    },
+    {
+      "topic": "16-bit XOR reduced modulo 42",
+      "resolution": "65536=42*1560+16; 16 residues have 1561 preimages and 26 have 1560",
+      "classification": "CORRECTION",
+      "state": "EXACT_UNIFORMITY_REFUTED",
+      "claim_allowed": false
+    },
+    {
+      "topic": "Hausdorff dimension of finite set of 42 points",
+      "resolution": "classical Hausdorff dimension is 0",
+      "classification": "CORRECTION",
+      "state": "DH7_REFUTED_FOR_FINITE_SET",
+      "claim_allowed": false
+    },
+    {
+      "topic": "Kaplan-Yorke value approximately 1.347",
+      "resolution": "requires ordered supported Lyapunov spectrum, not isolated/estimated exponents",
+      "classification": "TOKEN_VAZIO",
+      "state": "TOKEN_VAZIO_LYAPUNOV_SPECTRUM",
+      "claim_allowed": false
+    },
+    {
+      "topic": "Poincare-Hopf on T^7 with 42 isolated singularities of index ±1",
+      "resolution": "chi(T^7)=0 implies 21 index +1 and 21 index -1 under the stated assumptions",
+      "classification": "CONDITIONAL_VALID",
+      "state": "TOPOLOGICAL_RESULT_ONLY",
+      "claim_allowed": false,
+      "guard": "does not automatically imply 21 sources and 21 sinks"
+    },
+    {
+      "topic": "icosahedron first subdivision / 42 vertices",
+      "resolution": "12 original vertices + 30 edge midpoints = 42",
+      "classification": "M0",
+      "state": "KNOWN_GEOMETRIC_CONSTRUCTION",
+      "claim_allowed": false
+    },
+    {
+      "topic": "GWLA exactly 42 attractors",
+      "resolution": "M*N=42 embeds cardinality in premises; exact emergence not demonstrated",
+      "classification": "TOKEN_VAZIO",
+      "state": "TOKEN_VAZIO_THEOREM",
+      "claim_allowed": false
+    }
+  ],
+  "m2_survivors": [
+    {
+      "id": "M2-BITRAF64-FORMAL",
+      "object": "exact BITRAF64 transformation",
+      "formal_target": "T_B: F_2^64 -> F_2^64 where applicable",
+      "required": ["kernel", "rank", "invertibility", "order", "cycle_structure", "minimum_distance", "invariants", "prior_art"],
+      "state": "CANDIDATE_NOT_NOVELTY_PROVEN"
+    },
+    {
+      "id": "M2-G-30-45-42",
+      "object": "discrete angular/state coupling G_{30,45,42}",
+      "known_base": ["360/30=12", "360/45=8", "lcm(12,8)=24"],
+      "required": ["exact coupling rule", "orbit decomposition", "period", "coverage", "stabilizers", "invariants", "conjugacy/equivalence tests", "prior_art"],
+      "state": "CANDIDATE_NOT_NOVELTY_PROVEN"
+    },
+    {
+      "id": "M2-NCRIT-SEMANTIC",
+      "object": "n_critical geometry-entropy functional",
+      "required": ["formal definition", "dimensional consistency", "bound_or_theorem", "counterexamples", "external predictive test", "prior_art"],
+      "state": "CANDIDATE_NOT_NOVELTY_PROVEN"
+    }
+  ],
+  "evidence": {
+    "local_receipt_path": "data/evidence/local/coexistence_math_audit_2026-08-14.v1.json",
+    "environment_class": "CONTAINER_REFERENCE",
+    "scope_guard": "local execution evidence does not imply Android/Termux or universal performance evidence"
+  },
+  "priority_queue": [
+    {
+      "priority": "P0",
+      "id": "FORMALIZE-BITRAF64",
+      "state": "OPEN",
+      "next_verifiable_step": "freeze exact transformation and compute/prove algebraic invariants over the correct finite structure"
+    },
+    {
+      "priority": "P0",
+      "id": "FORMALIZE-G-30-45-42",
+      "state": "OPEN",
+      "next_verifiable_step": "write exact state space and transition/coupling maps, enumerate orbits and compare to known cyclic/toroidal systems"
+    },
+    {
+      "priority": "P1",
+      "id": "NCRIT-FALSIFIER",
+      "state": "OPEN",
+      "next_verifiable_step": "define the geometry-entropy functional exactly and search for a theorem, bound or minimal counterexample"
+    },
+    {
+      "priority": "P1",
+      "id": "C-MIXED-MPI-PORTABILITY",
+      "state": "REPRODUCED_CONTAINER_REFERENCE",
+      "next_verifiable_step": "replace/define M_PI portably and reproduce under strict C11 plus Termux ARM32/ARM64"
+    },
+    {
+      "priority": "P2",
+      "id": "FULL-FORMULA-NORMALIZATION",
+      "state": "TOKEN_VAZIO_PARTIAL_COVERAGE",
+      "next_verifiable_step": "normalize remaining formula inventory one by one; do not infer that session-local 13 families exhaust the registry"
+    }
+  ],
+  "next_index": "indices/RAFAELIA_MATH_GENEALOGY_INDEX_V1.md"
+}

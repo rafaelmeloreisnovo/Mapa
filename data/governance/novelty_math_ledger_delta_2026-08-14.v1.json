@@ -1,0 +1,57 @@
+{
+  "schema": "rafaelia.governance.math-novelty-ledger-delta.v1",
+  "date": "2026-08-14",
+  "mode": "APPEND_ONLY",
+  "claim_allowed": false,
+  "novelty_proven": 0,
+  "classification_contract": {
+    "M0": "known/equivalent mathematics",
+    "M1": "independent rediscovery or parametrization of known structure",
+    "M2": "nontrivial variant/candidate, novelty not established",
+    "M3": "strong candidate after prior-art search and formal properties",
+    "M4": "novel mathematical contribution demonstrated with proof, prior art and independent validation where applicable"
+  },
+  "session_local_counts": {
+    "families_treated": 13,
+    "known_or_equivalent": 6,
+    "corrected_refuted_or_token_vazio": 4,
+    "m2_survivors": 3,
+    "m3": 0,
+    "m4": 0
+  },
+  "m2_queue": [
+    {
+      "id": "M2-BITRAF64-FORMAL",
+      "status": "OPEN",
+      "novelty_claim": false,
+      "next_gate": "exact transformation + finite-algebra invariants + conceptual/formula prior art"
+    },
+    {
+      "id": "M2-G-30-45-42",
+      "status": "OPEN",
+      "novelty_claim": false,
+      "next_gate": "exact state/coupling maps + orbit invariants + equivalence/conjugacy search"
+    },
+    {
+      "id": "M2-NCRIT-SEMANTIC",
+      "status": "OPEN",
+      "novelty_claim": false,
+      "next_gate": "formal definition + theorem/bound or counterexample + prior art"
+    }
+  ],
+  "anti_regression": [
+    "Do not promote Fibonacci-shift identity a_n=F_{n+3}-1 as a new recurrence.",
+    "Do not claim exact uniformity for 16-bit XOR modulo 42 without bias correction.",
+    "Do not assign Hausdorff dimension 7 to a finite set of 42 points under the classical definition.",
+    "Do not report Kaplan-Yorke dimension without a supported ordered Lyapunov spectrum.",
+    "Do not convert Poincare-Hopf index balance into source/sink balance without dynamical proof.",
+    "Do not call a parameter choice, terminology or numeric fixed point academic novelty by itself.",
+    "Do not count uncovered formulas as absent; record TOKEN_VAZIO_PARTIAL_COVERAGE."
+  ],
+  "provenance": {
+    "canonical_audit": "docs/canonical/2026-08-14/RAFAELIA_MATH_SESSION_AUDIT_V1.md",
+    "registry_extension": "data/formulas/RAFAELIA_FORMULA_REGISTRY.v3.json",
+    "execution_receipt": "data/evidence/local/coexistence_math_audit_2026-08-14.v1.json",
+    "previous_registry": "data/formulas/RAFAELIA_FORMULA_REGISTRY.v2.json"
+  }
+}
