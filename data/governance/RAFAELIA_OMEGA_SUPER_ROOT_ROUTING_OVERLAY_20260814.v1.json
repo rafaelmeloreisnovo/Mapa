@@ -1,7 +1,7 @@
 {
   "schema": "RAFAELIA_OMEGA_SUPER_ROOT_ROUTING_OVERLAY/V1",
   "delta_id": "OMEGA-SUPER-ROOT-ROUTING-20260814-0001",
-  "state": "GOVERNED_PARTIAL",
+  "state": "GOVERNED_PARTIAL_PILOT_EXECUTED",
   "claim_allowed": false,
   "append_only": true,
   "canonical_promotion": "BLOCKED_PENDING_REVIEW",
@@ -87,6 +87,15 @@
       "decision": "Historical receipts remain unchanged; current-status decisions prefer the current provider observation."
     }
   ],
+  "pilot_receipts": [
+    {
+      "receipt":"data/evidence/routing/OMEGA_SUPER_ROOT_PILOT_PR243_20260814.v1.json",
+      "state":"PASS_RECONSTRUCTION_LIMITED",
+      "context_pages_opened":2,
+      "stop_condition_satisfied":true,
+      "global_boundary":"bounded PR243 route only"
+    }
+  ],
   "token_vazio_contract": {
     "objective": "TYPE_EVERY_GAP_NOT_ELIMINATE_EVERY_GAP",
     "required_fields": ["id","type","reason","dependencies","next_gate"],
@@ -102,16 +111,17 @@
     "Existing Omega activation router reused by reference",
     "Knowledge Hypervisor brainstorm preserved as predecessor",
     "SEMANTICA_DINAMICA and PROCEDURE_LEDGER mounted rather than copied",
-    "PR243 historical/current state transition typed append-only"
+    "PR243 historical/current state transition typed append-only",
+    "First bounded SUPER_ROOT pilot passed with two context pages and an explicit stop condition"
   ],
   "f_gap": [
     {"id":"GAP-SUPERROOT-GLOBAL-COVERAGE","type":"COVERAGE","reason":"Not every corpus/repository/provider is mounted yet","dependencies":["inventory","identity","authority"],"next_gate":"Add mounts only when an authority and reconstruction use-case are evidenced"},
-    {"id":"GAP-UNIVERSAL-NODE-MIGRATION","type":"MIGRATION","reason":"Contract exists but the universe has not been globally normalized into universal nodes","dependencies":["identity/dedup","class mapping"],"next_gate":"Pilot on one bounded high-value family before global migration"},
+    {"id":"GAP-UNIVERSAL-NODE-MIGRATION","type":"MIGRATION","reason":"Contract exists but the universe has not been globally normalized into universal nodes","dependencies":["identity/dedup","class mapping"],"next_gate":"Run at least one additional bounded high-unlock pilot before any global migration"},
     {"id":"GAP-TERMINALITY-GLOBAL","type":"TERMINALITY","reason":"Global coverage and certified terminal counts remain unknown","dependencies":["coverage","dedup","evidence linkage"],"next_gate":"Preserve TOKEN_VAZIO until bounded inventories converge"}
   ],
   "f_next": {
-    "id":"OMEGA-SUPER-ROOT-NEXT-0001",
-    "action":"Run one bounded reconstruction pilot through SUPER_ROOT using a high-value P0/P1 gap; emit a route receipt with context pages opened, authorities used, contradiction resolution and stop condition.",
-    "no_global_migration_before_pilot": true
+    "id":"OMEGA-SUPER-ROOT-NEXT-0002",
+    "action":"Run a second bounded reconstruction pilot through SUPER_ROOT on a distinct high-UnlockValue P0/P1 family, preferably one that requires a different orthogonal authority such as PROCEDURE_LEDGER or SEMANTICA_DINAMICA; compare pages opened, resolved gaps and stop condition against pilot 0001.",
+    "no_global_migration_before_second_distinct_pilot": true
   }
 }
