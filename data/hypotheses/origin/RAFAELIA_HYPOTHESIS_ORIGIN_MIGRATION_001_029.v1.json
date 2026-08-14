@@ -1,0 +1,104 @@
+{
+  "schema": "rafaelia.hypothesis-origin-migration.v1",
+  "generated_at": "2026-08-14T09:12:00-03:00",
+  "state": "PARTIAL_EVIDENCE_BASED_MIGRATION",
+  "claim_allowed": false,
+  "range": "HYP-...-001 through HYP-...-029",
+  "policy": "data/hypotheses/RAFAELIA_HYPOTHESIS_ORIGIN_POLICY.v1.json",
+  "invariants": [
+    "origin is assigned only where source provenance supports it",
+    "unresolved origin remains TOKEN_VAZIO_ORIGIN",
+    "AUTHORIAL_PROPOSITION does not imply academic novelty",
+    "historical internal claims remain preserved even when refuted or blocked"
+  ],
+  "assignments": [
+    {
+      "hypothesis_id": "HYP-STAT-RLL-EXTENSION-009",
+      "origin_class": "INFERRED_NORMALIZATION",
+      "evidence": "Registry statement was explicitly normalized from model-comparison context rather than recovered as verbatim source hypothesis.",
+      "novelty_implication": "NONE"
+    },
+    {
+      "hypothesis_id": "HYP-EMP-HETE018-019",
+      "origin_class": "AUTHORIAL_PROPOSITION",
+      "evidence": {
+        "repo": "rafaelmeloreisnovo/Rafaelia_Private",
+        "path": "docs/private-research/HETE_018_PRIVATE_REGISTRY.md",
+        "blob_sha": "b22377573a3cd8518e2da59f6d16b5417a4a58ab",
+        "artifact_id": "HETE-018-20260710-v0.1",
+        "author": "Rafael Melo Reis — ∆RafaelVerboΩ",
+        "claim_state": "HYPOTHESIS_FORMALIZED",
+        "attractor_claim": "TOKEN_VAZIO"
+      },
+      "novelty_implication": "NONE",
+      "scientific_state_unchanged": "ACTIVE_PARTIAL_EVIDENCE"
+    },
+    {
+      "hypothesis_id": "HYP-COMP-ZIPRAF-COMP2X5X-023",
+      "origin_class": "HISTORICAL_INTERNAL_CLAIM",
+      "evidence": "ZIPRAF academic-boundary source explicitly retains 2–5x compression as DECLARED_UNVERIFIED.",
+      "novelty_implication": "NONE"
+    },
+    {
+      "hypothesis_id": "HYP-COMP-ZIPRAF-ETHICA-LT1MS-024",
+      "origin_class": "HISTORICAL_INTERNAL_CLAIM",
+      "evidence": "ZIPRAF academic-boundary source explicitly retains <1 ms Ethica latency as DECLARED_UNVERIFIED.",
+      "novelty_implication": "NONE"
+    },
+    {
+      "hypothesis_id": "HYP-COMP-ZIPRAF-GAIN30_70-025",
+      "origin_class": "HISTORICAL_INTERNAL_CLAIM",
+      "evidence": "ZIPRAF academic-boundary source explicitly retains 30–70% gains as DECLARED_UNVERIFIED and underspecified.",
+      "novelty_implication": "NONE"
+    },
+    {
+      "hypothesis_id": "HYP-COMP-ZIPRAF-TAMPER100-026",
+      "origin_class": "HISTORICAL_INTERNAL_CLAIM",
+      "evidence": "ZIPRAF academic-boundary source explicitly retains 100% tamper detection as DECLARED_UNVERIFIED pending bounded threat model.",
+      "novelty_implication": "NONE"
+    }
+  ],
+  "unresolved_origin_ids": [
+    "HYP-M2-BITRAF64-F2-001",
+    "HYP-M2-G30-45-42-002",
+    "HYP-M2-NCRITICO-003",
+    "HYP-MATH-DHA-FACTORABILITY-004",
+    "HYP-MATH-ATTR42-FIB-005",
+    "HYP-COMP-ATTR42-ECC-006",
+    "HYP-COMP-ATTR42-TOROIDAL-007",
+    "HYP-EMP-BITRAF-PHYSRES-008",
+    "HYP-SCI-FEAC-BITVIS-010",
+    "HYP-METH-FEAC-SEARCHRECALL-011",
+    "HYP-SCI-SQRT3-UNIVERSAL-012",
+    "HYP-COMP-OMEGA42-DYNATTR-013",
+    "HYP-MATH-ERASURE-MINDEG3-014",
+    "HYP-COMP-VOID-FSM-015",
+    "HYP-METH-SEVEN-DIR-TAXONOMY-016",
+    "HYP-EMP-SPECTRAL-HISTORY-017",
+    "HYP-METH-PARABLE-CODEC-018",
+    "HYP-COMP-ZIPRAF-SEEDMATRIX-020",
+    "HYP-METH-ZIPRAF-TOROSPIRAL-021",
+    "HYP-COMP-ZIPRAF-SYNDROME-COMP-022",
+    "HYP-COMP-ERASURE-40_45-027",
+    "HYP-HW-ERROR-SIGNAL-028",
+    "HYP-STAT-RMRCTI-PEAK-STABILITY-029"
+  ],
+  "migration_metrics": {
+    "range_size": 29,
+    "evidence_assigned": 6,
+    "authorial_assigned": 1,
+    "historical_internal_assigned": 4,
+    "inferred_normalization_assigned": 1,
+    "unresolved": 23
+  },
+  "authorial_lower_bound_effect": {
+    "previous_explicit_authorial_ids": [
+      "HYP-MATH-CHIP-SQUARE-EQUIL-OVERLAP-043",
+      "HYP-MATH-CHIP-TORUS30-15-044"
+    ],
+    "newly_migrated_authorial_id": "HYP-EMP-HETE018-019",
+    "lower_bound_after_this_migration_before_delta0007": 3,
+    "certified_authorial_only_total": "TOKEN_VAZIO"
+  },
+  "next": "recover explicit provenance for unresolved 001-029 without guessing"
+}

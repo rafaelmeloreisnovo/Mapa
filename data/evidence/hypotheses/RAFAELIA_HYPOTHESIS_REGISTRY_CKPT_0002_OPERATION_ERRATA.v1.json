@@ -1,0 +1,35 @@
+{
+  "schema": "rafaelia.operation-errata.v1",
+  "event": "HYPOTHESIS_REGISTRY_CKPT_0002_BRANCH_ONLY_MUTATION_CONTAINMENT",
+  "date": "2026-08-14",
+  "state": "CONTAINED_NO_MAIN_MUTATION",
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "audit/hypothesis-registry-fgap-20260814",
+  "pull_request": 243,
+  "incidents": [
+    {
+      "path": "noop",
+      "introduced_commit": "7c715a17397ceb98dc71f4af3dabb2e96ddaed38",
+      "observed_blob": "a8b6c9477b693176aa811d7fc0fd5374d44e3557",
+      "containment_commit": "0c3f4879b59cf99d3de2ecf6a85214b73f1d4c09",
+      "final_diff_presence": false
+    },
+    {
+      "path": "data/evidence/hypotheses/RAFAELIA_HYPOTHESIS_REGISTRY_CKPT_0002_ERRATA.v1.json",
+      "introduced_placeholder_commit": "f4daad5e2e93164b5f7c7873b51a09e44e5e313a",
+      "observed_placeholder_blob": "c1b0730e0133447badcfd47fd144e254807b06e1",
+      "containment_commit": "c2ae73c7fc364400ad6bc24ab94f12551ce8da1b",
+      "final_diff_presence": false
+    }
+  ],
+  "postcondition_observed_after_first_containment": {
+    "pr_state": "OPEN_DRAFT_UNMERGED",
+    "changed_files": 9,
+    "main_touched_by_this_operation": false
+  },
+  "invariant": "accidental branch artifacts are not hidden; they are removed from the final diff and retained in commit history plus explicit errata",
+  "promotion": false,
+  "merge": false,
+  "release": false
+}

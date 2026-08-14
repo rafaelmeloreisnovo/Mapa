@@ -1,0 +1,39 @@
+{
+  "schema": "rafaelia.hypothesis-origin-policy.v1",
+  "generated_at": "2026-08-14T08:42:00-03:00",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "purpose": "Prevent project-held hypotheses, authorial propositions, external mechanisms, null hypotheses and baselines from being collapsed into one misleading count.",
+  "origin_classes": {
+    "AUTHORIAL_PROPOSITION": "A proposition explicitly authored as a RAFAELIA/Rafael hypothesis or theorem candidate, with provenance supporting that attribution.",
+    "PROJECT_DERIVED_PROPOSITION": "A testable proposition derived or normalized inside the project from project material; authorship/novelty is not implied.",
+    "EXTERNAL_REFERENCE_HYPOTHESIS": "A published or externally established mechanism/hypothesis retained as a comparator or target; must not be counted as original authorship.",
+    "HISTORICAL_INTERNAL_CLAIM": "A claim previously made in project material and retained for audit even when refuted, blocked or superseded.",
+    "NULL_HYPOTHESIS": "A statistical or methodological null used for falsification; count separately from substantive project hypotheses.",
+    "BASELINE_MODEL": "A reference model or comparator such as LambdaCDM, ordinary graph distance or linear traversal; not counted as an owned hypothesis unless the project separately formulates a proposition about it.",
+    "INFERRED_NORMALIZATION": "A proposition reconstructed by the registry from model-comparison or surrounding text rather than stated verbatim; must remain flagged until source wording is recovered.",
+    "INTERPRETIVE_SYMBOLIC": "Symbolic/philosophical proposition with no operational falsifier; excluded from scientific hypothesis count by default."
+  },
+  "count_views": {
+    "ledger_frontier": "All stable/provisional normalized substantive hypothesis IDs represented by the registry, regardless of origin, excluding pure baselines/nulls unless they are separately substantive records.",
+    "project_substantive": "AUTHORIAL_PROPOSITION + PROJECT_DERIVED_PROPOSITION + HISTORICAL_INTERNAL_CLAIM + INFERRED_NORMALIZATION, after dedup.",
+    "authorial_only": "Only AUTHORIAL_PROPOSITION after provenance review; academic novelty is a separate M0-M4 question.",
+    "external_under_test": "EXTERNAL_REFERENCE_HYPOTHESIS, reported separately.",
+    "null_and_baseline": "NULL_HYPOTHESIS and BASELINE_MODEL, reported separately and excluded from authorial/project-substantive totals by default.",
+    "scientific_active": "Substantive scientific hypotheses whose state is ACTIVE_UNTESTED, ACTIVE_PARTIAL_EVIDENCE, TOKEN_VAZIO, PROOF_OBLIGATION or BLOCKED_BY_DEPENDENCIES; historical refuted/equivalent records are reported separately."
+  },
+  "hard_boundaries": [
+    "ORIGIN != NOVELTY",
+    "PROJECT_OWNERSHIP != ACADEMIC_ORIGINALITY",
+    "EXTERNAL_REFERENCE != USER_HYPOTHESIS",
+    "NULL != SUBSTANTIVE_ALTERNATIVE",
+    "BASELINE != CLAIM",
+    "HISTORICAL_REFUTED_RECORDS_ARE_RETAINED_BUT_NOT_ACTIVE",
+    "A SOURCE FILE NAMED HYPOTHESES DOES NOT AUTOMATICALLY ESTABLISH AUTHORIAL_ORIGIN"
+  ],
+  "migration": {
+    "existing_ids": "origin_class remains TOKEN_VAZIO until source-by-source provenance assignment; do not retroactively guess",
+    "future_ids": "origin_class required whenever source provenance is sufficient",
+    "certified_authorial_total": "TOKEN_VAZIO until migration and dedup are complete"
+  }
+}

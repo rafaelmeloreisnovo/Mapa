@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0.0",
+  "registry_id": "RAFAELIA_HYPOTHESIS_FGAP_REGISTRY_V1_2026-08-14",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "generated_at": "2026-08-14T07:55:00-03:00",
+  "invariants": [
+    "IDEA != FORMULA != IMPLEMENTATION != EXECUTION != EVIDENCE != CLAIM != ACADEMIC_NOVELTY",
+    "TOKEN_VAZIO is a valid auditable state",
+    "append-only: prior conflicting states are preserved",
+    "global hypothesis total must not be inferred from a partial audit",
+    "deduplication requires normalized statement plus provenance, not title similarity alone"
+  ],
+  "anchors": [
+    {
+      "kind": "google_drive_doc",
+      "title": "RAFAELIA — Auditoria Matemática Genealógica — Sessão 2026-08-14 — V1",
+      "provider_id": "1lPFThf_HRM3BMPUXxg1nm42yPNhss7mDz-09PTsmvhM",
+      "role": "mathematical-audit-anchor"
+    },
+    {
+      "kind": "google_drive_doc",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "role": "operational-method-anchor"
+    }
+  ],
+  "known_counts": {
+    "mathematical_families_audited": 13,
+    "known_or_equivalent": 6,
+    "corrected_refuted_or_token_vazio": 4,
+    "m2_survivors": 3,
+    "m3": 0,
+    "m4": 0,
+    "global_unique_hypotheses": "TOKEN_VAZIO"
+  },
+  "m2_survivors": [
+    {
+      "hypothesis_id": "HYP-M2-BITRAF64-F2-001",
+      "name": "BITRAF64 formal transformation over F_2^64",
+      "status": "M2_CANDIDATE",
+      "claim_allowed": false,
+      "required_closures": [
+        "formal exact transformation definition",
+        "kernel",
+        "rank",
+        "invertibility conditions",
+        "order",
+        "cycle structure",
+        "minimum distance where an ECC interpretation is claimed",
+        "invariants"
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-M2-G304542-002",
+      "name": "Discrete construction G_{30,45,42}",
+      "status": "M2_CANDIDATE",
+      "claim_allowed": false,
+      "required_closures": [
+        "canonical coupling rule",
+        "state-space definition",
+        "nontrivial invariants",
+        "equivalence search against known constructions",
+        "prior-art review",
+        "reproducible computational examples"
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-M2-NCRIT-SEM-003",
+      "name": "n_critical semantic geometry-entropy functional",
+      "status": "M2_CANDIDATE",
+      "claim_allowed": false,
+      "required_closures": [
+        "formal domain and codomain",
+        "exact functional definition",
+        "units or dimensionless normalization",
+        "existence and uniqueness conditions for n_critical where applicable",
+        "sensitivity analysis",
+        "empirical mapping between semantic entropy and geometric quantity",
+        "null models and falsification criteria",
+        "prior-art review"
+      ]
+    }
+  ],
+  "f_gap": [
+    {
+      "gap_id": "FG-HYP-001",
+      "name": "GLOBAL_COVERAGE",
+      "state": "OPEN_TOKEN_VAZIO",
+      "problem": "The number of unique hypotheses across the RAFAELIA ecosystem is not canonically counted.",
+      "closure_condition": "Enumerate candidate hypothesis-bearing sources across Drive and GitHub, record source coverage, and produce a deduplicated unique count with unresolved coverage explicitly listed.",
+      "priority": "P0"
+    },
+    {
+      "gap_id": "FG-HYP-002",
+      "name": "CANONICAL_IDENTITY_AND_DEDUP",
+      "state": "OPEN",
+      "problem": "No single cross-domain hypothesis identity key is yet proven to cover all repositories and Drive material.",
+      "closure_condition": "Assign stable hypothesis_id and deduplicate using normalized statement, domain, variables, assumptions, provenance anchors and semantic equivalence review.",
+      "priority": "P0"
+    },
+    {
+      "gap_id": "FG-HYP-003",
+      "name": "CLASSIFICATION_HARMONIZATION",
+      "state": "OPEN",
+      "problem": "M0-M4 is defined for mathematical novelty but empirical, computational, cosmological and symbolic claims need compatible typed statuses.",
+      "closure_condition": "Define typed classes for mathematical, empirical, computational and symbolic propositions while preserving M0-M4 for mathematical novelty.",
+      "priority": "P1"
+    },
+    {
+      "gap_id": "FG-HYP-004",
+      "name": "EVIDENCE_LINKAGE",
+      "state": "OPEN",
+      "problem": "Not every hypothesis is linked to exact implementation, execution, receipt, dataset, environment and negative evidence.",
+      "closure_condition": "Every active hypothesis has zero or more evidence edges with provider/path/hash/run/receipt metadata; missing edges remain TOKEN_VAZIO.",
+      "priority": "P0"
+    },
+    {
+      "gap_id": "FG-HYP-005",
+      "name": "PRIOR_ART_AND_GENEALOGY",
+      "state": "OPEN",
+      "problem": "Surviving candidates cannot advance to M3/M4 without systematic prior-art and genealogy work.",
+      "closure_condition": "For each M2 candidate, record closest known constructions, differences, search strategy, dated sources and unresolved equivalence risks.",
+      "priority": "P1"
+    },
+    {
+      "gap_id": "FG-HYP-006",
+      "name": "EXECUTION_AND_FALSIFICATION",
+      "state": "OPEN",
+      "problem": "Some propositions have formal text or code but lack reproducible execution, adversarial tests, null models or physical-device validation.",
+      "closure_condition": "Attach reproducible tests and explicit failure criteria; distinguish container, CI and physical Termux evidence.",
+      "priority": "P0"
+    },
+    {
+      "gap_id": "FG-HYP-007",
+      "name": "TERMINALITY_AND_GLOBAL_COUNT",
+      "state": "OPEN_TOKEN_VAZIO",
+      "problem": "There is no global terminality certificate showing that the hypothesis-bearing source universe has been sufficiently scanned for a closed count.",
+      "closure_condition": "Publish a coverage matrix and terminality receipt that states scanned scope, exclusions, remaining TOKEN_VAZIO sources and the resulting unique hypothesis count.",
+      "priority": "P0"
+    }
+  ],
+  "source_universe_initial": [
+    {"domain": "mathematics", "status": "PARTIAL_AUDITED", "known_anchor": "Auditoria Matemática Genealógica 2026-08-14"},
+    {"domain": "cosmology_RLL", "status": "TOKEN_VAZIO_IN_GLOBAL_REGISTRY"},
+    {"domain": "BITRAF_ZIPRAF_integrity", "status": "TOKEN_VAZIO_IN_GLOBAL_REGISTRY"},
+    {"domain": "OMEGA42_computational", "status": "TOKEN_VAZIO_IN_GLOBAL_REGISTRY"},
+    {"domain": "semantic_ML_cognitive", "status": "TOKEN_VAZIO_IN_GLOBAL_REGISTRY"},
+    {"domain": "physics_biology_transdisciplinary", "status": "TOKEN_VAZIO_IN_GLOBAL_REGISTRY"},
+    {"domain": "symbolic_spiritual", "status": "SEPARATE_NONEMPIRICAL_LAYER_UNLESS_FALSIFIABLE"}
+  ],
+  "next_cursor": "FG-HYP-001_SCAN_HYPOTHESIS_BEARING_SOURCES_DRIVE_GITHUB_THEN_NORMALIZE_AND_DEDUP"
+}

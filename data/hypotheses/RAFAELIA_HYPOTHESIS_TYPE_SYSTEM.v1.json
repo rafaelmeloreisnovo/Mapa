@@ -1,0 +1,67 @@
+{
+  "schema": "rafaelia.hypothesis-type-system.v1",
+  "generated_at": "2026-08-14T08:01:00-03:00",
+  "state": "GOVERNED_PARTIAL",
+  "claim_allowed": false,
+  "purpose": "Harmonize hypothesis-like propositions across mathematical, empirical, computational, statistical and symbolic domains without conflating proof, execution, evidence or novelty.",
+  "invariants": [
+    "IDEA != FORMULA != HYPOTHESIS != IMPLEMENTATION != EXECUTION != EVIDENCE != CLAIM != ACADEMIC_NOVELTY",
+    "M0-M4 applies to mathematical novelty only",
+    "a rejected or disfavored hypothesis remains in history",
+    "symbolic or spiritual interpretations are not empirical hypotheses unless an explicit falsifiable proposition is stated",
+    "TOKEN_VAZIO is an auditable state, not a positive result",
+    "cross-domain dedup requires normalized proposition plus assumptions and provenance"
+  ],
+  "types": {
+    "MATH_NOVELTY_CANDIDATE": {
+      "description": "Mathematical construction or proposition whose novelty/equivalence is under study.",
+      "novelty_scale": ["M0", "M1", "M2", "M3", "M4"]
+    },
+    "MATH_OPEN_PROPOSITION": {
+      "description": "Mathematical proposition with a proof obligation or counterexample search outstanding. Not automatically a novelty candidate."
+    },
+    "EMPIRICAL_HYPOTHESIS": {
+      "description": "Falsifiable proposition about measured physical/biological/observational data."
+    },
+    "COMPUTATIONAL_HYPOTHESIS": {
+      "description": "Proposition about algorithm/runtime/system behavior requiring executable tests and environment-scoped evidence."
+    },
+    "STATISTICAL_MODEL_HYPOTHESIS": {
+      "description": "Model-comparison or parameter proposition requiring declared likelihood, priors, datasets and uncertainty."
+    },
+    "METHODOLOGICAL_HYPOTHESIS": {
+      "description": "Proposition that a method improves coverage, reliability, inference or error control; requires benchmark/null comparison."
+    },
+    "INTERPRETIVE_SYMBOLIC": {
+      "description": "Symbolic, spiritual or philosophical interpretation. Preserved semantically but excluded from empirical-hypothesis totals unless separately formalized as falsifiable."
+    }
+  },
+  "states": [
+    "ACTIVE_UNTESTED",
+    "ACTIVE_PARTIAL_EVIDENCE",
+    "TOKEN_VAZIO",
+    "PROOF_OBLIGATION",
+    "DISFAVORED_BY_CURRENT_EVIDENCE",
+    "REFUTED_IN_DECLARED_SCOPE",
+    "SUPPORTED_IN_DECLARED_SCOPE",
+    "EQUIVALENT_TO_KNOWN",
+    "BLOCKED_BY_DEPENDENCIES",
+    "HISTORICAL_ONLY"
+  ],
+  "identity_key_fields": [
+    "normalized_statement",
+    "type",
+    "domain",
+    "variables_or_objects",
+    "assumptions",
+    "scope",
+    "provenance_anchors"
+  ],
+  "count_policy": {
+    "global_unique_total": "TOKEN_VAZIO_UNTIL_TERMINALITY",
+    "historical_refuted_hypotheses": "retain_and_count_separately",
+    "open_proof_obligations": "do_not_merge_into_math_novelty_count_without_type_review",
+    "symbolic_interpretive": "exclude_from_scientific_total_by_default",
+    "duplicate_wording": "deduplicate_only_after_semantic_equivalence_review"
+  }
+}

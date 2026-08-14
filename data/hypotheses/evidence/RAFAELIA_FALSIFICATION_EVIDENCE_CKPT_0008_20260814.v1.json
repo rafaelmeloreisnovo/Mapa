@@ -1,0 +1,112 @@
+{
+  "schema": "RAFAELIA_FALSIFICATION_EVIDENCE_V1",
+  "checkpoint": "HYP_CKPT_0008",
+  "date": "2026-08-14",
+  "mode": [
+    "APPEND_ONLY",
+    "EVIDENCE_FIRST",
+    "TOKEN_VAZIO_STRICT",
+    "ANTI_REGRESSION",
+    "MAXIMA_RECORDING"
+  ],
+  "claim_allowed": false,
+  "new_hypothesis_ids_added": 0,
+  "represented_substantive_hypothesis_ids": 55,
+  "frontier_changed": false,
+  "execution_environment": {
+    "class": "CONTAINER_REFERENCE",
+    "physical_device_evidence": false,
+    "independent_replication": false
+  },
+  "source_bindings": {
+    "bitraf_simulator": {
+      "repository": "instituto-Rafael/Eletron-efeitos-qu-ntico",
+      "path": "scripts/bitraf_simulator.py",
+      "blob_sha": "871bd78987934a5983d1320697a8c69dcb76a6bc"
+    },
+    "josephson_analyzer": {
+      "repository": "instituto-Rafael/Eletron-efeitos-qu-ntico",
+      "path": "scripts/josephson_analyzer.py",
+      "blob_sha": "081b93f04e7299235ff17eef0a42dac5bfda0eb7"
+    },
+    "bitraf_calculation_gates": {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "path": "docs/BITRAF_CALCULATION_GATES_V1.md",
+      "blob_sha": "eae47231ab7690071c5c76bff900760768a3022d"
+    },
+    "math_audit": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "docs/canonical/2026-08-14/RAFAELIA_MATH_SESSION_AUDIT_V1.md",
+      "blob_sha": "f958a2b319c0287b96e31ff817f41c7c5984d166"
+    },
+    "rafcode_vocab": {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "path": "Livro/VOCABULARIOS_SEMANTICOS_RAFCODE.md",
+      "blob_sha": "4856ff766b915d72d5d4ad55d4f82c4e73896e7e"
+    }
+  },
+  "results": {
+    "bitraf_current_simulator_monte_carlo": {
+      "seed": 20260814,
+      "samples_per_dimension": 10000,
+      "dimensions": {
+        "2": {"mean_fidelity": 0.9515892624319764, "median_fidelity": 0.9715774126698988, "min_fidelity": 0.6632394984818029},
+        "3": {"mean_fidelity": 0.9268751042479932, "median_fidelity": 0.9425555489753505, "min_fidelity": 0.6489831268974853},
+        "4": {"mean_fidelity": 0.9077651929364267, "median_fidelity": 0.9203977918939825, "min_fidelity": 0.6513797986817301},
+        "8": {"mean_fidelity": 0.8495324080408687, "median_fidelity": 0.8549047760439491, "min_fidelity": 0.6271855952626084}
+      },
+      "interpretation": "CURRENT_IMPLEMENTATION_IS_LOSSY_IN_THIS_SAMPLE",
+      "scope_boundary": "DOES_NOT_REFUTE_BROADER_FORMAL_BITRAF64"
+    },
+    "bitraf_basis_vector": {
+      "tested_dimensions": [2, 3, 4, 8],
+      "cause": "mag_code=int(1*5)%5=0",
+      "decoded_norm": 0.0,
+      "state": "IMPLEMENTATION_DEFECT_CONFIRMED_IN_CURRENT_SIMULATOR"
+    },
+    "bitraf_generalized_hadamard": {
+      "matrix": "ones(n,n)/sqrt(n)",
+      "rank_for_n_gt_1": 1,
+      "unitarity_frobenius_error": {
+        "2": 1.4142135623730947,
+        "3": 2.4494897427831788,
+        "4": 3.4641016151377544,
+        "8": 7.483314773547882
+      },
+      "state": "NON_UNITARY_CURRENT_IMPLEMENTATION"
+    },
+    "fibonacci_rafael_2_4_7": {
+      "sequence_prefix": [2, 4, 7, 12, 20, 33, 54],
+      "recurrence": "a_n=a_(n-1)+a_(n-2)+1",
+      "closed_relation_1_based": "a_n=F_(n+3)-1",
+      "state": "M0_M1_KNOWN_EQUIVALENCE"
+    },
+    "mod42_from_uniform_uint16_xor": {
+      "domain_size": 65536,
+      "quotient": 1560,
+      "remainder": 16,
+      "residues_with_1561_preimages": 16,
+      "residues_with_1560_preimages": 26,
+      "state": "EXACT_UNIFORMITY_REFUTED_WITHOUT_CORRECTION"
+    },
+    "sqrt3_over_2_linear": {
+      "a": 0.8660254037844386,
+      "lambda_ln_abs_a": -0.14384103622589053,
+      "state": "LINEAR_CONTRACTION_ONLY_NOT_UNIVERSALITY_PROOF"
+    },
+    "josephson_repo_state": {
+      "model_code_present": true,
+      "raw_experimental_dataset_observed_in_current_pass": false,
+      "state": "MODEL_CODE_PRESENT_EXPERIMENTAL_DATA_TOKEN_VAZIO",
+      "negative_boundary": "CURRENT_PASS_ONLY_NOT_GLOBAL_ABSENCE"
+    }
+  },
+  "modern_comparators": [
+    {"family": "qudit_ecc", "reference": "arXiv:2510.06495", "year": 2025},
+    {"family": "voynich_fibonacci", "reference": "arXiv:2505.02261", "year": 2025},
+    {"family": "formal_grammar_compiler", "reference": "ACL Findings 2025 / arXiv:2505.11932", "year": 2025},
+    {"family": "hierarchical_memory", "reference": "arXiv:2606.11680", "year": 2026},
+    {"family": "abstention", "reference": "arXiv:2506.09038", "year": 2025}
+  ],
+  "next_cursor": "HYP_CKPT_0009_FORMAL_BITRAF64_RAFCODE_EBNF_MEMORY_TOKENVAZIO_BENCHMARKS"
+}
