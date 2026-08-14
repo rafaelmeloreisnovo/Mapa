@@ -1,0 +1,59 @@
+{
+  "schema": "RAFAELIA_EXECUTION_RECEIPT_V1",
+  "id": "EVID-VECTRAS-PROF-STATS-PR1097-20260814-V1",
+  "observed_at_date": "2026-08-14",
+  "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+  "pull_request": 1097,
+  "base_sha": "af85550ac43ab9ef1aed5a1ff508229d5c79b0c6",
+  "head_sha": "236e27f901c5a9357f90cb1ec4f4a2a215f0d661",
+  "pr_merge_ref_sha": "332e4b8f72e8df8d726bb9bf19e1eba2d76bfcfe",
+  "activity": {
+    "path": "app/src/main/java/com/vectras/vm/tools/ProfessionalToolsActivity.java",
+    "base_blob_sha": "76014394e07869b2dc2892ad9c73dc20b67b8707",
+    "head_blob_sha": "41534fd19300d03b2ed9c40d0d14fe6745d65ed2"
+  },
+  "workflow": {
+    "name": "Professional Statistics Contract",
+    "run_id": 31787085690,
+    "run_number": 3,
+    "job_id": 94725312927,
+    "job_name": "contract",
+    "runner_id": 1000130410,
+    "runner_name": "GitHub Actions 1000130410",
+    "runner_os": "Ubuntu 24.04.4 LTS",
+    "runner_image": "ubuntu-24.04",
+    "runner_version": "2.336.0",
+    "conclusion": "success",
+    "steps_observed": [
+      "Set up job",
+      "Run actions/checkout@v4",
+      "Fail closed on heterogeneous reproducibility promotion",
+      "Post Run actions/checkout@v4",
+      "Complete job"
+    ]
+  },
+  "validator": {
+    "command": "python3 tools/ci/validate_professional_tools_statistics_contract.py",
+    "schema": "VECTRAS_PROFESSIONAL_STATISTICS_CONTRACT_GATE_V1",
+    "status": "PASS_LIMITED",
+    "errors": [],
+    "claim_allowed": false,
+    "boundary": "PASS_LIMITED means only that known mixed-metric promotion anti-patterns were not found. It is not a benchmark, reproducibility, certification, or scientific-grade receipt."
+  },
+  "epistemic_transition": {
+    "TOKEN_VAZIO_PROFESSIONAL_STATISTICS_GATE_EXECUTION_RECEIPT": "FILLED_FOR_PR1097_MERGE_REF",
+    "TOKEN_VAZIO_HOMOGENEOUS_REPEAT_PRODUCER": "OPEN",
+    "TOKEN_VAZIO_METRIC_WORKLOAD_INPUT_UNIT_IDENTITY_BINDING": "OPEN",
+    "TOKEN_VAZIO_INDUSTRIAL_STATISTICS_TEST_EXECUTION_RECEIPT": "OPEN",
+    "TOKEN_VAZIO_ANDROID_BUILD_RECEIPT": "OPEN",
+    "TOKEN_VAZIO_RUNTIME_REPRODUCIBILITY_RECEIPT": "OPEN"
+  },
+  "invariants": [
+    "detector_pass != statistical_validity_proof",
+    "source_fix != android_build",
+    "android_build != device_execution",
+    "homogeneous_series_required_for_reproducibility",
+    "claim_allowed=false"
+  ],
+  "claim_allowed": false
+}
