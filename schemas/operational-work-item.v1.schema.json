@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/operational-work-item.v1.schema.json",
+  "title": "RAFAELIA Operational Work Item v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","id","summary","origin","priority","attention","epistemic","provenance","contract","execution","time_window","six_sigma","bibliotechnics","closure","f_ok","f_gap","f_next","claim_allowed"],
+  "properties": {
+    "schema_version":{"const":"rafaelia.operational-work-item/v1"},
+    "id":{"type":"string","pattern":"^WI-[A-Z0-9][A-Z0-9._:-]{3,95}$"},
+    "summary":{"type":"string","minLength":8,"maxLength":512},
+    "origin":{"type":"object","additionalProperties":false,"required":["class","source_refs"],"properties":{"class":{"enum":["EXPLICIT_USER","OBSERVED","DERIVED","SUGGESTED","INFERRED","LATENT","OBVIOUS_CANDIDATE","RECOVERED","IMPORTED"]},"source_refs":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true}}},
+    "priority":{"type":"object","additionalProperties":false,"required":["urgency","importance"],"properties":{"urgency":{"enum":["CRITICAL","URGENT","SOON","ROUTINE","UNSCHEDULED"]},"importance":{"enum":["MUST","IMPORTANT","SHOULD","SUGGESTED","OPTIONAL"]}}},
+    "attention":{"type":"object","additionalProperties":false,"required":["state","reason_code"],"properties":{"state":{"enum":["ACTIVE","FORGOTTEN_RECOVERED","IGNORED_INTENTIONAL","IGNORED_UNRESOLVED","DEFERRED","LEFT_INCOMPLETE","ABORTED","BLOCKED_BY_CONTROL","SUPPRESSED_BY_POLICY","SUPERSEDED","COMPLETED"]},"reason_code":{"type":["string","null"],"maxLength":128},"policy_ref":{"type":["string","null"],"maxLength":256}}},
+    "epistemic":{"type":"object","additionalProperties":false,"required":["state","evidence_refs"],"properties":{"state":{"enum":["VERIFIED","EVIDENCED","HYPOTHESIS","MODEL_ANALOGICAL","SYMBOLIC","TOKEN_VAZIO","ABSENT","CONFLICTING","INVALIDATED","SUPERSEDED"]},"evidence_refs":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true}}},
+    "provenance":{"type":"object","additionalProperties":false,"required":["status","refs"],"properties":{"status":{"enum":["BOUND","PARTIAL","MISSING","CONFLICTING"]},"refs":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},"hashes":{"type":"array","items":{"type":"string","pattern":"^[0-9a-f]{64}$"},"uniqueItems":true}}},
+    "contract":{"type":"object","additionalProperties":false,"required":["status","requirements"],"properties":{"status":{"enum":["SATISFIED","PARTIAL","UNSATISFIED","BREACHED","TOKEN_VAZIO","NOT_APPLICABLE"]},"requirements":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["id","state"],"properties":{"id":{"type":"string","minLength":1},"state":{"enum":["SATISFIED","OPEN","BLOCKED","TOKEN_VAZIO","NOT_APPLICABLE"]},"evidence_ref":{"type":["string","null"]}}}}}},
+    "execution":{"type":"object","additionalProperties":false,"required":["state","environment","evidence_refs"],"properties":{"state":{"enum":["NOT_STARTED","PLANNED","IN_PROGRESS","BLOCKED","EXECUTED","VERIFIED","FAILED","ABORTED","DEFERRED"]},"environment":{"type":["string","null"],"maxLength":128},"evidence_refs":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true}}},
+    "time_window":{"type":"object","additionalProperties":false,"required":["discovered_at","due_at","next_check_at"],"properties":{"discovered_at":{"type":"string","format":"date-time"},"due_at":{"type":["string","null"],"format":"date-time"},"next_check_at":{"type":["string","null"],"format":"date-time"}}},
+    "six_sigma":{"type":"object","additionalProperties":false,"required":["dmaic_stage","severity","occurrence","detectability","rpn"],"properties":{"dmaic_stage":{"enum":["DEFINE","MEASURE","ANALYZE","IMPROVE","CONTROL"]},"severity":{"type":"integer","minimum":1,"maximum":5},"occurrence":{"type":"integer","minimum":1,"maximum":5},"detectability":{"type":"integer","minimum":1,"maximum":5},"rpn":{"type":"integer","minimum":1,"maximum":125}}},
+    "bibliotechnics":{"type":"object","additionalProperties":false,"required":["authority_refs","relation_refs","index_terms","access_class"],"properties":{"authority_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},"relation_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},"index_terms":{"type":"array","items":{"type":"string"},"uniqueItems":true},"access_class":{"enum":["PUBLIC","INTERNAL","CONFIDENTIAL","RESTRICTED"]}}},
+    "closure":{"type":"object","additionalProperties":false,"required":["state","gates","falsifier"],"properties":{"state":{"enum":["OPEN","PARTIAL","CLOSED","TOKEN_VAZIO"]},"gates":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["id","state"],"properties":{"id":{"type":"string","minLength":1},"state":{"enum":["OPEN","PASS","FAIL","BLOCKED","TOKEN_VAZIO"]},"evidence_ref":{"type":["string","null"]}}}},"falsifier":{"type":"string","minLength":3}}},
+    "f_ok":{"type":"array","items":{"type":"string"}},
+    "f_gap":{"type":"array","items":{"type":"string"}},
+    "f_next":{"type":"array","minItems":1,"items":{"type":"string","minLength":3}},
+    "claim_allowed":{"const":false}
+  }
+}
