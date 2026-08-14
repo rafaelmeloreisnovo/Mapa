@@ -1,0 +1,88 @@
+{
+  "schema": "RAFAELIA_VECTRA_79_METRIC_SURFACE_V1",
+  "state": "EVIDENCED_STATIC",
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "commit": "21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d",
+    "path": "app/src/main/java/com/vectras/vm/benchmark/VectraBenchmark.java",
+    "blob_sha": "e86c56e7f6b3680cf37e20a9f3b78ef1bf12b5e5"
+  },
+  "metric_count_declared": 79,
+  "value_state_for_all_slots": "TOKEN_VAZIO_CURRENT_RUNTIME_RESULT",
+  "unit_state": "TOKEN_VAZIO_PER_SLOT_UNIT_BINDING_UNTIL_METHOD_LEVEL_EXTRACTION",
+  "groups": [
+    {
+      "category": "CPU_SINGLE",
+      "range": [0, 19],
+      "metrics": [
+        [0, "CPU_INTEGER_ADD"], [1, "CPU_INTEGER_MUL"], [2, "CPU_INTEGER_DIV"], [3, "CPU_INTEGER_MOD"],
+        [4, "CPU_LONG_ADD"], [5, "CPU_LONG_MUL"], [6, "CPU_LONG_DIV"], [7, "CPU_LONG_MIX"],
+        [8, "CPU_FLOAT_ADD"], [9, "CPU_FLOAT_MUL"], [10, "CPU_FLOAT_DIV"], [11, "CPU_DOUBLE_ADD"],
+        [12, "CPU_DOUBLE_MUL"], [13, "CPU_DOUBLE_DIV"], [14, "CPU_BITWISE_AND"], [15, "CPU_BITWISE_OR"],
+        [16, "CPU_BITWISE_XOR"], [17, "CPU_SHIFT_LEFT"], [18, "CPU_SHIFT_RIGHT"], [19, "CPU_POPCOUNT"]
+      ]
+    },
+    {
+      "category": "CPU_MULTI",
+      "range": [20, 29],
+      "metrics": [
+        [20, "CPU_MT_INTEGER"], [21, "CPU_MT_LONG"], [22, "CPU_MT_FLOAT"], [23, "CPU_MT_DOUBLE"],
+        [24, "CPU_MT_MIXED"], [25, "CPU_MT_CONTENTION"], [26, "CPU_MT_SPINLOCK"], [27, "CPU_MT_CAS"],
+        [28, "CPU_MT_BARRIER"], [29, "CPU_MT_THROUGHPUT"]
+      ]
+    },
+    {
+      "category": "MEMORY",
+      "range": [30, 44],
+      "metrics": [
+        [30, "MEM_SEQUENTIAL_READ"], [31, "MEM_SEQUENTIAL_WRITE"], [32, "MEM_RANDOM_READ"], [33, "MEM_RANDOM_WRITE"],
+        [34, "MEM_COPY_BANDWIDTH"], [35, "MEM_FILL_BANDWIDTH"], [36, "MEM_LATENCY_L1"], [37, "MEM_LATENCY_L2"],
+        [38, "MEM_LATENCY_L3"], [39, "MEM_LATENCY_RAM"], [40, "MEM_ALLOC_SPEED"], [41, "MEM_FREE_SPEED"],
+        [42, "MEM_BUFFER_POOL"], [43, "MEM_ARRAY_SUM"], [44, "MEM_STRIDE_ACCESS"]
+      ]
+    },
+    {
+      "category": "STORAGE",
+      "range": [45, 59],
+      "metrics": [
+        [45, "STORAGE_SEQ_READ"], [46, "STORAGE_SEQ_WRITE"], [47, "STORAGE_RANDOM_READ"], [48, "STORAGE_RANDOM_WRITE"],
+        [49, "STORAGE_MMAP_READ"], [50, "STORAGE_MMAP_WRITE"], [51, "STORAGE_SYNC_LATENCY"], [52, "STORAGE_APPEND_ONLY"],
+        [53, "STORAGE_TRUNCATE"], [54, "STORAGE_SEEK"], [55, "STORAGE_4K_READ"], [56, "STORAGE_4K_WRITE"],
+        [57, "STORAGE_64K_READ"], [58, "STORAGE_64K_WRITE"], [59, "STORAGE_1M_READ"]
+      ]
+    },
+    {
+      "category": "INTEGRITY",
+      "range": [60, 69],
+      "metrics": [
+        [60, "INTEGRITY_CRC32C"], [61, "INTEGRITY_PARITY_2D"], [62, "INTEGRITY_SYNDROME"], [63, "INTEGRITY_CHECKSUM"],
+        [64, "INTEGRITY_XOR_STRIPE"], [65, "INTEGRITY_HAMMING"], [66, "INTEGRITY_BLOCK_VERIFY"], [67, "INTEGRITY_BIT_FLIP_DETECT"],
+        [68, "INTEGRITY_ERROR_CORRECT"], [69, "INTEGRITY_HASH_MIX"]
+      ]
+    },
+    {
+      "category": "EMULATION",
+      "range": [70, 78],
+      "metrics": [
+        [70, "EMU_CONTEXT_SWITCH"], [71, "EMU_SYSCALL_OVERHEAD"], [72, "EMU_MEMORY_MAP"], [73, "EMU_BUFFER_COPY"],
+        [74, "EMU_EVENT_DISPATCH"], [75, "EMU_TIMER_PRECISION"], [76, "EMU_IRQ_LATENCY"], [77, "EMU_STATE_SERIALIZE"],
+        [78, "EMU_TRIAD_CONSENSUS"]
+      ]
+    }
+  ],
+  "invariants": [
+    "slot existence != runtime measurement",
+    "declared metric count != completed benchmark run",
+    "unit must be bound from producing method/result path, not guessed from metric name",
+    "all current runtime values remain TOKEN_VAZIO until raw result + environment + build + workload receipt"
+  ],
+  "open_tokens": [
+    "TOKEN_VAZIO_VECTRA_79_PER_SLOT_UNIT_BINDING",
+    "TOKEN_VAZIO_VECTRA_79_METHOD_BINDING",
+    "TOKEN_VAZIO_VECTRA_79_CURRENT_RAW_RESULTS",
+    "TOKEN_VAZIO_VECTRA_79_CURRENT_DEVICE_ENVIRONMENT",
+    "TOKEN_VAZIO_VECTRA_79_BUILD_IDENTITY"
+  ],
+  "next_verifiable_step": "Inspect producer methods for each slot to bind native unit/direction/statistic without inference, then transform actual raw benchmark output into MetricObservationV1 records."
+}
