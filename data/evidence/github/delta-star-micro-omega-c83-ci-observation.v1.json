@@ -1,0 +1,50 @@
+{
+  "schema": "rafaelia.delta-star-micro-omega-ci-observation/v1",
+  "cycle_id": "OMEGA-OPERATIONAL-COHERENCE-C83",
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "head_sha": "e764bc76f9eb04cffac39fab6d5aa862470fb000",
+  "classification": "INFRASTRUCTURE_STARTUP_NOT_CODE_REGRESSION",
+  "workflow_runs": [
+    {
+      "run_id": 31761800216,
+      "name": "CI",
+      "conclusion": "failure",
+      "job_id": 94649554759,
+      "job_name": "Validate Repository Structure",
+      "steps": [],
+      "code_execution_observed": false
+    },
+    {
+      "run_id": 31761800227,
+      "name": "Branch Topology Gate",
+      "conclusion": "failure",
+      "job_id": 94649554875,
+      "job_name": "branch-topology / validate",
+      "steps": [],
+      "code_execution_observed": false
+    },
+    {
+      "run_id": 31761800213,
+      "name": "RAFAELIA Promotion Control V1",
+      "conclusion": "failure",
+      "job_id": 94649554369,
+      "job_name": "promotion-control / negative-tests",
+      "steps": [],
+      "code_execution_observed": false,
+      "enforce_job": "skipped"
+    }
+  ],
+  "local_exact_byte_gate": {
+    "validator_exit": 0,
+    "adversarial_tests": "12/12 PASS",
+    "provider_blob_identity_matched": true
+  },
+  "boundary": [
+    "provider workflow failure with zero executed steps != code regression",
+    "local exact-byte PASS != provider CI PASS",
+    "remote CI PASS remains TOKEN_VAZIO until steps execute",
+    "claim_allowed=false"
+  ],
+  "F_next": "after runner or billing/startup recovery, rerun the same head SHA and require non-empty executed steps plus validator/test PASS before any provider-CI promotion"
+}
