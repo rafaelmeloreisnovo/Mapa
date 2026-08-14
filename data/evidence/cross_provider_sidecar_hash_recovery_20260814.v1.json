@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "event": "CROSS_PROVIDER_FILE_LIBRARY_SIDECAR_HASH_RECOVERY_20260814",
+  "state": "VERIFIED_LIMITED_CROSS_PROVIDER",
+  "claim_allowed": false,
+  "predecessor_checkpoint": "CHECKPOINT_0061",
+  "method_invariant": "provider_search_miss_is_bounded_negative_and_identity_must_be_routed_to_its_actual_authority",
+  "authority_transition": {
+    "from": "Google Drive provider search",
+    "to": "ChatGPT File Library",
+    "reason": "file_000... identifiers are upload/File-Library identities, not Google Drive file IDs",
+    "evidence_authority_relaxed": false
+  },
+  "sidecars": [
+    {
+      "file_name": "RafGitTools-main-own-lowlevel-sdk-20260731.sha256",
+      "file_library_id": "file_0000000067e881fd98cd223a8e95b682",
+      "expected_archive": "RafGitTools-main-own-lowlevel-sdk-20260731.zip",
+      "expected_sha256": "656ff819e68ab43213a72541e71e9670680b2c448fa2b6e3ec64e7ee1e6976c0",
+      "expected_digest_state": "RECOVERED",
+      "primary_archive_hash_verified": false
+    },
+    {
+      "file_name": "RafGitTools-main-lowlevel-android-capsule-20260731.sha256",
+      "file_library_id": "file_00000000245482308ed052d817f5fc7b",
+      "expected_archive": "RafGitTools-main-lowlevel-android-capsule-20260731.zip",
+      "expected_sha256": "41c7f2cbe73f8cfa9d82ffa0231c6103b002d3c22d4819b40298e525a0eab37b",
+      "expected_digest_state": "RECOVERED",
+      "primary_archive_hash_verified": false
+    },
+    {
+      "file_name": "RafGitTools-main-operational-hardening-20260731.sha256",
+      "file_library_id": "file_000000001c148230b596bbf276486f5f",
+      "expected_archive": "RafGitTools-main-operational-hardening-20260731.zip",
+      "expected_sha256": "bef3512d4634181a28fce4888a99b54b2e9c483247ae32ec9ed4148ea1d917e4",
+      "expected_digest_state": "RECOVERED",
+      "primary_archive_hash_verified": false
+    },
+    {
+      "file_name": "RafGitTools-main-owned-elf-indexed-20260731.sha256",
+      "file_library_id": "file_00000000448081fd8ea900c33ca441c2",
+      "expected_archive": "RafGitTools-main-owned-elf-indexed-20260731.zip",
+      "expected_sha256": "13a39cb62f39d317c417deee6f623beab6a4719b604043aa52f66f446a9d5dfb",
+      "expected_digest_state": "RECOVERED",
+      "primary_archive_hash_verified": false
+    }
+  ],
+  "receipts_recovered": [
+    "RAFSDK_LOWLEVEL_RECEIPT_2026-07-31.md",
+    "LOWLEVEL_ANDROID_CAPSULE_RECEIPT_2026-07-31.md",
+    "OPERATIONAL_HARDENING_RECEIPT_2026-07-31.md",
+    "RAFSDK_OWNED_ELF_EXECUTION_RECEIPT_2026-07-31.md"
+  ],
+  "anti_regression": [
+    "expected_digest_recovered != primary_archive_bytes_hashed",
+    "receipt_content != current_runtime_execution",
+    "file_library_search_miss != archive_absence",
+    "Drive provider miss != File Library object absence"
+  ],
+  "resolved_tokens": [
+    "FOUR_ARCHIVE_HASH_SIDECAR_VALUES_NOT_READ",
+    "FOUR_RECEIPT_CONTENT_UNREAD"
+  ],
+  "open_tokens": [
+    "FOUR_PRIMARY_ARCHIVE_BYTES_CURRENT_LOCATION",
+    "FOUR_PRIMARY_ARCHIVE_SHA256_RECOMPUTED_AND_MATCHED",
+    "HJ200225_PRIMARY_ASSET_BYTES_AND_SHA256",
+    "RAW_PROVIDER_MAP_018_027",
+    "RAW_SHA256_018_027",
+    "RECEIPT_018_022",
+    "RECEIPT_023_027",
+    "SNAPSHOT_TO_PROVIDER_TOTAL_MAP",
+    "PROVIDER_ENUMERATION_TERMINALITY",
+    "PRODUCER_BATCHING_RANGE_RULE"
+  ],
+  "next_cursor": "FILE_LIBRARY_PRIMARY_ARCHIVE_IDENTITY_RECOVERY_4_RAFGITTOOLS_ZIPS_THEN_PAIR00007_FALLBACK"
+}
