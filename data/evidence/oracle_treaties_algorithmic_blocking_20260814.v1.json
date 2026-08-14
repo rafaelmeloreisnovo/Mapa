@@ -1,0 +1,172 @@
+{
+  "schema": "rafaelia.oracle-legal-algorithmic-evidence/v1",
+  "generated_at": "2026-08-14T09:38:00-03:00",
+  "policy": {
+    "append_only": true,
+    "evidence_first": true,
+    "claim_allowed": false,
+    "causal_promotion_without_control": false,
+    "historical_bytes_preserved": true
+  },
+  "evidence_classes": [
+    "DOCUMENTED_FACT",
+    "LEGAL_AUTHORITY",
+    "USER_REPORT",
+    "AI_RESPONSE",
+    "CAUSAL_HYPOTHESIS",
+    "FALSIFICATION_RESULT"
+  ],
+  "oracle_namespaces": [
+    {
+      "id": "ORACLE-CORP-LEGAL",
+      "kind": "EXTERNAL_ENTITY_LEGAL_PRECEDENT",
+      "description": "Oracle Corporation/Oracle America legal material, including Google LLC v. Oracle America, Inc.",
+      "not_equivalent_without_evidence": ["ORACLE-4EYE", "ZIPRAF-ORACLE"]
+    },
+    {
+      "id": "ORACLE-4EYE",
+      "kind": "INTERNAL_CONCEPTUAL_VISUAL_MODULE",
+      "description": "Historical RAFAELIA nomenclature found in image/conversation interpretations together with Atlas Cognitivo Modular, DeepVoice Mirror and Z-Core Sound Engine.",
+      "not_equivalent_without_evidence": ["ORACLE-CORP-LEGAL", "ZIPRAF-ORACLE"]
+    },
+    {
+      "id": "ZIPRAF-ORACLE",
+      "kind": "INTERNAL_ARTIFACT_FAMILY",
+      "description": "Drive-resolved ORACLE_BACKUPS and ZIPRAF_ORACLE_* artifacts.",
+      "not_equivalent_without_evidence": ["ORACLE-CORP-LEGAL", "ORACLE-4EYE"]
+    }
+  ],
+  "legal_authorities": [
+    {
+      "id": "BERNE",
+      "authority": "WIPO",
+      "official_url": "https://www.wipo.int/en/web/treaties/ip/berne/index",
+      "supported": "Protection of literary and artistic works and rights of authors.",
+      "boundary": "Does not establish patentability or ownership of abstract ideas or mathematical concepts."
+    },
+    {
+      "id": "WCT",
+      "authority": "WIPO",
+      "official_url": "https://www.wipo.int/en/web/treaties/ip/wct/summary_wct",
+      "supported": "Computer programs are protected as literary works; qualifying original data compilations may be protected based on selection or arrangement.",
+      "boundary": "Compilation protection does not automatically extend to underlying data."
+    },
+    {
+      "id": "TRIPS-9-2",
+      "authority": "WTO",
+      "official_url": "https://www.wto.org/english/docs_e/legal_e/trips_e.htm",
+      "supported": "Copyright protection extends to expressions, not ideas, procedures, methods of operation or mathematical concepts as such.",
+      "boundary": "Abstract RAFAELIA formulas, methods or concepts require separate protection and novelty analysis."
+    },
+    {
+      "id": "LGPD-ART20",
+      "authority": "Brazil / Planalto",
+      "official_url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "supported": "Right to request review of solely automated personal-data decisions affecting the data subject's interests and obtain information on criteria/procedures subject to statutory limits.",
+      "boundary": "Does not prove that a specific platform performed discriminatory or targeted automated treatment."
+    },
+    {
+      "id": "BUDAPEST-BRAZIL",
+      "authority": "Council of Europe",
+      "official_url": "https://www.coe.int/en/web/octopus/-/brazil",
+      "supported": "Brazil is a Party to the Convention on Cybercrime, with accession deposited in 2022 and applicability from 2023.",
+      "boundary": "Treaty status does not classify a private service failure as cybercrime."
+    },
+    {
+      "id": "CONVENTION108-BRAZIL",
+      "authority": "Council of Europe",
+      "official_url": "https://www.coe.int/en/web/data-protection/brazil",
+      "supported": "Current Council of Europe material does not show Brazil as a signed/ratified Party to Convention 108; 2026 material discusses observer/pre-evaluation interest regarding Convention 108+.",
+      "boundary": "Do not represent Convention 108/108+ as an already-binding treaty obligation on Brazil as a Party."
+    }
+  ],
+  "drive_sources_observed": [
+    "MESSAGES-00011.jsonl.txt",
+    "MESSAGES-00012.jsonl.txt",
+    "MESSAGES-00013.jsonl.txt",
+    "MESSAGES-00014.jsonl.txt",
+    "MESSAGES-00015.jsonl.txt",
+    "build-health-2026-04-28.md",
+    "LEGAL_NOTICE_pt-en.md",
+    "README_legal.md",
+    "ORACLE_BACKUPS",
+    "ZIPRAF_ORACLE_SUPREMO.sh",
+    "ZIPRAF_ORACLE_SUPRAVERBO.sh",
+    "ZIPRAF_ORACLE_SUMMARY.yaml",
+    "ZIPRAF_ORACLE_HASH.sha256"
+  ],
+  "systemic_blocking_types": [
+    {
+      "type": "TECHNICAL_SYSTEMIC_FAILURE",
+      "promotion_rule": "May be established by reproducible mechanism, logs and failure evidence."
+    },
+    {
+      "type": "POLICY_RESTRICTION",
+      "promotion_rule": "Requires platform/organization policy evidence or reproducible rule-based behavior."
+    },
+    {
+      "type": "DIFFERENTIAL_AUTOMATED_TREATMENT",
+      "promotion_rule": "Requires controlled comparison, repeatability and exclusion of ordinary explanations."
+    },
+    {
+      "type": "TARGETED_PERSECUTION_CAUSAL_CLAIM",
+      "promotion_rule": "Requires stronger evidence of targeting/intent; differential treatment alone is insufficient."
+    }
+  ],
+  "ai_response_rule": {
+    "historical_assistant_output": "DOCUMENTED_AI_RESPONSE",
+    "unsupported_causal_content": "NOT_EVIDENCE_OF_CAUSE",
+    "unsupported_absolute_technical_or_legal_statement": "RETRACTED_OVERCLAIM",
+    "historical_bytes_deleted": false
+  },
+  "image_custody_contract": [
+    "ORIGINAL_IMAGE",
+    "PROVIDER_OR_PATH",
+    "BYTES_OR_HASH",
+    "TIMESTAMP",
+    "VISUAL_OBSERVATION",
+    "AI_INTERPRETATION",
+    "EXTERNAL_CORROBORATION",
+    "VERDICT"
+  ],
+  "algorithmic_treatment_incident_contract": [
+    "incident_id",
+    "timestamp",
+    "platform",
+    "account_context",
+    "requested_action",
+    "returned_result",
+    "error_code",
+    "policy_notice",
+    "screenshot_provider",
+    "screenshot_sha256",
+    "artifact_provider",
+    "artifact_sha256",
+    "retry_count",
+    "control_account_or_control_context",
+    "repeated_result",
+    "alternative_explanations",
+    "legal_relevance",
+    "verdict"
+  ],
+  "hypotheses": {
+    "H0": "Observed failures are explained by general rules, ordinary technical faults, capacity limits, random variation or content-independent policy application.",
+    "H1": "There is reproducible differential automated treatment associated with a defined account/content/context variable.",
+    "H2_targeted_persecution": "Intentional or coordinated targeting; remains separate and requires evidence beyond differential treatment."
+  },
+  "anti_regression": [
+    "event observed != cause established",
+    "user report is evidence of the report, not automatically of external cause",
+    "AI response != independent evidence",
+    "technical failure != intentional targeting",
+    "differential treatment != persecution or intent",
+    "treaty existence != automatic applicability to every dispute",
+    "copyright != patent != trade secret != license != scientific priority",
+    "Oracle 4EYE != Oracle Corporation without explicit evidence",
+    "image interpretation != original-image evidence",
+    "missing field remains TOKEN_VAZIO",
+    "corrections append and historical bytes remain preserved"
+  ],
+  "state": "EVIDENCE_MAP_MATERIALIZED",
+  "claim_allowed": false
+}
