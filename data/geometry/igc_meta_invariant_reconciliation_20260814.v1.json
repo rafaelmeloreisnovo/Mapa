@@ -1,0 +1,77 @@
+{
+  "schema_id": "rafaelia.igc-meta-invariant-reconciliation/v1",
+  "date": "2026-08-14",
+  "state": "CANONICAL_DRAFT",
+  "append_only": true,
+  "claim_allowed": false,
+  "sources": {
+    "earlier_candidate_model": {
+      "provider": "Google_Drive",
+      "provider_id": "1JL4nv_jlhzJyJCMKaEv5pvT0cVzZNK2V",
+      "title": "UNIFIED_INVARIANT_SPEC.md",
+      "role": "MODEL_CANDIDATE"
+    },
+    "later_canonical_contract": {
+      "provider": "Google_Drive+GitHub",
+      "provider_id": "1eGLmUTXAgcm4M9hJNCXoB5OLnc9ZSGMqTXvsFJasags",
+      "github_pr": 128,
+      "merge_commit": "6c60b1df49760f5867d173f24da44ef524b9435b",
+      "role": "CANONICAL_OPERATIONAL_CONTRACT"
+    }
+  },
+  "earlier_model_components": {
+    "state_space": "T7=(R/Z)^7",
+    "state_vector": "s=(u,v,psi,chi,rho,delta,sigma)",
+    "input": "x=(dados,entropia,hash,estado)",
+    "map": "s=ToroidalMap(x)",
+    "alpha": 0.25,
+    "phi": "(1-H)*C",
+    "candidate_attractor_count": 42,
+    "aggregate": "I=TensorProd_L(I_L)",
+    "integrity_axis": ["XOR", "FNV-like", "CRC-like", "Merkle"],
+    "source_anti_overfitting": "estado=aberto;pressao=baixa;inferencia=minima"
+  },
+  "canonical_reclassification": {
+    "T7": "MODEL_CANDIDATE",
+    "42": "TOKEN_VAZIO_EMPIRICAL_OR_MODEL_SPECIFIC",
+    "phi": "MODEL_OBSERVABLE_CANDIDATE",
+    "aggregate_I": "HYPOTHESIS_REQUIRING_DATASET_NORMALIZATION_AND_BASELINES",
+    "integrity_axis": "SECURITY_INTEGRITY_LAYER_SEPARATE_FROM_GEOMETRY"
+  },
+  "meta_contract": {
+    "family_tuple": "K_F=(X_F,R_F,T_F,I_F,epsilon_F,E_F,N_F,C_F)",
+    "lane": "SOURCE->IDENTITY->MODEL->REPRESENTATION->TRANSFORMATION->INVARIANT->TOLERANCE->TEST->NEGATIVE->RECEIPT->CLAIM_GATE->MEMORY",
+    "representation_coherence": "R_F(tau_X(X)) ~= tau_R(R_F(X))",
+    "residual": "Delta_R=d_R(R_F(tau_X(X)),tau_R(R_F(X)))",
+    "pass_condition": "Delta_R<=epsilon_R over declared tested transformation surface",
+    "scope": "REUSABLE_TEST_PATTERN_NOT_UNIVERSAL_PHYSICAL_LAW"
+  },
+  "anti_regression": [
+    "EARLIER_MODEL_NE_LATER_CANONICAL_CONTRACT",
+    "T7_MODEL_NE_UNIVERSAL_STATE_SPACE",
+    "42_CANDIDATE_NE_UNIVERSAL_ATTRACTOR_COUNT",
+    "PHI_OBSERVABLE_NE_GEOMETRIC_INVARIANT",
+    "INTEGRITY_HASH_NE_GEOMETRY",
+    "INTEGRITY_HASH_NE_AUTHENTICITY_WITHOUT_EXTERNAL_AUTHORITY",
+    "SAME_PIPELINE_SHAPE_NE_SAME_MATHEMATICAL_INVARIANT",
+    "CANDIDATE_METRIC_NE_MEASURED_RESULT",
+    "MEASURED_RESULT_NE_THEOREM",
+    "META_CONTRACT_RECURRENCE_NE_CROSS_DOMAIN_EQUIVALENCE_PROOF"
+  ],
+  "f_gap": [
+    "EXACT_TOROIDALMAP_SEMANTICS",
+    "FAMILY_LOCAL_JUSTIFICATION_FOR_SEVEN_DIMENSIONS",
+    "ATTRACTOR_42_VERSIONED_EXECUTION_AND_COUNTING_RULE",
+    "CROSS_LANGUAGE_DATASET_BASELINE_NORMALIZATION",
+    "GENERIC_INTEGRITY_FORMULA_GUARANTEE_REVIEW",
+    "FAMILY_LOCAL_IGC_RECORD_COMPLETION"
+  ],
+  "f_next": [
+    "BIND_T7_42_PHI_I_ONLY_WHERE_FAMILY_LOCAL_CONTRACT_REQUIRES",
+    "MATERIALIZE_DELTA_R_TEST_FOR_ZIPRAF_ROUNDTRIP",
+    "MATERIALIZE_DELTA_R_TEST_FOR_ONE_DIRECT_GEOMETRIC_FIXTURE",
+    "ADD_NON_COMMUTING_NEGATIVE_CASES",
+    "KEEP_SECURITY_INTEGRITY_AXIS_SEPARATE_FROM_GEOMETRY",
+    "KEEP_CLAIM_ALLOWED_FALSE"
+  ]
+}
