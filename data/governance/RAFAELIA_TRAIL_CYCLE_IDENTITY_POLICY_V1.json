@@ -1,0 +1,35 @@
+{
+  "schema":"rafaelia.trail-cycle-identity-policy/v1",
+  "state":"FORMALIZED",
+  "claim_allowed":false,
+  "canonical_identity":"trail_id + cycle_uid",
+  "bare_numeric_cycle_is_global_identity":false,
+  "required_fields":["trail_id","trail_seq","cycle_uid"],
+  "optional_trace_fields":["legacy_local_cycle","source_pr","source_commit","provider_id"],
+  "rules":[
+    "bare C-number labels are local trace metadata only",
+    "routing, collision detection and successor selection must use trail_id plus cycle_uid",
+    "cycle_uid must remain immutable after materialization",
+    "legacy numeric labels are preserved append-only and never rewritten as if they were globally unique",
+    "superseded concurrent trails are closed without merge and remain recoverable by PR/commit",
+    "a derived view never becomes authority merely by having a later numeric cycle label",
+    "claim_allowed remains false unless the underlying epistemic gate independently allows promotion"
+  ],
+  "recommended_cycle_uid_format":"<TRAIL>-<SEQ3>-<UTC_TIMESTAMP>-<HEAD8>",
+  "example":{
+    "trail_id":"OPERATIONAL_DASHBOARD",
+    "trail_seq":1,
+    "cycle_uid":"OPERATIONAL_DASHBOARD-001-20260814T015917Z-7f377447",
+    "legacy_local_cycle":"C83"
+  },
+  "known_collision_evidence":[
+    {"legacy_label":"C83","trail":"DELTA_STAR_MICRO_OMEGA","reference":"PR#223"},
+    {"legacy_label":"C83","trail":"FG006_REPOSITORY_COVERAGE","reference":"PR#226 superseded"},
+    {"legacy_label":"C83","trail":"OPERATIONAL_DASHBOARD","reference":"PR#229 superseded"}
+  ],
+  "open_token_vazio":[
+    "TOKEN_VAZIO_GLOBAL_CYCLE_UID_REGISTRY",
+    "TOKEN_VAZIO_REPOSITORY_WIDE_IDENTITY_LINT"
+  ],
+  "F_next":"materialize a repository-wide identity registry/linter that enumerates active cycle-bearing artifacts and rejects duplicate cycle_uid while preserving legacy local labels"
+}
