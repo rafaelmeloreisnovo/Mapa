@@ -1,0 +1,25 @@
+{
+  "schema":"RAFAELIA_HISTORICAL_BUILD_EVIDENCE_V1",
+  "record_id":"EVID-VECTRA-BENCHMARKMANAGER-BUILD-20260403-001",
+  "observed_source_date":"2026-04-03",
+  "state":"BUILD_FAILED_PRE_BENCHMARK",
+  "claim_allowed":false,
+  "source":{
+    "provider":"Google Drive",
+    "provider_id":"1wktbzGb5hQ1CisLrrRyZg3CXPvE-u5BD",
+    "title":"job-logs.txt"
+  },
+  "historical_repository":"ednadefatima1959-max/Vectra",
+  "historical_commit":"b7f7f681147d7502bc63bd03ee02d95f4dbe8ee2",
+  "environment":{"runner":"GitHub Actions hosted","os":"Ubuntu 24.04.4","java":17,"compile_api":35,"target_api":35,"min_api":23,"ndk":"27.2.12479018"},
+  "observation":{
+    "file":"app/src/main/java/com/vectras/vm/benchmark/BenchmarkManager.java",
+    "error":"cannot find symbol: detectAbiCpuMismatch()",
+    "observed_lines":[167,188,195],
+    "benchmark_execution_observed":false
+  },
+  "interpretation":"This revision is not a valid provenance anchor for a successful BenchmarkManager run. Build failure occurred before benchmark execution. Current pinned Vectras source contains detectAbiCpuMismatch(), so later source lineage differs from this historical revision.",
+  "negative_evidence":true,
+  "open_tokens":["TOKEN_VAZIO_FIRST_COMMIT_FIXING_DETECT_ABI_CPU_MISMATCH","TOKEN_VAZIO_FIRST_SUCCESSFUL_BENCHMARKMANAGER_RUN_RECEIPT"],
+  "next_verifiable_step":"Locate the first subsequent commit/build where BenchmarkManager compiles and then search for an attached smoke benchmark output/receipt."
+}
