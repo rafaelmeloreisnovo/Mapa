@@ -1,0 +1,55 @@
+{
+  "schema": "rafaelia.context_anchors.v1",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "append_only": true,
+  "privacy": "NO_RAW_PRIVATE_CONVERSATION_CONTENT",
+  "anchors": [
+    {
+      "id": "ART-CTX-20260813-001",
+      "kind": "CHAT_EXPORT",
+      "sha256": "53fbfbc52d110d5815024ca851868555d23c3180cd73bb5433dd5f5bade9d93f",
+      "bytes": 305843744,
+      "zip_test": "PASS",
+      "conversations": 2573,
+      "messages_with_payload": 239506,
+      "create_time_min_utc": "2025-02-12T00:08:06.258886Z",
+      "create_time_max_utc": "2025-10-06T16:30:36.847311Z",
+      "state": "VERIFIED_AGGREGATES_LOCAL",
+      "raw_payload_committed": false,
+      "route": "IDX-08_MEMORY->bounded_filter->selected_conversation->chunks->graph",
+      "open": ["TOKEN_VAZIO_CONVERSATION_ID_INDEX_REMOTE","TOKEN_VAZIO_CHUNK_GRAPH_MATERIALIZATION","TOKEN_VAZIO_CROSS_EXPORT_DEDUP"]
+    },
+    {
+      "id": "ART-RUNTIME-20260813-001",
+      "kind": "ANDROID_APK",
+      "sha256": "e6265a57eb5ca363808488e3b01955958bed93bc0c8a0d281849b363b11027ec",
+      "bytes": 113880067,
+      "zip_test": "PASS",
+      "package_string": "com.termux",
+      "certificate_subject": "FDroid",
+      "abis": ["arm64-v8a","armeabi-v7a","x86","x86_64"],
+      "state": "VERIFIED_STATIC",
+      "custom_build_relation": "TOKEN_VAZIO",
+      "physical_runtime": "TOKEN_VAZIO",
+      "route": "IDX-05_RUNTIME->exact_sha256->static_provenance->runtime_receipt"
+    }
+  ],
+  "visual_family": {
+    "id": "VIS-RAFAELIA-FRACTAL-20260813",
+    "count": 7,
+    "state": "SYMBOLIC_VISUAL_ARTIFACTS",
+    "scientific_claim_allowed": false,
+    "sha256": [
+      "34b34fb6db90eb47ff206c013ea1264055af205296f380766749f7c835e14264",
+      "09ce438287465ed76f3b4cc607dac5a5d915096b07a7c1cec5dac419b5d6e185",
+      "15e9752115e79967066e6409a0b8e0f51265feac963f8970829ac54b8c6778a8",
+      "ab9af9253e1985a02b7731e775c6ea83891c79470a336efca8976eb88939beee",
+      "b3cabd090f54da28dab569951238d99013eeb1ca5a6d328726c24333a32ceb5d",
+      "c6c34c72ecd7cb78e2b3217d1320e98a46f34e039b4b59e067db2dbecb1f5f3a",
+      "b4bbb92f475870d3a673bc45ffa97acc1eb02842e18610a55f2fdb3d9465c033"
+    ],
+    "open": ["TOKEN_VAZIO_VISUAL_GENERATOR_SOURCE_BINDING","TOKEN_VAZIO_PARAMETER_MANIFESTS","TOKEN_VAZIO_IMAGE_TO_FORMULA_PROVENANCE"]
+  },
+  "invariants": ["map_before_raw","minimal_relevant_subgraph","symbolic_not_measurement","static_not_runtime","TOKEN_VAZIO_not_zero","append_only"]
+}
