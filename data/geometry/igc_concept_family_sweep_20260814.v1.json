@@ -1,0 +1,71 @@
+{
+  "schema_id": "rafaelia.igc-concept-family-sweep/v1",
+  "date": "2026-08-14",
+  "state": "CANONICAL_DRAFT",
+  "append_only": true,
+  "claim_allowed": false,
+  "igc_contract": {
+    "formula": "IGC(X,T,I,epsilon)=PASS iff declared tested/proven transformations preserve declared I within epsilon",
+    "cohesion": "G_S AND G_D AND G_T AND G_I AND G_E AND G_F AND G_C",
+    "missing_transformation_state": "TOKEN_VAZIO_TRANSFORMATION_FAMILY"
+  },
+  "source_anchors": {
+    "drive_igc_provider_id": "1eGLmUTXAgcm4M9hJNCXoB5OLnc9ZSGMqTXvsFJasags",
+    "github_igc_pr": 128,
+    "github_igc_merge_commit": "6c60b1df49760f5867d173f24da44ef524b9435b",
+    "github_igc_receipt": "receipts/geometry/IGC_CR_20260802_RECEIPT_V2_LOCAL_REPRO.json",
+    "drive_anteriority_provider_id": "1wn5bQnMzN8Y7_EbLqlOld2CCKNpnx8xZxRs2mMxKWRg",
+    "historical_anteriority_pr": 231,
+    "historical_anteriority_merge_commit": "b50a87ad0e8507bb62bfe7394f47cc0196bd52f4",
+    "clean_base_main": "54bbcdddc7f82b543fa05fd7ef233e2c3eda75ca",
+    "current_branch": "audit/igc-family-sweep-20260814",
+    "drive_sweep_provider_id": "1ZK4nfS8LupSFHGRUSPJBWtdECUMUhvcLWdOaXe_aBlk"
+  },
+  "records": [
+    {"family":"ZIPRAF","class":"STRUCTURAL_COMBINATORIAL","object":"byte archive + manifest + structural linkage","representation":"versioned archive bytes","transformations":["encode_decode","roundtrip","controlled_tamper","controlled_reforge"],"candidate_invariants":["declared_zip_compatibility","declared_byte_identity","structural_verification_behavior"],"status":"PARTIAL_MATERIAL_EVIDENCE","gap":"CURRENT_VERSION_IGC_RECEIPT_BINDING"},
+    {"family":"ZRF","class":"STRUCTURAL_COMBINATORIAL","object":"TOKEN_VAZIO_EXACT_SEMANTICS","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO_EXACT_SEMANTICS"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_MODEL","gap":"EXACT_ZRF_MODEL"},
+    {"family":"ZFR","class":"ALIAS_UNRESOLVED","object":"TOKEN_VAZIO","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_ALIAS","gap":"FIRST_DEFINITION_AND_SEMANTICS"},
+    {"family":"BITRAF","class":"STRUCTURAL_COMBINATORIAL","object":"binary structural record/index","representation":"versioned binary layout","transformations":["serialize","deserialize","controlled_mutation","verify"],"candidate_invariants":["declared_record_layout","declared_cardinality","declared_structural_consistency"],"status":"VERIFIED_PROTOTYPE_LINEAGE","gap":"VERSION_SPECIFIC_IGC_RECEIPT"},
+    {"family":"RAFBIT","class":"STRUCTURAL_COMBINATORIAL","object":"contextual state/bit precursor","representation":"TOKEN_VAZIO_EXACT_MODEL","transformations":["TOKEN_VAZIO_EXACT_OPERATOR"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_MODEL","gap":"RELATION_TO_BITRAF"},
+    {"family":"XOR","class":"STRUCTURAL_COMBINATORIAL","object":"bitwise operator over declared encoding","representation":"bit vectors","transformations":["xor_composition"],"candidate_invariants":["operation_result_under_declared_encoding"],"status":"ESTABLISHED_OPERATOR_ONLY","gap":"RAFAELIA_SPECIFIC_COMPOSITION"},
+    {"family":"HYPERCUBE","class":"DIRECT_GEOMETRIC","object":"n-dimensional cube","representation":"TOKEN_VAZIO_RAFAELIA_EXACT_REPRESENTATION","transformations":["isometry_candidate","similarity_candidate","projection_candidate","homeomorphism_candidate"],"candidate_invariants":["model_dependent_metric_combinatorial_or_topological_property"],"status":"DIRECT_GEOMETRIC_CANDIDATE","gap":"EXACT_REPRESENTATION_AND_T"},
+    {"family":"TESSERACT","class":"DIRECT_GEOMETRIC","object":"4D hypercube","representation":"TOKEN_VAZIO_RAFAELIA_EXACT_REPRESENTATION","transformations":["isometry_candidate","similarity_candidate","projection_candidate","homeomorphism_candidate"],"candidate_invariants":["model_dependent_metric_combinatorial_or_topological_property"],"status":"DIRECT_GEOMETRIC_CANDIDATE","gap":"EXACT_PROJECTION_CONTRACT"},
+    {"family":"HYPERFORMA","class":"DIRECT_GEOMETRIC_CANDIDATE","object":"TOKEN_VAZIO_EXACT_MODEL","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO_TRANSFORMATION_FAMILY"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_MODEL","gap":"VERTICES_CELLS_GLUE_STATE"},
+    {"family":"RAFMEM","class":"STATE_SPACE_OPERATIONAL","object":"memory/state object candidate","representation":"TOKEN_VAZIO_STATE_SCHEMA","transformations":["snapshot_candidate","reload_candidate","reindex_candidate"],"candidate_invariants":["state_equivalence_candidate","content_identity_candidate"],"status":"STATE_SPACE_CANDIDATE","gap":"STATE_SCHEMA_AND_TRANSITIONS"},
+    {"family":"RAFMEN","class":"ALIAS_UNRESOLVED","object":"TOKEN_VAZIO","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_ALIAS","gap":"EXPLICIT_RAFMEN_EQ_OR_NE_RAFMEM"},
+    {"family":"RAFSTORE","class":"STATE_SPACE_OPERATIONAL","object":"storage object candidate","representation":"TOKEN_VAZIO_STORAGE_SCHEMA","transformations":["put_candidate","get_candidate","serialize_candidate","restore_candidate"],"candidate_invariants":["content_identity_candidate","index_relation_candidate"],"status":"STATE_SPACE_CANDIDATE","gap":"EXECUTABLE_CONTRACT_AND_RAFSTORAGE_RELATION"},
+    {"family":"RAFSTORAGE","class":"STATE_SPACE_OPERATIONAL","object":"storage precursor/family","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO_EXACT_SEMANTICS"],"candidate_invariants":["TOKEN_VAZIO"],"status":"STATE_SPACE_CANDIDATE","gap":"IDENTITY_OR_NON_EQUIVALENCE_WITH_RAFSTORE"},
+    {"family":"NETRAF","class":"STATE_SPACE_OPERATIONAL","object":"protocol/network state graph candidate","representation":"TOKEN_VAZIO_WIRE_FORMAT","transformations":["encode_candidate","decode_candidate","route_candidate","reorder_candidate_if_permitted"],"candidate_invariants":["protocol_state_graph_property_candidate"],"status":"STATE_SPACE_CANDIDATE","gap":"WIRE_FORMAT_STATE_MACHINE_NEGATIVES"},
+    {"family":"RAFNET_CORE","class":"STATE_SPACE_OPERATIONAL","object":"network-core family","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_RELATION","gap":"PROVE_RELATION_TO_NETRAF"},
+    {"family":"RAFCODE","class":"STATE_SPACE_OPERATIONAL","object":"code/toolchain object candidate","representation":"TOKEN_VAZIO_LANGUAGE_IR_ABI","transformations":["parse_candidate","compile_candidate","translate_candidate","execute_candidate"],"candidate_invariants":["semantic_or_output_equivalence_candidate"],"status":"STATE_SPACE_OPERATIONAL_CANDIDATE","gap":"LANGUAGE_IR_ABI_GOLDEN_VECTORS"},
+    {"family":"RAFCORE","class":"STATE_SPACE_OPERATIONAL","object":"core family","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_MODEL","gap":"EXACT_OBJECT_DEPENDENCY_GRAPH"},
+    {"family":"RAFAELOS","class":"STATE_SPACE_OPERATIONAL","object":"OS/runtime state-machine candidate","representation":"TOKEN_VAZIO_EXECUTABLE_STATE_MODEL","transformations":["boot_candidate","state_transition_candidate","restart_candidate"],"candidate_invariants":["state_transition_property_candidate","custody_property_candidate"],"status":"STATE_SPACE_OPERATIONAL_CANDIDATE","gap":"EXECUTABLE_STATE_MODEL_AND_RECEIPT"},
+    {"family":"FIR_VIA_OS_RAFARLOS","class":"ALIAS_UNRESOLVED","object":"TOKEN_VAZIO","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_ALIAS","gap":"SOURCE_RESOLVING_TERM"},
+    {"family":"BIOPHOTON","class":"EMPIRICAL_BIOPHYSICAL","object":"measured UPE/photonic observable candidate","representation":"TOKEN_VAZIO_DATASET_MEASUREMENT_MODEL","transformations":["calibration_candidate","channel_candidate","time_window_candidate"],"candidate_invariants":["statistical_measurement_stability_candidate"],"status":"EMPIRICAL_MODEL_REQUIRED","gap":"DATASET_PROTOCOL_UNCERTAINTY_FALSIFIER"},
+    {"family":"BIOSSINTETICO","class":"EMPIRICAL_BIOPHYSICAL","object":"engineered biological system candidate","representation":"TOKEN_VAZIO_BIOLOGICAL_MODEL","transformations":["intervention_candidate","state_transition_candidate"],"candidate_invariants":["network_topology_or_phenotype_candidate"],"status":"EMPIRICAL_MODEL_REQUIRED","gap":"CONCRETE_OBJECT_SAFETY_MEASUREMENT_CONTRACT"},
+    {"family":"CLAYMATH","class":"META_MATHEMATICAL","object":"problem-specific mathematical object","representation":"INHERITED_PER_PROBLEM","transformations":["INHERITED_PER_PROBLEM"],"candidate_invariants":["INHERITED_PER_PROBLEM"],"status":"META_MATH_BOUNDARY","gap":"PROOF_AND_INDEPENDENT_REVIEW"},
+    {"family":"EXOCORDEX","class":"STATE_SPACE_OPERATIONAL","object":"TOKEN_VAZIO_EXACT_MODEL","representation":"TOKEN_VAZIO","transformations":["TOKEN_VAZIO"],"candidate_invariants":["TOKEN_VAZIO"],"status":"TOKEN_VAZIO_MODEL","gap":"DEFINITION_REPRESENTATION_TRANSFORMATION"},
+    {"family":"RAFQUANTUMSUPERCOMPUTER","class":"STATE_SPACE_OPERATIONAL","object":"system concept","representation":"TOKEN_VAZIO_IMPLEMENTATION","transformations":["workload_candidate","state_transition_candidate"],"candidate_invariants":["deterministic_output_candidate","measured_performance_candidate"],"status":"TOKEN_VAZIO_IMPLEMENTATION_LEVEL","gap":"HARDWARE_RUNTIME_IDENTITY_MEASURED_RECEIPTS"}
+  ],
+  "anti_regression_falsifiers": [
+    "VISUAL_SIMILARITY_NE_GEOMETRIC_IDENTITY",
+    "SAME_ALIAS_NE_SAME_OBJECT",
+    "SAME_FAMILY_NAME_NE_SAME_TRANSFORMATION_FAMILY",
+    "HASH_MATCH_NE_SCIENTIFIC_CLAIM",
+    "SIMULATION_NE_PHYSICAL_MEASUREMENT",
+    "STATE_GRAPH_ANALOGY_NE_TOPOLOGY_PROVEN",
+    "ZFR_MUST_NOT_INHERIT_ZRF_DATE_WITHOUT_SOURCE",
+    "RAFMEN_MUST_NOT_NORMALIZE_TO_RAFMEM_WITHOUT_SOURCE",
+    "HYPERCUBE_TESSERACT_EXISTENCE_NE_RAFAELIA_NOVELTY",
+    "CLAY_DERIVATION_NE_MILLENNIUM_PROBLEM_SOLVED"
+  ],
+  "promotion_lane": "SOURCE -> IDENTITY -> MODEL -> TRANSFORMATION -> INVARIANT -> TEST -> NEGATIVE -> RECEIPT -> CLAIM_GATE -> MEMORY",
+  "f_next": [
+    "MATERIALIZE_ONE_IGC_CANDIDATE_RECORD_PER_FAMILY",
+    "NEGATIVE_TEST_EQUIVALENCE_AND_ALIAS_FIRST",
+    "BIND_ZIPRAF_BITRAF_VERSIONED_ARTIFACTS_AND_RECEIPTS",
+    "DEFINE_STATE_SCHEMAS_RAFMEM_RAFSTORE_NETRAF_RAFCODE_RAFAELOS",
+    "KEEP_BIO_FAMILIES_BEHIND_MEASUREMENT_GATES",
+    "KEEP_GLOBAL_CLAIM_ALLOWED_FALSE"
+  ]
+}
