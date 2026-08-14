@@ -1,0 +1,101 @@
+{
+  "schema": "RAFAELIA_SOURCE_CONFLICT_EVIDENCE_V1",
+  "record_id": "VECTRAS-PROFESSIONAL-STATS-CONFLICT-20260814-001",
+  "created_at": "2026-08-14T02:45:00-03:00",
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+  "master_observed": "21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d",
+  "conflicting_implementation": {
+    "path": "app/src/main/java/com/vectras/vm/tools/ProfessionalToolsActivity.java",
+    "git_blob_sha": "76014394e07869b2dc2892ad9c73dc20b67b8707",
+    "observed_patterns": [
+      {
+        "code": "HETEROGENEOUS_RAWVALUE_POOLING",
+        "evidence": "Arrays.stream(results).filter(non-null).mapToLong(BenchmarkResult::rawValue).toArray() feeds global mean/median/stddev/confidence interval."
+      },
+      {
+        "code": "MIXED_VECTOR_REPRODUCIBILITY",
+        "evidence": "assessReproducibility repeats the all-results rawValue pooling and maps coefficient of variation to a 0-100 reproducibilityScore."
+      },
+      {
+        "code": "ZERO_MEAN_EQUALS_PERFECT_REPRODUCIBILITY",
+        "evidence": "if (mean == 0) return 100."
+      },
+      {
+        "code": "GRADE_PROMOTION_FROM_LEGACY_SCORE",
+        "evidence": "Industry/Academic/Scientific grade predicates require reproducibilityScore >= 70/85/95 respectively, together with category/methodology counts."
+      },
+      {
+        "code": "SCIENTIFIC_VERDICT_TEXT_DEPENDS_ON_GRADE",
+        "evidence": "Generated report emits scientific/academic/industry-grade suitability text when those booleans are true."
+      }
+    ]
+  },
+  "merged_methodology_contract": {
+    "pull_request": 1090,
+    "merge_commit": "c62630a9cab530dc0db71029c5951dbd11f4ac19",
+    "methodology_path": "docs/benchmark/INDUSTRIAL_BENCHMARK_METHODS_V1.md",
+    "statistics_path": "app/src/main/java/com/vectras/vm/benchmark/IndustrialStatistics.java",
+    "statistics_git_blob_sha": "e057e0bc23e8945df2ca45b019ef7089916f2713",
+    "test_path": "app/src/test/java/com/vectras/vm/benchmark/IndustrialStatisticsTest.java",
+    "test_git_blob_sha": "544508c6f2d8bfc71c1a50d645bf42a5a0e02d0b",
+    "invariants": [
+      "one statistical series = repeated observations of the same metric/workload/input/unit",
+      "sample standard deviation uses N-1 when n > 1",
+      "one sample does not estimate variability/confidence interval/CV",
+      "empty and negative samples fail closed",
+      "no cross-metric reproducibility API exists"
+    ]
+  },
+  "conflict_verdict": "ACTIVE_IMPLEMENTATION_CONFLICT_WITH_MERGED_METHODOLOGY",
+  "risk": {
+    "priority": "P0",
+    "reason": "The legacy UI path can synthesize high reproducibility/grade labels from unlike data-generating processes, contaminating scientific/industrial interpretation even though the corrected methodology primitive exists elsewhere in the same repository."
+  },
+  "providencia": {
+    "branch": "fix/professional-tools-homogeneous-stats-gate-20260814",
+    "draft_pr": 1095,
+    "base_sha": "21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d",
+    "guard_files": [
+      "tools/ci/validate_professional_tools_statistics_contract.py",
+      ".github/workflows/professional-statistics-contract.yml",
+      "docs/benchmark/PROFESSIONAL_TOOLS_STATISTICS_BLOCKER_V1.md"
+    ],
+    "functional_patch_status": "TOKEN_VAZIO_SAFE_FULL_FILE_PATCH",
+    "functional_patch_reason": "No safe partial source patch primitive was available in the current connector path; reconstructing a large file from truncated reads was rejected as regression-prone."
+  },
+  "guard_execution": {
+    "workflow": "Professional Statistics Contract",
+    "run_id": 31773580665,
+    "job_id": 94684288666,
+    "head_sha": "06bc1ee8fccb20c35bb8f520fdfe2f9f950a25f7",
+    "status": "completed",
+    "conclusion": "failure",
+    "runner_id": 0,
+    "steps_observed": 0,
+    "classification": "RUNNER_STARTUP_FAILURE",
+    "logical_guard_execution_observed": false,
+    "token_state": "TOKEN_VAZIO_PROFESSIONAL_STATISTICS_GUARD_EXECUTION_RECEIPT"
+  },
+  "artifact_metadata_search_coverage": {
+    "repository_total_artifacts": 204,
+    "pages_examined": [1, 2, 3],
+    "nominal_raw_vectrabenchmark_79_artifact_found": false,
+    "boundary": "This is a metadata-name search result only. It does not prove absence inside archives, repository files, Drive, conversation exports, or local devices."
+  },
+  "closure_contract": {
+    "required": [
+      "integral functional patch removes/quarantines heterogeneous pooling from reproducibility and grade",
+      "Professional Tools consumes homogeneous repeated-series evidence or refuses grade promotion",
+      "one-sample and cross-metric negative tests exist",
+      "contract guard executes PASS_LIMITED on a real runner/runtime",
+      "IndustrialStatistics tests execute with receipt",
+      "source SHA/environment/commands/stdout/stderr/exit status are preserved"
+    ],
+    "forbidden": [
+      "Do not claim grade validity from current legacy UI",
+      "Do not relabel runner_id=0 workflow failure as guard logic failure",
+      "Do not weaken the guard merely to obtain green CI"
+    ]
+  }
+}
