@@ -1,0 +1,90 @@
+{
+  "receipt_type": "OMEGA_CONTEXT_ROUTE_PILOT",
+  "receipt_id": "OMEGA-ROUTE-PILOT-PR243-20260814-0001",
+  "state": "PASS_RECONSTRUCTION_LIMITED",
+  "claim_allowed": false,
+  "entry_root": "OMEGA:SUPER_ROOT",
+  "entry_node": "GITHUB:rafaelmeloreisnovo/Mapa:PR:243",
+  "goal": "Resolve whether OPEN_DRAFT_UNMERGED historical evidence conflicts with the current state of PR 243 without erasing history or loading unrelated project context.",
+  "route_contract": "data/governance/RAFAELIA_OMEGA_SUPER_ROOT_ROUTING_OVERLAY_20260814.v1.json",
+  "minimum_context_set": [
+    {
+      "authority": "GitHub repository receipt",
+      "path": "data/evidence/hypotheses/RAFAELIA_HYPOTHESIS_REGISTRY_CKPT_0002_RECEIPT.v1.json",
+      "role": "HISTORICAL_SNAPSHOT",
+      "observed_value": "OPEN_DRAFT_UNMERGED",
+      "generated_at": "2026-08-14T08:18:00-03:00",
+      "blob_sha": "c9dde53d9154545c57ad9639559ea874db4738b9"
+    },
+    {
+      "authority": "GitHub current pull-request provider state",
+      "resource": "rafaelmeloreisnovo/Mapa#243",
+      "role": "CURRENT_STATE_AUTHORITY",
+      "observed_value": {
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "merged_at": "2026-08-14T13:11:38Z",
+        "merge_commit_sha": "a0a0e6c333493d69283d399472eb3321d6fd7ebd"
+      }
+    }
+  ],
+  "context_pages_opened": 2,
+  "mechanisms_activated": [
+    "SUPER_ROOT_CURRENT_STATE_ROUTE",
+    "HISTORICAL_RECEIPT_LOOKUP",
+    "TEMPORAL_STATE_RELATION",
+    "ATA_PRESERVATION_GATE"
+  ],
+  "mechanisms_not_activated": [
+    {
+      "mechanism": "SEMANTICA_DINAMICA_FULL_PAGE",
+      "reason": "No marginal evidence required for this bounded state-transition goal"
+    },
+    {
+      "mechanism": "PROCEDURE_LEDGER_FULL_PAGE",
+      "reason": "No procedure execution is required to resolve current-vs-historical PR state"
+    },
+    {
+      "mechanism": "HYPOTHESIS_REGISTRY_FULL_CORPUS",
+      "reason": "The historical receipt already contains the required prior observation"
+    },
+    {
+      "mechanism": "DRIVE_FULL_HISTORY",
+      "reason": "GitHub historical receipt plus current provider state are sufficient for the requested relation"
+    }
+  ],
+  "contradiction": {
+    "detected": true,
+    "surface_form": "OPEN_DRAFT_UNMERGED versus closed+merged",
+    "classification": "TEMPORAL_STATE_DIFFERENCE_NOT_LOGICAL_CONTRADICTION",
+    "resolution_relation": "CURRENT_STATE_OF_AND_SUPERSEDES_WITHOUT_ERASING",
+    "historical_snapshot_rewritten": false
+  },
+  "validation": {
+    "PRESERVE_ATA": "PASS",
+    "TRACE_DELTA": "PASS",
+    "NO_FALSE_PROMOTION": "PASS",
+    "TYPE_GAPS": "PASS_NOT_APPLICABLE_TO_RESOLVED_STATE",
+    "RECONSTRUCTIBLE_CONTEXT": "PASS"
+  },
+  "stop_condition": {
+    "satisfied": true,
+    "reason": "Current provider state is authoritative for current status, historical receipt is sufficient to establish predecessor state, and opening additional project history would not change this decision."
+  },
+  "decision": {
+    "historical_state": "VALID_AT_CAPTURE_TIME",
+    "current_state": "MERGED_CURRENT_PROVIDER_STATE",
+    "relation": "CURRENT_STATE_OF_AND_SUPERSEDES_WITHOUT_ERASING",
+    "current_status_decisions_must_use": "CURRENT_GITHUB_PROVIDER_STATE"
+  },
+  "f_ok": [
+    "Current state resolved with two context pages",
+    "Historical ATA preserved byte-for-byte",
+    "No unrelated semantic/procedure/history pages were required",
+    "Temporal difference was resolved without deleting evidence"
+  ],
+  "f_gap": [],
+  "f_next": "NO_MORE_CONTEXT_REQUIRED_FOR_THIS_GOAL",
+  "global_boundary": "This pilot validates only the bounded PR243 reconstruction route; it does not prove global SUPER_ROOT coverage or universal-node migration."
+}
