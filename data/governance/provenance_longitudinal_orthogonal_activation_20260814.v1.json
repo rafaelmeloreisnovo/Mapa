@@ -1,0 +1,82 @@
+{
+  "schema": "RAFAELIA_APPEND_ONLY_ACTIVATION_RECEIPT/V1",
+  "receipt_id": "RECEIPT-OMEGA-MEM-ACT-20260814-0001",
+  "checkpoint_id": "OMEGA-MEM-ACT-20260814-0001",
+  "observed_at": "2026-08-14T06:20:23-03:00",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "append_only": true,
+  "source": {
+    "batch_id": "OMEGA-UNIFIED-INGEST-20260813",
+    "manifest_sha256": "47839c21b92f4e2de6580f434db2b5e5badfde66702261397c02027c8a08227b",
+    "dossier_sha256": "1fd143a26246cd30e576d80bee6756e67cf01b78498113ef10cf8d6287764839"
+  },
+  "outputs": [
+    {
+      "name": "RAFAELIA_LONGITUDINAL_ORTHOGONAL_MEMORY_ACTIVATION_V1.md",
+      "bytes": 9442,
+      "sha256": "bff5ccaefb647a1f3f347b923543e14574d6b87c903d4802de309e9ab81c655e",
+      "role": "human_navigation_checkpoint"
+    },
+    {
+      "name": "RAFAELIA_LONGITUDINAL_ORTHOGONAL_INDEX_20260814.v1.json",
+      "bytes": 13867,
+      "sha256": "01e1cfbd9847438522e4cde49ad93fa786d0f464aefc80006cdd267860f6a380",
+      "role": "machine_readable_orthogonal_index"
+    }
+  ],
+  "validations": [
+    {
+      "id": "VAL-JSON-SYNTAX",
+      "command_class": "jq empty",
+      "target": "RAFAELIA_LONGITUDINAL_ORTHOGONAL_INDEX_20260814.v1.json",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "VAL-HASH-OUTPUTS",
+      "command_class": "sha256sum",
+      "targets": 2,
+      "result": "PASS"
+    }
+  ],
+  "canonical_reads": [
+    {
+      "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "path": "memory_bridge/contracts/PERMANENT_MEMORY_INVARIANT_V1.md",
+      "blob_sha": "123502da6d8a4fa4a5ea7551a42f2c585e855426"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "path": "memory_bridge/indexes/PERMANENT_MEMORY_INDEX.md",
+      "blob_sha": "9113b565c9efe58c65cbb2d4702c1a1b60fb82d1"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "path": "memory_bridge/contracts/OMEGA_ACTIVATE_POLICY_V1.md",
+      "blob_sha": "be1737cfb31bd0f597180e27ee7e1966d5879e65"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "docs/OMEGA_ACTIVATE_ROUTING_V1.md",
+      "blob_sha": "cafc4ccb8189c15a544e7b72f1c20717c5e845b5"
+    }
+  ],
+  "mutation_status": {
+    "local": "MATERIALIZED",
+    "library": "PENDING",
+    "drive": "PENDING",
+    "github": "PENDING"
+  },
+  "F_ok": [
+    "predecessor manifest bound by SHA-256",
+    "two output artifacts materialized",
+    "machine index syntax validated",
+    "output hashes recorded"
+  ],
+  "F_gap": [
+    "external persistence and readback pending",
+    "physical Termux probes remain TOKEN_VAZIO"
+  ],
+  "F_next": "persist outputs, bind returned identifiers, verify readback, then issue a successor receipt rather than rewriting this one"
+}
