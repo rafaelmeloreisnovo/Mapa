@@ -1,0 +1,113 @@
+{
+  "schema": "rafaelia.evidence.coexistence-math-audit.v1",
+  "date": "2026-08-14",
+  "state": "VERIFIED_LIMITED_LOCAL",
+  "environment": {
+    "class": "CONTAINER_REFERENCE",
+    "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+    "not_user_termux_device": true
+  },
+  "claim_allowed": false,
+  "source_sha256": {
+    "raf_coexist_quintic.c": "6b5eda0d15c3759c6a203bb78c82c0995c545eea21bbc8112aed28fc4bdda699",
+    "raf_coexist_mixed.c": "bbd4fc708c77a299f496deb37bf1af4993f881b522e5f792220a430c8775eb52",
+    "raf_coexist_mixed_pipelines.c": "d6ab8c0d4ac433b1e835f6c3e525f48ed42049a7ec52ef41724cc3bdd4f9e5e2",
+    "raf_coexist_v2.c": "46891f4551974f5605d283a01d2ea19160a7ca63c2b12a86c027b8fbb437e4cb",
+    "aether_hybrid_core.py": "94888889767b1dc62798baf900f83ab55704785696c5dc1576ec05fcb9fd2158",
+    "aether_hybrid_web.py": "45fdaea1dae1969466597596942fb36029658204692afe00f2cb069849ae6bbf"
+  },
+  "runs": {
+    "quintic": {
+      "compile": "PASS_C11",
+      "nodes": 10000,
+      "newton_iterations": 127155,
+      "mean_iterations_per_node": 12.716,
+      "crc_failures": 0,
+      "genesis_seconds": 0.005308,
+      "solve_seconds": 0.000640,
+      "throughput_note": "reported nodes/s and ops_eq/s are program-defined benchmark outputs; ops_eq/s is not FLOP/s"
+    },
+    "mixed": {
+      "compile_c11_strict": "FAIL",
+      "compile_c11_error": "M_PI undeclared in build_problem_for_node",
+      "compile_gnu11": "PASS",
+      "nodes": 10000,
+      "newton_iterations": 129324,
+      "mean_iterations_per_node": 12.932,
+      "converged": 8972,
+      "convergence_percent": 89.72,
+      "per_type_convergence_percent": {
+        "POLY2": 69.54,
+        "POLY3": 94.32,
+        "POLY4": 79.85,
+        "POLY5": 91.84,
+        "POLY6": 82.32,
+        "TRIG1": 100.0,
+        "TRIG2": 100.0,
+        "TRIG3": 100.0
+      }
+    },
+    "mixed_pipelines": {
+      "compile_gnu11": "PASS",
+      "nodes": 1000000,
+      "genesis_seconds": 0.968865,
+      "solve_seconds": 0.062551,
+      "genesis_newton_iterations": 13024575,
+      "mean_iterations_per_node": 13.025,
+      "converged": 896547,
+      "convergence_percent": 89.65,
+      "hard_nodes": 129444,
+      "pipeline_A": {
+        "semantics": "reprocess same hard problems",
+        "iterations": 5009774,
+        "mean_iterations_per_node": 38.702,
+        "converged": 25991,
+        "convergence_percent": 20.08,
+        "mean_abs_final_residual": 1.631810e27
+      },
+      "pipeline_B": {
+        "semantics": "reprocess hard-node slots with newly randomized variables/problem instances",
+        "iterations": 2070272,
+        "mean_iterations_per_node": 15.994,
+        "converged": 103621,
+        "convergence_percent": 80.05,
+        "mean_abs_final_residual": 4.469769e22,
+        "claim_guard": "must not be described as solving 80.05% of the original hard instances"
+      },
+      "derived_reference_metric": {
+        "newton_iterations_per_second_over_genesis_plus_scan": 12627858.21,
+        "status": "single-run derived metric; not a robust benchmark"
+      }
+    },
+    "v2": {
+      "compile_gnu11": "PASS",
+      "nodes": 10000,
+      "crc_failures": 0,
+      "observed_algorithmic_scope": "linear scan over pre-built node chain and pre-populated solution_cache",
+      "blocked_claim": "general transformation of N^N complexity into O(N) is not demonstrated by this run/code path"
+    },
+    "aether_iron_blake": {
+      "input_utf8": "RAFAELIA",
+      "bytes": 8,
+      "IRON_SHA256": "301bd0e87b5e6dd49852cfb5359feb5866ed2c68dc92f93c3524031f5fffcf9b",
+      "sha256sum_independent": "301bd0e87b5e6dd49852cfb5359feb5866ed2c68dc92f93c3524031f5fffcf9b",
+      "iron_matches_sha256sum": true,
+      "AETHER_PY_256": "34c9a81a8aa628fc2e2ed0431b87b3a36ceb2603f8168d7672f36e2c57b618fe",
+      "BLAKE2B_256": "dba0ade53fd388293bf46db04b428228eeba7dc6a335f22dc7c7e4946049a076",
+      "aether_crypto_claim": false
+    }
+  },
+  "invariants": [
+    "execution != universal performance claim",
+    "ops_eq_per_s != FLOP_per_s",
+    "pipeline_B_new_instances != solved_original_hard_instances",
+    "label_name != solution_of_named_scientific_problem",
+    "local_container_evidence != physical_android_termux_evidence"
+  ],
+  "token_vazio": [
+    "repeat-run median/p95 benchmark",
+    "independent environment replication",
+    "Termux ARM32/ARM64 reproduction of this exact source set",
+    "formal convergence analysis of generated problem distributions"
+  ]
+}
