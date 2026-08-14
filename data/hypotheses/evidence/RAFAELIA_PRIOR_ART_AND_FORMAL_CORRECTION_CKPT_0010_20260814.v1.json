@@ -1,0 +1,94 @@
+{
+  "schema":"RAFAELIA_PRIOR_ART_AND_FORMAL_CORRECTION_V1",
+  "checkpoint":"HYP_CKPT_0010",
+  "date":"2026-08-14",
+  "claim_allowed":false,
+  "scope":"HYP-059..067",
+  "rules":["close only bounded proposition status, not patentability","external conceptual overlap != exact duplicate","origin != novelty","negative evidence is preserved","M0-M4 used only where mathematically meaningful"],
+  "reference_runtime":{"environment":"OpenAI reference Python / Decimal and float probes","repository_byte_execution":false,"physical_device":false,"independent_replication":false},
+  "records":[
+    {
+      "hypothesis_id":"HYP-MATH-TTT-LATTICE-REP-059",
+      "decision":"M0_M1_STANDARD_REPRESENTATION_DISTINCTION",
+      "reason":"If p/q and p'/q' are equal rationals but (p,q)!=(p',q') as integer-lattice vectors, position/norm dependent operations can differ. As stated this follows from changing the mathematical object/representation; a nontrivial theorem requires a precisely defined quotient/embedding and operator class.",
+      "novelty_gate":"BLOCKED_NO_NONTRIVIAL_THEOREM_YET",
+      "repair":"State the exact maps S and P and prove a noncommutation theorem with hypotheses stronger than vector inequality.",
+      "close_prior_art":"Representation/encoding dependence is an established formal topic; see Lim & Ziegler, Quantitative Coding and Complexity Theory of Continuous Data, arXiv:2002.04005."
+    },
+    {
+      "hypothesis_id":"HYP-MATH-TTT-RAFAELIAN-SPIRAL-060",
+      "decision":"M1_DERIVED_FIBONACCI_MULTIPLICATIVE_FAMILY",
+      "formal_result":"For c=sqrt(3)/2 and R_n=c^(F_n), Fibonacci recurrence gives R_(n+1)=R_n*R_(n-1) and R_(n+1)/R_n=R_(n-1).",
+      "reference_probe":{"script":"scripts/falsification/hyp060_multiplicative_fibonacci_identity.py","status":"PASS_REFERENCE_LOGIC","max_decimal_identity_error_observed":"2E-81","highest_F_tested":1597},
+      "novelty_gate":"M2_REQUIRES_PROPERTY_NOT_IMMEDIATE_FROM_FIBONACCI_PLUS_EXPONENTIATION",
+      "repair":"Search for and prove a genuinely non-derived invariant; quasicrystal analogy is not evidence by itself."
+    },
+    {
+      "hypothesis_id":"HYP-COMP-TTT-GRAMMAR-VISCOSITY-061",
+      "decision":"EMPIRICAL_METRIC_VARIANT_HIGH_PRIOR_ART_OVERLAP",
+      "reason":"Typological/language distances, cross-lingual embedding alignment and their relationship to transfer performance are already active research areas. The authorial term/metric can remain testable, but novelty requires incremental predictive value and directional asymmetry beyond existing distances/alignment measures.",
+      "primary_comparators":[
+        "https://aclanthology.org/2023.sigtyp-1.3/",
+        "https://aclanthology.org/2020.tacl-1.24/",
+        "https://aclanthology.org/2021.acl-long.560/",
+        "https://aclanthology.org/2026.eacl-srw.8/"
+      ],
+      "novelty_gate":"OPEN_ONLY_FOR_SPECIFIC_DIRECTIONAL_METRIC_PLUS_INCREMENTAL_VALIDATION"
+    },
+    {
+      "hypothesis_id":"HYP-MATH-TTT-SEMTRANS-SUBGRAPH-062",
+      "decision":"FORMAL_REDUCTION_REQUIRED_CORE_COMPONENTS_KNOWN",
+      "correction":"Subgraph isomorphism is a classical hard graph-matching problem; semantic graph representations and graph-based machine translation are also established. Complexity of the proposed translation problem does not follow until the language-to-graph mapping, reduction direction, decision/search problem and verification input are fixed.",
+      "primary_comparators":[
+        "https://doi.org/10.1145/321921.321925",
+        "https://aclanthology.org/2023.iwcs-1.28/",
+        "https://aclanthology.org/2022.dlg4nlp-1.2/",
+        "https://aclanthology.org/N18-2078/"
+      ],
+      "scope_guard":"If an explicit node mapping is supplied, checking preservation is polynomial; if correspondence must be found, the matching problem is different. Do not claim a complexity class until input specification is formalized.",
+      "novelty_gate":"BLOCKED_PENDING_FORMAL_REDUCTION_AND_DIFFERENTIATION"
+    },
+    {
+      "hypothesis_id":"HYP-MATH-TTT-RECURSIVE-MEMORY-063",
+      "decision":"UNIQUENESS_REFUTED_AS_STATED_REPAIRABLE",
+      "counterexample":"s_(t+1)=(1-alpha^2)s_t+alpha*x_t for 0<alpha<1 is first-order, linear, one-parameter, stable in the state coefficient, persistent and input-sensitive, but is not the claimed EMA rule.",
+      "reference_probe":{"script":"scripts/falsification/hyp063_uniqueness_counterexample.py","status":"PASS_COUNTEREXAMPLE","alphas":[0.1,0.25,0.5,0.75,0.9]},
+      "repair":"Add a formal constant-input fixed-point/fidelity axiom and define equivalence under parameter reparameterization. Then prove the narrower characterization theorem rather than absolute uniqueness.",
+      "novelty_gate":"CLOSED_NEGATIVE_FOR_CURRENT_UNIQUENESS_WORDING"
+    },
+    {
+      "hypothesis_id":"HYP-COMP-TTT-SEMANTIC-ATTRACTOR-064",
+      "decision":"CORE_SEMANTIC_ATTRACTOR_PRIOR_ART_HIGH_SPECIFIC_BASIN_PROXY_OPEN",
+      "reason":"Concept/semantic representations as attractor states have decades of neural-network prior art. A multilingual perturbation basin-size proxy may still be a specific empirical construction, but the core attractor interpretation is not novel by itself.",
+      "primary_comparators":[
+        "https://doi.org/10.1207/s15516709cog2303_4",
+        "https://doi.org/10.1038/s41598-018-28865-1"
+      ],
+      "novelty_gate":"OPEN_ONLY_FOR_PRECISE_MULTILINGUAL_BASIN_METRIC_AND_EMPIRICAL_RESULT"
+    },
+    {
+      "hypothesis_id":"HYP-EMP-TTT-ENACTIVE-GRAMMAR-065",
+      "decision":"EMPIRICAL_VARIANT_PRIOR_NEUROPHYSIOLOGY_EXISTS",
+      "reason":"Morphosyntactic/language-processing differences already produce measurable EEG/ERP differences in primary studies. The proposed combined grammar->HRV/EEG/GSR cross-language design remains a testable experimental extension, not a new general principle by default.",
+      "primary_comparators":["https://pubmed.ncbi.nlm.nih.gov/36099744/"],
+      "novelty_gate":"OPEN_FOR_SPECIFIC_MULTIMODAL_PREREGISTERED_EFFECT_ONLY"
+    },
+    {
+      "hypothesis_id":"HYP-METH-TTT-SEMANTIC-SYNTROPY-066",
+      "decision":"METRIC_CANDIDATE_HIGH_OVERLAP_WITH_SEMANTIC_INFORMATION_METRICS",
+      "reason":"Semantic entropy and information-emergence metrics already quantify meaning-aware uncertainty/semantic organization. Naming a metric syntropy is insufficient; it must be mathematically defined and add preregistered information beyond these baselines.",
+      "primary_comparators":["https://arxiv.org/abs/2302.09664","https://arxiv.org/abs/2405.12617"],
+      "scope_guard":"No thermodynamic equivalence is allowed without physical variables, units and model.",
+      "novelty_gate":"OPEN_ONLY_FOR_DEFINED_INCREMENTAL_METRIC"
+    },
+    {
+      "hypothesis_id":"HYP-MATH-TTT-REPRESENTATION-COMPLEXITY-067",
+      "decision":"GENERAL_PRINCIPLE_HIGH_PRIOR_ART_SPECIFIC_APPLICATION_OPEN",
+      "reason":"Computability/complexity can depend strongly on representations/encodings, especially for continuous data; this is established theory. A specific engineering theorem or counterexample can still be an application contribution.",
+      "primary_comparators":["https://arxiv.org/abs/2002.04005"],
+      "novelty_gate":"GENERAL_CLAIM_NOT_NOVEL_SPECIFIC_FORMAL_APPLICATION_MAY_REMAIN_OPEN"
+    }
+  ],
+  "summary":{"mathematical_current_negative_closures":["059 no nontrivial theorem yet","060 M1 derived structure","063 uniqueness refuted as stated"],"high_prior_art_overlap":["061","062","064","065","066","067"],"M3":0,"M4":0,"global_novelty_proven":0},
+  "next":"dedup these decisions into index V10 and issue bounded terminality certificate; do not certify global source exhaustion"
+}
