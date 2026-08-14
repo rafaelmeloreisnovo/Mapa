@@ -1,0 +1,95 @@
+{
+  "schema": "rafaelia.omega-universal-registry.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-08-14T12:59:00-03:00",
+  "state": "VERIFIED_LIMITED_NONTERMINAL",
+  "claim_allowed": false,
+  "node_contract": {
+    "required": ["omega_id", "display_name", "node_type", "identity", "state", "relations", "gaps", "recovery_routes"],
+    "identity_rule": "identity != name != physical_location",
+    "currentness_rule": "HISTORICAL_STATE != CURRENT_PROVIDER_STATE",
+    "gap_rule": "absence_or_insufficient_evidence => typed TOKEN_VAZIO + next_gate"
+  },
+  "nodes": [
+    {
+      "omega_id": "OMEGA-NODE-SUPER-ROOT-V1",
+      "display_name": "RAFAELIA Omega Super Root V1",
+      "node_type": "ROOT",
+      "identity": {"system": "GITHUB", "locator": "rafaelmeloreisnovo/Mapa:data/knowledge/RAFAELIA_OMEGA_SUPER_ROOT.v1.json", "observation_state": "MATERIALIZED_ON_BRANCH"},
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "currentness": "CURRENT_BOUNDED", "claim_allowed": false},
+      "relations": [{"type": "MOUNTS", "target_id": "OMEGA-NODE-MAPA-MAIN"}, {"type": "MOUNTS", "target_id": "OMEGA-NODE-DRIVE-MASTER-NAV"}, {"type": "MOUNTS", "target_id": "OMEGA-NODE-NOVOEXPORT"}],
+      "gaps": [{"token": "TOKEN_VAZIO_GLOBAL_TERMINALITY", "reason": "V1 is a routing root, not proof of exhaustive global coverage.", "next_gate": "expand mounts only through evidenced deltas and later produce a terminal coverage receipt"}],
+      "recovery_routes": ["OMEGA-ROUTE-BOOTSTRAP", "OMEGA-ROUTE-HYPOTHESIS", "OMEGA-ROUTE-NOVOEXPORT-READONLY", "OMEGA-ROUTE-STATE-RECONCILIATION"]
+    },
+    {
+      "omega_id": "OMEGA-NODE-MAPA-MAIN",
+      "display_name": "Mapa current main",
+      "node_type": "REPOSITORY",
+      "identity": {"system": "GITHUB", "locator": "rafaelmeloreisnovo/Mapa@main", "commit_sha": "a0871ca1f0771eae46c35d496d2f23339c550f7b", "observation_state": "VERIFIED_CURRENT"},
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "currentness": "CURRENT_PROVIDER_STATE", "claim_allowed": false},
+      "relations": [{"type": "INDEXES", "target_id": "OMEGA-NODE-HYP-INDEX-V8"}],
+      "gaps": [],
+      "recovery_routes": ["OMEGA-ROUTE-BOOTSTRAP", "OMEGA-ROUTE-HYPOTHESIS", "OMEGA-ROUTE-STATE-RECONCILIATION"]
+    },
+    {
+      "omega_id": "OMEGA-NODE-DRIVE-MASTER-NAV",
+      "display_name": "Drive Master Navigation Registry V1",
+      "node_type": "INDEX",
+      "identity": {"system": "GOOGLE_DRIVE", "locator": "drive:file:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y", "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y", "observation_state": "VERIFIED_PROVIDER"},
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "currentness": "CURRENT_BOUNDED", "claim_allowed": false},
+      "relations": [{"type": "ROUTES_TO", "target_id": "OMEGA-NODE-HYP-INDEX-V8"}, {"type": "ROUTES_TO", "target_id": "OMEGA-NODE-TRACEABILITY"}],
+      "gaps": [{"token": "TOKEN_VAZIO_GLOBAL_TERMINALITY", "reason": "An index is not a certificate that every source is covered.", "next_gate": "materialize terminal coverage matrix before any global completeness claim"}],
+      "recovery_routes": ["OMEGA-ROUTE-BOOTSTRAP", "OMEGA-ROUTE-HYPOTHESIS"]
+    },
+    {
+      "omega_id": "OMEGA-NODE-HYP-INDEX-V8",
+      "display_name": "GitHub Hypothesis Index V8",
+      "node_type": "INDEX",
+      "identity": {"system": "GITHUB", "locator": "rafaelmeloreisnovo/Mapa:indices/RAFAELIA_HYPOTHESIS_INDEX_V8.md", "blob_sha": "338889efb8ce253a4983a3a75a36c9d83a2c61ab", "observation_state": "VERIFIED_CURRENT"},
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "currentness": "CURRENT_PROVIDER_STATE", "claim_allowed": false},
+      "relations": [{"type": "HAS_GAP", "target_id": "TOKEN_VAZIO_GLOBAL_HYPOTHESIS_TOTAL"}],
+      "gaps": [{"token": "TOKEN_VAZIO_GLOBAL_HYPOTHESIS_TOTAL", "reason": "The represented frontier is explicitly nonterminal.", "next_gate": "continue coverage, origin migration, deduplication, evidence linkage and terminality"}],
+      "recovery_routes": ["OMEGA-ROUTE-HYPOTHESIS"]
+    },
+    {
+      "omega_id": "OMEGA-NODE-TRACEABILITY",
+      "display_name": "Drive Traceability Matrix",
+      "node_type": "INDEX",
+      "identity": {"system": "GOOGLE_DRIVE", "locator": "drive:file:1FMuZ-WVvuI7qbQJ8E5LjfHOKShI83VMsJfGB2zyWHgE", "provider_id": "1FMuZ-WVvuI7qbQJ8E5LjfHOKShI83VMsJfGB2zyWHgE", "observation_state": "VERIFIED_PROVIDER"},
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "currentness": "CURRENT_BOUNDED", "claim_allowed": false},
+      "relations": [{"type": "SUPPORTS", "target_id": "OMEGA-NODE-SUPER-ROOT-V1"}],
+      "gaps": [{"token": "TOKEN_VAZIO_RUNTIME", "reason": "Several procedure-ledger actions remain design-ready or implementable but not physically executed.", "next_gate": "execute only dependency-ready read-only procedures and attach receipts"}],
+      "recovery_routes": ["OMEGA-ROUTE-BOOTSTRAP", "OMEGA-ROUTE-STATE-RECONCILIATION"]
+    },
+    {
+      "omega_id": "OMEGA-NODE-NOVOEXPORT",
+      "display_name": "NOVOexport raw source",
+      "node_type": "FOLDER",
+      "identity": {"system": "GOOGLE_DRIVE", "locator": "drive:folder:1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv", "provider_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv", "observation_state": "VERIFIED_PROVIDER"},
+      "state": {"epistemic_status": "DOCUMENTED", "currentness": "CURRENT_BOUNDED", "claim_allowed": false},
+      "relations": [{"type": "HAS_GAP", "target_id": "TOKEN_VAZIO_NOVOEXPORT_FULL_INVENTORY"}],
+      "gaps": [{"token": "TOKEN_VAZIO_NOVOEXPORT_FULL_INVENTORY", "reason": "Folder existence is verified; recursive inventory, aggregate bytes and full hash coverage are not established here.", "next_gate": "perform bounded read-only source catalog before parsing or transformation"}],
+      "recovery_routes": ["OMEGA-ROUTE-NOVOEXPORT-READONLY"]
+    },
+    {
+      "omega_id": "OMEGA-NODE-PR243-CURRENT",
+      "display_name": "Mapa PR 243 current provider state",
+      "node_type": "ARTIFACT",
+      "identity": {"system": "GITHUB", "locator": "github:rafaelmeloreisnovo/Mapa/pull/243", "merge_commit_sha": "a0a0e6c333493d69283d399472eb3321d6fd7ebd", "observation_state": "VERIFIED_CURRENT"},
+      "state": {"epistemic_status": "VERIFIED_LIMITED", "currentness": "CURRENT_PROVIDER_STATE", "claim_allowed": false, "provider_state": "closed", "merged": true, "draft": false},
+      "relations": [{"type": "SUPERSEDES_WITHOUT_ERASING", "target_id": "OMEGA-NODE-PR243-HISTORICAL"}],
+      "gaps": [],
+      "recovery_routes": ["OMEGA-ROUTE-STATE-RECONCILIATION"]
+    },
+    {
+      "omega_id": "OMEGA-NODE-PR243-HISTORICAL",
+      "display_name": "PR 243 historical Drive snapshot",
+      "node_type": "ARTIFACT",
+      "identity": {"system": "GOOGLE_DRIVE", "locator": "drive:file:1-7qZzlykhfoJFdkO4tCTPhaq0JScXrjiF1rihb3JU2U#historical-pr243-state", "provider_id": "1-7qZzlykhfoJFdkO4tCTPhaq0JScXrjiF1rihb3JU2U", "observation_state": "HISTORICAL_SNAPSHOT"},
+      "state": {"epistemic_status": "DOCUMENTED", "currentness": "HISTORICAL", "claim_allowed": false, "recorded_state": "draft / not merged"},
+      "relations": [{"type": "REFERENCES_CURRENT", "target_id": "OMEGA-NODE-PR243-CURRENT"}],
+      "gaps": [],
+      "recovery_routes": ["OMEGA-ROUTE-STATE-RECONCILIATION"]
+    }
+  ]
+}
