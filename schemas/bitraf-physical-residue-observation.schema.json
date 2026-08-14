@@ -1,0 +1,41 @@
+{
+  "$id": "urn:rafaelia:schema:bitraf-physical-residue-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RAFAELIA BITRAF Physical Execution Residue Observation v1",
+  "description": "Multichannel physical observation for authorized-lab path/state inference. MEMORILIQUE is an author alias; it is not a software memory-leak claim.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rafaelia.bitraf-physical-residue-observation/v1"},
+    "observation_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "role": {"enum": ["baseline", "calibration", "query"]},
+    "source_kind": {"enum": ["MEASURED", "SIMULATED", "ESTIMATED", "TOKEN_VAZIO"]},
+    "channel": {"type": "string", "minLength": 1},
+    "coord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {"type": "integer"}, "y": {"type": "integer"}, "z": {"type": "integer"},
+        "t_ns": {"type": "integer", "minimum": 0}
+      },
+      "required": ["x", "y", "z", "t_ns"]
+    },
+    "current_a": {"type": "number"},
+    "voltage_v": {"type": "number"},
+    "temperature_c": {"type": "number"},
+    "node_currents_a": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "base": {"type": ["number", "null"]},
+        "collector": {"type": ["number", "null"]},
+        "emitter": {"type": ["number", "null"]}
+      },
+      "required": ["base", "collector", "emitter"]
+    },
+    "path_label": {"type": ["string", "null"]},
+    "claim_allowed": {"const": false}
+  },
+  "required": ["schema_version","observation_id","run_id","role","source_kind","channel","coord","current_a","voltage_v","temperature_c","node_currents_a","path_label","claim_allowed"]
+}
