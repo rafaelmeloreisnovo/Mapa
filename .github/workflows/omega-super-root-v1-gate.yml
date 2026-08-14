@@ -1,0 +1,24 @@
+name: Omega Super Root V1 Gate
+
+on:
+  pull_request:
+    paths:
+      - 'data/knowledge/RAFAELIA_OMEGA_SUPER_ROOT.v1.json'
+      - 'data/knowledge/RAFAELIA_OMEGA_UNIVERSAL_REGISTRY.v1.json'
+      - 'data/knowledge/RAFAELIA_CONTEXT_ROUTES.v1.json'
+      - 'data/governance/RAFAELIA_PR243_STATE_DELTA_20260814.v1.json'
+      - 'scripts/validate_omega_super_root_v1.py'
+      - '.github/workflows/omega-super-root-v1-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Omega Super Root V1
+        run: python3 scripts/validate_omega_super_root_v1.py .
