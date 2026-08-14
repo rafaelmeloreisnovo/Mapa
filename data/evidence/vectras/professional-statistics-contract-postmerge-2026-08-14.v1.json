@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "RECEIPT-VECTRAS-PROFESSIONAL-STATS-POSTMERGE-20260814-001",
+  "observed_at": "2026-08-14T07:43:00Z",
+  "subject": {
+    "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "merge_pr": 1095,
+    "merge_sha": "af85550ac43ab9ef1aed5a1ff508229d5c79b0c6",
+    "issue_tracking_functional_closure": 1096,
+    "activity_path": "app/src/main/java/com/vectras/vm/tools/ProfessionalToolsActivity.java",
+    "activity_blob_sha": "76014394e07869b2dc2892ad9c73dc20b67b8707"
+  },
+  "merged_control_plane": {
+    "workflow": ".github/workflows/professional-statistics-contract.yml",
+    "validator": "tools/ci/validate_professional_tools_statistics_contract.py",
+    "blocker_document": "docs/benchmark/PROFESSIONAL_TOOLS_STATISTICS_BLOCKER_V1.md",
+    "purpose": "fail closed on heterogeneous benchmark statistics/reproducibility promotion"
+  },
+  "static_observation": {
+    "status": "P0_ACTIVE_CONFIRMED_STATIC",
+    "heterogeneous_raw_value_pooling_present": true,
+    "mixed_vector_mean_median_stddev_ci_present": true,
+    "mixed_vector_reproducibility_score_present": true,
+    "zero_mean_returns_100_percent_reproducibility": true,
+    "grade_thresholds_depend_on_reproducibility_score": {
+      "industry": 70,
+      "academic": 85,
+      "scientific": 95
+    },
+    "claim_allowed": false,
+    "interpretation": "The detector/blocker is merged, but the legacy Professional Tools functional path remains inconsistent with the homogeneous repeated-series methodology."
+  },
+  "ci_observation": {
+    "workflow_name": "Professional Statistics Contract",
+    "run_id": 31774425388,
+    "job_id": 94686825856,
+    "head_sha": "af85550ac43ab9ef1aed5a1ff508229d5c79b0c6",
+    "event": "push",
+    "run_conclusion": "failure",
+    "job_conclusion": "failure",
+    "runner_id": 0,
+    "runner_name": "",
+    "steps": [],
+    "job_log_recovered": false,
+    "classification": "CI_FAILURE_NO_EXECUTION_EVIDENCE",
+    "runner_startup_failure_pattern": true,
+    "validator_execution_proven": false,
+    "test_failure_proven": false
+  },
+  "provenance": [
+    {
+      "type": "github_merge_commit",
+      "ref": "rafaelmeloreisnovo/Vectras-VM-Android@af85550ac43ab9ef1aed5a1ff508229d5c79b0c6"
+    },
+    {
+      "type": "github_actions_run",
+      "ref": "31774425388"
+    },
+    {
+      "type": "github_actions_job",
+      "ref": "94686825856"
+    },
+    {
+      "type": "source_blob",
+      "ref": "76014394e07869b2dc2892ad9c73dc20b67b8707"
+    },
+    {
+      "type": "github_issue",
+      "ref": "rafaelmeloreisnovo/Vectras-VM-Android#1096"
+    }
+  ],
+  "token_vazio": [
+    "TOKEN_VAZIO_VALIDATOR_EXECUTION_RECEIPT",
+    "TOKEN_VAZIO_INDUSTRIAL_STATISTICS_TEST_EXECUTION_RECEIPT",
+    "TOKEN_VAZIO_HOMOGENEOUS_SERIES_UI_IMPLEMENTATION",
+    "TOKEN_VAZIO_REAL_RUNNER_POSTFIX_PASS",
+    "TOKEN_VAZIO_RUNTIME_REPRODUCIBILITY_RECEIPT"
+  ],
+  "closure_contract": {
+    "heterogeneous_pooling_removed": false,
+    "one_sample_reproducibility_blocked": false,
+    "all_zero_reproducibility_promotion_blocked": false,
+    "homogeneous_series_identity_enforced": false,
+    "industrial_statistics_integrated_into_ui": false,
+    "unit_tests_executed_and_passed": false,
+    "contract_workflow_executed_and_passed": false,
+    "runtime_receipt_complete": false
+  },
+  "next_verifiable_step": "Implement the functional ProfessionalToolsActivity transition to homogeneous repeated-series evidence without reconstructing/truncating the large source file, then execute unit and contract gates on a real runner/runtime.",
+  "claim_allowed": false
+}
