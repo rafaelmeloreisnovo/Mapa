@@ -1,0 +1,339 @@
+{
+  "schema": "RAFAELIA_GAP_PRIORITY_CONTRACT_V1",
+  "ledger_id": "GAP-LEDGER-PERFORMANCE-METRIC-20260814-V1",
+  "created_at": "2026-08-14T02:10:00-03:00",
+  "scope": "Performance Metric Observatory / Vectras benchmark recovery / MetricObservationV1 / historical conversation shards / CI execution receipts",
+  "invariants": [
+    "IDEA != IMPLEMENTATION != EXECUTION != EVIDENCE != CLAIM",
+    "MEMORY != PROOF",
+    "INDEX != CONTENT",
+    "NUMBER_FOUND != MEASUREMENT != REPRODUCIBLE_MEASUREMENT != GENERAL_CLAIM",
+    "TOKEN_VAZIO is preserved and auditable; it is never silently filled",
+    "APPEND_ONLY: historical and conflicting states are not overwritten",
+    "claim_allowed=false until the applicable evidence contract is satisfied",
+    "negative evidence closes only the proposition actually tested",
+    "urgency and importance do not authorize evidence promotion"
+  ],
+  "priority_model": {
+    "scalar_score_forbidden": true,
+    "priority_classes": ["P0", "P1", "P2", "P3"],
+    "vector_dimensions": [
+      "urgency",
+      "importance",
+      "uncertainty",
+      "provenance_completeness",
+      "evidence_strength",
+      "dependency_centrality",
+      "closure_verifiability",
+      "regression_risk"
+    ]
+  },
+  "gaps": [
+    {
+      "gap_id": "GAP-PMO-001",
+      "title": "Recover current-access content identity and bytes for conversations-048/049/050",
+      "status": "PARTIAL",
+      "priority": "P0",
+      "token_state": "TOKEN_VAZIO_RAW_CONTENT_048_049_050_CURRENT_ACCESS",
+      "why_it_matters": "The export manifest proves that the three shards exist and fixes their ordinals, sizes and parent lineage, but the manifest source_id is not the individual Drive file ID. Treating manifest identity as raw-shard identity would corrupt provenance and can contaminate every downstream historical metric extraction.",
+      "vector": {
+        "urgency": "HIGH",
+        "importance": "CRITICAL",
+        "uncertainty": "MEDIUM",
+        "provenance_completeness": "PARTIAL",
+        "evidence_strength": "OBSERVED",
+        "dependency_centrality": "HIGH",
+        "closure_verifiability": "HIGH",
+        "regression_risk": "HIGH"
+      },
+      "contribution_vector": [
+        {"target": "PROVENANCE", "direction": "INCREASE", "mechanism": "Bind each shard to its real provider object instead of inheriting export_manifest identity."},
+        {"target": "TRACEABILITY", "direction": "INCREASE", "mechanism": "Permit message-level metrics to point back to exact shard bytes."},
+        {"target": "UNCERTAINTY", "direction": "REDUCE", "mechanism": "Replace current-access ambiguity with verified file identity plus hash."},
+        {"target": "ANTI_REGRESSION", "direction": "INCREASE", "mechanism": "Prevent later extraction code from collapsing manifest lineage and raw-object lineage."}
+      ],
+      "provenance_refs": [
+        {"kind": "DRIVE_FILE", "id": "13xMqjbn1O5nc1Q3gC3ZjnUdLLW5qneWk", "locator": "export_manifest.json", "sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a"},
+        {"kind": "DRIVE_FOLDER", "id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv", "locator": "NOVOexport parent lineage", "sha256": null},
+        {"kind": "MANIFEST_ENTRY", "id": "ordinal-72", "locator": "conversations-048.json; size_bytes=36771626", "sha256": null},
+        {"kind": "MANIFEST_ENTRY", "id": "ordinal-73", "locator": "conversations-049.json; size_bytes=47806754", "sha256": null},
+        {"kind": "MANIFEST_ENTRY", "id": "ordinal-74", "locator": "conversations-050.json; size_bytes=17115060", "sha256": null}
+      ],
+      "closure_contract": {
+        "closure_condition": "All three shards have independently verified provider object IDs or an equivalent exact byte-access route, with bytes/hash and manifest lineage joined without identity substitution.",
+        "required_evidence": [
+          "Exact provider identity or byte-access locator for conversations-048.json",
+          "Exact provider identity or byte-access locator for conversations-049.json",
+          "Exact provider identity or byte-access locator for conversations-050.json",
+          "SHA-256 or equivalent immutable content digest for each recovered shard",
+          "Receipt proving name/size/parent/bytes relation"
+        ],
+        "forbidden_promotion": "Do not label any metric extracted from 048-050 as raw-bound or reproducible while the exact shard bytes/object identity remain unresolved.",
+        "providencia": "Continue through derived MESSAGES/NODES and Drive parent pagination/search until exact objects or equivalent byte-level derivatives are located; preserve negative search receipts.",
+        "next_verifiable_step": "Resolve one of 048/049/050 to an exact provider object or exact derived byte span and record its hash before scaling to the other two."
+      },
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-PMO-002",
+      "title": "Recover a raw VectraBenchmark 79-slot execution export",
+      "status": "OPEN",
+      "priority": "P0",
+      "token_state": "TOKEN_VAZIO_VECTRA_79_RAW_EXECUTION",
+      "why_it_matters": "The 79-slot binding and unit semantics can only become an executed measurement surface when a real CSV/JSONL/runtime export is attached to a device/build/workload context. Code capability and historical prose cannot substitute for this receipt.",
+      "vector": {
+        "urgency": "CRITICAL",
+        "importance": "CRITICAL",
+        "uncertainty": "HIGH",
+        "provenance_completeness": "LOW",
+        "evidence_strength": "DOCUMENTED",
+        "dependency_centrality": "CRITICAL",
+        "closure_verifiability": "HIGH",
+        "regression_risk": "CRITICAL"
+      },
+      "contribution_vector": [
+        {"target": "EVIDENCE_DENSITY", "direction": "INCREASE", "mechanism": "One complete 79-slot raw run can bind many currently unbound quantitative families at once."},
+        {"target": "REPRODUCIBILITY", "direction": "INCREASE", "mechanism": "Raw export plus environment permits rerun comparison rather than narrative comparison."},
+        {"target": "SEMANTIC_ALIGNMENT", "direction": "INCREASE", "mechanism": "Metric IDs, formatted units and semantic kinds remain joined at source."},
+        {"target": "OPERATIONAL_LEVERAGE", "direction": "INCREASE", "mechanism": "A single governed run advances many downstream benchmark questions simultaneously."}
+      ],
+      "provenance_refs": [
+        {"kind": "GITHUB_PR", "id": "rafaelmeloreisnovo/Mapa#235", "locator": "MetricObservationV1 stacked implementation", "sha256": null},
+        {"kind": "DRIVE_FILE", "id": "1ClcleKaG8Uam7NA4l1FF8x7A0YiFyQQwGMIRkAr-_-M", "locator": "RAFAELIA Performance Metric Observatory V1", "sha256": null}
+      ],
+      "closure_contract": {
+        "closure_condition": "At least one unmodified VectraBenchmark raw output containing metric identifiers/values/units is preserved with device, build, workload, timestamp and source revision information sufficient for deterministic ingestion.",
+        "required_evidence": [
+          "Raw CSV/JSONL/runtime output",
+          "Source revision or APK/build identity",
+          "Device/ABI/OS context",
+          "Workload/configuration context",
+          "Raw file hash",
+          "Ingestion receipt showing accepted/rejected records without silent coercion"
+        ],
+        "forbidden_promotion": "Do not promote documented targets, estimates, UI formatter outputs or historical prose to MEASURED_WITH_RECEIPT.",
+        "providencia": "Search Drive, conversation derivatives, GitHub artifacts and owned-device exports for exact benchmark payloads before scheduling unnecessary reruns.",
+        "next_verifiable_step": "Locate one raw VectraBenchmark output and run the governed ingestor against it while preserving the original bytes."
+      },
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-PMO-003",
+      "title": "Join historical metric observations to exact device/build/workload/run identity",
+      "status": "PARTIAL",
+      "priority": "P0",
+      "token_state": "TOKEN_VAZIO_HISTORICAL_RUN_CONTEXT_JOIN",
+      "why_it_matters": "Twenty historical quantitative observations have been materialized, but without a complete same-run context join a number can be genuine historical evidence while still being unsafe for cross-run or hardware comparison.",
+      "vector": {
+        "urgency": "HIGH",
+        "importance": "CRITICAL",
+        "uncertainty": "HIGH",
+        "provenance_completeness": "PARTIAL",
+        "evidence_strength": "OBSERVED",
+        "dependency_centrality": "HIGH",
+        "closure_verifiability": "MEDIUM",
+        "regression_risk": "CRITICAL"
+      },
+      "contribution_vector": [
+        {"target": "TRACEABILITY", "direction": "INCREASE", "mechanism": "Join each observation to a run identity rather than only its surrounding narrative."},
+        {"target": "UNCERTAINTY", "direction": "REDUCE", "mechanism": "Separate same-run values from later corrections, estimates and unrelated device results."},
+        {"target": "ANTI_REGRESSION", "direction": "INCREASE", "mechanism": "Supersession stays explicit instead of replacing older historical values."},
+        {"target": "CONTRACT_STRENGTH", "direction": "INCREASE", "mechanism": "Comparison is allowed only after context-equivalence fields are proven or explicitly marked different."}
+      ],
+      "provenance_refs": [
+        {"kind": "CONVERSATION_SHARD", "id": "conversations-046.json", "locator": "historical quantitative source family", "sha256": null},
+        {"kind": "CONVERSATION_SHARD", "id": "conversations-047.json", "locator": "historical quantitative source family", "sha256": null},
+        {"kind": "GITHUB_PR", "id": "rafaelmeloreisnovo/Mapa#235", "locator": "materialized historical observations", "sha256": null}
+      ],
+      "closure_contract": {
+        "closure_condition": "Each historical observation used in comparison has a run-group identifier with device/build/workload/source-message lineage and explicit supersession/dedup state.",
+        "required_evidence": [
+          "Conversation/message or derived node identifier",
+          "Run grouping evidence",
+          "Device/ABI/build context where recoverable",
+          "Workload/configuration context where recoverable",
+          "Supersession relation for corrected values",
+          "TOKEN_VAZIO retained for fields that cannot be recovered"
+        ],
+        "forbidden_promotion": "Do not infer same hardware, same build or same workload from temporal proximity or similar metric names alone.",
+        "providencia": "Mine adjacent messages and derivatives around each historical observation, joining only facts with explicit contextual support.",
+        "next_verifiable_step": "Select the highest-value historical run group and complete its context join end-to-end before bulk deduplication."
+      },
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-PMO-004",
+      "title": "Obtain an actual execution receipt for PR #235 validator and negative tests",
+      "status": "BLOCKED",
+      "priority": "P0",
+      "token_state": "TOKEN_VAZIO_METRIC_OBSERVATION_TEST_RECEIPT",
+      "why_it_matters": "The branch contains implementation and tests, but current GitHub Actions observations repeatedly show runner startup failure with zero executed steps. Treating workflow conclusion=failure as logical test failure would be false; treating code existence as tested would also be false.",
+      "vector": {
+        "urgency": "CRITICAL",
+        "importance": "CRITICAL",
+        "uncertainty": "MEDIUM",
+        "provenance_completeness": "COMPLETE",
+        "evidence_strength": "OBSERVED",
+        "dependency_centrality": "CRITICAL",
+        "closure_verifiability": "HIGH",
+        "regression_risk": "HIGH"
+      },
+      "contribution_vector": [
+        {"target": "REPRODUCIBILITY", "direction": "INCREASE", "mechanism": "Actual validator/test execution converts implementation-only state into executed evidence."},
+        {"target": "PROVENANCE", "direction": "PRESERVE", "mechanism": "Runner startup failures remain negative infrastructure evidence rather than being mislabeled as test failures."},
+        {"target": "ANTI_REGRESSION", "direction": "INCREASE", "mechanism": "No future promotion can skip the execution-receipt boundary."},
+        {"target": "UNCERTAINTY", "direction": "REDUCE", "mechanism": "A real stdout/exit/environment receipt distinguishes code defects from infrastructure defects."}
+      ],
+      "provenance_refs": [
+        {"kind": "GITHUB_PR", "id": "rafaelmeloreisnovo/Mapa#235", "locator": "head branch audit/metric-observation-v1-20260814", "sha256": null},
+        {"kind": "GITHUB_RUN", "id": "31771477902", "locator": "RAFAELIA Promotion Control V1", "sha256": null},
+        {"kind": "GITHUB_JOB", "id": "94678153934", "locator": "negative-tests; runner_id=0; steps=[]", "sha256": null}
+      ],
+      "closure_contract": {
+        "closure_condition": "Validator and unit/negative tests execute on an assigned runtime with captured exit status, stdout/stderr, environment and source SHA; all expected negative cases fail closed.",
+        "required_evidence": [
+          "runner_id or local-runtime identity non-zero/non-empty",
+          "actual executed steps",
+          "test command",
+          "exit code",
+          "stdout/stderr receipt",
+          "source commit SHA",
+          "environment/toolchain fingerprint"
+        ],
+        "forbidden_promotion": "Do not classify runner_id=0/steps=[] as a logical test failure or a successful validation.",
+        "providencia": "Do not blindly rerun the same unavailable runner. Prefer an actually assigned CI runner or a pinned owned runtime and preserve a comparable receipt.",
+        "next_verifiable_step": "Execute the validator plus negative-test suite once on a known runtime and commit the immutable receipt."
+      },
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-PMO-005",
+      "title": "Recover or reproduce a native host smoke benchmark receipt without conflating it with Android device benchmarking",
+      "status": "PARTIAL",
+      "priority": "P1",
+      "token_state": "TOKEN_VAZIO_NATIVE_HOST_SMOKE_RECEIPT",
+      "why_it_matters": "The native smoke implementation is known: 100000 run_sector calls over a deterministic 256-byte buffer emitting total_ns, avg_ns and hash64. Historical CI around the introduction did not yield an observed execution receipt; therefore the implementation can be used as a controlled benchmark target but not as an historical measured result.",
+      "vector": {
+        "urgency": "MEDIUM",
+        "importance": "HIGH",
+        "uncertainty": "MEDIUM",
+        "provenance_completeness": "COMPLETE",
+        "evidence_strength": "DOCUMENTED",
+        "dependency_centrality": "MEDIUM",
+        "closure_verifiability": "HIGH",
+        "regression_risk": "MEDIUM"
+      },
+      "contribution_vector": [
+        {"target": "REPRODUCIBILITY", "direction": "INCREASE", "mechanism": "Deterministic input and fixed iteration count give a compact host baseline."},
+        {"target": "SEMANTIC_ALIGNMENT", "direction": "PRESERVE", "mechanism": "HOST_SMOKE remains distinct from ANDROID_DEVICE_BENCHMARK."},
+        {"target": "EVIDENCE_DENSITY", "direction": "INCREASE", "mechanism": "avg_ns plus hash64 couples timing with output-integrity context."}
+      ],
+      "provenance_refs": [
+        {"kind": "GITHUB_COMMIT", "id": "29c93c5f327e3e39785f34c5a93fbd1cde602f05", "locator": "merge introducing native core benchmark smoke flow", "sha256": null},
+        {"kind": "GITHUB_RUN", "id": "25128576018", "locator": "Android Native CI historical observation; jobs did not execute", "sha256": null},
+        {"kind": "GITHUB_FILE", "id": "app/src/main/cpp/core/tests/core_benchmark_smoke.c", "locator": "Vectras-VM-Android", "sha256": null}
+      ],
+      "closure_contract": {
+        "closure_condition": "Either an immutable historical log containing benchmark_smoke is recovered, or the pinned source is executed in a recorded host environment to create a new receipt explicitly labeled as reproduction rather than historical recovery.",
+        "required_evidence": [
+          "Source commit SHA",
+          "compiler/toolchain fingerprint",
+          "host CPU/OS context",
+          "stdout containing iters/total_ns/avg_ns/hash64",
+          "exit code",
+          "classification HISTORICAL_RECOVERED or REPRODUCED_NEW_RUN"
+        ],
+        "forbidden_promotion": "Never use host smoke timing as Android/ABI device performance evidence.",
+        "providencia": "Prefer recovery of an existing log first; if absent, reproduce the pinned source in a controlled host runtime and label the temporal distinction.",
+        "next_verifiable_step": "Search remaining historical logs/artifacts for literal benchmark_smoke; only then create a new pinned reproduction if needed."
+      },
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-PMO-006",
+      "title": "Finish same-run deduplication and supersession topology for historical quantitative records",
+      "status": "PARTIAL",
+      "priority": "P1",
+      "token_state": "TOKEN_VAZIO_METRIC_DEDUP_SAME_RUN",
+      "why_it_matters": "Historical values may be repeated, corrected, reformatted or quoted later. A simple value-level dedup can erase provenance or merge distinct runs; append-only supersession must therefore be based on run/message lineage rather than numeric equality.",
+      "vector": {
+        "urgency": "MEDIUM",
+        "importance": "HIGH",
+        "uncertainty": "HIGH",
+        "provenance_completeness": "PARTIAL",
+        "evidence_strength": "OBSERVED",
+        "dependency_centrality": "MEDIUM",
+        "closure_verifiability": "MEDIUM",
+        "regression_risk": "HIGH"
+      },
+      "contribution_vector": [
+        {"target": "ANTI_REGRESSION", "direction": "INCREASE", "mechanism": "Append-only supersession preserves corrected and superseded measurements."},
+        {"target": "TRACEABILITY", "direction": "INCREASE", "mechanism": "Dedup keys include source/run identity instead of only metric/value."},
+        {"target": "UNCERTAINTY", "direction": "REDUCE", "mechanism": "Separates duplicate report text from independent repeated execution."}
+      ],
+      "provenance_refs": [
+        {"kind": "GITHUB_PR", "id": "rafaelmeloreisnovo/Mapa#235", "locator": "historical metric materialization and supersession work", "sha256": null},
+        {"kind": "DRIVE_FILE", "id": "1ClcleKaG8Uam7NA4l1FF8x7A0YiFyQQwGMIRkAr-_-M", "locator": "Performance Metric Observatory V1", "sha256": null}
+      ],
+      "closure_contract": {
+        "closure_condition": "Every historical metric observation has an explicit dedup/supersession state based on source/run lineage, with independent reruns preserved as distinct observations even when values match.",
+        "required_evidence": [
+          "Stable observation IDs",
+          "Source/message/run grouping",
+          "Supersedes/superseded_by edges where applicable",
+          "No numeric-equality-only dedup rule",
+          "Audit receipt with counts before/after topology classification"
+        ],
+        "forbidden_promotion": "Do not delete or overwrite an older observation merely because a newer value appears more plausible.",
+        "providencia": "Complete the highest-value run groups first and preserve unresolved duplicates as TOKEN_VAZIO_DEDUP rather than guessing.",
+        "next_verifiable_step": "Produce a before/after dedup topology receipt for the 20 currently materialized historical observations."
+      },
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-PMO-007",
+      "title": "Align formatted benchmark units with semantic metric kind",
+      "status": "CLOSED",
+      "priority": "P2",
+      "token_state": "FILLED_SEMANTIC_UNIT_COMPATIBILITY",
+      "why_it_matters": "Generic formatter strings such as Mops/s can represent IOPS, FLOP/s, allocs/s, maps/s, events/s or states/s depending on the metric slot. The governed path now requires formatted-unit plus semantic-kind interpretation instead of flattening every rate to generic ops/s.",
+      "vector": {
+        "urgency": "LOW",
+        "importance": "HIGH",
+        "uncertainty": "LOW",
+        "provenance_completeness": "PARTIAL",
+        "evidence_strength": "DOCUMENTED",
+        "dependency_centrality": "HIGH",
+        "closure_verifiability": "HIGH",
+        "regression_risk": "MEDIUM"
+      },
+      "contribution_vector": [
+        {"target": "SEMANTIC_ALIGNMENT", "direction": "INCREASE", "mechanism": "Rate normalization preserves the metric family instead of collapsing distinct dimensions."},
+        {"target": "ANTI_REGRESSION", "direction": "INCREASE", "mechanism": "The same semantic rule is applied to ingestion, validation and historical normalization."},
+        {"target": "CONTRACT_STRENGTH", "direction": "INCREASE", "mechanism": "Unit acceptance is constrained by semantic kind rather than string parsing alone."}
+      ],
+      "provenance_refs": [
+        {"kind": "GITHUB_PR", "id": "rafaelmeloreisnovo/Mapa#235", "locator": "unit normalizer / Vectra ingestion compatibility work", "sha256": null},
+        {"kind": "DRIVE_FILE", "id": "1ClcleKaG8Uam7NA4l1FF8x7A0YiFyQQwGMIRkAr-_-M", "locator": "observatory append-only notes", "sha256": null}
+      ],
+      "closure_contract": {
+        "closure_condition": "Ingestion, validation and historical normalization preserve semantic kind for supported rate/latency unit variants.",
+        "required_evidence": [
+          "Source implementation",
+          "Contract/test definitions covering semantic rate families",
+          "Future actual test receipt remains separately required by GAP-PMO-004"
+        ],
+        "forbidden_promotion": "Closed implementation gap does not imply runtime tests executed or any benchmark claim proven.",
+        "providencia": "Preserve this mapping as an invariant and include it in the first actual validator execution receipt.",
+        "next_verifiable_step": "Verify the already-materialized compatibility rules when GAP-PMO-004 obtains a real runtime."
+      },
+      "claim_allowed": false
+    }
+  ],
+  "claim_allowed": false,
+  "provenance": [
+    {"kind": "GITHUB_PR", "id": "rafaelmeloreisnovo/Mapa#235", "locator": "open draft stacked continuation", "sha256": null},
+    {"kind": "GITHUB_COMMIT", "id": "5b826895047992d68970e1e62347bac593a539fd", "locator": "GapPriorityContractV1 schema materialization", "sha256": null},
+    {"kind": "DRIVE_FILE", "id": "1ClcleKaG8Uam7NA4l1FF8x7A0YiFyQQwGMIRkAr-_-M", "locator": "RAFAELIA Performance Metric Observatory V1", "sha256": null}
+  ]
+}
