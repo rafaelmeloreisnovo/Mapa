@@ -1,0 +1,86 @@
+{
+  "receipt_id": "IGC-CONCEPT-FAMILY-SWEEP-20260814-V1",
+  "date": "2026-08-14",
+  "state": "STRUCTURAL_MATERIALIZED_NOT_RUNTIME_EXECUTED",
+  "claim_allowed": false,
+  "append_only": true,
+  "source_igc": {
+    "drive_provider_id": "1eGLmUTXAgcm4M9hJNCXoB5OLnc9ZSGMqTXvsFJasags",
+    "github_pr": 128,
+    "merged": true,
+    "merge_commit": "6c60b1df49760f5867d173f24da44ef524b9435b",
+    "prior_local_reproduction_receipt": "receipts/geometry/IGC_CR_20260802_RECEIPT_V2_LOCAL_REPRO.json",
+    "prior_local_gate": "PASS_LIMITED",
+    "prior_remote_ci": "REMOTE_GATE_BLOCKED_BEFORE_STEPS",
+    "prior_physical_termux": "TOKEN_VAZIO",
+    "prior_independent_reproduction": "TOKEN_VAZIO"
+  },
+  "source_anteriority": {
+    "drive_provider_id": "1wn5bQnMzN8Y7_EbLqlOld2CCKNpnx8xZxRs2mMxKWRg",
+    "historical_github_pr": 231,
+    "historical_merge_commit": "b50a87ad0e8507bb62bfe7394f47cc0196bd52f4",
+    "effective_registry_on_main": "v1 + v1.1.delta + v1.2.delta"
+  },
+  "promotion_regression": {
+    "detected": true,
+    "historical_post_merge_branch_commits_preserved": [
+      "9853c2c3e0470dadbc0923280f24d15f8bd59190",
+      "8d5938bbb92c0b3559078c20e0532421c3a0026d",
+      "006af8bdef569b2dc845b41db675bfc58aaf27af"
+    ],
+    "containment_receipt": "data/evidence/igc_family_sweep_promotion_regression_20260814.v1.json",
+    "clean_base_main": "54bbcdddc7f82b543fa05fd7ef233e2c3eda75ca"
+  },
+  "materialization": {
+    "branch": "audit/igc-family-sweep-20260814",
+    "markdown_path": "docs/research/RAFAELIA_IGC_OPERATIONAL_SWEEP_CONCEPT_FAMILIES_20260814.md",
+    "markdown_commit": "b0de29b7b4584e46b430daf731e0c44fb155b10a",
+    "matrix_path": "data/geometry/igc_concept_family_sweep_20260814.v1.json",
+    "matrix_commit": "ac577c81edef2388731e8c336916130f782c2e95",
+    "matrix_git_blob_sha1": "7b07f0ca568cbba883b99cb5424a087ad03d8038",
+    "matrix_provider_refetch": "PASS",
+    "regression_receipt_commit": "d84b5b6c2f6f94a87193b0a2387638e0bb24bff0",
+    "drive_sweep_provider_id": "1ZK4nfS8LupSFHGRUSPJBWtdECUMUhvcLWdOaXe_aBlk"
+  },
+  "coverage": {
+    "family_records": 24,
+    "operational_classes": 6,
+    "anti_regression_falsifiers": 10
+  },
+  "execution": {
+    "machine_json_provider_refetch": "PASS",
+    "new_matrix_specific_validator_execution": "TOKEN_VAZIO_NOT_PERFORMED_IN_THIS_SWEEP",
+    "physical_termux": "TOKEN_VAZIO",
+    "independent_reproduction": "TOKEN_VAZIO"
+  },
+  "important_boundaries": [
+    "geometry label is not inferred from ecosystem membership",
+    "visual similarity != geometric identity",
+    "alias similarity != object identity",
+    "hash validity != scientific truth",
+    "simulation != physical measurement",
+    "ZFR does not inherit ZRF chronology",
+    "RAFMEN does not normalize to RafMem without source evidence",
+    "hypercube/tesseract existence != RAFAELIA novelty",
+    "Clay-related derivation != solved Millennium Problem",
+    "post-merge branch writes != merged content"
+  ],
+  "f_ok": [
+    "canonical IGC source inspected",
+    "historical IGC implementation and receipt state rechecked",
+    "24 concept families classified by operational geometry relationship",
+    "machine-readable matrix materialized on clean current-main branch and provider-refetched",
+    "Drive editorial sweep materialized and linked",
+    "post-merge promotion regression detected and contained",
+    "claim boundary preserved"
+  ],
+  "f_gap": [
+    "family-local executable IGC records not yet materialized for every family",
+    "ZRF current exact model not bound",
+    "ZFR RAFMEN and fir-via-os aliases unresolved",
+    "state-space schemas/operators missing for several families",
+    "new matrix-specific validator/test execution not performed",
+    "physical Termux and independent IGC reproduction remain open"
+  ],
+  "f_next": "draft PR -> diff verification -> family-local IGC candidate records -> negatives first -> versioned evidence -> receipts -> narrow claim gates"
+}
