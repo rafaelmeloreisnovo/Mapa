@@ -4,9 +4,9 @@
 Fail-closed rules:
 - metric_id must exist in binding;
 - run context must precede metric lines for JSONL;
-- formatted unit and declared unit are both preserved;
-- IOPS semantics are restored from binding even when formatter emits generic ops/s;
-- proxies/simulations remain notes and claim_allowed=false;
+- formatted unit and declared semantic unit are both preserved;
+- generic ops/s formatting is refined only through the pinned metric binding;
+- proxies/simulations remain flagged and claim_allowed=false;
 - no record is promoted automatically.
 """
 from __future__ import annotations
@@ -17,27 +17,35 @@ SCHEMA="RAFAELIA_METRIC_OBSERVATION_V1"
 RATE={"ops/s":1.0,"Kops/s":1e3,"Mops/s":1e6,"Gops/s":1e9}
 TIME={"ns":1e-9,"μs":1e-6,"µs":1e-6,"us":1e-6,"ms":1e-3,"s":1.0}
 TIME_PER={"ns/op":(1e-9,"s/op"),"μs/op":(1e-6,"s/op"),"µs/op":(1e-6,"s/op"),
-          "ms/op":(1e-3,"s/op"),"ns/access":(1e-9,"s/access"),
+          "us/op":(1e-6,"s/op"),"ms/op":(1e-3,"s/op"),"ns/access":(1e-9,"s/access"),
           "μs/sync":(1e-6,"s/sync"),"µs/sync":(1e-6,"s/sync"),
           "μs/switch":(1e-6,"s/switch"),"µs/switch":(1e-6,"s/switch"),
           "ns/call":(1e-9,"s/call")}
 BW={"MB/s":(1_000_000.0,"B/s"),"MiB/s":(1_048_576.0,"B/s"),"GB/s":(1_000_000_000.0,"B/s")}
+SEMANTIC_RATE_TARGETS={
+    "io_operations_per_second":("IOPS","io_operation_rate","VECTRA_FORMATTED_RATE_TO_IOPS_V1"),
+    "floating_operation_rate":("FLOP/s","floating_point_rate","VECTRA_FORMATTED_RATE_TO_FLOPS_V1"),
+    "allocation_rate":("allocs/s","allocation_rate","VECTRA_FORMATTED_RATE_TO_ALLOCS_V1"),
+    "mapping_rate":("maps/s","mapping_rate","VECTRA_FORMATTED_RATE_TO_MAPS_V1"),
+    "event_rate":("events/s","event_rate","VECTRA_FORMATTED_RATE_TO_EVENTS_V1"),
+    "state_rate":("states/s","state_rate","VECTRA_FORMATTED_RATE_TO_STATES_V1"),
+}
 SEM_RATE={"allocs/s","maps/s","events/s","states/s","IOPS"}
+
 
 def load_binding(path):
     obj=json.loads(Path(path).read_text(encoding="utf-8"))
     if obj.get("schema")!="RAFAELIA_VECTRA_79_METRIC_BINDING_V2":
         raise ValueError("unexpected binding schema")
-    fields=obj["fields"]
-    out={}
+    fields=obj["fields"]; out={}
     for row in obj["metrics"]:
-        rec=dict(zip(fields,row))
-        mid=rec["metric_id"]
+        rec=dict(zip(fields,row)); mid=rec["metric_id"]
         if mid in out: raise ValueError(f"duplicate metric_id {mid}")
         out[mid]=rec
     if sorted(out)!=list(range(79)):
         raise ValueError("binding must contain exactly metric_id 0..78")
     return out,obj["producer"]
+
 
 def parse_formatted(text):
     if not isinstance(text,str): raise ValueError("formatted value must be string")
@@ -47,9 +55,11 @@ def parse_formatted(text):
     if not math.isfinite(v): raise ValueError("non-finite formatted value")
     return v,u
 
+
 def normalize(value, unit, semantic_kind):
-    if semantic_kind=="io_operations_per_second" and unit in RATE:
-        return value*RATE[unit],"IOPS","io_operation_rate","VECTRA_FORMATTED_RATE_TO_IOPS_V1"
+    if semantic_kind in SEMANTIC_RATE_TARGETS and unit in RATE:
+        cu,dim,rule=SEMANTIC_RATE_TARGETS[semantic_kind]
+        return value*RATE[unit],cu,dim,rule
     if unit=="IOPS":
         return value,"IOPS","io_operation_rate","UNIT_IOPS_SEMANTIC_V1"
     if unit in RATE:
@@ -62,11 +72,10 @@ def normalize(value, unit, semantic_kind):
         return value*TIME[unit],"s","time","VECTRA_TIME_SI_V1"
     if unit in SEM_RATE:
         return value,unit,"semantic_rate","VECTRA_SEMANTIC_RATE_IDENTITY_V1"
-    if unit=="MFLOPS":
-        return value*1e6,"FLOP/s","floating_point_rate","UNIT_MFLOPS_TO_FLOPS_V1"
-    if unit=="GFLOPS":
-        return value*1e9,"FLOP/s","floating_point_rate","UNIT_GFLOPS_TO_FLOPS_V1"
+    if unit=="MFLOPS": return value*1e6,"FLOP/s","floating_point_rate","UNIT_MFLOPS_TO_FLOPS_V1"
+    if unit=="GFLOPS": return value*1e9,"FLOP/s","floating_point_rate","UNIT_GFLOPS_TO_FLOPS_V1"
     return None,unit,"unknown","TOKEN_VAZIO_UNIT_RULE"
+
 
 def make_obs(metric, binding, producer, run, raw_ref, artifact_sha256=None, receipt_ref=None):
     formatted=metric.get("formatted") or metric.get("formatted_value")
@@ -81,7 +90,8 @@ def make_obs(metric, binding, producer, run, raw_ref, artifact_sha256=None, rece
     state="MEASURED" if epi=="MEASURED_WITH_RECEIPT" else "HISTORICAL"
     evidence={"artifact_sha256":artifact_sha256,"receipt_refs":[receipt_ref] if receipt_ref else [],
               "raw_result_refs":[raw_ref],"digest_verified":None}
-    norm={"status":"NORMALIZED" if cv is not None else "PRESERVED_SEMANTIC",
+    semantic_refinement = binding["semantic_kind"] in SEMANTIC_RATE_TARGETS and formatted_unit in RATE
+    norm={"status":"PRESERVED_SEMANTIC" if semantic_refinement else ("NORMALIZED" if cv is not None else "PRESERVED_SEMANTIC"),
           "canonical_value":cv,"canonical_unit":cu,"dimension":dim,"rule_id":rule}
     notes=("; ".join(conflicts)) if conflicts else "method/unit binding consistent at static inspection level"
     return {
@@ -102,8 +112,8 @@ def make_obs(metric, binding, producer, run, raw_ref, artifact_sha256=None, rece
                      "cpu_cores":run.get("cpu_cores"),"ram_bytes":run.get("ram_bytes")},
       "workload":{"seed":run.get("seed"),"warmup":run.get("warmup"),"samples":run.get("samples"),
                   "min_test_duration_ns":run.get("min_test_duration_ns")},
-      "config":{"raw_ns":metric.get("raw_ns"),"formatted_value":formatted,"declared_unit":declared,
-                "semantic_kind":binding["semantic_kind"],"binding_flags":binding.get("flags") or []},
+      "config":{"raw_ns":metric.get("raw_ns"),"formatted_value":formatted,"formatted_unit":formatted_unit,
+                "declared_unit":declared,"semantic_kind":binding["semantic_kind"],"binding_flags":binding.get("flags") or []},
       "evidence":evidence,"negative_evidence":False,
       "token_vazio":["TOKEN_VAZIO_UNIT_CONFLICT_REVIEW"] if declared != formatted_unit else [],
       "promotion_gate":{"status":"NOT_REQUESTED","reviewer":None,"receipt_ref":None},
@@ -111,10 +121,10 @@ def make_obs(metric, binding, producer, run, raw_ref, artifact_sha256=None, rece
       "next_verifiable_step":"Validate observation; bind build/workload/receipt; review unit/proxy flags before any promotion."
     }
 
+
 def read_jsonl(path):
-    run={}
-    metrics=[]
-    for n,line in enumerate(Path(path).read_text(encoding="utf-8").splitlines(),1):
+    run={}; metrics=[]
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
         if not line.strip(): continue
         obj=json.loads(line)
         if obj.get("type")=="run": run=obj
@@ -122,23 +132,19 @@ def read_jsonl(path):
     if not run: raise ValueError("JSONL missing type=run record")
     return run,metrics
 
+
 def read_csv(path):
-    rows=list(csv.DictReader(Path(path).open(encoding="utf-8",newline="")))
-    metrics=[]
+    rows=list(csv.DictReader(Path(path).open(encoding="utf-8",newline=""))); metrics=[]
     for r in rows:
         metrics.append({"metric_id":int(r["metric_id"]),"name":r.get("name"),"category":r.get("category"),
                         "raw_ns":int(r["raw_ns"]),"formatted":r["formatted_value"],"unit":r["unit"]})
     return {},metrics
 
+
 def main(argv=None):
-    ap=argparse.ArgumentParser()
-    ap.add_argument("--binding",required=True)
-    ap.add_argument("--input",required=True)
-    ap.add_argument("--format",choices=["jsonl","csv"],required=True)
-    ap.add_argument("--output",required=True)
-    ap.add_argument("--artifact-sha256")
-    ap.add_argument("--receipt-ref")
-    a=ap.parse_args(argv)
+    ap=argparse.ArgumentParser(); ap.add_argument("--binding",required=True); ap.add_argument("--input",required=True)
+    ap.add_argument("--format",choices=["jsonl","csv"],required=True); ap.add_argument("--output",required=True)
+    ap.add_argument("--artifact-sha256"); ap.add_argument("--receipt-ref"); a=ap.parse_args(argv)
     bindings,producer=load_binding(a.binding)
     run,rows=read_jsonl(a.input) if a.format=="jsonl" else read_csv(a.input)
     out=[]
