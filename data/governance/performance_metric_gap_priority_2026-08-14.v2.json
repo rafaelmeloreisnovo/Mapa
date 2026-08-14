@@ -1,0 +1,135 @@
+{
+  "schema": "RAFAELIA_GAP_PRIORITY_DELTA_V2",
+  "delta_id": "GAP-LEDGER-PERFORMANCE-METRIC-20260814-V2",
+  "created_at": "2026-08-14T02:20:00-03:00",
+  "extends": {
+    "path": "data/governance/performance_metric_gap_priority_2026-08-14.v1.json",
+    "commit": "7e7a9f4eb3489190d1fda4221c664c0af6c75f37"
+  },
+  "invariants": [
+    "append-only refinement: old token remains historical state and is not deleted",
+    "historical byte identity != current provider object identity",
+    "hash authority != current raw fetch capability",
+    "negative current Drive search != proof that raw objects do not exist",
+    "claim_allowed=false"
+  ],
+  "gap_deltas": [
+    {
+      "gap_id": "GAP-PMO-001",
+      "status_before": "PARTIAL",
+      "status_after": "PARTIAL",
+      "priority_before": "P0",
+      "priority_after": "P0",
+      "superseded_coarse_token": "TOKEN_VAZIO_RAW_CONTENT_048_049_050_CURRENT_ACCESS",
+      "refined_states": [
+        {
+          "token_state": "FILLED_HISTORICAL_BYTE_IDENTITY_048_049_050",
+          "epistemic_state": "EVIDENCED_STAGE1_EXACT_BYTE_STREAM_HASH",
+          "claim_allowed": false,
+          "basis": "Stage-1 parser contract states SHA-256 was computed over exact downloaded byte streams and explicitly closes the earlier claim that 043-050 hashes were unknown."
+        },
+        {
+          "token_state": "TOKEN_VAZIO_CURRENT_PROVIDER_OBJECT_ID_048_049_050",
+          "epistemic_state": "OPEN",
+          "claim_allowed": false,
+          "basis": "Current Drive exact parent+filename query returned no directly indexed raw objects; manifest source_id identifies export_manifest.json rather than individual shard object IDs."
+        },
+        {
+          "token_state": "TOKEN_VAZIO_CURRENT_RAW_FETCH_ROUTE_048_049_050",
+          "epistemic_state": "OPEN",
+          "claim_allowed": false,
+          "basis": "No current exact raw fetch locator was recovered in this pass even though prior exact byte reads are proven."
+        }
+      ],
+      "verified_objects": [
+        {
+          "file": "conversations-048.json",
+          "bytes": 36771626,
+          "conversations": 100,
+          "messages": 6543,
+          "user_messages": 518,
+          "assistant_messages": 6025,
+          "characters": 5754181,
+          "textless": 4703,
+          "sha256": "ed19ea07f8763a8a4d87204d80c817694ce4d6c339c71b1d2a1b955a8c125256",
+          "first_message_utc": "2026-07-10T05:15:57.715329+00:00",
+          "last_message_utc": "2026-07-27T04:19:01.796969+00:00"
+        },
+        {
+          "file": "conversations-049.json",
+          "bytes": 47806754,
+          "conversations": 100,
+          "messages": 7196,
+          "user_messages": 520,
+          "assistant_messages": 6676,
+          "characters": 5576648,
+          "textless": 5017,
+          "sha256": "608e45449809a47f5931f86328b96dab2b2b86a5abf21a8dfe1c7da6834a2f1a",
+          "first_message_utc": "2026-07-21T12:15:49.793930+00:00",
+          "last_message_utc": "2026-08-03T02:40:50.845955+00:00"
+        },
+        {
+          "file": "conversations-050.json",
+          "bytes": 17115060,
+          "conversations": 54,
+          "messages": 3647,
+          "user_messages": 239,
+          "assistant_messages": 3408,
+          "characters": 2451412,
+          "textless": 2619,
+          "sha256": "c5058bf25f682de12de68b54029d13b07e836cd519416752fbc5e4fa320b4979",
+          "first_message_utc": "2026-07-30T07:05:02.708726+00:00",
+          "last_message_utc": "2026-08-03T02:53:47.964760+00:00"
+        }
+      ],
+      "aggregate_048_050": {
+        "bytes": 101693440,
+        "conversations": 254,
+        "messages": 17386,
+        "user_messages": 1277,
+        "assistant_messages": 16109,
+        "characters": 13782241,
+        "textless": 12339,
+        "token_count": "TOKEN_VAZIO_TOKENIZER_NOT_FIXED"
+      },
+      "provenance_refs": [
+        {
+          "kind": "DRIVE_DOCUMENT",
+          "provider_id": "1ccOoYooH-STuDvrPQQSihtg4nqpmifd7QQ8w25nIr1w",
+          "title": "RAFAELIA_METRICS_STAGE1_CONVERSATIONS_043_050",
+          "parser_contract": "SHA-256 over exact downloaded byte stream"
+        },
+        {
+          "kind": "DRIVE_DOCUMENT",
+          "provider_id": "1s5k8YuF7ZaLL-v9uMjTRhw5lQvci8-FVZRNHkxVDWiw",
+          "title": "RAFAELIA — Vectras 8-core × 760+ Logical Layers — Evidence Delta V1 — 2026-08-12",
+          "role": "independent indexed restatement of Stage-1 authority"
+        },
+        {
+          "kind": "DRIVE_SEARCH_NEGATIVE",
+          "query_scope": "parent 1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv + exact names conversations-048/049/050.json",
+          "result_count": 0,
+          "interpretation": "current direct metadata route unresolved only"
+        }
+      ],
+      "closure_contract_v2": {
+        "already_satisfied": [
+          "historical exact byte count for all three shards",
+          "historical exact SHA-256 for all three shards",
+          "historical parser counts for conversations/messages/content",
+          "evidence that raw bytes were downloaded and hashed under Stage-1"
+        ],
+        "still_required": [
+          "current provider object ID or equivalent exact raw fetch route for 048",
+          "current provider object ID or equivalent exact raw fetch route for 049",
+          "current provider object ID or equivalent exact raw fetch route for 050",
+          "if current bytes are recovered, verify their SHA-256 against Stage-1 authority and record any divergence append-only"
+        ],
+        "forbidden_promotion": "Do not regress to HASH_UNKNOWN and do not promote current-access=true until an exact current route is observed.",
+        "providencia": "Use derived MESSAGES/NODES/chunk lineage or historical worker checkpoints to recover current source locators; compare any recovered bytes to the three authoritative Stage-1 hashes.",
+        "next_verifiable_step": "Find a worker/checkpoint record containing the individual provider_id for conversations-048, then repeat for 049/050 and verify the provider metadata or bytes against the Stage-1 hash."
+      }
+    }
+  ],
+  "claim_allowed": false
+}
