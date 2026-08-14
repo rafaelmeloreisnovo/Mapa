@@ -1,0 +1,65 @@
+{
+  "schema": "rafaelia.delta-star-micro-omega-lifecycle/v1",
+  "date_local": "2026-08-13",
+  "state": "FORMALIZED_NOT_FULLY_EXECUTED",
+  "claim_allowed": false,
+  "append_only": true,
+  "mother_invariant": "idea != implementation != execution != evidence != claim",
+  "cycle": ["DELTA", "STAR", "MICRO_PER_MILLE", "OMEGA", "DELTA"],
+  "phase_contracts": {
+    "DELTA": {
+      "purpose": "detect and type the difference between current state and desired state",
+      "required": ["source", "baseline", "objective", "scope", "provenance", "constraints", "gap_labels", "epistemic_state"],
+      "forbidden": ["silent_default", "untyped_absence", "claim_promotion"],
+      "exit_gate": "every material absence is either bound to evidence or explicitly TOKEN_VAZIO"
+    },
+    "STAR": {
+      "purpose": "route each object through the correct operational window and authority path",
+      "windows": ["W1_SECURITY_INTEGRITY", "W2_BUILD_RUNTIME", "W3_CONTRACT_COMPAT", "W4_EVIDENCE_PROVENANCE", "W5_MEMORY_INDEX", "W6_EFFICIENCY", "W7_EVOLUTION"],
+      "required": ["owner_or_authority", "dependencies", "route", "isolation_boundary", "evidence_needed", "falsifier"],
+      "forbidden": ["cross_domain_context_leak", "duplicate_authority", "priority_without_dependency_check"],
+      "exit_gate": "each actionable object has exactly one primary route and explicit dependencies"
+    },
+    "MICRO_PER_MILLE": {
+      "purpose": "execute bounded micro-iterations with measurable change and regression control",
+      "required": ["before_state", "change_set", "test_or_probe", "result", "after_state", "uncertainty_delta", "receipt_or_token_vazio"],
+      "metrics": {
+        "regression_rate": "reopened_or_broken_closed_items / touched_closed_items",
+        "closure_rate": "closed_gaps / attempted_gaps",
+        "evidence_coverage": "evidence_bound_fields / applicable_required_fields",
+        "token_vazio_resolution_rate": "resolved_token_vazio / starting_token_vazio",
+        "defect_density": "observed_defects / reviewed_opportunities",
+        "dpmo_optional": "observed_defects / reviewed_opportunities * 1000000"
+      },
+      "forbidden": ["large_unreviewed_batch", "erase_negative_result", "merge_without_gate", "pass_by_inference"],
+      "exit_gate": "micro-batch has explicit result, no hidden regression, and unresolved uncertainty remains typed"
+    },
+    "OMEGA": {
+      "purpose": "declare a bounded operational plateau, never metaphysical or absolute completion",
+      "required": ["F_ok", "F_gap", "F_next", "closure_gates", "remaining_token_vazio", "recovery_route"],
+      "forbidden": ["absolute_completion_claim", "zero_uncertainty_claim_without_proof", "discard_open_gap"],
+      "exit_gate": "plateau is reproducible enough for the stated scope; any new material gap reopens DELTA"
+    }
+  },
+  "discovery_labels": ["TOKEN_VAZIO", "absence", "urgent", "provenance", "contract", "necessary", "important", "forgotten", "ignored", "obvious", "censored", "left_behind", "suggested", "should", "good_candidate", "aborted", "uncertain"],
+  "label_rule": "discovery labels alter triage and routing but never constitute evidence or epistemic promotion",
+  "priority_function": {
+    "dimensions": ["impact", "urgency", "dependency_blocking", "evidence_deficit", "provenance_risk", "regression_risk", "reversibility"],
+    "rule": "priority must be explained by dimensions and dependencies; urgency alone cannot bypass safety or evidence gates"
+  },
+  "six_sigma_boundary": "Six Sigma terminology is used as process-improvement instrumentation; no sigma-level claim is allowed without measured defects, opportunities, sampling plan and receipt.",
+  "anti_regression": {
+    "closed_state_requires_evidence": true,
+    "negative_results_append_only": true,
+    "new_conflict_reopens_delta": true,
+    "historical_state_never_silently_overwritten": true,
+    "token_vazio_never_coerced_to_zero": true
+  },
+  "current_integration": {
+    "parent_pr": 223,
+    "parent_map": "docs/canonical/2026-08-13/RAFAELIA_OPERATIONAL_COHERENCE_MAP_V1.md",
+    "parent_ledger": "data/governance/RAFAELIA_OPERATIONAL_COHERENCE_LEDGER_2026-08-13.v1.json",
+    "status": "EXTENDS_EXISTING_WINDOWS_NOT_PARALLEL_ARCHITECTURE"
+  },
+  "F_next": "validate this lifecycle contract against adversarial fixtures and bind one real open gap end-to-end through DELTA->STAR->MICRO_PER_MILLE->OMEGA without claim promotion"
+}
