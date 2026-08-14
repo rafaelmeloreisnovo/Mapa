@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/novoexport_anteriority_event.v1.schema.json",
+  "title": "RAFAELIA NOVOexport Anteriority Event V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "family_id", "canonical_name", "matched_aliases", "source_path",
+    "source_file_sha256", "conversation_id", "message_id", "text_sha256",
+    "evidence_class", "internal_documented", "public_disclosure", "legal_priority",
+    "scientific_novelty", "claim_allowed"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.novoexport.anteriority-event/v1"},
+    "family_id": {"type": "string", "minLength": 1},
+    "canonical_name": {"type": "string", "minLength": 1},
+    "matched_aliases": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "source_path": {"type": "string", "minLength": 1},
+    "source_file_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "conversation_id": {"type": ["string", "null"]},
+    "conversation_title": {"type": ["string", "null"]},
+    "message_id": {"type": ["string", "null"]},
+    "created_time": {"type": ["number", "string", "null"]},
+    "created_at_utc": {"type": ["string", "null"]},
+    "text_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_class": {"const": "E2_CONTENT_FINGERPRINTED"},
+    "internal_documented": {"const": true},
+    "public_disclosure": {"const": "TOKEN_VAZIO"},
+    "legal_priority": {"const": "TOKEN_VAZIO"},
+    "scientific_novelty": {"const": "TOKEN_VAZIO"},
+    "claim_allowed": {"const": false}
+  }
+}
