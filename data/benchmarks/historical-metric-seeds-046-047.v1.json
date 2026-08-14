@@ -1,0 +1,54 @@
+{
+  "schema":"RAFAELIA_HISTORICAL_METRIC_SEEDS_V1",
+  "state":"HISTORICAL_RUN_OUTPUT",
+  "claim_allowed":false,
+  "sources":{
+    "046":{"provider_id":"1ENIyZ-FpAbJqU46q6xSfmiXlBWbIeH2E","sha256":"daef888aee856833c4f26c3c0af804826a2043c775f2d3c543d1135f27ee8e75"},
+    "047":{"provider_id":"1tFmjzyQy1h7BSWw8SHwcCFoBV5Xgl4Vt","sha256":"dd133d11f02d757036eb3b9228a35e9734dc4b5984b1002f4f40c6b7260598d5"}
+  },
+  "runs":[
+    {
+      "run_id":"HIST-EDGEV7-047-001",
+      "source":"047",
+      "conversation_id":"6a447820-3ebc-83e9-a282-394148ecd482",
+      "message_id":"bbb21aa7-791f-4dfa-bc49-734eb875faf7",
+      "config":{"arch":"ARM32","buffer_kib":256,"rounds":72,"discard_low":8,"discard_high":8},
+      "metrics":[
+        ["BASE_TIME",1477804,"ns","TIME"],["BASE_BW",338.34,"MB/s","BANDWIDTH"],
+        ["UNROLL4_TIME",2052718,"ns","TIME"],["UNROLL4_BW",243.58,"MB/s","BANDWIDTH"],["UNROLL4_PENALTY",0.389,"ratio","SCALING"],
+        ["UNROLL8_TIME",2132431,"ns","TIME"],["UNROLL8_BW",234.47,"MB/s","BANDWIDTH"],["UNROLL8_PENALTY",0.443,"ratio","SCALING"]
+      ],
+      "notes":"winner=BASE; UNROLL4/UNROLL8 preserved as negative-result evidence"
+    },
+    {
+      "run_id":"HIST-ARM32-CPUMEM-046-001",
+      "source":"046",
+      "conversation_id":"6a434132-1394-83e9-acfa-55068f9d3450",
+      "config":{"arch":"ARM32","threads_detected":8,"cpu_runs":10},
+      "metrics":[
+        ["CPU_MEAN_SUPERSEDED",110.745,"MOPS","CPU"],["MEM_MEAN_SUPERSEDED",1.615,"GB/s","BANDWIDTH"],
+        ["CPU_MEAN_CORRECTED",111.956,"MOPS","CPU"],["MEM_MEAN_CORRECTED",1.522,"GB/s","BANDWIDTH"],
+        ["LAT_16K",7.01,"ns/access","MEMORY"],["LAT_256K",130.05,"ns/access","MEMORY"],["LAT_4096K",260.08,"ns/access","MEMORY"],["LAT_16384K",266.81,"ns/access","MEMORY"]
+      ],
+      "supersession":{"CPU_MEAN_CORRECTED":"CPU_MEAN_SUPERSEDED","MEM_MEAN_CORRECTED":"MEM_MEAN_SUPERSEDED"},
+      "notes":"corrected run supersedes earlier series; do not average both series"
+    },
+    {
+      "run_id":"HIST-MEMCPUIND-047-B",
+      "source":"047",
+      "conversation_id":"6a483fd5-d72c-83e9-9083-7f755876f87d",
+      "config":{"run":"B"},
+      "metrics":[["MEMORY_MEDIAN",3384,"ns","TIME"],["CPU_MEDIAN",78154,"ns","TIME"],["INDIRECT_MEDIAN",3385,"ns","TIME"]]
+    },
+    {
+      "run_id":"HIST-MATRIX8X8-047-001",
+      "source":"047",
+      "conversation_id":"6a483fd5-d72c-83e9-9083-7f755876f87d",
+      "message_id":"bbb21dc8-6272-468c-97f1-177078670198",
+      "metrics":[["TOTAL_TIME",1.642,"ms","TIME"]],
+      "open_tokens":["TOKEN_VAZIO_MATRIX_WORKLOAD_SEMANTICS","TOKEN_VAZIO_MATRIX_REPETITION_POLICY"]
+    }
+  ],
+  "open_tokens":["TOKEN_VAZIO_HISTORICAL_RAW_LOG_HASHES_PER_MVP","TOKEN_VAZIO_MVP_ARTIFACT_SOURCE_HASH_BINDING","TOKEN_VAZIO_MVP_REPLAY_CURRENT_DEVICE"],
+  "next_verifiable_step":"Materialize MetricObservationV1 records from these seeds, then bind exact historical message/raw-log bytes and replay representative runs."
+}

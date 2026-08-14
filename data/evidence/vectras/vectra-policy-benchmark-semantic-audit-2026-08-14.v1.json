@@ -1,0 +1,50 @@
+{
+  "schema": "RAFAELIA_BENCHMARK_SEMANTIC_AUDIT_V1",
+  "record_id": "VECTRA-POLICY-BENCH-SEMANTIC-AUDIT-20260814-001",
+  "created_at": "2026-08-14T02:32:00-03:00",
+  "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+  "result_path": "reports/vectra_policy_benchmark.tsv",
+  "result_git_blob_sha": "9deac448040a85b7075cd197c22f2295d2181183",
+  "result_sha256_in_ci_manifest": "aa4f726b3c6b736f8cc76cc60848093b3bf305216dab8f3477c71e1c30944f56",
+  "producer_path": "demo_cli/src/rmr_policy_benchmark.c",
+  "producer_git_blob_sha": "d5ad3a4cd95d07885e4611a4fae75f38663861e4",
+  "producer_resolved": true,
+  "runtime_environment": "TOKEN_VAZIO_POLICY_BENCHMARK_RUNTIME_ENVIRONMENT",
+  "observed_rows": [
+    {"mode_label": "recompute_all", "total_ms": 1.004, "chunks_label": 128, "bytes_label": 65536},
+    {"mode_label": "promote_valid_state", "total_ms": 0.977, "chunks_label": 136, "bytes_label": 65536},
+    {"mode_label": "verify_only", "total_ms": 0.872, "chunks_label": 144, "bytes_label": 65536},
+    {"mode_label": "policy_pipeline", "total_ms": 0.978, "chunks_label": 152, "bytes_label": 65536}
+  ],
+  "semantic_audit": {
+    "clock": "CLOCK_MONOTONIC",
+    "timed_workload": "for n in [0,300000): acc ^= n * (i + 3)",
+    "actual_policy_mode_dispatch_inside_timed_region": false,
+    "mode_label_changes_real_policy_function": false,
+    "mode_label_changes_synthetic_multiplier": true,
+    "chunks_field_is_measured_operation_count": false,
+    "chunks_field_source": "128 + i*8 constant expression",
+    "bytes_field_is_measured_bytes_processed": false,
+    "bytes_field_source": "constant 65536",
+    "crc_path_is_executed_in_timed_region": false,
+    "crc_path_source": "literal output label crc32c",
+    "tune_fields": "RmR_External_DetectHardware + RmR_External_BuildTunePlan are called before the timed loop and their plan values are printed after timing",
+    "verdict": "LABELED_SYNTHETIC_PROXY_NOT_POLICY_PATH_BENCHMARK"
+  },
+  "epistemic_transition": {
+    "before": "QUANTITATIVE_RESULT_FILE_WITH_PRODUCER_RUNTIME_UNBOUND",
+    "after": "QUANTITATIVE_SYNTHETIC_PROXY_WITH_PRODUCER_SOURCE_BOUND",
+    "filled_token": "FILLED_POLICY_BENCHMARK_PRODUCER_SOURCE",
+    "open_tokens": [
+      "TOKEN_VAZIO_POLICY_BENCHMARK_RUNTIME_ENVIRONMENT",
+      "TOKEN_VAZIO_REAL_POLICY_PATH_BENCHMARK_RECEIPT"
+    ]
+  },
+  "forbidden_claims": [
+    "Do not rank recompute_all/promote_valid_state/verify_only/policy_pipeline performance from this TSV.",
+    "Do not interpret chunks or bytes columns as work actually processed by the timed loop.",
+    "Do not claim CRC32C throughput from this benchmark; crc32c is a printed label outside the timed workload."
+  ],
+  "providencia": "If policy-mode performance matters, construct a benchmark whose timed region invokes the actual mode-specific implementation with identical input bytes/workload, repetitions, warmup, integrity sink and environment receipt; retain this proxy as historical negative evidence rather than deleting it.",
+  "claim_allowed": false
+}

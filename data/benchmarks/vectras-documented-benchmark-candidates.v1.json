@@ -1,0 +1,65 @@
+{
+  "schema":"RAFAELIA_DOCUMENTED_BENCHMARK_CANDIDATES_V1",
+  "state":"MIXED_DOCUMENTED_UNBOUND_AND_ESTIMATE",
+  "claim_allowed":false,
+  "invariant":"documented number != executed measurement != reproducible receipt",
+  "sources":[
+    {
+      "source_id":"DRIVE-VECTRA-BENCH-202601",
+      "provider":"Google Drive",
+      "provider_id":"1nR1qyB9tBbkzdeN922A8Z4kkOqH0Iyfo",
+      "title":"VECTRA_VM_BENCHMARKS.md",
+      "epistemic_class":"DOCUMENTED_BENCHMARK_UNBOUND",
+      "notes":"Tables present environment/methodology and numeric results, but no raw run/device/build artifact is bound in the current evidence chain."
+    },
+    {
+      "source_id":"DRIVE-VECTRAS-FULL-METRICS",
+      "provider":"Google Drive",
+      "provider_id":"1-1VcxoaRP-y-_FyRIUMXdeDEevBGdH2Q",
+      "title":"vectras_full_metrics.jsx.txt",
+      "epistemic_class":"ESTIMATE_CODE_ANALYSIS",
+      "notes":"Rows use approximate ranges, code-analysis rationale, doc targets and expected improvements; preserve as test targets, not measurements."
+    },
+    {
+      "source_id":"DRIVE-VECTRAS-AUDIT-20260224",
+      "provider":"Google Drive",
+      "provider_id":"1lj8ATw_OmCjDVMmfnnJgvGCzqrqsldpv",
+      "title":"Auditoria_RAFAELIA_VectrasVM.docx",
+      "epistemic_class":"DOCUMENTED_BENCHMARK_UNBOUND",
+      "notes":"Narrative audit contains claimed/plausible acceleration ranges but no raw benchmark receipt is attached here."
+    }
+  ],
+  "candidates":[
+    {"id":"DOC-001","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"Enhanced VM throughput","value":45,"unit":"Mops/s","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-002","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"Compact Runner throughput","value":62,"unit":"Mops/s","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-003","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"Enhanced VM latency","value":22,"unit":"ns/op","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-004","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"Compact Runner latency","value":16,"unit":"ns/op","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-005","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"Sequential memory bandwidth","value":8.7,"unit":"GB/s","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-006","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"Random memory bandwidth","value":3.2,"unit":"GB/s","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-007","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"MemDrive write 256 words","value":121.6,"unit":"MB/s","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-008","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"MemDrive read 256 words","value":130.2,"unit":"MB/s","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-009","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"1000x1000 matrix stash+block","value":1.837,"unit":"GFLOPS","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"DOC-010","source_id":"DRIVE-VECTRA-BENCH-202601","metric":"10 GB JSON dataset throughput","value":29.2,"unit":"MB/s","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"EST-001","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"VirtIO disk IOPS iothread on writeback","range":[50000,200000],"unit":"IOPS","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-002","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"VirtIO disk IOPS iothread off","range":[10000,40000],"unit":"IOPS","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-003","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"Optimized latency P99 doc target","value":8,"unit":"us","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-004","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"Upstream latency P99 comparison target","value":180,"unit":"us","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-005","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"Policy pipeline CRC32C software","range":[250000,500000],"unit":"chunks/s","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-006","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"Policy pipeline CRC32C hardware","range":[3000000,6000000],"unit":"chunks/s","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-007","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"IRQ period target","range":[1030,1500],"unit":"us","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-008","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"pthread mutex contended jitter spike","range":[5,50],"unit":"us","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"EST-009","source_id":"DRIVE-VECTRAS-FULL-METRICS","metric":"TCG performance","range":[200,500],"unit":"MIPS","class":"ESTIMATE_CODE_ANALYSIS"},
+    {"id":"AUD-001","source_id":"DRIVE-VECTRAS-AUDIT-20260224","metric":"CRC32C NEON/HW acceleration narrative","range":[8,20],"unit":"x","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"AUD-002","source_id":"DRIVE-VECTRAS-AUDIT-20260224","metric":"XOR fold acceleration narrative","range":[4,8],"unit":"x","class":"DOCUMENTED_BENCHMARK_UNBOUND"},
+    {"id":"AUD-003","source_id":"DRIVE-VECTRAS-AUDIT-20260224","metric":"memcpy bulk acceleration narrative","range":[2,4],"unit":"x","class":"DOCUMENTED_BENCHMARK_UNBOUND"}
+  ],
+  "promotion_rule":"Every candidate requires raw run + pinned source/build + environment + workload + receipt before MEASURED_WITH_RECEIPT. Estimates remain estimates even when numerically plausible.",
+  "open_tokens":[
+    "TOKEN_VAZIO_DOCUMENTED_VECTRA_BENCH_RAW_BINDING",
+    "TOKEN_VAZIO_FULL_METRICS_ROW_CLASSIFICATION_COMPLETE",
+    "TOKEN_VAZIO_DEVICE_BUILD_WORKLOAD_JOIN",
+    "TOKEN_VAZIO_P99_RAW_SERIES",
+    "TOKEN_VAZIO_IOPS_CURRENT_DEVICE_RECEIPT"
+  ],
+  "next_verifiable_step":"Use these candidates as falsifiable replay targets; search existing raw logs first, then execute matched workloads without retroactive promotion."
+}

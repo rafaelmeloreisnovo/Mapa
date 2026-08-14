@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/governance/gap_priority_contract.v1.schema.json",
+  "title": "RAFAELIA GapPriorityContractV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "ledger_id",
+    "created_at",
+    "scope",
+    "invariants",
+    "priority_model",
+    "gaps",
+    "claim_allowed",
+    "provenance"
+  ],
+  "properties": {
+    "schema": {"const": "RAFAELIA_GAP_PRIORITY_CONTRACT_V1"},
+    "ledger_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "scope": {"type": "string", "minLength": 1},
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "priority_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scalar_score_forbidden", "priority_classes", "vector_dimensions"],
+      "properties": {
+        "scalar_score_forbidden": {"const": true},
+        "priority_classes": {
+          "type": "array",
+          "items": {"enum": ["P0", "P1", "P2", "P3"]},
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true
+        },
+        "vector_dimensions": {
+          "type": "array",
+          "minItems": 6,
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/gap"}
+    },
+    "claim_allowed": {"const": false},
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/ref"}
+    }
+  },
+  "$defs": {
+    "tokenOrString": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {"const": "TOKEN_VAZIO"}
+      ]
+    },
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {"enum": ["GITHUB_PR", "GITHUB_COMMIT", "GITHUB_RUN", "GITHUB_JOB", "GITHUB_FILE", "DRIVE_FILE", "DRIVE_FOLDER", "MANIFEST_ENTRY", "CONVERSATION_SHARD", "LOCAL_RUN", "OTHER"]},
+        "id": {"type": "string", "minLength": 1},
+        "locator": {"type": ["string", "null"]},
+        "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["urgency", "importance", "uncertainty", "provenance_completeness", "evidence_strength", "dependency_centrality", "closure_verifiability", "regression_risk"],
+      "properties": {
+        "urgency": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "TOKEN_VAZIO"]},
+        "importance": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "TOKEN_VAZIO"]},
+        "uncertainty": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "TOKEN_VAZIO"]},
+        "provenance_completeness": {"enum": ["COMPLETE", "PARTIAL", "LOW", "TOKEN_VAZIO"]},
+        "evidence_strength": {"enum": ["REPRODUCED", "OBSERVED", "DOCUMENTED", "INFERRED", "NONE", "TOKEN_VAZIO"]},
+        "dependency_centrality": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "TOKEN_VAZIO"]},
+        "closure_verifiability": {"enum": ["HIGH", "MEDIUM", "LOW", "TOKEN_VAZIO"]},
+        "regression_risk": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "TOKEN_VAZIO"]}
+      }
+    },
+    "contribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "direction", "mechanism"],
+      "properties": {
+        "target": {"enum": ["TRACEABILITY", "EVIDENCE_DENSITY", "REPRODUCIBILITY", "SEMANTIC_ALIGNMENT", "ANTI_REGRESSION", "OPERATIONAL_LEVERAGE", "UNCERTAINTY", "PROVENANCE", "CONTRACT_STRENGTH"]},
+        "direction": {"enum": ["INCREASE", "PRESERVE", "REDUCE"]},
+        "mechanism": {"type": "string", "minLength": 1}
+      }
+    },
+    "closure_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["closure_condition", "required_evidence", "forbidden_promotion", "providencia", "next_verifiable_step"],
+      "properties": {
+        "closure_condition": {"type": "string", "minLength": 1},
+        "required_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "forbidden_promotion": {"type": "string", "minLength": 1},
+        "providencia": {"type": "string", "minLength": 1},
+        "next_verifiable_step": {"type": "string", "minLength": 1}
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gap_id", "title", "status", "priority", "token_state", "why_it_matters", "vector", "contribution_vector", "provenance_refs", "closure_contract", "claim_allowed"],
+      "properties": {
+        "gap_id": {"type": "string", "pattern": "^GAP-[A-Z0-9_-]+$"},
+        "title": {"type": "string", "minLength": 1},
+        "status": {"enum": ["OPEN", "PARTIAL", "CLOSED", "CLOSED_BY_NEGATIVE_EVIDENCE", "BLOCKED"]},
+        "priority": {"enum": ["P0", "P1", "P2", "P3"]},
+        "token_state": {"type": "string", "pattern": "^(TOKEN_VAZIO|TOKEN_VAZIO_[A-Z0-9_]+|FILLED_[A-Z0-9_]+)$"},
+        "why_it_matters": {"type": "string", "minLength": 1},
+        "vector": {"$ref": "#/$defs/vector"},
+        "contribution_vector": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/contribution"}
+        },
+        "provenance_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/ref"}
+        },
+        "closure_contract": {"$ref": "#/$defs/closure_contract"},
+        "claim_allowed": {"const": false}
+      }
+    }
+  }
+}

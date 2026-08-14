@@ -1,0 +1,219 @@
+{
+  "schema": "RAFAELIA_GAP_PRIORITY_DELTA_V3",
+  "delta_id": "GAP-LEDGER-PERFORMANCE-METRIC-20260814-V3",
+  "created_at": "2026-08-14T02:38:00-03:00",
+  "extends": {
+    "path": "data/governance/performance_metric_gap_priority_2026-08-14.v2.json",
+    "commit": "da7581d9afcd57c0fe2cb9aee38a2d0ea0e5f075"
+  },
+  "claim_allowed": false,
+  "new_invariants": [
+    "artifact_present != artifact_generated_by_that_run",
+    "artifact_uploaded_after_skipped_benchmark != benchmark_execution_receipt",
+    "versioned_result != producer_run",
+    "embedded_git_HEAD != exact_executed_worktree when the benchmark delta is uncommitted",
+    "methodology_implemented_and_merged != methodology_test_execution_receipt",
+    "source_contract_pass != unit_test_pass",
+    "heterogeneous metric aggregate != repeated homogeneous measurement series",
+    "labeled synthetic proxy != measured implementation path"
+  ],
+  "gap_deltas": [
+    {
+      "gap_id": "GAP-PMO-001",
+      "priority": "P0",
+      "state": "PARTIAL_REFINED",
+      "filled": [
+        "FILLED_HISTORICAL_BYTE_IDENTITY_048_049_050",
+        "FILLED_HISTORICAL_SHA256_048_049_050"
+      ],
+      "open": [
+        "TOKEN_VAZIO_CURRENT_PROVIDER_OBJECT_ID_048_049_050",
+        "TOKEN_VAZIO_CURRENT_RAW_FETCH_ROUTE_048_049_050"
+      ],
+      "anti_regression": "Never regress to HASH_UNKNOWN: Stage-1 exact-byte SHA-256 authority remains valid historical evidence even while current direct provider metadata access is unresolved."
+    },
+    {
+      "gap_id": "GAP-PMO-002",
+      "priority": "P0",
+      "state": "OPEN_REFINED",
+      "open": [
+        "TOKEN_VAZIO_VECTRA_79_RAW_EXECUTION",
+        "TOKEN_VAZIO_ANDROID_DEVICE_RUNTIME_RECEIPT"
+      ],
+      "negative_findings": [
+        "Actions artifact pages 1-2 contain host/perf/build/report families but no artifact name that by itself identifies a VectraBenchmark 79-slot raw Android execution.",
+        "reports/device_runtime_smoke.json is DEVICE_PENDING with apk=not_found, device/ABI/SDK unknown and adb missing.",
+        "reports/vectra_grade_benchmarks.json is documented_and_pending and not an executed grade measurement receipt."
+      ],
+      "forbidden_promotion": "Do not use host G8, host perf baselines, policy proxy TSV or Android build-report artifacts as substitutes for a real VectraBenchmark 79-slot device execution."
+    },
+    {
+      "gap_id": "GAP-PMO-004",
+      "priority": "P0",
+      "state": "BLOCKED_WITH_SEPARATE_EXECUTION_LAYERS",
+      "open": [
+        "TOKEN_VAZIO_METRIC_OBSERVATION_TEST_RECEIPT",
+        "TOKEN_VAZIO_CI_RUNNER_EXECUTION_PR235",
+        "TOKEN_VAZIO_INDUSTRIAL_STATISTICS_TEST_RECEIPT"
+      ],
+      "evidence": [
+        {
+          "source": "Mapa PR235 CI",
+          "state": "runner startup failure",
+          "run_id": 31772447230,
+          "job_id": 94680978242,
+          "runner_id": 0,
+          "steps": 0
+        },
+        {
+          "source": "Vectras PR1090 head ef401c3eb3618ffa9135612d301a448e93670ba1",
+          "state": "methodology implemented and merged; IndustrialStatistics unit execution still explicitly required",
+          "merge_commit": "c62630a9cab530dc0db71029c5951dbd11f4ac19"
+        },
+        {
+          "source": "Vectras android-ci run 31245080140",
+          "state": "Validate Java source contracts PASS; build halted at strict bootstrap assets contract before build/test lane",
+          "build_job_id": 93072303190
+        },
+        {
+          "source": "Vectras audit-benchmark-contract run 31245080013",
+          "state": "audit benchmark claims/coleta/equivalence PASS, but not evidence of IndustrialStatisticsTest execution",
+          "job_id": 93072228124
+        }
+      ],
+      "closure_contract": "Each test family closes only with its own executed command, source SHA, environment, output and exit status. Passing source/audit contracts cannot be inherited as unit-test execution."
+    },
+    {
+      "gap_id": "GAP-PMO-005",
+      "priority": "P1",
+      "state": "PARTIAL_REFINED",
+      "filled": [
+        "FILLED_HISTORICAL_G8_RUN_SOURCE_PROVENANCE_LIMITED"
+      ],
+      "open": [
+        "TOKEN_VAZIO_CORE_BENCHMARK_SMOKE_EXECUTION_RECEIPT",
+        "TOKEN_VAZIO_WORKTREE_DIFF_AT_BENCH_RUN",
+        "TOKEN_VAZIO_EXACT_BENCH_BINARY_BYTES"
+      ],
+      "historical_g8": {
+        "origin_commit": "ee8fd0fb1a3a7827862f543cc9c482dab20d3d92",
+        "embedded_head": "88f3ecfc1be292d3f0b985a885edfbbbb61997dc",
+        "platform": "x86_64",
+        "tick_source": "rdtsc",
+        "samples_per_kernel": 31,
+        "interpretation": "Direct historical host evidence exists, but exact worktree/executable byte identity at measurement remains incomplete."
+      },
+      "forbidden_promotion": "G8 is not the later core_benchmark_smoke receipt and is not Android/ARM performance evidence."
+    },
+    {
+      "gap_id": "GAP-PMO-008",
+      "priority": "P0",
+      "state": "OPEN_NEW",
+      "title": "Eliminate or quarantine heterogeneous Professional Tools reproducibility aggregation",
+      "token_state": "TOKEN_VAZIO_PROFESSIONAL_TOOLS_HOMOGENEOUS_SERIES_INTEGRATION",
+      "why_it_matters": "Vectras industrial-methodology audit states that the historical Professional Tools path pools rawValue from different metric IDs/workloads into global statistics. That is not a repeated-measurement reproducibility experiment and can contaminate scientific/industrial grades.",
+      "provenance": [
+        "Vectras PR #1090 merged as c62630a9cab530dc0db71029c5951dbd11f4ac19",
+        "docs/benchmark/INDUSTRIAL_BENCHMARK_METHODS_V1.md",
+        "app/src/main/java/com/vectras/vm/benchmark/IndustrialStatistics.java blob e057e0bc23e8945df2ca45b019ef7089916f2713",
+        "app/src/test/java/com/vectras/vm/benchmark/IndustrialStatisticsTest.java blob 544508c6f2d8bfc71c1a50d645bf42a5a0e02d0b"
+      ],
+      "contribution_vector": [
+        {"target": "SEMANTIC_ALIGNMENT", "direction": "INCREASE", "mechanism": "Only repeated samples of the same metric/workload/input/unit may enter one statistical series."},
+        {"target": "ANTI_REGRESSION", "direction": "INCREASE", "mechanism": "Prevents a UI grade from reintroducing the mixed-metric reproducibility error after the statistical primitive was corrected."},
+        {"target": "EVIDENCE_DENSITY", "direction": "INCREASE", "mechanism": "Each grade becomes attributable to a homogeneous evidence series rather than a composite of incomparable processes."},
+        {"target": "UNCERTAINTY", "direction": "REDUCE", "mechanism": "Separates missing repeated measurements from apparent stability produced by pooling unlike metrics."}
+      ],
+      "closure_contract": {
+        "condition": "Professional Tools/grade path consumes only homogeneous repeated-series objects or explicitly disables reproducibility/grade promotion when such a series is absent.",
+        "required_evidence": [
+          "source diff showing removal/quarantine of mixed rawValue aggregation",
+          "test proving one sample cannot produce reproducibility score",
+          "test proving different metric IDs cannot be pooled",
+          "actual execution receipt for those tests"
+        ],
+        "providencia": "Audit the current ProfessionalToolsActivity call graph against IndustrialStatistics and replace mixed-vector grading with per-metric repeated-series gating; keep old grade behavior as historical code evidence, not valid methodology.",
+        "forbidden_promotion": "No scientific/industrial reproducibility grade may be based on heterogeneous metric IDs/workloads."
+      },
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-PMO-009",
+      "priority": "P1",
+      "state": "PARTIAL_NEW",
+      "title": "Recover producer execution lineage for versioned host_x86_64 balanced/aggressive baselines",
+      "token_state": "TOKEN_VAZIO_BASELINE_PRODUCER_RUN",
+      "filled": [
+        "FILLED_PERF_SUITE_IMPLEMENTATION_ORIGIN_COMMIT"
+      ],
+      "origin_commit": "cec3c180c607f522c4f05e1f5fce94c387e3ce04",
+      "open": [
+        "TOKEN_VAZIO_BASELINE_PRODUCER_RUN",
+        "TOKEN_VAZIO_BASELINE_PRODUCER_ENVIRONMENT"
+      ],
+      "forbidden_promotion": "Version-controlled baseline numbers are not current-run measurements and are not attributed to run 31245608973 merely because that later run uploaded them."
+    },
+    {
+      "gap_id": "GAP-PMO-010",
+      "priority": "P0",
+      "state": "PARTIAL_NEW",
+      "title": "Replace labeled synthetic policy proxy with actual policy-path benchmark if policy performance is claimed",
+      "filled": [
+        "FILLED_POLICY_BENCHMARK_PRODUCER_SOURCE",
+        "FILLED_POLICY_PROXY_SEMANTIC_CLASSIFICATION"
+      ],
+      "open": [
+        "TOKEN_VAZIO_POLICY_BENCHMARK_RUNTIME_ENVIRONMENT",
+        "TOKEN_VAZIO_REAL_POLICY_PATH_BENCHMARK_RECEIPT"
+      ],
+      "verdict": "LABELED_SYNTHETIC_PROXY_NOT_POLICY_PATH_BENCHMARK",
+      "producer": "demo_cli/src/rmr_policy_benchmark.c blob d5ad3a4cd95d07885e4611a4fae75f38663861e4",
+      "why_it_matters": "The TSV prints four policy labels but times a synthetic XOR/multiply loop rather than the named policy implementations. Treating those rows as policy-mode performance would be a semantic false positive.",
+      "forbidden_promotion": "Do not rank recompute_all/promote_valid_state/verify_only/policy_pipeline, do not infer CRC32C throughput, and do not infer 64KiB byte throughput from this proxy TSV."
+    }
+  ],
+  "global_provenance_delta": [
+    {
+      "kind": "GITHUB_PR",
+      "id": "rafaelmeloreisnovo/Vectras-VM-Android#1090",
+      "state": "merged",
+      "merge_commit": "c62630a9cab530dc0db71029c5951dbd11f4ac19"
+    },
+    {
+      "kind": "GITHUB_RUN",
+      "id": "31245080013",
+      "role": "audit-benchmark-contract PASS; no currently returned run artifacts"
+    },
+    {
+      "kind": "GITHUB_RUN",
+      "id": "31245080140",
+      "role": "Android source contracts PASS; strict bootstrap asset gate failed before build/test"
+    },
+    {
+      "kind": "GITHUB_ARTIFACT_SEARCH",
+      "scope": "Vectras Actions artifacts pages 1-2, 200/204 artifact records",
+      "result": "No artifact name directly identified as VectraBenchmark 79-slot raw Android execution; finding applies only to searched metadata names, not artifact contents or absolute existence."
+    }
+  ],
+  "F_ok": [
+    "historical 048-050 byte identities and SHA-256 preserved",
+    "artifact-carried versus run-generated boundary formalized",
+    "G8 historical run lineage narrowed correctly",
+    "industrial benchmark methodology implemented and merged",
+    "homogeneous-series statistics primitive source-bound",
+    "policy benchmark proxy semantic mismatch proven from producer source"
+  ],
+  "F_gap": [
+    "current provider route for 048-050",
+    "raw VectraBenchmark 79 Android execution",
+    "PR235 validator execution receipt",
+    "IndustrialStatisticsTest execution receipt",
+    "Professional Tools homogeneous-series integration",
+    "core benchmark smoke execution receipt",
+    "G8 exact worktree and executable SHA-256",
+    "host baseline producer run/environment",
+    "real policy-path benchmark receipt",
+    "real Android device runtime receipt"
+  ],
+  "F_next": "Prioritize semantic contamination blockers and high-leverage evidence recovery: quarantine mixed-metric reproducibility first, recover raw Vectra79/device receipts, and execute only tests whose runtime receipt is still missing."
+}
