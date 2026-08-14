@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.omega-super-root.v1",
+  "root_id": "OMEGA-ROOT-RAFAELIA",
+  "version": "1.0.0",
+  "generated_at": "2026-08-14T12:59:00-03:00",
+  "source_main_sha": "a0871ca1f0771eae46c35d496d2f23339c550f7b",
+  "state": "VERIFIED_LIMITED_NONTERMINAL",
+  "claim_allowed": false,
+  "mounts": [
+    {"mount_id": "MOUNT-MAPA-MAIN", "node_id": "OMEGA-NODE-MAPA-MAIN", "mode": "READ_ONLY", "authority": "CURRENT_PROVIDER"},
+    {"mount_id": "MOUNT-DRIVE-MASTER-NAV", "node_id": "OMEGA-NODE-DRIVE-MASTER-NAV", "mode": "REFERENCE_ONLY", "authority": "INDEX"},
+    {"mount_id": "MOUNT-HYPOTHESIS-V8", "node_id": "OMEGA-NODE-HYP-INDEX-V8", "mode": "REFERENCE_ONLY", "authority": "INDEX"},
+    {"mount_id": "MOUNT-TRACEABILITY", "node_id": "OMEGA-NODE-TRACEABILITY", "mode": "REFERENCE_ONLY", "authority": "INDEX"},
+    {"mount_id": "MOUNT-NOVOEXPORT-RAW", "node_id": "OMEGA-NODE-NOVOEXPORT", "mode": "READ_ONLY", "authority": "RAW_SOURCE"}
+  ],
+  "route_ids": [
+    "OMEGA-ROUTE-BOOTSTRAP",
+    "OMEGA-ROUTE-HYPOTHESIS",
+    "OMEGA-ROUTE-NOVOEXPORT-READONLY",
+    "OMEGA-ROUTE-STATE-RECONCILIATION"
+  ],
+  "invariants": [
+    "IDEA != FORMULA != IMPLEMENTATION != EXECUTION != EVIDENCE != CLAIM != ACADEMIC_NOVELTY",
+    "HISTORICAL_STATE != CURRENT_PROVIDER_STATE",
+    "TOKEN_VAZIO is explicit and auditable",
+    "append-only deltas preserve predecessor states",
+    "identity != name != physical_location",
+    "filesystem_tree != knowledge_graph",
+    "open the minimum relevant subgraph by default",
+    "current provider state supersedes stale snapshots without erasing them",
+    "claim_allowed=false unless a specific evidence gate independently promotes a claim"
+  ],
+  "gaps": [
+    {
+      "token": "TOKEN_VAZIO_GLOBAL_TERMINALITY",
+      "criticality": "P0",
+      "reason": "This V1 root deliberately does not assert exhaustive coverage of all RAFAELIA sources.",
+      "next_gate": "expand mounts by evidenced deltas and produce a terminal coverage matrix only when justified"
+    },
+    {
+      "token": "TOKEN_VAZIO_IDENTITY_TABLE_COMPLETE",
+      "criticality": "P0",
+      "reason": "A universal node format is materialized, but a deduplicated global identity table is not complete.",
+      "next_gate": "normalize aliases and byte/content identities across mounted sources"
+    },
+    {
+      "token": "TOKEN_VAZIO_MOUNT_TABLE_COMPLETE",
+      "criticality": "P1",
+      "reason": "The initial mount set covers high-value current anchors only.",
+      "next_gate": "add a new mount only when it materially increases reconstructibility, provenance or evidence"
+    }
+  ],
+  "successor_policy": "v_next = validated(v_current) + append_only_delta",
+  "default_activation_gate": [
+    "resolve_gap",
+    "increase_evidence",
+    "increase_reconstructibility",
+    "increase_provenance",
+    "provide_falsifier",
+    "provide_execution",
+    "resolve_contradiction"
+  ]
+}
