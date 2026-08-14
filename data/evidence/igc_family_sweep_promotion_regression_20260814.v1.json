@@ -1,0 +1,38 @@
+{
+  "event": "IGC_FAMILY_SWEEP_PROMOTION_REGRESSION_CONTAINMENT_V1",
+  "date": "2026-08-14",
+  "state": "CONTAINED_APPEND_ONLY",
+  "claim_allowed": false,
+  "historical_pr": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pr": 231,
+    "state_observed_after_sweep_write": "MERGED",
+    "merged_at_utc": "2026-08-14T02:14:13Z",
+    "merge_commit": "b50a87ad0e8507bb62bfe7394f47cc0196bd52f4",
+    "head_at_merge": "483a0d34ab58d896956134303f66aa9f20996e7e"
+  },
+  "post_merge_historical_branch_writes": [
+    "9853c2c3e0470dadbc0923280f24d15f8bd59190",
+    "8d5938bbb92c0b3559078c20e0532421c3a0026d",
+    "006af8bdef569b2dc845b41db675bfc58aaf27af"
+  ],
+  "interpretation": "These commits occurred after PR #231 had already merged, so they were not promoted to main by that PR. They are retained as historical provenance, not rewritten or misrepresented as merged content.",
+  "containment": {
+    "main_reobserved": "54bbcdddc7f82b543fa05fd7ef233e2c3eda75ca",
+    "main_observation_note": "main also contains later merge PR #232; protected=false was observed",
+    "clean_branch": "audit/igc-family-sweep-20260814",
+    "clean_branch_base": "54bbcdddc7f82b543fa05fd7ef233e2c3eda75ca",
+    "clean_markdown_commit": "b0de29b7b4584e46b430daf731e0c44fb155b10a",
+    "clean_matrix_commit": "ac577c81edef2388731e8c336916130f782c2e95",
+    "promotion": "DRAFT_PR_REQUIRED",
+    "auto_merge": false
+  },
+  "invariants": [
+    "historical branch bytes are preserved",
+    "post-merge writes are not described as merged",
+    "new materialization starts from current main",
+    "no claim promotion follows from repository presence",
+    "no automatic merge is authorized"
+  ],
+  "f_next": "open a new draft PR for the clean branch, verify diff contains only intended sweep artifacts, keep claim_allowed=false"
+}
