@@ -1,0 +1,26 @@
+{
+  "schema":"RAFAELIA_VECTRA_NATIVE_CORE_SMOKE_BINDING_V1",
+  "state":"EVIDENCED_STATIC_METHOD_LEVEL",
+  "claim_allowed":false,
+  "producer":{
+    "repository":"rafaelmeloreisnovo/Vectras-VM-Android",
+    "commit":"21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d",
+    "path":"app/src/main/cpp/core/tests/core_benchmark_smoke.c",
+    "blob_sha":"9fb3af2d8745f6944916946ce7b4b47ea028fa9e"
+  },
+  "workload":{"iterations":100000,"payload_bytes":256,"payload_rule":"data[i]=(i*3+7) mod 256","operation":"run_sector(data,256,&out)"},
+  "output_format":"benchmark_smoke: iters=<u32> total_ns=<u64> avg_ns=<float> hash64=<u64>",
+  "fields":[
+    {"name":"total_ns","metric":"HOST_CORE_SMOKE_TOTAL_TIME","unit":"ns","semantic":"elapsed_time_for_all_iterations"},
+    {"name":"avg_ns","metric":"HOST_CORE_SMOKE_AVG_SECTOR_TIME","unit":"ns/sector","semantic":"elapsed_time_per_run_sector_256B"},
+    {"name":"hash64","metric":"HOST_CORE_SMOKE_FINAL_HASH64","unit":"uint64","semantic":"integrity_fingerprint_not_performance_metric"}
+  ],
+  "boundaries":[
+    "host CI smoke != Android device benchmark",
+    "one smoke sample != distribution/p50/p95/p99",
+    "hash64 != throughput",
+    "static producer existence != successful execution receipt"
+  ],
+  "open_tokens":["TOKEN_VAZIO_NATIVE_SMOKE_RAW_LOG","TOKEN_VAZIO_NATIVE_SMOKE_ENVIRONMENT_RECEIPT","TOKEN_VAZIO_NATIVE_SMOKE_BINARY_SHA256"],
+  "next_verifiable_step":"Locate or execute one host smoke log, bind environment/binary/source hash, then materialize total_ns and avg_ns as MetricObservationV1."
+}
