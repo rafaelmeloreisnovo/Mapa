@@ -1,0 +1,70 @@
+{
+  "schema": "rafaelia.operational-coherence-ledger/v1",
+  "date_local": "2026-08-13",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "append_only": true,
+  "base_main_sha": "39c0e38cc885bde18686871760453540545f9199",
+  "canonical_method_drive_provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+  "predecessor_cycle": "C81",
+  "predecessor_receipt_provider_id": "1YD_Vs34QyvjWe4sHCRifWl_bbM6HjPoDiyMPar5u3Pc",
+  "invariants": [
+    "idea != implementation != execution != evidence != claim",
+    "TOKEN_VAZIO != FAIL != PASS",
+    "artifact_present != provenance_closed",
+    "build_artifact != installed_artifact",
+    "installed_artifact != runtime_semantic_proof",
+    "single_execution != independent_reproduction",
+    "claim_allowed=false without closure evidence"
+  ],
+  "windows": [
+    {"id":"W1_SECURITY_INTEGRITY","priority":1,"scope":"fail-closed, signatures, hashes, traversal, parser/I-O, corruption"},
+    {"id":"W2_BUILD_RUNTIME","priority":2,"scope":"build, ABI, physical Android, install, launch, workload"},
+    {"id":"W3_CONTRACT_COMPAT","priority":3,"scope":"API, ABI, schema, identity, producer-verifier semantics"},
+    {"id":"W4_EVIDENCE_PROVENANCE","priority":4,"scope":"artifact-receipt-source-provider binding and reproduction"},
+    {"id":"W5_MEMORY_INDEX","priority":5,"scope":"Drive-GitHub longitudinal index, stale state and orphan recovery"},
+    {"id":"W6_EFFICIENCY","priority":6,"scope":"deduplication, CI observability, micro-batches and dependency ordering"},
+    {"id":"W7_EVOLUTION","priority":7,"scope":"research and capability growth only after earlier gates remain coherent"}
+  ],
+  "material_reclassifications": [
+    {
+      "id":"GAP-RAFCODEPHI-APK-BUILD",
+      "previous_state":"TOKEN_VAZIO_ARTIFACT",
+      "current_state":"BUILD_ARTIFACT_BOUND_VERIFIED_STATIC",
+      "reason_code":"RAFCODEPHI_APK_ARTIFACT_RECOVERED_FROM_GITHUB_ACTIONS",
+      "repo":"rafaelmeloreisnovo/termux-app-rafacodephi",
+      "source_commit":"31df72137513885ec2535077141f8597496fce73",
+      "workflow_run_id":31281091629,
+      "artifact_id":9028461291,
+      "artifact_archive_sha256":"0f55449ce3a7907fe7f16454e9c362d16192d1e77e744bc362d5f1fc6cb27a0a",
+      "arm32_apk_sha256":"6988d308c37975e227d352ce54c4dee952c2a13e5b04245ef00b1a4b0f92af64",
+      "arm64_apk_sha256":"86c3708ca346e7882664e7308b026386a4ffdffbc17ff2ab870928120212473e",
+      "universal_apk_sha256":"17ce6f4efd48e2e84fecbc3129304473d5fb60170decbd8d304e9f47439312bc",
+      "package":"com.termux.rafacodephi",
+      "version":"0.118.0-rafacodephi",
+      "evidence_needed":"physical installation and runtime bound to exact APK hash",
+      "falsifier":"installed package/hash or runtime identity differs from build-bound artifact",
+      "next_probe":"install exact ARM32 APK and collect installed base.apk hash, pm path, launch, logs and workload",
+      "closure_gate":"physical receipt bound to source commit + workflow artifact + exact APK hash",
+      "status_epistemic":"VERIFIED_STATIC_ONLY"
+    }
+  ],
+  "priority_gaps": [
+    {"rank":1,"reason_code":"PHYSICAL_ARM32_EXACT_ARTIFACT","status":"TOKEN_VAZIO","urgency":"P0","next_probe":"install ARM32 APK sha256 6988d308... and capture device receipt"},
+    {"rank":2,"reason_code":"INDEPENDENT_REPRODUCTION_MISSING","status":"TOKEN_VAZIO","urgency":"P0","next_probe":"second independent device/rerun with identical provenance and workload"},
+    {"rank":3,"reason_code":"CI_OBSERVABILITY_BILLING_OR_STARTUP","status":"TOKEN_VAZIO_INFRA","urgency":"P0","next_probe":"rerun same SHA after runner/billing restoration and require non-empty steps/logs"},
+    {"rank":4,"reason_code":"PRODUCTION_SIGNING_RECEIPT_MISSING","status":"TOKEN_VAZIO","urgency":"P1","next_probe":"bind production signature/certificate to exact release artifact without promoting debug signing"},
+    {"rank":5,"reason_code":"RAFCODEPHI_PACKAGE_REPOSITORY_UNPUBLISHED","status":"BLOCKED","urgency":"P1","next_probe":"signed repository metadata + on-device apt/pkg negative and positive tests"},
+    {"rank":6,"reason_code":"FG006_REPOSITORY_WIDE_COVERAGE_UNMEASURED","status":"VERIFIED_LIMITED","urgency":"P1","next_probe":"enumerate tracked provenance/custody objects and require ledger coverage without metadata-only promotion"},
+    {"rank":7,"reason_code":"DRIVE_GITHUB_STATE_DRIFT","status":"ACTIVE_RISK","urgency":"P1","next_probe":"always resolve newest receipt/checkpoint before acting; C81 supersedes C79/C80 as predecessor"}
+  ],
+  "anti_retraction": {
+    "do_not_close_by_inference": true,
+    "do_not_merge_or_release": true,
+    "do_not_write_protected_branch": true,
+    "preserve_negative_results": true,
+    "preserve_historical_receipts": true,
+    "require_immutable_identity_before_promotion": true
+  },
+  "F_next": "Execute the exact ARM32 RAFCODEPHI APK sha256 6988d308c37975e227d352ce54c4dee952c2a13e5b04245ef00b1a4b0f92af64 on physical Android and emit a source/workflow/artifact/device-bound receipt."
+}
