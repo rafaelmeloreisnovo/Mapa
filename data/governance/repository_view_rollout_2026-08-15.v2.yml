@@ -1,0 +1,61 @@
+schema: rafaelia_repository_view_rollout_v2
+schema_version: "2.0.0"
+observed_at: "2026-08-15"
+state: WAVE0_EXECUTION_PREPARED
+claim_allowed: false
+append_only: true
+predecessor:
+  path: data/governance/repository_view_rollout_2026-08-14.v1.yml
+  blob_sha: 99810350c15291f4960f7567b3ce9f592cf0f45a
+invariants:
+  - repository_known_is_not_recursive_tree_known
+  - workflow_defined_is_not_workflow_executed
+  - artifact_expected_is_not_artifact_observed
+  - receipt_required_before_scan_state_promotion
+  - unknown_semantic_role_is_TOKEN_VAZIO
+  - no_destructive_moves_from_structural_signals
+  - claim_allowed_false_for_structure_only
+control_plane:
+  generator_repository: rafaelmeloreisnovo/RafGitTools
+  generator_path: scripts/navigation/repository_view.py
+  reusable_workflow: .github/workflows/repository-view-reusable.yml
+  canonical_ref_target: main
+  predecessor_pr: 352
+  predecessor_pr_state: MERGED
+  hardening_pr: 353
+  hardening_pr_state: OPEN_DRAFT_AT_OBSERVATION
+contract_plane:
+  repository: rafaelmeloreisnovo/Mapa
+  predecessor_pr: 251
+  predecessor_pr_state: MERGED
+  schema_path: schemas/repository_view_index.schema.json
+  contract_path: indices/RAFAELIA_REPOSITORY_VIEW_CONTRACT_V1.md
+wave_0:
+  target_repository: rafaelmeloreisnovo/Mapa
+  caller_workflow: .github/workflows/repository-view-wave0.yml
+  caller_commit: e96562afd737b72be5e0d307fbecd2684a447b52
+  intended_generator_ref: main
+  max_records_per_shard: 5000
+  execution_state: TOKEN_VAZIO_WORKFLOW_RUN_NOT_YET_OBSERVED
+  artifact_state: TOKEN_VAZIO_REPOSITORY_VIEW_ARTIFACT_NOT_YET_OBSERVED
+  receipt_state: TOKEN_VAZIO_RECEIPT_NOT_YET_BOUND
+  rollout_state_before_execution: IMPLEMENTED_CONTROL_PLANE
+  promotion_target_after_verified_run: SCANNED_STRUCTURE_ONLY
+promotion_gate:
+  requires:
+    - workflow_run_success_observed
+    - target_commit_sha_bound
+    - repository_view_artifact_observed
+    - INDEX_yml_schema_validation_pass
+    - receipt_hashes_recorded
+  blocked_until_all_required_evidence: true
+F_ok:
+  - PR_251_merged_contract_plane
+  - PR_352_merged_generator_plane
+  - wave0_caller_materialized
+F_gap:
+  - PR_353_not_merged_at_observation
+  - wave0_workflow_run_not_observed
+  - wave0_artifact_not_observed
+  - wave0_receipt_not_bound
+F_next: observe_the_wave0_PR_run_then_bind_run_job_artifact_target_commit_and_hashes_in_successor_receipt_without_rewriting_this_file
