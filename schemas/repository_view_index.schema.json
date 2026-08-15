@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/repository_view_index.schema.json",
+  "title": "RAFAELIA Repository View Index V1",
+  "type": "object",
+  "required": [
+    "schema",
+    "schema_version",
+    "profile_id",
+    "generated_at",
+    "repository",
+    "source",
+    "evidence_boundary",
+    "statistics",
+    "navigation",
+    "documentation_debt"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia_repository_view_v1"},
+    "schema_version": {"const": "1.0.0"},
+    "profile_id": {"const": "RAFAELIA-REPOSITORY-VIEW-1"},
+    "generated_at": {"type": "string", "minLength": 1},
+    "repository": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "required": ["commit", "branch", "collection_method", "scope"],
+      "properties": {
+        "commit": {"type": "string", "minLength": 1},
+        "branch": {"type": "string", "minLength": 1},
+        "collection_method": {"enum": ["git_ls_files", "filesystem_walk"]},
+        "scope": {"enum": ["recursive_tracked_files", "recursive_filesystem_files"]}
+      },
+      "additionalProperties": false
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "required": ["state", "claim_allowed", "semantic_meaning_of_unknown_files", "note"],
+      "properties": {
+        "state": {"const": "STRUCTURE_ONLY"},
+        "claim_allowed": {"const": false},
+        "semantic_meaning_of_unknown_files": {"const": "TOKEN_VAZIO"},
+        "note": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "statistics": {
+      "type": "object",
+      "required": [
+        "files",
+        "directories",
+        "unknown_semantic_role_files",
+        "unindexed_source_directories",
+        "root_loose_file_candidates",
+        "role_counts",
+        "top_suffix_counts"
+      ],
+      "properties": {
+        "files": {"type": "integer", "minimum": 0},
+        "directories": {"type": "integer", "minimum": 1},
+        "unknown_semantic_role_files": {"type": "integer", "minimum": 0},
+        "unindexed_source_directories": {"type": "integer", "minimum": 0},
+        "root_loose_file_candidates": {"type": "integer", "minimum": 0},
+        "role_counts": {"type": "object"},
+        "top_suffix_counts": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "navigation": {
+      "type": "object",
+      "required": ["top_level_groups", "shards"],
+      "properties": {
+        "top_level_groups": {"type": "array"},
+        "shards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "path", "records"],
+            "properties": {
+              "kind": {"enum": ["files", "directories"]},
+              "path": {"type": "string", "minLength": 1},
+              "group": {"type": "string"},
+              "records": {"type": "integer", "minimum": 0}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "documentation_debt": {
+      "type": "object",
+      "required": [
+        "unindexed_source_directories_top",
+        "root_loose_file_candidates_top",
+        "truncation"
+      ],
+      "properties": {
+        "unindexed_source_directories_top": {"type": "array", "items": {"type": "string"}},
+        "root_loose_file_candidates_top": {"type": "array", "items": {"type": "string"}},
+        "truncation": {
+          "type": "object",
+          "required": ["unindexed_source_directories", "root_loose_file_candidates"],
+          "properties": {
+            "unindexed_source_directories": {"type": "boolean"},
+            "root_loose_file_candidates": {"type": "boolean"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "x-evidence-boundary": "This schema validates structure only. It does not validate semantic correctness, runtime reachability, implementation completeness, or scientific claims."
+}

@@ -1,0 +1,219 @@
+schema: rafaelia_repository_view_rollout_v1
+schema_version: "1.0.0"
+observed_at: "2026-08-14"
+source: github_connector_owner_affiliation
+owner: rafaelmeloreisnovo
+owned_repositories_observed: 83
+state: PARTIAL_ROLLOUT
+claim_allowed: false
+invariants:
+  - inventory_of_repository_metadata_is_not_recursive_tree_coverage
+  - repository_presence_is_not_documentation_completeness
+  - unknown_semantic_role_is_TOKEN_VAZIO
+  - no_destructive_moves_from_structural_signals
+  - fork_or_upstream_repositories_require_overlay_strategy
+  - generated_maps_must_be_sharded_when_large
+control_plane:
+  generator_repository: rafaelmeloreisnovo/RafGitTools
+  generator_path: scripts/navigation/repository_view.py
+  generator_branch: audit/repository-view-v1-20260814
+  contract_repository: rafaelmeloreisnovo/Mapa
+  contract_path: indices/RAFAELIA_REPOSITORY_VIEW_CONTRACT_V1.md
+  schema_path: schemas/repository_view_index.schema.json
+rollout_states:
+  IMPLEMENTED_CONTROL_PLANE: generator_or_contract_materialized
+  TOKEN_VAZIO_NOT_SCANNED: repository_observed_but_recursive_view_not_yet_materialized
+  SCANNED_STRUCTURE_ONLY: recursive_tree_receipt_exists_but_semantic_doc_review_is_open
+  NAVIGATION_COVERED: recursive_map_and_priority_documentation_triage_closed
+priority_wave_0:
+  - rafaelmeloreisnovo/RafGitTools
+  - rafaelmeloreisnovo/Mapa
+priority_wave_1:
+  - rafaelmeloreisnovo/RafPolimata
+  - rafaelmeloreisnovo/papers
+  - rafaelmeloreisnovo/relativity-living-light
+  - rafaelmeloreisnovo/termux-app-rafacodephi
+  - rafaelmeloreisnovo/termux-api_rafcodephi
+  - rafaelmeloreisnovo/termux-packages
+  - rafaelmeloreisnovo/Vectras-VM-Android
+  - rafaelmeloreisnovo/qemu_rafaelia
+  - rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL
+  - rafaelmeloreisnovo/BLAKE3
+  - rafaelmeloreisnovo/GAIA_phi
+  - rafaelmeloreisnovo/Matem-tica-
+  - rafaelmeloreisnovo/Fisica
+  - rafaelmeloreisnovo/MemRafcode
+  - rafaelmeloreisnovo/X0
+  - rafaelmeloreisnovo/home
+  - rafaelmeloreisnovo/Semente
+  - rafaelmeloreisnovo/CientiEspiritual
+repositories:
+  - name: rafaelmeloreisnovo/actions
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/androidRom
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/androidx_RmR
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/android_frameworks_base_rafaelia
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/arxiv-docs
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/BLAKE3
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Catalogo-cosmologico
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/ChipQuantum
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/CientiEspiritual
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/CientiEspiritual-tiEs-
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Clima
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Cosmos
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/CreFeBerna
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/CryptoSwift_RmR
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/DeepSeek-RafCoder
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Espiritual-espirualidade
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/fcea-originum
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Fisica
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/florisboard
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/frida-desktop
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/GAIA-PDS-PHI
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/GaiaPhiRafcode
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/GAIA_phi
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Geral
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Graditao
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/gradle
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/home
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/IaFcea
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/IA_nist
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Img
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Judicial-
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/linuxkernel
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/llamaRafaelia
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/LuaJIT
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Mapa
+    state: IMPLEMENTED_CONTROL_PLANE
+  - name: rafaelmeloreisnovo/Matem-tica-
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/MemRa
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/MemRafcode
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/myCat-iahelpsus
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/nanoGPT
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/new
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/OMEGAGIT
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/openssl
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/papers
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/PCR_Rafaelia_Code_seed
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/privadoFazendo
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/qemu_rafaelia
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/RafaelCiencias
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Rafaelia
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/rafaelia-core-enterprise
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Rafaelia_Core
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/rafaelia_privado
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Rafaelia_Private
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/RafaelIA_Solucoes_Clay
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/RafGitTools
+    state: IMPLEMENTED_CONTROL_PLANE
+  - name: rafaelmeloreisnovo/RAFNATIONS_CORE
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/RafNet-Core
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/RafPolimata
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/RAIAREIS_FRAMEWORK
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/relativity-living-light
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/ROM-emulator
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Seguran-a-informacional-
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Semente
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Shizuku
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/templo-vivo-arcs
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/teoremas
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/TeoremasTesesTeorias
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/termux-api_rafcodephi
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/termux-app-rafacodephi
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/termux-packages
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/TinyGPT
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Tora
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/treinarModelos
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/UserLAnd
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/UserLAnd2
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/V79-1
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/Vectras-VM-Android
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/verbum-vivo
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/X0
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/ZIPRAF_CORE
+    state: TOKEN_VAZIO_NOT_SCANNED
+  - name: rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL
+    state: TOKEN_VAZIO_NOT_SCANNED
+next_observable_step:
+  action: execute_generator_per_repository_and_record_receipt
+  promotion_rule: never_promote_unscanned_repository_by_inference
