@@ -1,0 +1,91 @@
+{
+  "F_gap": "Formula-level extraction and deduplication across these repositories have not yet run; the 653 target remains unverified.",
+  "F_next": "Run the bounded formula/source scanner against rafaelmeloreisnovo/Matem-tica-@e7a90eb64e02befa2a24708dfd24faa4c2381af5 and rafaelmeloreisnovo/teoremas@f497f9bc914bdc54dad7788fd74653bbe5a681d3, emitting candidate counts and source-path receipts without changing claims.",
+  "F_ok": "Both requested routes are now bound to exact installed repository identities, default branches, provider tree SHAs, and observed source paths.",
+  "after": {
+    "routes": [
+      {
+        "code_search_indexed": true,
+        "coverage": "ROUTE_BOUND_NOT_FULL_FORMULA_SCAN",
+        "default_branch": "main",
+        "repository_full_name": "rafaelmeloreisnovo/Matem-tica-",
+        "requested_alias": "matematica",
+        "source_paths_observed": [
+          "papers/2026-08-08_auditoria_crossrepo_matematica_cosmos_teoremas.md",
+          "A_raf/RAFAELIA_MASTER_DOC.txt",
+          "A_raf/RAFAELIA_ARKRAF_MASTER.txt",
+          "A_raf/Pomeg.txt"
+        ],
+        "status": "FOUND_BY_INSTALLED_REPOSITORY_IDENTITY_AND_TREE",
+        "tree_sha": "e7a90eb64e02befa2a24708dfd24faa4c2381af5",
+        "visibility": "private"
+      },
+      {
+        "code_search_indexed": true,
+        "coverage": "ROUTE_BOUND_NOT_FULL_FORMULA_SCAN",
+        "default_branch": "main",
+        "repository_full_name": "rafaelmeloreisnovo/teoremas",
+        "requested_alias": "teoremas",
+        "source_paths_observed": [
+          "TEORIA_ATRACTOR_42.md",
+          "AUDITORIA_TEORIA_ATRACTOR_42_20260808.md",
+          "docs/rafaelia/350-formulas-mvps.md",
+          "docs/rafaelia/01-neuro-clocking.md",
+          "docs/rafaelia/30-soma-multipla-oplus.md"
+        ],
+        "status": "FOUND_BY_INSTALLED_REPOSITORY_IDENTITY_AND_TREE",
+        "tree_sha": "f497f9bc914bdc54dad7788fd74653bbe5a681d3",
+        "visibility": "private"
+      }
+    ]
+  },
+  "before": {
+    "mathematics_route": {
+      "repo": "matematica",
+      "status": "TOKEN_VAZIO_REPO_NOT_FOUND_BY_NAME"
+    },
+    "theorems_route": {
+      "repo": "teoremas",
+      "status": "TOKEN_VAZIO_REPO_NOT_FOUND_BY_NAME"
+    }
+  },
+  "claim_allowed": false,
+  "closure_gate": {
+    "default_branch_bound": true,
+    "full_formula_scan": false,
+    "repository_identity_bound": true,
+    "source_paths_observed": true,
+    "tree_sha_bound": true
+  },
+  "cycle_id": "OMEGA-FUNILARIA-20260815-ROUTE-REPAIR-001",
+  "gap_id": "URG-REPO-ROUTE-FALSE-NEGATIVE",
+  "negative_control": {
+    "classification": "DISTINCT_REPOSITORY_NOT_SUBSTITUTED_FOR_EXACT_TEOREMAS_ROUTE",
+    "near_name_repository": "rafaelmeloreisnovo/TeoremasTesesTeorias",
+    "rule": "name similarity != repository identity"
+  },
+  "non_regression_invariants": [
+    "existing formula registries remain read-only",
+    "route repair does not alter formula text",
+    "route repair does not promote theorem or novelty claims",
+    "claim_allowed remains false",
+    "bounded route evidence != full repository formula coverage"
+  ],
+  "predecessor": "OMEGA-LONGITUDINAL-RECONCILIATION-20260815T1444-0300",
+  "reason_code": "PROVIDER_SEARCH_FALSE_NEGATIVE_OR_SEARCH_SCOPE_MISMATCH",
+  "regressions_after": 0,
+  "regressions_before": 1,
+  "rollback": "Delete this successor file from the audit branch before merge; predecessor evidence remains unchanged.",
+  "schema": "RAFAELIA_FORMULA_SOURCE_ROUTE_REPAIR_V1",
+  "scope": "mechanical source-route metadata only",
+  "state": "VERIFIED_LIMITED",
+  "token_vazio_preserved": [
+    "TOKEN_VAZIO_PENDING_FULL_SCAN",
+    "TOKEN_VAZIO_GLOBAL_FORMULA_TOTALITY"
+  ],
+  "token_vazio_resolved": [
+    "TOKEN_VAZIO_REPO_NOT_FOUND_BY_NAME:matematica",
+    "TOKEN_VAZIO_REPO_NOT_FOUND_BY_NAME:teoremas"
+  ],
+  "uncertainty_delta": "REDUCED"
+}
