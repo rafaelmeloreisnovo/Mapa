@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "cycle_id": "OMEGA-LONGITUDINAL-RECONCILIATION-20260815T1444-0300",
+  "generated_at_local": "2026-08-15T14:44:20-03:00",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "base_commit": "fe5e4e018f7f4b7550883e6087d1282d62678e69",
+  "invariants": [
+    "SOURCE != TRANSFORM != CLAIM != TEST_OR_EVIDENCE != RECEIPT",
+    "HISTORICAL_STATE != CURRENT_PROVIDER_STATE",
+    "STRUCTURE_ONLY != SEMANTIC_VALIDATION != RUNTIME_VALIDATION",
+    "COMMIT_COUNT != PROGRESS",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "source_anchors": [
+    {
+      "provider": "google_drive",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "role": "CANONICAL_METHOD"
+    },
+    {
+      "provider": "google_drive",
+      "title": "RAFAELIA — Master Navigation Registry V1",
+      "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "role": "MASTER_NAVIGATION"
+    },
+    {
+      "provider": "google_drive",
+      "title": "RAFAELIA — Índice de Reconstrução de Contexto Ω — Invariantes, Fórmulas, Relações e Rotas — 2026-08-11",
+      "provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+      "role": "CONTEXT_RECONSTRUCTION"
+    },
+    {
+      "provider": "google_drive",
+      "title": "RAFAELIA — Receipt Executivo C110 — FCEA Core Contract Keyword Probe — 2026-08-15",
+      "provider_id": "1v7UF0eem-0QqU52SNLtvrcIHjYkA0GGQ9A8lmu5jHOU",
+      "role": "LATEST_EXECUTIVE_RECEIPT",
+      "observed_state": "VERIFIED_LIMITED"
+    }
+  ],
+  "reconciled_deltas": [
+    {
+      "id": "REC-001",
+      "source": "Mapa PR #254",
+      "status": "CLOSED_BY_EVIDENCE",
+      "evidence": {
+        "workflow_run": 31876846831,
+        "job": 94993751065,
+        "artifact": 9244966778,
+        "artifact_provider_sha256": "f75c9357c0fea6f8ae8543000d9dd49e7ef556e5bd522b67193b9b66eeab357b",
+        "index_sha256": "30b5012956f0f1af68f9da1b1f3dff7479d703de12ebc41255ecffa1a133e84a",
+        "schema_errors": 0,
+        "files": 1442,
+        "directories": 243,
+        "records": 1685,
+        "shards": 51
+      },
+      "promotion": "Mapa: IMPLEMENTED_CONTROL_PLANE -> SCANNED_STRUCTURE_ONLY",
+      "bounded_to_source_commit": true,
+      "remaining": [
+        "11 semantic-role TOKEN_VAZIO files",
+        "18 source directories without local index",
+        "10 loose-root file candidates",
+        "other repositories remain TOKEN_VAZIO_NOT_SCANNED"
+      ]
+    },
+    {
+      "id": "REC-002",
+      "source": "RafGitTools PRs #352-#356",
+      "status": "MIXED_VERIFIED_AND_OPEN_GATES",
+      "verified": [
+        "repository-view generator and reusable workflow merged",
+        "historical branch reference replaced by RafGitTools@main",
+        "Kotlin compile blockers fixed and merged",
+        "debug APK workflow hardened fail-closed and merged",
+        "token-first/Drive staging/IME UI delta merged"
+      ],
+      "still_open": [
+        "exact-head APK verification where not independently receipted",
+        "physical-device runtime and UI verification",
+        "Drive OAuth API/full bidirectional sync",
+        "runtime-lock candidate cross-repo execution/promotion"
+      ]
+    },
+    {
+      "id": "REC-003",
+      "source": "GAIA_phi PR #97",
+      "status": "MERGED_GOVERNANCE_ONLY",
+      "verified": [
+        "opt-in/upstream-safety target formalized",
+        "coupling taxonomy formalized",
+        "claim_allowed=false preserved"
+      ],
+      "still_open": [
+        "GAIA_OFF => upstream behavior unchanged runtime proof",
+        "representative external-upstream replay proof",
+        "adapter/wrapper conformance and overhead receipts"
+      ]
+    },
+    {
+      "id": "REC-004",
+      "source": "Mapa PR #255",
+      "status": "DERIVED_INDEX_DRIFT_FOUND",
+      "finding": "Formula bridge recorded Matem-tica-/teoremas as unresolved by repo-name search, but installed-repository search resolves both rafaelmeloreisnovo/Matem-tica- and rafaelmeloreisnovo/teoremas.",
+      "classification": "PROVIDER_SEARCH_FALSE_NEGATIVE_OR_SEARCH_SCOPE_MISMATCH",
+      "impact": "source route completeness for the 653-formula target",
+      "repair_kind": "MECHANICAL_METADATA_SUCCESSOR_REQUIRED",
+      "claim_effect": "none; target remains TOKEN_VAZIO_PENDING_FULL_SCAN"
+    },
+    {
+      "id": "REC-005",
+      "source": "Drive Receipt C110",
+      "status": "VERIFIED_LIMITED",
+      "finding": "Latest observed executive chain advanced through C110 with predecessor C109 and no regression promotion; current FCEA core remains bounded and claim_allowed=false.",
+      "remaining": [
+        "full contract/core closure not demonstrated by the receipt title/state alone",
+        "runtime/build/evidence must remain separately receipted"
+      ]
+    }
+  ],
+  "divergence_summary": {
+    "drive_vs_github": [
+      "No direct contradiction found between the canonical Drive method/index and the observed GitHub merge states in this bounded pass.",
+      "A derived GitHub formula-route search result is stale/incomplete relative to installed repository visibility for Matem-tica- and teoremas."
+    ],
+    "schema_drift": [
+      "No new schema failure observed in Wave 0; Draft 2020-12 validation reported 0 errors.",
+      "Global cross-repository schema parity remains TOKEN_VAZIO_NOT_FULLY_SCANNED."
+    ],
+    "ci_pre_step": [
+      "No newly observed pre-step failure promoted in this pass; historical runner/startup failures remain distinct from code failures."
+    ],
+    "receipt_integrity": [
+      "Wave 0 artifact has provider SHA-256 and internal INDEX digest bound to receipt.",
+      "FCEA C110 is observed as VERIFIED_LIMITED; no broader artifact/runtime claim inferred."
+    ],
+    "regressions": []
+  },
+  "top_urgencies": [
+    {
+      "rank": 1,
+      "id": "URG-REPO-ROUTE-FALSE-NEGATIVE",
+      "reason": "Formula bridge route completeness is mechanically wrong for two existing installed repos.",
+      "closure_gate": "successor metadata update binds exact repository_full_name + default branch + source adapter paths for Matem-tica- and teoremas"
+    },
+    {
+      "rank": 2,
+      "id": "URG-REPOSITORY-VIEW-ROLL_OUT",
+      "reason": "Only Mapa has bounded Wave 0 structural evidence; remaining repos remain unscanned by this control plane.",
+      "closure_gate": "per-repository commit-bound artifact + schema PASS + hash receipt"
+    },
+    {
+      "rank": 3,
+      "id": "URG-RAFGITTOOLS-PHYSICAL-RUNTIME",
+      "reason": "Merged source/workflow/UI deltas remain distinct from physical-device evidence.",
+      "closure_gate": "exact-head APK hash + install/start/UI/Drive-staging physical receipt"
+    },
+    {
+      "rank": 4,
+      "id": "URG-GAIA-UPSTREAM-SAFETY",
+      "reason": "Opt-in invariant is governed but representative runtime equivalence remains unproven.",
+      "closure_gate": "GAIA OFF vs pristine upstream equivalence test on representative fixture"
+    },
+    {
+      "rank": 5,
+      "id": "URG-FCEA-CORE-CLOSURE",
+      "reason": "Executive receipts C108-C110 reduce uncertainty but remain VERIFIED_LIMITED.",
+      "closure_gate": "source/function/caller contract + executable test + receipt chain sufficient for the bounded FCEA core claim"
+    }
+  ],
+  "F_ok": [
+    "canonical Drive method/navigation/index observed",
+    "Mapa Wave 0 structural artifact evidence reconciled",
+    "RafGitTools recent merged deltas separated from physical runtime gates",
+    "GAIA governance state reconciled",
+    "one concrete derived-index drift discovered: two existing repos were missed by repo-name search"
+  ],
+  "F_gap": [
+    "global Repository View rollout",
+    "physical-device receipts for latest RafGitTools UI/APK flow",
+    "GAIA upstream-equivalence runtime proof",
+    "FCEA bounded core closure beyond VERIFIED_LIMITED",
+    "full NOVOexport and cross-provider totality remain nonterminal"
+  ],
+  "F_next": "Create one append-only successor to the multidimensional formula bridge source-route metadata that binds rafaelmeloreisnovo/Matem-tica- and rafaelmeloreisnovo/teoremas by exact installed repository identity, then rerun only the bounded source-discovery/formula scan to measure the coverage delta without changing any formula claim."
+}
