@@ -1,0 +1,17 @@
+name: RAFAELIA Repository View — Wave 0
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/repository-view-wave0.yml'
+      - 'data/governance/repository_view_rollout_2026-08-15.v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  repository-view:
+    uses: rafaelmeloreisnovo/RafGitTools/.github/workflows/repository-view-reusable.yml@main
+    with:
+      max-records-per-shard: 5000
