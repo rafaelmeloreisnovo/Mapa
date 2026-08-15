@@ -169,20 +169,23 @@ claim_allowed = false
 
 ## 8. F_ok / F_gap / F_next
 
-**F_ok**
+### F_ok
+
 - inventário de repositórios existente preservado;
 - nova camada interna formalizada;
 - gerador stdlib implementado no RafGitTools;
 - sharding definido para grandes árvores;
 - lacunas semânticas preservadas.
 
-**F_gap**
+### F_gap
+
 - execução do gerador em cada repositório ainda precisa de receipt por commit;
 - relação arquivo→feature→documento ainda não existe para todos os caminhos;
 - repositórios upstream gigantes exigem política de overlay antes de qualquer reescrita ampla;
 - cobertura completa do universo externo ao owner atual continua dependente do inventário longitudinal.
 
-**F_next**
+### F_next
+
 - usar `data/governance/repository_view_rollout_2026-08-14.v1.yml` como ledger de rollout;
 - começar por Mapa, RafGitTools, RafPolimata, papers, RLL, Termux, Vectras/QEMU, ZIPRAF e núcleos de memória;
 - gerar receipts e promover cada repositório individualmente sem inferir os restantes.
