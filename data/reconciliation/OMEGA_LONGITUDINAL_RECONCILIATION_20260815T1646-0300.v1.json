@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "cycle_id": "OMEGA-LONGITUDINAL-20260815T1646-0300",
+  "generated_at_local": "2026-08-15T16:46:41-03:00",
+  "claim_allowed": false,
+  "mode": "append_only_reconciliation",
+  "predecessor": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "main_commit": "ad402d2b0cc54f350e9744cfe5b36d9fbcda787e",
+    "source": "Merge PR #257"
+  },
+  "invariants": [
+    "SOURCE != TRANSFORM != CLAIM != TEST_EVIDENCE != RECEIPT",
+    "commit_count != progress",
+    "workflow_red != code_failure_without_step_evidence",
+    "merge != runtime_proof",
+    "memory != evidence",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "drive_anchors": [
+    {
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "state_observed": "CANONICAL_DRAFT / EXECUÇÃO NÃO-DESTRUTIVA / CLAIM_ALLOWED=false"
+    },
+    {
+      "title": "RAFAELIA — Master Navigation Registry V1",
+      "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "updated_at": "2026-08-15T12:16:33.310Z"
+    },
+    {
+      "title": "RAFAELIA — Índice de Reconstrução de Contexto Ω — Invariantes, Fórmulas, Relações e Rotas — 2026-08-11",
+      "provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+      "updated_at": "2026-08-15T12:16:46.137Z"
+    }
+  ],
+  "github_deltas": [
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "event": "PR #256 merged",
+      "merged_at": "2026-08-15T19:37:31Z",
+      "merge_commit": "53353a717a83bd0d1e9995c0d373f2cf72198ebf",
+      "verified_delta": "exact formula source routes bound; bounded scan: 49 candidate paths, 48 unique blobs, 257478 path-bytes; 653 target remains unverified",
+      "epistemic_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "event": "PR #257 merged",
+      "merged_at": "2026-08-15T19:37:56Z",
+      "merge_commit": "ad402d2b0cc54f350e9744cfe5b36d9fbcda787e",
+      "verified_delta": "longitudinal reconciliation of Mapa #255, llamaRafaelia #112, RafPolimata #280 and RafGitTools #356",
+      "epistemic_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "event": "PR #356 merged",
+      "merged_at": "2026-08-15T16:24:54Z",
+      "verified_delta": "token-first GitHub auth, Drive SAF read-only staging, 64KiB streaming copy, SHA-256 staging, IME-safe composer",
+      "gaps": [
+        "physical Drive provider selection + large-file staging/hash not reproduced here",
+        "physical IME behavior not reproduced here",
+        "OAuth Drive API remains TOKEN_VAZIO"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "event": "PR #280 merged",
+      "merged_at": "2026-08-15T16:25:15Z",
+      "verified_delta": "raw-source gate reconciled and one direct Apkc/apkc.c build bypass removed",
+      "gaps": [
+        "Android physical execution remains TOKEN_VAZIO",
+        "ARM roundtrip remains environment-bounded where runner is x86_64"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/llamaRafaelia",
+      "event": "PR #112 merged",
+      "merged_at": "2026-08-15T16:27:01Z",
+      "verified_delta": "RMRCTI_JSONL_ONES_V3 governed retrieval/index layer added",
+      "claim_boundaries": [
+        "retrieval_quality_claim=false until adversarial eval",
+        "semantic_memory_claim=false until embedding/reranker + gold questions pass",
+        "privacy_claim=false until privacy envelope is tested"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/GAIA_phi",
+      "event": "no eligible new PR delta in current observation window",
+      "latest_relevant": "PR #97 merged 2026-08-12T23:19:32Z",
+      "state": "SKIPPED_NO_NEW_DELTA"
+    }
+  ],
+  "reconciliation_findings": [
+    {
+      "id": "R1646-DRIFT-001",
+      "type": "DRIVE_GITHUB_TEMPORAL_DRIFT",
+      "severity": "P0",
+      "evidence": {
+        "drive_master_navigation_updated_at": "2026-08-15T12:16:33.310Z",
+        "drive_context_index_updated_at": "2026-08-15T12:16:46.137Z",
+        "latest_map_merge_at": "2026-08-15T19:37:56Z"
+      },
+      "interpretation": "Drive navigation anchors are temporally behind verified GitHub merges; this is staleness, not corruption.",
+      "closure_gate": "append successor navigation delta carrying post-12:16Z verified merges and source-route repair"
+    },
+    {
+      "id": "R1646-RUNTIME-002",
+      "type": "RUNTIME_NOT_REPRODUCED",
+      "severity": "P1",
+      "repos": ["rafaelmeloreisnovo/RafGitTools", "rafaelmeloreisnovo/RafPolimata", "rafaelmeloreisnovo/llamaRafaelia"],
+      "interpretation": "source/CI/merge evidence does not close physical Android/Termux or adversarial retrieval/privacy gates",
+      "closure_gate": "commit-bound physical/adversarial receipt relevant to each specific claim"
+    },
+    {
+      "id": "R1646-REPOVIEW-003",
+      "type": "FEDERATED_STRUCTURE_COVERAGE_GAP",
+      "severity": "P1",
+      "interpretation": "Mapa has bounded Repository View evidence while repositories without per-commit scan receipts remain TOKEN_VAZIO_NOT_SCANNED",
+      "closure_gate": "repository-view run + artifact + schema validation + digest-bound receipt per target commit"
+    }
+  ],
+  "F_ok": [
+    "formula source-route false negative corrected and bounded denominator merged on Mapa",
+    "latest longitudinal reconciliation merged on Mapa",
+    "RafGitTools #356, RafPolimata #280 and llamaRafaelia #112 are merged with explicit claim boundaries",
+    "GAIA_phi had no eligible new delta in this observation window and was skipped rather than reprocessed"
+  ],
+  "F_gap": [
+    "Drive Master Navigation Registry and Context Reconstruction Index are stale relative to post-12:16Z GitHub merges",
+    "physical Android/Termux execution is not reproduced for the latest RafGitTools/RafPolimata deltas",
+    "ONES V3 adversarial retrieval, semantic-memory and privacy gates remain open",
+    "Repository View rollout remains incomplete repo-by-repo",
+    "reported formula target 653 remains unverified; semantic formula dedup remains TOKEN_VAZIO"
+  ],
+  "top_urgencies": [
+    {"rank": 1, "id": "R1646-DRIFT-001", "reason": "canonical navigation staleness can route later cycles to pre-merge state"},
+    {"rank": 2, "id": "R1646-RUNTIME-002", "reason": "source/CI success must not be promoted to device/runtime or retrieval/privacy proof"},
+    {"rank": 3, "id": "R1646-REPOVIEW-003", "reason": "unscanned repositories remain structural blind spots"}
+  ],
+  "F_next": "Append exactly one successor delta to the Drive Master Navigation Registry / Context Reconstruction Index that binds the verified post-12:16Z GitHub merges (Mapa #256/#257, RafGitTools #356, RafPolimata #280, llamaRafaelia #112) and preserves all open runtime, retrieval/privacy, repository-view and formula-totality TOKEN_VAZIO states without promotion."
+}
