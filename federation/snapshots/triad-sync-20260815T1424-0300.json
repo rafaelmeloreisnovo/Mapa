@@ -1,0 +1,100 @@
+{
+  "R3": {
+    "F_gap": [
+      "repository_local_ci_not_executed_for_snapshot",
+      "runtime_behavior_not_changed_or_tested",
+      "provider_enforcement_remains_out_of_scope"
+    ],
+    "F_next": [
+      "on_next_bulk_cycle_expand_observational_head_refresh_to_enabled_repository_tracker_set_without_mutating_owner_repositories"
+    ],
+    "F_ok": [
+      "three_current_main_heads_refetched",
+      "control_plane_and_tracker_blobs_refetched",
+      "predecessor_snapshot_linked",
+      "append_only_refresh_prepared"
+    ]
+  },
+  "before_after": {
+    "heads_changed": 3,
+    "mapa_after": "fe5e4e018f7f4b7550883e6087d1282d62678e69",
+    "mapa_before": "4c949a1a12ff9a878f5cb11065a97a2a1e8f9b50",
+    "predecessor_sync_id": "triad-sync-20260802T234000-0300",
+    "rafgittools_after": "842de9741a31a242dea0bc7d2fd706f14b77aa83",
+    "rafgittools_before": "c3c74595c391010d0c0c6173b4579641a072a5a2",
+    "rafpolimata_after": "c00115672e35f26264d3fa1e2d2cd2b09241c0f3",
+    "rafpolimata_before": "e73c18cd7e40673523fccc26f293ddfb717e6ea2"
+  },
+  "canonical_references": [
+    {
+      "blob_sha": "b5cdcb8b1d6cb1b65cfef6096545e2fdbba66164",
+      "commit": "842de9741a31a242dea0bc7d2fd706f14b77aa83",
+      "path": "configs/rafaelia-federation.json",
+      "relation": "CONTROL_PLANE_SOURCE_OF_TRUTH",
+      "repository": "rafaelmeloreisnovo/RafGitTools"
+    },
+    {
+      "blob_sha": "daa5ff1aa9e018a03227ce4510e5e8abc2ec62bc",
+      "commit": "c00115672e35f26264d3fa1e2d2cd2b09241c0f3",
+      "path": "configs/repository-tracker.v1.json",
+      "relation": "TRACKING_ORDER_AND_SCOPE",
+      "repository": "rafaelmeloreisnovo/RafPolimata"
+    },
+    {
+      "blob_sha": "c39f47a9818a64347bccd9c23783e3967fd4d4e1",
+      "commit": "fe5e4e018f7f4b7550883e6087d1282d62678e69",
+      "path": "federation/snapshots/triad-sync-20260802T234000-0300.json",
+      "relation": "PREDECESSOR_SNAPSHOT",
+      "repository": "rafaelmeloreisnovo/Mapa"
+    }
+  ],
+  "claim_allowed": false,
+  "generated_at": "2026-08-15T14:24:00-03:00",
+  "invariants": [
+    "repository_local_truth_is_not_overwritten",
+    "observed_heads_are_evidence_anchors_not_forced_merge_targets",
+    "private_payloads_are_not_mirrored",
+    "missing_runtime_evidence_is_TOKEN_VAZIO",
+    "merge_requires_repository_local_gates",
+    "rollback_is_repository_local_and_reversible",
+    "mechanical_sync_does_not_promote_claims"
+  ],
+  "mode": "observational_refresh",
+  "repositories": [
+    {
+      "base_branch": "main",
+      "full_name": "rafaelmeloreisnovo/RafGitTools",
+      "observed_head": "842de9741a31a242dea0bc7d2fd706f14b77aa83",
+      "relation": "AUTHORIZES_ROUTES_AND_REGISTERS",
+      "role": "control_plane",
+      "state": "OBSERVED"
+    },
+    {
+      "base_branch": "main",
+      "full_name": "rafaelmeloreisnovo/RafPolimata",
+      "observed_head": "c00115672e35f26264d3fa1e2d2cd2b09241c0f3",
+      "relation": "VALIDATES_AND_COMPILES_EVIDENCE",
+      "role": "semantic_governance_and_evidence",
+      "state": "OBSERVED"
+    },
+    {
+      "base_branch": "main",
+      "full_name": "rafaelmeloreisnovo/Mapa",
+      "observed_head": "fe5e4e018f7f4b7550883e6087d1282d62678e69",
+      "relation": "INDEXES_AND_EXPLAINS_ROUTES",
+      "role": "ecosystem_navigation_and_index",
+      "state": "OBSERVED"
+    }
+  ],
+  "schema": "rafaelia.repository-triad-sync.v1",
+  "sync_id": "triad-sync-20260815T1424-0300",
+  "validation": {
+    "canonical_preimage_sha256": "935a9d09af3cd5fec6dcdbab7fb4049597f83668a8e7d4d2fd46232e84db1ec1",
+    "hash_scope": "canonical JSON with validation.canonical_preimage_sha256 set to TOKEN_VAZIO",
+    "independent_replication": "TOKEN_VAZIO",
+    "repository_local_ci": "TOKEN_VAZIO",
+    "runtime_execution": "TOKEN_VAZIO",
+    "source_refs_provider_bound": true
+  },
+  "version": "1.0.0"
+}
