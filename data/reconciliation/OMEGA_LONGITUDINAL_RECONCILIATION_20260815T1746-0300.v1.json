@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "kind": "OMEGA_LONGITUDINAL_RECONCILIATION",
+  "observed_at_local": "2026-08-15T17:46:12-03:00",
+  "claim_allowed": false,
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 258,
+    "branch": "audit/omega-longitudinal-reconcile-20260815-1646",
+    "head_before": "d2769bc0304a05279587376f70d9e55a2b39e7fd",
+    "artifact": "data/reconciliation/OMEGA_LONGITUDINAL_RECONCILIATION_20260815T1646-0300.v1.json"
+  },
+  "canonical_drive_anchors": [
+    {
+      "title": "RAFAELIA — Master Navigation Registry V1",
+      "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "observed_updated_at": "2026-08-15T12:16:33.310Z"
+    },
+    {
+      "title": "RAFAELIA — Índice de Reconstrução de Contexto Ω — Invariantes, Fórmulas, Relações e Rotas — 2026-08-11",
+      "provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+      "observed_updated_at": "2026-08-15T12:16:46.137Z"
+    }
+  ],
+  "eligible_delta": {
+    "repo": "rafaelmeloreisnovo/RafPolimata",
+    "pr": 281,
+    "merged_at": "2026-08-15T19:59:56Z",
+    "head_sha": "94ba119a4ee729546e4ef5c7bffe56b5d1b71011",
+    "changed_files_count": 26,
+    "material_scope": [
+      "Phase 49 comprehensive testing framework",
+      "Phase 50 production deployment framework",
+      "two C test programs",
+      "specification/documentation expansion"
+    ],
+    "evidence_boundary": {
+      "pr_body_gates_checked": 0,
+      "ci_run_id": 31905455265,
+      "ci_job_id": 95062392791,
+      "ci_job_name": "Semantic coherence and falsifiability gates",
+      "ci_status_observed": "queued",
+      "ci_conclusion": null,
+      "ci_steps_observed": 0,
+      "runner_id": 0,
+      "classification": "TOKEN_VAZIO_RUNNER_PRESTEP_OR_QUEUED",
+      "reason": "The merge is material code/documentation provenance, but no executed CI steps or runtime receipt were observed for the exact head in this reconciliation window."
+    },
+    "anti_overclaim": [
+      "framework_source != production deployment",
+      "deployment checklist data structures != gates executed",
+      "SLA constants != measured SLA compliance",
+      "test framework source != tests executed",
+      "merge != CI_PASS != APK_PASS != Android physical runtime"
+    ]
+  },
+  "no_new_eligible_delta_observed": [
+    "rafaelmeloreisnovo/RafGitTools",
+    "rafaelmeloreisnovo/llamaRafaelia",
+    "rafaelmeloreisnovo/GAIA_phi"
+  ],
+  "drift": [
+    {
+      "type": "DRIVE_GITHUB_TEMPORAL_DRIFT",
+      "severity": "P0_INDEX",
+      "detail": "Drive navigation anchors observed at ~12:16Z remain older than post-anchor GitHub merges, now including RafPolimata PR #281 at 19:59:56Z."
+    },
+    {
+      "type": "MERGED_WITHOUT_OBSERVED_EXECUTED_GATES",
+      "severity": "P0_EVIDENCE",
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 281,
+      "detail": "PR #281 merged while the exact-head CI job remained queued with zero steps and runner_id=0 at observation time; classify as pre-step/queued evidence gap, not code failure and not validation success."
+    }
+  ],
+  "chain_status": {
+    "source": "OBSERVED",
+    "transform": "OBSERVED_AS_GIT_DIFF",
+    "claim": "NOT_PROMOTED",
+    "test_evidence": "TOKEN_VAZIO_EXACT_HEAD_EXECUTION",
+    "receipt": "THIS_APPEND_ONLY_RECORD",
+    "status": "VERIFIED_LIMITED"
+  },
+  "top_urgencies": [
+    "P0: reconcile RafPolimata #281 exact-head CI when/if steps execute; do not infer result from merge",
+    "P0: append Drive navigation successor for post-12:16Z merges, including RafPolimata #281",
+    "P1: preserve Android/Termux physical runtime as TOKEN_VAZIO",
+    "P1: continue Repository View rollout repo-by-repo with artifact+receipt",
+    "P1: preserve ONES V3 retrieval/privacy adversarial evaluation gaps"
+  ],
+  "F_ok": [
+    "RafPolimata #281 material diff and merge provenance observed",
+    "26 changed paths inventoried",
+    "exact-head CI run/job located",
+    "pre-step/queued state distinguished from code failure and validation",
+    "no silent claim promotion"
+  ],
+  "F_gap": [
+    "RafPolimata #281 exact-head CI steps/results unavailable at observation time",
+    "no APK/device/runtime receipt for #281",
+    "Drive navigation anchors remain temporally behind current GitHub state"
+  ],
+  "F_next": "Observe only the exact-head RafPolimata #281 CI run 31905455265 and, once it reaches a terminal state with real steps, append one successor binding step-level result and artifacts/receipts without promoting Android physical runtime."
+}
