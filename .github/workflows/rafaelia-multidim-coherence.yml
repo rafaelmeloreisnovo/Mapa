@@ -1,0 +1,39 @@
+name: RAFAELIA Multidimensional Coherence
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build_rafaelia_multidim_coherence.py'
+      - 'data/control-plane/RAFAELIA_MULTIDIMENSIONAL_COHERENCE.v1.json'
+      - 'docs/research/RAFAELIA_MULTIDIMENSIONAL_COHERENCE_FORMULA_BRIDGE_20260815.md'
+      - 'tests/test_rafaelia_multidim_coherence.py'
+      - '.github/workflows/rafaelia-multidim-coherence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  multidim-coherence:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build coherence artifacts
+        run: |
+          python3 scripts/build_rafaelia_multidim_coherence.py --outdir artifacts/multidim_coherence
+
+      - name: Run tests
+        run: |
+          python3 tests/test_rafaelia_multidim_coherence.py
+
+      - name: Show receipt
+        run: |
+          cat artifacts/multidim_coherence/run_receipt.json
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: rafaelia-multidim-coherence
+          path: artifacts/multidim_coherence/
