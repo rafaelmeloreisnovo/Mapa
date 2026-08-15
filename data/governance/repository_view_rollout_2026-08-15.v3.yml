@@ -1,0 +1,66 @@
+schema: rafaelia_repository_view_rollout_v3
+schema_version: "3.0.0"
+observed_at: "2026-08-15T09:31:00Z"
+state: WAVE0_SCANNED_STRUCTURE_ONLY_BOUND
+claim_allowed: false
+append_only: true
+predecessor:
+  path: data/governance/repository_view_rollout_2026-08-15.v2.yml
+  blob_sha: b0366578a4e3cd01f8bd0f633b39f858a8325ed1
+  relation: SUCCESSOR_WITHOUT_REWRITE
+promotion_delta:
+  repository: rafaelmeloreisnovo/Mapa
+  from_state: IMPLEMENTED_CONTROL_PLANE
+  to_state: SCANNED_STRUCTURE_ONLY
+  bounded_to_scanned_commit: eaaba4d08d96d940ba734b167bac2f09522b7b01
+  pr_head_at_run: cd70b92d7942ab71e43c944c7fa17fdbbfa5fbde
+  source_branch_observed: 253/merge
+  receipt_path: data/evidence/repository_view/RAFAELIA_REPOSITORY_VIEW_WAVE0_MAPA_RECEIPT_20260815.v1.json
+  internal_hash_manifest_path: data/evidence/repository_view/RAFAELIA_REPOSITORY_VIEW_WAVE0_MAPA_INTERNAL_SHA256_20260815.v1.txt
+  promotion_scope: BOUNDED_STRUCTURAL_CHECKPOINT
+  semantic_navigation_state: OPEN
+provider_evidence:
+  workflow_run_id: 31876846831
+  workflow_run_conclusion: success
+  job_id: 94993751065
+  job_conclusion: success
+  artifact_id: 9244966778
+  artifact_size_bytes: 58232
+  artifact_sha256: f75c9357c0fea6f8ae8543000d9dd49e7ef556e5bd522b67193b9b66eeab357b
+validation:
+  INDEX_yml_schema: PASS
+  schema_errors: 0
+  index_sha256: 30b5012956f0f1af68f9da1b1f3dff7479d703de12ebc41255ecffa1a133e84a
+  tree_sha256: 4b62bd152a2861de8c9f123cf49e59f7b0d93fae5c868307ab84c13fa5bd3a1d
+  generator_receipt_sha256: 426eac0b45e61515b5373958fb57f910db0e0be68994e150b4280bee1f507c4e
+  internal_manifest_sha256: 9157100a71d08e266a0e23f904d3d57dcfaa47042d559262cfa097faf495557c
+  files: 1442
+  directories: 243
+  shards: 51
+  shard_records: 1685
+  files_plus_directories: 1685
+  record_count_consistency: PASS
+remaining_gaps:
+  semantic_unknown_files: 11
+  unindexed_source_directories: 18
+  root_loose_file_candidates: 10
+  current_head_parity_after_successor_receipt: TOKEN_VAZIO_RESCAN_REQUIRED_IF_EXACT_CURRENT_HEAD_PARITY_IS_NEEDED
+  unscanned_repositories: PRESERVE_PREDECESSOR_TOKEN_VAZIO_NOT_SCANNED
+invariants:
+  - structural_scan_is_not_semantic_validation
+  - scanned_checkpoint_is_not_current_head_forever
+  - PR_head_is_not_PR_merge_ref
+  - artifact_digest_match_is_integrity_not_authorship_or_semantic_truth
+  - no_unscanned_repository_promotion_by_inference
+  - claim_allowed_false
+F_ok:
+  - WAVE0_WORKFLOW_SUCCESS
+  - ARTIFACT_OBSERVED_AND_DIGEST_REPRODUCED
+  - INDEX_SCHEMA_PASS_ZERO_ERRORS
+  - INTERNAL_HASH_MANIFEST_PERSISTED
+  - MAPA_PROMOTED_TO_SCANNED_STRUCTURE_ONLY_AT_BOUND_COMMIT
+F_gap:
+  - SEMANTIC_TRIAGE_OPEN
+  - CURRENT_HEAD_PARITY_REQUIRES_SUCCESSOR_SCAN
+  - WAVE1_REPOSITORIES_REMAIN_UNPROMOTED_UNTIL_EACH_RECEIPT
+F_next: begin_wave1_with_one_high_unlock_value_repository_at_a_time_and_bind_each_scan_to_run_job_artifact_commit_schema_and_receipt
