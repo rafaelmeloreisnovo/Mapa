@@ -1,0 +1,159 @@
+{
+  "schema": "OMEGA_LONGITUDINAL_RECONCILIATION_V1",
+  "generated_at": "2026-08-15T15:46:22-03:00",
+  "mode": "APPEND_ONLY",
+  "claim_allowed": false,
+  "sources": {
+    "drive_method": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "drive_master_navigation_registry_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "drive_context_index_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+    "github_repositories": [
+      "rafaelmeloreisnovo/Mapa",
+      "rafaelmeloreisnovo/llamaRafaelia",
+      "rafaelmeloreisnovo/RafPolimata",
+      "rafaelmeloreisnovo/RafGitTools"
+    ]
+  },
+  "deltas": [
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 255,
+      "merge_commit": "fe5e4e018f7f4b7550883e6087d1282d62678e69",
+      "state": "VERIFIED_LIMITED",
+      "evidence": {
+        "coherence_run": 31889681813,
+        "coherence_job": 95023999780,
+        "job_steps_executed": true,
+        "tests": "PASS",
+        "artifact": "rafaelia-multidim-coherence",
+        "artifact_sha256": "005a7c737067bcb7efd7513f6e12e68111c3671421cd8bc2ab67b43255a058e3",
+        "promotion_initial_run": 31889681789,
+        "promotion_initial_state": "FAIL_MANUAL_ENFORCEMENT",
+        "promotion_successor_run": 31895572468,
+        "promotion_successor_state": "PASS"
+      },
+      "gap": [
+        "formula coverage remains TOKEN_VAZIO_PENDING_FULL_SCAN",
+        "Matem-tica- and teoremas were unresolved by name-search in PR metadata and require exact-identity route reconciliation"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/llamaRafaelia",
+      "pr": 112,
+      "merge_commit": "187bb8383eb9903088c7bfa314bb30c916470f4b",
+      "state": "TOKEN_VAZIO_RUNNER_PRESTEP",
+      "evidence": {
+        "ones_v3_run": 31889011455,
+        "ones_v3_job": 95022370474,
+        "ones_v3_conclusion": "failure",
+        "ones_v3_steps": null,
+        "safety_run": 31889011412,
+        "safety_jobs": 5,
+        "safety_all_steps": null,
+        "riscv_run": 31889011436,
+        "riscv_state": "queued"
+      },
+      "gap": [
+        "ONES V3 self-test has no executed step evidence in GitHub Actions",
+        "retrieval_quality_claim remains false",
+        "semantic_memory_claim remains false",
+        "privacy_claim remains false"
+      ],
+      "classification_note": "Do not attribute these workflow failures to ONES V3 logic while jobs expose no steps/logs."
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 280,
+      "merge_commit": "c00115672e35f26264d3fa1e2d2cd2b09241c0f3",
+      "state": "VERIFIED_LIMITED_CI",
+      "evidence": {
+        "ci_run": 31882977911,
+        "ci": "PASS",
+        "formal_science_run": 31882977924,
+        "formal_science": "PASS",
+        "apkc_first_part_run": 31882977947,
+        "apkc_first_part_job": 95008026923,
+        "apkc_first_part": "PASS_WITH_EXECUTED_STEPS",
+        "raw_source_bypass_removed": true
+      },
+      "gap": [
+        "Android physical PASS remains TOKEN_VAZIO",
+        "ARM physical runtime remains distinct from AArch64 user-mode proof runner"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "pr": 356,
+      "merge_commit": "842de9741a31a242dea0bc7d2fd706f14b77aa83",
+      "state": "PARTIAL_WITH_KNOWN_SOURCE_BLOCKERS",
+      "evidence": {
+        "ci_run": 31879777215,
+        "ci": "PASS",
+        "android_client_build_run": 31879777129,
+        "android_client_build": "PASS",
+        "internal_validation_run": 31879777131,
+        "internal_validation": "PASS",
+        "pr_validation_run": 31895440295,
+        "build_debug": "PASS",
+        "unit_tests": "PASS",
+        "lint": "PASS",
+        "pr_validation_failure_scope": "label/comment reporting steps",
+        "source_gap_run": 31879777126,
+        "source_gap_tree_sha256": "bf437aaf6891a16d40271b26a66b236699b43f35b053b130377bb9169548bdad",
+        "source_gap_files": 257,
+        "source_gap_blockers": 82,
+        "source_gap_warnings": 34
+      },
+      "gap": [
+        "82 source blockers remain, including NOT_IMPLEMENTED_ERROR and TOKEN_VAZIO_SOURCE",
+        "physical Drive picker large-file staging + hash test remains TOKEN_VAZIO",
+        "physical IME composer test remains TOKEN_VAZIO",
+        "OAuth/PKCE Drive API listing remains TOKEN_VAZIO"
+      ]
+    }
+  ],
+  "cross_source_reconciliation": {
+    "drive_canonical_method": "present",
+    "master_navigation_registry_updated_at": "2026-08-15T12:16:33.310Z",
+    "context_index_updated_at": "2026-08-15T12:16:46.137Z",
+    "newer_github_merges_after_drive_index": true,
+    "classification": "DRIVE_INDEX_STALE_RELATIVE_TO_LATEST_GITHUB_DELTAS",
+    "required_action": "append pointers to latest verified GitHub deltas without replacing prior Drive history"
+  },
+  "urgencies": [
+    {
+      "rank": 1,
+      "repo": "llamaRafaelia",
+      "reason": "merged retrieval layer lacks executed CI-step evidence; distinguish runner/pre-step failure from code failure"
+    },
+    {
+      "rank": 2,
+      "repo": "RafGitTools",
+      "reason": "source-gap audit exposes 82 blockers despite build/test/lint passing"
+    },
+    {
+      "rank": 3,
+      "repo": "Mapa",
+      "reason": "Drive master/context indices predate latest GitHub merges and formula routes need exact repository identities"
+    },
+    {
+      "rank": 4,
+      "repo": "RafPolimata",
+      "reason": "strong CI closure exists but physical Android/ARM runtime remains unproven"
+    }
+  ],
+  "F_ok": [
+    "Mapa multidimensional coherence workflow executed tests and uploaded a hashed artifact",
+    "Mapa promotion control successor run passed after initial fail-closed manual enforcement",
+    "RafPolimata PR 280 has executed CI steps and closes the identified raw-source bypass at CI scope",
+    "RafGitTools PR 356 debug build, unit tests and lint passed; PR-validation terminal failure is reporting/labeling, not compile/test/lint"
+  ],
+  "F_gap": [
+    "llamaRafaelia ONES V3 and related RMRCTI jobs have no executed steps and remain TOKEN_VAZIO_RUNNER_PRESTEP",
+    "RafGitTools source audit reports 82 blockers and 34 warnings",
+    "Drive master/context navigation timestamps precede the newest GitHub merges",
+    "physical-device/runtime gates remain open for RafGitTools and RafPolimata",
+    "formula source identity for Matem-tica- and teoremas needs exact-route successor metadata"
+  ],
+  "F_next": "Append exact repository identity routes for rafaelmeloreisnovo/Matem-tica- and rafaelmeloreisnovo/teoremas into the formula-bridge navigation metadata, then rerun only the bounded source-discovery/formula scan and compare coverage/receipt without promoting any mathematical claim."
+}
