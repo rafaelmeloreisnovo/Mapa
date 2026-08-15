@@ -1,0 +1,90 @@
+{
+  "schema": "RAFAELIA_REPOSITORY_VIEW_WAVE0_RECEIPT/V1",
+  "receipt_id": "REPOSITORY-VIEW-WAVE0-MAPA-20260815-0001",
+  "observed_at": "2026-08-15T09:31:00Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "state": "SCANNED_STRUCTURE_ONLY",
+  "claim_allowed": false,
+  "append_only": true,
+  "predecessor": {
+    "path": "data/governance/repository_view_rollout_2026-08-15.v2.yml",
+    "state": "WAVE0_EXECUTION_PREPARED"
+  },
+  "workflow_evidence": {
+    "workflow_name": "RAFAELIA Repository View — Wave 0",
+    "run_id": 31876846831,
+    "run_number": 1,
+    "run_conclusion": "success",
+    "job_id": 94993751065,
+    "job_name": "repository-view / repository-view",
+    "job_conclusion": "success",
+    "pr_number": 253,
+    "pr_head_sha": "cd70b92d7942ab71e43c944c7fa17fdbbfa5fbde",
+    "checked_out_source_commit": "eaaba4d08d96d940ba734b167bac2f09522b7b01",
+    "checked_out_source_branch": "253/merge",
+    "checked_out_source_commit_relation": "PR_MERGE_REF_OF_HEAD_INTO_BASE_AT_RUN_TIME"
+  },
+  "artifact": {
+    "artifact_id": 9244966778,
+    "name": "rafaelia-repository-view-1267885874-eaaba4d08d96d940ba734b167bac2f09522b7b01",
+    "provider_size_bytes": 58232,
+    "provider_digest": "sha256:f75c9357c0fea6f8ae8543000d9dd49e7ef556e5bd522b67193b9b66eeab357b",
+    "downloaded_size_bytes": 58232,
+    "downloaded_sha256": "f75c9357c0fea6f8ae8543000d9dd49e7ef556e5bd522b67193b9b66eeab357b",
+    "provider_vs_downloaded_digest": "MATCH",
+    "files_in_archive": 54,
+    "uncompressed_file_bytes": 325325
+  },
+  "index_validation": {
+    "schema_path": "schemas/repository_view_index.schema.json",
+    "schema_blob_sha": "f7fcbb0317af01d09d491c8aa504c54cd30d0f10",
+    "validator": "python-3.13.5/jsonschema-4.26.0/PyYAML-6.0.3",
+    "draft": "2020-12",
+    "errors": 0,
+    "result": "PASS",
+    "index_sha256": "30b5012956f0f1af68f9da1b1f3dff7479d703de12ebc41255ecffa1a133e84a",
+    "tree_sha256": "4b62bd152a2861de8c9f123cf49e59f7b0d93fae5c868307ab84c13fa5bd3a1d",
+    "generator_receipt_sha256": "426eac0b45e61515b5373958fb57f910db0e0be68994e150b4280bee1f507c4e",
+    "sorted_internal_sha256_manifest_sha256": "9157100a71d08e266a0e23f904d3d57dcfaa47042d559262cfa097faf495557c"
+  },
+  "map_statistics": {
+    "files": 1442,
+    "directories": 243,
+    "shards": 51,
+    "shard_records": 1685,
+    "files_plus_directories": 1685,
+    "record_count_consistency": "PASS",
+    "unknown_semantic_role_files": 11,
+    "unindexed_source_directories": 18,
+    "root_loose_file_candidates": 10
+  },
+  "evidence_boundary": {
+    "state": "STRUCTURE_ONLY",
+    "claim_allowed": false,
+    "semantic_meaning_of_unknown_files": "TOKEN_VAZIO",
+    "note": "This receipt proves one recursive structural scan at the bound PR merge-ref commit. It does not prove runtime reachability, semantic documentation completeness, correctness, or scientific claims."
+  },
+  "promotion_gate": {
+    "workflow_run_success_observed": "PASS",
+    "target_commit_sha_bound": "PASS",
+    "repository_view_artifact_observed": "PASS",
+    "INDEX_yml_schema_validation_pass": "PASS",
+    "receipt_hashes_recorded": "PASS",
+    "result": "PASS_SCANNED_STRUCTURE_ONLY"
+  },
+  "F_ok": [
+    "workflow and job completed successfully",
+    "artifact downloaded and provider digest reproduced",
+    "INDEX.yml validated with zero schema errors",
+    "shard record total equals files plus directories",
+    "source merge-ref commit and PR head SHA distinguished explicitly"
+  ],
+  "F_gap": [
+    "semantic documentation triage remains open",
+    "11 files retain TOKEN_VAZIO semantic role",
+    "18 source directories remain unindexed documentation candidates",
+    "10 root loose-file candidates remain review candidates",
+    "current repository head after this successor receipt is not identical to the scanned merge-ref checkpoint"
+  ],
+  "F_next": "preserve this bounded checkpoint; rerun after successor commits when current-head parity is required, then begin Wave 1 without inferring coverage for unscanned repositories"
+}
