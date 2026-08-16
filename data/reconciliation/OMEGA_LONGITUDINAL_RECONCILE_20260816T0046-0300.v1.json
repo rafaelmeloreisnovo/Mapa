@@ -1,0 +1,119 @@
+{
+  "schema": "rafaelia.omega_longitudinal_reconciliation.v1",
+  "cycle_id": "OMEGA-LONG-20260816T0046-0300",
+  "mode": "APPEND_ONLY",
+  "claim_allowed": false,
+  "invariant": "SOURCE != TRANSFORM != CLAIM != TEST/EVIDENCE != RECEIPT",
+  "sources_observed": [
+    {
+      "system": "GitHub",
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 296,
+      "head_sha": "a677bff9bf0ad09f17e604971b21b7f3913cfad1",
+      "ci_run": 31915981141,
+      "job": 95087710119
+    },
+    {
+      "system": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pr": 260,
+      "head_sha": "72bf95ac7bb0ca5f7dcefafb56bba9ef43700ccc"
+    },
+    {
+      "system": "GitHub",
+      "repository": "rafaelmeloreisnovo/llamaRafaelia",
+      "pr": 112,
+      "state": "NO_NEW_ELIGIBLE_DELTA_IN_WINDOW"
+    },
+    {
+      "system": "GitHub",
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "latest_observed_pr": 356,
+      "state": "NO_NEW_ELIGIBLE_DELTA_IN_WINDOW"
+    },
+    {
+      "system": "GitHub",
+      "repository": "rafaelmeloreisnovo/GAIA_phi",
+      "latest_observed_pr": 97,
+      "state": "NO_NEW_ELIGIBLE_DELTA_IN_WINDOW"
+    },
+    {
+      "system": "FileLibrary",
+      "authority": "RAFAELIA — Master Navigation Registry V1 / Índice de Reconstrução Ω / Implementação Latentes e Papers",
+      "state": "CANONICAL_ANCHORS_FOUND_BUT_CURRENT_CONTENT_TAIL_NOT_PROVEN",
+      "token_vazio": "TOKEN_VAZIO_DRIVE_CURRENT_TAIL"
+    }
+  ],
+  "f_ok": [
+    {
+      "id": "R296-H1",
+      "status": "PASS",
+      "evidence": "CI run 31915981141 job 95087710119 step 4; H1 completed success on exact head",
+      "boundary": "diff-scope PASS does not close historical TOKEN_VAZIO debt"
+    },
+    {
+      "id": "R296-PRE-M063",
+      "status": "PASS",
+      "evidence": "CI steps 3-10 all success before M063/APKc combined audit"
+    },
+    {
+      "id": "R296-ARTIFACTS",
+      "status": "OBSERVED",
+      "artifacts": [
+        {"id": 9254904025, "name": "apkc-proofs-and-hotfix-31915981141", "sha256": "4c7007da7109340e64c51ad5dac288244913189acad185097c10cf496eca2acf"},
+        {"id": 9254903886, "name": "token-vazio-validation-31915981141", "sha256": "ae1e9ef7809e80130663c2a08a3baa18ff87d8fc963290847c87481d5176514d"},
+        {"id": 9254904151, "name": "apkc-proof-runs", "sha256": "8da91ed3592cef6ef5ccc72d8b8e9c616d8416316ee3e90f84e8cdd54cca2f17"}
+      ]
+    },
+    {
+      "id": "MAPA-260-SHARD03",
+      "status": "VERIFIED_LIMITED_METADATA",
+      "evidence": "47 expression occurrences from 3 formal Matem-tica- sources; 44 exact unique SHA-256 digests; semantic dedup NOT RUN; 16 provider-bound candidates remain"
+    }
+  ],
+  "f_gap": [
+    {
+      "id": "R296-M063-APKC",
+      "urgency": "P0",
+      "status": "FAIL_REAL_STEP",
+      "evidence": "CI run 31915981141 job 95087710119 step 11 failed after real runner execution",
+      "classification": "M063_APKC_COMBINED_GATE_FAILURE",
+      "refinement": "Published APKc artifact records F0/F1 PASS and F2-F6 TOKEN_VAZIO because no executable apkc binary exists in that environment; apkc compile transcript also records host/toolchain register errors for ARM r0/r1/r2/r7 in Apkc/sys.h. These artifacts are evidence of a host/target/toolchain/runtime boundary, but they do not by themselves prove which of the two sequential scripts returned the step-11 nonzero exit.",
+      "token_vazio": "TOKEN_VAZIO_FIRST_FAILING_SCRIPT_AND_STDERR"
+    },
+    {
+      "id": "R296-POST-M063",
+      "urgency": "P1",
+      "status": "SKIPPED_BY_UPSTREAM_FAILURE",
+      "evidence": "CI steps 12-37 were skipped after step 11; later always() artifact uploads ran"
+    },
+    {
+      "id": "MAPA-260-FORMULAS",
+      "urgency": "P1",
+      "status": "PARTIAL",
+      "token_vazio": ["TOKEN_VAZIO_LINE_SPAN_SHARD03", "TOKEN_VAZIO_SEMANTIC_FORMULA_DEDUP", "TOKEN_VAZIO_GLOBAL_FORMULA_TOTALITY", "TOKEN_VAZIO_653_TARGET_RECONCILIATION"]
+    },
+    {
+      "id": "DRIVE-GITHUB-TAIL",
+      "urgency": "P1",
+      "status": "TOKEN_VAZIO",
+      "reason": "canonical Drive/FileLibrary anchors are available but current tail binding to the latest GitHub heads was not proven in this invocation"
+    },
+    {
+      "id": "PHYSICAL-RUNTIME",
+      "urgency": "P1",
+      "status": "TOKEN_VAZIO",
+      "reason": "hosted CI/artifacts do not promote Android/Termux physical runtime, install, signing, retrieval/privacy or device behavior"
+    }
+  ],
+  "top_urgencies": [
+    "P0 isolate the first failing command inside RafPolimata #296 step 11",
+    "P1 preserve H1 historical debt while keeping changed-lines enforcement green",
+    "P1 continue Mapa #260 bounded formula extraction without semantic/global promotion",
+    "P1 prove current Drive navigation tail binding before declaring Drive↔GitHub synchronization",
+    "P1 keep physical Android/Termux runtime and ONES retrieval/privacy gates open until direct evidence"
+  ],
+  "regression_delta": "NO_H1_REGRESSION_OBSERVED; downstream M063/APKc blocker remains",
+  "uncertainty_delta": "REDUCED: step-11 is real runner failure and APKc artifacts expose host/target/toolchain boundary; NOT YET REDUCED to first failing script/command",
+  "f_next": "On exact head a677bff9bf0ad09f17e604971b21b7f3913cfad1, execute or obtain step-level stderr separately for scripts/ci_freestanding_audit.sh and scripts/audit_language_freestanding_contract.sh, preserving command, exit_code and first divergent file/contract; classify that single blocker before any code patch or claim promotion."
+}
