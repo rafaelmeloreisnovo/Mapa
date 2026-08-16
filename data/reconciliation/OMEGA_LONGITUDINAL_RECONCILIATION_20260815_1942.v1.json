@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "cycle_id": "OMEGA_LONGITUDINAL_RECONCILIATION_20260815_1942",
+  "observed_at": "2026-08-15T22:42:05Z",
+  "append_only": true,
+  "claim_allowed": false,
+  "predecessor": "data/reconciliation/OMEGA_LONGITUDINAL_RECONCILIATION_20260815_1848.v1.json",
+  "invariant": "SOURCE != TRANSFORM != CLAIM != TEST_OR_EVIDENCE != RECEIPT",
+  "drive": {
+    "master_navigation_registry": {
+      "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "observed_contains_mapa_main": "e7d90a7d08ca333ac8ac94cd7cd21f741d665501",
+      "state": "VERIFIED_LIMITED"
+    },
+    "context_reconstruction_index_omega": {
+      "provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+      "observed_contains_mapa_main": "e7d90a7d08ca333ac8ac94cd7cd21f741d665501",
+      "state": "VERIFIED_LIMITED"
+    },
+    "prior_mapa_258_drift": "CLOSED_BY_READBACK"
+  },
+  "github_deltas": [
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "prs": [
+        {"number":285,"merged":true,"merged_at":"2026-08-15T22:04:29Z","head":"98a1840a4dc0745797c49d1584b166329c81eb70","merge_commit":"c6c805369b364bd801d152cae94785c0499d3d0e","scope":"agent governance reconciliation; preserves TOKEN_VAZIO and rejects 42 fixed-point attractor overclaim"},
+        {"number":286,"merged":true,"merged_at":"2026-08-15T22:25:21Z","head":"cba4aa5003d48c8f4085aae1dffa93ab5cdb9458","merge_commit":"fe481bf609844962be46cf26c9fb00db0135b5f7","scope":"Build Doctor structural classification + append-only internal custody ledger"},
+        {"number":287,"merged":true,"merged_at":"2026-08-15T22:30:05Z","head":"7fffa08e685f0b4b59265723661452aa7f7e0c47","merge_commit":"89283deb3334f100cea7f6b67cea37f745556add","scope":"Gap Atlas proof-chain builder; L2 device runtime and L10 signed-APK security remain TOKEN_VAZIO"},
+        {"number":288,"merged":true,"merged_at":"2026-08-15T22:34:26Z","head":"e850f609711068b86a3c984df26268d5ce45fa12","merge_commit":"de8eefdf6e9e307e1b35a94e10d9530e3a42fff3","scope":"ecosystem matrix inventory + HAM v1 consumer; device runtime and RafGitTools binding remain open"}
+      ],
+      "latest_exact_head_workflows": [
+        {"run_id":31912432678,"name":"CI","status":"queued","conclusion":null},
+        {"run_id":31912432819,"name":"Formal Science Orchestrator","status":"queued","conclusion":null}
+      ],
+      "classification": "MERGED_SOURCE_WITH_CI_TERMINAL_STATE_TOKEN_VAZIO_QUEUED",
+      "non_regression": ["42 range/index != 42 fixed-point attractors","source/tool implementation != device runtime","local/unit test declarations != exact-head CI PASS"]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "prs": [
+        {"number":365,"merged":true,"merged_at":"2026-08-15T19:38:09Z","head":"5aa835df4796d0cd0533a45149f11ed3824377e2","merge_commit":"40aba92918b8d9b50ad31ace86308fcc35c9b5b7","scope":"register BetaOrchestratorActivity + static contract"},
+        {"number":366,"merged":true,"merged_at":"2026-08-15T19:38:25Z","head":"796563de08f7cf8c312d168fd8daf27b404dff6c","merge_commit":"b4a6b97235cf8f20563b722f2dbad64dcb4d22db","scope":"minimal duplicate/successor manifest declaration fix"}
+      ],
+      "head_365_runtime_run": {
+        "run_id": 31903291464,
+        "workflow": "RAFCODEPHI Control Center Real Runtime",
+        "status": "completed",
+        "conclusion": "failure",
+        "job_id": 95057225440,
+        "job": "build-real-runtime",
+        "failed_step": 7,
+        "failed_step_name": "Source-build live real-pkg bootstrap pair",
+        "pre_failure_steps_1_to_6": "PASS",
+        "post_failure_build_apk_steps": "SKIPPED",
+        "classification": "REAL_STEP_FAILURE_BOOTSTRAP_BUILD_NOT_RUNNER_PRESTEP"
+      },
+      "boundary": "static Manifest fix != bootstrap build pass != APK build pass != install pass != physical UI pass",
+      "physical_retest": "TOKEN_VAZIO"
+    }
+  ],
+  "skipped_no_new_eligible_delta": ["rafaelmeloreisnovo/GAIA_phi","rafaelmeloreisnovo/Rafaelia_Private","rafaelmeloreisnovo/RafGitTools","rafaelmeloreisnovo/llamaRafaelia"],
+  "F_ok": [
+    "Drive Master Navigation Registry and Context Reconstruction Index both read back Mapa main e7d90a7d08ca333ac8ac94cd7cd21f741d665501, closing the prior bounded Mapa #258 navigation drift",
+    "RafPolimata PRs 285-288 merged with explicit governance, custody, gap-atlas, inventory and HAM deltas while preserving device/runtime gaps",
+    "Termux Control Center crash cause has a merged static manifest correction; exact-head runtime workflow progressed through real steps before failing at bootstrap source-build"
+  ],
+  "F_gap": [
+    "RafPolimata #288 exact-head CI and Formal Science workflows remain queued; no CI_PASS may be inferred",
+    "RafPolimata device runtime L2, signed-APK/security L10, and HAM RafGitTools binding remain TOKEN_VAZIO/open",
+    "Termux real runtime run 31903291464 failed at source-build live real-pkg bootstrap pair; APK build/install/physical Control Center retest were not reached",
+    "Physical Android validation remains separate from merged source for both RafPolimata and termux-app"
+  ],
+  "top_urgencies": [
+    {"priority":"P0","item":"termux-app runtime bootstrap source-build failure in run 31903291464 step 7","reason":"blocks APK/install/physical retest chain"},
+    {"priority":"P0","item":"RafPolimata #288 exact-head workflows queued","reason":"merged source lacks terminal exact-head CI classification"},
+    {"priority":"P1","item":"RafPolimata L2/L10 and HAM↔RafGitTools binding","reason":"proof chain still incomplete at device/security/federation boundaries"}
+  ],
+  "F_next": "Inspect only the failing termux-app run 31903291464 step 7 evidence/logs and classify the minimal root cause of the live real-pkg bootstrap source-build failure, without changing release/runtime claims or touching a protected branch."
+}

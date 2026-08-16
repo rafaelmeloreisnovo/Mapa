@@ -1,0 +1,77 @@
+{
+  "schema": "RAFAELIA_OMEGA_LONGITUDINAL_RECONCILE_V1",
+  "generated_at": "2026-08-16T02:47:00Z",
+  "claim_allowed": false,
+  "mode": "append_only_bounded_reconciliation",
+  "sources_observed": {
+    "drive_master_navigation_registry": {
+      "title": "RAFAELIA — Master Navigation Registry V1",
+      "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "delta_after_2026_08_16T01_45Z": false
+    },
+    "drive_context_reconstruction_index": {
+      "title": "RAFAELIA — Índice de Reconstrução de Contexto Ω — Invariantes, Fórmulas, Relações e Rotas — 2026-08-11",
+      "provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+      "last_observed_updated_at": "2026-08-16T00:28:32.771Z",
+      "delta_after_2026_08_16T01_45Z": false
+    },
+    "github_map_pr260": {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 260,
+      "head": "72bf95ac7bb0ca5f7dcefafb56bba9ef43700ccc",
+      "updated_at": "2026-08-16T02:27:33Z",
+      "eligible_delta": true,
+      "new_material": "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD03_FORMAL_20260816.v1.json"
+    },
+    "github_rafpolimata": {
+      "latest_observed_open_prs": [295,296],
+      "eligible_new_delta_in_window": false
+    },
+    "github_rafgittools": {
+      "latest_observed_pr": 356,
+      "eligible_new_delta_in_window": false
+    },
+    "github_llamarafaelia": {
+      "latest_observed_pr": 112,
+      "eligible_new_delta_in_window": false
+    }
+  },
+  "material_delta": {
+    "source": "Mapa#260 SHARD03-FORMAL",
+    "source_repository": "rafaelmeloreisnovo/Matem-tica-",
+    "source_tree_sha": "e7a90eb64e02befa2a24708dfd24faa4c2381af5",
+    "formal_sources_processed": 3,
+    "expression_occurrences": 47,
+    "unique_exact_sha256": 44,
+    "exact_duplicate_groups": 2,
+    "remaining_candidate_paths": 16,
+    "line_level_spans": "TOKEN_VAZIO_LINE_SPAN",
+    "semantic_dedup": "NOT_RUN",
+    "global_formula_total": "TOKEN_VAZIO_GLOBAL_FORMULA_TOTALITY",
+    "uncertainty_delta": "REDUCED_BOUNDED",
+    "regression_detected": false
+  },
+  "invariants": [
+    "SOURCE != TRANSFORM != CLAIM != TEST/EVIDENCE != RECEIPT",
+    "candidate source path != unique formula",
+    "exact digest dedup != semantic dedup",
+    "section locator != stable line-level span",
+    "bounded shard denominator != global formula total",
+    "claim_allowed=false"
+  ],
+  "F_ok": "SHARD03-FORMAL materialized and verified at patch level: 3 formal sources -> 47 expression occurrences -> 44 exact SHA-256 identities, with 2 exact duplicate groups preserved and no semantic promotion.",
+  "F_gap": [
+    "16 provider-bound candidate paths remain unprocessed",
+    "line-level spans for SHARD03 remain TOKEN_VAZIO_LINE_SPAN",
+    "semantic formula deduplication not run",
+    "global formula total remains TOKEN_VAZIO",
+    "Drive canonical navigation had no observable document modification after 2026-08-16T01:45Z, so explicit tail binding to Mapa#260@72bf95ac7 remains TOKEN_VAZIO_CONTENT_TAIL"
+  ],
+  "top_urgencies": [
+    {"priority":"P0","item":"Preserve exact-digest extraction without semantic/global overcount while processing remaining provider-bound candidates"},
+    {"priority":"P1","item":"Confirm by content-tail readback whether Master Navigation Registry / Índice Ω explicitly bind Mapa#260@72bf95ac7"},
+    {"priority":"P1","item":"Keep line-level spans, semantic dedup and global total unpromoted until direct evidence exists"}
+  ],
+  "F_next": "Process the remaining 12 Matem-tica- paper/prepaper/registry candidates as SHARD04 under the same frozen repo+tree+path+blob provenance and exact-digest rule, without running semantic dedup or claiming a global total in the same step.",
+  "rollback": "Remove only this successor file from the audit branch; source repositories and Mapa/main are untouched."
+}

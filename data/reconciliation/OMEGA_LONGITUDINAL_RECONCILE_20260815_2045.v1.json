@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "cycle_local": "2026-08-15T20:45:00-03:00",
+  "mode": "append_only_longitudinal_reconciliation",
+  "claim_allowed": false,
+  "invariants": [
+    "SOURCE != TRANSFORM != CLAIM != TEST/EVIDENCE != RECEIPT",
+    "TOKEN_VAZIO != PASS",
+    "merge != CI_PASS != runtime",
+    "unit_test_PASS != deployment_PASS",
+    "parable/narrative mapping != empirical or legal proof",
+    "artifact_upload != artifact_semantic_validity"
+  ],
+  "drive_anchors": {
+    "master_navigation_registry": {
+      "provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "observed_modified_at": "2026-08-15T21:25:49.727Z",
+      "delta_after_2026-08-15T22:35:00Z": false
+    },
+    "context_reconstruction_index": {
+      "provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+      "observed_modified_at": "2026-08-15T21:26:00.159Z",
+      "delta_after_2026-08-15T22:35:00Z": false
+    },
+    "catalog_protocol": {
+      "provider_id": "1yJf-606MW0BnTALCx1XLmQ9oM8386_TKK6mKJLJNzr8",
+      "observed_modified_at": "2026-08-15T03:38:15.550Z",
+      "delta_after_2026-08-15T22:35:00Z": false
+    },
+    "classification": "DRIVE_NO_ELIGIBLE_DELTA_IN_WINDOW__TEMPORAL_DRIFT_RELATIVE_TO_NEW_GITHUB_DELTAS"
+  },
+  "github_deltas": [
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "window": "2026-08-15T22:45:00Z..2026-08-15T23:45:00Z",
+      "merged_prs": [
+        {"pr": 289, "merged_at": "2026-08-15T22:48:59Z", "scope": "HAM v1 middleware consumer"},
+        {"pr": 290, "merged_at": "2026-08-15T22:59:08Z", "scope": "TOKEN_VAZIO validator + CI receipt hotfix branch"},
+        {"pr": 291, "merged_at": "2026-08-15T23:01:19Z", "scope": "algorithmic logic audit skill"},
+        {"pr": 292, "merged_at": "2026-08-15T23:02:52Z", "scope": "runtime doctor coherence v2"},
+        {"pr": 293, "merged_at": "2026-08-15T23:26:22Z", "scope": "federated claim protocol + CI gate/dashboard commits"},
+        {"pr": 294, "merged_at": "2026-08-15T23:32:39Z", "scope": "parable compiler"}
+      ],
+      "open_prs": [
+        {
+          "pr": 295,
+          "draft": true,
+          "head_sha": "5d45557f7f924f98a59f4b4f32f3e48e50b61450",
+          "scope": "hardening of internal custody ledger",
+          "boundary": "does not close issue 121 globally; four requested production gate integrations and physical Termux/Android remain open"
+        }
+      ],
+      "ci_evidence": [
+        {
+          "subject": "PR294 head 0f4d02f18fa05a7692f8753d798526e5a286ec1f",
+          "formal_science_orchestrator": {"run_id": 31914908249, "conclusion": "success"},
+          "ci": {
+            "run_id": 31914908238,
+            "job_id": 95085221879,
+            "conclusion": "failure",
+            "failed_step": "Validate TOKEN_VAZIO gates (Hotfix H1)",
+            "validator": {
+              "errors": 7012,
+              "warnings": 2,
+              "status": "FAIL",
+              "report_hash": "a395a79b01eb624c04a735cff069da65ee9672964a9557aef916a420ccf08350"
+            },
+            "artifacts": {
+              "token_vazio_validation_artifact_id": 9254646034,
+              "token_vazio_validation_zip_sha256": "8b69acc16569346b75200b7dff59c50f317286a4c0efc7f20ceb607cc27492ad",
+              "apkc_proofs_artifact_id": 9254646134,
+              "apkc_proofs_zip_sha256": "474a026eb92a42dd06037ef31c854f7bb0c7c07b925331d3f449735caf5927e1",
+              "apkc_proof_runs_artifact_id": 9254646219,
+              "apkc_proof_runs_zip_sha256": "f032bec209cae1a0765e6cf21efcaf416651371a031b71d58e71e67556f30b35"
+            }
+          },
+          "classification": "REAL_STEP_FAILURE_NOT_RUNNER_PRESTEP"
+        },
+        {
+          "subject": "PR295 head 5d45557f7f924f98a59f4b4f32f3e48e50b61450",
+          "formal_science_orchestrator": {"run_id": 31915498405, "conclusion": "success"},
+          "ci": {
+            "run_id": 31915498476,
+            "job_id": 95086592496,
+            "conclusion": "failure",
+            "failed_step": "Validate TOKEN_VAZIO gates (Hotfix H1)",
+            "validator": {
+              "errors": 7060,
+              "warnings": 2,
+              "status": "FAIL",
+              "report_hash": "407e90e0910863a76fdb1f13e6af1e21540b302babd40b421f4717b94e1d9141"
+            },
+            "artifact": {
+              "token_vazio_validation_artifact_id": 9254787800,
+              "token_vazio_validation_zip_sha256": "bcaefcfb89fa4a8bd3ff4e400b0d514c10764038229a32d2616a3c4ad8cbf911"
+            }
+          },
+          "internal_custody_ledger": {
+            "run_id": 31915498377,
+            "job_id": 95086592235,
+            "conclusion": "success",
+            "steps": [
+              "Syntax and adversarial unit tests PASS",
+              "Generate intact fixture chain PASS",
+              "Falsifier — one-byte semantic tamper must fail PASS",
+              "Upload custody evidence PASS"
+            ],
+            "artifact_id": 9254788066,
+            "artifact_sha256": "2b24f00d741aeaf11e13dac36e931a22312a5a7caca30607fdf532658dd4cbdd",
+            "classification": "VERIFIED_LIMITED_TO_LEDGER_WORKFLOW"
+          },
+          "classification": "CUSTODY_WORKFLOW_PASS_BUT_GLOBAL_CI_BLOCKED_BY_TOKEN_VAZIO_GATE"
+        }
+      ],
+      "epistemic_corrections": [
+        "PR294 narrative/parables compile into structured claims; this does not promote a parable to empirical, mathematical-universal, biomedical or legal proof.",
+        "PR293 declares ED25519/signature verification placeholders and lacks real external-repository connectivity; therefore federated CLAIM_ALLOWED must not be treated as cross-repository cryptographic verification.",
+        "PR295 improves concurrency/tamper/truncation/artifact-hash coverage of the ledger, but production-gate emission and physical runtime remain TOKEN_VAZIO."
+      ],
+      "regression_signal": {
+        "token_vazio_error_delta_pr294_to_pr295": 48,
+        "interpretation": "validator error count increased from 7012 to 7060 after later changes; this is a coverage/blocking delta, not proof of 48 new real-world defects until report items are classified/deduplicated."
+      }
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pr": 260,
+      "state": "open_draft",
+      "head_sha": "a5c43115389b2db52c477c44b63cee37f32c482b",
+      "path": "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD01_20260816.v1.json",
+      "material_delta": {
+        "provider_bound_source_documents": 10,
+        "explicit_expression_records": 22,
+        "exact_digest_duplicates_within_shard": 0
+      },
+      "boundaries": [
+        "expression record != theorem correctness",
+        "exact digest uniqueness != semantic uniqueness",
+        "shard count != global formula total",
+        "reported target 653 remains TOKEN_VAZIO"
+      ]
+    }
+  ],
+  "skipped_no_eligible_delta_observed_in_window": [
+    "rafaelmeloreisnovo/RafGitTools",
+    "rafaelmeloreisnovo/llamaRafaelia",
+    "rafaelmeloreisnovo/GAIA_phi",
+    "rafaelmeloreisnovo/Rafaelia_Private",
+    "rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL",
+    "rafaelmeloreisnovo/termux-app-rafacodephi"
+  ],
+  "F_ok": [
+    "RafPolimata internal custody ledger hardening has a real successful dedicated workflow with adversarial falsifier and an artifact digest.",
+    "RafPolimata Formal Science Orchestrator completed successfully on PR294 and PR295 heads.",
+    "Mapa formula shard01 has a bounded provider-bound denominator: 10 source documents and 22 explicit expressions, with no exact digest duplicates inside that shard.",
+    "CI failures are localized to a real executed TOKEN_VAZIO gate, not misclassified as runner/pre-step failures."
+  ],
+  "F_gap": [
+    "RafPolimata global CI is blocked by TOKEN_VAZIO strict validation: 7012 errors on PR294 and 7060 on PR295; the 7060 items require classification/dedup/closure mapping before the gate can be meaningfully green.",
+    "RafPolimata federated protocol still contains signature/ED25519 placeholders and lacks real authority connectivity, so cross-repository cryptographic verification is not established.",
+    "PR295 custody ledger is not yet emitted from the four production gates requested by issue 121 and lacks physical Termux/Android execution evidence.",
+    "Drive Master Navigation Registry and Context Reconstruction Index had no eligible update after 22:35Z and therefore trail the latest RafPolimata/Mapa GitHub deltas.",
+    "Mapa shard01 does not close semantic formula deduplication, global formula totality or target-653 reconciliation."
+  ],
+  "top_urgencies": [
+    {"priority": "P0", "item": "Classify and deduplicate the 7060 TOKEN_VAZIO validator errors from PR295 by reason/path/closure state before changing the gate or claiming regression."},
+    {"priority": "P0", "item": "Preserve the custody workflow PASS as scoped evidence while keeping issue-121 production-gate integration and physical runtime open."},
+    {"priority": "P1", "item": "Reconcile the latest RafPolimata PR289-295 and Mapa PR260 deltas into the Drive navigation layer when a writable Drive path is available."},
+    {"priority": "P1", "item": "Prevent parable compiler output and federated placeholder signatures from being promoted to empirical/legal/mathematical proof."},
+    {"priority": "P1", "item": "Continue formula shard extraction only with frozen source tree and exact source-span provenance; semantic/global totals remain open."}
+  ],
+  "F_next": "Download/read the PR295 token-vazio-validation artifact and produce one deterministic aggregation keyed by source path + normalized reason + closure target, separating exact duplicates, already-linked closures, intentional TOKEN_VAZIO and true unlinked blockers; use that aggregation to decide the minimal gate repair without weakening strictness."
+}

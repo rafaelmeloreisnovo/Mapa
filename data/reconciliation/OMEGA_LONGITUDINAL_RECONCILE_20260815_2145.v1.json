@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "cycle_local": "2026-08-15T21:45:00-03:00",
+  "mode": "append_only_longitudinal_reconciliation",
+  "claim_allowed": false,
+  "predecessor": {
+    "path": "data/reconciliation/OMEGA_LONGITUDINAL_RECONCILE_20260815_2045.v1.json",
+    "blob_sha": "2609b119f0de84ceb3b3a7b13053199ea67617af"
+  },
+  "invariants": [
+    "SOURCE != TRANSFORM != CLAIM != TEST/EVIDENCE != RECEIPT",
+    "TOKEN_VAZIO != PASS",
+    "legacy_debt != new_regression",
+    "diff_scope_PASS != full_repository_debt_closed",
+    "workflow_failure != all_prior_steps_failed",
+    "expression_record != theorem_correctness != semantic_formula_uniqueness != global_formula_total",
+    "merge != CI_PASS != physical_runtime"
+  ],
+  "drive_reconciliation": {
+    "master_navigation_registry_provider_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "context_reconstruction_index_provider_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+    "metadata_probe": "both canonical documents matched modifiedTime > 2026-08-15T23:45:00Z",
+    "content_boundary": "best-effort snippets confirm canonical documents remain readable but do not expose enough tail content to prove whether RafPolimata #296 and Mapa #260 shard02 are already indexed",
+    "classification": "DRIVE_DELTA_PRESENT__LATEST_GITHUB_BINDING_TOKEN_VAZIO_CONTENT_TAIL"
+  },
+  "github_deltas": [
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 296,
+      "state": "open_draft",
+      "head_sha": "a677bff9bf0ad09f17e604971b21b7f3913cfad1",
+      "material_delta": {
+        "subject": "TOKEN_VAZIO validator regression-aware repair",
+        "previous_pathology": [
+          "findings were inserted twice across scan_file/scan_repository",
+          "strict full-repository enforcement made unrelated PRs inherit historical debt"
+        ],
+        "new_behavior": [
+          "full-repository inventory remains available",
+          "--changed-since scopes strict enforcement to changed lines",
+          "invalid/unresolved diff base fails closed",
+          "legacy unmodified debt does not block unrelated PR",
+          "new unlinked TOKEN_VAZIO still blocks"
+        ]
+      },
+      "verified_ci": {
+        "run_id": 31915981141,
+        "job_id": 95087710119,
+        "overall_conclusion": "failure",
+        "h1_step": {
+          "name": "Validate TOKEN_VAZIO gates (Hotfix H1)",
+          "conclusion": "success",
+          "unit_tests": "15/15 PASS",
+          "scope": "changed_lines",
+          "base_sha": "761cea43e39cbc56a46129d00ca810202877897d",
+          "errors": 0,
+          "warnings": 10,
+          "status": "PASS",
+          "report_hash": "0d1e5ecb4b4b0df9c34c360b98d78b1aeaf31307f36de1a0454f5c6b3d617ab6"
+        },
+        "artifact": {
+          "id": 9254903886,
+          "name": "token-vazio-validation-31915981141",
+          "zip_sha256": "ae1e9ef7809e80130663c2a08a3baa18ff87d8fc963290847c87481d5176514d",
+          "expired": false
+        },
+        "next_real_blocker": {
+          "step": "Audit M063 and complete APKc HOTFIX station",
+          "conclusion": "failure",
+          "exit_code": 1,
+          "boundary": "failure is after H1 PASS and after compiler/manifest smoke steps PASS; downstream steps are skipped"
+        },
+        "independent_related_workflow": {
+          "run_id": 31915981170,
+          "name": "M063 language completion freestanding contract",
+          "conclusion": "success"
+        },
+        "formal_science_orchestrator": {
+          "run_id": 31915981184,
+          "conclusion": "success"
+        }
+      },
+      "classification": "H1_REPAIR_VERIFIED_LIMITED__GLOBAL_CI_STILL_FAILS_AT_SEPARATE_M063_APKC_COMBINED_GATE",
+      "open_gaps": [
+        "historical TOKEN_VAZIO inventory is not closed by diff-scoped PASS",
+        "combined M063/APKc audit failure cause is not isolated beyond exit code 1 in the observed job log",
+        "physical Android/Termux runtime remains TOKEN_VAZIO"
+      ]
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pr": 260,
+      "state": "open_draft",
+      "head_sha": "db729093c57a74d7910c74f1dc038f549c7bc957",
+      "material_delta": {
+        "shard01_records": 22,
+        "shard02_records": 38,
+        "combined_records": 60,
+        "unique_exact_sha256_digests": 59,
+        "exact_duplicate_group": "B=A ⊕ φ(s) occurs in docs 02 and 25",
+        "normalization": "Unicode NFC + trim only",
+        "semantic_dedup": "NOT_RUN",
+        "global_formula_total": "TOKEN_VAZIO",
+        "target_653": "TOKEN_VAZIO"
+      },
+      "classification": "BOUNDED_FORMULA_EXTRACTION_PROGRESS_WITHOUT_GLOBAL_OR_SEMANTIC_PROMOTION"
+    }
+  ],
+  "skipped_no_eligible_delta_observed": [
+    "rafaelmeloreisnovo/RafGitTools",
+    "rafaelmeloreisnovo/llamaRafaelia",
+    "rafaelmeloreisnovo/GAIA_phi",
+    "rafaelmeloreisnovo/Rafaelia_Private",
+    "rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL",
+    "rafaelmeloreisnovo/termux-app-rafacodephi"
+  ],
+  "regression_delta": {
+    "previous_h1_state": "REAL_STEP_FAILURE_WITH_THOUSANDS_OF_FULL_REPOSITORY_ERRORS",
+    "current_h1_state": "PASS_ON_CHANGED_LINES_WITH_15_TESTS_AND_ARTIFACT",
+    "interpretation": "The large historical inventory was not erased or converted to PASS; blocking enforcement is now scoped to regressions/new changed lines. This is a validator-mechanics repair, not closure of legacy debt."
+  },
+  "F_ok": [
+    "RafPolimata #296 materially fixes duplicated findings and separates historical inventory from changed-line enforcement.",
+    "Exact-head CI verifies H1 with 15/15 tests, 0 errors, 10 warnings, deterministic report hash and artifact digest.",
+    "The failed overall CI is localized to the later combined M063/APKc audit step; earlier H1/compiler/manifest gates passed.",
+    "Mapa #260 extends bounded formula extraction to 60 records / 59 exact digests while preserving semantic/global totality as TOKEN_VAZIO.",
+    "Drive canonical navigation documents show a metadata delta after the previous cycle window."
+  ],
+  "F_gap": [
+    "Cause of the combined M063/APKc audit failure remains only partially localized: observed exit code 1, but no discriminating stderr in the captured job log excerpt.",
+    "Historical TOKEN_VAZIO debt remains an inventory/backlog and must not be declared resolved because diff-scoped H1 passes.",
+    "Drive tail content could not be proven to already bind RafPolimata #296 and Mapa #260 shard02 despite recent modification metadata.",
+    "Mapa formula semantic deduplication, global totality and target-653 reconciliation remain open.",
+    "Physical Android/Termux runtime evidence remains open wherever previously required."
+  ],
+  "top_urgencies": [
+    {"priority": "P0", "item": "Diagnose the failing combined M063/APKc CI step on PR296 without weakening the now-correct H1 gate."},
+    {"priority": "P0", "item": "Preserve historical TOKEN_VAZIO inventory as debt while enforcing only new regressions in changed-line scope."},
+    {"priority": "P1", "item": "Bind the PR296 H1 receipt and Mapa #260 shard02 into the Drive navigation tail if not already present."},
+    {"priority": "P1", "item": "Continue formula extraction over the remaining provider-bound sources with exact spans; do not run semantic/global promotion yet."},
+    {"priority": "P1", "item": "Keep physical runtime/signing/device claims separate from hosted CI evidence."
+  ],
+  "F_next": "Isolate the PR296 combined step 'Audit M063 and complete APKc HOTFIX station' by running/reading its two constituent audit scripts separately against the exact head, capturing command, stderr, exit_code and first divergent file/contract; do not modify H1 or promote the PR until that single blocker is classified."
+}

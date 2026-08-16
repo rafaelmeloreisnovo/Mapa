@@ -1,0 +1,119 @@
+{
+  "schema": "RAFAELIA_OMEGA_LONGITUDINAL_RECONCILIATION_V1",
+  "generated_at": "2026-08-15T18:48:03-03:00",
+  "mode": "APPEND_ONLY_EVIDENCE_FIRST",
+  "claim_allowed": false,
+  "invariants": [
+    "SOURCE != TRANSFORM != CLAIM != TEST_OR_EVIDENCE != RECEIPT",
+    "MERGE != CI_PASS != DEVICE_RUNTIME != SCIENTIFIC_VALIDATION",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "predecessor": {
+    "mapa_pr": 258,
+    "state": "MERGED",
+    "merged_at": "2026-08-15T21:01:31Z",
+    "head_sha": "a0fdd233081ec11c2ed2a087cb6cff2f3bf5f858"
+  },
+  "drive_catalog": {
+    "protocol_provider_id": "1yJf-606MW0BnTALCx1XLmQ9oM8386_TKK6mKJLJNzr8",
+    "latest_observed_chain": "CHECKPOINT_0043 -> 0044 -> 0045 -> 0046 -> 0047 -> 0048 -> 0049 -> 0050 -> 0051",
+    "latest_observed_scope": "bounded source_path inverted-index progression over derived MESSAGES/NODES pairs",
+    "state": "MATERIAL_WRITTEN_APPEND_ONLY",
+    "final_complete": false,
+    "note": "Drive catalog progressed beyond the previously remembered CHECKPOINT_0043; no gap is closed by ordinal suffix inference."
+  },
+  "github_deltas": [
+    {
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 282,
+      "merged": true,
+      "merged_at": "2026-08-15T21:16:13Z",
+      "head_sha": "d814a6606d99f30adea59119cf66acb8e8d070e1",
+      "classification": "MERGED_WITHOUT_PR_BODY_EVIDENCE_GATES",
+      "gaps": ["compile receipt", "test receipt", "APK evidence", "device runtime"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 284,
+      "merged": true,
+      "merged_at": "2026-08-15T21:37:56Z",
+      "head_sha": "029fbd98714baac1f86c250678ae14177f2d5e78",
+      "classification": "HOST_COMPILE_AND_L3_DECLARED_WITH_DEVICE_GAP",
+      "observed_claims": ["x86_64 host compile declared PASS", "9 checks: 8 PASS, 1 SKIP declared", "ARM64 ELF structure declared PASS"],
+      "workflow_runs": [
+        {"id": 31909887722, "name": "Formal Science Orchestrator", "state": "QUEUED"},
+        {"id": 31909887690, "name": "CI", "state": "QUEUED"},
+        {"id": 31909887584, "name": "ApkC First Part Closure", "state": "QUEUED"}
+      ],
+      "gaps": ["native ARM execution", "signed APK", "adb install/logcat", "terminal CI receipts"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "pr": 283,
+      "merged": true,
+      "merged_at": "2026-08-15T21:45:38Z",
+      "head_sha": "fe38a59e3f68be0c82fe61f8eb229241c9cb867d",
+      "classification": "TRUTHFUL_GATES_IMPLEMENTED_CI_PENDING",
+      "material_deltas": [
+        "Android L1-L10 fail-closed master verification",
+        "C-Python FFI validator",
+        "T7 convergence falsifier",
+        "current-APK apksigner gate",
+        "Phase C-D truthful CI workflow"
+      ],
+      "important_negative_evidence": "Implemented T7 transition falsifier contradicts strong fixed-point-convergence/42-fixed-point-attractor reading; 42 remains an index-range construction until stronger proof.",
+      "workflow_runs": [
+        {"id": 31910305569, "name": "Document Governance", "state": "QUEUED"},
+        {"id": 31910305553, "name": "Formal Science Orchestrator", "state": "QUEUED"},
+        {"id": 31910305604, "name": "Phase C-D Truthful Gates", "state": "QUEUED"},
+        {"id": 31910305616, "name": "CI", "state": "QUEUED"}
+      ],
+      "gaps": ["physical Android current-commit chain", "12-language interop", "physical SLA benchmark", "machine-checked L9 proof", "current APK apksigner receipt"]
+    }
+  ],
+  "skipped_no_eligible_new_delta": [
+    "rafaelmeloreisnovo/RafGitTools",
+    "rafaelmeloreisnovo/llamaRafaelia",
+    "rafaelmeloreisnovo/GAIA_phi",
+    "rafaelmeloreisnovo/Rafaelia_Private"
+  ],
+  "reconciliation_findings": [
+    {
+      "id": "OMEGA-20260815-1848-P0-RAFPO-CI",
+      "severity": "P0",
+      "state": "TOKEN_VAZIO_CI_QUEUED",
+      "finding": "PR 283 merged while its exact-head workflows are still queued; merge must not be promoted to CI PASS."
+    },
+    {
+      "id": "OMEGA-20260815-1848-P0-T7",
+      "severity": "P0",
+      "state": "NEGATIVE_EVIDENCE_PRESERVED",
+      "finding": "T7 implemented-transition falsifier contradicts the strong fixed-point/42-attractor reading; preserve revised target and do not regress to the stronger claim."
+    },
+    {
+      "id": "OMEGA-20260815-1848-P1-DRIVE",
+      "severity": "P1",
+      "state": "CATALOG_ADVANCED_REGISTRY_RECONCILIATION_NEEDED",
+      "finding": "Catalog protocol has progressed through at least CHECKPOINT_0051; navigation/reconciliation should bind the newer cursor chain explicitly."
+    }
+  ],
+  "F_ok": [
+    "Drive catalog chain materially observed beyond CHECKPOINT_0043 through at least CHECKPOINT_0051",
+    "RafPolimata Phase C-D truthful gates merged with explicit fail-closed device/signing boundaries",
+    "T7 negative evidence preserved instead of discarded"
+  ],
+  "F_gap": [
+    "RafPolimata PR283 exact-head workflows are queued and have no terminal step-level receipt yet",
+    "physical Android/current-commit install-launch-logcat remains TOKEN_VAZIO",
+    "current signed APK/apksigner receipt remains TOKEN_VAZIO",
+    "catalog navigation must bind the newer CHECKPOINT_0051 cursor chain"
+  ],
+  "top_urgencies": [
+    "P0: exact-head terminal CI evidence for RafPolimata PR283",
+    "P0: preserve T7 falsifier as anti-regression boundary",
+    "P1: bind catalog CHECKPOINT_0051 into longitudinal navigation",
+    "P1: physical Android current-commit proof chain",
+    "P1: signed current APK verification receipt"
+  ],
+  "F_next": "Observe only the exact-head workflow runs for RafPolimata PR283 (head fe38a59e3f68be0c82fe61f8eb229241c9cb867d); once terminal, append one successor with step-level conclusions and artifacts/receipts, preserving physical Android/runtime and signing as TOKEN_VAZIO unless directly evidenced."
+}
