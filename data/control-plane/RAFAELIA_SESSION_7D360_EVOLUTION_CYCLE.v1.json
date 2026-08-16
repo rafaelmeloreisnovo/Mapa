@@ -1,0 +1,154 @@
+{
+  "schema": "rafaelia.session-7d360-evolution-cycle.v1",
+  "generated_at": "2026-08-16T12:28:00-03:00",
+  "state": "BRAINSTORM_GOVERNED",
+  "claim_allowed": false,
+  "publication_ready": false,
+  "automatic_promotion": false,
+  "mode": "APPEND_ONLY_DERIVED",
+  "mother_invariant": "idea != implementation != execution != evidence != claim; TOKEN_VAZIO is valid; validated state + explicit delta only",
+  "state_space": {
+    "symbol": "S[g,d,theta]",
+    "generation": "g >= 0",
+    "directions": 7,
+    "angular_domain_degrees": [0, 360],
+    "base_angular_resolution_degrees": 1,
+    "cells_per_generation_at_base_resolution": 2520,
+    "evolution_rule": "V[g+1] = VALIDATED(V[g]) XOR_APPEND DELTA[g+1]",
+    "non_regression": "historical states are immutable inputs; contradictions append relations instead of overwriting"
+  },
+  "epistemic_states": [
+    "TOKEN_VAZIO",
+    "HYPOTHESIS",
+    "ANALOGY_ONLY",
+    "FORMALIZED",
+    "SUPPORTED",
+    "CONTRADICTED",
+    "INVALIDATED",
+    "VERIFIED_LIMITED"
+  ],
+  "weight_policy": {
+    "numeric_weights": "TOKEN_VAZIO_UNCALIBRATED",
+    "rule": "do not invent probabilities or scalar confidence scores; use gate vectors and Pareto comparison until calibration exists"
+  },
+  "directions": [
+    {
+      "id": "D1_COSMOCHRONOLOGY",
+      "name": "Cosmocronologia e mundos antigos",
+      "session_tokens": ["Big_Bang", "bounce", "cyclic_universe", "stellar_age", "planet_age", "chemical_enrichment", "cosmic_web"],
+      "observables": ["t_universe", "t_star", "t_formation_min", "metallicity", "alpha_abundance", "planet_density"],
+      "core_residual": "R_chrono = t0 - t_star - t_enrichment_min - t_formation_min",
+      "primary_falsifier": "robust negative R_chrono across independent clocks and systematics",
+      "state": "HYPOTHESIS"
+    },
+    {
+      "id": "D2_ASTROBIOLOGY_WATER_ECOLOGY",
+      "name": "Água, habitabilidade, ecologia e memória mineral",
+      "session_tokens": ["surface_water", "subsurface_water", "subocean_aquifer", "deep_biosphere", "redox", "reef", "biomineral_memory"],
+      "observables": ["water_inventory", "temperature_pressure", "redox_energy", "atmosphere", "mineralogy", "temporal_variability"],
+      "core_residual": "H_available = water_accessible + free_energy + persistence - hostile_loss_terms",
+      "primary_falsifier": "candidate biosignature collapses to abiotic baseline or habitat persistence is insufficient",
+      "state": "HYPOTHESIS"
+    },
+    {
+      "id": "D3_PLASMA_ELECTRIC_MAGNETIC",
+      "name": "Plasma, eletricidade, magnetismo e aurora",
+      "session_tokens": ["stellar_wind", "magnetosphere", "ionosphere", "aurora", "electric_field", "magnetic_field", "ionic_exchange"],
+      "observables": ["B", "E", "particle_flux", "ionization_fraction", "conductivity", "radio_aurora", "atmospheric_escape"],
+      "core_residual": "R_env = O_obs - O_standard(X_planet,nu,t)",
+      "primary_falsifier": "signal reduces to known plasma, Faraday, conductivity, escape or calibration effects",
+      "state": "FORMALIZED"
+    },
+    {
+      "id": "D4_BIOPHOTON_BIOMAGNETIC_TRANSDUCTION",
+      "name": "Biofótons, biomagnetismo e transdução biológica",
+      "session_tokens": ["bee_electroreception", "flower_electric_field", "UPE", "living_dead_contrast", "heart_biomagnetic_field", "weak_signal", "biological_transduction"],
+      "observables": ["electric_field_response", "mechanosensory_displacement", "UPE_flux", "magnetocardiogram", "phase", "stress_response"],
+      "core_residual": "R_transduction = biological_response - physical_baseline_without_transduction",
+      "primary_falsifier": "response disappears under controlled removal of the proposed carrier or is explained by artifact",
+      "state": "SUPPORTED"
+    },
+    {
+      "id": "D5_GEOMETRY_ANTHROPOMETRY_SPIRALS",
+      "name": "Antropometria, proporções, osciladores e espirais",
+      "session_tokens": ["face_landmarks", "iris", "eye_width", "finger_width", "nose_chin", "navel_ratios", "spiral_projection"],
+      "observables": ["landmark_coordinates", "normalized_ratios", "population_variance", "sex_age_covariates", "principal_components", "phase_amplitude"],
+      "core_residual": "R_geometry = observed_normalized_relation - population_model_relation",
+      "primary_falsifier": "candidate invariant fails cross-population replication or vanishes after covariate normalization",
+      "state": "HYPOTHESIS"
+    },
+    {
+      "id": "D6_MULTISCALE_COSMIC_ANALOGY",
+      "name": "Analogia multiescala, espirais, cordas e wormholes como sementes distantes",
+      "session_tokens": ["spiral", "filament", "cosmic_web", "string_theory", "wormhole", "scale_bridge", "information_transduction"],
+      "observables": ["explicit_carrier", "coupling_equation", "units", "boundary_conditions", "effect_size", "discriminating_observable"],
+      "core_residual": "R_bridge = proposed_cross_scale_effect - standard_multiscale_baselines",
+      "primary_falsifier": "no explicit carrier/coupling/observable or bridge is reducible to known mechanisms",
+      "state": "ANALOGY_ONLY"
+    },
+    {
+      "id": "D7_EPISTEMIC_GOVERNANCE",
+      "name": "Proveniência, falsificabilidade, TOKEN_VAZIO e retroalimentação",
+      "session_tokens": ["source", "index", "semantic_token", "claim", "evidence", "falsifier", "receipt"],
+      "observables": ["source_count", "resolved_gates", "open_gaps", "contradictions", "independent_replication", "artifact_hashes"],
+      "core_residual": "R_epistemic = required_gates - resolved_gates",
+      "primary_falsifier": "claim promotion with missing mandatory gate",
+      "state": "FORMALIZED"
+    }
+  ],
+  "angular_sweep": {
+    "per_direction": true,
+    "degrees": 360,
+    "base_bins": 360,
+    "bin_semantics": [
+      "0-44: source_and_provenance",
+      "45-89: definitions_and_units",
+      "90-134: mechanisms_and_equations",
+      "135-179: observations_and_data",
+      "180-224: countermodels_and_inversions",
+      "225-269: falsifiers_and_adversarial_tests",
+      "270-314: replication_and_uncertainty",
+      "315-359: synthesis_gap_next"
+    ],
+    "closure_rule": "theta=359 closes only if every unresolved mandatory field is carried forward as TOKEN_VAZIO with next_gate"
+  },
+  "growth": {
+    "generation_0": "session semantic extraction",
+    "generation_1": "source binding and formula binding",
+    "generation_2": "dataset and observable binding",
+    "generation_3": "falsification and countermodel execution",
+    "generation_4": "independent replication",
+    "generation_5_plus": "refinement without overwriting prior generations",
+    "resolution_refinement": "sub-degree refinement is allowed append-only after base 1-degree map is stable"
+  },
+  "source_anchors": [
+    "GoogleDrive:RAFAELIA Implementacao Latentes e Papers Drive GitHub V1",
+    "GoogleDrive:RAFAELIA Indice de Reconstrucao de Contexto Omega",
+    "GoogleDrive:RAFAELIA Omega-ACTIVATE V1",
+    "GitHub:rafaelmeloreisnovo/Mapa/data/control-plane/RAFAELIA_MULTIDIMENSIONAL_COHERENCE.v1.json",
+    "GitHub:rafaelmeloreisnovo/Mapa/data/control-plane/RAFAELIA_ADAPTIVE_CYCLE.v1.json",
+    "GitHub:rafaelmeloreisnovo/papers/knowledge_packets/2026-07-19/01_environmental_planetary_plasma_rll_packet.md",
+    "GitHub:instituto-Rafael/PlamaticGravity-/docs/PLANETARY_PLASMA_ENVIRONMENT_BOUNDARY.md",
+    "GitHub:instituto-Rafael/relativity-living-light/data/formulas/FORMULAS_ARTIFACTS_MANIFEST.json",
+    "GitHub:rafaelmeloreisnovo/Mapa/data/formulas/RAFAELIA_FORMULA_REGISTRY.v3.json"
+  ],
+  "known_scope_conflicts": [
+    {
+      "id": "FORMULA_STOCK_486_VS_653",
+      "state": "TOKEN_VAZIO_SCOPE_RECONCILIATION",
+      "meaning": "RLL manifest materializes 486 formulas from 53 sources while Mapa coherence bridge reports 593+60=653 candidate target with full coverage still pending"
+    }
+  ],
+  "required_outputs": [
+    "direction_state.jsonl",
+    "angular_gap_map.jsonl",
+    "hypothesis_ledger.jsonl",
+    "falsifier_matrix.jsonl",
+    "generation_receipt.json"
+  ],
+  "R_3": {
+    "F_ok": "seven directions and full 360-degree sweep formalized",
+    "F_gap": "weights, exhaustive formula scan, datasets and independent replication remain TOKEN_VAZIO where unresolved",
+    "F_next": "bind session tokens to exact source lines/formula ids and generate generation-0 receipt"
+  }
+}
