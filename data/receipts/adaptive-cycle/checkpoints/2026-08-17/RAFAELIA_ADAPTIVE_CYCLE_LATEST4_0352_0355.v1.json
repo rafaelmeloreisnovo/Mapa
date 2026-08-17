@@ -1,0 +1,157 @@
+{
+  "schema": "rafaelia.adaptive-cycle-human-checkpoint.v1",
+  "checkpoint_date": "2026-08-17",
+  "source_workflow": {
+    "name": "RAFAELIA Adaptive Cycle",
+    "workflow_id": 325191787,
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "path": ".github/workflows/rafaelia-adaptive-cycle.yml"
+  },
+  "state": "VERIFIED_LATEST_FOUR_READ_ONLY",
+  "claim_allowed": false,
+  "automatic_mutation": false,
+  "automatic_merge": false,
+  "source_mode": "HUMAN_REQUESTED_CHECKPOINT_FROM_LIVE_GITHUB_ACTIONS_AUDIT",
+  "latest_four_count": 4,
+  "complete_index_entry_count_observed": 151,
+  "complete_index_sha256_observed": "9fcd6418950525c77cf4b7ac553094cb251cab5d7d0bab7724a21efa34ea31f5",
+  "chain_continuity": "VERIFIED_COMPLETE_INDEX_AND_LATEST_FOUR",
+  "runs": [
+    {
+      "run_number": 352,
+      "run_id": "31986942132",
+      "job_id": "95263474403",
+      "cycle_id": "RAF-CYCLE-20260817T020627Z-N14",
+      "n_mod_42": 14,
+      "phase": "rho",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "e3b59eae50943d4446648c237d10e82db1505ba2df62ccc5349bef0102538dff",
+      "entry_sha256": "a4fffa9f566239545c1bbfd8e82c8d760d0b8536825e76f162168936fff741fd",
+      "receipt_sha256": "ae9fca8213ac610019c5653061113aec3e3f9e979fafb554af6237ef012f0533",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    },
+    {
+      "run_number": 353,
+      "run_id": "31990270167",
+      "job_id": "95272416341",
+      "cycle_id": "RAF-CYCLE-20260817T031016Z-N18",
+      "n_mod_42": 18,
+      "phase": "psi",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "a4fffa9f566239545c1bbfd8e82c8d760d0b8536825e76f162168936fff741fd",
+      "entry_sha256": "3de838890b7b4cf2a61875cf9b4e2c634e2fb27fec86a305472168d787627e2c",
+      "receipt_sha256": "74ebcf6a32361e33e50408b5bc3d8245c1b11ef2aa35e169401d78bb7f340241",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    },
+    {
+      "run_number": 354,
+      "run_id": "31993325270",
+      "job_id": "95280561331",
+      "cycle_id": "RAF-CYCLE-20260817T040657Z-N22",
+      "n_mod_42": 22,
+      "phase": "sigma",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "3de838890b7b4cf2a61875cf9b4e2c634e2fb27fec86a305472168d787627e2c",
+      "entry_sha256": "feb2cf5ae682cc43fa2f196415a7de9ea5e4533be1e231d25469c8454728dd62",
+      "receipt_sha256": "30e04fe0a0e3e3d1e6ff7043af68dc675226d61c9c11bf3cc874fe9db0490a1b",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    },
+    {
+      "run_number": 355,
+      "run_id": "31996105693",
+      "job_id": "95287915344",
+      "cycle_id": "RAF-CYCLE-20260817T045531Z-N25",
+      "n_mod_42": 25,
+      "phase": "chi",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "feb2cf5ae682cc43fa2f196415a7de9ea5e4533be1e231d25469c8454728dd62",
+      "entry_sha256": "be85d13aaf606d6ce67fdbccafcf65bb070ce5d171a146148940d478a64b2552",
+      "receipt_sha256": "34abc8e7cb65885975751bac595161d7cfc399f1ab4ff44e66ab5cea19705762",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    }
+  ],
+  "anti_regression": {
+    "p0": [],
+    "p1": [],
+    "p2": [],
+    "tests_observed_passed": 19,
+    "guards_observed": [
+      "claim_promotion_rejected",
+      "fail_closed_contract",
+      "hash_bound_read_only_receipt",
+      "latest_four_exact_suffix",
+      "same_cycle_id_different_receipt_rejected",
+      "tampered_previous_index_rejected",
+      "broken_predecessor_chain_rejected"
+    ]
+  },
+  "operational_friction": [
+    {
+      "id": "MAINT-NODE20-DEPRECATION",
+      "severity": "P2_MAINTENANCE",
+      "state": "OBSERVED_WARNING_NOT_FAILURE",
+      "detail": "GitHub-hosted runner reports Node.js 20 deprecation and forces affected pinned actions to Node.js 24.",
+      "next": "Review upstream action releases and update pinned commit SHAs only after compatibility and license/provenance review."
+    }
+  ],
+  "uncertainty_register": [
+    {
+      "id": "TV-LICENSE-LEGAL-CONCLUSION",
+      "state": "TOKEN_VAZIO_REQUIRES_DEPENDENCY_LICENSE_REVIEW",
+      "claim_allowed": false,
+      "next": "Inventory each external action/dependency license and preserve commit-SHA provenance; do not treat this checkpoint as a license override or legal opinion."
+    },
+    {
+      "id": "TV-PHYSICAL-RUNTIME",
+      "state": "TOKEN_VAZIO_OUT_OF_SCOPE_FOR_CI",
+      "claim_allowed": false,
+      "next": "Require independent physical-runtime receipt when a physical/Termux execution claim is needed."
+    },
+    {
+      "id": "TV-SCIENTIFIC-TRUTH",
+      "state": "TOKEN_VAZIO_OUT_OF_SCOPE_FOR_OPERATIONAL_INDEX",
+      "claim_allowed": false,
+      "next": "Use a separate scientific evidence/falsification gate before promoting any scientific claim."
+    },
+    {
+      "id": "TV-COMPLEX-NETWORKS-LAST-CODE-BINDING",
+      "state": "TOKEN_VAZIO_SOURCE_PATH_NOT_BOUND_IN_THIS_AUDIT",
+      "claim_allowed": false,
+      "next": "Bind the exact repository path/commit of the referenced last complex-networks code before deriving or extending it."
+    }
+  ],
+  "semantic_internal_reference": {
+    "chain": [
+      "ESTATISTICA",
+      "TOKENS",
+      "METAFORAS",
+      "VETORES_DE_PALAVRA",
+      "PROMESSA",
+      "OMEGA_N"
+    ],
+    "role": "INTERNAL_NAVIGATION_AND_DIDACTICS",
+    "parable_is_not_mechanism": true,
+    "scientific_claim": false,
+    "claim_allowed": false
+  },
+  "license_boundary": {
+    "external_actions_referenced_by_commit_sha": true,
+    "dependency_license_obligations_separate": true,
+    "checkpoint_is_not_license_override": true,
+    "legal_conclusion_claimed": false
+  },
+  "providence_contract": {
+    "coherence": "preserve exact observed receipt fields and hash-chain continuity",
+    "operational_excellence": "fail closed on missing or contradictory evidence",
+    "providencias": [
+      "keep append-only checkpoint immutable after merge",
+      "preserve claim_allowed=false",
+      "resolve TOKEN_VAZIO only with source-bound evidence",
+      "do not conflate CI, physical runtime, scientific evidence, legal conclusion or metaphor"
+    ]
+  }
+}
