@@ -1,0 +1,96 @@
+{
+  "schema": "rafaelia.mod9_control_lattice.v1",
+  "date": "2026-08-17",
+  "status": "ARCHITECTURE_FORMALIZATION",
+  "claim_allowed": false,
+  "core": {
+    "statement": "Use 9 as a logical control ring / indexing lattice above binary hardware, not as a replacement for the physical radix of conventional digital logic.",
+    "base9_digits": "0..8",
+    "decimal_9_in_base9": "10_9",
+    "three_by_three": [[0,1,2],[3,4,5],[6,7,8]],
+    "forward_index": "(i + 1) mod 9",
+    "reverse_index": "(i + 8) mod 9",
+    "bank_jump": "(i + 3) mod 9"
+  },
+  "binary_path": {
+    "byte_fact": "A byte has 8 bit positions indexed 0..7 and 2^8 = 256 possible bit patterns.",
+    "one_hot_8": "If exactly one of the 8 bit positions is active, there are 8 selectable lanes.",
+    "ninth_logical_state": "A ninth logical slot requires either a 9-bit one-hot ring (stored in a wider integer) or an encoded value 0..8.",
+    "base9_digit_encoding": {
+      "container_bits": 4,
+      "valid_codes": "0..8",
+      "reserved_codes": "9..15"
+    },
+    "one_hot_9": {
+      "container": "uint16_t",
+      "valid_mask_hex": "0x01FF",
+      "forward_rotate": "((x << 1) | (x >> 8)) & 0x01FF",
+      "reverse_rotate": "((x >> 1) | ((x & 1) << 8)) & 0x01FF"
+    }
+  },
+  "bit_walk": {
+    "set": "reg |= (1u << n)",
+    "clear": "reg &= ~(1u << n)",
+    "toggle": "reg ^= (1u << n)",
+    "test": "(reg >> n) & 1u",
+    "walk_forward": "shift/rotate toward the next slot",
+    "walk_reverse": "shift/rotate toward the previous slot",
+    "interpretation": "The user's 'andar um bit para um lado e para o outro' maps to masks + shifts/rotates + optional modulo wrap."
+  },
+  "buffer_partition": {
+    "banks": 3,
+    "slots_per_bank": 3,
+    "total_slots": 9,
+    "flat_index": "i = bank*3 + slot",
+    "sync": "Barrier/phase-boundary semantics are architectural; exact runtime binding remains TOKEN_VAZIO until source-bound.",
+    "note": "L1/L2/L3 caches and generic buffers are distinct hardware concepts. They may be modeled as separate logical strata, but buffer is not a fourth cache level by definition."
+  },
+  "compute_routes": {
+    "octa_core": "Eight physical/logical CPU cores can be mapped to slots 0..7 when observed on a target, while slot 8 may be a control/sync state only by explicit design. Do not infer a physical ninth core.",
+    "memory": "Expose the same 0..8 control/index vocabulary to RAM-side queues only where useful.",
+    "storage": "Expose the same vocabulary to storage queues/chunks only where useful.",
+    "sync": "Use explicit barriers, sequence numbers, epochs or atomic state transitions; 'sync' is not itself a numeric proof of MOD9."
+  },
+  "crc": {
+    "software": "Support parameterized CRC widths/polynomials (for example 8/16/32/64) instead of assuming one width.",
+    "hardware": "Use hardware CRC/CRC32C instructions only when the target actually exposes them; hardware implementations are usually polynomial/width constrained.",
+    "cross_check": "HW and SW results are comparable only when width, polynomial, init, refin, refout and xorout are identical.",
+    "evidence_rule": "HW==SW under matched parameters is an implementation cross-check, not a scientific claim."
+  },
+  "io_masks": {
+    "concept": "Pin/line selection is naturally represented by bit masks and shifts.",
+    "db25_boundary": "DB25 is a connector form factor used by multiple electrical/protocol standards. RS-232 DB25 signaling is not generic 5 V TTL GPIO; legacy parallel-port DB25 also has direction/current limits. Bind the actual electrical standard and use a proper driver/interface before switching loads.",
+    "six_lines_example": "To select six logical lines, use a six-bit mask (for example 0x3F) or six one-hot positions; actual pin mapping is platform-specific."
+  },
+  "relations": [
+    "binary physical states -> masks/bit positions",
+    "8 one-hot lanes indexed 0..7 -> optional ninth logical control slot",
+    "3 banks x 3 slots -> MOD9 control ring",
+    "forward/reverse -> shifts or rotates",
+    "sync -> phase/barrier semantics",
+    "memory/storage/CRC -> routes that may share the control vocabulary without becoming the same hardware block"
+  ],
+  "routes_for_integration": {
+    "Mapa": "canonical architecture/index and provenance",
+    "RafGitTools": "candidate location for reusable bit-mask/rotate/mod9 helper functions",
+    "RLL": "candidate location only if a runtime scheduler or data path explicitly uses this control ring",
+    "Termux_ARM": "candidate target for executable smoke tests of shifts/rotates/CRC HW-vs-SW",
+    "Drive_MEMORY_PRIVATE": "human-readable longitudinal record"
+  },
+  "token_vazio": [
+    "Exact historical files/repositories that already implement every part of this lattice have not yet been exhaustively inventoried.",
+    "Exact meaning of slot 8: sync, sentinel, parity, control, data, or multiplexed role.",
+    "Exact binding of 3x3 banks to L1/L2/L3/buffer; do not infer physical equivalence.",
+    "Exact DB25 electrical target/protocol/pinout in the user's example.",
+    "Whether MOD9 should be encoded as one-hot 9-bit, compact 4-bit digit, or both per subsystem."
+  ],
+  "antiregression": [
+    "8 bits != 8 total binary values; 8 bits have 256 patterns.",
+    "bit positions 0..7 = 8 positions.",
+    "base 9 digit set = 0..8.",
+    "logical MOD9 != physical CPU core count.",
+    "buffer != L4 cache by default.",
+    "DB25 connector != guaranteed TTL GPIO.",
+    "claim_allowed=false"
+  ]
+}
