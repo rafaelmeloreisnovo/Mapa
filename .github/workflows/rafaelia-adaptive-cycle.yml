@@ -8,10 +8,13 @@ on:
     paths:
       - "data/control-plane/RAFAELIA_ADAPTIVE_CYCLE.v1.json"
       - "data/formulas/RAFAELIA_FORMULA_REGISTRY.v1.json"
+      - "data/contracts/RAFAELIA_ADAPTIVE_CYCLE_LATEST4_ANTI_REGRESSION.v1.yml"
       - "scripts/run_rafaelia_adaptive_cycle.py"
       - "scripts/append_microcycle_index.py"
+      - "scripts/audit_latest_four_microcycles.py"
       - "tests/test_rafaelia_adaptive_cycle.py"
       - "tests/test_microcycle_append_index.py"
+      - "tests/test_audit_latest_four_microcycles.py"
       - "docs/architecture/RAFAELIA_ADAPTIVE_CYCLE_FIBONACCI_V1.md"
       - "indices/microcycles/README.md"
       - ".github/workflows/rafaelia-adaptive-cycle.yml"
@@ -46,7 +49,8 @@ jobs:
         run: |
           python -m unittest -v \
             tests.test_rafaelia_adaptive_cycle \
-            tests.test_microcycle_append_index
+            tests.test_microcycle_append_index \
+            tests.test_audit_latest_four_microcycles
 
       - name: Restore previous immutable index cache
         id: restore-index
@@ -56,6 +60,7 @@ jobs:
           key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-
+            rafaelia-microcycle-index-main-
 
       - name: Record continuity observation
         run: |
@@ -125,12 +130,26 @@ jobs:
           assert 1 <= len(index['latest_four']) <= 4
           PY
 
+      - name: Audit latest four receipt contract
+        run: |
+          python scripts/audit_latest_four_microcycles.py \
+            --index artifacts/rafaelia-index/microcycle_index.json \
+            --output artifacts/rafaelia-index/latest_four_audit.json
+
       - name: Publish navigable receipt and index in run summary
         run: |
           {
             echo "# RAFAELIA Adaptive Cycle"
             echo
             cat artifacts/rafaelia-index/microcycle_index.md
+            echo
+            echo "<details><summary>Latest-four anti-regression audit</summary>"
+            echo
+            echo '```json'
+            cat artifacts/rafaelia-index/latest_four_audit.json
+            echo '```'
+            echo
+            echo "</details>"
             echo
             echo "<details><summary>Receipt JSON completo do microciclo atual</summary>"
             echo
