@@ -1,0 +1,84 @@
+schema: rafaelia.adaptive-cycle-latest4-anti-regression.v1
+status: governed_non_promoting
+claim_allowed: false
+
+purpose:
+  - make the four most recent adaptive-cycle receipts directly auditable
+  - reduce uncertainty between execution, index continuity, evidence and claim
+  - preserve append-only provenance without automatic repository mutation or merge
+  - expose gaps as TOKEN_VAZIO instead of silently promoting them
+
+required_projection:
+  - run_id
+  - cycle_id
+  - n_mod_42
+  - phase
+  - decision
+  - previous_entry_sha256
+  - entry_sha256
+  - receipt_sha256
+  - latest_four_count
+  - claim_allowed
+
+invariants:
+  index_schema: rafaelia.microcycle-index.v1
+  source_mode: ARTIFACT_APPEND_ONLY
+  latest_four_is_exact_suffix: true
+  latest_four_target_count: 4
+  indexed_decision: EXECUTED_READ_ONLY
+  claim_allowed: false
+  automatic_mutation: false
+  automatic_merge: false
+  hash_chain_required: true
+  duplicate_cycle_id_forbidden: true
+
+urgency:
+  P0:
+    - claim_allowed_true
+    - broken_entry_hash_chain
+    - invalid_embedded_hash
+    - same_cycle_id_different_receipt
+  P1:
+    - latest_four_count_not_four_after_history_is_established
+    - missing_previous_entry_sha256_after_genesis
+    - unsupported_decision_or_phase
+  P2:
+    - artifact_or_cache_continuity_unavailable
+    - missing_navigation_projection
+
+uncertainty_boundaries:
+  schedule_is_not_evidence: true
+  ci_is_not_physical_runtime: true
+  hash_is_not_truth: true
+  index_is_not_scientific_evidence: true
+  parabola_is_not_mechanism: true
+  semantic_pattern_is_not_physical_law: true
+  publication_requires_separate_human_and_scientific_gate: true
+
+semantic_internal_reference:
+  chain:
+    - ESTATISTICA
+    - TOKENS
+    - METAFORAS
+    - VETORES_DE_PALAVRA
+    - PROMESSA
+    - OMEGA_N
+  role: internal_navigation_and_didactics
+  mechanism_claim: false
+  scientific_claim: false
+  claim_allowed: false
+
+provenance_and_license_boundary:
+  generated_receipts_are_repository_evidence: true
+  external_actions_are_referenced_by_commit_sha_not_vendored_here: true
+  dependency_license_obligations_remain_separate: true
+  this_contract_is_not_a_license_override: true
+  legal_conclusion_claimed: false
+
+providencias:
+  contract:
+    - validate the complete index before projecting latest_four
+    - emit a machine-readable latest-four audit receipt on every successful cycle
+    - fail closed on chain, schema, claim-boundary or hash regression
+    - preserve TOKEN_VAZIO for unavailable continuity or non-observed evidence
+    - keep scientific and physical interpretations outside this operational gate
