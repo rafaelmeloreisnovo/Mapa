@@ -11,17 +11,38 @@
     "state": "PASS",
     "output": "data/geometry/spectral_geometry_baseline.v1.json",
     "receipt_sha256": "8f556b7adcd610ddbe7c1fb3cc2e6e75286b038ec1d840d2c61c5b97729fd67b",
-    "tests": {
-      "passed": 6,
-      "failed": 0,
-      "state": "PASS"
-    },
+    "tests": {"passed": 6, "failed": 0, "state": "PASS"},
     "dependency_profile": {
       "python_standard_library_only": true,
       "third_party_runtime_dependencies": [],
       "license_added_by_experiment": false,
       "repository_license_override": false
     }
+  },
+  "remote_reproduction": {
+    "state": "CI_REPRODUCED_SAME_IMPLEMENTATION",
+    "workflow": "Geometric invariant contract",
+    "run_id": "31985678528",
+    "run_number": 5,
+    "run_attempt": "1",
+    "source_head_sha": "124458b8bfcea9cc68a6603c0bea18dd85cd2ac3",
+    "pull_request_test_merge_sha": "41b3e4b984ee28839b3143434b692c23ae2db438",
+    "artifact_id": 9273691973,
+    "artifact_name": "rafaelia-spectral-geometry-31985678528",
+    "artifact_digest": "sha256:66d9ba2a6d240f1af396ee13e058f4d0f490801513deec00b878d580aa7fc025",
+    "artifact_expires_at": "2026-11-15T01:41:00Z",
+    "generated_receipt_sha256": "55b421ba99d5ceb9fc2442932b62409cefbbbe42265aa5384d0670aa73fbeee9",
+    "ci_receipt_sha256": "a693218c52f0145297f3533fde6d9619a2b94967f5e4f6a901666fddb5f004e3",
+    "same_implementation_numerical_reproduction": true,
+    "numeric_equality_except_execution_context_and_derived_hash": true,
+    "baseline_embedded_hash_recalculated_valid": true,
+    "generated_embedded_hash_recalculated_valid": true,
+    "ci_receipt_embedded_hash_recalculated_valid": true,
+    "constant_scan_any_match": false,
+    "icosahedral_convergence_monotone": true,
+    "octahedral_control_convergence_monotone_where_defined": true,
+    "claim_allowed": false,
+    "independent_implementation_replication": false
   },
   "observed": {
     "icosahedral_refinement_monotone": true,
@@ -38,24 +59,15 @@
     "experiment_v1_relative_tolerance": 0.01,
     "state": "SET_IN_EXPERIMENT_V1_BEFORE_REMOTE_REPRODUCTION_NOT_BEFORE_REFERENCE_RUN"
   },
-  "remote_reproduction": {
-    "state": "TOKEN_VAZIO_PENDING_GITHUB_ACTIONS",
-    "run_id": null,
-    "artifact_id": null,
-    "artifact_digest": null,
-    "generated_receipt_sha256": null,
-    "same_implementation_reproduction": false,
-    "independent_implementation_replication": false
-  },
   "epistemic_boundaries": {
     "reference_execution_is_not_independent_replication": true,
-    "github_actions_same_implementation_will_not_be_independent_replication": true,
+    "github_actions_same_implementation_is_not_independent_replication": true,
+    "pull_request_merge_sha_is_test_ref_not_source_head": true,
     "numerical_convergence_is_not_physical_confirmation": true,
     "area_scaling_is_not_bekenstein_hawking_derivation": true,
     "hash_is_not_truth": true
   },
   "token_vazio": [
-    "REMOTE_GITHUB_ACTIONS_REPRODUCTION",
     "INDEPENDENT_IMPLEMENTATION_REPLICATION",
     "HIGHER_REFINEMENT_WITH_SPARSE_SOLVER",
     "JUSTIFIED_STATISTICAL_NULL_MODEL",
@@ -64,5 +76,5 @@
     "BEKENSTEIN_HAWKING_FACTOR_ONE_QUARTER_DERIVATION",
     "PHYSICAL_DEGREES_OF_FREEDOM_PER_MODE"
   ],
-  "decision": "REFERENCE_PASS_REMOTE_AND_INDEPENDENT_GATES_OPEN"
+  "decision": "REFERENCE_AND_CI_SAME_IMPLEMENTATION_PASS_INDEPENDENT_GATE_OPEN"
 }
