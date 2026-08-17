@@ -9,12 +9,15 @@ on:
       - "data/control-plane/RAFAELIA_ADAPTIVE_CYCLE.v1.json"
       - "data/formulas/RAFAELIA_FORMULA_REGISTRY.v1.json"
       - "data/contracts/RAFAELIA_ADAPTIVE_CYCLE_LATEST4_ANTI_REGRESSION.v1.yml"
+      - "data/contracts/RAFAELIA_WORKFLOW_DEPENDENCY_BOUNDARY.v1.yml"
       - "scripts/run_rafaelia_adaptive_cycle.py"
       - "scripts/append_microcycle_index.py"
       - "scripts/audit_latest_four_microcycles.py"
+      - "scripts/audit_workflow_dependency_boundary.py"
       - "tests/test_rafaelia_adaptive_cycle.py"
       - "tests/test_microcycle_append_index.py"
       - "tests/test_audit_latest_four_microcycles.py"
+      - "tests/test_workflow_dependency_boundary.py"
       - "docs/architecture/RAFAELIA_ADAPTIVE_CYCLE_FIBONACCI_V1.md"
       - "indices/microcycles/README.md"
       - ".github/workflows/rafaelia-adaptive-cycle.yml"
@@ -50,7 +53,8 @@ jobs:
           python -m unittest -v \
             tests.test_rafaelia_adaptive_cycle \
             tests.test_microcycle_append_index \
-            tests.test_audit_latest_four_microcycles
+            tests.test_audit_latest_four_microcycles \
+            tests.test_workflow_dependency_boundary
 
       - name: Restore previous immutable index cache
         id: restore-index
@@ -98,6 +102,12 @@ jobs:
           assert len(receipt['toroidal_state']) == 7
           assert receipt['formula_evaluation']['formula_count'] == 50
           PY
+
+      - name: Audit dependency license runtime boundary
+        run: |
+          python scripts/audit_workflow_dependency_boundary.py \
+            --root . \
+            --output artifacts/rafaelia-cycle/dependency_boundary_audit.json
 
       - name: Append current receipt to navigable index
         run: |
@@ -147,6 +157,14 @@ jobs:
             echo
             echo '```json'
             cat artifacts/rafaelia-index/latest_four_audit.json
+            echo '```'
+            echo
+            echo "</details>"
+            echo
+            echo "<details><summary>Dependency / license / runtime boundary</summary>"
+            echo
+            echo '```json'
+            cat artifacts/rafaelia-cycle/dependency_boundary_audit.json
             echo '```'
             echo
             echo "</details>"

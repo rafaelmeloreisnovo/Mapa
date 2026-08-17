@@ -1,0 +1,119 @@
+{
+  "schema": "rafaelia.adaptive-cycle-latest4-observation.v1",
+  "observed_at_utc": "2026-08-17T04:55:31Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "workflow": ".github/workflows/rafaelia-adaptive-cycle.yml",
+  "source_run_id": "31996105693",
+  "source_job_id": "95287915344",
+  "audit_decision": "VERIFIED_LATEST_FOUR_READ_ONLY",
+  "chain_continuity": "VERIFIED_COMPLETE_INDEX_AND_LATEST_FOUR",
+  "latest_four_count": 4,
+  "claim_allowed": false,
+  "automatic_mutation": false,
+  "automatic_merge": false,
+  "entries": [
+    {
+      "run_id": "31986942132",
+      "cycle_id": "RAF-CYCLE-20260817T020627Z-N14",
+      "n_mod_42": 14,
+      "phase": "rho",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "e3b59eae50943d4446648c237d10e82db1505ba2df62ccc5349bef0102538dff",
+      "entry_sha256": "a4fffa9f566239545c1bbfd8e82c8d760d0b8536825e76f162168936fff741fd",
+      "receipt_sha256": "ae9fca8213ac610019c5653061113aec3e3f9e979fafb554af6237ef012f0533",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    },
+    {
+      "run_id": "31990270167",
+      "cycle_id": "RAF-CYCLE-20260817T031016Z-N18",
+      "n_mod_42": 18,
+      "phase": "psi",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "a4fffa9f566239545c1bbfd8e82c8d760d0b8536825e76f162168936fff741fd",
+      "entry_sha256": "3de838890b7b4cf2a61875cf9b4e2c634e2fb27fec86a305472168d787627e2c",
+      "receipt_sha256": "74ebcf6a32361e33e50408b5bc3d8245c1b11ef2aa35e169401d78bb7f340241",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    },
+    {
+      "run_id": "31993325270",
+      "cycle_id": "RAF-CYCLE-20260817T040657Z-N22",
+      "n_mod_42": 22,
+      "phase": "sigma",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "3de838890b7b4cf2a61875cf9b4e2c634e2fb27fec86a305472168d787627e2c",
+      "entry_sha256": "feb2cf5ae682cc43fa2f196415a7de9ea5e4533be1e231d25469c8454728dd62",
+      "receipt_sha256": "30e04fe0a0e3e3d1e6ff7043af68dc675226d61c9c11bf3cc874fe9db0490a1b",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    },
+    {
+      "run_id": "31996105693",
+      "cycle_id": "RAF-CYCLE-20260817T045531Z-N25",
+      "n_mod_42": 25,
+      "phase": "chi",
+      "decision": "EXECUTED_READ_ONLY",
+      "previous_entry_sha256": "feb2cf5ae682cc43fa2f196415a7de9ea5e4533be1e231d25469c8454728dd62",
+      "entry_sha256": "be85d13aaf606d6ce67fdbccafcf65bb070ce5d171a146148940d478a64b2552",
+      "receipt_sha256": "34abc8e7cb65885975751bac595161d7cfc399f1ab4ff44e66ab5cea19705762",
+      "latest_four_count": 4,
+      "claim_allowed": false
+    }
+  ],
+  "continuity_assertions": {
+    "entry_1_to_2": true,
+    "entry_2_to_3": true,
+    "entry_3_to_4": true,
+    "complete_latest_four_suffix": true
+  },
+  "urgency": {
+    "P0": [],
+    "P1": [
+      "NODE20_ACTION_RUNTIME_DEPRECATION_WARNING_OBSERVED"
+    ],
+    "P2": [
+      "TOKEN_VAZIO_DEPENDENCY_LICENSE_COMPATIBILITY_NOT_AUDITED",
+      "TOKEN_VAZIO_PINNED_ACTION_NODE24_NATIVE_COMPATIBILITY_NOT_VERIFIED"
+    ]
+  },
+  "uncertainties": {
+    "dependency_license_compatibility": "TOKEN_VAZIO_REQUIRES_SEPARATE_LICENSE_REVIEW",
+    "pinned_action_node24_native_compatibility": "TOKEN_VAZIO_RUNNER_FORCED_NODE24_OBSERVED_ONLY",
+    "scientific_evidence": "OUT_OF_SCOPE_OPERATIONAL_RECEIPT",
+    "physical_runtime_evidence": "NOT_CLAIMED"
+  },
+  "license_boundary": {
+    "repository_license_observed": "GPL-3.0-text-present",
+    "external_actions_reference_mode": "COMMIT_SHA_PINNED_NOT_VENDORED",
+    "external_dependency_licenses_overridden": false,
+    "legal_conclusion_claimed": false,
+    "claim_allowed": false
+  },
+  "ethics_by_design": {
+    "fail_closed": true,
+    "token_vazio_preserved": true,
+    "hash_is_not_truth": true,
+    "ci_is_not_physical_runtime": true,
+    "parabola_is_not_mechanism": true,
+    "semantic_internal_chain": [
+      "ESTATISTICA",
+      "TOKENS",
+      "METAFORAS",
+      "VETORES_DE_PALAVRA",
+      "PROMESSA",
+      "OMEGA_N"
+    ],
+    "semantic_chain_role": "INTERNAL_NAVIGATION_AND_DIDACTICS_ONLY"
+  },
+  "providencias": {
+    "contract": [
+      "preserve claim_allowed=false across receipts, indexes and dependency audits",
+      "keep external GitHub Actions pinned by exact commit SHA",
+      "audit dependency licenses separately before any compatibility claim",
+      "verify a Node-24-native pinned successor before replacing current action SHAs",
+      "treat runner-forced Node 24 as observed runtime behavior, not proof of native compatibility",
+      "fail closed on broken hash continuity, claim promotion or missing latest-four projection"
+    ]
+  }
+}
