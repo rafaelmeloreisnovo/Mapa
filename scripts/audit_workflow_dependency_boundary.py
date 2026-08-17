@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Fail-closed audit for workflow dependency, license and runtime boundaries.
 
-This audit is intentionally structural. It never promotes legal, scientific, or
-runtime-compatibility claims that are not directly observable from repository
-state. Unknown compatibility remains TOKEN_VAZIO.
+The parser is intentionally small and linear-time. It inspects only structural
+invariants needed by this gate and never promotes unverified legal, scientific,
+or runtime-compatibility claims. Unknown compatibility remains TOKEN_VAZIO.
 """
 
 from __future__ import annotations
@@ -15,11 +15,43 @@ from pathlib import Path
 from typing import Any
 
 SHA40 = re.compile(r"^[0-9a-fA-F]{40}$")
-USES_LINE = re.compile(r"^\s*uses:\s*([^@\s]+)@([^\s#]+)\s*$", re.MULTILINE)
-CONTENTS_READ = re.compile(r"(?ms)^permissions:\s*\n\s+contents:\s*read\s*$")
-CONTENTS_WRITE = re.compile(r"(?ms)^permissions:\s*\n(?:\s+.*\n)*?\s+contents:\s*write\s*$")
-PERSIST_FALSE = re.compile(r"(?m)^\s*persist-credentials:\s*false\s*$")
-CLAIM_TRUE = re.compile(r"(?mi)^\s*claim_allowed\s*:\s*true\s*$")
+USES_LINE = re.compile(r"^uses:\s*([^@\s]+)@([^\s#]+)\s*$")
+
+
+def _indent(line: str) -> int:
+    return len(line) - len(line.lstrip(" "))
+
+
+def _permissions_contents(lines: list[str]) -> list[str]:
+    """Return top-level permissions.contents values using one forward scan."""
+    values: list[str] = []
+    in_permissions = False
+    permissions_indent = 0
+
+    for raw in lines:
+        stripped = raw.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        indent = _indent(raw)
+
+        if not in_permissions:
+            if indent == 0 and stripped == "permissions:":
+                in_permissions = True
+                permissions_indent = indent
+            continue
+
+        if indent <= permissions_indent:
+            in_permissions = False
+            if indent == 0 and stripped == "permissions:":
+                in_permissions = True
+                permissions_indent = indent
+            continue
+
+        if stripped.startswith("contents:"):
+            _, value = stripped.split(":", 1)
+            values.append(value.strip())
+
+    return values
 
 
 def audit(root: Path, workflow_rel: str, license_rel: str) -> dict[str, Any]:
@@ -28,22 +60,46 @@ def audit(root: Path, workflow_rel: str, license_rel: str) -> dict[str, Any]:
 
     workflow = workflow_path.read_text(encoding="utf-8")
     license_text = license_path.read_text(encoding="utf-8")
+    lines = workflow.splitlines()
 
-    actions = []
-    unpinned = []
-    for action, ref in USES_LINE.findall(workflow):
-        item = {"action": action, "ref": ref, "sha_pinned": bool(SHA40.fullmatch(ref))}
-        actions.append(item)
-        if not item["sha_pinned"]:
-            unpinned.append(item)
+    actions: list[dict[str, Any]] = []
+    unpinned: list[dict[str, Any]] = []
+    persist_values: list[str] = []
+    claim_true_literal = False
+
+    for raw in lines:
+        stripped = raw.strip()
+
+        match = USES_LINE.fullmatch(stripped)
+        if match:
+            action, ref = match.groups()
+            item = {
+                "action": action,
+                "ref": ref,
+                "sha_pinned": bool(SHA40.fullmatch(ref)),
+            }
+            actions.append(item)
+            if not item["sha_pinned"]:
+                unpinned.append(item)
+
+        if stripped.startswith("persist-credentials:"):
+            _, value = stripped.split(":", 1)
+            persist_values.append(value.strip().lower())
+
+        normalized = stripped.replace(" ", "").lower()
+        if normalized == "claim_allowed:true":
+            claim_true_literal = True
+
+    contents_values = _permissions_contents(lines)
 
     checks = {
         "external_actions_found": bool(actions),
         "all_external_actions_sha_pinned": bool(actions) and not unpinned,
-        "contents_permission_read": bool(CONTENTS_READ.search(workflow)),
-        "contents_permission_write_absent": not bool(CONTENTS_WRITE.search(workflow)),
-        "checkout_persist_credentials_false": bool(PERSIST_FALSE.search(workflow)),
-        "claim_promotion_literal_absent": not bool(CLAIM_TRUE.search(workflow)),
+        "contents_permission_read": contents_values == ["read"],
+        "contents_permission_write_absent": "write" not in contents_values,
+        "checkout_persist_credentials_false": bool(persist_values)
+        and all(value == "false" for value in persist_values),
+        "claim_promotion_literal_absent": not claim_true_literal,
         "repository_gpl3_text_present": (
             "GNU GENERAL PUBLIC LICENSE" in license_text and "Version 3" in license_text
         ),
@@ -59,6 +115,11 @@ def audit(root: Path, workflow_rel: str, license_rel: str) -> dict[str, Any]:
         "repository_license": license_rel,
         "checks": checks,
         "blocking_regressions": blocking,
+        "observed": {
+            "permissions_contents_values": contents_values,
+            "persist_credentials_values": persist_values,
+            "external_action_count": len(actions),
+        },
         "actions": actions,
         "token_vazio": {
             "dependency_license_compatibility": "TOKEN_VAZIO_REQUIRES_SEPARATE_LICENSE_REVIEW",
@@ -74,6 +135,10 @@ def audit(root: Path, workflow_rel: str, license_rel: str) -> dict[str, Any]:
             "runner_success_is_not_native_runtime_compatibility_proof": True,
             "ci_is_not_physical_runtime": True,
             "hash_is_not_truth": True,
+        },
+        "complexity_contract": {
+            "workflow_scan": "O(lines)",
+            "catastrophic_regex_backtracking": False,
         },
         "automatic_mutation": False,
         "automatic_merge": False,
