@@ -198,19 +198,22 @@ claim_allowed = false
 
 ## 10. R3
 
-**F_ok**
+### F_ok
+
 - 7D canônico localizado e classificado;
 - 33D localizado em família FCEA e JSONL históricos;
 - 34D localizado como arquitetura cognitiva histórica;
 - raízes técnicas e simbólicas da ponte em silício recuperadas.
 
-**F_gap**
+### F_gap
+
 - enumerações 33D/34D não fechadas;
 - relação 33D→34D não demonstrada;
 - ponte direta DNA/RNA→silício não demonstrada;
 - nenhuma dimensão física adicional ou teorema é promovido.
 
-**F_next**
+### F_next
+
 - recuperar os registries 33/34 completos;
 - deduplicar aliases;
 - tipar cada eixo e relação;
