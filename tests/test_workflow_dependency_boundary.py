@@ -60,6 +60,14 @@ class WorkflowDependencyBoundaryTests(unittest.TestCase):
         self.assertTrue(result["token_vazio"]["pinned_action_node24_native_compatibility"].startswith("TOKEN_VAZIO"))
         self.assertFalse(result["runtime_observation"]["warning_is_compatibility_proof"])
 
+    def test_large_workflow_is_scanned_linearly(self):
+        noise = "\n".join(f"      # inert-line-{i}" for i in range(20000))
+        workflow = GOOD_WORKFLOW + "\n" + noise + "\n"
+        result = self.run_audit(workflow=workflow)
+        self.assertEqual(result["decision"], "VERIFIED_BOUNDARY_READ_ONLY")
+        self.assertEqual(result["complexity_contract"]["workflow_scan"], "O(lines)")
+        self.assertFalse(result["complexity_contract"]["catastrophic_regex_backtracking"])
+
     def test_current_repository_boundary(self):
         root = Path(__file__).resolve().parents[1]
         result = audit(root, ".github/workflows/rafaelia-adaptive-cycle.yml", "LICENSE")
