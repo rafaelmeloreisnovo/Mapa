@@ -1,0 +1,78 @@
+{
+  "id": "GOV-UIMP-20260817-V1",
+  "title": "Urgency × Importance Routing and Material Recording Contract",
+  "status": "ACTIVE_GOVERNANCE_CONTRACT",
+  "created_at": "2026-08-17T18:57:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "automatic_claim_promotion": false,
+  "automatic_deletion": false,
+  "automatic_overwrite": false,
+  "purpose": "Classify incoming material independently by urgency and importance, derive operational priority, and route durable records to canonical, memory, graph and receipt surfaces without confusing priority with epistemic truth.",
+  "axes": {
+    "urgency": {
+      "U0": "immediate: active data-loss, integrity, safety, security, blocking or irreversible-risk condition",
+      "U1": "near-term: should be handled in the next operational window",
+      "U2": "scheduled: relevant but can wait for planned execution",
+      "U3": "backlog: no current time pressure",
+      "TOKEN_VAZIO": "urgency not yet determined"
+    },
+    "importance": {
+      "I0": "critical: provenance, custody, security, irreversible evidence, canonical architecture or hard invariant",
+      "I1": "high: core implementation, reproducibility, indexes, contracts, runtime or cross-system integration",
+      "I2": "medium: useful supporting material, optimization, documentation or exploratory implementation",
+      "I3": "low: optional context, analogy or deferred convenience",
+      "TOKEN_VAZIO": "importance not yet determined"
+    }
+  },
+  "priority_policy": {
+    "P0": "reserve for high-urgency/high-importance operational risk; requires explicit observed reason",
+    "P1": "important or time-sensitive work requiring near-term execution",
+    "P2": "scheduled/maintenance/supporting work",
+    "TV": "classification incomplete; preserve as TOKEN_VAZIO rather than guess",
+    "rule": "urgency and importance are independent inputs; priority never promotes a scientific/technical claim"
+  },
+  "routing": {
+    "canonical_machine_readable": "GitHub/Mapa/data/... appropriate domain",
+    "canonical_governance": "GitHub/Mapa/data/governance/",
+    "operational_receipt": "GitHub/Mapa/data/receipts/ or receipts/ according to existing domain convention",
+    "longitudinal_memory": "Google Drive/NOVOexport_INDEX/MEMORY_PRIVATE",
+    "transversal_relations": "Google Drive/NOVOexport_INDEX/GRAPH_LEDGER_PRIVATE",
+    "receipt_mirror": "Google Drive/NOVOexport_INDEX/RECEIPTS",
+    "raw_source_policy": "raw source is not rewritten; normalized/indexed projections reference source provenance",
+    "dedup_policy": "do not blindly duplicate payloads; store canonical material once when possible and mirror references/receipts/projections",
+    "all_places_semantics": "all necessary functional surfaces, not every repository or folder indiscriminately"
+  },
+  "required_record_fields": [
+    "material_id",
+    "source",
+    "observed_at",
+    "urgency",
+    "importance",
+    "priority",
+    "reason",
+    "provenance",
+    "relations",
+    "epistemic_state",
+    "claim_allowed",
+    "TOKEN_VAZIO_fields",
+    "next_action"
+  ],
+  "epistemic_guardrails": [
+    "urgent != true",
+    "important != proven",
+    "indexed != validated",
+    "receipt != scientific evidence",
+    "hash != truth",
+    "analogy != mechanism",
+    "unknown -> TOKEN_VAZIO"
+  ],
+  "material_routes_to_register": [
+    "MOD9/control-lattice architecture",
+    "number-base/discretization hypotheses",
+    "runtime/CPU/cache/buffer/sync/CRC observations",
+    "math/science hypotheses and falsifiers",
+    "source provenance and receipts",
+    "repository and Drive cross-links"
+  ]
+}
