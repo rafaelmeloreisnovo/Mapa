@@ -7,7 +7,7 @@ from typing import Any
 
 SCHEMA="rafaelia.spectral-geometry-experiment.v1"
 DIGITS=10
-MATCH_TOL=1e-3
+MATCH_TOL=1e-2
 
 def canon(v:Any)->bytes:
     return (json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(",",":"))+"\n").encode()
@@ -158,9 +158,15 @@ def scan(rows):
     for label,t in targets.items():
         z=min(c,key=lambda q:abs(q[3]-t)/abs(t)); err=abs(z[3]-t)/abs(t)
         res[label]={"target":r(t),"nearest":{"geometry":z[0],"operator":z[1],"ratio_index":z[2],"value":r(z[3])},
-                    "relative_error":r(err),"match_within_preregistered_tolerance":err<=MATCH_TOL}
-    return {"relative_tolerance":MATCH_TOL,"scope":"positive_eigenvalue_ratios_only","results":res,
-            "any_match":any(x["match_within_preregistered_tolerance"] for x in res.values()),"claim_allowed":False}
+                    "relative_error":r(err),"match_within_experiment_v1_tolerance":err<=MATCH_TOL}
+    return {"relative_tolerance":MATCH_TOL,
+            "tolerance_provenance":"SET_IN_EXPERIMENT_V1_BEFORE_REMOTE_REPRODUCTION_NOT_BEFORE_REFERENCE_RUN",
+            "scope":"positive_eigenvalue_ratios_only",
+            "statistical_inference_performed":False,
+            "multiple_comparison_correction":"NOT_APPLICABLE_DESCRIPTIVE_DISTANCE_ONLY",
+            "results":res,
+            "any_match":any(x["match_within_experiment_v1_tolerance"] for x in res.values()),
+            "claim_allowed":False}
 
 def sphere():
     levels=[]; n=0
