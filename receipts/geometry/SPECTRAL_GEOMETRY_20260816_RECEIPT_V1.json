@@ -1,0 +1,68 @@
+{
+  "schema": "rafaelia.spectral-geometry-execution-receipt.v1",
+  "experiment_id": "GEO-SPECTRAL-SPHERE-POLYHEDRA-20260816",
+  "contract": "data/contracts/RAFAELIA_SPECTRAL_GEOMETRY_INVARIANT.v1.yml",
+  "claim_allowed": false,
+  "automatic_promotion": false,
+  "automatic_publication": false,
+  "automatic_merge": false,
+  "reference_execution": {
+    "context": "CHATGPT_CONTAINER_REFERENCE",
+    "state": "PASS",
+    "output": "data/geometry/spectral_geometry_baseline.v1.json",
+    "receipt_sha256": "8f556b7adcd610ddbe7c1fb3cc2e6e75286b038ec1d840d2c61c5b97729fd67b",
+    "tests": {
+      "passed": 6,
+      "failed": 0,
+      "state": "PASS"
+    },
+    "dependency_profile": {
+      "python_standard_library_only": true,
+      "third_party_runtime_dependencies": [],
+      "license_added_by_experiment": false,
+      "repository_license_override": false
+    }
+  },
+  "observed": {
+    "icosahedral_refinement_monotone": true,
+    "octahedral_control_refinement_monotone_where_defined": true,
+    "multiple_sphere_triangulation_families": 2,
+    "operator_sensitivity_control": "COTANGENT_VS_NORMALIZED_GRAPH",
+    "constant_scan_any_match": false,
+    "constant_assessment": "REJECT_CURRENT_PREREGISTERED_SCAN",
+    "statistical_inference_performed": false
+  },
+  "threshold_provenance": {
+    "constants_pre_registered_before_reference_run": true,
+    "numerical_match_tolerance_pre_registered_before_reference_run": false,
+    "experiment_v1_relative_tolerance": 0.01,
+    "state": "SET_IN_EXPERIMENT_V1_BEFORE_REMOTE_REPRODUCTION_NOT_BEFORE_REFERENCE_RUN"
+  },
+  "remote_reproduction": {
+    "state": "TOKEN_VAZIO_PENDING_GITHUB_ACTIONS",
+    "run_id": null,
+    "artifact_id": null,
+    "artifact_digest": null,
+    "generated_receipt_sha256": null,
+    "same_implementation_reproduction": false,
+    "independent_implementation_replication": false
+  },
+  "epistemic_boundaries": {
+    "reference_execution_is_not_independent_replication": true,
+    "github_actions_same_implementation_will_not_be_independent_replication": true,
+    "numerical_convergence_is_not_physical_confirmation": true,
+    "area_scaling_is_not_bekenstein_hawking_derivation": true,
+    "hash_is_not_truth": true
+  },
+  "token_vazio": [
+    "REMOTE_GITHUB_ACTIONS_REPRODUCTION",
+    "INDEPENDENT_IMPLEMENTATION_REPLICATION",
+    "HIGHER_REFINEMENT_WITH_SPARSE_SOLVER",
+    "JUSTIFIED_STATISTICAL_NULL_MODEL",
+    "NODAL_INVARIANTS_WITH_DEGENERATE_EIGENSPACE_GAUGE_CONTROL",
+    "MICROSCOPIC_BLACK_HOLE_STATE_MAP",
+    "BEKENSTEIN_HAWKING_FACTOR_ONE_QUARTER_DERIVATION",
+    "PHYSICAL_DEGREES_OF_FREEDOM_PER_MODE"
+  ],
+  "decision": "REFERENCE_PASS_REMOTE_AND_INDEPENDENT_GATES_OPEN"
+}
