@@ -7,7 +7,14 @@ import json
 from pathlib import Path
 from typing import Any
 
-from scripts.append_microcycle_index import MicrocycleIndexError, load_object, validate_index
+try:
+    from scripts.append_microcycle_index import (
+        MicrocycleIndexError,
+        load_object,
+        validate_index,
+    )
+except ModuleNotFoundError:
+    from append_microcycle_index import MicrocycleIndexError, load_object, validate_index
 
 AUDIT_SCHEMA = "rafaelia.adaptive-cycle-latest4-audit.v1"
 REQUIRED_ENTRY_FIELDS = (
