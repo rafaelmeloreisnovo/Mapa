@@ -1,7 +1,7 @@
 from __future__ import annotations
 import json, unittest
 from pathlib import Path
-from tools.spectral_geometry_experiment import build, cube, geodesic, icosa, tetra, validate
+from tools.spectral_geometry_experiment import build, cube, geodesic, icosa, octa, tetra, validate
 
 ROOT=Path(__file__).resolve().parents[2]
 BASELINE=ROOT/"data/geometry/spectral_geometry_baseline.v1.json"
@@ -19,6 +19,10 @@ class SpectralGeometryTests(unittest.TestCase):
         self.assertEqual((len(ico[0]),len(ico[1])),(12,20))
         self.assertEqual(tuple(map(len,geodesic(*ico,1))),(42,80))
         self.assertEqual(tuple(map(len,geodesic(*ico,2))),(162,320))
+        oc=octa()
+        self.assertEqual((len(oc[0]),len(oc[1])),(6,8))
+        self.assertEqual(tuple(map(len,geodesic(*oc,1))),(18,32))
+        self.assertEqual(tuple(map(len,geodesic(*oc,2))),(66,128))
 
     def test_baseline_reproduces_exactly(self):
         self.assertEqual(self.fresh,self.baseline)
@@ -29,11 +33,17 @@ class SpectralGeometryTests(unittest.TestCase):
         self.assertIs(self.fresh["automatic_promotion"],False)
 
     def test_convergence_is_observed_but_not_promoted(self):
-        obs=self.fresh["continuous_discrete_convergence"]["observed"]
-        self.assertTrue(all(obs.values()))
-        rows=self.fresh["continuous_discrete_convergence"]["rows"]
-        self.assertLess(rows[-1]["l2_relative_error"],0.03)
-        self.assertLess(rows[-1]["l3_relative_error"],0.06)
+        conv=self.fresh["continuous_discrete_convergence"]
+        self.assertTrue(all(conv["observed"].values()))
+        ico_rows=conv["families"]["icosahedral_refinement"]["rows"]
+        oct_rows=conv["families"]["octahedral_control_refinement"]["rows"]
+        self.assertLess(ico_rows[-1]["l2_relative_error"],0.03)
+        self.assertLess(ico_rows[-1]["l3_relative_error"],0.06)
+        self.assertLess(oct_rows[-1]["l2_relative_error"],0.07)
+        self.assertLess(oct_rows[-1]["l3_relative_error"],0.15)
+        self.assertEqual(self.fresh["control_assessment"]["multiple_sphere_triangulation_families"],2)
+        self.assertEqual(self.fresh["control_assessment"]["statistical_null_model"],
+                         "TOKEN_VAZIO_JUSTIFIED_NULL_DISTRIBUTION_NOT_DEFINED")
         self.assertEqual(self.fresh["hypothesis_assessment"]["H1"],
             "PARTIAL_NUMERICAL_SUPPORT_FOR_CONTINUUM_DISCRETE_CONVERGENCE_ONLY")
 
