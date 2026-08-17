@@ -37,10 +37,15 @@ class SpectralGeometryTests(unittest.TestCase):
         self.assertEqual(self.fresh["hypothesis_assessment"]["H1"],
             "PARTIAL_NUMERICAL_SUPPORT_FOR_CONTINUUM_DISCRETE_CONVERGENCE_ONLY")
 
-    def test_preregistered_constants_do_not_match(self):
+    def test_registered_constants_do_not_match(self):
         scan=self.fresh["constant_scan"]
         self.assertIs(scan["any_match"],False)
-        self.assertTrue(all(not x["match_within_preregistered_tolerance"] for x in scan["results"].values()))
+        self.assertEqual(scan["tolerance_provenance"],
+            "SET_IN_EXPERIMENT_V1_BEFORE_REMOTE_REPRODUCTION_NOT_BEFORE_REFERENCE_RUN")
+        self.assertIs(scan["statistical_inference_performed"],False)
+        self.assertEqual(scan["multiple_comparison_correction"],
+            "NOT_APPLICABLE_DESCRIPTIVE_DISTANCE_ONLY")
+        self.assertTrue(all(not x["match_within_experiment_v1_tolerance"] for x in scan["results"].values()))
         self.assertEqual(self.fresh["hypothesis_assessment"]["rafaelia_constants_as_spectral_invariants"],
                          "REJECT_CURRENT_PREREGISTERED_SCAN")
 
