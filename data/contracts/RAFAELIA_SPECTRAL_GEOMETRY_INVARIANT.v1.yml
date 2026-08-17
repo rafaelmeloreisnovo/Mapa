@@ -1,5 +1,5 @@
 schema: rafaelia.spectral-geometry-invariant.v1
-status: hypothesis_pre_registered
+status: hypothesis_pre_registered_with_reference_execution
 claim_allowed: false
 
 separation_of_concerns:
@@ -7,6 +7,7 @@ separation_of_concerns:
   mathematical_scaling_is_microscopic_derivation: false
   visual_similarity_is_invariant: false
   semantic_pattern_is_physical_law: false
+  numerical_convergence_is_physical_confirmation: false
 
 operator_family:
   continuum:
@@ -17,42 +18,54 @@ operator_family:
     eigenvalues: "lambda_l = l(l+1)/R^2"
     degeneracy: "g_l = 2l+1"
     cumulative_modes: "N(L) = (L+1)^2"
-  discrete:
+  discrete_primary:
     generalized_eigenproblem: "L u = lambda M u"
-    L_role: stiffness_or_discrete_laplace_beltrami
-    M_role: mass_or_area_matrix
+    realization: cotangent_stiffness_with_lumped_vertex_mass
+  discrete_operator_control:
+    realization: normalized_graph_laplacian
+    role: operator_sensitivity_only
 
 geometries:
-  - sphere
-  - tetrahedron
-  - cube
-  - icosahedron
-  - geodesic_triangulation
+  target_family:
+    - sphere_reference
+    - tetrahedron
+    - cube
+    - icosahedron
+    - icosahedral_geodesic_l1
+    - icosahedral_geodesic_l2
+  alternate_triangulation_control:
+    - octahedron
+    - octahedral_geodesic_l1
+    - octahedral_geodesic_l2
 
 primary_hypothesis:
   id: H1
   statement: "The declared RAFAELIA geometry family may contain normalized spectral invariants that survive controlled continuous-to-discrete refinement."
-  state: TOKEN_VAZIO_UNTIL_NUMERICAL_AND_INDEPENDENT_VALIDATION
+  state: PARTIAL_NUMERICAL_SUPPORT_FOR_CONTINUUM_DISCRETE_CONVERGENCE_ONLY
+  promotion_state: TOKEN_VAZIO_PENDING_REMOTE_AND_INDEPENDENT_IMPLEMENTATION_REPLICATION
   claim_allowed: false
 
 observables:
   - normalized_eigenvalue_ratios
   - eigenspace_multiplicities
   - cumulative_mode_count_N_lambda
-  - nodal_structure_metrics
-  - Weyl_scaling_residual
-  - symmetry_class
-  - refinement_convergence_error
+  - surface_area_error
+  - low_mode_refinement_convergence_error
+  - operator_sensitivity
+  - triangulation_family_sensitivity
 
 controls:
   scale_normalization_required: true
   multiple_triangulations_required: true
+  multiple_triangulation_families_observed: 2
   multiple_refinement_levels_required: true
   operator_sensitivity_required: true
-  null_model_required: true
-  multiple_comparison_correction_required: true
-  blind_constant_matching_preferred: true
-  independent_replication_required_for_promotion: true
+  operator_sensitivity_implemented: COTANGENT_VS_NORMALIZED_GRAPH
+  statistical_null_model_required_for_statistical_claim: true
+  statistical_null_model: TOKEN_VAZIO_JUSTIFIED_NULL_DISTRIBUTION_NOT_DEFINED
+  statistical_inference_performed_in_reference_run: false
+  multiple_comparison_correction: NOT_APPLICABLE_TO_CURRENT_DESCRIPTIVE_DISTANCE_ONLY
+  independent_implementation_replication_required_for_promotion: true
 
 pre_registered_constant_scan:
   constants:
@@ -60,8 +73,45 @@ pre_registered_constant_scan:
     - phi
     - 633
     - 999
-  rule: "Do not fit geometry or normalization to manufacture a match. Reject associations that disappear under rescaling, remeshing, operator change, null controls, or correction for multiple testing."
-  current_result: TOKEN_VAZIO
+  pre_registered_before_reference_execution:
+    constants: true
+    numerical_match_tolerance: false
+  experiment_v1_relative_tolerance: 0.01
+  threshold_provenance: SET_IN_EXPERIMENT_V1_BEFORE_REMOTE_REPRODUCTION_NOT_BEFORE_REFERENCE_RUN
+  scope: positive_eigenvalue_ratios_only
+  rule: "Do not fit geometry or normalization to manufacture a match. Reject associations that disappear under rescaling, remeshing, operator change, justified null controls, or independent replication."
+  current_result: REFERENCE_RUN_NO_MATCH_REJECT_CURRENT_SCAN_PENDING_REMOTE_REPRODUCTION
+  claim_allowed: false
+
+observed_reference_run:
+  execution_context: CHATGPT_CONTAINER_REFERENCE
+  receipt_sha256: 8f556b7adcd610ddbe7c1fb3cc2e6e75286b038ec1d840d2c61c5b97729fd67b
+  implementation:
+    language: Python
+    runtime_dependency_profile: STANDARD_LIBRARY_ONLY
+    third_party_runtime_dependencies: []
+    eigensolver: deterministic_symmetric_Jacobi_reference
+  icosahedral_refinement:
+    vertex_counts: [12, 42, 162]
+    area_relative_errors: [0.2380822055, 0.0716546766, 0.0188218242]
+    l2_relative_errors: [0.2763932023, 0.0866811574, 0.0225839656]
+    l3_relative_errors_where_defined: [0.206106715, 0.0556897333]
+    monotone_convergence_observed: true
+  octahedral_control_refinement:
+    vertex_counts: [6, 18, 66]
+    area_relative_errors: [0.4486711046, 0.1709816747, 0.0486599514]
+    l2_relative_errors_where_defined: [0.2297684341, 0.0599492613]
+    l3_relative_errors_where_defined: [0.2983398025, 0.1385959922]
+    monotone_convergence_observed_where_defined: true
+  constant_scan:
+    any_match_within_experiment_v1_tolerance: false
+    sqrt3_over_2_nearest_relative_error: 0.1547005384
+    phi_nearest_relative_error: 0.2109347678
+    value_633_nearest_relative_error: 0.9906006648
+    value_999_nearest_relative_error: 0.9940442651
+    assessment: REJECT_CURRENT_PREREGISTERED_SCAN
+  tests:
+    reference_suite: 6_of_6_pass
   claim_allowed: false
 
 horizon_information_boundary:
@@ -79,11 +129,11 @@ horizon_information_boundary:
 
 anti_regression:
   reject_when:
-    - a_constant_match_requires_post_hoc_parameter_choice
-    - a_match_fails_across_independent_triangulations
-    - a_match_fails_operator_sensitivity
-    - corrected_null_probability_is_not_distinguishable
-    - convergence_to_reference_sphere_spectrum_fails_without_explained_discretization_error
+    - claim_allowed_becomes_true_without_separate_promotion_gate
+    - reference_baseline_cannot_be_deterministically_reproduced_by_same_implementation
+    - convergence_flags_regress_without_explained_numerical_change
+    - a_constant_match_requires_post_hoc_geometry_or_normalization_choice
+    - a_constant_association_fails_operator_or_triangulation_sensitivity
   preserve_when_missing: TOKEN_VAZIO
 
 ethics_by_design:
@@ -107,15 +157,26 @@ semantic_internal_reference:
   claim_allowed: false
 
 license_boundary:
+  repository_license: GPL-3.0
   mathematical_statements_are_not_dependency_license_grants: true
   implementation_dependencies_require_separate_license_inventory: true
+  reference_implementation_adds_third_party_runtime_dependencies: false
   generated_receipts_do_not_override_source_licenses: true
+  this_contract_does_not_override_repository_license: true
   legal_conclusion_claimed: false
 
-next_experiment:
-  - generate controlled meshes for the declared geometries
-  - build discrete L and M operators with explicit convention receipts
-  - compute a fixed preregistered number of low eigenpairs
-  - normalize spectra without post_hoc constant fitting
-  - measure convergence, multiplicity splitting and Weyl residuals
-  - run null and remeshing controls before any RAFAELIA constant association
+evidence_pointers:
+  - tools/spectral_geometry_experiment.py
+  - tests/geometry/test_spectral_geometry_experiment.py
+  - data/geometry/spectral_geometry_baseline.v1.json
+  - receipts/geometry/SPECTRAL_GEOMETRY_20260816_RECEIPT_V1.json
+  - data/geometry/geometric_invariants.index.jsonl
+
+remaining_token_vazio:
+  - INDEPENDENT_IMPLEMENTATION_REPLICATION
+  - HIGHER_REFINEMENT_WITH_SPARSE_SOLVER
+  - JUSTIFIED_STATISTICAL_NULL_MODEL
+  - NODAL_INVARIANTS_WITH_DEGENERATE_EIGENSPACE_GAUGE_CONTROL
+  - MICROSCOPIC_BLACK_HOLE_STATE_MAP
+  - BEKENSTEIN_HAWKING_FACTOR_ONE_QUARTER_DERIVATION
+  - PHYSICAL_DEGREES_OF_FREEDOM_PER_MODE
