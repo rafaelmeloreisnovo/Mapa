@@ -60,6 +60,7 @@ jobs:
           key: rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             rafaelia-microcycle-index-${{ env.INDEX_BRANCH }}-
+            rafaelia-microcycle-index-main-
 
       - name: Record continuity observation
         run: |
