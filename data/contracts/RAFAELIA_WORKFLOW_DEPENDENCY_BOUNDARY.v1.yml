@@ -1,0 +1,70 @@
+schema: rafaelia.workflow-dependency-boundary.v1
+status: governed_non_promoting
+claim_allowed: false
+
+purpose:
+  - reduce friction between workflow execution, dependency provenance, repository license and ethics-by-design
+  - block structural regressions without asserting unverified legal or runtime compatibility
+  - convert unavailable dependency-license and native-runtime evidence into TOKEN_VAZIO
+
+scope:
+  workflow: .github/workflows/rafaelia-adaptive-cycle.yml
+  repository_license: LICENSE
+  external_actions: github_actions_uses_references
+
+required_invariants:
+  external_actions_pinned_to_exact_commit_sha: true
+  github_token_contents_permission: read
+  checkout_persist_credentials: false
+  repository_license_text_present: true
+  automatic_mutation: false
+  automatic_merge: false
+  claim_allowed: false
+
+license_boundary:
+  repository_license_observation: GPL_3_TEXT_PRESENT
+  external_action_license_compatibility: TOKEN_VAZIO_REQUIRES_SEPARATE_REVIEW
+  external_actions_are_not_relicensed_by_repository: true
+  legal_conclusion_claimed: false
+  claim_allowed: false
+
+runtime_boundary:
+  observed_warning: NODE20_ACTION_RUNTIME_DEPRECATION_RUNNER_FORCED_NODE24
+  pinned_action_node24_native_compatibility: TOKEN_VAZIO_REQUIRES_EXACT_RELEASE_VERIFICATION
+  runner_behavior_is_not_dependency_compatibility_proof: true
+  claim_allowed: false
+
+urgency:
+  P0:
+    - unpinned_external_action
+    - github_token_write_permission
+    - checkout_credentials_persisted
+    - claim_allowed_true
+  P1:
+    - deprecated_action_runtime_transition
+    - missing_dependency_provenance
+  P2:
+    - dependency_license_compatibility_not_audited
+    - native_node24_compatibility_not_verified
+
+providencias:
+  contract:
+    - keep every external action pinned to a 40-hex commit SHA
+    - keep contents permission read-only and persist-credentials false
+    - audit each external action license independently before any compatibility claim
+    - verify a Node-24-native successor SHA before changing pinned action references
+    - preserve TOKEN_VAZIO until evidence exists
+    - emit a machine-readable dependency-boundary audit in CI
+
+semantic_internal_reference:
+  chain:
+    - ESTATISTICA
+    - TOKENS
+    - METAFORAS
+    - VETORES_DE_PALAVRA
+    - PROMESSA
+    - OMEGA_N
+  role: internal_navigation_and_didactics
+  mechanism_claim: false
+  scientific_claim: false
+  claim_allowed: false
