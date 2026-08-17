@@ -1,5 +1,5 @@
 schema: rafaelia.spectral-geometry-invariant.v1
-status: hypothesis_pre_registered_with_reference_execution
+status: hypothesis_pre_registered_with_reference_and_ci_reproduction
 claim_allowed: false
 
 separation_of_concerns:
@@ -8,6 +8,7 @@ separation_of_concerns:
   visual_similarity_is_invariant: false
   semantic_pattern_is_physical_law: false
   numerical_convergence_is_physical_confirmation: false
+  same_implementation_ci_is_independent_replication: false
 
 operator_family:
   continuum:
@@ -42,7 +43,8 @@ primary_hypothesis:
   id: H1
   statement: "The declared RAFAELIA geometry family may contain normalized spectral invariants that survive controlled continuous-to-discrete refinement."
   state: PARTIAL_NUMERICAL_SUPPORT_FOR_CONTINUUM_DISCRETE_CONVERGENCE_ONLY
-  promotion_state: TOKEN_VAZIO_PENDING_REMOTE_AND_INDEPENDENT_IMPLEMENTATION_REPLICATION
+  same_implementation_reproduction: PASS_REFERENCE_AND_GITHUB_ACTIONS
+  promotion_state: TOKEN_VAZIO_PENDING_INDEPENDENT_IMPLEMENTATION_REPLICATION
   claim_allowed: false
 
 observables:
@@ -63,7 +65,7 @@ controls:
   operator_sensitivity_implemented: COTANGENT_VS_NORMALIZED_GRAPH
   statistical_null_model_required_for_statistical_claim: true
   statistical_null_model: TOKEN_VAZIO_JUSTIFIED_NULL_DISTRIBUTION_NOT_DEFINED
-  statistical_inference_performed_in_reference_run: false
+  statistical_inference_performed: false
   multiple_comparison_correction: NOT_APPLICABLE_TO_CURRENT_DESCRIPTIVE_DISTANCE_ONLY
   independent_implementation_replication_required_for_promotion: true
 
@@ -80,7 +82,9 @@ pre_registered_constant_scan:
   threshold_provenance: SET_IN_EXPERIMENT_V1_BEFORE_REMOTE_REPRODUCTION_NOT_BEFORE_REFERENCE_RUN
   scope: positive_eigenvalue_ratios_only
   rule: "Do not fit geometry or normalization to manufacture a match. Reject associations that disappear under rescaling, remeshing, operator change, justified null controls, or independent replication."
-  current_result: REFERENCE_RUN_NO_MATCH_REJECT_CURRENT_SCAN_PENDING_REMOTE_REPRODUCTION
+  reference_result: NO_MATCH
+  github_actions_same_implementation_result: NO_MATCH
+  current_result: REJECT_CURRENT_PREREGISTERED_SCAN
   claim_allowed: false
 
 observed_reference_run:
@@ -112,6 +116,31 @@ observed_reference_run:
     assessment: REJECT_CURRENT_PREREGISTERED_SCAN
   tests:
     reference_suite: 6_of_6_pass
+  claim_allowed: false
+
+observed_remote_reproduction:
+  workflow: Geometric invariant contract
+  run_id: 31985678528
+  run_number: 5
+  source_head_sha: 124458b8bfcea9cc68a6603c0bea18dd85cd2ac3
+  pull_request_test_merge_sha: 41b3e4b984ee28839b3143434b692c23ae2db438
+  artifact:
+    id: 9273691973
+    name: rafaelia-spectral-geometry-31985678528
+    digest: "sha256:66d9ba2a6d240f1af396ee13e058f4d0f490801513deec00b878d580aa7fc025"
+    expires_at: "2026-11-15T01:41:00Z"
+  generated_receipt_sha256: 55b421ba99d5ceb9fc2442932b62409cefbbbe42265aa5384d0670aa73fbeee9
+  ci_receipt_sha256: a693218c52f0145297f3533fde6d9619a2b94967f5e4f6a901666fddb5f004e3
+  same_implementation_numerical_reproduction: PASS
+  numeric_equality_except_execution_context_and_derived_hash: true
+  baseline_hash_recalculated_valid: true
+  generated_hash_recalculated_valid: true
+  ci_receipt_hash_recalculated_valid: true
+  constant_scan_any_match: false
+  convergence:
+    icosahedral_all_monotone: true
+    octahedral_control_all_monotone_where_defined: true
+  independent_implementation_replication: false
   claim_allowed: false
 
 horizon_information_boundary:
