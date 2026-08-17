@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 SHA40 = re.compile(r"^[0-9a-fA-F]{40}$")
-USES_LINE = re.compile(r"^uses:\s*([^@\s]+)@([^\s#]+)\s*$")
+USES_LINE = re.compile(r"^(?:-\s*)?uses:\s*([^@\s]+)@([^\s#]+)\s*$")
 
 
 def _indent(line: str) -> int:
