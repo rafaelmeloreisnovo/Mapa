@@ -1,0 +1,121 @@
+schema: rafaelia.spectral-geometry-invariant.v1
+status: hypothesis_pre_registered
+claim_allowed: false
+
+separation_of_concerns:
+  operational_receipts_are_scientific_evidence: false
+  mathematical_scaling_is_microscopic_derivation: false
+  visual_similarity_is_invariant: false
+  semantic_pattern_is_physical_law: false
+
+operator_family:
+  continuum:
+    definition: "L_M = -Delta_g + xi*R + V(x)"
+    eigenproblem: "L_M psi_k = lambda_k psi_k"
+  sphere_reference:
+    manifold: "S^2_R"
+    eigenvalues: "lambda_l = l(l+1)/R^2"
+    degeneracy: "g_l = 2l+1"
+    cumulative_modes: "N(L) = (L+1)^2"
+  discrete:
+    generalized_eigenproblem: "L u = lambda M u"
+    L_role: stiffness_or_discrete_laplace_beltrami
+    M_role: mass_or_area_matrix
+
+geometries:
+  - sphere
+  - tetrahedron
+  - cube
+  - icosahedron
+  - geodesic_triangulation
+
+primary_hypothesis:
+  id: H1
+  statement: "The declared RAFAELIA geometry family may contain normalized spectral invariants that survive controlled continuous-to-discrete refinement."
+  state: TOKEN_VAZIO_UNTIL_NUMERICAL_AND_INDEPENDENT_VALIDATION
+  claim_allowed: false
+
+observables:
+  - normalized_eigenvalue_ratios
+  - eigenspace_multiplicities
+  - cumulative_mode_count_N_lambda
+  - nodal_structure_metrics
+  - Weyl_scaling_residual
+  - symmetry_class
+  - refinement_convergence_error
+
+controls:
+  scale_normalization_required: true
+  multiple_triangulations_required: true
+  multiple_refinement_levels_required: true
+  operator_sensitivity_required: true
+  null_model_required: true
+  multiple_comparison_correction_required: true
+  blind_constant_matching_preferred: true
+  independent_replication_required_for_promotion: true
+
+pre_registered_constant_scan:
+  constants:
+    - "sqrt(3)/2"
+    - phi
+    - 633
+    - 999
+  rule: "Do not fit geometry or normalization to manufacture a match. Reject associations that disappear under rescaling, remeshing, operator change, null controls, or correction for multiple testing."
+  current_result: TOKEN_VAZIO
+  claim_allowed: false
+
+horizon_information_boundary:
+  allowed_statement: "For a two-dimensional compact surface, spectral mode counting has leading asymptotic scaling controlled by area; a Planck-scale cutoff therefore gives the same area-dimension scaling form as A/l_P^2."
+  forbidden_promotions:
+    - derives_Bekenstein_Hawking_entropy
+    - derives_factor_one_quarter
+    - identifies_black_hole_microstates
+    - proves_holography
+    - equates_atomic_orbitals_with_horizon_microstates
+  token_vazio:
+    - microscopic_state_map
+    - factor_one_quarter_derivation
+    - physical_degrees_of_freedom_per_mode
+
+anti_regression:
+  reject_when:
+    - a_constant_match_requires_post_hoc_parameter_choice
+    - a_match_fails_across_independent_triangulations
+    - a_match_fails_operator_sensitivity
+    - corrected_null_probability_is_not_distinguishable
+    - convergence_to_reference_sphere_spectrum_fails_without_explained_discretization_error
+  preserve_when_missing: TOKEN_VAZIO
+
+ethics_by_design:
+  provenance_required: true
+  uncertainty_visible: true
+  no_automatic_claim_promotion: true
+  no_automatic_publication: true
+  falsification_path_required: true
+  metaphor_must_be_labeled_didactic: true
+
+semantic_internal_reference:
+  chain:
+    - ESTATISTICA
+    - TOKENS
+    - METAFORAS
+    - VETORES_DE_PALAVRA
+    - PROMESSA
+    - OMEGA_N
+  role: internal_navigation_and_parable
+  scientific_mechanism: false
+  claim_allowed: false
+
+license_boundary:
+  mathematical_statements_are_not_dependency_license_grants: true
+  implementation_dependencies_require_separate_license_inventory: true
+  generated_receipts_do_not_override_source_licenses: true
+  legal_conclusion_claimed: false
+
+next_experiment:
+  - generate controlled meshes for the declared geometries
+  - build discrete L and M operators with explicit convention receipts
+  - compute a fixed preregistered number of low eigenpairs
+  - normalize spectra without post_hoc constant fitting
+  - measure convergence, multiplicity splitting and Weyl residuals
+  - run null and remeshing controls before any RAFAELIA constant association
