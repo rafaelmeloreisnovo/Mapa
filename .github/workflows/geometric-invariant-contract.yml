@@ -8,6 +8,11 @@ on:
       - "tools/validate_geometric_invariant_contract.py"
       - "tests/geometry/fixtures/*.json"
       - "data/geometry/geometric_invariants.index.jsonl"
+      - "data/contracts/RAFAELIA_SPECTRAL_GEOMETRY_INVARIANT.v1.yml"
+      - "tools/spectral_geometry_experiment.py"
+      - "tests/geometry/test_spectral_geometry_experiment.py"
+      - "data/geometry/spectral_geometry_baseline.v1.json"
+      - "receipts/geometry/SPECTRAL_GEOMETRY_20260816_RECEIPT_V1.json"
       - ".github/workflows/geometric-invariant-contract.yml"
   workflow_dispatch:
 
@@ -16,28 +21,43 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12"
-      - name: Compile validator
-        run: python -m py_compile tools/validate_geometric_invariant_contract.py
-      - name: Validate positive fixtures
+
+      - name: Compile validators and spectral implementation
+        run: |
+          python -m py_compile \
+            tools/validate_geometric_invariant_contract.py \
+            tools/spectral_geometry_experiment.py
+
+      - name: Validate positive geometric fixtures
         run: |
           python tools/validate_geometric_invariant_contract.py \
             tests/geometry/fixtures/igc_valid_torus.json \
             tests/geometry/fixtures/igc_valid_triangle_similarity.json
+
       - name: Require rejection of invalid affine-angle claim
         shell: bash
         run: |
+          set -euo pipefail
           if python tools/validate_geometric_invariant_contract.py \
             tests/geometry/fixtures/igc_invalid_affine_angle.json; then
             echo "negative fixture was incorrectly accepted"
             exit 1
           fi
           echo "negative fixture rejected as expected"
+
       - name: Validate JSON and JSONL syntax
         run: |
           python - <<'PY'
@@ -45,15 +65,115 @@ jobs:
           from pathlib import Path
 
           json.loads(Path("schemas/geometric-invariant-contract.schema.json").read_text())
+          json.loads(Path("data/geometry/spectral_geometry_baseline.v1.json").read_text())
+          json.loads(Path("receipts/geometry/SPECTRAL_GEOMETRY_20260816_RECEIPT_V1.json").read_text())
           for path in Path("tests/geometry/fixtures").glob("*.json"):
               json.loads(path.read_text())
           for number, line in enumerate(
-              Path("data/geometry/geometric_invariants.index.jsonl")
-              .read_text()
-              .splitlines(),
+              Path("data/geometry/geometric_invariants.index.jsonl").read_text().splitlines(),
               start=1,
           ):
               if line.strip():
                   json.loads(line)
           print("JSON/JSONL syntax PASS")
           PY
+
+      - name: Spectral anti-regression tests
+        run: python -m unittest -v tests.geometry.test_spectral_geometry_experiment
+
+      - name: Execute spectral geometry reproduction
+        run: |
+          mkdir -p artifacts/spectral-geometry
+          python tools/spectral_geometry_experiment.py \
+            --output artifacts/spectral-geometry/spectral_geometry_ci.json \
+            --context GITHUB_ACTIONS_REFERENCE
+
+      - name: Verify numerical reproduction and claim boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          baseline = json.loads(Path("data/geometry/spectral_geometry_baseline.v1.json").read_text())
+          observed = json.loads(Path("artifacts/spectral-geometry/spectral_geometry_ci.json").read_text())
+
+          assert observed["execution_context"] == "GITHUB_ACTIONS_REFERENCE"
+          assert observed["claim_allowed"] is False
+          assert observed["automatic_promotion"] is False
+          assert observed["constant_scan"]["any_match"] is False
+          assert observed["control_assessment"]["statistical_null_model"] == \
+              "TOKEN_VAZIO_JUSTIFIED_NULL_DISTRIBUTION_NOT_DEFINED"
+          assert all(observed["continuous_discrete_convergence"]["observed"].values())
+
+          for value in (baseline, observed):
+              value.pop("execution_context", None)
+              value.pop("receipt_sha256", None)
+          assert observed == baseline, "CI numerical result differs from reference baseline"
+          print("SAME_IMPLEMENTATION_NUMERICAL_REPRODUCTION=PASS")
+          print("claim_allowed=false")
+          PY
+
+      - name: Write workflow receipt
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          generated = json.loads(Path("artifacts/spectral-geometry/spectral_geometry_ci.json").read_text())
+          receipt = {
+              "schema": "rafaelia.spectral-geometry-ci-receipt.v1",
+              "run_id": os.environ["RUN_ID"],
+              "run_attempt": os.environ["RUN_ATTEMPT"],
+              "head_sha": os.environ["HEAD_SHA"],
+              "execution_context": "GITHUB_ACTIONS_REFERENCE",
+              "same_implementation_numerical_reproduction": "PASS",
+              "generated_receipt_sha256": generated["receipt_sha256"],
+              "constant_scan_any_match": generated["constant_scan"]["any_match"],
+              "convergence": generated["continuous_discrete_convergence"]["observed"],
+              "independent_implementation_replication": False,
+              "claim_allowed": False,
+          }
+          material = json.dumps(receipt, sort_keys=True, separators=(",", ":")).encode()
+          receipt["ci_receipt_sha256"] = hashlib.sha256(material).hexdigest()
+          Path("artifacts/spectral-geometry/ci_receipt.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(receipt, indent=2, sort_keys=True))
+          PY
+
+      - name: Publish spectral receipt summary
+        run: |
+          {
+            echo "# Spectral geometry reproduction"
+            echo
+            echo "- same implementation numerical reproduction: PASS"
+            echo "- constants current scan: REJECT_CURRENT_PREREGISTERED_SCAN"
+            echo "- independent implementation replication: TOKEN_VAZIO"
+            echo "- statistical null model: TOKEN_VAZIO"
+            echo "- claim_allowed: false"
+            echo
+            echo '<details><summary>CI receipt</summary>'
+            echo
+            echo '```json'
+            cat artifacts/spectral-geometry/ci_receipt.json
+            echo '```'
+            echo '</details>'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload immutable spectral reproduction artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rafaelia-spectral-geometry-${{ github.run_id }}
+          path: |
+            artifacts/spectral-geometry/
+            data/geometry/spectral_geometry_baseline.v1.json
+            data/contracts/RAFAELIA_SPECTRAL_GEOMETRY_INVARIANT.v1.yml
+            receipts/geometry/SPECTRAL_GEOMETRY_20260816_RECEIPT_V1.json
+          if-no-files-found: error
+          retention-days: 90
