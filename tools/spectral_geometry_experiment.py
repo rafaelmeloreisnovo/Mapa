@@ -32,6 +32,11 @@ def tetra():
     v=[unit(x) for x in ((1,1,1),(-1,-1,1),(-1,1,-1),(1,-1,-1))]
     return v,[(0,1,2),(0,3,1),(0,2,3),(1,3,2)]
 
+def octa():
+    v=[(1.,0.,0.),(-1.,0.,0.),(0.,1.,0.),(0.,-1.,0.),(0.,0.,1.),(0.,0.,-1.)]
+    f=[(4,0,2),(4,2,1),(4,1,3),(4,3,0),(5,2,0),(5,1,2),(5,3,1),(5,0,3)]
+    return v,f
+
 def cube():
     v=[unit(x) for x in ((-1,-1,-1),(1,-1,-1),(1,1,-1),(-1,1,-1),
                           (-1,-1,1),(1,-1,1),(1,1,1),(-1,1,1))]
@@ -141,7 +146,7 @@ def convergence(rows):
                     "l1_mean":None if l1 is None else r(l1),"l1_relative_error":None if l1 is None else r(rel(l1,2)),
                     "l2_mean":None if l2 is None else r(l2),"l2_relative_error":None if l2 is None else r(rel(l2,6)),
                     "l3_mean":None if l3 is None else r(l3),"l3_relative_error":None if l3 is None else r(rel(l3,12))})
-    ae=[x["area_relative_error"] for x in out]; e2=[x["l2_relative_error"] for x in out]
+    ae=[x["area_relative_error"] for x in out]; e2=[x["l2_relative_error"] for x in out if x["l2_relative_error"] is not None]
     e3=[x["l3_relative_error"] for x in out if x["l3_relative_error"] is not None]
     return {"rows":out,"observed":{
         "surface_area_error_monotone_decrease":all(b<a for a,b in zip(ae,ae[1:])),
@@ -176,12 +181,19 @@ def sphere():
             "weyl_leading_law":"N(lambda) ~ A*lambda/(4*pi)"}
 
 def build(context="REFERENCE_RUNTIME"):
-    iv,ifc=icosa()
+    iv,ifc=icosa(); ov,ofc=octa()
     rows=[mesh("tetrahedron",*tetra()),mesh("cube",*cube()),mesh("icosahedron",iv,ifc),
           mesh("geodesic_l1",*geodesic(iv,ifc,1)),mesh("geodesic_l2",*geodesic(iv,ifc,2))]
-    conv=convergence([x for x in rows if x["geometry"] in ("icosahedron","geodesic_l1","geodesic_l2")])
+    controls=[mesh("octahedron_control",ov,ofc),
+              mesh("octa_geodesic_l1_control",*geodesic(ov,ofc,1)),
+              mesh("octa_geodesic_l2_control",*geodesic(ov,ofc,2))]
+    c1=convergence([x for x in rows if x["geometry"] in ("icosahedron","geodesic_l1","geodesic_l2")])
+    c2=convergence(controls)
+    conv={"families":{"icosahedral_refinement":c1,"octahedral_control_refinement":c2},
+          "observed":{"icosahedral_all_monotone":all(c1["observed"].values()),
+                      "octahedral_control_all_monotone_where_defined":all(c2["observed"].values())}}
     s=scan(rows)
-    for x in rows: x.pop("_cot")
+    for x in rows+controls: x.pop("_cot")
     out={"schema":SCHEMA,"execution_context":context,"claim_allowed":False,"automatic_promotion":False,
          "dependency_profile":{"third_party_runtime_dependencies":[],"python_standard_library_only":True,
                                "license_added_by_experiment":False,"repository_license_override":False},
@@ -189,13 +201,19 @@ def build(context="REFERENCE_RUNTIME"):
             "same_area_scaling_is_not_bekenstein_hawking_derivation":True,
             "individual_eigenvectors_in_degenerate_spaces_are_not_basis_invariant":True,
             "visual_similarity_is_not_spectral_equivalence":True},
-         "reference":sphere(),"meshes":rows,"continuous_discrete_convergence":conv,"constant_scan":s,
+         "reference":sphere(),"meshes":rows,"remeshing_controls":controls,
+         "continuous_discrete_convergence":conv,"constant_scan":s,
+         "control_assessment":{"multiple_sphere_triangulation_families":2,
+            "operator_sensitivity_control":"COTANGENT_VS_NORMALIZED_GRAPH",
+            "statistical_null_model":"TOKEN_VAZIO_JUSTIFIED_NULL_DISTRIBUTION_NOT_DEFINED",
+            "claim_allowed":False},
          "hypothesis_assessment":{"H1":"PARTIAL_NUMERICAL_SUPPORT_FOR_CONTINUUM_DISCRETE_CONVERGENCE_ONLY",
              "rafaelia_constants_as_spectral_invariants":"INVESTIGATE" if s["any_match"] else "REJECT_CURRENT_PREREGISTERED_SCAN",
              "claim_allowed":False},
-         "token_vazio":["INDEPENDENT_REPLICATION","HIGHER_REFINEMENT_WITH_SPARSE_SOLVER",
-            "NODAL_INVARIANTS_WITH_DEGENERATE_EIGENSPACE_GAUGE_CONTROL","MICROSCOPIC_BLACK_HOLE_STATE_MAP",
-            "BEKENSTEIN_HAWKING_FACTOR_ONE_QUARTER_DERIVATION","PHYSICAL_DEGREES_OF_FREEDOM_PER_MODE"]}
+         "token_vazio":["INDEPENDENT_IMPLEMENTATION_REPLICATION","HIGHER_REFINEMENT_WITH_SPARSE_SOLVER",
+            "JUSTIFIED_STATISTICAL_NULL_MODEL","NODAL_INVARIANTS_WITH_DEGENERATE_EIGENSPACE_GAUGE_CONTROL",
+            "MICROSCOPIC_BLACK_HOLE_STATE_MAP","BEKENSTEIN_HAWKING_FACTOR_ONE_QUARTER_DERIVATION",
+            "PHYSICAL_DEGREES_OF_FREEDOM_PER_MODE"]}
     out["receipt_sha256"]=h(out); return out
 
 def validate(x):
