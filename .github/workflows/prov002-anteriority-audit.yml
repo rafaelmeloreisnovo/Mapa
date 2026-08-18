@@ -1,0 +1,173 @@
+name: PROV002 anteriority audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "scripts/extract_novoexport_anteriority_events_v1.py"
+      - "tests/test_novoexport_anteriority_events_v1.py"
+      - ".github/workflows/prov002-anteriority-audit.yml"
+      - "data/invariants/map_invariant_registry.v1.jsonl"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/extract_novoexport_anteriority_events_v1.py"
+      - "tests/test_novoexport_anteriority_events_v1.py"
+      - ".github/workflows/prov002-anteriority-audit.yml"
+      - "data/invariants/map_invariant_registry.v1.jsonl"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prov002-anteriority-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  prov002-dedicated-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile extractor and dedicated falsifiers
+        run: python -m py_compile scripts/extract_novoexport_anteriority_events_v1.py tests/test_novoexport_anteriority_events_v1.py
+
+      - name: Run dedicated PROV002 falsifiers
+        run: python -m unittest -v tests.test_novoexport_anteriority_events_v1
+
+      - name: Exercise CLI on bounded synthetic fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/prov002-anteriority
+          mkdir -p artifacts/prov002-anteriority/input
+          cat > artifacts/prov002-anteriority/config.json <<'JSON'
+          {
+            "families": [
+              {
+                "family_id": "FAM-RAFAELIA",
+                "canonical_name": "RAFAELIA",
+                "aliases": ["RAFAELIA", "RafaelIA"]
+              }
+            ]
+          }
+          JSON
+          cat > artifacts/prov002-anteriority/input/conversations-000.json <<'JSON'
+          [
+            {
+              "id": "synthetic-conv",
+              "title": "bounded synthetic reference",
+              "mapping": {
+                "node-1": {
+                  "message": {
+                    "id": "synthetic-user-message",
+                    "author": {"role": "user"},
+                    "create_time": 1700000000,
+                    "content": {"parts": ["RAFAELIA synthetic occurrence"]}
+                  }
+                }
+              }
+            }
+          ]
+          JSON
+          python scripts/extract_novoexport_anteriority_events_v1.py \
+            artifacts/prov002-anteriority/input \
+            --config artifacts/prov002-anteriority/config.json \
+            --events artifacts/prov002-anteriority/events.jsonl \
+            --summary artifacts/prov002-anteriority/summary.json
+
+      - name: Verify non-promotion boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('artifacts/prov002-anteriority')
+          rows = [json.loads(line) for line in (root / 'events.jsonl').read_text(encoding='utf-8').splitlines() if line.strip()]
+          assert len(rows) == 1, rows
+          row = rows[0]
+          assert row['internal_documented'] is True
+          assert row['public_disclosure'] == 'TOKEN_VAZIO'
+          assert row['legal_priority'] == 'TOKEN_VAZIO'
+          assert row['scientific_novelty'] == 'TOKEN_VAZIO'
+          assert row['claim_allowed'] is False
+
+          summary = json.loads((root / 'summary.json').read_text(encoding='utf-8'))
+          assert summary['policy']['first_mention_not_first_invention'] is True
+          assert summary['policy']['internal_anteriority_not_public_disclosure'] is True
+          assert summary['policy']['public_disclosure_not_legal_priority'] is True
+          assert summary['policy']['claim_allowed_default'] is False
+          PY
+
+      - name: Seal bounded CI receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          root = Path('artifacts/prov002-anteriority')
+          def sha(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          receipt = {
+              'schema': 'rafaelia.map.prov002-ci-receipt/v1',
+              'invariant_id': 'MAP-INV-PROV-002',
+              'source_head_sha': os.environ['SOURCE_HEAD_SHA'],
+              'generated_at_utc': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+              'test_scope': 'DEDICATED_SYNTHETIC_FALSIFIERS_ONLY',
+              'real_novoexport_executed': False,
+              'external_public_legal_scientific_join_closed': False,
+              'claim_allowed': False,
+              'events_sha256': sha(root / 'events.jsonl'),
+              'summary_sha256': sha(root / 'summary.json'),
+          }
+          raw = json.dumps(receipt, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+          receipt['receipt_sha256'] = hashlib.sha256(raw).hexdigest()
+          (root / 'ci-receipt.json').write_text(json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          PY
+          sha256sum artifacts/prov002-anteriority/events.jsonl \
+                    artifacts/prov002-anteriority/summary.json \
+                    artifacts/prov002-anteriority/ci-receipt.json \
+                    > artifacts/prov002-anteriority/SHA256SUMS
+
+      - name: Publish bounded summary
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          r = json.loads(Path('artifacts/prov002-anteriority/ci-receipt.json').read_text())
+          print('# MAP-INV-PROV-002 dedicated audit')
+          print()
+          print('- dedicated synthetic falsifiers: `PASS`')
+          print(f"- source_head_sha: `{r['source_head_sha']}`")
+          print(f"- receipt_sha256: `{r['receipt_sha256']}`")
+          print('- real NOVOexport executed: `false`')
+          print('- external public/legal/scientific join closed: `false`')
+          print('- claim_allowed: `false`')
+          print()
+          print('`PASS` proves the bounded extractor/test contract only; X/F remain TOKEN_VAZIO.')
+          PY
+
+      - name: Upload immutable bounded receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: prov002-anteriority-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/prov002-anteriority/
+          if-no-files-found: error
+          retention-days: 90
