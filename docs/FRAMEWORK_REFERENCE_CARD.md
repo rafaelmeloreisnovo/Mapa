@@ -29,10 +29,10 @@
 **Definition Document**: `/docs/INVARIANTES_NECESSIDADE_URGENCIA_GRUPAMENTOS.md` (line 15)  
 **Lifecycle Document**: `/docs/OBSERVATIONS_ARCO_LIFECYCLE.md`
 
-```
+```text
 I_dados = identidade ∧ proveniência ∧ contexto ∧ privacidade 
          ∧ estado_epistêmico ∧ dependências ∧ evidência ∧ próximo_passo
-```
+```text
 
 | # | Field | Example | Arco Where Primacy |
 |---|-------|---------|-------------------|
@@ -138,7 +138,7 @@ I_dados = identidade ∧ proveniência ∧ contexto ∧ privacidade
 
 **Definition Document**: `/docs/governance/PROOF_CUSTODY_AND_TOKEN_VALIDITY_V1.md` (Section 5, lines 130-139)
 
-```
+```text
 OBSERVED
   ↓ [must have artifact]
 HASH_BOUND
@@ -152,20 +152,25 @@ REVIEW_APPROVED
 MERGED_PROTECTED
   ↓ [all downstream gates pass]
 CANONICAL_TOKEN_VALID
-```
+```text
 
 **Rules**:
+
 - ✓ No state skipping
+
 - ✓ No backward transitions (no revert without new evidence)
+
 - ✓ Author cannot self-review their own changes
+
 - ✓ All states append-only (history preserved)
+
 - ✓ `claim_allowed=false` until final state
 
 ---
 
 ## Integration: How All Layers Connect
 
-```
+```text
 [Problem/Input]
     ↓
 Layer 1: Classify in 7 directions (fact/gap/invariant/variant/proof/parable/feedback)
@@ -183,47 +188,70 @@ Layer 7: Advance through fail-closed state machine
 Layer 5: Verify 6 IGC conditions hold
     ↓
 [Output/Decision]
-```
+```text
 
 ---
 
 ## Critical Files & Locations
 
 ### Governance & Policy
+
 - `/data/control-plane/promotion-control.v1.json` — Approval requirements (1 independent review, no auto-merge)
+
 - `/docs/SEMENTEIRA_CONTEXT_SUSTAINMENT_5X7_V1.md` — 7 directions definitions
+
 - `/docs/INVARIANTES_NECESSIDADE_URGENCIA_GRUPAMENTOS.md` — 8 observations + 15 invariants
 
 ### Architecture & Process
+
 - `/docs/architecture/RAFAELIA_7_ARCOS_RAFCONVERT_RAFDISK_V1.md` — 7 arcos full spec
+
 - `/docs/architecture/RAFAELIA_ARCO7_ROUTING_SCHEMA.md` — Arco 7 routing (NEW)
+
 - `/docs/governance/PROOF_CUSTODY_AND_TOKEN_VALIDITY_V1.md` — 6 IGC conditions + 7-state machine
+
 - `/docs/governance/BRANCH_TOPOLOGY_MAIN_NUMBERED_V1.md` — 10 lanes full spec
+
 - `/docs/governance/10_LANES_AUDIT_TOUCHPOINTS.md` — Lanes audit integration (NEW)
 
 ### Observations & Lifecycle
+
 - `/docs/OBSERVATIONS_ARCO_LIFECYCLE.md` — 8 observations mapped to 7 arcos (NEW)
 
 ### Active Receipts & Validation
+
 - `/data/receipts/` — All receipt JSON files (hash-chained)
+
 - `/data/audits/` — Append-only audit logs (one per lane + cross-cutting concerns)
+
 - `WORKFLOW_RECEIPTS_VALIDATION_REPORT.md` — Validation of 4 most recent workflow runs (407-404)
+
 - `/scripts/validate_receipts.py` — Automated receipt validation tool
 
 ### Token Vazio (Unresolved Gaps)
+
 - `/data/audits/TOKEN_VAZIO_REGISTRY.jsonl` — 9 documented gaps with priorities & approval criteria (NEW)
+
 - `/data/audits/unaudited-dependencies.json` — Dependency license audit status (to be created)
+
 - `/data/audits/pinned-action-compatibility.json` — Node 24 compatibility tracking (to be created)
+
 - `/data/audits/node-deprecation-tracking.json` — Node 20 deprecation timeline (to be created)
 
 ### Tests & Validation
+
 - `/tests/test_promotion_control.py` — Negative test fixtures for promotion gate
+
 - `/tests/test_*.py` — Full test suite (106 tests, 0 regression allowed)
+
 - `/tools/verify_promotion_control.py` — Governance policy enforcement tool
+
 - `/tools/check_invariants.py` — (To be created Phase 2) Invariant CI binding
 
 ### Workflows & CI
+
 - `/.github/workflows/promotion-control-v1.yml` — Approval enforcement (Lane 08)
+
 - `/.github/workflows/rafaelia-adaptive-cycle.yml` — Receipt generation & validation (Lanes 04-06)
 
 ---
@@ -248,27 +276,42 @@ Layer 5: Verify 6 IGC conditions hold
 ## Executable Patterns
 
 ### Pattern: Problem Analysis
+
 1. Map problem to 7 directions → Which are facts? gaps? proofs?
+
 2. Verify 8 observations → Missing any?
+
 3. Identify which lane(s) it affects (00-09)
+
 4. Determine if it requires all 7 arcos or can shortcut
+
 5. Check against 15 invariants
+
 6. Proceed only if fail-closed state machine advances
 
 ### Pattern: Decision Making
+
 1. Gather evidence (Layer 5: all 6 IGC conditions)
+
 2. Allow advancement through state machine gates only if:
    - All 8 observations present
    - No 15 invariants violated
    - Lane responsible party confirms
+
 3. Document decision append-only (no erasure)
+
 4. Predict feedback loop (Layer 1: what feedback will come?)
 
 ### Pattern: System Design
+
 1. Decompose into 10 lanes (ownership/responsibility)
+
 2. Design each lane to preserve 8 observations
+
 3. Validate 15 invariants at interfaces
+
 4. Ensure full 7 arcos possible (no shortcuts)
+
 5. Implement 6 IGC conditions as infrastructure
 
 ---
@@ -276,12 +319,19 @@ Layer 5: Verify 6 IGC conditions hold
 ## Phase 0 Status: Quick Wins (In Progress)
 
 - ✓ D1-01: RAFAELIA_ARCO7_ROUTING_SCHEMA.md (created)
+
 - ✓ D1-02: OBSERVATIONS_ARCO_LIFECYCLE.md (created)
+
 - ✓ D1-03: 10_LANES_AUDIT_TOUCHPOINTS.md (created)
+
 - ✓ D1-04: TOKEN_VAZIO registry documented (created)
+
 - ✓ D1-05: FRAMEWORK_REFERENCE_CARD.md (this file)
+
 - ⏳ V1-01 through V1-05: Simple validations (next)
+
 - ⏳ A1-01 through A1-05: Audit logging (next)
+
 - ⏳ S1-01 through S1-04: Security audits (next)
 
 ---

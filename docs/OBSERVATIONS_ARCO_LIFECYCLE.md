@@ -10,10 +10,10 @@
 
 All data identity (I_dados) must preserve these 8 attributes across every transformation:
 
-```
+```text
 I_dados = identidade ∧ proveniência ∧ contexto ∧ privacidade 
          ∧ estado_epistêmico ∧ dependências ∧ evidência ∧ próximo_passo
-```
+```text
 
 | # | Observation | Description |
 |---|-------------|-------------|
@@ -174,7 +174,7 @@ I_dados = identidade ∧ proveniência ∧ contexto ∧ privacidade
 
 At every arco transition, verify all 8 observations are present:
 
-```
+```text
 psi → chi: identidade, proveniência, contexto, privacidade present? ✓
 chi → rho: stato_epistêmico, dependências, evidência marked? ✓
 rho → delta: próximo_passo documented? ✓
@@ -182,7 +182,7 @@ delta → sigma: All 8 carried forward or explicitly replaced? ✓
 sigma → omega: identidade immutable? ✓
 omega → psi-prime: stato_epistêmico advanced? ✓
 psi-prime → [cycle N+1 psi]: Next prospection targets defined? ✓
-```
+```text
 
 **Fail-closed rule**: If any observation is missing or elided, the arco transition is REJECTED.
 
@@ -227,7 +227,7 @@ From WORKFLOW_RECEIPTS_VALIDATION_REPORT.md, Entry 4 (N25, chi phase):
   ],
   "próximo_passo": "VERIFY_OMEGA_GATE"
 }
-```
+```text
 
 **Analysis**: All 8 observations present. Receipt passes arco transition gate.
 
@@ -236,5 +236,7 @@ From WORKFLOW_RECEIPTS_VALIDATION_REPORT.md, Entry 4 (N25, chi phase):
 ## References
 
 - `/docs/INVARIANTES_NECESSIDADE_URGENCIA_GRUPAMENTOS.md` — I_dados definition
+
 - `/docs/architecture/RAFAELIA_7_ARCOS_RAFCONVERT_RAFDISK_V1.md` — Full arco descriptions
+
 - `WORKFLOW_RECEIPTS_VALIDATION_REPORT.md` — Live receipt data examples

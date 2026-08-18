@@ -18,6 +18,7 @@ Arco 7 completes the Rafaelia Adaptive Cycle by routing decision outcomes back i
 ## Core Concepts
 
 ### Routing Decision
+
 The decision output from Arco 6 (Omega verification) becomes a **routing signal**:
 
 ```json
@@ -33,13 +34,18 @@ The decision output from Arco 6 (Omega verification) becomes a **routing signal*
   "routing_target": "lane_01_intake_sources",
   "priority": "P0"
 }
-```
+```text
 
 ### Retrospection
+
 After routing, the cycle retrospectively documents:
+
 - What was observed? (chi → observation integrity)
+
 - What was transformed? (delta → ethical gates passed)
+
 - What was verified? (omega → decision confidence)
+
 - What gaps remain? (TOKEN_VAZIO markers)
 
 ---
@@ -125,16 +131,20 @@ Each completed cycle produces a retrospection record:
     }
   }
 }
-```
+```text
 
 ---
 
 ## Routing Rules (Fail-Closed)
 
 1. **Route only on verified decision** — Omega verification must pass before routing
+
 2. **Preserve decision immutability** — Routing does not re-examine or re-decide
+
 3. **Token Vazio explicit** — Gaps in next-cycle observations must be marked, never elided
+
 4. **Lane ownership** — Each lane must acknowledge its routed work or reject with reason
+
 5. **Append-only record** — Retrospection is immutable; corrections require new cycle
 
 ---
@@ -143,7 +153,7 @@ Each completed cycle produces a retrospection record:
 
 Arco 7 routing creates the input signal for the next cycle's psi (prospection):
 
-```
+```text
 Cycle N, Arco 7 (psi-prime):
   Decision: VERIFIED_LATEST_FOUR_READ_ONLY
   Routing: Lane 01 [new source], Lane 04 [validation], Lane 07 [security]
@@ -151,7 +161,7 @@ Cycle N, Arco 7 (psi-prime):
 Cycle N+1, Arco 1 (psi):
   Intention: "Verify the 3 routed items from Cycle N"
   Observation targets: sources from Lane 01, falsifiers from Lane 04, threats from Lane 07
-```
+```text
 
 This closes the loop without returning to psi — it creates a forward arrow.
 
@@ -194,15 +204,18 @@ From WORKFLOW_RECEIPTS_VALIDATION_REPORT.md:
     ]
   }
 }
-```
+```text
 
 ---
 
 ## Implementation Notes
 
 - **raf_route** module does not execute routing — it documents routing decisions
+
 - Actual work is assigned to lane owners (Lane 00-09) via audit trail
+
 - Routing is not optional; every cycle must route or document refusal (fail-closed)
+
 - Each lane maintains its own queue of routed work in `/data/audits/lane-*.queue.jsonl`
 
 ---
@@ -210,5 +223,7 @@ From WORKFLOW_RECEIPTS_VALIDATION_REPORT.md:
 ## References
 
 - `/docs/architecture/RAFAELIA_7_ARCOS_RAFCONVERT_RAFDISK_V1.md` — Full arco definitions
+
 - `/docs/governance/BRANCH_TOPOLOGY_MAIN_NUMBERED_V1.md` — Lane 00-09 responsibilities
+
 - `/data/audits/` — Lane work queues and routing history
