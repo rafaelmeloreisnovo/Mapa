@@ -166,22 +166,38 @@ def validate(document: Any) -> tuple[list[str], dict[str, Any]]:
     if seqs != sorted(seqs) or len(seqs) != len(set(seqs)):
         defects.append("anti_regression seq values must be strictly increasing and unique")
 
+    real_routes = [
+        r for r in route_by_id.values()
+        if r.get("origin") in {"DIRECT", "IMPORTED"}
+        and isinstance(r.get("provenance"), list)
+        and r.get("provenance")
+    ]
+    if defects:
+        next_step = "Correct every defect before ingesting or promoting any real route."
+    elif real_routes:
+        next_step = (
+            "Execute the highest-priority open F_next/falsifier on a provenance-bearing real route; "
+            "append the result without promoting WILDCHAR-generated candidates."
+        )
+    else:
+        next_step = (
+            "Ingest one real route with immutable provenance; keep WILDCHAR-generated candidates "
+            "claim_allowed=false until its producer evidence and falsifier close."
+        )
+
     report = {
         "schema_version": SCHEMA_VERSION,
         "manifold_id": document.get("manifold_id"),
         "status": "PASS" if not defects else "FAIL",
         "route_count": len(route_by_id),
+        "real_route_count": len(real_routes),
         "wildchar_candidate_count": sum(r.get("origin") == "WILDCHAR" for r in route_by_id.values()),
         "token_vazio_count": sum(r.get("epistemic_state") == "TOKEN_VAZIO" for r in route_by_id.values()),
         "claim_allowed_count": sum(r.get("claim_allowed") is True for r in route_by_id.values()),
         "anti_regression_event_count": len(events),
         "defects": defects,
         "claim_allowed": False,
-        "next_verifiable_step": (
-            "Ingest one real route with immutable provenance; keep WILDCHAR-generated candidates claim_allowed=false until its producer evidence and falsifier close."
-            if not defects else
-            "Correct every defect before ingesting or promoting any real route."
-        ),
+        "next_verifiable_step": next_step,
     }
     return defects, report
 
