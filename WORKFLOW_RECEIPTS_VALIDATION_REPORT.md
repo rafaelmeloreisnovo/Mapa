@@ -12,6 +12,7 @@
 ✓ **VALIDATION PASSED** - All available receipt data conforms to the required schema and constraints.
 
 All receipts examined contain the required fields with correct values:
+
 - `cycle_id`: Valid format (RAF-CYCLE-*)
 - `n_mod_42`: Integer in range [0, 42)
 - `phase`: Valid phase (psi, chi, rho, delta, sigma, omega)
@@ -40,12 +41,14 @@ All receipts examined contain the required fields with correct values:
 **Status**: ✓ **VALID**
 
 **Overview**:
+
 - Observed at: 2026-08-17T04:55:31Z
 - Schema: rafaelia.adaptive-cycle-latest4-observation.v1
 - Source Run ID: 31996105693 (from prior cycle)
 - Source Job ID: 95287915344
 
 **Top-Level Fields**:
+
 - `latest_four_count`: 4 ✓
 - `claim_allowed`: false ✓
 - `automatic_mutation`: false ✓
@@ -54,7 +57,8 @@ All receipts examined contain the required fields with correct values:
 **Entries Validated**: 4
 
 #### Entry 1: N14 (rho phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260817T020627Z-N14
 n_mod_42: 14 ✓
 phase: rho ✓
@@ -66,7 +70,8 @@ claim_allowed: false ✓
 ```
 
 #### Entry 2: N18 (psi phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260817T031016Z-N18
 n_mod_42: 18 ✓
 phase: psi ✓
@@ -78,7 +83,8 @@ claim_allowed: false ✓
 ```
 
 #### Entry 3: N22 (sigma phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260817T040657Z-N22
 n_mod_42: 22 ✓
 phase: sigma ✓
@@ -90,7 +96,8 @@ claim_allowed: false ✓
 ```
 
 #### Entry 4: N25 (chi phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260817T045531Z-N25
 n_mod_42: 25 ✓
 phase: chi ✓
@@ -102,12 +109,14 @@ claim_allowed: false ✓
 ```
 
 **Hash Chain Continuity**: ✓ **VERIFIED**
+
 - Entry 1 → Entry 2: entry_sha256 matches previous_entry_sha256 ✓
 - Entry 2 → Entry 3: entry_sha256 matches previous_entry_sha256 ✓
 - Entry 3 → Entry 4: entry_sha256 matches previous_entry_sha256 ✓
 - All continuity assertions: VERIFIED_COMPLETE_INDEX_AND_LATEST_FOUR ✓
 
 **Governance Compliance**:
+
 - Audit Decision: VERIFIED_LATEST_FOUR_READ_ONLY ✓
 - Chain Continuity: VERIFIED_COMPLETE_INDEX_AND_LATEST_FOUR ✓
 - Ethics by Design:
@@ -123,6 +132,7 @@ claim_allowed: false ✓
 **Status**: ✓ **VALID**
 
 **Overview**:
+
 - Schema: rafaelia.adaptive-cycle-latest4-audit.v1
 - Contains validation of runs 344-347 (from 2026-08-16)
 - Decision: VERIFIED_OPERATIONAL_ANTI_REGRESSION_EVIDENCE
@@ -130,7 +140,8 @@ claim_allowed: false ✓
 **Validated Runs**: 4
 
 #### Run 344 (N01, chi phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260816T225227Z-N01
 n_mod_42: 1 ✓
 phase: chi ✓
@@ -141,7 +152,8 @@ Status: ✓ VALID
 ```
 
 #### Run 345 (N03, delta phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260816T232944Z-N03
 n_mod_42: 3 ✓
 phase: delta ✓
@@ -152,7 +164,8 @@ Status: ✓ VALID
 ```
 
 #### Run 346 (N05, omega phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260816T235030Z-N05
 n_mod_42: 5 ✓
 phase: omega ✓
@@ -163,7 +176,8 @@ Status: ✓ VALID
 ```
 
 #### Run 347 (N07, chi phase)
-```
+
+```json
 cycle_id: RAF-CYCLE-20260817T002435Z-N07
 n_mod_42: 7 ✓
 phase: chi ✓
@@ -174,6 +188,7 @@ Status: ✓ VALID
 ```
 
 **Observed Relations**: ✓ **ALL VERIFIED**
+
 - entry_count_monotonic: true ✓
 - entry_count_sequence: [144, 145, 146, 147] (monotonically increasing) ✓
 - n_mod_42_sequence: [1, 3, 5, 7] (consistent toroidal progression) ✓
@@ -203,7 +218,9 @@ Status: ✓ VALID
 ## Workflow Run Artifacts
 
 ### Run 407 (Most Recent)
+
 **Artifacts Generated**:
+
 1. `rafaelia-microcycle-index` (28.6 KB)
    - SHA256: f070f4e8d9a2c47b1ddb51b4c4b84248a3b79fd70d4d5da28399eeb611667be7
    - Expires: 2026-11-16
@@ -213,6 +230,7 @@ Status: ✓ VALID
    - Expires: 2026-09-17
 
 **Job Status**: All 18 steps completed successfully ✓
+
 - Contract and append-only tests: ✓
 - Execute read-only microcycle: ✓
 - Verify receipt boundary: ✓
@@ -225,13 +243,16 @@ Status: ✓ VALID
 ## Governance & Compliance
 
 ### Fail-Closed Design Principles
+
 - ✓ No automatic mutation of claim_allowed beyond false
 - ✓ No automatic merge operations
 - ✓ No silent failures on broken hash continuity
 - ✓ No promotion of claims beyond validated state
 
 ### Token Vazio (Unresolved Gaps)
+
 **Current Uncertainties Preserved**:
+
 - TOKEN_VAZIO_DEPENDENCY_LICENSE_COMPATIBILITY_NOT_AUDITED (P2)
 - TOKEN_VAZIO_PINNED_ACTION_NODE24_NATIVE_COMPATIBILITY_NOT_VERIFIED (P2)
 - NODE20_ACTION_RUNTIME_DEPRECATION_WARNING_OBSERVED (P1)
@@ -255,7 +276,7 @@ From governance documents, the following contracts are maintained:
 
 ## Conclusion
 
-**VALIDATION RESULT: ✓ PASS**
+### VALIDATION RESULT: ✓ PASS
 
 All examined receipt data conforms to the required schema and governance constraints:
 
@@ -265,6 +286,7 @@ All examined receipt data conforms to the required schema and governance constra
 - **Governance Compliance**: All fail-closed principles maintained, no automatic promotions
 
 The Rafaelia Adaptive Cycle maintains operational integrity through:
+
 - Immutable, hash-chained receipt architecture
 - Read-only execution model enforcement
 - Explicit uncertainty tracking (Token Vazio)
@@ -276,6 +298,8 @@ The Rafaelia Adaptive Cycle maintains operational integrity through:
 
 1. `/home/user/Mapa/data/receipts/rafaelia_adaptive_cycle_latest4_20260817T045531Z.receipt.json`
 2. `/home/user/Mapa/data/audits/RAFAELIA_ADAPTIVE_CYCLE_LATEST4_20260816.v1.json`
+
+
 
 **Report Generated**: 2026-08-18  
 **Validator**: Claude Code (Rafaelia Receipt Validator)
