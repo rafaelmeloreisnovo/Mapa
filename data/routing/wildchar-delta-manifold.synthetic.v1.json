@@ -1,0 +1,80 @@
+{
+  "schema_version": "rafaelia.wildchar-delta-manifold/v1",
+  "manifold_id": "dm:wildchar-synthetic-v1",
+  "claim_allowed": false,
+  "wildchar": {
+    "N": "*",
+    "cardinality": "open",
+    "role": "candidate_space_expansion",
+    "numeric_weights_state": "TOKEN_VAZIO_CALIBRATION",
+    "lenses": ["direct", "inverse", "boundary", "counterexample", "analogy_parabola", "adjacent_domain_transfer", "unknown_unknown"]
+  },
+  "axes": ["concept", "evidence", "provenance", "falsifier_status", "gap_unknown", "urgency_necessity", "next_providence_action"],
+  "route_questions": [
+    "What exactly is being claimed or asked?",
+    "What observation or test would falsify it?",
+    "What is the source-to-artifact-to-claim provenance chain?",
+    "What counterevidence or contradiction is already known?",
+    "What remains unknown and must stay TOKEN_VAZIO?",
+    "How urgent and necessary is this route, and why?",
+    "What exact next action can reduce uncertainty without promoting the claim?"
+  ],
+  "routes": [
+    {
+      "id": "route:synthetic-bridge-001",
+      "kind": "hypothesis",
+      "title": "Synthetic bridge used only to exercise the routing contract",
+      "origin": "WILDCHAR",
+      "literal_claim": true,
+      "epistemic_state": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "provenance": [{"source_type": "other", "locator": "synthetic-fixture://wildchar/v1", "observed_at": "2026-08-18", "evidence_role": "provenance_only"}],
+      "evidence_for": [],
+      "evidence_against": [],
+      "falsifier": "A controlled fixture whose expected relation is absent or contradicted falsifies the candidate bridge.",
+      "F_gap": ["No empirical evidence is attached; this is intentionally synthetic."],
+      "F_next": ["Run the deterministic validator and negative tests before any real route is ingested."],
+      "F_esquecido": ["Reopen if the route remains unchanged while its source or dependency changes."],
+      "F_urgencia": "LOW",
+      "F_necessidade": "NECESSARY",
+      "F_providencia_operacional": [{"action": "Validate the contract against positive and adversarial fixtures.", "verification": "Unit tests must reject promotion without evidence and reject metaphor as literal claim.", "status": "OPEN"}],
+      "F_otimizar": ["Deduplicate routes only after preserving source identity and supersession links."],
+      "F_evolucao": ["Measure coverage by closed gaps and provenance completeness, not by route count."],
+      "F_so_sei_q_nada_sei": ["The useful size of the candidate space is unknown and intentionally not assigned a numeric infinity."],
+      "token_vazio": [{"field": "evidence_for", "reason": "Synthetic fixture has no empirical evidence by construction.", "next_test": "Replace with a real producer artifact only in a separate evidence-bearing route."}],
+      "priority": "P2_NECESSARY",
+      "supersedes": [],
+      "invariants": ["WILDCHAR_GENERATES_CANDIDATES_NOT_TRUTH", "ANALOGY_NE_MECHANISM", "TOKEN_VAZIO_NE_ZERO", "PROVENANCE_BEFORE_PROMOTION", "NO_NUMERIC_PRIORITY_BEFORE_CALIBRATION"]
+    },
+    {
+      "id": "route:synthetic-parabola-001",
+      "kind": "parabola",
+      "title": "Synthetic parabola preserving a conceptual analogy without literal promotion",
+      "origin": "WILDCHAR",
+      "literal_claim": false,
+      "epistemic_state": "HIPOTESE",
+      "claim_allowed": false,
+      "provenance": [{"source_type": "other", "locator": "synthetic-fixture://parabola/v1", "observed_at": "2026-08-18", "evidence_role": "context"}],
+      "evidence_for": [],
+      "evidence_against": [],
+      "falsifier": "Not applicable as a literal scientific mechanism; falsify only explicit mapped subclaims after they are separately instantiated.",
+      "F_gap": ["No literal mechanism is asserted."],
+      "F_next": ["If a testable subclaim is extracted, create a separate hypothesis route with its own falsifier."],
+      "F_esquecido": [],
+      "F_urgencia": "NONE",
+      "F_necessidade": "OPTIONAL",
+      "F_providencia_operacional": [],
+      "F_otimizar": ["Keep metaphor and mechanism in separate route kinds."],
+      "F_evolucao": ["Track whether analogies generate falsifiable subclaims without contaminating evidence state."],
+      "F_so_sei_q_nada_sei": ["Whether this analogy yields a useful scientific subclaim is unknown."],
+      "token_vazio": [],
+      "priority": "P4_BACKLOG",
+      "supersedes": [],
+      "invariants": ["PARABOLA_LITERAL_CLAIM_FALSE", "ANALOGY_NE_MECHANISM", "CLAIM_ALLOWED_FALSE"]
+    }
+  ],
+  "anti_regression": [
+    {"seq": 1, "route_id": "route:synthetic-bridge-001", "event": "CREATED", "reason": "Initial synthetic candidate retained with claim gate closed."},
+    {"seq": 2, "route_id": "route:synthetic-parabola-001", "event": "CREATED", "reason": "Parabola retained as non-literal context, never as evidence."}
+  ]
+}
