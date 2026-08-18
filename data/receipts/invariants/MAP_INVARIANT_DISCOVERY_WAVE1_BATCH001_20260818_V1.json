@@ -1,0 +1,92 @@
+{
+  "schema_version": "map.invariant-discovery-batch-receipt/v1",
+  "receipt_id": "MAP-INVARIANT-DISCOVERY-WAVE1-BATCH001-20260818-V1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "source_audit": {
+    "workflow_run_id": 32084467237,
+    "artifact_id": 9306211925,
+    "audit_receipt_sha256": "934cb702bff7d5d91219fcfafd8fd6001e92d686bb6f8ce6999cab74c1d08e9a"
+  },
+  "wave": 1,
+  "batch": 1,
+  "family_focus": "provenance",
+  "mode": "BOUNDED_CONTENT_REVIEW_NON_PROMOTING",
+  "claim_allowed": false,
+  "automatic_registration": false,
+  "automatic_merge": false,
+  "decisions": [
+    {
+      "path": "scripts/apply_repository_inventory_batch.py",
+      "blob_sha": "67b0cea9d62c3e6fc063513c444a30a87441c8f1",
+      "discovery_line": 48,
+      "outcome": "IMPLEMENTS_EXISTING_INVARIANT",
+      "primary_invariant": "MAP-INV-PROV-001",
+      "secondary_invariants": ["MAP-INV-TOP-001"],
+      "reason": "Validates explicit connector source, UTC observation, batch identity, counts and record integrity; this is an executable provenance/inventory surface rather than a distinct root statement.",
+      "next_verifiable_step": "Add implements/evidenced_by edges only after checking existing inventory tests and receipts."
+    },
+    {
+      "path": "scripts/compare_cross_source_evidence.py",
+      "blob_sha": "6d0154ced09d0c5721ed7c79adc1734aae3044c0",
+      "discovery_line": 67,
+      "outcome": "IMPLEMENTS_EXISTING_INVARIANT",
+      "primary_invariant": "MAP-INV-PROV-001",
+      "secondary_invariants": ["MAP-INV-EXEC-001", "MAP-INV-FED-001"],
+      "reason": "Validates checksum-backed cross-source quality floors, complete execution, clean outcomes, claim_allowed=false and remote-CI non-substitution. These specialize existing provenance/execution boundaries.",
+      "next_verifiable_step": "Bind its test and checksum receipts as typed edges instead of creating a duplicate invariant ID."
+    },
+    {
+      "path": "scripts/evaluate_cross_source_gate.py",
+      "blob_sha": "395f7424bd259b6a72708c2557b33c42fa5c04ca",
+      "discovery_line": 57,
+      "outcome": "IMPLEMENTS_EXISTING_INVARIANT",
+      "primary_invariant": "MAP-INV-EXEC-001",
+      "secondary_invariants": ["MAP-INV-PROV-001", "MAP-INV-FED-001"],
+      "reason": "Composes records, registry, custody and tests against a quality floor and explicitly checks claim boundaries and remote-CI substitution; it is a gate implementation, not a new root invariant.",
+      "next_verifiable_step": "Map its checks to existing invariant IDs and preserve independent evidence requirements."
+    },
+    {
+      "path": "scripts/extract_novoexport_anteriority_events_v1.py",
+      "blob_sha": "d392969cfd56205905b7ec2efcb8a56f2b8c8fe8",
+      "discovery_line": 5,
+      "outcome": "NEW_CANONICAL_INVARIANT_CANDIDATE",
+      "candidate_family": "provenance",
+      "candidate_statement": "First textual occurrence is not first invention; internal occurrence is not public disclosure; public disclosure is not legal priority.",
+      "candidate_dependencies": ["MAP-INV-EPI-001", "MAP-INV-PROV-001"],
+      "candidate_claim_allowed": false,
+      "state": "TOKEN_VAZIO_DUPLICATION_CHECK_PENDING",
+      "reason": "The source declares a distinct anteriority boundary that is narrower than generic custody, but existing canonical/governance documents may already encode the same invariant.",
+      "next_verifiable_step": "Compare against SOURCE_OF_TRUTH, anteriority research docs and authorship/provenance governance before assigning a canonical ID."
+    },
+    {
+      "path": "scripts/query_provenance_topology.py",
+      "blob_sha": "490c390b1000e05d365f04a12ebc12b96f2e0b95",
+      "discovery_line": 80,
+      "outcome": "IMPLEMENTS_EXISTING_INVARIANT",
+      "primary_invariant": "MAP-INV-PROV-001",
+      "secondary_invariants": ["MAP-INV-TOP-001", "MAP-INV-EPI-001"],
+      "reason": "Provides bounded queries/traversal over provenance topology and exposes TOKEN_VAZIO states; it is a navigation implementation rather than a new invariant statement.",
+      "next_verifiable_step": "Link the query tool to the provenance/topology registry as an implementation edge after validating its source graph contract."
+    }
+  ],
+  "batch_summary": {
+    "reviewed": 5,
+    "implements_existing": 4,
+    "new_canonical_candidates": 1,
+    "canonical_ids_appended": 0,
+    "claims_promoted": 0
+  },
+  "token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_ANTERIORITY_DUPLICATION_CHECK",
+      "reason": "The distinct anteriority statement has not yet been compared byte/semantically with canonical and governance documents.",
+      "next_verifiable_step": "Read bounded source-of-truth/anteriority governance documents and classify SAME_INVARIANT versus DISTINCT_INVARIANT."
+    },
+    {
+      "id": "TOKEN_VAZIO_IMPLEMENTATION_EDGE_BACKFILL",
+      "reason": "Four implementation decisions are evidenced but typed edges are intentionally not appended until corresponding tests/receipts are reconciled.",
+      "next_verifiable_step": "Locate test/receipt evidence for each implementation and append edges in a later versioned delta."
+    }
+  ],
+  "next_verifiable_step": "Perform the anteriority duplication check against the four highest-relevance canonical/governance documents before creating any new invariant ID."
+}
