@@ -6,6 +6,7 @@ on:
       - "docs/WILDCHAR_DELTA_MANIFOLD_ROUTING_V1.md"
       - "schemas/wildchar-delta-manifold-route.v1.schema.json"
       - "data/routing/wildchar-delta-manifold.synthetic.v1.json"
+      - "data/routing/quantum-echoes-otoc-2025.v1.json"
       - "scripts/validate_wildchar_delta_manifold.py"
       - "tests/test_wildchar_delta_manifold.py"
       - ".github/workflows/wildchar-delta-manifold-gate.yml"
@@ -15,6 +16,7 @@ on:
       - "docs/WILDCHAR_DELTA_MANIFOLD_ROUTING_V1.md"
       - "schemas/wildchar-delta-manifold-route.v1.schema.json"
       - "data/routing/wildchar-delta-manifold.synthetic.v1.json"
+      - "data/routing/quantum-echoes-otoc-2025.v1.json"
       - "scripts/validate_wildchar_delta_manifold.py"
       - "tests/test_wildchar_delta_manifold.py"
 
@@ -34,16 +36,20 @@ jobs:
         run: python3 -m py_compile scripts/validate_wildchar_delta_manifold.py tests/test_wildchar_delta_manifold.py
       - name: Unit tests
         run: python3 -m unittest tests/test_wildchar_delta_manifold.py -v
-      - name: Deterministic semantic gate
+      - name: Deterministic semantic gates
         run: |
           mkdir -p build/wildchar-delta-manifold
           python3 scripts/validate_wildchar_delta_manifold.py \
             data/routing/wildchar-delta-manifold.synthetic.v1.json \
-            --write-report build/wildchar-delta-manifold/report.json
+            --write-report build/wildchar-delta-manifold/synthetic-report.json
+          python3 scripts/validate_wildchar_delta_manifold.py \
+            data/routing/quantum-echoes-otoc-2025.v1.json \
+            --write-report build/wildchar-delta-manifold/quantum-echoes-report.json
           sha256sum \
             docs/WILDCHAR_DELTA_MANIFOLD_ROUTING_V1.md \
             schemas/wildchar-delta-manifold-route.v1.schema.json \
             data/routing/wildchar-delta-manifold.synthetic.v1.json \
+            data/routing/quantum-echoes-otoc-2025.v1.json \
             scripts/validate_wildchar_delta_manifold.py \
             tests/test_wildchar_delta_manifold.py \
             > build/wildchar-delta-manifold/SHA256SUMS
