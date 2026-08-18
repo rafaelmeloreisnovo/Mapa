@@ -36,6 +36,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/root/.claude/plans/*.md` — Framework documents
 
 ### Decision Gates
+
 - **ENTRY**: Lane 00 proposal (governance issue, policy change, vocabulary update)
 - **VERIFICATION**: Authority review (≥1 independent approval, no self-approval)
 - **EXIT**: Policy decision document (immutable, append-only, timestamped)
@@ -72,6 +73,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/receipts/*.receipt.json` — Intake receipts for each source
 
 ### Decision Gates
+
 - **ENTRY**: New source candidate (GitHub API, external dependency, user input)
 - **QUARANTINE**: Classify source origin, assess risk (PII? External? Transient?)
 - **RELEASE**: Source cleared for Lane 02 normalization
@@ -110,6 +112,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/collision-log.jsonl` — Deduplication decisions
 
 ### Decision Gates
+
 - **ENTRY**: Source from Lane 01
 - **SCHEMA CHECK**: Does source match known schema or require new one?
 - **DEDUPLICATION**: Is this a new object or duplicate of existing?
@@ -147,6 +150,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/navigation-index.jsonl` — Paths through model
 
 ### Decision Gates
+
 - **ENTRY**: Normalized object from Lane 02
 - **ONTOLOGY CHECK**: Where does this fit in the ontology?
 - **RELATION MAPPING**: What connects to this object?
@@ -184,6 +188,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/test-execution-log.jsonl` — Test run records
 
 ### Decision Gates
+
 - **ENTRY**: Semantically modeled object from Lane 03
 - **LINTING**: Style, format, naming consistency
 - **UNIT TESTS**: Behavior correctness
@@ -223,6 +228,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/reproduction-checklist.jsonl` — Steps to reproduce
 
 ### Decision Gates
+
 - **ENTRY**: Validated object from Lane 04
 - **ARTIFACT CAPTURE**: Store artifact (file, JSON, binary)
 - **HASH BINDING**: Compute SHA256, bind to identity
@@ -260,6 +266,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/staging-checkpoint.jsonl` — Pre-merge snapshot
 
 ### Decision Gates
+
 - **ENTRY**: Evidence + receipt from Lane 05
 - **CONTRACT CHECK**: Do all dependencies satisfy module contracts?
 - **STAGING**: Place in logical staging area (not production yet)
@@ -298,6 +305,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/token-vazio-registry.jsonl` — Unresolved security gaps
 
 ### Decision Gates
+
 - **ENTRY**: Staged module from Lane 06
 - **THREAT SCAN**: Vulnerabilities, exposed secrets, injection risks
 - **PRIVACY AUDIT**: PII exposure? Data residency? Retention?
@@ -337,6 +345,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/release-decision.json` — Approved for merge to main?
 
 ### Decision Gates
+
 - **ENTRY**: Security-approved module from Lane 07
 - **METRICS**: Performance within bounds? New tests faster than old?
 - **REGRESSION**: No breakage of 106 existing tests? No performance drop >5%?
@@ -375,6 +384,7 @@ The Rafaelia governance structure routes work through 10 operational lanes (00-0
 - `/data/audits/restoration-checklist.jsonl` — Steps to restore from archive
 
 ### Decision Gates
+
 - **ENTRY**: After merge to main (released version)
 - **CATALOG**: Add to archive catalog with metadata
 - **RETENTION**: Apply retention policy (keep N years? keep until policy changes?)
