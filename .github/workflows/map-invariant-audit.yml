@@ -1,0 +1,120 @@
+name: Map invariant audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "schemas/map_invariant_registry.v1.schema.json"
+      - "data/invariants/map_invariant_registry.v1.jsonl"
+      - "data/invariants/map_invariant_edges.v1.jsonl"
+      - "scripts/audit_map_invariants.py"
+      - "tests/test_map_invariant_registry.py"
+      - ".github/workflows/map-invariant-audit.yml"
+  push:
+    branches: [main]
+    paths:
+      - "schemas/map_invariant_registry.v1.schema.json"
+      - "data/invariants/map_invariant_registry.v1.jsonl"
+      - "data/invariants/map_invariant_edges.v1.jsonl"
+      - "scripts/audit_map_invariants.py"
+      - "tests/test_map_invariant_registry.py"
+      - ".github/workflows/map-invariant-audit.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: map-invariant-audit-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  invariant-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Compile auditor and tests
+        run: python -m py_compile scripts/audit_map_invariants.py tests/test_map_invariant_registry.py
+
+      - name: Run fail-closed invariant tests
+        run: python -m unittest -v tests.test_map_invariant_registry
+
+      - name: Bind runtime timestamp
+        run: echo "RAFAELIA_GENERATED_AT=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+
+      - name: Audit canonical invariant topology
+        run: |
+          mkdir -p artifacts/map-invariant-audit
+          python scripts/audit_map_invariants.py \
+            --root . \
+            --source-sha "$GITHUB_SHA" \
+            --run-id "$GITHUB_RUN_ID" \
+            --generated-at "$RAFAELIA_GENERATED_AT" \
+            --output artifacts/map-invariant-audit/receipt.json
+
+      - name: Verify receipt non-promotion boundary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p = Path('artifacts/map-invariant-audit/receipt.json')
+          r = json.loads(p.read_text(encoding='utf-8'))
+          assert r['status'] == 'PASS', r['errors']
+          assert r['claim_allowed'] is False
+          assert r['source_mode'] == 'READ_ONLY_AUDIT'
+          assert r['automatic_mutation'] is False
+          assert r['automatic_merge'] is False
+          declared = r.pop('receipt_sha256')
+          raw = json.dumps(r, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+          assert hashlib.sha256(raw).hexdigest() == declared
+          PY
+
+      - name: Seal receipt bundle
+        run: |
+          cp schemas/map_invariant_registry.v1.schema.json artifacts/map-invariant-audit/
+          cp data/invariants/map_invariant_registry.v1.jsonl artifacts/map-invariant-audit/
+          cp data/invariants/map_invariant_edges.v1.jsonl artifacts/map-invariant-audit/
+          sha256sum \
+            artifacts/map-invariant-audit/receipt.json \
+            artifacts/map-invariant-audit/map_invariant_registry.v1.jsonl \
+            artifacts/map-invariant-audit/map_invariant_edges.v1.jsonl \
+            artifacts/map-invariant-audit/map_invariant_registry.v1.schema.json \
+            > artifacts/map-invariant-audit/SHA256SUMS
+
+      - name: Publish bounded audit summary
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          r = json.loads(Path('artifacts/map-invariant-audit/receipt.json').read_text())
+          print('# Mapa Invariant Audit')
+          print()
+          print(f"- status: `{r['status']}`")
+          print(f"- source_commit_sha: `{r['source_commit_sha']}`")
+          print(f"- receipt_sha256: `{r['receipt_sha256']}`")
+          print(f"- invariants: `{r['metrics']['invariant_count']}`")
+          print(f"- edges: `{r['metrics']['edge_count']}`")
+          print(f"- dependency depth: `{r['metrics']['max_dependency_depth']}`")
+          print(f"- discovery candidates: `{r['metrics']['discovery_candidate_count']}`")
+          print(f"- claim_allowed: `{str(r['claim_allowed']).lower()}`")
+          print()
+          print('`PASS` here means registry/topology contract PASS only; it is not physical or scientific proof.')
+          PY
+
+      - name: Upload immutable per-run receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: map-invariant-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/map-invariant-audit/
+          if-no-files-found: error
+          retention-days: 90
