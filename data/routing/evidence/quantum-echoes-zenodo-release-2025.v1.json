@@ -1,0 +1,76 @@
+{
+  "schema_version": "rafaelia.evidence-receipt/v1",
+  "receipt_id": "evidence:quantum-echoes-zenodo-release-2025-v1",
+  "observed_at": "2026-08-18",
+  "manifold_id": "dm:quantum-echoes-otoc-2025-v1",
+  "route_id": "route:otoc-constructive-interference-2025",
+  "claim_allowed": false,
+  "source_chain": [
+    {
+      "role": "primary_paper",
+      "locator": "https://doi.org/10.1038/s41586-025-09526-6",
+      "statement": "Data availability identifies Zenodo DOI 10.5281/zenodo.15640502 for the quantum circuits and data generated and analysed in the study."
+    },
+    {
+      "role": "concept_doi",
+      "locator": "https://doi.org/10.5281/zenodo.15640502",
+      "statement": "Concept DOI cited by the Nature paper."
+    },
+    {
+      "role": "resolved_version_v1",
+      "locator": "https://doi.org/10.5281/zenodo.15640503",
+      "statement": "Zenodo version v1, published 2025-06-11, resolved as the concrete dataset version observed on 2026-08-18."
+    }
+  ],
+  "artifact": {
+    "name": "OTOC2_circuits.zip",
+    "display_size": "41.9 MB",
+    "publisher_checksum": {
+      "algorithm": "md5",
+      "value": "40dbe884d45bfaba7802a90993c611eb",
+      "authority": "Zenodo record 15640503"
+    },
+    "local_sha256": {
+      "state": "TOKEN_VAZIO",
+      "value": null,
+      "reason": "The current execution environment could resolve the primary Zenodo metadata but could not retrieve the 41.9 MB binary: the web fetch refused the payload as too large and the container runtime had no working external DNS/download path.",
+      "next_test": "Download OTOC2_circuits.zip in a network-capable reproducible runtime, verify the published MD5 first, compute SHA-256, record exact byte length and append a new receipt; do not overwrite this receipt."
+    }
+  },
+  "verification": {
+    "metadata_locator_resolved": true,
+    "version_specific_doi_resolved": true,
+    "publisher_md5_observed": true,
+    "binary_downloaded_locally": false,
+    "publisher_md5_recomputed_locally": false,
+    "sha256_computed_locally": false,
+    "small_reproduction_executed": false
+  },
+  "F_ok": [
+    "Primary Nature Data availability statement names the dataset concept DOI.",
+    "Zenodo v1 exposes a concrete version DOI, file name, display size and publisher MD5.",
+    "The route now has a stable external artifact locator independent of the news headline."
+  ],
+  "F_gap": [
+    "Exact local byte length and SHA-256 are not yet measured.",
+    "Published MD5 has not yet been independently recomputed.",
+    "No figure/subset reproduction has been executed from the archive."
+  ],
+  "F_next": [
+    "Acquire the binary in a network-capable runtime.",
+    "Verify MD5 == 40dbe884d45bfaba7802a90993c611eb.",
+    "Compute SHA-256 and exact byte count.",
+    "Inspect archive inventory/README without executing untrusted code.",
+    "Select the smallest classically tractable circuit/data subset tied to a paper figure and reproduce one observable with a frozen environment."
+  ],
+  "F_esquecido": [
+    "10.5281/zenodo.15640502 is the concept DOI cited by the paper; 10.5281/zenodo.15640503 is the concrete v1 record observed here.",
+    "A publisher-provided MD5 is provenance metadata, not an independently reproduced hash.",
+    "Successful download/hash verification would validate artifact identity, not the scientific claim itself."
+  ],
+  "anti_regression": {
+    "append_only": true,
+    "supersedes": [],
+    "rule": "Future binary/hash/reproduction receipts append evidence and may close individual gaps; this receipt remains as the historical observation of what was and was not verified on 2026-08-18."
+  }
+}
