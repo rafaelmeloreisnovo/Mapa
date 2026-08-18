@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
 
       - name: Python syntax
         run: |
@@ -51,7 +51,7 @@ jobs:
             'claim_allowed=false' \
             > artifacts/square-median-x3264/BOUNDARY.txt
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@c7d193f32eddeaeca500a8efe53f51ff053605ad
         with:
           name: square-median-x3264-pointer-${{ github.sha }}
           path: artifacts/square-median-x3264/

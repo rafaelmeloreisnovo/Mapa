@@ -24,6 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
       - run: python scripts/validate_bootstrap_assets_provenance.py
       - run: python -m unittest tests.test_bootstrap_assets_provenance -v

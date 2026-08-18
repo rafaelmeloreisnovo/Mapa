@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
       - name: Validate U2 receipt and corpus boundaries
         run: python scripts/validate_zipraf_corpus_u2.py
       - name: Run adversarial corpus promotion tests

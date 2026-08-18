@@ -32,7 +32,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
 
       - name: Parse schema
         run: python3 -m json.tool schemas/evidence-closure-record.v1.schema.json >/dev/null

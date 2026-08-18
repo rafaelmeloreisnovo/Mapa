@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
       - name: Validate canonical control-plane instance
         run: python scripts/validate_zipraf_real_archive_binding.py
       - name: Run adversarial promotion tests

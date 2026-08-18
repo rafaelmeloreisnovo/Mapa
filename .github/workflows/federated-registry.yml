@@ -24,7 +24,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout without persisted credentials
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
         with:
           persist-credentials: false
 
@@ -48,7 +48,7 @@ jobs:
             > CHECKSUMS.sha256
 
       - name: Upload audit artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@c7d193f32eddeaeca500a8efe53f51ff053605ad
         with:
           name: federated-authority-registry
           path: |

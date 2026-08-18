@@ -15,8 +15,8 @@ jobs:
   runtime-receipt:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
+      - uses: actions/setup-python@f677139bbe7f9c59030f3aa62b693246ab674ec9
         with:
           python-version: "3.12"
       - name: Install test dependency
@@ -35,7 +35,7 @@ jobs:
             --previous-index artifacts/semantic-runtime/index.json \
             --out-index artifacts/semantic-runtime/index.incremental.json \
             --receipt artifacts/semantic-runtime/receipt.incremental.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@c7d193f32eddeaeca500a8efe53f51ff053605ad
         with:
           name: semantic-runtime-receipt
           path: artifacts/semantic-runtime/

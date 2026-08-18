@@ -21,11 +21,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout without persistent credentials
-        uses: actions/checkout@v7
+        uses: actions/checkout@692973e3563ff3c01220e3a44793f4a10eb60ae8
         with:
           persist-credentials: false
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@1f56a43ccd0f2b32b6c62cc8f2fb4ad78ce05d45
         with:
           python-version: "3.12"
       - name: Validate V1 release-authority contract fail-closed

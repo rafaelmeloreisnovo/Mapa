@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
+      - uses: actions/setup-python@f677139bbe7f9c59030f3aa62b693246ab674ec9
         with:
           python-version: "3.12"
       - name: Compile validator and tests
@@ -43,7 +43,7 @@ jobs:
             data/control-plane/tof-namespace-allocation-fault.v1.json \
             --write-report build/tof-fault-invariant/report.json
       - name: Upload bounded evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@c7d193f32eddeaeca500a8efe53f51ff053605ad
         with:
           name: tof-fault-invariant-report
           path: build/tof-fault-invariant/report.json

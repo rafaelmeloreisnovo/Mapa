@@ -25,8 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
+      - uses: actions/setup-python@f677139bbe7f9c59030f3aa62b693246ab674ec9
         with:
           python-version: "3.12"
       - name: Compile
@@ -38,7 +38,7 @@ jobs:
           python scripts/validate_cognitive_operators.py \
             --manifest data/ontology/cognitive-operators.v1.json \
             --output build/cognitive-operators/audit.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@c7d193f32eddeaeca500a8efe53f51ff053605ad
         with:
           name: cognitive-operator-audit
           path: build/cognitive-operators/audit.json

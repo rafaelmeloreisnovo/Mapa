@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53b2ddc3a3808b9a7055
 
       - name: Build coherence artifacts
         run: |
@@ -33,7 +33,7 @@ jobs:
           cat artifacts/multidim_coherence/run_receipt.json
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@c7d193f32eddeaeca500a8efe53f51ff053605ad
         with:
           name: rafaelia-multidim-coherence
           path: artifacts/multidim_coherence/
