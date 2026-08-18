@@ -1,0 +1,78 @@
+{
+  "schemas": [
+    {
+      "schema_id": "rafaelia.adaptive-cycle-latest4-observation.v1",
+      "version": "1.0",
+      "adoption_date": "2026-08-17T04:55:31Z",
+      "deprecated_date": null,
+      "status": "active",
+      "usage": "Primary receipt format for latest-four observation cycles",
+      "required_fields": [
+        "cycle_id",
+        "n_mod_42",
+        "phase",
+        "decision",
+        "previous_entry_sha256",
+        "entry_sha256",
+        "latest_four_count",
+        "claim_allowed"
+      ],
+      "validator": "validate_receipts.py"
+    },
+    {
+      "schema_id": "rafaelia.adaptive-cycle-latest4-audit.v1",
+      "version": "1.0",
+      "adoption_date": "2026-08-16T00:00:00Z",
+      "deprecated_date": null,
+      "status": "active",
+      "usage": "Audit format for validating runs against governance policy",
+      "required_fields": [
+        "cycle_id",
+        "n_mod_42",
+        "phase",
+        "decision",
+        "claim_allowed",
+        "latest_four_count"
+      ],
+      "validator": "validate_receipts.py"
+    },
+    {
+      "schema_id": "rafaelia.promotion-control/v1",
+      "version": "1.0",
+      "adoption_date": "2026-08-18T00:00:00Z",
+      "deprecated_date": null,
+      "status": "active",
+      "usage": "Governance policy for manual promotion control",
+      "required_fields": [
+        "default_decision",
+        "invariants",
+        "required_independent_approvals"
+      ],
+      "location": "data/control-plane/promotion-control.v1.json",
+      "validator": "tools/verify_promotion_control.py"
+    },
+    {
+      "schema_id": "rafaelia.governance-framework/v1",
+      "version": "1.0",
+      "adoption_date": "2026-08-18T00:00:00Z",
+      "deprecated_date": null,
+      "status": "active",
+      "usage": "Meta-schema for framework documentation and governance structure",
+      "components": [
+        "7 Semantic Directions",
+        "8 Fundamental Observations",
+        "7 Arcos (Process Flow)",
+        "15 Invariants",
+        "6 IGC Conditions",
+        "10 Operational Lanes",
+        "7-State Fail-Closed Machine"
+      ]
+    }
+  ],
+  "summary": {
+    "total_schemas": 4,
+    "active": 4,
+    "deprecated": 0,
+    "latest_update": "2026-08-18T00:00:00Z"
+  }
+}
