@@ -1,0 +1,67 @@
+{
+  "schema": "rafaelia.map-invariant-meta-anteriority-ci-receipt/v1",
+  "observed_at": "2026-08-18T00:43:38Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 273,
+  "source_commit_sha": "a58f2983ccf060134a440504a72c16c8a3730788",
+  "canonicalization": {
+    "registry_blob_sha": "b4145fc21cb86b5f346637d86c770628b2586206",
+    "edges_blob_sha": "721d3d118d01191281e8e8279aae14fea78f5847",
+    "registered_invariants": ["MAP-INV-META-001", "MAP-INV-PROV-002"],
+    "append_only": true,
+    "atomic_tree_update": true
+  },
+  "map_invariant_audit": {
+    "run_id": 32085585460,
+    "run_number": 8,
+    "conclusion": "success",
+    "artifact_id": 9306584246,
+    "artifact_name": "map-invariant-audit-32085585460-1",
+    "artifact_digest": "sha256:fdb86f91e52a3d16634b3abdb587e4331c9ed6d8be57b17e463994c141a3fea9",
+    "artifact_receipt_file_sha256": "e45df2d466b54609ec5f4a1afa7a4430671b96f5976c78851fa9249020395cf4",
+    "audit_receipt_sha256": "f186477bf241315eeb7da5c1d945fb6735181d19f849638f91590d4f85bfcbc3",
+    "registry_sha256": "27bf40cb755346b17eb8179bf558ef98beba0304dc8a8208fa731149dd9024b5",
+    "edges_sha256": "624cd4dfb407f06823cea49b25755d69fbbc5afaf6a937e01e25789b581db100",
+    "bundle_checksums_recomputed": "PASS_4_OF_4",
+    "internal_receipt_hash_recomputed": "PASS",
+    "metrics": {
+      "invariant_count": 12,
+      "edge_count": 49,
+      "requires_edge_count": 28,
+      "max_dependency_depth": 4,
+      "orphan_count": 0,
+      "cycle_count": 0,
+      "error_count": 0,
+      "discovery_candidate_count": 188
+    }
+  },
+  "same_cut_gates": {
+    "branch_topology": {"run_id": 32085585463, "conclusion": "success"},
+    "repository_ci": {"run_id": 32085585446, "conclusion": "success"},
+    "promotion_control": {
+      "run_id": 32085585462,
+      "conclusion": "success",
+      "result": "ALLOWED_FOR_MANUAL_MERGE",
+      "blocking_reasons": [],
+      "automatic_merge": false,
+      "manual_merge_only": true,
+      "claim_allowed": false
+    }
+  },
+  "delta_interpretation": {
+    "MAP-INV-META-001.C": "OBSERVED_BY_EXACT_CI_RUN_32085585460",
+    "MAP-INV-PROV-002.C": "TOKEN_VAZIO_DEDICATED_CI_NOT_MATERIALIZED",
+    "reason_prov002_not_promoted": "The registry audit validates the invariant record and graph; it is not a dedicated execution/CI gate for the NOVOexport anteriority extractor.",
+    "discovery_delta": "192_TO_188_BY_CANONICALIZATION_NOT_BY_DELETION"
+  },
+  "epistemic_boundary": [
+    "registry CI PASS != NOVOexport real execution",
+    "registry CI PASS != public disclosure proof",
+    "registry CI PASS != legal priority",
+    "registry CI PASS != scientific novelty",
+    "ALLOWED_FOR_MANUAL_MERGE != automatic merge"
+  ],
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "next_verifiable_step": "Promote only MAP-INV-META-001.C to PASS with this receipt bound; preserve MAP-INV-PROV-002 T/C/X/F as TOKEN_VAZIO until dedicated evidence exists."
+}

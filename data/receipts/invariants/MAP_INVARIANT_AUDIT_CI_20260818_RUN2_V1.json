@@ -1,0 +1,64 @@
+{
+  "schema_version": "map.invariant-ci-evidence-receipt/v1",
+  "receipt_id": "MAP-INVARIANT-AUDIT-CI-20260818-RUN2-V1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 273,
+  "branch": "feat/map-invariant-registry-v1-20260817",
+  "source_head_sha": "fa2201c89a9117274048a82472355705465f8de1",
+  "workflow": "Map invariant audit",
+  "workflow_run_id": 32084467237,
+  "workflow_run_number": 2,
+  "workflow_conclusion": "success",
+  "artifact": {
+    "id": 9306211925,
+    "name": "map-invariant-audit-32084467237-1",
+    "digest": "sha256:429adf0e2fd0e1fe187923923dffb7b26f26178448563a0e6d77e87c56cbe065",
+    "expires_at": "2026-11-16T00:25:39Z"
+  },
+  "audit_receipt": {
+    "receipt_sha256": "934cb702bff7d5d91219fcfafd8fd6001e92d686bb6f8ce6999cab74c1d08e9a",
+    "artifact_file_sha256": "09ec32adf216641d1f89e8e93e5a687ca649d008a0a3f75cd9dfcab0da87f0da",
+    "registry_sha256": "12ab8137c3de3eeb31381138c7e6b030d979c16c527cc72928bed2ce92b1f637",
+    "edges_sha256": "cd636510e671778ef824a5c61f2f3d542fd0ece3923e6063e9d6af5b9609843b",
+    "schema_sha256": "a55ebbb7cb12547e9cdd9267949e3b4e03f19af1c738fabdd420814a7f20bee1"
+  },
+  "observed_metrics": {
+    "status": "PASS",
+    "invariant_count": 10,
+    "edge_count": 35,
+    "requires_edge_count": 21,
+    "max_dependency_depth": 4,
+    "orphan_count": 0,
+    "cycle_count": 0,
+    "error_count": 0,
+    "discovery_candidate_count": 192,
+    "urgency_counts": {
+      "P0_CRITICAL": 6,
+      "P1_URGENT": 3,
+      "P2_NECESSARY": 1,
+      "P3_IMPORTANT": 0,
+      "P4_BACKLOG": 0
+    }
+  },
+  "supersedes_for_canonical_evidence": {
+    "workflow_run_id": 32084359566,
+    "reason": "Run 1 passed the registry audit but labeled the pull-request test merge SHA as source_commit_sha. Run 2 preserves that historical evidence and corrects the semantic binding to the real PR head SHA."
+  },
+  "epistemic_boundary": [
+    "CI invariant audit PASS proves the registry/topology contract for the observed checkout only",
+    "CI audit PASS is not physical runtime proof",
+    "CI audit PASS is not scientific validation",
+    "192 discovery candidates remain TOKEN_VAZIO until classified",
+    "claim_allowed remains false"
+  ],
+  "claim_allowed": false,
+  "append_only": true,
+  "automatic_mutation": false,
+  "automatic_merge": false,
+  "token_vazio": [
+    "TOKEN_VAZIO_META_INVARIANT_REGISTRY_ENTRY",
+    "TOKEN_VAZIO_COMPLETE_ECOSYSTEM_COVERAGE",
+    "TOKEN_VAZIO_DISCOVERY_CLASSIFICATION_192"
+  ],
+  "next_verifiable_step": "Classify the 192 discovery candidates by invariant family and duplicate/implementation/non-invariant status, prioritizing P0 provenance, topology, execution and anti-regression sources before federating cross-repository invariants."
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "map.invariant-promotion-event-receipt/v1",
+  "receipt_id": "MAP-INVARIANT-PROMOTION-EVENT-REFRESH-20260818-V1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 273,
+  "observed_head_before_receipt": "2fc083012cf8bf63f11f67805d8114f548faa091",
+  "promotion_workflow_run_id": 32084680612,
+  "original_attempt": {
+    "attempt": 1,
+    "result": "DENIED",
+    "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN"],
+    "negative_tests": "PASS"
+  },
+  "rerun_attempt": {
+    "attempt": 2,
+    "result": "DENIED",
+    "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN"],
+    "negative_tests": "PASS",
+    "cause": "GitHub Actions rerun reused the original pull_request event payload, which was captured while the PR was draft. The live PR had already transitioned to ready for review."
+  },
+  "live_pr_observation": {
+    "state": "open",
+    "draft": false,
+    "merged": false,
+    "mergeable": true
+  },
+  "epistemic_boundary": [
+    "rerunning a workflow does not imply event payload refresh",
+    "live PR state and historical event payload are distinct observations",
+    "promotion policy must not be bypassed to compensate for stale event context",
+    "technical CI PASS does not imply promotion authorization"
+  ],
+  "claim_allowed": false,
+  "append_only": true,
+  "automatic_merge": false,
+  "manual_merge_only": true,
+  "token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_PROMOTION_EVENT_REFRESH",
+      "reason": "A fresh pull_request synchronize event with draft=false has not yet been observed by Promotion Control at the time this receipt is written.",
+      "next_verifiable_step": "Use this meaningful append-only receipt commit to generate a fresh synchronize event, then observe Promotion Control without changing its policy."
+    }
+  ],
+  "next_verifiable_step": "Observe Promotion Control on the new synchronize event and preserve any remaining human-approval requirement as a separate TOKEN_VAZIO rather than auto-merging."
+}
