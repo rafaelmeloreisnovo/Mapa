@@ -1,0 +1,53 @@
+name: wildchar-delta-manifold-gate
+
+on:
+  pull_request:
+    paths:
+      - "docs/WILDCHAR_DELTA_MANIFOLD_ROUTING_V1.md"
+      - "schemas/wildchar-delta-manifold-route.v1.schema.json"
+      - "data/routing/wildchar-delta-manifold.synthetic.v1.json"
+      - "scripts/validate_wildchar_delta_manifold.py"
+      - "tests/test_wildchar_delta_manifold.py"
+      - ".github/workflows/wildchar-delta-manifold-gate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/WILDCHAR_DELTA_MANIFOLD_ROUTING_V1.md"
+      - "schemas/wildchar-delta-manifold-route.v1.schema.json"
+      - "data/routing/wildchar-delta-manifold.synthetic.v1.json"
+      - "scripts/validate_wildchar_delta_manifold.py"
+      - "tests/test_wildchar_delta_manifold.py"
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: python3 -m py_compile scripts/validate_wildchar_delta_manifold.py tests/test_wildchar_delta_manifold.py
+      - name: Unit tests
+        run: python3 -m unittest tests/test_wildchar_delta_manifold.py -v
+      - name: Deterministic semantic gate
+        run: |
+          mkdir -p build/wildchar-delta-manifold
+          python3 scripts/validate_wildchar_delta_manifold.py \
+            data/routing/wildchar-delta-manifold.synthetic.v1.json \
+            --write-report build/wildchar-delta-manifold/report.json
+          sha256sum \
+            docs/WILDCHAR_DELTA_MANIFOLD_ROUTING_V1.md \
+            schemas/wildchar-delta-manifold-route.v1.schema.json \
+            data/routing/wildchar-delta-manifold.synthetic.v1.json \
+            scripts/validate_wildchar_delta_manifold.py \
+            tests/test_wildchar_delta_manifold.py \
+            > build/wildchar-delta-manifold/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wildchar-delta-manifold-gate
+          path: build/wildchar-delta-manifold/
