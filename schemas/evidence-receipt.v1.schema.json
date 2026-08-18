@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/evidence-receipt.v1.schema.json",
+  "title": "RAFAELIA Evidence Receipt V1",
+  "type": "object",
+  "required": [
+    "schema_version", "receipt_id", "observed_at", "claim_allowed",
+    "source_chain", "artifact", "verification", "F_ok", "F_gap",
+    "F_next", "F_esquecido", "anti_regression"
+  ],
+  "properties": {
+    "schema_version": {"const": "rafaelia.evidence-receipt/v1"},
+    "receipt_id": {"type": "string", "pattern": "^evidence:[a-z0-9][a-z0-9._:-]{4,191}$"},
+    "observed_at": {"type": "string", "minLength": 10},
+    "manifold_id": {"type": "string", "minLength": 1},
+    "route_id": {"type": "string", "minLength": 1},
+    "claim_allowed": {"const": false},
+    "source_chain": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role", "locator", "statement"],
+        "properties": {
+          "role": {"type": "string", "minLength": 1},
+          "locator": {"type": "string", "minLength": 1},
+          "statement": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["name", "publisher_checksum", "local_sha256"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "display_size": {"type": "string", "minLength": 1},
+        "publisher_checksum": {
+          "type": "object",
+          "required": ["algorithm", "value", "authority"],
+          "properties": {
+            "algorithm": {"type": "string", "minLength": 1},
+            "value": {"type": "string", "minLength": 1},
+            "authority": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        },
+        "local_sha256": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["state", "value", "reason", "next_test"],
+              "properties": {
+                "state": {"const": "TOKEN_VAZIO"},
+                "value": {"type": "null"},
+                "reason": {"type": "string", "minLength": 1},
+                "next_test": {"type": "string", "minLength": 1}
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": ["state", "value"],
+              "properties": {
+                "state": {"const": "VERIFIED"},
+                "value": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+                "byte_length": {"type": "integer", "minimum": 0}
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "boolean"}
+    },
+    "F_ok": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "F_gap": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "F_next": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "F_esquecido": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "anti_regression": {
+      "type": "object",
+      "required": ["append_only", "supersedes", "rule"],
+      "properties": {
+        "append_only": {"const": true},
+        "supersedes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "rule": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
