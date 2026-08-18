@@ -1,0 +1,48 @@
+{
+  "schema": "rafaelia.map-invariant-gateset-receipt/v1",
+  "observed_at": "2026-08-18T00:32:04Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 273,
+  "source_head_sha": "ece2fe0690ce605f2e86d4a5dc3408a42f590eb3",
+  "audit": {
+    "workflow": "Map invariant audit",
+    "run_id": 32084859639,
+    "conclusion": "success",
+    "artifact_id": 9306347210,
+    "artifact_name": "map-invariant-audit-32084859639-1",
+    "artifact_digest": "sha256:997a7a8304297fd4283ca2e47b0dd20cb3b123e727ccbe741133c29bf24e613d",
+    "receipt_sha256": "aa429be66439858a242f9d4a8f688799173b54f4de64d3d659dc84eada95f26a",
+    "invariant_count": 10,
+    "edge_count": 35,
+    "requires_edge_count": 21,
+    "max_dependency_depth": 4,
+    "orphan_count": 0,
+    "cycle_count": 0,
+    "error_count": 0,
+    "discovery_candidate_count": 192
+  },
+  "other_gates": {
+    "branch_topology": {"run_id": 32084859749, "conclusion": "success"},
+    "repository_ci": {"run_id": 32084859602, "conclusion": "success"},
+    "promotion_control": {
+      "run_id": 32084859579,
+      "conclusion": "success",
+      "result": "ALLOWED_FOR_MANUAL_MERGE",
+      "blocking_reasons": [],
+      "automatic_merge": false,
+      "manual_merge_only": true,
+      "claim_allowed": false
+    }
+  },
+  "epistemic_boundary": [
+    "gateset success != global claim",
+    "ALLOWED_FOR_MANUAL_MERGE != automatic merge",
+    "audit PASS != physical runtime proof",
+    "audit PASS != scientific validation"
+  ],
+  "append_only": true,
+  "automatic_mutation": false,
+  "automatic_merge": false,
+  "claim_allowed": false,
+  "next_verifiable_step": "Register the explicit meta-invariant and anteriority invariant with C left TOKEN_VAZIO until a new CI run observes those exact records."
+}
