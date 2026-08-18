@@ -27,6 +27,9 @@ concurrency:
   group: map-invariant-audit-${{ github.ref }}
   cancel-in-progress: false
 
+env:
+  SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
 jobs:
   invariant-audit:
     runs-on: ubuntu-24.04
@@ -57,7 +60,7 @@ jobs:
           mkdir -p artifacts/map-invariant-audit
           python scripts/audit_map_invariants.py \
             --root . \
-            --source-sha "$GITHUB_SHA" \
+            --source-sha "$SOURCE_HEAD_SHA" \
             --run-id "$GITHUB_RUN_ID" \
             --generated-at "$RAFAELIA_GENERATED_AT" \
             --output artifacts/map-invariant-audit/receipt.json
@@ -94,13 +97,14 @@ jobs:
       - name: Publish bounded audit summary
         run: |
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
-          import json
+          import json, os
           from pathlib import Path
           r = json.loads(Path('artifacts/map-invariant-audit/receipt.json').read_text())
           print('# Mapa Invariant Audit')
           print()
           print(f"- status: `{r['status']}`")
-          print(f"- source_commit_sha: `{r['source_commit_sha']}`")
+          print(f"- source_head_sha: `{r['source_commit_sha']}`")
+          print(f"- workflow_test_sha: `{os.environ['GITHUB_SHA']}`")
           print(f"- receipt_sha256: `{r['receipt_sha256']}`")
           print(f"- invariants: `{r['metrics']['invariant_count']}`")
           print(f"- edges: `{r['metrics']['edge_count']}`")
