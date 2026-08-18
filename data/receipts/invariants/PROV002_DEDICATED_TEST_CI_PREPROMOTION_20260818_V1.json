@@ -1,0 +1,20 @@
+{
+  "schema": "rafaelia.map.invariant-prepromotion-receipt/v1",
+  "invariant_id": "MAP-INV-PROV-002",
+  "phase": "DEDICATED_TEST_AND_CI_MATERIALIZED_NOT_YET_OBSERVED",
+  "tests_path": "tests/test_novoexport_anteriority_events_v1.py",
+  "workflow_path": ".github/workflows/prov002-anteriority-audit.yml",
+  "verification_vector_before_observation": {
+    "D": "PASS",
+    "I": "PASS",
+    "T": "TOKEN_VAZIO_DEDICATED_TEST_NOT_YET_OBSERVED_IN_CI",
+    "C": "TOKEN_VAZIO_DEDICATED_CI_NOT_YET_OBSERVED",
+    "X": "TOKEN_VAZIO_REAL_NOVOEXPORT_EXACT_BYTES_NOT_EXECUTED",
+    "F": "TOKEN_VAZIO_PUBLIC_LEGAL_SCIENTIFIC_JOIN_NOT_CLOSED"
+  },
+  "claim_allowed": false,
+  "automatic_promotion": false,
+  "real_novoexport_executed": false,
+  "external_public_legal_scientific_join_closed": false,
+  "next_verifiable_step": "Observe a fresh pull_request run of PROV002 anteriority audit on the branch head; only then consider promoting T/C while preserving X/F TOKEN_VAZIO."
+}
