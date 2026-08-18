@@ -87,6 +87,29 @@ jobs:
               handle.write("\n")
           PY
 
+      - name: Validate claim_allowed=false (V1-01 gate)
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import sys
+
+          with open("promotion-reviews.json", "r", encoding="utf-8") as f:
+              reviews = json.load(f)
+
+          for idx, review in enumerate(reviews):
+              body = review.get("body", "")
+              if body and ("claim_allowed" in body.lower() or "promotion" in body.lower()):
+                  try:
+                      if '"claim_allowed": true' in body or "claim_allowed=true" in body or "claim_allowed: true" in body.lower():
+                          print(f"ERROR: Review {idx} contains claim_allowed=true (DENIED)")
+                          sys.exit(1)
+                  except Exception:
+                      pass
+
+          print("✓ All reviews validated: no claim_allowed=true detected")
+          PY
+
       - name: Enforce manual promotion decision
         run: |
           set -euo pipefail
