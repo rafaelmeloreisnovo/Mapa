@@ -1,0 +1,107 @@
+{
+  "schema_version": "map.invariant-implementation-receipt/v1",
+  "receipt_id": "MAP-INVARIANT-REGISTRY-IMPLEMENTATION-20260817-V1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_branch": "main",
+  "base_commit_sha": "0fc8b9498fd24a894e5b8750839e89e540168399",
+  "implementation_branch": "feat/map-invariant-registry-v1-20260817",
+  "state": "IMPLEMENTED_PENDING_CI_OBSERVATION",
+  "claim_allowed": false,
+  "append_only": true,
+  "automatic_mutation": false,
+  "automatic_merge": false,
+  "implemented_files": [
+    {
+      "path": "schemas/map_invariant_registry.v1.schema.json",
+      "commit_sha": "6576253fdcf0d5b72a5ee0728d742ef9972cb649",
+      "role": "universal structural contract"
+    },
+    {
+      "path": "data/invariants/map_invariant_registry.v1.jsonl",
+      "commit_sha": "0b4b20bed95b3b9db21ef47f18cef64c86f1b208",
+      "role": "canonical root invariant records"
+    },
+    {
+      "path": "data/invariants/map_invariant_edges.v1.jsonl",
+      "commit_sha": "769b58254b79d97e24978d69f56964a65dcde2fc",
+      "role": "typed topology and artifact relations"
+    },
+    {
+      "path": "scripts/audit_map_invariants.py",
+      "commit_sha": "2e73ade7f06f619d64aa00d11ffaa2dc1d8906ea",
+      "role": "stdlib-only fail-closed auditor and implicit discovery"
+    },
+    {
+      "path": "tests/test_map_invariant_registry.py",
+      "commit_sha": "bdcbf41d2d7fd55929a3f100fbc89ad172229132",
+      "role": "falsifiers for orphan, cycle, drift, broken refs, TOKEN_VAZIO and false promotion"
+    },
+    {
+      "path": ".github/workflows/map-invariant-audit.yml",
+      "commit_sha": "63553cc1c6cf6b034ab56efbe962897f3bdd497b",
+      "role": "read-only CI gate and immutable per-run receipt bundle"
+    }
+  ],
+  "invariant_seed_count": 10,
+  "relation_vocabulary": [
+    "requires",
+    "contradicts",
+    "supersedes",
+    "implements",
+    "tests",
+    "falsifies",
+    "evidenced_by"
+  ],
+  "verification_vector_semantics": {
+    "D": "declaration",
+    "I": "implementation",
+    "T": "test/falsifier binding",
+    "C": "CI reproduction binding",
+    "X": "external/physical/independent evidence when applicable",
+    "F": "federated closure"
+  },
+  "urgency": {
+    "P0": [
+      "epistemic preservation",
+      "provenance/custody",
+      "topology integrity",
+      "execution/claim separation",
+      "longitudinal anti-regression",
+      "supply-chain immutability"
+    ],
+    "P1": [
+      "context/equivalence",
+      "federated memory",
+      "branch canonicalization"
+    ],
+    "P2": [
+      "scientific promotion boundary"
+    ]
+  },
+  "token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_CI_RECEIPT",
+      "reason": "The new workflow has not yet been observed on this implementation branch.",
+      "next_verifiable_step": "Open the pull request, observe the workflow run and bind the artifact/run identifiers."
+    },
+    {
+      "id": "TOKEN_VAZIO_META_INVARIANT_REGISTRY_ENTRY",
+      "reason": "The schema and auditor enforce meta-invariant identity, but a dedicated MAP-INV-META-001 record has not yet been appended to the canonical JSONL seed.",
+      "next_verifiable_step": "Append the dedicated meta-invariant after the first audit proves the seed is parseable and source-stable."
+    },
+    {
+      "id": "TOKEN_VAZIO_COMPLETE_ECOSYSTEM_COVERAGE",
+      "reason": "This implementation registers Mapa root invariants only and does not claim complete RAFAELIA cross-repository coverage.",
+      "next_verifiable_step": "Use discovery candidates and repository inventory batches to federate invariant IDs without automatic promotion."
+    }
+  ],
+  "epistemic_boundary": [
+    "implementation receipt != CI receipt",
+    "CI receipt != physical runtime proof",
+    "hash integrity != truth",
+    "same implementation reproduction != independent replication",
+    "schema conformance != scientific validation"
+  ],
+  "next_verifiable_step": "Open a PR from feat/map-invariant-registry-v1-20260817 to main, observe the fail-closed workflow, and only then append the CI evidence delta.",
+  "signature": "RAFCODE-Phi-DeltaRafaelVerboOmega"
+}
