@@ -1,0 +1,149 @@
+{
+  "schema_version": "map.invariant-discovery-triage-receipt/v1",
+  "receipt_id": "MAP-INVARIANT-DISCOVERY-TRIAGE-20260818-V1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "source_evidence": {
+    "workflow_run_id": 32084467237,
+    "artifact_id": 9306211925,
+    "artifact_digest": "sha256:429adf0e2fd0e1fe187923923dffb7b26f26178448563a0e6d77e87c56cbe065",
+    "audit_receipt_sha256": "934cb702bff7d5d91219fcfafd8fd6001e92d686bb6f8ce6999cab74c1d08e9a",
+    "source_head_sha": "fa2201c89a9117274048a82472355705465f8de1"
+  },
+  "mode": "HEURISTIC_NON_PROMOTING_TRIAGE",
+  "claim_allowed": false,
+  "automatic_registration": false,
+  "automatic_merge": false,
+  "candidate_total": 192,
+  "heuristic_boundary": [
+    "family_hint is derived from repository path/name only and is not semantic proof",
+    "urgency_hint prioritizes executable P0 control surfaces but does not prove defect severity",
+    "unclassified candidates remain TOKEN_VAZIO rather than receiving a guessed family",
+    "no candidate becomes a canonical invariant until statement, source, falsifier, relations and verification vector are reviewed"
+  ],
+  "family_hint_counts": {
+    "provenance": 28,
+    "longitudinal": 26,
+    "context": 19,
+    "execution": 15,
+    "topology": 14,
+    "scientific": 13,
+    "epistemic": 10,
+    "federation": 4,
+    "branch": 3,
+    "TOKEN_VAZIO_FAMILY_UNCLASSIFIED": 60
+  },
+  "urgency_hint_counts": {
+    "P0_CRITICAL": 37,
+    "P1_URGENT": 25,
+    "P2_NECESSARY": 78,
+    "P3_IMPORTANT": 52,
+    "P4_BACKLOG": 0
+  },
+  "p0_candidate_paths": [
+    "scripts/append_microcycle_index.py",
+    "scripts/apply_repository_inventory_batch.py",
+    "scripts/audit_latest_four_microcycles.py",
+    "scripts/compare_cross_source_evidence.py",
+    "scripts/evaluate_cross_source_gate.py",
+    "scripts/extract_novoexport_anteriority_events_v1.py",
+    "scripts/index_conversations_export.py",
+    "scripts/query_provenance_topology.py",
+    "scripts/research_intake/sources.py",
+    "scripts/run_rafaelia_adaptive_cycle.py",
+    "scripts/run_vertical_slice_v1.py",
+    "scripts/validate_bootstrap_assets_provenance.py",
+    "scripts/validate_conceptual_work_control_plane.py",
+    "scripts/validate_cross_source_records.py",
+    "scripts/validate_cross_source_registry.py",
+    "scripts/validate_drive_snapshot_catalog.py",
+    "scripts/validate_four_inks_session_registry.py",
+    "scripts/validate_gap_closure_delta_v1.py",
+    "scripts/validate_live_control_plane.py",
+    "scripts/validate_mhel_omega_bagua_manifold.py",
+    "scripts/validate_normative_graph_federated_batches.py",
+    "scripts/validate_omega_static_layout.py",
+    "scripts/validate_omega_super_root_v1.py",
+    "scripts/validate_operational_core_94.py",
+    "scripts/validate_operational_core_94_semantic_igc_v2.py",
+    "scripts/validate_orchestrator_contracts.py",
+    "scripts/validate_provenance_topology.py",
+    "scripts/validate_rafaelia_session_7d360.py",
+    "scripts/validate_repository_inventory.py",
+    "scripts/validate_repository_inventory_batch_chain.py",
+    "scripts/validate_repository_inventory_head.py",
+    "scripts/validate_research_program_topology.py",
+    "scripts/validate_rll_session_avalanche_route.py",
+    "scripts/validate_toroidal_research_federation.py",
+    "scripts/validate_zipraf_content_page_graph.py",
+    "scripts/validate_zipraf_payload_digest_u1.py",
+    "scripts/validate_zipraf_real_archive_binding.py"
+  ],
+  "p0_processing_order": [
+    {
+      "wave": 1,
+      "families": ["provenance"],
+      "reason": "Source identity and custody must be stable before any downstream invariant can cite evidence safely."
+    },
+    {
+      "wave": 2,
+      "families": ["topology", "longitudinal"],
+      "reason": "Dependency and ancestor structure must be stable before deduplication and supersession decisions."
+    },
+    {
+      "wave": 3,
+      "families": ["execution"],
+      "reason": "Execution gates can only be interpreted after source and topology bindings are stable."
+    },
+    {
+      "wave": 4,
+      "families": ["federation", "branch", "context"],
+      "reason": "Cross-repository and equivalence promotion must consume the stabilized local invariant graph."
+    },
+    {
+      "wave": 5,
+      "families": ["scientific"],
+      "reason": "Scientific promotion remains downstream of operational provenance and independent evidence requirements."
+    }
+  ],
+  "classification_contract": {
+    "allowed_outcomes": [
+      "NEW_CANONICAL_INVARIANT_CANDIDATE",
+      "IMPLEMENTS_EXISTING_INVARIANT",
+      "TESTS_EXISTING_INVARIANT",
+      "FALSIFIES_EXISTING_INVARIANT",
+      "EVIDENCES_EXISTING_INVARIANT",
+      "DUPLICATE_SEMANTIC_SURFACE",
+      "CONTRADICTS_EXISTING_INVARIANT",
+      "NOT_AN_INVARIANT",
+      "TOKEN_VAZIO_NEEDS_CONTENT_REVIEW"
+    ],
+    "promotion_requires": [
+      "canonical statement",
+      "source path and blob identity",
+      "authority",
+      "falsifier",
+      "typed relations",
+      "verification vector D/I/T/C/X/F",
+      "urgency reason",
+      "next verifiable step"
+    ]
+  },
+  "token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_FAMILY_UNCLASSIFIED_60",
+      "reason": "Path/name heuristic is insufficient to infer semantic family for 60 candidates.",
+      "next_verifiable_step": "Read candidate content in bounded batches and classify against the 10 root invariant statements."
+    },
+    {
+      "id": "TOKEN_VAZIO_DUPLICATION_MATRIX",
+      "reason": "Semantic equivalence between the 192 candidates and the 10 seed invariants has not yet been computed.",
+      "next_verifiable_step": "Build normalized statement signatures and source-role fingerprints before appending any new invariant IDs."
+    },
+    {
+      "id": "TOKEN_VAZIO_META_INVARIANT_REGISTRY_ENTRY",
+      "reason": "Meta-invariant behavior is implemented by schema/auditor but dedicated canonical record remains intentionally pending the first deduplication wave.",
+      "next_verifiable_step": "Append MAP-INV-META-001 only after its source role and relations are classified against the discovery set."
+    }
+  ],
+  "next_verifiable_step": "Process Wave 1 provenance candidates in bounded batches, classify each against MAP-INV-PROV-001 and MAP-INV-EPI-001, and emit an append-only delta receipt before changing the canonical registry."
+}
