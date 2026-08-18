@@ -9,6 +9,7 @@ from pathlib import Path
 from scripts.validate_wildchar_delta_manifold import validate
 
 FIXTURE = Path("data/routing/wildchar-delta-manifold.synthetic.v1.json")
+REAL_FIXTURE = Path("data/routing/quantum-echoes-otoc-2025.v1.json")
 
 
 class WildcharDeltaManifoldTests(unittest.TestCase):
@@ -21,6 +22,15 @@ class WildcharDeltaManifoldTests(unittest.TestCase):
         self.assertEqual([], defects)
         self.assertEqual("PASS", report["status"])
         self.assertEqual(0, report["claim_allowed_count"])
+
+    def test_real_quantum_route_passes_and_advances_next_step(self) -> None:
+        doc = json.loads(REAL_FIXTURE.read_text(encoding="utf-8"))
+        defects, report = validate(doc)
+        self.assertEqual([], defects)
+        self.assertEqual("PASS", report["status"])
+        self.assertEqual(3, report["real_route_count"])
+        self.assertEqual(7, report["wildchar_candidate_count"])
+        self.assertIn("highest-priority open F_next/falsifier", report["next_verifiable_step"])
 
     def test_wildchar_cannot_promote_directly(self) -> None:
         doc = copy.deepcopy(self.base)
