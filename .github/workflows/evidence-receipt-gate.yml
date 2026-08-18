@@ -1,0 +1,56 @@
+name: evidence-receipt-gate
+
+on:
+  pull_request:
+    paths:
+      - "schemas/evidence-receipt.v1.schema.json"
+      - "data/routing/evidence/**"
+      - "scripts/validate_evidence_receipt.py"
+      - "tests/test_evidence_receipt.py"
+      - ".github/workflows/evidence-receipt-gate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "schemas/evidence-receipt.v1.schema.json"
+      - "data/routing/evidence/**"
+      - "scripts/validate_evidence_receipt.py"
+      - "tests/test_evidence_receipt.py"
+      - ".github/workflows/evidence-receipt-gate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile validator and tests
+        run: python3 -m py_compile scripts/validate_evidence_receipt.py tests/test_evidence_receipt.py
+      - name: Unit tests
+        run: python3 -m unittest tests/test_evidence_receipt.py -v
+      - name: Validate every evidence receipt
+        run: |
+          mkdir -p build/evidence-receipts
+          count=0
+          while IFS= read -r receipt; do
+            count=$((count + 1))
+            stem="$(basename "$receipt" .json)"
+            python3 scripts/validate_evidence_receipt.py "$receipt" \
+              --write-report "build/evidence-receipts/${stem}.report.json"
+          done < <(find data/routing/evidence -type f -name '*.json' -print | sort)
+          test "$count" -gt 0
+          sha256sum \
+            schemas/evidence-receipt.v1.schema.json \
+            scripts/validate_evidence_receipt.py \
+            tests/test_evidence_receipt.py \
+            $(find data/routing/evidence -type f -name '*.json' -print | sort) \
+            > build/evidence-receipts/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evidence-receipt-gate
+          path: build/evidence-receipts/
