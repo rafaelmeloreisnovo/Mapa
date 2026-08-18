@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/wildchar-delta-manifold-route.v1.schema.json",
+  "title": "RAFAELIA WILDCHAR Delta Manifold Routing V1",
+  "type": "object",
+  "required": ["schema_version", "manifold_id", "claim_allowed", "wildchar", "axes", "route_questions", "routes", "anti_regression"],
+  "properties": {
+    "schema_version": {"const": "rafaelia.wildchar-delta-manifold/v1"},
+    "manifold_id": {"type": "string", "pattern": "^dm:[a-z0-9][a-z0-9._:-]{4,127}$"},
+    "claim_allowed": {"type": "boolean"},
+    "wildchar": {
+      "type": "object",
+      "required": ["N", "cardinality", "role", "numeric_weights_state", "lenses"],
+      "properties": {
+        "N": {"const": "*"},
+        "cardinality": {"const": "open"},
+        "role": {"const": "candidate_space_expansion"},
+        "numeric_weights_state": {"const": "TOKEN_VAZIO_CALIBRATION"},
+        "lenses": {
+          "type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true,
+          "items": {"enum": ["direct", "inverse", "boundary", "counterexample", "analogy_parabola", "adjacent_domain_transfer", "unknown_unknown"]}
+        }
+      },
+      "additionalProperties": false
+    },
+    "axes": {
+      "type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true,
+      "items": {"enum": ["concept", "evidence", "provenance", "falsifier_status", "gap_unknown", "urgency_necessity", "next_providence_action"]}
+    },
+    "route_questions": {"type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true, "items": {"type": "string", "minLength": 4}},
+    "routes": {"type": "array", "items": {"$ref": "#/$defs/route"}},
+    "anti_regression": {"type": "array", "items": {"$ref": "#/$defs/event"}}
+  },
+  "$defs": {
+    "tokenVazio": {
+      "type": "object",
+      "required": ["field", "reason", "next_test"],
+      "properties": {
+        "field": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "next_test": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source_type", "locator", "observed_at", "evidence_role"],
+      "properties": {
+        "source_type": {"enum": ["github", "drive", "local", "conversation", "paper", "web", "dataset", "instrument", "other"]},
+        "locator": {"type": "string", "minLength": 1},
+        "observed_at": {"type": "string", "minLength": 4},
+        "evidence_role": {"enum": ["primary", "secondary", "context", "counterevidence", "provenance_only"]}
+      },
+      "additionalProperties": false
+    },
+    "action": {
+      "type": "object",
+      "required": ["action", "verification", "status"],
+      "properties": {
+        "action": {"type": "string", "minLength": 1},
+        "verification": {"type": "string", "minLength": 1},
+        "status": {"enum": ["OPEN", "BLOCKED", "DONE", "TOKEN_VAZIO"]}
+      },
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "required": ["id", "kind", "title", "origin", "literal_claim", "epistemic_state", "claim_allowed", "provenance", "evidence_for", "evidence_against", "falsifier", "F_gap", "F_next", "F_esquecido", "F_urgencia", "F_necessidade", "F_providencia_operacional", "F_otimizar", "F_evolucao", "F_so_sei_q_nada_sei", "token_vazio", "priority", "supersedes", "invariants"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^route:[a-z0-9][a-z0-9._:-]{3,127}$"},
+        "kind": {"enum": ["claim", "hypothesis", "question", "analogy", "parabola", "counterexample", "boundary_case"]},
+        "title": {"type": "string", "minLength": 1},
+        "origin": {"enum": ["DIRECT", "WILDCHAR", "IMPORTED", "DERIVED"]},
+        "literal_claim": {"type": "boolean"},
+        "epistemic_state": {"enum": ["FATO", "VERIFIED_LIMITED", "HIPOTESE", "TOKEN_VAZIO", "REFUTED", "SUPERSEDED"]},
+        "claim_allowed": {"type": "boolean"},
+        "provenance": {"type": "array", "items": {"$ref": "#/$defs/provenance"}},
+        "evidence_for": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "evidence_against": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "falsifier": {"type": "string", "minLength": 1},
+        "F_gap": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "F_next": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "F_esquecido": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "F_urgencia": {"enum": ["NONE", "LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+        "F_necessidade": {"enum": ["OPTIONAL", "IMPORTANT", "NECESSARY", "BLOCKING"]},
+        "F_providencia_operacional": {"type": "array", "items": {"$ref": "#/$defs/action"}},
+        "F_otimizar": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "F_evolucao": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "F_so_sei_q_nada_sei": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "token_vazio": {"type": "array", "items": {"$ref": "#/$defs/tokenVazio"}},
+        "priority": {"enum": ["P0_CRITICAL", "P1_URGENT", "P2_NECESSARY", "P3_IMPORTANT", "P4_BACKLOG"]},
+        "supersedes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "invariants": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "required": ["seq", "route_id", "event", "reason"],
+      "properties": {
+        "seq": {"type": "integer", "minimum": 1},
+        "route_id": {"type": "string", "minLength": 1},
+        "event": {"enum": ["CREATED", "OBSERVED", "FALSIFIED", "CORRECTED", "SUPERSEDED", "VERIFIED_LIMITED", "CLOSED_GAP", "REOPENED_GAP"]},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
