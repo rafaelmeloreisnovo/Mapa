@@ -51,7 +51,7 @@ class InvariantsValidator:
             immutability_markers = [
                 "entry_sha256", "previous_entry_sha256", "observed_at_utc", "observed_at",
                 "receipt_id", "manifest_git_blob_sha1", "manifest_commit_sha",
-                "cycle_id", "chain_continuity", "created_at"
+                "cycle_id", "chain_continuity", "created_at", "event_id", "timestamp"
             ]
             for receipt in receipt_files[:3]:  # Sample check
                 try:
