@@ -1,0 +1,142 @@
+{
+  "schema": "rafaelia.omega-federated-cycle.v1",
+  "cycle_id": "OMEGA-20260819T1541BRT",
+  "observed_at": "2026-08-19T15:41:43-03:00",
+  "claim_allowed": false,
+  "predecessor": "omega-federated-cycle-20260819T1443BRT.v1.json",
+  "sources": {
+    "mapa_pr": 290,
+    "mapa_branch": "audit/omega-codeql-differential-20260819",
+    "rafgittools_pr364": {
+      "head_sha": "38375a3ce5760fca528f66963d8c3b9aa50e6d10",
+      "codeql_run": 32277879988,
+      "ci_run": 32277879966
+    },
+    "rafgittools_pr362": {
+      "head_sha": "328a20332794b249bec69af74da0044c6bbdcb35",
+      "state": "OPEN_DRAFT"
+    },
+    "termux_latest_observed": "fb18bbc4794dace1cc3480519681191f83152af6",
+    "rll_latest_observed": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe",
+    "drive_method_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "drive_navigation_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "drive_context_index_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+    "drive_catalog_protocol_id": "1yJf-606MW0BnTALCx1XLmQ9oM8386_TKK6mKJLJNzr8"
+  },
+  "F_ok": [
+    "CodeQL Advanced run 32277879988 completed SUCCESS",
+    "CodeQL Analyze(actions) completed SUCCESS",
+    "CodeQL Analyze(java-kotlin) completed JDK17, Android SDK, local.properties, CodeQL init, manual build and analysis SUCCESS",
+    "Security Scan, PR Validation, Internal Validation, Android Client Build and rafaelia-block1 completed SUCCESS on PR364 exact head",
+    "CI Android build job completed SUCCESS",
+    "PR364 evidence update was appended to the PR conversation",
+    "Drive canonical method, Master Navigation, Context Index Omega and continuous catalog protocol were reconciled in read mode",
+    "RLL and Termux showed no newer owner-source evidence than the previously gated commits"
+  ],
+  "F_gap": [
+    "CI canonical coherence remains FAILURE because PR364 merge-ref baseline does not contain open PR362 unittest-discovery correction",
+    "Code Coverage remains FAILURE as an independent coordinate",
+    "Source Gap Audit remains FAILURE as an independent baseline-debt coordinate",
+    "Performance Metrics remains TOKEN_VAZIO_PENDING/QUEUED",
+    "Termux physical device runtime remains TOKEN_VAZIO",
+    "RLL new scientific execution beyond Omega7 remains TOKEN_VAZIO",
+    "Drive append capability remains TOKEN_VAZIO_CAPABILITY"
+  ],
+  "F_esquecido": [
+    "A pull-request merge ref can exclude corrections that exist only in another open PR even when both share the same base.",
+    "CodeQL scoped success must not be hidden by an unrelated coherence failure, and coherence failure must not be attributed to CodeQL without surface intersection.",
+    "PR dependency/order is itself lifecycle/provenance data and must be resolved before interpreting global CI state."
+  ],
+  "F_next": [
+    "Preserve PR362 terminal scoped evidence independently",
+    "Run canonical coherence on an authorized baseline or non-destructive stacked test that contains PR362 plus PR364 and verify the 3 gap-closure tests are discovered",
+    "Decompose Code Coverage failure by job/step before any correction",
+    "Keep Source Gap baseline debt separate from PR364 regression attribution",
+    "Re-query Performance Metrics until terminal evidence exists"
+  ],
+  "token_vazio_new": [
+    "TOKEN_VAZIO_PR362_PR364_COMBINED_COHERENCE",
+    "TOKEN_VAZIO_PERFORMANCE_METRICS_TERMINAL"
+  ],
+  "token_vazio_resolved": [
+    "TOKEN_VAZIO_PR364_CODEQL_ADVANCED_TERMINAL",
+    "TOKEN_VAZIO_PR364_JAVA_KOTLIN_MANUAL_BUILD_ANALYSIS"
+  ],
+  "uncertainty": {
+    "before": {
+      "codeql_manual_build_probe": "PENDING",
+      "java_kotlin_analysis": "TOKEN_VAZIO",
+      "ci_failure_relationship": "AMBIGUOUS"
+    },
+    "after": {
+      "codeql_manual_build_probe": "EVIDENCED_SCOPED_SUCCESS",
+      "java_kotlin_analysis": "EVIDENCED_SCOPED_SUCCESS",
+      "ci_failure_relationship": "BASELINE_ORDERING_DEPENDENCY_IDENTIFIED",
+      "executor_wide_assurance": "REVALIDATION_REQUIRED"
+    }
+  },
+  "lifecycle_deltas": [
+    {
+      "component": "rafgittools:codeql-advanced-java-kotlin",
+      "event": "MANUAL_ANDROID_BUILD_AND_CODEQL_ANALYSIS_SUCCESS",
+      "limit_type": "EVENT_TRIGGERED",
+      "maintenance_actions_delta": 1,
+      "corrective_actions_delta": 0,
+      "incident_count_delta": 0,
+      "near_miss_count_delta": 0,
+      "last_verified_at": "2026-08-19T16:52Z_SCOPED_RUN_32277879988",
+      "next_review_gate": "material workflow/build-context change"
+    },
+    {
+      "component": "rafgittools:pr-merge-ref-baseline-ordering",
+      "event": "OPEN_DEPENDENCY_PR362_NOT_PRESENT_IN_PR364_MERGE_REF",
+      "limit_type": "CONDITION_BASED",
+      "maintenance_actions_delta": 1,
+      "corrective_actions_delta": 0,
+      "incident_count_delta": 0,
+      "near_miss_count_delta": 1,
+      "last_verified_at": "TOKEN_VAZIO_COMBINED_BASELINE",
+      "next_review_gate": "PR362_PR364_COMBINED_COHERENCE"
+    }
+  ],
+  "impact_radius": {
+    "direct": [
+      "RafGitTools CodeQL Advanced/java-kotlin",
+      "RafGitTools canonical coherence gate"
+    ],
+    "potential": [
+      "executor-wide assurance",
+      "federated receipt classification",
+      "promotion/review boundary"
+    ],
+    "routes": ["R5", "R6", "R11", "R12"]
+  },
+  "actions": {
+    "detective": "resolved CodeQL jobs/steps and CI failure logs on the PR364 lineage",
+    "preventive": "recorded PR dependency ordering before global state classification",
+    "precautionary": "claim_allowed=false; no merge, release or executor-wide promotion",
+    "adaptive": "split successful CodeQL coordinate from unrelated coherence baseline coordinate",
+    "corrective": "no new code correction; reuse existing PR362 correction rather than duplicate it",
+    "maintenance": "baseline/order revalidation gate opened",
+    "incident_investigation": "classified semantic near-miss, not runtime incident",
+    "safety_assurance": "accepted scoped CodeQL success only with observable steps",
+    "learning_anti_recurrence": "future PR evidence resolver must include head SHA, merge ref and open dependency graph"
+  },
+  "routes_promoted": [
+    "R5_CODEQL_SCOPED_EVIDENCE",
+    "R11_PARTIAL_STATE_TRANSITION"
+  ],
+  "routes_blocked": [
+    "R6_EXECUTOR_WIDE_ASSURANCE",
+    "R12_GLOBAL_PROMOTION"
+  ],
+  "recommendations_open": [
+    "model stacked/open PR dependencies explicitly in evidence acquisition",
+    "close coherence on baseline containing PR362",
+    "decompose Code Coverage independently",
+    "obtain terminal Performance Metrics evidence"
+  ],
+  "recommendations_closed": [
+    "PR364 CodeQL java-kotlin manual-build falsification probe"
+  ]
+}

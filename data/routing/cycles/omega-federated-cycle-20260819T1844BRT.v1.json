@@ -1,0 +1,159 @@
+{
+  "schema": "rafaelia.omega-federated-cycle.v1",
+  "cycle_id": "OMEGA-20260819T1844BRT",
+  "observed_at": "2026-08-19T18:44:16-03:00",
+  "mode": "APPEND_ONLY_EVIDENCE_FIRST",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "NO_SILENT_REGRESSION"
+  ],
+  "sources": [
+    {"repo":"rafaelmeloreisnovo/RafGitTools","pr":365,"head":"d2ee47fda94a14d77dc25008e9c49188f0521c67"},
+    {"repo":"rafaelmeloreisnovo/RafGitTools","workflow_run":32289232204,"name":"Code Coverage","conclusion":"failure"},
+    {"repo":"rafaelmeloreisnovo/RafGitTools","workflow_run":32289232123,"name":"CI","conclusion":"failure"},
+    {"repo":"rafaelmeloreisnovo/RafGitTools","workflow_run":32289232306,"name":"CodeQL Advanced","conclusion":"failure"},
+    {"repo":"rafaelmeloreisnovo/termux-app-rafacodephi","head":"fb18bbc4794dace1cc3480519681191f83152af6"},
+    {"repo":"instituto-Rafael/relativity-living-light","head":"8bd41005d63b2d83c4bcc313cc4900ff981cf8fe"},
+    {"drive_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","role":"CANONICAL_METHOD"},
+    {"drive_id":"1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y","role":"MASTER_NAVIGATION"},
+    {"drive_id":"1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk","role":"OMEGA_RECONSTRUCTION_INDEX"}
+  ],
+  "F_ok": [
+    "PR365 exact-head PR Validation SUCCESS",
+    "PR365 exact-head Android Client Build SUCCESS",
+    "PR365 exact-head Internal Validation SUCCESS",
+    "Coverage unit-test step SUCCESS",
+    "Coverage capability detector SUCCESS",
+    "Coverage report generation correctly SKIPPED when capability absent",
+    "Coverage artifact upload correctly SKIPPED when artifact absent",
+    "Coverage evidence gate deliberately FAIL-CLOSED",
+    "CI Android build/test/lint/APK path SUCCESS before independent coherence gate",
+    "Drive canonical method and navigation anchors readable",
+    "Termux latest observed source remains governance/preflight merge; no new physical-runtime receipt",
+    "RLL latest observed source remains Omega7 claim-gated bridge; no new scientific promotion evidence"
+  ],
+  "F_gap": [
+    {
+      "gap_id":"RGT_COVERAGE_PRODUCER_NOT_CONFIGURED",
+      "state":"TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+      "affected_routes":["R5","R6","R11","R12"],
+      "failure_mode":"Coverage capability absent; detector is functioning fail-closed",
+      "falsifier":"A configured coverage task produces a non-empty report artifact and terminal receipt",
+      "closure_gate":"COVERAGE_PRODUCER_REPORT_RECEIPT"
+    },
+    {
+      "gap_id":"RGT_COHERENCE_BASELINE_ORDERING",
+      "state":"BLOCKED_BY_OPEN_PR_DEPENDENCY",
+      "affected_routes":["R5","R6","R11"],
+      "failure_mode":"Canonical coherence gate reaches unittest discovery and runs 0 tests on PR365 merge-ref; PR362 contains the scoped discovery correction but is not in PR365 baseline",
+      "falsifier":"Combined baseline containing PR362 correction still yields 0 tests",
+      "closure_gate":"COMBINED_BASELINE_COHERENCE_RECEIPT"
+    },
+    {
+      "gap_id":"RGT_CODEQL_JAVA_KOTLIN_CONTEXT",
+      "state":"REVALIDATION_REQUIRED",
+      "affected_routes":["R5","R6","R11","R12"],
+      "failure_mode":"CodeQL Advanced java-kotlin analysis fails on PR365 while actions lane succeeds; PR365 does not contain PR364 manual Android build experiment",
+      "falsifier":"Matched explicit Android/JDK build context still fails at the same analysis boundary",
+      "closure_gate":"CODEQL_MATCHED_CONTEXT_TERMINAL_RECEIPT"
+    },
+    {
+      "gap_id":"GITHUB_ACTIONS_NODE24_RUNTIME_TRANSITION",
+      "state":"EVENT_TRIGGERED_REVALIDATION_REQUIRED",
+      "affected_routes":["R5","R6","R11"],
+      "failure_mode":"Hosted runner reports actions targeting Node 20 are being forced onto Node 24",
+      "evidence_for":["CI job log explicitly reports Node 20 deprecation and Node 24 forced execution for checkout/setup-python/upload-artifact"],
+      "evidence_against":["No causal link to current CI failures has been demonstrated"],
+      "falsifier":"Representative critical workflows execute under the new runtime with equivalent or explicitly accepted behavior and receipts",
+      "closure_gate":"NODE24_ACTION_CHAIN_REVALIDATION"
+    },
+    {
+      "gap_id":"TERMUX_PHYSICAL_RUNTIME",
+      "state":"TOKEN_VAZIO",
+      "affected_routes":["R7","R11"],
+      "closure_gate":"APK_INSTALL_LAUNCH_LOGCAT_DEVICE_RECEIPT"
+    },
+    {
+      "gap_id":"RLL_OMEGA7_EXECUTION",
+      "state":"TOKEN_VAZIO",
+      "affected_routes":["R8","R11","R12"],
+      "closure_gate":"OMEGA7_G1_G4_EXECUTION_RECEIPT"
+    },
+    {
+      "gap_id":"DRIVE_APPEND_CAPABILITY",
+      "state":"TOKEN_VAZIO_CAPABILITY",
+      "affected_routes":["R9","R11"],
+      "closure_gate":"CONNECTED_APPEND_WRITE_RECEIPT"
+    }
+  ],
+  "component_lifecycle_deltas": [
+    {
+      "component":"rafgittools:coverage-evidence-detector",
+      "event":"FAIL_CLOSED_BEHAVIOR_REOBSERVED",
+      "limit_type":"EVENT_TRIGGERED",
+      "incident_count":0,
+      "near_miss_count":1,
+      "maintenance_actions":1,
+      "corrective_actions":1,
+      "last_verified_at":"workflow_run:32289232204",
+      "next_review_gate":"material coverage workflow or producer change"
+    },
+    {
+      "component":"rafgittools:canonical-coherence-test-runner",
+      "event":"ZERO_TEST_BASELINE_REPRODUCED",
+      "limit_type":"EVENT_TRIGGERED",
+      "incident_count":0,
+      "near_miss_count":1,
+      "last_verified_at":"TOKEN_VAZIO_COMBINED_BASELINE_REQUIRED",
+      "next_review_gate":"PR362 correction combined with PR365 baseline"
+    },
+    {
+      "component":"rafgittools:github-actions-node-runtime-chain",
+      "event":"NODE20_TO_NODE24_FORCED_RUNTIME_OBSERVED",
+      "limit_type":"EVENT_TRIGGERED",
+      "incident_count":0,
+      "near_miss_count":0,
+      "maintenance_actions":1,
+      "last_verified_at":"TOKEN_VAZIO_GLOBAL_COMPATIBILITY",
+      "next_review_gate":"NODE24_ACTION_CHAIN_REVALIDATION"
+    }
+  ],
+  "impact_radius": {
+    "direct":["coverage detector","canonical coherence runner","CodeQL java-kotlin lane","GitHub Actions runtime chain"],
+    "downstream":["executor assurance","cross-repo evidence semantics","promotion boundary","Omega evidence classification"],
+    "causality_boundary":"Potential propagation is tracked; no unobserved causal link is promoted."
+  },
+  "actions": {
+    "DETECTIVE":"Resolved exact-head workflow runs, jobs and coherence logs; separated lane outcomes.",
+    "PREVENTIVE":"Preserved fail-closed coverage boundary and no inherited assurance across runtime/baseline changes.",
+    "PRECAUTIONARY":"claim_allowed=false; no merge/release/runtime/scientific promotion.",
+    "ADAPTIVE":"Reclassified CI as vector-valued and added Node24 runtime as lifecycle exposure.",
+    "CORRECTIVE":"No new source correction in this cycle; existing PR362/364/365 corrections remain isolated and reviewable.",
+    "MAINTENANCE":"Marked coverage producer, coherence baseline dependency and Node24 action chain for revalidation.",
+    "INCIDENT_INVESTIGATION":"No consumed incident proven; near-miss semantics remain scoped to evidence publication/detection risk.",
+    "SAFETY_ASSURANCE":"Verified coverage fail-closed by terminal steps and inspected exact coherence failure logs.",
+    "LEARNING_ANTI_RECURRENCE":"Detector/runtime/baseline are first-class lifecycle components; partial PASS cannot promote global state."
+  },
+  "uncertainty_delta": {
+    "before":["Coverage red could be misread as detector defect","CI red could be misread as Android build regression","Node24 runtime exposure not bound to exact log in this cycle"],
+    "after":["Coverage red classified as expected fail-closed with unit tests PASS","Android build/test/lint/APK path separated from coherence failure","0-test mechanism reproduced on exact merge-ref","Node24 forced runtime directly evidenced in CI log"],
+    "direction":"REDUCED"
+  },
+  "F_esquecido": [
+    "Workflow failure is not a scalar system verdict",
+    "Fail-closed failure can be correct behavior",
+    "Open PR fixes are not inherited by sibling PR merge-refs",
+    "The runtime of the inspection instrument is itself a lifecycle dependency"
+  ],
+  "F_next": [
+    "Run combined baseline containing PR362 discovery correction plus PR365 coverage boundary and require coherence to execute expected tests",
+    "Observe or execute PR364 matched-context CodeQL java-kotlin terminal receipt and compare with PR365 lane",
+    "Establish a real coverage producer or explicitly keep coverage as TOKEN_VAZIO with no percentage claim",
+    "Revalidate critical GitHub Actions chain under Node24 and record exact action SHA/runtime receipts",
+    "Obtain Termux physical APK install/launch/logcat receipt",
+    "Execute RLL Omega7 G1-G4 with hashes/artifacts before any scientific promotion"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "rafaelia.operational-gap.v1",
+  "gap_id": "RGT-COVERAGE-EVIDENCE-BOUNDARY-20260819T1541BRT",
+  "observed_at": "2026-08-19T15:41:43-03:00",
+  "claim_allowed": false,
+  "owner": "rafaelmeloreisnovo/RafGitTools",
+  "source_pointer": {
+    "pr": 364,
+    "run_id": 32277880224,
+    "job_id": 96149450858,
+    "corrective_pr": 365,
+    "corrective_head": "d2ee47fda94a14d77dc25008e9c49188f0521c67"
+  },
+  "affected_routes": ["R5", "R6", "R11", "R12"],
+  "state": "NEAR_MISS_SEMANTIC_BOUNDARY_CORRECTION_PREPARED",
+  "failure_mode": "UNIT_TEST_PASS_AND_MISSING_COVERAGE_REPORT_COEXIST_WITH_FALSE_REPORT-AVAILABLE_COMMENT_PATH",
+  "evidence_for": [
+    "testDevDebugUnitTest completed BUILD SUCCESSFUL",
+    "jacocoTestReport task is absent",
+    "no coverage files were found for upload",
+    "workflow attempted to publish that coverage reports were generated and available",
+    "comment publication failed with HTTP 403 because the workflow token lacked issue/PR write permission"
+  ],
+  "evidence_against": [
+    "No evidence that a coverage percentage was actually computed",
+    "No coverage artifact exists in the observed run",
+    "No source-code regression is implied by the 403 comment failure"
+  ],
+  "uncertainty_state": {
+    "before": "GENERIC_CODE_COVERAGE_FAILURE",
+    "after": "UNIT_TEST_PASS; COVERAGE_NOT_CONFIGURED; COMMENT_PERMISSION_FAILURE; SEMANTIC_BOUNDARY_FIX_PREPARED"
+  },
+  "urgency": "P1",
+  "necessity": "Prevent nonexistent coverage evidence from being described as generated evidence and make the coverage gate fail for the actual missing evidence condition.",
+  "impact": "high on evidence semantics; low on application runtime",
+  "detectability": "high with job steps/logs",
+  "recurrence_risk": "medium until PR365 is verified and an actual coverage producer is separately implemented",
+  "falsifier": "If PR365 still emits a generated/available coverage claim without report files, the semantic-boundary correction fails.",
+  "next_probe": [
+    "Observe PR365 exact-head workflow execution",
+    "Verify unit tests execute independently",
+    "Verify missing JaCoCo capability yields TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+    "Verify no nonexistent artifact is uploaded or described as available",
+    "Only after a real coverage producer exists, record percentage/report/hash evidence"
+  ],
+  "mitigation": [
+    "do not add broader GitHub token permissions merely to publish an unsupported claim",
+    "separate test execution, coverage capability, report emission and publication into distinct evidence states",
+    "fail closed when coverage evidence is unavailable"
+  ],
+  "closure_gate": "PR365_EXACT_HEAD_TRUTHFUL_COVERAGE_BOUNDARY",
+  "review_or_expiry": "revalidate on coverage workflow, Gradle coverage plugin/task or token-permission change",
+  "lifecycle": {
+    "component": "rafgittools:coverage-evidence-detector",
+    "limit_type": "EVENT_TRIGGERED",
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": 1,
+    "builds": 1,
+    "test_cycles": 1,
+    "deployments": 0,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "evidence_age": "TOKEN_VAZIO",
+    "provenance_age": "TOKEN_VAZIO",
+    "last_verified_at": "TOKEN_VAZIO_PR365_TERMINAL",
+    "next_review_gate": "PR365_EXACT_HEAD",
+    "retirement_revalidation_criteria": "coverage workflow or producer changes"
+  },
+  "impact_radius": [
+    "unit-test evidence",
+    "coverage capability",
+    "coverage artifact",
+    "PR/report publication",
+    "executor-wide assurance",
+    "federated evidence classification"
+  ],
+  "actions": {
+    "detective": "decomposed workflow into test, report generation, artifact and comment steps",
+    "preventive": "removed incentive to grant permissions only to publish unsupported evidence",
+    "precautionary": "claim_allowed=false; coverage stays TOKEN_VAZIO when absent",
+    "adaptive": "coverage is represented as a vector instead of workflow boolean",
+    "corrective": "PR365 changes workflow semantics to fail closed and publish only observed state",
+    "maintenance": "coverage detector entered lifecycle",
+    "incident_investigation": "semantic near-miss only; no runtime incident",
+    "safety_assurance": "PR365 terminal execution required",
+    "learning_anti_recurrence": "unit test PASS != coverage report != coverage claim"
+  }
+}

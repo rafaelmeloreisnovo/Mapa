@@ -1,0 +1,107 @@
+{
+  "schema": "RAFAELIA_DELTA_OMEGA_V1",
+  "cycle_id": "OMEGA-20260819T1348BRT",
+  "observed_at": "2026-08-19T13:48:00-03:00",
+  "predecessor": "2c41a7c13f90fe7bd2bb57bed9774137779d06b0",
+  "claim_allowed": false,
+  "state": "VERIFIED_LIMITED",
+  "sources": [
+    "rafaelmeloreisnovo/RafGitTools@9c0be86c366dd98380dbf836d8965a3eef882ecb",
+    "RafGitTools Security Scan run 32272600555",
+    "RafGitTools CodeQL Advanced run 32272600430",
+    "RafGitTools draft PR364@38375a3ce5760fca528f66963d8c3b9aa50e6d10",
+    "Mapa main@2c41a7c13f90fe7bd2bb57bed9774137779d06b0"
+  ],
+  "F_ok": [
+    "PR363 exact-head Security Scan is terminal SUCCESS",
+    "Trivy dependency vulnerability scanner executed and reached SARIF upload",
+    "Security Scan CodeQL completed under explicit Android/JDK/Gradle build path",
+    "CodeQL assurance decomposed by workflow/lane instead of a single boolean",
+    "Draft PR364 created as a reversible falsification probe for java-kotlin manual build"
+  ],
+  "F_gap": [
+    "CodeQL Advanced java-kotlin root cause remains TOKEN_VAZIO until PR364 terminal evidence",
+    "A successful scanner execution does not by itself establish zero vulnerabilities; findings content remains separate evidence",
+    "Source Gap baseline debt remains independently open unless a fresh baseline comparison closes it",
+    "physical Termux/device runtime remains TOKEN_VAZIO absent a new physical receipt",
+    "RLL scientific claims remain unpromoted absent new data/evidence",
+    "Drive append remains TOKEN_VAZIO_CAPABILITY when only read/search operations are available"
+  ],
+  "F_esquecido": [
+    "scanner execution != zero findings",
+    "CodeQL success in one workflow != CodeQL Advanced global success",
+    "same-source differential workflows are high-information controls for setup/build-path hypotheses",
+    "detectors/scanners and their build preconditions are lifecycle-managed components"
+  ],
+  "tokens_vazios_resolved": [
+    "TOKEN_VAZIO_TRIVY_SCAN_NOT_REACHED -> EVIDENCED_SCOPED_EXECUTION",
+    "TOKEN_VAZIO_SECURITY_SCAN_CODEQL_NOT_REACHED -> EVIDENCED_SCOPED"
+  ],
+  "tokens_vazios_new_or_open": [
+    "TOKEN_VAZIO_CODEQL_ADVANCED_JAVA_KOTLIN_ROOT_CAUSE",
+    "TOKEN_VAZIO_PR364_TERMINAL_RECEIPT",
+    "TOKEN_VAZIO_TRIVY_FINDINGS_CONTENT_IF_NOT_SEPARATELY_OBSERVED",
+    "TOKEN_VAZIO_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_DRIVE_APPEND_CAPABILITY"
+  ],
+  "uncertainty_before_after": {
+    "trivy_execution": ["NOT_REACHED/PENDING", "EVIDENCED_SCOPED_EXECUTION"],
+    "security_scan_codeql": ["NOT_REACHED/AMBIGUOUS", "EVIDENCED_SCOPED"],
+    "codeql_advanced_failure": ["GENERIC_CODEQL_FAILURE", "JAVA_KOTLIN_LANE_DIFFERENTIAL_WITH_MATCHED_SUCCESS_CONTROL"],
+    "codeql_root_cause": ["UNKNOWN", "TOKEN_VAZIO_WITH_AUTOBUILD_SETUP_HYPOTHESIS_UNDER_TEST"]
+  },
+  "hazards": {
+    "closed_or_mitigated": [
+      "Trivy action reference prevented scan execution; corrected reference now has exact-head execution evidence"
+    ],
+    "open": [
+      "Potential semantic overpromotion of CodeQL/security assurance across independent lanes"
+    ]
+  },
+  "lifecycle_deltas": [
+    {
+      "component": "rafgittools:dependency-vulnerability-scanner",
+      "event": "CORRECTIVE_ACTION_EXECUTED_AND_SCANNER_REACHED_OUTPUT_UPLOAD",
+      "class": ["CORRECTIVE", "MAINTENANCE", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+      "next_review_gate": "revalidate on Trivy/action/workflow dependency change"
+    },
+    {
+      "component": "rafgittools:codeql-advanced-java-kotlin",
+      "event": "LANE_SPECIFIC_FAILURE_WITH_SUCCESSFUL_MATCHED_SOURCE_CONTROL",
+      "class": ["DETECTIVE", "PRECAUTIONARY", "ADAPTIVE", "CORRECTIVE", "MAINTENANCE", "SAFETY_ASSURANCE"],
+      "next_review_gate": "PR364_CODEQL_JAVA_KOTLIN_TERMINAL_RECEIPT"
+    }
+  ],
+  "impact_radius": {
+    "routes": ["R5", "R6", "R11", "R12"],
+    "components": [
+      "dependency vulnerability scan",
+      "CodeQL Security Scan lane",
+      "CodeQL Advanced java-kotlin lane",
+      "RafGitTools executor security assurance",
+      "federated review/promotion boundary"
+    ]
+  },
+  "routes_promoted": [
+    "R5 scoped scanner evidence improved",
+    "R11 evidence classification improved through lane decomposition"
+  ],
+  "routes_blocked_or_revalidation": [
+    "R6 executor-wide security assurance remains revalidation-required",
+    "R12 promotion remains blocked from global security claim"
+  ],
+  "recommendations_open": [
+    "Observe PR364 exact-head jobs/steps/logs",
+    "If manual java-kotlin build succeeds, preserve workflow-specific scope and compare outputs; do not infer exclusive root cause",
+    "If it fails, use the new failing step as the next discriminating probe"
+  ],
+  "recommendations_closed": [
+    "Do not classify unresolved Trivy action setup as vulnerabilities; scanner now executes"
+  ],
+  "F_next": [
+    "PR364 exact-head CodeQL Advanced actions + java-kotlin terminal jobs/steps",
+    "Compare java-kotlin manual-build outcome against prior autobuild failure on equivalent source lineage",
+    "Classify findings content separately from scanner execution status",
+    "Continue cross-repo and physical/scientific routes only when new receipts exist"
+  ]
+}
