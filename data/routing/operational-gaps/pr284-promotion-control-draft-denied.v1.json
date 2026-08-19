@@ -1,0 +1,74 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "gap:mapa:pr284:promotion-control-draft-denied",
+  "status": "BLOCKED",
+  "source_pointer": "github://rafaelmeloreisnovo/Mapa/actions/runs/32212090359",
+  "owner_authority": "Mapa/promotion-control",
+  "affected_routes": ["R5", "R11", "R12"],
+  "observed_at": "2026-08-19T00:25:43-03:00",
+  "provenance": [
+    {
+      "source": "GitHub Actions run 32212090359",
+      "job": "promotion-control / enforce",
+      "step": "Enforce manual promotion decision",
+      "head_commit": "2648a6d7b4bfe99bbdbe39edfdadf8783ed807d3"
+    }
+  ],
+  "evidence_for": [
+    "operational-gap-assurance run 32212090401 completed success",
+    "CI run 32212090356 completed success",
+    "Branch Topology Gate run 32212090361 completed success",
+    "Promotion Control emitted result=DENIED with blocking_reasons=[PULL_REQUEST_DRAFT_OR_UNKNOWN]"
+  ],
+  "evidence_against": [],
+  "uncertainty_state": "MECHANISM_IDENTIFIED_PROMOTION_INTENTIONALLY_BLOCKED",
+  "urgency": 1,
+  "necessity": 2,
+  "impact": 2,
+  "unlock": 1,
+  "risk": 1,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 1,
+  "forgetting_risk": 1,
+  "failure_mode": "Draft PR is intentionally denied promotion by fail-closed manual promotion policy",
+  "falsifier": "A non-draft eligible PR with the required independent approval is still denied solely as PULL_REQUEST_DRAFT_OR_UNKNOWN",
+  "next_probe": "Keep PR 284 as draft until review-ready; when intentionally promoted from draft, rerun promotion control and verify the blocking reason changes according to policy",
+  "mitigation": {
+    "fail_closed": true,
+    "action": "preserve draft status and claim_allowed=false; do not bypass manual promotion gate",
+    "rollback": "not applicable because no promotion occurred"
+  },
+  "closure_gate": {
+    "criterion": "Promotion state matches explicit human decision and policy prerequisites",
+    "evidence_needed": "terminal Promotion Control run after deliberate draft-state/review transition",
+    "falsifier": "promotion allowed while policy prerequisites remain unmet",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "re-evaluate when PR 284 draft/review state changes or policy version changes",
+  "claim_allowed": false,
+  "action_categories": [
+    "DETECTIVE",
+    "PRECAUTIONARY",
+    "SAFETY_ASSURANCE",
+    "LEARNING_ANTI_RECURRENCE"
+  ],
+  "detector": {
+    "signal": "Promotion Control result=DENIED with PULL_REQUEST_DRAFT_OR_UNKNOWN",
+    "threshold": "any promotion attempt while PR remains draft or state is unknown",
+    "false_positive": "provider reports stale draft state after an intentional transition",
+    "false_negative": "promotion path bypasses Promotion Control workflow",
+    "evidence_needed": "PR state, workflow run, job steps and promotion-control-result"
+  },
+  "safety_assurance": {
+    "data_acquisition": "read PR state and Promotion Control result on each intended promotion transition",
+    "analysis": "compare prerequisites, blocking_reasons and observed independent approvals",
+    "system_reassessment": "confirm fail-closed policy still blocks unreviewed promotion without blocking unrelated validation",
+    "corrective_trigger": "promotion succeeds without prerequisites or denial reason contradicts observed PR/review state"
+  },
+  "learning": {
+    "reusable_control": "treat intentional fail-closed denial as a safety barrier event, not a code regression",
+    "index_or_test": "index blocking_reason and distinguish policy denial from implementation failure",
+    "recurrence_check": "on the next promotion transition, verify that the reason changes only when prerequisites change"
+  }
+}
