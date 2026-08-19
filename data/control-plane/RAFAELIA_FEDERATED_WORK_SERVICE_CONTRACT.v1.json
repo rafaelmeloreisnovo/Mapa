@@ -1,0 +1,128 @@
+{
+  "schema": "rafaelia.federated-work-service-contract.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-08-19T04:38:00-03:00",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "authority_role": "FEDERATED_CONTROL_AND_KNOWLEDGE_PLANE",
+  "claim_allowed": false,
+  "purpose": "Turn F_gap, F_next, uncertainty, TOKEN_VAZIO, provenance, urgency, contracts, indices, governance, data, privacy and security into reconstructible bounded work units with explicit authority, gates and stopping conditions.",
+  "mother_invariants": [
+    "idea != implementation != execution != evidence != claim",
+    "TOKEN_VAZIO != zero != false != PASS != RESOLVED",
+    "urgency orders execution; urgency does not increase truth",
+    "memory != proof",
+    "index != content",
+    "hash proves identity/integrity properties; hash does not prove truth",
+    "repository-local authority governs local implementation; Mapa governs federated routing/state",
+    "cross-repository claims require evidence at every claimed producer/consumer boundary",
+    "historical receipts are append-only; corrections supersede without erasing",
+    "privacy/security/governance gates are non-compensatory",
+    "READY_TO_TEST != RESOLVED",
+    "physical-runtime claims require physical-runtime receipts"
+  ],
+  "system_roles": {
+    "Mapa": "federated authority, routing, current-state reconciliation, relation graph, gaps, claim boundaries and governance decisions",
+    "RafGitTools": "executor/control-plane/tool-router for deterministic selection, validation, ledgers, checks and transitions",
+    "AGENTS.md": "repository-local entry adapter that binds identity, local authority, indices, boundaries and executable routes",
+    "Google_Drive": "longitudinal, transversal and orthogonal memory plus editorial reconstruction and durable navigation anchors",
+    "producer_repository": "authority for implementation details, local build/test contracts and domain-specific runtime behavior",
+    "receipt": "evidence bridge between execution, state transition, provenance and federated reconstruction"
+  },
+  "entry_questions": [
+    {"id":"Q01_IDENTITY","question":"Quem sou?","required_output":["agent_role","repository_role"]},
+    {"id":"Q02_OBJECT_BINDING","question":"Qual repo/ref/path/hash estou lendo?","required_output":["repository","ref","commit_sha","path","object_hash_or_TOKEN_VAZIO"]},
+    {"id":"Q03_AUTHORITY","question":"Qual minha autoridade?","required_output":["local_authority","federated_authority","write_scope"]},
+    {"id":"Q04_BOUNDARY","question":"Qual minha fronteira?","required_output":["allowed_claim_scope","forbidden_promotions","claim_allowed"]},
+    {"id":"Q05_INDICES","question":"Quais índices locais devo abrir?","required_output":["minimum_indices","why_each_index_is_needed"]},
+    {"id":"Q06_MAP_ROUTE","question":"Qual rota do Mapa corresponde ao objetivo?","required_output":["route_id_or_TOKEN_VAZIO","route_anchors","stop_condition"]},
+    {"id":"Q07_GAPS","question":"Que lacunas já existem?","required_output":["gap_ids","TOKEN_VAZIO_ids","uncertainties","dependencies"]},
+    {"id":"Q08_CURRENT_EVIDENCE","question":"Qual evidência é atual?","required_output":["exact_evidence_refs","observed_at","scope_binding","staleness_state"]},
+    {"id":"Q09_GATE","question":"Qual gate posso executar?","required_output":["gate","falsifier","exit_criterion","rollback_ref_if_mutating"]},
+    {"id":"Q10_STOP","question":"Quando devo parar?","required_output":["stop_condition","blocked_state_if_any","no_marginal_gain_rule"]},
+    {"id":"Q11_DELTA","question":"Onde registro o delta?","required_output":["local_receipt_target","Mapa_transition_target","Drive_reconstruction_target_if_material"]},
+    {"id":"Q12_DATA_GOVERNANCE","question":"Quais regras de governança, dados, privacidade e segurança governam esta unidade?","required_output":["governance_class","data_class","privacy_class","security_class","retention_or_TOKEN_VAZIO","access_roles_or_TOKEN_VAZIO"]}
+  ],
+  "mandatory_dimensions": {
+    "epistemic": ["state","uncertainty_type","falsifier","evidence_scope","claim_gate"],
+    "operational": ["urgency","risk","owner","dependencies","next_action","exit_criterion","stop_condition","rollback_ref"],
+    "provenance": ["source_provider","repository","ref","commit_sha","path","artifact_or_receipt_hash","observed_at"],
+    "governance": ["authority","approval_boundary","mutation_policy","supersession_rule","decision_record"],
+    "data": ["data_category","schema_or_contract","input_identity","output_identity","retention","deletion_or_supersession_semantics"],
+    "privacy": ["classification","minimum_necessary","pii_or_sensitive_state","access_roles","redaction_state","cross_provider_transfer_state"],
+    "security": ["threat_or_failure_mode","secrets_state","integrity_gate","authenticity_gate","fail_closed_behavior","incident_or_rollback_route"],
+    "reconstruction": ["local_indices","Mapa_route","Drive_anchor","incoming_relations","outgoing_relations","predecessor","successor_or_F_next"]
+  },
+  "gap_unit_contract": {
+    "required_fields": [
+      "gap_id","state","urgency","risk","owner","authority","provenance","dependencies","data_class","privacy_class","security_class","governance_class","failure_mode","falsifier","next_action","exit_criterion","stop_condition","evidence_refs","rollback_ref","claim_allowed"
+    ],
+    "allowed_states": ["TOKEN_VAZIO","UNCERTAIN","BLOCKED","READY_TO_TEST","TESTING","EVIDENCED_SCOPED","RESOLVED_NEGATIVE","RESOLVED"],
+    "urgency": ["P0","P1","P2","P3"],
+    "risk": ["LOW","MEDIUM","HIGH","CRITICAL"],
+    "unknown_policy": "An unknown required field is represented as a typed TOKEN_VAZIO with cause, dependencies and next gate; it is never omitted or guessed.",
+    "resolved_policy": "RESOLVED and RESOLVED_NEGATIVE require exact evidence refs and an observed exit criterion/falsifier result.",
+    "ready_policy": "READY_TO_TEST requires implementation evidence but remains unresolved until the exit criterion is observed.",
+    "mutation_policy": "HIGH/CRITICAL mutation requires a rollback reference before execution."
+  },
+  "priority_policy": {
+    "rule": "Select the highest-urgency work item that can reduce a named uncertainty with an observable gate while respecting dependency order and non-compensatory privacy/security/governance blockers.",
+    "ordering": [
+      "P0 safety/security/data-loss/privacy/governance/execution blockers",
+      "upstream dependency blockers before downstream consumers",
+      "READY_TO_TEST with executable falsifier before speculative redesign",
+      "cross-repository blockers with larger dependency impact before isolated cosmetic debt",
+      "oldest unresolved observation when otherwise tied"
+    ],
+    "numeric_weights": "TOKEN_VAZIO_PRIORITY_WEIGHT_CALIBRATION",
+    "forbidden": ["invent confidence scores","use urgency as proof","skip blocker because another dimension scores high"]
+  },
+  "transition_flow": [
+    "DISCOVER",
+    "BIND_IDENTITY",
+    "RESOLVE_AUTHORITY",
+    "LOAD_MINIMUM_INDICES",
+    "TYPE_GAP_OR_GOAL",
+    "CLASSIFY_GOVERNANCE_DATA_PRIVACY_SECURITY",
+    "RESOLVE_MAPA_ROUTE",
+    "SELECT_GATE",
+    "CAPTURE_BASELINE_AND_ROLLBACK",
+    "EXECUTE_BOUNDED",
+    "VERIFY_LOCAL",
+    "VERIFY_CROSS_REPO_EDGES_IF_ANY",
+    "EMIT_RECEIPT",
+    "APPEND_TRANSITION",
+    "UPDATE_DRIVE_RECONSTRUCTION_IF_MATERIAL",
+    "RECOMPUTE_F_GAP_F_NEXT"
+  ],
+  "stop_conditions": [
+    "Goal is reconstructible and opening more history would not change gate, evidence, contradiction, provenance, privacy/security classification or authority.",
+    "A mandatory dependency or authority is unavailable; record BLOCKED/TOKEN_VAZIO and stop mutation.",
+    "A privacy/security/governance gate fails; fail closed and emit receipt.",
+    "Exit criterion is observed; emit evidence-bound transition and do not expand scope automatically.",
+    "The next action would require authority outside the current role; route to that authority instead of acting by inference."
+  ],
+  "receipt_contract": {
+    "required_fields": [
+      "event_id","parent_event_id","observed_at","actor_role","repository","ref","commit_sha","path_scope","authority","gap_or_goal_ids","state_before","state_after","urgency","risk","governance_class","data_class","privacy_class","security_class","action","falsifier","exit_criterion","evidence_refs","F_ok","F_gap","F_next","uncertainty_delta","rollback_ref","stop_reason","claim_allowed"
+    ],
+    "append_only": true,
+    "cross_repo_rule": "A receipt from one repository cannot promote another repository's local/runtime claim without a compatible receiving-side receipt or explicit bounded federation decision."
+  },
+  "canonical_anchors": {
+    "Drive_Master_Navigation_Registry": "drive:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "Drive_Context_Reconstruction_Index_Omega": "drive:1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+    "Drive_Omega_Activate": "drive:1LgwvPnYNewcnaD78oADywxRtPhspFKJqDZFURzgVkI8",
+    "RafGitTools_Agent_Entry_Kernel": "github:rafaelmeloreisnovo/RafGitTools/configs/agent-entry-kernel.v1.json",
+    "RafGitTools_Gap_Closure_Contract": "github:rafaelmeloreisnovo/RafGitTools/configs/gap-closure-execution.v1.json",
+    "RafGitTools_Current_Gap_Ledger": "github:rafaelmeloreisnovo/RafGitTools/data/evidence/github/cross-repo-gap-closure-20260819.v1.json",
+    "Mapa_Current_HMAC_Provenance_Gap": "github:rafaelmeloreisnovo/Mapa/data/routing/operational-gaps/federated-broker-hmac-provenance-gap-20260819.v1.json"
+  },
+  "current_scope_boundaries": {
+    "global_exhaustiveness": "TOKEN_VAZIO_NOT_PROVEN",
+    "all_repositories_indexed": "TOKEN_VAZIO_NOT_PROVEN",
+    "all_AGENT_instruction_files_reconciled": "TOKEN_VAZIO_NOT_PROVEN",
+    "all_physical_runtime_edges_verified": "TOKEN_VAZIO_NOT_PROVEN",
+    "federated_HMAC_and_cross_repo_provenance_closure": "TOKEN_VAZIO_OPEN",
+    "privacy_classification_dataset_wide": "TOKEN_VAZIO_NOT_PROVEN"
+  }
+}
