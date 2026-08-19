@@ -1,0 +1,128 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "gap:federated-broker:provenance-signature-near-miss:20260819",
+  "status": "NEAR_MISS",
+  "source_pointer": "github:rafaelmeloreisnovo/Mapa@732fdb4a661527a30b003036852e4f8d97a415a1:.github/workflows/federated-receipt-broker.yml",
+  "owner_authority": "Mapa/Lane00+Lane04+Lane06",
+  "affected_routes": ["R4", "R5", "R6", "R11", "R12"],
+  "observed_at": "2026-08-19T01:43:27-03:00",
+  "provenance": [
+    {"source": ".github/workflows/federated-receipt-broker.yml@main", "role": "observed_workflow"},
+    {"source": "tools/validate_federated_receipt.py@main", "role": "validator_source"},
+    {"source": "tests/fixtures/federated/self-test-receipt.json@main", "role": "fixture"}
+  ],
+  "evidence_for": [
+    "Gate 4 swallowed provenance verifier failure with shell OR warning and then printed verification success",
+    "tools/verify_cross_repo_provenance.py was absent on main when inspected",
+    "validate_federated_receipt.py structurally checks signature fields but does not perform HMAC verification",
+    "broker used contents:read while attempting to push audit commits"
+  ],
+  "evidence_against": [
+    "No executed external receipt acceptance or downstream harmful promotion was evidenced in this cycle"
+  ],
+  "uncertainty_state": "MECHANISM_OBSERVED_RUNTIME_EFFECT_PENDING",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 2,
+  "failure_mode": "federated broker can report provenance/signature assurance beyond actually executed evidence gates",
+  "falsifier": "a broker run must terminate before Lane04/Lane06 confirmation whenever provenance verification fails, verifier is absent, external HMAC is unverified, or receipt transport is unsupported",
+  "next_probe": "run PR CI and bounded broker self-test on the branch; inspect executed steps and artifacts; do not test external federation until real HMAC secret verification and remote checkout/transport gates exist",
+  "mitigation": {
+    "fail_closed": true,
+    "branch": "audit/component-lifecycle-impact-radius-v1",
+    "changes": [
+      "add deterministic cross-repo provenance verifier",
+      "remove warning-to-success provenance path",
+      "block external producer path on TOKEN_VAZIO_HMAC",
+      "remove impossible audit git-push assumption under contents:read",
+      "preserve review boundary and claim_allowed=false"
+    ],
+    "rollback": "close draft PR and retain main state if CI/falsifier fails"
+  },
+  "closure_gate": {
+    "criterion": "branch CI executes lifecycle, operational-gap and provenance checks; broker self-test is bounded; external path remains fail-closed until HMAC/remote evidence exists",
+    "evidence_needed": "observable PR workflow runs, logs and artifacts tied to branch head",
+    "falsifier": "any missing/failed verifier is converted into success, or external receipt reaches integration without cryptographic HMAC evidence",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "re-evaluate on any broker/validator/federation-policy/provenance-verifier change",
+  "claim_allowed": false,
+  "action_categories": [
+    "DETECTIVE",
+    "PRECAUTIONARY",
+    "CORRECTIVE",
+    "MAINTENANCE",
+    "INCIDENT_INVESTIGATION",
+    "SAFETY_ASSURANCE",
+    "LEARNING_ANTI_RECURRENCE"
+  ],
+  "detector": {
+    "signal": "workflow converts absent/failing provenance verification or unavailable signature proof into a success-shaped downstream state",
+    "threshold": "any occurrence",
+    "false_positive": "self-test explicitly labeled structural-only and blocked from production promotion",
+    "false_negative": "unindexed alternate workflow bypasses broker gates",
+    "evidence_needed": "workflow source, validator source and actual run logs"
+  },
+  "corrective_control": {
+    "symptom": "success message/confirmation can exceed the proof executed",
+    "mechanism_hypothesis": "warning fallback and placeholder signature semantics weaken fail-closed boundary",
+    "before_after_test": "before: missing verifier path can continue; after: missing/failing verifier or external unverified HMAC must terminate"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "federated receipt broker + validator + federation policy + provenance verifier",
+    "condition_or_interval": "revalidate on every material dependency/policy/gate change and every detected near-miss",
+    "measured_condition": "two near-miss conditions observed in source inspection",
+    "verification": "operational-gap CI + lifecycle ledger + broker bounded self-test"
+  },
+  "incident_investigation": {
+    "trigger": "source inspection found assurance statements exceeding executable gate evidence",
+    "facts": [
+      "provenance verifier absent on main",
+      "Gate 4 warning fallback existed",
+      "HMAC cryptographic verification not implemented",
+      "audit push incompatible with declared read-only permission"
+    ],
+    "timeline": [
+      "P1-04b federation infrastructure merged",
+      "Operational Gap Assurance merged",
+      "federated broker inspected in this cycle",
+      "near-miss classified and corrective branch opened"
+    ],
+    "configuration": "Mapa main 732fdb4a661527a30b003036852e4f8d97a415a1 plus current federation files",
+    "recent_changes": ["PR #285 federation infrastructure", "PR #284 operational gap assurance"],
+    "competing_mechanisms": [
+      "documentation-only overstatement",
+      "workflow control-flow false-positive",
+      "unfinished implementation intentionally scaffolded"
+    ],
+    "contributing_factors": [
+      "architecture delivered faster than production cryptographic/remote-evidence closure",
+      "self-test and external-producer semantics were not sufficiently separated"
+    ],
+    "recommendations": [
+      "keep external federation fail-closed",
+      "implement real HMAC KAT/secret retrieval",
+      "implement remote source checkout/immutable commit verification",
+      "bind Lane04/Lane06 statements to executed gate outputs"
+    ],
+    "blame_assignment": false
+  },
+  "safety_assurance": {
+    "data_acquisition": "inspect source, PR CI steps, artifacts and decision receipts",
+    "analysis": "compare claimed assurance state against actually executed gates and evidence",
+    "system_reassessment": "propagate revalidation to broker, validator, policy and downstream Lane04/Lane06 decisions",
+    "corrective_trigger": "any verifier bypass, stale PASS after dependency change, unsupported remote receipt or absent cryptographic signature evidence"
+  },
+  "learning": {
+    "reusable_control": "no warning-to-success conversion inside mandatory evidence gates",
+    "index_or_test": "component lifecycle ledger + operational-gap CI + cross-repo provenance verifier",
+    "recurrence_check": "on every material broker/validator/policy change, require event-triggered revalidation before promotion"
+  }
+}
