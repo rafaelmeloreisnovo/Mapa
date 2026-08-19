@@ -1,0 +1,86 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "BOOTSTRAP_CROSS_STORE_PARITY_20260819T2044BRT",
+  "observed_at": "2026-08-19T20:44:04-03:00",
+  "state": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "owner_authority": "rafaelmeloreisnovo/Mapa",
+  "component": "rafaelia:chatgpt-federated-bootstrap",
+  "source_pointer": {
+    "github": {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "commit": "48afd905e0dde1539aaabfe7731412fb38d65183",
+      "path": "bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md"
+    },
+    "drive": {
+      "document_id": "1__kkzcgJhPPXll_8v6Fm5BnnL2XccDIza-8YX26KJ3g",
+      "title": "RAFAELIA — ChatGPT Bootstrap Federado — GitHub Drive V1",
+      "modified_time": "2026-08-19T23:43:53.474Z"
+    }
+  },
+  "affected_routes": ["R1", "R5", "R9", "R11"],
+  "failure_mode": "Cross-store semantic mirror is observed, but byte/hash/revision equivalence is not evidenced by a common digest receipt.",
+  "evidence_for": [
+    "GitHub main commit 48afd905e0dde1539aaabfe7731412fb38d65183 adds the canonical federated ChatGPT bootstrap.",
+    "Google Drive document 1__kkzcgJhPPXll_8v6Fm5BnnL2XccDIza-8YX26KJ3g exposes the same title, policy, routing rule, canonical pointers and authority model during this cycle.",
+    "Both representations preserve APPEND_ONLY/APENDING, PROVENANCE_FIRST, TOKEN_VAZIO and claim_allowed=false semantics."
+  ],
+  "evidence_against": [],
+  "uncertainty_state": {
+    "semantic_alignment": "EVIDENCED_SCOPED",
+    "byte_equivalence": "TOKEN_VAZIO_NO_COMMON_DIGEST",
+    "drive_revision_id": "TOKEN_VAZIO_NOT_CAPTURED",
+    "cross_store_receipt": "TOKEN_VAZIO_NOT_EMITTED"
+  },
+  "urgency": 2,
+  "necessity": 3,
+  "impact": 3,
+  "detectability": 3,
+  "recurrence_risk": 2,
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "event": "CANONICAL_BOOTSTRAP_CREATED_IN_GITHUB_AND_DRIVE",
+    "calendar_age": "<1h_at_observation",
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "dependency_changes": 1,
+    "incident_count": 0,
+    "near_miss_count": 0,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "last_verified_at": "2026-08-19T20:44:04-03:00_SCOPED_SEMANTIC_READ",
+    "next_review_gate": "CROSS_STORE_DIGEST_AND_REVISION_RECEIPT",
+    "retirement_revalidation_criteria": "Any material change to bootstrap pointers, authority model, persistence policy, or Drive/GitHub representation requires revalidation."
+  },
+  "impact_radius": [
+    {"component": "ChatGPT session entry", "state": "DIRECT_EXPOSURE", "revalidation_required": true},
+    {"component": "Mapa routing/bootstrap", "state": "DIRECT_EXPOSURE", "revalidation_required": true},
+    {"component": "Drive longitudinal reconstruction", "state": "DIRECT_EXPOSURE", "revalidation_required": true},
+    {"component": "future Ω cycle classification", "state": "POTENTIAL_PROPAGATION", "revalidation_required": true}
+  ],
+  "actions": {
+    "detective": "Compare GitHub path/commit with Drive document identity/content and capture revision/digest when available.",
+    "preventive": "Do not infer byte identity from matching semantic content.",
+    "precautionary": "Keep cross-store equivalence as TOKEN_VAZIO until a common digest/revision receipt exists.",
+    "adaptive": "Use the new bootstrap as the first routing contract for subsequent RAFAELIA cycles while preserving producer authority.",
+    "corrective": "None required; no divergence has been demonstrated.",
+    "maintenance": "Revalidate after any material bootstrap change on either store.",
+    "incident_investigation": "No incident or near-miss observed.",
+    "safety_assurance": "Verify that future cycles resolve objective→authority→route→evidence→gate before writes.",
+    "learning_anti_recurrence": "Treat the bootstrap itself as a lifecycle component; semantic mirror != digest-proven mirror."
+  },
+  "falsifier": "A captured Drive revision/export digest and GitHub blob digest differ for representations asserted to be identical, or a material authority/pointer divergence is observed.",
+  "next_probe": "Capture Drive revision ID/export digest and GitHub blob/content digest; emit a cross-store parity receipt without replacing either authority.",
+  "mitigation": "Use semantic alignment only for routing; do not use it as cryptographic identity evidence.",
+  "closure_gate": {
+    "name": "CROSS_STORE_DIGEST_AND_REVISION_RECEIPT",
+    "result": "TOKEN_VAZIO",
+    "requires": ["drive_revision_id", "drive_export_digest", "github_blob_or_content_digest", "comparison_result", "receipt"]
+  },
+  "predecessor_lineage": [
+    "Mapa@727401d4b4d4ccd887de9d4786867f9e660fa216",
+    "Mapa@48afd905e0dde1539aaabfe7731412fb38d65183",
+    "Drive:1__kkzcgJhPPXll_8v6Fm5BnnL2XccDIza-8YX26KJ3g"
+  ]
+}
