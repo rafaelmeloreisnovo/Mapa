@@ -1,0 +1,126 @@
+{
+  "schema": "rafaelia.operational-gap.v1",
+  "gap_id": "RGT-PR364-CODEQL-CLOSURE-BASELINE-ORDERING-20260819T1541BRT",
+  "observed_at": "2026-08-19T15:41:43-03:00",
+  "claim_allowed": false,
+  "owner": "rafaelmeloreisnovo/RafGitTools",
+  "authority": "producer-repository for executor implementation; Mapa for federated routing/state",
+  "source_pointer": {
+    "pr": 364,
+    "head_sha": "38375a3ce5760fca528f66963d8c3b9aa50e6d10",
+    "base_sha": "01d7e3f51c1489e3523b3a31d7a8423e80d435ce",
+    "codeql_run_id": 32277879988,
+    "ci_run_id": 32277879966,
+    "dependency_pr": 362,
+    "dependency_head_sha": "328a20332794b249bec69af74da0044c6bbdcb35"
+  },
+  "affected_routes": ["R5", "R6", "R11", "R12"],
+  "state": "VERIFIED_LIMITED_WITH_BASELINE_DEPENDENCY",
+  "failure_mode": "MERGE_REF_BASELINE_DOES_NOT_INCLUDE_OPEN_RUNNER_FIX_PR362",
+  "evidence_for": [
+    "CodeQL Advanced run 32277879988 completed success",
+    "Analyze (java-kotlin) completed JDK17, Android SDK, local.properties, CodeQL init, manual build and CodeQL analysis successfully",
+    "Analyze (actions) completed success",
+    "Security Scan, PR Validation, Internal Validation, Android Client Build and rafaelia-block1 completed success on the same PR head",
+    "CI run 32277879966 Android build job completed success",
+    "CI coherence job failed at Ran 0 tests / exit 5",
+    "PR362 remains open/draft and targets the same base commit, so PR364 merge-ref does not contain its unittest-discovery correction"
+  ],
+  "evidence_against": [
+    "No evidence that autobuild alone was the unique root cause of the former CodeQL failure",
+    "No executor-wide PASS because CI, Code Coverage and Source Gap remain independent non-green coordinates",
+    "Performance Metrics was non-terminal at observation"
+  ],
+  "uncertainty_state": {
+    "before": "CODEQL_MANUAL_BUILD_PROBE_PENDING_AND_CI_FAILURE_AMBIGUOUS",
+    "after": "CODEQL_SCOPED_CLOSED; CI_FAILURE_ATTRIBUTED_TO_OPEN_BASELINE_DEPENDENCY; GLOBAL_ASSURANCE_OPEN"
+  },
+  "urgency": "P1",
+  "necessity": "Prevent a successful CodeQL falsification probe from being obscured by an unrelated baseline gate and prevent executor-wide overpromotion.",
+  "impact": "high on evidence classification; low on runtime because no runtime claim is promoted",
+  "detectability": "high once PR head, merge ref, workflow job and dependency PR are resolved together",
+  "recurrence_risk": "medium until stacked/open-PR dependencies are modeled explicitly",
+  "falsifier": "If a merge-ref containing the PR362 unittest-discovery fix still fails the same coherence step with Ran 0 tests, the baseline-ordering explanation is falsified.",
+  "next_probe": [
+    "Observe PR362 terminal scoped evidence and preserve it independently",
+    "After authorized integration or a non-destructive stacked test containing PR362 plus PR364, rerun canonical coherence and verify the 3 gap-closure tests are discovered",
+    "Keep CodeQL success scoped to run 32277879988 and do not infer executor-wide PASS",
+    "Decompose Code Coverage and Source Gap independently"
+  ],
+  "mitigation": [
+    "record PR-to-PR dependency before interpreting merge-ref failures",
+    "classify CI as a state vector rather than a repository-wide boolean",
+    "preserve claim_allowed=false and draft state"
+  ],
+  "closure_gate": "CODEQL_SCOPED_RECEIPT_PLUS_COHERENCE_RUN_ON_BASELINE_CONTAINING_PR362",
+  "review_or_expiry": "revalidate on PR362/PR364 head, base or workflow dependency change",
+  "provenance": {
+    "github_pr364": "https://github.com/rafaelmeloreisnovo/RafGitTools/pull/364",
+    "github_pr362": "https://github.com/rafaelmeloreisnovo/RafGitTools/pull/362",
+    "codeql_run": "https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32277879988",
+    "ci_run": "https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32277879966"
+  },
+  "lifecycle": {
+    "component": "rafgittools:codeql-advanced-java-kotlin-and-ci-baseline-ordering",
+    "limit_type": "EVENT_TRIGGERED",
+    "calendar_age": "TOKEN_VAZIO",
+    "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": 1,
+    "test_cycles": "TOKEN_VAZIO",
+    "deployments": 0,
+    "commits_since_validation": "TOKEN_VAZIO",
+    "dependency_changes": 1,
+    "environment_exposure": "github-hosted ubuntu-24.04 / JDK17 / Android SDK / CodeQL",
+    "load_stress_proxy": "TOKEN_VAZIO",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "software_schema_version": "operational-gap.v1",
+    "evidence_age": "TOKEN_VAZIO",
+    "provenance_age": "TOKEN_VAZIO",
+    "last_verified_at": "2026-08-19T16:52:00Z_SCOPED_CODEQL_RUN",
+    "next_review_gate": "PR362_PR364_COMBINED_COHERENCE",
+    "retirement_revalidation_criteria": "any material change to CodeQL workflow, Android/JDK build context, canonical coherence runner, PR base or dependency ordering"
+  },
+  "impact_radius": [
+    {
+      "component": "CodeQL Advanced/java-kotlin",
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "static-analysis assurance",
+      "hidden_damage_or_hidden_state_possible": false,
+      "inspection_required": false,
+      "revalidation_required": false,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "run 32277879988 jobs/steps",
+      "false_positive_cost": "moderate overpromotion",
+      "false_negative_cost": "moderate unnecessary rework"
+    },
+    {
+      "component": "canonical coherence gate",
+      "direct_exposure": false,
+      "transmitted_load_or_effect": "merge-ref baseline excludes PR362 fix",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "coherence run on baseline containing PR362",
+      "false_positive_cost": "high false executor-wide PASS",
+      "false_negative_cost": "high false regression attribution"
+    }
+  ],
+  "actions": {
+    "detective": "resolved exact head, merge ref, job steps and open dependency PR",
+    "preventive": "explicit PR-dependency modeling before global CI classification",
+    "precautionary": "fail closed; no merge/release/global claim",
+    "adaptive": "split CodeQL success from baseline coherence failure",
+    "corrective": "none in this cycle; the required coherence correction already exists in PR362",
+    "maintenance": "revalidate after dependency/base integration",
+    "incident_investigation": "near-miss of semantic over/under-promotion; no runtime incident",
+    "safety_assurance": "CodeQL scoped closure accepted; executor-wide assurance remains open",
+    "learning_anti_recurrence": "PR evidence resolution must include head SHA, merge ref and open dependency graph"
+  }
+}
