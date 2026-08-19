@@ -1,4 +1,5 @@
 # Federated Producer Repositories V1
+
 ## Multi-Repository Governance Chains and Receipt Federation
 
 **Date**: 2026-08-18  
@@ -10,12 +11,14 @@
 ## Executive Summary
 
 **Problem**: The Rafaelia governance framework currently operates within a single repository (Mapa). External producer repositories have no way to participate in:
+
 - Immutable receipt emission
 - Hash-chained evidence trails
 - Fail-closed validation gates
 - Multi-repo approval chains
 
 **Solution**: Federated Producer Repositories enable external repos to:
+
 1. Emit receipts in Rafaelia format (same schema, same 8 observations)
 2. Link receipts across repositories via provenance chains
 3. Submit evidence to central governance authority
@@ -27,7 +30,7 @@
 
 ## Architecture: 4-Layer Federation Model
 
-```
+```text
 LAYER 1: PRODUCER (External Repository)
   └─ Emits receipt in Rafaelia format
   └─ Signs with producer identity
@@ -203,7 +206,7 @@ The broker validates:
 
 ### Validation Gatekeeping
 
-```
+```json
 Producer Receipt Arrives
     ↓
 GATE 1: Schema & Signature Validation
@@ -244,7 +247,7 @@ Status: REJECTED → Logged with reason; notify producer
 
 Federated receipts follow the same fail-closed machine as Mapa receipts:
 
-```
+```text
 FEDERATED_RECEIPT_OBSERVED (broker receives it)
     ↓ [GATE 1: Schema + signature verified]
     ↓ [Lane 04 (Validação) validator approves]
@@ -335,6 +338,7 @@ Mapa Lane 00 (Governança) reviews and approves or rejects.
 ### Step 2: Credential Exchange
 
 Approved producers receive:
+
 - HMAC secret key for signing receipts
 - Federated receipt endpoint URL
 - Policy document with rejection criteria
@@ -405,7 +409,7 @@ jobs:
 
 ### Example: Multi-Repo Feature Delivery
 
-```
+```json
 Producer A (frontend repo) emits receipt
     ├─ Artifact: Built UI bundle (SHA256)
     ├─ Evidence: Test coverage 92%
@@ -434,6 +438,7 @@ Producer C (release repo) consumes decision
 ```
 
 **Audit Trail**:
+
 ```jsonl
 {"timestamp": "2026-08-18T12:30:00Z", "event": "Producer A receipt received", "producer": "external-org/frontend", "status": "VALIDATED"}
 {"timestamp": "2026-08-18T12:35:00Z", "event": "Producer B receipt received", "producer": "external-org/backend", "status": "VALIDATED"}
@@ -446,6 +451,7 @@ Producer C (release repo) consumes decision
 ## Implementation Roadmap
 
 ### Phase 2-P1-04a: Foundation (Week 1)
+
 1. ✅ Design federation architecture (this document)
 2. Create `tools/validate_federated_receipt.py` (receipt broker validator)
 3. Create `tools/verify_cross_repo_provenance.py` (chain verifier)
@@ -453,17 +459,19 @@ Producer C (release repo) consumes decision
 5. Create `data/control-plane/federation-policy.v1.json` (policy template)
 
 ### Phase 2-P1-04b: Infrastructure (Week 2-3)
-6. Create `.github/workflows/federated-receipt-broker.yml` (reception workflow)
-7. Implement HMAC key management in GitHub Secrets
-8. Create producer onboarding issue template
-9. Document producer integration guide (`.md`)
-10. Test with internal producer (Mapa → itself as test)
+
+1. Create `.github/workflows/federated-receipt-broker.yml` (reception workflow)
+2. Implement HMAC key management in GitHub Secrets
+3. Create producer onboarding issue template
+4. Document producer integration guide (`.md`)
+5. Test with internal producer (Mapa → itself as test)
 
 ### Phase 2-P1-04c: Operations (Week 4+)
-11. Launch federation for first external producer
-12. Monitor cross-repo receipt chains
-13. Escalate policy violations to Lane 00
-14. Quarterly federation audit
+
+1. Launch federation for first external producer
+2. Monitor cross-repo receipt chains
+3. Escalate policy violations to Lane 00
+4. Quarterly federation audit
 
 ---
 
@@ -542,4 +550,3 @@ Two new audit trails:
 - 10 Lanes: `/docs/governance/BRANCH_TOPOLOGY_MAIN_NUMBERED_V1.md`
 - Receipt Schema: `/data/receipts/rafaelia_adaptive_cycle_latest4_*.receipt.json`
 - TOKEN_VAZIO Approval: `/docs/governance/TOKEN_VAZIO_APPROVAL_WORKFLOWS_V1.md`
-
