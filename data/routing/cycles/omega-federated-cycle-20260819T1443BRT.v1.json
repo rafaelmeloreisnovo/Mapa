@@ -1,0 +1,107 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE_V1",
+  "cycle_id": "OMEGA-20260819T144349-0300",
+  "observed_at": "2026-08-19T14:43:49-03:00",
+  "mode": "APPEND_ONLY_EVIDENCE_FIRST",
+  "claim_allowed": false,
+  "predecessor": {
+    "mapa_pr": 290,
+    "mapa_head_sha": "f3b8f5da8aabd775ce4c5180cde09cb323731d73",
+    "rafaelgittools_pr": 364,
+    "rafaelgittools_head_sha": "38375a3ce5760fca528f66963d8c3b9aa50e6d10"
+  },
+  "sources": [
+    {"repo":"rafaelmeloreisnovo/Mapa","ref":"main","sha":"2c41a7c13f90fe7bd2bb57bed9774137779d06b0","role":"FEDERATED_AUTHORITY"},
+    {"repo":"rafaelmeloreisnovo/RafGitTools","ref":"audit/codeql-java-kotlin-manual-build-20260819","sha":"38375a3ce5760fca528f66963d8c3b9aa50e6d10","role":"EXECUTOR_REVALIDATION"},
+    {"repo":"rafaelmeloreisnovo/termux-app-rafacodephi","ref":"master","sha":"fb18bbc4794dace1cc3480519681191f83152af6","role":"ANDROID_PROVIDER"},
+    {"repo":"instituto-Rafael/relativity-living-light","ref":"current_observed","sha":"8bd41005d63b2d83c4bcc313cc4900ff981cf8fe","role":"SCIENTIFIC_OWNER"},
+    {"drive_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","role":"CANONICAL_METHOD_MEMORY"},
+    {"drive_id":"1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y","role":"MASTER_NAVIGATION"},
+    {"drive_id":"1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk","role":"OMEGA_RECONSTRUCTION_INDEX"}
+  ],
+  "F_ok": [
+    "RafGitTools PR364 exact-head workflow lineage resolved",
+    "Internal Validation run 391 completed SUCCESS on exact head 38375a3ce5760fca528f66963d8c3b9aa50e6d10",
+    "PR363 Security Scan remains terminal SUCCESS on its exact head; Trivy execution stays EVIDENCED_SCOPED",
+    "Drive canonical method, Master Navigation and Omega reconstruction anchors remain readable and coherent",
+    "No newer Termux source commit after fb18bbc4794dace1cc3480519681191f83152af6 was observed",
+    "No newer RLL scientific source commit after 8bd41005d63b2d83c4bcc313cc4900ff981cf8fe was observed"
+  ],
+  "F_gap": [
+    {"gap_id":"PR364_CODEQL_TERMINAL","state":"TOKEN_VAZIO_PENDING","evidence":"CodeQL Advanced run 679 queued at observation"},
+    {"gap_id":"PR364_CI_TERMINAL","state":"TOKEN_VAZIO_IN_PROGRESS","evidence":"CI run 947 in_progress at observation"},
+    {"gap_id":"PR364_REMAINING_WORKFLOWS","state":"TOKEN_VAZIO_PENDING","evidence":"Code Coverage, Source Gap Audit, Security Scan, Android Client Build, rafaelia-block1, Performance Metrics and PR Validation queued"},
+    {"gap_id":"TERMUX_PHYSICAL_RUNTIME","state":"TOKEN_VAZIO","evidence":"no new device/install/launch/logcat receipt observed"},
+    {"gap_id":"RLL_NEW_SCIENTIFIC_EVIDENCE","state":"TOKEN_VAZIO_NO_NEW_DELTA","evidence":"latest observed scientific owner commit remains Omega7 boundary record"},
+    {"gap_id":"DRIVE_APPEND","state":"TOKEN_VAZIO_CAPABILITY","evidence":"read/search available; no safe append mutation action exposed in this cycle"}
+  ],
+  "token_vazio_resolved": [
+    {"id":"PR364_INTERNAL_VALIDATION","before":"TOKEN_VAZIO_PENDING","after":"EVIDENCED_SCOPED_SUCCESS","run_id":32277880118,"run_number":391}
+  ],
+  "uncertainty_delta": {
+    "before": "PR364_ALL_WORKFLOWS_PENDING_OR_UNKNOWN",
+    "after": "ONE_SCOPED_COORDINATE_SUCCESS_PLUS_TERMINAL_EVIDENCE_STILL_PENDING_FOR_CODEQL_AND_GLOBAL_ASSURANCE",
+    "direction": "DECREASED_SCOPED"
+  },
+  "component_lifecycle": [
+    {
+      "component":"rafgittools:codeql-advanced-java-kotlin",
+      "event":"MANUAL_BUILD_REVALIDATION_IN_FLIGHT",
+      "limit_type":"EVENT_TRIGGERED",
+      "dependency_changes":1,
+      "maintenance_actions":1,
+      "corrective_actions":1,
+      "incident_count":0,
+      "near_miss_count":1,
+      "execution_hours":"TOKEN_VAZIO",
+      "cycles":"TOKEN_VAZIO",
+      "test_cycles":"TOKEN_VAZIO",
+      "evidence_age":"TOKEN_VAZIO",
+      "provenance_age":"TOKEN_VAZIO",
+      "last_verified_at":"TOKEN_VAZIO_CODEQL_TERMINAL",
+      "next_review_gate":"PR364_CODEQL_ADVANCED_TERMINAL_STEPS"
+    },
+    {
+      "component":"rafgittools:internal-validation",
+      "event":"EXACT_HEAD_SUCCESS_OBSERVED",
+      "limit_type":"EVENT_TRIGGERED",
+      "last_verified_at":"2026-08-19T14:43:49-03:00",
+      "next_review_gate":"INVALIDATE_ON_MATERIAL_SOURCE_OR_WORKFLOW_CHANGE"
+    }
+  ],
+  "impact_radius": [
+    "R5: evidence/receipt and anti-regression",
+    "R6: RafGitTools executor assurance",
+    "R11: Omega state transition and evidence classification",
+    "R12: promotion boundary remains blocked pending independent terminal gates"
+  ],
+  "actions": {
+    "DETECTIVE":"Resolved PR364 exact head and inspected all associated workflow states.",
+    "PREVENTIVE":"Preserved vector-valued assurance; one green coordinate cannot promote global security/executor state.",
+    "PRECAUTIONARY":"Maintained claim_allowed=false and TOKEN_VAZIO for all non-terminal coordinates.",
+    "ADAPTIVE":"Updated lifecycle from all-pending to partial scoped success without rewriting predecessor evidence.",
+    "CORRECTIVE":"No new code correction applied in this cycle because CodeQL falsification probe has not terminated.",
+    "MAINTENANCE":"CodeQL manual-build probe remains under event-triggered revalidation.",
+    "INCIDENT_INVESTIGATION":"No new incident or confirmed source defect was inferred from queued/in-progress workflows.",
+    "SAFETY_ASSURANCE":"Internal Validation exact-head success captured; terminal CodeQL evidence explicitly withheld.",
+    "LEARNING_ANTI_RECURRENCE":"Partial workflow completion must update only its coordinate; pending coordinates remain TOKEN_VAZIO."
+  },
+  "F_esquecido": [
+    "queued != not executed forever",
+    "in_progress != PASS",
+    "Internal Validation PASS != CodeQL PASS",
+    "Security Scan PASS on PR363 != CodeQL Advanced PASS on PR364",
+    "no newer commit observed != proof of no external activity outside observed sources"
+  ],
+  "routes": {
+    "promoted_scoped":["R5 internal-validation evidence coordinate"],
+    "blocked_or_revalidation":["R6 global executor assurance","R11 terminal PR364 transition","R12 promotion/release"]
+  },
+  "F_next": [
+    "Fetch PR364 CodeQL Advanced run 679 when terminal and inspect jobs/steps/logs.",
+    "If java-kotlin PASS, classify matched manual-build hypothesis as supported-scoped, not exclusive root cause.",
+    "If java-kotlin FAIL, localize the first failing step and update the competing-cause set without broadening claims.",
+    "Reconcile CI run 947 and PR Validation 738 terminal outcomes independently.",
+    "Preserve Termux physical runtime and RLL scientific claims as TOKEN_VAZIO until new owner receipts exist."
+  ]
+}
