@@ -1,0 +1,81 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "RGT-CODEQL-LANE-DIFFERENTIAL-20260819T1348BRT",
+  "observed_at": "2026-08-19T13:48:00-03:00",
+  "source_pointer": {
+    "repo": "rafaelmeloreisnovo/RafGitTools",
+    "ref": "9c0be86c366dd98380dbf836d8965a3eef882ecb",
+    "security_scan_run": 32272600555,
+    "codeql_advanced_run": 32272600430,
+    "corrective_probe_pr": 364,
+    "corrective_probe_head": "38375a3ce5760fca528f66963d8c3b9aa50e6d10"
+  },
+  "owner_authority": "RafGitTools",
+  "affected_routes": ["R5", "R6", "R11", "R12"],
+  "provenance": "GitHub exact-head workflow/job evidence plus workflow source comparison",
+  "evidence_for": [
+    "Security Scan completed SUCCESS on the exact PR363 head",
+    "Dependency Vulnerability Scan executed through Trivy and reached SARIF upload",
+    "Security Scan CodeQL job completed under explicit JDK17 + Android SDK + local.properties + assembleDevDebug",
+    "CodeQL Advanced on the same source head remains lane-specific failure for java-kotlin",
+    "CodeQL Advanced java-kotlin uses autobuild and lacks the explicit Android/JDK preparation present in the successful Security Scan"
+  ],
+  "evidence_against": [
+    "A successful CodeQL lane in Security Scan disproves any inference that the source tree is globally unanalyzable by CodeQL",
+    "No evidence yet proves autobuild itself is the root cause"
+  ],
+  "uncertainty_state": "REDUCED_BUT_OPEN",
+  "urgency": 4,
+  "necessity": "HIGH",
+  "impact": "security assurance and executor-wide evidence classification",
+  "detectability": "HIGH_AFTER_LANE_DECOMPOSITION",
+  "recurrence_risk": "MEDIUM",
+  "failure_mode": "CODEQL_ADVANCED_JAVA_KOTLIN_LANE_FAILS_WHILE_MATCHED_SOURCE_SECURITY_CODEQL_SUCCEEDS",
+  "falsifier": "Run CodeQL Advanced java-kotlin with the explicit Android/JDK/manual Gradle build path. Continued failure weakens the autobuild/setup hypothesis; success supports it without proving exclusivity.",
+  "next_probe": "Observe PR364 exact-head CodeQL jobs/steps/logs and compare java-kotlin terminal state with the prior exact-head failure.",
+  "mitigation": "Draft-only reversible workflow experiment; no merge/release; claim_allowed remains false.",
+  "closure_gate": "PR364_CODEQL_JAVA_KOTLIN_TERMINAL_RECEIPT",
+  "review_or_expiry": "Re-evaluate on any material CodeQL/Gradle/Android workflow dependency change.",
+  "claim_allowed": false,
+  "predecessor_lineage": "RafGitTools PR363 security-scan vector gap",
+  "component_lifecycle": {
+    "component": "rafgittools:codeql-advanced-java-kotlin",
+    "rule_type": "EVENT_TRIGGERED",
+    "calendar_age": "TOKEN_VAZIO",
+    "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO_AGGREGATE",
+    "test_cycles": "TOKEN_VAZIO",
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": "TOKEN_VAZIO",
+    "dependency_changes": 1,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "software_schema_version": "codeql-action@v4 / workflow manual-build probe v1",
+    "evidence_age": "TOKEN_VAZIO",
+    "provenance_age": "TOKEN_VAZIO",
+    "last_verified_at": "TOKEN_VAZIO_PR364_TERMINAL",
+    "next_review_gate": "PR364_CODEQL_JAVA_KOTLIN_TERMINAL_RECEIPT",
+    "retirement_revalidation_criteria": "Any material CodeQL, Gradle, AGP, JDK, Android SDK, or workflow build-mode change invalidates inherited lane assurance."
+  },
+  "impact_radius": [
+    {"component": "Security Scan CodeQL", "state": "EVIDENCED_SCOPED", "causality": "comparison control"},
+    {"component": "CodeQL Advanced java-kotlin", "state": "REVALIDATION_REQUIRED", "causality": "direct"},
+    {"component": "RafGitTools security assurance", "state": "POTENTIAL_PROPAGATION", "causality": "downstream semantic dependency"},
+    {"component": "federated promotion/review", "state": "BLOCKED_FROM_GLOBAL_PROMOTION", "causality": "assurance dependency"}
+  ],
+  "actions": {
+    "detective": "Decomposed security workflows by exact head, run, job and lane.",
+    "preventive": "Prohibit global CodeQL/security PASS from one successful lane.",
+    "precautionary": "Fail closed for executor-wide security claim.",
+    "adaptive": "Created matched explicit-build probe from successful control lane.",
+    "corrective": "Prepared CodeQL Advanced java-kotlin manual-build workflow in draft PR364.",
+    "maintenance": "CodeQL lane entered event-triggered lifecycle revalidation.",
+    "incident_investigation": "Classified as near-miss/assurance gap; no security incident demonstrated.",
+    "safety_assurance": "Require terminal PR364 exact-head receipt before any promotion.",
+    "learning_anti_recurrence": "CodeQL/security assurance is vector-valued by lane and build precondition."
+  }
+}
