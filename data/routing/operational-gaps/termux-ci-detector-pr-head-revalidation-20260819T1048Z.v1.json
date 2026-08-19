@@ -1,0 +1,73 @@
+{
+  "schema": "rafaelia-operational-gap/v1",
+  "gap_id": "GAP_TERMUX_CI_DETECTOR_PR_HEAD_20260819T1048Z",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "observed_at": "2026-08-19T10:48:45Z",
+  "owner": "rafaelmeloreisnovo/termux-app-rafacodephi",
+  "authority": "Mapa routing / GitHub execution evidence",
+  "source_pointer": [
+    "PR#372 head bcb2f00c449ad65328f644f4722f939821387134",
+    "PR#372 merge-ref 363a0e0651f40dc7fb3ed835cc42e4ad4aad91d6",
+    "workflow run 32084330616",
+    "job 95553855152 rho ARM64 Debug apt-android-7",
+    "job 95553855221 Delta Validation Unit Tests",
+    "PR#368 head 4eabbb1c80f9364e8563ed5bb2be7fdc44e60741"
+  ],
+  "affected_routes": ["R6", "R7", "R11"],
+  "failure_mode": "CI revalidation detector queried merge commit SHA although PR-triggered workflows are associated with PR head/merge ref, creating false absence of execution evidence",
+  "evidence_for": [
+    "PR#372 head has 9 observed workflow runs: 8 SUCCESS and 1 FAILURE",
+    "failed pipeline reached Android setup, bootstrap generation, cache restoration, hash emission and Gradle execution",
+    "job 95553855152 failed at app:processDebugMainManifest because BetaOrchestratorActivity was duplicated",
+    "job 95553855221 independently failed at the same duplicated BetaOrchestratorActivity manifest merger gate",
+    "PR#368 head has 10 observed workflow runs: 9 SUCCESS and 1 FAILURE, demonstrating checkout v7 execution in PR context"
+  ],
+  "evidence_against": [
+    "No clean full beta-build on current combined master state has yet been observed in this record after the later manifest duplication fix",
+    "Physical-device runtime remains unobserved"
+  ],
+  "uncertainty_state": {
+    "before": "TOKEN_VAZIO_POST_DEPENDENCY_CHANGE_RUN due detector miss",
+    "after": "PR_HEAD_EXECUTION_VERIFIED_LIMITED; CURRENT_COMBINED_MASTER_RUN_TOKEN_VAZIO"
+  },
+  "lifecycle": {
+    "component": "CI assurance detector + actions/cache v6 + actions/checkout v7",
+    "event_class": ["EVENT_TRIGGERED", "MAINTENANCE", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+    "dependency_changes": 2,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "execution_hours": "TOKEN_VAZIO",
+    "test_cycles": "TOKEN_VAZIO",
+    "last_verified_at": "TOKEN_VAZIO_CURRENT_COMBINED_MASTER"
+  },
+  "impact_radius": [
+    {"component":"CI detector","state":"DIRECT","revalidation_required":true},
+    {"component":"actions/cache v6","state":"VERIFIED_LIMITED_PR_HEAD","revalidation_required":true},
+    {"component":"actions/checkout v7","state":"VERIFIED_LIMITED_PR_HEAD","revalidation_required":true},
+    {"component":"beta-build/LKG restore-save","state":"POTENTIAL_PROPAGATION","revalidation_required":true},
+    {"component":"BetaOrchestratorActivity manifest","state":"INDEPENDENT_FAILURE_MODE_IDENTIFIED","revalidation_required":true}
+  ],
+  "detective": {
+    "detector": "Resolve PR head SHA and PR merge ref before declaring absence of PR-triggered workflow evidence",
+    "signal": "workflow_runs(head_sha) or workflow_runs(pr_merge_ref)",
+    "threshold": "at least one terminal job with steps/logs for the changed surface",
+    "false_positive_cost": "extra CI/log inspection",
+    "false_negative_cost": "incorrect TOKEN_VAZIO or missed regression/assurance evidence"
+  },
+  "preventive": "Never infer no-run from merge-SHA-only query for PR-triggered workflows",
+  "precautionary": "Keep current-master end-to-end claim gated until a post-manifest-fix run is observed",
+  "adaptive": "Use PR head/merge-ref lineage for dependency-update assurance",
+  "corrective": "Reclassify prior no-run finding as detector gap, not absence of execution",
+  "maintenance": "Treat evidence acquisition logic itself as a lifecycle component requiring calibration",
+  "incident_investigation": "Observed pipeline failure is attributable to duplicated BetaOrchestratorActivity manifest declaration, not demonstrated cache-v6/checkout-v7 defect",
+  "safety_assurance": "Require clean current combined-state execution before closing revalidation",
+  "learning_anti_recurrence": "Persist SHA-type semantics in future CI probes: source head != merge ref != merge commit",
+  "falsifier": "A clean reproduction showing actions/cache v6 or checkout v7 is the cause of failure after manifest duplication is removed",
+  "next_probe": "Execute/observe current master beta-build and cross-domain gates after PR#373 fix, capture run_id/jobs/steps/hashes and compare LKG cache behavior",
+  "closure_gate": "POST_MANIFEST_FIX_COMBINED_STATE_CI_RECEIPT",
+  "review_or_expiry": "Revalidate on any change to checkout/cache/bootstrap/manifest/workflow topology",
+  "provenance": "GitHub PR-head workflow runs and job logs; append-only successor to prior dependency revalidation record"
+}
