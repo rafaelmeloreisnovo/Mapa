@@ -1,0 +1,141 @@
+{
+  "schema": "rafaelia.omega-federated-cycle.v1",
+  "observed_at": "2026-08-19T17:45:10-03:00",
+  "claim_allowed": false,
+  "state": "VERIFIED_LIMITED",
+  "principles": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "absence_of_evidence != evidence_of_absence",
+    "append_only",
+    "no_silent_regression"
+  ],
+  "sources": {
+    "rafgittools_pr365": {
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "pr": 365,
+      "head_sha": "d2ee47fda94a14d77dc25008e9c49188f0521c67",
+      "merge_ref_sha": "9a51560cec75ac7a900001c47169cc2cdc30b111"
+    },
+    "drive_anchor": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "termux_latest_observed": "fb18bbc4794dace1cc3480519681191f83152af6",
+    "rll_latest_observed": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe"
+  },
+  "F_ok": [
+    "PR365 PR Validation 739 SUCCESS",
+    "PR365 Internal Validation 392 SUCCESS",
+    "PR365 Android Client Build 494 SUCCESS",
+    "coverage unit tests PASS",
+    "coverage detector emitted TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+    "coverage gate failed closed with exit 2 and did not publish a fake report",
+    "CI build/test/lint/APK path PASS before coherence gate",
+    "Drive canonical anchors reconciled in read mode"
+  ],
+  "F_gap": [
+    "canonical coherence still fails because unittest discovery runs 0 tests on this baseline",
+    "PR362 runner fix remains a separate open draft lineage and is not inherited by PR365 merge-ref",
+    "CodeQL Advanced run 680 remains failure and requires its own scoped cause analysis",
+    "Source Gap Audit remains failure/baseline debt",
+    "Performance Metrics and Security Scan were still queued at observation time",
+    "physical Termux runtime remains TOKEN_VAZIO",
+    "RLL has no new scientific evidence beyond 8bd41005",
+    "Drive append capability unavailable in current connector"
+  ],
+  "F_esquecido": [
+    "expected fail-closed red is not equivalent to detector defect",
+    "unit-test PASS does not imply coverage capability or coverage report",
+    "an open PR does not contribute code to another PR merge-ref unless explicitly rebased/combined",
+    "CI environment/runtime is itself a lifecycle component",
+    "Node20-targeting actions are currently forced onto Node24 and require revalidation without assuming causality"
+  ],
+  "token_vazio": [
+    "TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+    "TOKEN_VAZIO_CODEQL_PR365_ROOT_CAUSE",
+    "TOKEN_VAZIO_PERFORMANCE_METRICS_TERMINAL",
+    "TOKEN_VAZIO_SECURITY_SCAN_TERMINAL",
+    "TOKEN_VAZIO_PHYSICAL_TERMUX_RUNTIME",
+    "TOKEN_VAZIO_RLL_NEW_EXECUTION",
+    "TOKEN_VAZIO_DRIVE_APPEND_CAPABILITY"
+  ],
+  "resolved_tokens": [
+    "TOKEN_VAZIO_PR365_PR_VALIDATION",
+    "TOKEN_VAZIO_PR365_INTERNAL_VALIDATION",
+    "TOKEN_VAZIO_PR365_ANDROID_BUILD",
+    "TOKEN_VAZIO_COVERAGE_FAIL_CLOSED_BEHAVIOR"
+  ],
+  "lifecycle_deltas": [
+    {
+      "component": "rafgittools:coverage-evidence-detector",
+      "event": "FAIL_CLOSED_BEHAVIOR_EVIDENCED",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 1,
+      "last_verified_at": "2026-08-19T18:58:27Z",
+      "next_review_gate": "coverage producer configured + report artifact observed"
+    },
+    {
+      "component": "rafgittools:canonical-coherence-runner",
+      "event": "BASELINE_STILL_LACKS_RUNNER_FIX",
+      "limit_type": "CONDITION_BASED",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "TOKEN_VAZIO_PR362_NOT_IN_BASELINE",
+      "next_review_gate": "combined/rebased baseline executes gap-closure tests > 0 and exits 0"
+    },
+    {
+      "component": "rafgittools:github-actions-node-runtime-chain",
+      "event": "NODE20_TARGET_ACTIONS_FORCED_TO_NODE24",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "TOKEN_VAZIO_GLOBAL_COMPATIBILITY",
+      "next_review_gate": "critical workflows rerun with compatible/pinned action versions"
+    }
+  ],
+  "impact_radius": {
+    "routes": ["R5", "R6", "R7", "R9", "R11", "R12"],
+    "nodes": [
+      "coverage detector",
+      "canonical coherence runner",
+      "GitHub Actions runtime chain",
+      "executor assurance",
+      "promotion boundary"
+    ]
+  },
+  "actions": {
+    "detective": "resolved exact-head workflow/job/step evidence and separated expected fail-closed from unrelated failures",
+    "preventive": "kept coverage claim blocked and recorded Node24 runtime-chain revalidation",
+    "precautionary": "claim_allowed=false; no global promotion",
+    "adaptive": "reclassified red workflows as vector states",
+    "corrective": "coverage evidence boundary is functioning; no new code fix applied in this cycle",
+    "maintenance": "opened lifecycle revalidation for runner baseline and Node runtime chain",
+    "incident_investigation": "no incident promoted; near-miss semantics preserved",
+    "safety_assurance": "coverage behavior evidenced; executor-wide assurance still blocked",
+    "learning_anti_recurrence": "red status must be interpreted through cause-specific state, not boolean aggregation"
+  },
+  "uncertainty_delta": {
+    "before": [
+      "coverage red could still be misread as detector failure",
+      "coherence red could be misread as coverage regression"
+    ],
+    "after": [
+      "coverage red = expected fail-closed with unit tests PASS and no coverage capability",
+      "coherence red = 0-test baseline/order issue, independent from coverage workflow",
+      "Node24 runtime transition explicitly tracked as maintenance event"
+    ],
+    "direction": "DECREASED"
+  },
+  "F_next": [
+    "observe terminal Performance Metrics and Security Scan on PR365 exact-head",
+    "combine/rebase PR362 runner fix with PR365 and rerun canonical coherence",
+    "decompose CodeQL Advanced run 680 to job/step/root-cause boundary",
+    "upgrade/revalidate Node24-affected critical actions without weakening fail-closed controls",
+    "retain physical runtime and RLL scientific claims as TOKEN_VAZIO until new receipts exist"
+  ]
+}
