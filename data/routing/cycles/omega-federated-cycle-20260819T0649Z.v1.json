@@ -1,0 +1,96 @@
+{
+  "schema_version": "rafaelia.federated-cycle-delta/v1-draft",
+  "cycle_id": "omega:2026-08-19T06:49:26Z",
+  "observed_at": "2026-08-19T06:49:26Z",
+  "claim_allowed": false,
+  "state": "VERIFIED_LIMITED",
+  "predecessor": "gap:mapa:federated-broker:hmac-provenance:20260819",
+  "observed_main": {
+    "operational_gap_assurance_merge": "732fdb4a661527a30b003036852e4f8d97a415a1",
+    "federated_infrastructure_merge": "17cb05622ad1ac91627cec588e9b61d75ddc9057"
+  },
+  "f_ok": [
+    "Operational Gap Assurance is now merged into main via PR #284.",
+    "Federated producer infrastructure is now merged into main via PR #285.",
+    "GitHub Actions checkout/setup-python refs in the broker are SHA-pinned.",
+    "PR #287 remains open, mergeable and draft with lifecycle and operational-gap records preserving the near-miss.",
+    "Drive canonical methodology and continuous catalog protocol remain readable and evidence-first."
+  ],
+  "f_gap": [
+    "tools/validate_federated_receipt.py still does not execute cryptographic HMAC comparison in validate_receipt.",
+    "federated-receipt-broker.yml still converts provenance-verifier failure into a warning/no-op path.",
+    "Lane 04 still records signature_valid=true and provenance_chain=true without deriving them from terminal gate evidence.",
+    "PR #287 contains containment/ledger artifacts but not the HMAC KAT and fail-closed implementation required by its closure gate.",
+    "No terminal evidence observed in this cycle for external federation positive/negative fixtures."
+  ],
+  "f_esquecido": [
+    "A merge of governance documentation does not validate the cryptographic mechanism it describes.",
+    "A previous PASS must be invalidated after material changes to broker, validator, policy, HMAC handling or producer registry until revalidation completes."
+  ],
+  "new_token_vazio": [
+    "TOKEN_VAZIO_HMAC_KAT",
+    "TOKEN_VAZIO_PROVENANCE_NEGATIVE_FIXTURE",
+    "TOKEN_VAZIO_EXTERNAL_FEDERATION_TERMINAL_RUN",
+    "TOKEN_VAZIO_LAST_VERIFIED_AT"
+  ],
+  "resolved_token_vazio": [
+    "TOKEN_VAZIO_OPERATIONAL_GAP_ASSURANCE_MERGE",
+    "TOKEN_VAZIO_FEDERATED_INFRASTRUCTURE_MERGE"
+  ],
+  "uncertainty_delta": {
+    "before": "Near-miss mechanism known; merge status of assurance/federation and persistence state not fully reconciled.",
+    "after": "Assurance/federation merges confirmed; cryptographic/provenance mechanism gap remains confirmed and bounded; no external false promotion observed.",
+    "direction": "DECREASED_STRUCTURAL_UNCERTAINTY_WITH_CRYPTOGRAPHIC_GAP_UNRESOLVED"
+  },
+  "lifecycle_deltas": [
+    {
+      "component": "mapa:operational-gap-assurance",
+      "event": "MERGED_TO_MAIN",
+      "maintenance_class": "EVENT_TRIGGERED",
+      "revalidation_required": true,
+      "reason": "promotion from audit branch to main changes operational authority"
+    },
+    {
+      "component": "mapa:federated-receipt-broker",
+      "event": "FEDERATION_INFRASTRUCTURE_MERGED_WITH_OPEN_NEAR_MISS",
+      "maintenance_class": "EVENT_TRIGGERED",
+      "revalidation_required": true,
+      "reason": "security/provenance assertions exceed currently observed terminal evidence"
+    }
+  ],
+  "impact_radius": [
+    "tools/validate_federated_receipt.py",
+    ".github/workflows/federated-receipt-broker.yml",
+    "tools/verify_cross_repo_provenance.py",
+    "Lane04 federation decisions",
+    "Lane06 integration decisions",
+    "R4 evidence-to-receipt",
+    "R5 receipt-to-anti-regression",
+    "R6 federated execution",
+    "R11 Omega transition",
+    "R12 promotion/publication"
+  ],
+  "actions": {
+    "detective": "Re-read validator and broker on main; compare claims with executed checks.",
+    "preventive": "Preserve claim_allowed=false for external federation until KAT and provenance negative fixtures pass.",
+    "precautionary": "Fail closed conceptually and prohibit promotion from hardcoded security booleans.",
+    "adaptive": "Invalidate prior assurance when broker/validator/policy/HMAC/producer-registry changes.",
+    "corrective": "Implementation still required; not falsely marked completed.",
+    "maintenance": "PR #287 retained as event-triggered revalidation work item.",
+    "incident_investigation": "Near-miss remains mechanism-confirmed, impact bounded by absence of observed external false promotion.",
+    "safety_assurance": "Require terminal positive/negative fixture evidence before closure.",
+    "learning_anti_recurrence": "Security/provenance booleans must be evidence-derived, never hardcoded."
+  },
+  "routes": {
+    "promoted": ["operational-gap-assurance governance capability"],
+    "blocked": ["external federated receipt cryptographic/provenance promotion"],
+    "unchanged": ["RLL physical/universal claims remain claim-gated unless independently evidenced"]
+  },
+  "next_probes": [
+    "Implement HMAC-SHA256 canonical payload verification with positive and negative KATs.",
+    "Make cross-repo provenance verification terminal fail-closed and expose explicit gate outputs.",
+    "Derive Lane 04 signature_valid and provenance_chain from actual gate outputs, never constants.",
+    "Run wrong-HMAC and broken-provenance fixtures and capture terminal CI run/steps/receipt.",
+    "Update component lifecycle last_verified_at only after terminal evidence exists."
+  ]
+}
