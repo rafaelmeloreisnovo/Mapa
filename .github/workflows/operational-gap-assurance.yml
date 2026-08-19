@@ -1,0 +1,29 @@
+name: operational-gap-assurance
+
+on:
+  pull_request:
+    paths:
+      - "scripts/operational_gap_assurance.py"
+      - ".github/workflows/operational-gap-assurance.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/operational_gap_assurance.py"
+      - ".github/workflows/operational-gap-assurance.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-self-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: python3 -m py_compile scripts/operational_gap_assurance.py
+      - name: Self-test
+        run: python3 scripts/operational_gap_assurance.py --self-test
