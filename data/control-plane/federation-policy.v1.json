@@ -1,0 +1,80 @@
+{
+  "schema": "rafaelia.federation-policy.v1",
+  "policy_version": "1.0",
+  "policy_effective_date": "2026-08-18T00:00:00Z",
+  "policy_authority": "Lane 00 (Governança)",
+  "federation_mode": "OPEN_WITH_VETTING",
+  "federation_mode_description": "External producers can register. Registration requires Lane 00 approval. Once approved, receipts are validated via broker gates.",
+
+  "approved_producers": [
+    {
+      "repository_owner": "example-org",
+      "repository_name": "example-producer",
+      "producer_type": "application",
+      "producer_description": "Example producer repository for federation testing",
+      "federation_status": "PROVISIONAL",
+      "federation_established": "2026-08-18T00:00:00Z",
+      "contract_expires": "2026-12-31T23:59:59Z",
+      "secret_key_id": "example-hmac-key-provisional",
+      "approval_lane": "00_governanca",
+      "approval_authority": "Rafaelia Governance Board",
+      "approval_notes": "Test producer; under monitoring during pilot phase"
+    }
+  ],
+
+  "rejection_criteria": [
+    "Schema validation fails (not rafaelia.federated-producer-receipt.v1)",
+    "Signature invalid or verification fails (HMAC mismatch)",
+    "Signature expired (timestamp > 24 hours old)",
+    "Producer not in approved_producers list",
+    "Producer federation_status is not REGISTERED or PROVISIONAL",
+    "Cross-border transfer not allowed (jurisdiction mismatch)",
+    "Secrets detected in receipt content (token, password, API key)",
+    "Run ID does not exist on producer GitHub (invalid provenance)",
+    "Provenance chain broken (received_at missing or invalid)",
+    "All 8 observations not present (missing identidade/proveniência/contexto/privacidade/epistemic/dependências/evidência/próximo_passo)",
+    "Immutability markers incomplete (run_id, job_id, timestamp missing)"
+  ],
+
+  "auto_reject_after_failures": 3,
+  "auto_reject_description": "Producer automatically SUSPENDED after 3 rejected receipts within 7 days",
+  "notify_producer_on_reject": true,
+  "append_audit_trail": true,
+
+  "privacy_controls": {
+    "allow_public_repos_only": true,
+    "disallow_private_repos": true,
+    "secret_scanning_enabled": true,
+    "gdpr_compliant": true,
+    "lgpd_compliant": true,
+    "cross_border_allowed_jurisdictions": [
+      "BR",
+      "US",
+      "EU"
+    ]
+  },
+
+  "security_requirements": {
+    "tls_version_minimum": "1.3",
+    "hmac_algorithm": "SHA256",
+    "signature_validity_hours": 24,
+    "producer_must_be_github_verified": false,
+    "producer_repo_must_be_public": true,
+    "producer_repo_must_have_license": true
+  },
+
+  "appeal_process": {
+    "rejected_producer_can_appeal": true,
+    "appeal_goes_to_lane": "00_governanca",
+    "appeal_response_sla_days": 5
+  },
+
+  "audit_requirements": {
+    "federation_audit_frequency": "quarterly",
+    "federation_audit_lane": "04_validacao",
+    "log_all_rejections": true,
+    "log_all_approvals": true,
+    "log_all_producer_registrations": true,
+    "retention_days": 730
+  }
+}
