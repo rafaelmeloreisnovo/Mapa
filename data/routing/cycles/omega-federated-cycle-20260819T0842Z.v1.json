@@ -1,0 +1,100 @@
+{
+  "schema_version": "rafaelia.omega-federated-cycle/v1",
+  "cycle_id": "omega:2026-08-19T08:42:21Z",
+  "observed_at": "2026-08-19T08:42:21Z",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "predecessor": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "2551b90df41d689cb2d8a961bc4fbca71a2fdc0e",
+    "prior_cycle": "data/routing/cycles/omega-federated-cycle-20260819T0649Z.v1.json"
+  },
+  "observed_sources": [
+    {"repository":"rafaelmeloreisnovo/Mapa","commit":"2551b90df41d689cb2d8a961bc4fbca71a2fdc0e","role":"federated governance + lifecycle authority"},
+    {"repository":"rafaelmeloreisnovo/Mapa","commit":"ea5d3cda824759f49cf2c936d2246b3e025c24bd","role":"component lifecycle + fail-closed broker"},
+    {"repository":"rafaelmeloreisnovo/RafGitTools","commit":"d6b7f8714cf30e7ff0e63a8a794fe1764ad2f6ab","role":"control-plane federation entry + gap closure"},
+    {"repository":"rafaelmeloreisnovo/termux-app-rafacodephi","commit":"3a8dd67adf78fedf3844c2148acf2a6aa5fce456","role":"BetaOrchestratorActivity manifest uniqueness correction"},
+    {"repository":"instituto-Rafael/relativity-living-light","commit":"8bd41005d63b2d83c4bcc313cc4900ff981cf8fe","role":"Omega7 research bridge with claim boundaries"},
+    {"drive_file_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","role":"canonical Drive↔GitHub method"},
+    {"drive_file_id":"1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y","role":"master navigation registry"},
+    {"drive_file_id":"1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk","role":"context reconstruction index Omega"}
+  ],
+  "F_ok": [
+    "Mapa PR #286 and #287 are merged to main, so lifecycle/impact-radius and fail-closed federation controls are current authority.",
+    "RafGitTools merged federated entry/gap-closure invariants, strengthening Mapa→control-plane routing without promoting producer runtime claims.",
+    "Termux app merged a manifest uniqueness correction for BetaOrchestratorActivity and added a regression assertion that exactly one canonical declaration exists.",
+    "RLL Omega7 bridge preserves explicit claim boundaries: physical_vortex, physical_refraction and universal_law remain TOKEN_VAZIO with claim_allowed=false.",
+    "Drive canonical method and navigation anchors remain discoverable and consistent with append-only/evidence-first separation."
+  ],
+  "F_gap": [
+    {"id":"gap:federation:hmac-external","state":"TOKEN_VAZIO_HMAC","owner":"rafaelmeloreisnovo/Mapa","closure_gate":"HMAC positive/negative KAT + terminal broker run"},
+    {"id":"gap:federation:remote-checkout","state":"TOKEN_VAZIO_REMOTE_IMMUTABLE_CHECKOUT","owner":"rafaelmeloreisnovo/Mapa","closure_gate":"remote producer checkout bound to immutable commit + receipt"},
+    {"id":"gap:termux:physical-runtime-after-manifest-fix","state":"TOKEN_VAZIO_DEVICE_RUNTIME","owner":"rafaelmeloreisnovo/termux-app-rafacodephi","closure_gate":"install/launch BetaOrchestratorActivity on physical Android + logcat receipt"},
+    {"id":"gap:rll:omega7-execution","state":"TOKEN_VAZIO_EXECUTION","owner":"instituto-Rafael/relativity-living-light","closure_gate":"G1-G4 executable geometry sweep with hashes/artifacts/CI"},
+    {"id":"gap:drive:append-capability","state":"TOKEN_VAZIO_CAPABILITY","owner":"Google Drive connector boundary","closure_gate":"connected append/write action available and verified"}
+  ],
+  "F_esquecido": [
+    "A merge closes source-governance state but not runtime or scientific evidence.",
+    "Dependency/action version bumps in Termux consume previous CI assurance and require revalidation even when application code is unchanged.",
+    "A corrected AndroidManifest declaration does not prove physical Activity launch; runtime remains a separate lifecycle clock.",
+    "An unsigned research commit can still be a source pointer, but signature/provenance state must not be silently upgraded."
+  ],
+  "lifecycle_deltas": [
+    {
+      "component":"mapa:federated-receipt-broker",
+      "event":"PR_286_AND_287_MERGED_TO_MAIN",
+      "maintenance_class":["EVENT_TRIGGERED","CORRECTIVE","SAFETY_ASSURANCE"],
+      "revalidation_required":true,
+      "next_review_gate":"HMAC_KAT_PLUS_REMOTE_PROVENANCE_RUN"
+    },
+    {
+      "component":"rafgittools:federated-entry-kernel",
+      "event":"GAP_CLOSURE_INVARIANTS_MERGED",
+      "maintenance_class":["PREVENTIVE","ADAPTIVE","ANTI_RECURRENCE"],
+      "revalidation_required":true,
+      "next_review_gate":"producer-consumer cross-repository evidence test"
+    },
+    {
+      "component":"termux:BetaOrchestratorActivity",
+      "event":"MANIFEST_UNIQUENESS_CORRECTION_MERGED",
+      "maintenance_class":["CORRECTIVE","EVENT_TRIGGERED"],
+      "revalidation_required":true,
+      "next_review_gate":"physical install + Activity launch + logcat receipt"
+    },
+    {
+      "component":"rll:omega7-modular-geodesic-bridge",
+      "event":"CLAIM_GATED_RESEARCH_BRIDGE_OBSERVED",
+      "maintenance_class":["PRECAUTIONARY","SAFETY_ASSURANCE"],
+      "revalidation_required":true,
+      "next_review_gate":"G1 modular → G4 sweep before optional physical G5"
+    }
+  ],
+  "impact_radius": [
+    {"origin":"mapa:federated-receipt-broker","routes":["R4","R5","R6","R11","R12"],"state":"STRUCTURALLY_MITIGATED_REVALIDATION_REQUIRED"},
+    {"origin":"termux:BetaOrchestratorActivity","routes":["R6","R7","R11"],"state":"SOURCE_FIX_MERGED_DEVICE_RUNTIME_TOKEN_VAZIO"},
+    {"origin":"rafgittools:federated-entry-kernel","routes":["R1","R5","R6","R11"],"state":"CONTROL_PLANE_PROMOTED_CROSS_REPO_EVIDENCE_REQUIRED"},
+    {"origin":"rll:omega7-modular-geodesic-bridge","routes":["R8","R11","R12"],"state":"CLAIM_GATED_EXECUTION_REQUIRED"}
+  ],
+  "actions": {
+    "detective":["reconciled current Mapa merges, RafGitTools federation merge, Termux manifest correction, RLL claim-gated bridge and Drive anchors"],
+    "preventive":["preserved fail-closed federation and explicit producer/consumer authority boundaries"],
+    "precautionary":["kept HMAC, remote checkout, device runtime and RLL physical claims as TOKEN_VAZIO"],
+    "adaptive":["expanded impact radius from Mapa federation to RafGitTools and Termux runtime boundary"],
+    "corrective":["recognized manifest uniqueness source correction without promoting runtime"],
+    "maintenance":["marked action/dependency changes and source merges as lifecycle events requiring revalidation"],
+    "incident_investigation":["no new consummated incident evidenced; prior federation near-miss remains structurally mitigated but not externally assured"],
+    "safety_assurance":["required new evidence after every material broker/validator/policy/manifest/dependency change"],
+    "anti_recurrence":["encoded source-fix != runtime-proof and merge != evidence as cycle invariants"]
+  },
+  "uncertainty_delta": {
+    "reduced":["whether PR286/287 reached main","whether Termux manifest uniqueness source fix reached main","whether RafGitTools federation entry reached main"],
+    "unchanged_open":["external HMAC proof","remote immutable checkout","physical Termux runtime after fix","RLL Omega7 executable G1-G4","Drive append capability"]
+  },
+  "next_probes": [
+    "Run positive and negative HMAC KATs through the merged federated broker and capture terminal receipt.",
+    "Run broken-provenance fixture and require terminal rejection before Lane04/Lane06.",
+    "Install current Termux APK on physical Android, launch BetaOrchestratorActivity and capture logcat + APK/commit hashes.",
+    "Execute producer→RafGitTools→Mapa cross-repository evidence path with immutable refs on both sides.",
+    "Implement and run RLL Omega7 G1-G4 geometry pipeline before any physical interpretation promotion."
+  ]
+}
