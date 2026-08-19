@@ -1,0 +1,128 @@
+{
+  "schema_version": "rafaelia.component-lifecycle-assurance/v1",
+  "component_id": "Mapa:.github/workflows/federated-receipt-broker.yml",
+  "observed_at": "2026-08-19T01:43:27-03:00",
+  "source_pointer": "github:rafaelmeloreisnovo/Mapa@732fdb4a661527a30b003036852e4f8d97a415a1:.github/workflows/federated-receipt-broker.yml",
+  "owner_authority": "Mapa/Lane00+Lane04+Lane06",
+  "lifecycle_clocks": {
+    "calendar_age": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "first-production-introduction-not-established"},
+    "execution_hours": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "no-runtime-duration-receipt"},
+    "cycles": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "workflow-run-census-not-reconciled"},
+    "starts_stops": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "not-measured"},
+    "builds": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "workflow-not-build-oriented"},
+    "test_cycles": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "self-test-run-not-yet-observed-for-this-delta"},
+    "deployments": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "no-deployment-receipt"},
+    "commits_since_validation": {"value": 3, "state": "DERIVED", "source": "branch commits 5abd947,f6428ea,2e3316c before CI observation"},
+    "dependency_changes": {"value": 2, "state": "OBSERVED", "source": "provenance verifier added; broker gate semantics changed"},
+    "environment_exposure": {"value": "GitHub Actions ubuntu-latest", "state": "OBSERVED", "source": ".github/workflows/federated-receipt-broker.yml"},
+    "load_stress_proxy": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "no-load-metric"},
+    "incident_count": {"value": 0, "state": "OBSERVED", "source": "no executed harmful event evidenced in this cycle"},
+    "near_miss_count": {"value": 2, "state": "OBSERVED", "source": "provenance false-pass path; read-permission workflow attempting push"},
+    "maintenance_actions": {"value": 3, "state": "OBSERVED", "source": "add verifier; fail-close broker; add lifecycle validator"},
+    "corrective_actions": {"value": 2, "state": "OBSERVED", "source": "provenance gate and audit-persistence behavior corrected on branch"},
+    "software_schema_version": {"value": "component-lifecycle-assurance/v1", "state": "OBSERVED", "source": "scripts/component_lifecycle_assurance.py"},
+    "evidence_age": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "CI evidence for branch not yet observed"},
+    "provenance_age": {"value": 0, "state": "DERIVED", "source": "same-cycle source inspection"},
+    "last_verified_at": {"value": "TOKEN_VAZIO", "state": "TOKEN_VAZIO", "source": "branch CI pending"}
+  },
+  "revalidation_rules": [
+    {
+      "type": "EVENT_TRIGGERED",
+      "trigger": "change to broker, receipt validator, federation policy, provenance verifier or producer registration state",
+      "origin": "near-miss analysis 2026-08-19",
+      "action": "re-run bounded broker self-test and provenance validation before promotion",
+      "evidence_needed": "workflow run with observable steps + uploaded broker evidence artifact",
+      "falsifier": "a changed dependency reaches PASS without the relevant gate executing"
+    },
+    {
+      "type": "CONDITION_BASED",
+      "trigger": "any path that converts verifier failure/missing verifier into warning or success",
+      "origin": "observed broker Gate 4 behavior on main",
+      "action": "quarantine promotion and restore fail-closed semantics",
+      "evidence_needed": "workflow source + run logs",
+      "falsifier": "all verifier failures terminate the broker before Lane04/06 confirmation"
+    },
+    {
+      "type": "HEURISTIC_LIMIT",
+      "trigger": "evidence/provenance age exceeds one material dependency change",
+      "origin": "internal assurance heuristic; not regulatory",
+      "action": "require revalidation before reusing previous PASS",
+      "evidence_needed": "dependency delta + last verified receipt",
+      "falsifier": "no material dependency delta exists"
+    }
+  ],
+  "event_history": [
+    {
+      "event_id": "near-miss:federated-broker:20260819:001",
+      "kind": "NEAR_MISS",
+      "facts": [
+        "Gate 4 swallowed provenance-verifier failure with shell OR warning",
+        "Gate 4 printed provenance verified even if the verifier was absent",
+        "tools/verify_cross_repo_provenance.py was absent on main at observation time",
+        "workflow had contents:read while attempting git push of audit data"
+      ],
+      "claim_allowed": false
+    }
+  ],
+  "impact_radius": [
+    {
+      "component": "federated-receipt-broker",
+      "relation": "event-origin",
+      "propagation_state": "DIRECT",
+      "direct_exposure": true,
+      "transmitted_effect": "false-positive provenance success and non-persistent audit assumption",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "branch workflow run with all five gates observable",
+      "false_positive_cost": "unverified receipt may appear integrated",
+      "false_negative_cost": "valid receipt blocked pending evidence"
+    },
+    {
+      "component": "tools/validate_federated_receipt.py",
+      "relation": "direct-validator-dependency",
+      "propagation_state": "REVALIDATION_REQUIRED",
+      "direct_exposure": false,
+      "transmitted_effect": "signature fields can be structurally present without cryptographic HMAC verification",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "real HMAC secret verification KAT or explicit TOKEN_VAZIO_HMAC gate",
+      "false_positive_cost": "signature-valid claim without cryptographic verification",
+      "false_negative_cost": "external federation remains unavailable"
+    },
+    {
+      "component": "data/control-plane/federation-policy.v1.json",
+      "relation": "policy-dependency",
+      "propagation_state": "POTENTIAL_PROPAGATION",
+      "direct_exposure": false,
+      "transmitted_effect": "producer approval state changes broker behavior",
+      "hidden_state_possible": false,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "policy diff + producer state verification",
+      "false_positive_cost": "unapproved producer accepted",
+      "false_negative_cost": "approved producer blocked"
+    },
+    {
+      "component": "Lane04/Lane06 integration decisions",
+      "relation": "downstream-governance",
+      "propagation_state": "POTENTIAL_PROPAGATION",
+      "direct_exposure": false,
+      "transmitted_effect": "upstream false PASS could contaminate integration confirmation",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "bounded decision receipt tied to executed gates",
+      "false_positive_cost": "premature integration status",
+      "false_negative_cost": "delayed integration"
+    }
+  ],
+  "next_review_gate": "draft PR CI: lifecycle validator + broker bounded self-test + provenance verifier",
+  "retirement_or_revalidation_criteria": "revalidate on every broker/validator/policy/provenance dependency change; external federation remains blocked until cryptographic HMAC and remote checkout/transport evidence exist",
+  "claim_allowed": false
+}
