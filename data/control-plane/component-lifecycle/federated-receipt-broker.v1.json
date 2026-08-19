@@ -1,0 +1,81 @@
+{
+  "schema_version": "rafaelia.component-lifecycle-ledger/v1-draft",
+  "component_id": "mapa:federated-receipt-broker",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "observed_ref": "732fdb4a661527a30b003036852e4f8d97a415a1",
+  "observed_at": "2026-08-19T02:46:38-03:00",
+  "claim_allowed": false,
+  "clocks": {
+    "calendar_age": "TOKEN_VAZIO_BASELINE",
+    "execution_hours_runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO",
+    "test_cycles": "TOKEN_VAZIO",
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": "TOKEN_VAZIO_NO_TERMINAL_VALIDATION_BASELINE",
+    "dependency_changes": 2,
+    "environment_exposure": ["github-actions", "workflow_dispatch", "cross-repository-input"],
+    "load_stress_proxy": "TOKEN_VAZIO",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "software_schema_version": "federated-receipt-broker/P1-04b",
+    "evidence_age": "TOKEN_VAZIO_NO_TERMINAL_EXTERNAL_FEDERATION_EVIDENCE",
+    "provenance_age": "TOKEN_VAZIO",
+    "last_verified_at": "TOKEN_VAZIO",
+    "next_review_gate": "HMAC_KAT_PLUS_FAIL_CLOSED_PROVENANCE_NEGATIVE_FIXTURES",
+    "retirement_revalidation_criteria": [
+      "EVENT_TRIGGERED: any broker/validator/policy/HMAC/producer-registry change",
+      "CONDITION_BASED: any run with missing gate artifact or mismatch between downstream boolean and verifier output",
+      "HARD_LIMIT: TOKEN_VAZIO — no empirical or normative hard retirement limit established"
+    ]
+  },
+  "impact_radius": [
+    {
+      "component": "tools/validate_federated_receipt.py",
+      "state": "REVALIDATION_REQUIRED",
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "validator output controls broker acceptance",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "cryptographic HMAC positive/negative KATs",
+      "false_positive_cost": "valid receipt rejected",
+      "false_negative_cost": "unsigned/incorrectly signed receipt treated as valid"
+    },
+    {
+      "component": "tools/verify_cross_repo_provenance.py",
+      "state": "TOKEN_VAZIO_EXISTENCE_AND_BEHAVIOR_AT_OBSERVED_REF",
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "provenance gate result should control downstream acceptance",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "file existence plus terminal negative/positive provenance tests",
+      "false_positive_cost": "valid cross-repo receipt blocked",
+      "false_negative_cost": "broken provenance accepted"
+    },
+    {
+      "component": "Lane04/Lane06 federation decisions",
+      "state": "POTENTIAL_PROPAGATION",
+      "direct_exposure": false,
+      "transmitted_load_or_effect": "hardcoded booleans can propagate unsupported acceptance state",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "derived gate outputs and decision receipt",
+      "false_positive_cost": "extra manual review",
+      "false_negative_cost": "unsupported federation state promoted"
+    }
+  ],
+  "lineage": {
+    "predecessor": "TOKEN_VAZIO_INITIAL_LEDGER",
+    "trigger_gap": "gap:mapa:federated-broker:hmac-provenance:20260819",
+    "next_probe": "Implement evidence-derived HMAC/provenance gates and rerun negative/positive fixtures"
+  }
+}
