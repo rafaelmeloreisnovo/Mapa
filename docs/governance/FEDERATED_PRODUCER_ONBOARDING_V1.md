@@ -2,9 +2,9 @@
 
 ## Step-by-Step Integration Guide for External Repositories
 
-**Date**: 2026-08-19  
-**Framework**: Rafaelia Federation System  
-**Target Audience**: Repository administrators seeking to emit Rafaelia receipts  
+**Date**: 2026-08-19
+**Framework**: Rafaelia Federation System
+**Target Audience**: Repository administrators seeking to emit Rafaelia receipts
 **Status**: Phase 2-P1-04b Implementation Guide
 
 ---
@@ -69,12 +69,13 @@ Open a **new issue** in `rafaelmeloreisnovo/Mapa` with:
 **Body**:
 
 ```markdown
+
 ## Producer Registration Request
 
-**Repository**: `[your-org]/[your-repo]`  
-**Repository URL**: `https://github.com/[your-org]/[your-repo]`  
-**Producer Type**: `[application|library|service|infrastructure]`  
-**Repository License**: `[Apache-2.0|MIT|GPL-3.0|OTHER]`  
+**Repository**: `[your-org]/[your-repo]`
+**Repository URL**: `https://github.com/[your-org]/[your-repo]`
+**Producer Type**: `[application|library|service|infrastructure]`
+**Repository License**: `[Apache-2.0|MIT|GPL-3.0|OTHER]`
 **Administrator Contact**: `[email or GitHub handle]`
 
 ### Confirmation Checklist
@@ -88,6 +89,7 @@ Open a **new issue** in `rafaelmeloreisnovo/Mapa` with:
 ### Expected Use
 
 Brief description of what receipts this producer will emit:
+
 - What evidence will receipts carry?
 - When will receipts be emitted (on every run, weekly, etc.)?
 - Will receipts be used for multi-repo coordination?
@@ -96,6 +98,7 @@ Brief description of what receipts this producer will emit:
 
 - Federation Policy: [Link to federation-policy.v1.json]
 - Architecture: [Link to FEDERATED_PRODUCER_REPOSITORIES_V1.md]
+
 ```
 
 ### 1.2 What Happens Next
@@ -113,19 +116,20 @@ Once approved, Lane 00 provides:
 
 ### 2.1 HMAC Secret Key
 
-**Format**: 64-character hex string  
-**Example**: `abc123def456789...`  
+**Format**: 64-character hex string
+**Example**: `abc123def456789...`
 
 **⚠️ SECURITY**: Never commit this to version control. Store only in GitHub Secrets.
 
 ### 2.2 Broker Endpoint URL
 
-**Format**: `https://api.mapa.rafaelia/federated-receipts`  
-**Authentication**: POST with signed receipt  
+**Format**: `https://api.mapa.rafaelia/federated-receipts`
+**Authentication**: POST with signed receipt
 
 ### 2.3 Federation Policy
 
 A copy of `federation-policy.v1.json` confirming:
+
 - Your producer status (REGISTERED or PROVISIONAL)
 - Approval dates and expiry
 - Rejection criteria for your receipts
@@ -144,6 +148,7 @@ Template to base your receipts on (see Step 3).
 In your repository, create `.github/workflows/emit-rafaelia-receipt.yml`:
 
 ```yaml
+
 name: Emit Rafaelia Receipt
 
 on:
@@ -287,6 +292,7 @@ jobs:
             -d @receipt.json \
             "$BROKER_ENDPOINT/federated-receipts" \
             || echo "WARNING: Broker submission failed (expected if broker not yet deployed)"
+
 ```
 
 ### 3.2 Store Credentials in Repository Secrets
@@ -307,28 +313,37 @@ Before submitting, validate your receipt format:
 ### 4.1 Download Validation Tool
 
 From Mapa repository:
+
 ```bash
+
 curl -o validate_federated_receipt.py \
   https://raw.githubusercontent.com/rafaelmeloreisnovo/Mapa/main/tools/validate_federated_receipt.py
+
 ```
 
 ### 4.2 Run Validation
 
 ```bash
+
 python3 validate_federated_receipt.py \
   --receipt receipt.json \
   --policy federation-policy.v1.json
+
 ```
 
 ### 4.3 Check Output
 
 **If VALIDATED**:
+
 ```
+
 ✓ receipt.json VALIDATED
 Status: VALIDATED
+
 ```
 
 **If REJECTED**:
+
 - Review error messages (schema, signature, timestamp, etc.)
 - Fix issues in your receipt generation workflow
 - Re-run validation
@@ -340,6 +355,7 @@ Status: VALIDATED
 ### 5.1 Manual Submission (for testing)
 
 ```bash
+
 # Sign receipt
 receipt_json=$(cat receipt.json)
 signature=$(echo -n "$receipt_json" | openssl dgst -sha256 -hmac "$HMAC_SECRET" | cut -d' ' -f2)
@@ -351,6 +367,7 @@ curl -X POST \
   -H "X-Producer: your-org/your-repo" \
   -d @receipt.json \
   "https://api.mapa.rafaelia/federated-receipts"
+
 ```
 
 ### 5.2 Automated Submission
@@ -372,6 +389,7 @@ After submission, the Mapa broker validates:
 **Timeline**: Usually completes within minutes.
 
 **What happens if validation fails**:
+
 - Broker logs rejection reason
 - Your producer gets notified (via GitHub Issues)
 - Review federation policy rejection criteria
@@ -388,6 +406,7 @@ Once broker validation passes:
 3. **Lane 00 (Governança)** issues governance decision (24-hour SLA)
 
 **Approval outcomes**:
+
 - **APPROVED_CLOSED**: Receipt accepted, can be used for downstream decisions
 - **APPROVED_PRESERVED**: Receipt accepted but marked for observation
 - **CONDITIONAL**: Approval requires remediation of specific issues
@@ -402,12 +421,15 @@ Once broker validation passes:
 **Cause**: Secret key mismatch
 
 **Fix**:
+
 ```bash
+
 # Verify secret is set
 echo $RAFAELIA_HMAC_SECRET | wc -c  # Should be 65 (64 chars + newline)
 
 # Check for hidden characters
 echo -n "$RAFAELIA_HMAC_SECRET" | od -c
+
 ```
 
 ### Issue: Schema Validation Failed
@@ -462,6 +484,7 @@ Mapa stores your federated receipts for **730 days** (2 years) minimum.
 ### Security Review
 
 Quarterly federation audits verify:
+
 - All producers still comply with policy
 - No unauthorized modifications to receipts
 - Signature validity maintained

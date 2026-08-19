@@ -2,9 +2,9 @@
 
 ## Cryptographic Key Lifecycle for Federated Receipt Signing
 
-**Date**: 2026-08-19  
-**Framework**: Rafaelia Federation System (Phase 2-P1-04b)  
-**Audience**: System Administrators, Lane 00 (Governança), Lane 07 (Segurança)  
+**Date**: 2026-08-19
+**Framework**: Rafaelia Federation System (Phase 2-P1-04b)
+**Audience**: System Administrators, Lane 00 (Governança), Lane 07 (Segurança)
 **Status**: Operational Guidelines
 
 ---
@@ -29,6 +29,7 @@ HMAC secrets for Rafaelia federation are **randomly generated 256-bit keys** (64
 **Generation Method**:
 
 ```bash
+
 # Using OpenSSL (FIPS-compliant)
 openssl rand -hex 32 > hmac-secret.txt
 
@@ -36,9 +37,11 @@ openssl rand -hex 32 > hmac-secret.txt
 import secrets
 key = secrets.token_hex(32)
 print(key)  # e.g., abc123def456...
+
 ```
 
 **Security Properties**:
+
 - **Length**: 32 bytes (256 bits) minimum
 - **Entropy**: Cryptographically random (≥128 bits effective entropy)
 - **Format**: Hex-encoded ASCII string (no binary storage)
@@ -56,6 +59,7 @@ print(key)  # e.g., abc123def456...
 | **Local (dev)** | Development/testing only | N/A (test keys only) | Developer laptops |
 
 **Never Store**:
+
 - ❌ In version control (git)
 - ❌ In workflow logs
 - ❌ In comments or documentation
@@ -100,12 +104,14 @@ print(key)  # e.g., abc123def456...
 ### 2.3 Emergency Rotation
 
 **Triggers**:
+
 - Suspected key compromise (e.g., accidental commit to public repo)
 - Unauthorized signature detection
 - Storage breach on producer or broker side
 - Security incident affecting related systems
 
 **Process** (within 1 hour):
+
 1. **Immediate**: Rotate key in GitHub Secrets (producer side)
 2. **Immediate**: Rotate key in Vault (broker side)
 3. **Within 15 min**: Audit recent receipts for unauthorized signatures
@@ -136,6 +142,7 @@ print(key)  # e.g., abc123def456...
 
 4. **Audit log**:
    ```json
+
    {
      "timestamp": "2026-08-19T12:00:00Z",
      "event": "KEY_DISTRIBUTION",
@@ -162,15 +169,19 @@ print(key)  # e.g., abc123def456...
 **GitHub Secrets Configuration**:
 
 ```yaml
+
 # In producer repository settings → Secrets and variables → Actions
 
 RAFAELIA_HMAC_SECRET: [64-char hex string from Mapa Lane 00]
+
 RAFAELIA_BROKER_ENDPOINT: "https://api.mapa.rafaelia/federated-receipts"
+
 ```
 
 **Workflow Usage** (NEVER print secret):
 
 ```yaml
+
 env:
   HMAC_SECRET: ${{ secrets.RAFAELIA_HMAC_SECRET }}
 
@@ -182,10 +193,11 @@ jobs:
         run: |
           # ✅ CORRECT: Use secret without logging
           signature=$(echo -n "$receipt" | openssl dgst -sha256 -hmac "$HMAC_SECRET")
-          
+
           # ❌ WRONG: Never do this
           # echo "Secret: $HMAC_SECRET"  # Would be logged!
           # echo $HMAC_SECRET > file.txt # Would be committed!
+
 ```
 
 ---
@@ -197,6 +209,7 @@ jobs:
 **Every receipt submission logged**:
 
 ```json
+
 {
   "timestamp": "2026-08-19T12:05:30Z",
   "event": "RECEIPT_SIGNATURE_VERIFIED",
@@ -206,7 +219,9 @@ jobs:
   "signature_valid": true,
   "receipt_id": "receipt-123456789",
   "run_id": "12345678901"
+
 }
+
 ```
 
 **Append-only storage**: `data/audits/hmac-key-audit.jsonl`
@@ -214,12 +229,14 @@ jobs:
 ### 4.2 Anomaly Detection
 
 **Alert on**:
+
 - ⚠️ Signature verification failure from trusted producer
 - ⚠️ Unusual submission frequency (e.g., 100+ receipts/hour)
 - ⚠️ Receipts from unexpected GitHub Actions runners
 - ⚠️ Multiple failed signature attempts (potential attack)
 
 **Thresholds**:
+
 - **1 failure**: Log and investigate
 - **3 failures in 24 hours**: Notify producer & Lane 07
 - **10 failures in 24 hours**: Suspend producer pending review
@@ -229,6 +246,7 @@ jobs:
 **Lane 07 generates monthly**:
 
 ```markdown
+
 # HMAC Key Audit Report — August 2026
 
 ## Key Status
@@ -249,6 +267,7 @@ jobs:
 
 ## Recommendations
 - [List any security improvements]
+
 ```
 
 ---
@@ -260,12 +279,14 @@ jobs:
 **Occurs when**: Broker cannot verify receipt signature with stored key
 
 **Investigation**:
+
 1. Check if producer recently rotated key (expected)
 2. Compare signature with audit trail (look for new key fingerprint)
 3. Verify receipt hasn't been tampered with (check all fields)
 4. Contact producer if issue persists
 
 **Resolution**:
+
 - ✅ If expected rotation: Accept receipt (2-week dual-key period)
 - ✅ If producer rotated early: Update broker key, confirm with producer
 - ❌ If tampering suspected: Reject receipt, escalate to Lane 07
@@ -273,23 +294,27 @@ jobs:
 ### 5.2 Suspected Key Compromise
 
 **Indicators**:
+
 - Unauthorized receipt from producer
 - Signature verification fails when it shouldn't
 - Producer reports accidental secret exposure
 
 **Immediate Actions** (within 15 minutes):
+
 1. **Producer**: Rotate key in GitHub Secrets immediately
 2. **Broker**: Deactivate old key, prevent new receipts with old signature
 3. **Lane 07**: Begin forensic audit of recent receipts
 4. **Lane 00**: Prepare incident response plan
 
 **Investigation** (within 24 hours):
+
 - Review all receipts signed with compromised key
 - Identify which ones were legitimate vs. forged
 - Determine exposure timeline
 - Implement long-term mitigations
 
 **Recovery**:
+
 - Producer can request re-submission of legitimate receipts with new key
 - Forged receipts remain in audit trail (marked as compromised)
 - Post-incident review with Lane 00
@@ -315,6 +340,7 @@ jobs:
 **Lane 07 (Segurança) signs off annually**:
 
 ```json
+
 {
   "timestamp": "2026-12-31T23:59:59Z",
   "attestation": "HMAC_KEY_MANAGEMENT_SECURE",
@@ -328,7 +354,9 @@ jobs:
   ],
   "signed_by": "Lane 07 Security Authority",
   "status": "APPROVED"
+
 }
+
 ```
 
 ### 6.3 Proof of Custody
@@ -351,6 +379,7 @@ Every key carries immutable proof:
 **Scenario**: Broker's HMAC key store is lost/corrupted
 
 **Process**:
+
 1. **Fail-closed**: All receipts rejected until key recovery
 2. **Backup activation**: Restore HMAC keys from encrypted backup
 3. **Verification**: Confirm key fingerprints match audit trail
@@ -361,6 +390,7 @@ Every key carries immutable proof:
 **Scenario**: Producer can't access GitHub Secrets
 
 **Process**:
+
 1. Producer contacts Lane 00 (via secure channel)
 2. Lane 00 regenerates key
 3. Secure delivery to producer (same as initial distribution)
@@ -381,23 +411,35 @@ Every key carries immutable proof:
 ## Appendix: Key Generation Command Reference
 
 **Generate new key**:
+
 ```bash
+
 openssl rand -hex 32
+
 ```
 
 **Get key fingerprint** (for audit):
+
 ```bash
+
 echo -n "abc123def456..." | sha256sum
+
 ```
 
 **Test HMAC signature**:
+
 ```bash
+
 echo -n "test message" | openssl dgst -sha256 -hmac "your-secret-key"
+
 ```
 
 **Verify receipt signature** (producer-side):
+
 ```bash
+
 # Inside workflow
 signature=$(echo -n "$receipt_json" | openssl dgst -sha256 -hmac "$RAFAELIA_HMAC_SECRET" | cut -d' ' -f2)
 echo "Signature: $signature"
+
 ```
