@@ -1,0 +1,109 @@
+{
+  "schema": "rafaelia.operational-gap.v1",
+  "gap_id": "gap:rafgittools:federated-executor:mixed-ci:20260819T1043BRT",
+  "observed_at": "2026-08-19T10:43:05-03:00",
+  "state": "REVALIDATION_REQUIRED",
+  "claim_allowed": false,
+  "source_pointer": {
+    "provider": "github",
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "pr": 361,
+    "head_sha": "d071177b876fb6eaca8bb0ac04d533409ca9bcfa",
+    "merge_commit_sha": "01d7e3f51c1489e3523b3a31d7a8423e80d435ce"
+  },
+  "owner": "rafaelmeloreisnovo/RafGitTools",
+  "authority": {
+    "local": "rafaelmeloreisnovo/RafGitTools",
+    "federated": "rafaelmeloreisnovo/Mapa"
+  },
+  "affected_routes": ["R1", "R5", "R6", "R11"],
+  "provenance": {
+    "Mapa_contract_merge": "ef9e436a04cc2a1fe348afe57c0994f8e181da66",
+    "RafGitTools_executor_merge": "01d7e3f51c1489e3523b3a31d7a8423e80d435ce",
+    "Termux_adapter_merge": "fb18bbc4794dace1cc3480519681191f83152af6",
+    "RafGitTools_head": "d071177b876fb6eaca8bb0ac04d533409ca9bcfa"
+  },
+  "evidence_for": [
+    "PR #361 is merged and materializes Q01..Q12, eight mandatory dimensions, fail-closed work-item validation and adversarial tests.",
+    "Exact-head workflow observations include Federation Audit SUCCESS, Internal Validation SUCCESS, PR Validation run 734 SUCCESS, Android Client Build SUCCESS and rafaelia-block1 SUCCESS.",
+    "Mapa PR #288 and Termux PR #375 are also merged, aligning federated authority, executor and Android provider adapter."
+  ],
+  "evidence_against_or_limiting": [
+    "The same RafGitTools head has terminal failures in CI, Security Scan, CodeQL Advanced, Performance Metrics, Documentation, Code Coverage and Source Gap Audit.",
+    "A later PR Validation run 735 on the same head is FAILURE after the earlier run 734 SUCCESS.",
+    "Job-step/root-cause evidence for those failures was not available through the bounded observation path in this cycle; causality to the new federated contract is therefore not established.",
+    "Merge state does not prove executor-wide runtime/security/coverage health."
+  ],
+  "uncertainty_state": {
+    "before": "TOKEN_VAZIO_PROVIDER_CI_EXACT_HEAD",
+    "after": "MIXED_TERMINAL_EVIDENCE_ROOT_CAUSE_TOKEN_VAZIO",
+    "delta": "reduced execution-observation uncertainty; root-cause uncertainty remains"
+  },
+  "urgency": "P1",
+  "necessity": "HIGH",
+  "impact": "HIGH",
+  "detectability": "HIGH_AT_WORKFLOW_LEVEL__TOKEN_VAZIO_AT_FAILING_STEP_LEVEL",
+  "recurrence_risk": "MEDIUM_HIGH",
+  "failure_mode": "A merged federated executor may inherit a broad VERIFIED interpretation from selected green gates while other exact-head gates remain red or change from PASS to FAIL without root-cause classification.",
+  "falsifier": "Fetch failing job/step/log evidence for the exact head, classify each failure as code/contract/environment/infrastructure/stale-independent, then rerun the bounded canonical executor gates; promotion requires terminal evidence for the claimed scope.",
+  "next_probe": [
+    "Resolve jobs/steps for PR Validation run 735 and CI run 943.",
+    "Classify whether failures are pre-existing, infrastructure/environmental, or introduced by the federated executor delta.",
+    "Execute scripts/check_agent_entry_kernel.py and scripts/validate_federated_work_item.py against the exact merged tree or capture equivalent CI step receipts.",
+    "Emit receiving-side Mapa transition only for scopes whose exit criteria are observed."
+  ],
+  "mitigation": [
+    "Keep claim_allowed=false for executor-wide promotion.",
+    "Preserve successful structural/federation gates as scoped evidence; do not discard them because unrelated gates are red.",
+    "Do not classify red workflows as contract regression without failing-step evidence.",
+    "Do not allow merge to erase the mixed-CI state."
+  ],
+  "closure_gate": "RGT_FEDERATED_EXECUTOR_EXACT_HEAD_ROOT_CAUSE_AND_SCOPED_GREEN_RECEIPT",
+  "review_or_expiry": "EVENT_TRIGGERED_ON_EXECUTOR_CONTRACT_OR_WORKFLOW_CHANGE",
+  "predecessor_lineage": [
+    "Mapa:data/control-plane/RAFAELIA_FEDERATED_WORK_SERVICE_CONTRACT.v1.json",
+    "RafGitTools:configs/agent-entry-kernel.v1.json",
+    "RafGitTools:PR#361"
+  ],
+  "component_lifecycle_ledger": {
+    "component": "rafgittools:federated-work-service-executor",
+    "calendar_age": "NEWLY_MERGED_2026-08-19",
+    "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": "MULTIPLE_CI_RUNS_OBSERVED_COUNT_NOT_PROMOTED_AS_LIFETIME",
+    "test_cycles": "TOKEN_VAZIO_TOTAL",
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": "TOKEN_VAZIO_CALIBRATION",
+    "dependency_changes": "FEDERATED_CONTRACT_AND_AGENT_KERNEL_V1_1",
+    "environment_exposure": "GITHUB_ACTIONS_PR_HEAD",
+    "load_stress_proxy": "TOKEN_VAZIO",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "software_schema_version": "agent-entry-kernel.v1.1.0",
+    "evidence_age": "CURRENT_CYCLE",
+    "provenance_age": "CURRENT_CYCLE",
+    "last_verified_at": "TOKEN_VAZIO_EXECUTOR_WIDE",
+    "next_review_gate": "RGT_FEDERATED_EXECUTOR_EXACT_HEAD_ROOT_CAUSE_AND_SCOPED_GREEN_RECEIPT",
+    "retirement_revalidation_criteria": "EVENT_TRIGGERED on executor contract, canonical workflow, security gate, Mapa authority pointer or producer/consumer boundary change"
+  },
+  "impact_radius": [
+    {"component":"Mapa federated work-service state","direct_exposure":false,"transmitted_load_or_effect":"receiving-side state may overread executor merge","hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"scoped executor receipt","false_positive_cost":"extra validation","false_negative_cost":"incorrect federated promotion"},
+    {"component":"RafGitTools executor/kernel","direct_exposure":true,"transmitted_load_or_effect":"mixed exact-head CI","hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"failing job/step evidence","false_positive_cost":"unnecessary rework","false_negative_cost":"unclassified executor defect"},
+    {"component":"Termux producer adapter","direct_exposure":false,"transmitted_load_or_effect":"cross-repo work routing depends on executor semantics","hidden_state_possible":true,"inspection_required":false,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"producer+executor bounded receipt","false_positive_cost":"extra preflight","false_negative_cost":"cross-repo state drift"}
+  ],
+  "actions": {
+    "DETECTIVE": "Exact-head workflow inventory revealed mixed terminal outcomes and PASS→FAIL on PR Validation.",
+    "PREVENTIVE": "Block executor-wide promotion until failing scopes are classified.",
+    "PRECAUTIONARY": "Fail closed; preserve TOKEN_VAZIO_ROOT_CAUSE.",
+    "ADAPTIVE": "Recompute lifecycle after coordinated Mapa/RafGitTools/Termux merges.",
+    "CORRECTIVE": "No code correction executed because root cause is not evidenced.",
+    "MAINTENANCE": "Event-triggered revalidation opened for the executor after merge and workflow-state change.",
+    "INCIDENT_INVESTIGATION": "Near-miss only: risk of overpromotion from selective green evidence; no consumed incident demonstrated.",
+    "SAFETY_ASSURANCE": "Successful gates retained as scoped evidence; red gates retained as unresolved evidence.",
+    "LEARNING_ANTI_RECURRENCE": "A federated merge must not collapse mixed exact-head CI into a single green state."
+  }
+}
