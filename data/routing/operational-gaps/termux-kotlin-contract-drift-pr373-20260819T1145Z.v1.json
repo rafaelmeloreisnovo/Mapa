@@ -1,0 +1,90 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "TERMUX-KOTLIN-CONTRACT-DRIFT-PR373-20260819T1145Z",
+  "observed_at": "2026-08-19T11:45:00Z",
+  "state": "BLOCKED_COMPILE_REVALIDATION_REQUIRED",
+  "claim_allowed": false,
+  "source_pointer": {
+    "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "pr": 373,
+    "head_sha": "48a0e94399e5db846072667ff0fe88853d57d011",
+    "pipeline_run_id": 32216210650,
+    "failed_job_id": 95958380189,
+    "failed_task": ":app:compileDebugKotlin"
+  },
+  "owner_authority": "termux-app-rafacodephi",
+  "affected_routes": ["R6", "R7", "R11"],
+  "provenance": "GitHub PR head workflow -> jobs -> job log",
+  "evidence_for": [
+    "PR373 removed the duplicate BetaOrchestratorActivity declaration and strengthened the manifest contract test",
+    "On PR373 head, 6 workflows completed SUCCESS and 3 completed FAILURE",
+    "RAFAELIA Pipeline run 32216210650 reached Kotlin compilation after setup/bootstrap stages",
+    "Job 95958380189 failed at :app:compileDebugKotlin with unresolved references/signature/type mismatches in RAFLANG components including RafExecutionPipeline, RafPermissionManager, RafBackgroundService and RaflangTranslator"
+  ],
+  "evidence_against": [
+    "No evidence establishes that the manifest correction caused the Kotlin failures",
+    "No evidence establishes that actions/cache v6 or actions/checkout v7 caused these Kotlin failures",
+    "No physical-device runtime was reached by this failing build"
+  ],
+  "uncertainty_state": {
+    "failure_location": "OBSERVED_COMPILEDEBUGKOTLIN",
+    "root_cause": "TOKEN_VAZIO_ROOT_CAUSE",
+    "regression_origin_commit": "TOKEN_VAZIO_BISECT",
+    "physical_runtime": "TOKEN_VAZIO_NOT_REACHED"
+  },
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "detectability": 3,
+  "recurrence_risk": 2,
+  "failure_mode": "KOTLIN_API_TYPE_CONTRACT_DRIFT_OR_INCOMPATIBILITY",
+  "component_lifecycle_ledger": {
+    "calendar_age": "TOKEN_VAZIO",
+    "execution_hours_runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": 1,
+    "test_cycles": "TOKEN_VAZIO_PRE_TEST_COMPILE_FAILURE",
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": "TOKEN_VAZIO",
+    "dependency_changes": "TOKEN_VAZIO_CAUSAL_RELATION_NOT_ESTABLISHED",
+    "environment_exposure": "GitHub-hosted Ubuntu runner; Android/Gradle build path",
+    "load_stress_proxy": "TOKEN_VAZIO",
+    "incident_count": 0,
+    "near_miss_count": 0,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "software_schema_version": "PR373@48a0e94399e5db846072667ff0fe88853d57d011",
+    "evidence_age": "TOKEN_VAZIO",
+    "provenance_age": "TOKEN_VAZIO",
+    "last_verified_at": "TOKEN_VAZIO_NO_GREEN_APP_COMPILE",
+    "next_review_gate": "COMPILEDEBUGKOTLIN_GREEN_AT_PINNED_COMMIT",
+    "retirement_revalidation_criteria": "Revalidate after any material RAFLANG API/type change and after the minimal fix/bisect"
+  },
+  "impact_radius": [
+    {"component": "RafExecutionPipeline", "direct_exposure": true, "hidden_state_possible": true, "revalidation_required": true},
+    {"component": "RafPermissionManager", "direct_exposure": true, "hidden_state_possible": true, "revalidation_required": true},
+    {"component": "RafBackgroundService", "direct_exposure": true, "hidden_state_possible": true, "revalidation_required": true},
+    {"component": "RaflangTranslator", "direct_exposure": true, "hidden_state_possible": true, "revalidation_required": true},
+    {"component": "APK build and downstream runtime gates", "direct_exposure": false, "transmitted_load_or_effect": "blocked by compilation", "hidden_state_possible": true, "revalidation_required": true}
+  ],
+  "false_positive_cost": "Unnecessary code/API investigation",
+  "false_negative_cost": "Treating a non-compiling app state as runtime-valid and contaminating downstream assurance",
+  "actions": {
+    "detective": "Pin PR373 head and preserve exact failed task, job, log and affected symbols",
+    "preventive": "Require compile gate before runtime/device promotion and add API-contract compile coverage for RAFLANG boundaries",
+    "precautionary": "Fail closed; keep runtime/device/release claims blocked",
+    "adaptive": "Separate this newly exposed compile layer from the already-fixed manifest layer",
+    "corrective": "REQUIRED_NOT_EXECUTED_PENDING_MINIMAL_BISECT_AND_CONTRACT_FIX",
+    "maintenance": "EVENT_TRIGGERED_REVALIDATION after manifest barrier removal exposed next failing layer",
+    "incident_investigation": "No incident promoted; investigate mechanism and earliest introducing commit without blame attribution",
+    "safety_assurance": "Require green compile + downstream tests on pinned commit after correction",
+    "learning_anti_recurrence": "A fixed upstream barrier must trigger re-execution of all previously unreachable downstream gates"
+  },
+  "falsifier": "If the same pinned PR373 head compiles cleanly under the same reproducible environment, this gap classification must be revised; otherwise bisect to the earliest commit where compileDebugKotlin transitions PASS->FAIL.",
+  "next_probe": "Bisect or compare RAFLANG API/type changes around the failing symbols, make the smallest contract-consistent correction, then rerun compileDebugKotlin before any APK/device claim.",
+  "mitigation": "Contain at compile gate; no runtime/release promotion; preserve logs and lineage.",
+  "closure_gate": "PINNED_COMMIT_COMPILEDEBUGKOTLIN_PASS_PLUS_DOWNSTREAM_TEST_RECEIPT",
+  "review_or_expiry": "Re-evaluate immediately after RAFLANG contract correction or a new pinned build receipt.",
+  "predecessor_lineage": "data/routing/cycles/omega-federated-cycle-20260819T1048Z.v1.json"
+}
