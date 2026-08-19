@@ -1,0 +1,99 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "gap:mapa:federated-broker:hmac-provenance:20260819",
+  "status": "NEAR_MISS",
+  "source_pointer": "github://rafaelmeloreisnovo/Mapa@732fdb4a661527a30b003036852e4f8d97a415a1/.github/workflows/federated-receipt-broker.yml",
+  "owner_authority": "Mapa/federated-receipt-broker",
+  "affected_routes": ["R4", "R5", "R6", "R11", "R12"],
+  "observed_at": "2026-08-19T02:46:38-03:00",
+  "provenance": [
+    {
+      "source": "tools/validate_federated_receipt.py@main",
+      "observation": "Validator imports hashlib/hmac and documents HMAC validation, but validate_receipt does not execute a cryptographic HMAC comparison; producer_commitment validation checks only field presence."
+    },
+    {
+      "source": ".github/workflows/federated-receipt-broker.yml@main",
+      "observation": "GATE 4 converts provenance-verifier failure into a warning and then emits a verified message; Lane 04 subsequently records signature_valid=true and provenance_chain=true unconditionally."
+    },
+    {
+      "source": "PR #285 merged as 17cb05622ad1ac91627cec588e9b61d75ddc9057",
+      "observation": "PR text states HMAC-SHA256 signatures prove receipt provenance while full federated receipt validation was still awaiting samples."
+    }
+  ],
+  "evidence_for": [
+    "get_producer_secret returns a placeholder string and is not called by validate_receipt",
+    "validate_producer_commitment verifies required fields but not HMAC bytes",
+    "GATE 4 uses `|| echo WARNING` rather than fail-closed propagation",
+    "Lane 04 audit entry hardcodes signature_valid=true and provenance_chain=true"
+  ],
+  "evidence_against": [
+    "The broker is workflow_dispatch and Lane 00 still requires a governance decision before final receipt approval",
+    "No external producer receipt falsely promoted to a published claim was observed in this cycle"
+  ],
+  "uncertainty_state": "MECHANISM_CONFIRMED_IMPACT_BOUNDED_BY_NO_OBSERVED_EXTERNAL_PROMOTION",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 2,
+  "failure_mode": "Structural signature/provenance fields can be recorded as validated even when cryptographic HMAC verification and cross-repo provenance verification have not actually passed.",
+  "falsifier": "A reproducible broker run with a deliberately wrong HMAC and a deliberately broken provenance chain is rejected before Lane 04, while a correctly signed receipt with immutable remote provenance passes both checks.",
+  "next_probe": "Add positive and negative HMAC KATs, make provenance verification fail-closed, derive Lane 04 booleans from actual gate outputs, then run one wrong-signature and one broken-provenance fixture.",
+  "mitigation": {
+    "fail_closed": true,
+    "action": "Keep external federation claim_allowed=false; do not treat signature_valid or provenance_chain as true until cryptographic and remote checks return terminal PASS.",
+    "rollback": "Disable external federation path or revert broker to self-test-only mode if a receipt can reach Lane 04 without cryptographic/provenance PASS."
+  },
+  "closure_gate": {
+    "criterion": "Negative fixtures are rejected fail-closed and positive fixture passes HMAC plus immutable provenance verification with captured logs/receipt.",
+    "evidence_needed": "CI run IDs, terminal job steps, HMAC KAT outputs, provenance verifier outputs, commit SHA and evidence receipt.",
+    "falsifier": "Any invalid signature/provenance fixture reaches Lane 04 with all_gates_passed=true.",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "Re-evaluate on any change to broker, federated validator, federation policy, producer onboarding or external federation enablement.",
+  "claim_allowed": false,
+  "action_categories": [
+    "DETECTIVE",
+    "PREVENTIVE",
+    "PRECAUTIONARY",
+    "CORRECTIVE",
+    "MAINTENANCE",
+    "INCIDENT_INVESTIGATION",
+    "SAFETY_ASSURANCE",
+    "LEARNING_ANTI_RECURRENCE"
+  ],
+  "detector": {
+    "signal": "Lane 04 says signature_valid/provenance_chain=true without an observed cryptographic/provenance PASS artifact",
+    "threshold": "any federation run where derived evidence for either boolean is absent",
+    "false_positive": "gate output exists in an artifact not visible to the current connector",
+    "false_negative": "hardcoded success masks a failed verifier",
+    "evidence_needed": "gate outputs, logs, receipt digest and verifier exit codes"
+  },
+  "maintenance": {
+    "type": "EVENT_TRIGGERED",
+    "trigger": "merge/change to broker, validator, policy, HMAC key handling or producer registry",
+    "verification": "rerun negative and positive federation fixtures before reusing prior validation evidence"
+  },
+  "incident_investigation": {
+    "trigger": "post-merge inspection of federated producer infrastructure",
+    "timeline": ["PR #285 merged", "broker and validator inspected", "HMAC/provenance semantic mismatch confirmed"],
+    "competing_mechanisms": ["documentation overstates implementation", "workflow hardcodes downstream booleans", "provenance verifier may be absent or non-terminal"],
+    "contributing_factors": ["structural validation conflated with cryptographic validation", "warning path interpreted as verified"],
+    "recommendation": "make every security/provenance assertion derive from explicit terminal gate evidence"
+  },
+  "safety_assurance": {
+    "data_acquisition": "capture actual validator/verifier exit codes and artifacts for positive/negative fixtures",
+    "analysis": "compare claimed booleans against terminal gate outputs",
+    "system_reassessment": "propagate invalidation to R4/R5/R6/R11/R12 if any gate can be bypassed",
+    "corrective_trigger": "invalid fixture is accepted or downstream success is logged without evidence"
+  },
+  "learning": {
+    "reusable_control": "security/provenance booleans must be evidence-derived, never hardcoded",
+    "index_or_test": "negative HMAC and broken-provenance fixtures become mandatory regression tests",
+    "recurrence_check": "every broker/validator/policy change invalidates previous federation assurance until tests rerun"
+  }
+}
