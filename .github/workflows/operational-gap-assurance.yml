@@ -4,14 +4,22 @@ on:
   pull_request:
     paths:
       - "scripts/operational_gap_assurance.py"
+      - "scripts/component_lifecycle_assurance.py"
+      - "tools/verify_cross_repo_provenance.py"
       - "data/routing/operational-gaps/**"
+      - "data/routing/component-lifecycle/**"
       - ".github/workflows/operational-gap-assurance.yml"
+      - ".github/workflows/federated-receipt-broker.yml"
   push:
     branches: [main]
     paths:
       - "scripts/operational_gap_assurance.py"
+      - "scripts/component_lifecycle_assurance.py"
+      - "tools/verify_cross_repo_provenance.py"
       - "data/routing/operational-gaps/**"
+      - "data/routing/component-lifecycle/**"
       - ".github/workflows/operational-gap-assurance.yml"
+      - ".github/workflows/federated-receipt-broker.yml"
 
 permissions:
   contents: read
@@ -25,9 +33,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Compile
-        run: python3 -m py_compile scripts/operational_gap_assurance.py
-      - name: Self-test
+      - name: Compile assurance engines
+        run: |
+          python3 -m py_compile \
+            scripts/operational_gap_assurance.py \
+            scripts/component_lifecycle_assurance.py \
+            tools/verify_cross_repo_provenance.py
+      - name: Operational gap self-test
         run: python3 scripts/operational_gap_assurance.py --self-test
       - name: Validate operational gap records
         run: |
@@ -38,3 +50,17 @@ jobs:
             python3 scripts/operational_gap_assurance.py "$record"
           done < <(find data/routing/operational-gaps -type f -name '*.json' -print | sort)
           test "$count" -gt 0
+      - name: Validate component lifecycle ledgers
+        run: |
+          set -euo pipefail
+          count=0
+          while IFS= read -r record; do
+            count=$((count + 1))
+            python3 scripts/component_lifecycle_assurance.py "$record"
+          done < <(find data/routing/component-lifecycle -type f -name '*.json' -print | sort)
+          test "$count" -gt 0
+      - name: Verify self-test cross-repo provenance
+        run: |
+          python3 tools/verify_cross_repo_provenance.py \
+            --receipt tests/fixtures/federated/self-test-receipt.json \
+            --policy data/control-plane/federation-policy.v1.json
