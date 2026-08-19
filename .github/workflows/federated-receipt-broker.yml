@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       receipt_url:
-        description: "URL of federated receipt (for manual testing)"
+        description: "Repository-local receipt path; remote URL transport remains TOKEN_VAZIO"
         required: false
         type: string
       producer_id:
@@ -23,7 +23,7 @@ jobs:
     outputs:
       receipt_id: ${{ steps.receive.outputs.receipt_id }}
       validation_status: ${{ steps.validate.outputs.status }}
-      producer_status: ${{ steps.check-producer.outputs.status }}
+      provenance_status: ${{ steps.provenance.outputs.status }}
 
     steps:
       - name: Checkout
@@ -37,319 +37,124 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: "GATE 1: Receive federated receipt (manual or webhook)"
+      - name: "GATE 1: Receive and classify receipt"
         id: receive
+        env:
+          RECEIPT_PATH: ${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}
+          PRODUCER_ID: ${{ inputs.producer_id || 'self-test' }}
         run: |
           set -euo pipefail
-
-          # Log receipt arrival with immutability markers
-          receipt_id="receipt-$(date +%s%N)-$(head -c 8 /dev/urandom | od -An -tx1 | tr -d ' ')"
+          receipt_id="receipt-$(date +%s%N)"
           echo "receipt_id=$receipt_id" >> "$GITHUB_OUTPUT"
-
-          timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          echo "Receipt received at: $timestamp"
-          echo "Receipt ID: $receipt_id"
-
-          # Audit log entry (append-only)
-          audit_entry=$(cat <<EOF
-          {
-            "timestamp": "$timestamp",
-            "event": "RECEIPT_RECEIVED",
-            "receipt_id": "$receipt_id",
-            "producer": "${{ inputs.producer_id || 'self-test' }}",
-            "run_id": "${{ github.run_id }}",
-            "job_id": "${{ github.job }}",
-            "source": "federated-receipt-broker",
-            "transport": "github-workflow-dispatch"
+          test -f "$RECEIPT_PATH" || {
+            echo "::error::Remote receipt transport/download is not implemented; receipt must be a repository-local path"
+            exit 2
           }
-          EOF
-          )
+          mkdir -p build/federated-broker
+          printf '{"receipt_id":"%s","producer":"%s","receipt_path":"%s","claim_allowed":false}\n' \
+            "$receipt_id" "$PRODUCER_ID" "$RECEIPT_PATH" \
+            > build/federated-broker/arrival.json
 
-          mkdir -p data/audits
-          echo "$audit_entry" >> data/audits/federated-receipts-audit.jsonl
-
-          echo "✓ Receipt logged with ID: $receipt_id"
-
-      - name: "GATE 2: Schema & policy validation"
+      - name: "GATE 2: Schema, policy and bounded receipt validation"
         id: validate
+        env:
+          RECEIPT_PATH: ${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}
         run: |
           set -euo pipefail
-
           python3 tools/validate_federated_receipt.py \
-            --receipt "${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}" \
+            --receipt "$RECEIPT_PATH" \
             --policy data/control-plane/federation-policy.v1.json \
-            --verbose > /tmp/validation-result.json 2>&1 || validation_exit=$?
-
-          # Parse validation result
-          cat /tmp/validation-result.json
-
-          # Extract status for output
-          status=$(python3 -c "import json; r=json.load(open('/tmp/validation-result.json')); print(r.get('status', 'UNKNOWN'))")
+            --verbose > build/federated-broker/validation.json
+          cat build/federated-broker/validation.json
+          status=$(python3 -c "import json; print(json.load(open('build/federated-broker/validation.json')).get('status','UNKNOWN'))")
           echo "status=$status" >> "$GITHUB_OUTPUT"
+          test "$status" = "VALIDATED"
 
-          if [ "$status" = "REJECTED" ]; then
-            echo "::error::Receipt validation failed - see validation result above"
-            exit 1
+      - name: "GATE 3: Signature boundary"
+        env:
+          PRODUCER_ID: ${{ inputs.producer_id || 'self-test' }}
+        run: |
+          set -euo pipefail
+          if [ "$PRODUCER_ID" != "self-test" ]; then
+            echo "::error::TOKEN_VAZIO_HMAC: production HMAC secret verification is not implemented in validate_federated_receipt.py"
+            exit 3
           fi
+          echo "SELF_TEST_LIMITED: signature fields are structurally checked; cryptographic HMAC verification is not claimed"
 
-          echo "✓ Receipt passed schema and policy validation"
-
-      - name: "GATE 3: Verify producer status & registration"
-        id: check-producer
+      - name: "GATE 4: Cross-repository provenance verification"
+        id: provenance
+        env:
+          RECEIPT_PATH: ${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}
         run: |
           set -euo pipefail
+          test -f tools/verify_cross_repo_provenance.py || {
+            echo "::error::TOKEN_VAZIO_PROVENANCE_VERIFIER"
+            exit 4
+          }
+          python3 tools/verify_cross_repo_provenance.py \
+            --receipt "$RECEIPT_PATH" \
+            --policy data/control-plane/federation-policy.v1.json \
+            > build/federated-broker/provenance.json
+          cat build/federated-broker/provenance.json
+          status=$(python3 -c "import json; print(json.load(open('build/federated-broker/provenance.json')).get('status','UNKNOWN'))")
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          case "$status" in PASS|VERIFIED_LIMITED) ;; *) exit 4 ;; esac
 
-          producer="${{ inputs.producer_id || 'self-test' }}"
-
-          # Check if producer is in approved list
-          python3 << 'PYEOF'
-          import json
-          from pathlib import Path
-
-          producer = "${{ inputs.producer_id || 'self-test' }}"
-          policy_path = Path("data/control-plane/federation-policy.v1.json")
-
-          with open(policy_path) as f:
-              policy = json.load(f)
-
-          # Check approved producers
-          found = False
-          for prod in policy.get("approved_producers", []):
-              if prod.get("repository_name") == producer.split('/')[-1]:
-                  found = True
-                  status = prod.get("federation_status", "UNKNOWN")
-                  print(f"Producer: {producer}")
-                  print(f"Status: {status}")
-
-                  if status not in ["REGISTERED", "PROVISIONAL"]:
-                      raise ValueError(f"Producer status {status} not approved for receipt emission")
-
-                  # Log approval check
-                  ts = __import__('datetime').datetime.utcnow().isoformat() + 'Z'
-                  audit = {
-                      "timestamp": ts,
-                      "event": "PRODUCER_VERIFIED",
-                      "producer": producer,
-                      "federation_status": status
-                  }
-
-                  audit_file = Path("data/audits/federated-receipts-audit.jsonl")
-                  audit_file.parent.mkdir(parents=True, exist_ok=True)
-                  with open(audit_file, "a") as f:
-                      f.write(json.dumps(audit) + "\n")
-
-                  print(f"✓ Producer approved: {producer} (status: {status})")
-                  break
-
-          if not found:
-              if producer == "self-test":
-                  print("✓ Self-test mode: bypassing external producer check")
-              else:
-                  raise ValueError(f"Producer not in approved list: {producer}")
-          PYEOF
-
-          echo "status=APPROVED" >> "$GITHUB_OUTPUT"
-
-      - name: "GATE 4: Cross-repo provenance verification"
-        id: verify-provenance
+      - name: "GATE 5: Immutability markers"
+        env:
+          RECEIPT_PATH: ${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}
         run: |
           set -euo pipefail
-
-          # If tools exist, run cross-repo verifier
-          if [ -f "tools/verify_cross_repo_provenance.py" ]; then
-            python3 tools/verify_cross_repo_provenance.py \
-              --receipt "${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}" \
-              --policy data/control-plane/federation-policy.v1.json \
-              || echo "WARNING: Cross-repo provenance tool not yet implemented"
-          else
-            echo "NOTE: Cross-repo provenance verifier (P1-04b task) scheduled for implementation"
-          fi
-
-          echo "✓ Provenance chain verified (or noted for P1-04b)"
-
-      - name: "GATE 5: Immutability marker validation"
-        id: check-immutability
-        run: |
-          set -euo pipefail
-
-          python3 << 'PYEOF'
-          import json
-          from pathlib import Path
-
-          receipt_path = Path("${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}")
-
-          if not receipt_path.exists():
-              print("NOTE: Self-test receipt fixture to be created in P1-04b")
-              exit(0)
-
-          with open(receipt_path) as f:
-              receipt = json.load(f)
-
-          required_markers = [
-              "run_id", "job_id", "signature_timestamp", "received_at_utc"
-          ]
-
-          found_markers = {}
-
-          # Check producer_commitment
-          commitment = receipt.get("producer_commitment", {})
-          for marker in required_markers:
-              if marker in commitment:
-                  found_markers[marker] = commitment[marker]
-
-          # Check provenance_chain
-          provenance = receipt.get("provenance_chain", {})
-          for marker in required_markers:
-              if marker not in found_markers and marker in provenance:
-                  found_markers[marker] = provenance[marker]
-
-          # Check federation_metadata
-          metadata = receipt.get("federation_metadata", {})
-          for marker in required_markers:
-              if marker not in found_markers and marker in metadata:
-                  found_markers[marker] = metadata[marker]
-
-          missing = [m for m in required_markers if m not in found_markers]
-
+          python3 - "$RECEIPT_PATH" <<'PY'
+          import json, sys
+          r=json.load(open(sys.argv[1], encoding='utf-8'))
+          blocks=[r.get('producer_commitment',{}),r.get('provenance_chain',{}),r.get('federation_metadata',{})]
+          required=['source_run_id','source_job_id','signature_timestamp','received_at_utc']
+          missing=[k for k in required if not any(k in b for b in blocks)]
           if missing:
-              print(f"ERROR: Missing immutability markers: {missing}")
-              exit(1)
+              raise SystemExit('missing immutability markers: '+','.join(missing))
+          print('PASS immutability markers:', ','.join(required))
+          PY
 
-          print(f"✓ All immutability markers present: {list(found_markers.keys())}")
-          PYEOF
-
-      - name: "LANE 04: Validation confirmation"
-        id: lane-04-confirms
+      - name: "LANE 04/06 bounded decision receipt"
+        if: success()
         run: |
           set -euo pipefail
-
-          timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-          # Log Lane 04 (Validação) confirmation
-          audit_entry=$(cat <<EOF
-          {
-            "timestamp": "$timestamp",
-            "event": "LANE_04_VALIDATION_CONFIRMED",
-            "receipt_id": "${{ steps.receive.outputs.receipt_id }}",
-            "lane": "04_validacao",
-            "validator": "automated-broker-workflow",
-            "all_gates_passed": true,
-            "checks": {
-              "schema_valid": true,
-              "signature_valid": true,
-              "producer_approved": true,
-              "immutability_markers": true,
-              "provenance_chain": true
-            }
+          python3 - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          out={
+            'observed_at': datetime.now(timezone.utc).isoformat(),
+            'state':'VERIFIED_LIMITED_SELF_TEST',
+            'lane_04_validation':'PASS_BOUNDED',
+            'lane_06_integration':'TOKEN_VAZIO_EXTERNAL_FEDERATION',
+            'claim_allowed':False,
+            'limitations':[
+              'external HMAC verification not implemented',
+              'remote receipt transport not implemented',
+              'cross-repo checkout verification limited to locally inspectable producer paths'
+            ]
           }
-          EOF
-          )
+          open('build/federated-broker/decision.json','w').write(json.dumps(out,indent=2,sort_keys=True)+'\n')
+          PY
+          cat build/federated-broker/decision.json
 
-          echo "$audit_entry" >> data/audits/federated-receipts-audit.jsonl
-
-          echo "✓ Lane 04 (Validação) confirms all gates passed"
-
-      - name: "LANE 06: Integration confirmation"
-        id: lane-06-confirms
-        run: |
-          set -euo pipefail
-
-          timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-          # Log Lane 06 (Integração) confirmation - no cascading gaps
-          audit_entry=$(cat <<EOF
-          {
-            "timestamp": "$timestamp",
-            "event": "LANE_06_INTEGRATION_CONFIRMED",
-            "receipt_id": "${{ steps.receive.outputs.receipt_id }}",
-            "lane": "06_integracao",
-            "validator": "automated-broker-workflow",
-            "cascading_gaps_check": "no_new_gaps",
-            "integration_status": "ready_for_governance_approval"
-          }
-          EOF
-          )
-
-          echo "$audit_entry" >> data/audits/federated-receipts-audit.jsonl
-
-          echo "✓ Lane 06 (Integração) confirms no cascading gaps"
-
-      - name: Store audit trail
+      - name: Store broker evidence artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: federated-receipt-audit-${{ steps.receive.outputs.receipt_id }}
-          path: data/audits/federated-receipts-audit.jsonl
-          retention-days: 730
-
-      - name: Commit audit trail (if changed)
-        if: always()
-        run: |
-          set -euo pipefail
-
-          git config user.name "Federated Receipt Broker"
-          git config user.email "broker@rafaelia.local"
-
-          git add data/audits/federated-receipts-audit.jsonl || true
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Audit: Federated receipt processed
-
-Receipt ID: ${{ steps.receive.outputs.receipt_id }}
-Status: ${{ steps.validate.outputs.status }}
-Producer: ${{ inputs.producer_id || 'self-test' }}
-
-Lanes: 04 (Validação) + 06 (Integração) confirmed
-
-Co-Authored-By: Federated Receipt Broker <broker@rafaelia.local>"
-
-            git push origin HEAD:${{ github.ref }} || echo "Could not push (expected in some contexts)"
-          fi
+          name: federated-receipt-broker-${{ steps.receive.outputs.receipt_id }}
+          path: build/federated-broker/
+          retention-days: 90
 
   lane-00-review:
-    name: "Lane 00: Governance Authority Review"
+    name: "Lane 00: Governance Review Boundary"
     needs: receive-and-validate
     runs-on: ubuntu-latest
     if: success()
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-
-      - name: Log governance decision point
+      - name: Preserve human approval boundary
         run: |
-          set -euo pipefail
-
-          timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-          # Lane 00 decision log (append-only)
-          decision_entry=$(cat <<EOF
-          {
-            "timestamp": "$timestamp",
-            "event": "LANE_00_GOVERNANCE_DECISION_REQUIRED",
-            "receipt_id": "${{ needs.receive-and-validate.outputs.receipt_id }}",
-            "lane": "00_governanca",
-            "validation_status": "${{ needs.receive-and-validate.outputs.validation_status }}",
-            "producer_status": "${{ needs.receive-and-validate.outputs.producer_status }}",
-            "decision_required": "APPROVE_RECEIPT | REJECT_RECEIPT | REQUEST_CLARIFICATION",
-            "sla_hours": 24,
-            "contact": "Lane 00 (Governança) via GitHub Issues"
-          }
-          EOF
-          )
-
-          mkdir -p data/audits
-          echo "$decision_entry" >> data/audits/federation-policy-decisions.jsonl
-
-          echo "✓ Governance decision logged - awaiting Lane 00 authority"
-          echo "  Issue: TBD (will be auto-created if approval workflow exists)"
-
-      - name: "TODO: Create GitHub Issue for Lane 00 approval"
-        run: |
-          echo "NOTE: Auto-creating Lane 00 approval issue would require write permissions"
-          echo "      Issue template: .github/ISSUE_TEMPLATE/federated-producer-approval.md"
-          echo "      To be implemented in P1-04b with GitHub App integration"
+          echo "REVIEW_REQUIRED"
+          echo "No receipt is promoted automatically."
+          echo "claim_allowed=false"
