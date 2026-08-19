@@ -1,0 +1,88 @@
+{
+  "schema_version": "rafaelia.operational-gap/v1",
+  "gap_id": "gap:termux-ci-actions-dependency-revalidation-20260819",
+  "observed_at": "2026-08-19T09:42:42Z",
+  "claim_allowed": false,
+  "owner_authority": "rafaelmeloreisnovo/termux-app-rafacodephi",
+  "source_pointer": [
+    "github:rafaelmeloreisnovo/termux-app-rafacodephi@3b423b4782a819edc6b8713fec9f81d009bc8004",
+    "github:rafaelmeloreisnovo/termux-app-rafacodephi@0ba33a91df25a16cdad0d49c9365a7ccd68a9fe7"
+  ],
+  "affected_routes": ["R6", "R7", "R11"],
+  "event_class": "EVENT_TRIGGERED_REVALIDATION",
+  "failure_mode": "CI dependency versions changed in workflows that participate in cross-domain inventory and LKG bootstrap cache handling; previous assurance must not be inherited without a post-change run.",
+  "evidence_for": [
+    "actions/cache restore/save changed from v4 to v6 in .github/workflows/beta-build.yml",
+    "actions/checkout changed from v6 to v7 in cross-domain workflows",
+    "combined status query returned no associated statuses for commit 3b423b4782a819edc6b8713fec9f81d009bc8004",
+    "pull-request workflow-run query returned no associated runs for that commit"
+  ],
+  "evidence_against": [
+    "No observed CI failure, artifact corruption, or LKG regression was found in this cycle."
+  ],
+  "uncertainty_state": "TOKEN_VAZIO_POST_DEPENDENCY_CHANGE_RUN",
+  "urgency": 3,
+  "necessity": 4,
+  "impact": 4,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "lifecycle_delta": {
+    "dependency_changes": 2,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "incident_count": 0,
+    "near_miss_count": 0,
+    "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO_POST_CHANGE",
+    "test_cycles": "TOKEN_VAZIO_POST_CHANGE",
+    "deployments": "TOKEN_VAZIO",
+    "evidence_age": "TOKEN_VAZIO",
+    "provenance_age": "TOKEN_VAZIO",
+    "last_verified_at": "TOKEN_VAZIO_POST_CHANGE"
+  },
+  "impact_radius": [
+    {
+      "component": "beta-build LKG cache restore/save",
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "cache action implementation participates in restoring/saving the last-known-good bootstrap pair",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "post-change workflow run with cache restore/save steps, bootstrap hashes, gate outcomes and artifact receipt",
+      "false_positive_cost": "extra CI execution",
+      "false_negative_cost": "stale or incorrectly handled LKG bootstrap could contaminate later APK validation"
+    },
+    {
+      "component": "cross-domain checkout workflows",
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "checkout implementation changed for source acquisition",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "post-change run proving expected checkout and inventory/contract gates",
+      "false_positive_cost": "extra CI execution",
+      "false_negative_cost": "source acquisition drift may invalidate downstream evidence"
+    }
+  ],
+  "actions": {
+    "detective": "Compare dependency-changing commits against associated statuses/runs and LKG-related workflow paths.",
+    "preventive": "Require post-change execution before inheriting prior LKG/checkout assurance.",
+    "precautionary": "Keep runtime/release promotion unchanged and claim_allowed=false until evidence exists.",
+    "adaptive": "Recompute lifecycle validity after dependency changes without rewriting previous PASS history.",
+    "corrective": "TOKEN_VAZIO_NOT_REQUIRED_YET; no defect is evidenced.",
+    "maintenance": "Classify dependency bump as event-triggered maintenance requiring revalidation.",
+    "incident_investigation": "No incident observed; preserve as change-triggered gap, not incident.",
+    "safety_assurance": "Acquire a terminal post-change run and compare outputs/hashes with the prior baseline.",
+    "learning_anti_recurrence": "Treat future CI-action changes touching bootstrap, checkout, signing or artifact custody as automatic assurance-invalidating events."
+  },
+  "falsifier": "A terminal post-change run that executes the affected checkout/cache steps, preserves expected bootstrap/artifact hashes and passes the relevant gates without regression closes this gap for the observed commit set.",
+  "next_probe": "Run or observe beta-build and cross-domain gates on a commit containing the dependency bumps; capture run_id, jobs, steps, exit codes, bootstrap hashes and artifacts.",
+  "mitigation": "Fail closed on assurance inheritance; do not classify the dependency bump itself as failure or success.",
+  "closure_gate": "POST_DEPENDENCY_CHANGE_CI_RECEIPT",
+  "review_or_expiry": "Reopen on any subsequent change to checkout/cache/bootstrap/signing/artifact-custody dependencies.",
+  "predecessor_lineage": "data/routing/cycles/omega-federated-cycle-20260819T0842Z.v1.json"
+}
