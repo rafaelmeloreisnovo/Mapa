@@ -1,0 +1,115 @@
+{
+  "schema": "rafaelia.operational-gap.v1",
+  "gap_id": "RGT-PR365-COVERAGE-NODE24-20260819T1642BRT",
+  "observed_at": "2026-08-19T16:42:31-03:00",
+  "owner": "rafaelmeloreisnovo/RafGitTools",
+  "authority": "producer-repository",
+  "source_pointer": {
+    "pr": 365,
+    "head_sha": "d2ee47fda94a14d77dc25008e9c49188f0521c67",
+    "merge_ref_sha_observed": "9a51560cec75ac7a900001c47169cc2cdc30b111",
+    "coverage_run_id": 32289232204,
+    "ci_run_id": 32289232123,
+    "source_gap_run_id": 32289232240
+  },
+  "affected_routes": ["R5", "R6", "R11", "R12"],
+  "provenance": "GitHub exact-head/merge-ref workflow jobs and logs",
+  "claim_allowed": false,
+  "failure_mode": {
+    "coverage_job": "EXPECTED_FAIL_CLOSED_WHEN_COVERAGE_CAPABILITY_ABSENT",
+    "ci_coherence": "BASELINE_MISSING_OPEN_PR362_UNITTEST_DISCOVERY_FIX",
+    "source_gap": "PERSISTENT_BASELINE_DEBT",
+    "node_runtime": "NODE20_TARGET_ACTIONS_FORCED_TO_NODE24_BY_RUNNER"
+  },
+  "evidence_for": [
+    "Coverage job unit tests completed BUILD SUCCESSFUL.",
+    "Coverage workflow detected jacocoTestReport absence and emitted TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED before deliberate exit 2.",
+    "PR365 changes only .github/workflows/coverage.yml.",
+    "CI build/unit/lint/APK/checksum/upload job completed successfully; coherence job failed at Ran 0 tests / exit 5.",
+    "PR362 remains open/draft and contains the targeted unittest discovery fix, so PR365 baseline does not inherit it.",
+    "Source Gap self-test passed and reproduced files=257 blockers=82 warnings=34 allowlisted=0 tree_sha256=bf437aaf6891a16d40271b26a66b236699b43f35b053b130377bb9169548bdad.",
+    "Workflow logs warn that actions/checkout@v4, actions/setup-python@v5 and actions/upload-artifact@v4 target Node20 and are being forced to Node24."
+  ],
+  "evidence_against": [
+    "No coverage report exists; execution of unit tests is not coverage evidence.",
+    "No evidence that PR365 introduced the 82 source-gap blockers.",
+    "No evidence that forced Node24 execution caused the observed coverage or coherence failures."
+  ],
+  "uncertainty_state": {
+    "coverage_false_evidence_path": "RESOLVED_SCOPED",
+    "coverage_capability": "TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+    "coverage_report": "TOKEN_VAZIO",
+    "ci_coherence_root_cause": "EVIDENCED_BASELINE_ORDERING_PR362",
+    "source_gap_baseline": "EVIDENCED_PERSISTENT",
+    "node24_global_compatibility": "TOKEN_VAZIO_REVALIDATION_REQUIRED"
+  },
+  "urgency": "P1",
+  "necessity": "Preserve fail-closed evidence semantics and revalidate critical GitHub Actions runtime transitions without misclassifying warnings as incidents.",
+  "impact": "High on evidence integrity; medium on execution availability.",
+  "detectability": "High through exact-head jobs/logs and action runtime warnings.",
+  "recurrence_risk": "Medium until action runtime/deprecation inventory is explicit and coverage producer exists.",
+  "falsifier": [
+    "A PR365 exact-head coverage run publishes a coverage report or coverage claim without a real producer/artifact.",
+    "A baseline containing PR362 still produces the same zero-test coherence failure.",
+    "A matched workflow using the same action/runtime set fails specifically because of Node24 after other causes are controlled."
+  ],
+  "next_probe": [
+    "Re-run coverage only after a real coverage producer/task is introduced; require report artifact before any coverage claim.",
+    "Test combined baseline PR362 + PR365 to verify coherence advances beyond zero-test barrier.",
+    "Inventory Node20-targeting critical actions and revalidate supported replacements/versions in isolated branches before promotion.",
+    "Baseline Source Gap by tree digest and classify introduced/resolved/persisting deltas rather than raw total only."
+  ],
+  "mitigation": [
+    "Keep PR365 fail-closed behavior.",
+    "Do not merge unrelated PR fixes into evidence semantics; model PR362 as explicit dependency/order edge.",
+    "Treat Node24 coercion/deprecation as EVENT_TRIGGERED maintenance, not incident, until causal failure evidence exists."
+  ],
+  "closure_gate": {
+    "coverage": "REAL_COVERAGE_PRODUCER_PLUS_ARTIFACT_PLUS_SCOPED_RECEIPT",
+    "coherence": "COMBINED_BASELINE_WITH_PR362_RUNS_DISCOVERABLE_TESTS_AND_ADVANCES_GATE",
+    "node_runtime": "SUPPORTED_ACTION_RUNTIME_CHAIN_REVALIDATED_WITH_TERMINAL_RUNS",
+    "source_gap": "BASELINE_TO_HEAD_DELTA_RECEIPT"
+  },
+  "review_or_expiry": "Revalidate on material workflow/action/runtime/coverage/source-tree change.",
+  "predecessor_lineage": [
+    "Mapa PR290 coverage/codeql append-only records",
+    "RafGitTools PR362 unittest discovery fix",
+    "RafGitTools PR365 coverage evidence boundary"
+  ],
+  "component_lifecycle_ledger": [
+    {
+      "component": "rafgittools:coverage-evidence-detector",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 1,
+      "last_verified_at": "GitHub Actions run 32289232204 (scoped fail-closed boundary only)",
+      "coverage_capability": "TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "evidence_age": "TOKEN_VAZIO"
+    },
+    {
+      "component": "rafgittools:github-actions-node-runtime-chain",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "environment_exposure": "Node20-targeting actions forced to Node24 by hosted runner",
+      "last_verified_at": "TOKEN_VAZIO_GLOBAL_COMPATIBILITY",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "provenance_age": "TOKEN_VAZIO"
+    }
+  ],
+  "impact_radius": [
+    {"component": "coverage workflow", "state": "DIRECT_EXPOSURE", "revalidation_required": true},
+    {"component": "federated evidence semantics", "state": "TRANSMITTED_INFORMATIONAL_EFFECT", "revalidation_required": true},
+    {"component": "canonical coherence gate", "state": "BASELINE_DEPENDENCY_PR362", "revalidation_required": true},
+    {"component": "Source Gap detector", "state": "BASELINE_PERSISTENT", "revalidation_required": true},
+    {"component": "GitHub Actions runtime chain", "state": "POTENTIAL_PROPAGATION", "revalidation_required": true}
+  ],
+  "actions": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "ADAPTIVE", "MAINTENANCE", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"]
+}
