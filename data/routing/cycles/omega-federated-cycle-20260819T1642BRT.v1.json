@@ -1,0 +1,118 @@
+{
+  "schema": "rafaelia.omega-federated-cycle.v1",
+  "cycle_id": "OMEGA-20260819T1642BRT",
+  "observed_at": "2026-08-19T16:42:31-03:00",
+  "predecessor": "Mapa PR290 head before this cycle: 7eef6f38ce9b2f689917c43706bc590e8d1b493d",
+  "claim_allowed": false,
+  "sources": [
+    "RafGitTools PR365 exact head d2ee47fda94a14d77dc25008e9c49188f0521c67",
+    "RafGitTools coverage run 32289232204",
+    "RafGitTools CI run 32289232123",
+    "RafGitTools Source Gap run 32289232240",
+    "RafGitTools PR362 open/draft head 328a20332794b249bec69af74da0044c6bbdcb35",
+    "RafGitTools PR364 open/draft head 38375a3ce5760fca528f66963d8c3b9aa50e6d10",
+    "Mapa PR290 append-only audit branch"
+  ],
+  "F_ok": [
+    "PR365 exact-head PR Validation SUCCESS.",
+    "PR365 exact-head Internal Validation SUCCESS.",
+    "PR365 exact-head Android Client Build SUCCESS.",
+    "Coverage fail-closed boundary is now evidenced: unit tests PASS, coverage producer absent, TOKEN_VAZIO emitted, job exits non-zero deliberately.",
+    "CI build/unit/lint/APK/checksum/upload path PASS; coherence failure isolated downstream.",
+    "Source Gap self-test PASS and persistent baseline fingerprint reproduced exactly: 257/82/34/0, tree_sha256 bf437aaf6891a16d40271b26a66b236699b43f35b053b130377bb9169548bdad.",
+    "Open-PR baseline ordering between PR362 and PR365 is explicit rather than silently inherited."
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+    "TOKEN_VAZIO_COVERAGE_REPORT",
+    "TOKEN_VAZIO_NODE24_GLOBAL_ACTION_COMPATIBILITY",
+    "TOKEN_VAZIO_CODEQL_PR365_ROOT_CAUSE until exact failing step is independently closed",
+    "SOURCE_GAP_BASELINE_DEBT: 82 blockers / 34 warnings",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_NEW_EXECUTION",
+    "TOKEN_VAZIO_DRIVE_APPEND_CAPABILITY"
+  ],
+  "F_esquecido": [
+    "A red fail-closed detector can be functioning correctly; conclusion must use step semantics, not workflow color alone.",
+    "Unit-test success is not coverage capability and missing report is not zero coverage.",
+    "Open PR fixes do not automatically exist in another PR merge-ref.",
+    "A stable raw Source Gap count needs a tree digest/baseline edge before it can be called introduced or resolved debt.",
+    "CI tooling/actions are components with lifecycle; forced runtime transitions require revalidation even without visible failure."
+  ],
+  "token_vazio_new": [
+    "TOKEN_VAZIO_NODE24_GLOBAL_ACTION_COMPATIBILITY"
+  ],
+  "token_vazio_resolved": [
+    "TOKEN_VAZIO_PR365_COVERAGE_BOUNDARY_BEHAVIOR -> EVIDENCED_SCOPED_FAIL_CLOSED",
+    "TOKEN_VAZIO_PR365_SOURCE_GAP_FINGERPRINT -> EVIDENCED_PERSISTENT_BASELINE"
+  ],
+  "uncertainty_before_after": {
+    "coverage_red_meaning": "GENERIC_FAILURE -> EXPECTED_FAIL_CLOSED_WITH_ABSENT_PRODUCER",
+    "coverage_false_evidence_path": "IMPLEMENTED_NOT_VERIFIED -> EVIDENCED_SCOPED",
+    "source_gap_counts": "PRIOR_BASELINE_ONLY -> EXACT_PR365_REPRODUCTION_WITH_TREE_DIGEST",
+    "ci_failure_scope": "GENERIC_RED -> BUILD_PATH_PASS + COHERENCE_ZERO_TESTS_BASELINE_ORDERING",
+    "node_runtime_transition": "UNTRACKED -> EVENT_TRIGGERED_MAINTENANCE"
+  },
+  "hazards": {
+    "closed_or_mitigated": [
+      "False coverage-report publication path is structurally and executably fail-closed on PR365."
+    ],
+    "open": [
+      "Coverage producer/report absent.",
+      "Node20-targeting action chain forced to Node24 without executor-wide revalidation.",
+      "Source Gap baseline debt remains.",
+      "PR362 integration ordering remains required for coherence closure."
+    ]
+  },
+  "lifecycle_deltas": [
+    {
+      "component": "rafgittools:coverage-evidence-detector",
+      "event": "PR365_FAIL_CLOSED_BOUNDARY_EXECUTED",
+      "state": "EVIDENCED_SCOPED",
+      "next_review_gate": "material workflow/coverage-producer change"
+    },
+    {
+      "component": "rafgittools:github-actions-node-runtime-chain",
+      "event": "NODE20_TARGET_ACTIONS_FORCED_TO_NODE24",
+      "state": "REVALIDATION_REQUIRED",
+      "next_review_gate": "supported action/runtime chain with terminal exact-head runs"
+    },
+    {
+      "component": "rafgittools:source-gap-detector",
+      "event": "BASELINE_FINGERPRINT_REPRODUCED",
+      "state": "EVIDENCED_PERSISTENT_DEBT",
+      "next_review_gate": "baseline-to-head introduced/resolved/persisting receipt"
+    }
+  ],
+  "actions": {
+    "DETECTIVE": "Exact-head workflows decomposed to jobs/steps/logs and tree digest.",
+    "PREVENTIVE": "False evidence publication remains blocked; no green override added.",
+    "PRECAUTIONARY": "claim_allowed=false and coverage remains TOKEN_VAZIO without producer/report.",
+    "ADAPTIVE": "PR ordering and Node runtime transition added to dependency/lifecycle state.",
+    "CORRECTIVE": "No new code correction applied beyond existing PR365; current evidence validates its intended boundary.",
+    "MAINTENANCE": "Node24 coercion and Source Gap baseline entered revalidation/maintenance state.",
+    "INCIDENT_INVESTIGATION": "No consumed incident evidenced; workflow failures were decomposed without blame or causal overreach.",
+    "SAFETY_ASSURANCE": "PR365 fail-closed semantics and source-gap fingerprint were re-executed and observed.",
+    "LEARNING_ANTI_RECURRENCE": "Workflow color is not semantic state; detectors and CI action runtimes receive their own lifecycle."
+  },
+  "routes": {
+    "promoted_scoped": ["R5 coverage evidence-boundary integrity", "R11 lifecycle classification accuracy"],
+    "blocked_or_revalidation": ["R6 executor-wide assurance", "R12 promotion/publication", "R7 physical runtime"]
+  },
+  "recommendations": {
+    "closed": ["PR365 false-coverage-evidence-path mitigation verified in exact-head run"],
+    "open": [
+      "Introduce a real coverage producer before any coverage percentage/report claim.",
+      "Test combined PR362+PR365 baseline and require coherence gate to advance beyond zero-test barrier.",
+      "Inventory/revalidate critical Node20-targeting GitHub Actions under supported runtime/version chain.",
+      "Generate Source Gap baseline-to-head delta receipt keyed by tree digest."
+    ]
+  },
+  "F_next": [
+    "COMBINED_PR362_PR365_COHERENCE_PROBE",
+    "SUPPORTED_GITHUB_ACTION_RUNTIME_CHAIN_REVALIDATION",
+    "SOURCE_GAP_BASELINE_TO_HEAD_DELTA_RECEIPT",
+    "REAL_COVERAGE_PRODUCER_ONLY_IF_IMPLEMENTED",
+    "DECOMPOSE_PR365_CODEQL_FAILURE_WITH_EXACT_STEP_LOGS"
+  ]
+}
