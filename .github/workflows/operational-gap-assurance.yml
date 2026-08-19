@@ -1,0 +1,40 @@
+name: operational-gap-assurance
+
+on:
+  pull_request:
+    paths:
+      - "scripts/operational_gap_assurance.py"
+      - "data/routing/operational-gaps/**"
+      - ".github/workflows/operational-gap-assurance.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/operational_gap_assurance.py"
+      - "data/routing/operational-gaps/**"
+      - ".github/workflows/operational-gap-assurance.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-self-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile
+        run: python3 -m py_compile scripts/operational_gap_assurance.py
+      - name: Self-test
+        run: python3 scripts/operational_gap_assurance.py --self-test
+      - name: Validate operational gap records
+        run: |
+          set -euo pipefail
+          count=0
+          while IFS= read -r record; do
+            count=$((count + 1))
+            python3 scripts/operational_gap_assurance.py "$record"
+          done < <(find data/routing/operational-gaps -type f -name '*.json' -print | sort)
+          test "$count" -gt 0
