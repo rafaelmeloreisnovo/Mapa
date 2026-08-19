@@ -1,0 +1,115 @@
+{
+  "schema": "rafaelia.federated-work-service-transition.v1",
+  "event_id": "MAPA-FGAP-FNEXT-FEDERATED-SERVICE-20260819-0001",
+  "observed_at": "2026-08-19T04:38:00-03:00",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "state": "DRAFT_FEDERATED_TRANSITION_PROVIDER_QUEUED",
+  "claim_allowed": false,
+  "predecessor": {
+    "Mapa_main": "2551b90df41d689cb2d8a961bc4fbca71a2fdc0e",
+    "related_security_gap": "gap:mapa:federated-broker:hmac-provenance:20260819",
+    "RafGitTools_gap_and_agent_kernel_merge": "d6b7f8714cf30e7ff0e63a8a794fe1764ad2f6ab"
+  },
+  "role_map": {
+    "Mapa": "federated authority + routing + state + relation/gap/claim boundary",
+    "RafGitTools": "executor/control-plane/tool-router + validation + transition receipts",
+    "AGENTS.md": "repository-local producer entry adapter",
+    "Google_Drive": "longitudinal/transversal/orthogonal memory + reconstruction",
+    "producer_repository": "local implementation/build/test/runtime authority",
+    "receipt": "evidence bridge between execution, provenance and state transition"
+  },
+  "contract_delta": {
+    "Q01_Q12": true,
+    "mandatory_dimensions": [
+      "epistemic",
+      "operational",
+      "provenance",
+      "governance",
+      "data",
+      "privacy",
+      "security",
+      "reconstruction"
+    ],
+    "non_compensatory": ["governance", "data", "privacy", "security"],
+    "TOKEN_VAZIO_preserved": true,
+    "stop_condition_required": true,
+    "rollback_for_high_critical_mutation": true
+  },
+  "observed_candidates": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pr": 288,
+      "observed_head": "5af0f581a2e0e9def791aac5daa136da5385c0ed",
+      "role": "FEDERATED_AUTHORITY",
+      "state": "OPEN_DRAFT_UNMERGED",
+      "provider_execution": "QUEUED_NOT_TERMINAL"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "pr": 361,
+      "observed_head": "64be7b3908629007b89c6f6d44a61d7ad6d3aef2",
+      "role": "CONTROL_PLANE_EXECUTOR",
+      "state": "OPEN_DRAFT_UNMERGED",
+      "provider_execution": "QUEUED_NOT_TERMINAL",
+      "successor_receipt_commit": "d071177b876fb6eaca8bb0ac04d533409ca9bcfa"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "pr": 375,
+      "observed_head": "b08ba887d2bcea0639aac3620a129754fb7a33dc",
+      "role": "ANDROID_RUNTIME_PROVIDER",
+      "state": "OPEN_DRAFT_UNMERGED",
+      "provider_execution": "QUEUED_NOT_TERMINAL"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "pr": 1099,
+      "observed_head": "b70285799649f0063fe92ffec15f19f313fe015b",
+      "role": "VM_QEMU_CONSUMER",
+      "state": "OPEN_DRAFT_UNMERGED",
+      "provider_execution": "QUEUED_NOT_TERMINAL"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-packages",
+      "pr": 86,
+      "observed_head": "61a87e7bb8dc0823848f517d5edca2a55145fe4c",
+      "role": "PACKAGE_SOURCE_FACTORY",
+      "state": "OPEN_DRAFT_UNMERGED",
+      "provider_execution": "QUEUED_NOT_TERMINAL"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/llamaRafaelia",
+      "pr": 116,
+      "observed_head": "61a8e70c0910257d254bfbf20f873eb7335c3332",
+      "role": "GOVERNED_RETRIEVAL_MEMORY",
+      "state": "OPEN_DRAFT_UNMERGED",
+      "provider_execution": "QUEUED_NOT_TERMINAL"
+    }
+  ],
+  "provider_truth_boundary": {
+    "run_creation": "OBSERVED",
+    "runner_assignment": "TOKEN_VAZIO_NOT_OBSERVED",
+    "step_execution": "TOKEN_VAZIO_NOT_OBSERVED",
+    "terminal_verdict": "TOKEN_VAZIO_NOT_OBSERVED",
+    "rule": "run creation != runner assignment != step execution != PASS"
+  },
+  "governance": {
+    "mutation_mode": "BRANCH_AND_DRAFT_PR",
+    "automatic_promotion": false,
+    "automatic_merge": false,
+    "append_only": true,
+    "authority_change": false
+  },
+  "data_privacy_security": {
+    "control_plane_payload": "REFERENCES_HASHES_BOUNDED_METADATA_ONLY",
+    "raw_private_payload_copied": false,
+    "dataset_wide_privacy_claim": "TOKEN_VAZIO_NOT_PROVEN",
+    "HMAC_cross_repo_provenance_closure": "TOKEN_VAZIO_OPEN",
+    "physical_device_execution": "TOKEN_VAZIO_NOT_PROVEN"
+  },
+  "F_ok": "Federated authority contract, F_gap/F_next transit index, AGENTS inventory, executor/validator design and four specialized producer adapter successors are materialized on isolated draft branches with provider run creation observed.",
+  "F_gap": "No terminal exact-head gate verdict is yet observed for the new candidate set; drafts are unmerged; HMAC/cross-repo provenance, physical runtime, global agent-instruction reconciliation and dataset-wide privacy classification remain open.",
+  "F_next": "Re-read exact provider runs and classify execution; fix only observed code/contract failures; produce successor receipts tied to final tested heads; then append the material navigation delta to Drive without promoting unresolved runtime/global claims.",
+  "stop_reason": "Current bounded transition is reconstructible and provider tests are still queued; additional mutation before terminal evidence would mix implementation with verification.",
+  "rollback_ref": "Mapa:main@2551b90df41d689cb2d8a961bc4fbca71a2fdc0e"
+}
