@@ -1,0 +1,55 @@
+{
+  "schema": "RAFAELIA_OMEGA_CYCLE_SUPPLEMENT_V1",
+  "cycle_id": "OMEGA_20260819T1246BRT",
+  "supplement": "security-vector-decomposition",
+  "observed_at": "2026-08-19T15:52:02Z",
+  "predecessor": "omega-federated-cycle-20260819T1246BRT.v1.json",
+  "claim_allowed": false,
+  "F_ok": [
+    "PR362 corrective runner closure has terminal PR Validation and CI success",
+    "ordinary CI build/lint/tests/APK are terminal success; APK SHA256 6d994c02ce02b9e613ac18ac2a28701ee0a6e41cae5ce7a98201bbb79b21436b",
+    "Security Scan decomposed: Secret Scanning PASS and License Compliance PASS",
+    "Trivy setup failure identified deterministically and repair isolated in draft PR363"
+  ],
+  "F_gap": [
+    "dependency vulnerability scanner did not execute on PR362; TOKEN_VAZIO_SCANNER_NOT_REACHED",
+    "CodeQL initialized but analysis did not execute because instrumented build failed at checkDevDebugAarMetadata; TOKEN_VAZIO_ANALYSIS_NOT_REACHED",
+    "CodeQL build-precondition root cause remains TOKEN_VAZIO",
+    "PR363 terminal scan receipt not yet observed",
+    "source-gap baseline delta receipt remains open"
+  ],
+  "F_esquecido": [
+    "Security Scan FAILURE is not a vulnerability verdict",
+    "setup failure != findings",
+    "build precondition failure != CodeQL finding",
+    "ordinary CI PASS does not by itself falsify instrumentation-specific failure"
+  ],
+  "token_vazio": {
+    "new": ["TOKEN_VAZIO_DEPENDENCY_SCAN_NOT_REACHED", "TOKEN_VAZIO_CODEQL_ANALYSIS_NOT_REACHED"],
+    "resolved": ["TOKEN_VAZIO_SECURITY_SCAN_FAILURE_CLASSIFICATION"],
+    "preserved": ["TOKEN_VAZIO_SOURCE_GAP_BASELINE_DELTA_RECEIPT", "TOKEN_VAZIO_EXECUTOR_WIDE_SECURITY_CLAIM"]
+  },
+  "uncertainty_before_after": {
+    "security_failure": "AGGREGATE_UNKNOWN -> VECTOR_DECOMPOSED",
+    "secret_scan": "UNKNOWN -> PASS_SCOPED",
+    "license_check": "UNKNOWN -> PASS_SCOPED",
+    "dependency_scan": "FAILURE_AMBIGUOUS -> TOKEN_VAZIO_SCANNER_NOT_REACHED_WITH_CAUSE",
+    "codeql": "FAILURE_AMBIGUOUS -> TOKEN_VAZIO_ANALYSIS_NOT_REACHED_WITH_BUILD_PRECONDITION"
+  },
+  "lifecycle_deltas": [
+    {"component": "rafgittools:dependency-vulnerability-scanner", "event": "ACTION_REFERENCE_REPAIR_PREPARED", "state": "REVALIDATION_REQUIRED", "repair_pr": 363},
+    {"component": "rafgittools:codeql-build-precondition", "event": "ANALYSIS_NOT_REACHED", "state": "INVESTIGATION_REQUIRED"}
+  ],
+  "routes": {
+    "R5": "scoped evidence improved",
+    "R6": "executor remains vector/mixed",
+    "R11": "classification improved without false promotion",
+    "R12": "security-wide promotion remains blocked"
+  },
+  "F_next": [
+    "observe PR363 exact-head Security Scan and require actual Trivy execution plus SARIF receipt",
+    "compare CodeQL instrumented build environment with ordinary CI using matched commit/ref and cache conditions",
+    "only after CodeQL analyze step executes classify CodeQL findings",
+    "preserve Source Gap Audit as independent debt pending exact-base/head delta receipt"
+  ]
+}

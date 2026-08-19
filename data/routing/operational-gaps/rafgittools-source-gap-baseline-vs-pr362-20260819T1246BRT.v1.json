@@ -1,0 +1,82 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "RGT_SOURCE_GAP_BASELINE_VS_PR362_20260819T1246BRT",
+  "observed_at": "2026-08-19T15:46:50Z",
+  "owner": "rafaelmeloreisnovo/RafGitTools",
+  "authority": "repo-producer-local; Mapa=federated-route-state",
+  "source_pointer": {
+    "pr": 362,
+    "head_sha": "328a20332794b249bec69af74da0044c6bbdcb35",
+    "source_gap_run_id": 32266399323,
+    "source_gap_job_id": 96111841959,
+    "source_tree_sha256": "bf437aaf6891a16d40271b26a66b236699b43f35b053b130377bb9169548bdad",
+    "pr_changed_path": "tests/test_gap_closure_execution.py",
+    "scanner_root": "app/src/main"
+  },
+  "state": "EVIDENCED_SCOPED",
+  "claim_allowed": false,
+  "failure_mode": "INHERITED_SOURCE_GAP_DEBT_NOT_CAUSED_BY_PR362_PATCH",
+  "evidence_for": [
+    "PR362 changes only tests/test_gap_closure_execution.py",
+    "source-gap scanner scope is app/src/main",
+    "scanner self-test passed",
+    "scan observed files=257 blockers=82 warnings=34 allowlisted=0",
+    "PR Validation run 736 succeeded on the corrective head",
+    "CI run 945 succeeded on the corrective head"
+  ],
+  "evidence_against": [
+    "No baseline receipt from the exact base SHA was observed in this cycle, so blocker-by-blocker age is not yet proven"
+  ],
+  "uncertainty_state": {
+    "pr362_introduced_source_gap": "DISPROVEN_BY_SCOPE",
+    "exact_age_of_each_source_gap": "TOKEN_VAZIO_BASELINE_RECEIPT_REQUIRED",
+    "source_gap_debt_exists": "EVIDENCED"
+  },
+  "affected_routes": ["R5", "R6", "R11"],
+  "urgency": "P1",
+  "necessity": "prevent false attribution and make source-gap CI delta-aware",
+  "impact": "medium-high",
+  "detectability": "high",
+  "recurrence_risk": "high while scanner is absolute-only",
+  "lifecycle": {
+    "component": "rafgittools:source-gap-audit-detector",
+    "event": "UNRELATED_PR_EXPOSES_PREEXISTING_ABSOLUTE_BLOCKERS",
+    "calendar_age": "TOKEN_VAZIO",
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "test_cycles": 1,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "last_verified_at": "2026-08-19T14:50:35Z",
+    "next_review_gate": "SOURCE_GAP_BASELINE_DELTA_RECEIPT",
+    "revalidation_criteria": "any scanner rule/source-root/allowlist change or any app/src/main delta"
+  },
+  "impact_radius": [
+    {"component": "source-gap-audit", "state": "DIRECT", "revalidation_required": true},
+    {"component": "PR362 runner fix", "state": "NO_DIRECT_SOURCE_EXPOSURE", "revalidation_required": false},
+    {"component": "executor-wide CI interpretation", "state": "POTENTIAL_PROPAGATION", "revalidation_required": true}
+  ],
+  "actions": {
+    "DETECTIVE": "compare PR changed paths with scanner source root and capture scanner tree digest",
+    "PREVENTIVE": "do not attribute absolute baseline blockers to a PR outside scanner scope",
+    "PRECAUTIONARY": "keep executor-wide claim_allowed=false while independent failing coordinates remain",
+    "ADAPTIVE": "classify CI as vector/scoped evidence rather than one boolean",
+    "CORRECTIVE": "none to app source in this cycle; no causal source defect from PR362 was evidenced",
+    "MAINTENANCE": "add baseline/delta semantics to source-gap assurance",
+    "INCIDENT_INVESTIGATION": "near-miss is false attribution risk, not a consumed runtime incident",
+    "SAFETY_ASSURANCE": "require exact-base vs head source-gap receipts or equivalent tree/path proof",
+    "LEARNING_ANTI_RECURRENCE": "scanner failures must report introduced/resolved/persisting blockers separately when used as PR gates"
+  },
+  "false_positive_cost": "unnecessary blocking or unrelated corrective work",
+  "false_negative_cost": "new executable stub could be hidden among historical debt",
+  "falsifier": "an app/src/main file changed by PR362 or an exact-base/head comparison showing blockers newly introduced by PR362",
+  "next_probe": "produce exact-base and head source-gap receipts and compute introduced/resolved/persisting finding sets keyed by marker+path+line_sha256",
+  "mitigation": "preserve Source Gap Audit failure as real repository debt while separating it from PR362 closure evidence",
+  "closure_gate": {
+    "id": "SOURCE_GAP_BASELINE_DELTA_RECEIPT",
+    "result": "TOKEN_VAZIO",
+    "requires": ["base receipt", "head receipt", "finding-set delta", "no silent allowlisting"]
+  }
+}
