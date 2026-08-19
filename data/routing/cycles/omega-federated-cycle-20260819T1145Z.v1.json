@@ -1,0 +1,123 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE_V1",
+  "cycle_id": "OMEGA-FEDERATED-20260819T1145Z",
+  "generated_at": "2026-08-19T11:45:00Z",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "predecessor": {
+    "cycle_path": "data/routing/cycles/omega-federated-cycle-20260819T1048Z.v1.json",
+    "predecessor_commit": "2f1a89474f0d30565c3b3fa940af5613d76e1e34",
+    "new_gap_commit": "b092deff0b877c8dd78cdc7adf01e08c622bcb46"
+  },
+  "observed_sources": [
+    {"repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "pr": 375, "head": "b08ba887d2bcea0639aac3620a129754fb7a33dc", "result": "4_OF_4_WORKFLOWS_SUCCESS"},
+    {"repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "pr": 373, "head": "48a0e94399e5db846072667ff0fe88853d57d011", "result": "6_SUCCESS_3_FAILURE"},
+    {"repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "run_id": 32216210650, "job_id": 95958380189, "result": "COMPILEDEBUGKOTLIN_FAILURE"},
+    {"repo": "rafaelmeloreisnovo/Mapa", "latest_before_cycle": "2f1a89474f0d30565c3b3fa940af5613d76e1e34"},
+    {"repo": "rafaelmeloreisnovo/RafGitTools", "latest_observed": "16986735df7"},
+    {"repo": "instituto-Rafael/relativity-living-light", "latest_observed": "e9d274"}
+  ],
+  "F_ok": [
+    "PR375 governed runtime preflight moved from TOKEN_VAZIO_RUNNER_PENDING to VERIFIED_LIMITED_PR_HEAD: four observed workflows completed SUCCESS on the PR head",
+    "PR373 manifest correction is structurally evidenced and its strengthened manifest contract test is present",
+    "The previously hidden downstream barrier is now localized to :app:compileDebugKotlin rather than the manifest merge stage",
+    "Exact failing RAFLANG surfaces were preserved in an append-only operational gap record"
+  ],
+  "F_gap": [
+    "TERMUX_KOTLIN_CONTRACT_DRIFT_ROOT_CAUSE",
+    "CURRENT_COMBINED_MASTER_GREEN_APP_COMPILE",
+    "PHYSICAL_DEVICE_RUNTIME",
+    "REAL_PKG_RUNTIME",
+    "RLL_OMEGA7_G1_G4_EXECUTION",
+    "DRIVE_APPEND_CAPABILITY"
+  ],
+  "F_esquecido": [
+    "A successful preflight/document governance gate is not a physical runtime receipt",
+    "Removing one blocking layer can expose an independent downstream failure; do not inherit PASS into gates that were previously unreachable",
+    "Compile failure after a dependency or manifest change does not establish causality without bisect/contract evidence",
+    "Detector and assurance chains themselves require lifecycle revalidation"
+  ],
+  "token_vazio_new_or_active": [
+    "TOKEN_VAZIO_ROOT_CAUSE_KOTLIN_CONTRACT_DRIFT",
+    "TOKEN_VAZIO_CURRENT_COMBINED_MASTER_BUILD",
+    "TOKEN_VAZIO_PHYSICAL_DEVICE_RUNTIME",
+    "TOKEN_VAZIO_REAL_PKG_RUNTIME",
+    "TOKEN_VAZIO_DRIVE_APPEND_CAPABILITY"
+  ],
+  "token_vazio_resolved": [
+    "TOKEN_VAZIO_PR375_CI_PENDING -> VERIFIED_LIMITED_PR_HEAD"
+  ],
+  "uncertainty_before_after": {
+    "pr375_terminal_ci": {"before": "TOKEN_VAZIO_RUNNER_PENDING", "after": "4_OF_4_SUCCESS_ON_PR_HEAD"},
+    "post_manifest_failure_location": {"before": "PARTIAL", "after": "OBSERVED_AT_COMPILEDEBUGKOTLIN"},
+    "kotlin_failure_root_cause": {"before": "UNKNOWN", "after": "TOKEN_VAZIO_BUT_AFFECTED_API_TYPE_SURFACES_IDENTIFIED"},
+    "physical_runtime": {"before": "TOKEN_VAZIO", "after": "TOKEN_VAZIO_NOT_REACHED"}
+  },
+  "lifecycle_deltas": [
+    {
+      "component": "termux:governed-runtime-preflight",
+      "event": "PR_HEAD_CI_TERMINAL_SUCCESS",
+      "classification": ["DETECTIVE", "PREVENTIVE", "SAFETY_ASSURANCE"],
+      "last_verified_at": "2026-08-19T11:45:00Z_PR_HEAD_EVIDENCE_ONLY",
+      "next_review_gate": "MERGE_OR_MATERIAL_CHANGE_THEN_REVALIDATE"
+    },
+    {
+      "component": "termux:raflang-kotlin-contract",
+      "event": "DOWNSTREAM_COMPILE_BARRIER_EXPOSED_AFTER_MANIFEST_FIX",
+      "classification": ["DETECTIVE", "PRECAUTIONARY", "MAINTENANCE", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+      "last_verified_at": "TOKEN_VAZIO_NO_GREEN_COMPILE",
+      "next_review_gate": "PINNED_COMMIT_COMPILEDEBUGKOTLIN_PASS"
+    }
+  ],
+  "impact_radius": [
+    "RafExecutionPipeline",
+    "RafPermissionManager",
+    "RafBackgroundService",
+    "RaflangTranslator",
+    "app:compileDebugKotlin",
+    "APK build",
+    "real runtime/handoff gates",
+    "R6",
+    "R7",
+    "R11"
+  ],
+  "hazards": {
+    "new": ["Treating the manifest fix as end-to-end build recovery despite a newly observed Kotlin contract barrier"],
+    "mitigated": ["PR375 runner uncertainty on its head commit"],
+    "closed": []
+  },
+  "actions": {
+    "detective": "Resolved PR375 workflow evidence and decomposed PR373 failed pipeline to the exact compile task and affected symbols",
+    "preventive": "Preserve compile-before-runtime promotion invariant",
+    "precautionary": "Keep device/runtime/release claims fail-closed",
+    "adaptive": "Split manifest repair evidence from newly exposed RAFLANG compile-contract evidence",
+    "corrective": "Not executed because root cause and minimal patch are not yet evidenced",
+    "maintenance": "Opened event-triggered revalidation for RAFLANG API/type boundaries",
+    "incident_investigation": "No incident or near-miss promoted; failure is a build nonconformity with cause still under investigation",
+    "safety_assurance": "Require green pinned compile and downstream tests before runtime promotion",
+    "learning_anti_recurrence": "Whenever a prior blocker is removed, automatically re-run every downstream gate that could not previously execute"
+  },
+  "routes_promoted": [
+    {"route": "R11", "scope": "PR375 governance/preflight CI evidence", "state": "VERIFIED_LIMITED_PR_HEAD"}
+  ],
+  "routes_blocked": [
+    {"route": "R7", "reason": "compileDebugKotlin failure prevents APK/device runtime assurance"},
+    {"route": "R11", "reason": "current combined build state remains unverified beyond PR-head subsets"},
+    {"route": "R12", "reason": "no release/runtime claim without build and device receipts"}
+  ],
+  "recommendations_open": [
+    "Bisect or compare RAFLANG API/type boundary changes around the exact unresolved symbols",
+    "Apply the smallest contract-consistent correction only after the introducing delta is identified",
+    "Rerun compileDebugKotlin, unit tests and APK build on a pinned commit",
+    "Only after build success attempt real pkg/runtime and physical-device receipt"
+  ],
+  "recommendations_closed": [
+    "Resolve PR375 pending workflow state on its PR head"
+  ],
+  "F_next": [
+    "Find earliest PASS->FAIL transition for :app:compileDebugKotlin or otherwise isolate the API/type contract mismatch",
+    "Correct the smallest evidenced RAFLANG contract defect and rerun pinned compileDebugKotlin",
+    "Capture downstream unit/APK receipt after compile becomes green",
+    "Preserve physical device and real-pkg runtime as TOKEN_VAZIO until their own execution receipts exist"
+  ]
+}
