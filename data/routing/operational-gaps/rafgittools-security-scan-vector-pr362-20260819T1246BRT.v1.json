@@ -1,0 +1,101 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "RGT_SECURITY_SCAN_VECTOR_PR362_20260819T1246BRT",
+  "observed_at": "2026-08-19T15:52:02Z",
+  "owner": "rafaelmeloreisnovo/RafGitTools",
+  "authority": "repo-producer-local; Mapa=federated-route-state",
+  "source_pointer": {
+    "pr": 362,
+    "head_sha": "328a20332794b249bec69af74da0044c6bbdcb35",
+    "security_run_id": 32266398821,
+    "codeql_job_id": 96111840269,
+    "dependency_scan_job_id": 96111840280,
+    "ordinary_ci_run_id": 32266398783,
+    "repair_pr": 363,
+    "repair_head_sha": "9c0be86c366dd98380dbf836d8965a3eef882ecb"
+  },
+  "state": "PARTIALLY_DECOMPOSED_REVALIDATION_REQUIRED",
+  "claim_allowed": false,
+  "failure_mode": "SECURITY_WORKFLOW_AGGREGATES_DISTINCT_MEASUREMENT_FAILURES",
+  "evidence_for": [
+    "Secret Scanning completed SUCCESS",
+    "License Compliance Check completed SUCCESS",
+    "Dependency Vulnerability Scan failed during Set up job because aquasecurity/trivy-action@0.34.1 could not be resolved; no vulnerability scan ran",
+    "CodeQL initialization succeeded, but instrumented Build application failed at :app:checkDevDebugAarMetadata with path-null exception; CodeQL analysis step was not reached",
+    "ordinary CI on the same corrective lineage completed unit tests, lint, assembleDevDebug and APK checksum successfully",
+    "ordinary CI APK SHA256 = 6d994c02ce02b9e613ac18ac2a28701ee0a6e41cae5ce7a98201bbb79b21436b",
+    "ordinary CI artifact id = 9370785018"
+  ],
+  "evidence_against": [
+    "No evidence in this cycle proves why CodeQL instrumentation/environment causes or exposes the AAR metadata path-null failure",
+    "No dependency vulnerability verdict exists because Trivy did not start"
+  ],
+  "uncertainty_state": {
+    "secrets": "PASS_SCOPED",
+    "license_compliance": "PASS_SCOPED",
+    "dependency_vulnerabilities": "TOKEN_VAZIO_SCANNER_NOT_REACHED",
+    "codeql_findings": "TOKEN_VAZIO_ANALYSIS_NOT_REACHED",
+    "codeql_build_precondition_root_cause": "TOKEN_VAZIO",
+    "application_build_general": "PASS_SCOPED_ORDINARY_CI"
+  },
+  "affected_routes": ["R5", "R6", "R11", "R12"],
+  "urgency": "P0_SECURITY_ASSURANCE",
+  "necessity": "restore actual security measurement without converting tool/setup failure into vulnerability verdict",
+  "impact": "high",
+  "detectability": "high after job-level decomposition",
+  "recurrence_risk": "high if aggregate Security Scan conclusion is consumed as one boolean",
+  "lifecycle": [
+    {
+      "component": "rafgittools:dependency-vulnerability-scanner",
+      "event": "ACTION_REFERENCE_UNRESOLVABLE",
+      "test_cycles": 1,
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 1,
+      "last_verified_at": "TOKEN_VAZIO_SCAN_NOT_REACHED",
+      "next_review_gate": "TRIVY_SCAN_TERMINAL_RECEIPT",
+      "revalidation_criteria": "action version/ref, scanner configuration or dependency tree changes"
+    },
+    {
+      "component": "rafgittools:codeql-build-precondition",
+      "event": "INSTRUMENTED_BUILD_PRECONDITION_FAILURE",
+      "test_cycles": 1,
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "TOKEN_VAZIO_ANALYSIS_NOT_REACHED",
+      "next_review_gate": "CODEQL_ANALYSIS_REACHED_RECEIPT",
+      "revalidation_criteria": "CodeQL version/query/build environment/Gradle or Android dependency changes"
+    }
+  ],
+  "impact_radius": [
+    {"component": "secret-scan", "state": "PASS_SCOPED", "revalidation_required": false},
+    {"component": "license-check", "state": "PASS_SCOPED", "revalidation_required": false},
+    {"component": "dependency-scan", "state": "TOKEN_VAZIO_SCANNER_NOT_REACHED", "revalidation_required": true},
+    {"component": "codeql", "state": "TOKEN_VAZIO_ANALYSIS_NOT_REACHED", "revalidation_required": true},
+    {"component": "executor-wide-security-claim", "state": "BLOCKED", "revalidation_required": true}
+  ],
+  "actions": {
+    "DETECTIVE": "decompose Security Scan by job and step; distinguish setup/build/analyze/findings",
+    "PREVENTIVE": "never translate scanner setup failure into a vulnerability finding or clean bill of health",
+    "PRECAUTIONARY": "keep security-wide claim_allowed=false until missing scanners actually execute",
+    "ADAPTIVE": "treat security assurance as vector: secret, license, dependency vulnerability, CodeQL",
+    "CORRECTIVE": "opened RafGitTools draft PR363 replacing unresolved Trivy action ref 0.34.1 with upstream current signed immutable v0.36.0",
+    "MAINTENANCE": "scanner/action references are lifecycle-controlled dependencies and must be revalidated on changes",
+    "INCIDENT_INVESTIGATION": "no exploited vulnerability or runtime incident observed; near-miss is false semantic classification risk",
+    "SAFETY_ASSURANCE": "require terminal Trivy scan/SARIF and CodeQL analysis receipt, separately",
+    "LEARNING_ANTI_RECURRENCE": "security workflow output must encode NOT_RUN/SETUP_FAIL/BUILD_FAIL/ANALYSIS_FAIL/FINDINGS rather than only success/failure"
+  },
+  "false_positive_cost": "claim vulnerabilities without scan or block unrelated work under ambiguous security failure",
+  "false_negative_cost": "declare security clean when scanners never executed",
+  "falsifier": "dependency scanner runs terminally and reports real findings/no-findings; CodeQL reaches analyze and returns terminal result",
+  "next_probe": "observe PR363 exact-head Security Scan; require Trivy action resolve, scan execute, SARIF produced/uploaded; separately reproduce CodeQL AAR metadata failure with matched CI environment and CodeQL instrumentation toggled",
+  "mitigation": "PR363 repairs only Trivy measurement path; CodeQL remains independent TOKEN_VAZIO until analysis is reached",
+  "closure_gate": {
+    "dependency_scan": "TRIVY_SCAN_TERMINAL_RECEIPT",
+    "codeql": "CODEQL_ANALYSIS_REACHED_RECEIPT",
+    "result": "TOKEN_VAZIO"
+  }
+}
