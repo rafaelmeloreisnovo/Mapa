@@ -102,7 +102,6 @@ distant_score  = D4 + D7   (sensorial + ethical)
 }
 ```
 
-
 ### Proof Metadata
 
 The `proof` object contains:
@@ -236,7 +235,7 @@ claim_allowed(VC) ⟺ (
 
 ### With Mapa Governance
 
-```
+```text
 VC.proof.vectorization_generation
   ↓
 RafaeliaKernelV22 (generation counter)
@@ -248,7 +247,7 @@ Governance.claim_allowed (yes/no/conditional)
 
 ### With Vectras-VM-Android Runtime
 
-```
+```text
 VerifiableCredentialFiller
   → TokenVectorizationEngine.vectorize()
   → BuildCredential()
