@@ -20,7 +20,10 @@ from pathlib import Path
 from operational_gap_assurance import build_report
 
 CANONICAL = "rafaelia.operational-gap-assurance/v1"
-LEGACY_SCHEMAS = {"RAFAELIA_OPERATIONAL_GAP_V1"}
+LEGACY_SCHEMAS = {
+    "RAFAELIA_OPERATIONAL_GAP_V1",
+    "rafaelia.operational-gap.v1",
+}
 HISTORICAL_CANONICAL_QUARANTINE = {
     "gap:mapa:federated-broker:hmac-provenance:20260819",
 }
