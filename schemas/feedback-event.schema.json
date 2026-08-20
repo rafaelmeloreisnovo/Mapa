@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/feedback-event.schema.json",
+  "title": "RAFAELIA Feedback Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "sequence", "event_id", "observed_at", "objective", "source_refs",
+    "transition_kind", "prior_state", "observed_state", "evidence_refs", "gate_id",
+    "F_ok", "F_gap", "F_next", "claim_allowed", "predecessor_event_ids",
+    "prev_event_hash", "leverage_class", "leverage_basis", "event_hash"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.feedback-event/v1"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "event_id": {"type": "string", "pattern": "^FEVT-[0-9]{8}-[A-Z0-9][A-Z0-9._-]{2,63}$"},
+    "observed_at": {"type": "string", "minLength": 20},
+    "objective": {"type": "string", "minLength": 8},
+    "source_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "transition_kind": {"enum": ["OBSERVATION", "EXECUTION", "PROMOTION", "CORRECTION", "CONTRADICTION", "REGRESSION"]},
+    "prior_state": {"enum": ["TOKEN_VAZIO", "PENDING", "PARTIAL", "VERIFIED_LIMITED", "VERIFIED", "PASS", "FAIL", "CONTRADICTION"]},
+    "observed_state": {"enum": ["TOKEN_VAZIO", "PENDING", "PARTIAL", "VERIFIED_LIMITED", "VERIFIED", "PASS", "FAIL", "CONTRADICTION"]},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "gate_id": {"type": ["string", "null"], "minLength": 3},
+    "F_ok": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "F_gap": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "F_next": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "claim_allowed": {"type": "boolean"},
+    "predecessor_event_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "prev_event_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "leverage_class": {"enum": ["LOCAL", "SYSTEMIC", "MULTIPLICATIVE", "EXPONENTIAL_CANDIDATE", "FACTORIAL_CANDIDATE"]},
+    "leverage_basis": {"type": "string", "minLength": 8},
+    "event_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
