@@ -1,0 +1,60 @@
+{
+  "schema": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "TERMUX_README_ABSOLUTE_CLAIM_DEBT_20260820T1150BRT",
+  "claim_allowed": false,
+  "owner": "rafaelmeloreisnovo/termux-app-rafacodephi",
+  "source_pointer": "PR #377 @ a91ce671b461432b8027e098d1bc37ca36aa5c40; run 32381934021/job 96467007292",
+  "affected_routes": ["R5", "R7", "R11", "R12"],
+  "observed_at": "2026-08-20T11:50:12-03:00",
+  "provenance": {
+    "validator_status": "PASS_WITH_KNOWN_DEBT",
+    "receipt": "data/receipts/termux-claim-boundary-pr377.20260820T1150BRT.receipt.json"
+  },
+  "evidence_for": [
+    "README contains one occurrence each of: fully compatible, will NOT crash, production-ready, Zero Collisions.",
+    "Claim Boundary Gate executed six tests successfully and reported the four bounded debt classes with claim_allowed=false."
+  ],
+  "evidence_against": [
+    "No evidence was observed that these four legacy phrases were removed in the audited PR merge-ref.",
+    "No physical-device matrix receipt supports universal Android 15/16 compatibility or no-crash guarantees."
+  ],
+  "uncertainty_state": "EVIDENCED_OPEN_DEBT",
+  "urgency": "P0_HIGH",
+  "necessity": "HIGH",
+  "impact": "Claim inflation may outrun device/runtime evidence.",
+  "detectability": "HIGH_BY_CLAIM_LANGUAGE_GATE",
+  "recurrence_risk": "MEDIUM_WITH_GATE_HIGH_WITHOUT_GATE",
+  "failure_mode": "LEGACY_ABSOLUTE_CLAIM_LANGUAGE_OUTRUNS_EVIDENCE_SCOPE",
+  "falsifier": "Replace all four legacy absolute phrases with bounded evidence-scoped wording, set debt counts to zero, rerun six tests plus validator, and require merged-main receipt.",
+  "next_probe": "README correction -> debt counters 0 -> Claim Boundary Gate terminal PASS -> main integration -> post-merge receipt",
+  "mitigation": "Existing gate blocks new unallowlisted absolute claims and preserves claim_allowed=false.",
+  "closure_gate": "ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_WITH_TERMINAL_RECEIPT",
+  "review_or_expiry": "EVENT_TRIGGERED_ON_README_OR_CLAIM_POLICY_CHANGE",
+  "predecessor": "known debt frozen by Termux PR #377",
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "calendar_age": "TOKEN_VAZIO",
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "test_cycles": 1,
+    "dependency_changes": 1,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "last_verified_at": "run:32381934021/job:96467007292",
+    "next_review_gate": "ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_WITH_TERMINAL_RECEIPT"
+  },
+  "actions": {
+    "DETECTIVE": "Claim-language validator with bounded occurrence counts and unknown-rule fail-closed tests.",
+    "PREVENTIVE": "No new absolute compatibility/production claims beyond known debt.",
+    "PRECAUTIONARY": "claim_allowed=false until debt reaches zero with evidence.",
+    "ADAPTIVE": "Recalculate debt on README/policy change without rewriting old receipts.",
+    "CORRECTIVE": "Pending replacement of four legacy phrases.",
+    "MAINTENANCE": "Revalidate on runner/action/runtime or README changes.",
+    "INCIDENT_INVESTIGATION": "No incident demonstrated; semantic near-miss only.",
+    "SAFETY_ASSURANCE": "Six tests + remote validator receipt present for current PR merge-ref.",
+    "ANTI_RECURRENCE": "Absolute claim debt must monotonically decrease or require evidence-backed exception."
+  }
+}
