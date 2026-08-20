@@ -49,8 +49,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p .rdgs-evidence
-          out=".rdgs-evidence/rdgs_validation_${GITHUB_RUN_ID}.txt"
+          mkdir -p rdgs-evidence
+          out="rdgs-evidence/rdgs_validation_${GITHUB_RUN_ID}.txt"
           {
             printf 'schema=RAFAELIA_RDGS_EXECUTION_EVIDENCE_V1\n'
             printf 'repository=%s\n' "$GITHUB_REPOSITORY"
@@ -80,6 +80,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rdgs-evidence-${{ github.run_id }}
-          path: .rdgs-evidence/
+          path: rdgs-evidence/
           if-no-files-found: error
           retention-days: 30
