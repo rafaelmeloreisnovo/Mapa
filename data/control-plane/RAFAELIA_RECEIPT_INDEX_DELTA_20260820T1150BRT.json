@@ -1,0 +1,72 @@
+{
+  "schema": "rafaelia.receipt-index-delta/v1",
+  "generated_at": "2026-08-20T11:50:12-03:00",
+  "claim_allowed": false,
+  "predecessor": "data/control-plane/RAFAELIA_RECEIPT_INDEX_V1.json",
+  "states": ["PRESENT", "MISSING", "STALE", "INVALID", "SUPERSEDED", "TOKEN_VAZIO"],
+  "entries": [
+    {
+      "id": "MAPA_FEEDBACK_EVENT_PRHEAD_REMOTE_CI",
+      "before": "TOKEN_VAZIO_REMOTE_CI",
+      "after": "PRESENT",
+      "scope": "PR_HEAD_ONLY",
+      "receipt": "data/receipts/mapa-feedback-event-prhead.20260820T1150BRT.receipt.json",
+      "next_gate": "MAPA_FEEDBACK_EVENT_POSTMERGE_MAIN_TERMINAL_RECEIPT"
+    },
+    {
+      "id": "MAPA_FEEDBACK_EVENT_POSTMERGE_MAIN",
+      "before": "UNINDEXED",
+      "after": "TOKEN_VAZIO",
+      "source": "a38a0c3eee18323a95efd9881d14940d82881d19",
+      "gap": "data/routing/operational-gaps/mapa-feedback-event-postmerge-revalidation-20260820T1150BRT.v1.json"
+    },
+    {
+      "id": "TERMUX_CLAIM_BOUNDARY_REMOTE_EXECUTION",
+      "before": "TOKEN_VAZIO",
+      "after": "PRESENT",
+      "scope": "PR_MERGE_REF",
+      "receipt": "data/receipts/termux-claim-boundary-pr377.20260820T1150BRT.receipt.json"
+    },
+    {
+      "id": "TERMUX_ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT",
+      "before": "UNINDEXED",
+      "after": "TOKEN_VAZIO",
+      "observed_state": "EVIDENCED_OPEN_DEBT",
+      "known_counts": {
+        "fully_compatible": 1,
+        "no_crash_guarantee": 1,
+        "production_ready": 1,
+        "zero_collisions": 1
+      },
+      "gap": "data/routing/operational-gaps/termux-readme-absolute-claim-debt-20260820T1150BRT.v1.json"
+    },
+    {
+      "id": "RAF_GIT_TOOLS_COMBINED_MAIN",
+      "before": "MISSING",
+      "after": "MISSING",
+      "source": "0c453be12b31eb21c85cf6295b740c0d54365166",
+      "next_gate": "main run -> jobs -> steps -> artifacts/hashes -> receipt"
+    },
+    {
+      "id": "TERMUX_PHYSICAL_RUNTIME",
+      "before": "MISSING",
+      "after": "MISSING",
+      "next_gate": "APK hash -> install -> launch -> PID/activity -> logcat -> device receipt"
+    },
+    {
+      "id": "RLL_FRESH_OWNER_AND_REPLICATION",
+      "before": "MISSING",
+      "after": "TOKEN_VAZIO",
+      "reason": "Fresh repository query in this cycle returned no resolvable commit history; this is not evidence of absence.",
+      "next_gate": "resolve owner source -> dataset -> config -> run -> outputs/hashes -> independent replication"
+    },
+    {
+      "id": "DRIVE_CANONICAL_APPEND_THIS_CYCLE",
+      "before": "PRESENT_CAPABILITY_HISTORICALLY",
+      "after": "TOKEN_VAZIO",
+      "reason": "Current revision 251 was resolved, but the available connector surface in this cycle did not expose a safe append mutation action.",
+      "next_gate": "fresh revision -> compare-and-write append -> new revision -> GitHub receipt"
+    }
+  ],
+  "invariant": "A receipt state transition is scoped to the exact source/ref/run/evidence observed; unresolved evidence remains TOKEN_VAZIO or MISSING and is never coerced to zero or PASS."
+}
