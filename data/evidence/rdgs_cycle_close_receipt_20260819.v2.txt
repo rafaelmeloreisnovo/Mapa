@@ -1,0 +1,51 @@
+RAFAELIA Ω — RECEIPT V2 — REAL/DONE/GOOD/STILL_GOOD POST-MERGE SEAL
+
+date_local=2026-08-19
+state=POSTMERGE_REVALIDATION_IN_PROGRESS
+claim_allowed=false
+append_only=true
+supersedes_effective_view=rdgs_cycle_close_receipt_20260819.v1.txt
+historical_v1_preserved=true
+
+contract=docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
+contract_main_blob_before_postmerge_append=4d901b0fa113c5a63fbb84f063ce12dfac5b2566
+postmerge_append_commit=181915606c057f3ba5a7e4dbaeedaf6658cdc510
+postmerge_append_blob=985cb73d5621003da8a54768d355ca6b2346713d
+
+pr294_state=merged
+pr294_head=62b07b1ebecaa0e5ee12500a13c562897490d016
+pr294_merge_commit=271cbeeb4a3a09d23f6084e3c04f4db73f80ae34
+pr294_changed_files=4
+
+first_pr_ci_run=32326429761
+first_pr_ci_conclusion=failure
+first_pr_ci_classification=CONTENT_LINT_REGRESSION_MD032
+first_pr_ci_failed_job=96298512810
+first_pr_ci_failed_step=Lint changed Markdown — blocking regression gate
+first_pr_ci_issue_count=7
+first_pr_ci_issue=MD032 blanks-around-lists
+
+promotion_control_run=32326429747
+promotion_control_conclusion=success
+branch_topology_run=32326429748
+branch_topology_conclusion=success
+
+fix_commit=62b07b1ebecaa0e5ee12500a13c562897490d016
+fix_scope=add required blank lines around Markdown lists only
+physical_runtime_impact=none
+
+postmerge_revalidation_branch=governance/rdgs-postmerge-seal-20260819
+postmerge_revalidation_reason=force changed Markdown through CI again from current main and seal merge lineage
+
+c41_real=true
+c41_done=true
+c41_good=true
+c41_still_good=TOKEN_VAZIO_REVALIDATION_REQUIRED
+
+F_ok=PR294 merged; contract/example/validator/receipt V1 materialized on main; first CI failure root cause observed exactly; lint fix materialized; postmerge seal branch created
+F_gap=postmerge CI for corrected Markdown not yet observed at time of this receipt; Termux/second-host/cross-host C41 revalidation remains TOKEN_VAZIO
+F_next=open postmerge seal PR; require CI+topology/promotion gates; merge only when corrected document is revalidated; append final merge identity to Drive Master Registry and reconstruction index
+
+closure_scope=governance_contract_materialization
+closure_status=PENDING_POSTMERGE_CI
+physical_scope_status=OPEN_BY_DESIGN
