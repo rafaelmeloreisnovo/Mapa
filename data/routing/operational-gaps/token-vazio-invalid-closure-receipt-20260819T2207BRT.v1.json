@@ -1,0 +1,85 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_ASSURANCE_V1",
+  "gap_id": "TOKEN_VAZIO_INVALID_CLOSURE_RECEIPT_PROVENANCE_20260819T2207BRT",
+  "observed_at": "2026-08-19T22:07:00-03:00",
+  "claim_allowed": false,
+  "classification": "NEAR_MISS",
+  "severity": "HIGH",
+  "priority": "P0_URGENT",
+  "failure_mode": "A canonical TOKEN_VAZIO approval decision declares APPROVED_CLOSED while its evidence package references a commit SHA that GitHub reports does not exist in rafaelmeloreisnovo/Mapa.",
+  "affected_artifacts": [
+    "data/audits/TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl",
+    "data/audits/TOKEN_VAZIO_REGISTRY.jsonl",
+    "tools/check_invariants.py",
+    "promotion-control/invariant assurance semantics"
+  ],
+  "source_evidence": [
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "path": "data/audits/TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl",
+      "observation": "TOKEN_VAZIO_INVARIANTS_CI_BINDING_MISSING is marked APPROVED_CLOSED with evidence commit_sha 3a2c8f18eef4f5a9b5c8d1e2f3a4b5c6d7e8f9a0."
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "path": "data/audits/TOKEN_VAZIO_REGISTRY.jsonl",
+      "observation": "The same TOKEN_VAZIO remains PRESERVED_IN_DOCUMENTATION, creating registry/decision divergence."
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "probe": "GET commit 3a2c8f18eef4f5a9b5c8d1e2f3a4b5c6d7e8f9a0",
+      "result": "NO_COMMIT_FOUND / HTTP 422"
+    }
+  ],
+  "epistemic_boundary": {
+    "not_proven": [
+      "The invariant CI implementation itself is absent or defective.",
+      "An incorrect external claim was consumed downstream.",
+      "The historical decision must be deleted."
+    ],
+    "proven_scoped": [
+      "The cited commit SHA cannot currently validate the closure evidence package.",
+      "The registry and approval-decision states diverge."
+    ]
+  },
+  "required_state_transition": "APPROVED_CLOSED_ASSURANCE -> TOKEN_VAZIO_REVALIDATION_REQUIRED",
+  "append_only_rule": "Do not delete or rewrite the historical decision. Add a superseding verification receipt that references the historical record and a real immutable evidence chain.",
+  "component_lifecycle_ledger": {
+    "component": "mapa:token-vazio-approval-evidence-chain",
+    "event": "INVALID_REFERENCED_COMMIT_DETECTED",
+    "limit_type": "EVENT_TRIGGERED",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "last_verified_at": "TOKEN_VAZIO_REOPENED",
+    "next_review_gate": "REAL_COMMIT_PLUS_WORKFLOW_RUN_PLUS_JOB_STEPS_PLUS_ARTIFACT_HASH_PLUS_VALIDATOR_RECEIPT"
+  },
+  "impact_radius": {
+    "affected_routes": ["R5", "R6", "R11", "R12"],
+    "direct_exposure": true,
+    "transmitted_effect": "Invalid closure provenance can cause later automation or reviewers to inherit a CLOSED state without reconstructible evidence.",
+    "hidden_state_possible": true,
+    "inspection_required": true,
+    "revalidation_required": true,
+    "replacement_or_retirement_candidate": false,
+    "false_positive_cost": "Re-running invariant evidence collection and preserving an additional receipt.",
+    "false_negative_cost": "Silent overpromotion of governance state and contamination of downstream receipts."
+  },
+  "actions": {
+    "detective": ["validate every commit/ref/artifact pointer in approval decisions", "cross-check canonical registry against decision ledger"],
+    "preventive": ["add referential-integrity gate for receipt pointers before closure"],
+    "precautionary": ["keep claim_allowed=false", "reopen assurance until immutable evidence resolves"],
+    "adaptive": ["treat receipt/decision ledgers as lifecycle-managed components"],
+    "corrective": ["emit superseding receipt with real commit/run/job/artifact identities"],
+    "maintenance": ["periodically reconcile registry, decisions, receipts and live refs"],
+    "incident_investigation": ["preserve historical record and establish whether the invalid SHA was placeholder, transcription error, generated value or stale pointer"],
+    "safety_assurance": ["verify re-closed state survives independent reconstruction from repository evidence"],
+    "learning_anti_recurrence": ["CLOSURE_DECISION_NE_VALID_CLOSURE_RECEIPT", "REFERENCED_SHA_MUST_RESOLVE_BEFORE_CLOSED"]
+  },
+  "F_ok": ["invalid SHA detected before using it as new evidence in this cycle", "historical record preserved"],
+  "F_gap": ["real immutable closure evidence package for invariant CI binding", "registry/decision reconciliation", "referential-integrity gate for all approval receipts"],
+  "F_next": ["resolve actual implementing commit and exact workflow run", "capture jobs/steps/exit codes and artifact/hash", "append superseding closure or preservation decision"],
+  "F_esquecido": ["a decision ledger is not itself proof", "syntactically valid SHA text is not evidence that a commit exists"]
+}
