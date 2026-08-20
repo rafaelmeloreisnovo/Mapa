@@ -1,0 +1,96 @@
+{
+  "schema": "RAFAELIA_FEDERATED_OMEGA_DELTA_V1",
+  "cycle_id": "omega-federated-cycle-20260819T2207BRT",
+  "observed_at": "2026-08-19T22:07:00-03:00",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "APPEND_ONLY",
+    "REFERENCED_IDENTITIES_MUST_RESOLVE",
+    "NO_SILENT_REGRESSION"
+  ],
+  "observed_sources": [
+    {"repo":"rafaelmeloreisnovo/Mapa","ref":"main","commit":"6e05a20c26920cf1034b498c615742c072451f8a","state":"CURRENT_AUTHORITY"},
+    {"repo":"rafaelmeloreisnovo/Mapa","path":"data/audits/TOKEN_VAZIO_REGISTRY.jsonl","state":"STALE_OR_DIVERGENT_RECONCILIATION_REQUIRED"},
+    {"repo":"rafaelmeloreisnovo/Mapa","path":"data/audits/TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl","state":"INVALID_REFERENCED_COMMIT_DETECTED"},
+    {"repo":"rafaelmeloreisnovo/RafGitTools","ref":"main","commit":"0c453be12b31eb21c85cf6295b740c0d54365166","state":"TOKEN_VAZIO_POST_MERGE_TERMINAL_RECEIPT"},
+    {"repo":"rafaelmeloreisnovo/termux-app-rafacodephi","state":"NO_OPEN_USER_PRS_OBSERVED_AND_PHYSICAL_RUNTIME_RECEIPT_STILL_TOKEN_VAZIO"},
+    {"repo":"instituto-Rafael/relativity-living-light","state":"NO_OPEN_USER_PRS_OBSERVED_AND_NO_NEW_SCIENTIFIC_EXECUTION_RECEIPT_OBSERVED"}
+  ],
+  "urgent_backlog": [
+    {"rank":1,"id":"INVALID_CLOSURE_RECEIPT_PROVENANCE","priority":"P0","why":"canonical closure decision cites non-existent commit SHA","next":"reconstruct real commit/run/job/artifact chain and append superseding decision"},
+    {"rank":2,"id":"TOKEN_VAZIO_REGISTRY_DECISION_DIVERGENCE","priority":"P0","why":"registry says PRESERVED while decision ledger says APPROVED_CLOSED","next":"append reconciliation receipt; do not rewrite history"},
+    {"rank":3,"id":"RAFGITTOOLS_POST_MERGE_MAIN_RECEIPT","priority":"P0","why":"corrective PRs converged in main but combined main/push terminal evidence is absent from accessible detector scope","next":"capture main SHA + run + jobs + steps + artifacts + hashes"},
+    {"rank":4,"id":"NODE24_ACTION_CHAIN","priority":"P0","why":"RafGitTools has long-open Node24 migration PRs #275 setup-android v4, #276 setup-python v7, #277 github-script v9 while runtime migration warnings are already lifecycle events","next":"rebase/revalidate individually; no blind batch merge"},
+    {"rank":5,"id":"TERMUX_PHYSICAL_RUNTIME_CHAIN","priority":"P0","why":"repository/build evidence still does not establish install/launch/device runtime","next":"APK hash -> install -> launch -> PID/activity -> bounded logcat receipts"},
+    {"rank":6,"id":"PRIVACY_AUDIT_FORMAL_RECEIPT","priority":"P0","why":"registry marks privacy audit only PARTIALLY_RESOLVED","next":"inventory data classes, minimization, retention, access, redaction and append formal audit receipt"},
+    {"rank":7,"id":"NEGATIVE_FIXTURES_AND_FALSIFIER_REGISTRY","priority":"P0","why":"negative fixtures remain preserved and falsifier coverage only partial","next":"bind each strong gate to at least one explicit negative fixture/falsifier receipt"},
+    {"rank":8,"id":"WORKFLOW_8_9_10_HISTORICAL_RECEIPTS","priority":"P1","why":"registry explicitly says historical continuous validation missing","next":"backfill immutable run/job/step receipts and mark PRESENT/MISSING/INVALID per run"},
+    {"rank":9,"id":"LICENSE_COMPATIBILITY_AUDIT","priority":"P1","why":"external Actions/dependencies lack formal compatibility receipt","next":"license inventory + compatibility decision + scope receipt"},
+    {"rank":10,"id":"SOURCE_GAP_BASELINE_DEBT","priority":"P1","why":"known source-gap debt must have introduced/resolved/persisting delta receipts rather than repeated totals only","next":"scanner version + tree hash + per-gap lifecycle delta"},
+    {"rank":11,"id":"DRIVE_GITHUB_PARITY_RECEIPT","priority":"P1","why":"semantic parity exists but cross-store digest remains TOKEN_VAZIO","next":"normalization policy + comparable digest or explicit non-byte-equivalence receipt"},
+    {"rank":12,"id":"RLL_SCIENTIFIC_CLOSURE_RECEIPTS","priority":"P0_SCIENCE","why":"claim promotion requires dataset, pipeline, inference and independent replication receipts","next":"dataset identity -> code/config -> run outputs -> inference -> replication; claim_allowed remains false"}
+  ],
+  "ignored_or_left_behind": [
+    "TOKEN_VAZIO registry was not reconciled after later merges/decisions",
+    "approval decision referential integrity was not enforced before canonical CLOSED wording",
+    "Node24 migration PRs in RafGitTools have remained open for more than 30 days",
+    "historical workflow receipt gap 8/9/10 remains explicitly documented",
+    "formal privacy audit remains partial",
+    "negative fixtures remain absent as a structured corpus",
+    "coverage producer remains distinct from truthful fail-closed coverage detector",
+    "Termux physical install/launch/runtime evidence remains absent",
+    "RLL strong scientific claims remain correctly unpromoted but need full receipt chain rather than narrative summaries"
+  ],
+  "receipt_architecture_delta": {
+    "new_contract":"data/control-plane/RAFAELIA_RECEIPT_COVERAGE_MATRIX_V1.json",
+    "principle":"ONE_MATERIAL_TRANSITION_ONE_SCOPED_RECEIPT_OR_TYPED_TOKEN_VAZIO",
+    "p0_receipts_first":["SOURCE_IDENTITY","COMMIT_REF_INTEGRITY","WORKFLOW_RUN","JOB","STEP","TEST_DISCOVERY","NEGATIVE_TEST","BUILD","ARTIFACT_HASH","PROVENANCE_CHAIN","REGISTRY_DECISION_RECONCILIATION","POST_MERGE_REVALIDATION","ANDROID_INSTALL","ANDROID_LAUNCH","ANDROID_RUNTIME_LOG","PHYSICAL_DEVICE","PRIVACY_AUDIT","NODE_RUNTIME_COMPATIBILITY","INCIDENT_NEAR_MISS","REVALIDATION","DATASET_IDENTITY","SCIENTIFIC_PIPELINE","INFERENCE","REPLICATION","CLAIM_PROMOTION"]
+  },
+  "actions": {
+    "detective":["validated closure-decision commit pointer against GitHub", "reconciled open PR backlog", "re-read canonical TOKEN_VAZIO registry"],
+    "preventive":["introduced receipt coverage matrix", "require resolvable immutable identities before closure"],
+    "precautionary":["reopen invalid closure assurance to TOKEN_VAZIO_REVALIDATION_REQUIRED", "no historical deletion", "claim_allowed=false"],
+    "adaptive":["shift receipt model from generic artifacts to per-transition scoped receipts"],
+    "corrective":["recorded invalid closure provenance as near-miss", "prepared superseding evidence path"],
+    "maintenance":["prioritize stale Node24 PRs and registry reconciliation"],
+    "incident_investigation":["determine origin of non-existent SHA before assigning mechanism"],
+    "safety_assurance":["require independent reconstruction of any re-closed token"],
+    "learning_anti_recurrence":["DECISION_NE_PROOF", "SHA_TEXT_NE_EXISTING_COMMIT", "RECEIPT_COVERAGE_MUST_BE_ROUTE_SCOPED"]
+  },
+  "F_ok": [
+    "Mapa PR291 is merged and main authority advanced to 6e05a20c26920cf1034b498c615742c072451f8a",
+    "invalid canonical closure evidence pointer detected",
+    "urgent ignored backlog converted into explicit ranked work units",
+    "receipt coverage matrix created on audit branch"
+  ],
+  "F_gap": [
+    "real closure receipt for invariants CI binding",
+    "registry/decision reconciliation receipt",
+    "RafGitTools combined-main terminal receipt",
+    "Node24 representative compatibility receipts",
+    "Termux physical runtime chain",
+    "formal privacy audit receipt",
+    "negative fixture/falsifier receipts",
+    "historical workflows 8/9/10 receipts",
+    "license compatibility receipts",
+    "Drive/GitHub parity receipt",
+    "RLL dataset/pipeline/inference/replication receipts"
+  ],
+  "F_next": [
+    "P0: repair canonical receipt integrity before closing additional TOKEN_VAZIO",
+    "P0: instantiate receipt-index with PRESENT/MISSING/STALE/INVALID/SUPERSEDED/TOKEN_VAZIO states",
+    "P0: revalidate RafGitTools Node24 action chain and combined main",
+    "P0: produce Termux physical runtime receipt chain",
+    "P0: formal privacy and negative-test receipts",
+    "P1: backfill workflow 8/9/10 and license/source-gap/cross-store receipts",
+    "science: require dataset->pipeline->inference->replication receipts before RLL promotion"
+  ],
+  "F_esquecido": [
+    "receipt validity itself requires lifecycle and referential-integrity checks",
+    "a stale registry can silently contradict a newer decision ledger",
+    "old Dependabot PRs can become safety-assurance debt when the runtime environment changes",
+    "more receipts should mean finer evidence granularity, not duplicated prose"
+  ]
+}

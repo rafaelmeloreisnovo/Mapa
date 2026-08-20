@@ -1,0 +1,126 @@
+{
+  "schema": "RAFAELIA_RECEIPT_INDEX_V1",
+  "generated_from": "RAFAELIA_RECEIPT_COVERAGE_MATRIX_V1",
+  "claim_allowed": false,
+  "states": ["PRESENT", "MISSING", "STALE", "INVALID", "SUPERSEDED", "TOKEN_VAZIO"],
+  "entries": [
+    {
+      "id": "MAPA_INVARIANTS_CI_BINDING",
+      "component": "Mapa:promotion-control/invariants",
+      "route": ["R5", "R11", "R12"],
+      "receipt_type": "WORKFLOW_RUN_JOB_STEP",
+      "state": "PRESENT",
+      "receipt": "data/receipts/invariants-ci-binding.superseding.20260819T2246BRT.receipt.json",
+      "supersedes": "invalid SHA reference in TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl",
+      "next_gate": "revalidate on material validator/workflow/fixture change"
+    },
+    {
+      "id": "MAPA_LEGACY_OPERATIONAL_GAP_SCHEMA",
+      "component": "Mapa:operational-gap-assurance",
+      "route": ["R5", "R11"],
+      "receipt_type": "LEGACY_SCHEMA_COMPATIBILITY",
+      "state": "TOKEN_VAZIO",
+      "reason": "legacy records must remain historical and fail-closed until superseding canonical records exist",
+      "next_gate": "operational-gap-assurance terminal run with legacy gate"
+    },
+    {
+      "id": "RAFGITTOOLS_COMBINED_MAIN",
+      "component": "RafGitTools:combined-main-assurance",
+      "route": ["R5", "R6", "R11", "R12"],
+      "receipt_type": "POST_MERGE_TERMINAL_EXECUTION",
+      "state": "MISSING",
+      "next_gate": "main/push run -> jobs -> steps -> artifacts -> hashes"
+    },
+    {
+      "id": "RAFGITTOOLS_NODE24_SETUP_ANDROID",
+      "component": "RafGitTools:android-actions/setup-android",
+      "route": ["R6", "R11"],
+      "receipt_type": "DEPENDENCY_CHANGE_NODE24",
+      "state": "STALE",
+      "source": "PR #275 open >30d",
+      "receipt": "data/receipts/rafgittools-node24-setup-android-pr275.20260819T2246BRT.receipt.json",
+      "observed_scope": "exact-head mixed CI; Android Client Build, CI and PR Validation succeeded",
+      "next_gate": "rebase/update against current main and produce new exact-head receipt before integration"
+    },
+    {
+      "id": "RAFGITTOOLS_NODE24_SETUP_PYTHON",
+      "component": "RafGitTools:actions/setup-python",
+      "route": ["R6", "R11"],
+      "receipt_type": "DEPENDENCY_CHANGE_NODE24",
+      "state": "STALE",
+      "source": "PR #276 open >30d",
+      "receipt": "data/receipts/rafgittools-node24-setup-python-pr276.20260819T2246BRT.receipt.json",
+      "observed_scope": "exact-head mixed CI; CI, PR Validation, Android Client Build and Internal Validation succeeded",
+      "next_gate": "rebase/update against current main and reproduce Python-dependent gates"
+    },
+    {
+      "id": "RAFGITTOOLS_NODE24_GITHUB_SCRIPT",
+      "component": "RafGitTools:actions/github-script",
+      "route": ["R6", "R11"],
+      "receipt_type": "DEPENDENCY_CHANGE_NODE24",
+      "state": "STALE",
+      "source": "PR #277 open >30d",
+      "receipt": "data/receipts/rafgittools-node24-github-script-pr277.20260819T2246BRT.receipt.json",
+      "observed_scope": "exact-head mixed CI; PR Validation, Android Client Build and Internal Validation succeeded",
+      "next_gate": "inventory github-script callsites, rebase/update and execute v9 compatibility fixtures"
+    },
+    {
+      "id": "TERMUX_PHYSICAL_RUNTIME",
+      "component": "termux-app-rafacodephi:device-runtime",
+      "route": ["R7", "R11", "R12"],
+      "receipt_type": "APK_INSTALL_LAUNCH_LOGCAT_DEVICE",
+      "state": "MISSING",
+      "next_gate": "APK hash -> install -> launch -> PID/activity -> logcat -> device receipt"
+    },
+    {
+      "id": "MAPA_PRIVACY_AUDIT",
+      "component": "Mapa:audit-logs/receipts",
+      "route": ["R5", "R9", "R12"],
+      "receipt_type": "PRIVACY_AUDIT",
+      "state": "TOKEN_VAZIO",
+      "next_gate": "data inventory + minimization + redaction + retention + access + evidence receipt"
+    },
+    {
+      "id": "MAPA_NEGATIVE_FIXTURES",
+      "component": "Mapa:test/falsifier-system",
+      "route": ["R5", "R11", "R12"],
+      "receipt_type": "NEGATIVE_FIXTURE_COVERAGE",
+      "state": "TOKEN_VAZIO",
+      "next_gate": "structured negative fixtures mapped to invariants and expected failures"
+    },
+    {
+      "id": "MAPA_WORKFLOW_8_9_10_HISTORY",
+      "component": "Mapa:adaptive-cycle historical receipts",
+      "route": ["R5", "R11"],
+      "receipt_type": "HISTORICAL_WORKFLOW_RUN_COVERAGE",
+      "state": "MISSING",
+      "next_gate": "continuous run index + missing/stale/invalid classification"
+    },
+    {
+      "id": "MAPA_LICENSE_COMPATIBILITY",
+      "component": "Mapa:external-dependencies",
+      "route": ["R5", "R12"],
+      "receipt_type": "LICENSE_COMPATIBILITY",
+      "state": "TOKEN_VAZIO",
+      "next_gate": "dependency/action license inventory and compatibility decision receipt"
+    },
+    {
+      "id": "BOOTSTRAP_DRIVE_GITHUB_PARITY",
+      "component": "rafaelia:chatgpt-federated-bootstrap",
+      "route": ["R1", "R5", "R9", "R11"],
+      "receipt_type": "CROSS_STORE_PARITY",
+      "state": "TOKEN_VAZIO",
+      "next_gate": "Drive revision/export digest + GitHub blob/content digest + normalization contract"
+    },
+    {
+      "id": "RLL_SCIENTIFIC_REPLICATION",
+      "component": "RLL:scientific-claims",
+      "route": ["R8", "R11", "R12"],
+      "receipt_type": "DATASET_PIPELINE_INFERENCE_REPLICATION_CLAIM",
+      "state": "MISSING",
+      "next_gate": "dataset identity -> config -> run -> outputs -> hashes -> independent replication -> claim gate"
+    }
+  ],
+  "selection_rule": "P0 first: INVALID/SUPERSEDED provenance integrity, then MISSING receipts on promotion/runtime boundaries, then STALE dependency assurance, then TOKEN_VAZIO evidence production",
+  "anti_regression": "Every material state transition requires a scoped receipt or explicit TOKEN_VAZIO; absence must never be coerced to PASS or zero."
+}

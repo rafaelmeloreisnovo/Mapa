@@ -1,0 +1,24 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "rafgittools-node24-setup-android-pr275.20260819T2246BRT",
+  "claim_allowed": false,
+  "source": {"repo":"rafaelmeloreisnovo/RafGitTools","pr":275,"head_sha":"f517ce2ce1503027f26c943a7e13423ab5b9ce57","change":"android-actions/setup-android v3 -> v4 / Node24"},
+  "evidence": [
+    {"workflow":"PR Validation","run_id":31988160900,"conclusion":"success"},
+    {"workflow":"Android Client Build","run_id":31988160894,"conclusion":"success"},
+    {"workflow":"CI","run_id":31988160893,"conclusion":"success"},
+    {"workflow":"Internal Validation","run_id":31988160886,"conclusion":"success"},
+    {"workflow":"Native ASM CI","run_id":31988160881,"conclusion":"success"},
+    {"workflow":"Kernel Architecture Build","run_id":31988160891,"conclusion":"failure"},
+    {"workflow":"Security Scan","run_id":31988160870,"conclusion":"failure"},
+    {"workflow":"Source Gap Audit","run_id":31988160907,"conclusion":"failure"},
+    {"workflow":"Code Coverage","run_id":31988160924,"conclusion":"failure"},
+    {"workflow":"Performance Metrics","run_id":31988160922,"conclusion":"failure"},
+    {"workflow":"CodeQL Advanced","run_id":31988160903,"conclusion":"failure"}
+  ],
+  "state": "STALE_WITH_SCOPED_MIXED_EVIDENCE",
+  "why_stale": "PR remains open >30 days and exact-head evidence predates later main changes; successes cannot be inherited into current main without rebase/revalidation.",
+  "evidenced": "Android build, CI, PR Validation and several scoped gates succeeded on the exact PR head.",
+  "not_evidenced": "current-main compatibility, executor-wide green state, physical Android runtime",
+  "next_gate": "rebase/update against current main, then capture exact-head jobs/steps/artifact hashes before integration"
+}

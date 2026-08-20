@@ -1,0 +1,23 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "rafgittools-node24-github-script-pr277.20260819T2246BRT",
+  "claim_allowed": false,
+  "source": {"repo":"rafaelmeloreisnovo/RafGitTools","pr":277,"head_sha":"45ef349a31524718016c6225382681411e27167b","change":"actions/github-script v7 -> v9 / Node24 + injected getOctokit API changes"},
+  "evidence": [
+    {"workflow":"PR Validation","run_id":31988169012,"conclusion":"success"},
+    {"workflow":"Android Client Build","run_id":31988169017,"conclusion":"success"},
+    {"workflow":"Internal Validation","run_id":31988169059,"conclusion":"success"},
+    {"workflow":"rafaelia-block1","run_id":31988169030,"conclusion":"success"},
+    {"workflow":"CI","run_id":31988169010,"conclusion":"failure"},
+    {"workflow":"Security Scan","run_id":31988168998,"conclusion":"failure"},
+    {"workflow":"Source Gap Audit","run_id":31988168985,"conclusion":"failure"},
+    {"workflow":"Code Coverage","run_id":31988169000,"conclusion":"failure"},
+    {"workflow":"Performance Metrics","run_id":31988169007,"conclusion":"failure"},
+    {"workflow":"CodeQL Advanced","run_id":31988168967,"conclusion":"failure"}
+  ],
+  "state": "STALE_WITH_SCOPED_MIXED_EVIDENCE",
+  "why_stale": "PR remains open >30 days; v9 includes API-breaking changes and current main differs materially from the tested base.",
+  "evidenced": "PR Validation, Android Client Build, Internal Validation and rafaelia-block1 succeeded on exact head.",
+  "not_evidenced": "all github-script callsites compatible with v9 injected API under current main",
+  "next_gate": "inventory github-script callsites, rebase/update, run exact-head compatibility fixtures and terminal CI receipts"
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "invariants-ci-binding.superseding.20260819T2246BRT",
+  "claim_allowed": false,
+  "scope": "TOKEN_VAZIO_INVARIANTS_CI_BINDING_MISSING evidence/provenance repair",
+  "supersedes_evidence_reference": {
+    "source": "data/audits/TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl",
+    "invalid_commit_sha": "3a2c8f18eef4f5a9b5c8d1e2f3a4b5c6d7e8f9a0",
+    "probe_result": "NO_COMMIT_FOUND",
+    "decision_history_preserved": true
+  },
+  "actual_provenance": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 278,
+    "pr_state": "MERGED",
+    "head_sha": "1a918ec6e9f94e8f84c088af1946e273c7d5f7a5",
+    "merge_commit_sha": "9977ce43bc56b313df0d211749188f41657d3292",
+    "artifact": "tools/check_invariants.py"
+  },
+  "execution_evidence": [
+    {
+      "workflow": "RAFAELIA Promotion Control V1",
+      "run_id": 32162784209,
+      "conclusion": "success",
+      "job_id": 95795298332,
+      "job": "promotion-control / negative-tests",
+      "step": "Validate 15 Rafaelia invariants (P1-02 gate)",
+      "step_conclusion": "success"
+    },
+    {
+      "workflow": "RAFAELIA Promotion Control V1",
+      "run_id": 32162784209,
+      "conclusion": "success",
+      "job_id": 95795298332,
+      "job": "promotion-control / negative-tests",
+      "step": "Compile and run fail-closed fixtures",
+      "step_conclusion": "success"
+    },
+    {
+      "workflow": "CI",
+      "run_id": 32162784235,
+      "conclusion": "success",
+      "job_id": 95795298333,
+      "job": "Validate Repository Structure",
+      "step": "M3 — Varredura operacional contract check",
+      "step_conclusion": "success"
+    }
+  ],
+  "epistemic_boundary": {
+    "evidenced": "P1-02 invariants validation step executed successfully on PR #278 exact head; fail-closed fixtures also executed successfully",
+    "not_evidenced": "timeless validity of all invariants after future changes",
+    "revalidation_rule": "material change to invariants validator, promotion-control workflow, fixtures, or dependent policy invalidates inherited assurance"
+  },
+  "state_transition": "INVALID_PROVENANCE_REFERENCE -> SUPERSEDED_BY_REAL_PR_RUN_JOB_STEP_EVIDENCE",
+  "closure_result": "EVIDENCED_SCOPED",
+  "next_review_gate": "POST_CHANGE_INVARIANTS_GATE_RECEIPT",
+  "anti_regression": [
+    "CLOSED_DECISION_NE_VALID_RECEIPT",
+    "RECEIPT_COMMIT_MUST_RESOLVE",
+    "WORKFLOW_SUCCESS_NE_TIMELESS_ASSURANCE"
+  ]
+}
