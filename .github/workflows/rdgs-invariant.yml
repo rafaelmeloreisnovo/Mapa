@@ -32,11 +32,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -s docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
-          test -s data/evidence/rdgs_cycle_close_receipt_20260819.v2.txt
-          grep -F 'VISÃO ≠ ARTEFATO ≠ EXECUÇÃO ≠ EVIDÊNCIA ≠ CLAIM' docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
-          grep -F 'TOKEN_VAZIO != 0' docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
-          grep -F 'claim_allowed=false' data/evidence/rdgs_cycle_close_receipt_20260819.v2.txt
+          contract='docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md'
+          prior='data/evidence/rdgs_cycle_close_receipt_20260819.v2.txt'
+          test -s "$contract"
+          test -s "$prior"
+          grep -F 'REAL(scope)=true' "$contract"
+          grep -F 'DONE(scope)=true' "$contract"
+          grep -F 'GOOD(scope)=true' "$contract"
+          grep -F 'STILL_GOOD(scope,t)=true' "$contract"
+          grep -F 'STILL_GOOD = TOKEN_VAZIO_REVALIDATION_REQUIRED' "$contract"
+          grep -F 'GOOD             != claim_allowed=true' "$contract"
+          grep -F 'claim_allowed=false' "$prior"
 
       - name: Emit scoped execution evidence
         id: evidence
