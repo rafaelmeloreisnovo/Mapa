@@ -1,0 +1,38 @@
+{
+  "schema": "RAFAELIA_SCOPED_ASSURANCE_RECEIPT_V1",
+  "receipt_id": "pr299-fdf4c8f1-assurance-20260820T0749BRT",
+  "claim_allowed": false,
+  "scope": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pull_request": 299,
+    "exact_head_sha": "fdf4c8f15bf42944d8a581f3ae212b45de6e2643"
+  },
+  "workflow_evidence": [
+    {"workflow": "CI", "conclusion": "SUCCESS"},
+    {"workflow": "Branch Topology Gate", "conclusion": "SUCCESS"},
+    {"workflow": "operational-gap-assurance", "conclusion": "SUCCESS"},
+    {
+      "workflow": "Promotion Control",
+      "conclusion": "EXPECTED_FAIL_CLOSED",
+      "run_id": 32355606260,
+      "job_id": 96384044882,
+      "blocking_reason": "PULL_REQUEST_DRAFT_OR_UNKNOWN",
+      "automatic_merge": false,
+      "manual_merge_only": true,
+      "approvals_observed": 0,
+      "approvals_required": 1
+    }
+  ],
+  "state_transition": "TOKEN_VAZIO_LATEST_HEAD_CI -> EVIDENCED_SCOPED",
+  "lifecycle": {
+    "event": "TERMINAL_ASSURANCE_OBSERVED_AT_EXACT_HEAD",
+    "limit_type": "EVENT_TRIGGERED",
+    "next_review_gate": "ANY_NEW_COMMIT_REQUIRES_NEW_TERMINAL_ASSURANCE"
+  },
+  "epistemic_boundaries": [
+    "EXPECTED_FAIL_CLOSED_NE_REGRESSION",
+    "EXACT_HEAD_EVIDENCE_DOES_NOT_PROPAGATE_TO_FUTURE_HEAD",
+    "CLAIM_ALLOWED_FALSE"
+  ],
+  "affected_routes": ["R5", "R11", "R12"]
+}
