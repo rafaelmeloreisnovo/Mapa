@@ -1,0 +1,47 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "promotion-control-negative-fixtures.20260820T0042BRT",
+  "claim_allowed": false,
+  "scope": "promotion-control fail-closed negative fixtures only; not global falsifier coverage",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "test_file": "tests/test_promotion_control.py",
+    "test_blob_sha": "a36b43de166d25856111aebe51880e95a4d8b7a0",
+    "workflow": ".github/workflows/promotion-control-v1.yml",
+    "workflow_blob_sha": "980f8c39e6bce2a345e19096e4faceb7a631bc89"
+  },
+  "negative_cases": [
+    "draft pull request denied",
+    "explicit do-not-merge body denied",
+    "READY_FOR_GRAPH=false denied",
+    "required independent review missing denied",
+    "author self-approval does not count",
+    "latest CHANGES_REQUESTED revokes prior approval",
+    "auto-merge enabled denied"
+  ],
+  "positive_control": "clean PR with independent approval -> ALLOWED_FOR_MANUAL_MERGE while automatic_merge=false and claim_allowed=false",
+  "execution_evidence": {
+    "receipt": "data/receipts/invariants-ci-binding.superseding.20260819T2246BRT.receipt.json",
+    "run_id": 32162784209,
+    "job_id": 95795298332,
+    "step": "Compile and run fail-closed fixtures",
+    "step_conclusion": "success"
+  },
+  "boundary": {
+    "evidenced": "promotion-control fail-closed fixtures executed successfully for the enumerated cases",
+    "not_evidenced": "complete negative-fixture coverage for every Mapa invariant, workflow, scientific claim, runtime path or federated producer",
+    "global_token_state": "TOKEN_VAZIO_NEGATIVE_FIXTURE_COVERAGE_INCOMPLETE"
+  },
+  "lifecycle": {
+    "component": "Mapa:promotion-control-negative-fixtures",
+    "limit_type": "EVENT_TRIGGERED",
+    "incident_count": 0,
+    "near_miss_count": 0,
+    "maintenance_actions": 0,
+    "corrective_actions": 0,
+    "last_verified_at": "run:32162784209/job:95795298332",
+    "next_review_gate": "PROMOTION_CONTROL_TEST_OR_POLICY_CHANGE"
+  },
+  "state": "PRESENT_SCOPED",
+  "anti_regression": ["NEGATIVE_FIXTURES_PRESENT_NE_GLOBAL_FALSIFIER_COVERAGE", "POSITIVE_CONTROL_NE_CLAIM_ALLOWED", "TEST_FILE_NE_EXECUTION_WITHOUT_RUN_RECEIPT"]
+}
