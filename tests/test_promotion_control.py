@@ -51,6 +51,13 @@ class PromotionControlTests(unittest.TestCase):
         self.assertEqual(result["result"], "DENIED")
         self.assertIn("PULL_REQUEST_DRAFT_OR_UNKNOWN", result["blocking_reasons"])
 
+    def test_policy_approval_floor_applies_without_body_marker(self):
+        result = MODULE.evaluate(event(body=""), [], POLICY)
+        self.assertEqual(result["result"], "DENIED")
+        self.assertTrue(result["independent_review_required"])
+        self.assertEqual(result["observed_independent_approvals"], 0)
+        self.assertIn("INDEPENDENT_APPROVAL_MISSING", result["blocking_reasons"])
+
     def test_explicit_do_not_merge_is_denied(self):
         result = MODULE.evaluate(event(body="Não mesclar antes do receipt físico."), [], POLICY)
         self.assertIn("EXPLICIT_BODY_DENIAL", result["blocking_reasons"])
@@ -66,6 +73,7 @@ class PromotionControlTests(unittest.TestCase):
             POLICY,
         )
         self.assertIn("HUMAN_REVIEW_MISSING", result["blocking_reasons"])
+        self.assertIn("INDEPENDENT_APPROVAL_MISSING", result["blocking_reasons"])
 
     def test_author_approval_does_not_count(self):
         result = MODULE.evaluate(
@@ -75,6 +83,7 @@ class PromotionControlTests(unittest.TestCase):
         )
         self.assertEqual(result["observed_independent_approvals"], 0)
         self.assertIn("HUMAN_REVIEW_MISSING", result["blocking_reasons"])
+        self.assertIn("INDEPENDENT_APPROVAL_MISSING", result["blocking_reasons"])
 
     def test_latest_review_state_wins(self):
         result = MODULE.evaluate(
@@ -84,6 +93,16 @@ class PromotionControlTests(unittest.TestCase):
         )
         self.assertEqual(result["observed_independent_approvals"], 0)
         self.assertIn("HUMAN_REVIEW_MISSING", result["blocking_reasons"])
+        self.assertIn("INDEPENDENT_APPROVAL_MISSING", result["blocking_reasons"])
+
+    def test_bot_approval_does_not_count(self):
+        result = MODULE.evaluate(
+            event(author="author"),
+            [review("ci-reviewer[bot]", "APPROVED")],
+            POLICY,
+        )
+        self.assertEqual(result["observed_independent_approvals"], 0)
+        self.assertIn("INDEPENDENT_APPROVAL_MISSING", result["blocking_reasons"])
 
     def test_auto_merge_enabled_is_denied(self):
         result = MODULE.evaluate(event(auto_merge={"enabled_by": {"login": "author"}}), [], POLICY)
@@ -91,14 +110,24 @@ class PromotionControlTests(unittest.TestCase):
 
     def test_clean_pr_with_independent_approval_is_allowed(self):
         result = MODULE.evaluate(
-            event(body="human_review_required=true"),
+            event(body=""),
             [review("reviewer", "APPROVED")],
             POLICY,
         )
         self.assertEqual(result["result"], "ALLOWED_FOR_MANUAL_MERGE")
         self.assertEqual(result["approved_by"], ["reviewer"])
+        self.assertTrue(result["independent_review_required"])
         self.assertFalse(result["automatic_merge"])
         self.assertFalse(result["claim_allowed"])
+
+    def test_body_human_review_marker_with_approval_is_allowed(self):
+        result = MODULE.evaluate(
+            event(body="human_review_required=true"),
+            [review("reviewer", "APPROVED")],
+            POLICY,
+        )
+        self.assertEqual(result["result"], "ALLOWED_FOR_MANUAL_MERGE")
+        self.assertTrue(result["human_review_required"])
 
 
 if __name__ == "__main__":
