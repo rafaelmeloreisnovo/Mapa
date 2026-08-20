@@ -1,0 +1,110 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE_V1",
+  "cycle_id": "OMEGA-20260819T1945BRT",
+  "observed_at": "2026-08-19T19:45:51-03:00",
+  "mode": "APPEND_ONLY_EVIDENCE_FIRST",
+  "claim_allowed": false,
+  "state": "VERIFIED_LIMITED",
+  "sources": [
+    {"repo":"rafaelmeloreisnovo/RafGitTools","ref":"main","sha":"0c453be12b31eb21c85cf6295b740c0d54365166","role":"EXECUTOR_CURRENT_MAIN"},
+    {"repo":"rafaelmeloreisnovo/Mapa","ref":"main","sha":"727401d4b4d4ccd887de9d4786867f9e660fa216","role":"FEDERATED_AUTHORITY"},
+    {"drive_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","role":"CANONICAL_METHOD_MEMORY"},
+    {"drive_id":"1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y","role":"MASTER_NAVIGATION"},
+    {"drive_id":"1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk","role":"OMEGA_RECONSTRUCTION_INDEX"}
+  ],
+  "F_ok": [
+    "RafGitTools PR362 merged: unittest discovery correction is now in main",
+    "RafGitTools PR364 merged: CodeQL java-kotlin explicit Android/JDK manual build is now in main",
+    "RafGitTools PR365 merged: coverage evidence boundary/fail-closed detector is now in main",
+    "Mapa PR290 merged: previous security/lifecycle deltas are now in authority main",
+    "Current RafGitTools main contains all three formerly-separated corrective mechanisms simultaneously",
+    "Drive canonical method, Master Navigation, Omega index and continuous catalog protocol remain readable and preserve claim_allowed=false / append-only / evidence-first boundaries"
+  ],
+  "F_gap": [
+    {"gap_id":"RGT_COMBINED_MAIN_POST_MERGE_RECEIPT","state":"TOKEN_VAZIO","evidence":"commit-associated pull-request workflow query on merge commit 0c453be... returned no PR-triggered runs; this does not establish absence of push/main workflows"},
+    {"gap_id":"RGT_COVERAGE_PRODUCER","state":"TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED","evidence":"main workflow truthfully fail-closes when jacocoTestReport/report artifacts are absent"},
+    {"gap_id":"RGT_SOURCE_GAP_BASELINE_DEBT","state":"EVIDENCED_PERSISTENT_FROM_PRIOR_SCOPED_RUNS","evidence":"not re-promoted or re-counted in this cycle without a new baseline/head receipt"},
+    {"gap_id":"TERMUX_PHYSICAL_RUNTIME","state":"TOKEN_VAZIO","evidence":"no new physical device/install/launch/logcat receipt observed in this cycle"},
+    {"gap_id":"RLL_NEW_SCIENTIFIC_EVIDENCE","state":"TOKEN_VAZIO_NO_NEW_PROMOTION","evidence":"no new scientific receipt used to promote a claim in this cycle"},
+    {"gap_id":"DRIVE_APPEND","state":"TOKEN_VAZIO_CAPABILITY","evidence":"Drive connector exposed read/search but no safe append mutation in this execution"}
+  ],
+  "tokens_vazios_resolved": [
+    "TOKEN_VAZIO_OPEN_PR_BASELINE_ORDERING_PR362_PR364_PR365 -> STRUCTURALLY_RESOLVED_BY_MERGE_TO_SAME_MAIN",
+    "TOKEN_VAZIO_PR362_MERGE -> RESOLVED",
+    "TOKEN_VAZIO_PR364_MERGE -> RESOLVED",
+    "TOKEN_VAZIO_PR365_MERGE -> RESOLVED",
+    "TOKEN_VAZIO_MAPA_PR290_MERGE -> RESOLVED"
+  ],
+  "tokens_vazios_open": [
+    "TOKEN_VAZIO_RGT_COMBINED_MAIN_POST_MERGE_RECEIPT",
+    "TOKEN_VAZIO_COVERAGE_NOT_CONFIGURED",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_NEW_SCIENTIFIC_EVIDENCE",
+    "TOKEN_VAZIO_DRIVE_APPEND_CAPABILITY"
+  ],
+  "uncertainty_before_after": {
+    "pr_baseline_ordering": ["OPEN_PR_DEPENDENCY", "STRUCTURALLY_RESOLVED_IN_COMMON_MAIN"],
+    "unittest_discovery_on_current_main": ["SEPARATE_PR_FIX", "IMPLEMENTATION_PRESENT_IN_MAIN"],
+    "codeql_manual_build_on_current_main": ["SEPARATE_PR_FIX", "IMPLEMENTATION_PRESENT_IN_MAIN"],
+    "coverage_boundary_on_current_main": ["SEPARATE_PR_FIX", "IMPLEMENTATION_PRESENT_IN_MAIN"],
+    "combined_post_merge_execution": ["UNKNOWN", "TOKEN_VAZIO_POST_MERGE_RECEIPT_REQUIRED"]
+  },
+  "component_lifecycle": [
+    {
+      "component":"rafgittools:combined-main-assurance",
+      "event":"THREE_CORRECTIVE_LINEAGES_CONVERGED_IN_MAIN",
+      "limit_type":"EVENT_TRIGGERED",
+      "dependency_changes":3,
+      "incident_count":0,
+      "near_miss_count":"TOKEN_VAZIO_CUMULATIVE_NOT_RECOUNTED",
+      "maintenance_actions":3,
+      "corrective_actions":3,
+      "execution_hours":"TOKEN_VAZIO",
+      "cycles":"TOKEN_VAZIO",
+      "builds":"TOKEN_VAZIO_POST_MERGE",
+      "test_cycles":"TOKEN_VAZIO_POST_MERGE",
+      "deployments":"TOKEN_VAZIO",
+      "evidence_age":"TOKEN_VAZIO",
+      "provenance_age":"TOKEN_VAZIO",
+      "last_verified_at":"TOKEN_VAZIO_COMBINED_MAIN_TERMINAL_RECEIPT",
+      "next_review_gate":"COMBINED_MAIN_BUILD_TEST_CODEQL_COVERAGE_BOUNDARY_RECEIPT",
+      "retirement_revalidation_criteria":"revalidate on material workflow/build/test/security dependency change"
+    }
+  ],
+  "impact_radius": {
+    "routes":["R5","R6","R11","R12"],
+    "components":["unittest coherence runner","CodeQL java-kotlin lane","coverage evidence detector","executor-wide assurance","federated promotion boundary"]
+  },
+  "actions": {
+    "DETECTIVE":"Resolved current merge state of PR362/364/365 and inspected current-main implementations of all three mechanisms.",
+    "PREVENTIVE":"Removed obsolete baseline-ordering assumption from current-state reasoning; future assurance must target the converged main.",
+    "PRECAUTIONARY":"Kept claim_allowed=false and post-merge execution as TOKEN_VAZIO until a terminal combined-main receipt exists.",
+    "ADAPTIVE":"Rebased the assurance model from sibling-PR topology to converged-main lifecycle without rewriting predecessor history.",
+    "CORRECTIVE":"No new code correction applied because the highest-information next probe is execution of the already-converged main, not another speculative patch.",
+    "MAINTENANCE":"Opened event-triggered revalidation for the combined main after three corrective lineages merged.",
+    "INCIDENT_INVESTIGATION":"No incident inferred from lack of PR-associated workflow runs on a merge SHA; detector limitation preserved.",
+    "SAFETY_ASSURANCE":"Verified structural presence of unittest discovery, CodeQL manual-build and coverage fail-closed boundaries on main; runtime assurance withheld.",
+    "LEARNING_ANTI_RECURRENCE":"Once sibling fixes converge in main, baseline-ordering ceases to explain current failures; assurance must pivot to the combined-main state."
+  },
+  "F_esquecido": [
+    "structural convergence != post-merge execution evidence",
+    "absence of PR-triggered runs on a merge SHA != absence of push/main runs",
+    "coverage fail-closed remains correct control behavior until a real coverage producer exists",
+    "merged corrective mechanisms invalidate earlier sibling-PR baseline explanations for the current main"
+  ],
+  "routes_promoted": [
+    "R6 structural executor coherence improved because three corrective lineages now coexist in main",
+    "R11 state model improved by retiring obsolete sibling-PR baseline ordering as a current explanation"
+  ],
+  "routes_blocked_or_revalidation": [
+    "R5 combined-main evidence/receipt still requires terminal execution evidence",
+    "R12 executor-wide promotion remains blocked",
+    "Termux physical/runtime and RLL scientific promotion remain blocked without new owner receipts"
+  ],
+  "F_next": [
+    "obtain or execute a combined-main RafGitTools receipt covering canonical coherence discovery, Android build/tests/lint/APK, CodeQL actions+java-kotlin, and truthful coverage boundary",
+    "record jobs/steps/exit codes/artifact hashes against current main SHA 0c453be12b31eb21c85cf6295b740c0d54365166 or a later explicitly identified main SHA",
+    "if combined-main CI fails, attribute only the first evidenced failing coordinate and recompute IMPACT_RADIUS; do not reuse the obsolete sibling-PR baseline-ordering explanation without new evidence",
+    "continue physical Termux and RLL scientific routes only when new owner-specific receipts exist"
+  ]
+}
