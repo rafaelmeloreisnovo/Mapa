@@ -1,0 +1,40 @@
+{
+  "schema": "RAFAELIA_RECEIPT_V1",
+  "receipt_id": "operational-gap-assurance-schema-alias-pr299-terminal-20260820T0347BRT",
+  "claim_allowed": false,
+  "scope": "terminal revalidation of bounded historical schema alias correction in Mapa PR299",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 299,
+    "head_sha": "bf6c2f51608dcbabf00dc74bd4b162cff54a5aee",
+    "workflow": "operational-gap-assurance",
+    "run_id": 32341170103,
+    "job_id": 96340416946
+  },
+  "terminal_steps": {
+    "Compile assurance engines": "SUCCESS",
+    "Operational gap self-test": "SUCCESS",
+    "Validate operational gap records": "SUCCESS",
+    "Validate component lifecycle ledgers": "SUCCESS",
+    "Verify self-test cross-repo provenance": "SUCCESS"
+  },
+  "predecessor_receipt": "data/receipts/operational-gap-assurance-schema-alias-pr299.20260820T0347BRT.receipt.json",
+  "correction_lineage": {
+    "failure_run": 32337172101,
+    "failure_job": 96328862848,
+    "failure_mode": "EXPLICIT_HISTORICAL_SCHEMA_ALIAS_MISSING_FROM_COMPATIBILITY_GATE",
+    "correction_commit": "7ba83e240d43b7060e53638d9dc5b8a078eec6d7",
+    "accepted_alias": "rafaelia.operational-gap-assurance/v1",
+    "wildcard_added": false,
+    "canonical_current_validation_relaxed": false
+  },
+  "state_transition": "FIX_IMPLEMENTED_TERMINAL_REVALIDATION_PENDING -> EVIDENCED_SCOPED",
+  "resolved_token_vazio": "TOKEN_VAZIO_PR299_POST_FIX_OPERATIONAL_GAP_ASSURANCE_TERMINAL",
+  "remaining_boundaries": [
+    "HISTORICAL_ACCEPTED_NE_CANONICAL_VALIDATED_NE_CLOSED_BY_EVIDENCE",
+    "PR_HEAD_ASSURANCE_NE_MERGED_MAIN_ASSURANCE",
+    "VC_DOCUMENTATION_NE_PRODUCER_IMPLEMENTATION"
+  ],
+  "closure_result": "EVIDENCED_SCOPED",
+  "next_review_gate": "EVENT_TRIGGERED_ON_OPERATIONAL_GAP_SCHEMA_OR_GATE_CHANGE"
+}
