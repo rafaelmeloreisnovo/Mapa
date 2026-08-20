@@ -1,0 +1,44 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "operational-gap-schema-compat.terminal.20260819T2347BRT",
+  "claim_allowed": false,
+  "transition": "TOKEN_VAZIO_TERMINAL_REVALIDATION_PENDING -> EVIDENCED_SCOPED",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 293,
+    "head_sha": "de5060edfe3479f20fd758727930399edca6dd38",
+    "merge_ref_sha": "8c78cadefdbcff046124f5ebf58f3a78c29760e5",
+    "workflow_run_id": 32326235126,
+    "job_id": 96297945720,
+    "workflow": "operational-gap-assurance",
+    "job": "deterministic-self-test"
+  },
+  "terminal_evidence": {
+    "workflow_conclusion": "success",
+    "operational_gap_self_test": "success",
+    "validate_operational_gap_records": "success",
+    "validate_component_lifecycle_ledgers": "success",
+    "verify_self_test_cross_repo_provenance": "success",
+    "canonical_new_record": "valid=true; claim_allowed=false; closure_result=TOKEN_VAZIO",
+    "legacy_rafaelia_operational_gap_slash_v1": "legacy_accepted=true; claim_allowed=false; closure_result=TOKEN_VAZIO_REVALIDATION_REQUIRED",
+    "legacy_RAFAELIA_OPERATIONAL_GAP_ASSURANCE_V1": "legacy_accepted=true; claim_allowed=false; closure_result=TOKEN_VAZIO_REVALIDATION_REQUIRED",
+    "provenance_self_test": "PASS with boundary=provenance coherence only; not execution/scientific validation"
+  },
+  "environment": {
+    "runner": "2.336.0",
+    "os": "Ubuntu 24.04.4 LTS",
+    "runner_image": "ubuntu-24.04/20260816.277.1",
+    "python": "3.12.14",
+    "node_runtime_event": "actions/checkout@v4 and actions/setup-python@v5 target Node20 but were forced onto Node24"
+  },
+  "boundary": [
+    "historical compatibility is explicit and narrow; no wildcard acceptance",
+    "historical acceptance does not equal canonical validation",
+    "historical acceptance does not close historical gaps",
+    "claim_allowed remains false",
+    "Node24 exposure is a lifecycle revalidation item and is not claimed causal to the resolved schema vocabulary failure"
+  ],
+  "closure_gate": "OPERATIONAL_GAP_SCHEMA_COMPAT_TERMINAL_RECEIPT",
+  "state": "PRESENT",
+  "scope": "schema compatibility and assurance gate only"
+}
