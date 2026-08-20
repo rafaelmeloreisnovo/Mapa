@@ -1,0 +1,36 @@
+name: feedback-event-noregression
+
+on:
+  pull_request:
+    paths:
+      - 'data/feedback-events/**'
+      - 'schemas/feedback-event.schema.json'
+      - 'scripts/validate_feedback_events.py'
+      - 'tests/test_feedback_events.py'
+  push:
+    paths:
+      - 'data/feedback-events/**'
+      - 'schemas/feedback-event.schema.json'
+      - 'scripts/validate_feedback_events.py'
+      - 'tests/test_feedback_events.py'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests
+        run: python3 -m unittest -v tests.test_feedback_events
+      - name: Validate append-only feedback ledger
+        run: |
+          python3 scripts/validate_feedback_events.py \
+            --ledger data/feedback-events/feedback-events.v1.jsonl \
+            --write-report build/feedback-events/report.json
