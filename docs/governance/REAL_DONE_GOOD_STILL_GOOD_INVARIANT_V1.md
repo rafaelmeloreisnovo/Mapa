@@ -22,6 +22,7 @@ A invariante não promove evidência local para escopo global e não transforma 
 `REAL(scope)=true` somente quando existe materialização observável no escopo declarado, com identidade e proveniência suficientes para reencontrar o objeto.
 
 Requisitos mínimos:
+
 - objeto/ref/endereço recuperável;
 - identidade material quando aplicável (hash, commit, provider_id ou equivalente);
 - autoridade/proveniência declarada;
@@ -30,6 +31,7 @@ Requisitos mínimos:
 ### DONE(scope)
 
 `DONE(scope)=true` somente quando:
+
 - `REAL(scope)=true`;
 - a obrigação foi explicitamente definida;
 - o gate de encerramento dessa obrigação foi executado;
@@ -41,6 +43,7 @@ Requisitos mínimos:
 ### GOOD(scope)
 
 `GOOD(scope)=true` somente quando:
+
 - `DONE(scope)=true`;
 - critérios aplicáveis de qualidade, segurança, privacidade, coerência e anti-regressão foram avaliados;
 - não existe regressão ativa não contida dentro do escopo;
@@ -52,6 +55,7 @@ Requisitos mínimos:
 ### STILL_GOOD(scope, t)
 
 `STILL_GOOD(scope,t)=true` somente quando:
+
 - existiu um `GOOD(scope)` anterior;
 - ocorreu revalidação após evento que pode invalidá-lo, ou a política de recertificação ainda é válida;
 - dependências críticas não sofreram delta incompatível;
@@ -196,16 +200,19 @@ still_good = TOKEN_VAZIO_REVALIDATION_REQUIRED
 ## 10. R3
 
 F_ok:
+
 - estados REAL/DONE/GOOD/STILL_GOOD definidos com escopo;
 - transições e gates explícitos;
 - regressão preservada append-only;
 - claim global não herdado de evidência local.
 
 F_gap:
+
 - cada domínio ainda precisa mapear seus closure gates específicos;
 - Termux/cross-host/physical runtime continuam dependentes de execução real quando aplicáveis.
 
 F_next:
+
 - emitir registros tipados para itens reais;
 - usar receipts existentes para revalidação;
 - bloquear qualquer promoção que pule estado ou escopo.
