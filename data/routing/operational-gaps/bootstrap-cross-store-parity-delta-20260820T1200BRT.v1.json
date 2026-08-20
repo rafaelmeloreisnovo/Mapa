@@ -1,0 +1,66 @@
+{
+  "schema": "rafaelia.operational-gap-delta/v1",
+  "delta_id": "BOOTSTRAP_CROSS_STORE_PARITY_DELTA_20260820T1200BRT",
+  "observed_at": "2026-08-20T12:00:00-03:00",
+  "claim_allowed": false,
+  "predecessor": "data/routing/operational-gaps/bootstrap-cross-store-parity-20260819T2044BRT.v1.json",
+  "gap_id": "BOOTSTRAP_CROSS_STORE_PARITY_20260819T2044BRT",
+  "source_observations": {
+    "drive": {
+      "document_id": "1__kkzcgJhPPXll_8v6Fm5BnnL2XccDIza-8YX26KJ3g",
+      "current_revision_id": "2",
+      "previous_revision_id": "1",
+      "revision_modified_time": "2026-08-19T23:43:53.401Z",
+      "export_mime_type": "text/plain",
+      "text_observed": true
+    },
+    "github": {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "path": "bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md",
+      "blob_sha": "2fdb05b786f1d42db12182bc4e7023a28499cb46",
+      "text_observed": true
+    }
+  },
+  "before": {
+    "semantic_alignment": "EVIDENCED_SCOPED",
+    "byte_equivalence": "TOKEN_VAZIO_NO_COMMON_DIGEST",
+    "drive_revision_id": "TOKEN_VAZIO_NOT_CAPTURED",
+    "cross_store_receipt": "TOKEN_VAZIO_NOT_EMITTED"
+  },
+  "after": {
+    "semantic_alignment": "EVIDENCED_SCOPED_CURRENT_READ",
+    "drive_revision_id": "PRESENT_REVISION_2",
+    "github_blob_identity": "PRESENT_BLOB_SHA",
+    "byte_equivalence": "TOKEN_VAZIO_NO_COMMON_DIGEST",
+    "cross_store_receipt": "PRESENT_PARTIAL_RECEIPT"
+  },
+  "observed_difference_class": "REPRESENTATION_FORMATTING",
+  "observed_notes": [
+    "Drive text/plain export carries CRLF/BOM and additional blank-line formatting relative to the GitHub Markdown representation.",
+    "The substantive bootstrap headings, policy, authority model, pointers, control questions, custody rules and F_ok/F_gap/F_next contract are aligned in the inspected texts.",
+    "Semantic alignment is not cryptographic byte identity."
+  ],
+  "closure_gate": {
+    "name": "CROSS_STORE_DIGEST_AND_REVISION_RECEIPT",
+    "result": "PARTIAL",
+    "satisfied": [
+      "drive_revision_id",
+      "github_blob_identity",
+      "scoped_text_comparison",
+      "append_only_partial_receipt"
+    ],
+    "still_required": [
+      "drive_export_digest",
+      "github_export_or_normalized_digest under the same canonicalization contract",
+      "digest comparison result"
+    ]
+  },
+  "falsifier": "Any material semantic divergence between the referenced Drive revision and GitHub blob, or a future digest mismatch under an explicitly shared canonicalization contract, invalidates parity promotion.",
+  "next_probe": "Export both representations under one explicit canonicalization contract, hash both outputs, compare digests, and append the terminal parity receipt.",
+  "r3": {
+    "F_ok": "Drive revision identity and GitHub blob identity are now captured and semantically aligned by scoped read.",
+    "F_gap": "Exact/common-digest equivalence remains TOKEN_VAZIO.",
+    "F_next": "Compute and compare canonicalized digests without rewriting either source."
+  }
+}
