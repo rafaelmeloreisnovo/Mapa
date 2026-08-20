@@ -7,9 +7,8 @@ only as historical evidence when claim_allowed is false, and are reported as
 TOKEN_VAZIO_REVALIDATION_REQUIRED until a superseding canonical record/receipt
 exists.
 
-A very small explicit quarantine set handles records that used the canonical
-schema label before all current subcontracts were enforced. This is intentionally
-allowlist-only: new malformed canonical records still fail.
+Historical compatibility is explicit and narrow. Unknown schemas or malformed
+new canonical records still fail.
 """
 from __future__ import annotations
 
@@ -23,6 +22,9 @@ CANONICAL = "rafaelia.operational-gap-assurance/v1"
 LEGACY_SCHEMAS = {
     "RAFAELIA_OPERATIONAL_GAP_V1",
     "rafaelia.operational-gap.v1",
+}
+LEGACY_SCHEMA_VERSIONS = {
+    "rafaelia.operational-gap/v1",
 }
 HISTORICAL_CANONICAL_QUARANTINE = {
     "gap:mapa:federated-broker:hmac-provenance:20260819",
@@ -66,7 +68,8 @@ def main() -> int:
     path = Path(sys.argv[1])
     record = json.loads(path.read_text(encoding="utf-8"))
 
-    if record.get("schema_version") == CANONICAL:
+    schema_version = record.get("schema_version")
+    if schema_version == CANONICAL:
         report = build_report(record)
         if report["valid"]:
             print(json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False))
@@ -75,6 +78,9 @@ def main() -> int:
             return emit_historical(record, "CANONICAL_LABEL_PRE_CURRENT_SUBCONTRACTS")
         print(json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False))
         return 2
+
+    if schema_version in LEGACY_SCHEMA_VERSIONS:
+        return emit_historical(record, schema_version)
 
     legacy_schema = record.get("schema")
     if legacy_schema in LEGACY_SCHEMAS:
@@ -85,7 +91,7 @@ def main() -> int:
         "gap_id": record.get("gap_id"),
         "valid": False,
         "errors": ["unknown operational-gap schema"],
-        "observed_schema_version": record.get("schema_version"),
+        "observed_schema_version": schema_version,
         "observed_schema": record.get("schema"),
     }, indent=2, sort_keys=True, ensure_ascii=False))
     return 2
