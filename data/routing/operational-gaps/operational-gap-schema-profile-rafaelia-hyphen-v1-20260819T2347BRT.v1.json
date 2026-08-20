@@ -1,0 +1,71 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "gap:mapa:operational-gap-schema:rafaelia-hyphen-v1:20260819T2347BRT",
+  "status": "REVALIDATION_REQUIRED",
+  "source_pointer": "github://rafaelmeloreisnovo/Mapa/actions/runs/32322709436/jobs/96287858447",
+  "owner_authority": "Mapa/operational-gap-assurance",
+  "affected_routes": ["R5", "R11", "R12"],
+  "observed_at": "2026-08-19T23:47:04-03:00",
+  "provenance": [
+    {
+      "source": "GitHub Actions run 32322709436",
+      "job": "deterministic-self-test",
+      "step": "Validate operational gap records",
+      "head_commit": "377fc5e087eb07bf5bf7584dd757c2029b155aae",
+      "merge_ref": "606168d45d43f887760def73c058e9b0d1d1b994"
+    }
+  ],
+  "evidence_for": [
+    "operational_gap_assurance.py --self-test returned PASS",
+    "historical records with recognized profiles were accepted only as legacy with claim_allowed=false and TOKEN_VAZIO_REVALIDATION_REQUIRED",
+    "validation stopped on GAP_TERMUX_CI_DETECTOR_PR_HEAD_20260819T1048Z because its schema field was rafaelia-operational-gap/v1 and the profile was not in the explicit allowlist"
+  ],
+  "evidence_against": [
+    "no evidence that the historical Termux detector record itself is malformed or unsafe; failure is limited to schema-profile recognition"
+  ],
+  "uncertainty_state": "MECHANISM_IDENTIFIED_FIX_IMPLEMENTED_TERMINAL_REVALIDATION_PENDING",
+  "urgency": 4,
+  "necessity": 5,
+  "impact": 4,
+  "unlock": 5,
+  "risk": 3,
+  "detectability": 5,
+  "recurrence_risk": 4,
+  "information_gain": 5,
+  "forgetting_risk": 4,
+  "failure_mode": "Historical schema profile rafaelia-operational-gap/v1 was omitted from the explicit legacy schema allowlist, causing fail-closed rejection after otherwise valid historical records passed",
+  "falsifier": "After adding only the explicit historical profile, the same record is still rejected as unknown schema or any new malformed current-schema record is incorrectly accepted",
+  "next_probe": "Run operational-gap-assurance on the corrective branch and require all historical profiles to remain claim_allowed=false/TOKEN_VAZIO_REVALIDATION_REQUIRED while current malformed records still fail",
+  "mitigation": {
+    "fail_closed": true,
+    "action": "add rafaelia-operational-gap/v1 only to the explicit legacy schema set; do not broaden wildcard acceptance and do not rewrite historical records",
+    "rollback": "revert the single allowlist entry if terminal validation reveals over-acceptance"
+  },
+  "closure_gate": {
+    "criterion": "terminal operational-gap-assurance succeeds with the historical profile explicitly accepted and anti-promotion invariant preserved",
+    "evidence_needed": "workflow run id, job id, Validate operational gap records step SUCCESS, and logs showing legacy_accepted=true with claim_allowed=false for the target profile",
+    "falsifier": "unknown/new malformed schemas pass or target historical profile remains rejected",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "revalidate whenever operational-gap schema vocabulary or record gate changes",
+  "claim_allowed": false,
+  "action_categories": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "ADAPTIVE", "CORRECTIVE", "MAINTENANCE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+  "detector": {
+    "signal": "unknown operational-gap schema emitted by operational_gap_record_gate.py",
+    "threshold": "any record in data/routing/operational-gaps is rejected solely because an already-observed historical schema vocabulary is missing from the explicit compatibility table",
+    "false_positive": "a genuinely unknown or malformed schema is mistaken for a historical profile",
+    "false_negative": "a historical profile is accepted without claim_allowed=false or without TOKEN_VAZIO_REVALIDATION_REQUIRED",
+    "evidence_needed": "record schema/schema_version, gate JSON output, workflow exit code and log"
+  },
+  "safety_assurance": {
+    "data_acquisition": "scan every operational-gap JSON through the explicit record gate",
+    "analysis": "separate canonical validation from explicit historical compatibility and reject unknown vocabularies",
+    "system_reassessment": "on each schema change, rerun all historical records and negative malformed fixtures",
+    "corrective_trigger": "new current-schema record bypasses canonical validator or legacy record receives closure/PASS semantics"
+  },
+  "learning": {
+    "reusable_control": "schema vocabulary is itself a lifecycle component; historical compatibility must be explicit, narrow, fail-closed and non-promotional",
+    "index_or_test": "maintain explicit historical schema fixtures and receipt for each compatibility addition",
+    "recurrence_check": "next assurance run must prove both target acceptance and unknown-schema rejection"
+  }
+}
