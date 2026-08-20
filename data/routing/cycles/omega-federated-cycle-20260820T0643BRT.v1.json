@@ -1,0 +1,114 @@
+{
+  "schema": "RAFAELIA_FEDERATED_OMEGA_DELTA_V1",
+  "cycle_id": "omega-federated-cycle-20260820T0643BRT",
+  "observed_at": "2026-08-20T06:43:44-03:00",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY",
+    "NO_SILENT_REGRESSION"
+  ],
+  "observed_sources": [
+    {"repo": "rafaelmeloreisnovo/Mapa", "ref": "main", "sha": "bbc7b8052349a76c96363a6eb7b39c3541e12e44"},
+    {"repo": "rafaelmeloreisnovo/Mapa", "pr": 299, "head_sha": "1c6732335a483c50da57bc6957ba86a693ef1319", "state": "EVIDENCED_SCOPED"},
+    {"repo": "rafaelmeloreisnovo/RafGitTools", "ref": "main", "sha": "0c453be12b31eb21c85cf6295b740c0d54365166"},
+    {"repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "ref": "master", "sha": "5e83eef9aea803bee127cd21eed6206ced193cb7"},
+    {"repo": "rafaelmeloreisnovo/Vectras-VM-Android", "ref": "master", "sha": "65a597d137708dc74cda7cb5b2ed44831f124171"},
+    {"repo": "instituto-Rafael/relativity-living-light", "ref": "main", "sha": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe", "signature": "unsigned"}
+  ],
+  "component_lifecycle_ledger": [
+    {
+      "component": "Mapa:PR299-assurance",
+      "event": "HEAD_1C673233_TERMINALLY_CLASSIFIED",
+      "limit_type": "EVENT_TRIGGERED",
+      "builds": "TOKEN_VAZIO_NOT_AGGREGATED",
+      "test_cycles": 4,
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "environment": "ubuntu-24.04@20260816.277.1; runner 2.336.0; checkout Node20-targeted action forced to Node24",
+      "last_verified_at": "2026-08-20T08:46:09Z",
+      "next_review_gate": "NEW_HEAD_TERMINAL_ASSURANCE",
+      "retirement_or_revalidation": "any new PR head SHA invalidates inherited assurance"
+    },
+    {
+      "component": "Mapa:promotion-control-runner-chain",
+      "event": "NODE24_FORCED_RUNTIME_OBSERVED_WITH_EXPECTED_POLICY_DENIAL",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "2026-08-20T08:46:09Z",
+      "next_review_gate": "NODE24_NATIVE_ACTION_REVALIDATION"
+    }
+  ],
+  "impact_radius": [
+    {
+      "source": "Mapa:PR299-assurance",
+      "affected_routes": ["R1", "R5", "R11", "R12"],
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "classification of producer-status errata and promotion boundary",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "terminal workflows for any successor head",
+      "false_positive_cost": "extra CI",
+      "false_negative_cost": "silent inheritance of stale assurance"
+    }
+  ],
+  "actions": {
+    "detective": ["resolved PR299 exact-head workflows", "decomposed Promotion Control to enforce job and blocking reason", "reconciled current owner heads"],
+    "preventive": ["preserved expected policy denial as distinct from regression", "preserved owner authority boundaries"],
+    "precautionary": ["claim_allowed=false", "no merge/release/promotion", "unclosed producer/runtime/scientific gaps remain TOKEN_VAZIO"],
+    "adaptive": ["runner image and Node24 exposure included in lifecycle"],
+    "corrective": [],
+    "maintenance": ["Node24-native compatibility remains revalidation target"],
+    "incident_investigation": ["no incident evidenced; Promotion Control failure has policy mechanism PULL_REQUEST_DRAFT_OR_UNKNOWN"],
+    "safety_assurance": ["CI success", "Branch Topology Gate success", "operational-gap-assurance success", "promotion negative-tests success", "promotion enforce expected fail-closed"],
+    "learning_anti_recurrence": ["EXPECTED_FAIL_CLOSED_NE_REGRESSION", "NEW_COMMIT_INVALIDATES_INHERITED_ASSURANCE", "NODE24_EXPOSURE_NE_CAUSAL_FAILURE"]
+  },
+  "F_ok": [
+    "PR299 head 1c673233 terminally classified",
+    "CI/topology/operational-gap-assurance successful on exact head",
+    "Promotion negative fixtures successful",
+    "Promotion denial causally localized to draft-state policy",
+    "RafGitTools/Termux/Vectras/RLL owner heads reconciled"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_VC_FILLER_PRODUCER_TERMINAL_RECEIPT",
+    "TOKEN_VAZIO_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_NEW_EXECUTION_AND_INDEPENDENT_REPLICATION",
+    "TOKEN_VAZIO_NODE24_NATIVE_ACTION_REVALIDATION"
+  ],
+  "F_esquecido": [
+    "policy failure is not a code regression",
+    "owner-head source identity does not establish runtime identity",
+    "scientific source presence does not establish replication",
+    "runner/action runtime is itself a lifecycle component"
+  ],
+  "uncertainty": {
+    "before": ["PR299 latest-head terminal state unresolved"],
+    "after": ["PR299 head 1c673233 is EVIDENCED_SCOPED; Promotion Control denial is expected fail-closed; remaining owner gaps unchanged and explicitly bounded"]
+  },
+  "F_next": [
+    "resolve Vectras VC/Filler producer artifacts and terminal build/test receipt",
+    "obtain RafGitTools combined-main push/run/job/steps/artifact-hash receipt",
+    "capture Termux execution-time binary identity and physical install/launch/logcat/device receipt",
+    "execute RLL owner pipeline with output hashes and independent replication before any claim promotion",
+    "revalidate critical GitHub Actions natively under Node24-compatible versions"
+  ],
+  "closure_gates": [
+    "VC_PRODUCER_IMPLEMENTATION_TERMINAL_RECEIPT",
+    "RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+    "TERMUX_EXECUTION_IDENTITY_AND_PHYSICAL_RUNTIME_RECEIPT",
+    "RLL_INDEPENDENT_REPLICATION_RECEIPT",
+    "NODE24_NATIVE_ACTION_REVALIDATION"
+  ]
+}
