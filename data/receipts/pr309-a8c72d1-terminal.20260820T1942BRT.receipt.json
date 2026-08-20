@@ -1,0 +1,54 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR309_A8C72D1_TERMINAL_20260820T1942BRT",
+  "type": "EXACT_HEAD_TERMINAL_ASSURANCE",
+  "status": "PRESENT_SCOPED_MIXED_FAIL_CLOSED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 309,
+    "head_sha": "a8c72d1ec060b4f1c3cdd92aabad442e3fa72a34",
+    "base_sha": "974a8dc02ef0ebe347028212862b779761d6105a",
+    "draft": true
+  },
+  "execution_matrix": {
+    "CI": {"run":32421291864,"conclusion":"SUCCESS"},
+    "Branch_Topology": {"run":32421291955,"conclusion":"SUCCESS"},
+    "operational_gap_assurance": {"run":32421292057,"conclusion":"SUCCESS"},
+    "Promotion_Control": {
+      "run":32421291860,
+      "negative_tests":"SUCCESS",
+      "enforce":"DENIED",
+      "blocking_reasons":["PULL_REQUEST_DRAFT_OR_UNKNOWN","INDEPENDENT_APPROVAL_MISSING"],
+      "observed_independent_approvals":0,
+      "required_independent_approvals":1,
+      "automatic_merge":false,
+      "manual_merge_only":true,
+      "classification":"EXPECTED_FAIL_CLOSED"
+    },
+    "Server_Merge_Enforcement": {
+      "run":32421291862,
+      "job":96593681249,
+      "fixtures":"4/4 PASS",
+      "live_probe":"BLOCKED",
+      "failure_modes":["BRANCH_PROTECTION_DISABLED","PROTECTION_NOT_ENABLED","REQUIRED_STATUS_CHECKS_NOT_ENFORCED","NO_REQUIRED_STATUS_CHECKS_OBSERVED"],
+      "server_side_merge_binding":"NOT_ENFORCED_OBSERVED",
+      "classification":"EXPECTED_FAIL_CLOSED"
+    }
+  },
+  "resolved_gap": "TOKEN_VAZIO_PR309_A8C72D1_EXACT_HEAD_TERMINAL_REVALIDATION",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+  ],
+  "epistemic_boundary": [
+    "Workflow failure is not automatically regression when the control is designed to fail closed.",
+    "Classic branch protection endpoint evidence does not prove complete ruleset/bypass state.",
+    "This exact-head receipt does not transfer to later PR heads.",
+    "No merge, release, runtime or scientific claim is authorized."
+  ],
+  "falsifier": "A mismatch in the referenced run/job conclusions or evidence invalidates this receipt; any later head requires a new receipt rather than inheriting this one.",
+  "next_review_gate": "REVALIDATE_ON_NEXT_PR_HEAD_AND_PROVE_SERVER_SIDE_ZERO_APPROVAL_BLOCK"
+}
