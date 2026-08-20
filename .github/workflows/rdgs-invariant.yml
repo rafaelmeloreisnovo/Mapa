@@ -1,0 +1,79 @@
+name: RAFAELIA RDGS Invariant
+
+on:
+  pull_request:
+    paths:
+      - "docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md"
+      - "data/evidence/rdgs_cycle_close_receipt_*.txt"
+      - "data/receipts/rdgs-*.receipt.json"
+      - "data/control-plane/RAFAELIA_RECEIPT_INDEX_V1.json"
+      - ".github/workflows/rdgs-invariant.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md"
+      - "data/evidence/rdgs_cycle_close_receipt_*.txt"
+      - "data/receipts/rdgs-*.receipt.json"
+      - "data/control-plane/RAFAELIA_RECEIPT_INDEX_V1.json"
+      - ".github/workflows/rdgs-invariant.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rdgs-assurance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+
+      - name: Verify canonical RDGS contract and receipt boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
+          test -s data/evidence/rdgs_cycle_close_receipt_20260819.v2.txt
+          grep -F 'VISÃO ≠ ARTEFATO ≠ EXECUÇÃO ≠ EVIDÊNCIA ≠ CLAIM' docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
+          grep -F 'TOKEN_VAZIO != 0' docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
+          grep -F 'claim_allowed=false' data/evidence/rdgs_cycle_close_receipt_20260819.v2.txt
+
+      - name: Emit scoped execution evidence
+        id: evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .rdgs-evidence
+          out=".rdgs-evidence/rdgs_validation_${GITHUB_RUN_ID}.txt"
+          {
+            printf 'schema=RAFAELIA_RDGS_EXECUTION_EVIDENCE_V1\n'
+            printf 'repository=%s\n' "$GITHUB_REPOSITORY"
+            printf 'event=%s\n' "$GITHUB_EVENT_NAME"
+            printf 'ref=%s\n' "$GITHUB_REF"
+            printf 'sha=%s\n' "$GITHUB_SHA"
+            printf 'run_id=%s\n' "$GITHUB_RUN_ID"
+            printf 'run_attempt=%s\n' "$GITHUB_RUN_ATTEMPT"
+            printf 'actor=%s\n' "$GITHUB_ACTOR"
+            printf 'rdgs_contract=PASS\n'
+            printf 'claim_allowed=false\n'
+          } > "$out"
+          sha256sum "$out" | tee "$out.sha256"
+          echo "path=$out" >> "$GITHUB_OUTPUT"
+
+      - name: Enforce post-merge boundary
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          test -s "${{ steps.evidence.outputs.path }}"
+          test -s "${{ steps.evidence.outputs.path }}.sha256"
+          echo "post-merge/main execution boundary PASS; this is scoped execution evidence, not external independent verification"
+
+      - name: Upload content-addressed RDGS evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: rdgs-evidence-${{ github.run_id }}
+          path: .rdgs-evidence/
+          if-no-files-found: error
+          retention-days: 30
