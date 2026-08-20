@@ -3,8 +3,8 @@
 
 The control evaluates GitHub pull-request event metadata plus review records.
 It does not infer intent from missing evidence: an unreadable event, missing
-policy, ambiguous review state, draft PR, enabled auto-merge, or an explicit
-do-not-merge declaration results in DENIED.
+policy, ambiguous review state, draft PR, enabled auto-merge, explicit do-not-
+merge declaration, or insufficient independent approvals results in DENIED.
 """
 from __future__ import annotations
 
@@ -89,7 +89,7 @@ def evaluate(event: Any, reviews: Any, policy: Any) -> dict[str, Any]:
         raise ValueError("unexpected policy schema")
 
     required_approvals = policy.get("required_independent_approvals")
-    if not isinstance(required_approvals, int) or required_approvals < 1:
+    if not isinstance(required_approvals, int) or isinstance(required_approvals, bool) or required_approvals < 1:
         raise ValueError("required_independent_approvals must be an integer >= 1")
 
     deny_patterns = compile_patterns(policy.get("deny_body_patterns"), "deny_body_patterns")
@@ -125,14 +125,21 @@ def evaluate(event: Any, reviews: Any, policy: Any) -> dict[str, Any]:
         blockers.append("EXPLICIT_BODY_DENIAL")
         evidence.extend(f"body_pattern:{pattern}" for pattern in matched_deny_patterns)
 
-    human_review_required = any(pattern.search(body) for pattern in review_patterns)
+    # A body marker may raise review sensitivity, but it must never weaken the
+    # policy's unconditional independent-approval floor. The previous behavior
+    # only enforced required_independent_approvals when a body pattern matched,
+    # allowing 0 approvals to pass despite policy requiring >=1.
+    body_requires_review = any(pattern.search(body) for pattern in review_patterns)
     approval_count, approved_by = count_independent_approvals(
         reviews,
         author_login=author_login,
         ignore_bot_suffix=ignore_bot_suffix,
     )
-    if human_review_required and approval_count < required_approvals:
-        blockers.append("HUMAN_REVIEW_MISSING")
+    independent_review_required = required_approvals > 0
+    if approval_count < required_approvals:
+        blockers.append("INDEPENDENT_APPROVAL_MISSING")
+        if body_requires_review:
+            blockers.append("HUMAN_REVIEW_MISSING")
 
     result = "ALLOWED_FOR_MANUAL_MERGE" if not blockers else "DENIED"
     return {
@@ -141,7 +148,8 @@ def evaluate(event: Any, reviews: Any, policy: Any) -> dict[str, Any]:
         "claim_allowed": False,
         "automatic_merge": False,
         "manual_merge_only": True,
-        "human_review_required": human_review_required,
+        "human_review_required": body_requires_review,
+        "independent_review_required": independent_review_required,
         "required_independent_approvals": required_approvals,
         "observed_independent_approvals": approval_count,
         "approved_by": approved_by,
