@@ -1,0 +1,44 @@
+name: Server Merge Enforcement Assurance
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  server-merge-enforcement:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Negative and positive detector fixtures
+        run: python3 -m unittest -v tests.test_server_merge_enforcement
+
+      - name: Inspect live main branch server-side enforcement
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/check_server_merge_enforcement.py \
+            --repo "${GITHUB_REPOSITORY}" \
+            --branch main \
+            --write-report build/server-merge-enforcement/report.json
+
+      - name: Print assurance boundary
+        if: always()
+        run: |
+          if [ -f build/server-merge-enforcement/report.json ]; then
+            cat build/server-merge-enforcement/report.json
+          else
+            echo 'TOKEN_VAZIO_SERVER_MERGE_ENFORCEMENT_REPORT_NOT_PRODUCED'
+            exit 3
+          fi
