@@ -1,0 +1,74 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "FEDERATED_SERVER_MERGE_ENFORCEMENT_OFF_20260820T1343BRT",
+  "source_pointer": "Mapa/main@4002ced01db77b879888d08b1737dfe4430017b7 + RafGitTools/main@062f09986840db24b684ba5affde1fbf192f35c7 + termux-app-rafacodephi/main@92d80377116c4fcbfd6f572247ad65201b75c5e6",
+  "owner_authority": "repository server-side governance configuration; Mapa records federated state but does not substitute repository protection",
+  "affected_routes": ["R5", "R6", "R7", "R11", "R12"],
+  "observed_at": "2026-08-20T13:43:11-03:00",
+  "provenance": {
+    "Mapa_branch_endpoint": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]",
+    "RafGitTools_branch_endpoint": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]",
+    "Termux_branch_endpoint": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]",
+    "predecessor": "Mapa PR #306 POLICY_DECISION != SERVER_SIDE_MERGE_ENFORCEMENT"
+  },
+  "evidence_for": [
+    "Mapa PR #306 is merged and documents a policy DENIED -> merge observed near-miss",
+    "Current Mapa/main branch metadata reports classic protection disabled and required status check enforcement off",
+    "RafGitTools/main and Termux/main show the same observed classic branch-protection state"
+  ],
+  "evidence_against": [
+    "No evidence was obtained that every merge bypassed a protection barrier",
+    "Available tooling did not expose repository rulesets or enumerate bypass actors",
+    "RafGitTools and Termux have no observed denied-then-merged event in this cycle"
+  ],
+  "uncertainty_state": {
+    "classic_branch_protection": "EVIDENCED_DISABLED",
+    "required_status_checks": "EVIDENCED_NOT_ENFORCED",
+    "promotion_control_exact_required_context": "TOKEN_VAZIO_NOT_ENFORCED_IN_CLASSIC_PROTECTION",
+    "repository_rulesets": "TOKEN_VAZIO_ENDPOINT_NOT_AVAILABLE",
+    "bypass_actors_or_admin_path": "TOKEN_VAZIO_NOT_INSPECTED",
+    "causality_for_RafGitTools_or_Termux_merges": "TOKEN_VAZIO_NO_EVENT_OBSERVED"
+  },
+  "urgency": "P0",
+  "necessity": "SERVER_SIDE_GOVERNANCE_BOUNDARY",
+  "impact": "A policy can make a correct DENIED decision without a server-side barrier preventing merge; downstream main-state and release assumptions can then outrun evidence.",
+  "detectability": "HIGH after branch-endpoint detector; previously LOW because CI policy and server configuration were conflated",
+  "recurrence_risk": "HIGH_UNTIL_SERVER_SIDE_ENFORCEMENT_IS_EVIDENCED",
+  "failure_mode": "POLICY_DECISION_NOT_BOUND_TO_CLASSIC_BRANCH_PROTECTION_REQUIRED_CHECKS",
+  "falsifier": "Configure server-side protection and show protected=true + protection.enabled=true + required status checks enforced; then prove a synthetic non-draft zero-approval PR is DENIED by policy and remains unmergeable on the server.",
+  "next_probe": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+  "mitigation": [
+    "Keep claim_allowed=false and no automatic promotion",
+    "Run Server Merge Enforcement Assurance on every governance PR",
+    "Do not interpret policy PASS/DENIED as server binding without a branch/ruleset receipt",
+    "Configure server-side required checks outside this repository artifact path, then re-run the detector",
+    "Inspect rulesets/bypass actors when connector/API support is available"
+  ],
+  "closure_gate": "SERVER_SIDE_PROTECTION_PRESENT_AND_ZERO_APPROVAL_MERGE_BLOCKED",
+  "review_or_expiry": "EVENT_TRIGGERED on any branch protection, ruleset, Promotion Control, permission, or merge-policy change",
+  "claim_allowed": false,
+  "predecessor_lineage": [
+    "Mapa PR #304 independent-approval floor",
+    "Mapa PR #306 policy-denied-yet-merged near-miss",
+    "this cycle live branch metadata refinement"
+  ],
+  "detector": {
+    "implementation": "scripts/check_server_merge_enforcement.py",
+    "signal": "branch protected/protection.enabled/enforcement/required checks",
+    "threshold": "fail if protection disabled, enforcement off/unknown, or no required checks observed",
+    "false_positive_cost": "temporarily blocks assurance until server governance is made observable/enforced",
+    "false_negative_cost": "a denied or unvalidated change can reach main without a binding server barrier",
+    "evidence_needed": "live branch/ruleset configuration + synthetic blocked merge receipt"
+  },
+  "actions": {
+    "DETECTIVE": "implemented live branch-state detector and four unit fixtures",
+    "PREVENTIVE": "requires server-side enforcement before any promotion claim",
+    "PRECAUTIONARY": "claim_allowed=false; promotion_allowed=false; fail-closed",
+    "ADAPTIVE": "predecessor uncertainty refined from unknown merge path to observed classic protection disabled while preserving ruleset/bypass TOKEN_VAZIO",
+    "CORRECTIVE": "repository detector added; server configuration itself remains external/unapplied in this cycle",
+    "MAINTENANCE": "branch governance enters EVENT_TRIGGERED lifecycle",
+    "INCIDENT_INVESTIGATION": "Mapa denied-then-merged preserved as near-miss; no blame or unsupported causal story",
+    "SAFETY_ASSURANCE": "closure requires policy decision and server behavior to agree under a synthetic zero-approval probe",
+    "LEARNING_ANTI_RECURRENCE": "POLICY_DECISION != SERVER_ENFORCEMENT becomes a reusable invariant"
+  }
+}
