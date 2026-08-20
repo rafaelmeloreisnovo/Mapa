@@ -1,0 +1,28 @@
+{
+  "schema_version": "rafaelia.feedback-event-local-validation/v1",
+  "observed_at": "2026-08-20T11:28:00-03:00",
+  "execution_environment": "ChatGPT local Python sandbox",
+  "command_set": [
+    "python -m unittest -v tests.test_feedback_events",
+    "python scripts/validate_feedback_events.py --ledger data/feedback-events/feedback-events.v1.jsonl"
+  ],
+  "unit_tests": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "ledger_validation": {
+    "status": "PASS",
+    "events": 4,
+    "promotions": 0,
+    "errors": 0,
+    "warnings": 0,
+    "chain_head": "8cf55779db1e8de9487894cd123fce162b5449fb8a6d5a5de701dc58c17d7dab"
+  },
+  "limitations": [
+    "This receipt proves only the local stdlib validator/test execution described above.",
+    "It does not prove GitHub Actions execution or repository-branch protection.",
+    "Remote gate remains TOKEN_VAZIO until an observable workflow run completes."
+  ],
+  "claim_allowed": false
+}
