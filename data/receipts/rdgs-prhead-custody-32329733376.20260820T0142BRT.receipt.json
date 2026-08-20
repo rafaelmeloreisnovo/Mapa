@@ -1,0 +1,37 @@
+{
+  "schema": "RAFAELIA_RECEIPT_V1",
+  "receipt_id": "rdgs-prhead-custody-32329733376-20260820T0142BRT",
+  "claim_allowed": false,
+  "state": "PRESENT_SCOPED",
+  "scope": "PR_HEAD_ONLY",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 296,
+    "head_sha": "08a98bef8430b868e7f7edc0f9d3db01affc169b",
+    "merge_sha": "35776f9cffb3d58d3cb955f840c244337f1e99a2",
+    "event": "pull_request",
+    "run_id": 32329733376,
+    "job_id": 96308068267,
+    "workflow": "RAFAELIA RDGS Invariant"
+  },
+  "steps": {
+    "validate_contract": "SUCCESS",
+    "run_postmerge_invariant_gate": "SUCCESS",
+    "validate_evidence_and_sha256": "SUCCESS",
+    "upload_evidence": "SUCCESS"
+  },
+  "artifact": {
+    "id": 9392609321,
+    "name": "rdgs-evidence-32329733376",
+    "archive_sha256": "c96be171452240b7f6041fa329ad19b48b2c46f65168e10afeb40c0fad86cc21",
+    "downloaded_archive_sha256_match": true,
+    "evidence_file": "rdgs_validation_32329733376.txt",
+    "evidence_sha256": "452c1b48ac2993b1acb63c564f16eeef97ac961cb3c26d27d7e9eb261cd1a3c8",
+    "sidecar_sha256_match": true
+  },
+  "boundary": {
+    "pr_head_receipt_is_not_postmerge_main_receipt": true,
+    "postmerge_state": "TOKEN_VAZIO_REVALIDATION_REQUIRED",
+    "closure_gate": "RDGS_PUSH_MAIN_POSTMERGE_RECEIPT"
+  }
+}
