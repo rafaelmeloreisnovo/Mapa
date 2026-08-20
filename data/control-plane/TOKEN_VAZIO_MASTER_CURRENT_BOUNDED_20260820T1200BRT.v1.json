@@ -1,0 +1,183 @@
+{
+  "schema": "rafaelia.token-vazio-master-current-bounded/v1",
+  "snapshot_id": "TV-MASTER-CURRENT-BOUNDED-20260820T1200BRT",
+  "generated_at": "2026-08-20T12:00:00-03:00",
+  "claim_allowed": false,
+  "coverage": {
+    "status": "BOUNDED_NOT_EXHAUSTIVE",
+    "reason": "The ecosystem-wide provider inventory remains open; this view reconciles the highest-value gaps and state transitions evidenced in the inspected current cycle.",
+    "forbidden_interpretation": "Do not treat this file as proof that no other TOKEN_VAZIO exists."
+  },
+  "authority": {
+    "router": "rafaelmeloreisnovo/Mapa",
+    "base_main": "2e666e80edac21f6e1af694ad246b26c2b039783",
+    "predecessor_cycle": "data/routing/cycles/omega-federated-cycle-20260820T1150BRT.fill-gaps.v1.json",
+    "policy": ["APPEND_ONLY", "PROVENANCE_FIRST", "NO_SILENT_REGRESSION", "TOKEN_VAZIO_VALID"]
+  },
+  "source_ledgers": [
+    "data/audits/TOKEN_VAZIO_REGISTRY.jsonl",
+    "data/audits/TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl",
+    "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v2.yaml",
+    "data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json",
+    "auditoria/OPCORE94_V2_TOKEN_VAZIO_LEDGER.txt",
+    "data/control-plane/RAFAELIA_RECEIPT_INDEX_DELTA_20260820T1150BRT.json",
+    "data/routing/operational-gaps/",
+    "data/audits/TOKEN_VAZIO_INVARIANTS_CLOSURE_ERRATA_20260820T1200BRT.v1.json",
+    "data/routing/operational-gaps/bootstrap-cross-store-parity-delta-20260820T1200BRT.v1.json"
+  ],
+  "items": [
+    {
+      "id": "TOKEN_VAZIO_INVARIANTS_CI_BINDING_MISSING",
+      "class": "GOVERNANCE_PROVENANCE",
+      "priority": "P0_RECONCILIATION",
+      "previous_state": "APPROVED_CLOSED_WITH_INVALID_COMMIT_POINTER",
+      "current_state": "RESOLVED_EVIDENCED_WITH_ERRATA",
+      "evidence": {
+        "pr": 278,
+        "head_sha": "1a918ec6e9f94e8f84c088af1946e273c7d5f7a5",
+        "merge_commit_sha": "9977ce43bc56b313df0d211749188f41657d3292",
+        "workflow_run": 32162784209,
+        "job": 95795298332,
+        "step": "Validate 15 Rafaelia invariants (P1-02 gate)",
+        "conclusion": "success",
+        "errata": "data/audits/TOKEN_VAZIO_INVARIANTS_CLOSURE_ERRATA_20260820T1200BRT.v1.json"
+      },
+      "next_gate": "EVENT_TRIGGERED_REVALIDATION_ON_INVARIANT_OR_WORKFLOW_CHANGE"
+    },
+    {
+      "id": "TOKEN_VAZIO_MAPA_FEEDBACK_EVENT_POSTMERGE_MAIN_RECEIPT",
+      "class": "REMOTE_EXECUTION",
+      "priority": "P0",
+      "current_state": "TOKEN_VAZIO",
+      "known": "PR-head receipt is PRESENT_SCOPED_PR_HEAD from run 32381133697/job 96464330979.",
+      "unknown": "Post-merge main/push terminal execution receipt is not observed in the current bounded evidence.",
+      "next_gate": "main/push run -> job -> tests -> ledger validation -> receipt"
+    },
+    {
+      "id": "TOKEN_VAZIO_TERMUX_ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_CLOSURE_RECEIPT",
+      "class": "CLAIM_LANGUAGE_GOVERNANCE",
+      "priority": "P0",
+      "current_state": "TOKEN_VAZIO_KNOWN_DEBT",
+      "known_counts": {
+        "fully_compatible": 1,
+        "no_crash_guarantee": 1,
+        "production_ready": 1,
+        "zero_collisions": 1
+      },
+      "known_evidence": "PR #377 run 32381934021/job 96467007292 passed 6 tests with PASS_WITH_KNOWN_DEBT.",
+      "next_gate": "replace or evidence-bound four legacy absolute claims -> counters zero -> terminal gate -> merged-main receipt"
+    },
+    {
+      "id": "MISSING_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+      "class": "REMOTE_EXECUTION",
+      "priority": "P0",
+      "current_state": "MISSING",
+      "source": "0c453be12b31eb21c85cf6295b740c0d54365166",
+      "next_gate": "main run -> jobs -> steps -> artifacts/hashes -> receipt"
+    },
+    {
+      "id": "MISSING_TERMUX_PHYSICAL_RUNTIME_RECEIPT",
+      "class": "PHYSICAL_EXECUTION",
+      "priority": "P0",
+      "current_state": "MISSING",
+      "boundary": "CI/QEMU/host evidence cannot substitute for a physical Android device receipt.",
+      "next_gate": "APK hash -> install -> launch -> PID/activity -> logcat -> device identity -> receipt"
+    },
+    {
+      "id": "TOKEN_VAZIO_RLL_FRESH_OWNER_SOURCE_AND_REPLICATION",
+      "class": "SCIENTIFIC_EVIDENCE",
+      "priority": "P0",
+      "current_state": "TOKEN_VAZIO",
+      "boundary": "Absence of a fresh resolved owner source in the bounded cycle is not evidence that the source does not exist.",
+      "next_gate": "resolve owner source -> pin dataset/config -> execute -> hash outputs -> independent replication"
+    },
+    {
+      "id": "TOKEN_VAZIO_DRIVE_APPEND_THIS_CYCLE",
+      "class": "LONGITUDINAL_PERSISTENCE",
+      "priority": "P1",
+      "current_state": "TOKEN_VAZIO",
+      "known": "Revision chain capability is evidenced, but no safe append mutation was executed for the predecessor cycle.",
+      "next_gate": "fresh revision -> compare-and-write append -> new revision -> GitHub receipt"
+    },
+    {
+      "id": "BOOTSTRAP_CROSS_STORE_PARITY_20260819T2044BRT",
+      "class": "CROSS_STORE_PROVENANCE",
+      "priority": "P1",
+      "previous_state": "TOKEN_VAZIO_NO_COMMON_DIGEST",
+      "current_state": "PARTIAL_EVIDENCED",
+      "filled": {
+        "drive_revision_id": "2",
+        "github_blob_sha": "2fdb05b786f1d42db12182bc4e7023a28499cb46",
+        "semantic_alignment": "EVIDENCED_SCOPED_CURRENT_READ"
+      },
+      "remaining": "TOKEN_VAZIO_COMMON_DIGEST_EQUIVALENCE",
+      "delta": "data/routing/operational-gaps/bootstrap-cross-store-parity-delta-20260820T1200BRT.v1.json",
+      "next_gate": "shared canonicalization -> digest both -> compare -> terminal parity receipt"
+    },
+    {
+      "id": "GAP-FCEA-SECRET-001",
+      "class": "SECURITY",
+      "priority": "P0",
+      "current_state": "UNSAFE_REMEDIATION_EVIDENCE_OPEN",
+      "unknown": "Credential rotation/revocation and downstream-copy closure are not evidenced in the bounded current cycle.",
+      "next_gate": "credential-owner rotation/revocation evidence -> downstream copy inventory -> post-remediation inspection"
+    },
+    {
+      "id": "GAP-FCEA-CANONICALITY-001",
+      "class": "IDENTITY_LINEAGE",
+      "priority": "P0",
+      "current_state": "TOKEN_VAZIO_CANONICAL_AUTHORITY",
+      "unknown": "Canonical equivalence/supersession between FCEA/CORE candidate trees remains unproved in this bounded cycle.",
+      "next_gate": "tree manifests -> hashes/roles -> explicit canonical or versioned-role receipt"
+    },
+    {
+      "id": "TOKEN_VAZIO_OC94_017_094",
+      "class": "IDENTITY_ITEMIZATION",
+      "priority": "P0",
+      "current_state": "TOKEN_VAZIO_78_IDENTITIES_NOT_ITEMIZED",
+      "known": "OPCORE94 V2 explicitly records 78 identities not itemized and the original 94-item source artifact not located.",
+      "next_gate": "locate original enumeration or append 78 individually-addressable unresolved identity records without guessing"
+    },
+    {
+      "id": "GAP-META-INVENTORY-001",
+      "class": "ECOSYSTEM_INVENTORY",
+      "priority": "P0",
+      "current_state": "TOKEN_VAZIO_PROVIDER_WIDE_COVERAGE",
+      "boundary": "This gap is why this master snapshot is BOUNDED_NOT_EXHAUSTIVE.",
+      "next_gate": "bounded paginated Drive inventory + GitHub repo/ref inventory -> dedupe -> map every unresolved object to a gap_id"
+    },
+    {
+      "id": "gap:federated-broker:provenance-signature-near-miss:20260819",
+      "class": "FEDERATED_SECURITY_PROVENANCE",
+      "priority": "P0",
+      "current_state": "NEAR_MISS_TOKEN_VAZIO_CLOSURE_GATE",
+      "known": "Source inspection observed warning-to-success provenance risk, absent verifier in inspected main state, structural-only signature checking, and permission/transport mismatch.",
+      "next_gate": "fail-closed verifier -> real HMAC KAT/secret path -> immutable remote checkout -> bounded broker self-test -> run/job/artifact receipt"
+    }
+  ],
+  "counts": {
+    "items_in_bounded_view": 13,
+    "resolved_evidenced": 1,
+    "partial_evidenced": 1,
+    "open_or_missing": 11,
+    "ecosystem_total": "TOKEN_VAZIO_NOT_PROVEN"
+  },
+  "promotion_rule": "Only exact evidence closes the exact dimension it proves; no item may inherit PASS from a predecessor, neighboring repo, CI scope, semantic mirror, or symbolic similarity.",
+  "r3": {
+    "F_ok": [
+      "Invalid invariants-closure provenance pointer is superseded by a real PR/commit/workflow chain.",
+      "Bootstrap Drive revision and GitHub blob identities are captured.",
+      "PR #301 scoped closures are carried forward without widening their scope."
+    ],
+    "F_gap": [
+      "Provider-wide inventory remains open, so ecosystem total is TOKEN_VAZIO_NOT_PROVEN.",
+      "Physical-device, independent-replication, security-remediation, cross-store-digest and several terminal-main receipts remain open."
+    ],
+    "F_next": [
+      "Validate this bounded reconciliation in CI.",
+      "Close post-merge/main receipts where runs are observable.",
+      "Prioritize security remediation evidence before scientific or publication promotion.",
+      "Execute provider-wide bounded inventories and append newly discovered gap_ids."
+    ]
+  }
+}
