@@ -1,0 +1,46 @@
+{
+  "schema": "rafaelia.receipt/pr-head-assurance.v1",
+  "receipt_id": "pr299-head-1c673233-terminal-assurance-20260820T0643BRT",
+  "observed_at": "2026-08-20T06:43:44-03:00",
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 299,
+  "head_sha": "1c6732335a483c50da57bc6957ba86a693ef1319",
+  "base_sha": "bbc7b8052349a76c96363a6eb7b39c3541e12e44",
+  "merge_ref_sha_observed": "44c1c1631b4386575e1be9d50a42eb18ca1df35f",
+  "workflow_evidence": [
+    {"run_id": 32350422886, "name": "CI", "conclusion": "success"},
+    {"run_id": 32350423059, "name": "Branch Topology Gate", "conclusion": "success"},
+    {"run_id": 32350422882, "name": "operational-gap-assurance", "conclusion": "success"},
+    {"run_id": 32350422909, "name": "RAFAELIA Promotion Control V1", "conclusion": "failure", "classification": "EXPECTED_FAIL_CLOSED"}
+  ],
+  "promotion_control": {
+    "negative_tests_job_id": 96368186183,
+    "negative_tests": "success",
+    "enforce_job_id": 96368217912,
+    "enforce": "failure",
+    "result": "DENIED",
+    "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN"],
+    "automatic_merge": false,
+    "manual_merge_only": true,
+    "observed_independent_approvals": 0,
+    "required_independent_approvals": 1,
+    "classification": "POLICY_BARRIER_WORKING_AS_DESIGNED"
+  },
+  "environment": {
+    "runner_version": "2.336.0",
+    "os": "Ubuntu 24.04.4 LTS",
+    "runner_image": "ubuntu-24.04@20260816.277.1",
+    "checkout_sha": "11d5960a326750d5838078e36cf38b85af677262",
+    "node_runtime_observation": "Node20-targeted checkout forced to Node24",
+    "node24_causality": "NOT_ESTABLISHED"
+  },
+  "epistemic_boundary": [
+    "EXPECTED_FAIL_CLOSED_NE_REGRESSION",
+    "PR_HEAD_ASSURANCE_NE_POST_MERGE_ASSURANCE",
+    "NEW_COMMIT_INVALIDATES_INHERITED_ASSURANCE",
+    "NODE24_EXPOSURE_NE_NODE24_CAUSED_FAILURE"
+  ],
+  "state": "EVIDENCED_SCOPED",
+  "next_review_gate": "ANY_NEW_HEAD_SHA_REQUIRES_OWN_TERMINAL_ASSURANCE"
+}
