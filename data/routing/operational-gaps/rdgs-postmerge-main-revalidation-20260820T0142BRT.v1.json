@@ -1,0 +1,49 @@
+{
+  "schema": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "RDGS_POSTMERGE_MAIN_REVALIDATION_20260820T0142BRT",
+  "source_pointer": "rafaelmeloreisnovo/Mapa@35776f9cffb3d58d3cb955f840c244337f1e99a2",
+  "owner_authority": "Mapa",
+  "affected_routes": ["R4", "R5", "R11", "R12"],
+  "observed_at": "2026-08-20T01:42:03-03:00",
+  "provenance": {
+    "pr": 296,
+    "verified_pr_head_run": 32329733376,
+    "verified_pr_head_artifact": 9392609321,
+    "merge_commit": "35776f9cffb3d58d3cb955f840c244337f1e99a2"
+  },
+  "evidence_for": [
+    "PR-head RDGS run completed SUCCESS",
+    "all RDGS evidence/hash/upload steps completed SUCCESS",
+    "artifact archive digest independently matched",
+    "embedded evidence digest independently matched sidecar"
+  ],
+  "evidence_against": [
+    "verified evidence event is pull_request, not push/main",
+    "merge commit combined status returned pending with zero status objects"
+  ],
+  "uncertainty_state": "TOKEN_VAZIO_POSTMERGE_MAIN_RECEIPT",
+  "urgency": "P0_HIGH_INFORMATION_GAIN",
+  "necessity": "required before STILL_GOOD may apply to integrated main state",
+  "impact": "prevents PR-scoped assurance from silently propagating to main",
+  "detectability": "high once push/main run is observable",
+  "recurrence_risk": "medium",
+  "failure_mode": "ASSURANCE_SCOPE_OVERPROMOTION",
+  "falsifier": "observe an actual push/main RDGS run for integrated state and reconstruct run->job->steps->artifact->archive digest->embedded evidence digest",
+  "next_probe": "RDGS_PUSH_MAIN_POSTMERGE_RECEIPT",
+  "mitigation": "keep claim_allowed=false and postmerge state TOKEN_VAZIO_REVALIDATION_REQUIRED",
+  "closure_gate": "RDGS_PUSH_MAIN_POSTMERGE_RECEIPT",
+  "review_or_expiry": "EVENT_TRIGGERED on any RDGS contract/workflow/evidence-path change",
+  "claim_allowed": false,
+  "actions": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "MAINTENANCE", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+  "impact_radius": {
+    "direct_exposure": true,
+    "transmitted_load_or_effect": "PR-head evidence can be incorrectly inherited by integrated main",
+    "hidden_damage_or_hidden_state_possible": true,
+    "inspection_required": true,
+    "revalidation_required": true,
+    "replacement_or_retirement_candidate": false,
+    "evidence_needed": "post-merge push/main terminal receipt",
+    "false_positive_cost": "one additional CI/reconstruction pass",
+    "false_negative_cost": "STILL_GOOD overpromotion without integrated-state evidence"
+  }
+}
