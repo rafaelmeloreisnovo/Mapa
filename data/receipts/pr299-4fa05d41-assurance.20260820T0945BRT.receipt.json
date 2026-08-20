@@ -1,0 +1,53 @@
+{
+  "schema": "RAFAELIA_SCOPED_ASSURANCE_RECEIPT_V1",
+  "receipt_id": "pr299-4fa05d41-assurance-20260820T0945BRT",
+  "observed_at": "2026-08-20T09:45:51-03:00",
+  "claim_allowed": false,
+  "scope": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pull_request": 299,
+    "head_sha": "4fa05d4197f730bd19dcd4cdec3a9e7e27443dff",
+    "merge_ref_sha_observed_in_promotion_job": "2589655c81ec226efeb44e3d1360669f5a5f2674"
+  },
+  "workflow_runs": [
+    {"name":"CI","run_id":32365228407,"conclusion":"success"},
+    {"name":"operational-gap-assurance","run_id":32365228329,"conclusion":"success"},
+    {"name":"Branch Topology Gate","run_id":32365228340,"conclusion":"success"},
+    {"name":"RAFAELIA Promotion Control V1","run_id":32365228417,"conclusion":"failure","classification":"EXPECTED_FAIL_CLOSED"}
+  ],
+  "promotion_control": {
+    "negative_tests_job_id": 96413201696,
+    "negative_tests": "success",
+    "fifteen_invariants": "success",
+    "enforce_job_id": 96413262875,
+    "result": "DENIED",
+    "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN"],
+    "automatic_merge": false,
+    "manual_merge_only": true,
+    "observed_independent_approvals": 0,
+    "required_independent_approvals": 1
+  },
+  "runner_environment": {
+    "runner_version": "2.336.0",
+    "os": "Ubuntu 24.04.4 LTS",
+    "runner_image": "ubuntu-24.04@20260816.277.1",
+    "git_version": "2.55.0",
+    "checkout_sha": "11d5960a326750d5838078e36cf38b85af677262",
+    "node_runtime_event": "NODE20_TARGET_ACTION_FORCED_TO_NODE24"
+  },
+  "classification": "EVIDENCED_SCOPED",
+  "not_proven": [
+    "merge or release eligibility",
+    "producer VC/Filler implementation",
+    "RafGitTools combined-main execution",
+    "Termux execution-time identity",
+    "Termux physical runtime",
+    "RLL new execution or independent replication",
+    "Node24 compatibility outside this observed workflow scope"
+  ],
+  "anti_recurrence": [
+    "EXPECTED_FAIL_CLOSED_NE_REGRESSION",
+    "RECEIPT_AT_SHA_A_NE_RECEIPT_AT_SHA_B",
+    "RUNNER_ENVIRONMENT_IS_LIFECYCLE_COMPONENT"
+  ]
+}

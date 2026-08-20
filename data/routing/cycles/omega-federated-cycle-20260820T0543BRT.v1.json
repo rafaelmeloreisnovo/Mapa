@@ -1,0 +1,125 @@
+{
+  "schema": "RAFAELIA_FEDERATED_OMEGA_DELTA_V1",
+  "cycle_id": "omega-federated-cycle-20260820T0543BRT",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY",
+    "NO_SILENT_REGRESSION"
+  ],
+  "observed_sources": [
+    {"repo":"rafaelmeloreisnovo/Mapa","ref":"main","commit":"bbc7b8052349a76c96363a6eb7b39c3541e12e44","state":"OWNER_HEAD_OBSERVED"},
+    {"repo":"rafaelmeloreisnovo/Mapa","pr":299,"head":"c2cceeaea99954f366b98164c97064950d5d52e1","state":"EVIDENCED_SCOPED"},
+    {"repo":"rafaelmeloreisnovo/Vectras-VM-Android","ref":"master","commit":"65a597d137708dc74cda7cb5b2ed44831f124171","state":"NO_NEW_VC_FILLER_TERMINAL_RECEIPT"},
+    {"repo":"rafaelmeloreisnovo/RafGitTools","ref":"main","commit":"0c453be12b31eb21c85cf6295b740c0d54365166","state":"TOKEN_VAZIO_COMBINED_MAIN_TERMINAL_RECEIPT"},
+    {"repo":"rafaelmeloreisnovo/termux-app-rafacodephi","ref":"master","commit":"5e83eef9aea803bee127cd21eed6206ced193cb7","state":"TOKEN_VAZIO_EXECUTION_TIME_IDENTITY_AND_PHYSICAL_RUNTIME"},
+    {"repo":"instituto-Rafael/relativity-living-light","ref":"main","commit":"8bd41005d63b2d83c4bcc313cc4900ff981cf8fe","state":"TOKEN_VAZIO_NEW_EXECUTION_AND_REPLICATION"},
+    {"drive_document_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","revision_before_append":"AIroW34EtSGFoKfgQjoiZFUlWVyJxCDaPqh3b5ix3CsMvC2BwuYzQ3m1NCV3xa03nHA7fSDLRaDNxWdqR8DxQ1AQ_2jJTNPsPNCT7v9s-wE","state":"FRESH_REVISION_OBSERVED"}
+  ],
+  "component_lifecycle_ledger": [
+    {
+      "component":"Mapa:PR299-assurance",
+      "event":"EXACT_HEAD_TERMINAL_ASSURANCE_OBSERVED",
+      "limit_type":"EVENT_TRIGGERED",
+      "builds":"TOKEN_VAZIO_NOT_AGGREGATED",
+      "test_cycles":"TOKEN_VAZIO_NOT_AGGREGATED",
+      "incident_count":0,
+      "near_miss_count":0,
+      "maintenance_actions":1,
+      "corrective_actions":0,
+      "software_schema_version":"current PR299 lineage",
+      "last_verified_at":"run:32345840035 + run:32345839915 + run:32345840072",
+      "next_review_gate":"LATEST_HEAD_TERMINAL_ASSURANCE",
+      "retirement_revalidation":"any new commit invalidates inherited PR-head assurance"
+    },
+    {
+      "component":"Mapa:promotion-control-runtime-environment",
+      "event":"RUNNER_IMAGE_CHANGED_AND_NODE24_FORCING_OBSERVED",
+      "limit_type":"EVENT_TRIGGERED",
+      "environment_exposure":"Ubuntu 24.04.4; runner image 20260816.277.1; checkout Node20 target forced under Node24",
+      "incident_count":0,
+      "near_miss_count":0,
+      "maintenance_actions":1,
+      "corrective_actions":0,
+      "last_verified_at":"job:96354335778",
+      "next_review_gate":"NODE24_NATIVE_ACTION_REVALIDATION",
+      "retirement_revalidation":"material action/runtime/runner image change requires revalidation"
+    }
+  ],
+  "impact_radius": [
+    {
+      "source":"Mapa:PR299-assurance",
+      "affected_routes":["R1","R5","R11","R12"],
+      "direct_exposure":true,
+      "transmitted_effect":"VC status correction assurance and promotion boundary",
+      "hidden_state_possible":true,
+      "inspection_required":true,
+      "revalidation_required":true,
+      "replacement_or_retirement_candidate":false,
+      "evidence_needed":"terminal workflow evidence for each subsequent head",
+      "false_positive_cost":"extra CI observation",
+      "false_negative_cost":"silent inheritance of stale assurance"
+    },
+    {
+      "source":"promotion-control-runtime-environment",
+      "affected_routes":["R5","R6","R11","R12"],
+      "direct_exposure":true,
+      "transmitted_effect":"CI detector runtime changed without causal evidence of failure",
+      "hidden_state_possible":true,
+      "inspection_required":true,
+      "revalidation_required":true,
+      "replacement_or_retirement_candidate":false,
+      "evidence_needed":"Node24-native action matrix on current baseline",
+      "false_positive_cost":"maintenance/retest",
+      "false_negative_cost":"environment drift corrupting assurance semantics"
+    }
+  ],
+  "actions": {
+    "detective":["resolved PR299 c2 exact-head workflows","decomposed promotion failure to blocking reason","reconciled owner heads across Mapa, Vectras, RafGitTools, Termux and RLL","read fresh Drive canonical revision"],
+    "preventive":["do not treat expected fail-closed as regression","do not inherit c2 assurance into newly written head","preserve producer authority boundary for VC/Filler"],
+    "precautionary":["claim_allowed=false","RafGitTools combined-main remains TOKEN_VAZIO","Termux execution/physical remains TOKEN_VAZIO","RLL new execution/replication remains TOKEN_VAZIO"],
+    "adaptive":["runner image change entered lifecycle","Node24 forcing remains maintenance event, not causal claim"],
+    "corrective":[],
+    "maintenance":["revalidate Node24-native critical actions","revalidate PR299 after every material head change"],
+    "incident_investigation":["no incident evidenced; promotion failure explained by draft policy"],
+    "safety_assurance":["CI success","Branch Topology success","operational-gap-assurance success","promotion negative-tests success","promotion enforcement fail-closed observed"],
+    "learning_anti_recurrence":["EXPECTED_FAIL_CLOSED_NE_REGRESSION","NEW_COMMIT_INVALIDATES_INHERITED_ASSURANCE","NODE24_EXPOSURE_NE_CAUSALITY"]
+  },
+  "uncertainty": {
+    "before":["PR299 c2 latest-head CI pending","promotion failure generic","runner-image transition not captured in current cycle"],
+    "after":["PR299 c2 terminal assurance evidenced scoped","promotion failure classified expected fail-closed","runner image 20260816.277.1 and Node24 forcing captured","new write-created PR head requires its own assurance"]
+  },
+  "F_ok":[
+    "PR299 c2 CI success",
+    "PR299 c2 Branch Topology Gate success",
+    "PR299 c2 operational-gap-assurance success",
+    "Promotion negative fixtures success",
+    "Promotion enforcement reason resolved as PULL_REQUEST_DRAFT_OR_UNKNOWN",
+    "Mapa/Vectras/RafGitTools/Termux/RLL current owner heads reconciled",
+    "Drive canonical fresh revision observed"
+  ],
+  "F_gap":[
+    "TOKEN_VAZIO_PR299_NEW_HEAD_TERMINAL_ASSURANCE_AFTER_THIS_APPEND",
+    "TOKEN_VAZIO_VC_FILLER_PRODUCER_TERMINAL_RECEIPT",
+    "TOKEN_VAZIO_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_NEW_EXECUTION_AND_INDEPENDENT_REPLICATION",
+    "TOKEN_VAZIO_NODE24_NATIVE_ACTION_REVALIDATION"
+  ],
+  "F_esquecido":[
+    "runner image itself is a lifecycle dependency",
+    "expected policy failure must not be counted as regression",
+    "writing a receipt changes the branch head and therefore expires inherited exact-head assurance"
+  ],
+  "F_next":[
+    "observe terminal workflows for the new PR299 head created by this append",
+    "obtain VC/Filler producer source+build+test+artifact-hash receipt before status promotion",
+    "obtain RafGitTools current-main terminal run/job/step/artifact receipt",
+    "bind Termux execution-time executable identity then physical install/launch/log receipt",
+    "execute RLL dataset→pipeline→outputs→hashes→independent replication chain",
+    "revalidate Node24-native actions on current baseline"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "RAFAELIA_RECEIPT_V1",
+  "receipt_id": "operational-gap-assurance-schema-alias-pr299-20260820T0347BRT",
+  "claim_allowed": false,
+  "scope": "Mapa PR299 operational-gap-assurance detector failure and bounded correction",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 299,
+    "head_before_fix": "f10e9bb16d0b1867b3b49b9a9ee819e318762fb1",
+    "run_id": 32337172101,
+    "job_id": 96328862848,
+    "failed_step": "Validate operational gap records",
+    "failed_record": "data/routing/operational-gaps/rdgs-postmerge-main-revalidation-20260820T0142BRT.v1.json",
+    "observed_schema_field": "rafaelia.operational-gap-assurance/v1"
+  },
+  "evidence": {
+    "self_test": "PASS",
+    "failure": "unknown operational-gap schema",
+    "record_claim_allowed": false,
+    "correction_commit": "7ba83e240d43b7060e53638d9dc5b8a078eec6d7",
+    "correction": "add only rafaelia.operational-gap-assurance/v1 to explicit LEGACY_SCHEMAS",
+    "wildcard_added": false,
+    "current_canonical_strictness_relaxed": false
+  },
+  "state": "FIX_IMPLEMENTED_TERMINAL_REVALIDATION_PENDING",
+  "token_vazio": [
+    "TOKEN_VAZIO_PR299_POST_FIX_OPERATIONAL_GAP_ASSURANCE_TERMINAL"
+  ],
+  "falsifier": "post-fix operational-gap-assurance must accept this historical profile as legacy_accepted=true with claim_allowed=false/TOKEN_VAZIO_REVALIDATION_REQUIRED while still rejecting unknown schemas and malformed current records",
+  "closure_gate": "PR299_POST_FIX_OPERATIONAL_GAP_ASSURANCE_TERMINAL_RECEIPT"
+}

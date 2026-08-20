@@ -1,0 +1,78 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "VC_DOCUMENTATION_PRODUCER_STATUS_DRIFT_20260820T0245BRT",
+  "observed_at": "2026-08-20T02:45:25-03:00",
+  "claim_allowed": false,
+  "owner_authority": {
+    "federated_authority": "rafaelmeloreisnovo/Mapa",
+    "producer_authority": "rafaelmeloreisnovo/Vectras-VM-Android"
+  },
+  "source_pointer": [
+    "Mapa@bbc7b8052349a76c96363a6eb7b39c3541e12e44:protocolos/VC_VECTORIZATION_FILLING_PROTOCOL.md",
+    "Vectras-VM-Android@65a597d137708dc74cda7cb5b2ed44831f124171:app/src/main/java/com/vectras/vm/rafaelia/token/",
+    "data/receipts/vc-vectorization-producer-source-audit.20260820T0245BRT.receipt.json"
+  ],
+  "affected_routes": ["R1", "R4", "R5", "R6", "R11", "R12"],
+  "uncertainty_state": "REDUCED_TO_SCOPED_SOURCE_MISMATCH",
+  "urgency": "P0_SEMANTIC_PROVENANCE",
+  "necessity": "prevent documentation status from being consumed as producer implementation evidence",
+  "impact": "Mapa main currently labels VerifiableCredential, VerifiableCredentialFiller and a comprehensive filler test suite as implemented/present although those expected source artifacts are not present in the audited producer token directory/head",
+  "detectability": "HIGH_BY_OWNER_DIRECTORY_AND_CODE_SEARCH",
+  "recurrence_risk": "HIGH_IF_DOCUMENTATION_STATUS_IS_NOT_OWNER_VERIFIED",
+  "failure_mode": "DOCUMENTATION_STATUS_OVERPROMOTION_ACROSS_REPO_AUTHORITY_BOUNDARY",
+  "evidence_for": [
+    "Mapa protocol implementation table declares TokenVectorizationEngine STABLE, VerifiableCredential IMPLEMENTED, VerifiableCredentialFiller IMPLEMENTED, Test Suite COMPREHENSIVE",
+    "Vectras owner directory at audited head contains only TokenVectorizationEngine.java",
+    "TokenVectorizationEngineTest.java exists with ten unit test methods",
+    "search for VerifiableCredential and VerifiableCredentialFiller returned no owner-head results"
+  ],
+  "evidence_against": [
+    "TokenVectorizationEngine source is genuinely present",
+    "TokenVectorizationEngine unit-test source is genuinely present",
+    "absence from audited paths/head does not prove the concepts never existed elsewhere or in another historical ref"
+  ],
+  "detector": {
+    "signal": "Mapa implementation status stronger than producer-head artifact state",
+    "threshold": "any IMPLEMENTED/STABLE/COMPREHENSIVE row without resolvable producer artifact plus execution receipt",
+    "false_positive_cost": "temporary demotion/revalidation of a real implementation stored at an unobserved path",
+    "false_negative_cost": "future VC governance may trust a component that is documentation-only or missing"
+  },
+  "falsifier": "resolve exact producer paths for VerifiableCredential, VerifiableCredentialFiller and filler tests at a declared immutable ref and produce terminal execution receipts",
+  "next_probe": "owner-head implementation inventory plus build/test execution receipt",
+  "mitigation": "publish status erratum; preserve original document history; keep VC governance integration claim_allowed=false",
+  "closure_gate": "VC_PRODUCER_IMPLEMENTATION_TERMINAL_RECEIPT",
+  "review_or_expiry": "EVENT_TRIGGERED_ON_VECTRAS_TOKEN_MODULE_OR_MAPA_VC_PROTOCOL_CHANGE",
+  "predecessor_lineage": "PR298 -> producer audit receipt",
+  "actions": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "ADAPTIVE", "MAINTENANCE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+  "component_lifecycle": {
+    "component": "Mapa:VC-vectorization-protocol-status",
+    "limit_type": "EVENT_TRIGGERED",
+    "dependency_changes": 1,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "test_cycles": "TOKEN_VAZIO",
+    "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "provenance_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "last_verified_at": "2026-08-20T02:45:25-03:00",
+    "next_review_gate": "VC_PRODUCER_IMPLEMENTATION_TERMINAL_RECEIPT",
+    "retirement_revalidation": "any producer token-module or protocol status change invalidates this assurance"
+  },
+  "impact_radius": [
+    {
+      "component": "VC governance integration",
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "implementation status feeds governance expectations",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "producer source + terminal test/build receipt",
+      "false_positive_cost": "extra verification",
+      "false_negative_cost": "issuance or governance based on nonexistent implementation"
+    }
+  ]
+}

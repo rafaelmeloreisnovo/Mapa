@@ -1,0 +1,50 @@
+{
+  "schema": "RAFAELIA_RECEIPT_V1",
+  "receipt_id": "vc-vectorization-producer-source-audit-20260820T0245BRT",
+  "claim_allowed": false,
+  "scope": "source-presence audit only; not execution evidence",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "ref": "master",
+    "commit": "65a597d137708dc74cda7cb5b2ed44831f124171",
+    "commit_state": "PRESENT_VERIFIED_MERGE_COMMIT"
+  },
+  "observations": [
+    {
+      "component": "TokenVectorizationEngine",
+      "path": "app/src/main/java/com/vectras/vm/rafaelia/token/TokenVectorizationEngine.java",
+      "blob_sha": "175a2ca012e0f2da7ce551a8e325571530791127",
+      "state": "SOURCE_PRESENT"
+    },
+    {
+      "component": "TokenVectorizationEngineTest",
+      "path": "app/src/test/java/com/vectras/vm/rafaelia/token/TokenVectorizationEngineTest.java",
+      "blob_sha": "2fa9b68884b572ab2fc796e886033f1dc57609a9",
+      "state": "SOURCE_PRESENT",
+      "known_tests": 10
+    },
+    {
+      "component": "VerifiableCredential",
+      "expected_path": "app/src/main/java/com/vectras/vm/rafaelia/token/VerifiableCredential.java",
+      "state": "TOKEN_VAZIO_NOT_PRESENT_IN_OWNER_DIRECTORY_AT_AUDITED_HEAD"
+    },
+    {
+      "component": "VerifiableCredentialFiller",
+      "expected_path": "app/src/main/java/com/vectras/vm/rafaelia/token/VerifiableCredentialFiller.java",
+      "state": "TOKEN_VAZIO_NOT_PRESENT_IN_OWNER_DIRECTORY_AT_AUDITED_HEAD"
+    },
+    {
+      "component": "VerifiableCredentialFillerTest",
+      "expected_path": "app/src/test/java/com/vectras/vm/rafaelia/token/VerifiableCredentialFillerTest.java",
+      "state": "TOKEN_VAZIO_NOT_FOUND_AT_AUDITED_HEAD"
+    }
+  ],
+  "boundary": [
+    "SOURCE_PRESENT != EXECUTED",
+    "TEST_SOURCE_PRESENT != TEST_RUN_PASS",
+    "MAPA_DOCUMENTATION != PRODUCER_IMPLEMENTATION",
+    "TOKEN_VAZIO != 0"
+  ],
+  "closure_gate": "OWNER_HEAD_IMPLEMENTATION_AND_TERMINAL_TEST_RECEIPT",
+  "next_probe": "implement or locate exact VC classes in producer repo, then capture workflow/run/job/steps and artifact hashes"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "RAFAELIA_RECEIPT_V1",
+  "receipt_id": "drive-canonical-omega-append-20260820T0245BRT",
+  "claim_allowed": false,
+  "scope": "longitudinal memory append only; not execution evidence",
+  "drive": {
+    "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "stale_revision_rejected": "AIroW30OjMUgSyu0KR00pvLXUrVjW8LNIyeMs7qGHC5D-4baA4nsjre42JXP9H1hC0UPMUcjxaVtPgwi7GHIAMxp0m_EWoPfHS8Y8G-YvKmuFlf0",
+    "revision_before_successful_append": "AIroW34P9oAUj0rgEHDCcmDGVSnTcPKnEh0FTsR6meP6sOlQWKFEuCA_gUsKz5ew8AnBUZmPmv9A7mT3lD2yMlNPpywZMyCmFg_7WD7ikFU",
+    "revision_after_append": "AIroW35nWLT_AfINZKQDF15i6mdTPjKr-rquqGLoU6nsa0X5yE2zy_roV8OG-VUepYL0IDtHY2kmmwWOmSOAHGebC9xQdT7jjCRoMP7rkEQ",
+    "write_control": "REQUIRED_REVISION_COMPARE_AND_WRITE"
+  },
+  "github_delta": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "branch": "audit/vc-producer-status-revalidation-20260820T0245BRT",
+    "cycle_path": "data/routing/cycles/omega-federated-cycle-20260820T0245BRT.v1.json",
+    "cycle_commit": "8abefd0ca4ffdd6fc1d1f5c5a1f199e8b58ee08c"
+  },
+  "event": "STALE_DRIVE_REVISION_REJECTED_THEN_FRESH_REVISION_APPEND_SUCCEEDED",
+  "lifecycle": {
+    "component": "Drive:canonical-longitudinal-memory-write-control",
+    "limit_type": "EVENT_TRIGGERED",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "last_verified_at": "revision_after_append",
+    "next_review_gate": "REQUIRE_FRESH_REVISION_ON_EACH_APPEND"
+  },
+  "boundary": [
+    "DRIVE_MEMORY_NE_EXECUTION_EVIDENCE",
+    "STALE_REVISION_NE_CURRENT_STATE",
+    "APPEND_SUCCESS_NE_CLAIM_PROMOTION",
+    "TOKEN_VAZIO_NE_ZERO"
+  ],
+  "anti_recurrence": "Every canonical Drive append must use a freshly read revision ID and fail on stale revision rather than silently overwrite concurrent history."
+}

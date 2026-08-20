@@ -1,0 +1,92 @@
+{
+  "schema": "RAFAELIA_FEDERATED_OMEGA_DELTA_V1",
+  "cycle_id": "omega-federated-cycle-20260820T1046BRT",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY",
+    "NO_SILENT_REGRESSION"
+  ],
+  "observed_sources": [
+    {"repo": "rafaelmeloreisnovo/Mapa", "ref": "PR299-head", "sha": "1892b1a1358074d92c0864c8648e2a1ffffbd0d1", "state": "EVIDENCED_SCOPED"},
+    {"repo": "rafaelmeloreisnovo/RafGitTools", "ref": "main", "sha": "0c453be12b31eb21c85cf6295b740c0d54365166", "state": "TOKEN_VAZIO_COMBINED_MAIN_TERMINAL_RECEIPT"},
+    {"repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "ref": "master", "sha": "5e83eef9aea803bee127cd21eed6206ced193cb7", "state": "TOKEN_VAZIO_EXECUTION_TIME_IDENTITY_AND_PHYSICAL_RUNTIME"},
+    {"repo": "instituto-Rafael/relativity-living-light", "ref": "main", "sha": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe", "state": "TOKEN_VAZIO_NEW_EXECUTION_AND_INDEPENDENT_REPLICATION"}
+  ],
+  "component_lifecycle_ledger": [
+    {
+      "component": "Mapa:PR299-exact-head-assurance",
+      "limit_type": "EVENT_TRIGGERED",
+      "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "test_cycles": "TOKEN_VAZIO",
+      "dependency_changes": 0,
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "run:32370871387+32370871339+32370871152+32370871295",
+      "next_review_gate": "NEW_HEAD_TERMINAL_ASSURANCE"
+    },
+    {
+      "component": "Mapa:github-actions-runner-environment",
+      "limit_type": "EVENT_TRIGGERED",
+      "environment_exposure": "Ubuntu24.04.4/runner2.336.0/Node24-forced",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "promotion-run:32370871295",
+      "next_review_gate": "NODE24_NATIVE_ACTION_REVALIDATION"
+    }
+  ],
+  "impact_radius": [
+    {"source": "Mapa:PR299-exact-head-assurance", "affected_routes": ["R5","R11","R12"], "direct_exposure": true, "revalidation_required": true, "evidence_needed": "own terminal evidence for every successor head"},
+    {"source": "Mapa:github-actions-runner-environment", "affected_routes": ["R5","R6","R11"], "direct_exposure": true, "revalidation_required": true, "evidence_needed": "critical action chain revalidated under Node24-native versions"}
+  ],
+  "actions": {
+    "detective": ["resolved PR299 exact-head workflow vector and promotion job logs", "reconciled current owner heads for RafGitTools, Termux and RLL"],
+    "preventive": ["scoped assurance to exact SHA; no inheritance to successor commits"],
+    "precautionary": ["claim_allowed=false", "unexecuted producer/runtime/scientific states remain TOKEN_VAZIO"],
+    "adaptive": ["runner environment retained as lifecycle dependency"],
+    "corrective": [],
+    "maintenance": ["Node24 exposure requires action-chain revalidation"],
+    "incident_investigation": ["promotion red classified as expected policy barrier, not code regression"],
+    "safety_assurance": ["CI/topology/gap-assurance/negative-fixtures/invariants observed terminally"],
+    "learning_anti_recurrence": ["RECEIPT_AT_SHA_A_NE_RECEIPT_AT_SHA_B", "EXPECTED_FAIL_CLOSED_NE_REGRESSION", "UNCHANGED_SOURCE_NE_FRESH_EXECUTION"]
+  },
+  "uncertainty": {
+    "before": ["PR299 1892b1a1 terminal assurance unresolved in receipt layer"],
+    "after": ["PR299 1892b1a1 EVIDENCED_SCOPED", "promotion denial mechanism resolved", "RafGitTools/Termux/RLL remain bounded TOKEN_VAZIO"]
+  },
+  "F_ok": [
+    "PR299 exact-head CI success",
+    "Branch Topology Gate success",
+    "operational-gap-assurance success",
+    "promotion negative fixtures and 15 invariants success",
+    "promotion denial classified as expected fail-closed"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_NEW_PR299_HEAD_AFTER_APPEND",
+    "TOKEN_VAZIO_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_NEW_EXECUTION_AND_INDEPENDENT_REPLICATION",
+    "TOKEN_VAZIO_NODE24_NATIVE_ACTION_REVALIDATION"
+  ],
+  "F_esquecido": [
+    "receipt creation itself changes branch state and therefore opens a new lifecycle clock",
+    "stable repository head does not constitute fresh execution evidence",
+    "runner runtime is part of the evidence-producing component graph"
+  ],
+  "F_next": [
+    "obtain RafGitTools combined-main execution receipt",
+    "capture Termux execution-time executable identity then physical install/launch/logcat receipt",
+    "produce RLL dataset→run→outputs→hashes→independent replication receipts",
+    "revalidate critical GitHub Actions chain on Node24-native action versions"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "rafaelia.receipt/v1",
+  "receipt_id": "pr299-latest-head-assurance-20260820T0446BRT",
+  "claim_allowed": false,
+  "scope": "Mapa PR #299 exact head assurance only",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 299,
+    "head_sha": "c92c519e65be27070e5222c2a39dd2423a57ece0",
+    "merge_ref_sha": "47596680af2cbf46330dd3c4203139d623662e4c",
+    "base_sha": "bbc7b8052349a76c96363a6eb7b39c3541e12e44"
+  },
+  "workflow_evidence": [
+    {"run_id": 32341514747, "name": "Branch Topology Gate", "conclusion": "success"},
+    {"run_id": 32341514703, "name": "operational-gap-assurance", "conclusion": "success"},
+    {"run_id": 32341514644, "name": "CI", "conclusion": "success"},
+    {
+      "run_id": 32341514656,
+      "name": "RAFAELIA Promotion Control V1",
+      "conclusion": "failure_expected_fail_closed",
+      "jobs": [
+        {"job_id": 96341408837, "name": "promotion-control / negative-tests", "conclusion": "success"},
+        {
+          "job_id": 96341434544,
+          "name": "promotion-control / enforce",
+          "conclusion": "failure",
+          "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN"],
+          "result": "DENIED",
+          "automatic_merge": false,
+          "manual_merge_only": true,
+          "observed_independent_approvals": 0,
+          "required_independent_approvals": 1
+        }
+      ]
+    }
+  ],
+  "environment_observation": {
+    "runner_version": "2.336.0",
+    "runner_os": "Ubuntu 24.04.4 LTS",
+    "runner_image": "ubuntu-24.04@20260810.271.1",
+    "node_runtime_event": "NODE20_TARGETED_ACTION_FORCED_ON_NODE24",
+    "observed_action": "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+    "causal_failure_attribution": "NOT_ESTABLISHED"
+  },
+  "state_transition": {
+    "before": "TOKEN_VAZIO_LATEST_HEAD_CI",
+    "after": "EVIDENCED_SCOPED_PR_HEAD",
+    "promotion_state": "BLOCKED_BY_DRAFT_POLICY"
+  },
+  "boundaries": [
+    "PR_HEAD_ASSURANCE_NE_POST_MERGE_MAIN_ASSURANCE",
+    "EXPECTED_FAIL_CLOSED_NE_REGRESSION",
+    "NODE24_EXPOSURE_NE_CAUSAL_FAILURE",
+    "VISON_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM"
+  ],
+  "next_review_gate": "VC_PRODUCER_IMPLEMENTATION_TERMINAL_RECEIPT_OR_MATERIAL_HEAD_CHANGE"
+}
