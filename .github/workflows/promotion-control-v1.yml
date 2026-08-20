@@ -40,13 +40,14 @@ jobs:
           python -m py_compile \
             tools/verify_promotion_control.py \
             tools/check_invariants.py \
+            tools/check_invariants_v2.py \
             tests/test_promotion_control.py
           python tests/test_promotion_control.py
 
       - name: Validate 15 Rafaelia invariants (P1-02 gate)
         run: |
           set -euo pipefail
-          python tools/check_invariants.py
+          python tools/check_invariants_v2.py
 
   enforce:
     name: promotion-control / enforce
