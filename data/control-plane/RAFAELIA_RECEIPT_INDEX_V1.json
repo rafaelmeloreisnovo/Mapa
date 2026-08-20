@@ -38,7 +38,9 @@
       "receipt_type": "DEPENDENCY_CHANGE_NODE24",
       "state": "STALE",
       "source": "PR #275 open >30d",
-      "next_gate": "exact-head build/test receipt before integration"
+      "receipt": "data/receipts/rafgittools-node24-setup-android-pr275.20260819T2246BRT.receipt.json",
+      "observed_scope": "exact-head mixed CI; Android Client Build, CI and PR Validation succeeded",
+      "next_gate": "rebase/update against current main and produce new exact-head receipt before integration"
     },
     {
       "id": "RAFGITTOOLS_NODE24_SETUP_PYTHON",
@@ -47,7 +49,9 @@
       "receipt_type": "DEPENDENCY_CHANGE_NODE24",
       "state": "STALE",
       "source": "PR #276 open >30d",
-      "next_gate": "exact-head Python/workflow compatibility receipt"
+      "receipt": "data/receipts/rafgittools-node24-setup-python-pr276.20260819T2246BRT.receipt.json",
+      "observed_scope": "exact-head mixed CI; CI, PR Validation, Android Client Build and Internal Validation succeeded",
+      "next_gate": "rebase/update against current main and reproduce Python-dependent gates"
     },
     {
       "id": "RAFGITTOOLS_NODE24_GITHUB_SCRIPT",
@@ -56,7 +60,9 @@
       "receipt_type": "DEPENDENCY_CHANGE_NODE24",
       "state": "STALE",
       "source": "PR #277 open >30d",
-      "next_gate": "exact-head script API compatibility receipt"
+      "receipt": "data/receipts/rafgittools-node24-github-script-pr277.20260819T2246BRT.receipt.json",
+      "observed_scope": "exact-head mixed CI; PR Validation, Android Client Build and Internal Validation succeeded",
+      "next_gate": "inventory github-script callsites, rebase/update and execute v9 compatibility fixtures"
     },
     {
       "id": "TERMUX_PHYSICAL_RUNTIME",
