@@ -1,0 +1,172 @@
+{
+  "schema_version": "rafaelia.omega-cycle/v1",
+  "cycle_id": "OMEGA_FEDERATED_20260820T1241BRT",
+  "state": "VERIFIED_LIMITED",
+  "observed_at": "2026-08-20T12:41:00-03:00",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY",
+    "NO_SILENT_REGRESSION"
+  ],
+  "sources": {
+    "Mapa": {
+      "ref": "main",
+      "sha": "d0865b3a7ffc89b861684ecf7c2598ddae5dd721",
+      "pr_304_head": "0c2423634cd7e7b67431b4f3c059eefc69fc16a6",
+      "promotion_run": 32384786813,
+      "promotion_enforce_job": 96476541728
+    },
+    "RafGitTools": {
+      "ref": "main",
+      "sha": "062f09986840db24b684ba5affde1fbf192f35c7",
+      "terminal_combined_main_receipt": "TOKEN_VAZIO"
+    },
+    "termux_app_rafacodephi": {
+      "ref": "master",
+      "sha": "5e83eef9aea803bee127cd21eed6206ced193cb7",
+      "claim_boundary_pr_377_head": "a91ce671b461432b8027e098d1bc37ca36aa5c40",
+      "claim_boundary_run": 32381934021,
+      "claim_boundary_job": 96467007292
+    },
+    "RLL": {
+      "fresh_owner_source": "TOKEN_VAZIO",
+      "independent_replication": "TOKEN_VAZIO"
+    },
+    "Drive": {
+      "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "append_this_cycle": "TOKEN_VAZIO_NO_NEW_WRITE_RECEIPT"
+    }
+  },
+  "F_ok": [
+    "PR304 independent-approval policy floor is materialized in Mapa",
+    "Promotion Control correctly denied PR304 with zero qualifying independent approvals",
+    "CI, Branch Topology and operational-gap-assurance were successful on PR304 head",
+    "policy-decision versus merge-outcome mismatch is now evidenced and persisted",
+    "RafGitTools current source identity is resolved",
+    "Termux claim-language detector executed remotely with 6/6 tests PASS and PASS_WITH_KNOWN_DEBT"
+  ],
+  "F_gap": [
+    "P0 server-side merge binding for Promotion Control is not evidenced",
+    "exact ruleset/bypass/merge-path root cause is TOKEN_VAZIO",
+    "RafGitTools combined-main terminal execution receipt is TOKEN_VAZIO",
+    "Termux execution-time identity is TOKEN_VAZIO",
+    "Termux physical runtime receipt is TOKEN_VAZIO",
+    "Termux legacy absolute-claim debt remains evidenced-open, not closed",
+    "RLL fresh owner/source and independent replication are TOKEN_VAZIO",
+    "Drive append in this cycle has no new write receipt"
+  ],
+  "F_esquecido": [
+    "POLICY_DECISION_NE_SERVER_SIDE_MERGE_ENFORCEMENT",
+    "MERGED_NE_POLICY_SATISFIED",
+    "STATUSES_EMPTY_NE_NO_WORKFLOW",
+    "UNCHANGED_SOURCE_NE_FRESH_EXECUTION",
+    "KNOWN_DEBT_NE_TOKEN_VAZIO"
+  ],
+  "new_token_vazio": [
+    "TOKEN_VAZIO_MERGE_PATH_OR_RULESET_CAUSE_NOT_OBSERVED",
+    "TOKEN_VAZIO_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_TERMUX_CLAIM_DEBT_ZERO",
+    "TOKEN_VAZIO_RLL_FRESH_OWNER_SOURCE",
+    "TOKEN_VAZIO_RLL_NEW_EXECUTION_AND_INDEPENDENT_REPLICATION",
+    "TOKEN_VAZIO_DRIVE_APPEND_THIS_CYCLE"
+  ],
+  "resolved_token_vazio": [
+    "INDEPENDENT_APPROVAL_DETECTOR_ZERO_APPROVAL_BEHAVIOR -> EVIDENCED_SCOPED_DENY",
+    "MAPA_CURRENT_SOURCE_IDENTITY -> PRESENT"
+  ],
+  "uncertainty_before_after": {
+    "before": "Independent-approval floor intended; whether zero-approval merge was actually blocked server-side was unverified.",
+    "after": "Policy logic is verified to DENY zero approvals, while observed PR304 merge demonstrates that this decision was not an effective server-side barrier on the observed path. Exact ruleset/bypass mechanism remains TOKEN_VAZIO."
+  },
+  "hazards": {
+    "new": [
+      {
+        "id": "PROMOTION_DECISION_MERGE_BINDING_GAP",
+        "classification": "NEAR_MISS",
+        "incident": false,
+        "risk": "A future denied change could reach main if server-side merge enforcement remains unbound."
+      }
+    ],
+    "closed": []
+  },
+  "component_lifecycle_ledgers": [
+    {
+      "component": "Mapa:promotion-control-merge-binding",
+      "limit_type": "EVENT_TRIGGERED",
+      "test_cycles": 1,
+      "dependency_changes": 1,
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "run:32384786813/job:96476541728",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "deployments": "TOKEN_VAZIO",
+      "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+    },
+    {
+      "component": "RafGitTools:combined-main-assurance",
+      "limit_type": "EVENT_TRIGGERED",
+      "dependency_changes": 1,
+      "last_verified_at": "TOKEN_VAZIO_COMBINED_MAIN_TERMINAL_RECEIPT",
+      "next_review_gate": "MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT"
+    },
+    {
+      "component": "Termux:claim-language-boundary",
+      "limit_type": "EVENT_TRIGGERED",
+      "test_cycles": 1,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "last_verified_at": "run:32381934021/job:96467007292",
+      "known_debt": {
+        "fully_compatible": 1,
+        "will_not_crash": 1,
+        "production_ready": 1,
+        "zero_collisions": 1,
+        "guaranteed_compatible": 0
+      },
+      "claim_allowed": false,
+      "next_review_gate": "LEGACY_CLAIM_DEBT_ZERO_AND_POSTMERGE_RECEIPT"
+    }
+  ],
+  "impact_radius": {
+    "promotion_binding": {
+      "routes": ["R5", "R6", "R11", "R12"],
+      "direct_exposure": ["Promotion Control decision", "PR merge boundary"],
+      "transmitted_effect": ["anti-regression", "future promotion", "release/publication boundary"],
+      "hidden_state_possible": true,
+      "revalidation_required": true
+    }
+  },
+  "actions": {
+    "detective": "Reconciled Promotion Control decision with actual merge outcome and review history.",
+    "preventive": "Require server-side binding between the named promotion check, independent review, and merge eligibility.",
+    "precautionary": "claim_allowed=false; merge occurrence is not treated as evidence that policy was satisfied.",
+    "adaptive": "Any ruleset, review requirement, bypass permission or promotion workflow change invalidates prior assurance.",
+    "corrective": "No server-side configuration mutation claimed because repository-rule settings were not observed in this cycle.",
+    "maintenance": "Promotion check binding is now a lifecycle component.",
+    "incident_investigation": "Near-miss recorded; exact bypass/ruleset mechanism remains TOKEN_VAZIO.",
+    "safety_assurance": "Closure requires a blocked zero-approval merge falsifier and subsequent one-approval eligibility probe.",
+    "learning_anti_recurrence": "POLICY_PASS_OR_DENY_NE_SERVER_SIDE_MERGE_ENFORCEMENT"
+  },
+  "routes": {
+    "promoted_scoped": ["R5: decision evidence is stronger", "R11: mismatch is now explicit and reconstructible"],
+    "blocked": ["R6: server-side enforcement unproven", "R12: promotion/release remains blocked without closure receipt"]
+  },
+  "F_next": [
+    "Inspect repository rulesets, branch protection, required checks and bypass actors; capture SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+    "Capture RafGitTools main -> run -> jobs -> steps -> artifacts -> hashes -> receipt",
+    "Capture Termux execution-time identity and physical runtime receipt",
+    "Reduce Termux absolute-claim debt from four evidenced occurrences to zero and re-run claim boundary post-merge",
+    "Resolve RLL fresh owner/source before any historical claim reuse, then dataset -> config -> run -> outputs -> hashes -> independent replication",
+    "Append this delta to Drive only with a fresh compare-and-write revision receipt when a safe mutation is available"
+  ]
+}

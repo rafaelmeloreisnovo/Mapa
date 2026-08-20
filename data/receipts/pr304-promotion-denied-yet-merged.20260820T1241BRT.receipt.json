@@ -1,0 +1,29 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR304_PROMOTION_DENIED_YET_MERGED_20260820T1241BRT",
+  "observed_at": "2026-08-20T12:41:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 304,
+  "head_sha": "0c2423634cd7e7b67431b4f3c059eefc69fc16a6",
+  "merge_commit_sha": "d0865b3a7ffc89b861684ecf7c2598ddae5dd721",
+  "merged_at": "2026-08-20T15:15:21Z",
+  "promotion_control": {
+    "run_id": 32384786813,
+    "enforce_job_id": 96476541728,
+    "result": "DENIED",
+    "blocking_reasons": ["INDEPENDENT_APPROVAL_MISSING", "HUMAN_REVIEW_MISSING"],
+    "required_independent_approvals": 1,
+    "observed_independent_approvals": 0,
+    "claim_allowed": false,
+    "automatic_merge": false,
+    "manual_merge_only": true
+  },
+  "pull_request_reviews_observed": 0,
+  "finding": "PR_MERGED_DESPITE_PROMOTION_DENIAL",
+  "failure_mode": "GOVERNANCE_CONTROL_NOT_BINDING_TO_MERGE_PATH",
+  "root_cause": "TOKEN_VAZIO_MERGE_PATH_OR_RULESET_CAUSE_NOT_OBSERVED",
+  "incident": false,
+  "near_miss": true,
+  "scope_boundary": "This receipt proves a mismatch between the policy decision and the observed merge outcome. It does not prove which GitHub ruleset, admin override, permission, or merge path caused the mismatch.",
+  "claim_allowed": false
+}
