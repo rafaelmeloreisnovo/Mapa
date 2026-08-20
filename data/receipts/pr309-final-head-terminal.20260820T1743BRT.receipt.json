@@ -1,0 +1,62 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR309_FINAL_HEAD_TERMINAL_20260820T1743BRT",
+  "type": "EXACT_HEAD_TERMINAL_ASSURANCE",
+  "status": "PRESENT_SCOPED_MIXED_FAIL_CLOSED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 309,
+    "head_sha": "00d0c6a34e5181e2bfca57e657c805c062dcf170",
+    "base_sha": "974a8dc02ef0ebe347028212862b779761d6105a",
+    "draft": true,
+    "merged": false,
+    "mergeable_observed": true
+  },
+  "workflow_matrix": {
+    "ci": {"run_id": 32410512458, "conclusion": "SUCCESS"},
+    "branch_topology": {"run_id": 32410512481, "conclusion": "SUCCESS"},
+    "operational_gap_assurance": {"run_id": 32410512459, "job_id": 96559578736, "conclusion": "SUCCESS"},
+    "promotion_control": {
+      "run_id": 32410512486,
+      "negative_tests": "SUCCESS",
+      "enforce_job_id": 96559623686,
+      "decision": "DENIED",
+      "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN", "INDEPENDENT_APPROVAL_MISSING"],
+      "required_independent_approvals": 1,
+      "observed_independent_approvals": 0,
+      "interpretation": "EXPECTED_FAIL_CLOSED"
+    },
+    "server_merge_enforcement": {
+      "run_id": 32410512507,
+      "job_id": 96559578637,
+      "fixtures": "4/4 PASS",
+      "live_probe": "BLOCKED",
+      "server_side_merge_binding": "NOT_ENFORCED_OBSERVED",
+      "failure_modes": ["BRANCH_PROTECTION_DISABLED", "PROTECTION_NOT_ENABLED", "REQUIRED_STATUS_CHECKS_NOT_ENFORCED", "NO_REQUIRED_STATUS_CHECKS_OBSERVED"],
+      "interpretation": "EXPECTED_FAIL_CLOSED"
+    }
+  },
+  "resolved_gap": "TOKEN_VAZIO_PR309_FINAL_HEAD_00D0C6A_TERMINAL",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+  ],
+  "environment": {
+    "runner": "2.336.0",
+    "os": "Ubuntu 24.04.4",
+    "runner_image": "ubuntu-24.04@20260816.277.1",
+    "python": "3.12.14",
+    "node_runtime_observation": "Node20-target actions forced under Node24"
+  },
+  "epistemic_boundary": [
+    "WorkflowRed != Regression when a fail-closed gate intentionally denies unsafe promotion.",
+    "Classic branch protection endpoint does not establish repository rulesets or bypass actors.",
+    "This receipt proves the exact tested PR head only; any later head requires revalidation.",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM."
+  ],
+  "falsifier": "A workflow rerun for the same exact head producing a contradictory terminal result or evidence that the recorded run/job mapping is wrong falsifies this receipt scope.",
+  "next_review_gate": "REVALIDATE_ON_HEAD_POLICY_RULESET_OR_SERVER_CONFIGURATION_CHANGE"
+}
