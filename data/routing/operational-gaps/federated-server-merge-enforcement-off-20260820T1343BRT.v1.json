@@ -1,74 +1,131 @@
 {
   "schema_version": "rafaelia.operational-gap-assurance/v1",
   "gap_id": "FEDERATED_SERVER_MERGE_ENFORCEMENT_OFF_20260820T1343BRT",
-  "source_pointer": "Mapa/main@4002ced01db77b879888d08b1737dfe4430017b7 + RafGitTools/main@062f09986840db24b684ba5affde1fbf192f35c7 + termux-app-rafacodephi/main@92d80377116c4fcbfd6f572247ad65201b75c5e6",
+  "status": "NEAR_MISS",
+  "source_pointer": "Mapa/main@2e67d93d1ce48eaf8628127636625aee3f1a034d + RafGitTools/main@062f09986840db24b684ba5affde1fbf192f35c7 + termux-app-rafacodephi/main@92d80377116c4fcbfd6f572247ad65201b75c5e6",
   "owner_authority": "repository server-side governance configuration; Mapa records federated state but does not substitute repository protection",
   "affected_routes": ["R5", "R6", "R7", "R11", "R12"],
-  "observed_at": "2026-08-20T13:43:11-03:00",
-  "provenance": {
-    "Mapa_branch_endpoint": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]",
-    "RafGitTools_branch_endpoint": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]",
-    "Termux_branch_endpoint": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]",
-    "predecessor": "Mapa PR #306 POLICY_DECISION != SERVER_SIDE_MERGE_ENFORCEMENT"
-  },
+  "observed_at": "2026-08-20T14:43:32-03:00",
+  "provenance": [
+    {"source": "GitHub branch endpoint", "repo": "rafaelmeloreisnovo/Mapa", "ref": "main", "sha": "2e67d93d1ce48eaf8628127636625aee3f1a034d", "observation": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]"},
+    {"source": "GitHub branch endpoint", "repo": "rafaelmeloreisnovo/RafGitTools", "ref": "main", "sha": "062f09986840db24b684ba5affde1fbf192f35c7", "observation": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]"},
+    {"source": "GitHub branch endpoint", "repo": "rafaelmeloreisnovo/termux-app-rafacodephi", "ref": "main", "sha": "92d80377116c4fcbfd6f572247ad65201b75c5e6", "observation": "protected=false; protection.enabled=false; required_status_checks.enforcement_level=off; checks=[]"},
+    {"source": "Mapa PR #307 head workflow", "run": 32394466127, "job": 96507967849, "observation": "operational-gap-assurance aborted on this record because the previous impact field was prose while the canonical schema requires integer 0..3"}
+  ],
   "evidence_for": [
-    "Mapa PR #306 is merged and documents a policy DENIED -> merge observed near-miss",
-    "Current Mapa/main branch metadata reports classic protection disabled and required status check enforcement off",
-    "RafGitTools/main and Termux/main show the same observed classic branch-protection state"
+    "Mapa PR #306 documented a policy DENIED -> merge observed near-miss.",
+    "Current Mapa/main branch metadata reports classic branch protection disabled and required status-check enforcement off.",
+    "RafGitTools/main and Termux/main show the same observed classic branch-protection state.",
+    "Operational-gap-assurance run 32394466127/job 96507967849 exposed a schema/consumer drift in the first version of this record."
   ],
   "evidence_against": [
-    "No evidence was obtained that every merge bypassed a protection barrier",
-    "Available tooling did not expose repository rulesets or enumerate bypass actors",
-    "RafGitTools and Termux have no observed denied-then-merged event in this cycle"
+    "No evidence was obtained that every merge bypassed a protection barrier.",
+    "Available tooling did not expose repository rulesets or enumerate bypass actors.",
+    "RafGitTools and Termux have no observed denied-then-merged event in this cycle.",
+    "The assurance failure does not falsify the server-enforcement hazard; it falsifies the malformed operational-gap record representation."
   ],
-  "uncertainty_state": {
-    "classic_branch_protection": "EVIDENCED_DISABLED",
-    "required_status_checks": "EVIDENCED_NOT_ENFORCED",
-    "promotion_control_exact_required_context": "TOKEN_VAZIO_NOT_ENFORCED_IN_CLASSIC_PROTECTION",
-    "repository_rulesets": "TOKEN_VAZIO_ENDPOINT_NOT_AVAILABLE",
-    "bypass_actors_or_admin_path": "TOKEN_VAZIO_NOT_INSPECTED",
-    "causality_for_RafGitTools_or_Termux_merges": "TOKEN_VAZIO_NO_EVENT_OBSERVED"
+  "uncertainty_state": "CLASSIC_PROTECTION_DISABLED; RULESETS_AND_BYPASS_ACTORS_TOKEN_VAZIO",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "POLICY_DECISION_NOT_BOUND_TO_CLASSIC_BRANCH_PROTECTION_REQUIRED_CHECKS; predecessor record also exhibited CURRENT_SCHEMA_FIELD_TYPE_DRIFT",
+  "falsifier": "Configure/evidence server-side protection and prove a synthetic non-draft zero-approval PR is DENIED by policy and remains unmergeable; independently, this corrected record must pass operational-gap-assurance without schema coercion.",
+  "next_probe": "Run operational-gap-assurance on this corrected record, then obtain SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT.",
+  "mitigation": {
+    "fail_closed": true,
+    "rollback": "retain prior Git history and revert this corrective commit if the canonical validator rejects the replacement",
+    "containment": "claim_allowed=false; promotion_allowed=false; no automatic promotion",
+    "server_action": "configure required server-side checks/ruleset outside repository artifacts, then re-run the live detector"
   },
-  "urgency": "P0",
-  "necessity": "SERVER_SIDE_GOVERNANCE_BOUNDARY",
-  "impact": "A policy can make a correct DENIED decision without a server-side barrier preventing merge; downstream main-state and release assumptions can then outrun evidence.",
-  "detectability": "HIGH after branch-endpoint detector; previously LOW because CI policy and server configuration were conflated",
-  "recurrence_risk": "HIGH_UNTIL_SERVER_SIDE_ENFORCEMENT_IS_EVIDENCED",
-  "failure_mode": "POLICY_DECISION_NOT_BOUND_TO_CLASSIC_BRANCH_PROTECTION_REQUIRED_CHECKS",
-  "falsifier": "Configure server-side protection and show protected=true + protection.enabled=true + required status checks enforced; then prove a synthetic non-draft zero-approval PR is DENIED by policy and remains unmergeable on the server.",
-  "next_probe": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
-  "mitigation": [
-    "Keep claim_allowed=false and no automatic promotion",
-    "Run Server Merge Enforcement Assurance on every governance PR",
-    "Do not interpret policy PASS/DENIED as server binding without a branch/ruleset receipt",
-    "Configure server-side required checks outside this repository artifact path, then re-run the detector",
-    "Inspect rulesets/bypass actors when connector/API support is available"
-  ],
-  "closure_gate": "SERVER_SIDE_PROTECTION_PRESENT_AND_ZERO_APPROVAL_MERGE_BLOCKED",
-  "review_or_expiry": "EVENT_TRIGGERED on any branch protection, ruleset, Promotion Control, permission, or merge-policy change",
+  "closure_gate": {
+    "criterion": "server-side protection present and zero-approval merge blocked, with corrected record accepted by the canonical assurance validator",
+    "evidence_needed": "live branch/ruleset configuration + synthetic blocked-merge receipt + terminal operational-gap-assurance receipt",
+    "falsifier": "merge remains possible with policy DENIED, or corrected record fails canonical validation",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "EVENT_TRIGGERED on branch protection, ruleset, Promotion Control, permission, merge-policy, operational-gap schema, or assurance-engine change",
   "claim_allowed": false,
+  "action_categories": [
+    "DETECTIVE",
+    "PREVENTIVE",
+    "PRECAUTIONARY",
+    "ADAPTIVE",
+    "CORRECTIVE",
+    "MAINTENANCE",
+    "SAFETY_ASSURANCE",
+    "LEARNING_ANTI_RECURRENCE"
+  ],
+  "detector": {
+    "signal": "branch protected/protection.enabled/enforcement/required checks plus operational-gap schema validation",
+    "threshold": "fail if protection disabled, enforcement off/unknown, no required checks observed, or current-schema record violates typed contract",
+    "false_positive": "temporarily blocks assurance until server governance or record schema is made observable and valid",
+    "false_negative": "a denied/unvalidated change can reach main, or a malformed record can escape prioritization",
+    "evidence_needed": "live branch/ruleset configuration + canonical validator output + synthetic blocked-merge receipt"
+  },
+  "adaptive_control": {
+    "baseline": "PR #307 first version recorded semantic severity labels/prose in fields consumed as canonical integers",
+    "delta": "replace severity axes with canonical integers 0..3 while preserving human-readable context in evidence/failure_mode",
+    "justification": "run 32394466127/job 96507967849 raised ValueError during priority_score() on impact",
+    "rollback": "revert corrective commit; do not weaken validator",
+    "retest": "operational-gap-assurance must execute past this record and continue scanning downstream records"
+  },
+  "corrective_control": {
+    "symptom": "Validate operational gap records step aborted with ValueError converting prose impact to int",
+    "mechanism_hypothesis": "producer record used semantic labels/prose while canonical consumer requires typed integer severity axes and structured controls",
+    "before_after_test": "before: run 32394466127/job 96507967849 fails on this record; after: same gate must accept this record and advance to subsequent records"
+  },
+  "maintenance": {
+    "class": "CORRECTIVE",
+    "asset": "data/routing/operational-gaps/federated-server-merge-enforcement-off-20260820T1343BRT.v1.json",
+    "condition_or_interval": "EVENT_TRIGGERED on canonical schema/consumer change or server-governance evidence change",
+    "verification": "canonical validator + terminal CI receipt"
+  },
+  "safety_assurance": {
+    "data_acquisition": "branch metadata, PR #307 workflow run/job logs, canonical assurance schema",
+    "analysis": "separate server-enforcement hazard from malformed-record detector failure",
+    "system_reassessment": "re-run full operational-gap scan after correcting record, then reassess server-side closure gate",
+    "corrective_trigger": "any validator failure, branch-protection change, ruleset discovery, or denied-yet-merged recurrence"
+  },
+  "learning": {
+    "reusable_control": "CURRENT_SCHEMA_FIELDS_MUST_MATCH_CONSUMER_TYPES; POLICY_DECISION_NE_SERVER_ENFORCEMENT",
+    "index_or_test": "operational-gap-assurance full-directory scan plus server-merge-enforcement assurance",
+    "recurrence_check": "new current-schema operational-gap records must survive full scan; server binding must be revalidated after governance changes"
+  },
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO",
+    "test_cycles": 2,
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": 1,
+    "dependency_changes": 2,
+    "environment_exposure": "GitHub-hosted Ubuntu 24.04.4; Node20-target actions forced under Node24 observed in failing assurance run",
+    "load_stress_proxy": "TOKEN_VAZIO",
+    "incident_count": 0,
+    "near_miss_count": 2,
+    "maintenance_actions": 2,
+    "corrective_actions": 1,
+    "software_schema_version": "rafaelia.operational-gap-assurance/v1",
+    "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "provenance_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "last_verified_at": "run:32394466127/job:96507967849 (failure evidence); corrected-head terminal receipt pending",
+    "next_review_gate": "OPERATIONAL_GAP_ASSURANCE_CORRECTED_RECORD_TERMINAL + SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+    "retirement_revalidation_criteria": "revalidate on schema, assurance engine, branch protection, ruleset, permission, or merge-policy change"
+  },
   "predecessor_lineage": [
     "Mapa PR #304 independent-approval floor",
     "Mapa PR #306 policy-denied-yet-merged near-miss",
-    "this cycle live branch metadata refinement"
-  ],
-  "detector": {
-    "implementation": "scripts/check_server_merge_enforcement.py",
-    "signal": "branch protected/protection.enabled/enforcement/required checks",
-    "threshold": "fail if protection disabled, enforcement off/unknown, or no required checks observed",
-    "false_positive_cost": "temporarily blocks assurance until server governance is made observable/enforced",
-    "false_negative_cost": "a denied or unvalidated change can reach main without a binding server barrier",
-    "evidence_needed": "live branch/ruleset configuration + synthetic blocked merge receipt"
-  },
-  "actions": {
-    "DETECTIVE": "implemented live branch-state detector and four unit fixtures",
-    "PREVENTIVE": "requires server-side enforcement before any promotion claim",
-    "PRECAUTIONARY": "claim_allowed=false; promotion_allowed=false; fail-closed",
-    "ADAPTIVE": "predecessor uncertainty refined from unknown merge path to observed classic protection disabled while preserving ruleset/bypass TOKEN_VAZIO",
-    "CORRECTIVE": "repository detector added; server configuration itself remains external/unapplied in this cycle",
-    "MAINTENANCE": "branch governance enters EVENT_TRIGGERED lifecycle",
-    "INCIDENT_INVESTIGATION": "Mapa denied-then-merged preserved as near-miss; no blame or unsupported causal story",
-    "SAFETY_ASSURANCE": "closure requires policy decision and server behavior to agree under a synthetic zero-approval probe",
-    "LEARNING_ANTI_RECURRENCE": "POLICY_DECISION != SERVER_ENFORCEMENT becomes a reusable invariant"
-  }
+    "Mapa PR #307 server-enforcement detector",
+    "run 32394466127/job 96507967849 schema/consumer drift finding"
+  ]
 }

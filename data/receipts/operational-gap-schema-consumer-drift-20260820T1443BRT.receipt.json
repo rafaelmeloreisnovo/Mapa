@@ -1,0 +1,50 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "OPERATIONAL_GAP_SCHEMA_CONSUMER_DRIFT_20260820T1443BRT",
+  "status": "PRESENT_SCOPED_CORRECTION_PENDING_TERMINAL_RETEST",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "base_sha": "2e67d93d1ce48eaf8628127636625aee3f1a034d",
+    "branch": "audit/operational-gap-schema-drift-20260820T1443BRT",
+    "corrective_commit": "44e95fc42f6370db3d07494fca8df84ee4214098"
+  },
+  "failure_evidence": {
+    "workflow": "operational-gap-assurance",
+    "run_id": 32394466127,
+    "job_id": 96507967849,
+    "step": "Validate operational gap records",
+    "result": "FAILURE",
+    "exception": "ValueError: invalid literal for int() with base 10 on prose impact field",
+    "runner": "2.336.0",
+    "os": "Ubuntu 24.04.4",
+    "runner_image": "ubuntu-24.04@20260816.277.1",
+    "node_runtime_observation": "Node20-target checkout/setup-python actions forced under Node24"
+  },
+  "before": {
+    "record": "data/routing/operational-gaps/federated-server-merge-enforcement-off-20260820T1343BRT.v1.json",
+    "schema_version": "rafaelia.operational-gap-assurance/v1",
+    "impact_type": "string",
+    "urgency_type": "string",
+    "canonical_required_range_fields": "integer 0..3",
+    "full_scan_result": "ABORTED"
+  },
+  "after": {
+    "record": "data/routing/operational-gaps/federated-server-merge-enforcement-off-20260820T1343BRT.v1.json",
+    "canonical_range_fields": "integers 0..3",
+    "provenance": "list",
+    "mitigation": "object",
+    "closure_gate": "object",
+    "action_categories": "canonical list",
+    "specialized_controls": "DETECTIVE/PRECAUTIONARY/ADAPTIVE/CORRECTIVE/MAINTENANCE/SAFETY_ASSURANCE/LEARNING structures added",
+    "terminal_retest": "TOKEN_VAZIO_PENDING"
+  },
+  "epistemic_boundary": [
+    "This receipt proves the failing mechanism was located and a schema-conformant correction was committed.",
+    "It does not prove the corrected head passes CI until a terminal workflow run is observed.",
+    "It does not close the separate server-side merge-enforcement P0 gap."
+  ],
+  "next_probe": "Open draft PR; require operational-gap-assurance to pass the corrected record and continue full-directory scan.",
+  "closure_gate": "CORRECTED_RECORD_TERMINAL_ASSURANCE_PASS",
+  "predecessor": "Mapa PR #307 run 32394466127/job 96507967849"
+}
