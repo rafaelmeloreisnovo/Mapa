@@ -1,0 +1,236 @@
+{
+  "schema": "rafaelia.omega-federated-cycle/v1",
+  "observed_at": "2026-08-20T11:50:12-03:00",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "predecessor_main": "a38a0c3eee18323a95efd9881d14940d82881d19",
+  "principles": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY",
+    "NO_SILENT_REGRESSION"
+  ],
+  "F_ok": [
+    "Mapa PR #300 feedback-event gate is merged into main.",
+    "Feedback-event PR-head remote workflow run 32381133697/job 96464330979 completed successfully; unit tests and append-only ledger validation succeeded.",
+    "TOKEN_VAZIO_REMOTE_CI for feedback-event PR-head was reduced to PRESENT_SCOPED_PR_HEAD.",
+    "Termux PR #377 Claim Boundary Gate run 32381934021/job 96467007292 completed successfully with six tests passing.",
+    "Termux claim validator returned PASS_WITH_KNOWN_DEBT and claim_allowed=false; exact legacy debt counts are now observed.",
+    "TOKEN_VAZIO_CLAIM_BOUNDARY_REMOTE_EXECUTION was reduced to PRESENT_SCOPED_PR_MERGE_REF.",
+    "Drive canonical revision chain is resolvable through current revision 251 with previous revision 250."
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_MAPA_FEEDBACK_EVENT_POSTMERGE_MAIN_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_CLOSURE_RECEIPT",
+    "MISSING_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+    "MISSING_TERMUX_PHYSICAL_RUNTIME_RECEIPT",
+    "TOKEN_VAZIO_RLL_FRESH_OWNER_SOURCE_AND_REPLICATION",
+    "TOKEN_VAZIO_DRIVE_APPEND_THIS_CYCLE"
+  ],
+  "F_esquecido": [
+    "PASS_WITH_KNOWN_DEBT_NE_DEBT_CLOSURE",
+    "PR_HEAD_OR_MERGE_REF_RECEIPT_NE_POSTMERGE_MAIN_RECEIPT",
+    "UNCHANGED_SOURCE_NE_FRESH_EXECUTION",
+    "RUNNER_AND_NODE_RUNTIME_ARE_LIFECYCLE_COMPONENTS",
+    "KNOWN_ABSOLUTE_CLAIM_DEBT_REQUIRES_MONOTONIC_REDUCTION_TO_ZERO_OR_EVIDENCE_BACKED_EXCEPTION"
+  ],
+  "new_TOKEN_VAZIO": [
+    "TOKEN_VAZIO_MAPA_FEEDBACK_EVENT_POSTMERGE_MAIN_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_CLOSURE_RECEIPT",
+    "TOKEN_VAZIO_RLL_FRESH_OWNER_SOURCE_AND_REPLICATION",
+    "TOKEN_VAZIO_DRIVE_APPEND_THIS_CYCLE"
+  ],
+  "resolved_TOKEN_VAZIO": [
+    "TOKEN_VAZIO_MAPA_FEEDBACK_EVENT_REMOTE_CI -> PRESENT_SCOPED_PR_HEAD",
+    "TOKEN_VAZIO_TERMUX_CLAIM_BOUNDARY_REMOTE_EXECUTION -> PRESENT_SCOPED_PR_MERGE_REF"
+  ],
+  "uncertainty_before_after": [
+    {
+      "dimension": "Mapa feedback-event remote CI",
+      "before": "TOKEN_VAZIO_REMOTE_CI",
+      "after": "run/job/steps observed SUCCESS at PR head; post-merge main remains TOKEN_VAZIO"
+    },
+    {
+      "dimension": "Termux claim boundary",
+      "before": "remote execution unknown",
+      "after": "6 tests PASS + validator PASS_WITH_KNOWN_DEBT; four legacy absolute claim classes remain open debt"
+    },
+    {
+      "dimension": "Drive current identity",
+      "before": "write-control error/stale ambiguity",
+      "after": "revision 251 and predecessor 250 resolved; append action unavailable in current connector surface"
+    },
+    {
+      "dimension": "RLL fresh source",
+      "before": "historical owner state",
+      "after": "fresh query not resolvable in this cycle; TOKEN_VAZIO rather than inherited historical claim"
+    }
+  ],
+  "hazards": {
+    "new": [
+      {
+        "id": "TERMUX_LEGACY_ABSOLUTE_CLAIM_LANGUAGE",
+        "type": "SEMANTIC_NEAR_MISS",
+        "incident": false,
+        "state": "EVIDENCED_OPEN_DEBT"
+      }
+    ],
+    "closed_or_mitigated": [
+      {
+        "id": "TERMUX_NEW_CLAIM_INFLATION_PATH",
+        "state": "MITIGATED_SCOPED_BY_FAIL_CLOSED_GATE"
+      },
+      {
+        "id": "MAPA_FEEDBACK_EVENT_REMOTE_CI_UNKNOWN",
+        "state": "RESOLVED_PR_HEAD_SCOPE"
+      }
+    ]
+  },
+  "COMPONENT_LIFECYCLE_LEDGER": [
+    {
+      "component": "Mapa:feedback-event-noregression",
+      "limit_type": "EVENT_TRIGGERED",
+      "calendar_age": "TOKEN_VAZIO",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "starts_stops": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "test_cycles": 1,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": "TOKEN_VAZIO",
+      "dependency_changes": 1,
+      "environment_exposure": "GitHub-hosted PR workflow",
+      "load_stress_proxy": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "feedback-event no-regression gate as merged by PR #300",
+      "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "provenance_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "last_verified_at": "run:32381133697/job:96464330979@PR_HEAD",
+      "next_review_gate": "post-merge main/push terminal receipt",
+      "retirement_revalidation_criteria": "Any material ledger/schema/validator/main change invalidates prior scoped assurance"
+    },
+    {
+      "component": "Termux:claim-language-boundary",
+      "limit_type": "EVENT_TRIGGERED",
+      "calendar_age": "TOKEN_VAZIO",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "starts_stops": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "test_cycles": 1,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": "TOKEN_VAZIO",
+      "dependency_changes": 1,
+      "environment_exposure": "Ubuntu 24.04.4; runner 2.336.0; Node24 forcing Node20-targeted actions",
+      "load_stress_proxy": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "rafacodephi.claim-language-validation/v1",
+      "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "provenance_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "last_verified_at": "run:32381934021/job:96467007292@PR_MERGE_REF",
+      "next_review_gate": "zero legacy absolute claim debt + terminal main receipt",
+      "retirement_revalidation_criteria": "README, debt policy, validator, runner/action runtime, or device-matrix evidence change"
+    },
+    {
+      "component": "Drive:canonical-longitudinal-memory",
+      "limit_type": "EVENT_TRIGGERED",
+      "calendar_age": "TOKEN_VAZIO",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "test_cycles": "TOKEN_VAZIO",
+      "dependency_changes": 0,
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "Google Docs revision chain",
+      "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "provenance_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "last_verified_at": "revision:251",
+      "next_review_gate": "safe append action + compare-and-write + new revision receipt",
+      "retirement_revalidation_criteria": "Any concurrent revision requires fresh read before write"
+    }
+  ],
+  "IMPACT_RADIUS": [
+    {
+      "event": "MAPA_FEEDBACK_EVENT_GATE_MERGED",
+      "components": ["feedback ledger", "event validator", "revalidation event semantics", "R4", "R5", "R11", "R12"],
+      "direct_exposure": "feedback ledger and workflow",
+      "transmitted_load_or_effect": "PR-head PASS may be incorrectly inherited by main",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "post-merge main/push receipt",
+      "false_positive_cost": "one additional CI/revalidation run",
+      "false_negative_cost": "promotion using stale PR-head assurance"
+    },
+    {
+      "event": "TERMUX_CLAIM_BOUNDARY_GATE_EXECUTED",
+      "components": ["README", "claim debt ledger", "claim validator", "device/runtime expectations", "R5", "R7", "R11", "R12"],
+      "direct_exposure": "README language and governance gate",
+      "transmitted_load_or_effect": "absolute language can influence downstream compatibility/runtime interpretation",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "zero-debt validator receipt plus device-scoped evidence where claims require it",
+      "false_positive_cost": "bounded wording may understate capability temporarily",
+      "false_negative_cost": "unsupported universal compatibility/no-crash/production claims"
+    }
+  ],
+  "actions": {
+    "DETECTIVE": "Resolved exact workflows/jobs/steps and exact legacy claim counts.",
+    "PREVENTIVE": "Persist scoped receipts; prevent inheritance from PR evidence to main and prevent new absolute claim inflation.",
+    "PRECAUTIONARY": "claim_allowed=false; unresolved main, physical and scientific evidence remain TOKEN_VAZIO/MISSING.",
+    "ADAPTIVE": "Opened post-merge and zero-debt lifecycle clocks after new evidence.",
+    "CORRECTIVE": "No unsupported code correction applied; legacy Termux README wording remains explicit corrective work.",
+    "MAINTENANCE": "Runner/Node runtime and claim/ledger validators remain event-triggered revalidation surfaces.",
+    "INCIDENT_INVESTIGATION": "No physical incident; Termux semantic near-miss is bounded and evidenced.",
+    "SAFETY_ASSURANCE": "Two remote execution TVs were replaced with scoped terminal evidence.",
+    "ANTI_RECURRENCE": "PASS_WITH_KNOWN_DEBT_NE_CLOSED; PR_HEAD_NE_MAIN; TOKEN_VAZIO_NE_ZERO."
+  },
+  "provenance_changes": [
+    "Mapa feedback-event now has run/job receipt instead of remote-CI uncertainty.",
+    "Termux claim boundary now has run/job/log receipt and exact known-debt vector.",
+    "Drive current revision is concretely resolved as 251 with predecessor 250."
+  ],
+  "contradictions": [],
+  "regressions": [],
+  "routes_promoted": [
+    "R5 scoped: feedback-event PR-head evidence",
+    "R11 scoped: claim-boundary detector execution"
+  ],
+  "routes_blocked": [
+    "R12 broad promotion remains blocked",
+    "R7 physical runtime remains blocked",
+    "R8 scientific claim promotion remains blocked"
+  ],
+  "recommendations_closed": [
+    "Obtain remote execution evidence for feedback-event PR head.",
+    "Obtain remote execution evidence for Termux claim-language detector."
+  ],
+  "recommendations_open": [
+    "Feedback-event post-merge main receipt",
+    "Termux four legacy absolute claims -> zero debt -> main receipt",
+    "RafGitTools combined-main terminal receipt",
+    "Termux execution-time identity + physical-device receipt",
+    "RLL fresh owner source + independent replication",
+    "Drive append when a safe mutation action is exposed"
+  ],
+  "F_next": [
+    "Resolve Mapa PR #300 post-merge main/push run and capture terminal receipt.",
+    "Replace Termux legacy absolute phrases with evidence-scoped wording, reduce debt counts to zero, rerun six tests+validator, then capture main receipt.",
+    "Resolve RafGitTools main run/job/steps/artifacts/hashes and create combined-main receipt.",
+    "Capture Termux executable identity at execution plus install/launch/PID/logcat/device receipt.",
+    "Resolve RLL owner source and require dataset/config/run/output hashes/independent replication before any claim promotion.",
+    "When safe Drive append is available: revision 251 -> compare-and-write -> new revision -> receipt."
+  ]
+}
