@@ -1,0 +1,59 @@
+{
+  "schema": "rafaelia.receipt/v1",
+  "receipt_id": "TERMUX_CLAIM_BOUNDARY_PR377_20260820T1150BRT",
+  "claim_allowed": false,
+  "component": "termux-app-rafacodephi:claim-language-boundary",
+  "authority": "rafaelmeloreisnovo/termux-app-rafacodephi",
+  "source": {
+    "pr": 377,
+    "base_sha": "b6d516cda1c0780c0a06f1891aee7225726cceb3",
+    "head_sha": "a91ce671b461432b8027e098d1bc37ca36aa5c40",
+    "pr_merge_ref_sha": "3710288af424a3b05ce5db63d1c8dd370a49c596",
+    "workflow_run_id": 32381934021,
+    "job_id": 96467007292,
+    "workflow": "Claim Boundary Gate",
+    "job": "claim-language"
+  },
+  "evidence": {
+    "unit_tests": {
+      "count": 6,
+      "result": "PASS"
+    },
+    "validator": {
+      "status": "PASS_WITH_KNOWN_DEBT",
+      "claim_allowed": false,
+      "known_debt": {
+        "fully_compatible": 1,
+        "no_crash_guarantee": 1,
+        "production_ready": 1,
+        "zero_collisions": 1,
+        "guaranteed_compatible": 0
+      }
+    },
+    "runner": {
+      "version": "2.336.0",
+      "os": "Ubuntu 24.04.4 LTS",
+      "image": "ubuntu-24.04@20260816.277.1",
+      "python": "3.12.14",
+      "git": "2.55.0",
+      "node24_forced_for_node20_actions": true
+    }
+  },
+  "state_transition": {
+    "before": "TOKEN_VAZIO_CLAIM_BOUNDARY_REMOTE_EXECUTION",
+    "after": "PRESENT_SCOPED_PR_MERGE_REF"
+  },
+  "boundaries": [
+    "PASS_WITH_KNOWN_DEBT proves the detector bounded new claim inflation; it does not clear the four legacy absolute claims.",
+    "The run checked the PR merge ref, not a merged main state.",
+    "Node24 exposure is observed but is not demonstrated as a cause of failure or correctness."
+  ],
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "incident_count": 0,
+    "near_miss_count": 0,
+    "maintenance_actions": 1,
+    "last_verified_at": "run:32381934021/job:96467007292",
+    "next_review_gate": "replace legacy absolute claims -> debt counters zero -> terminal gate -> merged-main receipt"
+  }
+}
