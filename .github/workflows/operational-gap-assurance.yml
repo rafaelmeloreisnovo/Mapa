@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "scripts/operational_gap_assurance.py"
+      - "scripts/operational_gap_record_gate.py"
       - "scripts/component_lifecycle_assurance.py"
       - "tools/verify_cross_repo_provenance.py"
       - "data/routing/operational-gaps/**"
@@ -14,6 +15,7 @@ on:
     branches: [main]
     paths:
       - "scripts/operational_gap_assurance.py"
+      - "scripts/operational_gap_record_gate.py"
       - "scripts/component_lifecycle_assurance.py"
       - "tools/verify_cross_repo_provenance.py"
       - "data/routing/operational-gaps/**"
@@ -37,6 +39,7 @@ jobs:
         run: |
           python3 -m py_compile \
             scripts/operational_gap_assurance.py \
+            scripts/operational_gap_record_gate.py \
             scripts/component_lifecycle_assurance.py \
             tools/verify_cross_repo_provenance.py
       - name: Operational gap self-test
@@ -47,7 +50,7 @@ jobs:
           count=0
           while IFS= read -r record; do
             count=$((count + 1))
-            python3 scripts/operational_gap_assurance.py "$record"
+            python3 scripts/operational_gap_record_gate.py "$record"
           done < <(find data/routing/operational-gaps -type f -name '*.json' -print | sort)
           test "$count" -gt 0
       - name: Validate component lifecycle ledgers
