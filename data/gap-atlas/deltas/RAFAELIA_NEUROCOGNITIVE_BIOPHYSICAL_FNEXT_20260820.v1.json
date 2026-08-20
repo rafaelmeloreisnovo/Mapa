@@ -1,0 +1,219 @@
+{
+  "schema": "RAFAELIA_GAP_ATLAS_DELTA_V1",
+  "delta_id": "RGA-DELTA-NEUROBIO-20260820-V1",
+  "date": "2026-08-20",
+  "mode": "APPEND_ONLY_EVIDENCE_FIRST",
+  "claim_allowed": false,
+  "scope": [
+    "cognitive_neuroscience",
+    "neurolinguistics",
+    "intentional_behavior",
+    "epigenetics",
+    "dietary_exposure",
+    "bioelectricity",
+    "mechanotransduction",
+    "thermosensation",
+    "electromagnetic_fields",
+    "ionizing_radiation",
+    "ultraweak_photon_emission",
+    "social_norm_learning"
+  ],
+  "invariants": [
+    "DNA_SEQUENCE != DNA_METHYLATION != GENE_EXPRESSION != DNA_DAMAGE",
+    "INTENTION != DIRECT_GENOME_EDITING",
+    "SOCIAL_FIELD_METAPHOR != PHYSICAL_ELECTROMAGNETIC_FIELD",
+    "IONIZING_RADIATION != NON_IONIZING_EMF",
+    "MOLECULAR_POLARITY != MEMBRANE_ELECTRICAL_POLARIZATION != CELL_POLARITY",
+    "EVIDENCE_FOUND != GATE_CLOSED",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != ZERO"
+  ],
+  "priority_rule": "Urgency is assigned by risk of conceptual conflation, false causal promotion, and downstream scientific regression; not by novelty or rhetorical importance.",
+  "records": [
+    {
+      "gap_id": "GAP-NEURO-SEMANTIC-BOUNDARY-001",
+      "priority": "P0",
+      "state": "PARTIAL_EVIDENCE_BOUNDARY_DEFINED",
+      "scope": "Foundational ontology for cross-scale neuroscience/biology claims",
+      "known": [
+        "DNA sequence change, DNA damage/adducts, DNA methylation, chromatin state and gene expression are distinct endpoints.",
+        "Molecular polarity, membrane electrical polarization and anatomical/cellular polarity are distinct concepts.",
+        "Physical electromagnetic fields require measurable frequency/intensity/dosimetry and must not be inferred from social or metaphorical uses of field."
+      ],
+      "unknown": [
+        "A canonical RAFAELIA ontology linking each term to measurement units, tissue/sample type and admissible evidence class is not yet attached."
+      ],
+      "falsifier": "A downstream claim uses one endpoint as proof of another without an explicit validated bridge, e.g. DNA adduct as inherited mutation or methylation as sequence editing.",
+      "acceptance_criterion": "Every claim specifies endpoint, tissue, timescale, exposure/intervention, measurement method, comparator and causal status.",
+      "next_gate": "Create typed claim grammar before promoting any cross-scale causal claim.",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-INTENT-EPIGENETIC-MEDIATION-001",
+      "priority": "P0",
+      "state": "EVIDENCE_FOUND_GATE_OPEN",
+      "scope": "Conscious/propositional action -> behavior -> physiology -> epigenetic/gene-regulatory state",
+      "known": [
+        "Exercise is associated with reproducible changes in DNA methylation and transcriptional adaptation in human skeletal muscle literature.",
+        "Psychobehavioral intervention studies report DNA methylation differences, but the 2025 scoping literature describes small/heterogeneous studies and unresolved biological significance.",
+        "These findings support mediated biological effects of behavior; they do not establish voluntary locus-specific editing of DNA sequence."
+      ],
+      "unknown": [
+        "Causal mediation from a specified conscious intention through a measured physiological mediator to a specified epigenetic locus and functional outcome remains unresolved in the general case.",
+        "Direct intentional mutation or sequence editing without a molecular editing mechanism remains TOKEN_VAZIO."
+      ],
+      "falsifier": "Effects disappear under randomized active-control intervention, fail independent replication, or are explained by cell-composition/batch/confounding rather than within-cell regulatory change.",
+      "acceptance_criterion": "Preregistered controlled intervention with baseline/post sampling, cell-composition control, DNAm plus transcript/protein or physiological readout, mediation analysis, and independent replication.",
+      "next_gate": "Use exercise as the high-evidence positive-control intervention; keep psychobehavioral interventions as a separate lower-confidence branch. Do not test direct sequence-editing claims without a defined molecular mechanism.",
+      "evidence_refs": [
+        "PMID:38561436",
+        "PMID:40448426"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-DIET-MOLECULAR-ENDPOINTS-001",
+      "priority": "P0",
+      "state": "PARTIAL_EVIDENCE_EXPOSURES_SPLIT",
+      "scope": "Partially hydrogenated/trans fat, free sugar, fried food and non-sugar sweetened beverages",
+      "known": [
+        "Industrially produced trans fat is an established cardiovascular dietary risk and is targeted for elimination by WHO.",
+        "WHO recommends limiting free sugars and treats non-sugar sweeteners as a heterogeneous class with a conditional recommendation against their use for long-term weight control/NCD prevention.",
+        "A human fried-food study reported increased urinary acrolein metabolite and buccal acrolein-DNA adducts after fried chicken/French fries exposure.",
+        "Nutrition can influence DNA methylation, but intervention evidence remains heterogeneous and tissue-/diet-specific."
+      ],
+      "unknown": [
+        "A fixed mutation or heritable DNA-sequence change caused by ordinary consumption of fries or zero-sugar soda is not established by these findings.",
+        "A class-wide DNA/epigenetic effect for all zero-sugar beverages is TOKEN_VAZIO because sweetener identity, dose, matrix and endpoints differ."
+      ],
+      "falsifier": "A claimed class effect fails when exposures are separated by compound/dose or when DNA adduct, methylation and sequence mutation endpoints are measured independently.",
+      "acceptance_criterion": "Exposure-specific ledger records ingredient/compound, dose, cooking process, comparator, metabolic endpoints, DNA-damage endpoints and epigenetic endpoints separately.",
+      "next_gate": "For fried food, replicate standardized acrolein/adduct measurements and distinguish reversible damage/adduct from fixed mutation. For zero-sugar beverages, use ingredient-specific randomized crossover/substitution designs rather than class-wide inference.",
+      "evidence_refs": [
+        "WHO:healthy-diet:2026-01-26",
+        "WHO:trans-fat:2024-01-24",
+        "WHO:non-sugar-sweeteners-guideline",
+        "PMID:31139379",
+        "PMID:39077104",
+        "PMID:41596220",
+        "PMID:42549039"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-EMF-RADIATION-DOSIMETRY-001",
+      "priority": "P0",
+      "state": "BOUNDARY_STRONG_MECHANISM_SPECIFIC_GATE_OPEN",
+      "scope": "Electromagnetic field, electric potential, radiofrequency and ionizing radiation",
+      "known": [
+        "Ionizing radiation has sufficient energy to ionize molecules and can produce cellular DNA damage.",
+        "RF electromagnetic exposure must be specified by frequency, field strength/power density or SAR, geometry and duration; established protection limits are dosimetry-based.",
+        "ICNIRP identifies tissue heating as the substantiated RF-EMF effect relevant to human health/safety and separately maintains RF knowledge-gap statements."
+      ],
+      "unknown": [
+        "A generic claim that environmental non-ionizing EMF programs cognition or DNA without dosimetry and a reproducible endpoint remains TOKEN_VAZIO."
+      ],
+      "falsifier": "Effect vanishes under blinded sham exposure, thermal matching, calibrated dosimetry, preregistered endpoint and independent replication.",
+      "acceptance_criterion": "Every EMF claim binds frequency, waveform, E/B or power/SAR, exposure geometry, duration, tissue temperature, sham condition, endpoint and uncertainty.",
+      "next_gate": "Dosimetry-first blinded/sham protocol; separate thermal, induced-current and hypothesized non-thermal mechanisms before biological interpretation.",
+      "evidence_refs": [
+        "ICNIRP:RF-Guidelines-2020",
+        "ICNIRP:RF-Knowledge-Gaps-2025",
+        "IARC:European-Code-Ionising-Non-Ionising-Radiation"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-BIOELECTRIC-MECHANO-THERMO-001",
+      "priority": "P1",
+      "state": "MECHANISM_SUPPORTED_SCOPE_LIMITED",
+      "scope": "Membrane potential, mechanotransduction and thermosensation",
+      "known": [
+        "Bioelectric signaling is not restricted to neurons; membrane potential and ionic flux participate in multiple cell/tissue processes.",
+        "PIEZO1/2 are mechanically activated cation channels providing a well-established route from force to ionic signaling.",
+        "Thermo-sensitive TRP channels provide a well-established route from temperature changes to sensory/autonomic signaling."
+      ],
+      "unknown": [
+        "A universal mapping from a given pressure or temperature perturbation to a specific gene-expression program is not established and is tissue/context dependent."
+      ],
+      "falsifier": "Proposed downstream effect persists when the nominated channel/voltage/Ca2+ pathway is selectively blocked or rescued in a way inconsistent with the causal model.",
+      "acceptance_criterion": "Perturbation -> sensor/channel -> Vm/ion/Ca2+ readout -> transcriptional response is measured with inhibition/rescue and dose-response in a specified tissue/model.",
+      "next_gate": "Use cell/organoid causal perturbation with voltage/Ca2+ imaging, channel inhibition or genetic perturbation, transcript readout and rescue.",
+      "evidence_refs": [
+        "PMID:39873662",
+        "PMID:39251883",
+        "PMID:39793986"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-LANGUAGE-SOCIAL-NEURAL-001",
+      "priority": "P1",
+      "state": "NETWORK_EVIDENCE_SUPPORTED_CROSS_SCALE_GATE_OPEN",
+      "scope": "Neurolinguistics, social norms, tradition and behavior",
+      "known": [
+        "The core human language network includes strongly interconnected left frontal and temporal regions and is distinguishable from several perceptual, motor and domain-general systems.",
+        "Social norms can be modeled through learning, reinforcement, cultural transmission and social-network dynamics; the evidence does not require a physical electromagnetic social field.",
+        "Freudian id/ego/superego are historical theoretical constructs and must not be promoted as anatomical brain modules."
+      ],
+      "unknown": [
+        "A direct language/tradition -> specific epigenetic locus causal pathway is not established without an intermediate behavioral/physiological mechanism.",
+        "Any one-to-one id/ego/superego -> brain-region identity remains unsupported."
+      ],
+      "falsifier": "A proposed cross-scale effect cannot be distinguished from general cognition, socioeconomic/environmental covariates, reinforcement history or other mediators.",
+      "acceptance_criterion": "Separate language-network measurement, social-learning variables, behavior, physiological mediators and molecular endpoints; test mediated paths rather than semantic equivalence.",
+      "next_gate": "Model society/tradition -> learning/reinforcement -> behavior as the primary causal route; only add molecular endpoints when a measurable mediator is specified.",
+      "evidence_refs": [
+        "PMID:38609551",
+        "AnnualReviewPsychology:75:341-378:2024"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-UPE-BRAIN-COMMUNICATION-001",
+      "priority": "P2_HIGH_FALSIFICATION_VALUE",
+      "state": "CONTESTED_TOKEN_VAZIO",
+      "scope": "Endogenous ultraweak photon emission as extracranial marker or neural communication channel",
+      "known": [
+        "Ultraweak photon emission from biological metabolism is a measurable phenomenon.",
+        "A 2025 paper proposed task/rhythm-related brain UPE readout and explicitly noted uncertainty about inferring brain states.",
+        "A 2026 experimental critique reported serious background-light contamination concerns, strong scalp/skull attenuation below 600 nm and likely scalp dominance for current extracranial PMT measurements."
+      ],
+      "unknown": [
+        "Reliable extracranial measurement of brain-origin UPE under background-free conditions is unresolved.",
+        "Functional neural communication carried by endogenous UPE in humans remains TOKEN_VAZIO."
+      ],
+      "falsifier": "Signal is explained by detector dark counts/background light/scalp emission, fails optical attenuation controls, or does not replicate with preregistered concurrent neural measures.",
+      "acceptance_criterion": "Independent replication in calibrated dark enclosure with spectral sensitivity/attenuation model, scalp/background controls, blinded tasks, concurrent EEG/MEG where feasible, preregistered signal-detection criterion and source-localization evidence.",
+      "next_gate": "Treat the 2026 critique as mandatory adversarial control set; do not promote UPE to neural communication until source attribution survives it.",
+      "evidence_refs": [
+        "PMID:38420619",
+        "PMID:40124516",
+        "PMID:42460881"
+      ],
+      "claim_allowed": false
+    }
+  ],
+  "execution_order": [
+    "GAP-NEURO-SEMANTIC-BOUNDARY-001",
+    "GAP-INTENT-EPIGENETIC-MEDIATION-001",
+    "GAP-DIET-MOLECULAR-ENDPOINTS-001",
+    "GAP-EMF-RADIATION-DOSIMETRY-001",
+    "GAP-BIOELECTRIC-MECHANO-THERMO-001",
+    "GAP-LANGUAGE-SOCIAL-NEURAL-001",
+    "GAP-UPE-BRAIN-COMMUNICATION-001"
+  ],
+  "f_next_terminal_rule": "A next step closes only when its declared acceptance criterion has an attached reproducible receipt or authoritative external evidence appropriate to the claim. Literature discovery alone changes state to EVIDENCE_FOUND, never automatically to PASS.",
+  "destination_route": {
+    "mapa": "identity/relation/state/dependency/falsifier registration",
+    "papers": "literature synthesis, claim ledger, limits and references",
+    "rafpolimata": "deterministic analysis/test harnesses where computationally applicable",
+    "external_or_lab": "biological experiments requiring wet-lab/human protocols",
+    "drive": "longitudinal editorial memory and source custody"
+  },
+  "R3": {
+    "F_ok": "Seven cross-scale gaps are typed, prioritized and linked to explicit falsifiers/acceptance criteria using current literature and RAFAELIA authority boundaries.",
+    "F_gap": "No new wet-lab or independent biological replication was executed; broad causal promotion remains blocked and UPE brain communication remains TOKEN_VAZIO.",
+    "F_next": "Build the typed claim grammar/ledger first, then route each scientific claim to Papers/RafPolimata or an external experimental protocol without promoting Mapa state into scientific validity."
+  }
+}
