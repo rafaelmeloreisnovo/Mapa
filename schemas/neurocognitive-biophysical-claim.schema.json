@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/neurocognitive-biophysical-claim.schema.json",
+  "title": "RAFAELIA Neurocognitive Biophysical Claim V1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["claim_id","gap_id","domain","claim_text","claim_class","evidence_state","endpoint_type","falsifier","acceptance_criterion","next_gate","claim_allowed","provenance"],
+  "properties": {
+    "claim_id": {"type":"string","minLength":1},
+    "gap_id": {"type":"string","pattern":"^GAP-"},
+    "domain": {"type":"string"},
+    "claim_text": {"type":"string","minLength":8},
+    "claim_class": {"enum":["MECHANISTIC","CAUSAL","ASSOCIATIONAL","METHODOLOGICAL","HISTORICAL_MODEL","METAPHORICAL"]},
+    "evidence_state": {"enum":["PASS","FAIL","DRAFT","BLOCKED","TOKEN_VAZIO","EVIDENCE_FOUND_GATE_OPEN","PARTIAL"]},
+    "endpoint_type": {"enum":["DNA_SEQUENCE","DNA_DAMAGE_ADDUCT","DNA_METHYLATION","CHROMATIN","GENE_EXPRESSION","PROTEIN","METABOLIC","MEMBRANE_POTENTIAL","ION_FLUX","NEURAL_ACTIVITY","BEHAVIOR","SOCIAL_LEARNING","UPE","OTHER"]},
+    "exposure": {"type":["object","null"]},
+    "measurement": {"type":["object","null"]},
+    "mediators": {"type":"array","items":{"type":"string"}},
+    "falsifier": {"type":"string","minLength":8},
+    "acceptance_criterion": {"type":"string","minLength":8},
+    "next_gate": {"type":"string","minLength":8},
+    "claim_allowed": {"const": false},
+    "provenance": {
+      "type":"object",
+      "required":["source_ids","observed_at"],
+      "properties": {
+        "source_ids":{"type":"array","items":{"type":"string"},"minItems":1},
+        "observed_at":{"type":"string"},
+        "repo":{"type":["string","null"]},
+        "ref":{"type":["string","null"]},
+        "path":{"type":["string","null"]},
+        "hash":{"type":["string","null"]}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties":{"endpoint_type":{"const":"DNA_SEQUENCE"}}},
+      "then": {"properties":{"measurement":{"type":"object"}}}
+    },
+    {
+      "if": {"properties":{"domain":{"const":"EMF_RADIATION"}}},
+      "then": {
+        "required":["exposure"],
+        "properties":{"exposure":{"type":"object","required":["radiation_class","frequency_or_energy","dose_or_dosimetry","duration","geometry","thermal_control"]}}
+      }
+    },
+    {
+      "if": {"properties":{"endpoint_type":{"const":"UPE"}}},
+      "then": {"required":["measurement"],"properties":{"measurement":{"type":"object","required":["background_control","detector_characterization","source_attribution_control"]}}}
+    }
+  ],
+  "x-rafaelia-invariants": [
+    "DNA_SEQUENCE != DNA_METHYLATION != GENE_EXPRESSION != DNA_DAMAGE_ADDUCT",
+    "INTENTION != DIRECT_GENOME_EDITING",
+    "IONIZING_RADIATION != NON_IONIZING_EMF",
+    "EVIDENCE_FOUND != GATE_CLOSED",
+    "TOKEN_VAZIO != ZERO",
+    "claim_allowed=false until claim-specific gate closure"
+  ]
+}
