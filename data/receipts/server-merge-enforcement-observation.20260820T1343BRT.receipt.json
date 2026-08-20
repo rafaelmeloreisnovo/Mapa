@@ -1,0 +1,56 @@
+{
+  "schema_version": "rafaelia.receipt/server-merge-enforcement-observation/v1",
+  "receipt_id": "SERVER_MERGE_ENFORCEMENT_OBSERVATION_20260820T1343BRT",
+  "observed_at": "2026-08-20T13:43:11-03:00",
+  "claim_allowed": false,
+  "promotion_allowed": false,
+  "epistemic_boundary": "branch metadata is evidence of observed branch-protection state; it does not enumerate unavailable rulesets, bypass actors, or prove causality for every merge",
+  "observations": [
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "branch": "main",
+      "commit_sha": "4002ced01db77b879888d08b1737dfe4430017b7",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_checks_enforcement": "off",
+      "required_status_contexts": [],
+      "required_status_checks": [],
+      "state": "NOT_ENFORCED_OBSERVED",
+      "evidence_pointer": "GET /repos/rafaelmeloreisnovo/Mapa/branches/main"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "branch": "main",
+      "commit_sha": "062f09986840db24b684ba5affde1fbf192f35c7",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_checks_enforcement": "off",
+      "required_status_contexts": [],
+      "required_status_checks": [],
+      "state": "NOT_ENFORCED_OBSERVED",
+      "evidence_pointer": "GET /repos/rafaelmeloreisnovo/RafGitTools/branches/main"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "branch": "main",
+      "commit_sha": "92d80377116c4fcbfd6f572247ad65201b75c5e6",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_checks_enforcement": "off",
+      "required_status_contexts": [],
+      "required_status_checks": [],
+      "state": "NOT_ENFORCED_OBSERVED",
+      "evidence_pointer": "GET /repos/rafaelmeloreisnovo/termux-app-rafacodephi/branches/main"
+    }
+  ],
+  "known_event_lineage": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "predecessor_gap": "POLICY_DECISION_NE_SERVER_SIDE_MERGE_ENFORCEMENT",
+    "predecessor_pr": 306,
+    "predecessor_merge_sha": "4002ced01db77b879888d08b1737dfe4430017b7",
+    "refined_mechanism": "CLASSIC_BRANCH_PROTECTION_DISABLED_AND_REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+    "ruleset_or_bypass_path": "TOKEN_VAZIO_NOT_INSPECTED_BY_AVAILABLE_ENDPOINT"
+  },
+  "falsifier": "After server-side protection is configured, the same branch endpoint must report protected=true, protection.enabled=true, and enforced required status checks; a synthetic zero-approval PR must remain server-side non-mergeable until the qualifying approval gate is satisfied.",
+  "next_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+}
