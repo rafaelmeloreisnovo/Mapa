@@ -19,9 +19,20 @@
       "component": "Mapa:operational-gap-assurance",
       "route": ["R5", "R11"],
       "receipt_type": "LEGACY_SCHEMA_COMPATIBILITY",
+      "state": "PRESENT",
+      "receipt": "data/receipts/operational-gap-schema-compat.terminal.20260819T2347BRT.receipt.json",
+      "observed_scope": "terminal schema-compat assurance; historical records remain claim_allowed=false and TOKEN_VAZIO_REVALIDATION_REQUIRED",
+      "next_gate": "revalidate on material schema vocabulary, record-gate or validator change"
+    },
+    {
+      "id": "MAPA_RDGS_STILL_GOOD",
+      "component": "Mapa:REAL-DONE-GOOD-STILL_GOOD assurance",
+      "route": ["R5", "R11", "R12"],
+      "receipt_type": "POST_MERGE_TERMINAL_EXECUTION",
       "state": "TOKEN_VAZIO",
-      "reason": "legacy records must remain historical and fail-closed until superseding canonical records exist",
-      "next_gate": "operational-gap-assurance terminal run with legacy gate"
+      "receipt": "data/receipts/rdgs-still-good-revalidation.20260820T0042BRT.receipt.json",
+      "reason": "PR #295 merged and PR-scoped CI was observed, but the V2-declared postmerge evidence artifact is absent on main and no reconstructible post-merge main/push run receipt was observed",
+      "next_gate": "post-merge run -> jobs -> steps -> exit codes -> content-addressed evidence artifact -> receipt"
     },
     {
       "id": "RAFGITTOOLS_COMBINED_MAIN",
@@ -29,6 +40,8 @@
       "route": ["R5", "R6", "R11", "R12"],
       "receipt_type": "POST_MERGE_TERMINAL_EXECUTION",
       "state": "MISSING",
+      "source_commit": "0c453be12b31eb21c85cf6295b740c0d54365166",
+      "detector_limit": "available commit-workflow wrapper is PR-scoped; generic actions/runs REST query was unavailable through connector",
       "next_gate": "main/push run -> jobs -> steps -> artifacts -> hashes"
     },
     {
@@ -70,6 +83,7 @@
       "route": ["R7", "R11", "R12"],
       "receipt_type": "APK_INSTALL_LAUNCH_LOGCAT_DEVICE",
       "state": "MISSING",
+      "source_commit": "fb18bbc4794dace1cc3480519681191f83152af6",
       "next_gate": "APK hash -> install -> launch -> PID/activity -> logcat -> device receipt"
     },
     {
@@ -118,7 +132,18 @@
       "route": ["R8", "R11", "R12"],
       "receipt_type": "DATASET_PIPELINE_INFERENCE_REPLICATION_CLAIM",
       "state": "MISSING",
+      "source_commit": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe",
       "next_gate": "dataset identity -> config -> run -> outputs -> hashes -> independent replication -> claim gate"
+    },
+    {
+      "id": "DRIVE_CANONICAL_APPEND_CAPABILITY",
+      "component": "Drive:canonical-longitudinal-memory",
+      "route": ["R9", "R11"],
+      "receipt_type": "DRIVE_REVISION_APPEND",
+      "state": "PRESENT",
+      "receipt": "data/receipts/drive-canonical-omega-append.20260819T2347BRT.receipt.json",
+      "observed_scope": "append operation observed with returned revisionId; does not prove execution or scientific validity",
+      "next_gate": "capture new revision receipt after each material append"
     }
   ],
   "selection_rule": "P0 first: INVALID/SUPERSEDED provenance integrity, then MISSING receipts on promotion/runtime boundaries, then STALE dependency assurance, then TOKEN_VAZIO evidence production",
