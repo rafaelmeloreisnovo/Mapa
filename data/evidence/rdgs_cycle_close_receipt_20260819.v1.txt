@@ -1,0 +1,45 @@
+RAFAELIA Ω — RECEIPT — REAL/DONE/GOOD/STILL_GOOD V1
+
+date=2026-08-19
+state=VERIFIED_LIMITED
+claim_allowed=false
+append_only=true
+scope=governance_contract_plus_c41_example_plus_local_validator
+branch=governance/real-done-good-still-good-v1-20260819
+
+contract_path=docs/governance/REAL_DONE_GOOD_STILL_GOOD_INVARIANT_V1.md
+contract_local_sha256=9c78c3a9c4215e435f79a6cbb26e69182122ac6e7e373cddac0da604a9315066
+contract_git_blob_sha=e5a9444eceba1c86c23fdf3a1bd8bce22e774e59
+contract_commit=3399a35fd030679c9837bf893f286125b571e44d
+
+example_path=data/governance/examples/c41.real-done-good-still-good.v1.json
+example_local_sha256=7d2946b61fbb3a621ba9be30caf392d8cec0af1f1fff1c482a7970fc86e58c50
+example_git_blob_sha=e91a1140ac142aa632673ccab830ef2121c04344
+example_commit=49358118ac1cb4b5e640c244e962e81c663b2e25
+
+validator_path=tools/validate_rdgs.py
+validator_local_sha256=5e4e6d27bb87a0f5b87b369d5fd271ff0a134d187f5629a93a0b4458f32ce465
+validator_git_blob_sha=c4741f1a9532969dd3af984303fda9396e23ae39
+validator_commit=413277542d7879a9dc8cb50e5bfab86704de8a88
+
+local_command=python3 validate_rdgs.py c41.real-done-good-still-good.v1.json
+local_exit=0
+local_output=PASS ✓Ω_00421_ALLOCATOR_STALE_LOCK_RECOVERY repository_main_plus_local_posix_evidence REAL=True DONE=True GOOD=True STILL_GOOD=TOKEN_VAZIO_REVALIDATION_REQUIRED
+
+source_receipt=RAFAELIA_RECEIPT_EXECUTIVO_C41_2026-08-12.txt
+source_receipt_body_sha256=fd11a668426926d8eba235bbc37e37b3c176903c65f48e9b97dd1adf4a5d69d2
+source_pr190_state=merged
+source_pr190_merge_commit=87bab20b07d8a2eca784de4989f829937fdd441b
+source_pr263_state=merged
+source_pr263_merge_commit=a399afb46d324bad438533711f98514834fa2449
+
+classification_c41_real=true
+classification_c41_done=true
+classification_c41_good=true
+classification_c41_still_good=TOKEN_VAZIO_REVALIDATION_REQUIRED
+
+F_ok=contract materialized; validator materialized; C41 typed example passes local fail-closed validator; historical receipt preserved; current PR190 merged state observed
+F_gap=independent Termux/Android runtime not executed in this cycle; second-host and cross-host/shared-filesystem flock semantics remain TOKEN_VAZIO; no remote CI receipt for this branch yet
+F_next=open reviewable PR; compare branch to main; merge only if repository diff is limited to intended governance artifacts; after merge index Drive/Memory with merge identity; later independent runtime may promote STILL_GOOD within its own scope
+
+closure_rule=cycle closes for governance/materialization scope when contract+example+validator+receipt are versioned and indexed; physical/runtime scope remains open by design

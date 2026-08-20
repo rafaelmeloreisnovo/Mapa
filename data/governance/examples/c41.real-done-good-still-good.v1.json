@@ -1,0 +1,61 @@
+{
+  "item_id": "✓Ω_00421_ALLOCATOR_STALE_LOCK_RECOVERY",
+  "object_ref": "rafaelmeloreisnovo/Mapa#PR190",
+  "scope": "repository_main_plus_local_posix_evidence",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "real": {
+    "state": true,
+    "evidence_refs": [
+      "PR190 merged=true",
+      "merge_commit=87bab20b07d8a2eca784de4989f829937fdd441b",
+      "head=a5469d0605f404ba69eef08d983a1f6b81ae4147",
+      "receipt_body_sha256=fd11a668426926d8eba235bbc37e37b3c176903c65f48e9b97dd1adf4a5d69d2"
+    ]
+  },
+  "done": {
+    "state": true,
+    "obligation": "materialize safe stale-lock recovery and regression/concurrency coverage in repository; local POSIX closure gate 9/9",
+    "closure_gate_refs": [
+      "C41 local POSIX tests 9/9 PASS",
+      "PR190 merged on 2026-08-12"
+    ]
+  },
+  "good": {
+    "state": true,
+    "quality_gate_refs": [
+      "idempotent replay PASS",
+      "registry unchanged after conflict PASS"
+    ],
+    "security_gate_refs": [
+      "live owner never stolen PASS",
+      "conflicting provider REJECT"
+    ],
+    "anti_regression_refs": [
+      "C41 regressions_after=0_ACTIVE_UNCONTAINED",
+      "historical C31 remains CONTAINED_NOT_ERASED"
+    ]
+  },
+  "still_good": {
+    "state": "TOKEN_VAZIO_REVALIDATION_REQUIRED",
+    "revalidation_refs": [
+      "PR263 merged anti-regression latest-four receipts is ecosystem continuity evidence but is not a direct Termux/cross-host revalidation of allocator"
+    ]
+  },
+  "dependencies": [
+    "Python3",
+    "POSIX fcntl.flock semantics"
+  ],
+  "gaps": [
+    "TOKEN_VAZIO_TERMUX_INDEPENDENT_RUNTIME",
+    "TOKEN_VAZIO_SECOND_HOST",
+    "TOKEN_VAZIO_FLOCK_CROSS_HOST_SHARED_FILESYSTEM_SEMANTICS"
+  ],
+  "falsifier": "allocator steals live lock; orphan lock remains permanently blocking; conflicting provider accepted; registry corrupted; or a prior PASS becomes FAIL",
+  "next_probe": "run merged allocator/tests on independent Termux/Android POSIX, verify file hashes and emit stdout/stderr/exit receipt; separately test cross-host/shared-filesystem semantics",
+  "claim_allowed": false,
+  "provenance": [
+    "RAFAELIA_RECEIPT_EXECUTIVO_C41_2026-08-12.txt",
+    "GitHub PR190 current metadata observed 2026-08-19",
+    "GitHub PR263 current metadata observed 2026-08-19"
+  ]
+}
