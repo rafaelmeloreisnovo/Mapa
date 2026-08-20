@@ -1,0 +1,54 @@
+{
+  "schema_version": "rafaelia.omega-federated-cycle-supplement/v1",
+  "cycle_id": "OMEGA_FEDERATED_20260820T1343BRT",
+  "supplement_observed_at": "2026-08-20T13:51:22-03:00",
+  "claim_allowed": false,
+  "predecessor": "data/routing/cycles/omega-federated-cycle-20260820T1343BRT.v1.json",
+  "terminal_probe": {
+    "workflow": "Server Merge Enforcement Assurance",
+    "run_id": 32394327668,
+    "job_id": 96507528849,
+    "source_head_sha": "c193affb52619fb99ed329a774d5e541dc05ff79",
+    "fixtures": "4/4 SUCCESS",
+    "live_probe": "FAILURE_EXIT_2_EXPECTED_FAIL_CLOSED",
+    "finding": "NOT_ENFORCED_OBSERVED",
+    "failure_modes": [
+      "BRANCH_PROTECTION_DISABLED",
+      "PROTECTION_NOT_ENABLED",
+      "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+      "NO_REQUIRED_STATUS_CHECKS_OBSERVED"
+    ]
+  },
+  "F_ok_delta": [
+    "Detector fixtures executed terminally 4/4 PASS",
+    "Live Mapa/main configuration was rejected by the detector exactly as designed",
+    "Assurance boundary report was printed after the failing live probe",
+    "Expected red is now classified as evidence of an open P0 rather than detector regression"
+  ],
+  "F_gap_delta": [
+    "Server-side protection remains unconfigured/unobserved as enforced",
+    "Promotion Control exact required server context remains TOKEN_VAZIO",
+    "Ruleset and bypass path remain TOKEN_VAZIO"
+  ],
+  "uncertainty_before_after": {
+    "detector_effectiveness": "IMPLEMENTED_NOT_EXECUTED -> TERMINALLY_FALSIFIED_AND_WORKING",
+    "server_enforcement": "STATIC_ENDPOINT_OBSERVATION -> STATIC_ENDPOINT_PLUS_INDEPENDENT_CI_LIVE_PROBE",
+    "workflow_red_semantics": "UNKNOWN -> EXPECTED_FAIL_CLOSED_FINDING"
+  },
+  "lifecycle_delta": {
+    "component": "Mapa:server-side-merge-governance-detector",
+    "test_cycles": 1,
+    "near_miss_count": 0,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "last_verified_at": "run:32394327668/job:96507528849",
+    "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+    "limit_type": "EVENT_TRIGGERED"
+  },
+  "F_next_exact": [
+    "CONFIGURE_SERVER_SIDE_BRANCH_OR_RULESET_ENFORCEMENT",
+    "REPROBE_LIVE_BRANCH_UNTIL_DETECTOR_PASS_SCOPED",
+    "SYNTHETIC_NON_DRAFT_ZERO_APPROVAL_PR_MUST_REMAIN_SERVER_UNMERGEABLE",
+    "ONE_QUALIFYING_INDEPENDENT_APPROVAL_THEN_MANUAL_ELIGIBILITY_RECEIPT"
+  ]
+}
