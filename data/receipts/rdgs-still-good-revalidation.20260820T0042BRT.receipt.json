@@ -1,0 +1,97 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "rdgs-still-good-revalidation.20260820T0042BRT",
+  "claim_allowed": false,
+  "scope": "REAL->DONE->GOOD->STILL_GOOD post-integration assurance after Mapa PR #295",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "base": "main",
+    "pr": 295,
+    "head_sha": "23372017b0e8aa1547416f1cc70b65911b779589",
+    "merge_commit_sha": "6e05a20c26920cf1034b498c615742c072451f8a",
+    "merged_at": "2026-08-20T03:00:30Z",
+    "prior_receipt": "data/evidence/rdgs_cycle_close_receipt_20260819.v2.txt"
+  },
+  "observed_execution": [
+    {
+      "workflow": "CI",
+      "run_id": 32331304153,
+      "event": "pull_request",
+      "conclusion": "success",
+      "scope": "PR exact-head run"
+    },
+    {
+      "workflow": "Branch Topology Gate",
+      "run_id": 32331304144,
+      "event": "pull_request",
+      "conclusion": "success",
+      "scope": "PR exact-head run"
+    },
+    {
+      "workflow": "Promotion Control V1",
+      "run_id": 32331304202,
+      "event": "pull_request",
+      "conclusion": "failure",
+      "scope": "PR exact-head run; failure mechanism not resolved in this receipt"
+    }
+  ],
+  "detector_limits": {
+    "jobs_steps_probe": "TOKEN_VAZIO_ENDPOINT_RETURNED_404",
+    "post_merge_push_run": "TOKEN_VAZIO_NOT_OBSERVED_WITH_AVAILABLE_PR_SCOPED_RUN_DETECTOR"
+  },
+  "near_miss": {
+    "type": "DECLARED_POSTMERGE_EVIDENCE_ARTIFACT_NOT_PRESENT",
+    "declared_artifact": "data/evidence/rdgs_postmerge_validation_20260819.txt",
+    "probe_result": "NOT_FOUND_ON_MAIN",
+    "declared_workflow": ".github/workflows/rdgs-invariant.yml",
+    "workflow_search_result": "NOT_FOUND_WITH_AVAILABLE_CODE_SEARCH",
+    "impact": "A merged PR plus PR-scoped green CI could be overpromoted to STILL_GOOD without the post-integration evidence required by the invariant."
+  },
+  "lifecycle": {
+    "component": "Mapa:RDGS-assurance-chain",
+    "event": "PR295_MERGED_WITH_DECLARED_POSTMERGE_EVIDENCE_NOT_RECONSTRUCTIBLE",
+    "limit_type": "EVENT_TRIGGERED",
+    "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO",
+    "test_cycles": "TOKEN_VAZIO",
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": "TOKEN_VAZIO",
+    "dependency_changes": 1,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "provenance_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "last_verified_at": "TOKEN_VAZIO_POSTMERGE_TERMINAL_RECEIPT",
+    "next_review_gate": "RDGS_POSTMERGE_RUN_JOB_STEP_ARTIFACT_RECEIPT"
+  },
+  "impact_radius": {
+    "affected_routes": ["R5", "R11", "R12"],
+    "direct_exposure": true,
+    "transmitted_load_or_effect": "RDGS status can influence anti-regression and promotion semantics",
+    "hidden_damage_or_hidden_state_possible": true,
+    "inspection_required": true,
+    "revalidation_required": true,
+    "replacement_or_retirement_candidate": false,
+    "evidence_needed": "post-merge main/push run with jobs, steps, exit codes and a content-addressed evidence artifact",
+    "false_positive_cost": "extra post-merge validation",
+    "false_negative_cost": "silent promotion from GOOD to STILL_GOOD without reconstructible post-integration evidence"
+  },
+  "actions": {
+    "detective": ["resolved PR #295 exact head and merge commit", "resolved PR-scoped workflow conclusions", "probed declared postmerge artifact", "searched declared RDGS workflow"],
+    "preventive": ["do not inherit STILL_GOOD from merge or PR-scoped CI alone"],
+    "precautionary": ["claim_allowed=false", "STILL_GOOD remains TOKEN_VAZIO_REVALIDATION_REQUIRED"],
+    "adaptive": ["receipt state aged after merge event and was reclassified"],
+    "corrective": [],
+    "maintenance": ["require a new post-merge receipt on every material RDGS workflow/invariant change"],
+    "incident_investigation": ["no production incident evidenced; classified as evidence-chain near-miss"],
+    "safety_assurance": ["post-integration evidence remains open because declared artifact is absent"],
+    "learning_anti_recurrence": ["PR_SCOPED_CI_NE_POSTMERGE_ASSURANCE", "DECLARED_ARTIFACT_MUST_RESOLVE", "MERGED_NE_STILL_GOOD"]
+  },
+  "state_transition": "PENDING_POSTMERGE_CI -> MERGED_WITH_PR_SCOPED_CI -> TOKEN_VAZIO_REVALIDATION_REQUIRED",
+  "closure_result": "TOKEN_VAZIO_REVALIDATION_REQUIRED",
+  "closure_gate": "RDGS_POSTMERGE_RUN_JOB_STEP_ARTIFACT_RECEIPT"
+}

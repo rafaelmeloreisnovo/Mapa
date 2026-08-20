@@ -1,0 +1,48 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "rdgs-artifact-custody-failure.20260820T0042BRT",
+  "claim_allowed": false,
+  "scope": "RDGS evidence generation succeeded but artifact custody/upload failed due hidden-directory semantics",
+  "execution_evidence": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 296,
+    "workflow": "RAFAELIA RDGS Invariant",
+    "run_id": 32329678512,
+    "job_id": 96307801875,
+    "canonical_contract_step": "success",
+    "evidence_generation_step": "success",
+    "generated_sha256": "aeb658a71191e60abca5bbcc945860cee786ab02eea2d2f61f3c5fdc1a58fd05",
+    "artifact_upload_step": "failure",
+    "artifact_error": "No files were found with the provided path: .rdgs-evidence/"
+  },
+  "mechanism": {
+    "type": "HIDDEN_DIRECTORY_EXCLUDED_BY_UPLOAD_ARTIFACT_DEFAULT",
+    "evidence": "actions/upload-artifact@v4 reported include-hidden-files=false while evidence was written under .rdgs-evidence/",
+    "causality_scope": "artifact custody only; RDGS contract validation and evidence-file generation had already succeeded"
+  },
+  "correction": {
+    "commit": "73ccf9a2cef0d3bf0b08735fac6793036a846c69",
+    "change": "move evidence directory from .rdgs-evidence/ to rdgs-evidence/",
+    "policy": "if-no-files-found:error remains fail-closed",
+    "terminal_state": "TOKEN_VAZIO_CORRECTED_HEAD_PENDING"
+  },
+  "lifecycle": {
+    "component": "Mapa:RDGS-artifact-custody",
+    "event": "EVIDENCE_GENERATED_BUT_NOT_CUSTODIED",
+    "limit_type": "EVENT_TRIGGERED",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "last_verified_at": "TOKEN_VAZIO_CORRECTED_HEAD_ARTIFACT_UPLOAD",
+    "next_review_gate": "CORRECTED_RDGS_ARTIFACT_UPLOAD_AND_HASH_RECEIPT"
+  },
+  "impact_radius": {
+    "affected_routes": ["R4", "R5", "R11", "R12"],
+    "false_positive_cost": "rerun artifact upload",
+    "false_negative_cost": "evidence generated in ephemeral runner but unavailable for custody/reconstruction"
+  },
+  "state_transition": "CONTRACT_PASS_AND_EVIDENCE_GENERATED -> CUSTODY_FAIL -> CORRECTED_PENDING_REVALIDATION",
+  "closure_result": "TOKEN_VAZIO_REVALIDATION_REQUIRED",
+  "anti_regression": ["EVIDENCE_GENERATED_NE_EVIDENCE_CUSTODIED", "HASH_PRINTED_NE_ARTIFACT_RETRIEVABLE", "CUSTODY_FIX_REQUIRES_NEW_TERMINAL_RUN"]
+}

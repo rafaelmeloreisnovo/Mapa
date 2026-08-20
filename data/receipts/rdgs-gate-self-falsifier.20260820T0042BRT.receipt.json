@@ -1,0 +1,49 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "rdgs-gate-self-falsifier.20260820T0042BRT",
+  "claim_allowed": false,
+  "scope": "first execution of newly materialized RDGS gate and deterministic detector correction",
+  "failure_evidence": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 296,
+    "workflow": "RAFAELIA RDGS Invariant",
+    "run_id": 32329566304,
+    "job_id": 96307480004,
+    "job": "rdgs-assurance",
+    "job_conclusion": "failure",
+    "failed_step": "Verify canonical RDGS contract and receipt boundary",
+    "failed_step_conclusion": "failure",
+    "downstream_evidence_step": "skipped",
+    "artifact_upload_step": "skipped"
+  },
+  "observed_mechanism": {
+    "type": "DETECTOR_LITERAL_MISMATCH",
+    "description": "The first gate version searched for literal invariants that are not the canonical document's actual textual representation. The job failed before emitting evidence.",
+    "not_claimed": ["RDGS contract invalid", "repository regression", "postmerge assurance achieved"]
+  },
+  "environment": {
+    "runner": "2.336.0",
+    "os": "Ubuntu 24.04.4 LTS",
+    "runner_image": "ubuntu-24.04/20260816.277.1",
+    "node_runtime_event": "actions/checkout@v4 and actions/upload-artifact@v4 are observed in a runner environment transitioning Node20-targeted actions to Node24"
+  },
+  "correction": {
+    "commit": "73f6063e6846c5f03832fea47b0b13338c4c0137",
+    "strategy": "replace noncanonical literal probes with structural RDGS state-machine probes: REAL(scope), DONE(scope), GOOD(scope), STILL_GOOD(scope,t), revalidation TOKEN_VAZIO and claim boundary",
+    "policy": "fail-closed preserved; no wildcard or bypass introduced"
+  },
+  "lifecycle": {
+    "component": "Mapa:RDGS-detector",
+    "event": "FIRST_RUN_FALSE_NEGATIVE_LITERAL_MISMATCH",
+    "limit_type": "EVENT_TRIGGERED",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "last_verified_at": "TOKEN_VAZIO_CORRECTED_HEAD_TERMINAL_RUN",
+    "next_review_gate": "CORRECTED_RDGS_PR_HEAD_RUN_JOB_STEP_ARTIFACT"
+  },
+  "state_transition": "NEW_DETECTOR -> FAIL_CLOSED_SELF_FALSIFICATION -> CORRECTED_NOT_YET_TERMINALLY_REVALIDATED",
+  "closure_result": "TOKEN_VAZIO_REVALIDATION_REQUIRED",
+  "anti_regression": ["DETECTOR_FAILURE_NE_SYSTEM_FAILURE", "FAIL_CLOSED_MUST_NOT_BE_BYPASSED", "DETECTOR_CORRECTION_REQUIRES_NEW_TERMINAL_RECEIPT"]
+}
