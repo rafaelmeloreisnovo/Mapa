@@ -1,0 +1,161 @@
+{
+  "schema": "RAFAELIA_FEDERATED_OMEGA_DELTA_V1",
+  "cycle_id": "omega-federated-cycle-20260820T0142BRT",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY",
+    "NO_SILENT_REGRESSION"
+  ],
+  "observed_sources": [
+    {
+      "owner": "Mapa",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "commit": "35776f9cffb3d58d3cb955f840c244337f1e99a2",
+      "event": "PR296_MERGED",
+      "state": "RDGS_PR_HEAD_CUSTODY_EVIDENCED_POSTMERGE_REVALIDATION_REQUIRED"
+    },
+    {
+      "owner": "RafGitTools",
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "ref": "main",
+      "commit": "0c453be12b31eb21c85cf6295b740c0d54365166",
+      "combined_status_objects": 0,
+      "state": "TOKEN_VAZIO_COMBINED_MAIN_RECEIPT"
+    },
+    {
+      "owner": "Termux",
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "ref": "master",
+      "commit": "5e83eef9aea803bee127cd21eed6206ced193cb7",
+      "event": "VECTRAS_DISCOVERY_PROVENANCE_IDENTITIES_MERGED",
+      "state": "DISCOVERY_PROVENANCE_ADVANCED_EXECUTION_IDENTITY_TOKEN_VAZIO"
+    },
+    {
+      "owner": "RLL",
+      "repo": "instituto-Rafael/relativity-living-light",
+      "commit": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe",
+      "state": "NO_NEW_SCIENTIFIC_EXECUTION_OBSERVED"
+    },
+    {
+      "owner": "Drive",
+      "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "pre_append_revision": "242",
+      "state": "OMEGA_DELTA_APPENDED"
+    }
+  ],
+  "component_lifecycle_ledger": [
+    {
+      "component": "Mapa:RDGS-invariant-gate",
+      "limit_type": "EVENT_TRIGGERED",
+      "event": "PR_HEAD_EVIDENCE_CUSTODY_VERIFIED_AND_MERGED",
+      "builds": "TOKEN_VAZIO_NOT_AGGREGATED",
+      "test_cycles": 1,
+      "dependency_changes": 1,
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "2026-08-20T01:38:14-03:00",
+      "next_review_gate": "RDGS_PUSH_MAIN_POSTMERGE_RECEIPT",
+      "retirement_revalidation_criteria": "any RDGS contract/workflow/evidence-path or main integration change"
+    },
+    {
+      "component": "Termux:VectrasIntegrationReceiver-provenance",
+      "limit_type": "EVENT_TRIGGERED",
+      "event": "DISCOVERY_MATERIAL_IDENTITIES_ADDED",
+      "dependency_changes": 1,
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "last_verified_at": "TOKEN_VAZIO_EXECUTION_BOUNDARY",
+      "next_review_gate": "EXECUTION_TIME_IDENTITY_PLUS_PHYSICAL_RUNTIME_RECEIPT",
+      "retirement_revalidation_criteria": "provider APK/QEMU discovery or execution boundary change"
+    }
+  ],
+  "impact_radius": [
+    {
+      "source": "Mapa:RDGS-invariant-gate",
+      "affected_routes": ["R4", "R5", "R11", "R12"],
+      "direct_exposure": true,
+      "transmitted_effect": "scope of STILL_GOOD evidence",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "push/main terminal artifact receipt",
+      "false_positive_cost": "extra CI run",
+      "false_negative_cost": "overpromotion of integrated state"
+    },
+    {
+      "source": "Termux:VectrasIntegrationReceiver-provenance",
+      "affected_routes": ["R6", "R7", "R11"],
+      "direct_exposure": true,
+      "transmitted_effect": "discovery digest becomes available to Vectras transaction chain",
+      "hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "executable identity at execution plus device/runtime receipt",
+      "false_positive_cost": "additional execution-boundary instrumentation",
+      "false_negative_cost": "discovery identity misrepresented as execution identity"
+    }
+  ],
+  "actions": {
+    "detective": ["resolved final PR296 RDGS run/job/artifact", "downloaded artifact and recomputed embedded evidence SHA-256", "detected new Termux provenance merge", "rechecked RafGitTools main status scope", "rechecked RLL latest owner commit"],
+    "preventive": ["separate PR-head from postmerge main receipt", "separate Termux discovery identity from execution identity"],
+    "precautionary": ["claim_allowed=false", "RDGS postmerge remains TOKEN_VAZIO", "Termux physical runtime remains TOKEN_VAZIO"],
+    "adaptive": ["lifecycle moved RDGS from custody pending to PR-head EVIDENCED_SCOPED", "Termux lifecycle baseline advanced to new provenance commit"],
+    "corrective": [],
+    "maintenance": ["postmerge RDGS revalidation", "Termux execution-boundary revalidation"],
+    "incident_investigation": ["no new incident established"],
+    "safety_assurance": ["artifact archive digest and embedded evidence digest independently reconstructed"],
+    "learning_anti_recurrence": ["EVIDENCE_GENERATED_NE_EVIDENCE_CUSTODIED", "PR_HEAD_RECEIPT_NE_POSTMERGE_RECEIPT", "DISCOVERY_IDENTITY_NE_EXECUTION_IDENTITY"]
+  },
+  "uncertainty": {
+    "before": ["RDGS corrected-head terminal custody pending", "Termux latest owner state assumed older"],
+    "after": ["RDGS PR-head custody EVIDENCED_SCOPED", "RDGS integrated main TOKEN_VAZIO_REVALIDATION_REQUIRED", "Termux master advanced to 5e83eef9 with discovery provenance only", "RafGitTools combined main still TOKEN_VAZIO", "RLL still no new execution"]
+  },
+  "new_token_vazio": [
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY"
+  ],
+  "resolved_token_vazio": [
+    "TOKEN_VAZIO_RDGS_CORRECTED_HEAD_CUSTODY"
+  ],
+  "F_ok": [
+    "RDGS final PR-head workflow SUCCESS with all evidence custody steps SUCCESS",
+    "artifact 9392609321 downloaded and archive digest matched provider digest",
+    "embedded evidence SHA-256 matched its sidecar",
+    "Drive canonical longitudinal memory append completed",
+    "Termux new discovery-provenance merge reconciled without runtime overpromotion"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_RDGS_POSTMERGE_MAIN_RECEIPT",
+    "TOKEN_VAZIO_RAFGITTOOLS_COMBINED_MAIN_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_NEW_EXECUTION",
+    "privacy/negative-fixture/history/license receipts remain incomplete"
+  ],
+  "F_esquecido": [
+    "artifact provider digest and embedded evidence digest are distinct custody layers",
+    "discovery-time digest does not prove execution-time identity",
+    "merged code invalidates PR-only assurance until integrated-state revalidation"
+  ],
+  "F_next": [
+    "obtain RDGS push/main run for integrated state and reconstruct run/job/steps/artifact/archive/evidence digests",
+    "obtain RafGitTools main/push terminal receipt",
+    "instrument Termux/Vectras result boundary to carry execution-time executable identity and then obtain device receipt",
+    "continue privacy, global negative fixtures, historical workflow, license and RLL replication receipts"
+  ],
+  "closure_gates": [
+    "RDGS_PUSH_MAIN_POSTMERGE_RECEIPT",
+    "RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+    "TERMUX_EXECUTION_IDENTITY_AND_PHYSICAL_RUNTIME_RECEIPT",
+    "RLL_REPLICATION_CHAIN"
+  ]
+}
