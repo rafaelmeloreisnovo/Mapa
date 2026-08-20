@@ -1,0 +1,77 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "OPERATIONAL_GAP_ASSURANCE_SCHEMA_ALIAS_PR299_20260820T0347BRT",
+  "observed_at": "2026-08-20T03:47:01-03:00",
+  "claim_allowed": false,
+  "owner_authority": {
+    "federated_authority": "rafaelmeloreisnovo/Mapa",
+    "component": "scripts/operational_gap_record_gate.py"
+  },
+  "source_pointer": [
+    "Mapa PR299@f10e9bb16d0b1867b3b49b9a9ee819e318762fb1",
+    "workflow run 32337172101",
+    "job 96328862848",
+    "data/routing/operational-gaps/rdgs-postmerge-main-revalidation-20260820T0142BRT.v1.json",
+    "correction commit 7ba83e240d43b7060e53638d9dc5b8a078eec6d7"
+  ],
+  "affected_routes": ["R5", "R11", "R12"],
+  "uncertainty_state": "FIX_IMPLEMENTED_TERMINAL_REVALIDATION_PENDING",
+  "urgency": "P0_ASSURANCE_DETECTOR",
+  "necessity": "assurance detector must distinguish known historical schema vocabulary from malformed or unknown current records",
+  "impact": "a valid historical RDGS revalidation record blocked the entire operational-gap assurance pass",
+  "detectability": "HIGH_BY_RUN_JOB_STEP_LOG",
+  "recurrence_risk": "MEDIUM_WHEN_SCHEMA_VOCABULARY_EVOLVES",
+  "failure_mode": "EXPLICIT_HISTORICAL_SCHEMA_ALIAS_MISSING_FROM_COMPATIBILITY_GATE",
+  "evidence_for": [
+    "self-test passed before record traversal",
+    "failure localized to Validate operational gap records",
+    "log reports observed_schema=rafaelia.operational-gap-assurance/v1 and unknown operational-gap schema",
+    "failing historical record has claim_allowed=false"
+  ],
+  "evidence_against": [
+    "unknown-schema rejection is desirable for unrecognized records",
+    "terminal success after the correction is not yet observed"
+  ],
+  "detector": {
+    "signal": "known historical schema rejected as unknown",
+    "threshold": "exact schema vocabulary has a bounded historical producer and claim_allowed=false",
+    "false_positive_cost": "incorrectly accepting an unrecognized future schema",
+    "false_negative_cost": "blocking assurance on a known historical record and obscuring downstream gaps"
+  },
+  "falsifier": "post-fix run must accept only the exact historical alias and retain fail-closed behavior for unknown/malformed records",
+  "next_probe": "observe PR299 post-fix operational-gap-assurance run, jobs and record-gate outputs",
+  "mitigation": "explicit allowlist entry only; no wildcard; no historical rewrite; claim_allowed remains false",
+  "closure_gate": "PR299_POST_FIX_OPERATIONAL_GAP_ASSURANCE_TERMINAL_RECEIPT",
+  "review_or_expiry": "EVENT_TRIGGERED_ON_SCHEMA_VOCABULARY_OR_RECORD_GATE_CHANGE",
+  "predecessor_lineage": "PR293 schema compatibility -> PR297 RDGS historical record -> PR299 detector failure",
+  "actions": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "ADAPTIVE", "CORRECTIVE", "MAINTENANCE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+  "component_lifecycle": {
+    "component": "Mapa:operational-gap-record-gate",
+    "limit_type": "EVENT_TRIGGERED",
+    "dependency_changes": 1,
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "test_cycles": "TOKEN_VAZIO",
+    "last_verified_at": "TOKEN_VAZIO_POST_FIX_TERMINAL",
+    "next_review_gate": "PR299_POST_FIX_OPERATIONAL_GAP_ASSURANCE_TERMINAL_RECEIPT",
+    "retirement_revalidation": "any compatibility vocabulary change invalidates previous assurance"
+  },
+  "impact_radius": [
+    {
+      "component": "operational-gap assurance chain",
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "record vocabulary mismatch blocks downstream lifecycle/provenance assurance",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "terminal post-fix run with exact legacy acceptance and strict unknown rejection",
+      "false_positive_cost": "schema over-acceptance",
+      "false_negative_cost": "assurance-wide blockage"
+    }
+  ]
+}
