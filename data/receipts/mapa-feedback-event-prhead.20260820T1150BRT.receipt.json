@@ -1,0 +1,39 @@
+{
+  "schema": "rafaelia.receipt/v1",
+  "receipt_id": "MAPA_FEEDBACK_EVENT_PRHEAD_20260820T1150BRT",
+  "claim_allowed": false,
+  "component": "Mapa:feedback-event-noregression",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "source": {
+    "pr": 300,
+    "head_sha": "9330c1c36779e53536c95016947f4da924bc55d1",
+    "merge_commit_sha": "a38a0c3eee18323a95efd9881d14940d82881d19",
+    "workflow_run_id": 32381133697,
+    "job_id": 96464330979,
+    "workflow": "feedback-event-noregression",
+    "job": "validate"
+  },
+  "evidence": {
+    "unit_tests": "SUCCESS",
+    "append_only_feedback_ledger_validation": "SUCCESS",
+    "branch_topology_gate": "SUCCESS",
+    "ci": "SUCCESS",
+    "promotion_control": "SUCCESS"
+  },
+  "state_transition": {
+    "before": "TOKEN_VAZIO_REMOTE_CI",
+    "after": "PRESENT_SCOPED_PR_HEAD"
+  },
+  "boundaries": [
+    "PR-head evidence does not prove a post-merge push/main execution.",
+    "Local or PR-scoped PASS does not authorize scientific, runtime or publication claims.",
+    "Any material ledger/schema/validator change requires revalidation."
+  ],
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "incident_count": 0,
+    "near_miss_count": 0,
+    "last_verified_at": "run:32381133697/job:96464330979",
+    "next_review_gate": "post-merge main/push run -> job -> tests -> ledger validation -> receipt"
+  }
+}
