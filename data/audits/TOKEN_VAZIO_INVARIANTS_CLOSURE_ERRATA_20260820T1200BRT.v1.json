@@ -1,0 +1,55 @@
+{
+  "schema": "rafaelia.token-vazio-closure-errata/v1",
+  "errata_id": "TV-INVARIANTS-CI-BINDING-ERRATA-20260820T1200BRT",
+  "observed_at": "2026-08-20T12:00:00-03:00",
+  "claim_allowed": false,
+  "policy": [
+    "APPEND_ONLY",
+    "NO_HISTORY_DELETION",
+    "PROVENANCE_FIRST",
+    "TOKEN_VAZIO_VALID"
+  ],
+  "target_token": "TOKEN_VAZIO_INVARIANTS_CI_BINDING_MISSING",
+  "predecessor_decision": "data/audits/TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl",
+  "problem": {
+    "kind": "INVALID_EVIDENCE_POINTER",
+    "recorded_commit_sha": "3a2c8f18eef4f5a9b5c8d1e2f3a4b5c6d7e8f9a0",
+    "verification_result": "COMMIT_NOT_RESOLVABLE",
+    "interpretation": "The historical closure decision is preserved, but its commit pointer is not valid evidence and must not be used as a custody anchor."
+  },
+  "replacement_evidence": {
+    "pull_request": 278,
+    "pr_title": "P1-02: Implement 15 Invariants CI Validator",
+    "base_sha": "c3566ac5bc1ef40925e7019495509cae55615fd7",
+    "head_sha": "1a918ec6e9f94e8f84c088af1946e273c7d5f7a5",
+    "merge_commit_sha": "9977ce43bc56b313df0d211749188f41657d3292",
+    "artifacts": [
+      "tools/check_invariants.py",
+      "data/audits/invariants-validation.json",
+      ".github/workflows/promotion-control-v1.yml"
+    ],
+    "workflow": {
+      "run_id": 32162784209,
+      "name": "RAFAELIA Promotion Control V1",
+      "conclusion": "success",
+      "job_id": 95795298332,
+      "job": "promotion-control / negative-tests",
+      "step": "Validate 15 Rafaelia invariants (P1-02 gate)",
+      "step_conclusion": "success"
+    }
+  },
+  "state_reconciliation": {
+    "implementation": "EVIDENCED",
+    "ci_binding": "EVIDENCED_SCOPED_PR_HEAD",
+    "historical_bad_pointer": "SUPERSEDED_BY_ERRATA",
+    "token_current_state": "RESOLVED_EVIDENCED_WITH_ERRATA",
+    "automatic_scientific_claim_promotion": false
+  },
+  "falsifier": "If PR #278, its head/merge commit, or workflow run/job do not resolve to the stated artifacts and successful invariant-validation step, this errata is invalid and the token returns to TOKEN_VAZIO_PROVENANCE.",
+  "next_gate": "Revalidate the invariant gate whenever tools/check_invariants.py, promotion-control-v1.yml, or the invariant definitions materially change.",
+  "r3": {
+    "F_ok": "A real PR, real commits, and an observed successful CI step replace the invalid evidence pointer.",
+    "F_gap": "No claim is made that every future commit preserves the invariants without event-triggered revalidation.",
+    "F_next": "Reference this errata from the bounded current TOKEN_VAZIO reconciliation view."
+  }
+}

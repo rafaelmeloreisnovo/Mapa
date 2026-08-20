@@ -1,0 +1,84 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "BOOTSTRAP_CROSS_STORE_PARITY_20260819T2044BRT",
+  "status": "TOKEN_VAZIO",
+  "source_pointer": "github:rafaelmeloreisnovo/Mapa@main:bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md + drive:1__kkzcgJhPPXll_8v6Fm5BnnL2XccDIza-8YX26KJ3g@revision:2",
+  "owner_authority": "rafaelmeloreisnovo/Mapa",
+  "affected_routes": ["R1", "R5", "R9", "R11"],
+  "observed_at": "2026-08-20T12:00:00-03:00",
+  "provenance": [
+    {
+      "source": "data/routing/operational-gaps/bootstrap-cross-store-parity-20260819T2044BRT.v1.json",
+      "role": "predecessor_gap"
+    },
+    {
+      "source": "Google Drive document 1__kkzcgJhPPXll_8v6Fm5BnnL2XccDIza-8YX26KJ3g revision 2",
+      "role": "drive_text_revision"
+    },
+    {
+      "source": "rafaelmeloreisnovo/Mapa main bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md blob 2fdb05b786f1d42db12182bc4e7023a28499cb46",
+      "role": "github_blob"
+    }
+  ],
+  "evidence_for": [
+    "Drive current revision id is observed as 2 and previous revision id as 1.",
+    "Drive revision 2 text/plain content was read in this cycle.",
+    "GitHub bootstrap blob identity is observed as 2fdb05b786f1d42db12182bc4e7023a28499cb46 and its text was read in this cycle.",
+    "Substantive bootstrap headings, policies, authority model, pointers, custody rules and F_ok/F_gap/F_next contract are semantically aligned in the scoped reads."
+  ],
+  "evidence_against": [],
+  "uncertainty_state": "COMMON_DIGEST_NOT_COMPUTED",
+  "urgency": 2,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 2,
+  "risk": 2,
+  "detectability": 3,
+  "recurrence_risk": 2,
+  "information_gain": 3,
+  "forgetting_risk": 2,
+  "failure_mode": "Semantic mirror could be mistaken for cryptographic identity when Drive export representation and GitHub Markdown bytes are not bound by one shared digest/canonicalization receipt.",
+  "falsifier": "A shared canonicalization-and-digest procedure yields different digests, or a material semantic divergence is observed between the referenced Drive revision and GitHub blob.",
+  "next_probe": "Export both representations under one explicit canonicalization contract, hash both outputs, compare digests, and append the terminal parity receipt.",
+  "mitigation": {
+    "fail_closed": true,
+    "current_use": "Use semantic alignment for routing only.",
+    "forbidden_promotion": "Do not claim byte identity until a common digest comparison exists.",
+    "rollback": "Retain the predecessor TOKEN_VAZIO state if any material divergence is found."
+  },
+  "closure_gate": {
+    "criterion": "Drive revision identity, GitHub blob identity, shared canonicalized digests and comparison result are bound in one receipt.",
+    "evidence_needed": "Drive revision/export digest + GitHub canonicalized digest + canonicalization contract + comparison result.",
+    "falsifier": "Digest mismatch or material semantic divergence.",
+    "result": "TOKEN_VAZIO_PARTIAL"
+  },
+  "review_or_expiry": "Revalidate after any material bootstrap change in Drive or GitHub and before asserting cross-store identity.",
+  "claim_allowed": false,
+  "action_categories": ["DETECTIVE", "PRECAUTIONARY"],
+  "detector": {
+    "signal": "Cross-store identity claim lacks one shared digest/canonicalization receipt.",
+    "threshold": "Any identity claim beyond semantic alignment.",
+    "false_positive": "Representations intentionally differ in formatting while carrying the same substantive contract.",
+    "false_negative": "Unobserved Drive revision or GitHub blob changed outside the bounded read.",
+    "evidence_needed": "Current Drive revision, GitHub blob, exported bytes/canonicalized text and digests."
+  },
+  "delta": {
+    "before": {
+      "semantic_alignment": "EVIDENCED_SCOPED",
+      "drive_revision_id": "TOKEN_VAZIO_NOT_CAPTURED",
+      "github_blob_identity": "KNOWN_PATH_ONLY",
+      "byte_equivalence": "TOKEN_VAZIO_NO_COMMON_DIGEST"
+    },
+    "after": {
+      "semantic_alignment": "EVIDENCED_SCOPED_CURRENT_READ",
+      "drive_revision_id": "PRESENT_REVISION_2",
+      "github_blob_identity": "PRESENT_2fdb05b786f1d42db12182bc4e7023a28499cb46",
+      "byte_equivalence": "TOKEN_VAZIO_NO_COMMON_DIGEST"
+    }
+  },
+  "r3": {
+    "F_ok": "Drive revision identity and GitHub blob identity are now captured with scoped semantic alignment.",
+    "F_gap": "Exact/common-digest equivalence remains TOKEN_VAZIO.",
+    "F_next": "Compute and compare canonicalized digests without rewriting either source."
+  }
+}

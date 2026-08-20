@@ -6,9 +6,11 @@ on:
       - "scripts/operational_gap_assurance.py"
       - "scripts/operational_gap_record_gate.py"
       - "scripts/component_lifecycle_assurance.py"
+      - "scripts/token_vazio_master_gate.py"
       - "tools/verify_cross_repo_provenance.py"
       - "data/routing/operational-gaps/**"
       - "data/routing/component-lifecycle/**"
+      - "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_*.json"
       - ".github/workflows/operational-gap-assurance.yml"
       - ".github/workflows/federated-receipt-broker.yml"
   push:
@@ -17,9 +19,11 @@ on:
       - "scripts/operational_gap_assurance.py"
       - "scripts/operational_gap_record_gate.py"
       - "scripts/component_lifecycle_assurance.py"
+      - "scripts/token_vazio_master_gate.py"
       - "tools/verify_cross_repo_provenance.py"
       - "data/routing/operational-gaps/**"
       - "data/routing/component-lifecycle/**"
+      - "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_*.json"
       - ".github/workflows/operational-gap-assurance.yml"
       - ".github/workflows/federated-receipt-broker.yml"
 
@@ -41,6 +45,7 @@ jobs:
             scripts/operational_gap_assurance.py \
             scripts/operational_gap_record_gate.py \
             scripts/component_lifecycle_assurance.py \
+            scripts/token_vazio_master_gate.py \
             tools/verify_cross_repo_provenance.py
       - name: Operational gap self-test
         run: python3 scripts/operational_gap_assurance.py --self-test
@@ -52,6 +57,15 @@ jobs:
             count=$((count + 1))
             python3 scripts/operational_gap_record_gate.py "$record"
           done < <(find data/routing/operational-gaps -type f -name '*.json' -print | sort)
+          test "$count" -gt 0
+      - name: Validate bounded TOKEN_VAZIO master snapshots
+        run: |
+          set -euo pipefail
+          count=0
+          while IFS= read -r record; do
+            count=$((count + 1))
+            python3 scripts/token_vazio_master_gate.py "$record"
+          done < <(find data/control-plane -maxdepth 1 -type f -name 'TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_*.json' -print | sort)
           test "$count" -gt 0
       - name: Validate component lifecycle ledgers
         run: |
