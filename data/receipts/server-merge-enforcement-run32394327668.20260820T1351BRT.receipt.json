@@ -1,0 +1,55 @@
+{
+  "schema_version": "rafaelia.receipt/server-merge-enforcement-run/v1",
+  "receipt_id": "SERVER_MERGE_ENFORCEMENT_RUN_32394327668_20260820T1351BRT",
+  "observed_at": "2026-08-20T13:51:22-03:00",
+  "repo": "rafaelmeloreisnovo/Mapa",
+  "pr": 307,
+  "source_head_sha": "c193affb52619fb99ed329a774d5e541dc05ff79",
+  "merge_ref_sha_observed_by_runner": "a8426572f0477920cc49374d1d9b532069eef32a",
+  "workflow": {
+    "name": "Server Merge Enforcement Assurance",
+    "run_id": 32394327668,
+    "run_number": 1,
+    "job_id": 96507528849,
+    "job_name": "server-merge-enforcement",
+    "status": "completed",
+    "conclusion": "failure_expected_fail_closed"
+  },
+  "steps": {
+    "checkout": "SUCCESS",
+    "setup_python": "SUCCESS",
+    "detector_fixtures": "SUCCESS_4_OF_4",
+    "live_main_enforcement_probe": "FAILURE_EXIT_2_EXPECTED",
+    "print_assurance_boundary": "SUCCESS"
+  },
+  "live_report": {
+    "branch": "main",
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks_enforcement_level": "off",
+    "contexts": [],
+    "checks": [],
+    "failure_modes": [
+      "BRANCH_PROTECTION_DISABLED",
+      "PROTECTION_NOT_ENABLED",
+      "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+      "NO_REQUIRED_STATUS_CHECKS_OBSERVED"
+    ],
+    "server_side_merge_binding": "NOT_ENFORCED_OBSERVED",
+    "promotion_control_exact_required_context": "TOKEN_VAZIO_NOT_OBSERVED_BY_THIS_ENDPOINT",
+    "ruleset_or_bypass_path": "TOKEN_VAZIO_NOT_INSPECTED",
+    "claim_allowed": false,
+    "promotion_allowed": false
+  },
+  "runner_environment": {
+    "runner_version": "2.336.0",
+    "os": "Ubuntu 24.04.4 LTS",
+    "image": "ubuntu-24.04@20260816.277.1",
+    "git": "2.55.0",
+    "python": "3.12.14",
+    "node_runtime_note": "Node20-targeted pinned checkout/setup-python were forced to Node24 by hosted runner"
+  },
+  "interpretation": "The red workflow is an expected fail-closed finding: the detector itself passed its fixtures and correctly rejected the live main server configuration. It is evidence of the governance gap, not a detector regression.",
+  "claim_allowed": false,
+  "closure_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+}
