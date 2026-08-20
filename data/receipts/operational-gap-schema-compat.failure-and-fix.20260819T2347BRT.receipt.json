@@ -1,0 +1,38 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "operational-gap-schema-compat.failure-and-fix.20260819T2347BRT",
+  "claim_allowed": false,
+  "transition": "HISTORICAL_SCHEMA_UNKNOWN -> FIX_IMPLEMENTED_REVALIDATION_PENDING",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 292,
+    "head_sha": "377fc5e087eb07bf5bf7584dd757c2029b155aae",
+    "merged_main_sha": "290d44654ea1da1ca5a79ed4785e0d6821432a1e",
+    "workflow_run_id": 32322709436,
+    "job_id": 96287858447,
+    "failed_step": "Validate operational gap records",
+    "failed_record_gap_id": "GAP_TERMUX_CI_DETECTOR_PR_HEAD_20260819T1048Z",
+    "observed_schema": "rafaelia-operational-gap/v1"
+  },
+  "failure_evidence": {
+    "self_test": "PASS",
+    "gate_error": "unknown operational-gap schema",
+    "workflow_conclusion": "failure",
+    "node_runtime_observed": "Node20-targeting checkout@v4/setup-python@v5 forced onto Node24"
+  },
+  "corrective_change": {
+    "branch": "audit/operational-gap-schema-compat-20260819T2347BRT",
+    "commit": "f5d10c0b8cdc158cba6687de3999d2e905ad2597",
+    "path": "scripts/operational_gap_record_gate.py",
+    "change": "add rafaelia-operational-gap/v1 to explicit LEGACY_SCHEMAS only",
+    "wildcard_acceptance": false,
+    "historical_rewrite": false
+  },
+  "anti_promotion": [
+    "HISTORICAL_ACCEPTED_NE_CANONICAL_VALIDATED_NE_CLOSED_BY_EVIDENCE",
+    "legacy acceptance requires claim_allowed=false",
+    "legacy closure remains TOKEN_VAZIO_REVALIDATION_REQUIRED"
+  ],
+  "closure_gate": "terminal operational-gap-assurance run on corrective head with target legacy record accepted and unknown/new malformed schema rejection preserved",
+  "state": "TOKEN_VAZIO_TERMINAL_REVALIDATION_PENDING"
+}

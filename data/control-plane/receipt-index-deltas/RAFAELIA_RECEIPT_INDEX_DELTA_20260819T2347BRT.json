@@ -1,0 +1,29 @@
+{
+  "schema": "RAFAELIA_RECEIPT_INDEX_DELTA_V1",
+  "observed_at": "2026-08-19T23:47:04-03:00",
+  "claim_allowed": false,
+  "predecessor_index": "data/control-plane/RAFAELIA_RECEIPT_INDEX_V1.json",
+  "transitions": [
+    {
+      "id": "MAPA_LEGACY_OPERATIONAL_GAP_SCHEMA",
+      "before": "TOKEN_VAZIO",
+      "after": "PRESENT",
+      "receipt": "data/receipts/operational-gap-schema-compat.terminal.20260819T2347BRT.receipt.json",
+      "scope": "explicit historical schema compatibility; historical gaps remain TOKEN_VAZIO_REVALIDATION_REQUIRED",
+      "next_gate": "revalidate on schema vocabulary/gate change"
+    },
+    {
+      "id": "DRIVE_CANONICAL_APPEND_CAPABILITY",
+      "before": "TOKEN_VAZIO_CAPABILITY",
+      "after": "PRESENT",
+      "receipt": "data/receipts/drive-canonical-omega-append.20260819T2347BRT.receipt.json",
+      "scope": "append to canonical longitudinal memory observed in this cycle",
+      "next_gate": "verify append receipt/document revision on future material memory update"
+    }
+  ],
+  "anti_regression": [
+    "PRESENT receipt state is scoped, not global PASS",
+    "historical compatibility does not close historical operational gaps",
+    "Drive write capability does not establish execution/scientific evidence"
+  ]
+}

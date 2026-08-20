@@ -21,7 +21,9 @@ from operational_gap_assurance import build_report
 CANONICAL = "rafaelia.operational-gap-assurance/v1"
 LEGACY_SCHEMAS = {
     "RAFAELIA_OPERATIONAL_GAP_V1",
+    "RAFAELIA_OPERATIONAL_GAP_ASSURANCE_V1",
     "rafaelia.operational-gap.v1",
+    "rafaelia-operational-gap/v1",
 }
 LEGACY_SCHEMA_VERSIONS = {
     "rafaelia.operational-gap/v1",
