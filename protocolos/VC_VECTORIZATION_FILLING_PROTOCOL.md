@@ -61,7 +61,8 @@ Claims are assigned to chains that govern their evolution:
 | **C** | CONVERGENCIA_DISTANTE | Creative, open convergence | Exploratory claims, speculative content |
 
 Chain assignment is deterministic per vector via:
-```
+
+```text
 formal_score   = D1 + D3   (arithmetic + geometric)
 bridge_score   = D2 + D5   (computational + linguistic)
 distant_score  = D4 + D7   (sensorial + ethical)
@@ -101,6 +102,7 @@ distant_score  = D4 + D7   (sensorial + ethical)
 }
 ```
 
+
 ### Proof Metadata
 
 The `proof` object contains:
@@ -116,7 +118,7 @@ The `proof` object contains:
 
 ### Stage 1: Initialization
 
-```
+```text
 Input: claim_data ∈ Map<String, String>
 Output: TokenVectorizationEngine instance
 Action: new TokenVectorizationEngine()
@@ -125,7 +127,7 @@ Gate: ENGINE_READY
 
 ### Stage 2: Claim Vectorization
 
-```
+```text
 for each (claim_key, claim_value) in claim_data:
   vector[7] = vectorize(claim_value)
   coherence = aggregate(vector[7])
@@ -137,7 +139,7 @@ Gate: VECTORIZATION_COMPLETE
 
 ### Stage 3: Quality Assessment
 
-```
+```text
 avg_coherence = mean(all coherence scores)
 forte_count = count(classification == FORTE)
 abort_count = count(classification == ABORTADO)
@@ -158,7 +160,7 @@ Gate: QUALITY_ASSESSMENT
 
 ### Stage 4: VC Assembly
 
-```
+```text
 VC = {
   context, issuer, subject,
   claims (original key-values),
@@ -171,7 +173,7 @@ Gate: VC_READY_FOR_ISSUANCE
 
 ### Stage 5: Custody & Custody Chain
 
-```
+```text
 VC.custody = {
   generation_timestamp,
   vectorization_generation_id,
@@ -205,7 +207,7 @@ Gate: CUSTODY_RECORDED
 
 ### Claim Custody
 
-```
+```text
 claim_allowed(VC) ⟺ (
   VC.proof.vectorization_generation is defined ∧
   VC.coherence >= min_threshold ∧
@@ -292,6 +294,7 @@ VerifiableCredentialFiller
 ---
 
 **Document Signature Block:**
+
 - Version: 1.0
 - Locked: 2026-08-20
 - Approver: RAFAELIA-GOVERNANCE
