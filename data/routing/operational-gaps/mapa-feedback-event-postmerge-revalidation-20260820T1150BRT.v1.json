@@ -1,0 +1,61 @@
+{
+  "schema": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "MAPA_FEEDBACK_EVENT_POSTMERGE_REVALIDATION_20260820T1150BRT",
+  "claim_allowed": false,
+  "owner": "rafaelmeloreisnovo/Mapa",
+  "source_pointer": "PR #300 head 9330c1c36779e53536c95016947f4da924bc55d1 -> merge a38a0c3eee18323a95efd9881d14940d82881d19",
+  "affected_routes": ["R4", "R5", "R11", "R12"],
+  "observed_at": "2026-08-20T11:50:12-03:00",
+  "provenance": {
+    "pr_head_receipt": "data/receipts/mapa-feedback-event-prhead.20260820T1150BRT.receipt.json",
+    "workflow_run_id": 32381133697,
+    "job_id": 96464330979
+  },
+  "evidence_for": [
+    "PR-head feedback-event workflow completed successfully.",
+    "Unit tests and append-only feedback ledger validation steps completed successfully.",
+    "PR #300 was merged into main as a38a0c3eee18323a95efd9881d14940d82881d19."
+  ],
+  "evidence_against": [
+    "No post-merge push/main run->job->step receipt was captured in this cycle."
+  ],
+  "uncertainty_state": "TOKEN_VAZIO_POSTMERGE_MAIN_RECEIPT",
+  "urgency": "P1_HIGH",
+  "necessity": "HIGH",
+  "impact": "PR-head assurance could be overextended to the integrated main state.",
+  "detectability": "HIGH_ONCE_MAIN_PUSH_RUN_IS_RESOLVED",
+  "recurrence_risk": "MEDIUM",
+  "failure_mode": "PR_HEAD_ASSURANCE_OVEREXTENDED_TO_POSTMERGE_MAIN",
+  "falsifier": "Resolve a push/main workflow run for merge a38a0c3eee18323a95efd9881d14940d82881d19 or successor containing the same change; inspect job/steps; require tests and ledger validation success; capture receipt.",
+  "next_probe": "main/push run -> job -> Unit tests -> Validate append-only feedback ledger -> receipt",
+  "mitigation": "Treat PR-head receipt as PRESENT_SCOPED only; main remains TOKEN_VAZIO_REVALIDATION_REQUIRED.",
+  "closure_gate": "MAPA_FEEDBACK_EVENT_POSTMERGE_MAIN_TERMINAL_RECEIPT",
+  "review_or_expiry": "EVENT_TRIGGERED_ON_LEDGER_SCHEMA_VALIDATOR_OR_MAIN_CHANGE",
+  "predecessor": "MAPA_FEEDBACK_EVENT_PRHEAD_20260820T1150BRT",
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "execution_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO",
+    "test_cycles": 1,
+    "deployments": "TOKEN_VAZIO",
+    "dependency_changes": 1,
+    "incident_count": 0,
+    "near_miss_count": 0,
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "last_verified_at": "run:32381133697/job:96464330979@PR_HEAD",
+    "next_review_gate": "MAPA_FEEDBACK_EVENT_POSTMERGE_MAIN_TERMINAL_RECEIPT"
+  },
+  "actions": {
+    "DETECTIVE": "Compare exact PR-head evidence with integrated main state.",
+    "PREVENTIVE": "Do not inherit PR-head PASS into main without a main receipt.",
+    "PRECAUTIONARY": "claim_allowed=false and main state remains TOKEN_VAZIO.",
+    "ADAPTIVE": "Open a new revalidation clock after merge.",
+    "CORRECTIVE": "No code defect demonstrated; no corrective code action justified.",
+    "MAINTENANCE": "Event-triggered post-merge revalidation.",
+    "INCIDENT_INVESTIGATION": "No incident observed.",
+    "SAFETY_ASSURANCE": "Require terminal main evidence before promotion.",
+    "ANTI_RECURRENCE": "PR_HEAD_RECEIPT_NE_POSTMERGE_MAIN_RECEIPT."
+  }
+}
