@@ -1,0 +1,260 @@
+{
+  "schema": "RAFAELIA_FEDERATED_OMEGA_DELTA_V1",
+  "cycle_id": "omega-federated-cycle-20260819T2246BRT-receipt-recovery",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY",
+    "NO_SILENT_REGRESSION",
+    "CLOSED_DECISION_NE_VALID_RECEIPT"
+  ],
+  "observed_sources": [
+    {
+      "owner": "Mapa",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 292,
+      "branch": "audit/receipt-integrity-backlog-20260819T2207BRT",
+      "state": "DRAFT_REVALIDATION"
+    },
+    {
+      "owner": "Drive",
+      "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "state": "READ_RECONCILED"
+    },
+    {
+      "owner": "Drive",
+      "document_id": "1__kkzcgJhPPXll_8v6Fm5BnnL2XccDIza-8YX26KJ3g",
+      "title": "RAFAELIA — ChatGPT Bootstrap Federado — GitHub Drive V1",
+      "state": "READ_RECONCILED"
+    },
+    {
+      "owner": "RafGitTools",
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "ref": "main",
+      "commit": "0c453be12b31eb21c85cf6295b740c0d54365166",
+      "state": "NO_NEW_MAIN_COMMIT"
+    },
+    {
+      "owner": "Termux",
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "ref": "master",
+      "commit": "fb18bbc4794dace1cc3480519681191f83152af6",
+      "state": "TOKEN_VAZIO_PHYSICAL_RUNTIME"
+    },
+    {
+      "owner": "RLL",
+      "repo": "instituto-Rafael/relativity-living-light",
+      "ref": "main",
+      "commit": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe",
+      "commit_signature": "UNSIGNED",
+      "state": "NO_NEW_SCIENTIFIC_EXECUTION"
+    }
+  ],
+  "field_evidence": {
+    "invalid_closure_decision": {
+      "token": "TOKEN_VAZIO_INVARIANTS_CI_BINDING_MISSING",
+      "invalid_sha": "3a2c8f18eef4f5a9b5c8d1e2f3a4b5c6d7e8f9a0",
+      "invalid_sha_probe": "NO_COMMIT_FOUND",
+      "actual_pr": 278,
+      "actual_head": "1a918ec6e9f94e8f84c088af1946e273c7d5f7a5",
+      "actual_merge": "9977ce43bc56b313df0d211749188f41657d3292",
+      "promotion_run": 32162784209,
+      "promotion_job": 95795298332,
+      "invariant_step": "Validate 15 Rafaelia invariants (P1-02 gate)",
+      "invariant_step_result": "SUCCESS",
+      "superseding_receipt": "data/receipts/invariants-ci-binding.superseding.20260819T2246BRT.receipt.json"
+    },
+    "operational_gap_assurance": {
+      "initial_failure_run": 32320099964,
+      "initial_failure": "legacy schema record rejected by current validator",
+      "first_adapter_run": 32322362498,
+      "first_adapter_result": "legacy schema accepted fail-closed; next historical canonical profile rejected",
+      "current_fix": "explicit allowlist quarantine for known pre-current-subcontract canonical record",
+      "current_terminal_run": "TOKEN_VAZIO_PENDING_INDEX"
+    },
+    "node24_backlog": [
+      {
+        "pr": 275,
+        "head": "f517ce2ce1503027f26c943a7e13423ab5b9ce57",
+        "change": "setup-android v3->v4",
+        "state": "STALE_WITH_SCOPED_MIXED_EVIDENCE",
+        "receipt": "data/receipts/rafgittools-node24-setup-android-pr275.20260819T2246BRT.receipt.json"
+      },
+      {
+        "pr": 276,
+        "head": "6cc9fdd5d02dcfacfd7966e111ddc968ead674f8",
+        "change": "setup-python v5->v7",
+        "state": "STALE_WITH_SCOPED_MIXED_EVIDENCE",
+        "receipt": "data/receipts/rafgittools-node24-setup-python-pr276.20260819T2246BRT.receipt.json"
+      },
+      {
+        "pr": 277,
+        "head": "45ef349a31524718016c6225382681411e27167b",
+        "change": "github-script v7->v9",
+        "state": "STALE_WITH_SCOPED_MIXED_EVIDENCE",
+        "receipt": "data/receipts/rafgittools-node24-github-script-pr277.20260819T2246BRT.receipt.json"
+      }
+    ]
+  },
+  "component_lifecycle_ledger": [
+    {
+      "component": "Mapa:receipt-closure-integrity",
+      "event": "INVALID_CLOSURE_SHA_SUPERSEDED_WITH_REAL_PR_RUN_JOB_STEP",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 2,
+      "corrective_actions": 2,
+      "last_verified_at": "EVIDENCED_SCOPED_PR278",
+      "next_review_gate": "RECEIPT_INDEX_RESOLVABILITY_CHECK"
+    },
+    {
+      "component": "Mapa:operational-gap-record-gate",
+      "event": "HISTORICAL_SCHEMA_COMPATIBILITY_REQUIRED",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 2,
+      "corrective_actions": 2,
+      "last_verified_at": "TOKEN_VAZIO_CURRENT_TERMINAL_RUN",
+      "next_review_gate": "OPERATIONAL_GAP_ASSURANCE_TERMINAL_SUCCESS"
+    },
+    {
+      "component": "RafGitTools:Node24 dependency chain",
+      "event": "OLD_DEPENDABOT_HEADS_RECEIPTED_BUT_STALE",
+      "limit_type": "EVENT_TRIGGERED",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 3,
+      "corrective_actions": 0,
+      "last_verified_at": "STALE_EXACT_HEAD_RECEIPTS",
+      "next_review_gate": "REBASE_TO_CURRENT_MAIN_AND_REVALIDATE"
+    }
+  ],
+  "impact_radius": [
+    {
+      "source": "invalid closure receipt",
+      "affected_routes": ["R5", "R11", "R12"],
+      "direct_exposure": true,
+      "hidden_state_possible": true,
+      "revalidation_required": true,
+      "false_positive_cost": "extra receipt reconstruction",
+      "false_negative_cost": "canonical CLOSED state backed by non-resolvable provenance"
+    },
+    {
+      "source": "historical record validator drift",
+      "affected_routes": ["R5", "R11"],
+      "direct_exposure": true,
+      "hidden_state_possible": true,
+      "revalidation_required": true,
+      "false_positive_cost": "historical record quarantined longer",
+      "false_negative_cost": "new malformed records silently accepted"
+    },
+    {
+      "source": "Node24 dependency chain",
+      "affected_routes": ["R6", "R11"],
+      "direct_exposure": true,
+      "hidden_state_possible": true,
+      "revalidation_required": true,
+      "false_positive_cost": "extra CI after rebase",
+      "false_negative_cost": "stale exact-head evidence inherited into materially changed main"
+    }
+  ],
+  "actions": {
+    "detective": [
+      "verified invalid closure SHA does not resolve",
+      "resolved actual PR #278 head/merge/run/job/step evidence",
+      "decomposed operational-gap-assurance failures by exact record",
+      "queried exact-head Node24 PR workflow matrices"
+    ],
+    "preventive": [
+      "created receipt coverage matrix and receipt index",
+      "required resolvable commit/run/job/step provenance for closure receipts",
+      "kept stale dependency evidence scoped to exact historical heads"
+    ],
+    "precautionary": [
+      "claim_allowed=false",
+      "historical records accepted only fail-closed",
+      "no Node24 PR integration from stale evidence",
+      "Termux physical runtime and RLL claim promotion remain blocked"
+    ],
+    "adaptive": [
+      "added compatibility gate instead of rewriting historical records",
+      "separated legacy schema acceptance from canonical validation"
+    ],
+    "corrective": [
+      "emitted superseding invariants receipt",
+      "added operational-gap legacy adapter and explicit historical quarantine"
+    ],
+    "maintenance": [
+      "instantiated receipt lifecycle index",
+      "captured three stale Node24 exact-head receipts for later rebase comparison"
+    ],
+    "incident_investigation": [
+      "classified invalid closure SHA as near-miss of receipt integrity, not proof of missing invariants implementation"
+    ],
+    "safety_assurance": [
+      "actual PR278 invariant gate SUCCESS observed",
+      "legacy adapter first stage observed in CI",
+      "current adapter terminal status remains TOKEN_VAZIO until indexed"
+    ],
+    "learning_anti_recurrence": [
+      "CLOSED_DECISION_NE_VALID_RECEIPT",
+      "RECEIPT_COMMIT_MUST_RESOLVE",
+      "HISTORICAL_ACCEPTED_NE_CANONICAL_VALIDATED",
+      "STALE_EXACT_HEAD_EVIDENCE_NE_CURRENT_MAIN_ASSURANCE"
+    ]
+  },
+  "uncertainty": {
+    "before": [
+      "invariants closure decision existed but cited non-resolving SHA",
+      "receipt coverage was not centrally indexed",
+      "Node24 backlog lacked scoped receipts in Mapa",
+      "operational-gap assurance failure was generic"
+    ],
+    "after": [
+      "actual PR278 execution provenance resolved",
+      "superseding receipt emitted",
+      "receipt index instantiated",
+      "three Node24 PR exact-head receipts emitted and marked stale",
+      "legacy record failure decomposed into two historical compatibility profiles",
+      "current terminal adapter run remains TOKEN_VAZIO_PENDING_INDEX"
+    ]
+  },
+  "F_ok": [
+    "invalid invariants receipt provenance superseded by real PR/run/job/step evidence",
+    "receipt coverage matrix + index exist on audit branch",
+    "three Node24 backlog PRs now have exact-head scoped receipts",
+    "Drive canonical/bootstrap documents reconciled in read mode",
+    "Termux/RafGitTools/RLL owner heads reconciled"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_OPERATIONAL_GAP_ASSURANCE_CURRENT_TERMINAL",
+    "TOKEN_VAZIO_RAFGITTOOLS_POST_MERGE_MAIN_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_PRIVACY_AUDIT",
+    "TOKEN_VAZIO_NEGATIVE_FIXTURE_COVERAGE",
+    "MISSING_WORKFLOW_8_9_10_CONTINUOUS_RECEIPTS",
+    "TOKEN_VAZIO_LICENSE_COMPATIBILITY",
+    "TOKEN_VAZIO_BOOTSTRAP_CROSS_STORE_DIGEST",
+    "MISSING_RLL_DATASET_PIPELINE_INFERENCE_REPLICATION_RECEIPTS"
+  ],
+  "F_esquecido": [
+    "receipt validators and legacy adapters are lifecycle components",
+    "a syntactically plausible SHA must never be accepted without repository resolution",
+    "old green PR heads become stale after material main changes",
+    "physical-device and scientific-replication receipts remain higher-value than more narrative documentation"
+  ],
+  "F_next": [
+    "observe operational-gap-assurance terminal run after historical canonical quarantine fix",
+    "if green, create validator-run receipt and update MAPA_LEGACY_OPERATIONAL_GAP_SCHEMA index state",
+    "rebase Node24 PRs individually onto current RafGitTools main and capture jobs/steps/artifact receipts",
+    "produce Termux physical APK/install/launch/logcat/device receipt",
+    "produce privacy audit + negative fixture coverage receipts",
+    "build continuous historical workflow receipt index for missing workflow 8/9/10 coverage",
+    "produce RLL dataset/pipeline/inference/replication receipt chain before any scientific claim promotion"
+  ]
+}
