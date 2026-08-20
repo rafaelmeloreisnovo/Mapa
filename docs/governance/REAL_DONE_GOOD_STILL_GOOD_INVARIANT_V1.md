@@ -216,3 +216,16 @@ F_next:
 - emitir registros tipados para itens reais;
 - usar receipts existentes para revalidação;
 - bloquear qualquer promoção que pule estado ou escopo.
+
+## 11. Selo de materialização do contrato
+
+O contrato V1 foi materializado no `Mapa` pelo PR `#294`.
+
+- head materializado: `62b07b1ebecaa0e5ee12500a13c562897490d016`;
+- merge commit: `271cbeeb4a3a09d23f6084e3c04f4db73f80ae34`;
+- primeiro CI do PR falhou exclusivamente no gate Markdown MD032;
+- a causa foi observada em sete listas do presente documento;
+- a correção de espaçamento foi materializada no commit `62b07b1ebecaa0e5ee12500a13c562897490d016`;
+- `Promotion Control V1` e `Branch Topology Gate` haviam concluído com sucesso antes do merge.
+
+Este selo prova materialização e linhagem do contrato. Ele não promove `STILL_GOOD` físico do exemplo C41 e não substitui Termux/segundo-host/cross-host.
