@@ -1,0 +1,24 @@
+{
+  "schema": "RAFAELIA_SCOPED_RECEIPT_V1",
+  "receipt_id": "rafgittools-node24-setup-python-pr276.20260819T2246BRT",
+  "claim_allowed": false,
+  "source": {"repo":"rafaelmeloreisnovo/RafGitTools","pr":276,"head_sha":"6cc9fdd5d02dcfacfd7966e111ddc968ead674f8","change":"actions/setup-python v5 -> v7 / Node24-compatible dependency chain"},
+  "evidence": [
+    {"workflow":"CI","run_id":31988170582,"conclusion":"success"},
+    {"workflow":"PR Validation","run_id":31988170570,"conclusion":"success"},
+    {"workflow":"Android Client Build","run_id":31988170598,"conclusion":"success"},
+    {"workflow":"Internal Validation","run_id":31988170514,"conclusion":"success"},
+    {"workflow":"Contextual Execution Preflight v1","run_id":31988170537,"conclusion":"success"},
+    {"workflow":"RAFAELIA Ω Orchestrator V1","run_id":31988170561,"conclusion":"success"},
+    {"workflow":"Security Scan","run_id":31988170522,"conclusion":"failure"},
+    {"workflow":"CodeQL Advanced","run_id":31988170588,"conclusion":"failure"},
+    {"workflow":"Source Gap Audit","run_id":31988170552,"conclusion":"failure"},
+    {"workflow":"Code Coverage","run_id":31988170640,"conclusion":"failure"},
+    {"workflow":"Federation Audit","run_id":31988170562,"conclusion":"failure"}
+  ],
+  "state": "STALE_WITH_SCOPED_MIXED_EVIDENCE",
+  "why_stale": "PR remains open >30 days and current main has materially changed since the exact-head run set.",
+  "evidenced": "CI, PR Validation, Android build, internal validation and several control-plane gates succeeded on the exact PR head.",
+  "not_evidenced": "current-main Node24 compatibility or executor-wide assurance",
+  "next_gate": "rebase/update against current main and reproduce Python-dependent gates with terminal jobs/steps receipts"
+}
