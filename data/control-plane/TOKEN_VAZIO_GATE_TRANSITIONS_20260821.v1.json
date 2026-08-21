@@ -1,0 +1,94 @@
+{
+  "schema": "rafaelia.token-vazio-transitions.v1",
+  "generated_at": "2026-08-21T00:00:00Z",
+  "branch": "claude/qemu-androidx-mapa-ntfioo",
+  "transitions": [
+    {
+      "gap_id": "GAP-QEMU-PINNED-COMMIT-LOST",
+      "current_state": "TOKEN_VAZIO_UNRECOVERABLE",
+      "after_recovery": "VERIFIED_FALLBACK",
+      "gate": "O1_CONTRACTS_REJECT_MALFORMED_AND_AMBIGUOUS",
+      "condition": "qemu commit recovery plan executed + fallback commit validated",
+      "recovery_method": "use_latest_main | use_upstream_qemu_stable",
+      "evidence_required": [
+        "git ls-remote output",
+        "commit object verification",
+        "ABI baseline test passed"
+      ],
+      "timeline": "Before android-ci passes O1 gate"
+    },
+    {
+      "gap_id": "GAP-ANDROIDX-ABI-VALIDATION-MISSING",
+      "current_state": "TOKEN_VAZIO",
+      "after_implementation": "TESTED_LOCAL",
+      "gate": "O2_FIRST_READ_ONLY_TRACE_CROSSES_MODULES",
+      "condition": "ABI contract schema implemented + fixtures validated + signature validator passes golden tests",
+      "evidence_required": [
+        "schema:module_registry.schema.json capability definition",
+        "fixture:qemu_androidx_integration.valid.json passes validation",
+        "signature baseline established"
+      ],
+      "timeline": "Before qemu-androidx integration product approved"
+    },
+    {
+      "gap_id": "GAP-TERMUX-DEVICE-RUNTIME",
+      "current_state": "TOKEN_VAZIO",
+      "after_implementation": "PARTIAL",
+      "gate": "O10_VM_STARTS_AFTER_JUSTIFICATION",
+      "condition": "qemu_rafaelia available + androidx_RmR bound + local Termux receipt recorded + health probe passes",
+      "evidence_required": [
+        "EVT-QEMU-COMMIT-RECOVERY-20260821 event envelope",
+        "ABI validation event (abi_validation fields populated)",
+        "Termux local APK load receipt"
+      ],
+      "timeline": "After android-ci workflow passes O1-O8 gates"
+    },
+    {
+      "gap_id": "GAP-ANDROID-CI-INTEGRATION-VALIDATION",
+      "current_state": "TOKEN_VAZIO_RUNNER",
+      "after_repair": "PASS_LIMITED",
+      "gate": "O8_UNKNOWN_MISSING_EVIDENCE_NEVER_BECOMES_IMPLICIT_PASS",
+      "condition": "verify_external_sources_v2.sh executes + records structured decision + workflow completes with explicit status",
+      "evidence_required": [
+        "Script logs with recovery decision",
+        "Event envelope with commit_recovery_context fields",
+        "Next action explicitly stated even if PASS"
+      ],
+      "timeline": "Immediate (first CI run after android-ci.yml update)"
+    }
+  ],
+  "gates_that_remain_token_vazio": [
+    {
+      "gap_id": "GAP-PHYSICAL-DEVICE-EXECUTION",
+      "reason": "Requires actual Android hardware or full QEMU environment with graphics/input",
+      "recovery_rank": "P1_FUTURE",
+      "estimated_timeline": "After Vectras-VM-Android full stack + device access established",
+      "next_verifiable_step": "Deploy to physical device or Vectras-VM with graphics support; record DeviceRuntime event envelope"
+    },
+    {
+      "gap_id": "GAP-INDEPENDENT-REPLICATION",
+      "reason": "Requires external third-party verification and reproduction",
+      "recovery_rank": "P1_RESEARCH",
+      "estimated_timeline": "After build reproducibility proven; external auditor engagement required",
+      "next_verifiable_step": "Publish reproducible build instructions + invite external validation + document auditor receipt"
+    },
+    {
+      "gap_id": "GAP-PERFORMANCE-BENCHMARKING",
+      "reason": "Requires comparative metrics against baseline QEMU",
+      "recovery_rank": "P2_OPTIMIZATION",
+      "estimated_timeline": "Post-integration; optional unless performance claims made",
+      "next_verifiable_step": "Establish qemu_rafaelia vs upstream QEMU benchmark baseline + publish results"
+    }
+  ],
+  "invariants_protected": [
+    "TOKEN_VAZIO != implicit PASS (all recorded gaps have explicit next_verifiable_step)",
+    "Commit identity binding: every receipt includes source_commit field",
+    "Append-only audit trail: evidence never retroactively rewritten",
+    "Contradiction recording: conflicting evidence preserved with both sides documented"
+  ],
+  "r3": {
+    "F_ok": "Token_vazio gate transitions mapped; current→after states defined per orchestrator gate (O1-O11)",
+    "F_gap": "Actual execution of transitions blocked on script implementation (verify_external_sources_v2.sh, ABI validator)",
+    "F_next": "Implement verify_external_sources_v2.sh; run android-ci workflow; record event envelopes; validate transitions occur"
+  }
+}

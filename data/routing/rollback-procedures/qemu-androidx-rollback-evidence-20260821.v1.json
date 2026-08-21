@@ -1,0 +1,102 @@
+{
+  "schema": "rafaelia.rollback-procedure.v1",
+  "generated_at": "2026-08-21T00:00:00Z",
+  "procedure_id": "ROLLBACK-QEMU-ANDROIDX-20260821",
+  "scope": "branch:claude/qemu-androidx-mapa-ntfioo",
+  "affected_repositories": [
+    "rafaelmeloreisnovo/mapa",
+    "rafaelmeloreisnovo/Vectras-VM-Android",
+    "rafaelmeloreisnovo/RafPolimata"
+  ],
+  "rollback_triggers": [
+    {
+      "trigger_id": "RT-001",
+      "event": "qemu_rafaelia commit recovery succeeds BUT androidx_RmR ABI validation fails",
+      "condition": "Event envelope has commit_recovery_context.recovery_method=VERIFIED but abi_validation.validation_result=MISMATCH",
+      "action": "PRESERVE qemu recovery decision; MARK androidx as TOKEN_VAZIO_ABI_MISMATCH; WAIT for next androidx release or compatibility study",
+      "preserve": [
+        "qemu recovery decision logged in event envelope",
+        "ABI mismatch details documented",
+        "Both success/failure paths visible"
+      ],
+      "do_not": [
+        "Delete qemu recovery artifacts",
+        "Promote ABI mismatch to implicit PASS",
+        "Merge qemu changes without androidx fix"
+      ],
+      "next_action": "Contact androidx_RmR maintainer; document incompatibility; schedule compatibility study"
+    },
+    {
+      "trigger_id": "RT-002",
+      "event": "android-ci workflow passes O1-O8 gates BUT physical device execution fails",
+      "condition": "Workflow conclusion=success but subsequent device test fails",
+      "action": "RECORD device failure as EXPECTED gap (O8 rule); DO NOT promote local success to device capability; maintain PARTIAL state",
+      "preserve": [
+        "android-ci success receipt",
+        "Device execution attempt + failure logs",
+        "Explicit TOKEN_VAZIO recording for device runtime"
+      ],
+      "do_not": [
+        "Claim runtime success based on CI alone",
+        "Silence device failure",
+        "Auto-retry without explicit authorization"
+      ],
+      "next_action": "Gap remains open; escalate for Vectras-VM-Android full stack deployment planning"
+    },
+    {
+      "trigger_id": "RT-003",
+      "event": "Schema changes break existing product_graph.v1.json validators",
+      "condition": "Validation error: unknown field OR type mismatch in nodes/edges validation",
+      "action": "RESTORE previous schema version in contracts; DESIGN v2 schema in parallel; DOCUMENT incompatibility",
+      "preserve": [
+        "Both v1 and v2 schemas in repository",
+        "Migration guide from v1 → v2",
+        "All existing fixtures remain unchanged"
+      ],
+      "do_not": [
+        "Delete old schema version",
+        "Force-upgrade all fixtures without migration",
+        "Skip versioning discipline"
+      ],
+      "next_action": "Create migration validator; test backward compatibility; plan coordinated v2 rollout"
+    },
+    {
+      "trigger_id": "RT-004",
+      "event": "Orchestrator gate rules violated (e.g., TOKEN_VAZIO promoted without next_verifiable_step)",
+      "condition": "Validation check finds gap record missing required next_verifiable_step field",
+      "action": "BLOCK commit; REQUIRE gap completion before merge; DO NOT weaken invariant",
+      "preserve": [
+        "Orchestrator gate rules unchanged",
+        "Validation check enabled in CI"
+      ],
+      "do_not": [
+        "Remove validation check",
+        "Allow TOKEN_VAZIO without next step",
+        "Weaken O8 rule (unknown_missing_evidence_never_becomes_implicit_pass)"
+      ],
+      "next_action": "Fix gap records; re-run validation; commit only after passing"
+    }
+  ],
+  "evidence_preservation": {
+    "all_attempts_logged": "data/audits/qemu-androidx-rollback-log-20260821.jsonl (append-only)",
+    "no_silent_regressions": "Every decision recorded with timestamp + decision_maker + rationale",
+    "contradictions_kept": "When evidence conflicts, both versions recorded + escalation marker added",
+    "audit_trail_accessible": "All rollback decisions visible in git history + separate audit ledger"
+  },
+  "rollback_execution": {
+    "if_full_rollback_needed": "git reset --hard HEAD~6 (before phase 2 commits); rebuild plan",
+    "if_partial_rollback_needed": "git revert specific commits; preserve all evidence files",
+    "if_amendment_needed": "Create new commit (never amend) with corrected decision; record reason"
+  },
+  "guardian_rules": [
+    "No automatic rollback without human review",
+    "Every rollback decision becomes a new audit entry",
+    "Rollback does not delete evidence; only suspends forward motion",
+    "All gaps marked as TOKEN_VAZIO_BLOCKED_BY_ROLLBACK until resolved"
+  ],
+  "r3": {
+    "F_ok": "4 rollback triggers defined with clear detection + action rules; evidence preservation enforced",
+    "F_gap": "Rollback procedures not yet tested; audit ledger structure not yet implemented",
+    "F_next": "Create data/audits/qemu-androidx-rollback-log-20260821.jsonl; simulate rollback scenario; test barrier enforcement"
+  }
+}

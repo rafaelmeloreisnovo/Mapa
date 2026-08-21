@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.event.v1",
+  "event_id": "EVT-TERMUX-APK-LOCAL-MINIMAL-TEMPLATE",
+  "emitted_at": "2026-08-21T00:00:00Z",
+  "timestamp_monotonic_ms": 0,
+  "run_id": "RUN-LOCAL-TERMUX-MINIMAL",
+  "trace_id": "TRACE-TERMUX-LOCAL",
+  "span_id": "SPAN-APK-LOAD",
+  "source_module": "MOD-TERMUX-RUNTIME",
+  "source_repository": "termux-app-rafacodephi",
+  "source_commit": "TOKEN_VAZIO_LOCAL_EXECUTION",
+  "plane": "execution",
+  "host": "termux-local",
+  "arch": "arm64",
+  "event_type": "ARTIFACT_VERIFIED",
+  "status": "TOKEN_VAZIO",
+  "severity": "INFO",
+  "action": "verify_apk_load",
+  "target": "app-debug.apk",
+  "detail": "APK compiled and loadable locally; device runtime remains TOKEN_VAZIO",
+  "privacy": "internal",
+  "evidence_refs": [
+    "apk-hash-sha256:TOKEN_VAZIO",
+    "build-log-path:TOKEN_VAZIO"
+  ],
+  "artifact_refs": [
+    "local-apk-path:TOKEN_VAZIO"
+  ],
+  "payload_hash": "TOKEN_VAZIO_HASH",
+  "retry_count": 0,
+  "token_vazio": [
+    {
+      "gap_id": "GAP-TERMUX-DEVICE-RUNTIME",
+      "field": "device_execution",
+      "reason": "No physical or emulated Android device available in this environment",
+      "context_preserved": "APK built and verified syntactically; runtime execution not attempted",
+      "next_verifiable_step": "Execute on qemu_rafaelia with androidx_RmR runtime support"
+    },
+    {
+      "gap_id": "GAP-ANDROIDX-ABI-RUNTIME-BINDING",
+      "field": "abi_binding",
+      "reason": "androidx_RmR ABI contracts not yet validated",
+      "context_preserved": "APK structure preserved; ABI validation required before device load",
+      "next_verifiable_step": "Validate androidx_RmR contracts; bind to qemu execution environment"
+    }
+  ],
+  "r3": {
+    "F_ok": "APK compiled and structure verified locally",
+    "F_gap": "Device runtime execution and androidx ABI binding remain TOKEN_VAZIO",
+    "F_next": "Repair qemu_rafaelia commit recovery + validate androidx_RmR ABI + record qemu execution receipt"
+  }
+}
