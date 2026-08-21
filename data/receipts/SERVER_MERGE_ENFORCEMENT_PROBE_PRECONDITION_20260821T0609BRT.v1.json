@@ -1,0 +1,31 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "SERVER_MERGE_ENFORCEMENT_PROBE_PRECONDITION_20260821T0609BRT",
+  "type": "SERVER_MERGE_ENFORCEMENT_PRECONDITION_OBSERVATION",
+  "status": "BLOCKED_PRECONDITION_NOT_SATISFIED",
+  "claim_allowed": false,
+  "observed_at": "2026-08-21T06:09:12-03:00",
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "branch": "main",
+    "main_sha": "c3fe7224b55e4a78c4d1d09ee6ef0e0561614156",
+    "observation_surface": "GitHub branch metadata"
+  },
+  "observation": {
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks_enforcement_level": "off",
+    "required_status_check_contexts": [],
+    "server_side_zero_approval_rejection_observed": false,
+    "ruleset_binding": "TOKEN_VAZIO",
+    "bypass_actors": "TOKEN_VAZIO"
+  },
+  "epistemic_boundary": [
+    "POLICY_DENIED != SERVER_SIDE_MERGE_BLOCKED",
+    "MERGED != POLICY_SATISFIED",
+    "This receipt does not attempt a merge while protection is absent because such an attempt could mutate main.",
+    "No promotion, release, certification, runtime or scientific claim is authorized by this observation."
+  ],
+  "falsifier": "Invalidate this precondition state when GitHub server configuration is observably changed and a controlled ready-for-review PR with zero independent approvals is rejected by the server while main remains unchanged.",
+  "next_review_gate": "ENABLE_OR_IDENTIFY_BINDING_SERVER_RULESET_THEN_CAPTURE_ZERO_APPROVAL_REJECTION_RECEIPT"
+}
