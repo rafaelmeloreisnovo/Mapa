@@ -60,9 +60,9 @@
   },
   "adaptive_control": {
     "baseline": "PR304 established the first observed mismatch",
-    "delta": "PR309 establishes recurrence and raises recurrence_risk while preserving exact mechanism as TOKEN_VAZIO",
+    "delta": "PR309 establishes recurrence while preserving exact mechanism as TOKEN_VAZIO",
     "justification": "two distinct PRs show denied/missing-approval policy evidence with merges observed",
-    "rollback": "downgrade recurrence classification only if one cited event is disproved by authoritative history",
+    "rollback": "downgrade recurrence only if authoritative history disproves a cited event",
     "retest": "synthetic zero-approval PR must be unmergeable server-side"
   },
   "corrective_control": {
@@ -71,11 +71,24 @@
     "before_after_test": "before: DENIED+0 approvals did not prevent observed merge; after: identical condition must be rejected by server"
   },
   "maintenance": {
-    "class": "EVENT_TRIGGERED",
+    "class": "CONDITION_BASED",
     "asset": "Mapa server-side promotion/merge governance",
-    "condition_or_interval": "revalidate after any policy/ruleset/protection/permission/check/merge-path change",
+    "condition_or_interval": "EVENT_TRIGGERED on policy/ruleset/protection/permission/check/merge-path change",
     "measured_condition": "recurrence observed; classic protection disabled; exact ruleset/bypass state unresolved",
     "verification": "settings snapshot + synthetic blocked-merge receipt"
+  },
+  "incident_investigation": {
+    "trigger": "second observed policy-DENIED/zero-review PR merged",
+    "evidence_preserved": ["PR309 metadata", "review list", "Promotion Control run/job/log", "main branch protection snapshot", "merge commit"],
+    "timeline": ["merge observed at 2026-08-21T01:23:48Z", "closure Promotion Control job started after merge and returned DENIED"],
+    "conditions": "zero submitted reviews; required independent approvals=1; classic protection disabled",
+    "recent_changes": "PR309 integrated the operational-gap assurance work",
+    "competing_mechanisms": ["unbound classic protection", "repository ruleset path TOKEN_VAZIO", "bypass actor path TOKEN_VAZIO"],
+    "evidence_favoring": "merge plus DENIED plus zero reviews demonstrates enforcement mismatch",
+    "evidence_disfavoring": "no evidence identifies a specific ruleset or bypass actor",
+    "probable_cause": "TOKEN_VAZIO_EXACT_SERVER_PATH; observed barrier absence is sufficient for containment but not actor attribution",
+    "contributing_factors": ["Promotion Control observability can occur after merge", "classic required checks not enforced"],
+    "recurrence_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
   },
   "safety_assurance": {
     "data_acquisition": "PR/review history, policy run/job/log, branch governance and merge commit",
@@ -114,9 +127,5 @@
     "retirement_revalidation_criteria": "close only after server-side blocked-merge evidence; reopen on any governance change or recurrence"
   },
   "priority_axes_basis": "Integer 0..3 engineering priority classification based on repeated promotion-boundary mismatch; not a physical measurement.",
-  "predecessor_lineage": [
-    "PROMOTION_CONTROL_NOT_BINDING_TO_MERGE_20260820T1241BRT",
-    "PR304 merge d0865b3a7ffc89b861684ecf7c2598ddae5dd721",
-    "PR309 merge 54aeeb11bc5440ceb54573dfdda02db3ea68aa82"
-  ]
+  "predecessor_lineage": ["PROMOTION_CONTROL_NOT_BINDING_TO_MERGE_20260820T1241BRT", "PR304 merge d0865b3a7ffc89b861684ecf7c2598ddae5dd721", "PR309 merge 54aeeb11bc5440ceb54573dfdda02db3ea68aa82"]
 }
