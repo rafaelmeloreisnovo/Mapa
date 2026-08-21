@@ -1,0 +1,75 @@
+{
+  "schema_version": "rafaelia.shared-data-bootstrap-receipt/v1",
+  "receipt_id": "SHARED-DATA-GOVERNANCE-BOOTSTRAP-20260821-V1",
+  "state": "VERIFIED_LIMITED",
+  "observed_at": "2026-08-21T02:49:00-03:00",
+  "claim_allowed": false,
+  "certification_claim": false,
+  "drive": {
+    "root": {
+      "name": "[C1_INTERNAL] RAFAELIA_DADOS_COMPARTILHADOS_GOVERNADOS_V1",
+      "id": "1U3G5dJwcbGxGWaSPu3WbH1WI1-Jeyi7x"
+    },
+    "shared_data": {
+      "name": "[C1_INTERNAL] DADOS_COMPARTILHADOS",
+      "id": "1pOQ68FarWfRmY6hiG4_9F2X0UrnG0pI2"
+    },
+    "zones": {
+      "C0_PUBLIC_RELEASE": "1wKilenrhe6kcO4hqeR40nGfV2JvH8O4s",
+      "C1_MANIFESTS_INDICES": "13WIRh5liioA-yG8R1Xd8I05ykRi7wa0U",
+      "C2_STAGING_REDACTION": "1VamuXOmrGlwEEFpgd0qSJ6jzA6BWSolP",
+      "C3_RESTRICTED_PERSONAL_CONTEXT": "1dGAYHZ1xLCUsqM7xKFx0xeeXg84RuXS7",
+      "C4_NO_EXPORT_WITHOUT_HUMAN_GATE": "15JRV9lZ5HiHTvmsQcoRv6jG4YDEwnnS2",
+      "C1_GOVERNANCE": "1KOJoIKwdnzvTg1rYp-dKSpNCcJS3WfOz",
+      "C1_CASCADE_IMPACT": "1bifirokT3kNuawfkzpvkz7DXMnUavGZp",
+      "C1_RECEIPTS_CONSENT_REVOCATION": "192x-iA0kdD6B5FuCykVthCQL5eV8H_5g",
+      "C1_GITHUB_ACTION_HANDOFF_DISABLED": "1SJK2eQhtjGOHVXmS8IRTL2EuTVBPMjRc",
+      "C2_QUARANTINE": "1cZl8bAyu8UM1me7oWrHZQexp-be0DOP7",
+      "C1_APPEND_ONLY_ARCHIVE": "1CVBCinia1WKEADEhhLc1CG9r9c_h6XAP"
+    },
+    "documents": {
+      "governance_canon": "1ZzWWXL4vXOR0bOqd8I9a2OUn8cBN45GMPL-88mv5kVA",
+      "share_impact_envelope": "1oXhGBc94im0uvVyAGF3l87ySglfD2HNM8IW4-WIENy4",
+      "github_action_handoff_contract": "1k_SakF0a_-QYBDBwxCP5Gz5gyP4sgJ9-YV7BYElqH50"
+    },
+    "sharing_activated_by_this_receipt": false
+  },
+  "github": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "base_ref": "ed4f498afa3d7ea7e974fcd6381dbd69860e5f6e",
+    "branch": "governance/shared-data-release-v1-20260821",
+    "drive_bridge_enabled": false,
+    "validation_scope": "repository-local synthetic fixtures only"
+  },
+  "reference_posture": {
+    "NIST_CSF_2_0": "PRACTICE_REFERENCE",
+    "NIST_SP_800_53_R5": "PRACTICE_REFERENCE",
+    "NIST_SP_800_122": "PRACTICE_REFERENCE",
+    "NIST_PRIVACY_FRAMEWORK_1_0": "PRACTICE_REFERENCE",
+    "ISO_IEC_27001_2022": "PRACTICE_REFERENCE",
+    "ISO_IEC_27002_2022": "PRACTICE_REFERENCE",
+    "ISO_IEC_27701_2025": "PRACTICE_REFERENCE",
+    "ISO_8000_8_2015": "PRACTICE_REFERENCE",
+    "ISO_8000_61_2016": "PRACTICE_REFERENCE",
+    "ISO_8000_150_2022": "PRACTICE_REFERENCE",
+    "ISO_9001_2015_Amd1_2024": "CURRENT_PUBLISHED_REFERENCE_REVALIDATE_ON_2026_ED6_PUBLICATION",
+    "SIX_SIGMA_DMAIC": "CONTINUAL_IMPROVEMENT_METHOD",
+    "LGPD_ANPD": "APPLICABILITY_DEPENDS_ON_CONCRETE_PROCESSING_CONTEXT"
+  },
+  "F_ok": [
+    "Drive tree materialized with criticality prefixes",
+    "governance canon materialized",
+    "share impact/awareness template materialized",
+    "GitHub Action handoff contract materialized",
+    "GitHub machine-readable policy/schema/validator/fixtures/workflow materialized",
+    "no Drive credential or sharing permission activated"
+  ],
+  "F_gap": [
+    "repository CI exact-head result not yet observed at receipt creation",
+    "real Drive-to-GitHub identity/credential path TOKEN_VAZIO",
+    "real redaction/reidentification testing TOKEN_VAZIO",
+    "real personal-data release TOKEN_VAZIO and intentionally not attempted",
+    "external audit/certification TOKEN_VAZIO"
+  ],
+  "F_next": "Open draft PR, observe exact-head fail-closed CI, correct only evidenced defects, and keep Drive bridge disabled until a separately authorized activation cycle."
+}
