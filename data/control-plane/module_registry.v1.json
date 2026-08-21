@@ -1,7 +1,7 @@
 {
   "schema_version": "rafaelia.live-module-registry/v1",
-  "registry_id": "modules:rafaelia-observed-20260725",
-  "observation_date": "2026-07-25",
+  "registry_id": "modules:rafaelia-observed-20260821",
+  "observation_date": "2026-08-21",
   "claim_allowed": false,
   "modules": [
     {
@@ -134,6 +134,37 @@
         "Private-source redaction, ambiguity abstention and governed semantic packet execution remain TOKEN_VAZIO."
       ],
       "next_action": "Do not connect raw private sources; implement the privacy fixture and abstention gate first."
+    },
+    {
+      "module_id": "MOD-TERMUX-INTEGRATION",
+      "name": "Termux App + Packages Federated Integration",
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "secondary_repository": "rafaelmeloreisnovo/termux-packages",
+      "branch": "claude/proximo-passo-natural-c15mg3",
+      "observed_ref": "5e83eef9aea803bee127cd21eed6206ced193cb7",
+      "plane": "runtime",
+      "state": "PARTIAL_DRAFT",
+      "capabilities": [
+        "Android runtime execution environment",
+        "native code integration (JNI/NDK)",
+        "logcat evidence collection",
+        "package dependency resolution",
+        "health monitoring"
+      ],
+      "evidence_ids": [
+        "EVID-TERMUX-INTEGRATION-STRUCT",
+        "EVID-TERMUX-GENEALOGY-MATRIX",
+        "EVID-TERMUX-RECEIPT-20260821"
+      ],
+      "gaps": [
+        "No Android SDK/NDK available in this build environment (ELO 2-3 build gates TOKEN_VAZIO).",
+        "No physical Android device or emulator for runtime execution (ELO 4-5 installation/runtime gates TOKEN_VAZIO).",
+        "APK signing and device installation proof unavailable (requires device/keystore access).",
+        "Runtime ANativeActivity observation not executable (requires emulator or physical device).",
+        "Health metrics and device capability verification pending (blocked on device access)."
+      ],
+      "next_action": "Await Android SDK/NDK provisioning and physical device access; register genealogy matrix and execute federated doctor pass aggregation.",
+      "_closure_reference": "CLOSURE_L12 (Device Runtime Evidence — TOKEN_VAZIO gates for device-level validation)"
     }
   ]
 }
