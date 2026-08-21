@@ -1,0 +1,85 @@
+{
+  "schema_version": "rafaelia.omega-federated-cycle/v1",
+  "cycle_id": "OMEGA_FEDERATED_20260821T0542BRT",
+  "observed_at": "2026-08-21T05:42:57-03:00",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "absence_of_evidence != evidence_of_absence",
+    "history = append_only",
+    "stable_SHA != new_execution_evidence",
+    "merge_provenance != gate_authorization"
+  ],
+  "authorities": {
+    "Mapa": "main@ef705a8441f98cc16c4e772575acc69cbc4ef0d5",
+    "qemu_rafaelia": "master@b274de47403f48136d1969f7663aa457383e3ef4",
+    "androidx_RmR": "androidx-main@d4f500fce4ffb645a8372eb5a6683c3e0eb563e2",
+    "termux-app-rafacodephi": "master@5e83eef9aea803bee127cd21eed6206ced193cb7",
+    "RafGitTools": "main@062f09986840db24b684ba5affde1fbf192f35c7",
+    "RLL": "main@0fe2fb410b17ba357ef0c251abac68b1b2af8288"
+  },
+  "F_ok": [
+    "fresh repository authorities reconciled",
+    "PR323 exact-head failure mechanisms localized",
+    "13 Markdown violations corrected on successor branch without weakening lint policy",
+    "shared-data receipt immutability marker repaired on successor branch",
+    "PR323 merge has verified GitHub provenance",
+    "QEMU/AndroidX/Termux/RafGitTools/RLL source identities remain resolvable"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_SUCCESSOR_EXACT_HEAD_TERMINAL_ASSURANCE",
+    "TOKEN_VAZIO_SERVER_SIDE_REQUIRED_GATE_BINDING",
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_QEMU_EXACT_PIN_ABI_INTEGRATION",
+    "TOKEN_VAZIO_RAFGITTOOLS_POSTMERGE_MAIN_EVENT_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_PROVENANCE_V3_PHYSICAL_TRANSACTION_BINDING",
+    "TOKEN_VAZIO_RLL_FRESH_SCIENTIFIC_RUN_OUTPUT_HASH_INDEPENDENT_REPLICATION"
+  ],
+  "F_next": [
+    "execute successor exact-head CI + Promotion invariant + operational-gap assurance",
+    "obtain server-side rejection receipt for failed required gate/direct-main mutation",
+    "execute QEMU exact-pin ABI build/inspection against AndroidX/Vectras identities",
+    "capture RafGitTools postmerge-main run/job/step/artifact/hash receipt",
+    "bind Termux/Vectras/QEMU nonce-run physical transaction receipt",
+    "execute RLL fresh dataset/config/run/output hashes and independent replication"
+  ],
+  "F_esquecido": [
+    "A risk-management document itself is subject to the repository's regression gates",
+    "A receipt named CORRECTIVE_APPEND_ONLY still requires a machine-recognized immutability marker",
+    "MERGED and GATE_PASS are separate facts",
+    "GitHub valid merge signature proves provenance, not authorization"
+  ],
+  "token_vazio_resolved": [],
+  "new_token_vazio": ["TOKEN_VAZIO_SUCCESSOR_EXACT_HEAD_TERMINAL_ASSURANCE"],
+  "uncertainty_before_after": {
+    "before": ["PR323 merge looked like a governance-framework integration", "exact failure causes not yet reconciled in this cycle"],
+    "after": ["CI failure = 13 markdownlint issues in one file", "Promotion failure = I1 immutability-marker absence in one receipt", "server-side merge barrier remains unproved", "corrective successor exists but terminal result is pending"]
+  },
+  "hazards": {
+    "new": ["PR323_MERGED_WITH_BLOCKING_GATES_FAILED"],
+    "open": ["POLICY_DECISION_NOT_SERVER_BARRIER", "AUTHORITATIVE_MAIN_MUTATION_NOT_GOVERNED_TRANSITION"],
+    "closed": []
+  },
+  "lifecycle_deltas": {
+    "Mapa_merge_boundary": {"cycles_delta": 1, "test_cycles_delta": 1, "near_miss_delta": 1, "corrective_actions_delta": 2, "next_review_gate": "SUCCESSOR_EXACT_HEAD_TERMINAL_AND_SERVER_BINDING"},
+    "QEMU_pin_ABI": {"source_state": "STABLE_RESOLVED", "commits_since_pin_validation": 93, "exact_abi_execution": "TOKEN_VAZIO"},
+    "AndroidX": {"source_state": "STABLE_RESOLVED", "execution_delta": "NONE_OBSERVED"},
+    "Termux": {"source_state": "STABLE_RESOLVED", "physical_transaction_delta": "NONE_OBSERVED"},
+    "RafGitTools": {"source_state": "STABLE_RESOLVED", "postmerge_event_delta": "NONE_OBSERVED"},
+    "RLL": {"source_state": "STABLE_RESOLVED_UNSIGNED_DOCUMENTAL_HEAD", "scientific_execution_delta": "NONE_OBSERVED"}
+  },
+  "provenance_delta": {
+    "PR323": "head ec829093... -> merge ef705a84... with valid GitHub signature",
+    "correction_branch": "audit/omega-federated-20260821T0542BRT",
+    "correction_commits": ["7becfbb7f39b1fa635cf2db738e1f1cd80a6b651", "82a1c50d55fc6fda0e22f0365ffbde0d490a65da", "6c10ddcd38524b097dd9bc9a226515967c403b88"]
+  },
+  "routes": {
+    "promoted": ["PR323 failure mechanism -> corrective successor"],
+    "blocked": ["claim/release/publication", "server-governance closure", "QEMU ABI claim", "Termux physical transaction claim", "RLL scientific claim"]
+  },
+  "impact_radius_pointer": "data/routing/operational-gaps/pr323-merged-with-blocking-gates-failed-20260821T0542BRT.v1.json",
+  "next_review_gate": "SUCCESSOR_EXACT_HEAD_TERMINAL_THEN_DRIVE_APPEND_RECEIPT"
+}
