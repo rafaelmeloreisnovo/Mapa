@@ -1,0 +1,123 @@
+{
+  "schema": "rafaelia.operational-gap-recovery.v1",
+  "gap_id": "GAP-QEMU-PINNED-COMMIT-LOST",
+  "generated_at": "2026-08-21T00:00:00Z",
+  "severity": "P0_BLOCKER",
+  "state": "UNRECOVERABLE_WITH_FALLBACK",
+  "affected_repositories": [
+    "rafaelmeloreisnovo/qemu_rafaelia",
+    "rafaelmeloreisnovo/Vectras-VM-Android",
+    "rafaelmeloreisnovo/androidx_RmR"
+  ],
+  "original_pin": {
+    "commit_sha": "2346c30c2ba77881c2930add83523ea903b173fe",
+    "documented_in": "Vectras-VM-Android/.github/workflows/android-ci.yml",
+    "discovered_missing_at": "2026-08-01T22:01:00-03:00",
+    "catalog_cycle": "RAFAELIA_CATALOG_CYCLE_2026-08-01T2201-0300"
+  },
+  "investigation": {
+    "local_git_check": {
+      "command": "find /home/user/termux-app-rafacodephi/qemu_rafaelia/.git/objects -name 2346c3*",
+      "status": "NOT_FOUND",
+      "interpretation": "Commit object does not exist in local git database"
+    },
+    "remote_git_check": {
+      "command": "git ls-remote https://github.com/rafaelmeloreisnovo/qemu_rafaelia 2346c30c2ba77881c2930add83523ea903b173fe",
+      "status": "TOKEN_VAZIO",
+      "reason": "Requires network access; local fallbacks available"
+    },
+    "repository_state": {
+      "directory_found": "/home/user/Vectras-VM-Android/external/qemu_rafaelia",
+      "contains_git_repo": false,
+      "contains_code": "Minimal README only",
+      "interpretation": "qemu_rafaelia appears to be submodule reference, not active clone"
+    }
+  },
+  "recovery_options": [
+    {
+      "rank": 1,
+      "method": "use_latest_main",
+      "description": "Use latest commit from qemu_rafaelia main/master branch",
+      "command": "git ls-remote https://github.com/rafaelmeloreisnovo/qemu_rafaelia HEAD | awk '{print $1}'",
+      "precondition": [
+        "qemu_rafaelia GitHub repo is accessible",
+        "main branch exists",
+        "main branch has at least one commit"
+      ],
+      "risk_level": "LOW",
+      "validation": "Verify ABI contract compatibility with androidx_RmR after resolution"
+    },
+    {
+      "rank": 2,
+      "method": "use_upstream_qemu_stable",
+      "description": "Use upstream QEMU stable release + Android-specific patches from qemu_rafaelia commits",
+      "source": "https://github.com/qemu/qemu (latest stable) + downstream patches",
+      "precondition": [
+        "Upstream QEMU is publicly available",
+        "Android patches can be extracted from git history",
+        "Patches can be applied cleanly"
+      ],
+      "risk_level": "MEDIUM",
+      "validation": "Golden test against known Android APK builds"
+    },
+    {
+      "rank": 3,
+      "method": "synthesize_minimal_baseline",
+      "description": "Synthesize minimal QEMU + Android baseline from docs + RafPolimata requirements",
+      "source": "README + docs + Orchestrator contracts",
+      "precondition": [
+        "qemu_rafaelia documentation is sufficient",
+        "Requirements are clearly specified",
+        "Synthetic version can be tested locally"
+      ],
+      "risk_level": "HIGH",
+      "validation": "Full adversarial testing before device runtime"
+    }
+  ],
+  "decision": {
+    "chosen_method": "use_latest_main",
+    "rationale": "Lowest risk; preserves original intent if qemu_rafaelia has been maintained",
+    "fallback_method": "use_upstream_qemu_stable",
+    "fallback_rationale": "If main is empty, use stable upstream + documented patches"
+  },
+  "implementation": {
+    "location": "Vectras-VM-Android/.github/workflows/android-ci.yml",
+    "step_name": "Validate external integration sources (androidx_RmR/qemu_rafaelia)",
+    "script_path": "tools/ci/verify_external_sources_v2.sh",
+    "script_logic": [
+      "1. Attempt to resolve original pinned commit (2346c30c...) on remote",
+      "2. If commit not found, fetch latest from origin/HEAD",
+      "3. Record resolution method in event envelope",
+      "4. Validate androidx_RmR ABI contracts",
+      "5. If both succeed, pass workflow; if not, record TOKEN_VAZIO + next step"
+    ]
+  },
+  "evidence_recording": {
+    "event_type": "COMMIT_RECOVERY_DECISION",
+    "event_id": "EVT-QEMU-COMMIT-RECOVERY-20260821",
+    "envelope_fields": {
+      "commit_recovery_context": {
+        "original_commit": "2346c30c2ba77881c2930add83523ea903b173fe",
+        "resolution_commit": "TOKEN_VAZIO (to be filled during execution)",
+        "recovery_method": "TOKEN_VAZIO (use_latest_main | use_upstream_qemu_stable)",
+        "recovery_evidence": "git ls-remote output + verification receipt"
+      }
+    },
+    "must_preserve": [
+      "Both success and failure paths recorded",
+      "No implicit promotion of TOKEN_VAZIO to PASS",
+      "Fallback decisions logged with rationale",
+      "All commits checksummed for replay/audit"
+    ]
+  },
+  "rollback": {
+    "condition": "If recovery fails completely",
+    "action": "Mark as UNRECOVERABLE_PERMANENT; escalate to human review",
+    "preserve": "All investigation and decision logs; do not delete attempt history"
+  },
+  "r3": {
+    "F_ok": "Recovery strategy defined with 3-rank fallback hierarchy; decision rules documented",
+    "F_gap": "Actual resolution commit not determined without network access or git ls-remote execution",
+    "F_next": "Execute verify_external_sources_v2.sh; record event envelope with resolution_commit + recovery_method"
+  }
+}
