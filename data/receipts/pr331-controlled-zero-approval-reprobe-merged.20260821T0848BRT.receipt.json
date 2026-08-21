@@ -1,0 +1,15 @@
+{
+  "schema_version":"rafaelia.receipt/v1",
+  "receipt_id":"PR331_CONTROLLED_ZERO_APPROVAL_REPROBE_MERGED_20260821T0848BRT",
+  "type":"SERVER_ENFORCEMENT_FIELD_PROBE",
+  "status":"PRESENT_SCOPED_NEGATIVE_RESULT",
+  "claim_allowed":false,
+  "source":{"repo":"rafaelmeloreisnovo/Mapa","pr":331,"base_sha":"084c1f6f88c93442d14661fe06cd5756eee05a36","head_sha":"6dd764c8ab183320b80daeda4087c2188678823d","merge_sha":"db621d537c3fff0673a5aa345a239aea280948ad","created_at":"2026-08-21T11:45:25Z","merged_at":"2026-08-21T11:45:40Z"},
+  "probe_contract":{"independent_approvals":0,"expected_if_enforcement_binding":"merge rejection and unchanged main","interpret_successful_merge_as":"provider still permits tested path, including any applicable bypass"},
+  "observed":{"merge":"SUCCESSFUL","main_after":"db621d537c3fff0673a5aa345a239aea280948ad","ci":"SUCCESS","branch_topology":"SUCCESS","promotion_control":{"run_id":32478674253,"job_id":96760237431,"observed_independent_approvals":0,"required_independent_approvals":1,"result":"DENIED","blocking_reason":"INDEPENDENT_APPROVAL_MISSING"},"server_merge_enforcement":{"run_id":32478674276,"conclusion":"FAIL_CLOSED"}},
+  "interpretation":"The controlled zero-approval reprobe did not produce the required server-side rejection. The tested provider path remained mergeable in practice. Exact ruleset/bypass mechanism remains TOKEN_VAZIO.",
+  "resolved_gap":"TOKEN_VAZIO_CONTROLLED_REPROBE_OUTCOME",
+  "remaining_gaps":["TOKEN_VAZIO_PROVIDER_ADMIN_WRITE_ACTION_NOT_EXPOSED","TOKEN_VAZIO_REPOSITORY_RULESET_BINDING","TOKEN_VAZIO_BYPASS_ACTORS","TOKEN_VAZIO_EXACT_REQUIRED_CONTEXT_SERVER_BINDING","TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT"],
+  "falsifier":"After provider activation and read-back, a fresh zero-approval probe is rejected server-side with main SHA unchanged.",
+  "next_review_gate":"PROVIDER_ACTIVATION_READBACK_THEN_FRESH_REJECTED_MERGE_RECEIPT"
+}
