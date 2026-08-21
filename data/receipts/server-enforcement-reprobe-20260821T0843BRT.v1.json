@@ -1,0 +1,23 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "SERVER_ENFORCEMENT_REPROBE_20260821T0843BRT",
+  "type": "CONTROLLED_ZERO_APPROVAL_SERVER_PROBE",
+  "status": "PROBE_PENDING",
+  "claim_allowed": false,
+  "observed_at": "2026-08-21T08:43:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_branch": "main",
+  "base_sha": "084c1f6f88c93442d14661fe06cd5756eee05a36",
+  "purpose": "Controlled append-only probe after user-reported enforcement change.",
+  "preconditions": {
+    "independent_approvals": 0,
+    "expected_behavior_if_server_enforcement_is_binding": "MERGE_REJECTED",
+    "expected_main_sha_if_rejected": "084c1f6f88c93442d14661fe06cd5756eee05a36"
+  },
+  "epistemic_boundary": [
+    "POLICY_DENIED != SERVER_SIDE_MERGE_BLOCKED",
+    "MERGE_REJECTION != CONFIGURATION_DECLARATION",
+    "claim_allowed remains false until provider behavior is observed"
+  ],
+  "next_gate": "ATTEMPT_CONTROLLED_ZERO_APPROVAL_MERGE_WITH_EXPECTED_HEAD_SHA"
+}
