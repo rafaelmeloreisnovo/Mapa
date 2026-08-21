@@ -1,90 +1,127 @@
 {
   "schema_version": "rafaelia.operational-gap-assurance/v1",
   "gap_id": "SERVER_MERGE_ENFORCEMENT_PRECONDITION_20260821T0609BRT",
-  "title": "Server-side merge enforcement precondition remains unsatisfied on main",
-  "source_pointer": {
-    "repo": "rafaelmeloreisnovo/Mapa",
-    "main_sha": "c3fe7224b55e4a78c4d1d09ee6ef0e0561614156",
-    "probe_branch": "audit/server-enforcement-probe-20260821T0609BRT",
-    "probe_commit": "b0674110f6e8058536565cc1232748d12f546c2b"
-  },
-  "owner": "Mapa governance / repository authority",
-  "authority": "rafaelmeloreisnovo/Mapa:main",
+  "status": "BLOCKED",
+  "source_pointer": "github://rafaelmeloreisnovo/Mapa/pull/325@fe8a8a087dab9282fe4464dc86f31cde39bf3660",
+  "owner_authority": "rafaelmeloreisnovo/Mapa:main governance",
   "affected_routes": ["policy->server barrier->main", "approval->promotion->merge", "CI->required-context->main"],
   "observed_at": "2026-08-21T06:09:12-03:00",
-  "provenance": {
-    "main_protected": false,
-    "protection_enabled": false,
-    "classic_required_checks_enforcement": "off",
-    "zero_approval_server_rejection_observed": false
-  },
+  "provenance": [
+    {"source": "GitHub branch metadata", "role": "server-control precondition", "main_sha": "c3fe7224b55e4a78c4d1d09ee6ef0e0561614156"},
+    {"source": "PR #325 exact-head assurance", "role": "producer-consumer schema evidence", "run": 32466638674, "job": 96724509219}
+  ],
   "evidence_for": [
-    "GitHub branch metadata reports protected=false for main",
-    "GitHub branch metadata reports protection.enabled=false",
-    "required status checks enforcement level is off and no required contexts are exposed",
-    "no server-side rejection receipt for a zero-approval ready-for-review PR exists in this cycle"
+    "classic branch metadata reported protected=false",
+    "protection.enabled=false and required checks enforcement off",
+    "no zero-approval server rejection receipt exists",
+    "PR #325 later merged although its operational-gap assurance failed"
   ],
   "evidence_against": [
-    "repository-local Promotion Control and assurance workflows can still fail closed",
-    "absence of classic branch protection does not by itself prove absence of every possible repository ruleset or bypass path"
+    "repository-local Promotion Control and server-enforcement detector can fail closed",
+    "classic branch metadata alone cannot prove ruleset or bypass state"
   ],
   "uncertainty_state": "CLASSIC_PROTECTION_DISABLED_RULESET_AND_BYPASS_BINDING_TOKEN_VAZIO",
   "urgency": 3,
   "necessity": 3,
   "impact": 3,
+  "unlock": 3,
+  "risk": 3,
   "detectability": 3,
   "recurrence_risk": 3,
-  "failure_mode": "repository policy can deny promotion without an evidenced server-side barrier preventing merge",
-  "falsifier": "Configure or identify the binding server rule, then show that a controlled ready-for-review PR with zero independent approvals is rejected by GitHub while main remains unchanged; follow with one valid independent approval and a second controlled observation.",
-  "next_probe": "Enable or identify binding server-side protection/ruleset, then use the staged probe PR to capture zero-approval rejection without merging before the barrier exists.",
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "Policy can deny promotion without an evidenced server-side barrier; the precondition record itself also drifted from the executable schema.",
+  "falsifier": "Identify or configure the binding server rule, then show a controlled ready-for-review zero-approval PR is rejected while main remains unchanged.",
+  "next_probe": "First close schema drift with exact-head full-scan PASS; then identify or configure binding ruleset or protection before any zero-approval rejection test.",
   "mitigation": {
-    "class": "PREVENTIVE_FAIL_CLOSED",
-    "immediate": ["claim_allowed=false", "do not auto-merge", "do not attempt merge while server barrier is absent", "preserve zero-approval probe state"],
-    "server_side": "TOKEN_VAZIO_REQUIRED_CONFIGURATION_OR_RULESET_ACTION"
+    "fail_closed": true,
+    "rollback": "Retain current main and predecessor receipts; do not attempt destructive merge while barrier is absent.",
+    "immediate": ["claim_allowed=false", "no auto-merge", "no merge probe until binding control is observable"]
   },
-  "closure_gate": "SERVER_REJECTS_ZERO_APPROVAL_READY_PR_AND_MAIN_SHA_UNCHANGED_THEN_VALID_APPROVAL_PATH_OBSERVED",
-  "review_or_expiry": {
-    "type": "EVENT_TRIGGERED",
-    "origin": "live branch metadata observation",
-    "triggers": ["branch protection change", "ruleset change", "required-context change", "bypass actor change", "probe PR ready-for-review transition"]
+  "closure_gate": {
+    "criterion": "Binding server rule is observable and rejects a controlled zero-approval ready PR while main SHA remains unchanged; valid approval path is observed separately.",
+    "evidence_needed": "authoritative server configuration, rejected merge receipt, unchanged main SHA, and subsequent authorized-path receipt",
+    "falsifier": "zero-approval PR can still merge or binding rule cannot be identified",
+    "result": "TOKEN_VAZIO"
   },
+  "review_or_expiry": "EVENT_TRIGGERED on branch protection, ruleset, required-context, bypass actor, or probe-state change",
   "claim_allowed": false,
-  "predecessor_lineage": ["POLICY_DECISION_NOT_SERVER_BARRIER", "PR323_MERGED_WITH_BLOCKING_GATES_FAILED_20260821T0542BRT"],
-  "actions": {
-    "DETECTIVE": "re-read live main branch metadata at exact SHA",
-    "PREVENTIVE": "stage a non-merged probe branch and preserve zero approvals",
-    "PRECAUTIONARY": "no merge attempt until binding server configuration is observable",
-    "CORRECTIVE": "TOKEN_VAZIO for ruleset/bypass remains explicit rather than inferred",
-    "SAFETY_ASSURANCE": "main SHA must remain unchanged during zero-approval rejection test",
-    "ANTI_RECURRENCE": "POLICY_DENIED != SERVER_SIDE_MERGE_BLOCKED"
+  "action_categories": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "ADAPTIVE", "CORRECTIVE", "MAINTENANCE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+  "detector": {
+    "signal": "server-control metadata lacks binding protection or zero-approval rejection receipt",
+    "threshold": "any authority branch without evidenced binding gate",
+    "false_positive": "an unobserved ruleset may already enforce equivalent controls",
+    "false_negative": "merge can bypass repository-local policy",
+    "evidence_needed": "authoritative ruleset/protection/bypass metadata and controlled rejection receipt"
+  },
+  "adaptive_control": {
+    "baseline": "classic protection disabled; server ruleset and bypass unknown",
+    "delta": "precondition probe staged but destructive merge attempt withheld",
+    "justification": "safe rejection probe requires a barrier before attempting rejection",
+    "rollback": "discard probe branch without changing main",
+    "retest": "re-read server controls, then controlled zero-approval rejection"
+  },
+  "corrective_control": {
+    "symptom": "precondition record crashes operational-gap consumer because closure_gate is a string",
+    "mechanism_hypothesis": "producer emitted non-canonical current-schema shape",
+    "before_after_test": "before run 32466638674 raises AttributeError; after full-directory scan must pass this record"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "Mapa server-side merge-governance contract",
+    "condition_or_interval": "revalidate on any server merge-control or schema change",
+    "verification": "authoritative settings read plus exact-head assurance",
+    "measured_condition": "classic protection absent and current producer type drift observed"
+  },
+  "incident_investigation": {
+    "trigger": "PR #325 merged while the assurance record designed to stage server enforcement failed schema validation",
+    "facts": "CI and topology passed; operational-gap assurance failed 2/34; PR later merged",
+    "timeline": "precondition recorded -> exact-head assurance crash -> PR merged -> corrective successor",
+    "configuration": "classic protection disabled; ruleset and bypass unknown",
+    "recent_changes": "new server-enforcement precondition record",
+    "competing_mechanisms": ["unobserved ruleset", "bypass permission", "absence of required checks"],
+    "contributing_factors": ["schema contract mismatch", "server barrier not evidenced"],
+    "recommendations": ["fix producer schema", "require full-scan PASS before relying on gap record", "prove server rejection only after binding control exists"],
+    "blame_assignment": false
+  },
+  "safety_assurance": {
+    "data_acquisition": "branch metadata plus exact-head workflow and merge SHA",
+    "analysis": "separate local fail-closed policy from material server rejection",
+    "system_reassessment": "full scan after schema repair, then settings and rejection probe",
+    "corrective_trigger": "any merge while server binding remains unproved or any schema assurance failure"
+  },
+  "learning": {
+    "reusable_control": "DO_NOT_TEST_REJECTION_BY_MUTATING_MAIN_WHEN_BARRIER_IS_ABSENT",
+    "index_or_test": "server-enforcement precondition receipt plus operational-gap full scan",
+    "recurrence_check": "every server-governance change must prove schema validity before interpreting control state"
   },
   "component_lifecycle_ledger": {
     "component": "Mapa:server-merge-enforcement",
     "calendar_age": "CURRENT_CYCLE",
     "execution_hours": "TOKEN_VAZIO",
     "runtime_hours": "TOKEN_VAZIO",
-    "cycles": 1,
+    "cycles": 2,
     "starts_stops": "TOKEN_VAZIO",
     "builds": "TOKEN_VAZIO",
-    "test_cycles": 1,
+    "test_cycles": 2,
     "deployments": "TOKEN_VAZIO",
     "commits_since_validation": 1,
-    "dependency_changes": 0,
-    "environment_exposure": "GitHub repository settings and merge path",
-    "load_stress_proxy": "single controlled server-enforcement probe",
+    "dependency_changes": 1,
+    "environment_exposure": "GitHub repository settings and PR merge path",
+    "load_stress_proxy": "single server-enforcement probe plus 34-record assurance scan",
     "incident_count": 0,
-    "near_miss_count": 1,
-    "maintenance_actions": 0,
-    "corrective_actions": 1,
-    "software_schema_version": "operational-gap-assurance/v1",
+    "near_miss_count": 2,
+    "maintenance_actions": 1,
+    "corrective_actions": 2,
+    "software_schema_version": "rafaelia.operational-gap-assurance/v1",
     "evidence_age": "CURRENT_CYCLE",
     "provenance_age": "CURRENT_CYCLE",
-    "last_verified_at": "2026-08-21T06:09:12-03:00",
-    "next_review_gate": "SERVER_REJECTION_RECEIPT",
-    "retirement_revalidation_criteria": "EVENT_TRIGGERED on server merge-control change"
+    "last_verified_at": "run:32466638674/job:96724509219 + merge:fc6283b2851810bc33703f3692e6ebe95d8c3160",
+    "next_review_gate": "FULL_SCAN_PASS_THEN_SERVER_REJECTION_RECEIPT",
+    "retirement_revalidation_criteria": "EVENT_TRIGGERED"
   },
   "impact_radius": {
-    "Mapa_main": {"direct_exposure": true, "transmitted_load_or_effect": "promotion decisions may not be materially binding", "hidden_damage_or_hidden_state_possible": true, "inspection_required": true, "revalidation_required": true, "replacement_or_retirement_candidate": false, "evidence_needed": "binding ruleset/protection plus zero-approval rejection receipt", "false_positive_cost": "temporary merge delay", "false_negative_cost": "unauthorized merge into authority branch"},
-    "federated_consumers": {"direct_exposure": false, "transmitted_load_or_effect": "POTENTIAL_PROPAGATION", "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO", "inspection_required": false, "revalidation_required": "CONDITION_BASED", "replacement_or_retirement_candidate": false, "evidence_needed": "consumer binding receipts", "false_positive_cost": "extra revalidation", "false_negative_cost": "consumption of authority state merged outside binding governance"}
+    "Mapa_main": {"direct_exposure": true, "transmitted_load_or_effect": "promotion decisions are not evidenced as materially binding", "hidden_damage_or_hidden_state_possible": true, "inspection_required": true, "revalidation_required": true, "replacement_or_retirement_candidate": false, "evidence_needed": "binding rule plus rejection receipt", "false_positive_cost": "temporary merge delay", "false_negative_cost": "unauthorized authority-branch mutation"},
+    "federated_consumers": {"direct_exposure": false, "transmitted_load_or_effect": "POTENTIAL_PROPAGATION", "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO", "inspection_required": false, "revalidation_required": "CONDITION_BASED", "replacement_or_retirement_candidate": false, "evidence_needed": "consumer binding receipts", "false_positive_cost": "extra revalidation", "false_negative_cost": "consumption of inadequately governed authority state"}
   }
 }
