@@ -1,0 +1,56 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR312_OPERATIONAL_GAP_CONTRACT_CLOSURE_20260820T2348BRT",
+  "type": "BEFORE_AFTER_STRUCTURAL_ASSURANCE",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 312,
+    "base_sha": "ce8900b087bbde947d0026934ce1ee1c05563537",
+    "tested_head_sha": "f319214f2f2055524b6f301886195e36c8db02c0"
+  },
+  "before": {
+    "predecessor_pr": 310,
+    "predecessor_head_sha": "e7ba33aa3fd5df53462ba335d194d5710484cf26",
+    "workflow_run": 32437548927,
+    "job_id": 96641711547,
+    "operational_gap_records": 26,
+    "failures": 1,
+    "failing_gap_id": "PROMOTION_CONTROL_NOT_BINDING_TO_MERGE_RECURRENCE_20260820T2243BRT",
+    "missing_contract_fields": [
+      "incident_investigation.facts",
+      "incident_investigation.configuration",
+      "incident_investigation.recommendations"
+    ]
+  },
+  "after": {
+    "workflow": "operational-gap-assurance",
+    "run_id": 32441101316,
+    "job_id": 96651805215,
+    "conclusion": "SUCCESS",
+    "steps": {
+      "compile_assurance_engines": "SUCCESS",
+      "operational_gap_self_test": "SUCCESS",
+      "validate_operational_gap_records": "SUCCESS",
+      "validate_bounded_token_vazio_master_snapshots": "SUCCESS",
+      "validate_component_lifecycle_ledgers": "SUCCESS",
+      "verify_self_test_cross_repo_provenance": "SUCCESS"
+    }
+  },
+  "resolved_gap": "TOKEN_VAZIO_RECURRENT_MERGE_GAP_INCIDENT_CONTRACT_VALIDATION",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+  ],
+  "epistemic_boundary": [
+    "This receipt proves structural validity of the operational-gap record at the exact tested PR head only.",
+    "It does not prove server-side merge enforcement.",
+    "It does not identify a ruleset, permission path or bypass actor.",
+    "No scientific, runtime or release claim is promoted."
+  ],
+  "falsifier": "Any rerun on the exact tested content state that fails the same operational-gap contract invalidates this receipt scope.",
+  "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+}
