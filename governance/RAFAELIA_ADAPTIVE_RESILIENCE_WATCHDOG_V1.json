@@ -1,0 +1,70 @@
+{
+  "schema_version": "rafaelia.adaptive_resilience_watchdog/v1",
+  "status": "PROPOSED_FAIL_CLOSED",
+  "claim_allowed": false,
+  "purpose": "Route detected anomalies through bounded mitigation, sandbox self-test, hotfix qualification, hotswap/failover and rollback without allowing prediction or automation to manufacture authority.",
+  "invariants": [
+    "prediction != evidence",
+    "anomaly != vulnerability",
+    "sandbox_pass != production_pass",
+    "hotfix_candidate != hotfix_approved",
+    "failover_success != root_cause_resolved",
+    "rollback_success != prevention_control",
+    "TOKEN_VAZIO != PASS",
+    "P0_non_compensatory = true",
+    "human_dignity_privacy_child_safety_gates cannot be bypassed by technical score"
+  ],
+  "state_machine": ["OBSERVE","SCORE","HOLD_OR_ROUTE","SANDBOX_TEST","MITIGATE","VERIFY","CANARY","HOTSWAP_OR_FAILOVER","MONITOR","CLOSE_OR_ROLLBACK"],
+  "risk_vector": {
+    "dimensions": ["authority","security","privacy","protected_subject","compliance","governance","runtime","integrity","availability","reversibility","provenance"],
+    "score_rule": "weighted evidence only; unknown dimensions remain TOKEN_VAZIO and never score as zero risk",
+    "tensor_note": "vectors/tensors are semantic prioritization structures, not proof of causality"
+  },
+  "triggers": {
+    "P0": "immediate HOLD; no autonomous promotion; sandbox-only reproduction; require explicit authority and evidence before mutation",
+    "P1": "bounded mitigation may proceed on non-authoritative branch with rollback point and canary",
+    "P2_P3": "queue, observe and trend; promotion still requires ordinary gates",
+    "edge_conditions": ["new TOKEN_VAZIO on authority path","CI regression","unexpected permission/IPC behavior","receipt identity mismatch","protected-subject/privacy context unknown","dependency or supply-chain drift","watchdog heartbeat loss","error-rate or latency anomaly"]
+  },
+  "watchdog": {
+    "heartbeat_required": true,
+    "stale_state_action": "FAIL_CLOSED_HOLD",
+    "loop_guard": "max_attempts and cooldown required per route",
+    "storm_guard": "deduplicate correlated alerts before mitigation",
+    "self_health": ["validator integrity","receipt freshness","clock/ref/hash coherence","rollback target exists","authority owner resolvable"]
+  },
+  "sandbox_self_test": {
+    "allowed": ["negative fixtures","fault injection into owned test fixtures","dependency failure simulation","permission denial simulation","rollback rehearsal","canary verification"],
+    "forbidden": ["attacking third-party systems","credential harvesting","production destructive testing","bypassing authorization"],
+    "required_outputs": ["exact ref/hash","fixture identity","expected failure","observed failure","falsifier","receipt"]
+  },
+  "mitigation_ladder": [
+    "M0 observe_and_record",
+    "M1 isolate_feature_or_route",
+    "M2 degrade_safely",
+    "M3 failover_to_known_good",
+    "M4 hotswap_only_if_interface_and_state_compatibility_proven",
+    "M5 hotfix_candidate_in_sandbox",
+    "M6 canary_with_bounded_blast_radius",
+    "M7 promote_only_after_authority_and_evidence_gates"
+  ],
+  "rollback": {
+    "preconditions": ["known_good_ref","state/schema compatibility decision","data migration reversibility or explicit irreversible hold","receipt before mutation"],
+    "automatic_allowed_only_when": "pre-authorized, bounded, reversible, no privacy/protected-subject/legal authority ambiguity",
+    "otherwise": "HOLD_FOR_AUTHORITY"
+  },
+  "predictive_layer": {
+    "methods": ["rolling baseline","EWMA/CUSUM-style drift indicators","robust quantile bands","change-point candidates","edge/trigger frequency","paradox/anomaly registry"],
+    "rule": "forecast changes inspection priority; it never changes claim_allowed by itself",
+    "calibration": ["false-positive rate","false-negative observations when knowable","precision/recall on labeled incidents","time-to-detect","time-to-recover"]
+  },
+  "normative_matrix": {
+    "axes": ["binding_force","jurisdiction_or_scope","subject_context","data_class","technical_control","evidence_type","authority_owner"],
+    "decision": "APPLICABLE, NOT_APPLICABLE_WITH_EVIDENCE, or TOKEN_VAZIO_APPLICABILITY",
+    "certification_rule": "reference to a law/standard/framework never implies certification"
+  },
+  "closure": {
+    "requires": ["root cause or bounded TOKEN_VAZIO","mitigation receipt","non-regression evidence","rollback/failover status","owner","next review trigger"],
+    "append_only": true
+  }
+}

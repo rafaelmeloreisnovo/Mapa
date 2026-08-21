@@ -1,0 +1,37 @@
+name: Adaptive Resilience Watchdog V1
+on:
+  pull_request:
+    paths:
+      - 'governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json'
+      - 'scripts/validate_adaptive_resilience_watchdog_v1.py'
+      - '.github/workflows/adaptive-resilience-watchdog-v1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json'
+      - 'scripts/validate_adaptive_resilience_watchdog_v1.py'
+permissions:
+  contents: read
+jobs:
+  fail-closed-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Validate adaptive resilience contract
+        run: python scripts/validate_adaptive_resilience_watchdog_v1.py
+      - name: Negative semantic checks
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json'))
+          assert d['claim_allowed'] is False
+          assert d['triggers']['P0'].startswith('immediate HOLD')
+          assert d['watchdog']['stale_state_action']=='FAIL_CLOSED_HOLD'
+          assert d['rollback']['otherwise']=='HOLD_FOR_AUTHORITY'
+          assert 'attacking third-party systems' in d['sandbox_self_test']['forbidden']
+          print('PASS negative semantic checks')
+          PY
