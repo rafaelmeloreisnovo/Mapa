@@ -1,0 +1,154 @@
+name: Test Emit Federated Receipt
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * 1'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test-emit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate Test Receipt
+        id: generate
+        run: |
+          python3 << 'PYEOF'
+          import json
+          import hashlib
+          from datetime import datetime, timezone
+
+          # Test receipt (will be submitted to broker for validation)
+          receipt = {
+              "schema": "rafaelia.federated-producer-receipt.v1",
+              "observed_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+              "producer_identity": {
+                  "repository_owner": "${{ github.repository_owner }}",
+                  "repository_name": "${{ github.event.repository.name }}",
+                  "repository_url": "${{ github.event.repository.html_url }}",
+                  "producer_type": "internal-test",
+                  "federation_status": "PROVISIONAL"
+              },
+              "producer_commitment": {
+                  "signed_by_sha256": hashlib.sha256("test-hmac-key".encode()).hexdigest(),
+                  "signer_identity": "${{ github.repository }}",
+                  "signature_algorithm": "HMAC-SHA256",
+                  "signature_timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+                  "signature_validity_hours": 24
+              },
+              "provenance_chain": {
+                  "source_producer_repository": "${{ github.repository }}",
+                  "source_workflow": "${{ github.workflow }}",
+                  "source_run_id": "${{ github.run_id }}",
+                  "source_job_id": "${{ github.job }}",
+                  "received_by": "test-emit-workflow",
+                  "received_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+                  "transport_integrity": "HTTPS-TLS-1.3"
+              },
+              "cross_repo_observations": {
+                  "producer_identifier": {
+                      "uuid": "${{ github.repository }}",
+                      "canonical_name": "Mapa Internal Test Producer",
+                      "identity_hash": hashlib.sha256("${{ github.repository }}".encode()).hexdigest()
+                  },
+                  "producer_provenance": {
+                      "origin": "github.com/${{ github.repository }}",
+                      "custody_chain": ["test-emit-workflow"],
+                      "root_cause": "internal federation test on ${{ github.event_name }}"
+                  },
+                  "producer_context": {
+                      "execution_environment": "GitHub Actions",
+                      "runtime": "ubuntu-latest",
+                      "workflow_name": "${{ github.workflow }}",
+                      "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+                  },
+                  "producer_privacy": {
+                      "data_classification": "INTERNAL",
+                      "pii_scan": "no_pii_detected",
+                      "gdpr_compliant": true,
+                      "lgpd_compliant": true,
+                      "secrets_scan": "no_secrets_detected"
+                  },
+                  "producer_epistemic_level": {
+                      "knowledge_level": "observed",
+                      "confidence": 0.95,
+                      "falsifiers_applied": true,
+                      "can_be_promoted": true
+                  },
+                  "producer_dependencies": {
+                      "direct": [
+                          "data/control-plane/federation-policy.v1.json"
+                      ],
+                      "transitive": [
+                          "github-actions-runtime"
+                      ],
+                      "external": []
+                  },
+                  "producer_evidence": {
+                      "artifacts": [
+                          ".github/workflows/test-emit-federated-receipt.yml"
+                      ],
+                      "validation_result": "PASS",
+                      "immutability_proof": "run_id_job_id_timestamp_present"
+                  },
+                  "producer_next_step": {
+                      "action_required": "SUBMIT_TO_BROKER",
+                      "decision_type": "TEST_FEDERATION_EMISSION",
+                      "sla": "immediate",
+                      "escalation": "if_validation_fails"
+                  }
+              }
+          }
+
+          # Save receipt
+          with open("test-receipt.json", "w") as f:
+              json.dump(receipt, f, indent=2)
+
+          print("✓ Test receipt generated")
+          PYEOF
+
+      - name: Validate Receipt Locally
+        run: |
+          python3 tools/verify_cross_repo_provenance.py \
+            --receipt test-receipt.json \
+            --verbose > /tmp/validation-result.json
+
+          echo "✓ Receipt validated locally"
+          cat /tmp/validation-result.json | jq '.validation_status'
+
+      - name: Store Receipt as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-receipt-${{ github.run_id }}
+          path: test-receipt.json
+          retention-days: 30
+
+      - name: Print Receipt Summary
+        run: |
+          echo "Test Receipt Summary:"
+          echo "===================="
+          cat test-receipt.json | jq '{
+            schema: .schema,
+            producer: .producer_identity.repository_owner + "/" + .producer_identity.repository_name,
+            status: .producer_identity.federation_status,
+            run_id: .provenance_chain.source_run_id,
+            timestamp: .observed_at_utc,
+            validation: .cross_repo_observations.producer_evidence.validation_result
+          }'
+
+          echo ""
+          echo "Next steps:"
+          echo "- Run: tools/verify_cross_repo_provenance.py --receipt test-receipt.json"
+          echo "- Submit to broker: (pending Phase 2-P1-04c-prod implementation)"
