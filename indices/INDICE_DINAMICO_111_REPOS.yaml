@@ -161,6 +161,52 @@ catalogados:
       status: "CONFORME"
       descricao: "Framework cosmológico | Fibonacci modificada | Estruturas recursivas"
 
+    - id: "R_042"
+      nome: "qemu_rafaelia"
+      owner: "rafaelmeloreisnovo"
+      url: "TOKEN_VAZIO_URL_RESOLUTION_PENDING"
+      notacao: "RAF.VIRTUO.QEMU.ARM"
+      linguagem: "C | Shell"
+      categoria: "Virtualization | ARM/x86 Emulation"
+      marca_epistemica: "TOKEN_VAZIO"
+      primeira_linha_ok: false
+      nivel_topologico: "3_APLICACOES | 4_VIRTUALIZACAO"
+      status: "TOKEN_VAZIO_PINNED_COMMIT_RECOVERY"
+      contract_state: "DECLARED"
+      product_edge_id: "EDGE-QEMU-CONTRACTS"
+      metricas:
+        bootstrap_commit: "2346c30c... (UNRECOVERABLE)"
+        latest_known_commit: "TOKEN_VAZIO"
+      descricao: |
+        QEMU fork para emulação Android/ARM; integração com androidx_RmR.
+        Estado: Pinned commit (2346c30c) perdido no remote.
+        Recovery: Usar latest HEAD ou upstream QEMU + Android patches.
+        TOKEN_VAZIO: pinned commit recovery, ABI baseline establishment, source coherence.
+
+    - id: "R_043"
+      nome: "androidx_RmR"
+      owner: "rafaelmeloreisnovo"
+      url: "https://github.com/rafaelmeloreisnovo/androidx_RmR"
+      notacao: "RAF.ANDROID.ANDROIDX"
+      linguagem: "Java | Kotlin"
+      categoria: "Android | AndroidX | Runtime"
+      marca_epistemica: "DECLARED"
+      primeira_linha_ok: true
+      nivel_topologico: "3_APLICACOES | 4_VIRTUALIZACAO"
+      status: "ABI_CONTRACT_VALIDATION_MISSING"
+      contract_state: "PARTIAL"
+      product_edge_id: "EDGE-ANDROIDX-ABI"
+      last_observed_commit: "4f01fd23e91e861a060d2bbc1ed14f256a1b5e3b"
+      metricas:
+        loc: "TOKEN_VAZIO"
+        abi_contracts_validated: 0
+        abi_contracts_declared: "unknown"
+      descricao: |
+        Biblioteca AndroidX runtime support integrada com RAFAELIA.
+        Branch: androidx-main
+        Estado: Alto (complete, technically precise per README quality index)
+        Lacuna: ABI contract validation missing; precisa integração com qemu_rafaelia.
+
   # NÍVEL 4: GOVERNO (3 repos)
   governo:
     - id: "R_010"
@@ -209,12 +255,12 @@ repositorios_pendentes:
     android_variants: [
       "androidRom",
       "android_frameworks_base_rafaelia",
-      "androidx_RmR",
-      "qemu_rafaelia",
       "termux-api_rafcodephi",
       "UserLAnd2",
       "Vectras-VM-Android"
     ]
+    # Nota: androidx_RmR (R_043) e qemu_rafaelia (R_042) movidos para "catalogados.aplicacoes"
+    #       com TOKEN_VAZIO gates registradas explicitamente.
     
     crypto_security: [
       "CryptoSwift_RmR",

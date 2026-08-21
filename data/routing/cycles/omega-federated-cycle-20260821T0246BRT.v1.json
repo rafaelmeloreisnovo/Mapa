@@ -1,0 +1,60 @@
+{
+  "schema_version":"rafaelia.omega-federated-cycle/v1",
+  "cycle_id":"OMEGA_FEDERATED_20260821T0246BRT",
+  "state":"VERIFIED_LIMITED",
+  "claim_allowed":false,
+  "invariants":["VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM","TOKEN_VAZIO_NE_ZERO","ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE","APPEND_ONLY","NO_SILENT_REGRESSION"],
+  "F_ok":[
+    "PR316 head 5bb11dffbc9fc4df03bceee9790baae0d30e0afa terminal matrix reconciled: CI/Topology/operational-gap assurance SUCCESS; governance lanes fail-closed",
+    "PR317 exact head a086f04e23900821c6484c54c012276a056763da: CI SUCCESS, Branch Topology SUCCESS, operational-gap-assurance SUCCESS, Live Control Plane Reconciliation SUCCESS",
+    "QEMU historical pin 2346c30c2ba77881c2930add83523ea903b173fe resolves on authoritative rafaelmeloreisnovo/qemu_rafaelia",
+    "Termux authority corrected to repository default branch master@5e83eef9aea803bee127cd21eed6206ced193cb7; main@92d80377116c4fcbfd6f572247ad65201b75c5e6 retained as secondary lineage",
+    "Drive Stage7 physical Android/Termux ARM32 evidence reconciled separately from Cycle8 Vectras-Termux-QEMU transaction contract",
+    "Drive longitudinal append completed with revision control"
+  ],
+  "F_gap":[
+    "QEMU_PIN_ABI_INTEGRATION_RECEIPT",
+    "SERVER_RULESETS_BYPASS_REQUIRED_CONTEXT_AND_ZERO_APPROVAL_BLOCKED_MERGE_RECEIPT",
+    "TERMUX_VECTRAS_QEMU_SAME_RUN_EXECUTION_IDENTITY_AND_NONCE_BOUND_DEVICE_RECEIPT",
+    "RLL_FRESH_RUN_OUTPUT_HASHES_AND_INDEPENDENT_REPLICATION",
+    "ORCHESTRATOR_CAPABILITY_SCHEMA_MIGRATION_COMPATIBILITY_TEST"
+  ],
+  "F_next":[
+    "execute ABI/integration gate on qemu_rafaelia@2346c30c2ba77881c2930add83523ea903b173fe",
+    "inspect authoritative server rulesets/bypass/required check identities and execute synthetic zero-approval blocked-merge probe",
+    "execute one nonce-bound Vectras->Termux->QEMU physical transaction with execution-time hashes and ordered guest markers",
+    "execute RLL dataset->config->run->outputs->hashes->independent replication",
+    "exercise orchestrator contract fixtures against capability object-schema migration"
+  ],
+  "F_esquecido":[
+    "repository default_branch is part of authority identity",
+    "LOCAL_NOT_FOUND_NE_REMOTE_ABSENT",
+    "registry mutation must reconcile snapshot/evidence registry in the same validation cycle",
+    "physical evidence from one workload does not close a different transaction contract"
+  ],
+  "resolved_TOKEN_VAZIO":[
+    "TOKEN_VAZIO_QEMU_REMOTE_SOURCE_IDENTITY -> PRESENT_SCOPED at 2346c30c2ba77881c2930add83523ea903b173fe",
+    "TOKEN_VAZIO_PR316_FINAL_CI_TERMINAL -> SUCCESS",
+    "PR317_OPERATIONAL_GAP_SCHEMA_REGRESSION -> corrected and assurance SUCCESS",
+    "PR317_LIVE_CONTROL_BASELINE_REGRESSION -> reconciliation SUCCESS on a086f04e"
+  ],
+  "new_or_remaining_TOKEN_VAZIO":["QEMU_ABI_INTEGRATION_COMPATIBILITY","SERVER_RULESETS","SERVER_BYPASS_ACTORS","SERVER_REQUIRED_CONTEXT_BINDING","ZERO_APPROVAL_BLOCKED_MERGE","TERMUX_TRANSACTION_EXECUTION_IDENTITY","RLL_INDEPENDENT_REPLICATION","ORCHESTRATOR_CAPABILITY_SCHEMA_MIGRATION_TEST"],
+  "uncertainty_before_after":{
+    "qemu_pin":"local NOT_FOUND + remote TOKEN_VAZIO -> exact remote SHA PRESENT_SCOPED; compatibility remains TOKEN_VAZIO",
+    "termux_authority":"main implicitly treated as canonical -> metadata resolves default_branch=master; main is secondary divergent lineage",
+    "live_control":"PR317 initial baseline FAIL -> current exact-head reconciliation SUCCESS after snapshot/module reconciliation"
+  },
+  "hazards":[
+    {"id":"SERVER_MERGE_BINDING","state":"OPEN_RECURRENT_NEAR_MISS","impact_radius":{"Mapa":"DIRECT","RafGitTools":"POTENTIAL_PROPAGATION","Termux":"POTENTIAL_PROPAGATION","RLL":"POTENTIAL_PROPAGATION"}},
+    {"id":"QEMU_EXTERNAL_PIN_COMPATIBILITY","state":"TOKEN_VAZIO","impact_radius":{"qemu_rafaelia":"DIRECT","Vectras":"DIRECT","androidx_RmR":"DIRECT","Termux_device":"POTENTIAL_PROPAGATION","publication":"POTENTIAL_PROPAGATION"}},
+    {"id":"LIVE_CONTROL_REGISTRY_DRIFT","state":"MITIGATED_ON_PR317_HEAD","source":"PR314 added module without matching evidence/snapshot reconciliation; PR317 exposed baseline failure"}
+  ],
+  "component_lifecycle_ledger":[
+    {"component":"Mapa:PR317-assurance","limit_type":"EVENT_TRIGGERED","calendar_age":"TOKEN_VAZIO","runtime_hours":"TOKEN_VAZIO","cycles":2,"test_cycles":2,"builds":"TOKEN_VAZIO","deployments":"TOKEN_VAZIO","dependency_changes":1,"environment_exposure":"GitHub Actions Ubuntu 24.04.4 runner 2.336.0; Node20-target actions forced under Node24","incident_count":0,"near_miss_count":2,"maintenance_actions":2,"corrective_actions":2,"evidence_age":"CURRENT_CYCLE","provenance_age":"CURRENT_CYCLE","last_verified_at":"head:a086f04e23900821c6484c54c012276a056763da","next_review_gate":"exact-head workflow matrix after any further branch mutation"},
+    {"component":"qemu_rafaelia:historical-pin+ABI","limit_type":"EVENT_TRIGGERED","calendar_age":"TOKEN_VAZIO_NOT_COMPUTED","runtime_hours":"TOKEN_VAZIO","cycles":2,"test_cycles":1,"builds":"TOKEN_VAZIO","deployments":"TOKEN_VAZIO","dependency_changes":1,"environment_exposure":"GitHub source + AndroidX/Vectras ABI boundary","incident_count":0,"near_miss_count":1,"maintenance_actions":2,"corrective_actions":2,"evidence_age":"CURRENT_CYCLE","provenance_age":"CURRENT_CYCLE","last_verified_at":"commit:2346c30c2ba77881c2930add83523ea903b173fe","next_review_gate":"QEMU_PIN_ABI_INTEGRATION_RECEIPT"},
+    {"component":"Termux:default-authority+physical-boundary","limit_type":"EVENT_TRIGGERED","calendar_age":"TOKEN_VAZIO_NOT_COMPUTED","runtime_hours":"TOKEN_VAZIO","cycles":"TOKEN_VAZIO","test_cycles":"TOKEN_VAZIO","builds":"TOKEN_VAZIO","deployments":"TOKEN_VAZIO","dependency_changes":1,"environment_exposure":"default master + secondary main + Android/Termux ARM32 Stage7 + Cycle8 transaction contract","incident_count":0,"near_miss_count":1,"maintenance_actions":1,"corrective_actions":1,"evidence_age":"MIXED_SCOPES","provenance_age":"CURRENT_CYCLE","last_verified_at":"master:5e83eef9aea803bee127cd21eed6206ced193cb7 + Drive Stage7/Cycle8 reads","next_review_gate":"NONCE_BOUND_VECTRAS_TERMUX_QEMU_DEVICE_RECEIPT"}
+  ],
+  "actions":{"DETECTIVE":"workflow/log/source/default-branch probes","PREVENTIVE":"suppressed unnecessary QEMU latest-main fallback","PRECAUTIONARY":"claim_allowed=false and exact-scope separation","ADAPTIVE":"authority and QEMU route recalculated without rewriting predecessors","CORRECTIVE":"QEMU gap canonicalized then updated with remote evidence; live control baseline reconciled","MAINTENANCE":"Node runtime drift and schema migrations remain event-triggered review points","INCIDENT_INVESTIGATION":"local-vs-remote QEMU contradiction and PR314 registry drift factored without blame","SAFETY_ASSURANCE":"exact-head PR317 assurance and live-control gates rerun","LEARNING_ANTI_RECURRENCE":"LOCAL_NOT_FOUND_NE_REMOTE_ABSENT; DEFAULT_BRANCH_IN_AUTHORITY_IDENTITY"},
+  "provenance_delta":{"Mapa_main":"ed4f498afa3d7ea7e974fcd6381dbd69860e5f6e","PR317_tested_head":"a086f04e23900821c6484c54c012276a056763da","qemu_pin":"2346c30c2ba77881c2930add83523ea903b173fe","qemu_default_master":"b274de47403f48136d1969f7663aa457383e3ef4","termux_default_master":"5e83eef9aea803bee127cd21eed6206ced193cb7","termux_secondary_main":"92d80377116c4fcbfd6f572247ad65201b75c5e6"},
+  "drive_append":{"document_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88","revision_before":"AIroW376cEOboOVmjzjoMvU6ZNBozWhzXlcfMXuRnepaNO4dlxpQOnHF59iP--cLjzuKy7BLK65CK38b835XUWOihrXbp9S5ZcEvQnynErY","revision_after":"AIroW36YuhI8y3yQQcH8tYqcM34Ma_vT4exQldUs216dr6XKz-R2VgYdRxSItJSwUlemNWsFrgSymCOpUHXVtKXJP7XyLJ3dRt9GLPTCs6k","mode":"APPEND_ONLY_COMPARE_AND_WRITE"}
+}

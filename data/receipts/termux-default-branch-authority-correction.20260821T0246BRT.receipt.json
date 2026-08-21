@@ -1,0 +1,12 @@
+{
+  "schema_version":"rafaelia.receipt/v1",
+  "receipt_id":"TERMUX_DEFAULT_BRANCH_AUTHORITY_20260821T0246BRT",
+  "type":"SOURCE_AUTHORITY_CORRECTION",
+  "status":"PRESENT_SCOPED",
+  "claim_allowed":false,
+  "source":{"repo":"rafaelmeloreisnovo/termux-app-rafacodephi","default_branch":"master","default_head":"5e83eef9aea803bee127cd21eed6206ced193cb7","secondary_branch":"main","secondary_head":"92d80377116c4fcbfd6f572247ad65201b75c5e6","default_head_origin":"merged PR #376"},
+  "correction":{"before":"recent federated cycles treated main as the canonical producer branch","after":"repository metadata establishes master as default authority; main is a distinct secondary lineage","invariant":"BRANCH_NAME_FAMILIARITY_NE_REPOSITORY_AUTHORITY"},
+  "evidence_scope":["master head is a verified GitHub merge commit exposing discovery-time APK/QEMU SHA-256 identities","PR376 explicitly preserves DISCOVERY_NOT_EXECUTION and claim_allowed=false","main and master are separate lineages; no cross-lineage execution claim is inherited"],
+  "remaining_gaps":["TERMUX_VECTRAS_QEMU_SAME_RUN_EXECUTION_IDENTITY","NONCE_BOUND_DEVICE_TRANSACTION_RECEIPT","PHYSICAL_RUNTIME_FOR_CURRENT_TRANSACTION"],
+  "next_review_gate":"REVALIDATE_ON_DEFAULT_BRANCH_OR_PROVENANCE_CONTRACT_CHANGE"
+}
