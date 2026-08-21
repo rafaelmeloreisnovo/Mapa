@@ -10,6 +10,7 @@
 ## Visão Geral — Risco em Autoridade e Roteamento
 
 Mapa é o **sistema de autoridade e roteamento** de RAFAELIA. Seus riscos são únicos:
+
 - Mensagem é roteada para **lugar errado**
 - Autoridade é **falsa ou expirada**
 - Roteamento é **recursivo infinito**
@@ -21,24 +22,29 @@ Mapa é o **sistema de autoridade e roteamento** de RAFAELIA. Seus riscos são �
 ## Categorias de Risco (Mapa)
 
 ### R1 — Roteamento Incorreto
+
 - **R1.1:** Mensagem vai para destino errado (cache stale, tabela desatualizada)
 - **R1.2:** Hop count infinito (loop detectado tarde)
 - **R1.3:** Fallback incorreto (modo de degradação não é seguro)
 
 ### R2 — Autoridade Falsa
+
 - **R2.1:** Claim de autoridade sem verificação de signature
 - **R2.2:** Certificado expirado aceito
 - **R2.3:** Revogação não propagada
 
 ### R3 — Isolamento Violado
+
 - **R3.1:** Um canal vê dados de outro
 - **R3.2:** Context leak entre rotas
 
 ### R4 — Execução
+
 - **R4.1:** Timeout causa corrupção de estado
 - **R4.2:** Deadlock entre autoridades
 
 ### R5 — Evolução
+
 - **R5.1:** Protocolo de roteamento desatualizado
 - **R5.2:** Entrada obsoleta no cache
 
@@ -68,6 +74,7 @@ Mapa é o **sistema de autoridade e roteamento** de RAFAELIA. Seus riscos são �
 ### Remediação (R0-R3)
 
 **Isolamento em caso de falha:**
+
 - Loop detectado → Truncar rota, marcar como falha
 - Autoridade expirada → Fallback a modo read-only
 - Timeout → Rollback de transição de estado
@@ -78,12 +85,12 @@ Mapa é o **sistema de autoridade e roteamento** de RAFAELIA. Seus riscos são �
 
 | Risco | Subsistema | Severidade | Gate Crítico | Status |
 |-------|-----------|------------|--------------|--------|
-| R1.1  | Roteamento | ALTA | D1.1 | IMPLEMENTED |
-| R1.2  | Roteamento | ALTA | D1.1 | IMPLEMENTED |
-| R2.1  | Autoridade | ALTA | G0 | IMPLEMENTED |
-| R2.2  | Autoridade | MÉDIA | D3.1 | TOKEN_VAZIO |
-| R3.1  | Isolamento | ALTA | D2.1 | IMPLEMENTED |
-| R4.1  | Execução | MÉDIA | D1.1 | IMPLEMENTED |
+| R1.1 | Roteamento | ALTA | D1.1 | IMPLEMENTED |
+| R1.2 | Roteamento | ALTA | D1.1 | IMPLEMENTED |
+| R2.1 | Autoridade | ALTA | G0 | IMPLEMENTED |
+| R2.2 | Autoridade | MÉDIA | D3.1 | TOKEN_VAZIO |
+| R3.1 | Isolamento | ALTA | D2.1 | IMPLEMENTED |
+| R4.1 | Execução | MÉDIA | D1.1 | IMPLEMENTED |
 
 ---
 
@@ -98,7 +105,7 @@ Mapa é o **sistema de autoridade e roteamento** de RAFAELIA. Seus riscos são �
 
 **Fechamento R3:**
 
-```
+```text
 F_ok   = Framework aplicado a Mapa; 6 riscos mapeados
 F_gap  = D3/D5 em TOKEN_VAZIO; validação de autoridade incompleta
 F_next = Criar falsificador de loop infinito
