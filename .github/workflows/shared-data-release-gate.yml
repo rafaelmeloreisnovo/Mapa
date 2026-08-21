@@ -1,0 +1,64 @@
+name: RAFAELIA Shared Data Release Gate
+
+on:
+  pull_request:
+    paths:
+      - "docs/governance/SHARED_DATA_GOVERNANCE_V1.md"
+      - "schemas/shared_data/**"
+      - "data/governance/shared_data/**"
+      - "examples/shared_data/**"
+      - "tools/validate_shared_data_release.py"
+      - "tests/test_shared_data_release.py"
+      - ".github/workflows/shared-data-release-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-shared-data-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile validator
+        run: python -m py_compile tools/validate_shared_data_release.py
+
+      - name: Run adversarial unit tests
+        run: python -m unittest discover -s tests -p 'test_shared_data_release.py' -v
+
+      - name: Positive synthetic fixture must pass
+        run: python tools/validate_shared_data_release.py examples/shared_data/manifest.synthetic.allowed.v1.json
+
+      - name: Restricted unresolved fixture must be blocked
+        run: python tools/validate_shared_data_release.py --expect-blocked examples/shared_data/manifest.synthetic.blocked.v1.json
+
+      - name: Verify Drive bridge remains disabled and C4 raw automation prohibited
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          p = json.load(open('data/governance/shared_data/criticality_policy.v1.json', encoding='utf-8'))
+          assert p['drive_bridge_enabled'] is False
+          assert p['claim_allowed_certification'] is False
+          assert p['levels']['C4_CRITICAL']['automation_raw_export'] == 'PROHIBITED'
+          assert p['levels']['C4_CRITICAL']['raw_bytes_to_actions'] is False
+          print('shared-data policy boundary PASS')
+          PY
+
+      - name: Boundary summary
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## RAFAELIA Shared Data Release Gate
+          - Drive bridge: **DISABLED_BY_DEFAULT**
+          - Validation input: repository-local synthetic manifests only
+          - C4 raw bytes to Actions: **PROHIBITED**
+          - Fragmentation != anonymization
+          - Unknown high-impact privacy/semantic risk => `TOKEN_VAZIO` + BLOCK
+          - This gate is not ISO/NIST certification or legal compliance proof.
+          EOF

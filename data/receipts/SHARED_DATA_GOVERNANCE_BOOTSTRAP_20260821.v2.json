@@ -1,0 +1,77 @@
+{
+  "schema_version": "rafaelia.shared-data-bootstrap-receipt/v1",
+  "receipt_id": "SHARED-DATA-GOVERNANCE-BOOTSTRAP-20260821-V2",
+  "supersedes_for_effective_state": "data/receipts/SHARED_DATA_GOVERNANCE_BOOTSTRAP_20260821.v1.json",
+  "historical_v1_preserved": true,
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "certification_claim": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "governance/shared-data-release-v1-20260821",
+  "exact_head": "fe87d58cde6dfd62a05d0d00ca28c5bda7582562",
+  "pull_request": 318,
+  "drive_bridge_enabled": false,
+  "drive_sharing_activated": false,
+  "workflow_evidence": {
+    "shared_data_release_gate": {
+      "run_id": 32452583288,
+      "run_number": 1,
+      "conclusion": "success",
+      "job_id": 96683661482,
+      "steps": {
+        "compile_validator": "success",
+        "adversarial_unit_tests": "success",
+        "positive_C0_fixture": "success",
+        "blocked_C3_fixture_expected_block": "success",
+        "bridge_disabled_and_C4_prohibited": "success"
+      }
+    },
+    "repository_CI": {
+      "run_id": 32452583211,
+      "run_number": 1450,
+      "conclusion": "success"
+    },
+    "branch_topology_gate": {
+      "run_id": 32452583238,
+      "run_number": 662,
+      "conclusion": "success"
+    },
+    "server_merge_enforcement_assurance": {
+      "run_id": 32452583217,
+      "run_number": 59,
+      "conclusion": "failure",
+      "detector_fixtures": "success",
+      "live_main_server_enforcement": "failure",
+      "classification": "EXPECTED_FAIL_CLOSED_GOVERNANCE_GAP"
+    },
+    "promotion_control": {
+      "run_id": 32452583227,
+      "run_number": 729,
+      "conclusion": "failure",
+      "negative_tests": "success",
+      "rafaelia_15_invariants": "success",
+      "manual_promotion_decision": "failure",
+      "classification": "EXPECTED_FAIL_CLOSED_NO_PROMOTION"
+    }
+  },
+  "scope_proven": [
+    "policy/schema/validator compile and execute on GitHub Actions",
+    "synthetic C0 releaseable fixture passes",
+    "synthetic unresolved C3 fixture is blocked as designed",
+    "C4 raw automation prohibition is asserted by policy and test",
+    "Drive bridge remains disabled",
+    "repository structural CI accepts the new workflow/docs"
+  ],
+  "not_proven": [
+    "real Drive-to-GitHub data transfer",
+    "real personal-data redaction effectiveness",
+    "real reidentification resistance",
+    "semantic privacy safety for arbitrary fragments",
+    "legal compliance",
+    "ISO/NIST certification",
+    "server-side main protection"
+  ],
+  "F_ok": "Shared-data governance control plane is materialized and synthetically fail-closed on exact head.",
+  "F_gap": "Real-data bridge, privacy effectiveness evidence, external assessment/certification and server-side promotion authority remain open.",
+  "F_next": "Keep PR 318 draft; activate no Drive credentials. Next cycle should add a synthetic fragment-redaction/reidentification test corpus and impact scoring calibration before any real-data handoff is considered."
+}
