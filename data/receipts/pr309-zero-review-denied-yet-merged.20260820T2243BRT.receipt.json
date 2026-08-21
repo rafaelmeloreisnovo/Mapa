@@ -1,0 +1,49 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR309_ZERO_REVIEW_DENIED_YET_MERGED_20260820T2243BRT",
+  "type": "GOVERNANCE_RECURRENCE_RECEIPT",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 309,
+    "pr_head_sha": "3d9bce3fa184601e4bf9df69fa73a4d0da71c5a7",
+    "main_merge_sha": "54aeeb11bc5440ceb54573dfdda02db3ea68aa82",
+    "merged_at": "2026-08-21T01:23:48Z",
+    "reviews_observed": 0
+  },
+  "promotion_control": {
+    "run_id": 32436139556,
+    "job_id": 96637651527,
+    "result": "DENIED",
+    "blocking_reasons": ["INDEPENDENT_APPROVAL_MISSING"],
+    "observed_independent_approvals": 0,
+    "required_independent_approvals": 1,
+    "manual_merge_only": true,
+    "automatic_merge": false,
+    "claim_allowed": false
+  },
+  "server_observation": {
+    "main_protected": false,
+    "classic_protection_enabled": false,
+    "required_status_checks_enforcement": "off",
+    "required_contexts": [],
+    "merge_observed": true,
+    "merge_preceded_closure_run": true
+  },
+  "resolved_uncertainty": "A second observed PR reached main with zero submitted reviews while Promotion Control evaluated the same PR as DENIED for missing independent approval.",
+  "remaining_token_vazio": [
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+  ],
+  "epistemic_boundary": [
+    "This proves recurrence of policy/server-binding mismatch in the observed path; it does not prove which ruleset, permission or bypass actor enabled the merge.",
+    "The merge commit is GitHub-verified provenance, not evidence that downstream claims are scientifically or operationally valid.",
+    "No blame or actor-causality is assigned.",
+    "claim_allowed remains false."
+  ],
+  "falsifier": "A future synthetic zero-independent-approval PR with Promotion Control DENIED must be server-side unmergeable until required review/check conditions are satisfied.",
+  "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+}
