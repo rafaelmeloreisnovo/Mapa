@@ -1,0 +1,37 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR320_PHASE0_CONTRACT_REPAIR_20260821T0345BRT",
+  "type": "BEFORE_AFTER_EXECUTION_REPAIR",
+  "status": "PRESENT_SCOPED_MIXED",
+  "claim_allowed": false,
+  "before": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 319,
+    "head_sha": "c9f426bd3bf20b65c777e6356fe3ab5b902135eb",
+    "ci": {"run_id":32455326016,"job_id":96691397780,"conclusion":"FAILURE","failure":"markdownlint blocking regression gate; 145 issues in 5 changed Markdown files"},
+    "operational_gap_assurance": {"run_id":32455326092,"job_id":96691397893,"conclusion":"FAILURE","records":29,"failures":3,"mechanism":"three current-schema records lacked canonical next_probe"},
+    "declarative_contradiction": "PR body stated CI validations 5/5 passing/no new failures"
+  },
+  "correction": {
+    "pr": 320,
+    "tested_head_sha": "ec58fa70f42c9d7271012c070e8f17d02cc08b57",
+    "files": [
+      "data/routing/operational-gaps/bootstrap-cross-store-parity-delta-20260820T1200BRT.v1.json",
+      "data/routing/operational-gaps/operational-gap-schema-profile-rafaelia-hyphen-v1-20260819T2347BRT.v1.json",
+      "data/routing/operational-gaps/qemu-commit-recovery-plan-20260821.v1.json"
+    ],
+    "method": "restore next_probe while retaining next_verifiable_step; no validator relaxation"
+  },
+  "after": {
+    "ci": {"run_id":32455863182,"conclusion":"SUCCESS"},
+    "operational_gap_assurance": {"run_id":32455863163,"conclusion":"SUCCESS"},
+    "branch_topology": {"run_id":32455863129,"conclusion":"SUCCESS"},
+    "promotion_control": "FAIL_CLOSED_EXPECTED",
+    "server_merge_enforcement": "FAIL_CLOSED_EXPECTED"
+  },
+  "closed_scope": "PR319 three-record producer/consumer next_probe regression",
+  "open_scope": "PR319 historical markdownlint debt: 145 issues across five Phase 0 Markdown files",
+  "invariants": ["DECLARED_PASS_NE_EXECUTED_PASS","VISÃO_NE_ARTEFATO_NE_EXECUÇÃO_NE_EVIDÊNCIA_NE_CLAIM","TOKEN_VAZIO_NE_ZERO"],
+  "falsifier": "Any unchanged-policy exact-head full scan that still rejects the corrected three records falsifies the repair scope; Markdown closure requires a separate blocking lint PASS.",
+  "next_review_gate": "PHASE0_MARKDOWN_AND_OPERATIONAL_GAP_TERMINAL_RECEIPT"
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR321_OPERATIONAL_GAP_CONTRACT_REPAIR_20260821T0447BRT",
+  "type": "BEFORE_AFTER_ASSURANCE",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 321,
+    "failed_head_sha": "3ec2b6cf87c12db0b3bd8f7e33ae3dd4f77697c0",
+    "corrected_head_sha": "c492738dd8bbe87c4d7a48d111d5cd460ecf1833"
+  },
+  "before": {
+    "run_id": 32456249418,
+    "job_id": 96694004100,
+    "conclusion": "FAILURE",
+    "scan_records": 30,
+    "failures": 1,
+    "failed_record": "data/routing/operational-gaps/pr319-phase0-execution-claim-regression-20260821T0345BRT.v1.json",
+    "errors": [
+      "ADAPTIVE requires adaptive_control object",
+      "CORRECTIVE requires corrective_control object",
+      "maintenance.class must be PREVENTIVE, CONDITION_BASED or CORRECTIVE"
+    ]
+  },
+  "correction": {
+    "validator_relaxed": false,
+    "producer_changes": [
+      "add adaptive_control",
+      "add corrective_control",
+      "canonicalize maintenance.class to CONDITION_BASED while retaining event-trigger semantics in lifecycle/review fields",
+      "extend factual incident investigation and recurrence gate"
+    ]
+  },
+  "after": {
+    "run_id": 32460331219,
+    "job_id": 96705836500,
+    "conclusion": "SUCCESS",
+    "steps": {
+      "compile_assurance_engines": "SUCCESS",
+      "operational_gap_self_test": "SUCCESS",
+      "validate_operational_gap_records": "SUCCESS",
+      "validate_bounded_token_vazio_master": "SUCCESS",
+      "validate_component_lifecycle_ledgers": "SUCCESS",
+      "verify_cross_repo_provenance": "SUCCESS"
+    }
+  },
+  "resolved_gap": "TOKEN_VAZIO_PR321_OPERATIONAL_GAP_RECORD_CONTRACT_REPAIR",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_PHASE0_MARKDOWN_145_ISSUES_5_FILES",
+    "TOKEN_VAZIO_SERVER_SIDE_MERGE_AND_DIRECT_WRITE_BINDING",
+    "TOKEN_VAZIO_QEMU_PIN_ABI_INTEGRATION",
+    "TOKEN_VAZIO_TERMUX_VECTRAS_QEMU_PHYSICAL_TRANSACTION",
+    "TOKEN_VAZIO_RLL_FRESH_EXECUTION_HASHES_INDEPENDENT_REPLICATION"
+  ],
+  "epistemic_boundary": [
+    "This receipt proves structural operational-gap assurance only for the exact corrected head and unchanged gate contract.",
+    "Current PR CI success does not close historical Markdown debt because the five affected Markdown files were not changed in this successor.",
+    "Expected fail-closed Promotion Control and Server Merge Enforcement red states are separate governance evidence, not this repair's regression."
+  ],
+  "falsifier": "A rerun on identical content and gate version that rejects the corrected record, or evidence that the validator was weakened to accept it, falsifies this closure scope.",
+  "next_review_gate": "REVALIDATE_ON_OPERATIONAL_GAP_SCHEMA_CONSUMER_OR_RECORD_CHANGE"
+}

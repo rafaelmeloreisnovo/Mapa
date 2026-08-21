@@ -1,0 +1,133 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "QEMU_PIN_ABI_INTEGRATION_20260821T0447BRT",
+  "status": "TOKEN_VAZIO",
+  "source_pointer": "qemu_rafaelia:2346c30c2ba77881c2930add83523ea903b173fe -> master@b274de47403f48136d1969f7663aa457383e3ef4; consumer=Vectras/AndroidX/Termux transaction chain",
+  "owner_authority": "rafaelmeloreisnovo/qemu_rafaelia + consuming ABI owners",
+  "affected_routes": ["R5", "R7", "R11", "R12"],
+  "observed_at": "2026-08-21T04:47:00-03:00",
+  "provenance": [
+    {"source":"GitHub qemu_rafaelia master snapshot","observation":"master remains b274de47403f48136d1969f7663aa457383e3ef4; merge message includes armeabi-v7a alongside arm64-v8a"},
+    {"source":"GitHub compare 2346c30c...b274de47","observation":"status=ahead; ahead_by=93; behind_by=0; merge_base is exact historical pin"},
+    {"source":"compare file delta","observation":"post-pin lineage changes Android cross-files, armv7a NDK cross-file, bridge runtime, Gradle/ABI-related files, artifact contracts and workflows"}
+  ],
+  "evidence_for": [
+    "Historical pin is an ancestor of current master and resolves authoritatively.",
+    "Current master contains explicit ARM32 armeabi-v7a Android/NDK support added after the pin.",
+    "The 93-commit delta identifies concrete ABI-sensitive surfaces that must be discriminated."
+  ],
+  "evidence_against": [
+    "No exact-source ABI integration run for historical pin 2346c30c against the current consuming AndroidX/Vectras contract was observed in this cycle.",
+    "Ancestry and later ARM32 support do not prove compatibility of the historical pin with current consumers."
+  ],
+  "uncertainty_state": "SOURCE_IDENTITY_PRESENT; ANCESTRY_PRESENT; EXACT_PIN_CONSUMER_ABI_EXECUTION_TOKEN_VAZIO",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 2,
+  "detectability": 3,
+  "recurrence_risk": 2,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "Resolved immutable source can be mistakenly promoted as compatible merely because it is ancestral to a newer ARM32-capable branch.",
+  "falsifier": "Execute an ABI/integration gate bound to the exact pin and consuming source identities; incompatibility or build/runtime failure falsifies compatibility, while a scoped PASS closes only the tested matrix.",
+  "next_probe": "Bind qemu_rafaelia@2346c30c2ba77881c2930add83523ea903b173fe plus current AndroidX/Vectras consumer SHAs into one deterministic ABI build/integration job and capture compiler/NDK/ABI, steps, artifacts and hashes.",
+  "next_verifiable_step": "QEMU_PIN_ABI_INTEGRATION_RECEIPT: exact source SHAs -> toolchain/NDK -> build -> ABI inspection -> consumer integration -> artifact hashes -> receipt.",
+  "mitigation": {
+    "fail_closed": true,
+    "current": "do not replace or promote the pin based on ancestry alone",
+    "containment": "keep compatibility claim_allowed=false until exact-source execution",
+    "rollback": "if exact-pin integration fails, preserve source identity as PRESENT while returning compatibility to BLOCKED with failure receipt"
+  },
+  "closure_gate": {
+    "criterion": "exact historical pin passes bounded ABI/integration matrix against named current consumer identities",
+    "evidence_needed": "immutable producer/consumer SHAs, NDK/toolchain identity, build logs, ABI inspection, artifact hashes, terminal run/job receipt",
+    "falsifier": "source substitution, ABI mismatch, build/integration failure, or missing hash/receipt",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "EVENT_TRIGGERED on QEMU source, AndroidX/Vectras ABI, NDK/toolchain, bridge runtime, Gradle or artifact-contract change",
+  "claim_allowed": false,
+  "action_categories": ["DETECTIVE","PREVENTIVE","PRECAUTIONARY","ADAPTIVE","CORRECTIVE","MAINTENANCE","INCIDENT_INVESTIGATION","SAFETY_ASSURANCE","LEARNING_ANTI_RECURRENCE"],
+  "detector": {
+    "signal": "exact pin build/ABI/integration outcome differs from ancestry-based expectation",
+    "threshold": "any unresolved producer/consumer identity, non-terminal job, ABI mismatch or missing artifact hash",
+    "false_positive": "toolchain/environment failure is misclassified as source incompatibility",
+    "false_negative": "build succeeds but wrong source or ABI artifact is tested",
+    "evidence_needed": "source identity at execution time + toolchain + produced ABI artifact + consumer integration receipt"
+  },
+  "adaptive_control": {
+    "baseline": "predecessor gap still named source recovery even after authoritative pin resolution",
+    "delta": "source existence and ancestry are now treated as closed subclaims; next uncertainty is exact-pin ABI/integration compatibility",
+    "justification": "fresh authoritative compare confirms pin is merge base and current master is +93 commits with ABI-sensitive changes",
+    "rollback": "if source resolution changes, reopen source-identity layer without erasing the historical compare",
+    "retest": "rerun exact-pin matrix after any producer/consumer/toolchain change"
+  },
+  "corrective_control": {
+    "symptom": "current next_probe still asked to resolve an already resolved pin",
+    "mechanism_hypothesis": "operational record state lagged behind accumulated source-identity evidence",
+    "before_after_test": "before: probe repeats source lookup; after: successor routes directly to exact-pin ABI execution while preserving source identity evidence"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "QEMU immutable pin + Android consumer ABI boundary",
+    "condition_or_interval": "event-triggered on source/consumer/toolchain/ABI contract changes",
+    "measured_condition": "master is +93 commits from pin; ABI-sensitive surfaces changed; exact-pin current integration unmeasured",
+    "verification": "QEMU_PIN_ABI_INTEGRATION_RECEIPT"
+  },
+  "incident_investigation": {
+    "trigger": "historical source-resolution uncertainty persisted after authoritative source and ancestry were established",
+    "facts": ["pin 2346c30c resolves", "master b274de47 is ahead by 93 and behind by 0", "pin is merge base", "post-pin files include armv7a NDK cross-file and bridge/runtime/build changes", "exact-pin current consumer ABI run not observed"],
+    "timeline": ["2026-08-01 predecessor recorded source contradiction", "2026-08-21 authoritative pin lookup resolved source", "2026-08-21 fresh compare reconfirmed ancestry and +93 delta", "successor gap redirects probe to ABI execution"],
+    "configuration": {"producer_pin":"2346c30c2ba77881c2930add83523ea903b173fe","producer_master":"b274de47403f48136d1969f7663aa457383e3ef4","ahead_by":93,"behind_by":0,"compatibility":"TOKEN_VAZIO"},
+    "recent_changes": ["ARM32/ARM64 cross-files", "Android NDK build contract", "bridge runtime", "Gradle and artifact contracts"],
+    "competing_mechanisms": ["historical pin remains compatible", "post-pin ABI changes are required for current consumer", "toolchain/NDK environment rather than source content determines failure"],
+    "contributing_factors": ["source existence and compatibility had been conflated in earlier routing language"],
+    "recommendations": ["pin all producer/consumer identities at execution time", "test both ABI metadata and consumer linkage", "classify toolchain failure separately from source incompatibility", "hash produced artifacts"],
+    "blame_assignment": false,
+    "recurrence_gate": "QEMU_PIN_ABI_INTEGRATION_RECEIPT"
+  },
+  "safety_assurance": {
+    "data_acquisition": "authoritative source compare plus exact-source build/integration execution",
+    "analysis": "separate ancestry, buildability, ABI identity and consumer compatibility",
+    "system_reassessment": "revalidate after source/ABI/toolchain changes",
+    "corrective_trigger": "any identity drift, ABI mismatch or unreceipted artifact"
+  },
+  "learning": {
+    "reusable_control": "SOURCE_ANCESTRY_NE_ABI_COMPATIBILITY; RESOLVED_SUBCLAIM_ADVANCES_NEXT_PROBE",
+    "index_or_test": "exact-pin producer-consumer ABI matrix receipt",
+    "recurrence_check": "operational gap next_probe must not repeat a subclaim already evidenced as PRESENT_SCOPED"
+  },
+  "impact_radius": [
+    {"component":"qemu_rafaelia pin","direct_exposure":true,"transmitted_load_or_effect":"exact source under compatibility test","hidden_damage_or_hidden_state_possible":false,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"exact-source build/ABI receipt","false_positive_cost":"unnecessary fallback to newer QEMU source","false_negative_cost":"incompatible pin propagated into Android route"},
+    {"component":"Vectras/AndroidX ABI consumer","direct_exposure":true,"transmitted_load_or_effect":"compile/link/runtime contract","hidden_damage_or_hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"consumer SHA + ABI/link/integration result","false_positive_cost":"extra rebuild/testing","false_negative_cost":"binary/runtime mismatch"},
+    {"component":"Termux/device transaction","direct_exposure":false,"transmitted_load_or_effect":"POTENTIAL_PROPAGATION after ABI closure only","hidden_damage_or_hidden_state_possible":"TOKEN_VAZIO","inspection_required":false,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"nonce-bound physical transaction receipt","false_positive_cost":"premature device testing","false_negative_cost":"ABI result assumed equivalent to physical execution"}
+  ],
+  "lifecycle": {
+    "limit_type":"EVENT_TRIGGERED",
+    "calendar_age":"TOKEN_VAZIO_NOT_COMPUTED",
+    "execution_hours":"TOKEN_VAZIO",
+    "runtime_hours":"TOKEN_VAZIO",
+    "cycles":3,
+    "starts_stops":"TOKEN_VAZIO",
+    "builds":"TOKEN_VAZIO",
+    "test_cycles":2,
+    "deployments":"TOKEN_VAZIO",
+    "commits_since_validation":93,
+    "dependency_changes":1,
+    "environment_exposure":"QEMU source graph + Android/Vectras/AndroidX/Termux ABI boundary",
+    "load_stress_proxy":"93-commit source delta with ABI/build/runtime-sensitive files",
+    "incident_count":0,
+    "near_miss_count":1,
+    "maintenance_actions":3,
+    "corrective_actions":3,
+    "software_schema_version":"rafaelia.operational-gap-assurance/v1",
+    "evidence_age":"CURRENT_CYCLE",
+    "provenance_age":"CURRENT_CYCLE",
+    "last_verified_at":"qemu_rafaelia compare 2346c30c...b274de474",
+    "next_review_gate":"QEMU_PIN_ABI_INTEGRATION_RECEIPT",
+    "retirement_revalidation_criteria":"revalidate on producer, consumer, NDK/toolchain, bridge, Gradle or artifact-contract change"
+  },
+  "priority_axes_basis": "0..3 engineering priority classification, not physical measurement",
+  "predecessor_lineage": ["GAP-QEMU-PINNED-COMMIT-LOST", "qemu-commit-recovery-plan-20260821.v1.json"]
+}

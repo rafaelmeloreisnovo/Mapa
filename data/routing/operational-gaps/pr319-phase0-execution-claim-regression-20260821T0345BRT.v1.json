@@ -1,0 +1,132 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "PR319_PHASE0_EXECUTION_CLAIM_REGRESSION_20260821T0345BRT",
+  "status": "BLOCKED",
+  "source_pointer": "github:rafaelmeloreisnovo/Mapa#319@c9f426bd3bf20b65c777e6356fe3ab5b902135eb; actions:32455326016,32455326092",
+  "owner_authority": "rafaelmeloreisnovo/Mapa",
+  "affected_routes": ["R5", "R6", "R11", "R12"],
+  "observed_at": "2026-08-21T03:45:00-03:00",
+  "provenance": [
+    {"source":"PR319 body","observation":"declared CI validations 5/5 passing and no new failures"},
+    {"source":"GitHub Actions run 32455326016/job 96691397780","observation":"CI failed at blocking markdownlint regression gate; 145 issues in 5 changed Markdown files"},
+    {"source":"GitHub Actions run 32455326092/job 96691397893","observation":"operational-gap-assurance scanned 29 records and found 3 invalid current-schema records"},
+    {"source":"PR320 head ec58fa70f42c9d7271012c070e8f17d02cc08b57","observation":"CI 32455863182 SUCCESS; operational-gap-assurance 32455863163 SUCCESS; Branch Topology 32455863129 SUCCESS"}
+  ],
+  "evidence_for": [
+    "Exact-head CI contradicts the PR319 declarative passing statement.",
+    "The three operational-gap failures all lost canonical next_probe while retaining next_verifiable_step.",
+    "Restoring next_probe without relaxing the consumer produced terminal operational-gap-assurance SUCCESS on PR320 exact head."
+  ],
+  "evidence_against": [
+    "PR320 does not modify the five Markdown files, so its CI success does not close the 145 historical markdownlint issues merged by PR319."
+  ],
+  "uncertainty_state": "PRODUCER_CONSUMER_REGRESSION_CORRECTED; MARKDOWN_REGRESSION_OPEN",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "Declarative validation status diverged from executed exact-head gates, while a vocabulary rename removed a field required by the canonical operational-gap consumer.",
+  "falsifier": "Re-run exact-head gates after corrections; producer-consumer closure requires operational-gap-assurance SUCCESS without schema relaxation, while Markdown closure separately requires the five affected files to pass the same blocking markdownlint gate.",
+  "next_probe": "Correct the five PR319 Markdown files under the existing markdownlint policy, then run exact-head CI and require the blocking Markdown regression gate to pass; keep the three next_probe restorations under full operational-gap scan.",
+  "next_verifiable_step": "Correct the five PR319 Markdown files under the existing markdownlint policy, then run exact-head CI and require the blocking Markdown regression gate to pass; keep the three next_probe restorations under full operational-gap scan.",
+  "mitigation": {
+    "fail_closed": true,
+    "current": "PR320 restores the canonical next_probe fields; no gate was weakened.",
+    "markdown": "Historical Markdown debt remains open and must be corrected under the existing policy.",
+    "rollback": "Revert only producer corrections if a full-scan negative fixture shows over-acceptance."
+  },
+  "closure_gate": {
+    "criterion": "operational-gap-assurance exact-head PASS plus blocking markdownlint PASS on the five PR319 Markdown files under unchanged policies",
+    "evidence_needed": "run/job/step receipts for both gates and immutable tested head",
+    "falsifier": "any current-schema record still lacks canonical next_probe or any affected Markdown file still fails the blocking gate",
+    "result": "TOKEN_VAZIO_PARTIAL"
+  },
+  "review_or_expiry": "EVENT_TRIGGERED on operational-gap schema/consumer change or edits to the five Phase 0 Markdown files",
+  "claim_allowed": false,
+  "action_categories": ["DETECTIVE","PREVENTIVE","PRECAUTIONARY","ADAPTIVE","CORRECTIVE","MAINTENANCE","INCIDENT_INVESTIGATION","SAFETY_ASSURANCE","LEARNING_ANTI_RECURRENCE"],
+  "detector": {
+    "signal": "PR declarative PASS disagrees with terminal exact-head workflow state",
+    "threshold": "any declared terminal PASS with blocking workflow failure",
+    "false_positive": "a deliberately fail-closed workflow is misread as regression without inspecting its blocking reason",
+    "false_negative": "green auxiliary fixtures hide a failed blocking step",
+    "evidence_needed": "exact SHA, workflow conclusion, job and failed step/log"
+  },
+  "adaptive_control": {
+    "baseline": "PR319 Phase 0 summary declared passing validation while exact-head CI and operational-gap assurance contradicted it.",
+    "delta": "PR320 restored canonical next_probe fields without removing next_verifiable_step; this successor also completes the operational-gap action contracts while keeping Markdown debt open.",
+    "justification": "Executed evidence supersedes declarative status for gate state, while historical observations remain append-only.",
+    "rollback": "If the unchanged assurance consumer rejects the corrected producer for a different substantive reason, revert only the producer-contract additions and preserve the failure receipt.",
+    "retest": "Run exact-head full operational-gap scan and unchanged blocking Markdown gate."
+  },
+  "corrective_control": {
+    "symptom": "The PR321 operational-gap scan rejected this record after the earlier next_probe repair.",
+    "mechanism_hypothesis": "The record declared ADAPTIVE/CORRECTIVE actions without their required structured controls and encoded EVENT_TRIGGERED in the maintenance.class field rather than in the lifecycle/review trigger fields.",
+    "before_after_test": "before: PR321 run 32456249418 reports this record invalid; after: require full operational-gap scan failures=0 on the corrected exact head without validator relaxation."
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "Phase 0 documentation + operational-gap schema/consumer contract",
+    "condition_or_interval": "event-triggered revalidation on schema vocabulary change, validator change, or blocking lint failure",
+    "measured_condition": "producer-consumer field repair executed previously; Markdown closure remains open; PR321 record-contract drift observed",
+    "verification": "exact-head CI + complete operational-gap scan"
+  },
+  "incident_investigation": {
+    "trigger": "PR319 merged despite exact-head CI/assurance failures while its body described all gates as passing",
+    "facts": ["CI failed at markdownlint", "145 lint issues were reported in 5 changed Markdown files", "operational-gap-assurance reported 29 records and 3 failures", "the three failures lacked next_probe", "PR320 restored next_probe and exact-head CI/assurance became SUCCESS", "PR321 later exposed missing structured action contracts in this learning record"],
+    "timeline": ["PR319 head c9f426bd created", "exact-head workflows failed", "PR319 merged at 2026-08-21T06:40:40Z", "PR320 corrective branch created", "three producer records corrected", "PR320 exact-head CI/assurance succeeded", "PR321 run 32456249418 rejected this record contract"],
+    "configuration": {"runner":"Ubuntu 24.04.4","python":"3.12.x","markdownlint_cli2":"0.23.2","operational_gap_records_before_successor":29,"operational_gap_records_pr321":30},
+    "recent_changes": ["Phase 0 renamed next_probe to next_verifiable_step in three current-schema records", "five Markdown files were introduced/modified", "successor persisted a new current-schema regression record"],
+    "competing_mechanisms": ["declarative summary generated before terminal CI", "producer-consumer field vocabulary drift", "Markdown formatting not tested before merge", "learning record encoded action labels without all schema-required action contracts"],
+    "contributing_factors": ["server-side merge barrier remains unproved", "declarative test counts were not bound to terminal run IDs", "record authoring did not execute the full current-schema gate before persistence"],
+    "recommendations": ["bind every PASS claim to immutable SHA+run+job", "keep next_probe as canonical consumer field until versioned schema migration", "lint Markdown before merge using the same CI command", "validate every newly persisted current-schema gap record before considering the learning artifact structurally complete"],
+    "blame_assignment": false,
+    "recurrence_gate": "PHASE0_MARKDOWN_AND_OPERATIONAL_GAP_TERMINAL_RECEIPT"
+  },
+  "safety_assurance": {
+    "data_acquisition": "exact-head workflow/job/log inspection",
+    "analysis": "separate expected fail-closed governance red from actual CI/schema regressions",
+    "system_reassessment": "rerun on every relevant producer/consumer or documentation change",
+    "corrective_trigger": "any declared PASS without matching terminal blocking-gate evidence"
+  },
+  "learning": {
+    "reusable_control": "DECLARED_PASS_NE_EXECUTED_PASS; FIELD_RENAME_REQUIRES_VERSIONED_CONSUMER_MIGRATION; ACTION_LABEL_REQUIRES_STRUCTURED_CONTROL",
+    "index_or_test": "exact-head terminal-status receipt + full operational-gap scan + blocking markdownlint",
+    "recurrence_check": "future Phase summaries must point to immutable terminal run IDs and newly created gap records must pass the current schema gate"
+  },
+  "impact_radius": [
+    {"component":"Mapa Phase 0 docs","direct_exposure":true,"transmitted_load_or_effect":"documentation/CI integrity","hidden_damage_or_hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"markdownlint terminal PASS","false_positive_cost":"formatting effort and delayed merge","false_negative_cost":"merged documentation presented as validated despite blocking lint failure"},
+    {"component":"operational-gap assurance","direct_exposure":true,"transmitted_load_or_effect":"three historical producer records plus successor learning record rejected across the lineage","hidden_damage_or_hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"full scan failures=0","false_positive_cost":"temporary blocked record","false_negative_cost":"invalid gap records silently accepted"},
+    {"component":"runtime/science claims","direct_exposure":false,"transmitted_load_or_effect":"POTENTIAL_PROPAGATION through governance semantics only","hidden_damage_or_hidden_state_possible":"TOKEN_VAZIO","inspection_required":false,"revalidation_required":false,"replacement_or_retirement_candidate":false,"evidence_needed":"causal route if any","false_positive_cost":"unnecessary runtime revalidation","false_negative_cost":"semantic promotion if governance boundary is later relied upon"}
+  ],
+  "lifecycle": {
+    "limit_type":"EVENT_TRIGGERED",
+    "calendar_age":"CURRENT_CYCLE",
+    "execution_hours":"TOKEN_VAZIO",
+    "runtime_hours":"TOKEN_VAZIO",
+    "cycles":3,
+    "starts_stops":"TOKEN_VAZIO",
+    "builds":"TOKEN_VAZIO",
+    "test_cycles":3,
+    "deployments":"TOKEN_VAZIO",
+    "commits_since_validation":4,
+    "dependency_changes":0,
+    "environment_exposure":"GitHub Actions Ubuntu 24.04.4; Node20-target actions forced to Node24 observed",
+    "load_stress_proxy":"30 operational-gap records + 5 changed Markdown files",
+    "incident_count":0,
+    "near_miss_count":2,
+    "maintenance_actions":2,
+    "corrective_actions":2,
+    "software_schema_version":"rafaelia.operational-gap-assurance/v1",
+    "evidence_age":"CURRENT_CYCLE",
+    "provenance_age":"CURRENT_CYCLE",
+    "last_verified_at":"PR321@3ec2b6cf87c12db0b3bd8f7e33ae3dd4f77697c0 run 32456249418/job 96694004100 failure mechanism",
+    "next_review_gate":"PHASE0_MARKDOWN_AND_OPERATIONAL_GAP_TERMINAL_RECEIPT",
+    "retirement_revalidation_criteria":"revalidate on schema/consumer/lint-policy or affected-document change"
+  },
+  "priority_axes_basis": "0..3 engineering priority classification, not physical measurement"
+}
