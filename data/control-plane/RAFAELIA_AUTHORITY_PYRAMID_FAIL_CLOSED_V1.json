@@ -1,0 +1,180 @@
+{
+  "schema": "rafaelia.authority-pyramid-fail-closed.v1",
+  "generated_at": "2026-08-21T09:04:00-03:00",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "purpose": "Prevent evidence, debugging, security, privacy, compliance or governance state from crossing an authority boundary without the lower-layer evidence required by the claimed scope.",
+  "core_invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0 != false != PASS",
+    "absence_of_evidence != evidence_of_absence",
+    "urgency_orders_execution_not_truth",
+    "group_label != cultural_meaning",
+    "child_status_unknown != adult",
+    "age_threshold != cultural_context_resolved",
+    "cultural_reference_missing -> TOKEN_VAZIO_CONTEXT",
+    "guardian_role != automatically_valid_consent",
+    "best_interest_assessment != compliance_certificate",
+    "standard_reference != certification",
+    "rollback_success != prevention_control"
+  ],
+  "authority_layers": [
+    {
+      "level": "L0_OBSERVABLE_REALITY",
+      "authority": "exact observable system state",
+      "requires": ["repo_ref_path_hash_or_artifact_identity", "environment_or_device_when_claim_requires_it"],
+      "rule": "The silicon/runtime floor is the lowest observable technical layer for a computer/device claim; unobservable hardware/runtime state remains TOKEN_VAZIO."
+    },
+    {
+      "level": "L1_PROTECTED_SUBJECT_CONTEXT",
+      "authority": "established subject/use/context evidence",
+      "requires": ["subject_state", "purpose", "data_categories", "context_provenance"],
+      "rule": "Never infer protected status, age, culture, ethnicity, religion, guardian status or vulnerability from names, labels, geography or stereotypes."
+    },
+    {
+      "level": "L2_BINDING_EXTERNAL_AUTHORITY",
+      "authority": "applicable law/regulation/private obligation within resolved scope",
+      "requires": ["jurisdiction_or_applicability", "controller_provider_deployer_role", "purpose_and_data_flow"],
+      "rule": "A law or regulation is binding only within its actual material/territorial scope; unresolved applicability is TOKEN_VAZIO."
+    },
+    {
+      "level": "L3_TECHNICAL_NORMATIVE_REFERENCE",
+      "authority": "current technical standard/framework/guideline",
+      "requires": ["exact_reference_and_version", "scope", "conformance_evidence_if_claimed"],
+      "rule": "NIST/OWASP/ISO/RFC references guide engineering; they do not become law or certification by citation alone."
+    },
+    {
+      "level": "L4_FEDERATED_GOVERNANCE",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "requires": ["route", "state", "gap", "promotion_gate", "receipt_index"],
+      "rule": "Mapa routes and records federated state; it does not replace producer implementation authority or physical/scientific evidence."
+    },
+    {
+      "level": "L5_PRODUCER_AUTHORITY",
+      "authority": "owning repository and local contract",
+      "requires": ["repo", "default_or_declared_authority_ref", "exact_sha", "local_boundary"],
+      "rule": "The producer owns its implementation truth; cross-repo claims require producer and consumer evidence."
+    },
+    {
+      "level": "L6_EXECUTION_EVIDENCE",
+      "authority": "terminal verifier/device/receipt",
+      "requires": ["run_or_device_event", "steps_or_observations", "artifact_or_output_identity", "hash_or_bounded_result", "environment"],
+      "rule": "Source present, CI present, hash present and physical runtime are separate evidence scopes."
+    },
+    {
+      "level": "L7_CLAIM_PROMOTION",
+      "authority": "bounded promotion decision",
+      "requires": ["all_required_lower_layers_resolved", "falsifier", "review_when_required", "rollback", "receipt"],
+      "rule": "Any gating P0 or TOKEN_VAZIO holds promotion; claim scope cannot exceed evidence scope."
+    }
+  ],
+  "evidence_states": [
+    "TOKEN_VAZIO",
+    "OBSERVED",
+    "PARTIAL",
+    "EVIDENCED_SCOPED",
+    "FAILURE",
+    "BUG_CONFIRMED",
+    "REGRESSION",
+    "SECURITY_WEAKNESS",
+    "VULNERABILITY_SUSPECTED",
+    "VULNERABILITY_CONFIRMED",
+    "PRIVACY_RISK",
+    "COMPLIANCE_GAP",
+    "GOVERNANCE_GAP",
+    "DEBUG_BLOCKER",
+    "NEAR_MISS",
+    "INCIDENT",
+    "SUPERSEDED",
+    "NOT_APPLICABLE_WITH_EVIDENCE"
+  ],
+  "attention_states": [
+    "ACTIVE",
+    "URGENT",
+    "IGNORED_DISCOVERED",
+    "FORGOTTEN_REDISCOVERED",
+    "UNDERPRIORITIZED",
+    "DEFERRED_WITH_OWNER",
+    "ABORTED_WITH_REASON",
+    "BLOCKED_EXTERNAL"
+  ],
+  "priority_function": "impact * unblock * risk * urgency * information_gain * forgetting_risk",
+  "non_compensatory_dimensions": ["governance", "privacy", "security", "protected_subject"],
+  "p0_triggers": [
+    "child_or_vulnerable_subject_established_or_potential_with_unresolved_dataflow_purpose_retention_recipient_authority_or_best_interest",
+    "secret_or_credential_exposure",
+    "critical_auth_permission_or_bypass_surface_exploitable_or_unknown",
+    "direct_authoritative_branch_mutation_without_demonstrated_server_barrier",
+    "arbitrary_command_or_ipc_execution_without_bounded_authorization_and_integrity_evidence",
+    "raw_vm_guest_user_or_device_payload_crossing_public_receipt_boundary",
+    "high_impact_mutation_without_rollback",
+    "physical_runtime_or_security_claim_without_required_device_execution_evidence"
+  ],
+  "attention_rules": {
+    "IGNORED_DISCOVERED": ["reason", "next_probe", "owner_or_TOKEN_VAZIO_OWNER_REQUIRED"],
+    "FORGOTTEN_REDISCOVERED": ["rediscovery_evidence", "next_probe", "owner_or_TOKEN_VAZIO_OWNER_REQUIRED"],
+    "UNDERPRIORITIZED": ["priority_reason", "next_probe"],
+    "DEFERRED_WITH_OWNER": ["reason", "owner", "revisit_gate"],
+    "ABORTED_WITH_REASON": ["reason", "evidence_preserved", "reopen_condition"],
+    "BLOCKED_EXTERNAL": ["external_dependency", "observable_unblock_condition"]
+  },
+  "protected_subject_gate": {
+    "states": ["ESTABLISHED", "POTENTIAL", "TOKEN_VAZIO_NOT_ESTABLISHED", "NOT_APPLICABLE_WITH_EVIDENCE"],
+    "default": "TOKEN_VAZIO_NOT_ESTABLISHED",
+    "no_inference_fields": ["age", "ethnicity", "culture", "religion", "guardian_status", "vulnerability"],
+    "required_if_established_or_potential": ["purpose", "data_categories", "data_flow", "recipients", "retention", "minimization", "transparency", "authority_or_legal_basis", "best_interest_review", "jurisdiction", "alternatives", "receipt"],
+    "promotion_rule": "missing_required_field -> HOLD"
+  },
+  "debug_security_route": [
+    "symptom",
+    "reproduction",
+    "owning_component",
+    "exact_ref_hash",
+    "local_falsifier",
+    "producer_evidence",
+    "edge_evidence",
+    "receipt",
+    "federated_state"
+  ],
+  "producer_adapters": [
+    {
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "role": "CONTROL_PLANE_EXECUTOR_TOOL_ROUTER",
+      "base_authority_sha": "062f09986840db24b684ba5affde1fbf192f35c7",
+      "adapter_pr": 367,
+      "adapter_head_sha": "e323dc3b14f8937608c9efffd0f6429bdaec6d4d",
+      "adapter_path": "configs/rafaelia-authority-pyramid-adapter.v1.json",
+      "state": "PROPOSED_DRAFT_PR",
+      "claim_allowed": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "role": "VM_QEMU_CONSUMER",
+      "base_authority_sha": "152389cce37b0f02d4dd2d881e2b8b2779004de4",
+      "adapter_pr": 1102,
+      "adapter_head_sha": "e1a12f7d2ae86e78005194827db052bb15d27b07",
+      "adapter_path": "configs/rafaelia-authority-pyramid-adapter.v1.json",
+      "state": "PROPOSED_DRAFT_PR",
+      "claim_allowed": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "role": "ANDROID_RUNTIME_PROVIDER",
+      "base_authority_sha": "5e83eef9aea803bee127cd21eed6206ced193cb7",
+      "adapter_pr": 378,
+      "adapter_head_sha": "fddce623207a8d26ac240e802a52149cdba5bbf5",
+      "adapter_path": "configs/rafaelia-authority-pyramid-adapter.v1.json",
+      "state": "PROPOSED_DRAFT_PR",
+      "claim_allowed": false
+    }
+  ],
+  "normative_registry": "data/normative/NORMATIVE_GRAPH_BATCH_023_2026-08-21.v1.json",
+  "assurance": {
+    "validator": "scripts/authority_pyramid_gate.py",
+    "workflow": ".github/workflows/authority-pyramid-assurance.yml",
+    "required_behavior": "fail_closed",
+    "unknown_is_pass": false
+  },
+  "promotion_rule": "ALLOW only for an explicitly bounded claim after every required lower authority layer is evidenced; otherwise HOLD/TOKEN_VAZIO.",
+  "falsifier": "Any promotion that bypasses a required lower authority layer, treats an unknown as PASS, infers protected/cultural context from a label, or claims standards/legal conformance without scoped evidence falsifies this contract."
+}

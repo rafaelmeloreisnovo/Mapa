@@ -1,0 +1,58 @@
+name: Authority Pyramid Assurance
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json'
+      - 'data/normative/NORMATIVE_GRAPH_BATCH_023_2026-08-21.v1.json'
+      - 'docs/governance/AUTHORITY_PYRAMID_FAIL_CLOSED_V1.md'
+      - 'scripts/authority_pyramid_gate.py'
+      - '.github/workflows/authority-pyramid-assurance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json'
+      - 'data/normative/NORMATIVE_GRAPH_BATCH_023_2026-08-21.v1.json'
+      - 'docs/governance/AUTHORITY_PYRAMID_FAIL_CLOSED_V1.md'
+      - 'scripts/authority_pyramid_gate.py'
+      - '.github/workflows/authority-pyramid-assurance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile validator
+        run: python -m py_compile scripts/authority_pyramid_gate.py
+
+      - name: Run negative fixtures
+        run: python scripts/authority_pyramid_gate.py --self-test
+
+      - name: Validate canonical authority pyramid
+        run: python scripts/authority_pyramid_gate.py
+
+      - name: Validate normative graph parses
+        run: python -m json.tool data/normative/NORMATIVE_GRAPH_BATCH_023_2026-08-21.v1.json >/dev/null
+
+      - name: Preserve claim boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path('data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json').read_text())
+          n = json.loads(Path('data/normative/NORMATIVE_GRAPH_BATCH_023_2026-08-21.v1.json').read_text())
+          assert p['claim_allowed'] is False
+          assert n['claim_allowed'] is False
+          assert p['assurance']['unknown_is_pass'] is False
+          print('claim-boundary: PASS claim_allowed=false unknown_is_pass=false')
+          PY
