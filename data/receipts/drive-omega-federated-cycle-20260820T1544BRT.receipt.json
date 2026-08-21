@@ -1,0 +1,32 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "DRIVE_OMEGA_FEDERATED_CYCLE_20260820T1544BRT",
+  "type": "DRIVE_REVISION",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "tab_id": "t.0"
+  },
+  "write": {
+    "mode": "APPEND_ONLY_COMPARE_AND_WRITE",
+    "required_revision_before": "AIroW34r_ObHP_ntv-I0niIAtR30T990Q0bXxXFM391H229zPOl8mhzLeRpp-7BCURsYuIqRjix50cCruKNRyd9Y9JkaXVydSVPSNZvYbxo",
+    "revision_after": "AIroW37CHdRUal5VDeoHSr21zl9SKv2FaaenWAL2IQXzl0UbQAh6giQaLyfvDyL3NSCmS3Ov_sFBhzyIX2a7FCqqUxqRY37b8K2jZLrKWQ4",
+    "result": "SUCCESS"
+  },
+  "semantic_scope": [
+    "PR309 current-head CI/topology/operational-gap assurance state",
+    "expected fail-closed Promotion Control state",
+    "expected fail-closed server merge enforcement state",
+    "fresh producer main identities",
+    "remaining server, RafGitTools, Termux and RLL TOKEN_VAZIO gates"
+  ],
+  "epistemic_boundary": [
+    "DriveMemory != ExecutionEvidence",
+    "The Drive append records the cycle but does not replace workflow/device/scientific execution receipts.",
+    "No claim or publication is promoted."
+  ],
+  "falsifier": "If the recorded resulting revision lacks the appended cycle content, this receipt is invalid within its scope.",
+  "next_review_gate": "FRESH_REVISION_READ_BEFORE_NEXT_APPEND"
+}

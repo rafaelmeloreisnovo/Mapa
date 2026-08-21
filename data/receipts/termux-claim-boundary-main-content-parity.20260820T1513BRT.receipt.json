@@ -1,0 +1,52 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "TERMUX_CLAIM_BOUNDARY_MAIN_CONTENT_PARITY_20260820T1513BRT",
+  "type": "POST_MERGE_CONTENT_PARITY",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "pr": 377,
+    "pr_head_sha": "a91ce671b461432b8027e098d1bc37ca36aa5c40",
+    "tested_pr_merge_ref_sha": "3710288af424a3b05ce5db63d1c8dd370a49c596",
+    "final_main_merge_sha": "92d80377116c4fcbfd6f572247ad65201b75c5e6"
+  },
+  "execution": {
+    "claim_boundary_run_id": 32381934021,
+    "claim_boundary_job_id": 96467007292,
+    "unit_tests": "6/6 PASS",
+    "validator": "PASS_WITH_KNOWN_DEBT",
+    "claim_allowed": false
+  },
+  "content_comparison": {
+    "base": "3710288af424a3b05ce5db63d1c8dd370a49c596",
+    "head": "92d80377116c4fcbfd6f572247ad65201b75c5e6",
+    "compare_status": "diverged",
+    "ahead_by": 1,
+    "behind_by": 1,
+    "merge_base": "a91ce671b461432b8027e098d1bc37ca36aa5c40",
+    "changed_files": 0,
+    "interpretation": "different merge objects with no file-level content delta reported by GitHub compare"
+  },
+  "known_debt": {
+    "fully_compatible": 1,
+    "no_crash_guarantee": 1,
+    "production_ready": 1,
+    "zero_collisions": 1,
+    "guaranteed_compatible": 0
+  },
+  "resolved_gap": "TOKEN_VAZIO_TERMUX_TESTED_MERGE_TO_FINAL_MAIN_CONTENT_PARITY",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_TERMUX_POSTMERGE_MAIN_EXECUTION_EVENT",
+    "TOKEN_VAZIO_TERMUX_CLAIM_DEBT_ZERO",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME"
+  ],
+  "epistemic_boundary": [
+    "No-file-delta comparison narrows content uncertainty between tested PR merge ref and final main merge object.",
+    "It is not a substitute for an actual push/main execution receipt.",
+    "PASS_WITH_KNOWN_DEBT is not debt closure or production readiness.",
+    "No physical device/install/launch claim is promoted."
+  ],
+  "next_review_gate": "TERMUX_POSTMERGE_MAIN_EVENT_AND_PHYSICAL_RUNTIME_RECEIPTS"
+}

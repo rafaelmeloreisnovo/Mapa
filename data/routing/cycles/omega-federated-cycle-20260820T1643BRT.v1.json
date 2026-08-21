@@ -1,0 +1,325 @@
+{
+  "schema_version": "rafaelia.omega-federated-cycle/v1",
+  "cycle_id": "OMEGA_FEDERATED_20260820T1643BRT",
+  "status": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "ABSENCE_OF_EVIDENCE != EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY_HISTORY",
+    "NO_SILENT_REGRESSION",
+    "WORKFLOW_RED != REGRESSION_WHEN_FAIL_CLOSED_IS_EXPECTED"
+  ],
+  "authoritative_state": {
+    "Mapa": {
+      "main_sha": "974a8dc02ef0ebe347028212862b779761d6105a",
+      "main_protected": false,
+      "required_status_checks_enforcement": "off",
+      "active_pr": 309,
+      "pr_head_before_cycle_writes": "082f30311aa82707b7dd2ae617795ae4ee111fe4",
+      "exact_head_terminal_receipt": "data/receipts/pr309-exact-head-terminal.20260820T1643BRT.receipt.json"
+    },
+    "RafGitTools": {
+      "main_sha": "062f09986840db24b684ba5affde1fbf192f35c7",
+      "changed_since_previous_cycle": false,
+      "main_protected": false,
+      "required_status_checks_enforcement": "off"
+    },
+    "Termux": {
+      "main_sha": "92d80377116c4fcbfd6f572247ad65201b75c5e6",
+      "changed_since_previous_cycle": false,
+      "main_protected": false,
+      "required_status_checks_enforcement": "off"
+    },
+    "RLL": {
+      "repo": "instituto-Rafael/relativity-living-light",
+      "main_sha": "0fe2fb410b17ba357ef0c251abac68b1b2af8288",
+      "changed_since_previous_cycle": false,
+      "current_commit_scope": "DOCUMENTATION",
+      "signature_state": "unsigned"
+    }
+  },
+  "F_ok": [
+    "PR309_EXACT_HEAD_082f3031_TERMINAL_MATRIX_RESOLVED",
+    "MAPA_CI_SUCCESS",
+    "MAPA_BRANCH_TOPOLOGY_SUCCESS",
+    "MAPA_OPERATIONAL_GAP_ASSURANCE_SUCCESS",
+    "PROMOTION_CONTROL_NEGATIVE_FIXTURES_SUCCESS",
+    "PROMOTION_CONTROL_DENIED_FAIL_CLOSED_FOR_DRAFT_AND_0_OF_1_INDEPENDENT_APPROVAL",
+    "SERVER_MERGE_ENFORCEMENT_FIXTURES_4_OF_4_PASS",
+    "SERVER_LIVE_PROBE_BLOCKED_WITH_CLASSIC_PROTECTION_NOT_ENFORCED",
+    "RGT_SOURCE_IDENTITY_REVALIDATED_UNCHANGED",
+    "TERMUX_SOURCE_IDENTITY_REVALIDATED_UNCHANGED",
+    "RLL_SOURCE_IDENTITY_REVALIDATED_UNCHANGED"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+    "TOKEN_VAZIO_RAFGITTOOLS_POSTMERGE_MAIN_EVENT_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_POSTMERGE_MAIN_EXECUTION_EVENT",
+    "TOKEN_VAZIO_TERMUX_CLAIM_DEBT_ZERO",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_FRESH_SCIENTIFIC_EXECUTION",
+    "TOKEN_VAZIO_RLL_OUTPUT_HASH_RECEIPT",
+    "TOKEN_VAZIO_RLL_INDEPENDENT_REPLICATION"
+  ],
+  "F_next": [
+    "PROBE_SERVER_RULESETS_AND_BYPASS_SURFACE_IF_ENDPOINT_BECOMES_AVAILABLE",
+    "PROVE_ZERO_APPROVAL_MERGE_BLOCKED_BY_SERVER_AND_PROMOTION_CONTROL_CONTEXT_REQUIRED",
+    "OBTAIN_RAFGITTOOLS_POSTMERGE_MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT",
+    "OBTAIN_TERMUX_POSTMERGE_MAIN_EVENT_THEN_REDUCE_CLAIM_DEBT_4_TO_0",
+    "OBTAIN_TERMUX_EXECUTION_TIME_IDENTITY_APK_INSTALL_LAUNCH_PID_LOGCAT_DEVICE_RECEIPT",
+    "RUN_RLL_DATASET_CONFIG_OUTPUT_HASH_CHAIN_AND_INDEPENDENT_REPLICATION"
+  ],
+  "F_esquecido": [
+    "A_FAIL_CLOSED_WORKFLOW_CAN_BE_RED_AND_CORRECT",
+    "UNCHANGED_SOURCE_IDENTITY_DOES_NOT_CREATE_NEW_EXECUTION_EVIDENCE",
+    "SERVER_CONFIGURATION_IS_A_LIFECYCLE_COMPONENT",
+    "SOURCE_IDENTITY != SCIENTIFIC_EXECUTION",
+    "PR_HEAD_EVIDENCE != POSTMERGE_MAIN_EVIDENCE"
+  ],
+  "token_vazio_resolved": [
+    "TOKEN_VAZIO_PR309_EXACT_NEW_HEAD_TERMINAL_REVALIDATION"
+  ],
+  "new_token_vazio": [],
+  "uncertainty_before_after": {
+    "before": {
+      "PR309_082f3031_terminal_state": "TOKEN_VAZIO",
+      "promotion_red_semantics": "NEEDS_DISCRIMINATION",
+      "server_red_semantics": "NEEDS_DISCRIMINATION"
+    },
+    "after": {
+      "PR309_082f3031_terminal_state": "PRESENT_SCOPED_MIXED_FAIL_CLOSED",
+      "promotion_red_semantics": "EXPECTED_DENIED_DRAFT_AND_INDEPENDENT_APPROVAL_MISSING",
+      "server_red_semantics": "EXPECTED_FAIL_CLOSED_LIVE_CONFIGURATION_NOT_ENFORCED"
+    }
+  },
+  "hazards": [
+    {
+      "hazard_id": "POLICY_DECISION_NOT_BOUND_TO_SERVER_MERGE_BARRIER",
+      "state": "OPEN_P0_REVALIDATED",
+      "evidence_for": [
+        "Mapa main protected=false",
+        "classic protection enabled=false",
+        "required status checks enforcement=off",
+        "server assurance live probe status=BLOCKED"
+      ],
+      "evidence_against": [],
+      "uncertainty_state": "PARTIALLY_RESOLVED",
+      "remaining_uncertainty": ["rulesets", "bypass actors", "exact required promotion context"],
+      "claim_allowed": false
+    }
+  ],
+  "impact_radius": {
+    "origin": "Mapa:server-side-merge-governance",
+    "components": [
+      {
+        "component": "Mapa/main",
+        "direct_exposure": true,
+        "transmitted_load_or_effect": "merge eligibility can bypass policy intent unless server barrier is separately enforced",
+        "hidden_damage_or_hidden_state_possible": true,
+        "inspection_required": true,
+        "revalidation_required": true,
+        "replacement_or_retirement_candidate": false,
+        "evidence_needed": "server-side zero-approval blocked merge receipt plus ruleset/bypass inspection",
+        "false_positive_cost": "delay legitimate merge",
+        "false_negative_cost": "denied change can reach main"
+      },
+      {
+        "component": "RafGitTools",
+        "direct_exposure": false,
+        "transmitted_load_or_effect": "POTENTIAL_PROPAGATION through federated control-plane authority",
+        "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO",
+        "inspection_required": true,
+        "revalidation_required": true,
+        "replacement_or_retirement_candidate": false,
+        "evidence_needed": "producer-specific server-enforcement and postmerge receipt",
+        "false_positive_cost": "extra CI/inspection",
+        "false_negative_cost": "unverified control-plane state"
+      },
+      {
+        "component": "Termux",
+        "direct_exposure": false,
+        "transmitted_load_or_effect": "POTENTIAL_PROPAGATION through release/runtime routing",
+        "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO",
+        "inspection_required": true,
+        "revalidation_required": true,
+        "replacement_or_retirement_candidate": false,
+        "evidence_needed": "postmerge and physical runtime receipts",
+        "false_positive_cost": "extra validation effort",
+        "false_negative_cost": "runtime claim exceeds evidence"
+      },
+      {
+        "component": "RLL/publication-boundary",
+        "direct_exposure": false,
+        "transmitted_load_or_effect": "POTENTIAL_PROPAGATION only if governance receipts are used to authorize scientific publication",
+        "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO",
+        "inspection_required": true,
+        "revalidation_required": true,
+        "replacement_or_retirement_candidate": false,
+        "evidence_needed": "fresh scientific run/output hashes/independent replication",
+        "false_positive_cost": "delayed publication",
+        "false_negative_cost": "unsupported scientific claim"
+      }
+    ]
+  },
+  "component_lifecycle_ledger": [
+    {
+      "component": "Mapa:PR309-assurance",
+      "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "execution_hours": "TOKEN_VAZIO",
+      "runtime_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "starts_stops": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "test_cycles": 1,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": 0,
+      "dependency_changes": 0,
+      "environment_exposure": "GitHub hosted runner Ubuntu 24.04.4; runner 2.336.0; Node20-target actions forced under Node24",
+      "load_stress_proxy": "CI + topology + operational-gap full assurance + promotion fixtures + server fixtures/live probe",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "mixed workflow schemas as cited by exact-head receipt",
+      "evidence_age": "CURRENT_CYCLE",
+      "provenance_age": "CURRENT_CYCLE",
+      "last_verified_at": "run matrix on head 082f30311aa82707b7dd2ae617795ae4ee111fe4",
+      "next_review_gate": "REVALIDATE_ON_HEAD_CHANGE",
+      "retirement_revalidation_criteria": "EVENT_TRIGGERED: any head/workflow/schema/dependency change",
+      "rule_origin": "internal contract + observed CI behavior"
+    },
+    {
+      "component": "Mapa:server-side-merge-governance",
+      "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "execution_hours": "TOKEN_VAZIO",
+      "runtime_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "starts_stops": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "test_cycles": 1,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": 0,
+      "dependency_changes": 0,
+      "environment_exposure": "GitHub repository/branch server configuration",
+      "load_stress_proxy": "4 fixtures + 1 live probe",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "rafaelia.server-merge-enforcement-assurance/v1",
+      "evidence_age": "CURRENT_CYCLE",
+      "provenance_age": "CURRENT_CYCLE",
+      "last_verified_at": "run 32405141237 job 96542343554",
+      "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+      "retirement_revalidation_criteria": "EVENT_TRIGGERED on protection/ruleset/permission/promotion-control change",
+      "rule_origin": "field evidence from live server probe + internal governance contract"
+    },
+    {
+      "component": "RafGitTools:main",
+      "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "execution_hours": "TOKEN_VAZIO",
+      "runtime_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "starts_stops": "TOKEN_VAZIO",
+      "builds": "previous PR-head build evidenced; no new build this cycle",
+      "test_cycles": 0,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": 0,
+      "dependency_changes": 0,
+      "environment_exposure": "classic main protection remains disabled",
+      "load_stress_proxy": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "main@062f09986840db24b684ba5affde1fbf192f35c7",
+      "evidence_age": "REVALIDATED_SOURCE_IDENTITY_CURRENT_CYCLE",
+      "provenance_age": "REVALIDATED_SOURCE_IDENTITY_CURRENT_CYCLE",
+      "last_verified_at": "current branch lookup",
+      "next_review_gate": "POSTMERGE_MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT",
+      "retirement_revalidation_criteria": "EVENT_TRIGGERED on main/dependency/server-governance change",
+      "rule_origin": "internal receipt contract"
+    },
+    {
+      "component": "Termux:main-runtime-boundary",
+      "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "execution_hours": "TOKEN_VAZIO",
+      "runtime_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "starts_stops": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO_THIS_CYCLE",
+      "test_cycles": 0,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": 0,
+      "dependency_changes": 0,
+      "environment_exposure": "Android physical/runtime evidence not refreshed; classic main protection remains disabled",
+      "load_stress_proxy": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "main@92d80377116c4fcbfd6f572247ad65201b75c5e6",
+      "evidence_age": "SOURCE_IDENTITY_CURRENT; RUNTIME_EVIDENCE_STALE_OR_TOKEN_VAZIO",
+      "provenance_age": "CURRENT_SOURCE_IDENTITY",
+      "last_verified_at": "current branch lookup",
+      "next_review_gate": "POSTMERGE_MAIN_EVENT_AND_PHYSICAL_RUNTIME_RECEIPTS",
+      "retirement_revalidation_criteria": "EVENT_TRIGGERED on main/APK/device/environment/dependency change",
+      "rule_origin": "internal runtime evidence contract"
+    },
+    {
+      "component": "RLL:scientific-evidence-boundary",
+      "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+      "execution_hours": "TOKEN_VAZIO",
+      "runtime_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "starts_stops": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "test_cycles": 0,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": 0,
+      "dependency_changes": 0,
+      "environment_exposure": "documentation-only current commit; scientific execution environment TOKEN_VAZIO",
+      "load_stress_proxy": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "software_schema_version": "main@0fe2fb410b17ba357ef0c251abac68b1b2af8288",
+      "evidence_age": "SOURCE_IDENTITY_CURRENT; SCIENTIFIC_EXECUTION_TOKEN_VAZIO",
+      "provenance_age": "CURRENT_SOURCE_IDENTITY",
+      "last_verified_at": "current branch lookup",
+      "next_review_gate": "DATASET_CONFIG_RUN_OUTPUT_HASH_INDEPENDENT_REPLICATION_RECEIPT",
+      "retirement_revalidation_criteria": "EVENT_TRIGGERED on data/config/code/model/dependency/new-evidence change",
+      "rule_origin": "scientific falsifiability/replication contract"
+    }
+  ],
+  "action_categories": {
+    "DETECTIVE": ["fresh branch identity reconciliation", "exact-head workflow discrimination", "live server enforcement probe"],
+    "PREVENTIVE": ["preserve fail-closed gates", "keep claim_allowed=false", "do not inherit execution across unchanged source identities"],
+    "PRECAUTIVE": ["block promotion while server binding/rulesets/bypass remain unresolved", "retain runtime/scientific TOKEN_VAZIO"],
+    "ADAPTIVE": ["upgrade PR309 exact-head state from TOKEN_VAZIO to scoped terminal matrix without rewriting prior snapshot"],
+    "CORRECTIVE": [],
+    "MAINTENANCE": ["revalidate source identities and server-governance lifecycle clocks"],
+    "INCIDENT_NEAR_MISS_INVESTIGATION": ["server-binding near-miss remains open; mechanism narrowed to classic protection absent while rulesets/bypass remain unknown"],
+    "SAFETY_ASSURANCE": ["server detector fixtures and live probe re-executed on exact head"],
+    "ANTI_RECURRENCE": ["persist exact-head receipt and maintain head-change revalidation trigger"]
+  },
+  "routes": {
+    "promoted": ["PR309 exact-head terminal revalidation -> PRESENT_SCOPED_MIXED_FAIL_CLOSED"],
+    "blocked": ["server binding -> release/promotion", "Termux runtime -> claim", "RLL execution -> scientific claim"],
+    "unchanged": ["RafGitTools source identity", "Termux source identity", "RLL source identity"]
+  },
+  "provenance_delta": {
+    "added": ["exact-head run/job matrix for PR309 082f3031"],
+    "unchanged": ["RafGitTools main identity", "Termux main identity", "RLL main identity"],
+    "contradictions": [],
+    "regressions": []
+  },
+  "closure_policy": "Only deterministic probe evidence may move a gap to F_ok; unchanged identity is not counted as new execution progress."
+}

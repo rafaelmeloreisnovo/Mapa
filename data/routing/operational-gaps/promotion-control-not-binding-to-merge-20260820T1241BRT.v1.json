@@ -1,84 +1,142 @@
 {
   "schema_version": "rafaelia.operational-gap-assurance/v1",
   "gap_id": "PROMOTION_CONTROL_NOT_BINDING_TO_MERGE_20260820T1241BRT",
+  "status": "NEAR_MISS",
   "source_pointer": "rafaelmeloreisnovo/Mapa#304@0c2423634cd7e7b67431b4f3c059eefc69fc16a6",
-  "owner_authority": "rafaelmeloreisnovo/Mapa",
+  "owner_authority": "rafaelmeloreisnovo/Mapa + repository server-side governance configuration",
   "affected_routes": ["R5", "R6", "R11", "R12"],
   "observed_at": "2026-08-20T12:41:00-03:00",
-  "provenance": {
-    "merge_commit_sha": "d0865b3a7ffc89b861684ecf7c2598ddae5dd721",
-    "promotion_run_id": 32384786813,
-    "enforce_job_id": 96476541728,
-    "reviews_observed": 0
-  },
+  "provenance": [
+    {
+      "source": "Mapa PR #304 Promotion Control",
+      "run_id": 32384786813,
+      "job_id": 96476541728,
+      "observation": "enforce returned DENIED with INDEPENDENT_APPROVAL_MISSING and HUMAN_REVIEW_MISSING; required independent approvals=1; observed=0"
+    },
+    {
+      "source": "GitHub PR #304 metadata",
+      "merge_commit_sha": "d0865b3a7ffc89b861684ecf7c2598ddae5dd721",
+      "observation": "PR merged despite the observed policy DENIED decision"
+    },
+    {
+      "source": "subsequent branch-governance probe",
+      "observation": "classic branch protection / required status-check enforcement was later observed disabled; rulesets and bypass actors remain separately unresolved"
+    }
+  ],
   "evidence_for": [
-    "Promotion Control enforce returned DENIED",
-    "blocking reasons were INDEPENDENT_APPROVAL_MISSING and HUMAN_REVIEW_MISSING",
-    "required independent approvals=1 and observed=0",
-    "GitHub reports PR #304 merged=true with merge commit d0865b3a...",
-    "no pull-request review submissions were observed"
+    "Promotion Control enforce returned DENIED.",
+    "Blocking reasons were INDEPENDENT_APPROVAL_MISSING and HUMAN_REVIEW_MISSING.",
+    "Required independent approvals=1 and observed=0.",
+    "GitHub reports PR #304 merged=true with merge commit d0865b3a7ffc89b861684ecf7c2598ddae5dd721.",
+    "No pull-request review submissions were observed in the audited scope."
   ],
   "evidence_against": [
-    "The promoted content itself strengthens the independent-approval policy; no unsafe downstream claim promotion was observed in this cycle"
+    "The promoted content itself strengthens the independent-approval policy; no unsafe downstream claim promotion was observed in this cycle.",
+    "The exact server-side merge mechanism, ruleset state and bypass actor path were not established by this record alone."
   ],
-  "uncertainty_state": "ROOT_CAUSE_TOKEN_VAZIO",
-  "urgency": "P0",
-  "necessity": "REQUIRED",
-  "impact": "HIGH_FUTURE_PROMOTION_BOUNDARY",
-  "detectability": "HIGH_BY_DECISION_VS_MERGE_RECONCILIATION",
-  "recurrence_risk": "HIGH_UNTIL_SERVER_SIDE_MERGE_BARRIER_IS_EVIDENCED",
-  "failure_mode": "GOVERNANCE_CONTROL_NOT_BINDING_TO_MERGE_PATH",
+  "uncertainty_state": "CLASSIC_PROTECTION_LATER_OBSERVED_DISABLED; RULESETS_AND_BYPASS_ACTORS_TOKEN_VAZIO",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "GOVERNANCE_CONTROL_NOT_BINDING_TO_OBSERVED_MERGE_PATH",
   "falsifier": "Create a non-draft synthetic PR with zero independent approvals: Promotion Control must DENY and GitHub server-side merge must remain unavailable. Then add one qualifying independent approval and verify only manual merge becomes eligible.",
-  "next_probe": "Inspect repository rulesets/branch protection and required status-check configuration for the default branch; determine whether Promotion Control/enforce is a required check and whether bypass actors exist; capture a server-side merge-block receipt.",
-  "mitigation": "Fail closed at the promotion-decision layer; do not treat merge occurrence as evidence of policy satisfaction. Configure server-side required checks/reviews when the repository settings surface is available, and require an explicit override receipt for any bypass path.",
-  "closure_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
-  "review_or_expiry": "EVENT_TRIGGERED_ON_RULESET_OR_PROMOTION_WORKFLOW_CHANGE",
+  "next_probe": "Inspect repository rulesets/required checks/bypass actors when the settings surface is observable, then capture SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT.",
+  "mitigation": {
+    "fail_closed": true,
+    "containment": "claim_allowed=false; merge occurrence is not promotion evidence",
+    "server_action": "bind required checks and independent review to server-side merge governance",
+    "rollback": "retain Git history and revert only the canonicalization change if the strict validator rejects it"
+  },
+  "closure_gate": {
+    "criterion": "zero-independent-approval PR is denied by policy and blocked server-side from merge",
+    "evidence_needed": "ruleset/protection snapshot + required-check identity + synthetic blocked-merge receipt",
+    "falsifier": "a policy-DENIED zero-approval PR remains server-side mergeable",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "EVENT_TRIGGERED on promotion workflow, ruleset, branch protection, required checks, review requirements, bypass permissions or merge-path change",
   "claim_allowed": false,
-  "predecessor_lineage": "PR304 independent-approval-floor correction",
-  "component_lifecycle_ledger": {
-    "component": "Mapa:promotion-control-merge-binding",
-    "calendar_age": "TOKEN_VAZIO",
+  "action_categories": [
+    "DETECTIVE",
+    "PREVENTIVE",
+    "PRECAUTIONARY",
+    "ADAPTIVE",
+    "CORRECTIVE",
+    "MAINTENANCE",
+    "SAFETY_ASSURANCE",
+    "LEARNING_ANTI_RECURRENCE"
+  ],
+  "detector": {
+    "signal": "Promotion Control decision versus observed server-side merge outcome",
+    "threshold": "any DENIED decision followed by an observed merge, or missing required server-side binding",
+    "false_positive": "a legitimate explicitly receipted bypass is initially classified as an unexplained governance mismatch",
+    "false_negative": "a denied change reaches main without decision-vs-merge reconciliation",
+    "evidence_needed": "promotion run/job + PR merge metadata + server-governance snapshot"
+  },
+  "adaptive_control": {
+    "baseline": "policy decisions were evaluated independently from server-side merge eligibility",
+    "delta": "treat policy-to-server binding as its own lifecycle component and revalidate after governance changes",
+    "justification": "PR #304 produced DENIED while a merge was later observed",
+    "rollback": "retain the prior policy and remove only any unsupported server-binding assertion",
+    "retest": "synthetic zero-approval PR must remain unmergeable until qualifying independent review and required checks are satisfied"
+  },
+  "corrective_control": {
+    "symptom": "policy DENIED and merge both observed for PR #304",
+    "mechanism_hypothesis": "server-side merge governance was not bound to the policy decision in the observed path; exact ruleset/bypass path remains TOKEN_VAZIO",
+    "before_after_test": "before: DENIED did not prevent observed merge; after: DENIED zero-approval synthetic PR must be server-side blocked"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "Mapa server-side promotion/merge governance",
+    "condition_or_interval": "EVENT_TRIGGERED on policy/ruleset/protection/permission/merge-path change",
+    "measured_condition": "classic branch protection subsequently observed disabled; exact ruleset/bypass state unresolved",
+    "verification": "server governance snapshot + synthetic blocked-merge receipt"
+  },
+  "safety_assurance": {
+    "data_acquisition": "Promotion Control run/job, PR merge metadata and server-governance probes",
+    "analysis": "separate policy decision correctness from server-side enforcement",
+    "system_reassessment": "re-evaluate merge eligibility after any governance configuration change",
+    "corrective_trigger": "any DENIED decision followed by merge, or any missing required server-side check/review binding"
+  },
+  "learning": {
+    "reusable_control": "POLICY_PASS_OR_DENY_NE_SERVER_SIDE_MERGE_ENFORCEMENT",
+    "index_or_test": "decision-vs-merge reconciliation + server-merge-enforcement assurance",
+    "recurrence_check": "every material promotion-policy change requires a server-binding revalidation receipt"
+  },
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
     "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
     "cycles": "TOKEN_VAZIO",
     "starts_stops": "TOKEN_VAZIO",
     "builds": "TOKEN_VAZIO",
     "test_cycles": 1,
     "deployments": "TOKEN_VAZIO",
-    "commits_since_validation": 0,
+    "commits_since_validation": "TOKEN_VAZIO_NOT_RECOMPUTED",
     "dependency_changes": 1,
     "environment_exposure": "GitHub-hosted runner + GitHub merge service",
     "load_stress_proxy": "TOKEN_VAZIO",
     "incident_count": 0,
     "near_miss_count": 1,
     "maintenance_actions": 1,
-    "corrective_actions": 0,
-    "software_schema_version": "promotion-control policy v1 / gap v1",
-    "evidence_age": "CURRENT_CYCLE",
-    "provenance_age": "CURRENT_CYCLE",
-    "last_verified_at": "run:32384786813/job:96476541728",
+    "corrective_actions": 1,
+    "software_schema_version": "rafaelia.operational-gap-assurance/v1",
+    "evidence_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "provenance_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "last_verified_at": "run:32384786813/job:96476541728 + merge:d0865b3a7ffc89b861684ecf7c2598ddae5dd721",
     "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
-    "retirement_revalidation_criteria": "Any change to promotion policy, repository ruleset, required checks, review requirements, bypass permissions, or merge path"
+    "retirement_revalidation_criteria": "revalidate on promotion policy, repository ruleset, required checks, review requirements, bypass permissions or merge path"
   },
-  "impact_radius": {
-    "direct_exposure": ["Promotion Control decision", "PR merge boundary"],
-    "transmitted_load_or_effect": ["anti-regression state", "future promotion decisions", "release/publication boundary"],
-    "hidden_damage_or_hidden_state_possible": true,
-    "inspection_required": true,
-    "revalidation_required": true,
-    "replacement_or_retirement_candidate": false,
-    "evidence_needed": "repository ruleset + required-check snapshot + blocked merge probe",
-    "false_positive_cost": "A legitimate merge waits for review/check evidence",
-    "false_negative_cost": "A denied change can enter main despite policy"
-  },
-  "actions": {
-    "detective": "Decision-vs-merge reconciliation",
-    "preventive": "Bind named promotion check and independent review to server-side merge rules",
-    "precautionary": "claim_allowed=false; merge occurrence is not promotion evidence",
-    "adaptive": "Revalidate after any ruleset/workflow change",
-    "corrective": "TOKEN_VAZIO until repository-setting mechanism is observed",
-    "maintenance": "Treat ruleset/check binding as lifecycle component",
-    "incident_investigation": "Near-miss; exact bypass mechanism not inferred",
-    "safety_assurance": "Require blocked-merge falsifier",
-    "learning_anti_recurrence": "POLICY_PASS_OR_DENY_NE_SERVER_SIDE_MERGE_ENFORCEMENT"
-  }
+  "priority_axes_basis": "Canonical integer 0..3 priority axes encode the original P0/REQUIRED/HIGH classifications and the demonstrated promotion-boundary risk; they are engineering classifications, not physical measurements.",
+  "predecessor_lineage": [
+    "PR304 independent-approval-floor correction",
+    "run 32384786813/job 96476541728",
+    "merge d0865b3a7ffc89b861684ecf7c2598ddae5dd721"
+  ]
 }

@@ -1,0 +1,61 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR309_EXACT_HEAD_TERMINAL_20260820T1643BRT",
+  "type": "EXACT_HEAD_TERMINAL_REVALIDATION",
+  "status": "PRESENT_SCOPED_MIXED_FAIL_CLOSED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 309,
+    "base_sha": "974a8dc02ef0ebe347028212862b779761d6105a",
+    "head_sha": "082f30311aa82707b7dd2ae617795ae4ee111fe4",
+    "merge_ref_sha": "45ec74e9c64562b64a08557b33aa389a04e4e5db",
+    "draft": true,
+    "mergeable": true
+  },
+  "terminal_matrix": {
+    "CI": {"run_id": 32405141219, "conclusion": "SUCCESS"},
+    "Branch_Topology_Gate": {"run_id": 32405141284, "conclusion": "SUCCESS"},
+    "operational_gap_assurance": {"run_id": 32405141253, "conclusion": "SUCCESS"},
+    "Promotion_Control": {
+      "run_id": 32405141223,
+      "enforce_job_id": 96542388052,
+      "workflow_conclusion": "FAILURE_FAIL_CLOSED",
+      "decision": "DENIED",
+      "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN", "INDEPENDENT_APPROVAL_MISSING"],
+      "required_independent_approvals": 1,
+      "observed_independent_approvals": 0,
+      "automatic_merge": false,
+      "manual_merge_only": true
+    },
+    "Server_Merge_Enforcement_Assurance": {
+      "run_id": 32405141237,
+      "job_id": 96542343554,
+      "workflow_conclusion": "FAILURE_FAIL_CLOSED",
+      "fixtures": "4/4 PASS",
+      "live_probe_status": "BLOCKED",
+      "server_side_merge_binding": "NOT_ENFORCED_OBSERVED",
+      "failure_modes": [
+        "BRANCH_PROTECTION_DISABLED",
+        "PROTECTION_NOT_ENABLED",
+        "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+        "NO_REQUIRED_STATUS_CHECKS_OBSERVED"
+      ]
+    }
+  },
+  "resolved_gap": "TOKEN_VAZIO_PR309_EXACT_NEW_HEAD_TERMINAL_REVALIDATION",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+  ],
+  "epistemic_boundary": [
+    "Workflow red is not treated as regression when the gate intentionally fails closed.",
+    "This receipt is valid only for exact head 082f30311aa82707b7dd2ae617795ae4ee111fe4.",
+    "The server probe observes classic branch protection and required status checks as not enforced; rulesets and bypass paths remain unobserved.",
+    "No release, scientific, runtime, certification or production claim is promoted."
+  ],
+  "falsifier": "A contradictory run/job result for the same exact head or evidence that the recorded server configuration snapshot was not the configuration inspected by the cited live probe invalidates the affected scope.",
+  "next_review_gate": "REVALIDATE_ON_HEAD_CHANGE_AND_PROVE_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED"
+}

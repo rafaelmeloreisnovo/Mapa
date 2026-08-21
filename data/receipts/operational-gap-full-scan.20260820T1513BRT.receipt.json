@@ -1,0 +1,48 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "OPERATIONAL_GAP_FULL_SCAN_20260820T1513BRT",
+  "type": "TEST_DISCOVERY_AND_FULL_SCAN",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 309,
+    "tested_head_sha": "b2c94bde0fece23a4ef1dbceefd33f3c76a39674",
+    "base_sha": "974a8dc02ef0ebe347028212862b779761d6105a"
+  },
+  "execution": {
+    "workflow": "operational-gap-assurance",
+    "run_id": 32401853574,
+    "job_id": 96531670779,
+    "conclusion": "SUCCESS",
+    "operational_gap_records": 25,
+    "failures": 0,
+    "steps": {
+      "compile_assurance_engines": "SUCCESS",
+      "operational_gap_self_test": "SUCCESS",
+      "validate_operational_gap_records": "SUCCESS",
+      "validate_bounded_token_vazio_master_snapshots": "SUCCESS",
+      "validate_component_lifecycle_ledgers": "SUCCESS",
+      "verify_self_test_cross_repo_provenance": "SUCCESS"
+    }
+  },
+  "before_after": {
+    "before": "PR308 run 32399932219/job 96525400945 advanced past the first corrected record then failed on a second current-schema record with textual impact",
+    "after": "PR309 exact-head scan enumerated all 25 records and reported failures=0"
+  },
+  "closed_gap": "TOKEN_VAZIO_CORRECTED_RECORD_TERMINAL_ASSURANCE_AND_FULL_DIRECTORY_SCAN",
+  "epistemic_boundary": [
+    "This receipt proves structural operational-gap assurance for the exact tested PR head only.",
+    "Historical records accepted by the legacy gate remain TOKEN_VAZIO_REVALIDATION_REQUIRED and are not promoted to canonical closure.",
+    "Cross-repo provenance PASS is provenance coherence only, not execution or scientific validation.",
+    "Server-side merge enforcement remains a separate open gap."
+  ],
+  "environment": {
+    "runner": "2.336.0",
+    "os": "Ubuntu 24.04.4",
+    "runner_image": "ubuntu-24.04@20260816.277.1",
+    "node_runtime_observation": "Node20-target checkout/setup-python actions were forced under Node24"
+  },
+  "falsifier": "Any current-schema record failing the same full-directory gate on this exact content state falsifies this receipt scope.",
+  "next_review_gate": "REVALIDATE_ON_OPERATIONAL_GAP_RECORD_SCHEMA_ASSURANCE_OR_WORKFLOW_CHANGE"
+}

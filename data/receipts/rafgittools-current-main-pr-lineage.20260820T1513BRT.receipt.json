@@ -1,0 +1,41 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "RAFGITTOOLS_CURRENT_MAIN_PR_LINEAGE_20260820T1513BRT",
+  "type": "POST_MERGE_LINEAGE_WITH_PR_EXECUTION",
+  "status": "PRESENT_SCOPED_MIXED_MATRIX",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/RafGitTools",
+    "main_sha": "062f09986840db24b684ba5affde1fbf192f35c7",
+    "merge_pr": 366,
+    "pr_head_sha": "5164244a4c77e134610a82e073569a2c7ef676c9",
+    "base_sha": "0c453be12b31eb21c85cf6295b740c0d54365166",
+    "merge_commit_verified": true
+  },
+  "positive_execution": {
+    "ci_run_id": 32387249580,
+    "build_job_id": 96484643373,
+    "coherence_job_id": 96484643664,
+    "build_job_steps": "startup contract, documentation claim boundary, authentication tests, full dev unit tests, lint, assemble APK, verify/checksum APK, upload APK, diagnostics and enforce build gate all SUCCESS",
+    "coherence_steps": "canonical coherence gate, boundary publication and receipt upload all SUCCESS"
+  },
+  "artifacts": [
+    {"id": 9413683966, "name": "RafGitTools-diagnostics-32387249580", "digest": "sha256:665b9f708f5f2fd14371ed3b01f64a510294846fb3639f4866747a315305c708"},
+    {"id": 9413683449, "name": "RafGitTools-devDebug", "digest": "sha256:bd6d1630f1d9c559f0a03f24eef595630a245c71acc7b3e524486d0ad89c7343"},
+    {"id": 9413397850, "name": "rafaelia-coherence-32387249580", "digest": "sha256:bafb45cd8659d1af785c28f549cc4be286da58babdec8b8e06ec368a07553c02"}
+  ],
+  "workflow_vector": {
+    "success": ["Internal Validation", "CodeQL Advanced", "Security Scan", "CI", "Android Client Build", "PR Validation run 743", "Federation Audit", "rafaelia-block1"],
+    "failure": ["PR Validation run 744", "Performance Metrics", "Kernel Architecture Build", "Source Gap Audit", "Documentation", "Code Coverage"]
+  },
+  "resolved_gap": "TOKEN_VAZIO_RAFGITTOOLS_PR_HEAD_BUILD_APK_COHERENCE_ARTIFACT_CHAIN",
+  "remaining_gap": "TOKEN_VAZIO_RAFGITTOOLS_POSTMERGE_MAIN_EVENT_RECEIPT",
+  "epistemic_boundary": [
+    "The integrated main identity and its PR lineage are known.",
+    "The PR-head CI/build/coherence artifact chain is evidenced and hashed.",
+    "The overall workflow matrix is MIXED and is not a global PASS.",
+    "The available commit-run wrapper does not establish a push/main terminal run, so post-merge main execution remains TOKEN_VAZIO."
+  ],
+  "falsifier": "A post-merge main execution showing a different integrated content/result supersedes the execution scope, while the historical PR-head receipt remains valid for its SHA.",
+  "next_review_gate": "RAFGITTOOLS_POSTMERGE_MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT"
+}

@@ -1,0 +1,177 @@
+{
+  "schema_version": "rafaelia.omega-federated-cycle/v1",
+  "cycle_id": "OMEGA_FEDERATED_20260820T2042BRT",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "absence_of_evidence != evidence_of_absence",
+    "append_only_history",
+    "no_silent_regression"
+  ],
+  "authorities": {
+    "Mapa_main": "974a8dc02ef0ebe347028212862b779761d6105a",
+    "Mapa_pr309_tested_head": "a4c374aea2ff290fcc067df8dbf1d9a409f7ccbf",
+    "RafGitTools_main": "062f09986840db24b684ba5affde1fbf192f35c7",
+    "Termux_main": "92d80377116c4fcbfd6f572247ad65201b75c5e6",
+    "RLL_main": "0fe2fb410b17ba357ef0c251abac68b1b2af8288"
+  },
+  "F_ok": [
+    "PR309_A4C374A_EXACT_HEAD_TERMINAL_MATRIX",
+    "CI_SUCCESS_RUN_32425693400",
+    "BRANCH_TOPOLOGY_SUCCESS_RUN_32425693432",
+    "OPERATIONAL_GAP_ASSURANCE_SUCCESS_RUN_32425693487",
+    "PROMOTION_CONTROL_NEGATIVE_FIXTURES_SUCCESS_AND_DENIED_FAIL_CLOSED_RUN_32425693398",
+    "SERVER_MERGE_DETECTOR_4_OF_4_FIXTURES_PASS_AND_LIVE_PROBE_BLOCKED_RUN_32425693425",
+    "FRESH_RAFGITTOOLS_MAIN_IDENTITY",
+    "FRESH_TERMUX_MAIN_IDENTITY",
+    "FRESH_RLL_MAIN_IDENTITY"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+    "TOKEN_VAZIO_RAFGITTOOLS_POSTMERGE_MAIN_EVENT_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_POSTMERGE_MAIN_EXECUTION_EVENT",
+    "TOKEN_VAZIO_TERMUX_CLAIM_DEBT_ZERO",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_PHYSICAL_RUNTIME",
+    "TOKEN_VAZIO_RLL_FRESH_SCIENTIFIC_EXECUTION",
+    "TOKEN_VAZIO_RLL_OUTPUT_HASH_RECEIPT",
+    "TOKEN_VAZIO_RLL_INDEPENDENT_REPLICATION"
+  ],
+  "F_esquecido": [
+    "StableSHA != NewExecutionEvidence",
+    "WorkflowFailure can be expected fail-closed",
+    "ClassicBranchProtectionEndpoint != CompleteRulesetKnowledge",
+    "SourceIdentity != ScientificExecution"
+  ],
+  "uncertainty_before_after": {
+    "before": "PR309 a4c374a terminal state was TOKEN_VAZIO",
+    "after": "terminal matrix discriminated: CI/Topology/GapAssurance SUCCESS; Promotion DENIED by draft + 0/1 independent approval; server live probe BLOCKED with classic protection absent"
+  },
+  "hazards": [{
+    "gap_id": "SERVER_SIDE_MERGE_BINDING_NOT_PROVED",
+    "source_pointer": "Mapa PR309 runs 32425693398 and 32425693425",
+    "owner_authority": "rafaelmeloreisnovo/Mapa + GitHub server configuration",
+    "affected_routes": ["R5", "R6", "R7", "R11", "R12"],
+    "uncertainty_state": "PARTIALLY_EVIDENCED_OPEN",
+    "urgency": 3,
+    "necessity": 3,
+    "impact": 3,
+    "detectability": 2,
+    "recurrence_risk": 3,
+    "failure_mode": "policy decision may not be server-enforced",
+    "evidence_for": ["protected=false", "protection_enabled=false", "required_status_checks enforcement=off", "contexts=[]", "checks=[]"],
+    "evidence_against": ["promotion policy itself correctly returns DENIED", "server detector fixtures 4/4 pass"],
+    "falsifier": "server-side zero-approval merge attempt is rejected and the exact Promotion Control context is observed as required",
+    "next_probe": "inspect repository rulesets/bypass actors/required contexts with an authorized endpoint, then execute zero-approval synthetic merge-block test",
+    "mitigation": "fail-closed; claim_allowed=false; no automatic promotion",
+    "closure_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+    "review_or_expiry": "EVENT_TRIGGERED on protection/ruleset/permission/promotion-control change"
+  }],
+  "component_lifecycle_ledger": {
+    "Mapa_PR309_assurance": {
+      "calendar_age": "TOKEN_VAZIO",
+      "execution_hours": "TOKEN_VAZIO",
+      "cycles": "TOKEN_VAZIO",
+      "builds": "TOKEN_VAZIO",
+      "test_cycles": 1,
+      "deployments": "TOKEN_VAZIO",
+      "commits_since_validation": 0,
+      "dependency_changes": 0,
+      "environment": "GitHub-hosted Ubuntu 24.04.4; runner 2.336.0",
+      "incident_count": 0,
+      "near_miss_count": 0,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "evidence_age": "CURRENT_CYCLE",
+      "provenance_age": "CURRENT_CYCLE",
+      "last_verified_at": "runs 32425693400/432/487/398/425",
+      "next_review_gate": "REVALIDATE_ON_HEAD_CHANGE",
+      "limit_type": "EVENT_TRIGGERED"
+    },
+    "Mapa_server_side_merge_governance": {
+      "calendar_age": "TOKEN_VAZIO",
+      "execution_hours": "TOKEN_VAZIO",
+      "test_cycles": 1,
+      "dependency_changes": 0,
+      "environment": "GitHub server configuration + Actions probe",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 0,
+      "evidence_age": "CURRENT_CYCLE",
+      "last_verified_at": "run 32425693425/job 96607058189",
+      "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+      "limit_type": "EVENT_TRIGGERED"
+    },
+    "RafGitTools_main": {
+      "software_schema_version": "main@062f09986840db24b684ba5affde1fbf192f35c7",
+      "test_cycles": "TOKEN_VAZIO_POSTMERGE",
+      "commits_since_validation": 0,
+      "dependency_changes": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": "TOKEN_VAZIO",
+      "evidence_age": "SOURCE_CURRENT_EXECUTION_STALE",
+      "last_verified_at": "fresh branch lookup this cycle",
+      "next_review_gate": "POSTMERGE_MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT",
+      "limit_type": "EVENT_TRIGGERED"
+    },
+    "Termux_main_runtime_boundary": {
+      "software_schema_version": "main@92d80377116c4fcbfd6f572247ad65201b75c5e6",
+      "test_cycles": "TOKEN_VAZIO_POSTMERGE",
+      "starts_stops": "TOKEN_VAZIO",
+      "environment_exposure": "physical Android runtime TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": "TOKEN_VAZIO",
+      "evidence_age": "SOURCE_CURRENT_EXECUTION_STALE",
+      "last_verified_at": "fresh branch lookup this cycle",
+      "next_review_gate": "POSTMERGE_MAIN_AND_PHYSICAL_RUNTIME_RECEIPTS",
+      "limit_type": "EVENT_TRIGGERED"
+    },
+    "RLL_scientific_evidence_boundary": {
+      "software_schema_version": "main@0fe2fb410b17ba357ef0c251abac68b1b2af8288",
+      "test_cycles": "TOKEN_VAZIO_NEW_SCIENTIFIC_RUN",
+      "environment_exposure": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": "TOKEN_VAZIO",
+      "evidence_age": "SOURCE_CURRENT_SCIENTIFIC_EXECUTION_STALE",
+      "last_verified_at": "fresh branch lookup this cycle",
+      "next_review_gate": "DATASET_CONFIG_RUN_OUTPUT_HASH_INDEPENDENT_REPLICATION_RECEIPT",
+      "limit_type": "CONDITION_BASED"
+    }
+  },
+  "impact_radius": {
+    "origin": "Mapa server-side merge governance",
+    "Mapa": {"direct_exposure": true, "transmitted_load_or_effect": "promotion boundary", "hidden_state_possible": true, "inspection_required": true, "revalidation_required": true, "replacement_or_retirement_candidate": false, "evidence_needed": "rulesets/bypass/required-context/block receipt", "false_positive_cost": "delayed legitimate merge", "false_negative_cost": "denied change may reach main"},
+    "RafGitTools": {"direct_exposure": false, "relation": "POTENTIAL_PROPAGATION", "inspection_required": true, "evidence_needed": "postmerge main receipt"},
+    "Termux": {"direct_exposure": false, "relation": "POTENTIAL_PROPAGATION", "inspection_required": true, "evidence_needed": "postmerge + physical runtime receipt"},
+    "RLL": {"direct_exposure": false, "relation": "POTENTIAL_PROPAGATION", "inspection_required": true, "evidence_needed": "fresh run + independent replication"}
+  },
+  "actions": {
+    "DETECTIVE": ["fresh exact-head workflow matrix", "live server-enforcement probe", "fresh producer branch identities"],
+    "PREVENTIVE": ["pinned Actions retained", "strict fail-closed server detector"],
+    "PRECAUTIONARY": ["claim_allowed=false", "no automatic promotion", "typed TOKEN_VAZIO"],
+    "ADAPTIVE": ["stable source identities retained without inheriting execution assurance"],
+    "CORRECTIVE": [],
+    "MAINTENANCE": ["server governance retained as EVENT_TRIGGERED lifecycle component"],
+    "INCIDENT_INVESTIGATION": ["policy DENIED separated from server barrier absence"],
+    "SAFETY_ASSURANCE": ["4/4 detector fixtures plus live probe"],
+    "ANTI_RECURRENCE": ["POLICY_DECISION != SERVER_ENFORCEMENT", "FAIL_CLOSED_RED != REGRESSION"]
+  },
+  "routes": {
+    "promoted": ["PR309_a4c374a_terminal_assurance_to_PRESENT_SCOPED_MIXED_FAIL_CLOSED"],
+    "blocked": ["publication", "automatic_merge", "claim_promotion", "server_binding_claim", "physical_runtime_claim", "new_RLL_scientific_claim"]
+  },
+  "F_next": [
+    "INSPECT_RULESETS_BYPASS_REQUIRED_CONTEXT",
+    "PROVE_ZERO_APPROVAL_SERVER_MERGE_BLOCKED",
+    "RAFGITTOOLS_POSTMERGE_MAIN_RECEIPT",
+    "TERMUX_POSTMERGE_AND_PHYSICAL_RUNTIME_RECEIPTS",
+    "TERMUX_CLAIM_DEBT_4_TO_0",
+    "RLL_FRESH_RUN_OUTPUT_HASH_INDEPENDENT_REPLICATION"
+  ]
+}

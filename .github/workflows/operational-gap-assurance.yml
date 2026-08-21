@@ -51,13 +51,26 @@ jobs:
         run: python3 scripts/operational_gap_assurance.py --self-test
       - name: Validate operational gap records
         run: |
-          set -euo pipefail
+          set -uo pipefail
           count=0
+          failures=0
           while IFS= read -r record; do
             count=$((count + 1))
-            python3 scripts/operational_gap_record_gate.py "$record"
+            echo "::group::operational-gap $record"
+            if python3 scripts/operational_gap_record_gate.py "$record"; then
+              :
+            else
+              rc=$?
+              failures=$((failures + 1))
+              echo "::error file=$record::operational-gap record gate failed with exit=$rc"
+            fi
+            echo "::endgroup::"
           done < <(find data/routing/operational-gaps -type f -name '*.json' -print | sort)
           test "$count" -gt 0
+          echo "operational_gap_records=$count failures=$failures"
+          if [ "$failures" -ne 0 ]; then
+            exit 1
+          fi
       - name: Validate bounded TOKEN_VAZIO master snapshots
         run: |
           set -euo pipefail
