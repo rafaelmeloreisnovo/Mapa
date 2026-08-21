@@ -1,0 +1,87 @@
+{
+  "schema": "rafaelia.mapa.provenance-receipt.v1",
+  "receipt_id": "MAPA-VECTRAS-TERMUX-PROVENANCE-20260821-0001",
+  "observed_at": "2026-08-21T01:47:00-03:00",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "claim_allowed": false,
+  "state": "VERIFIED_LIMITED",
+  "route": "N-VECTRAS -> N-TERMUX",
+  "relation": "CONSUMES_PROVIDER",
+  "source_boundary": {
+    "Mapa_base": "ed4f498afa3d7ea7e974fcd6381dbd69860e5f6e",
+    "Termux_repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "Vectras_repository": "rafaelmeloreisnovo/Vectras-VM-Android"
+  },
+  "termux_provider": {
+    "pr": 376,
+    "head_sha": "767c3cccc157689eff4bb7d45e290baf7cd1672b",
+    "merge_commit_sha": "5e83eef9aea803bee127cd21eed6206ced193cb7",
+    "merged": true,
+    "material_identity": [
+      "provider_apk_sha256",
+      "qemu_binary_sha256"
+    ],
+    "privacy_boundary": "QEMU identity is returned as name=sha256 without exporting private sandbox paths."
+  },
+  "vectras_consumer": {
+    "pr": 1100,
+    "head_sha": "06d13260649b801b529e151b75da949d163d1170",
+    "merge_commit_sha": "65a597d137708dc74cda7cb5b2ed44831f124171",
+    "merged": true,
+    "request_schema": "raf.vectras-termux-request.v4",
+    "receipt_schema": "raf.android-runtime-receipt.v3",
+    "runtime_fields": [
+      "producer_apk_sha256",
+      "provider_apk_sha256",
+      "provider_binary_sha256_discovery",
+      "request_sha256",
+      "stdout_sha256",
+      "stderr_sha256",
+      "provenance_chain_sha256"
+    ]
+  },
+  "exact_head_ci": {
+    "commit_sha": "06d13260649b801b529e151b75da949d163d1170",
+    "ipc_v2": {"run_id": 32332113940, "conclusion": "success"},
+    "ipc_v3": {"run_id": 32332113845, "conclusion": "success"},
+    "apk_wizard": {
+      "run_id": 32332113794,
+      "conclusion": "success",
+      "shell_loader": "success",
+      "multi_abi_build": "success",
+      "abis": ["arm64-v8a", "armeabi-v7a"]
+    },
+    "artifact": {
+      "artifact_id": 9393482973,
+      "name": "apk-wizard",
+      "archive_sha256": "db6dac4df2b1ea746c36cfd6e6cc0e650025a8694465788e85161aa35d20a0cc",
+      "scope": "WORKFLOW_ARTIFACT_ZIP_NOT_INDIVIDUAL_APK_SHA256"
+    },
+    "parallel_failures_preserved": {
+      "android_ci": "failure at strict bootstrap-assets contract before selected Android workfile build",
+      "orchestrator_build_matrix": "failure outside the Vectras-Termux provenance contract",
+      "host_ci": "cancelled",
+      "rule": "parallel historical/debt gates are not rewritten as provenance-path failures and remain independently auditable"
+    }
+  },
+  "falsification_delta": {
+    "observed_failure": "undefined symbol: vos_rdcnt_av7",
+    "source_found": "engine/rmr/interop/rmr_vectra_os_armv7.S",
+    "cause": "ARMv7 backend existed but was not consumed by the APK CMake/link manifest path",
+    "correction": "wire ARMv7 backend into Android source group and restore .cmake/.mk manifest parity",
+    "retest": "exact-head APK Wizard arm64 + arm32/arm64 success"
+  },
+  "epistemic_boundary": {
+    "provider_identity_scope": "DISCOVERY_NOT_EXECUTION",
+    "executable_sha256_at_execution": "TOKEN_VAZIO",
+    "provenance_chain_complete": false,
+    "physical_android_transaction": "TOKEN_VAZIO",
+    "guest_boot": "TOKEN_VAZIO",
+    "performance_claim": "TOKEN_VAZIO",
+    "rule": "DISPATCHED != QEMU_EXECUTED != GUEST_BOOT != PERFORMANCE"
+  },
+  "F_ok": "Termux provider and Vectras consumer are merged; exact-head IPC v2/v3 and APK Wizard multi-ABI build are observed successful; material discovery identities and bounded transaction receipt fields are implemented.",
+  "F_gap": "Exact executable identity at execution time, physical Android transaction, guest boot and performance evidence remain TOKEN_VAZIO; unrelated strict bootstrap-assets/orchestrator debts remain open.",
+  "F_next": "Execute one physical Vectras-to-Termux transaction on Android, bind executable_sha256_at_execution at the result boundary, compare it with discovery identity, and append the resulting physical receipt without promoting guest boot unless independently observed.",
+  "stop_reason": "Code/CI provenance closure is sufficient for VERIFIED_LIMITED; further promotion requires physical runtime evidence."
+}
