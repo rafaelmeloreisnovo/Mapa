@@ -80,8 +80,7 @@
         "role": {"$ref": "#/$defs/nonEmptyString"},
         "capabilities": {
           "type": "array",
-          "uniqueItems": true,
-          "items": {"type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"}
+          "items": {"$ref": "#/$defs/capability"}
         },
         "product_ids": {
           "type": "array",
@@ -162,6 +161,18 @@
         "known_gaps": {"type": "array", "items": {"$ref": "#/$defs/nonEmptyString"}},
         "next_action": {"$ref": "#/$defs/nonEmptyString"},
         "owner": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "state", "contract_id"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"},
+        "contract_id": {"type": "string", "pattern": "^CAP-[A-Z0-9_-]+$"},
+        "state": {"enum": ["DECLARED", "CONTRACTED", "TESTED_LOCAL", "TESTED_DEVICE", "INTEGRATED", "TOKEN_VAZIO"]},
+        "evidence_receipt_id": {"type": "string"},
+        "abi_signature": {"type": "string", "description": "hash of ABI contract for change detection"}
       }
     }
   }

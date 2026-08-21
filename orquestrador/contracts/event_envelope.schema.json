@@ -198,6 +198,36 @@
     "tags": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
     "state_before": {"type": ["object", "array", "string", "number", "boolean", "null"]},
     "state_after": {"type": ["object", "array", "string", "number", "boolean", "null"]},
+    "virtualization_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "vm_id": {"type": "string"},
+        "qemu_version": {"type": "string"},
+        "guest_os": {"type": "string"},
+        "abi_profile": {"type": "string"}
+      }
+    },
+    "abi_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_id": {"type": "string"},
+        "signature_before": {"type": "string"},
+        "signature_after": {"type": "string"},
+        "validation_result": {"enum": ["MATCH", "MISMATCH", "PARTIAL", "TOKEN_VAZIO"]}
+      }
+    },
+    "commit_recovery_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "original_commit": {"type": "string"},
+        "resolution_commit": {"type": "string"},
+        "recovery_method": {"type": "string"},
+        "recovery_evidence": {"type": "string"}
+      }
+    },
     "r3": {"$ref": "#/$defs/r3"}
   },
   "$defs": {
