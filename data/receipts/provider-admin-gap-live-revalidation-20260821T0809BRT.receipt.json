@@ -1,0 +1,57 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PROVIDER_ADMIN_GAP_LIVE_REVALIDATION_20260821T0809BRT",
+  "type": "PROVIDER_AUTHORITY_GATE",
+  "status": "BLOCKED_VERIFIED",
+  "claim_allowed": false,
+  "observed_at": "2026-08-21T08:09:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_branch": "main",
+  "observed_main_sha": "9eedd05c6ef9ab0635ab8eec5f967b6e337c270e",
+  "live_provider_state": {
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks_enforcement_level": "off",
+    "required_contexts": [],
+    "required_checks": [],
+    "server_side_merge_binding": "NOT_ENFORCED_OBSERVED"
+  },
+  "authority_gate": {
+    "required": "GitHub Administration: write branch-protection/ruleset mutation path",
+    "connected_surface_result": "NOT_EXPOSED",
+    "token_vazio": "TOKEN_VAZIO_PROVIDER_ADMIN_WRITE_ACTION_NOT_EXPOSED",
+    "merge_endpoint_invoked": false,
+    "reason_no_merge_attempt": "Without an active provider barrier, merge would be a destructive mutation rather than a valid rejection proof."
+  },
+  "drive_append": {
+    "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "mode": "APPEND_ONLY_COMPARE_AND_WRITE",
+    "revision_before": "AIroW37xf612hUpeSE9BjjDbbgwpbJr_qMdVaM_w8FdZgfuekdYIBV0087YY71itVdMAmRGph7GCJyZtPqfwoNbtbDUXcqLjxwtpSbLINto",
+    "revision_after": "AIroW35lLjOomkTVFNyjuNzSJ4C0r6x_VQbrIC4MAikHOi7_OdpYDaEF5An2mwjgmmaqO5oP8tb-VFbn75uRT4HF9YmnjXXflMoS5Klq91o",
+    "post_write_heading_verified": true
+  },
+  "closed_items": [
+    "PR326 schema repair merged",
+    "operational-gap exact-head scan previously observed at 34 records / failures=0",
+    "PR328 provider-protection bootstrap merged and fixtures validated",
+    "live main re-read after PR328",
+    "Drive post-PR328 state appended and verified"
+  ],
+  "open_items": [
+    "activate real main branch protection server-side",
+    "require exact check promotion-control / enforce",
+    "require at least one approving review",
+    "enforce protection for admins",
+    "re-observe protected=true with required binding",
+    "execute zero-independent-approval rejection proof only after barrier activation",
+    "persist SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT only after observed rejection"
+  ],
+  "falsifier": "If live provider inspection shows main protection active with the required check, approval rule, and admin enforcement before this receipt's observation, this BLOCKED_VERIFIED state is superseded and must not be treated as current.",
+  "next_gate": "Obtain authorized Administration: write path; apply scripts/apply_main_branch_protection.py --apply with expected-main-sha 9eedd05c6ef9ab0635ab8eec5f967b6e337c270e; re-read live state; then test zero-approval rejection without changing main.",
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "claim_allowed=false until provider-side rejection evidence exists"
+  ]
+}
