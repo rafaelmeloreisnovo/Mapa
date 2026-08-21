@@ -1,0 +1,53 @@
+{
+  "schema": "rafaelia.shared-data-authorial-supersession/v3",
+  "date": "2026-08-21",
+  "state": "CORRECTIVE_APPEND_ONLY",
+  "claim_allowed": false,
+  "event": "external-reference operational identity superseded by authorial process authority",
+  "prior_merge": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pull_request": 318,
+    "status": "MERGED_HISTORICAL"
+  },
+  "current_authority": "docs/governance/SHARED_DATA_GOVERNANCE_V2.md",
+  "historical_pointer": "docs/governance/SHARED_DATA_GOVERNANCE_V1.md",
+  "drive": {
+    "authorial_v2_document_id": "1h0fYMfEHeI2CNFD9UO4MctYbzLTrcgvjYCq_r8f42ws",
+    "external_research_folder_id": "1O8JA_Zz789tqcJ5R5m_me_YReJDMaJk8",
+    "v1_document_state": "HISTORICAL_SUPERSEDED",
+    "external_crosswalk_state": "HISTORICAL_RESEARCH_ONLY",
+    "method_reference_state": "HISTORICAL_METHOD_REFERENCE"
+  },
+  "operational_invariants": [
+    "research != operational_authority",
+    "similarity != adoption",
+    "fragmentation != anonymization",
+    "small_fragment != small_impact",
+    "hash != authorization",
+    "unknown_effect != zero_risk",
+    "CI_pass != human_authorization",
+    "redundancy_without_independent_parity != independent_resilience"
+  ],
+  "direct_main_incident": {
+    "observed": true,
+    "cause": "tool invocation targeted main before corrective branch existed",
+    "partial_commit": "33d727534e16a828f115e3b6e82407f267f62851",
+    "partial_content": "single placeholder byte/string artifact",
+    "revert_commit": "a3230bfbd2cda7c2e0b93dda445602004bbf47dc",
+    "effective_state": "REVERTED",
+    "lesson": "unprotected main permits operator/tool routing error to materialize; branch protection remains a real control-plane gap"
+  },
+  "F_ok": [
+    "Drive authorial V2 materialized",
+    "external research isolated from operational route",
+    "GitHub V2 authority materialized on corrective branch",
+    "V1 operational route superseded without erasing Git history",
+    "accidental direct-main partial write reverted"
+  ],
+  "F_gap": [
+    "server-side main protection remains unresolved",
+    "machine policy V2 with mandatory first-release human awareness not yet materialized",
+    "real-data privacy/reidentification effectiveness remains TOKEN_VAZIO"
+  ],
+  "F_next": "run exact-head repository gates; then evolve machine policy so first release requires explicit human awareness and approval while later automation remains bounded to the approved immutable envelope"
+}
