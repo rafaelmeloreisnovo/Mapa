@@ -1,0 +1,238 @@
+{
+  "schema_version": "rafaelia.delta-omega/v1",
+  "cycle_id": "OMEGA_FEDERATED_20260821T0749BRT",
+  "state_transition": "OMEGA_N_TO_OMEGA_N_PLUS_1_VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_0",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY_HISTORY",
+    "NO_SILENT_REGRESSION"
+  ],
+  "authorities": {
+    "Mapa": {"repo":"rafaelmeloreisnovo/Mapa","branch":"main","sha":"9eedd05c6ef9ab0635ab8eec5f967b6e337c270e","provider_classic_protection":"DISABLED_OBSERVED"},
+    "RafGitTools": {"repo":"rafaelmeloreisnovo/RafGitTools","branch":"main","sha":"062f09986840db24b684ba5affde1fbf192f35c7","delta":"STABLE_NO_NEW_EXECUTION_COUNTED"},
+    "Termux": {"repo":"rafaelmeloreisnovo/termux-app-rafacodephi","branch":"master","sha":"5e83eef9aea803bee127cd21eed6206ced193cb7","delta":"STABLE_NO_NEW_RUNTIME_COUNTED"},
+    "QEMU": {"repo":"rafaelmeloreisnovo/qemu_rafaelia","branch":"master","sha":"b274de47403f48136d1969f7663aa457383e3ef4","delta":"STABLE_EXACT_PIN_ABI_STILL_OPEN"},
+    "RLL": {"repo":"instituto-Rafael/relativity-living-light","branch":"main","sha":"1c942ac589628f677338ffde3ae3fcb2ebbf652f","delta":"SCAN_POC_CONTRACT_PRESENT_POC_NOT_EXECUTED"}
+  },
+  "F_ok": [
+    "PR329 failing operational-gap mechanism localized exactly",
+    "maintenance.class producer corrected without relaxing validator",
+    "PR329 repaired head d267f28d5e72fedfde7a65efd4dca4820b252b93 operational-gap-assurance SUCCESS",
+    "CI SUCCESS and Branch Topology SUCCESS on repaired head",
+    "server detector fixtures PASS 4/4 and provider-bootstrap fixtures PASS 4/4",
+    "Mapa current main provenance re-read",
+    "RafGitTools/Termux/QEMU/RLL authorities freshly reconciled",
+    "canonical Drive document freshly located for compare-and-write"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_PROVIDER_ADMIN_WRITE_ACTION_NOT_EXPOSED",
+    "TOKEN_VAZIO_REPOSITORY_RULESET_BINDING",
+    "TOKEN_VAZIO_BYPASS_ACTORS",
+    "TOKEN_VAZIO_PROMOTION_CONTROL_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT",
+    "TOKEN_VAZIO_RAFGITTOOLS_POSTMERGE_MAIN_EVENT_RECEIPT",
+    "TOKEN_VAZIO_TERMUX_EXECUTION_TIME_IDENTITY",
+    "TOKEN_VAZIO_TERMUX_NONCE_BOUND_PHYSICAL_TRANSACTION",
+    "TOKEN_VAZIO_QEMU_EXACT_PIN_ABI_INTEGRATION",
+    "TOKEN_VAZIO_RLL_POC_NOT_EXECUTED",
+    "TOKEN_VAZIO_RLL_INDEPENDENT_REPLICATION"
+  ],
+  "F_esquecido": [
+    "IMPLEMENTATION_PASS_NE_PROVIDER_ACTIVATION",
+    "EVENT_TRIGGERED_REVALIDATION_NE_MAINTENANCE_CLASS_ENUM",
+    "STABLE_SHA_NE_NEW_EXECUTION_EVIDENCE",
+    "SCAN_POC_CONTRACT_PASS_NE_POC_EXECUTED",
+    "SOURCE_IDENTITY_NE_ABI_COMPATIBILITY",
+    "DRIVE_MEMORY_NE_EXECUTION_EVIDENCE"
+  ],
+  "token_vazio_resolved": [
+    "TOKEN_VAZIO_PR329_OPERATIONAL_GAP_RECORD_TERMINAL_REPAIR"
+  ],
+  "new_token_vazio": [
+    "TOKEN_VAZIO_PR329_APPEND_ONLY_FINAL_HEAD_TERMINAL_REVALIDATION"
+  ],
+  "uncertainty_before_after": {
+    "before": [
+      "PR329 operational-gap-assurance red with mechanism not yet corrected",
+      "provider bootstrap implementation present but local record validity and provider activation were partially conflated"
+    ],
+    "after": [
+      "exact invalid field localized: maintenance.class=EVENT_TRIGGERED",
+      "producer corrected to CONDITION_BASED while event-trigger semantics preserved elsewhere",
+      "exact-head operational-gap-assurance SUCCESS",
+      "provider live probe independently remains BLOCKED with classic protection disabled",
+      "provider activation gap therefore remains separate and narrower"
+    ]
+  },
+  "hazards": [
+    {
+      "hazard_id":"MAPA_PROVIDER_BARRIER_NOT_ACTIVE",
+      "status":"OPEN_P0",
+      "failure_modes":["BRANCH_PROTECTION_DISABLED","PROTECTION_NOT_ENABLED","REQUIRED_STATUS_CHECKS_NOT_ENFORCED","NO_REQUIRED_STATUS_CHECKS_OBSERVED"],
+      "ruleset_or_bypass":"TOKEN_VAZIO_NOT_INSPECTED",
+      "falsifier":"Observe protected=true, admins enforced, >=1 independent approval required and exact promotion-control / enforce required, then prove zero-approval server rejection with main SHA unchanged."
+    }
+  ],
+  "component_lifecycle_ledger": {
+    "Mapa_provider_side_merge_protection": {
+      "calendar_age":"CURRENT_CYCLE",
+      "execution_hours":"TOKEN_VAZIO",
+      "runtime_hours":"TOKEN_VAZIO",
+      "cycles":2,
+      "starts_stops":"TOKEN_VAZIO",
+      "builds":2,
+      "test_cycles":2,
+      "deployments":"TOKEN_VAZIO",
+      "commits_since_validation":2,
+      "dependency_changes":1,
+      "environment_exposure":"GitHub provider settings + Actions + PR merge path",
+      "load_stress_proxy":"4 legacy detector fixtures + 4 provider bootstrap fixtures + live provider probe + 35-record operational-gap scan",
+      "incident_count":0,
+      "near_miss_count":1,
+      "maintenance_actions":2,
+      "corrective_actions":2,
+      "software_schema_version":"operational-gap-assurance/v1 + provider bootstrap PR328",
+      "evidence_age":"CURRENT_CYCLE",
+      "provenance_age":"CURRENT_CYCLE",
+      "last_verified_at":"run:32474430324 + run:32474430147 + main:9eedd05c6ef9ab0635ab8eec5f967b6e337c270e",
+      "next_review_gate":"PROVIDER_SETTINGS_ACTIVE_THEN_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT",
+      "retirement_revalidation_criteria":"EVENT_TRIGGERED",
+      "limit_origin":"INTERNAL_CONTRACT_PLUS_OBSERVED_NEAR_MISS",
+      "limit_type":"EVENT_TRIGGERED"
+    },
+    "RafGitTools_main": {
+      "calendar_age":"CURRENT_SOURCE_RECHECK",
+      "execution_hours":"TOKEN_VAZIO",
+      "runtime_hours":"TOKEN_VAZIO",
+      "cycles":"TOKEN_VAZIO",
+      "starts_stops":"TOKEN_VAZIO",
+      "builds":"TOKEN_VAZIO_POSTMERGE",
+      "test_cycles":"TOKEN_VAZIO_POSTMERGE",
+      "deployments":"TOKEN_VAZIO",
+      "commits_since_validation":0,
+      "dependency_changes":"TOKEN_VAZIO",
+      "environment_exposure":"GitHub main + Android/CI producer",
+      "load_stress_proxy":"TOKEN_VAZIO",
+      "incident_count":"TOKEN_VAZIO",
+      "near_miss_count":"TOKEN_VAZIO",
+      "maintenance_actions":0,
+      "corrective_actions":0,
+      "software_schema_version":"main@062f09986840db24b684ba5affde1fbf192f35c7",
+      "evidence_age":"STALE_FOR_POSTMERGE_EXECUTION",
+      "provenance_age":"CURRENT_SOURCE_RECHECK",
+      "last_verified_at":"source:062f09986840db24b684ba5affde1fbf192f35c7",
+      "next_review_gate":"RAFGITTOOLS_POSTMERGE_MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT",
+      "retirement_revalidation_criteria":"EVENT_TRIGGERED_OR_SOURCE_CHANGE",
+      "limit_origin":"INTERNAL_EVIDENCE_CONTRACT",
+      "limit_type":"EVENT_TRIGGERED"
+    },
+    "Termux_master_runtime_boundary": {
+      "calendar_age":"CURRENT_SOURCE_RECHECK",
+      "execution_hours":"TOKEN_VAZIO",
+      "runtime_hours":"TOKEN_VAZIO",
+      "cycles":"TOKEN_VAZIO",
+      "starts_stops":"TOKEN_VAZIO",
+      "builds":"TOKEN_VAZIO_CURRENT_TRANSACTION",
+      "test_cycles":"TOKEN_VAZIO_CURRENT_TRANSACTION",
+      "deployments":"TOKEN_VAZIO",
+      "commits_since_validation":0,
+      "dependency_changes":"TOKEN_VAZIO",
+      "environment_exposure":"Android/Termux ARM32 + Vectras/QEMU transaction boundary",
+      "load_stress_proxy":"TOKEN_VAZIO_CURRENT_TRANSACTION",
+      "incident_count":"TOKEN_VAZIO",
+      "near_miss_count":"TOKEN_VAZIO",
+      "maintenance_actions":0,
+      "corrective_actions":0,
+      "software_schema_version":"master@5e83eef9aea803bee127cd21eed6206ced193cb7",
+      "evidence_age":"STALE_FOR_NONCE_BOUND_PHYSICAL_TRANSACTION",
+      "provenance_age":"CURRENT_SOURCE_RECHECK",
+      "last_verified_at":"source:5e83eef9aea803bee127cd21eed6206ced193cb7",
+      "next_review_gate":"APK_QEMU_HASH_NONCE_INSTALL_LAUNCH_PID_LOGCAT_DEVICE_RECEIPT",
+      "retirement_revalidation_criteria":"EVENT_TRIGGERED_OR_RUNTIME_DEPENDENCY_CHANGE",
+      "limit_origin":"INTERNAL_RUNTIME_EVIDENCE_CONTRACT",
+      "limit_type":"EVENT_TRIGGERED"
+    },
+    "QEMU_exact_pin_ABI": {
+      "calendar_age":"CURRENT_SOURCE_RECHECK",
+      "execution_hours":"TOKEN_VAZIO",
+      "runtime_hours":"TOKEN_VAZIO",
+      "cycles":3,
+      "starts_stops":"TOKEN_VAZIO",
+      "builds":"TOKEN_VAZIO_EXACT_PIN",
+      "test_cycles":"TOKEN_VAZIO_EXACT_PIN_ABI",
+      "deployments":"TOKEN_VAZIO",
+      "commits_since_validation":93,
+      "dependency_changes":"PRESENT_POST_PIN_LINEAGE",
+      "environment_exposure":"ARM32/ARM64 NDK Gradle bridge runtime surfaces",
+      "load_stress_proxy":"TOKEN_VAZIO",
+      "incident_count":0,
+      "near_miss_count":1,
+      "maintenance_actions":1,
+      "corrective_actions":0,
+      "software_schema_version":"master@b274de47403f48136d1969f7663aa457383e3ef4; exact pin 2346c30c2ba77881c2930add83523ea903b173fe",
+      "evidence_age":"STALE_FOR_EXACT_PIN_ABI",
+      "provenance_age":"CURRENT_SOURCE_RECHECK",
+      "last_verified_at":"source:b274de47403f48136d1969f7663aa457383e3ef4",
+      "next_review_gate":"QEMU_EXACT_PIN_ABI_INTEGRATION_RECEIPT",
+      "retirement_revalidation_criteria":"EVENT_TRIGGERED_ON_TOOLCHAIN_CONSUMER_OR_PIN_CHANGE",
+      "limit_origin":"LINEAGE_EVIDENCE_PLUS_INTERNAL_ABI_CONTRACT",
+      "limit_type":"EVENT_TRIGGERED"
+    },
+    "RLL_scan_poc_scientific_boundary": {
+      "calendar_age":"CURRENT_SOURCE_RECHECK",
+      "execution_hours":"TOKEN_VAZIO_POC_NOT_EXECUTED",
+      "runtime_hours":"TOKEN_VAZIO_POC_NOT_EXECUTED",
+      "cycles":1,
+      "starts_stops":"TOKEN_VAZIO",
+      "builds":"TOKEN_VAZIO_POC",
+      "test_cycles":1,
+      "deployments":"TOKEN_VAZIO",
+      "commits_since_validation":0,
+      "dependency_changes":1,
+      "environment_exposure":"scientific data/inference registry",
+      "load_stress_proxy":"scan/POC contract validation only",
+      "incident_count":0,
+      "near_miss_count":0,
+      "maintenance_actions":1,
+      "corrective_actions":0,
+      "software_schema_version":"main@1c942ac589628f677338ffde3ae3fcb2ebbf652f",
+      "evidence_age":"CURRENT_CONTRACT_STALE_FOR_POC_EXECUTION",
+      "provenance_age":"CURRENT_SOURCE_RECHECK",
+      "last_verified_at":"source:1c942ac589628f677338ffde3ae3fcb2ebbf652f",
+      "next_review_gate":"POC_COMMAND_ENV_EXIT_OUTPUT_SHA256_THEN_INDEPENDENT_REPLICATION",
+      "retirement_revalidation_criteria":"EVENT_TRIGGERED_ON_DATA_MODEL_CONTRACT_OR_EXECUTION_CHANGE",
+      "limit_origin":"INTERNAL_SCIENTIFIC_EVIDENCE_CONTRACT",
+      "limit_type":"EVENT_TRIGGERED"
+    }
+  },
+  "impact_radius": {
+    "provider_barrier_event": {
+      "Mapa_main":{"direct_exposure":true,"transmitted_load_or_effect":"authoritative merge path remains less restrictive than local policy","hidden_damage_or_hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"provider settings + rejected merge receipt","false_positive_cost":"temporary merge delay","false_negative_cost":"unauthorized authoritative transition"},
+      "RafGitTools_Termux_RLL":{"direct_exposure":false,"transmitted_load_or_effect":"POTENTIAL_PROPAGATION","hidden_damage_or_hidden_state_possible":"TOKEN_VAZIO","inspection_required":"CONDITION_BASED","revalidation_required":"CONDITION_BASED","replacement_or_retirement_candidate":false,"evidence_needed":"consumer binding receipts to affected Mapa states","false_positive_cost":"extra revalidation","false_negative_cost":"consumer trusts inadequately governed authority state"}
+    }
+  },
+  "actions": {
+    "DETECTIVE":"localized exact schema failure and re-read provider/runtime/scientific authorities",
+    "PREVENTIVE":"preserved strict validator and exact provider context bootstrap fixtures",
+    "PRECAUTIONARY":"claim_allowed=false; no destructive merge rejection test while barrier absent",
+    "ADAPTIVE":"moved event-trigger semantics out of maintenance class enum without rewriting history",
+    "CORRECTIVE":"corrected only the invalid producer and proved exact-head assurance PASS",
+    "MAINTENANCE":"kept Node20-to-Node24 action drift and stale runtime/scientific clocks as revalidation signals",
+    "INCIDENT_INVESTIGATION":"separated local schema regression from provider activation hazard and competing ruleset/bypass mechanisms",
+    "SAFETY_ASSURANCE":"reran full operational-gap assurance and server enforcement fixtures/live probe",
+    "LEARNING_ANTI_RECURRENCE":"record rule: implementation PASS does not activate provider barrier; maintenance class enum is distinct from review trigger semantics"
+  },
+  "F_next": [
+    "Acquire authorized provider Administration:write path without exposing credentials",
+    "Apply tested protection bootstrap against fresh expected-main SHA and re-read provider settings",
+    "Prove zero-independent-approval server rejection with main SHA unchanged",
+    "Execute bounded RLL POC and capture command/environment/exit/output SHA-256",
+    "Execute QEMU exact-pin ABI integration receipt",
+    "Capture RafGitTools postmerge main receipt",
+    "Capture Termux nonce-bound physical transaction receipt",
+    "Advance RLL to independent replication only after bounded POC evidence"
+  ]
+}
