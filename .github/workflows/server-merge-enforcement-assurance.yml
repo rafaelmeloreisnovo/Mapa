@@ -24,6 +24,9 @@ jobs:
       - name: Negative and positive detector fixtures
         run: python3 -m unittest -v tests.test_server_merge_enforcement
 
+      - name: Provider protection bootstrap fixtures
+        run: python3 -m unittest -v tests.test_apply_main_branch_protection
+
       - name: Inspect live main branch server-side enforcement
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
