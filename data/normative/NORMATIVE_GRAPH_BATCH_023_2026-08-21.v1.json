@@ -1,0 +1,108 @@
+{
+  "schema_version": "NORMATIVE_GRAPH_SCHEMA_V1",
+  "batch_id": "023",
+  "generated_at": "2026-08-21T09:04:00-03:00",
+  "claim_allowed": false,
+  "purpose": "Route child-rights, dignity, privacy and secure-development references without converting reference presence into compliance or certification.",
+  "invariants": [
+    "human_dignity_child_protection = high_priority_gate_not_automatic_compliance",
+    "privacy_claim != privacy_conformance",
+    "technical_reference != law != certification",
+    "subject_or_jurisdiction_unknown -> TOKEN_VAZIO",
+    "group_label != cultural_meaning",
+    "cultural_reference_missing -> TOKEN_VAZIO_CONTEXT",
+    "consent_artifact != universally_valid_consent",
+    "best_interest_review != legal_certificate",
+    "TOKEN_VAZIO closes only by evidence"
+  ],
+  "authorities": [
+    {
+      "id": "CRC_GC25_2021",
+      "type": "UN_TREATY_BODY_GENERAL_COMMENT",
+      "authority": "UN Committee on the Rights of the Child — General Comment No. 25 (2021)",
+      "official_source": "https://docstore.ohchr.org/",
+      "scope": "children's rights in relation to the digital environment, including networks, apps, connected devices, AI, algorithms, data analytics and biometrics",
+      "binding_force": "AUTHORITATIVE_TREATY_INTERPRETIVE_GUIDANCE; legal effect depends on applicable treaty/state context",
+      "engineering_use": "P0 protected-subject digital-rights and impact-analysis routing",
+      "not_proved": ["repository_compliance", "jurisdiction_applicability", "child_subject_presence"]
+    },
+    {
+      "id": "ACRWC_1990",
+      "type": "REGIONAL_HUMAN_RIGHTS_TREATY",
+      "authority": "African Charter on the Rights and Welfare of the Child",
+      "official_source": "https://achpr.au.int/",
+      "scope": "African regional child-rights framework; Article 2 defines child as under 18, Article 4 best interests, Article 10 privacy, with non-discrimination and cultural-rights context",
+      "binding_force": "BINDING_FOR_STATES_PARTIES_WITHIN_APPLICABLE_SCOPE",
+      "engineering_use": "do not erase cultural context; do not allow cultural labels or practices to override established child rights; require context provenance instead of stereotype",
+      "not_proved": ["South_Africa_specific_system_compliance", "individual_cultural_membership", "repository_user_age"]
+    },
+    {
+      "id": "BRAZIL_LGPD_CHILDREN_ANPD_2023",
+      "type": "LAW_PLUS_REGULATORY_INTERPRETATION",
+      "authority": "Brazil LGPD Article 14 + ANPD Enunciado CD/ANPD No. 1/2023",
+      "official_source": "https://www.gov.br/anpd/",
+      "scope": "processing of personal data of children and adolescents in Brazil/applicable LGPD scope; best interest must prevail in the concrete case",
+      "binding_force": "BINDING_WITHIN_LGPD_SCOPE; ANPD enunciado is regulatory interpretation",
+      "engineering_use": "resolve legal basis, best interest, purpose, minimization, transparency and concrete data flow before child-data promotion",
+      "not_proved": ["LGPD_compliance", "consent_sufficiency_in_every_case", "child_data_presence"]
+    },
+    {
+      "id": "SOUTH_AFRICA_POPIA_CHILDREN_34_35",
+      "type": "LAW",
+      "authority": "South Africa Protection of Personal Information Act 4 of 2013 — sections 34-35",
+      "official_source": "https://www.gov.za/ and official/public-sector copies of Act 4 of 2013",
+      "scope": "processing personal information concerning children when POPIA applies; section 34 prohibition subject to section 35 authorisations/conditions",
+      "binding_force": "BINDING_WITHIN_POPIA_SCOPE",
+      "engineering_use": "if South African child-data processing is actually established, require applicable authority/condition and safeguards before promotion",
+      "not_proved": ["POPIA_compliance", "South_African_user_presence", "competent_person_status"]
+    },
+    {
+      "id": "NIST_PRIVACY_FRAMEWORK_1_0",
+      "type": "TECHNICAL_PRIVACY_FRAMEWORK",
+      "authority": "NIST Privacy Framework Version 1.0",
+      "official_source": "https://www.nist.gov/privacy-framework",
+      "scope": "voluntary privacy risk management framework",
+      "binding_force": "VOLUNTARY_TECHNICAL_FRAMEWORK_UNLESS_INCORPORATED_BY_OTHER_AUTHORITY",
+      "engineering_use": "identify/govern/control/communicate/protect privacy-risk evidence and gaps",
+      "not_proved": ["legal_compliance", "certification", "privacy_effectiveness_without_execution_evidence"]
+    },
+    {
+      "id": "NIST_SP_800_218_SSDF_1_1",
+      "type": "TECHNICAL_SECURE_DEVELOPMENT_GUIDANCE",
+      "authority": "NIST SP 800-218 Secure Software Development Framework Version 1.1",
+      "official_source": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "scope": "secure software development practices and vulnerability-risk reduction",
+      "binding_force": "TECHNICAL_GUIDANCE; contractual/regulatory force depends on incorporation",
+      "engineering_use": "prepare organisation, protect software, produce well-secured software and respond to residual vulnerabilities using scoped receipts",
+      "not_proved": ["FIPS_validation", "product_certification", "absence_of_vulnerabilities"]
+    },
+    {
+      "id": "OWASP_MASVS_V2_PRIVACY",
+      "type": "MOBILE_SECURITY_VERIFICATION_STANDARD",
+      "authority": "OWASP MASVS v2 privacy/security control families and current MASWE/MASTG evidence references",
+      "official_source": "https://mas.owasp.org/",
+      "scope": "mobile application security/privacy verification baseline",
+      "binding_force": "COMMUNITY_TECHNICAL_STANDARD_NOT_LAW_BY_ITSELF",
+      "engineering_use": "derive Android storage, network, platform, code, resilience and privacy negative-path tests",
+      "not_proved": ["all_privacy_laws", "certification", "production_security"]
+    }
+  ],
+  "cross_cultural_context_gate": {
+    "purpose": "Preserve meaning and provenance without stereotyping or using culture as a shortcut around individual rights.",
+    "rules": [
+      "culture_or_group_membership_requires_source_if_material_to_decision",
+      "age_transition_does_not_resolve_group_meaning_or_consent",
+      "missing_reference_or_group_meaning = TOKEN_VAZIO_CONTEXT",
+      "do_not_infer_culture_ethnicity_religion_or_family_role_from_name_geography_or_usage",
+      "rights_and_dignity_gate_remains_non_compensatory"
+    ]
+  },
+  "resolution_function_delta": {
+    "resolve_subject": "Establish whether a child/vulnerable/protected-subject use is real, potential or unknown; never infer from labels.",
+    "resolve_jurisdiction": "Resolve controller/provider/deployer, subject location, establishment/targeting, purpose and data flow separately.",
+    "resolve_authority_hierarchy": "Applicable law/regulation outranks private policy within scope; technical standards guide engineering but do not silently become law or certification.",
+    "resolve_cultural_context": "Require a traceable source/reference when cultural meaning changes a decision; otherwise preserve TOKEN_VAZIO_CONTEXT.",
+    "resolve_evidence": "Exact source, execution environment, test/inspection, artifact/device evidence, receipt and independent/legal review where applicable.",
+    "promotion": "Any missing gating input -> HOLD; claim_allowed remains false outside a bounded completed gate."
+  }
+}
