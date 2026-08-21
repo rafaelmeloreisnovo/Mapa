@@ -1,104 +1,128 @@
 {
   "schema_version": "rafaelia.operational-gap-assurance/v1",
   "gap_id": "PR323_MERGED_WITH_BLOCKING_GATES_FAILED_20260821T0542BRT",
-  "title": "PR #323 merged after exact-head CI and Promotion invariant failures",
-  "source_pointer": {
-    "repo": "rafaelmeloreisnovo/Mapa",
-    "pr": 323,
-    "pr_head_sha": "ec829093c58d1a42cf211190583a04076687f74b",
-    "merge_sha": "ef705a8441f98cc16c4e772575acc69cbc4ef0d5",
-    "ci_run": 32462758938,
-    "ci_job": 96712900017,
-    "promotion_run": 32462758958,
-    "promotion_job": 96712900384
-  },
-  "owner": "Mapa governance / repository authority",
-  "authority": "rafaelmeloreisnovo/Mapa:main",
+  "status": "NEAR_MISS",
+  "source_pointer": "github://rafaelmeloreisnovo/Mapa/pull/323@ec829093c58d1a42cf211190583a04076687f74b",
+  "owner_authority": "rafaelmeloreisnovo/Mapa:main governance",
   "affected_routes": ["governance->CI->main", "receipt->invariants->promotion", "policy->server barrier->main"],
   "observed_at": "2026-08-21T05:42:57-03:00",
-  "provenance": {
-    "merge_verified_by_github": true,
-    "reviews_observed": 0,
-    "main_protected": false,
-    "classic_required_checks_enforcement": "off"
-  },
+  "provenance": [
+    {"source": "GitHub PR #323", "role": "merge and exact-head identity", "merge_sha": "ef705a8441f98cc16c4e772575acc69cbc4ef0d5"},
+    {"source": "GitHub Actions", "role": "execution", "ci_run": 32462758938, "promotion_run": 32462758958}
+  ],
   "evidence_for": [
-    "CI exact-head run failed at blocking markdown regression gate with 13 issues in governance/RISCO_GESTAO_FRAMEWORK_MAPA.md",
-    "Promotion Control negative tests passed but invariant validation failed 14/15 because SHARED_DATA_AUTHORIAL_SUPERSESSION_20260821.v3.json lacked an immutability marker",
-    "Promotion enforce job was skipped after invariant failure",
-    "PR #323 merged into main after these exact-head failures",
-    "zero review submissions were observed through the accessible review surface"
+    "Exact-head CI failed at blocking markdown gate with 13 violations in governance/RISCO_GESTAO_FRAMEWORK_MAPA.md",
+    "Promotion invariant validation failed 14/15 because SHARED_DATA_AUTHORIAL_SUPERSESSION_20260821.v3.json lacked a recognized immutability marker",
+    "PR #323 subsequently merged into main",
+    "Accessible review surface observed zero review submissions"
   ],
   "evidence_against": [
     "Branch Topology Gate passed",
-    "the merge commit has valid GitHub provenance signature",
-    "no downstream runtime or scientific harm is evidenced by this observation alone"
+    "Merge commit has valid GitHub provenance signature",
+    "No downstream runtime or scientific harm is evidenced by this observation alone"
   ],
-  "uncertainty_state": "MECHANISM_PARTIALLY_OBSERVED_SERVER_ENFORCEMENT_CAUSE_TOKEN_VAZIO",
+  "uncertainty_state": "SERVER_ENFORCEMENT_MECHANISM_PARTIALLY_OBSERVED_RULESET_BYPASS_TOKEN_VAZIO",
   "urgency": 3,
   "necessity": 3,
   "impact": 3,
+  "unlock": 3,
+  "risk": 3,
   "detectability": 3,
   "recurrence_risk": 3,
-  "failure_mode": "blocking repository gates can fail without constituting a server-side merge barrier on the observed path",
-  "falsifier": "A controlled PR with equivalent blocking gate failures is rejected by the server and main remains unchanged, with ruleset/required-context evidence identifying the binding control.",
-  "next_probe": "Run exact-head correction PR and require CI + invariant gate success; separately inspect or prove server-side rejection semantics without weakening gates.",
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "Blocking repository gates failed on exact head yet did not constitute an observed server-side merge barrier.",
+  "falsifier": "A controlled equivalent PR is rejected by the server while main remains unchanged and the binding ruleset/required context is evidenced.",
+  "next_probe": "Re-run the corrected producer under exact-head operational-gap assurance; separately prove binding server-side rejection without weakening gates.",
   "mitigation": {
-    "class": "CONDITION_BASED",
-    "immediate": ["repair markdown producer", "repair receipt immutability marker", "claim_allowed=false", "no automatic promotion"],
-    "server_side": "TOKEN_VAZIO_REQUIRED_SERVER_CONFIGURATION_OR_RULESET_ACTION"
+    "fail_closed": true,
+    "rollback": "Retain predecessor receipts and revert only this corrective branch if validation regresses.",
+    "immediate": ["claim_allowed=false", "do not weaken CI or invariant checks"]
   },
-  "closure_gate": "CORRECTION_EXACT_HEAD_PASS_AND_SERVER_SIDE_BLOCKING_GATE_BINDING_RECEIPT",
-  "review_or_expiry": {
-    "type": "EVENT_TRIGGERED",
-    "origin": "observed near-miss / repeated merge-boundary evidence",
-    "triggers": ["branch protection change", "ruleset change", "Promotion Control change", "CI required-context change", "new merge while blocking gate failed"]
+  "closure_gate": {
+    "criterion": "Corrected record passes exact-head assurance and binding server-side blocking semantics are evidenced.",
+    "evidence_needed": "successful operational-gap-assurance receipt plus server rejection receipt with unchanged main SHA",
+    "falsifier": "record still fails assurance or equivalent failed-gate PR can merge without required authorization",
+    "result": "TOKEN_VAZIO"
   },
+  "review_or_expiry": "EVENT_TRIGGERED on merge-control, workflow, invariant, ruleset, or required-context change",
   "claim_allowed": false,
-  "predecessor_lineage": ["POLICY_DECISION_NOT_SERVER_BARRIER", "DIRECT_MAIN_MUTATION_NOT_GOVERNED_TRANSITION"],
-  "actions": {
-    "DETECTIVE": "exact-head CI, workflow jobs, review surface and branch protection reconciled",
-    "PREVENTIVE": "do not weaken markdownlint or invariant checker; repair producers",
-    "PRECAUTIONARY": "fail closed for claims/promotion while server binding is unproved",
-    "ADAPTIVE": "new risk-framework delta treated as a new lifecycle event without rewriting predecessor receipts",
-    "CORRECTIVE": "13 markdown issues and missing receipt immutability marker corrected on successor branch",
-    "MAINTENANCE": "Node20-target action forced under Node24 remains a revalidation signal, not assigned failure cause",
-    "INCIDENT_INVESTIGATION": {
-      "facts": "PR merged after two blocking exact-head gates failed",
-      "configuration": "classic branch protection disabled; required checks enforcement off",
-      "recommendations": "prove server-side gate binding; keep factual distinction between merge provenance and authorization",
-      "blame_assignment": false
-    },
-    "SAFETY_ASSURANCE": "successor must re-run exact-head gates",
-    "ANTI_RECURRENCE": "MERGE_PROVENANCE != GATE_AUTHORIZATION; BLOCKING_CI != SERVER_BARRIER unless server binding is evidenced"
+  "action_categories": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "ADAPTIVE", "CORRECTIVE", "MAINTENANCE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+  "detector": {
+    "signal": "exact-head blocking gate failure followed by merge",
+    "threshold": "any occurrence",
+    "false_positive": "merge may be authorized by an unobserved binding mechanism after the captured head state",
+    "false_negative": "failed controls integrate into authority without detection",
+    "evidence_needed": "PR head, workflow run/job, merge SHA, review and server-control state"
+  },
+  "adaptive_control": {
+    "baseline": "PR #323 exact-head failures and merge observation",
+    "delta": "producer schema normalized without rewriting event facts",
+    "justification": "current assurance contract requires typed control structures",
+    "rollback": "revert successor correction commit while historical Git evidence remains immutable",
+    "retest": "full operational-gap-assurance on exact successor head"
+  },
+  "corrective_control": {
+    "symptom": "current-schema record crashes consumer because closure_gate is a string",
+    "mechanism_hypothesis": "producer/consumer schema drift",
+    "before_after_test": "before run 32466638674 raises AttributeError; after must scan all records with failures=0"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "Mapa operational-gap record and merge-governance contract",
+    "condition_or_interval": "revalidate on schema, workflow, or server-control change",
+    "verification": "exact-head full-directory assurance plus server-control observation",
+    "measured_condition": "closure_gate type drift observed in run 32466638674"
+  },
+  "incident_investigation": {
+    "trigger": "PR #323 merged after blocking exact-head failures",
+    "facts": "CI and Promotion invariant failed before merge; merge later present on main",
+    "timeline": "exact-head failures -> merge into main -> successor correction",
+    "configuration": "classic protection previously observed disabled; ruleset/bypass state not established here",
+    "recent_changes": "risk-framework and authorial-supersession receipt changes",
+    "competing_mechanisms": ["unobserved ruleset", "repository permission or bypass", "absence of binding required checks"],
+    "contributing_factors": ["producer schema drift", "server binding not evidenced"],
+    "recommendations": ["normalize producer schema", "prove server-side binding with non-destructive rejection receipt"],
+    "blame_assignment": false
+  },
+  "safety_assurance": {
+    "data_acquisition": "exact-head workflow runs, branch metadata, merge and review evidence",
+    "analysis": "separate policy failure, schema failure, merge provenance and server authorization",
+    "system_reassessment": "re-run full scan and server binding probe after corrective changes",
+    "corrective_trigger": "any merged change with blocking gate failure or any current-schema record failure"
+  },
+  "learning": {
+    "reusable_control": "MERGE_PROVENANCE != GATE_AUTHORIZATION and current-schema producers must match executable consumer types",
+    "index_or_test": "operational-gap full-directory assurance",
+    "recurrence_check": "future merge-boundary events must reconcile exact-head gates with server eligibility"
   },
   "component_lifecycle_ledger": {
     "component": "Mapa:merge-boundary-and-risk-framework",
     "calendar_age": "TOKEN_VAZIO_NOT_RECONSTRUCTED",
     "execution_hours": "TOKEN_VAZIO",
     "runtime_hours": "TOKEN_VAZIO",
-    "cycles": 1,
+    "cycles": 2,
     "starts_stops": "TOKEN_VAZIO",
     "builds": "TOKEN_VAZIO",
-    "test_cycles": 1,
+    "test_cycles": 2,
     "deployments": "TOKEN_VAZIO",
     "commits_since_validation": 1,
     "dependency_changes": 1,
-    "environment_exposure": "GitHub Actions ubuntu-24.04; Node20-target checkout forced under Node24",
-    "load_stress_proxy": "64 workflow YAML parsed; 1 changed Markdown linted; 15 invariants evaluated",
+    "environment_exposure": "GitHub Actions Ubuntu 24.04; Node20-target actions forced under Node24",
+    "load_stress_proxy": "34 operational-gap records in latest failed scan",
     "incident_count": 0,
-    "near_miss_count": 1,
-    "maintenance_actions": 1,
-    "corrective_actions": 2,
-    "software_schema_version": "operational-gap-assurance/v1 + check_invariants_v2",
+    "near_miss_count": 2,
+    "maintenance_actions": 2,
+    "corrective_actions": 3,
+    "software_schema_version": "rafaelia.operational-gap-assurance/v1",
     "evidence_age": "CURRENT_CYCLE",
     "provenance_age": "CURRENT_CYCLE",
-    "last_verified_at": "PR323 exact-head runs + main merge snapshot",
-    "next_review_gate": "SUCCESSOR_EXACT_HEAD_TERMINAL_AND_SERVER_BINDING_RECEIPT",
-    "retirement_revalidation_criteria": "EVENT_TRIGGERED on merge-control, workflow, invariant or ruleset change"
+    "last_verified_at": "run:32466638674/job:96724509219",
+    "next_review_gate": "FULL_SCAN_PASS_AND_SERVER_BINDING_RECEIPT",
+    "retirement_revalidation_criteria": "EVENT_TRIGGERED"
   },
   "impact_radius": {
-    "Mapa_main": {"direct_exposure": true, "transmitted_load_or_effect": "failed gate content integrated", "hidden_damage_or_hidden_state_possible": true, "inspection_required": true, "revalidation_required": true, "replacement_or_retirement_candidate": false, "evidence_needed": "successor exact-head gates + server binding", "false_positive_cost": "temporary merge delay", "false_negative_cost": "failed controls integrated into authority"},
-    "RafGitTools_Termux_RLL": {"direct_exposure": false, "transmitted_load_or_effect": "POTENTIAL_PROPAGATION", "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO", "inspection_required": false, "revalidation_required": "CONDITION_BASED if bound to affected Mapa SHA/state", "replacement_or_retirement_candidate": false, "evidence_needed": "consumer binding receipts", "false_positive_cost": "unnecessary revalidation", "false_negative_cost": "silent consumption of stale/failed authority state"}
+    "Mapa_main": {"direct_exposure": true, "transmitted_load_or_effect": "failed control state integrated", "hidden_damage_or_hidden_state_possible": true, "inspection_required": true, "revalidation_required": true, "replacement_or_retirement_candidate": false, "evidence_needed": "successor full scan plus server binding", "false_positive_cost": "temporary merge delay", "false_negative_cost": "failed controls integrated into authority"},
+    "federated_consumers": {"direct_exposure": false, "transmitted_load_or_effect": "POTENTIAL_PROPAGATION", "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO", "inspection_required": false, "revalidation_required": "CONDITION_BASED if bound to affected Mapa state", "replacement_or_retirement_candidate": false, "evidence_needed": "consumer binding receipt", "false_positive_cost": "extra revalidation", "false_negative_cost": "silent consumption of inadequately governed authority"}
   }
 }
