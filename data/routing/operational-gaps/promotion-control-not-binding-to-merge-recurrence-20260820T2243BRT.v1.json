@@ -79,15 +79,43 @@
   },
   "incident_investigation": {
     "trigger": "second observed policy-DENIED/zero-review PR merged",
-    "evidence_preserved": ["PR309 metadata", "review list", "Promotion Control run/job/log", "main branch protection snapshot", "merge commit"],
-    "timeline": ["merge observed at 2026-08-21T01:23:48Z", "closure Promotion Control job started after merge and returned DENIED"],
-    "conditions": "zero submitted reviews; required independent approvals=1; classic protection disabled",
-    "recent_changes": "PR309 integrated the operational-gap assurance work",
-    "competing_mechanisms": ["unbound classic protection", "repository ruleset path TOKEN_VAZIO", "bypass actor path TOKEN_VAZIO"],
-    "evidence_favoring": "merge plus DENIED plus zero reviews demonstrates enforcement mismatch",
-    "evidence_disfavoring": "no evidence identifies a specific ruleset or bypass actor",
+    "facts": [
+      "PR #309 merged to main at 2026-08-21T01:23:48Z.",
+      "Zero submitted pull-request reviews were observed.",
+      "Promotion Control closure run 32436139556/job 96637651527 returned DENIED with observed independent approvals=0 and required=1.",
+      "The observed classic main branch protection snapshot had required-status-check enforcement off."
+    ],
+    "timeline": [
+      "PR #309 merge observed at 2026-08-21T01:23:48Z.",
+      "Promotion Control closure job started after the merge and returned DENIED."
+    ],
+    "configuration": {
+      "classic_branch_protection": "disabled in observed snapshot",
+      "required_status_check_enforcement": "off in observed snapshot",
+      "required_independent_approvals_by_policy": 1,
+      "observed_independent_approvals": 0,
+      "repository_rulesets": "TOKEN_VAZIO_NOT_INSPECTED",
+      "bypass_actors": "TOKEN_VAZIO_NOT_INSPECTED"
+    },
+    "recent_changes": "PR309 integrated operational-gap assurance work; no server-side governance change was evidenced in this investigation.",
+    "competing_mechanisms": [
+      "unbound classic branch protection",
+      "repository ruleset path TOKEN_VAZIO",
+      "bypass actor path TOKEN_VAZIO"
+    ],
+    "evidence_favoring": "merge plus DENIED plus zero reviews demonstrates an enforcement mismatch on the observed path",
+    "evidence_disfavoring": "no evidence identifies a specific ruleset, permission path or bypass actor",
     "probable_cause": "TOKEN_VAZIO_EXACT_SERVER_PATH; observed barrier absence is sufficient for containment but not actor attribution",
-    "contributing_factors": ["Promotion Control observability can occur after merge", "classic required checks not enforced"],
+    "contributing_factors": [
+      "Promotion Control observability can occur after merge",
+      "classic required checks were not enforced in the observed snapshot"
+    ],
+    "recommendations": [
+      "Bind qualifying independent review and exact required assurance contexts to server-side merge eligibility.",
+      "Inspect repository rulesets and bypass actors before assigning a mechanism or actor.",
+      "Run a synthetic zero-approval PR and require an explicit server-side rejected-merge receipt before closure."
+    ],
+    "blame_assignment": false,
     "recurrence_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
   },
   "safety_assurance": {
