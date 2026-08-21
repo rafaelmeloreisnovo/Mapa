@@ -1,0 +1,38 @@
+name: Federated Omega Cycle V1
+on:
+  pull_request:
+    paths:
+      - 'governance/RAFAELIA_FEDERATED_OMEGA_CYCLE_20260821.v1.json'
+      - 'scripts/validate_federated_omega_cycle_v1.py'
+      - '.github/workflows/federated-omega-cycle-v1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'governance/RAFAELIA_FEDERATED_OMEGA_CYCLE_20260821.v1.json'
+      - 'scripts/validate_federated_omega_cycle_v1.py'
+permissions:
+  contents: read
+jobs:
+  fail-closed-cycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Validate federated omega cycle
+        run: python scripts/validate_federated_omega_cycle_v1.py
+      - name: Negative semantic checks
+        run: |
+          python - <<'PY'
+          import json
+          p='governance/RAFAELIA_FEDERATED_OMEGA_CYCLE_20260821.v1.json'
+          d=json.load(open(p))
+          assert d['claim_allowed'] is False
+          g={x['gap_id']:x for x in d['operational_gaps']}
+          assert g['PROVIDER_SERVER_BARRIER_FIELD_FAILURE_20260821']['urgency']=='P0'
+          assert all(x['claim_allowed'] is False for x in d['operational_gaps'])
+          assert len(d['F_next']) >= 5
+          print('PASS federated negative semantic checks')
+          PY
