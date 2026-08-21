@@ -1,0 +1,54 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR313_FOURTH_DENIED_TO_MERGE_RECURRENCE_20260821T0150BRT",
+  "type": "GOVERNANCE_NEAR_MISS_RECURRENCE",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 313,
+    "pr_head_sha": "3f81cb5ded8abbf399ced2406a48a1b0b84a52b5",
+    "merge_sha": "ed4f498afa3d7ea7e974fcd6381dbd69860e5f6e",
+    "merged_at": "2026-08-21T04:36:59Z",
+    "main_tree_sha": "e2a2ed469920e4ff5e3c3df4e03ac751f46f7ceb",
+    "merge_signature_verified": true
+  },
+  "review_observation": {
+    "accessible_discussion_entries": 0,
+    "observed_independent_approvals": 0,
+    "required_independent_approvals": 1
+  },
+  "execution": {
+    "workflow": "RAFAELIA Promotion Control V1",
+    "run_id": 32447564555,
+    "job_id": 96669906116,
+    "negative_tests": "SUCCESS",
+    "claim_allowed_gate": "SUCCESS",
+    "manual_promotion_decision": "DENIED",
+    "blocking_reasons": ["INDEPENDENT_APPROVAL_MISSING"],
+    "automatic_merge": false,
+    "manual_merge_only": true
+  },
+  "governance_snapshot": {
+    "branch": "main",
+    "head_sha": "ed4f498afa3d7ea7e974fcd6381dbd69860e5f6e",
+    "classic_protected": false,
+    "classic_protection_enabled": false,
+    "required_status_check_enforcement": "off",
+    "required_contexts": [],
+    "repository_rulesets": "TOKEN_VAZIO_NOT_INSPECTED",
+    "bypass_actors": "TOKEN_VAZIO_NOT_INSPECTED"
+  },
+  "lineage": {
+    "observed_recurrence_count": 4,
+    "predecessor_prs": [304,309,312,313]
+  },
+  "epistemic_boundary": [
+    "This receipt establishes merge + zero observed independent approvals + policy DENIED for PR313.",
+    "It does not identify the exact server-side ruleset, permission or bypass actor that allowed merge.",
+    "A verified GitHub merge signature proves merge provenance, not authorization of scientific/runtime claims.",
+    "No claim is promoted."
+  ],
+  "falsifier": "Authoritative PR review history, policy execution or merge history disproving any cited event invalidates this receipt scope.",
+  "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+}
