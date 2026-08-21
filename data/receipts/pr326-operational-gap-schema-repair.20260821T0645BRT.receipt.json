@@ -1,0 +1,56 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR326_OPERATIONAL_GAP_SCHEMA_REPAIR_20260821T0645BRT",
+  "type": "EXACT_HEAD_ASSURANCE_BEFORE_AFTER",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 326,
+    "base_sha": "fc6283b2851810bc33703f3692e6ebe95d8c3160",
+    "tested_head_sha": "2ac51829f6f4ae558766f44779297bef8c301297"
+  },
+  "before": {
+    "pr": 325,
+    "head_sha": "fe8a8a087dab9282fe4464dc86f31cde39bf3660",
+    "run_id": 32466638674,
+    "job_id": 96724509219,
+    "operational_gap_records": 34,
+    "failures": 2,
+    "mechanism": "two current-schema producers emitted closure_gate as string; build_report expected object and raised AttributeError"
+  },
+  "after": {
+    "run_id": 32469642848,
+    "job_id": 96733553366,
+    "conclusion": "SUCCESS",
+    "operational_gap_records": 34,
+    "failures": 0,
+    "steps": {
+      "compile_assurance_engines": "SUCCESS",
+      "operational_gap_self_test": "SUCCESS",
+      "validate_operational_gap_records": "SUCCESS",
+      "validate_bounded_token_vazio_master_snapshots": "SUCCESS",
+      "validate_component_lifecycle_ledgers": "SUCCESS",
+      "verify_self_test_cross_repo_provenance": "SUCCESS"
+    },
+    "ci": "SUCCESS",
+    "branch_topology": "SUCCESS",
+    "promotion_control": "FAIL_CLOSED",
+    "server_merge_enforcement": "FAIL_CLOSED"
+  },
+  "resolved_gap": "TOKEN_VAZIO_CURRENT_SCHEMA_CLOSURE_GATE_TYPE_DRIFT_PR323_AND_PR325",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_REPOSITORY_RULESET_BINDING",
+    "TOKEN_VAZIO_BYPASS_ACTORS",
+    "TOKEN_VAZIO_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT"
+  ],
+  "epistemic_boundary": [
+    "This receipt proves structural assurance on the exact tested PR326 head only.",
+    "Cross-repo provenance PASS is provenance coherence, not producer execution or scientific validation.",
+    "Server Merge Enforcement remaining fail-closed means the server barrier is still not evidenced.",
+    "claim_allowed remains false."
+  ],
+  "falsifier": "Any same-content current-schema record failure on the exact tested head falsifies this structural receipt scope.",
+  "next_review_gate": "REVALIDATE_ON_OPERATIONAL_GAP_SCHEMA_OR_SERVER_CONTROL_CHANGE"
+}
