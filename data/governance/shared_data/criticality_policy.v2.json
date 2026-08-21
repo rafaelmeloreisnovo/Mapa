@@ -1,0 +1,83 @@
+{
+  "schema_version": "rafaelia.shared-data-criticality-policy/v2",
+  "state": "CANONICAL_DRAFT",
+  "private_by_default": true,
+  "external_association_claim_allowed": false,
+  "drive_bridge_enabled": false,
+  "first_release_requires_human_awareness": true,
+  "first_release_requires_human_approval": true,
+  "automation_scope": "ONLY_AFTER_EXPLICIT_APPROVAL_OF_EXACT_BOUNDED_ENVELOPE",
+  "approval_revalidation_triggers": [
+    "source_revision_change",
+    "purpose_change",
+    "recipient_change",
+    "selected_fields_change",
+    "transformation_change",
+    "criticality_change",
+    "ttl_extension",
+    "downstream_route_change",
+    "risk_change",
+    "evidence_of_control_failure"
+  ],
+  "levels": {
+    "C0_PUBLIC": {
+      "raw_bytes_to_actions": true,
+      "human_awareness_required": true,
+      "human_approval_required_for_first_release": true,
+      "subsequent_automation_after_exact_approval": true
+    },
+    "C1_INTERNAL": {
+      "raw_bytes_to_actions": true,
+      "human_awareness_required": true,
+      "human_approval_required_for_first_release": true,
+      "subsequent_automation_after_exact_approval": true
+    },
+    "C2_SENSITIVE": {
+      "raw_bytes_to_actions": false,
+      "human_awareness_required": true,
+      "human_approval_required_for_first_release": true,
+      "requires_redaction": true,
+      "requires_reidentification_assessment": true,
+      "requires_semantic_cascade_assessment": true,
+      "subsequent_automation_after_exact_approval": false
+    },
+    "C3_RESTRICTED": {
+      "raw_bytes_to_actions": false,
+      "human_awareness_required": true,
+      "human_approval_required_for_first_release": true,
+      "requires_redaction": true,
+      "requires_reidentification_assessment": true,
+      "requires_semantic_cascade_assessment": true,
+      "subsequent_automation_after_exact_approval": false
+    },
+    "C4_CRITICAL": {
+      "raw_bytes_to_actions": false,
+      "human_awareness_required": true,
+      "human_approval_required_for_first_release": true,
+      "automation_raw_export": "PROHIBITED",
+      "subsequent_automation_after_exact_approval": false
+    }
+  },
+  "parallel_assurance": {
+    "redundancy_is_not_independence": true,
+    "allowed_states": ["MATCH", "DIVERGENCE", "TOKEN_VAZIO", "BLOCKED"],
+    "critical_divergence_promotes": false,
+    "critical_unknown_promotes": false
+  },
+  "stop_conditions": [
+    "secret_or_credential_detected",
+    "source_provenance_missing",
+    "purpose_missing",
+    "recipient_missing",
+    "human_awareness_missing",
+    "human_approval_missing",
+    "expired",
+    "revoked",
+    "criticality_C4_raw_bytes",
+    "C2_plus_reidentification_TOKEN_VAZIO",
+    "C2_plus_semantic_reconstruction_TOKEN_VAZIO",
+    "C2_plus_redaction_not_passed",
+    "critical_parity_DIVERGENCE",
+    "critical_parity_TOKEN_VAZIO"
+  ]
+}
