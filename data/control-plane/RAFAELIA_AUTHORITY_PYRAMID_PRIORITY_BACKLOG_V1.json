@@ -1,0 +1,136 @@
+{
+  "schema": "rafaelia.authority-pyramid-priority-backlog.v1",
+  "generated_at": "2026-08-21T09:04:00-03:00",
+  "claim_allowed": false,
+  "priority_formula": "impact * unblock * risk * urgency * information_gain * forgetting_risk",
+  "rule": "attention state does not replace evidence state; unknown is never PASS",
+  "items": [
+    {
+      "rank": 1,
+      "id": "MAPA_SERVER_SIDE_AUTHORITY_BARRIER",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "category": "GOVERNANCE_GAP",
+      "evidence_state": "OBSERVED",
+      "attention_state": "URGENT",
+      "priority": "P0",
+      "why_now": "authoritative main is observed without classic branch protection/required-check enforcement; prior direct-main and zero-approval paths make prevention evidence critical",
+      "next_probe": "inspect complete rulesets/bypass/required-context state and produce controlled server-rejection receipts for direct-main and zero-approval merge attempts",
+      "closure_gate": "SERVER_REJECTED receipt with unchanged authoritative main SHA plus ruleset/bypass/required-context evidence",
+      "claim_allowed": false
+    },
+    {
+      "rank": 2,
+      "id": "TERMUX_HISTORICAL_SECURITY_OVERPROMOTION",
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "category": "GOVERNANCE_GAP",
+      "evidence_state": "OBSERVED",
+      "attention_state": "FORGOTTEN_REDISCOVERED",
+      "priority": "P0",
+      "why_now": "historical summary contains SECURE FOR PRODUCTION USE/Approved while current exact-head/device operating effectiveness is not established by that document",
+      "next_probe": "adopt successor interpretation then execute exact-head permission/IPC/native/privacy/device gates",
+      "closure_gate": "scoped security/privacy receipts for each claimed boundary; no broad production claim from historical checklist",
+      "claim_allowed": false
+    },
+    {
+      "rank": 3,
+      "id": "VECTRAS_TERMUX_EXECUTION_AUTHORITY_CHAIN",
+      "repo": "rafaelmeloreisnovo/Vectras-VM-Android + rafaelmeloreisnovo/termux-app-rafacodephi",
+      "category": "SECURITY_WEAKNESS",
+      "evidence_state": "TOKEN_VAZIO",
+      "attention_state": "URGENT",
+      "priority": "P0",
+      "why_now": "discovery identity and static contracts exist but execution-time binary identity and physical transaction remain separate unresolved scopes",
+      "next_probe": "request digest -> authorization -> exact APK/package -> executable digest at execution -> provider result/exit -> device receipt",
+      "closure_gate": "matching producer+consumer transaction receipt with hashes and negative authorization/integrity fixtures",
+      "claim_allowed": false
+    },
+    {
+      "rank": 4,
+      "id": "ANDROID_RUNTIME_PRIVACY_MINIMIZATION",
+      "repo": "RafGitTools + Vectras-VM-Android + termux-app-rafacodephi",
+      "category": "PRIVACY_RISK",
+      "evidence_state": "TOKEN_VAZIO",
+      "attention_state": "UNDERPRIORITIZED",
+      "priority": "P0",
+      "why_now": "logs, paths, VM/guest payload, account/device metadata and artifacts can cross debugging/receipt boundaries",
+      "next_probe": "run exact fixtures that seed sensitive canary values and prove public logs/receipts/artifacts expose only allowed redacted/digested fields",
+      "closure_gate": "negative privacy fixture + artifact/log inspection + retention/access decision receipt",
+      "claim_allowed": false
+    },
+    {
+      "rank": 5,
+      "id": "PROTECTED_SUBJECT_CONTEXT_AND_CHILD_DATA_GATE",
+      "repo": "federated",
+      "category": "PRIVACY_RISK",
+      "evidence_state": "TOKEN_VAZIO",
+      "attention_state": "ACTIVE",
+      "priority": "P0_IF_TRIGGERED",
+      "why_now": "child protection and dignity are non-compensatory, but protected status must not be inferred from labels or stereotypes",
+      "next_probe": "when a child/vulnerable use case is established or potential, resolve purpose/dataflow/recipients/retention/minimization/transparency/authority/best-interest/jurisdiction/alternatives",
+      "closure_gate": "protected-subject impact receipt scoped to the actual use case and applicable authority",
+      "claim_allowed": false
+    },
+    {
+      "rank": 6,
+      "id": "RGT_POSTMERGE_MAIN_AND_RUNTIME_SECURITY_RECEIPT",
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "category": "DEBUG_BLOCKER",
+      "evidence_state": "TOKEN_VAZIO",
+      "attention_state": "UNDERPRIORITIZED",
+      "priority": "P1",
+      "why_now": "PR-head build/artifact evidence exists but post-merge main execution and runtime privacy/security effectiveness are narrower unresolved scopes",
+      "next_probe": "main -> run -> job -> steps -> artifacts -> hashes plus sensitive-output inspection",
+      "closure_gate": "post-merge main receipt and scoped privacy/security negative evidence",
+      "claim_allowed": false
+    },
+    {
+      "rank": 7,
+      "id": "NATIVE_BOOTSTRAP_SUPPLY_CHAIN_AND_SBOM",
+      "repo": "termux-app-rafacodephi + Vectras-VM-Android",
+      "category": "SECURITY_WEAKNESS",
+      "evidence_state": "PARTIAL",
+      "attention_state": "DEFERRED_WITH_OWNER",
+      "priority": "P1",
+      "why_now": "native/bootstrap material can fall outside Java/Kotlin analysis and changes the runtime trust boundary",
+      "owner": "producer_repo_owners",
+      "revisit_gate": "before production/runtime security promotion or bundled artifact release",
+      "next_probe": "source/provenance pinning + SBOM/dependency/vulnerability inventory + artifact hashes",
+      "closure_gate": "supply-chain receipt bound to exact APK/native artifacts",
+      "claim_allowed": false
+    },
+    {
+      "rank": 8,
+      "id": "CULTURAL_CONTEXT_REFERENCE_INTEGRITY",
+      "repo": "federated",
+      "category": "COMPLIANCE_GAP",
+      "evidence_state": "TOKEN_VAZIO",
+      "attention_state": "IGNORED_DISCOVERED",
+      "priority": "P1_IF_MATERIAL",
+      "why_now": "group/cultural meaning can be lost when labels are used without the reference that gives them meaning",
+      "owner": "TOKEN_VAZIO_OWNER_REQUIRED",
+      "next_probe": "require traceable cultural/context source whenever group meaning materially changes a decision; otherwise preserve TOKEN_VAZIO_CONTEXT",
+      "closure_gate": "context provenance reference plus explicit no-stereotype/no-protected-attribute-inference check",
+      "claim_allowed": false
+    }
+  ],
+  "F_ok": [
+    "authority roles already explicit in AGENTS for RafGitTools/Vectras/Termux",
+    "existing Mapa normative graph already separates privacy claims, standards conformance and certification",
+    "producer adapter draft PRs created"
+  ],
+  "F_gap": [
+    "server-side prevention proof",
+    "runtime privacy minimization evidence",
+    "Vectras-Termux execution-time identity and physical transaction",
+    "post-merge RafGitTools runtime receipt",
+    "native/bootstrap supply-chain evidence",
+    "protected-subject impact assessment only when an actual/potential use case is established"
+  ],
+  "F_next": [
+    "run central authority-pyramid assurance",
+    "run producer PR CI and negative fixtures",
+    "perform privacy canary/redaction tests",
+    "obtain server-side rejection receipts",
+    "execute Vectras-Termux physical transaction with minimum-data receipt"
+  ]
+}
