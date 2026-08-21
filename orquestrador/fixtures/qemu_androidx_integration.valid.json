@@ -1,0 +1,233 @@
+{
+  "schema": "rafaelia.product-graph.v1",
+  "generated_at": "2026-08-21T00:00:00-03:00",
+  "nodes": [
+    {
+      "id": "REPO-QEMU-RAFAELIA",
+      "kind": "repository",
+      "name": "qemu_rafaelia",
+      "description": "QEMU fork for Android/ARM emulation; integration layer with androidx_RmR runtime support",
+      "authority": "rafaelmeloreisnovo (GitHub repository)",
+      "state": "TOKEN_VAZIO",
+      "source_refs": [
+        "git-recovery-plan-20260821",
+        "recovery-method:use_latest_main"
+      ],
+      "gaps": [
+        "Pinned commit 2346c30c lost; recovery plan in place",
+        "ABI baseline establishment pending",
+        "Source coherence with androidx_RmR not yet validated"
+      ],
+      "metadata": {
+        "virtualization_requirements": {
+          "required": true,
+          "vm_type": "qemu",
+          "arch_targets": ["arm32", "arm64"],
+          "abi_contracts": ["CAP-qemu.arm32-abi", "CAP-qemu.arm64-abi"]
+        },
+        "dependency_recovery": {
+          "pinned_commits": [
+            {
+              "commit_sha": "2346c30c2ba77881c2930add83523ea903b173fe",
+              "reason": "Original bootstrap commit",
+              "state": "UNRECOVERABLE",
+              "recovery_rank": 1
+            }
+          ],
+          "fallback_strategy": "latest_main"
+        }
+      }
+    },
+    {
+      "id": "REPO-ANDROIDX-RMR",
+      "kind": "repository",
+      "name": "androidx_RmR",
+      "description": "AndroidX runtime support library for RAFAELIA; provides ABI contracts for device/emulator integration",
+      "authority": "rafaelmeloreisnovo (GitHub repository, androidx-main branch)",
+      "state": "PARTIAL",
+      "source_refs": [
+        "androidx-main",
+        "commit:4f01fd23e91e861a060d2bbc1ed14f256a1b5e3b"
+      ],
+      "gaps": [
+        "ABI contract validation missing",
+        "Signature verification not implemented",
+        "Runtime binding with qemu_rafaelia untested"
+      ],
+      "metadata": {
+        "abi_validation_state": {
+          "contract_count": 3,
+          "validated_count": 0,
+          "last_validation_receipt": "TOKEN_VAZIO"
+        }
+      }
+    },
+    {
+      "id": "MOD-QEMU-INTEGRATION",
+      "kind": "module",
+      "name": "QEMU Integration & Virtualization Manager",
+      "description": "Manages VM lifecycle, handles commit recovery decisions, validates integration contracts",
+      "authority": "Orchestrator frontline (O0-O11 gates)",
+      "state": "DECLARED",
+      "source_refs": [
+        "schema:product_graph.schema.json",
+        "fixture:qemu_androidx_integration.valid.json"
+      ],
+      "gaps": [
+        "Implementation not yet started",
+        "Health probe not defined",
+        "Evidence receipt producer pending"
+      ],
+      "metadata": {
+        "module_id": "MOD-QEMU-INTEGRATION",
+        "plane": "virtualization",
+        "capabilities": [
+          {
+            "name": "commit_recovery",
+            "state": "DECLARED",
+            "contract_id": "CAP-QEMU-COMMIT-RECOVERY",
+            "evidence_receipt_id": "TOKEN_VAZIO"
+          },
+          {
+            "name": "vm_lifecycle",
+            "state": "DECLARED",
+            "contract_id": "CAP-QEMU-VM-LIFECYCLE",
+            "evidence_receipt_id": "TOKEN_VAZIO"
+          },
+          {
+            "name": "abi_validation",
+            "state": "DECLARED",
+            "contract_id": "CAP-QEMU-ABI-VALIDATION",
+            "evidence_receipt_id": "TOKEN_VAZIO"
+          }
+        ]
+      }
+    },
+    {
+      "id": "MOD-ANDROIDX-ABI-VALIDATOR",
+      "kind": "module",
+      "name": "AndroidX ABI Contract Validator",
+      "description": "Validates AndroidX ABI signatures, detects breaking changes, enforces runtime compatibility",
+      "authority": "Orchestrator frontline (O1 gate)",
+      "state": "DECLARED",
+      "source_refs": [
+        "schema:module_registry.schema.json",
+        "fixture:qemu_androidx_integration.valid.json"
+      ],
+      "gaps": [
+        "Validator implementation not yet started",
+        "No golden ABI baselines",
+        "No test fixtures for signature verification"
+      ],
+      "metadata": {
+        "module_id": "MOD-ANDROIDX-ABI-VALIDATOR",
+        "plane": "virtualization",
+        "capabilities": [
+          {
+            "name": "abi_signature_validation",
+            "state": "DECLARED",
+            "contract_id": "CAP-ANDROIDX-SIGNATURE",
+            "evidence_receipt_id": "TOKEN_VAZIO"
+          },
+          {
+            "name": "abi_compatibility_check",
+            "state": "DECLARED",
+            "contract_id": "CAP-ANDROIDX-COMPATIBILITY",
+            "evidence_receipt_id": "TOKEN_VAZIO"
+          }
+        ]
+      }
+    },
+    {
+      "id": "MOD-EVIDENCE-RECEIPT-PRODUCER",
+      "kind": "module",
+      "name": "Evidence Receipt Producer",
+      "description": "Normalizes receipts from qemu/androidx integration; produces structured event envelopes",
+      "authority": "RafPolimata evidence production pipeline",
+      "state": "DECLARED",
+      "source_refs": [
+        "schema:event_envelope.schema.json",
+        "fixture:qemu_androidx_integration.valid.json"
+      ],
+      "gaps": [
+        "Integration with Vectras-VM-Android CI not started",
+        "Receipt normalization templates missing",
+        "Transport to ledger not implemented"
+      ],
+      "metadata": {
+        "module_id": "MOD-EVIDENCE-RECEIPT-PRODUCER",
+        "plane": "evidence"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "EDGE-QEMU-CONTRACTS",
+      "from": "REPO-QEMU-RAFAELIA",
+      "to": "MOD-QEMU-INTEGRATION",
+      "relation": "implements",
+      "direction": "directed",
+      "strength": 1.0,
+      "evidence_refs": [
+        "recovery-plan:qemu-commit-recovery-plan-20260821.v1.json"
+      ],
+      "state": "DECLARED",
+      "constraint": "Repository membership does not prove runtime virtualization capability; recovery plan must complete successfully",
+      "next_verifiable_step": "Execute qemu commit recovery; record resolution_commit in event envelope; validate against androidx_RmR"
+    },
+    {
+      "edge_id": "EDGE-ANDROIDX-ABI",
+      "from": "REPO-ANDROIDX-RMR",
+      "to": "MOD-ANDROIDX-ABI-VALIDATOR",
+      "relation": "provides",
+      "direction": "directed",
+      "strength": 0.5,
+      "evidence_refs": [],
+      "state": "PARTIAL",
+      "constraint": "Repository documentation exists but ABI contracts not yet validated; no golden baselines",
+      "next_verifiable_step": "Extract ABI signatures from androidx_RmR commit 4f01fd23; create validator fixtures; run signature validation golden tests"
+    },
+    {
+      "edge_id": "EDGE-QEMU-ANDROIDX-INTEGRATION",
+      "from": "MOD-QEMU-INTEGRATION",
+      "to": "MOD-ANDROIDX-ABI-VALIDATOR",
+      "relation": "requires",
+      "direction": "directed",
+      "strength": 1.0,
+      "evidence_refs": [],
+      "state": "TOKEN_VAZIO",
+      "constraint": "Both modules must pass O1-O8 gates before any VM start (O10 gate requires O9 rollback validation)",
+      "next_verifiable_step": "Complete both commit recovery and ABI validation; implement rollback procedures; record integrated event envelope"
+    },
+    {
+      "edge_id": "EDGE-QEMU-EVIDENCE-PRODUCTION",
+      "from": "MOD-QEMU-INTEGRATION",
+      "to": "MOD-EVIDENCE-RECEIPT-PRODUCER",
+      "relation": "evidences",
+      "direction": "directed",
+      "strength": 0.5,
+      "evidence_refs": [
+        "schema:event_envelope.schema.json",
+        "field:commit_recovery_context"
+      ],
+      "state": "DECLARED",
+      "constraint": "All qemu decisions (recovery method, ABI validation result) must be recorded before ledger closure",
+      "next_verifiable_step": "Implement EventEnvelope producer; wire qemu integration into RafPolimata evidence pipeline; test roundtrip"
+    },
+    {
+      "edge_id": "EDGE-ANDROIDX-EVIDENCE-PRODUCTION",
+      "from": "MOD-ANDROIDX-ABI-VALIDATOR",
+      "to": "MOD-EVIDENCE-RECEIPT-PRODUCER",
+      "relation": "evidences",
+      "direction": "directed",
+      "strength": 0.5,
+      "evidence_refs": [
+        "schema:event_envelope.schema.json",
+        "field:abi_validation"
+      ],
+      "state": "DECLARED",
+      "constraint": "All ABI validation decisions (signature_before, signature_after, validation_result) must be recorded",
+      "next_verifiable_step": "Implement ABI validation event generation; link to evidence producer; test with fixture APKs"
+    }
+  ]
+}
