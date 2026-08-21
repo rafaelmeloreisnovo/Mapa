@@ -1,0 +1,62 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR328_PROVIDER_BOOTSTRAP_MERGED_BEFORE_ACTIVATION_20260821T0741BRT",
+  "type": "GOVERNANCE_NEAR_MISS_AND_PROVIDER_STATE",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 328,
+    "pr_head_sha": "0a7a03b97e1c0216ba194f5019f5500bb4f644c6",
+    "merge_main_sha": "9eedd05c6ef9ab0635ab8eec5f967b6e337c270e",
+    "merge_verified_by_github": true,
+    "observed_review_submissions": 0
+  },
+  "exact_head_execution": {
+    "ci_run": 32470837498,
+    "ci": "SUCCESS",
+    "branch_topology_run": 32470837491,
+    "branch_topology": "SUCCESS",
+    "server_merge_enforcement_run": 32470837505,
+    "server_merge_enforcement_job": 96737065338,
+    "legacy_fixtures": "4/4 PASS",
+    "provider_bootstrap_fixtures": "4/4 PASS",
+    "live_provider_probe": "BLOCKED",
+    "promotion_control_run": 32470837619,
+    "promotion_control": "FAIL_CLOSED"
+  },
+  "post_merge_provider_state": {
+    "main_sha": "9eedd05c6ef9ab0635ab8eec5f967b6e337c270e",
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks_enforcement": "off",
+    "required_contexts": [],
+    "required_checks": [],
+    "rulesets": "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "bypass_actors": "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED"
+  },
+  "before_after": {
+    "before": "provider barrier unproved and bootstrap implementation absent",
+    "after": "bootstrap implementation/fixtures present on main, but authoritative provider barrier still unobserved/inactive on classic branch metadata"
+  },
+  "resolved_gaps": [
+    "TOKEN_VAZIO_PROVIDER_BOOTSTRAP_IMPLEMENTATION",
+    "TOKEN_VAZIO_PROVIDER_BOOTSTRAP_FIXTURES"
+  ],
+  "remaining_gaps": [
+    "TOKEN_VAZIO_PROVIDER_ADMIN_WRITE_ACTION_NOT_EXPOSED",
+    "TOKEN_VAZIO_REPOSITORY_RULESETS_NOT_INSPECTED",
+    "TOKEN_VAZIO_BYPASS_ACTORS_NOT_INSPECTED",
+    "TOKEN_VAZIO_EXACT_REQUIRED_CONTEXT_SERVER_BINDING",
+    "TOKEN_VAZIO_SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT"
+  ],
+  "epistemic_boundary": [
+    "Repository implementation is not provider activation.",
+    "Provider activation is not the same as a rejected-merge receipt.",
+    "A successful merge cannot be used as evidence that rejection works.",
+    "Classic branch metadata does not prove ruleset or bypass state.",
+    "No runtime, scientific, publication, or release claim is promoted."
+  ],
+  "falsifier": "Authoritative provider read-back shows binding protection active and a zero-independent-approval merge is rejected with main SHA unchanged.",
+  "next_review_gate": "PROVIDER_SETTINGS_ACTIVE_THEN_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT"
+}

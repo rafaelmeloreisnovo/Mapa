@@ -1,0 +1,52 @@
+{
+  "schema_version": "rafaelia.receipt/v1",
+  "receipt_id": "PR329_OPERATIONAL_GAP_MAINTENANCE_CLASS_REPAIR_20260821T0749BRT",
+  "type": "BEFORE_AFTER_ASSURANCE",
+  "status": "PRESENT_SCOPED",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 329,
+    "failing_head": "b752fe208d3a5db14ac1944e078e7995ec568c1a",
+    "repaired_head": "d267f28d5e72fedfde7a65efd4dca4820b252b93",
+    "base_main": "9eedd05c6ef9ab0635ab8eec5f967b6e337c270e"
+  },
+  "before": {
+    "run_id": 32474086631,
+    "job_id": 96746722131,
+    "result": "FAILURE",
+    "records": 35,
+    "failures": 1,
+    "mechanism": "provider-bootstrap-merged-before-activation record used maintenance.class=EVENT_TRIGGERED while executable contract accepts PREVENTIVE, CONDITION_BASED or CORRECTIVE"
+  },
+  "correction": {
+    "producer_only": true,
+    "validator_relaxed": false,
+    "change": "maintenance.class EVENT_TRIGGERED -> CONDITION_BASED",
+    "event_trigger_semantics_preserved_in": ["review_or_expiry", "component_lifecycle_ledger.retirement_revalidation_criteria"]
+  },
+  "after": {
+    "run_id": 32474430324,
+    "job_id": 96747741573,
+    "result": "SUCCESS",
+    "steps": {
+      "compile_assurance_engines": "SUCCESS",
+      "operational_gap_self_test": "SUCCESS",
+      "validate_operational_gap_records": "SUCCESS",
+      "validate_bounded_token_vazio_master_snapshots": "SUCCESS",
+      "validate_component_lifecycle_ledgers": "SUCCESS",
+      "verify_cross_repo_provenance": "SUCCESS"
+    }
+  },
+  "separate_open_hazard": {
+    "server_enforcement_run": 32474430147,
+    "server_enforcement_job": 96747741169,
+    "legacy_detector_fixtures": "PASS_4_OF_4",
+    "provider_bootstrap_fixtures": "PASS_4_OF_4",
+    "live_probe": "BLOCKED",
+    "server_side_merge_binding": "NOT_ENFORCED_OBSERVED",
+    "ruleset_or_bypass_path": "TOKEN_VAZIO_NOT_INSPECTED"
+  },
+  "falsifier": "Any exact-content rerun of the same operational-gap assurance that rejects the repaired record or detects a new current-schema incompatibility falsifies this scoped closure.",
+  "next_review_gate": "REVALIDATE_ON_OPERATIONAL_GAP_SCHEMA_OR_PROVIDER_GOVERNANCE_CHANGE"
+}

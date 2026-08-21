@@ -1,0 +1,185 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "PROVIDER_BOOTSTRAP_MERGED_BEFORE_ACTIVATION_20260821T0741BRT",
+  "status": "BLOCKED",
+  "source_pointer": "github://rafaelmeloreisnovo/Mapa/pull/328@0a7a03b97e1c0216ba194f5019f5500bb4f644c6",
+  "owner_authority": "rafaelmeloreisnovo/Mapa:main governance",
+  "affected_routes": [
+    "policy->server barrier->main",
+    "provider bootstrap->branch protection->required context",
+    "approval->promotion->merge",
+    "receipt->Mapa->anti-regression"
+  ],
+  "observed_at": "2026-08-21T07:41:39-03:00",
+  "provenance": [
+    {"source": "GitHub PR #328", "role": "bootstrap implementation and exact-head validation", "head_sha": "0a7a03b97e1c0216ba194f5019f5500bb4f644c6"},
+    {"source": "GitHub main branch metadata", "role": "post-merge provider state", "main_sha": "9eedd05c6ef9ab0635ab8eec5f967b6e337c270e"},
+    {"source": "Promotion Control exact-head workflow", "role": "policy decision", "run": 32470837619},
+    {"source": "Server Merge Enforcement Assurance", "role": "live provider probe", "run": 32470837505, "job": 96737065338}
+  ],
+  "evidence_for": [
+    "PR #328 implemented a plan/apply provider-protection bootstrap with exact required context promotion-control / enforce, one approving review, admin enforcement, expected-main-SHA precondition and post-mutation re-read",
+    "exact-head CI and Branch Topology passed",
+    "server-enforcement legacy fixtures 4/4 and provider-bootstrap fixtures 4/4 passed, while live provider inspection remained BLOCKED",
+    "PR #328 was merged into main@9eedd05c6ef9ab0635ab8eec5f967b6e337c270e",
+    "post-merge main branch metadata still reports protected=false, protection.enabled=false, required-status-check enforcement off, contexts=[], checks=[]",
+    "PR #328 review submissions observed through the connected review surface are empty"
+  ],
+  "evidence_against": [
+    "repository-local bootstrap implementation and fixtures exist and passed on the tested PR head",
+    "repository metadata reports admin permission for the connected identity, but the connected action surface does not expose branch-protection mutation",
+    "classic branch metadata cannot establish absence or presence of repository rulesets or bypass actors"
+  ],
+  "uncertainty_state": "BOOTSTRAP_IMPLEMENTED_PROVIDER_ACTIVATION_NOT_OBSERVED_RULESET_AND_BYPASS_TOKEN_VAZIO",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "A repository-local control can be implemented and tested while the authoritative provider barrier remains inactive; merging the bootstrap does not itself activate branch protection or required checks.",
+  "falsifier": "Observe authoritative provider settings with protected=true, admins enforced, >=1 required approving review and exact required context promotion-control / enforce, then prove a zero-independent-approval merge attempt is rejected while main SHA remains unchanged.",
+  "next_probe": "Use an authorized provider Administration:write path to apply the already-tested bootstrap against the current expected main SHA, re-read provider state, then execute the non-destructive zero-approval rejection probe.",
+  "mitigation": {
+    "fail_closed": true,
+    "rollback": "If provider mutation produces an unexpected configuration, restore the previously captured provider configuration; retain all receipts append-only.",
+    "immediate": [
+      "claim_allowed=false",
+      "no automatic promotion",
+      "do not use successful merge as a rejection test",
+      "require current-main SHA precondition before provider mutation"
+    ]
+  },
+  "closure_gate": {
+    "criterion": "Authoritative provider barrier is observed active and a controlled zero-independent-approval PR is server-rejected with main SHA unchanged; authorized one-approval path is observed separately.",
+    "evidence_needed": "provider settings receipt, exact required-context binding, admin enforcement, required-review count, rejected merge response, unchanged main SHA, and later authorized-path receipt",
+    "falsifier": "zero-approval PR can still merge, exact required context is absent, admin enforcement is absent, or provider state cannot be re-observed",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "EVENT_TRIGGERED on provider protection/ruleset/permission/bootstrap/workflow change",
+  "claim_allowed": false,
+  "action_categories": [
+    "DETECTIVE",
+    "PREVENTIVE",
+    "PRECAUTIONARY",
+    "ADAPTIVE",
+    "CORRECTIVE",
+    "MAINTENANCE",
+    "INCIDENT_INVESTIGATION",
+    "SAFETY_ASSURANCE",
+    "LEARNING_ANTI_RECURRENCE"
+  ],
+  "detector": {
+    "signal": "bootstrap is present in source but authoritative main remains unprotected or exact required context is not observed",
+    "threshold": "any mismatch between intended provider configuration and authoritative provider read-back",
+    "false_positive": "an unobserved ruleset may supply equivalent protection",
+    "false_negative": "repository-local policy appears strong while server accepts an inadequately governed transition",
+    "evidence_needed": "authoritative provider protection/ruleset/bypass read plus controlled rejection receipt"
+  },
+  "adaptive_control": {
+    "baseline": "before PR #328: bootstrap implementation absent and provider barrier unproved",
+    "delta": "bootstrap implementation and fixtures now present; provider barrier still unproved after merge",
+    "justification": "implementation reduced software gap but did not reduce provider-state gap",
+    "rollback": "revert bootstrap only if it is shown to misconfigure provider state; otherwise preserve it and correct provider settings",
+    "retest": "apply against expected current main SHA, re-read, then controlled rejection"
+  },
+  "corrective_control": {
+    "symptom": "PR #328 merged while live server-enforcement probe remained BLOCKED and Promotion Control remained fail-closed",
+    "mechanism_hypothesis": "authoritative provider enforcement is not activated on the classic branch-protection surface; ruleset/bypass mechanism remains TOKEN_VAZIO",
+    "before_after_test": "before: protected=false and required checks off; after provider apply: protected=true, exact context required, review/admin controls active, zero-approval rejection observed"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "Mapa provider-side merge protection",
+    "condition_or_interval": "revalidate on every protection/ruleset/permission/required-context/bootstrap change",
+    "verification": "authoritative provider read-back plus controlled rejection receipt",
+    "measured_condition": "bootstrap merged; classic provider barrier still absent at main@9eedd05c6ef9ab0635ab8eec5f967b6e337c270e"
+  },
+  "incident_investigation": {
+    "trigger": "bootstrap PR #328 merged although live server-enforcement remained BLOCKED and no independent review submission was observed",
+    "facts": "PR head had CI/topology PASS; server-enforcement fixtures passed but live provider probe blocked; Promotion Control failed closed; PR merged; main remained unprotected on classic metadata",
+    "timeline": "bootstrap staged -> exact-head fixtures pass -> live provider probe blocked -> PR merged -> post-merge provider state re-read still unprotected",
+    "configuration": "classic protection disabled; required checks off; ruleset and bypass state TOKEN_VAZIO",
+    "recent_changes": "provider bootstrap script/tests/workflow merged",
+    "competing_mechanisms": [
+      "classic branch protection absent",
+      "unobserved repository ruleset",
+      "authorized bypass capability",
+      "merge path not bound to repository-local fail-closed checks"
+    ],
+    "contributing_factors": [
+      "implementation and activation are separate authority domains",
+      "provider Administration:write mutation is not exposed through the connected action surface"
+    ],
+    "recommendations": [
+      "activate protection only through an authorized provider admin path with expected-main-SHA precondition",
+      "capture before/after provider settings",
+      "prove zero-approval rejection non-destructively",
+      "preserve ruleset/bypass as TOKEN_VAZIO until directly observed"
+    ],
+    "blame_assignment": false
+  },
+  "safety_assurance": {
+    "data_acquisition": "exact-head workflows, PR review surface, post-merge branch metadata and current main SHA",
+    "analysis": "separate bootstrap implementation, provider activation, policy decision and material merge rejection",
+    "system_reassessment": "provider read-back before and after any authorized mutation, then rejection/authorized-path probes",
+    "corrective_trigger": "any merge or direct-main mutation while provider barrier remains unproved"
+  },
+  "learning": {
+    "reusable_control": "IMPLEMENTATION_PASS_DOES_NOT_ACTIVATE_PROVIDER_BARRIER",
+    "index_or_test": "provider bootstrap fixtures + post-merge provider read-back + rejected-merge receipt",
+    "recurrence_check": "every merge-control change must reconcile local implementation state with authoritative provider state"
+  },
+  "component_lifecycle_ledger": {
+    "component": "Mapa:provider-side-merge-protection",
+    "calendar_age": "CURRENT_CYCLE",
+    "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
+    "cycles": 1,
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": 1,
+    "test_cycles": 1,
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": 1,
+    "dependency_changes": 1,
+    "environment_exposure": "GitHub provider settings, PR merge path and Actions workflows",
+    "load_stress_proxy": "4/4 legacy fixtures + 4/4 bootstrap fixtures + one live provider probe",
+    "incident_count": 0,
+    "near_miss_count": 1,
+    "maintenance_actions": 1,
+    "corrective_actions": 1,
+    "software_schema_version": "rafaelia.operational-gap-assurance/v1 + provider bootstrap from PR #328",
+    "evidence_age": "CURRENT_CYCLE",
+    "provenance_age": "CURRENT_CYCLE",
+    "last_verified_at": "main:9eedd05c6ef9ab0635ab8eec5f967b6e337c270e + run:32470837505 + run:32470837619",
+    "next_review_gate": "PROVIDER_SETTINGS_ACTIVE_THEN_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT",
+    "retirement_revalidation_criteria": "EVENT_TRIGGERED"
+  },
+  "impact_radius": {
+    "Mapa_main": {
+      "direct_exposure": true,
+      "transmitted_load_or_effect": "provider merge path can remain materially less restrictive than repository-local policy",
+      "hidden_damage_or_hidden_state_possible": true,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "provider configuration plus controlled rejection receipt",
+      "false_positive_cost": "temporary delay while protection is verified",
+      "false_negative_cost": "authoritative main mutation despite local fail-closed governance"
+    },
+    "RafGitTools_Termux_RLL_consumers": {
+      "direct_exposure": false,
+      "transmitted_load_or_effect": "POTENTIAL_PROPAGATION",
+      "hidden_damage_or_hidden_state_possible": "TOKEN_VAZIO",
+      "inspection_required": "CONDITION_BASED",
+      "revalidation_required": "CONDITION_BASED",
+      "replacement_or_retirement_candidate": false,
+      "evidence_needed": "consumer binding receipts to affected Mapa authority states",
+      "false_positive_cost": "extra consumer revalidation",
+      "false_negative_cost": "consumer may trust an inadequately governed authority transition"
+    }
+  }
+}
