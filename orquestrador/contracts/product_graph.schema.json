@@ -51,7 +51,45 @@
         },
         "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
         "gaps": {"type": "array", "items": {"type": "string", "minLength": 1}},
-        "metadata": {"type": "object", "additionalProperties": true}
+        "metadata": {"type": "object", "additionalProperties": true},
+      "virtualization_requirements": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "required": {"type": "boolean"},
+          "vm_type": {"enum": ["qemu", "kvm", "xen", "docker", null]},
+          "arch_targets": {
+            "type": "array",
+            "items": {"enum": ["arm32", "arm64", "x86", "x86_64", "riscv64"]},
+            "minItems": 0
+          },
+          "abi_contracts": {
+            "type": "array",
+            "items": {"type": "string"},
+            "minItems": 0
+          }
+        }
+      },
+      "abi_validation_state": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contract_count": {"type": "integer", "minimum": 0},
+          "validated_count": {"type": "integer", "minimum": 0},
+          "last_validation_receipt": {"type": "string"}
+        }
+      },
+      "dependency_recovery": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pinned_commits": {
+            "type": "array",
+            "items": {"$ref": "#/$defs/pinned_commit"}
+          },
+          "fallback_strategy": {"enum": ["latest_main", "upstream_stable", "synthesize_minimal", null]}
+        }
+      }
       }
     },
     "edge": {
@@ -91,6 +129,17 @@
         "state": {"enum": ["VERIFIED", "DECLARED", "PARTIAL", "CONTRADICTION", "TOKEN_VAZIO"]},
         "constraint": {"type": "string"},
         "next_verifiable_step": {"type": "string"}
+      }
+    },
+    "pinned_commit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit_sha", "reason", "state"],
+      "properties": {
+        "commit_sha": {"type": "string"},
+        "reason": {"type": "string"},
+        "state": {"enum": ["VERIFIED", "UNRECOVERABLE", "STALE", "PENDING_VALIDATION"]},
+        "recovery_rank": {"type": "integer", "minimum": 1}
       }
     }
   }
