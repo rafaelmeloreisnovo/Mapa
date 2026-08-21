@@ -1,0 +1,131 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "PROMOTION_CONTROL_NOT_BINDING_TO_MERGE_RECURRENCE_20260820T2243BRT",
+  "status": "NEAR_MISS",
+  "source_pointer": "rafaelmeloreisnovo/Mapa#309@3d9bce3fa184601e4bf9df69fa73a4d0da71c5a7 -> main@54aeeb11bc5440ceb54573dfdda02db3ea68aa82",
+  "owner_authority": "rafaelmeloreisnovo/Mapa + repository server-side governance configuration",
+  "affected_routes": ["R5", "R6", "R7", "R11", "R12"],
+  "observed_at": "2026-08-20T22:43:00-03:00",
+  "provenance": [
+    {"source":"GitHub PR #309 metadata","observation":"merged=true; merge=54aeeb11bc5440ceb54573dfdda02db3ea68aa82; merged_at=2026-08-21T01:23:48Z"},
+    {"source":"GitHub pull-request reviews","observation":"zero submitted reviews observed"},
+    {"source":"Promotion Control closure run","run_id":32436139556,"job_id":96637651527,"observation":"DENIED; INDEPENDENT_APPROVAL_MISSING; observed=0 required=1"},
+    {"source":"Mapa main branch snapshot","observation":"protected=false; classic protection disabled; required status-check enforcement off"}
+  ],
+  "evidence_for": [
+    "PR #309 merged to main.",
+    "No review submissions were observed for PR #309.",
+    "Promotion Control evaluated PR #309 as DENIED with observed independent approvals=0 and required=1.",
+    "Classic branch protection and required status-check enforcement are disabled on the observed main snapshot.",
+    "A predecessor mismatch had already been observed for PR #304."
+  ],
+  "evidence_against": [
+    "No unsafe scientific/runtime claim promotion caused by PR #309 was established.",
+    "The exact ruleset, permission or bypass actor enabling merge remains unobserved."
+  ],
+  "uncertainty_state": "RECURRENCE_EVIDENCED; EXACT_RULESET_BYPASS_PATH_TOKEN_VAZIO",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "RECURRING_GOVERNANCE_CONTROL_NOT_BINDING_TO_OBSERVED_MERGE_PATH",
+  "falsifier": "Create a synthetic non-draft PR with zero independent approvals: Promotion Control must DENY and the server must reject merge; after one qualifying independent approval and required checks, only the authorized manual path may become eligible.",
+  "next_probe": "Inspect repository rulesets, bypass actors and required check identities when an observable settings surface exists; then execute synthetic zero-approval blocked-merge test.",
+  "mitigation": {
+    "fail_closed": true,
+    "containment": "claim_allowed=false; observed merge is not claim promotion evidence",
+    "server_action": "bind independent review and exact required assurance checks to server-side merge eligibility",
+    "rollback": "preserve Git history; revert only unsupported governance/configuration assertions"
+  },
+  "closure_gate": {
+    "criterion": "zero-independent-approval PR is DENIED by policy and provably blocked server-side",
+    "evidence_needed": "ruleset/protection snapshot + bypass actor state + exact required-check identity + synthetic blocked-merge receipt",
+    "falsifier": "any zero-approval policy-DENIED PR remains mergeable or is merged through an unreceipted path",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "EVENT_TRIGGERED on promotion workflow, branch protection, ruleset, review requirement, bypass permission, required-check identity or merge-path change",
+  "claim_allowed": false,
+  "action_categories": ["DETECTIVE","PREVENTIVE","PRECAUTIONARY","ADAPTIVE","CORRECTIVE","MAINTENANCE","INCIDENT_INVESTIGATION","SAFETY_ASSURANCE","LEARNING_ANTI_RECURRENCE"],
+  "detector": {
+    "signal": "Promotion Control decision + submitted review count + observed server merge outcome",
+    "threshold": "any DENIED decision with zero required approvals followed by merge, or any absent server-side binding",
+    "false_positive": "an explicitly authorized and separately receipted emergency bypass is initially flagged",
+    "false_negative": "a policy-DENIED change reaches main without reconciliation",
+    "evidence_needed": "PR state/reviews + policy run/job/log + merge commit + governance snapshot"
+  },
+  "adaptive_control": {
+    "baseline": "PR304 established the first observed mismatch",
+    "delta": "PR309 establishes recurrence while preserving exact mechanism as TOKEN_VAZIO",
+    "justification": "two distinct PRs show denied/missing-approval policy evidence with merges observed",
+    "rollback": "downgrade recurrence only if authoritative history disproves a cited event",
+    "retest": "synthetic zero-approval PR must be unmergeable server-side"
+  },
+  "corrective_control": {
+    "symptom": "zero-review PR merged while Promotion Control returned DENIED",
+    "mechanism_hypothesis": "server-side merge eligibility is not bound to Promotion Control/independent approval in the observed path",
+    "before_after_test": "before: DENIED+0 approvals did not prevent observed merge; after: identical condition must be rejected by server"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "Mapa server-side promotion/merge governance",
+    "condition_or_interval": "EVENT_TRIGGERED on policy/ruleset/protection/permission/check/merge-path change",
+    "measured_condition": "recurrence observed; classic protection disabled; exact ruleset/bypass state unresolved",
+    "verification": "settings snapshot + synthetic blocked-merge receipt"
+  },
+  "incident_investigation": {
+    "trigger": "second observed policy-DENIED/zero-review PR merged",
+    "evidence_preserved": ["PR309 metadata", "review list", "Promotion Control run/job/log", "main branch protection snapshot", "merge commit"],
+    "timeline": ["merge observed at 2026-08-21T01:23:48Z", "closure Promotion Control job started after merge and returned DENIED"],
+    "conditions": "zero submitted reviews; required independent approvals=1; classic protection disabled",
+    "recent_changes": "PR309 integrated the operational-gap assurance work",
+    "competing_mechanisms": ["unbound classic protection", "repository ruleset path TOKEN_VAZIO", "bypass actor path TOKEN_VAZIO"],
+    "evidence_favoring": "merge plus DENIED plus zero reviews demonstrates enforcement mismatch",
+    "evidence_disfavoring": "no evidence identifies a specific ruleset or bypass actor",
+    "probable_cause": "TOKEN_VAZIO_EXACT_SERVER_PATH; observed barrier absence is sufficient for containment but not actor attribution",
+    "contributing_factors": ["Promotion Control observability can occur after merge", "classic required checks not enforced"],
+    "recurrence_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT"
+  },
+  "safety_assurance": {
+    "data_acquisition": "PR/review history, policy run/job/log, branch governance and merge commit",
+    "analysis": "separate correct policy decision from actual server enforcement",
+    "system_reassessment": "recheck after every governance change and after any denied merge event",
+    "corrective_trigger": "DENIED followed by merge, missing required context, or bypass without explicit receipt"
+  },
+  "learning": {
+    "reusable_control": "POLICY_DECISION_NE_SERVER_ENFORCEMENT_UNTIL_BLOCKED_MERGE_IS_PROVED",
+    "index_or_test": "decision-vs-review-vs-merge reconciliation",
+    "recurrence_check": "every merge of a policy-governed PR must reconcile policy result, approvals and server eligibility"
+  },
+  "lifecycle": {
+    "limit_type": "EVENT_TRIGGERED",
+    "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED",
+    "execution_hours": "TOKEN_VAZIO",
+    "runtime_hours": "TOKEN_VAZIO",
+    "cycles": 2,
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO",
+    "test_cycles": 2,
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": 1,
+    "dependency_changes": 0,
+    "environment_exposure": "GitHub-hosted runner + GitHub merge service + repository governance configuration",
+    "load_stress_proxy": "TOKEN_VAZIO",
+    "incident_count": 0,
+    "near_miss_count": 2,
+    "maintenance_actions": 2,
+    "corrective_actions": 2,
+    "software_schema_version": "rafaelia.operational-gap-assurance/v1",
+    "evidence_age": "CURRENT_CYCLE",
+    "provenance_age": "CURRENT_CYCLE",
+    "last_verified_at": "merge:54aeeb11bc5440ceb54573dfdda02db3ea68aa82 + run:32436139556/job:96637651527",
+    "next_review_gate": "SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT",
+    "retirement_revalidation_criteria": "close only after server-side blocked-merge evidence; reopen on any governance change or recurrence"
+  },
+  "priority_axes_basis": "Integer 0..3 engineering priority classification based on repeated promotion-boundary mismatch; not a physical measurement.",
+  "predecessor_lineage": ["PROMOTION_CONTROL_NOT_BINDING_TO_MERGE_20260820T1241BRT", "PR304 merge d0865b3a7ffc89b861684ecf7c2598ddae5dd721", "PR309 merge 54aeeb11bc5440ceb54573dfdda02db3ea68aa82"]
+}
