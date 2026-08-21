@@ -98,22 +98,29 @@
       "module_id": "MOD-VECTRAS-RUNTIME",
       "name": "Vectras VM Android Runtime",
       "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
-      "branch": "main",
-      "observed_ref": "4c461538e1e62faab4d4754101675f1340466a72",
+      "branch": "master",
+      "observed_ref": "65a597d137708dc74cda7cb5b2ed44831f124171",
       "plane": "virtualization",
       "state": "VERIFIED_LIMITED",
       "capabilities": [
         "vm_runtime",
         "cmake_language_contract",
-        "rmr_cache_selftest"
+        "rmr_cache_selftest",
+        "termux_provider_provenance_v3",
+        "arm64_arm32_apk_wizard_build"
       ],
       "evidence_ids": [
-        "EVID-VECTRAS-CMAKE-CONTRACT"
+        "EVID-VECTRAS-CMAKE-CONTRACT",
+        "EVID-VECTRAS-TERMUX-PR1100",
+        "EVID-VECTRAS-APK-WIZARD-32332113794"
       ],
       "gaps": [
-        "QEMU TCG RMR shadow callsite and Android device evidence remain open."
+        "QEMU executable SHA-256 at the exact execution boundary remains TOKEN_VAZIO.",
+        "Physical Android Vectras-to-Termux transaction remains TOKEN_VAZIO.",
+        "Guest boot and performance evidence remain TOKEN_VAZIO.",
+        "Canonical android-ci strict bootstrap-assets gate and orchestrator debts remain independently open."
       ],
-      "next_action": "Keep RMR in shadow-first design and attach byte-equivalence evidence before productive reuse."
+      "next_action": "Execute one physical Vectras-to-Termux transaction and bind executable_sha256_at_execution before promoting runtime identity or guest-boot claims."
     },
     {
       "module_id": "MOD-LLAMA-INTERPRET",
@@ -140,31 +147,35 @@
       "name": "Termux App + Packages Federated Integration",
       "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
       "secondary_repository": "rafaelmeloreisnovo/termux-packages",
-      "branch": "claude/proximo-passo-natural-c15mg3",
+      "branch": "master",
       "observed_ref": "5e83eef9aea803bee127cd21eed6206ced193cb7",
       "plane": "runtime",
-      "state": "PARTIAL_DRAFT",
+      "state": "VERIFIED_LIMITED",
       "capabilities": [
         "Android runtime execution environment",
         "native code integration (JNI/NDK)",
         "logcat evidence collection",
         "package dependency resolution",
-        "health monitoring"
+        "health monitoring",
+        "provider APK SHA-256 discovery",
+        "QEMU executable SHA-256 discovery without private-path disclosure",
+        "ARM32 and ARM64 CI build coverage"
       ],
       "evidence_ids": [
         "EVID-TERMUX-INTEGRATION-STRUCT",
         "EVID-TERMUX-GENEALOGY-MATRIX",
-        "EVID-TERMUX-RECEIPT-20260821"
+        "EVID-TERMUX-RECEIPT-20260821",
+        "EVID-TERMUX-PR376",
+        "MAPA-VECTRAS-TERMUX-PROVENANCE-20260821-0001"
       ],
       "gaps": [
-        "No Android SDK/NDK available in this build environment (ELO 2-3 build gates TOKEN_VAZIO).",
-        "No physical Android device or emulator for runtime execution (ELO 4-5 installation/runtime gates TOKEN_VAZIO).",
-        "APK signing and device installation proof unavailable (requires device/keystore access).",
-        "Runtime ANativeActivity observation not executable (requires emulator or physical device).",
-        "Health metrics and device capability verification pending (blocked on device access)."
+        "No physical Android device transaction is attached to this provenance receipt.",
+        "QEMU executable SHA-256 at the exact execution boundary remains TOKEN_VAZIO.",
+        "APK device installation proof remains TOKEN_VAZIO for this specific Vectras-to-Termux transaction.",
+        "Guest boot, runtime health metrics and performance claims remain TOKEN_VAZIO."
       ],
-      "next_action": "Await Android SDK/NDK provisioning and physical device access; register genealogy matrix and execute federated doctor pass aggregation.",
-      "_closure_reference": "CLOSURE_L12 (Device Runtime Evidence — TOKEN_VAZIO gates for device-level validation)"
+      "next_action": "Run one physical Vectras-to-Termux transaction, bind the execution-time QEMU digest at the result boundary, compare it with discovery identity and append the physical receipt.",
+      "_closure_reference": "data/receipts/VECTRAS_TERMUX_PROVENANCE_RECEIPT_20260821.v1.json"
     }
   ]
 }
