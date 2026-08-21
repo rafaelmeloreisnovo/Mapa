@@ -24,7 +24,7 @@
   "forgetting_risk": 3,
   "failure_mode": "PINNED_EXTERNAL_COMMIT_UNRESOLVED_AND_RECOVERY_RECORD_OUTSIDE_CANONICAL_GAP_CONTRACT",
   "falsifier": "Resolve the original SHA from an authoritative qemu_rafaelia ref/object source and validate that exact content against the consuming ABI/integration contract.",
-  "next_probe": "Resolve 2346c30c2ba77881c2930add83523ea903b173fe through the authoritative qemu_rafaelia source; if absent, bind the repository default-branch head by immutable SHA and run ABI/integration validation before fallback promotion.",
+  "next_verifiable_step": "Resolve 2346c30c2ba77881c2930add83523ea903b173fe through the authoritative qemu_rafaelia source; if absent, bind the repository default-branch head by immutable SHA and run ABI/integration validation before fallback promotion.",
   "mitigation": {"fail_closed": true, "containment": "do not silently replace the pin; claim_allowed=false", "fallback_order": ["resolve_original_pin", "resolve_default_branch_head", "evaluate_upstream_stable_plus_patches", "synthesize_minimal_last"], "rollback": "restore TOKEN_VAZIO_PINNED_COMMIT_RECOVERY if any fallback fails; preserve attempts append-only"},
   "closure_gate": {"criterion": "immutable QEMU source identity resolved and compatible with the consuming Android route", "evidence_needed": "authoritative lookup + immutable SHA + ABI/integration run/job/steps + tested-source receipt/hash", "falsifier": "unresolved source, ABI mismatch, or unreceipted fallback", "result": "TOKEN_VAZIO"},
   "review_or_expiry": "EVENT_TRIGGERED on provider ref/default-branch change, consumer ABI change, recovery attempt or external-source workflow change",
