@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-21T20:39:00-03:00",
+  "state": "IMPLEMENTED_INDEX_ROOT",
+  "coverage_complete": "TOKEN_VAZIO",
+  "github_inventory_observed": 84,
+  "authority_model": {
+    "drive_navigation_authority": {
+      "id": "SRC:DRIVE:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "title": "RAFAELIA — Master Navigation Registry V1"
+    },
+    "drive_operational_memory": {
+      "id": "SRC:DRIVE:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1"
+    },
+    "github_federated_mirror": "ART:Mapa:navigation/INDEX.md"
+  },
+  "root_graph": ["Ω", "domains", "repositories", "artifacts", "evidence", "claims", "gaps", "experiments", "timeslices", "sources"],
+  "id_schemes": {
+    "repository": "REP:<repo>",
+    "artifact": "ART:<repo>:<path>",
+    "pull_request": "PR:<repo>#<n>",
+    "evidence": "EVD:<type>:<hash-or-run>",
+    "gap": "GAP:<id>",
+    "drive_source": "SRC:DRIVE:<document_id>",
+    "cycle": "CYCLE:<YYYY-MM-DD>:<n>",
+    "timeslice": "TS:<YYYY-MM-DD>:<window>"
+  },
+  "relations": ["IMPLEMENTS", "EVIDENCES", "BLOCKS", "DEPENDS_ON", "SUPERSEDES", "DERIVED_FROM", "MIRRORS", "INDEXES"],
+  "states": ["REFERENCE", "IMPLEMENTED", "PASS", "FAIL", "OPEN", "TOKEN_VAZIO", "SUPERSEDED"],
+  "invariants": [
+    "OPEN != CANONICAL",
+    "TOKEN_VAZIO != PASS",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "COHERENCE != CLAIM_AUTHORITY",
+    "INCOMPLETE_INVENTORY => coverage_complete=TOKEN_VAZIO"
+  ],
+  "repositories": [
+    "V79", "CientiEspiritualRAFCODE", "IaFceaBook", "templo_vivo", "fceabook", "Rafaelia", "CientiEspiritualBook", "verbumindex", "rafaeliacoreenterprise", "ZIPRAF", "PrivateRafaea", "Clay-Millennium-Problems", "RafNet", "ZIPRAF_CORE", "RAIAREIS-core", "RAFNATIONS", "Espiritual", "newrafaelreia", "Cosmos", "Fisica", "Judicial", "Img", "Graditao", "myCat", "termux-app-rafacodephi", "actions", "GEOM", "rafaelia_privado", "privadoFazendoDeus", "PCR", "CONVERSATIONSALAR", "llama.cpp", "GAIA-PDS", "Catalogo", "florisboard", "CreFe", "ROMS", "ClimaHondaSS", "nano-bench", "BLAKE3", "X0", "UserLAnd", "home-assistant", "TinyGPT-V", "androidx", "androidRom", "frameworks", "Vectras-VM-Android", "qemu", "RafGitTools", "Crypto", "Tora", "GAIA_phi_RAF", "treinar24h", "teoremas", "gradle", "papers", "linuxkernel", "LuaJIT", "TeoremasTeses", "DeepSeek-V3", "RafPolimata", "relativity", "Matem", "termux-api", "IA_nist", "Seguranca", "UserLAnd2", "Semente", "ChipQuantumIA", "Rafaelia_Core", "Gaia", "frida", "RafaelCiencias", "MemRa", "Geral", "Mapa", "MemRafcode", "openssl", "termux-packages", "Shizuku", "arxiv-docs", "OMEGAGIT", "Recipt"
+  ],
+  "navigation_routes": [
+    "by_repository", "by_domain", "by_evidence", "by_gap", "by_time_cycle", "by_source", "by_claim_state", "by_next_gate", "cross_repo_causal"
+  ],
+  "recent_nodes": [
+    {"id":"PR:termux-app-rafacodephi#380","state":"MERGED","role":"execute patched usable build path"},
+    {"id":"PR:termux-packages#89","state":"MERGED","role":"restore libLLVM18 Doxygen host closure"},
+    {"id":"PR:termux-app-rafacodephi#381","state":"MERGED","role":"canonical usable APK gate"},
+    {"id":"PR:Mapa#335","state":"MERGED","role":"federated omega lifecycle ledger"},
+    {"id":"PR:Vectras-VM-Android#1104","state":"MERGED","role":"coherence claim-authority boundary"},
+    {"id":"PR:termux-app-rafacodephi#382","state":"MERGED","role":"ABI-localized bootstrap diagnostic"},
+    {"id":"PR:RafGitTools#370","state":"MERGED","role":"deterministic source-gap triage"},
+    {"id":"PR:termux-packages#91","state":"OPEN","role":"bootstrap governance draft"},
+    {"id":"PR:termux-packages#92","state":"OPEN","role":"libxml2 Doxygen host runtime correction"}
+  ],
+  "evidence_nodes": [
+    {
+      "id": "EVD:RUN:32531572529",
+      "job": "96924467031",
+      "log_sha256": "614d8d39698aad19818bfae956f46dd056e06b4e8f868c2092248b3afb7b1ccf",
+      "observed_failure": "doxygen loader missing libxml2.so.2",
+      "physical_android": "TOKEN_VAZIO"
+    },
+    {
+      "id": "EVD:SOURCE_GAP_BASELINE:20260821",
+      "files": 257,
+      "blockers": 82,
+      "warnings": 34,
+      "closure": "TOKEN_VAZIO"
+    }
+  ],
+  "gaps": [
+    {"id":"GAP:TERMUX_ARM32_LIBXML2_RUNTIME","state":"OPEN","next_gate":"rerun ARM32 after bounded libxml2 host-closure correction"},
+    {"id":"GAP:PHYSICAL_ANDROID_RUNTIME","state":"TOKEN_VAZIO","next_gate":"signed APK install/runtime receipt on physical Android"},
+    {"id":"GAP:PROVIDER_SERVER_BARRIER_FIELD_FAILURE_20260821","state":"OPEN","priority":"P0"},
+    {"id":"GAP:FULL_GITHUB_ARTIFACT_COVERAGE","state":"TOKEN_VAZIO"},
+    {"id":"GAP:DRIVE_DEDUPLICATION_AND_CLASSIFICATION","state":"TOKEN_VAZIO"}
+  ],
+  "timeslices": [
+    {
+      "id": "TS:2026-08-21:5H",
+      "path": "navigation/GITHUB_DELTA_5H_20260821.md",
+      "state": "REFERENCE",
+      "authority": "TIMESLICE_ONLY",
+      "relation": "INDEXES"
+    }
+  ],
+  "coverage": {
+    "github_repository_names": {"observed":84,"complete":"TOKEN_VAZIO"},
+    "github_per_repo_artifacts": {"state":"partial","complete":"TOKEN_VAZIO"},
+    "drive_rafaelia_candidates": {"state":"observed","deduped":false,"complete":"TOKEN_VAZIO"},
+    "evidence_linking": {"state":"partial","complete":"TOKEN_VAZIO"}
+  },
+  "next_work": [
+    "extract per-repository README/AGENTS/index/workflows/tests/receipts",
+    "assign stable ART identifiers and bind refs/hashes",
+    "deduplicate and classify Drive candidates by authority and lineage",
+    "link run/hash/receipt evidence to producer and consumer repositories",
+    "bind each unresolved gap to falsifier and executable gate",
+    "append superseding states without deleting prior evidence"
+  ]
+}
