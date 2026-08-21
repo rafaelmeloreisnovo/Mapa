@@ -1,124 +1,43 @@
 {
-  "schema": "rafaelia.operational-gap.v1",
-  "claim_allowed": false,
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
   "gap_id": "GAP-QEMU-PINNED-COMMIT-LOST",
-  "generated_at": "2026-08-21T00:00:00Z",
-  "severity": "P0_BLOCKER",
-  "state": "UNRECOVERABLE_WITH_FALLBACK",
-  "affected_repositories": [
-    "rafaelmeloreisnovo/qemu_rafaelia",
-    "rafaelmeloreisnovo/Vectras-VM-Android",
-    "rafaelmeloreisnovo/androidx_RmR"
+  "status": "TOKEN_VAZIO",
+  "source_pointer": "Vectras-VM-Android/.github/workflows/android-ci.yml pin 2346c30c2ba77881c2930add83523ea903b173fe -> qemu_rafaelia",
+  "owner_authority": "rafaelmeloreisnovo/qemu_rafaelia + rafaelmeloreisnovo/Vectras-VM-Android",
+  "affected_routes": ["R5", "R7", "R11", "R12"],
+  "observed_at": "2026-08-21T02:45:45-03:00",
+  "provenance": [
+    {"source": "PR317 operational-gap-assurance run 32451741176/job 96681365742", "observation": "predecessor recovery record rejected because its schema was unknown"},
+    {"source": "predecessor recovery investigation", "observation": "original pin local object lookup NOT_FOUND; remote resolution remained TOKEN_VAZIO"}
   ],
-  "original_pin": {
-    "commit_sha": "2346c30c2ba77881c2930add83523ea903b173fe",
-    "documented_in": "Vectras-VM-Android/.github/workflows/android-ci.yml",
-    "discovered_missing_at": "2026-08-01T22:01:00-03:00",
-    "catalog_cycle": "RAFAELIA_CATALOG_CYCLE_2026-08-01T2201-0300"
-  },
-  "investigation": {
-    "local_git_check": {
-      "command": "find /home/user/termux-app-rafacodephi/qemu_rafaelia/.git/objects -name 2346c3*",
-      "status": "NOT_FOUND",
-      "interpretation": "Commit object does not exist in local git database"
-    },
-    "remote_git_check": {
-      "command": "git ls-remote https://github.com/rafaelmeloreisnovo/qemu_rafaelia 2346c30c2ba77881c2930add83523ea903b173fe",
-      "status": "TOKEN_VAZIO",
-      "reason": "Requires network access; local fallbacks available"
-    },
-    "repository_state": {
-      "directory_found": "/home/user/Vectras-VM-Android/external/qemu_rafaelia",
-      "contains_git_repo": false,
-      "contains_code": "Minimal README only",
-      "interpretation": "qemu_rafaelia appears to be submodule reference, not active clone"
-    }
-  },
-  "recovery_options": [
-    {
-      "rank": 1,
-      "method": "use_latest_main",
-      "description": "Use latest commit from qemu_rafaelia main/master branch",
-      "command": "git ls-remote https://github.com/rafaelmeloreisnovo/qemu_rafaelia HEAD | awk '{print $1}'",
-      "precondition": [
-        "qemu_rafaelia GitHub repo is accessible",
-        "main branch exists",
-        "main branch has at least one commit"
-      ],
-      "risk_level": "LOW",
-      "validation": "Verify ABI contract compatibility with androidx_RmR after resolution"
-    },
-    {
-      "rank": 2,
-      "method": "use_upstream_qemu_stable",
-      "description": "Use upstream QEMU stable release + Android-specific patches from qemu_rafaelia commits",
-      "source": "https://github.com/qemu/qemu (latest stable) + downstream patches",
-      "precondition": [
-        "Upstream QEMU is publicly available",
-        "Android patches can be extracted from git history",
-        "Patches can be applied cleanly"
-      ],
-      "risk_level": "MEDIUM",
-      "validation": "Golden test against known Android APK builds"
-    },
-    {
-      "rank": 3,
-      "method": "synthesize_minimal_baseline",
-      "description": "Synthesize minimal QEMU + Android baseline from docs + RafPolimata requirements",
-      "source": "README + docs + Orchestrator contracts",
-      "precondition": [
-        "qemu_rafaelia documentation is sufficient",
-        "Requirements are clearly specified",
-        "Synthetic version can be tested locally"
-      ],
-      "risk_level": "HIGH",
-      "validation": "Full adversarial testing before device runtime"
-    }
-  ],
-  "decision": {
-    "chosen_method": "use_latest_main",
-    "rationale": "Lowest risk; preserves original intent if qemu_rafaelia has been maintained",
-    "fallback_method": "use_upstream_qemu_stable",
-    "fallback_rationale": "If main is empty, use stable upstream + documented patches"
-  },
-  "implementation": {
-    "location": "Vectras-VM-Android/.github/workflows/android-ci.yml",
-    "step_name": "Validate external integration sources (androidx_RmR/qemu_rafaelia)",
-    "script_path": "tools/ci/verify_external_sources_v2.sh",
-    "script_logic": [
-      "1. Attempt to resolve original pinned commit (2346c30c...) on remote",
-      "2. If commit not found, fetch latest from origin/HEAD",
-      "3. Record resolution method in event envelope",
-      "4. Validate androidx_RmR ABI contracts",
-      "5. If both succeed, pass workflow; if not, record TOKEN_VAZIO + next step"
-    ]
-  },
-  "evidence_recording": {
-    "event_type": "COMMIT_RECOVERY_DECISION",
-    "event_id": "EVT-QEMU-COMMIT-RECOVERY-20260821",
-    "envelope_fields": {
-      "commit_recovery_context": {
-        "original_commit": "2346c30c2ba77881c2930add83523ea903b173fe",
-        "resolution_commit": "TOKEN_VAZIO (to be filled during execution)",
-        "recovery_method": "TOKEN_VAZIO (use_latest_main | use_upstream_qemu_stable)",
-        "recovery_evidence": "git ls-remote output + verification receipt"
-      }
-    },
-    "must_preserve": [
-      "Both success and failure paths recorded",
-      "No implicit promotion of TOKEN_VAZIO to PASS",
-      "Fallback decisions logged with rationale",
-      "All commits checksummed for replay/audit"
-    ]
-  },
-  "rollback": {
-    "condition": "If recovery fails completely",
-    "action": "Mark as UNRECOVERABLE_PERMANENT; escalate to human review",
-    "preserve": "All investigation and decision logs; do not delete attempt history"
-  },
-  "r3": {
-    "F_ok": "Recovery strategy defined with 3-rank fallback hierarchy; decision rules documented",
-    "F_gap": "Actual resolution commit not determined without network access or git ls-remote execution",
-    "F_next": "Execute verify_external_sources_v2.sh; record event envelope with resolution_commit + recovery_method"
-  }
+  "evidence_for": ["Original immutable pin is known.", "Local predecessor lookup reported the object not found.", "No authoritative remote-resolution receipt exists yet."],
+  "evidence_against": ["No current authoritative remote lookup proves permanent absence from every reachable ref/object surface.", "No ABI/integration execution proves that any fallback is compatible."],
+  "uncertainty_state": "ORIGINAL_PIN_LOCAL_NOT_FOUND; REMOTE_REACHABILITY_AND_SAFE_FALLBACK_TOKEN_VAZIO",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 2,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "PINNED_EXTERNAL_COMMIT_UNRESOLVED_AND_RECOVERY_RECORD_OUTSIDE_CANONICAL_GAP_CONTRACT",
+  "falsifier": "Resolve the original SHA from an authoritative qemu_rafaelia ref/object source and validate that exact content against the consuming ABI/integration contract.",
+  "next_probe": "Resolve 2346c30c2ba77881c2930add83523ea903b173fe through the authoritative qemu_rafaelia source; if absent, bind the repository default-branch head by immutable SHA and run ABI/integration validation before fallback promotion.",
+  "mitigation": {"fail_closed": true, "containment": "do not silently replace the pin; claim_allowed=false", "fallback_order": ["resolve_original_pin", "resolve_default_branch_head", "evaluate_upstream_stable_plus_patches", "synthesize_minimal_last"], "rollback": "restore TOKEN_VAZIO_PINNED_COMMIT_RECOVERY if any fallback fails; preserve attempts append-only"},
+  "closure_gate": {"criterion": "immutable QEMU source identity resolved and compatible with the consuming Android route", "evidence_needed": "authoritative lookup + immutable SHA + ABI/integration run/job/steps + tested-source receipt/hash", "falsifier": "unresolved source, ABI mismatch, or unreceipted fallback", "result": "TOKEN_VAZIO"},
+  "review_or_expiry": "EVENT_TRIGGERED on provider ref/default-branch change, consumer ABI change, recovery attempt or external-source workflow change",
+  "claim_allowed": false,
+  "action_categories": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "ADAPTIVE", "CORRECTIVE", "MAINTENANCE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "LEARNING_ANTI_RECURRENCE"],
+  "detector": {"signal": "immutable source pin cannot be resolved or recovery source changes without receipt", "threshold": "any unresolved pin on a build/integration route", "false_positive": "object exists but is temporarily unreachable from the queried surface", "false_negative": "fallback resolves but changes ABI/behavior undetected", "evidence_needed": "authoritative source identity plus ABI/integration evidence"},
+  "adaptive_control": {"baseline": "consumer expected pin 2346c30c2ba77881c2930add83523ea903b173fe", "delta": "local lookup NOT_FOUND and remote identity still unobserved", "justification": "recovery must preserve source identity and compatibility", "rollback": "return route to TOKEN_VAZIO without deleting failed attempts", "retest": "external-source + ABI/integration gates on exact recovered SHA"},
+  "corrective_control": {"symptom": "recovery record failed assurance while source pin remained unresolved", "mechanism_hypothesis": "non-canonical gap schema plus unexecuted source-resolution step", "before_after_test": "canonical record passes structural assurance while source closure remains TOKEN_VAZIO until identity+ABI evidence exists"},
+  "maintenance": {"class": "CONDITION_BASED", "asset": "QEMU external-source pin and Android integration contract", "condition_or_interval": "revalidate on ref disappearance, ABI/dependency change, recovery attempt or build failure", "measured_condition": "pin locally NOT_FOUND; remote identity unresolved; schema mismatch observed", "verification": "immutable ref lookup plus exact-source ABI/integration receipt"},
+  "incident_investigation": {"trigger": "pinned source could not be located locally and predecessor recovery record failed governance assurance", "facts": ["original pin is 2346c30c2ba77881c2930add83523ea903b173fe", "predecessor local lookup reported NOT_FOUND", "remote resolution remained TOKEN_VAZIO", "PR317 assurance rejected the predecessor schema"], "timeline": ["2026-08-01 missing-pin condition recorded", "2026-08-21 recovery record added", "2026-08-21T05:45Z assurance exposed schema mismatch"], "configuration": {"consumer": "Vectras-VM-Android", "provider": "qemu_rafaelia", "original_pin": "2346c30c2ba77881c2930add83523ea903b173fe", "remote_resolution": "TOKEN_VAZIO"}, "recent_changes": "PR317 adds QEMU/AndroidX mapping; no fallback has been executed or promoted.", "competing_mechanisms": ["pin absent from reachable history", "pin exists outside queried refs/object surface", "historical reference drift"], "contributing_factors": ["source identity aged without fresh remote receipt", "recovery record used a non-canonical schema"], "recommendations": ["resolve source identity first", "bind fallback by SHA", "validate ABI/integration before promotion", "preserve failed attempts"], "blame_assignment": false, "recurrence_gate": "QEMU_IMMUTABLE_SOURCE_AND_ABI_RECEIPT"},
+  "safety_assurance": {"data_acquisition": "source refs/object lookup plus ABI/integration run evidence", "analysis": "compare resolved source identity with consumer contract", "system_reassessment": "revalidate after source/ABI/workflow change", "corrective_trigger": "unresolved identity, ABI mismatch or unreceipted source change"},
+  "learning": {"reusable_control": "EXTERNAL_PIN_RECOVERY_REQUIRES_IMMUTABLE_IDENTITY_PLUS_CONSUMER_COMPATIBILITY_RECEIPT", "index_or_test": "external-source resolver + ABI/integration gate", "recurrence_check": "every pin change reconciles predecessor SHA, successor SHA, reason, receipt and rollback"},
+  "lifecycle": {"limit_type": "EVENT_TRIGGERED", "calendar_age": "TOKEN_VAZIO_NOT_COMPUTED", "execution_hours": "TOKEN_VAZIO", "runtime_hours": "TOKEN_VAZIO", "cycles": 1, "starts_stops": "TOKEN_VAZIO", "builds": "TOKEN_VAZIO", "test_cycles": 1, "deployments": "TOKEN_VAZIO", "commits_since_validation": "TOKEN_VAZIO", "dependency_changes": 1, "environment_exposure": "GitHub source graph + Vectras Android build + QEMU/AndroidX ABI boundary", "load_stress_proxy": "TOKEN_VAZIO", "incident_count": 0, "near_miss_count": 1, "maintenance_actions": 1, "corrective_actions": 1, "software_schema_version": "rafaelia.operational-gap-assurance/v1", "evidence_age": "CURRENT_CYCLE", "provenance_age": "CURRENT_CYCLE", "last_verified_at": "PR317 run:32451741176/job:96681365742", "next_review_gate": "QEMU_IMMUTABLE_SOURCE_AND_ABI_RECEIPT", "retirement_revalidation_criteria": "revalidate on provider ref, consumer ABI, fallback or source contradiction"},
+  "priority_axes_basis": "Integer 0..3 engineering priority classification; not a physical measurement.",
+  "predecessor_lineage": ["rafaelia.operational-gap-recovery.v1", "rafaelia.operational-gap.v1 compatibility patch"]
 }
