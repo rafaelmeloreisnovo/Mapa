@@ -1,0 +1,134 @@
+{
+  "schema_version": "rafaelia.operational-gap-assurance/v1",
+  "gap_id": "MAPA_DIRECT_MAIN_ACCIDENTAL_MUTATION_REVERT_20260821T0402BRT",
+  "status": "NEAR_MISS",
+  "source_pointer": "github:rafaelmeloreisnovo/Mapa@33d727534e16a828f115e3b6e82407f267f62851 -> a3230bfbd2cda7c2e0b93dda445602004bbf47dc",
+  "owner_authority": "rafaelmeloreisnovo/Mapa",
+  "affected_routes": ["R5", "R6", "R11", "R12"],
+  "observed_at": "2026-08-21T04:02:34-03:00",
+  "provenance": [
+    {"source":"GitHub commit 33d727534e16a828f115e3b6e82407f267f62851","observation":"direct main commit message=noop created docs/governance/SHARED_DATA_GOVERNANCE_V2.md containing one byte x at 2026-08-21T07:02:34Z"},
+    {"source":"GitHub commit a3230bfbd2cda7c2e0b93dda445602004bbf47dc","observation":"30 seconds later revert removed exactly the one-byte file; message=revert: remove accidental direct-main partial shared-data v2"},
+    {"source":"GitHub main branch snapshot","observation":"main@a3230bf... protected=false; classic protection disabled; required status checks enforcement off"}
+  ],
+  "evidence_for": [
+    "A direct commit reached main without a PR merge object in the observed two-commit sequence.",
+    "The first commit introduced a partial governance document containing only x.",
+    "The following commit explicitly identifies the prior mutation as accidental and reverts exactly that content.",
+    "Classic branch protection is not enforced on the observed main snapshot."
+  ],
+  "evidence_against": [
+    "The visible file-level mutation was fully reverted within 30 seconds.",
+    "No evidence observed in this probe demonstrates downstream release, runtime, or scientific claim propagation from the transient byte."
+  ],
+  "uncertainty_state": "DIRECT_MAIN_WRITE_PATH_OBSERVED; VISIBLE_FILE_DELTA_REVERTED; RULESETS_BYPASS_AND_DOWNSTREAM_EFFECT_TOKEN_VAZIO",
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "unlock": 3,
+  "risk": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "information_gain": 3,
+  "forgetting_risk": 3,
+  "failure_mode": "A partial governance artifact can reach the authoritative default branch directly before review/gates, even if manually reverted shortly afterward.",
+  "falsifier": "Demonstrate through an authoritative server-side configuration and attempted write that equivalent unauthorized direct-main mutation is rejected before branch state changes.",
+  "next_probe": "Inspect authoritative rulesets/bypass/required-context settings when exposed; then execute a safe synthetic direct-main rejection test or capture an equivalent server rejection receipt without modifying main.",
+  "next_verifiable_step": "Obtain SERVER_SIDE_DIRECT_MAIN_WRITE_REJECTED_RECEIPT plus ruleset/required-context identity; keep zero-approval PR merge rejection as a separate but related gate.",
+  "mitigation": {
+    "fail_closed": true,
+    "current": "visible accidental file delta reverted; do not infer governance barrier from successful rollback",
+    "containment": "keep claim_allowed=false and all successor work in draft PR branches",
+    "rollback": "the observed content rollback is commit a3230bfbd2cda7c2e0b93dda445602004bbf47dc; do not rewrite either historical commit"
+  },
+  "closure_gate": {
+    "criterion": "server rejects unauthorized direct-main writes before branch mutation and exact required gate identities are observable",
+    "evidence_needed": "authoritative settings snapshot plus rejected-write receipt with unchanged main SHA",
+    "falsifier": "any equivalent direct write changes main before required review/check policy completes",
+    "result": "TOKEN_VAZIO"
+  },
+  "review_or_expiry": "EVENT_TRIGGERED on branch protection, ruleset, permission, required-check, bypass, or default-branch configuration change",
+  "claim_allowed": false,
+  "action_categories": ["DETECTIVE","PREVENTIVE","PRECAUTIONARY","ADAPTIVE","CORRECTIVE","MAINTENANCE","INCIDENT_INVESTIGATION","SAFETY_ASSURANCE","LEARNING_ANTI_RECURRENCE"],
+  "detector": {
+    "signal": "non-merge direct commit changes main followed by corrective revert",
+    "threshold": "any direct main content mutation outside the governed PR path",
+    "false_positive": "an explicitly authorized emergency direct write could be classified as accidental without authorization evidence",
+    "false_negative": "direct write persists without an immediate revert or recognizable commit message",
+    "evidence_needed": "main commit parentage, diff, timestamps, authorization/gate metadata, subsequent state"
+  },
+  "adaptive_control": {
+    "baseline": "prior server-governance hazard focused primarily on DENIED PRs that were nevertheless merged",
+    "delta": "direct-main mutation path is now independently observed, followed by an explicit corrective revert",
+    "justification": "field evidence expands the hazard class from merge binding to authoritative branch write binding",
+    "rollback": "if authoritative evidence later shows this was a deliberately authorized exceptional path, narrow the classification but preserve the observed commit sequence",
+    "retest": "server-side rejected direct-write receipt plus PR zero-approval blocked-merge receipt"
+  },
+  "corrective_control": {
+    "symptom": "partial one-byte governance file reached main",
+    "mechanism_hypothesis": "authoritative branch accepted a direct content write because the observed classic branch protection path is disabled; other provider controls remain TOKEN_VAZIO",
+    "before_after_test": "before: main included one-byte SHARED_DATA_GOVERNANCE_V2.md at 33d7275; after: a3230bf removes exactly that file content, while prevention remains unproved"
+  },
+  "maintenance": {
+    "class": "CONDITION_BASED",
+    "asset": "Mapa authoritative main write boundary",
+    "condition_or_interval": "event-triggered on any direct-main mutation or server-governance setting change",
+    "measured_condition": "direct-main mutation observed and content rollback completed; prevention control absent on classic branch snapshot",
+    "verification": "immutable main lineage plus authoritative rejected-write evidence"
+  },
+  "incident_investigation": {
+    "trigger": "direct-main commit created a partial governance file and was explicitly reverted as accidental",
+    "facts": ["33d7275 created SHARED_DATA_GOVERNANCE_V2.md with content x", "a3230bf removed the same one-byte file 30 seconds later", "current main classic protection reports disabled", "no downstream release/runtime/scientific propagation was observed in this probe"],
+    "timeline": ["2026-08-21T07:02:34Z direct commit 33d7275", "2026-08-21T07:03:04Z corrective revert a3230bf", "subsequent federated cycle classified the event as a governance near-miss"],
+    "configuration": {"repo":"rafaelmeloreisnovo/Mapa","branch":"main","protected":false,"classic_required_checks":"off","rulesets":"TOKEN_VAZIO_NOT_INSPECTED","bypass_actors":"TOKEN_VAZIO_NOT_INSPECTED"},
+    "recent_changes": ["direct partial shared-data governance write", "immediate revert"],
+    "competing_mechanisms": ["unprotected direct push path", "authorized exceptional write path", "ruleset or bypass behavior not visible to current connector"],
+    "contributing_factors": ["classic branch protection not enforced", "server-side required-context binding remains unproved"],
+    "recommendations": ["make default branch reject ordinary direct writes", "bind promotion checks to server-side required gates", "capture ruleset/bypass identity", "retain corrective revert as historical evidence rather than erasing the event"],
+    "blame_assignment": false,
+    "recurrence_gate": "SERVER_SIDE_DIRECT_MAIN_WRITE_REJECTED_RECEIPT"
+  },
+  "safety_assurance": {
+    "data_acquisition": "main branch snapshot + exact commit diffs/timestamps",
+    "analysis": "separate successful rollback from prevention efficacy",
+    "system_reassessment": "revalidate on every branch/ruleset/permission change and any future direct-main event",
+    "corrective_trigger": "any new direct authoritative-branch mutation outside governed transition path"
+  },
+  "learning": {
+    "reusable_control": "ROLLBACK_SUCCESS_NE_PREVENTION_CONTROL; DIRECT_MAIN_WRITE_PATH_REQUIRES_SERVER_REJECTION_EVIDENCE",
+    "index_or_test": "main lineage detector + server-side direct-write rejection receipt",
+    "recurrence_check": "every authoritative main mutation must be classified as PR merge, explicitly authorized exception, or governance near-miss"
+  },
+  "impact_radius": [
+    {"component":"Mapa/main","direct_exposure":true,"transmitted_load_or_effect":"authoritative branch state changed transiently","hidden_damage_or_hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"lineage/diff plus post-revert state and server settings","false_positive_cost":"extra governance review","false_negative_cost":"silent partial or malicious authoritative mutation"},
+    {"component":"Mapa control-plane consumers","direct_exposure":false,"transmitted_load_or_effect":"POTENTIAL_PROPAGATION while transient main state was visible","hidden_damage_or_hidden_state_possible":"TOKEN_VAZIO","inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"consumer run/source SHA if any during transient window","false_positive_cost":"bounded revalidation effort","false_negative_cost":"consumer may bind to transient authoritative state"},
+    {"component":"RafGitTools/Termux/RLL publication routes","direct_exposure":false,"transmitted_load_or_effect":"POTENTIAL_PROPAGATION only","hidden_damage_or_hidden_state_possible":"TOKEN_VAZIO","inspection_required":false,"revalidation_required":false,"replacement_or_retirement_candidate":false,"evidence_needed":"actual dependency/source binding to transient SHA","false_positive_cost":"unnecessary cross-repo retest","false_negative_cost":"unnoticed propagation if a consumer captured transient main"}
+  ],
+  "lifecycle": {
+    "limit_type":"EVENT_TRIGGERED",
+    "calendar_age":"CURRENT_CYCLE",
+    "execution_hours":"TOKEN_VAZIO",
+    "runtime_hours":"TOKEN_VAZIO",
+    "cycles":1,
+    "starts_stops":"TOKEN_VAZIO",
+    "builds":"TOKEN_VAZIO",
+    "test_cycles":1,
+    "deployments":"TOKEN_VAZIO",
+    "commits_since_validation":2,
+    "dependency_changes":1,
+    "environment_exposure":"GitHub authoritative main; direct-write and downstream consumer exposure window approximately 30 seconds",
+    "load_stress_proxy":"one-byte governance file mutation then exact revert",
+    "incident_count":0,
+    "near_miss_count":1,
+    "maintenance_actions":1,
+    "corrective_actions":1,
+    "software_schema_version":"rafaelia.operational-gap-assurance/v1",
+    "evidence_age":"CURRENT_CYCLE",
+    "provenance_age":"CURRENT_CYCLE",
+    "last_verified_at":"Mapa/main@a3230bfbd2cda7c2e0b93dda445602004bbf47dc",
+    "next_review_gate":"SERVER_SIDE_DIRECT_MAIN_WRITE_REJECTED_RECEIPT",
+    "retirement_revalidation_criteria":"revalidate on branch/ruleset/permission/required-check/bypass change or direct-main event"
+  },
+  "priority_axes_basis": "0..3 engineering priority classification, not physical measurement",
+  "predecessor_lineage": ["PROMOTION_CONTROL_NOT_BINDING_TO_MERGE_20260820T1241BRT", "FEDERATED_SERVER_MERGE_ENFORCEMENT_OFF_20260820T1343BRT"]
+}
