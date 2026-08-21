@@ -1,0 +1,130 @@
+{
+  "schema": "rafaelia.vectras-termux-drive-hardware-bridge.v2",
+  "receipt_id": "MAPA-VECTRAS-TERMUX-DRIVE-HW-20260821-0002",
+  "observed_at": "2026-08-21T01:57:00-03:00",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "append_only": true,
+  "claim_allowed": false,
+  "predecessor_receipt": "data/receipts/VECTRAS_TERMUX_PROVENANCE_RECEIPT_20260821.v1.json",
+  "correction": {
+    "previous_overbroad_gap": "physical Android hardware execution absent",
+    "correct_state": "physical Android/Termux hardware execution exists in RAFAELIA evidence, but the specific Vectras-to-Termux-to-QEMU provenance-v3 transaction is not yet physically bound",
+    "rule": "general hardware execution evidence != transaction-specific cross-repository execution evidence"
+  },
+  "drive_sources": [
+    {
+      "provider": "google_drive",
+      "provider_id": "1aZVss73eYKfcVi-BEjsMGT2sPld7xYVLb0BBnVLtapk",
+      "title": "RAFAELIA — Hardware Microarchitecture ARM32 — Stage 7 VA Color Alias Isolation — Checkpoint V1 — 2026-08-15",
+      "revision_id": "AIroW35GGFhwlj6YPQN_7QAlY6sZ-YGH1zsM2s70M15VaO28hQARKUc_0CajmgX8ePssb5b4yDIlZA2WU8tR2IOVqXNkChvteQsYkjLCxyg",
+      "evidence_state": "VERIFIED_LIMITED_PENDING_EXTERNAL_REPLICATION",
+      "scope": "physical Android/Termux ARM32 measured microarchitecture workload",
+      "environment": "Android/Termux ARM32 no-root; Linux 4.9.190+; clang 21.1.8; armv7a-unknown-linux-android24; ELF 32-bit ARM EABI5 PIE; NDK r29",
+      "observations": {
+        "sample_rows": 11520,
+        "migration_pass_samples": "11520/11520",
+        "stable_frequency_samples": "11479/11520",
+        "complete_quartets": 2880,
+        "strict_same_frequency_quartets": 2838,
+        "cpus": [0, 3, 4, 7]
+      },
+      "receipt_sha256": "705505f553864c2a95aea3cb01cb6d9bdc27316f209e334b4720d5d0fe76a798",
+      "limitations": [
+        "Not a Vectras-to-Termux transaction receipt.",
+        "Does not identify the exact QEMU executable used by provenance-v3.",
+        "Does not prove guest boot for Vectras PR #1100."
+      ]
+    },
+    {
+      "provider": "google_drive",
+      "provider_id": "1MKv6Tq5ZXGs8J8YDZ-Bsk1fJ8HfrNyBmjzDSfrEd6zc",
+      "title": "RAFAELIA — Ciclo 8 — Evidência Física com Nonce e Guest Boot — 2026-07-26",
+      "revision_id": "AIroW34SIHW71suFRY1NK0u32H71tXJiah0N0-tWuSe63FNzu8Vu1splX-4UpkUH1MsuJwvBL8ZvGfDixZjdC97lN94SPCov20oSOmttwN0",
+      "evidence_state": "IMPLEMENTED_BLOCKED_INFRA_ZERO_JOB_STEPS",
+      "scope": "transaction-specific closure design for Vectras -> Termux -> QEMU -> guest kernel -> guest userspace -> shutdown",
+      "implemented_contract": [
+        "32-byte SecureRandom nonce serialized to 64 hex characters",
+        "nonce bound to guest argv, canonical request, request SHA-256, append-only request and Termux receipt",
+        "ordered boot/userspace/shutdown guest markers sharing the same nonce",
+        "ADB no-root collector with Android/ABI identity, serial hash, fingerprint, boot ID and installed APK SHA-256",
+        "request/receipt collection via adb exec-out run-as",
+        "PASS_DEVICE_EVIDENCE_LIMITED requires request/receipt reconciliation, permission grant, non-truncated output, err=0 and exitCode=0"
+      ],
+      "observed_execution": false,
+      "device_collection_executed": false,
+      "guest_marker_executed": false,
+      "limitations": [
+        "The 2026-07-26 workflow observed zero job steps and no logs.",
+        "No physical Vectras-to-Termux guest transaction was observed in this document."
+      ]
+    },
+    {
+      "provider": "google_drive",
+      "provider_id": "1QGqOP8pT5DAhNPYc5czXB19kvcDoYrVNHntfayhvDz8",
+      "title": "01_CONTRATO__SYSLOG_EVENTBUS_LEDGER_RAFAELIA_V1",
+      "revision_id": "AIroW34uwoZpPD_P8ZddVpHODWSyBQnsDNqKVGs_1cFa0ihXbgLAoU9s79rBHNTk4RkjrTcvbza5BAgM21JEMiwQ3pVcuh2SKEfxCN3nyVY",
+      "evidence_state": "CANONICAL_DRAFT",
+      "scope": "local-first observability and orchestration logging contract",
+      "transport_levels": [
+        "S0 stdout/stderr",
+        "S1 JSONL append-only per run_id",
+        "S2 spool inbox/active/outbox/events/quarantine",
+        "S3 optional Unix domain socket with ACK/backpressure/replay",
+        "S4 Android Logcat, Room, RafGitTools UI, RafBBS, Vectras ledger and Drive manifest adapters"
+      ],
+      "termux_paths": [
+        "$HOME/.rafaelia/orchestrator/events/<run_id>.jsonl",
+        "$HOME/.rafaelia/orchestrator/logs/<run_id>.log",
+        "$HOME/.rafaelia/orchestrator/manifests/<run_id>.manifest.json",
+        "$HOME/.rafaelia/orchestrator/artifacts/<run_id>/",
+        "$HOME/.rafaelia/orchestrator/checkpoints/<run_id>/",
+        "$HOME/.rafaelia/orchestrator/quarantine/<job_id>/"
+      ],
+      "limitations": [
+        "Contract states that real adapters are not implemented in every repository.",
+        "Unix socket, replay and hashchain remain TOKEN_VAZIO in this document.",
+        "Contract definition is not evidence that a particular run_id was executed."
+      ]
+    },
+    {
+      "provider": "google_drive",
+      "provider_id": "1cVvVhOUedHtCc2C72rLRLPCjcEH2gTmfw1FkMrrVRlw",
+      "title": "00_CANONE__ORQUESTRADOR_FRONTAL_RAFAELIA__TOPOLOGIA_PRODUTOS_MODULOS_V1",
+      "revision_id": "AIroW37SZiCz5umeVqf8elZK8WmA4oDCpe90TLfOdgkw44aQddoxVuov9cDv_JJhOdijmStAe5jiD7bE5pUs06Pv7nENnecPNLgI5ibn9MU",
+      "evidence_state": "CANONICAL_DRAFT_IMPLEMENTATION_BY_PHASES",
+      "scope": "federated execution topology and conductor contract",
+      "canonical_flow": "IntentIR -> governance gate -> capability resolution -> immutable Job -> Termux/authorized execution -> Syslog/EventBus -> result/evidence/hashes -> catalog/cache/ledger -> R3/checkpoint",
+      "limitations": [
+        "Document explicitly states no end-to-end JobEnvelope execution by Termux at that consolidation date.",
+        "Transport/replay/ResultEnvelope were partially TOKEN_VAZIO."
+      ]
+    },
+    {
+      "provider": "google_drive",
+      "provider_id": "1vm0Uo0Rj_1Do_614Bznn89VRppMpJAKDzS1sXeASLZY",
+      "title": "RAFAELIA_B7_ORCHESTRATION_RECEIPT_2026-08-03",
+      "revision_id": "AIroW34kVhvAg7YdrC0TzQNEy9_p6u3KZ7rMlqM_qDOqSZQsaWchcu_-w1XyrIM7PW7kdhQm2HwwvFPxPm_XxR3QNx1hrtW8Pc_y54l8N9M",
+      "evidence_state": "IMPLEMENTED_LOCAL_HOST_PASS_CI_INFRA_FAIL_PRESTEP_DEVICE_TOKEN_VAZIO",
+      "scope": "B7 orchestration host self-test and federated implementation receipt",
+      "local_result": "PASS bytes=8192 crc32c=caf1abc5 caps=00000009 receipts=4",
+      "limitations": [
+        "Device evidence was TOKEN_VAZIO in this B7 receipt.",
+        "Vectras/Termux/GAIA CI jobs inspected had no steps/logs and do not prove code success or failure."
+      ]
+    }
+  ],
+  "classification": {
+    "physical_hardware_execution_exists": true,
+    "physical_hardware_execution_scope": "RAFAELIA Android/Termux ARM32 measured workload",
+    "orchestration_logging_contract_exists": true,
+    "orchestration_logging_runtime_complete": false,
+    "vectras_termux_provenance_v3_physical_transaction_observed": false,
+    "exact_execution_time_qemu_sha256_observed": false,
+    "guest_boot_for_pr1100_observed": false,
+    "claim_allowed": false
+  },
+  "F_ok": "Drive contains measured physical Android/Termux ARM32 execution with independently revalidated ingestion hashes, plus explicit orchestration/syslog/ledger and nonce-bound guest-boot closure contracts.",
+  "F_gap": "No Drive source opened in this cycle binds the physical Stage7 workload to the exact Vectras PR #1100 -> Termux PR #376 provenance-v3 transaction; execution-time QEMU digest and ordered guest markers for that transaction remain unobserved.",
+  "F_next": "Reuse the existing C08 nonce/ADB collector contract against the merged provenance-v3 producer/consumer, emit the run into the local-first Syslog/JSONL paths, and append the resulting request/receipt/marker hashes without reclassifying unrelated physical hardware runs as this transaction.",
+  "stop_reason": "Drive sources are now located and scope-separated; further promotion requires a transaction-bound physical receipt, not inference from adjacent hardware evidence."
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "rafaelia.evidence-pointer-registry/v1",
-  "registry_id": "evidence:mapa-live-control-plane-20260725",
+  "registry_id": "evidence:mapa-live-control-plane-20260821",
   "claim_allowed": false,
   "pointers": [
     {
@@ -150,6 +150,58 @@
       "state": "VERIFIED_LIMITED",
       "supports": ["PDT-RAFMEDIA-VERTICAL"],
       "limitations": ["This pointer proves the canonical execution record, not complete PNG/WAV decoding."],
+      "claim_allowed": false
+    },
+    {
+      "evidence_id": "EVID-TERMUX-PR376",
+      "provider": "github",
+      "kind": "pull_request",
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "ref": "767c3cccc157689eff4bb7d45e290baf7cd1672b",
+      "pr_number": 376,
+      "pr_state": "MERGED",
+      "path": null,
+      "state": "VERIFIED_LIMITED",
+      "supports": ["MOD-TERMUX-INTEGRATION", "E-TERMUX-VECTRAS", "E-VECTRAS-TERMUX"],
+      "limitations": ["Provider APK/QEMU digests are discovery-time identities; exact execution-time QEMU identity and physical Android transaction remain TOKEN_VAZIO."],
+      "claim_allowed": false
+    },
+    {
+      "evidence_id": "EVID-VECTRAS-TERMUX-PR1100",
+      "provider": "github",
+      "kind": "pull_request",
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "ref": "06d13260649b801b529e151b75da949d163d1170",
+      "pr_number": 1100,
+      "pr_state": "MERGED",
+      "path": null,
+      "state": "VERIFIED_LIMITED",
+      "supports": ["MOD-VECTRAS-RUNTIME", "E-TERMUX-VECTRAS", "E-VECTRAS-TERMUX"],
+      "limitations": ["Merged code does not by itself prove physical Android execution, guest boot or performance."],
+      "claim_allowed": false
+    },
+    {
+      "evidence_id": "EVID-VECTRAS-APK-WIZARD-32332113794",
+      "provider": "github",
+      "kind": "run",
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "ref": "06d13260649b801b529e151b75da949d163d1170",
+      "run_id": 32332113794,
+      "state": "VERIFIED_LIMITED",
+      "supports": ["MOD-VECTRAS-RUNTIME", "E-TERMUX-VECTRAS", "E-VECTRAS-TERMUX"],
+      "limitations": ["Exact-head APK Wizard proves arm64 and arm32+arm64 build lanes; artifact ZIP digest is not an individual APK digest and no physical device transaction is proven."],
+      "claim_allowed": false
+    },
+    {
+      "evidence_id": "EVID-MAPA-VECTRAS-TERMUX-RECEIPT-20260821",
+      "provider": "local_repository",
+      "kind": "file",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "ref": "52aa5571adbe7048e6c00052ee72f6443c496f66",
+      "path": "data/receipts/VECTRAS_TERMUX_PROVENANCE_RECEIPT_20260821.v1.json",
+      "state": "VERIFIED_LIMITED",
+      "supports": ["MOD-TERMUX-INTEGRATION", "MOD-VECTRAS-RUNTIME", "E-TERMUX-VECTRAS", "E-VECTRAS-TERMUX"],
+      "limitations": ["Receipt closes code/CI provenance only; execution-time QEMU digest, physical Android transaction, guest boot and performance remain TOKEN_VAZIO."],
       "claim_allowed": false
     }
   ]
