@@ -1,0 +1,71 @@
+{
+  "schema_version": "rafaelia.omega-federated-cycle/v1",
+  "cycle_id": "OMEGA_FEDERATED_20260820T2147BRT",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "absence_of_evidence != evidence_of_absence",
+    "APPEND_ONLY",
+    "no_silent_regression"
+  ],
+  "authorities": {
+    "Mapa": {"repo":"rafaelmeloreisnovo/Mapa","main_sha":"974a8dc02ef0ebe347028212862b779761d6105a","classic_branch_protection":"DISABLED_OBSERVED"},
+    "RafGitTools": {"repo":"rafaelmeloreisnovo/RafGitTools","main_sha":"062f09986840db24b684ba5affde1fbf192f35c7","delta_since_prior_cycle":"NONE_OBSERVED"},
+    "Termux": {"repo":"rafaelmeloreisnovo/termux-app-rafacodephi","main_sha":"92d80377116c4fcbfd6f572247ad65201b75c5e6","delta_since_prior_cycle":"NONE_OBSERVED"},
+    "RLL": {"repo":"instituto-Rafael/relativity-living-light","main_sha":"0fe2fb410b17ba357ef0c251abac68b1b2af8288","delta_since_prior_cycle":"NONE_OBSERVED","scientific_execution":"TOKEN_VAZIO"}
+  },
+  "closed_temporal_gap": {
+    "gap_id":"PR309_A4C301F_EXACT_HEAD_TERMINAL",
+    "pr":309,
+    "head_sha":"a4c301f808519c0d9e37234a68b6ab6d82d449de",
+    "status":"PRESENT_SCOPED_MIXED_FAIL_CLOSED",
+    "workflow_matrix": {
+      "CI":{"run_id":32429955049,"result":"SUCCESS"},
+      "Branch_Topology":{"run_id":32429954980,"result":"SUCCESS"},
+      "operational_gap_assurance":{"run_id":32429955051,"result":"SUCCESS"},
+      "Promotion_Control":{"run_id":32429954978,"result":"DENIED_EXPECTED_FAIL_CLOSED","blocking_reasons":["PULL_REQUEST_DRAFT_OR_UNKNOWN","INDEPENDENT_APPROVAL_MISSING"],"observed_independent_approvals":0,"required_independent_approvals":1},
+      "Server_Merge_Enforcement":{"run_id":32429955016,"result":"BLOCKED_EXPECTED_FAIL_CLOSED","fixtures":"4/4_PASS","failure_modes":["BRANCH_PROTECTION_DISABLED","PROTECTION_NOT_ENABLED","REQUIRED_STATUS_CHECKS_NOT_ENFORCED","NO_REQUIRED_STATUS_CHECKS_OBSERVED"]}
+    }
+  },
+  "component_lifecycle_ledger": [
+    {"component":"Mapa:PR309-assurance","calendar_age":"EVENT_SCOPED","runtime_hours":"TOKEN_VAZIO","cycles":"TOKEN_VAZIO","starts_stops":"TOKEN_VAZIO","builds":"TOKEN_VAZIO","test_cycles":1,"deployments":"TOKEN_VAZIO","commits_since_validation":0,"dependency_changes":"TOKEN_VAZIO","environment":"GitHub hosted Ubuntu 24.04.4; runner 2.336.0; Node20-target actions forced under Node24","load_stress_proxy":"workflow matrix 5 gates","incident_count":0,"near_miss_count":0,"maintenance_actions":1,"corrective_actions":0,"version":"PR309@a4c301f808519c0d9e37234a68b6ab6d82d449de","evidence_age":"CURRENT_CYCLE","provenance_age":"CURRENT_CYCLE","last_verified_at":"2026-08-20T23:45:30Z","next_review_gate":"REVALIDATE_EXACT_NEW_HEAD","revalidation_criteria":{"type":"EVENT_TRIGGERED","origin":"internal contract + observed workflow semantics"}},
+    {"component":"Mapa:server-side-merge-governance","calendar_age":"TOKEN_VAZIO","runtime_hours":"TOKEN_VAZIO","cycles":"TOKEN_VAZIO","starts_stops":"TOKEN_VAZIO","builds":"TOKEN_VAZIO","test_cycles":1,"deployments":"TOKEN_VAZIO","commits_since_validation":0,"dependency_changes":0,"environment":"GitHub branch protection endpoint + PR gate","load_stress_proxy":"live main probe","incident_count":0,"near_miss_count":1,"maintenance_actions":1,"corrective_actions":0,"version":"server-merge-enforcement-assurance/v1","evidence_age":"CURRENT_CYCLE","provenance_age":"CURRENT_CYCLE","last_verified_at":"2026-08-20T23:45:25Z","next_review_gate":"SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT","revalidation_criteria":{"type":"EVENT_TRIGGERED","origin":"field near-miss + internal contract"}},
+    {"component":"RafGitTools:main","calendar_age":"TOKEN_VAZIO","runtime_hours":"TOKEN_VAZIO","cycles":"TOKEN_VAZIO","starts_stops":"TOKEN_VAZIO","builds":"TOKEN_VAZIO","test_cycles":"TOKEN_VAZIO_CURRENT_MAIN_POSTMERGE","deployments":"TOKEN_VAZIO","commits_since_validation":0,"dependency_changes":"TOKEN_VAZIO","environment":"repository main; classic protection disabled observed","load_stress_proxy":"TOKEN_VAZIO","incident_count":0,"near_miss_count":0,"maintenance_actions":0,"corrective_actions":0,"version":"062f09986840db24b684ba5affde1fbf192f35c7","evidence_age":"STALE_UNTIL_POSTMERGE_RECEIPT","provenance_age":"CURRENT_SOURCE_IDENTITY","last_verified_at":"2026-08-20T21:47:00-03:00","next_review_gate":"RAFGITTOOLS_POSTMERGE_MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT","revalidation_criteria":{"type":"EVENT_TRIGGERED","origin":"internal provenance contract"}},
+    {"component":"Termux:main-runtime-boundary","calendar_age":"TOKEN_VAZIO","runtime_hours":"TOKEN_VAZIO","cycles":"TOKEN_VAZIO","starts_stops":"TOKEN_VAZIO","builds":"TOKEN_VAZIO","test_cycles":"TOKEN_VAZIO_POSTMERGE_MAIN","deployments":"TOKEN_VAZIO","commits_since_validation":0,"dependency_changes":"TOKEN_VAZIO","environment":"repository main; physical device not observed this cycle","load_stress_proxy":"TOKEN_VAZIO","incident_count":0,"near_miss_count":0,"maintenance_actions":0,"corrective_actions":0,"version":"92d80377116c4fcbfd6f572247ad65201b75c5e6","evidence_age":"STALE_UNTIL_POSTMERGE_AND_PHYSICAL_RECEIPT","provenance_age":"CURRENT_SOURCE_IDENTITY","last_verified_at":"2026-08-20T21:47:00-03:00","next_review_gate":"TERMUX_POSTMERGE_MAIN_AND_PHYSICAL_RUNTIME_RECEIPTS","revalidation_criteria":{"type":"CONDITION_BASED","origin":"internal runtime evidence contract"}},
+    {"component":"RLL:scientific-evidence-boundary","calendar_age":"TOKEN_VAZIO","runtime_hours":"TOKEN_VAZIO","cycles":"TOKEN_VAZIO","starts_stops":"TOKEN_VAZIO","builds":"TOKEN_VAZIO","test_cycles":"TOKEN_VAZIO_FRESH_SCIENTIFIC_RUN","deployments":"TOKEN_VAZIO","commits_since_validation":0,"dependency_changes":"TOKEN_VAZIO","environment":"source identity only","load_stress_proxy":"TOKEN_VAZIO","incident_count":0,"near_miss_count":0,"maintenance_actions":0,"corrective_actions":0,"version":"0fe2fb410b17ba357ef0c251abac68b1b2af8288","evidence_age":"TOKEN_VAZIO_FRESH_EXECUTION","provenance_age":"CURRENT_SOURCE_IDENTITY","last_verified_at":"2026-08-20T21:47:00-03:00","next_review_gate":"RLL_DATASET_CONFIG_RUN_OUTPUT_HASH_INDEPENDENT_REPLICATION_RECEIPT","revalidation_criteria":{"type":"CONDITION_BASED","origin":"scientific falsifiability + replication contract"}}
+  ],
+  "impact_radius": {
+    "event":"SERVER_SIDE_MERGE_BARRIER_NOT_ENFORCED_OBSERVED",
+    "Mapa":{"direct_exposure":true,"transmitted_load_or_effect":"merge-policy boundary","hidden_damage_or_hidden_state_possible":true,"inspection_required":true,"revalidation_required":true,"replacement_or_retirement_candidate":false,"evidence_needed":"rulesets+bypass actors+required context+zero-approval blocked merge","false_positive_cost":"merge delay","false_negative_cost":"policy-denied change may reach main"},
+    "RafGitTools":{"direct_exposure":false,"relation":"POTENTIAL_PROPAGATION","inspection_required":true,"revalidation_required":true,"evidence_needed":"producer-specific server controls + postmerge receipt"},
+    "Termux":{"direct_exposure":false,"relation":"POTENTIAL_PROPAGATION","inspection_required":true,"revalidation_required":true,"evidence_needed":"producer-specific server controls + physical runtime receipt"},
+    "RLL":{"direct_exposure":false,"relation":"POTENTIAL_PROPAGATION","inspection_required":true,"revalidation_required":true,"evidence_needed":"publication boundary + independent replication receipt"}
+  },
+  "operational_gaps": [
+    {"gap_id":"SERVER_BINDING_RULESETS_BYPASS_REQUIRED_CONTEXT","source_pointer":"Mapa/main + Server Merge Enforcement run 32429955016","owner_authority":"GitHub server configuration / Mapa governance","affected_routes":["R5","R6","R11","R12"],"observed_at":"2026-08-20T23:45:25Z","provenance":"live branch endpoint + workflow report","evidence_for":["classic protection disabled","required checks enforcement off","4/4 detector fixtures PASS"],"evidence_against":[],"uncertainty_state":"TOKEN_VAZIO_RULESETS_BYPASS_AND_REQUIRED_CONTEXT","urgency":3,"necessity":3,"impact":3,"detectability":2,"recurrence_risk":3,"failure_mode":"policy decision may not bind server merge path","falsifier":"server proves Promotion Control exact context required and zero-approval merge rejected","next_probe":"inspect rulesets/bypass actors/required contexts then synthetic zero-approval merge test","mitigation":"fail-closed; no automatic promotion","closure_gate":"SERVER_SIDE_ZERO_APPROVAL_MERGE_BLOCKED_RECEIPT","review_or_expiry":"EVENT_TRIGGERED","claim_allowed":false,"lineage":"promotion-control-not-binding-to-merge near-miss"},
+    {"gap_id":"RAFGITTOOLS_POSTMERGE_MAIN_RECEIPT","source_pointer":"RafGitTools/main@062f09986840db24b684ba5affde1fbf192f35c7","owner_authority":"RafGitTools producer","affected_routes":["R5","R7","R11"],"observed_at":"2026-08-20T21:47:00-03:00","provenance":"fresh branch identity","evidence_for":["stable source identity"],"evidence_against":[],"uncertainty_state":"TOKEN_VAZIO_POSTMERGE_EXECUTION","urgency":2,"necessity":3,"impact":2,"detectability":2,"recurrence_risk":2,"failure_mode":"PR-head evidence may be mistaken for main execution","falsifier":"postmerge main run/job/step/artifact/hash receipt","next_probe":"resolve main-associated postmerge workflow execution","mitigation":"do not inherit PR-head PASS","closure_gate":"RAFGITTOOLS_POSTMERGE_MAIN_RUN_JOB_STEP_ARTIFACT_HASH_RECEIPT","review_or_expiry":"EVENT_TRIGGERED","claim_allowed":false},
+    {"gap_id":"TERMUX_POSTMERGE_PHYSICAL_RUNTIME","source_pointer":"Termux/main@92d80377116c4fcbfd6f572247ad65201b75c5e6","owner_authority":"Termux producer + physical Android device","affected_routes":["R7","R11","R12"],"observed_at":"2026-08-20T21:47:00-03:00","provenance":"fresh branch identity; no physical observation this cycle","evidence_for":["source identity stable"],"evidence_against":[],"uncertainty_state":"TOKEN_VAZIO_POSTMERGE_AND_PHYSICAL_RUNTIME","urgency":2,"necessity":3,"impact":3,"detectability":2,"recurrence_risk":2,"failure_mode":"content/test evidence may be mistaken for device runtime behavior","falsifier":"APK hash->install->launch->PID/activity->logcat->device/environment receipt","next_probe":"acquire physical execution-time identity and runtime chain","mitigation":"claim_allowed=false; no production-runtime claim","closure_gate":"TERMUX_PHYSICAL_RUNTIME_RECEIPT","review_or_expiry":"CONDITION_BASED","claim_allowed":false},
+    {"gap_id":"RLL_FRESH_RUN_HASH_REPLICATION","source_pointer":"RLL/main@0fe2fb410b17ba357ef0c251abac68b1b2af8288","owner_authority":"RLL scientific producer","affected_routes":["R11","R12"],"observed_at":"2026-08-20T21:47:00-03:00","provenance":"fresh source identity only","evidence_for":["current repository identity resolved"],"evidence_against":[],"uncertainty_state":"TOKEN_VAZIO_FRESH_SCIENTIFIC_EXECUTION_AND_REPLICATION","urgency":2,"necessity":3,"impact":3,"detectability":2,"recurrence_risk":2,"failure_mode":"documentation/source state may be mistaken for scientific evidence","falsifier":"dataset->config->run->outputs->hashes->independent replication receipt","next_probe":"execute or locate fresh scientific run with reproducible inputs and independent replication","mitigation":"claim_allowed=false","closure_gate":"RLL_INDEPENDENT_REPLICATION_RECEIPT","review_or_expiry":"CONDITION_BASED","claim_allowed":false}
+  ],
+  "actions": {
+    "detective":["fresh authority reconciliation","exact PR-head workflow matrix","live server barrier probe"],
+    "preventive":["pinned action SHAs observed","strict fail-closed detector retained"],
+    "precautionary":["claim_allowed=false","no automatic promotion","unknown rulesets/bypass remain typed TOKEN_VAZIO"],
+    "adaptive":["temporal PR gap promoted only for exact tested head"],
+    "corrective":[],
+    "maintenance":["Node20-target action deprecation under forced Node24 recorded as maintenance signal; no causal failure attributed"],
+    "incident_investigation":["promotion denial separated from server-binding hazard; mechanism not blame"],
+    "safety_assurance":["4/4 server detector fixtures + live fail-closed probe"],
+    "anti_recurrence":["POLICY_DECISION != SERVER_ENFORCEMENT","STABLE_SHA != NEW_EXECUTION_EVIDENCE"]
+  },
+  "F_ok":["PR309_a4c301f_exact_head_terminal","CI_SUCCESS","TOPOLOGY_SUCCESS","OPERATIONAL_GAP_ASSURANCE_SUCCESS","PROMOTION_DENIED_EXPECTED","SERVER_DETECTOR_FIXTURES_4_OF_4","fresh_source_identities"],
+  "F_gap":["SERVER_BINDING_RULESETS_BYPASS_REQUIRED_CONTEXT","RAFGITTOOLS_POSTMERGE_MAIN_RECEIPT","TERMUX_POSTMERGE_PHYSICAL_RUNTIME","RLL_FRESH_RUN_HASH_REPLICATION","DRIVE_APPEND_THIS_CYCLE"],
+  "F_esquecido":["Node20-target actions are currently forced under Node24; treat as maintenance/revalidation signal, not automatic defect","stable source identity is provenance, not fresh execution"],
+  "F_next":["fresh Drive compare-and-write append","server rulesets/bypass/required-context inspection","zero-approval blocked-merge receipt","RafGitTools postmerge receipt","Termux physical runtime receipt","RLL independent replication receipt"],
+  "uncertainty_before_after": {
+    "before":"PR309 a4c301f exact-head terminal state was TOKEN_VAZIO",
+    "after":"exact head terminal matrix is PRESENT_SCOPED_MIXED_FAIL_CLOSED; server rulesets/bypass remain typed TOKEN_VAZIO"
+  }
+}
