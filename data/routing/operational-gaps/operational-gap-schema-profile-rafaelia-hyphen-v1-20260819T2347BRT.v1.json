@@ -21,6 +21,7 @@
   "forgetting_risk": 2,
   "failure_mode": "Historical schema profile rafaelia-operational-gap/v1 was omitted from the explicit legacy schema allowlist, causing fail-closed rejection after otherwise valid historical records passed",
   "falsifier": "After adding only the explicit historical profile, the same record remains rejected as unknown schema or a new malformed current-schema record is incorrectly accepted",
+  "next_probe": "Run operational-gap-assurance on the corrective branch and require historical profiles to remain claim_allowed=false/TOKEN_VAZIO_REVALIDATION_REQUIRED while current malformed records still fail",
   "next_verifiable_step": "Run operational-gap-assurance on the corrective branch and require historical profiles to remain claim_allowed=false/TOKEN_VAZIO_REVALIDATION_REQUIRED while current malformed records still fail",
   "mitigation": {"fail_closed":true,"action":"add rafaelia-operational-gap/v1 only to the explicit legacy schema set; no wildcard and no historical rewrite","rollback":"revert the single allowlist entry if terminal validation reveals over-acceptance"},
   "closure_gate": {"criterion":"terminal operational-gap-assurance succeeds with the historical profile explicitly accepted and anti-promotion invariant preserved","evidence_needed":"workflow run id, job id, Validate operational gap records step SUCCESS, and logs showing legacy_accepted=true with claim_allowed=false for the target profile","falsifier":"unknown/new malformed schemas pass or target historical profile remains rejected","result":"TOKEN_VAZIO"},
