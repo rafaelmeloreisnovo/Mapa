@@ -1,0 +1,43 @@
+{
+  "schema": "rafaelia.federated_sustainment_correction/v1",
+  "predecessor": "data/routing/cycles/omega-federated-sustainment-20260822T0456BRT.correction-002.v1.json",
+  "claim_allowed": false,
+  "append_only": true,
+  "gap_id": "RLL-G4-G6-POST-HANDOFF-003",
+  "source_pointer": "instituto-Rafael/relativity-living-light#763",
+  "head": "231ffdd756447ae9c40fa975675a1744f31d5378",
+  "run_id": 32562686477,
+  "job_id": 97006611999,
+  "artifact": {
+    "id": 9473250027,
+    "name": "python-tests-32562686477",
+    "digest": "sha256:4d947c9d1322b8312e03a680c1f3101d7ff7f654415d3767ccaac67fbbdd7c13"
+  },
+  "result": {
+    "tests_passed": 1288,
+    "tests_failed": 1,
+    "fixture_isolation_falsifier": "SATISFIED_SCOPED",
+    "repository_state_pollution_failures": "CLOSED_SCOPED",
+    "remaining_primary_boundary": "G4 report contains non-finite float (inf) and strict JSON-compatible evidence remains fail-closed"
+  },
+  "correction_of_prior_state": {
+    "prior_tests_passed": 1285,
+    "prior_tests_failed": 4,
+    "prior_run_id": 32562521311,
+    "meaning": "The three secondary repository-state expectation failures recorded by correction-002 disappeared on the exact final producer head; the G4 non-finite boundary remains."
+  },
+  "interpretation": [
+    "The fixture-isolation prediction recorded in correction-002 was tested and satisfied on the final producer head.",
+    "The remaining failure is no longer confounded by the three repository-state pollution failures.",
+    "One failing G4 non-finite evidence path keeps the scientific/runtime promotion gate closed.",
+    "This correction resolves temporal evidence drift without erasing correction-002."
+  ],
+  "falsifier": "Identify the exact model/seed/path producing inf, make the blocked receipt strictly JSON-compatible without coercing the non-finite observation into a PASS, and rerun the exact-head Python gate; any remaining or new failure becomes the next scoped boundary.",
+  "next_probe": "Reproduce the G4 non-finite path on head 231ffdd756447ae9c40fa975675a1744f31d5378 with finite-domain diagnostics and a fail-closed strict receipt.",
+  "new_rules": [
+    "PREDICTED_FIXTURE_ISOLATION_MUST_BE_REVALIDATED_ON_FINAL_HEAD",
+    "SCOPED_FALSIFIER_SATISFIED != GLOBAL_GATE_CLOSED",
+    "NONFINITE_RESULT_MUST_REMAIN_EXPLICIT_AND_FAIL_CLOSED",
+    "CORRECTION_SUPERSEDES_STATE_WITHOUT_ERASING_HISTORY"
+  ]
+}
