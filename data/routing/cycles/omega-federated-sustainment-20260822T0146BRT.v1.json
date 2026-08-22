@@ -1,0 +1,136 @@
+{
+  "schema": "rafaelia.federated-sustainment-cycle/v1",
+  "observed_at": "2026-08-22T04:46:12Z",
+  "predecessor": {
+    "mapa_main_sha": "749604de237a520ae56b49017c3703d49a0b53cf",
+    "predecessor_receipt_merge": "PR#344",
+    "history_policy": "APPEND_ONLY"
+  },
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "absence_of_evidence != evidence_of_absence",
+    "claim_allowed=false_until_closure_gate"
+  ],
+  "delta": {
+    "mapa": {
+      "pr341": "MERGED_CORRECTIVE_SCOPE_AND_FIFTH_GATE",
+      "pr344": "MERGED_APPEND_ONLY_CUSTODY",
+      "provider_branch_protected": false,
+      "required_status_enforcement": "off",
+      "provider_barrier": "OPEN"
+    },
+    "termux_packages": {
+      "pr96": "MERGED_PATCH_PRESENT",
+      "head_sha": "764438b9575377fe5d299eb5f30d9151fd684d60",
+      "post_merge_run_id": 32550305299,
+      "source_build_state": "IN_PROGRESS_AT_OBSERVATION",
+      "bootstrap_closure": "TOKEN_VAZIO",
+      "physical_android": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "revalidation_rule": {
+        "type": "EVENT_TRIGGERED",
+        "trigger": "historical_source_disappears_or_dependency_source_changes",
+        "origin": "FIELD_EVIDENCE"
+      }
+    },
+    "rafgittools": {
+      "pr374": "MERGED_PASS_SCOPED",
+      "p0_after": 0,
+      "p1_after": 69,
+      "pr_validation_rerun": "PASS",
+      "app_error_allowlist_line_sha256": "34135216903fefdd8e01c79cee204d216b1b22443971373b029b19e1188bf816",
+      "claim_allowed": false,
+      "revalidation_rule": {
+        "type": "EVENT_TRIGGERED",
+        "trigger": "hash_bound_source_line_or_scanner_contract_changes",
+        "origin": "INTERNAL_CONTRACT"
+      }
+    },
+    "vectras": {
+      "coherence_claim_boundary_pr1104": "MERGED_PASS_SCOPED",
+      "material_provenance_pr1100": "MERGED_SCOPED",
+      "execution_time_qemu_identity": "TOKEN_VAZIO",
+      "physical_android_e2e": "TOKEN_VAZIO",
+      "claim_allowed": false
+    },
+    "rll": {
+      "authority_repo": "instituto-Rafael/relativity-living-light",
+      "g2_full_covariance": "CLOSED_BY_EVIDENCE",
+      "g3_dataset_compatibility": "PASS_LIMITED_COMPATIBILITY_BRANCH",
+      "g4_pantheon_only": "PASS_LIMITED_NEGATIVE_RESULT_PRESERVED",
+      "g6_inference": "NOT_PROMOTED_BY_THIS_CYCLE",
+      "independent_replication": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "evidence_source": "PR#760"
+    },
+    "drive": {
+      "method_anchor": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "method_anchor_state": "CANONICAL_DRAFT",
+      "method_anchor_modified_at": "2026-08-12T17:02:15Z",
+      "producer_drift_revalidation": "REQUIRED",
+      "drive_write_this_cycle": "TOKEN_VAZIO_REVISION_CONTROL_NOT_VERIFIED"
+    }
+  },
+  "impact_radius": [
+    {
+      "event": "TERMUX_HISTORICAL_APT_SOURCE_DISAPPEARANCE",
+      "direct_exposure": ["APT source acquisition", "ARM32 source build"],
+      "potential_propagation": ["APT materialization", "APK chain", "device runtime"],
+      "physical_damage_demonstrated": false,
+      "inspection_required": true,
+      "revalidation_required": true
+    },
+    {
+      "event": "RAFGITTOOLS_METADATA_FALSE_RED_CLOSED",
+      "direct_exposure": ["PR metadata validation"],
+      "not_affected_by_evidence": ["build", "unit tests", "lint", "source-gap P0 classification"],
+      "anti_recurrence": "semantic title vocabulary must be rerun after metadata correction"
+    }
+  ],
+  "lifecycle": {
+    "unmeasured_fields_policy": "TOKEN_VAZIO_NEVER_ZERO",
+    "mapa_provider": {"state": "BLOCKED", "revalidation_type": "CONDITION_BASED", "next_gate": "Administration write binding then zero-approval rejection probe"},
+    "termux_arm32": {"state": "REVALIDATION_IN_PROGRESS", "next_gate": "exact post-merge source-build completion and first terminal mechanism"},
+    "rafgittools_p0": {"state": "PASS_SCOPED", "next_gate": "source/scanner hash-triggered revalidation"},
+    "rafgittools_p1": {"state": "OPEN_69", "next_gate": "highest-impact bounded path-level before-after probe"},
+    "rll_science": {"state": "PARTIAL_EVIDENCED", "next_gate": "G6 observable inference then independent replication route"},
+    "drive_method_anchor": {"state": "REVALIDATION_REQUIRED", "next_gate": "revision-aware append/reconciliation"}
+  },
+  "actions": {
+    "detective": ["fresh provider observation", "exact workflow state observation", "RLL gate reconciliation", "Drive anchor freshness check"],
+    "preventive": ["hash-bound source-gap exception classification", "historical source pinning preserved"],
+    "precautionary": ["provider/device/publication remain fail-closed"],
+    "adaptive": ["RLL G2/G3 state supersedes older blocked snapshot without deleting predecessor"],
+    "corrective": ["PR341 and PR96 are now merged predecessors under revalidation"],
+    "maintenance": ["Drive method anchor marked for producer-drift reconciliation"],
+    "incident_investigation": ["Termux source-disappearance chain preserved as field evidence"],
+    "safety_assurance": ["merged state does not promote unfinished exact-head execution"],
+    "anti_recurrence": ["PINNED_VERSION != LIVE_SOURCE_AVAILABILITY", "CI_RED != CODE_FAILURE"]
+  },
+  "f_ok": [
+    "Mapa PR341 merged with fail-closed scope and fifth lineage gate",
+    "RafGitTools PR374 merged with P0=0 scoped and metadata rerun PASS",
+    "RLL G2 full covariance and G3 compatibility reconciled as evidence-backed",
+    "RLL G4 negative Pantheon-only result preserved",
+    "provider non-enforcement freshly reobserved"
+  ],
+  "f_gap": [
+    "Termux PR96 post-merge source-build completion",
+    "RafGitTools 69 P1 TOKEN_VAZIO source findings",
+    "Vectras execution-time QEMU identity and physical E2E",
+    "Mapa provider server-side enforcement",
+    "Drive revision-aware append",
+    "RLL G6 observable inference and independent replication",
+    "Papers canonical authority binding"
+  ],
+  "f_next": [
+    "Observe Termux run 32550305299 to completion and bind only the first terminal mechanism or PASS",
+    "Select the highest-impact RafGitTools P1 group and require finding_set_after < finding_set_before without new P0",
+    "Obtain provider Administration write binding before any zero-approval merge probe",
+    "Acquire Vectras execution-time QEMU SHA256 to PID/exit receipt on physical route when available",
+    "Advance RLL only from G6 receipt to robustness/replication gates",
+    "Perform Drive append only with revision-safe write semantics"
+  ],
+  "claim_allowed": false
+}

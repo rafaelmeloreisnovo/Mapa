@@ -1,0 +1,43 @@
+{
+  "schema": "rafaelia.federated-sustainment-correction/v1",
+  "observed_at": "2026-08-22T04:53:00Z",
+  "predecessor_path": "data/routing/cycles/omega-federated-sustainment-20260822T0146BRT.v1.json",
+  "correction_id": "PAPERS_AUTHORITY_001",
+  "before": {
+    "papers_canonical_authority": "TOKEN_VAZIO_AUTHORITY",
+    "reason": "repository lookup was previously inconclusive"
+  },
+  "new_evidence": {
+    "repository": "rafaelmeloreisnovo/papers",
+    "visibility": "private",
+    "default_branch": "main",
+    "observed_permission": "admin",
+    "recent_evidence": [
+      {
+        "pr": 55,
+        "state": "MERGED",
+        "role": "research note + claims/falsification ledger",
+        "claim_allowed": false,
+        "next_gate": "deterministic RafPolimata validation + receipt/Drive binding"
+      },
+      {
+        "pr": 54,
+        "state": "MERGED",
+        "role": "omega-7D derivative/antiderivative gap-priority documentation",
+        "claim_allowed": false
+      }
+    ]
+  },
+  "after": {
+    "papers_canonical_repo_binding": "EVIDENCED_SCOPED",
+    "publication_authority": "NOT_PROMOTED",
+    "publication_ready": false,
+    "claim_allowed": false
+  },
+  "falsifier": "a newer Mapa/Drive authority record explicitly supersedes this repository binding or repository access/ownership changes",
+  "impact": {
+    "resolved_gap": "Papers canonical repository identity",
+    "still_open": ["paper-level claim gates", "RafPolimata deterministic validation", "receipt/Drive binding", "scientific publication authorization"]
+  },
+  "history_policy": "APPEND_ONLY"
+}
