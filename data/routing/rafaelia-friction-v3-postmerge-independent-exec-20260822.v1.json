@@ -1,0 +1,121 @@
+{
+  "schema": "rafaelia.mapa.friction-v3-postmerge-independent-exec.v1",
+  "date": "2026-08-22",
+  "state": "ROUTED_POSTMERGE_PARTIAL_VERIFIED",
+  "claim_allowed": false,
+  "authority": {
+    "mapa": "routing/state/gaps/receipts",
+    "rafgittools": "friction/uncertainty/rights/ethics/evidence governance",
+    "gaia_phi": "producer implementation and producer-side execution evidence",
+    "drive": "longitudinal/editorial reconstruction"
+  },
+  "merged_anchors": {
+    "rafgittools": {
+      "pr": 377,
+      "main_commit": "beac247565cba4f1dac9125f1a1cacb0186c981f",
+      "merge_parent_head": "4453fe723473110b21ee7d6732b43b9da844d9cd"
+    },
+    "mapa": {
+      "pr": 362,
+      "main_commit": "8cb7908222132bf01645c39db6fd0fb952176099",
+      "merge_parent_head": "642a50f831cb3a2407620b842f67098dcbac6549"
+    },
+    "gaia_phi": {
+      "pr": 99,
+      "main_commit": "e5b62377ac9e7ee3e013ce68a4846538c2695604",
+      "merge_parent_head": "9d5aeaede43d2c9cb180ff674a6083b3752a135b"
+    }
+  },
+  "execution_delta": {
+    "source": "GAIA_phi:data/evidence/cognitive-symbiotic-independent-executor-20260822.v1.json",
+    "producer_receipt_pr": 100,
+    "producer_receipt_head": "ee1496e97a3cd7c2909ffe3b08ee126c94912b63",
+    "source_blob": "1bb228392c51d3bfd0d85ae8e6ce92c40fe28dd1",
+    "source_identity": "PASS",
+    "canonical_tests": "9/9 PASS",
+    "supplemental_checks": "16/16 PASS",
+    "torch": "2.10.0+cpu",
+    "python": "3.13.5",
+    "output_digest_sha256": "8940b9bfd5fa68539e8ec6af72056d6ab66a223f6523fbdba20c9e8a90800ec9",
+    "state": "INDEPENDENT_EXECUTION_PASS",
+    "boundary": "independent execution != GitHub Actions CI != scientific claim"
+  },
+  "governance_delta": {
+    "source": "RafGitTools:data/evidence/github/friction-v3-postmerge-main-and-independent-exec-20260822.v1.json",
+    "receipt_pr": 378,
+    "receipt_head": "e21a4329ef11d88124b4d1fc28c00577f06b6587",
+    "premerge_v3_run": 32574481174,
+    "premerge_artifact_digest": "sha256:e2992a540066eb8a58e7e5651bf56e59525a00ae073c6c88d4950e95f5a21f32",
+    "postmerge_content_identity": "VERIFIED_SAMPLED_GOVERNANCE_ARTIFACTS",
+    "postmerge_runtime_ci": "TOKEN_VAZIO_OBSERVABILITY"
+  },
+  "provider_gap": {
+    "id": "TV-V3-PROVIDER-CLASS-001",
+    "state": "TOKEN_VAZIO_PROVIDER_EXECUTION",
+    "zero_step_observations": 3,
+    "root_cause": "TOKEN_VAZIO",
+    "independent_execution_effect": "reduces source-executability uncertainty without closing provider gap"
+  },
+  "enforcement_gap": {
+    "state": "TOKEN_VAZIO_SERVER_ENFORCEMENT",
+    "observed": {
+      "RafGitTools_main_protected": false,
+      "Mapa_main_protected": false,
+      "GAIA_phi_main_protected": false
+    },
+    "boundary": "merge success does not imply protected-branch enforcement"
+  },
+  "friction_baseline": {
+    "version": 2,
+    "scope_id": "FRICTION_SCOPE:GAIA_COMPLEX_FEEDBACK_RAFGITTOOLS_V3_PROVIDER_PROBE:20260822",
+    "unresolved_gap_count": 5,
+    "unbound_license_unit_count": 2,
+    "provider_pre_step_failure_count": 3,
+    "untyped_relation_count": 0,
+    "missing_rollback_count": 0,
+    "missing_provenance_count": 0,
+    "manual_rework_count": "TOKEN_VAZIO_UNMEASURED",
+    "aggregate": "TOKEN_VAZIO_SCORE"
+  },
+  "relations": [
+    {
+      "from": "GAIA_phi:cognitive_symbiotic.py@1bb228...",
+      "relation_type": "EXECUTES_INDEPENDENTLY",
+      "to": "INDEPENDENT_ASSISTANT_CONTAINER",
+      "evidence_effect": "EVIDENCES_BOUNDED",
+      "boundary": "not GitHub Actions CI"
+    },
+    {
+      "from": "RafGitTools:PR377",
+      "relation_type": "MERGED_INTO",
+      "to": "RafGitTools:main@beac247...",
+      "evidence_effect": "ROUTING_ONLY",
+      "boundary": "merged != postmerge runtime verified"
+    },
+    {
+      "from": "Mapa:PR362",
+      "relation_type": "MERGED_INTO",
+      "to": "Mapa:main@8cb790...",
+      "evidence_effect": "ROUTING_ONLY",
+      "boundary": "route merge only"
+    },
+    {
+      "from": "GAIA_phi:PR99",
+      "relation_type": "MERGED_INTO",
+      "to": "GAIA_phi:main@e5b623...",
+      "evidence_effect": "ROUTING_ONLY",
+      "boundary": "provider probe merge does not close provider root cause"
+    }
+  ],
+  "anti_regression": [
+    "independent PASS != provider PASS",
+    "merged != postmerge runtime verified",
+    "routing != implementation",
+    "branch protection false remains visible",
+    "TOKEN_VAZIO provider/license/manual-rework/B7-T2 gaps are preserved",
+    "claim_allowed remains false"
+  ],
+  "F_ok": "three prior PRs merged; exact GAIA source blob independently executes and passes canonical/supplemental gates; governance receipt is routed",
+  "F_gap": "GitHub provider shell-start and server-side branch enforcement remain open; two license units, manual-rework metric, global relation coverage and B7_TO_T2 remain unresolved",
+  "F_next": "persist Drive longitudinal receipt; obtain provider shell-start evidence and branch enforcement evidence independently; only then append successor closure states"
+}
