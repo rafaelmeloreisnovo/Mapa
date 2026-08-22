@@ -143,11 +143,19 @@
       "rafgittools",
       "llamarafaelia"
     ],
+    "dependency_edges": [
+      ["termux-packages", "termux-app-rafacodephi"],
+      ["termux-app-rafacodephi", "rafpolimata"],
+      ["rafpolimata", "mapa"],
+      ["mapa", "rafgittools"],
+      ["rafgittools", "llamarafaelia"]
+    ],
     "validation_gates": [
       "lineage_chain_closure",
       "authority_non_overlap",
       "dedup_consistency",
-      "independence_proof"
+      "independence_proof",
+      "dependency_graph_acyclic"
     ]
   },
   "tv_independence_closure": {
