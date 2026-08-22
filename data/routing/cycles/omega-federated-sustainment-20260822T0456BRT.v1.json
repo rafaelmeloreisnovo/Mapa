@@ -1,0 +1,184 @@
+{
+  "schema": "rafaelia.federated-omega-sustainment/v1",
+  "observed_at": "2026-08-22T04:56:49-03:00",
+  "predecessor": {
+    "mapa_main": "5bca366a215b5983d61a8c79cf30570f1a57b76f",
+    "predecessor_receipt": "data/routing/cycles/omega-federated-sustainment-20260822T0254BRT.correction-002.v1.json"
+  },
+  "invariants": {
+    "vision_artifact_execution_evidence_claim_are_distinct": true,
+    "token_vazio_is_not_zero": true,
+    "claim_allowed_default": false,
+    "append_only": true
+  },
+  "delta": {
+    "termux_packages": {
+      "pr": 97,
+      "old_head": "16cf60cf49677398e876d3c4ab0f2ae95d1a3007",
+      "failure_run": 32555998529,
+      "failure_job": 96990081944,
+      "failure_artifact_id": 9472162937,
+      "failure_artifact_digest": "sha256:5ff44b60364d2f06afe6c9ccd25c73eab95e072c762a214af2cf4312f9819184",
+      "failure_status_exit": 141,
+      "before": "writable Android SDK provisioning reached platform extraction then source-build exited 141 before Gradle resumed",
+      "mechanism": "yes|sdkmanager under pipefail can report producer-side SIGPIPE 141 after sdkmanager succeeds",
+      "corrective_head": "035aeb6a67cc39b468497d8fdc6ca143dd949c83",
+      "correction": "preserve sdkmanager consumer exit status and ignore expected yes-side SIGPIPE only when sdkmanager exited 0",
+      "pr_merged": true,
+      "rerun": {
+        "source_build_run": 32560563326,
+        "apt_run": 32560563308,
+        "packages_run": 32560563282,
+        "hardening_run": 32560563285,
+        "packages": "PASS",
+        "hardening": "PASS",
+        "source_build": "IN_PROGRESS",
+        "apt": "IN_PROGRESS"
+      },
+      "physical_android": "TOKEN_VAZIO",
+      "claim_allowed_release": false,
+      "revalidation_rule": {
+        "type": "EVENT_TRIGGERED",
+        "origin": "FIELD_EVIDENCE",
+        "trigger": "pipeline producer SIGPIPE or SDK provisioning semantics change"
+      }
+    },
+    "papers": {
+      "pr": 56,
+      "head": "a5061303c1e254e84dfac9cc791bb380dc267d3b",
+      "merge_commit": "50d58adcfdb90dc854cf590d0328ac937b324cb0",
+      "ci_run": 32556479177,
+      "ci": "FAIL",
+      "failed_jobs": [
+        "Validate Session Packet Chain",
+        "Validate Documentation",
+        "Build C Sources (x86_64)"
+      ],
+      "observable_steps": 0,
+      "main_protected": false,
+      "required_status_enforcement": "off",
+      "near_miss": "PR merged while exact-head CI remained red with no observable job steps",
+      "code_failure": "NOT_DEMONSTRATED",
+      "documentation_failure": "NOT_DEMONSTRATED",
+      "provider_or_runner_preexecution_mechanism": "TOKEN_VAZIO",
+      "publication_ready": false,
+      "claim_allowed": false,
+      "anti_recurrence": [
+        "CI_RED_WITHOUT_STEPS != CODE_FAILURE",
+        "MERGED != GATE_CLOSED",
+        "UNPROTECTED_MAIN_CAN_BYPASS_RED_CI"
+      ]
+    },
+    "mapa_provider": {
+      "main": "5bca366a215b5983d61a8c79cf30570f1a57b76f",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_enforcement": "off",
+      "claim_allowed": false,
+      "closure_gate": "Administration write binding -> reobserve -> zero-approval probe -> MERGE_REJECTED && main_SHA_UNCHANGED"
+    },
+    "rafgittools": {
+      "p0": 0,
+      "p1": 69,
+      "p0_state": "PASS_SCOPED",
+      "p1_state": "OPEN",
+      "latest_governance_pr": 375,
+      "claim_allowed_broad": false,
+      "next_probe": "select highest-impact bounded P1 group and require finding_set_after < finding_set_before with new_P0=0"
+    },
+    "drive": {
+      "method_anchor_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "method_anchor_state": "CANONICAL_DRAFT",
+      "method_anchor_claim_allowed": false,
+      "master_navigation_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "master_navigation_updated_at": "2026-08-22T03:55:34.006Z",
+      "drive_write_this_cycle": "TOKEN_VAZIO_REVISION_SAFE_WRITE_NOT_EXECUTED"
+    }
+  },
+  "impact_radius": [
+    {
+      "event": "TERMUX_SDKMANAGER_PIPEFAIL_141",
+      "direct_exposure": ["termux-am source build", "RAFCODEPHI bootstrap"],
+      "potential_propagation": ["development APT", "APK materialization", "physical runtime"],
+      "physical_damage_demonstrated": false,
+      "inspection_required": true,
+      "revalidation_required": true
+    },
+    {
+      "event": "PAPERS_RED_CI_MERGED_ON_UNPROTECTED_MAIN",
+      "direct_exposure": ["merge readiness", "automated assurance", "publication routing"],
+      "potential_propagation": ["claim/evidence binding"],
+      "code_or_content_fault_demonstrated": false,
+      "inspection_required": true,
+      "revalidation_required": true,
+      "false_positive_cost": "modifying healthy research/code to cure a pre-execution provider failure",
+      "false_negative_cost": "treating red CI as irrelevant and allowing unverified promotion"
+    }
+  ],
+  "component_lifecycle_ledger": [
+    {
+      "component": "termux-am SDK closure",
+      "state": "REVALIDATION_IN_PROGRESS",
+      "builds": 2,
+      "test_cycles": "TOKEN_VAZIO_EXACT_TOTAL",
+      "runtime_hours": "TOKEN_VAZIO",
+      "incident_count": 1,
+      "near_miss_count": 1,
+      "maintenance_actions": 1,
+      "corrective_actions": 1,
+      "last_verified_at": "2026-08-22T04:56:49-03:00",
+      "next_review_gate": "source-build run 32560563326"
+    },
+    {
+      "component": "papers main merge assurance",
+      "state": "REVALIDATION_REQUIRED",
+      "runtime_hours": "TOKEN_VAZIO",
+      "incident_count": 0,
+      "near_miss_count": 1,
+      "last_verified_at": "2026-08-22T04:56:49-03:00",
+      "next_review_gate": "provider/runner pre-execution diagnosis plus enforceable required checks"
+    },
+    {
+      "component": "Mapa provider barrier",
+      "state": "BLOCKED",
+      "runtime_hours": "TOKEN_VAZIO",
+      "last_verified_at": "2026-08-22T04:56:49-03:00",
+      "next_review_gate": "Administration write binding"
+    }
+  ],
+  "actions": {
+    "detective": ["inspected Termux failure artifact and exit status", "reobserved papers exact-head CI and branch protection", "reobserved Mapa provider", "reconciled Drive anchors"],
+    "preventive": ["preserve sdkmanager consumer exit as fail-closed signal", "require provider-side required checks before publication-sensitive promotion"],
+    "precautionary": ["physical Android remains TOKEN_VAZIO", "papers publication remains blocked", "provider claims remain false"],
+    "adaptive": ["Termux correction changed from SDK availability to pipeline status semantics without rewriting predecessor"],
+    "corrective": ["sdkmanager SIGPIPE handling incorporated in Termux PR97 head 035aeb6a..."],
+    "maintenance": ["papers merge-assurance surface requires server-side protection review", "Drive method anchor remains revalidation-scoped against newer producer state"],
+    "incident_investigation": ["facts preserve exit 141, artifact digest, no post-sdkmanager Gradle evidence", "papers CI red remains pre-execution with zero steps"],
+    "safety_assurance": ["new Termux exact-head rerun active", "no zero-approval merge probe executed while provider barrier absent"],
+    "anti_recurrence": ["PIPELINE_EXIT_141 != SDKMANAGER_FAILURE when consumer exit is 0", "MERGED != CI_GATE_CLOSED", "CI_RED_WITHOUT_STEPS != CODE_FAILURE"]
+  },
+  "F_ok": [
+    "Termux #97 first failure narrowed from generic source-build failure to pipeline SIGPIPE semantics with artifact hash and exit 141",
+    "bounded corrective semantics incorporated and new exact-head rerun active",
+    "papers #56 merge-assurance near-miss demonstrated: red CI plus unprotected main",
+    "Mapa and Drive authorities reanchored"
+  ],
+  "F_gap": [
+    "Termux source-build rerun 32560563326 not yet complete",
+    "Termux development APT rerun 32560563308 not yet complete",
+    "physical Android receipt absent",
+    "papers provider/runner zero-step failure mechanism unresolved",
+    "papers main lacks enforceable required checks",
+    "Mapa main lacks enforceable required checks",
+    "RafGitTools P1=69 remains open",
+    "Drive revision-safe append not executed"
+  ],
+  "F_next": [
+    "observe Termux run 32560563326; if red, bind only the next first terminal mechanism",
+    "diagnose papers provider/runner pre-execution surface before changing research code",
+    "obtain provider administration binding before any destructive zero-approval merge probe",
+    "select one bounded RafGitTools P1 group by impact/unblocking and run scanner before-after",
+    "capture Vectras execution-time QEMU identity when a real transaction surface is available"
+  ],
+  "omega_successor_state": "SUSTAINMENT_ADVANCED_WITH_OPEN_RUNTIME_AND_PROVIDER_GATES"
+}
