@@ -1,0 +1,125 @@
+{
+  "schema": "RAFAELIA_FORMULA_EXTRACTION_SHARD04_MATEMATICA_V1",
+  "generated_at": "2026-08-22T01:34:00-03:00",
+  "cycle_id": "OMEGA-MATH-CALC-MEMORY-INGEST-SHARD04-20260822",
+  "claim_allowed": false,
+  "mode": "APPEND_ONLY_PROVIDER_BOUND_EXTRACTION",
+  "scope": {
+    "repository_control": "rafaelmeloreisnovo/Mapa",
+    "source_repository": "rafaelmeloreisnovo/Matem-tica-",
+    "tree_sha": "e7a90eb64e02befa2a24708dfd24faa4c2381af5",
+    "source_paths_in_scope": 12,
+    "unique_source_blobs": 11,
+    "normalization": "Unicode NFC + trim only; no algebraic or semantic canonicalization",
+    "extraction_boundary": "Explicit equation/relation/set/tuple/map/inequality/limit/recurrence or formula-like symbolic expression materially present in the inspected source. Prose-only analogies, percentages, publication estimates and unlabeled numeric prose are excluded.",
+    "record_store": {
+      "provider": "Google Drive",
+      "spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+      "target_sheet": "SHARD04_RAW",
+      "role": "full expression-level rows with source path, blob, span, exact digest, type and epistemic state"
+    }
+  },
+  "source_alias_groups": [
+    {
+      "blob_sha1": "976967682b6c242c6ff36745fcbd41c628b86abc",
+      "paths": ["Paper2.md", "Paper3.md"],
+      "policy": "extract expressions once from Paper2.md and preserve Paper3.md as an alias path, not independent evidence"
+    }
+  ],
+  "before": {
+    "remaining_candidate_paths_after_shard03": 16,
+    "matematica_candidates_targeted_by_prior_F_next": 12,
+    "global_formula_total": "TOKEN_VAZIO",
+    "semantic_dedup": "NOT_RUN"
+  },
+  "after": {
+    "source_paths_inspected": 12,
+    "unique_source_blobs": 11,
+    "expression_occurrences": 208,
+    "unique_exact_sha256": 201,
+    "exact_duplicate_groups": 6,
+    "exact_duplicate_extra_occurrences": 7,
+    "semantic_dedup": "NOT_RUN",
+    "global_formula_total": "TOKEN_VAZIO"
+  },
+  "expression_counts_by_canonical_path": {
+    "Paper2.md": 11,
+    "Paper3.md": 0,
+    "PrePaper/INICIO_70.md": 18,
+    "papers/2026-05-23_adendo_sete_possibilidades_0001123.md": 24,
+    "papers/2026-05-23_teorema_forma_normal_123.md": 27,
+    "papers/2026-07-16_codec_semantico_parabolico.md": 9,
+    "papers/2026-07-17_antiderivada_vazio_fluxo_toroidal.md": 25,
+    "papers/2026-07-17_omega_cube42_invariante_geometrica.md": 17,
+    "papers/2026-07-17_zipraf_ao42_multiview_formalization.md": 16,
+    "papers/2026-08-08_auditoria_crossrepo_matematica_cosmos_teoremas.md": 39,
+    "papers/2026-08-12_representacao_multiresolucao_reconstrutivel.md": 19,
+    "data/registries/MATHEMATICS_PAPERS_THEOREMS_REGISTRY.json": 3
+  },
+  "exact_duplicate_groups": [
+    {
+      "expression": "D_H ≈ 1.347",
+      "sha256": "164377b2d6ae90a27c9128cccf3c463055373316d527f36e1455276d3fa45378",
+      "occurrences": ["INICIO_70 §1.1", "INICIO_70 §4.3", "INICIO_70 §S12"]
+    },
+    {
+      "expression": "F* = 23.158",
+      "sha256": "92a72d33d916f558131789a98eb1b48e0ced046706bb0f22c69fdcde6cfa00ee",
+      "occurrences": ["INICIO_70 §1.2", "INICIO_70 §S11"]
+    },
+    {
+      "expression": "q = sqrt(3)/2",
+      "sha256": "531e296be177d6e4680b11072739d2962489b90c30b082717dadb272dee40382",
+      "occurrences": ["adendo §6", "teorema forma normal §7"]
+    },
+    {
+      "expression": "id(e,p)=7e+p",
+      "sha256": "e554a118a7b20bfc4bffc53d9e0f637bdc720cccdcdf65951ce7ef6c42a31c92",
+      "occurrences": ["omega-cube42 §2", "zipraf-ao42 §T1"]
+    },
+    {
+      "expression": "q=√3/2",
+      "sha256": "4ab50eaef66927bb82d1c74c6d2c0db8adda7e6e48d201b3a06e6b9c7a71c85e",
+      "occurrences": ["auditoria cross-repo §2.1", "multirresolução §1"]
+    },
+    {
+      "expression": "q^2=3/4",
+      "sha256": "fcf463f08f8604bdb22dea0f80087a1be34e3c3d3427f5c480cbb70688b08447",
+      "occurrences": ["auditoria cross-repo §2.1", "multirresolução §2"]
+    }
+  ],
+  "epistemic_notes": [
+    "Historical expressions such as D_H≈1.347 and F*=23.158 are ingested as source occurrences, not silently promoted to current accepted results.",
+    "The 2026-08-08 cross-repo audit contains correction/counterexample expressions; explicit CORRECTS/REFUTES/SUPERSEDES edge materialization remains a subsequent relation-index step.",
+    "The antiderivative paper contributes formal/proved discrete identities; physical toroidal claims remain blocked.",
+    "Formula registry records preserve concept/implementation/execution/evidence/physical-claim separation and TOKEN_VAZIO for uncoupled vectors."
+  ],
+  "remaining_after_this_shard": {
+    "provider_bound_candidate_paths": 4,
+    "source_repository": "rafaelmeloreisnovo/teoremas",
+    "paths": [
+      "TEORIA_ATRACTOR_42.md",
+      "docs/rafaelia/350-formulas-mvps.md",
+      "docs/rafaelia/biosincronia.md",
+      "docs/rafaelia/domo-rafaelia-402-expressoes.md"
+    ],
+    "state": "TOKEN_VAZIO_EXPRESSION_LEVEL_PENDING_SHARD05"
+  },
+  "invariants": [
+    "candidate source path != unique formula",
+    "same Git blob at multiple paths != independent evidence",
+    "exact digest dedup != semantic dedup",
+    "historical formula != current accepted resolution",
+    "formula != implementation != execution != evidence != claim != novelty",
+    "claim_allowed=false"
+  ],
+  "F_ok": "The 12 provider-bound Matem-tica- candidate paths from the prior SHARD03 F_next were inspected at frozen tree provenance; one exact blob alias pair was preserved; 208 explicit expression occurrences were ingested with 201 exact NFC+trim SHA-256 identities and 6 exact duplicate groups.",
+  "F_gap": [
+    "4 teoremas candidate paths remain expression-level pending",
+    "semantic/algebraic equivalence dedup not run",
+    "global unique formula total remains TOKEN_VAZIO",
+    "typed calculus overlay remains partial",
+    "explicit correction/refutation relation-edge materialization remains pending"
+  ],
+  "F_next": "Create SHARD05 for the 4 remaining teoremas candidates under frozen provenance; then run exact cross-shard S01..S05 digest dedup, followed by typed E1 AST and E2 algebraic-equivalence analysis before updating any global formula count."
+}
