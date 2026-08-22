@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/multimodal-representation.v1.schema.json",
+  "title": "RAFAELIA multimodal representation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "representation_id",
+    "object_id",
+    "kind",
+    "source_locator",
+    "media",
+    "bit_exact_to_source",
+    "loss_profile",
+    "claim_allowed"
+  ],
+  "properties": {
+    "representation_id": {"type": "string", "pattern": "^MMR-[0-9]{2}-SOURCE$"},
+    "object_id": {"type": "string", "pattern": "^MMO-[0-9]{2}$"},
+    "kind": {"const": "SOURCE_BITSTREAM"},
+    "source_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "provider_id", "sha256"],
+      "properties": {
+        "provider": {"const": "CHATGPT_WORKSPACE_UPLOAD_COPY"},
+        "provider_id": {"type": "string", "pattern": "^file_[0-9a-f]+$"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mime", "encoding", "width", "height", "bit_depth", "channels", "color_space"],
+      "properties": {
+        "mime": {"const": "image/jpeg"},
+        "encoding": {"const": "JPEG_BASELINE"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "bit_depth": {"const": 8},
+        "channels": {"const": 3},
+        "color_space": {"const": "sRGB"}
+      }
+    },
+    "bit_exact_to_source": {"const": true},
+    "loss_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prior_encoding_loss", "current_transform_loss", "unknown_prior_pipeline"],
+      "properties": {
+        "prior_encoding_loss": {"const": "PRESENT_BY_CODEC_CLASS_BUT_UNMEASURED"},
+        "current_transform_loss": {"const": "NONE"},
+        "unknown_prior_pipeline": {"const": true}
+      }
+    },
+    "claim_allowed": {"const": false}
+  }
+}

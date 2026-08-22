@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/semantic-tile.v1.schema.json",
+  "title": "RAFAELIA semantic tile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tile_id",
+    "object_id",
+    "parent_tile_id",
+    "depth",
+    "bounds_normalized",
+    "label",
+    "observations",
+    "interpretations",
+    "child_tile_ids",
+    "uncertainty",
+    "privacy",
+    "claim_allowed"
+  ],
+  "properties": {
+    "tile_id": {"type": "string", "pattern": "^MMTILE-[0-9]{2}-[A-Z0-9-]+$"},
+    "object_id": {"type": "string", "pattern": "^MMO-[0-9]{2}$"},
+    "parent_tile_id": {"type": ["string", "null"]},
+    "depth": {"type": "integer", "minimum": 0, "maximum": 8},
+    "bounds_normalized": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": {"type": "number", "minimum": 0, "maximum": 1},
+        "y": {"type": "number", "minimum": 0, "maximum": 1},
+        "width": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "height": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+      }
+    },
+    "label": {"type": "string", "minLength": 1},
+    "observations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["layer", "text", "state", "evidence_ids", "claim_allowed"],
+        "properties": {
+          "layer": {"enum": ["LITERAL", "SYMBOLIC", "COMPUTATIONAL", "SCIENTIFIC"]},
+          "text": {"type": "string"},
+          "state": {"enum": ["OBSERVED_BOUNDED", "HYPOTHESIS", "VERIFIED_LIMITED", "TOKEN_VAZIO"]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "claim_allowed": {"const": false}
+        }
+      }
+    },
+    "child_tile_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "uncertainty": {"type": "number", "minimum": 0, "maximum": 1},
+    "privacy": {"enum": ["NON_PERSONAL_VISUAL", "SENSITIVE_PERSONAL_IMAGE"]},
+    "claim_allowed": {"const": false}
+  }
+}

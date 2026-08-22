@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/multimodal-object.v1.schema.json",
+  "title": "RAFAELIA multimodal object v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "object_id",
+    "role",
+    "source",
+    "representation_ids",
+    "root_tile_id",
+    "semantic_state",
+    "privacy",
+    "claim_allowed"
+  ],
+  "properties": {
+    "object_id": {"type": "string", "pattern": "^MMO-[0-9]{2}$"},
+    "role": {"type": "string", "minLength": 3},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "provider_id",
+        "uploaded_name",
+        "observed_filename",
+        "bytes",
+        "sha256",
+        "detected_mime",
+        "declared_extension",
+        "extension_mime_match",
+        "pixel_width",
+        "pixel_height",
+        "bit_depth",
+        "color_space",
+        "custody_state",
+        "bytes_in_repository",
+        "publication_rights",
+        "existing_aliases"
+      ],
+      "properties": {
+        "provider": {"const": "CHATGPT_WORKSPACE_UPLOAD_COPY"},
+        "provider_id": {"type": "string", "pattern": "^file_[0-9a-f]+$"},
+        "uploaded_name": {"type": "string", "minLength": 1},
+        "observed_filename": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "detected_mime": {"type": "string", "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$"},
+        "declared_extension": {"type": "string", "pattern": "^\\.[A-Za-z0-9]+$"},
+        "extension_mime_match": {"type": "boolean"},
+        "pixel_width": {"type": "integer", "minimum": 1},
+        "pixel_height": {"type": "integer", "minimum": 1},
+        "bit_depth": {"type": "integer", "minimum": 1},
+        "color_space": {"type": "string", "minLength": 1},
+        "custody_state": {"const": "OBSERVED_LOCAL_UPLOAD_COPY"},
+        "bytes_in_repository": {"const": false},
+        "publication_rights": {"const": "TOKEN_VAZIO_PUBLICATION_RIGHTS"},
+        "existing_aliases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["repository", "ref", "path", "role", "match_basis", "claim_allowed"],
+            "properties": {
+              "repository": {"type": "string"},
+              "ref": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+              "path": {"type": "string"},
+              "role": {"type": "string"},
+              "match_basis": {"const": "EXACT_SHA256_AND_BYTE_COUNT"},
+              "claim_allowed": {"const": false}
+            }
+          }
+        }
+      }
+    },
+    "representation_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^MMR-"}
+    },
+    "root_tile_id": {"type": "string", "pattern": "^MMTILE-"},
+    "semantic_state": {"enum": ["OBSERVED_VISUAL_BOUNDED", "REFERENCE_ONLY"]},
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "identity_inference_allowed", "segmentation_export_allowed"],
+      "properties": {
+        "classification": {"enum": ["NON_PERSONAL_VISUAL", "SENSITIVE_PERSONAL_IMAGE"]},
+        "identity_inference_allowed": {"const": false},
+        "segmentation_export_allowed": {"type": "boolean"}
+      }
+    },
+    "claim_allowed": {"const": false}
+  }
+}
