@@ -1,0 +1,150 @@
+{
+  "schema": "rafaelia.omega-federated-sustainment/v1",
+  "observed_through": "2026-08-22T02:12:32Z",
+  "timezone_context": "America/Sao_Paulo",
+  "predecessor": {
+    "mapa_pr": 338,
+    "head_sha": "bf5eb41663b42c87397b8000c5e5cbfef2b211e3",
+    "relation": "append_only_successor"
+  },
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "absence_of_evidence != evidence_of_absence",
+    "claim_allowed=false_until_closure_gate",
+    "historical_PASS_is_not_silently_rewritten"
+  ],
+  "deltas": {
+    "termux_packages": {
+      "pr94_head": "651efdce7b53a8216ad34a3648a5d1d21a6725a9",
+      "real_bootstrap_run": 32543333946,
+      "artifact_id": 9468279349,
+      "artifact_sha256": "5005ef0b9f34e892d9298eda1e006cab40ee4953f47815a2e03dbae09133cb60",
+      "receipt_state": "BLOCKED",
+      "exit_code": 2,
+      "before_failure": "host ld.lld missing libicuuc.so.74",
+      "after_failure": "GNU tar regeneration invokes missing automake-1.16; make exits 2",
+      "uncertainty_delta": "libicu74 boundary displaced; next terminal mechanism localized to host Automake command identity",
+      "corrective_pr": 95,
+      "corrective_pr_head": "d39b06201614750fb2d9c748f41ded6d53dff144",
+      "corrective_scope": "packages/tar/build.sh binds AUTOMAKE=automake only",
+      "closure_gate": "same real-bootstrap rerun must eliminate automake-1.16 command-not-found as first terminal failure",
+      "claim_allowed": false
+    },
+    "rafgittools": {
+      "pr373_head": "310ad6a93c844565d828d5adf65e7f643cc2b3ed",
+      "triage_run": 32545187865,
+      "triage_artifact_id": 9468267396,
+      "triage_artifact_sha256": "cdd1e0fc022e42f22c57cfc86dccff9ebaef0b8c909ff8f06f3dccd6faad5a12",
+      "triage_receipt_sha256": "44179da10c038a80bba10b54cf75fa4944e376bcb095cc730b9197370ebccdee",
+      "p0_before": 4,
+      "p0_after": 1,
+      "p1_before": 69,
+      "p1_after": 69,
+      "blockers_after": 70,
+      "closed_group": "WorktreeManager blank repoPath false-unimplemented findings: 3 -> 0",
+      "remaining_p0": "AppError.kt type-reference match",
+      "remaining_p0_hypothesis": "scanner false positive: exception type matching is not constructor/stub execution",
+      "next_probe": "narrow NOT_IMPLEMENTED_ERROR detector to constructor/invocation semantics and self-test type-reference non-match without hiding real Bisect sentinels",
+      "claim_allowed": false
+    },
+    "mapa_provider": {
+      "semantic_ci": "PASS_SCOPED",
+      "branch_topology": "PASS_SCOPED",
+      "promotion_control": "FAIL_CLOSED_ON_DECISION_GATE",
+      "server_merge_enforcement": "FAIL_CLOSED",
+      "branch_protected": false,
+      "protection_api": "http_404",
+      "required_status_contexts": 0,
+      "required_approving_review_count": 0,
+      "enforce_admins": false,
+      "closure_gate": "authorized Administration write -> binding -> reobserve -> zero-approval probe -> MERGE_REJECTED && main_SHA_UNCHANGED",
+      "claim_allowed": false
+    },
+    "drive": {
+      "canonical_document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "state": "REVALIDATION_REQUIRED",
+      "reason": "producer evidence advanced after the last observed Drive revision; no revision-aware append committed in this cycle",
+      "write_state": "TOKEN_VAZIO"
+    },
+    "token_vazio_scope": {
+      "three_repo_scoped_total": 33,
+      "mapa_enumerated_total": 10,
+      "mapa_declared_text_total": 12,
+      "mapa_count_state": "CONTRADICTION_SCOPED",
+      "ecosystem_total": "TOKEN_VAZIO_NOT_PROVEN"
+    }
+  },
+  "lifecycle": {
+    "termux_host_closure": {
+      "state": "REVALIDATION_REQUIRED",
+      "trigger_class": "EVENT_TRIGGERED",
+      "origin": "observed_build_failure"
+    },
+    "rafgittools_worktree_group": {
+      "state": "PASS_SCOPED_BY_TRIAGE",
+      "revalidation": "EVENT_TRIGGERED on source/scanner change"
+    },
+    "rafgittools_app_error_group": {
+      "state": "DETECTOR_REVALIDATION_REQUIRED",
+      "revalidation": "CONDITION_BASED"
+    },
+    "mapa_provider_barrier": {
+      "state": "OPEN",
+      "revalidation": "EVENT_TRIGGERED on provider binding change"
+    },
+    "drive_longitudinal_custody": {
+      "state": "REVALIDATION_REQUIRED",
+      "revalidation": "EVENT_TRIGGERED on material producer delta"
+    },
+    "unmeasured_runtime_hours_cycles_stress": "TOKEN_VAZIO"
+  },
+  "impact_radius": {
+    "termux_tar_automake": {
+      "direct_exposure": ["GNU tar build", "RAFCODEPHI ARM bootstrap"],
+      "potential_propagation": ["APT materialization", "usable APK", "Termux-Vectras handoff"],
+      "not_demonstrated": ["physical Android damage", "AArch64 physical failure", "Vectras/QEMU corruption"]
+    },
+    "rafgittools_detector_false_positive": {
+      "direct_exposure": ["source-gap P0 prioritization"],
+      "transmitted_effect": ["triage ordering", "gap accounting"],
+      "product_runtime_effect": "TOKEN_VAZIO_NOT_DEMONSTRATED"
+    }
+  },
+  "actions": {
+    "detective": ["exact-head artifact inspection", "provider enforcement observation", "source-gap receipt comparison"],
+    "preventive": ["blank repoPath input contracts", "source-triggered triage"],
+    "precautionary": ["provider/device/science claims remain fail-closed"],
+    "adaptive": ["Termux failure lineage advanced without rewriting predecessor"],
+    "corrective": ["RafGitTools PR373", "termux-packages PR95"],
+    "maintenance": ["Drive revalidation required", "Mapa count contradiction remains open"],
+    "incident_investigation": ["host build-tool identity localized to automake-1.16 alias"],
+    "safety_assurance": ["before-after receipts required before promotion"],
+    "anti_recurrence": ["RafGitTools triage source trigger retained; detector semantics next"]
+  },
+  "F_ok": [
+    "RafGitTools WorktreeManager P0 group reduced 3 -> 0 with exact-head triage receipt; total P0 4 -> 1",
+    "Termux PR94 displaced libicuuc.so.74 boundary and exposed next first terminal failure at GNU tar automake-1.16",
+    "Termux corrective PR95 created with a one-file bounded host Automake binding",
+    "Mapa provider fail-closed gates independently confirm no active server-side protection"
+  ],
+  "F_gap": [
+    "Termux PR95 rerun not yet closed",
+    "RafGitTools remaining AppError detector false-positive hypothesis not yet rerun",
+    "Mapa 12-vs-10 count contradiction",
+    "provider Administration binding",
+    "Drive revision-aware append",
+    "Termux-Vectras execution-time identity",
+    "RLL Pantheon full covariance and independent replication"
+  ],
+  "F_next": [
+    "observe PR95 exact-head bootstrap; localize only next terminal mechanism if red",
+    "correct source-gap NOT_IMPLEMENTED_ERROR detector semantics and require P0 1 -> 0 without hiding real constructor sentinels",
+    "add Mapa count-consistency correction/validator",
+    "perform provider binding only with authorized Administration write, then new rejection probe",
+    "append Drive custody only with revision-aware write primitive",
+    "preserve science/device claims blocked until their evidence gates"
+  ],
+  "claim_allowed": false
+}
