@@ -1,0 +1,94 @@
+{
+  "schema": "RAFAELIA_FORMULA_EXTRACTION_SHARD05_TEOREMAS_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-CALC-MEMORY-INGEST-SHARD05-20260822",
+  "claim_allowed": false,
+  "mode": "APPEND_ONLY_PROVIDER_BOUND_EXTRACTION",
+  "scope": {
+    "repository_control": "rafaelmeloreisnovo/Mapa",
+    "source_repository": "rafaelmeloreisnovo/teoremas",
+    "tree_sha": "f497f9bc914bdc54dad7788fd74653bbe5a681d3",
+    "source_paths_in_scope": 4,
+    "unique_source_blobs": 4,
+    "normalization": "Unicode NFC + trim only; no algebraic or semantic canonicalization",
+    "extraction_boundary": "Explicit mathematical/formula-like relation materially present in the frozen source, plus explicitly quantitative/symbolic latent candidates where the source provides a concrete relation or pipeline. Empty formula placeholders, repeated editorial labels, implementation code and prose-only claims are excluded from expression count.",
+    "record_store": {
+      "provider": "Google Drive",
+      "spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+      "target_sheet": "SHARD05_RAW",
+      "role": "full expression-level rows with source path, blob, span, expression, exact digest, object type, epistemic state and claim_allowed"
+    }
+  },
+  "sources": [
+    {
+      "path": "TEORIA_ATRACTOR_42.md",
+      "blob_sha1": "916e60420d0afd8993ca3ba93fd28862046ca73c",
+      "expression_occurrences": 39,
+      "note": "Historical formulas and claims are preserved with typed states; known later corrections/refutations are not silently erased."
+    },
+    {
+      "path": "docs/rafaelia/350-formulas-mvps.md",
+      "blob_sha1": "d50dc2b1805f817910dcc7f385acb16ae8cd75c2",
+      "expression_occurrences": 0,
+      "note": "The numbered 001..350 entries are repeated generic MVP placeholders, not 350 materially written formulas. Numeric-title inflation is blocked."
+    },
+    {
+      "path": "docs/rafaelia/biosincronia.md",
+      "blob_sha1": "5055adcc9538f0e096534f7975d90c3fa28aeea9",
+      "expression_occurrences": 14,
+      "note": "Only concrete quantitative/symbolic relations and pipelines are ingested; empty formula placeholders are excluded and biomedical/physical claims remain unvalidated."
+    },
+    {
+      "path": "docs/rafaelia/domo-rafaelia-402-expressoes.md",
+      "blob_sha1": "f0771d672129eee0a645ffa726ea85782eb243c7",
+      "expression_occurrences": 6,
+      "note": "The source materializes block-level general forms and a final identity; editorial numbering 001..402 is not promoted to 402 distinct expressions."
+    }
+  ],
+  "before": {
+    "remaining_candidate_paths_after_shard04": 4,
+    "bounded_raw_occurrences_s01_s04": 315,
+    "global_formula_total": "TOKEN_VAZIO",
+    "semantic_dedup": "NOT_RUN"
+  },
+  "after": {
+    "source_paths_inspected": 4,
+    "unique_source_blobs": 4,
+    "expression_occurrences": 59,
+    "unique_exact_sha256_within_shard": 59,
+    "exact_duplicate_groups_within_shard": 0,
+    "bounded_raw_occurrences_s01_s05": 374,
+    "remaining_candidate_paths_in_frozen_49_path_scan": 0,
+    "semantic_dedup": "NOT_RUN",
+    "global_formula_total": "TOKEN_VAZIO"
+  },
+  "digest_integrity_gate": {
+    "state": "BLOCKED_REVALIDATION_REQUIRED",
+    "reason": "Cross-shard exact dedup was started only after checking that stored digest equals SHA256(NFC(trim(normalized_expression))). An inconsistency was observed in the historical SHARD02 receipt, so a global exact-dedup result would be unsafe until S01..S03 digests are revalidated.",
+    "example": {
+      "normalized_expression": "|m|=42",
+      "recomputed_sha256_nfc_trim": "9be21e29103564ee443072d0ac37b95bf7b338e68812aeb53ed5e7d57f540682",
+      "stored_shard02_sha256": "ddfba245af3b34bd95b52f3f828937b4d75179c0d4cf395bc9a3ae795863c45a"
+    },
+    "exact_cross_shard_dedup_s01_s05": "NOT_PROMOTED"
+  },
+  "invariants": [
+    "candidate source path != unique formula",
+    "numeric title/range != materialized expression count",
+    "empty formula placeholder != formula",
+    "exact digest dedup requires verified digest integrity",
+    "exact digest dedup != AST dedup != algebraic equivalence",
+    "historical occurrence != current accepted resolution",
+    "formula != implementation != execution != evidence != claim != novelty",
+    "claim_allowed=false"
+  ],
+  "F_ok": "The final four provider-bound candidates in the frozen 49-path source scan were inspected and 59 expression-level records were materialized in Drive; the bounded candidate-path queue is now zero.",
+  "F_gap": [
+    "S01..S03 stored digest integrity must be revalidated before global exact cross-shard dedup",
+    "E1 AST and E2 algebraic-equivalence dedup not run",
+    "global unique formula total remains TOKEN_VAZIO",
+    "domain/unit/calculus overlay remains partial",
+    "full Drive/GitHub universe exhaustivity remains TOKEN_VAZIO outside the frozen source scan"
+  ],
+  "F_next": "Recompute and validate SHA-256 for every stored normalized_expression in S01..S03 under the declared NFC+trim rule; then run E0 exact cross-shard S01..S05, followed by E1 AST, E2 algebraic equivalence, domain/unit typing and MCM calculation overlay."
+}
