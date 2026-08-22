@@ -1,0 +1,58 @@
+name: unknown-unknown-discovery-v1
+
+on:
+  pull_request:
+    paths:
+      - 'tooling/unknown_unknown_discovery.py'
+      - 'tests/test_unknown_unknown_discovery.py'
+      - 'data/gap-atlas/UNKNOWN_UNKNOWN_DISCOVERY_V1.json'
+      - 'data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json'
+      - 'indices/ASSET_INDEX_AUTO.yaml'
+      - '.github/workflows/unknown-unknown-discovery-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit invariants
+        run: python tests/test_unknown_unknown_discovery.py
+      - name: Real bounded discovery
+        run: |
+          python tooling/unknown_unknown_discovery.py \
+            --asset-index indices/ASSET_INDEX_AUTO.yaml \
+            --gap-atlas data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json \
+            --output /tmp/UNKNOWN_UNKNOWN_DISCOVERY_V1.generated.json
+      - name: Epistemic safety gate
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/UNKNOWN_UNKNOWN_DISCOVERY_V1.generated.json'))
+          assert p['schema']=='rafaelia.unknown_unknown_discovery.v1'
+          assert p['claim_allowed'] is False
+          for c in p['candidates']:
+              assert c['state']=='UNKNOWN_UNKNOWN_CANDIDATE'
+              assert c['claim_allowed'] is False
+              assert c['next_probe']
+              assert c['search_scope']
+              assert 'not proof of non-existence' in c['epistemic_boundary']
+          print(json.dumps({'candidate_count':p['candidate_count'],'safety_gate':'PASS'}))
+          PY
+      - name: Receipt summary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          b=open('/tmp/UNKNOWN_UNKNOWN_DISCOVERY_V1.generated.json','rb').read()
+          p=json.loads(b)
+          print('UNKNOWN_UNKNOWN_DISCOVERY_V1')
+          print('candidate_count=',p['candidate_count'])
+          print('sha256=',hashlib.sha256(b).hexdigest())
+          print('claim_allowed=',p['claim_allowed'])
+          PY
