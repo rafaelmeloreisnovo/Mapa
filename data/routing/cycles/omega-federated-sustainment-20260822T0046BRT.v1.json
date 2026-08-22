@@ -1,0 +1,178 @@
+{
+  "schema": "rafaelia.federated-sustainment-omega/v1",
+  "observed_at": "2026-08-22T00:46:39-03:00",
+  "predecessor": {
+    "mapa_main_sha": "fe667fd6e3f3a7d931728f1fbc0bbd2384c9a51f",
+    "mapa_main_protected": false,
+    "provider_required_status_enforcement": "off",
+    "claim_allowed": false
+  },
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "absence_of_evidence != evidence_of_absence",
+    "PATCH_PRESENT != FAILURE_MODE_CLOSED",
+    "P0_zero != source_gap_complete",
+    "semantic_governance_PASS != provider_enforcement_PASS"
+  ],
+  "deltas": {
+    "mapa": {
+      "topology_cycle_falsifier": "PASS_SCOPED_MAIN",
+      "lineage_scope_and_validator": {
+        "pr": 341,
+        "head_sha": "bc6eebd49641659c5bcdb545892df86704157bf2",
+        "state": "CORRECTIVE_CANDIDATE",
+        "local_ci": "PASS_SCOPED",
+        "server_enforcement": "FAIL_CLOSED",
+        "promotion_control": "FAIL_CLOSED"
+      }
+    },
+    "termux_packages": {
+      "pr": 96,
+      "head_sha": "764438b9575377fe5d299eb5f30d9151fd684d60",
+      "before": "Automake generated-metadata mismatch while building GNU tar 1.35",
+      "after": "tar_1.35-3_arm.deb materialized; next first terminal boundary is apt 3.1.15 live Debian pool HTTP 404",
+      "corrective_delta": "preserve apt 3.1.15 + official SHA256; move source custody to Debian Snapshot; preserve existing RM_AFTER_INSTALL list",
+      "static_gates": "PASS_SCOPED",
+      "source_build": "IN_PROGRESS",
+      "development_apt": "IN_PROGRESS",
+      "physical_android": "TOKEN_VAZIO",
+      "claim_allowed_release": false
+    },
+    "rafgittools": {
+      "pr": 374,
+      "head_sha": "918e3cd603150bc0110f01233aba979cbcbf68af",
+      "source_gap_triage": {
+        "P0": 0,
+        "P1_TOKEN_VAZIO_SOURCE": 69,
+        "source_files": 257,
+        "state": "PASS_SCOPED_P0_ONLY"
+      },
+      "source_gap_audit": "FAIL_EXPECTED_WITH_69_OPEN_BLOCKERS",
+      "pr_validation_previous_failure": "SEMANTIC_TITLE_TYPE_audit_NOT_ALLOWED",
+      "corrective_action": "retitle PR to chore(source-gap): classify AppError translation boundary",
+      "claim_allowed": false
+    },
+    "rll": {
+      "authority_repo": "instituto-Rafael/relativity-living-light",
+      "observed_main_sha": "1c942ac589628f677338ffde3ae3fcb2ebbf652f",
+      "latest_observed_scope": "scan_and_POC_coherence_governance",
+      "scientific_promotion": "TOKEN_VAZIO_NO_NEW_INDEPENDENT_REPLICATION_EVIDENCE"
+    },
+    "drive": {
+      "canonical_anchor": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1.txt",
+      "state": "REVALIDATION_REQUIRED",
+      "write_this_cycle": "TOKEN_VAZIO",
+      "reason": "producer GitHub state advanced; no revision-aware append executed"
+    }
+  },
+  "incident_near_miss": [
+    {
+      "id": "TERMUX-APT-SOURCE-CUSTODY-20260822",
+      "trigger": "HTTP 404 for apt_3.1.15.tar.xz on mutable live Debian pool",
+      "mechanism": "superseded source removed from live pool while recipe retained exact historical version",
+      "impact_radius": {
+        "direct": ["apt source acquisition", "ARM32 real bootstrap"],
+        "potential_propagation": ["development APT materialization", "usable APK materialization", "Termux-Vectras runtime handoff"],
+        "not_demonstrated": ["physical Android failure", "AArch64 physical failure", "Vectras corruption"]
+      },
+      "anti_recurrence": "historical exact-version Debian sources require immutable/archive custody plus checksum verification"
+    },
+    {
+      "id": "RAFGITTOOLS-PR-TYPE-20260822",
+      "trigger": "PR Validation rejected audit(...) title",
+      "mechanism": "metadata type outside repository semantic-release allowlist",
+      "impact_radius": {
+        "direct": ["PR validation metadata gate"],
+        "not_demonstrated": ["code regression", "source-gap P0 regression"]
+      },
+      "corrective_action": "retitled to allowed chore(...) type"
+    }
+  ],
+  "lifecycle": {
+    "mapa_topology_gate": {
+      "state": "PASS_SCOPED_MAIN",
+      "revalidation": "EVENT_TRIGGERED_ON_TOPOLOGY_OR_SCHEMA_CHANGE",
+      "runtime_hours": "TOKEN_VAZIO"
+    },
+    "termux_arm32_bootstrap": {
+      "state": "REVALIDATION_IN_PROGRESS",
+      "dependency_changes": ["GNU tar autoreconf regeneration", "APT historical source custody"],
+      "physical_runtime_hours": "TOKEN_VAZIO"
+    },
+    "rafgittools_source_gap": {
+      "state": "P0_ZERO_SCOPED_P1_OPEN",
+      "revalidation": "EVENT_TRIGGERED_ON_SOURCE_LINE_OR_SCANNER_CHANGE",
+      "runtime_hours": "TOKEN_VAZIO"
+    },
+    "provider_main_barrier": {
+      "state": "OPEN",
+      "revalidation": "CONDITION_BASED_ON_REAL_ADMIN_BINDING"
+    }
+  },
+  "operational_gaps": [
+    {
+      "gap_id": "MAPA-PROVIDER-ENFORCEMENT",
+      "authority": "GitHub provider administration",
+      "uncertainty_state": "OPEN",
+      "falsifier": "new zero-approval merge probe after real binding",
+      "closure_gate": "MERGE_REJECTED && main_SHA_UNCHANGED",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TERMUX-APT-SNAPSHOT-RERUN",
+      "authority": "rafaelmeloreisnovo/termux-packages",
+      "uncertainty_state": "IN_PROGRESS",
+      "falsifier": "exact-head source build must fetch apt 3.1.15 from snapshot and verify official SHA256",
+      "closure_gate": "old HTTP404 absent; SHA256 match; capture next first failure or PASS",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "RAFGITTOOLS-P1-SOURCE-GAPS",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "uncertainty_state": "69_OPEN",
+      "falsifier": "bounded path-level probe per finding; no bulk promotion",
+      "closure_gate": "finding-specific before-after evidence",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "DRIVE-REVISION-AWARE-APPEND",
+      "authority": "Google Drive longitudinal memory",
+      "uncertainty_state": "TOKEN_VAZIO",
+      "closure_gate": "revision-aware append + reread confirmation",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "RLL-SCIENTIFIC-PROMOTION",
+      "authority": "instituto-Rafael/relativity-living-light",
+      "uncertainty_state": "TOKEN_VAZIO",
+      "closure_gate": "dataset/hash -> likelihood/inference -> diagnostics -> independent replication",
+      "claim_allowed": false
+    }
+  ],
+  "F_ok": [
+    "Mapa cycle-safety falsifier is canonical in main",
+    "Termux GNU tar Automake failure closed scoped and build advanced to APT source acquisition",
+    "APT source-liveness failure localized and minimally corrected with historical custody candidate",
+    "RafGitTools source-gap P0 remains zero scoped; semantic PR-title gate cause localized and corrected",
+    "provider barrier reobserved fail-closed",
+    "RLL authority and latest governance head reobserved"
+  ],
+  "F_gap": [
+    "Termux #96 discriminatory reruns still in progress",
+    "Mapa #341 not merged",
+    "provider server-side protection absent",
+    "RafGitTools 69 P1/TOKEN_VAZIO source gaps remain",
+    "Drive append not executed",
+    "physical Android evidence remains TOKEN_VAZIO",
+    "RLL scientific independent replication not newly demonstrated"
+  ],
+  "F_next": [
+    "Termux #96 exact-head: require snapshot fetch + SHA match and capture next first terminal mechanism",
+    "Mapa #341: preserve local coherence while provider/promotion gates remain fail-closed",
+    "RafGitTools #374: re-run PR metadata validation after allowed title; then prioritize highest-impact P1 by security/authority/provenance",
+    "Provider: only after real admin binding run zero-approval rejection probe",
+    "Drive: revision-aware append and reread confirmation",
+    "RLL: advance only through concrete dataset/hash/inference/independent-replication receipts"
+  ]
+}
