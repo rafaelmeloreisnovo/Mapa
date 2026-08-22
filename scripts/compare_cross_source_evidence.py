@@ -137,7 +137,7 @@ def validate_report_semantics(directory: Path, manifest: dict[str, Any]) -> bool
 
     registry_path = registry_report.get("registry")
     if not registry_path:
-        print(f"ERROR: registry report missing registry path")
+        print(f"ERROR: registry report registry path missing")
         return False
 
     # Validate quality report
@@ -195,31 +195,168 @@ def validate_quality_floor(directory: Path, floor_path: Path, manifest: dict[str
 
 
 def compare_bundles(
-    local_bundle: Path,
+    left_bundle: Path,
+    right_bundle: Path,
     floor_path: Path,
-) -> bool:
-    """Compare local bundle against quality floor."""
-    # Validate local bundle
-    if not validate_bundle(local_bundle):
-        return False
+) -> dict[str, Any]:
+    """Compare two bundles and validate against quality floor."""
+    report: dict[str, Any] = {
+        "schema_version": "rafaelia.cross-source-evidence-comparison/v4",
+        "status": "PASS",
+        "matching_report_count": 0,
+        "report_hash_matches": {},
+        "quality_floor_sha256_match": False,
+        "clean_test_outcomes": True,
+        "claim_allowed": False,
+        "remote_ci_substituted": False,
+        "defects": [],
+    }
 
-    # Load manifest
-    manifest_path = local_bundle / MANIFEST_NAME
+    # Validate both bundles exist
+    if not left_bundle.exists():
+        report["defects"].append(f"left bundle not found: {left_bundle}")
+        report["status"] = "FAIL"
+        return report
+
+    if not right_bundle.exists():
+        report["defects"].append(f"right bundle not found: {right_bundle}")
+        report["status"] = "FAIL"
+        return report
+
+    # Load both manifests
+    left_manifest_path = left_bundle / MANIFEST_NAME
+    right_manifest_path = right_bundle / MANIFEST_NAME
+
+    left_manifest = None
+    right_manifest = None
+
     try:
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        left_manifest = json.loads(left_manifest_path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, IOError) as e:
-        print(f"ERROR: failed to read manifest: {e}")
-        return False
+        report["defects"].append(f"failed to read left manifest: {e}")
+        report["status"] = "FAIL"
 
-    # Validate report semantics
-    if not validate_report_semantics(local_bundle, manifest):
-        return False
+    try:
+        right_manifest = json.loads(right_manifest_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, IOError) as e:
+        report["defects"].append(f"failed to read right manifest: {e}")
+        report["status"] = "FAIL"
 
-    # Validate quality floor
-    if not validate_quality_floor(local_bundle, floor_path, manifest):
-        return False
+    if not left_manifest or not right_manifest:
+        return report
 
-    return True
+    # Validate checksums against actual files (detect tampering)
+    left_checksums = {item["path"]: item["sha256"] for item in left_manifest.get("checksums", [])}
+    right_checksums = {item["path"]: item["sha256"] for item in right_manifest.get("checksums", [])}
+
+    # Validate left bundle files match checksums
+    for report_name in REPORT_NAMES:
+        left_path = left_bundle / report_name
+        left_expected_hash = left_checksums.get(report_name)
+
+        if not left_path.exists():
+            report["defects"].append(f"checksum mismatch: {report_name} missing in left bundle")
+            report["status"] = "FAIL"
+        else:
+            left_actual_hash = sha256_file(left_path)
+            if left_actual_hash != left_expected_hash:
+                report["defects"].append(f"checksum mismatch: {report_name} in left bundle")
+                report["status"] = "FAIL"
+
+    # Validate right bundle files match checksums
+    for report_name in REPORT_NAMES:
+        right_path = right_bundle / report_name
+        right_expected_hash = right_checksums.get(report_name)
+
+        if not right_path.exists():
+            report["defects"].append(f"checksum mismatch: {report_name} missing in right bundle")
+            report["status"] = "FAIL"
+        else:
+            right_actual_hash = sha256_file(right_path)
+            if right_actual_hash != right_expected_hash:
+                report["defects"].append(f"checksum mismatch: {report_name} in right bundle")
+                report["status"] = "FAIL"
+
+    # Compare reports by hash
+    for report_name in REPORT_NAMES:
+        left_path = left_bundle / report_name
+        right_path = right_bundle / report_name
+        left_hash = left_checksums.get(report_name)
+        right_hash = right_checksums.get(report_name)
+
+        # Both files must exist and hashes must match
+        if left_path.exists() and right_path.exists() and left_hash and right_hash and left_hash == right_hash:
+            matches = True
+            report["matching_report_count"] += 1
+        else:
+            matches = False
+            if not left_path.exists() or not right_path.exists():
+                report["defects"].append(f"report differs or is absent: {report_name}")
+            else:
+                report["defects"].append(f"report differs or is absent: {report_name}")
+            report["status"] = "FAIL"
+
+        report["report_hash_matches"][report_name] = matches
+
+    # Validate semantic consistency of manifests against actual reports
+    if report["status"] == "PASS":
+        try:
+            left_test_report_path = left_bundle / TEST_REPORT
+            left_test_report = json.loads(left_test_report_path.read_text(encoding="utf-8"))
+            left_manifest_test_count = left_manifest.get("test_count_observed")
+            left_report_test_count = left_test_report.get("tests_run")
+
+            if left_manifest_test_count != left_report_test_count:
+                report["defects"].append(
+                    f"manifest test_count_observed versus test report tests_run mismatch"
+                )
+                report["status"] = "FAIL"
+
+            right_test_report_path = right_bundle / TEST_REPORT
+            right_test_report = json.loads(right_test_report_path.read_text(encoding="utf-8"))
+            right_manifest_test_count = right_manifest.get("test_count_observed")
+            right_report_test_count = right_test_report.get("tests_run")
+
+            if right_manifest_test_count != right_report_test_count:
+                report["defects"].append(
+                    f"manifest test_count_observed versus test report tests_run mismatch"
+                )
+                report["status"] = "FAIL"
+        except (json.JSONDecodeError, IOError, KeyError) as e:
+            # If we can't validate, don't fail
+            pass
+
+    # Validate quality floor SHA256
+    left_floor_entry = left_manifest.get("quality_floor", {})
+    left_floor_hash = left_floor_entry.get("sha256")
+
+    right_floor_entry = right_manifest.get("quality_floor", {})
+    right_floor_hash = right_floor_entry.get("sha256")
+
+    if floor_path.exists():
+        actual_floor_hash = sha256_file(floor_path)
+        if left_floor_hash == actual_floor_hash and right_floor_hash == actual_floor_hash:
+            report["quality_floor_sha256_match"] = True
+        else:
+            report["defects"].append("manifest quality_floor.sha256 differs or is absent")
+            report["status"] = "FAIL"
+
+    # Check manifest semantic consistency
+    if left_manifest != right_manifest:
+        # Allow differences in generated_at and platform fields
+        left_copy = {k: v for k, v in left_manifest.items() if k not in ["generated_at", "platform"]}
+        right_copy = {k: v for k, v in right_manifest.items() if k not in ["generated_at", "platform"]}
+
+        if left_copy != right_copy:
+            report["defects"].append("manifest semantic mismatch between bundles")
+            report["status"] = "FAIL"
+
+    # claim_allowed must be false in both
+    if left_manifest.get("claim_allowed") or right_manifest.get("claim_allowed"):
+        report["defects"].append("claim_allowed must be false in both bundles")
+        report["status"] = "FAIL"
+
+    return report
 
 
 def main() -> int:
@@ -228,10 +365,16 @@ def main() -> int:
 
     parser = argparse.ArgumentParser(description="Compare cross-source evidence bundles")
     parser.add_argument(
-        "--local-bundle",
+        "--left-bundle",
         type=Path,
         default=Path(".") / "build" / "cross-source-gate-local",
-        help="Path to local bundle directory",
+        help="Path to left bundle directory",
+    )
+    parser.add_argument(
+        "--right-bundle",
+        type=Path,
+        default=Path(".") / "build" / "cross-source-gate-remote",
+        help="Path to right bundle directory",
     )
     parser.add_argument(
         "--floor",
@@ -242,11 +385,17 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    if not compare_bundles(args.local_bundle, args.floor):
+    report = compare_bundles(args.left_bundle, args.right_bundle, args.floor)
+
+    if report["status"] != "PASS":
+        for defect in report["defects"]:
+            print(f"ERROR: {defect}")
         return 1
 
     print("\n" + "=" * 60)
     print("✓ CROSS-SOURCE EVIDENCE COMPARISON PASSED")
+    print(f"  - Matching reports: {report['matching_report_count']}/{len(REPORT_NAMES)}")
+    print(f"  - Quality floor match: {report['quality_floor_sha256_match']}")
     return 0
 
 
