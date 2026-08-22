@@ -1,0 +1,103 @@
+{
+  "schema": "rafaelia.unknown_unknown_discovery.contract.v1",
+  "contract_id": "UNKNOWN_UNKNOWN_DISCOVERY_V1",
+  "status": "IMPLEMENTED_PENDING_EXECUTION_EVIDENCE",
+  "claim_allowed": false,
+  "authority": {
+    "routing": "rafaelmeloreisnovo/Mapa",
+    "producer": "tooling/unknown_unknown_discovery.py",
+    "gap_authority": "data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json"
+  },
+  "purpose": "Detect candidate questions and missing epistemic surfaces that have not yet become formulated TOKEN_VAZIO gaps.",
+  "invariants": [
+    "NOT_FOUND_IN_BOUNDED_SEARCH != DOES_NOT_EXIST",
+    "UNKNOWN_UNKNOWN_CANDIDATE != TOKEN_VAZIO",
+    "CANDIDATE != CLAIM",
+    "PROMOTION_REQUIRES_FORMULATED_QUESTION_AND_BOUNDED_SEARCH_EVIDENCE",
+    "APPEND_ONLY_GAP_HISTORY"
+  ],
+  "state_model": [
+    "KNOWN_KNOWN",
+    "KNOWN_UNKNOWN",
+    "UNKNOWN_UNKNOWN_CANDIDATE",
+    "UNOBSERVABLE_CURRENTLY",
+    "CONTRADICTION",
+    "FALSIFIED",
+    "VERIFIED_LIMITED"
+  ],
+  "promotion_path": [
+    "UNKNOWN_UNKNOWN_CANDIDATE",
+    "KNOWN_UNKNOWN",
+    "TOKEN_VAZIO",
+    "EXPERIMENT",
+    "PASS_OR_FAIL"
+  ],
+  "required_candidate_fields": [
+    "candidate_id",
+    "state",
+    "candidate_class",
+    "key",
+    "observation",
+    "search_scope",
+    "epistemic_boundary",
+    "promotion_rule",
+    "next_probe",
+    "claim_allowed"
+  ],
+  "detectors_v1": [
+    {
+      "id": "D1_MISSING_SURFACE",
+      "question": "Which critical evidence/governance surface is absent from the bounded asset and gap views?"
+    },
+    {
+      "id": "D2_UNQUESTIONED_CATEGORY",
+      "question": "Which existing asset category has not yet been explicitly interrogated in the bounded Gap Atlas view?"
+    },
+    {
+      "id": "D3_GAP_WITHOUT_FALSIFIER",
+      "question": "Which known gap lacks a condition capable of falsifying its framing?"
+    },
+    {
+      "id": "D4_GAP_WITHOUT_NEXT_GATE",
+      "question": "Which known gap has no smallest verifiable uncertainty-reducing action?"
+    }
+  ],
+  "bounded_inputs": [
+    "indices/ASSET_INDEX_AUTO.yaml",
+    "data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json"
+  ],
+  "outputs": {
+    "default_generated": "data/gap-atlas/UNKNOWN_UNKNOWN_DISCOVERY_V1.generated.json",
+    "epistemic_status": "CANDIDATE_ONLY",
+    "automatic_promotion_to_token_vazio": false
+  },
+  "acceptance_gates": [
+    "unit tests pass",
+    "real bounded run completes deterministically",
+    "each emitted candidate preserves claim_allowed=false",
+    "no candidate is automatically promoted to TOKEN_VAZIO",
+    "candidate identifiers are stable for identical detector class and key"
+  ],
+  "omega7_projection": {
+    "what_is_it": "Detector of unformulated epistemic gaps",
+    "how_do_we_know": "Deterministic bounded scan plus test/CI receipts",
+    "how_it_works": "Compare observed asset/gap surfaces against explicit epistemic interrogation rules",
+    "relations": ["Gap Atlas", "Asset Index", "Evidence Compiler", "Question→Evidence Router"],
+    "falsifier": "A candidate is emitted as fact, or identical bounded inputs produce unstable candidate IDs/content",
+    "provenance": "Git branch/commit + input paths + CI run",
+    "next_experiment": "Run on current Mapa inputs, review candidates, then promote only confirmed formulated gaps"
+  },
+  "cognitive_cycle": {
+    "psi": "intention: expose unasked questions",
+    "chi": "observation: bounded inventory and gap records",
+    "rho": "noise: absence, aliases, naming mismatch, incomplete coverage",
+    "delta": "transformation: candidate with explicit epistemic boundary",
+    "sigma": "memory: append-only candidate/gap linkage",
+    "omega": "completion: only after a verifiable probe resolves or formalizes the gap"
+  },
+  "r3": {
+    "f_ok": "Executable detector, deterministic candidate model and tests are defined.",
+    "f_gap": "Current real-input execution receipt is pending until CI/runner executes the branch.",
+    "f_next": "Execute the branch gate; inspect real candidates; append only evidence-backed TOKEN_VAZIO promotions."
+  }
+}
