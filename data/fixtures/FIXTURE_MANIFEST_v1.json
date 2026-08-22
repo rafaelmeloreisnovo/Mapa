@@ -1,0 +1,68 @@
+{
+  "manifest_version": "1.0.0",
+  "generated_at": "2026-08-22T00:00:00Z",
+  "description": "Frozen fixture manifest for federated validation and TV-DATA closure",
+  "fixtures": [
+    {
+      "id": "vector_corpus_v1",
+      "filename": "vector_corpus_v1.jsonl.gz.json",
+      "type": "vector_corpus_frozen",
+      "schema_version": "1.0.0",
+      "created_at": "2026-08-22T00:00:00Z",
+      "sha256": "7e9ae12b630587ca8abb680dcc785440bb0ac1eaf4f533c430d8972437ae74c5",
+      "size_bytes": 783,
+      "immutable": true,
+      "purpose": "Federated validation, cross-repository evidence",
+      "lifecycle": "FROZEN"
+    },
+    {
+      "id": "calibration_benchmark_v1",
+      "filename": "calibration_benchmark_v1.json",
+      "type": "calibration_benchmark_frozen",
+      "schema_version": "1.0.0",
+      "created_at": "2026-08-22T00:00:00Z",
+      "sha256": "67547c166847924bc3c5ac4e8d98e2a21acde88984913c4192df59987242b1cd",
+      "size_bytes": 746,
+      "immutable": true,
+      "purpose": "Bootstrap UQ validation ground truth",
+      "lifecycle": "FROZEN"
+    },
+    {
+      "id": "log_log_comparison_v1",
+      "filename": "log_log_comparison_v1.json",
+      "type": "log_log_comparison_frozen",
+      "schema_version": "1.0.0",
+      "created_at": "2026-08-22T00:00:00Z",
+      "sha256": "9262abe325bdee5df4005e5d395086b2ab3ec4c68d3281a5fb19d06b48286613",
+      "size_bytes": 1053,
+      "immutable": true,
+      "purpose": "Model comparison validation (power-law vs linear)",
+      "lifecycle": "FROZEN"
+    },
+    {
+      "id": "fractal_dimension_null_v1",
+      "filename": "fractal_dimension_null_v1.json",
+      "type": "fractal_dimension_null_frozen",
+      "schema_version": "1.0.0",
+      "created_at": "2026-08-22T00:00:00Z",
+      "sha256": "1fa5a2fc2d4992052db22f7e5a875079bee0bbbd1ddaae99a2492bcaca3134ca",
+      "size_bytes": 1838,
+      "immutable": true,
+      "purpose": "Null model validation (dimension estimator ground truth)",
+      "lifecycle": "FROZEN"
+    }
+  ],
+  "tv_data_closure": {
+    "status": "CLOSED",
+    "tv_data_items_frozen": 4,
+    "all_hashes_recorded": true,
+    "versioning_immutable": true,
+    "cross_repo_ready": true
+  },
+  "integrity": {
+    "total_fixtures": 4,
+    "total_size_bytes": 4420,
+    "all_immutable": true,
+    "manifest_sha256": "COMPUTED_AFTER_MANIFEST_WRITE"
+  }
+}
