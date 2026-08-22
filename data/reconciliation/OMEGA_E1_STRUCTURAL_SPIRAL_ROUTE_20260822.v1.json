@@ -1,0 +1,91 @@
+{
+  "schema": "RAFAELIA_E1_STRUCTURAL_SPIRAL_ROUTE_V1",
+  "generated_at": "2026-08-22",
+  "mode": "APPEND_ONLY_EVIDENCE_FIRST",
+  "claim_allowed": false,
+  "source_state": {
+    "mapa_main_observed_commit": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+    "e0_receipt": "data/reconciliation/OMEGA_FORMULA_DIGEST_REVALIDATION_E0_S01_S05_20260822.v1.json",
+    "drive_spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+    "drive_sheet": "E1_STRUCTURAL_V2_20260822"
+  },
+  "e1_structural": {
+    "e0_representatives": 356,
+    "parsed": 339,
+    "parsed_fraction": 0.952247191011236,
+    "typed_failures": 17,
+    "failure_breakdown": {
+      "MIXED_NATURAL_LANGUAGE": 16,
+      "UNSUPPORTED_CHAR": 1
+    },
+    "ast_unique_within_parsed": 331,
+    "merge_groups": 8,
+    "duplicate_extra_occurrences": 8,
+    "scope": "conservative structural canonicalization only; no algebraic reordering or semantic promotion",
+    "merge_examples": [
+      ["B=u ⊕ φ(s)", "B=u⊕φ(s)"],
+      ["𝓜(S)=S ∥ rev(S)", "𝓜(S)=S∥rev(S)"],
+      ["phi=(1+sqrt(5))/2", "φ=(1+√5)/2"],
+      ["q = sqrt(3)/2", "q=√3/2"],
+      ["red(∅^n 0^n 1123) = 123", "red(∅^n 0^n 1123)=123"],
+      ["0 < q < 1", "0<q<1"],
+      ["q^n -> 0", "q^n→0"],
+      ["C(4,2)*7=42", "C(4,2) * 7 = 42"]
+    ],
+    "boundaries": {
+      "E1_GLOBAL": "TOKEN_VAZIO_17_TYPED_FAILURES",
+      "E2_GLOBAL": "TOKEN_VAZIO_TYPED_DOMAIN_WIDE_NOT_RUN"
+    }
+  },
+  "e2_safe_rational_subset": {
+    "candidates": 19,
+    "canonical_unique": 19,
+    "new_merges_beyond_e1": 0,
+    "state": "PASS_LIMITED_NO_NEW_MERGES",
+    "boundary": "plain scalar assignments with rational arithmetic only; formal commutative symbols; not global E2"
+  },
+  "spiral_route": {
+    "memory_id": "MCM:TEO:SPIRAL_R:003:v1",
+    "source": {
+      "repo": "rafaelmeloreisnovo/teoremas",
+      "path": "docs/rafaelia/04-spiral-raiz3-sobre-2.md",
+      "blob_sha": "eaa831155fcfac79fa72d1cd6fd13f5d5d9aecb8",
+      "radial_formula": "r_{n+1}=(sqrt(3)/2)*r_n",
+      "angular_formula": "theta[n+1]=theta[n]+pi/phi"
+    },
+    "implementation": {
+      "repo": "rafaelmeloreisnovo/GAIA_phi",
+      "path": "dados/RAFAELIA_TRIG_CORE2.py",
+      "blob_sha": "cccf5f7da96e2f867fbb5cdec07a45da6e380994",
+      "function": "generate_spiral_sqrt3_over_2",
+      "radial_form": "r0*(SQRT3_OVER_2**k)",
+      "angular_form": "theta(k)=sign*2*pi*k/steps_per_turn"
+    },
+    "portable_harness": {
+      "path": "tools/audit/verify_spiral_route_v1.py",
+      "executed_sha256": "db4d128040841690c97491c92445ef6802fea562fb4df2cd7e99e8942b9e24c6",
+      "receipt_sha256": "32546c4ebb006debd51092113b2b170754fc08bba31bb208a7970179b8be48ba"
+    },
+    "execution": {
+      "n_turns": 2,
+      "steps_per_turn": 10,
+      "r0": 1.0,
+      "points": 21,
+      "yinyang_points": 42,
+      "kappa": 0.8660254037844386,
+      "max_radial_recurrence_abs_error": 5.551115123125783e-17,
+      "max_closed_form_abs_error": 2.7755575615628914e-17
+    },
+    "gates": {
+      "radial_recurrence_matches_source": "PASS_NUMERIC_LIMITED",
+      "closed_form_consistency": "PASS_NUMERIC_LIMITED",
+      "yinyang_42_count": "PASS",
+      "angular_equivalence": "FAIL_NOT_SAME_FORM",
+      "full_source_pair_equivalence": "TOKEN_VAZIO_NOT_ESTABLISHED"
+    },
+    "boundary": "GAIA_phi implements the radial √3/2 recurrence, but its angular law is 2π/steps_per_turn rather than the source π/φ law. Broader application/physical claims are not validated by this execution."
+  },
+  "F_ok": "E1 structural coverage increased to 339/356 with typed failures preserved; a real teoremas→GAIA_phi radial implementation link was bound and executed; radial and 42-point gates pass within the declared numerical scope.",
+  "F_gap": "17 E1 records remain typed TOKEN_VAZIO; global E2 remains open; the source angular π/φ recurrence is not the same law implemented by GAIA_phi, so the full two-equation Spiral source is not implementation-equivalent.",
+  "F_next": "Split Spiral√3/2 radial and angular variants in the calculation memory or bind a producer implementation of theta[n+1]=theta[n]+pi/phi; then run a dedicated angular gate before any full-formula claim."
+}
