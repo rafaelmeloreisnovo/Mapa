@@ -1,0 +1,60 @@
+{
+  "schema": "rafaelia.federated-sustainment-correction/v1",
+  "predecessor": "data/routing/cycles/omega-federated-sustainment-20260822T0254BRT.correction-001.v1.json",
+  "observed_at": "2026-08-22T06:48:33Z",
+  "claim_allowed": false,
+  "corrections": [
+    {
+      "gap_id": "PAPERS-PR56-METADATA-DRIFT-001",
+      "source_pointer": "rafaelmeloreisnovo/papers#56@a5061303c1e254e84dfac9cc791bb380dc267d3b",
+      "before": "PR_BODY_PHASE2_COMPLETE_READY_FOR_PHASE3",
+      "new_evidence": "head_commit_materializes_phase3_python_core_tests_examples_while_PR_body_still_describes_phase2",
+      "after": "CONTRADICTION_METADATA_STALE",
+      "affected_routes": ["papers->validation", "papers->publication", "Mapa->papers-routing"],
+      "falsifier": "refresh PR metadata against exact head and require declared phase/state to match materialized files without promoting execution claims",
+      "next_probe": "inspect exact-head implementation/tests independently from PR prose",
+      "closure_gate": "PR_METADATA_MATCHES_EXACT_HEAD_AND_AUTOMATED_GATES_OBSERVABLE",
+      "actions": ["DETECTIVE", "PRECAUTIONARY", "MAINTENANCE", "ANTI_RECURRENCE"]
+    },
+    {
+      "gap_id": "PAPERS-CI-PREEXEC-001",
+      "source_pointer": "papers/actions/runs/32556479177",
+      "before": "PRE_EXECUTION_CI_FAILURE_REPRODUCIBLE_ON_PRIOR_HEAD",
+      "new_evidence": "latest_head_run_fails_all_three_jobs_with_zero_observable_steps_and_job_log_blob_missing",
+      "after": "PRE_EXECUTION_CI_FAILURE_REPRODUCIBLE_ACROSS_HEAD_CHANGE",
+      "code_failure": "NOT_DEMONSTRATED",
+      "documentation_failure": "NOT_DEMONSTRATED",
+      "provider_or_runner_mechanism": "TOKEN_VAZIO",
+      "falsifier": "obtain provider/check-run/runner diagnostic that explains why jobs terminate before step materialization",
+      "next_probe": "diagnose provider/check-suite surface before modifying content",
+      "closure_gate": "FIRST_OBSERVABLE_JOB_STEP_OR_PROVIDER_CAUSE_BOUND",
+      "actions": ["DETECTIVE", "PRECAUTIONARY", "INVESTIGATION", "SAFETY_ASSURANCE", "ANTI_RECURRENCE"]
+    },
+    {
+      "gap_id": "TERMUX-PR97-EXACT-HEAD",
+      "source_pointer": "rafaelmeloreisnovo/termux-packages#97@16cf60cf49677398e876d3c4ab0f2ae95d1a3007",
+      "before": "SDK_CLOSURE_CORRECTIVE_PATCH_PRESENT",
+      "new_evidence": "Packages_and_Hardening_PASS;_Real_Bootstrap_and_Development_APT_still_IN_PROGRESS",
+      "after": "REVALIDATION_IN_PROGRESS",
+      "next_probe": "wait_for_exact_head_run_result_then_localize_only_next_first_terminal_mechanism",
+      "closure_gate": "ANDROID33_BUILDTOOLS34_FAILURE_ABSENT_ON_EXACT_HEAD",
+      "actions": ["CORRECTIVE", "PRECAUTIONARY", "SAFETY_ASSURANCE"]
+    },
+    {
+      "gap_id": "MAPA-PROVIDER-SERVER-BARRIER",
+      "source_pointer": "rafaelmeloreisnovo/Mapa:main@749604de237a520ae56b49017c3703d49a0b53cf",
+      "new_evidence": "protected=false;protection_enabled=false;required_status_checks_enforcement=off",
+      "after": "BLOCKED_NOT_ENFORCED_OBSERVED",
+      "next_probe": "Administration_write_binding_then_reobserve_before_any_zero_approval_probe",
+      "closure_gate": "MERGE_REJECTED_AND_MAIN_SHA_UNCHANGED",
+      "actions": ["DETECTIVE", "PRECAUTIONARY", "SAFETY_ASSURANCE"]
+    }
+  ],
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "CI_RED != CODE_FAILURE",
+    "PR_METADATA != EXACT_HEAD_MATERIAL",
+    "PATCH_PRESENT != FAILURE_MODE_CLOSED"
+  ]
+}
