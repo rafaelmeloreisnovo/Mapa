@@ -1,0 +1,60 @@
+{
+  "schema": "RAFAELIA_MCM_EXECUTION_RECEIPT_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MCM-SPIRAL-R-003-EXECUTION-20260822",
+  "mcm_id": "MCM:TEO:SPIRAL_R:003:v1",
+  "claim_allowed": false,
+  "source": {
+    "repository": "rafaelmeloreisnovo/teoremas",
+    "tree_sha": "f497f9bc914bdc54dad7788fd74653bbe5a681d3",
+    "path": "docs/rafaelia/04-spiral-raiz3-sobre-2.md",
+    "blob_sha1": "eaa831155fcfac79fa72d1cd6fd13f5d5d9aecb8",
+    "radial_expression": "r_{n+1}=(√3/2)·r_n",
+    "angular_expression": "θ_{n+1}=θ_n+π/φ"
+  },
+  "producer_candidates": [
+    {
+      "repository": "rafaelmeloreisnovo/GAIA_phi",
+      "path": "dados/RAFAELIA_TRIG_CORE2.py",
+      "blob_sha1": "cccf5f7da96e2f867fbb5cdec07a45da6e380994",
+      "function": "generate_spiral_sqrt3_over_2",
+      "radial_law": "r(k)=r0*(sqrt(3)/2)^k",
+      "angular_law": "theta(k)=sign*2*pi*k/steps_per_turn"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/GAIA_phi",
+      "path": "dados/RAFAELIA_FIB_TRIG_BRIDGE.py",
+      "blob_sha1": "2a7c05d959fc9b0ab3d0234bcd499e1ba92d3892",
+      "function": "map_rafael_to_spiral",
+      "angular_law": "theta_n=n*(2*pi/phi^2)"
+    }
+  ],
+  "execution": {
+    "method": "independent Python reference re-execution of source radial recurrence and producer closed form",
+    "harness_sha256": "19522402386f231f27cb732c6f67c067aa25060e2fc7b238c0beb1bcf9fc38d1",
+    "steps": 20,
+    "r0": 1.0,
+    "radial_max_step_error": 5.551115123125783e-17,
+    "radial_max_closed_form_error": 5.551115123125783e-17,
+    "radial_gate": "PASS_NUMERIC_LIMITED",
+    "source_dtheta_pi_over_phi": 1.9416110387254664,
+    "trig_core_dtheta_default_steps20": 0.3141592653589793,
+    "source_over_trig_core": 6.180339887498948,
+    "fib_bridge_dtheta_2pi_over_phi2": 2.399963229728653,
+    "source_over_fib_bridge": 0.8090169943749475,
+    "angular_gate": "FAIL_NOT_SAME_FORM"
+  },
+  "interpretation": {
+    "radial": "The producer closed form implements the same discrete radial recurrence up to floating-point roundoff for the tested bounded execution.",
+    "angular": "Neither inspected GAIA_phi angular law is the same step law as pi/phi. The implementations must be treated as distinct angular variants unless a producer with the exact pi/phi law is located or added.",
+    "full_spiral_implementation": "PARTIAL_ONLY"
+  },
+  "falsifiers": [
+    "a radial step residual above the declared numeric tolerance",
+    "a producer source showing a different radial scale than sqrt(3)/2",
+    "evidence that the angular increment pi/phi is actually implemented by the cited producer path"
+  ],
+  "F_ok": "Radial recurrence is source-bound, producer-bound and independently executed with max residual 5.551115123125783e-17.",
+  "F_gap": "The angular source law pi/phi is not implemented by the two inspected producer variants; full source-pair implementation remains partial.",
+  "F_next": "Search producer repos for an exact pi/phi angular-step implementation; if absent, split the radial and angular variants in the MCM registry and add a dedicated producer implementation before widening the implementation claim."
+}
