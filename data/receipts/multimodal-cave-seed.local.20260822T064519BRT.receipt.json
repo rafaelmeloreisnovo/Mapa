@@ -1,0 +1,211 @@
+{
+  "schema": "rafaelia.multimodal_cave_seed.local_receipt.v1",
+  "receipt_id": "MULTIMODAL-CAVE-SEED-LOCAL-20260822T064519BRT",
+  "created_at": "2026-08-22T06:45:19-03:00",
+  "state": "LOCAL_PASS_DRAFT",
+  "evidence_class": "MEASURED_LOCAL",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "baseline": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "ref": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+    "tree_sha": "26cb169077dc07b979e2d27bf1e93074a2a6b7d9",
+    "default_branch": "main",
+    "environment": {
+      "python": "3.12.13",
+      "kernel": "Linux 6.18.35",
+      "architecture": "x86_64",
+      "scope": "local workspace; not remote runner and not producer device"
+    }
+  },
+  "service_preflight_q01_q12": [
+    {
+      "id": "Q01",
+      "question": "Quem sou?",
+      "answer": "Federated control-plane agent and knowledge-organization curator acting under Mapa authority."
+    },
+    {
+      "id": "Q02",
+      "question": "Qual repo/ref/path/hash estou lendo?",
+      "answer": "rafaelmeloreisnovo/Mapa at commit 44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381 and tree 26cb169077dc07b979e2d27bf1e93074a2a6b7d9; ten upload copies are separately bound by SHA-256 in the seed."
+    },
+    {
+      "id": "Q03",
+      "question": "Qual minha autoridade?",
+      "answer": "Mapa owns bounded catalog, routing, schemas, coherence gates and gap records. It does not own scientific truth, portrait identity, consent or publication rights."
+    },
+    {
+      "id": "Q04",
+      "question": "Qual minha fronteira?",
+      "answer": "This receipt proves local structure, media-header observations, exact algebra and scalar codec roundtrip only."
+    },
+    {
+      "id": "Q05",
+      "question": "Quais índices locais devo abrir?",
+      "answer": "README.md; AGENTS.md; authority pyramid; operational ontology; prior federated audit; hyperformas source manifest/cohesion event; and the new seed index."
+    },
+    {
+      "id": "Q06",
+      "question": "Qual rota/agente no produtor corresponde?",
+      "answer": "Source bytes are workspace upload copies, not a producer-repository checkout. Producer repository for eight sources is TOKEN_VAZIO_PRODUCER_REPOSITORY. MMO-08 and MMO-09 have exact-byte aliases in the existing Mapa hyperformas source manifest."
+    },
+    {
+      "id": "Q07",
+      "question": "Que lacunas já existem?",
+      "answer": "Nine typed gaps: original media; rasterization lineage; semantic transcript; audio samples; VOB/subtitle map; manifold proof; overlay execution; portrait identity/rights; scientific validation."
+    },
+    {
+      "id": "Q08",
+      "question": "Qual evidência é atual?",
+      "answer": "Source header/hash observations and local gates were measured in this receipt. The prior federated audit targets eb9cb679d42f64da6e4e4e09abcb96848aae2a8f and is stale relative to the baseline; it was not used for promotion."
+    },
+    {
+      "id": "Q09",
+      "question": "Qual gate posso executar?",
+      "answer": "Media header/hash inspection; schema parse; graph/lineage/containment/preface coherence; privacy boundary; exact matrix/formula checks; exhaustive 10-bit roundtrip; local unit/adversarial tests."
+    },
+    {
+      "id": "Q10",
+      "question": "Quando devo parar?",
+      "answer": "Stop before identity inference, crop export, rights assertion, scientific promotion, undefined manifold/projective map, auto-merge or unobserved remote PASS."
+    },
+    {
+      "id": "Q11",
+      "question": "Onde registro o delta?",
+      "answer": "Append-only seed, schemas, index, local receipt and later federation settlement receipt on a non-protected branch; editorial checkpoint in a separate Google Doc."
+    },
+    {
+      "id": "Q12",
+      "question": "Quais regras de governança, dados, privacidade e segurança?",
+      "answer": "Immutable source identity; no raw image bytes in repository; distinct relation types; TOKEN_VAZIO preserved; portrait classified sensitive; no credentials/device identifiers; claim_allowed=false; no merge without human authorization."
+    }
+  ],
+  "pointer_gaps": [
+    {
+      "path": "docs/AGENTES.md",
+      "state": "TOKEN_VAZIO_STALE_POINTER_NOT_FOUND_AT_BASELINE",
+      "handling": "Root AGENTS.md remained authoritative for this change; the missing pointer was recorded, not repaired out of scope."
+    }
+  ],
+  "hypothesis": {
+    "h1": "A typed multimodal seed can be coherent and reversible in bounded aspects without promoting visual or symbolic material.",
+    "h0": "A dangling identity, invalid containment, preface/dependency cycle, unguarded portrait, unaccounted MIME/loss boundary, unsupported promotion or codec failure exists.",
+    "decision_gate": "H1 is accepted only as draft implementation when all local gates pass; remote execution and domain claims remain separate."
+  },
+  "gates": [
+    {
+      "gate_id": "GATE-MEDIA-HEADER-INSPECTION",
+      "command": "for f in ../upload/[0-9][0-9]-*; do sha256sum \"$f\"; file -b --mime-type \"$f\"; identify -format '%m|%w|%h|%z|%[colorspace]|%b\\n' \"$f\"; done",
+      "exit_code": 0,
+      "result": "PASS",
+      "measured": {
+        "source_count": 10,
+        "detected_jpeg_count": 10,
+        "jpeg_baseline_bit_depth": 8,
+        "color_space": "sRGB",
+        "extension_mime_mismatch_count": 9
+      }
+    },
+    {
+      "gate_id": "GATE-PYTHON-COMPILE",
+      "command": "python3 -m py_compile scripts/validate_multimodal_cave_seed.py tests/test_multimodal_cave_seed.py",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "gate_id": "GATE-UNIT-ADVERSARIAL",
+      "command": "python3 -m unittest -v tests/test_multimodal_cave_seed.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "measured": {"tests": 15, "failures": 0, "errors": 0, "elapsed_seconds": 0.024}
+    },
+    {
+      "gate_id": "GATE-SEED-VALIDATOR",
+      "command": "python3 scripts/validate_multimodal_cave_seed.py --repo-root . --seed data/multimodal/MULTIMODAL_CAVE_SEED_20260822.v1.json",
+      "exit_code": 0,
+      "result": "PASS",
+      "measured": {
+        "objects": 10,
+        "representations": 10,
+        "tiles": 28,
+        "root_tiles": 10,
+        "relations": 15,
+        "prefaces": 8,
+        "transforms": 7,
+        "gaps": 9,
+        "schemas": 6,
+        "claim_guards": 133,
+        "codec_vectors": 1024,
+        "extension_mime_mismatches": 9,
+        "seed_sha256": "69df43d0d24f89026aec7afe238c2b357bd2679b70071d4ad2e28281f48732ce"
+      }
+    },
+    {
+      "gate_id": "GATE-JSON-YAML-PARSE",
+      "command": "python3 -m json.tool <each seed/schema>; yaml.safe_load(.github/workflows/multimodal-cave-seed-v1.yml)",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "gate_id": "GATE-DRIVE-EDITORIAL-READBACK",
+      "operation": "Create native Google Doc; write title, native date chip, ten headings and bounded summary; get_document readback.",
+      "exit_code": 0,
+      "result": "PASS",
+      "measured": {
+        "document_id": "17O7mEaLXpiypz4rufGf_hx1G-jCranCzXjP1CQpNqlY",
+        "tab_id": "t.0",
+        "native_date_elements": 1,
+        "heading_1_count": 10,
+        "title_style_verified": true,
+        "revision_id": "AIroW36H8_q3t5prR_IwQ8QX5qndKTl5jJ4JCSPl2GDPFdUtp5lqrRhT4srr65kScn0Ddp1iJxp0hs6lNQHaZLK2pY6VSMKEaQBrvxbKHSk"
+      }
+    }
+  ],
+  "artifact_hashes": [
+    {"path": ".github/workflows/multimodal-cave-seed-v1.yml", "sha256": "42184885711681c8688bd0536208eaf0b9c72f33f60bef6afdfdb6a7a5107da9"},
+    {"path": "data/multimodal/MULTIMODAL_CAVE_SEED_20260822.v1.json", "sha256": "69df43d0d24f89026aec7afe238c2b357bd2679b70071d4ad2e28281f48732ce"},
+    {"path": "indices/MULTIMODAL_CAVE_SEED_V1_20260822.md", "sha256": "bb5d9c716ddae81bff9cca1fcfc3b74f556fad7a6dd07ee88d3b362be3c08f74"},
+    {"path": "schemas/multimodal-cave-seed.v1.schema.json", "sha256": "0d5a59bf7b8b44a64f8e981c6bfd3e99c24e48066300380b6a273b0b105d10c7"},
+    {"path": "schemas/multimodal-object.v1.schema.json", "sha256": "1436bae90eb439f92bff4ffc1c17e32a610a992097a640fa34bba722006d193e"},
+    {"path": "schemas/multimodal-representation.v1.schema.json", "sha256": "6e6c2a473457931e77d7de36d5c735a1030cc9a89946d8af5dc1093ac0696f9e"},
+    {"path": "schemas/multimodal-transform.v1.schema.json", "sha256": "fd979e7560177eb3bfa16dec89bc8a4c62c55b37b51287460b7baccadad1a157"},
+    {"path": "schemas/route-preface.v1.schema.json", "sha256": "74419b37bc3a61f3bd834ed76ceec12d952bbdab3c0b54db94f61760ce17c693"},
+    {"path": "schemas/semantic-tile.v1.schema.json", "sha256": "908518b22df08dbbbb8fbc4fcfb04f3774cf265f6d1fa1bed5f4ee73d561877d"},
+    {"path": "scripts/validate_multimodal_cave_seed.py", "sha256": "9838e2af1e724aa5e5a61c5ffb8c3ebc41376e41f39ecba8a1550eb024091175"},
+    {"path": "tests/test_multimodal_cave_seed.py", "sha256": "1ff9ab5f785252aacbc38a94d1291e656f050904c10f292ff5bb9aa2c534dcbe"}
+  ],
+  "editorial_mirror": {
+    "provider": "GOOGLE_DRIVE",
+    "document_id": "17O7mEaLXpiypz4rufGf_hx1G-jCranCzXjP1CQpNqlY",
+    "url": "https://docs.google.com/document/d/17O7mEaLXpiypz4rufGf_hx1G-jCranCzXjP1CQpNqlY",
+    "state": "VERIFIED_READBACK",
+    "github_pr": "TOKEN_VAZIO_PENDING_CREATION"
+  },
+  "risks_and_reversal": {
+    "risks": [
+      "A filename extension may be mistaken for the detected encoding.",
+      "Semantic similarities may be mistaken for dependencies or causal relations.",
+      "Local PASS may be mistaken for remote or domain PASS.",
+      "A portrait may be reused without identity, consent or rights authority.",
+      "A flattened derivative may lose layer information or lineage."
+    ],
+    "controls": [
+      "Detected MIME and declared extension are separate fields.",
+      "Relation type and graph class are mandatory.",
+      "Every claim_allowed field is false and recursively checked.",
+      "Portrait identity inference and crop export are false.",
+      "Unexecuted transforms remain TOKEN_VAZIO_EXECUTION."
+    ],
+    "reversal": "No existing file was overwritten. Reversal is a normal revert of the additive commit or closure/deletion of the unmerged branch after review. The independent Drive checkpoint remains a historical editorial record."
+  },
+  "decision": {
+    "result": "ACCEPT_DRAFT_IMPLEMENTATION_FOR_REMOTE_REVIEW",
+    "reason": "H1 is compatible with all executed bounded gates and no declared invariant regressed in the local seed.",
+    "not_authorized": ["merge", "release", "scientific claim promotion", "identity inference", "publication of source bytes"]
+  },
+  "r3": {
+    "f_ok": "All declared local gates passed and the editorial mirror was read back with native structure.",
+    "f_gap": "Remote PR execution, source producer authority, original multimedia, derivative transforms and external/domain gates remain unexecuted or TOKEN_VAZIO.",
+    "f_next": "Create a branch and draft PR from the frozen baseline, observe its exact-head workflow, then append a federation settlement receipt without rewriting this local receipt."
+  }
+}

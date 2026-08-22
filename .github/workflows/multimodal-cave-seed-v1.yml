@@ -1,0 +1,62 @@
+name: multimodal-cave-seed-v1
+
+on:
+  pull_request:
+    paths:
+      - 'data/multimodal/MULTIMODAL_CAVE_SEED_20260822.v1.json'
+      - 'data/receipts/multimodal-cave-seed*.json'
+      - 'schemas/multimodal-*.schema.json'
+      - 'schemas/semantic-tile.v1.schema.json'
+      - 'schemas/route-preface.v1.schema.json'
+      - 'scripts/validate_multimodal_cave_seed.py'
+      - 'tests/test_multimodal_cave_seed.py'
+      - 'indices/MULTIMODAL_CAVE_SEED_V1_20260822.md'
+      - '.github/workflows/multimodal-cave-seed-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-seed-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile validator and tests
+        run: python -m py_compile scripts/validate_multimodal_cave_seed.py tests/test_multimodal_cave_seed.py
+      - name: Unit and adversarial gates
+        run: python -m unittest -v tests/test_multimodal_cave_seed.py
+      - name: Validate real seed
+        run: python scripts/validate_multimodal_cave_seed.py --repo-root . --seed data/multimodal/MULTIMODAL_CAVE_SEED_20260822.v1.json
+      - name: Epistemic and privacy boundary
+        run: |
+          python - <<'PY'
+          import json
+          p = json.load(open('data/multimodal/MULTIMODAL_CAVE_SEED_20260822.v1.json', encoding='utf-8'))
+          assert p['claim_allowed'] is False
+          assert p['state'] == 'VERIFIED_LIMITED'
+          assert all(g['state'] == 'TOKEN_VAZIO' and g['claim_allowed'] is False for g in p['gaps'])
+          portrait = next(x for x in p['objects'] if x['object_id'] == 'MMO-10')
+          assert portrait['privacy'] == {
+              'classification': 'SENSITIVE_PERSONAL_IMAGE',
+              'identity_inference_allowed': False,
+              'segmentation_export_allowed': False,
+          }
+          print(json.dumps({'boundary': 'PASS', 'claim_allowed': False, 'gap_count': len(p['gaps'])}, sort_keys=True))
+          PY
+      - name: Receipt summary
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          path = 'data/multimodal/MULTIMODAL_CAVE_SEED_20260822.v1.json'
+          data = open(path, 'rb').read()
+          payload = json.loads(data)
+          print('MULTIMODAL_CAVE_SEED_V1')
+          print('objects=', len(payload['objects']))
+          print('tiles=', len(payload['tiles']))
+          print('sha256=', hashlib.sha256(data).hexdigest())
+          print('claim_allowed=', payload['claim_allowed'])
+          PY
