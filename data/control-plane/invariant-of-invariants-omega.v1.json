@@ -1,0 +1,591 @@
+{
+  "schema_version": "1.0.0",
+  "architecture_id": "IOMEGA-RAFAELIA-MULTISURFACE-V1",
+  "as_of": "2026-08-22T17:03:52-03:00",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "privacy_default": "DENY",
+  "core_equation": {
+    "expression": "I_OMEGA = ID * C * H * P * E * F * Q * G * R * D",
+    "zero_rule": "TOKEN_VAZIO"
+  },
+  "axes": [
+    "IDENTITY",
+    "CUSTODY",
+    "INTEGRITY",
+    "PROVENANCE",
+    "EVIDENCE",
+    "FRESHNESS",
+    "QUERY_BOUNDS",
+    "GOVERNANCE",
+    "REVERSIBILITY",
+    "DELTA"
+  ],
+  "invariants": [
+    {"id": "I00", "name": "Identidade lógica estável", "factor": "ID", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I01", "name": "Fonte preservada e custódia explícita", "factor": "C", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I02", "name": "Integridade por hash de conteúdo", "factor": "H", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I03", "name": "Proveniência e família de origem", "factor": "P", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I04", "name": "Estado epistemológico e falsificador", "factor": "E", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I05", "name": "Frescor por revisão e descendência", "factor": "F", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I06", "name": "Consulta tipada e limitada", "factor": "Q", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I07", "name": "Privacidade, licença e autoridade", "factor": "G", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I08", "name": "Mudança reversível com rollback", "factor": "R", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I09", "name": "Delta append-only com receipt", "factor": "D", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I10", "name": "Separação entre símbolo, modelo e evidência", "factor": "E_SYMBOL_BOUNDARY", "failure_state": "TOKEN_VAZIO"},
+    {"id": "I11", "name": "Separação entre editorial, execução e ciência", "factor": "AUTHORITY_BOUNDARY", "failure_state": "TOKEN_VAZIO"}
+  ],
+  "surfaces": [
+    {
+      "id": "S-CUSTOM-INSTRUCTIONS",
+      "kind": "INSTRUCTION",
+      "authority_role": "CONTROL",
+      "locator": "chatgpt:custom-instructions:user-controlled",
+      "state": "OBSERVED_LIMITED",
+      "privacy_class": "P1_INTERNAL",
+      "content_hash": null,
+      "revision": null
+    },
+    {
+      "id": "S-CHATGPT-MEMORY",
+      "kind": "MEMORY",
+      "authority_role": "RECONSTRUCTION",
+      "locator": "chatgpt:memory:product-surface",
+      "state": "REFERENCE",
+      "privacy_class": "P2_PRIVATE_METADATA",
+      "content_hash": null,
+      "revision": null
+    },
+    {
+      "id": "S-LIBRARY",
+      "kind": "LIBRARY",
+      "authority_role": "CUSTODY",
+      "locator": "library:libfile_9e278f6df944819193e103fdf9e9b35e",
+      "state": "OBSERVED",
+      "privacy_class": "P1_INTERNAL",
+      "content_hash": "sha256:daa72b9808b9321abf3527acbc50bf578d9508b6ce614b888217fff29330b662",
+      "revision": "version:0"
+    },
+    {
+      "id": "S-DRIVE-NOVOEXPORT",
+      "kind": "GOOGLE_DRIVE",
+      "authority_role": "EDITORIAL_SOURCE",
+      "locator": "drive:1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+      "state": "CANONICAL",
+      "privacy_class": "P3_PRIVATE_BODY",
+      "content_hash": "sha256:38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+      "revision": "manifest:2026-08-03"
+    },
+    {
+      "id": "S-DRIVE-NOVOEXPORT-INDEX",
+      "kind": "GOOGLE_DRIVE",
+      "authority_role": "CUSTODY",
+      "locator": "drive:1_AVO3UWZU7r469YS06SnXoI5dZaH1v_l",
+      "state": "OBSERVED",
+      "privacy_class": "P2_PRIVATE_METADATA",
+      "content_hash": null,
+      "revision": "receipts:2026-08-22"
+    },
+    {
+      "id": "S-GMAIL",
+      "kind": "GMAIL",
+      "authority_role": "EVENT_PROVENANCE",
+      "locator": "gmail:rafaelmeloreisnovo@gmail.com",
+      "state": "OBSERVED_LIMITED",
+      "privacy_class": "P2_PRIVATE_METADATA",
+      "content_hash": null,
+      "revision": "search:2026-08-22"
+    },
+    {
+      "id": "S-GITHUB-MAPA",
+      "kind": "GITHUB",
+      "authority_role": "ONTOLOGY",
+      "locator": "github:rafaelmeloreisnovo/Mapa",
+      "state": "CANONICAL",
+      "privacy_class": "P0_PUBLIC",
+      "content_hash": null,
+      "revision": "main"
+    },
+    {
+      "id": "S-GITHUB-CHUNKS",
+      "kind": "GITHUB",
+      "authority_role": "EXECUTION",
+      "locator": "github:rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "state": "IMPLEMENTED",
+      "privacy_class": "P2_PRIVATE_METADATA",
+      "content_hash": "git:0c8f90e3c5616c249f01a1038c7f67adea6ec3fa",
+      "revision": "draft-pr:46"
+    },
+    {
+      "id": "S-DALLE-IMAGES",
+      "kind": "IMAGE",
+      "authority_role": "CREATIVE_ASSET",
+      "locator": "imagegen:artifact-not-specified",
+      "state": "TOKEN_VAZIO",
+      "privacy_class": "P1_INTERNAL",
+      "content_hash": null,
+      "revision": null
+    },
+    {
+      "id": "S-PETS",
+      "kind": "PET",
+      "authority_role": "UX_STATE",
+      "locator": "chatgpt-pets:active=seedy",
+      "state": "OBSERVED_LIMITED",
+      "privacy_class": "P1_INTERNAL",
+      "content_hash": null,
+      "revision": "observed:2026-08-22"
+    },
+    {
+      "id": "S-RLL",
+      "kind": "SCIENCE",
+      "authority_role": "SCIENTIFIC_EVIDENCE",
+      "locator": "github:instituto-Rafael/relativity-living-light",
+      "state": "REFERENCE",
+      "privacy_class": "P0_PUBLIC",
+      "content_hash": null,
+      "revision": null
+    },
+    {
+      "id": "S-RAFGITTOOLS",
+      "kind": "GITHUB",
+      "authority_role": "EXECUTION",
+      "locator": "github:rafaelmeloreisnovo/RafGitTools",
+      "state": "REFERENCE",
+      "privacy_class": "P0_PUBLIC",
+      "content_hash": null,
+      "revision": null
+    },
+    {
+      "id": "S-VECTRAS",
+      "kind": "RUNTIME",
+      "authority_role": "RUNTIME",
+      "locator": "github:rafaelmeloreisnovo/Vectras-VM-Android",
+      "state": "REFERENCE",
+      "privacy_class": "P0_PUBLIC",
+      "content_hash": null,
+      "revision": null
+    },
+    {
+      "id": "S-TERMUX",
+      "kind": "RUNTIME",
+      "authority_role": "RUNTIME",
+      "locator": "github:rafaelmeloreisnovo/termux-app-rafacodephi",
+      "state": "REFERENCE",
+      "privacy_class": "P0_PUBLIC",
+      "content_hash": null,
+      "revision": null
+    }
+  ],
+  "relations": [
+    {
+      "id": "R-INSTRUCTIONS-GOVERN-MAPA",
+      "from": "S-CUSTOM-INSTRUCTIONS",
+      "to": "S-GITHUB-MAPA",
+      "type": "GOVERNS",
+      "evidence_state": "OBSERVADO_LIMITADO",
+      "receipt_locator": "conversation:current-request:2026-08-22"
+    },
+    {
+      "id": "R-MEMORY-RECONSTRUCTS-LIBRARY",
+      "from": "S-CHATGPT-MEMORY",
+      "to": "S-LIBRARY",
+      "type": "RECONSTRUCTS",
+      "evidence_state": "TOKEN_VAZIO",
+      "receipt_locator": null
+    },
+    {
+      "id": "R-NOVOEXPORT-CUSTODY-INDEX",
+      "from": "S-DRIVE-NOVOEXPORT",
+      "to": "S-DRIVE-NOVOEXPORT-INDEX",
+      "type": "DERIVES_TO",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "drive:1sod2Grn5tfHolV8w_RWEKyiS_VATM7CK"
+    },
+    {
+      "id": "R-INDEX-CATALOGS-CHUNKS",
+      "from": "S-DRIVE-NOVOEXPORT-INDEX",
+      "to": "S-GITHUB-CHUNKS",
+      "type": "CATALOGS",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "github:rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE/pull/45"
+    },
+    {
+      "id": "R-NOVOEXPORT-GENERATION-CHUNKS",
+      "from": "S-DRIVE-NOVOEXPORT",
+      "to": "S-GITHUB-CHUNKS",
+      "type": "DERIVES_TO",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "github:rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE/pull/46"
+    },
+    {
+      "id": "R-CHUNKS-ROUTES-MAPA",
+      "from": "S-GITHUB-CHUNKS",
+      "to": "S-GITHUB-MAPA",
+      "type": "ROUTES",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "github:rafaelmeloreisnovo/Mapa:docs/OMEGA_ACTIVATE_ROUTING_V1.md"
+    },
+    {
+      "id": "R-GMAIL-NOTIFIES-MAPA",
+      "from": "S-GMAIL",
+      "to": "S-GITHUB-MAPA",
+      "type": "NOTIFIES",
+      "evidence_state": "OBSERVADO_LIMITADO",
+      "receipt_locator": "gmail:message:1a027d0cf4aaacf1"
+    },
+    {
+      "id": "R-DALLE-PERSISTS-LIBRARY",
+      "from": "S-DALLE-IMAGES",
+      "to": "S-LIBRARY",
+      "type": "PERSISTS",
+      "evidence_state": "TOKEN_VAZIO",
+      "receipt_locator": null
+    },
+    {
+      "id": "R-PETS-PRESENTS-INSTRUCTIONS",
+      "from": "S-PETS",
+      "to": "S-CUSTOM-INSTRUCTIONS",
+      "type": "PRESENTS",
+      "evidence_state": "MODELO_ANALOGICO",
+      "receipt_locator": null
+    },
+    {
+      "id": "R-MAPA-ROUTES-RLL",
+      "from": "S-GITHUB-MAPA",
+      "to": "S-RLL",
+      "type": "ROUTES",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "github:rafaelmeloreisnovo/Mapa:indices/FEDERATED_REFERENCE_MATRIX_V1.md"
+    },
+    {
+      "id": "R-MAPA-ROUTES-RAFGITTOOLS",
+      "from": "S-GITHUB-MAPA",
+      "to": "S-RAFGITTOOLS",
+      "type": "ROUTES",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "github:rafaelmeloreisnovo/Mapa:data/control-plane/federated-reference-matrix.v1.json"
+    },
+    {
+      "id": "R-RAFGITTOOLS-EXECUTES-CHUNKS",
+      "from": "S-RAFGITTOOLS",
+      "to": "S-GITHUB-CHUNKS",
+      "type": "EXECUTES",
+      "evidence_state": "HIPOTESE",
+      "receipt_locator": null
+    },
+    {
+      "id": "R-MAPA-ROUTES-VECTRAS",
+      "from": "S-GITHUB-MAPA",
+      "to": "S-VECTRAS",
+      "type": "ROUTES",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "github:rafaelmeloreisnovo/Mapa:data/control-plane/federated-reference-matrix.v1.json"
+    },
+    {
+      "id": "R-MAPA-ROUTES-TERMUX",
+      "from": "S-GITHUB-MAPA",
+      "to": "S-TERMUX",
+      "type": "ROUTES",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "github:rafaelmeloreisnovo/Mapa:data/control-plane/federated-reference-matrix.v1.json"
+    },
+    {
+      "id": "R-VECTRAS-VALIDATES-CHUNKS",
+      "from": "S-VECTRAS",
+      "to": "S-GITHUB-CHUNKS",
+      "type": "VALIDATES",
+      "evidence_state": "TOKEN_VAZIO",
+      "receipt_locator": null
+    },
+    {
+      "id": "R-TERMUX-VALIDATES-CHUNKS",
+      "from": "S-TERMUX",
+      "to": "S-GITHUB-CHUNKS",
+      "type": "VALIDATES",
+      "evidence_state": "TOKEN_VAZIO",
+      "receipt_locator": null
+    },
+    {
+      "id": "R-RLL-FALSIFIES-MAPA",
+      "from": "S-RLL",
+      "to": "S-GITHUB-MAPA",
+      "type": "FALSIFIES",
+      "evidence_state": "HIPOTESE",
+      "receipt_locator": null
+    },
+    {
+      "id": "R-LIBRARY-CUSTODIES-MAPA",
+      "from": "S-LIBRARY",
+      "to": "S-GITHUB-MAPA",
+      "type": "CUSTODIES",
+      "evidence_state": "EVIDENCIADO",
+      "receipt_locator": "library:libfile_9e278f6df944819193e103fdf9e9b35e:version:0"
+    }
+  ],
+  "symbols": [
+    {"token": "∆", "operator": "delta append-only observado", "evidence_weight": 0},
+    {"token": "n", "operator": "cardinalidade ou índice finito", "evidence_weight": 0},
+    {"token": "ⁿ", "operator": "ordem, potência ou dimensão declarada", "evidence_weight": 0},
+    {"token": "¡", "operator": "interrupção, atenção ou gate urgente", "evidence_weight": 0},
+    {"token": "∅", "operator": "conjunto vazio conhecido", "evidence_weight": 0},
+    {"token": "0", "operator": "zero medido ou contador nulo", "evidence_weight": 0},
+    {"token": "⁰", "operator": "baseline ou camada inicial", "evidence_weight": 0},
+    {"token": "¹", "operator": "primeira camada ou evidência unitária", "evidence_weight": 0},
+    {"token": "φ", "operator": "razão, proporção ou hipótese de forma", "evidence_weight": 0},
+    {"token": "π", "operator": "periodicidade ou topologia circular", "evidence_weight": 0},
+    {"token": "Ω", "operator": "platô verificável provisório", "evidence_weight": 0},
+    {"token": "Π", "operator": "produto ou agregação com fatores explícitos", "evidence_weight": 0},
+    {"token": "μ", "operator": "microestado ou unidade de memória", "evidence_weight": 0},
+    {"token": "★", "operator": "prioridade candidata, nunca prova", "evidence_weight": 0},
+    {"token": "†", "operator": "artefato retirado ou legado", "evidence_weight": 0},
+    {"token": "‡", "operator": "contradição, risco ou supersessão a revisar", "evidence_weight": 0},
+    {"token": "‰", "operator": "taxa por mil com denominador explícito", "evidence_weight": 0},
+    {"token": "℅", "operator": "rota de custódia ou atribuição care-of", "evidence_weight": 0}
+  ],
+  "topologies": [
+    {"id": "T01", "group": "PRIMITIVA", "name": "Nó tipado", "gate": "identidade estável"},
+    {"id": "T02", "group": "PRIMITIVA", "name": "Aresta tipada", "gate": "origem e destino válidos"},
+    {"id": "T03", "group": "PRIMITIVA", "name": "Caminho navegável", "gate": "todas as arestas rastreáveis"},
+    {"id": "T04", "group": "HIERARQUIA", "name": "Árvore de derivação", "gate": "raiz imutável"},
+    {"id": "T05", "group": "HIERARQUIA", "name": "Floresta de fontes", "gate": "famílias de origem separadas"},
+    {"id": "T06", "group": "FLUXO", "name": "DAG de proveniência", "gate": "ciclos de derivação proibidos"},
+    {"id": "T07", "group": "CICLO", "name": "Ciclo de feedback", "gate": "estado e condição de parada"},
+    {"id": "T08", "group": "GEOMETRIA", "name": "Toro T^k", "gate": "mapa, domínio e estabilidade explícitos"},
+    {"id": "T09", "group": "GEOMETRIA", "name": "Reticulado multidimensional", "gate": "vizinhança e métrica explícitas"},
+    {"id": "T10", "group": "RELAÇÃO", "name": "Hipergrafo", "gate": "hiperarestas com semântica"},
+    {"id": "T11", "group": "RELAÇÃO", "name": "Grafo bipartido fonte-artefato", "gate": "partições disjuntas"},
+    {"id": "T12", "group": "RELAÇÃO", "name": "Grafo tripartido fonte-claim-evidência", "gate": "claim nunca liga sem evidência"},
+    {"id": "T13", "group": "RELAÇÃO", "name": "Grafo multiplex", "gate": "camadas não colapsadas"},
+    {"id": "T14", "group": "TEMPO", "name": "Grafo temporal", "gate": "intervalos e revisões explícitos"},
+    {"id": "T15", "group": "PROVENIÊNCIA", "name": "Grafo de cadeia de custódia", "gate": "hash e receipt por handoff"},
+    {"id": "T16", "group": "SISTEMA", "name": "Grafo de dependências", "gate": "versões e direção explícitas"},
+    {"id": "T17", "group": "CAUSAL", "name": "Grafo causal candidato", "gate": "intervenção ou falsificador"},
+    {"id": "T18", "group": "SEMÂNTICA", "name": "Grafo semântico", "gate": "vocabulário e tipo de relação"},
+    {"id": "T19", "group": "AUDITORIA", "name": "Grafo de contradições", "gate": "ambos os lados preservados"},
+    {"id": "T20", "group": "AUDITORIA", "name": "Grafo de anomalias", "gate": "baseline e limiar"},
+    {"id": "T21", "group": "CONHECIMENTO", "name": "Grafo de conhecimento", "gate": "proveniência por tripla"},
+    {"id": "T22", "group": "OPORTUNIDADE", "name": "Grafo de oportunidades", "gate": "valor, custo, risco e opção"},
+    {"id": "T23", "group": "INOVAÇÃO", "name": "Grafo de inovação", "gate": "novidade comparada ao baseline"},
+    {"id": "T24", "group": "TENSOR", "name": "Rede de tensores", "gate": "dimensões e contrações válidas"},
+    {"id": "T25", "group": "GEOMETRIA", "name": "Complexo simplicial", "gate": "faces e compatibilidade"},
+    {"id": "T26", "group": "LOCAL_GLOBAL", "name": "Compatibilidade local-global tipo feixe", "gate": "restrições e colagem testáveis"},
+    {"id": "T27", "group": "MORFISMO", "name": "Registro categorial de morfismos", "gate": "domínio, contradomínio e composição"},
+    {"id": "T28", "group": "MANIFOLD", "name": "Atlas de variedades", "gate": "cartas e mapas de transição"},
+    {"id": "T29", "group": "DINÂMICA", "name": "Espaço de estados", "gate": "estado completo e transição determinável"},
+    {"id": "T30", "group": "DINÂMICA", "name": "Bacia de atração", "gate": "recorrência e estabilidade medidas"},
+    {"id": "T31", "group": "DINÂMICA", "name": "Laço de retroalimentação", "gate": "ganho, atraso e saturação"},
+    {"id": "T32", "group": "CONCORRÊNCIA", "name": "Fila produtor-consumidor", "gate": "ordem de memória e backpressure"},
+    {"id": "T33", "group": "CONCORRÊNCIA", "name": "Ring buffer sequenciado", "gate": "número de sequência por slot"},
+    {"id": "T34", "group": "DISTRIBUÍDO", "name": "Malha", "gate": "liveness e partições"},
+    {"id": "T35", "group": "DISTRIBUÍDO", "name": "Estrela", "gate": "falha do centro explicitada"},
+    {"id": "T36", "group": "DISTRIBUÍDO", "name": "Hub-and-spoke", "gate": "autoridade e rotas do hub"},
+    {"id": "T37", "group": "DISTRIBUÍDO", "name": "Federação", "gate": "autoridade por domínio"},
+    {"id": "T38", "group": "DISTRIBUÍDO", "name": "Grafo de quorum", "gate": "interseção e falhas toleradas"},
+    {"id": "T39", "group": "DISTRIBUÍDO", "name": "Grafo de replicação CRDT", "gate": "merge convergente e relógio"},
+    {"id": "T40", "group": "EVENTO", "name": "Log event-sourced", "gate": "append-only e replay"},
+    {"id": "T41", "group": "RECUPERAÇÃO", "name": "Cadeia de checkpoints", "gate": "hash pai e restauração"},
+    {"id": "T42", "group": "RECUPERAÇÃO", "name": "Árvore de rollback", "gate": "ponto seguro e custo de reversão"}
+  ],
+  "methodologies": [
+    {"id": "M01", "group": "EVIDÊNCIA", "name": "Cadeia de custódia", "gate": "identidade e handoff"},
+    {"id": "M02", "group": "EVIDÊNCIA", "name": "Fechamento por hash", "gate": "bytes reproduzíveis"},
+    {"id": "M03", "group": "EVIDÊNCIA", "name": "Event sourcing append-only", "gate": "replay determinístico"},
+    {"id": "M04", "group": "EVIDÊNCIA", "name": "Evidence gate", "gate": "classe e suficiência"},
+    {"id": "M05", "group": "EVIDÊNCIA", "name": "Ledger de falsificadores", "gate": "teste capaz de refutar"},
+    {"id": "M06", "group": "EVIDÊNCIA", "name": "Preservação de contradições", "gate": "sem sobrescrita silenciosa"},
+    {"id": "M07", "group": "EVIDÊNCIA", "name": "Famílias de origem independentes", "gate": "alias não conta como confirmação"},
+    {"id": "M08", "group": "EVIDÊNCIA", "name": "Calibração de incerteza", "gate": "intervalo e método"},
+    {"id": "M09", "group": "TOPOLOGIA", "name": "Multigrafo tipado", "gate": "tipo por aresta"},
+    {"id": "M10", "group": "TOPOLOGIA", "name": "Hipergrafo relacional", "gate": "n-ária explícita"},
+    {"id": "M11", "group": "TOPOLOGIA", "name": "DAG de linhagem", "gate": "sem ciclo causal falso"},
+    {"id": "M12", "group": "TOPOLOGIA", "name": "Árvore dentro da matriz vetorial", "gate": "raiz, célula e vetor tipados"},
+    {"id": "M13", "group": "TOPOLOGIA", "name": "Mapa toroidal", "gate": "domínio e recorrência"},
+    {"id": "M14", "group": "TOPOLOGIA", "name": "Grafo bipartido", "gate": "partições válidas"},
+    {"id": "M15", "group": "TOPOLOGIA", "name": "Grafo temporal", "gate": "ordem parcial por revisão"},
+    {"id": "M16", "group": "TOPOLOGIA", "name": "Complexo simplicial", "gate": "compatibilidade de faces"},
+    {"id": "M17", "group": "MATEMÁTICA", "name": "Derivação de delta", "gate": "variável e passo explícitos"},
+    {"id": "M18", "group": "MATEMÁTICA", "name": "Integração de evidências", "gate": "não somar fontes dependentes"},
+    {"id": "M19", "group": "MATEMÁTICA", "name": "Antiderivada estrutural", "gate": "família de soluções e constante"},
+    {"id": "M20", "group": "MATEMÁTICA", "name": "Inversão", "gate": "domínio e singularidades"},
+    {"id": "M21", "group": "MATEMÁTICA", "name": "Ponto fixo", "gate": "convergência medida"},
+    {"id": "M22", "group": "MATEMÁTICA", "name": "Bifurcação segura", "gate": "baseline e rollback"},
+    {"id": "M23", "group": "MATEMÁTICA", "name": "Contração tensorial", "gate": "dimensões compatíveis"},
+    {"id": "M24", "group": "MATEMÁTICA", "name": "Análise espectral", "gate": "matriz e normalização"},
+    {"id": "M25", "group": "SEMÂNTICA", "name": "Alinhamento ontológico", "gate": "identidade não confundida com alias"},
+    {"id": "M26", "group": "SEMÂNTICA", "name": "Diff semântico", "gate": "mudança de significado classificada"},
+    {"id": "M27", "group": "SEMÂNTICA", "name": "Análise morfológica", "gate": "forma e contexto separados"},
+    {"id": "M28", "group": "SEMÂNTICA", "name": "Formulação explícita", "gate": "termos definidos"},
+    {"id": "M29", "group": "SEMÂNTICA", "name": "Agrupamento", "gate": "métrica e estabilidade"},
+    {"id": "M30", "group": "SEMÂNTICA", "name": "Fatoração latente", "gate": "baseline e validação externa"},
+    {"id": "M31", "group": "SEMÂNTICA", "name": "Relações ocultas candidatas", "gate": "falsificador antes de promoção"},
+    {"id": "M32", "group": "SEMÂNTICA", "name": "AST de consulta", "gate": "gramática e limites"},
+    {"id": "M33", "group": "SISTEMAS", "name": "Log single-writer", "gate": "ordem total observável"},
+    {"id": "M34", "group": "SISTEMAS", "name": "MPMC limitada por sequência", "gate": "prova de slot e testes concorrentes"},
+    {"id": "M35", "group": "SISTEMAS", "name": "Read-copy-update", "gate": "período de graça"},
+    {"id": "M36", "group": "SISTEMAS", "name": "CRDT opcional", "gate": "convergência e semântica de merge"},
+    {"id": "M37", "group": "SISTEMAS", "name": "Quorum", "gate": "interseção e partição"},
+    {"id": "M38", "group": "SISTEMAS", "name": "Arena de páginas", "gate": "ownership e alinhamento"},
+    {"id": "M39", "group": "SISTEMAS", "name": "Framing zero-copy candidato", "gate": "lifetime do buffer"},
+    {"id": "M40", "group": "SISTEMAS", "name": "Backpressure", "gate": "limite e política de descarte"},
+    {"id": "M41", "group": "DESEMPENHO", "name": "Baseline reproduzível", "gate": "ambiente fixado"},
+    {"id": "M42", "group": "DESEMPENHO", "name": "Matriz de workloads", "gate": "casos representativos"},
+    {"id": "M43", "group": "DESEMPENHO", "name": "P50 P95 P99", "gate": "amostra e relógio"},
+    {"id": "M44", "group": "DESEMPENHO", "name": "Contadores de perfil", "gate": "evento e plataforma"},
+    {"id": "M45", "group": "DESEMPENHO", "name": "Experimento A/B", "gate": "isolamento de variável"},
+    {"id": "M46", "group": "DESEMPENHO", "name": "Testes de propriedades", "gate": "invariantes executáveis"},
+    {"id": "M47", "group": "DESEMPENHO", "name": "Fuzzing adversarial", "gate": "corpus e sanitização"},
+    {"id": "M48", "group": "DESEMPENHO", "name": "Chaos e partições", "gate": "recuperação observável"},
+    {"id": "M49", "group": "GOVERNANÇA", "name": "Default deny", "gate": "autorização explícita"},
+    {"id": "M50", "group": "GOVERNANÇA", "name": "Minimização de dados", "gate": "campo necessário"},
+    {"id": "M51", "group": "GOVERNANÇA", "name": "Autorização por capacidade", "gate": "escopo mínimo"},
+    {"id": "M52", "group": "GOVERNANÇA", "name": "Política versionada", "gate": "diff e vigência"},
+    {"id": "M53", "group": "GOVERNANÇA", "name": "Rollout reversível", "gate": "rollback testado"},
+    {"id": "M54", "group": "GOVERNANÇA", "name": "Audit trail", "gate": "ator, tempo e efeito"},
+    {"id": "M55", "group": "GOVERNANÇA", "name": "Linhagem de licença", "gate": "origem e compatibilidade"},
+    {"id": "M56", "group": "GOVERNANÇA", "name": "Redação e quarentena", "gate": "classe de privacidade"},
+    {"id": "M57", "group": "INOVAÇÃO", "name": "Adjacente possível", "gate": "dependências disponíveis"},
+    {"id": "M58", "group": "INOVAÇÃO", "name": "Caixa morfológica", "gate": "dimensões independentes"},
+    {"id": "M59", "group": "INOVAÇÃO", "name": "Score de oportunidade", "gate": "valor, evidência, custo e risco"},
+    {"id": "M60", "group": "INOVAÇÃO", "name": "Árvore de cenários", "gate": "probabilidades e decisões"},
+    {"id": "M61", "group": "INOVAÇÃO", "name": "Valor da informação", "gate": "decisão alterável"},
+    {"id": "M62", "group": "INOVAÇÃO", "name": "Fronteira de portfólio", "gate": "retorno e correlação"},
+    {"id": "M63", "group": "INOVAÇÃO", "name": "Opções reais", "gate": "custo de espera e reversibilidade"},
+    {"id": "M64", "group": "INOVAÇÃO", "name": "Falsificador anti-utopia", "gate": "critério de abandono"}
+  ],
+  "freshness_contract": {
+    "comparison_scope": "SAME_LOGICAL_IDENTITY",
+    "vector": [
+      "logical_id",
+      "provider_revision",
+      "parent_hash",
+      "content_hash",
+      "content_time",
+      "capture_time",
+      "source_family"
+    ],
+    "promotion_requires": [
+      "descendancy_or_supersedes_receipt",
+      "content_hash_or_provider_revision",
+      "custody_intact",
+      "privacy_gate_passed"
+    ],
+    "timestamp_only_forbidden": true,
+    "conflict_state": "TOKEN_VAZIO"
+  },
+  "query_contract": {
+    "grammar": "FIND entity [WHERE predicate] [TRAVERSE relation DEPTH n] [ORDER BY field] LIMIT n",
+    "max_depth": 8,
+    "max_limit": 1000,
+    "max_predicates": 32,
+    "timeout_ms": 5000,
+    "allow_arbitrary_eval": false
+  },
+  "latency_receipts": [
+    {
+      "id": "L01",
+      "scope": "parallel reconciliation: 2 Drive raw receipts + Gmail search + GitHub PR, commit and repository reads",
+      "wall_ms": 7300,
+      "measured_at": "2026-08-22T16:58:00-03:00",
+      "classification": "MEASURED_CONFOUNDED",
+      "throughput": "TOKEN_VAZIO"
+    },
+    {
+      "id": "L02",
+      "scope": "targeted inventory: Gmail search + 6 GitHub searches + 7 GitHub file reads",
+      "wall_ms": 13100,
+      "measured_at": "2026-08-22T17:00:00-03:00",
+      "classification": "MEASURED_CONFOUNDED",
+      "throughput": "TOKEN_VAZIO"
+    },
+    {
+      "id": "L03",
+      "scope": "two targeted Gmail metadata searches with zero exact NOVOexport hits",
+      "wall_ms": 1500,
+      "measured_at": "2026-08-22T17:01:00-03:00",
+      "classification": "MEASURED_CONFOUNDED",
+      "throughput": "TOKEN_VAZIO"
+    },
+    {
+      "id": "L04",
+      "scope": "two Gmail thread reads",
+      "wall_ms": 900,
+      "measured_at": "2026-08-22T17:01:30-03:00",
+      "classification": "MEASURED_CONFOUNDED",
+      "throughput": "TOKEN_VAZIO"
+    },
+    {
+      "id": "L05",
+      "scope": "four GitHub file reads for validator and test patterns",
+      "wall_ms": 1900,
+      "measured_at": "2026-08-22T17:02:30-03:00",
+      "classification": "MEASURED_CONFOUNDED",
+      "throughput": "TOKEN_VAZIO"
+    }
+  ],
+  "gates": [
+    {"id": "G00", "name": "Compilar intenção", "pass_condition": "objeto, escopo, autoridade e risco definidos", "failure_action": "STOP"},
+    {"id": "G01", "name": "Reconstruir contexto mínimo", "pass_condition": "fontes canônicas e contradições localizadas", "failure_action": "TOKEN_VAZIO"},
+    {"id": "G02", "name": "Inventariar sem mutar", "pass_condition": "IDs, revisões, tamanhos e hashes observados", "failure_action": "TOKEN_VAZIO"},
+    {"id": "G03", "name": "Classificar privacidade e licença", "pass_condition": "payload permitido e minimizado", "failure_action": "QUARANTINE"},
+    {"id": "G04", "name": "Calcular frescor", "pass_condition": "mesma identidade e descendência comprovada", "failure_action": "TOKEN_VAZIO"},
+    {"id": "G05", "name": "Construir subgrafo", "pass_condition": "nós, arestas e dimensões sem dangling references", "failure_action": "TOKEN_VAZIO"},
+    {"id": "G06", "name": "Executar consulta limitada", "pass_condition": "AST válido dentro dos limites", "failure_action": "STOP"},
+    {"id": "G07", "name": "Testar baseline e falsificadores", "pass_condition": "resultado repetível e refutável", "failure_action": "ROLLBACK"},
+    {"id": "G08", "name": "Promover claim", "pass_condition": "evidência suficiente, receipt e revisão independente", "failure_action": "TOKEN_VAZIO"},
+    {"id": "G09", "name": "Publicar delta", "pass_condition": "branch, diff, testes, receipt e rollback", "failure_action": "STOP"},
+    {"id": "G10", "name": "Observar latência e regressão", "pass_condition": "P50, P95, P99 e ambiente registrados", "failure_action": "TOKEN_VAZIO"},
+    {"id": "G11", "name": "Fechar platô provisório", "pass_condition": "F_ok, F_gap e F_next emitidos", "failure_action": "TOKEN_VAZIO"}
+  ],
+  "gaps": [
+    {
+      "id": "GAP-NOVOEXPORT-RAW018",
+      "state": "TOKEN_VAZIO",
+      "description": "RAW018 não possui fechamento corrente completo de provider bytes, SHA e provider ID.",
+      "falsifier": "receipt imutável com bytes, SHA-256 e provider ID de RAW018.",
+      "next_gate": "G02"
+    },
+    {
+      "id": "GAP-NOVOEXPORT-RAW048-050",
+      "state": "TOKEN_VAZIO",
+      "description": "RAW048 a RAW050 ainda não possuem rotas/provider IDs correntes no índice limpo.",
+      "falsifier": "índice provider-bound para RAW048, RAW049 e RAW050.",
+      "next_gate": "G02"
+    },
+    {
+      "id": "GAP-NOVOEXPORT-25GB-RUN",
+      "state": "TOKEN_VAZIO",
+      "description": "A execução integral sobre 25.132.295.924 bytes e os hashes físicos não foi observada.",
+      "falsifier": "execução imutável fim a fim com receipt de bytes e hashes físicos.",
+      "next_gate": "G07"
+    },
+    {
+      "id": "GAP-GITHUB-RUNNER",
+      "state": "TOKEN_VAZIO",
+      "description": "A PR 46 possui publicação Git verificada, mas o CI remoto falhou antes de qualquer etapa.",
+      "falsifier": "workflow remoto executa ao menos uma etapa e preserva logs/artifact.",
+      "next_gate": "G07"
+    },
+    {
+      "id": "GAP-DALLE-ASSET",
+      "state": "TOKEN_VAZIO",
+      "description": "Nenhuma imagem DALL-E específica foi fornecida ou gerada neste ciclo.",
+      "falsifier": "artefato com prompt/proveniência e hash de conteúdo.",
+      "next_gate": "G02"
+    },
+    {
+      "id": "GAP-SCIENTIFIC-PROMOTION",
+      "state": "TOKEN_VAZIO",
+      "description": "A arquitetura não promove claims de RLL ou cosmologia.",
+      "falsifier": "likelihood, baseline, priors, diagnósticos, falsificador e replicação independente.",
+      "next_gate": "G08"
+    },
+    {
+      "id": "GAP-LATENCY-DISTRIBUTION",
+      "state": "TOKEN_VAZIO",
+      "description": "As latências observadas são wall times compostos; não existem ainda P50, P95, P99 ou throughput isolado.",
+      "falsifier": "benchmark com ambiente fixado, amostra suficiente e percentis.",
+      "next_gate": "G10"
+    }
+  ]
+}
