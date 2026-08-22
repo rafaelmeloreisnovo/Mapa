@@ -1,0 +1,217 @@
+{
+  "event_type": "federated_producer_state_registration",
+  "event_date": "2026-08-22T00:00:00Z",
+  "producer_repository": {
+    "owner": "rafaelmeloreisnovo",
+    "name": "frida-desktop",
+    "url": "https://github.com/rafaelmeloreisnovo/frida-desktop"
+  },
+  "producer_commit": {
+    "hash": "fce522d",
+    "branch": "claude/gui-testes-resultados-6k8yzp",
+    "tag": "frida-gui-phase1-repair",
+    "parent": "341f457",
+    "message_summary": "Frida Desktop GUI: semantic ontology + test harness + React dashboard + Android app [DOCUMENTED_PARTIAL]"
+  },
+  "federation_status": {
+    "state": "DOCUMENTED_PARTIAL",
+    "classification": "PARTIAL_FAIL_CLOSED",
+    "claim_allowed": false,
+    "promotion_hold": true,
+    "next_gate": "frida-desktop:compile-all-targets"
+  },
+  "component_inventory": {
+    "semantic_ontology": {
+      "file": "ontology/learning-semantic-tree.v1.json",
+      "state": "MERGED",
+      "size_bytes": 12450,
+      "hash_sha256": "7098aaf48cbeba67c0a66f727cf54bf0dcafc93468a45e324fec20e0fd27fac2",
+      "role": "test structure definition + RFL component mapping"
+    },
+    "test_harness": {
+      "file": "tests/harness/test_runner.py",
+      "state": "MERGED",
+      "size_bytes": 8920,
+      "status": "IMPLEMENTED_UNTESTED_SYNTHETIC",
+      "role": "test orchestration (3-5 phases per scenario)"
+    },
+    "dashboard_backend": {
+      "file": "dashboard/backend/server.js",
+      "state": "MERGED",
+      "size_bytes": 11200,
+      "status": "IMPLEMENTED_UNTESTED",
+      "role": "Express REST API + WebSocket + SQLite"
+    },
+    "dashboard_frontend": {
+      "file": "dashboard/web/src/",
+      "state": "MERGED",
+      "status": "INCOMPLETE_INFRASTRUCTURE",
+      "missing_files": [
+        "index.html",
+        "src/main.tsx",
+        "tsconfig.json"
+      ],
+      "role": "React dashboard + component tree"
+    },
+    "android_app": {
+      "file": "android/app/src/",
+      "state": "MERGED",
+      "status": "CI_PARTIAL_FAIL",
+      "compiled_files": [
+        "MainActivity.java"
+      ],
+      "failed_files": [
+        "learning/RFLBridge.java",
+        "learning/MetricsPoller.java",
+        "ui/ResearchModePanel.java",
+        "native/learning_runtime.c",
+        "native/learning_store.c",
+        "native/neon4096_core.c"
+      ],
+      "role": "Android runtime + RFL JNI bridge"
+    },
+    "gradle_build": {
+      "files": [
+        "android/build.gradle",
+        "android/app/build.gradle",
+        "android/gradle.properties",
+        "android/proguard-rules.pro"
+      ],
+      "state": "MERGED",
+      "status": "STRUCTURE_VALID",
+      "role": "Build orchestration (not validated by full compile)"
+    }
+  },
+  "falsifiers_discovered": [
+    {
+      "id": "F1_CI_INCOMPLETE",
+      "severity": "CRITICAL",
+      "description": "CI compilation incomplete: only MainActivity.java compiled; ResearchModePanel, RFLBridge, MetricsPoller, React frontend, backend server, and test harness NOT built",
+      "evidence": "GitHub Actions android-build.yml ran successfully but artifact manifest shows only MainActivity.class",
+      "gate_affected": "compile-all-targets"
+    },
+    {
+      "id": "F2_JNI_CORRUPTION",
+      "severity": "CRITICAL",
+      "description": "RFLBridge.java JNI corruption: duplicate method signatures; native wrappers call themselves recursively",
+      "evidence": "Source code inspection shows setMode(), snapshot(), predict(), train(), reset() defined twice with conflicting JNI export",
+      "gate_affected": "android-jni-compilation"
+    },
+    {
+      "id": "F3_RESEARCHMODE_ORPHANED",
+      "severity": "CRITICAL",
+      "description": "ResearchModePanel not linked to MainActivity; missing imports, @BindView annotations, onCreate() integration, AndroidX configuration",
+      "evidence": "ResearchModePanel.java exists but not referenced in MainActivity; build would fail if CI ran full compilation",
+      "gate_affected": "android-ui-linking"
+    },
+    {
+      "id": "F4_FRONTEND_INFRA_MISSING",
+      "severity": "HIGH",
+      "description": "Frontend infrastructure missing: no index.html, main.tsx, tsconfig.json; 'Vite started' does not prove build or rendering",
+      "evidence": "Dashboard files created but React entry point bootstrap incomplete; dev server port 5173 opened but no artifact validation",
+      "gate_affected": "react-frontend-build"
+    },
+    {
+      "id": "F5_HARNESS_SYNTHETIC",
+      "severity": "HIGH",
+      "description": "Test harness uses synthetic metrics: sleep() calls and fake data generation produce PASS without physical device or Frida runtime",
+      "evidence": "test_runner.py contains sleep(0.1) and generate_synthetic_metrics() functions; no device_validation_marker in results",
+      "gate_affected": "harness-deterministic-gate"
+    },
+    {
+      "id": "F6_POSTMERGE_RECEIPT_MISSING",
+      "severity": "MEDIUM",
+      "description": "No post-merge receipt: commit chain exists (4f9285 → 341f457 → fce522d) but no federated receipt linking artifact identity, schema, and authority",
+      "evidence": "Mapa/data/control-plane/ has no frida-desktop entry; no lineage_id or dedup rule defined",
+      "gate_affected": "frida-mapa-binding"
+    },
+    {
+      "id": "F7_CROSSREPO_BRANCH_UNVERIFIED",
+      "severity": "MEDIUM",
+      "description": "Cross-repository branch 'synchronized across 10 repos' is TOKEN_VAZIO: no manifest with repo/ref/SHA-256 exists in Mapa",
+      "evidence": "Branch claude/gui-testes-resultados-6k8yzp claimed on 10 repos but Mapa/data/control-plane/ has no registry entry",
+      "gate_affected": "mapa-toroid-validate-6-repos"
+    },
+    {
+      "id": "F8_GAP_CATEGORIZATION_IMPRECISE",
+      "severity": "LOW",
+      "description": "Gap categorization imprecise: audit lists '12 TOKEN_VAZIO across 6 categories' without individual IDs; two additional global blockers (device execution, TOROID topology) untracked",
+      "evidence": "OBSERVACAO-FINAL.md enumerates TV-CODE (2), TV-TEST (2), TV-DATA (2), TV-INDEPENDENCE (2), TV-BOUNDARY (1), TV-ACCESS (1) = 10; device + TOROID = 2 additional, unindexed",
+      "gate_affected": "mapa-gap-indexing"
+    }
+  ],
+  "epistemological_errors": [
+    {
+      "error": "Promoted 'code exists' (IMPLEMENTED) to 'untested in declared scope' (IMPLEMENTED_UNTESTED) globally, ignoring CI-level failures",
+      "correction": "Reclassified as DOCUMENTED_PARTIAL / PARTIAL_FAIL_CLOSED; compilation must close before IMPLEMENTED promotion"
+    },
+    {
+      "error": "CI green on one file (MainActivity.java) interpreted as 'all files compile'",
+      "correction": "CI green on subset ≠ all targets green; require full compilation including Java, native, React, backend"
+    },
+    {
+      "error": "'Harness PASS' from synthetic metrics interpreted as physical evidence",
+      "correction": "Synthetic PASS ≠ device evidence; harness must require device=true or TOKEN_VAZIO marker"
+    },
+    {
+      "error": "Vite dev server started → React/backend built or functional",
+      "correction": "Dev server ≠ build artifact; require npm run build output, test-drive dashboard, validate API contract"
+    }
+  ],
+  "authority_assignment": {
+    "producer_authority": "rafaelmeloreisnovo/frida-desktop",
+    "producer_gates_responsible": [
+      "compile-all-targets",
+      "harness-deterministic-gate",
+      "fixtures-freeze",
+      "lineage-define"
+    ],
+    "federation_custodian": "rafaelmeloreisnovo/Mapa",
+    "custodian_gates_responsible": [
+      "frida-mapa-binding",
+      "mapa-toroid-validate-6-repos"
+    ],
+    "consumer_authority": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "consumer_gates_responsible": [
+      "frida-bridge-integration",
+      "device-rfl-runtime-test"
+    ]
+  },
+  "next_phase": {
+    "phase_number": 2,
+    "name": "Repair in frida-desktop",
+    "authority": "rafaelmeloreisnovo/frida-desktop",
+    "gate": "frida-android-compile-all",
+    "actions_required": [
+      "Fix RFLBridge.java: remove duplicate methods, fix JNI exports",
+      "Link ResearchModePanel to MainActivity: add @BindView, onCreate() integration",
+      "Verify AndroidX dependencies in app/build.gradle",
+      "Build Android module: ./gradlew :app:assembleDebug",
+      "Fix frontend: create index.html, main.tsx, tsconfig.json",
+      "Build React: npm run build",
+      "Build backend: npm run build in dashboard/backend",
+      "Update CI: expand android-build.yml to compile all targets"
+    ],
+    "exit_criterion": "All targets compile to zero errors; CI red if any target fails"
+  },
+  "state_transition": {
+    "from": "IMPLEMENTED_UNTESTED (misclassified)",
+    "to": "DOCUMENTED_PARTIAL / PARTIAL_FAIL_CLOSED",
+    "holding": "PROMOTION_HOLD until Phase 2-5 gates close",
+    "final_target": "FEDERATION_CERTIFIED (Cycle 6 closure)",
+    "blocked_gates": [
+      "frida-mapa-binding",
+      "termux-app-frida-integration",
+      "device-rfl-runtime-test",
+      "mapa-toroid-validate-6-repos"
+    ]
+  },
+  "custody_chain": {
+    "recorded_by": "claude-code-remote session",
+    "recorded_at": "2026-08-22T00:00:00Z",
+    "mapa_branch": "claude/gui-testes-resultados-6k8yzp",
+    "mapa_head": "1ddc1850",
+    "signature": "receipt-phase1-repair-20260822",
+    "immutable_until_phase2": true
+  }
+}
