@@ -16,7 +16,7 @@
 
 - title: `RAFAELIA — Formula & Calculation Memory Index Ω — V1 — 2026-08-22`
 - Drive ID: `1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8`
-- sheets: `FORMULAS`, `SOURCE_COVERAGE`, `MEMORY_TAXONOMY`, `INDEX_TAXONOMY`, `GAPS_NEXT`
+- sheets: `FORMULAS`, `SOURCE_COVERAGE`, `MEMORY_TAXONOMY`, `INDEX_TAXONOMY`, `GAPS_NEXT`, `SHARD04_RAW`
 - role: navigation by source expression, type, domain, derivative, antiderivative/accumulator, inverse/reverse, singularities, equivalence, epistemic state, gap, and `F_next`.
 
 ## 2. Recovered memory topology
@@ -52,7 +52,17 @@ These are different levels of the architecture and MUST NOT be added together as
 | extraction shard02 | 38 occurrences | S01+S02 = 60 occurrences / 59 exact unique |
 | extraction shard03 formal | 47 occurrences | 44 exact unique inside shard |
 | raw observed S01+S02+S03 | 107 occurrences | NOT a global unique total |
+| extraction shard04 Matem-tica- | 208 occurrences | 201 exact NFC+trim identities; 6 duplicate groups; 12 paths / 11 blobs |
+| raw observed S01+S02+S03+S04 | 315 occurrences | NOT a global unique total; cross-shard dedup pending |
 | reported target | 593 + 60 = 653 | `UNVERIFIED_REPORTED_TARGET` |
+
+SHARD04 receipt:
+
+`data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD04_MATEMATICA_20260822.v1.json`
+
+SHARD04 index delta:
+
+`indices/RAFAELIA_CALCULATION_MEMORY_SHARD04_DELTA_20260822.md`
 
 Canonical unresolved states:
 
@@ -129,7 +139,7 @@ E7 SEMANTIC_ANALOGY
 
 ## 8. Initial calculation overlay
 
-The Drive memory currently contains 18 seed families covering:
+The Drive memory contains 18 curated seed families plus the provider-bound SHARD04 raw expression layer. Seed families cover:
 
 - `κ=sqrt(3)/2` and `S(d)=κ^d`;
 - radial/angular discrete recurrences;
@@ -144,7 +154,7 @@ The Drive memory currently contains 18 seed families covering:
 - longitudinal discrete derivative/antiderivative;
 - typed `TOKEN_VAZIO` gap-load accumulator.
 
-This is a calculation overlay derived from observed formulas. It does not rewrite the source expressions.
+SHARD04 raw expressions are source-bound occurrences; they are not automatically promoted into differentiated `MCM` records until domain/operator gates are applied.
 
 ## 9. Source anchors already present in Mapa
 
@@ -154,13 +164,26 @@ This is a calculation overlay derived from observed formulas. It does not rewrit
 - `data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD01_20260816.v1.json`
 - `data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD02_20260816.v1.json`
 - `data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD03_FORMAL_20260816.v1.json`
+- `data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD04_MATEMATICA_20260822.v1.json`
+- `indices/RAFAELIA_CALCULATION_MEMORY_SHARD04_DELTA_20260822.md`
 - `docs/research/RAFAELIA_MULTIDIMENSIONAL_COHERENCE_FORMULA_BRIDGE_20260815.md`
 
 External governed source anchor:
 
 - `rafaelmeloreisnovo/Matem-tica-/papers/2026-07-17_antiderivada_vazio_fluxo_toroidal.md`
 
-## 10. Deterministic route
+## 10. Remaining bounded queue
+
+Four `rafaelmeloreisnovo/teoremas` source-scan candidates remain expression-level pending:
+
+- `TEORIA_ATRACTOR_42.md`
+- `docs/rafaelia/350-formulas-mvps.md`
+- `docs/rafaelia/biosincronia.md`
+- `docs/rafaelia/domo-rafaelia-402-expressoes.md`
+
+State: `TOKEN_VAZIO_EXPRESSION_LEVEL_PENDING_SHARD05`.
+
+## 11. Deterministic route
 
 ```text
 SOURCE
@@ -180,8 +203,8 @@ SOURCE
 → APPEND MEMORY
 ```
 
-## 11. R3
+## 12. R3
 
-**F_ok:** Drive calculation memory and operational index were materialized; existing formula registry/source scan/shards were reconciled; calculation operators and equivalence levels are now explicitly separated.  
-**F_gap:** global unique formula count, full semantic dedup, remaining candidate-source extraction, complete domain/unit typing, and full formula→implementation→execution→evidence linkage remain partial or `TOKEN_VAZIO`.  
-**F_next:** complete the remaining source extraction at frozen provenance, perform exact cross-shard dedup before semantic equivalence, then append typed `MCM` records without widening scientific or novelty claims.
+**F_ok:** Drive calculation memory and operational index were materialized; SHARD04 closes the prior 12-path `Matem-tica-` queue under frozen provenance with 208 raw occurrences and 201 exact NFC+trim identities; the raw row store and GitHub receipt are bound.  
+**F_gap:** four `teoremas` paths remain; global unique formula count, exact cross-shard dedup, semantic/algebraic equivalence, complete domain/unit typing, and formula→implementation→execution→evidence linkage remain partial or `TOKEN_VAZIO`.  
+**F_next:** SHARD05 → exact digest S01..S05 → E1 AST → E2 algebraic equivalence → typed `MCM` calculation overlay; do not widen scientific or novelty claims before those gates.
