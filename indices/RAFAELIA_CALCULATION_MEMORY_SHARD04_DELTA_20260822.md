@@ -47,7 +47,7 @@ SHARD04 includes both source-era expressions and later mathematical audits. Ther
 historical occurrence != current accepted resolution
 ```
 
-Corrections/counterexamples are linked conceptually as `CORRECTS` / `REFUTES` / `SUPERSEDES`; the historical source is not erased.
+Corrections/counterexamples are represented as typed mathematical records and are candidates for explicit `CORRECTS` / `REFUTES` / `SUPERSEDES` relations; the historical source is not erased.
 
 Examples present in the audited material include distinction of first modular alignment from joint-origin return, failure of the old weighted permutation-invariance claim without explicit conditions, generalized CRT compatibility, and rejection of `28/13` as an approximation to pi.
 
