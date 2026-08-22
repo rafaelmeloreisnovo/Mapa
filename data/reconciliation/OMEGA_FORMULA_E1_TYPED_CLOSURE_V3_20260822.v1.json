@@ -1,0 +1,73 @@
+{
+  "schema": "RAFAELIA_FORMULA_E1_TYPED_CLOSURE_V3",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-MEMORY-E1-TYPED-CLOSURE-V3-20260822",
+  "claim_allowed": false,
+  "source_main_commit": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+  "predecessor": "E1_STRUCTURAL_V2_20260822",
+  "drive": {
+    "spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+    "source_sheet": "E1_STRUCTURAL_V2_20260822",
+    "closure_sheet": "E1_TYPED_CLOSURE_V3_20260822"
+  },
+  "denominator": {
+    "e0_representatives": 356,
+    "scope": "frozen 49-path provider-bound scan",
+    "global_universe_exhaustive": false
+  },
+  "e1": {
+    "structural_ast_v2": 339,
+    "safe_token_lift": 1,
+    "ast_parsed_v3": 340,
+    "ast_unique_v3": 332,
+    "duplicate_extra_occurrences": 8,
+    "typed_derived_formalization_queue": 6,
+    "typed_non_ast_objects": 10,
+    "structural_classification_coverage": "356/356",
+    "ast_global": "TOKEN_VAZIO"
+  },
+  "safe_token_lift": {
+    "source_expression": "f(n+1)=n+n+𝒩^n+🆕",
+    "token_map": {"🆕": "U_NEW"},
+    "rule": "reversible uninterpreted atom only; no semantic meaning or algebraic simplification assigned",
+    "state": "PASS_STRUCTURAL"
+  },
+  "derived_formalization_queue": [
+    {"id":"F01","expression":"if check(A,B,s,P0,P1)=ok","reason":"conditional predicate expressed with prose prefix"},
+    {"id":"F02","expression":"R_n is prime iff n in {1,3}","reason":"natural-language number-theory predicate requires derived formalization"},
+    {"id":"F03","expression":"C(A,B)={j:test j is well-defined in both A and B}","reason":"set-builder predicate uses prose semantics"},
+    {"id":"F06","expression":"û={A if check(A,B,s,P0,P1)=ok; B⊕φ(s) if check=ok no segundo; falha controlada caso contrário}","reason":"piecewise candidate has underspecified second predicate"},
+    {"id":"F08","expression":"Sincronia 963↔999","reason":"relation operator/observable undefined"},
+    {"id":"F10","expression":"HRV + condutância dérmica","reason":"plus operator cannot be assumed numeric without feature-domain typing"}
+  ],
+  "typed_non_ast_objects": [
+    {"id":"F05","type":"OPERATIONAL_ROUTE_MIXED"},
+    {"id":"F07","type":"LABEL_CLAIM_NOT_FORMULA"},
+    {"id":"F09","type":"OPERATIONAL_PIPELINE"},
+    {"id":"F11","type":"OPERATIONAL_PIPELINE"},
+    {"id":"F12","type":"EXPERIMENT_PROTOCOL"},
+    {"id":"F13","type":"EXPERIMENT_PROTOCOL"},
+    {"id":"F14","type":"TRANSFORMATION_PIPELINE"},
+    {"id":"F15","type":"EXPERIMENT_PROTOCOL"},
+    {"id":"F16","type":"EXPERIMENT_PROTOCOL"},
+    {"id":"F17","type":"EXPERIMENT_PROTOCOL"}
+  ],
+  "e2": {
+    "rational_assignment_candidates": 19,
+    "rational_unique": 19,
+    "new_merges_beyond_e1": 0,
+    "global": "TOKEN_VAZIO",
+    "boundary": "only compatible typed domains may enter algebraic equivalence"
+  },
+  "invariants": [
+    "classification coverage != AST coverage",
+    "source text != derived formalization",
+    "uninterpreted token != defined variable semantics",
+    "pipeline/protocol != formula",
+    "E1 structural identity != E2 algebraic equivalence",
+    "claim_allowed=false"
+  ],
+  "F_ok": "All 356 E0 representatives are now structurally typed; 340 are safe structural ASTs, 6 are explicit derived-formalization candidates, and 10 are typed non-AST route/protocol/label objects.",
+  "F_gap": "Six semantic-formalization candidates keep E1_AST_GLOBAL open; E2 remains domain-partial and global uniqueness remains TOKEN_VAZIO.",
+  "F_next": "Formalize the six source-preserving semantic candidates with explicit derived provenance, then partition E2 by domain family rather than applying one algebraic normalizer globally."
+}
