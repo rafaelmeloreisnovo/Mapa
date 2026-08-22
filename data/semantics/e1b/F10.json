@@ -1,0 +1,11 @@
+{
+  "epistemic": {"claim_allowed": false, "proof_boundary": "Feature composition only; no uniqueness/unclonability/security claim.", "state": "STRUCTURAL"},
+  "grounding": {"canonical_form": "FeatureVector(HRV_features,GSR_features)", "formalization_kind": "feature_vector_composition", "gaps": ["feature definitions", "windowing", "normalization", "units", "privacy/security model"], "state": "DERIVED_TYPED", "witnesses": [{"kind": "source_context", "value": "simultaneous capture + feature vector hash"}]},
+  "operational": {"evidence_refs": [], "execution_refs": [], "falsifiers": ["frozen fixture does not reproduce feature vector"], "implementation_refs": [], "negative_controls": ["channel permutation", "missing channel", "unit mismatch", "replay"], "next_gate": "freeze feature schema/windowing/units/privacy boundary", "route": ["SEMANTIC_PARSE", "FEATURE_SCHEMA", "PRIVACY_GATE", "IMPLEMENTATION_BINDING", "REPLAY_TEST"]},
+  "packet_id": "SEM:E1B:F10",
+  "relations": [{"evidence_effect": "STRUCTURAL_ONLY", "guard": "not arithmetic addition", "operator": "FORMAL_REWRITE", "promotion_cap": "FORMAL_ONLY", "target": "formal:FeatureVector(HRV_features,GSR_features)"}],
+  "schema": "rafaelia.semantic-support-packet/v1",
+  "semantic": {"ambiguity": {"alternatives": [{"description": "feature-vector composition from simultaneous capture", "discriminator": "MVP says simultaneous capture and vector hash", "reading_id": "F10-R1"}, {"description": "numeric addition", "discriminator": "requires scalar definitions and aligned units", "reading_id": "F10-R2"}], "selected_reading": "F10-R1", "state": "RESOLVED_BY_SOURCE"}, "domain_candidates": ["FEATURE_ENGINEERING", "BIOSIGNAL_PIPELINE"], "object_class": "FEATURE_COMPOSITION", "scope": {"locality": "SECTION_LOCAL", "modality": "PROCEDURAL", "negation": false, "temporal": "source-local"}},
+  "source": {"blob_sha": "5055adcc9538f0e096534f7975d90c3fa28aeea9", "path": "docs/rafaelia/biosincronia.md", "ref": "f497f9bc914bdc54dad7788fd74653bbe5a681d3", "repository": "rafaelmeloreisnovo/teoremas", "span": "Bio-Criptografia / MVP"},
+  "surface": {"language": "pt", "normalization": "PRESERVE_SOURCE", "text": "HRV + condutância dérmica"}
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "RAFAELIA_FORMULA_E2_MODULAR_EMBED_420_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-MEMORY-E2-MODULAR-420-20260822",
+  "claim_allowed": false,
+  "sources": [
+    {"repo":"rafaelmeloreisnovo/teoremas","tree_sha":"f497f9bc914bdc54dad7788fd74653bbe5a681d3","path":"docs/rafaelia/09-modularidade-multi-base.md","blob_sha1":"83051b6a3caafb0e5354e99676422c8e29320f01"},
+    {"repo":"rafaelmeloreisnovo/teoremas","tree_sha":"f497f9bc914bdc54dad7788fd74653bbe5a681d3","path":"docs/rafaelia/10-consistencia-congruencias.md","blob_sha1":"f00741309bdb4e82a514596718efa543c9796ec4"}
+  ],
+  "map": "Pi(n)=(n mod 7,n mod 10,n mod 12,n mod 20)",
+  "verification_harness_sha256": "be12c0d2aa8768316e00c1bb341ac184774f9634e267bb9dc72ce52a1c84d23a",
+  "results": {
+    "lcm": 420,
+    "minimum_period": 420,
+    "unique_tuples_n_0_419": 420,
+    "raw_product_tuple_count": 16800,
+    "generalized_crt_compatible_tuples": 420,
+    "image_equals_compatible_tuple_set": true,
+    "injective_on_Z_mod_420": true,
+    "injective_on_Z": false
+  },
+  "compatibility_rule": "for every modulus pair m_i,m_j, residue_i == residue_j mod gcd(m_i,m_j)",
+  "inverse": {
+    "mod_420": "UNIQUE_FOR_COMPATIBLE_TUPLE",
+    "over_Z": "PREIMAGE_CLASS_n0_PLUS_420Z"
+  },
+  "example": {
+    "n": 42,
+    "Pi_n": [0,2,6,2],
+    "inverse_mod_420": 42
+  },
+  "correction": {
+    "prior_safe_bound": "period divides lcm(7,10,12,20)=420",
+    "new_result": "minimum period is exactly 420 and the map is bijective between Z_420 and the generalized-CRT compatible residue tuples",
+    "global_Z_inverse": "not unique"
+  },
+  "invariants": [
+    "non-coprime CRT requires gcd compatibility",
+    "unique inverse modulo 420 != unique inverse over integers",
+    "exhaustive one-period enumeration is finite verification of the declared finite quotient",
+    "claim_allowed=false"
+  ],
+  "F_ok": "The multi-base embedding has exact minimum period 420, 420 unique states over one period, and exactly 420 generalized-CRT compatible tuples; inverse modulo 420 is uniquely characterized.",
+  "F_gap": "Implementation binding and runtime orbit/decoder receipts remain open; no broader security or physical claim follows.",
+  "F_next": "Bind or implement a generalized-CRT compatibility validator and inverse_mod420 routine, then execute it against all 420 states under a producer receipt."
+}

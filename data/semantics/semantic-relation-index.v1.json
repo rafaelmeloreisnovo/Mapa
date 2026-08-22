@@ -1,0 +1,98 @@
+{
+  "schema": "rafaelia.semantic-relation-index/v1",
+  "index_id": "SEMANTIC_RELATION_INDEX_E1B_V1_20260822",
+  "state": "ACTIVE_BOUNDED",
+  "claim_allowed": false,
+  "source_packet_set": [
+    "SEM:E1B:F01",
+    "SEM:E1B:F02",
+    "SEM:E1B:F03",
+    "SEM:E1B:F06",
+    "SEM:E1B:F08",
+    "SEM:E1B:F10"
+  ],
+  "invariant": "relation edge != proof; every edge carries evidence_effect, promotion_cap and guard",
+  "edges": [
+    {
+      "edge_id": "SEMREL:E1B:F01:DERIVED_FROM:001",
+      "source": "SEM:E1B:F01",
+      "operator": "DERIVED_FROM",
+      "target": "source:13-erro-absorvido#formula",
+      "evidence_effect": "STRUCTURAL_ONLY",
+      "promotion_cap": "NEVER",
+      "guard": "source adjacency != implication proof",
+      "status": "ACTIVE_TYPED"
+    },
+    {
+      "edge_id": "SEMREL:E1B:F02:DEFINITIONAL_EQUIV:001",
+      "source": "SEM:E1B:F02",
+      "operator": "DEFINITIONAL_EQUIV",
+      "target": "formal:Iff(Prime(R_n),Member(n,{1,3}))",
+      "evidence_effect": "SUPPORTS",
+      "promotion_cap": "FORMAL_ONLY",
+      "guard": "declared recurrence and n>=1; novelty excluded",
+      "status": "ACTIVE_FORMAL"
+    },
+    {
+      "edge_id": "SEMREL:E1B:F03:FORMAL_REWRITE:001",
+      "source": "SEM:E1B:F03",
+      "operator": "FORMAL_REWRITE",
+      "target": "formal:SetBuilder",
+      "evidence_effect": "STRUCTURAL_ONLY",
+      "promotion_cap": "FORMAL_ONLY",
+      "guard": "WellDefined remains uninterpreted until domain instantiation",
+      "status": "ACTIVE_TYPED"
+    },
+    {
+      "edge_id": "SEMREL:E1B:F06:DERIVED_FROM:001",
+      "source": "SEM:E1B:F06",
+      "operator": "DERIVED_FROM",
+      "target": "source:TEORIA_ATRACTOR_42#8.4",
+      "evidence_effect": "STRUCTURAL_ONLY",
+      "promotion_cap": "NEVER",
+      "guard": "second-lane predicate remains P2_UNKNOWN",
+      "status": "ACTIVE_TYPED"
+    },
+    {
+      "edge_id": "SEMREL:E1B:F08:FORMAL_ANALOGY:001",
+      "source": "SEM:E1B:F08",
+      "operator": "FORMAL_ANALOGY",
+      "target": "candidate:963_999_sync",
+      "evidence_effect": "NONE",
+      "promotion_cap": "NEVER",
+      "guard": "no observable/operator/mechanism inferred from ↔",
+      "status": "TOKEN_VAZIO_MECHANISM"
+    },
+    {
+      "edge_id": "SEMREL:E1B:F10:FORMAL_REWRITE:001",
+      "source": "SEM:E1B:F10",
+      "operator": "FORMAL_REWRITE",
+      "target": "formal:FeatureVector(HRV_features,GSR_features)",
+      "evidence_effect": "STRUCTURAL_ONLY",
+      "promotion_cap": "FORMAL_ONLY",
+      "guard": "source context selects composition; numeric addition is rejected without scalar/unit definitions",
+      "status": "ACTIVE_TYPED"
+    }
+  ],
+  "counts": {
+    "packets": 6,
+    "edges": 6,
+    "supports_edges": 1,
+    "structural_only_edges": 4,
+    "zero_evidence_edges": 1,
+    "promotion_never": 3,
+    "promotion_formal_only": 3,
+    "observed_or_tested_promotion": 0
+  },
+  "retrieval_keys": [
+    "source",
+    "operator",
+    "target",
+    "evidence_effect",
+    "promotion_cap",
+    "status"
+  ],
+  "F_ok": "The six bounded E1B semantic packets now have an explicit typed relation index with proof caps.",
+  "F_gap": "Cross-packet/transitive relation inference, implementation/runtime edges and evidence edges remain unmaterialized unless directly witnessed.",
+  "F_next": "Validate relation index against packet relations, then append IMPLEMENTS/EXECUTES/EVIDENCES edges only after exact bindings and receipts exist."
+}

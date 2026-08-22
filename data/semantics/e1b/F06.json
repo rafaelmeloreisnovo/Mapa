@@ -1,0 +1,11 @@
+{
+  "epistemic": {"claim_allowed": false, "proof_boundary": "Known-mask XOR reversibility != lane-error correction proof.", "state": "STRUCTURAL"},
+  "grounding": {"canonical_form": "Piecewise((A,P1),(Xor(B,phi(s)),P2_UNKNOWN),(FAIL,Otherwise))", "formalization_kind": "piecewise_decoder_with_unknown_guard", "gaps": ["P2_UNKNOWN", "parity definitions", "bit widths"], "state": "DERIVED_TYPED", "witnesses": [{"kind": "explicit_piecewise_source", "section": "§8.4"}]},
+  "operational": {"evidence_refs": ["Mapa/data/reconciliation/OMEGA_E2_GF2_MASK_GATE_20260822.v1.json"], "execution_refs": [], "falsifiers": ["bounded decoder returns wrong u"], "implementation_refs": [], "negative_controls": ["wrong mask", "both lanes corrupted", "parity mismatch"], "next_gate": "freeze P0/P1 and second-lane predicate; exhaustive bounded test", "route": ["SEMANTIC_PARSE", "BOOLEAN_GF2_CODING", "DECODER_SPEC", "IMPLEMENTATION_BINDING"]},
+  "packet_id": "SEM:E1B:F06",
+  "relations": [{"evidence_effect": "STRUCTURAL_ONLY", "guard": "unknown second predicate", "operator": "DERIVED_FROM", "promotion_cap": "NEVER", "target": "source:TEORIA_ATRACTOR_42#8.4"}],
+  "schema": "rafaelia.semantic-support-packet/v1",
+  "semantic": {"ambiguity": {"alternatives": [{"description": "second check swaps lane roles", "discriminator": "producer shows argument swap", "reading_id": "F06-R1"}, {"description": "second check is distinct parity predicate", "discriminator": "producer defines second predicate", "reading_id": "F06-R2"}], "selected_reading": null, "state": "UNRESOLVED_TYPED"}, "domain_candidates": ["BOOLEAN_GF2_CODING", "PIECEWISE_LOGIC"], "object_class": "FORMULA", "scope": {"locality": "SECTION_LOCAL", "modality": "DEFINED", "negation": false, "temporal": "source-local"}},
+  "source": {"blob_sha": "916e60420d0afd8993ca3ba93fd28862046ca73c", "path": "TEORIA_ATRACTOR_42.md", "ref": "f497f9bc914bdc54dad7788fd74653bbe5a681d3", "repository": "rafaelmeloreisnovo/teoremas", "span": "§8.4"},
+  "surface": {"language": "pt", "normalization": "PRESERVE_SOURCE", "text": "û={A if check(...)=ok; B⊕φ(s) if check=ok no segundo; falha controlada caso contrário}"}
+}

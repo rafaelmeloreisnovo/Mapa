@@ -1,0 +1,55 @@
+{
+  "schema": "RAFAELIA_MCM_CALCULUS_BATCH02_P1_P7_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-MEMORY-CALCULUS-BATCH02-P1-P7-20260822",
+  "claim_allowed": false,
+  "source": {
+    "repository": "rafaelmeloreisnovo/Matem-tica-",
+    "tree_sha": "e7a90eb64e02befa2a24708dfd24faa4c2381af5",
+    "path": "papers/2026-05-23_adendo_sete_possibilidades_0001123.md",
+    "blob_sha1": "56cfb695007a17509417ac6d31b1d0930261f7f1",
+    "native_parameter": "n",
+    "q": "sqrt(3)/2",
+    "families": ["P1(n)=q^n","P2(n)=n q^n","P3(n)=n^2 q^n","P4(n)=log(n+1)q^n","P5(n)=log(log(n+e))q^n","P6(n)=q^n/(n+1)","P7(n)=phi^n q^n"]
+  },
+  "operator_policy": {
+    "native": "D6 finite difference Delta because source parameter n is discrete",
+    "continuous_extension": "secondary DERIVED_CANDIDATE under explicit n->x real extension",
+    "continuous_extension_is_source_formula": false
+  },
+  "verification": {
+    "method": "symbolic simplify of Q(n+1)-Q(n)-P(n) for closed antidifferences; symbolic differentiation for listed continuous primitives",
+    "harness_sha256": "df8cd950f826df1e51061db97eacebe9e858c87cfcfbf2ad6cd8ce248e9028d8",
+    "closed_antidifference_pass": ["P1","P2","P3","P7"],
+    "closed_antidifference_count": "4/7",
+    "summation_antidifference_count": "3/7",
+    "native_delta_count": "7/7",
+    "continuous_derivative_forms": "7/7"
+  },
+  "records": [
+    {"id":"MCM:MATH:P1:019:v1","delta":"(q-1)q^n","antidifference":"q^n/(q-1)+C","continuous_derivative":"ln(q)q^x","continuous_primitive":"q^x/ln(q)+C"},
+    {"id":"MCM:MATH:P2:020:v1","delta":"q^n[(q-1)n+q]","antidifference":"q^n[n/(q-1)-q/(q-1)^2]+C","continuous_derivative":"q^x[1+x ln(q)]","continuous_primitive":"q^x[x/ln(q)-1/ln(q)^2]+C"},
+    {"id":"MCM:MATH:P3:021:v1","delta":"q^n[(q-1)n^2+2qn+q]","antidifference":"q^n[n^2/(q-1)-2qn/(q-1)^2+q(q+1)/(q-1)^3]+C","continuous_derivative":"q^x[2x+x^2 ln(q)]","continuous_primitive":"q^x[x^2/ln(q)-2x/ln(q)^2+2/ln(q)^3]+C"},
+    {"id":"MCM:MATH:P4:022:v1","delta":"q^n[q log(n+2)-log(n+1)]","antidifference":"sum_{k=0}^{n-1} log(k+1)q^k + C","continuous_derivative":"q^x[1/(x+1)+ln(q)ln(x+1)]","continuous_primitive":"SPECIAL_FUNCTION_OR_UNEVALUATED_INTEGRAL"},
+    {"id":"MCM:MATH:P5:023:v1","delta":"q^n[q log(log(n+1+e))-log(log(n+e))]","antidifference":"sum_{k=0}^{n-1} log(log(k+e))q^k + C","continuous_derivative":"q^x[ln(q)ln(ln(x+e))+1/((x+e)ln(x+e))]","continuous_primitive":"NO_ELEMENTARY_PRIMITIVE_ASSUMED"},
+    {"id":"MCM:MATH:P6:024:v1","delta":"q^n[q/(n+2)-1/(n+1)]","antidifference":"sum_{k=0}^{n-1} q^k/(k+1)+C","continuous_derivative":"q^x[ln(q)/(x+1)-1/(x+1)^2]","continuous_primitive":"q^(-1) Ei((x+1)ln(q))+C"},
+    {"id":"MCM:MATH:P7:025:v1","delta":"(phi q-1)(phi q)^n","antidifference":"(phi q)^n/(phi q-1)+C","continuous_derivative":"ln(phi q)(phi q)^x","continuous_primitive":"(phi q)^x/ln(phi q)+C"}
+  ],
+  "stability": {
+    "q_numeric": 0.8660254037844386,
+    "phi_q_numeric": 1.4012585384440734,
+    "P1_to_P6_general_note": "polynomial/log factors do not defeat q^n exponential decay in the listed source families when n grows and 0<q<1",
+    "P7": "EXPANSIVE_WITHOUT_NORMALIZATION",
+    "P7_reason": "phi*q > 1, matching the source warning"
+  },
+  "invariants": [
+    "discrete source domain is primary",
+    "antidifference closed form is promoted only when DeltaQ=P is symbolically verified",
+    "unevaluated finite sum is preferable to invented elementary primitive",
+    "continuous extension is derived and separately gated",
+    "claim_allowed=false"
+  ],
+  "F_ok": "Seven source-bound families now have native finite differences; P1/P2/P3/P7 have symbolically verified closed antidifferences and P4/P5/P6 retain exact summation antidifferences without fabricated elementary forms.",
+  "F_gap": "Implementation/execution bindings for these seven families remain mostly TOKEN_VAZIO; continuous extension semantics are secondary and require use-case-specific domain acceptance.",
+  "F_next": "Search code producers for P1..P7, bind executions, then expand Batch03 to the next high-confidence recurrence/continuous families."
+}

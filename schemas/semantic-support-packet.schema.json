@@ -1,0 +1,445 @@
+{
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/semantic-support-packet.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "epistemic": {
+      "additionalProperties": true,
+      "properties": {
+        "claim_allowed": {
+          "const": false
+        },
+        "proof_boundary": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "SOURCE_ONLY",
+            "STRUCTURAL",
+            "FORMAL",
+            "IMPLEMENTED",
+            "EXECUTED",
+            "EVIDENCED",
+            "TOKEN_VAZIO"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "claim_allowed",
+        "proof_boundary"
+      ],
+      "type": "object"
+    },
+    "grounding": {
+      "additionalProperties": true,
+      "properties": {
+        "canonical_form": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "formalization_kind": {
+          "type": "string"
+        },
+        "gaps": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "state": {
+          "enum": [
+            "SOURCE_EXPLICIT",
+            "REVERSIBLE_LIFT",
+            "DERIVED_TYPED",
+            "UNINTERPRETED",
+            "TOKEN_VAZIO"
+          ]
+        },
+        "witnesses": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "state",
+        "formalization_kind",
+        "witnesses",
+        "gaps"
+      ],
+      "type": "object"
+    },
+    "operational": {
+      "additionalProperties": true,
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "execution_refs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "falsifiers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "implementation_refs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negative_controls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "next_gate": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "route": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "route",
+        "implementation_refs",
+        "execution_refs",
+        "evidence_refs",
+        "falsifiers",
+        "next_gate"
+      ],
+      "type": "object"
+    },
+    "packet_id": {
+      "pattern": "^SEM:[A-Z0-9:_-]+$",
+      "type": "string"
+    },
+    "relations": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "evidence_effect": {
+            "enum": [
+              "NONE",
+              "STRUCTURAL_ONLY",
+              "SUPPORTS",
+              "CONTRADICTS"
+            ]
+          },
+          "guard": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "operator": {
+            "enum": [
+              "EXACT_ALIAS",
+              "DEFINITIONAL_EQUIV",
+              "FORMAL_REWRITE",
+              "CHANGE_OF_VARIABLES",
+              "IMPLEMENTS",
+              "EXECUTES",
+              "EVIDENCES",
+              "REFUTES",
+              "CORRECTS",
+              "SUPERSEDES",
+              "DERIVED_FROM",
+              "DEPENDS_ON",
+              "PRECONDITION",
+              "METHOD_SHARED",
+              "FORMAL_ANALOGY",
+              "CO_OCCURS"
+            ]
+          },
+          "promotion_cap": {
+            "enum": [
+              "NEVER",
+              "FORMAL_ONLY",
+              "OBSERVED_LIMITED",
+              "TESTED"
+            ]
+          },
+          "target": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "target",
+          "evidence_effect",
+          "promotion_cap"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "schema": {
+      "const": "rafaelia.semantic-support-packet/v1"
+    },
+    "semantic": {
+      "additionalProperties": true,
+      "properties": {
+        "ambiguity": {
+          "additionalProperties": false,
+          "properties": {
+            "alternatives": {
+              "items": {
+                "additionalProperties": true,
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "discriminator": {
+                    "type": "string"
+                  },
+                  "reading_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "reading_id",
+                  "description",
+                  "discriminator"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "selected_reading": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "enum": [
+                "NONE",
+                "RESOLVED_BY_SOURCE",
+                "UNRESOLVED_TYPED",
+                "BLOCKED"
+              ]
+            }
+          },
+          "required": [
+            "state",
+            "alternatives"
+          ],
+          "type": "object"
+        },
+        "constraints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "domain_candidates": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "object_class": {
+          "enum": [
+            "FORMULA",
+            "PREDICATE",
+            "SET_BUILDER",
+            "RELATION",
+            "PIPELINE",
+            "PROTOCOL",
+            "LABEL",
+            "FEATURE_COMPOSITION",
+            "NARRATIVE_QUANT_CANDIDATE",
+            "SYMBOLIC_UNINTERPRETED"
+          ]
+        },
+        "roles": {
+          "items": {
+            "additionalProperties": true,
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "role",
+              "value"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "scope": {
+          "additionalProperties": true,
+          "properties": {
+            "locality": {
+              "enum": [
+                "SOURCE_LOCAL",
+                "SECTION_LOCAL",
+                "REPO_LOCAL",
+                "CROSS_REPO_CANDIDATE"
+              ]
+            },
+            "modality": {
+              "enum": [
+                "ASSERTED",
+                "DEFINED",
+                "HYPOTHETICAL",
+                "CONDITIONAL",
+                "PROCEDURAL",
+                "GOAL",
+                "UNKNOWN"
+              ]
+            },
+            "negation": {
+              "type": "boolean"
+            },
+            "temporal": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "locality",
+            "temporal",
+            "modality",
+            "negation"
+          ],
+          "type": "object"
+        },
+        "units": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "object_class",
+        "domain_candidates",
+        "scope",
+        "ambiguity"
+      ],
+      "type": "object"
+    },
+    "source": {
+      "additionalProperties": false,
+      "properties": {
+        "blob_sha": {
+          "minLength": 7,
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "ref": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "repository": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "span": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "path",
+        "ref",
+        "blob_sha",
+        "span"
+      ],
+      "type": "object"
+    },
+    "surface": {
+      "additionalProperties": true,
+      "properties": {
+        "language": {
+          "minLength": 2,
+          "type": "string"
+        },
+        "normalization": {
+          "enum": [
+            "PRESERVE_SOURCE",
+            "NFC_TRIM",
+            "DERIVED_CANONICAL"
+          ]
+        },
+        "symbols": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "tokens": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "language",
+        "normalization"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema",
+    "packet_id",
+    "source",
+    "surface",
+    "semantic",
+    "grounding",
+    "relations",
+    "operational",
+    "epistemic"
+  ],
+  "title": "RAFAELIA Semantic Support Packet",
+  "type": "object"
+}

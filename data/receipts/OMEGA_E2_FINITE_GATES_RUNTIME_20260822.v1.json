@@ -1,0 +1,84 @@
+{
+  "schema": "RAFAELIA_E2_FINITE_GATES_RUNTIME_RECEIPT_V1",
+  "receipt_id": "RECEIPT:OMEGA:E2_FINITE_GATES_RUNTIME:20260822:V1",
+  "cycle_id": "OMEGA-MATH-MEMORY-E2-FINITE-GATES-RUNTIME-20260822",
+  "generated_at": "2026-08-22",
+  "observed_at_utc": "2026-08-22T10:07:43Z",
+  "claim_allowed": false,
+  "implementation": {
+    "path": "tools/math_memory/verify_e2_finite_gates_v1.py",
+    "sha256_exact_content": "51e859e039d8f48b9cec419b37087965d62d94332abb057ec9470c7b9eb3ae25"
+  },
+  "execution": {
+    "runtime": "Python stdlib reference execution",
+    "exit_state": "PASS",
+    "stdout_sha256": "2c30c78874288abb82151a42176e5e277ffc51b77817c3baec73134a45c80e46",
+    "stdout": {
+      "schema": "RAFAELIA_E2_FINITE_GATES_RUNTIME_V1",
+      "claim_allowed": false,
+      "scope": "bounded exact finite verifier",
+      "overall": "PASS",
+      "recurrence": {
+        "fibonacci_residual_negation": true,
+        "fibonacci_reverse_checks": 99,
+        "rafael_residual_negation": true,
+        "rafael_reverse_checks": 98,
+        "rafael_fibonacci_shift_checks": 100,
+        "rafael_initial_terms": [2,4,7,12,20,33,54]
+      },
+      "gf2": {
+        "known_mask_involution": true,
+        "xor_involution_truth_cases": 4,
+        "xor_involution_truth_total": 4,
+        "xor_finite_roundtrips": 640,
+        "state_domain_10bit": 1024,
+        "mask_codomain_mod20": 20,
+        "state_to_mask_injective_possible": false,
+        "pigeonhole_minimum_max_preimage": 52
+      },
+      "modular": {
+        "moduli": [7,10,12,20],
+        "period": 420,
+        "minimum_period": 420,
+        "unique_image_states": 420,
+        "raw_product_states": 16800,
+        "generalized_crt_compatible_states": 420,
+        "image_equals_compatible_set": true,
+        "inverse_mod420_roundtrips": 420,
+        "global_integer_inverse_unique": false,
+        "global_preimage_form": "n0 + 420*Z",
+        "example_42": {"residues":[0,2,6,2],"inverse_mod420":42}
+      },
+      "not_proved": [
+        "cryptographic security",
+        "scientific or physical mechanism",
+        "novelty",
+        "global formula-corpus exhaustivity"
+      ]
+    }
+  },
+  "ci": {
+    "workflow": "Math memory E2 finite gates",
+    "run_id": 32566788356,
+    "run_number": 1,
+    "conclusion": "success",
+    "job_id": 97016467901,
+    "steps": {
+      "compile_verifier": "success",
+      "execute_deterministic_finite_gates": "success",
+      "verify_deterministic_receipt_digest": "success",
+      "upload_artifact": "success"
+    },
+    "artifact": {
+      "id": 9474282294,
+      "name": "math-memory-e2-finite-gates",
+      "digest": "sha256:067226780ece7508e847b2799d6d008e085609d7d2daefe8952dfb1582678ad7",
+      "expired": false
+    }
+  },
+  "evidence_boundary": "This receipt is exact finite/runtime evidence for the listed arithmetic gates only. It does not promote cryptographic, physical, scientific, novelty or global-exhaustivity claims.",
+  "governance_boundary": "Mathematical/runtime CI success does not override provider-side merge enforcement. Server merge enforcement remains a separate gate.",
+  "F_ok": "The repository implementation reproduces recurrence, GF2 and modular family gates deterministically; the dedicated GitHub Actions workflow compiled, executed, verified the stable stdout digest and uploaded its artifact successfully.",
+  "F_gap": "Producer-specific implementations remain open; provider-side main branch merge enforcement is separately observed as not enforced.",
+  "F_next": "Bind producer implementations for inverse_mod420, recurrence roundtrips and decoder/parity; preserve the independent server-enforcement blocker until provider protection is actually enabled."
+}

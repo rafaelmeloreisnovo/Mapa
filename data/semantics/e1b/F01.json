@@ -1,0 +1,90 @@
+{
+  "epistemic": {
+    "claim_allowed": false,
+    "proof_boundary": "Derived conditional reading only; no error-correction proof.",
+    "state": "STRUCTURAL"
+  },
+  "grounding": {
+    "canonical_form": "Implies(Eq(check(A,B,s,P0,P1),ok),Eq(y_hat,u))",
+    "formalization_kind": "conditional_predicate_candidate",
+    "gaps": [
+      "logical connective not explicit"
+    ],
+    "state": "DERIVED_TYPED",
+    "witnesses": [
+      {
+        "effect": "structural_only",
+        "kind": "source_adjacency"
+      }
+    ]
+  },
+  "operational": {
+    "evidence_refs": [],
+    "execution_refs": [],
+    "falsifiers": [
+      "producer defines incompatible check semantics"
+    ],
+    "implementation_refs": [],
+    "negative_controls": [
+      "treat lines independently"
+    ],
+    "next_gate": "bind producer check definition and decoder control flow",
+    "route": [
+      "SEMANTIC_PARSE",
+      "PREDICATE_LOGIC",
+      "CODING_CHECK_SPEC"
+    ]
+  },
+  "packet_id": "SEM:E1B:F01",
+  "relations": [
+    {
+      "evidence_effect": "STRUCTURAL_ONLY",
+      "guard": "adjacency != proof",
+      "operator": "DERIVED_FROM",
+      "promotion_cap": "NEVER",
+      "target": "source:13-erro-absorvido#formula"
+    }
+  ],
+  "schema": "rafaelia.semantic-support-packet/v1",
+  "semantic": {
+    "ambiguity": {
+      "alternatives": [
+        {
+          "description": "check ok implies ŷ=u",
+          "discriminator": "producer explicitly declares implication",
+          "reading_id": "F01-R1"
+        },
+        {
+          "description": "two independent listed assertions",
+          "discriminator": "producer/source declares no implication",
+          "reading_id": "F01-R2"
+        }
+      ],
+      "selected_reading": null,
+      "state": "UNRESOLVED_TYPED"
+    },
+    "domain_candidates": [
+      "PREDICATE_LOGIC",
+      "BOOLEAN_GF2_CODING"
+    ],
+    "object_class": "PREDICATE",
+    "scope": {
+      "locality": "SECTION_LOCAL",
+      "modality": "CONDITIONAL",
+      "negation": false,
+      "temporal": "source-local"
+    }
+  },
+  "source": {
+    "blob_sha": "b8b4399cd95966a6812da7a0aff2323ad9f3a4d4",
+    "path": "docs/rafaelia/13-erro-absorvido.md",
+    "ref": "f497f9bc914bdc54dad7788fd74653bbe5a681d3",
+    "repository": "rafaelmeloreisnovo/teoremas",
+    "span": "Formulação Matemática"
+  },
+  "surface": {
+    "language": "pt",
+    "normalization": "PRESERVE_SOURCE",
+    "text": "ŷ=u\nif check(A,B,s,P0,P1)=ok"
+  }
+}

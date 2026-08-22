@@ -1,0 +1,101 @@
+{
+  "schema": "rafaelia.semantic-support-gate-receipt/v1",
+  "receipt_id": "RCPT:SEMANTIC_SUPPORT_GATE:20260822:V1",
+  "cycle_id": "SEMANTIC_SUPPORT_S0_S12_20260822",
+  "observed_at_utc": "2026-08-22T10:35:15Z",
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 359,
+  "branch": "omega/math-memory-e1-structural-v2-20260822",
+  "head_sha": "fc8f6a1ac6ffb8af60b78123a27b42ecb48a5c3b",
+  "workflow": {
+    "name": "Semantic support gate v1",
+    "run_id": 32567987229,
+    "run_number": 5,
+    "job_id": 97019312365,
+    "job_name": "semantic-contract",
+    "status": "completed",
+    "conclusion": "success",
+    "steps": {
+      "compile_validator_and_tests": "success",
+      "fail_closed_unit_tests": "success",
+      "validate_bounded_semantic_packets": "success",
+      "upload_artifact": "success"
+    }
+  },
+  "validation": {
+    "schema": "rafaelia.semantic-support-validation/v1",
+    "status": "PASS",
+    "support_arms": 13,
+    "packets": 6,
+    "packet_ids": [
+      "SEM:E1B:F01",
+      "SEM:E1B:F02",
+      "SEM:E1B:F03",
+      "SEM:E1B:F06",
+      "SEM:E1B:F08",
+      "SEM:E1B:F10"
+    ],
+    "class_counts": {
+      "FEATURE_COMPOSITION": 1,
+      "FORMULA": 1,
+      "PREDICATE": 2,
+      "RELATION": 1,
+      "SET_BUILDER": 1
+    },
+    "ambiguity_counts": {
+      "RESOLVED_BY_SOURCE": 3,
+      "UNRESOLVED_TYPED": 3
+    },
+    "grounding_counts": {
+      "DERIVED_TYPED": 4,
+      "SOURCE_EXPLICIT": 1,
+      "UNINTERPRETED": 1
+    },
+    "contract_sha256": "629edc6654332de31959485960606aa73e43655ae743537b8a92c2798648bfde",
+    "packet_set_sha256": "adfada9e8c710921f6d4d6f73e4c61105f80e3ea6539b19d7a096778d3cb666e",
+    "unit_tests": {
+      "count": 5,
+      "result": "PASS",
+      "negative_properties": [
+        "FORMAL_ANALOGY cannot be promoted as SUPPORTS",
+        "claim_allowed=true fails closed",
+        "EXECUTED without receipt fails closed",
+        "unresolved ambiguity without competing readings fails closed"
+      ]
+    }
+  },
+  "artifact": {
+    "artifact_id": 9474584023,
+    "name": "semantic-support-gate-v1",
+    "size_bytes": 1973,
+    "sha256_zip": "d8a728ec4e7c3173243faf49d13c165516c3748d340b34907fcb917d0fcff299",
+    "expired": false,
+    "expires_at": "2026-11-20T10:35:08Z"
+  },
+  "materialized_contracts": [
+    "schemas/semantic-support-packet.schema.json",
+    "data/semantics/semantic-support-contract.v1.json",
+    "data/workflows/semantic-support-vertical.v1.json",
+    "tools/semantic_support/validate_semantic_support_v1.py",
+    "tests/test_semantic_support_v1.py",
+    ".github/workflows/semantic-support-gate-v1.yml",
+    "indices/RAFAELIA_SEMANTIC_SUPPORT_MATRIX_V1_20260822.md"
+  ],
+  "semantic_relation_index": {
+    "path": "data/semantics/semantic-relation-index.v1.json",
+    "state": "MATERIALIZED_SAME_HEAD",
+    "gate_boundary": "NOT_CROSS_VALIDATED_BY_SEMANTIC_SUPPORT_GATE_V1; packet relations are validated in-packet, but the derived standalone index does not yet have a dedicated packet-index consistency gate"
+  },
+  "parallel_gates_observed_on_head": {
+    "math_memory_e2_finite_gates": "SUCCESS",
+    "branch_topology_gate": "SUCCESS",
+    "server_merge_enforcement_assurance": "FAIL_EXPECTED_PROVIDER_GOVERNANCE",
+    "promotion_control": "FAIL_EXPECTED_DRAFT_AND_INDEPENDENT_APPROVAL_GATE",
+    "general_ci": "IN_PROGRESS_AT_RECEIPT_OBSERVATION"
+  },
+  "evidence_boundary": "This receipt proves deterministic contract/packet validation, five fail-closed unit properties and artifact production for the bounded six-packet semantic vertical. It does not prove semantic truth, E2 algebraic equivalence, producer implementation correctness, scientific mechanism, novelty, global corpus completeness, relation-index cross-consistency, or claim promotion.",
+  "F_ok": "S0-S12 semantic support contract, six source-bound packets, fail-closed validator/tests, specialized vertical, semantic CI execution and artifact are materialized and observed PASS.",
+  "F_gap": "Standalone semantic relation-index cross-validation; F01/F06/F10 producer bindings; F02 runtime binding; F03 concrete domain instantiation; F08 measurable scientific protocol; provider-side merge enforcement and independent approval remain open.",
+  "F_next": "Add packet-index consistency gate; bind F01/F06 producer semantics; execute exhaustive decoder fixture; append IMPLEMENTS/EXECUTES/EVIDENCES edges only after exact receipts; wire interpret_context to packet-in/packet-out."
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "rafaelia.semantic-support-vertical/v1",
+  "vertical_id": "semantic-support-s0-s12",
+  "state": "ACTIVE_BOUNDED",
+  "claim_allowed": false,
+  "entrypoint": "interpret_context",
+  "input_contract": ["relation_index", "source pointers", "epistemic states", "gap index"],
+  "output_contract": ["semantic packets", "typed relation edges", "blocked ambiguities", "next gates"],
+  "execution_model": {
+    "default": "deterministic-first",
+    "model_role": "proposal-only",
+    "model_outputs": "DERIVED_TYPED or TOKEN_VAZIO until witnessed",
+    "network": "not required for bounded fixture validation"
+  },
+  "stages": [
+    {"id":"S0_SOURCE_IDENTITY","depends_on":[],"purpose":"bind provider/ref/path/blob/span","gate":"no orphan semantic packets","failure_state":"TOKEN_VAZIO_OR_REJECT"},
+    {"id":"S1_SURFACE_PRESERVATION","depends_on":["S0_SOURCE_IDENTITY"],"purpose":"preserve literal source before normalization","gate":"derived text never overwrites source","failure_state":"REJECT"},
+    {"id":"S2_SYMBOL_TABLE","depends_on":["S1_SURFACE_PRESERVATION"],"purpose":"scope symbols and candidate units/domains locally","gate":"same glyph != same object by default","failure_state":"TOKEN_VAZIO"},
+    {"id":"S3_SCOPE_MODALITY","depends_on":["S2_SYMBOL_TABLE"],"purpose":"type conditionality, negation, time, locality and procedural/asserted mode","gate":"hypothesis/procedure cannot become assertion by parsing","failure_state":"REJECT"},
+    {"id":"S4_AMBIGUITY","depends_on":["S3_SCOPE_MODALITY"],"purpose":"retain competing readings with discriminators","gate":"unresolved reading blocks E2 equivalence","failure_state":"UNRESOLVED_TYPED"},
+    {"id":"S5_GROUNDING","depends_on":["S4_AMBIGUITY"],"purpose":"map source fragments to typed formal objects with witnesses","gate":"derived grounding requires provenance witness","failure_state":"TOKEN_VAZIO"},
+    {"id":"S6_RELATION_GRAPH","depends_on":["S5_GROUNDING"],"purpose":"emit typed edges with evidence effect and promotion cap","gate":"analogy/co-occurrence cannot auto-promote proof","failure_state":"REJECT_EDGE"},
+    {"id":"S7_DOMAIN_ENGINE","depends_on":["S6_RELATION_GRAPH"],"purpose":"route to specialized formal/computational engine","gate":"no universal simplifier across domains","failure_state":"TOKEN_VAZIO_DOMAIN"},
+    {"id":"S8_IMPLEMENTATION_BINDING","depends_on":["S7_DOMAIN_ENGINE"],"purpose":"bind repo/ref/path/blob/function to formal object","gate":"documentation similarity is not implementation","failure_state":"TOKEN_VAZIO_IMPLEMENTATION"},
+    {"id":"S9_EXECUTION_EVIDENCE","depends_on":["S8_IMPLEMENTATION_BINDING"],"purpose":"bind exact runtime/environment/result digest","gate":"implementation without run remains IMPLEMENTED","failure_state":"TOKEN_VAZIO_EXECUTION"},
+    {"id":"S10_FALSIFICATION","depends_on":["S9_EXECUTION_EVIDENCE"],"purpose":"run counterexamples, property/metamorphic tests and negative controls","gate":"absence of falsifier caps promotion","failure_state":"TOKEN_VAZIO_FALSIFIER"},
+    {"id":"S11_MEMORY_CUSTODY","depends_on":["S10_FALSIFICATION"],"purpose":"append longitudinal event and orthogonal indexes","gate":"corrections append; history never silently rewrites","failure_state":"REJECT_APPEND"},
+    {"id":"S12_CLAIM_PROMOTION","depends_on":["S11_MEMORY_CUSTODY"],"purpose":"apply evidence/review/provider governance","gate":"claim_allowed=false by default","failure_state":"PROMOTION_BLOCKED"}
+  ],
+  "specialized_engines": {
+    "PREDICATE_LOGIC":{"operators":["Implies","Iff","And","Not","Member"],"tests":["bounded truth table","counterexample witness"]},
+    "NUMBER_THEORY":{"operators":["Prime","Factor","Congruence"],"tests":["exact integer verifier","factorization witness"]},
+    "DISCRETE_RECURRENCE":{"operators":["Delta","shift","reverse recurrence","antidifference"],"tests":["roundtrip","residual identity","finite exact range"]},
+    "REAL_COMPLEX_CONTINUOUS":{"operators":["D","grad","Jacobian","Hessian","integral"],"tests":["symbolic derivative","finite-difference check","branch/singularity probes"]},
+    "MODULAR_FINITE":{"operators":["mod","CRT","orbit","preimage"],"tests":["full finite enumeration when bounded","compatibility constraints"]},
+    "BOOLEAN_GF2_CODING":{"operators":["xor","syndrome","decode"],"tests":["bounded exhaustive truth table","single/multi-error controls"]},
+    "SET_GRAPH_STRUCTURAL":{"operators":["membership","preimage","reachability","cycle rank"],"tests":["dangling-edge check","graph invariants"]},
+    "FEATURE_PIPELINE":{"operators":["window","normalize","concatenate","hash"],"tests":["unit/schema checks","channel permutation","replay/privacy gate"]}
+  },
+  "cross_support_feedback": [
+    {"from":"S4_AMBIGUITY","to":"S2_SYMBOL_TABLE","when":"readings differ by symbol scope","action":"refine local symbol definition"},
+    {"from":"S5_GROUNDING","to":"S4_AMBIGUITY","when":"formal witness discriminates reading","action":"resolve append-only; retain rejected alternative"},
+    {"from":"S8_IMPLEMENTATION_BINDING","to":"S5_GROUNDING","when":"producer contradicts inferred semantics","action":"downgrade derived reading; add correction edge"},
+    {"from":"S9_EXECUTION_EVIDENCE","to":"S8_IMPLEMENTATION_BINDING","when":"runtime differs from bound behavior","action":"open regression gap with exact environment"},
+    {"from":"S10_FALSIFICATION","to":"S6_RELATION_GRAPH","when":"counterexample exists","action":"emit REFUTES/CORRECTS; preserve historical source"},
+    {"from":"S11_MEMORY_CUSTODY","to":"S0_SOURCE_IDENTITY","when":"provider ref drifts","action":"freeze prior blob and append new source event"},
+    {"from":"S12_CLAIM_PROMOTION","to":"S10_FALSIFICATION","when":"evidence/review missing","action":"remain claim_allowed=false"}
+  ],
+  "retrieval_axes": ["source","blob","span","semantic class","domain","symbol","ambiguity state","grounding state","relation operator","implementation ref","execution ref","evidence ref","falsifier","gap","time"],
+  "F_next": "CI pass -> typed relation materialization -> bind F01/F06 producer semantics -> bounded decoder execution -> receipt -> connect interpret_context to packet-in/packet-out"
+}

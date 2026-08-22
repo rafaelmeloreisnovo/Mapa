@@ -1,0 +1,11 @@
+{
+  "epistemic": {"claim_allowed": false, "proof_boundary": "Audit schema only; no shared-mechanism claim.", "state": "FORMAL"},
+  "grounding": {"canonical_form": "Eq(C(A,B),SetBuilder(j,And(WellDefined(j,A),WellDefined(j,B))))", "formalization_kind": "set_builder", "gaps": ["WellDefined is domain-specific"], "state": "DERIVED_TYPED", "witnesses": [{"kind": "source_definition", "section": "§11"}]},
+  "operational": {"evidence_refs": [], "execution_refs": [], "falsifiers": ["selected j undefined in one domain"], "implementation_refs": [], "negative_controls": ["j defined only in A"], "next_gate": "instantiate WellDefined in two concrete domains", "route": ["SEMANTIC_PARSE", "SET_LOGIC", "DOMAIN_INSTANTIATION"]},
+  "packet_id": "SEM:E1B:F03",
+  "relations": [{"evidence_effect": "STRUCTURAL_ONLY", "guard": "predicate uninterpreted until domain instantiation", "operator": "FORMAL_REWRITE", "promotion_cap": "FORMAL_ONLY", "target": "formal:SetBuilder"}],
+  "schema": "rafaelia.semantic-support-packet/v1",
+  "semantic": {"ambiguity": {"alternatives": [{"description": "tests well-defined in both domains", "discriminator": "explicit definition", "reading_id": "F03-R1"}], "selected_reading": "F03-R1", "state": "RESOLVED_BY_SOURCE"}, "domain_candidates": ["SET_LOGIC", "CROSS_DOMAIN_METHOD"], "object_class": "SET_BUILDER", "scope": {"locality": "SECTION_LOCAL", "modality": "DEFINED", "negation": false, "temporal": "source-local"}},
+  "source": {"blob_sha": "4d3ae7caa37ec011504587ad1fc9edcff7b6552a", "path": "docs/formal/META_INVARIANT_CROSS_DOMAIN_TEST_PROTOCOL_V1.md", "ref": "e7a90eb64e02befa2a24708dfd24faa4c2381af5", "repository": "rafaelmeloreisnovo/Matem-tica-", "span": "§11"},
+  "surface": {"language": "pt", "normalization": "PRESERVE_SOURCE", "text": "C(A,B)={j:test j is well-defined in both A and B}"}
+}
