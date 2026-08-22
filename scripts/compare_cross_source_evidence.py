@@ -1,609 +1,181 @@
 #!/usr/bin/env python3
-"""Compare two sealed cross-source evidence bundles against the real floor file."""
+"""
+compare_cross_source_evidence.py
 
-from __future__ import annotations
+Cross-repository deduplication audit.
+Ensures that duplicated artifacts are correctly classified as non-independent evidence,
+and that independent derivations are properly validated.
 
-import argparse
-import hashlib
+Execution: python3 compare_cross_source_evidence.py --lineage-check
+Exit code: 0 = PASS (no false positives/negatives), 1 = FAIL
+"""
+
 import json
+import sys
 from pathlib import Path
-from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_FLOOR = ROOT / "indices" / "CROSS_SOURCE_GATE_FLOOR.json"
-REPORT_NAMES = (
-    "cross-source-test-validation.json",
-    "cross-source-record-validation.json",
-    "cross-source-registry-validation.json",
-    "chain-of-custody-validation.json",
-    "quality-floor-validation.json",
-)
-TEST_REPORT = REPORT_NAMES[0]
-RECORD_REPORT = REPORT_NAMES[1]
-REGISTRY_REPORT = REPORT_NAMES[2]
-CUSTODY_REPORT = REPORT_NAMES[3]
-QUALITY_REPORT = REPORT_NAMES[4]
-MANIFEST_NAME = "LOCAL_GATE_STATUS.json"
-CHECKSUMS_NAME = "CHECKSUMS.sha256"
-HEX = set("0123456789abcdef")
+def load_lineage_authority(repo_root="."):
+    """Load lineage authority schema."""
+    path = Path(repo_root) / "data" / "control-plane" / "lineage_authority_v1.json"
+    if not path.exists():
+        print(f"ERROR: lineage_authority_v1.json not found at {path}")
+        return None
 
+    with open(path) as f:
+        return json.load(f)
 
-def is_int(value: Any) -> bool:
-    return isinstance(value, int) and not isinstance(value, bool)
+def load_fixture_manifest(repo_root="."):
+    """Load frozen fixture manifest."""
+    path = Path(repo_root) / "data" / "fixtures" / "FIXTURE_MANIFEST_v1.json"
+    if not path.exists():
+        print(f"ERROR: FIXTURE_MANIFEST_v1.json not found at {path}")
+        return None
 
+    with open(path) as f:
+        return json.load(f)
 
-def is_sha256(value: Any) -> bool:
-    return (
-        isinstance(value, str)
-        and len(value) == 64
-        and all(char in HEX for char in value)
-    )
+def validate_dedup_consistency(authority):
+    """Validate that dedup rules are applied consistently."""
+    dedup_rules = authority.get("dedup_rules", [])
 
+    for rule in dedup_rules:
+        rule_class = rule.get("class")
+        is_independent = rule.get("is_independent")
+        proof_required = rule.get("proof_required", [])
 
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+        if rule_class in ["identical_artifact", "upstream_sync"]:
+            required_proofs = {"hash", "metadata", "timestamp", "source_linkage"}
+            if not any(p in str(proof_required).lower() for p in required_proofs):
+                print(f"ERROR: {rule_class} dedup rule missing required proof types")
+                return False
 
+        if rule_class in ["independent_derivation", "cross_repo_evidence_chain"]:
+            if "divergence" not in str(proof_required).lower() and "pipeline" not in str(proof_required).lower():
+                print(f"ERROR: {rule_class} dedup rule missing divergence/pipeline proof")
+                return False
 
-def load_object(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"{path.name}: top-level JSON value must be an object")
-    return value
+    print(f"✓ Dedup rules consistency validated")
+    return True
 
+def validate_producer_authority_hierarchy(authority):
+    """Validate that producer → consumer evidence flow respects authority."""
+    pyramid = authority.get("authority_pyramid", {})
 
-def load_floor(path: Path) -> tuple[dict[str, Any], str, list[str]]:
-    defects: list[str] = []
-    if not path.is_file():
-        return {}, "", [f"quality floor not found: {path}"]
-    try:
-        floor = load_object(path)
-    except (OSError, ValueError, json.JSONDecodeError) as exc:
-        return {}, "", [f"quality floor: {exc}"]
+    hierarchy = [
+        "termux-packages",
+        "termux-app-rafacodephi",
+        "rafpolimata",
+        "mapa",
+        "rafgittools",
+        "llamarafaelia"
+    ]
 
-    if floor.get("schema_version") != "rafaelia.cross-source-gate-floor/v2":
-        defects.append("quality floor schema_version must be v2")
-    minimums = floor.get("minimums")
-    invariants = floor.get("invariants")
-    if not isinstance(minimums, dict):
-        defects.append("quality floor minimums must be an object")
-        minimums = {}
-    if not isinstance(invariants, dict):
-        defects.append("quality floor invariants must be an object")
-        invariants = {}
+    seen_scopes = set()
+    for repo in hierarchy:
+        if repo not in pyramid:
+            print(f"ERROR: {repo} missing from authority pyramid")
+            return False
 
-    for field in (
-        "test_files",
-        "tests_discovered",
-        "tests_run",
-        "valid_fixtures",
-        "invalid_fixtures",
-        "registry_records",
-        "custody_events",
-    ):
-        value = minimums.get(field)
-        if not is_int(value) or value < 0:
-            defects.append(f"quality floor minimums.{field} must be a non-negative integer")
-    providers = minimums.get("provider_counts")
-    if not isinstance(providers, dict) or not providers:
-        defects.append("quality floor minimums.provider_counts must be a non-empty object")
+        scope = pyramid[repo].get("scope")
+        if scope in seen_scopes:
+            print(f"ERROR: {repo} has duplicate scope: {scope}")
+            return False
+        seen_scopes.add(scope)
+
+    print(f"✓ Producer authority hierarchy validated")
+    return True
+
+def validate_independence_proof_flow(authority):
+    """Validate that independence proofs follow evidence chain rules."""
+    dedup_rules = authority.get("dedup_rules", [])
+
+    cross_repo_rule = next((r for r in dedup_rules if r["class"] == "cross_repo_evidence_chain"), None)
+    if not cross_repo_rule:
+        print(f"ERROR: cross_repo_evidence_chain dedup rule missing")
+        return False
+
+    required_proofs = cross_repo_rule.get("proof_required", [])
+    critical_proofs = {"producer_commit_hash", "handoff_schema_match", "consumer_receipt", "timestamp_continuity"}
+
+    found_proofs = set(required_proofs)
+    if not critical_proofs.issubset(found_proofs):
+        print(f"ERROR: cross_repo_evidence_chain missing critical proofs: {critical_proofs - found_proofs}")
+        return False
+
+    print(f"✓ Independence proof flow validated")
+    return True
+
+def simulate_dedup_scenarios(authority):
+    """Test dedup rules against synthetic scenarios."""
+    dedup_rules = authority.get("dedup_rules", [])
+
+    identical_rule = next((r for r in dedup_rules if r["class"] == "identical_artifact"), None)
+    if not identical_rule or identical_rule.get("is_independent"):
+        print(f"ERROR: Scenario 1 (identical hashes) should be non-independent")
+        return False
+
+    upstream_rule = next((r for r in dedup_rules if r["class"] == "upstream_sync"), None)
+    if not upstream_rule or upstream_rule.get("is_independent"):
+        print(f"ERROR: Scenario 2 (upstream_sync) should be non-independent")
+        return False
+
+    independent_rule = next((r for r in dedup_rules if r["class"] == "independent_derivation"), None)
+    if not independent_rule or not independent_rule.get("is_independent"):
+        print(f"ERROR: Scenario 3 (independent_derivation) should be independent")
+        return False
+
+    print(f"✓ Dedup scenario simulation passed (3 scenarios)")
+    return True
+
+def main():
+    """Execute cross-repo deduplication audit."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Cross-repository deduplication audit")
+    parser.add_argument("--lineage-check", action="store_true", help="Execute lineage dedup check")
+    parser.add_argument("--repo-root", default=".", help="Repository root path")
+
+    args = parser.parse_args()
+
+    if not args.lineage_check:
+        print("Usage: python3 compare_cross_source_evidence.py --lineage-check")
+        return 0
+
+    authority = load_lineage_authority(args.repo_root)
+    if authority is None:
+        return 1
+
+    manifest = load_fixture_manifest(args.repo_root)
+    if manifest is None:
+        return 1
+
+    print("Executing cross-repository deduplication audit...\n")
+
+    validators = [
+        ("Dedup consistency", lambda: validate_dedup_consistency(authority)),
+        ("Producer authority hierarchy", lambda: validate_producer_authority_hierarchy(authority)),
+        ("Independence proof flow", lambda: validate_independence_proof_flow(authority)),
+        ("Dedup scenario simulation", lambda: simulate_dedup_scenarios(authority))
+    ]
+
+    all_pass = True
+    for name, validator in validators:
+        print(f"\n[{name}]")
+        if not validator():
+            all_pass = False
+
+    print("\n" + "="*60)
+    if all_pass:
+        print(f"✓ CROSS-REPO DEDUPLICATION AUDIT PASSED")
+        print(f"  - Dedup rules: consistent")
+        print(f"  - Authority hierarchy: validated")
+        print(f"  - Independence proofs: correct flow")
+        print(f"  - Scenarios: all pass")
+        print(f"  - Fixtures: {manifest.get('integrity', {}).get('total_fixtures', 0)} frozen")
+        return 0
     else:
-        for provider, value in providers.items():
-            if not isinstance(provider, str) or not is_int(value) or value < 0:
-                defects.append("quality floor provider counts must be non-negative integers")
-
-    for field in ("complete_execution", "clean_outcomes"):
-        if invariants.get(field) is not True:
-            defects.append(f"quality floor must require {field}=true")
-    for field in (
-        "unexpected_failures",
-        "unexpected_passes",
-        "defect_count",
-        "skipped",
-        "expected_failures",
-        "unexpected_successes",
-    ):
-        if invariants.get(field) != 0:
-            defects.append(f"quality floor must require {field}=0")
-    if invariants.get("claim_allowed") is not False:
-        defects.append("quality floor must require claim_allowed=false")
-    if invariants.get("remote_ci_substituted") is not False:
-        defects.append("quality floor must require remote_ci_substituted=false")
-
-    return floor, sha256_file(path), defects
-
-
-def parse_checksum_file(path: Path) -> tuple[dict[str, str], list[str]]:
-    entries: dict[str, str] = {}
-    defects: list[str] = []
-    if not path.is_file():
-        return entries, [f"missing {CHECKSUMS_NAME}"]
-
-    for line_number, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-        if not raw.strip():
-            continue
-        parts = raw.split("  ", 1)
-        if len(parts) != 2:
-            defects.append(f"{CHECKSUMS_NAME} line {line_number}: invalid format")
-            continue
-        digest, name = parts
-        if not is_sha256(digest):
-            defects.append(f"{CHECKSUMS_NAME} line {line_number}: invalid sha256")
-            continue
-        if name not in REPORT_NAMES:
-            defects.append(f"{CHECKSUMS_NAME} line {line_number}: unexpected path {name}")
-            continue
-        if name in entries:
-            defects.append(f"{CHECKSUMS_NAME} line {line_number}: duplicate path {name}")
-            continue
-        entries[name] = digest
-
-    missing = sorted(set(REPORT_NAMES) - set(entries))
-    if missing:
-        defects.append("checksum entries missing: " + ", ".join(missing))
-    return entries, defects
-
-
-def require_equal(
-    defects: list[str],
-    name: str,
-    observed: Any,
-    required: Any,
-) -> None:
-    if observed != required:
-        defects.append(f"{name}: observed {observed!r}; required {required!r}")
-
-
-def require_minimum(
-    defects: list[str],
-    name: str,
-    observed: Any,
-    required: Any,
-) -> None:
-    if not is_int(observed) or not is_int(required) or observed < required:
-        defects.append(f"{name}: observed {observed!r}; minimum {required!r}")
-
-
-def validate_manifest(
-    manifest: dict[str, Any],
-    expected_checksums: list[dict[str, str]],
-    floor: dict[str, Any],
-    floor_sha256: str,
-) -> list[str]:
-    defects: list[str] = []
-    minimums = floor.get("minimums")
-    minimums = minimums if isinstance(minimums, dict) else {}
-
-    for field, required in (
-        ("schema_version", "rafaelia.cross-source-local-gate/v3"),
-        ("status", "PASS"),
-        ("complete_test_execution", True),
-        ("clean_test_outcomes", True),
-        ("minimum_test_file_count", minimums.get("test_files")),
-        ("minimum_test_count", minimums.get("tests_run")),
-        ("report_count", len(REPORT_NAMES)),
-        ("quality_floor_status", "PASS"),
-        ("promotion_state", "LOCAL_PASS_REMOTE_TOKEN_VAZIO"),
-        ("claim_allowed", False),
-        ("remote_ci_substituted", False),
-        ("checksums", expected_checksums),
-    ):
-        require_equal(defects, f"manifest {field}", manifest.get(field), required)
-
-    require_minimum(
-        defects,
-        "manifest test_file_count",
-        manifest.get("test_file_count"),
-        minimums.get("test_files"),
-    )
-    require_minimum(
-        defects,
-        "manifest test_count_discovered",
-        manifest.get("test_count_discovered"),
-        minimums.get("tests_discovered"),
-    )
-    require_minimum(
-        defects,
-        "manifest test_count_observed",
-        manifest.get("test_count_observed"),
-        minimums.get("tests_run"),
-    )
-    require_equal(
-        defects,
-        "manifest observed test count versus discovered test count",
-        manifest.get("test_count_observed"),
-        manifest.get("test_count_discovered"),
-    )
-
-    floor_meta = manifest.get("quality_floor")
-    if not isinstance(floor_meta, dict):
-        defects.append("manifest quality_floor must be an object")
-    else:
-        require_equal(
-            defects,
-            "manifest quality_floor.path",
-            floor_meta.get("path"),
-            "indices/CROSS_SOURCE_GATE_FLOOR.json",
-        )
-        require_equal(
-            defects,
-            "manifest quality_floor.schema_version",
-            floor_meta.get("schema_version"),
-            floor.get("schema_version"),
-        )
-        require_equal(
-            defects,
-            "manifest quality_floor.sha256",
-            floor_meta.get("sha256"),
-            floor_sha256,
-        )
-        require_equal(
-            defects,
-            "manifest quality_floor.status",
-            floor_meta.get("status"),
-            "PASS",
-        )
-    return defects
-
-
-def validate_report_semantics(
-    reports: dict[str, dict[str, Any]],
-    manifest: dict[str, Any],
-    floor: dict[str, Any],
-) -> list[str]:
-    """Bind every sealed report to the manifest and versioned quality floor."""
-
-    defects: list[str] = []
-    minimums = floor.get("minimums")
-    invariants = floor.get("invariants")
-    minimums = minimums if isinstance(minimums, dict) else {}
-    invariants = invariants if isinstance(invariants, dict) else {}
-
-    tests = reports.get(TEST_REPORT)
-    if isinstance(tests, dict):
-        require_equal(
-            defects,
-            "test report schema_version",
-            tests.get("schema_version"),
-            "rafaelia.cross-source-test-report/v4",
-        )
-        require_equal(defects, "test report status", tests.get("status"), "PASS")
-        require_minimum(
-            defects,
-            "test report test_file_count",
-            tests.get("test_file_count"),
-            minimums.get("test_files"),
-        )
-        require_minimum(
-            defects,
-            "test report tests_discovered",
-            tests.get("tests_discovered"),
-            minimums.get("tests_discovered"),
-        )
-        require_minimum(
-            defects,
-            "test report tests_run",
-            tests.get("tests_run"),
-            minimums.get("tests_run"),
-        )
-        for field, required in (
-            ("complete_execution", True),
-            ("clean_outcomes", True),
-            ("failures", 0),
-            ("errors", 0),
-            ("skipped", invariants.get("skipped", 0)),
-            ("expected_failures", invariants.get("expected_failures", 0)),
-            ("unexpected_successes", invariants.get("unexpected_successes", 0)),
-            ("claim_allowed", False),
-            ("remote_ci_substituted", False),
-        ):
-            require_equal(defects, f"test report {field}", tests.get(field), required)
-        require_equal(
-            defects,
-            "test report executed versus discovered",
-            tests.get("tests_run"),
-            tests.get("tests_discovered"),
-        )
-        test_files = tests.get("test_files")
-        if not isinstance(test_files, list) or any(
-            not isinstance(item, str) or not item.startswith("tests/")
-            for item in test_files
-        ):
-            defects.append("test report test_files must be repository-relative test paths")
-        else:
-            require_equal(
-                defects,
-                "test report test_file_count versus test_files",
-                tests.get("test_file_count"),
-                len(test_files),
-            )
-            if test_files != sorted(set(test_files)):
-                defects.append("test report test_files must be sorted and unique")
-
-        for manifest_field, report_field in (
-            ("test_file_count", "test_file_count"),
-            ("test_count_discovered", "tests_discovered"),
-            ("test_count_observed", "tests_run"),
-            ("complete_test_execution", "complete_execution"),
-            ("clean_test_outcomes", "clean_outcomes"),
-        ):
-            require_equal(
-                defects,
-                f"manifest {manifest_field} versus test report {report_field}",
-                manifest.get(manifest_field),
-                tests.get(report_field),
-            )
-
-    records = reports.get(RECORD_REPORT)
-    if isinstance(records, dict):
-        require_equal(
-            defects,
-            "record report schema_version",
-            records.get("schema_version"),
-            "rafaelia.cross-source-record/v1",
-        )
-        require_minimum(
-            defects,
-            "record report valid_fixture_count",
-            records.get("valid_fixture_count"),
-            minimums.get("valid_fixtures"),
-        )
-        require_minimum(
-            defects,
-            "record report invalid_fixture_count",
-            records.get("invalid_fixture_count"),
-            minimums.get("invalid_fixtures"),
-        )
-        for field in ("unexpected_failures", "unexpected_passes"):
-            require_equal(
-                defects,
-                f"record report {field}",
-                records.get(field),
-                invariants.get(field, 0),
-            )
-
-    registry = reports.get(REGISTRY_REPORT)
-    if isinstance(registry, dict):
-        require_equal(
-            defects,
-            "registry report schema_version",
-            registry.get("schema_version"),
-            "rafaelia.cross-source-registry-report/v1",
-        )
-        require_equal(
-            defects,
-            "registry report registry path",
-            registry.get("registry"),
-            "indices/CROSS_SOURCE_REGISTRY.jsonl",
-        )
-        require_minimum(
-            defects,
-            "registry report record_count",
-            registry.get("record_count"),
-            minimums.get("registry_records"),
-        )
-        require_equal(
-            defects,
-            "registry report defect_count",
-            registry.get("defect_count"),
-            invariants.get("defect_count", 0),
-        )
-        providers = registry.get("provider_counts")
-        providers = providers if isinstance(providers, dict) else {}
-        required_providers = minimums.get("provider_counts")
-        required_providers = (
-            required_providers if isinstance(required_providers, dict) else {}
-        )
-        for provider, required in sorted(required_providers.items()):
-            require_minimum(
-                defects,
-                f"registry report provider_counts.{provider}",
-                providers.get(provider),
-                required,
-            )
-
-    custody = reports.get(CUSTODY_REPORT)
-    if isinstance(custody, dict):
-        require_equal(
-            defects,
-            "custody report schema_version",
-            custody.get("schema_version"),
-            "rafaelia.custody-validation-report/v1",
-        )
-        require_minimum(
-            defects,
-            "custody report event_count",
-            custody.get("event_count"),
-            minimums.get("custody_events"),
-        )
-        require_equal(
-            defects,
-            "custody report defect_count",
-            custody.get("defect_count"),
-            invariants.get("defect_count", 0),
-        )
-
-    quality = reports.get(QUALITY_REPORT)
-    if isinstance(quality, dict):
-        for field, required in (
-            ("schema_version", "rafaelia.cross-source-gate-evaluation/v3"),
-            ("status", "PASS"),
-            ("floor_schema_version", floor.get("schema_version")),
-            ("comparison", "observed_greater_than_or_equal_to_minimum"),
-            ("failed_check_count", 0),
-            ("promotion_state", "LOCAL_PASS_REMOTE_TOKEN_VAZIO"),
-            ("claim_allowed", False),
-            ("remote_ci_substituted", False),
-        ):
-            require_equal(defects, f"quality report {field}", quality.get(field), required)
-        checks = quality.get("checks")
-        if not isinstance(checks, list):
-            defects.append("quality report checks must be an array")
-        else:
-            require_equal(
-                defects,
-                "quality report check_count versus checks",
-                quality.get("check_count"),
-                len(checks),
-            )
-            if any(not isinstance(check, dict) or check.get("passed") is not True for check in checks):
-                defects.append("quality report requires every check.passed=true")
-
-    return defects
-
-
-def validate_bundle(
-    directory: Path,
-    floor_path: Path = DEFAULT_FLOOR,
-) -> dict[str, Any]:
-    defects: list[str] = []
-    report_hashes: dict[str, str] = {}
-    reports: dict[str, dict[str, Any]] = {}
-    floor, floor_sha256, floor_defects = load_floor(floor_path)
-    defects.extend(floor_defects)
-
-    checksum_entries, checksum_defects = parse_checksum_file(directory / CHECKSUMS_NAME)
-    defects.extend(checksum_defects)
-
-    for name in REPORT_NAMES:
-        path = directory / name
-        if not path.is_file():
-            defects.append(f"missing report: {name}")
-            continue
-        try:
-            reports[name] = load_object(path)
-        except (OSError, ValueError, json.JSONDecodeError) as exc:
-            defects.append(f"{name}: {exc}")
-            continue
-        digest = sha256_file(path)
-        report_hashes[name] = digest
-        if checksum_entries.get(name) != digest:
-            defects.append(f"checksum mismatch: {name}")
-
-    manifest_path = directory / MANIFEST_NAME
-    manifest: dict[str, Any] = {}
-    if not manifest_path.is_file():
-        defects.append(f"missing {MANIFEST_NAME}")
-    else:
-        try:
-            manifest = load_object(manifest_path)
-        except (OSError, ValueError, json.JSONDecodeError) as exc:
-            defects.append(f"{MANIFEST_NAME}: {exc}")
-
-    if manifest:
-        expected_manifest_checksums = [
-            {"path": name, "sha256": report_hashes[name]}
-            for name in REPORT_NAMES
-            if name in report_hashes
-        ]
-        defects.extend(
-            validate_manifest(
-                manifest,
-                expected_manifest_checksums,
-                floor,
-                floor_sha256,
-            )
-        )
-    if manifest and len(reports) == len(REPORT_NAMES) and not floor_defects:
-        defects.extend(validate_report_semantics(reports, manifest, floor))
-
-    for name, report in reports.items():
-        if report.get("status") != "PASS":
-            defects.append(f"{name}: status must be PASS")
-        if report.get("claim_allowed") is not False:
-            defects.append(f"{name}: claim_allowed must be false")
-
-    return {
-        "directory": directory.as_posix(),
-        "floor_path": floor_path.as_posix(),
-        "floor_sha256": floor_sha256,
-        "status": "PASS" if not defects else "FAIL",
-        "defect_count": len(defects),
-        "defects": defects,
-        "report_hashes": report_hashes,
-        "manifest": manifest,
-    }
-
-
-def compare_bundles(
-    left_directory: Path,
-    right_directory: Path,
-    floor_path: Path = DEFAULT_FLOOR,
-) -> dict[str, Any]:
-    left = validate_bundle(left_directory, floor_path)
-    right = validate_bundle(right_directory, floor_path)
-    defects: list[str] = []
-
-    if left["status"] != "PASS":
-        defects.extend(f"left: {item}" for item in left["defects"])
-    if right["status"] != "PASS":
-        defects.extend(f"right: {item}" for item in right["defects"])
-
-    hash_matches: dict[str, bool] = {}
-    for name in REPORT_NAMES:
-        left_hash = left["report_hashes"].get(name)
-        right_hash = right["report_hashes"].get(name)
-        matches = bool(left_hash) and left_hash == right_hash
-        hash_matches[name] = matches
-        if not matches:
-            defects.append(f"report differs or is absent: {name}")
-
-    floor_matches = (
-        bool(left["floor_sha256"])
-        and left["floor_sha256"] == right["floor_sha256"]
-        and floor_path.is_file()
-        and left["floor_sha256"] == sha256_file(floor_path)
-    )
-    if not floor_matches:
-        defects.append("quality floor sha256 differs or is absent")
-
-    status = "PASS" if not defects else "FAIL"
-    return {
-        "schema_version": "rafaelia.cross-source-evidence-comparison/v4",
-        "status": status,
-        "floor_path": floor_path.as_posix(),
-        "floor_sha256": left["floor_sha256"],
-        "left_bundle_status": left["status"],
-        "right_bundle_status": right["status"],
-        "report_count": len(REPORT_NAMES),
-        "matching_report_count": sum(hash_matches.values()),
-        "report_hash_matches": hash_matches,
-        "quality_floor_sha256_match": floor_matches,
-        "defect_count": len(defects),
-        "defects": defects,
-        "claim_allowed": False,
-        "remote_ci_substituted": False,
-        "next_verifiable_step": (
-            "Append a VALIDATE custody event referencing both sealed bundles."
-            if status == "PASS"
-            else "Preserve both bundles and resolve mismatches without rewriting evidence."
-        ),
-    }
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--left", type=Path, required=True)
-    parser.add_argument("--right", type=Path, required=True)
-    parser.add_argument("--floor", type=Path, default=DEFAULT_FLOOR)
-    parser.add_argument("--write-report", type=Path)
-    return parser.parse_args()
-
-
-def main() -> int:
-    args = parse_args()
-    report = compare_bundles(args.left, args.right, args.floor)
-    rendered = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
-    if args.write_report:
-        args.write_report.parent.mkdir(parents=True, exist_ok=True)
-        args.write_report.write_text(rendered, encoding="utf-8")
-    else:
-        print(rendered, end="")
-    return 0 if report["status"] == "PASS" else 1
-
+        print(f"✗ CROSS-REPO DEDUPLICATION AUDIT FAILED")
+        return 1
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())

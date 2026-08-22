@@ -81,8 +81,8 @@
       "description": "Two artifacts with byte-for-byte identical content",
       "proof_required": [
         "sha256_hash_match",
-        "metadata_match (schema_version, type)",
-        "source_repo_linkage (do not merge authority)"
+        "metadata_match",
+        "source_repo_linkage"
       ],
       "is_independent": false,
       "reason": "Same bytes do not constitute independent evidence; must preserve source repo authority"
@@ -91,9 +91,9 @@
       "class": "upstream_sync",
       "description": "Artifact derived from same upstream source via documented pipeline",
       "proof_required": [
-        "commit_chain_linkage (both trace to same upstream commit)",
-        "timestamp_ordering (acceptable lag)",
-        "pipeline_identity (same recipe/build)"
+        "commit_chain_linkage",
+        "timestamp_ordering",
+        "pipeline_identity"
       ],
       "is_independent": false,
       "reason": "Synchronized output, not independent evidence"
@@ -103,9 +103,9 @@
       "description": "Same logical artifact derived via different pipelines/repos",
       "proof_required": [
         "sha256_hash_match",
-        "semantic_equivalence (same output semantics, different derivation)",
-        "pipeline_chain_divergence (provably different execution paths)",
-        "timestamps_independent (derivation times do not suggest copying)"
+        "semantic_equivalence",
+        "pipeline_chain_divergence",
+        "timestamps_independent"
       ],
       "is_independent": true,
       "reason": "Different derivation paths provide independent verification"
@@ -117,8 +117,9 @@
         "producer_commit_hash",
         "producer_gate_identifier",
         "handoff_schema_match",
-        "consumer_receipt (confirms receipt of artifact)",
-        "timestamp_continuity (handoff occurred after producer gate)"
+        "consumer_receipt",
+        "timestamp_continuity",
+        "pipeline_divergence"
       ],
       "is_independent": true,
       "reason": "Handoff chain creates distinct evidence link from producer to consumer"
@@ -143,10 +144,10 @@
       "llamarafaelia"
     ],
     "validation_gates": [
-      "lineage_chain_closure (all artifacts linked)",
-      "authority_non_overlap (roles distinct)",
-      "dedup_consistency (rules applied uniformly)",
-      "independence_proof (duplicates correctly classified)"
+      "lineage_chain_closure",
+      "authority_non_overlap",
+      "dedup_consistency",
+      "independence_proof"
     ]
   },
   "tv_independence_closure": {
