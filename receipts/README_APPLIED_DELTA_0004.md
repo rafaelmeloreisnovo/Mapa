@@ -1,0 +1,1 @@
+Applied delta 0004 records Drive A2 closure, PID V5, deep-corpus method gates, A1/A3/A4 dependency correction, and PR113 post-merge succession. See sibling snapshot/method/receipt files. No automatic promotion; claim_allowed=false.
