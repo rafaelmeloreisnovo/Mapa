@@ -56,3 +56,11 @@ jobs:
           print('sha256=',hashlib.sha256(b).hexdigest())
           print('claim_allowed=',p['claim_allowed'])
           PY
+      - name: Upload bounded discovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unknown-unknown-discovery-v1-${{ github.sha }}
+          path: /tmp/UNKNOWN_UNKNOWN_DISCOVERY_V1.generated.json
+          if-no-files-found: error
+          retention-days: 30
