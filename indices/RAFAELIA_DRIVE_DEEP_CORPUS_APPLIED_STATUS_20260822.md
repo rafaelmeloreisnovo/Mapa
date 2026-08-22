@@ -1,0 +1,1 @@
+Applied status: A2 is CLOSED_VERIFIED; A1 remains TOKEN_VAZIO_HARD_CUSTODY; A3 is BLOCKED_BY_A1_ONLY; A4 remains TOKEN_VAZIO_HARD_PROVIDER_ENUMERATION. Detailed evidence is in snapshot 0004 and receipt A2 closure.
