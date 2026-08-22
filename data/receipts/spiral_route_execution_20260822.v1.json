@@ -1,0 +1,41 @@
+{
+  "schema": "RAFAELIA_SPIRAL_ROUTE_EXECUTION_RECEIPT_V1",
+  "claim_allowed": false,
+  "source": {
+    "repo": "rafaelmeloreisnovo/teoremas",
+    "path": "docs/rafaelia/04-spiral-raiz3-sobre-2.md",
+    "blob_sha": "eaa831155fcfac79fa72d1cd6fd13f5d5d9aecb8",
+    "formula_radial": "r_{n+1}=(sqrt(3)/2)*r_n",
+    "formula_angular": "theta[n+1]=theta[n]+pi/phi"
+  },
+  "implementation": {
+    "repo": "rafaelmeloreisnovo/GAIA_phi",
+    "path": "dados/RAFAELIA_TRIG_CORE2.py",
+    "blob_sha": "cccf5f7da96e2f867fbb5cdec07a45da6e380994",
+    "function": "generate_spiral_sqrt3_over_2",
+    "radial_form": "r0*(SQRT3_OVER_2**k)",
+    "angular_form": "theta(k)=sign*2*pi*k/steps_per_turn"
+  },
+  "execution": {
+    "n_turns": 2,
+    "steps_per_turn": 10,
+    "r0": 1.0,
+    "points": 21,
+    "yinyang_points": 42,
+    "kappa": 0.8660254037844386,
+    "max_radial_recurrence_abs_error": 5.551115123125783e-17,
+    "max_closed_form_abs_error": 2.7755575615628914e-17,
+    "implementation_angular_step_for_steps10": 0.6283185307179586
+  },
+  "gates": {
+    "radial_recurrence_matches_source": "PASS_NUMERIC_LIMITED",
+    "closed_form_consistency": "PASS_NUMERIC_LIMITED",
+    "yinyang_42_count": "PASS",
+    "full_source_pair_equivalence": "TOKEN_VAZIO_NOT_ESTABLISHED",
+    "angular_equivalence": "FAIL_NOT_SAME_FORM"
+  },
+  "boundary": "Execution verifies the radial recurrence implemented by GAIA_phi. It does not validate broader applications/physical meaning, and the angular law in the source document is not the same law implemented by the generator.",
+  "F_ok": "source->implementation radial link found and executed; radial recurrence and 42-point count pass limited deterministic checks",
+  "F_gap": "angular source recurrence pi/phi is not implemented by this generator; broader source applications remain unverified; full semantic equivalence is not established",
+  "F_next": "either bind a producer implementation for theta[n+1]=theta[n]+pi/phi or explicitly split Spiral√3/2 into independent radial and angular variants before any full-formula claim"
+}
