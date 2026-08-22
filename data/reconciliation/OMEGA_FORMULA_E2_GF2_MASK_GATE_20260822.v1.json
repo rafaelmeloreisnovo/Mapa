@@ -1,0 +1,52 @@
+{
+  "schema": "RAFAELIA_FORMULA_E2_GF2_MASK_GATE_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-MEMORY-E2-GF2-MASK-20260822",
+  "claim_allowed": false,
+  "sources": [
+    {"repo":"rafaelmeloreisnovo/teoremas","tree_sha":"f497f9bc914bdc54dad7788fd74653bbe5a681d3","path":"docs/rafaelia/02-bio-criptografia.md","blob_sha1":"928c6d0c2ec72cc1974dcc566cfbbfe48119246d"},
+    {"repo":"rafaelmeloreisnovo/teoremas","tree_sha":"f497f9bc914bdc54dad7788fd74653bbe5a681d3","path":"docs/rafaelia/25-mascaramento-phi-s.md","blob_sha1":"37785509661fed3a8eec749b265a9447d08747df"},
+    {"repo":"rafaelmeloreisnovo/teoremas","tree_sha":"f497f9bc914bdc54dad7788fd74653bbe5a681d3","path":"TEORIA_ATRACTOR_42.md","blob_sha1":"916e60420d0afd8993ca3ba93fd28862046ca73c"}
+  ],
+  "gates": [
+    {
+      "id":"GF2-001",
+      "relation":"B=A xor m <=> A=B xor m for known mask m",
+      "state":"PASS_EXACT_GF2_INVOLUTION",
+      "proof":"(A xor m) xor m = A bitwise",
+      "truth_table_cases":"4/4 PASS",
+      "finite_checks":"640/640 PASS for A=0..31 and m=0..19"
+    },
+    {
+      "id":"GF2-002",
+      "relation":"phi(s)=H(s) mod 20 is injective on the full 10-bit s domain",
+      "state":"FAIL_PROVED_IMPOSSIBLE_BY_CARDINALITY",
+      "domain_size":1024,
+      "codomain_size":20,
+      "pigeonhole_minimum_max_preimage":52,
+      "reason":"No function from 1024 states to 20 masks can be injective."
+    },
+    {
+      "id":"GF2-003",
+      "relation":"recover A from B and known s",
+      "state":"PASS_CONDITIONAL",
+      "construction":"m=phi(s); A=B xor m",
+      "guard":"same deterministic H/mask encoding and compatible bit width; this does not recover s uniquely from m"
+    }
+  ],
+  "correction": {
+    "historical_wording":"mask invertible derived from state s",
+    "safe_interpretation":"the XOR transform in A is invertible for a known mask; the state-to-mask map phi(s)=H(s) mod20 is not uniquely invertible on the full declared 10-bit state domain",
+    "mode":"APPEND_ONLY_CONDITIONING_NOT_SOURCE_REWRITE"
+  },
+  "e2_global":"TOKEN_VAZIO",
+  "invariants":[
+    "XOR involution != invertibility of mask derivation",
+    "known mask != recoverable source state",
+    "finite test != cryptographic security proof",
+    "claim_allowed=false"
+  ],
+  "F_ok":"GF2 XOR involution is formally closed for known masks and independently checked on a bounded finite grid; a cardinality falsifier conditions the source wording about phi(s) invertibility.",
+  "F_gap":"H(s), bit-width/encoding, parity P0/P1 and security properties remain incompletely specified; cryptographic claims remain blocked.",
+  "F_next":"Freeze H(s), mask encoding and lane widths; then test decoder/parity behavior and single-lane error recovery separately from the XOR involution proof."
+}
