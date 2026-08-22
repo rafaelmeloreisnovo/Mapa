@@ -1,0 +1,1 @@
+`RAFAELIA_DRIVE_DEEP_CORPUS_SNAPSHOT_0004.json` is an additive routing/evidence snapshot. It records A2 closure and successor states only; it does not claim full Drive enumeration, RAW018 recovery, or full-corpus execution.
