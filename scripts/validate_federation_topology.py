@@ -1,185 +1,211 @@
 #!/usr/bin/env python3
-"""
-validate_federation_topology.py
-
-Validates 6-repo TOROID federation topology coherence.
-Ensures all repositories are connected and roles are non-overlapping.
-
-Execution: python3 validate_federation_topology.py --repos 6 --check
-Exit code: 0 = PASS, 1 = FAIL
-"""
+"""Fail-closed validator for the declared six-repository federation topology."""
 
 import json
 import sys
 from pathlib import Path
 
+
 def load_lineage_authority(repo_root="."):
-    """Load lineage authority from control plane."""
     path = Path(repo_root) / "data" / "control-plane" / "lineage_authority_v1.json"
     if not path.exists():
         print(f"ERROR: lineage_authority_v1.json not found at {path}")
         return None
-
     with open(path) as f:
         return json.load(f)
 
+
 def validate_repo_count(authority, expected_count):
-    """Validate number of repositories in federation."""
     repos = authority.get("cross_repo_validation", {}).get("repos", [])
     if len(repos) != expected_count:
         print(f"ERROR: Expected {expected_count} repos, found {len(repos)}")
         return False
-
     print(f"✓ Repository count valid ({len(repos)} repos)")
     return True
 
+
 def validate_role_non_overlap(authority):
-    """Ensure all repository roles are distinct (no overlap)."""
     pyramid = authority.get("authority_pyramid", {})
     roles = {}
-
     for repo, spec in pyramid.items():
         role = spec.get("role")
+        if not role:
+            print(f"ERROR: {repo} has no role")
+            return False
         if role in roles:
             print(f"ERROR: Role '{role}' assigned to both {repo} and {roles[role]}")
             return False
         roles[role] = repo
-
     print(f"✓ Role non-overlap validated ({len(roles)} distinct roles)")
     return True
 
+
 def validate_responsibility_coverage(authority):
-    """Validate that responsibilities cover all producer/consumer domains."""
     pyramid = authority.get("authority_pyramid", {})
-
-    # Expected responsibility domains
     required_domains = {
-        "source": False,  # termux-packages
-        "build": False,   # termux-app-rafacodephi
-        "compiler": False,  # rafpolimata
-        "version": False,  # rafgittools
-        "federation": False,  # mapa
-        "model": False  # llamarafaelia
+        "source": False,
+        "build": False,
+        "compiler": False,
+        "version": False,
+        "federation": False,
+        "model": False,
     }
-
-    for repo, spec in pyramid.items():
+    for spec in pyramid.values():
         responsibilities = spec.get("responsibility", [])
         role = spec.get("role", "").lower()
-        responsibilities_str = (" ".join(responsibilities) + " " + role).lower()
-
-        if "source" in responsibilities_str or "verification" in responsibilities_str:
+        text = (" ".join(responsibilities) + " " + role).lower()
+        if "source" in text or "verification" in text:
             required_domains["source"] = True
-        if "build" in responsibilities_str or "compilation" in responsibilities_str:
+        if "build" in text or "compilation" in text:
             required_domains["build"] = True
-        if "compiler" in responsibilities_str:
+        if "compiler" in text:
             required_domains["compiler"] = True
-        if "version" in responsibilities_str or "commit" in responsibilities_str or "versioning" in responsibilities_str or "branch" in responsibilities_str:
+        if any(k in text for k in ("version", "commit", "versioning", "branch")):
             required_domains["version"] = True
-        if "federation" in responsibilities_str or "validation" in responsibilities_str or "routing" in responsibilities_str:
+        if any(k in text for k in ("federation", "validation", "routing")):
             required_domains["federation"] = True
-        if "model" in responsibilities_str or "semantic" in responsibilities_str or "inference" in responsibilities_str or "authority" in responsibilities_str:
+        if any(k in text for k in ("model", "semantic", "inference", "authority")):
             required_domains["model"] = True
-
-    coverage = sum(required_domains.values())
-    if coverage < len(required_domains):
-        print(f"ERROR: Responsibility coverage incomplete")
-        print(f"  Covered: {sum(required_domains.values())}/{len(required_domains)}")
+    missing = sorted(k for k, covered in required_domains.items() if not covered)
+    if missing:
+        print(f"ERROR: Responsibility coverage incomplete: {', '.join(missing)}")
         return False
-
-    print(f"✓ Responsibility coverage validated (6 domains)")
+    print("✓ Responsibility coverage validated (6 domains)")
     return True
 
-def validate_immutable_id_schema(authority):
-    """Validate that all repos use immutable lineage IDs."""
-    pyramid = authority.get("authority_pyramid", {})
 
-    for repo, spec in pyramid.items():
+def validate_immutable_id_schema(authority):
+    for repo, spec in authority.get("authority_pyramid", {}).items():
         if spec.get("immutable_id_type") != "lineage_id":
             print(f"ERROR: {repo} does not use immutable_id_type='lineage_id'")
             return False
-
-    print(f"✓ Immutable ID schema validated (all repos)")
+    print("✓ Immutable ID schema validated (all repos)")
     return True
+
 
 def validate_independence_claims(authority):
-    """Validate that independence claims are well-formed."""
-    pyramid = authority.get("authority_pyramid", {})
-
-    for repo, spec in pyramid.items():
+    for repo, spec in authority.get("authority_pyramid", {}).items():
         claim = spec.get("independence_claim")
-        if not claim or len(claim) == 0:
+        if not isinstance(claim, str) or not claim.strip():
             print(f"ERROR: {repo} has empty independence_claim")
             return False
-
-    print(f"✓ Independence claims validated (all repos)")
+    print("✓ Independence claims validated (all repos)")
     return True
+
 
 def validate_dedup_enforcement(authority):
-    """Validate that dedup rules enforce producer non-duplication."""
     rules = authority.get("dedup_rules", [])
-
-    # Verify key rule: identical artifacts are NOT independent evidence
-    identical_rule = next((r for r in rules if r["class"] == "identical_artifact"), None)
-    if not identical_rule or identical_rule.get("is_independent"):
-        print(f"ERROR: identical_artifact dedup rule must mark as non-independent")
-        return False
-
-    # Verify key rule: upstream sync is NOT independent evidence
-    upstream_rule = next((r for r in rules if r["class"] == "upstream_sync"), None)
-    if not upstream_rule or upstream_rule.get("is_independent"):
-        print(f"ERROR: upstream_sync dedup rule must mark as non-independent")
-        return False
-
-    print(f"✓ Dedup enforcement validated")
+    by_class = {r.get("class"): r for r in rules}
+    for klass in ("identical_artifact", "upstream_sync"):
+        rule = by_class.get(klass)
+        if not rule or rule.get("is_independent") is not False:
+            print(f"ERROR: {klass} must be explicitly non-independent")
+            return False
+    print("✓ Dedup enforcement validated")
     return True
+
 
 def validate_topology_cycle_safety(authority):
-    """Validate that federation topology is acyclic (DAG)."""
-    # In current 6-repo TOROID, validate that no circular dependencies exist in roles
-    pyramid = authority.get("authority_pyramid", {})
+    """Validate declared dependency edges, weak connectivity, and acyclicity.
 
-    # Conceptual dependencies:
-    # termux-packages → termux-app (build depends on source)
-    # termux-app → rafpolimata (AArch64 validation)
-    # rafpolimata → mapa (federation validation)
-    # mapa → rafgittools (version tracking)
-    # rafgittools → llamarafaelia (model authority)
-    # llamarafaelia → (none - terminal)
+    This is deliberately fail-closed. Missing/malformed edges are not a PASS.
+    A real cycle is a falsifier and must return False.
+    """
+    cfg = authority.get("cross_repo_validation", {})
+    repos = cfg.get("repos", [])
+    edges = cfg.get("dependency_edges")
+    repo_set = set(repos)
 
-    # Check for reverse dependencies that would create cycle
-    roles = {spec.get("role"): repo for repo, spec in pyramid.items()}
+    if not repos:
+        print("ERROR: No repositories declared")
+        return False
+    if not isinstance(edges, list) or not edges:
+        print("ERROR: dependency_edges missing or empty; acyclicity is TOKEN_VAZIO")
+        return False
 
-    # Simple check: source must come before build, build before validation
-    if "source authority" in roles and "build + runtime authority" in roles:
-        # This is OK - source feeds build
-        pass
+    adjacency = {repo: [] for repo in repos}
+    undirected = {repo: set() for repo in repos}
+    seen_edges = set()
 
-    print(f"✓ Topology cycle safety validated (acyclic DAG)")
+    for raw in edges:
+        if not isinstance(raw, list) or len(raw) != 2:
+            print(f"ERROR: malformed dependency edge: {raw!r}")
+            return False
+        src, dst = raw
+        if src not in repo_set or dst not in repo_set:
+            print(f"ERROR: dependency edge references undeclared repo: {src!r}->{dst!r}")
+            return False
+        if src == dst:
+            print(f"ERROR: self-cycle detected: {src}")
+            return False
+        edge = (src, dst)
+        if edge in seen_edges:
+            print(f"ERROR: duplicate dependency edge: {src}->{dst}")
+            return False
+        seen_edges.add(edge)
+        adjacency[src].append(dst)
+        undirected[src].add(dst)
+        undirected[dst].add(src)
+
+    # Weak connectivity: every declared repo must belong to the same authority graph.
+    reached = set()
+    stack = [repos[0]]
+    while stack:
+        node = stack.pop()
+        if node in reached:
+            continue
+        reached.add(node)
+        stack.extend(undirected[node] - reached)
+    if reached != repo_set:
+        missing = sorted(repo_set - reached)
+        print(f"ERROR: disconnected repositories: {', '.join(missing)}")
+        return False
+
+    # DFS three-color cycle detector over the actual declared directed edges.
+    WHITE, GRAY, BLACK = 0, 1, 2
+    color = {repo: WHITE for repo in repos}
+    path = []
+
+    def visit(node):
+        color[node] = GRAY
+        path.append(node)
+        for nxt in adjacency[node]:
+            if color[nxt] == GRAY:
+                cycle_start = path.index(nxt)
+                cycle = path[cycle_start:] + [nxt]
+                print("ERROR: dependency cycle detected: " + " -> ".join(cycle))
+                return False
+            if color[nxt] == WHITE and not visit(nxt):
+                return False
+        path.pop()
+        color[node] = BLACK
+        return True
+
+    for repo in repos:
+        if color[repo] == WHITE and not visit(repo):
+            return False
+
+    print(f"✓ Topology cycle safety validated ({len(edges)} declared edges; connected DAG)")
     return True
 
+
 def main():
-    """Execute federation topology validation."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="Validate 6-repo federation topology")
-    parser.add_argument("--repos", type=int, default=6, help="Expected number of repositories")
-    parser.add_argument("--check", action="store_true", help="Execute validation check")
-    parser.add_argument("--repo-root", default=".", help="Repository root path")
-
+    parser = argparse.ArgumentParser(description="Validate six-repo federation topology")
+    parser.add_argument("--repos", type=int, default=6)
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--repo-root", default=".")
     args = parser.parse_args()
 
     if not args.check:
-        print("Usage: python3 validate_federation_topology.py --repos 6 --check")
+        print("Usage: python3 scripts/validate_federation_topology.py --repos 6 --check")
         return 0
 
-    # Load lineage authority
     authority = load_lineage_authority(args.repo_root)
     if authority is None:
         return 1
 
-    print(f"Validating {args.repos}-repo federation topology...\n")
-
-    # Run validators
     validators = [
         ("Repository count", lambda: validate_repo_count(authority, args.repos)),
         ("Role non-overlap", lambda: validate_role_non_overlap(authority)),
@@ -187,7 +213,7 @@ def main():
         ("Immutable ID schema", lambda: validate_immutable_id_schema(authority)),
         ("Independence claims", lambda: validate_independence_claims(authority)),
         ("Dedup enforcement", lambda: validate_dedup_enforcement(authority)),
-        ("Topology cycle safety", lambda: validate_topology_cycle_safety(authority))
+        ("Topology cycle safety", lambda: validate_topology_cycle_safety(authority)),
     ]
 
     all_pass = True
@@ -196,19 +222,15 @@ def main():
         if not validator():
             all_pass = False
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     if all_pass:
-        print(f"✓ FEDERATION TOPOLOGY VALIDATION PASSED")
-        print(f"  - Repositories: {args.repos}")
-        print(f"  - Roles: {args.repos} distinct (no overlap)")
-        print(f"  - Responsibility: 6 domains covered")
-        print(f"  - Immutable IDs: all repos")
-        print(f"  - Dedup rules: enforced")
-        print(f"  - Topology: acyclic DAG")
+        print("✓ FEDERATION TOPOLOGY VALIDATION PASSED")
+        print("  Scope: declared schema/authority graph only; not device/runtime proof")
         return 0
-    else:
-        print(f"✗ FEDERATION TOPOLOGY VALIDATION FAILED")
-        return 1
+
+    print("✗ FEDERATION TOPOLOGY VALIDATION FAILED")
+    return 1
+
 
 if __name__ == "__main__":
     sys.exit(main())
