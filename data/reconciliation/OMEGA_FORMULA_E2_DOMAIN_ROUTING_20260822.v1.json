@@ -1,0 +1,52 @@
+{
+  "schema": "RAFAELIA_FORMULA_E2_DOMAIN_ROUTING_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-MEMORY-E2-DOMAIN-ROUTING-20260822",
+  "claim_allowed": false,
+  "source_main_commit": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+  "denominator": 356,
+  "scope": "frozen 49-path E0 exact-identity corpus",
+  "routing_semantics": "HEURISTIC_PRIMARY_ROUTE_CANDIDATE_NOT_DOMAIN_PROOF",
+  "counts": {
+    "ALGEBRAIC_GENERIC": 102,
+    "REAL_COMPLEX_CONTINUOUS": 40,
+    "MODULAR_FINITE": 39,
+    "SET_GRAPH_STRUCTURAL": 29,
+    "DISCRETE_RECURRENCE": 25,
+    "SYMBOLIC_REWRITE": 25,
+    "NUMERIC_OR_CLAIM_RELATION": 20,
+    "NUMBER_THEORY": 20,
+    "BOOLEAN_GF2_CODING": 19,
+    "SYMBOLIC_UNTYPED": 13,
+    "COMBINATORIAL_DISCRETE": 11,
+    "OPERATIONAL_NON_FORMULA": 10,
+    "PREDICATE_LOGIC": 1,
+    "SET_LOGIC": 1,
+    "FEATURE_COMPOSITION": 1
+  },
+  "sum_check": 356,
+  "policies": {
+    "ALGEBRAIC_GENERIC": "type scalar/vector/tensor and assumptions before E2",
+    "REAL_COMPLEX_CONTINUOUS": "declare branch, singularities and differentiability",
+    "MODULAR_FINITE": "use modulus/ring/module-specific equivalence; never default real simplifier",
+    "DISCRETE_RECURRENCE": "finite difference/recurrence is native; continuous derivative only as declared analytic extension",
+    "BOOLEAN_GF2_CODING": "freeze bit width, field/ring and coding map",
+    "NUMBER_THEORY": "integer predicates/factorization/sequence identities only",
+    "SET_GRAPH_STRUCTURAL": "use morphisms, graph/set/topological invariants rather than scalar algebra",
+    "SYMBOLIC_REWRITE": "requires explicit rewrite grammar/equivalence/confluence policy",
+    "NUMERIC_OR_CLAIM_RELATION": "comparison only; approximation/claim is not exact identity",
+    "OPERATIONAL_NON_FORMULA": "route outside formula-E2",
+    "SYMBOLIC_UNTYPED": "no E2 until operator/domain semantics exist"
+  },
+  "e2_global": "TOKEN_VAZIO",
+  "invariants": [
+    "routing != proof of mathematical domain",
+    "one global algebraic simplifier is forbidden across incompatible domains",
+    "approximate equality != exact algebraic equivalence",
+    "pipeline/protocol/label != formula",
+    "claim_allowed=false"
+  ],
+  "F_ok": "All 356 bounded E0 identities reconcile to one primary next-engine route candidate; the routing count sums exactly to the E0 denominator.",
+  "F_gap": "Record-level domain proof remains object-specific and E2 global remains TOKEN_VAZIO.",
+  "F_next": "Run E2 gates family by family, beginning with source-bound discrete recurrence/calculus families and high-confidence scalar identities."
+}
