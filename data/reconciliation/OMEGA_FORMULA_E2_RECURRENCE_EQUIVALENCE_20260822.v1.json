@@ -1,0 +1,63 @@
+{
+  "schema": "RAFAELIA_FORMULA_E2_RECURRENCE_EQUIVALENCE_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-MEMORY-E2-RECURRENCE-20260822",
+  "claim_allowed": false,
+  "source_formalization": {
+    "repository": "rafaelmeloreisnovo/Matem-tica-",
+    "tree_sha": "e7a90eb64e02befa2a24708dfd24faa4c2381af5",
+    "path": "papers/2026-07-17_zipraf_ao42_multiview_formalization.md",
+    "blob_sha1": "37890985ced10ecb9f4c7b697af0910322140a1c"
+  },
+  "verification_harness_sha256": "e3140202e70ed473dfa47f25be32967e5ed60eb16d20223ca42e5d91385d6308",
+  "relations": [
+    {
+      "id": "E2-REC-001",
+      "A": "F_{n+1}=F_n+F_{n-1}",
+      "B": "F_{n-1}=F_{n+1}-F_n",
+      "level": "E2_ALGEBRAIC_REARRANGEMENT",
+      "witness": "residual(B)=-residual(A)",
+      "symbolic_gate": "PASS_EXACT",
+      "finite_gate": "PASS_EXACT_INTEGER_N_1_99"
+    },
+    {
+      "id": "E2-REC-002",
+      "A": "R_{n+1}=R_n+R_{n-1}+1",
+      "B": "R_{n-1}=R_{n+1}-R_n-1",
+      "level": "E2_ALGEBRAIC_REARRANGEMENT",
+      "witness": "residual(B)=-residual(A)",
+      "symbolic_gate": "PASS_EXACT",
+      "finite_gate": "PASS_EXACT_INTEGER_N_2_99"
+    },
+    {
+      "id": "E3-REC-003",
+      "A": "F_{n+1}=F_n+F_{n-1}",
+      "B": "F_{n+2}=F_{n+1}+F_n",
+      "level": "E3_CHANGE_OF_INDEX",
+      "witness": "n -> n+1",
+      "gate": "PASS_EXACT_SUBSTITUTION"
+    },
+    {
+      "id": "E3-REC-004",
+      "A": "R_{n+1}=R_n+R_{n-1}+1; R_1=2,R_2=4",
+      "B": "S_{n+1}=S_n+S_{n-1}; S_n=R_n+1; S_1=3,S_2=5",
+      "level": "E3_AFFINE_CHANGE_OF_VARIABLES",
+      "witness": "S_n=R_n+1 and S_n=F_{n+3}",
+      "symbolic_gate": "PASS_EXACT",
+      "finite_gate": "PASS_R_n_EQ_F_nPLUS3_MINUS1_N_1_100"
+    }
+  ],
+  "finite_verification_is_proof": false,
+  "e2_global": "TOKEN_VAZIO",
+  "invariants": [
+    "E2 rearrangement means same zero-set under the same declared variables/domain",
+    "E3 change of index/variables is not collapsed into E0/E1 identity",
+    "source occurrences remain separate even when equivalence edge is verified",
+    "finite execution supports but does not replace formal algebra",
+    "Rafaeliana equivalence does not imply novelty",
+    "claim_allowed=false"
+  ],
+  "F_ok": "Two recurrence-family E2 rearrangement classes and two E3 transformation edges are verified; exact integer checks pass on the declared finite ranges.",
+  "F_gap": "Implementation-level reverse roundtrip receipts remain open; E2 global remains TOKEN_VAZIO outside the recurrence family.",
+  "F_next": "Bind recurrence producer implementations and execute forward/reverse roundtrips; then advance modular and Boolean/GF2 E2 gates independently."
+}
