@@ -1,0 +1,74 @@
+{
+  "schema": "rafaelia.federated_sustainment_correction/v1",
+  "predecessor": "data/routing/cycles/omega-federated-sustainment-20260822T0456BRT.v1.json",
+  "claim_allowed": false,
+  "append_only": true,
+  "corrections": [
+    {
+      "gap_id": "TERMUX-RAFCODEPHI-SDK-PIPEFAIL-001",
+      "source_pointer": "rafaelmeloreisnovo/termux-packages#97",
+      "before": {
+        "head": "16cf60cf49677398e876d3c4ab0f2ae95d1a3007",
+        "run_id": 32555998529,
+        "artifact_id": 9472162937,
+        "artifact_sha256": "5ff44b60364d2f06afe6c9ccd25c73eab95e072c762a214af2cf4312f9819184",
+        "exit_code": 141,
+        "mechanism": "sdkmanager completed Android 33 extraction while yes producer received SIGPIPE under pipefail"
+      },
+      "after": {
+        "head": "035aeb6a67cc39b468497d8fdc6ca143dd949c83",
+        "run_id": 32560563326,
+        "artifact_id": 9473061332,
+        "artifact_sha256": "9b8749e8932a74ed8b78e97728889695118954d659e9c8632aaa830f298e68e3",
+        "exit_code": 1,
+        "sdk_pipefail_boundary": "CROSSED",
+        "next_first_terminal_mechanism": "curl timeout downloading https://xorg.freedesktop.org/releases/individual/util/util-macros-1.20.2.tar.xz after retries",
+        "classification": "NETWORK_OR_UPSTREAM_AVAILABILITY_UNCERTAIN"
+      },
+      "actions": ["DETECTIVE", "ADAPTIVE", "CORRECTIVE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "ANTI_RECURRENCE"],
+      "falsifier": "exact job rerun must either fetch the same pinned xorg source successfully or reproduce the timeout; source mutation is not authorized before that discriminant",
+      "next_probe": "rerun exact failed source-build job 97001361039",
+      "revalidation_rule": {
+        "type": "EVENT_TRIGGERED",
+        "origin": "FIELD_EVIDENCE"
+      }
+    },
+    {
+      "gap_id": "RLL-G4-G6-COVARIANCE-HANDOFF-001",
+      "source_pointer": "instituto-Rafael/relativity-living-light#760 run 32288697735",
+      "evidence": {
+        "python_tests": "FAIL",
+        "passed": 1288,
+        "failed": 1,
+        "subtests_passed": 12,
+        "failure": "FileNotFoundError for Pantheon+SH0ES_STAT+SYS.cov before G4 report construction",
+        "artifact_id": 9378690082,
+        "artifact_sha256": "e935e73b7f0798b20074efa7932215fcbf8dae91bbd0bfa881be1cfd3fd6bce8"
+      },
+      "interpretation": "G2 covariance materialization evidence does not persist automatically into a fresh G4-G6 runner filesystem; this is a custody/handoff gap, not scientific falsification",
+      "corrective_candidate": {
+        "pr": 763,
+        "head": "c8acc649c0711d759b9f0d03f2496bdb1a6a2c2b",
+        "mechanism": "integration test re-materializes the pinned covariance with source/hash/shape receipt before G4"
+      },
+      "actions": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "CORRECTIVE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "ANTI_RECURRENCE"],
+      "falsifier": "PR 763 Python tests must cross FileNotFoundError and emit Pantheon materialization receipt; any later G4/G5/G6 failure becomes the next scoped scientific boundary",
+      "claim_allowed": false,
+      "independent_replication": "TOKEN_VAZIO"
+    }
+  ],
+  "drive_reconciliation": {
+    "method_anchor": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "state": "CANONICAL_DRAFT",
+    "claim_allowed": false,
+    "master_navigation_updated_at": "2026-08-22T03:55:34.006Z",
+    "write_this_correction": "TOKEN_VAZIO_REVISION_SAFE_WRITE_NOT_EXECUTED"
+  },
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "MERGED != GATE_CLOSED",
+    "MATERIALIZED_IN_ONE_RUN != PRESENT_IN_FRESH_RUNNER",
+    "NETWORK_TIMEOUT != PERMANENT_SOURCE_INVALIDITY"
+  ]
+}
