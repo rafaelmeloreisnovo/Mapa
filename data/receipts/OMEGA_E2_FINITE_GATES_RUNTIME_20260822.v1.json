@@ -1,0 +1,61 @@
+{
+  "schema": "RAFAELIA_E2_FINITE_GATES_RUNTIME_RECEIPT_V1",
+  "generated_at": "2026-08-22",
+  "claim_allowed": false,
+  "implementation": {
+    "path": "tools/math_memory/verify_e2_finite_gates_v1.py",
+    "sha256_exact_content": "51e859e039d8f48b9cec419b37087965d62d94332abb057ec9470c7b9eb3ae25"
+  },
+  "execution": {
+    "runtime": "Python stdlib reference execution",
+    "exit_state": "PASS",
+    "stdout_sha256": "2c30c78874288abb82151a42176e5e277ffc51b77817c3baec73134a45c80e46",
+    "stdout": {
+      "schema": "RAFAELIA_E2_FINITE_GATES_RUNTIME_V1",
+      "claim_allowed": false,
+      "scope": "bounded exact finite verifier",
+      "overall": "PASS",
+      "recurrence": {
+        "fibonacci_residual_negation": true,
+        "fibonacci_reverse_checks": 99,
+        "rafael_residual_negation": true,
+        "rafael_reverse_checks": 98,
+        "rafael_fibonacci_shift_checks": 100,
+        "rafael_initial_terms": [2,4,7,12,20,33,54]
+      },
+      "gf2": {
+        "known_mask_involution": true,
+        "xor_involution_truth_cases": 4,
+        "xor_involution_truth_total": 4,
+        "xor_finite_roundtrips": 640,
+        "state_domain_10bit": 1024,
+        "mask_codomain_mod20": 20,
+        "state_to_mask_injective_possible": false,
+        "pigeonhole_minimum_max_preimage": 52
+      },
+      "modular": {
+        "moduli": [7,10,12,20],
+        "period": 420,
+        "minimum_period": 420,
+        "unique_image_states": 420,
+        "raw_product_states": 16800,
+        "generalized_crt_compatible_states": 420,
+        "image_equals_compatible_set": true,
+        "inverse_mod420_roundtrips": 420,
+        "global_integer_inverse_unique": false,
+        "global_preimage_form": "n0 + 420*Z",
+        "example_42": {"residues":[0,2,6,2],"inverse_mod420":42}
+      },
+      "not_proved": [
+        "cryptographic security",
+        "scientific or physical mechanism",
+        "novelty",
+        "global formula-corpus exhaustivity"
+      ]
+    }
+  },
+  "evidence_boundary": "This receipt is exact finite/runtime evidence for the listed arithmetic gates only. It does not promote cryptographic, physical, scientific, novelty or global-exhaustivity claims.",
+  "F_ok": "A repository implementation now reproduces the recurrence, GF2 and modular family gates with deterministic stdlib execution and a stable stdout digest.",
+  "F_gap": "CI execution of this verifier and producer-specific implementations remain open.",
+  "F_next": "Wire the verifier into an observable CI gate or test command, then bind producer implementations for inverse_mod420, recurrence roundtrips and decoder/parity."
+}
