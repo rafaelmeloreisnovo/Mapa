@@ -1,0 +1,49 @@
+name: Math memory E2 finite gates
+
+on:
+  pull_request:
+    paths:
+      - "tools/math_memory/verify_e2_finite_gates_v1.py"
+      - "data/reconciliation/OMEGA_FORMULA_E2_*.json"
+      - "data/receipts/OMEGA_E2_FINITE_GATES_RUNTIME_*.json"
+      - "indices/RAFAELIA_CALCULATION_MEMORY_INDEX_V*.md"
+      - ".github/workflows/math-memory-e2-finite-gates.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tools/math_memory/verify_e2_finite_gates_v1.py"
+      - "data/reconciliation/OMEGA_FORMULA_E2_*.json"
+      - "data/receipts/OMEGA_E2_FINITE_GATES_RUNTIME_*.json"
+      - "indices/RAFAELIA_CALCULATION_MEMORY_INDEX_V*.md"
+
+permissions:
+  contents: read
+
+jobs:
+  finite-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile verifier
+        run: python -m py_compile tools/math_memory/verify_e2_finite_gates_v1.py
+      - name: Execute deterministic finite gates
+        run: |
+          mkdir -p build/math-memory
+          python tools/math_memory/verify_e2_finite_gates_v1.py | tee build/math-memory/e2-finite-gates.json
+      - name: Verify deterministic receipt digest
+        shell: bash
+        run: |
+          expected="2c30c78874288abb82151a42176e5e277ffc51b77817c3baec73134a45c80e46"
+          actual="$(sha256sum build/math-memory/e2-finite-gates.json | awk '{print $1}')"
+          echo "expected=$expected"
+          echo "actual=$actual"
+          test "$actual" = "$expected"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: math-memory-e2-finite-gates
+          path: build/math-memory/e2-finite-gates.json
+          if-no-files-found: error
