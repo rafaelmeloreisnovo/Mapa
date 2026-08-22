@@ -1,0 +1,73 @@
+{
+  "schema": "rafaelia.multimodal_cave_seed.federation_settlement.v1",
+  "receipt_id": "MULTIMODAL-CAVE-SEED-FEDERATION-SETTLEMENT-20260822T065044BRT",
+  "created_at": "2026-08-22T06:50:44-03:00",
+  "state": "FEDERATED_POINTERS_SETTLED_PENDING_REMOTE_GATE",
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "append_only": true,
+  "source_receipt": {
+    "path": "data/receipts/multimodal-cave-seed.local.20260822T064519BRT.receipt.json",
+    "sha256": "b8e39d5de8a402d20c3383cdb516eca2dd8aae287fd0dafdf9640c9ca8fb2ff1",
+    "state": "LOCAL_PASS_DRAFT"
+  },
+  "github": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "base_branch": "main",
+    "base_sha": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+    "branch": "feat/multimodal-cave-seed-v1-20260822",
+    "initial_commit": "bce975461e651ee8e6c5bc8622af49c5ed75ae02",
+    "initial_commit_url": "https://github.com/rafaelmeloreisnovo/Mapa/commit/bce975461e651ee8e6c5bc8622af49c5ed75ae02",
+    "pull_request": 356,
+    "pull_request_url": "https://github.com/rafaelmeloreisnovo/Mapa/pull/356",
+    "pull_request_state": "OPEN_DRAFT",
+    "changed_files_initial": 12,
+    "additions_initial": 1889,
+    "deletions_initial": 0,
+    "merged": false,
+    "remote_gate": "TOKEN_VAZIO_REMOTE_RUN_PENDING_OBSERVATION"
+  },
+  "google_drive": {
+    "document_id": "17O7mEaLXpiypz4rufGf_hx1G-jCranCzXjP1CQpNqlY",
+    "url": "https://docs.google.com/document/d/17O7mEaLXpiypz4rufGf_hx1G-jCranCzXjP1CQpNqlY",
+    "tab_id": "t.0",
+    "trusted_read": {
+      "bridge_version": "3.6",
+      "status": "complete",
+      "revision_id": "AIroW36H8_q3t5prR_IwQ8QX5qndKTl5jJ4JCSPl2GDPFdUtp5lqrRhT4srr65kScn0Ddp1iJxp0hs6lNQHaZLK2pY6VSMKEaQBrvxbKHSk",
+      "protected_controls": 0,
+      "opaque_controls": 0,
+      "native_date_elements": 1,
+      "manifest_sha256": "2c3d159193e0b0454b3430d04354a9f81879cccda24b38ae8c2733e0a42b492f",
+      "document_text_sha256": "e8e56700471fb98098be2de8660cc1dcd05fe35dbfbbe29d5d8cec3e8eb3ddbc"
+    },
+    "pr_pointer_update": {
+      "placeholder_occurrences_changed": 1,
+      "revision_id_after_write": "AIroW34UlDTSd8XZFQOIEKIe79wXkSnsFN1u_rNO14rlMF49wg2DiMaSKAQy6TCEMT9MXLRdFN03jiJZ6abiZXlcHwoUFv6eQW38CooZpg0",
+      "readback_text": "GitHub PR: https://github.com/rafaelmeloreisnovo/Mapa/pull/356",
+      "ordinary_hyperlink_target_verified": "https://github.com/rafaelmeloreisnovo/Mapa/pull/356",
+      "placeholder_remaining": false,
+      "native_date_elements_after_write": 1,
+      "heading_1_count_after_write": 10,
+      "result": "PASS"
+    }
+  },
+  "coherence": {
+    "github_points_to_drive": true,
+    "drive_points_to_pull_request": true,
+    "drive_and_github_are_distinct_authorities": true,
+    "no_synchronization_inferred_from_links": true,
+    "settled_surfaces": ["branch", "initial_commit", "draft_pull_request", "editorial_document", "bidirectional_pointer"],
+    "unsettled_surfaces": ["remote_workflow_result", "merge_decision", "external_authority", "scientific_validation"]
+  },
+  "decision": {
+    "result": "POINTER_SETTLEMENT_ACCEPTED",
+    "scope": "Existence and readback of the draft PR and editorial cross-pointers only.",
+    "not_authorized": ["merge", "release", "remote PASS inference", "claim promotion"]
+  },
+  "r3": {
+    "f_ok": "The draft PR and Drive checkpoint now point to each other and both were read back at exact identifiers/revisions.",
+    "f_gap": "The final PR-head workflow has not yet been observed; all external/domain gaps remain open.",
+    "f_next": "Commit this append-only settlement receipt, observe workflow runs on the new exact head and append a separate remote receipt if a terminal result becomes available."
+  }
+}
