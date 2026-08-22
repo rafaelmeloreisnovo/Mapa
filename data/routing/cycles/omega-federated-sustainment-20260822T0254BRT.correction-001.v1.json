@@ -1,0 +1,58 @@
+{
+  "schema": "rafaelia.omega-sustainment-correction/v1",
+  "predecessor_pr": "rafaelmeloreisnovo/Mapa#347",
+  "observed_at": "2026-08-22T06:15:00Z",
+  "component": "rafaelmeloreisnovo/papers#56",
+  "before": {
+    "ci_run_id": 32555548859,
+    "attempt": 1,
+    "state": "FAIL_SCOPED_UNDIAGNOSED",
+    "jobs": [
+      "Build C Sources (x86_64)",
+      "Validate Session Packet Chain",
+      "Validate Documentation"
+    ],
+    "observable_steps": "TOKEN_VAZIO",
+    "job_logs": "TOKEN_VAZIO_PROVIDER_BLOB_NOT_AVAILABLE"
+  },
+  "action": {
+    "type": ["DETECTIVE", "PRECAUTIONARY", "SAFETY_ASSURANCE"],
+    "operation": "rerun_failed_workflow_run_jobs",
+    "run_id": 32555548859,
+    "result": "ACCEPTED"
+  },
+  "after": {
+    "attempt": 2,
+    "jobs_reproduced_failure": 3,
+    "observable_steps": "TOKEN_VAZIO",
+    "classification": "PRE_EXECUTION_CI_FAILURE_REPRODUCIBLE",
+    "code_failure": "NOT_DEMONSTRATED",
+    "documentation_failure": "NOT_DEMONSTRATED",
+    "publication_ready": false,
+    "claim_allowed": false
+  },
+  "gap": {
+    "gap_id": "PAPERS-CI-PREEXEC-001",
+    "owner_authority": "rafaelmeloreisnovo/papers",
+    "affected_routes": ["papers/PR56", "publication", "phase2-validation"],
+    "uncertainty_state": "runner_or_provider_pre_execution_failure_not_yet_discriminated",
+    "urgency": "P0_FOR_PUBLICATION_ROUTE_ONLY",
+    "impact": "blocks CI evidence for PR56 but does not falsify document contents",
+    "detectability": "high at job-status level; low at mechanism level because no steps/logs are exposed",
+    "recurrence_risk": "observed on two attempts",
+    "failure_mode": "all three jobs terminate failure before observable steps",
+    "falsifier": "a fresh run exposes normal steps or a provider/runner diagnostic identifying the pre-execution mechanism",
+    "next_probe": "inspect provider/check-suite/runner failure surface before changing paper content or C source",
+    "mitigation": "keep PR56 draft and fail-closed; do not merge or publish based on manual validation",
+    "closure_gate": "CI jobs start with observable steps and complete with scoped results, or provider pre-execution failure is explicitly diagnosed and resolved",
+    "review_or_expiry": "EVENT_TRIGGERED on CI/provider state change",
+    "claim_allowed": false
+  },
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "CI_RED != CONTENT_FALSIFIED",
+    "MANUAL_VALIDATION != AUTOMATED_GATE_PASS",
+    "RERUN_REPRODUCED != ROOT_CAUSE_PROVEN"
+  ]
+}

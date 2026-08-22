@@ -1,0 +1,152 @@
+{
+  "schema": "rafaelia.federated-omega-sustainment/v1",
+  "observed_at": "2026-08-22T02:54:32-03:00",
+  "mode": "EVIDENCE_FIRST_APPEND_ONLY_FAIL_CLOSED",
+  "claim_allowed": false,
+  "predecessor": {
+    "mapa_main_sha": "749604de237a520ae56b49017c3703d49a0b53cf",
+    "receipt_relation": "SUPERSEDES_WITHOUT_ERASING"
+  },
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "MERGED != EXECUTION_CLOSED",
+    "P0_SOURCE_SCAN_ZERO != GLOBAL_P0_ZERO",
+    "DISCOVERY_IDENTITY != EXECUTION_TIME_IDENTITY"
+  ],
+  "deltas": {
+    "termux_packages": {
+      "predecessor_pr": 96,
+      "predecessor_head": "764438b9575377fe5d299eb5f30d9151fd684d60",
+      "exact_run": 32550305299,
+      "job": 96975871212,
+      "artifact_id": 9470677356,
+      "artifact_sha256": "6913c4b148f2aa6dcb3ccb6c67d64a92d2ba74ab4f6d159b81924c3f6e25c02d",
+      "before_first_terminal_mechanism": "historical APT source unavailable",
+      "after_first_terminal_mechanism": "termux-am Gradle cannot provision platforms;android-33 and build-tools;34.0.0 into immutable canonical SDK root",
+      "evidence": {
+        "gradle_task": ":app:lintVitalReportRelease",
+        "sdk_root": "/home/builder/lib/android-sdk-9123335",
+        "missing_components": ["platforms;android-33", "build-tools;34.0.0"],
+        "builder_setup_preinstalls_platforms": ["android-35", "android-28", "android-24"],
+        "apparmor_rule": "deny /home/builder/lib/** wlk"
+      },
+      "corrective_pr": 97,
+      "corrective_head": "16cf60cf49677398e876d3c4ab0f2ae95d1a3007",
+      "corrective_state": "REVALIDATION_IN_PROGRESS",
+      "falsifier": "exact-head rerun must cross missing Android 33/build-tools 34 boundary",
+      "device_runtime_proof": "TOKEN_VAZIO"
+    },
+    "rafgittools": {
+      "source_gap_p0": 0,
+      "source_gap_scope": "app/src/main executable source scan",
+      "source_gap_p1": 69,
+      "source_gap_claim_allowed": false,
+      "newer_governance_pr": 375,
+      "global_p0_inference": "FORBIDDEN",
+      "new_governance_p0": [
+        "TV-V2-LICENSE-PRODUCER-001",
+        "TV-V2-GAIA-COMPLEX-EXEC-001",
+        "TV-V2-NOISE-NULL-001"
+      ],
+      "uncertainty_state": "P0_SOURCE_SCAN_ZERO_BUT_FEDERATED_GOVERNANCE_P0_PRESENT"
+    },
+    "mapa_provider": {
+      "main_protected": false,
+      "protection_enabled": false,
+      "required_status_checks_enforcement": "off",
+      "server_side_merge_binding": "NOT_ENFORCED_OBSERVED",
+      "closure_gate": "Administration write binding -> reobserve -> zero-approval probe -> MERGE_REJECTED AND main_SHA_UNCHANGED"
+    },
+    "drive": {
+      "canonical_method_anchor_id": "1FQpHTjphXmeRtD4H8CYgSTZvj6W7TG8l",
+      "canonical_anchor_state": "CANONICAL_DRAFT / claim_allowed=false",
+      "master_navigation_registry": "PRESENT",
+      "drive_3470_record_index": "OBSERVED_IN_MAPA_NAVIGATION_DELTA",
+      "write_this_cycle": "TOKEN_VAZIO_REVISION_SAFE_APPEND_NOT_EXECUTED"
+    },
+    "vectras": {
+      "latest_observed_main_merge": 1104,
+      "coherence_claim_boundary": "PASS_SCOPED",
+      "qemu_sha256_at_execution": "TOKEN_VAZIO",
+      "next_gate": "request_digest -> provider_result_digest -> qemu_sha256_at_execution -> PID -> exit"
+    },
+    "rll": {
+      "latest_observed_main_sha": "1c942ac589628f677338ffde3ae3fcb2ebbf652f",
+      "latest_observed_delta": "scan/POC coherence governance",
+      "new_scientific_promotion_this_cycle": false,
+      "independent_replication": "TOKEN_VAZIO_OR_NOT_REOBSERVED_AS_CLOSED"
+    },
+    "papers": {
+      "canonical_repo": "rafaelmeloreisnovo/papers",
+      "latest_observed_main_sha": "148a3e3f0ec445198541f99be13132610902f601",
+      "publication_allowed": false,
+      "latest_observed_claim_policy": "falsifiable ledger with explicit limitations"
+    }
+  },
+  "impact_radius": [
+    {
+      "event": "TERMUX_AM_SDK_PROVISIONING_FAILURE",
+      "direct_exposure": ["termux-am source build", "RAFCODEPHI ARM32 bootstrap"],
+      "potential_propagation": ["development APT", "usable APK", "Termux-Vectras handoff"],
+      "not_demonstrated": ["physical Android failure", "AArch64 physical failure", "Vectras corruption"],
+      "revalidation_required": true
+    }
+  ],
+  "lifecycle": {
+    "termux_bootstrap": {
+      "state": "REVALIDATION_IN_PROGRESS",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "trigger_origin": "field evidence / first terminal failure"
+    },
+    "rafgittools_source_scan": {
+      "state": "PASS_SCOPED_P0_ZERO",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "trigger": "app/src/main or scanner/allowlist hash change"
+    },
+    "mapa_provider": {
+      "state": "BLOCKED_P0",
+      "revalidation_type": "CONDITION_BASED",
+      "trigger": "real provider administration binding"
+    },
+    "drive_method_anchor": {
+      "state": "REVALIDATION_REQUIRED",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "trigger": "producer HEAD/provenance drift"
+    }
+  },
+  "actions": {
+    "detective": ["exact-head workflow/artifact inspection", "provider protection reobservation", "producer freshness reconciliation"],
+    "preventive": ["bounded writable SDK closure rather than mutating canonical builder toolchain"],
+    "precautionary": ["physical/device/scientific/provider claims remain fail-closed"],
+    "adaptive": ["Termux route advanced from source-custody failure to SDK-provisioning failure without erasing predecessor"],
+    "corrective": ["termux-packages PR #97"],
+    "maintenance": ["builder image SDK closure identified as environment dependency drift"],
+    "incident_investigation": ["Gradle failure reduced to missing components + immutable toolchain policy"],
+    "safety_assurance": ["PR #97 rerun is required before closure"],
+    "anti_recurrence": ["BUILDER_COMPONENT_REQUIRED != BUILDER_COMPONENT_PREINSTALLED", "MERGED != EXECUTION_CLOSED"]
+  },
+  "F_ok": [
+    "Termux #96 exact-head failure localized beyond previous APT source blocker",
+    "Termux #97 materialized with a bounded falsifiable correction",
+    "RafGitTools P0=0 preserved as source-scan-scoped rather than globalized",
+    "Map provider non-enforcement reobserved",
+    "RLL/Papers/Vectras authority/freshness boundaries reobserved"
+  ],
+  "F_gap": [
+    "Termux #97 exact-head outcome",
+    "RafGitTools 69 P1 plus three governance P0 introduced/declared by #375",
+    "Map provider binding",
+    "Vectras execution-time QEMU identity",
+    "physical Android receipts",
+    "Drive revision-safe append",
+    "RLL independent scientific replication/promotion boundary"
+  ],
+  "F_next": [
+    "Observe Termux #97 exact-head; promote only if missing SDK boundary disappears",
+    "Reclassify RafGitTools priorities using scoped P0 domains; do not equate source P0=0 with federation P0=0",
+    "Acquire real provider administration binding before any zero-approval merge probe",
+    "Capture Vectras execution-time identity chain",
+    "Append Drive only with revision-safe custody"
+  ]
+}

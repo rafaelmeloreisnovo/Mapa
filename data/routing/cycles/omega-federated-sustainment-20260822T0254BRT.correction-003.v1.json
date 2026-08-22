@@ -1,0 +1,176 @@
+{
+  "schema": "rafaelia.federated-sustainment-correction/v1",
+  "correction_id": "OMEGA-SUSTAINMENT-20260822T0254BRT-C003",
+  "observed_at": "2026-08-22T04:43:00-03:00",
+  "predecessor": {
+    "mapa_main": "749604de237a520ae56b49017c3703d49a0b53cf",
+    "receipt_pr": 347,
+    "prior_correction_head": "c3f6438d4404628a7b9c1dec0791092e373477f1"
+  },
+  "invariants": {
+    "vision_ne_artifact_ne_execution_ne_evidence_ne_claim": true,
+    "token_vazio_ne_zero": true,
+    "claim_allowed": false,
+    "history": "APPEND_ONLY"
+  },
+  "material_deltas": [
+    {
+      "gap_id": "TERMUX-AM-SDK-PIPEFAIL-001",
+      "repo": "rafaelmeloreisnovo/termux-packages",
+      "pr": 97,
+      "before_head": "16cf60cf49677398e876d3c4ab0f2ae95d1a3007",
+      "source_run": 32555998529,
+      "source_job": 96990081944,
+      "artifact_id": 9472162937,
+      "artifact_digest": "sha256:5ff44b60364d2f06afe6c9ccd25c73eab95e072c762a214af2cf4312f9819184",
+      "before": {
+        "state": "BLOCKED",
+        "exit_code": 141,
+        "first_terminal_mechanism": "yes producer receives SIGPIPE after sdkmanager successfully provisions Android 33/build-tools 34 under pipefail",
+        "sdk_provisioning_progress_observed": "100%",
+        "prior_missing_sdk_failure_recurred": false
+      },
+      "corrective_action": {
+        "commit": "035aeb6a67cc39b468497d8fdc6ca143dd949c83",
+        "scope": "packages/termux-am/build.sh only",
+        "mechanism": "inspect PIPESTATUS and fail only on sdkmanager non-zero; do not promote expected yes SIGPIPE 141 to SDK failure"
+      },
+      "after": {
+        "exact_head_workflows": {
+          "production_hardening": 32560563285,
+          "development_apt": 32560563308,
+          "packages": 32560563282,
+          "real_bootstrap": 32560563326
+        },
+        "state": "REVALIDATION_QUEUED"
+      },
+      "falsifier": "exact-head rerun must cross the exit-141 pipeline boundary; sdkmanager non-zero must still fail closed",
+      "closure_gate": "new exact-head real-bootstrap result",
+      "claim_allowed": false,
+      "actions": ["DETECTIVE", "ADAPTIVE", "CORRECTIVE", "SAFETY_ASSURANCE", "ANTI_RECURRENCE"]
+    },
+    {
+      "gap_id": "PAPERS-CI-PREEXEC-002",
+      "repo": "rafaelmeloreisnovo/papers",
+      "pr": 56,
+      "head": "a5061303c1e254e84dfac9cc791bb380dc267d3b",
+      "run": 32556479177,
+      "evidence": {
+        "jobs": [96991364627, 96991364662, 96991364686],
+        "steps_observed": false,
+        "head_contains_phase3_implementation": true,
+        "pr_body_still_describes_phase3_as_next": true,
+        "repo_visibility": "private"
+      },
+      "classification": "PRE_EXECUTION_CI_FAILURE_REPRODUCIBLE_ACROSS_HEAD_CHANGE",
+      "hypotheses": [
+        {
+          "name": "provider_or_runner_preexecution",
+          "state": "SUPPORTED_NOT_PROVEN"
+        },
+        {
+          "name": "billing_or_spending_runner_allocation",
+          "state": "POTENTIAL_PROPAGATION",
+          "support": "RafGitTools source-gap documentation records BLOCKED_INFRA_BILLING as a known runner-allocation failure class; papers is private"
+        },
+        {
+          "name": "python_c_or_document_content_failure",
+          "state": "NOT_DEMONSTRATED"
+        }
+      ],
+      "falsifier": "obtain first observable runner/check diagnostic or a job with internal steps; do not mutate content solely from zero-step red",
+      "closure_gate": "provider/runner diagnostic bound to run/check suite",
+      "claim_allowed": false,
+      "actions": ["DETECTIVE", "PRECAUTIONARY", "INCIDENT_INVESTIGATION", "MAINTENANCE", "SAFETY_ASSURANCE"]
+    },
+    {
+      "gap_id": "MAPA-PROVIDER-ENFORCEMENT-001",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "main": "749604de237a520ae56b49017c3703d49a0b53cf",
+      "observed": {
+        "protected": false,
+        "protection_enabled": false,
+        "required_status_enforcement": "off"
+      },
+      "state": "BLOCKED_PROVIDER_BINDING",
+      "closure_gate": "Administration:write binding -> reobserve -> zero-approval probe -> MERGE_REJECTED AND main_SHA_UNCHANGED",
+      "claim_allowed": false,
+      "actions": ["DETECTIVE", "PRECAUTIONARY", "SAFETY_ASSURANCE"]
+    },
+    {
+      "gap_id": "DRIVE-CLOCKS-001",
+      "source": "Google Drive",
+      "observed": {
+        "method_anchor": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+        "method_anchor_state": "CANONICAL_DRAFT",
+        "master_navigation_updated_at": "2026-08-22T03:55:34.006Z",
+        "math_memory_updated_at": "2026-08-22T07:25:12.397Z",
+        "drive_write_this_cycle": "TOKEN_VAZIO_REVISION_SAFE_WRITE_NOT_AVAILABLE"
+      },
+      "rule": "evidence_age is per-document, never one global Drive age",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "claim_allowed": false,
+      "actions": ["DETECTIVE", "MAINTENANCE", "ANTI_RECURRENCE"]
+    }
+  ],
+  "impact_radius": [
+    {
+      "event": "TERMUX-AM-SDK-PIPEFAIL-001",
+      "direct_exposure": ["termux-am package build", "RAFCODEPHI real bootstrap"],
+      "potential_propagation": ["development APT", "usable APK chain"],
+      "not_demonstrated": ["physical Android failure", "Vectras runtime damage"],
+      "false_positive_cost": "patching SDK/content after successful provisioning",
+      "false_negative_cost": "masking a real sdkmanager failure while suppressing SIGPIPE"
+    },
+    {
+      "event": "PAPERS-CI-PREEXEC-002",
+      "direct_exposure": ["PR56 automated assurance", "merge readiness", "publication route"],
+      "potential_propagation": ["claim/evidence binding"],
+      "not_demonstrated": ["Python defect", "C defect", "documentation defect", "scientific defect"]
+    }
+  ],
+  "lifecycle_delta": {
+    "termux_am_sdk_closure": {
+      "state": "REVALIDATION_QUEUED",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "evidence_age": "CURRENT_CYCLE",
+      "runtime_hours": "TOKEN_VAZIO"
+    },
+    "papers_ci": {
+      "state": "BLOCKED_PREEXECUTION",
+      "revalidation_type": "CONDITION_BASED",
+      "next_review_gate": "first provider/runner diagnostic"
+    },
+    "mapa_provider": {
+      "state": "BLOCKED_P0",
+      "revalidation_type": "CONDITION_BASED",
+      "next_review_gate": "Administration binding"
+    },
+    "drive": {
+      "state": "MIXED_DOCUMENT_CLOCKS",
+      "revalidation_type": "EVENT_TRIGGERED"
+    }
+  },
+  "f_ok": [
+    "Termux #97 first terminal mechanism reduced from generic SDK failure to expected producer SIGPIPE after observed SDK provisioning",
+    "bounded fail-closed correction committed as 035aeb6a67cc39b468497d8fdc6ca143dd949c83",
+    "papers zero-step failure reconfirmed on Phase3-bearing head without attributing code/content blame",
+    "Mapa provider non-enforcement reobserved",
+    "Drive per-document lifecycle clocks reconciled"
+  ],
+  "f_gap": [
+    "Termux exact-head rerun after 035aeb6a remains unresolved",
+    "papers provider/runner preexecution mechanism remains TOKEN_VAZIO",
+    "RafGitTools 69 P1 source gaps remain open",
+    "Mapa server-side binding remains absent",
+    "physical Android and Vectras execution-time identity remain TOKEN_VAZIO",
+    "Drive revision-safe append primitive not demonstrated"
+  ],
+  "f_next": [
+    "observe Termux exact-head 035aeb6a real-bootstrap and classify only its first terminal result",
+    "obtain papers provider/runner diagnostic before any content correction",
+    "select highest-value bounded RafGitTools P1 group and require findings_after < findings_before with new_P0=0",
+    "bind Mapa server-side protection only with real Administration authority before merge rejection probe",
+    "capture Vectras request_digest -> provider_result_digest -> qemu_sha256_at_execution -> PID -> exit when execution surface is available"
+  ]
+}
