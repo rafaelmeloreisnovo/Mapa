@@ -1,0 +1,47 @@
+{
+  "schema": "rafaelia.federated_omega_sustainment.correction.v1",
+  "correction_id": "OMEGA_SUSTAINMENT_20260822T0555BRT_CORRECTION_001",
+  "predecessor": "data/routing/cycles/omega-federated-sustainment-20260822T0555BRT.v1.json",
+  "claim_allowed": false,
+  "before": {
+    "termux_real_bootstrap_run_32560563326": "IN_PROGRESS",
+    "xorg_util_macros_failure_durability": "TOKEN_VAZIO"
+  },
+  "new_evidence": {
+    "termux_real_bootstrap_run_32560563326": {
+      "status": "COMPLETED",
+      "conclusion": "FAILURE",
+      "artifact_id": 9473518080,
+      "artifact_sha256": "6f5d26a84bca7a1a0096141af1e2bdc67ed74d4e58dad9f28bc0c20bbabe613c",
+      "first_terminal_mechanism": "repeated curl 28 timeout acquiring util-macros-1.20.2.tar.xz from xorg.freedesktop.org"
+    },
+    "independent_reproduction": {
+      "development_apt_run": 32560563308,
+      "job": 97001361029,
+      "same_failure_mechanism": true,
+      "source_evidence_artifact_id": 9473034968,
+      "source_evidence_sha256": "e310cc69da255cdf9bc55bdae6b109f368221bca9bda594ae4761607b8278f85"
+    },
+    "corrective_pr": {
+      "repo": "rafaelmeloreisnovo/termux-packages",
+      "pr": 98,
+      "head": "c4d3b50299ac693bc3818628d5562591bfb2baa0",
+      "normal_builds_unchanged": true,
+      "rafcodephi_source": "https://www.x.org/pub/individual/util/util-macros-1.20.2.tar.xz",
+      "sha256_unchanged": "9ac269eba24f672d7d7b3574e4be5f333d13f04a7712303b1821b2a51ac82e8e",
+      "state": "CORRECTIVE_CANDIDATE",
+      "falsifier": "exact-head rerun still cannot acquire and verify the checksum-pinned tarball"
+    }
+  },
+  "after": {
+    "xorg_util_macros_failure": "REPRODUCED_IN_TWO_INDEPENDENT_WORKFLOWS",
+    "classification": "SOURCE_CUSTODY_NETWORK_PATH_FAILURE_SCOPED",
+    "corrective_candidate": "termux-packages#98",
+    "closure": "TOKEN_VAZIO_PENDING_EXACT_HEAD_RERUN"
+  },
+  "anti_recurrence": [
+    "PINNED_HASH_DOES_NOT_GUARANTEE_SINGLE_ENDPOINT_AVAILABILITY",
+    "ALTERNATE_SOURCE_MUST_REMAIN_AUTHORITY_EQUIVALENT_AND_HASH_IDENTICAL",
+    "NORMAL_TERMUX_SOURCE_ROUTE_MUST_REMAIN_UNCHANGED"
+  ]
+}
