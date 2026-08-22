@@ -1,0 +1,34 @@
+{
+  "schema": "rafaelia.unknown_unknown_discovery_execution_receipt/v1",
+  "observed_run": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pull_request": 349,
+    "head_sha": "52353fa5d7495e11cb6c291a0ac01123d4787457",
+    "workflow": "unknown-unknown-discovery-v1",
+    "run_id": 32562780369,
+    "event": "pull_request",
+    "conclusion": "success",
+    "run_started_at": "2026-08-22T08:37:38Z"
+  },
+  "evidence": {
+    "unit_tests": {"tests": 3, "failures": 0, "status": "PASS"},
+    "bounded_discovery": "PASS",
+    "epistemic_safety_gate": "PASS",
+    "candidate_count": 26,
+    "generated_payload_sha256": "9f5bcdf0cbe053a64eec7dfe10e91cbcf5c03dcba25cda1af65fca3bb4a1ee2c",
+    "claim_allowed": false
+  },
+  "custody": {
+    "historical_generated_payload": "TOKEN_VAZIO_GENERATED_PAYLOAD_NOT_PERSISTED",
+    "reason": "The successful PR run generated the JSON under /tmp and emitted its count/hash to logs, but the workflow did not upload the payload as an artifact.",
+    "non_fabrication_rule": "Do not reconstruct the historical 26-candidate payload from current inputs unless a rerun reproduces the recorded SHA-256 exactly.",
+    "future_closure": "The workflow successor uploads UNKNOWN_UNKNOWN_DISCOVERY_V1.generated.json as a retained GitHub Actions artifact."
+  },
+  "invariants": [
+    "NOT_FOUND_IN_BOUNDED_SEARCH != DOES_NOT_EXIST",
+    "COUNT_AND_HASH != PAYLOAD_CUSTODY",
+    "SUCCESSFUL_EXECUTION != CLAIM_PROMOTION"
+  ],
+  "claim_allowed": false,
+  "append_only": true
+}
