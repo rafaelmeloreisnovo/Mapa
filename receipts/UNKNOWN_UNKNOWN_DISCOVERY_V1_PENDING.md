@@ -5,6 +5,7 @@ State: `PENDING_CI_EXECUTION`
 This receipt intentionally does **not** claim runtime success.
 
 Implemented artifacts:
+
 - `tooling/unknown_unknown_discovery.py`
 - `tests/test_unknown_unknown_discovery.py`
 - `data/gap-atlas/UNKNOWN_UNKNOWN_DISCOVERY_V1.json`
@@ -16,6 +17,7 @@ Promotion boundary:
 `UNKNOWN_UNKNOWN_CANDIDATE -> KNOWN_UNKNOWN -> TOKEN_VAZIO -> EXPERIMENT -> PASS/FAIL`
 
 Required closure evidence:
+
 - CI run on the branch/PR head;
 - unit test PASS;
 - real bounded discovery completion;
