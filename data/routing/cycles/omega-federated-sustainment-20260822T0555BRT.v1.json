@@ -1,0 +1,167 @@
+{
+  "schema": "rafaelia.federated_omega_sustainment.v1",
+  "cycle_id": "OMEGA_SUSTAINMENT_20260822T0555BRT",
+  "claim_allowed": false,
+  "principles": [
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM",
+    "TOKEN_VAZIO_NE_ZERO",
+    "ABSENCE_OF_EVIDENCE_NE_EVIDENCE_OF_ABSENCE",
+    "APPEND_ONLY"
+  ],
+  "predecessor": {
+    "mapa_main_sha": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+    "mapa_provider_protected": false,
+    "mapa_required_status_enforcement": "off"
+  },
+  "executions_realized": [
+    {
+      "component": "termux-packages/termux-am",
+      "pr": 97,
+      "pre_correction_head": "16cf60cf49677398e876d3c4ab0f2ae95d1a3007",
+      "run_id": 32555998529,
+      "job_id": 96990081944,
+      "artifact_id": 9472162937,
+      "artifact_sha256": "5ff44b60364d2f06afe6c9ccd25c73eab95e072c762a214af2cf4312f9819184",
+      "before_failure": "platforms;android-33 and build-tools;34.0.0 unavailable in immutable SDK",
+      "observed_after": "SDK platform extraction reached 100 percent but workflow status exit_code=141",
+      "mechanism": "yes producer receives SIGPIPE after sdkmanager finishes under pipefail",
+      "classification": "FALSE_FAILURE_FROM_PIPELINE_PRODUCER_SIGPIPE",
+      "corrective_head": "035aeb6a67cc39b468497d8fdc6ca143dd949c83",
+      "correction": "preserve sdkmanager exit status while accepting expected yes-side SIGPIPE",
+      "pr_merged": true,
+      "release_claim_allowed": false,
+      "device_runtime_proof": "TOKEN_VAZIO"
+    },
+    {
+      "component": "termux-packages/ARM32 development APT",
+      "head": "035aeb6a67cc39b468497d8fdc6ca143dd949c83",
+      "run_id": 32560563308,
+      "job_id": 97001361029,
+      "artifact_id": 9473034968,
+      "artifact_sha256": "e310cc69da255cdf9bc55bdae6b109f368221bca9bda594ae4761607b8278f85",
+      "source_debs_tar_sha256": "038d5ca1c7adc644470994c51ab534be01959de1095224f0c16bcd03eee32009",
+      "source_evidence_state": "PASS",
+      "live_bootstrap_state": "BLOCKED",
+      "live_bootstrap_exit_code": 1,
+      "first_terminal_mechanism": "repeated curl timeout downloading https://xorg.freedesktop.org/releases/individual/util/util-macros-1.20.2.tar.xz",
+      "next_probe_executed": "rerun failed job 97001361029",
+      "rerun_reason": "discriminate transient external-network failure from durable source-custody failure",
+      "claim_allowed": false
+    },
+    {
+      "component": "Mapa/UNKNOWN_UNKNOWN_DISCOVERY_V1",
+      "pr": 349,
+      "head": "52353fa5d7495e11cb6c291a0ac01123d4787457",
+      "run_id": 32562780369,
+      "job_id": 97006843703,
+      "unit_tests": {"tests": 3, "failures": 0, "status": "PASS"},
+      "real_bounded_discovery": "PASS",
+      "epistemic_safety_gate": "PASS",
+      "candidate_count": 26,
+      "output_sha256": "9f5bcdf0cbe053a64eec7dfe10e91cbcf5c03dcba25cda1af65fca3bb4a1ee2c",
+      "candidate_state": "UNKNOWN_UNKNOWN_CANDIDATE",
+      "automatic_promotion_to_token_vazio": false,
+      "claim_allowed": false
+    }
+  ],
+  "near_misses": [
+    {
+      "gap_id": "TERMUX-SDK-PIPEFAIL-141",
+      "failure_mode": "successful consumer command masked by producer-side SIGPIPE under pipefail",
+      "evidence_for": ["SDK extraction completed", "source-build status exit_code=141", "yes|sdkmanager pipeline present"],
+      "falsifier": "corrected exact-head still exits 141 at sdkmanager provisioning",
+      "action_categories": ["DETECTIVE", "ADAPTIVE", "CORRECTIVE", "SAFETY_ASSURANCE", "ANTI_RECURRENCE"]
+    },
+    {
+      "gap_id": "PAPERS-MERGE-WITH-RED-CI-001",
+      "source_pointer": "rafaelmeloreisnovo/papers#56",
+      "evidence_for": ["PR merged at head a5061303...", "CI run 32556479177 conclusion=failure", "papers/main protected=false", "required checks enforcement=off"],
+      "uncertainty_state": "MERGE_ASSURANCE_GAP_OBSERVED",
+      "claim_allowed": false,
+      "action_categories": ["DETECTIVE", "PREVENTIVE", "PRECAUTIONARY", "SAFETY_ASSURANCE"]
+    }
+  ],
+  "impact_radius": [
+    {
+      "event": "TERMUX_XORG_UTIL_MACROS_DOWNLOAD_TIMEOUT",
+      "direct_exposure": ["ARM32 source-build package closure", "development APT materialization"],
+      "potential_propagation": ["bootstrap completion", "APK materialization", "device runtime route"],
+      "not_demonstrated": ["Android physical failure", "artifact corruption", "AArch64 physical failure"],
+      "inspection_required": true,
+      "revalidation_required": true,
+      "evidence_needed": "rerun outcome or durable source availability evidence",
+      "false_positive_cost": "unnecessary source URL mutation for a transient timeout",
+      "false_negative_cost": "repeated non-reproducible builds if upstream source is durably unavailable"
+    }
+  ],
+  "drive_reconciliation": {
+    "method_anchor": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "method_anchor_state": "CANONICAL_DRAFT",
+    "method_anchor_claim_allowed": false,
+    "master_navigation_registry_updated_at": "2026-08-22T03:55:34.006Z",
+    "drive_write_this_cycle": "TOKEN_VAZIO_REVISION_SAFE_WRITE_NOT_EXECUTED"
+  },
+  "component_lifecycle_ledger_delta": [
+    {
+      "component": "termux-am writable SDK closure",
+      "state": "CORRECTED_REVALIDATION_IN_PROGRESS",
+      "builds": 2,
+      "test_cycles": "observed workflow reruns",
+      "runtime_hours": "TOKEN_VAZIO",
+      "physical_deployments": "TOKEN_VAZIO",
+      "near_miss_count_observed_this_cycle": 1,
+      "revalidation_rule": "EVENT_TRIGGERED",
+      "revalidation_origin": "FIELD_EVIDENCE",
+      "next_review_gate": "exact-head real bootstrap run 32560563326"
+    },
+    {
+      "component": "Mapa UNKNOWN_UNKNOWN_DISCOVERY_V1",
+      "state": "PASS_SCOPED",
+      "test_cycles": 1,
+      "candidate_count": 26,
+      "evidence_age": "CURRENT_AT_HEAD_52353fa5",
+      "revalidation_rule": "EVENT_TRIGGERED",
+      "revalidation_origin": "INTERNAL_CONTRACT",
+      "next_review_gate": "review candidates individually before any TOKEN_VAZIO promotion"
+    },
+    {
+      "component": "papers merge assurance",
+      "state": "MAINTENANCE_REQUIRED",
+      "protected": false,
+      "required_checks_enforcement": "off",
+      "revalidation_rule": "CONDITION_BASED",
+      "revalidation_origin": "OBSERVED_NEAR_MISS",
+      "next_review_gate": "server-side binding before publication-sensitive promotion"
+    }
+  ],
+  "uncertainty_before_after": [
+    "TERMUX_SDK_MISSING -> SDK_PROVISIONING_COMPLETES_BUT_PIPEFAIL_141 -> CORRECTED_HEAD_REVALIDATING",
+    "TERMUX_NEXT_FAILURE_UNKNOWN -> XORG_UTIL_MACROS_DOWNLOAD_TIMEOUT_SCOPED -> RERUN_EXECUTED",
+    "UNKNOWN_UNKNOWN_DISCOVERY_PENDING -> 26_CANDIDATES_PASS_SCOPED_WITH_SHA256",
+    "PAPERS_MERGE_ASSURANCE_UNKNOWN -> MERGED_WITH_RED_CI_AND_NO_SERVER_ENFORCEMENT_OBSERVED"
+  ],
+  "f_ok": [
+    "Termux exit-141 mechanism localized from preserved artifact and corrected on merged PR97",
+    "current-head Termux source evidence preserves source-built deb archive PASS while bootstrap remains blocked",
+    "network-timeout hypothesis received a safe rerun probe instead of speculative source mutation",
+    "UNKNOWN_UNKNOWN_DISCOVERY_V1 executed with 3/3 tests, safety PASS, 26 candidates and output SHA256",
+    "papers merge-assurance near-miss reobserved against live unprotected main",
+    "Drive method/navigation anchors reanchored without inventing a write"
+  ],
+  "f_gap": [
+    "Termux corrected exact-head real bootstrap run 32560563326 still in progress at observation",
+    "Termux util-macros timeout durability vs transience pending rerun result",
+    "Mapa main and papers main remain unprotected server-side",
+    "papers CI failure mechanism remains unresolved and merge occurred without required-check enforcement",
+    "physical Android execution remains TOKEN_VAZIO",
+    "Drive revision-safe append not executed",
+    "UNKNOWN_UNKNOWN candidates remain candidates, not TOKEN_VAZIO or claims"
+  ],
+  "f_next": [
+    "Observe Termux run 32560563326; accept only PASS or next first terminal mechanism",
+    "Observe rerun of APT job 97001361029; if timeout repeats, bind durable source-custody correction; if it passes, classify transient network event",
+    "Review 26 UNKNOWN_UNKNOWN candidates and promote only formulated evidence-backed gaps",
+    "Require server-side protection binding before any new zero-approval rejection probe or publication-sensitive promotion",
+    "Preserve papers content claims fail-closed until executable CI/scientific evidence is available"
+  ]
+}
