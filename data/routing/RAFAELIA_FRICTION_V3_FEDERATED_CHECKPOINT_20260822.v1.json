@@ -1,0 +1,112 @@
+{
+  "schema": "rafaelia.friction-v3-federated-checkpoint.v1",
+  "observed_at": "2026-08-22T13:02:00Z",
+  "state": "VERIFIED_PARTIAL_WITH_PENDING_PROVIDER_RUNS",
+  "claim_allowed": false,
+  "authorities": {
+    "governance": "rafaelmeloreisnovo/RafGitTools",
+    "producer": "rafaelmeloreisnovo/GAIA_phi",
+    "routing": "rafaelmeloreisnovo/Mapa",
+    "memory": "Google Drive"
+  },
+  "rafgittools": {
+    "pr": 377,
+    "branch": "governance/friction-reduction-ethics-license-v3-20260822",
+    "current_head": "5b92a46884ee50f828a0c2130974ccd2558473c5",
+    "draft": true,
+    "merged": false,
+    "previous_gate": {
+      "head": "a17dbca5c1a4e6222575221dafaae75e38164406",
+      "workflow": "uncertainty-urgency-friction-v3",
+      "run_id": 32574162282,
+      "conclusion": "failure",
+      "executed_tests": 12,
+      "passed_tests": 11,
+      "failed_tests": 1,
+      "failure": "provider evidence validator read exposed_steps_count while current record uses latest_exposed_steps_count",
+      "classification": "VALIDATOR_SCHEMA_DRIFT"
+    },
+    "correction": {
+      "commit": "5b92a46884ee50f828a0c2130974ccd2558473c5",
+      "effect": "read latest_exposed_steps_count with legacy fallback; require a step-count field; validate per-attempt zero-step semantics",
+      "weakened_gate": false
+    },
+    "current_gate": {
+      "workflow": "uncertainty-urgency-friction-v3",
+      "run_id": 32574481174,
+      "run_number": 7,
+      "state": "QUEUED",
+      "claim_effect": "NONE_UNTIL_COMPLETED_AND_OBSERVED"
+    }
+  },
+  "gaia": {
+    "producer_source_commit": "d3f49c10b74f740ee2024314dff91e9a0ef20b2f",
+    "producer_source_blob": "1bb228392c51d3bfd0d85ae8e6ce92c40fe28dd1",
+    "pr98_merge_commit": "f980cc5be46b8daff892e3885da40097eba46e90",
+    "cognitive_receipt": {
+      "run_id": 32564704743,
+      "attempts": [
+        {"job_id": 97011790745, "conclusion": "failure", "exposed_steps": 0},
+        {"job_id": 97033065513, "conclusion": "failure", "exposed_steps": 0}
+      ],
+      "state": "TOKEN_VAZIO_PROVIDER_EXECUTION"
+    },
+    "provider_probe": {
+      "pr": 99,
+      "branch": "audit/provider-capability-probe-20260822",
+      "head": "9d5aeaede43d2c9cb180ff674a6083b3752a135b",
+      "workflow": "provider-capability-probe",
+      "run_id": 32574530990,
+      "state": "QUEUED",
+      "scope": "runner/shell capability only; no GAIA implementation test"
+    }
+  },
+  "drive": {
+    "longitudinal_doc": {
+      "id": "1QrJmd7xsd8-zJVfNr8MMoHsFf-X-WvNXPmHTR_SlyRg",
+      "title": "RAFAELIA — Ruído, Incerteza, Urgência, Ética e License by Design — V2 — 2026-08-22",
+      "delta": "V3 append-only checkpoint inserted",
+      "state": "PERSISTED"
+    },
+    "operational_sheet": {
+      "id": "1JbT-lBtV97oFniRHjIjcnuS3SNSqIXrD5IvTEUBNhEA",
+      "title": "RAFAELIA — Urgências, Fricção, Usos, Licenças e Relações — V3 — 2026-08-22",
+      "tabs": ["OVERVIEW", "URGENCIES", "USES", "LICENSE_UNITS", "RELATIONS", "FRICTION_BASELINE"],
+      "readback": {
+        "urgencies": 6,
+        "p0": 3,
+        "token_vazio_states": 2,
+        "governed_uses": 5,
+        "license_units": 4,
+        "unknown_license_units": 2,
+        "typed_relations": 11,
+        "analogy_with_nonzero_evidence_weight": 0,
+        "provider_pre_step_attempts": 2,
+        "manual_rework": "TOKEN_VAZIO_UNMEASURED",
+        "aggregate": "TOKEN_VAZIO_SCORE"
+      },
+      "state": "PERSISTED_AND_READBACK_VERIFIED"
+    }
+  },
+  "mapa": {
+    "pr": 362,
+    "branch": "routing/friction-ethics-license-complex-v1-20260822",
+    "predecessor_head": "dd87f6f73d01df1d787bfb7903de6956d597747c",
+    "branch_topology_gate": "SUCCESS_ON_PREDECESSOR_HEAD",
+    "promotion_control": "EXPECTED_FAIL_DRAFT_AND_APPROVAL_BOUNDARY",
+    "server_enforcement": "EXPECTED_FAIL_PROVIDER_GOVERNANCE_BOUNDARY"
+  },
+  "anti_regression": [
+    "failed V3 run is retained as negative evidence and not overwritten by correction",
+    "correction strengthens current-field validation instead of muting the failing test",
+    "queued workflow is not PASS or FAIL",
+    "two GAIA zero-step failures remain TOKEN_VAZIO_PROVIDER_EXECUTION, not TEST_EXECUTED_FAIL",
+    "Drive memory is not execution evidence",
+    "parable evidence effect remains NONE",
+    "unknown license permissions remain fail-closed",
+    "manual_rework is not coerced to zero and aggregate remains TOKEN_VAZIO_SCORE"
+  ],
+  "F_ok": "V3 artifacts, validator drift detection/correction, rights/use/relation/baseline data, Mapa route, Drive longitudinal delta and structured sheet are persisted and reconstructible",
+  "F_gap": "corrected V3 CI, GAIA provider probe and Mapa general CI remain pending provider execution; GAIA cognitive runtime receipt, residual rights units, manual rework and B7_TO_T2 remain open",
+  "F_next": "observe queued gates; append receipt artifacts without rewriting this checkpoint; close only exact tokens whose gates complete"
+}
