@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.federated_sustainment_correction/v1",
+  "predecessor": "data/routing/cycles/omega-federated-sustainment-20260822T0456BRT.correction-001.v1.json",
+  "claim_allowed": false,
+  "append_only": true,
+  "gap_id": "RLL-G4-G6-POST-HANDOFF-002",
+  "source_pointer": "instituto-Rafael/relativity-living-light#763",
+  "head_before_isolation_fix": "c8acc649c0711d759b9f0d03f2496bdb1a6a2c2b",
+  "run_id": 32562521311,
+  "job_id": 97006203717,
+  "artifact_id": 9473208684,
+  "artifact_sha256": "2db4b6c554eddda57b67363dd4a185249e3b38dba0a8f0a6fdfe7ba48ba26587",
+  "result": {
+    "tests_passed": 1285,
+    "tests_failed": 4,
+    "subtests_passed": 12,
+    "covariance_file_not_found": "CLOSED_SCOPED",
+    "new_primary_boundary": "G4 report contains non-finite float and strict JSON receipt rejects it",
+    "secondary_test_pollution": "materialized covariance remained visible to repository-state tests that intentionally expect a clean checkout without full covariance"
+  },
+  "corrective_delta": {
+    "head_after_isolation_fix": "231ffdd756447ae9c40fa975675a1744f31d5378",
+    "scope": "test isolation only",
+    "mechanism": "remove covariance and sidecar in pytest finalizers only when the integration test created them; preserve the materialization receipt artifact",
+    "nonfinite_scientific_receipt": "OPEN_SEPARATE_MECHANISM"
+  },
+  "interpretation": [
+    "G2 custody handoff now reaches G4 execution",
+    "the earlier FileNotFoundError is no longer the first boundary",
+    "repository-state tests must not be mutated by an integration test fixture",
+    "non-finite optimization evidence must remain visible and cannot be hidden by permissive JSON serialization"
+  ],
+  "actions": [
+    "DETECTIVE",
+    "PREVENTIVE",
+    "PRECAUTIONARY",
+    "ADAPTIVE",
+    "CORRECTIVE",
+    "INCIDENT_INVESTIGATION",
+    "SAFETY_ASSURANCE",
+    "ANTI_RECURRENCE"
+  ],
+  "falsifiers": {
+    "fixture_isolation": "fresh exact-head Python test run must eliminate the three repository-state expectation failures",
+    "g4_nonfinite": "determine which model/seed produces non-finite run data and emit a strict JSON-compatible blocked receipt without converting non-finite evidence into a scientific PASS"
+  },
+  "new_rules": [
+    "TEST_MATERIALIZATION != REPOSITORY_CANONICAL_STATE",
+    "STRICT_RECEIPT_SERIALIZATION_FAILURE != SCIENTIFIC_MODEL_FALSIFICATION",
+    "NONFINITE_RESULT_MUST_REMAIN_EXPLICIT_AND_FAIL_CLOSED"
+  ]
+}
