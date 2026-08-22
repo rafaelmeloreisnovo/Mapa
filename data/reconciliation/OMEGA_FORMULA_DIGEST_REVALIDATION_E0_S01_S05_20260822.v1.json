@@ -1,0 +1,94 @@
+{
+  "schema": "RAFAELIA_FORMULA_DIGEST_REVALIDATION_E0_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-CALC-MEMORY-DIGEST-REVALIDATION-E0-20260822",
+  "claim_allowed": false,
+  "mode": "APPEND_ONLY_CORRECTION_LEDGER",
+  "normalization": "SHA256(Unicode NFC(trim(normalized_expression)))",
+  "historical_receipts_preserved": true,
+  "source_receipts": [
+    "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD01_20260816.v1.json",
+    "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD02_20260816.v1.json",
+    "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD03_FORMAL_20260816.v1.json",
+    "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD04_MATEMATICA_20260822.v1.json",
+    "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD05_TEOREMAS_20260822.v1.json"
+  ],
+  "drive_ledger": {
+    "spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+    "digest_revalidation_sheet": "DIGEST_REVALIDATION",
+    "e0_summary_sheet": "E0_EXACT",
+    "columns": [
+      "Shard",
+      "Record ID",
+      "Normalized Expression",
+      "Stored SHA256",
+      "Recomputed SHA256 NFC+trim",
+      "Match"
+    ]
+  },
+  "digest_revalidation": {
+    "records_rehashed": 107,
+    "S01": {
+      "records": 22,
+      "stored_hash_matches": 22,
+      "stored_hash_mismatches": 0,
+      "state": "PASS"
+    },
+    "S02": {
+      "records": 38,
+      "stored_hash_matches": 1,
+      "stored_hash_mismatches": 37,
+      "state": "HISTORICAL_LEDGER_INVALID_CORRECTED_APPEND_ONLY"
+    },
+    "S03": {
+      "records": 47,
+      "stored_hash_matches": 0,
+      "stored_hash_mismatches": 47,
+      "state": "HISTORICAL_LEDGER_INVALID_CORRECTED_APPEND_ONLY"
+    },
+    "total_stored_hash_matches": 23,
+    "total_stored_hash_mismatches": 84,
+    "source_expression_mutations": 0,
+    "historical_receipt_mutations": 0
+  },
+  "example_correction": {
+    "record_id": "TEO-S02-002",
+    "normalized_expression": "|m|=42",
+    "stored_sha256": "ddfba245af3b34bd95b52f3f828937b4d75179c0d4cf395bc9a3ae795863c45a",
+    "recomputed_sha256": "9be21e29103564ee443072d0ac37b95bf7b338e68812aeb53ed5e7d57f540682"
+  },
+  "e0_exact_bounded": {
+    "scope": "frozen 49-path provider-bound source scan represented by S01..S05",
+    "raw_expression_occurrences": 374,
+    "exact_unique_sha256_after_revalidation": 356,
+    "exact_duplicate_extra_occurrences": 18,
+    "remaining_candidate_paths_in_frozen_scan": 0,
+    "state": "PASS_BOUNDED_EXACT_IDENTITY"
+  },
+  "boundaries": {
+    "E0_definition": "exact textual identity after Unicode NFC + trim only",
+    "E1_AST": "TOKEN_VAZIO_NOT_RUN",
+    "E2_ALGEBRAIC_EQUIVALENCE": "TOKEN_VAZIO_NOT_RUN",
+    "FORMULA_REGISTRY_GLOBAL_UNIQUE_TOTAL": "TOKEN_VAZIO",
+    "SEMANTIC_DEDUP_GLOBAL": "TOKEN_VAZIO",
+    "broader_drive_github_exhaustivity": "TOKEN_VAZIO",
+    "reported_653_target": "UNVERIFIED_REPORTED_TARGET"
+  },
+  "invariants": [
+    "historical receipt != corrected digest ledger",
+    "corrected digest does not rewrite source expression",
+    "E0 exact identity != E1 AST equivalence",
+    "E1 AST equivalence != E2 algebraic equivalence",
+    "bounded exact unique count != global universe total",
+    "formula != implementation != execution != evidence != claim != novelty",
+    "claim_allowed=false"
+  ],
+  "F_ok": "The 107 historical S01..S03 expression digests were deterministically revalidated; S01 reproduced 22/22, S02 reproduced 1/38, S03 reproduced 0/47. The corrected append-only ledger enabled bounded E0 across S01..S05: 374 occurrences -> 356 exact identities -> 18 duplicate extra occurrences.",
+  "F_gap": [
+    "E1 heterogeneous AST parser/canonicalization not yet run",
+    "E2 algebraic equivalence not yet run",
+    "global Drive/GitHub unique formula total remains TOKEN_VAZIO",
+    "domain/unit/calculus overlay remains partial"
+  ],
+  "F_next": "Define deterministic E1 parsing/canonical AST with typed parse failures; run E2 only on compatible parsed mathematical domains; then attach domain/units and calculation operators before MCM promotion."
+}
