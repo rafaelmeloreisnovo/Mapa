@@ -63,41 +63,49 @@ This IR is deliberately richer than a formula AST. A formula AST cannot represen
 ## 4. Specialized computational engines
 
 ### Predicate / logic
+
 Objects: conditions, biconditionals, set predicates, quantifiers.  
 Methods: bounded truth tables, witness/counterexample search, explicit predicate signatures.  
 Forbidden shortcut: converting linguistic adjacency into implication without a source/producer witness.
 
 ### Number theory
+
 Objects: integer sequences, divisibility, primality, congruences.  
 Methods: exact integer arithmetic, factorization witnesses, range verifiers plus formal proof.  
 Boundary: a finite verifier supports but never replaces a general proof.
 
 ### Discrete recurrence
+
 Objects: `x_{n+1}=F(x_n,...)`, deltas and cumulative states.  
 Methods: residual identities, index shifts, reverse-roundtrip, antidifferences.  
 Boundary: continuous derivative is a secondary analytic extension, not native semantics.
 
 ### Real/complex continuous
+
 Objects: typed scalar/vector functions.  
 Methods: symbolic differentiation, finite-difference cross-check, branch and singularity probes, Jacobian/Hessian where typed.  
 Boundary: domain and branch declaration precede simplification.
 
 ### Modular finite
+
 Objects: `Z_m`, residue tuples, finite orbits.  
 Methods: exhaustive enumeration when tractable, generalized CRT compatibility, preimage cardinality, minimum-period tests.  
 Boundary: inverse modulo a period is not a unique inverse over all integers.
 
 ### Boolean/GF(2)/coding
+
 Objects: bit-vectors, XOR, parity, syndrome, decoder branches.  
 Methods: exhaustive truth tables at bounded widths, single/multiple-error controls, decoder roundtrip.  
 Boundary: XOR by a known mask is reversible; a state→mask function need not be invertible.
 
 ### Set/graph structural
+
 Objects: set builders, preimages, graph relations, routes.  
 Methods: membership checks, dangling-edge checks, reachability, cycle rank/topological invariants.  
 Boundary: reverse traversal is not automatically a functional inverse.
 
 ### Feature/sensor pipeline
+
 Objects: HRV/GSR/etc. feature compositions and pipelines.  
 Methods: schema/unit checks, windowing and normalization freeze, channel permutation, missing-channel and replay controls.  
 Boundary: `A+B` in prose is not arithmetic until aligned scalar definitions and units exist.
