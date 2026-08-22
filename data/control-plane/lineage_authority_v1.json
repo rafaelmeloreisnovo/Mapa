@@ -1,0 +1,159 @@
+{
+  "lineage_spec_version": "1.0.0",
+  "created_at": "2026-08-22T00:00:00Z",
+  "description": "Federated lineage authority and deduplication schema for 6-repo TOROID",
+  "scope": "FEDERATION_CERTIFIED",
+  "authority_pyramid": {
+    "termux-packages": {
+      "role": "source authority",
+      "responsibility": [
+        "source verification",
+        "recipe correctness",
+        "package artifact handoff",
+        "provenance binding (source -> receipt)"
+      ],
+      "scope": "source_fetch, source_extract, patch_apply",
+      "immutable_id_type": "lineage_id",
+      "independence_claim": "source authenticity, checksum verification"
+    },
+    "termux-app-rafacodephi": {
+      "role": "build + runtime authority",
+      "responsibility": [
+        "binary compilation",
+        "APK packaging",
+        "runtime validation",
+        "device receipt collection"
+      ],
+      "scope": "build_artifact, android_runtime",
+      "immutable_id_type": "lineage_id",
+      "independence_claim": "build correctness, runtime behavior"
+    },
+    "mapa": {
+      "role": "federation + validation authority",
+      "responsibility": [
+        "cross-repo routing",
+        "lineage authority definition",
+        "deduplication validation",
+        "topology coherence"
+      ],
+      "scope": "federation_graph, dedup_rules",
+      "immutable_id_type": "lineage_id",
+      "independence_claim": "federation schema validation"
+    },
+    "rafpolimata": {
+      "role": "compiler authority",
+      "responsibility": [
+        "AArch64 instruction correctness",
+        "optimization validation",
+        "compiled artifact proof"
+      ],
+      "scope": "compiler_contract, elf_proof",
+      "immutable_id_type": "lineage_id",
+      "independence_claim": "compiler semantics, ABI correctness"
+    },
+    "rafgittools": {
+      "role": "versioning authority",
+      "responsibility": [
+        "commit integrity",
+        "branch management",
+        "remote state tracking",
+        "control-plane routing"
+      ],
+      "scope": "git_metadata, versioning",
+      "immutable_id_type": "lineage_id",
+      "independence_claim": "git history integrity"
+    },
+    "llamarafaelia": {
+      "role": "model authority",
+      "responsibility": [
+        "semantic interpretation",
+        "knowledge retrieval",
+        "inference validation"
+      ],
+      "scope": "model_output, inference_state",
+      "immutable_id_type": "lineage_id",
+      "independence_claim": "model semantic correctness"
+    }
+  },
+  "dedup_rules": [
+    {
+      "class": "identical_artifact",
+      "description": "Two artifacts with byte-for-byte identical content",
+      "proof_required": [
+        "sha256_hash_match",
+        "metadata_match (schema_version, type)",
+        "source_repo_linkage (do not merge authority)"
+      ],
+      "is_independent": false,
+      "reason": "Same bytes do not constitute independent evidence; must preserve source repo authority"
+    },
+    {
+      "class": "upstream_sync",
+      "description": "Artifact derived from same upstream source via documented pipeline",
+      "proof_required": [
+        "commit_chain_linkage (both trace to same upstream commit)",
+        "timestamp_ordering (acceptable lag)",
+        "pipeline_identity (same recipe/build)"
+      ],
+      "is_independent": false,
+      "reason": "Synchronized output, not independent evidence"
+    },
+    {
+      "class": "independent_derivation",
+      "description": "Same logical artifact derived via different pipelines/repos",
+      "proof_required": [
+        "sha256_hash_match",
+        "semantic_equivalence (same output semantics, different derivation)",
+        "pipeline_chain_divergence (provably different execution paths)",
+        "timestamps_independent (derivation times do not suggest copying)"
+      ],
+      "is_independent": true,
+      "reason": "Different derivation paths provide independent verification"
+    },
+    {
+      "class": "cross_repo_evidence_chain",
+      "description": "Evidence from producer linked to consumer via handoff contract",
+      "proof_required": [
+        "producer_commit_hash",
+        "producer_gate_identifier",
+        "handoff_schema_match",
+        "consumer_receipt (confirms receipt of artifact)",
+        "timestamp_continuity (handoff occurred after producer gate)"
+      ],
+      "is_independent": true,
+      "reason": "Handoff chain creates distinct evidence link from producer to consumer"
+    }
+  ],
+  "lineage_id_structure": {
+    "format": "{repo}:{branch}:{commit}:{path}:{artifact_hash}",
+    "example": "termux-packages:main:a1b2c3d:packages/curl/build.sh:sha256:abc123",
+    "immutable": true,
+    "uniqueness": "global across RAFAELIA federation",
+    "versioning": "append-only (never rewrite)",
+    "authority_binding": "repo owner"
+  },
+  "cross_repo_validation": {
+    "topology": "6-repo TOROID",
+    "repos": [
+      "termux-packages",
+      "termux-app-rafacodephi",
+      "mapa",
+      "rafpolimata",
+      "rafgittools",
+      "llamarafaelia"
+    ],
+    "validation_gates": [
+      "lineage_chain_closure (all artifacts linked)",
+      "authority_non_overlap (roles distinct)",
+      "dedup_consistency (rules applied uniformly)",
+      "independence_proof (duplicates correctly classified)"
+    ]
+  },
+  "tv_independence_closure": {
+    "status": "CLOSED",
+    "authority_pyramid_defined": true,
+    "dedup_rules_enumerated": true,
+    "lineage_id_schema_specified": true,
+    "ready_for_federation_certification": true
+  }
+}
