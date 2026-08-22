@@ -1,0 +1,88 @@
+{
+  "event_type": "phase2_repair_completion",
+  "event_date": "2026-08-22",
+  "producer_repository": {
+    "owner": "rafaelmeloreisnovo",
+    "name": "frida-desktop",
+    "commit": "f29c4a7"
+  },
+  "phase_number": 2,
+  "gate_name": "frida-android-compile-all",
+  "authority": "rafaelmeloreisnovo/frida-desktop",
+  "status": "PARTIAL_PASS",
+  "completion_scope": "remote-environment-limited",
+  "repairs_applied": [
+    {
+      "id": "R2_1_JNI_RECURSION",
+      "falsifier": "F2_JNI_CORRUPTION",
+      "description": "RFLBridge.java JNI recursion: wrapper methods calling themselves instead of native methods",
+      "repair": "Renamed native methods from setMode()/snapshot()/etc. to native_setMode()/native_snapshot()/etc. to disambiguate from public wrappers",
+      "verification": "Code syntax valid; JNI method signatures now non-conflicting",
+      "status": "FIXED"
+    },
+    {
+      "id": "R2_2_LAYOUT_MISSING",
+      "falsifier": "F4_FRONTEND_INFRA",
+      "description": "ResearchModePanel.java depends on R.layout.research_mode_panel which did not exist",
+      "repair": "Created android/app/res/layout/research_mode_panel.xml with complete UI hierarchy (Spinner, TextViews, Buttons)",
+      "verification": "Layout XML valid; resource IDs match ResearchModePanel code",
+      "status": "FIXED"
+    },
+    {
+      "id": "R2_3_GRADLE_JAVA21",
+      "falsifier": "gradle-jvm-incompatible",
+      "description": "gradle.properties contained -XX:MaxPermSize=512m flag removed in Java 8 and incompatible with Java 21",
+      "repair": "Removed obsolete flag from org.gradle.jvmargs, retained -Xmx2048m for heap sizing",
+      "verification": "Gradle configuration valid for Java 21",
+      "status": "FIXED"
+    }
+  ],
+  "compilation_status": {
+    "environment": "remote-claude-code-session",
+    "jdk_version": "21.0.10",
+    "gradle_version": "8.14.3",
+    "android_sdk": "NOT_AVAILABLE",
+    "android_ndk": "NOT_AVAILABLE",
+    "reason_sdk_unavailable": "Remote container does not include Android SDK; expected per BUILD_GUIDE.md; requires local developer machine or CI environment with SDK",
+    "gradle_configuration_check": "PASS",
+    "jni_signature_validation": "PASS (no recursion)",
+    "layout_xml_validation": "PASS (resource IDs match code)"
+  },
+  "exit_criterion_status": {
+    "declared_criterion": "All targets compile to zero errors; CI red if any target fails",
+    "actual_status": "PARTIAL_PASS",
+    "reason": "Syntax and configuration validation passed; full compilation requires Android SDK (unavailable in remote environment)",
+    "next_validation_point": "Local developer machine or CI with Android SDK installed"
+  },
+  "falsifier_impact": {
+    "F2_JNI_CORRUPTION": "RESOLVED by native method renaming",
+    "F4_FRONTEND_INFRA": "RESOLVED by layout XML creation",
+    "F1_CI_INCOMPLETE": "DEFERRED (requires CI environment with SDK)",
+    "F3_RESEARCHMODE_ORPHANED": "MITIGATED (layout created; component still optional)",
+    "F5_HARNESS_SYNTHETIC": "DEFERRED (Phase 3 responsibility)",
+    "F6_POSTMERGE_RECEIPT_MISSING": "BEING_ADDRESSED (this receipt)",
+    "F7_CROSSREPO_BRANCH_UNVERIFIED": "DEFERRED (Phase 9 responsibility)",
+    "F8_GAP_CATEGORIZATION_IMPRECISE": "ACKNOWLEDGED (10 TV + 2 global blockers tracked)"
+  },
+  "next_phase": {
+    "phase_number": 3,
+    "name": "Replace Synthetic Test Harness",
+    "description": "Replace sleep() calls with deterministic event polling; add device validation marker to harness output",
+    "authority": "rafaelmeloreisnovo/frida-desktop",
+    "gate": "frida-harness-deterministic",
+    "dependencies": "Phase 2 repairs (completed)"
+  },
+  "federation_promotion": {
+    "from_state": "DOCUMENTED_PARTIAL / PARTIAL_FAIL_CLOSED",
+    "to_state": "DOCUMENTED_PARTIAL / PARTIAL_REPAIR_COMPLETED",
+    "claim_allowed": false,
+    "promotion_hold": true,
+    "reason_hold": "Full compile validation requires Android SDK; harness still synthetic; fixture not frozen"
+  },
+  "custody": {
+    "recorded_by": "claude-code-remote session",
+    "recorded_at": "2026-08-22",
+    "frida_desktop_commit": "f29c4a7",
+    "mapa_custody_link": "auditoria/frida-desktop-phase2-repairs-20260822.json"
+  }
+}
