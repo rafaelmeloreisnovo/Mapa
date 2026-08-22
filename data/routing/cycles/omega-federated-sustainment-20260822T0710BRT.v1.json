@@ -1,0 +1,178 @@
+{
+  "schema": "rafaelia.federated_sustainment_cycle.v1",
+  "cycle_id": "OMEGA-SUSTAINMENT-20260822T0710BRT",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "predecessor": {
+    "mapa_main": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+    "note": "Append-only successor; does not rewrite earlier cycle receipts."
+  },
+  "observations": {
+    "mapa": {
+      "main": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+      "latest_delta": "UNKNOWN_UNKNOWN_DISCOVERY_V1 merged",
+      "provider_protected": false,
+      "required_status_enforcement": "off",
+      "server_side_merge_binding": "NOT_ENFORCED_OBSERVED"
+    },
+    "unknown_unknown_discovery": {
+      "producer_head": "52353fa5d7495e11cb6c291a0ac01123d4787457",
+      "run_id": 32562780369,
+      "job_id": 97006843703,
+      "unit_tests": "3/3 PASS",
+      "bounded_discovery": "PASS",
+      "epistemic_safety": "PASS",
+      "candidate_count": 26,
+      "generated_sha256": "9f5bcdf0cbe053a64eec7dfe10e91cbcf5c03dcba25cda1af65fca3bb4a1ee2c",
+      "candidate_state": "UNKNOWN_UNKNOWN_CANDIDATE",
+      "claim_allowed": false,
+      "execution_receipt_pr": 358
+    },
+    "termux_packages": {
+      "pr97": {
+        "state": "MERGED_WITH_CORRECTIVE_SUCCESSOR_RERUN_IN_PROGRESS",
+        "original_head": "16cf60cf49677398e876d3c4ab0f2ae95d1a3007",
+        "corrective_head": "035aeb6a67cc39b468497d8fdc6ca143dd949c83",
+        "merge_commit": "2ce1f68562502c59ff14d336bd8c86e40c8bd51c",
+        "failed_run": 32555998529,
+        "failed_job": 96990081944,
+        "failure_artifact_id": 9472162937,
+        "failure_artifact_sha256": "5ff44b60364d2f06afe6c9ccd25c73eab95e072c762a214af2cf4312f9819184",
+        "failure_exit_code": 141,
+        "mechanism": "yes producer received SIGPIPE after sdkmanager successfully consumed confirmations under pipefail",
+        "evidence": "SDK Android 33 / build-tools 34 download and unzip progressed before exit 141; artifact status BLOCKED and device runtime remained TOKEN_VAZIO",
+        "correction": "preserve sdkmanager exit code and do not treat expected producer-side SIGPIPE as SDK failure",
+        "corrective_source_build_run": 32560563326,
+        "corrective_apt_run": 32560563308,
+        "corrective_runs_state": "IN_PROGRESS_AT_OBSERVATION",
+        "claim_allowed_release": false,
+        "device_runtime_proof": "TOKEN_VAZIO"
+      }
+    },
+    "papers": {
+      "main": "50d58adcfdb90dc854cf590d0328ac937b324cb0",
+      "near_miss": "C syntax checks used gcc ... || true and could convert real compiler errors into green steps",
+      "corrective_pr": 57,
+      "corrective_head": "6f298367cfa31896fce8e6de5d05886e14722814",
+      "correction": "remove unconditional-success suppression and fail if expected source families are absent",
+      "ci_run": 32566904210,
+      "ci_state": "QUEUED_AT_OBSERVATION",
+      "publication_claim_allowed": false
+    },
+    "rafgittools": {
+      "p0_source_gap": 0,
+      "p1_token_vazio_source": 69,
+      "latest_open_pr": 376,
+      "boundary": "governance and typed links do not close remaining P1 implementation debt",
+      "claim_allowed": false
+    },
+    "rll": {
+      "main": "1c942ac589628f677338ffde3ae3fcb2ebbf652f",
+      "latest_observed_scope": "governance scan/POC coherence",
+      "independent_replication": "TOKEN_VAZIO",
+      "scientific_claim_promotion_this_cycle": false
+    },
+    "vectras": {
+      "default_branch": "master",
+      "head": "bcb2947e02855a99b0842c39b2f9d4669da6a1c0",
+      "execution_time_qemu_sha256": "TOKEN_VAZIO",
+      "next_gate": "request_digest -> provider_result_digest -> qemu_sha256_at_execution -> PID -> exit"
+    },
+    "drive": {
+      "method_anchor_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "method_anchor_state": "CANONICAL_DRAFT / EXECUCAO_NAO_DESTRUTIVA / CLAIM_ALLOWED=false",
+      "master_navigation_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "master_navigation_updated_at": "2026-08-22T03:55:34.006Z",
+      "math_memory_id": "1ELvmzr2cltIayFrJmY1ZHzbWgjl6OJ2AkmBu3UoaivU",
+      "math_memory_updated_at": "2026-08-22T10:00:42.089Z",
+      "write_this_cycle": "TOKEN_VAZIO_REVISION_SAFE_WRITE_NOT_EXECUTED"
+    }
+  },
+  "gaps": [
+    {
+      "gap_id": "TERMUX-PR97-SIGPIPE-001",
+      "state": "CORRECTED_RERUN_IN_PROGRESS",
+      "failure_mode": "producer-side SIGPIPE 141 masks successful sdkmanager consumer completion under pipefail",
+      "falsifier": "corrective exact-head rerun still exits 141 at the same sdkmanager pipeline",
+      "closure_gate": "source build crosses sdkmanager provisioning and reveals PASS or a distinct first terminal mechanism",
+      "actions": ["DETECTIVE", "ADAPTIVE", "CORRECTIVE", "INCIDENT_INVESTIGATION", "SAFETY_ASSURANCE", "ANTI_RECURRENCE"],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "PAPERS-CI-FALSEPASS-C-001",
+      "state": "CORRECTIVE_PR_OPEN",
+      "failure_mode": "gcc syntax failures suppressed by || true",
+      "falsifier": "invalid C can still produce a green C syntax-check step after PR57",
+      "closure_gate": "PR57 CI executes observable steps and proves fail-closed behavior on current source",
+      "actions": ["DETECTIVE", "PREVENTIVE", "CORRECTIVE", "SAFETY_ASSURANCE", "ANTI_RECURRENCE"],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "MAPA-PROVIDER-ENFORCEMENT-001",
+      "state": "BLOCKED",
+      "failure_mode": "branch protection and required status enforcement absent",
+      "falsifier": "live provider observation shows binding enabled and zero-approval merge is rejected while main SHA remains unchanged",
+      "closure_gate": "Administration write -> binding -> reobserve -> MERGE_REJECTED AND main_SHA_UNCHANGED",
+      "actions": ["DETECTIVE", "PRECAUTIONARY", "SAFETY_ASSURANCE"],
+      "claim_allowed": false
+    }
+  ],
+  "impact_radius": {
+    "termux_sigpipe": {
+      "direct_exposure": ["termux-am package build", "ARM32 source-bootstrap continuity"],
+      "potential_propagation": ["development APT materialization", "APK chain"],
+      "not_demonstrated": ["physical Android failure", "device runtime corruption"]
+    },
+    "papers_falsepass": {
+      "direct_exposure": ["Build C Sources evidence semantics", "publication assurance"],
+      "potential_propagation": ["claim/evidence binding if green CI were overinterpreted"],
+      "not_demonstrated": ["scientific invalidity", "mathematical invalidity"]
+    }
+  },
+  "lifecycle": {
+    "termux_am_sdk_closure": {
+      "state": "REVALIDATION_IN_PROGRESS",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "origin": "field execution evidence",
+      "runtime_hours": "TOKEN_VAZIO",
+      "physical_cycles": "TOKEN_VAZIO"
+    },
+    "papers_c_syntax_gate": {
+      "state": "CORRECTIVE_CANDIDATE",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "origin": "workflow semantic audit",
+      "next_review_gate": "PR57 CI"
+    },
+    "unknown_unknown_detector": {
+      "state": "PASS_SCOPED",
+      "revalidation_type": "EVENT_TRIGGERED",
+      "origin": "internal executable contract + CI evidence",
+      "next_review_gate": "detector/test/workflow/Asset Index/Gap Atlas change"
+    }
+  },
+  "r3": {
+    "F_ok": [
+      "Termux exit 141 mechanism bound to artifact/status/log evidence and corrective successor exists",
+      "Papers false-pass C syntax mechanism corrected in PR57 and CI dispatched",
+      "UNKNOWN_UNKNOWN_DISCOVERY_V1 executed: 3/3 tests PASS, 26 candidates, safety PASS, output SHA-256 bound",
+      "Drive method/navigation/mathematical-memory anchors reobserved without pretending a write occurred",
+      "RLL and Vectras producer heads reanchored"
+    ],
+    "F_gap": [
+      "Termux corrective source-build/APT reruns not yet complete",
+      "Papers PR57 CI not yet complete",
+      "Map provider server-side enforcement absent",
+      "RafGitTools P1=69 remains open",
+      "Vectras qemu_sha256_at_execution remains TOKEN_VAZIO",
+      "RLL independent replication remains TOKEN_VAZIO",
+      "Drive revision-safe append not executed"
+    ],
+    "F_next": [
+      "Observe Termux corrective exact-head and bind only the next first terminal mechanism or scoped PASS",
+      "Observe Papers PR57 CI; if steps execute, use actual compiler result as evidence; if zero-step pre-execution failure recurs, keep provider/runner gap separate",
+      "Review 26 unknown-unknown candidates and promote none automatically",
+      "Choose highest-value RafGitTools P1 bounded group and require finding_set_after < finding_set_before with new_P0=0",
+      "Do not run zero-approval provider merge probe before real protection binding"
+    ]
+  }
+}
