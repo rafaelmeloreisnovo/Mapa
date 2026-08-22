@@ -1,0 +1,99 @@
+{
+  "schema": "rafaelia.omega_federated_sustainment.v1",
+  "cycle_id": "OMEGA-SUSTAINMENT-20260822T0717BRT",
+  "mode": "EXECUTION_FIRST_APPEND_ONLY",
+  "claim_allowed": false,
+  "predecessor": {
+    "mapa_main": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+    "drive_method_anchor": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "deltas": [
+    {
+      "gap_id": "TERMUX-AM-SDK-PIPEFAIL-141",
+      "authority": "rafaelmeloreisnovo/termux-packages",
+      "source_pointer": "PR#97 / run 32555998529 / artifact 9472162937",
+      "artifact_sha256": "5ff44b60364d2f06afe6c9ccd25c73eab95e072c762a214af2cf4312f9819184",
+      "before": "writable SDK provisioning terminated source-build with exit_code=141",
+      "field_evidence": "SDK platform Android 33 reached 100% extraction; status receipt recorded BLOCKED exit_code=141",
+      "mechanism": "yes producer SIGPIPE under pipefail can dominate a successful sdkmanager consumer",
+      "correction": "PR#97 second commit preserves sdkmanager exit status while tolerating producer-side SIGPIPE",
+      "after": "PR#97 merged at head 035aeb6a67cc39b468497d8fdc6ca143dd949c83; exact-head source-build and APT reruns in progress",
+      "falsifier": "sdkmanager provisioning remains the first failing mechanism, or sdkmanager itself returns non-zero",
+      "closure_gate": "exact-head Real Bootstrap Source Build crosses SDK provisioning boundary",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "MAPA-UNKNOWN-UNKNOWN-DISCOVERY-EXECUTION",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "source_pointer": "PR#349 / run 32562780369 / job 97006843703",
+      "before": "IMPLEMENTED_PENDING_EXECUTION_EVIDENCE",
+      "after": "PASS_SCOPED_EXECUTED",
+      "tests": {"count": 3, "failures": 0, "status": "PASS"},
+      "candidate_count": 26,
+      "output_sha256": "9f5bcdf0cbe053a64eec7dfe10e91cbcf5c03dcba25cda1af65fca3bb4a1ee2c",
+      "safety_gate": "PASS",
+      "epistemic_boundary": "UNKNOWN_UNKNOWN_CANDIDATE != TOKEN_VAZIO != CLAIM",
+      "automatic_promotion": false,
+      "claim_allowed": false,
+      "next_probe": "review candidates individually and promote only formulated evidence-backed gaps"
+    },
+    {
+      "gap_id": "MAPA-PROVIDER-BARRIER",
+      "authority": "GitHub provider",
+      "source_pointer": "Mapa main branch observation",
+      "state": "NOT_ENFORCED_OBSERVED",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_enforcement": "off",
+      "closure_gate": "authorized administration binding then zero-approval rejection probe with MERGE_REJECTED and main_SHA_UNCHANGED",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "PAPERS-CI-PREEXECUTION",
+      "authority": "rafaelmeloreisnovo/papers",
+      "source_pointer": "PR#56 head a5061303c1e254e84dfac9cc791bb380dc267d3b / CI run 32556479177",
+      "state": "FAIL_SCOPED_PROVIDER_OR_RUNNER_MECHANISM_TOKEN_VAZIO",
+      "code_failure": "NOT_DEMONSTRATED",
+      "publication_ready": false,
+      "claim_allowed": false
+    }
+  ],
+  "drive_reconciliation": {
+    "method_anchor_state": "CANONICAL_DRAFT",
+    "method_anchor_claim_allowed": false,
+    "read_reconciled": true,
+    "write_this_cycle": "TOKEN_VAZIO_REVISION_SAFE_APPEND_NOT_EXECUTED"
+  },
+  "component_lifecycle_ledger": [
+    {"component": "termux-am SDK closure", "state": "REVALIDATION_IN_PROGRESS", "revalidation_rule": "EVENT_TRIGGERED", "runtime_hours": "TOKEN_VAZIO", "next_review_gate": "run 32560563326"},
+    {"component": "UNKNOWN_UNKNOWN_DISCOVERY_V1", "state": "PASS_SCOPED_EXECUTED", "revalidation_rule": "EVENT_TRIGGERED_ON_INPUT_OR_DETECTOR_CHANGE", "evidence_age": "CURRENT_CYCLE", "next_review_gate": "candidate review"},
+    {"component": "Mapa provider protection", "state": "BLOCKED", "revalidation_rule": "CONDITION_BASED_ON_ADMIN_BINDING", "runtime_hours": "TOKEN_VAZIO"},
+    {"component": "papers CI", "state": "FAIL_SCOPED", "revalidation_rule": "EVENT_TRIGGERED_ON_PROVIDER_RUNNER_DIAGNOSTIC", "runtime_hours": "TOKEN_VAZIO"}
+  ],
+  "impact_radius": [
+    {
+      "event": "TERMUX-AM-SDK-PIPEFAIL-141",
+      "direct_exposure": ["termux-am source package", "ARM32 real bootstrap"],
+      "potential_propagation": ["development APT", "usable APK", "physical Android runtime"],
+      "physical_damage_demonstrated": false,
+      "revalidation_required": true
+    },
+    {
+      "event": "UNKNOWN_UNKNOWN_DISCOVERY_EXECUTED",
+      "direct_exposure": ["Gap Atlas", "Asset Index", "epistemic routing"],
+      "potential_propagation": ["future TOKEN_VAZIO registry", "future experiments"],
+      "automatic_claim_effect": false
+    }
+  ],
+  "anti_recurrence": [
+    "CONSUMER_SUCCESS_WITH_PRODUCER_SIGPIPE != OPERATION_FAILURE",
+    "UNKNOWN_UNKNOWN_CANDIDATE != TOKEN_VAZIO",
+    "NOT_FOUND_IN_BOUNDED_SEARCH != DOES_NOT_EXIST",
+    "MERGED != EXECUTION_CLOSED"
+  ],
+  "r3": {
+    "f_ok": ["Termux exit-141 mechanism discriminated and bounded correction merged", "UNKNOWN_UNKNOWN_DISCOVERY_V1 executed with 26 safe candidates and hashed output", "provider non-enforcement reobserved", "Drive method anchor reconciled"],
+    "f_gap": ["Termux post-correction source-build and APT reruns incomplete", "provider binding absent", "papers CI provider/runner mechanism unresolved", "Drive revision-safe append not executed", "physical Android TOKEN_VAZIO"],
+    "f_next": ["observe Termux run 32560563326 and capture only next first terminal mechanism", "review 26 unknown-unknown candidates without automatic promotion", "diagnose papers pre-execution CI surface", "obtain provider administration binding before merge rejection probe"]
+  }
+}
