@@ -1,0 +1,95 @@
+{
+  "schema": "RAFAELIA_FORMULA_E1B_SEMANTIC_FORMALIZATION_V1",
+  "generated_at": "2026-08-22",
+  "cycle_id": "OMEGA-MATH-MEMORY-E1B-SEMANTIC-FORMALIZATION-20260822",
+  "claim_allowed": false,
+  "source_main_commit": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381",
+  "drive_sheet": "E1B_SEMANTIC_FORMALIZATION_V1",
+  "counts": {
+    "e1a_direct_or_reversible_ast": 340,
+    "e1b_semantic_formalizations": 6,
+    "formula_like_structural_ast_coverage": "346/346",
+    "typed_non_ast_objects": 10,
+    "e1_object_coverage": "356/356",
+    "e2_global": "TOKEN_VAZIO"
+  },
+  "formalizations": [
+    {
+      "id": "E1B-F01",
+      "source_repo": "rafaelmeloreisnovo/teoremas",
+      "source_path": "docs/rafaelia/13-erro-absorvido.md",
+      "source_blob_sha1": "b8b4399cd95966a6812da7a0aff2323ad9f3a4d4",
+      "source_expression": "ŷ=u ; if check(A,B,s,P0,P1)=ok",
+      "derived_ast": "Implies(Eq(check(A,B,s,P0,P1),ok),Eq(y_hat,u))",
+      "origin": "DERIVED_CANDIDATE_SOURCE_ADJACENCY",
+      "typed_gap": "check semantics require producer definition",
+      "e2_eligible": false
+    },
+    {
+      "id": "E1B-F02",
+      "source_repo": "rafaelmeloreisnovo/Matem-tica-",
+      "source_path": "docs/formal/RAFAELIANA_PRIME_FACTOR_THEOREM_V1.md",
+      "source_blob_sha1": "3791edf8f2b58a8c1ceb3797d69464195cb08423",
+      "source_expression": "R_n is prime iff n in {1,3}",
+      "derived_ast": "Iff(Prime(R_n),Member(n,{1,3}))",
+      "origin": "DERIVED_CANONICAL_PREDICATE_FROM_EXPLICIT_SOURCE_MATH",
+      "typed_gap": "none at syntax level; novelty remains blocked",
+      "e2_eligible": "DOMAIN_NUMBER_THEORY_ONLY"
+    },
+    {
+      "id": "E1B-F03",
+      "source_repo": "rafaelmeloreisnovo/Matem-tica-",
+      "source_path": "docs/formal/META_INVARIANT_CROSS_DOMAIN_TEST_PROTOCOL_V1.md",
+      "source_blob_sha1": "4d3ae7caa37ec011504587ad1fc9edcff7b6552a",
+      "source_expression": "C(A,B)={j:test j is well-defined in both A and B}",
+      "derived_ast": "Eq(C(A,B),SetBuilder(j,And(WellDefined(j,A),WellDefined(j,B))))",
+      "origin": "DERIVED_CANONICAL_PREDICATE_FROM_EXPLICIT_SOURCE_MATH",
+      "typed_gap": "WellDefined remains uninterpreted until each domain defines test j",
+      "e2_eligible": false
+    },
+    {
+      "id": "E1B-F06",
+      "source_repo": "rafaelmeloreisnovo/teoremas",
+      "source_path": "TEORIA_ATRACTOR_42.md",
+      "source_blob_sha1": "916e60420d0afd8993ca3ba93fd28862046ca73c",
+      "source_expression": "û={A if check(...)=ok; B⊕φ(s) if check=ok no segundo; falha controlada caso contrário}",
+      "derived_ast": "Piecewise((A,P1),(Xor(B,phi(s)),P2_UNKNOWN),(FAIL,Otherwise))",
+      "origin": "DERIVED_CANDIDATE_WITH_TYPED_UNKNOWN_PREDICATE",
+      "typed_gap": "P2_UNKNOWN=TOKEN_VAZIO_SECOND_LANE_CHECK_SPEC",
+      "e2_eligible": false
+    },
+    {
+      "id": "E1B-F08",
+      "source_repo": "rafaelmeloreisnovo/teoremas",
+      "source_path": "docs/rafaelia/biosincronia.md",
+      "source_blob_sha1": "5055adcc9538f0e096534f7975d90c3fa28aeea9",
+      "source_expression": "Sincronia 963↔999",
+      "derived_ast": "Relation(SYNC_UNDEFINED,963,999)",
+      "origin": "DERIVED_CANDIDATE_UNINTERPRETED_RELATION",
+      "typed_gap": "observable/operator and scientific support are TOKEN_VAZIO",
+      "e2_eligible": false
+    },
+    {
+      "id": "E1B-F10",
+      "source_repo": "rafaelmeloreisnovo/teoremas",
+      "source_path": "docs/rafaelia/biosincronia.md",
+      "source_blob_sha1": "5055adcc9538f0e096534f7975d90c3fa28aeea9",
+      "source_expression": "HRV + condutância dérmica",
+      "derived_ast": "FeatureVector(HRV,GSR)",
+      "origin": "DERIVED_CANDIDATE_FROM_SIMULTANEOUS_CAPTURE_CONTEXT",
+      "typed_gap": "numeric plus rejected; feature scaling/units undefined",
+      "e2_eligible": false
+    }
+  ],
+  "invariants": [
+    "exact source expression is preserved",
+    "derived AST is not rewritten back into source history",
+    "uninterpreted predicate/operator remains typed unknown",
+    "scientific hypothesis is not promoted by syntactic formalization",
+    "E1B formalization does not imply E2 equivalence",
+    "claim_allowed=false"
+  ],
+  "F_ok": "All six prior semantic-formalization gaps now have explicit provenance-preserving E1B structural representations; formula-like structural coverage is 346/346 and all 356 E0 objects have a typed route.",
+  "F_gap": "Several E1B predicates/operators remain uninterpreted by design, and E2 remains domain-partitioned rather than global.",
+  "F_next": "Create domain partitions for E2 (real/continuous, recurrence/discrete, modular, Boolean/GF2, number theory/set predicates, graph/state) and run equivalence only inside compatible partitions."
+}
