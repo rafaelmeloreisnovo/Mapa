@@ -1,0 +1,55 @@
+name: Semantic support gate v1
+
+on:
+  pull_request:
+    paths:
+      - "schemas/semantic-support-packet.schema.json"
+      - "data/semantics/**"
+      - "tools/semantic_support/**"
+      - "tests/test_semantic_support_v1.py"
+      - "indices/RAFAELIA_SEMANTIC_SUPPORT_MATRIX_V1_20260822.md"
+      - ".github/workflows/semantic-support-gate-v1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "schemas/semantic-support-packet.schema.json"
+      - "data/semantics/**"
+      - "tools/semantic_support/**"
+      - "tests/test_semantic_support_v1.py"
+
+permissions:
+  contents: read
+
+jobs:
+  semantic-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile validator and tests
+        run: python -m py_compile tools/semantic_support/validate_semantic_support_v1.py tests/test_semantic_support_v1.py
+      - name: Fail-closed unit tests
+        run: python -m unittest -v tests/test_semantic_support_v1.py
+      - name: Validate bounded semantic packets
+        run: |
+          mkdir -p build/semantic-support
+          python tools/semantic_support/validate_semantic_support_v1.py \
+            --output build/semantic-support/report.json \
+            | tee build/semantic-support/stdout.json
+          sha256sum \
+            schemas/semantic-support-packet.schema.json \
+            data/semantics/semantic-support-contract.v1.json \
+            data/semantics/e1b/*.json \
+            tools/semantic_support/validate_semantic_support_v1.py \
+            tests/test_semantic_support_v1.py \
+            build/semantic-support/report.json \
+            build/semantic-support/stdout.json \
+            > build/semantic-support/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semantic-support-gate-v1
+          path: build/semantic-support/
+          if-no-files-found: error
