@@ -1,0 +1,142 @@
+{
+  "schema": "rafaelia.gpt-layout-workflow/v1",
+  "version": "1.0.0",
+  "state": "IMPLEMENTED_PROPOSED",
+  "claim_state": "REFERENCE",
+  "date": "2026-08-23",
+  "objective": "Use ChatGPT as a federated cognitive interface and contextual router rather than a monolithic state store.",
+  "bootstrap": "bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md",
+  "authority_matrix": "governance/AUTHORITY_MATRIX_V1.yaml",
+  "activation_registry": "governance/ACTIVATION_REGISTRY_V1.json",
+  "navigation": {
+    "github_human": "navigation/INDEX.md",
+    "github_machine": "navigation/RAFAELIA_MASTER_REGISTRY.v1.json",
+    "drive_master_navigation": "SRC:DRIVE:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "drive_operational_memory": "SRC:DRIVE:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "drive_gpt_layout_v1": "SRC:DRIVE:1tKGN2zBCaIuqTPJbIBEgjD6WjNO28YYyVn6ZDDfGYsA"
+  },
+  "invariants": [
+    "SESSION != LONGITUDINAL_MEMORY != EVIDENCE",
+    "MASCOTE != AGENTE != AUTORIDADE != EXECUTOR",
+    "VISAO != ARTEFATO != EXECUCAO != EVIDENCIA != CLAIM",
+    "TOKEN_VAZIO != PASS",
+    "claim_allowed=false without an applicable evidence gate",
+    "current private state must be read from connected authority when available",
+    "custom instructions must not duplicate mutable repository or runtime state",
+    "no competing master registry"
+  ],
+  "layers": [
+    {
+      "id": "L0_HUMAN_INTERFACE",
+      "input": ["objective", "format", "authorization", "urgency"],
+      "output": ["bounded_objective"]
+    },
+    {
+      "id": "L1_BOOTSTRAP",
+      "input": ["bounded_objective", "bootstrap"],
+      "output": ["bootstrap_contract"]
+    },
+    {
+      "id": "L2_AUTHORITY",
+      "input": ["bootstrap_contract", "authority_matrix"],
+      "output": ["canonical_owner", "write_boundary"]
+    },
+    {
+      "id": "L3_NAVIGATION",
+      "input": ["canonical_owner", "navigation_indices"],
+      "output": ["minimal_context", "known_gaps"]
+    },
+    {
+      "id": "L4_ACTIVATION",
+      "input": ["minimal_context", "known_gaps", "activation_registry"],
+      "output": ["required_components", "applicable_gate"]
+    },
+    {
+      "id": "L5_EXECUTION_EVIDENCE",
+      "input": ["required_components", "applicable_gate", "write_boundary"],
+      "output": ["execution_state", "receipt", "claim_ceiling"]
+    },
+    {
+      "id": "L6_RETROFEEDBACK",
+      "input": ["execution_state", "receipt", "known_gaps"],
+      "output": ["F_ok", "F_gap", "F_next", "DELTA"]
+    }
+  ],
+  "workflow_profiles": {
+    "new_session": [
+      "objective",
+      "bootstrap",
+      "authority",
+      "minimal_context",
+      "known_gaps",
+      "highest_value_gate",
+      "R3"
+    ],
+    "research_or_paper": [
+      "Mapa",
+      "source_or_producer",
+      "RLL_or_Papers_when_applicable",
+      "method",
+      "falsifier",
+      "evidence",
+      "receipt",
+      "claim_gate"
+    ],
+    "code_or_repository": [
+      "Mapa",
+      "producer_repository",
+      "AGENTS_or_local_index",
+      "bounded_change",
+      "test_or_CI",
+      "receipt",
+      "index_feedback"
+    ],
+    "memory_or_session": [
+      "session",
+      "semantic_block",
+      "concept",
+      "typed_relation",
+      "longitudinal_index",
+      "evidence_or_falsifier",
+      "decision",
+      "artifact_or_receipt"
+    ],
+    "current_status": [
+      "current_authority_read",
+      "previous_state",
+      "current_state",
+      "material_delta",
+      "gate_state",
+      "blocked_claims",
+      "F_next"
+    ]
+  },
+  "custom_instruction_contract": {
+    "keep": [
+      "operational identity",
+      "response style",
+      "epistemic invariants",
+      "bootstrap pointer",
+      "R3 closure"
+    ],
+    "exclude": [
+      "repository inventories",
+      "mutable PR states",
+      "mutable CI states",
+      "mutable hashes",
+      "historical checkpoints",
+      "domain formula corpora"
+    ]
+  },
+  "fallback": {
+    "missing_source": "TOKEN_VAZIO_SOURCE_UNAVAILABLE",
+    "unresolved_authority": "TOKEN_VAZIO_AUTHORITY_UNRESOLVED",
+    "unsatisfied_gate": "TOKEN_VAZIO_GATE_UNSATISFIED",
+    "missing_receipt": "TOKEN_VAZIO_RECEIPT_MISSING"
+  },
+  "R3": {
+    "F_ok": "GPT layout is machine-addressable as a federated routing contract.",
+    "F_gap": "Runtime behavior of ChatGPT cannot be proven solely by this repository artifact.",
+    "F_next": "Validate schema invariants in CI and preserve runtime claims behind evidence gates."
+  }
+}
