@@ -1,0 +1,35 @@
+name: Memory Safety Gate V1
+
+on:
+  pull_request:
+    paths:
+      - 'RAFAELIA_RELATIONSHIP_HOUSE_V1/**'
+      - '.github/workflows/memory-safety-gate-v1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'RAFAELIA_RELATIONSHIP_HOUSE_V1/**'
+      - '.github/workflows/memory-safety-gate-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  memory-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate frozen baseline and public boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            python3 RAFAELIA_RELATIONSHIP_HOUSE_V1/09_RUNTIME/memory_safety_gate.py \
+              --base-ref "${{ github.event.pull_request.base.sha }}"
+          else
+            python3 RAFAELIA_RELATIONSHIP_HOUSE_V1/09_RUNTIME/memory_safety_gate.py
+          fi
