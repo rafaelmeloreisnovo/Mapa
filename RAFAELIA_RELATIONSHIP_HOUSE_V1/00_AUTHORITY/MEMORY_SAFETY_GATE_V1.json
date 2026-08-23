@@ -1,0 +1,92 @@
+{
+  "schema": "RAFAELIA_MEMORY_SAFETY_GATE_V1",
+  "status": "ACTIVE_CONTRACT",
+  "policy": "FAIL_CLOSED",
+  "purpose": "Allow optimization of reconstructible projections without mutating source authority or leaking private memory into public control-plane artifacts.",
+  "invariants": [
+    "RAW_AUTHORITY_IS_IMMUTABLE",
+    "PRIVATE_MEMORY_IS_NOT_PUBLIC_STATE",
+    "PROJECTION_IS_NOT_AUTHORITY",
+    "LITERAL != NORMALIZED != CONCEPT != AREA != CLAIM",
+    "IDEA != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "UNKNOWN_VISIBILITY => TOKEN_VAZIO_VISIBILITY",
+    "FAILED_GATE => NO_PROMOTION",
+    "ROLLBACK_IS_POINTER_CHANGE_NOT_SOURCE_DELETION"
+  ],
+  "data_classes": {
+    "PRIVATE_RAW": {
+      "write_policy": "READ_ONLY_AFTER_INGEST",
+      "public_commit": false,
+      "destructive_optimization": false,
+      "examples": ["raw conversations", "original exports", "authoritative source bytes"]
+    },
+    "PRIVATE_DERIVED": {
+      "write_policy": "VERSIONED_REBUILDABLE",
+      "public_commit": false,
+      "destructive_optimization": true,
+      "requirements": ["source_set_digest", "algorithm_version", "output_digest", "predecessor_or_null", "rollback_target"]
+    },
+    "PUBLIC_SAFE_AGGREGATE": {
+      "write_policy": "VERSIONED_REVIEWED",
+      "public_commit": true,
+      "destructive_optimization": false,
+      "requirements": ["no private locator", "no raw private payload", "no credential", "no person-level sensitive inference", "provenance-safe aggregate or opaque digest"]
+    },
+    "EPHEMERAL": {
+      "write_policy": "DISCARDABLE",
+      "public_commit": false,
+      "destructive_optimization": true,
+      "requirements": ["must be reproducible or explicitly non-authoritative"]
+    }
+  },
+  "promotion_chain": [
+    "AUTHORITY",
+    "PRIVACY",
+    "INTEGRITY",
+    "DERIVATION",
+    "REGRESSION",
+    "PUBLICATION"
+  ],
+  "required_metadata_for_derived_versions": [
+    "artifact_id",
+    "version",
+    "visibility_class",
+    "source_set_digest",
+    "algorithm_version",
+    "output_digest",
+    "timestamp",
+    "rebuildable",
+    "predecessor",
+    "rollback_target",
+    "evidence_state",
+    "claim_allowed"
+  ],
+  "public_boundary": {
+    "forbid": [
+      "private Drive or Docs locators",
+      "raw private conversations",
+      "credentials or bearer secrets",
+      "private file identifiers",
+      "person-level sensitive inference derived from the corpus"
+    ],
+    "allow": [
+      "opaque source aliases",
+      "authorized cryptographic digests",
+      "schemas and algorithms",
+      "aggregate metrics that do not expose private records",
+      "gaps, gates and receipts without private locators"
+    ]
+  },
+  "freeze_rule": {
+    "baseline_version": "V1",
+    "mutation": "DENY",
+    "optimization_destination": "V2_OR_LATER_CANDIDATE",
+    "promotion": "POINTER_SWITCH_AFTER_ALL_GATES_PASS",
+    "rollback": "RESTORE_PREVIOUS_POINTER"
+  },
+  "claim_allowed": false,
+  "notes": [
+    "This contract governs public metadata only; private source location is intentionally absent.",
+    "Server-side branch enforcement is a separate gate and must not be inferred from CI success."
+  ]
+}
