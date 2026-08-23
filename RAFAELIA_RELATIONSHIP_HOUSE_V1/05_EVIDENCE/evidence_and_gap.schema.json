@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/relationship-house/evidence-gap-v1.json",
+  "title": "RAFAELIA Evidence / Claim / TOKEN_VAZIO Bridge V1",
+  "oneOf": [
+    {"$ref":"#/$defs/evidence"},
+    {"$ref":"#/$defs/claim"},
+    {"$ref":"#/$defs/gap_bridge"}
+  ],
+  "$defs": {
+    "evidence": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["record_type","evidence_id","source_id","source_digest","locator","evidence_class","status"],
+      "properties": {
+        "record_type":{"const":"evidence"},
+        "evidence_id":{"type":"string","pattern":"^EV-[A-Za-z0-9._:-]+$"},
+        "source_id":{"type":"string","pattern":"^SRC-[A-Za-z0-9._:-]+$"},
+        "source_digest":{"type":"string","pattern":"^[a-fA-F0-9]{64}$"},
+        "locator":{"type":["string","null"],"description":"Public locator only; private locators remain null."},
+        "evidence_class":{"type":"string","enum":["direct_quote_pointer","structural_observation","execution_receipt","test_receipt","metric_receipt","other"]},
+        "status":{"type":"string","enum":["OBSERVED","VERIFIED","TOKEN_VAZIO","INVALIDATED"]}
+      }
+    },
+    "claim": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["record_type","claim_id","statement","evidence_refs","status","claim_allowed"],
+      "properties": {
+        "record_type":{"const":"claim"},
+        "claim_id":{"type":"string","pattern":"^CLAIM-[A-Za-z0-9._:-]+$"},
+        "statement":{"type":"string","minLength":1},
+        "evidence_refs":{"type":"array","items":{"type":"string","pattern":"^EV-[A-Za-z0-9._:-]+$"},"uniqueItems":true},
+        "falsifier":{"type":["string","null"]},
+        "status":{"type":"string","enum":["PROPOSED","SUPPORTED","VERIFIED","TOKEN_VAZIO","REFUTED"]},
+        "claim_allowed":{"type":"boolean"}
+      }
+    },
+    "gap_bridge": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["record_type","bridge_id","token_vazio_id","local_subject_refs","evidence_refs","gap_class","status"],
+      "properties": {
+        "record_type":{"const":"gap_bridge"},
+        "bridge_id":{"type":"string","pattern":"^GAPBR-[A-Za-z0-9._:-]+$"},
+        "token_vazio_id":{"type":"string","minLength":1,"description":"ID from data/audits/TOKEN_VAZIO_REGISTRY.jsonl; this file is not a parallel registry."},
+        "local_subject_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "evidence_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "gap_class":{"type":"string","enum":["missing_source","missing_evidence","ambiguity","parse_error","truncation","taxonomy_unknown","metric_uncomputed","conflict","privacy_withheld","other"]},
+        "status":{"type":"string","enum":["OPEN","INVESTIGATING","RESOLVED","WONT_FIX"]}
+      }
+    }
+  }
+}
