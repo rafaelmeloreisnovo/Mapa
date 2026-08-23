@@ -1,0 +1,36 @@
+schema: rafaelia_mascot_index_v1
+version: 1.0.0
+source: data/ontology/mascots/MASCOT_ROLE_REGISTRY_V1.yaml
+index_type: SEMANTIC_NAVIGATION_ARTIFACT
+claim_allowed: false
+
+lookup:
+  by_symbol:
+    "🐢": turtle
+    "🦉": owl
+    "🐙": octopus
+    "🐬": dolphin
+    "🍄": mushroom
+    "🌐": mycelium
+    "👽": alien
+  by_group:
+    custody: [turtle]
+    observation: [owl]
+    orchestration: [octopus]
+    translation: [dolphin]
+    emergence: [mushroom]
+    network: [mycelium]
+    exploration: [alien]
+  by_role:
+    MEMORY_CUSTODY: turtle
+    OBSERVATION_AUDIT: owl
+    DISTRIBUTED_ORCHESTRATION: octopus
+    INTERDOMAIN_TRANSLATION: dolphin
+    EMERGENT_OUTPUT: mushroom
+    SEMANTIC_NETWORK: mycelium
+    UNKNOWN_EXPLORATION: alien
+
+navigation:
+  forward: "mascot -> concept -> semantic_route -> eligible_agent -> authority"
+  reverse: "concept|role|group -> mascot"
+  authority_boundary: "mascot.authority == NONE"

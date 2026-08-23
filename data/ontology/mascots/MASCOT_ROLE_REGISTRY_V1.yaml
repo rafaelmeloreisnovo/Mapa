@@ -1,0 +1,69 @@
+schema: rafaelia_mascot_role_registry_v1
+version: 1.0.0
+state: ACTIVE_SEED
+policy:
+  append_only: true
+  claim_allowed_default: false
+  token_vazio_is_valid_state: true
+invariants:
+  - "MASCOT != AGENT"
+  - "MASCOT != AUTHORITY"
+  - "MASCOT != EXECUTION"
+  - "MASCOT != EVIDENCE"
+  - "MASCOT != CLAIM"
+  - "mascot.authority == NONE"
+
+mascots:
+  turtle:
+    symbol: "🐢"
+    group: custody
+    canonical_role: MEMORY_CUSTODY
+    authority: NONE
+    concepts: [persistence, longitudinal_memory, provenance, append_only]
+    routes_to: [memory_index, custody_registry, google_drive]
+  owl:
+    symbol: "🦉"
+    token: OWLψ
+    group: observation
+    canonical_role: OBSERVATION_AUDIT
+    authority: NONE
+    concepts: [observation, audit, falsification, uncertainty, provenance_check]
+    routes_to: [evidence_gate, gap_atlas, auditor_registry]
+  octopus:
+    symbol: "🐙"
+    group: orchestration
+    canonical_role: DISTRIBUTED_ORCHESTRATION
+    authority: NONE
+    concepts: [federation, multi_agent, routing, distributed_coordination]
+    routes_to: [control_plane, agent_registry, dependency_graph]
+  dolphin:
+    symbol: "🐬"
+    group: translation
+    canonical_role: INTERDOMAIN_TRANSLATION
+    authority: NONE
+    concepts: [translation, interoperability, protocol_bridge]
+    routes_to: [adapters, schemas, github_drive_bridge]
+  mushroom:
+    symbol: "🍄"
+    group: emergence
+    canonical_role: EMERGENT_OUTPUT
+    authority: NONE
+    concepts: [synthesis, derived_artifact, discovery]
+    routes_to: [artifact_registry, papers, implementations]
+  mycelium:
+    symbol: "🌐"
+    group: network
+    canonical_role: SEMANTIC_NETWORK
+    authority: NONE
+    concepts: [knowledge_graph, semantic_edges, cross_repo_relations, indexes]
+    routes_to: [master_navigation_registry, topology, relational_index]
+  alien:
+    symbol: "👽"
+    group: exploration
+    canonical_role: UNKNOWN_EXPLORATION
+    authority: NONE
+    concepts: [anomaly, hypothesis, heuristic, unexplored_solution_space]
+    routes_to: [hypothesis_registry, gap_atlas, falsifier]
+
+routing_rule: "MASCOT -> SEMANTIC_ROLE -> ELIGIBLE_AGENT -> AUTHORITY -> GATE -> RECEIPT"
+forbidden_shortcut: "MASCOT -/-> CLAIM"

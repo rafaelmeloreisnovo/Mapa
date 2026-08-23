@@ -1,0 +1,49 @@
+schema: rafaelia_semantic_boundaries_v1
+version: 1.0.0
+state: ACTIVE_SEED
+policy:
+  append_only: true
+  destructive_writes: false
+  claim_allowed_default: false
+
+invariants:
+  - "SOURCE != IMPLEMENTATION != EXECUTION != EVIDENCE != CLAIM"
+  - "MESSAGE != EVENT != INDEX != INDEXER != EXECUTION != EVIDENCE != CLAIM"
+  - "MASCOT != AGENT != AUTHORITY"
+
+boundaries:
+  mascot:
+    authority: NONE
+    may: [signal_semantic_role, route_to_concept, aid_navigation]
+    may_not: [execute, authorize, prove, promote_claim]
+  index:
+    authority: NONE
+    may: [locate, relate, route]
+    may_not: [fabricate_edge, promote_claim]
+  indexer:
+    authority: ROUTING_ONLY
+    may: [read_authorized_sources, build_lookup, append_typed_pointer]
+    may_not: [override_domain_authority, infer_missing_sequence, promote_claim]
+  gmail:
+    authority: MEMORY_EVENT_ONLY
+    may: [store_message_node, carry_tags, preserve_subject_and_receipt_pointer]
+    may_not: [prove_execution, prove_scientific_validity]
+  google_calendar:
+    authority: NONE
+    may: [anchor_time, carry_semantic_description, aid_temporal_navigation]
+    may_not: [authorize_execution, prove_event_happened_outside_calendar, promote_claim]
+  google_drive:
+    authority_reference: governance/AUTHORITY_MATRIX_V1.yaml#google_drive
+  mapa:
+    authority_reference: governance/AUTHORITY_MATRIX_V1.yaml#mapa
+
+incremental:
+  format: "INC-%06d"
+  monotonic: true
+  reuse: false
+  verify_existing_surfaces_before_allocate: true
+  uncertainty_state: TOKEN_VAZIO_INCREMENTAL_SEQUENCE
+
+promotion_gate:
+  rule: "No semantic surface promotes claim without domain-specific evidence and gate receipt."
+  default: claim_allowed=false
