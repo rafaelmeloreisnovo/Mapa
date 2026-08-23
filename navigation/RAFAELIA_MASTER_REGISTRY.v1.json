@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "generated_at": "2026-08-21T20:39:00-03:00",
+  "schema_version": "1.1",
+  "generated_at": "2026-08-23T05:15:00-03:00",
   "state": "IMPLEMENTED_INDEX_ROOT",
   "coverage_complete": "TOKEN_VAZIO",
   "github_inventory_observed": 84,
@@ -13,7 +13,12 @@
       "id": "SRC:DRIVE:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
       "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1"
     },
-    "github_federated_mirror": "ART:Mapa:navigation/INDEX.md"
+    "github_federated_mirror": "ART:Mapa:navigation/INDEX.md",
+    "activation_registry": {
+      "id": "ART:Mapa:governance/ACTIVATION_REGISTRY_V1.json",
+      "role": "subordinate_activation_and_routing_layer",
+      "human_contract": "ART:Mapa:docs/ACTIVATION_REGISTRY_V1.md"
+    }
   },
   "root_graph": ["Ω", "domains", "repositories", "artifacts", "evidence", "claims", "gaps", "experiments", "timeslices", "sources"],
   "id_schemes": {
@@ -26,20 +31,21 @@
     "cycle": "CYCLE:<YYYY-MM-DD>:<n>",
     "timeslice": "TS:<YYYY-MM-DD>:<window>"
   },
-  "relations": ["IMPLEMENTS", "EVIDENCES", "BLOCKS", "DEPENDS_ON", "SUPERSEDES", "DERIVED_FROM", "MIRRORS", "INDEXES"],
+  "relations": ["IMPLEMENTS", "EVIDENCES", "BLOCKS", "DEPENDS_ON", "SUPERSEDES", "DERIVED_FROM", "MIRRORS", "INDEXES", "ACTIVATES"],
   "states": ["REFERENCE", "IMPLEMENTED", "PASS", "FAIL", "OPEN", "TOKEN_VAZIO", "SUPERSEDED"],
   "invariants": [
     "OPEN != CANONICAL",
     "TOKEN_VAZIO != PASS",
     "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
     "COHERENCE != CLAIM_AUTHORITY",
-    "INCOMPLETE_INVENTORY => coverage_complete=TOKEN_VAZIO"
+    "INCOMPLETE_INVENTORY => coverage_complete=TOKEN_VAZIO",
+    "MASCOTE != AGENTE != AUTORIDADE != EXECUTOR"
   ],
   "repositories": [
     "V79", "CientiEspiritualRAFCODE", "IaFceaBook", "templo_vivo", "fceabook", "Rafaelia", "CientiEspiritualBook", "verbumindex", "rafaeliacoreenterprise", "ZIPRAF", "PrivateRafaea", "Clay-Millennium-Problems", "RafNet", "ZIPRAF_CORE", "RAIAREIS-core", "RAFNATIONS", "Espiritual", "newrafaelreia", "Cosmos", "Fisica", "Judicial", "Img", "Graditao", "myCat", "termux-app-rafacodephi", "actions", "GEOM", "rafaelia_privado", "privadoFazendoDeus", "PCR", "CONVERSATIONSALAR", "llama.cpp", "GAIA-PDS", "Catalogo", "florisboard", "CreFe", "ROMS", "ClimaHondaSS", "nano-bench", "BLAKE3", "X0", "UserLAnd", "home-assistant", "TinyGPT-V", "androidx", "androidRom", "frameworks", "Vectras-VM-Android", "qemu", "RafGitTools", "Crypto", "Tora", "GAIA_phi_RAF", "treinar24h", "teoremas", "gradle", "papers", "linuxkernel", "LuaJIT", "TeoremasTeses", "DeepSeek-V3", "RafPolimata", "relativity", "Matem", "termux-api", "IA_nist", "Seguranca", "UserLAnd2", "Semente", "ChipQuantumIA", "Rafaelia_Core", "Gaia", "frida", "RafaelCiencias", "MemRa", "Geral", "Mapa", "MemRafcode", "openssl", "termux-packages", "Shizuku", "arxiv-docs", "OMEGAGIT", "Recipt"
   ],
   "navigation_routes": [
-    "by_repository", "by_domain", "by_evidence", "by_gap", "by_time_cycle", "by_source", "by_claim_state", "by_next_gate", "cross_repo_causal"
+    "by_repository", "by_domain", "by_evidence", "by_gap", "by_time_cycle", "by_source", "by_claim_state", "by_next_gate", "cross_repo_causal", "by_activation_edge"
   ],
   "recent_nodes": [
     {"id":"PR:termux-app-rafacodephi#380","state":"MERGED","role":"execute patched usable build path"},
@@ -50,7 +56,8 @@
     {"id":"PR:termux-app-rafacodephi#382","state":"MERGED","role":"ABI-localized bootstrap diagnostic"},
     {"id":"PR:RafGitTools#370","state":"MERGED","role":"deterministic source-gap triage"},
     {"id":"PR:termux-packages#91","state":"OPEN","role":"bootstrap governance draft"},
-    {"id":"PR:termux-packages#92","state":"OPEN","role":"libxml2 Doxygen host runtime correction"}
+    {"id":"PR:termux-packages#92","state":"OPEN","role":"libxml2 Doxygen host runtime correction"},
+    {"id":"ART:Mapa:governance/ACTIVATION_REGISTRY_V1.json","state":"IMPLEMENTED_PROPOSED","role":"subordinate activation state machine"}
   ],
   "evidence_nodes": [
     {
@@ -73,7 +80,8 @@
     {"id":"GAP:PHYSICAL_ANDROID_RUNTIME","state":"TOKEN_VAZIO","next_gate":"signed APK install/runtime receipt on physical Android"},
     {"id":"GAP:PROVIDER_SERVER_BARRIER_FIELD_FAILURE_20260821","state":"OPEN","priority":"P0"},
     {"id":"GAP:FULL_GITHUB_ARTIFACT_COVERAGE","state":"TOKEN_VAZIO"},
-    {"id":"GAP:DRIVE_DEDUPLICATION_AND_CLASSIFICATION","state":"TOKEN_VAZIO"}
+    {"id":"GAP:DRIVE_DEDUPLICATION_AND_CLASSIFICATION","state":"TOKEN_VAZIO"},
+    {"id":"GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT","state":"OPEN","priority":"P1","next_gate":"reconcile Drive master-navigation pointer with current GitHub navigation artifact using append-only provenance receipt"}
   ],
   "timeslices": [
     {
@@ -84,11 +92,19 @@
       "relation": "INDEXES"
     }
   ],
+  "activation": {
+    "registry": "governance/ACTIVATION_REGISTRY_V1.json",
+    "documentation": "docs/ACTIVATION_REGISTRY_V1.md",
+    "chain": ["objective", "bootstrap", "authority_resolution", "route_resolution", "evidence_collection", "gate_evaluation", "execution", "receipt", "delta", "index_feedback", "retrofeedback"],
+    "gate_sequence": ["G0_TRIAGEM", "G1_DERIVADA", "G2_REPLICA_LOCAL", "G3_REPLICA_REDHAT", "G4_MULTIVERIFICADA"],
+    "runtime_enforcement_complete": "TOKEN_VAZIO"
+  },
   "coverage": {
     "github_repository_names": {"observed":84,"complete":"TOKEN_VAZIO"},
     "github_per_repo_artifacts": {"state":"partial","complete":"TOKEN_VAZIO"},
     "drive_rafaelia_candidates": {"state":"observed","deduped":false,"complete":"TOKEN_VAZIO"},
-    "evidence_linking": {"state":"partial","complete":"TOKEN_VAZIO"}
+    "evidence_linking": {"state":"partial","complete":"TOKEN_VAZIO"},
+    "activation_edges": {"state":"registry_implemented_proposed","runtime_enforcement":"TOKEN_VAZIO"}
   },
   "next_work": [
     "extract per-repository README/AGENTS/index/workflows/tests/receipts",
@@ -96,6 +112,8 @@
     "deduplicate and classify Drive candidates by authority and lineage",
     "link run/hash/receipt evidence to producer and consumer repositories",
     "bind each unresolved gap to falsifier and executable gate",
-    "append superseding states without deleting prior evidence"
+    "append superseding states without deleting prior evidence",
+    "validate activation registry structure and bind activation edges to CI/runtime enforcement",
+    "reconcile Drive master-navigation pointer through append-only provenance"
   ]
 }
