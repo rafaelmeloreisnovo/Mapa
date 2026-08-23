@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/relationship-house/chunk-manifest-v1.json",
+  "title": "RAFAELIA TXT Chunk Manifest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["chunk_id","source_id","source_sha256","size_bytes","encoding","projection_version","chunk_sha256","lossy","split_reason"],
+  "properties": {
+    "chunk_id": {"type":"string","pattern":"^CHK-[A-Za-z0-9._:-]+$"},
+    "source_id": {"type":"string","pattern":"^SRC-[A-Za-z0-9._:-]+$"},
+    "source_sha256": {"type":"string","pattern":"^[a-fA-F0-9]{64}$"},
+    "message_start": {"type":["integer","null"],"minimum":0},
+    "message_end": {"type":["integer","null"],"minimum":0},
+    "byte_start": {"type":["integer","null"],"minimum":0},
+    "byte_end": {"type":["integer","null"],"minimum":0},
+    "size_bytes": {"type":"integer","minimum":0,"maximum":2000000},
+    "encoding": {"const":"UTF-8"},
+    "projection_version": {"type":"string","minLength":1},
+    "chunk_sha256": {"type":"string","pattern":"^[a-fA-F0-9]{64}$"},
+    "lossy": {"const":false},
+    "split_reason": {"type":"string","enum":["conversation_boundary","message_boundary","content_block_boundary","utf8_safe_byte_boundary","source_under_limit"]},
+    "evidence_refs": {"type":"array","items":{"type":"string"},"uniqueItems":true}
+  }
+}
