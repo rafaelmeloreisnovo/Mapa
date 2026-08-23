@@ -53,13 +53,18 @@ def main() -> int:
                     except json.JSONDecodeError as exc:
                         raise AssertionError(f"invalid JSONL {path}:{line_no}: {exc}") from exc
 
-    # This tree is public; explicit private Drive locators must never be committed.
-    forbidden = ("drive.google.com", "document_id\":", "private_locator\":")
+    # This tree is public; explicit private-source locator signatures must never be committed.
+    # Signatures are assembled so the scanner does not flag its own detector source.
+    forbidden = (
+        "drive" + "." + "google" + "." + "com",
+        "document" + "_" + "id" + '\":',
+        "private" + "_" + "locator" + '\":',
+    )
     for path in sorted(p for p in HOUSE.rglob("*") if p.is_file()):
         if path.suffix in {".md", ".json", ".jsonl", ".py", ".sh"}:
             text = path.read_text(encoding="utf-8")
             for needle in forbidden:
-                assert needle not in text, f"public/private boundary violation in {path}: {needle}"
+                assert needle not in text, f"public/private boundary violation in {path}: signature={needle!r}"
 
     print("RELATIONSHIP_HOUSE_V1_AUDIT=PASS")
     print(f"dimensions={len(dims)} namespace_capacity={ns['namespace_capacity']} json_files={len(json_files)}")
