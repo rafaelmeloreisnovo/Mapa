@@ -1,0 +1,38 @@
+name: GPT Layout Contract
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "governance/GPT_LAYOUT_WORKFLOW_V1.json"
+      - "docs/GPT_LAYOUT_WORKFLOWS_V1.md"
+      - "tools/validate_gpt_layout_workflow.py"
+      - "navigation/INDEX.md"
+      - ".github/workflows/gpt-layout-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-gpt-layout:
+    name: Validate federated GPT layout
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Validate machine contract
+        run: python3 tools/validate_gpt_layout_workflow.py
+
+      - name: Assert human contract exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s docs/GPT_LAYOUT_WORKFLOWS_V1.md
+          grep -q 'GPT = interface cognitiva' docs/GPT_LAYOUT_WORKFLOWS_V1.md
+          grep -q 'TOKEN_VAZIO' docs/GPT_LAYOUT_WORKFLOWS_V1.md
+          grep -q 'F_ok' docs/GPT_LAYOUT_WORKFLOWS_V1.md
+          echo 'PASS: human GPT layout contract is present'
