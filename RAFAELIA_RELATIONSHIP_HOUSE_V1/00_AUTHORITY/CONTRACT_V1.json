@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "RAFAELIA-RELATIONSHIP-HOUSE-V1",
+  "status": "BOOTSTRAP",
+  "recorded_on": "2026-08-23",
+  "invariant": "source -> identity -> digest -> evidence -> transformation -> projection -> claim",
+  "promotion_rule": "IDEA != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+  "source_policy": {
+    "raw_immutable": true,
+    "projection_deterministic": true,
+    "public_repo_private_locator_forbidden": true,
+    "unknown_value": null,
+    "unknown_state": "TOKEN_VAZIO"
+  },
+  "txt_projection": {
+    "max_chunk_bytes": 2000000,
+    "encoding": "UTF-8",
+    "lossy_default": false,
+    "split_priority": ["conversation", "message", "content_block", "utf8_safe_byte_boundary"]
+  },
+  "semantic_model": {
+    "canonical": ["property_graph", "hypergraph"],
+    "tensor_view": "DERIVED_ONLY",
+    "manifold_view": "DERIVED_ONLY",
+    "geojson": "VISUALIZATION_ONLY"
+  },
+  "taxonomy": {
+    "namespace": "136+",
+    "completeness_claim": false,
+    "unknown_slots": "TOKEN_VAZIO",
+    "stable_ids_required": true
+  },
+  "token_vazio": {
+    "authority": "data/audits/TOKEN_VAZIO_REGISTRY.jsonl",
+    "mode": "FEDERATED_BRIDGE",
+    "parallel_registry_forbidden": true
+  },
+  "dimensions_total": 17,
+  "dimensions": [
+    {"id":"D1","name":"temporal","class":"observed"},
+    {"id":"D2","name":"thematic_area","class":"classified"},
+    {"id":"D3","name":"object_evidence","class":"observed"},
+    {"id":"D4","name":"intensity","class":"calculated"},
+    {"id":"D5","name":"uncertainty","class":"calculated"},
+    {"id":"D6","name":"provenance","class":"observed"},
+    {"id":"D7","name":"priority","class":"governance"},
+    {"id":"D8","name":"lifecycle_state","class":"observed"},
+    {"id":"D9","name":"directionality_reciprocity","class":"calculated"},
+    {"id":"D10","name":"anomaly","class":"derived"},
+    {"id":"D11","name":"evidence_discontinuity","class":"observed_or_derived"},
+    {"id":"D12","name":"derivation","class":"evidential"},
+    {"id":"D13","name":"contradiction_inversion","class":"relational"},
+    {"id":"D14","name":"temporal_dynamics","class":"calculated"},
+    {"id":"D15","name":"interaction_synergy","class":"hypothesis_or_calculated"},
+    {"id":"D16","name":"semantic_register","class":"classified"},
+    {"id":"D17","name":"morphology_topology","class":"derived"}
+  ],
+  "evidence_discontinuity_states": [
+    "parse_error",
+    "truncated",
+    "omitted_by_filter",
+    "missing_source",
+    "deleted_at_source",
+    "policy_block",
+    "unknown",
+    "TOKEN_VAZIO"
+  ],
+  "analytics_policy": {
+    "correlation_is_not_causation": true,
+    "metric_requires_method_version": true,
+    "metric_requires_source_set_digest": true,
+    "metric_requires_support": true,
+    "illustrative_values_are_observations": false
+  }
+}
