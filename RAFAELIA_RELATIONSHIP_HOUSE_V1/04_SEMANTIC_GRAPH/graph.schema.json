@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/relationship-house/graph-v1.json",
+  "title": "RAFAELIA Semantic Graph Record V1",
+  "oneOf": [
+    {"$ref":"#/$defs/node"},
+    {"$ref":"#/$defs/edge"},
+    {"$ref":"#/$defs/hyperedge"}
+  ],
+  "$defs": {
+    "common": {
+      "type":"object",
+      "properties": {
+        "status":{"type":"string","enum":["OBSERVED","DERIVED","HYPOTHESIS","TOKEN_VAZIO","DEPRECATED"]},
+        "evidence_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "derivation_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "schema_version":{"type":"string","minLength":1}
+      }
+    },
+    "node": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["record_type","node_id","kind","status","evidence_refs","derivation_refs","schema_version"],
+      "properties": {
+        "record_type":{"const":"node"},
+        "node_id":{"type":"string","minLength":1},
+        "kind":{"type":"string","enum":["concept","formula","program","artifact","event","person_role","area","source","other"]},
+        "label":{"type":["string","null"]},
+        "area_refs":{"type":"array","items":{"type":"string","pattern":"^A[0-9]{3,}$"},"uniqueItems":true},
+        "status":{"type":"string","enum":["OBSERVED","DERIVED","HYPOTHESIS","TOKEN_VAZIO","DEPRECATED"]},
+        "evidence_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "derivation_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "schema_version":{"type":"string","minLength":1}
+      }
+    },
+    "edge": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["record_type","edge_id","src","dst","relation","weight","weight_method","status","evidence_refs","derivation_refs","schema_version"],
+      "properties": {
+        "record_type":{"const":"edge"},
+        "edge_id":{"type":"string","minLength":1},
+        "src":{"type":"string","minLength":1},
+        "dst":{"type":"string","minLength":1},
+        "relation":{"type":"string","minLength":1},
+        "directed":{"type":"boolean"},
+        "weight":{"type":["number","null"]},
+        "weight_method":{"type":["string","null"]},
+        "status":{"type":"string","enum":["OBSERVED","DERIVED","HYPOTHESIS","TOKEN_VAZIO","DEPRECATED"]},
+        "evidence_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "derivation_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "schema_version":{"type":"string","minLength":1}
+      }
+    },
+    "hyperedge": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["record_type","hyperedge_id","members","relation","status","evidence_refs","derivation_refs","schema_version"],
+      "properties": {
+        "record_type":{"const":"hyperedge"},
+        "hyperedge_id":{"type":"string","minLength":1},
+        "members":{"type":"array","minItems":2,"items":{"type":"string"},"uniqueItems":true},
+        "relation":{"type":"string","minLength":1},
+        "status":{"type":"string","enum":["OBSERVED","DERIVED","HYPOTHESIS","TOKEN_VAZIO","DEPRECATED"]},
+        "evidence_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "derivation_refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},
+        "schema_version":{"type":"string","minLength":1}
+      }
+    }
+  }
+}
