@@ -1,0 +1,45 @@
+schema: rafaelia_indexer_role_registry_v1
+version: 1.0.0
+state: ACTIVE_SEED
+invariant: "INDEX != INDEXER != AUTHORITY"
+policy:
+  append_only: true
+  destructive_writes: false
+  claim_allowed_default: false
+
+indexers:
+  mascot_semantic_indexer:
+    role: BUILD_SEMANTIC_LOOKUPS
+    inputs:
+      - data/ontology/mascots/MASCOT_ROLE_REGISTRY_V1.yaml
+    outputs:
+      - indices/semantic/MASCOT_INDEX_V1.yaml
+    authority: ROUTING_ONLY
+    may_not: [promote_claim, fabricate_relation, override_authority]
+
+  incremental_graph_indexer:
+    role: BUILD_INCREMENTAL_GRAPH
+    inputs:
+      - data/memory/incremental/INC-000001.yaml
+      - indices/semantic/MASCOT_INDEX_V1.yaml
+    outputs:
+      - indices/semantic/INCREMENTAL_SEMANTIC_GRAPH_INDEX_V1.yaml
+    authority: ROUTING_ONLY
+    allocation:
+      format: "INC-%06d"
+      monotonic: true
+      reuse: false
+      unknown_sequence: TOKEN_VAZIO_INCREMENTAL_SEQUENCE
+    may_not: [infer_missing_incremental, promote_claim, treat_calendar_as_evidence]
+
+  cross_surface_pointer_indexer:
+    role: LINK_SURFACE_POINTERS
+    inputs: [gmail_message_id, calendar_event_id, drive_document_id, github_repo_ref_path_hash]
+    outputs: [typed_edges, custody_pointers]
+    authority: ROUTING_ONLY
+    missing_pointer: TOKEN_VAZIO_POINTER
+
+execution_contract:
+  preflight: "resolve objective + source + authority + current sequence"
+  write: "append-only delta"
+  postflight: "record receipt + F_ok + F_gap + F_next"
