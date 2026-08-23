@@ -1,0 +1,64 @@
+{
+  "receipt_id": "RAFAELIA-MEMORY-FREEZE-V1-20260823",
+  "status": "FROZEN_BASELINE",
+  "frozen_at": "2026-08-23T07:34:00Z",
+  "source_alias": "PRIVATE_INDEX_BUNDLE_V1",
+  "visibility_class": "PRIVATE_DERIVED",
+  "private_location_persisted": false,
+  "raw_private_content_persisted": false,
+  "authority_scope": "MOUNTED_SOURCE_SET_ONLY",
+  "index_id": "RAFAELIA_TOTAL_INDEX_V1",
+  "literal_index_status": "COMPLETE_FOR_MOUNTED_SOURCE_SET",
+  "immutable": true,
+  "rebuildable": true,
+  "checksum_set": {
+    "algorithm": "SHA-256",
+    "checksum_manifest_bytes": 784,
+    "checksum_manifest_sha256": "03a5779b3303f2435d70ff7d33b6e78413d8768fb8e2f76f71ed3c760eb1a68a",
+    "index_manifest_bytes": 7730,
+    "index_manifest_sha256": "87dad16a9883247e28769073dd61de5344847e1a13b737f21b04b1972f0c5f7b"
+  },
+  "aggregate_evidence": {
+    "message_shards_indexed": 19,
+    "message_bytes": 185953216,
+    "message_records": 91232,
+    "invalid_json_records": 0,
+    "distinct_message_ids": 91232,
+    "distinct_conversations": 1000,
+    "token_occurrences_total_raw": 44185626,
+    "literal_unique_tokens": 675638,
+    "normalized_unique_tokens": 612471,
+    "token_source_rows": 1245720,
+    "explicit_area_domain_field_mentions": 27065,
+    "distinct_structural_headings": 962
+  },
+  "identity_invariant": "LITERAL != NORMALIZED != CONCEPT != AREA != CLAIM",
+  "known_gaps": [
+    {
+      "id": "TV-RAW-OUTSIDE-003-012",
+      "state": "TOKEN_VAZIO",
+      "meaning": "Raw text bytes outside conversations-003.json through conversations-012.json were not mounted in the frozen execution; this baseline is not a claim of total NOVOexport lexical coverage."
+    },
+    {
+      "id": "TV-SEMANTIC-AREA-CLUSTER",
+      "state": "TOKEN_VAZIO",
+      "meaning": "Exact semantic-area count still requires classification and deduplication over the literal index."
+    },
+    {
+      "id": "TV-GITHUB-FULL-TEXT",
+      "state": "TOKEN_VAZIO",
+      "meaning": "GitHub repositories were not exhaustively tokenized in this baseline."
+    }
+  ],
+  "optimization_rule": {
+    "v1_mutation_allowed": false,
+    "next_candidate": "V2",
+    "candidate_must_reference": "PRIVATE_INDEX_BUNDLE_V1",
+    "candidate_requires_differential_gate": true,
+    "promotion_method": "POINTER_SWITCH_ONLY",
+    "rollback_target": "V1"
+  },
+  "evidence_state": "FROZEN_PRIVATE_BASELINE_WITH_PUBLIC_OPAQUE_RECEIPT",
+  "claim_allowed": false,
+  "epistemic_note": "This receipt proves the identity of the observed V1 manifests and records aggregate metadata. It does not prove unmounted source completeness, semantic correctness, or scientific claims."
+}
