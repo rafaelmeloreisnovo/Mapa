@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/relationship-house/raw-manifest-v1.json",
+  "title": "RAFAELIA Raw Source Manifest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_id","source_class","content_sha256","size_bytes","immutable","locator_visibility","status"],
+  "properties": {
+    "source_id": {"type":"string","pattern":"^SRC-[A-Za-z0-9._:-]+$"},
+    "source_class": {"type":"string","enum":["conversation_json","document","repository_file","dataset","artifact","other"]},
+    "content_sha256": {"type":"string","pattern":"^[a-fA-F0-9]{64}$"},
+    "size_bytes": {"type":"integer","minimum":0},
+    "encoding": {"type":["string","null"]},
+    "immutable": {"const":true},
+    "locator_visibility": {"type":"string","enum":["public","private","withheld"]},
+    "locator_ref": {"type":["string","null"],"description":"MUST be null in this public repository for private/withheld sources."},
+    "observed_at": {"type":["string","null"],"format":"date-time"},
+    "status": {"type":"string","enum":["OBSERVED","TOKEN_VAZIO","UNAVAILABLE","DEPRECATED"]},
+    "evidence_refs": {"type":"array","items":{"type":"string"},"uniqueItems":true}
+  },
+  "allOf": [
+    {
+      "if": {"properties":{"locator_visibility":{"enum":["private","withheld"]}},"required":["locator_visibility"]},
+      "then": {"properties":{"locator_ref":{"type":"null"}}}
+    }
+  ]
+}
