@@ -36,7 +36,7 @@ Canonical traversal:
 
 ## 3. Relations
 
-`IMPLEMENTS | EVIDENCES | BLOCKS | DEPENDS_ON | SUPERSEDES | DERIVED_FROM | MIRRORS | INDEXES`
+`IMPLEMENTS | EVIDENCES | BLOCKS | DEPENDS_ON | SUPERSEDES | DERIVED_FROM | MIRRORS | INDEXES | ACTIVATES`
 
 ## 4. States
 
@@ -62,6 +62,7 @@ Canonical traversal:
 7. **By claim state** — `PASS`, `FAIL`, `OPEN`, `TOKEN_VAZIO`, `SUPERSEDED`.
 8. **By next gate** — execution queue ordered by falsifiability/unblocking value.
 9. **Cross-repo causal route** — producer → consumer → evidence → federated state.
+10. **By activation edge** — objective → component → condition → gate → output → TOKEN_VAZIO fallback.
 
 ## 6. GitHub inventory — observed pass
 
@@ -170,6 +171,8 @@ Observed repository count in the connected GitHub inventory: **84**. This is an 
 - `ART:Mapa:navigation/INDEX.md` → GitHub federated navigation mirror.
 - `ART:Mapa:navigation/RAFAELIA_MASTER_REGISTRY.v1.json` → machine-readable registry.
 - `ART:Mapa:navigation/SOURCES.md` → authority/provenance rules.
+- `ART:Mapa:governance/ACTIVATION_REGISTRY_V1.json` → subordinate machine-readable activation registry.
+- `ART:Mapa:docs/ACTIVATION_REGISTRY_V1.md` → human-readable activation contract.
 
 ## 8. Current cross-repository causal chain
 
@@ -221,6 +224,7 @@ The previous 5-hour index is retained as historical evidence only:
 | Drive deduplication | not closed | `TOKEN_VAZIO` |
 | Evidence/run/hash linking | partial | `TOKEN_VAZIO` |
 | Claim-to-falsifier linking | partial | `TOKEN_VAZIO` |
+| Activation edge coverage | registry implemented, runtime enforcement partial | `TOKEN_VAZIO` |
 
 ## 11. Append-only expansion order
 
@@ -230,10 +234,36 @@ The previous 5-hour index is retained as historical evidence only:
 4. evidence → run/hash/receipt → producer/consumer links;
 5. unresolved item → `GAP:` + falsifier + executable gate;
 6. completed gate → append new state and `SUPERSEDES`; never erase prior state;
-7. update longitudinal Drive registry and GitHub mirror together when authority permits.
+7. update longitudinal Drive registry and GitHub mirror together when authority permits;
+8. activation edge → condition + input + gate + output + fallback TOKEN_VAZIO.
+
+## 12. Activation Registry
+
+Activation is now represented as a subordinate state machine rather than an implicit prompt convention:
+
+```text
+objective
+  → bootstrap
+  → authority_resolution
+  → route_resolution
+  → evidence_collection
+  → gate_evaluation
+  → execution
+  → receipt
+  → delta
+  → index_feedback
+  → retrofeedback
+```
+
+Machine contract: `governance/ACTIVATION_REGISTRY_V1.json`  
+Human contract: `docs/ACTIVATION_REGISTRY_V1.md`
+
+Observed unresolved alignment:
+
+- `GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT` — Drive Master Navigation Registry still references a GitHub path not observed on current `main`; historical memory is not silently rewritten.
 
 ## R3
 
-- `F_ok`: universal navigation root exists and the 5h snapshot is correctly demoted to a temporal leaf.
-- `F_gap`: full-content coverage and Drive/GitHub deduplication remain `TOKEN_VAZIO`.
-- `F_next`: per-repository artifact extraction + Drive dedupe + evidence-to-gap linking.
+- `F_ok`: universal navigation root exists; activation semantics are explicitly indexed; the 5h snapshot remains correctly demoted to a temporal leaf.
+- `F_gap`: full-content coverage, Drive/GitHub deduplication, runtime activation enforcement, and master-navigation pointer reconciliation remain `TOKEN_VAZIO`/open where applicable.
+- `F_next`: validate the Activation Registry delta, bind it into the machine registry/receipt chain, then reconcile the Drive pointer with append-only provenance.
