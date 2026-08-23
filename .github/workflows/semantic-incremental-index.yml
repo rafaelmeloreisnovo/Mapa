@@ -1,0 +1,39 @@
+name: semantic-incremental-index
+
+on:
+  pull_request:
+    paths:
+      - 'data/memory/incremental/**'
+      - 'data/ontology/mascots/**'
+      - 'indices/semantic/**'
+      - 'control-plane/indexers/**'
+      - 'governance/semantics/**'
+      - 'scripts/semantic_incremental_index.py'
+      - 'tests/test_semantic_incremental_index.py'
+      - '.github/workflows/semantic-incremental-index.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/memory/incremental/**'
+      - 'data/ontology/mascots/**'
+      - 'indices/semantic/**'
+      - 'control-plane/indexers/**'
+      - 'governance/semantics/**'
+      - 'scripts/semantic_incremental_index.py'
+      - 'tests/test_semantic_incremental_index.py'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate INC namespace
+        run: python scripts/semantic_incremental_index.py --check
+      - name: Run indexer unit tests
+        run: python -m unittest tests/test_semantic_incremental_index.py -v
