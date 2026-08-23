@@ -1,0 +1,27 @@
+schema: rafaelia_semantic_index_root_v1
+version: 1.0.0
+state: ACTIVE_SEED
+purpose: "Stable discovery root for mascot, incremental, and indexer semantics."
+
+registries:
+  mascot_roles: data/ontology/mascots/MASCOT_ROLE_REGISTRY_V1.yaml
+  mascot_index: indices/semantic/MASCOT_INDEX_V1.yaml
+  incremental_graph: indices/semantic/INCREMENTAL_SEMANTIC_GRAPH_INDEX_V1.yaml
+  indexer_roles: control-plane/indexers/INDEXER_ROLE_REGISTRY_V1.yaml
+  semantic_boundaries: governance/semantics/SEMANTIC_BOUNDARIES_V1.yaml
+
+incremental_nodes:
+  first_confirmed: INC-000001
+  path_pattern: data/memory/incremental/INC-%06d.yaml
+  allocation_source: indices/semantic/INCREMENTAL_SEMANTIC_GRAPH_INDEX_V1.yaml
+  unresolved_sequence: TOKEN_VAZIO_INCREMENTAL_SEQUENCE
+
+external_memory:
+  drive_semantic_graph_registry: 1ftNOnbV5Zm-qHzoUlXkLqsOdNWUVbpXw9YOXPaLjd6g
+  drive_master_navigation_registry: 1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y
+  drive_longitudinal_gmail_chatgpt_github: 1wgMrDNHf9sASCdNPa4JTvxBeJtbKbeFXfMBRx-gMAIs
+
+navigation:
+  canonical_chain: "MASCOT <-> CONCEPT <-> INDEX -> INDEXER -> ROUTE -> AGENT -> AUTHORITY -> GATE -> RECEIPT"
+  incremental_chain: "INC-ID -> SUBJECT|TAG|ENTITY -> TYPED_EDGE -> SURFACE_POINTER -> AUTHORITY_ROUTE -> EVIDENCE_STATE"
+  claim_allowed_default: false
