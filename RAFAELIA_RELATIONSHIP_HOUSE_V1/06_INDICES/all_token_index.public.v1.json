@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "index_id": "RAFAELIA_TOTAL_INDEX_V1",
+  "recorded_on": "2026-08-23",
+  "status": "COMPLETE_FOR_MOUNTED_SOURCE_SET",
+  "claim_allowed": false,
+  "public_private_boundary": {
+    "private_content_persisted": false,
+    "private_locator_persisted": false,
+    "individual_private_source_digests_persisted": false,
+    "aggregate_receipt_only": true
+  },
+  "scope": {
+    "message_shards_indexed": 19,
+    "message_shard_alias_range": "MESSAGES-00001..00019",
+    "semantic_source_range_observed": "conversations-003.json..conversations-012.json",
+    "physical_inventory_included": true
+  },
+  "metrics": {
+    "message_bytes": 185953216,
+    "message_records_valid_json": 91232,
+    "invalid_json_records": 0,
+    "distinct_conversations": 1000,
+    "token_occurrences_total_raw": 44185626,
+    "literal_unique_tokens": 675638,
+    "normalized_unique_tokens": 612471,
+    "token_source_rows": 1245720,
+    "explicit_area_domain_field_mentions": 27065,
+    "distinct_structural_headings": 962,
+    "physical_inventory_entries_recognized": 15437
+  },
+  "tokenization_contract": {
+    "keep_every_word": true,
+    "stopword_removal": false,
+    "domain_filter": false,
+    "symbols_preserved": true,
+    "punctuation_preserved": true,
+    "literal": "Unicode word units plus every other non-whitespace character",
+    "normalized_projection": "Unicode NFKC + casefold; never replaces literal"
+  },
+  "identity_invariant": "LITERAL != NORMALIZED != CONCEPT != AREA != CLAIM",
+  "derived_private_package": {
+    "opaque_name": "RAFAELIA_TOTAL_INDEX_V1.zip",
+    "sha256": "2e63c1f242ee6670847787b2642f411207c1a1816edfd1ad6453b26946d2853e",
+    "bytes": 38305760,
+    "contents_published_here": false
+  },
+  "token_vazio": [
+    {
+      "local_bridge_id": "TV-RAW-OUTSIDE-003-012",
+      "meaning": "Raw text bytes outside conversations-003.json..conversations-012.json were not mounted in this execution; total NOVOexport lexical coverage is not claimed."
+    },
+    {
+      "local_bridge_id": "TV-SEMANTIC-AREA-CLUSTER",
+      "meaning": "Exact semantic-area count requires classification and deduplication over the complete literal index; explicit area/domain mentions and headings are intermediate evidence only."
+    },
+    {
+      "local_bridge_id": "TV-GITHUB-FULL-TEXT",
+      "meaning": "GitHub repositories were not exhaustively tokenized in this V1."
+    }
+  ],
+  "canonical_gap_authority": "data/audits/TOKEN_VAZIO_REGISTRY.jsonl"
+}
