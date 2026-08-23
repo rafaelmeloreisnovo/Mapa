@@ -1,0 +1,64 @@
+schema: rafaelia_incremental_semantic_node_v1
+id: INC-000001
+subject: "Mascotes + Indexadores + Grafo Semântico RAFAELIA"
+semantic_type: SEMANTIC_NAVIGATION_NODE
+state: ACTIVE_SEED
+claim_allowed: false
+created_at: "2026-08-22T23:55:00-03:00"
+timezone: America/Sao_Paulo
+predecessor: TOKEN_VAZIO_FIRST_NODE
+successor_expected: INC-000002
+
+tags:
+  - RAFAELIA
+  - INCREMENTAL
+  - MASCOTES
+  - INDEXADORES
+  - SEMANTIC_GRAPH
+  - MAPA
+  - GITHUB
+  - GOOGLE_DRIVE
+  - GMAIL
+  - GOOGLE_CALENDAR
+  - MEMORIA_LONGITUDINAL
+
+relations:
+  - {type: ROUTES_TO, target: data/ontology/mascots/MASCOT_ROLE_REGISTRY_V1.yaml}
+  - {type: ROUTES_TO, target: indices/semantic/MASCOT_INDEX_V1.yaml}
+  - {type: ROUTES_TO, target: control-plane/indexers/INDEXER_ROLE_REGISTRY_V1.yaml}
+  - {type: TEMPORALLY_ANCHORED_AT, target: "calendar:cd3g3cuemhdbcl2r7294o1s8jo"}
+  - {type: REFERENCES, target: "gmail:1a02c8e243786406"}
+  - {type: REFERENCES, target: "drive:1ftNOnbV5Zm-qHzoUlXkLqsOdNWUVbpXw9YOXPaLjd6g"}
+  - {type: REFERENCES, target: "drive:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y"}
+  - {type: REFERENCES, target: "drive:1wgMrDNHf9sASCdNPa4JTvxBeJtbKbeFXfMBRx-gMAIs"}
+
+gmail:
+  account: rafaelmeloreisnovo@gmail.com
+  message_id: 1a02c8e243786406
+  labels:
+    - RAFAELIA/INCREMENTAL
+    - RAFAELIA/SEMANTIC_GRAPH
+    - RAFAELIA/MASCOTES_INDEXADORES
+
+calendar:
+  calendar_id: primary
+  event_id: cd3g3cuemhdbcl2r7294o1s8jo
+  role: TEMPORAL_SEMANTIC_ANCHOR
+  visibility: private
+  transparency: transparent
+
+drive:
+  semantic_graph_registry_id: 1ftNOnbV5Zm-qHzoUlXkLqsOdNWUVbpXw9YOXPaLjd6g
+  master_navigation_registry_id: 1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y
+  longitudinal_gmail_chatgpt_github_id: 1wgMrDNHf9sASCdNPa4JTvxBeJtbKbeFXfMBRx-gMAIs
+  implementation_latentes_papers_id: 1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
+
+github:
+  repository: rafaelmeloreisnovo/Mapa
+  branch: rafaelia/semantic-incremental-mascot-index-v1
+  bootstrap: bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md
+
+evidence_state: DRAFT
+allocation_rule:
+  next_id_requires_search: true
+  on_unknown_sequence: TOKEN_VAZIO_INCREMENTAL_SEQUENCE
