@@ -1,0 +1,63 @@
+schema: rafaelia_incremental_semantic_graph_index_v1
+version: 1.0.0
+state: ACTIVE_SEED
+policy:
+  append_only: true
+  claim_allowed_default: false
+  token_vazio_is_valid_state: true
+
+allocation:
+  prefix: INC
+  width: 6
+  monotonic: true
+  reuse: false
+  verify_before_allocate: true
+  unresolved_sequence: TOKEN_VAZIO_INCREMENTAL_SEQUENCE
+
+edge_types:
+  - IS_A
+  - PART_OF
+  - DERIVED_FROM
+  - SUPERSEDES
+  - SUPPORTS
+  - CONTRADICTS
+  - TESTS
+  - REFERENCES
+  - ROUTES_TO
+  - AUTHORIZED_BY
+  - EVIDENCED_BY
+  - TEMPORALLY_ANCHORED_AT
+  - TAGGED_AS
+  - RELATED_TO
+
+surfaces:
+  gmail:
+    role: MESSAGE_MEMORY_NODE
+    key: message_id
+    authority: MEMORY_EVENT_ONLY
+  google_calendar:
+    role: TEMPORAL_SEMANTIC_ANCHOR
+    key: event_id
+    authority: NONE
+  google_drive:
+    role: LONGITUDINAL_EDITORIAL_MEMORY
+    key: document_id
+  github_mapa:
+    role: ONTOLOGY_STATE_AUTHORITY
+    key: "repo/ref/path/hash"
+
+nodes:
+  INC-000001:
+    source: data/memory/incremental/INC-000001.yaml
+    subject: "Mascotes + Indexadores + Grafo Semântico RAFAELIA"
+    tags: [RAFAELIA, INCREMENTAL, MASCOTES, INDEXADORES, SEMANTIC_GRAPH, MAPA, GITHUB, GOOGLE_DRIVE, GMAIL, GOOGLE_CALENDAR, MEMORIA_LONGITUDINAL]
+    pointers:
+      gmail_message_id: 1a02c8e243786406
+      calendar_event_id: cd3g3cuemhdbcl2r7294o1s8jo
+      drive_registry_id: 1ftNOnbV5Zm-qHzoUlXkLqsOdNWUVbpXw9YOXPaLjd6g
+
+navigation_contract:
+  entry_keys: [incremental_id, subject, tag, mascot, concept, drive_document_id, github_path, date]
+  convergence: "entry -> node -> typed_edges -> authority_route -> evidence_state"
+  stop_on_missing_evidence: true
+  missing_state: TOKEN_VAZIO
