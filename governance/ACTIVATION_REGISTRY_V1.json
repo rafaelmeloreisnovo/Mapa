@@ -1,0 +1,200 @@
+{
+  "schema": "rafaelia.activation-registry/v1",
+  "registry_id": "RAFAELIA-ACTIVATION-REGISTRY-V1",
+  "generated_at": "2026-08-23T05:15:00-03:00",
+  "state": "IMPLEMENTED_PROPOSED",
+  "claim_state": "REFERENCE",
+  "scope": {
+    "role": "subordinate_activation_and_routing_layer",
+    "federated_control_plane": "Mapa",
+    "longitudinal_navigation_authority": "SRC:DRIVE:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "operational_memory": "SRC:DRIVE:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "machine_navigation_registry": "ART:Mapa:navigation/RAFAELIA_MASTER_REGISTRY.v1.json",
+    "human_navigation_index": "ART:Mapa:navigation/INDEX.md",
+    "authority_matrix": "ART:Mapa:governance/AUTHORITY_MATRIX_V1.yaml",
+    "bootstrap": "ART:Mapa:bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md"
+  },
+  "invariants": [
+    "MASCOTE != AGENTE",
+    "AGENTE != AUTORIDADE",
+    "AUTORIDADE != EXECUTOR",
+    "VISAO != ARTEFATO != EXECUCAO != EVIDENCIA != CLAIM",
+    "TOKEN_VAZIO != PASS",
+    "TOKEN_VAZIO is a valid auditable unresolved state",
+    "no operational promotion without applicable gate, evidence and receipt",
+    "no competing master registry is created by this artifact"
+  ],
+  "activation_chain": [
+    "objective",
+    "bootstrap",
+    "authority_resolution",
+    "route_resolution",
+    "evidence_collection",
+    "gate_evaluation",
+    "execution",
+    "receipt",
+    "delta",
+    "index_feedback",
+    "retrofeedback"
+  ],
+  "gate_model": {
+    "sequence": [
+      "G0_TRIAGEM",
+      "G1_DERIVADA",
+      "G2_REPLICA_LOCAL",
+      "G3_REPLICA_REDHAT",
+      "G4_MULTIVERIFICADA"
+    ],
+    "verified_claim_minimum": "G4_MULTIVERIFICADA",
+    "source": "SRC:DRIVE:1LgwvPnYNewcnaD78oADywxRtPhspFKJqDZFURzgVkI8"
+  },
+  "token_vazio_model": {
+    "lifecycle": [
+      "ABERTO",
+      "EM_TESTE",
+      "CONFIRMADO",
+      "REBAIXADO",
+      "FECHADO"
+    ],
+    "required_fields": [
+      "id",
+      "priority",
+      "gap",
+      "signals",
+      "computable_action",
+      "exit_criterion",
+      "provenance"
+    ]
+  },
+  "components": [
+    {
+      "id": "bootstrap",
+      "activates": "authority_resolver",
+      "condition": "objective_present AND bootstrap_readable",
+      "inputs": ["objective", "bootstrap"],
+      "gate": "bootstrap_contract_loaded",
+      "outputs": ["bounded_objective_context"],
+      "fallback": "GAP:ACTIVATION_BOOTSTRAP_UNAVAILABLE"
+    },
+    {
+      "id": "authority_resolver",
+      "activates": "route_resolver",
+      "condition": "authority_candidate_observed",
+      "inputs": ["bounded_objective_context", "AUTHORITY_MATRIX_V1"],
+      "gate": "authority_match_or_explicit_token_vazio",
+      "outputs": ["canonical_owner", "primary_artifact", "authority_state"],
+      "fallback": "GAP:ACTIVATION_AUTHORITY_UNRESOLVED"
+    },
+    {
+      "id": "route_resolver",
+      "activates": "evidence_collector",
+      "condition": "authority_state_resolved",
+      "inputs": ["canonical_owner", "primary_artifact", "navigation_indices"],
+      "gate": "route_is_addressable_and_bounded",
+      "outputs": ["evidence_targets", "producer_route"],
+      "fallback": "GAP:ACTIVATION_ROUTE_UNRESOLVED"
+    },
+    {
+      "id": "evidence_collector",
+      "activates": "gate_engine",
+      "condition": "evidence_targets_addressable",
+      "inputs": ["evidence_targets", "producer_route"],
+      "gate": "provenance_traceable",
+      "outputs": ["evidence_bundle", "missing_evidence_gaps"],
+      "fallback": "GAP:ACTIVATION_EVIDENCE_UNTRACEABLE"
+    },
+    {
+      "id": "gate_engine",
+      "activates": "executor",
+      "condition": "applicable_gate_identified",
+      "inputs": ["evidence_bundle", "gate_policy", "claim_state_policy"],
+      "gate": "G0_TRIAGEM_to_G4_MULTIVERIFICADA",
+      "outputs": ["execution_authorization", "claim_ceiling"],
+      "fallback": "GAP:ACTIVATION_GATE_UNSATISFIED"
+    },
+    {
+      "id": "executor",
+      "activates": "receipt_writer",
+      "condition": "execution_authorization_allows_action",
+      "inputs": ["execution_authorization", "apply_policy", "producer_tool"],
+      "gate": "apply_policy_passed",
+      "outputs": ["execution_delta", "execution_state"],
+      "fallback": "GAP:ACTIVATION_EXECUTION_BLOCKED_OR_FAILED"
+    },
+    {
+      "id": "receipt_writer",
+      "activates": "index_feedback",
+      "condition": "execution_delta_exists OR bounded_failure_observed",
+      "inputs": ["execution_delta", "execution_state", "provenance"],
+      "gate": "receipt_has_source_ref_hash_or_equivalent_trace",
+      "outputs": ["receipt"],
+      "fallback": "GAP:ACTIVATION_RECEIPT_MISSING"
+    },
+    {
+      "id": "index_feedback",
+      "activates": "retrofeedback",
+      "condition": "receipt_addressable",
+      "inputs": ["receipt", "navigation_registry", "longitudinal_memory"],
+      "gate": "delta_is_discoverable_without_replacing_authority",
+      "outputs": ["indexed_delta", "supersession_edges"],
+      "fallback": "GAP:ACTIVATION_INDEX_FEEDBACK_MISSING"
+    },
+    {
+      "id": "retrofeedback",
+      "activates": "next_cycle",
+      "condition": "cycle_completed_or_gap_declared",
+      "inputs": ["indexed_delta", "open_gaps"],
+      "gate": "R3_complete",
+      "outputs": ["F_ok", "F_gap", "F_next"],
+      "fallback": "GAP:ACTIVATION_NEXT_STEP_UNRESOLVED"
+    }
+  ],
+  "profiles": {
+    "research_or_paper": {
+      "default_claim_ceiling": "DERIVED_OR_RESEARCH",
+      "promotion_requires": ["method", "evidence", "falsifier", "applicable_gate", "receipt"]
+    },
+    "code_change": {
+      "promotion_requires": ["bounded_change", "test_or_ci_evidence", "receipt", "index_feedback"]
+    },
+    "memory_sync": {
+      "mode": "append_only",
+      "promotion_requires": ["provenance", "stable_identifier", "index_feedback"]
+    },
+    "mascot": {
+      "role": "semantic_interface_only",
+      "authority": false,
+      "execution": false
+    },
+    "agent": {
+      "role": "bounded_capability",
+      "authority": "must_be_resolved_per_objective",
+      "execution": "only_when_gate_and_contract_allow"
+    }
+  },
+  "observed_gaps": [
+    {
+      "id": "GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT",
+      "state": "ABERTO",
+      "priority": "P1",
+      "gap": "Drive Master Navigation Registry references Mapa/docs/RAFAELIA_MASTER_NAV_REGISTRY_V1.md, but that path was not found on current main; current GitHub navigation artifacts are under navigation/.",
+      "signals": [
+        "missing path: docs/RAFAELIA_MASTER_NAV_REGISTRY_V1.md",
+        "present path: navigation/RAFAELIA_MASTER_REGISTRY.v1.json",
+        "present path: navigation/INDEX.md"
+      ],
+      "computable_action": "reconcile the Drive pointer with the current GitHub navigation authority using an explicit receipt; do not silently rewrite historical memory",
+      "exit_criterion": "Drive navigation pointer resolves to the current canonical GitHub navigation artifact and the change has a provenance receipt",
+      "provenance": [
+        "SRC:DRIVE:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+        "ART:Mapa:navigation/RAFAELIA_MASTER_REGISTRY.v1.json",
+        "ART:Mapa:navigation/INDEX.md"
+      ]
+    }
+  ],
+  "R3": {
+    "F_ok": "activation semantics consolidated as a subordinate machine-readable registry",
+    "F_gap": ["GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT", "full runtime automation remains outside this registry"],
+    "F_next": "validate this registry in CI/schema checks, merge only after review, then reconcile the Drive pointer with an append-only receipt"
+  }
+}
