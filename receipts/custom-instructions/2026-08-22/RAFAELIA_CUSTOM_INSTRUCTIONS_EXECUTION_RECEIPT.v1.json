@@ -1,0 +1,83 @@
+{
+  "schema": "rafaelia.custom-instructions-execution-receipt.v1",
+  "event_id": "RFX-CUSTOM-INSTRUCTIONS-20260822-2339-BRT",
+  "observed_at": "2026-08-22T23:39:00-03:00",
+  "mode": "EXECUCAO_NAO_DESTRUTIVA",
+  "append_only": true,
+  "claim_allowed": false,
+  "automatic_merge": false,
+  "retroactive_rewrite": false,
+  "sources": {
+    "drive": {
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "observation_state": "VERIFIED_PRIMARY"
+    },
+    "mapa_contract": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md",
+      "blob_sha": "11728f44f918e8944293e0bf997467baba3ee928",
+      "observation_state": "VERIFIED_PRIMARY"
+    },
+    "mapa_main_before": {
+      "commit_sha": "86f1d3cb1198a1904e831176e59af03615d33abb",
+      "protected": false
+    },
+    "papers_repository": {
+      "repository": "rafaelmeloreisnovo/papers",
+      "default_branch": "main",
+      "visibility": "private",
+      "license_spdx": "MIT",
+      "pushed_at": "2026-08-22T12:35:05Z",
+      "observation_state": "VERIFIED_PRIMARY"
+    }
+  },
+  "reconciliation": [
+    {
+      "item": "P0.3",
+      "before": "TOKEN_VAZIO",
+      "after": "PASS_OBSERVED",
+      "scope": "repository existence and identity only"
+    },
+    {
+      "item": "P0.4",
+      "before": "TODO",
+      "after": "PASS_OBSERVED",
+      "scope": "schemas/latent-artifact.schema.json exists and is readable"
+    },
+    {
+      "item": "P0.5_SCHEMA",
+      "before": "TODO",
+      "after": "PASS_OBSERVED",
+      "scope": "schemas/paper-claim-ledger.schema.json exists and is readable"
+    },
+    {
+      "item": "P0.5_LEDGER_INSTANCE",
+      "before": "TODO",
+      "after": "TOKEN_VAZIO_DISCOVERY",
+      "scope": "no clearly identified initial ledger instance located by scoped search; absence not proven"
+    },
+    {
+      "item": "P0.6_GITHUB_RECORD",
+      "before": "PASS_PARTIAL",
+      "after": "PASS_BRANCH",
+      "scope": "append-only audit artifact committed on isolated branch"
+    }
+  ],
+  "writes": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "audit/custom-instructions-delta-20260822",
+      "path": "docs/canonical/2026-08-22/RAFAELIA_CUSTOM_INSTRUCTIONS_EXECUTION_DELTA_V1.md",
+      "commit_sha": "4d5bf75d034e82956f3efeaa40a495b8eb727453"
+    }
+  ],
+  "destructive_operations": [],
+  "gaps": [
+    "TOKEN_VAZIO_LEDGER_INSTANCE",
+    "TOKEN_VAZIO_DRIVE_APPEND_RECEIPT",
+    "TOKEN_VAZIO_POST_MERGE_RECEIPT",
+    "TOKEN_VAZIO_BRANCH_PROTECTION"
+  ],
+  "f_next": "Open and validate a pull request from audit/custom-instructions-delta-20260822 to main; do not auto-merge."
+}
