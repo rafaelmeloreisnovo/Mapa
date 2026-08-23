@@ -5,7 +5,6 @@ import argparse
 import json
 import re
 import subprocess
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -63,10 +62,10 @@ def validate_contract() -> None:
 
 
 def scan_public_boundary() -> None:
-    # Patterns are assembled so the scanner source does not contain a real locator/secret literal.
+    # Patterns are assembled so this source does not contain a real private locator or secret token literal.
     locator = re.compile(r"(?:drive|docs)" + r"\." + r"google" + r"\.com/(?:file/d|document/d|spreadsheets/d)/[A-Za-z0-9_-]{20,}")
     id_assignment = re.compile(r"(?:document_id|drive_id|file_id)\s*[:=]\s*[\"']?[A-Za-z0-9_-]{20,}", re.IGNORECASE)
-    secret_markers = ["ghp" + "_", "github" + "_pat_", "sk" + "-", "AIza"[:2] + "Iza"]
+    secret_markers = ["ghp" + "_", "github" + "_pat_", "sk" + "-", "AI" + "za"]
 
     findings: list[str] = []
     for path in HOUSE.rglob("*"):
