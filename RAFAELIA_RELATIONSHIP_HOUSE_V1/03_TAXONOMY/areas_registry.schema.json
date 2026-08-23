@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/relationship-house/areas-registry-v1.json",
+  "title": "RAFAELIA 136+ Area Namespace Registry V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["area_id","status","taxonomy_version","evidence_refs"],
+  "properties": {
+    "area_id": {"type":"string","pattern":"^A[0-9]{3,}$"},
+    "label": {"type":["string","null"],"minLength":1},
+    "description": {"type":["string","null"]},
+    "parent_area_ids": {"type":"array","items":{"type":"string","pattern":"^A[0-9]{3,}$"},"uniqueItems":true},
+    "aliases": {"type":"array","items":{"type":"string"},"uniqueItems":true},
+    "status": {"type":"string","enum":["PROVISIONAL","CONFIRMED","TOKEN_VAZIO","DEPRECATED"]},
+    "taxonomy_version": {"type":"string","minLength":1},
+    "evidence_refs": {"type":"array","items":{"type":"string"},"uniqueItems":true}
+  },
+  "allOf": [
+    {
+      "if": {"properties":{"status":{"const":"TOKEN_VAZIO"}},"required":["status"]},
+      "then": {"properties":{"label":{"type":"null"}}}
+    }
+  ]
+}
