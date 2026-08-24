@@ -1,0 +1,86 @@
+{
+  "schema_version": "rafaelia.omega-assurance-skills-receipt/v1",
+  "receipt_id": "OMEGA_ASSURANCE_SKILLS_V1_20260824",
+  "status": "MATERIALIZED_VALIDATED_GOVERNANCE_PENDING",
+  "claim_allowed": false,
+  "base_main": "f1a96df83d0969a012358ee321be814d0656f377",
+  "pull_request": 391,
+  "branch": "chatgpt/omega-assurance-skills-v1-20260824",
+  "implementation_commit": "0c01de52bef60a50d38ee7c4137a3da70a81fa2e",
+  "markdown_fix_commit": "504eb5f8e0088121a5092e1e2e133ddbc552aa72",
+  "skills": {
+    "operational": 9,
+    "router": 1,
+    "total_skill_files": 10,
+    "registry": "skills/omega-assurance-skills.v1.json",
+    "index": "indices/OMEGA_ASSURANCE_SKILLS_V1.md"
+  },
+  "qualification": {
+    "first_head": {
+      "commit": "0c01de52bef60a50d38ee7c4137a3da70a81fa2e",
+      "dedicated_gate": {"run_id": 32791402425, "run_number": 1, "conclusion": "success"},
+      "general_ci": {"run_id": 32791402290, "run_number": 1712, "conclusion": "failure", "cause": "markdownlint MD022 in epistemic-discernment/SKILL.md"},
+      "branch_topology": {"run_id": 32791402262, "run_number": 841, "conclusion": "success"},
+      "interpretation": "VALIDATOR_PASS_BUT_REPOSITORY_MARKDOWN_GATE_CAUGHT_LOCAL_FORMATTING_REGRESSION"
+    },
+    "corrected_head": {
+      "commit": "504eb5f8e0088121a5092e1e2e133ddbc552aa72",
+      "dedicated_gate": {"run_id": 32791452708, "run_number": 2, "conclusion": "success"},
+      "general_ci": {"run_id": 32791452764, "run_number": 1713, "conclusion": "success"},
+      "branch_topology": {"run_id": 32791452711, "run_number": 842, "conclusion": "success"}
+    }
+  },
+  "independent_governance": {
+    "promotion_control": {
+      "run_id": 32791452719,
+      "run_number": 965,
+      "conclusion": "failure",
+      "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN", "INDEPENDENT_APPROVAL_MISSING"],
+      "claim_allowed_observed": false
+    },
+    "server_merge_enforcement": {
+      "run_id": 32791452736,
+      "run_number": 239,
+      "conclusion": "failure",
+      "classification": "LIVE_SERVER_ENFORCEMENT_GOVERNANCE_GAP_INDEPENDENT_OF_SKILL_VALIDATOR"
+    }
+  },
+  "fail_closed_properties": [
+    "TOKEN_VAZIO != PASS",
+    "SEE_MORE != CLAIM_MORE",
+    "CAN_DO != MAY_DO",
+    "search_miss != absence",
+    "sandbox_pass != production_pass",
+    "unknown_privacy => PRIVATE_DEFAULT_DENY",
+    "unknown_authority => HOLD_FOR_AUTHORITY",
+    "irreversible_unknown_risk => HOLD"
+  ],
+  "negative_tests": [
+    "claim_allowed true rejected",
+    "unknown dependency rejected",
+    "dependency cycle rejected",
+    "missing TOKEN_VAZIO invariant rejected",
+    "private Drive-style locator injection rejected"
+  ],
+  "boundary": {
+    "structural_skill_contract": "EVIDENCED_BY_CI",
+    "agent_runtime_adoption": "TOKEN_VAZIO_NOT_YET_OBSERVED",
+    "production_watchdog_runtime": "TOKEN_VAZIO_NOT_PROVEN_BY_THIS_WAVE",
+    "physical_failover": "TOKEN_VAZIO_NOT_PROVEN_BY_THIS_WAVE",
+    "legal_or_standard_certification": "NOT_CLAIMED",
+    "scientific_truth": "NOT_CLAIMED"
+  },
+  "F_ok": [
+    "10 SKILL.md contracts materialized",
+    "machine-readable registry materialized",
+    "fail-closed validator and negative tests executed successfully",
+    "general CI and branch topology passed after local markdown correction"
+  ],
+  "F_gap": [
+    "runtime adoption by agents/producers not yet observed",
+    "independent approval missing for promotion",
+    "live main server merge enforcement remains unresolved"
+  ],
+  "F_next": "observe receipt-head dedicated gate and CI; then keep draft until governance requirements are intentionally satisfied",
+  "append_only": true
+}
