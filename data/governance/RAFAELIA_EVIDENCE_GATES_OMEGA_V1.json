@@ -1,0 +1,25 @@
+{
+  "schema": "RAFAELIA_EVIDENCE_GATES_OMEGA/V1",
+  "generated_at": "2026-08-24T04:55:00-03:00",
+  "claim_allowed_default": false,
+  "drive_doc_id": "1ZOIgUdffE9xoW_erxaeozNOqbC2M8KOkiumEYuTaPM8",
+  "query_prefix": "EVID:",
+  "gates": [
+    {"id":"G0","name":"SOURCE_IDENTITY","requires":["source","locator","authority"]},
+    {"id":"G1","name":"INTEGRITY","requires":["hash_or_revision_when_applicable"]},
+    {"id":"G2","name":"LITERAL_TRACE","requires":["literal_occurrence_or_observable_artifact"]},
+    {"id":"G3","name":"RELATION_EVIDENCE","requires":["edge_source_ref","direction","typed_relation"]},
+    {"id":"G4","name":"INDEPENDENCE","requires":["independent_origin_when_claim_requires_confirmation"]},
+    {"id":"G5","name":"REPRODUCIBILITY","requires":["method","parameters","version","source_set"]},
+    {"id":"G6","name":"FALSIFIER","requires":["falsifier_when_applicable"]},
+    {"id":"G7","name":"BOUNDARY","requires":["privacy","license","authority","write_boundary"]},
+    {"id":"G8","name":"EXECUTION","requires":["real_execution_distinguished_from_code_docs_simulation"]},
+    {"id":"G9","name":"RECEIPT","requires":["destination","revision_hash_or_commit_when_written"]},
+    {"id":"G10","name":"CLAIM_PROMOTION","requires":["all_required_gates_PASS"]}
+  ],
+  "states": ["PASS","FAIL","DRAFT","BLOCKED","HYPOTHESIS","CONTRADICTED","TOKEN_VAZIO"],
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "LITERAL != NORMALIZED != CONCEPT != THEME != INVARIANT != CLAIM"
+  ]
+}
