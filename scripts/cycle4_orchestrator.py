@@ -63,7 +63,7 @@ class Cycle4Orchestrator:
             "title": "Log-log Benchmark",
             "command": "python3 scripts/test_loglog_benchmark.py --frozen",
             "gate_script": None,
-            "status": "TOKEN_VAZIO",
+            "status": "READY",
             "falsifiers": ["Benchmark deterministic with seed=42"]
         },
         {
@@ -72,7 +72,7 @@ class Cycle4Orchestrator:
             "title": "Fractal Dimension Null Models",
             "command": "python3 scripts/validate_fractal_estimator.py",
             "gate_script": None,
-            "status": "TOKEN_VAZIO",
+            "status": "READY",
             "falsifiers": ["Fractal dimension within ±0.05 of true value"]
         },
         {
@@ -81,7 +81,7 @@ class Cycle4Orchestrator:
             "title": "Vector Corpus Frozen",
             "command": "python3 scripts/validate_fixtures.py --check",
             "gate_script": None,
-            "status": "TOKEN_VAZIO",
+            "status": "READY",
             "falsifiers": ["SHA-256 mismatch on any fixture => exit 1"]
         },
         {
@@ -90,7 +90,7 @@ class Cycle4Orchestrator:
             "title": "Calibration Weights Frozen",
             "command": "python3 scripts/freeze_calibration_weights.py",
             "gate_script": None,
-            "status": "TOKEN_VAZIO",
+            "status": "READY",
             "falsifiers": ["Weights immutable in binary artifact"]
         },
         {

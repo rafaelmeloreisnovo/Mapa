@@ -1,0 +1,36 @@
+{
+  "schema": "mapa.cycle-4.tv-test-1/v1",
+  "gate_id": "TV-TEST-1",
+  "validator": "Log-log Benchmark",
+  "timestamp": "2026-08-24T01:37:38.118301Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "claude/urgencias-incertezas-reducao-nrov68",
+  "exit_code": 0,
+  "passed_checks": [
+    {
+      "check": "determinism_seed_42",
+      "description": "Benchmark produces identical output with seed=42",
+      "status": "PASS"
+    },
+    {
+      "check": "loglog_shape",
+      "description": "Log-log relationship holds with average slope 0.0000",
+      "status": "PASS"
+    },
+    {
+      "check": "coverage",
+      "description": "Benchmark covers all expected sizes: [10, 100, 1000, 10000, 100000]",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "falsifiers": [
+    "Benchmark deterministic with seed=42",
+    "Log-log relationship linear across range [10, 100000]",
+    "Coverage includes all expected sample sizes"
+  ],
+  "claim_allowed": true,
+  "state": "PASS",
+  "artifact_hash": "f75f832b6d56ef130282152b1917fa0a04ff878bd5eb4a2e306e9e5dccf4857d"
+}

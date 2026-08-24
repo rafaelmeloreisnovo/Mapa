@@ -1,14 +1,14 @@
 {
   "schema": "mapa.cycle-4/v1",
   "cycle": 4,
-  "timestamp": "2026-08-24T01:22:04.182611Z",
+  "timestamp": "2026-08-24T01:37:38.248032Z",
   "repository": "rafaelmeloreisnovo/Mapa",
   "branch": "claude/urgencias-incertezas-reducao-nrov68",
   "summary": {
     "total_gates": 8,
-    "passed": 2,
-    "failed": 0,
-    "deferred": 6
+    "passed": 5,
+    "failed": 1,
+    "deferred": 2
   },
   "gates": {
     "TV-CODE-1": {
@@ -17,7 +17,7 @@
       "exit_code": 0,
       "stdout_lines": 0,
       "stderr_lines": 5,
-      "timestamp": "2026-08-24T01:22:04.058344Z",
+      "timestamp": "2026-08-24T01:37:37.892083Z",
       "title": "DAG Causal Engine",
       "falsifiers": [
         "DAG cannot confuse association (via confounder) with direct causal link",
@@ -32,7 +32,7 @@
       "exit_code": 0,
       "stdout_lines": 0,
       "stderr_lines": 5,
-      "timestamp": "2026-08-24T01:22:04.182569Z",
+      "timestamp": "2026-08-24T01:37:38.054562Z",
       "title": "Bootstrap UQ",
       "falsifiers": [
         "CI must contain true mean",
@@ -43,22 +43,24 @@
     },
     "TV-TEST-1": {
       "gate_id": "TV-TEST-1",
-      "status": "TOKEN_VAZIO",
-      "reason": "Log-log Benchmark not yet implemented",
-      "exit_code": null,
-      "timestamp": "2026-08-24T01:22:04.182584Z",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_lines": 3,
+      "stderr_lines": 0,
+      "timestamp": "2026-08-24T01:37:38.124735Z",
       "title": "Log-log Benchmark",
       "falsifiers": [
         "Benchmark deterministic with seed=42"
       ],
-      "claim_allowed": false
+      "claim_allowed": true
     },
     "TV-TEST-2": {
       "gate_id": "TV-TEST-2",
-      "status": "TOKEN_VAZIO",
-      "reason": "Fractal Dimension Null Models not yet implemented",
-      "exit_code": null,
-      "timestamp": "2026-08-24T01:22:04.182587Z",
+      "status": "FAIL",
+      "exit_code": 1,
+      "stdout_lines": 3,
+      "stderr_lines": 0,
+      "timestamp": "2026-08-24T01:37:38.176397Z",
       "title": "Fractal Dimension Null Models",
       "falsifiers": [
         "Fractal dimension within \u00b10.05 of true value"
@@ -67,34 +69,36 @@
     },
     "TV-DATA-1": {
       "gate_id": "TV-DATA-1",
-      "status": "TOKEN_VAZIO",
-      "reason": "Vector Corpus Frozen not yet implemented",
-      "exit_code": null,
-      "timestamp": "2026-08-24T01:22:04.182590Z",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_lines": 3,
+      "stderr_lines": 0,
+      "timestamp": "2026-08-24T01:37:38.215255Z",
       "title": "Vector Corpus Frozen",
       "falsifiers": [
         "SHA-256 mismatch on any fixture => exit 1"
       ],
-      "claim_allowed": false
+      "claim_allowed": true
     },
     "TV-DATA-2": {
       "gate_id": "TV-DATA-2",
-      "status": "TOKEN_VAZIO",
-      "reason": "Calibration Weights Frozen not yet implemented",
-      "exit_code": null,
-      "timestamp": "2026-08-24T01:22:04.182592Z",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_lines": 3,
+      "stderr_lines": 0,
+      "timestamp": "2026-08-24T01:37:38.247978Z",
       "title": "Calibration Weights Frozen",
       "falsifiers": [
         "Weights immutable in binary artifact"
       ],
-      "claim_allowed": false
+      "claim_allowed": true
     },
     "TV-BOUNDARY-1": {
       "gate_id": "TV-BOUNDARY-1",
       "status": "TOKEN_VAZIO",
       "reason": "Antiderivative Boundary Condition Schema not yet implemented",
       "exit_code": null,
-      "timestamp": "2026-08-24T01:22:04.182596Z",
+      "timestamp": "2026-08-24T01:37:38.248002Z",
       "title": "Antiderivative Boundary Condition Schema",
       "falsifiers": [
         "Boundary schema matches real-world constraints"
@@ -106,7 +110,7 @@
       "status": "TOKEN_VAZIO",
       "reason": "Vector Corpus Access Control not yet implemented",
       "exit_code": null,
-      "timestamp": "2026-08-24T01:22:04.182601Z",
+      "timestamp": "2026-08-24T01:37:38.248012Z",
       "title": "Vector Corpus Access Control",
       "falsifiers": [
         "No secrets exposed in manifest SHA-256"
@@ -119,14 +123,14 @@
     "TV-CODE-2 (Bootstrap UQ): PASS - PASS"
   ],
   "F_gap": [
-    "TV-TEST-1: TOKEN_VAZIO",
-    "TV-TEST-2: TOKEN_VAZIO",
-    "TV-DATA-1: TOKEN_VAZIO",
-    "TV-DATA-2: TOKEN_VAZIO",
+    "TV-TEST-1: PASS",
+    "TV-TEST-2: FAIL",
+    "TV-DATA-1: PASS",
+    "TV-DATA-2: PASS",
     "TV-BOUNDARY-1: TOKEN_VAZIO",
     "TV-ACCESS-1: TOKEN_VAZIO"
   ],
   "F_next": "Implement TV-TEST gates (loglog benchmark, fractal estimator) in weeks 2-3",
-  "claim_allowed": true,
+  "claim_allowed": false,
   "state": "PARTIAL_PASS"
 }
