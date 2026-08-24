@@ -1,0 +1,176 @@
+{
+  "schema": "rafaelia.vectras.runtime_receipt.v1",
+  "receipt_id": "VECTRAS-20260824-DAGGER-STAR-001",
+  "captured_at": "2026-08-24T00:06:00-03:00",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "operator_semantics": {
+    "‡": "contradicao, risco ou supersessao a revisar",
+    "¡": "interrupcao, atencao ou gate urgente",
+    "★": "prioridade candidata"
+  },
+  "authority_chain": {
+    "control_plane": "rafaelmeloreisnovo/Mapa",
+    "mapa_base_sha": "c60bff718d3caa0474438afef4d01ddc926123bc",
+    "runtime_source_repo": "rafaelmeloreisnovo/Vectras-VM-Android",
+    "runtime_source_head_observed": "2c6a71e5e3a8e6d87c4eb07ab6cedf3d67992d9d"
+  },
+  "physical_observation": {
+    "device": "motorola moto e(7) power",
+    "android": "10 (API 29)",
+    "kernel": "4.9.190+",
+    "supported_abis": ["armeabi-v7a", "armeabi"],
+    "app_version": "3.6.6 (70)",
+    "crash_time": "2026-08-23T23:37:22-03:00",
+    "storage_gb": {"total": 125.1, "used": 64.9, "free": 60.2},
+    "memory_gb_approx": {"total": 1.9, "used": "1.1-1.2", "free": 0.7}
+  },
+  "screenshot_evidence": [
+    {"file": "Screenshot_20260823-233248.png", "sha256": "6755317524521d6b96278ece2e838cb3abe0518f9b29f8e322e33185a9993798"},
+    {"file": "Screenshot_20260823-233337.png", "sha256": "5bb2730a2593d7a9df67ea93c23fabc7dbcf023b2f88f739a54cf809ca2b0d0c"},
+    {"file": "Screenshot_20260823-233344.png", "sha256": "3c3b46cfba9000e0a17da734832854a7a3339f8d25806c7a5e72461e091deb70"},
+    {"file": "Screenshot_20260823-233405.png", "sha256": "e0f1567fa963745229140323ad401095b5145c2d80584ee73fb608bbfb8e47f2"},
+    {"file": "Screenshot_20260823-233504.png", "sha256": "84d9d874bfb1f94a9c75a5719301c7fe9099895892c8b535123abcdcca867345"},
+    {"file": "Screenshot_20260823-233519.png", "sha256": "ad9794a6e9ff9e0794f7133b5bd3be1dca5aa5b303a6460be7d4c71860fbba09"},
+    {"file": "Screenshot_20260823-233605.png", "sha256": "0acae02bfcc6ef17c00106af54acca3b1555bcb2ee76c17331f5ac1620ee0d8f"},
+    {"file": "Screenshot_20260823-233738.png", "sha256": "800d38ce63dec2249dfd57f7ee4434f73b3b552ef946383c4b9c75efe43cb575"},
+    {"file": "Screenshot_20260823-233746.png", "sha256": "61436a567fcf475cdf1e4f8224a9af169734c44ae62c2699bcbed221dea3349f"},
+    {"file": "Screenshot_20260823-233439.png", "sha256": "ac4fe8c346e88090c408847616161e662a433197697649b5dd19b78c4068b89a"}
+  ],
+  "observed_failures": [
+    {
+      "id": "E-RUNTIME-001",
+      "state": "OBSERVED",
+      "error": "POST_CHECK_FAIL:missing-proot,missing-distro-busybox,missing-qemu-binary",
+      "consequence": "Home/QEMU runtime is not ready"
+    },
+    {
+      "id": "E-PROOT-002",
+      "state": "OBSERVED",
+      "error": "Cannot run program /mnt/expand/e8ecef58-6da2-49de-9135-1caec2557cb9/user/0/com.rafacodephi.app/files/usr/bin/proot: error=2, No such file or directory",
+      "consequence": "bootstrap cannot enter distro/rootfs"
+    },
+    {
+      "id": "E-MANIFEST-003",
+      "state": "OBSERVED",
+      "error": "ActivityNotFoundException for com.vectras.vm.settings.LanguageModulesActivity",
+      "consequence": "settings navigation crashes when activity is launched"
+    },
+    {
+      "id": "E-QEMU-004",
+      "state": "OBSERVED",
+      "error": "QEMU stopped; binary absent according to runtime post-check",
+      "consequence": "VM cannot start"
+    }
+  ],
+  "source_crosschecks": [
+    {
+      "id": "X-MANIFEST-001",
+      "state": "VERIFIED_SOURCE",
+      "path": "app/src/main/AndroidManifest.xml",
+      "finding": "current source declares .settings.LanguageModulesActivity"
+    },
+    {
+      "id": "X-BUILD-002",
+      "state": "VERIFIED_SOURCE",
+      "path": "app/build.gradle",
+      "finding": "current source reports versionCode 70 and versionName 3.6.6, matching the installed version label"
+    },
+    {
+      "id": "X-SETUP-003",
+      "state": "VERIFIED_SOURCE",
+      "path": "app/src/main/java/com/vectras/vm/setupwizard/SetupFeatureCore.java",
+      "finding": "post-check explicitly emits missing-proot, missing-distro-busybox and missing-qemu-binary"
+    },
+    {
+      "id": "X-PKGS-004",
+      "state": "VERIFIED_SOURCE",
+      "path": "app/src/main/java/com/vectras/vm/AppConfig.java",
+      "finding": "32-bit Alpine expected package set matches the Missing Libraries dialog family"
+    }
+  ],
+  "expected_32bit_alpine_packages_observed": [
+    "bash", "aria2", "tar", "dwm", "xterm", "libslirp", "libslirp-dev", "pulseaudio-dev", "glib-dev", "pixman-dev", "zlib-dev", "spice-dev", "libusbredirparser", "usbredir-dev", "sdl2", "sdl2-dev", "sdl2_image-dev", "libepoxy-dev", "virglrenderer-dev", "rdma-core", "fluxbox", "libusb", "libaio", "ncurses-libs", "curl", "libnfs", "gtk+3.0", "gtk+3.0-dev", "fuse", "libpulse", "libseccomp", "jack", "pipewire", "liburing", "pulseaudio", "pulseaudio-alsa", "alsa-plugins-pulse", "mesa-dri-gallium", "mesa-vulkan-swrast", "vulkan-loader", "mesa-utils", "mesa-egl", "qemu-audio-sdl", "capstone", "libcbor", "snappy", "lzo", "ndctl", "keyutils-libs", "vde2-libs", "libdw", "libbpf", "sndio-libs", "linux-pam", "fuse3-libs", "libssh", "vte3"
+  ],
+  "inference_with_boundary": [
+    {
+      "id": "I-ROOTFS-001",
+      "state": "SUPPORTED_INFERENCE",
+      "finding": "the near-total dependency list is more consistent with an absent/uninitialized distro/rootfs than with independent failures of every library",
+      "falsifier": "a verified initialized rootfs containing its package database while all listed packages are genuinely absent"
+    },
+    {
+      "id": "I-APK-002",
+      "state": "SUPPORTED_INFERENCE",
+      "finding": "installed APK provenance or merged-manifest state differs from the current source tree despite the same 3.6.6/70 version label",
+      "falsifier": "extracting the installed APK and proving LanguageModulesActivity is present and resolvable in its merged manifest"
+    }
+  ],
+  "token_vazio": [
+    {
+      "id": "TV-APK-SHA",
+      "missing": "SHA-256 of the exact installed APK",
+      "next_gate": "hash the installed APK or build artifact"
+    },
+    {
+      "id": "TV-APK-GIT-SHA",
+      "missing": "exact git commit/build provenance of installed APK",
+      "next_gate": "embed/read build git SHA and bind to APK hash"
+    },
+    {
+      "id": "TV-MERGED-MANIFEST",
+      "missing": "merged manifest of the exact installed APK",
+      "next_gate": "inspect with apkanalyzer/aapt and verify LanguageModulesActivity"
+    },
+    {
+      "id": "TV-PROOT-PACKAGE",
+      "missing": "receipt proving proot was packaged/extracted executable at runtime path",
+      "next_gate": "test -x files/usr/bin/proot plus file/readelf receipt"
+    },
+    {
+      "id": "TV-DISTRO-ROOTFS",
+      "missing": "receipt proving distro/rootfs and distro BusyBox are initialized",
+      "next_gate": "verify rootfs marker/package DB and executable BusyBox"
+    },
+    {
+      "id": "TV-QEMU-ELF",
+      "missing": "host ELF ABI and executable receipt for packaged QEMU binary",
+      "next_gate": "file/readelf -h plus qemu-system-* --version on device"
+    },
+    {
+      "id": "TV-ROMS-DATA",
+      "missing": "semantic content of 2-byte roms-data.json",
+      "next_gate": "read exact bytes; do not infer {} versus []"
+    }
+  ],
+  "dagger_to_star_execution": [
+    {"order": 0, "token": "‡", "unit": "freeze_evidence", "gate": "preserve screenshot hashes and source SHAs"},
+    {"order": 1, "token": "‡", "unit": "apk_provenance", "gate": "bind installed APK hash -> git SHA -> merged manifest"},
+    {"order": 2, "token": "‡", "unit": "runtime_bootstrap", "gate": "proot exists, executable, correct host ABI"},
+    {"order": 3, "token": "‡", "unit": "distro_rootfs", "gate": "BusyBox/rootfs/package database exists before apk add"},
+    {"order": 4, "token": "‡", "unit": "qemu_host_binary", "gate": "actual ELF ABI verified; --version executes"},
+    {"order": 5, "token": "‡", "unit": "dependency_install", "gate": "run package install only after rootfs gate passes"},
+    {"order": 6, "token": "‡", "unit": "post_check", "gate": "zero missing-proot, missing-distro-busybox, missing-qemu-binary"},
+    {"order": 7, "token": "★", "unit": "vm_launch_candidate", "gate": "QEMU process starts and selected display/control path becomes observable"}
+  ],
+  "priority": {
+    "P0": [
+      "reconcile exact APK/manifest provenance",
+      "make bootstrap transactional and idempotent for proot + distro/rootfs",
+      "package and verify host-executable QEMU binary"
+    ],
+    "P1": ["install Alpine dependency set only after rootfs gate"],
+    "P2": ["VNC/graphics/3dfx/performance after QEMU start evidence"]
+  },
+  "authorial_context": {
+    "language_family": "RAFAELIA / CientiEspiritual",
+    "faith_context": "author-declared theological and faith framing concerning God and creation",
+    "copyright_boundary": "Berne Convention is an international copyright framework, not the repository license itself; repository LICENSE and applicable law govern permissions where declared",
+    "evidence_boundary": "symbolic, philosophical and theological language is preserved as authorial provenance but does not substitute for technical execution evidence"
+  },
+  "closure": {
+    "F_ok": "physical failures captured; current source cross-checked; contradiction isolated",
+    "F_gap": "installed APK provenance, merged manifest, packaged proot/rootfs/QEMU execution receipts remain TOKEN_VAZIO",
+    "F_next": "close P0 gates in order and append device receipts without overwriting this record"
+  }
+}
