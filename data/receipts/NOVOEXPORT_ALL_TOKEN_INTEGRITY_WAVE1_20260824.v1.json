@@ -1,0 +1,128 @@
+{
+  "schema": "rafaelia.novoexport-all-token-integrity-wave1-receipt/v1",
+  "record_id": "NOVOEXPORT_ALL_TOKEN_INTEGRITY_WAVE1_20260824_V1",
+  "observed_at": "2026-08-24T19:31:00-03:00",
+  "status": "MATERIALIZED_VALIDATED_PROMOTION_BLOCKED",
+  "claim_allowed": false,
+  "base_main": "47a2a4235d25c7912b7cf9581ff932bb6012ced6",
+  "branch": "chatgpt/novoexport-all-token-drift-materialization-20260824",
+  "pull_request": 384,
+  "evidence_head": "e8c342dbd62603d859b11c3779f4b940aa564c93",
+  "private_artifact_identity": {
+    "private_locators_persisted_publicly": false,
+    "tokens_literal_sha256": "24a358786fba54a3b5174aaa8b4fa294901da8db5c7dbccf8cc3c29769c9afdc",
+    "token_source_counts_sha256": "85264d118e85ec8df3679725a16eccff9ee7d99528731bf8e57acf15883c3be3",
+    "source_manifest_sha256": "d88d259eccd53d42c03fd31b498238e8f213207fe8dac1747e2df1aa67a5e3f3",
+    "manifest_json_sha256": "87dad16a9883247e28769073dd61de5344847e1a13b737f21b04b1972f0c5f7b"
+  },
+  "reproduction": {
+    "tokens_literal_sum_count_total": 44185627,
+    "token_source_counts_sum_count": 44185627,
+    "source_manifest_sum_token_occurrences": 44185627,
+    "embedded_source_manifest_sum": 44185627,
+    "manifest_token_occurrences_total_raw": 44185626,
+    "manifest_delta_vs_detailed": -1,
+    "per_literal_mismatches": 0,
+    "per_source_mismatches": 0,
+    "embedded_source_mismatches": 0,
+    "classification": "MANIFEST_AGGREGATE_DRIFT",
+    "generator_root_cause": "TOKEN_VAZIO_NOT_LOCATED"
+  },
+  "gap_transitions": [
+    {
+      "gap_id": "TV-TOKEN-OCCURRENCE-OFFBY1",
+      "from": "TOKEN_VAZIO_ROOT_CAUSE",
+      "to": "PARTIAL_EVIDENCED_MANIFEST_AGGREGATE_DRIFT",
+      "closed_dimension": "Artifact-level location of the -1 discrepancy.",
+      "open_dimension": "Generator code/execution path that wrote the scalar aggregate."
+    },
+    {
+      "gap_id": "TV-RAW-018-CURRENT-ID",
+      "from": "TOKEN_VAZIO",
+      "to": "TOKEN_VAZIO_CURRENT_PROVIDER",
+      "closed_dimension": "Anti-substitution boundary and bounded current provider probe are explicit.",
+      "open_dimension": "Current provider_id, raw bytes, SHA-256, JSON parse and PID set."
+    },
+    {
+      "gap_id": "TV-DATA-CHUNK-LINEAGE",
+      "from": "TOKEN_VAZIO",
+      "to": "TOKEN_VAZIO_GLOBAL_LINEAGE",
+      "closed_dimension": "Missing stable-ID dimensions are explicitly typed.",
+      "open_dimension": "Global source/conversation/message-node/file/chunk joins and receipts."
+    }
+  ],
+  "drive_longitudinal_mirror": {
+    "state": "WRITTEN",
+    "document_reference": "PRIVATE_REFERENCE_OMITTED_FROM_PUBLIC_RECEIPT",
+    "revision_reference": "PRIVATE_REFERENCE_OMITTED_FROM_PUBLIC_RECEIPT",
+    "boundary": "Private provider locators remain in Drive; public GitHub persists only opaque state and artifact hashes."
+  },
+  "workflow_evidence": {
+    "dedicated_integrity_gate": {
+      "run_id": 32784879624,
+      "run_number": 2,
+      "conclusion": "success",
+      "steps": {
+        "compile_reconciler": "success",
+        "deterministic_fixtures": "success",
+        "public_evidence_boundary": "success"
+      }
+    },
+    "general_ci": {
+      "run_id": 32784879652,
+      "run_number": 1691,
+      "conclusion": "success"
+    },
+    "branch_topology_gate": {
+      "run_id": 32784879603,
+      "run_number": 825,
+      "conclusion": "success"
+    },
+    "promotion_control": {
+      "run_id": 32784927385,
+      "run_number": 943,
+      "conclusion": "failure",
+      "scope_result": "14_OF_15_INVARIANTS_PASS",
+      "blocking_invariant": "I1",
+      "blocking_observation": "ATLAS_COMPLETION_MARKER_20260824.v1.json missing immutability marker",
+      "independent_of_this_wave": true,
+      "promotion_allowed": false
+    },
+    "server_merge_enforcement": {
+      "run_id": 32784879570,
+      "run_number": 222,
+      "conclusion": "failure",
+      "fixture_steps": "success",
+      "blocking_step": "Inspect live main branch server-side enforcement",
+      "observed_main": "protected=false; required status checks enforcement off",
+      "independent_of_this_wave": true,
+      "promotion_allowed": false
+    }
+  },
+  "anti_regression": [
+    "Frozen V1 private stores and manifest are not rewritten in place.",
+    "A manifest-only aggregate drift cannot be repaired by changing detailed stores.",
+    "Artifact-level localization does not claim generator-level causality.",
+    "A derived ordinal cannot substitute a raw shard identity.",
+    "No-result provider search cannot be promoted to file absence.",
+    "Prototype/partial chunk trees cannot be promoted to full-corpus lineage."
+  ],
+  "f_ok": [
+    "The off-by-one is reproduced on exact SHA-identified private artifacts.",
+    "All detailed planes and embedded source manifest agree at 44,185,627 with zero literal/source mismatches.",
+    "The -1 is localized to manifest.token_occurrences_total_raw.",
+    "Dedicated integrity gate, general CI and branch topology passed on evidence head.",
+    "Drive longitudinal mirror is written without exposing private locators publicly."
+  ],
+  "f_gap": [
+    "Generator code/execution path remains TOKEN_VAZIO_NOT_LOCATED.",
+    "Raw conversations-018 current provider identity remains TOKEN_VAZIO_CURRENT_PROVIDER.",
+    "Global message/node/file/chunk lineage remains TOKEN_VAZIO_GLOBAL_LINEAGE.",
+    "Atlas immutability and live server merge enforcement remain independent promotion blockers."
+  ],
+  "f_next": [
+    "Locate/reexecute generator path for token_occurrences_total_raw and create a differential V2 or explicit supersession receipt.",
+    "Resume bounded raw018 provider recovery from the preserved source-path cursor; stop on first exact positive binding.",
+    "Materialize stable-ID lineage manifests for conversation/message-node/file/chunk and emit per-edge receipts."
+  ]
+}
