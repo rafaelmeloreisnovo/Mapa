@@ -2,18 +2,73 @@
 """Build deterministic D-dimensional amplifier fixtures without external dependencies."""
 
 from __future__ import annotations
+import heapq
 import json
 import itertools
 import pathlib
 import sys
 from typing import Any
 
+MAX_RAPPORT_RANK = 16
+
+
+def require_int(value: Any, name: str, minimum: int, maximum: int) -> int:
+    """Validate integer configuration without permissive coercion."""
+    if type(value) is not int:
+        raise ValueError(f"{name} must be an integer")
+    if not minimum <= value <= maximum:
+        raise ValueError(f"{name} must be in [{minimum},{maximum}]")
+    return value
+
+
+def coord_to_node_id(values: tuple[int, int, int, int], dmax: int) -> str:
+    """Map a 4-D structural coordinate to the canonical deterministic node id."""
+    idx = 0
+    for value in values:
+        idx = idx * dmax + value
+    return f"C-{idx:04d}"
+
+
+def nearest_neighbors(
+    source_coord: tuple[int, int, int, int],
+    dmax: int,
+    k: int,
+) -> list[tuple[int, str]]:
+    """Return up to k L1-nearest nodes without scanning the full graph."""
+    if k == 0:
+        return []
+
+    frontier: list[tuple[int, str, tuple[int, int, int, int]]] = []
+    queued = {source_coord}
+
+    def push(coord: tuple[int, int, int, int]) -> None:
+        if coord in queued:
+            return
+        queued.add(coord)
+        distance = sum(abs(a - b) for a, b in zip(source_coord, coord))
+        heapq.heappush(frontier, (distance, coord_to_node_id(coord, dmax), coord))
+
+    def push_axis_neighbors(coord: tuple[int, int, int, int]) -> None:
+        for axis in range(4):
+            for step in (-1, 1):
+                candidate = list(coord)
+                candidate[axis] += step
+                if 0 <= candidate[axis] < dmax:
+                    push(tuple(candidate))
+
+    push_axis_neighbors(source_coord)
+    selected: list[tuple[int, str]] = []
+    while frontier and len(selected) < k:
+        distance, target, coord = heapq.heappop(frontier)
+        selected.append((distance, target))
+        push_axis_neighbors(coord)
+    return selected
+
+
 def build_fixture(config: dict[str, Any]) -> dict[str, Any]:
-    dmax = int(config["arity"])
-    iteration = int(config["iteration"])
-    k = int(config["graph_policy"]["k"])
-    if not 1 <= dmax <= 7:
-        raise ValueError("arity must be in [1,7]")
+    dmax = require_int(config["arity"], "arity", 1, 7)
+    iteration = require_int(config["iteration"], "iteration", 0, 1_000_000)
+    k = require_int(config["graph_policy"]["k"], "graph_policy.k", 0, MAX_RAPPORT_RANK)
     expected = dmax ** 4
     nodes: list[dict[str, Any]] = []
     coords: dict[str, tuple[int, int, int, int]] = {}
@@ -37,14 +92,9 @@ def build_fixture(config: dict[str, Any]) -> dict[str, Any]:
     for node in nodes:
         source = node["id"]
         source_coord = coords[source]
-        candidates: list[tuple[int, str]] = []
-        for target, target_coord in coords.items():
-            if source == target:
-                continue
-            distance = sum(abs(a - b) for a, b in zip(source_coord, target_coord))
-            candidates.append((distance, target))
-        candidates.sort(key=lambda item: (item[0], item[1]))
-        for rank, (distance, target) in enumerate(candidates[:k], start=1):
+        for rank, (distance, target) in enumerate(
+            nearest_neighbors(source_coord, dmax, k), start=1
+        ):
             score = round(1.0 - distance / denom, 6)
             edges.append({
                 "source": source,
@@ -69,8 +119,10 @@ def build_fixture(config: dict[str, Any]) -> dict[str, Any]:
         "claim_allowed": False,
     }
 
+
 def canonical_json(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
 
 def main(argv: list[str]) -> int:
     if len(argv) not in {2, 3}:
@@ -85,6 +137,7 @@ def main(argv: list[str]) -> int:
     else:
         sys.stdout.write(output)
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main(sys.argv))
