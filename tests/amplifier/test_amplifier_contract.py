@@ -5,12 +5,14 @@ import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
+
 def load_module(name, path):
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
     return module
+
 
 PARSER = load_module("amp_parser", ROOT / "tools" / "parse_amplified_expression.py")
 BUILDER = load_module("amp_builder", ROOT / "tools" / "build_amplifier_fixture.py")
@@ -21,6 +23,7 @@ VALID = (
     "PI_ROLE=CIRCULAR_CONSTANT;PHI_ROLE=GOLDEN_RATIO;"
     "EQUIV=NUMERIC_EQUAL;FUNCTION=F_TRANSITION}"
 )
+
 
 class AmplifierContractTests(unittest.TestCase):
     def test_parser_builds_typed_ast(self):
@@ -62,6 +65,32 @@ class AmplifierContractTests(unittest.TestCase):
             self.assertGreaterEqual(edge["score"], -1.0)
             self.assertLessEqual(edge["score"], 1.0)
             self.assertIn(edge["rank"], range(1, 5))
+
+    def test_sparse_neighbor_order_matches_contract(self):
+        self.assertEqual(
+            BUILDER.nearest_neighbors((0, 0, 0, 0), 3, 4),
+            [(1, "C-0001"), (1, "C-0003"), (1, "C-0009"), (1, "C-0027")],
+        )
+
+    def test_graph_policy_k_is_fail_closed(self):
+        config = json.loads((ROOT / "data/fixtures/amplifier_d3.v1.json").read_text())
+        for invalid_k in (-1, 17, True, "4", 4.0):
+            bad = json.loads(json.dumps(config))
+            bad["graph_policy"]["k"] = invalid_k
+            with self.subTest(k=invalid_k):
+                with self.assertRaises(ValueError):
+                    BUILDER.build_fixture(bad)
+
+    def test_d7_k16_stays_within_rapport_rank_contract(self):
+        config = json.loads((ROOT / "data/fixtures/amplifier_d3.v1.json").read_text())
+        config["fixture_id"] = "AMP-D7-ANTIREGRESSION"
+        config["arity"] = 7
+        config["graph_policy"]["k"] = 16
+        fixture = BUILDER.build_fixture(config)
+        self.assertEqual(fixture["cell_count"], 7 ** 4)
+        self.assertEqual(len(fixture["edges"]), (7 ** 4) * 16)
+        self.assertEqual(max(edge["rank"] for edge in fixture["edges"]), 16)
+
 
 if __name__ == "__main__":
     unittest.main()
