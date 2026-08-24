@@ -1,0 +1,108 @@
+{
+  "schema": "rafaelia.mega-scene-s-plus-gap-materialization-receipt/v1",
+  "record_id": "MEGA_SCENE_S_PLUS_GAP_MATERIALIZATION_20260824_V1",
+  "observed_at": "2026-08-24T19:02:00-03:00",
+  "claim_allowed": false,
+  "status": "MATERIALIZED_VALIDATED_PROMOTION_BLOCKED",
+  "base_main": "3729e1f21f3ff208f714706481b8cf02126fc590",
+  "branch": "chatgpt/mega-scene-s-plus-gap-materialization-20260824",
+  "pull_request": 380,
+  "evidence_head": "e62c3d1158db99dab291d412cadaf3caddeaf11d",
+  "artifacts": [
+    "data/control-plane/MEGA_SCENE_S_PLUS_GAP_LEDGER_20260824.v1.json",
+    "data/audits/TOKEN_VAZIO_REGISTRY_DELTA_20260824_MEGA_SCENE_S_PLUS.jsonl",
+    "indices/MEGA_SCENE_S_PLUS_GAPS_20260824_V1.md",
+    "tools/validate_mega_scene_s_plus_gap_ledger.py",
+    ".github/workflows/mega-scene-s-plus-gap-ledger.yml"
+  ],
+  "materialized_counts": {
+    "ledger_items": 32,
+    "delta_items": 20,
+    "semantic_seeds": 3,
+    "priority_P0": 19,
+    "priority_P1": 9,
+    "priority_P2": 4
+  },
+  "drive_longitudinal_mirror": {
+    "state": "WRITTEN",
+    "document_reference": "PRIVATE_REFERENCE_OMITTED_FROM_PUBLIC_RECEIPT",
+    "revision_reference": "PRIVATE_REFERENCE_OMITTED_FROM_PUBLIC_RECEIPT",
+    "boundary": "The public repository records existence/state, not the private Drive locator."
+  },
+  "workflow_evidence": {
+    "mega_scene_gap_ledger": {
+      "run_id": 32782437744,
+      "run_number": 2,
+      "conclusion": "success",
+      "validated": {
+        "status": "PASS",
+        "ledger_items": 32,
+        "delta_items": 20,
+        "semantic_seeds": 3,
+        "claim_allowed": false,
+        "coverage": "BOUNDED_CURRENT_NOT_EXHAUSTIVE"
+      }
+    },
+    "general_ci": {
+      "run_id": 32782437728,
+      "run_number": 1682,
+      "conclusion": "success"
+    },
+    "branch_topology_gate": {
+      "run_id": 32782437766,
+      "run_number": 819,
+      "conclusion": "success"
+    },
+    "live_control_plane_reconciliation": {
+      "run_id": 32782437712,
+      "run_number": 216,
+      "conclusion": "success"
+    },
+    "promotion_control": {
+      "run_id": 32782437758,
+      "run_number": 932,
+      "conclusion": "failure",
+      "scope_result": "14_OF_15_INVARIANTS_PASS",
+      "blocking_invariant": "I1",
+      "blocking_observation": "ATLAS_COMPLETION_MARKER_20260824.v1.json missing immutability marker",
+      "promotion_allowed": false
+    },
+    "server_merge_enforcement": {
+      "run_id": 32782437729,
+      "run_number": 216,
+      "conclusion": "failure",
+      "fixture_steps": "PASS",
+      "blocking_step": "Inspect live main branch server-side enforcement",
+      "observed_main": "protected=false; required status checks enforcement off",
+      "promotion_allowed": false
+    }
+  },
+  "epistemic_boundary": {
+    "coverage": "BOUNDED_CURRENT_NOT_EXHAUSTIVE",
+    "parable_rule": "PARABLE_OR_SEMANTIC_SEED_MAY_ROUTE_DISCOVERY_BUT_CANNOT_SUBSTITUTE_FOR_CONTRACT_EVIDENCE_OR_CLAIM_GATE",
+    "token_vazio_rule": "TOKEN_VAZIO_IS_VALID_AUDITABLE_STATE_AND_MUST_NOT_BE_FILLED_BY_GUESSING",
+    "fail_rule": "FAIL_FROM_A_WORKING_FALSIFIER_IS_PRESERVED_AS_USEFUL_EVIDENCE",
+    "promotion_rule": "TECHNICAL_VALIDATION_DOES_NOT_OVERRIDE_GOVERNANCE_BLOCKERS"
+  },
+  "f_ok": [
+    "Drive longitudinal editorial mirror was written.",
+    "32 current bounded points are materialized with known/uncertainty/evidence/next-gate fields.",
+    "20 append-only delta entries were added without rewriting the historical registry.",
+    "Dedicated ledger gate, general CI, branch topology and live control-plane reconciliation passed on the evidence head.",
+    "Three semantic/parabolic seeds remain fail-closed as TOKEN_VAZIO_DEFINITION."
+  ],
+  "f_gap": [
+    "Provider-wide exhaustive inventory remains unproven.",
+    "Atlas immutability invariant I1 remains open.",
+    "Server-side merge enforcement on main remains blocked.",
+    "Physical-device runtime, producer-specific execution and independent scientific replication remain open.",
+    "NOVOexport token occurrence +1 root cause remains TOKEN_VAZIO."
+  ],
+  "f_next": [
+    "P0 integrity: reproduce off-by-one -> resolve shard 018 -> close chunk lineage.",
+    "P0 security: remediate sensitive-data/secret/signature gaps with post-remediation receipts.",
+    "P0 governance: append Atlas immutability errata and establish server-side required enforcement.",
+    "P0 runtime: close BLAKE3 fail-closed, Vectras rerun, physical device and Frida compile-all gates.",
+    "P0 proof: refine BUG-02 falsifiers and obtain RLL owner-source plus independent replication."
+  ]
+}
