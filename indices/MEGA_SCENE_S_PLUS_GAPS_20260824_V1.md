@@ -43,47 +43,47 @@ O delta append-only de `2026-08-24` registra **20 entradas novas/explicitadas** 
 
 ### A. Integridade e identidade
 
-1. `TV-TOKEN-OCCURRENCE-OFFBY1` — `TOKEN_VAZIO_ROOT_CAUSE`
-   - 44.185.627 detalhado vs 44.185.626 agregado histórico.
-   - Não corrigir número manualmente.
-   - Gate: reproduzir caminho de agregação e emitir receipt.
+- `TV-TOKEN-OCCURRENCE-OFFBY1` — `TOKEN_VAZIO_ROOT_CAUSE`
+  - 44.185.627 detalhado vs 44.185.626 agregado histórico.
+  - Não corrigir número manualmente.
+  - Gate: reproduzir caminho de agregação e emitir receipt.
 
-2. `TV-RAW-018-CURRENT-ID` — `TOKEN_VAZIO`
-   - Gate: fechar provider/source identity + hash.
+- `TV-RAW-018-CURRENT-ID` — `TOKEN_VAZIO`
+  - Gate: fechar provider/source identity + hash.
 
-3. `TV-DATA-CHUNK-LINEAGE` — `TOKEN_VAZIO`
-   - Gate: `raw → shard → conversation → node/message → chunk/file → digest → receipt`.
+- `TV-DATA-CHUNK-LINEAGE` — `TOKEN_VAZIO`
+  - Gate: `raw → shard → conversation → node/message → chunk/file → digest → receipt`.
 
 ### B. Segurança
 
-4. `TV-ACCESS-1-SENSITIVE-DATA` — `FAIL_USEFUL`
-   - Falsificador funcionou; não converter FAIL em PASS.
-   - Gate: remediação + rerun + receipt pós-remediação.
+- `TV-ACCESS-1-SENSITIVE-DATA` — `FAIL_USEFUL`
+  - Falsificador funcionou; não converter FAIL em PASS.
+  - Gate: remediação + rerun + receipt pós-remediação.
 
-5. `GAP-FCEA-SECRET-001` — evidência de remediação aberta.
-6. `GAP-FEDERATED-BROKER-PROVENANCE-SIGNATURE` — near-miss; verifier criptográfico fail-closed pendente.
+- `GAP-FCEA-SECRET-001` — evidência de remediação aberta.
+- `GAP-FEDERATED-BROKER-PROVENANCE-SIGNATURE` — near-miss; verifier criptográfico fail-closed pendente.
 
 ### C. Governança/proveniência
 
-7. `GAP-ATLAS-COMPLETION-MARKER-IMMUTABILITY` — `BLOCKED`.
-8. `GAP-MAIN-SERVER-MERGE-ENFORCEMENT` — `BLOCKED`; `main` observado sem enforcement obrigatório.
-9. `GAP-FCEA-CANONICALITY-001` — canonicalidade/supersessão ainda não provada.
-10. `TOKEN_VAZIO_OC94_017_094` — 78 identidades ainda não individualizadas.
-11. `GAP-META-INVENTORY-001` — cobertura provider-wide permanece aberta.
-12. `MISSING_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT` — estado atual não reconciliado neste turno.
-13. `TOKEN_VAZIO_TERMUX_ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_CLOSURE_RECEIPT` — dívida de linguagem absoluta não provada como zerada.
+- `GAP-ATLAS-COMPLETION-MARKER-IMMUTABILITY` — `BLOCKED`.
+- `GAP-MAIN-SERVER-MERGE-ENFORCEMENT` — `BLOCKED`; `main` observado sem enforcement obrigatório.
+- `GAP-FCEA-CANONICALITY-001` — canonicalidade/supersessão ainda não provada.
+- `TOKEN_VAZIO_OC94_017_094` — 78 identidades ainda não individualizadas.
+- `GAP-META-INVENTORY-001` — cobertura provider-wide permanece aberta.
+- `MISSING_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT` — estado atual não reconciliado neste turno.
+- `TOKEN_VAZIO_TERMUX_ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_CLOSURE_RECEIPT` — dívida de linguagem absoluta não provada como zerada.
 
 ### D. Runtime/implementação
 
-14. `BUG-07-BLAKE3-GATE-ENFORCEMENT` — mismatch ainda sem fail-closed comprovado.
-15. `GAP-CYCLE6-PHYSICAL-DEVICE-EVIDENCE` — device físico continua necessário.
-16. `GAP-VECTRAS-RUNTIME-BOOTSTRAP-RERUN` — post-check físico pendente.
-17. `GAP-FRIDA-DESKTOP-COMPILE-ALL-TARGETS` — producer compile-all-targets pendente.
+- `BUG-07-BLAKE3-GATE-ENFORCEMENT` — mismatch ainda sem fail-closed comprovado.
+- `GAP-CYCLE6-PHYSICAL-DEVICE-EVIDENCE` — device físico continua necessário.
+- `GAP-VECTRAS-RUNTIME-BOOTSTRAP-RERUN` — post-check físico pendente.
+- `GAP-FRIDA-DESKTOP-COMPILE-ALL-TARGETS` — producer compile-all-targets pendente.
 
 ### E. Ciência/prova
 
-18. `BUG-02-PROOF-REFINEMENT` — F1/F2 PASS; F3/F4 FAIL; bloqueado por refinamento.
-19. `TOKEN_VAZIO_RLL_FRESH_OWNER_SOURCE_AND_REPLICATION` — owner source + replicação independente pendentes.
+- `BUG-02-PROOF-REFINEMENT` — F1/F2 PASS; F3/F4 FAIL; bloqueado por refinamento.
+- `TOKEN_VAZIO_RLL_FRESH_OWNER_SOURCE_AND_REPLICATION` — owner source + replicação independente pendentes.
 
 ## P1 — alta prioridade
 
