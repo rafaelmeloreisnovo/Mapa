@@ -1,0 +1,35 @@
+name: novoexport-raw048-050-wave3
+
+on:
+  pull_request:
+    paths:
+      - "data/evidence/novoexport_raw048_050_wave3_20260824.v1.json"
+      - "tools/validate_novoexport_raw048_050_wave3.py"
+      - "indices/NOVOEXPORT_RAW048_050_WAVE3_20260824_V1.md"
+      - ".github/workflows/novoexport-raw048-050-wave3.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout pinned action
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile validator
+        run: python3 -m py_compile tools/validate_novoexport_raw048_050_wave3.py
+      - name: Validate evidence packet
+        run: python3 tools/validate_novoexport_raw048_050_wave3.py
+      - name: Enforce fail-closed public boundary
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('data/evidence/novoexport_raw048_050_wave3_20260824.v1.json').read_text())
+          assert data['claim_allowed'] is False
+          assert data['authority']['private_provider_locators_persisted_publicly'] is False
+          assert all(o['current_provider_object'].startswith('TOKEN_VAZIO_') for o in data['objects'])
+          print('PASS: current-provider custody remains fail-closed')
+          PY
