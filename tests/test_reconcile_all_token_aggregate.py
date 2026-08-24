@@ -3,9 +3,12 @@
 import csv
 import gzip
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tools.reconcile_all_token_aggregate import analyze
 
