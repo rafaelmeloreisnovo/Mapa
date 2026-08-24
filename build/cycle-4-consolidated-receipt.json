@@ -1,0 +1,132 @@
+{
+  "schema": "mapa.cycle-4/v1",
+  "cycle": 4,
+  "timestamp": "2026-08-24T01:22:04.182611Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "claude/urgencias-incertezas-reducao-nrov68",
+  "summary": {
+    "total_gates": 8,
+    "passed": 2,
+    "failed": 0,
+    "deferred": 6
+  },
+  "gates": {
+    "TV-CODE-1": {
+      "gate_id": "TV-CODE-1",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_lines": 0,
+      "stderr_lines": 5,
+      "timestamp": "2026-08-24T01:22:04.058344Z",
+      "title": "DAG Causal Engine",
+      "falsifiers": [
+        "DAG cannot confuse association (via confounder) with direct causal link",
+        "do-calculus must distinguish observational from interventional",
+        "Coverage: confounder, mediator, collider, instrumental, front-door"
+      ],
+      "claim_allowed": true
+    },
+    "TV-CODE-2": {
+      "gate_id": "TV-CODE-2",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_lines": 0,
+      "stderr_lines": 5,
+      "timestamp": "2026-08-24T01:22:04.182569Z",
+      "title": "Bootstrap UQ",
+      "falsifiers": [
+        "CI must contain true mean",
+        "Coverage >= 95% on holdout set",
+        "Uncertainty monotonic with sample size"
+      ],
+      "claim_allowed": true
+    },
+    "TV-TEST-1": {
+      "gate_id": "TV-TEST-1",
+      "status": "TOKEN_VAZIO",
+      "reason": "Log-log Benchmark not yet implemented",
+      "exit_code": null,
+      "timestamp": "2026-08-24T01:22:04.182584Z",
+      "title": "Log-log Benchmark",
+      "falsifiers": [
+        "Benchmark deterministic with seed=42"
+      ],
+      "claim_allowed": false
+    },
+    "TV-TEST-2": {
+      "gate_id": "TV-TEST-2",
+      "status": "TOKEN_VAZIO",
+      "reason": "Fractal Dimension Null Models not yet implemented",
+      "exit_code": null,
+      "timestamp": "2026-08-24T01:22:04.182587Z",
+      "title": "Fractal Dimension Null Models",
+      "falsifiers": [
+        "Fractal dimension within \u00b10.05 of true value"
+      ],
+      "claim_allowed": false
+    },
+    "TV-DATA-1": {
+      "gate_id": "TV-DATA-1",
+      "status": "TOKEN_VAZIO",
+      "reason": "Vector Corpus Frozen not yet implemented",
+      "exit_code": null,
+      "timestamp": "2026-08-24T01:22:04.182590Z",
+      "title": "Vector Corpus Frozen",
+      "falsifiers": [
+        "SHA-256 mismatch on any fixture => exit 1"
+      ],
+      "claim_allowed": false
+    },
+    "TV-DATA-2": {
+      "gate_id": "TV-DATA-2",
+      "status": "TOKEN_VAZIO",
+      "reason": "Calibration Weights Frozen not yet implemented",
+      "exit_code": null,
+      "timestamp": "2026-08-24T01:22:04.182592Z",
+      "title": "Calibration Weights Frozen",
+      "falsifiers": [
+        "Weights immutable in binary artifact"
+      ],
+      "claim_allowed": false
+    },
+    "TV-BOUNDARY-1": {
+      "gate_id": "TV-BOUNDARY-1",
+      "status": "TOKEN_VAZIO",
+      "reason": "Antiderivative Boundary Condition Schema not yet implemented",
+      "exit_code": null,
+      "timestamp": "2026-08-24T01:22:04.182596Z",
+      "title": "Antiderivative Boundary Condition Schema",
+      "falsifiers": [
+        "Boundary schema matches real-world constraints"
+      ],
+      "claim_allowed": false
+    },
+    "TV-ACCESS-1": {
+      "gate_id": "TV-ACCESS-1",
+      "status": "TOKEN_VAZIO",
+      "reason": "Vector Corpus Access Control not yet implemented",
+      "exit_code": null,
+      "timestamp": "2026-08-24T01:22:04.182601Z",
+      "title": "Vector Corpus Access Control",
+      "falsifiers": [
+        "No secrets exposed in manifest SHA-256"
+      ],
+      "claim_allowed": false
+    }
+  },
+  "F_ok": [
+    "TV-CODE-1 (DAG Causal): PASS - PASS",
+    "TV-CODE-2 (Bootstrap UQ): PASS - PASS"
+  ],
+  "F_gap": [
+    "TV-TEST-1: TOKEN_VAZIO",
+    "TV-TEST-2: TOKEN_VAZIO",
+    "TV-DATA-1: TOKEN_VAZIO",
+    "TV-DATA-2: TOKEN_VAZIO",
+    "TV-BOUNDARY-1: TOKEN_VAZIO",
+    "TV-ACCESS-1: TOKEN_VAZIO"
+  ],
+  "F_next": "Implement TV-TEST gates (loglog benchmark, fractal estimator) in weeks 2-3",
+  "claim_allowed": true,
+  "state": "PARTIAL_PASS"
+}
