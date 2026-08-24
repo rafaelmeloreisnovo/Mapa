@@ -1,0 +1,50 @@
+{
+  "schema": "mapa.tv-access/corpus-access-control/v1",
+  "tv_id": "TV-ACCESS-1",
+  "title": "Vector Corpus Access Control",
+  "timestamp": "2026-08-24T01:44:08.759476Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "claude/urgencias-incertezas-reducao-nrov68",
+  "exit_code": 1,
+  "passed_checks": [
+    {
+      "check": "access_control_schema_defined",
+      "description": "Corpus access control schema defined with 4 levels",
+      "status": "PASS",
+      "schema_path": "/home/user/Mapa/data/schemas/corpus_access_control.v1.json",
+      "classification_levels": [
+        "PUBLIC",
+        "INTERNAL",
+        "SENSITIVE",
+        "PRIVATE"
+      ],
+      "access_rules_count": 3
+    },
+    {
+      "check": "access_rule_enforcement",
+      "description": "Corpus access manifest created at /home/user/Mapa/data/corpus/ACCESS_MANIFEST.json",
+      "status": "PASS",
+      "manifest_version": "1.0",
+      "authorized_readers_count": 3
+    },
+    {
+      "check": "audit_trail_structure",
+      "description": "Corpus access audit trail schema defined at /home/user/Mapa/data/schemas/corpus_audit_trail.v1.json",
+      "status": "PASS",
+      "audit_path": "/home/user/Mapa/data/schemas/corpus_audit_trail.v1.json"
+    }
+  ],
+  "errors": [
+    "Falsifier ACTIVATED (secret in manifest): corpus_manifest_p0.v1.json: potential secret detected"
+  ],
+  "warnings": [],
+  "closure_criteria": [
+    "Access control schema defined with PUBLIC/INTERNAL/SENSITIVE/PRIVATE levels",
+    "Access rules enforceable via filesystem and manifest verification",
+    "No credentials or API keys embedded in access control files",
+    "Append-only audit trail schema defined and deployable"
+  ],
+  "claim_allowed": false,
+  "state": "FAIL",
+  "artifact_hash": "d48f74169e0ab41b20a9af6d103e63ee6f2b1c0b47fb15ff9c29e5337f83ee3c"
+}
