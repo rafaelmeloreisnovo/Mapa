@@ -1,0 +1,32 @@
+{
+  "schema": "RAFAELIA_RELATION_ONTOLOGY_OMEGA/V1",
+  "generated_at": "2026-08-24T04:55:00-03:00",
+  "state": "EXECUTED_STRUCTURE",
+  "claim_allowed": false,
+  "drive_doc_id": "1zBRetiSqlpgZep4OU8Qqd8-tgktVMhzGxJP2IeeBkV8",
+  "query_prefix": "REL:",
+  "edge_required_fields": ["edge_id","from","relation","to","direction","source_ref","evidence_state","confidence","temporal_scope","scale","memory_axis","falsifier","gap","receipt"],
+  "families": {
+    "identity_equivalence": ["IDENTICAL_TO","ALIAS_OF","VERSION_OF","INSTANCE_OF","MEMBER_OF","SAME_SOURCE_AS","SAME_FAMILY_AS","EQUIVALENT_UNDER","APPROXIMATES","NORMALIZES_TO"],
+    "composition_structure": ["CONTAINS","PART_OF","COMPOSES","DECOMPOSES_INTO","EMBEDS","NESTS","INTERSECTS","OVERLAPS","ADJACENT_TO","CONNECTS_TO","COUPLES_WITH","DECOUPLES_FROM"],
+    "dependency_condition": ["DEPENDS_ON","REQUIRES","ENABLES","DISABLES","CONSTRAINS","BOUNDS","PERMITS","BLOCKS","TRIGGERS","PRECONDITION_OF","SUFFICIENT_FOR","NECESSARY_FOR"],
+    "causality_influence": ["CAUSES","CONTRIBUTES_TO","INFLUENCES","MODULATES","AMPLIFIES","ATTENUATES","INHIBITS","ACCELERATES","DECELERATES","STABILIZES","DESTABILIZES","FEEDS_BACK_TO"],
+    "evidence_epistemology": ["SUPPORTS","CONTRADICTS","FALSIFIES","VERIFIES","VALIDATES","INVALIDATES","EVIDENCES","MEASURES","OBSERVES","PREDICTS","EXPLAINS","REPRODUCES","FAILS_TO_REPRODUCE","CONTROLS_FOR"],
+    "transformation": ["TRANSFORMS_TO","MAPS_TO","PROJECTS_TO","LIFTS_TO","REDUCES_TO","TRANSLATES_TO","ENCODED_AS","DECODED_FROM","DERIVES_FROM","GENERATES","COMPRESSES_TO","EXPANDS_TO"],
+    "abstraction_classification": ["GENERALIZES","SPECIALIZES","ABSTRACTS","INSTANTIATES","CLASSIFIES_AS","CLUSTERS_WITH","DISTINGUISHES_FROM","ANALOGOUS_TO","DUAL_OF","INVERSE_OF","COMPLEMENT_OF","SYMMETRIC_WITH"],
+    "temporality_evolution": ["PRECEDES","FOLLOWS","EVOLVES_TO","RECURS","PERSISTS","DECAYS","SPLITS_INTO","MERGES_WITH","MIGRATES_TO","SUPERSEDES_WITHOUT_ERASING","REVISES","CORRECTS_BY_ERRATA","ROLLS_BACK_TO"],
+    "implementation_execution": ["IMPLEMENTS","EXECUTES","COMPILES_TO","BUILDS_WITH","CALLS","READS_FROM","WRITES_TO","ROUTES_TO","INDEXES","CACHES","MATERIALIZES","EMITS_RECEIPT_FOR","VALIDATES_RUNTIME_OF"],
+    "memory_navigation": ["REMEMBERS","RECONSTRUCTS","REFERENCES","LINKS_TO","CATALOGS","LOCATES","TAGS","RESOLVES_TO","SUMMARIZES","CHUNKS","RETRIEVES","FEDERATES_WITH"],
+    "security_risk_governance": ["OWNS","AUTHORIZES","GOVERNS","LICENSES","CUSTODIES","EXPOSES","PROTECTS","RISKS","MITIGATES","ADAPTS_TO","RECOVERS_FROM","ROLLS_BACK","DENIES","ALLOWS"],
+    "transversality_opportunity": ["BRIDGES","TRANSFERS_TO","APPLIES_TO","REUSES_METHOD_FROM","SHARES_INVARIANT_WITH","SYNERGIZES_WITH","ANTAGONIZES","CONVERGES_WITH","DIVERGES_FROM","SCALES_TO","EMERGES_FROM","OPENS_OPPORTUNITY_FOR"]
+  },
+  "states": ["OBSERVED_LITERAL","OBSERVED_RELATION","MEASURED","EXECUTED","VERIFIED","HYPOTHESIS","CONTRADICTED","TOKEN_VAZIO"],
+  "rules": [
+    "relation without source_ref is not promoted",
+    "CAUSES requires stronger evidence than association/correlation",
+    "ANALOGOUS_TO never implies IDENTICAL_TO",
+    "aliases/mirrors do not create independent evidence",
+    "relations may be directed and asymmetric",
+    "materialized edges preserve predecessor and receipt"
+  ]
+}
