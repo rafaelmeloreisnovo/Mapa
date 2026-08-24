@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NOVOEXPORT_REVIEW_ERRATA_20260824_V1",
+  "status": "REVIEW_EXECUTED_PRIVATE_EVIDENCE_PUBLIC_SAFE",
+  "claim_allowed": false,
+  "policy": [
+    "APPEND_ONLY",
+    "PROVENANCE_FIRST",
+    "TOKEN_VAZIO_VALID",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+  ],
+  "bootstrap": {
+    "path": "bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md",
+    "blob_sha": "2fdb05b786f1d42db12182bc4e7023a28499cb46"
+  },
+  "scope": "Google Drive NOVOexport private corpus review; this file contains no private Drive object IDs or corpus content",
+  "observed": {
+    "conversation_shards": 51,
+    "raw_conversation_bytes": 1107289897,
+    "pid_sha_conversations_known": 4952,
+    "pid_sha_shards_covered": 50,
+    "message_projection_records": 91232,
+    "message_projection_conversations": 1000,
+    "relations_before_review": 26,
+    "relations_after_review": 32,
+    "literal_tokens_distinct": 675638,
+    "normalized_tokens_distinct": 612471,
+    "token_source_edges": 1245720,
+    "token_occurrences_detailed_recount": 44185627,
+    "token_occurrences_historical_aggregate": 44185626,
+    "token_occurrence_delta": 1,
+    "temp_locate_lines": 15439,
+    "temp_locate_ls_entries": 15437
+  },
+  "errata": {
+    "id": "TV-TOKEN-OCCURRENCE-OFFBY1",
+    "classification": "AGGREGATE_OFF_BY_ONE",
+    "preferred_metric_value": 44185627,
+    "evidence_basis": [
+      "sum(tokens_literal.count_total)",
+      "sum(token_source_counts.count)",
+      "sum(source_manifest.token_occurrences)"
+    ],
+    "historical_value": 44185626,
+    "root_cause": "TOKEN_VAZIO",
+    "f_next": "inspect or reproduce the indexer aggregation path; do not mutate detailed stores"
+  },
+  "non_conflict_clarification": {
+    "temp_locate_lines": 15439,
+    "temp_locate_ls_entries": 15437,
+    "note": "These are distinct metrics and must not be treated as a count conflict."
+  },
+  "active_gaps": [
+    "TV-RAW-018-CURRENT-ID",
+    "TV-MESSAGES-FULL-COVERAGE",
+    "TV-DATA-CHUNK-LINEAGE",
+    "TV-CORPUS-TOTAL-LOGICAL-UNITS",
+    "TV-TOKEN-OCCURRENCE-OFFBY1"
+  ],
+  "preferred_route_v2": "source_ref -> shard/provider -> conversation_id/PID -> node_id/message_id -> file_id/attachment_id -> record_sha256 -> literal token -> normalized token -> ngram/expression -> entity/concept -> relation/vector -> family/area -> evidence -> receipt -> gate",
+  "private_evidence_boundary": {
+    "drive_receipt": "PRIVATE_REFERENCE_OMITTED",
+    "drive_memory_event": "PRIVATE_REFERENCE_OMITTED",
+    "raw_corpus": "NOT_PUBLISHED",
+    "provider_ids": "NOT_PUBLISHED"
+  },
+  "f_ok": [
+    "post-write review completed",
+    "aggregate off-by-one isolated without changing detailed stores",
+    "current-state route v2 materialized in private index",
+    "historical records preserved"
+  ],
+  "f_gap": [
+    "off-by-one root cause not yet reproduced in indexer code",
+    "shard 018 current provider identity unresolved",
+    "message/node projection remains partial",
+    "global attachment/file and chunk lineage joins remain open"
+  ],
+  "f_next": "reproduce aggregation delta -> close shard 018 -> expand message/node projection -> materialize stable ID joins -> derive semantic/vector relations with receipts"
+}
