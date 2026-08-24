@@ -1,0 +1,101 @@
+{
+  "schema": "rafaelia.novoexport-raw018-wave2-receipt/v1",
+  "record_id": "NOVOEXPORT_RAW018_WAVE2_20260824_V1",
+  "observed_at": "2026-08-24T19:44:00-03:00",
+  "status": "MATERIALIZED_VALIDATED_PROVIDER_BYTES_PENDING",
+  "claim_allowed": false,
+  "source_base_main": "a5b08a4e6dd903afe0a3144c35cd5e67b60014fa",
+  "pull_request": 387,
+  "evidence_head": "9ba5daeb52927a66e965f58cd26adb0967916bc1",
+  "target": {
+    "path": "conversations-018.json",
+    "size_bytes": 12115336
+  },
+  "evidence": {
+    "export_manifest": {
+      "sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+      "path": "conversations-018.json",
+      "size_bytes": 12115336
+    },
+    "physical_inventory": {
+      "source": "temp.locate.txt",
+      "sha256": "7e291744e7522eeb4a4ce4f843f55ef479205de8305ac126130ff6c5631682bf",
+      "path": "conversations-018.json",
+      "size_bytes": 12115336
+    },
+    "agreement": "EXACT_PATH_AND_SIZE_MATCH"
+  },
+  "gap_transition": {
+    "gap_id": "TV-RAW-018-CURRENT-ID",
+    "from": "TOKEN_VAZIO_CURRENT_PROVIDER",
+    "to": "PARTIAL_EVIDENCED_PHYSICAL_INVENTORY_PROVIDER_UNBOUND",
+    "evidenced": [
+      "raw shard existence in observed NOVOexport export inventory",
+      "canonical raw path conversations-018.json",
+      "byte size 12115336 from two independent evidence planes"
+    ],
+    "token_vazio_remaining": [
+      "directly addressable Drive provider for the raw member",
+      "recoverable raw byte stream",
+      "raw member SHA-256",
+      "JSON parse/cardinality",
+      "exact conversation/PID set"
+    ]
+  },
+  "workflow_evidence": {
+    "raw018_gate": {
+      "run_id": 32785907507,
+      "run_number": 1,
+      "conclusion": "success"
+    },
+    "general_ci": {
+      "run_id": 32785907491,
+      "run_number": 1701,
+      "conclusion": "success"
+    },
+    "branch_topology": {
+      "run_id": 32785907489,
+      "run_number": 833,
+      "conclusion": "success"
+    },
+    "promotion_control": {
+      "run_id": 32785907495,
+      "run_number": 951,
+      "conclusion": "failure",
+      "independent_blocker": "ATLAS completion marker immutability invariant I1",
+      "independent_of_raw018_wave": true
+    },
+    "server_merge_enforcement": {
+      "run_id": 32785907475,
+      "run_number": 230,
+      "conclusion": "failure",
+      "independent_blocker": "live main server-side required enforcement not observed",
+      "independent_of_raw018_wave": true
+    }
+  },
+  "drive_longitudinal_mirror": {
+    "state": "WRITTEN",
+    "private_locator_persisted_publicly": false,
+    "title": "RAFAELIA — NOVOexport Raw 018 Wave 2 — Physical Inventory & Provider Gap — 2026-08-24"
+  },
+  "anti_regression": [
+    "MESSAGES-00018.jsonl.txt must not substitute conversations-018.json.",
+    "DERIVED_ORDINAL != RAW_SOURCE_ORDINAL.",
+    "Inventory evidence does not fabricate a direct provider ID.",
+    "Existence/path/size evidence does not fabricate raw SHA/PID evidence."
+  ],
+  "f_ok": [
+    "Raw shard 018 existence, raw path and byte size are evidenced by two independent NOVOexport planes.",
+    "Dedicated raw018 gate, general CI and Branch Topology passed.",
+    "Drive longitudinal mirror is written."
+  ],
+  "f_gap": [
+    "Direct raw provider remains unbound.",
+    "Raw byte stream, raw SHA-256, parse result and PID set remain TOKEN_VAZIO.",
+    "Independent Atlas I1 and server enforcement governance gaps remain open."
+  ],
+  "f_next": [
+    "Locate original export container/provider and recover exact conversations-018.json bytes.",
+    "Verify 12115336 bytes, compute SHA-256, parse fail-closed, enumerate PIDs, emit byte-level receipt."
+  ]
+}
