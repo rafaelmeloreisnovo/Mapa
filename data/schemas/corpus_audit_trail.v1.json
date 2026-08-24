@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "type": "corpus_access_audit_trail",
+  "entries": [
+    {
+      "timestamp": "ISO8601",
+      "accessor": "agent_id or user_id (never secrets)",
+      "resource": "filename_or_resource_id",
+      "action": "read|write|delete|share",
+      "classification": "PUBLIC|INTERNAL|SENSITIVE|PRIVATE",
+      "status": "allowed|denied",
+      "reason": "authorization_reason_if_denied"
+    }
+  ],
+  "immutability": "entries are append-only; no deletion or modification",
+  "retention": "keep indefinitely for compliance"
+}

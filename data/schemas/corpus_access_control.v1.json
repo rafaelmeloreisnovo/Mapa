@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "type": "vector_corpus_access_control",
+  "description": "Access control and security rules for frozen vector corpus",
+  "classification_levels": {
+    "PUBLIC": {
+      "description": "Corpus data publishable in academic/open contexts",
+      "restrictions": [],
+      "audience": "unrestricted"
+    },
+    "INTERNAL": {
+      "description": "Corpus data for authorized team/project members only",
+      "restrictions": [
+        "no external sharing",
+        "audit logging required"
+      ],
+      "audience": "authenticated_team"
+    },
+    "SENSITIVE": {
+      "description": "User-derived data or privacy-related corpus segments",
+      "restrictions": [
+        "encryption required",
+        "access log mandatory",
+        "redact PII"
+      ],
+      "audience": "authorized_researchers"
+    },
+    "PRIVATE": {
+      "description": "Unreleased or confidential data",
+      "restrictions": [
+        "access denied except by explicit approval"
+      ],
+      "audience": "owners_only"
+    }
+  },
+  "access_rules": [
+    {
+      "resource": "vector_corpus_v1.bin",
+      "classification": "INTERNAL",
+      "access_granted_to": [
+        "mapa",
+        "termux-app-rafacodephi",
+        "rafpolimata"
+      ],
+      "audit_required": true
+    },
+    {
+      "resource": "embeddings_reference.txt",
+      "classification": "INTERNAL",
+      "access_granted_to": [
+        "scientific_validation",
+        "reproducibility"
+      ],
+      "audit_required": true
+    },
+    {
+      "resource": "calibration_data.csv",
+      "classification": "SENSITIVE",
+      "access_granted_to": [
+        "authorized_researchers_only"
+      ],
+      "audit_required": true,
+      "redaction_rules": "remove user_id, session_id, timestamp"
+    }
+  ],
+  "enforcement_mechanisms": [
+    "File permissions (600 on SENSITIVE, 640 on INTERNAL)",
+    "Access log in auditoria/access_trail.json",
+    "Hash verification before grant",
+    "Automatic expiry after 90 days without revalidation"
+  ]
+}

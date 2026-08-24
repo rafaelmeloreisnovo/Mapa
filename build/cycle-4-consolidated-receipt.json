@@ -1,14 +1,14 @@
 {
   "schema": "mapa.cycle-4/v1",
   "cycle": 4,
-  "timestamp": "2026-08-24T01:37:38.248032Z",
+  "timestamp": "2026-08-24T01:44:46.374672Z",
   "repository": "rafaelmeloreisnovo/Mapa",
   "branch": "claude/urgencias-incertezas-reducao-nrov68",
   "summary": {
     "total_gates": 8,
-    "passed": 5,
-    "failed": 1,
-    "deferred": 2
+    "passed": 6,
+    "failed": 2,
+    "deferred": 0
   },
   "gates": {
     "TV-CODE-1": {
@@ -17,7 +17,7 @@
       "exit_code": 0,
       "stdout_lines": 0,
       "stderr_lines": 5,
-      "timestamp": "2026-08-24T01:37:37.892083Z",
+      "timestamp": "2026-08-24T01:44:45.930416Z",
       "title": "DAG Causal Engine",
       "falsifiers": [
         "DAG cannot confuse association (via confounder) with direct causal link",
@@ -32,7 +32,7 @@
       "exit_code": 0,
       "stdout_lines": 0,
       "stderr_lines": 5,
-      "timestamp": "2026-08-24T01:37:38.054562Z",
+      "timestamp": "2026-08-24T01:44:46.129655Z",
       "title": "Bootstrap UQ",
       "falsifiers": [
         "CI must contain true mean",
@@ -47,7 +47,7 @@
       "exit_code": 0,
       "stdout_lines": 3,
       "stderr_lines": 0,
-      "timestamp": "2026-08-24T01:37:38.124735Z",
+      "timestamp": "2026-08-24T01:44:46.187702Z",
       "title": "Log-log Benchmark",
       "falsifiers": [
         "Benchmark deterministic with seed=42"
@@ -60,7 +60,7 @@
       "exit_code": 1,
       "stdout_lines": 3,
       "stderr_lines": 0,
-      "timestamp": "2026-08-24T01:37:38.176397Z",
+      "timestamp": "2026-08-24T01:44:46.239310Z",
       "title": "Fractal Dimension Null Models",
       "falsifiers": [
         "Fractal dimension within \u00b10.05 of true value"
@@ -73,7 +73,7 @@
       "exit_code": 0,
       "stdout_lines": 3,
       "stderr_lines": 0,
-      "timestamp": "2026-08-24T01:37:38.215255Z",
+      "timestamp": "2026-08-24T01:44:46.275910Z",
       "title": "Vector Corpus Frozen",
       "falsifiers": [
         "SHA-256 mismatch on any fixture => exit 1"
@@ -86,7 +86,7 @@
       "exit_code": 0,
       "stdout_lines": 3,
       "stderr_lines": 0,
-      "timestamp": "2026-08-24T01:37:38.247978Z",
+      "timestamp": "2026-08-24T01:44:46.309308Z",
       "title": "Calibration Weights Frozen",
       "falsifiers": [
         "Weights immutable in binary artifact"
@@ -95,25 +95,29 @@
     },
     "TV-BOUNDARY-1": {
       "gate_id": "TV-BOUNDARY-1",
-      "status": "TOKEN_VAZIO",
-      "reason": "Antiderivative Boundary Condition Schema not yet implemented",
-      "exit_code": null,
-      "timestamp": "2026-08-24T01:37:38.248002Z",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_lines": 3,
+      "stderr_lines": 0,
+      "timestamp": "2026-08-24T01:44:46.342408Z",
       "title": "Antiderivative Boundary Condition Schema",
       "falsifiers": [
-        "Boundary schema matches real-world constraints"
+        "Boundary schema matches real-world constraints",
+        "\u03c6 \u2208 [0,1] constraint satisfied"
       ],
-      "claim_allowed": false
+      "claim_allowed": true
     },
     "TV-ACCESS-1": {
       "gate_id": "TV-ACCESS-1",
-      "status": "TOKEN_VAZIO",
-      "reason": "Vector Corpus Access Control not yet implemented",
-      "exit_code": null,
-      "timestamp": "2026-08-24T01:37:38.248012Z",
+      "status": "FAIL",
+      "exit_code": 1,
+      "stdout_lines": 3,
+      "stderr_lines": 0,
+      "timestamp": "2026-08-24T01:44:46.374640Z",
       "title": "Vector Corpus Access Control",
       "falsifiers": [
-        "No secrets exposed in manifest SHA-256"
+        "No secrets exposed in manifest SHA-256",
+        "Access control schema defines 4 classification levels"
       ],
       "claim_allowed": false
     }
@@ -127,8 +131,8 @@
     "TV-TEST-2: FAIL",
     "TV-DATA-1: PASS",
     "TV-DATA-2: PASS",
-    "TV-BOUNDARY-1: TOKEN_VAZIO",
-    "TV-ACCESS-1: TOKEN_VAZIO"
+    "TV-BOUNDARY-1: PASS",
+    "TV-ACCESS-1: FAIL"
   ],
   "F_next": "Implement TV-TEST gates (loglog benchmark, fractal estimator) in weeks 2-3",
   "claim_allowed": false,
