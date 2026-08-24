@@ -45,6 +45,7 @@ python3 -m py_compile \
   tests/test_cross_source_local_gate_contract.py \
   tests/test_cross_source_gate_evaluator.py \
   tests/test_cross_source_test_runner.py \
+  tests/test_cross_source_custody_evidence_kind_contract.py \
   tests/test_compare_cross_source_evidence.py \
   tests/test_validate_chain_of_custody.py
 
@@ -106,7 +107,7 @@ validator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(validator)
 
 ledger = root / "indices" / "CADEIA_CUSTODIA_EVENTOS.jsonl"
-count, defects = validator.validate_ledger(ledger, root)
+count, defects = validator.validate_ledger(ledger)
 report = {
     "schema_version": "rafaelia.custody-validation-report/v1",
     "ledger": ledger.relative_to(root).as_posix(),

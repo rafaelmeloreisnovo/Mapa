@@ -78,6 +78,7 @@ EVIDENCE_KINDS = {
     "measurement",
     "source",
     "review",
+    "test",
 }
 SIGMA_PHASES = {"DEFINE", "MEASURE", "ANALYZE", "IMPROVE", "CONTROL"}
 CONTROL_STATES = {"verified", "partial", "TOKEN_VAZIO"}
