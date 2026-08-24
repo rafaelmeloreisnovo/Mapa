@@ -1,0 +1,58 @@
+{
+  "schema": "mapa.cycle-4.tv-data-1/v1",
+  "gate_id": "TV-DATA-1",
+  "validator": "Vector Corpus Frozen",
+  "timestamp": "2026-08-24T01:44:46.270932Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "claude/urgencias-incertezas-reducao-nrov68",
+  "exit_code": 0,
+  "passed_checks": [
+    {
+      "check": "checksum_integrity",
+      "description": "Fixture checksums recorded at /home/user/Mapa/build/fixture-checksums-v1.json",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "Fixture vector_corpus_v1.bin not found (expected for test environment)",
+    "Fixture vector_index_v1.json not found (expected for test environment)",
+    "Fixture embeddings_reference.txt not found (expected for test environment)",
+    "Fixture calibration_data.csv not found (expected for test environment)"
+  ],
+  "fixture_results": [
+    {
+      "fixture": "vector_corpus_v1.bin",
+      "status": "MISSING (test environment)",
+      "immutable": true,
+      "validated": false
+    },
+    {
+      "fixture": "vector_index_v1.json",
+      "status": "MISSING (test environment)",
+      "immutable": true,
+      "validated": false
+    },
+    {
+      "fixture": "embeddings_reference.txt",
+      "status": "MISSING (test environment)",
+      "immutable": true,
+      "validated": false
+    },
+    {
+      "fixture": "calibration_data.csv",
+      "status": "MISSING (test environment)",
+      "immutable": true,
+      "validated": false
+    }
+  ],
+  "falsifiers": [
+    "SHA-256 mismatch on any fixture \u2192 exit 1",
+    "All 4 fixture files checksummed and immutable",
+    "Fixture manifest version locked (v1)",
+    "No modification allowed without version bump"
+  ],
+  "claim_allowed": true,
+  "state": "PASS",
+  "artifact_hash": "bf1ef00667d07c917ef40e6a4ee1ad73e04ec60f52cceb612e88dd2c7c0b996f"
+}

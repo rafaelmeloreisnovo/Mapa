@@ -1,0 +1,56 @@
+{
+  "schema": "mapa.cycle-4.tv-data-2/v1",
+  "gate_id": "TV-DATA-2",
+  "validator": "Calibration Weights Frozen",
+  "timestamp": "2026-08-24T01:44:46.304332Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "claude/urgencias-incertezas-reducao-nrov68",
+  "exit_code": 0,
+  "passed_checks": [
+    {
+      "check": "weights_structure",
+      "description": "Calibration weights have required structure",
+      "status": "PASS"
+    },
+    {
+      "check": "binary_immutability",
+      "description": "Binary serialization deterministic (37 bytes)",
+      "status": "PASS"
+    },
+    {
+      "check": "binary_hash",
+      "description": "Binary artifact hash: d04171f455dd899f...",
+      "status": "PASS"
+    },
+    {
+      "check": "locked_flag",
+      "description": "Weights marked as locked (immutable)",
+      "status": "PASS"
+    },
+    {
+      "check": "normalization",
+      "description": "Weights sum to 1.000000 \u2248 1.0",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "weight_values": {
+    "entropy_weight": 0.3,
+    "coherence_weight": 0.4,
+    "convergence_weight": 0.3,
+    "normalization_factor": 1.0,
+    "version": 1,
+    "locked": true
+  },
+  "falsifiers": [
+    "Weights immutable in binary artifact",
+    "Binary serialization deterministic",
+    "Locked flag enforces immutability",
+    "Weights normalize to 1.0 \u00b1 1e-6",
+    "Version field prevents regression"
+  ],
+  "claim_allowed": true,
+  "state": "PASS",
+  "artifact_hash": "81a3d35a72d4f5a801edbc0abd0b5cb6304023e27a8804cca9784906d0a60581"
+}

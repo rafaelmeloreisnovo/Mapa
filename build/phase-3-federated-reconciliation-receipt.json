@@ -1,0 +1,114 @@
+{
+  "schema": "mapa.federated-reconciliation/v1",
+  "phase": "Phase 3 - Cross-Repository Evidence Aggregation",
+  "timestamp": "2026-08-24T01:47:05.304964Z",
+  "repositories_count": 2,
+  "repositories": [
+    "Mapa",
+    "termux-app-rafacodephi"
+  ],
+  "collected_evidence": {
+    "Mapa": {
+      "receipt_path": "/home/user/Mapa/build/cycle-4-consolidated-receipt.json",
+      "schema": "mapa.cycle-4/v1",
+      "timestamp": "2026-08-24T01:44:46.374672Z",
+      "summary": {
+        "total_gates": 8,
+        "passed": 6,
+        "failed": 2,
+        "deferred": 0
+      },
+      "gates_passed": 6,
+      "gates_failed": 2,
+      "artifact_hash": "547921b1a1f4fedd30f459f8a2f29e8ce0999e9b7fc79d462225a490c6de1bca"
+    },
+    "termux-app-rafacodephi": {
+      "bug_receipts": {
+        "BUG-02": {
+          "path": "/home/user/termux-app-rafacodephi/build/bug-02-proxy-proof-receipt.json",
+          "status": "FAIL",
+          "claim_allowed": false,
+          "timestamp": "2026-08-24T01:39:23.206184Z",
+          "errors_count": 6,
+          "artifact_hash": "98f8036079b13869d2cbdd0b8430bd208460a238bbf6f8d22354147807e3b32e"
+        },
+        "BUG-04": {
+          "path": "/home/user/termux-app-rafacodephi/build/bug-04-bootstrap-config-receipt.json",
+          "status": "PASS",
+          "claim_allowed": true,
+          "timestamp": "2026-08-24T01:41:56.666193Z",
+          "errors_count": 0,
+          "artifact_hash": "27993f48ce7bbab4d2d4fcaa5a04abd2450889062b35d0bdfaccfe4c9c9bdec5"
+        },
+        "BUG-07": {
+          "path": "/home/user/termux-app-rafacodephi/build/bug-07-blake3-validation-receipt.json",
+          "status": "FAIL",
+          "claim_allowed": false,
+          "timestamp": "2026-08-24T01:42:47.288038Z",
+          "errors_count": 1,
+          "artifact_hash": "43bc197b9c19bd77fb22e46dffe0444477904b658b6acc864412c96766e2025f"
+        },
+        "BUG-05": {
+          "path": "/home/user/termux-app-rafacodephi/build/bug-05-zr-manifest-stack-receipt.json",
+          "status": "PASS",
+          "claim_allowed": true,
+          "timestamp": "2026-08-24T01:42:22.818886Z",
+          "errors_count": 0,
+          "artifact_hash": "2e025d1bee7e77a8900a90062799560b9b97e00224c9f8675df7c7250f99438d"
+        }
+      },
+      "timestamp": "2026-08-24T01:47:05.304934Z",
+      "status": "COLLECTED"
+    }
+  },
+  "cross_repo_dependencies": {
+    "BUG-02": {
+      "producer": "termux-app-rafacodephi",
+      "scope": "Attractor #22 VOID paradox mathematical proof",
+      "blocker_for": [
+        "BUG-01",
+        "BUG-03",
+        "BUG-08"
+      ],
+      "status": "BLOCKED_ON_PROOF_REFINEMENT",
+      "expected_unblock_date": "2026-09-07"
+    },
+    "TV-CODE-1": {
+      "producer": "Mapa",
+      "scope": "DAG causal engine implementation",
+      "blocker_for": [
+        "cross-repo-inference"
+      ],
+      "status": "PASS",
+      "receipt": "Mapa:cycle-4-consolidated-receipt.json"
+    },
+    "TV-BOUNDARY-1": {
+      "producer": "Mapa",
+      "scope": "Antiderivative boundary conditions",
+      "blocker_for": [
+        "Lyapunov convergence proofs"
+      ],
+      "status": "PASS",
+      "receipt": "Mapa:tv-boundary-1-antiderivative-receipt.json"
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "validation": {
+    "coherence_check": "PASS",
+    "circular_deps_found": false,
+    "all_hashes_valid": true
+  },
+  "federation_status": "VERIFICATION_PENDING",
+  "ready_for_topology_check": true,
+  "F_ok": [
+    "Collected evidence from 2 repositories",
+    "Mapped 3 cross-repo dependencies"
+  ],
+  "F_gap": [
+    "BUG-02 still BLOCKED_ON_PROOF_REFINEMENT",
+    "Device evidence (Cycle 6) still TOKEN_VAZIO",
+    "Cross-repo topological validation pending (6 repos in TOROID)"
+  ],
+  "F_next": "Execute federation topology validator (Cycle 6)"
+}

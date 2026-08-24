@@ -1,0 +1,51 @@
+{
+  "schema": "mapa.cycle-4.tv-test-2/v1",
+  "gate_id": "TV-TEST-2",
+  "validator": "Fractal Dimension Estimator",
+  "timestamp": "2026-08-24T01:44:46.234200Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "claude/urgencias-incertezas-reducao-nrov68",
+  "exit_code": 1,
+  "passed_checks": [],
+  "errors": [
+    "Falsifier activated: 1d_uniform error 0.5910 > 0.05",
+    "Falsifier activated: 2d_uniform error 1.1457 > 0.05",
+    "Falsifier activated: 3d_uniform error 1.7170 > 0.05"
+  ],
+  "warnings": [
+    "Convergence unclear: estimates [0.7404787312226737, 0.806040677678472, 0.8392380206727964]"
+  ],
+  "test_results": [
+    {
+      "case": "1d_uniform",
+      "true_dimension": 1.0,
+      "estimated_dimension": 0.408967987525686,
+      "error": 0.591032012474314,
+      "passed": false
+    },
+    {
+      "case": "2d_uniform",
+      "true_dimension": 2.0,
+      "estimated_dimension": 0.8542886218292717,
+      "error": 1.1457113781707284,
+      "passed": false
+    },
+    {
+      "case": "3d_uniform",
+      "true_dimension": 3.0,
+      "estimated_dimension": 1.2829590964410285,
+      "error": 1.7170409035589715,
+      "passed": false
+    }
+  ],
+  "falsifiers": [
+    "Fractal dimension within \u00b10.05 of true value for null models",
+    "1D uniform data dimension \u2248 1.0",
+    "2D uniform data dimension \u2248 2.0",
+    "3D uniform data dimension \u2248 3.0",
+    "Dimension estimates converge with increasing sample size"
+  ],
+  "claim_allowed": false,
+  "state": "FAIL",
+  "artifact_hash": "933dd8ffb1b866ff6871f7b10d0d59f4e32c369326ba03e52eb106a2e883df54"
+}

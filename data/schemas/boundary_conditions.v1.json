@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "type": "antiderivative_boundary_conditions",
+  "description": "Boundary conditions for RL convergence proofs",
+  "fields": [
+    {
+      "name": "x_min",
+      "type": "float",
+      "description": "Lower bound of state space",
+      "constraint": "x_min < x_max"
+    },
+    {
+      "name": "x_max",
+      "type": "float",
+      "description": "Upper bound of state space",
+      "constraint": "x_max > x_min"
+    },
+    {
+      "name": "derivative_order",
+      "type": "int",
+      "description": "Order of derivative (1=first, 2=second, etc)",
+      "constraint": "derivative_order >= 1"
+    },
+    {
+      "name": "continuity_class",
+      "type": "string",
+      "description": "C^n continuity class",
+      "allowed_values": [
+        "C0",
+        "C1",
+        "C2",
+        "Cinf"
+      ]
+    },
+    {
+      "name": "boundary_type",
+      "type": "string",
+      "description": "Dirichlet, Neumann, Robin, or periodic",
+      "allowed_values": [
+        "dirichlet",
+        "neumann",
+        "robin",
+        "periodic"
+      ]
+    },
+    {
+      "name": "boundary_value",
+      "type": "float",
+      "description": "Value at boundary (Dirichlet) or derivative (Neumann)"
+    }
+  ],
+  "validations": [
+    "All float fields must be finite (not inf/nan)",
+    "State space bounds must define non-zero interval",
+    "Continuity class must match derivative order",
+    "Boundary type determines value interpretation"
+  ]
+}
