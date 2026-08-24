@@ -1,0 +1,53 @@
+name: novoexport-all-token-integrity-wave1
+
+on:
+  pull_request:
+    paths:
+      - "tools/reconcile_all_token_aggregate.py"
+      - "tests/test_reconcile_all_token_aggregate.py"
+      - "data/evidence/novoexport_all_token_integrity_wave1_20260824.v1.json"
+      - "indices/NOVOEXPORT_ALL_TOKEN_INTEGRITY_WAVE1_20260824_V1.md"
+      - ".github/workflows/novoexport-all-token-integrity-wave1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout pinned commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Compile reconciler
+        run: python3 -m py_compile tools/reconcile_all_token_aggregate.py tests/test_reconcile_all_token_aggregate.py
+
+      - name: Run deterministic fixtures
+        run: python3 tests/test_reconcile_all_token_aggregate.py
+
+      - name: Validate public evidence boundary
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("data/evidence/novoexport_all_token_integrity_wave1_20260824.v1.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          assert data["claim_allowed"] is False
+          assert data["off_by_one"]["current_state"] == "PARTIAL_EVIDENCED_MANIFEST_AGGREGATE_DRIFT"
+          r = data["off_by_one"]["reproduction"]
+          assert r["tokens_literal"]["sum_count_total"] == 44185627
+          assert r["token_source_counts"]["sum_count"] == 44185627
+          assert r["source_manifest"]["sum_token_occurrences"] == 44185627
+          assert r["manifest_embedded_source_manifest"]["sum_token_occurrences"] == 44185627
+          assert r["manifest_scalar"]["value"] == 44185626
+          assert r["manifest_scalar_delta_vs_detailed"] == -1
+          assert r["per_literal_mismatches"] == 0
+          assert r["per_source_mismatches"] == 0
+          assert data["off_by_one"]["not_yet_evidenced"].startswith("The generator")
+          assert data["shard_018"]["state"] == "TOKEN_VAZIO_CURRENT_PROVIDER"
+          assert data["chunk_lineage"]["state"] == "TOKEN_VAZIO_GLOBAL_LINEAGE"
+          assert data["authority"]["private_locators_persisted_publicly"] is False
+          print("PASS: public evidence boundary and typed gaps preserved")
+          PY
