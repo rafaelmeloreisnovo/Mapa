@@ -1,0 +1,133 @@
+{
+  "schema": "rafaelia.novoexport-all-token-integrity-wave1-receipt/v1",
+  "record_id": "NOVOEXPORT_ALL_TOKEN_INTEGRITY_WAVE1_20260824_V1",
+  "observed_at": "2026-08-24T19:34:00-03:00",
+  "status": "IMPLEMENTATION_MERGED_CUSTODY_RECEIPT_PENDING_PROMOTION_GOVERNANCE",
+  "claim_allowed": false,
+  "source_base_main": "47a2a4235d25c7912b7cf9581ff932bb6012ced6",
+  "source_pull_request": 384,
+  "source_evidence_head": "e8c342dbd62603d859b11c3779f4b940aa564c93",
+  "source_merge_commit": "a5b08a4e6dd903afe0a3144c35cd5e67b60014fa",
+  "custody_branch": "chatgpt/novoexport-all-token-wave1-postmerge-custody-20260824",
+  "private_artifact_identity": {
+    "private_locators_persisted_publicly": false,
+    "tokens_literal_sha256": "24a358786fba54a3b5174aaa8b4fa294901da8db5c7dbccf8cc3c29769c9afdc",
+    "token_source_counts_sha256": "85264d118e85ec8df3679725a16eccff9ee7d99528731bf8e57acf15883c3be3",
+    "source_manifest_sha256": "d88d259eccd53d42c03fd31b498238e8f213207fe8dac1747e2df1aa67a5e3f3",
+    "manifest_json_sha256": "87dad16a9883247e28769073dd61de5344847e1a13b737f21b04b1972f0c5f7b"
+  },
+  "reproduction": {
+    "tokens_literal_sum_count_total": 44185627,
+    "token_source_counts_sum_count": 44185627,
+    "source_manifest_sum_token_occurrences": 44185627,
+    "embedded_source_manifest_sum": 44185627,
+    "manifest_token_occurrences_total_raw": 44185626,
+    "manifest_delta_vs_detailed": -1,
+    "per_literal_mismatches": 0,
+    "per_source_mismatches": 0,
+    "embedded_source_mismatches": 0,
+    "classification": "MANIFEST_AGGREGATE_DRIFT",
+    "generator_root_cause": "TOKEN_VAZIO_NOT_LOCATED"
+  },
+  "gap_transitions": [
+    {
+      "gap_id": "TV-TOKEN-OCCURRENCE-OFFBY1",
+      "state": "PARTIAL_EVIDENCED_MANIFEST_AGGREGATE_DRIFT",
+      "closed_dimension": "Artifact-level location of the -1 discrepancy is evidenced.",
+      "open_dimension": "Generator code/execution path remains TOKEN_VAZIO_NOT_LOCATED."
+    },
+    {
+      "gap_id": "TV-RAW-018-CURRENT-ID",
+      "state": "TOKEN_VAZIO_CURRENT_PROVIDER",
+      "closed_dimension": "Historical identity and anti-substitution boundary are preserved.",
+      "open_dimension": "Current provider_id, bytes, SHA-256, JSON parse and PID set remain unresolved."
+    },
+    {
+      "gap_id": "TV-DATA-CHUNK-LINEAGE",
+      "state": "TOKEN_VAZIO_GLOBAL_LINEAGE",
+      "closed_dimension": "Required stable-ID lineage dimensions are explicitly typed.",
+      "open_dimension": "Global source/conversation/message-node/file/chunk joins remain unresolved."
+    }
+  ],
+  "drive_longitudinal_mirror": {
+    "state": "WRITTEN",
+    "document_reference": "PRIVATE_REFERENCE_OMITTED_FROM_PUBLIC_RECEIPT",
+    "revision_reference": "PRIVATE_REFERENCE_OMITTED_FROM_PUBLIC_RECEIPT",
+    "boundary": "Private provider locators remain in Drive; public GitHub persists only hashes and scoped state."
+  },
+  "premerge_workflow_evidence": {
+    "dedicated_integrity_gate": {
+      "run_id": 32784879624,
+      "run_number": 2,
+      "conclusion": "success",
+      "steps": {
+        "compile_reconciler": "success",
+        "deterministic_fixtures": "success",
+        "public_evidence_boundary": "success"
+      }
+    },
+    "general_ci": {
+      "run_id": 32784879652,
+      "run_number": 1691,
+      "conclusion": "success"
+    },
+    "branch_topology_gate": {
+      "run_id": 32784879603,
+      "run_number": 825,
+      "conclusion": "success"
+    },
+    "promotion_control": {
+      "run_id": 32784927385,
+      "run_number": 943,
+      "conclusion": "failure",
+      "scope_result": "14_OF_15_INVARIANTS_PASS",
+      "blocking_invariant": "I1",
+      "blocking_observation": "ATLAS_COMPLETION_MARKER_20260824.v1.json missing immutability marker",
+      "independent_of_all_token_wave": true,
+      "promotion_allowed": false
+    },
+    "server_merge_enforcement": {
+      "run_id": 32784879570,
+      "run_number": 222,
+      "conclusion": "failure",
+      "fixture_steps": "success",
+      "blocking_step": "Inspect live main branch server-side enforcement",
+      "observed_main_at_gate": "required server-side enforcement not observed",
+      "independent_of_all_token_wave": true,
+      "promotion_allowed": false
+    }
+  },
+  "postmerge_observation": {
+    "main_commit": "a5b08a4e6dd903afe0a3144c35cd5e67b60014fa",
+    "source_pr_merged": true,
+    "source_pr_merged_at": "2026-08-24T22:29:49Z",
+    "main_protected_observed": false,
+    "required_status_checks_enforcement_observed": "off",
+    "custody_receipt_rule": "This receipt records evidence/custody; it does not widen scientific or semantic claims."
+  },
+  "anti_regression": [
+    "Frozen V1 stores and manifest are not rewritten in place.",
+    "Manifest scalar drift is not repaired by mutating detailed stores.",
+    "Artifact localization does not imply generator causality.",
+    "Derived ordinal does not substitute raw shard identity.",
+    "No-result search does not prove provider/file absence.",
+    "Prototype chunk trees do not prove full-corpus lineage."
+  ],
+  "f_ok": [
+    "Source implementation/evidence PR #384 is merged into main at a5b08a4e6dd903afe0a3144c35cd5e67b60014fa.",
+    "All four detailed count planes agree at 44,185,627 while the frozen manifest scalar is 44,185,626.",
+    "Dedicated integrity gate, general CI and branch topology passed before merge.",
+    "Drive longitudinal mirror is written with private provider identity and public-safe GitHub boundary."
+  ],
+  "f_gap": [
+    "Generator root cause remains TOKEN_VAZIO_NOT_LOCATED.",
+    "Raw shard 018 current provider remains TOKEN_VAZIO_CURRENT_PROVIDER.",
+    "Global chunk lineage remains TOKEN_VAZIO_GLOBAL_LINEAGE.",
+    "Atlas immutability and server enforcement remain independent promotion/governance gaps."
+  ],
+  "f_next": [
+    "Locate/reexecute generator path for token_occurrences_total_raw; create V2/errata only with differential evidence.",
+    "Resume raw018 recovery from the preserved bounded source-path cursor.",
+    "Materialize stable-ID conversation/message-node/file/chunk lineage and per-edge receipts."
+  ]
+}
