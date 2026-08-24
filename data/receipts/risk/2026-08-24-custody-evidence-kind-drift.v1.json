@@ -1,0 +1,72 @@
+{
+  "schema": "rafaelia.risk-receipt/v1",
+  "receipt_id": "RISK-20260824T222504Z-CUSTODY-EVIDENCE-KIND-DRIFT",
+  "observed_at_utc": "2026-08-24T22:25:04Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "chatgpt/risk-ledger-canonical-alignment-20260824",
+  "pull_request": 382,
+  "state": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "risk_class": "R4",
+  "scope": "canonical chain-of-custody evidence-kind compatibility",
+  "sources": [
+    {
+      "path": "schemas/cadeia_custodia_evento.schema.json",
+      "blob_sha": "80da576d28cc400681b55d852d65a3e95f51901b"
+    },
+    {
+      "path": "scripts/validate_chain_of_custody.py",
+      "blob_sha": "f8fbc52ae4698ef73411f4ccbd8de2dd3cd3135e"
+    },
+    {
+      "path": "indices/CADEIA_CUSTODIA_EVENTOS.jsonl",
+      "blob_sha": "7861ba1b860fba68ec90d38dd669992796e02b9f"
+    }
+  ],
+  "observation": {
+    "event_id": "COC-20260724T201318Z-PR48_SEMANTIC_BINDING_TOKEN_VAZIO",
+    "field": "evidence[3].kind",
+    "observed_value": "test",
+    "schema_allowed_values": [
+      "commit",
+      "file",
+      "hash",
+      "log",
+      "measurement",
+      "source",
+      "review"
+    ],
+    "validator_accepts_observed_value": false,
+    "declared_event_hash_sha256": "4d0974915a1eb91f093a4a21733d24febba0e37391f2021d50df2fe86fd82312",
+    "recalculated_event_hash_sha256": "4d0974915a1eb91f093a4a21733d24febba0e37391f2021d50df2fe86fd82312",
+    "hash_matches": true
+  },
+  "preceding_event": {
+    "event_id": "COC-20260724T200101Z-PR48_HARDENING_TOKEN_VAZIO",
+    "declared_event_hash_sha256": "ef78bb4a6f3626cc37d4019494e8aa566de86c0de63ec01d11a1fe019190ff22",
+    "recalculated_event_hash_sha256": "ef78bb4a6f3626cc37d4019494e8aa566de86c0de63ec01d11a1fe019190ff22",
+    "hash_matches": true
+  },
+  "risk": "Appending a new custody event while the immediately preceding ledger event is rejected by the current validator would preserve a structurally failing ledger and may create a false chain anchor.",
+  "controls_applied": [
+    "no historical ledger line rewritten",
+    "no new custody event appended behind an invalid anchor",
+    "claim_allowed remains false",
+    "gap materialized as a versioned receipt",
+    "canonical schema, validator and ledger blob SHAs captured"
+  ],
+  "candidate_remediation": [
+    "decide whether evidence kind 'test' is a canonical evidence category",
+    "if yes, add 'test' to both schema and validator in one isolated change",
+    "add regression coverage proving 'test' is accepted and unknown kinds remain rejected",
+    "run the complete chain-of-custody validator against the full ledger",
+    "only after a clean validation append the next custody event"
+  ],
+  "forbidden_shortcuts": [
+    "do not silently rewrite the historical event",
+    "do not point a new event at an event rejected by the validator",
+    "do not widen the schema without matching validator and regression coverage",
+    "do not promote this receipt to evidence of runtime execution"
+  ],
+  "next_verifiable_step": "Resolve the evidence-kind contract drift with schema + validator + regression parity, validate the full custody ledger, then append a canonical custody event linked to the immediately preceding valid event."
+}
