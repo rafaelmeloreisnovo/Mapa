@@ -1,0 +1,34 @@
+{
+  "schema": "RAFAELIA_ATLAS_MEMORY_FEDERATION/V1",
+  "generated_at": "2026-08-24T04:55:00-03:00",
+  "state": "EXECUTED_STRUCTURE",
+  "claim_allowed": false,
+  "surfaces": [
+    {
+      "id":"DRIVE_ATLAS",
+      "role":"EDITORIAL_CATALOG_AND_MEMORY",
+      "locator":"drive:1yqrafV9KvQ2C-wz8nDCrYeVEyQo_TdQZ",
+      "contains":["START_HERE","LONGITUDINAL","ORTHOGONAL","TRANSVERSAL","THEME_CATALOG","RELATION_ONTOLOGY","SCALE_ATLAS","ROUTE_MANUALS","EVIDENCE_GATES","RECEIPTS","LEARNING_DELTAS"]
+    },
+    {
+      "id":"MAPA",
+      "role":"PUBLIC_SAFE_ONTOLOGY_ROUTING_GAPS_RECEIPTS",
+      "locator":"github:rafaelmeloreisnovo/Mapa/pull/377",
+      "branch":"chatgpt/atlas-rotas-catalogo-omega-20260824"
+    },
+    {
+      "id":"PRIVATE_MEMORY_BRIDGE",
+      "role":"PRIVATE_METADATA_MEMORY_INDEX_ROUTING",
+      "locator":"github:rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE/pull/48",
+      "branch":"chatgpt/atlas-triaxial-memory-20260824"
+    }
+  ],
+  "relations": [
+    {"from":"DRIVE_ATLAS","type":"EDITORIAL_AUTHORITY_FOR","to":"PRIVATE_MEMORY_BRIDGE","evidence_state":"MATERIALIZED"},
+    {"from":"PRIVATE_MEMORY_BRIDGE","type":"ROUTES_PUBLIC_SAFE_TO","to":"MAPA","evidence_state":"MATERIALIZED"},
+    {"from":"MAPA","type":"CATALOGS_AND_ROUTES","to":"DRIVE_ATLAS","evidence_state":"MATERIALIZED"}
+  ],
+  "memory_axes": ["LONGITUDINAL","ORTHOGONAL","TRANSVERSAL"],
+  "privacy_invariant":"private bodies/localizers are not copied to public Mapa",
+  "append_only": true
+}
