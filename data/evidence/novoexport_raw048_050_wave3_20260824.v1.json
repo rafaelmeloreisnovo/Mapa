@@ -1,0 +1,109 @@
+{
+  "schema": "rafaelia.novoexport-raw048-050-wave3/v1",
+  "record_id": "NOVOEXPORT_RAW048_050_WAVE3_20260824_V1",
+  "observed_at": "2026-08-24T19:58:00-03:00",
+  "state": "PARTIAL_EVIDENCED_HISTORICAL_BYTES_CURRENT_PROVIDER_UNBOUND",
+  "claim_allowed": false,
+  "authority": {
+    "historical_metrics_alias": "RAFAELIA_METRICS_STAGE1_CONVERSATIONS_043_050",
+    "historical_metrics_checkpoint_sha256": "d9e61977389772747dad09b90d4635cdf4649b10c74ff8c5e7a97ccd4d40cbc2",
+    "physical_inventory_alias": "NOVOEXPORT_TEMP_LOCATE",
+    "physical_inventory_sha256": "7e291744e7522eeb4a4ce4f843f55ef479205de8305ac126130ff6c5631682bf",
+    "private_provider_locators_persisted_publicly": false
+  },
+  "parser_contract": {
+    "conversation_count": "len(root_json_array)",
+    "message_count": "mapping nodes whose message.author.role is user or assistant",
+    "character_count": "sum lengths of string elements in message.content.parts only",
+    "hash": "SHA-256 over exact downloaded byte stream"
+  },
+  "objects": [
+    {
+      "file": "conversations-048.json",
+      "bytes": 36771626,
+      "physical_inventory_bytes": 36771626,
+      "size_matches": true,
+      "conversations": 100,
+      "messages": 6543,
+      "user": 518,
+      "assistant": 6025,
+      "characters": 5754181,
+      "textless": 4703,
+      "historical_download_sha256": "ed19ea07f8763a8a4d87204d80c817694ce4d6c339c71b1d2a1b955a8c125256",
+      "first_message_utc": "2026-07-10T05:15:57.715329+00:00",
+      "last_message_utc": "2026-07-27T04:19:01.796969+00:00",
+      "historical_bytes_parse": "EVIDENCED",
+      "current_provider_object": "TOKEN_VAZIO_CURRENT_PROVIDER_OBJECT",
+      "current_byte_stream": "TOKEN_VAZIO_CURRENT_BYTES",
+      "current_sha256": "TOKEN_VAZIO_CURRENT_REHASH",
+      "exact_pid_set": "TOKEN_VAZIO_PID_SET"
+    },
+    {
+      "file": "conversations-049.json",
+      "bytes": 47806754,
+      "physical_inventory_bytes": 47806754,
+      "size_matches": true,
+      "conversations": 100,
+      "messages": 7196,
+      "user": 520,
+      "assistant": 6676,
+      "characters": 5576648,
+      "textless": 5017,
+      "historical_download_sha256": "608e45449809a47f5931f86328b96dab2b2b86a5abf21a8dfe1c7da6834a2f1a",
+      "first_message_utc": "2026-07-21T12:15:49.793930+00:00",
+      "last_message_utc": "2026-08-03T02:40:50.845955+00:00",
+      "historical_bytes_parse": "EVIDENCED",
+      "current_provider_object": "TOKEN_VAZIO_CURRENT_PROVIDER_OBJECT",
+      "current_byte_stream": "TOKEN_VAZIO_CURRENT_BYTES",
+      "current_sha256": "TOKEN_VAZIO_CURRENT_REHASH",
+      "exact_pid_set": "TOKEN_VAZIO_PID_SET"
+    },
+    {
+      "file": "conversations-050.json",
+      "bytes": 17115060,
+      "physical_inventory_bytes": 17115060,
+      "size_matches": true,
+      "conversations": 54,
+      "messages": 3647,
+      "user": 239,
+      "assistant": 3408,
+      "characters": 2451412,
+      "textless": 2619,
+      "historical_download_sha256": "c5058bf25f682de12de68b54029d13b07e836cd519416752fbc5e4fa320b4979",
+      "first_message_utc": "2026-07-30T07:05:02.708726+00:00",
+      "last_message_utc": "2026-08-03T02:53:47.964760+00:00",
+      "historical_bytes_parse": "EVIDENCED",
+      "current_provider_object": "TOKEN_VAZIO_CURRENT_PROVIDER_OBJECT",
+      "current_byte_stream": "TOKEN_VAZIO_CURRENT_BYTES",
+      "current_sha256": "TOKEN_VAZIO_CURRENT_REHASH",
+      "exact_pid_set": "TOKEN_VAZIO_PID_SET"
+    }
+  ],
+  "gap_transition": {
+    "previous": "RAW048_050_CURRENT_PROVIDER_FETCH_ROUTES_AND_PIDS=TOKEN_VAZIO_HARD_CUSTODY",
+    "closed_dimensions": [
+      "raw filenames 048-050",
+      "physical/historical size identity",
+      "historical exact downloaded byte SHA-256",
+      "historical JSON parse under declared parser contract",
+      "historical root conversation cardinality",
+      "historical message/user/assistant counts"
+    ],
+    "remaining": [
+      "directly addressable current provider objects",
+      "retrievable current byte streams",
+      "current SHA-256 rehash",
+      "exact conversation_id/PID sets"
+    ]
+  },
+  "invariants": [
+    "HISTORICAL_DOWNLOADED_BYTES != CURRENT_PROVIDER_CUSTODY",
+    "HISTORICAL_SHA256 != CURRENT_REHASH_UNTIL_REOBSERVED",
+    "CONVERSATION_COUNT != PID_SET",
+    "SEARCH_MISS != ABSENCE",
+    "claim_allowed=false"
+  ],
+  "f_ok": "048-050 historical downloaded-byte hashes, parse/cardinality and physical size identity are explicitly materialized instead of remaining bundled inside a hard-custody TOKEN_VAZIO.",
+  "f_gap": "Current provider objects, current bytes/rehash and exact PID sets remain TOKEN_VAZIO.",
+  "f_next": "Recover an authoritative current provider/container route for each raw shard, stream exact bytes, rehash, fail-closed parse and enumerate exact conversation IDs without substituting derived MESSAGES artifacts."
+}
