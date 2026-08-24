@@ -1,0 +1,100 @@
+{
+  "schema": "RAFAELIA_CONVERSATION_INTERACTION_BENCHMARK/V1",
+  "benchmark_id": "BENCH-CONV-INTERACT-20260824-0001",
+  "state": "EXECUTED_LIMITED",
+  "claim_allowed": false,
+  "aggregate_fingerprint_sha256": "8ac85d03a08b2124e1702486d2ae68b8631acd50d825da9255929155096f913c",
+  "source_scope": {
+    "deep_raw_shards": "000..007",
+    "deep_raw_shard_count": 8,
+    "deep_conversations": 800,
+    "deep_bytes": 185446706,
+    "all_hashes_match_pid_index": true,
+    "global_pid_unique_conversations": 4698,
+    "global_pid_shards": 47,
+    "global_pid_shard_range": "000..047 except 018",
+    "deep_conversation_coverage_ratio_vs_pid": 0.17028522775649213
+  },
+  "volume": {
+    "mapping_nodes": 78408,
+    "messages_all_mapping": 77608,
+    "messages_canonical_path": 70403,
+    "user_canonical": 34193,
+    "assistant_canonical": 36210,
+    "canonical_words": 10978952,
+    "canonical_chars": 83725683
+  },
+  "interaction_flow": {
+    "user_to_assistant_adjacent_pairs": 33936,
+    "assistant_to_user_adjacent_pairs": 33155,
+    "user_message_followed_by_assistant_ratio": 0.9924838417219899,
+    "turn_alternation_ratio": 0.9639096015976323,
+    "same_role_user_user": 238,
+    "same_role_assistant_assistant": 2274
+  },
+  "conversation_depth": {
+    "canonical_messages_mean": 88.00375,
+    "canonical_messages_p50": 23.0,
+    "canonical_messages_p75": 88.0,
+    "canonical_messages_p95": 438.45,
+    "canonical_messages_p99": 830.36,
+    "canonical_messages_max": 1099
+  },
+  "branching": {
+    "conversations_with_branch_nodes": 391,
+    "conversations_with_branch_ratio": 0.48875,
+    "branch_nodes_total": 1717,
+    "offcanonical_messages": 7205,
+    "offcanonical_message_ratio": 0.09283836717864137,
+    "max_children_observed": 23
+  },
+  "message_size_words": {
+    "user_mean": 36.651712338782794,
+    "user_p50": 11.0,
+    "user_p95": 115.0,
+    "assistant_mean": 268.59210162938416,
+    "assistant_p50": 228.0,
+    "assistant_p95": 708.0,
+    "assistant_user_mean_ratio": 7.328227918704224,
+    "assistant_share_canonical_words": 0.8858514000243375
+  },
+  "pair_amplification": {
+    "assistant_over_user_words_p25": 6.285714285714286,
+    "assistant_over_user_words_p50": 17.605555555555554,
+    "assistant_over_user_words_p75": 46.0625,
+    "assistant_over_user_words_p95": 178.0,
+    "short_user_le10_and_assistant_ge200_pairs": 8395,
+    "short_user_le10_and_assistant_ge200_ratio": 0.24737741631305987
+  },
+  "timestamps": {
+    "conversation_create_min": "2025-02-11T21:08:06.258886-03:00",
+    "conversation_create_max": "2025-05-09T22:56:56.475604-03:00",
+    "message_activity_max": "2026-07-16T01:34:34.418841-03:00",
+    "user_to_assistant_record_delta_p50_s": 0.2686150074005127,
+    "user_to_assistant_record_delta_p95_s": 33.06707406044006,
+    "timestamp_warning": "record creation delta is NOT end-to-end generation latency",
+    "assistant_to_user_delta_p50_s": 76.22135496139526
+  },
+  "synthetic_sessionization": {
+    "rule": "user-message timestamps; new session after >30min inactivity",
+    "sessions": 401,
+    "user_messages_per_session_p50": 27.0,
+    "user_messages_per_session_p75": 97.0,
+    "user_messages_per_session_p95": 385.0,
+    "session_duration_p50_s": 3659.621067047119,
+    "session_duration_p95_s": 40966.215259075165
+  },
+  "gaps": [
+    "TV-DEEP-RAW-008-047",
+    "TV-RAW-SHARD-018",
+    "TV-END_TO_END-LATENCY",
+    "TV-TOKENIZER-MODEL-SPECIFIC",
+    "TV-SEMANTIC-QUALITY-BENCHMARK",
+    "TV-EXTERNAL-INDUSTRY-COMPARATOR"
+  ],
+  "drive": {
+    "benchmark_folder_id": "1y6gvKnneGJXIomFw_5VRsazA4OFrHA7u",
+    "benchmark_doc_id": "1MB1v6jp7JUOTcJjXK53BCOdwMCl8bPxLKFfVSCFS5VU",
+    "receipt_doc_id": "1ZE7piLE4CEuzemePxaTih8wW3zHvRMtrAxG8SWdQ5nk"
+  }
+}
