@@ -1,0 +1,79 @@
+{
+  "claim_allowed": false,
+  "date": "2026-08-24",
+  "evidence": {
+    "candidate_chronological_sha256": "c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706",
+    "candidate_count": 100,
+    "candidate_outside_boundary": 0,
+    "candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "historical_archive_found": "100/100",
+    "historical_object_witness_sha256": "f14cd8767241255d64dba51b818e1bf3d5eefb6af157f1b321199cb102223156",
+    "raw018_expected_bytes": 12115336
+  },
+  "falsifiers": [
+    "historical_archive_adjacency_alone_identifies_raw018=FALSE",
+    "timestamp_window_alone_identifies_raw018=FALSE",
+    "cardinality_100_alone_identifies_raw018=FALSE",
+    "MESSAGES_00018_substitutes_RAW018=FALSE"
+  ],
+  "next_gate": "current RAW018 byte witness -> 12115336 bytes -> SHA256 -> JSON parse -> PID hash-set commitment equality",
+  "pre_receipt_runs": [
+    {
+      "conclusion": "success",
+      "name": "novoexport-raw018-wave3-pid-reconciliation",
+      "run_id": 32787603175
+    },
+    {
+      "conclusion": "success",
+      "name": "CI",
+      "run_id": 32787602807
+    },
+    {
+      "conclusion": "success",
+      "name": "Branch Topology Gate",
+      "run_id": 32787602955
+    },
+    {
+      "blocking_reasons": [
+        "PULL_REQUEST_DRAFT_OR_UNKNOWN",
+        "INDEPENDENT_APPROVAL_MISSING"
+      ],
+      "classification": "EXPECTED_GOVERNANCE_BLOCK",
+      "conclusion": "failure",
+      "name": "RAFAELIA Promotion Control V1",
+      "run_id": 32787602930
+    },
+    {
+      "classification": "SERVER_SIDE_ENFORCEMENT_NOT_OBSERVED",
+      "conclusion": "failure",
+      "failed_step": "Inspect live main branch server-side enforcement",
+      "name": "Server Merge Enforcement Assurance",
+      "run_id": 32787603040
+    }
+  ],
+  "private_custody": {
+    "drive_longitudinal_document": "RAFAELIA — NOVOexport Raw 018 Wave 3 — PID Hash Reconciliation — 2026-08-24",
+    "drive_private_pid_hash_sheet": "RAFAELIA — RAW018 PID Hash Set — Wave 3 Private — 2026-08-24",
+    "pid_hash_list_in_public_artifacts": false,
+    "private_pid_hash_sheet_source_sha256": "3c87924e4afc531d52f055c4e9c52b12ee4dc28f5ba4bbcec6f071f81722b992",
+    "raw_ids_in_public_artifacts": false
+  },
+  "promotion_note": "Draft/independent-approval and server-side enforcement are governance boundaries, not RAW018 evidence failures.",
+  "receipt_id": "NOVOEXPORT_RAW018_WAVE3_PID_RECONCILIATION_20260824_V1",
+  "schema": "rafaelia.receipt.novoexport.raw018.wave3.v1",
+  "source": {
+    "base_commit": "f1a96df83d0969a012358ee321be814d0656f377",
+    "branch": "chatgpt/novoexport-raw018-wave3-pid-reconciliation-20260824",
+    "evidence_head": "39d9c06e4d3b5a7a139e054a8c59dc04cef70ef4",
+    "pull_request": 390,
+    "repository": "rafaelmeloreisnovo/Mapa"
+  },
+  "status": "EVIDENCE_MATERIALIZED_CUSTODY_OPEN_PROMOTION_BLOCKED",
+  "transition": {
+    "RAW018_CURRENT_BYTES": "TOKEN_VAZIO_HARD_CUSTODY",
+    "RAW018_CURRENT_JSON_PARSE": "TOKEN_VAZIO_HARD_CUSTODY",
+    "RAW018_CURRENT_PROVIDER": "TOKEN_VAZIO_HARD_CUSTODY",
+    "RAW018_CURRENT_SHA256": "TOKEN_VAZIO_HARD_CUSTODY",
+    "RAW018_PID_HASH_SET": "EVIDENCED_RECONCILED_100_PRIVACY_PRESERVING"
+  }
+}
