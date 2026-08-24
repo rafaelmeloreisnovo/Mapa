@@ -1,0 +1,23 @@
+name: mega-scene-s-plus-gap-ledger
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/MEGA_SCENE_S_PLUS_GAP_LEDGER_20260824.v1.json'
+      - 'data/audits/TOKEN_VAZIO_REGISTRY_DELTA_20260824_MEGA_SCENE_S_PLUS.jsonl'
+      - 'tools/validate_mega_scene_s_plus_gap_ledger.py'
+      - '.github/workflows/mega-scene-s-plus-gap-ledger.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout pinned commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Validate bounded evidence-first ledger
+        run: python3 tools/validate_mega_scene_s_plus_gap_ledger.py
