@@ -1,0 +1,103 @@
+{
+  "schema": "rafaelia.novoexport-raw018-wave2/v1",
+  "record_id": "NOVOEXPORT_RAW018_WAVE2_20260824_V1",
+  "observed_at": "2026-08-24T19:39:00-03:00",
+  "status": "PARTIAL_EVIDENCED_PHYSICAL_INVENTORY_PROVIDER_UNBOUND",
+  "claim_allowed": false,
+  "authority": {
+    "router": "rafaelmeloreisnovo/Mapa",
+    "source_scope": "Google Drive NOVOexport",
+    "private_drive_locators_persisted_publicly": false
+  },
+  "target": {
+    "shard": 18,
+    "path": "conversations-018.json",
+    "size_bytes": 12115336
+  },
+  "evidence_planes": [
+    {
+      "source": "export_manifest.json",
+      "sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+      "observation": {
+        "path": "conversations-018.json",
+        "size_bytes": 12115336
+      },
+      "evidence_class": "EXPORT_MANIFEST_ENTRY"
+    },
+    {
+      "source": "temp.locate.txt",
+      "sha256": "7e291744e7522eeb4a4ce4f843f55ef479205de8305ac126130ff6c5631682bf",
+      "observation": {
+        "path": "conversations-018.json",
+        "size_bytes": 12115336
+      },
+      "evidence_class": "PHYSICAL_DIRECTORY_INVENTORY"
+    }
+  ],
+  "agreement": {
+    "path_matches": true,
+    "size_matches": true,
+    "independent_planes": 2,
+    "result": "RAW018_EXISTENCE_PATH_SIZE_EVIDENCED"
+  },
+  "gap_transition": {
+    "gap_id": "TV-RAW-018-CURRENT-ID",
+    "previous_state": "TOKEN_VAZIO_CURRENT_PROVIDER",
+    "current_state": "PARTIAL_EVIDENCED_PHYSICAL_INVENTORY_PROVIDER_UNBOUND",
+    "closed_dimensions": [
+      "NOVOexport contains a logical export entry for conversations-018.json.",
+      "Physical inventory independently records conversations-018.json.",
+      "Both evidence planes agree on size 12,115,336 bytes."
+    ],
+    "open_dimensions": [
+      "Current directly addressable Drive provider/file ID for raw conversations-018.json.",
+      "Recoverable current raw byte stream.",
+      "SHA-256 of raw conversations-018.json itself.",
+      "JSON parse validity/cardinality of the raw shard.",
+      "Exact conversation/PID set in raw shard 018."
+    ]
+  },
+  "anti_substitution": {
+    "rule": "DERIVED_ORDINAL != RAW_SOURCE_ORDINAL",
+    "known": "MESSAGES-00018.jsonl.txt is a derived tokenization/message shard and must not substitute raw conversations-018.json.",
+    "raw_target": "conversations-018.json"
+  },
+  "provider_probe": {
+    "direct_child_exact_name_result": "NO_DIRECT_FILE_RESULT",
+    "global_exact_name_result": "NO_DIRECT_FILE_RESULT",
+    "interpretation": "The raw shard is evidenced inside the NOVOexport export/inventory, but a directly addressable Drive item has not yet been bound.",
+    "forbidden_interpretation": "No direct Drive item result does not negate the raw shard evidence in export_manifest/temp.locate."
+  },
+  "next_gate": {
+    "objective": "Recover the raw member bytes from the original export container or a direct provider without ordinal substitution.",
+    "sequence": [
+      "locate original export container/provider that materialized the NOVOexport inventory",
+      "extract or stream exact member conversations-018.json",
+      "verify byte length equals 12115336",
+      "compute SHA-256",
+      "parse JSON fail-closed",
+      "enumerate conversation IDs/PIDs",
+      "compare against the 100 historical unmatched PID candidates",
+      "emit append-only custody receipt"
+    ]
+  },
+  "boundary": {
+    "existence_claim": "EVIDENCED_FOR_OBSERVED_NOVOEXPORT_INVENTORY",
+    "direct_provider_claim": "TOKEN_VAZIO",
+    "current_raw_bytes_claim": "TOKEN_VAZIO",
+    "sha_pid_claim": "TOKEN_VAZIO",
+    "claim_allowed": false
+  },
+  "f_ok": [
+    "Raw shard 018 existence is evidenced by two independent NOVOexport planes.",
+    "Path and byte size agree exactly at conversations-018.json / 12,115,336 bytes.",
+    "The gap is narrowed from generic provider uncertainty to provider/bytes/SHA/PID-only uncertainty."
+  ],
+  "f_gap": [
+    "Direct provider remains unbound.",
+    "Raw bytes, raw SHA-256, parse result and PID set remain TOKEN_VAZIO."
+  ],
+  "f_next": [
+    "Recover original export container/member bytes for conversations-018.json and emit a byte-level receipt."
+  ]
+}
