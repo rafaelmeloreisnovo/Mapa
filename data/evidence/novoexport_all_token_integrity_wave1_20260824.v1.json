@@ -1,0 +1,123 @@
+{
+  "schema": "rafaelia.novoexport-all-token-integrity-wave1/v1",
+  "record_id": "NOVOEXPORT_ALL_TOKEN_INTEGRITY_WAVE1_20260824_V1",
+  "observed_at": "2026-08-24T19:22:00-03:00",
+  "claim_allowed": false,
+  "status": "PARTIAL_EVIDENCE_MATERIALIZED",
+  "authority": {
+    "router": "rafaelmeloreisnovo/Mapa",
+    "base_main": "47a2a4235d25c7912b7cf9581ff932bb6012ced6",
+    "private_source_alias": "RAFAELIA_TOTAL_INDEX_V1_PRIVATE",
+    "private_locators_persisted_publicly": false
+  },
+  "off_by_one": {
+    "gap_id": "TV-TOKEN-OCCURRENCE-OFFBY1",
+    "previous_state": "TOKEN_VAZIO_ROOT_CAUSE",
+    "current_state": "PARTIAL_EVIDENCED_MANIFEST_AGGREGATE_DRIFT",
+    "private_artifact_identity": {
+      "tokens_literal.tsv.gz": {
+        "sha256": "24a358786fba54a3b5174aaa8b4fa294901da8db5c7dbccf8cc3c29769c9afdc"
+      },
+      "token_source_counts.tsv.gz": {
+        "sha256": "85264d118e85ec8df3679725a16eccff9ee7d99528731bf8e57acf15883c3be3"
+      },
+      "source_manifest.tsv": {
+        "sha256": "d88d259eccd53d42c03fd31b498238e8f213207fe8dac1747e2df1aa67a5e3f3"
+      },
+      "manifest.json": {
+        "sha256": "87dad16a9883247e28769073dd61de5344847e1a13b737f21b04b1972f0c5f7b"
+      },
+      "checksum_set_verified": true
+    },
+    "reproduction": {
+      "tokens_literal": {
+        "rows": 675638,
+        "sum_count_total": 44185627
+      },
+      "token_source_counts": {
+        "rows": 1245720,
+        "sum_count": 44185627,
+        "distinct_sources": 20,
+        "distinct_literals": 675638
+      },
+      "source_manifest": {
+        "rows": 20,
+        "sum_token_occurrences": 44185627
+      },
+      "manifest_embedded_source_manifest": {
+        "rows": 20,
+        "sum_token_occurrences": 44185627
+      },
+      "manifest_scalar": {
+        "field": "token_occurrences_total_raw",
+        "value": 44185626
+      },
+      "per_literal_mismatches": 0,
+      "per_source_mismatches": 0,
+      "embedded_source_mismatches": 0,
+      "manifest_scalar_delta_vs_detailed": -1
+    },
+    "evidenced_conclusion": "The current detailed stores agree exactly at 44,185,627. The -1 discrepancy is localized to the scalar token_occurrences_total_raw stored in the frozen manifest/aggregate projection.",
+    "not_yet_evidenced": "The generator statement or execution path that wrote token_occurrences_total_raw=44,185,626 has not been located; code-level root cause remains TOKEN_VAZIO.",
+    "anti_regression": [
+      "Do not mutate tokens_literal.tsv.gz.",
+      "Do not mutate token_source_counts.tsv.gz.",
+      "Do not mutate source_manifest.tsv.",
+      "Do not rewrite frozen V1 manifest.json in place.",
+      "Correct by errata/supersession or a rebuildable V2 candidate after generator-path evidence."
+    ],
+    "next_gate": "Locate generator/rebuild path -> reproduce scalar derivation -> explain -1 by code/execution evidence -> create V2 or explicit errata -> differential validation against V1."
+  },
+  "shard_018": {
+    "gap_id": "TV-RAW-018-CURRENT-ID",
+    "state": "TOKEN_VAZIO_CURRENT_PROVIDER",
+    "known": [
+      "Historical path conversations-018.json is corroborated with historical size 12,115,336 bytes.",
+      "Exactly 100 historical PIDs remain unjoined after current PID-covered shards through 047; this is a candidate set only, not identity proof.",
+      "A derived MESSAGES-00018 provider was previously inspected and its source_path is conversations-012.json; derived ordinal 00018 must not substitute raw conversations-018.json.",
+      "Private source-path checkpoint pair 00010 was fully parsed and contains only conversations-006.json and conversations-007.json; target 018..027 matches were zero for that pair only."
+    ],
+    "current_probe": {
+      "exact_drive_name_query": "conversations-018.json",
+      "result": "NO_EXACT_PROVIDER_RESULT_IN_BOUNDED_QUERY",
+      "forbidden_interpretation": "No search result does not prove file absence."
+    },
+    "uncertainty": "Current provider_id, raw byte stream, current SHA-256, JSON parse and current PID set remain unresolved.",
+    "next_gate": "Resume bounded source-path/provider recovery from preserved private cursor or locate immutable raw provider by alias/receipt -> stream bytes -> SHA-256 -> JSON parse -> PID set -> compare candidate set -> receipt."
+  },
+  "chunk_lineage": {
+    "gap_id": "TV-DATA-CHUNK-LINEAGE",
+    "state": "TOKEN_VAZIO_GLOBAL_LINEAGE",
+    "known": [
+      "Current source_manifest binds tokenization sources to bytes, SHA-256, line counts and token occurrences.",
+      "Orthogonal ID-token receipt states observed chunk trees are PROTOTYPE/PARTIAL_UPLOAD and do not represent total corpus coverage.",
+      "Current ALL_TOKEN source_manifest has no global node_id/message_id/file_id/attachment_id lineage columns."
+    ],
+    "uncertainty": "A complete source_ref -> conversation_id/PID -> message_id/node_id -> file_id/attachment_id -> record_sha256 -> chunk edge is not yet evidenced.",
+    "next_gate": "Materialize provider-bound message/node manifests -> join stable conversation/message/node IDs -> join attachment/file IDs -> bind chunk records and hashes -> emit per-edge lineage receipts before semantic/vector promotion."
+  },
+  "boundary": {
+    "coverage": "BOUNDED_PRIVATE_STORE_REPRODUCTION_PLUS_TARGETED_PROVIDER_PROBES",
+    "provider_wide_exhaustive": false,
+    "private_raw_content_persisted_publicly": false,
+    "token_vazio_rule": "A narrowed uncertainty remains TOKEN_VAZIO until the exact missing dimension is evidenced.",
+    "parable_rule": "Parabolic or semantic language may route discovery but cannot close these integrity/identity/lineage gates."
+  },
+  "f_ok": [
+    "The ALL_TOKEN +1 discrepancy is reproduced from immutable identified private artifacts.",
+    "All detailed count planes agree at 44,185,627 with zero literal/source mismatches.",
+    "The discrepancy is localized to the frozen manifest scalar aggregate rather than the detailed stores.",
+    "Shard 018 anti-substitution boundary is preserved and reasserted.",
+    "Chunk-lineage missing dimensions are explicitly typed."
+  ],
+  "f_gap": [
+    "Generator code/execution path for token_occurrences_total_raw remains TOKEN_VAZIO.",
+    "Current raw provider identity for conversations-018.json remains TOKEN_VAZIO.",
+    "Global data->chunk stable-ID lineage remains TOKEN_VAZIO."
+  ],
+  "f_next": [
+    "Find generator path for manifest scalar before creating a V2 aggregate.",
+    "Continue exact provider recovery for raw shard 018 without derived-ordinal substitution.",
+    "Build provider-bound message/node/file/chunk lineage manifests and validate joins."
+  ]
+}
