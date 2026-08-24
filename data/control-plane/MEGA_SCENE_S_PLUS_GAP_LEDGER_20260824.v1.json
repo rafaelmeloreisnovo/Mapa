@@ -1,0 +1,397 @@
+{
+  "schema": "rafaelia.mega-scene-s-plus-gap-ledger/v1",
+  "record_id": "MEGA_SCENE_S_PLUS_GAP_LEDGER_20260824_V1",
+  "generated_at": "2026-08-24T18:52:00-03:00",
+  "status": "MATERIALIZED_BOUNDED_CURRENT_NOT_EXHAUSTIVE",
+  "claim_allowed": false,
+  "policy": [
+    "APPEND_ONLY",
+    "PROVENANCE_FIRST",
+    "TOKEN_VAZIO_VALID",
+    "NO_SILENT_REGRESSION",
+    "FAIL_IS_USEFUL_EVIDENCE",
+    "PARABLE_IS_NAVIGATION_NOT_PROOF",
+    "VISION_NE_ARTIFACT_NE_EXECUTION_NE_EVIDENCE_NE_CLAIM"
+  ],
+  "authority": {
+    "router": "rafaelmeloreisnovo/Mapa",
+    "base_main": "3729e1f21f3ff208f714706481b8cf02126fc590",
+    "bootstrap": "bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md",
+    "producer_rule": "Each producer repository remains authority for its implementation domain."
+  },
+  "coverage": {
+    "status": "BOUNDED_CURRENT_NOT_EXHAUSTIVE",
+    "reason": "Reconciles high-value gaps evidenced in inspected Drive/Mapa state through 2026-08-24. Provider-wide exhaustive inventory is not proven.",
+    "forbidden_interpretation": "Do not infer that unlisted gaps do not exist.",
+    "predecessor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json"
+  },
+  "state_semantics": {
+    "PASS": "Exact gate closed by scoped evidence.",
+    "FAIL": "A falsifier or gate failed; failure is preserved as useful evidence.",
+    "TOKEN_VAZIO": "Evidence is insufficient or unavailable; not zero, not PASS, not FAIL.",
+    "BLOCKED": "A known gate prevents promotion.",
+    "PARTIAL": "Some dimensions are evidenced while others remain open.",
+    "SEMANTIC_SEED": "Authorial/parabolic language retained only as a navigation seed until a contract/evidence path exists."
+  },
+  "priority_semantics": {
+    "P0": "Urgent: security, provenance, runtime, promotion blockers or count/identity integrity.",
+    "P1": "High: lineage, coverage, semantics, reproducibility, cross-store parity.",
+    "P2": "Important: taxonomy, definitions, wider coverage and technical debt not currently blocking integrity."
+  },
+  "items": [
+    {
+      "id": "TV-TOKEN-OCCURRENCE-OFFBY1",
+      "class": "COUNT_INTEGRITY",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO_ROOT_CAUSE",
+      "known": "Detailed recount is 44185627 while historical aggregate is 44185626; three detailed summations agree on 44185627.",
+      "uncertainty": "The indexer aggregation path causing delta +1 has not been reproduced.",
+      "evidence_anchor": "data/evidence/novoexport_review_errata_20260824.v1.json",
+      "next_gate": "Locate/reproduce aggregation code -> compare detailed stores vs aggregate step-by-step -> emit receipt; do not mutate detailed stores."
+    },
+    {
+      "id": "TV-RAW-018-CURRENT-ID",
+      "class": "SOURCE_IDENTITY",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO",
+      "known": "Current PID/SHA plane covers 50 of 51 conversation shards.",
+      "uncertainty": "Current provider identity for shard 018 is unresolved.",
+      "evidence_anchor": "data/evidence/novoexport_review_errata_20260824.v1.json",
+      "next_gate": "Resolve source/provider identity -> bind stable ID/hash -> append receipt."
+    },
+    {
+      "id": "TV-MESSAGES-FULL-COVERAGE",
+      "class": "CORPUS_COVERAGE",
+      "priority": "P1",
+      "state": "PARTIAL",
+      "known": "Message projection contains 91232 records across 1000 conversations.",
+      "uncertainty": "Projection is not proven complete for the full corpus.",
+      "evidence_anchor": "data/evidence/novoexport_review_errata_20260824.v1.json",
+      "next_gate": "Enumerate source conversations -> project messages/nodes -> reconcile counts/hash lineage."
+    },
+    {
+      "id": "TV-DATA-CHUNK-LINEAGE",
+      "class": "LINEAGE",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO",
+      "known": "Chunk/data joins are named as an active gap.",
+      "uncertainty": "Global lineage from raw source through chunk/message/node is not closed.",
+      "evidence_anchor": "data/evidence/novoexport_review_errata_20260824.v1.json",
+      "next_gate": "source_ref -> shard -> conversation -> node/message -> chunk/file -> digest chain -> receipt."
+    },
+    {
+      "id": "TV-CORPUS-TOTAL-LOGICAL-UNITS",
+      "class": "CORPUS_ACCOUNTING",
+      "priority": "P1",
+      "state": "TOKEN_VAZIO",
+      "known": "Multiple physical/logical count planes exist.",
+      "uncertainty": "A single reconciled total of logical corpus units is not proven.",
+      "evidence_anchor": "data/evidence/novoexport_review_errata_20260824.v1.json",
+      "next_gate": "Define unit ontology -> reconcile per-plane counts -> publish scoped total with exclusions."
+    },
+    {
+      "id": "TOKEN_VAZIO_RELATIONSHIP_HOUSE_RAW_OUTSIDE_003_012",
+      "class": "LEXICAL_COVERAGE",
+      "priority": "P1",
+      "state": "OPEN_EVIDENCE_BOUNDARY",
+      "known": "ALL_TOKEN V1 is complete for the mounted set tied to conversations-003..012.",
+      "uncertainty": "Equivalent no-filter lexical execution outside that mounted raw range is not proven.",
+      "evidence_anchor": "RAFAELIA_RELATIONSHIP_HOUSE_V1/06_INDICES/ALL_TOKEN_INDEX_STATUS_V1.md",
+      "next_gate": "Materialize remaining authorized raw sources -> execute same ALL_TOKEN contract -> append-only merge."
+    },
+    {
+      "id": "TOKEN_VAZIO_RELATIONSHIP_HOUSE_SEMANTIC_AREA_CLUSTER",
+      "class": "SEMANTIC_DERIVATION",
+      "priority": "P1",
+      "state": "OPEN_DERIVATION_PENDING",
+      "known": "27065 explicit area/domain/field mentions and 962 structural headings are intermediate lexical evidence.",
+      "uncertainty": "Exact deduplicated semantic-area count is unresolved.",
+      "evidence_anchor": "RAFAELIA_RELATIONSHIP_HOUSE_V1/06_INDICES/ALL_TOKEN_INDEX_STATUS_V1.md",
+      "next_gate": "Complete lexical coverage -> expression/ngram -> entity/concept -> family/area derivation with provenance-preserving dedup."
+    },
+    {
+      "id": "TOKEN_VAZIO_RELATIONSHIP_HOUSE_GITHUB_FULL_TEXT",
+      "class": "REPOSITORY_COVERAGE",
+      "priority": "P2",
+      "state": "OPEN_SCOPE_GAP",
+      "known": "ALL_TOKEN V1 did not exhaustively tokenize federated GitHub repositories.",
+      "uncertainty": "Repository-wide lexical coverage remains open.",
+      "evidence_anchor": "data/audits/TOKEN_VAZIO_REGISTRY.jsonl",
+      "next_gate": "Enumerate authorized repos/refs -> provenance-preserving lexical indexing -> scoped receipts."
+    },
+    {
+      "id": "GAP-ATLAS-COMPLETION-MARKER-IMMUTABILITY",
+      "class": "GOVERNANCE_PROVENANCE",
+      "priority": "P0",
+      "state": "BLOCKED",
+      "known": "ATLAS completion marker exists, state=EXECUTED_STRUCTURE, claim_allowed=false, coverage_semantic_complete=false.",
+      "uncertainty": "Promotion-control invariant I1 reports the marker lacks an immutability marker.",
+      "evidence_anchor": "data/receipts/ATLAS_COMPLETION_MARKER_20260824.v1.json",
+      "next_gate": "Add a non-retroactive immutability/supersession contract in a new receipt/errata -> rerun invariant gate."
+    },
+    {
+      "id": "GAP-MAIN-SERVER-MERGE-ENFORCEMENT",
+      "class": "SERVER_GOVERNANCE",
+      "priority": "P0",
+      "state": "BLOCKED",
+      "known": "Live main is observed protected=false with required status checks enforcement off.",
+      "uncertainty": "Ruleset/bypass enforcement beyond the inspected endpoint is not proven.",
+      "evidence_anchor": "GitHub branch main + Server Merge Enforcement Assurance run 32781435018",
+      "next_gate": "Enable/verify branch protection or equivalent ruleset -> require exact promotion context -> prove zero-approval merge is blocked."
+    },
+    {
+      "id": "GAP-AMPLIFIER-SPARSE-RAPPORT-PROMOTION",
+      "class": "IMPLEMENTATION_PROMOTION",
+      "priority": "P1",
+      "state": "PARTIAL_PASS_BLOCKED_PROMOTION",
+      "known": "PR #379 dedicated amplifier-contract, general CI and Branch Topology Gate passed on head b01bcd16dac78ed19284f033c0462699a62ed743.",
+      "uncertainty": "PR remains draft; promotion is blocked by repository-governance failures outside the two changed amplifier files.",
+      "evidence_anchor": "PR #379",
+      "next_gate": "Keep draft -> resolve independent governance blockers -> rerun applicable gates -> promote only with explicit authorization."
+    },
+    {
+      "id": "TV-TEST-2-FRACTAL-ESTIMATOR",
+      "class": "ALGORITHM_FALSIFIER",
+      "priority": "P1",
+      "state": "FAIL_USEFUL",
+      "known": "Box-counting estimator failed the stated +/-0.05 tolerance.",
+      "uncertainty": "Whether to refine estimator, redefine scoped acceptance, or change tolerance remains unresolved; no automatic promotion allowed.",
+      "evidence_anchor": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "next_gate": "Choose documented closure path -> rerun deterministic falsifier -> receipt."
+    },
+    {
+      "id": "TV-ACCESS-1-SENSITIVE-DATA",
+      "class": "SECURITY_FALSIFIER",
+      "priority": "P0",
+      "state": "FAIL_USEFUL",
+      "known": "Access-control falsifier detected sensitive data.",
+      "uncertainty": "Remediation and post-remediation closure are not proven in this ledger.",
+      "evidence_anchor": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "next_gate": "Remediate manifests/ACL -> rerun security falsifier -> post-remediation receipt."
+    },
+    {
+      "id": "BUG-02-PROOF-REFINEMENT",
+      "class": "MATHEMATICAL_VALIDATION",
+      "priority": "P0",
+      "state": "BLOCKED_ON_PROOF_REFINEMENT",
+      "known": "F1/F2 pass; F3/F4 fail in the current proxy-proof path.",
+      "uncertainty": "A valid replacement/refinement satisfying both failed falsifiers is not evidenced.",
+      "evidence_anchor": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "next_gate": "Implement one explicit refinement hypothesis per failed falsifier -> rerun F1-F4 -> preserve negative result if still failing."
+    },
+    {
+      "id": "BUG-05-ZRMANIFEST-STACK",
+      "class": "IMPLEMENTATION",
+      "priority": "P1",
+      "state": "TOKEN_VAZIO_IMPLEMENTATION_PENDING",
+      "known": "Validator/closure path exists; implementation is pending.",
+      "uncertainty": "No passing implementation receipt.",
+      "evidence_anchor": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "next_gate": "Implement bounded memory/alignment fix -> activate falsifiers -> runtime/build receipt."
+    },
+    {
+      "id": "BUG-07-BLAKE3-GATE-ENFORCEMENT",
+      "class": "INTEGRITY_GATE",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO_IMPLEMENTATION_PENDING",
+      "known": "Validator reports the mismatch gate is not enforced.",
+      "uncertainty": "Fail-closed behavior is not proven.",
+      "evidence_anchor": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "next_gate": "Enforce nonzero exit on mismatch -> add deterministic target -> negative/positive KAT -> receipt."
+    },
+    {
+      "id": "GAP-CYCLE6-PHYSICAL-DEVICE-EVIDENCE",
+      "class": "PHYSICAL_EXECUTION",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO",
+      "known": "CI/local/emulated evidence cannot substitute for a physical-device receipt.",
+      "uncertainty": "Current ARM32/ARM64 physical validation remains open.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json; auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "next_gate": "APK/binary hash -> install -> launch -> PID/activity -> device identity -> logs -> exit/result -> receipt."
+    },
+    {
+      "id": "GAP-CROSS-REPO-TOROID-TOPOLOGY",
+      "class": "FEDERATED_TOPOLOGY",
+      "priority": "P1",
+      "state": "PENDING",
+      "known": "Cycle 4 federation remains VERIFICATION_PENDING; cross-repo dependencies have partial evidence.",
+      "uncertainty": "6-repo TOROID synchronization/independent tracing is not closed.",
+      "evidence_anchor": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "next_gate": "Pin six repo/ref identities -> topology validator -> independent dedup/lineage test -> receipt."
+    },
+    {
+      "id": "GAP-VECTRAS-RUNTIME-BOOTSTRAP-RERUN",
+      "class": "PHYSICAL_RUNTIME",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO_PHYSICAL_RERUN",
+      "known": "Observed incident separated bootstrap/runtime missing components from APK/manifest contradiction; claim remains fail-closed.",
+      "uncertainty": "Post-fix physical rerun proving proot/rootfs BusyBox/QEMU materialization and activity launch is not present in the bounded evidence used here.",
+      "evidence_anchor": "PR #375 / Vectras runtime incident receipt",
+      "next_gate": "Bind APK SHA256 <-> Git SHA <-> merged manifest -> prove binaries exist/executable -> physical post-check -> receipt."
+    },
+    {
+      "id": "GAP-FRIDA-DESKTOP-COMPILE-ALL-TARGETS",
+      "class": "PRODUCER_IMPLEMENTATION",
+      "priority": "P0",
+      "state": "DOCUMENTED_PARTIAL",
+      "known": "Frida Desktop was reclassified from implemented-untested after multiple falsifiers; producer authority remains frida-desktop.",
+      "uncertainty": "All-target compilation and physical Android evidence are not closed in this ledger.",
+      "evidence_anchor": "Mapa PR #365 federation repair receipt",
+      "next_gate": "Compile all targets -> repair JNI/frontend/orphan integration -> producer receipt -> federation binding -> device validation."
+    },
+    {
+      "id": "BOOTSTRAP-CROSS-STORE-COMMON-DIGEST",
+      "class": "CROSS_STORE_PROVENANCE",
+      "priority": "P1",
+      "state": "PARTIAL_EVIDENCED",
+      "known": "Drive revision and GitHub blob identities were captured in predecessor reconciliation.",
+      "uncertainty": "Common canonical digest equivalence remains open.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Shared canonicalization -> digest Drive/GitHub forms -> compare -> terminal parity receipt."
+    },
+    {
+      "id": "GAP-FCEA-SECRET-001",
+      "class": "SECURITY",
+      "priority": "P0",
+      "state": "UNSAFE_REMEDIATION_EVIDENCE_OPEN",
+      "known": "Security gap existed in bounded predecessor snapshot.",
+      "uncertainty": "Credential rotation/revocation and downstream-copy closure are not evidenced by the sources reconciled in this turn.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Credential-owner rotation/revocation evidence -> downstream inventory -> post-remediation inspection."
+    },
+    {
+      "id": "GAP-FCEA-CANONICALITY-001",
+      "class": "IDENTITY_LINEAGE",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO_CANONICAL_AUTHORITY",
+      "known": "Candidate FCEA/CORE trees exist in predecessor state.",
+      "uncertainty": "Canonical equivalence/supersession is not proven by current bounded reconciliation.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Tree manifests -> hashes/roles -> explicit canonical/versioned-role receipt."
+    },
+    {
+      "id": "TOKEN_VAZIO_OC94_017_094",
+      "class": "IDENTITY_ITEMIZATION",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO_78_IDENTITIES_NOT_ITEMIZED",
+      "known": "Predecessor ledger records 78 unresolved identities and missing original 94-item source artifact.",
+      "uncertainty": "Individual identities remain unclosed in the current bounded evidence.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Locate original enumeration or append individually addressable unresolved records without guessing."
+    },
+    {
+      "id": "GAP-META-INVENTORY-001",
+      "class": "ECOSYSTEM_INVENTORY",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO_PROVIDER_WIDE_COVERAGE",
+      "known": "Provider-wide exhaustive inventory is explicitly not proven.",
+      "uncertainty": "Ecosystem total of gaps/assets cannot be claimed.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Paginated Drive inventory + GitHub repo/ref inventory -> dedupe -> map each unresolved object to stable gap_id."
+    },
+    {
+      "id": "GAP-FEDERATED-BROKER-PROVENANCE-SIGNATURE",
+      "class": "FEDERATED_SECURITY_PROVENANCE",
+      "priority": "P0",
+      "state": "NEAR_MISS_TOKEN_VAZIO_CLOSURE_GATE",
+      "known": "Predecessor inspection recorded warning-to-success provenance risk and insufficient signature verification.",
+      "uncertainty": "Fail-closed real cryptographic verification and immutable remote checkout are not closed in current reconciliation.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Fail-closed verifier -> real HMAC KAT/secret path -> immutable checkout -> bounded broker self-test -> run/job/artifact receipt."
+    },
+    {
+      "id": "TOKEN_VAZIO_RLL_FRESH_OWNER_SOURCE_AND_REPLICATION",
+      "class": "SCIENTIFIC_EVIDENCE",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO",
+      "known": "Scientific promotion requires owner source, pinned dataset/config and independent replication.",
+      "uncertainty": "Fresh owner-source resolution and independent replication are not evidenced in this bounded reconciliation.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Resolve owner source -> pin dataset/config -> execute -> hash outputs -> independent replication."
+    },
+    {
+      "id": "MISSING_RAFGITTOOLS_COMBINED_MAIN_TERMINAL_RECEIPT",
+      "class": "REMOTE_EXECUTION",
+      "priority": "P0",
+      "state": "MISSING_UNRECONCILED_CURRENT_TURN",
+      "known": "Predecessor snapshot marked the combined terminal main receipt missing.",
+      "uncertainty": "This turn did not establish a newer terminal main receipt; absence is not asserted beyond inspected evidence.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Resolve latest main run -> jobs/steps -> artifacts/hashes -> terminal receipt."
+    },
+    {
+      "id": "TOKEN_VAZIO_TERMUX_ZERO_LEGACY_ABSOLUTE_CLAIM_DEBT_CLOSURE_RECEIPT",
+      "class": "CLAIM_LANGUAGE_GOVERNANCE",
+      "priority": "P0",
+      "state": "TOKEN_VAZIO_KNOWN_DEBT_UNRECONCILED_CURRENT_TURN",
+      "known": "Predecessor snapshot records four legacy absolute-claim counters.",
+      "uncertainty": "This turn did not prove those counters were reduced to zero.",
+      "evidence_anchor": "data/control-plane/TOKEN_VAZIO_MASTER_CURRENT_BOUNDED_20260820T1200BRT.v1.json",
+      "next_gate": "Reconcile current producer state -> evidence-bound or remove absolute wording -> terminal gate -> merged-main receipt."
+    },
+    {
+      "id": "SEMANTIC-SEED-LESSFRICTION",
+      "class": "SEMANTIC_SEED",
+      "priority": "P2",
+      "state": "TOKEN_VAZIO_DEFINITION",
+      "known": "The phrase expresses a desired reduction of unnecessary mutation/friction.",
+      "uncertainty": "No canonical literal contract named LessFriction was found in the targeted Drive/Mapa searches performed in this session.",
+      "evidence_anchor": "session search record; no canonical file match",
+      "parable_role": "Navigation seed only; not evidence.",
+      "next_gate": "Define schema + measurable friction dimensions + falsifiers before promotion to operational contract."
+    },
+    {
+      "id": "SEMANTIC-SEED-SEMANTICASTOP",
+      "class": "SEMANTIC_SEED",
+      "priority": "P2",
+      "state": "TOKEN_VAZIO_DEFINITION",
+      "known": "The phrase points toward higher-order semantic routing/topology.",
+      "uncertainty": "No canonical literal contract named semanticasTop was found in the targeted Drive/Mapa searches performed in this session.",
+      "evidence_anchor": "session search record; no canonical file match",
+      "parable_role": "Navigation seed only; not evidence.",
+      "next_gate": "Bind to explicit expression/concept/relation/family operations -> schema -> fixtures -> falsifier."
+    },
+    {
+      "id": "SEMANTIC-SEED-EMPRE-SGO-SA",
+      "class": "SEMANTIC_SEED",
+      "priority": "P2",
+      "state": "TOKEN_VAZIO_DEFINITION",
+      "known": "Authorial expression is preserved without erasure.",
+      "uncertainty": "Operational semantics are not yet recoverably defined from canonical sources.",
+      "evidence_anchor": "current user expression; canonical source not resolved",
+      "parable_role": "Preserved authorial seed; no inferred technical meaning.",
+      "next_gate": "Locate source occurrence/definition or author an explicit typed contract; until then keep TOKEN_VAZIO."
+    }
+  ],
+  "current_cycle_materialization": {
+    "drive_memory": {
+      "state": "CREATED_PENDING_CONTENT_WRITE_AT_LEDGER_CREATION",
+      "public_locator_policy": "PRIVATE_REFERENCE_OMITTED_FROM_PUBLIC_GITHUB",
+      "purpose": "Longitudinal editorial mirror of gaps, uncertainty, urgency and evidence paths."
+    },
+    "github": {
+      "branch": "chatgpt/mega-scene-s-plus-gap-materialization-20260824",
+      "state": "BRANCH_MATERIALIZATION_IN_PROGRESS"
+    }
+  },
+  "closure_rule": "A gap closes only when the exact next_gate has scoped evidence. A parable may propose a route but cannot inherit PASS or scientific truth.",
+  "r3": {
+    "F_ok": [
+      "Existing bounded TOKEN_VAZIO snapshot reconciled with 2026-08-24 NOVOexport, Atlas, Cycle 4 and RAPPORT evidence.",
+      "FAIL, TOKEN_VAZIO, BLOCKED, PARTIAL and SEMANTIC_SEED are separated instead of collapsed.",
+      "Every listed current item has a next verifiable gate."
+    ],
+    "F_gap": [
+      "Provider-wide exhaustive inventory remains TOKEN_VAZIO.",
+      "Several producer-specific gaps require current reads/execution in their authority repos.",
+      "Physical-device and independent scientific replication evidence remain open.",
+      "Three new semantic phrases remain untyped seeds until explicit contracts exist."
+    ],
+    "F_next": [
+      "Close P0 security/provenance/count integrity before semantic/scientific promotion.",
+      "Reproduce NOVOexport off-by-one without mutating detailed stores.",
+      "Resolve server-side merge enforcement and Atlas immutability as separate governance deltas.",
+      "Execute bounded provider inventory and append newly discovered stable gap_ids."
+    ]
+  }
+}
