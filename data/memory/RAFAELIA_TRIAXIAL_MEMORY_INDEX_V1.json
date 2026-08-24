@@ -1,0 +1,58 @@
+{
+  "schema": "RAFAELIA_TRIAXIAL_MEMORY_INDEX/V1",
+  "generated_at": "2026-08-24T04:55:00-03:00",
+  "state": "EXECUTED_STRUCTURE",
+  "claim_allowed": false,
+  "append_only": true,
+  "root_drive": {
+    "title": "RAFAELIA_ATLAS_ROTAS_CATALOGO_OMEGA",
+    "id": "1yqrafV9KvQ2C-wz8nDCrYeVEyQo_TdQZ"
+  },
+  "axes": {
+    "LONGITUDINAL": {
+      "query_prefix": "L:",
+      "purpose": "temporal evolution, versions, predecessors, deltas, decisions and receipts",
+      "drive_folder_id": "1X2-O4-_C-wKqpUbgly6EpbNE4ApLGmvK",
+      "drive_index_doc_id": "1XHkixpMruPqrv22EJ5X0TeWUn7fWEXgmjnGSlxtaGzk",
+      "required_fields": ["object_id","source_id","timestamp","predecessor","successor","version","delta","decision","evidence","receipt","gap","next_step"],
+      "preferred_relations": ["PRECEDES","FOLLOWS","VERSION_OF","SUPERSEDES_WITHOUT_ERASING","DERIVES_FROM","EVOLVES_TO","REVISES","CORRECTS_BY_ERRATA","REINTRODUCES","RECURS","PERSISTS","DECAYS","SPLITS_INTO","MERGES_WITH","MIGRATES_TO","ROLLS_BACK_TO"]
+    },
+    "ORTHOGONAL": {
+      "query_prefix": "O:",
+      "purpose": "independent axes, contradictions, falsifiers, measurements and boundaries",
+      "drive_folder_id": "1p6_xn3kTalwh5uqB4rIhf0k3nyq3NIKx",
+      "drive_index_doc_id": "1HXDWFSmHGNo7pouUge3AIGhTq4SL_EkfrurXdJzM6-E",
+      "axes": ["provenance","identity_integrity","execution_runtime","measurement","semantic_symbolic","science_claim","governance_navigation","legal_license","security_privacy","human_context"],
+      "independent_origin_required": true,
+      "aliases_count_as_independent": false
+    },
+    "TRANSVERSAL": {
+      "query_prefix": "T:",
+      "purpose": "bridges across domains, scales, methods, applications and contexts",
+      "drive_folder_id": "15Ie8OypFVrdl1OU-mQ4moDWer4fhRESe",
+      "drive_index_doc_id": "13oy53b9OAm7Fomyt_FANl7pAORrPtBAfnkZny7Kx-f8",
+      "required_fields": ["source_domain","target_domain","bridge_type","shared_method","shared_object","scale_from","scale_to","evidence","asymmetry","boundary","risk","opportunity","gap"],
+      "two_sided_evidence_required_for_promotion": true
+    }
+  },
+  "routing": {
+    "full": "ATLAS:",
+    "longitudinal": "L:",
+    "orthogonal": "O:",
+    "transversal": "T:",
+    "relations": "REL:",
+    "scale": "SCALE:",
+    "evidence": "EVID:",
+    "novoexport": "NOVO:"
+  },
+  "invariants": [
+    "OBSERVED_LITERAL != THEME_RECURRENT != INVARIANT != CLAIM",
+    "COOCCURRENCE != CAUSALITY",
+    "ANALOGY != IDENTITY",
+    "SYMBOL != EVIDENCE",
+    "MISSING_EVIDENCE => TOKEN_VAZIO",
+    "LEARNING => APPEND_ONLY_DELTA + PREDECESSOR + SOURCE"
+  ],
+  "preexisting_authority": "data/memory/RAFAELIA_LONGITUDINAL_ORTHOGONAL_INDEX_20260814.v1.json",
+  "note": "This V1 adds an explicit transversal axis and a compact routing surface. It does not supersede or erase the earlier longitudinal/orthogonal checkpoint."
+}

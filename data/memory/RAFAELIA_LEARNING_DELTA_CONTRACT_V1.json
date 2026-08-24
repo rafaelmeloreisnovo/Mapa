@@ -1,0 +1,18 @@
+{
+  "schema": "RAFAELIA_LEARNING_DELTA_CONTRACT/V1",
+  "generated_at": "2026-08-24T04:55:00-03:00",
+  "state": "EXECUTED_STRUCTURE",
+  "claim_allowed": false,
+  "append_only": true,
+  "drive_doc_id": "11YEhHHr3I1tbOZX8qdUXMtszLD4k5MLbTdPGs7OPHcM",
+  "query_prefix": "LEARN:",
+  "event_fields": ["learning_id","timestamp","object_id","predecessor","observation","delta","why_changed","source_refs","evidence_state","affected_themes","affected_relations","affected_memory_axes","affected_scales","contradiction","falsifier","confidence","gaps","destinations","receipt"],
+  "event_types": ["DISCOVERED_LITERAL","DISCOVERED_THEME","DISCOVERED_RELATION","DISCOVERED_CONTRADICTION","DISCOVERED_INVARIANT_CANDIDATE","FALSIFIED","REFINED","RENAMED_WITH_ALIAS","MERGED_WITHOUT_ERASING","SPLIT_WITH_PROVENANCE","SCALE_REINTERPRETED","IMPLEMENTED","EXECUTED","VERIFIED","REGRESSED","RECOVERED"],
+  "propagation_targets": ["LONGITUDINAL","ORTHOGONAL","TRANSVERSAL","THEME_CATALOG","RELATION_ONTOLOGY","SCALE_ATLAS","EVIDENCE_GATES","MAPA_OR_PRODUCER_REPO","RECEIPT"],
+  "rules": [
+    "new learning does not silently rewrite history",
+    "every material learning references predecessor when one exists",
+    "missing source_refs or evidence_state => TOKEN_VAZIO",
+    "no material change => no decorative delta"
+  ]
+}

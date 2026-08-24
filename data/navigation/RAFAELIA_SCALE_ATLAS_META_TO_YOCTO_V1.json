@@ -1,0 +1,28 @@
+{
+  "schema": "RAFAELIA_SCALE_ATLAS/V1",
+  "generated_at": "2026-08-24T04:55:00-03:00",
+  "claim_allowed": false,
+  "drive_doc_id": "1ExbWhj2dNsF-_4P5tjvB0StN55ll5T_ZtjleNTr3jY4",
+  "query_prefix": "SCALE:",
+  "axes": {
+    "semantic": ["META","UNIVERSE_DOMAIN","AREA","SUBAREA","FAMILY","NICHE","SUBNICHE","PROBLEM","METHOD","CONCEPT","ENTITY","EXPRESSION","TOKEN","OCCURRENCE"],
+    "operational": ["VISION","OBJECTIVE","PROJECT","SYSTEM","COMPONENT","MODULE","FUNCTION","BLOCK","INSTRUCTION","BIT_STATE"],
+    "physical_si_when_applicable": [
+      {"name":"milli","exp10":-3},
+      {"name":"micro","exp10":-6},
+      {"name":"nano","exp10":-9},
+      {"name":"pico","exp10":-12},
+      {"name":"femto","exp10":-15},
+      {"name":"atto","exp10":-18},
+      {"name":"zepto","exp10":-21},
+      {"name":"yocto","exp10":-24}
+    ]
+  },
+  "rules": [
+    "META is not an SI prefix",
+    "NICHE is semantic position, not physical unit",
+    "YOCTO means 1e-24 only for an appropriate physical quantity",
+    "scale transitions must declare preserved and lost properties"
+  ],
+  "relations": ["SCALES_TO","CONTAINS","PART_OF","GENERALIZES","SPECIALIZES","EMERGES_FROM","REDUCES_TO","LIFTS_TO","PROJECTS_TO","AGGREGATES_TO","DECOMPOSES_INTO"]
+}

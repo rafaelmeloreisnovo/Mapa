@@ -1,0 +1,61 @@
+{
+  "schema": "RAFAELIA_SESSION_RETROFEEDBACK_X/V1",
+  "executed_at": "2026-08-24T05:14:00-03:00",
+  "state": "CHECKPOINTED_LIMITED",
+  "claim_allowed": false,
+  "append_only": true,
+  "operator": "X",
+  "definition": "retroalimentar com coesao a sessao inteira, consolidando ativacoes em F_ok/F_gap/F_next sem promover inferencia a evidencia",
+  "route": ["ATLAS:X","NOVO:X","L:X","O:X","T:X","REL:X","SCALE:X","EVID:X","GAP:X","LEARN:X"],
+  "drive": {
+    "atlas_root": "1yqrafV9KvQ2C-wz8nDCrYeVEyQo_TdQZ",
+    "checkpoint_doc": "1L5Rj7nk9onIDoCB9Gxzq4kLeEfPQJ3bzExMmpCuNMMA",
+    "receipt_doc": "1e6YVydV6SLp_59s3k-ckcdUMVixg0rpZoR1diLH0sQ0"
+  },
+  "f_ok": [
+    "explicit_theme_observation_separated_from_claim",
+    "atlas_drive_root_materialized",
+    "longitudinal_orthogonal_transversal_indexes_materialized",
+    "relation_ontology_materialized",
+    "scale_atlas_materialized",
+    "compact_query_grammar_materialized",
+    "evidence_gates_materialized",
+    "learning_delta_contract_materialized",
+    "Mapa_PR_377_created",
+    "CONVERSATIONS_CHUNKS_PRIVATE_PR_48_created"
+  ],
+  "f_gap": [
+    "TV-RAW-OUTSIDE-003-012",
+    "TV-SEMANTIC-AREA-CLUSTER",
+    "TV-GITHUB-FULL-TEXT",
+    "EXPLICIT-THEME-FULL-CORPUS",
+    "ROLE-STRATIFICATION",
+    "RELATION-EXTRACTION",
+    "COUNTEREVIDENCE",
+    "SCALE-BINDING",
+    "PRODUCER-BINDING",
+    "PR-MERGE",
+    "COMPLETE-SESSION-EVIDENCE",
+    "CLAIM-PROMOTION"
+  ],
+  "f_next": [
+    "materialize_remaining_raw_sources_under_ALL_TOKEN",
+    "extract_complete_explicit_theme_registry_with_role_and_source_pointer",
+    "role_stratify_user_assistant_system",
+    "extract_ngrams_concepts_entities_preserving_literal_provenance",
+    "materialize_observed_relation_edges_with_falsifiers_and_gaps",
+    "extract_counterexamples_before_promotion",
+    "bind_themes_to_L_O_T_and_scale",
+    "append_only_update_Drive_Mapa_CHUNKS_PRIVATE_with_receipts",
+    "evaluate_theme_to_invariant_to_claim_only_after_gates"
+  ],
+  "next_session_rule": "load latest X checkpoint; revalidate F_gap against current sources; move an item to F_ok only with new evidence; preserve closed gaps as CLOSED_BY + receipt; emit a new delta",
+  "invariants": [
+    "VISAO != ARTEFATO != EXECUCAO != EVIDENCIA != CLAIM",
+    "LITERAL != NORMALIZED != CONCEPT != AREA != CLAIM",
+    "OBSERVED_LITERAL != THEME_RECURRENT != INVARIANT != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "cooccurrence != causality",
+    "symbolic_weight != scientific_evidence"
+  ]
+}
