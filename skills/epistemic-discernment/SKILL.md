@@ -23,15 +23,19 @@ status: DRAFT_FAIL_CLOSED
 ## Gate templates
 
 ### Hypothesis
+
 `variables → falsifiable prediction → dataset → protocol → test → result → uncertainty`.
 
 ### Theorem
+
 `axioms → definitions → derivation/proof → checker/review scope`.
 
 ### Anomaly
+
 `observation → baseline → reproducibility → competing explanations`; causal claim remains separate.
 
 ### Parable/analogy
+
 `declared meaning → scope`; no automatic promotion to empirical claim.
 
 ## Output
