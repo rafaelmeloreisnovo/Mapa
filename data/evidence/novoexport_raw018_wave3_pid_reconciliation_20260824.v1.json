@@ -1,0 +1,107 @@
+{
+  "anti_regression": [
+    "PID_HASH_SET_EVIDENCE != CURRENT_RAW_BYTE_CUSTODY",
+    "HISTORICAL_OBJECT_WITNESS != CURRENT_RAW018_SHA256",
+    "CARDINALITY_MATCH_ALONE != IDENTITY_PROOF",
+    "TIMESTAMP_WINDOW_ALONE != IDENTITY_PROOF",
+    "DERIVED_ORDINAL != RAW_SOURCE_ORDINAL",
+    "SEARCH_MISS != GLOBAL_ABSENCE"
+  ],
+  "claim_allowed": false,
+  "current_custody_boundary": {
+    "absence_global": false,
+    "current_raw_bytes": "TOKEN_VAZIO",
+    "current_raw_json_parse": "TOKEN_VAZIO",
+    "current_raw_provider": "TOKEN_VAZIO",
+    "current_raw_sha256": "TOKEN_VAZIO",
+    "direct_current_provider_search": "BOUNDED_NO_RESULT"
+  },
+  "date": "2026-08-24",
+  "evidence_id": "NOVOEXPORT_RAW018_WAVE3_PID_RECONCILIATION_20260824_V1",
+  "falsifiers_preserved": [
+    {
+      "hypothesis": "historical_archive_adjacency_alone_identifies_raw018",
+      "observation": "Only 82 archive-order objects occur between exact RAW017-last and RAW019-first IDs in the independent September archive; historical archive order is not the current sharding contract.",
+      "result": "FALSE"
+    },
+    {
+      "hypothesis": "101_locator_timestamps_in_open_interval_implies_101_candidates",
+      "observation": "The extra identity is RAW019-first itself: its Locator millisecond timestamp truncates below its finer raw create_time. Identity-set difference excludes it.",
+      "result": "FALSE"
+    },
+    {
+      "hypothesis": "MESSAGES-00018_can_substitute_RAW018",
+      "observation": "Derived ordinal is not raw source ordinal.",
+      "result": "FALSE"
+    }
+  ],
+  "gap_refinement": {
+    "new_dimensions": {
+      "RAW018_CURRENT_BYTES": "TOKEN_VAZIO_HARD_CUSTODY",
+      "RAW018_CURRENT_JSON_PARSE": "TOKEN_VAZIO_HARD_CUSTODY",
+      "RAW018_CURRENT_PROVIDER": "TOKEN_VAZIO_HARD_CUSTODY",
+      "RAW018_CURRENT_SHA256": "TOKEN_VAZIO_HARD_CUSTODY",
+      "RAW018_PID_HASH_SET": "EVIDENCED_RECONCILED_100_PRIVACY_PRESERVING"
+    },
+    "previous_composite_gap": "RAW018_CURRENT_PROVIDER_BYTES_SHA_JSON_PID_SET"
+  },
+  "identity_reconciliation": {
+    "candidate_chronological_sha256": "c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706",
+    "candidate_hash_list_persisted_publicly": false,
+    "candidate_max_created_utc": "2025-08-09T15:47:07.214Z",
+    "candidate_min_created_utc": "2025-08-04T07:50:53.332Z",
+    "candidate_pids_outside_live_sibling_boundary": 0,
+    "candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "current_index_unique_pids": 4698,
+    "historical_current_intersection": 2473,
+    "historical_locator_unique_pids": 2573,
+    "historical_minus_current": 100,
+    "identity_method": "SHA256_UTF8_CANONICAL_CONVERSATION_ID",
+    "raw_ids_persisted_publicly": false
+  },
+  "independent_historical_archive_witness": {
+    "archive_sha256": "0d1eec04eea3b3a8e3cf6435b6a6fb0e732db3f037ac9220f09031b0ecba8815",
+    "archive_size_bytes": 258114346,
+    "archive_total_conversations": 2334,
+    "candidate_pids_found": 100,
+    "candidate_pids_missing": 0,
+    "member": "conversations.json",
+    "member_uncompressed_bytes": 678116200,
+    "object_witness_sha256": "f14cd8767241255d64dba51b818e1bf3d5eefb6af157f1b321199cb102223156",
+    "timestamp_agreement_count": 100,
+    "timestamp_max_abs_delta_seconds": 0.000958,
+    "timestamp_precision_note": "Locator stores millisecond precision; byte witness preserves finer create_time precision."
+  },
+  "live_sibling_boundary": {
+    "raw017": {
+      "bytes": 22560934,
+      "create_time_monotonic_ascending": true,
+      "last_created_utc": "2025-08-04T07:36:49.264419Z",
+      "root_objects": 100,
+      "sha256": "b4b6a6080b89102699e6dbd9958c715264464d74f9782126af3085296eb3ce4f"
+    },
+    "raw019": {
+      "bytes": 16440670,
+      "create_time_monotonic_ascending": true,
+      "first_created_utc": "2025-08-09T16:00:53.999997Z",
+      "root_objects": 100,
+      "sha256": "f90bfc11a9088772570c1f81503c1bedcc9bd475c5435ce809d62812ff351436"
+    }
+  },
+  "next_gate": "Observe current RAW018 bytes or an immutable current byte witness; require exactly 12115336 bytes, compute SHA256, parse JSON fail-closed, compute privacy-preserving PID hash set, and require candidate_set_sha256=766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e.",
+  "predecessor": {
+    "merge_commit": "f1a96df83d0969a012358ee321be814d0656f377",
+    "rule": "APPEND_ONLY_REFINEMENT",
+    "wave": "NOVOEXPORT_RAW018_WAVE2_20260824_V1"
+  },
+  "schema": "rafaelia.novoexport.raw018.pid-reconciliation.v1",
+  "source_digests": {
+    "current_pid_index_csv_sha256": "7a9a684a6e322e0fa0f3ff43c118d50b596e37af339af3c897440f1aec47c721",
+    "historical_locator_csv_sha256": "23013dbf862a12564c0300f64bdd8f317b5cf92d388880037e30fd6feae7d770"
+  },
+  "status": "PARTIAL_EVIDENCED_PID_SET_CURRENT_BYTE_CUSTODY_OPEN",
+  "target": {
+    "expected_size_bytes": 12115336,
+    "path": "conversations-018.json"
+  }
+}
