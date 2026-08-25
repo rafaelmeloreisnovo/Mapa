@@ -1,0 +1,72 @@
+{
+  "schema": "rafaelia.research-receipt.v1",
+  "date": "2026-08-25",
+  "status": "INDEXED_RESEARCH_DELTA",
+  "claim_allowed": false,
+  "source_received": {
+    "type": "secondary_article",
+    "title": "Imagens da NASA mostram queda de fitoplâncton no Pacífico durante El Niño",
+    "url": "https://acritica.net/meio-ambiente/imagens-da-nasa-mostram-queda-de-fitoplancton-no-pacifico-durante-el-nino/"
+  },
+  "primary_verification": [
+    {
+      "authority": "NASA Earth Observatory / PACE OCI",
+      "url": "https://science.nasa.gov/earth/earth-observatory/el-nino-alters-marine-life-in-the-pacific/",
+      "observed": "June 2026 equatorial central Pacific chlorophyll-a substantially lower than June 2025 neutral baseline; El Nino suppresses nutrient-rich upwelling",
+      "epistemic_state": "PASS_OBSERVED"
+    },
+    {
+      "authority": "NOAA Ocean Service",
+      "url": "https://oceanservice.noaa.gov/facts/ocean-oxygen.html",
+      "observed": "roughly half of Earth oxygen production comes from the ocean and a comparable amount is consumed by marine life",
+      "epistemic_state": "PASS_CONTEXT"
+    },
+    {
+      "authority": "NASA Earth Observatory / Amazon River plume",
+      "url": "https://science.nasa.gov/earth/earth-observatory/amazon-river-in-the-atlantic-ocean-7021/",
+      "observed": "Amazon plume nutrients fertilize Atlantic phytoplankton and support fish; plume is advected by regional currents",
+      "epistemic_state": "PASS_ROUTE"
+    },
+    {
+      "authority": "NASA SeaBASS / ANACONDAS",
+      "url": "https://seabass.gsfc.nasa.gov/experiment/ANACONDAS",
+      "observed": "Amazon plume carbon/nitrogen study includes oxygen among measured parameters",
+      "epistemic_state": "PASS_DATA_ROUTE"
+    },
+    {
+      "authority": "NASA / South Atlantic Anomaly",
+      "url": "https://www.nasa.gov/missions/icon/nasa-researchers-track-slowly-splitting-dent-in-earths-magnetic-field/",
+      "observed": "SAA is a weak geomagnetic-field region relevant to particle radiation and spacecraft",
+      "epistemic_state": "PASS_GEOMAG_CONTEXT"
+    }
+  ],
+  "longitudinal_predecessor": {
+    "drive_source": "MESSAGES-00019.jsonl.txt",
+    "observed_concept": "mangrove/decomposition -> nitrogen nutrient deposition -> plankton -> oxygen/atmosphere",
+    "epistemic_state": "HISTORICAL_CONCEPT_SOURCE"
+  },
+  "drive_delta": {
+    "file_id": "1i6L6HOk13dU9Damh37FcvJycpmik-ewTgbXPve6Wr_Y",
+    "title": "RAFAELIA — Delta PACE/El Niño — Fitoplâncton × O₂ × NO3/NO2 × Fluxo × Rhincodon × Amazônia/SAA — 2026-08-25"
+  },
+  "map_delta": "indices/deltas/ATLAS_PACE_PHYTO_O2_NITROGEN_RHINCODON_FLOW_20260825.md",
+  "gates": {
+    "PACE_CHL_2026": "PASS_OBSERVED",
+    "ENSO_UPWELLING": "PASS_MECHANISM",
+    "OCEAN_O2_GROSS": "PASS_CONTEXT",
+    "AMAZON_PHYTO": "PASS_ROUTE",
+    "RHINCODON_ENV": "EVIDENCE_ROUTE",
+    "O2_DIRECT_PACE": "TOKEN_VAZIO",
+    "NO2_DATASET": "TOKEN_VAZIO",
+    "O2_DATASET": "TOKEN_VAZIO",
+    "WS_DATASET": "TOKEN_VAZIO",
+    "AMAZON_TO_PACIFIC": "TOKEN_VAZIO",
+    "SAA_BIOGEOCHEM": "TOKEN_VAZIO",
+    "PARAM": "TOKEN_VAZIO"
+  },
+  "correction": {
+    "historical_claim": "plankton supply 70-80% of global oxygen",
+    "replacement": "roughly half of gross Earth oxygen production is oceanic; gross production is not net atmospheric accumulation",
+    "state": "CORRECTED_WITH_NOAA_AUTHORITY"
+  }
+}
