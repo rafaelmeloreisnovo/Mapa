@@ -21,6 +21,11 @@ class OmegaAssuranceAdoptionV2Tests(unittest.TestCase):
             (ROOT / "data" / "control-plane" / "omega-assurance-adoption.v2.json").read_text(encoding="utf-8")
         )
         cls.events, cls.parse_errors = MOD.load_ledger()
+        cls.receipt = json.loads(
+            (ROOT / "data" / "receipts" / "OMEGA_ASSURANCE_ADOPTION_V2_20260824.v1.json").read_text(
+                encoding="utf-8"
+            )
+        )
 
     def errors(self, data):
         return MOD.validate_manifest(data)
@@ -29,6 +34,7 @@ class OmegaAssuranceAdoptionV2Tests(unittest.TestCase):
         self.assertEqual(self.errors(self.manifest), [])
         self.assertEqual(self.parse_errors, [])
         self.assertEqual(MOD.validate_ledger(self.events), [])
+        self.assertEqual(MOD.validate_receipt(self.receipt, self.manifest), [])
 
     def test_claim_promotion_fails(self):
         data = copy.deepcopy(self.manifest)
@@ -92,6 +98,16 @@ class OmegaAssuranceAdoptionV2Tests(unittest.TestCase):
         events = copy.deepcopy(self.events)
         events[1]["prior_event_id"] = "OAE-UNKNOWN"
         self.assertTrue(any("prior_event_id" in e for e in MOD.validate_ledger(events)))
+
+    def test_receipt_cannot_hide_governance_failure(self):
+        receipt = copy.deepcopy(self.receipt)
+        receipt["independent_governance"]["promotion_control"]["conclusion"] = "success"
+        self.assertTrue(any("promotion control" in e for e in MOD.validate_receipt(receipt, self.manifest)))
+
+    def test_receipt_cannot_hide_server_enforcement_gap(self):
+        receipt = copy.deepcopy(self.receipt)
+        receipt["independent_governance"]["server_merge_enforcement"]["failure_modes"] = []
+        self.assertTrue(any("failure modes" in e for e in MOD.validate_receipt(receipt, self.manifest)))
 
 
 if __name__ == "__main__":
