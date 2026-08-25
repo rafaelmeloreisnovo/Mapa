@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "generated_at": "2026-08-23T05:15:00-03:00",
+  "generated_at": "2026-08-25T10:00:00-03:00",
   "state": "IMPLEMENTED_INDEX_ROOT",
   "coverage_complete": "TOKEN_VAZIO",
   "github_inventory_observed": 84,
@@ -57,7 +57,8 @@
     {"id":"PR:RafGitTools#370","state":"MERGED","role":"deterministic source-gap triage"},
     {"id":"PR:termux-packages#91","state":"OPEN","role":"bootstrap governance draft"},
     {"id":"PR:termux-packages#92","state":"OPEN","role":"libxml2 Doxygen host runtime correction"},
-    {"id":"ART:Mapa:governance/ACTIVATION_REGISTRY_V1.json","state":"IMPLEMENTED_PROPOSED","role":"subordinate activation state machine"}
+    {"id":"ART:Mapa:governance/ACTIVATION_REGISTRY_V1.json","state":"IMPLEMENTED_PROPOSED","role":"subordinate activation state machine"},
+    {"id":"ART:Mapa:data/receipts/navigation/2026-08-25-master-nav-pointer-drift.v1.json","state":"PASS","role":"append-only Drive-to-GitHub pointer reconciliation receipt"}
   ],
   "evidence_nodes": [
     {
@@ -73,6 +74,12 @@
       "blockers": 82,
       "warnings": 34,
       "closure": "TOKEN_VAZIO"
+    },
+    {
+      "id": "EVD:RECEIPT:MASTER_NAV_POINTER_DRIFT:20260825",
+      "path": "data/receipts/navigation/2026-08-25-master-nav-pointer-drift.v1.json",
+      "drive_readback": "PASS",
+      "canonical_pointer": "ART:Mapa:navigation/INDEX.md"
     }
   ],
   "gaps": [
@@ -81,7 +88,7 @@
     {"id":"GAP:PROVIDER_SERVER_BARRIER_FIELD_FAILURE_20260821","state":"OPEN","priority":"P0"},
     {"id":"GAP:FULL_GITHUB_ARTIFACT_COVERAGE","state":"TOKEN_VAZIO"},
     {"id":"GAP:DRIVE_DEDUPLICATION_AND_CLASSIFICATION","state":"TOKEN_VAZIO"},
-    {"id":"GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT","state":"OPEN","priority":"P1","next_gate":"reconcile Drive master-navigation pointer with current GitHub navigation artifact using append-only provenance receipt"}
+    {"id":"GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT","state":"PASS","priority":"P1","receipt":"data/receipts/navigation/2026-08-25-master-nav-pointer-drift.v1.json","closed_at":"2026-08-25T10:00:00-03:00","next_gate":"CLOSED: Drive append-only supersession and readback bind current GitHub navigation artifact"}
   ],
   "timeslices": [
     {
@@ -113,7 +120,6 @@
     "link run/hash/receipt evidence to producer and consumer repositories",
     "bind each unresolved gap to falsifier and executable gate",
     "append superseding states without deleting prior evidence",
-    "validate activation registry structure and bind activation edges to CI/runtime enforcement",
-    "reconcile Drive master-navigation pointer through append-only provenance"
+    "validate activation registry structure and bind activation edges to CI/runtime enforcement"
   ]
 }
