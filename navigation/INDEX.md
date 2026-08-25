@@ -273,7 +273,7 @@ Pointer reconciliation:
 
 - `REP:RafGitTools` → [`PR:RafGitTools#381`](https://github.com/rafaelmeloreisnovo/RafGitTools/pull/381) → `OPEN_DRAFT_UNMERGED`;
 - `ART:RafGitTools:native/rafcode_federation_v1` → implementation commit `7e72713da20b849a0d975d3dbefedd3d65ca0443`;
-- [`EVD:RUN:32868449710`](https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32868449710) → dedicated x86-64/ARMv7/AArch64 gate `PASS`;
+- [`EVD:RUN:32868449710`](https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32868449710) → PR merge ref `3e589ab557ad1afbc09e8b79bdf976d661f5a0fc` (`head 7e72713d` into `base 83a28508`) → dedicated x86-64/ARMv7/AArch64 gate `PASS`;
 - `ART:Mapa:indices/runtime/RAFCODE_FEDERATION_V1.md` → human evidence-bound route;
 - `ART:Mapa:data/federation/rafcode-federation-v1.json` → machine route;
 - `SRC:DRIVE:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y` → append/readback `PASS`, revision `AIroW37h5TPWuni5fvC6A7ahvnk-truV83UYSpHgRqCUwxHZbq3s2qX2N1XaFEy4mMSEixg2DCenOwBcYbxyQym8WxVS9ZlMMNgimwrjObc`;

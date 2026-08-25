@@ -9,7 +9,7 @@
 
 `L/O/T indices → Mapa route → RafGitTools producer → fixed work frame → branchless validator → fixed receipt → ABI ELF gate → append-only receipt`
 
-The implementation is proposed in [RafGitTools PR #381](https://github.com/rafaelmeloreisnovo/RafGitTools/pull/381). The exact implementation commit is `7e72713da20b849a0d975d3dbefedd3d65ca0443`; its dedicated [workflow run 32868449710](https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32868449710) completed successfully. The PR remains draft and unmerged.
+The implementation is proposed in [RafGitTools PR #381](https://github.com/rafaelmeloreisnovo/RafGitTools/pull/381). The exact producer head is `7e72713da20b849a0d975d3dbefedd3d65ca0443`; its dedicated [workflow run 32868449710](https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32868449710) executed PR merge ref `3e589ab557ad1afbc09e8b79bdf976d661f5a0fc` (`head 7e72713d` into base `83a28508`) and completed successfully. The append-only ref-binding receipt is in producer commit `05807455ed23a91e08ba5505d5cf66366d3932fe`. The PR remains draft and unmerged.
 
 ## Three memories / three indices
 
