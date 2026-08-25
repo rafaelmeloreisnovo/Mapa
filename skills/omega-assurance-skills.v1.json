@@ -1,0 +1,30 @@
+{
+  "schema_version": "rafaelia.omega-assurance-skills/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "authority": "AGENTS.md + bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md",
+  "router": "omega-assurance-router",
+  "required_output": ["F_ok", "F_gap", "F_next", "claim_allowed", "write_authority", "receipt_required"],
+  "skills": [
+    {"id":"omega-assurance-router","path":"skills/omega-assurance-router/SKILL.md","kind":"router","axes":["D1","D2","D3","D4","D5","D6","D7"],"depends_on":[]},
+    {"id":"identity-provenance","path":"skills/identity-provenance/SKILL.md","kind":"specialist","axes":["D1"],"depends_on":[]},
+    {"id":"epistemic-discernment","path":"skills/epistemic-discernment/SKILL.md","kind":"specialist","axes":["D2"],"depends_on":["identity-provenance"]},
+    {"id":"execution-evidence","path":"skills/execution-evidence/SKILL.md","kind":"specialist","axes":["D3"],"depends_on":["identity-provenance"]},
+    {"id":"resilience-safety","path":"skills/resilience-safety/SKILL.md","kind":"specialist","axes":["D4"],"depends_on":["authority-governance","transition-ledger"]},
+    {"id":"privacy-information","path":"skills/privacy-information/SKILL.md","kind":"specialist","axes":["D5"],"depends_on":["identity-provenance","authority-governance"]},
+    {"id":"authority-governance","path":"skills/authority-governance/SKILL.md","kind":"specialist","axes":["D6"],"depends_on":["identity-provenance"]},
+    {"id":"transition-ledger","path":"skills/transition-ledger/SKILL.md","kind":"specialist","axes":["D7"],"depends_on":["identity-provenance","authority-governance"]},
+    {"id":"knowledge-attention","path":"skills/knowledge-attention/SKILL.md","kind":"cross_cutting","axes":["D2","D7"],"depends_on":["transition-ledger"]},
+    {"id":"crossfail-secure-sandbox","path":"skills/crossfail-secure-sandbox/SKILL.md","kind":"cross_cutting","axes":["D1","D2","D3","D4","D5","D6","D7"],"depends_on":["resilience-safety","privacy-information","authority-governance","transition-ledger"]}
+  ],
+  "fail_closed_invariants": [
+    "TOKEN_VAZIO != PASS",
+    "prediction != evidence",
+    "capability != authority",
+    "sandbox_pass != production_pass",
+    "search_miss != absence",
+    "unknown_privacy => PRIVATE_DEFAULT_DENY",
+    "unknown_authority => HOLD_FOR_AUTHORITY",
+    "irreversible_unknown_risk => HOLD"
+  ]
+}

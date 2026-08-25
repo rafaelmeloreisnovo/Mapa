@@ -1,0 +1,31 @@
+name: omega-assurance-skills-v1
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'tools/validate_omega_assurance_skills_v1.py'
+      - 'tests/test_omega_assurance_skills_v1.py'
+      - '.github/workflows/omega-assurance-skills-v1.yml'
+      - 'indices/OMEGA_ASSURANCE_SKILLS_V1.md'
+      - 'data/receipts/OMEGA_ASSURANCE_SKILLS_V1_20260824.v1.json'
+      - 'AGENTS.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout pinned commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile tools/validate_omega_assurance_skills_v1.py
+          python3 -m py_compile tests/test_omega_assurance_skills_v1.py
+      - name: Run negative and structural tests
+        run: python3 -m unittest tests/test_omega_assurance_skills_v1.py
+      - name: Validate Ω Assurance Skills registry
+        run: python3 tools/validate_omega_assurance_skills_v1.py
