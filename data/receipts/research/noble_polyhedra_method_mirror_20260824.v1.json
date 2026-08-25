@@ -5,29 +5,35 @@
   "repository": "rafaelmeloreisnovo/Mapa",
   "branch": "research/noble-polyhedra-method-mirror-20260824",
   "claim_allowed": false,
-  "write_policy": "APPEND_ONLY_ON_DEDICATED_BRANCH",
+  "write_policy": "APPEND_ONLY_ON_DEDICATED_BRANCH_WITH_GIT_HISTORY",
   "artifacts": [
     {
       "path": "docs/research/RAFAELIA_NOBLE_POLYHEDRA_METHOD_MIRROR_20260824.md",
-      "commit": "5c1dd10eefe8abf5931f44ba9dabaecea1ec8aff",
+      "initial_commit": "5c1dd10eefe8abf5931f44ba9dabaecea1ec8aff",
       "role": "human_readable_evidence_map"
     },
     {
       "path": "data/geometry/noble_polyhedra_method_mirror_20260824.v1.json",
-      "commit": "bb5adeaf40adb80124007c2b7f3edad5339ceb81",
+      "initial_commit": "bb5adeaf40adb80124007c2b7f3edad5339ceb81",
+      "provenance_fix_commit": "4d55daf5d9328498cbb0d87c69e7b98ce26d15c0",
       "role": "machine_readable_method_mirror"
     },
     {
       "path": "data/evidence/termux_geometry_probe_20260824.v1.json",
-      "commit": "b95b99a7e2302763624587da2e2ad170e8f47c4f",
+      "initial_commit": "b95b99a7e2302763624587da2e2ad170e8f47c4f",
       "role": "runtime_and_negative_validation_receipt"
+    },
+    {
+      "path": "tools/validate_noble_polyhedra_method_mirror.py",
+      "initial_commit": "c26787cfd0b344507153b88878271f7648f377e8",
+      "role": "fail_closed_boundary_validator"
     }
   ],
   "source_boundary": {
     "private_raw_content_copied_to_public_repo": false,
     "external_secondary_article_promoted_to_primary_evidence": false,
     "primary_external_authorities": [
-      "arXiv:2607.22862",
+      "arXiv:2607.28711",
       "Society for Science Regeneron STS 2026 Connor Hill profile"
     ]
   },
@@ -41,6 +47,21 @@
       "deletion_commit": "505fb2741bf971dca1962d854eb566deec57a3aa",
       "postcondition": "__probe__ ABSENT_ON_MAIN",
       "regression_policy": "NO_FURTHER_PROBE_WRITES_ON_DEFAULT_BRANCH"
+    },
+    {
+      "id": "ANOM-PROVENANCE-ARXIV-ID-20260824-02",
+      "description": "Initial mirror materialization used arXiv identifier 2607.22862. A primary-source recheck showed the correct identifier is 2607.28711.",
+      "impact": "REFERENCE_IDENTIFIER_ONLY",
+      "mathematical_result_changed": false,
+      "disclosed_to_user_immediately": true,
+      "mitigation": "Corrected all active mirror records and preserved the earlier commits in Git history.",
+      "correct_value": "2607.28711"
+    },
+    {
+      "id": "GAP-MIRROR-VALIDATOR-EXECUTION-ENV-20260824-03",
+      "description": "A second sandbox retrieval/execution of the newly committed fail-closed validator was blocked by DNS resolution failure.",
+      "impact": "NO_PASS_CLAIMED_FOR_NEW_VALIDATOR",
+      "state": "TOKEN_VAZIO_EXECUTION_ENV"
     }
   ],
   "gates": {
@@ -50,5 +71,9 @@
     "noble_polyhedra_classifier_implemented": false,
     "claim_allowed": false
   },
-  "next_verifiable_step": "Run the dedicated mirror validator, open a draft PR, and keep promotion blocked until raw-corpus and mathematical gaps are closed."
+  "pull_request": {
+    "number": 394,
+    "state": "DRAFT_OPEN"
+  },
+  "next_verifiable_step": "Execute the dedicated mirror validator in CI or a resolvable environment, complete raw-corpus geometry/prior-art sweep, and keep promotion blocked until mathematical gaps close."
 }
