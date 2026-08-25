@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NOBLE-POLYHEDRA-METHOD-MIRROR-CUSTODY-20260824-V1",
+  "created_at": "2026-08-24T23:26:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "research/noble-polyhedra-method-mirror-20260824",
+  "claim_allowed": false,
+  "write_policy": "APPEND_ONLY_ON_DEDICATED_BRANCH",
+  "artifacts": [
+    {
+      "path": "docs/research/RAFAELIA_NOBLE_POLYHEDRA_METHOD_MIRROR_20260824.md",
+      "commit": "5c1dd10eefe8abf5931f44ba9dabaecea1ec8aff",
+      "role": "human_readable_evidence_map"
+    },
+    {
+      "path": "data/geometry/noble_polyhedra_method_mirror_20260824.v1.json",
+      "commit": "bb5adeaf40adb80124007c2b7f3edad5339ceb81",
+      "role": "machine_readable_method_mirror"
+    },
+    {
+      "path": "data/evidence/termux_geometry_probe_20260824.v1.json",
+      "commit": "b95b99a7e2302763624587da2e2ad170e8f47c4f",
+      "role": "runtime_and_negative_validation_receipt"
+    }
+  ],
+  "source_boundary": {
+    "private_raw_content_copied_to_public_repo": false,
+    "external_secondary_article_promoted_to_primary_evidence": false,
+    "primary_external_authorities": [
+      "arXiv:2607.22862",
+      "Society for Science Regeneron STS 2026 Connor Hill profile"
+    ]
+  },
+  "operational_anomalies": [
+    {
+      "id": "ANOM-API-PROBE-20260824-01",
+      "description": "An empty __probe__ path was unintentionally materialized on the default branch while probing the write API.",
+      "impact": "EMPTY_FILE_ONLY_NO_DOMAIN_CONTENT",
+      "disclosed_to_user_immediately": true,
+      "mitigation": "Deleted explicitly from main and verified absent by a subsequent fetch returning 404.",
+      "deletion_commit": "505fb2741bf971dca1962d854eb566deec57a3aa",
+      "postcondition": "__probe__ ABSENT_ON_MAIN",
+      "regression_policy": "NO_FURTHER_PROBE_WRITES_ON_DEFAULT_BRANCH"
+    }
+  ],
+  "gates": {
+    "method_mirror_only": true,
+    "mathematical_equivalence": false,
+    "novelty": false,
+    "noble_polyhedra_classifier_implemented": false,
+    "claim_allowed": false
+  },
+  "next_verifiable_step": "Run the dedicated mirror validator, open a draft PR, and keep promotion blocked until raw-corpus and mathematical gaps are closed."
+}
