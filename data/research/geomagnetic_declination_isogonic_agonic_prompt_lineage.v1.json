@@ -1,0 +1,318 @@
+{
+  "schema": "rafaelia.geomagnetic-declination-prompt-lineage.v1",
+  "date": "2026-08-25",
+  "status": "IMPLEMENTATION_REGISTRY",
+  "claim_allowed": false,
+  "parent_delta": "indices/deltas/ATLAS_ISOGONIC_AGONIC_DECLINATION_PROMPT_RESPONSE_CROSSWALK_20260825.md",
+  "privacy_policy": {
+    "raw_private_text_exported_to_public_repo": false,
+    "private_message_content_republication": "DENIED",
+    "public_safe_fields": [
+      "message_id",
+      "node_id",
+      "parent_id",
+      "conversation_id",
+      "create_time_utc",
+      "text_hash",
+      "role",
+      "privacy_class",
+      "source_path",
+      "source_pointer",
+      "semantic_items",
+      "audit_state"
+    ],
+    "secret_material": "EXCLUDED"
+  },
+  "terminology": [
+    {
+      "token": "isogonic",
+      "definition": "contour of constant magnetic declination D",
+      "state": "PASS_STANDARD_GEOMAGNETICS"
+    },
+    {
+      "token": "agonic",
+      "definition": "special isogonic contour where D=0",
+      "state": "PASS_STANDARD_GEOMAGNETICS"
+    },
+    {
+      "token": "isoporic",
+      "definition": "contour of equal secular change in declination dD/dt",
+      "state": "PASS_STANDARD_GEOMAGNETICS"
+    },
+    {
+      "token": "antagonicas",
+      "definition": "historical literal token from user prompt; mapped to agonic only when intended as zero-declination line",
+      "state": "HISTORICAL_TOKEN_NEEDS_NORMALIZATION"
+    },
+    {
+      "token": "sintagonicas",
+      "definition": "term observed in a historical assistant response but not accepted here as a standard geomagnetic line class",
+      "state": "REJECT_NONSTANDARD"
+    }
+  ],
+  "historical_prompt_lineage": [
+    {
+      "id": "PROMPT-DECLINATION-ISOGONIC-2025-04-05",
+      "drive_source_file_id": "1YSVI3lRddEYw8GxO75tBbydBxOr2PIt5",
+      "conversation_id": "67edff88-f77c-800d-83e6-2374b28e0f6b",
+      "prompt": {
+        "message_id": "bbb21868-fe25-40c0-89e1-65e01103a288",
+        "node_id": "bbb21868-fe25-40c0-89e1-65e01103a288",
+        "parent_id": "3407ce18-e94c-4d90-9e3e-062a747c9fff",
+        "create_time_utc": "2025-04-05T02:47:05.882681Z",
+        "text_hash": "b280c0b3203cbcaac34d2c7cddae1ac69e5795515d1088e8b07e41f99c063666",
+        "role": "user",
+        "privacy_class": "PRIVATE_DEFAULT_DENY",
+        "source_path": "conversations-005.json",
+        "source_pointer": "conversations-005.json#conversation[5].mapping[\"bbb21868-fe25-40c0-89e1-65e01103a288\"]",
+        "semantic_items": [
+          "noise_floor",
+          "magnetic_declination",
+          "historical_token_antagonicas",
+          "isogonic_lines"
+        ]
+      },
+      "response": {
+        "message_id": "d94f3e38-a533-4b24-bf95-ed2f3f9d2388",
+        "node_id": "d94f3e38-a533-4b24-bf95-ed2f3f9d2388",
+        "parent_id": "bbb21868-fe25-40c0-89e1-65e01103a288",
+        "create_time_utc": "2025-04-05T02:47:06.241216Z",
+        "text_hash": "2d8d6e61dc13be470d5b82f68cb97dc01d7ca5ebcb11035190a10da9f4cf60ac",
+        "role": "assistant",
+        "privacy_class": "PRIVATE_DEFAULT_DENY",
+        "source_path": "conversations-005.json",
+        "source_pointer": "conversations-005.json#conversation[5].mapping[\"d94f3e38-a533-4b24-bf95-ed2f3f9d2388\"]"
+      },
+      "relation": "DIRECT_PARENT_CHILD",
+      "audit": [
+        {
+          "item": "noise_floor_as_measurement_baseline",
+          "state": "PASS_WITH_SENSOR_DEFINITION_REQUIRED"
+        },
+        {
+          "item": "declination_true_vs_magnetic_north",
+          "state": "PASS"
+        },
+        {
+          "item": "isogonic_constant_declination",
+          "state": "PASS"
+        },
+        {
+          "item": "agonic_zero_declination",
+          "state": "PASS_TERMINOLOGY_NORMALIZED"
+        },
+        {
+          "item": "portals_intention_conflict_zones",
+          "state": "REJECT_METAPHOR_AS_PHYSICS"
+        },
+        {
+          "item": "gps_magnetometer_global_model_route",
+          "state": "EVIDENCE_ROUTE_REQUIRES_CALIBRATION_AND_RECEIPT"
+        }
+      ]
+    },
+    {
+      "id": "ASSISTANT-DRIFT-SINTAGONIC-2025-05-20",
+      "drive_source_file_id": "1KlvHxzoUNMHu5pg5VZwh441PMj-ROJif",
+      "conversation_id": "682c56f0-2a7c-800d-be8d-c7b1c6ea5249",
+      "response": {
+        "message_id": "c57567a4-3066-4c6c-836f-f3a6ac496e4a",
+        "node_id": "c57567a4-3066-4c6c-836f-f3a6ac496e4a",
+        "parent_id": "bbb213eb-f8ea-44d8-bc1b-15a30e5c57f1",
+        "create_time_utc": "2025-05-20T16:53:53.507391Z",
+        "text_hash": "892875895b766a925d59cbdcebcb17c642f16d15473e095edc3fb1682baa8819",
+        "role": "assistant",
+        "privacy_class": "PRIVATE_DEFAULT_DENY",
+        "source_path": "conversations-008.json",
+        "source_pointer": "conversations-008.json#conversation[99].mapping[\"c57567a4-3066-4c6c-836f-f3a6ac496e4a\"]"
+      },
+      "audit": [
+        {
+          "item": "sintagonicas_as_geomagnetic_lines",
+          "state": "REJECT_NONSTANDARD"
+        },
+        {
+          "item": "sensor_execution_claim_without_receipt",
+          "state": "REJECT_EXECUTION_WITHOUT_EVIDENCE"
+        },
+        {
+          "item": "gps_radio_bluetooth_semantic_metaphor",
+          "state": "CONCEPTUAL_ONLY_NOT_PHYSICAL_EVIDENCE"
+        }
+      ]
+    }
+  ],
+  "reviewed_jsons": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "data/research/solar_lunar_aurora_jovian_observables.v1.json",
+      "role": "parent observables registry"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "data/research/aurora_historical_image_manifest_1971_2026.v1.json",
+      "role": "historical auroral comparison manifest"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca",
+      "path": "data/calendar_cycles_matrix.json",
+      "role": "record/relation/evidence-state structural precedent"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca",
+      "path": "data/calendar_round_lunar_extension_20260825.v1.json",
+      "role": "calendar and lunar phase extension"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "data/federation/geophysical-transduction-executable-route-v1.json",
+      "role": "physical evidence and receipt boundary precedent"
+    },
+    {
+      "drive_file_id": "1YSVI3lRddEYw8GxO75tBbydBxOr2PIt5",
+      "path": "MESSAGES-00005.jsonl.txt",
+      "role": "private prompt-response lineage source"
+    },
+    {
+      "drive_file_id": "1KlvHxzoUNMHu5pg5VZwh441PMj-ROJif",
+      "path": "MESSAGES-00015.jsonl.txt",
+      "role": "private historical response-drift source"
+    }
+  ],
+  "geomagnetic_observables": [
+    {
+      "id": "D_main_deg",
+      "definition": "main-field magnetic declination",
+      "source_route": ["WMM2025", "WMMHR2025", "IGRF14"]
+    },
+    {
+      "id": "I_main_deg",
+      "definition": "main-field inclination",
+      "source_route": ["WMM2025", "WMMHR2025", "IGRF14"]
+    },
+    {
+      "id": "F_main_nT",
+      "definition": "main-field total intensity",
+      "source_route": ["WMM2025", "WMMHR2025", "IGRF14"]
+    },
+    {
+      "id": "dDdt_deg_per_year",
+      "definition": "secular variation of declination"
+    },
+    {
+      "id": "isogonic_value_deg",
+      "definition": "declination value labeling the isogonic contour"
+    },
+    {
+      "id": "dist_to_agonic_km",
+      "definition": "geodesic distance to nearest D=0 contour"
+    },
+    {
+      "id": "grad_D_deg_per_km",
+      "definition": "spatial gradient magnitude of declination"
+    },
+    {
+      "id": "isoporic_dDdt",
+      "definition": "secular-variation contour value"
+    },
+    {
+      "id": "agonic_normal_speed_km_per_year",
+      "formula": "-(dD/dt)/norm(grad_D)",
+      "definition": "derived local normal migration speed of D=0 contour",
+      "state": "DERIVED_NOT_PROVIDER_NATIVE"
+    },
+    {
+      "id": "D_WMMHR_minus_WMM_deg",
+      "definition": "high-resolution minus standard WMM declination residual"
+    },
+    {
+      "id": "D_sensor_deg",
+      "definition": "calibrated device declination estimate",
+      "state": "TOKEN_VAZIO_DATASET"
+    },
+    {
+      "id": "D_sensor_residual_deg",
+      "formula": "wrap(D_sensor-D_main_model)",
+      "state": "TOKEN_VAZIO_DATASET"
+    },
+    {
+      "id": "mag_noise_floor_nT_rms",
+      "definition": "sensor-specific calibrated RMS noise floor in declared band/window",
+      "state": "TOKEN_VAZIO_DATASET"
+    }
+  ],
+  "measurement_model": {
+    "vector_formula": "B_sensor = R_device*(B_main + dB_external + dB_crust_local) + hard_iron_bias + soft_iron_distortion + noise",
+    "declination_formula": "D=atan2(Y,X)",
+    "residual_formula": "residual_D=wrap(D_sensor-D_main_model)",
+    "required_controls": [
+      "device_attitude",
+      "hard_iron_calibration",
+      "soft_iron_calibration",
+      "local_metal_interference",
+      "sample_rate",
+      "altitude",
+      "model_epoch",
+      "model_generation"
+    ]
+  },
+  "data_routes": [
+    {
+      "id": "NOAA_WMM2025",
+      "role": "2025-2030 operational main-field/navigation model",
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "id": "NOAA_WMMHR2025",
+      "role": "higher-resolution contemporary main-field model",
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "id": "NOAA_IGRF14",
+      "role": "historical/scientific main-field reconstruction by epoch",
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "id": "NOAA_HISTORICAL_ISOGONIC_VIEWER",
+      "role": "historical declination/isogonic context",
+      "state": "PASS_DATA_ROUTE"
+    }
+  ],
+  "crosswalk": {
+    "saa": {
+      "primary": ["F_main_nT", "field_minimum", "grad_F"],
+      "declination_role": "independent geometric covariate",
+      "invariant": "AGONIC_LINE != SAA_BOUNDARY"
+    },
+    "aurora": {
+      "primary": ["AEB", "PAB", "hemispheric_power", "MLT"],
+      "declination_role": "epoch/main-field context; not a replacement for magnetic coordinates",
+      "controls": ["IMF_By", "IMF_Bz", "Vsw", "Pdyn", "Kp", "AE", "Dst", "dipole_tilt"]
+    },
+    "space_weather": {
+      "role": "external/dynamic field forcing",
+      "invariant": "WMM_IGRF_MAIN_FIELD != STORM_TIME_EXTERNAL_FIELD"
+    },
+    "calendar_lunar": {
+      "role": "independent phase features after physical baseline",
+      "invariant": "ISOGONIC_GEOMETRY != CALENDAR_CAUSALITY"
+    }
+  },
+  "gates": {
+    "PROMPT_RESPONSE_DIRECT_LINEAGE": "PASS_SOURCE_OBSERVED",
+    "ISOGONIC_DEFINITION": "PASS_STANDARD_GEOMAGNETICS",
+    "AGONIC_D_ZERO": "PASS_STANDARD_GEOMAGNETICS",
+    "ISOPORIC_SECULAR_VARIATION": "PASS_STANDARD_GEOMAGNETICS",
+    "WMM2025_DATA_ROUTE": "PASS_DATA_ROUTE",
+    "WMMHR2025_DATA_ROUTE": "PASS_DATA_ROUTE",
+    "IGRF14_HISTORICAL_ROUTE": "PASS_DATA_ROUTE",
+    "METAPHOR_AS_PHYSICS": "REJECT",
+    "SINTAGONIC_GEOMAGNETIC_TERM": "REJECT_NONSTANDARD",
+    "UNVERIFIED_SENSOR_EXECUTION": "REJECT_EXECUTION_WITHOUT_EVIDENCE",
+    "MAG_SENSOR_NOISE_FLOOR": "TOKEN_VAZIO_DATASET",
+    "CROSS_INSTRUMENT_DECLINATION_CUBE": "TOKEN_VAZIO",
+    "AGONIC_AURORA_CAUSALITY": "TOKEN_VAZIO",
+    "AGONIC_SAA_CAUSALITY": "TOKEN_VAZIO",
+    "FULL_JSON_UNIVERSE_SWEEP": "TOKEN_VAZIO"
+  }
+}
