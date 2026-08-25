@@ -1,0 +1,32 @@
+name: omega-assurance-adoption-v2
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/omega-assurance-adoption.v2.json'
+      - 'data/ledgers/omega-assurance-adoption-events.v2.jsonl'
+      - 'data/receipts/OMEGA_ASSURANCE_ADOPTION_V2_20260824.v1.json'
+      - 'tools/validate_omega_assurance_adoption_v2.py'
+      - 'tests/test_omega_assurance_adoption_v2.py'
+      - '.github/workflows/omega-assurance-adoption-v2.yml'
+      - 'indices/OMEGA_ASSURANCE_ADOPTION_V2.md'
+      - 'AGENTS.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout pinned action
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile tools/validate_omega_assurance_adoption_v2.py
+          python3 -m py_compile tests/test_omega_assurance_adoption_v2.py
+      - name: Run fail-closed negative tests
+        run: python3 -m unittest tests/test_omega_assurance_adoption_v2.py
+      - name: Validate adoption manifest and ledger
+        run: python3 tools/validate_omega_assurance_adoption_v2.py

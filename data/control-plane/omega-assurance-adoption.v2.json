@@ -1,0 +1,572 @@
+{
+  "schema_version": "rafaelia.omega-assurance-adoption/v2",
+  "manifest_id": "OMEGA_ASSURANCE_ADOPTION_V2_20260824",
+  "status": "DRAFT_FAIL_CLOSED",
+  "observed_on": "2026-08-24",
+  "claim_allowed": false,
+  "append_only": true,
+  "baseline": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "commit": "1da6932b7a90215dda5fd8c2e2b1d27b114e6538",
+    "mesh_v1_receipt": "data/receipts/OMEGA_ASSURANCE_SKILLS_V1_20260824.v1.json"
+  },
+  "authority": {
+    "federation": "AGENTS.md",
+    "bootstrap": "bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md",
+    "skill_registry": "skills/omega-assurance-skills.v1.json",
+    "watchdog_contract": "governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json",
+    "rule": "Mapa routes federation state; producer repositories own implementation and runtime evidence"
+  },
+  "invariants": [
+    "IDEA != IMPLEMENTATION != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != PASS",
+    "SEE_MORE != CLAIM_MORE",
+    "CAN_DO != MAY_DO",
+    "prediction != evidence",
+    "detection != accusation",
+    "sandbox_pass != production_pass",
+    "search_miss != absence",
+    "unknown_privacy => PRIVATE_DEFAULT_DENY",
+    "unknown_authority => HOLD_FOR_AUTHORITY",
+    "irreversible_unknown_risk => HOLD",
+    "P0_non_compensatory = true"
+  ],
+  "omega7_axes": [
+    {
+      "id": "D1",
+      "name": "IDENTITY_PROVENANCE",
+      "question": "What exactly is this and where did it come from?",
+      "skill": "identity-provenance",
+      "gate": "exact repo/ref/path/provider/digest/receipt binding",
+      "falsifier": "provider or digest mismatch, or inferred identity promoted as exact",
+      "adoption_state": "CONTRACT_MATERIALIZED_RUNTIME_ADOPTION_TOKEN_VAZIO"
+    },
+    {
+      "id": "D2",
+      "name": "EPISTEMIC",
+      "question": "What is asserted to mean, with which evidence and falsifier?",
+      "skill": "epistemic-discernment",
+      "gate": "epistemic class plus evidence, counterevidence, uncertainty and falsifier",
+      "falsifier": "hypothesis, analogy or parable promoted as empirical fact",
+      "adoption_state": "CONTRACT_MATERIALIZED_CLAIM_BLOCKED"
+    },
+    {
+      "id": "D3",
+      "name": "EXECUTION",
+      "question": "Was it specified, implemented, built, tested, observed at runtime or reproduced?",
+      "skill": "execution-evidence",
+      "gate": "toolchain, flags, environment, exit code, artifact digest and runtime receipt",
+      "falsifier": "fixture or build treated as runtime or physical PASS",
+      "adoption_state": "CONTRACT_MATERIALIZED_RUNTIME_TOKEN_VAZIO"
+    },
+    {
+      "id": "D4",
+      "name": "SAFETY_RESILIENCE",
+      "question": "How does it fail, contain damage and return to a known state?",
+      "skill": "resilience-safety",
+      "gate": "CrossFail, heartbeat, rollback rehearsal, bounded blast radius and known-good target",
+      "falsifier": "uncertainty becomes PASS or irreversible action proceeds with unknown risk",
+      "adoption_state": "WATCHDOG_PROPOSED_FAIL_CLOSED_EXECUTION_PENDING"
+    },
+    {
+      "id": "D5",
+      "name": "PRIVACY_INFORMATION",
+      "question": "May this be observed, moved or published?",
+      "skill": "privacy-information",
+      "gate": "data class, authority, destination boundary and minimum sufficient disclosure",
+      "falsifier": "unknown or private material crosses a boundary without authorization",
+      "adoption_state": "CONTRACT_MATERIALIZED_DEFAULT_DENY"
+    },
+    {
+      "id": "D6",
+      "name": "AUTHORITY_GOVERNANCE",
+      "question": "Who may read, write, mutate, promote, publish or delete?",
+      "skill": "authority-governance",
+      "gate": "owner, operation, branch, privacy class, rollback decision and receipt destination",
+      "falsifier": "technical capability substitutes for authority",
+      "adoption_state": "MAPA_AUTHORITY_BOUND_PRODUCER_AUTHORITY_PRESERVED"
+    },
+    {
+      "id": "D7",
+      "name": "TIME_TRANSITION",
+      "question": "How did state change and what invalidates that transition?",
+      "skill": "transition-ledger",
+      "gate": "before, after, reason, prior event, evidence, falsifier, rollback, receipt and review trigger",
+      "falsifier": "material mutation has no reason, predecessor or reconstructible receipt",
+      "adoption_state": "EXISTING_SCHEMA_PILOT_LEDGER_MATERIALIZED"
+    }
+  ],
+  "cross_cutting": {
+    "attention_states": [
+      "OBSERVED",
+      "ACTIVE",
+      "IGNORED_WITH_REASON",
+      "IGNORED_WITHOUT_REASON",
+      "DEFERRED",
+      "ABORTED",
+      "QUARANTINED",
+      "SUPERSEDED",
+      "DEPRECATED",
+      "WITHHELD_BY_POLICY",
+      "REDACTED_PRIVACY",
+      "UNREVIEWED",
+      "UNREACHABLE",
+      "ORPHANED",
+      "CONTRADICTED",
+      "ANOMALOUS",
+      "PARADOXICAL",
+      "FALSIFIED",
+      "FORGOTTEN",
+      "NORMALIZED",
+      "DISMISSED",
+      "LOW_PRIORITY",
+      "ABANDONED",
+      "REOPENED",
+      "RECOVERED",
+      "TOKEN_VAZIO",
+      "CLOSED"
+    ],
+    "evidence_age": [
+      "FRESH",
+      "AGING",
+      "STALE",
+      "HISTORICAL_ONLY",
+      "SUPERSEDED",
+      "INVALIDATED"
+    ],
+    "operator_conduct": {
+      "principle": "maximum discernment plus minimum sufficient intervention",
+      "required_fields": [
+        "intent",
+        "authority",
+        "certainty",
+        "blast_radius",
+        "reversibility",
+        "information_exposure",
+        "escalation_path"
+      ]
+    }
+  },
+  "risk_vector": {
+    "dimensions": [
+      "authority",
+      "security",
+      "privacy",
+      "governance",
+      "integrity",
+      "availability",
+      "reversibility",
+      "uncertainty"
+    ],
+    "unknown_value": "TOKEN_VAZIO",
+    "p0_action": "HOLD",
+    "compensation_allowed": false
+  },
+  "quiet_watchdog": {
+    "modes": ["WATCH", "WARN", "HOLD", "ACT_BOUNDED"],
+    "meta_watch_depth": 2,
+    "overflow_action": "HOLD_FOR_AUDIT",
+    "ambiguous_signal_action": "WATCH_AND_CORRELATE",
+    "heartbeat_loss_action": "FAIL_CLOSED_HOLD"
+  },
+  "producer_tracks": [
+    {
+      "id": "TP-01",
+      "domain": "FEDERATION_ONTOLOGY",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "state": "PILOT_AUTHORIZED",
+      "receipt": "AGENTS.md",
+      "next_gate": "draft PR plus dedicated CI"
+    },
+    {
+      "id": "TP-02",
+      "domain": "LONGITUDINAL_MEMORY",
+      "authority": "GOOGLE_DRIVE_EDITORIAL_CUSTODY",
+      "state": "MATRIX_MATERIALIZED_PROVIDER_VERIFIED",
+      "receipt": "DRIVE_MATRIX_CANONICAL:OMEGA7_ADOCAO",
+      "next_gate": "retain append-only session delta"
+    },
+    {
+      "id": "TP-03",
+      "domain": "VERSION_CONTROL",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "state": "CONTRACT_ONLY",
+      "receipt": "TOKEN_VAZIO_RUNTIME_ADOPTION",
+      "next_gate": "inspect producer AGENTS and server enforcement gate"
+    },
+    {
+      "id": "TP-04",
+      "domain": "COMPILER_BINARY",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "state": "CONTRACT_ONLY",
+      "receipt": "TOKEN_VAZIO_RUNTIME_ADOPTION",
+      "next_gate": "producer toolchain and binary receipt"
+    },
+    {
+      "id": "TP-05",
+      "domain": "ANDROID_RUNTIME",
+      "authority": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "state": "CONTRACT_ONLY",
+      "receipt": "TOKEN_VAZIO_RUNTIME_ADOPTION",
+      "next_gate": "physical or VM runtime receipt"
+    },
+    {
+      "id": "TP-06",
+      "domain": "PACKAGE_SOURCE",
+      "authority": "termux-packages",
+      "state": "CONTRACT_ONLY",
+      "receipt": "TOKEN_VAZIO_RUNTIME_ADOPTION",
+      "next_gate": "source provenance and reproducible build"
+    },
+    {
+      "id": "TP-07",
+      "domain": "VM_QEMU",
+      "authority": "TOKEN_VAZIO_PRODUCER",
+      "state": "ROUTE_REFERENCE_ONLY",
+      "receipt": "TOKEN_VAZIO_AUTHORITY_CONFIRMATION",
+      "next_gate": "resolve producer ref, environment and QEMU invocation"
+    },
+    {
+      "id": "TP-08",
+      "domain": "MODEL_LLM",
+      "authority": "rafaelmeloreisnovo/llamaRafaelia",
+      "state": "CONTRACT_ONLY",
+      "receipt": "TOKEN_VAZIO_RUNTIME_ADOPTION",
+      "next_gate": "model receipt and safety gate"
+    },
+    {
+      "id": "TP-09",
+      "domain": "TOROIDAL_GEOMETRY_STATE_MACHINE",
+      "authority": "TOKEN_VAZIO_PRODUCER",
+      "state": "MODEL_ROUTE_ONLY",
+      "receipt": "TOKEN_VAZIO_EXECUTION",
+      "next_gate": "bind map, seed, precision, recurrence test and falsifier"
+    },
+    {
+      "id": "TP-10",
+      "domain": "CACHE_PHASE_DISTRIBUTED_GPU",
+      "authority": "TOKEN_VAZIO_PRODUCER",
+      "state": "MODEL_ROUTE_ONLY",
+      "receipt": "TOKEN_VAZIO_EXECUTION",
+      "next_gate": "bind workload, consistency model and fault matrix"
+    },
+    {
+      "id": "TP-11",
+      "domain": "NETWORK_PROTOCOL",
+      "authority": "TOKEN_VAZIO_PRODUCER",
+      "state": "MODEL_ROUTE_ONLY",
+      "receipt": "TOKEN_VAZIO_EXECUTION",
+      "next_gate": "golden frames, CRC vectors and partition tests"
+    },
+    {
+      "id": "TP-12",
+      "domain": "QUERY_COMPRESSION",
+      "authority": "TOKEN_VAZIO_PRODUCER",
+      "state": "MODEL_ROUTE_ONLY",
+      "receipt": "TOKEN_VAZIO_EXECUTION",
+      "next_gate": "bounded grammar fixtures plus LZ4 roundtrip and ratio"
+    },
+    {
+      "id": "TP-13",
+      "domain": "RLL_COSMOLOGY",
+      "authority": "instituto-Rafael/relativity-living-light",
+      "state": "RESEARCH_ROUTE_ONLY",
+      "receipt": "TOKEN_VAZIO_RLL_LIKELIHOOD_REPLICATION",
+      "next_gate": "DESI DR2 likelihood audit against LambdaCDM baseline"
+    },
+    {
+      "id": "TP-14",
+      "domain": "PUBLICATION",
+      "authority": "rafaelmeloreisnovo/papers",
+      "state": "BLOCKED_BY_EVIDENCE",
+      "receipt": "TOKEN_VAZIO_PUBLICATION_GATE",
+      "next_gate": "publish only after producer evidence and review"
+    },
+    {
+      "id": "TP-15",
+      "domain": "SESSION_MASCOT",
+      "authority": "HOST_PRESENTATION_ONLY",
+      "state": "OBSERVED_NO_MUTATION",
+      "receipt": "ACTIVE_PET_SEEDY",
+      "next_gate": "none; mascot must never become technical authority"
+    }
+  ],
+  "crossfail_cases": [
+    {
+      "id": "CF-01",
+      "fault": "D1_PROVIDER_UNKNOWN",
+      "expected": "TOKEN_VAZIO_PROVIDER_NO_INFERENCE",
+      "test_type": "TEST_DO_NOT_OVERREACT",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-02",
+      "fault": "D2_HYPOTHESIS_PROMOTED_AS_FACT",
+      "expected": "HOLD_PROMOTION",
+      "test_type": "TEST_AUTHORITY_DENY",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-03",
+      "fault": "D3_RUNTIME_RECEIPT_MISSING",
+      "expected": "TOKEN_VAZIO_EXECUTION_RUNTIME_HOLD",
+      "test_type": "TEST_FAIL_CLOSED",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-04",
+      "fault": "D4_WATCHDOG_HEARTBEAT_LOSS",
+      "expected": "FAIL_CLOSED_HOLD",
+      "test_type": "TEST_WATCHDOG_FAILURE",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-05",
+      "fault": "D5_PRIVACY_UNKNOWN",
+      "expected": "PRIVATE_DEFAULT_DENY",
+      "test_type": "TEST_PRIVACY_DEFAULT_DENY",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-06",
+      "fault": "D6_AUTHORITY_UNKNOWN",
+      "expected": "DENY_MUTATION_APPEND_DENIED_EVENT",
+      "test_type": "TEST_AUTHORITY_DENY",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-07",
+      "fault": "D7_PRIOR_EVENT_MISSING",
+      "expected": "TOKEN_VAZIO_PREDECESSOR_NO_PROMOTION",
+      "test_type": "TEST_FAIL_CLOSED",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-08",
+      "fault": "SANDBOX_PASS",
+      "expected": "NO_PRODUCTION_PROMOTION",
+      "test_type": "TEST_DO_NOT_OVERREACT",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-09",
+      "fault": "SEARCH_MISS",
+      "expected": "TOKEN_VAZIO_NOT_ABSENT",
+      "test_type": "TEST_DO_NOT_OVERREACT",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-10",
+      "fault": "RISK_DIMENSION_P0",
+      "expected": "HOLD_NON_COMPENSATORY",
+      "test_type": "TEST_FAIL_CLOSED",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-11",
+      "fault": "EVIDENCE_HISTORICAL_ONLY",
+      "expected": "BLOCK_CURRENT_PASS",
+      "test_type": "TEST_EVIDENCE_DECAY",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    },
+    {
+      "id": "CF-12",
+      "fault": "META_WATCH_DEPTH_EXCEEDED",
+      "expected": "HOLD_FOR_AUDIT",
+      "test_type": "TEST_META_WATCH_BOUND",
+      "execution_state": "SPECIFIED_NOT_EXECUTED"
+    }
+  ],
+  "primary_sources": [
+    {
+      "id": "EXT-001",
+      "title": "W3C PROV-DM",
+      "source_kind": "OFFICIAL_STANDARD",
+      "version_or_date": "W3C Recommendation 2013-04-30",
+      "url": "https://www.w3.org/TR/prov-dm/",
+      "maps_to": ["D1"],
+      "boundary": "reference does not prove local custody"
+    },
+    {
+      "id": "EXT-002",
+      "title": "JSON Schema Draft 2020-12",
+      "source_kind": "OFFICIAL_SPEC",
+      "version_or_date": "2020-12",
+      "url": "https://json-schema.org/draft/2020-12",
+      "maps_to": ["D7"],
+      "boundary": "schema PASS does not prove runtime"
+    },
+    {
+      "id": "EXT-003",
+      "title": "JSON Canonicalization Scheme",
+      "source_kind": "OFFICIAL_STANDARD",
+      "version_or_date": "RFC 8785",
+      "url": "https://www.rfc-editor.org/info/rfc8785/",
+      "maps_to": ["D1", "D7"],
+      "boundary": "canonicalization does not supply signing authority"
+    },
+    {
+      "id": "EXT-004",
+      "title": "SLSA Build Provenance",
+      "source_kind": "OFFICIAL_SPEC",
+      "version_or_date": "v1.2",
+      "url": "https://slsa.dev/spec/v1.2/build-provenance",
+      "maps_to": ["D1", "D3"],
+      "boundary": "local SLSA adoption or certification is not claimed"
+    },
+    {
+      "id": "EXT-005",
+      "title": "in-toto Statement",
+      "source_kind": "OFFICIAL_SPEC",
+      "version_or_date": "v1",
+      "url": "https://in-toto.io/Statement/v1",
+      "maps_to": ["D1", "D3", "D7"],
+      "boundary": "statement creation is not independent verification"
+    },
+    {
+      "id": "EXT-006",
+      "title": "OpenTelemetry Logs Data Model",
+      "source_kind": "OFFICIAL_SPEC",
+      "version_or_date": "stable specification observed 2026-08-24",
+      "url": "https://opentelemetry.io/docs/specs/otel/logs/data-model/",
+      "maps_to": ["D4", "D7"],
+      "boundary": "local instrumentation remains TOKEN_VAZIO"
+    },
+    {
+      "id": "EXT-007",
+      "title": "NIST SP 800-160 Volume 2 Revision 1",
+      "source_kind": "OFFICIAL_STANDARD",
+      "version_or_date": "2021",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v2/r1/final",
+      "maps_to": ["D4"],
+      "boundary": "reference does not imply compliance or certification"
+    },
+    {
+      "id": "EXT-008",
+      "title": "NIST SP 800-218 SSDF",
+      "source_kind": "OFFICIAL_STANDARD",
+      "version_or_date": "v1.1 final 2022; v1.2 draft observed",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "maps_to": ["D4", "D6", "D7"],
+      "boundary": "SSDF v1.2 final or local conformance is not claimed"
+    },
+    {
+      "id": "EXT-009",
+      "title": "Arm AAPCS64",
+      "source_kind": "OFFICIAL_SPEC",
+      "version_or_date": "2025Q4 issued 2026-01-23",
+      "url": "https://github.com/ARM-software/abi-aa/blob/main/aapcs64/aapcs64.rst",
+      "maps_to": ["D3"],
+      "boundary": "ABI conformance requires producer build and execution evidence"
+    },
+    {
+      "id": "EXT-010",
+      "title": "QEMU Documentation",
+      "source_kind": "OFFICIAL_DOCS",
+      "version_or_date": "master 11.1.50 observed",
+      "url": "https://www.qemu.org/docs/master/",
+      "maps_to": ["D3", "D4"],
+      "boundary": "master documentation is not a runtime receipt"
+    },
+    {
+      "id": "EXT-011",
+      "title": "LZ4 Frame Format",
+      "source_kind": "OFFICIAL_SPEC",
+      "version_or_date": "v1.6.4 2023-12-28",
+      "url": "https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md",
+      "maps_to": ["D3", "D4"],
+      "boundary": "ratio and performance still require measured workloads"
+    },
+    {
+      "id": "EXT-012",
+      "title": "Conflict-Free Replicated Data Types",
+      "source_kind": "PRIMARY_PAPER",
+      "version_or_date": "Shapiro et al. 2011",
+      "url": "https://inria.hal.science/inria-00609399v2/document",
+      "maps_to": ["D3", "D4"],
+      "boundary": "RAFAELIA implementation and convergence remain unobserved"
+    },
+    {
+      "id": "EXT-013",
+      "title": "Linearizability: A Correctness Condition for Concurrent Objects",
+      "source_kind": "PRIMARY_PAPER",
+      "version_or_date": "Herlihy and Wing 1990",
+      "url": "https://dl.acm.org/doi/10.1145/78969.78972",
+      "maps_to": ["D3", "D4"],
+      "boundary": "local concurrent code is not proven linearizable"
+    },
+    {
+      "id": "EXT-014",
+      "title": "Lyapunov Characteristic Exponents for Smooth Dynamical Systems",
+      "source_kind": "PRIMARY_PAPER",
+      "version_or_date": "Benettin et al. 1980",
+      "url": "https://doi.org/10.1007/BF02128236",
+      "maps_to": ["D2", "D3"],
+      "boundary": "T7, cycle 42 or attractor claims require map, seed, precision and execution"
+    },
+    {
+      "id": "EXT-015",
+      "title": "DESI DR2 Results II",
+      "source_kind": "PRIMARY_PAPER",
+      "version_or_date": "arXiv:2503.14738 2025",
+      "url": "https://arxiv.org/abs/2503.14738",
+      "maps_to": ["D2", "D3"],
+      "boundary": "statistical preference cannot transfer to RLL without reproduced likelihood and baseline"
+    },
+    {
+      "id": "EXT-016",
+      "title": "DESI DR2 Results IV",
+      "source_kind": "PRIMARY_PAPER",
+      "version_or_date": "arXiv:2607.27410 2026-07-29",
+      "url": "https://arxiv.org/abs/2607.27410",
+      "maps_to": ["D2", "D3"],
+      "boundary": "recent preprint; replication and systematic-error analysis remain separate"
+    }
+  ],
+  "session_surface": {
+    "drive_matrix_ref": "DRIVE_MATRIX_CANONICAL",
+    "materialized_tabs": [
+      "OMEGA7_ADOCAO",
+      "TRILHAS_PRODUTORAS",
+      "CROSSFAIL_OMEGA",
+      "FONTES_PRIMARIAS",
+      "SESSAO_OMEGA_20260824"
+    ],
+    "raw_private_content_embedded": false,
+    "pet": {
+      "name": "Seedy",
+      "role": "SESSION_MASCOT_ONLY",
+      "authority": "NONE"
+    }
+  },
+  "write_boundary": {
+    "allowed": [
+      "append-only Drive Matrix tabs",
+      "non-protected Mapa branch",
+      "draft pull request",
+      "owned negative fixtures"
+    ],
+    "forbidden_without_new_authority": [
+      "merge",
+      "producer repository mutation",
+      "production fault injection",
+      "raw private Drive content publication",
+      "claim promotion"
+    ]
+  },
+  "F_ok": [
+    "Drive Matrix adoption tabs materialized and provider-read verified",
+    "Mapa Mesh V1 baseline bound to exact commit",
+    "Omega7, attention, risk, quiet-watchdog and producer tracks specified",
+    "primary-source registry separated from local execution evidence"
+  ],
+  "F_gap": [
+    "producer runtime adoption remains TOKEN_VAZIO unless separately evidenced",
+    "CrossFail cases are specified but not yet executed at manifest creation",
+    "server-side merge enforcement and independent approval remain external governance blockers",
+    "geometry, distributed, protocol, query and compression producer authority is unresolved"
+  ],
+  "F_next": "execute the manifest validator and negative tests in a draft PR; then append exact CI receipts without promoting claim_allowed",
+  "DELTA": "Mesh V1 procedural contracts become a bounded adoption pilot linked to Drive Matrix, producer gates and primary sources"
+}
