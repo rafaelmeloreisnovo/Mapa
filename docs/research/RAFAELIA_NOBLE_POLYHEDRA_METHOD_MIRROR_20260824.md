@@ -34,8 +34,8 @@ Primary result summary:
 
 Primary URLs:
 
-- https://arxiv.org/abs/2607.28711
-- https://www.societyforscience.org/regeneron-sts/2026-student-finalists/connor-hill/
+- [arXiv 2607.28711](https://arxiv.org/abs/2607.28711)
+- [Society for Science — Connor Hill](https://www.societyforscience.org/regeneron-sts/2026-student-finalists/connor-hill/)
 
 The supplied news article is treated as a secondary pointer; primary sources govern the technical description.
 
