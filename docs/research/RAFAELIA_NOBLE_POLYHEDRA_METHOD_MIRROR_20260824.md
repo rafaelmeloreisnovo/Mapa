@@ -20,7 +20,9 @@ Hard invariants:
 
 ## 1. External reference — verified primary-source core
 
-Primary paper: Connor Hill, **The complete set of noble polyhedra**, arXiv:2607.22862, submitted 2026-07-30.
+Primary paper: Connor Hill, **The complete set of noble polyhedra**, arXiv:2607.28711, submitted 2026-07-30.
+
+**Provenance correction:** the initial branch materialization mistakenly recorded arXiv `2607.22862`. A primary-source recheck before finalization established `2607.28711` as the correct identifier. The mathematical title/author/date/result description did not change; the incorrect identifier remains visible in Git history and is recorded in the custody receipt rather than hidden.
 
 Primary result summary:
 
@@ -32,7 +34,7 @@ Primary result summary:
 
 Primary URLs:
 
-- https://arxiv.org/abs/2607.22862
+- https://arxiv.org/abs/2607.28711
 - https://www.societyforscience.org/regeneron-sts/2026-student-finalists/connor-hill/
 
 The supplied news article is treated as a secondary pointer; primary sources govern the technical description.
@@ -148,6 +150,10 @@ State: `FAIL_DOC_EXPECTATION_DRIFT` pending source-of-truth reconciliation; no s
 
 State: `PASS_MANUAL_FUNCTION_INVOCATION / TEST_DISCOVERY_GAP`.
 
+A dedicated fail-closed validator was added at `tools/validate_noble_polyhedra_method_mirror.py`. A second sandbox retrieval/execution attempt was blocked by external DNS resolution, so no PASS is fabricated for the new validator in this session.
+
+State: `TOKEN_VAZIO_EXECUTION_ENV`.
+
 ## 6. NOVO/raw corpus check
 
 The Drive master index for corpus `000–050` exists with typed projections (`CONCEITOS`, `AREAS`, `FORMULAS`, `PROGRAMAS`, `RELACOES`, `TOKEN_VAZIO`, etc.), but its recorded state is still `MATERIALIZING` / `INGESTION_REQUIRED`.
@@ -218,7 +224,7 @@ See Section 8.
 
 ### LEARN:X
 
-This document and its companion JSON/receipt are new append-only records. They do not rewrite the older audits.
+This document and its companion JSON/receipt are append-only in Git history. Corrections are explicit commits/receipts; earlier states are not erased from history.
 
 ## 8. Gap ledger / TOKEN_VAZIO
 
@@ -231,6 +237,7 @@ This document and its companion JSON/receipt are new append-only records. They d
 | `bootstrap-arm.zip` required by C08 | `MISSING_ARTIFACT` | C08 remains FAIL | restore from authoritative custody or change contract with evidence |
 | Vectra invariant validator/doc contract drift | `OPEN_DRIFT` | blocks validator PASS | identify authoritative invariant spec and reconcile without weakening checks |
 | Automated discovery of function-style runtime boundary tests | `OPEN_TEST_HARNESS` | limits CI evidence | register with pytest or explicit runner |
+| New mirror validator runtime in this session | `TOKEN_VAZIO_EXECUTION_ENV` | blocks validator PASS claim | execute in CI/resolvable environment and seal output |
 | Noble-polyhedra engine implementation | `NOT_IMPLEMENTED` | blocks any algorithm claim | only after complete paper/code study, implement independently with test corpus |
 
 ## 9. Serpent–Dove operational layer
@@ -239,7 +246,7 @@ Applied here as:
 
 - **Serpent / discernment:** search primary sources, raw source, source code, hashes, negative tests, validator failures and possible prior art.
 - **Dove / minimum sufficient intervention:** no rewriting history, no claiming equivalence, no publishing private raw content, no automatic promotion, no destructive edits.
-- **Reversibility:** all new records live on a dedicated branch/PR; `claim_allowed=false`.
+- **Reversibility:** all new domain records live on a dedicated branch/PR; `claim_allowed=false`.
 
 `SEE_MORE != CLAIM_MORE`
 
