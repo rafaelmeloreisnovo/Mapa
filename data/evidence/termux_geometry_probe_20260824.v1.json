@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "TERMUX-GEOMETRY-PROBE-20260824-V1",
+  "executed_at": "2026-08-24",
+  "claim_allowed": false,
+  "source": {
+    "archive": "termux-app-rafacodephi-master.zip",
+    "archive_sha256": "ac180c75a748c984b5973b1abaa60f251cda17bffe8c9f3dd13c70030c7e7389",
+    "source_header": "app/src/main/cpp/rafaelia_bagua.h",
+    "source_header_sha256": "8859d36ca2cf9f87424ebe52be3ce63e8544e5794641dab7c334f23bb2c861d9"
+  },
+  "probe": {
+    "language": "C11",
+    "compile_flags": ["-std=c11", "-O2", "-Wall", "-Wextra"],
+    "harness_sha256": "ba1769483cb42fdf829ca1ad46634cc18a201c637c67be6e3248b7d3d96e34e6",
+    "binary_sha256": "83226fd37389d3309c2a6dc0fc7096026932769163917a0e716dec5b7549291c"
+  },
+  "observations": {
+    "rotation_selftest": 1,
+    "trigram_domain": [0,1,2,3,4,5,6,7],
+    "trigram_inverse_closed": true,
+    "q15_initial_vector": [32768,0],
+    "q15_rotation_degrees_per_step": 30,
+    "q15_steps_observed": 12,
+    "q15_vector_after_step_12": [32768,0],
+    "q15_norm2_baseline": 1073741824,
+    "q15_norm2_observed_positive_quantization_delta": 4516
+  },
+  "scoped_verdict": "PASS_LOCAL_DISCRETE_ROTATION_SELFTEST",
+  "does_not_evidence": [
+    "42_stable_orbits",
+    "noble_polyhedra_classification",
+    "physical_geometry_claim",
+    "mathematical_novelty",
+    "scientific_equivalence_to_connor_hill_result"
+  ],
+  "validator_observations": [
+    {
+      "command": "python3 scripts/validate_rafaelia_claim_matrix.py",
+      "checks": 20,
+      "final_failures_after_navigation_generation": ["C08"],
+      "failure_class": "MISSING_REQUIRED_ARTIFACT",
+      "detail": "app/src/main/cpp/bootstrap-arm.zip missing from supplied snapshot"
+    },
+    {
+      "command": "python3 scripts/validate_vectra_invariants.py",
+      "checks": 14,
+      "pass": 7,
+      "fail": 7,
+      "failure_class": "DOC_EXPECTATION_DRIFT",
+      "detail": "V01-V07 expected invariant patterns not found in current AGENTS.md"
+    },
+    {
+      "command": "manual invocation of function-style tests in tests/test_readme_runtime_claim_boundary.py",
+      "pass": 3,
+      "fail": 0,
+      "discovery_gap": "python -m unittest discovered zero tests because the file is function-style"
+    }
+  ]
+}
