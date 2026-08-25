@@ -1,0 +1,127 @@
+{
+  "schema_version": "rafaelia.omega-assurance-adoption-receipt/v1",
+  "receipt_id": "OMEGA_ASSURANCE_ADOPTION_V2_20260824",
+  "status": "MATERIALIZED_VALIDATED_GOVERNANCE_PENDING",
+  "observed_on": "2026-08-24",
+  "claim_allowed": false,
+  "append_only": true,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 393,
+  "pull_request_state": "DRAFT",
+  "branch": "chatgpt/omega-assurance-adoption-v2-20260824",
+  "base_main": "1da6932b7a90215dda5fd8c2e2b1d27b114e6538",
+  "qualified_head": "36582b61fc2f0d6310a089f89c48ce3370138346",
+  "drive_first_delta": {
+    "reference": "DRIVE_MATRIX_CANONICAL",
+    "provider_write": "SUCCESS",
+    "provider_readback": "SUCCESS",
+    "tab_count_before": 18,
+    "tab_count_after": 23,
+    "tabs": [
+      "OMEGA7_ADOCAO",
+      "TRILHAS_PRODUTORAS",
+      "CROSSFAIL_OMEGA",
+      "FONTES_PRIMARIAS",
+      "SESSAO_OMEGA_20260824"
+    ],
+    "raw_private_content_embedded_in_github": false
+  },
+  "local_qualification": {
+    "python_compile": "PASS",
+    "negative_and_structural_tests": {
+      "count": 15,
+      "conclusion": "PASS"
+    },
+    "validator": {
+      "conclusion": "PASS",
+      "axes": 7,
+      "producer_tracks": 15,
+      "crossfail_cases": 12,
+      "primary_sources": 16,
+      "ledger_events": 2
+    }
+  },
+  "github_qualification": {
+    "omega_assurance_adoption_v2": {
+      "run_id": 32798323018,
+      "run_number": 1,
+      "conclusion": "success",
+      "scope": "validator plus 13 owned negative and structural fixtures"
+    },
+    "general_ci": {
+      "run_id": 32798323040,
+      "run_number": 1722,
+      "conclusion": "success",
+      "confirmations": [
+        "workflow YAML parse",
+        "changed Markdown lint",
+        "repository structure",
+        "internal link verification"
+      ]
+    },
+    "branch_topology": {
+      "run_id": 32798323045,
+      "run_number": 847,
+      "conclusion": "success"
+    },
+    "live_control_plane_reconciliation": {
+      "run_id": 32798323005,
+      "run_number": 221,
+      "conclusion": "success"
+    }
+  },
+  "independent_governance": {
+    "promotion_control": {
+      "run_id": 32798323039,
+      "run_number": 972,
+      "conclusion": "failure",
+      "claim_allowed_check": "PASS_FALSE_PRESERVED",
+      "negative_fixtures": "PASS",
+      "blocking_reasons": [
+        "PULL_REQUEST_DRAFT_OR_UNKNOWN",
+        "INDEPENDENT_APPROVAL_MISSING"
+      ],
+      "observed_independent_approvals": 0,
+      "required_independent_approvals": 1,
+      "interpretation": "EXPECTED_FAIL_CLOSED_GOVERNANCE_DENIAL"
+    },
+    "server_merge_enforcement": {
+      "run_id": 32798323016,
+      "run_number": 244,
+      "conclusion": "failure",
+      "detector_fixtures": "PASS",
+      "failure_modes": [
+        "BRANCH_PROTECTION_DISABLED",
+        "PROTECTION_NOT_ENABLED"
+      ],
+      "server_side_merge_binding": "NOT_ENFORCED_OBSERVED",
+      "enforcement_level": "off",
+      "next_gate": "PROVE_PROMOTION_CONTROL_CONTEXT_IS_SERVER_REQUIRED_AND_ZERO_APPROVAL_MERGE_IS_BLOCKED",
+      "interpretation": "LIVE_SERVER_GOVERNANCE_GAP_INDEPENDENT_OF_ADOPTION_VALIDATOR"
+    }
+  },
+  "evidence_boundary": {
+    "manifest_structure": "EVIDENCED_BY_LOCAL_AND_GITHUB_CI",
+    "drive_matrix_delta": "EVIDENCED_BY_PROVIDER_WRITE_AND_READBACK",
+    "producer_runtime_adoption": "TOKEN_VAZIO_NOT_OBSERVED",
+    "crossfail_producer_execution": "TOKEN_VAZIO_NOT_EXECUTED",
+    "production_watchdog": "TOKEN_VAZIO_NOT_PROVEN",
+    "physical_failover": "TOKEN_VAZIO_NOT_PROVEN",
+    "geometric_or_performance_claims": "NOT_CLAIMED",
+    "cosmological_truth_or_model_preference": "NOT_CLAIMED",
+    "standards_certification": "NOT_CLAIMED"
+  },
+  "F_ok": [
+    "Drive Matrix received five append-only tabs and was read back successfully",
+    "adoption manifest, ledger, validator, tests, workflow and index materialized",
+    "dedicated workflow, general CI, branch topology and live reconciliation passed",
+    "promotion control preserved claim_allowed=false and denied unauthorized promotion"
+  ],
+  "F_gap": [
+    "independent approval missing while PR remains draft",
+    "main branch protection and required server-side promotion check are disabled",
+    "producer runtime adoption and CrossFail execution remain TOKEN_VAZIO",
+    "several technical domains retain TOKEN_VAZIO_PRODUCER"
+  ],
+  "F_next": "revalidate this receipt-bearing head; keep the PR draft and select one producer only after its AGENTS preflight and smallest executable gate are resolved"
+}
