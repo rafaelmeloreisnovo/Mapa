@@ -43,6 +43,12 @@ The binary requires mask `0x07`; no axis may be silently omitted. Canonical GitH
 
 Each ELF has one RX `PT_LOAD`, zero `PT_INTERP`, `DT_NEEDED`, relocations, symbols, undefined symbols, writable static bytes, source loops and heap primitives.
 
+## Drive longitudinal readback
+
+The canonical Drive document `RAFAELIA — Master Navigation Registry V1` (`1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y`) received the append-only marker `SUPERSESSÃO APPEND-ONLY — RAFCODE_FEDERATION_V1 — 2026-08-25`. The write used required revision control, returned revision `AIroW37h5TPWuni5fvC6A7ahvnk-truV83UYSpHgRqCUwxHZbq3s2qX2N1XaFEy4mMSEixg2DCenOwBcYbxyQym8WxVS9ZlMMNgimwrjObc`, and readback confirmed the marker as `HEADING_2` plus both PRs, the run, all three index IDs and all three binary hashes.
+
+Drive receipt: `data/receipts/rafcode/2026-08-25-rafcode-federation-drive-append.v1.json`
+
 ## Boundary
 
 This evidence does **not** prove physical ARM execution, HMAC/authenticity closure, repository-wide health, merge readiness, post-merge `main`, or complete federation. These remain:
@@ -59,5 +65,5 @@ Receiving receipt: `data/receipts/rafcode/2026-08-25-rafcode-federation-cross-ab
 ## R3
 
 - `F_ok`: L/O/T identities, producer boundary, fixed-frame implementation and three cross-ABI compile/link/ELF/hotpath gates are reconstructible.
-- `F_gap`: device execution, HMAC authenticity, producer merge/main, Drive append and repository-wide health remain open/TOKEN_VAZIO.
-- `F_next`: append the route to the Drive master navigation with revision/readback evidence; keep both PRs draft until global blockers and merge authority are resolved.
+- `F_gap`: device execution, HMAC authenticity, producer merge/main and repository-wide health remain open/TOKEN_VAZIO.
+- `F_next`: keep both PRs draft until global blockers and merge authority are resolved; after authorized integration, collect producer-main and physical-device receipts.
