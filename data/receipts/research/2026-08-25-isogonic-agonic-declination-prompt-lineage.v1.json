@@ -1,0 +1,83 @@
+{
+  "schema": "rafaelia.research-receipt.v1",
+  "date": "2026-08-25",
+  "status": "INDEXED_RESEARCH_DELTA",
+  "claim_allowed": false,
+  "delta": "indices/deltas/ATLAS_ISOGONIC_AGONIC_DECLINATION_PROMPT_RESPONSE_CROSSWALK_20260825.md",
+  "registry": "data/research/geomagnetic_declination_isogonic_agonic_prompt_lineage.v1.json",
+  "parent": "indices/deltas/ATLAS_SOLAR_LUNAR_TZOLKIN_AURORA_JOVIAN_HE3_20260825.md",
+  "private_sources": [
+    {
+      "provider": "Google Drive",
+      "file_id": "1YSVI3lRddEYw8GxO75tBbydBxOr2PIt5",
+      "title": "MESSAGES-00005.jsonl.txt",
+      "observed": "direct prompt-response lineage for noise floor / magnetic declination / historical antagonicas / isogonic lines",
+      "public_text_exported": false
+    },
+    {
+      "provider": "Google Drive",
+      "file_id": "1KlvHxzoUNMHu5pg5VZwh441PMj-ROJif",
+      "title": "MESSAGES-00015.jsonl.txt",
+      "observed": "later assistant drift using nonstandard sintagonicas and unverified sensor execution claims",
+      "public_text_exported": false
+    }
+  ],
+  "public_evidence": [
+    {
+      "authority": "NOAA NCEI World Magnetic Model 2025",
+      "observed": "D is geomagnetic declination; WMM2025 supplies X,Y,Z,H,F,I,D and secular variation for the contemporary main field",
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "authority": "NOAA NCEI Magnetic Declination",
+      "observed": "declination is angle between magnetic north and true north; varies with time and location; historical isogonic data are available",
+      "state": "PASS_STANDARD_GEOMAGNETICS"
+    },
+    {
+      "authority": "NOAA/IAGA IGRF-14",
+      "observed": "IGRF-14 is the current standard mathematical description of the Earth main magnetic field and provides historical/scientific epoch reconstruction",
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "authority": "NASA CCMC IGRF",
+      "observed": "IGRF outputs declination/inclination/field parameters and excludes external sources",
+      "state": "PASS_BOUNDARY_DEFINITION"
+    }
+  ],
+  "reviewed_internal_artifacts": [
+    "data/research/solar_lunar_aurora_jovian_observables.v1.json",
+    "data/research/aurora_historical_image_manifest_1971_2026.v1.json",
+    "data/federation/geophysical-transduction-executable-route-v1.json",
+    "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca:data/calendar_cycles_matrix.json",
+    "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca:data/calendar_round_lunar_extension_20260825.v1.json",
+    "docs/longitudinal/RAFAELIA_PROMPT_ROUTE_INDEX_2026-08-12.md"
+  ],
+  "corrections": [
+    {
+      "historical": "antagonicas used as magnetic-line term",
+      "replacement": "preserve as provenance token; use agonic for D=0"
+    },
+    {
+      "historical": "sintagonicas treated as geomagnetic line class",
+      "replacement": "REJECT_NONSTANDARD"
+    },
+    {
+      "historical": "isogonic/agonic lines assigned metaphysical or intentional effects",
+      "replacement": "REJECT_METAPHOR_AS_PHYSICS"
+    },
+    {
+      "historical": "sensor activity asserted without execution evidence",
+      "replacement": "REJECT_EXECUTION_WITHOUT_EVIDENCE"
+    }
+  ],
+  "gates": {
+    "PROMPT_RESPONSE_DIRECT_LINEAGE": "PASS_SOURCE_OBSERVED",
+    "DECLINATION_TERMINOLOGY": "PASS",
+    "WMM_IGRF_ROUTE": "PASS",
+    "PUBLIC_PRIVATE_BOUNDARY": "PASS_NO_RAW_PRIVATE_TEXT",
+    "MAG_SENSOR_REAL_DATA": "TOKEN_VAZIO",
+    "DECLINATION_AURORA_CAUSALITY": "TOKEN_VAZIO",
+    "DECLINATION_SAA_CAUSALITY": "TOKEN_VAZIO",
+    "FULL_JSON_UNIVERSE_SWEEP": "TOKEN_VAZIO"
+  }
+}
