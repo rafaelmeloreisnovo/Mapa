@@ -258,12 +258,13 @@ objective
 Machine contract: `governance/ACTIVATION_REGISTRY_V1.json`  
 Human contract: `docs/ACTIVATION_REGISTRY_V1.md`
 
-Observed unresolved alignment:
+Pointer reconciliation:
 
-- `GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT` — Drive Master Navigation Registry still references a GitHub path not observed on current `main`; historical memory is not silently rewritten.
+- `GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT` — `PASS/FECHADO` on 2026-08-25. Drive Master Navigation Registry received an append-only supersession that binds the current federated mirror `navigation/INDEX.md`; readback passed and provenance is recorded at `data/receipts/navigation/2026-08-25-master-nav-pointer-drift.v1.json`.
+- Legacy `docs/RAFAELIA_MASTER_NAV_REGISTRY_V1.md` is retained only as `SUPERSEDED` history; it is not the current mirror.
 
 ## R3
 
-- `F_ok`: universal navigation root exists; activation semantics are explicitly indexed; the 5h snapshot remains correctly demoted to a temporal leaf.
-- `F_gap`: full-content coverage, Drive/GitHub deduplication, runtime activation enforcement, and master-navigation pointer reconciliation remain `TOKEN_VAZIO`/open where applicable.
-- `F_next`: validate the Activation Registry delta, bind it into the machine registry/receipt chain, then reconcile the Drive pointer with append-only provenance.
+- `F_ok`: universal navigation root exists; activation semantics are explicitly indexed; the master-navigation pointer drift is reconciled with Drive readback + GitHub receipt; the 5h snapshot remains correctly demoted to a temporal leaf.
+- `F_gap`: full-content coverage, Drive/GitHub deduplication, runtime activation enforcement, and other unresolved evidence gates remain `TOKEN_VAZIO`/open where applicable.
+- `F_next`: validate this reconciliation delta in CI, merge it, verify `main`, then continue with the highest-unblocking unresolved evidence/runtime gap.

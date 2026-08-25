@@ -1,7 +1,7 @@
 {
   "schema": "rafaelia.activation-registry/v1",
   "registry_id": "RAFAELIA-ACTIVATION-REGISTRY-V1",
-  "generated_at": "2026-08-23T05:15:00-03:00",
+  "generated_at": "2026-08-25T10:00:00-03:00",
   "state": "IMPLEMENTED_PROPOSED",
   "claim_state": "REFERENCE",
   "scope": {
@@ -175,26 +175,31 @@
   "observed_gaps": [
     {
       "id": "GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT",
-      "state": "ABERTO",
+      "state": "FECHADO",
       "priority": "P1",
       "gap": "Drive Master Navigation Registry references Mapa/docs/RAFAELIA_MASTER_NAV_REGISTRY_V1.md, but that path was not found on current main; current GitHub navigation artifacts are under navigation/.",
       "signals": [
         "missing path: docs/RAFAELIA_MASTER_NAV_REGISTRY_V1.md",
         "present path: navigation/RAFAELIA_MASTER_REGISTRY.v1.json",
-        "present path: navigation/INDEX.md"
+        "present path: navigation/INDEX.md",
+        "Drive append-only supersession readback PASS on 2026-08-25"
       ],
       "computable_action": "reconcile the Drive pointer with the current GitHub navigation authority using an explicit receipt; do not silently rewrite historical memory",
       "exit_criterion": "Drive navigation pointer resolves to the current canonical GitHub navigation artifact and the change has a provenance receipt",
       "provenance": [
         "SRC:DRIVE:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
         "ART:Mapa:navigation/RAFAELIA_MASTER_REGISTRY.v1.json",
-        "ART:Mapa:navigation/INDEX.md"
-      ]
+        "ART:Mapa:navigation/INDEX.md",
+        "ART:Mapa:data/receipts/navigation/2026-08-25-master-nav-pointer-drift.v1.json"
+      ],
+      "closed_at": "2026-08-25T10:00:00-03:00",
+      "receipt": "data/receipts/navigation/2026-08-25-master-nav-pointer-drift.v1.json",
+      "result": "PASS"
     }
   ],
   "R3": {
-    "F_ok": "activation semantics consolidated as a subordinate machine-readable registry",
-    "F_gap": ["GAP:ACTIVATION_MASTER_NAV_POINTER_DRIFT", "full runtime automation remains outside this registry"],
-    "F_next": "validate this registry in CI/schema checks, merge only after review, then reconcile the Drive pointer with an append-only receipt"
+    "F_ok": "activation semantics consolidated; master-navigation pointer drift closed by Drive append-only supersession plus readback and provenance receipt",
+    "F_gap": ["full runtime automation remains outside this registry"],
+    "F_next": "validate this registry in CI/schema checks and continue runtime-enforcement gaps without reopening the closed navigation-pointer drift"
   }
 }
