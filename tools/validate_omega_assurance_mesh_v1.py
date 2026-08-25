@@ -282,10 +282,11 @@ def validate_bundle(root: Path = ROOT) -> list[str]:
     for index, result in enumerate(negative_sets, 1):
         add(errors, bool(result), f"negative fixture {index} unexpectedly passed")
 
-    public_paths = list(contracts.values()) + [
-        "indices/OMEGA_ASSURANCE_MESH_V1.md",
-        "data/receipts/OMEGA_ASSURANCE_MESH_V1_20260824.v1.json",
+    receipt_paths = [
+        str(path.relative_to(root))
+        for path in sorted((root / "data/receipts").glob("OMEGA_ASSURANCE_MESH_V1_*.json"))
     ]
+    public_paths = list(contracts.values()) + ["indices/OMEGA_ASSURANCE_MESH_V1.md"] + receipt_paths
     for relative in public_paths:
         path = root / relative
         if path.is_file():
