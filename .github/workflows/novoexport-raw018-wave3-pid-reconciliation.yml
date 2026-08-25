@@ -1,0 +1,31 @@
+name: novoexport-raw018-wave3-pid-reconciliation
+
+on:
+  pull_request:
+    paths:
+      - 'data/evidence/novoexport_raw018_wave3_pid_reconciliation_20260824.v1.json'
+      - 'tools/reconcile_novoexport_raw018_pid_boundary.py'
+      - 'tools/validate_novoexport_raw018_wave3_evidence.py'
+      - 'tests/test_reconcile_novoexport_raw018_pid_boundary.py'
+      - '.github/workflows/novoexport-raw018-wave3-pid-reconciliation.yml'
+      - 'indices/NOVOEXPORT_RAW018_WAVE3_PID_RECONCILIATION_20260824_V1.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout pinned commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile Wave 3 tools and tests
+        run: |
+          python3 -m py_compile tools/reconcile_novoexport_raw018_pid_boundary.py
+          python3 -m py_compile tools/validate_novoexport_raw018_wave3_evidence.py
+          python3 -m py_compile tests/test_reconcile_novoexport_raw018_pid_boundary.py
+      - name: Run fail-closed synthetic reconciliation tests
+        run: python3 tests/test_reconcile_novoexport_raw018_pid_boundary.py
+      - name: Validate public-safe Wave 3 evidence
+        run: python3 tools/validate_novoexport_raw018_wave3_evidence.py
