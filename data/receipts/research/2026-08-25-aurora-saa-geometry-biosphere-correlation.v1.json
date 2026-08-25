@@ -1,0 +1,66 @@
+{
+  "schema": "rafaelia.research-receipt.v1",
+  "date": "2026-08-25",
+  "status": "INDEXED_RESEARCH_ADDENDUM",
+  "claim_allowed": false,
+  "parent_delta": "indices/deltas/ATLAS_PACE_PHYTO_O2_NITROGEN_RHINCODON_FLOW_20260825.md",
+  "addendum": "indices/deltas/ATLAS_AURORA_SAA_GEOMETRY_IONIZATION_BIOSPHERE_CORRELATION_20260825.md",
+  "authorities_observed": [
+    {
+      "authority": "NASA/NTRS SAA geometry",
+      "state": "PASS_CONTEXT",
+      "observed": "main geomagnetic dipole tilted about 10-11 degrees from rotation axis and offset hundreds of km; SAA is a weak-field region"
+    },
+    {
+      "authority": "NASA/NTRS auroral ion chemistry",
+      "state": "PASS_MECHANISM",
+      "observed": "auroral energetic particles ionize/dissociate N/O species and produce NO+, O2+, O+, N2+, NO and enhanced NOx"
+    },
+    {
+      "authority": "NASA Aura / EPP",
+      "state": "PASS_MECHANISM",
+      "observed": "energetic particle precipitation produces NOx/HOx and can alter polar middle-atmosphere ozone"
+    },
+    {
+      "authority": "NASA SVS Phytoplankton Decline",
+      "state": "PASS_NASA_SERIES",
+      "observed": "global modeled diatom concentration declined more than 1 percent per year during 1998-2012"
+    },
+    {
+      "authority": "NASA Amazon vegetation decline",
+      "state": "PASS_NASA_SERIES",
+      "observed": "2000-2012 eastern/southeastern Amazon greenness decline associated with drying; El Nino years appear browner"
+    },
+    {
+      "authority": "Aquatic Ecology 2025",
+      "state": "EVIDENCE_LOCAL",
+      "observed": "chlorophyll versus sunspot number correlation is cycle-dependent; solar cycle 24 reported Spearman r about 0.83 but other cycles differ"
+    }
+  ],
+  "repository_evidence": {
+    "private_pipeline": "rafaelmeloreisnovo/Rafaelia_Private/saa_aurora_pipeline",
+    "observed": "ionization variables exist, but calculate_B_local uses geographic dipole approximation plus Gaussian SAA penalty rather than explicit geomagnetic tilt/offset/IGRF transform",
+    "gate": "TOKEN_VAZIO_SAA_TILT_IMPLEMENTATION"
+  },
+  "longitudinal_search": {
+    "drive_folder": "saa_aurora_pipeline",
+    "drive_folder_id": "1GcnZFaPKlBZqemoOEabZk4vOsC3H_IIA",
+    "historical_title_found": "Análise Plâncton e Interações",
+    "numeric_internal_aurora_biosphere_coefficient_recovered": false,
+    "gate": "TOKEN_VAZIO_INTERNAL_AURORA_BIOSPHERE_CORR_COEF"
+  },
+  "gates": {
+    "GEOMAG_TILT_OFFSET": "PASS_CONTEXT",
+    "SAA_EVOLUTION": "PASS_OBSERVED",
+    "AURORA_N_O_IONIZATION": "PASS_MECHANISM",
+    "EPP_NOX": "PASS_MECHANISM",
+    "AURORA_EVENT_DECAY": "PASS_HISTORICAL",
+    "DIATOM_DECLINE_1998_2012": "PASS_NASA_SERIES",
+    "AMAZON_VEG_DECLINE_2000_2012": "PASS_NASA_SERIES",
+    "SOLAR_CHL_RS_0_83": "EVIDENCE_LOCAL",
+    "SAA_TILT_IMPLEMENTATION": "TOKEN_VAZIO",
+    "AURORA_TO_SURFACE_N_FLUX": "TOKEN_VAZIO",
+    "GLOBAL_AURORA_BIOSPHERE_CAUSALITY": "TOKEN_VAZIO",
+    "INTERNAL_AURORA_BIOSPHERE_CORR_COEF": "TOKEN_VAZIO"
+  }
+}
