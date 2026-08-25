@@ -1,0 +1,59 @@
+{
+  "schema": "rafaelia.federated-work-receipt.v1",
+  "event_id": "MAPA-RAFCODE-FEDERATION-RECEIVE-20260825T125309-0300",
+  "parent_event_id": "RAFCODE-FEDERATION-CROSS-ABI-CI-20260825T125309-0300",
+  "observed_at": "2026-08-25T12:53:09-03:00",
+  "actor_role": "Mapa federated receiving authority",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "ref": "chatgpt/rafcode-federation-route-v1-20260825",
+  "commit_sha": "a86955c789bfb31db14a3a16397953aa5aa3f1c3",
+  "path_scope": "data/federation/rafcode-federation-v1.json; data/receipts/rafcode; indices/runtime/RAFCODE_FEDERATION_V1.md; navigation/INDEX.md; data/control-plane/RAFAELIA_RECEIPT_INDEX_V1.json",
+  "authority": {
+    "local": "rafaelmeloreisnovo/Mapa",
+    "producer": "rafaelmeloreisnovo/RafGitTools",
+    "producer_contract_sha": "20b2a9fb3ef251726fcaffca5a73059f6bc91f4a"
+  },
+  "gap_or_goal_ids": [
+    "GOAL-RAFCODE-FEDERATION-FREESTANDING-V1",
+    "GAP-RAFGITTOOLS-CURRENT-RUNTIME-SNAPSHOT"
+  ],
+  "state_before": "TOKEN_VAZIO",
+  "state_after": "EVIDENCED_SCOPED",
+  "urgency": "P1",
+  "risk": "MEDIUM",
+  "governance_class": "BRANCH_AND_DRAFT_PR_NO_AUTO_MERGE",
+  "data_class": "PUBLIC_REFERENCES_HASHES_AND_SYNTHETIC_TEST_METADATA",
+  "privacy_class": "NO_RAW_PRIVATE_PAYLOAD_NO_PII",
+  "security_class": "FAIL_CLOSED_AUTHENTICITY_OPEN",
+  "action": "APPEND_TRANSITION",
+  "falsifier": "A producer ref/hash/run mismatch, failed exact-head dedicated gate, missing L/O/T binding, or promotion beyond compile/link/ELF scope invalidates this receiving transition.",
+  "exit_criterion": "Exact producer implementation commit 7e72713d is bound to successful workflow run 32868449710 and the three content-addressed ABI artifacts while device/authenticity gaps remain explicit.",
+  "evidence_refs": {
+    "producer_pull_request": "https://github.com/rafaelmeloreisnovo/RafGitTools/pull/381",
+    "producer_implementation_commit": "7e72713da20b849a0d975d3dbefedd3d65ca0443",
+    "producer_receipt_commit": "9362ae2560fc9cbdff0efc6b2ea1440a90ecb967",
+    "workflow_run": "https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32868449710",
+    "workflow_job_id": 97869400865,
+    "host_sha256": "2a7d78477d99cdbd0f75d4969141dcc39e0a5427c3f289c51474584465f04a0a",
+    "armv7_sha256": "07d1a7c0eb59ab06f3b820d762f809a90534caae8561e6e213ce360e310d5bf3",
+    "aarch64_sha256": "e33c9b244d908717e914d6176184bf051ab6679a06add24df8bbc8d233974ac1"
+  },
+  "F_ok": [
+    "Producer ownership and Mapa receiving authority are separated.",
+    "L/O/T memory-index identities are explicit.",
+    "Cross-ABI compiler/linker/ELF/hotpath evidence is reconstructible."
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_PRODUCER_PR_MERGE_AND_MAIN_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_ARMV7_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_AARCH64_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_HMAC_AUTHENTICITY",
+    "TOKEN_VAZIO_REPOSITORY_WIDE_HEALTH",
+    "TOKEN_VAZIO_DRIVE_RECONSTRUCTION_APPEND_RECEIPT"
+  ],
+  "F_next": "Append the material route to the Drive master-navigation authority with revision/readback receipt, then keep both pull requests draft until unrelated repository-wide blockers are reconciled and explicit merge authority is given.",
+  "uncertainty_delta": "Cross-ABI freestanding build properties are routed as EVIDENCED_SCOPED; physical runtime, authenticity, merge/main and global-health properties remain TOKEN_VAZIO.",
+  "rollback_ref": "a86955c789bfb31db14a3a16397953aa5aa3f1c3",
+  "stop_reason": "Receiving transition is reconstructible; the next bounded authority is the Drive longitudinal navigation append.",
+  "claim_allowed": false
+}

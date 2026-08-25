@@ -268,3 +268,15 @@ Pointer reconciliation:
 - `F_ok`: universal navigation root exists; activation semantics are explicitly indexed; the master-navigation pointer drift is reconciled with Drive readback + GitHub receipt; the 5h snapshot remains correctly demoted to a temporal leaf.
 - `F_gap`: full-content coverage, Drive/GitHub deduplication, runtime activation enforcement, and other unresolved evidence gates remain `TOKEN_VAZIO`/open where applicable.
 - `F_next`: validate this reconciliation delta in CI, merge it, verify `main`, then continue with the highest-unblocking unresolved evidence/runtime gap.
+
+## 13. RafCode freestanding federation route
+
+- `REP:RafGitTools` → [`PR:RafGitTools#381`](https://github.com/rafaelmeloreisnovo/RafGitTools/pull/381) → `OPEN_DRAFT_UNMERGED`;
+- `ART:RafGitTools:native/rafcode_federation_v1` → implementation commit `7e72713da20b849a0d975d3dbefedd3d65ca0443`;
+- [`EVD:RUN:32868449710`](https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32868449710) → dedicated x86-64/ARMv7/AArch64 gate `PASS`;
+- `ART:Mapa:indices/runtime/RAFCODE_FEDERATION_V1.md` → human evidence-bound route;
+- `ART:Mapa:data/federation/rafcode-federation-v1.json` → machine route;
+- state: `EVIDENCED_SCOPED_DRAFT_UNMERGED`, limited to compile/link/ELF/hotpath and x86-64 smoke evidence;
+- `GAP:RAFCODE:DEVICE_ARMV7`, `GAP:RAFCODE:DEVICE_AARCH64`, `GAP:RAFCODE:HMAC`, producer merge/main and repository-wide health remain `TOKEN_VAZIO`/open.
+
+The route binds the three exact Drive/Mapa memory indices `LONGITUDINAL | ORTHOGONAL | TRANSVERSAL` with required mask `0x07`. Dedicated workflow success does not promote physical execution, global health, merge readiness or claim authority.
