@@ -25,6 +25,7 @@ Tzolk'in / Haab / Calendar Round
 ### 1.1 GEOMETRIA_SOLAR_Maia_Inca
 
 `data/calendar_cycles_matrix.json` já registra:
+
 - `CAL-MAYA-TZOLKIN-260` como ciclo de `260 day`, `evidence_state=VERIFIED`;
 - ciclo Venus 5×8 como `PARTIAL`;
 - candidatos lunar/auroral ainda como `TOKEN_VAZIO` quando não havia fonte.
@@ -124,6 +125,7 @@ Q(t)   = electron energy flux
 ```
 
 Literatura mostra:
+
 - `IMF Bz southward → expansão equatorward`;
 - `IMF Bz northward / quieting → contração poleward`;
 - expansão média pode ocorrer em ~45 min e contração em escala de horas (~8 h em estudo clássico), portanto comparar fotos sem estado do IMF/Kp gera falso ciclo.
