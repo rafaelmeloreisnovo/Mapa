@@ -1,0 +1,49 @@
+{
+  "schema": "rafaelia.rafcode-producer-postmerge-remediation-receipt.v1",
+  "version": 1,
+  "observed_at": "2026-08-25T13:30:34-03:00",
+  "claim_allowed": false,
+  "supersedes_state_only": "data/federation/rafcode-federation-v1.json",
+  "preserves_historical_blob_sha": "7922b93e23dec385d5f20b34c1eb73e6dfff7283",
+  "producer": {
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "pull_request": 381,
+    "pull_request_state": "MERGED",
+    "merged_at": "2026-08-25T16:15:06Z",
+    "merge_commit_sha": "40fe688d30977967dd3b880b7b63a94e1d03694e"
+  },
+  "post_merge_observation": {
+    "main_ref": "40fe688d30977967dd3b880b7b63a94e1d03694e",
+    "repository_wide_health": "OBSERVED_FAIL",
+    "ci_run": 32870834116,
+    "coherence_gate": "PASS",
+    "build_gate": "FAIL",
+    "root_cause": "Gradle 9.6.1 is incompatible with AGP 8.13.2 because the Android plugin path relies on org.gradle.api.problems.internal.InternalProblems, removed in Gradle 9.6.0.",
+    "attribution": "BUILD_TOOLING_COMPATIBILITY_NOT_RAFCODE_LOGIC"
+  },
+  "remediation": {
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "pull_request": 382,
+    "branch": "chatgpt/fix-gradle-agp-compat-20260825",
+    "head_sha": "da46beed28d63ba0d7d99a0731bb75c63b8dc5fa",
+    "change": "gradle/wrapper/gradle-wrapper.properties: Gradle 9.6.1 -> 9.5",
+    "state": "CI_PENDING",
+    "falsifier": "If the AGP/InternalProblems failure persists under Gradle 9.5, this remediation is insufficient."
+  },
+  "resolved": [
+    "TOKEN_VAZIO_PRODUCER_PR_MERGE"
+  ],
+  "open": [
+    "TOKEN_VAZIO_REMEDIATION_PR_382_CI",
+    "TOKEN_VAZIO_PRODUCER_MAIN_POST_FIX_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_ARMV7_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_AARCH64_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_HMAC_AUTHENTICITY"
+  ],
+  "invariants": [
+    "historical receipts are append-only",
+    "compile/link/ELF evidence != physical device execution",
+    "repository-wide failure != RafCode logic regression without attribution evidence",
+    "TOKEN_VAZIO is not PASS"
+  ]
+}
