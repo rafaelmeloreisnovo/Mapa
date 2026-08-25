@@ -2,23 +2,12 @@
   "schema": "RAFAELIA_RECEIPT_INDEX_V1",
   "generated_from": "RAFAELIA_RECEIPT_COVERAGE_MATRIX_V1",
   "claim_allowed": false,
-  "states": [
-    "PRESENT",
-    "MISSING",
-    "STALE",
-    "INVALID",
-    "SUPERSEDED",
-    "TOKEN_VAZIO"
-  ],
+  "states": ["PRESENT", "MISSING", "STALE", "INVALID", "SUPERSEDED", "TOKEN_VAZIO"],
   "entries": [
     {
       "id": "MAPA_INVARIANTS_CI_BINDING",
       "component": "Mapa:promotion-control/invariants",
-      "route": [
-        "R5",
-        "R11",
-        "R12"
-      ],
+      "route": ["R5", "R11", "R12"],
       "receipt_type": "WORKFLOW_RUN_JOB_STEP",
       "state": "PRESENT",
       "receipt": "data/receipts/invariants-ci-binding.superseding.20260819T2246BRT.receipt.json",
@@ -28,10 +17,7 @@
     {
       "id": "MAPA_LEGACY_OPERATIONAL_GAP_SCHEMA",
       "component": "Mapa:operational-gap-assurance",
-      "route": [
-        "R5",
-        "R11"
-      ],
+      "route": ["R5", "R11"],
       "receipt_type": "LEGACY_SCHEMA_COMPATIBILITY",
       "state": "PRESENT",
       "receipt": "data/receipts/operational-gap-schema-compat.terminal.20260819T2347BRT.receipt.json",
@@ -41,11 +27,7 @@
     {
       "id": "MAPA_RDGS_STILL_GOOD",
       "component": "Mapa:REAL-DONE-GOOD-STILL_GOOD assurance",
-      "route": [
-        "R5",
-        "R11",
-        "R12"
-      ],
+      "route": ["R5", "R11", "R12"],
       "receipt_type": "POST_MERGE_TERMINAL_EXECUTION",
       "state": "TOKEN_VAZIO",
       "receipt": "data/receipts/rdgs-still-good-revalidation.20260820T0042BRT.receipt.json",
@@ -55,12 +37,7 @@
     {
       "id": "RAFGITTOOLS_COMBINED_MAIN",
       "component": "RafGitTools:combined-main-assurance",
-      "route": [
-        "R5",
-        "R6",
-        "R11",
-        "R12"
-      ],
+      "route": ["R5", "R6", "R11", "R12"],
       "receipt_type": "POST_MERGE_TERMINAL_EXECUTION",
       "state": "MISSING",
       "source_commit": "0c453be12b31eb21c85cf6295b740c0d54365166",
@@ -70,10 +47,7 @@
     {
       "id": "RAFGITTOOLS_NODE24_SETUP_ANDROID",
       "component": "RafGitTools:android-actions/setup-android",
-      "route": [
-        "R6",
-        "R11"
-      ],
+      "route": ["R6", "R11"],
       "receipt_type": "DEPENDENCY_CHANGE_NODE24",
       "state": "STALE",
       "source": "PR #275 open >30d",
@@ -84,10 +58,7 @@
     {
       "id": "RAFGITTOOLS_NODE24_SETUP_PYTHON",
       "component": "RafGitTools:actions/setup-python",
-      "route": [
-        "R6",
-        "R11"
-      ],
+      "route": ["R6", "R11"],
       "receipt_type": "DEPENDENCY_CHANGE_NODE24",
       "state": "STALE",
       "source": "PR #276 open >30d",
@@ -98,10 +69,7 @@
     {
       "id": "RAFGITTOOLS_NODE24_GITHUB_SCRIPT",
       "component": "RafGitTools:actions/github-script",
-      "route": [
-        "R6",
-        "R11"
-      ],
+      "route": ["R6", "R11"],
       "receipt_type": "DEPENDENCY_CHANGE_NODE24",
       "state": "STALE",
       "source": "PR #277 open >30d",
@@ -112,11 +80,7 @@
     {
       "id": "TERMUX_PHYSICAL_RUNTIME",
       "component": "termux-app-rafacodephi:device-runtime",
-      "route": [
-        "R7",
-        "R11",
-        "R12"
-      ],
+      "route": ["R7", "R11", "R12"],
       "receipt_type": "APK_INSTALL_LAUNCH_LOGCAT_DEVICE",
       "state": "MISSING",
       "source_commit": "fb18bbc4794dace1cc3480519681191f83152af6",
@@ -125,11 +89,7 @@
     {
       "id": "MAPA_PRIVACY_AUDIT",
       "component": "Mapa:audit-logs/receipts",
-      "route": [
-        "R5",
-        "R9",
-        "R12"
-      ],
+      "route": ["R5", "R9", "R12"],
       "receipt_type": "PRIVACY_AUDIT",
       "state": "TOKEN_VAZIO",
       "next_gate": "data inventory + minimization + redaction + retention + access + evidence receipt"
@@ -137,11 +97,7 @@
     {
       "id": "MAPA_NEGATIVE_FIXTURES",
       "component": "Mapa:test/falsifier-system",
-      "route": [
-        "R5",
-        "R11",
-        "R12"
-      ],
+      "route": ["R5", "R11", "R12"],
       "receipt_type": "NEGATIVE_FIXTURE_COVERAGE",
       "state": "TOKEN_VAZIO",
       "next_gate": "structured negative fixtures mapped to invariants and expected failures"
@@ -149,10 +105,7 @@
     {
       "id": "MAPA_WORKFLOW_8_9_10_HISTORY",
       "component": "Mapa:adaptive-cycle historical receipts",
-      "route": [
-        "R5",
-        "R11"
-      ],
+      "route": ["R5", "R11"],
       "receipt_type": "HISTORICAL_WORKFLOW_RUN_COVERAGE",
       "state": "MISSING",
       "next_gate": "continuous run index + missing/stale/invalid classification"
@@ -160,10 +113,7 @@
     {
       "id": "MAPA_LICENSE_COMPATIBILITY",
       "component": "Mapa:external-dependencies",
-      "route": [
-        "R5",
-        "R12"
-      ],
+      "route": ["R5", "R12"],
       "receipt_type": "LICENSE_COMPATIBILITY",
       "state": "TOKEN_VAZIO",
       "next_gate": "dependency/action license inventory and compatibility decision receipt"
@@ -171,12 +121,7 @@
     {
       "id": "BOOTSTRAP_DRIVE_GITHUB_PARITY",
       "component": "rafaelia:chatgpt-federated-bootstrap",
-      "route": [
-        "R1",
-        "R5",
-        "R9",
-        "R11"
-      ],
+      "route": ["R1", "R5", "R9", "R11"],
       "receipt_type": "CROSS_STORE_PARITY",
       "state": "TOKEN_VAZIO",
       "next_gate": "Drive revision/export digest + GitHub blob/content digest + normalization contract"
@@ -184,11 +129,7 @@
     {
       "id": "RLL_SCIENTIFIC_REPLICATION",
       "component": "RLL:scientific-claims",
-      "route": [
-        "R8",
-        "R11",
-        "R12"
-      ],
+      "route": ["R8", "R11", "R12"],
       "receipt_type": "DATASET_PIPELINE_INFERENCE_REPLICATION_CLAIM",
       "state": "MISSING",
       "source_commit": "8bd41005d63b2d83c4bcc313cc4900ff981cf8fe",
@@ -197,10 +138,7 @@
     {
       "id": "DRIVE_CANONICAL_APPEND_CAPABILITY",
       "component": "Drive:canonical-longitudinal-memory",
-      "route": [
-        "R9",
-        "R11"
-      ],
+      "route": ["R9", "R11"],
       "receipt_type": "DRIVE_REVISION_APPEND",
       "state": "PRESENT",
       "receipt": "data/receipts/drive-canonical-omega-append.20260819T2347BRT.receipt.json",
@@ -210,23 +148,18 @@
     {
       "id": "RAFCODE_FEDERATION_CROSS_ABI_V1",
       "component": "RafGitTools:native/rafcode_federation_v1",
-      "route": [
-        "R5",
-        "R6",
-        "R11",
-        "R12"
-      ],
+      "route": ["R5", "R6", "R11", "R12"],
       "receipt_type": "CROSS_ABI_COMPILE_LINK_ELF_HOTPATH",
       "state": "PRESENT",
       "source_commit": "7e72713da20b849a0d975d3dbefedd3d65ca0443",
       "source_pr": 381,
       "workflow_run": 32868449710,
       "receipt": "data/receipts/rafcode/2026-08-25-rafcode-federation-cross-abi.v1.json",
-      "observed_scope": "Clang/lld x86-64 execution plus ARMv7/AArch64 compile-link-ELF/generated-hotpath gates; physical ARM execution, HMAC, merge/main and repository-wide health remain TOKEN_VAZIO",
-      "next_gate": "producer and Mapa draft review -> reconcile repository-wide blockers -> explicit merge authority -> producer-main receipt -> physical-device receipts",
       "drive_receipt": "data/receipts/rafcode/2026-08-25-rafcode-federation-drive-append.v1.json",
       "drive_postwrite_revision_id": "AIroW37h5TPWuni5fvC6A7ahvnk-truV83UYSpHgRqCUwxHZbq3s2qX2N1XaFEy4mMSEixg2DCenOwBcYbxyQym8WxVS9ZlMMNgimwrjObc",
-      "drive_readback_state": "PASS"
+      "drive_readback_state": "PASS",
+      "observed_scope": "Clang/lld x86-64 execution plus ARMv7/AArch64 compile-link-ELF/generated-hotpath gates; physical ARM execution, HMAC, merge/main and repository-wide health remain TOKEN_VAZIO",
+      "next_gate": "producer and Mapa draft review -> reconcile repository-wide blockers -> explicit merge authority -> producer-main receipt -> physical-device receipts"
     }
   ],
   "selection_rule": "P0 first: INVALID/SUPERSEDED provenance integrity, then MISSING receipts on promotion/runtime boundaries, then STALE dependency assurance, then TOKEN_VAZIO evidence production",
