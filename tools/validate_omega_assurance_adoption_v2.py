@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data" / "control-plane" / "omega-assurance-adoption.v2.json"
 LEDGER = ROOT / "data" / "ledgers" / "omega-assurance-adoption-events.v2.jsonl"
+RECEIPT = ROOT / "data" / "receipts" / "OMEGA_ASSURANCE_ADOPTION_V2_20260824.v1.json"
 
 EXPECTED_AXES = {f"D{i}" for i in range(1, 8)}
 EXPECTED_CROSSFAIL = {f"CF-{i:02d}" for i in range(1, 13)}
@@ -224,10 +225,83 @@ def validate_ledger(events: list[dict]) -> list[str]:
     return errors
 
 
+def validate_receipt(receipt: dict, manifest: dict) -> list[str]:
+    errors: list[str] = []
+    if receipt.get("schema_version") != "rafaelia.omega-assurance-adoption-receipt/v1":
+        errors.append("receipt schema_version mismatch")
+    if receipt.get("status") != "MATERIALIZED_VALIDATED_GOVERNANCE_PENDING":
+        errors.append("receipt status mismatch")
+    if receipt.get("claim_allowed") is not False:
+        errors.append("receipt claim_allowed must be false")
+    if receipt.get("append_only") is not True:
+        errors.append("receipt append_only must be true")
+    if receipt.get("base_main") != manifest.get("baseline", {}).get("commit"):
+        errors.append("receipt base_main must match manifest baseline")
+    if receipt.get("pull_request") != 393 or receipt.get("pull_request_state") != "DRAFT":
+        errors.append("receipt must bind draft PR 393")
+
+    drive = receipt.get("drive_first_delta", {})
+    if drive.get("provider_write") != "SUCCESS" or drive.get("provider_readback") != "SUCCESS":
+        errors.append("receipt Drive write/readback must be successful")
+    if drive.get("tab_count_after") - drive.get("tab_count_before", 0) != 5:
+        errors.append("receipt Drive tab delta must equal five")
+    if drive.get("raw_private_content_embedded_in_github") is not False:
+        errors.append("receipt must deny raw private Drive content embedding")
+
+    local = receipt.get("local_qualification", {})
+    if local.get("python_compile") != "PASS":
+        errors.append("receipt local compile must PASS")
+    tests = local.get("negative_and_structural_tests", {})
+    if tests.get("count") != 15 or tests.get("conclusion") != "PASS":
+        errors.append("receipt must bind 15 passing local tests")
+    if local.get("validator", {}).get("conclusion") != "PASS":
+        errors.append("receipt local validator must PASS")
+
+    github = receipt.get("github_qualification", {})
+    for gate in (
+        "omega_assurance_adoption_v2",
+        "general_ci",
+        "branch_topology",
+        "live_control_plane_reconciliation",
+    ):
+        record = github.get(gate, {})
+        if not isinstance(record.get("run_id"), int) or record.get("conclusion") != "success":
+            errors.append(f"receipt {gate} must bind a successful run")
+
+    governance = receipt.get("independent_governance", {})
+    promotion = governance.get("promotion_control", {})
+    if promotion.get("conclusion") != "failure":
+        errors.append("receipt promotion control must preserve observed failure")
+    if promotion.get("interpretation") != "EXPECTED_FAIL_CLOSED_GOVERNANCE_DENIAL":
+        errors.append("receipt promotion failure interpretation mismatch")
+    if set(promotion.get("blocking_reasons", [])) != {
+        "PULL_REQUEST_DRAFT_OR_UNKNOWN",
+        "INDEPENDENT_APPROVAL_MISSING",
+    }:
+        errors.append("receipt promotion blocking reasons mismatch")
+
+    server = governance.get("server_merge_enforcement", {})
+    if server.get("conclusion") != "failure":
+        errors.append("receipt server merge enforcement must preserve observed failure")
+    if set(server.get("failure_modes", [])) != {
+        "BRANCH_PROTECTION_DISABLED",
+        "PROTECTION_NOT_ENABLED",
+    }:
+        errors.append("receipt server enforcement failure modes mismatch")
+    if server.get("server_side_merge_binding") != "NOT_ENFORCED_OBSERVED":
+        errors.append("receipt must preserve server merge enforcement gap")
+
+    serialized = json.dumps(receipt, sort_keys=True)
+    if PROHIBITED_LOCATOR.search(serialized):
+        errors.append("receipt must not embed a private Drive-style locator")
+    return errors
+
+
 def main() -> int:
     data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    receipt = json.loads(RECEIPT.read_text(encoding="utf-8"))
     events, parse_errors = load_ledger()
-    errors = validate_manifest(data) + parse_errors + validate_ledger(events)
+    errors = validate_manifest(data) + parse_errors + validate_ledger(events) + validate_receipt(receipt, data)
     if errors:
         print(json.dumps({"status": "FAIL", "errors": errors}, indent=2, sort_keys=True))
         return 1
@@ -241,6 +315,7 @@ def main() -> int:
                 "crossfail_cases": len(data["crossfail_cases"]),
                 "primary_sources": len(data["primary_sources"]),
                 "ledger_events": len(events),
+                "receipt_status": receipt["status"],
                 "claim_allowed": data["claim_allowed"],
             },
             sort_keys=True,
