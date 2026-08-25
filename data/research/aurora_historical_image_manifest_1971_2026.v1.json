@@ -1,0 +1,130 @@
+{
+  "schema": "rafaelia.aurora-historical-image-manifest.v1",
+  "date": "2026-08-25",
+  "status": "SOURCE_MANIFEST_ONLY",
+  "claim_allowed": false,
+  "purpose": "Provide auditable source pointers for historical auroral imagery/boundary extraction before any 52-year comparison.",
+  "invariants": [
+    "IMAGE != BOUNDARY_MEASUREMENT",
+    "INSTRUMENT_CHANGE != SECULAR_CHANGE",
+    "TWO_EPOCHS != PERIODICITY",
+    "GEOGRAPHIC_LATITUDE != MAGNETIC_LATITUDE"
+  ],
+  "records": [
+    {
+      "id": "AUR-ISIS2-1971-1973-GLOBAL-UV",
+      "era": "1971-1973",
+      "platform": "ISIS-II",
+      "observable": ["391.4 nm", "557.7 nm", "630.0 nm", "nightside oval", "polar cap"],
+      "source": "https://ntrs.nasa.gov/citations/19730046269",
+      "source_type": "NASA_NTRS_scientific_record",
+      "image_status": "record_describes_global_mapping; NTRS page may have no preview",
+      "normalization_required": ["corrected geomagnetic coordinates", "magnetic local time", "emission channel", "exposure/photometer response"],
+      "state": "PASS_ARCHIVAL_ROUTE"
+    },
+    {
+      "id": "AUR-DMSP-1973-1974-EQUATORWARD-BOUNDARY",
+      "era": "1973-1974",
+      "platform": "DMSP",
+      "observable": ["equatorward auroral boundary", "optical photographs", "auroral analysis records"],
+      "source": "https://ntrs.nasa.gov/citations/19790031810",
+      "source_type": "NASA_NTRS_boundary_from_photographs",
+      "image_status": "boundary derived from DMSP photographs; source record has no preview download",
+      "normalization_required": ["invariant magnetic latitude", "MLT", "AE", "IMF Bz", "solar-wind context"],
+      "state": "PASS_ARCHIVAL_ROUTE"
+    },
+    {
+      "id": "AUR-DMSP-1972-1977-CONTINUOUS-LATITUDE",
+      "era": "1972-1977",
+      "platform": "DMSP",
+      "observable": ["equatorial latitude of auroral activity", "electron observations", "optical observations"],
+      "source": "https://ntrs.nasa.gov/citations/19800063480",
+      "source_type": "NASA_NTRS_nearly_continuous_boundary_series",
+      "known_structure": {
+        "diurnal_variation_deg_approx": 5,
+        "irregular_day_scale_variation_deg_approx": "5-10",
+        "major_expansion_mlat": "<55 deg under intense IMF intervals"
+      },
+      "normalization_required": ["dipole precession/MLT sampling", "solar flares/coronal holes", "IMF intensity", "instrument/platform"],
+      "state": "PASS_HIGH_VALUE_ARCHIVAL_ROUTE"
+    },
+    {
+      "id": "AUR-GLOBAL-UV-1981",
+      "era": "1981",
+      "platform": "spaceborne UV imager",
+      "observable": ["global auroral oval", "solar-wind-driven equatorward motion"],
+      "source": "https://science.nasa.gov/science-research/planetary-science/bullet2/",
+      "source_type": "NASA_Science_image_context",
+      "image_status": "NASA Science page with auroral oval image/context",
+      "normalization_required": ["image timestamp", "MLT", "Kp/AE/IMF", "projection"],
+      "state": "PASS_IMAGE_ROUTE"
+    },
+    {
+      "id": "AUR-POLAR-UVI-1990S",
+      "era": "1996-2000",
+      "platform": "POLAR/UVI",
+      "observable": ["global FUV auroral images", "equatorward/poleward boundaries"],
+      "source": "https://ntrs.nasa.gov/citations/19990098012",
+      "source_type": "NASA_NTRS_boundary_comparison",
+      "image_status": "global UVI imagery documented; boundary technique differs from in-situ/ground observations",
+      "normalization_required": ["FUV threshold definition", "DMSP particle boundary comparison", "ground optical boundary comparison", "MLT"],
+      "state": "PASS_ARCHIVAL_ROUTE"
+    },
+    {
+      "id": "AUR-TIMED-GUVI-2002-2007",
+      "era": "2002-2007",
+      "platform": "TIMED/GUVI",
+      "observable": ["auroral precipitation products", "equatorward/poleward boundary"],
+      "source": "NASA CCMC auroral oval studies / TIMED GUVI data",
+      "source_type": "NASA_structured_product",
+      "image_status": "structured FUV products preferred over manually tracing images",
+      "normalization_required": ["product version", "hemisphere", "MLT", "energy-flux threshold"],
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "id": "AUR-DMSP-SSUSI-2004-PRESENT",
+      "era": "2004-present",
+      "platform": "DMSP/SSUSI",
+      "observable": ["equatorward boundary", "poleward boundary", "electron energy flux", "mean energy"],
+      "source": "NASA SPDF / CCMC SSUSI auroral products",
+      "source_type": "NASA_structured_product",
+      "image_status": "use structured boundary/EDR files as primary modern comparator",
+      "normalization_required": ["satellite F16/F17/F18", "version", "AACGM/MLT", "sampling bias"],
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "id": "AUR-GOLD-2018-2025-DAYSIDE",
+      "era": "2018-2025",
+      "platform": "GOLD",
+      "observable": ["dayside aurora", "OI 135.6 nm", "NI 149.3 nm", "N2 LBH"],
+      "source": "NASA GOLD dayside aurora dataset",
+      "source_type": "NASA_structured_dataset",
+      "image_status": "scan-level FUV dataset; not interchangeable with nightside boundary products",
+      "normalization_required": ["dayside-only geometry", "emission channel", "solar illumination", "viewing geometry"],
+      "state": "PASS_DATA_ROUTE"
+    },
+    {
+      "id": "JUP-AURORA-GALILEO-1997",
+      "era": "1997",
+      "platform": "Galileo SSI",
+      "observable": ["Jupiter northern auroral oval"],
+      "source": "https://science.nasa.gov/photojournal/jupiters-northern-auroral-oval/",
+      "source_type": "NASA_Science_image",
+      "image_status": "downloadable JPEG/TIFF on NASA Science",
+      "role": "planetary comparator only",
+      "state": "PASS_IMAGE_ROUTE"
+    }
+  ],
+  "comparison_protocol": {
+    "target_eras": ["1972-1977", "1996-2000", "2002-2007", "2004-present"],
+    "primary_response": ["equatorward_boundary_MLAT", "poleward_boundary_MLAT", "oval_width", "hemispheric_power"],
+    "mandatory_covariates": ["MLT", "IMF_Bz", "IMF_By", "Vsw", "Pdyn", "Kp", "AE", "Dst", "dipole_tilt", "season", "solar_cycle_phase"],
+    "calendar_features_only_after_baseline": ["tzolkin_260", "haab_365", "calendar_round_18980", "lunar_synodic", "lunar_nodal"]
+  },
+  "gates": {
+    "HISTORICAL_IMAGE_CHAIN": "PASS_SOURCE_MANIFEST",
+    "1972_1977_BOUNDARY_SERIES": "PASS_HIGH_VALUE_ROUTE",
+    "CROSS_INSTRUMENT_CALIBRATION": "TOKEN_VAZIO",
+    "52Y_AURORA_PERIODICITY": "TOKEN_VAZIO_IDENTIFIABILITY"
+  }
+}
