@@ -1,0 +1,43 @@
+{
+  "schema_version": "rafaelia.cross-layer-failure-matrix/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "sandbox_boundary": {
+    "allowed": ["owned fixtures", "owned sandbox", "permission denial simulation", "dependency failure simulation", "rollback rehearsal", "bounded canary fixture"],
+    "forbidden": ["third-party attack", "credential harvesting", "authorization bypass", "destructive production test"]
+  },
+  "layer_cases": [
+    {"id": "XF-D1-D2", "fault": "D1 identity or provider unresolved", "expected": "D2 preserves TOKEN_VAZIO and does not invent identity or meaning"},
+    {"id": "XF-D2-D6", "fault": "D2 evidence or epistemic gate unresolved", "expected": "D6 blocks promotion"},
+    {"id": "XF-D3-D4", "fault": "D3 build, test or runtime evidence fails", "expected": "D4 holds, degrades or rolls back within the known boundary"},
+    {"id": "XF-D4-D5", "fault": "D4 recovery path fails", "expected": "D5 privacy boundary remains deny-by-default"},
+    {"id": "XF-D5-D6", "fault": "D5 privacy class unresolved", "expected": "D6 freezes disclosure and mutation"},
+    {"id": "XF-D6-D7", "fault": "D6 authority denies the operation", "expected": "D7 records the denied attempt without mutation"},
+    {"id": "XF-D7-HISTORY", "fault": "D7 transition or receipt write fails", "expected": "previous state remains reconstructible and current promotion is held"}
+  ],
+  "test_families": [
+    "TEST_FAIL_CLOSED",
+    "TEST_DO_NOT_OVERREACT",
+    "TEST_ROLLBACK_REHEARSAL",
+    "TEST_FAILOVER_BOUNDARY",
+    "TEST_PRIVACY_DEFAULT_DENY",
+    "TEST_AUTHORITY_DENY",
+    "TEST_WATCHDOG_FAILURE"
+  ],
+  "negative_intervention_cases": [
+    {"signal": "search misses a file", "forbidden_conclusion": "ABSENT", "expected": "TOKEN_VAZIO_PROVIDER"},
+    {"signal": "timestamp precision differs", "forbidden_conclusion": "CONTRADICTION", "expected": "PRECISION_UNCERTAINTY"},
+    {"signal": "candidate identifiers coincide", "forbidden_conclusion": "IDENTITY_PROVEN", "expected": "CANDIDATE_SET"},
+    {"signal": "sandbox passes", "forbidden_conclusion": "PRODUCTION_PASS", "expected": "SANDBOX_PASS_SCOPED"}
+  ],
+  "domain_routes": [
+    {"domain": "LOCK_FREE", "default_state": "TOKEN_VAZIO", "falsifier": "missing linearization, reclamation or progress argument, or an adversarial history violates the contract"},
+    {"domain": "PROFILING_BENCHMARKING", "default_state": "TOKEN_VAZIO", "falsifier": "claim lacks raw samples, exact environment or baseline"},
+    {"domain": "SMART_GUARD", "default_state": "HOLD", "falsifier": "ambiguous signal becomes accusation, irreversible action or excess data collection"},
+    {"domain": "PHASE_INTEGRATION", "default_state": "TOKEN_VAZIO", "falsifier": "restart, partial failure or node loss breaks ownership or recovery contract"},
+    {"domain": "NETWORK_PROTOCOL", "default_state": "TOKEN_VAZIO", "falsifier": "fragmentation, reordering, duplication, truncation, corruption or version mismatch violates framing semantics"},
+    {"domain": "QUERY_SYSTEM", "default_state": "TOKEN_VAZIO", "falsifier": "ambiguous grammar, unstable ordering, unbounded resource path or undefined null/collation behavior"},
+    {"domain": "RLL_COSMOLOGY", "default_state": "TOKEN_VAZIO", "falsifier": "likelihood, covariance, baseline, convergence or falsifier is absent"}
+  ],
+  "receipt_fields": ["fixture_id", "fault", "expected_failure", "observed_failure", "expected_mitigation", "observed_mitigation", "falsifier", "blast_radius", "rollback_result", "receipt"]
+}

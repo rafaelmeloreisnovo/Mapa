@@ -1,0 +1,62 @@
+{
+  "schema_version": "rafaelia.omega-transition/v1",
+  "transition_id": "OMGTR-20260825T011216Z-MESH_MATERIALIZATION",
+  "timestamp_utc": "2026-08-25T01:12:16Z",
+  "from_state": "PROCEDURAL_SKILL_LAYER_ONLY",
+  "to_state": "MACHINE_READABLE_MESH_PROPOSED",
+  "trigger": "User-authorized append-only materialization after NOVO-first routing and current-state audit.",
+  "observation": "The prior Omega skill wave and neighboring controls exist, while the exact machine-readable schema and registry set is absent at the bound base ref.",
+  "interpretation": "A second, non-promoting contract wave is the smallest coherent delta.",
+  "evidence": [
+    "main@1da6932b7a90215dda5fd8c2e2b1d27b114e6538",
+    "indices/OMEGA_ASSURANCE_SKILLS_V1.md",
+    "governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json"
+  ],
+  "counterevidence": [],
+  "uncertainty": "BOUNDED",
+  "risk_before": {
+    "vector_id": "R-MESH-BEFORE",
+    "decision": "HOLD",
+    "p0_dimensions": [],
+    "unknown_dimensions": ["runtime_adoption", "physical_failover", "performance"]
+  },
+  "risk_after": {
+    "vector_id": "R-MESH-AFTER",
+    "decision": "HOLD",
+    "p0_dimensions": [],
+    "unknown_dimensions": ["runtime_adoption", "physical_failover", "performance", "independent_approval"]
+  },
+  "authority": {
+    "owner": "rafaelmeloreisnovo/Mapa for branch-local federated contract files",
+    "operation": "WRITE",
+    "state": "ALLOW",
+    "review": "PENDING"
+  },
+  "privacy_class": "PUBLIC",
+  "falsifier": "Any negative fixture is accepted or any unknown becomes PASS.",
+  "test_set": [
+    "TEST_FAIL_CLOSED",
+    "TEST_DO_NOT_OVERREACT",
+    "TEST_AUTHORITY_DENY",
+    "TEST_PRIVACY_DEFAULT_DENY",
+    "TEST_WATCHDOG_FAILURE"
+  ],
+  "minimum_intervention": "Add only the missing contract layer on an isolated branch; do not replace or activate production controls.",
+  "blast_radius": "one draft branch and its proposed public contract files",
+  "rollback": {
+    "state": "READY",
+    "target": "main@1da6932b7a90215dda5fd8c2e2b1d27b114e6538",
+    "rehearsal_receipt": "branch deletion or PR closure preserves main"
+  },
+  "failover": {
+    "state": "NOT_APPLICABLE",
+    "target": "no runtime failover is performed by this wave",
+    "compatibility": "NOT_APPLICABLE"
+  },
+  "watchdog_state": "HOLD",
+  "attention_state": "ACTIVE",
+  "receipt": "data/receipts/OMEGA_ASSURANCE_MESH_V1_20260824.v1.json",
+  "next_review": "observe draft PR CI and keep claim_allowed=false pending independent review",
+  "append_only": true,
+  "claim_allowed": false
+}

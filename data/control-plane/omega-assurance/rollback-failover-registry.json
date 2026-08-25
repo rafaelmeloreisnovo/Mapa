@@ -1,0 +1,36 @@
+{
+  "schema_version": "rafaelia.rollback-failover-registry/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "rollback_states": [
+    {"id": "NOT_APPLICABLE", "promotion_effect": "NONE"},
+    {"id": "DEFINED", "promotion_effect": "HOLD_UNTIL_TARGET_VERIFIED"},
+    {"id": "READY", "promotion_effect": "SCOPED_ONLY"},
+    {"id": "REHEARSED_LOCAL", "promotion_effect": "LOCAL_EVIDENCE_ONLY"},
+    {"id": "OBSERVED_RUNTIME", "promotion_effect": "RUNTIME_SCOPE_ONLY"},
+    {"id": "FAILED", "promotion_effect": "HOLD"},
+    {"id": "TOKEN_VAZIO", "promotion_effect": "HOLD"}
+  ],
+  "failover_order": ["canonical_source", "verified_replica", "hash_verified_cache", "TOKEN_VAZIO_HOLD"],
+  "required_preconditions": [
+    "known_good_ref",
+    "state_and_schema_compatibility",
+    "data_migration_reversibility_or_explicit_irreversible_hold",
+    "bounded_blast_radius",
+    "authority",
+    "receipt_before_mutation"
+  ],
+  "rules": [
+    "rollback success does not prove prevention control",
+    "failover success does not resolve root cause",
+    "hotswap requires interface and state compatibility evidence",
+    "watchdog failure produces FAIL_CLOSED_HOLD",
+    "rollback failure produces HOLD and escalation, not creative adaptation",
+    "automatic recovery is allowed only when pre-authorized, bounded, reversible and privacy-safe"
+  ],
+  "meta_watch": {
+    "watchdog_depth_limit": 2,
+    "after_limit": "HOLD_FOR_AUDIT",
+    "required_health": ["heartbeat", "validator_integrity", "receipt_freshness", "clock_ref_hash_coherence", "rollback_target_exists", "authority_owner_resolvable"]
+  }
+}

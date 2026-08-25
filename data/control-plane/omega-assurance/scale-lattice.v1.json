@@ -1,0 +1,25 @@
+{
+  "schema_version": "rafaelia.scale-lattice/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "ordered_levels": [
+    {"id": "META", "parent": null, "meaning": "governance and ontology of the whole assurance system"},
+    {"id": "FEDERATION", "parent": "META", "meaning": "cross-repository authority and evidence routing"},
+    {"id": "SYSTEM", "parent": "FEDERATION", "meaning": "one deployed or specified system"},
+    {"id": "DOMAIN", "parent": "SYSTEM", "meaning": "independent technical or epistemic domain"},
+    {"id": "COMPONENT", "parent": "DOMAIN", "meaning": "bounded subsystem or service"},
+    {"id": "ARTIFACT", "parent": "COMPONENT", "meaning": "file, binary, schema, dataset or receipt"},
+    {"id": "RECORD", "parent": "ARTIFACT", "meaning": "one structured record or event"},
+    {"id": "FIELD", "parent": "RECORD", "meaning": "one typed property"},
+    {"id": "TOKEN", "parent": "FIELD", "meaning": "literal or semantic token with provenance"},
+    {"id": "BIT", "parent": "TOKEN", "meaning": "binary representation when byte evidence exists"},
+    {"id": "YOCTO", "parent": "BIT", "meaning": "declared extreme niche scale only when a valid domain, unit, instrument and resolution contract exist"}
+  ],
+  "rules": [
+    "scale descent never creates evidence",
+    "parent PASS does not imply child PASS",
+    "child detail does not authorize parent-level promotion",
+    "YOCTO is NOT_APPLICABLE or TOKEN_VAZIO unless domain, unit, instrument and measurable resolution are explicit",
+    "cross-scale bridge requires relation type, provenance, uncertainty and falsifier"
+  ]
+}

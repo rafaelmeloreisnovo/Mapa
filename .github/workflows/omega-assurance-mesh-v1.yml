@@ -1,0 +1,39 @@
+name: omega-assurance-mesh-v1
+
+on:
+  pull_request:
+    paths:
+      - 'schemas/omega-assurance/**'
+      - 'data/control-plane/omega-assurance/**'
+      - 'data/fixtures/omega-assurance/**'
+      - 'data/ledgers/omega-assurance/**'
+      - 'tools/validate_omega_assurance_mesh_v1.py'
+      - 'tests/test_omega_assurance_mesh_v1.py'
+      - 'indices/OMEGA_ASSURANCE_MESH_V1.md'
+      - 'data/receipts/OMEGA_ASSURANCE_MESH_V1_*.json'
+      - '.github/workflows/omega-assurance-mesh-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structural-fail-closed:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout pinned action
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile validator and tests
+        run: |
+          python3 -m py_compile tools/validate_omega_assurance_mesh_v1.py
+          python3 -m py_compile tests/test_omega_assurance_mesh_v1.py
+      - name: Run mesh tests
+        run: python3 -m unittest tests/test_omega_assurance_mesh_v1.py
+      - name: Validate machine-readable mesh
+        run: python3 tools/validate_omega_assurance_mesh_v1.py
+      - name: Revalidate inherited fail-closed controls
+        run: |
+          python3 tools/validate_omega_assurance_skills_v1.py
+          python3 scripts/validate_adaptive_resilience_watchdog_v1.py
+          python3 scripts/authority_pyramid_gate.py --self-test

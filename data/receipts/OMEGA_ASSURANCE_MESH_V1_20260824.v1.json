@@ -1,0 +1,61 @@
+{
+  "schema_version": "rafaelia.omega-assurance-mesh-receipt/v1",
+  "receipt_id": "OMEGA_ASSURANCE_MESH_V1_20260824",
+  "status": "MATERIALIZED_LOCAL_VALIDATED_BRANCH",
+  "claim_allowed": false,
+  "append_only": true,
+  "base_main": "1da6932b7a90215dda5fd8c2e2b1d27b114e6538",
+  "branch": "chatgpt/omega-assurance-mesh-v1-20260824",
+  "pull_request": null,
+  "implementation_commit": null,
+  "artifacts": {
+    "schemas": 3,
+    "registries_and_matrices": 9,
+    "ledger": 1,
+    "positive_fixtures": 3,
+    "negative_fixtures": 3,
+    "validator": "tools/validate_omega_assurance_mesh_v1.py",
+    "tests": "tests/test_omega_assurance_mesh_v1.py",
+    "workflow": ".github/workflows/omega-assurance-mesh-v1.yml",
+    "index": "indices/OMEGA_ASSURANCE_MESH_V1.md"
+  },
+  "qualification": {
+    "local_validator": "PASS_STRUCTURAL_FAIL_CLOSED_CONTRACT_ONLY",
+    "local_unit_tests": "PASS_10_OF_10",
+    "remote_dedicated_gate": "TOKEN_VAZIO_NOT_YET_OBSERVED",
+    "general_ci": "TOKEN_VAZIO_NOT_YET_OBSERVED",
+    "independent_review": "TOKEN_VAZIO_NOT_YET_OBSERVED"
+  },
+  "inherited_controls": [
+    "AGENTS.md",
+    "governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json",
+    "data/control-plane/rafaelia-convergence-multifilament-omega.v1.json",
+    "data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json",
+    "schemas/cadeia_custodia_evento.schema.json",
+    "indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
+  ],
+  "preserved_token_vazio": [
+    "agent and producer runtime adoption",
+    "active production watchdog",
+    "physical rollback and failover",
+    "lock-free or wait-free progress",
+    "performance and capacity",
+    "network interoperability and security",
+    "RLL or cosmological evidence",
+    "independent approval",
+    "server-side main protection enforcement"
+  ],
+  "F_ok": [
+    "machine-readable Omega7 node, transition and watchdog-event contracts materialized",
+    "epistemic, attention, risk, authority, rollback, relation and scale registries materialized",
+    "cross-layer positive and do-not-overreact cases materialized",
+    "append-only anomaly/paradox ledger seeded without a production claim"
+  ],
+  "F_gap": [
+    "remote validation unobserved at receipt creation",
+    "implementation commit and pull request not yet bound",
+    "runtime and physical evidence remain TOKEN_VAZIO"
+  ],
+  "F_next": "bind exact implementation commit, open a draft PR and append a separate qualification receipt",
+  "boundary": "STRUCTURAL_CONTRACT_ONLY"
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "rafaelia.omega-assurance-mesh-qualification/v1",
+  "receipt_id": "OMEGA_ASSURANCE_MESH_V1_20260824_QUALIFICATION",
+  "status": "STRUCTURAL_GATES_PASS_GOVERNANCE_BLOCKED",
+  "claim_allowed": false,
+  "append_only": true,
+  "previous_receipt": "data/receipts/OMEGA_ASSURANCE_MESH_V1_20260824.v1.json",
+  "observed_at": "2026-08-25T01:22:27Z",
+  "base_main": "1da6932b7a90215dda5fd8c2e2b1d27b114e6538",
+  "branch": "chatgpt/omega-assurance-mesh-v1-20260824",
+  "pull_request": 392,
+  "implementation_commit": "cbfd6a372f1d48d91edc023372bfb206458d356d",
+  "implementation_tree": "94b5741c2ad1c6987193f878c64798f063a3c26d",
+  "bundle_sha256": "adb5a2239560ec2ee50b646029785d16ab0eb521c1f80e08393b311b00808f96",
+  "delta": {
+    "commits": 1,
+    "files": 24,
+    "additions": 1645,
+    "deletions": 0
+  },
+  "local_qualification": {
+    "validator": {
+      "command": "python3 tools/validate_omega_assurance_mesh_v1.py",
+      "result": "PASS",
+      "proof_scope": "STRUCTURAL_FAIL_CLOSED_CONTRACT_ONLY"
+    },
+    "unit_tests": {
+      "command": "python3 -m unittest tests/test_omega_assurance_mesh_v1.py",
+      "result": "PASS_10_OF_10"
+    },
+    "json_parse": "PASS_19_JSON_DOCUMENTS"
+  },
+  "remote_qualification": {
+    "omega_assurance_mesh_v1": {"run_id": 32797182503, "run_number": 1, "conclusion": "success"},
+    "general_ci": {"run_id": 32797182449, "run_number": 1720, "conclusion": "success"},
+    "branch_topology": {"run_id": 32797182401, "run_number": 845, "conclusion": "success"},
+    "live_control_plane_reconciliation": {"run_id": 32797182429, "run_number": 219, "conclusion": "success"},
+    "promotion_control": {
+      "run_id": 32797182425,
+      "run_number": 970,
+      "conclusion": "failure",
+      "negative_tests": "success",
+      "enforcement_result": "DENIED",
+      "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN", "INDEPENDENT_APPROVAL_MISSING"],
+      "observed_independent_approvals": 0,
+      "required_independent_approvals": 1,
+      "claim_allowed_observed": false
+    },
+    "server_merge_enforcement": {
+      "run_id": 32797182509,
+      "run_number": 242,
+      "conclusion": "failure",
+      "status": "BLOCKED",
+      "failure_modes": ["BRANCH_PROTECTION_DISABLED", "PROTECTION_NOT_ENABLED"],
+      "enforcement_level": "off",
+      "claim_allowed_observed": false
+    }
+  },
+  "evidence_classification": {
+    "machine_readable_contract": "EVIDENCED_SCOPED_AT_IMPLEMENTATION_COMMIT",
+    "negative_fixtures": "EXECUTED_LOCAL_AND_CI",
+    "integration_with_inherited_structural_controls": "EXECUTED_IN_DEDICATED_WORKFLOW",
+    "agent_or_producer_runtime_adoption": "TOKEN_VAZIO_NOT_OBSERVED",
+    "active_production_watchdog": "TOKEN_VAZIO_NOT_OBSERVED",
+    "physical_rollback_failover": "TOKEN_VAZIO_NOT_OBSERVED",
+    "lock_free_progress": "TOKEN_VAZIO_NOT_PROVEN",
+    "performance": "TOKEN_VAZIO_NOT_MEASURED",
+    "network_interoperability_security": "TOKEN_VAZIO_NOT_PROVEN",
+    "RLL_cosmology": "TOKEN_VAZIO_NO_RESULT_CLAIMED",
+    "legal_or_standard_certification": "NOT_CLAIMED"
+  },
+  "F_ok": [
+    "24-file atomic implementation commit bound",
+    "dedicated mesh gate, general CI, topology and live reconciliation passed",
+    "promotion negative tests passed and correctly denied promotion",
+    "server enforcement detector correctly exposed disabled main protection"
+  ],
+  "F_gap": [
+    "PR remains draft with zero independent approvals",
+    "main branch protection and required server-side enforcement are disabled",
+    "runtime, physical, performance, protocol and scientific evidence remain TOKEN_VAZIO"
+  ],
+  "F_next": "keep the PR draft; obtain independent review and intentionally configure server-side main protection before any promotion decision",
+  "boundary": "STRUCTURAL_CONTRACT_ONLY"
+}

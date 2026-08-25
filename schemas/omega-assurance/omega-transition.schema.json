@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/omega-assurance/omega-transition.schema.json",
+  "title": "RAFAELIA Omega Transition V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "transition_id",
+    "timestamp_utc",
+    "from_state",
+    "to_state",
+    "trigger",
+    "observation",
+    "interpretation",
+    "evidence",
+    "counterevidence",
+    "uncertainty",
+    "risk_before",
+    "risk_after",
+    "authority",
+    "privacy_class",
+    "falsifier",
+    "test_set",
+    "minimum_intervention",
+    "blast_radius",
+    "rollback",
+    "failover",
+    "watchdog_state",
+    "attention_state",
+    "receipt",
+    "next_review",
+    "append_only",
+    "claim_allowed"
+  ],
+  "$defs": {
+    "token_vazio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reason", "next_gate"],
+      "properties": {
+        "state": {"const": "TOKEN_VAZIO"},
+        "reason": {"type": "string", "minLength": 1},
+        "next_gate": {"type": "string", "minLength": 1}
+      }
+    },
+    "known_or_vazio": {"oneOf": [{"type": "string", "minLength": 1}, {"$ref": "#/$defs/token_vazio"}]},
+    "risk_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vector_id", "decision", "p0_dimensions", "unknown_dimensions"],
+      "properties": {
+        "vector_id": {"type": "string", "minLength": 1},
+        "decision": {"enum": ["WATCH", "WARN", "HOLD", "ACT_BOUNDED"]},
+        "p0_dimensions": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "unknown_dimensions": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "rafaelia.omega-transition/v1"},
+    "transition_id": {"type": "string", "pattern": "^OMGTR-[0-9]{8}T[0-9]{6}Z-[A-Z0-9_-]{4,64}$"},
+    "timestamp_utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "from_state": {"type": "string", "minLength": 1},
+    "to_state": {"type": "string", "minLength": 1},
+    "trigger": {"type": "string", "minLength": 1},
+    "observation": {"type": "string", "minLength": 1},
+    "interpretation": {"type": "string", "minLength": 1},
+    "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "counterevidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "uncertainty": {"enum": ["MEASURED", "BOUNDED", "OPEN", "TOKEN_VAZIO"]},
+    "risk_before": {"$ref": "#/$defs/risk_ref"},
+    "risk_after": {"$ref": "#/$defs/risk_ref"},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "operation", "state", "review"],
+      "properties": {
+        "owner": {"$ref": "#/$defs/known_or_vazio"},
+        "operation": {"enum": ["READ", "WRITE", "MUTATE", "PROMOTE", "PUBLISH", "DELETE"]},
+        "state": {"enum": ["ALLOW", "DENY", "HOLD"]},
+        "review": {"enum": ["NOT_REQUIRED", "PENDING", "APPROVED", "REJECTED", "TOKEN_VAZIO"]}
+      }
+    },
+    "privacy_class": {"enum": ["PUBLIC", "INTERNAL", "PRIVATE", "RESTRICTED", "SEALED", "REDACTED", "TOKEN_VAZIO"]},
+    "falsifier": {"$ref": "#/$defs/known_or_vazio"},
+    "test_set": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "minimum_intervention": {"type": "string", "minLength": 1},
+    "blast_radius": {"$ref": "#/$defs/known_or_vazio"},
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "target", "rehearsal_receipt"],
+      "properties": {
+        "state": {"enum": ["NOT_APPLICABLE", "READY", "REHEARSED_LOCAL", "FAILED", "TOKEN_VAZIO"]},
+        "target": {"$ref": "#/$defs/known_or_vazio"},
+        "rehearsal_receipt": {"$ref": "#/$defs/known_or_vazio"}
+      }
+    },
+    "failover": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "target", "compatibility"],
+      "properties": {
+        "state": {"enum": ["NOT_APPLICABLE", "DEFINED", "REHEARSED_LOCAL", "OBSERVED_RUNTIME", "FAILED", "TOKEN_VAZIO"]},
+        "target": {"$ref": "#/$defs/known_or_vazio"},
+        "compatibility": {"enum": ["NOT_APPLICABLE", "EVIDENCED", "PARTIAL", "FAILED", "TOKEN_VAZIO"]}
+      }
+    },
+    "watchdog_state": {"enum": ["WATCH", "WARN", "HOLD", "ACT_BOUNDED", "TOKEN_VAZIO"]},
+    "attention_state": {"type": "string", "minLength": 1},
+    "receipt": {"$ref": "#/$defs/known_or_vazio"},
+    "next_review": {"$ref": "#/$defs/known_or_vazio"},
+    "append_only": {"const": true},
+    "claim_allowed": {"type": "boolean"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"authority": {"properties": {"state": {"enum": ["DENY", "HOLD"]}}, "required": ["state"]}}},
+      "then": {"properties": {"claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"privacy_class": {"const": "TOKEN_VAZIO"}}},
+      "then": {"properties": {"authority": {"properties": {"state": {"enum": ["DENY", "HOLD"]}}}, "claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"rollback": {"properties": {"state": {"const": "TOKEN_VAZIO"}}, "required": ["state"]}, "authority": {"properties": {"operation": {"enum": ["MUTATE", "PROMOTE", "PUBLISH", "DELETE"]}}, "required": ["operation"]}}},
+      "then": {"properties": {"watchdog_state": {"const": "HOLD"}, "claim_allowed": {"const": false}}}
+    }
+  ]
+}

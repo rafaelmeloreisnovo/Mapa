@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/omega-assurance/omega7-node.schema.json",
+  "title": "RAFAELIA Omega7 Node V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "node_id",
+    "node_type",
+    "label",
+    "D1_identity",
+    "D2_epistemic",
+    "D3_execution",
+    "D4_safety",
+    "D5_privacy",
+    "D6_authority",
+    "D7_transition",
+    "attention_state",
+    "scales",
+    "evidence",
+    "relations",
+    "promotion_gate",
+    "claim_allowed"
+  ],
+  "$defs": {
+    "token_vazio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reason", "next_gate"],
+      "properties": {
+        "state": {"const": "TOKEN_VAZIO"},
+        "reason": {"type": "string", "minLength": 1},
+        "next_gate": {"type": "string", "minLength": 1},
+        "owner": {"type": ["string", "null"]}
+      }
+    },
+    "known_or_vazio": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {"$ref": "#/$defs/token_vazio"}
+      ]
+    },
+    "evidence_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "reference", "scope", "evidence_level"],
+      "properties": {
+        "kind": {"enum": ["commit", "file", "hash", "log", "measurement", "source", "review", "test", "receipt", "proof"]},
+        "reference": {"type": "string", "minLength": 1},
+        "scope": {"type": "string", "minLength": 1},
+        "evidence_level": {"enum": ["DOCUMENTED", "SIMULATED", "ESTIMATED", "EXTRAPOLATED", "MEASURED_LOCAL", "REPRODUCED", "CROSS_HOST", "PROVEN", "INVALIDATED"]}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "rafaelia.omega7-node/v1"},
+    "node_id": {"type": "string", "pattern": "^OMG7-[A-Z0-9][A-Z0-9_-]{3,95}$"},
+    "node_type": {"enum": ["TOKEN", "FILE", "ARTIFACT", "CLAIM", "FORMULA", "HYPOTHESIS", "MODEL", "THEOREM", "PROOF", "EVENT", "FAILURE", "ANOMALY", "PARADOX", "RECEIPT", "DECISION", "SYSTEM", "RELATION"]},
+    "label": {"type": "string", "minLength": 1},
+    "D1_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "revision", "digest", "provenance_state"],
+      "properties": {
+        "source": {"$ref": "#/$defs/known_or_vazio"},
+        "revision": {"$ref": "#/$defs/known_or_vazio"},
+        "digest": {
+          "oneOf": [
+            {"type": "string", "pattern": "^(sha256:)?[a-f0-9]{64}$"},
+            {"$ref": "#/$defs/token_vazio"}
+          ]
+        },
+        "provenance_state": {"enum": ["BOUND", "PARTIAL", "CONTRADICTED", "TOKEN_VAZIO"]}
+      }
+    },
+    "D2_epistemic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "uncertainty", "falsifier"],
+      "properties": {
+        "state": {"enum": ["OBSERVATION", "DEFINITION", "FORMULA", "DERIVATION", "HYPOTHESIS", "MODEL", "THEORY", "THEOREM", "PROOF", "EMPIRICAL_RESULT", "ANOMALY", "PARADOX", "COUNTEREXAMPLE", "FALSIFIER", "REFUTED", "REPLICATED", "META_ANALYSIS", "PARABLE", "ANALOGY", "TOKEN_VAZIO"]},
+        "uncertainty": {"enum": ["MEASURED", "BOUNDED", "OPEN", "TOKEN_VAZIO"]},
+        "falsifier": {"$ref": "#/$defs/known_or_vazio"},
+        "counterevidence": {"type": "array", "items": {"$ref": "#/$defs/evidence_ref"}}
+      }
+    },
+    "D3_execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "environment", "receipt"],
+      "properties": {
+        "level": {"enum": ["NOT_APPLICABLE", "SPECIFIED", "IMPLEMENTED", "BUILT", "TEST_EXECUTED", "RUNTIME_OBSERVED", "PHYSICAL_OBSERVED", "REPRODUCED", "TOKEN_VAZIO"]},
+        "environment": {"$ref": "#/$defs/known_or_vazio"},
+        "receipt": {"$ref": "#/$defs/known_or_vazio"}
+      }
+    },
+    "D4_safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["failure_mode", "blast_radius", "rollback_state", "failover_state"],
+      "properties": {
+        "failure_mode": {"$ref": "#/$defs/known_or_vazio"},
+        "blast_radius": {"$ref": "#/$defs/known_or_vazio"},
+        "rollback_state": {"enum": ["NOT_APPLICABLE", "READY", "REHEARSED_LOCAL", "FAILED", "TOKEN_VAZIO"]},
+        "failover_state": {"enum": ["NOT_APPLICABLE", "DEFINED", "REHEARSED_LOCAL", "OBSERVED_RUNTIME", "FAILED", "TOKEN_VAZIO"]}
+      }
+    },
+    "D5_privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "disclosure_state", "minimization"],
+      "properties": {
+        "classification": {"enum": ["PUBLIC", "INTERNAL", "PRIVATE", "RESTRICTED", "SEALED", "REDACTED", "TOKEN_VAZIO"]},
+        "disclosure_state": {"enum": ["ALLOW", "DENY", "HOLD"]},
+        "minimization": {"type": "string", "minLength": 1}
+      }
+    },
+    "D6_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "write_state", "promotion_state", "review_state"],
+      "properties": {
+        "owner": {"$ref": "#/$defs/known_or_vazio"},
+        "write_state": {"enum": ["ALLOW", "DENY", "HOLD"]},
+        "promotion_state": {"enum": ["ALLOW", "DENY", "HOLD"]},
+        "review_state": {"enum": ["NOT_REQUIRED", "PENDING", "APPROVED", "REJECTED", "TOKEN_VAZIO"]}
+      }
+    },
+    "D7_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_revision", "previous_transition", "reason", "next_review"],
+      "properties": {
+        "current_revision": {"type": "integer", "minimum": 0},
+        "previous_transition": {
+          "oneOf": [
+            {"type": "string", "minLength": 1},
+            {"type": "null"}
+          ]
+        },
+        "reason": {"type": "string", "minLength": 1},
+        "next_review": {"$ref": "#/$defs/known_or_vazio"}
+      }
+    },
+    "attention_state": {"type": "string", "minLength": 1},
+    "scales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["META", "FEDERATION", "SYSTEM", "DOMAIN", "COMPONENT", "ARTIFACT", "RECORD", "FIELD", "TOKEN", "BIT", "YOCTO"]}
+    },
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence_ref"}},
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relation_id", "type", "target", "provenance", "confidence", "inferred"],
+        "properties": {
+          "relation_id": {"type": "string", "pattern": "^OMGREL-[A-Z0-9_-]{4,96}$"},
+          "type": {"type": "string", "minLength": 1},
+          "target": {"type": "string", "minLength": 1},
+          "provenance": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "confidence": {"enum": ["MEASURED", "DOCUMENTED", "INFERRED", "TOKEN_VAZIO"]},
+          "inferred": {"type": "boolean"}
+        }
+      }
+    },
+    "promotion_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "gate_id", "receipt"],
+      "properties": {
+        "state": {"enum": ["OPEN", "HOLD", "CLOSED_PASS", "CLOSED_FAIL", "TOKEN_VAZIO"]},
+        "gate_id": {"$ref": "#/$defs/known_or_vazio"},
+        "receipt": {"$ref": "#/$defs/known_or_vazio"}
+      }
+    },
+    "claim_allowed": {"type": "boolean"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"D2_epistemic": {"properties": {"state": {"const": "TOKEN_VAZIO"}}, "required": ["state"]}}},
+      "then": {"properties": {"claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"claim_allowed": {"const": true}}, "required": ["claim_allowed"]},
+      "then": {
+        "properties": {
+          "D6_authority": {"properties": {"promotion_state": {"const": "ALLOW"}}, "required": ["promotion_state"]},
+          "promotion_gate": {"properties": {"state": {"const": "CLOSED_PASS"}}, "required": ["state"]},
+          "evidence": {"minItems": 1}
+        }
+      }
+    }
+  ]
+}

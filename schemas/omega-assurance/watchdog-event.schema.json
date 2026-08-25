@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/omega-assurance/watchdog-event.schema.json",
+  "title": "RAFAELIA Omega Watchdog Event V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "timestamp_utc",
+    "watch_group",
+    "signal",
+    "subject_ref",
+    "evidence_state",
+    "severity",
+    "risk_vector_id",
+    "action_mode",
+    "minimum_intervention",
+    "authority_state",
+    "privacy_state",
+    "rollback_state",
+    "heartbeat_state",
+    "dedup_key",
+    "falsifier",
+    "receipt",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "rafaelia.omega-watchdog-event/v1"},
+    "event_id": {"type": "string", "pattern": "^OMGW-[0-9]{8}T[0-9]{6}Z-[A-Z0-9_-]{4,64}$"},
+    "timestamp_utc": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "watch_group": {"enum": ["W1_IDENTITY", "W2_EPISTEMIC", "W3_EXECUTION", "W4_RESILIENCE", "W5_SECURITY_PRIVACY", "W6_GOVERNANCE", "W7_KNOWLEDGE_DECAY"]},
+    "signal": {"type": "string", "minLength": 1},
+    "subject_ref": {"type": "string", "minLength": 1},
+    "evidence_state": {"enum": ["DOCUMENTED", "SIMULATED", "MEASURED_LOCAL", "REPRODUCED", "PROVEN", "INVALIDATED", "TOKEN_VAZIO"]},
+    "severity": {"enum": ["P0", "P1", "P2", "P3", "TOKEN_VAZIO"]},
+    "risk_vector_id": {"type": "string", "minLength": 1},
+    "action_mode": {"enum": ["WATCH", "WARN", "HOLD", "ACT_BOUNDED"]},
+    "minimum_intervention": {"type": "string", "minLength": 1},
+    "authority_state": {"enum": ["ALLOW", "DENY", "HOLD", "TOKEN_VAZIO"]},
+    "privacy_state": {"enum": ["PUBLIC", "KNOWN_RESTRICTED", "DENY", "TOKEN_VAZIO"]},
+    "rollback_state": {"enum": ["NOT_APPLICABLE", "READY", "REHEARSED_LOCAL", "FAILED", "TOKEN_VAZIO"]},
+    "heartbeat_state": {"enum": ["FRESH", "STALE", "FAILED", "TOKEN_VAZIO"]},
+    "dedup_key": {"type": "string", "minLength": 1},
+    "falsifier": {"type": "string", "minLength": 1},
+    "receipt": {"type": "string", "minLength": 1},
+    "claim_allowed": {"type": "boolean"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"severity": {"const": "P0"}}},
+      "then": {"properties": {"action_mode": {"const": "HOLD"}, "claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"evidence_state": {"const": "TOKEN_VAZIO"}}},
+      "then": {"properties": {"action_mode": {"enum": ["WATCH", "WARN", "HOLD"]}, "claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"action_mode": {"const": "ACT_BOUNDED"}}},
+      "then": {
+        "properties": {
+          "authority_state": {"const": "ALLOW"},
+          "privacy_state": {"enum": ["PUBLIC", "KNOWN_RESTRICTED"]},
+          "rollback_state": {"enum": ["READY", "REHEARSED_LOCAL"]}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"heartbeat_state": {"enum": ["STALE", "FAILED", "TOKEN_VAZIO"]}}},
+      "then": {"properties": {"action_mode": {"const": "HOLD"}, "claim_allowed": {"const": false}}}
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "rafaelia.omega7-node/v1",
+  "node_id": "OMG7-OMEGA_ASSURANCE_MESH_V1",
+  "node_type": "SYSTEM",
+  "label": "Omega Assurance Mesh V1 machine-readable contract",
+  "D1_identity": {
+    "source": "rafaelmeloreisnovo/Mapa:data/control-plane/omega-assurance/omega-assurance-mesh.v1.json",
+    "revision": "branch-bound materialization",
+    "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "provenance_state": "BOUND"
+  },
+  "D2_epistemic": {
+    "state": "DEFINITION",
+    "uncertainty": "BOUNDED",
+    "falsifier": "The validator accepts unknown authority, unknown privacy, TOKEN_VAZIO promotion or irreversible unknown risk."
+  },
+  "D3_execution": {
+    "level": "TEST_EXECUTED",
+    "environment": "repository CI or exact local validator environment",
+    "receipt": "data/receipts/OMEGA_ASSURANCE_MESH_V1_20260824.v1.json"
+  },
+  "D4_safety": {
+    "failure_mode": "contract drift or false promotion",
+    "blast_radius": "repository-local contract and proposed branch",
+    "rollback_state": "READY",
+    "failover_state": "NOT_APPLICABLE"
+  },
+  "D5_privacy": {
+    "classification": "PUBLIC",
+    "disclosure_state": "ALLOW",
+    "minimization": "Public repository paths and aggregate states only; no private locators or raw private content."
+  },
+  "D6_authority": {
+    "owner": "rafaelmeloreisnovo/Mapa for federated contract structure",
+    "write_state": "ALLOW",
+    "promotion_state": "HOLD",
+    "review_state": "PENDING"
+  },
+  "D7_transition": {
+    "current_revision": 0,
+    "previous_transition": null,
+    "reason": "Materialize the missing machine-readable layer without replacing existing authorities.",
+    "next_review": "draft PR gates and independent governance review"
+  },
+  "attention_state": "ACTIVE",
+  "scales": ["META", "FEDERATION", "SYSTEM", "ARTIFACT", "RECORD", "FIELD", "TOKEN"],
+  "evidence": [
+    {
+      "kind": "commit",
+      "reference": "main@1da6932b7a90215dda5fd8c2e2b1d27b114e6538",
+      "scope": "pre-materialization repository state",
+      "evidence_level": "DOCUMENTED"
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "OMGREL-MESH_DEPENDS_WATCHDOG_V1",
+      "type": "DEPENDS_ON",
+      "target": "governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json",
+      "provenance": ["main@1da6932b7a90215dda5fd8c2e2b1d27b114e6538"],
+      "confidence": "DOCUMENTED",
+      "inferred": false
+    }
+  ],
+  "promotion_gate": {
+    "state": "HOLD",
+    "gate_id": "draft PR CI plus independent governance review",
+    "receipt": "data/receipts/OMEGA_ASSURANCE_MESH_V1_20260824.v1.json"
+  },
+  "claim_allowed": false
+}

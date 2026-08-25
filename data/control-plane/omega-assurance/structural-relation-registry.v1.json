@@ -1,0 +1,35 @@
+{
+  "schema_version": "rafaelia.structural-relation-registry/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "identity_rule": "Every edge binds stable source and target identifiers, relation type, provenance, revision and confidence.",
+  "relation_types": [
+    {"id": "IDENTICAL_TO", "symmetric": true, "transitive": true, "evidence_required": "identity proof"},
+    {"id": "SIMILAR_TO", "symmetric": true, "transitive": false, "evidence_required": "declared comparison dimensions"},
+    {"id": "DEPENDS_ON", "symmetric": false, "transitive": "CONDITIONAL", "evidence_required": "dependency contract"},
+    {"id": "IMPLEMENTS", "symmetric": false, "transitive": false, "evidence_required": "source and artifact binding"},
+    {"id": "BUILDS", "symmetric": false, "transitive": false, "evidence_required": "build receipt"},
+    {"id": "EXECUTES", "symmetric": false, "transitive": false, "evidence_required": "runtime receipt"},
+    {"id": "TESTS", "symmetric": false, "transitive": false, "evidence_required": "test identity and outcome"},
+    {"id": "FALSIFIES", "symmetric": false, "transitive": false, "evidence_required": "claim target and executed falsifier"},
+    {"id": "SUPPORTS", "symmetric": false, "transitive": false, "evidence_required": "bounded evidence scope"},
+    {"id": "CONTRADICTS", "symmetric": true, "transitive": false, "evidence_required": "lhs, rhs and shared scope"},
+    {"id": "SUPERSEDES", "symmetric": false, "transitive": true, "evidence_required": "append-only transition receipt"},
+    {"id": "PART_OF", "symmetric": false, "transitive": true, "evidence_required": "containment contract"},
+    {"id": "PRODUCED_BY", "symmetric": false, "transitive": false, "evidence_required": "producer authority and receipt"},
+    {"id": "AUTHORIZED_BY", "symmetric": false, "transitive": false, "evidence_required": "authority decision"},
+    {"id": "ROLLS_BACK_TO", "symmetric": false, "transitive": false, "evidence_required": "known-good target and compatibility"},
+    {"id": "FAILS_OVER_TO", "symmetric": false, "transitive": false, "evidence_required": "ordered target and failover receipt"},
+    {"id": "BRIDGES_TRANSVERSELY", "symmetric": false, "transitive": false, "evidence_required": "explicit mapped dimensions"},
+    {"id": "TOKEN_VAZIO_RELATION", "symmetric": false, "transitive": false, "evidence_required": "reason and next gate"}
+  ],
+  "graph_checks": [
+    "unique node identifiers",
+    "unique edge identifiers",
+    "all endpoints resolve or are typed TOKEN_VAZIO",
+    "cycles reported by relation type, never erased",
+    "orphan nodes remain visible",
+    "inferred edges are hypotheses until evidenced",
+    "hub or community claims require the actual versioned graph and method"
+  ]
+}

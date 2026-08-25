@@ -1,0 +1,30 @@
+{
+  "schema_version": "rafaelia.authorization-write-matrix/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "default": "HOLD_FOR_AUTHORITY",
+  "operations": [
+    {"id": "READ", "requires": ["resolved_subject", "privacy_class", "read_scope"], "unknown_action": "DENY"},
+    {"id": "WRITE", "requires": ["destination", "authority_owner", "branch_or_revision", "privacy_class", "receipt_destination"], "unknown_action": "HOLD"},
+    {"id": "MUTATE", "requires": ["exact_target", "authority_owner", "before_state", "rollback", "blast_radius", "receipt_destination"], "unknown_action": "HOLD"},
+    {"id": "PROMOTE", "requires": ["bounded_claim", "evidence_gate", "all_lower_authority_layers", "independent_review_when_required", "rollback", "receipt"], "unknown_action": "DENY"},
+    {"id": "PUBLISH", "requires": ["disclosure_authority", "privacy_minimization", "provenance", "review", "receipt"], "unknown_action": "DENY"},
+    {"id": "DELETE", "requires": ["explicit_delete_authority", "exact_target", "retention_decision", "recoverability_or_explicit_irreversibility", "receipt"], "unknown_action": "DENY"}
+  ],
+  "decision_order": [
+    "privacy and protected-subject gate",
+    "exact producer or control-plane authority",
+    "operation-specific evidence",
+    "reversibility and blast radius",
+    "independent review when required",
+    "append-only receipt"
+  ],
+  "rules": [
+    "capability != authority",
+    "knowledge != permission",
+    "silence != consent",
+    "technical PASS never overrides governance DENY",
+    "unknown authority blocks mutation and promotion",
+    "Mapa may route and reconcile but cannot manufacture producer runtime evidence"
+  ]
+}

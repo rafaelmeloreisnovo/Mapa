@@ -1,0 +1,29 @@
+{
+  "schema_version": "rafaelia.omega-risk-vector/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "vector_notation": "R=(A,S,P,G,I,V,C,U)",
+  "core_dimensions": [
+    {"symbol": "A", "id": "authority", "non_compensatory": true},
+    {"symbol": "S", "id": "security", "non_compensatory": true},
+    {"symbol": "P", "id": "privacy", "non_compensatory": true},
+    {"symbol": "G", "id": "governance", "non_compensatory": true},
+    {"symbol": "I", "id": "integrity", "non_compensatory": false},
+    {"symbol": "V", "id": "availability", "non_compensatory": false},
+    {"symbol": "C", "id": "reversibility", "non_compensatory": true},
+    {"symbol": "U", "id": "uncertainty", "non_compensatory": true}
+  ],
+  "watchdog_extensions": ["protected_subject", "runtime", "provenance"],
+  "dimension_states": ["CONTROLLED", "WATCH", "P1", "P0", "NOT_APPLICABLE_WITH_EVIDENCE", "TOKEN_VAZIO"],
+  "decision_rules": [
+    "any P0 => HOLD",
+    "TOKEN_VAZIO is never converted to zero risk",
+    "a favorable performance result cannot compensate a privacy, authority, governance, reversibility or security P0",
+    "technical PASS cannot override governance DENY",
+    "ACT_BOUNDED requires known authority, known privacy boundary and ready or rehearsed rollback"
+  ],
+  "unknown_is_zero": false,
+  "p0_non_compensatory": true,
+  "aggregation": "vector_preserving_no_magic_scalar",
+  "priority_only_model": "Autonomy is reduced as impact or uncertainty grows and may increase only with evidence and reversibility; this is an architectural rule, not a calibrated scientific formula."
+}
