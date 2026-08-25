@@ -1,0 +1,37 @@
+name: JSON Totality Invariant
+
+on:
+  push:
+    branches:
+      - 'chatgpt/json-totality-invariant-*'
+  pull_request:
+    paths:
+      - 'scripts/audit_json_totality_invariants.py'
+      - 'schemas/json-totality-invariant-audit.v1.schema.json'
+      - 'tests/test_json_totality_invariants.py'
+      - 'tests/fixtures/json_totality/**'
+      - 'docs/canonical/**/JSON_TOTALITY_INVARIANT_CONTRACT_V1.md'
+      - 'data/audits/JSON_TOTALITY_INVARIANT_SCOPE_*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  stdlib-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile auditor
+        run: python3 -m py_compile scripts/audit_json_totality_invariants.py tests/test_json_totality_invariants.py
+      - name: Run unit tests
+        run: python3 -m unittest tests.test_json_totality_invariants -v
+      - name: Positive strict fixture
+        run: python3 scripts/audit_json_totality_invariants.py tests/fixtures/json_totality/messages-pass.jsonl --strict
+      - name: Negative fixture must fail closed
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/audit_json_totality_invariants.py tests/fixtures/json_totality/messages-gap.jsonl --strict
+          rc=$?
+          set -e
+          test "$rc" -eq 2
