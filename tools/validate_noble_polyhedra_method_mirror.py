@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MIRROR = ROOT / "data/geometry/noble_polyhedra_method_mirror_20260824.v1.json"
 PROBE = ROOT / "data/evidence/termux_geometry_probe_20260824.v1.json"
 RECEIPT = ROOT / "data/receipts/research/noble_polyhedra_method_mirror_20260824.v1.json"
+EXPECTED_ARXIV = "2607.28711"
 
 REQUIRED_INVARIANTS = {
     "VISION_NE_ARTIFACT",
@@ -58,6 +59,10 @@ def main() -> int:
         require(probe.get("claim_allowed") is False, "probe must remain claim_allowed=false")
         require(receipt.get("claim_allowed") is False, "receipt must remain claim_allowed=false")
         require(mirror.get("relation_scope") == "METHOD_MIRROR_ONLY", "relation scope widened")
+        require(mirror.get("external_reference", {}).get("arxiv") == EXPECTED_ARXIV,
+                "primary-source arXiv identifier drifted")
+        require(f"arXiv:{EXPECTED_ARXIV}" in set(receipt.get("source_boundary", {}).get("primary_external_authorities", [])),
+                "custody receipt does not pin corrected arXiv identifier")
 
         invariants = set(mirror.get("invariants", []))
         require(REQUIRED_INVARIANTS <= invariants, "required anti-regression invariants missing")
@@ -86,18 +91,24 @@ def main() -> int:
         require(any(a.get("id") == "ANOM-API-PROBE-20260824-01" and
                     a.get("postcondition") == "__probe__ ABSENT_ON_MAIN"
                     for a in anomalies), "custody anomaly closure not recorded")
+        require(any(a.get("id") == "ANOM-PROVENANCE-ARXIV-ID-20260824-02" and
+                    a.get("correct_value") == EXPECTED_ARXIV
+                    for a in anomalies), "provenance correction receipt missing")
 
         gaps = {g.get("id"): g.get("state") for g in mirror.get("gaps", [])}
         require(gaps.get("TV-RAW-CROSS-CORPUS-EXHAUSTIVENESS") == "TOKEN_VAZIO",
                 "raw corpus uncertainty must remain TOKEN_VAZIO")
         require(gaps.get("TV-INTERNAL-NOBLE-POLYHEDRA-PRIOR-ART") == "TOKEN_VAZIO",
                 "internal prior-art uncertainty must remain TOKEN_VAZIO")
+        require(gaps.get("MIRROR-VALIDATOR-EXECUTION-ENV") == "TOKEN_VAZIO_EXECUTION_ENV",
+                "validator execution-environment gap must remain explicit until rerun")
 
     except (AssertionError, KeyError, json.JSONDecodeError) as exc:
         print(f"FAIL: {exc}")
         return 1
 
     print("PASS: noble-polyhedra method mirror boundaries intact")
+    print(f"primary_arxiv={EXPECTED_ARXIV}")
     print("claim_allowed=false")
     print("scope=METHOD_MIRROR_ONLY")
     return 0
