@@ -1,0 +1,205 @@
+{
+  "schema": "rafaelia.omega-hourly-federated-cycle/v1",
+  "cycle_id": "OMEGA-CYCLE-20260825T191128-0300-001",
+  "predecessor": "TOKEN_VAZIO_NO_PREVIOUS_AUTOMATION_RECEIPT",
+  "observed_interval": {
+    "start": "2026-08-25T19:11:28-03:00",
+    "end": "2026-08-25T19:11:28-03:00",
+    "boundary": "first recoverable checkpoint for this automation lineage"
+  },
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "claim_allowed": false,
+  "authority": {
+    "federation": "rafaelmeloreisnovo/Mapa",
+    "source_recipe": "rafaelmeloreisnovo/termux-packages",
+    "build_runtime": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "drive_occurrence": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "sources": [
+    {
+      "provider": "google-drive",
+      "object_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title_observed": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "role": "governance_anchor",
+      "identity_rule": "Drive fileId is occurrence identity; title is not identity"
+    },
+    {
+      "provider": "github",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "commit": "9ab55e10233b0a8237838a909cfd8a6d1c10584c",
+      "role": "federation_snapshot"
+    },
+    {
+      "provider": "github-actions",
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "workflow": "RAFCODEPHI Usable APK",
+      "run_id": 32612996708,
+      "job_id": 97128879225,
+      "observed_head": "1d411537057d7b9ec2899c6380bf75be96c4689d",
+      "role": "build_falsifier"
+    },
+    {
+      "provider": "github",
+      "repository": "rafaelmeloreisnovo/termux-packages",
+      "commit": "8fcb13afd14398b496ec0c90026a6765fa09c54b",
+      "path": "packages/xorgproto/build.sh",
+      "role": "source_recipe_authority"
+    }
+  ],
+  "cursor": {
+    "before": {
+      "automation_receipt": "TOKEN_VAZIO",
+      "mapa_head": "9ab55e10233b0a8237838a909cfd8a6d1c10584c",
+      "termux_app_falsifier_run": 32612996708
+    },
+    "after": {
+      "automation_receipt": "RAFAELIA_OMEGA_HOURLY_2026-08-25T1911-0300.json",
+      "mapa_branch": "automation/omega-hourly-20260825t1911-0300",
+      "termux_app_falsifier_classified": true
+    }
+  },
+  "processed": {
+    "drive_anchor_objects": 1,
+    "github_repositories_bound": 3,
+    "workflow_runs_inspected": 1,
+    "workflow_jobs_inspected": 1,
+    "workflow_artifacts_inspected": 1,
+    "artifact_files_inspected": 2,
+    "source_recipe_commits_bound": 1,
+    "new_federated_receipts": 1
+  },
+  "evidence": {
+    "workflow_artifact": {
+      "artifact_id": 9486460059,
+      "name": "rafcodephi-usable-apk-c1d25a5daf93ad87b586e5c876d5fddf3c99adb7",
+      "sha256": "37844f71b627e370820291d98d03e037d1f9baaabc78f4d8ecf726a19f926121",
+      "state": "OBSERVED"
+    },
+    "failure_receipt": {
+      "schema": "rafcodephi.usable-apk-receipt/v3",
+      "sha256": "bef7093a72bf649c27e2348ae909450df77eaf4f2762e66fdd370264246ee9f1",
+      "job_status": "failure",
+      "apk_count": 0,
+      "termux_packages_sha": "8fcb13afd14398b496ec0c90026a6765fa09c54b",
+      "bootstrap_build": "failure",
+      "bootstrap_gate": "skipped",
+      "apk_matrix": "skipped",
+      "usable_apk_gate": "skipped",
+      "physical_android": "TOKEN_VAZIO",
+      "claim_allowed_release": false,
+      "claim_allowed_device_runtime": false
+    },
+    "bootstrap_log": {
+      "sha256": "1bdff83b4e977b3829215e9b736518a49490a07c0a83e2b8c945980c868dc415",
+      "terminal_signal": "curl: (28) Connection timed out after 30002 milliseconds",
+      "terminal_source": "https://ftp.x.org/archive/individual/proto/xorgproto-2025.1.tar.xz",
+      "terminal_result": "Failed to download https://ftp.x.org/archive/individual/proto/xorgproto-2025.1.tar.xz",
+      "classification": "EXECUTED_AND_FAILED"
+    }
+  },
+  "provenance_delta": {
+    "source_commit": "8fcb13afd14398b496ec0c90026a6765fa09c54b",
+    "source_change": "RAFCODEPHI-only xorgproto route changed from xorg.freedesktop.org to ftp.x.org while retaining upstream release checksum",
+    "falsifier_run": 32612996708,
+    "falsifier_result": "FAIL",
+    "causal_localization": "ARM source-build reached xorgproto after xorg-util-macros completed, then ftp.x.org repeatedly timed out",
+    "interpretation_boundary": "network-source route failure; does not prove package recipe failure, bootstrap correctness, APK correctness, or device runtime"
+  },
+  "gaps": [
+    {
+      "gap_id": "TV-TERMUX-SOURCE-XORGPROTO-20260825-001",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "github:rafaelmeloreisnovo/termux-packages@8fcb13afd14398b496ec0c90026a6765fa09c54b:packages/xorgproto/build.sh + actions:rafaelmeloreisnovo/termux-app-rafacodephi/run/32612996708",
+      "missing_field": "reachable checksum-bound xorgproto source route demonstrated in the same build environment",
+      "blocking_dependency": "xorgproto source acquisition for ARM bootstrap",
+      "evidence_needed": "successful download from an authoritative immutable source candidate, independently pinned digest, followed by same-head source-build rerun",
+      "falsifier": "source download timeout/hash mismatch/build failure on the replacement route",
+      "next_probe": "derive an immutable upstream Git tag/archive candidate for xorgproto-2025.1, bind its content digest without assuming equality to the .tar.xz release, then rerun the RAFCODEPHI source-build gate",
+      "owner_authority": "rafaelmeloreisnovo/termux-packages",
+      "urgency": "P0_UNBLOCKS_BOOTSTRAP_AND_APK_MATRIX",
+      "closure_gate": "ARM bootstrap source acquisition + source build PASS on exact candidate; then continue to AArch64/bootstrap-pair/APK gates",
+      "claim_allowed": false,
+      "predecessor_lineage": [
+        "termux-packages PR #100",
+        "termux-app PR #388",
+        "workflow run 32612996708",
+        "artifact 9486460059"
+      ]
+    },
+    {
+      "gap_id": "TV-TERMUX-DEVICE-RUNTIME-EXISTING",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "drive:1hJhRn3cR1JCLmxwBlbZvB-9JOtLikI4i",
+      "missing_field": "physical ARMv7 and ARM64 installed APK runtime receipts",
+      "blocking_dependency": "usable APK gate has not produced an APK in the observed falsifier run",
+      "evidence_needed": "device-bound receipt with APK SHA-256, source revision, command, exit code, transcript SHA-256 and environment SHA-256",
+      "falsifier": "install/runtime failure or APK/source hash mismatch",
+      "next_probe": "do not execute device promotion until a usable APK is produced and hash-bound",
+      "owner_authority": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "urgency": "P1_AFTER_USABLE_APK",
+      "closure_gate": "physical device receipt gate",
+      "claim_allowed": false,
+      "predecessor_lineage": ["RAFAELIA_T7_DEVICE_RUNTIME_MATRIX.v1.json", "workflow run 32612996708"]
+    }
+  ],
+  "convergence": {
+    "drive_to_github": "CLOSED_FOR_ANCHOR_IDENTITY_ONLY",
+    "github_app_to_packages": "CLOSED_FOR_FAILURE_LINEAGE",
+    "packages_to_mapa": "MATERIALIZED_AS_FEDERATED_GAP_RECEIPT",
+    "semantic_equivalence": "NOT_CLAIMED",
+    "release_or_runtime_promotion": "NOT_ALLOWED"
+  },
+  "memory_projection": {
+    "L": "PR #100 -> app PR #388 -> run 32612996708 -> artifact 9486460059 -> hourly receipt",
+    "O": "workflow step outcomes + artifact digest + internal file digests independently constrain the same failure boundary",
+    "T": "Drive governance anchor <-> Mapa federation <-> termux-packages source authority <-> termux-app build authority",
+    "C": "GitHub-hosted Linux X64 builder; custom package name com.termux.rafacodephi; ARM lane failed before bootstrap pair/APK",
+    "P": "provider IDs, repo/commit/path, run/job/artifact IDs and SHA-256 digests retained append-only"
+  },
+  "uncertainty": {
+    "before": "source-build failure known at workflow-step granularity; terminal cause and exact evidence hashes not federated",
+    "after": "failure localized to xorgproto acquisition at ftp.x.org and bound to recipe commit, workflow run, artifact, receipt and log digests; replacement source remains TOKEN_VAZIO"
+  },
+  "coverage": {
+    "before": "workflow status + prior PR narrative",
+    "after": "SOURCE+EXECUTION+EVIDENCE+RECEIPT lineage for the current observed blocker",
+    "numeric_fraction": "TOKEN_VAZIO_NO_STABLE_DENOMINATOR"
+  },
+  "claim_allowed_changes": [],
+  "contradictions": [
+    {
+      "id": "CONTRADICTION-XORGPROTO-ALT-HOST-001",
+      "statement_a": "PR #100 proposed ftp.x.org as alternate official archive route",
+      "statement_b": "run 32612996708 demonstrated repeated ftp.x.org timeouts in the actual build environment",
+      "resolution": "the route is disproven as sufficient for this environment; no broader claim about ftp.x.org availability is made"
+    }
+  ],
+  "top_urgencies": [
+    "P0: close xorgproto authoritative reachable source route with independent digest and rerun",
+    "P1: only after bootstrap pair PASS, produce and gate signed APKs",
+    "P1: only after exact APK hash exists, collect physical ARMv7/ARM64 receipts",
+    "P2: reconcile Google Drive plugin packaging and GitHub provider integration after core usable-APK path is unblocked"
+  ],
+  "next_probes_exact": [
+    "Probe xorgproto upstream immutable tag xorgproto-2025.1 and derive a candidate archive/source digest without reusing the .tar.xz checksum unless byte identity is demonstrated.",
+    "Patch only the RAFCODEPHI source route on a non-default termux-packages branch and run the same source-build falsifier; preserve normal com.termux route.",
+    "If ARM passes, continue the existing gate chain to AArch64 -> bootstrap pair -> APK matrix -> usable signed APK; stop at first new measured blocker.",
+    "Keep physical Android and Drive/GitHub in-app provider claims TOKEN_VAZIO until their respective build/runtime receipts exist."
+  ],
+  "F_ok": [
+    "Drive governance anchor rebound by immutable fileId",
+    "current source/build authority chain rebound to exact commits/run/artifact",
+    "failure diagnostic artifact retrieved and content-hashed",
+    "xorgproto ftp.x.org timeout localized as the first observed blocker after xorg-util-macros completion",
+    "federated append-only gap receipt materialized"
+  ],
+  "F_gap": [
+    "reachable immutable xorgproto source candidate with independently verified digest",
+    "bootstrap pair PASS",
+    "usable APK artifact",
+    "physical ARMv7/ARM64 runtime receipts",
+    "Google Drive plugin APK/bootstrap integration and GitHub provider remain outside current closure"
+  ],
+  "F_next": "Close TV-TERMUX-SOURCE-XORGPROTO-20260825-001 at producer authority, then resume the same evidence chain without skipping gates."
+}
