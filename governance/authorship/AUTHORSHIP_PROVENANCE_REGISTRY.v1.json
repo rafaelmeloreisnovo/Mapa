@@ -1,0 +1,65 @@
+{
+  "schema": "RAFAELIA_AUTHORSHIP_PROVENANCE_REGISTRY/v1",
+  "status": "CANONICAL_DRAFT",
+  "claim_allowed": false,
+  "classes": {
+    "A": "AUTHORIAL_PROVEN",
+    "B": "THIRD_PARTY_LICENSED",
+    "C": "RIGHTS_UNRESOLVED",
+    "D": "CLEAN_ROOM_REQUIRED",
+    "E": "CLEAN_ROOM_REIMPLEMENTED"
+  },
+  "components": [
+    {
+      "component_id": "QEMU_RAFAELIA",
+      "repo": "rafaelmeloreisnovo/qemu_rafaelia",
+      "upstream_family": "QEMU",
+      "state": "B_MIXED_WITH_A_CANDIDATES",
+      "evidence": ["COPYING.LIB", "linux-headers/LICENSES", "pc-bios/edk2-licenses.txt", "hw/core/rafaelia-rmr-license.txt"],
+      "next_gate": "file-level provenance matrix and RAFAELIA-module isolation",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "TERMUX_APP_RAFACODEPHI",
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "upstream_family": "Termux",
+      "state": "B_DERIVATIVE_WITH_A_CANDIDATES",
+      "next_gate": "path+commit authorship ledger for RAFCODEPHI-only modules while preserving upstream obligations",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "VIRTUAL_RUNTIME_LEGACY_VECTRAS",
+      "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "upstream_family": "Vectras VM",
+      "state": "B_D_MIXED",
+      "evidence": ["docs/LEGAL_AND_LICENSES.md", "AUTHORSHIP_CLEANROOM_PLAN.md", "conjunto_de_conceitos/PROVENANCE_AND_LICENSES.md"],
+      "working_successor_name": "RAFAELIA_VIRTUAL_RUNTIME",
+      "next_gate": "forensic file inventory + quarantine unresolved assets + independent successor specs",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "LLAMA_RAFAELIA",
+      "repo": "rafaelmeloreisnovo/llamaRafaelia",
+      "upstream_family": "llama.cpp/related",
+      "state": "TOKEN_VAZIO_FILE_LEVEL_LICENSE_AUDIT",
+      "next_gate": "enumerate LICENSE/NOTICE and file-level provenance",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "ANDROIDX_DEPENDENCIES",
+      "repo": "MULTI_REPO_DEPENDENCY",
+      "upstream_family": "AndroidX",
+      "state": "B_THIRD_PARTY_DEPENDENCY",
+      "next_gate": "Gradle dependency/license inventory and notice verification",
+      "claim_allowed": false
+    }
+  ],
+  "invariants": [
+    "RENAME != NEW_AUTHORSHIP",
+    "REFACTOR != CLEAN_ROOM",
+    "REPOSITORY_OWNERSHIP != COPYRIGHT_OWNERSHIP_OF_ALL_CONTENT",
+    "LICENSE_PERMISSION != TRADEMARK_PERMISSION",
+    "CLEAN_ROOM_CLAIM_REQUIRES_RECEIPT",
+    "TOKEN_VAZIO != CLEARED"
+  ]
+}
