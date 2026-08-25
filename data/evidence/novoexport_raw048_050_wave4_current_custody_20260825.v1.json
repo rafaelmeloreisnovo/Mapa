@@ -1,0 +1,114 @@
+{
+  "schema": "rafaelia.novoexport-raw048-050-current-custody/v1",
+  "record_id": "NOVOEXPORT_RAW048_050_WAVE4_CURRENT_CUSTODY_20260825_V1",
+  "recorded_at_utc": "2026-08-25T08:08:27Z",
+  "recorded_at_brt": "2026-08-25T05:08:27-03:00",
+  "state": "PARTIAL_EVIDENCED_CURRENT_CUSTODY_PID_SET_OPEN",
+  "claim_allowed": false,
+  "append_only": true,
+  "predecessor": {
+    "path": "data/evidence/novoexport_raw048_050_wave3_20260824.v1.json",
+    "git_blob_sha1": "276550fa59aa9f7dd1a2245d9ab24cad210d0e8e",
+    "predecessor_state": "PARTIAL_EVIDENCED_HISTORICAL_BYTES_CURRENT_PROVIDER_UNBOUND",
+    "relationship": "APPEND_ONLY_SUCCESSOR"
+  },
+  "authority": {
+    "provider": "GOOGLE_DRIVE_PRIVATE",
+    "source_scope": "three current raw provider objects",
+    "current_provider_locators_verified": true,
+    "current_provider_locators_persisted_publicly": false,
+    "raw_bytes_persisted_publicly": false,
+    "raw_ids_persisted_publicly": false,
+    "measurement_method": "stream exact provider bytes and compute SHA-256 locally without persisting bodies or IDs"
+  },
+  "observation_window": {
+    "started_at_utc": "2026-08-25T08:06:24.459Z",
+    "completed_at_utc": "2026-08-25T08:07:02.472Z",
+    "started_at_brt": "2026-08-25T05:06:24.459-03:00",
+    "completed_at_brt": "2026-08-25T05:07:02.472-03:00"
+  },
+  "objects": [
+    {
+      "file": "conversations-048.json",
+      "bytes": 36771626,
+      "provider_locator_state": "VERIFIED_PRIVATE_NOT_PUBLISHED",
+      "provider_created_time_utc": "2026-08-04T06:23:00.972Z",
+      "provider_modified_time_utc": "2026-08-03T08:51:08.000Z",
+      "hash_started_at_utc": "2026-08-25T08:06:24.459Z",
+      "hash_completed_at_utc": "2026-08-25T08:06:31.477Z",
+      "current_sha256": "ed19ea07f8763a8a4d87204d80c817694ce4d6c339c71b1d2a1b955a8c125256",
+      "historical_download_sha256": "ed19ea07f8763a8a4d87204d80c817694ce4d6c339c71b1d2a1b955a8c125256",
+      "exact_byte_identity": true,
+      "historical_root_conversations": 100,
+      "historical_messages": 6543,
+      "current_parse_binding": "EVIDENCED_BY_EXACT_BYTE_IDENTITY_TO_HISTORICAL_PARSE",
+      "exact_pid_set": "TOKEN_VAZIO_PID_SET"
+    },
+    {
+      "file": "conversations-049.json",
+      "bytes": 47806754,
+      "provider_locator_state": "VERIFIED_PRIVATE_NOT_PUBLISHED",
+      "provider_created_time_utc": "2026-08-04T06:23:21.755Z",
+      "provider_modified_time_utc": "2026-08-03T08:52:02.000Z",
+      "hash_started_at_utc": "2026-08-25T08:06:31.477Z",
+      "hash_completed_at_utc": "2026-08-25T08:06:58.937Z",
+      "current_sha256": "608e45449809a47f5931f86328b96dab2b2b86a5abf21a8dfe1c7da6834a2f1a",
+      "historical_download_sha256": "608e45449809a47f5931f86328b96dab2b2b86a5abf21a8dfe1c7da6834a2f1a",
+      "exact_byte_identity": true,
+      "historical_root_conversations": 100,
+      "historical_messages": 7196,
+      "current_parse_binding": "EVIDENCED_BY_EXACT_BYTE_IDENTITY_TO_HISTORICAL_PARSE",
+      "exact_pid_set": "TOKEN_VAZIO_PID_SET"
+    },
+    {
+      "file": "conversations-050.json",
+      "bytes": 17115060,
+      "provider_locator_state": "VERIFIED_PRIVATE_NOT_PUBLISHED",
+      "provider_created_time_utc": "2026-08-04T06:23:31.446Z",
+      "provider_modified_time_utc": "2026-08-03T08:53:14.000Z",
+      "hash_started_at_utc": "2026-08-25T08:06:58.937Z",
+      "hash_completed_at_utc": "2026-08-25T08:07:02.472Z",
+      "current_sha256": "c5058bf25f682de12de68b54029d13b07e836cd519416752fbc5e4fa320b4979",
+      "historical_download_sha256": "c5058bf25f682de12de68b54029d13b07e836cd519416752fbc5e4fa320b4979",
+      "exact_byte_identity": true,
+      "historical_root_conversations": 54,
+      "historical_messages": 3647,
+      "current_parse_binding": "EVIDENCED_BY_EXACT_BYTE_IDENTITY_TO_HISTORICAL_PARSE",
+      "exact_pid_set": "TOKEN_VAZIO_PID_SET"
+    }
+  ],
+  "gap_transition": {
+    "closed": [
+      "RAW048_CURRENT_PROVIDER",
+      "RAW048_CURRENT_BYTES",
+      "RAW048_CURRENT_SHA256",
+      "RAW049_CURRENT_PROVIDER",
+      "RAW049_CURRENT_BYTES",
+      "RAW049_CURRENT_SHA256",
+      "RAW050_CURRENT_PROVIDER",
+      "RAW050_CURRENT_BYTES",
+      "RAW050_CURRENT_SHA256"
+    ],
+    "bound_by_exact_byte_identity": [
+      "RAW048_CURRENT_JSON_PARSE_AND_CARDINALITY",
+      "RAW049_CURRENT_JSON_PARSE_AND_CARDINALITY",
+      "RAW050_CURRENT_JSON_PARSE_AND_CARDINALITY"
+    ],
+    "remaining": [
+      "RAW048_EXACT_PID_SET",
+      "RAW049_EXACT_PID_SET",
+      "RAW050_EXACT_PID_SET"
+    ]
+  },
+  "invariants": [
+    "CURRENT_PROVIDER_CUSTODY_REQUIRES_DIRECT_PROVIDER_OBSERVATION",
+    "CURRENT_SHA256_EQUALS_HISTORICAL_SHA256_IMPLIES_EXACT_BYTE_IDENTITY",
+    "DETERMINISTIC_PARSE_OF_IDENTICAL_BYTES_PRESERVES_PARSE_RESULT",
+    "CONVERSATION_COUNT_DOES_NOT_IMPLY_PID_SET_ENUMERATION",
+    "INTEGRITY_DOES_NOT_IMPLY_AUTHENTICATION",
+    "CLAIM_ALLOWED_FALSE"
+  ],
+  "f_ok": "Current private provider objects, exact byte streams, byte counts and SHA-256 are bound for RAW 048-050; all three current streams equal the historical parsed streams byte-for-byte.",
+  "f_gap": "Exact PID sets for RAW 048-050 remain TOKEN_VAZIO; RAW018 current-byte custody remains outside this receipt.",
+  "f_next": "Enumerate privacy-preserving PID commitments from the exact current streams and compare them with the corpus PID index without publishing raw IDs."
+}
