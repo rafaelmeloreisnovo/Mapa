@@ -1,0 +1,39 @@
+{
+  "schema": "rafaelia.research-receipt.v1",
+  "date": "2026-08-25",
+  "status": "INDEXED_RESEARCH_DELTA",
+  "claim_allowed": false,
+  "delta": "indices/deltas/ATLAS_SOLAR_LUNAR_TZOLKIN_AURORA_JOVIAN_HE3_20260825.md",
+  "registry": "data/research/solar_lunar_aurora_jovian_observables.v1.json",
+  "internal_predecessors": [
+    {"repo":"rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca","path":"data/calendar_cycles_matrix.json","observed":"CAL-MAYA-TZOLKIN-260 VERIFIED; candidate lunar/auroral nodes still source-gated"},
+    {"repo":"rafaelmeloreisnovo/Clima","path":"docs/IONOSFERA_QUIMICA_AURORA_ELETRODINAMICA.md","observed":"O/N/O2/N2 ionization, aurora and O3 chemistry already separated"},
+    {"repo":"rafaelmeloreisnovo/Mapa","path":"indices/deltas/ATLAS_AURORA_SAA_GEOMETRY_IONIZATION_BIOSPHERE_CORRELATION_20260825.md","observed":"parent aurora/SAA/N/O/biosphere addendum"}
+  ],
+  "external_evidence": [
+    {"authority":"Smithsonian NMAI Living Maya Time","observed":"Tzolkin 260 d; Haab 365 d; Calendar Round repeats after 52 Haab / 18,980 d","state":"PASS_CALENDAR_STRUCTURE"},
+    {"authority":"NASA NTRS / Russell-McPherron literature","observed":"semiannual geomagnetic variation and equinoctial solar-wind coupling geometry","state":"PASS_MECHANISM_CONTEXT"},
+    {"authority":"NASA/CCMC","observed":"GUVI/SSUSI provide equatorward and poleward auroral boundary products","state":"PASS_DATA_ROUTE"},
+    {"authority":"NASA NTRS / DMSP 1973-1974","observed":"equatorward auroral extent derived from DMSP photographs and tied to geomagnetic activity, solar flares/coronal holes, AE and southward IMF","state":"PASS_ARCHIVAL_ROUTE"},
+    {"authority":"NASA ICON/GOLD","observed":"atmospheric lunar tide observed in neutral winds/plasma drifts/O 135.6 nm airglow","state":"PASS_OBSERVED_ROUTE"},
+    {"authority":"NASA Voyager IRIS","observed":"historical Jovian H2/He abundance estimate","state":"PASS_HISTORICAL_MEASUREMENT"},
+    {"authority":"NASA Galileo GPMS","observed":"direct Jovian 3He/4He measurement; reevaluated value ~1.66e-4","state":"PASS_DIRECT_MEASUREMENT"},
+    {"authority":"NASA Juno","observed":"magnetic field, polar magnetosphere, particles/waves and auroral observations; solar-wind compression is relevant to Jovian aurora","state":"PASS_DATA_ROUTE"}
+  ],
+  "corrections": [
+    {"incorrect_merge":"Juno measured Jupiter 3He/4He","replacement":"Galileo Probe Mass Spectrometer is the direct isotope authority; Juno is magnetosphere/aurora authority"},
+    {"incorrect_merge":"equinox means auroral boundary decreases","replacement":"geomagnetic activity tends to peak near equinox on average; boundary contraction is conditional on quieting/northward IMF/recovery, while geoeffective forcing drives equatorward expansion"},
+    {"incorrect_merge":"1974 vs 2026 demonstrates 52-year aurora cycle","replacement":"it gives a two-epoch comparison separated by ~52 years, not a demonstrated periodicity"}
+  ],
+  "gates": {
+    "CALENDAR_ROUND_ARITHMETIC":"PASS",
+    "CR_51_9655_TROPICAL_YEAR_CONVERSION":"PASS",
+    "AURORA_1973_74_ARCHIVE":"PASS_ROUTE",
+    "AURORA_MODERN_BOUNDARY":"PASS_ROUTE",
+    "EQUINOX_RM":"PASS_MECHANISM_CONTEXT",
+    "GALILEO_3HE4HE":"PASS_DIRECT_MEASUREMENT",
+    "52Y_AURORA_PERIODICITY":"TOKEN_VAZIO_IDENTIFIABILITY",
+    "TZOLKIN_AURORA_CAUSALITY":"TOKEN_VAZIO",
+    "AURORA_TO_SURFACE_N_FLUX":"TOKEN_VAZIO"
+  }
+}
