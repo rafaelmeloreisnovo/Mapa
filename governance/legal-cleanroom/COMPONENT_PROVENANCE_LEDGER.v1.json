@@ -1,0 +1,82 @@
+{
+  "schema": "RAFAELIA_COMPONENT_PROVENANCE_LEDGER/v1",
+  "state": "CANONICAL_DRAFT",
+  "observed_at": "2026-08-25T19:57:00-03:00",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "legal_compliance_claim": false,
+  "components": [
+    {
+      "component_id": "TERMUX_APP_RAFACODEPHI",
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "observed_ref": "afa012d50d26640264f89befe96ceb98988356ae",
+      "classification": "B_THIRD_PARTY_LICENSED",
+      "upstream_authority": "termux/termux-app",
+      "license_observed": "GPL-3.0-only primary; component exceptions exist",
+      "license_source_pointer": "LICENSE.md@470c7d9c51b0b61a5fc4868f293d87b4c34ccc5f",
+      "authorship_scope": "RAFAELIA modifications only; upstream ownership preserved",
+      "cleanroom_target": "selected original RAFAELIA modules only, not an automatic relicensing of the fork",
+      "release_gate": "component-license-and-corresponding-source-audit",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "QEMU_RAFAELIA",
+      "repo": "rafaelmeloreisnovo/qemu_rafaelia",
+      "observed_ref": "b274de47403f48136d1969f7663aa457383e3ef4",
+      "classification": "B_THIRD_PARTY_LICENSED",
+      "upstream_authority": "QEMU upstream",
+      "license_observed": "GPL-2.0 text present; repository also contains component-specific licenses",
+      "license_source_pointer": "COPYING@8095135d50d970174ab0167816e259b677f4430a",
+      "special_note": "hw/core/rafaelia-rmr-license.txt declares separate RAFAELIA low-level terms; compatibility/scope against surrounding QEMU licensing requires a specific audit before distribution claims",
+      "cleanroom_target": "new standalone RAFAELIA virtualization kernels/interfaces may be developed independently; do not claim QEMU-derived code became proprietary/original by rewrite or rename",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "LLAMA_RAFAELIA",
+      "repo": "rafaelmeloreisnovo/llamaRafaelia",
+      "observed_ref": "70a7594e550e1e87dbc6a656ac1bf11575d8f8e9",
+      "classification": "B_THIRD_PARTY_LICENSED",
+      "upstream_authority": "ggml/llama.cpp lineage",
+      "license_observed": "MIT",
+      "license_source_pointer": "LICENSE@acb96ce78e0486e9dc7602cdcdd2f491c34f335a",
+      "authorship_scope": "RAFAELIA additions may have independent authorship while MIT copyright/permission notice remains for covered upstream/substantial portions",
+      "cleanroom_target": "freestanding inference/dataflow kernels may be separate originals if independently specified and implemented",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "VECTRAS_LEGACY_FORK",
+      "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "observed_ref": "38b9faacf09eee998487f8f08674bc5305697a52",
+      "classification": "B_THIRD_PARTY_LICENSED",
+      "upstream_authority": "xoureldeen/Vectras-VM-Android",
+      "license_observed": "GPL-2.0 with explicit original-author/fork attribution in current LICENSE",
+      "license_source_pointer": "LICENSE@7af071d115add5c858c2373891459a9af711e73b",
+      "existing_cleanroom_plan": "AUTHORSHIP_CLEANROOM_PLAN.md",
+      "legacy_brand": "Vectras VM",
+      "cleanroom_product_codename": "RAFAELIA Virtual Runtime (RVR)",
+      "trademark_clearance": "TOKEN_VAZIO",
+      "migration_rule": "legacy fork remains licensed/attributed; RVR is a separate clean-room target only after per-module evidence closes",
+      "claim_allowed": false
+    },
+    {
+      "component_id": "ANDROIDX_ANDROID_PLATFORM_APIS",
+      "repo": "EXTERNAL_OFFICIAL_REFERENCE",
+      "classification": "B_THIRD_PARTY_LICENSED",
+      "upstream_authority": "official Android/AndroidX project sources",
+      "license_observed": "TOKEN_VAZIO_COMPONENT_SPECIFIC_AUDIT",
+      "rule": "record the exact artifact/module/version and its official license before redistribution; do not copy framework source merely to avoid dependency declarations",
+      "claim_allowed": false
+    }
+  ],
+  "global_gate": {
+    "required_before_public_release": [
+      "per-file-or-component origin classification",
+      "license/NOTICE obligations closed",
+      "third-party binary/assets provenance closed",
+      "clean-room receipts for every F_CLEANROOM_VERIFIED_SCOPED claim",
+      "brand/trademark decision for new product name",
+      "privacy/data-processing assessment for Drive/GitHub account integration",
+      "source and build reproducibility receipt"
+    ]
+  }
+}

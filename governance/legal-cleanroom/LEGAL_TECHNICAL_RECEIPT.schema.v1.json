@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "RAFAELIA_LEGAL_TECHNICAL_RECEIPT/v1",
+  "type": "object",
+  "required": [
+    "receipt_id", "artifact_id", "repo", "ref", "path", "classification",
+    "source_origin", "license_basis", "authorship_basis", "evidence",
+    "cleanroom_state", "claim_allowed", "release_allowed"
+  ],
+  "properties": {
+    "receipt_id": {"type":"string"},
+    "artifact_id": {"type":"string"},
+    "repo": {"type":"string"},
+    "ref": {"type":"string"},
+    "path": {"type":"string"},
+    "blob_sha": {"type":["string","null"]},
+    "content_sha256": {"type":["string","null"]},
+    "classification": {"enum":["A_ORIGINAL_RAFAELIA","B_THIRD_PARTY_LICENSED","C_RIGHTS_UNRESOLVED","D_DERIVATION_RISK","E_CLEANROOM_CANDIDATE","F_CLEANROOM_VERIFIED_SCOPED"]},
+    "source_origin": {"type":"object"},
+    "upstream_authority": {"type":["string","null"]},
+    "license_basis": {"type":"object"},
+    "notice_requirements": {"type":"array","items":{"type":"string"}},
+    "authorship_basis": {"type":"object"},
+    "specification_pointer": {"type":["string","null"]},
+    "implementation_pointer": {"type":["string","null"]},
+    "independent_test_pointer": {"type":["string","null"]},
+    "similarity_review_pointer": {"type":["string","null"]},
+    "evidence": {"type":"array","items":{"type":"object"}},
+    "cleanroom_state": {"enum":["NOT_APPLICABLE","TOKEN_VAZIO","CANDIDATE","QUARANTINED","VERIFIED_SCOPED"]},
+    "trademark_state": {"type":"string"},
+    "privacy_state": {"type":"string"},
+    "security_state": {"type":"string"},
+    "claim_allowed": {"const":false},
+    "release_allowed": {"type":"boolean"},
+    "falsifier": {"type":["string","null"]},
+    "predecessor_receipt": {"type":["string","null"]},
+    "observed_at": {"type":"string"}
+  },
+  "additionalProperties": true,
+  "notes": [
+    "Schema intentionally defaults high-impact claims to fail-closed.",
+    "A receipt records evidence; it is not a legal opinion or certification.",
+    "A rename or rewrite does not by itself change license/derivative status."
+  ]
+}
