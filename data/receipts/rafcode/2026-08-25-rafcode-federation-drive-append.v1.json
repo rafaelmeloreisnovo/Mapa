@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.federated-work-receipt.v1",
+  "event_id": "MAPA-RAFCODE-DRIVE-APPEND-20260825T130120-0300",
+  "parent_event_id": "MAPA-RAFCODE-FEDERATION-RECEIVE-20260825T125309-0300",
+  "observed_at": "2026-08-25T13:01:20-03:00",
+  "actor_role": "Google Drive longitudinal navigation authority via bounded Mapa transition",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "ref": "chatgpt/rafcode-federation-route-v1-20260825",
+  "commit_sha": "93637f1aed22710e01d3c0d4b2b12a7129b18a1e",
+  "path_scope": "Drive:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y; data/federation/rafcode-federation-v1.json; indices/runtime/RAFCODE_FEDERATION_V1.md",
+  "authority": {
+    "longitudinal_navigation": "Google Drive RAFAELIA — Master Navigation Registry V1",
+    "federated_routing": "rafaelmeloreisnovo/Mapa",
+    "producer": "rafaelmeloreisnovo/RafGitTools"
+  },
+  "gap_or_goal_ids": [
+    "GOAL-RAFCODE-FEDERATION-FREESTANDING-V1",
+    "GAP-RAFCODE-DRIVE-RECONSTRUCTION"
+  ],
+  "state_before": "TOKEN_VAZIO",
+  "state_after": "EVIDENCED_SCOPED",
+  "urgency": "P1",
+  "risk": "LOW",
+  "governance_class": "APPEND_ONLY_REQUIRED_REVISION_AND_READBACK",
+  "data_class": "PUBLIC_REFERENCES_HASHES_AND_SCOPED_STATUS",
+  "privacy_class": "NO_RAW_PRIVATE_PAYLOAD_NO_PII",
+  "security_class": "REVISION_BOUND_WRITE_AUTHENTICITY_STILL_OPEN",
+  "action": "UPDATE_DRIVE_RECONSTRUCTION_IF_MATERIAL",
+  "falsifier": "A revision conflict, absent marker, wrong paragraph style, missing PR/run/index/hash fields, or readback mismatch fails the Drive append gate.",
+  "exit_criterion": "The required-revision append returns a new revision and readback finds the exact heading plus all bounded route identifiers.",
+  "evidence_refs": {
+    "document_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "document_title": "RAFAELIA — Master Navigation Registry V1",
+    "marker": "SUPERSESSÃO APPEND-ONLY — RAFCODE_FEDERATION_V1 — 2026-08-25",
+    "marker_style": "HEADING_2",
+    "marker_start_index": 207274,
+    "marker_end_index": 207334,
+    "prewrite_revision_id": "AIroW34KdiGt2I46ovj16eHaDpY2CMHb_yVX-CF4GmRST9TPhckfTV1QGwc28__2RuZ0z3FaYWRIGnSdkBkCC55G-Ef-EqVYqOhPaTq3ajM",
+    "postwrite_revision_id": "AIroW37h5TPWuni5fvC6A7ahvnk-truV83UYSpHgRqCUwxHZbq3s2qX2N1XaFEy4mMSEixg2DCenOwBcYbxyQym8WxVS9ZlMMNgimwrjObc",
+    "write_state": "PASS",
+    "readback_state": "PASS",
+    "producer_pr": "https://github.com/rafaelmeloreisnovo/RafGitTools/pull/381",
+    "mapa_pr": "https://github.com/rafaelmeloreisnovo/Mapa/pull/403",
+    "workflow_run": "https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/32868449710"
+  },
+  "F_ok": [
+    "Drive append was revision-bound and returned a new revision.",
+    "Readback confirmed the semantic heading and all three L/O/T index IDs.",
+    "Readback confirmed both PRs, the exact evidence run and the three ABI hashes."
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_PRODUCER_PR_MERGE_AND_MAIN_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_ARMV7_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_AARCH64_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_HMAC_AUTHENTICITY",
+    "TOKEN_VAZIO_REPOSITORY_WIDE_HEALTH"
+  ],
+  "F_next": "Keep producer and Mapa PRs draft; reconcile global blockers and obtain explicit merge authority before integration; then collect main and device receipts.",
+  "uncertainty_delta": "Drive reconstruction moved from TOKEN_VAZIO to readback-observed; device execution, authenticity, merge/main and global health remain unchanged.",
+  "rollback_ref": "APPEND_ONLY_SUPERSESSION_REQUIRED_IF_CORRECTION_NEEDED",
+  "stop_reason": "Drive write and readback exit criterion observed; further mutation would cross into merge authorization or physical-runtime authority.",
+  "claim_allowed": false
+}

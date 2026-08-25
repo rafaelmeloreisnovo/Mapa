@@ -144,6 +144,26 @@
       "receipt": "data/receipts/drive-canonical-omega-append.20260819T2347BRT.receipt.json",
       "observed_scope": "append operation observed with returned revisionId; does not prove execution or scientific validity",
       "next_gate": "capture new revision receipt after each material append"
+    },
+    {
+      "id": "RAFCODE_FEDERATION_CROSS_ABI_V1",
+      "component": "RafGitTools:native/rafcode_federation_v1",
+      "route": ["R5", "R6", "R11", "R12"],
+      "receipt_type": "CROSS_ABI_COMPILE_LINK_ELF_HOTPATH",
+      "state": "PRESENT",
+      "source_commit": "7e72713da20b849a0d975d3dbefedd3d65ca0443",
+      "source_pr": 381,
+      "workflow_run": 32868449710,
+      "executed_pr_merge_commit": "3e589ab557ad1afbc09e8b79bdf976d661f5a0fc",
+      "producer_head_commit": "7e72713da20b849a0d975d3dbefedd3d65ca0443",
+      "producer_base_commit": "83a2850870d1b6f53e3d1e7b6b929f19168add3d",
+      "producer_ci_ref_receipt_commit": "05807455ed23a91e08ba5505d5cf66366d3932fe",
+      "receipt": "data/receipts/rafcode/2026-08-25-rafcode-federation-cross-abi.v1.json",
+      "drive_receipt": "data/receipts/rafcode/2026-08-25-rafcode-federation-drive-append.v1.json",
+      "drive_postwrite_revision_id": "AIroW37h5TPWuni5fvC6A7ahvnk-truV83UYSpHgRqCUwxHZbq3s2qX2N1XaFEy4mMSEixg2DCenOwBcYbxyQym8WxVS9ZlMMNgimwrjObc",
+      "drive_readback_state": "PASS",
+      "observed_scope": "Clang/lld x86-64 execution plus ARMv7/AArch64 compile-link-ELF/generated-hotpath gates; physical ARM execution, HMAC, merge/main and repository-wide health remain TOKEN_VAZIO",
+      "next_gate": "producer and Mapa draft review -> reconcile repository-wide blockers -> explicit merge authority -> producer-main receipt -> physical-device receipts"
     }
   ],
   "selection_rule": "P0 first: INVALID/SUPERSEDED provenance integrity, then MISSING receipts on promotion/runtime boundaries, then STALE dependency assurance, then TOKEN_VAZIO evidence production",

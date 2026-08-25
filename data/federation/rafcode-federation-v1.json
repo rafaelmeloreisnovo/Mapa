@@ -1,0 +1,147 @@
+{
+  "schema": "rafaelia.rafcode-federation-route.v1",
+  "version": 1,
+  "route_id": "ROUTE:RAFCODE:FREESTANDING:FEDERATION:V1",
+  "observed_at": "2026-08-25T12:53:09-03:00",
+  "state": "EVIDENCED_SCOPED_DRAFT_UNMERGED",
+  "claim_allowed": false,
+  "authority": {
+    "federated_routing_and_state": "rafaelmeloreisnovo/Mapa",
+    "implementation_build_and_test": "rafaelmeloreisnovo/RafGitTools",
+    "longitudinal_navigation": "Google Drive RAFAELIA — Master Navigation Registry V1",
+    "physical_runtime": "TOKEN_VAZIO_DEVICE_AUTHORITY_RECEIPT"
+  },
+  "drive_reconstruction": {
+    "document_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "title": "RAFAELIA — Master Navigation Registry V1",
+    "marker": "SUPERSESSÃO APPEND-ONLY — RAFCODE_FEDERATION_V1 — 2026-08-25",
+    "prewrite_revision_id": "AIroW34KdiGt2I46ovj16eHaDpY2CMHb_yVX-CF4GmRST9TPhckfTV1QGwc28__2RuZ0z3FaYWRIGnSdkBkCC55G-Ef-EqVYqOhPaTq3ajM",
+    "postwrite_revision_id": "AIroW37h5TPWuni5fvC6A7ahvnk-truV83UYSpHgRqCUwxHZbq3s2qX2N1XaFEy4mMSEixg2DCenOwBcYbxyQym8WxVS9ZlMMNgimwrjObc",
+    "write_state": "PASS",
+    "readback_state": "PASS",
+    "marker_style": "HEADING_2",
+    "observed_at": "2026-08-25T13:01:20-03:00",
+    "receipt": "data/receipts/rafcode/2026-08-25-rafcode-federation-drive-append.v1.json"
+  },
+  "producer": {
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "pull_request": 381,
+    "pull_request_state": "OPEN_DRAFT_UNMERGED",
+    "branch": "chatgpt/rafcode-federation-freestanding-v1-20260825",
+    "implementation_commit": "7e72713da20b849a0d975d3dbefedd3d65ca0443",
+    "receipt_commit": "9362ae2560fc9cbdff0efc6b2ea1440a90ecb967",
+    "ci_ref_binding_receipt_commit": "05807455ed23a91e08ba5505d5cf66366d3932fe",
+    "path": "native/rafcode_federation_v1"
+  },
+  "memory_index_binding": {
+    "source": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "data/memory/RAFAELIA_TRIAXIAL_MEMORY_INDEX_V1.json",
+      "blob_sha": "0b3d43e7fc75d86c6fa8606d4dbc6345734e44ac"
+    },
+    "required_mask": "0x07",
+    "axes": [
+      {
+        "code": "L",
+        "name": "LONGITUDINAL",
+        "drive_folder_id": "1X2-O4-_C-wKqpUbgly6EpbNE4ApLGmvK",
+        "drive_index_document_id": "1XHkixpMruPqrv22EJ5X0TeWUn7fWEXgmjnGSlxtaGzk"
+      },
+      {
+        "code": "O",
+        "name": "ORTHOGONAL",
+        "drive_folder_id": "1p6_xn3kTalwh5uqB4rIhf0k3nyq3NIKx",
+        "drive_index_document_id": "1HXDWFSmHGNo7pouUge3AIGhTq4SL_EkfrurXdJzM6-E"
+      },
+      {
+        "code": "T",
+        "name": "TRANSVERSAL",
+        "drive_folder_id": "15Ie8OypFVrdl1OU-mQ4moDWer4fhRESe",
+        "drive_index_document_id": "13oy53b9OAm7Fomyt_FANl7pAORrPtBAfnkZny7Kx-f8"
+      }
+    ]
+  },
+  "runtime_participants": {
+    "required_mask": "0x0f",
+    "members": ["CONTROL", "EXECUTOR", "EVIDENCE", "VM"],
+    "source": "RafGitTools:contracts/rafaelia-federated-runtime-v1.json"
+  },
+  "wire_contract": {
+    "byte_order": "little-endian",
+    "input_bytes": 64,
+    "receipt_bytes": 64,
+    "states": 8,
+    "actions": 16,
+    "short_frame": "FAIL_CLOSED",
+    "claim_allowed_input": "REJECTED",
+    "private_paths_input": "REJECTED"
+  },
+  "evidence": {
+    "workflow_run": 32868449710,
+    "job": 97869400865,
+    "conclusion": "success",
+    "executed_pr_merge_commit": "3e589ab557ad1afbc09e8b79bdf976d661f5a0fc",
+    "executed_ref_parents": {
+      "producer_head": "7e72713da20b849a0d975d3dbefedd3d65ca0443",
+      "base": "83a2850870d1b6f53e3d1e7b6b929f19168add3d"
+    },
+    "toolchain": "Clang 18.1.3 + LLD 22.1.6 + GNU readelf 2.42",
+    "artifacts": [
+      {
+        "abi": "x86_64",
+        "bytes": 1280,
+        "sha256": "2a7d78477d99cdbd0f75d4969141dcc39e0a5427c3f289c51474584465f04a0a",
+        "execution": "SMOKE_PASS"
+      },
+      {
+        "abi": "armv7",
+        "bytes": 1048,
+        "sha256": "07d1a7c0eb59ab06f3b820d762f809a90534caae8561e6e213ce360e310d5bf3",
+        "execution": "TOKEN_VAZIO_DEVICE_RECEIPT"
+      },
+      {
+        "abi": "aarch64",
+        "bytes": 1152,
+        "sha256": "e33c9b244d908717e914d6176184bf051ab6679a06add24df8bbc8d233974ac1",
+        "execution": "TOKEN_VAZIO_DEVICE_RECEIPT"
+      }
+    ],
+    "negative_contract_each_abi": {
+      "expected_machine": "PASS",
+      "pt_load": 1,
+      "pt_interp": 0,
+      "dt_needed": 0,
+      "relocations": 0,
+      "symbols": 0,
+      "undefined_symbols": 0,
+      "writable_static_bytes": 0,
+      "source_loops": 0,
+      "heap_primitives": 0,
+      "hotpath_branches": 0,
+      "hotpath_calls": 0
+    }
+  },
+  "invariants": [
+    "idea != implementation != execution != evidence != claim",
+    "memory != proof",
+    "index != content",
+    "compile/link/ELF evidence != physical device execution",
+    "dedicated workflow PASS != repository-wide health",
+    "historical receipts are append-only",
+    "producer repository owns implementation; Mapa owns federated routing/state"
+  ],
+  "F_ok": [
+    "Three memory/index axes are bound to exact Drive and Mapa identifiers.",
+    "The producer has a fixed-frame freestanding implementation and an append-only local receipt.",
+    "Independent Clang/lld gates passed for x86_64, ARMv7 and AArch64 at the exact implementation commit."
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_PRODUCER_PR_MERGE_AND_MAIN_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_ARMV7_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_PHYSICAL_AARCH64_DEVICE_RECEIPT",
+    "TOKEN_VAZIO_HMAC_AUTHENTICITY",
+    "TOKEN_VAZIO_REPOSITORY_WIDE_HEALTH"
+  ],
+  "F_next": "Keep both PRs draft; reconcile repository-wide failing checks, merge only with explicit user authorization and required gates, then collect producer-main and physical-device receipts before any broader claim.",
+  "rollback_ref": "Mapa:main@a86955c789bfb31db14a3a16397953aa5aa3f1c3"
+}
