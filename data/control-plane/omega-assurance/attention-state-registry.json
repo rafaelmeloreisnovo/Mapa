@@ -1,0 +1,58 @@
+{
+  "schema_version": "rafaelia.attention-state-registry/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "states": [
+    {"id": "OBSERVED", "requires": ["observation", "provenance"]},
+    {"id": "ACTIVE", "requires": ["owner", "next_gate"]},
+    {"id": "IGNORED_WITH_REASON", "requires": ["reason", "owner_or_TOKEN_VAZIO", "revisit_gate"]},
+    {"id": "IGNORED_WITHOUT_REASON", "requires": ["discovery_evidence", "owner_or_TOKEN_VAZIO", "next_probe"]},
+    {"id": "DEFERRED", "requires": ["reason", "owner", "revisit_gate"]},
+    {"id": "ABORTED", "requires": ["reason", "evidence_preserved", "reopen_condition"]},
+    {"id": "QUARANTINED", "requires": ["containment_scope", "reason", "release_gate"]},
+    {"id": "SUPERSEDED", "requires": ["successor_ref", "transition_receipt"]},
+    {"id": "DEPRECATED", "requires": ["reason", "replacement_or_TOKEN_VAZIO", "review_date"]},
+    {"id": "WITHHELD_BY_POLICY", "requires": ["documented_policy_decision", "authority", "disclosure_boundary"]},
+    {"id": "REDACTED_PRIVACY", "requires": ["privacy_basis", "redaction_scope", "authority"]},
+    {"id": "UNREVIEWED", "requires": ["review_owner_or_TOKEN_VAZIO", "next_review_gate"]},
+    {"id": "UNREACHABLE", "requires": ["route_attempt", "provider_state", "next_probe"]},
+    {"id": "ORPHANED", "requires": ["missing_owner_or_parent", "relink_gate"]},
+    {"id": "CONTRADICTED", "requires": ["lhs", "rhs", "resolution_gate"]},
+    {"id": "ANOMALOUS", "requires": ["baseline", "observation", "reproduction_gate"]},
+    {"id": "PARADOXICAL", "requires": ["premises", "contradiction_locus", "resolution_gate"]},
+    {"id": "FALSIFIED", "requires": ["target_claim", "falsifier_receipt", "scope"]},
+    {"id": "TOKEN_VAZIO", "requires": ["reason", "next_gate"]},
+    {"id": "FORGOTTEN", "requires": ["rediscovery_evidence", "forgetting_interval", "owner_or_TOKEN_VAZIO"]},
+    {"id": "NORMALIZED", "requires": ["repeated_anomaly_evidence", "tolerance_decision_or_gap", "risk_review"]},
+    {"id": "DISMISSED", "requires": ["decision_reason", "authority", "reopen_condition"]},
+    {"id": "LOW_PRIORITY", "requires": ["priority_reason", "next_probe"]},
+    {"id": "ABANDONED", "requires": ["reason", "owner_or_TOKEN_VAZIO", "reopen_condition"]},
+    {"id": "REOPENED", "requires": ["prior_state", "reopen_trigger", "owner"]},
+    {"id": "RECOVERED", "requires": ["prior_state", "recovery_evidence", "next_review"]},
+    {"id": "CLOSED", "requires": ["closure_evidence", "falsifier_status", "receipt"]}
+  ],
+  "evidence_age_states": [
+    {"id": "FRESH", "rule": "identity and review interval are current"},
+    {"id": "AGING", "rule": "review trigger is approaching"},
+    {"id": "STALE", "rule": "current-state support requires a new observation"},
+    {"id": "HISTORICAL_ONLY", "rule": "valid only for the recorded past state"},
+    {"id": "SUPERSEDED", "rule": "a newer receipt governs current state"},
+    {"id": "INVALIDATED", "rule": "a bounded falsifier closed the former claim"}
+  ],
+  "inference_rules": [
+    "nonappearance alone never becomes WITHHELD_BY_POLICY",
+    "search_miss becomes TOKEN_VAZIO_REASON, not ABSENT",
+    "FORGOTTEN != FALSE",
+    "DISMISSED != IRRELEVANT",
+    "stale evidence may remain historical evidence but cannot support current runtime state"
+  ],
+  "periodic_scans": [
+    "FORGOTTEN_TOKEN_SCAN",
+    "ABANDONED_HYPOTHESIS_SCAN",
+    "UNRESOLVED_ANOMALY_SCAN",
+    "STALE_TOKEN_VAZIO_SCAN",
+    "UNTESTED_ASSUMPTION_SCAN",
+    "UNOWNED_RISK_SCAN",
+    "NORMALIZATION_OF_DEVIANCE_WATCH"
+  ]
+}

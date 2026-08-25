@@ -1,0 +1,85 @@
+{
+  "schema_version": "rafaelia.epistemic-state-registry/v1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "evidence_ladder": [
+    "NARRATIVE",
+    "DOCUMENTED",
+    "SIMULATED",
+    "ESTIMATED",
+    "EXTRAPOLATED",
+    "MEASURED_LOCAL",
+    "REPRODUCED",
+    "CROSS_HOST",
+    "PROVEN",
+    "INVALIDATED"
+  ],
+  "orthogonal_unknown_state": "TOKEN_VAZIO",
+  "states": [
+    {"id": "OBSERVATION", "promotion_default": "HOLD", "required_gate": "identity + observation protocol + scope + receipt"},
+    {"id": "DEFINITION", "promotion_default": "HOLD", "required_gate": "terms + domain + version + authority"},
+    {"id": "FORMULA", "promotion_default": "HOLD", "required_gate": "variables + units + domain + boundary conditions"},
+    {"id": "DERIVATION", "promotion_default": "HOLD", "required_gate": "premises + steps + valid domain + checker or review"},
+    {"id": "HYPOTHESIS", "promotion_default": "DENY", "required_gate": "variables + falsifiable prediction + dataset + protocol + test + uncertainty"},
+    {"id": "MODEL", "promotion_default": "DENY", "required_gate": "scope + assumptions + baseline + calibration + out-of-sample falsifier"},
+    {"id": "THEORY", "promotion_default": "DENY", "required_gate": "defined scope + convergent evidence + alternatives + independent review"},
+    {"id": "THEOREM", "promotion_default": "HOLD", "required_gate": "axioms + definitions + proof + proof scope"},
+    {"id": "PROOF", "promotion_default": "HOLD", "required_gate": "formal object + checker or expert review + stated logic and scope"},
+    {"id": "EMPIRICAL_RESULT", "promotion_default": "HOLD", "required_gate": "frozen data + executable method + uncertainty + baseline + receipt"},
+    {"id": "ANOMALY", "promotion_default": "DENY", "required_gate": "observation + baseline + reproduction + competing explanations"},
+    {"id": "PARADOX", "promotion_default": "DENY", "required_gate": "explicit premises + contradiction locus + scope + resolution test"},
+    {"id": "COUNTEREXAMPLE", "promotion_default": "HOLD", "required_gate": "target statement + admissibility + reproducible construction"},
+    {"id": "FALSIFIER", "promotion_default": "HOLD", "required_gate": "claim target + observable failure condition + decision rule"},
+    {"id": "REFUTED", "promotion_default": "HOLD", "required_gate": "executed falsifier + bounded scope + immutable receipt"},
+    {"id": "REPLICATED", "promotion_default": "HOLD", "required_gate": "independent lineage + frozen protocol + matching result + uncertainty"},
+    {"id": "META_ANALYSIS", "promotion_default": "HOLD", "required_gate": "search protocol + inclusion rules + dependency/dedup audit + model"},
+    {"id": "PARABLE", "promotion_default": "DENY", "required_gate": "declared teaching meaning + scope; no empirical promotion"},
+    {"id": "ANALOGY", "promotion_default": "DENY", "required_gate": "mapped and unmapped structure + scope; no identity inference"},
+    {"id": "TOKEN_VAZIO", "promotion_default": "DENY", "required_gate": "reason + owner or owner gap + next verifiable gate"}
+  ],
+  "domain_gates": [
+    {
+      "domain": "LOCK_FREE",
+      "required": ["participants", "ownership", "linearization_point", "happens_before", "memory_order", "reclamation", "progress_argument", "stress_and_adversarial_tests"],
+      "boundary": "stress PASS alone does not prove lock-free or wait-free progress"
+    },
+    {
+      "domain": "PROFILING_BENCHMARKING",
+      "required": ["exact_ref", "binary_digest", "flags", "hardware", "corpus", "warmup", "repetitions", "raw_samples", "p50_p95_p99", "baseline"],
+      "boundary": "no latency or throughput claim without measured raw samples"
+    },
+    {
+      "domain": "NETWORK_PROTOCOL",
+      "required": ["version", "byte_order", "field_contract", "framing", "max_sizes", "integrity_or_authentication", "error_semantics", "fragmentation_reordering_duplication_corruption_tests"],
+      "boundary": "CRC or framing does not by itself prove authenticity or interoperability"
+    },
+    {
+      "domain": "PHASE_INTEGRATION",
+      "required": ["tier_ownership", "source_of_truth", "write_path", "eviction", "invalidation", "restart", "partial_failure", "node_loss_tests"],
+      "boundary": "defined failover is not observed failover"
+    },
+    {
+      "domain": "QUERY_SYSTEM",
+      "required": ["grammar", "precedence", "schema", "null_semantics", "collation", "stable_ordering", "error_semantics", "resource_bounds", "execution_plan"],
+      "boundary": "example queries do not prove parser completeness or performance"
+    },
+    {
+      "domain": "SMART_GUARD",
+      "required": ["policy_scope", "outcomes", "review_route", "confidence_handling", "data_minimization", "fail_safe_behavior", "audit_receipt"],
+      "boundary": "detection is not accusation and confidence is not authority"
+    },
+    {
+      "domain": "RLL_COSMOLOGY",
+      "required": ["code", "dataset", "likelihood", "covariance", "baseline_LambdaCDM", "priors", "convergence", "posterior_predictive_check", "falsifier"],
+      "boundary": "symbolic, narrative or fit-only material cannot promote a cosmological claim"
+    }
+  ],
+  "global_rules": [
+    "FORMULA != HYPOTHESIS",
+    "HYPOTHESIS != THEORY",
+    "ANOMALY != ROOT_CAUSE",
+    "PARABLE != PHYSICAL_EVIDENCE",
+    "REPETITION != PROOF",
+    "TOKEN_VAZIO is orthogonal to the evidence ladder"
+  ]
+}

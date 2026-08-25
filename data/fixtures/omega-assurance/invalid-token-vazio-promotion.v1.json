@@ -1,0 +1,24 @@
+{
+  "schema_version": "rafaelia.omega7-node/v1",
+  "node_id": "OMG7-INVALID_TOKEN_VAZIO_PROMOTION",
+  "node_type": "CLAIM",
+  "label": "Negative fixture: unknown promoted as claim",
+  "D1_identity": {
+    "source": {"state": "TOKEN_VAZIO", "reason": "provider unknown", "next_gate": "resolve provider"},
+    "revision": {"state": "TOKEN_VAZIO", "reason": "revision unknown", "next_gate": "bind revision"},
+    "digest": {"state": "TOKEN_VAZIO", "reason": "bytes unavailable", "next_gate": "obtain bytes and hash"},
+    "provenance_state": "TOKEN_VAZIO"
+  },
+  "D2_epistemic": {"state": "TOKEN_VAZIO", "uncertainty": "TOKEN_VAZIO", "falsifier": {"state": "TOKEN_VAZIO", "reason": "claim undefined", "next_gate": "define claim"}},
+  "D3_execution": {"level": "TOKEN_VAZIO", "environment": {"state": "TOKEN_VAZIO", "reason": "not run", "next_gate": "execute"}, "receipt": {"state": "TOKEN_VAZIO", "reason": "not run", "next_gate": "execute"}},
+  "D4_safety": {"failure_mode": {"state": "TOKEN_VAZIO", "reason": "unknown", "next_gate": "threat model"}, "blast_radius": {"state": "TOKEN_VAZIO", "reason": "unknown", "next_gate": "bound scope"}, "rollback_state": "TOKEN_VAZIO", "failover_state": "TOKEN_VAZIO"},
+  "D5_privacy": {"classification": "TOKEN_VAZIO", "disclosure_state": "ALLOW", "minimization": "none"},
+  "D6_authority": {"owner": {"state": "TOKEN_VAZIO", "reason": "unknown", "next_gate": "resolve owner"}, "write_state": "ALLOW", "promotion_state": "ALLOW", "review_state": "TOKEN_VAZIO"},
+  "D7_transition": {"current_revision": 0, "previous_transition": null, "reason": "negative fixture", "next_review": {"state": "TOKEN_VAZIO", "reason": "none", "next_gate": "set review"}},
+  "attention_state": "TOKEN_VAZIO",
+  "scales": ["META"],
+  "evidence": [],
+  "relations": [],
+  "promotion_gate": {"state": "CLOSED_PASS", "gate_id": "fabricated", "receipt": "fabricated"},
+  "claim_allowed": true
+}

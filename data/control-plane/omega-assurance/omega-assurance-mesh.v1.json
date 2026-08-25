@@ -1,0 +1,100 @@
+{
+  "schema_version": "rafaelia.omega-assurance-mesh/v1",
+  "mesh_id": "OMEGA_ASSURANCE_MESH_V1",
+  "status": "DRAFT_FAIL_CLOSED",
+  "claim_allowed": false,
+  "append_only": true,
+  "purpose": "Bind identity, epistemic state, execution, safety, privacy, authority and transition without allowing unknowns or automation to manufacture PASS.",
+  "axes": [
+    {"id": "D1", "name": "IDENTITY_PROVENANCE", "question": "What exactly is this and where did it come from?"},
+    {"id": "D2", "name": "EPISTEMIC", "question": "What is asserted and which evidence class can support it?"},
+    {"id": "D3", "name": "EXECUTION", "question": "Was it specified, implemented, built, executed, observed or reproduced?"},
+    {"id": "D4", "name": "SAFETY_RESILIENCE", "question": "How can it fail, contain damage and return?"},
+    {"id": "D5", "name": "PRIVACY_INFORMATION", "question": "May it be observed, moved or published?"},
+    {"id": "D6", "name": "AUTHORITY_GOVERNANCE", "question": "Who may read, write, promote, publish or delete?"},
+    {"id": "D7", "name": "TIME_TRANSITION", "question": "What changed, why, and what falsifies or reverses it?"}
+  ],
+  "longitudinal_direction": {
+    "id": "L",
+    "rule": "Every material change is a new transition or ledger record; history is not silently rewritten."
+  },
+  "orthogonal_axes": ["D1", "D2", "D3", "D4", "D5", "D6", "D7"],
+  "transverse_bridges": [
+    "ATTENTION_STATE",
+    "EVIDENCE_DECAY",
+    "RISK_VECTOR",
+    "STRUCTURAL_RELATION",
+    "SCALE_LATTICE",
+    "SERPENT_DOVE_CONDUCT",
+    "CROSS_LAYER_FAILURE"
+  ],
+  "multifilament_threads": [
+    "F_SOURCE",
+    "F_BUILD",
+    "F_RUNTIME",
+    "F_EPISTEMIC",
+    "F_SAFETY",
+    "F_MEMORY",
+    "F_SEMANTIC"
+  ],
+  "serpent_dove_invariants": [
+    "SEE_MORE != CLAIM_MORE",
+    "KNOW_MORE != DO_MORE",
+    "CAN_DO != MAY_DO",
+    "DETECTION != ACCUSATION",
+    "MITIGATION != ROOT_CAUSE",
+    "MINIMUM_SUFFICIENT_INTERVENTION",
+    "NO_IRREVERSIBLE_ACTION_WITH_UNKNOWN_RISK"
+  ],
+  "fail_closed_invariants": [
+    "TOKEN_VAZIO != PASS",
+    "TOKEN_VAZIO != 0",
+    "search_miss != absence",
+    "prediction != evidence",
+    "sandbox_pass != production_pass",
+    "failover_success != root_cause_resolved",
+    "rollback_success != prevention_control",
+    "unknown_privacy => PRIVATE_DEFAULT_DENY",
+    "unknown_authority => HOLD_FOR_AUTHORITY",
+    "irreversible_unknown_risk => HOLD",
+    "P0_non_compensatory = true"
+  ],
+  "contracts": {
+    "node_schema": "schemas/omega-assurance/omega7-node.schema.json",
+    "transition_schema": "schemas/omega-assurance/omega-transition.schema.json",
+    "watchdog_event_schema": "schemas/omega-assurance/watchdog-event.schema.json",
+    "epistemic_registry": "data/control-plane/omega-assurance/epistemic-state-registry.json",
+    "attention_registry": "data/control-plane/omega-assurance/attention-state-registry.json",
+    "risk_vector": "data/control-plane/omega-assurance/risk-vector.v1.json",
+    "cross_layer_matrix": "data/control-plane/omega-assurance/cross-layer-failure-matrix.json",
+    "authorization_matrix": "data/control-plane/omega-assurance/authorization-write-matrix.json",
+    "rollback_registry": "data/control-plane/omega-assurance/rollback-failover-registry.json",
+    "relation_registry": "data/control-plane/omega-assurance/structural-relation-registry.v1.json",
+    "scale_lattice": "data/control-plane/omega-assurance/scale-lattice.v1.json",
+    "event_ledger": "data/ledgers/omega-assurance/anomaly-paradox-ledger.v1.jsonl"
+  },
+  "existing_authorities": [
+    "AGENTS.md",
+    "governance/RAFAELIA_ADAPTIVE_RESILIENCE_WATCHDOG_V1.json",
+    "data/control-plane/rafaelia-convergence-multifilament-omega.v1.json",
+    "data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json",
+    "schemas/cadeia_custodia_evento.schema.json",
+    "indices/CADEIA_CUSTODIA_EVENTOS.jsonl"
+  ],
+  "validators": [
+    "tools/validate_omega_assurance_mesh_v1.py",
+    "tests/test_omega_assurance_mesh_v1.py"
+  ],
+  "boundary": {
+    "validator_pass_proves": "Structural and fail-closed integrity of this machine-readable contract at the tested ref.",
+    "validator_pass_does_not_prove": [
+      "agent or producer runtime adoption",
+      "lock-free or wait-free progress",
+      "latency, throughput or capacity",
+      "network interoperability or security",
+      "physical failover or rollback success",
+      "RLL or cosmological evidence",
+      "legal compliance or certification"
+    ]
+  }
+}
