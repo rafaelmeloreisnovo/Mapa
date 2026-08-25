@@ -3,15 +3,17 @@ name: JSON Totality Invariant
 on:
   push:
     branches:
-      - 'chatgpt/json-totality-invariant-*'
+      - 'chatgpt/json-totality-*'
   pull_request:
     paths:
       - 'scripts/audit_json_totality_invariants.py'
+      - 'scripts/validate_json_totality_scope.py'
       - 'schemas/json-totality-invariant-audit.v1.schema.json'
       - 'tests/test_json_totality_invariants.py'
       - 'tests/fixtures/json_totality/**'
       - 'docs/canonical/**/JSON_TOTALITY_INVARIANT_CONTRACT_V1.md'
       - 'data/audits/JSON_TOTALITY_INVARIANT_SCOPE_*.json'
+      - 'indices/JSON_TOTALITY_INVARIANT_INDEX_V1.md'
 
 permissions:
   contents: read
@@ -21,10 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compile auditor
-        run: python3 -m py_compile scripts/audit_json_totality_invariants.py tests/test_json_totality_invariants.py
+      - name: Compile auditors
+        run: python3 -m py_compile scripts/audit_json_totality_invariants.py scripts/validate_json_totality_scope.py tests/test_json_totality_invariants.py
       - name: Run unit tests
         run: python3 -m unittest tests.test_json_totality_invariants -v
+      - name: Validate provider scope continuity
+        run: python3 scripts/validate_json_totality_scope.py data/audits/JSON_TOTALITY_INVARIANT_SCOPE_20260825.v1.json
       - name: Positive strict fixture
         run: python3 scripts/audit_json_totality_invariants.py tests/fixtures/json_totality/messages-pass.jsonl --strict
       - name: Negative fixture must fail closed
