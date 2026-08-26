@@ -1,0 +1,75 @@
+schema: rafaelia_route_denylist_illicit_use_v1
+updated: '2026-08-25'
+state: ACTIVE_FAIL_CLOSED
+policy: ../governance/ILLICIT_SUBSTANCE_CONTENT_POLICY.md
+
+scope:
+  - github_routes
+  - repository_ingestion
+  - semantic_indexes
+  - generated_summaries
+  - active_navigation
+
+semantic_block:
+  intent_classes:
+    - illicit_consumption_instruction
+    - illicit_preparation_or_extraction_for_consumption
+    - illicit_dosage_or_effect_optimization
+    - illicit_procurement_or_sale
+    - illicit_distribution_or_concealment
+    - illicit_cultivation_for_consumption
+  lexical_seeds:
+    - LSD
+    - maconha
+    - marijuana
+    - weed
+    - cannabis
+    - DMT
+    - MDMA
+    - ecstasy
+    - cocaine
+    - crack
+    - psilocybin
+    - psilocibina
+    - ketamine
+    - metanfetamina
+  lexical_seed_is_not_sufficient: true
+
+allow_classes:
+  - legal_evidence
+  - legislation_or_jurisprudence
+  - scientific_neutral
+  - medical_or_public_health
+  - toxicology_or_harm_prevention
+  - bibliography
+  - technical_false_positive
+
+ambiguous:
+  state: TOKEN_VAZIO
+  route_allowed: false
+  claim_allowed: false
+  next: semantic_review
+
+precedence:
+  BLOCK_ILLICIT_USE: 100
+  TOKEN_VAZIO: 90
+  ALLOW_LEGAL_EVIDENCE: 50
+  ALLOW_SCIENTIFIC_NEUTRAL: 50
+  ALLOW_TECH_FALSE_POSITIVE: 50
+
+tombstones:
+  - id: TV-ILLICIT-ROUTE-001
+    former_route: instituto-Rafael/DMT-molecular
+    observed_2026_08_25: NOT_ACCESSIBLE
+    active_route: false
+    ingest_allowed: false
+    reason: removed_from_active_routing_under_user_governance_instruction
+    evidence: GitHub repository lookup returned 404 on 2026-08-25
+
+invariants:
+  - 'term != intent'
+  - 'legal_evidence != promotion'
+  - 'neutral_science != consumption_instruction'
+  - 'technical_substring != drug_reference'
+  - 'TOKEN_VAZIO != authorization'
+  - 'tombstone > stale_catalog_route'
