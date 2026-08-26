@@ -1,0 +1,80 @@
+{
+  "schema": "RAFAELIA_FEDERATION_RECEIPT/v1",
+  "cycle": "STAGE0_FLUENT_FEDERATION_20260825_V1",
+  "state": "MATERIALIZED_FOR_REVIEW",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "authorities": {
+    "compiler_producer": "rafaelmeloreisnovo/RafPolimata",
+    "executor_projection": "rafaelmeloreisnovo/RafGitTools",
+    "android_runtime": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "governance": "rafaelmeloreisnovo/Mapa"
+  },
+  "materialized_refs": [
+    {
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "branch": "architecture/stage0-fluent-event-v1",
+      "observed_head": "313bcd323d9a8e9434b5f5c2305560520795c504",
+      "artifacts": [
+        "Apkc/raf_fluent_event.h",
+        "tests/test_raf_fluent_event_v1.c",
+        "spec/RAFAELIA_STAGE0_FLUENT_EVENT_ABI_V1.md"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "branch": "architecture/stage0-fluent-event-v1",
+      "observed_head": "2c2c72c6a5033552186a1a6281fa9ef107751c0b",
+      "artifacts": [
+        "docs/architecture/RAFGITTOOLS_FLUENT_PROJECTION_V1.md"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "branch": "architecture/stage0-fluent-event-v1",
+      "observed_head": "e25add0ff4c21c9187cfeedae1f6c71937663d0d",
+      "artifacts": [
+        "docs/architecture/RAFCODEPHI_STAGE0_FLUENT_RUNTIME_V1.md"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "branch": "architecture/stage0-fluent-federation-v1",
+      "observed_head_before_receipt": "b1c2c290a053d9fd1b3281aa4f838014c7a21932",
+      "artifacts": [
+        "architecture/RAFAELIA_STAGE0_FLUENT_FEDERATION_V1.md"
+      ]
+    }
+  ],
+  "invariants": [
+    "RAFIR != FLUENT_EVENT != ELF != DEX != ZIP",
+    "SQL_PROJECTION != EVENT_AUTHORITY",
+    "COMPILER_PASS != RUNTIME_PASS != AUTHORSHIP_PASS != LICENSE_PASS != RELEASE_PASS",
+    "TOKEN_VAZIO != CLEARED"
+  ],
+  "evidence_state": {
+    "freestanding_messagepack_codec_source": "MATERIALIZED_UNEXECUTED",
+    "codec_smoke_test_source": "MATERIALIZED_UNEXECUTED",
+    "direct_rafir_to_a32_to_elf32_stage0": "TOKEN_VAZIO",
+    "no_python_stage0_subset": "TOKEN_VAZIO",
+    "self_host_bootstrap": "TOKEN_VAZIO",
+    "rafgittools_append_first_ingest": "TOKEN_VAZIO",
+    "rafgittools_projection_replay": "TOKEN_VAZIO",
+    "physical_arm32_runtime_receipt": "TOKEN_VAZIO",
+    "rafcodephi_packaged_stage0_hash": "TOKEN_VAZIO"
+  },
+  "F_ok": [
+    "cross-repository authority split materialized",
+    "SQL removed from canonical event critical path by policy",
+    "direct Fluent Forward/MessagePack codec source materialized in compiler producer",
+    "roadmap F0-F8 materialized"
+  ],
+  "F_gap": [
+    "codec execution evidence",
+    "direct Stage0 ELF32 implementation closure",
+    "physical ARM32 execution",
+    "RafGitTools canonical ingest/replay implementation",
+    "RAFCODEPHI embedded validated Stage0 artifact"
+  ],
+  "F_next": "execute/verify codec smoke test, then implement minimal RAFIR/ASM to A32 to ELF32 Stage0 inside RafPolimata without external assembler/linker in the supported path"
+}

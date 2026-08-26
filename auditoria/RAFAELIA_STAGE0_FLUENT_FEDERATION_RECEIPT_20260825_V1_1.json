@@ -1,0 +1,24 @@
+{
+  "schema": "RAFAELIA_FEDERATION_DELTA_RECEIPT/v1",
+  "cycle": "STAGE0_FLUENT_FEDERATION_20260825_V1_1",
+  "predecessor": "auditoria/RAFAELIA_STAGE0_FLUENT_FEDERATION_RECEIPT_20260825_V1.json",
+  "state": "MATERIALIZED_FOR_REVIEW",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "delta": {
+    "repo": "rafaelmeloreisnovo/RafPolimata",
+    "branch": "architecture/stage0-fluent-event-v1",
+    "observed_head": "ed9cbfb61671816b04a054267d5c48ebd5e16fc0",
+    "added": [
+      ".github/workflows/stage0-fluent-event-v1.yml"
+    ],
+    "purpose": "execute host codec smoke test and ARM32 freestanding compile-only identity/hash gate in CI"
+  },
+  "evidence_state": {
+    "workflow_definition": "MATERIALIZED",
+    "workflow_execution": "TOKEN_VAZIO",
+    "host_smoke_result": "TOKEN_VAZIO",
+    "arm32_compile_identity": "TOKEN_VAZIO"
+  },
+  "F_next": "open producer PR, observe CI execution, then bind run conclusion and hashes in a successor receipt"
+}

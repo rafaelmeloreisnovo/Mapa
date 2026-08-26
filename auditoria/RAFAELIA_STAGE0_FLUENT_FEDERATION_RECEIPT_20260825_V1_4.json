@@ -1,0 +1,51 @@
+{
+  "schema": "RAFAELIA_FEDERATION_DELTA_RECEIPT/v1",
+  "cycle": "STAGE0_FLUENT_FEDERATION_20260825_V1_4",
+  "predecessor": "auditoria/RAFAELIA_STAGE0_FLUENT_FEDERATION_RECEIPT_20260825_V1_3.json",
+  "state": "DIRECT_STAGE0_ARTIFACT_SEALED_VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "producer": {
+    "repo": "rafaelmeloreisnovo/RafPolimata",
+    "pr": 317,
+    "head": "5a22ed071610f8302e15036b6c2f0a2414d3213a",
+    "workflow": "Stage0 Fluent Event V1",
+    "run_id": 32916745098,
+    "job_id": 98021929545,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "fixture": "RAFIR_TINY_V1: MOV_IMM r0,42; RET",
+    "artifact_kind": "ELF32_SHARED_OBJECT",
+    "machine": "ARM",
+    "export": "raf_entry",
+    "sha256": "48b1de8390536efec3917386288672408edaf50bf9fd57795fe0c9b8f12cc7ae",
+    "pt_interp": "ABSENT_PASS",
+    "dt_needed": "ABSENT_PASS",
+    "external_assembler_in_core_route": false,
+    "external_linker_in_core_route": false
+  },
+  "supporting_hashes": {
+    "fluent_codec_host_test_binary_sha256": "42e6fcaa6d61fdc5c64cb8d94d688e9e1b644c02fb4ca74451ff4d060462aa85",
+    "fluent_codec_arm32_object_sha256": "8e08674ec5db0e769fb718dc68dfad33e5ac03f27c51fecda87096e956237b6c",
+    "direct_stage0_host_test_binary_sha256": "6b4ad6e413e6e5719c4ccb6b8773ab7732e9a66fcccbd728b6ba3c23774c203d",
+    "stage0_core_arm32_object_sha256": "2fe8175dba31c0926f848b7b97cd87060dce747cc954f093f76817fdf044dfdf"
+  },
+  "promotions": {
+    "artifact_file_sha256_emitted_by_stage0": "PASS",
+    "direct_rafir_to_a32_to_elf32": "EXECUTION_VERIFIED_LIMITED",
+    "physical_arm32_execution": "TOKEN_VAZIO",
+    "standalone_stage0_executable_binary": "TOKEN_VAZIO",
+    "no_python_parser_for_bounded_source_text": "TOKEN_VAZIO",
+    "self_host_stage0_stage1_stage2": "TOKEN_VAZIO"
+  },
+  "not_claimed": [
+    "physical ARM32 runtime execution of the emitted artifact",
+    "self-hosted compiler bootstrap",
+    "full C language compilation",
+    "Android APK embedding",
+    "release readiness",
+    "authorship or legal clearance"
+  ],
+  "F_next": "implement and gate a bounded freestanding textual RAFIR parser so the Stage0-supported source path no longer requires Python, then bind a physical ARM32 runtime receipt"
+}
