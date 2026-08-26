@@ -1,0 +1,74 @@
+{
+  "schema": "mapa.active-repository-current-head-execution/v3.2",
+  "observed_date": "2026-08-26",
+  "predecessor": "ACTIVE_REPOSITORY_CURRENT_HEAD_EXECUTION_MATRIX_20260826_V3_1.json",
+  "update_semantics": "append-only second strict-core promotion",
+  "cohort_size": 20,
+  "metrics": {
+    "current_head_project_execution_observed": {"count": 2, "denominator": 20, "fraction": 0.10, "percent": 10.0},
+    "current_head_project_pass_observed": {"count": 2, "denominator": 20, "fraction": 0.10, "percent": 10.0},
+    "current_head_project_fail_after_steps": {"count": 0, "denominator": 20, "fraction": 0.0, "percent": 0.0},
+    "strict_reproducible_core_closed": {"count": 2, "denominator": 20, "fraction": 0.10, "percent": 10.0},
+    "provider_startup_fail_exact_head": {"count": 4, "denominator": 20, "fraction": 0.20, "percent": 20.0},
+    "execution_unobserved_or_nonqualifying": {"count": 14, "denominator": 20, "fraction": 0.70, "percent": 70.0}
+  },
+  "strict_core_repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca",
+      "head_sha": "0d4d23210414dd1ff6582d453ffbc4009df5168a",
+      "tree_sha": "c607c1dd9229bf09ba57975b31a55270e5109bd3",
+      "state": "STRICT_REPRODUCIBLE_CORE_PASS",
+      "run_id": 32943310618,
+      "job_id": 98098654246,
+      "receipt_payload_sha256": "417c6b653e40d7812bd6ddd8a7f305bb9e8485c581c0144f356708353d4e7b0d",
+      "artifact_id": 9597299796,
+      "artifact_sha256": "b518c74da99081bc7108d77a275c1e9a591447da3cf5a772b37b6d4f9a61e1b7",
+      "scientific_empirical_claims_validated": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Fisica",
+      "prior_head_sha": "4ef974a8eab07e8154ff90308e0dafb251ce1078",
+      "head_sha": "06c83a3e7e470613d48963d287f1dc6a34f5f544",
+      "tree_sha": "3ec45fa1290f5c6f800403616730e0793145fcb9",
+      "promotion_pr": 9,
+      "state": "STRICT_REPRODUCIBLE_GEOPHYSICAL_CORE_PASS",
+      "run_id": 32943882726,
+      "job_id": 98100375198,
+      "receipt_payload_sha256": "03e36810a79fde609317785429dc28901162bc680b70641bb6231daa8e4ca5cc",
+      "artifact_id": 9597503232,
+      "artifact_sha256": "742f112b4ade8cf8fad15348228da00b846ad3101c41380a722ed7af61f03ce3",
+      "container": "python:3.12.11-slim-bookworm@sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7",
+      "declared_gates": [
+        "compile deterministic core",
+        "geophysical DOI registry",
+        "solid-Earth/hydrology registry",
+        "empty preregistration manifest fail-closed",
+        "physical transduction invariant fail-closed",
+        "synthetic raw-data receipt bounded",
+        "Earth-hum period comparator",
+        "stdlib adversarial smoke",
+        "machine-readable receipt",
+        "artifact digest binding"
+      ],
+      "pytest_suite_included": false,
+      "empirical_physical_validation": false,
+      "synthetic_fixture_promoted_to_empirical": false,
+      "claim_allowed": false
+    }
+  ],
+  "provider_boundary": {
+    "repositories": ["rafaelmeloreisnovo/Rafaelia_Core", "rafaelmeloreisnovo/RafNet-Core", "rafaelmeloreisnovo/nanoGPT", "rafaelmeloreisnovo/privadoFazendo"],
+    "state": "PROVIDER_STARTUP_FAIL",
+    "code_execution": "TOKEN_VAZIO"
+  },
+  "next_gate": {
+    "goal": "Raise strict-reproducible project-core coverage from 2/20 to 3/20.",
+    "priority": [
+      "Inspect ZIPRAF_CORE current HEAD, tests and tools and bind a native deterministic gate before adding generic CI.",
+      "Keep Fisica pytest suite as a separate completeness dimension; do not retroactively count it as executed by the stdlib core receipt.",
+      "Preserve synthetic fixture != empirical physical evidence and provider startup != code failure."
+    ]
+  },
+  "claim_allowed": false,
+  "release_allowed": false
+}
