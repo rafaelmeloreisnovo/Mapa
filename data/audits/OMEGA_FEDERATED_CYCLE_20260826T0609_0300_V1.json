@@ -1,0 +1,192 @@
+{
+  "schema": "mapa.omega-federated-cycle-receipt/v1",
+  "cycle_id": "OMEGA-20260826T0609-0300",
+  "predecessor": "Mapa PR #423 cycle 008 + PR #424 execution V3.3 + PR #425 provenance/license V4",
+  "observed_interval": {
+    "local_start": "2026-08-26T06:09:38-03:00",
+    "local_end": "2026-08-26T06:12:00-03:00"
+  },
+  "contract": {
+    "pipeline": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+    "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "absence_rule": "absence of evidence != evidence of absence",
+    "identity_rule": "filename/title != identity",
+    "claim_allowed": false,
+    "release_allowed": false
+  },
+  "sources_traversed": [
+    {
+      "provider": "Google Drive",
+      "object_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "updated_at": "2026-08-26T07:47:05.785Z",
+      "role": "routing/memory authority candidate"
+    },
+    {
+      "provider": "Google Drive",
+      "object_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "updated_at": "2026-08-25T22:01:35.825Z",
+      "role": "coverage/index surface"
+    },
+    {
+      "provider": "Google Drive",
+      "object_id": "1JkAFxVz8oiBMzSzQH5uDo2PkD9Ug0ymv2YzItBlBpVs",
+      "title": "RAFAELIA — DRIVE_JSON_RECONCILIATION_INGEST — 2026-08-26",
+      "updated_at": "2026-08-26T05:38:24.163Z",
+      "role": "recent ingest/reconciliation checkpoint"
+    },
+    {
+      "provider": "GitHub",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 424,
+      "artifact": "ACTIVE_REPOSITORY_CURRENT_HEAD_EXECUTION_MATRIX_20260826_V3_3.json",
+      "role": "current execution authority for active-20"
+    },
+    {
+      "provider": "GitHub",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 425,
+      "artifact": "ACTIVE_20_PROVENANCE_LICENSE_EXECUTION_RECEIPT_20260826_V4.json",
+      "role": "provenance/license snapshot requiring execution reconciliation"
+    },
+    {
+      "provider": "GitHub",
+      "repo": "instituto-Rafael/ESTADO-FRACTAL-HAJA",
+      "head_sha": "92c592e8dc8f9af7017a35a2e778b0fc314e82b6",
+      "tree_sha": "75677837d21429d1f44f4cb7fb2af8bd5312ff8c",
+      "role": "next strict-core execution candidate"
+    }
+  ],
+  "cursor": {
+    "before": "active-20 identity closed; execution authority split between stale V4 snapshot and later V3.3 chain",
+    "after": "execution authority reconciled to V3.3; ESTADO-FRACTAL-HAJA exact tree inspected and reproducibility gate prepared"
+  },
+  "volume_processed": {
+    "drive_high_value_objects_observed": 3,
+    "github_pr_evidence_chains_reconciled": 2,
+    "estado_fractal_tree_files_enumerated": 26,
+    "estado_fractal_executable_test_surfaces": 3
+  },
+  "evidence_delta": {
+    "active20_execution_stale_snapshot": {
+      "before": "1/20 observed, 0/20 strict in PR #425 V4 embedded execution section",
+      "after_authority": "3/20 observed, 3/20 strict in PR #424 V3.3",
+      "promotion": "RECONCILED_NOT_REWRITTEN"
+    },
+    "estado_fractal_haja": {
+      "default_head": "92c592e8dc8f9af7017a35a2e778b0fc314e82b6",
+      "root_tree": "75677837d21429d1f44f4cb7fb2af8bd5312ff8c",
+      "observed_surfaces": [
+        "HAJA.SH",
+        "scripts/validate_legal_governance.py",
+        "tests/test_legal_governance.py",
+        "data/contracts/haja_legal_governance.v1.json"
+      ],
+      "prepared_branch": "audit/head-exact-governance-repro-20260826",
+      "prepared_commit": "603113ccaed218e7d97263de32922266fa44c3e2",
+      "prepared_pr": 7,
+      "workflow": ".github/workflows/head-exact-governance-repro.yml",
+      "workflow_run_observed": false,
+      "state": "PREPARED_PENDING_EXECUTION",
+      "strict_reproducible_promotion": false
+    }
+  },
+  "provenance_added": [
+    "bound ESTADO-FRACTAL-HAJA default HEAD to root tree",
+    "bound validator/test/contract executable surfaces to blob-visible current tree",
+    "linked active-20 license receipt V4 to later execution authority V3.3 without overwriting either predecessor"
+  ],
+  "receipts_or_hashes": [
+    "Mapa PR #424 V3.3 strict-core receipts for GEOMETRIA, Fisica and Zrf",
+    "ESTADO-FRACTAL-HAJA prepared commit 603113ccaed218e7d97263de32922266fa44c3e2",
+    "Drive object IDs retained as provider identities"
+  ],
+  "memory_projection": {
+    "L": "V4 stale execution snapshot -> V3.3 authoritative later execution state -> current prepared Estado probe",
+    "O": "license/provenance evidence remains independent from execution evidence",
+    "T": "Drive routing/index objects linked to GitHub Mapa active-20 audit and Estado candidate",
+    "C": "3/20 strict is valid only for exact heads/receipts recorded by V3.3; Estado remains pending",
+    "P": "cycle_id + provider IDs + repo HEAD/tree + PR/commit lineage retained append-only"
+  },
+  "gaps_resolved": [
+    {
+      "gap_id": "TV-ACTIVE-20-EXECUTION-STALE-BINDING-20260826-010",
+      "resolution": "PR #425 V4 execution subsection classified as historical/stale relative to V3.3; current authority is 3/20 strict",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-ESTADO-FRACTAL-IDENTITY-20260826-010",
+      "resolution": "repository identity closed as instituto-Rafael/ESTADO-FRACTAL-HAJA@92c592e8... tree 75677837...",
+      "claim_allowed": false
+    }
+  ],
+  "gaps_created_or_remaining": [
+    {
+      "gap_id": "TV-ESTADO-FRACTAL-HEAD-EXACT-EXECUTION-20260826-010",
+      "state": "TOKEN_VAZIO/PENDING_EXECUTION",
+      "source_pointer": "instituto-Rafael/ESTADO-FRACTAL-HAJA PR #7 @603113ccaed218e7d97263de32922266fa44c3e2",
+      "missing_field": "observed workflow run with executed steps, result, artifact and digest",
+      "blocking_dependency": "GitHub Actions provider execution",
+      "evidence_needed": "run_id + job steps + canonical validator output + unittest outcome + uploaded receipt artifact digest",
+      "falsifier": "validator or unittest failure after actual steps execute",
+      "next_probe": "fetch workflow run for prepared commit/PR and classify only after steps are visible",
+      "owner_authority": "instituto-Rafael/ESTADO-FRACTAL-HAJA",
+      "urgency": "P0",
+      "closure_gate": "actual project steps execute and receipt is digest-bound to exact tested commit/tree",
+      "claim_allowed": false,
+      "predecessor_lineage": "Mapa PR #424 V3.3 next_gate"
+    },
+    {
+      "gap_id": "TV-DRIVE-SOURCE-SCAN-16-20260826-010",
+      "state": "TOKEN_VAZIO/PARTIAL",
+      "source_pointer": "Drive: RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "missing_field": "16 candidate source scan completion/cursor identities",
+      "blocking_dependency": "source candidate list/cursors not fully materialized in current provider response",
+      "evidence_needed": "candidate IDs + processed status + content/revision pointer + resulting index receipt",
+      "falsifier": "candidate already processed under stable object_id/content hash",
+      "next_probe": "recover candidate IDs from routing document/index and continue cursor-first",
+      "owner_authority": "Drive routing/index authority",
+      "urgency": "P0",
+      "closure_gate": "16/16 candidates have stable IDs and process receipts or evidence-bound exclusion",
+      "claim_allowed": false,
+      "predecessor_lineage": "Drive routing document priority section"
+    }
+  ],
+  "uncertainty": {
+    "before": "execution current-state conflicted across active-20 audit artifacts; Estado identity/executable scope not bound in this cycle",
+    "after": "active-20 execution authority reconciled to 3/20 strict; Estado identity and executable scope bound; actual Estado execution remains TOKEN_VAZIO"
+  },
+  "coverage": {
+    "before": "active-20 exact identity 20/20; strict execution 3/20 from later evidence chain but not reconciled into V4",
+    "after": "active-20 exact identity 20/20; strict execution remains 3/20; one additional exact candidate prepared for evidence-producing execution",
+    "delta_claim": "no numerical strict-coverage promotion until Estado run evidence exists"
+  },
+  "claim_allowed_changes": [],
+  "top_urgencies": [
+    "P0 observe/classify ESTADO-FRACTAL-HAJA PR #7 workflow execution without promoting preparation to evidence",
+    "P0 recover and close the 16 pending Drive Source Scan candidate identities cursor-first",
+    "P0 continue license clarity work in RafNet-Core, Clay-Maths and Etica without automatic SPDX inference",
+    "P1 process 11 active-20 repos with absent/unresolved standard license path",
+    "P1 preserve provider-startup-fail != CODE_FAIL for zero-step runs"
+  ],
+  "next_probes": [
+    "Fetch ESTADO-FRACTAL-HAJA PR #7 workflow run; if steps execute, collect job/artifact digest and classify PASS/FAIL bounded to exact commit.",
+    "Recover stable IDs/cursors for the 16 Drive Source Scan candidates from the routing/index corpus and process the next maximal coherent batch.",
+    "Reconcile PR #425 provenance/license receipt against V3.3 execution authority in downstream indexes without modifying the historical V4 snapshot."
+  ],
+  "F_ok": [
+    "Drive routing/index authorities observed with stable provider IDs",
+    "active-20 current execution authority reconciled to 3/20 strict",
+    "ESTADO-FRACTAL-HAJA identity/tree/executable surfaces bound",
+    "reversible reproducibility gate prepared in draft PR #7"
+  ],
+  "F_gap": [
+    "ESTADO-FRACTAL-HAJA run not yet observed",
+    "Drive 16-source candidate cursor list still partial",
+    "active-20 license clarity/absence gaps remain"
+  ],
+  "F_next": "actual execution evidence first; then Drive source-scan cursor continuation; then license/provenance closure batch",
+  "claim_allowed": false,
+  "release_allowed": false
+}
