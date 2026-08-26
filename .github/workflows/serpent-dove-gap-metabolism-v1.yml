@@ -1,0 +1,43 @@
+name: serpent-dove-gap-metabolism-v1
+
+on:
+  pull_request:
+    paths:
+      - 'schemas/omega-assurance/serpent-dove-transition.v1.schema.json'
+      - 'data/control-plane/omega-assurance/serpent-dove-conduct.v1.json'
+      - 'data/control-plane/omega-assurance/gap-metabolism-registry.v1.json'
+      - 'data/fixtures/omega-assurance/serpent-dove-negative-cases.v1.json'
+      - 'tools/validate_serpent_dove_gap_metabolism_v1.py'
+      - 'tests/test_serpent_dove_gap_metabolism_v1.py'
+      - 'indices/SERPENT_DOVE_GAP_METABOLISM_V1.md'
+      - 'data/receipts/SERPENT_DOVE_GAP_METABOLISM_*.json'
+      - '.github/workflows/serpent-dove-gap-metabolism-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-non-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout pinned action
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile new validator and tests
+        run: |
+          python3 -m py_compile tools/validate_serpent_dove_gap_metabolism_v1.py
+          python3 -m py_compile tests/test_serpent_dove_gap_metabolism_v1.py
+      - name: Run Serpent-Dove tests
+        run: python3 -m unittest tests/test_serpent_dove_gap_metabolism_v1.py
+      - name: Validate conduct and gap metabolism
+        run: python3 tools/validate_serpent_dove_gap_metabolism_v1.py
+      - name: Revalidate Omega Mesh V1
+        run: |
+          python3 -m unittest tests/test_omega_assurance_mesh_v1.py
+          python3 tools/validate_omega_assurance_mesh_v1.py
+      - name: Revalidate inherited fail-closed controls
+        run: |
+          python3 tools/validate_omega_assurance_skills_v1.py
+          python3 scripts/validate_adaptive_resilience_watchdog_v1.py
+          python3 scripts/authority_pyramid_gate.py --self-test
