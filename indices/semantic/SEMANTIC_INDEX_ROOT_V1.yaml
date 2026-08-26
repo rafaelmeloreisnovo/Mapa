@@ -1,5 +1,5 @@
 schema: rafaelia_semantic_index_root_v1
-version: 1.0.0
+version: 1.1.0
 state: ACTIVE_SEED
 purpose: "Stable discovery root for mascot, incremental, indexer, and architecture-family semantics."
 
@@ -11,6 +11,11 @@ registries:
   semantic_boundaries: governance/semantics/SEMANTIC_BOUNDARIES_V1.yaml
   architecture_families: data/ontology/architectures/ARCHITECTURE_FAMILY_REGISTRY_V1.yaml
   architecture_family_index: indices/semantic/ARCHITECTURE_FAMILY_INDEX_V1.yaml
+  architecture_discovery_rules: data/ontology/architectures/ARCHITECTURE_DISCOVERY_RULES_V1.json
+
+pipelines:
+  architecture_discovery: scripts/discover_architecture_families.py
+  architecture_discovery_contract: "JSON|JSONL -> CANDIDATE -> COOCCURRENCE -> TOKEN_VAZIO|KNOWN -> RECEIPT -> REVIEW -> PROMOTION_GATE"
 
 incremental_nodes:
   first_confirmed: INC-000001
@@ -27,4 +32,5 @@ navigation:
   canonical_chain: "MASCOT <-> CONCEPT <-> INDEX -> INDEXER -> ROUTE -> AGENT -> AUTHORITY -> GATE -> RECEIPT"
   incremental_chain: "INC-ID -> SUBJECT|TAG|ENTITY -> TYPED_EDGE -> SURFACE_POINTER -> AUTHORITY_ROUTE -> EVIDENCE_STATE"
   architecture_chain: "TERM -> FAMILY -> VARIANT|MODULE|LAYER|PROTOCOL|COMMAND -> PROVENANCE -> EPISTEMIC_STATE -> GAP -> NEXT_VERIFIABLE_STEP"
+  architecture_discovery_chain: "RAW_JSON_POINTER_HASH -> RULE -> CANDIDATE -> STRUCTURAL_SIGNALS -> COOCCURRENCE_EDGE -> EPISTEMIC_STATE -> RECEIPT"
   claim_allowed_default: false
