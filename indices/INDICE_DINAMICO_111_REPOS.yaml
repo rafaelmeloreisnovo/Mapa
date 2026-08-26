@@ -1,353 +1,101 @@
-# ÍNDICE DINÂMICO: 111 REPOSITÓRIOS CONHECIDOS + ONBOARDING PARA 83 PENDENTES
-## Mapeamento completo com Notação RAF, Categoria, Marca Epistêmica, Topologia
+# ÍNDICE DINÂMICO — ESTADO ATIVO RECONCILIADO
+# Nome físico legado mantido somente para compatibilidade de links.
 
-indice_dinamico_versao: "1.0"
-timestamp_geracao: "2026-07-17T15:15:00Z"
-total_repositorios: 111
-repositorios_catalogados: 28
-repositorios_conhecidos_pendentes: 83
-repositorios_planejados: 50
+schema: mapa_indice_dinamico_reconciliado_v2
+indice_dinamico_versao: "2.0"
+snapshot_origem: "2026-07-17T15:15:00Z"
+reconciled_at: "2026-08-25"
+legacy_filename: true
 
-# ==================================================================================
-# SEÇÃO 1: 28 REPOSITÓRIOS CATALOGADOS (Fichas completas em Mapa)
-# ==================================================================================
-catalogados:
-  # NÍVEL 1: ESTRUTURA (7 repos)
+estado_ativo:
+  total_repositorios: 110
+  repositorios_catalogados: 28
+  repositorios_conhecidos_pendentes: 82
+  repositorios_planejados: 50
+  source_of_truth: "indices/BACKLOG_ACERVO.yaml"
+  human_readable: "biblioteconomia/BACKLOG_ACERVO.md"
+
+invariantes:
+  - "entidade removida pelo proprietario nao permanece em indice ativo"
+  - "snapshot historico != estado ativo"
+  - "HIPOTESE != FATO"
+  - "TOKEN_VAZIO != zero"
+  - "protecao juridica/autoral != relacao cientifica ou ontologica"
+
+catalogados_referencia:
   estrutura:
-    - id: "R_001"
-      nome: "Mapa"
-      owner: "rafaelmeloreisnovo"
-      url: "https://github.com/rafaelmeloreisnovo/Mapa"
-      notacao: "RAF.MAPEO.LIBRERIA"
-      linguagem: "Markdown + Python + YAML"
-      categoria: "Biblioteconomia | Catálogo | Schema"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "1_ESTRUTURA"
-      status: "CONFORME"
-      metricas:
-        loc: 15000
-        kb_prosa: 500
-        kb_dados: 250
-        commits_ultimos_30d: 25
-        issues_abertas: 0
-      descricao: "Repositório maestro | 18 docs biblioteconômicos | 5 ferramentas | índices YAML | orquestrador de IA"
-      sub_recursos:
-        - "biblioteconomia/ (18 documentos)"
-        - "codigo/ (5 ferramentas Python)"
-        - "indices/ (GRAFO, INDEXADOR, CATALOGO)"
-        - "orquestrador/ (maestro_py + query_engine)"
-
-    - id: "R_002"
-      nome: "BLAKE3"
-      owner: "rafaelmeloreisnovo"
-      url: "https://github.com/rafaelmeloreisnovo/BLAKE3"
-      notacao: "RAF.CRIPTO.BLAKE"
-      linguagem: "Rust | Assembly"
-      categoria: "Criptografia | Hash | Segurança"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "1_ESTRUTURA | 3_APLICACOES"
-      status: "CONFORME"
-      metricas:
-        loc: 8940
-        kb_dados: 120
-        forks: 3
-        stars: 0
-      descricao: "Implementação oficial de blake3 | Hashing triplo determinístico | Verificação de integridade"
-
-    - id: "R_003"
-      nome: "ChipQuantum"
-      owner: "rafaelmeloreisnovo"
-      url: "https://github.com/rafaelmeloreisnovo/ChipQuantum"
-      notacao: "RAF.CRIPTO.CHIP.QNT"
-      linguagem: "Python | C"
-      categoria: "Criptografia | Quantum | Hardware"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "1_ESTRUTURA | 3_APLICACOES"
-      status: "CONFORME"
-      descricao: "Operações criptográficas em nível de chip | Quantum-ready"
-
-  # NÍVEL 2: CIÊNCIA (8 repos)
+    - Mapa
+    - BLAKE3
+    - ChipQuantum
   ciencia:
-    - id: "R_004"
-      nome: "relativity-living-light"
-      owner: "instituto-Rafael"
-      url: "https://github.com/instituto-Rafael/relativity-living-light"
-      notacao: "RAF.FISICA.RELAT.LUZ"
-      linguagem: "Python"
-      categoria: "Física | Relatividade | Astrofísica"
-      marca_epistemica: "SIMBOLICO"
-      primeira_linha_ok: true
-      nivel_topologico: "2_CIENCIA | 5_SABEDORIA"
-      status: "CONFORME"
-      metricas:
-        loc: 5400
-        kb_prosa: 3000
-        stars: 1
-      descricao: "Dark matter, dark energy, relatividade, luz viva | Parábola física"
-
-    - id: "R_005"
-      nome: "Clay-Maths"
-      owner: "instituto-Rafael"
-      url: "https://github.com/instituto-Rafael/Clay-Maths"
-      notacao: "RAF.MATEMATICA.CLAY"
-      linguagem: "Python"
-      categoria: "Matemática | Millennium Prize | Pesquisa"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "2_CIENCIA"
-      status: "CONFORME"
-      descricao: "Implementação de soluções para problemas Clay de Matemática"
-
-    - id: "R_006"
-      nome: "QUANTUM_source_code"
-      owner: "instituto-Rafael"
-      url: "https://github.com/instituto-Rafael/QUANTUM_source_code"
-      notacao: "RAF.QUANTUM.SOURCE"
-      linguagem: "Python | Qiskit"
-      categoria: "Computação Quântica | Pesquisa"
-      marca_epistemica: "HIPOTESE"
-      primeira_linha_ok: true
-      nivel_topologico: "2_CIENCIA | 5_EXPERIMENTAL"
-      status: "CONFORME"
-      descricao: "Implementação de algoritmos de computação quântica"
-
-  # NÍVEL 3: APLICAÇÕES (10 repos)
+    - relativity-living-light
+    - Clay-Maths
+    - QUANTUM_source_code
   aplicacoes:
-    - id: "R_007"
-      nome: "termux-app-rafacodephi"
-      owner: "rafaelmeloreisnovo"
-      url: "https://github.com/rafaelmeloreisnovo/termux-app-rafacodephi"
-      notacao: "RAF.APP.TERMUX"
-      linguagem: "Java | Kotlin"
-      categoria: "Android | Terminal | Ferramentas"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "3_APLICACOES"
-      status: "CONFORME"
-      metricas:
-        loc: 45000
-        kb_codigo: 12000
-        stars: 4
-        forks: 6
-        downloads: "10K+"
-      descricao: "Terminal emulator para Android com extensões RAFAELIA | Em produção"
-
-    - id: "R_008"
-      nome: "UserLAnd"
-      owner: "rafaelmeloreisnovo"
-      url: "https://github.com/rafaelmeloreisnovo/UserLAnd.git"
-      notacao: "RAF.APP.USERLAND"
-      linguagem: "Kotlin"
-      categoria: "Android | Linux | Virtualização"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "3_APLICACOES"
-      status: "CONFORME"
-      descricao: "Ambiente Linux completo em Android | Múltiplas distribuições"
-
-    - id: "R_009"
-      nome: "Cosmos"
-      owner: "rafaelmeloreisnovo"
-      url: "https://github.com/rafaelmeloreisnovo/Cosmos"
-      notacao: "RAF.COSMO.FRAME"
-      linguagem: "Python"
-      categoria: "Framework | Cosmologia | Algorithms"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "3_APLICACOES"
-      status: "CONFORME"
-      descricao: "Framework cosmológico | Fibonacci modificada | Estruturas recursivas"
-
-    - id: "R_042"
-      nome: "qemu_rafaelia"
-      owner: "rafaelmeloreisnovo"
-      url: "TOKEN_VAZIO_URL_RESOLUTION_PENDING"
-      notacao: "RAF.VIRTUO.QEMU.ARM"
-      linguagem: "C | Shell"
-      categoria: "Virtualization | ARM/x86 Emulation"
-      marca_epistemica: "TOKEN_VAZIO"
-      primeira_linha_ok: false
-      nivel_topologico: "3_APLICACOES | 4_VIRTUALIZACAO"
-      status: "TOKEN_VAZIO_PINNED_COMMIT_RECOVERY"
-      contract_state: "DECLARED"
-      product_edge_id: "EDGE-QEMU-CONTRACTS"
-      metricas:
-        bootstrap_commit: "2346c30c... (UNRECOVERABLE)"
-        latest_known_commit: "TOKEN_VAZIO"
-      descricao: |
-        QEMU fork para emulação Android/ARM; integração com androidx_RmR.
-        Estado: Pinned commit (2346c30c) perdido no remote.
-        Recovery: Usar latest HEAD ou upstream QEMU + Android patches.
-        TOKEN_VAZIO: pinned commit recovery, ABI baseline establishment, source coherence.
-
-    - id: "R_043"
-      nome: "androidx_RmR"
-      owner: "rafaelmeloreisnovo"
-      url: "https://github.com/rafaelmeloreisnovo/androidx_RmR"
-      notacao: "RAF.ANDROID.ANDROIDX"
-      linguagem: "Java | Kotlin"
-      categoria: "Android | AndroidX | Runtime"
-      marca_epistemica: "DECLARED"
-      primeira_linha_ok: true
-      nivel_topologico: "3_APLICACOES | 4_VIRTUALIZACAO"
-      status: "ABI_CONTRACT_VALIDATION_MISSING"
-      contract_state: "PARTIAL"
-      product_edge_id: "EDGE-ANDROIDX-ABI"
-      last_observed_commit: "4f01fd23e91e861a060d2bbc1ed14f256a1b5e3b"
-      metricas:
-        loc: "TOKEN_VAZIO"
-        abi_contracts_validated: 0
-        abi_contracts_declared: "unknown"
-      descricao: |
-        Biblioteca AndroidX runtime support integrada com RAFAELIA.
-        Branch: androidx-main
-        Estado: Alto (complete, technically precise per README quality index)
-        Lacuna: ABI contract validation missing; precisa integração com qemu_rafaelia.
-
-  # NÍVEL 4: GOVERNO (3 repos)
+    - termux-app-rafacodephi
+    - UserLAnd
+    - Cosmos
+    - qemu_rafaelia
+    - androidx_RmR
   governo:
-    - id: "R_010"
-      nome: "publicacientiespiritual"
-      owner: "instituto-Rafael"
-      url: "https://github.com/instituto-Rafael/publicacientiespiritual"
-      notacao: "RAF.GOVT.CIENTI"
-      linguagem: "Python | Markdown"
-      categoria: "Manifesto | Ética | CientiEspiritual"
-      marca_epistemica: "SIMBOLICO"
-      primeira_linha_ok: true
-      nivel_topologico: "4_GOVERNO"
-      status: "CONFORME"
-      descricao: "Repositório simbiótico absoluto | Publicação científico-espiritual"
+    - publicacientiespiritual
+    - manifesto-antioligopolio-rafaelia
 
-    - id: "R_011"
-      nome: "manifesto-antioligopolio-rafaelia"
-      owner: "instituto-Rafael"
-      url: "https://github.com/instituto-Rafael/manifesto-antioligopolio-rafaelia"
-      notacao: "RAF.GOVT.MANIF.ANTIOLIG"
-      linguagem: "Markdown"
-      categoria: "Manifesto | Política | Antitrust"
-      marca_epistemica: "FATO"
-      primeira_linha_ok: true
-      nivel_topologico: "4_GOVERNO"
-      status: "CONFORME"
-      descricao: "Manifesto público contra oligopólio e manipulação algorítmica"
+pendentes_por_foco:
+  android_variants:
+    - androidRom
+    - android_frameworks_base_rafaelia
+    - termux-api_rafcodephi
+    - UserLAnd2
+    - Vectras-VM-Android
+  crypto_security:
+    - CryptoSwift_RmR
+    - QUANTUM_auth_certificate
+    - Firewall
+  research_advanced:
+    - Particula-Omega
+    - ASTRA-FRACTAL-PIPE
+    - Blackhole
+    - Whilehole
+    - PlamaticGravity
+  frameworks_tools:
+    - gradle
+    - DeepSeek-RafCoder
+    - nanoGPT
+    - TinyGPT
+    - LuaJIT
+    - linuxkernel
+    - frida-desktop
+  science_math:
+    - solvedClayMaths
+    - Bitraf-Bit-quantum
+    - Tegmark
+    - Entropia-aponta-a-origem-do-feito
+    - Eletron-efeitos-qu-ntico
+    - Unify_Teory_of_mission_holly_espiritual_ciencias
+  governance_ethics:
+    - LGPD-Constituicoes-planetaria
+    - apk-guardian-rafaelia
+    - apk-privacy-rafaelia
+    - apk-ethics-rafaelia
+    - apk-antitrust-rafaelia
+    - Cren-as-ESPIRITUAL-amparo-LEGAL-SAGRADO
+    - Analise-juridica
+  cultural_spiritual:
+    - CientiEspiritual
+    - Espiritual-espirualidade
+    - templo-vivo-arcs
+    - cienti-espiritual-verbo-vivo
+    - ESTADO-FRACTAL-HAJA
+    - Constituicao-brasileira-leis
 
-  # ... (continuar com R_012–R_028)
-
-# ==================================================================================
-# SEÇÃO 2: 83 REPOSITÓRIOS PENDENTES (Onboarding necessário)
-# ==================================================================================
-repositorios_pendentes:
-  status_geral: "⏳ Aguardando onboarding | Fichas vazias | Marcados LACUNA"
-  protocolo_onboarding: "11_ESCALA_120_ONBOARDING.md"
-  passos:
-    passo_1: "Autorização do dono do acervo (add_repo owner/repo)"
-    passo_2: "Executar protocolo de catalogação (11_§3 por lote)"
-    passo_3: "Gerar ficha YAML (ficha_de_entrada.py)"
-    passo_4: "Validar primeira-linha + marca_epistemica"
-    passo_5: "Executar varredura (varredura_conteudo.py)"
-    passo_6: "Publicar em CATALOGO_BIBLIOTECONOMICO.yaml"
-
-  categoria_pendentes:
-    android_variants: [
-      "androidRom",
-      "android_frameworks_base_rafaelia",
-      "termux-api_rafcodephi",
-      "UserLAnd2",
-      "Vectras-VM-Android"
-    ]
-    # Nota: androidx_RmR (R_043) e qemu_rafaelia (R_042) movidos para "catalogados.aplicacoes"
-    #       com TOKEN_VAZIO gates registradas explicitamente.
-    
-    crypto_security: [
-      "CryptoSwift_RmR",
-      "QUANTUM_auth_certificate",
-      "Firewall"
-    ]
-    
-    research_advanced: [
-      "Particula-Omega",
-      "ASTRA-FRACTAL-PIPE",
-      "Blackhole",
-      "Whilehole",
-      "DMT-molecular",
-      "PlamaticGravity"
-    ]
-    
-    frameworks_tools: [
-      "gradle",
-      "DeepSeek-RafCoder",
-      "nanoGPT",
-      "TinyGPT",
-      "LuaJIT",
-      "linuxkernel",
-      "frida-desktop"
-    ]
-    
-    science_math: [
-      "solvedClayMaths",
-      "Bitraf-Bit-quantum",
-      "Tegmark",
-      "Entropia-aponta-a-origem-do-feito",
-      "Eletron-efeitos-qu-ntico",
-      "Unify_Teory_of_mission_holly_espiritual_ciencias"
-    ]
-    
-    governance_ethics: [
-      "LGPD-Constituicoes-planetaria",
-      "apk-guardian-rafaelia",
-      "apk-privacy-rafaelia",
-      "apk-ethics-rafaelia",
-      "apk-antitrust-rafaelia",
-      "Cren-as-ESPIRITUAL-amparo-LEGAL-SAGRADO",
-      "Analise-juridica"
-    ]
-    
-    cultural_spiritual: [
-      "CientiEspiritual",
-      "Espiritual-espirualidade",
-      "templo-vivo-arcs",
-      "cienti-espiritual-verbo-vivo",
-      "ESTADO-FRACTAL-HAJA",
-      "Constituicao-brasileira-leis"
-    ]
-
-# ==================================================================================
-# SEÇÃO 3: ROADMAP DE ONBOARDING (Próximos 6 meses)
-# ==================================================================================
 roadmap_onboarding:
-  fase_1_semana_1_2:
-    objetivo: "Onboard 15 repos (prioridade alta)"
-    repos_selecionados: ["androidRom", "CryptoSwift_RmR", "Particula-Omega", "solvedClayMaths", "LGPD-Constituicoes"]
-    metodo: "Lote A via script batch"
-    resultado_esperado: "15 fichas YAML + 15 hashes triplos validados"
+  source_of_truth: "indices/BACKLOG_ACERVO.yaml"
+  objetivo: "onboard dos 82 pendentes por lotes verificaveis"
+  regra_sync: "qualquer alteracao de existencia deve ser reconciliada primeiro no BACKLOG_ACERVO.yaml"
 
-  fase_2_semana_3_4:
-    objetivo: "Onboard 30 repos (prioridade média)"
-    categoria_foco: "Frameworks + Research"
-    resultado_esperado: "30 fichas | Índices atualizados"
-
-  fase_3_mes_2_3:
-    objetivo: "Onboard 38 repos (prioridade baixa)"
-    categoria_foco: "Experimental + Standby"
-    resultado_esperado: "38 fichas | Avaliar correlações entre níveis"
-
-  resultado_final:
-    total: "111 repositórios catalogados"
-    primeira_linha: "100% validada"
-    marca_epistemica: "Todos marcados FATO/HIPOTESE/SIMBOLICO/LACUNA"
-    grafo_dependencias: "Atualizado"
-
-# ==================================================================================
-# VERIFICAÇÃO
-# ==================================================================================
-verificacao:
-  timestamp: "2026-07-17T15:15:00Z"
-  primeira_linha_ok: true
-  catalogados_validados: 28
-  pendentes_mapeados: 83
-  roadmap_definido: true
-  estado: "✓ ÍNDICE DINÂMICO ESTRUTURADO | Pronto para expansão 28 → 111"
+nota_migracao: >-
+  Este arquivo era um indice derivado de 111 repositorios conhecidos e 83 pendentes.
+  Em 2026-08-25 o estado ativo foi reconciliado apos remocao de uma entidade pelo
+  proprietario. O nome do arquivo permanece apenas para compatibilidade; consumidores
+  devem usar os campos de estado_ativo e o source_of_truth atual.
