@@ -1,0 +1,56 @@
+name: Legal Governance Gates
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'codigo/matriz_conformidade.py'
+      - 'indices/MANIFESTO_INTEGRIDADE.yaml'
+      - 'indices/MATRIZ_CONFORMIDADE.md'
+      - 'schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json'
+      - 'scripts/validate_gnss_runtime_receipt.py'
+      - 'docs/legal/**'
+      - 'data/normative-graph/**'
+      - '.github/workflows/legal-governance-gates.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'codigo/matriz_conformidade.py'
+      - 'indices/MANIFESTO_INTEGRIDADE.yaml'
+      - 'indices/MATRIZ_CONFORMIDADE.md'
+      - 'schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json'
+      - 'scripts/validate_gnss_runtime_receipt.py'
+      - 'docs/legal/**'
+      - 'data/normative-graph/**'
+      - '.github/workflows/legal-governance-gates.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  governance-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: GNSS receipt falsifiability self-test
+        run: python3 scripts/validate_gnss_runtime_receipt.py --self-test
+
+      - name: Regenerate compliance matrix
+        run: python3 codigo/matriz_conformidade.py --write
+
+      - name: Upload regenerated matrix evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-compliance-matrix
+          path: indices/MATRIZ_CONFORMIDADE.md
+          if-no-files-found: error
+
+      - name: Fail closed on generated drift
+        run: git diff --exit-code -- indices/MATRIZ_CONFORMIDADE.md
