@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/user-governance-capsule.v1.schema.json",
+  "title": "RAFAELIA Robotics User Governance Capsule V1",
+  "description": "Machine-readable governance envelope for a bounded automated-information processing context. This schema does not create legal authority; it records authority, purpose, rights, evidence, unknowns and receipts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "ugc_id",
+    "subject_scope",
+    "service_identity",
+    "authority",
+    "purposes",
+    "data",
+    "automation",
+    "sharing",
+    "retention",
+    "rights",
+    "risk",
+    "evidence",
+    "unknowns",
+    "normative_snapshot",
+    "last_verified_at",
+    "receipt"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "ugc_id": {"type": "string", "minLength": 1},
+    "subject_scope": {"type": "string", "minLength": 1},
+    "service_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "producer_repo"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "producer_repo": {"type": ["string", "null"]},
+        "producer_commit": {"type": ["string", "null"]}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controller", "processor", "jurisdictions", "legal_basis_by_purpose", "authority_unknowns"],
+      "properties": {
+        "controller": {"type": ["string", "null"]},
+        "processor": {"type": ["string", "null"]},
+        "joint_controllers": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "dpo_or_contact": {"type": ["string", "null"]},
+        "jurisdictions": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "uniqueItems": true},
+        "legal_basis_by_purpose": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["purpose_id", "basis", "source", "status"],
+            "properties": {
+              "purpose_id": {"type": "string", "minLength": 1},
+              "basis": {"type": "string", "minLength": 1},
+              "source": {"type": "string", "minLength": 1},
+              "status": {"enum": ["BOUND", "DISPUTED", "TOKEN_VAZIO"]}
+            }
+          }
+        },
+        "authority_unknowns": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "purposes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["purpose_id", "description", "essentiality", "change_requires_revalidation"],
+        "properties": {
+          "purpose_id": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1},
+          "essentiality": {"enum": ["ESSENTIAL", "OPTIONAL", "CONTEXT_DEPENDENT", "TOKEN_VAZIO"]},
+          "change_requires_revalidation": {"const": true}
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["collected", "inferred", "sensitive", "provenance", "minimization_status"],
+      "properties": {
+        "collected": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "inferred": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "sensitive": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "provenance": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "minimization_status": {"enum": ["PASS", "PARTIAL", "FAIL", "TOKEN_VAZIO"]}
+      }
+    },
+    "automation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classes", "material_decisions", "ranking_or_recommendation", "human_oversight", "contestability"],
+      "properties": {
+        "classes": {"type": "array", "items": {"enum": ["COLLECT", "INFER", "CLASSIFY", "RANK", "RECOMMEND", "DECIDE", "ACT", "TRANSMIT", "RETAIN", "DELETE"]}, "uniqueItems": true},
+        "material_decisions": {"type": "array", "items": {"type": "string"}},
+        "ranking_or_recommendation": {"type": "array", "items": {"type": "string"}},
+        "model_or_rule_versions": {"type": "array", "items": {"type": "string"}},
+        "human_oversight": {"enum": ["AVAILABLE", "NOT_AVAILABLE", "NOT_APPLICABLE", "TOKEN_VAZIO"]},
+        "contestability": {"enum": ["AVAILABLE", "NOT_AVAILABLE", "NOT_APPLICABLE", "TOKEN_VAZIO"]}
+      }
+    },
+    "sharing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recipients", "international_transfers", "downstream_propagation_status"],
+      "properties": {
+        "recipients": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "international_transfers": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "transfer_mechanisms": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "downstream_propagation_status": {"enum": ["BOUND", "PARTIAL", "NOT_APPLICABLE", "TOKEN_VAZIO"]}
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "trigger", "deletion_or_anonymization_route"],
+      "properties": {
+        "rule": {"type": "string", "minLength": 1},
+        "trigger": {"type": "string", "minLength": 1},
+        "legal_hold_conditions": {"type": "array", "items": {"type": "string"}},
+        "deletion_or_anonymization_route": {"type": "string", "minLength": 1}
+      }
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "routes", "acknowledgement_is_consent"],
+      "properties": {
+        "available": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "routes": {"type": "object", "additionalProperties": {"type": "string"}},
+        "acknowledgement_is_consent": {"const": false}
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "criticality", "bias_vectors", "unresolved_critical_risk"],
+      "properties": {
+        "summary": {"type": "string", "minLength": 1},
+        "criticality": {"enum": ["C0_PUBLIC", "C1_INTERNAL", "C2_SENSITIVE", "C3_RESTRICTED", "C4_CRITICAL"]},
+        "bias_vectors": {"type": "array", "items": {"enum": ["SAMPLING", "MEASUREMENT", "MODEL", "INTERFACE", "LEGAL", "JURISDICTION", "INSTITUTIONAL", "ECONOMIC", "AUTOMATION", "CONFIRMATION", "SURVIVORSHIP", "UNKNOWN"]}, "uniqueItems": true},
+        "unresolved_critical_risk": {"type": "boolean"}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence_id", "kind", "source", "scope", "state"],
+        "properties": {
+          "evidence_id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["PRIMARY_LAW", "REGULATION", "COURT_OR_REGULATOR_DECISION", "STANDARD_METADATA", "CERTIFICATE", "AUDIT", "TEST", "RUNTIME_RECEIPT", "USER_STUDY", "ECONOMIC_DATA", "OTHER"]},
+          "source": {"type": "string", "minLength": 1},
+          "scope": {"type": "string", "minLength": 1},
+          "state": {"enum": ["OBSERVED", "VERIFIED", "CONTRADICTED", "STALE", "TOKEN_VAZIO"]}
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["token", "description", "blocking", "f_next"],
+        "properties": {
+          "token": {"const": "TOKEN_VAZIO"},
+          "description": {"type": "string", "minLength": 1},
+          "blocking": {"type": "boolean"},
+          "f_next": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "certifications_or_attestations": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "external_audits": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "normative_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshot_id", "checked_at", "staleness_state"],
+      "properties": {
+        "snapshot_id": {"type": "string", "minLength": 1},
+        "checked_at": {"type": "string", "format": "date-time"},
+        "staleness_state": {"enum": ["CURRENT", "REVALIDATION_DUE", "STALE", "TOKEN_VAZIO"]}
+      }
+    },
+    "last_verified_at": {"type": "string", "format": "date-time"},
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_id", "state", "append_only"],
+      "properties": {
+        "receipt_id": {"type": "string", "minLength": 1},
+        "state": {"enum": ["IMPLEMENTED", "EXECUTED", "PASS", "FAIL", "BLOCKED", "TOKEN_VAZIO"]},
+        "append_only": {"const": true}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"risk": {"properties": {"unresolved_critical_risk": {"const": true}}}}},
+      "then": {"properties": {"receipt": {"properties": {"state": {"enum": ["BLOCKED", "TOKEN_VAZIO"]}}}}}
+    }
+  ]
+}
