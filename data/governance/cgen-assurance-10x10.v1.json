@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "CGEN-ASSURANCE-10X10-V1",
+  "state": "PROPOSED_RESEARCH_PROGRAM_EXTENSION",
+  "policy": {
+    "append_only": true,
+    "fail_closed": true,
+    "claim_allowed": false,
+    "token_vazio_first_class": true,
+    "non_compensatory_p0": true,
+    "promotion_requires_human_authority": true
+  },
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "METAPHOR != MECHANISM",
+    "ANALOGY != PROOF",
+    "ATTENTION != TRUTH",
+    "CENSORSHIP != VALIDATION",
+    "ABANDONMENT != FALSIFICATION",
+    "RETRACTION != AUTOMATIC_FALSITY",
+    "LEGAL_AUTHORITY != SCIENTIFIC_TRUTH",
+    "STANDARD != STATUTE",
+    "GUIDANCE != LAW",
+    "CERTIFICATION != UNIVERSAL_COMPLIANCE",
+    "CI_PASS != HUMAN_PROMOTION_AUTHORIZATION",
+    "TOKEN_VAZIO != FALSE",
+    "TOKEN_VAZIO != PASS",
+    "TOKEN_VAZIO != FAIL",
+    "UNKNOWN_CRITICAL -> HOLD",
+    "P0_CANNOT_BE_AVERAGED_AWAY",
+    "STALE_NORM_CANNOT_AUTHORIZE_CURRENT_PROMOTION",
+    "IRREVERSIBLE_ACTION_WITH_UNKNOWN_ROLLBACK -> BLOCK"
+  ],
+  "depth_levels": [
+    {"id":"L0","name":"IDENTITY_SCOPE","hard_unknown":"TOKEN_VAZIO_IDENTITY"},
+    {"id":"L1","name":"EPISTEMIC_CLASS","hard_unknown":"TOKEN_VAZIO_EPISTEMIC_CLASS"},
+    {"id":"L2","name":"EVIDENCE_FALSIFIER","hard_unknown":"TOKEN_VAZIO_EVIDENCE"},
+    {"id":"L3","name":"TEMPORAL_VALIDITY","hard_unknown":"TOKEN_VAZIO_TEMPORAL"},
+    {"id":"L4","name":"AUTHORITY_APPLICABILITY","hard_unknown":"TOKEN_VAZIO_AUTHORITY"},
+    {"id":"L5","name":"NORM_INTERACTION","hard_unknown":"TOKEN_VAZIO_NORM_CONFLICT"},
+    {"id":"L6","name":"RISK_HARM","hard_unknown":"TOKEN_VAZIO_RISK"},
+    {"id":"L7","name":"MITIGATION_REVERSIBILITY","hard_unknown":"TOKEN_VAZIO_CONTROL"},
+    {"id":"L8","name":"RUNTIME_ADAPTATION","hard_unknown":"TOKEN_VAZIO_RUNTIME"},
+    {"id":"L9","name":"OVERSIGHT_EVOLUTION","hard_unknown":"TOKEN_VAZIO_OVERSIGHT"}
+  ],
+  "correlated_lenses": [
+    "LAW_REGULATION",
+    "TECHNICAL_STANDARD",
+    "SECURITY_RESILIENCE",
+    "PRIVACY_DATA_GOVERNANCE",
+    "AI_ALGORITHMIC_GOVERNANCE",
+    "SAFETY_HUMAN_RIGHTS",
+    "ACCESSIBILITY_HUMAN_FACTORS",
+    "ENVIRONMENT_SUSTAINABILITY",
+    "SCIENTIFIC_EPISTEMIC_INTEGRITY",
+    "OPERATIONAL_CONTRACTUAL_GOVERNANCE"
+  ],
+  "gates": [
+    {"id":"G0","name":"IDENTITY","blockers":["AMBIGUOUS_IDENTITY"]},
+    {"id":"G1","name":"PROVENANCE","blockers":["UNKNOWN_SOURCE","UNKNOWN_PRODUCER"]},
+    {"id":"G2","name":"EPISTEMIC","blockers":["CLAIM_CLASS_COLLAPSE"]},
+    {"id":"G3","name":"EVIDENCE","blockers":["UNSUPPORTED_PROMOTION"]},
+    {"id":"G4","name":"NORMATIVE","blockers":["STALE_APPLICABLE_NORM","UNKNOWN_APPLICABLE_NORM"]},
+    {"id":"G5","name":"INTERACTION","blockers":["UNRESOLVED_MATERIAL_NORM_CONFLICT"]},
+    {"id":"G6","name":"RISK","blockers":["CRITICAL_UNKNOWN_RISK"]},
+    {"id":"G7","name":"CONTROL","blockers":["IRREVERSIBLE_UNKNOWN_ROLLBACK"]},
+    {"id":"G8","name":"RUNTIME","blockers":["DECLARED_OBSERVED_MISMATCH","STALE_WATCHDOG_HEARTBEAT"]},
+    {"id":"G9","name":"PROMOTION","blockers":["MISSING_INDEPENDENT_REVIEW","MISSING_PROMOTION_AUTHORITY","MISSING_RECEIPT"]}
+  ],
+  "urgency": {
+    "P0": {"effect":"HOLD","cannot_be_compensated":true},
+    "P1": {"effect":"PRIORITY_CLOSURE"},
+    "P2": {"effect":"PLANNED_REDUCTION"},
+    "P3": {"effect":"RESEARCH_QUEUE"},
+    "P4": {"effect":"ARCHIVE_WATCH"}
+  },
+  "token_vazio_required_fields": [
+    "id","domain","blocked_gate","missing_evidence","why_missing","owner","f_next",
+    "falsifier_or_closure_test","created_at","last_reviewed_at","staleness_trigger",
+    "impact_if_unresolved","dependencies"
+  ],
+  "norm_relations": [
+    "IMPLEMENTS","INTERPRETS","AMENDS","SUPERSEDES","DEROGATES","SPECIALIZES",
+    "SUPPLEMENTS","CONFLICTS_WITH","CROSS_REFERENCES","NON_BINDING_GUIDANCE_FOR",
+    "TECHNICAL_CONTROL_SUPPORT_FOR","NO_DIRECT_LEGAL_HIERARCHY","TOKEN_VAZIO_RELATION"
+  ],
+  "attention_history_states": [
+    "MAINSTREAM_CURRENT","LOW_ATTENTION","IGNORED_WITH_REASON","HISTORICALLY_IGNORED",
+    "ABANDONED_PRE_CONCLUSION","WITHDRAWN","RETRACTED","SUPERSEDED","HISTORICALLY_CENSORED",
+    "SUPPRESSED_BY_POLICY","REDACTED_PRIVACY","UNPUBLISHED","ORPHANED","LOST_SOURCE","TOKEN_VAZIO_HISTORY"
+  ],
+  "epistemic_event_types": [
+    "ANOMALY","PARADOX","CONTRADICTION","OUTLIER","COUNTEREXAMPLE","NEGATIVE_RESULT",
+    "REPLICATION_FAILURE","FALSIFIED","TOKEN_VAZIO"
+  ],
+  "monitoring_drifts": [
+    "AUTHORITY_DRIFT","NORMATIVE_DRIFT","PROVENANCE_DRIFT","SCHEMA_DRIFT","DATA_DRIFT",
+    "MODEL_DRIFT","BEHAVIOR_DRIFT","DEPENDENCY_DRIFT","SECURITY_DRIFT","PRIVACY_DRIFT",
+    "PERFORMANCE_DRIFT","ACCESSIBILITY_DRIFT","EVIDENCE_AGING","WATCHDOG_HEARTBEAT_STALE"
+  ],
+  "non_regression_suites": [
+    "IDENTITY","PROVENANCE","EPISTEMIC","NORMATIVE","SECURITY_PRIVACY",
+    "SAFETY_RIGHTS","RUNTIME","ROLLBACK","OBSERVABILITY","ARCHIVE"
+  ],
+  "normative_snapshot_extension": {
+    "checked_at": "2026-08-26T17:12:00-03:00",
+    "bounded_not_universal": true,
+    "sources": [
+      {"id":"BR-LGPD-13709","type":"STATUTE","state":"ACTIVE","url":"https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm"},
+      {"id":"BR-ANPD-R15-2024","type":"REGULATION","state":"ACTIVE","url":"https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd"},
+      {"id":"BR-ANPD-R18-2024","type":"REGULATION","state":"ACTIVE","url":"https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd"},
+      {"id":"BR-ANPD-R19-2024","type":"REGULATION","state":"ACTIVE","url":"https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no-19-de-23-de-agosto-de-2024"},
+      {"id":"BR-ECA-DIGITAL-15211-2025","type":"STATUTE","state":"ACTIVE","url":"https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm"},
+      {"id":"BR-LAW-15352-2026","type":"STATUTE","state":"ACTIVE","url":"https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/l15352.htm"},
+      {"id":"BR-ANPD-R30-2025","type":"REGULATION","state":"ACTIVE","url":"https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd"},
+      {"id":"BR-ANPD-R31-2025","type":"REGULATION","state":"ACTIVE","url":"https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd"},
+      {"id":"BR-ANPD-R32-2026","type":"REGULATOR_DECISION","state":"ACTIVE","url":"https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd"},
+      {"id":"EU-AI-ACT-2024-1689-AMENDED-2026-1744","type":"REGULATION","state":"PHASED_APPLICATION","url":"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32026R1744"},
+      {"id":"ISO-IEC-27701-2025","type":"TECHNICAL_STANDARD","state":"PUBLISHED","url":"https://www.iso.org/standard/27701"},
+      {"id":"ISO-IEC-42001-2023","type":"TECHNICAL_STANDARD","state":"PUBLISHED","url":"https://www.iso.org/standard/42001"},
+      {"id":"ISO-14001-2026","type":"TECHNICAL_STANDARD","state":"PUBLISHED","url":"https://www.iso.org/standard/14001"},
+      {"id":"NIST-CSF-2.0","type":"FRAMEWORK","state":"PUBLISHED","url":"https://www.nist.gov/cyberframework"},
+      {"id":"NIST-AI-RMF-1.0","type":"FRAMEWORK","state":"PUBLISHED_UNDER_REVISION","url":"https://www.nist.gov/itl/ai-risk-management-framework"},
+      {"id":"NIST-AI-600-1","type":"PROFILE","state":"PUBLISHED","url":"https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"},
+      {"id":"NIST-PRIVACY-FRAMEWORK-1.0","type":"FRAMEWORK","state":"PUBLISHED_CURRENT_WITH_1.1_IPD_PENDING","url":"https://www.nist.gov/privacy-framework"}
+    ]
+  },
+  "external_p0_preserved": [
+    "SERVER_SIDE_MAIN_BRANCH_ENFORCEMENT_UNPROVEN",
+    "INDEPENDENT_PROMOTION_APPROVAL_MISSING"
+  ],
+  "open_tokens": [
+    {"id":"TV-CGEN-RUNTIME","state":"TOKEN_VAZIO","blocked_gate":"G8","f_next":"Bind exact Robotics producer/runtime and emit an execution receipt."},
+    {"id":"TV-CGEN-JURISDICTION","state":"TOKEN_VAZIO","blocked_gate":"G4","f_next":"Resolve deployment-specific jurisdiction, purpose, population and applicable-rule set."},
+    {"id":"TV-CGEN-INDEPENDENT-REVIEW","state":"TOKEN_VAZIO","blocked_gate":"G9","f_next":"Obtain independent legal/privacy/security review with bounded scope."},
+    {"id":"TV-CGEN-ACCESSIBILITY","state":"TOKEN_VAZIO","blocked_gate":"G6","f_next":"Run comprehension/accessibility testing against measurable criteria."}
+  ],
+  "falsification_tests": [
+    "UNKNOWN_COLLAPSES_TO_FALSE",
+    "CRITICAL_EVIDENCE_LOSS_DOES_NOT_REOPEN_GATE",
+    "NORMATIVE_CHANGE_DOES_NOT_REOPEN_DEPENDENCIES",
+    "AUDITOR_CANNOT_RECONSTRUCT_TRANSITION",
+    "CONTROL_HAS_NO_TRACE_TO_HARM",
+    "ENGINE_INVENTS_LEGAL_HIERARCHY",
+    "ARCHIVE_CREATES_FALSE_EQUIVALENCE",
+    "MONITORING_HAS_UNBOUNDED_ERROR_WITHOUT_CONTROL",
+    "HUMAN_OVERSIGHT_CANNOT_HALT_MATERIAL_ACTION",
+    "FRAMEWORK_COMPLEXITY_ADDS_UNCONTROLLED_CRITICAL_FAILURE"
+  ]
+}
