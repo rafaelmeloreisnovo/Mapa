@@ -4,6 +4,7 @@
 Evidence-first boundaries:
 - recursively reads JSON/JSONL, including NOVOexport `.jsonl.txt` wrappers and gzip variants;
 - top-level JSON arrays are treated as independent records, not one mega-record;
+- custody/identity/hash metadata is excluded from semantic matching by default;
 - default outputs never contain source text or source paths;
 - known aliases become source-bound candidates, never runtime claims;
 - unknown structural contexts become TOKEN_VAZIO structural orphans;
@@ -37,6 +38,31 @@ SUPPORTED_SUFFIXES = (
     ".jsonl.txt.gz",
 )
 JSONL_SUFFIXES = (".jsonl", ".jsonl.txt", ".jsonl.gz", ".jsonl.txt.gz")
+
+# These fields describe custody/transport/runtime metadata, not semantic content.
+# Skipping both their key labels and values prevents source paths, hashes and IDs
+# from manufacturing architecture candidates or structural orphan edges.
+NON_SEMANTIC_KEYS = frozenset({
+    "asset_refs",
+    "claim_allowed",
+    "content_type",
+    "conversation_id",
+    "create_time",
+    "epistemic_state",
+    "error_json",
+    "kind",
+    "message_id",
+    "node_id",
+    "parent_id",
+    "privacy_class",
+    "role",
+    "source_path",
+    "source_pointer",
+    "structural_hash",
+    "text_hash",
+    "title_hash",
+    "update_time",
+})
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -102,11 +128,14 @@ def pointer_token(value: Any) -> str:
 
 
 def iter_strings(node: Any, pointer: str = "$") -> Iterator[tuple[str, str]]:
+    """Yield semantic string surfaces while excluding known custody metadata."""
     if isinstance(node, str):
         yield pointer, node
     elif isinstance(node, dict):
         for key in sorted(node, key=lambda x: str(x)):
             key_text = str(key)
+            if key_text.casefold() in NON_SEMANTIC_KEYS:
+                continue
             key_pointer = f"{pointer}/{pointer_token(key_text)}"
             yield f"{key_pointer}/@key", key_text
             yield from iter_strings(node[key], key_pointer)
