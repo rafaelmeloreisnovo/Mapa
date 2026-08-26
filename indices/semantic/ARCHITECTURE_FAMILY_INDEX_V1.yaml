@@ -1,13 +1,16 @@
 schema: rafaelia.architecture-family-index/v1
-version: 1.0.0
-state: ACTIVE_SEED
+version: 1.1.0
+state: ACTIVE_DISCOVERY
 claim_allowed: false
 source_registry: data/ontology/architectures/ARCHITECTURE_FAMILY_REGISTRY_V1.yaml
+discovery_rules: data/ontology/architectures/ARCHITECTURE_DISCOVERY_RULES_V1.json
+discovery_pipeline: scripts/discover_architecture_families.py
 
 navigation_contract:
   chain: "TERM -> FAMILY -> VARIANT|MODULE|LAYER|PROTOCOL|COMMAND -> PROVENANCE -> EPISTEMIC_STATE -> GAP -> NEXT_VERIFIABLE_STEP"
   identity_rule: "NAME != IMPLEMENTATION != RUNTIME != EVIDENCE != CLAIM"
   missing_rule: "TOKEN_VAZIO != ZERO"
+  cooccurrence_rule: "CO_OCCURRENCE != CAUSATION != DEPENDENCY"
 
 by_kind:
   FRAMEWORK_FAMILY:
@@ -70,6 +73,27 @@ unresolved_tokens:
   - Teta
   - Penta
   - Supreme
+
+discovery_contract:
+  accepted_inputs:
+    - json
+    - jsonl
+    - json.gz
+    - jsonl.gz
+  recursive_directory_scan: true
+  dependencies: PYTHON_STDLIB_ONLY
+  raw_text_emission: false
+  raw_source_path_emission: false
+  deterministic_outputs:
+    - architecture_candidates.jsonl
+    - architecture_relations.jsonl
+    - architecture_summary.json
+    - architecture_receipt.json
+  relation_semantics: OBSERVED_COOCCURRENCE_NOT_CAUSATION
+  parse_error_policy: RECEIPT_AND_CONTINUE_BY_DEFAULT
+  strict_mode: --fail-on-parse-error
+  invocation: "python scripts/discover_architecture_families.py <NOVOexport paths...> --output-dir <receipt-dir>"
+  promotion_route: "candidate -> provenance review -> registry append/refine -> validation -> receipt -> independent promotion gate"
 
 promotion_gate:
   required_before_runtime_claim:
