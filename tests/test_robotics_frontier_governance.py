@@ -68,10 +68,14 @@ class RoboticsFrontierGovernanceTests(unittest.TestCase):
 
     def test_handoff_binds_exact_producer_and_does_not_fake_enrollment(self):
         handoff = load(HANDOFF)
-        self.assertEqual(handoff["producer"]["observed_commit"], "ad0de98b4cd521fa9eefb05d5aac033e95b45a65")
+        expected = "ce601dbb6b813b760a5d548ad4f5834c1a23a1d1"
+        self.assertEqual(handoff["producer"]["observed_commit"], expected)
+        self.assertEqual(handoff["producer_evidence"]["head_sha"], expected)
+        self.assertEqual(handoff["producer_evidence"]["workflow_run_id"], 33008483192)
         self.assertEqual(handoff["producer_evidence"]["conclusion"], "success")
         self.assertEqual(handoff["producer"]["formal_enrollment_in_mapa_authority_pyramid"], "TOKEN_VAZIO")
         self.assertIn("CI_success_to_legal_compliance", handoff["forbidden_promotions"])
+        self.assertIn("dated_snapshot_to_permanent_normative_truth", handoff["forbidden_promotions"])
 
     def test_dual_anchor_rotation_preserves_distance(self):
         c = (1.25, -0.75)
