@@ -1,0 +1,246 @@
+{
+  "schema": "mapa.active-repository-exact-bindings/v2-tranche2",
+  "observed_date": "2026-08-26",
+  "branch": "audit/active-repos-exact-bindings-v2-20260826",
+  "predecessor": "ACTIVE_REPOSITORY_EXACT_BINDINGS_20260826_V2.json",
+  "inventory_erratum": {
+    "v1_signal_count_S": 20,
+    "v1_priority_array_length": 18,
+    "omitted_from_priority_array": [
+      "rafaelmeloreisnovo/ZIPRAF_CORE",
+      "instituto-Rafael/RAFAELIA_CORE"
+    ],
+    "correction": "V2 canonical implementation-rich cohort is 20 repositories; the V1 total count was correct but its priority-name array omitted two entries."
+  },
+  "contract": {
+    "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "token_vazio_rule": "TOKEN_VAZIO is neither PASS nor FAIL",
+    "old_run_rule": "A workflow run on a SHA different from current HEAD is not HEAD-exact evidence.",
+    "platform_automation_rule": "Codespaces/CodeQL platform automation is not promoted to project-code CI unless its executed scope establishes that claim.",
+    "license_rule": "Presence of a file named LICENSE does not imply a standard or legally verified license; content class is recorded separately.",
+    "claim_allowed": false,
+    "release_allowed": false
+  },
+  "records": [
+    {
+      "repo": "rafaelmeloreisnovo/ZIPRAF_CORE",
+      "default_branch": "main",
+      "head_sha": "060f7f2874d8a65fb04e57321a770daab0eb2cc9",
+      "root_tree_sha": "df0777272ccea9cfd43094c7c71346ec495a6caf",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "exact_structure_observed": ["include", "src", "tests", "tools", "examples", "docs"],
+      "provenance": {"LICENSE": "404", "root_standard_license_entry": "not_observed", "state": "TOKEN_VAZIO"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Semente",
+      "default_branch": "main",
+      "head_sha": "fca23ee92d8284c089157dfd7adfba8526ac22c3",
+      "root_tree_sha": "098ed49c61f797c7e75b73415f3ba6ac219ed5bb",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "exact_structure_observed": ["RAFAELIA_ARM32_VALIDATION_STATUS.md", "RAFAELIA_BENCHMARK_EVIDENCE_PACK_v3.zip", "RAFAELIA_BENCHMARK_INDUSTRIAL_KIT_v2.zip"],
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO_REQUIRES_RECEIPT_REBIND"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/rafaelia-core-enterprise",
+      "default_branch": "fcea-auto-sync",
+      "head_sha": "de12cfb0e387bb3ddb0f7468c5b2c6d82df1b65c",
+      "root_tree_sha": "95216ee86342877045a56b18f8d317bed29d1c8f",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "exact_structure_observed": ["geolm.c", "geolm_raf.c", "Incluir.md", "fractal-fft-plotter.html", "multiple C implementation files"],
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {
+        "latest_branch_run_id": 24915603125,
+        "latest_branch_run_head_sha": "40aaea08080d005fd98d680a35b296f773903e98",
+        "current_head_sha": "de12cfb0e387bb3ddb0f7468c5b2c6d82df1b65c",
+        "run_kind": "CodeQL Setup dynamic platform automation",
+        "conclusion": "failure",
+        "state": "LATEST_RUN_NOT_HEAD_EXACT",
+        "head_execution": "TOKEN_VAZIO"
+      },
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/templo-vivo-arcs",
+      "default_branch": "main",
+      "head_sha": "ebbf8c2f5fdca7e15137f5a72091a7cf0be78ed0",
+      "root_tree_sha": "06be0a79b97ad4a7e841849b8d7514d5f6ab1b23",
+      "commit_signature_verified": false,
+      "signature_reason": "unsigned",
+      "branch_protected": false,
+      "provenance": {
+        "license_path": "LICENSE",
+        "content_class": "NONSTANDARD_MANIFEST_LICENSE",
+        "state": "CLARITY_GAP",
+        "note": "File contains manifesto/chat-style legal assertions rather than a conventional machine-identifiable license grant."
+      },
+      "ci": {
+        "latest_head_exact_run_id": 31605256704,
+        "head_exact": true,
+        "conclusion": "success",
+        "automation_path": "dynamic/codespaces/create_codespaces_prebuilds",
+        "actor": "github-codespaces[bot]",
+        "state": "PLATFORM_AUTOMATION_SUCCESS_NOT_PROJECT_CODE_CI",
+        "project_code_execution": "TOKEN_VAZIO"
+      },
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/RAFAELIA_CORE",
+      "default_branch": "main",
+      "head_sha": "5af6d636e22462611f3f28720705f7c427eac6e8",
+      "root_tree_sha": "19476a2533be1175bd2ee45029596679d83c320d",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Zrf",
+      "default_branch": "main",
+      "head_sha": "ea863fc3c096316412b611ad9c167ad4560c7edc",
+      "root_tree_sha": "2a11a37ae4fdbd2d30d8be92104f28d999ea7e2d",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Bitraf-Bit-quantum",
+      "default_branch": "main",
+      "head_sha": "cffd71e033b5231b60ad0616860a41cebfb99de8",
+      "root_tree_sha": "00a4762b19c72f2366fb31e7010a5aa7efbb3df0",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/ESTADO-FRACTAL-HAJA",
+      "default_branch": "main",
+      "head_sha": "92c592e8dc8f9af7017a35a2e778b0fc314e82b6",
+      "root_tree_sha": "75677837d21429d1f44f4cb7fb2af8bd5312ff8c",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {
+        "paths": ["LICENSE.md", "License.md"],
+        "primary_bound_path": "LICENSE.md",
+        "content_class": "LAYERED_NONCOMMERCIAL_DRAFT",
+        "documentation_license": "CC-BY-NC-SA-4.0",
+        "software_license": "PolyForm-Noncommercial-1.0.0",
+        "counsel_review": "TOKEN_VAZIO",
+        "claim_allowed_in_license": false,
+        "state": "BOUND_DRAFT_WITH_EXPLICIT_BOUNDARIES"
+      },
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Clay-Maths",
+      "default_branch": "main",
+      "head_sha": "8a15ddb77869517596ae7c43d6b2e3cb2bf42b7e",
+      "root_tree_sha": "1f72cd9fe0fd65439109cdb580fe88c0116afc9c",
+      "commit_signature_verified": false,
+      "signature_reason": "unsigned",
+      "branch_protected": false,
+      "exact_structure_observed": ["core_fractal_universe.py", "experiments", "docs", "License.md"],
+      "provenance": {
+        "license_path": "License.md",
+        "content_class": "CONFLICTING_NONSTANDARD_LICENSE",
+        "state": "CLARITY_GAP",
+        "note": "Document mixes RAFCODE/Sovereign restrictions with a generic AGPL reference; no automatic SPDX promotion is authorized."
+      },
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "scientific_claim_boundary": "Millennium/Clay solution claims remain unestablished",
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Atomic_EX_WASTE",
+      "default_branch": "main",
+      "head_sha": "ae9ee346de3da960d33878bcd073224eec1a61e5",
+      "root_tree_sha": "20b2cafc8b13bdab7bc5bee16dc2901a0a8e1bdd",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Eletron-efeitos-qu-ntico",
+      "default_branch": "main",
+      "head_sha": "3451046fc01ab4534818f4dd63e6d63b3bfe16bd",
+      "root_tree_sha": "b8d803db0fe01241705045b2b85e1190ccaba6b3",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "experimental_claim_boundary": "quantum/physical claims are not promoted from code/document presence",
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Whilehole",
+      "default_branch": "main",
+      "head_sha": "08798d8daa63a15371515ae998bd1fd83d7dbfeb",
+      "root_tree_sha": "24e3ca3c6e4585c7b26daaa737d79641c3092b1b",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {"LICENSE": "404", "state": "TOKEN_VAZIO_STANDARD_PATH"},
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Etica-nas-Intelig-ncia-artificial-",
+      "default_branch": "main",
+      "head_sha": "ebc3cf5073ed3e2f95b22f22bf4fd1c08d056f39",
+      "root_tree_sha": "4fa6bbb647f81e71c8d6740febc204044e724331",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {
+        "license_path": "LICENSE",
+        "content_class": "MIT_CORE_WITH_APPENDED_NONLICENSE_CONTENT",
+        "state": "BOUND_WITH_CLARITY_GAP",
+        "note": "A complete MIT grant appears first, followed by unrelated parable/symbolic material in the same file."
+      },
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    },
+    {
+      "repo": "instituto-Rafael/Unify_Teory_of_mission_holly_espiritual_ciencias_",
+      "default_branch": "main",
+      "head_sha": "ac303f5626e0218a2b07301b86738cdaa16cd2d8",
+      "root_tree_sha": "d6d896e50fad5ef29330375e6178a3d15276bc82",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "provenance": {
+        "license_path": "LICENSE",
+        "content_class": "NONSTANDARD_SYMBOLIC_RESTRICTION_TEXT",
+        "state": "CLARITY_GAP"
+      },
+      "ci": {"branch_runs_observed": 0, "state": "EXECUTION_UNOBSERVED", "head_execution": "TOKEN_VAZIO"},
+      "runtime_empirical": "TOKEN_VAZIO"
+    }
+  ],
+  "cohort_closure": {
+    "v2_tranche1_exact_head_tree": 6,
+    "v2_tranche2_exact_head_tree": 14,
+    "implementation_rich_total": 20,
+    "exact_head_tree_bound": "20/20",
+    "exact_head_tree_coverage": 1.0,
+    "default_branch_protected_observed": "0/20",
+    "tranche2_head_exact_project_ci_pass": 0,
+    "tranche2_platform_automation_success_head_exact": 1,
+    "tranche2_latest_run_not_head_exact": 1,
+    "tranche2_zero_branch_runs": 12,
+    "runtime_empirical_promotions": 0
+  },
+  "remaining_gate": "Exact HEAD/tree identity is closed for the 20 implementation-rich repositories. Provenance clarity and executable current-tree receipts remain heterogeneous; next phase must bind or run repo-specific tests/receipts/runtime without transferring historical evidence to current HEAD."
+}
