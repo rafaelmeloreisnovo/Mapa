@@ -1,0 +1,267 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_id": "RNE-20260826-V1",
+  "checked_at": "2026-08-26T20:00:00-03:00",
+  "state": "CURRENT_BOUNDED",
+  "purpose": "Track legal, regulatory and technical-reference evolution affecting Robotics governance without silently promoting guidance into law or stale material into current authority.",
+  "invariants": [
+    "SOURCE_IDENTITY_REQUIRED",
+    "AUTHORITY_TYPE_REQUIRED",
+    "VERSION_OR_DATE_REQUIRED",
+    "GUIDANCE != LAW",
+    "STANDARD != STATUTE",
+    "CERTIFICATION != UNIVERSAL_COMPLIANCE",
+    "STALE != CURRENT",
+    "SUPERSEDED != ACTIVE",
+    "TOKEN_VAZIO != FALSE",
+    "NORMATIVE_CHANGE_REOPENS_AFFECTED_GATES"
+  ],
+  "authority_types": [
+    "CONSTITUTION",
+    "STATUTE",
+    "REGULATION",
+    "REGULATOR_DECISION",
+    "COURT_DECISION",
+    "TREATY",
+    "TECHNICAL_STANDARD",
+    "BEST_CURRENT_PRACTICE",
+    "FRAMEWORK",
+    "GUIDANCE",
+    "CERTIFICATION_SCHEME",
+    "CONTRACT",
+    "INTERNAL_POLICY"
+  ],
+  "sources": [
+    {
+      "id": "BR-LGPD-13709",
+      "authority_type": "STATUTE",
+      "title": "Lei 13.709/2018 - LGPD, texto compilado",
+      "authority": "Presidencia da Republica / legislacao federal",
+      "effective_state": "ACTIVE",
+      "source_url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "scope": ["personal_data", "automated_processing", "rights", "security", "governance"],
+      "revalidate_on": ["legislative_amendment", "court_precedent_material_to_scope", "ANPD_regulation_material_to_scope"]
+    },
+    {
+      "id": "BR-ANPD-R15-2024",
+      "authority_type": "REGULATION",
+      "title": "Resolução CD/ANPD nº 15/2024 - Comunicação de Incidente de Segurança",
+      "authority": "ANPD",
+      "effective_state": "ACTIVE",
+      "source_url": "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd",
+      "scope": ["security_incident", "notification", "accountability"]
+    },
+    {
+      "id": "BR-ANPD-R18-2024",
+      "authority_type": "REGULATION",
+      "title": "Resolução CD/ANPD nº 18/2024 - Atuação do Encarregado",
+      "authority": "ANPD",
+      "effective_state": "ACTIVE",
+      "source_url": "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd",
+      "scope": ["dpo", "data_subject_channel", "governance"]
+    },
+    {
+      "id": "BR-ANPD-R19-2024",
+      "authority_type": "REGULATION",
+      "title": "Resolução CD/ANPD nº 19/2024 - Transferência Internacional de Dados",
+      "authority": "ANPD",
+      "effective_state": "ACTIVE_WITH_2025_RECTIFICATION",
+      "source_url": "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no-19-de-23-de-agosto-de-2024",
+      "scope": ["international_transfer", "standard_contractual_clauses", "adequacy", "global_corporate_rules"]
+    },
+    {
+      "id": "BR-ECA-DIGITAL-15211-2025",
+      "authority_type": "STATUTE",
+      "title": "Lei 15.211/2025 - Estatuto Digital da Criança e do Adolescente",
+      "authority": "Presidencia da Republica / legislacao federal",
+      "effective_state": "ACTIVE_FROM_2026-03-17",
+      "source_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/_leis2025.htm",
+      "scope": ["children", "adolescents", "digital_platforms", "age_assurance", "parental_supervision", "advertising"]
+    },
+    {
+      "id": "BR-LAW-15352-2026",
+      "authority_type": "STATUTE",
+      "title": "Lei 15.352/2026 - ANPD como agência e vigência do ECA Digital",
+      "authority": "Presidencia da Republica / legislacao federal",
+      "effective_state": "ACTIVE",
+      "source_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/l15352.htm",
+      "scope": ["ANPD_institutional_status", "ECA_Digital_effective_date"]
+    },
+    {
+      "id": "BR-ANPD-R30-2025",
+      "authority_type": "REGULATION",
+      "title": "Resolução CD/ANPD nº 30/2025 - Mapa de Temas Prioritários 2026-2027",
+      "authority": "ANPD",
+      "effective_state": "ACTIVE",
+      "source_url": "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd",
+      "scope": ["data_subject_rights", "children", "public_sector", "AI_emerging_technologies"]
+    },
+    {
+      "id": "BR-ANPD-R31-2025",
+      "authority_type": "REGULATION",
+      "title": "Resolução CD/ANPD nº 31/2025 - Agenda Regulatória 2025-2026 atualizada",
+      "authority": "ANPD",
+      "effective_state": "ACTIVE",
+      "source_url": "https://www.gov.br/anpd/pt-br/assuntos/regulacao/agenda-regulatoria-1/agenda-regulatoria-2025-2026",
+      "scope": ["rights", "RIPD", "biometrics", "security", "AI", "high_risk_processing", "governance", "age_assurance"]
+    },
+    {
+      "id": "BR-ANPD-R32-2026",
+      "authority_type": "REGULATOR_DECISION",
+      "title": "Resolução CD/ANPD nº 32/2026 - Adequação da União Europeia",
+      "authority": "ANPD",
+      "effective_state": "ACTIVE",
+      "source_url": "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd",
+      "scope": ["international_transfer", "EU_adequacy"]
+    },
+    {
+      "id": "BR-ANPD-ECA-IMPLEMENTATION-2026",
+      "authority_type": "GUIDANCE",
+      "title": "ANPD - ECA Digital implementation plan",
+      "authority": "ANPD",
+      "effective_state": "CURRENT_2026",
+      "source_url": "https://www.gov.br/anpd/pt-br/assuntos/eca-digital",
+      "scope": ["age_assurance", "adaptation_window_Aug_Nov_2026", "future_enforcement_2027"]
+    },
+    {
+      "id": "EU-AI-ACT-2024-1689-2026-1744",
+      "authority_type": "REGULATION",
+      "title": "EU AI Act Regulation 2024/1689 as timing modified by Regulation 2026/1744",
+      "authority": "European Union",
+      "effective_state": "PHASED_APPLICATION",
+      "source_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32026R1744",
+      "scope": ["AI_governance", "prohibited_practices", "GPAI", "transparency", "high_risk_AI"],
+      "timeline": {
+        "general_application": "2026-08-02",
+        "annex_III_high_risk": "2027-12-02",
+        "annex_I_product_high_risk": "2028-08-02"
+      }
+    },
+    {
+      "id": "ISO-IEC-27701-2025",
+      "authority_type": "TECHNICAL_STANDARD",
+      "title": "ISO/IEC 27701:2025",
+      "authority": "ISO/IEC",
+      "effective_state": "PUBLISHED_EDITION_2",
+      "source_url": "https://www.iso.org/standard/27701",
+      "scope": ["privacy_information_management"]
+    },
+    {
+      "id": "ISO-14001-2026",
+      "authority_type": "TECHNICAL_STANDARD",
+      "title": "ISO 14001:2026",
+      "authority": "ISO",
+      "effective_state": "PUBLISHED_EDITION_4",
+      "source_url": "https://www.iso.org/standard/14001",
+      "scope": ["environmental_management"]
+    },
+    {
+      "id": "ISO-IEC-42001-2023",
+      "authority_type": "TECHNICAL_STANDARD",
+      "title": "ISO/IEC 42001:2023",
+      "authority": "ISO/IEC",
+      "effective_state": "PUBLISHED",
+      "source_url": "https://www.iso.org/standard/42001",
+      "scope": ["AI_management_system"]
+    },
+    {
+      "id": "ISO-8000-1-2022",
+      "authority_type": "TECHNICAL_STANDARD",
+      "title": "ISO 8000-1:2022",
+      "authority": "ISO",
+      "effective_state": "PUBLISHED_CONFIRMED",
+      "source_url": "https://www.iso.org/standard/81745.html",
+      "scope": ["data_quality"]
+    },
+    {
+      "id": "NIST-AI-RMF-1.0",
+      "authority_type": "FRAMEWORK",
+      "title": "NIST AI Risk Management Framework 1.0",
+      "authority": "NIST",
+      "effective_state": "CURRENT_LIVING_FRAMEWORK",
+      "source_url": "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf",
+      "scope": ["AI_risk_management"]
+    },
+    {
+      "id": "IEEE-7000-SERIES",
+      "authority_type": "TECHNICAL_STANDARD",
+      "title": "IEEE 7000-series relevant active standards",
+      "authority": "IEEE Standards Association",
+      "effective_state": "ACTIVE_REFERENCES",
+      "source_url": "https://standards.ieee.org/sitemap/",
+      "scope": ["ethical_design", "privacy", "algorithmic_bias", "robotics_ontology", "fail_safe"]
+    },
+    {
+      "id": "RFC-6973",
+      "authority_type": "GUIDANCE",
+      "title": "RFC 6973 - Privacy Considerations for Internet Protocols",
+      "authority": "IAB/RFC Editor",
+      "effective_state": "INFORMATIONAL",
+      "source_url": "https://www.rfc-editor.org/info/rfc6973/",
+      "scope": ["protocol_privacy", "data_minimization", "user_participation"]
+    },
+    {
+      "id": "RFC-3552",
+      "authority_type": "BEST_CURRENT_PRACTICE",
+      "title": "RFC 3552 / BCP 72 - Security Considerations",
+      "authority": "IAB/RFC Editor",
+      "effective_state": "BCP_UPDATED_BY_LATER_RFCS",
+      "source_url": "https://www.rfc-editor.org/info/rfc3552/",
+      "scope": ["protocol_security", "threat_scope", "attack_analysis"]
+    }
+  ],
+  "normative_change_protocol": {
+    "triggers": [
+      "new_statute_or_amendment",
+      "new_regulation_or_regulator_decision",
+      "court_decision_material_to_scope",
+      "standard_new_edition_or_withdrawal",
+      "certification_expiry_or_scope_change",
+      "official_guidance_material_change",
+      "jurisdiction_or_processing_purpose_change"
+    ],
+    "procedure": [
+      "capture_source_identity_and_timestamp",
+      "compare_against_previous_snapshot",
+      "classify_authority_type",
+      "identify_affected_claims_controls_and_contracts",
+      "mark_superseded_material_without_deletion",
+      "reopen_impacted_gates",
+      "run_non_regression_tests",
+      "append_receipt",
+      "promote_only_with_evidence"
+    ],
+    "default_on_conflict_or_unknown": "TOKEN_VAZIO_FAIL_CLOSED"
+  },
+  "urgencies": {
+    "P0": [
+      "server_side_main_branch_protection_missing_in_Mapa",
+      "independent_promotion_approval_missing_in_Mapa",
+      "prevent_runtime_or_claim_promotion_without_authority_and_evidence"
+    ],
+    "P1": [
+      "UGC_schema_and_tests",
+      "bind_LGPD_crosswalk_exact_commit",
+      "normative_provenance_and_staleness_registry",
+      "formal_producer_handoff_contract_without_premature_enrollment"
+    ],
+    "P2": [
+      "bind_runtime_producer",
+      "emit_runtime_receipt",
+      "independent_privacy_security_review",
+      "user_comprehension_and_accessibility_testing"
+    ],
+    "P3": [
+      "economic_systemic_hypotheses",
+      "market_concentration_and_lock_in_studies",
+      "mechanical_or_physical_claims_of_geometric_model"
+    ]
+  },
+  "open_tokens": [
+    {"id": "TV-RUG-RUNTIME", "state": "TOKEN_VAZIO", "f_next": "Bind a producer repository and exact implementation path/version."},
+    {"id": "TV-RUG-INDEPENDENT-REVIEW", "state": "TOKEN_VAZIO", "f_next": "Obtain independent privacy/security review with bounded scope."},
+    {"id": "TV-RUG-USER-STUDY", "state": "TOKEN_VAZIO", "f_next": "Run comprehension/accessibility study against measurable criteria."},
+    {"id": "TV-RUG-JURISDICTION", "state": "TOKEN_VAZIO", "f_next": "Resolve jurisdiction-specific conflict-of-laws only for declared deployment contexts."},
+    {"id": "TV-RUG-MAPA-PRODUCER-ENROLLMENT", "state": "TOKEN_VAZIO", "f_next": "Amend authority pyramid/topology through dedicated gate and independent approval."}
+  ]
+}
