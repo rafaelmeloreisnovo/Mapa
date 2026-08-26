@@ -1,0 +1,26 @@
+schema: rafaelia_active_routing_pointer_v1
+updated: '2026-08-25'
+state: ACTIVE
+
+authority_order:
+  - ROUTE_DENYLIST_ILLICIT_USE.yaml
+  - BACKLOG_ACERVO.yaml
+
+legacy_snapshots:
+  - path: INDICE_DINAMICO_111_REPOS.yaml
+    state: HISTORICAL_SNAPSHOT_READ_ONLY
+    route_authority: false
+    reason: 'Snapshot legado; pode conter rotas tombstonadas ou metadados obsoletos.'
+
+rules:
+  - 'denylist sempre precede catálogo, backlog, índice e memória'
+  - 'tombstone nunca volta à rota por aparecer em snapshot histórico'
+  - 'TOKEN_VAZIO => route_allowed=false até revisão semântica'
+  - 'evidência jurídica e ciência neutra podem ser preservadas sem virar rota de uso/consumo'
+
+active_counts:
+  historical_snapshot_known: 111
+  governance_tombstones: 1
+  active_known: 110
+  cataloged: 28
+  pending_active: 82
