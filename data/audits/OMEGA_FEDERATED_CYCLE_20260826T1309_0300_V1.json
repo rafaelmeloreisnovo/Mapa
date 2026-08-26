@@ -1,0 +1,123 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE_V1",
+  "cycle_id": "OMEGA-CYCLE-20260826T1309-0300-015",
+  "observed_at": "2026-08-26T13:09:17-03:00",
+  "predecessor": "Mapa/main@83bea8eb99e4d503a3711430dee22cd524a0171a",
+  "claim_allowed": false,
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "sources": [
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "role": "METHOD"
+    },
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1xhP6CJZsaLoqPokHvGuuWlvathVS5UKLejgFo9S2J9U",
+      "title": "RAFAELIA_CURRENT_RAW_PID_INDEX_000_050_EXCEPT_018.v5",
+      "role": "CURRENT_PID_INDEX",
+      "observed_metadata": {"rows":4955,"columns":10,"updated_at":"2026-08-22T09:09:25.849Z"}
+    },
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "title": "RAFAELIA — NOVOexport Raw 018 Wave 3 — PID Hash Reconciliation — 2026-08-24",
+      "role": "RAW018_PID_RECONCILIATION"
+    },
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1j9c-ocHSqV4uXaD1HAvOYWKdrkYMNbp69fdI6BHdMSo",
+      "title": "RAFAELIA — NOVOexport Raw 018 Wave 2 — Physical Inventory & Provider Gap — 2026-08-24",
+      "role": "RAW018_PROVIDER_GAP"
+    }
+  ],
+  "cursor": {
+    "before": "50/51 current provider/PID/SHA/cardinality indexed; RAW018 isolated",
+    "after": "PID-index structure directly inspected around shard boundary 17→19; RAW018 absence independently evidenced by ordinal discontinuity"
+  },
+  "observations": [
+    {
+      "id": "OBS-PID-INDEX-SCHEMA",
+      "state": "OBSERVED",
+      "evidence": "sheet header directly read",
+      "fields": ["raw_shard","conversation_pid_sha256","historical_locator_match","source_provider_id","source_sha256","identity_method","raw_id_persisted","evidence_class"]
+    },
+    {
+      "id": "OBS-RAW018-ORDINAL-GAP",
+      "state": "OBSERVED",
+      "evidence": "bounded row read A1701:H1905 transitions from raw_shard=17 directly to raw_shard=19; no raw_shard=18 row in inspected transition window",
+      "interpretation": "supports the dataset title EXCEPT_018 and prior RAW018 provider-gap receipts; does not prove nonexistence outside this index"
+    },
+    {
+      "id": "OBS-EVIDENCE-CLASS",
+      "state": "OBSERVED",
+      "evidence": "rows for shards 17 and 19 carry evidence_class=RAW_PROVIDER_SHA_JSON_PARSE with stable source_provider_id/source_sha256 per shard",
+      "interpretation": "the index is evidence-bearing metadata, not merely a filename list"
+    },
+    {
+      "id": "OBS-RAW-ID-PERSISTED",
+      "state": "OBSERVED",
+      "evidence": "raw_id_persisted=false in directly inspected rows",
+      "interpretation": "conversation identity is represented by privacy-preserving SHA256 canonical IDs rather than persisted raw conversation IDs"
+    }
+  ],
+  "coverage": {
+    "before": {"current_provider_pid_sha_cardinality_indexed":"50/51"},
+    "after": {"current_provider_pid_sha_cardinality_indexed":"50/51","direct_schema_inspection":"added","raw018_ordinal_absence_in_v5":"directly_observed"},
+    "promotion": false
+  },
+  "uncertainty": {
+    "before": "RAW018 current provider/bytes/SHA/parse TOKEN_VAZIO; CURRENT_PID_INDEX_V5 provenance/revision not directly inspected",
+    "after": "RAW018 current provider/bytes/SHA/parse still TOKEN_VAZIO; index structure and ordinal exclusion directly inspected; revision lineage/hash of native Sheet still pending",
+    "direction": "decreased_without_claim_promotion"
+  },
+  "gaps": [
+    {
+      "gap_id": "TV-RAW018-CURRENT-CUSTODY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:1j9c-ocHSqV4uXaD1HAvOYWKdrkYMNbp69fdI6BHdMSo + 1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "missing_field": ["current_provider_id","current_byte_stream","current_sha256","current_json_parse"],
+      "blocking_dependency": "observable current raw object/container",
+      "evidence_needed": "provider object + exact 12115336-byte witness + SHA256 + JSON parse + PID-set reconciliation",
+      "falsifier": "byte length, parse, or PID-set digest mismatch",
+      "next_probe": "search provider/container aliases for conversations-018.json and bind exact object identity before download/rehash",
+      "owner_authority": "Drive raw export custody",
+      "urgency": "P0",
+      "closure_gate": "identity→12115336 bytes→SHA256→JSON parse→PID-set reconciliation",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1214-0300-014"
+    },
+    {
+      "gap_id": "TV-PID-INDEX-V5-REVISION-CUSTODY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:1xhP6CJZsaLoqPokHvGuuWlvathVS5UKLejgFo9S2J9U",
+      "missing_field": ["revision_lineage","content_digest_of_export"],
+      "blocking_dependency": "revision enumeration/export digest",
+      "evidence_needed": "revision IDs + observed timestamps/authorship where available + deterministic exported-content digest",
+      "falsifier": "revision/export content diverges from indexed state assumed by coverage receipts",
+      "next_probe": "enumerate revisions then hash/export a bounded deterministic representation or receipt",
+      "owner_authority": "Drive index custody",
+      "urgency": "P1",
+      "closure_gate": "revision identity→export representation→digest→receipt",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1214-0300-014"
+    }
+  ],
+  "memory_projection": {
+    "L": "v5 index observed after historical 0078/0079 and before RAW018 Wave2/Wave3 receipts; no rewrite of predecessors",
+    "O": "direct bounded Sheet read independently supports title-level EXCEPT_018 claim",
+    "T": "Drive index ↔ RAW018 receipts ↔ Mapa audit receipt",
+    "C": "50/51 metric remains index/custody metadata coverage, not semantic ingestion or scientific validation",
+    "P": "provider IDs, repository predecessor and immutable audit path recorded append-only"
+  },
+  "top_urgencies": ["P0 TV-RAW018-CURRENT-CUSTODY","P1 TV-PID-INDEX-V5-REVISION-CUSTODY"],
+  "next_probes": [
+    "enumerate revision lineage for CURRENT_RAW_PID_INDEX v5",
+    "search RAW018 aliases/container/provider identity without inferring from title",
+    "only after exact provider binding: verify 12115336 bytes, SHA256, JSON parse and PID-set reconciliation"
+  ],
+  "F_ok": "PID index schema and 17→19 ordinal discontinuity directly observed; RAW018 exclusion strengthened without artificial coverage promotion",
+  "F_gap": "RAW018 current custody + v5 revision/export digest lineage",
+  "F_next": "revision lineage v5 → RAW018 provider binding → byte/hash/parse/PID closure gate"
+}
