@@ -1,7 +1,7 @@
 schema: rafaelia_semantic_index_root_v1
 version: 1.0.0
 state: ACTIVE_SEED
-purpose: "Stable discovery root for mascot, incremental, and indexer semantics."
+purpose: "Stable discovery root for mascot, incremental, indexer, and architecture-family semantics."
 
 registries:
   mascot_roles: data/ontology/mascots/MASCOT_ROLE_REGISTRY_V1.yaml
@@ -9,6 +9,8 @@ registries:
   incremental_graph: indices/semantic/INCREMENTAL_SEMANTIC_GRAPH_INDEX_V1.yaml
   indexer_roles: control-plane/indexers/INDEXER_ROLE_REGISTRY_V1.yaml
   semantic_boundaries: governance/semantics/SEMANTIC_BOUNDARIES_V1.yaml
+  architecture_families: data/ontology/architectures/ARCHITECTURE_FAMILY_REGISTRY_V1.yaml
+  architecture_family_index: indices/semantic/ARCHITECTURE_FAMILY_INDEX_V1.yaml
 
 incremental_nodes:
   first_confirmed: INC-000001
@@ -24,4 +26,5 @@ external_memory:
 navigation:
   canonical_chain: "MASCOT <-> CONCEPT <-> INDEX -> INDEXER -> ROUTE -> AGENT -> AUTHORITY -> GATE -> RECEIPT"
   incremental_chain: "INC-ID -> SUBJECT|TAG|ENTITY -> TYPED_EDGE -> SURFACE_POINTER -> AUTHORITY_ROUTE -> EVIDENCE_STATE"
+  architecture_chain: "TERM -> FAMILY -> VARIANT|MODULE|LAYER|PROTOCOL|COMMAND -> PROVENANCE -> EPISTEMIC_STATE -> GAP -> NEXT_VERIFIABLE_STEP"
   claim_allowed_default: false
