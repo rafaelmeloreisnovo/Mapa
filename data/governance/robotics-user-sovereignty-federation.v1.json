@@ -1,13 +1,13 @@
 {
-  "schema_version": "1.1.0",
-  "state": "PROPOSED_IMPLEMENTED_CONTRACTS_PENDING_PROMOTION",
+  "schema_version": "1.2.0",
+  "state": "PROPOSED_IMPLEMENTED_TESTED_PENDING_PROMOTION",
   "authority": {
     "mapa_repo": "rafaelmeloreisnovo/Mapa",
     "mapa_observed_commit": "8e2f3933e5d49cab7e36a1bbc4acbb8a4116952e",
     "role": "federation_authority",
     "lgpd_repo": "instituto-Rafael/LGPD-Constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic",
     "lgpd_ref": "feat/robotics-information-governance-v1",
-    "lgpd_observed_commit": "ad0de98b4cd521fa9eefb05d5aac033e95b45a65",
+    "lgpd_observed_commit": "ce601dbb6b813b760a5d548ad4f5834c1a23a1d1",
     "lgpd_role": "proposed_legal_privacy_normative_research_producer",
     "formal_lgpd_producer_enrollment": "TOKEN_VAZIO"
   },
@@ -39,7 +39,26 @@
     "lgpd_handoff": "data/governance/robotics-lgpd-handoff-contract.v1.json",
     "dual_anchor_geometry": "data/governance/robotics-dual-anchor-octant-geometry.v1.json",
     "frontier_research_program": "docs/governance/CGEN_FRONTIER_RESEARCH_PROGRAM_V1.md",
-    "tests": "tests/test_robotics_frontier_governance.py"
+    "tests": "tests/test_robotics_frontier_governance.py",
+    "workflow": ".github/workflows/robotics-frontier-governance.yml"
+  },
+  "test_evidence": {
+    "workflow_name": "Robotics Frontier Governance",
+    "workflow_run_id": 33008876717,
+    "tested_head": "18d009ed60dc920802467f7b0c561afe8c9a67f0",
+    "status": "completed",
+    "conclusion": "success",
+    "scope": "machine-readable contract syntax, UGC invariants, bounded normative snapshot assertions, exact LGPD handoff identity, dual-anchor/octant/two-square/cube-hexagon mathematical tests, and preservation of unproved claims as TOKEN_VAZIO or FAIL",
+    "not_proved": [
+      "runtime_Robotics_behavior",
+      "legal_compliance_for_a_concrete_deployment",
+      "independent_assurance",
+      "user_comprehension",
+      "mechanical_optimality",
+      "pi_over_phi_implementation_equivalence",
+      "formal_LGPD_producer_enrollment",
+      "promotion_authorization"
+    ]
   },
   "user_governance_capsule_required_fields": [
     "ugc_id",
@@ -116,25 +135,26 @@
     "default_state": "TOKEN_VAZIO"
   },
   "geometry_boundary": {
-    "dual_anchor_rotation": "THEOREM",
-    "octant_8_to_4_antipodal_quotient": "THEOREM",
-    "two_rotated_squares_to_octagon_vertices": "THEOREM",
-    "cube_center_plane_to_regular_hexagon": "THEOREM",
+    "dual_anchor_rotation": "THEOREM_TESTED",
+    "octant_8_to_4_antipodal_quotient": "THEOREM_TESTED",
+    "two_rotated_squares_to_octagon_vertices": "THEOREM_TESTED",
+    "cube_center_plane_to_regular_hexagon": "THEOREM_TESTED",
     "hexagon_mechanical_optimality": "TOKEN_VAZIO",
     "sqrt3_over_2_radial_route": "PASS_NUMERIC_LIMITED",
     "pi_over_phi_angular_equivalence": "FAIL_NOT_SAME_FORM"
   },
   "gates": {
     "G-RUG-01_mapa_authority_inheritance": "PASS_DOCUMENTED",
-    "G-RUG-02_ugc_schema_implemented": "IMPLEMENTED_PENDING_CI",
-    "G-RUG-03_lgpd_crosswalk_linked": "IMPLEMENTED_BOUND_PENDING_CI",
+    "G-RUG-02_ugc_schema_implemented": "PASS_IMPLEMENTED_TESTED",
+    "G-RUG-03_lgpd_crosswalk_linked": "PASS_DOCUMENTED_BOUND_TESTED",
     "G-RUG-04_runtime_repo_bound": "TOKEN_VAZIO",
     "G-RUG-05_runtime_receipt_demonstrated": "TOKEN_VAZIO",
     "G-RUG-06_independent_review": "TOKEN_VAZIO",
     "G-RUG-07_user_comprehension_test": "TOKEN_VAZIO",
     "G-RUG-08_jurisdiction_legal_review": "TOKEN_VAZIO",
-    "G-RUG-09_normative_evolution_registry": "IMPLEMENTED_PENDING_CI",
-    "G-RUG-10_geometry_formalization": "IMPLEMENTED_PENDING_CI",
-    "G-RUG-11_formal_lgpd_producer_enrollment": "TOKEN_VAZIO"
+    "G-RUG-09_normative_evolution_registry": "PASS_IMPLEMENTED_TESTED",
+    "G-RUG-10_geometry_formalization": "PASS_IMPLEMENTED_TESTED_BOUNDED",
+    "G-RUG-11_formal_lgpd_producer_enrollment": "TOKEN_VAZIO",
+    "G-RUG-12_promotion_authorization": "BLOCKED_BY_REPOSITORY_GOVERNANCE"
   }
 }
