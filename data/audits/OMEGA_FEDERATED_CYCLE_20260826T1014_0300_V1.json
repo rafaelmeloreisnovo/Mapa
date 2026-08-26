@@ -1,0 +1,20 @@
+{
+  "cycle_id":"OMEGA-CYCLE-20260826T1014-0300-012",
+  "predecessor":"Mapa/main@83bea8eb99e4d503a3711430dee22cd524a0171a",
+  "claim_allowed":false,
+  "contract":"SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "source_receipt":{"repo":"rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE","ref":"b343cac4636f1d100e1ff63d6cc081ffe96411c7","path":"auditoria/RAFAELIA_RAW_CONVERSATIONS_019_027_PROVIDER_SHA_CLOSURE_20260814.md"},
+  "drive_witness":{"id":"1AqVqs9GhmItGj8myvDFhvhSMyWruMXSeuaC4ml344oM","title":"RAFAELIA — Current Export PID Bridge 000–027 except 018 — CHECKPOINT_0078 — 2026-08-14"},
+  "reconciled":{"raw_range":"019..027","files":9,"bytes":145027742,"objects":900,"json_parse":"9/9 PASS","provider_bound":"9/9","sha256_bound":"9/9"},
+  "closed_gaps":["EXPORT_PATH_TO_PROVIDER_FILEID_019_027","BYTE_ACCESS_PROVIDER_019_027","CONTENT_SHA256_019_027","RAW_JSON_VALIDITY_019_027","RAW_CONVERSATION_OBJECT_COUNT_019_027"],
+  "invariant":"derived shard ordinal != raw conversation source ordinal",
+  "coverage":{"before_current_byte_hash":"31/51","after_current_byte_hash":"40/51","after_percent":78.43137254901961,"semantic_ingest_changed":false},
+  "open_gaps":[
+    {"gap_id":"TV-RAW018-CURRENT-CUSTODY","missing_field":"provider+bytes+sha256+parse","evidence_needed":"exact raw identity and bytes; filename alone insufficient","next_probe":"historical path/container/provider aliases","urgency":"P0","claim_allowed":false},
+    {"gap_id":"TV-RAW019-027-TO-DERIVED-TRANSFORM","missing_field":"generator/source_pointer joins","evidence_needed":"producer evidence binding raw to derived outputs","next_probe":"producer manifests/code","urgency":"P0","claim_allowed":false}
+  ],
+  "next_probes":["RAW018 alias/path custody probe","raw019..027 producer transform join","bulk current custody 041..050"],
+  "F_ok":"019..027 current provider-byte-SHA structural custody reconciled from authoritative receipt",
+  "F_gap":"018 current custody; raw-to-derived transform lineage; 041..050 current custody",
+  "F_next":"018 probe + transform join + 041..050 bulk"
+}
