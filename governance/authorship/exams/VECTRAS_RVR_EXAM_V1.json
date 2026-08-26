@@ -1,0 +1,29 @@
+{
+  "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
+  "track": "T3_VECTRAS_RVR",
+  "observed_ref": "38b9faacf09eee998487f8f08674bc5305697a52",
+  "state": "CLEANROOM_PROTOCOL_PRESENT_EXECUTION_PARTIAL",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "observed_evidence": [
+    "AUTHORSHIP_CLEANROOM_PLAN.md defines forensic inventory, A/B/C/D classification, quarantine, specification-first, independent implementation, similarity review, license consolidation and release gate"
+  ],
+  "findings": [
+    {
+      "id": "T3.F1",
+      "status": "BACKLOG_OPEN",
+      "finding": "the clean-room document defines required controls but its own minimum backlog remains unchecked",
+      "effect": "protocol presence is not evidence that RVR modules have reached clean-room verified state"
+    }
+  ],
+  "exams": [
+    {"id":"T3.E1","name":"forensic_inventory","status":"TOKEN_VAZIO","pass":"candidate distribution has path/hash/type/origin/license/risk/status ledger"},
+    {"id":"T3.E2","name":"quarantine","status":"TOKEN_VAZIO","pass":"all C/D code/assets/binaries excluded from implementation workspace and release candidate"},
+    {"id":"T3.E3","name":"spec_before_implementation","status":"TOKEN_VAZIO","pass":"spec hash/timestamp predates implementation ref for each E candidate"},
+    {"id":"T3.E4","name":"independent_implementation","status":"TOKEN_VAZIO","pass":"implementation receipt binds only permitted specification sources"},
+    {"id":"T3.E5","name":"dissimilarity_provenance_review","status":"TOKEN_VAZIO","pass":"review method/findings/reviewer/falsifier recorded without treating similarity as sole proof"},
+    {"id":"T3.E6","name":"acceptance_runtime","status":"TOKEN_VAZIO","pass":"independent acceptance tests plus runtime receipt close"},
+    {"id":"T3.E7","name":"release_legal_brand","status":"TOKEN_VAZIO","pass":"NOTICE/licenses/source obligations and trademark/name state closed"}
+  ],
+  "next": "execute forensic inventory and quarantine before any RVR implementation is promoted to class E"
+}
