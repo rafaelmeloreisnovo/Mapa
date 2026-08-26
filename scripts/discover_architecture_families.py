@@ -3,6 +3,7 @@
 
 Evidence-first boundaries:
 - recursively reads JSON/JSONL, including gzip variants;
+- top-level JSON arrays are treated as independent records, not one mega-record;
 - default outputs never contain source text or source paths;
 - known aliases become source-bound candidates, never runtime claims;
 - unknown structural contexts become TOKEN_VAZIO structural orphans;
@@ -100,6 +101,12 @@ def iter_strings(node: Any, pointer: str = "$") -> Iterator[tuple[str, str]]:
 
 
 def iter_records(path: Path) -> Iterator[tuple[str, Any]]:
+    """Yield independent source records without inventing cross-record relations.
+
+    JSONL: each non-empty line is one record.
+    JSON list: each top-level item is one record (ChatGPT exports commonly use this).
+    JSON object/scalar: the document is one record.
+    """
     name = path.name.casefold()
     if name.endswith(".jsonl") or name.endswith(".jsonl.gz"):
         with open_text(path) as handle:
@@ -108,8 +115,14 @@ def iter_records(path: Path) -> Iterator[tuple[str, Any]]:
                     continue
                 yield f"line:{line_no}", json.loads(line)
         return
+
     with open_text(path) as handle:
-        yield "document", json.load(handle)
+        root = json.load(handle)
+    if isinstance(root, list):
+        for index, record in enumerate(root):
+            yield f"item:{index}", record
+    else:
+        yield "document", root
 
 
 def compile_rules(rules_path: Path):
@@ -206,7 +219,6 @@ def scan(
 
     for file_index, path in enumerate(files, 1):
         file_sha = sha256_file(path)
-        # Content-bound source IDs are private-path independent and reproducible.
         source_id = file_sha[:24]
         inventory.append({
             "ordinal": file_index,
