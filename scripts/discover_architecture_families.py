@@ -2,7 +2,7 @@
 """Deterministic, dependency-free NOVOexport architecture-family discovery.
 
 Evidence-first boundaries:
-- recursively reads JSON/JSONL, including gzip variants;
+- recursively reads JSON/JSONL, including NOVOexport `.jsonl.txt` wrappers and gzip variants;
 - top-level JSON arrays are treated as independent records, not one mega-record;
 - default outputs never contain source text or source paths;
 - known aliases become source-bound candidates, never runtime claims;
@@ -26,7 +26,17 @@ from typing import Any, Iterator
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RULES = ROOT / "data/ontology/architectures/ARCHITECTURE_DISCOVERY_RULES_V1.json"
-SUPPORTED_SUFFIXES = (".json", ".jsonl", ".json.gz", ".jsonl.gz")
+SUPPORTED_SUFFIXES = (
+    ".json",
+    ".jsonl",
+    ".json.txt",
+    ".jsonl.txt",
+    ".json.gz",
+    ".jsonl.gz",
+    ".json.txt.gz",
+    ".jsonl.txt.gz",
+)
+JSONL_SUFFIXES = (".jsonl", ".jsonl.txt", ".jsonl.gz", ".jsonl.txt.gz")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -61,6 +71,11 @@ def atomic_write_bytes(path: Path, data: bytes) -> None:
 def is_supported(path: Path) -> bool:
     name = path.name.casefold()
     return any(name.endswith(suffix) for suffix in SUPPORTED_SUFFIXES)
+
+
+def is_jsonl(path: Path) -> bool:
+    name = path.name.casefold()
+    return any(name.endswith(suffix) for suffix in JSONL_SUFFIXES)
 
 
 def discover_files(inputs: list[Path]) -> list[Path]:
@@ -103,12 +118,11 @@ def iter_strings(node: Any, pointer: str = "$") -> Iterator[tuple[str, str]]:
 def iter_records(path: Path) -> Iterator[tuple[str, Any]]:
     """Yield independent source records without inventing cross-record relations.
 
-    JSONL: each non-empty line is one record.
+    JSONL / JSONL.TXT: each non-empty line is one record.
     JSON list: each top-level item is one record (ChatGPT exports commonly use this).
     JSON object/scalar: the document is one record.
     """
-    name = path.name.casefold()
-    if name.endswith(".jsonl") or name.endswith(".jsonl.gz"):
+    if is_jsonl(path):
         with open_text(path) as handle:
             for line_no, line in enumerate(handle, 1):
                 if not line.strip():
@@ -225,7 +239,7 @@ def scan(
             "source_id": source_id,
             "sha256": file_sha,
             "size_bytes": path.stat().st_size,
-            "format": "JSONL" if ".jsonl" in path.name.casefold() else "JSON",
+            "format": "JSONL" if is_jsonl(path) else "JSON",
             "compressed": path.name.casefold().endswith(".gz"),
         })
         file_ok = True
