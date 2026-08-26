@@ -1,0 +1,137 @@
+{
+  "cycle_id": "OMEGA-CYCLE-20260826T1612-0300-018",
+  "predecessor": "Mapa/main@c83db30cb2843a67227fee4d74d0c31ee529297a",
+  "observed_interval": "2026-08-26T16:12:28-03:00",
+  "claim_allowed": false,
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "sources": [
+    {
+      "provider": "Google Drive",
+      "provider_id": "19gKzpJ5_7k6rSyvbW_s4mzlpsrXfjbloHNNKT-qVpfw",
+      "title": "JOURNAL_2026-08-25_NOVOEXPORT_CUSTODY",
+      "observed_modified_time": "2026-08-26T01:50:20.280Z",
+      "authority_role": "append-only custody journal"
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "title": "RAFAELIA — NOVOexport Raw 018 Wave 3 — PID Hash Reconciliation — 2026-08-24",
+      "authority_role": "orthogonal PID commitment evidence"
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1j9c-ocHSqV4uXaD1HAvOYWKdrkYMNbp69fdI6BHdMSo",
+      "title": "RAFAELIA — NOVOexport Raw 018 Wave 2 — Physical Inventory & Provider Gap — 2026-08-24",
+      "authority_role": "physical inventory/provider gap"
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1xhP6CJZsaLoqPokHvGuuWlvathVS5UKLejgFo9S2J9U",
+      "title": "RAFAELIA_CURRENT_RAW_PID_INDEX_000_050_EXCEPT_018.v5",
+      "authority_role": "current PID index excluding RAW018"
+    }
+  ],
+  "cursor": {
+    "before": "RAW018 provider/container exact binding search + receipts upstream 000..004",
+    "after": "RAW018 active G2 membership + historical listing + 51/51 path-size coherence observed; original shard producer/current bytes still unresolved"
+  },
+  "processed": {
+    "custody_journal_events_read": 9,
+    "raw018_specific_drive_objects_identified": 4,
+    "conversation_family_paths_reconciled_in_observed_receipt": 51,
+    "manifest_listing_common_paths": 15435,
+    "manifest_only_paths": 4,
+    "listing_only_paths": 2
+  },
+  "evidence": {
+    "active_manifest_bytes": 3812404,
+    "active_manifest_sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+    "active_generation": "novoexport_g2_38bb97724a432420",
+    "batch_00014_range": "conversations-017.json..conversations-020.json",
+    "batch_00014_declared_source_bytes": 64541017,
+    "batch_equation": "22560934+12115336+16440670+13424077=64541017",
+    "batch_equation_result": "TRANSVERSAL_DECLARED_BYTE_COHERENCE_PASS",
+    "temp_locate_bytes": 1396867,
+    "temp_locate_sha256": "7e291744e7522eeb4a4ce4f843f55ef479205de8305ac126130ff6c5631682bf",
+    "raw018_historical_listing_bytes": 12115336,
+    "conversation_family_manifest_count": 51,
+    "conversation_family_listing_count": 51,
+    "conversation_family_common_count": 51,
+    "conversation_family_size_mismatches": 0,
+    "conversation_family_bytes": 1107289897,
+    "wave3_pid_candidate_count": 100,
+    "wave3_pid_candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e"
+  },
+  "promotions": [
+    "RAW018_ACTIVE_LOGICAL_MEMBERSHIP",
+    "RAW018_HISTORICAL_LOCAL_SOURCE_LISTING_PRESENCE",
+    "CONVERSATION_FAMILY_51_OF_51_PATH_SIZE_COHERENCE",
+    "BATCH_00014_DECLARED_BYTE_COHERENCE",
+    "RAW018_PID_HASH_SET_EVIDENCED_RECONCILED_100_PRIVACY_PRESERVING"
+  ],
+  "not_promoted": [
+    "RAW018_CURRENT_PROVIDER",
+    "RAW018_CONTENT_BYTES",
+    "RAW018_CONTENT_SHA256",
+    "RAW018_CURRENT_JSON_PARSE",
+    "RAW018_CURRENT_CARDINALITY",
+    "RAW018_CURRENT_RAW_PID_COMMITMENT_MATCH"
+  ],
+  "anti_regression": [
+    "G2_BATCHER!=RAW_SHARD_PRODUCER",
+    "BATCH_SUM_AGREEMENT!=RAW018_BYTE_CUSTODY",
+    "HISTORICAL_FILESYSTEM_LISTING!=RAW_CONTENT_BYTES",
+    "PATH_SIZE_COHERENCE!=CONTENT_SHA256_EQUALITY",
+    "PID_HASH_SET_EVIDENCE!=CURRENT_RAW_BYTE_CUSTODY",
+    "TOKEN_VAZIO!=0"
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-RAW-018-CURRENT-BYTE-CUSTODY",
+      "state": "TOKEN_VAZIO_HARD_CUSTODY",
+      "source_pointer": "Drive:JOURNAL_2026-08-25_NOVOEXPORT_CUSTODY#EVENT0009",
+      "missing_field": ["current_provider_id", "current_byte_stream", "current_sha256", "current_json_parse", "current_cardinality", "current_raw_pid_commitment_match", "original_shard_producer_or_container"],
+      "blocking_dependency": "exact immutable/current RAW018 witness",
+      "evidence_needed": "observe exact source object; require 12115336 bytes; SHA256; JSON parse; compute PID commitment; compare to Wave3 commitment",
+      "falsifier": "byte length !=12115336 OR parse failure OR PID commitment !=766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+      "next_probe": "trace active manifest -> G2 generation -> historical source listing -> original shard producer/container",
+      "owner_authority": "NOVOexport source/custody authority",
+      "urgency": "P0",
+      "closure_gate": "12115336 bytes -> SHA256 -> JSON parse -> PID commitment equality -> append receipt",
+      "claim_allowed": false,
+      "predecessor_lineage": ["RAW018 Wave2", "RAW018 Wave3", "Mapa PR#413", "JOURNAL EVENT0007", "EVENT0008", "EVENT0009"]
+    }
+  ],
+  "coverage": {
+    "provider_pid_sha_cardinality_indexed": "50/51 unchanged",
+    "conversation_family_path_size_coherence": "51/51 evidenced in custody journal EVENT0009",
+    "raw018_current_byte_custody": "0/1 open"
+  },
+  "uncertainty": {
+    "before": "RAW018 exact provider/container unresolved; active-generation relationship partially distributed across receipts",
+    "after": "G2 logical membership, batch byte equation, historical listing and 51/51 path-size coherence consolidated; only original producer/current content custody remains hard-open"
+  },
+  "memory_projection": {
+    "L": "Wave2 -> Wave3 -> Wave4 candidate rejection -> EVENT0008 correction -> EVENT0009 active G2 reconciliation -> this receipt",
+    "O": "provider|bytes|SHA|parse|PID remain independent evidence dimensions",
+    "T": "active manifest <-> G2 batch <-> historical listing <-> Wave3 PID commitment",
+    "C": "logical/path-size evidence valid without promoting content custody",
+    "P": "Drive provider IDs + GitHub immutable receipt path/commit"
+  },
+  "top_urgencies": [
+    "P0 trace original RAW018 shard producer/container",
+    "P0 recover immutable/current RAW018 bytes and execute physical closure gate",
+    "P1 bind upstream receipts for non-default evidence classes 000..004 after RAW018 probe if provider route blocks"
+  ],
+  "next_probes_exact": [
+    "search source manifests/scripts for the producer that created conversations-017..020 from the original export",
+    "resolve RAW018 exact provider/container or immutable raw object",
+    "require byte length 12115336 and compute SHA256",
+    "parse JSON fail-closed and compute current cardinality",
+    "compute canonical conversation PID-set commitment and require equality with 766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "append closure receipt only if every gate passes"
+  ],
+  "F_ok": "active G2 membership + exact batch equation + 51/51 conversation path-size reconciliation + Wave3 PID commitment consolidated into immutable GitHub receipt",
+  "F_gap": "RAW018 current provider/content bytes/SHA/parse/cardinality/PID equality and original shard producer remain TOKEN_VAZIO_HARD_CUSTODY",
+  "F_next": "trace original shard producer/container -> recover exact RAW018 bytes -> physical closure gate; otherwise resume upstream receipt binding 000..004"
+}
