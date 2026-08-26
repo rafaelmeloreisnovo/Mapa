@@ -1,0 +1,86 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE/v1",
+  "cycle_id": "OMEGA-CYCLE-20260825T2112-0300-002",
+  "predecessor": "LEGAL-PROVENANCE-20260825T1957-0300-V1",
+  "observed_interval": "2026-08-25T20:12:00-03:00/2026-08-25T21:12:39-03:00",
+  "source_contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "cursor": {
+    "github_mapa_before": "78e75860572d3ae5949f16423eaf0d0eac37fca2",
+    "github_mapa_after_observed": "5100db1c7a03ff387d6bfa98b5e15105da6709b2",
+    "llamaRafaelia_ref": "70a7594e550e1e87dbc6a656ac1bf11575d8f8e9",
+    "drive_anchor_file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "processed": {
+    "github_commits_reviewed": 5,
+    "mapa_governance_objects_reviewed": 4,
+    "drive_index_objects_observed": 10,
+    "llama_license_surfaces_observed": 4
+  },
+  "evidence": [
+    {
+      "object_id": "LLAMA-ROOT-LICENSE-20260825",
+      "source_pointer": "rafaelmeloreisnovo/llamaRafaelia@70a7594e550e1e87dbc6a656ac1bf11575d8f8e9:LICENSE",
+      "blob_sha": "acb96ce78e0486e9dc7602cdcdd2f491c34f335a",
+      "state": "OBSERVED",
+      "finding": "Root repository license is MIT with copyright 2023-2024 The ggml authors; required notice preservation remains applicable."
+    },
+    {
+      "object_id": "LLAMA-RAFAELIA-BAREMETAL-LICENSE-20260825",
+      "source_pointer": "rafaelmeloreisnovo/llamaRafaelia@70a7594e550e1e87dbc6a656ac1bf11575d8f8e9:rafaelia-baremetal/LICENSE",
+      "blob_sha": "74efcc46f821d64496b0141749be42bd0d773b51",
+      "state": "OBSERVED",
+      "finding": "Submodule license is MIT, copyright 2026 Rafael Melo Reis, and explicitly records operation with llama.cpp plus upstream MIT attribution."
+    }
+  ],
+  "gap_delta": {
+    "resolved": [
+      {
+        "gap_id": "TV-LLAMA-LICENSE-DISCOVERY-20260825-001",
+        "previous_state": "TOKEN_VAZIO",
+        "new_state": "OBSERVED",
+        "closure_gate": "root LICENSE and rafaelia-baremetal/LICENSE fetched at immutable ref with blob SHAs",
+        "claim_allowed": false,
+        "reason": "License discovery is closed; file-level authorship/path lineage is not."
+      }
+    ],
+    "created_or_preserved": [
+      {
+        "gap_id": "TV-LLAMA-PATH-LINEAGE-20260825-002",
+        "source_pointer": "rafaelmeloreisnovo/llamaRafaelia@70a7594e550e1e87dbc6a656ac1bf11575d8f8e9",
+        "missing_field": "file-level inherited-vs-original path lineage",
+        "blocking_dependency": "tree/path provenance enumeration and commit-origin classification",
+        "evidence_needed": "path manifest with blob SHA, first-known commit/origin, license authority and relation",
+        "falsifier": "any supposedly authorial path shown to pre-exist in upstream or carry incompatible/third-party provenance",
+        "next_probe": "enumerate rafaelia-baremetal paths first, then compare origin/commit lineage against root/upstream surfaces",
+        "owner_authority": "llamaRafaelia producer repository; upstream authors retain authority over inherited material; Mapa routes evidence only",
+        "urgency": "P0",
+        "closure_gate": "100% target-path provenance classification with unresolved items retained as TOKEN_VAZIO",
+        "claim_allowed": false,
+        "predecessor_lineage": "LEGAL-PROVENANCE-20260825T1957-0300-V1"
+      }
+    ]
+  },
+  "memory_projection": {
+    "L": "license state advanced from unknown to immutable-ref observations",
+    "O": "root license and submodule license are independent surfaces",
+    "T": "llama.cpp/ggml upstream attribution is explicitly connected to RAFAELIA baremetal module",
+    "C": "license observation does not establish code authorship or non-derivation",
+    "P": "object IDs, ref and blob SHAs form append-only identity anchors"
+  },
+  "uncertainty_before": "llamaRafaelia LICENSE/NOTICE and path lineage globally TOKEN_VAZIO",
+  "uncertainty_after": "license identity observed; path lineage remains TOKEN_VAZIO",
+  "coverage_before": "component-level registry only",
+  "coverage_after": "component registry + two immutable license objects with blob SHAs",
+  "claim_allowed_changes": [],
+  "contradictions": [],
+  "top_urgencies": [
+    "llamaRafaelia path-level lineage",
+    "Termux/RAFCODEPHI inherited-vs-original manifest",
+    "QEMU/RMR path-level provenance split",
+    "Vectras C/D forensic quarantine inventory",
+    "AndroidX/Gradle/native third-party notice inventory"
+  ],
+  "F_ok": "Closed only the llamaRafaelia license-discovery gap with immutable ref/blob evidence and increased verifiable provenance coverage.",
+  "F_gap": "File-level authorship/non-derivation remains unproven; no AUTHORIAL_CLEAN promotion; Drive mirror receipt still requires a writable append surface.",
+  "F_next": "Enumerate rafaelia-baremetal target paths and classify path lineage; then update the central provenance registry without collapsing upstream and authorial identities."
+}
