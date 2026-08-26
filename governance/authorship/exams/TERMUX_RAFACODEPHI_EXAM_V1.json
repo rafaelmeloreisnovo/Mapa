@@ -1,0 +1,37 @@
+{
+  "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
+  "track": "T1_TERMUX_RAFACODEPHI",
+  "observed_ref": "afa012d50d26640264f89befe96ceb98988356ae",
+  "state": "STATIC_EXAM_1_RECORDED",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "observed_evidence": [
+    "LICENSE.md upstream/derivative authority recorded by governance",
+    "RAFAELIA_MODULE_ORGANIZATION.md documents rafaelia module/JNI/native layout and a prior Gradle build result",
+    "rafaelia/src/main/cpp/rafaelia.c blob 8872a8f1bfb10624bab102c6e066f2ed52969307 directly includes jni.h, string.h, math.h, stdlib.h and uses memcpy/memset/sqrtf/calloc/free",
+    "app/build.gradle blob a4ec7894bb88a9fe86da8459fcd79ebb9b156b55 configures NDK build, ABI splits, native flags, bootstrap artifacts and verification tasks"
+  ],
+  "findings": [
+    {
+      "id": "T1.F1",
+      "status": "FAIL_FREESTANDING_CLAIM",
+      "finding": "the current native implementation directly depends on JNI plus libc/libm allocation and memory/math functions",
+      "effect": "current module is NATIVE_INTEGRATION; FREESTANDING_PASS is prohibited for this source state"
+    },
+    {
+      "id": "T1.F2",
+      "status": "BUILD_METADATA_PARTIAL",
+      "finding": "Gradle records flags/NDK/ABI packaging rules but no current artifact hash/exit/transcript receipt was observed in this exam",
+      "effect": "BUILD_PASS remains open"
+    }
+  ],
+  "exams": [
+    {"id":"T1.E1","name":"distributable_manifest","status":"TOKEN_VAZIO","pass":"all shipped APK paths/resources/native objects identified"},
+    {"id":"T1.E2","name":"path_lineage_split","status":"TOKEN_VAZIO","pass":"each shipped path classified inherited/original/third-party/unresolved with source pointer"},
+    {"id":"T1.E3","name":"license_notice","status":"TOKEN_VAZIO","pass":"license/NOTICE/source obligations bound to shipped set"},
+    {"id":"T1.E4","name":"native_import_freestanding_audit","status":"FAIL_CURRENT_SOURCE","evidence":"direct source imports/use prove JNI+libc/libm+allocator dependency"},
+    {"id":"T1.E5","name":"build_receipt","status":"PARTIAL_METADATA_ONLY","evidence":"Gradle flags/NDK/ABI rules observed; current binary hashes/exit receipt missing"},
+    {"id":"T1.E6","name":"physical_runtime_receipt","status":"TOKEN_VAZIO","pass":"device+APK+source+transcript+environment hashes and exit captured"}
+  ],
+  "next": "execute T1.E1 against the actual distributable APK set; treat any future freestanding kernel as a separate artifact from the JNI integration"
+}

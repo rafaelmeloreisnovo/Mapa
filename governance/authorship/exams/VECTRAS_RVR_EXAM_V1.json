@@ -1,0 +1,36 @@
+{
+  "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
+  "track": "T3_VECTRAS_RVR",
+  "observed_ref": "38b9faacf09eee998487f8f08674bc5305697a52",
+  "state": "STATIC_EXAM_1_RECORDED",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "observed_evidence": [
+    "AUTHORSHIP_CLEANROOM_PLAN.md defines forensic inventory, A/B/C/D classification, quarantine, specification-first, independent implementation, similarity review, license consolidation and release gate",
+    "reports/full_repo_audit.tsv exists and enumerates repository paths with kind, size, line count, extension, technical issues and a sha column"
+  ],
+  "findings": [
+    {
+      "id": "T3.F1",
+      "status": "BACKLOG_OPEN",
+      "finding": "the clean-room document defines required controls but its own minimum backlog remains unchecked",
+      "effect": "protocol presence is not evidence that RVR modules have reached clean-room verified state"
+    },
+    {
+      "id": "T3.F2",
+      "status": "FORENSIC_LEDGER_STRUCTURALLY_INCOMPLETE",
+      "finding": "the observed full_repo_audit.tsv is a useful technical inventory but does not provide the required origin/license/risk/status fields, and many displayed sha values are '-'",
+      "effect": "it cannot yet satisfy the clean-room file-level provenance ledger required by T3.E1"
+    }
+  ],
+  "exams": [
+    {"id":"T3.E1","name":"forensic_inventory","status":"PARTIAL_TECHNICAL_INVENTORY","evidence":"reports/full_repo_audit.tsv enumerates many paths but lacks required origin/license/risk/status closure"},
+    {"id":"T3.E2","name":"quarantine","status":"TOKEN_VAZIO","pass":"all C/D code/assets/binaries excluded from implementation workspace and release candidate"},
+    {"id":"T3.E3","name":"spec_before_implementation","status":"TOKEN_VAZIO","pass":"spec hash/timestamp predates implementation ref for each E candidate"},
+    {"id":"T3.E4","name":"independent_implementation","status":"TOKEN_VAZIO","pass":"implementation receipt binds only permitted specification sources"},
+    {"id":"T3.E5","name":"dissimilarity_provenance_review","status":"TOKEN_VAZIO","pass":"review method/findings/reviewer/falsifier recorded without treating similarity as sole proof"},
+    {"id":"T3.E6","name":"acceptance_runtime","status":"TOKEN_VAZIO","pass":"independent acceptance tests plus runtime receipt close"},
+    {"id":"T3.E7","name":"release_legal_brand","status":"TOKEN_VAZIO","pass":"NOTICE/licenses/source obligations and trademark/name state closed"}
+  ],
+  "next": "upgrade the existing technical inventory into a provenance ledger by adding origin/license/risk/status and real content hashes, then quarantine C/D before class-E promotion"
+}
