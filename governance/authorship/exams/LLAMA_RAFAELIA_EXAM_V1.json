@@ -2,27 +2,41 @@
   "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
   "track": "T4_LLAMA_RAFAELIA",
   "observed_ref": "70a7594e550e1e87dbc6a656ac1bf11575d8f8e9",
-  "state": "LICENSE_OBSERVED_LINEAGE_PARTIAL",
+  "state": "STATIC_EXAM_1_RECORDED",
   "claim_allowed": false,
   "release_allowed": false,
   "observed_evidence": [
-    "LICENSE records MIT terms and copyright for the ggml authors"
+    "LICENSE records MIT terms and copyright for the ggml authors",
+    "repository search exposes RAFAELIA-specific surfaces including rafaelia-baremetal/, native/rafaelia_q16/, rmrCti/ and multiple docs",
+    "rafaelia-baremetal/core/rafaelia_core.c blob 4a23ee7401c57572c15aecf97b602e19fdd862d8 directly includes math.h and string.h, calls sqrtf/expf/sinf/tanhf/cosf/memset, labels a Smart Guard implementation as placeholder, and embeds a function described as wyhash/public-domain"
   ],
   "findings": [
     {
       "id": "T4.F1",
       "status": "FILE_LINEAGE_UNRESOLVED",
-      "finding": "repository-level MIT license does not identify which paths are inherited/substantial upstream versus independently authored RAFAELIA additions",
+      "finding": "repository-level MIT license does not identify inherited/substantial upstream paths versus independently authored RAFAELIA additions",
       "effect": "authorship promotion must be path+commit scoped"
+    },
+    {
+      "id": "T4.F2",
+      "status": "BAREMETAL_LABEL_NOT_FREESTANDING_PROOF",
+      "finding": "observed rafaelia-baremetal core directly uses standard math/string runtime functions",
+      "effect": "directory naming cannot establish FREESTANDING_PASS"
+    },
+    {
+      "id": "T4.F3",
+      "status": "THIRD_PARTY_CODE_PROVENANCE_REVIEW_REQUIRED",
+      "finding": "the core describes an embedded hash implementation as wyhash/public-domain; exact source/version/license/origin must be independently verified before authorship classification",
+      "effect": "affected code remains non-A until provenance is closed"
     }
   ],
   "exams": [
-    {"id":"T4.E1","name":"lineage_inventory","status":"TOKEN_VAZIO","pass":"source paths mapped to upstream/ref/blob or independent origin"},
-    {"id":"T4.E2","name":"mit_notice_retention","status":"TOKEN_VAZIO","pass":"required copyright and permission notice retained in copies/substantial portions and distribution"},
+    {"id":"T4.E1","name":"lineage_inventory","status":"PARTIAL_DISCOVERY","evidence":"multiple RAFAELIA-specific path families discovered; upstream/ref/blob mapping remains incomplete"},
+    {"id":"T4.E2","name":"mit_notice_retention","status":"PARTIAL_LICENSE_OBSERVED","evidence":"root MIT license observed; distribution-level retention not yet examined"},
     {"id":"T4.E3","name":"rafaelia_delta","status":"TOKEN_VAZIO","pass":"independent RAFAELIA commits/paths and authorship evidence identified"},
     {"id":"T4.E4","name":"dependency_model_data_terms","status":"TOKEN_VAZIO","pass":"code separated from weights/tokenizers/datasets/artifacts with independent terms"},
     {"id":"T4.E5","name":"build_runtime_receipt","status":"TOKEN_VAZIO","pass":"compiler/backend/flags/ABI/fixture-or-model identity/artifact hashes/exit recorded"},
-    {"id":"T4.E6","name":"freestanding_candidate","status":"TOKEN_VAZIO","pass":"new kernel, if any, audited separately from llama.cpp-derived integration"}
+    {"id":"T4.E6","name":"freestanding_candidate","status":"FAIL_FOR_OBSERVED_RAFAELIA_CORE_C","evidence":"math.h/string.h and runtime math/memory functions are directly used; a separate kernel would need independent freestanding proof"}
   ],
-  "next": "execute T4.E1 and T4.E2 before any repository-wide authorial-clean statement"
+  "next": "split rafaelia-specific paths into authored/third-party/unknown lineage, verify embedded algorithm provenance, and audit any true freestanding candidate separately"
 }
