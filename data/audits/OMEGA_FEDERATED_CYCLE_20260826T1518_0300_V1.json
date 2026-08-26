@@ -1,0 +1,125 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE_V1",
+  "cycle_id": "OMEGA-CYCLE-20260826T1518-0300-017",
+  "observed_at": "2026-08-26T15:18:24-03:00",
+  "predecessor": "Mapa/main@c83db30cb2843a67227fee4d74d0c31ee529297a",
+  "claim_allowed": false,
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "sources": [
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1xhP6CJZsaLoqPokHvGuuWlvathVS5UKLejgFo9S2J9U",
+      "title": "RAFAELIA_CURRENT_RAW_PID_INDEX_000_050_EXCEPT_018.v5",
+      "role": "CURRENT_PID_INDEX",
+      "revision_id": "1",
+      "previous_revision_id": null,
+      "revision_modified_at": "2026-08-22T09:09:25.383Z",
+      "geometry": {"rows": 4955, "columns": 10}
+    },
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "title": "RAFAELIA — NOVOexport Raw 018 Wave 3 — PID Hash Reconciliation — 2026-08-24",
+      "role": "RAW018_PID_RECONCILIATION"
+    }
+  ],
+  "cursor": {
+    "before": "PID_INDEX_V5 provenance closed; evidence-class heterogeneity 000..004 unresolved",
+    "after": "evidence-class heterogeneity directly enumerated by shard and row cardinality; authority remains non-uniform"
+  },
+  "volume": {
+    "spreadsheet_rows_scanned": 4955,
+    "spreadsheet_columns_scanned": 10,
+    "non_default_evidence_rows_revalidated": 500,
+    "shards_reviewed": [0,1,2,3,4]
+  },
+  "measurements": {
+    "evidence_class_distribution_revalidated_for_non_default_classes": {
+      "PRIVATE_METADATA_INDEX": 300,
+      "V2_METADATA_RECORDS": 100,
+      "RAW_ID_TRANSIENT_HASH_ONLY": 100
+    },
+    "mapping": {
+      "0": {"evidence_class": "PRIVATE_METADATA_INDEX", "rows": 100, "provider_id": "1VfP3u2BUBJ7aByrHh-PUfo4cW1jj3SBZ", "source_sha256": "27b3ebe900dcf811e648f0bcb8da02cc5e1e1230049567cdd1a83a6df317ee06"},
+      "1": {"evidence_class": "PRIVATE_METADATA_INDEX", "rows": 100, "provider_id": "1iJJ9p5P3_t8LSQXEB_dDVetOOGMfVP6B", "source_sha256": "44c3cc8f298cacb809319558ee07c5737051e5ef6c0ad88cb33997ae31ddc6f1"},
+      "2": {"evidence_class": "PRIVATE_METADATA_INDEX", "rows": 100, "provider_id": "1EB9PHfAs5UNtFwqtTrHRDwPYwfZLzF8A", "source_sha256": "2af58ace3177b0e669c0ba8867f43eec11ee11e90a5bfef482c7cee1e032da80"},
+      "3": {"evidence_class": "V2_METADATA_RECORDS", "rows": 100, "provider_id": "1iSJeDw1wI-zKICJF5pV0Nb1hj5LS5IRQ", "source_sha256": "8544e29a071bfa80a21ebc25719ec5d0462cff289d8ce27f9dbed778e7fefc38"},
+      "4": {"evidence_class": "RAW_ID_TRANSIENT_HASH_ONLY", "rows": 100, "provider_id": "1fE2386qBSM7-r7PB0I_drpIrkLyfT7aO", "source_sha256": "477f650a94d535b76f0ce9283b22429df229cf93d44f11d9209be2ffd435a8c5"}
+    },
+    "shared_identity_method": "SHA256_UTF8_CANONICAL_CONVERSATION_ID",
+    "raw_id_persisted": false,
+    "historical_locator_match": true
+  },
+  "interpretation": {
+    "state": "OBSERVED",
+    "result": "shards 000..004 are consistently represented by provider ID + source SHA + 100 privacy-preserving conversation PID hashes, but evidence_class is not uniform and therefore must not be flattened into RAW_PROVIDER_SHA_JSON_PARSE authority",
+    "falsifier": "if source receipts show equivalent raw-provider byte-stream + JSON-parse evidence for any of 000..004, that shard may be promoted individually after receipt binding; class label alone is insufficient",
+    "non_claims": [
+      "PRIVATE_METADATA_INDEX does not equal current raw-byte custody",
+      "V2_METADATA_RECORDS does not equal current raw-byte custody",
+      "RAW_ID_TRANSIENT_HASH_ONLY does not equal current raw-byte custody",
+      "provider ID + source SHA in an index does not by itself prove a fresh current byte re-download"
+    ]
+  },
+  "coverage": {
+    "before": {"current_provider_pid_sha_cardinality_indexed": "50/51", "evidence_class_authority_reviewed_000_004": "0/5"},
+    "after": {"current_provider_pid_sha_cardinality_indexed": "50/51", "evidence_class_authority_reviewed_000_004": "5/5_OBSERVED_NON_UNIFORM"},
+    "promotion": false
+  },
+  "gaps": [
+    {
+      "gap_id": "TV-RAW018-CURRENT-CUSTODY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "missing_field": ["current_provider_id","current_byte_stream","current_sha256","current_json_parse"],
+      "blocking_dependency": "observable exact RAW018 provider/container",
+      "evidence_needed": "provider object + exact 12115336-byte witness + SHA256 + JSON parse + PID-set reconciliation",
+      "falsifier": "byte length, parse, or PID-set digest mismatch",
+      "next_probe": "search current Drive aliases/container metadata for conversations-018.json; bind object identity before download/rehash",
+      "owner_authority": "Drive raw export custody",
+      "urgency": "P0",
+      "closure_gate": "identity→12115336 bytes→SHA256→JSON parse→PID-set reconciliation",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1417-0300-016"
+    },
+    {
+      "gap_id": "TV-PID-INDEX-V5-EVIDENCE-CLASS-AUTHORITY",
+      "state": "PARTIAL_EVIDENCED",
+      "source_pointer": "Drive:1xhP6CJZsaLoqPokHvGuuWlvathVS5UKLejgFo9S2J9U#rows2-501",
+      "missing_field": ["upstream_receipt_binding_for_000","upstream_receipt_binding_for_001","upstream_receipt_binding_for_002","upstream_receipt_binding_for_003","upstream_receipt_binding_for_004"],
+      "blocking_dependency": "source-specific custody receipts or manifests",
+      "evidence_needed": "for each shard 000..004: receipt showing source byte/hash/parse provenance appropriate to claimed authority",
+      "falsifier": "receipt proves weaker or different evidence than index class/authority assumption",
+      "next_probe": "bulk-search Drive for receipts/manifests keyed by provider IDs and source SHA256 of shards 000..004",
+      "owner_authority": "Drive source custody + Mapa provenance registry",
+      "urgency": "P1",
+      "closure_gate": "provider_id→source_sha256→upstream receipt→evidence class normalization decision per shard",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1417-0300-016"
+    }
+  ],
+  "memory_projection": {
+    "L": "follows merged PR431 and preserves the v5 single-revision/digest receipt without rewrite",
+    "O": "three direct bounded searches independently enumerate all 500 non-default evidence rows",
+    "T": "Drive PID index ↔ shard-specific provider IDs/source SHA ↔ Mapa receipt",
+    "C": "50/51 index coverage remains unchanged; only evidence-authority depth for 000..004 increased",
+    "P": "provider IDs, revision ID, source SHA and immutable audit path recorded append-only"
+  },
+  "uncertainty": {
+    "before": "evidence classes 000..004 known only as heterogeneous aggregate",
+    "after": "exact shard-to-class/provider/source-hash mapping observed for all 5 shards; upstream receipt authority still open",
+    "direction": "decreased_without_claim_promotion"
+  },
+  "top_urgencies": [
+    "P0 TV-RAW018-CURRENT-CUSTODY",
+    "P1 TV-PID-INDEX-V5-EVIDENCE-CLASS-AUTHORITY"
+  ],
+  "next_probes": [
+    "bulk-search Drive receipts/manifests by provider IDs and source SHA256 for shards 000..004",
+    "search RAW018 aliases/container/provider identity without inferring from filename",
+    "only after exact binding, verify RAW018 12115336 bytes→SHA256→JSON parse→PID-set reconciliation"
+  ],
+  "F_ok": "evidence-class heterogeneity for shards 000..004 fully enumerated at row/provider/hash level; no false normalization",
+  "F_gap": "upstream source receipts for 000..004 + RAW018 current custody",
+  "F_next": "bind 000..004 upstream receipts in bulk → search RAW018 exact provider/container → physical closure gate"
+}
