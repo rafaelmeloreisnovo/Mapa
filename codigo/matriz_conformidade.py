@@ -8,8 +8,9 @@ PRIMEIRA-LINHA: DIGNIDADE-HUMANA / PROTECAO-INFANTIL (ONU UDHR Art.1 / UNCRC Art
 
 Nao afirma conformidade: liga cada conceito evidenciado a sua ancora normativa
 (REFERENCE, de 08_) e abre uma linha de auditoria com estado PENDENTE. A passagem de
-PENDENTE -> CONFORME exige auditoria real (fora do escopo desta sessao). Repos com
-exposicao a dados pessoais/infantis recebem prioridade (regra pro-humano de 08_).
+PENDENTE -> CONFORME exige auditoria real. Repos com exposicao a dados pessoais/infantis
+recebem prioridade, mas aplicabilidade juridica depende do fluxo factual, jurisdicao,
+autoridade, vigencia e evidencia.
 
 Sem dependencias (stdlib). Le indices/MANIFESTO_INTEGRIDADE.yaml.
 
@@ -24,6 +25,8 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFESTO = os.path.join(ROOT, "indices", "MANIFESTO_INTEGRIDADE.yaml")
+CANON_PRIVACY = "docs/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_V1.md"
+ATLAS_PRIVACY = "data/normative-graph/GLOBAL_DATA_PRIVACY_GNSS_AI_SEMANTIC_ATLAS_V1.json"
 
 # conceito -> ancora normativa externa (REFERENCE, de 08_ANCORAGEM_NORMATIVA)
 CONCEITO_NORMA = {
@@ -35,7 +38,8 @@ CONCEITO_NORMA = {
     "C13": "ISO/IEC 42001; UNESCO Etica IA; UDHR; UNCRC (etica/direitos)",
 }
 
-# repos com exposicao a dados pessoais/publico -> LGPD/GDPR, prioridade alta
+# repos com exposicao a dados pessoais/publico -> prioridade alta.
+# O nome do repo nao prova aplicabilidade; cada linha continua PENDENTE ate fluxo factual.
 DADOS_PESSOAIS = {
     "conversations_chunks_private": "corpus de conversas (dados pessoais)",
     "home": "analise de codigo/dados do usuario",
@@ -43,7 +47,10 @@ DADOS_PESSOAIS = {
     "x0": "ecossistema cognitivo com dados",
     "lgpd_constituicoes": "framework LGPD/direitos (proprio dominio)",
 }
-NORMA_DADOS = "LGPD 13.709/2018; GDPR 2016/679; ISO/IEC 27701 (privacidade)"
+NORMA_DADOS = (
+    "CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; "
+    "GDPR 2016/679 quando aplicavel; ISO/IEC 27701 como REFERENCE"
+)
 
 
 def ler_evidencia(path: str) -> dict:
@@ -71,12 +78,10 @@ def linhas_conformidade():
     rows = []
     for rid in sorted(ev):
         prioridade = "ALTA" if rid in DADOS_PESSOAIS else "normal"
-        # linha de dados pessoais (se aplicavel)
         if rid in DADOS_PESSOAIS:
             rows.append({"repo": rid, "norma": NORMA_DADOS, "conceito": "dados",
                          "evidencia": DADOS_PESSOAIS[rid], "auditoria": "PENDENTE",
                          "prioridade": "ALTA"})
-        # linhas por conceito com ancora normativa
         for c, origem in sorted(ev[rid].items()):
             if c in CONCEITO_NORMA:
                 rows.append({"repo": rid, "norma": CONCEITO_NORMA[c], "conceito": c,
@@ -87,7 +92,9 @@ def linhas_conformidade():
 
 def relatorio(rows) -> str:
     L = ["MATRIZ DE CONFORMIDADE :: norma x evidencia x gap (REFERENCE, nao atestado)",
-         "PRIMEIRA-LINHA: DIGNIDADE-HUMANA / PROTECAO-INFANTIL", ""]
+         "PRIMEIRA-LINHA: DIGNIDADE-HUMANA / PROTECAO-INFANTIL",
+         f"CANON_PRIVACY: {CANON_PRIVACY}",
+         f"ATLAS_PRIVACY: {ATLAS_PRIVACY}", ""]
     alta = [r for r in rows if r["prioridade"] == "ALTA"]
     L.append(f"linhas: {len(rows)}  |  prioridade ALTA (dados pessoais): {len(alta)}")
     L.append("estado global de auditoria: PENDENTE (nenhuma conformidade atestada)")
@@ -107,8 +114,14 @@ def markdown(rows) -> str:
          "Gerado por `codigo/matriz_conformidade.py`. Liga cada conceito evidenciado à sua "
          "**âncora normativa** (`REFERENCE`, de `biblioteconomia/08_ANCORAGEM_NORMATIVA.md`) "
          "e abre uma linha de auditoria. **Estado global: `PENDENTE`** — nada aqui é atestado "
-         "de conformidade; a passagem `PENDENTE`→`CONFORME` exige auditoria real (próximo "
-         "ciclo). Repos com dados pessoais têm **prioridade ALTA** (regra pró-humano).",
+         "de conformidade; a passagem `PENDENTE`→`CONFORME` exige auditoria real. Repos com "
+         "dados pessoais têm **prioridade ALTA**, mas o nome do repo não prova aplicabilidade.",
+         "",
+         f"Cânone jurídico de privacidade/GNSS/IA: `{CANON_PRIVACY}`.",
+         f"Atlas semântico: `{ATLAS_PRIVACY}`.",
+         "",
+         "> `permissão_do_SO != base_jurídica`; `data_no_dispositivo != dado_no_modelo`; "
+         "`TOKEN_VAZIO != falso`. Cada fluxo deve ser provado ponta a ponta.",
          "",
          "| prioridade | repo | conceito | norma (REFERENCE) | evidência | auditoria |",
          "|---|---|---|---|---|---|"]
