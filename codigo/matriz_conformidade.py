@@ -38,7 +38,7 @@ CONCEITO_NORMA = {
     "C13": "ISO/IEC 42001; UNESCO Etica IA; UDHR; UNCRC (etica/direitos)",
 }
 
-# repos com exposicao a dados pessoais/publico -> prioridade alta.
+# repos com exposicao material a dados pessoais/publico -> prioridade alta.
 # O nome do repo nao prova aplicabilidade; cada linha continua PENDENTE ate fluxo factual.
 DADOS_PESSOAIS = {
     "conversations_chunks_private": "corpus de conversas (dados pessoais)",
@@ -46,6 +46,10 @@ DADOS_PESSOAIS = {
     "gaia_phi": "indexacao/dataset",
     "x0": "ecossistema cognitivo com dados",
     "lgpd_constituicoes": "framework LGPD/direitos (proprio dominio)",
+    "termux-api_rafcodephi": (
+        "ponte Android com APIs de localizacao, contatos, call log, SMS, microfone, "
+        "telefonia e outros dados conforme metodo/permissao"
+    ),
 }
 NORMA_DADOS = (
     "CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; "
