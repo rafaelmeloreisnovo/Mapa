@@ -1,0 +1,161 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE_V1",
+  "cycle_id": "OMEGA-CYCLE-20260826T0910-0300-011",
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "sha": "83bea8eb99e4d503a3711430dee22cd524a0171a",
+    "tree": "19db3ed52387ec20e452e8f0eb70347712f34275"
+  },
+  "observed_interval": {
+    "local_start": "2026-08-26T09:10:55-03:00",
+    "observed_at": "2026-08-26T12:10:55Z"
+  },
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "sources": [
+    {
+      "provider": "Google Drive",
+      "provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "state": "OBSERVED",
+      "updated_at": "2026-08-26T10:34:48.663Z"
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "state": "OBSERVED_METADATA",
+      "sheet_count": 17,
+      "notable_sheets": ["CONCEITOS","AREAS","FORMULAS","PROGRAMAS","FONTES_000_050","RELACOES","TOKEN_VAZIO","STATS","EDICOES_REVISOES","REVISION_QUEUE_ROOT","UNIVERSE_OBJECTS","CONTENT_IDENTITIES","UNIVERSE_COVERAGE","UNIVERSE_QUEUE","SUPERSEDED_SCOPE_20260825","PARABOLAS_ANCORADAS","PRANCHA_PEDAGOGICA"]
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "state": "OBSERVED_METADATA",
+      "sheet_count": 1,
+      "notable_sheets": ["CONCEITOS"]
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1AqVqs9GhmItGj8myvDFhvhSMyWruMXSeuaC4ml344oM",
+      "title": "RAFAELIA — Current Export PID Bridge 000–027 except 018 — CHECKPOINT_0078 — 2026-08-14",
+      "state": "OBSERVED_DOCUMENTED",
+      "predecessor": "CHECKPOINT_0077"
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1nY7Vvc5_20WVURzL6jrUN-FSRNhx1j4_vWKmBJp7ie8",
+      "title": "RAFAELIA — Current PID Coverage 000–047 except 018 — CHECKPOINT_0079 — 2026-08-14",
+      "state": "OBSERVED_DOCUMENTED",
+      "predecessor": "CHECKPOINT_0078"
+    }
+  ],
+  "cursor": {
+    "before": "NOVOexport byte/hash receipt coverage: 000..017 + 028..040; PID bridge known historically",
+    "after": "PID scope 019..027 reclassified as historically provider/PID-covered but current raw byte/hash custody still open; duplicate-title MASTER_INDEX objects classified as structurally diverged candidates"
+  },
+  "volume_processed": {
+    "drive_objects_observed": 5,
+    "master_index_objects_compared": 2,
+    "master_index_sheet_structures_compared": 18,
+    "pid_checkpoint_documents_revalidated": 2,
+    "shard_scope_refined": "019..027 and 041..047 provider/PID evidence distinguished from current byte/hash custody"
+  },
+  "deltas": [
+    {
+      "type": "CONTENT_IDENTITY_REFINEMENT",
+      "object_a": "drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "object_b": "drive:1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "same_title": true,
+      "structural_relation": "diverged_from_candidate",
+      "evidence": "17 sheets versus 1 sheet",
+      "canonical_candidate": "drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "canonical_authority": "TOKEN_VAZIO",
+      "reason": "richer/current object is a candidate only; content hash/revision lineage has not yet proven replica/supersession semantics"
+    },
+    {
+      "type": "COVERAGE_SCOPE_REFINEMENT",
+      "scope": "NOVOexport conversations shards",
+      "finding": "CHECKPOINT_0078 documents PID bridge 000..027 except 018; CHECKPOINT_0079 documents PID coverage 000..047 except 018",
+      "effect": "provider/PID coverage must not be counted as current raw byte/hash custody",
+      "claim_allowed": false
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-MASTER-INDEX-DUPLICATE-TITLE-LINEAGE-001",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": ["drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk","drive:1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U"],
+      "missing_field": ["content_hash","revision_origin","replica_or_supersession_relation"],
+      "blocking_dependency": "revision/hash comparison",
+      "evidence_needed": "exported content digests and revision metadata for both sheets",
+      "falsifier": "matching exported digest and revision lineage proving replica_of",
+      "next_probe": "export both spreadsheets to deterministic format; hash; compare revision histories",
+      "owner_authority": "Drive object/revision authority",
+      "urgency": "P0",
+      "closure_gate": "typed relation replica_of|supersedes|derived_from|diverged_from supported by hash+revision evidence",
+      "claim_allowed": false,
+      "predecessor_lineage": "same-title ambiguity observed in prior cycle"
+    },
+    {
+      "gap_id": "TV-NOVO-019-027-CURRENT-BYTE-CUSTODY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "drive:1AqVqs9GhmItGj8myvDFhvhSMyWruMXSeuaC4ml344oM",
+      "missing_field": ["current_raw_provider_id","current_raw_bytes","current_raw_sha256","current_parse_receipt"],
+      "blocking_dependency": "current raw objects/receipts",
+      "evidence_needed": "current provider identities plus byte/hash receipts per shard 019..027",
+      "falsifier": "current raw receipt disagreeing with historical PID bridge",
+      "next_probe": "bulk search exact raw/receipt identities for 019..027 and reconcile against PID manifest V3/V4",
+      "owner_authority": "Drive raw object + custody receipt",
+      "urgency": "P0",
+      "closure_gate": "provider_id + bytes + SHA-256 + predecessor receipt per shard",
+      "claim_allowed": false,
+      "predecessor_lineage": "CHECKPOINT_0078→CHECKPOINT_0079"
+    }
+  ],
+  "contradictions": [],
+  "uncertainty": {
+    "before": "same-title MASTER_INDEX ambiguity + PID/current-byte scope partially conflated",
+    "after": "MASTER_INDEX objects structurally distinguished; PID coverage explicitly separated from current byte/hash custody",
+    "direction": "decreased"
+  },
+  "coverage": {
+    "before": "31/51 current byte/hash receipts revalidated in prior checkpoint; historical PID coverage broader",
+    "after": "31/51 current byte/hash receipts unchanged; historical PID coverage 000..047 except 018 separately evidenced; identity coverage quality increased",
+    "claim_allowed_change": "none"
+  },
+  "memory_projection": {
+    "L": "CHECKPOINT_0078→0079 and Mapa main predecessor preserved",
+    "O": "Drive metadata comparison independently falsifies same-title=same-object",
+    "T": "Drive MASTER_INDEX identities linked to Mapa audit receipt",
+    "C": "PID coverage and current byte/hash custody kept as distinct validity contexts",
+    "P": "provider IDs + commit predecessor + append-only audit path"
+  },
+  "top_urgencies": [
+    "P0 export/hash/revision-compare both MASTER_INDEX objects",
+    "P0 current byte/hash custody 019..027",
+    "P0 RAW018 current-byte custody",
+    "P1 current byte/hash custody 041..050"
+  ],
+  "next_probes": [
+    "export both MASTER_INDEX spreadsheets in deterministic formats and compute digests",
+    "list revision histories for both MASTER_INDEX provider IDs and classify lineage",
+    "bulk-resolve current raw/receipt objects for conversations 019..027",
+    "retain RAW018 as hard custody gap until current bytes/hash are observed",
+    "continue 041..050 only after 019..027 cursor advances or provider exhaustion is recorded"
+  ],
+  "F_ok": [
+    "same-title MASTER_INDEX ambiguity reduced to two distinct provider identities with structural evidence",
+    "historical PID coverage separated from current byte/hash custody",
+    "no destructive merge or claim promotion"
+  ],
+  "F_gap": [
+    "MASTER_INDEX relation lacks hash/revision proof",
+    "019..027 current bytes/hash receipts unresolved",
+    "RAW018 current custody unresolved",
+    "041..050 current byte/hash coverage incomplete"
+  ],
+  "F_next": "hash+revision gate for MASTER_INDEX in parallel with bulk 019..027 current-custody resolution"
+}
