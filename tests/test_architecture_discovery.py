@@ -91,6 +91,20 @@ class ArchitectureDiscoveryTests(unittest.TestCase):
             self.assertTrue(all(row["dependency_claim"] is False for row in fcea_hcpm))
             self.assertTrue(all(row["claim_allowed"] is False for row in fcea_hcpm))
 
+    def test_top_level_json_items_do_not_create_cross_record_relations(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "out"
+            result = self.run_scan(out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            relations = self.load_jsonl(out / "architecture_relations.jsonl")
+            cross_record = [
+                row
+                for row in relations
+                if {row["left"], row["right"]} == {"ZETA", "V79-1"}
+                and row["scope"] == "SAME_RECORD"
+            ]
+            self.assertEqual(cross_record, [], "top-level JSON conversations must remain independent records")
+
     def test_private_review_is_explicit_local_only_and_not_in_public_receipt_path(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "out"
