@@ -1,0 +1,156 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE_V1",
+  "cycle_id": "OMEGA-CYCLE-20260826T1112-0300-013",
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "sha": "83bea8eb99e4d503a3711430dee22cd524a0171a"
+  },
+  "observed_interval": {
+    "local_start": "2026-08-26T11:12:30-03:00",
+    "observed_at": "2026-08-26T11:12:30-03:00"
+  },
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "sources": [
+    {
+      "provider": "Google Drive",
+      "provider_id": "18Hv8UOPL70HFMXHviW7vHFxPhOoSz7bM",
+      "title": "temp.locate.txt",
+      "role": "historical_physical_listing",
+      "observed_fact": "listing contains conversations-000.json through conversations-050.json with byte sizes; RAW018=12115336 bytes; 041=23938683; 042=26236995; 043=19772419; 044=16112555; 045=22452249; 046=36869653; 047=11402988; 048=36771626; 049=47806754; 050=17115060"
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1ccOoYooH-STuDvrPQQSihtg4nqpmifd7QQ8w25nIr1w",
+      "title": "RAFAELIA_METRICS_STAGE1_CONVERSATIONS_043_050",
+      "role": "historical_exact_download_metrics",
+      "checkpoint_sha256": "d9e61977389772747dad09b90d4635cdf4649b10c74ff8c5e7a97ccd4d40cbc2",
+      "parser_contract_hash": "SHA-256 over exact downloaded byte stream",
+      "range": "043-050",
+      "objects": [
+        {"file":"conversations-043.json","bytes":19772419,"conversations":100,"sha256":"0d5d782ef0f78bddf61ea50af50292e5e86e3e3a4cf5d6453d28359b4c7a2d5c"},
+        {"file":"conversations-044.json","bytes":16112555,"conversations":100,"sha256":"9fab3b6af19c1e08fa0306aa3ef6165b42cfec007179fba474fe7769adf3482f"},
+        {"file":"conversations-045.json","bytes":22452249,"conversations":100,"sha256":"a490e4c7ad6f79f5f3f3eae2336fe87faf20a006df806173f0f4280eaf2039f2"},
+        {"file":"conversations-046.json","bytes":36869653,"conversations":100,"sha256":"daef888aee856833c4f26c3c0af804826a2043c775f2d3c543d1135f27ee8e75"},
+        {"file":"conversations-047.json","bytes":11402988,"conversations":100,"sha256":"dd133d11f02d757036eb3b9228a35e9734dc4b5984b1002f4f40c6b7260598d5"},
+        {"file":"conversations-048.json","bytes":36771626,"conversations":100,"sha256":"ed19ea07f8763a8a4d87204d80c817694ce4d6c339c71b1d2a1b955a8c125256"},
+        {"file":"conversations-049.json","bytes":47806754,"conversations":100,"sha256":"608e45449809a47f5931f86328b96dab2b2b86a5abf21a8dfe1c7da6834a2f1a"},
+        {"file":"conversations-050.json","bytes":17115060,"conversations":54,"sha256":"c5058bf25f682de12de68b54029d13b07e836cd519416752fbc5e4fa320b4979"}
+      ]
+    },
+    {
+      "provider": "Google Drive",
+      "provider_id": "1Tqm9rw9JnyyUKUG8OVw5e6EWFVEXF7sgRHkTVF53nt4",
+      "title": "RAFAELIA — NOVOexport Raw 048-050 Wave 3 — Historical Bytes vs Current Custody — 2026-08-24",
+      "role": "epistemic_boundary_receipt",
+      "status": "PARTIAL_EVIDENCED_HISTORICAL_BYTES_CURRENT_PROVIDER_UNBOUND",
+      "remaining": ["current_provider_object","current_byte_stream","current_sha256_rehash","exact_current_conversation_id/PID_set"]
+    }
+  ],
+  "cursor": {
+    "before": "current_byte/hash 40/51; 041-050 current custody broad gap; RAW018 hard custody",
+    "after": "historical physical-size listing 51/51; historical exact downloaded SHA-256 at least 48/51 (000-017,019-040 from predecessor + 043-050 revalidated here); 041-042 exact historical SHA-256 still TOKEN_VAZIO; current byte/hash custody remains 40/51; RAW018 current custody remains TOKEN_VAZIO"
+  },
+  "coverage": {
+    "historical_physical_size": {"before":"partial/not explicitly separated","after":"51/51","meaning":"historical listing only, not current provider custody"},
+    "historical_exact_download_sha256": {"before":"mixed with current-custody metric","after":"at_least_48/51","missing":["018","041","042"],"meaning":"exact downloaded byte-stream evidence from historical receipts; not a current rehash"},
+    "current_byte_hash_custody": {"before":"40/51","after":"40/51","missing":["018","041","042","043","044","045","046","047","048","049","050"]}
+  },
+  "contradictions_closed": [
+    {
+      "claim": "041-050 lack all physical evidence",
+      "verdict": "FALSE",
+      "reason": "temp.locate historical physical listing supplies filenames and exact historical byte sizes for 041-050"
+    },
+    {
+      "claim": "043-050 hashes unknown",
+      "verdict": "FALSE_HISTORICALLY",
+      "reason": "RAFAELIA_METRICS_STAGE1_CONVERSATIONS_043_050 records SHA-256 over exact downloaded byte streams for all 043-050",
+      "boundary": "does not establish current provider custody or current rehash"
+    },
+    {
+      "claim": "all shards have 100 conversations",
+      "verdict": "FALSE",
+      "reason": "conversations-050.json has 54 root conversation objects under the declared parser contract"
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-NOVO-RAW018-CURRENT-CUSTODY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:temp.locate.txt + predecessor receipts",
+      "missing_field": ["current_provider_object","current_byte_stream","current_sha256_rehash","current_parse"],
+      "blocking_dependency": "locate current canonical provider/container object",
+      "evidence_needed": "provider_id + exact bytes=12115336 candidate check + SHA-256 + JSON parse + identity/PID reconciliation",
+      "falsifier": "candidate size/hash/parse or PID commitment mismatch",
+      "next_probe": "search aliases/container/provider metadata for current conversations-018.json; require exact byte/hash/parse match",
+      "owner_authority": "NOVOexport raw source authority / Drive provider",
+      "urgency": "P0",
+      "closure_gate": "CURRENT_PROVIDER_BOUND + BYTE_SIZE_MATCH + SHA256_REHASH + JSON_PARSE + PID/IDENTITY_CHECK",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1014-0300-012"
+    },
+    {
+      "gap_id": "TV-NOVO-RAW041-042-HISTORICAL-HASH",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:temp.locate.txt",
+      "missing_field": ["historical_exact_download_sha256","historical_parser_receipt"],
+      "blocking_dependency": "locate exact metrics/receipt for 041-042",
+      "evidence_needed": "receipt with SHA-256 over exact downloaded bytes and parser contract",
+      "falsifier": "hash/size mismatch against historical physical listing",
+      "next_probe": "search metrics/checkpoints covering 038-042 or exact filenames 041/042 and fetch source",
+      "owner_authority": "NOVOexport metrics/custody receipts",
+      "urgency": "P1",
+      "closure_gate": "EXACT_DOWNLOADED_SHA256 + BYTE_SIZE_MATCH + PARSER_CONTRACT",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1014-0300-012"
+    },
+    {
+      "gap_id": "TV-NOVO-RAW043-050-CURRENT-CUSTODY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:RAFAELIA_METRICS_STAGE1_CONVERSATIONS_043_050",
+      "missing_field": ["current_provider_object","current_sha256_rehash"],
+      "blocking_dependency": "current provider binding",
+      "evidence_needed": "current provider id + current byte stream + rehash",
+      "falsifier": "current digest differs from historical downloaded digest",
+      "next_probe": "resolve current provider/container for 043-050 in bulk and rehash without assuming historical equality",
+      "owner_authority": "Drive current raw objects",
+      "urgency": "P1",
+      "closure_gate": "CURRENT_PROVIDER_BOUND + CURRENT_REHASH + SIZE/PARSE_CHECK",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1014-0300-012"
+    }
+  ],
+  "memory_projection": {
+    "L": "historical physical listing → historical exact-download hashes → current-custody revalidation",
+    "O": "temp.locate physical-size evidence cross-checked against metrics receipts for 043-050",
+    "T": "Drive custody evidence linked to Mapa audit receipt",
+    "C": "historical evidence is valid only for observed/downloaded state and must not be promoted to current custody",
+    "P": "cycle receipt persisted append-only by cycle_id"
+  },
+  "uncertainty": {
+    "before": "041-050 broad custody/hash ambiguity",
+    "after": "041-042 historical hash specifically unresolved; 043-050 historical hashes resolved; all 041-050 current custody still unresolved; RAW018 current custody unchanged",
+    "direction": "decreased"
+  },
+  "claim_allowed_changes": [],
+  "F_ok": [
+    "historical physical byte-size coverage explicitly separated and evidenced for 51/51 filenames",
+    "historical exact downloaded SHA-256 for 043-050 revalidated from a declared parser/hash contract",
+    "broad 041-050 uncertainty narrowed into 041-042 historical-hash gap plus 043-050 current-custody gap",
+    "false all-shards-100-conversations assumption remains falsified by shard 050=54"
+  ],
+  "F_gap": [
+    "RAW018 current provider/bytes/rehash/parse",
+    "041-042 exact historical downloaded SHA-256 receipt",
+    "041-050 current provider binding and current rehash",
+    "raw→derived transform lineage remains separate"
+  ],
+  "F_next": [
+    "bulk search/fetch exact metrics receipt for conversations-041 and conversations-042",
+    "resolve current provider/container for RAW018 and apply size+hash+parse+identity gate",
+    "bulk bind current provider objects 043-050 then rehash and compare to historical receipts",
+    "only after custody closure update UNIVERSE_COVERAGE/CONTENT_IDENTITIES typed edges"
+  ]
+}
