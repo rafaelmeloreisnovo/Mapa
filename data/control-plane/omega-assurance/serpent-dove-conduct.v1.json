@@ -1,0 +1,155 @@
+{
+  "schema_version": "rafaelia.serpent-dove-conduct/v1",
+  "contract_id": "SERPENT_DOVE_CONDUCT_V1",
+  "status": "IMPLEMENTED_PENDING_CI",
+  "claim_allowed": false,
+  "append_only": true,
+  "source_metaphor": {
+    "reference": "Matthew 10:16",
+    "epistemic_type": "PARABLE",
+    "engineering_evidence_weight": 0,
+    "boundary": "The verse is provenance for the metaphor only; it is not technical evidence, scientific validation, legal authority, or permission to act."
+  },
+  "architectural_heuristic": {
+    "expression": "Omega_SP = Discernment * NonHarm * Reversibility",
+    "status": "ARCHITECTURAL_HEURISTIC_NOT_VALIDATED_METRIC",
+    "forbidden_use": "Do not compute or compare scientific performance from this expression without an independently defined measurement model."
+  },
+  "matrix": [
+    {"discernment": "HIGH", "non_harm": "HIGH", "state": "WISE_SAFE"},
+    {"discernment": "HIGH", "non_harm": "LOW", "state": "OPERATIONAL_RISK"},
+    {"discernment": "LOW", "non_harm": "HIGH", "state": "FRAGILE_NAIVETY"},
+    {"discernment": "LOW", "non_harm": "LOW", "state": "NEGLIGENCE"}
+  ],
+  "core_invariants": [
+    "CAPABILITY != AUTHORITY",
+    "KNOWLEDGE != PERMISSION",
+    "PREDICTION != EVIDENCE",
+    "DETECTION != ACCUSATION",
+    "MITIGATION != ROOT_CAUSE",
+    "PASS_SANDBOX != PASS_PRODUCTION",
+    "SEE_MORE != CLAIM_MORE",
+    "KNOW_MORE != DO_MORE",
+    "CAN_DO != MAY_DO",
+    "MITIGATE != ERASE",
+    "ADAPT != OVERRIDE",
+    "UNCERTAINTY != FAILURE",
+    "TOKEN_VAZIO != ZERO",
+    "PASS != TRUTH_FOREVER"
+  ],
+  "rules": [
+    {"id": "SP01", "rule": "Observe before altering."},
+    {"id": "SP02", "rule": "Identify before interpreting."},
+    {"id": "SP03", "rule": "Correlate before concluding causality."},
+    {"id": "SP04", "rule": "Seek the falsifier before confirmation."},
+    {"id": "SP05", "rule": "Experiment first in the smallest sufficient environment."},
+    {"id": "SP06", "rule": "Reduce blast radius before increasing automation."},
+    {"id": "SP07", "rule": "Use the least sufficient privilege."},
+    {"id": "SP08", "rule": "Collect less information when less information is sufficient."},
+    {"id": "SP09", "rule": "Preserve rollback whenever a material action is reversible in principle."},
+    {"id": "SP10", "rule": "Never transform silence into consent."},
+    {"id": "SP11", "rule": "Never transform absence or a search miss into proof."},
+    {"id": "SP12", "rule": "Never transform prediction into authority."},
+    {"id": "SP13", "rule": "Escalate uncertainty instead of hiding it."},
+    {"id": "SP14", "rule": "As impact increases, permitted autonomy must not increase without stronger evidence, authority and reversibility."}
+  ],
+  "minimum_sufficient_intervention": {
+    "ordering": ["OBSERVE", "WARN", "ISOLATE", "QUARANTINE", "ACT_BOUNDED", "ESCALATE"],
+    "preferred_relations": [
+      "contain > destroy",
+      "isolate > erase",
+      "quarantine > infer_guilt",
+      "append_correction > rewrite_history",
+      "degrade_safely > improvise",
+      "hold > fabricate_PASS"
+    ]
+  },
+  "quiet_watchdog": {
+    "modes": ["WATCH", "WARN", "HOLD", "ACT_BOUNDED"],
+    "route": [
+      "WATCH -> weak_signal -> CORRELATE",
+      "insufficient_evidence -> WATCH",
+      "sufficient_evidence -> WARN",
+      "unknown_impact_or_reversibility -> HOLD",
+      "known_authority_and_bounded_reversible_action -> ACT_BOUNDED"
+    ],
+    "meta_watch_depth": 2,
+    "meta_watch_overflow": "HOLD_FOR_AUDIT",
+    "heartbeat_rule": "STALE|FAILED|TOKEN_VAZIO watchdog heartbeat cannot ACT_BOUNDED"
+  },
+  "operator_audit_fields": [
+    "OPERATOR_INTENT",
+    "OPERATOR_AUTHORITY",
+    "OPERATOR_CERTAINTY",
+    "OPERATOR_BLAST_RADIUS",
+    "OPERATOR_REVERSIBILITY",
+    "OPERATOR_INFORMATION_EXPOSURE",
+    "OPERATOR_ESCALATION_PATH"
+  ],
+  "gap_operators": [
+    {"id": "DIRECT", "question": "What is directly observed at the exact ref/provider?"},
+    {"id": "INVERSE", "question": "Which contrary or counterfactual observation would overturn the interpretation?"},
+    {"id": "REVERSIVE", "question": "How can the proposed intervention be rolled back or the prior state reconstructed?"},
+    {"id": "DERIVATIVE", "question": "What changed relative to the predecessor receipt and on which explicit axis?"},
+    {"id": "ANTIDERIVATIVE", "question": "Which provenance lineage and boundary conditions reconstruct how this state arose?"},
+    {"id": "ORTHOGONAL", "question": "Which independent evidence axis can test the same claim without duplicating lineage?"},
+    {"id": "TRANSVERSE", "question": "Which other routes, producers, risks or claims are affected by this gap?"},
+    {"id": "SCALE", "question": "How does the state project from META to repository, route, object, token and smallest meaningful unit?"}
+  ],
+  "attention_metabolism": {
+    "states_requiring_periodic_revisit": [
+      "FORGOTTEN",
+      "NORMALIZED",
+      "IGNORED_WITH_REASON",
+      "IGNORED_WITHOUT_REASON",
+      "DISMISSED",
+      "LOW_PRIORITY",
+      "DEFERRED",
+      "ABANDONED",
+      "UNREVIEWED",
+      "ORPHANED",
+      "ANOMALOUS",
+      "PARADOXICAL",
+      "TOKEN_VAZIO"
+    ],
+    "scans": [
+      "FORGOTTEN_TOKEN_SCAN",
+      "ABANDONED_HYPOTHESIS_SCAN",
+      "UNRESOLVED_ANOMALY_SCAN",
+      "STALE_TOKEN_VAZIO_SCAN",
+      "UNTESTED_ASSUMPTION_SCAN",
+      "UNOWNED_RISK_SCAN",
+      "NORMALIZATION_OF_DEVIANCE_WATCH"
+    ]
+  },
+  "evidence_decay": {
+    "states": ["FRESH", "AGING", "STALE", "HISTORICAL_ONLY", "SUPERSEDED", "INVALIDATED"],
+    "rule": "Historical evidence remains evidence for its recorded past state but does not automatically support current runtime or current provider state."
+  },
+  "urgency_contract": {
+    "principle": "urgency orders execution, not truth",
+    "classes": [
+      {"id": "P0", "meaning": "non-compensatory promotion/safety/governance blocker", "default_action": "HOLD"},
+      {"id": "P1", "meaning": "causal blocker that prevents closure or high-value uncertainty reduction", "default_action": "PROBE_NEXT"},
+      {"id": "P2", "meaning": "important unresolved structure, provenance or quality debt", "default_action": "QUEUE_WITH_OWNER"},
+      {"id": "P3", "meaning": "bounded backlog or low-impact refinement", "default_action": "WATCH"}
+    ],
+    "no_scalar_compensation": true
+  },
+  "test_families": [
+    "TEST_DETECT_REAL_RISK",
+    "TEST_DO_NOT_OVERREACT",
+    "TEST_STALE_EVIDENCE_CANNOT_PROMOTE_CURRENT_STATE",
+    "TEST_SEARCH_MISS_IS_NOT_ABSENCE",
+    "TEST_SKIPPED_IS_NOT_EXECUTED",
+    "TEST_MITIGATION_IS_NOT_ROOT_CAUSE",
+    "TEST_PARABLE_IS_NOT_ENGINEERING_EVIDENCE",
+    "TEST_UNKNOWN_AUTHORITY_HOLDS",
+    "TEST_UNKNOWN_ROLLBACK_HOLDS",
+    "TEST_PRIVATE_LOCATOR_NOT_PUBLIC"
+  ],
+  "transition_schema": "schemas/omega-assurance/serpent-dove-transition.v1.schema.json",
+  "parent_mesh": "data/control-plane/omega-assurance/omega-assurance-mesh.v1.json",
+  "attention_registry": "data/control-plane/omega-assurance/attention-state-registry.json",
+  "authority_pyramid": "data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json"
+}
