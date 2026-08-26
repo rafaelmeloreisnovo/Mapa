@@ -1,0 +1,55 @@
+name: Robotics Frontier Governance
+
+on:
+  pull_request:
+    paths:
+      - "docs/governance/CGEN_FRONTIER_RESEARCH_PROGRAM_V1.md"
+      - "docs/governance/ROBOTICS_USER_SOVEREIGNTY_FEDERATION_V1.md"
+      - "schemas/user-governance-capsule.v1.schema.json"
+      - "data/governance/robotics-user-sovereignty-federation.v1.json"
+      - "data/governance/robotics-normative-evolution.v1.json"
+      - "data/governance/robotics-dual-anchor-octant-geometry.v1.json"
+      - "data/governance/robotics-lgpd-handoff-contract.v1.json"
+      - "tests/test_robotics_frontier_governance.py"
+      - ".github/workflows/robotics-frontier-governance.yml"
+  push:
+    paths:
+      - "docs/governance/CGEN_FRONTIER_RESEARCH_PROGRAM_V1.md"
+      - "docs/governance/ROBOTICS_USER_SOVEREIGNTY_FEDERATION_V1.md"
+      - "schemas/user-governance-capsule.v1.schema.json"
+      - "data/governance/robotics-user-sovereignty-federation.v1.json"
+      - "data/governance/robotics-normative-evolution.v1.json"
+      - "data/governance/robotics-dual-anchor-octant-geometry.v1.json"
+      - "data/governance/robotics-lgpd-handoff-contract.v1.json"
+      - "tests/test_robotics_frontier_governance.py"
+      - ".github/workflows/robotics-frontier-governance.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate machine-readable contracts
+        run: |
+          python -m json.tool schemas/user-governance-capsule.v1.schema.json >/dev/null
+          python -m json.tool data/governance/robotics-user-sovereignty-federation.v1.json >/dev/null
+          python -m json.tool data/governance/robotics-normative-evolution.v1.json >/dev/null
+          python -m json.tool data/governance/robotics-dual-anchor-octant-geometry.v1.json >/dev/null
+          python -m json.tool data/governance/robotics-lgpd-handoff-contract.v1.json >/dev/null
+
+      - name: Compile test module
+        run: python -m py_compile tests/test_robotics_frontier_governance.py
+
+      - name: Run frontier falsifiability tests
+        run: python -m unittest tests.test_robotics_frontier_governance -v
