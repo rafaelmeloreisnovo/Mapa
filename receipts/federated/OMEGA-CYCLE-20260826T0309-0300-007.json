@@ -1,0 +1,114 @@
+{
+  "schema": "RAFAELIA_FEDERATED_OPERATIONAL_RECEIPT/v1",
+  "cycle_id": "OMEGA-CYCLE-20260826T0309-0300-007",
+  "predecessor": "OMEGA-CYCLE-20260826T0212-0300-006",
+  "observed_at": "2026-08-26T03:09:12-03:00",
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "cursor": {
+    "mapa_before": "12b3fbe453ad57643d79c62e70b3ed4ea63067a3",
+    "mapa_after": "12b3fbe453ad57643d79c62e70b3ed4ea63067a3",
+    "bulk_exam_merge": "12b3fbe453ad57643d79c62e70b3ed4ea63067a3",
+    "bulk_exam_base": "a47eb393c2622cb6f110921aaa0e530d22ee0a49",
+    "nanoGPT_head_observed": "d839c0d08910dd3bbe87b5e2da40a0ea2c11da61",
+    "nanoGPT_subject_execution_commit": "dc305105671e429a347e8d5997df71de766caf36",
+    "nanoGPT_provider_receipt_commit": "c2ad0130cad8073c8a016bbf07cf611857650c07"
+  },
+  "sources": [
+    "github:rafaelmeloreisnovo/Mapa@12b3fbe453ad57643d79c62e70b3ed4ea63067a3",
+    "github:rafaelmeloreisnovo/nanoGPT@d839c0d08910dd3bbe87b5e2da40a0ea2c11da61",
+    "github:rafaelmeloreisnovo/nanoGPT@c2ad0130cad8073c8a016bbf07cf611857650c07",
+    "drive:folder:1aVPudztple-lQrH0hxfhYdbB0jk4eKPv"
+  ],
+  "processed": {
+    "pending_repository_identities_reconciled": 82,
+    "bulk_signal_counts": {
+      "implementation_test_evidence": 20,
+      "documentation_research": 35,
+      "empty_api": 5,
+      "token_vazio_structural": 22
+    },
+    "deep_exhaustiveness": "TOKEN_VAZIO",
+    "automatic_catalog_promotions": 0
+  },
+  "evidence_delta": [
+    {
+      "object_id": "repo:rafaelmeloreisnovo/nanoGPT",
+      "state_before": "T1/T2_PARTIAL_EXECUTION_UNBOUND",
+      "state_after": "PROVIDER_STARTUP_FAILURE_OBSERVED_EXECUTION_STILL_TOKEN_VAZIO",
+      "evidence": {
+        "workflow": "Freestanding Triad Falsifier",
+        "run_id": 32932080987,
+        "attempts": 2,
+        "steps_observed": 0
+      },
+      "independent_crosscheck": {
+        "workflow": "RAFAELIA Validation",
+        "run_id": 32932081005,
+        "attempts": 2,
+        "jobs_failed_before_steps": 4
+      },
+      "interpretation": "CI provider startup failure is observed; no code failure may be inferred because no workflow step executed.",
+      "claim_allowed": false
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-ACTIVE-82-DEEP-BOUNDARY-20260826-007",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Mapa@12b3fbe453ad57643d79c62e70b3ed4ea63067a3",
+      "missing_field": "exact HEAD/default-branch/root-tree/license/workflows/latest executable receipt per non-empty pending repository",
+      "blocking_dependency": "bulk provider-bound deep enumeration",
+      "evidence_needed": "immutable repository identity plus HEAD/tree/license/workflow/receipt tuple for each eligible repository",
+      "falsifier": "any repository classified beyond observed evidence or any stale HEAD reused as current",
+      "next_probe": "continue implementation-rich priority list cursor-first, starting with exact provider-bound tuples; classify N/A dimensions explicitly",
+      "owner_authority": "producer repository for source/runtime; Mapa for federation/index",
+      "urgency": "P0",
+      "closure_gate": "all eligible non-empty pending repositories have current immutable tuples or explicit typed boundary",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T0212-0300-006 -> PR#420 merge -> cycle007"
+    },
+    {
+      "gap_id": "TV-NANOGPT-REMOTE-EXECUTION-20260826-007",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "nanoGPT@dc305105671e429a347e8d5997df71de766caf36 + receipt@c2ad0130cad8073c8a016bbf07cf611857650c07",
+      "missing_field": "provider execution reaching at least one test/falsifier step on the subject commit or a successor with equivalent source boundary",
+      "blocking_dependency": "GitHub Actions runner startup availability",
+      "evidence_needed": "workflow run with steps_observed>0, exact commit SHA, exit outcomes and logs/artifact receipt",
+      "falsifier": "a started workflow that reaches code steps and fails the declared invariant/test",
+      "next_probe": "revalidate a later workflow run; do not relabel startup failure as code failure",
+      "owner_authority": "rafaelmeloreisnovo/nanoGPT",
+      "urgency": "P1",
+      "closure_gate": "HEAD-exact or source-equivalent provider execution receipt",
+      "claim_allowed": false,
+      "predecessor_lineage": "dc305105 -> provider runs -> c2ad013 receipt -> d839c0 merge -> cycle007"
+    }
+  ],
+  "memory_projection": {
+    "L": "82-pending preliminary bulk exam merged after cycle006; nanoGPT provider failure receipt precedes current observed head",
+    "O": "two independent workflows repeated startup failure before steps",
+    "T": "Mapa bulk maturity routing linked to nanoGPT producer evidence without transferring source authority",
+    "C": "provider failure explains absent remote execution but does not validate or invalidate code",
+    "P": "immutable repository/commit/run identifiers preserved append-only"
+  },
+  "uncertainty_before": "82 repositories identity-covered but deep boundary globally TOKEN_VAZIO; nanoGPT T2 wording partially ambiguous",
+  "uncertainty_after": "82 identity coverage retained with exact 20/35/5/22 partition; nanoGPT remote execution explicitly separated from provider startup failure",
+  "coverage_before": "82/82 T0 identity; deep exhaustiveness TOKEN_VAZIO",
+  "coverage_after": "82/82 T0 identity + provider-bound nanoGPT execution boundary; deep exhaustiveness remains TOKEN_VAZIO",
+  "claim_allowed_changes": [],
+  "claim_allowed": false,
+  "F_ok": [
+    "PR#420 bulk examination is merged and reachable from Mapa/main",
+    "82/82 pending identities are preliminarily routed without automatic promotion",
+    "nanoGPT provider startup failure is evidence-bound and separated from code execution"
+  ],
+  "F_gap": [
+    "deep tuple coverage for non-empty pending repositories remains incomplete",
+    "nanoGPT remote code execution remains TOKEN_VAZIO",
+    "Drive recursive universe enumeration remains outside closure in this cycle"
+  ],
+  "F_next": [
+    "bind exact HEAD/default-branch/root-tree/license/workflow/receipt tuples for implementation-rich pending repositories",
+    "revalidate nanoGPT only when a provider run actually reaches steps",
+    "advance Drive recursive enumeration from the receipts/provenance namespace without title-based identity merging"
+  ]
+}
