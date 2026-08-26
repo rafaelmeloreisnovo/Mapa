@@ -10,5 +10,13 @@ This index binds governance artifacts for authorship/licensing review.
 - provenance matrix: `governance/authorship/PROVENANCE_MATRIX_V1.md`
 - freestanding contract: `governance/authorship/FREESTANDING_AUTHORIAL_KERNEL_CONTRACT_V1.md`
 - backlog: `governance/authorship/LEGAL_PROVENANCE_AUDIT_BACKLOG_V1.md`
+- examination matrix: `governance/authorship/EXAMINATION_MATRIX_V1.md`
+
+Per-component examination receipts:
+- Termux/RAFCODEPHI: `governance/authorship/exams/TERMUX_RAFACODEPHI_EXAM_V1.json`
+- QEMU/RMR: `governance/authorship/exams/QEMU_RMR_EXAM_V1.json`
+- Vectras/RVR: `governance/authorship/exams/VECTRAS_RVR_EXAM_V1.json`
+- llamaRafaelia: `governance/authorship/exams/LLAMA_RAFAELIA_EXAM_V1.json`
+- AndroidX/Gradle/native: `governance/authorship/exams/ANDROIDX_GRADLE_NATIVE_EXAM_V1.json`
 
 State: REVIEW_REQUIRED / claim_allowed=false
