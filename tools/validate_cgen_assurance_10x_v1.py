@@ -2,8 +2,8 @@
 """Validate CGEN Assurance Hardening 10x10 V1.
 
 Stdlib-only fail-closed validator. It validates structure, hard invariants,
-gate/lens/depth cardinality, TOKEN_VAZIO semantics, normative snapshot
-source identity, P0 preservation and anti-false-equivalence guards.
+gate/lens/depth cardinality, TOKEN_VAZIO semantics, normative snapshot,
+P0 preservation, anti-false-equivalence and dimensional formula transfer.
 """
 
 from __future__ import annotations
@@ -37,6 +37,12 @@ REQUIRED_INVARIANTS = {
     "P0_CANNOT_BE_AVERAGED_AWAY",
     "STALE_NORM_CANNOT_AUTHORIZE_CURRENT_PROMOTION",
     "IRREVERSIBLE_ACTION_WITH_UNKNOWN_ROLLBACK -> BLOCK",
+    "FORMULA_SIMILARITY != DOMAIN_VALIDITY",
+    "DIMENSIONAL_CONSISTENCY != EMPIRICAL_VALIDATION",
+    "PURE_MATH_VALIDITY != PHYSICAL_APPLICABILITY",
+    "PHYSICAL_APPLICABILITY != EMPIRICAL_SUPPORT",
+    "EMPIRICAL_SUPPORT != CAUSAL_EXPLANATION",
+    "CAUSAL_EXPLANATION != LEGAL_OR_NORMATIVE_AUTHORITY",
 }
 
 REQUIRED_EXTERNAL_P0 = {
@@ -72,6 +78,54 @@ REQUIRED_DRIFTS = {
     "PRIVACY_DRIFT",
     "EVIDENCE_AGING",
     "WATCHDOG_HEARTBEAT_STALE",
+    "FORMULA_DOMAIN_DRIFT",
+    "UNIT_SCALE_DRIFT",
+}
+
+REQUIRED_TRANSFER_FIELDS = {
+    "domain",
+    "codomain",
+    "units",
+    "scale",
+    "coordinates",
+    "invariants",
+    "boundary_conditions",
+    "transform",
+    "assumptions",
+    "error",
+    "falsifier",
+    "evidence",
+}
+
+REQUIRED_TRANSFER_DIMENSIONS = {
+    "MATHEMATICAL",
+    "PHYSICAL",
+    "MEASUREMENT_UNIT",
+    "TENSOR_ARRAY",
+    "STATISTICAL",
+    "SEMANTIC",
+    "OPERATIONAL",
+    "NORMATIVE",
+}
+
+REQUIRED_TRANSFER_STATES = {
+    "PROVED_IDENTITY_SAME_DOMAIN",
+    "PROVED_ISOMORPHIC_REWRITE",
+    "VALID_DIMENSIONAL_TRANSFORM",
+    "MODEL_TRANSFER_BOUNDED",
+    "HYPOTHESIS_TRANSFER",
+    "ANALOGY_ONLY",
+    "INVALID_DIMENSIONAL_MISMATCH",
+    "OUT_OF_SCOPE",
+    "TOKEN_VAZIO_TRANSFER",
+}
+
+REQUIRED_TRANSFER_FORBIDDEN = {
+    "ANALOGY_ONLY_TO_EMPIRICAL_FACT",
+    "DIMENSIONAL_CONSISTENCY_TO_EMPIRICAL_VALIDATION",
+    "PURE_MATH_VALIDITY_TO_PHYSICAL_APPLICABILITY",
+    "PHYSICAL_APPLICABILITY_TO_CAUSAL_EXPLANATION",
+    "SCIENTIFIC_MODEL_TO_NORMATIVE_AUTHORITY",
 }
 
 
@@ -139,6 +193,21 @@ def validate_contract(data: dict) -> list[str]:
     events = set(data.get("epistemic_event_types") or [])
     require(REQUIRED_EVENT_TYPES <= events, "epistemic event types incomplete")
 
+    transfer = data.get("formula_transfer")
+    require(isinstance(transfer, dict), "formula_transfer must be object")
+    require(REQUIRED_TRANSFER_FIELDS <= set(transfer.get("required_signature_fields") or []),
+            "formula transfer signature incomplete")
+    require(REQUIRED_TRANSFER_DIMENSIONS <= set(transfer.get("dimension_classes") or []),
+            "formula transfer dimensions incomplete")
+    require(REQUIRED_TRANSFER_STATES <= set(transfer.get("states") or []),
+            "formula transfer states incomplete")
+    require(REQUIRED_TRANSFER_FORBIDDEN <= set(transfer.get("forbidden_promotions") or []),
+            "formula transfer forbidden promotions incomplete")
+    require("EVIDENCE" in set(transfer.get("promotion_requires") or []),
+            "formula transfer promotion must require evidence")
+    require("FALSIFIER" in set(transfer.get("promotion_requires") or []),
+            "formula transfer promotion must require a falsifier")
+
     drifts = set(data.get("monitoring_drifts") or [])
     require(REQUIRED_DRIFTS <= drifts, "monitoring drift set incomplete")
 
@@ -176,11 +245,16 @@ def validate_contract(data: dict) -> list[str]:
         require(bool(token.get("f_next")), f"open token {token.get('id')} missing f_next")
 
     falsification = data.get("falsification_tests")
-    require(isinstance(falsification, list) and len(falsification) >= 10, "at least 10 falsification tests required")
+    require(isinstance(falsification, list) and len(falsification) >= 12, "at least 12 falsification tests required")
+    require("FORMULA_ANALOGY_IS_PROMOTED_WITHOUT_DOMAIN_TRANSFER_EVIDENCE" in falsification,
+            "formula-transfer falsifier missing")
+    require("DIMENSIONAL_CONSISTENCY_IS_TREATED_AS_EMPIRICAL_VALIDATION" in falsification,
+            "dimensional-consistency falsifier missing")
 
     messages.append("PASS: CGEN 10x10 contract structurally valid")
     messages.append("PASS: 10 depth levels × 10 correlated lenses × 10 gates")
     messages.append("PASS: TOKEN_VAZIO, P0, archive and normative-drift guards preserved")
+    messages.append("PASS: dimensional formula-transfer boundary machine-enforced")
     messages.append("PASS: claim_allowed=false and external promotion blockers preserved")
     return messages
 
