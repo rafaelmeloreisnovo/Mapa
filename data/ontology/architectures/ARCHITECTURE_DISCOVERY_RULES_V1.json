@@ -1,6 +1,6 @@
 {
   "schema": "rafaelia.architecture-discovery-rules/v1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "claim_allowed": false,
   "normalization": {
     "unicode": "NFKD_ASCII_FOLD",
@@ -15,8 +15,8 @@
   "rules": [
     {"id":"RULE-FCEA","canonical":"FCEA","architecture_id":"ARCH-FCEA","kind_hint":"FRAMEWORK_FAMILY","state":"MATCHED_REGISTRY","patterns":["\\bfcea\\b","framework cognitivo evolutivo absoluto","framework cognitivo absoluto","framework evolutivo parametrico"]},
     {"id":"RULE-ZETA","canonical":"ZETA","architecture_id":"ARCH-ZETA","kind_hint":"AI_FAMILY","state":"MATCHED_REGISTRY","patterns":["\\bzeta(?:zero)?\\b","ia precisao extrema zeta","zeta v2"]},
-    {"id":"RULE-V79-1","canonical":"V79-1","architecture_id":"ARCH-V79-1","kind_hint":"VERSION_LINEAGE","state":"MATCHED_REGISTRY","patterns":["\\bv79[._ -]?1\\b","\\bv79\\.1\\b"]},
-    {"id":"RULE-V79","canonical":"V79","architecture_id":null,"kind_hint":"VERSION_LINEAGE","state":"TOKEN_VAZIO_LINEAGE_MEMBER","patterns":["\\bv79\\b"]},
+    {"id":"RULE-V79-1","canonical":"V79-1","architecture_id":"ARCH-V79-1","kind_hint":"VERSION_LINEAGE","state":"MATCHED_REGISTRY","patterns":["\\bv79[._ -]+1\\b"]},
+    {"id":"RULE-V79","canonical":"V79","architecture_id":null,"kind_hint":"VERSION_LINEAGE","state":"TOKEN_VAZIO_LINEAGE_MEMBER","patterns":["\\bv79\\b(?![._ -]+1\\b)"]},
     {"id":"RULE-V80","canonical":"V80","architecture_id":null,"kind_hint":"VERSION_LINEAGE","state":"TOKEN_VAZIO_LINEAGE_MEMBER","patterns":["\\bv80\\b"]},
     {"id":"RULE-V2000","canonical":"V2000","architecture_id":null,"kind_hint":"VERSION_LINEAGE","state":"TOKEN_VAZIO_LINEAGE_MEMBER","patterns":["\\bv2000\\b"]},
     {"id":"RULE-V2001","canonical":"V2001","architecture_id":null,"kind_hint":"VERSION_LINEAGE","state":"TOKEN_VAZIO_LINEAGE_MEMBER","patterns":["\\bv2001\\b"]},
@@ -28,7 +28,7 @@
     {"id":"RULE-MITM","canonical":"Camada MiTM","architecture_id":"ARCH-MITM-LAYER","kind_hint":"DATA_LAYER","state":"MATCHED_REGISTRY","patterns":["\\bmitm\\b","camada mitm","mitm inteligente","mitm expandida"]},
     {"id":"RULE-MULTICAMADAS","canonical":"IA Multicamadas","architecture_id":"ARCH-IA-MULTICAMADAS","kind_hint":"AI_FAMILY","state":"MATCHED_REGISTRY","patterns":["ia multicamadas","ia integrada e multicamadas","multicamadas e projetos"]},
     {"id":"RULE-DEEPRAFA","canonical":"DeepRafa","architecture_id":"ARCH-DEEPRAFA","kind_hint":"AI_FAMILY","state":"MATCHED_REGISTRY","patterns":["\\bdeeprafa(?:2)?\\b","deep rafa"]},
-    {"id":"RULE-RA-IA","canonical":"RA-IA","architecture_id":"ARCH-RA-IA","kind_hint":"AI_FAMILY","state":"MATCHED_REGISTRY","patterns":["\\bra[ _-]?ia\\b"]},
+    {"id":"RULE-RA-IA","canonical":"RA-IA","architecture_id":"ARCH-RA-IA","kind_hint":"AI_FAMILY","state":"MATCHED_REGISTRY","patterns":["\\bra[ _-]+ia\\b"]},
     {"id":"RULE-HCPM","canonical":"HCPM","architecture_id":"ARCH-HCPM","kind_hint":"FRAMEWORK_FAMILY","state":"MATCHED_REGISTRY","patterns":["\\bhcpm\\b","hcpm core"]},
     {"id":"RULE-HYPERCUBE","canonical":"fcea_hypercube","architecture_id":"ARCH-FCEA-HYPERCUBE","kind_hint":"IMPLEMENTATION_TREE","state":"MATCHED_REGISTRY","patterns":["fcea hypercube","fcea_hypercube","\\bhypercube\\b","\\bhipercubo\\b"]},
     {"id":"RULE-NEXUS","canonical":"RAFAELIA_NEXUS","architecture_id":"ARCH-NEXUS","kind_hint":"FRAMEWORK_FAMILY","state":"MATCHED_REGISTRY","patterns":["rafaelia nexus","\\bnexus\\b"]},
