@@ -1,0 +1,24 @@
+name: novoexport-raw018-wave4-evolution-x
+
+on:
+  pull_request:
+    paths:
+      - 'data/evidence/novoexport_raw018_wave4_evolution_x_20260825.v1.json'
+      - 'tools/validate_novoexport_raw018_wave4_evolution_x.py'
+      - '.github/workflows/novoexport-raw018-wave4-evolution-x.yml'
+      - 'indices/NOVOEXPORT_RAW018_WAVE4_EVOLUTION_X_20260825_V1.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout pinned commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile validator
+        run: python3 -m py_compile tools/validate_novoexport_raw018_wave4_evolution_x.py
+      - name: Validate raw018 candidate rejection and gap preservation
+        run: python3 tools/validate_novoexport_raw018_wave4_evolution_x.py
