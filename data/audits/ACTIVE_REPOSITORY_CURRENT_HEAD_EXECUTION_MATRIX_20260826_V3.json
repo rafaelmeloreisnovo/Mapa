@@ -1,0 +1,68 @@
+{
+  "schema": "mapa.active-repository-current-head-execution/v3",
+  "observed_date": "2026-08-26",
+  "predecessor": [
+    "ACTIVE_REPOSITORY_EXACT_BINDINGS_20260826_V2.json",
+    "ACTIVE_REPOSITORY_EXACT_BINDINGS_20260826_V2_TRANCHE2.json"
+  ],
+  "cohort_size": 20,
+  "contract": {
+    "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "token_vazio_rule": "TOKEN_VAZIO is neither PASS nor FAIL",
+    "project_execution_rule": "A repository counts as executed only when project-code or project-validation steps actually run on the exact current HEAD and produce observable step outcomes.",
+    "provider_rule": "A failed run/job with no observed steps is PROVIDER_STARTUP_FAIL and does not count as code execution.",
+    "old_sha_rule": "A run on a SHA different from current HEAD does not count.",
+    "platform_automation_rule": "Codespaces/CodeQL/platform-only automation does not count as project-code execution unless its executed scope establishes the project gate.",
+    "strict_reproducibility_rule": "Strict reproducibility additionally requires a sufficiently pinned environment/dependency boundary or equivalent immutable receipt. A successful run on floating ubuntu-latest plus unpinned dependencies is PASS_OBSERVED but not STRICT_REPRODUCIBLE.",
+    "claim_allowed": false,
+    "release_allowed": false
+  },
+  "metrics": {
+    "current_head_project_execution_observed": {"count": 1, "denominator": 20, "fraction": 0.05, "percent": 5.0},
+    "current_head_project_pass_observed": {"count": 1, "denominator": 20, "fraction": 0.05, "percent": 5.0},
+    "current_head_project_fail_after_steps": {"count": 0, "denominator": 20, "fraction": 0.0, "percent": 0.0},
+    "strict_reproducibility_closed": {"count": 0, "denominator": 20, "fraction": 0.0, "percent": 0.0},
+    "provider_startup_fail_exact_head": {"count": 4, "denominator": 20, "fraction": 0.20, "percent": 20.0},
+    "execution_unobserved_or_nonqualifying": {"count": 15, "denominator": 20, "fraction": 0.75, "percent": 75.0}
+  },
+  "rerun_probe": {
+    "performed": true,
+    "repositories": [
+      {"repo": "rafaelmeloreisnovo/Rafaelia_Core", "run_id": 32689068745, "head_sha": "f4c0e6ab51bcd74af57eb0ef8c120e76851a0428", "attempt": 2, "status": "completed", "conclusion": "failure", "job": "Publish benchmark metrics into docs", "steps": null, "classification": "PROVIDER_STARTUP_FAIL", "code_execution": "TOKEN_VAZIO"},
+      {"repo": "rafaelmeloreisnovo/RafNet-Core", "run_id": 31804298183, "head_sha": "1a772441277bddf9a4daf5a4d87a292f32972fb8", "attempt": 2, "status": "completed", "conclusion": "failure", "job": "runtime-evidence", "steps": null, "classification": "PROVIDER_STARTUP_FAIL", "code_execution": "TOKEN_VAZIO"},
+      {"repo": "rafaelmeloreisnovo/nanoGPT", "run_id": 32932352408, "head_sha": "d839c0d08910dd3bbe87b5e2da40a0ea2c11da61", "attempt": 2, "status": "completed", "conclusion": "failure", "job": "falsify", "steps": null, "classification": "PROVIDER_STARTUP_FAIL", "code_execution": "TOKEN_VAZIO"},
+      {"repo": "rafaelmeloreisnovo/privadoFazendo", "run_id": 31855741833, "head_sha": "4ab686f2c233800fe65c5cfbd7c43017ecd086db", "attempt": 2, "status": "completed", "conclusion": "failure", "job": "security-regression", "steps": null, "classification": "PROVIDER_STARTUP_FAIL", "code_execution": "TOKEN_VAZIO"}
+    ],
+    "result": "All four exact-HEAD provider failures reproduced at attempt 2 without observed steps; none is promoted to CODE_FAIL."
+  },
+  "records": [
+    {"repo":"rafaelmeloreisnovo/Rafaelia_Core","head_sha":"f4c0e6ab51bcd74af57eb0ef8c120e76851a0428","state":"PROVIDER_STARTUP_FAIL","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/RafNet-Core","head_sha":"1a772441277bddf9a4daf5a4d87a292f32972fb8","state":"PROVIDER_STARTUP_FAIL","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/nanoGPT","head_sha":"d839c0d08910dd3bbe87b5e2da40a0ea2c11da61","state":"PROVIDER_STARTUP_FAIL","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/Fisica","head_sha":"4ef974a8eab07e8154ff90308e0dafb251ce1078","state":"CI_DEFINED_EXECUTION_UNOBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca","head_sha":"9a66958cb35813fae2feeac3d348c69273f09b76","state":"PASS_OBSERVED_REPLAYABLE_BOUNDED","project_execution_observed":true,"pass_observed":true,"strict_reproducible":false,"run_id":32819806079,"job_id":97715355081,"workflow":".github/workflows/ci.yml","executed_scope":["checkout exact HEAD","markdownlint changed Markdown","validate_calendar_matrix.py --check","cycle_phase_features.py --self-test","required root files","docs directory"],"observed_outputs":["markdownlint Summary: 0 issues","[OK] matrix valid: records=10 relations=9","PASS cycle_phase_features","All required root files present","docs/ validated"],"runner":{"os":"Ubuntu 24.04.4 LTS","runner_version":"2.336.0","image":"ubuntu-24.04","image_version":"20260816.277.1","git":"2.55.0","markdownlint_cli2":"0.23.2"},"strict_reproducibility_gaps":["workflow specifies ubuntu-latest rather than immutable runner image","markdownlint-cli2 installed without pinned version","no workflow artifact emitted"]},
+    {"repo":"rafaelmeloreisnovo/privadoFazendo","head_sha":"4ab686f2c233800fe65c5cfbd7c43017ecd086db","state":"PROVIDER_STARTUP_FAIL","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/ZIPRAF_CORE","head_sha":"060f7f2874d8a65fb04e57321a770daab0eb2cc9","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/Semente","head_sha":"fca23ee92d8284c089157dfd7adfba8526ac22c3","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/rafaelia-core-enterprise","head_sha":"de12cfb0e387bb3ddb0f7468c5b2c6d82df1b65c","state":"OLD_SHA_PLATFORM_RUN_ONLY","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"rafaelmeloreisnovo/templo-vivo-arcs","head_sha":"ebbf8c2f5fdca7e15137f5a72091a7cf0be78ed0","state":"EXACT_HEAD_PLATFORM_AUTOMATION_ONLY","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/RAFAELIA_CORE","head_sha":"5af6d636e22462611f3f28720705f7c427eac6e8","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Zrf","head_sha":"ea863fc3c096316412b611ad9c167ad4560c7edc","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Bitraf-Bit-quantum","head_sha":"cffd71e033b5231b60ad0616860a41cebfb99de8","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/ESTADO-FRACTAL-HAJA","head_sha":"92c592e8dc8f9af7017a35a2e778b0fc314e82b6","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Clay-Maths","head_sha":"8a15ddb77869517596ae7c43d6b2e3cb2bf42b7e","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Atomic_EX_WASTE","head_sha":"ae9ee346de3da960d33878bcd073224eec1a61e5","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Eletron-efeitos-qu-ntico","head_sha":"3451046fc01ab4534818f4dd63e6d63b3bfe16bd","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Whilehole","head_sha":"08798d8daa63a15371515ae998bd1fd83d7dbfeb","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Etica-nas-Intelig-ncia-artificial-","head_sha":"ebc3cf5073ed3e2f95b22f22bf4fd1c08d056f39","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false},
+    {"repo":"instituto-Rafael/Unify_Teory_of_mission_holly_espiritual_ciencias_","head_sha":"ac303f5626e0218a2b07301b86738cdaa16cd2d8","state":"NO_ACTIONS_RUN_OBSERVED","project_execution_observed":false,"pass_observed":false,"strict_reproducible":false}
+  ],
+  "next_gate": {
+    "goal": "Raise strict reproducibility from 0/20 without conflating provider availability with code correctness.",
+    "priority": [
+      "Pin and receipt GEOMETRIA_SOLAR_Maia_Inca CI environment/dependencies so its observed PASS can become STRICT_REPRODUCIBLE.",
+      "Diagnose provider-startup failure boundary for Rafaelia_Core, RafNet-Core, nanoGPT and privadoFazendo because attempt 2 again produced no steps.",
+      "Create or expose runnable current-HEAD gates for repositories with NO_ACTIONS_RUN_OBSERVED, using repository-appropriate tests and N/A dimensions rather than generic CI theater."
+    ]
+  }
+}

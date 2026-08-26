@@ -1,0 +1,92 @@
+{
+  "schema": "mapa.active-repository-current-head-execution/v3.1",
+  "observed_date": "2026-08-26",
+  "predecessor": "ACTIVE_REPOSITORY_CURRENT_HEAD_EXECUTION_MATRIX_20260826_V3.json",
+  "update_semantics": "append-only promotion event; V3 remains historical evidence",
+  "cohort_size": 20,
+  "contract": {
+    "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "token_vazio_rule": "TOKEN_VAZIO is neither PASS nor FAIL",
+    "strict_core_rule": "A repository counts as strict-reproducible for a declared project-core scope when the current default-branch HEAD executes project gates inside a sufficiently immutable project environment, critical orchestration actions are commit-pinned, a machine-readable HEAD-bound receipt is emitted, and the receipt artifact has an observed digest.",
+    "provider_boundary": "GitHub-hosted runner orchestration is not claimed fully hermetic; project-core reproducibility is bounded to the immutable container and declared gates.",
+    "scientific_empirical_boundary": "Software/data reproducibility does not establish archaeological, astronomical-causal, historical, or physical claims.",
+    "claim_allowed": false,
+    "release_allowed": false
+  },
+  "metrics": {
+    "current_head_project_execution_observed": {"count": 1, "denominator": 20, "fraction": 0.05, "percent": 5.0},
+    "current_head_project_pass_observed": {"count": 1, "denominator": 20, "fraction": 0.05, "percent": 5.0},
+    "current_head_project_fail_after_steps": {"count": 0, "denominator": 20, "fraction": 0.0, "percent": 0.0},
+    "strict_reproducible_core_closed": {"count": 1, "denominator": 20, "fraction": 0.05, "percent": 5.0},
+    "provider_startup_fail_exact_head": {"count": 4, "denominator": 20, "fraction": 0.20, "percent": 20.0},
+    "execution_unobserved_or_nonqualifying": {"count": 15, "denominator": 20, "fraction": 0.75, "percent": 75.0}
+  },
+  "promotion_event": {
+    "repo": "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca",
+    "from_state": "PASS_OBSERVED_REPLAYABLE_BOUNDED",
+    "to_state": "STRICT_REPRODUCIBLE_CORE_PASS",
+    "old_main_head": "9a66958cb35813fae2feeac3d348c69273f09b76",
+    "new_main_head": "0d4d23210414dd1ff6582d453ffbc4009df5168a",
+    "new_main_tree": "c607c1dd9229bf09ba57975b31a55270e5109bd3",
+    "promotion_pr": 7,
+    "workflow": ".github/workflows/reproducible-core.yml",
+    "main_head_run_id": 32943310618,
+    "main_head_job_id": 98098654246,
+    "main_head_conclusion": "success",
+    "project_gates": {
+      "calendar_matrix": "success",
+      "cycle_phase": "success",
+      "required_root_files": "success",
+      "docs_directory": "success",
+      "receipt_generation": "success",
+      "artifact_upload": "success"
+    },
+    "immutable_project_environment": "python:3.12.11-slim-bookworm@sha256:519591d6871b7bc437060736b9f7456b8731f1499a57e22e6c285135ae657bf7",
+    "action_pins": {
+      "actions/checkout": "11d5960a326750d5838078e36cf38b85af677262",
+      "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+    },
+    "receipt": {
+      "schema": "rafaelia.reproducible-core-receipt/v1",
+      "payload_sha256": "417c6b653e40d7812bd6ddd8a7f305bb9e8485c581c0144f356708353d4e7b0d",
+      "all_project_gates_passed": true,
+      "artifact_id": 9597299796,
+      "artifact_name": "reproducible-core-receipt-0d4d23210414dd1ff6582d453ffbc4009df5168a-1",
+      "artifact_sha256": "b518c74da99081bc7108d77a275c1e9a591447da3cf5a772b37b6d4f9a61e1b7",
+      "retention_days": 90
+    },
+    "provider_orchestration_fully_hermetic": false,
+    "scientific_empirical_claims_validated": false,
+    "claim_allowed": false
+  },
+  "records": [
+    {"repo":"rafaelmeloreisnovo/Rafaelia_Core","state":"PROVIDER_STARTUP_FAIL","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/RafNet-Core","state":"PROVIDER_STARTUP_FAIL","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/nanoGPT","state":"PROVIDER_STARTUP_FAIL","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/Fisica","state":"CI_DEFINED_EXECUTION_UNOBSERVED","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca","head_sha":"0d4d23210414dd1ff6582d453ffbc4009df5168a","tree_sha":"c607c1dd9229bf09ba57975b31a55270e5109bd3","state":"STRICT_REPRODUCIBLE_CORE_PASS","project_execution_observed":true,"pass_observed":true,"strict_reproducible_core":true},
+    {"repo":"rafaelmeloreisnovo/privadoFazendo","state":"PROVIDER_STARTUP_FAIL","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/ZIPRAF_CORE","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/Semente","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/rafaelia-core-enterprise","state":"OLD_SHA_PLATFORM_RUN_ONLY","strict_reproducible_core":false},
+    {"repo":"rafaelmeloreisnovo/templo-vivo-arcs","state":"EXACT_HEAD_PLATFORM_AUTOMATION_ONLY","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/RAFAELIA_CORE","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Zrf","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Bitraf-Bit-quantum","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/ESTADO-FRACTAL-HAJA","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Clay-Maths","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Atomic_EX_WASTE","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Eletron-efeitos-qu-ntico","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Whilehole","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Etica-nas-Intelig-ncia-artificial-","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false},
+    {"repo":"instituto-Rafael/Unify_Teory_of_mission_holly_espiritual_ciencias_","state":"NO_ACTIONS_RUN_OBSERVED","strict_reproducible_core":false}
+  ],
+  "next_gate": {
+    "goal": "Raise strict-reproducible project-core coverage from 1/20 to 2/20.",
+    "priority": [
+      "Inspect Fisica current HEAD and bind its repository-native geophysical-transduction tests into a reproducible receipt without upgrading synthetic fixtures into empirical physical evidence.",
+      "Then inspect ZIPRAF_CORE native tests/tools as the next no-run executable candidate.",
+      "Keep the four zero-step repositories on provider-boundary diagnosis; do not modify project code merely to chase infrastructure startup failures."
+    ]
+  }
+}
