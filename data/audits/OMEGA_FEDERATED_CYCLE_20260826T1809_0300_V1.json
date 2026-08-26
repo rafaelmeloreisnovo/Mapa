@@ -1,0 +1,207 @@
+{
+  "cycle_id": "OMEGA-CYCLE-20260826T1809-0300-020",
+  "predecessor": "Mapa/main@8e2f3933e5d49cab7e36a1bbc4acbb8a4116952e",
+  "observed_interval": {
+    "local_start": "2026-08-26T18:09:11-03:00",
+    "local_end": "2026-08-26T18:09:11-03:00",
+    "note": "connector observations in this cycle; timestamps are receipt anchors, not provider mutation times"
+  },
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "sources_traversed": [
+    {
+      "provider": "Google Drive",
+      "object_id": "1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og",
+      "title": "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT",
+      "revision_id": "AIroW35cEoTlGlyndWoZfxfu6ZPzQiHGu747feIgoXyihQ0Vvz8MUH5KGRFRtbP0iFje2w0ybQSIS_mJKr61nlvE4LNXNau4im-7wOqs9yQ",
+      "role": "declared navigation registry"
+    },
+    {
+      "provider": "Google Drive",
+      "object_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+      "title": "01_SISTEMA_CORPUS_CUSTODIA",
+      "role": "current live system root"
+    },
+    {
+      "provider": "Google Drive",
+      "object_id": "1q7NThjg5FBiVB8L2wNspijef25kDRCFi",
+      "title": "02_CONVERSAS_SOLTAS_QUARENTENA",
+      "role": "current live quarantine root"
+    },
+    {
+      "provider": "Google Drive",
+      "object_id": "19gKzpJ5_7k6rSyvbW_s4mzlpsrXfjbloHNNKT-qVpfw",
+      "title": "JOURNAL_2026-08-25_NOVOEXPORT_CUSTODY",
+      "role": "RAW018 custody predecessor evidence"
+    },
+    {
+      "provider": "GitHub",
+      "object_id": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "commit_sha": "8e2f3933e5d49cab7e36a1bbc4acbb8a4116952e",
+      "tree_sha": "20589d46e1dc278f4cb9b15bd4ebf18fe77536a0"
+    }
+  ],
+  "cursor": {
+    "before": "RAW018 live corpus/quarantine probe + route registry stale-pointer suspicion",
+    "after": "system route registry 00..08 reconciled against live root/provider metadata; 02 live, 8 declared IDs unresolved via files.get"
+  },
+  "volume_processed": {
+    "declared_system_subroutes_tested": 9,
+    "live_system_subroutes": 1,
+    "unresolved_declared_system_route_ids": 8,
+    "live_root_folders_verified": 2,
+    "current_system_root_children_observed": 21,
+    "current_system_root_direct_subfolders_observed": 1
+  },
+  "route_registry_reconciliation": {
+    "declared_system_routes": [
+      {"ordinal":"00","name":"00_ESTRUTURA_INTERNA","provider_id":"1hMJUITmIG7XODqR8s31jxaGyyUk7K9Wr","probe":"files.get","result":"NOT_FOUND"},
+      {"ordinal":"01","name":"01_EXPORT_CORE_JSON","provider_id":"1ILDwi_A3r_93OyMiQW-BKKOu5hVVeV74","probe":"files.get","result":"NOT_FOUND"},
+      {"ordinal":"02","name":"02_CONVERSATIONS_CORPUS","provider_id":"1S0DaA9ByFeL9wdPmvDgd3CCEe3Jcj7c2","probe":"files.get + parent check","result":"OBSERVED_CURRENT","current_parent":"1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O"},
+      {"ordinal":"03","name":"03_CODEX_CORPUS","provider_id":"14b56xHXeWht8un64BbTnrUCbiCSmcSDA","probe":"files.get","result":"NOT_FOUND"},
+      {"ordinal":"04","name":"04_ASSETS_VINCULADOS","provider_id":"1t9H7R1YxqJnCmwLgMmlfaYgtzyMfaZ0p","probe":"files.get","result":"NOT_FOUND"},
+      {"ordinal":"05","name":"05_AUDITORIA_CUSTODIA","provider_id":"1enlRakBEfDWi5_ir5k5fkY4K-IqCtXWX","probe":"files.get","result":"NOT_FOUND"},
+      {"ordinal":"06","name":"06_MAPAS_RELACOES_CONTEXTO","provider_id":"1q8etx_XT2h_pPGV8MASNkGuokL69rGR5","probe":"files.get","result":"NOT_FOUND"},
+      {"ordinal":"07","name":"07_INVENTARIO_CONTABILIDADE","provider_id":"1ah5OstY5K3oPJDuDStCSD7XoKnUVpjFG","probe":"files.get","result":"NOT_FOUND"},
+      {"ordinal":"08","name":"08_HASHES_BLOCKCHAIN_ANCHORS","provider_id":"10bB3XuYH2LFziTZBM-0P7tbQkz8IBYlr","probe":"files.get","result":"NOT_FOUND"}
+    ],
+    "interpretation": "BROKEN_OR_STALE_ROUTE_POINTERS_CONFIRMED_FOR_SYSTEM_SUBROUTES",
+    "falsifier": "A NOT_FOUND provider probe does not prove deletion; a successor/move receipt or restored access could explain the unresolved IDs.",
+    "non_claims": [
+      "NOT_FOUND != DELETED",
+      "route registry != current physical authority",
+      "list_folder empty response on an unresolved ID != valid empty folder"
+    ]
+  },
+  "current_physical_observation": {
+    "system_root_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+    "system_root_verified": true,
+    "quarantine_root_id": "1q7NThjg5FBiVB8L2wNspijef25kDRCFi",
+    "quarantine_root_verified": true,
+    "only_declared_system_subroute_directly_observed": "02_CONVERSATIONS_CORPUS",
+    "notable_direct_files": [
+      "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT",
+      "temp.locate.txt",
+      "export_manifest.json",
+      "library_files.json",
+      "message_feedback.json",
+      "shared_conversations.json",
+      "user_settings.json",
+      "user.json",
+      "group_chats.json",
+      "conversations-000.json",
+      "conversations-001.json",
+      "conversations-002.json",
+      "conversations-003.json",
+      "conversations-044.json",
+      "conversations-045.json",
+      "conversations-046.json",
+      "conversations-047.json",
+      "conversations-048.json",
+      "conversations-049.json",
+      "conversations-050.json"
+    ]
+  },
+  "provenance_added": [
+    "navigation registry revisionId bound to this reconciliation",
+    "current system root provider identity and parent observed",
+    "current quarantine root provider identity and parent observed",
+    "route 02 current parent verified",
+    "eight system route IDs classified unresolved rather than inferred deleted"
+  ],
+  "ingestions": [],
+  "new_objects_or_indexations": [
+    "typed route-state observation for system subroutes 00..08"
+  ],
+  "revisions_reviewed": [
+    "Drive navigation registry current revision",
+    "Mapa current main predecessor"
+  ],
+  "receipts_or_hashes_found": [
+    "RAW018 predecessor PID commitment remains 766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "RAW018 expected historical bytes remain 12115336"
+  ],
+  "convergences_closed": [
+    "route-registry suspicion → direct provider reconciliation for all 9 declared system subroutes"
+  ],
+  "duplicate_classifications": [],
+  "gaps_resolved": [
+    {
+      "gap_id": "TV-NOVO-ROUTE-REGISTRY-SYSTEM-SCOPE-20260826",
+      "resolution": "scope quantified: 9 declared system routes tested; 1 observed current, 8 provider IDs unresolved",
+      "claim_allowed": false
+    }
+  ],
+  "gaps_created_or_refined": [
+    {
+      "gap_id": "TV-NOVO-ROUTE-REGISTRY-STALE-POINTERS-20260826",
+      "state": "TOKEN_VAZIO_LINEAGE",
+      "source_pointer": "Drive:1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og@revision:AIroW35cEoTlGlyndWoZfxfu6ZPzQiHGu747feIgoXyihQ0Vvz8MUH5KGRFRtbP0iFje2w0ybQSIS_mJKr61nlvE4LNXNau4im-7wOqs9yQ",
+      "missing_field": "successor/predecessor/move receipt for eight unresolved declared system route IDs",
+      "blocking_dependency": "movement/classification receipts or provider successor identities",
+      "evidence_needed": "receipt containing old provider_id → current provider_id/parent plus reason and integrity verification",
+      "falsifier": "any unresolved provider ID becomes observable again with coherent parent/state, or a receipt proves it was replaced/moved",
+      "next_probe": "search 04_RECEIPTS_CLASSIFICACAO / rollback / custody journals for each unresolved route provider ID and route name; then test successor IDs",
+      "owner_authority": "NOVOexport custody/navigation authority",
+      "urgency": "P0",
+      "closure_gate": "8/8 unresolved IDs each have observed successor/current object or explicit lineage receipt; registry updated only after evidence",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1710-0300-019"
+    },
+    {
+      "gap_id": "TV-RAW018-CURRENT-BYTE-CUSTODY",
+      "state": "TOKEN_VAZIO_HARD_CUSTODY",
+      "source_pointer": "Drive:JOURNAL_2026-08-25_NOVOEXPORT_CUSTODY",
+      "missing_field": "current provider_id/current byte stream/current SHA256/current JSON parse/PID equality",
+      "blocking_dependency": "current raw018 witness or move/successor lineage",
+      "evidence_needed": "exact 12115336-byte object, SHA256, JSON parse, PID-set commitment equality",
+      "falsifier": "candidate size/hash/parse/PID commitment diverges",
+      "next_probe": "use route movement receipts and current corpus lineage to locate successor/container for conversations-018.json",
+      "owner_authority": "NOVOexport raw custody",
+      "urgency": "P0",
+      "closure_gate": "12115336 bytes → SHA256 → parse → 100-PID commitment == 766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1612-0300-018"
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CONTRADICTION-ROUTE-REGISTRY-VS-CURRENT-PHYSICAL-ROOT",
+      "documented": "navigation registry declares system subroutes 00..08 with provider IDs",
+      "observed": "current system root exposes only 02_CONVERSATIONS_CORPUS as a direct declared subfolder; eight declared IDs return NOT_FOUND via files.get",
+      "state": "CONTRADICTED_CURRENT_TOPOLOGY_WITH_LINEAGE_UNRESOLVED"
+    }
+  ],
+  "uncertainty": {
+    "before": "route pointer drift known only from partial probes; breadth unknown",
+    "after": "system-route drift quantified 8/9 unresolved; cause remains TOKEN_VAZIO_LINEAGE"
+  },
+  "coverage": {
+    "before": "system route registry direct provider validation partial",
+    "after": "system route registry direct provider validation 9/9 tested; current-valid 1/9, unresolved 8/9",
+    "raw_provider_pid_sha_cardinality": "50/51 unchanged"
+  },
+  "claim_allowed_changes": [],
+  "memory_projection": {
+    "L": "navigation registry revision → current provider topology contradiction → this receipt",
+    "O": "declared IDs independently tested through Drive files.get plus current root listing",
+    "T": "Drive route registry ↔ current physical root ↔ Mapa audit receipt ↔ RAW018 custody path",
+    "C": "NOT_FOUND is unresolved provider visibility/state, not deletion proof",
+    "P": "provider IDs, revisionId, Git predecessor SHA and audit path preserved append-only"
+  },
+  "top_urgencies": [
+    "P0 resolve route movement/successor lineage for eight unresolved system route IDs",
+    "P0 use that lineage to narrow RAW018 current provider/container",
+    "P1 reconcile quarantine subroutes 00..05 using the same provider test before any move/classification"
+  ],
+  "next_probes_exact": [
+    "search Drive for each unresolved provider ID and exact route name inside movement/classification/custody receipts",
+    "inspect current quarantine root children and test declared quarantine route IDs 00..05",
+    "for any successor object tied to RAW018 require exact 12115336 bytes before SHA/parse/PID promotion",
+    "only after successor evidence, propose navigation registry correction with predecessor/successor redirects"
+  ],
+  "F_ok": "9/9 system route pointers directly reconciled; live roots and route 02 verified; stale-pointer scope narrowed without destructive edits",
+  "F_gap": "8 system route successor lineages unresolved + RAW018 current byte custody unresolved + quarantine subroute validation pending",
+  "F_next": "movement/classification receipts bulk search → quarantine 00..05 provider reconciliation → RAW018 successor/provider gate → evidence-bound registry redirect proposal"
+}
