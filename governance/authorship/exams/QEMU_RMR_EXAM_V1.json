@@ -2,12 +2,14 @@
   "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
   "track": "T2_QEMU_RMR",
   "observed_ref": "b274de47403f48136d1969f7663aa457383e3ef4",
-  "state": "EXAM_DEFINED_EVIDENCE_PARTIAL",
+  "state": "STATIC_EXAM_1_RECORDED",
   "claim_allowed": false,
   "release_allowed": false,
   "observed_evidence": [
     "QEMU upstream licensing surfaces recorded by governance",
-    "hw/core/rafaelia-rmr-license.txt declares separate RAFAELIA RMR low-level terms"
+    "hw/core/rafaelia-rmr-license.txt declares separate RAFAELIA RMR low-level terms",
+    "repository search exposes multiple RAFAELIA implementation/build paths including hw/core/rafaelia-rmr.c, rafaelia-core.c, rafaelia_bridge.c, rafaelia-runtime.c, rafaelia-lowlevel.c, headers and Makefile.rafaelia",
+    "hw/core/rafaelia-rmr.c blob d6efb351c09f0208affe7a87b88e884928533885 directly includes qemu/osdep.h, qemu/cacheinfo.h, qemu/log.h, qemu/memalign.h and uses qemu_memalign, qemu_vfree, g_new0 and g_free"
   ],
   "findings": [
     {
@@ -15,15 +17,21 @@
       "status": "BOUNDARY_UNRESOLVED",
       "finding": "component-specific RMR terms do not establish scope over surrounding QEMU files or close combined-work/linkage obligations",
       "effect": "RMR authorship/license claims remain path-scoped and fail-closed"
+    },
+    {
+      "id": "T2.F2",
+      "status": "QEMU_LINKAGE_CONFIRMED",
+      "finding": "rafaelia-rmr.c directly consumes QEMU headers, allocators, logging/cache interfaces and GLib allocation helpers",
+      "effect": "this implementation is not a standalone freestanding kernel and must be audited as a QEMU integration boundary"
     }
   ],
   "exams": [
-    {"id":"T2.E1","name":"rmr_path_inventory","status":"TOKEN_VAZIO","pass":"all RMR source/header/build references enumerated"},
+    {"id":"T2.E1","name":"rmr_path_inventory","status":"PARTIAL_DISCOVERY","evidence":"multiple RAFAELIA/RMR source/header/build paths discovered; exhaustive inventory not yet closed"},
     {"id":"T2.E2","name":"origin_header_audit","status":"TOKEN_VAZIO","pass":"each RMR path classified against upstream/third-party history"},
-    {"id":"T2.E3","name":"linkage_symbol_boundary","status":"TOKEN_VAZIO","pass":"compile units, exported/imported symbols and QEMU interfaces mapped"},
+    {"id":"T2.E3","name":"linkage_symbol_boundary","status":"PARTIAL_SOURCE_CONFIRMED","evidence":"rafaelia-rmr.c directly binds QEMU/GLib allocation and QEMU runtime interfaces; full symbol map missing"},
     {"id":"T2.E4","name":"license_compatibility","status":"TOKEN_VAZIO","pass":"license obligations on both sides of each retained boundary recorded"},
-    {"id":"T2.E5","name":"standalone_freestanding_kernel","status":"TOKEN_VAZIO","pass":"new standalone kernel proves ABI, no libc/heap/helpers and bounded storage/behavior"},
+    {"id":"T2.E5","name":"standalone_freestanding_kernel","status":"FAIL_FOR_RAFAELIA_RMR_C","evidence":"current rafaelia-rmr.c directly uses QEMU/GLib runtime services; separate standalone artifact would require independent proof"},
     {"id":"T2.E6","name":"deterministic_build_test_receipt","status":"TOKEN_VAZIO","pass":"source/compiler/flags/object hash/test vector/exit receipt complete"}
   ],
-  "next": "execute T2.E1 then T2.E3 before any broader RMR licensing claim"
+  "next": "complete T2.E1 over all discovered RAFAELIA paths, then build a symbol/linkage map before license compatibility review"
 }
