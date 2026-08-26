@@ -1,0 +1,170 @@
+{
+  "schema": "rafaelia.novoexport-raw018-wave4-evolution-x/v1",
+  "record_id": "NOVOEXPORT_RAW018_WAVE4_EVOLUTION_X_20260825_V1",
+  "observed_at": "2026-08-25T22:25:00-03:00",
+  "status": "CANDIDATE_REJECTED_RAW018_PROVIDER_STILL_UNBOUND",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "predecessor": "NOVOEXPORT_RAW018_WAVE2_20260824_V1",
+  "authority": {
+    "router": "rafaelmeloreisnovo/Mapa",
+    "source_scope": "Google Drive NOVOexport + byte-level read of candidate export archive",
+    "private_drive_locators_persisted_publicly": false
+  },
+  "x_evolution": {
+    "ATLAS": "Selected the highest-dependency gap rather than reopening already-closed Stage0 F1/F2/F3 work.",
+    "NOVO": "Started from NOVOexport raw shard 018 because the canonical orthogonal receipt routes it first.",
+    "L": "Preserves Wave2 as predecessor and appends a stricter successor observation.",
+    "O": [
+      "provider identity",
+      "container membership",
+      "byte identity",
+      "JSON validity/cardinality",
+      "conversation/PID set",
+      "message/node projection"
+    ],
+    "T": "Crossed a candidate historical export archive against current shard-017 and shard-019 boundary IDs.",
+    "REL": [
+      "candidate_archive -> monolithic conversations.json",
+      "current shard017 boundary -> candidate monolith overlap",
+      "current shard019 boundary -> candidate monolith non-coverage",
+      "raw018 -> provider remains unresolved"
+    ],
+    "SCALE": "META custody route -> archive -> monolith -> shard boundary -> conversation ID.",
+    "EVID": "Only byte/hash/member/boundary observations are promoted.",
+    "GAP": "Provider/raw bytes/raw SHA/raw parse/raw PID set for conversations-018.json remain TOKEN_VAZIO.",
+    "LEARN": "Temporal/name affinity is not enough to bind a source container; rejected candidates remain append-only evidence."
+  },
+  "target": {
+    "shard": 18,
+    "path": "conversations-018.json",
+    "expected_size_bytes_from_predecessor": 12115336
+  },
+  "candidate_archive": {
+    "artifact_name": "d6e9db90fbd5ffb1158e68518e6f46005d1c78dbaef56427bb8a934c8f466c0a-2025-08-03-14-59-01-8057f90275d043c98c918e67298056ff.zip",
+    "size_bytes": 187756731,
+    "sha256": "04ca4578dc2990e740001d9e49c3bdb229b1599bdf44dd366ec9ed19290c2ecb",
+    "member_count": 5,
+    "members": [
+      {"name": "user.json", "size_bytes": 128, "crc32": "e8b05a3f"},
+      {"name": "conversations.json", "size_bytes": 499885038, "crc32": "007940e5"},
+      {"name": "message_feedback.json", "size_bytes": 22109, "crc32": "df6407f2"},
+      {"name": "shared_conversations.json", "size_bytes": 11733, "crc32": "bc0f730f"},
+      {"name": "chat.html", "size_bytes": 507819960, "crc32": "691e8879"}
+    ],
+    "exact_raw018_member_present": false,
+    "export_manifest_member_present": false,
+    "temp_locate_member_present": false,
+    "direct_container_result": "REJECTED_FOR_DIRECT_RAW018_CONTAINER"
+  },
+  "current_neighbor_evidence": {
+    "shard017": {
+      "path": "conversations-017.json",
+      "size_bytes": 22560934,
+      "sha256": "b4b6a6080b89102699e6dbd9958c715264464d74f9782126af3085296eb3ce4f",
+      "json_array_cardinality": 100,
+      "first_conversation_id": "68888d5e-cb78-800d-b911-154c3f8337d0",
+      "last_conversation_id": "68906311-07fc-800d-bc17-146c0b8cada5"
+    },
+    "shard019": {
+      "path": "conversations-019.json",
+      "size_bytes": 16440670,
+      "sha256": "f90bfc11a9088772570c1f81503c1bedcc9bd475c5435ce809d62812ff351436",
+      "json_array_cardinality": 100,
+      "first_conversation_id": "689770b5-2a00-8331-bb5a-e66a41d534dc",
+      "last_conversation_id": "689ec9d4-f934-832e-9b9e-0d6103ba45dd"
+    }
+  },
+  "candidate_monolith_boundary_probe": {
+    "member": "conversations.json",
+    "observations": [
+      {
+        "conversation_id": "68888d5e-cb78-800d-b911-154c3f8337d0",
+        "role": "current_shard017_first",
+        "present": true
+      },
+      {
+        "conversation_id": "68906311-07fc-800d-bc17-146c0b8cada5",
+        "role": "current_shard017_last",
+        "present": false
+      },
+      {
+        "conversation_id": "689770b5-2a00-8331-bb5a-e66a41d534dc",
+        "role": "current_shard019_first",
+        "present": false
+      }
+    ],
+    "result": "REJECTED_AS_COMPLETE_SOURCE_FOR_CURRENT_SHARD_RANGE_017_019",
+    "interpretation": "The archive overlaps at least one current shard-017 conversation but does not contain enough current boundary evidence to reconstruct or bind raw shard 018."
+  },
+  "anti_regression": {
+    "rules": [
+      "CANDIDATE_TEMPORAL_AFFINITY != PROVIDER_IDENTITY",
+      "MONOLITH_OVERLAP != COMPLETE_SHARD_SOURCE",
+      "NEIGHBOR_CARDINALITY != RAW018_CARDINALITY",
+      "RECONSTRUCTION != OBSERVED_RAW_SOURCE",
+      "DERIVED_ORDINAL != RAW_SOURCE_ORDINAL",
+      "TOKEN_VAZIO != 0"
+    ],
+    "forbidden_promotions": [
+      "Do not infer raw018 SHA from neighbor shards.",
+      "Do not infer raw018 cardinality as 100 merely because observed neighbors each contain 100 records.",
+      "Do not promote the inspected archive to source authority for raw018.",
+      "Do not replace raw018 with a reconstructed or derived ordinal without a separate derivation receipt."
+    ]
+  },
+  "gap_transition": {
+    "gap_id": "TV-RAW-018-CURRENT-ID",
+    "previous_state": "PARTIAL_EVIDENCED_PHYSICAL_INVENTORY_PROVIDER_UNBOUND",
+    "current_state": "PARTIAL_EVIDENCED_PHYSICAL_INVENTORY_PROVIDER_UNBOUND",
+    "new_information": [
+      "One plausible historical export archive was byte-read and rejected as the direct raw018 container.",
+      "Its monolithic conversations.json overlaps the first ID of current shard017 but lacks the last ID of current shard017 and first ID of current shard019.",
+      "The search space is narrowed without promoting any raw018 unknown."
+    ],
+    "open_dimensions": [
+      "Current directly addressable provider/file identity for raw conversations-018.json.",
+      "Recoverable exact raw byte stream for conversations-018.json.",
+      "SHA-256 of raw conversations-018.json itself.",
+      "JSON parse validity and cardinality of raw shard018.",
+      "Exact conversation/PID set of raw shard018."
+    ]
+  },
+  "next_gate": {
+    "objective": "Find the source/container or shard-generation provenance that can yield the exact raw018 byte stream without reconstruction-by-assumption.",
+    "sequence": [
+      "search later/full export containers and shard-generation receipts for a source containing current shard017-last and shard019-first boundary IDs",
+      "bind a candidate only if provenance and boundary coverage are consistent",
+      "extract exact conversations-018.json or reproduce it only with an explicitly evidenced deterministic sharding recipe",
+      "require byte length 12115336 before promotion",
+      "compute raw018 SHA-256",
+      "parse JSON fail-closed",
+      "enumerate exact conversation IDs/PIDs",
+      "join source_ref/conversation_id/message_id/node_id/file_id/record_sha256",
+      "emit append-only receipt before semantic/vector promotion"
+    ]
+  },
+  "boundary": {
+    "raw018_existence_path_size": "EVIDENCED_BY_PREDECESSOR",
+    "tested_candidate_archive": "REJECTED",
+    "direct_provider_claim": "TOKEN_VAZIO",
+    "current_raw_bytes_claim": "TOKEN_VAZIO",
+    "raw_sha256_claim": "TOKEN_VAZIO",
+    "raw_cardinality_claim": "TOKEN_VAZIO",
+    "raw_pid_set_claim": "TOKEN_VAZIO",
+    "claim_allowed": false
+  },
+  "f_ok": [
+    "Stage0 F1/F2/F3 work is already merged and is not reopened by this NOVO cycle.",
+    "Raw018 Wave2 remains intact as predecessor evidence.",
+    "A candidate archive was tested at byte/member level and rejected instead of being promoted by affinity.",
+    "Current shard017/019 boundary evidence narrows the search route."
+  ],
+  "f_gap": [
+    "Exact raw018 provider, bytes, SHA-256, parse/cardinality and PID set remain TOKEN_VAZIO.",
+    "Full message/node projection and source/file joins remain incomplete after raw018."
+  ],
+  "f_next": [
+    "Locate a newer/full export or the deterministic shard-generation provenance that spans current shard017/019 boundaries and can close raw018 byte identity."
+  ]
+}
