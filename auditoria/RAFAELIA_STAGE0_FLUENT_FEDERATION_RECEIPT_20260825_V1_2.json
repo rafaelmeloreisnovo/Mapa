@@ -1,0 +1,55 @@
+{
+  "schema": "RAFAELIA_FEDERATION_DELTA_RECEIPT/v1",
+  "cycle": "STAGE0_FLUENT_FEDERATION_20260825_V1_2",
+  "predecessor": "auditoria/RAFAELIA_STAGE0_FLUENT_FEDERATION_RECEIPT_20260825_V1_1.json",
+  "state": "EXECUTION_EVIDENCE_RECORDED",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "producer": {
+    "repo": "rafaelmeloreisnovo/RafPolimata",
+    "pr": 317,
+    "head": "f3cc9f353b7fc83912314cd84b8e20543b258d98",
+    "workflow": "Stage0 Fluent Event V1",
+    "run_id": 32916121502,
+    "job_id": 98020094456,
+    "conclusion": "success"
+  },
+  "evidence": {
+    "host_smoke": {
+      "status": "PASS",
+      "binary_sha256": "42e6fcaa6d61fdc5c64cb8d94d688e9e1b644c02fb4ca74451ff4d060462aa85"
+    },
+    "arm32_compile_only": {
+      "status": "PASS",
+      "target": "armv7a-linux-androideabi21",
+      "march": "armv7-a",
+      "float_abi": "softfp",
+      "fpu": "neon-vfpv4",
+      "freestanding": true,
+      "nostdinc": true,
+      "readelf_machine": "ARM",
+      "object_sha256": "8e08674ec5db0e769fb718dc68dfad33e5ac03f27c51fecda87096e956237b6c"
+    }
+  },
+  "correction_history": {
+    "prior_failure_run": 32916027963,
+    "cause": "codec included Apkc/sys.h; host validation inherited libc headers and collided on NULL redefinition under -Werror",
+    "correction": "codec now defines prefixed primitive types from compiler builtins and has no sys.h/libc-header dependency"
+  },
+  "promotions": {
+    "freestanding_messagepack_codec_source": "EXECUTION_VERIFIED_LIMITED",
+    "codec_host_smoke": "PASS",
+    "codec_arm32_compile_identity": "PASS",
+    "physical_arm32_runtime": "TOKEN_VAZIO",
+    "direct_stage0_elf32": "TOKEN_VAZIO"
+  },
+  "not_claimed": [
+    "physical ARM32 execution",
+    "Fluent network interoperability",
+    "Stage0 self-hosting",
+    "direct RAFIR to ELF32 closure",
+    "release readiness",
+    "authorship or license clearance"
+  ],
+  "F_next": "close direct RAFIR/ASM to A32 to ELF32 Stage0 path and obtain physical ARM32 runtime receipt"
+}
