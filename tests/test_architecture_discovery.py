@@ -50,13 +50,13 @@ class ArchitectureDiscoveryTests(unittest.TestCase):
             self.assertNotIn("Nebula", all_outputs)
             self.assertNotIn(str(FIXTURE.resolve()), all_outputs)
 
-    def test_drive_jsonl_txt_wrapper_is_supported_as_jsonl(self):
+    def test_drive_jsonl_txt_wrapper_is_supported_and_custody_metadata_is_not_semantic(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             shard = root / "CONVERSATIONS-00001.jsonl.txt"
             shard.write_text(
-                json.dumps({"title": "IA Precisao Extrema Zeta"}) + "\n"
-                + json.dumps({"title": "V79.1 Maya Infinity"}) + "\n",
+                json.dumps({"text": "IA Precisao Extrema Zeta", "source_path": "Monalisa-V79.1-private.json"}) + "\n"
+                + json.dumps({"text": "V79.1 Maya Infinity", "source_pointer": "Monalisa#private"}) + "\n",
                 encoding="utf-8",
             )
             out = root / "out"
@@ -65,10 +65,12 @@ class ArchitectureDiscoveryTests(unittest.TestCase):
             summary = json.loads((out / "architecture_summary.json").read_text(encoding="utf-8"))
             receipt = json.loads((out / "architecture_receipt.json").read_text(encoding="utf-8"))
             candidates = self.load_jsonl(out / "architecture_candidates.jsonl")
+            canonicals = {row["canonical"] for row in candidates if row["canonical"]}
             self.assertEqual(summary["files_parsed"], 1)
             self.assertEqual(receipt["input_inventory"][0]["format"], "JSONL")
-            self.assertIn("ZETA", {row["canonical"] for row in candidates if row["canonical"]})
-            self.assertIn("V79-1", {row["canonical"] for row in candidates if row["canonical"]})
+            self.assertIn("ZETA", canonicals)
+            self.assertIn("V79-1", canonicals)
+            self.assertNotIn("Monalisa", canonicals, "custody source paths/pointers must not create semantic candidates")
 
     def test_unspoken_structural_context_becomes_token_vazio_orphan(self):
         with tempfile.TemporaryDirectory() as tmp:
