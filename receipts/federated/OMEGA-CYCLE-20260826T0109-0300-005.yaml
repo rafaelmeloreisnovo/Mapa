@@ -1,0 +1,119 @@
+schema: RAFAELIA_FEDERATED_OPERATIONAL_RECEIPT/v1
+cycle_id: OMEGA-CYCLE-20260826T0109-0300-005
+predecessor: OMEGA-CYCLE-20260826T0013-0300-004
+observed_interval:
+  start: '2026-08-26T00:13:00-03:00'
+  end: '2026-08-26T01:09:55-03:00'
+claim_allowed: false
+contract: SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY
+cursor:
+  before:
+    mapa_main: f20df54f163d52cfc9d964a2e39d9346922c7f5e
+    active_known_repositories: 110
+  after:
+    mapa_main_observed: f20df54f163d52cfc9d964a2e39d9346922c7f5e
+    receipt_branch: automation/omega-hourly-20260826t0109-0300
+sources:
+  - provider: github
+    repo: rafaelmeloreisnovo/Mapa
+    ref: f20df54f163d52cfc9d964a2e39d9346922c7f5e
+    state: OBSERVED
+  - provider: github
+    repo: rafaelmeloreisnovo/Mapa
+    ref: d4868b69a9e3f99ab36d011cadb33d4c437fff23
+    state: OBSERVED
+  - provider: google_drive
+    file_id: 1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88
+    title: RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1
+    updated_at: '2026-08-23T10:40:50.061Z'
+    state: OBSERVED
+  - provider: google_drive
+    file_id: 1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y
+    title: RAFAELIA — Master Navigation Registry V1
+    updated_at: '2026-08-25T16:00:50.836Z'
+    state: OBSERVED
+  - provider: google_drive
+    file_id: 1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk
+    title: RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23
+    updated_at: '2026-08-25T22:01:35.825Z'
+    state: OBSERVED
+transformations:
+  - id: active-repository-reconciliation
+    evidence: d4868b69a9e3f99ab36d011cadb33d4c437fff23
+    result:
+      historical_known: 111
+      governance_tombstones: 1
+      active_known: 110
+      cataloged: 28
+      pending_active: 82
+  - id: active-routing-precedence
+    evidence: f20df54f163d52cfc9d964a2e39d9346922c7f5e
+    result:
+      authority_order:
+        - indices/ROUTE_DENYLIST_ILLICIT_USE.yaml
+        - indices/BACKLOG_ACERVO.yaml
+      legacy_snapshot_route_authority: false
+      token_vazio_route_allowed: false
+  - id: drive-freshness-revalidation
+    result:
+      master_navigation_registry: OBSERVED
+      master_index_corpus_000_050: OBSERVED
+      implementation_latentes_master: OBSERVED
+coverage:
+  before: 'active repository topology and Drive freshness partially reconciled'
+  after: '110-repository active topology hash-bound to reconciliation commit; active-routing precedence hash-bound; three Drive index anchors revalidated by provider_id and updated_at'
+uncertainty:
+  before: 'legacy 111-repository snapshot could be confused with active authority; Drive anchor freshness not revalidated in this cycle'
+  after: 'legacy snapshot explicitly non-authoritative for routing; active count=110 observed; Drive freshness known for three anchors; recursive Drive enumeration remains open'
+closed:
+  - id: TV-ACTIVE-REPO-COUNT-LEGACY-111
+    state: CLOSED_BY_EVIDENCE
+    evidence: d4868b69a9e3f99ab36d011cadb33d4c437fff23
+    conclusion: '111 is historical snapshot count; active known repository count is 110 after one governance tombstone.'
+created_gaps:
+  - gap_id: TV-DRIVE-RECURSIVE-ENUMERATION-20260826-005
+    state: TOKEN_VAZIO
+    source_pointer: google_drive:RAFAELIA
+    missing_field: recursive_object_coverage_and_revision_lineage
+    blocking_dependency: provider-recursive-enumeration-and-content-hash-pass
+    evidence_needed: 'provider_id + revision/version + content digest where obtainable + parent relation for each eligible object'
+    falsifier: 'a complete existing inventory proving every eligible Drive object and revision is already represented in UNIVERSE_OBJECTS/CONTENT_IDENTITIES'
+    next_probe: 'enumerate the receipt/provenance namespace and newest index objects cursor-first, then compare provider_ids against current universe indexes'
+    owner_authority: Google Drive object metadata; Mapa indexes are derived authority
+    urgency: P0
+    closure_gate: 'recursive coverage manifest with cardinality, cursor, lineage and no unexplained orphan IDs'
+    claim_allowed: false
+    predecessor: OMEGA-CYCLE-20260826T0109-0300-005
+  - gap_id: TV-ACTIVE-82-PENDING-INDEX-COVERAGE-20260826-005
+    state: TOKEN_VAZIO
+    source_pointer: 'Mapa:indices/BACKLOG_ACERVO.yaml@f20df54f163d52cfc9d964a2e39d9346922c7f5e'
+    missing_field: per_repository_head_tree_hash_provenance_receipt_coverage
+    blocking_dependency: bulk_repository_enumeration
+    evidence_needed: 'for each pending active repository: stable repo identity, default branch, HEAD, tree/content boundary, license/provenance pointer and receipt state'
+    falsifier: 'existing current receipts covering all 82 pending active repositories at current refs'
+    next_probe: 'process pending_active in largest provider-supported coherent batch, preserving cursor and one receipt per batch rather than restarting cataloging'
+    owner_authority: repository owner for source; Mapa for routing/index state
+    urgency: P0
+    closure_gate: '82/82 pending active repository identities have current source pointers and evidence-state classification'
+    claim_allowed: false
+    predecessor: d4868b69a9e3f99ab36d011cadb33d4c437fff23
+contradictions:
+  - historical_snapshot_111_vs_active_known_110: RESOLVED_AS_TEMPORAL_VERSION_DIFFERENCE
+memory_projection:
+  L: '111 historical -> tombstone -> 110 active; commits d4868b69 -> f20df54f'
+  O: 'GitHub commit evidence cross-checked against Drive index metadata'
+  T: 'Mapa routing authority linked to Drive navigation/index anchors'
+  C: 'active routing is fail-closed; neutral legal/scientific evidence is preserved separately from operational routing'
+  P: 'cycle_id and immutable source refs form append-only ledger identity'
+F_ok:
+  - active repository cardinality ambiguity narrowed and closed as temporal-version distinction
+  - active routing precedence observed at immutable commit
+  - three Drive anchors revalidated by provider identity and freshness
+  - receipt persisted on isolated branch
+F_gap:
+  - Drive recursive enumeration remains incomplete
+  - 82 pending active repositories lack demonstrated current per-repo evidence coverage in this cycle
+F_next:
+  - 'bulk enumerate pending_active repository identities/HEADs with cursor'
+  - 'enumerate Drive receipt/provenance namespace and newest index objects by provider_id/revision'
+  - 'reconcile both batches into UNIVERSE_OBJECTS/CONTENT_IDENTITIES without title-based merging'
