@@ -1,0 +1,36 @@
+name: CGEN Assurance 10x10 V1
+
+on:
+  pull_request:
+    paths:
+      - "docs/governance/CGEN_ASSURANCE_HARDENING_10X10_V1.md"
+      - "data/governance/cgen-assurance-10x10.v1.json"
+      - "tools/validate_cgen_assurance_10x_v1.py"
+      - "tests/test_cgen_assurance_10x_v1.py"
+      - ".github/workflows/cgen-assurance-10x10.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/governance/CGEN_ASSURANCE_HARDENING_10X10_V1.md"
+      - "data/governance/cgen-assurance-10x10.v1.json"
+      - "tools/validate_cgen_assurance_10x_v1.py"
+      - "tests/test_cgen_assurance_10x_v1.py"
+      - ".github/workflows/cgen-assurance-10x10.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate machine-readable contract
+        run: python tools/validate_cgen_assurance_10x_v1.py
+      - name: Run negative and non-regression tests
+        run: python -m unittest tests.test_cgen_assurance_10x_v1 -v
