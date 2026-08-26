@@ -45,6 +45,20 @@ class ArchitectureDiscoveryTests(unittest.TestCase):
             self.assertNotIn("SENTINEL_PRIVATE_TEXT_7429", all_outputs)
             self.assertNotIn(str(FIXTURE.resolve()), all_outputs)
 
+    def test_ambiguous_version_and_name_tokens_are_disambiguated(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "out"
+            result = self.run_scan(out)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            candidates = self.load_jsonl(out / "architecture_candidates.jsonl")
+            counts = {}
+            for row in candidates:
+                counts[row["canonical"]] = counts.get(row["canonical"], 0) + 1
+            self.assertEqual(counts.get("V79", 0), 0, "V79.1 must not be downgraded into generic V79")
+            self.assertEqual(counts.get("V79-1", 0), 1)
+            self.assertEqual(counts.get("RA-IA", 0), 1, "Raia must not be interpreted as RA-IA")
+            self.assertGreaterEqual(counts.get("Raia", 0), 1)
+
     def test_cooccurrence_is_observation_not_causation(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "out"
