@@ -1,0 +1,72 @@
+{
+  "receipt_schema": "RAFAELIA_LEGAL_GOVERNANCE_RECEIPT_V1",
+  "receipt_id": "GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V2",
+  "predecessor_receipt": "data/receipts/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V1.json",
+  "recorded_at": "2026-08-26T19:39:53-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "delta": [
+    {
+      "artifact": "docs/legal/OPENAI_CHATGPT_LOCATION_BOUNDARY_20260826_V1.md",
+      "commit": "2c040aa6f6d07a4bac2f6256fbaa76464ac1b67b",
+      "finding": "current OpenAI public documentation distinguishes approximate IP location from optional user-enabled precise device/GPS location; public documentation located in this audit does not establish raw satellite engineering telemetry reaching assistant/model"
+    },
+    {
+      "artifact": "docs/legal/BR_PLATFORM_DATA_GOVERNANCE_MARCO_CIVIL_2026_V1.md",
+      "commit": "c7c9c9761485d71ecd9f9c0db7d545b73f7d4126",
+      "finding": "Marco Civil privacy/data provisions and Decrees 12.975/2026 and 12.976/2026 connected to platform transparency, risk governance and specialized digital protection"
+    },
+    {
+      "artifact": "google_drive:1nmdrjRAsf0UMjJbNAWjNaF4NQfJliGsf5Plv66Jdx8w",
+      "revision": "AIroW344sQW1xDc0KQ78eb9hxHf7OjAkQcTUk0S9tKno_iPHRLBLA9MPswD8ESKkKQvzfwn6I3nrQNn2ihieg2uHmKYUWK_nONrqwh9wRn0",
+      "finding": "Drive canon appended with Brazil platform overlay and current OpenAI/ChatGPT location boundary"
+    },
+    {
+      "artifact": "google_drive:1XbaXpmMTtuLeJ1t_Om4ScW3QicxZq2vG",
+      "comment_id": "AAACGHFhSYs",
+      "finding": "legacy compliance_map.md linked to current versioned canon without overwriting historical content"
+    }
+  ],
+  "closed_or_narrowed_gaps": [
+    {
+      "id": "TOKEN_VAZIO_PRODUCT_LOCATION_FEATURE",
+      "new_state": "PARTIAL_CLOSED_DOCUMENTATION_LEVEL",
+      "evidence": "approximate IP location and optional precise device location are documented product capabilities"
+    }
+  ],
+  "remaining_token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_RAW_GNSS_RUNTIME",
+      "state": "OPEN",
+      "question": "whether raw GNSS engineering fields leave device/app or enter assistant/model/tool boundary"
+    },
+    {
+      "id": "TOKEN_VAZIO_MODEL_CONTEXT_BOUNDARY",
+      "state": "OPEN",
+      "question": "exact internal boundary between location service/tool processing and model context"
+    },
+    {
+      "id": "TOKEN_VAZIO_THIRD_PARTY_LOCATION_PAYLOAD",
+      "state": "OPEN",
+      "question": "request-level minimized payload/provider when third-party local data provider is used"
+    }
+  ],
+  "invariant_delta": [
+    "precise_location_feature_documented != raw_GNSS_satellite_telemetry_documented",
+    "platform_duty_of_care != raw_sensor_passthrough_duty",
+    "non_collection_of_unnecessary_raw_GNSS may align with minimization/privacy_by_design",
+    "misrepresentation_or_undisclosed_overcollection remains independently reviewable"
+  ],
+  "F_ok": [
+    "current OpenAI location policy layer added",
+    "Brazil 2026 platform governance overlay added",
+    "Drive canon updated",
+    "legacy Drive compliance map linked without mutation"
+  ],
+  "F_gap": [
+    "raw GNSS runtime receipt",
+    "exact assistant/model context boundary",
+    "exact third-party location payload per request"
+  ],
+  "F_next": "retain raw GNSS path as TOKEN_VAZIO until a controlled runtime receipt exists; keep future changes append-only and source-versioned"
+}
