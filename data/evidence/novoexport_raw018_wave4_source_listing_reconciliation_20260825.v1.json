@@ -1,0 +1,97 @@
+{
+  "schema": "rafaelia.novoexport-raw018-source-listing-reconciliation/v1",
+  "record_id": "NOVOEXPORT_RAW018_WAVE4_SOURCE_LISTING_RECONCILIATION_20260825_V1",
+  "observed_at": "2026-08-25T22:00:00-03:00",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "parent_record": "NOVOEXPORT_RAW018_WAVE4_EVOLUTION_X_20260825_V1",
+  "source_listing": {
+    "name": "temp.locate.txt",
+    "bytes": 1396867,
+    "sha256": "7e291744e7522eeb4a4ce4f843f55ef479205de8305ac126130ff6c5631682bf",
+    "format_observed": "LS_LONG_STYLE_SINGLE_ROOT_LISTING",
+    "file_entries_parsed": 15437,
+    "raw018_line": "-rw-rw----. 1 root everybody  12115336 Aug  3 05:35 conversations-018.json",
+    "raw018_historical_size_bytes": 12115336,
+    "raw018_historical_listing_time": "Aug 3 05:35",
+    "raw018_historical_mode": "-rw-rw----.",
+    "raw018_historical_owner": "root",
+    "raw018_historical_group": "everybody"
+  },
+  "active_manifest": {
+    "name": "export_manifest.json",
+    "bytes": 3812404,
+    "sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+    "export_file_entries": 15439
+  },
+  "full_path_size_reconciliation": {
+    "common_paths": 15435,
+    "common_path_size_mismatches": 0,
+    "manifest_only_count": 4,
+    "listing_only_count": 2,
+    "manifest_only": [
+      {"path": "file_0000000066e461f78edae6f31fa5078d.dat", "size_bytes": 747603},
+      {"path": "file_00000000cc0471f5ba16f9e59b980f57.dat", "size_bytes": 584806},
+      {"path": "file_00000000cee0720ebc8c6e0596ae893a.dat", "size_bytes": 91357},
+      {"path": "file_00000000d78c71f5a2707d7392a55dc8.dat", "size_bytes": 4541}
+    ],
+    "listing_only": [
+      {"path": "export_manifest.json", "listed_size_bytes": 3812404},
+      {"path": "temp.locate.txt", "listed_size_bytes": 0}
+    ],
+    "result": "NEAR_COMPLETE_PATH_SIZE_SNAPSHOT_COHERENCE_PASS",
+    "interpretation": "The listing and active manifest describe a near-identical source snapshot at path/size level; the two listing-only metadata files and four manifest-only DAT entries prevent a false total-equality claim."
+  },
+  "conversation_family_reconciliation": {
+    "expected_paths": "conversations-000.json..conversations-050.json",
+    "manifest_count": 51,
+    "listing_count": 51,
+    "common_count": 51,
+    "path_size_mismatches": 0,
+    "declared_bytes_manifest": 1107289897,
+    "declared_bytes_listing": 1107289897,
+    "result": "CONVERSATION_FAMILY_51_OF_51_PATH_SIZE_COHERENCE_PASS",
+    "raw018_member": {
+      "manifest_size_bytes": 12115336,
+      "listing_size_bytes": 12115336,
+      "size_equal": true,
+      "historical_source_listing_presence": true
+    }
+  },
+  "promotions": {
+    "raw018_historical_local_source_listing_presence": "EVIDENCED",
+    "raw018_active_manifest_membership": "EVIDENCED",
+    "raw018_historical_path_size_agreement": "PASS",
+    "conversation_family_path_size_snapshot_coherence": "PASS"
+  },
+  "non_promotions": {
+    "raw018_current_provider_id": "TOKEN_VAZIO",
+    "raw018_current_or_immutable_content_bytes": "TOKEN_VAZIO",
+    "raw018_content_sha256": "TOKEN_VAZIO",
+    "raw018_current_json_parse": "TOKEN_VAZIO",
+    "raw018_current_cardinality": "TOKEN_VAZIO",
+    "raw018_raw_derived_pid_commitment_match": "TOKEN_VAZIO"
+  },
+  "anti_regression": [
+    "HISTORICAL_FILESYSTEM_LISTING != RAW_CONTENT_BYTES",
+    "PATH_SIZE_COHERENCE != CONTENT_SHA256_EQUALITY",
+    "51_OF_51_PATH_SIZE_MATCH != CURRENT_PROVIDER_CUSTODY",
+    "LISTING_TIMESTAMP != CONTENT_VERSION_PROOF",
+    "NEAR_COMPLETE_SNAPSHOT != TOTAL_SNAPSHOT_EQUALITY",
+    "TOKEN_VAZIO != 0"
+  ],
+  "f_ok": [
+    "Exact temp.locate bytes/hash re-read.",
+    "Raw018 historical source listing presence and 12,115,336-byte size are directly observed.",
+    "15,435 manifest/listing common paths have zero size mismatches.",
+    "All 51 conversation shards reconcile exactly by path and size with aggregate 1,107,289,897 bytes."
+  ],
+  "f_gap": [
+    "Historical listing does not carry raw018 content bytes or SHA-256.",
+    "Current Drive provider remains unresolved.",
+    "Original shard-construction algorithm/source container remains unresolved."
+  ],
+  "f_next": [
+    "Trace the command/source that produced the source directory listing and manifest, or recover an immutable copy of the listed raw018 file; then validate bytes/hash/parse/PID commitment."
+  ]
+}
