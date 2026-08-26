@@ -1,0 +1,90 @@
+{
+  "receipt_schema": "RAFAELIA_LEGAL_GOVERNANCE_RECEIPT_V1",
+  "receipt_id": "GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V3",
+  "predecessor_receipt": "data/receipts/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V2.json",
+  "recorded_at": "2026-08-26",
+  "append_only": true,
+  "claim_allowed": false,
+  "intent": "apply current legal-semantic layer only where materially necessary without duplicating or rewriting provenance",
+  "integrations": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "biblioteconomia/08_ANCORAGEM_NORMATIVA.md",
+      "commit": "c6cf80cc4db1602c3401f0d253ba2d72a73c0336",
+      "state": "UPDATED",
+      "effect": "anchors current privacy/GNSS/AI canon and corrects internal human-protective policy so it is not represented as a universal conflict-of-laws rule"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "codigo/matriz_conformidade.py",
+      "commits": [
+        "bd39e062f0f8e1d99a5343e0951319e7844934b9",
+        "74a3b8046418d9b3bfc06c0eebb1b185ccc5e8d0"
+      ],
+      "state": "UPDATED",
+      "effect": "generated compliance matrix now routes privacy audits to the current canon and prioritizes termux-api_rafcodephi as a material personal/device-data surface"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafGitTools",
+      "path": "docs/COMPLIANCE.md",
+      "commit": "d8184f482102cc38a6048479484488b23abee081",
+      "state": "UPDATED",
+      "effect": "binds executor/compliance receipts to Mapa legal-semantic authority and adds field-level data-flow evidence gates"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-api_rafcodephi",
+      "path": "docs/PERMISSIONS.md",
+      "commit": "69ee01bc6862e505b125f6aa4270b81ac167b07b",
+      "state": "UPDATED",
+      "effect": "separates Android permission, actual collection, precise location and raw GNSS telemetry; adds runtime and legal-basis TOKEN_VAZIO gates"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL",
+      "path": "CURRENT_PRIVACY_GOVERNANCE.md",
+      "commit": "ba35306e05c7c93791e9ec91e7cfc02042eda0c7",
+      "state": "CREATED_NON_DESTRUCTIVE_OVERLAY",
+      "effect": "preserves historical compliance_map.md while applying current authority/version/evidence boundaries"
+    }
+  ],
+  "blocked_or_deferred": [
+    {
+      "repository": "rafaelmeloreisnovo/Rafaelia_Private",
+      "path": "docs/PRIVACY_DATA_GOVERNANCE_CURRENT.md",
+      "state": "WRITE_BLOCKED_BY_CONNECTOR_SAFETY_STATUS",
+      "action": "not retried by bypass; preserve as explicit unresolved write",
+      "token_vazio": "TOKEN_VAZIO_PRIVATE_REPO_PRIVACY_OVERLAY_WRITE"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "indices/MATRIZ_CONFORMIDADE.md",
+      "state": "DERIVED_ARTIFACT_STALE_UNTIL_REGENERATION",
+      "reason": "source generator changed; generated output should be regenerated from current MANIFESTO_INTEGRIDADE rather than hand-edited",
+      "token_vazio": "TOKEN_VAZIO_MATRIX_REGENERATION_RECEIPT"
+    }
+  ],
+  "invariants_enforced": [
+    "legal_applicability_requires_facts_jurisdiction_authority_scope_and_vigency",
+    "internal_human_protective_policy != universal_conflict_of_laws_rule",
+    "OS_PERMISSION != LAWFUL_BASIS",
+    "device_data_capability != actual_collection",
+    "precise_location != raw_GNSS_telemetry",
+    "data_exists_on_device != data_reaches_AI",
+    "historical_checklist != current_compliance_evidence",
+    "generated_artifact_should_follow_generator_not_manual_patch",
+    "TOKEN_VAZIO != false"
+  ],
+  "F_ok": [
+    "central normative anchor corrected and linked",
+    "compliance generator routed to current privacy canon",
+    "Termux API personal-data surface raised to high-priority audit",
+    "RafGitTools executor boundary integrated",
+    "Termux location/GNSS evidence gate integrated",
+    "ZIPRAF legacy compliance map preserved with current overlay"
+  ],
+  "F_gap": [
+    "Rafaelia_Private overlay write blocked by connector safety status",
+    "generated MATRIZ_CONFORMIDADE.md awaits regeneration from updated source",
+    "runtime GNSS field-level receipt remains TOKEN_VAZIO"
+  ],
+  "F_next": "regenerate indices/MATRIZ_CONFORMIDADE.md from the updated generator when repository execution is available; retry the private-repository governance overlay only through an authorized connector path; keep runtime GNSS/model path TOKEN_VAZIO until controlled evidence exists"
+}
