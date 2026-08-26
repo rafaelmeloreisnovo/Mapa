@@ -1,0 +1,120 @@
+{
+  "receipt_schema": "RAFAELIA_LEGAL_GOVERNANCE_RECEIPT_V1",
+  "receipt_id": "GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V4",
+  "predecessor_receipt": "data/receipts/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V3.json",
+  "recorded_at": "2026-08-26T20:56:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "intent": "promote the privacy/GNSS/legal semantic layer from documentation-only integration to executable fail-closed governance gates",
+  "artifacts": [
+    {
+      "path": "schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json",
+      "commit": "d549060fb4e5f086977f5e9d078a4ece9cb0073e",
+      "state": "CREATED",
+      "effect": "defines evidence envelope for authorized minimized Android/GNSS boundary verification without promoting product or legal claims"
+    },
+    {
+      "path": "scripts/validate_gnss_runtime_receipt.py",
+      "commit": "ab6d357a55a54b7dbabe6d683b6506d1b1be748e",
+      "state": "CREATED",
+      "effect": "stdlib fail-closed validator with positive fixture and five negative falsifiers"
+    },
+    {
+      "path": ".github/workflows/legal-governance-gates.yml",
+      "commit": "5f5c059652705656940802bdef2a1b686c74ca52",
+      "state": "CREATED",
+      "effect": "CI regenerates compliance matrix, uploads evidence artifact, self-tests GNSS receipt validator and rejects generated drift"
+    },
+    {
+      "path": "indices/MATRIZ_CONFORMIDADE.md",
+      "commit": "71e456eaa95d110e436b9a39886ce68d55b8d740",
+      "state": "REGENERATED_FROM_CURRENT_GENERATOR",
+      "effect": "current canon/atlas anchors and termux-api_rafcodephi high-priority personal/device-data audit surface are materialized in the derived matrix"
+    }
+  ],
+  "ci_evidence": [
+    {
+      "run_id": 33024919752,
+      "head_sha": "5f5c059652705656940802bdef2a1b686c74ca52",
+      "expected_result": "FAIL_CLOSED_ON_GENERATED_DRIFT",
+      "observed": {
+        "gnss_receipt_falsifiability_self_test": "PASS",
+        "matrix_regeneration": "PASS",
+        "artifact_upload": "PASS",
+        "generated_drift_gate": "FAIL"
+      },
+      "artifact": {
+        "id": 9628028245,
+        "name": "regenerated-compliance-matrix",
+        "digest": "sha256:492ab7d0135b57fccd9630e5b83755ca388ff3141c1d0fcce82940fa499b6263"
+      },
+      "interpretation": "the gate correctly detected stale derived output"
+    },
+    {
+      "run_id": 33024994480,
+      "head_sha": "71e456eaa95d110e436b9a39886ce68d55b8d740",
+      "expected_result": "PASS_AFTER_REGENERATION",
+      "observed": {
+        "checkout": "PASS",
+        "python_setup": "PASS",
+        "gnss_receipt_falsifiability_self_test": "PASS",
+        "matrix_regeneration": "PASS",
+        "artifact_upload": "PASS",
+        "generated_drift_gate": "PASS"
+      },
+      "conclusion": "SUCCESS"
+    }
+  ],
+  "closed_gaps": [
+    {
+      "id": "TOKEN_VAZIO_MATRIX_REGENERATION_RECEIPT",
+      "new_state": "CLOSED",
+      "evidence": "CI run 33024994480 regenerated the matrix and produced zero generated drift at head 71e456eaa95d110e436b9a39886ce68d55b8d740"
+    },
+    {
+      "id": "TOKEN_VAZIO_GNSS_RECEIPT_CONTRACT",
+      "new_state": "CLOSED_CONTRACT_LEVEL",
+      "evidence": "GNSS receipt schema + stdlib validator + five negative falsifiers passed in CI"
+    }
+  ],
+  "remaining_token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_RAW_GNSS_RUNTIME",
+      "state": "OPEN",
+      "reason": "no controlled physical Android runtime receipt yet proves which GNSS fields cross each boundary"
+    },
+    {
+      "id": "TOKEN_VAZIO_MODEL_CONTEXT_BOUNDARY",
+      "state": "OPEN",
+      "reason": "internal service/tool/assistant/model context boundary still lacks request-level runtime evidence"
+    },
+    {
+      "id": "TOKEN_VAZIO_PRIVATE_REPO_PRIVACY_OVERLAY_WRITE",
+      "state": "OPEN_BLOCKED",
+      "reason": "Rafaelia_Private write was blocked by connector safety status and was not bypassed"
+    }
+  ],
+  "invariants_enforced": [
+    "generator_is_authority_for_generated_matrix",
+    "generated_drift_must_fail_closed",
+    "contract_pass != runtime_evidence",
+    "OS_PERMISSION != LAWFUL_BASIS",
+    "precise_location != raw_GNSS_telemetry",
+    "data_exists_on_device != data_reaches_AI",
+    "authorized_test + minimization + unrelated_data_exclusion are mandatory for GNSS receipt validation",
+    "TOKEN_VAZIO != false"
+  ],
+  "F_ok": [
+    "GNSS runtime evidence contract created",
+    "GNSS validator falsifiability self-test passed",
+    "compliance matrix regenerated from source",
+    "generated drift gate passed after regeneration",
+    "CI now prevents silent matrix/source divergence"
+  ],
+  "F_gap": [
+    "physical Android GNSS runtime receipt",
+    "exact service/tool/assistant/model context boundary",
+    "Rafaelia_Private overlay write remains connector-blocked"
+  ],
+  "F_next": "capture one authorized minimized Android GNSS runtime receipt using GNSS_RUNTIME_RECEIPT_V1; do not promote any raw-GNSS-to-AI claim until all boundary gates have evidence"
+}
