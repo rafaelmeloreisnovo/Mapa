@@ -1,0 +1,197 @@
+{
+  "schema": "mapa.active-repository-exact-bindings/v2",
+  "observed_date": "2026-08-26",
+  "base": "Mapa/main@12b3fbe453ad57643d79c62e70b3ed4ea63067a3",
+  "predecessor": "ACTIVE_REPOSITORY_BULK_EXAMINATION_20260826_V1",
+  "scope": {
+    "priority_cohort": 20,
+    "exact_bound_this_tranche": 6,
+    "priority_binding_coverage": 0.30
+  },
+  "contract": {
+    "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "ci_failure_rule": "failure with zero observed steps is PROVIDER_STARTUP_FAIL, not CODE_FAIL",
+    "token_vazio_rule": "TOKEN_VAZIO is neither PASS nor FAIL",
+    "claim_allowed": false,
+    "release_allowed": false
+  },
+  "records": [
+    {
+      "repo": "rafaelmeloreisnovo/Rafaelia_Core",
+      "repo_kind": "software-research-mixed",
+      "default_branch": "main",
+      "head_sha": "f4c0e6ab51bcd74af57eb0ef8c120e76851a0428",
+      "root_tree_sha": "38e6b34e904faf57543c275b046a9d01e6f23350",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "structure": ["src/arm32", "tools/invariants", "tests/invariants", "data/invariants", ".github/workflows"],
+      "provenance": {
+        "api_license": null,
+        "license_probe": ["LICENSE:404", "LICENSE.md:404"],
+        "state": "TOKEN_VAZIO"
+      },
+      "ci": {
+        "workflows_observed": ["benchmark-available-arch.yml", "benchmark-docs.yml", "ci-multiarch.yml", "invariant-claims.yml"],
+        "latest_head_exact_run_id": 32689068745,
+        "latest_head_exact_conclusion": "failure",
+        "steps_observed": 0,
+        "state": "PROVIDER_STARTUP_FAIL",
+        "code_execution": "TOKEN_VAZIO"
+      },
+      "runtime_empirical": "TOKEN_VAZIO",
+      "gap_governance": ["branch protection disabled", "machine-readable license/provenance unresolved", "HEAD-exact provider code execution unresolved"],
+      "claim_allowed": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafNet-Core",
+      "repo_kind": "network-runtime-software",
+      "default_branch": "main",
+      "head_sha": "1a772441277bddf9a4daf5a4d87a292f32972fb8",
+      "root_tree_sha": "03cd32c78d93bb320b3283f7d7dc26b27b9315cc",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "structure": ["modules", "tests", "audit", "data/evidence", "docs", ".github/workflows"],
+      "provenance": {
+        "api_license": "NOASSERTION",
+        "license_path": "LICENSE",
+        "license_content_class": "INCOMPLETE_STUB",
+        "observed_content": "MIT License",
+        "state": "INCOMPLETE"
+      },
+      "ci": {
+        "workflow": ".github/workflows/rafnet-runtime-v2.yml",
+        "latest_head_exact_run_id": 31804298183,
+        "latest_head_exact_conclusion": "failure",
+        "steps_observed": 0,
+        "state": "PROVIDER_STARTUP_FAIL",
+        "code_execution": "TOKEN_VAZIO"
+      },
+      "runtime_empirical": "TOKEN_VAZIO",
+      "gap_governance": ["branch protection disabled", "license text incomplete", "physical/MPLS runtime closure unresolved", "HEAD-exact provider code execution unresolved"],
+      "claim_allowed": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/nanoGPT",
+      "repo_kind": "machine-learning-software",
+      "default_branch": "master",
+      "head_sha": "d839c0d08910dd3bbe87b5e2da40a0ea2c11da61",
+      "root_tree_sha": "7c0c064459dca3a6b91e15f2d0e935ff9ae3ae88",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "structure": ["model.py", "train.py", "freestanding_triad", "benchmarks", ".github/workflows"],
+      "provenance": {
+        "api_license": "MIT",
+        "license_path": "LICENSE",
+        "copyright": "Copyright (c) 2022 Andrej Karpathy",
+        "state": "BOUND"
+      },
+      "ci": {
+        "workflow": ".github/workflows/freestanding_triad.yml",
+        "latest_head_exact_run_id": 32932352408,
+        "latest_head_exact_conclusion": "failure",
+        "steps_observed": 0,
+        "state": "PROVIDER_STARTUP_FAIL",
+        "code_execution": "TOKEN_VAZIO"
+      },
+      "runtime_empirical": "PARTIAL_LOCAL_RECEIPTS_NOT_REBOUND_IN_THIS_TRANCHE",
+      "gap_governance": ["branch protection disabled", "main model/train path still Torch", "checkpoint equivalence TOKEN_VAZIO", "tensor-free training TOKEN_VAZIO", "2x speedup TOKEN_VAZIO", "HEAD-exact provider code execution unresolved"],
+      "claim_allowed": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Fisica",
+      "repo_kind": "scientific-software-research",
+      "default_branch": "main",
+      "head_sha": "4ef974a8eab07e8154ff90308e0dafb251ce1078",
+      "root_tree_sha": "f9ab7461db3093961f83a2f988925924c614df7d",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "structure": ["src", "tests", "configs", "data", "docs", ".github/workflows/geophysical-transduction.yml"],
+      "provenance": {
+        "api_license": null,
+        "license_probe": ["LICENSE:404", "LICENSE.md:404"],
+        "state": "TOKEN_VAZIO"
+      },
+      "ci": {
+        "workflow": ".github/workflows/geophysical-transduction.yml",
+        "workflow_defined": true,
+        "trigger_scope": ["pull_request:path-filtered", "workflow_dispatch"],
+        "main_branch_runs_observed": 0,
+        "state": "CI_DEFINED_EXECUTION_UNOBSERVED",
+        "code_execution": "TOKEN_VAZIO"
+      },
+      "runtime_empirical": "TOKEN_VAZIO",
+      "gap_governance": ["branch protection disabled", "machine-readable license/provenance unresolved", "provider execution unobserved", "synthetic fixture != empirical physical validation"],
+      "claim_allowed": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca",
+      "repo_kind": "scientific-software-research",
+      "default_branch": "main",
+      "head_sha": "9a66958cb35813fae2feeac3d348c69273f09b76",
+      "root_tree_sha": "79ed17f0ac44517f439e01d0f1c5196b5d3eb3e3",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "web_commit_signoff_required": true,
+      "structure": ["scripts", "data", "docs", ".github/workflows/ci.yml"],
+      "provenance": {
+        "api_license": "NOASSERTION",
+        "license_path": "LICENSE",
+        "license_content_class": "MIT_WITH_ACADEMIC_CITATION_NOTE",
+        "copyright": "Copyright (c) 2025-2026 Rafael Melo Reis Novo",
+        "state": "BOUND"
+      },
+      "ci": {
+        "workflow": ".github/workflows/ci.yml",
+        "latest_head_exact_run_id": 32819806079,
+        "latest_head_exact_conclusion": "success",
+        "steps_observed": 9,
+        "state": "PASS_BOUNDED",
+        "validated_scope": ["markdown lint", "calendar matrix contract", "Calendar Round/cycle phase self-test", "required root files", "docs directory"],
+        "empirical_science_validated": false
+      },
+      "runtime_empirical": "TOKEN_VAZIO",
+      "gap_governance": ["branch protection disabled", "scientific causal/empirical claims not established by documentation CI"],
+      "claim_allowed": false
+    },
+    {
+      "repo": "rafaelmeloreisnovo/privadoFazendo",
+      "repo_kind": "mixed-security-software-research",
+      "default_branch": "master",
+      "head_sha": "4ab686f2c233800fe65c5cfbd7c43017ecd086db",
+      "root_tree_sha": "1a83057569b1ba8ecd47ea087061a7e388a621a0",
+      "commit_signature_verified": true,
+      "branch_protected": false,
+      "structure": ["tests", ".github/workflows", "shell scripts", ".rafaelia", "audit/remediation history"],
+      "provenance": {
+        "api_license": "MIT",
+        "license_path": "LICENSE",
+        "copyright": "Copyright (c) 2024-2026 Rafael Melo Reis",
+        "state": "BOUND"
+      },
+      "ci": {
+        "workflow": ".github/workflows/fcea-c88-security.yml",
+        "latest_head_exact_run_id": 31855741833,
+        "latest_head_exact_conclusion": "failure",
+        "steps_observed": 0,
+        "state": "PROVIDER_STARTUP_FAIL",
+        "code_execution": "TOKEN_VAZIO"
+      },
+      "runtime_empirical": "TOKEN_VAZIO",
+      "gap_governance": ["branch protection disabled", "current-tree security certification requires executable re-run", "historical remediation commits are not current certification", "HEAD-exact provider code execution unresolved"],
+      "claim_allowed": false
+    }
+  ],
+  "tranche_summary": {
+    "head_tree_exact_bound": "6/6",
+    "priority_cohort_binding": "6/20",
+    "branch_protected": "0/6",
+    "full_license_text_bound": "3/6",
+    "license_incomplete_stub": "1/6",
+    "license_token_vazio": "2/6",
+    "ci_exact_head_pass_bounded": "1/6",
+    "provider_startup_fail_zero_steps": "4/6",
+    "ci_defined_execution_unobserved": "1/6",
+    "global_runtime_empirical_promotions": 0
+  },
+  "next_gate": "continue exact HEAD/tree/provenance/CI binding for the remaining implementation-rich priority repositories; then bind receipts/runtime and only afterward compute domain-normalized maturity scores"
+}
