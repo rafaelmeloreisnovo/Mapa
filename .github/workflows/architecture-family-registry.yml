@@ -1,0 +1,42 @@
+name: Architecture Family Registry
+
+on:
+  pull_request:
+    paths:
+      - "data/ontology/architectures/**"
+      - "indices/semantic/ARCHITECTURE_FAMILY_INDEX_V1.yaml"
+      - "indices/semantic/SEMANTIC_INDEX_ROOT_V1.yaml"
+      - "scripts/validate_architecture_family_registry.py"
+      - "scripts/discover_architecture_families.py"
+      - "tests/test_architecture_family_registry.py"
+      - "tests/test_architecture_discovery.py"
+      - "tests/fixtures/architecture_discovery/**"
+      - ".github/workflows/architecture-family-registry.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "data/ontology/architectures/**"
+      - "indices/semantic/ARCHITECTURE_FAMILY_INDEX_V1.yaml"
+      - "indices/semantic/SEMANTIC_INDEX_ROOT_V1.yaml"
+      - "scripts/validate_architecture_family_registry.py"
+      - "scripts/discover_architecture_families.py"
+      - "tests/test_architecture_family_registry.py"
+      - "tests/test_architecture_discovery.py"
+      - "tests/fixtures/architecture_discovery/**"
+
+permissions:
+  contents: read
+
+jobs:
+  structural-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate architecture family registry and discovery contract
+        run: python scripts/validate_architecture_family_registry.py
+      - name: Run dependency-free architecture tests
+        run: python -m unittest -v tests.test_architecture_family_registry tests.test_architecture_discovery

@@ -1,0 +1,139 @@
+schema: rafaelia.architecture-family-index/v1
+version: 1.1.2
+state: ACTIVE_DISCOVERY
+claim_allowed: false
+source_registry: data/ontology/architectures/ARCHITECTURE_FAMILY_REGISTRY_V1.yaml
+discovery_rules: data/ontology/architectures/ARCHITECTURE_DISCOVERY_RULES_V1.json
+discovery_pipeline: scripts/discover_architecture_families.py
+
+navigation_contract:
+  chain: "TERM -> FAMILY -> VARIANT|MODULE|LAYER|PROTOCOL|COMMAND -> PROVENANCE -> EPISTEMIC_STATE -> GAP -> NEXT_VERIFIABLE_STEP"
+  identity_rule: "NAME != IMPLEMENTATION != RUNTIME != EVIDENCE != CLAIM"
+  missing_rule: "TOKEN_VAZIO != ZERO"
+  cooccurrence_rule: "CO_OCCURRENCE != CAUSATION != DEPENDENCY"
+
+by_kind:
+  FRAMEWORK_FAMILY:
+    - ARCH-FCEA
+    - ARCH-HCPM
+    - ARCH-NEXUS
+  AI_FAMILY:
+    - ARCH-ZETA
+    - ARCH-RARATA
+    - ARCH-IA-MULTICAMADAS
+    - ARCH-DEEPRAFA
+    - ARCH-RA-IA
+  VERSION_LINEAGE:
+    - ARCH-V79-1
+    - ARCH-MAYA-LINEAGE
+  DATA_LAYER:
+    - ARCH-MITM-LAYER
+  IMPLEMENTATION_TREE:
+    - ARCH-FCEA-HYPERCUBE
+    - ARCH-HYPER-THEO-NEO-NEXUS
+  RESEARCH_FAMILY:
+    - ARCH-EXACORDEX
+  SECURITY_OR_CLEANUP_ALIAS:
+    - ARCH-MONALISA
+
+high_value_routes:
+  cognitive_frameworks:
+    - ARCH-FCEA
+    - ARCH-HCPM
+    - ARCH-FCEA-HYPERCUBE
+  version_reconciliation:
+    - ARCH-V79-1
+    - ARCH-MAYA-LINEAGE
+  layered_ai:
+    - ARCH-ZETA
+    - ARCH-IA-MULTICAMADAS
+    - ARCH-DEEPRAFA
+    - ARCH-MITM-LAYER
+  nexus_hyperstructures:
+    - ARCH-NEXUS
+    - ARCH-HYPER-THEO-NEO-NEXUS
+    - ARCH-EXACORDEX
+  safety_review:
+    - ARCH-MONALISA
+
+unresolved_tokens:
+  - Iara
+  - Raia
+  - Infinity
+  - Deep Machine
+  - Middle
+  - Espaco Tempo
+  - HiperCognicao
+  - HF
+  - EA
+  - FCEA-HF-EA relation
+  - CMD
+  - Beta
+  - Gama
+  - Teta
+  - Penta
+  - Supreme
+
+discovery_contract:
+  accepted_inputs:
+    - json
+    - jsonl
+    - json.txt
+    - jsonl.txt
+    - json.gz
+    - jsonl.gz
+    - json.txt.gz
+    - jsonl.txt.gz
+  record_boundaries:
+    jsonl: EACH_NONEMPTY_LINE
+    json_top_level_array: EACH_ARRAY_ITEM
+    json_object_or_scalar: WHOLE_DOCUMENT
+  recursive_directory_scan: true
+  dependencies: PYTHON_STDLIB_ONLY
+  raw_text_emission: false
+  raw_source_path_emission: false
+  semantic_metadata_policy:
+    rule: "CUSTODY_METADATA != SEMANTIC_CONTENT"
+    excluded_fields:
+      - asset_refs
+      - claim_allowed
+      - content_type
+      - conversation_id
+      - create_time
+      - epistemic_state
+      - error_json
+      - kind
+      - message_id
+      - node_id
+      - parent_id
+      - privacy_class
+      - role
+      - source_path
+      - source_pointer
+      - structural_hash
+      - text_hash
+      - title_hash
+      - update_time
+  deterministic_outputs:
+    - architecture_candidates.jsonl
+    - architecture_relations.jsonl
+    - architecture_summary.json
+    - architecture_receipt.json
+  relation_semantics: OBSERVED_COOCCURRENCE_NOT_CAUSATION
+  relation_scopes:
+    - SAME_STRING
+    - SAME_RECORD
+  parse_error_policy: RECEIPT_AND_CONTINUE_BY_DEFAULT
+  strict_mode: --fail-on-parse-error
+  invocation: "python scripts/discover_architecture_families.py <NOVOexport paths...> --output-dir <receipt-dir>"
+  private_review_invocation: "python scripts/discover_architecture_families.py <NOVOexport paths...> --output-dir <receipt-dir> --private-review-output <PRIVATE_LOCAL_ONLY.jsonl>"
+  promotion_route: "candidate -> provenance review -> registry append/refine -> validation -> receipt -> independent promotion gate"
+
+promotion_gate:
+  required_before_runtime_claim:
+    - primary_artifact
+    - provenance
+    - implementation_boundary
+    - executable_or_build_evidence
+    - test_or_runtime_receipt
+  default_when_missing: TOKEN_VAZIO

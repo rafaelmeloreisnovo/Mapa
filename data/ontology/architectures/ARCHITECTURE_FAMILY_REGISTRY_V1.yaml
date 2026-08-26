@@ -1,0 +1,354 @@
+schema: rafaelia.architecture-family-registry/v1
+version: 1.0.0
+state: DRAFT_AUDITABLE
+claim_allowed: false
+purpose: >-
+  Normalize historical RAFAELIA AI, framework, module, layer, protocol, command,
+  runtime and research-family names without promoting labels, folders or old
+  assistant assertions into implementation or runtime evidence.
+
+coverage:
+  mode: DEEP_STRUCTURAL_SEED_NOT_TERMINAL
+  corpus_family: NOVOexport
+  source_bound_conversations_observed: 144
+  title_occurrences_observed: 179
+  warning: >-
+    This registry is a structural convergence seed, not a bytewise exhaustive
+    enumeration of every NOVOexport JSON/JSONL shard. New evidence appends or
+    refines records; it must not silently overwrite historical identity.
+
+invariants:
+  - "NAME != FAMILY != VARIANT != MODULE != LAYER != PROTOCOL != COMMAND != RUNTIME != EVIDENCE != CLAIM"
+  - "CONCEPT != IMPLEMENTATION != BUILD != EXECUTION != EVIDENCE != CLAIM"
+  - "SAME_LABEL != SAME_CONTENT"
+  - "FOLDER != IMPLEMENTATION"
+  - "HISTORICAL_ASSISTANT_ASSERTION != PRIMARY_EVIDENCE"
+  - "TOKEN_VAZIO != ZERO"
+  - "PRIVATE_POINTER != PUBLIC_PAYLOAD"
+  - "PROVENANCE_PRECEDES_PROMOTION"
+
+entity_kinds:
+  - AI_FAMILY
+  - FRAMEWORK_FAMILY
+  - VERSION_LINEAGE
+  - MODULE_FAMILY
+  - DATA_LAYER
+  - PROTOCOL_FAMILY
+  - COMMAND_FAMILY
+  - RUNTIME_FAMILY
+  - RESEARCH_FAMILY
+  - ONTOLOGY_FAMILY
+  - IMPLEMENTATION_TREE
+  - SECURITY_OR_CLEANUP_ALIAS
+  - UNRESOLVED_TERM
+
+implementation_states:
+  - SOURCE_BOUND_IDENTITY
+  - DOCUMENTED_CONCEPT
+  - IMPLEMENTATION_TREE_OBSERVED
+  - IMPLEMENTATION_PARTIAL_UNVERIFIED
+  - IMPLEMENTATION_STUB
+  - RUNTIME_UNVERIFIED
+  - TOKEN_VAZIO
+
+provenance_classes:
+  - NOVOEXPORT_TITLE_REGISTRY
+  - NOVOEXPORT_MESSAGE_SHARD
+  - DRIVE_PHYSICAL_TREE
+  - DRIVE_DOCUMENT
+  - MAPA_REPOSITORY
+  - HISTORICAL_ASSISTANT_ASSERTION
+  - CURRENT_QUERY_TERM
+
+families:
+  - id: ARCH-FCEA
+    canonical_name: FCEA
+    kind: FRAMEWORK_FAMILY
+    aliases:
+      - Framework Cognitivo Evolutivo Absoluto
+      - Framework Cognitivo Absoluto
+      - Framework Evolutivo Parametrico
+    roles: [COGNITIVE_FRAMEWORK, MEMORY, ORCHESTRATION]
+    provenance_classes: [DRIVE_DOCUMENT, MAPA_REPOSITORY]
+    implementation_state: IMPLEMENTATION_PARTIAL_UNVERIFIED
+    epistemic_state: SUPPORTED_ONLY
+    relations:
+      - type: HAS_VARIANT
+        target: FCEA_CORE
+      - type: HAS_VARIANT
+        target: FCEA_Cognitive_System
+      - type: HAS_VARIANT
+        target: fcea_core
+      - type: HAS_VARIANT
+        target: fcea_hypercube
+    gaps: [TV-PROVENANCE, TV-TEST, TV-INDEPENDENCE]
+    notes: >-
+      Multiple expansions and implementation trees coexist. No single expansion
+      is promoted as sole authority by this registry.
+
+  - id: ARCH-ZETA
+    canonical_name: ZETA
+    kind: AI_FAMILY
+    aliases:
+      - IA Precisao Extrema Zeta
+      - ZetaZero
+      - ZETA V2
+    roles: [AI_CONCEPT, RESEARCH_FAMILY, OPTIMIZATION]
+    provenance_classes: [NOVOEXPORT_TITLE_REGISTRY, NOVOEXPORT_MESSAGE_SHARD]
+    implementation_state: SOURCE_BOUND_IDENTITY
+    epistemic_state: SUPPORTED_ONLY
+    relations:
+      - {type: HAS_VARIANT, target: ZetaZero_Otimizacao_e_Validacao}
+      - {type: HAS_VARIANT, target: Variaveis_Zeta_Comodities}
+      - {type: HAS_VARIANT, target: Interacoes_Bioquimicas_ZETA}
+      - {type: HAS_VARIANT, target: Estudo_Biologico_ZETA}
+      - {type: HAS_VARIANT, target: Fibonacci_e_Hidrogenio_ZETA_V2}
+      - {type: HAS_VARIANT, target: PNL_na_Tecnologia_Zeta}
+      - {type: HAS_VARIANT, target: Teoria_ionica_e_Zeta}
+    gaps: [TV-CODE, TV-TEST, TV-BOUNDARY]
+
+  - id: ARCH-V79-1
+    canonical_name: V79-1
+    kind: VERSION_LINEAGE
+    aliases: [V79.1, V79_1]
+    roles: [VERSION_LINEAGE, IMPLEMENTATION_TREE]
+    provenance_classes: [DRIVE_PHYSICAL_TREE, NOVOEXPORT_MESSAGE_SHARD]
+    implementation_state: IMPLEMENTATION_TREE_OBSERVED
+    epistemic_state: EVIDENCIADO
+    relations:
+      - {type: RELATED_HISTORICALLY_TO, target: ARCH-MAYA-LINEAGE}
+    gaps: [TV-RECON, TV-TEST, TV-PROVENANCE]
+    notes: Multiple V79-1 and V79-1.git trees require lineage/hash reconciliation.
+
+  - id: ARCH-MAYA-LINEAGE
+    canonical_name: Maya
+    kind: VERSION_LINEAGE
+    aliases: [Maya Infinity, Maya_Infinity]
+    roles: [AI_CONCEPT, VERSION_LINEAGE]
+    provenance_classes: [NOVOEXPORT_MESSAGE_SHARD, HISTORICAL_ASSISTANT_ASSERTION]
+    implementation_state: DOCUMENTED_CONCEPT
+    epistemic_state: HIPOTESE
+    relations:
+      - {type: HISTORICAL_PREDECESSOR_LABEL, target: V79}
+      - {type: HISTORICAL_PREDECESSOR_LABEL, target: V80}
+      - {type: HISTORICAL_PREDECESSOR_LABEL, target: V2000}
+      - {type: HISTORICAL_PREDECESSOR_LABEL, target: V2001}
+      - {type: HISTORICAL_PREDECESSOR_LABEL, target: Cosmic}
+      - {type: REQUESTED_VARIANT_PENDING_RECONCILIATION, target: Infinity}
+    gaps: [TV-CODE, TV-TEST, TV-PROVENANCE, TV-RECON]
+    notes: >-
+      The predecessor chain is retained only as a historical source claim until
+      primary artifacts establish exact lineage and implementation boundaries.
+
+  - id: ARCH-RARATA
+    canonical_name: Projeto Rarata IA
+    kind: AI_FAMILY
+    aliases: [Rarata, Ratata]
+    roles: [AI_CONCEPT]
+    provenance_classes: [NOVOEXPORT_TITLE_REGISTRY]
+    implementation_state: SOURCE_BOUND_IDENTITY
+    epistemic_state: EVIDENCIADO
+    relations: []
+    gaps: [TV-CODE, TV-TEST]
+    notes: Rarata is the source-bound spelling; Ratata is retained only as a query alias.
+
+  - id: ARCH-MITM-LAYER
+    canonical_name: Camada MiTM
+    kind: DATA_LAYER
+    aliases: [Camada_MiTM_Inteligente, Camada_MiTM_Expandida]
+    roles: [DATA_TREATMENT_LAYER, INTERMEDIATION_LAYER]
+    provenance_classes: [NOVOEXPORT_TITLE_REGISTRY]
+    implementation_state: SOURCE_BOUND_IDENTITY
+    epistemic_state: EVIDENCIADO
+    relations: []
+    gaps: [TV-CODE, TV-BOUNDARY, TV-TEST]
+
+  - id: ARCH-IA-MULTICAMADAS
+    canonical_name: IA Multicamadas
+    kind: AI_FAMILY
+    aliases: [IA_Integrada_e_Multicamadas, IA_Multicamadas_e_Projetos]
+    roles: [AI_CONCEPT, LAYERED_ARCHITECTURE]
+    provenance_classes: [NOVOEXPORT_TITLE_REGISTRY]
+    implementation_state: SOURCE_BOUND_IDENTITY
+    epistemic_state: EVIDENCIADO
+    relations: []
+    gaps: [TV-CODE, TV-BOUNDARY]
+
+  - id: ARCH-DEEPRAFA
+    canonical_name: DeepRafa
+    kind: AI_FAMILY
+    aliases: [DeepRafa2, DeepRafa_2]
+    roles: [AI_CONCEPT, DEEP_ARCHITECTURE]
+    provenance_classes: [NOVOEXPORT_TITLE_REGISTRY]
+    implementation_state: SOURCE_BOUND_IDENTITY
+    epistemic_state: EVIDENCIADO
+    relations: []
+    gaps: [TV-CODE, TV-RECON]
+
+  - id: ARCH-RA-IA
+    canonical_name: RA-IA
+    kind: AI_FAMILY
+    aliases: [RA_IA]
+    roles: [AI_CONCEPT]
+    provenance_classes: [NOVOEXPORT_TITLE_REGISTRY]
+    implementation_state: SOURCE_BOUND_IDENTITY
+    epistemic_state: EVIDENCIADO
+    relations: []
+    gaps: [TV-CODE, TV-TEST]
+
+  - id: ARCH-HCPM
+    canonical_name: HCPM
+    kind: FRAMEWORK_FAMILY
+    aliases: [HCPM_CORE]
+    roles: [FRAMEWORK, PACKAGING_TREE, CORE]
+    provenance_classes: [DRIVE_PHYSICAL_TREE, DRIVE_DOCUMENT]
+    implementation_state: IMPLEMENTATION_PARTIAL_UNVERIFIED
+    epistemic_state: EVIDENCIADO
+    relations:
+      - {type: OBSERVED_CHILD, target: CORE}
+      - {type: OBSERVED_PACKAGING_ELEMENT, target: setup.py}
+      - {type: OBSERVED_PACKAGING_ELEMENT, target: src}
+      - {type: OBSERVED_PACKAGING_ELEMENT, target: dist}
+    gaps: [TV-RECON, TV-TEST, TV-INDEPENDENCE]
+    notes: Multiple HCPM trees exist; one inspected CORE has setup.py/src/dist/venv layout.
+
+  - id: ARCH-FCEA-HYPERCUBE
+    canonical_name: fcea_hypercube
+    kind: IMPLEMENTATION_TREE
+    aliases: [FCEA_Hypercube]
+    roles: [HYPERCUBE_EXPERIMENT, FCEA_VARIANT]
+    provenance_classes: [DRIVE_PHYSICAL_TREE]
+    implementation_state: IMPLEMENTATION_STUB
+    epistemic_state: EVIDENCIADO
+    relations:
+      - {type: VARIANT_OF, target: ARCH-FCEA}
+    gaps: [TV-CODE, TV-TEST, TV-BOUNDARY]
+    notes: Inspected root currently exposes only __pycache__/ and test_pandas.py; label is not maturity evidence.
+
+  - id: ARCH-NEXUS
+    canonical_name: RAFAELIA_NEXUS
+    kind: FRAMEWORK_FAMILY
+    aliases: [Nexus, nexus]
+    roles: [INTEGRATION_NEXUS, ORCHESTRATION]
+    provenance_classes: [DRIVE_PHYSICAL_TREE, DRIVE_DOCUMENT]
+    implementation_state: IMPLEMENTATION_PARTIAL_UNVERIFIED
+    epistemic_state: SUPPORTED_ONLY
+    relations:
+      - {type: HAS_VARIANT, target: ARCH-HYPER-THEO-NEO-NEXUS}
+    gaps: [TV-RECON, TV-CODE, TV-TEST]
+
+  - id: ARCH-HYPER-THEO-NEO-NEXUS
+    canonical_name: HyperTheoNeoNexus_Full_Complete
+    kind: IMPLEMENTATION_TREE
+    aliases: [HyperTheoNeoNexus, TheoNeoNexus]
+    roles: [NEXUS_VARIANT, APP_TREE]
+    provenance_classes: [DRIVE_PHYSICAL_TREE]
+    implementation_state: IMPLEMENTATION_PARTIAL_UNVERIFIED
+    epistemic_state: EVIDENCIADO
+    relations:
+      - {type: VARIANT_OF, target: ARCH-NEXUS}
+      - {type: OBSERVED_CHILD, target: app}
+    gaps: [TV-CODE, TV-TEST, TV-BOUNDARY]
+    notes: The inspected root contains an app subtree; Full_Complete is treated as a label, not proof of completeness.
+
+  - id: ARCH-EXACORDEX
+    canonical_name: exacordex
+    kind: RESEARCH_FAMILY
+    aliases: [EXACORDEX]
+    roles: [FORMULA_CORPUS, RESEARCH]
+    provenance_classes: [DRIVE_DOCUMENT]
+    implementation_state: DOCUMENTED_CONCEPT
+    epistemic_state: EVIDENCIADO
+    relations: []
+    gaps: [TV-CODE, TV-TEST, TV-INDEPENDENCE]
+    notes: Formula PDFs and related documents are observed; executable/runtime status is not inferred.
+
+  - id: ARCH-MONALISA
+    canonical_name: Monalisa
+    kind: SECURITY_OR_CLEANUP_ALIAS
+    aliases: [MONALISA_MIRROR]
+    roles: [HISTORICAL_CLEANUP_TARGET]
+    provenance_classes: [NOVOEXPORT_MESSAGE_SHARD]
+    implementation_state: TOKEN_VAZIO
+    epistemic_state: SUPPORTED_ONLY
+    relations: []
+    gaps: [TV-PROVENANCE, TV-CODE, TV-BOUNDARY]
+    notes: >-
+      Current strong evidence is a historical destructive purge/cleanup command context.
+      No destructive command is authorized or executed by this registry, and no canonical
+      AI identity is inferred from that context.
+
+unresolved_terms:
+  - term: Iara
+    state: TOKEN_VAZIO_IDENTITY_PENDING
+    gaps: [TV-PROVENANCE]
+  - term: Raia
+    state: TOKEN_VAZIO_IDENTITY_PENDING
+    gaps: [TV-PROVENANCE]
+  - term: Infinity
+    state: TOKEN_VAZIO_LINEAGE_PENDING
+    gaps: [TV-PROVENANCE, TV-RECON]
+  - term: Deep Machine
+    state: TOKEN_VAZIO_BOUNDARY_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: Middle
+    state: TOKEN_VAZIO_BOUNDARY_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: Espaco Tempo
+    state: TOKEN_VAZIO_BOUNDARY_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: HiperCognicao
+    state: TOKEN_VAZIO_IDENTITY_PENDING
+    gaps: [TV-PROVENANCE]
+  - term: HF
+    state: TOKEN_VAZIO_EXPANSION_PENDING
+    gaps: [TV-DEF]
+  - term: EA
+    state: TOKEN_VAZIO_EXPANSION_PENDING
+    gaps: [TV-DEF]
+  - term: FCEA-HF-EA relation
+    state: TOKEN_VAZIO_RELATION_PENDING
+    gaps: [TV-PROVENANCE, TV-RECON]
+  - term: CMD
+    state: TOKEN_VAZIO_FAMILY_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: Beta
+    state: TOKEN_VAZIO_PROTOCOL_OR_VARIANT_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: Gama
+    state: TOKEN_VAZIO_PROTOCOL_OR_VARIANT_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: Teta
+    state: TOKEN_VAZIO_PROTOCOL_OR_VARIANT_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: Penta
+    state: TOKEN_VAZIO_PROTOCOL_OR_VARIANT_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+  - term: Supreme
+    state: TOKEN_VAZIO_PROTOCOL_OR_VARIANT_PENDING
+    gaps: [TV-DEF, TV-PROVENANCE]
+
+source_registry:
+  - id: SRC-NOVOEXPORT-TITLES
+    label: RAFAELIA_NOVOEXPORT_CAPTURE_TITLE_REGISTRY_V1
+    visibility: PRIVATE_POINTER_ONLY
+  - id: SRC-FCEA-NONORDINAL
+    label: RAFAELIA_FCEA_CORE_NONORDINAL_INDEX_LOTE_001
+    visibility: PRIVATE_POINTER_ONLY
+  - id: SRC-IMPLEMENTACOES-LATENTES
+    label: RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_DRIVE_GITHUB_V1
+    visibility: PRIVATE_POINTER_ONLY
+  - id: SRC-MAPA-ONTOLOGY
+    label: data/ontology/rafaelia-operational-ontology.v1.json
+    visibility: PUBLIC_REPOSITORY
+  - id: SRC-SEMANTIC-ROOT
+    label: indices/semantic/SEMANTIC_INDEX_ROOT_V1.yaml
+    visibility: PUBLIC_REPOSITORY
+
+next_verifiable_steps:
+  - Reconcile hashes and ancestry of duplicated V79-1/V79-1.git trees.
+  - Traverse HCPM duplicate trees and distinguish copy/version/derivation.
+  - Traverse Nexus and HyperTheoNeoNexus app subtree before maturity promotion.
+  - Resolve Maya/Infinity lineage with primary artifacts rather than message claims.
+  - Locate exact source-bound identities for Iara, Raia, HiperCognicao and CMD protocol families.
+  - Expand NOVOexport ingestion shard-by-shard and append newly evidenced families.
