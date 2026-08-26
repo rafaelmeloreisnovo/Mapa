@@ -1,0 +1,129 @@
+{
+  "cycle_id": "OMEGA-CYCLE-20260826T1214-0300-014",
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "sha": "83bea8eb99e4d503a3711430dee22cd524a0171a",
+    "tree": "19db3ed52387ec20e452e8f0eb70347712f34275"
+  },
+  "observed_interval": {
+    "from": "2026-08-26T11:12:00-03:00",
+    "to": "2026-08-26T12:14:31-03:00"
+  },
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "claim_allowed": false,
+  "sources_traversed": [
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "surface": "FONTES_000_050",
+      "observed_rows": "41..50",
+      "authority": "PRIMARY_EXPORT_SOURCE + CURRENT_PID_INDEX_V5"
+    },
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1j9c-ocHSqV4uXaD1HAvOYWKdrkYMNbp69fdI6BHdMSo",
+      "title": "RAFAELIA — NOVOexport Raw 018 Wave 2 — Physical Inventory & Provider Gap — 2026-08-24",
+      "role": "RAW018 physical/path/size evidence"
+    },
+    {
+      "provider": "GoogleDrive",
+      "provider_id": "1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "title": "RAFAELIA — NOVOexport Raw 018 Wave 3 — PID Hash Reconciliation — 2026-08-24",
+      "role": "RAW018 privacy-preserving PID-set reconciliation"
+    },
+    {
+      "provider": "GitHub",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "ref": "main",
+      "sha": "83bea8eb99e4d503a3711430dee22cd524a0171a"
+    }
+  ],
+  "cursor": {
+    "before": "historical-size 51/51 + historical exact-hash >=48/51 + current custody 40/51",
+    "after": "current provider/PID/SHA/cardinality indexed for 50/51; RAW018 remains hard-current-byte-custody TOKEN_VAZIO"
+  },
+  "volume_processed": {
+    "shards_reconciled_this_cycle": 10,
+    "shards_current_index_total": 50,
+    "shards_total": 51,
+    "raw018_candidate_pid_count": 100
+  },
+  "coverage": {
+    "metric": "CURRENT_PROVIDER_PID_SHA_CARDINALITY_INDEXED",
+    "before": {"closed": 40, "total": 51, "ratio": 0.7843137254901961},
+    "after": {"closed": 50, "total": 51, "ratio": 0.9803921568627451},
+    "promotion_scope": "index/provider/hash/cardinality evidence only; not semantic ingestion, training, scientific validation, or current-byte re-download proof"
+  },
+  "shards_041_050": [
+    {"shard":41,"provider_id":"1crH7SHAwsiErDBCeYbpIMweDq4DA08SG","bytes":23938683,"sha256":"2ddf748d3b77884b48d94fd008ed29d4f600f319e2e6e90b19f1185c2465e2dc","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":42,"provider_id":"1fuT858Ztj7iuhedq1UKcZecHBHKTKbgO","bytes":26236995,"sha256":"e443d91e4047007dc1ff886d48e554fe49938a10e15ed29a8e7df5b317687d58","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":43,"provider_id":"1GvyKQLrYWL2NrW9TWJcaKjdy6UN9dyU6","bytes":19772419,"sha256":"0d5d782ef0f78bddf61ea50af50292e5e86e3e3a4cf5d6453d28359b4c7a2d5c","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":44,"provider_id":"1KHQtwy_ocZZVw9ih4iXzmLZhhH11OO_H","bytes":16112555,"sha256":"9fab3b6af19c1e08fa0306aa3ef6165b42cfec007179fba474fe7769adf3482f","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":45,"provider_id":"1POpVeIOZNuuS2hEGj1HB_j4FvturdFo2","bytes":22452249,"sha256":"a490e4c7ad6f79f5f3f3eae2336fe87faf20a006df806173f0f4280eaf2039f2","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":46,"provider_id":"1ENIyZ-FpAbJqU46q6xSfmiXlBWbIeH2E","bytes":36869653,"sha256":"daef888aee856833c4f26c3c0af804826a2043c775f2d3c543d1135f27ee8e75","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":47,"provider_id":"1tFmjzyQy1h7BSWw8SHwcCFoBV5Xgl4Vt","bytes":11402988,"sha256":"dd133d11f02d757036eb3b9228a35e9734dc4b5984b1002f4f40c6b7260598d5","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":48,"provider_id":"1zfyYkELQQOiMNeW_no8oYFgdiewhxCdO","bytes":36771626,"sha256":"ed19ea07f8763a8a4d87204d80c817694ce4d6c339c71b1d2a1b955a8c125256","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":49,"provider_id":"1e4qhX1taiRY72ZBQZUim-A-jgQojqeEH","bytes":47806754,"sha256":"608e45449809a47f5931f86328b96dab2b2b86a5abf21a8dfe1c7da6834a2f1a","conversations":100,"status":"INDEXED_PID_SHA"},
+    {"shard":50,"provider_id":"1rpWFICYTTFKbZzvzHdW3PQV5LzLlEA-C","bytes":17115060,"sha256":"c5058bf25f682de12de68b54029d13b07e836cd519416752fbc5e4fa320b4979","conversations":54,"status":"INDEXED_PID_SHA"}
+  ],
+  "raw018": {
+    "gap_id": "TV-RAW-018-CURRENT-BYTE-CUSTODY",
+    "state": "TOKEN_VAZIO_HARD_CUSTODY",
+    "source_pointer": [
+      "Drive:1j9c-ocHSqV4uXaD1HAvOYWKdrkYMNbp69fdI6BHdMSo",
+      "Drive:1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "Drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk#FONTES_000_050:row20"
+    ],
+    "known": {
+      "path": "conversations-018.json",
+      "bytes": 12115336,
+      "existence_path_size": "EVIDENCED",
+      "pid_hash_set": "EVIDENCED_RECONCILED_100_PRIVACY_PRESERVING",
+      "candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e"
+    },
+    "missing_field": ["current_provider_id","current_byte_stream","current_sha256","current_json_parse"],
+    "blocking_dependency": "recover exact current RAW018 byte witness/container/provider",
+    "evidence_needed": "exactly 12115336 bytes + SHA256 + JSON parse fail-closed + PID hash set equality",
+    "falsifier": "byte-size mismatch OR JSON parse failure OR PID-set digest != 766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "next_probe": "locate original/current container or directly addressable Drive object for conversations-018.json; stream exact bytes; hash; parse; compare privacy-preserving PID-set digest",
+    "owner_authority": "NOVOexport primary export source / current Drive provider binding",
+    "urgency": "P0",
+    "closure_gate": "BYTES_12115336 + SHA256 + JSON_PARSE + PID_SET_SHA256_MATCH",
+    "claim_allowed": false,
+    "lineage": ["RAW018 Wave2", "RAW018 Wave3", "CURRENT_PID_INDEX_V5"]
+  },
+  "contradictions_preserved": [
+    "CURRENT_PID_INDEX_V5 evidence != proof of a fresh byte re-download in this cycle",
+    "PID_HASH_SET_EVIDENCE != CURRENT_RAW_BYTE_CUSTODY",
+    "HISTORICAL_OBJECT_WITNESS != CURRENT_RAW018_SHA256",
+    "DERIVED_ORDINAL != RAW_SOURCE_ORDINAL",
+    "conversations-050 cardinality=54 falsifies a universal 100-conversations-per-shard assumption"
+  ],
+  "uncertainty": {
+    "before": "041-042 historical-hash gap + 043-050 current-provider/hash ambiguity + RAW018 hard custody",
+    "after": "041-050 current index identity/provider/hash/cardinality reconciled; RAW018 isolated as sole 51-shard current provider/PID/SHA gap"
+  },
+  "memory_projection": {
+    "L": "current index V5 supersedes older broad 041-050 ambiguity without deleting historical receipts",
+    "O": "Drive master index cross-checked against RAW018 Wave2/Wave3 independent evidence planes",
+    "T": "Drive shard custody -> Mapa audit receipt",
+    "C": "coverage promotion limited to CURRENT_PROVIDER_PID_SHA_CARDINALITY_INDEXED metric",
+    "P": "append-only receipt bound to provider IDs, hashes, predecessor SHA and gap lineage"
+  },
+  "top_urgencies": [
+    "P0 RAW018 current byte custody",
+    "P1 verify authority freshness/revision lineage of CURRENT_PID_INDEX_V5 rows against underlying primary export objects",
+    "P1 add typed CONTENT_IDENTITIES/UNIVERSE_COVERAGE edges only after receipt review"
+  ],
+  "next_probes_exact": [
+    "Drive search by exact RAW018 path+12115336 across container/export artifacts and provider metadata",
+    "if witness found: stream 12115336 bytes -> SHA256 -> parse JSON -> compute privacy-preserving PID-set digest -> compare 766644f8...fc69e",
+    "revalidate CURRENT_PID_INDEX_V5 revision origin/receipt for rows 41..50 before promoting downstream UNIVERSE_COVERAGE",
+    "then materialize typed CONTENT_IDENTITIES edges for 041..050 without merging occurrences"
+  ],
+  "F_ok": "041-050 reconciled to current provider/PID/SHA/cardinality index; metric coverage 40/51 -> 50/51",
+  "F_gap": "RAW018 remains TOKEN_VAZIO_HARD_CUSTODY; current-index freshness/underlying-byte proof remains distinct",
+  "F_next": "RAW018 exact byte witness gate -> CURRENT_PID_INDEX_V5 revision provenance -> typed coverage/index edges"
+}
