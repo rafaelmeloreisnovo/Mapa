@@ -2,36 +2,46 @@
 
 # Matriz de Conformidade — norma × evidência × gap
 
-Gerado por `codigo/matriz_conformidade.py`. Liga cada conceito evidenciado à sua **âncora normativa** (`REFERENCE`, de `biblioteconomia/08_ANCORAGEM_NORMATIVA.md`) e abre uma linha de auditoria. **Estado global: `PENDENTE`** — nada aqui é atestado de conformidade; a passagem `PENDENTE`→`CONFORME` exige auditoria real (próximo ciclo). Repos com dados pessoais têm **prioridade ALTA** (regra pró-humano).
+Gerado por `codigo/matriz_conformidade.py`. Liga cada conceito evidenciado à sua **âncora normativa** (`REFERENCE`, de `biblioteconomia/08_ANCORAGEM_NORMATIVA.md`) e abre uma linha de auditoria. **Estado global: `PENDENTE`** — nada aqui é atestado de conformidade; a passagem `PENDENTE`→`CONFORME` exige auditoria real. Repos com dados pessoais têm **prioridade ALTA**, mas o nome do repo não prova aplicabilidade.
+
+Cânone jurídico de privacidade/GNSS/IA: `docs/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_V1.md`.
+Atlas semântico: `data/normative-graph/GLOBAL_DATA_PRIVACY_GNSS_AI_SEMANTIC_ATLAS_V1.json`.
+
+> `permissão_do_SO != base_jurídica`; `data_no_dispositivo != dado_no_modelo`; `TOKEN_VAZIO != falso`. Cada fluxo deve ser provado ponta a ponta.
 
 | prioridade | repo | conceito | norma (REFERENCE) | evidência | auditoria |
 |---|---|---|---|---|---|
-| ALTA | conversations_chunks_private | dados | LGPD 13.709/2018; GDPR 2016/679; ISO/IEC 27701 (privacidade) | corpus de conversas (dados pessoais) | PENDENTE |
+| ALTA | conversations_chunks_private | dados | CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; GDPR 2016/679 quando aplicavel; ISO/IEC 27701 como REFERENCE | corpus de conversas (dados pessoais) | PENDENTE |
 | ALTA | conversations_chunks_private | C01 | SLSA; ISO/IEC/IEEE 12207 (reprodutibilidade) | codigo+prosa | PENDENTE |
 | ALTA | conversations_chunks_private | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
 | ALTA | conversations_chunks_private | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
 | ALTA | conversations_chunks_private | C05 | IETF RFC 8032 (assinatura Ed25519) | codigo+prosa | PENDENTE |
 | ALTA | conversations_chunks_private | C11 | UNESCO Etica da IA 2021 (enquadramento) | codigo | PENDENTE |
 | ALTA | conversations_chunks_private | C13 | ISO/IEC 42001; UNESCO Etica IA; UDHR; UNCRC (etica/direitos) | codigo+prosa | PENDENTE |
-| ALTA | gaia_phi | dados | LGPD 13.709/2018; GDPR 2016/679; ISO/IEC 27701 (privacidade) | indexacao/dataset | PENDENTE |
+| ALTA | gaia_phi | dados | CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; GDPR 2016/679 quando aplicavel; ISO/IEC 27701 como REFERENCE | indexacao/dataset | PENDENTE |
 | ALTA | gaia_phi | C01 | SLSA; ISO/IEC/IEEE 12207 (reprodutibilidade) | codigo+prosa | PENDENTE |
 | ALTA | gaia_phi | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
 | ALTA | gaia_phi | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
 | ALTA | gaia_phi | C05 | IETF RFC 8032 (assinatura Ed25519) | codigo+prosa | PENDENTE |
 | ALTA | gaia_phi | C13 | ISO/IEC 42001; UNESCO Etica IA; UDHR; UNCRC (etica/direitos) | codigo+prosa | PENDENTE |
-| ALTA | home | dados | LGPD 13.709/2018; GDPR 2016/679; ISO/IEC 27701 (privacidade) | analise de codigo/dados do usuario | PENDENTE |
+| ALTA | home | dados | CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; GDPR 2016/679 quando aplicavel; ISO/IEC 27701 como REFERENCE | analise de codigo/dados do usuario | PENDENTE |
 | ALTA | home | C01 | SLSA; ISO/IEC/IEEE 12207 (reprodutibilidade) | codigo+prosa | PENDENTE |
 | ALTA | home | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
 | ALTA | home | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
 | ALTA | home | C05 | IETF RFC 8032 (assinatura Ed25519) | codigo+prosa | PENDENTE |
 | ALTA | home | C13 | ISO/IEC 42001; UNESCO Etica IA; UDHR; UNCRC (etica/direitos) | codigo | PENDENTE |
-| ALTA | lgpd_constituicoes | dados | LGPD 13.709/2018; GDPR 2016/679; ISO/IEC 27701 (privacidade) | framework LGPD/direitos (proprio dominio) | PENDENTE |
+| ALTA | lgpd_constituicoes | dados | CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; GDPR 2016/679 quando aplicavel; ISO/IEC 27701 como REFERENCE | framework LGPD/direitos (proprio dominio) | PENDENTE |
 | ALTA | lgpd_constituicoes | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
 | ALTA | lgpd_constituicoes | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
 | ALTA | lgpd_constituicoes | C05 | IETF RFC 8032 (assinatura Ed25519) | codigo+prosa | PENDENTE |
 | ALTA | lgpd_constituicoes | C11 | UNESCO Etica da IA 2021 (enquadramento) | prosa | PENDENTE |
 | ALTA | lgpd_constituicoes | C13 | ISO/IEC 42001; UNESCO Etica IA; UDHR; UNCRC (etica/direitos) | prosa | PENDENTE |
-| ALTA | x0 | dados | LGPD 13.709/2018; GDPR 2016/679; ISO/IEC 27701 (privacidade) | ecossistema cognitivo com dados | PENDENTE |
+| ALTA | termux-api_rafcodephi | dados | CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; GDPR 2016/679 quando aplicavel; ISO/IEC 27701 como REFERENCE | ponte Android com APIs de localizacao, contatos, call log, SMS, microfone, telefonia e outros dados conforme metodo/permissao | PENDENTE |
+| ALTA | termux-api_rafcodephi | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
+| ALTA | termux-api_rafcodephi | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
+| ALTA | termux-api_rafcodephi | C05 | IETF RFC 8032 (assinatura Ed25519) | codigo+prosa | PENDENTE |
+| ALTA | termux-api_rafcodephi | C11 | UNESCO Etica da IA 2021 (enquadramento) | codigo | PENDENTE |
+| ALTA | x0 | dados | CF/88 privacidade+dados; Marco Civil; LGPD 13.709/2018; GDPR 2016/679 quando aplicavel; ISO/IEC 27701 como REFERENCE | ecossistema cognitivo com dados | PENDENTE |
 | ALTA | x0 | C01 | SLSA; ISO/IEC/IEEE 12207 (reprodutibilidade) | codigo+prosa | PENDENTE |
 | ALTA | x0 | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
 | ALTA | x0 | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
@@ -132,10 +142,6 @@ Gerado por `codigo/matriz_conformidade.py`. Liga cada conceito evidenciado à su
 | normal | relativity-living-light | C05 | IETF RFC 8032 (assinatura Ed25519) | codigo+prosa | PENDENTE |
 | normal | relativity-living-light | C11 | UNESCO Etica da IA 2021 (enquadramento) | codigo+prosa | PENDENTE |
 | normal | relativity-living-light | C13 | ISO/IEC 42001; UNESCO Etica IA; UDHR; UNCRC (etica/direitos) | codigo+prosa | PENDENTE |
-| normal | termux-api_rafcodephi | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
-| normal | termux-api_rafcodephi | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
-| normal | termux-api_rafcodephi | C05 | IETF RFC 8032 (assinatura Ed25519) | codigo+prosa | PENDENTE |
-| normal | termux-api_rafcodephi | C11 | UNESCO Etica da IA 2021 (enquadramento) | codigo | PENDENTE |
 | normal | termux-app-rafacodephi | C01 | SLSA; ISO/IEC/IEEE 12207 (reprodutibilidade) | codigo+prosa | PENDENTE |
 | normal | termux-app-rafacodephi | C03 | NIST FIPS 180-4 / FIPS 202 (hashing) | codigo+prosa | PENDENTE |
 | normal | termux-app-rafacodephi | C04 | W3C PROV-O; ISO 15489 (proveniencia/custodia) | codigo+prosa | PENDENTE |
