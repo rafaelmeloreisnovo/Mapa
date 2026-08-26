@@ -1,5 +1,5 @@
 schema: rafaelia.architecture-family-index/v1
-version: 1.1.1
+version: 1.1.2
 state: ACTIVE_DISCOVERY
 claim_allowed: false
 source_registry: data/ontology/architectures/ARCHITECTURE_FAMILY_REGISTRY_V1.yaml
@@ -92,6 +92,28 @@ discovery_contract:
   dependencies: PYTHON_STDLIB_ONLY
   raw_text_emission: false
   raw_source_path_emission: false
+  semantic_metadata_policy:
+    rule: "CUSTODY_METADATA != SEMANTIC_CONTENT"
+    excluded_fields:
+      - asset_refs
+      - claim_allowed
+      - content_type
+      - conversation_id
+      - create_time
+      - epistemic_state
+      - error_json
+      - kind
+      - message_id
+      - node_id
+      - parent_id
+      - privacy_class
+      - role
+      - source_path
+      - source_pointer
+      - structural_hash
+      - text_hash
+      - title_hash
+      - update_time
   deterministic_outputs:
     - architecture_candidates.jsonl
     - architecture_relations.jsonl
