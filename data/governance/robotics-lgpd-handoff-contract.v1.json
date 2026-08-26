@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "ROBOTICS-LGPD-HANDOFF-V1",
+  "state": "PROPOSED_BOUND_HANDOFF_NOT_FORMAL_PRODUCER_ENROLLMENT",
+  "consumer": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "branch": "feat/robotics-user-governance-federation-v1",
+    "role": "federation_authority_and_state_router"
+  },
+  "producer": {
+    "repo": "instituto-Rafael/LGPD-Constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic",
+    "ref": "feat/robotics-information-governance-v1",
+    "observed_commit": "ad0de98b4cd521fa9eefb05d5aac033e95b45a65",
+    "role": "proposed_legal_privacy_normative_research_producer",
+    "formal_enrollment_in_mapa_authority_pyramid": "TOKEN_VAZIO"
+  },
+  "bound_artifacts": [
+    "docs/ROBOTICS_INFORMATION_GOVERNANCE_FIRST_QUESTION.md",
+    "docs/ROBOTICS_MAPA_NORMATIVE_CROSSWALK_V2.md",
+    "data/robotics_information_governance_v1.json",
+    "data/robotics_normative_crosswalk_v2.json",
+    "tests/test_robotics_information_governance.py",
+    "tests/test_robotics_normative_crosswalk.py"
+  ],
+  "producer_evidence": {
+    "workflow": "Robotics Information Governance",
+    "workflow_run_id": 33006885912,
+    "head_sha": "ad0de98b4cd521fa9eefb05d5aac033e95b45a65",
+    "status": "completed",
+    "conclusion": "success",
+    "scope": "repository-level syntax/invariant tests for the Robotics governance and normative crosswalk artifacts; not legal opinion, certification, runtime proof or independent audit"
+  },
+  "allowed_handoff": [
+    "legal_source_identifiers",
+    "article_crosswalks",
+    "regulatory_source_identifiers",
+    "technical_standard_metadata",
+    "normative_status_and_version_metadata",
+    "typed_hypotheses",
+    "typed_TOKEN_VAZIO",
+    "test_receipts_and_commit_identity"
+  ],
+  "forbidden_promotions": [
+    "research_crosswalk_to_binding_legal_opinion",
+    "standard_reference_to_certification",
+    "CI_success_to_legal_compliance",
+    "economic_hypothesis_to_proven_illegality",
+    "producer_proposal_to_formal_mapa_authority_without_gate",
+    "stale_source_to_current_normative_truth"
+  ],
+  "acceptance_gates": [
+    "exact_repo_ref_commit",
+    "source_authority_classification",
+    "scope_match",
+    "staleness_check",
+    "TOKEN_VAZIO_preservation",
+    "non_regression_check",
+    "receipt_append"
+  ],
+  "revalidation_triggers": [
+    "producer_head_material_change",
+    "legal_or_regulatory_change",
+    "standard_version_change",
+    "jurisdiction_change",
+    "new_runtime_processing_scope",
+    "contradictory_primary_source",
+    "independent_review_finding"
+  ],
+  "claim_boundary": "Mapa may route and preserve the producer's normative research state but may not transform that research into a binding legal conclusion or implementation proof without the relevant authority and evidence.",
+  "falsifier": "If Mapa promotes a producer claim beyond its source scope or erases a producer TOKEN_VAZIO, this handoff contract is violated.",
+  "F_ok": "Exact producer branch/commit and successful bounded workflow receipt are linked.",
+  "F_gap": "Formal producer enrollment remains TOKEN_VAZIO and requires authority-pyramid/topology amendment plus governance approval.",
+  "F_next": "Validate this contract in CI and only then mark the crosswalk linkage gate as PASS_DOCUMENTED_BOUND."
+}
