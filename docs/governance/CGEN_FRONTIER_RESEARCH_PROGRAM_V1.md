@@ -149,7 +149,7 @@ O objetivo não é pressupor que todo viés existe, mas impedir que ele desapare
 
 ---
 
-# PARTE II — INVARIANTE DOS DOIS PONTOS, OITO MOMENTOS E QUATRO EIXOS
+## PARTE II — INVARIANTE DOS DOIS PONTOS, OITO MOMENTOS E QUATRO EIXOS
 
 ## 5. Definição formal do par equidistante
 
@@ -288,7 +288,7 @@ Isso é exato para raio comum e passo angular uniforme.
 
 ---
 
-# PARTE III — ELEVAÇÃO 3D E O HEXÁGONO
+## PARTE III — ELEVAÇÃO 3D E O HEXÁGONO
 
 ## 9. Dois quadrados como faces opostas de um cubo
 
@@ -371,7 +371,7 @@ Um claim de superioridade mecânica exigiria FEA/ensaio e comparação contra ge
 
 ---
 
-# PARTE IV — ESPIRAL, √3/2 E FIBONACCI
+## PARTE IV — ESPIRAL, √3/2 E FIBONACCI
 
 ## 10. Separação obrigatória entre raio e ângulo
 
@@ -468,7 +468,7 @@ Para ligar Fibonacci a um fenômeno Robotics real, é preciso declarar a variáv
 
 ---
 
-# PARTE V — CORRESPONDÊNCIA ENTRE GEOMETRIA E GOVERNANÇA
+## PARTE V — CORRESPONDÊNCIA ENTRE GEOMETRIA E GOVERNANÇA
 
 ## 13. A parábola formal: dois pontos que se fiscalizam
 
@@ -527,7 +527,7 @@ Esta pareação é uma **construção de design**, não teorema jurídico. Ela �
 
 ---
 
-# PARTE VI — NORMAS, DIREITO E EVOLUÇÃO TEMPORAL
+## PARTE VI — NORMAS, DIREITO E EVOLUÇÃO TEMPORAL
 
 ## 15. A norma como objeto versionado
 
@@ -628,7 +628,7 @@ Se a trilha quebrar, `ROOT_CAUSE=TOKEN_VAZIO`.
 
 ---
 
-# PARTE VII — FALSIFICABILIDADE
+## PARTE VII — FALSIFICABILIDADE
 
 ## 18. Matriz de falsificadores
 
@@ -702,7 +702,7 @@ A camada geométrica deve passar independentemente de qualquer narrativa jurídi
 
 ---
 
-# PARTE VIII — URGÊNCIAS E FECHAMENTO DE LACUNAS
+## PARTE VIII — URGÊNCIAS E FECHAMENTO DE LACUNAS
 
 ## 20. P0 — bloqueios que não podem ser mascarados
 
@@ -767,19 +767,10 @@ Essa parábola é interpretação. Os teoremas geométricos que a sustentam são
 
 ## 25. Invariante final
 
-\[
-\boxed{
-Truth_{operational}
-=
-Authority
-\cap Provenance
-\cap Scope
-\cap Time
-\cap Reproducibility
-\cap Falsifiability
-\cap Ethics
-}
-\]
+```text
+Truth_operational =
+  Authority ∩ Provenance ∩ Scope ∩ Time ∩ Reproducibility ∩ Falsifiability ∩ Ethics
+```
 
 O símbolo de interseção expressa que a perda de uma dimensão relevante limita o claim total.
 
