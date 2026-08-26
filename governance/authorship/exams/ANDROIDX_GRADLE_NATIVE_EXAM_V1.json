@@ -1,27 +1,34 @@
 {
   "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
   "track": "T5_ANDROIDX_GRADLE_NATIVE",
-  "state": "DEPENDENCY_SURFACE_DEFINED_EVIDENCE_PARTIAL",
+  "state": "STATIC_EXAM_1_RECORDED",
   "claim_allowed": false,
   "release_allowed": false,
   "observed_evidence": [
-    "control plane classifies AndroidX/Gradle/native dependencies as third-party surfaces requiring component-specific license audit"
+    "control plane classifies AndroidX/Gradle/native dependencies as third-party surfaces requiring component-specific license audit",
+    "termux-app-rafacodephi app/build.gradle blob a4ec7894bb88a9fe86da8459fcd79ebb9b156b55 records compile/target/min SDK, NDK version, external native build, ABI splits, jniLibs packaging mode, bootstrap ZIP inputs and Android compatibility verification tasks"
   ],
   "findings": [
     {
       "id": "T5.F1",
       "status": "RESOLVED_GRAPH_UNAVAILABLE",
-      "finding": "declared dependencies alone are insufficient to prove the actually packaged third-party set",
-      "effect": "THIRD_PARTY_NOTICES must be derived from the resolved/shipped graph"
+      "finding": "build configuration describes packaging/build mechanics but does not itself enumerate the resolved third-party dependency graph and transitive license set",
+      "effect": "THIRD_PARTY_NOTICES cannot be closed from declarations/configuration alone"
+    },
+    {
+      "id": "T5.F2",
+      "status": "PACKAGING_BOUNDARY_PARTIAL",
+      "finding": "JNI packaging and bootstrap artifact inputs are explicitly configured, creating concrete surfaces that must be included in the shipped-set provenance exam",
+      "effect": "native/bootstrap artifacts must be identity+license+hash bound independently from Java dependencies"
     }
   ],
   "exams": [
-    {"id":"T5.E1","name":"resolved_dependency_graph","status":"TOKEN_VAZIO","pass":"exact group/artifact/version and native package identities captured"},
-    {"id":"T5.E2","name":"official_license_notice_sources","status":"TOKEN_VAZIO","pass":"each dependency bound to official license/NOTICE evidence"},
-    {"id":"T5.E3","name":"packaging_scope","status":"TOKEN_VAZIO","pass":"embedded/runtime/build-only/generated dependency roles separated"},
+    {"id":"T5.E1","name":"resolved_dependency_graph","status":"TOKEN_VAZIO","pass":"exact group/artifact/version and native package identities captured from resolved build"},
+    {"id":"T5.E2","name":"official_license_notice_sources","status":"TOKEN_VAZIO","pass":"each resolved dependency bound to official license/NOTICE evidence"},
+    {"id":"T5.E3","name":"packaging_scope","status":"PARTIAL_CONFIGURATION_OBSERVED","evidence":"ABI splits, jniLibs packaging, NDK build and bootstrap ZIP surfaces observed; actual packaged file set still missing"},
     {"id":"T5.E4","name":"third_party_notices","status":"TOKEN_VAZIO","pass":"notice candidate generated from actual shipped set"},
     {"id":"T5.E5","name":"source_obligations","status":"TOKEN_VAZIO","pass":"corresponding-source/source-offer duties closed where applicable"},
     {"id":"T5.E6","name":"privacy_security_boundary","status":"TOKEN_VAZIO","pass":"account/data-processing permissions and security state recorded separately from copyright review"}
   ],
-  "next": "capture resolved dependencies from the real Android build then generate notice inventory"
+  "next": "capture resolved Gradle dependency graph plus actual packaged APK/native/bootstrap contents, then bind official licenses and generate THIRD_PARTY_NOTICES"
 }
