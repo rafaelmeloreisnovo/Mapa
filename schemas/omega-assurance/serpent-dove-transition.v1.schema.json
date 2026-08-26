@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/omega-assurance/serpent-dove-transition.v1.schema.json",
+  "title": "RAFAELIA Serpent-Dove Conduct Transition V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "timestamp_utc",
+    "target",
+    "operator",
+    "observation",
+    "interpretation",
+    "evidence",
+    "counterevidence",
+    "uncertainty",
+    "attention_state",
+    "evidence_age",
+    "action_mode",
+    "minimum_intervention",
+    "rollback",
+    "next_gate",
+    "append_only",
+    "claim_allowed"
+  ],
+  "$defs": {
+    "token_vazio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reason", "next_gate"],
+      "properties": {
+        "state": {"const": "TOKEN_VAZIO"},
+        "reason": {"type": "string", "minLength": 1},
+        "next_gate": {"type": "string", "minLength": 1}
+      }
+    },
+    "known_or_vazio": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {"$ref": "#/$defs/token_vazio"}
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "rafaelia.serpent-dove-transition/v1"},
+    "event_id": {"type": "string", "pattern": "^SP-[0-9]{8}T[0-9]{6}Z-[A-Z0-9_-]{4,64}$"},
+    "timestamp_utc": {"type": "string", "format": "date-time"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository_or_provider", "ref", "object", "digest"],
+      "properties": {
+        "repository_or_provider": {"$ref": "#/$defs/known_or_vazio"},
+        "ref": {"$ref": "#/$defs/known_or_vazio"},
+        "object": {"$ref": "#/$defs/known_or_vazio"},
+        "digest": {"$ref": "#/$defs/known_or_vazio"}
+      }
+    },
+    "operator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intent",
+        "authority_state",
+        "certainty",
+        "blast_radius",
+        "reversibility",
+        "information_exposure",
+        "escalation_path"
+      ],
+      "properties": {
+        "intent": {"enum": ["OBSERVE", "CLASSIFY", "TEST", "CONTAIN", "MUTATE", "PROMOTE", "PUBLISH"]},
+        "authority_state": {"enum": ["ALLOW", "DENY", "HOLD", "TOKEN_VAZIO"]},
+        "certainty": {"enum": ["MEASURED", "BOUNDED", "AMBIGUOUS", "TOKEN_VAZIO"]},
+        "blast_radius": {"enum": ["NONE", "OBJECT", "ROUTE", "REPOSITORY", "CROSS_REPOSITORY", "TOKEN_VAZIO"]},
+        "reversibility": {"enum": ["NOT_APPLICABLE", "READY", "REHEARSED", "PARTIAL", "FAILED", "TOKEN_VAZIO"]},
+        "information_exposure": {"enum": ["NONE", "PUBLIC_METADATA", "BOUNDED_INTERNAL", "PRIVATE", "RESTRICTED", "TOKEN_VAZIO"]},
+        "escalation_path": {"$ref": "#/$defs/known_or_vazio"}
+      }
+    },
+    "observation": {"type": "string", "minLength": 1},
+    "interpretation": {"type": "string", "minLength": 1},
+    "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "counterevidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "uncertainty": {"enum": ["MEASURED", "BOUNDED", "OPEN", "AMBIGUOUS", "TOKEN_VAZIO"]},
+    "attention_state": {"type": "string", "minLength": 1},
+    "evidence_age": {"enum": ["FRESH", "AGING", "STALE", "HISTORICAL_ONLY", "SUPERSEDED", "INVALIDATED", "TOKEN_VAZIO"]},
+    "action_mode": {"enum": ["WATCH", "WARN", "HOLD", "ACT_BOUNDED"]},
+    "minimum_intervention": {"type": "string", "minLength": 1},
+    "rollback": {"$ref": "#/$defs/known_or_vazio"},
+    "next_gate": {"type": "string", "minLength": 1},
+    "append_only": {"const": true},
+    "claim_allowed": {"type": "boolean"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"operator": {"properties": {"authority_state": {"enum": ["DENY", "HOLD", "TOKEN_VAZIO"]}}, "required": ["authority_state"]}}},
+      "then": {"properties": {"action_mode": {"enum": ["WATCH", "WARN", "HOLD"]}, "claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"operator": {"properties": {"certainty": {"enum": ["AMBIGUOUS", "TOKEN_VAZIO"]}}, "required": ["certainty"]}}},
+      "then": {"properties": {"action_mode": {"enum": ["WATCH", "WARN", "HOLD"]}, "claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"operator": {"properties": {"reversibility": {"enum": ["FAILED", "TOKEN_VAZIO"]}, "intent": {"enum": ["MUTATE", "PROMOTE", "PUBLISH"]}}, "required": ["reversibility", "intent"]}}},
+      "then": {"properties": {"action_mode": {"const": "HOLD"}, "claim_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"evidence_age": {"enum": ["STALE", "HISTORICAL_ONLY", "INVALIDATED"]}}},
+      "then": {"properties": {"claim_allowed": {"const": false}}}
+    }
+  ]
+}
