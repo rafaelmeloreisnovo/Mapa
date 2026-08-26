@@ -1,0 +1,116 @@
+{
+  "schema": "RAFAELIA_OMEGA_FEDERATED_CYCLE/v1",
+  "cycle_id": "OMEGA-CYCLE-20260826T0013-0300-004",
+  "predecessor": "OMEGA-CYCLE-20260825T2211-0300-003",
+  "observed_interval": "2026-08-25T22:11:28-03:00/2026-08-26T00:13:58-03:00",
+  "source_contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "cursor": {
+    "github_mapa_before": "f20df54f163d52cfc9d964a2e39d9346922c7f5e",
+    "github_branch": "automation/omega-hourly-20260826t0013-0300",
+    "pr416_head": "7fa9e08343e55ccfeeb7a7d0ac034cf4f4630d19",
+    "pr416_base": "f20df54f163d52cfc9d964a2e39d9346922c7f5e",
+    "drive_anchor_file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "drive_master_navigation_id": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+    "drive_master_index_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+    "drive_receipt_folder_id": "1aVPudztple-lQrH0hxfhYdbB0jk4eKPv",
+    "drive_receipt_file_id": "1yfoLRFe-tfhkBN1zKoysQb6gY69a334THFMwiGs9yv8",
+    "drive_receipt_revision_id": "AIroW34YBb2srj1bstSeuENRwscSr6Y5_2HYzb8rSYNS5ZPw0b0PQX-9UQu65u3HM3GnVEUigw-CMSaVJRwnnO0D6czL8DcSC7p4QUBRoUw"
+  },
+  "processed": {
+    "mapa_recent_commits_observed": 8,
+    "open_mapa_prs_revalidated": 2,
+    "pr416_commits": 24,
+    "pr416_changed_files": 10,
+    "pr416_additions": 1416,
+    "pr416_deletions": 2,
+    "pr416_workflow_runs_observed": 6,
+    "pr416_check_runs_observed": 8,
+    "drive_objects_revalidated": 4,
+    "drive_receipts_created": 1
+  },
+  "evidence": {
+    "mapa_main": {
+      "state": "OBSERVED",
+      "sha": "f20df54f163d52cfc9d964a2e39d9346922c7f5e",
+      "message": "Governance: fail-closed illicit-use route gate"
+    },
+    "pr416": {
+      "state": "OBSERVED_PARTIAL_CI",
+      "number": 416,
+      "head_sha": "7fa9e08343e55ccfeeb7a7d0ac034cf4f4630d19",
+      "base_sha": "f20df54f163d52cfc9d964a2e39d9346922c7f5e",
+      "mergeable": true,
+      "semantic_incremental_index": "SUCCESS",
+      "branch_topology_validate": "SUCCESS",
+      "promotion_control_enforce": "FAILURE",
+      "negative_tests_at_observation": "IN_PROGRESS",
+      "repository_structure_at_observation": "IN_PROGRESS",
+      "legacy_commit_status": "PENDING_WITH_ZERO_STATUSES",
+      "claim_allowed": false
+    },
+    "server_governance": {
+      "rulesets": [],
+      "branch_protection_read": "BLOCKED_403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
+      "interpretation": "No server-enforcement closure. Empty rulesets and unreadable branch-protection surface must not be collapsed into proof of absence."
+    },
+    "drive": {
+      "master_index_updated_at": "2026-08-25T22:01:35.825Z",
+      "receipt_state": "EXECUTED_AND_MOVED_UNDER_CANONICAL_RECEIPT_FOLDER"
+    }
+  },
+  "gap_delta": {
+    "created_or_narrowed": [
+      {
+        "gap_id": "TV-MAPA-PR416-CHECK-COMPLETENESS-20260826-001",
+        "state": "PARTIAL_BLOCKED",
+        "source_pointer": "rafaelmeloreisnovo/Mapa#416@7fa9e08343e55ccfeeb7a7d0ac034cf4f4630d19",
+        "missing_field": "terminal result of every required check plus independent promotion decision",
+        "blocking_dependency": "in-progress checks and promotion-control policy",
+        "evidence_needed": "completed check-runs with conclusions and policy-compatible approval evidence",
+        "falsifier": "any required terminal check failure that is not an intentional fail-closed approval boundary",
+        "next_probe": "re-read all check-runs for exact head 7fa9e083 and classify every terminal conclusion without weakening gates",
+        "owner_authority": "Mapa governance + GitHub provider",
+        "urgency": "P0",
+        "closure_gate": "all required checks terminal and failures classified; no promotion without authorized independent approval",
+        "claim_allowed": false,
+        "predecessor_lineage": "OMEGA-CYCLE-20260825T2211-0300-003→Mapa@f20df54f→PR416@7fa9e083"
+      },
+      {
+        "gap_id": "TV-MAPA-SERVER-ENFORCEMENT-20260826-002",
+        "state": "TOKEN_VAZIO_BLOCKED",
+        "source_pointer": "GitHub rulesets endpoint + main branch protection endpoint",
+        "missing_field": "readable authoritative server-side protection configuration for main",
+        "blocking_dependency": "integration permission on branch-protection read; no rulesets observed",
+        "evidence_needed": "authoritative provider response showing branch protection/rules or equivalent enforcement",
+        "falsifier": "authoritative provider response proving required protections absent or insufficient",
+        "next_probe": "query server enforcement through another accessible authoritative provider surface; never infer enforcement from workflow YAML",
+        "owner_authority": "GitHub provider / repository administration",
+        "urgency": "P0",
+        "closure_gate": "provider-side enforcement observed and matched to required contexts/review policy",
+        "claim_allowed": false,
+        "predecessor_lineage": "PR413 governance triage→OMEGA-CYCLE-20260826T0013-0300-004"
+      }
+    ]
+  },
+  "memory_projection": {
+    "L": "cycle003→Mapa merges/reconciliations→PR416 architecture-family seed→cycle004 governance receipt",
+    "O": "GitHub refs/check-runs, Drive provider IDs, registry/index artifacts and server-enforcement surfaces remain independent",
+    "T": "NOVOexport archaeology↔Mapa ontology/index↔CI gates↔Drive navigation/receipt",
+    "C": "pending/in-progress/permission-denied are non-terminal; historical family names are not runtime evidence",
+    "P": "cycle_id, immutable SHAs, Drive file/revision IDs and gap IDs are append-only anchors"
+  },
+  "uncertainty_before": "latest PR416 and server-governance state were not reconciled with durable cycle003",
+  "uncertainty_after": "PR416 identity/scope and partial CI are bound; server-enforcement uncertainty narrowed to empty rulesets plus unreadable branch-protection surface",
+  "coverage_before": "durable cycle003 plus later PR413 triage",
+  "coverage_after": "latest Mapa main + PR416 structural seed + 6 workflow-run/8 check-run surface + Drive master-index freshness + current Drive receipt + 2 typed governance gaps",
+  "claim_allowed_changes": [],
+  "top_urgencies": [
+    "terminal classification of every PR416 required check",
+    "authoritative server-side enforcement evidence for main",
+    "independent approval boundary without gate weakening",
+    "bulk NOVOexport family-lineage expansion only after governance checks are reconciled"
+  ],
+  "F_ok": "Re-anchored current Mapa main and PR416, observed successful semantic/topology checks, narrowed governance uncertainty, revalidated Drive index surfaces, and created a revision-bound Drive receipt.",
+  "F_gap": "PR416 checks were not all terminal at observation; promotion approval remains unresolved; branch protection is unreadable and rulesets are empty; no claim promotion is allowed.",
+  "F_next": "Re-read all check-runs on PR416 head 7fa9e083 until terminal, classify the promotion-control failure versus implementation/test failures, obtain authoritative main-enforcement evidence, then resume bulk NOVOexport architecture-family lineage expansion shard-by-shard."
+}
