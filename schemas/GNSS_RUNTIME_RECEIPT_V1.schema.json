@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json",
+  "title": "GNSS_RUNTIME_RECEIPT_V1",
+  "description": "Evidence-first receipt for controlled Android/GNSS data-flow verification. It records boundary states without promoting legal compliance or product capability claims.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "recorded_at",
+    "scope",
+    "device_context",
+    "permission_state",
+    "path_gates",
+    "field_observations",
+    "privacy_controls",
+    "evidence",
+    "claim_allowed",
+    "F_ok",
+    "F_gap",
+    "F_next"
+  ],
+  "properties": {
+    "schema_version": {"const": "GNSS_RUNTIME_RECEIPT_V1"},
+    "receipt_id": {"type": "string", "minLength": 1},
+    "recorded_at": {"type": "string", "minLength": 1},
+    "scope": {
+      "type": "object",
+      "required": ["purpose", "product_or_app", "jurisdiction", "authorized_test"],
+      "properties": {
+        "purpose": {"type": "string", "minLength": 1},
+        "product_or_app": {"type": "string", "minLength": 1},
+        "jurisdiction": {"type": "string", "minLength": 1},
+        "authorized_test": {"const": true}
+      },
+      "additionalProperties": true
+    },
+    "device_context": {
+      "type": "object",
+      "required": ["android_version", "hardware_model_state", "location_services_enabled"],
+      "properties": {
+        "android_version": {"type": "string", "minLength": 1},
+        "hardware_model_state": {"enum": ["RECORDED", "REDACTED", "TOKEN_VAZIO"]},
+        "location_services_enabled": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "permission_state": {
+      "type": "object",
+      "required": ["coarse_location", "fine_location", "precise_location_toggle"],
+      "properties": {
+        "coarse_location": {"enum": ["GRANTED", "DENIED", "TOKEN_VAZIO", "NOT_APPLICABLE"]},
+        "fine_location": {"enum": ["GRANTED", "DENIED", "TOKEN_VAZIO", "NOT_APPLICABLE"]},
+        "precise_location_toggle": {"enum": ["ENABLED", "DISABLED", "TOKEN_VAZIO", "NOT_APPLICABLE"]}
+      },
+      "additionalProperties": true
+    },
+    "path_gates": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["gate", "state", "evidence_ref"],
+        "properties": {
+          "gate": {
+            "enum": [
+              "HARDWARE_TO_ANDROID",
+              "ANDROID_TO_APP",
+              "APP_TO_SERVICE",
+              "SERVICE_TO_TOOL",
+              "TOOL_TO_ASSISTANT_CONTEXT",
+              "ASSISTANT_CONTEXT_TO_MODEL",
+              "APP_TO_THIRD_PARTY"
+            ]
+          },
+          "state": {"enum": ["PASS", "FAIL", "TOKEN_VAZIO", "NOT_APPLICABLE"]},
+          "evidence_ref": {"type": "string", "minLength": 1},
+          "notes": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "field_observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["field", "state", "source_boundary"],
+        "properties": {
+          "field": {
+            "enum": [
+              "latitude",
+              "longitude",
+              "altitude",
+              "accuracy",
+              "speed",
+              "bearing",
+              "constellation",
+              "svid_prn",
+              "used_in_fix",
+              "cn0_dbhz",
+              "azimuth_deg",
+              "elevation_deg",
+              "carrier_frequency_hz",
+              "nmea",
+              "pseudorange_related",
+              "pseudorange_rate",
+              "accumulated_delta_range",
+              "receiver_clock",
+              "multipath_indicator",
+              "other"
+            ]
+          },
+          "state": {"enum": ["OBSERVED", "NOT_OBSERVED", "TOKEN_VAZIO", "REDACTED"]},
+          "source_boundary": {"type": "string", "minLength": 1},
+          "value_retained": {"type": "boolean"},
+          "notes": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "network_observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["destination_state", "payload_schema_state"],
+        "properties": {
+          "destination_state": {"enum": ["OBSERVED", "REDACTED", "TOKEN_VAZIO", "NONE_OBSERVED"]},
+          "payload_schema_state": {"enum": ["OBSERVED", "REDACTED", "TOKEN_VAZIO", "NONE_OBSERVED"]},
+          "evidence_ref": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "model_context_observation": {
+      "type": "object",
+      "properties": {
+        "state": {"enum": ["OBSERVED", "NOT_OBSERVED", "TOKEN_VAZIO", "NOT_APPLICABLE"]},
+        "evidence_ref": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "privacy_controls": {
+      "type": "object",
+      "required": ["minimized_scope", "unrelated_personal_data_excluded", "precise_coordinates_retention", "redaction_applied"],
+      "properties": {
+        "minimized_scope": {"const": true},
+        "unrelated_personal_data_excluded": {"const": true},
+        "precise_coordinates_retention": {"enum": ["NOT_CAPTURED", "REDACTED", "TEMPORARY_TEST_ONLY", "TOKEN_VAZIO"]},
+        "redaction_applied": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["runtime_receipt_ref", "hash_state", "provenance_state"],
+      "properties": {
+        "runtime_receipt_ref": {"type": "string", "minLength": 1},
+        "hash_state": {"enum": ["RECORDED", "TOKEN_VAZIO"]},
+        "provenance_state": {"enum": ["RECORDED", "TOKEN_VAZIO"]}
+      },
+      "additionalProperties": true
+    },
+    "claim_allowed": {"const": false},
+    "F_ok": {"type": "array", "items": {"type": "string"}},
+    "F_gap": {"type": "array", "items": {"type": "string"}},
+    "F_next": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}
