@@ -31,6 +31,7 @@ class CgenAssurance10x10Tests(unittest.TestCase):
     def test_base_contract_passes(self):
         messages = validator.validate_contract(copy.deepcopy(self.base))
         self.assertTrue(any("10 depth levels" in m for m in messages))
+        self.assertTrue(any("formula-transfer" in m for m in messages))
 
     def test_claim_allowed_cannot_be_promoted(self):
         data = copy.deepcopy(self.base)
@@ -97,6 +98,36 @@ class CgenAssurance10x10Tests(unittest.TestCase):
         data = copy.deepcopy(self.base)
         data["gates"].pop()
         self.assertInvalid(data, "exactly 10 gates")
+
+    def test_formula_transfer_contract_cannot_disappear(self):
+        data = copy.deepcopy(self.base)
+        del data["formula_transfer"]
+        self.assertInvalid(data, "formula_transfer")
+
+    def test_formula_transfer_requires_units_field(self):
+        data = copy.deepcopy(self.base)
+        data["formula_transfer"]["required_signature_fields"].remove("units")
+        self.assertInvalid(data, "signature incomplete")
+
+    def test_formula_transfer_requires_token_vazio_state(self):
+        data = copy.deepcopy(self.base)
+        data["formula_transfer"]["states"].remove("TOKEN_VAZIO_TRANSFER")
+        self.assertInvalid(data, "states incomplete")
+
+    def test_formula_analogy_cannot_promote_to_empirical_fact(self):
+        data = copy.deepcopy(self.base)
+        data["formula_transfer"]["forbidden_promotions"].remove("ANALOGY_ONLY_TO_EMPIRICAL_FACT")
+        self.assertInvalid(data, "forbidden promotions")
+
+    def test_dimensional_consistency_invariant_is_required(self):
+        data = copy.deepcopy(self.base)
+        data["invariants"].remove("DIMENSIONAL_CONSISTENCY != EMPIRICAL_VALIDATION")
+        self.assertInvalid(data, "missing invariants")
+
+    def test_formula_domain_drift_must_be_monitored(self):
+        data = copy.deepcopy(self.base)
+        data["monitoring_drifts"].remove("FORMULA_DOMAIN_DRIFT")
+        self.assertInvalid(data, "monitoring drift")
 
 
 if __name__ == "__main__":
