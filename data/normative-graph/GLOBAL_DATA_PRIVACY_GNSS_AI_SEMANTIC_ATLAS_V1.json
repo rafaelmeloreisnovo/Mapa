@@ -1,0 +1,296 @@
+{
+  "schema_version": "RAFAELIA_GLOBAL_PRIVACY_GNSS_AI_ATLAS_V1",
+  "atlas_id": "GLOBAL_DATA_PRIVACY_GNSS_AI_SEMANTIC_ATLAS_V1",
+  "generated_at": "2026-08-26T19:23:00-03:00",
+  "mode": "evidence-first",
+  "claim_allowed": false,
+  "canonical_doc": "docs/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_V1.md",
+  "invariants": [
+    "law != regulation != case_law != executive_policy != standard != contract != project_policy",
+    "data_exists_on_device != AI_has_access_to_data",
+    "OS_permission != lawful_basis",
+    "sensor_capability != provider_duty_to_expose_raw_telemetry",
+    "transparency != raw_data_passthrough",
+    "access_right != real_time_sensor_API_entitlement",
+    "portability != unbounded_interoperability",
+    "minimization_and_necessity_can_support_non_exposure_of_unused_raw_GNSS",
+    "civil_GPS_open_service != military_GPS_service != export_controlled_GNSS_technology",
+    "embargo_or_sanctions != automatic_shutdown_of_civil_GPS_signal",
+    "national_security_exception != blanket_privacy_waiver",
+    "constitutional_state_action_limit != automatic_private_platform_duty",
+    "claim != evidence",
+    "TOKEN_VAZIO is auditable"
+  ],
+  "data_taxonomy": {
+    "gnss_fix": ["latitude", "longitude", "altitude", "time", "speed", "bearing", "accuracy"],
+    "gnss_status": ["fix_state", "ttff", "constellation", "svid_prn", "visible", "tracked", "used_in_fix", "cn0_dbhz", "azimuth", "elevation", "carrier_frequency"],
+    "gnss_messages": ["NMEA_GGA", "NMEA_GSA", "NMEA_GSV", "NMEA_RMC"],
+    "gnss_raw_measurements": ["receiver_clock", "pseudorange_related_observables", "pseudorange_rate_doppler_related", "accumulated_delta_range_carrier_phase_related", "multipath_state", "measurement_uncertainty", "baseband_cn0_if_supported"],
+    "classification_rule": "field availability depends on chipset, OS, API, permission, app architecture and service boundary"
+  },
+  "nodes": [
+    {
+      "id": "BR-CF-DATA-PROTECTION",
+      "jurisdiction": "BR",
+      "type": "CONSTITUTION",
+      "authority": "Constituicao da Republica Federativa do Brasil / EC 115-2022",
+      "binding_force": "constitutional",
+      "articles": ["1-III", "5-X", "5-XII", "5-XXXIII", "5-LXXII", "5-LXXIX", "21-XXVI", "22-XXX", "37"],
+      "concepts": ["dignity", "privacy", "communications_secrecy", "habeas_data", "fundamental_data_protection", "federal_competence", "public_accountability"],
+      "source": "https://planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc115.htm",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "BR-LGPD-13709",
+      "jurisdiction": "BR",
+      "type": "STATUTE",
+      "authority": "Lei 13.709/2018 LGPD, consolidated",
+      "binding_force": "binding_law_when_applicable",
+      "article_ranges": {
+        "scope_foundations": "1-5",
+        "principles_bases": "6-10",
+        "sensitive_children": "11-14",
+        "termination_retention": "15-16",
+        "data_subject_rights": "17-22",
+        "public_sector": "23-32",
+        "international_transfers": "33-36",
+        "accountability_records_dpia": "37-41",
+        "liability": "42-45",
+        "security_incidents_design": "46-49",
+        "governance_good_practices": "50-51",
+        "sanctions": "52-54",
+        "ANPD": "55-A-55-L",
+        "CNPD": "58-A-58-B",
+        "final_transitional": "60-65"
+      },
+      "gnss_effect": "identifiable or linkable geolocation is personal data; processing requires applicable LGPD gates; no general raw-GNSS-to-AI entitlement",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "BR-ANPD-REGULATORY-2026",
+      "jurisdiction": "BR",
+      "type": "REGULATORY_LAYER",
+      "authority": "Agencia Nacional de Protecao de Dados",
+      "binding_force": "regulatory_acts_within_competence",
+      "acts": ["Resolution 15/2024 incident communication", "Resolution 18/2024 DPO", "Resolution 19/2024 international transfers", "Resolution 30/2025 priority map 2026-2027", "Resolution 32/2026 EU adequacy", "Resolution 33/2026 institutional structure", "Law 15.352/2026", "Decree 12.881/2026"],
+      "source": "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "EU-GDPR-2016-679",
+      "jurisdiction": "EU_EEA_CONTEXTUAL",
+      "type": "REGULATION",
+      "authority": "European Union",
+      "binding_force": "binding_EU_regulation_when_applicable",
+      "articles": ["4", "5", "6", "7", "9", "12-22", "24", "25", "26", "28", "30", "32-35", "37-39", "44-49", "82", "83"],
+      "concepts": ["lawfulness", "purpose_limitation", "data_minimization", "accountability", "privacy_by_design_default", "DPIA", "rights", "security", "cross_border_transfers"],
+      "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "EU-EPRIVACY-LOCATION",
+      "jurisdiction": "EU_EEA_CONTEXTUAL",
+      "type": "DIRECTIVE",
+      "authority": "Directive 2002/58/EC",
+      "binding_force": "directive_as_transposed_and_applicable",
+      "articles": ["9"],
+      "concepts": ["location_data_other_than_traffic_data", "consent_or_anonymization", "necessity", "withdrawal"],
+      "source": "https://eur-lex.europa.eu/eli/dir/2002/58/oj",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "EU-AI-ACT-2024-1689",
+      "jurisdiction": "EU",
+      "type": "REGULATION",
+      "authority": "European Union",
+      "binding_force": "binding_EU_regulation_with_staged_application",
+      "effective_snapshot": "major enforcement and Article 50 transparency active from 2026-08-02 subject to transitions",
+      "concepts": ["risk_based_AI_governance", "transparency", "GPAI", "high_risk_transitions"],
+      "source": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-FIRST-AMENDMENT-ASSOCIATIONAL-PRIVACY",
+      "jurisdiction": "US",
+      "type": "CONSTITUTIONAL_DOCTRINE",
+      "authority": "First Amendment / Supreme Court doctrine",
+      "binding_force": "constitutional_state_action_context",
+      "concepts": ["speech", "association", "government_compelled_disclosure", "chilling_effect"],
+      "limitation": "not a general private-platform consumer-data statute",
+      "source": "https://constitution.congress.gov/browse/essay/amdt1-8-3-1/ALDE_00013145/",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-FOURTH-AMENDMENT-LOCATION",
+      "jurisdiction": "US",
+      "type": "CONSTITUTIONAL_CASE_LAW",
+      "authority": "Fourth Amendment / Carpenter v United States (2018)",
+      "binding_force": "constitutional_government_search_context",
+      "concepts": ["historical_CSLI", "search", "warrant", "probable_cause"],
+      "limitation": "Carpenter expressly did not decide every future location or national-security scenario",
+      "source": "https://www.supremecourt.gov/opinions/17pdf/16-402_h315.pdf",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-FIFTH-AMENDMENT-INFORMATIONAL-PRIVACY",
+      "jurisdiction": "US",
+      "type": "CONSTITUTIONAL_DOCTRINE",
+      "authority": "Fifth Amendment due process",
+      "binding_force": "federal_state_action_context",
+      "concepts": ["due_process", "informational_privacy_doctrine"],
+      "limitation": "Supreme Court has assumed without deciding a constitutional informational privacy right in key cases; not GDPR-equivalent",
+      "source": "https://constitution.congress.gov/browse/essay/Amdt5_7_7/ALDE_00013735/",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-FTC-LOCATION-DATA",
+      "jurisdiction": "US",
+      "type": "ENFORCEMENT_AUTHORITY",
+      "authority": "Federal Trade Commission Act Section 5 and case-specific orders",
+      "binding_force": "federal_consumer_protection_enforcement",
+      "concepts": ["unfair_or_deceptive_practices", "sensitive_location", "consent_representation", "security"],
+      "source": "https://www.ftc.gov/news-events/news/press-releases/2025/01/ftc-finalizes-order-banning-mobilewalla-selling-sensitive-location-data",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-EU-DPF-DPRC",
+      "jurisdiction": "US_EU_TRANSFER",
+      "type": "TRANSFER_REDRESS_FRAMEWORK",
+      "authority": "EO 14086 + DOJ DPRC + EU adequacy / FTC enforcement for participants",
+      "binding_force": "framework_and_US_enforcement_commitments_as_applicable",
+      "lineage": ["Safe Harbor invalidated 2015", "Privacy Shield invalidated 2020", "EO 14086 and DPRC 2022", "EU-US DPF adequacy 2023"],
+      "source": "https://www.justice.gov/opcl/executive-order-14086",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-DOJ-DATA-SECURITY-PROGRAM",
+      "jurisdiction": "US_CROSS_BORDER_NATIONAL_SECURITY",
+      "type": "NATIONAL_SECURITY_DATA_CONTROL",
+      "authority": "DOJ National Security Division / EO 14117 implementation",
+      "binding_force": "binding_rules_when_transaction_and_person_scope_apply",
+      "effective_from": "2025-04-08",
+      "countries_of_concern": ["China including Hong Kong and Macau", "Russia", "Iran", "North Korea", "Cuba", "Venezuela"],
+      "data_classes_include": ["bulk_geolocation", "genomic", "biometric", "health", "financial", "other_sensitive_personal_data", "US_government_related_data"],
+      "source": "https://www.justice.gov/nsd/data-security",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-DEEPSEEK-IC-RESTRICTION",
+      "jurisdiction": "US",
+      "type": "NATIONAL_SECURITY_SYSTEM_RESTRICTION",
+      "authority": "Pub. L. 119-60 div. F title LXVI section 6604",
+      "binding_force": "statutory_direction_for_intelligence_community_national_security_systems",
+      "effective_from": "2025-12-18",
+      "scope": "removal standards/guidelines for DeepSeek or successor application/service from intelligence-community national security systems; national security and research exceptions with mitigation",
+      "not_proven": ["universal_US_civilian_ban", "Commerce_Entity_List_listing_as_of_2026-08-26"],
+      "source": "https://uscode.house.gov/view.xhtml?edition=prelim&path=%2Fprelim%40title50%2Fchapter45%2Fsubchapter2",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-GPS-CIVIL-MILITARY-POLICY",
+      "jurisdiction": "US_GLOBAL_SERVICE",
+      "type": "PNT_POLICY",
+      "authority": "US Government GPS/PNT policy",
+      "binding_force": "US_government_policy_plus_statutory_commitment_context",
+      "milestones": ["1983 worldwide civil availability commitment", "2000 Selective Availability discontinued", "2004 PNT policy", "localized denial of hostile use without undue disruption outside military operations"],
+      "source": "https://archive.gps.gov/policy/docs/2004/",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "US-EU-GPS-GALILEO-2004",
+      "jurisdiction": "US_EU_GNSS",
+      "type": "INTERNATIONAL_COOPERATION",
+      "authority": "US-EC GPS/Galileo cooperation",
+      "binding_force": "international_agreement_policy_context",
+      "concepts": ["interoperability", "non_discrimination", "open_service_end_user_access", "national_security_capability_preservation"],
+      "source": "https://archive.gps.gov/policy/cooperation/europe/2004/joint-statement/",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "CN-PIPL",
+      "jurisdiction": "CN",
+      "type": "STATUTE",
+      "authority": "Personal Information Protection Law of PRC",
+      "binding_force": "binding_law_when_applicable",
+      "articles": ["23", "24", "28", "29", "30", "58"],
+      "concepts": ["separate_consent", "automated_decision_transparency_fairness", "sensitive_personal_information", "whereabouts", "large_platform_governance"],
+      "source": "https://en.spp.gov.cn/2021-12/29/c_948419.htm",
+      "state": "VERIFIED_SOURCE_ANCHOR"
+    },
+    {
+      "id": "RU-152FZ-23FZ",
+      "jurisdiction": "RU",
+      "type": "STATUTE",
+      "authority": "Federal Law 152-FZ as amended including 23-FZ of 2025",
+      "binding_force": "binding_law_when_applicable",
+      "concepts": ["personal_data", "localization", "security", "data_subject_rights", "cross_border_context"],
+      "source": "https://government.ru/docs/all/98196/",
+      "state": "PARTIAL_VERIFIED_WITH_2026_CROSS_BORDER_GAP"
+    },
+    {
+      "id": "CU-LAW-149-2022",
+      "jurisdiction": "CU",
+      "type": "STATUTE",
+      "authority": "Ley 149/2022 de Proteccion de Datos Personales",
+      "binding_force": "Cuban_law_when_applicable",
+      "concepts": ["personal_data_control", "access", "correction", "rectification", "update", "cancellation", "unauthorized_use"],
+      "source": "https://www.granma.cu/cuba/2022-08-25/publican-en-la-gaceta-oficial-la-ley-de-proteccion-de-datos-personales-25-08-2022-10-08-45",
+      "state": "VERIFIED_EXISTENCE_AND_GENERAL_SCOPE; OFFICIAL_ARTICLE_CROSSWALK_TOKEN_VAZIO"
+    }
+  ],
+  "edges": [
+    {"from": "BR-CF-DATA-PROTECTION", "to": "BR-LGPD-13709", "relation": "constitutional_foundation_and_legislative_implementation"},
+    {"from": "BR-LGPD-13709", "to": "BR-ANPD-REGULATORY-2026", "relation": "implemented_and_supervised_by"},
+    {"from": "EU-GDPR-2016-679", "to": "EU-EPRIVACY-LOCATION", "relation": "complementary_location_communications_privacy_layer"},
+    {"from": "EU-GDPR-2016-679", "to": "EU-AI-ACT-2024-1689", "relation": "complementary_data_protection_and_AI_governance"},
+    {"from": "US-EU-DPF-DPRC", "to": "EU-GDPR-2016-679", "relation": "cross_border_transfer_mechanism_context"},
+    {"from": "US-FIRST-AMENDMENT-ASSOCIATIONAL-PRIVACY", "to": "US-FOURTH-AMENDMENT-LOCATION", "relation": "distinct_constitutional_privacy_doctrines_not_synonyms"},
+    {"from": "US-FIFTH-AMENDMENT-INFORMATIONAL-PRIVACY", "to": "US-FTC-LOCATION-DATA", "relation": "government_constitutional_context_distinct_from_private_consumer_enforcement"},
+    {"from": "US-DOJ-DATA-SECURITY-PROGRAM", "to": "US-DEEPSEEK-IC-RESTRICTION", "relation": "parallel_national_security_governance_not_same_legal_instrument"},
+    {"from": "US-GPS-CIVIL-MILITARY-POLICY", "to": "US-EU-GPS-GALILEO-2004", "relation": "civil_interoperability_plus_security_preservation"},
+    {"from": "US-GPS-CIVIL-MILITARY-POLICY", "to": "US-DOJ-DATA-SECURITY-PROGRAM", "relation": "dual_use_infrastructure_vs_sensitive_data_transfer_controls"},
+    {"from": "CN-PIPL", "to": "US-DOJ-DATA-SECURITY-PROGRAM", "relation": "cross_border_sovereignty_and_security_intersection_not_equivalence"},
+    {"from": "RU-152FZ-23FZ", "to": "US-DOJ-DATA-SECURITY-PROGRAM", "relation": "localization_sovereignty_vs_US_country_of_concern_controls"},
+    {"from": "CU-LAW-149-2022", "to": "US-DOJ-DATA-SECURITY-PROGRAM", "relation": "domestic_privacy_law_coexists_with_US_country_of_concern_status"},
+    {"from": "CU-LAW-149-2022", "to": "US-GPS-CIVIL-MILITARY-POLICY", "relation": "embargo_privacy_and_civil_GPS_are_separate_axes"}
+  ],
+  "bigtech_gnss_ai_gate": {
+    "sequence": ["capability", "collection", "purpose", "lawful_basis", "necessity", "OS_permission", "AI_boundary", "transfer", "security", "retention", "rights", "claim_accuracy", "national_security"],
+    "rule": "no field advances to CLAIM_ALLOWED without product-specific and jurisdiction-specific evidence",
+    "default": "TOKEN_VAZIO_OR_FAIL_CLOSED"
+  },
+  "falsifiers": [
+    "device_can_expose_satellite_status therefore AI_receives_it",
+    "Android_permission therefore universal_lawful_basis",
+    "LGPD_or_GDPR therefore raw_GNSS_delivery_duty_to_AI",
+    "First_or_Fifth_Amendment therefore every_private_platform_is_state_actor",
+    "Cuba_embargo therefore civil_GPS_signal_is_disabled",
+    "DeepSeek_restricted_on_IC_national_security_systems therefore universal_US_ban",
+    "DeepSeek_investigated therefore Commerce_Entity_List_member",
+    "ISO_or_NIST_reference therefore compliance_certified"
+  ],
+  "token_vazio": [
+    {"id": "TOKEN_VAZIO_LITERAL", "question": "exact referent of remembered phrase 'acordo no tempo de psic'", "candidates": ["1983 civil GPS commitment", "2004 GPS-Galileo", "2022 EO 14086 / 2023 EU-US DPF"]},
+    {"id": "TOKEN_VAZIO_PRODUCT_ARCHITECTURE", "question": "exact GNSS telemetry exposed by current ChatGPT Android product path to assistant/model/tool layer"},
+    {"id": "TOKEN_VAZIO_BIGTECH_CONTRACT", "question": "current product-specific terms/privacy commitments and feature claims"},
+    {"id": "TOKEN_VAZIO_RU_2026_CONSOLIDATED_CROSS_BORDER", "question": "article-level effect of July 2026 Russian amendments"},
+    {"id": "TOKEN_VAZIO_CUBA_OFFICIAL_FINAL_CONSTITUTION_ARTICLE_CROSSWALK", "question": "current authoritative final constitutional article numbering and direct official source"},
+    {"id": "TOKEN_VAZIO_SECTORAL_US", "question": "sector-specific US overlay for actual data/use/actor"}
+  ],
+  "F_ok": [
+    "jurisdictional nodes separated by authority and binding force",
+    "GNSS capability separated from AI access",
+    "civil GPS separated from military/export-control capability",
+    "DeepSeek restriction scoped instead of generalized",
+    "China Russia Cuba linked without treating national regimes as equivalent"
+  ],
+  "F_gap": [
+    "product runtime telemetry evidence",
+    "product-specific contract/privacy policy audit",
+    "Russian July 2026 consolidated article-level crosswalk",
+    "Cuban final constitutional official article-level crosswalk",
+    "literal identification of remembered agreement"
+  ],
+  "F_next": "issue append-only provenance receipt, mirror canonical legal material to Drive, and connect from existing compliance material without rewriting historical evidence"
+}
