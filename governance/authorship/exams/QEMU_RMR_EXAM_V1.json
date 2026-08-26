@@ -1,0 +1,29 @@
+{
+  "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
+  "track": "T2_QEMU_RMR",
+  "observed_ref": "b274de47403f48136d1969f7663aa457383e3ef4",
+  "state": "EXAM_DEFINED_EVIDENCE_PARTIAL",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "observed_evidence": [
+    "QEMU upstream licensing surfaces recorded by governance",
+    "hw/core/rafaelia-rmr-license.txt declares separate RAFAELIA RMR low-level terms"
+  ],
+  "findings": [
+    {
+      "id": "T2.F1",
+      "status": "BOUNDARY_UNRESOLVED",
+      "finding": "component-specific RMR terms do not establish scope over surrounding QEMU files or close combined-work/linkage obligations",
+      "effect": "RMR authorship/license claims remain path-scoped and fail-closed"
+    }
+  ],
+  "exams": [
+    {"id":"T2.E1","name":"rmr_path_inventory","status":"TOKEN_VAZIO","pass":"all RMR source/header/build references enumerated"},
+    {"id":"T2.E2","name":"origin_header_audit","status":"TOKEN_VAZIO","pass":"each RMR path classified against upstream/third-party history"},
+    {"id":"T2.E3","name":"linkage_symbol_boundary","status":"TOKEN_VAZIO","pass":"compile units, exported/imported symbols and QEMU interfaces mapped"},
+    {"id":"T2.E4","name":"license_compatibility","status":"TOKEN_VAZIO","pass":"license obligations on both sides of each retained boundary recorded"},
+    {"id":"T2.E5","name":"standalone_freestanding_kernel","status":"TOKEN_VAZIO","pass":"new standalone kernel proves ABI, no libc/heap/helpers and bounded storage/behavior"},
+    {"id":"T2.E6","name":"deterministic_build_test_receipt","status":"TOKEN_VAZIO","pass":"source/compiler/flags/object hash/test vector/exit receipt complete"}
+  ],
+  "next": "execute T2.E1 then T2.E3 before any broader RMR licensing claim"
+}
