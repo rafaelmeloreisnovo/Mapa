@@ -1,30 +1,28 @@
-schema: mapa_backlog_acervo_v1
-updated: '2026-07-05'
+schema: mapa_backlog_acervo_v2
+snapshot_origem: '2026-07-05'
+reconciled: '2026-08-25'
 primeira_linha: 'DIGNIDADE-HUMANA · PROTECAO-INFANTIL (UDHR Art.1 · UNCRC Art.3)'
-fonte: 'GitHub search_repositories (user:rafaelmeloreisnovo, user:instituto-Rafael), 2026-07-05'
+fonte: 'GitHub search_repositories snapshot + owner-deletion reconciliation'
 
 honestidade:
-  metadados: 'FATO — nome, linguagem, visibilidade e branch vem da API do GitHub'
-  estrato_provisorio: 'HIPOTESE — inferido do nome/descricao; confirmar lendo o README (onboarding 11_)'
-  conteudo: 'LACUNA — repos nao-catalogados NAO tiveram README lido nesta sessao'
+  metadados: 'FATO quando derivados da API/estado observado'
+  estrato_provisorio: 'HIPOTESE — inferido do nome/descricao; confirmar no onboarding'
+  conteudo: 'LACUNA — repos nao-catalogados exigem leitura'
+  reconciliacao: 'um repo pendente do snapshot foi removido pelo proprietario e excluido do estado ativo'
 
 contagem:
-  descobertos_rafaelmeloreisnovo: 59
-  descobertos_instituto_rafael: 48
-  descobertos_por_busca: 107
+  ativos_rafaelmeloreisnovo: 59
+  ativos_instituto_rafael: 47
+  ativos_derivados_da_busca_base: 106
   destes_catalogados: 24
-  destes_pendentes: 83
-  forks_catalogados_omitidos_pela_busca: 4  # BLAKE3, DeepSeek-RafCoder, actions, termux-api_rafcodephi
-  total_distinto_conhecido: 111  # 107 descobertos + 4 forks omitidos
-  catalogados_L01: 28  # 24 descobertos + 4 forks omitidos
-  pendentes_backlog: 83
-  estimativa_autor: '~120 (coerente: 111 conhecidos + possiveis privados/arquivados nao retornados)'
-
-# status: catalogado (L01, FATO) | pendente (LACUNA de conteudo)
-# estrato_prov: nucleo|plataforma|cognicao|ciencia|juridico|espiritual|meta|indefinido (HIPOTESE)
+  destes_pendentes: 82
+  forks_catalogados_omitidos_pela_busca_base: 4
+  total_distinto_ativo_conhecido: 110
+  catalogados_L01: 28
+  pendentes_backlog: 82
 
 repos:
-  # ---------- ja catalogados (L01) ----------
+  # ---------- catalogados (L01) ----------
   - {nome: ChipQuantum, org: RMN, status: catalogado, estrato_prov: nucleo}
   - {nome: GAIA_phi, org: RMN, status: catalogado, estrato_prov: nucleo}
   - {nome: BLAKE3, org: RMN, status: catalogado, estrato_prov: nucleo, fork: true}
@@ -54,7 +52,7 @@ repos:
   - {nome: Blackhole, org: IRF, status: catalogado, estrato_prov: espiritual}
   - {nome: publicacientiespiritual, org: IRF, status: catalogado, estrato_prov: espiritual}
 
-  # ---------- pendentes (LACUNA de conteudo) — rafaelmeloreisnovo ----------
+  # ---------- pendentes — rafaelmeloreisnovo ----------
   - {nome: ZIPRAF_CORE, org: RMN, status: pendente, estrato_prov: nucleo, lang: Python}
   - {nome: Rafaelia_Core, org: RMN, status: pendente, estrato_prov: nucleo, lang: Shell}
   - {nome: Semente, org: RMN, status: pendente, estrato_prov: nucleo, lang: Shell}
@@ -96,7 +94,7 @@ repos:
   - {nome: CreFeBerna, org: RMN, status: pendente, estrato_prov: espiritual}
   - {nome: Graditao, org: RMN, status: pendente, estrato_prov: espiritual}
 
-  # ---------- pendentes (LACUNA de conteudo) — instituto-Rafael ----------
+  # ---------- pendentes — instituto-Rafael ----------
   - {nome: RAFAELIA_CORE, org: IRF, status: pendente, estrato_prov: nucleo, lang: Shell}
   - {nome: RAFNET_CORE, org: IRF, status: pendente, estrato_prov: meta, lang: Shell}
   - {nome: omega-rafaelia, org: IRF, status: pendente, estrato_prov: nucleo}
@@ -120,7 +118,6 @@ repos:
   - {nome: Tegmark, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Entropia-aponta-a-origem-do-feito, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Atomic_EX_WASTE, org: IRF, status: pendente, estrato_prov: ciencia, lang: Python}
-  - {nome: DMT-molecular, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Eletron-efeitos-qu-ntico, org: IRF, status: pendente, estrato_prov: ciencia, lang: Python}
   - {nome: PlamaticGravity-, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Whilehole, org: IRF, status: pendente, estrato_prov: ciencia, lang: Python}
@@ -142,10 +139,5 @@ repos:
   - {nome: Pesquisa, org: IRF, status: pendente, estrato_prov: meta}
 
 proxima_acao:
-  - {id: onboarding_prioritario, medida: 'trazer a escopo (add_repo) e catalogar por prioridade de risco: dados pessoais/infantil primeiro (apk-*, IA-*, LGPD-familia)', estado: LACUNA}
-  - {id: confirmar_estrato, medida: 'ler README de cada pendente e trocar estrato_prov (HIPOTESE) por estrato (FATO)', estado: LACUNA}
-
-totais:
-  repos_no_backlog: 111
-  catalogados: 28
-  pendentes: 83
+  - {id: onboarding_prioritario, estado: ativo, objetivo: 'catalogar os 82 pendentes em lotes verificaveis'}
+  - {id: sync_indices, estado: ativo, objetivo: 'propagar adicoes/remocoes reais sem reintroduzir entidades inexistentes'}
