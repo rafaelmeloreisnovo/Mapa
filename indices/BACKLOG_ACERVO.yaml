@@ -1,27 +1,32 @@
 schema: mapa_backlog_acervo_v1
-updated: '2026-07-05'
+updated: '2026-08-25'
 primeira_linha: 'DIGNIDADE-HUMANA · PROTECAO-INFANTIL (UDHR Art.1 · UNCRC Art.3)'
-fonte: 'GitHub search_repositories (user:rafaelmeloreisnovo, user:instituto-Rafael), 2026-07-05'
+fonte: 'GitHub search_repositories snapshot 2026-07-05 + governance revalidation 2026-08-25'
+policy_gate: 'ROUTE_DENYLIST_ILLICIT_USE.yaml'
 
 honestidade:
   metadados: 'FATO — nome, linguagem, visibilidade e branch vem da API do GitHub'
   estrato_provisorio: 'HIPOTESE — inferido do nome/descricao; confirmar lendo o README (onboarding 11_)'
   conteudo: 'LACUNA — repos nao-catalogados NAO tiveram README lido nesta sessao'
+  tombstone: 'FATO — remove rota ativa sem reescrever o snapshot historico'
 
 contagem:
   descobertos_rafaelmeloreisnovo: 59
   descobertos_instituto_rafael: 48
   descobertos_por_busca: 107
   destes_catalogados: 24
-  destes_pendentes: 83
+  destes_pendentes_snapshot: 83
   forks_catalogados_omitidos_pela_busca: 4  # BLAKE3, DeepSeek-RafCoder, actions, termux-api_rafcodephi
-  total_distinto_conhecido: 111  # 107 descobertos + 4 forks omitidos
+  total_distinto_conhecido_snapshot: 111  # 107 descobertos + 4 forks omitidos
   catalogados_L01: 28  # 24 descobertos + 4 forks omitidos
-  pendentes_backlog: 83
-  estimativa_autor: '~120 (coerente: 111 conhecidos + possiveis privados/arquivados nao retornados)'
+  retirados_governanca: 1
+  total_distinto_ativo: 110
+  pendentes_ativos: 82
+  estimativa_autor: '~120 (snapshot historico; nao usar como contagem ativa)'
 
 # status: catalogado (L01, FATO) | pendente (LACUNA de conteudo)
 # estrato_prov: nucleo|plataforma|cognicao|ciencia|juridico|espiritual|meta|indefinido (HIPOTESE)
+# PRECEDENCIA: ROUTE_DENYLIST_ILLICIT_USE.yaml > lista abaixo
 
 repos:
   # ---------- ja catalogados (L01) ----------
@@ -120,7 +125,6 @@ repos:
   - {nome: Tegmark, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Entropia-aponta-a-origem-do-feito, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Atomic_EX_WASTE, org: IRF, status: pendente, estrato_prov: ciencia, lang: Python}
-  - {nome: DMT-molecular, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Eletron-efeitos-qu-ntico, org: IRF, status: pendente, estrato_prov: ciencia, lang: Python}
   - {nome: PlamaticGravity-, org: IRF, status: pendente, estrato_prov: ciencia}
   - {nome: Whilehole, org: IRF, status: pendente, estrato_prov: ciencia, lang: Python}
@@ -142,10 +146,12 @@ repos:
   - {nome: Pesquisa, org: IRF, status: pendente, estrato_prov: meta}
 
 proxima_acao:
-  - {id: onboarding_prioritario, medida: 'trazer a escopo (add_repo) e catalogar por prioridade de risco: dados pessoais/infantil primeiro (apk-*, IA-*, LGPD-familia)', estado: LACUNA}
+  - {id: onboarding_prioritario, medida: 'aplicar ROUTE_DENYLIST_ILLICIT_USE.yaml; depois trazer a escopo e catalogar por prioridade de risco', estado: LACUNA}
   - {id: confirmar_estrato, medida: 'ler README de cada pendente e trocar estrato_prov (HIPOTESE) por estrato (FATO)', estado: LACUNA}
 
 totais:
-  repos_no_backlog: 111
+  repos_snapshot_historico: 111
   catalogados: 28
-  pendentes: 83
+  retirados_governanca: 1
+  repos_ativos_no_backlog: 110
+  pendentes_ativos: 82
