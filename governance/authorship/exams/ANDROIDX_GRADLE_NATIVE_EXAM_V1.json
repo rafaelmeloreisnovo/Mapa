@@ -1,0 +1,27 @@
+{
+  "schema": "RAFAELIA_PROVENANCE_EXAM/v1",
+  "track": "T5_ANDROIDX_GRADLE_NATIVE",
+  "state": "DEPENDENCY_SURFACE_DEFINED_EVIDENCE_PARTIAL",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "observed_evidence": [
+    "control plane classifies AndroidX/Gradle/native dependencies as third-party surfaces requiring component-specific license audit"
+  ],
+  "findings": [
+    {
+      "id": "T5.F1",
+      "status": "RESOLVED_GRAPH_UNAVAILABLE",
+      "finding": "declared dependencies alone are insufficient to prove the actually packaged third-party set",
+      "effect": "THIRD_PARTY_NOTICES must be derived from the resolved/shipped graph"
+    }
+  ],
+  "exams": [
+    {"id":"T5.E1","name":"resolved_dependency_graph","status":"TOKEN_VAZIO","pass":"exact group/artifact/version and native package identities captured"},
+    {"id":"T5.E2","name":"official_license_notice_sources","status":"TOKEN_VAZIO","pass":"each dependency bound to official license/NOTICE evidence"},
+    {"id":"T5.E3","name":"packaging_scope","status":"TOKEN_VAZIO","pass":"embedded/runtime/build-only/generated dependency roles separated"},
+    {"id":"T5.E4","name":"third_party_notices","status":"TOKEN_VAZIO","pass":"notice candidate generated from actual shipped set"},
+    {"id":"T5.E5","name":"source_obligations","status":"TOKEN_VAZIO","pass":"corresponding-source/source-offer duties closed where applicable"},
+    {"id":"T5.E6","name":"privacy_security_boundary","status":"TOKEN_VAZIO","pass":"account/data-processing permissions and security state recorded separately from copyright review"}
+  ],
+  "next": "capture resolved dependencies from the real Android build then generate notice inventory"
+}
