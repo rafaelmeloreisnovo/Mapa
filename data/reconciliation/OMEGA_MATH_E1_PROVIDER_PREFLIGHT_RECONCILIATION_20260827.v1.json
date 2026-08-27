@@ -1,0 +1,85 @@
+{
+  "schema_version": "OMEGA_MATH_E1_PROVIDER_PREFLIGHT_RECONCILIATION_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260827T1710-0300-E1-PROVIDER-PROVENANCE",
+  "observed_at": "2026-08-27T17:10:38-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "audit/omega-e1-parser-20260827t1510-0300",
+  "predecessor_head": "f9dbe4ed2f0df1ebab37d997b6565f9de44ae585",
+  "pr_number": 445,
+  "workflow": {
+    "name": "Omega Math E1 Parser Preflight",
+    "run_id": 33107179434,
+    "job_id": 98640041087,
+    "status": "completed",
+    "conclusion": "success",
+    "fixture_count": 5,
+    "pass_count": 5,
+    "all_pass": true,
+    "contract_version": "E1-CONTRACT-v1",
+    "implementation_version": "E1-PARSER-v1",
+    "parser_sha256": "db52a63fae0bda32313bc965a0c1f5a4c81ac77c2c40c0f1e106a163bde4d171",
+    "preflight_result_sha256": "a84a5146e2b09f2ec49cf4c582869300c3a51dc14eea4a670928a226bac2e568"
+  },
+  "provenance_reconciliation": {
+    "workflow_step_label": "Checkout exact PR source",
+    "provider_checkout_ref": "refs/remotes/pull/445/merge",
+    "provider_checkout_commit": "b072f04b790eed03060b56d9da2e8b8f864c3d9e",
+    "expected_exact_head": "f9dbe4ed2f0df1ebab37d997b6565f9de44ae585",
+    "classification": "PROVIDER_PASS_ON_PR_MERGE_REF_NOT_EXACT_HEAD",
+    "exact_head_execution_proven": false
+  },
+  "epistemic_state": {
+    "documented": true,
+    "observed": true,
+    "executed": true,
+    "measured": true,
+    "reproduced": false,
+    "claim_allowed": false
+  },
+  "closed_gaps": [
+    {
+      "gap_id": "TV-MATH-E1-PARSER-PROVIDER-CI-MERGE-REF",
+      "state": "CLOSED_FOR_PR_MERGE_REF_PREFLIGHT_ONLY",
+      "evidence": "workflow run 33107179434 job 98640041087: 5/5 PASS"
+    }
+  ],
+  "open_gaps": [
+    {
+      "gap_id": "TV-MATH-E1-PARSER-EXACT-HEAD-CI",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "github:rafaelmeloreisnovo/Mapa@f9dbe4ed2f0df1ebab37d997b6565f9de44ae585",
+      "missing_field": "provider execution bound to exact head commit",
+      "blocking_dependency": "workflow checkout currently resolves pull/445/merge",
+      "evidence_needed": "provider log showing checkout and execution of exact head f9dbe4ed2f0df1ebab37d997b6565f9de44ae585 with 5/5 PASS",
+      "falsifier": "checkout SHA differs from expected head or any fixture fails",
+      "next_probe": "change dedicated workflow checkout ref to github.event.pull_request.head.sha (or equivalent immutable exact head), rerun, verify logged SHA before fixture execution",
+      "owner_authority": "rafaelmeloreisnovo/Mapa",
+      "urgency": "P0",
+      "closure_gate": "exact-head SHA observed + 5/5 fixtures PASS + digests emitted",
+      "claim_allowed": false,
+      "predecessor": "TV-MATH-E1-PARSER-PROVIDER-CI"
+    },
+    {
+      "gap_id": "TV-MATH-E1-CANONICAL-AST",
+      "state": "TOKEN_VAZIO",
+      "missing_field": "356/356 deterministic dispositions",
+      "evidence_needed": "ledger with AST_DIGEST or TYPED_PARSE_FAILURE for each E0 identity",
+      "next_probe": "only after exact-head provider gate, execute bulk cursor over 356 E0 identities",
+      "urgency": "P0",
+      "claim_allowed": false
+    }
+  ],
+  "boundaries": [
+    "5/5 provider fixture PASS on PR merge ref is not exact-head execution",
+    "fixture preflight is not 356/356 E1 disposition",
+    "E1 parsing is not E2 algebraic equivalence",
+    "bounded corpus is not global mathematical exhaustivity"
+  ],
+  "memory_projection": {
+    "L": "f9dbe4ed head -> b072f04 PR merge execution -> provenance reconciliation",
+    "O": "local preflight and provider merge-ref execution are independent observations",
+    "T": "GitHub workflow evidence linked to parser contract and E1 ledger frontier",
+    "C": "valid only for PR #445 merge ref at observed run",
+    "P": "append-only receipt; no historical occurrence removed"
+  }
+}
