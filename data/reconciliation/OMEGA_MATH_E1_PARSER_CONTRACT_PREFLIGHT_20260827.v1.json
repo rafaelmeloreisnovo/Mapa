@@ -1,0 +1,207 @@
+{
+  "schema": "RAFAELIA_MATH_E1_PARSER_CONTRACT_PREFLIGHT_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260827T121300-0300-E1-CONTRACT",
+  "generated_at": "2026-08-27T15:13:00Z",
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "epistemic_state": "DOCUMENTED_TEST_CONTRACT_NOT_EXECUTED",
+  "predecessor": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "commit": "4072c1ac54a1c0f952e779810ffb8ce47f76e7bc",
+    "source_index": "indices/RAFAELIA_CALCULATION_MEMORY_INDEX_V2_20260822.md",
+    "source_index_blob_sha": "cbe84d47fd912cd40e2459402bd451060f9742f1"
+  },
+  "bounded_input_state": {
+    "frozen_candidate_paths": 49,
+    "raw_expression_occurrences": 374,
+    "e0_exact_unique_sha256": 356,
+    "e0_duplicate_groups": 16,
+    "e0_duplicate_extra_occurrences": 18,
+    "e1_exact_ast": "TOKEN_VAZIO",
+    "scope_note": "These counts describe the previously frozen bounded source scan only and do not assert global Drive/GitHub exhaustivity."
+  },
+  "objective": "Define a deterministic, fail-closed E1 parser contract before any bulk 356/356 execution, so canonicalization cannot silently change mathematical meaning.",
+  "parser_contract": {
+    "contract_version": "E1-CONTRACT-v1",
+    "implementation_state": "TOKEN_VAZIO",
+    "execution_state": "NOT_RUN",
+    "input_identity": "E0 SHA256 over Unicode_NFC(trim(normalized_expression))",
+    "output_partition": [
+      "AST_DIGEST",
+      "TYPED_PARSE_FAILURE"
+    ],
+    "totality_requirement": "Every one of the 356 E0 representatives must receive exactly one disposition record during the later bulk run.",
+    "determinism_requirement": "Identical E0 input bytes under the declared parser version must yield identical normalized AST serialization or identical typed failure code.",
+    "semantic_guard": "Lexical or syntactic normalization is allowed only where meaning is invariant under the declared grammar; domain assumptions, units, branch choices and algebraic equivalence are not inferred at E1.",
+    "failure_is_valid_output": true,
+    "no_silent_coercion": true,
+    "no_e2_promotion": true,
+    "no_global_total_promotion": true
+  },
+  "minimum_ast_node_kinds": [
+    "symbol",
+    "integer",
+    "decimal_literal",
+    "unary_minus",
+    "add",
+    "subtract",
+    "multiply",
+    "divide",
+    "power",
+    "sqrt",
+    "absolute_value",
+    "function_call",
+    "equality",
+    "relation",
+    "tuple_or_sequence"
+  ],
+  "canonicalization_rules": [
+    {
+      "rule_id": "E1-R01",
+      "rule": "Ignore non-semantic whitespace outside identifiers and literals.",
+      "boundary": "Does not reorder operands or terms."
+    },
+    {
+      "rule_id": "E1-R02",
+      "rule": "Normalize the Unicode radical token √ applied to one syntactic atom into an explicit sqrt(atom) AST node.",
+      "boundary": "If radical extent is not syntactically unambiguous, emit TYPED_PARSE_FAILURE instead of guessing."
+    },
+    {
+      "rule_id": "E1-R03",
+      "rule": "Preserve operator order, explicit grouping and relation direction exactly as parsed.",
+      "boundary": "No commutative sorting, simplification, cancellation or constant folding is permitted in E1."
+    },
+    {
+      "rule_id": "E1-R04",
+      "rule": "Treat absolute-value bars only when a complete balanced syntactic span is recognized.",
+      "boundary": "Unbalanced or overloaded bars must fail closed."
+    },
+    {
+      "rule_id": "E1-R05",
+      "rule": "Preserve identifier spelling as observed after Unicode NFC.",
+      "boundary": "No synonym, variable-renaming, unit inference or semantic aliasing is permitted."
+    }
+  ],
+  "typed_failure_codes": [
+    "UNBALANCED_DELIMITER",
+    "AMBIGUOUS_RADICAL_EXTENT",
+    "AMBIGUOUS_IMPLICIT_MULTIPLICATION",
+    "UNSUPPORTED_OPERATOR",
+    "UNSUPPORTED_NOTATION",
+    "MALFORMED_NUMBER",
+    "MISSING_OPERAND",
+    "TOKENIZATION_FAILURE",
+    "PARSER_INTERNAL_ERROR"
+  ],
+  "pre_execution_fixtures": [
+    {
+      "fixture_id": "E1-FX-001",
+      "class": "positive_candidate",
+      "left": "q = sqrt(3)/2",
+      "right": "q=√3/2",
+      "source_basis": "Both textual forms are explicitly identified by the calculation-memory index as distinct E0 strings and candidates for one E1 AST if radical parsing is meaning-preserving.",
+      "expected_relation": "SAME_AST_CANDIDATE",
+      "observed_execution": "NOT_RUN"
+    },
+    {
+      "fixture_id": "E1-FX-002",
+      "class": "positive_syntax",
+      "expression": "|m|=42",
+      "source_basis": "Observed cross-shard E0 exact identity example in the calculation-memory index.",
+      "expected_shape": "equality(absolute_value(symbol(m)), integer(42))",
+      "observed_execution": "NOT_RUN"
+    },
+    {
+      "fixture_id": "E1-FX-003",
+      "class": "positive_syntax",
+      "expression": "A=u",
+      "source_basis": "Observed cross-shard E0 exact identity example in the calculation-memory index.",
+      "expected_shape": "equality(symbol(A), symbol(u))",
+      "observed_execution": "NOT_RUN"
+    },
+    {
+      "fixture_id": "E1-FX-NEG-001",
+      "class": "negative_fail_closed",
+      "expression": "1/2x",
+      "expected_failure": "AMBIGUOUS_IMPLICIT_MULTIPLICATION",
+      "reason": "Do not choose a convention-dependent parse without explicit grouping.",
+      "observed_execution": "NOT_RUN"
+    },
+    {
+      "fixture_id": "E1-FX-NEG-002",
+      "class": "negative_fail_closed",
+      "expression": "|x=1",
+      "expected_failure": "UNBALANCED_DELIMITER",
+      "reason": "Absolute-value extent is incomplete.",
+      "observed_execution": "NOT_RUN"
+    }
+  ],
+  "required_bulk_ledger_fields": [
+    "e0_sha256",
+    "source_occurrence_pointer",
+    "parser_contract_version",
+    "parser_implementation_digest",
+    "input_expression_digest",
+    "disposition",
+    "ast_serialization",
+    "ast_digest",
+    "typed_failure_code",
+    "observed_at",
+    "predecessor_receipt"
+  ],
+  "gaps_reduced": [
+    {
+      "gap_id": "TV-MATH-E1-CONTRACT",
+      "before": "parser grammar + fail-closed disposition contract unspecified",
+      "after": "versioned pre-execution contract and fixture set materialized",
+      "closure_state": "CONTRACT_MATERIALIZED_IMPLEMENTATION_PENDING",
+      "claim_allowed": false
+    }
+  ],
+  "gaps_open": [
+    {
+      "gap_id": "TV-MATH-E1-PARSER-IMPLEMENTATION",
+      "source_pointer": "data/reconciliation/OMEGA_MATH_E1_PARSER_CONTRACT_PREFLIGHT_20260827.v1.json",
+      "missing_field": "deterministic parser implementation bound to E1-CONTRACT-v1",
+      "blocking_dependency": "implementation + reproducible tests",
+      "evidence_needed": "source path/blob digest plus passing positive and fail-closed fixture receipts",
+      "falsifier": "same input/parser version produces different AST/failure, or any fixture changes mathematical meaning",
+      "next_probe": "implement parser in a separate auditable source file and execute the preflight fixtures before corpus bulk-run",
+      "owner_authority": "Mapa mathematical reconciliation",
+      "urgency": "P0",
+      "closure_gate": "all preflight fixtures reproducibly dispositioned under a content-addressed parser implementation",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MATH-E1-CANONICAL-AST",
+      "source_pointer": "indices/RAFAELIA_CALCULATION_MEMORY_INDEX_V2_20260822.md",
+      "missing_field": "356/356 AST digest or typed parse failure ledger",
+      "blocking_dependency": "TV-MATH-E1-PARSER-IMPLEMENTATION",
+      "evidence_needed": "complete 356-record disposition ledger with parser version and implementation digest",
+      "falsifier": "any E0 representative missing, duplicated without occurrence accounting, or silently coerced",
+      "next_probe": "after parser preflight passes, run cursor-first over all 356 E0 representatives",
+      "owner_authority": "Mapa mathematical reconciliation",
+      "urgency": "P0",
+      "closure_gate": "356/356 unique E0 representatives have exactly one E1 disposition",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MATH-GLOBAL-UNIVERSE-EXHAUSTIVITY",
+      "source_pointer": "bounded 49-path scan",
+      "missing_field": "provider-complete mathematical-source denominator",
+      "blocking_dependency": "recursive Drive/GitHub enumeration with stable identities",
+      "evidence_needed": "enumeration receipts, orphan scan and reproducible source-selection rules",
+      "falsifier": "eligible mathematical source discovered outside declared denominator",
+      "next_probe": "continue independent source enumeration outside the frozen 49-path corpus",
+      "owner_authority": "Mapa/Atlas + provider authorities",
+      "urgency": "P1",
+      "closure_gate": "source-complete denominator with reproducible disposition ledger",
+      "claim_allowed": false
+    }
+  ],
+  "claim_allowed_changes": [],
+  "F_ok": "The E1 frontier now has a versioned fail-closed grammar/disposition contract and explicit pre-execution fixtures without claiming parser execution or AST equivalence.",
+  "F_gap": "Parser implementation, fixture execution, 356/356 disposition, E2 equivalence, domain/unit typing and global source exhaustivity remain open.",
+  "F_next": "Implement and content-address the E1-CONTRACT-v1 parser, execute the preflight fixtures, then bulk-run the 356 E0 representatives only if the fail-closed gate passes."
+}
