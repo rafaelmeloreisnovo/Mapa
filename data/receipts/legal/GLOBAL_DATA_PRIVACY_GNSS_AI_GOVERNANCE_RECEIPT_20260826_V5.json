@@ -1,0 +1,102 @@
+{
+  "receipt_schema": "RAFAELIA_LEGAL_GOVERNANCE_RECEIPT_V1",
+  "receipt_id": "GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V5",
+  "predecessor_receipt": "data/receipts/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V4.json",
+  "recorded_at": "2026-08-26T21:07:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "intent": "convert F_next from a prose next-step into a continuous risk-mitigated provenance-bound falsifiable claim-evolution state machine",
+  "artifacts": [
+    {
+      "path": "schemas/F_NEXT_CONTINUOUS_EVOLUTION_V1.schema.json",
+      "commit": "c5e04ee987359908454587eb04a778ea2732fc46",
+      "state": "CREATED",
+      "effect": "defines typed stages for priority, urgency, Omega risk vector, provenance, required evidence, falsifier, mitigations, forbidden promotions, dependencies and claim target"
+    },
+    {
+      "path": "data/control-plane/legal-gnss/F_NEXT_CONTINUOUS_EVOLUTION_20260826.v1.json",
+      "commit": "fd3a67740a2bd543d79ece7bc4130b9447846b09",
+      "state": "MATERIALIZED",
+      "effect": "instantiates nine append-only stages from contract closure through physical Android evidence, provenance, boundary testing, privacy review, reproducibility, precise claim promotion, continuous evolution and blocked private overlay"
+    },
+    {
+      "path": "scripts/validate_f_next_continuous_evolution.py",
+      "commit": "b8172d0794a92b90c5d2adcfbf388fbe32024015",
+      "state": "CREATED",
+      "effect": "stdlib fail-closed semantic validator with six negative falsifiers"
+    },
+    {
+      "path": ".github/workflows/legal-governance-gates.yml",
+      "commit": "8a77bc7f679158830b068d77c9d09df47bc2d191",
+      "state": "UPDATED",
+      "effect": "continuous F_next validator is now a required governance CI step for relevant changes"
+    }
+  ],
+  "ci_evidence": {
+    "workflow": "Legal Governance Gates",
+    "run_id": 33025681805,
+    "head_sha": "8a77bc7f679158830b068d77c9d09df47bc2d191",
+    "conclusion": "SUCCESS",
+    "observed_steps": {
+      "gnss_receipt_falsifiability_self_test": "PASS",
+      "f_next_continuous_evolution_self_test": "PASS",
+      "matrix_regeneration": "PASS",
+      "artifact_upload": "PASS",
+      "generated_drift_gate": "PASS"
+    }
+  },
+  "evolution_state": {
+    "FN-GNSS-001": "CLOSED_PASS",
+    "FN-GNSS-002": "WAITING_EXTERNAL_RUNTIME",
+    "FN-GNSS-003": "TOKEN_VAZIO",
+    "FN-GNSS-004": "TOKEN_VAZIO",
+    "FN-GNSS-005": "TOKEN_VAZIO",
+    "FN-GNSS-006": "TOKEN_VAZIO",
+    "FN-GNSS-007": "TOKEN_VAZIO",
+    "FN-CONT-008": "READY",
+    "FN-PRIVATE-009": "BLOCKED"
+  },
+  "claim_ladder": [
+    "OBSERVATION",
+    "EVIDENCED_OBSERVATION",
+    "BOUNDED_CLAIM",
+    "PRECISE_CLAIM",
+    "GENERAL_CLAIM"
+  ],
+  "promotion_boundary": "this chain may reach PRECISE_CLAIM only when evidence precision, provenance, falsifier and non-compensatory risk gates support it; GENERAL_CLAIM requires separate multi-context evidence",
+  "risk_mitigation_invariants": [
+    "R=(A,S,P,G,I,V,C,U) remains vector-preserving and non-compensatory",
+    "any non-compensatory P0 blocks promotion",
+    "urgency selects attention but never upgrades evidence",
+    "provenance incompleteness cannot be filled by importance",
+    "exact coordinates are minimized/redacted from shared evidence unless necessary",
+    "unrelated personal data is excluded from GNSS evidence collection",
+    "each service/tool/assistant/model boundary is tested independently",
+    "claim precision cannot exceed evidence precision",
+    "new material change reopens affected nodes append-only rather than erasing historical PASS"
+  ],
+  "current_P0_frontier": [
+    {
+      "id": "FN-GNSS-002",
+      "why": "physical Android evidence is the first missing proof-producing operation; without it all downstream raw-GNSS and boundary claims remain TOKEN_VAZIO",
+      "safe_action": "produce one authorized, minimized, local-only GNSS_RUNTIME_RECEIPT_V1 on the physical device"
+    }
+  ],
+  "F_ok": [
+    "continuous F_next schema materialized",
+    "nine-stage evolution ledger materialized",
+    "risk/urgency/provenance/falsifier/claim promotion are now coupled by contract",
+    "negative falsifiers validated in CI",
+    "anti-regression matrix gate remains green"
+  ],
+  "F_gap": [
+    "one physical Android GNSS runtime receipt",
+    "field-by-field provenance seal derived from that receipt",
+    "service/tool/assistant/model boundary evidence",
+    "privacy/authority review bound to observed flow",
+    "repeatability receipt",
+    "precise claim promotion receipt",
+    "Rafaelia_Private authorized overlay write"
+  ],
+  "F_next": "execute FN-GNSS-002 only on an authorized physical Android runtime; once its receipt validates, advance append-only through provenance, boundary, governance, reproducibility and precise-claim gates without skipping stages"
+}
