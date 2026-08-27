@@ -1,0 +1,409 @@
+{
+  "schema_version": "rafaelia.model-semantic-rapport/v1",
+  "rapport_id": "MSR-CLOSED-PROVIDER-BOUNDARY-001",
+  "created_on": "2026-08-27",
+  "mode": "REFERENCE_BOUNDARY",
+  "claim_allowed": false,
+  "model_surface": {
+    "surface_id": "model:closed-provider-unbound",
+    "provider": "TOKEN_VAZIO_PROVIDER_NOT_BOUND",
+    "model_name": "TOKEN_VAZIO_MODEL_NOT_BOUND",
+    "model_version": "TOKEN_VAZIO_MODEL_VERSION_NOT_BOUND",
+    "capability_class": "LLM",
+    "architecture_family": "TOKEN_VAZIO",
+    "architecture_expansion": null,
+    "architecture_evidence_refs": [],
+    "artifact_sha256": null,
+    "tokenizer_id": "TOKEN_VAZIO_TOKENIZER_NOT_BOUND",
+    "tokenizer_sha256": null,
+    "execution_mode": "UNKNOWN_PROVIDER_RUNTIME",
+    "internal_access": "PROPRIETARY_WITHHELD",
+    "parameter_update_observed": null,
+    "rights": [
+      {
+        "unit": "CODE",
+        "state": "TOKEN_VAZIO_LICENSE_UNBOUND",
+        "source_refs": []
+      },
+      {
+        "unit": "WEIGHTS",
+        "state": "TOKEN_VAZIO_LICENSE_UNBOUND",
+        "source_refs": []
+      },
+      {
+        "unit": "TOKENIZER",
+        "state": "TOKEN_VAZIO_LICENSE_UNBOUND",
+        "source_refs": []
+      },
+      {
+        "unit": "DATASET",
+        "state": "TOKEN_VAZIO_LICENSE_UNBOUND",
+        "source_refs": []
+      }
+    ]
+  },
+  "context_effect": {
+    "changes_runtime_input": true,
+    "parameter_update_observed": null,
+    "parameter_update_state": "TOKEN_VAZIO_NO_WEIGHT_UPDATE_EVIDENCE",
+    "persistent_memory_observed": null,
+    "persistent_memory_state": "TOKEN_VAZIO_PROVIDER_RUNTIME_NOT_OBSERVED",
+    "invariant": "context conditioning may change activations, state or cache when applicable; it does not by itself prove a parameter update or persistent memory"
+  },
+  "instance_sources": [
+    {
+      "source_id": "SRC-MSR-SESSION-INTENT",
+      "kind": "USER_AUTHORIZED_INTENT",
+      "reference": "conversation:2026-08-27:model-semantic-rapport",
+      "scope": "Request to map tokenization, embeddings, layers, weights, tensors and closed-box boundaries."
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "N-CONTEXT",
+      "kind": "CONTEXT_WINDOW",
+      "label": "Contexto disponível à interface",
+      "observability": "DIRECT_OBSERVED",
+      "epistemic_state": "DOCUMENTED",
+      "source_refs": ["SRC-MSR-SESSION-INTENT", "REF-MAPA-CONTEXT-V1"],
+      "gap_refs": []
+    },
+    {
+      "node_id": "N-INPUT-TEXT",
+      "kind": "INPUT_TEXT",
+      "label": "Texto de entrada observado",
+      "observability": "DIRECT_OBSERVED",
+      "epistemic_state": "DOCUMENTED",
+      "source_refs": ["SRC-MSR-SESSION-INTENT"],
+      "gap_refs": []
+    },
+    {
+      "node_id": "N-TOKENIZER",
+      "kind": "TOKENIZER",
+      "label": "Tokenizer nativo do modelo",
+      "observability": "TOKEN_VAZIO",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-TOKENIZER"]
+    },
+    {
+      "node_id": "N-TOKEN-IDS",
+      "kind": "TOKEN_IDS",
+      "label": "IDs de tokens nativos",
+      "observability": "TOKEN_VAZIO",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-TOKENIZER"]
+    },
+    {
+      "node_id": "N-EMBEDDING-TABLE",
+      "kind": "EMBEDDING_TABLE",
+      "label": "Tabela de embeddings do modelo",
+      "observability": "PROPRIETARY_WITHHELD",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-WEIGHTS"]
+    },
+    {
+      "node_id": "N-INPUT-EMBEDDINGS",
+      "kind": "INPUT_EMBEDDINGS",
+      "label": "Vetores de entrada internos",
+      "observability": "PROPRIETARY_WITHHELD",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-ACTIVATIONS"]
+    },
+    {
+      "node_id": "N-PARAMETERS",
+      "kind": "MODEL_PARAMETERS",
+      "label": "Pesos e vieses treináveis",
+      "observability": "PROPRIETARY_WITHHELD",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-WEIGHTS"]
+    },
+    {
+      "node_id": "N-LAYERS",
+      "kind": "LAYER_COMPUTATION",
+      "label": "Transformações de camadas",
+      "observability": "PROPRIETARY_WITHHELD",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-DEF-MSR-ARCHITECTURE", "TV-ACCESS-MSR-ACTIVATIONS"]
+    },
+    {
+      "node_id": "N-HIDDEN-ACTIVATIONS",
+      "kind": "HIDDEN_ACTIVATIONS",
+      "label": "Ativações ou estados ocultos",
+      "observability": "PROPRIETARY_WITHHELD",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-ACTIVATIONS"]
+    },
+    {
+      "node_id": "N-LOGITS",
+      "kind": "LOGITS",
+      "label": "Escores anteriores à decodificação",
+      "observability": "PROPRIETARY_WITHHELD",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-ACTIVATIONS"]
+    },
+    {
+      "node_id": "N-DECODING",
+      "kind": "DECODING_POLICY",
+      "label": "Política de amostragem ou decodificação",
+      "observability": "TOKEN_VAZIO",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "gap_refs": ["TV-ACCESS-MSR-DECODING"]
+    },
+    {
+      "node_id": "N-OUTPUT-TEXT",
+      "kind": "OUTPUT_TEXT",
+      "label": "Texto de saída observado",
+      "observability": "DIRECT_OBSERVED",
+      "epistemic_state": "DOCUMENTED",
+      "source_refs": ["SRC-MSR-SESSION-INTENT"],
+      "gap_refs": []
+    },
+    {
+      "node_id": "N-EXTERNAL-SEMANTICS",
+      "kind": "EXTERNAL_SEMANTIC_MAP",
+      "label": "Interpretação semântica e rapport do Mapa",
+      "observability": "DERIVED_INTERPRETATION",
+      "epistemic_state": "DERIVED_INTERPRETATION",
+      "source_refs": ["REF-MAPA-CONTEXT-V1", "REF-MAPA-TENSOR-V1"],
+      "gap_refs": []
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "E-CONTEXT-INPUT",
+      "source": "N-CONTEXT",
+      "target": "N-INPUT-TEXT",
+      "relation": "CONDITIONS",
+      "epistemic_state": "DOCUMENTED",
+      "source_refs": ["SRC-MSR-SESSION-INTENT"],
+      "falsifier": "The recorded input is not part of the bounded context represented by this packet.",
+      "next_gate": "Bind exact message coordinates and content hash."
+    },
+    {
+      "edge_id": "E-INPUT-TOKENIZER",
+      "source": "N-INPUT-TEXT",
+      "target": "N-TOKENIZER",
+      "relation": "SEGMENTS",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "Provider documentation or local tracing shows a different preprocessing path.",
+      "next_gate": "Bind tokenizer identity, version and a deterministic encode/decode receipt."
+    },
+    {
+      "edge_id": "E-TOKENIZER-IDS",
+      "source": "N-TOKENIZER",
+      "target": "N-TOKEN-IDS",
+      "relation": "PRODUCES",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The bound tokenizer does not emit the recorded IDs.",
+      "next_gate": "Record token IDs from the exact bound tokenizer artifact."
+    },
+    {
+      "edge_id": "E-IDS-EMBEDDING-TABLE",
+      "source": "N-TOKEN-IDS",
+      "target": "N-EMBEDDING-TABLE",
+      "relation": "INDEXES",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The bound architecture uses a representation path other than direct embedding lookup.",
+      "next_gate": "Inspect the exact producer graph and record tensor names and shapes."
+    },
+    {
+      "edge_id": "E-EMBEDDING-LOOKUP",
+      "source": "N-EMBEDDING-TABLE",
+      "target": "N-INPUT-EMBEDDINGS",
+      "relation": "PRODUCES",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "Local graph inspection yields no corresponding input embedding tensor.",
+      "next_gate": "Bind a local inspectable model and tensor-shape receipt."
+    },
+    {
+      "edge_id": "E-PARAMETERS-LAYERS",
+      "source": "N-PARAMETERS",
+      "target": "N-LAYERS",
+      "relation": "PARAMETERIZES",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The bound producer graph attributes layer computation to a different parameter set.",
+      "next_gate": "Bind model artifact hash and parameter manifest."
+    },
+    {
+      "edge_id": "E-EMBEDDINGS-LAYERS",
+      "source": "N-INPUT-EMBEDDINGS",
+      "target": "N-LAYERS",
+      "relation": "TRANSFORMS",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The exact architecture does not consume an input embedding representation.",
+      "next_gate": "Inspect the bound computation graph."
+    },
+    {
+      "edge_id": "E-CONTEXT-LAYERS",
+      "source": "N-CONTEXT",
+      "target": "N-LAYERS",
+      "relation": "CONDITIONS",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The bound runtime demonstrates a different context-conditioning mechanism.",
+      "next_gate": "Bind architecture and trace a controlled context perturbation."
+    },
+    {
+      "edge_id": "E-LAYERS-ACTIVATIONS",
+      "source": "N-LAYERS",
+      "target": "N-HIDDEN-ACTIVATIONS",
+      "relation": "PRODUCES",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The bound runtime exposes no corresponding hidden activation state.",
+      "next_gate": "Capture named activation tensors from an inspectable local artifact."
+    },
+    {
+      "edge_id": "E-ACTIVATIONS-LOGITS",
+      "source": "N-HIDDEN-ACTIVATIONS",
+      "target": "N-LOGITS",
+      "relation": "PRODUCES",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The producer graph uses a different output projection path.",
+      "next_gate": "Bind output-head graph and logits receipt."
+    },
+    {
+      "edge_id": "E-LOGITS-DECODING",
+      "source": "N-LOGITS",
+      "target": "N-DECODING",
+      "relation": "CONDITIONS",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The provider output is not selected from logits under the claimed policy.",
+      "next_gate": "Bind decoding parameters, seed and provider/runtime receipt."
+    },
+    {
+      "edge_id": "E-DECODING-OUTPUT",
+      "source": "N-DECODING",
+      "target": "N-OUTPUT-TEXT",
+      "relation": "PRODUCES",
+      "epistemic_state": "TOKEN_VAZIO",
+      "source_refs": [],
+      "falsifier": "The observed output cannot be reproduced by the bound decoder and seed.",
+      "next_gate": "Reproduce output with an inspectable local model or obtain an exact provider receipt."
+    },
+    {
+      "edge_id": "E-OUTPUT-SEMANTICS",
+      "source": "N-OUTPUT-TEXT",
+      "target": "N-EXTERNAL-SEMANTICS",
+      "relation": "INTERPRETED_AS",
+      "epistemic_state": "DERIVED_INTERPRETATION",
+      "source_refs": ["REF-MAPA-CONTEXT-V1", "REF-MAPA-TENSOR-V1"],
+      "falsifier": "The interpretation loses the source text, scope or epistemic state.",
+      "next_gate": "Validate the contextual semantic packet and preserve its source hash."
+    },
+    {
+      "edge_id": "E-EMBEDDINGS-NOT-SEMANTICS",
+      "source": "N-INPUT-EMBEDDINGS",
+      "target": "N-EXTERNAL-SEMANTICS",
+      "relation": "NOT_EQUIVALENT_TO",
+      "epistemic_state": "DOCUMENTED",
+      "source_refs": ["REF-MAPA-TENSOR-V1"],
+      "falsifier": "A producer-level proof establishes an explicitly defined reversible identity mapping.",
+      "next_gate": "Keep the external semantic projection separately typed unless such a mapping is proven."
+    },
+    {
+      "edge_id": "E-CONTEXT-NOT-WEIGHT-PROOF",
+      "source": "N-CONTEXT",
+      "target": "N-PARAMETERS",
+      "relation": "DOES_NOT_ESTABLISH",
+      "epistemic_state": "DOCUMENTED",
+      "source_refs": ["REF-MAPA-GPT-LAYOUT-V1"],
+      "falsifier": "A bound training, adaptation or online-learning receipt demonstrates a parameter update from this interaction.",
+      "next_gate": "Require an allowed update mode, before/after parameter digests and an execution receipt."
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-ACCESS-MSR-TOKENIZER",
+      "gap_class": "TV-ACCESS",
+      "priority": "P0",
+      "blocking": true,
+      "reason": "Tokenizer identity, version, vocabulary and encode/decode behavior are not bound.",
+      "affected_nodes": ["N-TOKENIZER", "N-TOKEN-IDS"],
+      "next_probe": "Bind tokenizer artifact or provider documentation plus deterministic tokenization receipt."
+    },
+    {
+      "gap_id": "TV-ACCESS-MSR-WEIGHTS",
+      "gap_class": "TV-ACCESS",
+      "priority": "P0",
+      "blocking": true,
+      "reason": "Model parameters and embedding table are proprietary or otherwise inaccessible in this packet.",
+      "affected_nodes": ["N-EMBEDDING-TABLE", "N-PARAMETERS"],
+      "next_probe": "Bind an authorized inspectable model artifact, parameter manifest and SHA-256."
+    },
+    {
+      "gap_id": "TV-ACCESS-MSR-ACTIVATIONS",
+      "gap_class": "TV-ACCESS",
+      "priority": "P1",
+      "blocking": true,
+      "reason": "Layer tensors, hidden activations, logits and caches were not observed.",
+      "affected_nodes": ["N-INPUT-EMBEDDINGS", "N-LAYERS", "N-HIDDEN-ACTIVATIONS", "N-LOGITS"],
+      "next_probe": "Run an instrumented local model with named tensor-shape and value-digest receipts."
+    },
+    {
+      "gap_id": "TV-ACCESS-MSR-DECODING",
+      "gap_class": "TV-ACCESS",
+      "priority": "P1",
+      "blocking": true,
+      "reason": "Sampling policy, seed and decoding parameters are not bound.",
+      "affected_nodes": ["N-DECODING"],
+      "next_probe": "Bind decoding configuration and deterministic replay evidence when available."
+    },
+    {
+      "gap_id": "TV-DEF-MSR-ARCHITECTURE",
+      "gap_class": "TV-DEF",
+      "priority": "P0",
+      "blocking": true,
+      "reason": "The concrete provider architecture cannot be inferred from the LLM capability label.",
+      "affected_nodes": ["N-LAYERS"],
+      "next_probe": "Bind a provider architecture declaration or inspectable producer graph."
+    },
+    {
+      "gap_id": "TV-PROVENANCE-MSR-RIGHTS",
+      "gap_class": "TV-PROVENANCE",
+      "priority": "P0",
+      "blocking": true,
+      "reason": "Code, weights, tokenizer and dataset rights are independent units and remain unbound.",
+      "affected_nodes": ["N-TOKENIZER", "N-EMBEDDING-TABLE", "N-PARAMETERS"],
+      "next_probe": "Attach separate authoritative rights sources for each unit used by an exact artifact."
+    }
+  ],
+  "invariants": [
+    "semantic_token != tokenizer_token_id",
+    "external_semantic_vector != native_model_embedding",
+    "tensor != weight",
+    "context_conditioning != parameter_training",
+    "llm_label != transformer_architecture_proof",
+    "LNN requires explicit expansion",
+    "proprietary_withheld != measured_local",
+    "repository_license != weights_tokenizer_dataset_license"
+  ],
+  "F_ok": [
+    "Input text, output text and external semantic interpretation are separately represented.",
+    "Hidden model stages remain typed as proprietary or TOKEN_VAZIO rather than guessed.",
+    "Context effects are separated from parameter updates and persistent memory."
+  ],
+  "F_gap": [
+    "Exact model, tokenizer, architecture, parameters, activations, decoding and rights are unbound."
+  ],
+  "F_next": [
+    "Bind an authorized inspectable producer artifact before promoting any internal tensor or weight claim."
+  ]
+}

@@ -173,6 +173,8 @@ Observed repository count in the connected GitHub inventory: **84**. This is an 
 - `ART:Mapa:navigation/SOURCES.md` → authority/provenance rules.
 - `ART:Mapa:governance/ACTIVATION_REGISTRY_V1.json` → subordinate machine-readable activation registry.
 - `ART:Mapa:docs/ACTIVATION_REGISTRY_V1.md` → human-readable activation contract.
+- `ART:Mapa:contracts/model-semantic-rapport.v1.json` → external semantic/model observability contract.
+- `ART:Mapa:navigation/MODEL_SEMANTIC_RAPPORT_V1.md` → bounded route from contextual semantics to producer-controlled tokenizer, tensors and weights.
 
 ## 8. Current cross-repository causal chain
 

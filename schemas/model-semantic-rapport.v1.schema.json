@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/model-semantic-rapport.v1.schema.json",
+  "title": "RAFAELIA Model Semantic Rapport V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "rapport_id",
+    "created_on",
+    "mode",
+    "claim_allowed",
+    "model_surface",
+    "context_effect",
+    "instance_sources",
+    "nodes",
+    "edges",
+    "gaps",
+    "invariants",
+    "F_ok",
+    "F_gap",
+    "F_next"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.model-semantic-rapport/v1"
+    },
+    "rapport_id": {
+      "type": "string",
+      "pattern": "^MSR-[A-Z0-9-]+$"
+    },
+    "created_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "mode": {
+      "enum": [
+        "REFERENCE_BOUNDARY",
+        "PROVIDER_DECLARATION",
+        "LOCAL_INSPECTION",
+        "MEASURED_EXECUTION"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "model_surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface_id",
+        "provider",
+        "model_name",
+        "model_version",
+        "capability_class",
+        "architecture_family",
+        "architecture_expansion",
+        "architecture_evidence_refs",
+        "artifact_sha256",
+        "tokenizer_id",
+        "tokenizer_sha256",
+        "execution_mode",
+        "internal_access",
+        "parameter_update_observed",
+        "rights"
+      ],
+      "properties": {
+        "surface_id": {
+          "type": "string",
+          "pattern": "^model:[a-z0-9:_-]+$"
+        },
+        "provider": {"type": "string", "minLength": 1},
+        "model_name": {"type": "string", "minLength": 1},
+        "model_version": {"type": "string", "minLength": 1},
+        "capability_class": {
+          "enum": ["LLM", "LANGUAGE_MODEL", "SEQUENCE_MODEL", "OTHER", "TOKEN_VAZIO"]
+        },
+        "architecture_family": {
+          "enum": [
+            "RNN",
+            "LSTM",
+            "GRU",
+            "TRANSFORMER",
+            "LIQUID_TIME_CONSTANT",
+            "LOGICAL_NEURAL_NETWORK",
+            "HYBRID",
+            "OTHER",
+            "TOKEN_VAZIO"
+          ]
+        },
+        "architecture_expansion": {
+          "type": ["string", "null"]
+        },
+        "architecture_evidence_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "artifact_sha256": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+          ]
+        },
+        "tokenizer_id": {"type": "string", "minLength": 1},
+        "tokenizer_sha256": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+          ]
+        },
+        "execution_mode": {"type": "string", "minLength": 1},
+        "internal_access": {
+          "enum": ["OPEN_LOCAL", "PROVIDER_DECLARED", "PROPRIETARY_WITHHELD", "TOKEN_VAZIO"]
+        },
+        "parameter_update_observed": {
+          "type": ["boolean", "null"]
+        },
+        "rights": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["unit", "state", "source_refs"],
+            "properties": {
+              "unit": {"enum": ["CODE", "WEIGHTS", "TOKENIZER", "DATASET"]},
+              "state": {"type": "string", "minLength": 1},
+              "source_refs": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {"type": "string", "minLength": 1}
+              }
+            }
+          }
+        }
+      }
+    },
+    "context_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changes_runtime_input",
+        "parameter_update_observed",
+        "parameter_update_state",
+        "persistent_memory_observed",
+        "persistent_memory_state",
+        "invariant"
+      ],
+      "properties": {
+        "changes_runtime_input": {"const": true},
+        "parameter_update_observed": {"type": ["boolean", "null"]},
+        "parameter_update_state": {"type": "string", "minLength": 1},
+        "persistent_memory_observed": {"type": ["boolean", "null"]},
+        "persistent_memory_state": {"type": "string", "minLength": 1},
+        "invariant": {"type": "string", "minLength": 1}
+      }
+    },
+    "instance_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "kind", "reference", "scope"],
+        "properties": {
+          "source_id": {"type": "string", "pattern": "^SRC-[A-Z0-9-]+$"},
+          "kind": {"type": "string", "minLength": 1},
+          "reference": {"type": "string", "minLength": 1},
+          "scope": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "node_id",
+          "kind",
+          "label",
+          "observability",
+          "epistemic_state",
+          "source_refs",
+          "gap_refs"
+        ],
+        "properties": {
+          "node_id": {"type": "string", "pattern": "^N-[A-Z0-9-]+$"},
+          "kind": {"type": "string", "minLength": 1},
+          "label": {"type": "string", "minLength": 1},
+          "observability": {"type": "string", "minLength": 1},
+          "epistemic_state": {"type": "string", "minLength": 1},
+          "source_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          },
+          "gap_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "pattern": "^TV-[A-Z0-9-]+$"}
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "edge_id",
+          "source",
+          "target",
+          "relation",
+          "epistemic_state",
+          "source_refs",
+          "falsifier",
+          "next_gate"
+        ],
+        "properties": {
+          "edge_id": {"type": "string", "pattern": "^E-[A-Z0-9-]+$"},
+          "source": {"type": "string", "pattern": "^N-[A-Z0-9-]+$"},
+          "target": {"type": "string", "pattern": "^N-[A-Z0-9-]+$"},
+          "relation": {"type": "string", "minLength": 1},
+          "epistemic_state": {"type": "string", "minLength": 1},
+          "source_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          },
+          "falsifier": {"type": "string", "minLength": 1},
+          "next_gate": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gap_id",
+          "gap_class",
+          "priority",
+          "blocking",
+          "reason",
+          "affected_nodes",
+          "next_probe"
+        ],
+        "properties": {
+          "gap_id": {"type": "string", "pattern": "^TV-[A-Z0-9-]+$"},
+          "gap_class": {"type": "string", "pattern": "^TV-[A-Z]+$"},
+          "priority": {"enum": ["P0", "P1", "P2", "P3", "P4"]},
+          "blocking": {"type": "boolean"},
+          "reason": {"type": "string", "minLength": 1},
+          "affected_nodes": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "pattern": "^N-[A-Z0-9-]+$"}
+          },
+          "next_probe": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "F_ok": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "F_gap": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "F_next": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

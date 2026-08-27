@@ -32,6 +32,13 @@ objective
 
 `ART:Mapa:.github/workflows/gpt-layout-contract.yml`
 
+## Model semantic boundary
+
+- Contract: `ART:Mapa:contracts/model-semantic-rapport.v1.json`
+- Navigation leaf: `ART:Mapa:navigation/MODEL_SEMANTIC_RAPPORT_V1.md`
+- Invariant: contextual conditioning is not evidence of parameter training.
+- Closed provider: hidden tokenizer, embeddings, weights, activations and decoder remain `TOKEN_VAZIO` until producer evidence exists.
+
 ## Drive mirror
 
 `SRC:DRIVE:1tKGN2zBCaIuqTPJbIBEgjD6WjNO28YYyVn6ZDDfGYsA`
