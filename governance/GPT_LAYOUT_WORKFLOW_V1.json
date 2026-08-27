@@ -13,13 +13,16 @@
     "github_machine": "navigation/RAFAELIA_MASTER_REGISTRY.v1.json",
     "drive_master_navigation": "SRC:DRIVE:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
     "drive_operational_memory": "SRC:DRIVE:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
-    "drive_gpt_layout_v1": "SRC:DRIVE:1tKGN2zBCaIuqTPJbIBEgjD6WjNO28YYyVn6ZDDfGYsA"
+    "drive_gpt_layout_v1": "SRC:DRIVE:1tKGN2zBCaIuqTPJbIBEgjD6WjNO28YYyVn6ZDDfGYsA",
+    "model_semantic_rapport": "contracts/model-semantic-rapport.v1.json"
   },
   "invariants": [
     "SESSION != LONGITUDINAL_MEMORY != EVIDENCE",
     "MASCOTE != AGENTE != AUTORIDADE != EXECUTOR",
     "VISAO != ARTEFATO != EXECUCAO != EVIDENCIA != CLAIM",
     "TOKEN_VAZIO != PASS",
+    "context conditioning != parameter training",
+    "external semantic vector != native model embedding",
     "claim_allowed=false without an applicable evidence gate",
     "current private state must be read from connected authority when available",
     "custom instructions must not duplicate mutable repository or runtime state",

@@ -18,6 +18,34 @@ consulta
 → gate da resposta
 ```
 
+## Ponte para tokenização, embeddings e pesos
+
+O `Model Semantic Context Rapport V1` torna a fronteira acima endereçável:
+
+```text
+texto observado
+→ tokenizer/IDs [produtor ou TOKEN_VAZIO]
+→ embeddings/camadas/pesos/ativações [produtor ou TOKEN_VAZIO]
+→ saída observada
+→ interpretação semântica externa
+```
+
+Contrato: `contracts/model-semantic-rapport.v1.json`.
+Documento: `docs/architecture/MODEL_SEMANTIC_CONTEXT_RAPPORT_V1.md`.
+
+Invariantes adicionais:
+
+```text
+semantic_token != tokenizer_token_id
+external_semantic_vector != native_model_embedding
+tensor != weight
+context_conditioning != parameter_training
+```
+
+`LNN` permanece ambígua até declarar se significa uma rede Liquid
+Time-constant ou uma Logical Neural Network. `LLM` descreve classe de
+capacidade/escala e não prova, isoladamente, uma arquitetura Transformer.
+
 ## Invariante
 
 \[

@@ -1,0 +1,256 @@
+{
+  "schema_version": "rafaelia.model-semantic-rapport-control/v1",
+  "state": "IMPLEMENTED_PROPOSED",
+  "claim_allowed": false,
+  "purpose": "Mapear, sem inventar introspecção, a passagem entre linguagem humana, tokenização, representações vetoriais, dinâmica de camadas, parâmetros e interpretação semântica externa.",
+  "authority": {
+    "mapa": "ontologia, relações, estados de observabilidade, gaps e gate",
+    "producer_model": "tokenizer, arquitetura, pesos, tensores internos, execução e receipts",
+    "drive": "memória editorial e longitudinal; não é prova de runtime",
+    "receipt": "ponte limitada entre execução observada e claim"
+  },
+  "acronym_registry": [
+    {
+      "symbol": "ANN",
+      "expansions": ["ARTIFICIAL_NEURAL_NETWORK"],
+      "resolution": "RESOLVED",
+      "category": "UMBRELLA_FAMILY",
+      "primary_refs": []
+    },
+    {
+      "symbol": "RNN",
+      "expansions": ["RECURRENT_NEURAL_NETWORK"],
+      "resolution": "RESOLVED",
+      "category": "ARCHITECTURE_FAMILY",
+      "primary_refs": ["REF-LSTM-1997"]
+    },
+    {
+      "symbol": "LSTM",
+      "expansions": ["LONG_SHORT_TERM_MEMORY"],
+      "resolution": "RESOLVED",
+      "category": "GATED_RECURRENT_ARCHITECTURE",
+      "primary_refs": ["REF-LSTM-1997"]
+    },
+    {
+      "symbol": "GRU",
+      "expansions": ["GATED_RECURRENT_UNIT"],
+      "resolution": "RESOLVED",
+      "category": "GATED_RECURRENT_ARCHITECTURE",
+      "primary_refs": []
+    },
+    {
+      "symbol": "LNN",
+      "expansions": [
+        "LIQUID_TIME_CONSTANT_NETWORK",
+        "LOGICAL_NEURAL_NETWORK"
+      ],
+      "resolution": "AMBIGUOUS_REQUIRES_EXPANSION",
+      "category": "AMBIGUOUS_ACRONYM",
+      "primary_refs": ["REF-LTC-2021", "REF-LOGICAL-LNN-2020"]
+    },
+    {
+      "symbol": "LTC",
+      "expansions": ["LIQUID_TIME_CONSTANT_NETWORK"],
+      "resolution": "RESOLVED",
+      "category": "CONTINUOUS_TIME_RECURRENT_ARCHITECTURE",
+      "primary_refs": ["REF-LTC-2021"]
+    },
+    {
+      "symbol": "LLM",
+      "expansions": ["LARGE_LANGUAGE_MODEL"],
+      "resolution": "RESOLVED",
+      "category": "CAPABILITY_AND_SCALE_CLASS_NOT_ARCHITECTURE_PROOF",
+      "primary_refs": ["REF-TRANSFORMER-2017"]
+    },
+    {
+      "symbol": "TRANSFORMER",
+      "expansions": ["TRANSFORMER_ARCHITECTURE"],
+      "resolution": "RESOLVED",
+      "category": "ATTENTION_ARCHITECTURE",
+      "primary_refs": ["REF-TRANSFORMER-2017"]
+    }
+  ],
+  "execution_modes": [
+    "INFERENCE_FIXED_PARAMETERS",
+    "INFERENCE_STATEFUL_CACHE",
+    "TRAINING_FULL_PARAMETERS",
+    "ADAPTATION_PARAMETER_SUBSET",
+    "ONLINE_LEARNING",
+    "UNKNOWN_PROVIDER_RUNTIME"
+  ],
+  "parameter_update_modes": [
+    "TRAINING_FULL_PARAMETERS",
+    "ADAPTATION_PARAMETER_SUBSET",
+    "ONLINE_LEARNING"
+  ],
+  "observability_states": [
+    "DIRECT_OBSERVED",
+    "PROVIDER_DECLARED",
+    "LOCAL_ARTIFACT_INSPECTED",
+    "DERIVED_INTERPRETATION",
+    "PROPRIETARY_WITHHELD",
+    "TOKEN_VAZIO"
+  ],
+  "epistemic_states": [
+    "DOCUMENTED",
+    "SIMULATED",
+    "MEASURED_LOCAL",
+    "REPRODUCED",
+    "DERIVED_INTERPRETATION",
+    "TOKEN_VAZIO",
+    "INVALIDATED"
+  ],
+  "node_kinds": [
+    "CONTEXT_WINDOW",
+    "INPUT_TEXT",
+    "TOKENIZER",
+    "TOKEN_IDS",
+    "EMBEDDING_TABLE",
+    "INPUT_EMBEDDINGS",
+    "MODEL_PARAMETERS",
+    "LAYER_COMPUTATION",
+    "HIDDEN_ACTIVATIONS",
+    "RECURRENT_STATE",
+    "ATTENTION_STATE",
+    "RUNTIME_CACHE",
+    "LOGITS",
+    "DECODING_POLICY",
+    "OUTPUT_TOKENS",
+    "OUTPUT_TEXT",
+    "EXTERNAL_SEMANTIC_MAP"
+  ],
+  "internal_node_kinds": [
+    "TOKENIZER",
+    "TOKEN_IDS",
+    "EMBEDDING_TABLE",
+    "INPUT_EMBEDDINGS",
+    "MODEL_PARAMETERS",
+    "LAYER_COMPUTATION",
+    "HIDDEN_ACTIVATIONS",
+    "RECURRENT_STATE",
+    "ATTENTION_STATE",
+    "RUNTIME_CACHE",
+    "LOGITS",
+    "DECODING_POLICY",
+    "OUTPUT_TOKENS"
+  ],
+  "edge_types": [
+    "CONDITIONS",
+    "SEGMENTS",
+    "PRODUCES",
+    "INDEXES",
+    "LOOKS_UP",
+    "PARAMETERIZES",
+    "TRANSFORMS",
+    "UPDATES_ACTIVATION",
+    "UPDATES_PARAMETER",
+    "DECODES",
+    "INTERPRETED_AS",
+    "NOT_EQUIVALENT_TO",
+    "DOES_NOT_ESTABLISH"
+  ],
+  "rights_units": ["CODE", "WEIGHTS", "TOKENIZER", "DATASET"],
+  "gap_classes": [
+    "TV-DEF",
+    "TV-SOURCE",
+    "TV-ACCESS",
+    "TV-DATA",
+    "TV-TEST",
+    "TV-ENV",
+    "TV-INDEPENDENCE",
+    "TV-PROVENANCE"
+  ],
+  "sources": [
+    {
+      "source_id": "REF-TRANSFORMER-2017",
+      "kind": "PRIMARY_PAPER",
+      "title": "Attention Is All You Need",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "scope": "Transformer architecture and attention; not evidence for the architecture of an unbound provider model."
+    },
+    {
+      "source_id": "REF-LSTM-1997",
+      "kind": "PRIMARY_PAPER",
+      "title": "Long Short-Term Memory",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9377276/",
+      "scope": "LSTM recurrent architecture; not evidence for the architecture of an unbound provider model."
+    },
+    {
+      "source_id": "REF-LTC-2021",
+      "kind": "PRIMARY_PAPER",
+      "title": "Liquid Time-constant Networks",
+      "url": "https://arxiv.org/abs/2006.04439",
+      "scope": "Liquid time-constant recurrent networks; the paper uses LTC terminology."
+    },
+    {
+      "source_id": "REF-LOGICAL-LNN-2020",
+      "kind": "PRIMARY_PAPER",
+      "title": "Logical Neural Networks",
+      "url": "https://arxiv.org/abs/2006.13155",
+      "scope": "Logical Neural Networks; demonstrates why LNN cannot be expanded silently."
+    },
+    {
+      "source_id": "REF-MAPA-CONTEXT-V1",
+      "kind": "REPOSITORY_CONTRACT",
+      "title": "Contextual Semantic Execution Protocol V1",
+      "path": "docs/CONTEXTUAL_SEMANTIC_EXECUTION_PROTOCOL_V1.md",
+      "scope": "External contextual and epistemic governance."
+    },
+    {
+      "source_id": "REF-MAPA-TENSOR-V1",
+      "kind": "REPOSITORY_CONTRACT",
+      "title": "RAFAELIA Semantic Tensor and Parable Engine V1",
+      "path": "docs/architecture/RAFAELIA_SEMANTIC_TENSOR_PARABLE_ENGINE_V1.md",
+      "scope": "External heuristic tensor; explicitly not native model tensors or model weights."
+    },
+    {
+      "source_id": "REF-MAPA-GPT-LAYOUT-V1",
+      "kind": "REPOSITORY_CONTRACT",
+      "title": "RAFAELIA GPT Layout and Workflows V1",
+      "path": "docs/GPT_LAYOUT_WORKFLOWS_V1.md",
+      "scope": "Federated interface and hidden-runtime evidence boundary."
+    }
+  ],
+  "invariants": [
+    {
+      "id": "MSR-I01",
+      "rule": "semantic_token != tokenizer_token_id",
+      "falsifier": "A record silently uses a Mapa semantic token as a provider tokenizer ID."
+    },
+    {
+      "id": "MSR-I02",
+      "rule": "external_semantic_vector != native_model_embedding",
+      "falsifier": "An edge promotes external rapport similarity to identity with a hidden model embedding."
+    },
+    {
+      "id": "MSR-I03",
+      "rule": "tensor != weight",
+      "falsifier": "A record treats every runtime tensor as a trainable parameter."
+    },
+    {
+      "id": "MSR-I04",
+      "rule": "context_conditioning != parameter_training",
+      "falsifier": "Context is asserted to update weights without an allowed update mode and execution evidence."
+    },
+    {
+      "id": "MSR-I05",
+      "rule": "llm_label != transformer_architecture_proof",
+      "falsifier": "An unbound LLM label is used as sole evidence for a Transformer implementation."
+    },
+    {
+      "id": "MSR-I06",
+      "rule": "LNN requires explicit expansion",
+      "falsifier": "LNN is consumed without selecting Liquid Time-constant or Logical Neural Network."
+    },
+    {
+      "id": "MSR-I07",
+      "rule": "proprietary_withheld != measured_local",
+      "falsifier": "Hidden weights or activations are marked measured without an inspectable artifact and receipt."
+    },
+    {
+      "id": "MSR-I08",
+      "rule": "repository_license != weights_tokenizer_dataset_license",
+      "falsifier": "A code license is propagated to weights, tokenizer or dataset without separate rights evidence."
+    }
+  ]
+}

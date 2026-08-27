@@ -36,6 +36,8 @@ objective
 - Machine navigation: `navigation/RAFAELIA_MASTER_REGISTRY.v1.json`.
 - Machine GPT layout: `governance/GPT_LAYOUT_WORKFLOW_V1.json`.
 - Drive GPT layout: `SRC:DRIVE:1tKGN2zBCaIuqTPJbIBEgjD6WjNO28YYyVn6ZDDfGYsA`.
+- Model semantic boundary: `contracts/model-semantic-rapport.v1.json`.
+- Model semantic navigation: `navigation/MODEL_SEMANTIC_RAPPORT_V1.md`.
 
 ## Custom instructions contract
 
@@ -242,6 +244,12 @@ After this contract:
 This repository contract can validate its own structure and invariants.
 It cannot prove hidden model behavior or all future ChatGPT runtime behavior.
 Such claims remain outside this artifact until separately evidenced.
+
+The Model Semantic Rapport contract refines this boundary: input/output text
+may be observed while tokenizer IDs, native embeddings, architecture, weights,
+activations, logits, decoder, persistence and parameter updates remain
+`PROPRIETARY_WITHHELD` or `TOKEN_VAZIO` unless bound to producer evidence.
+External Mapa rapport edges are not native neural connections or model weights.
 
 ## R3
 
