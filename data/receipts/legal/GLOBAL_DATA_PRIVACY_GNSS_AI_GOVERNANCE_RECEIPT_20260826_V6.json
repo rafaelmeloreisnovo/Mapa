@@ -1,0 +1,162 @@
+{
+  "receipt_schema": "RAFAELIA_LEGAL_GOVERNANCE_RECEIPT_V1",
+  "receipt_id": "GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V6",
+  "predecessor_receipt": "data/receipts/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V5.json",
+  "recorded_at": "2026-08-26T21:29:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "intent": "advance the GNSS F_next chain from contract-only readiness to build-evidenced producer plus validated byte-level provenance sealing, without claiming physical runtime or AI-boundary transfer",
+  "producer_evidence": {
+    "repository": "rafaelmeloreisnovo/termux-api_rafcodephi",
+    "head_sha": "50cc6e8f618c70145fc2365467935d542fe8ef17",
+    "binding": "data/control-plane/legal-gnss/GNSS_RUNTIME_PRODUCER_BINDING_20260826.v2.json",
+    "binding_commit": "2ad33b736497f9b66ea3d50bfa2cd10c6267b9c3",
+    "build": {
+      "workflow": "Advanced Hardcoded CI Build",
+      "run_id": 33026629120,
+      "conclusion": "SUCCESS",
+      "steps": {
+        "locked_termux_shared_publication": "PASS",
+        "debug_release_build": "PASS",
+        "arm32_arm64_validation": "PASS",
+        "internal_validation_signing": "PASS",
+        "temporary_private_key_destroyed": "PASS",
+        "checksums": "PASS",
+        "artifact_upload": "PASS"
+      },
+      "artifact": {
+        "id": 9628699094,
+        "name": "advanced-hardcoded-apks",
+        "size_bytes": 26668157,
+        "digest": "sha256:e5db2835bfa31f14bfa17aacb90c6c7723bd05ac4089715ad84148b4352447ac"
+      }
+    }
+  },
+  "producer_semantic_controls": [
+    "authorized_test=true is mandatory",
+    "capture window is bounded to 1-15 seconds",
+    "latitude and longitude values are not retained",
+    "NMEA sentences are not retained",
+    "SVID/PRN values are not retained",
+    "raw GNSS measurement values are not retained",
+    "aggregate satellite counts may be retained",
+    "APP_TO_THIRD_PARTY remains TOKEN_VAZIO without runtime packet capture",
+    "tool/assistant/model boundaries remain TOKEN_VAZIO until independently observed",
+    "ADR and multipath presence are not promoted when Android reports UNKNOWN",
+    "raw receipt provenance and hash remain TOKEN_VAZIO until the exact bytes are sealed"
+  ],
+  "provenance_sealer": {
+    "path": "scripts/seal_gnss_runtime_evidence.py",
+    "implementation_commits": [
+      "a1722bea262590cf98ce8778db3b8fe6007b365f",
+      "97ea90ad2360ad3b38c2e7c6b2be23564033a88f"
+    ],
+    "output_contract": "schemas/evidence-closure-record.v1.schema.json",
+    "behavior": "validate GNSS_RUNTIME_RECEIPT_V1, hash exact receipt bytes, pin producer commit, emit status=EVIDENCED and claim_allowed=false; leave build/CI limited locally and reproducibility TOKEN_VAZIO",
+    "cross_validator": "tools/validate_evidence_closure.py"
+  },
+  "governance_ci": {
+    "workflow": "Legal Governance Gates",
+    "run_id": 33026947016,
+    "head_sha": "2ad33b736497f9b66ea3d50bfa2cd10c6267b9c3",
+    "conclusion": "SUCCESS",
+    "observed_steps": {
+      "gnss_receipt_falsifiability_self_test": "PASS",
+      "f_next_continuous_evolution_self_test": "PASS",
+      "gnss_provenance_sealer_self_test": "PASS",
+      "compliance_matrix_regeneration": "PASS",
+      "generated_drift_gate": "PASS"
+    }
+  },
+  "evolution_delta": {
+    "FN-GNSS-001": "CLOSED_PASS",
+    "FN-GNSS-002": "WAITING_EXTERNAL_RUNTIME",
+    "FN-GNSS-002_BUILD_SUBAXIS": "CLOSED_PASS",
+    "FN-GNSS-003_TOOLING_SUBAXIS": "READY_AND_CI_VALIDATED",
+    "FN-GNSS-003_RUNTIME_INPUT": "TOKEN_VAZIO",
+    "FN-GNSS-004": "TOKEN_VAZIO",
+    "FN-GNSS-005": "TOKEN_VAZIO",
+    "FN-GNSS-006": "TOKEN_VAZIO",
+    "FN-GNSS-007": "TOKEN_VAZIO",
+    "FN-CONT-008": "READY",
+    "FN-PRIVATE-009": "BLOCKED"
+  },
+  "risk_delta": {
+    "reduced": [
+      "implementation uncertainty",
+      "build compatibility uncertainty for the corrected producer head",
+      "provenance-tool format drift risk"
+    ],
+    "not_reduced": [
+      "physical device GNSS availability uncertainty",
+      "runtime field availability uncertainty",
+      "network transfer uncertainty",
+      "assistant/model context boundary uncertainty",
+      "single-run reproducibility uncertainty",
+      "legal applicability/compliance uncertainty"
+    ]
+  },
+  "closed_gaps": [
+    {
+      "id": "TOKEN_VAZIO_GNSS_PRODUCER_BUILD",
+      "state": "CLOSED_PASS",
+      "evidence": "Advanced Hardcoded CI Build run 33026629120 at exact producer head 50cc6e8f618c70145fc2365467935d542fe8ef17"
+    },
+    {
+      "id": "TOKEN_VAZIO_GNSS_PROVENANCE_SEALER_TOOLING",
+      "state": "CLOSED_TOOLING_LEVEL",
+      "evidence": "Legal Governance Gates run 33026947016 cross-validated the specialized sealer against the generic evidence-closure validator"
+    }
+  ],
+  "remaining_token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_RAW_GNSS_RUNTIME",
+      "state": "OPEN_P0",
+      "reason": "no authorized physical Android receipt has been produced"
+    },
+    {
+      "id": "TOKEN_VAZIO_GNSS_RECEIPT_BYTE_SEAL",
+      "state": "OPEN_DEPENDENT",
+      "reason": "sealing tool is ready but has no physical receipt bytes to seal"
+    },
+    {
+      "id": "TOKEN_VAZIO_MODEL_CONTEXT_BOUNDARY",
+      "state": "OPEN",
+      "reason": "service/tool/assistant/model boundaries lack runtime observations"
+    },
+    {
+      "id": "TOKEN_VAZIO_REPRODUCIBILITY",
+      "state": "OPEN",
+      "reason": "no second compatible physical execution exists"
+    },
+    {
+      "id": "TOKEN_VAZIO_PRIVATE_REPO_PRIVACY_OVERLAY_WRITE",
+      "state": "OPEN_BLOCKED",
+      "reason": "previous private-repository write remained connector-blocked and was not bypassed"
+    }
+  ],
+  "invariants_enforced": [
+    "build_success != physical_runtime",
+    "physical_runtime != network_transfer",
+    "network_transfer != model_context_access",
+    "implementation != execution != evidence != claim",
+    "receipt_hash_seal != reproducibility",
+    "urgency != evidence_promotion",
+    "claim_precision <= evidence_precision",
+    "TOKEN_VAZIO != false"
+  ],
+  "F_ok": [
+    "corrected privacy-minimized GNSS producer builds for debug/release and ARM32/ARM64",
+    "exact APK artifact bundle digest recorded",
+    "provenance sealer implemented and cross-validated in CI",
+    "build and provenance tooling are now ready for a physical receipt"
+  ],
+  "F_gap": [
+    "physical Android GNSS receipt",
+    "byte seal of that exact receipt",
+    "remaining boundary evidence",
+    "second-run reproducibility",
+    "precise claim promotion only after the above gates"
+  ],
+  "F_next": "run one authorized minimized physical capture using the build-evidenced producer, then immediately seal its exact bytes with scripts/seal_gnss_runtime_evidence.py; do not skip to boundary or claim promotion before those receipts exist"
+}
