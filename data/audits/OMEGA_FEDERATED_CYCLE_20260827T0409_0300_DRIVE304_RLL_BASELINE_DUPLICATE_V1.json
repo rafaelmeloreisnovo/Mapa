@@ -1,0 +1,197 @@
+{
+  "schema": "rafaelia.omega_federated_cycle.v1",
+  "cycle_id": "OMEGA-CYCLE-20260827T0409-0300-026",
+  "append_only": true,
+  "claim_allowed": false,
+  "authority_contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "filename/title != identity",
+    "index != authority",
+    "absence_of_evidence != evidence_of_absence",
+    "TOKEN_VAZIO != zero"
+  ],
+  "predecessor_context": {
+    "drive_router_revision": "302",
+    "drive_router_predecessor_revision": "299",
+    "drive_router_export_bytes": 753193,
+    "drive_router_sha256": "4425758f10680c1a7746af21b6cea48466502c3beb50f8c849c3a6b2200effda",
+    "rll_pr774_head": "ee50711b32b75adb6ba5092e395ecb380490bd85",
+    "rll_lab_head": "3861436c9e8c8692a341208d9ee2beeaaf26df77",
+    "mapa_previous_known_main": "77b4d02524b9904b669cd636fa3d498371623de5"
+  },
+  "observed_sources": [
+    {
+      "kind": "GOOGLE_DRIVE_NATIVE_DOCUMENT",
+      "provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "revision": "304",
+      "previous_revision": "302",
+      "modified_time_utc": "2026-08-27T05:25:19.013Z"
+    },
+    {
+      "kind": "GITHUB_PR",
+      "repository": "instituto-Rafael/relativity-living-light",
+      "pr": 774,
+      "head": "ee50711b32b75adb6ba5092e395ecb380490bd85"
+    },
+    {
+      "kind": "GITHUB_PR_PREDECESSOR",
+      "repository": "instituto-Rafael/relativity-living-light",
+      "pr": 772,
+      "head": "ee495369dd7082fed431c284b7bf606d5dfe793c"
+    },
+    {
+      "kind": "GOOGLE_SHEET",
+      "provider_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "observed_sheet_count": 17
+    },
+    {
+      "kind": "GOOGLE_SHEET",
+      "provider_id": "1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "observed_sheet_count": 1
+    },
+    {
+      "kind": "GITHUB_MAIN",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "head": "20a15b2308f0781572cfda72e796422bd77aa61d",
+      "cause": "merged PR #440 model semantic rapport"
+    }
+  ],
+  "cursor_updates": {
+    "drive_router": {
+      "before": {
+        "revision": "302",
+        "previous_revision": "299",
+        "export_bytes": 753193,
+        "sha256": "4425758f10680c1a7746af21b6cea48466502c3beb50f8c849c3a6b2200effda"
+      },
+      "after": {
+        "revision": "304",
+        "previous_revision": "302",
+        "export_mime_type": "text/plain",
+        "export_bytes": 755750,
+        "sha256": "44e9caab65cfbbb20fcb7fe2ecd3cbda5b6dca5cd1e5cecbec26721a98775f51",
+        "state": "CLOSED_REVISION_EXPORT_DIGEST",
+        "scope": "identity_and_integrity_of_observed_representation_only"
+      }
+    },
+    "rll_pr774_python_ci": {
+      "before": "THREE_FAILURES_CAUSALITY_UNRESOLVED",
+      "after": "TOKEN_VAZIO_BASELINE_INHERITED_PENDING_BASE_FIX",
+      "proof": "PR772 predecessor Python run failed with the exact same three tests before ARM32 ingress existed"
+    },
+    "drive_master_index_same_title": {
+      "before": "AMBIGUOUS_SAME_TITLE",
+      "after": "DISTINCT_PROVIDER_IDS_COMMON_PREFIX_STRUCTURAL_EXTENSION_CANDIDATE",
+      "observed_common_range": "CONCEITOS!A1:H20",
+      "common_range_equality": true,
+      "relation": "TOKEN_VAZIO_RELATION_PREDECESSOR_OR_REPLICA_EXTENSION"
+    },
+    "mapa_main": {
+      "before": "77b4d02524b9904b669cd636fa3d498371623de5",
+      "after": "20a15b2308f0781572cfda72e796422bd77aa61d"
+    }
+  },
+  "evidence_receipts": [
+    {
+      "id": "DRIVE_ROUTER_REV304_TEXT_EXPORT",
+      "bytes": 755750,
+      "sha256": "44e9caab65cfbbb20fcb7fe2ecd3cbda5b6dca5cd1e5cecbec26721a98775f51"
+    },
+    {
+      "id": "RLL_PR774_PYTHON_TEST_ARTIFACT",
+      "workflow_run": 33043436642,
+      "artifact_id": 9634826762,
+      "bytes": 53992,
+      "sha256": "edc57383168cdb696b580e55f9ae331fc228ab6a628a6182d8c9da3188d076c4",
+      "result": "3 failed, 1391 passed, 12 subtests passed"
+    },
+    {
+      "id": "RLL_PR772_PREDECESSOR_PYTHON_TEST_ARTIFACT",
+      "workflow_run": 32999462297,
+      "artifact_id": 9618113965,
+      "bytes": 54055,
+      "sha256": "105bce68220ee11300d6f4ac3ce1c951ccab49abb67b0c2b5ea0aa6b9c4c6837",
+      "result": "3 failed, 1391 passed, 12 subtests passed"
+    },
+    {
+      "id": "RLL_FORMULA_LITERATURE_PREDECESSOR_SNAPSHOT",
+      "source_sha": "3861436c9e8c8692a341208d9ee2beeaaf26df77",
+      "source_blob": "be758fd4e6b6193a5130db3ea5189a6af594d9d5",
+      "source_sha256": "1fbfa31856343339b89e458da59ca7d8ffc57afaa154d3838731cb5a2eea56ae",
+      "validation": "PASS references=11 edges=12 formulas=6"
+    }
+  ],
+  "gap_updates": [
+    {
+      "gap_id": "TV-RLL-PR774-PYTHON-CI-20260827",
+      "state": "TOKEN_VAZIO_BASELINE_INHERITED_PENDING_BASE_FIX",
+      "source_pointer": "instituto-Rafael/relativity-living-light#774@ee50711b32b75adb6ba5092e395ecb380490bd85",
+      "missing_field": "green Python test gate on current rll/lab baseline",
+      "blocking_dependency": "three inherited QCD/primordial test failures",
+      "evidence_needed": "separate baseline-fix execution receipt followed by full PR774 rerun",
+      "falsifier": "a PR774-only change reproduces a new failure not present in predecessor PR772",
+      "next_probe": "root-cause the primordial validator FAIL, then fix exact-knot matching and missing schema description in a separate QCD causal unit",
+      "owner_authority": "instituto-Rafael/relativity-living-light@rll/lab",
+      "urgency": "P0",
+      "closure_gate": "targeted tests PASS + full Python suite PASS on repaired baseline + PR774 rerun",
+      "claim_allowed": false,
+      "predecessor_lineage": "PR772 Python run 32999462297"
+    },
+    {
+      "gap_id": "TV-DRIVE-MASTER-INDEX-DUPLICATE-IDENTITY-20260827",
+      "state": "TOKEN_VAZIO_RELATION_PREDECESSOR_OR_REPLICA_EXTENSION",
+      "source_pointer": "Drive IDs 1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk and 1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "missing_field": "typed relation between same-title objects",
+      "blocking_dependency": "full content/revision comparison not yet executed",
+      "evidence_needed": "bounded full CONCEITOS equality/hash plus revision metadata and structural lineage",
+      "falsifier": "full content or revision lineage demonstrates independent divergence",
+      "next_probe": "compare complete CONCEITOS ranges and revision histories, then classify replica_of|supersedes|derived_from|diverged_from",
+      "owner_authority": "Google Drive provider identity",
+      "urgency": "P1",
+      "closure_gate": "provider IDs + full content identity + revision lineage support one typed relation",
+      "claim_allowed": false,
+      "predecessor_lineage": "same-title discovery; first 20 rows identical"
+    }
+  ],
+  "closed_items": [
+    {
+      "gap_id": "TV-DRIVE-CANONICAL-ROUTER-REVISION-DIGEST-20260827",
+      "state": "CLOSED_REVISION_EXPORT_DIGEST",
+      "scope": "current observed text/plain representation only",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-RLL-PR774-INGRESS-CAUSAL-REGRESSION-20260827",
+      "state": "CLOSED_NO_OBSERVED_CAUSAL_EDGE_TO_EXISTING_THREE_FAILURES",
+      "scope": "the three currently observed Python failures only",
+      "claim_allowed": false
+    }
+  ],
+  "coverage_before_after": {
+    "drive_router_provenance": "rev302_digest -> rev304_digest",
+    "rll_ci_causality": "unresolved -> predecessor-matched baseline-inherited",
+    "same_title_drive_identity": "title-level ambiguity -> distinct provider IDs + structural cardinality + common-prefix equality",
+    "mapa_head_cursor": "77b4d025... -> 20a15b230..."
+  },
+  "uncertainty_before_after": "DOWN: three independent ambiguities narrowed without scientific-claim promotion",
+  "claim_allowed_changes": "none; remains false",
+  "top_urgencies": [
+    "P0: isolate and repair rll/lab QCD/primordial baseline CI debt, then rerun PR #774",
+    "P0: obtain canonical ARM32 build/link/runtime/physical reproduction receipt before strengthening evidence class",
+    "P1: resolve same-title MASTER_INDEX Sheets with full content/revision lineage",
+    "P1: revalidate provider-side merge enforcement/protection state where it is a promotion dependency"
+  ],
+  "next_probes": [
+    "Capture exact errors returned by validate_rll_primordial_assurance_v2 on current rll/lab and create a separate minimal baseline-fix unit only after all three failure causes are known",
+    "Compare complete CONCEITOS content and revision histories for the two same-title MASTER_INDEX Sheets and assign only an evidence-supported typed relation",
+    "Recover ARM32 source/build artifacts by exact hashes and execute canonical build/link/runtime receipt",
+    "Use Mapa main@20a15b2308f0781572cfda72e796422bd77aa61d as the next routing baseline"
+  ],
+  "F_ok": "Drive router rev304 revision+digest closed; RLL PR774 three failures proven inherited from predecessor; duplicate-title Sheets separated by provider identity and structural evidence; Mapa cursor refreshed",
+  "F_gap": "RLL baseline three-failure repair + ARM32 canonical runtime/physical receipt + full typed relation between MASTER_INDEX Sheet occurrences + remaining provider enforcement state",
+  "F_next": "separate QCD baseline causal fix -> rerun PR774 -> ARM32 reproduction -> full Sheet identity/revision reconciliation"
+}
