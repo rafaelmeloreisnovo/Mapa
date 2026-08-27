@@ -1,0 +1,106 @@
+{
+  "schema_version": "rafaelia.gnss-build-artifact-catalog/v1",
+  "catalog_id": "GNSS_BUILD_ARTIFACT_CATALOG_20260826_V1",
+  "recorded_at": "2026-08-26T21:33:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "producer_repository": "rafaelmeloreisnovo/termux-api_rafcodephi",
+  "producer_head": "50cc6e8f618c70145fc2365467935d542fe8ef17",
+  "workflow_run": 33026629120,
+  "artifact": {
+    "id": 9628699094,
+    "name": "advanced-hardcoded-apks",
+    "provider_size_bytes": 26668157,
+    "provider_digest": "sha256:e5db2835bfa31f14bfa17aacb90c6c7723bd05ac4089715ad84148b4352447ac",
+    "downloaded_zip_sha256": "e5db2835bfa31f14bfa17aacb90c6c7723bd05ac4089715ad84148b4352447ac",
+    "digest_match": true
+  },
+  "apks": [
+    {
+      "kind": "debug",
+      "abi": "arm64-v8a",
+      "file": "debug/termux-api-app_v0.53.0+debug-arm64-v8a.apk",
+      "size_bytes": 9563440,
+      "sha256": "586d8a776b954caadbb584dbd4455ff54050780d46c29b3832ff9b4c8dad2649",
+      "install_update_compatibility": "TOKEN_VAZIO"
+    },
+    {
+      "kind": "debug",
+      "abi": "armeabi-v7a",
+      "file": "debug/termux-api-app_v0.53.0+debug-armeabi-v7a.apk",
+      "size_bytes": 9562046,
+      "sha256": "76c6325cba0d36652c3d25760e28047e87114250e27f3f641018847328191ba7",
+      "install_update_compatibility": "TOKEN_VAZIO"
+    },
+    {
+      "kind": "release-ci-signed",
+      "abi": "arm64-v8a",
+      "file": "release/termux-api-app_v0.53.0+release-arm64-v8a-ci-signed.apk",
+      "size_bytes": 4039780,
+      "sha256": "7965a24832695ddef3104170a85f8224bf9baff2af2c508d10087d31037c625c",
+      "signer_certificate_sha256": "4339256780facb0ee62c6b6bb972b901c5d140a9c0dc3bd595f55273821bbb68",
+      "signer_dn": "CN=CI Validation, OU=CI, O=Termux, L=NA, ST=NA, C=US",
+      "signing_scope": "ephemeral_internal_validation",
+      "install_update_compatibility": "TOKEN_VAZIO"
+    },
+    {
+      "kind": "release-unsigned-or-non-ci-signed-output",
+      "abi": "arm64-v8a",
+      "file": "release/termux-api-app_v0.53.0+release-arm64-v8a.apk",
+      "size_bytes": 3884501,
+      "sha256": "29321fee6048b8d024cd8ac505cee8fbb06b892a531c976fb2b1d871163a2dde",
+      "install_update_compatibility": "TOKEN_VAZIO"
+    },
+    {
+      "kind": "release-ci-signed",
+      "abi": "armeabi-v7a",
+      "file": "release/termux-api-app_v0.53.0+release-armeabi-v7a-ci-signed.apk",
+      "size_bytes": 4039782,
+      "sha256": "a30558f97fb275259694aa39bb9d32c7f646ee38e33ad705b80448743a8f6c65",
+      "signer_certificate_sha256": "4339256780facb0ee62c6b6bb972b901c5d140a9c0dc3bd595f55273821bbb68",
+      "signer_dn": "CN=CI Validation, OU=CI, O=Termux, L=NA, ST=NA, C=US",
+      "signing_scope": "ephemeral_internal_validation",
+      "install_update_compatibility": "TOKEN_VAZIO"
+    },
+    {
+      "kind": "release-unsigned-or-non-ci-signed-output",
+      "abi": "armeabi-v7a",
+      "file": "release/termux-api-app_v0.53.0+release-armeabi-v7a.apk",
+      "size_bytes": 3883107,
+      "sha256": "2485c6728ca9612794d378cdd052e58328c4ed26fc89784f8e345b16a83c5320",
+      "install_update_compatibility": "TOKEN_VAZIO"
+    }
+  ],
+  "signing_boundary": {
+    "ci_validation_key_destroyed_after_build": true,
+    "durable_production_signing_key": false,
+    "installed_package_signer_observed": false,
+    "rule": "do not force Android package update unless installed and candidate signing lineages are proven compatible"
+  },
+  "selection_rule": {
+    "arm32": "armeabi-v7a",
+    "arm64": "arm64-v8a",
+    "abi_must_be_observed_on_target": true,
+    "marketing_model_name_is_not_abi_evidence": true
+  },
+  "invariants": [
+    "artifact_bundle_digest_match != installed_package_identity",
+    "apk_sha256_match != signer_compatibility",
+    "signer_compatibility != physical_runtime",
+    "build_artifact != GNSS_observation",
+    "TOKEN_VAZIO != false"
+  ],
+  "F_ok": [
+    "provider artifact bundle digest independently reproduced",
+    "six APK SHA-256 values reproduced and matched build manifests",
+    "CI-signed release certificate fingerprint recorded",
+    "ABI-specific artifacts cataloged"
+  ],
+  "F_gap": [
+    "target-device observed ABI",
+    "installed package signer fingerprint",
+    "candidate-vs-installed signer compatibility",
+    "physical GNSS receipt"
+  ],
+  "F_next": "observe target ABI and installed signer before selecting/installing any candidate; if signer-compatible build is available, execute the bounded physical GNSS runbook"
+}
