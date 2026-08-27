@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "model_id": "RDAOG-V1",
+  "title": "Robotics Dual-Anchor Octant Geometry",
+  "state": "MIXED_PROVED_AND_HYPOTHESIS",
+  "terminology": {
+    "vercipice": {
+      "authorial_term": true,
+      "standard_mathematical_term": false,
+      "definition": "Operational name for an antipodal equivalence class {c+v,c-v} treated as one reciprocal unoriented axis when sign orientation is not material."
+    }
+  },
+  "dual_anchor": {
+    "space": "R2",
+    "center": "c",
+    "vector": "v != 0",
+    "points": ["p=c+v", "q=c-v"],
+    "invariants": ["norm(p-c)=norm(q-c)", "p+q=2c"],
+    "rotation": "p_theta=c+R_theta*v; q_theta=c-R_theta*v",
+    "claim_state": "THEOREM"
+  },
+  "octant_states": {
+    "theta": "theta_k=theta_0+k*pi/4",
+    "k": [0, 1, 2, 3, 4, 5, 6, 7],
+    "antipodal_identity": "z[k+4]=-z[k]",
+    "antipodal_classes": [[0, 4], [1, 5], [2, 6], [3, 7]],
+    "quotient_cardinality": 4,
+    "claim_state": "THEOREM"
+  },
+  "two_squares": {
+    "square_A_indices": [0, 2, 4, 6],
+    "square_B_indices": [1, 3, 5, 7],
+    "relative_rotation": "pi/4",
+    "union_vertices": "regular_octagon_under_equal_radius_and_uniform_step",
+    "claim_state": "THEOREM"
+  },
+  "cube_hexagon": {
+    "cube": "[-a,a]^3",
+    "opposite_square_faces": ["z=+a", "z=-a"],
+    "section_plane": "x+y+z=0",
+    "vertices": [
+      ["a", "-a", "0"],
+      ["a", "0", "-a"],
+      ["0", "a", "-a"],
+      ["-a", "a", "0"],
+      ["-a", "0", "a"],
+      ["0", "-a", "a"]
+    ],
+    "side_length": "sqrt(2)*a",
+    "circumradius": "sqrt(2)*a",
+    "area": "3*sqrt(3)*a^2",
+    "regular_hexagon": true,
+    "claim_state": "THEOREM",
+    "mechanical_optimality": "TOKEN_VAZIO"
+  },
+  "spiral": {
+    "radial": {
+      "law": "r[n+1]=(sqrt(3)/2)*r[n]",
+      "state": "PASS_NUMERIC_LIMITED",
+      "provenance": "data/reconciliation/OMEGA_E1_STRUCTURAL_SPIRAL_ROUTE_20260822.v1.json"
+    },
+    "angular_authorial": {
+      "law": "theta[n+1]=theta[n]+pi/phi",
+      "state": "FAIL_NOT_SAME_FORM_AS_OBSERVED_GAIA_IMPLEMENTATION"
+    },
+    "octant_law": {
+      "law": "theta[k]=theta0+k*pi/4",
+      "state": "DEFINITION_FOR_DISCRETE_8_STATE_MODEL"
+    },
+    "golden_angle_reference": {
+      "law": "delta_theta=2*pi/phi^2",
+      "state": "DISTINCT_REFERENCE_NOT_SUBSTITUTE_FOR_PI_OVER_PHI"
+    }
+  },
+  "fibonacci": {
+    "recurrence": "F[n+1]=F[n]+F[n-1]",
+    "seed": [1, 1],
+    "example": [1, 1, 2, 3, 5, 8, 13],
+    "allowed_role": "indexing_or_scaling_rule_when_explicitly_defined",
+    "forbidden_promotions": [
+      "visual_similarity_to_spiral_is_not_derivation",
+      "pair_symmetry_is_not_fibonacci_proof",
+      "hexagon_is_not_fibonacci_consequence"
+    ]
+  },
+  "governance_mapping": {
+    "state": "DESIGN_MODEL_HYPOTHESIS",
+    "power_vector": ["collection", "inference", "decision", "sharing", "retention"],
+    "counterpower_vector": ["visibility", "choice", "contestability", "portability", "auditability"],
+    "coverage_invariant": "every material power capability requires an explicit authority-purpose-rights-risk-evidence counterpart",
+    "falsifier": "a material processing capability exists without a governed counterpart and still receives release authorization"
+  },
+  "falsifiers": [
+    {"claim": "dual_anchor_equidistance", "test": "rotation must preserve norm around declared center"},
+    {"claim": "8_to_4_antipodal_quotient", "test": "verify z[k+4]=-z[k] for k=0..3"},
+    {"claim": "two_regular_squares", "test": "verify equal radius and pi/2 separation within each parity subset"},
+    {"claim": "regular_octagon", "test": "verify common radius and pi/4 angular increments"},
+    {"claim": "cube_regular_hexagon_section", "test": "verify six listed points satisfy cube bounds and plane, equal center radius and equal adjacent distance"},
+    {"claim": "mechanical_optimality", "test": "requires controlled material/load/boundary comparison; current state TOKEN_VAZIO"},
+    {"claim": "pi_over_phi_implementation_equivalence", "test": "requires producer implementation of exact angular recurrence and dedicated gate"}
+  ]
+}

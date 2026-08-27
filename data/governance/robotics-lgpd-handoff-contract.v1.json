@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.1.0",
+  "contract_id": "ROBOTICS-LGPD-HANDOFF-V1",
+  "state": "BOUND_TESTED_HANDOFF_NOT_FORMAL_PRODUCER_ENROLLMENT",
+  "consumer": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "branch": "feat/robotics-user-governance-federation-v1",
+    "role": "federation_authority_and_state_router"
+  },
+  "producer": {
+    "repo": "instituto-Rafael/LGPD-Constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic",
+    "ref": "feat/robotics-information-governance-v1",
+    "observed_commit": "ce601dbb6b813b760a5d548ad4f5834c1a23a1d1",
+    "role": "proposed_legal_privacy_normative_research_producer",
+    "formal_enrollment_in_mapa_authority_pyramid": "TOKEN_VAZIO"
+  },
+  "bound_artifacts": [
+    "docs/ROBOTICS_INFORMATION_GOVERNANCE_FIRST_QUESTION.md",
+    "docs/ROBOTICS_MAPA_NORMATIVE_CROSSWALK_V2.md",
+    "docs/ROBOTICS_NORMATIVE_CONTINUOUS_EVOLUTION_V3.md",
+    "data/robotics_information_governance_v1.json",
+    "data/robotics_normative_crosswalk_v2.json",
+    "data/robotics_normative_snapshot_20260826.v3.json",
+    "tests/test_robotics_information_governance.py",
+    "tests/test_robotics_normative_crosswalk.py",
+    "tests/test_robotics_normative_snapshot_v3.py",
+    ".github/workflows/robotics-information-governance.yml"
+  ],
+  "producer_evidence": {
+    "workflow": "Robotics Information Governance",
+    "workflow_run_id": 33008483192,
+    "head_sha": "ce601dbb6b813b760a5d548ad4f5834c1a23a1d1",
+    "status": "completed",
+    "conclusion": "success",
+    "scope": "repository-level syntax and zero-dependency invariant tests for Robotics governance, normative crosswalk and dated normative snapshot V3; not legal opinion, certification, runtime proof or independent audit"
+  },
+  "allowed_handoff": [
+    "legal_source_identifiers",
+    "article_crosswalks",
+    "regulatory_source_identifiers",
+    "technical_standard_metadata",
+    "normative_status_version_and_timeline_metadata",
+    "staleness_and_revalidation_triggers",
+    "typed_hypotheses",
+    "typed_TOKEN_VAZIO",
+    "test_receipts_and_commit_identity"
+  ],
+  "forbidden_promotions": [
+    "research_crosswalk_to_binding_legal_opinion",
+    "standard_reference_to_certification",
+    "CI_success_to_legal_compliance",
+    "economic_hypothesis_to_proven_illegality",
+    "producer_proposal_to_formal_mapa_authority_without_gate",
+    "stale_source_to_current_normative_truth",
+    "dated_snapshot_to_permanent_normative_truth"
+  ],
+  "acceptance_gates": [
+    "exact_repo_ref_commit",
+    "source_authority_classification",
+    "scope_match",
+    "staleness_check",
+    "TOKEN_VAZIO_preservation",
+    "non_regression_check",
+    "producer_CI_receipt",
+    "consumer_CI_receipt",
+    "receipt_append"
+  ],
+  "revalidation_triggers": [
+    "producer_head_material_change",
+    "legal_or_regulatory_change",
+    "standard_version_change",
+    "jurisdiction_change",
+    "new_runtime_processing_scope",
+    "contradictory_primary_source",
+    "independent_review_finding",
+    "snapshot_staleness_threshold_reached"
+  ],
+  "claim_boundary": "Mapa may route and preserve the producer's normative research state but may not transform that research into a binding legal conclusion or implementation proof without the relevant authority and evidence.",
+  "falsifier": "If Mapa promotes a producer claim beyond its source scope, treats a dated snapshot as timeless, or erases a producer TOKEN_VAZIO, this handoff contract is violated.",
+  "F_ok": "Exact producer V3 branch/commit and successful bounded workflow receipt are linked; consumer dedicated Robotics gate has also passed on the prior consumer head.",
+  "F_gap": "Formal producer enrollment remains TOKEN_VAZIO and requires authority-pyramid/topology amendment plus governance approval; consumer must rerun after this provenance-only update.",
+  "F_next": "Rerun consumer Robotics/CI gates; retain formal producer enrollment and promotion authorization as TOKEN_VAZIO/BLOCKED until their independent gates close."
+}
