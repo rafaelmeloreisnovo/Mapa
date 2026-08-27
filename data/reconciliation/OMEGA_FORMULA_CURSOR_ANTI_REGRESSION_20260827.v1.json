@@ -1,0 +1,105 @@
+{
+  "schema": "RAFAELIA_FORMULA_CURSOR_ANTI_REGRESSION_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260827T081043-0300-CURSOR-ANTI-REGRESSION",
+  "generated_at": "2026-08-27T11:10:43Z",
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "epistemic_state": "CONTRADICTION_RESOLVED_BOUNDED_CURSOR_ONLY",
+  "predecessor": {
+    "branch": "audit/omega-cycle-20260827t0710-0300-formula-shard04a",
+    "commit": "f744c9b2861bd9e80a803a9041fe964579c69baf",
+    "receipt": "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD04A_PAPER23_20260827.v1.json",
+    "asserted_remaining_candidate_paths": 14,
+    "asserted_coverage": "35/49",
+    "status_after_reconciliation": "CONTRADICTED_BY_EARLIER_CANONICAL_BOUNDED_CLOSURE"
+  },
+  "authoritative_observed_predecessors": [
+    {
+      "path": "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD04_MATEMATICA_20260822.v1.json",
+      "state": "OBSERVED_IN_MAIN",
+      "tree_sha": "e7a90eb64e02befa2a24708dfd24faa4c2381af5",
+      "source_paths_inspected": 12,
+      "expression_occurrences": 208,
+      "remaining_after": 4
+    },
+    {
+      "path": "data/reconciliation/OMEGA_FORMULA_EXTRACTION_SHARD05_TEOREMAS_20260822.v1.json",
+      "state": "OBSERVED_IN_MAIN",
+      "tree_sha": "f497f9bc914bdc54dad7788fd74653bbe5a681d3",
+      "source_paths_inspected": 4,
+      "expression_occurrences": 59,
+      "remaining_candidate_paths_in_frozen_49_path_scan": 0
+    },
+    {
+      "path": "indices/RAFAELIA_CALCULATION_MEMORY_INDEX_V2_20260822.md",
+      "state": "OBSERVED_IN_MAIN",
+      "bounded_candidate_paths": 49,
+      "remaining_candidate_paths": 0,
+      "raw_expression_occurrences_s01_s05": 374,
+      "e0_exact_unique_sha256_bounded": 356,
+      "e0_duplicate_groups": 16,
+      "e0_duplicate_extra_occurrences": 18
+    }
+  ],
+  "reconciliation": {
+    "finding": "The 2026-08-27 SHARD04A restarted from the older post-SHARD03 cursor and reprocessed Paper2.md/Paper3.md even though the same frozen 49-path denominator had already been closed by SHARD04+SHARD05 on 2026-08-22.",
+    "identity_note": "Paper2.md/Paper3.md remain two path occurrences over one exact Git blob; the later duplicate extraction is preserved as an occurrence/receipt but is not counted as new bounded-source coverage.",
+    "normalization_note": "SHARD04 used Unicode NFC + trim and recorded 11 Paper2 expressions; SHARD04A declared trim-only and emitted 10 records. These are different extraction contracts and SHARD04A cannot supersede the earlier bounded ledger without an explicit reconciliation test.",
+    "coverage_before_this_cycle": "ambiguous due to stale successor assertion 35/49 versus canonical bounded index 49/49",
+    "coverage_after_this_cycle": "49/49 frozen candidate paths dispositioned; no new source-path coverage credited for SHARD04A",
+    "uncertainty_before": "whether 14 frozen candidate paths remained unprocessed",
+    "uncertainty_after": "that question is closed: 0 remain in the frozen 49-path denominator; global universe exhaustivity still remains TOKEN_VAZIO"
+  },
+  "anti_regression_rules": [
+    "Before resuming any cursor, search newer receipts and indexes for the same denominator/tree lineage.",
+    "A later timestamp does not override an earlier completed bounded closure when the later receipt was initialized from a stale predecessor.",
+    "Duplicate processing may be preserved as evidence but must not inflate coverage, object count, formula count, or independent evidence.",
+    "Frozen bounded closure 49/49 is not global Drive/GitHub exhaustivity.",
+    "E0 exact textual identity 356 is not E1 AST, E2 algebraic equivalence, novelty count, or global formula total."
+  ],
+  "gaps_resolved": [
+    {
+      "gap_id": "TV-MATH-REMAINING-14-PATHS",
+      "resolution": "CLOSED_AS_STALE_CURSOR_NOT_REAL_RESIDUAL",
+      "evidence": [
+        "OMEGA_FORMULA_EXTRACTION_SHARD04_MATEMATICA_20260822.v1.json",
+        "OMEGA_FORMULA_EXTRACTION_SHARD05_TEOREMAS_20260822.v1.json",
+        "RAFAELIA_CALCULATION_MEMORY_INDEX_V2_20260822.md"
+      ],
+      "closure_gate": "49/49 frozen source paths already dispositioned with provider-bound receipts",
+      "claim_allowed": false
+    }
+  ],
+  "gaps_open": [
+    {
+      "gap_id": "TV-MATH-E1-CANONICAL-AST",
+      "source_pointer": "indices/RAFAELIA_CALCULATION_MEMORY_INDEX_V2_20260822.md",
+      "missing_field": "deterministic canonical AST or typed parse failure for 356 E0 representatives",
+      "blocking_dependency": "parser grammar + domain-safe normalization",
+      "evidence_needed": "356/356 disposition ledger with parser version, input digest, AST digest or typed failure",
+      "falsifier": "parser canonicalization changes mathematical meaning or collapses domain-distinct expressions",
+      "next_probe": "run a conservative deterministic E1 parser over E0 representatives; preserve failures as first-class records",
+      "owner_authority": "Mapa mathematical reconciliation",
+      "urgency": "P0",
+      "closure_gate": "356/356 E0 representatives dispositioned without semantic coercion",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MATH-GLOBAL-UNIVERSE-EXHAUSTIVITY",
+      "source_pointer": "bounded 49-path scan",
+      "missing_field": "proof that all eligible Drive/GitHub mathematical sources are enumerated",
+      "blocking_dependency": "recursive universe inventory with stable provider identities and source-selection rules",
+      "evidence_needed": "enumeration receipts + coverage denominator + orphan/unindexed-source scan",
+      "falsifier": "discovery of an eligible provider-bound source outside the denominator",
+      "next_probe": "enumerate candidate mathematical sources outside the frozen 49-path corpus before any global-total claim",
+      "owner_authority": "Mapa/Atlas + provider source repositories/Drive",
+      "urgency": "P1",
+      "closure_gate": "source-complete universe denominator with reproducible selection/disposition ledger",
+      "claim_allowed": false
+    }
+  ],
+  "claim_allowed_changes": [],
+  "F_ok": "Detected and neutralized a stale-cursor regression: the alleged 14-path residual was already closed on 2026-08-22. Restored the bounded coverage interpretation to 49/49 without deleting the later receipt or inflating counts.",
+  "F_gap": "E1 AST, E2 algebraic equivalence, domain/unit typing, formula→implementation→execution→evidence edges, and global Drive/GitHub source exhaustivity remain partial or TOKEN_VAZIO.",
+  "F_next": "Do not process the stale 14-path queue. Next highest-value probe is conservative E1 canonical-AST disposition over the 356 E0 representatives, while independently enumerating mathematical sources outside the frozen 49-path denominator."
+}
