@@ -1,0 +1,81 @@
+{
+  "schema": "rafaelia.drive_master_index_reconciliation.v1",
+  "observed_at": "2026-08-27T07:45:00Z",
+  "claim_allowed": false,
+  "authority": "Google Drive provider identities and observed revisions",
+  "objects": [
+    {
+      "object_id": "drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "provider_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "current_revision": "105",
+      "previous_observed_revision": "97",
+      "sheet_count": 17,
+      "canonical_cell_content_sha256": "bb2c66f6f8a2f94e4906e16146e3a7bb2857de6a8e04fe06296adc425c2bf37c",
+      "canonical_cell_json_bytes": 217774,
+      "conceitos_rows_nonempty": 40,
+      "conceitos_canonical_sha256": "9d83454890d79e67036972475dacb41790d9c26bec1df02f0c5f782db4890c5a"
+    },
+    {
+      "object_id": "drive:1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "provider_id": "1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "current_revision": "4",
+      "previous_observed_revision": "2",
+      "sheet_count": 1,
+      "canonical_cell_content_sha256": "cab03ef1d315e5780278b273e22307fb5d2ffa029007d0eb0874412a46434fa8",
+      "canonical_cell_json_bytes": 13204,
+      "conceitos_rows_nonempty": 28,
+      "conceitos_canonical_sha256": "08b7026a766530a9462f6e5943f9cd8f1edef687bccadb03eee61cffa2f65de2"
+    }
+  ],
+  "observations": {
+    "same_title": true,
+    "same_provider_object": false,
+    "current_B_conceitos_equals_current_A_first_28_rows": true,
+    "A_extra_conceitos_rows": 12,
+    "A_extra_conceitos_ids": ["SEM_001","SEM_002","SEM_003","SEM_004","SEM_005","SEM_006","SEM_007","SEM_008","SEM_009","SEM_010","SEM_011","SEM_012"],
+    "A_additional_sheets_beyond_CONCEITOS": 16,
+    "creation_order_observed": "A revision 1 precedes B revision 1 by about 11.8 seconds",
+    "subsequent_revision_pattern": "A continued evolving through revision 105; B stopped at revision 4",
+    "xlsx_export_package_digest_is_not_stable_content_identity": true,
+    "xlsx_export_falsifier": "Two exports of A at the same observed revision produced different XLSX package sizes/digests; use normalized cell-content digest for current semantic-content comparison, not ZIP-package hash."
+  },
+  "safe_relation_edges": [
+    {
+      "from": "drive:1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "relation": "current_content_prefix_of",
+      "to": "drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "scope": "CONCEITOS rows 1..28",
+      "evidence": "cell-normalized exact equality"
+    }
+  ],
+  "relations_not_promoted": ["replica_of","derived_from","supersedes"],
+  "gap": {
+    "gap_id": "TV-DRIVE-MASTER-INDEX-DERIVATION-EDGE-20260827",
+    "state": "TOKEN_VAZIO_DERIVATION_EDGE_ONLY",
+    "source_pointer": "Drive provider IDs + revision lists + normalized current cell contents",
+    "missing_field": "creation/copy/move receipt or historical content witness proving causal derivation",
+    "blocking_dependency": "historical revision content or explicit predecessor/successor receipt",
+    "evidence_needed": "provider-authentic historical content/operation record linking the two objects",
+    "falsifier": "a historical revision showing incompatible origin or independent creation",
+    "next_probe": "recover creation/copy receipt or export comparable historical revision content",
+    "owner_authority": "Google Drive object/revision history",
+    "urgency": "P1",
+    "closure_gate": "causal relation may be promoted only after provider-bound historical witness",
+    "claim_allowed": false
+  },
+  "invariants": [
+    "same_title != same_object",
+    "current_content_prefix != proven_derivation",
+    "xlsx_package_hash != stable semantic content hash",
+    "absence_of_creation_receipt != evidence_of_independent_origin"
+  ],
+  "projections": {
+    "L": "revision chronology 105/97 versus 4/2 and observed creation order",
+    "O": "provider metadata plus normalized cell-content comparison",
+    "T": "Drive object identity -> Mapa typed-relation audit",
+    "C": "relation valid for current observed cell contents only",
+    "P": "provider IDs and this append-only receipt"
+  }
+}
