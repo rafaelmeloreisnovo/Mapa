@@ -1,0 +1,162 @@
+{
+  "cycle_id": "OMEGA-CYCLE-20260826T1710-0300-019",
+  "predecessor": "Mapa/main@8e2f3933e5d49cab7e36a1bbc4acbb8a4116952e",
+  "observed_interval": "2026-08-26T16:12:00-03:00/2026-08-26T17:10:53-03:00",
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "claim_allowed": false,
+  "sources": [
+    {
+      "provider": "Google Drive",
+      "id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "state": "OBSERVED"
+    },
+    {
+      "provider": "Google Drive",
+      "id": "1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og",
+      "title": "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT",
+      "revision_id": "AIroW35cEoTlGlyndWoZfxfu6ZPzQiHGu747feIgoXyihQ0Vvz8MUH5KGRFRtbP0iFje2w0ybQSIS_mJKr61nlvE4LNXNau4im-7wOqs9yQ",
+      "state": "OBSERVED"
+    },
+    {
+      "provider": "Google Drive",
+      "id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+      "title": "01_SISTEMA_CORPUS_CUSTODIA",
+      "state": "OBSERVED"
+    },
+    {
+      "provider": "Google Drive",
+      "id": "1S0DaA9ByFeL9wdPmvDgd3CCEe3Jcj7c2",
+      "title": "02_CONVERSATIONS_CORPUS",
+      "state": "OBSERVED"
+    },
+    {
+      "provider": "Google Drive",
+      "id": "19gKzpJ5_7k6rSyvbW_s4mzlpsrXfjbloHNNKT-qVpfw",
+      "title": "JOURNAL_2026-08-25_NOVOEXPORT_CUSTODY",
+      "revision_id": "AIroW36kGMvWgUQgaugIOPmJDjxvpvKCqRZA_SO_nnxxFL-TzLhFcEqR-SCC6g-qfM_Ekq5_okdpIG4RCTM8gYkY6yhoX5TLgaHAHZEN47w",
+      "state": "OBSERVED"
+    }
+  ],
+  "cursor_before": "RAW018 active G2 membership/path-size coherence; exact current provider/bytes/SHA/parse TOKEN_VAZIO",
+  "cursor_after": "current curated corpus topology inspected; 017 and 019 provider-bound in corpus; 018 not observed in corpus; route-registry stale/broken subroute IDs detected",
+  "volume": {
+    "drive_roots_read": 4,
+    "documents_read_deep": 2,
+    "neighbor_raw_objects_bound": 2,
+    "route_ids_negative_probed": 3
+  },
+  "observations": {
+    "current_corpus_neighbors": {
+      "017": {
+        "drive_file_id": "1CY52RNY6-z0yO32isQKrnC8pdVYvLuLv",
+        "bytes": 22560934,
+        "state": "OBSERVED_PROVIDER_BOUND"
+      },
+      "018": {
+        "drive_file_id": null,
+        "expected_bytes": 12115336,
+        "state": "TOKEN_VAZIO_HARD_CUSTODY"
+      },
+      "019": {
+        "drive_file_id": "1cDWWp9vmRfOXp3nca6le1feiPkk0-vvW",
+        "bytes": 16440670,
+        "state": "OBSERVED_PROVIDER_BOUND"
+      }
+    },
+    "quarantine_root": {
+      "drive_folder_id": "1q7NThjg5FBiVB8L2wNspijef25kDRCFi",
+      "direct_children_observed": ["aqui.zip"],
+      "raw018_observed": false
+    },
+    "route_registry_divergence": {
+      "registry_revision": "AIroW35cEoTlGlyndWoZfxfu6ZPzQiHGu747feIgoXyihQ0Vvz8MUH5KGRFRtbP0iFje2w0ybQSIS_mJKr61nlvE4LNXNau4im-7wOqs9yQ",
+      "registered_but_unresolvable_ids": [
+        "1F6WKviCvF86y3UJhBA3h_iQk9wk245KD",
+        "1ah5OstY5K3oPJDuDStCSD7XoKnUVpjFG",
+        "1ILDwi_A3r_93OyMiQW-BKKOu5hVVeV74"
+      ],
+      "interpretation": "BROKEN_OR_STALE_ROUTE_POINTERS; not proof of deletion or nonexistence"
+    }
+  },
+  "provenance_added": [
+    "RAW017 current curated corpus provider id + bytes",
+    "RAW019 current curated corpus provider id + bytes",
+    "RAW018 absence from observed current curated corpus surface",
+    "route registry revision-level pointer plus three failed provider-resolution probes"
+  ],
+  "contradictions": [
+    {
+      "id": "CONTR-NOVO-ROUTE-REGISTRY-20260826-001",
+      "type": "DOCUMENTED_ROUTE_VS_PROVIDER_RESOLUTION",
+      "documented": "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT lists several subroute folder IDs",
+      "observed": "three sampled listed IDs returned provider NOT_FOUND while current root/corpus IDs resolve",
+      "state": "CONTRADICTED_PARTIAL",
+      "claim_allowed": false
+    }
+  ],
+  "gaps_created": [
+    {
+      "gap_id": "TV-NOVO-ROUTE-REGISTRY-STALE-POINTERS-20260826",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og@AIroW35c...",
+      "missing_field": "current provider identity for registered subroutes",
+      "blocking_dependency": "route registry may reference moved/deleted/inaccessible predecessors",
+      "evidence_needed": "current child enumeration + successor/predecessor or move receipts",
+      "falsifier": "all registered IDs resolve and map to current intended subroutes",
+      "next_probe": "enumerate current 01_SISTEMA_CORPUS_CUSTODIA children and reconcile each registry route by fileId/title/receipt",
+      "owner_authority": "NOVOexport custody/navigation authority",
+      "urgency": "P1",
+      "closure_gate": "registered route -> current provider object or explicit superseded/moved receipt",
+      "claim_allowed": false,
+      "predecessor_lineage": "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT revision AIroW35c..."
+    }
+  ],
+  "gaps_refined": [
+    {
+      "gap_id": "TV-RAW-018-CURRENT-ID",
+      "state": "TOKEN_VAZIO_HARD_CUSTODY",
+      "source_pointer": "Drive corpus folder 1S0DaA9ByFeL9wdPmvDgd3CCEe3Jcj7c2 + custody journal 19gKzpJ5_7k6rSyvbW_s4mzlpsrXfjbloHNNKT-qVpfw",
+      "missing_field": "current raw018 provider object / bytes / SHA256 / parse / current-cardinality / raw-derived PID commitment equality",
+      "blocking_dependency": "raw018 not observed on current curated corpus surface; exact original producer/container still unbound",
+      "evidence_needed": "provider-bound object with exactly 12115336 bytes, SHA256, JSON parse, PID commitment equal to 766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+      "falsifier": "candidate object differs in size, parse, identity, or PID commitment",
+      "next_probe": "reconcile current root/corpus topology and movement receipts before wider archive search",
+      "owner_authority": "NOVOexport source/custody authority",
+      "urgency": "P0",
+      "closure_gate": "12115336 bytes -> SHA256 -> JSON parse -> PID commitment equality",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-CYCLE-20260826T1612-0300-018"
+    }
+  ],
+  "uncertainty_before_after": {
+    "before": "RAW018 provider/container unresolved; navigation map assumed usable",
+    "after": "RAW018 localized as missing on observed curated corpus surface between provider-bound neighbors; navigation map itself now has typed stale-pointer uncertainty"
+  },
+  "coverage_before_after": {
+    "raw_provider_pid_sha_cardinality_indexed": "50/51 -> 50/51",
+    "conversation_family_path_size_historical": "51/51 -> 51/51",
+    "navigation_route_validity": "unmeasured -> sampled 3 registered subroute IDs unresolved; full reconciliation pending"
+  },
+  "memory_projection": {
+    "L": "1612 G2 coherence -> 1710 current curated corpus/topology probe",
+    "O": "journal/listing evidence cross-checked against live Drive folder enumeration",
+    "T": "Drive route registry <-> current provider topology <-> Mapa receipt",
+    "C": "absence is scoped to observed current corpus/quarantine surfaces, not global nonexistence",
+    "P": "object/file IDs and contradiction/gap records preserved append-only"
+  },
+  "top_urgencies": [
+    "P0 RAW018 exact current provider/byte custody",
+    "P1 reconcile stale/broken NOVOexport route pointers",
+    "P1 bind upstream evidence receipts for shards 000..004"
+  ],
+  "next_probes": [
+    "enumerate and reconcile current 01_SISTEMA_CORPUS_CUSTODIA topology against 00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT",
+    "locate move/classification receipts that explain where conversations-018.json should reside",
+    "if exact provider object emerges: require 12115336 bytes -> SHA256 -> JSON parse -> PID commitment equality",
+    "otherwise resume upstream evidence receipt binding for 000..004 without reopening closed dimensions"
+  ],
+  "F_ok": "live corpus neighbors 017/019 provider-bound; RAW018 absence scoped; three stale/broken route pointers detected and typed",
+  "F_gap": "RAW018 current byte custody; route-registry successor/move lineage; upstream 000..004 receipt authority",
+  "F_next": "topology/receipt reconciliation -> RAW018 exact provider gate -> 000..004 upstream receipt binding"
+}
