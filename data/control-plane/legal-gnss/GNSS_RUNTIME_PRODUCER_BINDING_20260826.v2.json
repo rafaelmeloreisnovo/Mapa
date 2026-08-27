@@ -1,0 +1,112 @@
+{
+  "schema_version": "rafaelia.gnss-runtime-producer-binding/v1",
+  "binding_id": "GNSS_RUNTIME_PRODUCER_BINDING_20260826_V2",
+  "predecessor": "data/control-plane/legal-gnss/GNSS_RUNTIME_PRODUCER_BINDING_20260826.v1.json",
+  "recorded_at": "2026-08-26T21:26:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "authority": {
+    "receipt_contract": "schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json",
+    "f_next_chain": "data/control-plane/legal-gnss/F_NEXT_CONTINUOUS_EVOLUTION_20260826.v1.json",
+    "risk_model": "data/control-plane/omega-assurance/risk-vector.v1.json",
+    "provenance_sealer": "scripts/seal_gnss_runtime_evidence.py"
+  },
+  "producer": {
+    "repository": "rafaelmeloreisnovo/termux-api_rafcodephi",
+    "branch": "master",
+    "head_sha": "50cc6e8f618c70145fc2365467935d542fe8ef17",
+    "components": [
+      {
+        "path": "app/src/main/java/com/termux/api/apis/GnssReceiptCapture.java",
+        "state": "BUILD_EVIDENCED",
+        "notes": "explicit authorization; bounded capture; coordinate/NMEA/SVID/raw-value non-retention; unknown network/model/provenance states remain TOKEN_VAZIO"
+      },
+      {
+        "path": "app/src/main/java/com/termux/api/apis/LocationAPI.java",
+        "commit": "96a640a94852e3569fc737afa66f93b415645e8f",
+        "state": "BUILD_EVIDENCED",
+        "notes": "routes request=gnss-receipt only for provider=gps"
+      },
+      {
+        "path": "scripts/gnss-runtime-receipt.sh",
+        "commit": "4aa933a4b03f93d71f53246eabb5b15924c72d2a",
+        "state": "IMPLEMENTED_UNEXECUTED_ON_PHYSICAL_DEVICE",
+        "notes": "local JSON persistence plus SHA-256 sidecar; physical execution still required"
+      },
+      {
+        "path": "docs/PERMISSIONS.md",
+        "commit": "4dd81dd56e3c647ed934d885a777baa3afaf80eb",
+        "state": "DOCUMENTED"
+      }
+    ]
+  },
+  "semantic_corrections_since_v1": [
+    "APP_TO_THIRD_PARTY remains TOKEN_VAZIO without runtime packet capture",
+    "network destination/payload remain TOKEN_VAZIO without runtime packet capture",
+    "ADR presence requires Android ADR state != UNKNOWN",
+    "multipath presence requires Android multipath indicator != UNKNOWN",
+    "receipt provenance_state remains TOKEN_VAZIO until exact bytes are SHA-256 sealed and tied to source/build evidence",
+    "location-service query failure cannot be interpreted as evidence that GPS is disabled"
+  ],
+  "build_evidence": {
+    "state": "PASS",
+    "workflow": "Advanced Hardcoded CI Build",
+    "run_id": 33026629120,
+    "head_sha": "50cc6e8f618c70145fc2365467935d542fe8ef17",
+    "steps": {
+      "locked_termux_shared_publication": "PASS",
+      "debug_release_build": "PASS",
+      "arm32_arm64_validation": "PASS",
+      "internal_signing": "PASS",
+      "validation_private_key_destroyed": "PASS",
+      "checksums": "PASS",
+      "artifact_upload": "PASS"
+    },
+    "artifact": {
+      "id": 9628699094,
+      "name": "advanced-hardcoded-apks",
+      "size_bytes": 26668157,
+      "digest": "sha256:e5db2835bfa31f14bfa17aacb90c6c7723bd05ac4089715ad84148b4352447ac",
+      "expires_at": "2026-11-25T00:22:36Z"
+    }
+  },
+  "risk_state_after_build": {
+    "A": "WATCH",
+    "S": "WATCH",
+    "P": "P1",
+    "G": "WATCH",
+    "I": "CONTROLLED",
+    "V": "CONTROLLED",
+    "C": "CONTROLLED",
+    "U": "P1"
+  },
+  "runtime_evidence": {
+    "state": "TOKEN_VAZIO",
+    "f_next_stage": "FN-GNSS-002",
+    "priority": "P0",
+    "reason": "CI proves buildability of the collector but no physical Android GNSS callback/field observation has been captured yet"
+  },
+  "claim_boundary": {
+    "allowed_now": "IMPLEMENTATION_AND_BUILD_EVIDENCED",
+    "forbidden": [
+      "raw_GNSS_observed_on_physical_device",
+      "raw_GNSS_transferred_to_service_or_AI",
+      "all_supported_fields_available_on_any_device",
+      "legal_compliance_proved_by_build"
+    ]
+  },
+  "F_ok": [
+    "privacy-minimized GNSS producer implemented",
+    "exact corrected producer head built successfully",
+    "ARM32 and ARM64 APK paths validated",
+    "artifact digest recorded",
+    "provenance sealing tool prepared independently in Mapa"
+  ],
+  "F_gap": [
+    "physical Android GNSS runtime receipt",
+    "runtime receipt SHA-256 provenance seal",
+    "independent downstream boundary observations",
+    "reproducibility on a second compatible run"
+  ],
+  "F_next": "execute only FN-GNSS-002 on an authorized physical Android using the build evidenced at head 50cc6e8f618c70145fc2365467935d542fe8ef17; then seal exact receipt bytes and advance append-only"
+}
