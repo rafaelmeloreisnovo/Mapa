@@ -1,0 +1,108 @@
+{
+  "cycle_id": "OMEGA-CYCLE-20260827T0110-0300-026",
+  "observed_at": "2026-08-27T04:10:56Z",
+  "predecessor": {
+    "pr": "rafaelmeloreisnovo/Mapa#439",
+    "head": "7782e9c2618b92eec9fd8b3b298c00544f5dab6d",
+    "base_at_pr_creation": "8e2f3933e5d49cab7e36a1bbc4acbb8a4116952e"
+  },
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "sources": [
+    {"provider":"GitHub","pointer":"commit 7782e9c2618b92eec9fd8b3b298c00544f5dab6d workflow runs","state":"OBSERVED"},
+    {"provider":"GitHub","pointer":"main branch endpoint @18fb2762af1e42f83d235bc939332bd0f51db861","state":"OBSERVED"},
+    {"provider":"GitHub","pointer":".github/workflows/server-merge-enforcement-assurance.yml@7782e9c","state":"OBSERVED"},
+    {"provider":"GitHub","pointer":"scripts/check_server_merge_enforcement.py@7782e9c","state":"OBSERVED"}
+  ],
+  "cursor_before": "markdown regression fixed; remaining workflow failures unclassified; PR base drift not quantified",
+  "cursor_after": "CI and topology PASS; Promotion Control fail classified as manual-promotion hold; Server Merge Enforcement fail classified as real fail-closed governance gap; PR/base divergence quantified",
+  "workflow_evidence": {
+    "CI": {"run_id":33035706432,"conclusion":"success","classification":"PASS"},
+    "Branch Topology Gate": {"run_id":33035706423,"conclusion":"success","classification":"PASS"},
+    "RAFAELIA Promotion Control V1": {
+      "run_id":33035706429,
+      "conclusion":"failure",
+      "negative_tests":"PASS",
+      "invariants_15":"PASS",
+      "claim_allowed_false_gate":"PASS",
+      "failing_step":"Enforce manual promotion decision",
+      "classification":"EXPECTED_FAIL_CLOSED_MANUAL_PROMOTION_HOLD"
+    },
+    "Server Merge Enforcement Assurance": {
+      "run_id":33035706431,
+      "conclusion":"failure",
+      "fixtures":"PASS",
+      "failing_step":"Inspect live main branch server-side enforcement",
+      "live_branch_observation":{"protected":false,"protection_enabled":false,"required_status_checks_enforcement_level":"off","required_contexts":0},
+      "classification":"BLOCKED_REAL_SERVER_SIDE_ENFORCEMENT_GAP"
+    }
+  },
+  "base_drift": {
+    "current_main":"18fb2762af1e42f83d235bc939332bd0f51db861",
+    "current_main_observed_at":"2026-08-27T04:10:56Z",
+    "pr_head":"7782e9c2618b92eec9fd8b3b298c00544f5dab6d",
+    "merge_base":"8e2f3933e5d49cab7e36a1bbc4acbb8a4116952e",
+    "main_ahead_of_pr_head":68,
+    "main_behind_pr_head":8,
+    "compare_status":"diverged",
+    "pr_mergeable_observed":false
+  },
+  "gaps_resolved": [
+    {"gap_id":"TV-PR439-MARKDOWN-CI-REGRESSION-20260827","state":"CLOSED","evidence":"CI run 33035706432 success"},
+    {"gap_id":"TV-PR439-PROMOTION-FAILURE-CLASSIFICATION-20260827","state":"CLOSED_CLASSIFICATION_ONLY","evidence":"negative tests + 15 invariants + claim_allowed=false PASS; manual promotion decision intentionally blocks"}
+  ],
+  "gaps": [
+    {
+      "gap_id":"TV-MAPA-SERVER-MERGE-ENFORCEMENT-20260827",
+      "state":"TOKEN_VAZIO_BLOCKED_REAL_GOVERNANCE",
+      "source_pointer":"GitHub main branch endpoint + workflow run 33035706431",
+      "missing_field":"server-side branch protection and required status checks",
+      "blocking_dependency":"repository protection/ruleset configuration with appropriate authority",
+      "evidence_needed":"main protected=true plus enforced required checks observed server-side",
+      "falsifier":"main remains unprotected, enforcement_level=off, or required checks remain empty",
+      "next_probe":"inspect available rulesets/protection authority and prepare a non-destructive configuration delta; do not claim enforcement until provider confirms it",
+      "owner_authority":"GitHub repository administration",
+      "urgency":"P0",
+      "closure_gate":"server-side provider observation proves protected branch/ruleset and required checks",
+      "claim_allowed":false,
+      "predecessor_lineage":"run 33035706431 → main@18fb2762"
+    },
+    {
+      "gap_id":"TV-PR439-BASE-DIVERGENCE-20260827",
+      "state":"TOKEN_VAZIO_RECONCILIATION_REQUIRED",
+      "source_pointer":"compare 7782e9c...18fb2762",
+      "missing_field":"conflict-safe integration of 68 main-side commits with 8 PR-side commits",
+      "blocking_dependency":"base reconciliation/rebase or successor PR without losing append-only receipts",
+      "evidence_needed":"clean compare/mergeability plus rerun gates after reconciliation",
+      "falsifier":"conflicts, dropped receipts, or changed claims during reconciliation",
+      "next_probe":"inspect changed-path overlap before choosing rebase versus successor branch; preserve PR#439 as lineage if successor is safer",
+      "owner_authority":"Mapa repository governance",
+      "urgency":"P0",
+      "closure_gate":"all PR receipts preserved and reconciled against current main with CI rerun",
+      "claim_allowed":false,
+      "predecessor_lineage":"merge-base 8e2f3933 → PR head 7782e9c; current main 18fb2762"
+    }
+  ],
+  "projections": {
+    "L":"PR#439 base 8e2f3933 → head 7782e9c; main advanced to 18fb2762",
+    "O":"CI/topology independent PASS; promotion/server-enforcement fail for distinct reasons",
+    "T":"GitHub workflow evidence ↔ branch provider metadata ↔ Mapa governance receipts",
+    "C":"manual promotion hold is expected fail-closed; missing server enforcement is a real governance gap",
+    "P":"run IDs, commit SHAs, merge-base and branch observation retained append-only"
+  },
+  "coverage_before":"workflow state partially classified; base drift qualitative",
+  "coverage_after":"4/4 observed workflow conclusions classified; server enforcement state provider-bound; base divergence quantified",
+  "uncertainty_before":"two failures ambiguous; PR mergeability false without quantified lineage",
+  "uncertainty_after":"promotion failure expected by policy; server enforcement failure real; main/PR divergence = 68/8 with merge-base identified",
+  "claim_allowed_changes":[],
+  "top_urgencies":["P0 server-side merge enforcement","P0 PR#439 base reconciliation","P0 RLL bounded execution receipt","P0 RAW018 physical custody"],
+  "next_probes":[
+    "inspect current GitHub rulesets/branch-protection observability and authority; prepare safe delta only if write authority is explicit",
+    "inspect overlap between PR#439 paths and current-main changes; choose rebase versus successor PR without dropping receipts",
+    "after reconciliation rerun CI/topology/promotion/server-enforcement gates",
+    "resume RLL executable receipt and RAW018 physical custody once repository-governance regression is contained"
+  ],
+  "F_ok":"Markdown regression closed by CI success; 4 workflow outcomes classified; fail-closed promotion behavior separated from real server-enforcement gap; base drift quantified",
+  "F_gap":"server-side protection absent; PR#439 diverged from current main; RLL execution receipt and RAW018 custody remain open",
+  "F_next":"server enforcement authority/probe → PR#439 conflict-safe reconciliation → gate rerun → RLL/RAW018"
+}
