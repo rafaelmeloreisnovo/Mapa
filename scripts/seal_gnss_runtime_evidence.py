@@ -16,6 +16,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
@@ -23,6 +24,8 @@ from pathlib import Path
 from validate_gnss_runtime_receipt import ContractError, load_json, validate as validate_gnss
 
 HEX40 = re.compile(r"^[0-9a-fA-F]{40}$")
+ROOT = Path(__file__).resolve().parents[1]
+EVIDENCE_CLOSURE_VALIDATOR = ROOT / "tools" / "validate_evidence_closure.py"
 
 
 def sha256_bytes(path: Path) -> str:
@@ -181,7 +184,8 @@ def _fixture() -> dict:
 
 def self_test() -> dict:
     with tempfile.TemporaryDirectory() as td:
-        path = Path(td) / "fixture.json"
+        td_path = Path(td)
+        path = td_path / "fixture.json"
         path.write_text(json.dumps(_fixture(), sort_keys=True), encoding="utf-8")
         rec = build_record(path, "rafaelmeloreisnovo/termux-api_rafcodephi", "0" * 40)
         if rec["status"] != "EVIDENCED" or rec["claim_allowed"] is not False:
@@ -191,6 +195,28 @@ def self_test() -> dict:
         if rec["provenance"][0]["sha256"] != sha256_bytes(path):
             raise ContractError("self-test digest mismatch")
 
+        # Cross-contract gate: the specialized sealer output must also pass the
+        # existing generic append-only evidence closure validator. This prevents
+        # a local GNSS format from silently drifting away from federation rules.
+        closure_path = td_path / "closure.jsonl"
+        closure_path.write_text(
+            json.dumps(rec, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n",
+            encoding="utf-8",
+        )
+        proc = subprocess.run(
+            [sys.executable, str(EVIDENCE_CLOSURE_VALIDATOR), str(closure_path)],
+            cwd=str(ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=False,
+        )
+        if proc.returncode != 0:
+            raise ContractError(
+                "generic evidence-closure validator rejected GNSS seal: "
+                + (proc.stderr.strip() or proc.stdout.strip())
+            )
+
         rejected = 0
         for bad_commit in ("", "abc", "g" * 40, "0" * 39):
             try:
@@ -199,7 +225,7 @@ def self_test() -> dict:
                 rejected += 1
         if rejected != 4:
             raise ContractError(f"self-test rejected {rejected}/4 malformed producer commits")
-        return {"positive": 1, "negative_rejected": rejected}
+        return {"positive": 1, "negative_rejected": rejected, "closure_validator": "PASS"}
 
 
 def main(argv=None) -> int:
