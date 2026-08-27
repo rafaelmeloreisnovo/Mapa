@@ -1,0 +1,68 @@
+{
+  "schema_version": "F_NEXT_SESSION_LEDGER_V1",
+  "ledger_id": "F_NEXT_SESSION_20260826_27_V1",
+  "recorded_at": "2026-08-27T04:44:00-03:00",
+  "mode": "APPEND_ONLY",
+  "claim_allowed": false,
+  "source_scope": "conversation-session plus repository/CI artifacts created during the session",
+  "authority": {
+    "execution_repo": "rafaelmeloreisnovo/termux-api_rafcodephi",
+    "execution_commit": "84e06901b995a133aa4c63696a183f9838789474",
+    "control_plane_repo": "rafaelmeloreisnovo/Mapa",
+    "drive_index_id": "1unCKnocd5WpBD8zyvUG_MQXk-3Iku8XaqlkS3HidRPs"
+  },
+  "invariants": [
+    "VISION != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "superseded work remains in provenance history",
+    "physical observation cannot be inferred from build or implementation",
+    "user-deferred physical GNSS must not execute automatically"
+  ],
+  "current": {
+    "route": "SOFTWARE_GOVERNANCE_EVIDENCE_NONREGRESSION",
+    "physical_gnss": "DEFERRED_BY_USER",
+    "gnss_is_global_p0": false,
+    "zip_purpose": "CI_BUILD_ARTIFACT_PACKAGE",
+    "termux_shared_downloads": "~/storage/downloads",
+    "physical_sensor_access_by_fnext_api": false,
+    "network_access_by_fnext_api": false
+  },
+  "entries": [
+    {"seq":1,"event":"GNSS_CONTRACT_BOUNDARY","state":"CLOSED_PASS","detail":"GNSS receipt contract boundary closed before runtime evidence."},
+    {"seq":2,"event":"GNSS_RUNTIME_PROMOTION","state":"SUPERSEDED","detail":"FN-GNSS-002 was initially promoted as a physical-runtime next step and later recognized as an over-prioritized branch."},
+    {"seq":3,"event":"ANDROID_GNSS_API_REVIEW","state":"RECORDED","detail":"Missing raw GNSS callbacks must not be translated into a hardware-failure claim."},
+    {"seq":4,"event":"GNSS_RECEIPT_COLLECTOR","state":"IMPLEMENTED_NOT_CURRENTLY_ACTIVE","detail":"GnssReceiptCapture implemented with minimization and TOKEN_VAZIO semantics."},
+    {"seq":5,"event":"LOCATION_GNSS_DISPATCH","state":"SUPERSEDED_BY_DEFER","detail":"gnss-receipt dispatch was connected to the collector and is now fail-closed without physical capture."},
+    {"seq":6,"event":"GNSS_LOCAL_HELPER","state":"IMPLEMENTED_NOT_TO_BE_RUN","detail":"Local helper exists but is outside the active route."},
+    {"seq":7,"event":"GNSS_PERMISSION_DOCS","state":"RECORDED","detail":"Privacy/evidence boundaries and implementation/runtime/proof distinctions documented."},
+    {"seq":8,"event":"CI_BUILD","state":"PASS","detail":"Corrected termux-api_rafcodephi producer built successfully for ARM32 and ARM64."},
+    {"seq":9,"event":"BUILD_ARTIFACT_IDENTITY","state":"PASS","detail":"Actions bundle identity and SHA-256 matched independently."},
+    {"seq":10,"event":"PRODUCER_BINDING","state":"PASS_LIMITED","detail":"Source/build bound; physical runtime remained unobserved."},
+    {"seq":11,"event":"PROVENANCE_SEALER","state":"READY_AND_CI_VALIDATED","detail":"Receipt byte sealing/provenance tooling implemented and cross-validated."},
+    {"seq":12,"event":"LEGAL_GOVERNANCE_CI","state":"PASS","detail":"Falsifiability, F_next, sealer, matrix and drift gates executed."},
+    {"seq":13,"event":"GOVERNANCE_RECEIPT_V6","state":"RECORDED","detail":"V6 recorded build evidence, semantic corrections and guarded runtime gaps."},
+    {"seq":14,"event":"PHYSICAL_RUNBOOK","state":"DEFERRED_BY_USER","detail":"Fail-closed runbook exists historically but physical GNSS is not an active execution path."},
+    {"seq":15,"event":"BUILD_ARTIFACT_CATALOG","state":"PASS","detail":"APK variants, hashes, bundle digest and CI validation signer cataloged."},
+    {"seq":16,"event":"GOVERNANCE_RECEIPT_V7","state":"RECORDED","detail":"Artifact identity closed while target ABI, installed signer, runtime and reproducibility remained uncertain."},
+    {"seq":17,"event":"RECEIPT_GATE_PATH_COVERAGE","state":"PASS","detail":"data/receipts/legal changes now trigger legal governance gates."},
+    {"seq":18,"event":"DRIVE_INDEX_APPEND","state":"RECORDED","detail":"Canonical Drive integration index received append-only V6/V7 deltas."},
+    {"seq":19,"event":"BUNDLE_DELIVERED","state":"PASS","detail":"ZIP containing CI-built APK artifacts/checksums/metadata delivered."},
+    {"seq":20,"event":"TERMUX_DOWNLOAD_PATH","state":"CORRECTED","detail":"Incorrect ~/storage/download path corrected to ~/storage/downloads."},
+    {"seq":21,"event":"PRECHECK_PURPOSE","state":"CLARIFIED","detail":"ZIP/hash/ABI/signer commands were only pre-install verification."},
+    {"seq":22,"event":"GNSS_RUNTIME_HELPER_PURPOSE","state":"CLARIFIED_THEN_DEFERRED","detail":"Physical GNSS helper purpose was explained and then explicitly rejected by the user."},
+    {"seq":23,"event":"PHYSICAL_GNSS","state":"DEFERRED_BY_USER","detail":"No GPS/GNSS/raw-measurement probing belongs to the active route."},
+    {"seq":24,"event":"SCOPE_CORRECTION","state":"PASS","detail":"GNSS reclassified as a lateral/deferred branch, not the global P0."},
+    {"seq":25,"event":"ZIP_PURPOSE","state":"CLARIFIED","detail":"ZIP is a compiled termux-api_rafcodephi CI build package, not user data, backup or captured GNSS."},
+    {"seq":26,"event":"SESSION_LEDGER_API","state":"ACTIVE","detail":"Read-only FNext API added and the same session ledger mirrored to GitHub/Drive where appropriate."}
+  ],
+  "f_next": {
+    "active": "continue software/governance/evidence/non-regression work without promoting physical GNSS",
+    "forbidden_automatic_actions": [
+      "physical GNSS capture",
+      "GPS probing",
+      "raw GNSS measurement collection",
+      "forced APK installation/uninstallation",
+      "claim promotion from build to physical runtime"
+    ]
+  }
+}
