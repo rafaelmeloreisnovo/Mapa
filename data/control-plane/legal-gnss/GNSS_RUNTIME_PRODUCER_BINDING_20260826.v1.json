@@ -1,0 +1,92 @@
+{
+  "schema_version": "rafaelia.gnss-runtime-producer-binding/v1",
+  "binding_id": "GNSS_RUNTIME_PRODUCER_BINDING_20260826_V1",
+  "recorded_at": "2026-08-26T21:18:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "authority": {
+    "receipt_contract": "schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json",
+    "f_next_chain": "data/control-plane/legal-gnss/F_NEXT_CONTINUOUS_EVOLUTION_20260826.v1.json",
+    "risk_model": "data/control-plane/omega-assurance/risk-vector.v1.json"
+  },
+  "producer": {
+    "repository": "rafaelmeloreisnovo/termux-api_rafcodephi",
+    "branch": "master",
+    "head_observed": "4dd81dd56e3c647ed934d885a777baa3afaf80eb",
+    "components": [
+      {
+        "path": "app/src/main/java/com/termux/api/apis/GnssReceiptCapture.java",
+        "commit": "3372f747ca5239eaa384fbce860ab921d47c5537",
+        "role": "privacy-minimized Android GNSS field-presence and aggregate-count collector"
+      },
+      {
+        "path": "app/src/main/java/com/termux/api/apis/LocationAPI.java",
+        "commit": "96a640a94852e3569fc737afa66f93b415645e8f",
+        "role": "authorized request=gnss-receipt routing"
+      },
+      {
+        "path": "scripts/gnss-runtime-receipt.sh",
+        "commit": "4aa933a4b03f93d71f53246eabb5b15924c72d2a",
+        "role": "local receipt persistence plus SHA-256 sidecar"
+      },
+      {
+        "path": "docs/PERMISSIONS.md",
+        "commit": "4dd81dd56e3c647ed934d885a777baa3afaf80eb",
+        "role": "runtime and legal/evidence boundary documentation"
+      }
+    ]
+  },
+  "privacy_controls": {
+    "explicit_authorized_test_required": true,
+    "capture_window_bounded_ms": [1000, 15000],
+    "coordinates_retained": false,
+    "nmea_sentences_retained": false,
+    "satellite_identifiers_retained": false,
+    "raw_measurement_values_retained": false,
+    "aggregate_satellite_counts_allowed": true,
+    "network_upload_implemented": false
+  },
+  "android_api_basis": {
+    "min_sdk": 24,
+    "compile_sdk": 35,
+    "interfaces": [
+      "LocationManager.requestLocationUpdates",
+      "LocationManager.registerGnssStatusCallback",
+      "LocationManager.addNmeaListener",
+      "LocationManager.registerGnssMeasurementsCallback",
+      "GnssStatus",
+      "GnssMeasurementsEvent"
+    ],
+    "support_caveat": "not every chipset/runtime exposes raw GNSS measurements; absence must remain TOKEN_VAZIO/NOT_OBSERVED rather than being inferred as hardware failure"
+  },
+  "build_evidence": {
+    "state": "PENDING",
+    "workflow_run": 33026283832,
+    "head_sha": "4aa933a4b03f93d71f53246eabb5b15924c72d2a",
+    "observed_progress": "Android CI entered toolchain setup and locked termux-shared publication; compilation conclusion not yet observed"
+  },
+  "runtime_evidence": {
+    "state": "TOKEN_VAZIO",
+    "f_next_stage": "FN-GNSS-002",
+    "reason": "no physical Android receipt has been captured"
+  },
+  "invariants": [
+    "implementation != build_evidence",
+    "build_evidence != physical_runtime",
+    "field_presence != retained_value",
+    "local_receipt != network_transfer",
+    "claim_precision <= evidence_precision",
+    "TOKEN_VAZIO != false"
+  ],
+  "F_ok": [
+    "producer implementation bound to canonical receipt contract",
+    "explicit authorization and minimization encoded in producer",
+    "local SHA-256 helper materialized"
+  ],
+  "F_gap": [
+    "CI build conclusion",
+    "physical Android GNSS runtime receipt",
+    "boundary evidence beyond local plugin output"
+  ],
+  "F_next": "observe CI conclusion; if build passes, append a BUILD_EVIDENCED binding revision while keeping FN-GNSS-002 open until a physical authorized receipt is produced"
+}
