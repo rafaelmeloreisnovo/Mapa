@@ -1,0 +1,93 @@
+{
+  "schema_version": "rafaelia.serpent-dove-gap-metabolism-qualification-receipt/v1",
+  "receipt_id": "SERPENT_DOVE_GAP_METABOLISM_20260826_QUALIFICATION_V1",
+  "timestamp_utc": "2026-08-26T20:38:05Z",
+  "state": "CONTENT_QUALIFIED_PROMOTION_HOLD",
+  "claim_allowed": false,
+  "publication_effect": "NONE",
+  "append_only": true,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 437,
+  "qualified_head": "2af6e80d7be900478a2f9e5acf567b2835fd9c07",
+  "base_ref": "main@8e2f3933e5d49cab7e36a1bbc4acbb8a4116952e",
+  "content_gates": [
+    {"workflow": "serpent-dove-gap-metabolism-v1", "run_id": 33011357670, "conclusion": "success", "scope": "new schema/contract/registry/fixtures/tests + inherited Omega fail-closed controls"},
+    {"workflow": "omega-assurance-mesh-v1", "run_id": 33011357503, "conclusion": "success", "scope": "parent mesh structural non-regression"},
+    {"workflow": "Live Control Plane Reconciliation", "run_id": 33011357576, "conclusion": "success", "scope": "live control-plane reconciliation"},
+    {"workflow": "Branch Topology Gate", "run_id": 33011357550, "conclusion": "success", "scope": "branch topology"},
+    {"workflow": "CI", "run_id": 33011357584, "conclusion": "success", "scope": "repository CI on exact head"}
+  ],
+  "promotion_gates": [
+    {
+      "workflow": "Server Merge Enforcement Assurance",
+      "run_id": 33011357482,
+      "conclusion": "failure",
+      "classification": "EXPECTED_FAIL_CLOSED_P0",
+      "reason": [
+        "BRANCH_PROTECTION_DISABLED",
+        "PROTECTION_NOT_ENABLED",
+        "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+        "NO_REQUIRED_STATUS_CHECKS_OBSERVED"
+      ],
+      "observed": {
+        "protected": false,
+        "protection_enabled": false,
+        "required_status_check_contexts": [],
+        "required_status_check_checks": [],
+        "enforcement_level": "off"
+      },
+      "promotion_allowed": false,
+      "next_gate": "PROVE_PROMOTION_CONTROL_CONTEXT_IS_SERVER_REQUIRED_AND_ZERO_APPROVAL_MERGE_IS_BLOCKED"
+    },
+    {
+      "workflow": "RAFAELIA Promotion Control V1",
+      "run_id": 33011357491,
+      "conclusion": "failure",
+      "classification": "EXPECTED_FAIL_CLOSED_P0",
+      "negative_tests_job": "success",
+      "invariant_validation_job": "success",
+      "claim_allowed_validation": "success",
+      "blocking_reasons": ["PULL_REQUEST_DRAFT_OR_UNKNOWN", "INDEPENDENT_APPROVAL_MISSING"],
+      "observed_independent_approvals": 0,
+      "required_independent_approvals": 1,
+      "manual_merge_only": true,
+      "promotion_result": "DENIED"
+    }
+  ],
+  "qualification": {
+    "content_structural_state": "PASS_SCOPED",
+    "non_regression_state": "PASS_SCOPED",
+    "server_enforcement_state": "BLOCKED_P0",
+    "independent_review_state": "TOKEN_VAZIO",
+    "promotion_state": "HOLD",
+    "automatic_merge": false
+  },
+  "serpent_dove_interpretation": {
+    "discernment": "separate content validity from promotion authority",
+    "non_harm": "do not weaken or bypass P0 gates to obtain green status",
+    "reversibility": "keep PR draft and changes isolated; do not merge",
+    "result": "WISE_SAFE_SCOPED_HOLD"
+  },
+  "anti_overreaction": {
+    "server_enforcement_failure_is_content_regression": false,
+    "promotion_denial_is_content_regression": false,
+    "reason": "Both failures arise from predeclared non-compensatory authority/governance barriers that the new registry already classifies as P0."
+  },
+  "remaining_high_priority_gaps": [
+    "GAP-MAPA-SERVER-ENFORCEMENT",
+    "GAP-MAPA-INDEPENDENT-REVIEW-WAVE",
+    "GAP-RLL-FULL-PRIMORDIAL-VERDICT",
+    "GAP-NOVO-RAW018-CURRENT-CUSTODY",
+    "GAP-NOVO-ROUTE-POINTER-RECONCILIATION",
+    "GAP-NOVO-EXACT-ARCH-PIPELINE-FULL-RUN",
+    "GAP-NOVO-TOKEN-OCCURRENCE-OFFBY1-ROOT-CAUSE",
+    "GAP-MAPA-ONTOLOGY-REVALIDATION",
+    "GAP-MAPA-PRODUCER-CROSSFAIL-EXECUTION",
+    "GAP-RLL-BP-PERTURBATION-MICROPHYSICS",
+    "GAP-RLL-RAW-BBN-CMB-REPLAY",
+    "GAP-RLL-POST-RNG-MCMC-REFERENCE"
+  ],
+  "F_ok": "Exact-head content CI, dedicated Serpent-Dove validation, parent Omega Mesh V1, live reconciliation, branch topology and repository CI all passed in their scoped roles.",
+  "F_gap": "Server merge enforcement is demonstrably absent and independent approval is missing; producer/Drive scientific and custody gaps remain open.",
+  "F_next": "Keep PR draft/HOLD. Do not bypass governance. Append this qualification, re-run exact-head content gates after the receipt-only commit, then record the qualified state longitudinally in private Drive."
+}
