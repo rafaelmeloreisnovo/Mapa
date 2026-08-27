@@ -1,0 +1,155 @@
+{
+  "schema": "RAFAELIA_MATH_E1_PARSER_PREFLIGHT_RECEIPT_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260827T151042-0300-E1-IMPLEMENTATION-PREFLIGHT",
+  "observed_at": "2026-08-27T18:10:42Z",
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "epistemic_state": "EXECUTED_IN_ASSISTANT_SANDBOX_NOT_PROVIDER_CI",
+  "predecessor": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "commit": "deb277df5e98778935ffe95755a7b37a4ddb437d",
+    "contract_path": "data/reconciliation/OMEGA_MATH_E1_PARSER_CONTRACT_PREFLIGHT_20260827.v1.json",
+    "contract_version": "E1-CONTRACT-v1"
+  },
+  "implementation": {
+    "path": "scripts/omega_math_e1_parser_v1.py",
+    "version": "E1-PARSER-v1",
+    "sha256": "db52a63fae0bda32313bc965a0c1f5a4c81ac77c2c40c0f1e106a163bde4d171",
+    "content_addressed": true,
+    "semantic_boundary": "syntax-only; no algebraic simplification, variable renaming, domain/unit inference, E2 promotion or global-total promotion"
+  },
+  "preflight": {
+    "fixture_count": 5,
+    "pass_count": 5,
+    "fail_count": 0,
+    "all_pass": true,
+    "execution_environment": "assistant Python sandbox",
+    "provider_ci_execution": "TOKEN_VAZIO",
+    "fixtures": [
+      {
+        "fixture_id": "E1-FX-001",
+        "pass": true,
+        "left": {
+          "contract_version": "E1-CONTRACT-v1",
+          "implementation_version": "E1-PARSER-v1",
+          "input_expression_digest": "531e296be177d6e4680b11072739d2962489b90c30b082717dadb272dee40382",
+          "disposition": "AST_DIGEST",
+          "ast_serialization": "[\"equality\",[\"symbol\",\"q\"],[\"divide\",[\"sqrt\",[\"integer\",\"3\"]],[\"integer\",\"2\"]]]",
+          "ast_digest": "ea408007a4e4e9c9120b22f623835ebfc34539924d54a2351c4f8d36d47aa5e3",
+          "typed_failure_code": null
+        },
+        "right": {
+          "contract_version": "E1-CONTRACT-v1",
+          "implementation_version": "E1-PARSER-v1",
+          "input_expression_digest": "4ab50eaef66927bb82d1c74c6d2c0db8adda7e6e48d201b3a06e6b9c7a71c85e",
+          "disposition": "AST_DIGEST",
+          "ast_serialization": "[\"equality\",[\"symbol\",\"q\"],[\"divide\",[\"sqrt\",[\"integer\",\"3\"]],[\"integer\",\"2\"]]]",
+          "ast_digest": "ea408007a4e4e9c9120b22f623835ebfc34539924d54a2351c4f8d36d47aa5e3",
+          "typed_failure_code": null
+        }
+      },
+      {
+        "fixture_id": "E1-FX-002",
+        "pass": true,
+        "result": {
+          "contract_version": "E1-CONTRACT-v1",
+          "implementation_version": "E1-PARSER-v1",
+          "input_expression_digest": "9be21e29103564ee443072d0ac37b95bf7b338e68812aeb53ed5e7d57f540682",
+          "disposition": "AST_DIGEST",
+          "ast_serialization": "[\"equality\",[\"absolute_value\",[\"symbol\",\"m\"]],[\"integer\",\"42\"]]",
+          "ast_digest": "46355bf03baf1c0feb70c060b8bb41b6252d5463df59e1b2730b63ea995e3292",
+          "typed_failure_code": null
+        }
+      },
+      {
+        "fixture_id": "E1-FX-003",
+        "pass": true,
+        "result": {
+          "contract_version": "E1-CONTRACT-v1",
+          "implementation_version": "E1-PARSER-v1",
+          "input_expression_digest": "809745db6e1fffea6b8a861f928950828e9b7064e841f78233e476270805ea64",
+          "disposition": "AST_DIGEST",
+          "ast_serialization": "[\"equality\",[\"symbol\",\"A\"],[\"symbol\",\"u\"]]",
+          "ast_digest": "dc0650bba4177cdd86726c94a9a7dcbdc421b66aae8994a01c203e51d56f8e1c",
+          "typed_failure_code": null
+        }
+      },
+      {
+        "fixture_id": "E1-FX-NEG-001",
+        "pass": true,
+        "result": {
+          "contract_version": "E1-CONTRACT-v1",
+          "implementation_version": "E1-PARSER-v1",
+          "input_expression_digest": "b91cc6845ee63238b48c66205b2bdfd518cd6269230dc3f4e3a3e8e556f936d9",
+          "disposition": "TYPED_PARSE_FAILURE",
+          "ast_serialization": null,
+          "ast_digest": null,
+          "typed_failure_code": "AMBIGUOUS_IMPLICIT_MULTIPLICATION"
+        }
+      },
+      {
+        "fixture_id": "E1-FX-NEG-002",
+        "pass": true,
+        "result": {
+          "contract_version": "E1-CONTRACT-v1",
+          "implementation_version": "E1-PARSER-v1",
+          "input_expression_digest": "4340b1ffdcbb8265fb8eb05a294a2bc5290b8f25efb1e7b9033e49eb0c303a80",
+          "disposition": "TYPED_PARSE_FAILURE",
+          "ast_serialization": null,
+          "ast_digest": null,
+          "typed_failure_code": "UNBALANCED_DELIMITER"
+        }
+      }
+    ]
+  },
+  "gap_changes": [
+    {
+      "gap_id": "TV-MATH-E1-PARSER-IMPLEMENTATION",
+      "before": "TOKEN_VAZIO",
+      "after": "SOURCE_MATERIALIZED_PREFLIGHT_PASS_LOCAL_PROVIDER_CI_PENDING",
+      "closure_state": "PARTIAL",
+      "claim_allowed": false
+    }
+  ],
+  "gaps_open": [
+    {
+      "gap_id": "TV-MATH-E1-PARSER-PROVIDER-CI",
+      "source_pointer": "scripts/omega_math_e1_parser_v1.py",
+      "missing_field": "provider-bound reproducible fixture execution",
+      "blocking_dependency": "GitHub workflow/run on implementation commit",
+      "evidence_needed": "workflow/job receipt executing the five E1 fixtures against implementation digest",
+      "falsifier": "any provider execution differs from local 5/5 disposition or implementation digest mismatch",
+      "next_probe": "run/classify provider workflows and add a dedicated E1 fixture job if generic CI does not execute this parser",
+      "owner_authority": "Mapa mathematical reconciliation",
+      "urgency": "P0",
+      "closure_gate": "provider-bound 5/5 fixture execution on exact implementation digest",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MATH-E1-CANONICAL-AST",
+      "source_pointer": "indices/RAFAELIA_CALCULATION_MEMORY_INDEX_V2_20260822.md",
+      "missing_field": "356/356 E1 disposition ledger",
+      "blocking_dependency": "TV-MATH-E1-PARSER-PROVIDER-CI",
+      "evidence_needed": "356 unique E0 records each with exactly one AST_DIGEST or TYPED_PARSE_FAILURE",
+      "falsifier": "missing/duplicate disposition, parser nondeterminism, silent coercion",
+      "next_probe": "only after provider-bound preflight, run cursor-first across the 356 E0 representatives",
+      "owner_authority": "Mapa mathematical reconciliation",
+      "urgency": "P0",
+      "closure_gate": "356/356 complete deterministic disposition ledger",
+      "claim_allowed": false
+    }
+  ],
+  "uncertainty_before": "no implementation existed",
+  "uncertainty_after": "implementation source exists and passes 5/5 contract fixtures locally; provider-bound execution remains unproven",
+  "coverage_before": {
+    "e1_preflight_implementation": 0,
+    "fixtures_executed": 0
+  },
+  "coverage_after": {
+    "e1_preflight_implementation": 1,
+    "fixtures_executed_local": "5/5"
+  },
+  "F_ok": "A deterministic syntax-only E1 parser implementation is content-addressed and passes all five contract fixtures in the assistant sandbox.",
+  "F_gap": "Provider-bound fixture execution and the 356/356 E0 bulk disposition remain open; claim_allowed stays false.",
+  "F_next": "Commit implementation+receipt on a separate audit branch, open a draft PR, then classify provider workflows before any 356/356 bulk run."
+}
