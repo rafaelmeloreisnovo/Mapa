@@ -1,0 +1,135 @@
+{
+  "receipt_schema": "RAFAELIA_LEGAL_GOVERNANCE_RECEIPT_V1",
+  "receipt_id": "GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V7",
+  "predecessor_receipt": "data/receipts/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_RECEIPT_20260826_V6.json",
+  "recorded_at": "2026-08-26T21:36:00-03:00",
+  "append_only": true,
+  "claim_allowed": false,
+  "intent": "close artifact-identification uncertainty for the build-evidenced GNSS producer while preserving installed-package, signer-compatibility and physical-runtime uncertainty",
+  "artifact_catalog": {
+    "path": "data/control-plane/legal-gnss/GNSS_BUILD_ARTIFACT_CATALOG_20260826.v1.json",
+    "commit": "0b470e59c0be1abc84556b52d8f7071b4ce9bf87",
+    "producer_repository": "rafaelmeloreisnovo/termux-api_rafcodephi",
+    "producer_head": "50cc6e8f618c70145fc2365467935d542fe8ef17",
+    "workflow_run": 33026629120,
+    "bundle": {
+      "artifact_id": 9628699094,
+      "name": "advanced-hardcoded-apks",
+      "provider_digest": "sha256:e5db2835bfa31f14bfa17aacb90c6c7723bd05ac4089715ad84148b4352447ac",
+      "independently_recomputed_digest": "sha256:e5db2835bfa31f14bfa17aacb90c6c7723bd05ac4089715ad84148b4352447ac",
+      "digest_match": true
+    }
+  },
+  "apk_evidence": [
+    {
+      "abi": "arm64-v8a",
+      "kind": "debug",
+      "sha256": "586d8a776b954caadbb584dbd4455ff54050780d46c29b3832ff9b4c8dad2649"
+    },
+    {
+      "abi": "armeabi-v7a",
+      "kind": "debug",
+      "sha256": "76c6325cba0d36652c3d25760e28047e87114250e27f3f641018847328191ba7"
+    },
+    {
+      "abi": "arm64-v8a",
+      "kind": "release-ci-signed",
+      "sha256": "7965a24832695ddef3104170a85f8224bf9baff2af2c508d10087d31037c625c",
+      "signer_certificate_sha256": "4339256780facb0ee62c6b6bb972b901c5d140a9c0dc3bd595f55273821bbb68"
+    },
+    {
+      "abi": "armeabi-v7a",
+      "kind": "release-ci-signed",
+      "sha256": "a30558f97fb275259694aa39bb9d32c7f646ee38e33ad705b80448743a8f6c65",
+      "signer_certificate_sha256": "4339256780facb0ee62c6b6bb972b901c5d140a9c0dc3bd595f55273821bbb68"
+    }
+  ],
+  "signing_boundary": {
+    "ci_signer_scope": "ephemeral_internal_validation",
+    "ci_validation_private_key_destroyed": true,
+    "installed_package_signer": "TOKEN_VAZIO",
+    "update_signer_compatibility": "TOKEN_VAZIO",
+    "rule": "never infer Android update compatibility from APK hash or successful build; prove installed and candidate signing lineage first"
+  },
+  "governance_ci": {
+    "workflow": "Legal Governance Gates",
+    "run_id": 33027146521,
+    "head_sha": "0b470e59c0be1abc84556b52d8f7071b4ce9bf87",
+    "conclusion": "SUCCESS",
+    "observed_steps": {
+      "gnss_receipt_falsifiability_self_test": "PASS",
+      "f_next_continuous_evolution_self_test": "PASS",
+      "gnss_provenance_sealer_self_test": "PASS",
+      "compliance_matrix_regeneration": "PASS",
+      "generated_drift_gate": "PASS"
+    }
+  },
+  "closed_gaps": [
+    {
+      "id": "TOKEN_VAZIO_GNSS_BUILD_ARTIFACT_IDENTITY",
+      "state": "CLOSED_PASS",
+      "evidence": "provider artifact digest and independently recomputed downloaded ZIP digest match exactly; ABI-specific APK SHA-256 values are cataloged"
+    }
+  ],
+  "remaining_token_vazio": [
+    {
+      "id": "TOKEN_VAZIO_TARGET_DEVICE_ABI",
+      "state": "OPEN_EXTERNAL_RUNTIME",
+      "reason": "target ABI has not been freshly observed on the physical device for this execution chain"
+    },
+    {
+      "id": "TOKEN_VAZIO_INSTALLED_SIGNER",
+      "state": "OPEN_EXTERNAL_RUNTIME",
+      "reason": "installed Termux:API package signer has not been observed"
+    },
+    {
+      "id": "TOKEN_VAZIO_UPDATE_SIGNER_COMPATIBILITY",
+      "state": "OPEN_DEPENDENT",
+      "reason": "candidate-versus-installed signing lineage cannot be evaluated until installed signer is observed"
+    },
+    {
+      "id": "TOKEN_VAZIO_RAW_GNSS_RUNTIME",
+      "state": "OPEN_P0",
+      "reason": "no physical Android GNSS receipt exists"
+    },
+    {
+      "id": "TOKEN_VAZIO_GNSS_RECEIPT_BYTE_SEAL",
+      "state": "OPEN_DEPENDENT",
+      "reason": "provenance sealer has no physical receipt bytes yet"
+    },
+    {
+      "id": "TOKEN_VAZIO_MODEL_CONTEXT_BOUNDARY",
+      "state": "OPEN",
+      "reason": "downstream service/tool/assistant/model boundaries remain unobserved"
+    },
+    {
+      "id": "TOKEN_VAZIO_REPRODUCIBILITY",
+      "state": "OPEN",
+      "reason": "a second compatible physical execution does not exist"
+    }
+  ],
+  "invariants_enforced": [
+    "artifact_identity != installed_identity",
+    "apk_sha256 != signer_compatibility",
+    "signer_compatibility != physical_runtime",
+    "build_success != GNSS_observation",
+    "one physical observation != reproducibility",
+    "claim_precision <= evidence_precision",
+    "TOKEN_VAZIO != false"
+  ],
+  "F_ok": [
+    "exact build artifact bundle identity independently verified",
+    "ABI-specific APK hashes cataloged",
+    "CI validation signer certificate fingerprint recorded",
+    "catalog governance gate passed"
+  ],
+  "F_gap": [
+    "fresh target ABI observation",
+    "installed signer observation and compatibility gate",
+    "first physical GNSS receipt",
+    "byte-level runtime provenance seal",
+    "downstream boundary evidence",
+    "second-run reproducibility"
+  ],
+  "F_next": "on the authorized physical Android, observe ABI and installed package signer first; only if an installation path is signer-compatible use the matching build, then execute one bounded GNSS receipt, verify SHA-256, validate and seal exact bytes"
+}
