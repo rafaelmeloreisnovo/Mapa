@@ -1,0 +1,80 @@
+{
+  "schema": "RAFAELIA_SESSION_E1B_GAP_ANTI_REGRESSION_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260827T203200-0300-E1B-ANTI-REGRESSION",
+  "observed_at": "2026-08-27T20:32:00-03:00",
+  "claim_allowed": false,
+  "append_only": true,
+  "predecessor": {
+    "main_sha": "c566e3d02c7ed579ae6cf4fa9b16d6bc579454c3",
+    "pr_447_head_before": "114a2c04b32c6bcce6fbb25a5f220a7db1b7764b",
+    "session_ledger": "data/reconciliation/OMEGA_SESSION_GAP_EVOLUTION_LEDGER_20260827.v1.json"
+  },
+  "finding": {
+    "gap_id": "TV-MATH-E1-DERIVED-FORMALIZATION",
+    "prior_session_state": "TOKEN_VAZIO_6_CANDIDATES",
+    "corrected_state": "CLOSED_AS_STALE_GAP_BY_EARLIER_E1B_RECEIPT",
+    "reason": "An earlier canonical append-only receipt already materialized provenance-preserving E1B structural representations for all six candidates. The session must not count them as newly unprocessed work.",
+    "authoritative_receipt_path": "data/reconciliation/OMEGA_FORMULA_E1B_SEMANTIC_FORMALIZATION_20260822.v1.json",
+    "authoritative_receipt_blob_sha": "d22481a2678128101a467855dfc6c9dfffdcbdc6",
+    "source_main_commit_recorded_by_receipt": "44cb3cefdb0434b8f3c6f7361cb9c3850dbb7381"
+  },
+  "six_dispositions": [
+    {"id":"F01","derived_ast":"Implies(Eq(check(A,B,s,P0,P1),ok),Eq(y_hat,u))","remaining_typed_gap":"check semantics require producer definition","e2_eligible":false},
+    {"id":"F02","derived_ast":"Iff(Prime(R_n),Member(n,{1,3}))","remaining_typed_gap":"none at syntax level; novelty remains blocked","e2_eligible":"DOMAIN_NUMBER_THEORY_ONLY"},
+    {"id":"F03","derived_ast":"Eq(C(A,B),SetBuilder(j,And(WellDefined(j,A),WellDefined(j,B))))","remaining_typed_gap":"WellDefined remains uninterpreted until each domain defines test j","e2_eligible":false},
+    {"id":"F06","derived_ast":"Piecewise((A,P1),(Xor(B,phi(s)),P2_UNKNOWN),(FAIL,Otherwise))","remaining_typed_gap":"P2_UNKNOWN=TOKEN_VAZIO_SECOND_LANE_CHECK_SPEC","e2_eligible":false},
+    {"id":"F08","derived_ast":"Relation(SYNC_UNDEFINED,963,999)","remaining_typed_gap":"observable/operator and scientific support are TOKEN_VAZIO","e2_eligible":false},
+    {"id":"F10","derived_ast":"FeatureVector(HRV,GSR)","remaining_typed_gap":"numeric plus rejected; feature scaling/units undefined","e2_eligible":false}
+  ],
+  "coverage_correction": {
+    "historical_e1a_direct_or_reversible_ast": 340,
+    "historical_e1b_semantic_formalizations": 6,
+    "formula_like_structural_coverage": "346/346",
+    "typed_non_ast_objects": 10,
+    "historical_typed_route_coverage": "356/356",
+    "e1_parser_v1_reproduction_of_356": "TOKEN_VAZIO"
+  },
+  "source_topology_revalidated": {
+    "drive_spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+    "v3_sheet_role": "summary/typed-closure ledger, not 356-row object table",
+    "v3_rows_observed_with_content": 30,
+    "shard04_raw_occurrences": 208,
+    "shard04_raw_provider_bound": true,
+    "shard05_raw_expected_occurrences_from_prior receipt": 59,
+    "full_e0_unique_exact": 356,
+    "full_occurrences": 374,
+    "note": "Do not infer object-by-object V1↔V3 reconciliation from the V3 summary sheet. Reconciliation still requires reconstructing the 356 E0 representatives from S01..S05 provider-bound occurrence stores/receipts."
+  },
+  "remaining_gaps": [
+    {
+      "gap_id":"TV-MATH-E1-V1-VS-DRIVE-V3-RECONCILIATION",
+      "state":"TOKEN_VAZIO",
+      "missing_field":"356 deterministic current-parser dispositions compared to historical typed routes",
+      "blocking_dependency":"reconstruct exact 356 E0 representative list from S01..S05 without losing occurrence lineage",
+      "evidence_needed":"356/356 input digest + E1-PARSER-v1 output + historical route + comparison disposition",
+      "falsifier":"cardinality mismatch, missing representative, duplicate counted as new identity, or silent semantic coercion",
+      "next_probe":"bulk reconstruct E0 representatives from S01..S05; execute parser only after exact identity set is reproduced",
+      "urgency":"P0",
+      "claim_allowed":false
+    },
+    {
+      "gap_id":"TV-MATH-E1B-SEMANTIC-OPERATORS",
+      "state":"TOKEN_VAZIO_TYPED",
+      "missing_field":"producer/domain definitions for check, P2_UNKNOWN, WellDefined, SYNC_UNDEFINED and feature scaling",
+      "evidence_needed":"producer-bound definitions/tests",
+      "falsifier":"assigning semantics not present in producer sources",
+      "next_probe":"route each residual typed unknown to its producer/domain authority, not back to syntax parser",
+      "urgency":"P1",
+      "claim_allowed":false
+    }
+  ],
+  "anti_regression_rules": [
+    "Do not reopen the six E1B formalizations as unprocessed.",
+    "Do not claim E1-PARSER-v1 reproduced the historical 356/356 classification until executed over the exact representative set.",
+    "Do not convert typed non-AST routes or uninterpreted E1B operators into numeric/algebraic claims.",
+    "Historical classification != current parser reproduction != E2 equivalence != scientific validation."
+  ],
+  "F_ok": "The six apparent E1B gaps were falsified as stale by an earlier provenance-preserving receipt; historical typed-route coverage remains 356/356 and the current session no longer schedules redundant formalization work.",
+  "F_gap": "Current E1-PARSER-v1 object-by-object reproduction remains TOKEN_VAZIO; semantic operator definitions remain typed domain gaps.",
+  "F_next": "Reconstruct the exact 356 E0 representative set from S01..S05 provider-bound stores and then perform one deterministic bulk V1↔historical-route reconciliation."
+}
