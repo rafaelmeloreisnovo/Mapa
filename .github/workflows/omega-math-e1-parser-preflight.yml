@@ -1,0 +1,65 @@
+name: Omega Math E1 Parser Preflight
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/omega_math_e1_parser_v1.py'
+      - 'data/reconciliation/OMEGA_MATH_E1_PARSER_CONTRACT_PREFLIGHT_20260827.v1.json'
+      - 'data/reconciliation/OMEGA_MATH_E1_PARSER_PREFLIGHT_RECEIPT_20260827.v1.json'
+      - '.github/workflows/omega-math-e1-parser-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e1-parser-fixtures:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact PR source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Execute E1-CONTRACT-v1 fixtures
+        run: |
+          set -euo pipefail
+          python scripts/omega_math_e1_parser_v1.py > e1-preflight.json
+          cat e1-preflight.json
+
+      - name: Enforce deterministic fail-closed preflight
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path('e1-preflight.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          assert d['contract_version'] == 'E1-CONTRACT-v1'
+          assert d['implementation_version'] == 'E1-PARSER-v1'
+          assert d['fixture_count'] == 5
+          assert d['pass_count'] == 5
+          assert d['all_pass'] is True
+          ids = [x['fixture_id'] for x in d['fixtures']]
+          assert ids == [
+              'E1-FX-001',
+              'E1-FX-002',
+              'E1-FX-003',
+              'E1-FX-NEG-001',
+              'E1-FX-NEG-002',
+          ]
+          assert all(x['pass'] is True for x in d['fixtures'])
+          print('E1_PROVIDER_PREFLIGHT=PASS fixtures=5/5 claim_promotion=false')
+          PY
+
+      - name: Emit evidence digests
+        run: |
+          set -euo pipefail
+          sha256sum scripts/omega_math_e1_parser_v1.py e1-preflight.json
+          echo 'BOUNDARY: provider CI fixture execution is evidence for parser preflight only; it is not 356/356 E1 disposition, E2 equivalence, or global mathematical exhaustivity.'
