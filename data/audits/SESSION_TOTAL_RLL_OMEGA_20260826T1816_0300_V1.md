@@ -30,31 +30,39 @@ Este checkpoint não reduz a sessão ao RAW018. Ele preserva como linhas simult�
 ## ATLAS:X
 
 ### NOVO:X
+
 Drive-first permanece prioritário para JSON/NOVOexport. O journal `JOURNAL_2026-08-25_NOVOEXPORT_CUSTODY` e os objetos Wave2/Wave3 RAW018 são witnesses distintos. O estado consolidado mantém provider/PID/SHA/cardinality em 50/51 e RAW018 como hard-custody gap.
 
 ### L:X — longitudinal
+
 - predecessor chain: cycles Ω008..Ω020;
 - preservar commits/PRs/Drive revisions sem sobrescrever predecessor;
 - toda correção supersede semanticamente, não apaga receipt anterior.
 
 ### O:X — ortogonal
+
 Validações independentes devem separar: provider identity, hash, parse, PID commitment, CI execution, scientific falsifier, legal/provenance review.
 
 ### T:X — transversal
+
 Pontes ativas: Drive↔Mapa; Mapa↔RafPolimata↔RLL route; Templo↔legal/privacy/provenance; Estado Fractal↔execution receipts; NOVOexport↔semantic discovery/index.
 
 ### REL:X
+
 Tipos mínimos: `source_of`, `derived_from`, `replica_of`, `supersedes`, `diverged_from`, `evidenced_by`, `tested_by`, `receipt_of`, `indexed_by`, `blocks`, `unblocks`, `contradicts`, `routes_to`, `authority_for`.
 
 ### SCALE:X
+
 Projetar do META/session-total até repo/ref/path/blob, Drive file/revision, shard/PID e token/claim. Escalas não autorizam equivalência entre níveis.
 
 ### EVID:X
+
 Promoção exige fonte observável + transformação conhecida + falsificador/teste + receipt + index. CI genérica não é validação científica.
 
 ### GAP:X — backlog consolidado
 
 #### P0 — TV-RAW018-CURRENT-CUSTODY
+
 - source_pointer: Drive Wave2/Wave3 + G2 journal
 - missing: current provider, exact bytes, current SHA256, JSON parse, PID equality
 - evidence_needed: exactly 12,115,336 bytes → SHA256 → parse → 100 PID commitment → expected digest
@@ -64,6 +72,7 @@ Promoção exige fonte observável + transformação conhecida + falsificador/te
 - claim_allowed: false
 
 #### P0 — TV-NOVO-ROUTE-LINEAGE
+
 - source_pointer: `00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT`
 - observed: 9 system route IDs tested; 1 current, 8 unresolved
 - missing: predecessor→successor/move receipts for 8 route IDs
@@ -72,12 +81,14 @@ Promoção exige fonte observável + transformação conhecida + falsificador/te
 - claim_allowed: false
 
 #### P0 — TV-ACTIVE20-LICENSE-PROVENANCE
+
 - observed: 20/20 HEAD/tree exact-bound; legal clarity remains mixed
 - known priority cases: RafNet-Core incomplete MIT stub; Clay-Maths conflicting/nonstandard; Ética repo MIT core plus appended non-license content; canonical license absent in multiple repos
 - closure_gate: repo@HEAD → exact license blob/text → upstream/third-party lineage → classification → receipt
 - claim_allowed: false
 
 #### P0 — TV-RLL-AUTHORITY-BINDING
+
 - source_pointer: `workflows/RLL_SESSION_AVALANCHE_ROUTE.md`
 - observed: Mapa route explicitly says Mapa is not source authority and separates RLL physical model candidate from RafPolimata computational fan-out
 - missing: current exact RLL producer repository/ref/commit identity in accessible provider surface
@@ -88,33 +99,39 @@ Promoção exige fonte observável + transformação conhecida + falsificador/te
 - claim_allowed: false
 
 #### P1 — TV-RLL-SCIENCE-GATES
+
 - observed surfaces: Mapa RLL formula audit/postmerge governance; papers ARM32 methods evidence; ChipQuantum ISA evidence; Matemática formal invariants; llamaRafaelia RLL claim-consumer contracts
 - missing: one current federated tuple joining model claim → dataset/version → executable test → measured result → independent falsifier → receipt
 - closure_gate: immutable pins and claim-specific evidence, not documentation aggregation
 - claim_allowed: false
 
 #### P1 — TV-ESTADO-FRACTAL-HEAD-EXACT
+
 - observed: execution reached steps and passed on synthetic PR merge
 - missing: receipt executing exact intended head SHA
 - falsifier: exact-head execution fails
 - claim_allowed: false
 
 #### P1 — TV-TEMPLO-SACRED-PRIVACY-LEGAL-REVIEW
+
 - observed: modular policies and semantic expansion exist in draft PR
 - missing: article-by-article official-source matrix and legal review; software SPDX grant remains TOKEN_VAZIO
 - closure_gate: instrument→article→right/duty→subject→applicability→limit→official source→review state
 - claim_allowed: false
 
 #### P1 — TV-NOVO-000004-UPSTREAM-RECEIPTS
+
 - observed: evidence classes mapped exactly for 000..004
 - missing: upstream receipts that justify each evidence-class strength
 - claim_allowed: false
 
 #### P1 — TV-DRIVE-RECURSIVE-ENUMERATION
+
 - missing: recursive manifest provider_id→parent→revision→digest for all relevant Drive namespaces
 - claim_allowed: false
 
 #### P1 — TV-NOVO-DEEP-SEMANTIC-INGESTION
+
 - observed: custody/index coverage is not semantic ingestion
 - missing: shard-by-shard execution of discovery pipeline with source hashes, cardinalities, candidate/relation hashes and receipts
 - claim_allowed: false
