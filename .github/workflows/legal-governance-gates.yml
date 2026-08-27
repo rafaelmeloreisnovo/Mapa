@@ -8,7 +8,10 @@ on:
       - 'indices/MANIFESTO_INTEGRIDADE.yaml'
       - 'indices/MATRIZ_CONFORMIDADE.md'
       - 'schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json'
+      - 'schemas/F_NEXT_CONTINUOUS_EVOLUTION_V1.schema.json'
       - 'scripts/validate_gnss_runtime_receipt.py'
+      - 'scripts/validate_f_next_continuous_evolution.py'
+      - 'data/control-plane/legal-gnss/**'
       - 'docs/legal/**'
       - 'data/normative-graph/**'
       - '.github/workflows/legal-governance-gates.yml'
@@ -19,7 +22,10 @@ on:
       - 'indices/MANIFESTO_INTEGRIDADE.yaml'
       - 'indices/MATRIZ_CONFORMIDADE.md'
       - 'schemas/GNSS_RUNTIME_RECEIPT_V1.schema.json'
+      - 'schemas/F_NEXT_CONTINUOUS_EVOLUTION_V1.schema.json'
       - 'scripts/validate_gnss_runtime_receipt.py'
+      - 'scripts/validate_f_next_continuous_evolution.py'
+      - 'data/control-plane/legal-gnss/**'
       - 'docs/legal/**'
       - 'data/normative-graph/**'
       - '.github/workflows/legal-governance-gates.yml'
@@ -41,6 +47,9 @@ jobs:
 
       - name: GNSS receipt falsifiability self-test
         run: python3 scripts/validate_gnss_runtime_receipt.py --self-test
+
+      - name: F_next continuous evolution self-test
+        run: python3 scripts/validate_f_next_continuous_evolution.py --self-test
 
       - name: Regenerate compliance matrix
         run: python3 codigo/matriz_conformidade.py --write
