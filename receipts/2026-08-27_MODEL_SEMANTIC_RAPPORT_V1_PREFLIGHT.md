@@ -1,11 +1,14 @@
 # Model Semantic Rapport V1 — Preflight Receipt
 
 **Date:** 2026-08-27
-**State:** `STRUCTURAL_PASS_LOCAL / REMOTE_CI_PENDING / CLAIM_BLOCKED`
+**State:** `BRANCH_PUBLISHED / REMOTE_CI_PENDING / CLAIM_BLOCKED`
 **Repository:** `rafaelmeloreisnovo/Mapa`
 **Branch:** `feat/model-semantic-rapport-v1-20260827`
 **Base:** `77b4d02524b9904b669cd636fa3d498371623de5`
-**Implementation commit:** `a6cccf23706ff635b3673f19dc0aed2368e5d52e`
+**Local qualification commit:** `a6cccf23706ff635b3673f19dc0aed2368e5d52e`
+**Published implementation commit:** `4514452430789bfa5943dfa63ef0376443ecb135`
+**Published predecessor head:** `880f5fd70200493734be86d8415cbb7d4a7ab082`
+**Verified implementation tree:** `da465c74895e4fa4b29961a85684145d995b2dca`
 **Merge authorization:** absent; merge remains blocked for human review
 
 ## Scope
@@ -56,7 +59,7 @@ worktree at the exact base.
 | Revision | Tests run | Failures | Errors |
 |---|---:|---:|---:|
 | base `77b4d02` | 855 | 3 | 9 |
-| feature `a6cccf2` | 873 | 3 | 9 |
+| feature tree `da465c7` | 873 | 3 | 9 |
 
 The feature adds 18 passing tests and reproduces the same pre-existing twelve
 non-passing outcomes. Their observed classes are:
@@ -86,11 +89,11 @@ scope. It does not declare the repository-wide suite green.
 ## R3
 
 **F_ok:** the semantic/model boundary is implemented, machine-addressable,
-fail-closed and locally regression-compared.
+fail-closed, locally regression-compared and published with exact tree
+identity.
 
 **F_gap:** remote CI, independent JSON Schema engine validation and every
 provider-internal or rights claim remain unverified.
 
-**F_next:** publish the branch, open a draft PR, observe the exact GitHub run,
-then append its URL and result to the longitudinal Drive receipt without
-merging.
+**F_next:** open a draft PR, observe the exact GitHub run, then append its URL
+and result to the longitudinal Drive receipt without merging.
