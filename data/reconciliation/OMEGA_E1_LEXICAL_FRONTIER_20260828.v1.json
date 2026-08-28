@@ -1,0 +1,127 @@
+{
+  "schema": "RAFAELIA_E1_LEXICAL_FRONTIER_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260828-E1-LEXICAL-FRONTIER",
+  "claim_allowed": false,
+  "mode": "APPEND_ONLY_PROVIDER_BOUND_AUDIT",
+  "predecessor": {
+    "main_sha": "44636e2078fea5897fa533fd304eaabfffbae1a8",
+    "pr": 448,
+    "pr_head_before": "aeb7a9a988159c779ccb6798c29a8dc7cb85902a"
+  },
+  "control_book": {
+    "provider": "Google Drive",
+    "provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "role": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1"
+  },
+  "input": {
+    "provider": "Google Drive",
+    "spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+    "sheet": "E0_REPRESENTATIVES_V1_20260828",
+    "occurrences": 374,
+    "exact_e0_representatives": 356,
+    "duplicate_extra_occurrences": 18
+  },
+  "parser": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "ref": "44636e2078fea5897fa533fd304eaabfffbae1a8",
+    "path": "scripts/omega_math_e1_parser_v1.py",
+    "contract_version": "E1-CONTRACT-v1",
+    "implementation_version": "E1-PARSER-v1",
+    "boundary": "syntax-only fail-closed; AST_DIGEST or TYPED_PARSE_FAILURE"
+  },
+  "provider_scan": {
+    "surface": "all 356 Representative Expression cells",
+    "marker_matching_rows": {
+      "⊕": 7,
+      "≈": 15,
+      "∈": 19,
+      "→": 21,
+      "·": 18
+    },
+    "overlap_policy": "marker counts may overlap and MUST NOT be summed as distinct representatives",
+    "distinct_union": "TOKEN_VAZIO",
+    "interpretation": "These markers are outside the current lexical grammar and predict fail-closed UNSUPPORTED_NOTATION for matching inputs unless an earlier typed failure applies. Typed parse failure is a valid E1 disposition, not by itself a parser defect."
+  },
+  "drive_receipt": {
+    "provider_id": "1DVT_xXomTEFxh_lF7xGa9uFlhyURDAAQBkmNIXT-HSI",
+    "revision_id": "AIroW37CGk0x9jF0ipH2g_F4R-M513gFe_h8sr9I3fN414-Hqvy8J-bh1pfoXU_GN2cjQkBFwFd1jzpdZakeYq2Cb6q6gaM2wYDpERXWeMc",
+    "title": "RAFAELIA — Ω E1 Lexical Frontier Receipt — 2026-08-28"
+  },
+  "anti_regression": [
+    {
+      "gap_id": "TV-MATH-E1-DERIVED-FORMALIZATION",
+      "state": "CLOSED_AS_STALE_GAP",
+      "reason": "historical E1B receipt already materializes F01,F02,F03,F06,F08,F10; no new falsifier observed"
+    },
+    {
+      "gap_id": "TV-MATH-E0-REPRESENTATIVE-SET",
+      "state": "CLOSED_BOUNDED_PROVIDER_MATERIALIZED",
+      "reason": "356 exact representatives remain provider-materialized"
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-MATH-E1-CURRENT-REPRODUCTION",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": [
+        "Drive:E0_REPRESENTATIVES_V1_20260828",
+        "GitHub:scripts/omega_math_e1_parser_v1.py@44636e2078fea5897fa533fd304eaabfffbae1a8"
+      ],
+      "missing_field": "exactly one current E1-PARSER-v1 disposition for each of 356 representatives",
+      "blocking_dependency": "deterministic bulk execution harness/snapshot bridge from provider-bound representative table to parser",
+      "evidence_needed": "356/356 outputs with representative/input digest, AST digest or typed failure, parser/contract version, aggregate digest and receipt",
+      "falsifier": "output cardinality !=356; duplicate/missing representative identity; input digest mismatch; parser version mismatch",
+      "next_probe": "freeze/export exact 356 representative input surface and run E1-PARSER-v1 in one resumable bulk execution; compare only actual differences",
+      "owner_authority": "Mapa parser implementation + Drive bounded input ledger; scientific/domain authority separate",
+      "urgency": "P0",
+      "closure_gate": "356 unique inputs == 356 deterministic dispositions + digest-bound receipt + index/Atlas update",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "GitHub:branches/main",
+      "missing_field": "provider-side branch protection/ruleset enforcement",
+      "blocking_dependency": "repository governance configuration",
+      "evidence_needed": "provider-observed protected/ruleset state with required checks",
+      "falsifier": "main protected=false or enforcement disabled",
+      "next_probe": "inspect rulesets/protection and prepare governance delta separately from mathematical reproduction",
+      "owner_authority": "repository owner/provider",
+      "urgency": "P0-P1",
+      "closure_gate": "provider-observed server-side enforcement enabled",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MATH-GLOBAL-UNIVERSE-EXHAUSTIVITY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "bounded 49-path/S01..S05 mathematical corpus",
+      "missing_field": "independent recursive exhaustive enumeration across Drive/GitHub outside bounded denominator",
+      "blocking_dependency": "provider cursors plus identity reconciliation",
+      "evidence_needed": "independent universe coverage ledger with provider cursors/hashes",
+      "falsifier": "discovery of a mathematical source outside declared exhaustive universe",
+      "next_probe": "continue independent enumeration without promoting the 49-path corpus to global total",
+      "owner_authority": "federated Atlas/UNIVERSE_* index",
+      "urgency": "P1",
+      "closure_gate": "independent enumeration closure with provider cursors and content identities",
+      "claim_allowed": false
+    }
+  ],
+  "atlas_projection": {
+    "L": "historical E1 routes -> parser contract/preflight -> E0 representative materialization -> lexical frontier -> pending 356/356 reproduction",
+    "O": "historical Drive typed routes vs current GitHub parser grammar/execution",
+    "T": "Drive representatives <-> GitHub parser <-> receipts/PR <-> Atlas/index",
+    "C": "syntax-only fail-closed; typed failure allowed; no E2/domain/scientific promotion",
+    "P": "provider IDs, exact refs/SHAs, E0 SHA256 identities, receipts and append-only gap IDs"
+  },
+  "evolution_enclosures": [
+    "R1_IDENTITY_LINEAGE","R2_PROVENANCE_CUSTODY","R3_EXECUTION_REPRODUCTION","R4_COVERAGE_CURSOR_ANTI_REGRESSION","R5_CONTRADICTION_FALSIFIER","R6_AUTHORITY_PROMOTION_GATES","R7_ATLAS_MEMORY_L_O_T_C_P",
+    "E8_CONTENT_ADDRESSING","E9_ORPHAN_BROKEN_EDGE_SWEEP","E10_DUPLICATE_VERSION_RECONCILIATION","E11_EVIDENCE_AGE_REVALIDATION","E12_ROLLBACK_IDEMPOTENCE","E13_SHARED_OBJECT_MEMORY_PROJECTION"
+  ],
+  "coverage_before": "356 exact E0 inputs materialized; current parser corpus-level behavior unmeasured except fixtures",
+  "coverage_after": "356 exact E0 inputs retained; five guaranteed unsupported-notation marker classes quantified across full representative-expression column; actual distinct union and 356/356 dispositions remain open",
+  "uncertainty_before": "unknown whether real corpus contains notation outside E1-PARSER-v1 lexical grammar",
+  "uncertainty_after": "yes: ⊕,≈,∈,→,· are present with provider-measured row counts; overlap/distinct union and full parser outcomes remain TOKEN_VAZIO",
+  "F_ok": "full 356-input lexical probe completed; five unsupported notation classes quantified without double-counting; six historical E1B items not reopened; Drive receipt bound into GitHub custody",
+  "F_gap": "actual E1-PARSER-v1 356/356 execution remains TOKEN_VAZIO; distinct unsupported-marker union not computed; server enforcement and global exhaustivity remain independent open gaps",
+  "F_next": "freeze provider-bound 356 snapshot -> deterministic E1-PARSER-v1 bulk -> 356 dispositions -> mismatch-only reconciliation -> RECEIPT -> INDEX -> Atlas L/O/T/C/P -> MEMORY"
+}
