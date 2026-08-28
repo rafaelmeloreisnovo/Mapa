@@ -1,0 +1,116 @@
+{
+  "schema": "RAFAELIA_DRIVE_IDENTITY_RECONCILIATION_V1",
+  "cycle_id": "OMEGA-20260828-0409-DRIVE-MASTER-INDEX-IDENTITY",
+  "observed_at": "2026-08-28T04:09:03-03:00",
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "sha": "e921820de042cefea53c1c77371824664fe55e4f"
+  },
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "source": {
+    "anchor_document": {
+      "provider": "google_drive",
+      "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1"
+    },
+    "same_title_occurrences": [
+      {
+        "provider_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+        "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+        "created_at": "2026-08-23T06:25:50.458Z",
+        "updated_at": "2026-08-25T22:01:35.825Z",
+        "provider_reported_size": 65199,
+        "current_revision_id": "105",
+        "sheet_count_observed": 17,
+        "role": "EXPANDED_ACTIVE_CANDIDATE"
+      },
+      {
+        "provider_id": "1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+        "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+        "created_at": "2026-08-23T06:26:02.301Z",
+        "updated_at": "2026-08-23T06:26:03.526Z",
+        "provider_reported_size": 6818,
+        "current_revision_id": "4",
+        "sheet_count_observed": 1,
+        "role": "FROZEN_BASELINE_CANDIDATE"
+      }
+    ]
+  },
+  "evidence": {
+    "title_identity": false,
+    "provider_identity_distinct": true,
+    "shared_sheet": "CONCEITOS",
+    "shared_range_compared": "A1:Z80",
+    "baseline_rows_observed_in_frozen_occurrence": 29,
+    "baseline_rows_match_expanded_occurrence": true,
+    "expanded_occurrence_has_additional_semantic_rows": true,
+    "expanded_occurrence_has_additional_tabs": [
+      "AREAS", "FORMULAS", "PROGRAMAS", "FONTES_000_050", "RELACOES", "TOKEN_VAZIO", "STATS", "EDICOES_REVISOES", "REVISION_QUEUE_ROOT", "UNIVERSE_OBJECTS", "CONTENT_IDENTITIES", "UNIVERSE_COVERAGE", "UNIVERSE_QUEUE", "SUPERSEDED_SCOPE_20260825", "PARABOLAS_ANCORADAS", "PRANCHA_PEDAGOGICA"
+    ],
+    "revision_counts_observed": {
+      "expanded_occurrence": 13,
+      "frozen_occurrence": 3
+    }
+  },
+  "transform": {
+    "action": "CLASSIFY_WITHOUT_MERGE_OR_DELETE",
+    "identity_rule": "provider_id is occurrence identity; title is only an attribute",
+    "content_disposition": "The expanded occurrence contains the frozen occurrence's currently observed CONCEITOS baseline and has subsequently accumulated additional rows/tabs. This supports an extension relationship at the observed content surface, but does not prove provider-level copy ancestry.",
+    "relation": {
+      "type": "derived_from_candidate",
+      "from": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "to": "1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "status": "TOKEN_VAZIO_LINEAGE_PROOF",
+      "authority_promoted": false
+    }
+  },
+  "gaps": [
+    {
+      "gap_id": "TV-DRIVE-MASTER-INDEX-COPY-ORIGIN",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk + Drive:1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "missing_field": "provider-level copy/creation ancestry or an earlier receipt explicitly linking the two fileIds",
+      "blocking_dependency": "copy provenance not exposed by currently inspected metadata/revisions",
+      "evidence_needed": "receipt, event log, source copy identifier, or other provider-bound evidence proving replica_of/derived_from",
+      "falsifier": "evidence that the two files were independently generated from a third source despite matching baseline cells",
+      "next_probe": "search receipts/registries for both provider IDs and inspect creation-time provenance references",
+      "owner_authority": "Google Drive provider metadata + RAFAELIA custody registry",
+      "urgency": "P0_PROVENANCE",
+      "closure_gate": "explicit provider-bound or receipt-bound ancestry edge",
+      "claim_allowed": false,
+      "predecessor_lineage": "none observed"
+    },
+    {
+      "gap_id": "TV-DRIVE-MASTER-INDEX-CANONICAL-AUTHORITY",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "same-title Drive occurrences",
+      "missing_field": "explicit canonical authority designation",
+      "blocking_dependency": "extension/activity evidence is not authority evidence",
+      "evidence_needed": "canonical registry/receipt naming provider_id as authority",
+      "falsifier": "a registry designating the other occurrence or another object as canonical",
+      "next_probe": "query Master Navigation Registry and custody indices for the exact provider IDs",
+      "owner_authority": "RAFAELIA canonical registry",
+      "urgency": "P0_AUTHORITY",
+      "closure_gate": "provider_id appears in authoritative canonical locator with valid predecessor/receipt",
+      "claim_allowed": false,
+      "predecessor_lineage": "same-title ambiguity"
+    }
+  ],
+  "memory_projection": {
+    "L": "two distinct creation/revision timelines preserved",
+    "O": "content comparison independent from title/size metadata",
+    "T": "Drive occurrences linked to Mapa reconciliation object",
+    "C": "expanded/frozen roles are contextual dispositions, not authority claims",
+    "P": "both provider IDs preserved append-only; no deletion or merge"
+  },
+  "coverage_delta": {
+    "same_title_occurrences_unclassified_before": 2,
+    "same_title_occurrences_identity_classified_after": 2,
+    "canonical_authority_closed": false
+  },
+  "F_ok": ["distinct occurrence identities established", "shared observed baseline established", "expanded-vs-frozen contextual roles established", "no occurrence erased"],
+  "F_gap": ["exact copy ancestry", "canonical authority"],
+  "F_next": ["search exact provider IDs in Drive registries/receipts", "promote relation only if ancestry evidence appears"]
+}
