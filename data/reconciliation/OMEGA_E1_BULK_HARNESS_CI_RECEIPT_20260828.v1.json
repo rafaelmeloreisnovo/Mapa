@@ -1,0 +1,24 @@
+{
+  "schema":"RAFAELIA_E1_BULK_HARNESS_CI_RECEIPT_V1",
+  "cycle_id":"OMEGA-CONVERGENCIA-20260828-E1-BULK-HARNESS-CI",
+  "observed_at":"2026-08-28",
+  "repository":"rafaelmeloreisnovo/Mapa",
+  "pr":449,
+  "branch":"audit/e1-bulk-harness-20260828",
+  "predecessor_head":"cc1cdfd91e7aa29d19e1fd5056ca9323a8219e65",
+  "base":"main@ed8a60fce58700a49f2255782529174ca3fdf443",
+  "source_drive_receipt":{"provider_id":"1WbYglTidetSs23OzLsXlcEXksZrj-_68g1HVCPHJ4vM","title":"RAFAELIA — Ω E1 Bulk Harness Custody Receipt — 2026-08-28"},
+  "workflow_evidence":[
+    {"name":"CI","run_id":33135121821,"status":"completed","conclusion":"success"},
+    {"name":"Branch Topology Gate","run_id":33135121830,"status":"completed","conclusion":"success"},
+    {"name":"RAFAELIA Promotion Control V1","run_id":33135121757,"status":"completed","conclusion":"failure","interpretation":"promotion gate remains closed; not parser scientific failure"},
+    {"name":"Server Merge Enforcement Assurance","run_id":33135121799,"status":"completed","conclusion":"failure","interpretation":"server-side governance gap remains open"}
+  ],
+  "gap_delta":{
+    "TV-MATH-E1-BULK-HARNESS-CI":{"before":"TOKEN_VAZIO","after":"OBSERVED_PROVIDER_CI_SUCCESS","closure_boundary":"generic CI/topology evidence only; bulk 356 execution still not evidenced"},
+    "TV-MATH-E1-CURRENT-REPRODUCTION":{"state":"TOKEN_VAZIO","source_pointer":["Drive:E1_INPUT_FREEZE_V1_20260828","Mapa:scripts/omega_math_e1_parser_v1.py","Mapa:scripts/omega_math_e1_bulk_v1.py"],"missing_field":"356 deterministic current-parser dispositions with aggregate input/output digests","blocking_dependency":"provider byte export and harness execution","evidence_needed":"356 dispositions + input_tsv_sha256 + parser_sha256 + output_jsonl_sha256","falsifier":"cardinality drift, duplicate identity, digest mismatch, missing/duplicate disposition, nondeterministic rerun","next_probe":"execute frozen 356-row byte export through bulk harness","owner_authority":"Mapa producer execution + Drive frozen input authority","urgency":"P0","closure_gate":"356 unique inputs == 356 deterministic dispositions with digest-bound receipt","claim_allowed":false},
+    "TV-MAPA-MAIN-SERVER-ENFORCEMENT":{"state":"TOKEN_VAZIO","missing_field":"provider-side merge enforcement","evidence_needed":"successful Server Merge Enforcement Assurance with provider-observed protection/ruleset","urgency":"P0-P1","claim_allowed":false}
+  },
+  "atlas":{"L":"E0 freeze -> lexical frontier -> bulk harness -> provider CI -> bulk execution pending","O":"generic CI/topology independent from scientific reproduction","T":"Drive frozen identities <-> GitHub harness <-> Actions evidence <-> receipts","C":"harness materialized and CI-observed; not yet 356/356 executed","P":"provider IDs, run IDs, commit SHAs, gap IDs append-only"},
+  "claim_allowed":false
+}
