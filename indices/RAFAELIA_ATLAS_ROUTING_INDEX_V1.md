@@ -54,3 +54,33 @@ This index augments, not replaces:
 `VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM`
 
 Missing material evidence remains `TOKEN_VAZIO`.
+
+## Route append — `ATLAS:AGC-20260828`
+
+State: `EVIDENCE_FIRST / APPEND_ONLY / claim_allowed=false`
+
+| Axis | Route |
+|---|---|
+| Atlas delta | `indices/deltas/ATLAS_ARCHAEOASTRONOMY_GEOMETRY_CALENDAR_ROUTE_20260828.md` |
+| Producer | `rafaelmeloreisnovo/papers/papers/archaeoastronomy_geometry_calendar_invariants_v1/paper.md` |
+| Drive artifact | `1sJjCYjPrRw4fIHV3hgIhVaoB3UN_sl0kv1dnXQkthko` |
+| Longitudinal | `L:AGC-20260828` |
+| Orthogonal | `O:AGC-20260828` |
+| Transversal | `T:AGC-20260828` |
+
+Hard evidence boundaries:
+
+- `equal-angle != equal-time` for elliptic `e>0` unless an explicit time map is supplied;
+- seasonal anchors are `2 solstices + 2 equinoxes`;
+- Stonehenge solstitial evidence does not promote an equinox/12-sector calendar claim;
+- Giza cardinal-orientation evidence does not promote a precise Orion-intent claim;
+- symbolic-only evidence has `evidence_weight=0`.
+
+Open `TOKEN_VAZIO` nodes:
+
+- `Shichokawa` entity resolution;
+- Giza–Orion intentional blueprint;
+- calendrical/astronomical function of the Twelve-Angled Stone;
+- specific `7D Sasakian / 3-Sasakian` tensor and integrability conditions.
+
+Next gates: `AGC-G1..AGC-G7`.
