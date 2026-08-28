@@ -1,0 +1,129 @@
+{
+  "schema": "rafaelia.raw018_gmail_byte_witness.v1",
+  "cycle_id": "OMEGA-20260828T2043-0300-RAW018-GMAIL-CUSTODY-CLOSURE",
+  "observed_at": "2026-08-28T20:43:00-03:00",
+  "state": "VERIFIED_LIMITED_APPEND_ONLY",
+  "claim_allowed": false,
+  "source_mutation_allowed": false,
+  "default_branch_write_performed": false,
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "branch": "audit/atlas-novo-drive-upgrade-20260828t2013-0300",
+    "head_sha": "8a25f021245eae90fb176a4711ae0ed8b7dfa5dc",
+    "receipt": "data/reconciliation/ATLAS_NOVO_DRIVE_UPGRADE_GATE_20260828T2013_0300.v1.json"
+  },
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "source": {
+    "provider": "Gmail",
+    "provider_message_id": "1a04ab3abe6e46a2",
+    "attachment_name": "conversations-018.json",
+    "mime_type": "application/json",
+    "size_bytes": 12115336,
+    "privacy": "RAW_CONTENT_NOT_PUBLISHED"
+  },
+  "custody_mirror": {
+    "provider": "GoogleDrive",
+    "file_id": "1OlI3sq78ZiPtnYNZtsNn0hJNyCJ9jxRa",
+    "name": "conversations-018.gmail-witness-20260828.json",
+    "role": "CHAIN_OF_CUSTODY_MIRROR_NOT_SOURCE_AUTHORITY"
+  },
+  "byte_evidence": {
+    "sha256": "3cf4783727feb5c53868af76d6e2de660e2287c2cb075180a6aad2738b10140c",
+    "json_parse": "PASS",
+    "root_type": "list",
+    "conversation_count": 100,
+    "unique_conversation_ids": 100,
+    "mapping_nodes": 3204,
+    "messages_with_payload": 3104,
+    "user_messages": 1497,
+    "assistant_messages": 1607
+  },
+  "gap_disposition": [
+    {
+      "gap_id": "TV-RAW-018-CURRENT-PROVIDER",
+      "before": "TOKEN_VAZIO_HARD_CUSTODY",
+      "after": "CLOSED_BY_GMAIL_ATTACHMENT_WITNESS"
+    },
+    {
+      "gap_id": "TV-RAW-018-CURRENT-BYTES",
+      "before": "TOKEN_VAZIO_HARD_CUSTODY",
+      "after": "CLOSED_BY_EXACT_SIZE_12115336"
+    },
+    {
+      "gap_id": "TV-RAW-018-CURRENT-SHA256",
+      "before": "TOKEN_VAZIO_HARD_CUSTODY",
+      "after": "CLOSED_BY_BYTE_SHA256"
+    },
+    {
+      "gap_id": "TV-RAW-018-CURRENT-JSON-PARSE",
+      "before": "TOKEN_VAZIO_HARD_CUSTODY",
+      "after": "CLOSED_BY_FAIL_CLOSED_PARSE_PASS"
+    },
+    {
+      "gap_id": "TV-RAW-018-CURRENT-CARDINALITY",
+      "before": "TOKEN_VAZIO_HARD_CUSTODY",
+      "after": "CLOSED_BY_100_ROOT_OBJECTS_AND_100_UNIQUE_IDS"
+    }
+  ],
+  "historical_pid_commitment": {
+    "wave3_receipt_drive_id": "1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+    "candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "candidate_chronological_sha256": "c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706",
+    "equality_to_current_witness": "TOKEN_VAZIO_ALGORITHM_PROVENANCE",
+    "reason": "public Wave3 receipt preserves commitments but does not specify the exact canonical serialization/hash procedure required for a reproducible equality test"
+  },
+  "successor_gap": {
+    "gap_id": "TV-RAW-018-PID-COMMITMENT-ALGORITHM-PROVENANCE",
+    "state": "TOKEN_VAZIO",
+    "source_pointer": [
+      "Drive:1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "Gmail:message:1a04ab3abe6e46a2/attachment:conversations-018.json",
+      "Drive:custody:1OlI3sq78ZiPtnYNZtsNn0hJNyCJ9jxRa"
+    ],
+    "missing_field": "canonical serialization/hash algorithm used for historical candidate_set_sha256",
+    "blocking_dependency": "Wave3 generator/procedure provenance or original private hash-set artifact",
+    "evidence_needed": "exact deterministic procedure sufficient to recompute the historical commitment from the current 100 IDs",
+    "falsifier": "canonical recomputation differs from 766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "next_probe": "recover Wave3 commitment generator/procedure or original private hash-set artifact and recompute against this byte witness",
+    "owner_authority": "NOVOexport custody / Wave3 PID reconciliation",
+    "urgency": "P0",
+    "closure_gate": "CANONICAL_ALGORITHM_RECOVERED + CURRENT_PID_COMMITMENT_RECOMPUTED + EQUALITY_PASS",
+    "claim_allowed": false
+  },
+  "coverage_delta": {
+    "metric": "CURRENT_BYTE_BACKED_SHARD_CUSTODY",
+    "before": {"closed": 50, "total": 51},
+    "after": {"closed": 51, "total": 51},
+    "scope": "MIXED_PROVIDER_CUSTODY",
+    "boundary": "the original Drive conversation source folder remains distinct from the Gmail recovery witness; 51/51 shard custody does not imply 15439/15439 object coverage"
+  },
+  "message_projection_delta": {
+    "direct_raw018_conversations": 100,
+    "direct_raw018_mapping_nodes": 3204,
+    "direct_raw018_messages": 3104,
+    "legacy_projection_generator_state": "TOKEN_VAZIO",
+    "interpretation": "direct shard evidence reduces coverage uncertainty but does not replace or certify the legacy MESSAGES/NODES projection generator"
+  },
+  "anti_regression": [
+    "GMAIL_ATTACHMENT_WITNESS_NE_ORIGINAL_DRIVE_SOURCE_OCCURRENCE",
+    "DRIVE_CUSTODY_MIRROR_NE_SOURCE_AUTHORITY_REPLACEMENT",
+    "BYTE_CUSTODY_CLOSED_NE_HISTORICAL_PID_COMMITMENT_EQUALITY_CLOSED",
+    "SHARD_CUSTODY_51_OF_51_NE_NOVOEXPORT_OBJECT_COVERAGE_15439_OF_15439",
+    "DIRECT_RAW018_MESSAGE_COUNTS_NE_LEGACY_PROJECTION_GENERATOR_REPRODUCTION",
+    "CLAIM_ALLOWED_FALSE"
+  ],
+  "memory_projection": {
+    "L": "hard custody gap -> Gmail byte witness -> Drive custody mirror -> this receipt",
+    "O": "current byte evidence and historical PID commitment remain independent validation axes",
+    "T": "Gmail witness <-> Drive custody <-> Mapa receipt <-> NOVOexport shard slot 018",
+    "C": "closure is limited to current byte custody and direct cardinality/message observations",
+    "P": "provider message id, custody file id, byte SHA256 and receipt path are stable anchors"
+  },
+  "F_ok": "RAW018 current provider/bytes/SHA256/JSON parse/cardinality gaps closed by a direct byte-backed Gmail witness; custody mirror persisted in Drive; current shard custody metric reaches 51/51 across mixed providers.",
+  "F_gap": "Historical PID commitment equality remains TOKEN_VAZIO until its canonical algorithm/procedure provenance is recovered; legacy message projection generator and 15439-object upgrade coverage remain open.",
+  "F_next": [
+    "recover Wave3 PID commitment generator/procedure or original private hash-set artifact and recompute equality",
+    "continue message projection using stable IDs without treating direct RAW018 counts as generator reproduction",
+    "continue cursor-first per-object NOVOexport disposition toward 15439/15439"
+  ]
+}
