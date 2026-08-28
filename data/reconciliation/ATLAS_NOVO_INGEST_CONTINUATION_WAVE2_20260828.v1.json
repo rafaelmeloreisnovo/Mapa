@@ -1,0 +1,107 @@
+{
+  "schema": "rafaelia.atlas_novo_ingest_continuation_wave2.v1",
+  "generated_at": "2026-08-28",
+  "state": "VERIFIED_LIMITED_APPEND_ONLY",
+  "claim_allowed": false,
+  "source_mutation_allowed": false,
+  "predecessor": {
+    "receipt": "data/reconciliation/ATLAS_NOVO_INGEST_RECONCILIATION_20260828.v1.json",
+    "commit": "dc46b697b0223a2c6687f4951673bceaa9205cb8",
+    "drive_receipt": "1J_P0c9NMDlIAru8IYaRn6fmtp6YRaLi2A0oPDuUvrvo"
+  },
+  "raw018": {
+    "logical_path": "conversations-018.json",
+    "historical_size_bytes": 12115336,
+    "existence_path_size_state": "EVIDENCED",
+    "pid_set_state": "EVIDENCED_RECONCILED_100_PRIVACY_PRESERVING",
+    "candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "sibling_parent_id": "1S0DaA9ByFeL9wdPmvDgd3CCEe3Jcj7c2",
+    "raw017_provider_id": "1CY52RNY6-z0yO32isQKrnC8pdVYvLuLv",
+    "raw019_provider_id": "1cDWWp9vmRfOXp3nca6le1feiPkk0-vvW",
+    "current_exact_name_in_sibling_parent": "NOT_EXPOSED",
+    "current_exact_name_global_nontrashed": "NOT_EXPOSED",
+    "current_exact_name_global_trashed": "NOT_EXPOSED",
+    "movement_receipt_in_current_inventory": "NOT_EXPOSED",
+    "interpretation": "SEARCH_AND_PARENT_MISS_DO_NOT_PROVE_DELETE_MOVE_RENAME_OR_GLOBAL_ABSENCE",
+    "current_provider_bytes_sha_parse": "TOKEN_VAZIO_HARD_CUSTODY",
+    "successor_gap": "TV-RAW-018-CURRENT-LOCATOR-PROVENANCE"
+  },
+  "message_projection": {
+    "provider_folder_id": "1X-L89NlStIAHNx6fvWVPixiWFKIbeBvt",
+    "messages_range_observed": "00001..00019",
+    "nodes_range_observed": "00001..00019",
+    "messages_00020_current_exact_artifact": "NOT_OBSERVED",
+    "known_records": 91232,
+    "known_conversations": 1000,
+    "next_requirement": "LOCATE_OR_RECONSTRUCT_PROJECTION_GENERATOR_AND_CONTINUE_IDEMPOTENTLY",
+    "successor_gap": "TV-MESSAGES-PROJECTION-GENERATOR"
+  },
+  "all_token_v1": {
+    "tokens_literal_sum": 44185627,
+    "token_source_counts_sum": 44185627,
+    "source_manifest_sum": 44185627,
+    "embedded_source_manifest_sum": 44185627,
+    "literal_mismatches": 0,
+    "source_mismatches": 0,
+    "embedded_manifest_mismatches": 0,
+    "frozen_scalar": 44185626,
+    "frozen_scalar_state": "SUPERSEDED_FOR_METRIC",
+    "canonical_detailed_metric": 44185627,
+    "generator_root_cause": "TOKEN_VAZIO_NOT_LOCATED",
+    "generator_search_result": "RECONCILER_STATUS_RECEIPTS_FOUND_ORIGINAL_V1_GENERATOR_NOT_FOUND_IN_INSPECTED_VERSIONED_SOURCES",
+    "successor_gap": "TV-TOKEN-OCCURRENCE-GENERATOR-PROVENANCE"
+  },
+  "longitudinal_root_revisions": {
+    "total_physical_revisions": 164,
+    "resolved_successor": 17,
+    "pending_successor": 147,
+    "next_pair": "32->33",
+    "classified_deltas": [
+      {
+        "from": "26",
+        "to": "29",
+        "state": "CONTENT_DIFF_VERIFIED_SEMANTIC_DELTA",
+        "summary": "Adds PR #76 MHEL post-gate receipt: nominal completed/failure with two jobs observed_steps=0, missing/empty logs and zero artifacts; remains TOKEN_VAZIO_EXECUTION_NOT_OBSERVED, not CODE_FAILURE."
+      },
+      {
+        "from": "29",
+        "to": "30",
+        "state": "CONTENT_DIFF_VERIFIED_SEMANTIC_DELTA",
+        "summary": "Adds General CI completion: run 30299475037 completed/failure, job 90088594199 observed_steps=0, zero artifacts; root cause UNKNOWN_UNKNOWN and execution remains unobserved."
+      },
+      {
+        "from": "30",
+        "to": "32",
+        "state": "CONTENT_DIFF_VERIFIED_SEMANTIC_DELTA",
+        "summary": "Adds SUOmega V1 canonical append spanning infrastructure, public procurement, market and vector-forest framing; claim_allowed remains false."
+      }
+    ]
+  },
+  "master_index_materialization": {
+    "spreadsheet_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+    "revision_queue_updated": ["29", "30", "32"],
+    "new_gap_ids": [
+      "TV-RAW-018-CURRENT-LOCATOR-PROVENANCE",
+      "TV-MESSAGES-PROJECTION-GENERATOR",
+      "TV-TOKEN-OCCURRENCE-GENERATOR-PROVENANCE"
+    ],
+    "append_only": true
+  },
+  "guards": [
+    "SEARCH_MISS_NE_GLOBAL_ABSENCE",
+    "DERIVED_ORDINAL_NE_RAW_SOURCE_ORDINAL",
+    "NOMINAL_WORKFLOW_FAILURE_WITH_ZERO_STEPS_NE_CODE_FAILURE",
+    "FROZEN_V1_NE_DESTRUCTIVE_REWRITE",
+    "DETAILED_METRIC_NE_GENERATOR_CAUSAL_PROOF",
+    "CLAIM_ALLOWED_FALSE"
+  ],
+  "F_ok": "RAW018 locator uncertainty narrowed, message projection boundary materialized, ALL_TOKEN metric reconciled at 44185627, and root revision classification advanced to 17/164.",
+  "F_gap": "RAW018 current provider/bytes/SHA/parse, projection generator, ALL_TOKEN V1 generator provenance, and 147 root revision diffs remain open.",
+  "F_next": [
+    "trace RAW018 provider activity or alternate-name/content witness without inferring deletion",
+    "locate or reconstruct message/node projection generator and continue with stable-ID dedup receipts",
+    "recover ALL_TOKEN generator provenance or build deterministic V2 differential receipt",
+    "classify root revision 32->33",
+    "continue Drive/GitHub deep-content queues"
+  ]
+}
