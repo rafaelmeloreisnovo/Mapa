@@ -1,0 +1,48 @@
+{
+  "schema": "rafaelia.phase-0-remote-publication-receipt/v1",
+  "receipt_id": "PHASE-0-REMOTE-PUBLICATION-20260828",
+  "observed_at": "2026-08-28T04:55:03Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "phase-0-reconciliation-20260828",
+  "source_head": "33035dd2c275948226e033c07a107df36b6efaab",
+  "base_head": "ed8a60fce58700a49f2255782529174ca3fdf443",
+  "predecessor_local_receipt": {
+    "path": "data/audits/phase_0_reconciliation_20260828.json",
+    "local_source_head": "429e43cd8052804a782ecc5e1b713d6e32e6f11f"
+  },
+  "claim_allowed": false,
+  "status": "PUBLISHED_WITH_OPEN_FINDINGS",
+  "published_delta": {
+    "files_added_before_this_receipt": 8,
+    "files_deleted": 0,
+    "files_modified_before_this_receipt": 0,
+    "tree_base_preserved": true,
+    "method": "GitHub Git objects API: blobs -> tree(base_tree) -> commit -> branch ref"
+  },
+  "strict_foundation": {
+    "status": "PASS",
+    "foundation_gates": "5/5",
+    "support_checks": "4/4",
+    "adversarial_tests": "11/11",
+    "secret_hygiene": "10/10"
+  },
+  "security": {
+    "status": "PASS_WITH_OPEN_FINDINGS",
+    "hard_failures": [],
+    "unpinned_remote_action_references": 44
+  },
+  "non_regression": {
+    "historical_106_scope": "TOKEN_VAZIO",
+    "full_suite_pre_delta": "873 collected; 3 failures; 9 errors",
+    "full_suite_post_delta": "884 collected; 3 failures; 9 errors",
+    "interpretation": "11 new Phase 0 tests added without increasing the known failure/error signature; full suite remains non-green"
+  },
+  "f_ok": "Phase 0 strict foundation is published on a branch with remote SHA custody and claim_allowed=false",
+  "f_gap": [
+    "44 action references require immutable SHA pinning",
+    "106-test historical scope remains unreproduced",
+    "full suite retains 3 failures and 9 errors",
+    "physical runtime, server-side merge enforcement, and global exhaustivity remain open"
+  ],
+  "f_next": "open a draft PR for human review; run the new workflow; then address action pinning and recover the 106-test manifest"
+}

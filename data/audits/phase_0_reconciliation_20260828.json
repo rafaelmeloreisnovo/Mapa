@@ -1,0 +1,94 @@
+{
+  "schema": "rafaelia.phase-0-reconciliation-receipt/v1",
+  "receipt_id": "PHASE-0-RECONCILIATION-20260828",
+  "observed_at": "2026-08-28T04:55:03Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "phase-0-reconciliation-20260828",
+  "source_head": "429e43cd8052804a782ecc5e1b713d6e32e6f11f",
+  "predecessor": {
+    "main": "ed8a60fce58700a49f2255782529174ca3fdf443",
+    "provider_reference_pr449": "c08ccc61b163b30d293c714f2279ad5fc0be172a"
+  },
+  "claim_allowed": false,
+  "status": "IMPLEMENTED_WITH_OPEN_FINDINGS",
+  "strict_foundation": {
+    "status": "PASS",
+    "foundation_gates": {
+      "total": 5,
+      "passed": 5,
+      "failed": 0
+    },
+    "support_checks": {
+      "manifest_contract": "PASS",
+      "documentation": "PASS",
+      "token_locations": "PASS",
+      "audit_logs": "PASS"
+    },
+    "observations": 8,
+    "lanes": 5,
+    "token_vazio_entries": 4,
+    "unique_evidence_ids": 16,
+    "audit_logs": 5
+  },
+  "security": {
+    "status": "PASS_WITH_OPEN_FINDINGS",
+    "secret_exposure": "PASS",
+    "file_permissions": "PASS",
+    "dependency_surface": "PASS",
+    "action_pinning": "PASS_WITH_OPEN_FINDINGS",
+    "unpinned_remote_action_references": 44,
+    "hard_failures": []
+  },
+  "tests": {
+    "phase_0_adversarial": {
+      "command": "python -m unittest -v tests.test_phase_0_foundation_v2",
+      "collected": 11,
+      "passed": 11,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "secret_hygiene": {
+      "command": "python tests/test_secret_hygiene.py",
+      "collected": 10,
+      "passed": 10,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "full_current_suite": {
+      "command": "python -m unittest discover -s tests -p 'test*.py' -q",
+      "pre_delta_observed": {
+        "collected": 873,
+        "failures": 3,
+        "errors": 9,
+        "source": "PR449 comparison checkout c08ccc61b163b30d293c714f2279ad5fc0be172a"
+      },
+      "post_delta_observed": {
+        "collected": 884,
+        "failures": 3,
+        "errors": 9,
+        "new_tests": 11
+      },
+      "exit_code": 1,
+      "interpretation": "No additional full-suite failure or error was observed; the full suite is not green."
+    },
+    "historical_106_scope": {
+      "status": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "reason": "No reproducible test manifest or command maps the historical 106 count to the current checkout."
+    }
+  },
+  "append_only_delta": {
+    "files_added": 7,
+    "files_deleted": 0,
+    "files_modified": 0,
+    "historical_artifacts_rewritten": false
+  },
+  "f_ok": "strict Phase 0 structure, five foundation gates, adversarial tests, and four security surfaces were executed and recorded",
+  "f_gap": [
+    "44 remote GitHub Actions remain unpinned by immutable SHA",
+    "historical 106/106 non-regression scope is not reproducible",
+    "current full suite retains 3 failures and 9 errors",
+    "physical runtime, provider-side merge enforcement, and global exhaustivity remain outside this phase"
+  ],
+  "f_next": "publish the branch as a draft PR, run the provider workflow, then address action pinning and recover the 106-test manifest through a separate reviewed change"
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/phase-0-foundation-manifest.v1.schema.json",
+  "title": "RAFAELIA Phase 0 Foundation Manifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "manifest_id",
+    "repository",
+    "claim_allowed",
+    "claim_state",
+    "required_documentation",
+    "token_vazio_entries",
+    "gates",
+    "audit_logs",
+    "security_audits",
+    "non_regression",
+    "append_only"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.phase-0-foundation-manifest/v1"
+    },
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "claim_state": {
+      "type": "object",
+      "required": [
+        "expected",
+        "files"
+      ],
+      "properties": {
+        "expected": {
+          "const": false
+        },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "required_documentation": {
+      "type": "array",
+      "minItems": 4
+    },
+    "token_vazio_entries": {
+      "type": "array",
+      "minItems": 4
+    },
+    "gates": {
+      "type": "object",
+      "required": [
+        "evidence_uniqueness",
+        "lane_dag",
+        "observation_coverage"
+      ]
+    },
+    "audit_logs": {
+      "type": "array",
+      "minItems": 5
+    },
+    "security_audits": {
+      "type": "array",
+      "minItems": 4
+    },
+    "non_regression": {
+      "type": "object",
+      "required": [
+        "requested_test_count",
+        "status",
+        "claim_allowed"
+      ]
+    },
+    "append_only": {
+      "type": "object",
+      "required": [
+        "deletions_allowed",
+        "historical_artifacts_rewritten"
+      ],
+      "properties": {
+        "deletions_allowed": {
+          "const": false
+        },
+        "historical_artifacts_rewritten": {
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "schema": "rafaelia.phase-0-foundation-manifest/v1",
+  "manifest_id": "PHASE-0-FOUNDATION-20260828",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "baseline": {
+    "base_branch": "main",
+    "base_sha": "ed8a60fce58700a49f2255782529174ca3fdf443",
+    "provider_reference_head": "c08ccc61b163b30d293c714f2279ad5fc0be172a",
+    "scope": "documentation-validation-audit-security",
+    "claim_allowed": false
+  },
+  "claim_allowed": false,
+  "claim_state": {
+    "expected": false,
+    "files": [
+      "data/control-plane/current_state_snapshot.v1.json",
+      "data/control-plane/module_registry.v1.json"
+    ]
+  },
+  "required_documentation": [
+    {
+      "id": "DOC-ARCO7",
+      "path": "docs/ARCO_7_ROUTING_EDGE_PROTOCOL.md",
+      "markers": [
+        "ARCO 7",
+        "Falsifier"
+      ]
+    },
+    {
+      "id": "DOC-OBSERVATIONS",
+      "path": "docs/OBSERVATIONS_MAPPING_MATRIX.md",
+      "markers": [
+        "Observations Mapping Matrix",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "DOC-LANES",
+      "path": "docs/LANES_TOUCHPOINTS_CATALOG.md",
+      "markers": [
+        "Lanes Touchpoints Catalog",
+        "Lane R5"
+      ]
+    },
+    {
+      "id": "DOC-REFERENCE-CARD",
+      "path": "docs/FRAMEWORK_REFERENCE_CARD.md",
+      "markers": [
+        "Complete Reference Card",
+        "8 Fundamental Observations"
+      ]
+    }
+  ],
+  "token_vazio_entries": [
+    {
+      "id": "TV-PHASE0-O8-DEVICE-RUNTIME",
+      "status": "TOKEN_VAZIO",
+      "source": {
+        "path": "data/control-plane/module_registry.v1.json",
+        "marker": "MOD-TERMUX-INTEGRATION"
+      },
+      "approval_location": {
+        "path": "docs/LANES_TOUCHPOINTS_CATALOG.md",
+        "marker": "Lane R5: Device Runtime (BLOCKED)"
+      },
+      "falsifier": "A reproducible physical-device or emulator receipt with ABI, artifact digest, command, exit status, and observed runtime log.",
+      "next_verifiable_step": "Run the Termux/device lane and append an execution-bound receipt.",
+      "claim_allowed": false
+    },
+    {
+      "id": "TV-PHASE0-O3-ANDROID-SDK",
+      "status": "TOKEN_VAZIO",
+      "source": {
+        "path": "docs/OBSERVATIONS_MAPPING_MATRIX.md",
+        "marker": "O3 |"
+      },
+      "approval_location": {
+        "path": "docs/OBSERVATIONS_MAPPING_MATRIX.md",
+        "marker": "Tier 2: Compilation Gates"
+      },
+      "falsifier": "A provider-observed SDK/NDK provisioning receipt with exact versions and a successful environment probe.",
+      "next_verifiable_step": "Provision or observe the pinned Android SDK/NDK environment and append its receipt.",
+      "claim_allowed": false
+    },
+    {
+      "id": "TV-PHASE0-O7-ABI-CONTRACT",
+      "status": "TOKEN_VAZIO",
+      "source": {
+        "path": "data/control-plane/TOKEN_VAZIO_GATE_TRANSITIONS_20260821.v1.json",
+        "marker": "GAP-ANDROIDX-ABI-VALIDATION-MISSING"
+      },
+      "approval_location": {
+        "path": "docs/OBSERVATIONS_MAPPING_MATRIX.md",
+        "marker": "O7 |"
+      },
+      "falsifier": "Compiled artifact and ABI contract produce a matching provider-bound compatibility receipt.",
+      "next_verifiable_step": "Execute the ABI validator against a digest-bound compiled artifact and retain both result and falsifier log.",
+      "claim_allowed": false
+    },
+    {
+      "id": "TV-PHASE0-INDEPENDENT-REPLICATION",
+      "status": "TOKEN_VAZIO",
+      "source": {
+        "path": "docs/OBSERVATIONS_MAPPING_MATRIX.md",
+        "marker": "Pathway C: Recovery"
+      },
+      "approval_location": {
+        "path": "docs/OBSERVATIONS_MAPPING_MATRIX.md",
+        "marker": "Pathway C: Recovery"
+      },
+      "falsifier": "An independent environment reproduces the bounded result and supplies an independent receipt.",
+      "next_verifiable_step": "Configure a secondary execution environment and append an independent replication receipt.",
+      "claim_allowed": false
+    }
+  ],
+  "gates": {
+    "evidence_uniqueness": {
+      "files": [
+        "data/control-plane/evidence_pointer_registry.v1.json"
+      ],
+      "key": "evidence_id"
+    },
+    "lane_dag": {
+      "nodes": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "dependencies": {
+        "R1": [],
+        "R2": [],
+        "R3": [
+          "R1",
+          "R2"
+        ],
+        "R4": [
+          "R3"
+        ],
+        "R5": [
+          "R3"
+        ]
+      }
+    },
+    "observation_coverage": {
+      "path": "docs/OBSERVATIONS_MAPPING_MATRIX.md",
+      "observations": [
+        "O1",
+        "O2",
+        "O3",
+        "O4",
+        "O5",
+        "O6",
+        "O7",
+        "O8"
+      ]
+    }
+  },
+  "audit_logs": [
+    {
+      "id": "AUDIT-GIT-COMMITS",
+      "path": "data/audits/git-audit.jsonl",
+      "format": "jsonl",
+      "minimum_records": 1
+    },
+    {
+      "id": "AUDIT-VALIDATION-RUNS",
+      "path": "data/audits/validation-runs.jsonl",
+      "format": "jsonl",
+      "minimum_records": 1
+    },
+    {
+      "id": "AUDIT-WORKFLOW-METADATA",
+      "path": "data/audits/workflow-runs-metadata.json",
+      "format": "json",
+      "minimum_records": 1
+    },
+    {
+      "id": "AUDIT-RECEIPT-VERIFICATION",
+      "path": "data/audits/receipt-verification-timeline.jsonl",
+      "format": "jsonl",
+      "minimum_records": 1
+    },
+    {
+      "id": "AUDIT-SCHEMA-VERSIONS",
+      "path": "data/audits/schema-versions.json",
+      "format": "json",
+      "minimum_records": 1
+    }
+  ],
+  "security_audits": [
+    {
+      "id": "S1-01",
+      "name": "secret-exposure",
+      "tool": "tools/phase_0_security_audit_v2.py"
+    },
+    {
+      "id": "S1-02",
+      "name": "file-permissions",
+      "tool": "tools/phase_0_security_audit_v2.py"
+    },
+    {
+      "id": "S1-03",
+      "name": "action-pinning",
+      "tool": "tools/phase_0_security_audit_v2.py"
+    },
+    {
+      "id": "S1-04",
+      "name": "dependency-surface",
+      "tool": "tools/phase_0_security_audit_v2.py"
+    }
+  ],
+  "non_regression": {
+    "requested_test_count": 106,
+    "status": "TOKEN_VAZIO",
+    "reason": "The historical 106-test scope is not mapped to a reproducible command in the current checkout.",
+    "targeted_command": "python -m unittest -v tests.test_phase_0_foundation_v2 && python tests/test_secret_hygiene.py",
+    "claim_allowed": false
+  },
+  "append_only": {
+    "deletions_allowed": false,
+    "historical_artifacts_rewritten": false
+  }
+}
