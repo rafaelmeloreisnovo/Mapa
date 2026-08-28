@@ -1,0 +1,97 @@
+{
+  "schema": "RAFAELIA_E0_REPRESENTATIVE_MATERIALIZATION_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260828-E0-REPRESENTATIVES-MATERIALIZATION",
+  "claim_allowed": false,
+  "contract": ["SOURCE","TRANSFORM","CLAIM","TEST_EVIDENCE","RECEIPT","INDEX","MEMORY"],
+  "predecessor": {
+    "main_sha": "c566e3d02c7ed579ae6cf4fa9b16d6bc579454c3",
+    "pr_447_prior_head": "7754800f6bc3fdbe2a631fe73618c8d39a43abbb",
+    "historical_e0_receipt": "data/reconciliation/OMEGA_FORMULA_DIGEST_REVALIDATION_E0_S01_S05_20260822.v1.json"
+  },
+  "drive": {
+    "spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+    "sheet": "E0_REPRESENTATIVES_V1_20260828",
+    "sheet_id": 1901877287,
+    "receipt_document_id": "15UcT50rYFxe09h9t-JyRTPxw8BOBg3926npa3xCzTvU",
+    "receipt_revision_id": "AIroW35IvgxHflLfVxh8KKMhaMwaxWfyhtVmNUARyCEIz5WthGYDCP652WyG86Qm-JcrMr9NRuD4ks7OZ0isfEJjr-kB75zg6tWM1WB8jUI"
+  },
+  "sources": {
+    "S01_S03": "DIGEST_REVALIDATION using Recomputed SHA256 NFC+trim",
+    "S04": "SHARD04_RAW",
+    "S05": "SHARD05_RAW"
+  },
+  "materialization": {
+    "occurrence_columns": ["Shard","Record ID","Normalized Expression","E0 SHA256"],
+    "representative_key": "E0 SHA256 only",
+    "merge_by_title": false,
+    "merge_by_filename": false,
+    "semantic_dedup": false,
+    "source_mutation": false,
+    "historical_receipt_mutation": false
+  },
+  "validation": {
+    "occurrence_count": 374,
+    "expected_occurrence_count": 374,
+    "unique_e0_sha256": 356,
+    "expected_unique_e0_sha256": 356,
+    "duplicate_extra_occurrences": 18,
+    "expected_duplicate_extra_occurrences": 18,
+    "state": "PASS_BOUNDED_PROVIDER_MATERIALIZED"
+  },
+  "correction_event": {
+    "initial_transform": "single-cell VSTACK/SORTN materialization",
+    "initial_result": "FORMULA_PARSE_ERROR",
+    "counted_as_progress": false,
+    "correction": "column-wise ARRAYFORMULA projections followed by provider-side cardinality validation",
+    "final_result": "PASS"
+  },
+  "atlas": {
+    "L": "S01..S05 extraction -> digest correction -> bounded 374/356 receipt -> navigable representative materialization",
+    "O": "GitHub historical receipt and Drive provider-side materialization independently agree on 374/356/18",
+    "T": "DIGEST_REVALIDATION + SHARD04_RAW + SHARD05_RAW -> E0_REPRESENTATIVES_V1_20260828 -> GitHub receipt",
+    "C": "frozen bounded E0 textual identity only; E1 current reproduction remains open",
+    "P": "Drive provider_id/sheet_id/revision + Git commit/receipt append-only custody anchors"
+  },
+  "gap_updates": [
+    {
+      "gap_id": "TV-MATH-E0-REPRESENTATIVE-SET",
+      "state": "CLOSED_BOUNDED_PROVIDER_MATERIALIZED",
+      "closure_gate": "374 occurrences and 356 unique E0 SHA256 with 18 duplicate extras provider-validated",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MATH-E1-CURRENT-REPRODUCTION",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": ["Drive:E0_REPRESENTATIVES_V1_20260828","Mapa:scripts/omega_math_e1_parser_v1.py"],
+      "missing_field": "356 current E1-PARSER-v1 dispositions",
+      "blocking_dependency": "execution path consuming exact representative expressions",
+      "evidence_needed": "356/356 deterministic AST_DIGEST|TYPED_PARSE_FAILURE outputs with parser/input/output digests",
+      "falsifier": "missing or duplicated E0 identity, cardinality != 356, or nondeterministic repeat",
+      "next_probe": "run E1-PARSER-v1 against the exact 356 representative rows",
+      "owner_authority": "Mapa parser implementation + Drive E0 source ledger",
+      "urgency": "P0",
+      "closure_gate": "356/356 dispositions + digest-bound receipt + index update",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+      "state": "TOKEN_VAZIO",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TV-MATH-GLOBAL-UNIVERSE-EXHAUSTIVITY",
+      "state": "TOKEN_VAZIO",
+      "claim_allowed": false
+    }
+  ],
+  "invariants": [
+    "E0 exact identity != E1 AST equivalence",
+    "bounded 49-path corpus != global Drive/GitHub exhaustivity",
+    "index != authority",
+    "absence of evidence != evidence of absence",
+    "claim_allowed=false"
+  ],
+  "F_ok": "The exact bounded denominator is now provider-materialized and navigable in Drive: 374 occurrences -> 356 E0 identities -> 18 duplicate extra occurrences.",
+  "F_gap": "Current E1-PARSER-v1 bulk reproduction over the exact 356 representatives remains TOKEN_VAZIO; server-side enforcement and global exhaustivity remain independent open gaps.",
+  "F_next": "Consume the exact 356 representative rows with E1-PARSER-v1, emit deterministic typed dispositions, compare only against historical typed routes, then update receipt/index/memory without claim promotion."
+}
