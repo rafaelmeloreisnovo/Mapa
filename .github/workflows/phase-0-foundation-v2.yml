@@ -1,0 +1,86 @@
+name: Phase 0 Foundation V2
+
+"on":
+  pull_request:
+    paths:
+      - "data/control-plane/phase_0_foundation_manifest.v1.json"
+      - "schemas/phase-0-foundation-manifest.v1.schema.json"
+      - "scripts/validate_phase_0_foundation_v2.py"
+      - "tools/phase_0_security_audit_v2.py"
+      - "tests/test_phase_0_foundation_v2.py"
+      - "docs/PHASE_0_RECONCILIATION_20260828.md"
+      - ".github/workflows/phase-0-foundation-v2.yml"
+  push:
+    paths:
+      - "data/control-plane/phase_0_foundation_manifest.v1.json"
+      - "schemas/phase-0-foundation-manifest.v1.schema.json"
+      - "scripts/validate_phase_0_foundation_v2.py"
+      - "tools/phase_0_security_audit_v2.py"
+      - "tests/test_phase_0_foundation_v2.py"
+      - "docs/PHASE_0_RECONCILIATION_20260828.md"
+      - ".github/workflows/phase-0-foundation-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase-0-foundation-v2
+  cancel-in-progress: false
+
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Validate manifest and foundation gates
+        run: |
+          set -euo pipefail
+          python scripts/validate_phase_0_foundation_v2.py \
+            --manifest data/control-plane/phase_0_foundation_manifest.v1.json \
+            --receipt build/phase-0-foundation-validation.json
+
+      - name: Run explicit security audits
+        run: |
+          set -euo pipefail
+          python tools/phase_0_security_audit_v2.py \
+            --output build/phase-0-security-audit.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt = json.loads(Path("build/phase-0-security-audit.json").read_text())
+          assert receipt["claim_allowed"] is False
+          assert receipt["status"] in {"PASS", "PASS_WITH_OPEN_FINDINGS"}
+          assert not receipt["summary"]["hard_failures"]
+          PY
+
+      - name: Run Phase 0 adversarial tests
+        run: |
+          set -euo pipefail
+          python -m unittest -v tests.test_phase_0_foundation_v2
+          python tests/test_secret_hygiene.py
+
+      - name: Enforce no deletions in pull-request delta
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if git diff --name-status "$BASE_SHA" "$HEAD_SHA" | awk '$1 ~ /^D/ { print; bad=1 } END { exit bad }'; then
+            echo "append-only deletion check: PASS"
+          else
+            echo "append-only deletion check: FAIL"
+            exit 1
+          fi
