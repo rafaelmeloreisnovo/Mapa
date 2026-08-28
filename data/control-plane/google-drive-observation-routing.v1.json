@@ -1,0 +1,64 @@
+{
+  "schema": "rafaelia.google_drive_observation_routing.v1",
+  "generated_at": "2026-08-28",
+  "state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "source_mutation_allowed": false,
+  "authority": {
+    "mapa": "ONTOLOGY_ATLAS_IDENTITY_RELATIONS_ROUTING",
+    "core": "INSTITUTIONAL_POLICY_FENCES_WATCHDOG",
+    "drive": "PRIVATE_EDITORIAL_SOURCE_AND_CUSTODY",
+    "rll": "SCIENTIFIC_PRODUCER_WHEN_DOMAIN_ROUTED",
+    "runtime": "EXECUTION_ONLY_WITH_RUNTIME_RECEIPT"
+  },
+  "references": {
+    "invariant_of_invariants": "data/control-plane/invariant-of-invariants-omega.v1.json",
+    "invariant_index": "indices/INVARIANTE_DAS_INVARIANTES_OMEGA_V1.md",
+    "core_contract": "github:instituto-Rafael/RAFAELIA_CORE:governance/google_drive_observation_analysis_protocol.v1.json",
+    "drive_procedure_document_id": "19PYVBAfaCfTDOOnXmYnTp7MbEU38Crc4hRaW5APgeg4",
+    "drive_custody_folder_id": "1inKEWLBwvOuAo3lh-AEMtg48EhXeaIBZ"
+  },
+  "boundary": "OBSERVATION != INTERPRETATION != PATTERN_CANDIDATE != INVARIANT_CANDIDATE != VALIDATION != EXECUTION != EVIDENCE != CLAIM",
+  "atlas_macros": {
+    "ATLAS:X":"select route by authority and evidence",
+    "NOVO:X":"prefer provider-bound NOVOexport evidence when in scope",
+    "L:X":"compare same logical identity longitudinally",
+    "O:X":"test independent orthogonal axes without authority collapse",
+    "T:X":"cross typed transverse relations",
+    "REL:X":"preserve relation type, direction, provenance and falsifier",
+    "SCALE:X":"track scale from meta to niche/token/yocto only when defined",
+    "EVID:X":"separate observation, evidence, execution and claim",
+    "GAP:X":"persist TOKEN_VAZIO with next gate",
+    "LEARN:X":"append-only delta, contradiction and supersession"
+  },
+  "route_table": [
+    {"class":"PI-IDENTITY","primary":"Mapa","required":["provider_id","logical_id","identity_falsifier"]},
+    {"class":"PI-CUSTODY","primary":"Drive+Mapa","required":["locator","revision","hash_or_TOKEN_VAZIO","lineage"]},
+    {"class":"PI-STRUCTURE","primary":"Mapa","required":["schema_or_structure","version_scope","counterexample"]},
+    {"class":"PI-TEMPORAL","primary":"Mapa","required":["same_identity","comparable_revisions","freshness_basis"]},
+    {"class":"PI-SEMANTIC","primary":"Mapa","required":["definition","occurrence_provenance","semantic_falsifier"]},
+    {"class":"PI-RELATIONAL","primary":"Mapa","required":["typed_relation","independent_support","directionality"]},
+    {"class":"PI-NUMERIC","primary":"producer-by-domain","required":["semantics","units","representation_or_quantization","numeric_falsifier"]},
+    {"class":"PI-BEHAVIORAL","primary":"runtime-producer","required":["executable","environment","input_hash","output_receipt","reproduction"]},
+    {"class":"PI-SCIENTIFIC","primary":"scientific-producer","required":["hypothesis_or_model","baseline","falsifier","likelihood_or_declared_test","independent_evidence"]}
+  ],
+  "observation_record_required": [
+    "observation_id","provider_id","logical_id","source_surface","source_family","locator","revision","content_hash","parent_hash","capture_time","privacy_class","authority_role","observation_type","extracted_features","relations","invariant_candidates","falsifiers","contradictions","uncertainty","risk","evidence_state","claim_allowed","rollback_locator","receipt_locator","next_gate"
+  ],
+  "guards": {
+    "private_body_to_public_repo": "DENY",
+    "same_filename_identity": "DENY",
+    "timestamp_only_freshness": "DENY",
+    "frequency_to_truth": "DENY",
+    "code_to_execution": "DENY",
+    "symbolic_formula_to_physical_law": "DENY",
+    "self_replication_to_independence": "DENY",
+    "silent_conflict_replacement": "DENY",
+    "drive_observation_to_autonomous_source_write": "DENY"
+  },
+  "closing_contract": {
+    "F_ok": "observed and gate-passed facts only",
+    "F_gap": "TOKEN_VAZIO, contradictions and external dependencies",
+    "F_next": "next verifiable test bound to authority and close condition"
+  }
+}

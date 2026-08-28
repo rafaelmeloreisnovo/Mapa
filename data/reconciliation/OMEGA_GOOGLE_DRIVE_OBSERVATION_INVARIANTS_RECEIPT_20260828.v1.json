@@ -1,0 +1,55 @@
+{
+  "schema": "rafaelia.omega.google_drive_observation_invariants_receipt.v1",
+  "generated_at": "2026-08-28",
+  "state": "ROUTING_MATERIALIZED_PROMOTION_BLOCKED_BY_EXISTING_GOVERNANCE",
+  "claim_allowed": false,
+  "base": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "sha": "0bde6a76c82bf524a5ab217516036a68c5df633c"
+  },
+  "pull_request": 452,
+  "artifacts": [
+    "data/control-plane/google-drive-observation-routing.v1.json",
+    "indices/GOOGLE_DRIVE_OBSERVATION_INVARIANTS_ATLAS_V1.md"
+  ],
+  "upstream_policy": {
+    "repo": "instituto-Rafael/RAFAELIA_CORE",
+    "pull_request": 6,
+    "merge_sha": "d5a42902c2310c221d1b2643324dd70c0fd70d71",
+    "contract": "governance/google_drive_observation_analysis_protocol.v1.json",
+    "ci": "SUCCESS"
+  },
+  "drive": {
+    "native_procedure_document_id": "19PYVBAfaCfTDOOnXmYnTp7MbEU38Crc4hRaW5APgeg4",
+    "deployment_receipt_document_id": "1WXa3TJGNf-rpMpM4uP5_Am7xoAi9tgVarI-cTvM7BNA",
+    "custody_folder_id": "1inKEWLBwvOuAo3lh-AEMtg48EhXeaIBZ"
+  },
+  "extends": [
+    "data/control-plane/invariant-of-invariants-omega.v1.json",
+    "indices/INVARIANTE_DAS_INVARIANTES_OMEGA_V1.md"
+  ],
+  "observed_pr_gates": {
+    "CI": "SUCCESS",
+    "Live Control Plane Reconciliation": "SUCCESS",
+    "Branch Topology Gate": "SUCCESS",
+    "RAFAELIA Promotion Control V1": "BLOCKED_INDEPENDENT_APPROVAL_MISSING",
+    "Server Merge Enforcement Assurance": "BLOCKED_MAIN_UNPROTECTED_REQUIRED_CHECKS_NOT_ENFORCED"
+  },
+  "promotion_boundary": {
+    "promotion_allowed": false,
+    "required_independent_approvals": 1,
+    "observed_independent_approvals": 0,
+    "server_branch_protection_observed": false,
+    "next_gate": "INDEPENDENT_APPROVAL_AND_SERVER_SIDE_PROTECTION_BINDING"
+  },
+  "guarantees": {
+    "parallel_ontology_created": false,
+    "private_drive_body_published": false,
+    "scientific_claim_promoted": false,
+    "runtime_claim_promoted": false,
+    "source_mutation_performed": false,
+    "TOKEN_VAZIO_preserved": true,
+    "F_ok_F_gap_F_next_required": true
+  }
+}
