@@ -1,0 +1,115 @@
+{
+  "schema": "RAFAELIA_E1_INPUT_FREEZE_LEXICAL_UNION_V1",
+  "cycle_id": "OMEGA-CONVERGENCIA-20260828-E1-INPUT-FREEZE-LEXICAL-UNION",
+  "observed_at_utc": "2026-08-28T01:15:26Z",
+  "claim_allowed": false,
+  "mode": "APPEND_ONLY_PROVIDER_BOUND_DERIVATION",
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "pr": 448,
+    "base_main_sha": "44636e2078fea5897fa533fd304eaabfffbae1a8",
+    "head_sha": "6c14ad86056d8d64e2d08269b8fcd1e5b0efb129",
+    "drive_prior_lexical_receipt": "1DVT_xXomTEFxh_lF7xGa9uFlhyURDAAQBkmNIXT-HSI"
+  },
+  "drive": {
+    "spreadsheet_id": "1HDaHo5IBj42rr-iyxftG1zfaEzzCI9xC4s_0W_-1vR8",
+    "source_sheet": {"title":"E0_REPRESENTATIVES_V1_20260828","sheet_id":1901877287},
+    "derived_input_sheet": {"title":"E1_INPUT_FREEZE_V1_20260828","sheet_id":927119691},
+    "receipt_document_id": "1wc6K9iNR3NW-EEBNitgv3Q--qVTfxQFZRo8q77yNR3o",
+    "receipt_revision_id": "AIroW35E1MRQpNfb9v7mnanP2j2lg1A4kFkJ2DybcL7WbkhOqI66Nk_9GZgs-EYDHaCyHSJikMCteODQ13XWnOHjZbOOkIf3LJ5B79uC04c"
+  },
+  "transform": {
+    "source_cardinality": 356,
+    "source_identity": "Representative SHA256",
+    "lexical_predicate": "contains any of ⊕|≈|∈|→|·",
+    "first_attempt": {
+      "state": "FAILED_NOT_COUNTED",
+      "reason": "comma-separated Google Sheets formulas produced #ERROR! under pt_BR locale",
+      "observed_bad_metrics": {"input_count":1,"distinct_sha256":1,"lexical_union_distinct":"ERROR"}
+    },
+    "corrected_attempt": {
+      "state": "REVALIDATED",
+      "change": "formula argument separators changed from comma to semicolon",
+      "input_count": 356,
+      "distinct_sha256": 356,
+      "lexical_union_distinct": 78
+    }
+  },
+  "boundary": [
+    "derived view is provider-materialized and reproducible but formula-linked, not immutable byte export",
+    "lexical union measurement is not E1-PARSER-v1 execution",
+    "tracked marker presence does not guarantee a specific final typed failure code",
+    "historical typed routing != current parser reproduction != E2 equivalence != scientific validation",
+    "claim_allowed=false"
+  ],
+  "anti_regression": {
+    "bounded_e0": "374 occurrences -> 356 exact E0 identities -> 18 duplicate extras remains closed",
+    "six_e1b": "F01,F02,F03,F06,F08,F10 remain CLOSED_AS_STALE_GAP; no new falsifier observed",
+    "lexical_union_gap": "TOKEN_VAZIO -> MEASURED_78_OF_356"
+  },
+  "gaps": [
+    {
+      "gap_id":"TV-MATH-E1-CURRENT-REPRODUCTION",
+      "state":"TOKEN_VAZIO",
+      "source_pointer":["Drive:E1_INPUT_FREEZE_V1_20260828#927119691","GitHub:scripts/omega_math_e1_parser_v1.py"],
+      "missing_field":"one deterministic E1-PARSER-v1 disposition for each of 356 representative SHA256 identities",
+      "blocking_dependency":"provider-bound bulk harness or deterministic exported-input execution path",
+      "evidence_needed":"356/356 rows containing contract/implementation version, input digest, AST digest or typed failure, aggregate digest and receipt",
+      "falsifier":"input cardinality != 356, duplicate/missing identity, or nondeterministic disposition on identical input/parser version",
+      "next_probe":"execute parser once per representative identity and reconcile output against historical typed routing",
+      "owner_authority":"Mapa parser implementation + Drive bounded input ledger; scientific authority remains separate",
+      "urgency":"P0",
+      "closure_gate":"356 unique inputs == 356 deterministic dispositions, receipt-bound and indexed",
+      "claim_allowed":false,
+      "predecessor_lineage":"6c14ad86056d8d64e2d08269b8fcd1e5b0efb129"
+    },
+    {
+      "gap_id":"TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+      "state":"TOKEN_VAZIO",
+      "source_pointer":"GitHub:main branch/rulesets",
+      "missing_field":"provider-observed required branch/ruleset enforcement",
+      "blocking_dependency":"repository governance configuration",
+      "evidence_needed":"GitHub protection/ruleset state with required checks enforced",
+      "falsifier":"main unprotected or enforcement disabled",
+      "next_probe":"re-read main branch protection/rulesets and prepare governance change separately if authorized",
+      "owner_authority":"repository owner/provider",
+      "urgency":"P0-P1",
+      "closure_gate":"provider-observed server-side enforcement enabled",
+      "claim_allowed":false
+    },
+    {
+      "gap_id":"TV-MATH-GLOBAL-UNIVERSE-EXHAUSTIVITY",
+      "state":"TOKEN_VAZIO",
+      "source_pointer":"bounded 49-path S01..S05 corpus",
+      "missing_field":"independent exhaustive enumeration beyond bounded corpus",
+      "blocking_dependency":"recursive provider enumeration and identity reconciliation",
+      "evidence_needed":"independent universe cursor/coverage ledger with source hashes and provider cursors",
+      "falsifier":"discovery of eligible mathematical source outside enumerated universe",
+      "next_probe":"continue independent Drive/GitHub universe enumeration after P0 E1 reproduction gate",
+      "owner_authority":"federated Atlas/universe index",
+      "urgency":"P1",
+      "closure_gate":"independently closed enumeration with provider cursors/hashes",
+      "claim_allowed":false
+    }
+  ],
+  "atlas_projection": {
+    "L":"E0 extraction -> exact dedup -> 356 representatives -> lexical scan -> 356 input derived view -> parser bulk pending",
+    "O":"Drive bounded input identity vs GitHub current parser implementation vs historical E1 typed routing",
+    "T":"Drive sheet <-> parser <-> receipts <-> PR #448 <-> Atlas/universe indexes",
+    "C":"syntax-only fail-closed; 78/356 contain tracked outside-grammar markers; exact final dispositions pending execution",
+    "P":"Drive provider/sheet IDs + SHA256 E0 identities + Git ref/SHA + append-only receipt/gap IDs"
+  },
+  "F_ok":[
+    "duplicate hourly automation disabled; canonical hourly automation preserved",
+    "356/356 provider-materialized input identities revalidated",
+    "distinct lexical union measured at 78/356",
+    "pt_BR formula failure recorded and corrected rather than hidden",
+    "Drive receipt created and revision-bound"
+  ],
+  "F_gap":[
+    "current E1-PARSER-v1 execution remains 0/356 at this closure gate",
+    "server-side enforcement remains open until provider revalidation",
+    "global mathematical-universe exhaustivity remains open"
+  ],
+  "F_next":"execute E1-PARSER-v1 over 356 exact identities -> deterministic disposition ledger -> receipt -> UNIVERSE/INDEX -> Atlas L/O/T/C/P -> MEMORY; reconcile only actual differences"
+}
