@@ -1,0 +1,39 @@
+name: Uncertainty Risk Ratchet
+
+"on":
+  push:
+    paths:
+      - 'data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json'
+      - 'data/reconciliation/OMEGA_UNCERTAINTY_RISK_RATCHET_20260829.v1.json'
+      - 'scripts/check_markdown_debt_ratchet.py'
+      - 'scripts/validate_uncertainty_risk_ratchet.py'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/uncertainty-risk-ratchet.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json'
+      - 'data/reconciliation/OMEGA_UNCERTAINTY_RISK_RATCHET_20260829.v1.json'
+      - 'scripts/check_markdown_debt_ratchet.py'
+      - 'scripts/validate_uncertainty_risk_ratchet.py'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/uncertainty-risk-ratchet.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ratchet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install pinned markdownlint
+        run: npm install -g markdownlint-cli2@0.23.2
+      - name: Validate evidence authority and protected uncertainty
+        run: python3 scripts/validate_uncertainty_risk_ratchet.py
+      - name: Enforce historical Markdown debt no-increase ratchet
+        run: python3 scripts/check_markdown_debt_ratchet.py

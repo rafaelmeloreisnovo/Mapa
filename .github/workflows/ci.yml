@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout without persistent credentials
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -41,8 +41,8 @@ jobs:
           puts "Parsed #{files.length} workflow YAML files."
           RUBY
 
-      - name: Install markdownlint
-        run: npm install -g markdownlint-cli2
+      - name: Install pinned markdownlint
+        run: npm install -g markdownlint-cli2@0.23.2
 
       - name: Lint changed Markdown — blocking regression gate
         shell: bash
@@ -78,9 +78,8 @@ jobs:
           printf '  %s\n' "${markdown_files[@]}"
           markdownlint-cli2 --no-globs "${markdown_files[@]}"
 
-      - name: Historical Markdown debt report — non-blocking
-        continue-on-error: true
-        run: markdownlint-cli2 "**/*.md" "#node_modules"
+      - name: Historical Markdown debt — blocking no-increase ratchet
+        run: python3 scripts/check_markdown_debt_ratchet.py
 
       - name: Check required root files
         run: |
