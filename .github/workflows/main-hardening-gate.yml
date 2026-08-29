@@ -1,0 +1,125 @@
+name: main-hardening-gate
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  contract:
+    name: contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate hardening contract
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, re, subprocess, sys
+
+          contract_path = pathlib.Path('governance/main-hardening-contract.v1.json')
+          if not contract_path.is_file():
+              raise SystemExit('FAIL: hardening contract missing')
+
+          contract = json.loads(contract_path.read_text(encoding='utf-8'))
+          checks = [
+              (contract.get('target_branch') == 'main', 'target_branch must be main'),
+              (contract.get('claim_allowed') is False, 'contract claim_allowed must remain false'),
+              (contract.get('mode') == 'APPEND_ONLY_FAIL_CLOSED', 'mode must be APPEND_ONLY_FAIL_CLOSED'),
+              (contract.get('invariants', {}).get('direct_main_write_forbidden') is True, 'direct main writes must be forbidden'),
+              (contract.get('invariants', {}).get('pull_request_required') is True, 'PR must be required'),
+              (contract.get('invariants', {}).get('human_review_required') is True, 'human review must be required'),
+              (os.environ.get('BASE_REF') == 'main', 'workflow must run against main'),
+          ]
+          failed = [msg for ok, msg in checks if not ok]
+          if failed:
+              raise SystemExit('FAIL: ' + '; '.join(failed))
+
+          base = os.environ['BASE_SHA']
+          head = os.environ['HEAD_SHA']
+          changed = subprocess.check_output(
+              ['git', 'diff', '--name-only', f'{base}...{head}'], text=True
+          ).splitlines()
+
+          claim_true = re.compile(r'(?i)["\']?claim_allowed["\']?\s*[:=]\s*true\b')
+          token_zero = re.compile(r'(?i)TOKEN_VAZIO\s*[:=]\s*0\b')
+          violations = []
+
+          for name in changed:
+              p = pathlib.Path(name)
+              if not p.is_file():
+                  continue
+              if p.suffix.lower() not in {'.json', '.jsonl', '.yml', '.yaml', '.md', '.txt'}:
+                  continue
+              text = p.read_text(encoding='utf-8', errors='ignore')
+              if name.startswith(('data/receipts/', 'data/reconciliation/')) and claim_true.search(text):
+                  violations.append(f'{name}: claim_allowed=true is forbidden in changed receipts/reconciliation')
+              if token_zero.search(text):
+                  violations.append(f'{name}: TOKEN_VAZIO must never be coerced to zero')
+
+          if violations:
+              raise SystemExit('FAIL:\n' + '\n'.join(violations))
+
+          print('PASS: contract and changed-file non-regression checks')
+          PY
+
+      - name: Observe server-side enforcement without inventing success
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}"
+          auth="Authorization: Bearer ${GH_TOKEN}"
+          accept="Accept: application/vnd.github+json"
+
+          rules_code=$(curl -sS -o /tmp/rulesets.json -w "%{http_code}" -H "$auth" -H "$accept" "$api/rulesets" || true)
+          protection_code=$(curl -sS -o /tmp/protection.json -w "%{http_code}" -H "$auth" -H "$accept" "$api/branches/main/protection" || true)
+
+          python - "$rules_code" "$protection_code" <<'PY'
+          import json, pathlib, sys
+
+          rules_code, protection_code = sys.argv[1], sys.argv[2]
+
+          def load(path):
+              try:
+                  return json.loads(pathlib.Path(path).read_text())
+              except Exception:
+                  return None
+
+          rulesets = load('/tmp/rulesets.json') if rules_code == '200' else None
+          protection = load('/tmp/protection.json') if protection_code == '200' else None
+
+          protection_ok = False
+          if isinstance(protection, dict):
+              required = protection.get('required_status_checks')
+              if isinstance(required, dict):
+                  contexts = required.get('contexts') or []
+                  checks = required.get('checks') or []
+                  protection_ok = bool(contexts or checks)
+
+          ruleset_observed = isinstance(rulesets, list) and len(rulesets) > 0
+
+          print(json.dumps({
+              'rulesets_http': rules_code,
+              'ruleset_count': len(rulesets) if isinstance(rulesets, list) else 'TOKEN_VAZIO',
+              'protection_http': protection_code,
+              'required_status_checks_observed': protection_ok,
+              'ruleset_presence_observed': ruleset_observed,
+              'claim_allowed': False,
+          }, indent=2))
+
+          # Fail closed. A 403 is an access boundary, not evidence of absence or success.
+          if not protection_ok and not ruleset_observed:
+              raise SystemExit('HOLD: server-side merge enforcement is absent or not independently observable; claim_allowed=false')
+          PY
