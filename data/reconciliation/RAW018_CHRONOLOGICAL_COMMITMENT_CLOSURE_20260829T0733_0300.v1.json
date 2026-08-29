@@ -1,0 +1,43 @@
+{
+  "schema": "rafaelia.raw018.chronological-commitment-closure.v1",
+  "cycle_id": "OMEGA-20260829T0733-0300-RAW018-CHRONOLOGICAL-COMMITMENT-CLOSURE",
+  "state": "REPRODUCED_VERIFIED_LIMITED_APPEND_ONLY",
+  "claim_allowed": false,
+  "predecessor": {
+    "merge_commit": "7657041891775d0e9c878216dc80eba5503cdb81",
+    "receipt": "data/reconciliation/RAW018_PID_COMMITMENT_ALGORITHM_CLOSURE_20260829T0712_0300.v1.json",
+    "gap_id": "TV-RAW-018-CHRONOLOGICAL-COMMITMENT-CURRENT-REPRODUCTION"
+  },
+  "source_algorithm": {
+    "commit": "3ab1eb3a596148e616f0e2d134f2cc8b71b0fafe",
+    "path": "tools/reconcile_novoexport_raw018_pid_boundary.py",
+    "rule": "sort (Created UTC, Conversation PID SHA-256); SHA256 over timestamp + TAB + pid + newline"
+  },
+  "drive_source": {
+    "spreadsheet_id": "1ccGgqXyfjsqDPgELGjVlLmj2IN9Vs66tw4BhPHx4Kl8",
+    "title": "RAFAELIA — RAW018 PID Hash Set — Wave 3 Private — 2026-08-24",
+    "rows": 100,
+    "columns_used": ["conversation_pid_sha256", "created_utc", "locator_source_index"]
+  },
+  "reproduction": {
+    "expected_candidate_chronological_sha256": "c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706",
+    "recomputed_candidate_chronological_sha256": "c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706",
+    "equality": "PASS",
+    "classification": "REPRODUCED"
+  },
+  "gap_disposition": {
+    "before": "TOKEN_VAZIO",
+    "after": "CLOSED_BY_PRIVATE_WAVE3_TIMESTAMP_SOURCE_PLUS_RECOMPUTATION",
+    "closure_gate": "CHRONOLOGICAL_SERIALIZATION_PROVENANCE + RECOMPUTE + EQUALITY_PASS",
+    "closure_gate_result": "PASS"
+  },
+  "anti_regression": [
+    "CHRONOLOGICAL_COMMITMENT_EQUALITY_NE_RAW_SOURCE_AUTHORITY_REPLACEMENT",
+    "CHRONOLOGICAL_COMMITMENT_EQUALITY_NE_LEGACY_MESSAGES_nodes_GENERATOR_REPRODUCTION",
+    "SHARD_CUSTODY_51_OF_51_NE_OBJECT_COVERAGE_15439_OF_15439",
+    "CLAIM_ALLOWED_FALSE"
+  ],
+  "F_ok": "Historical chronological commitment reproduced exactly from the private Wave3 timestamp/PID table under the merged generator contract.",
+  "F_gap": "Legacy message/node projection generator and NOVOexport per-object coverage remain open.",
+  "F_next": ["continue cursor-first per-object disposition from ordinal 13634", "recover legacy message/node projection generator"]
+}
