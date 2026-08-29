@@ -1,0 +1,57 @@
+{
+  "schema": "rafaelia.canonical_control_plane_ci_receipt.v1",
+  "receipt_id": "RECEIPT-CANONICAL-CONTROL-PLANE-CI-20260829",
+  "observed_at": "2026-08-29T07:26:02-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "validated_head": "6b4675800fbf40d8a709d8c7c37cb944a8ce33f2",
+  "workflow": {
+    "name": "Canonical Control Plane Atlas",
+    "path": ".github/workflows/canonical-control-plane-atlas.yml",
+    "run_id": 33247804943,
+    "run_number": 1,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "job": {
+    "job_id": 99088208431,
+    "name": "validate",
+    "status": "completed",
+    "conclusion": "success",
+    "started_at": "2026-08-29T10:25:53Z",
+    "completed_at": "2026-08-29T10:26:02Z"
+  },
+  "steps": [
+    {"name": "Checkout exact revision", "conclusion": "success"},
+    {"name": "Validate canonical control-plane", "conclusion": "success"},
+    {"name": "Run anti-regression tests", "conclusion": "success"}
+  ],
+  "validated_artifacts": [
+    "data/control-plane/CANONICAL_CONTROL_PLANE_ATLAS_V1_20260829.json",
+    "schemas/canonical_control_plane_atlas.v1.schema.json",
+    "scripts/validate_canonical_control_plane_atlas.py",
+    "fixtures/canonical_control_plane_atlas.invalid.token_zero.v1.json",
+    "tests/test_canonical_control_plane_atlas.py",
+    ".github/workflows/canonical-control-plane-atlas.yml"
+  ],
+  "validated_invariants": [
+    "canonical node dimensions preserved",
+    "TOKEN_VAZIO cannot collapse to zero or assumed value",
+    "ATLAS planes preserved",
+    "ingestion order preserved",
+    "open priority gaps keep global claim fail-closed",
+    "anti-regression guards preserved",
+    "negative TOKEN_VAZIO fixture is rejected"
+  ],
+  "claim_allowed": false,
+  "global_closure": "VERIFIED_LIMITED_APPEND_ONLY",
+  "global_closure_reason": "CI validates the control-plane contract, but provider-complete universe queues and open P0/P1 evidence gaps remain unresolved.",
+  "predecessor_receipt": "data/receipts/CANONICAL_CONTROL_PLANE_BOOTSTRAP_20260829.v1.json",
+  "F_ok": "Dedicated canonical control-plane gate passed on the exact registered head.",
+  "F_gap": "RAW018 custody, projection generator lineage, ALL_TOKEN generator provenance, exact spreadsheet pre/post digests and remaining universe queues remain open.",
+  "F_next": [
+    "append CI evidence to MASTER_INDEX RECEIPTS and VALIDATIONS",
+    "continue P0/P1 gap closure",
+    "advance closure ledger only by evidence-backed successor rows"
+  ]
+}
