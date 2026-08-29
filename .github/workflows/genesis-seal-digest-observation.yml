@@ -1,0 +1,74 @@
+name: Genesis Seal Digest Observation
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "file_000000002e20820ebc7eb4567c469138.png"
+      - ".github/workflows/genesis-seal-digest-observation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    name: genesis-seal / exact-byte-digest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Compute evidence receipt from exact checked-out bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          path="file_000000002e20820ebc7eb4567c469138.png"
+          expected_blob="b9d3af394b3f32601c51debf285ee1f627343f14"
+          expected_size="3160622"
+
+          test -f "$path"
+          blob=$(git hash-object "$path")
+          size=$(wc -c < "$path" | tr -d '[:space:]')
+          sha256=$(sha256sum "$path" | awk '{print $1}')
+
+          test "$blob" = "$expected_blob"
+          test "$size" = "$expected_size"
+          test "${#sha256}" -eq 64
+
+          mkdir -p artifacts/genesis-seal
+          python3 - "$path" "$blob" "$size" "$sha256" "${GITHUB_SHA}" "${GITHUB_RUN_ID}" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          path, blob, size, sha256, head_sha, run_id = sys.argv[1:]
+          receipt = {
+              "schema": "rafaelia.genesis-seal-byte-digest-observation.v1",
+              "path": path,
+              "git_blob_id": blob,
+              "size_bytes": int(size),
+              "sha256": sha256,
+              "head_sha": head_sha,
+              "workflow_run_id": int(run_id),
+              "method": "sha256sum on exact GitHub Actions checkout bytes",
+              "claim_allowed": False,
+          }
+          Path("artifacts/genesis-seal/receipt.json").write_text(
+              json.dumps(receipt, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
+          python3 -m json.tool artifacts/genesis-seal/receipt.json >/dev/null
+
+      - name: Upload byte-digest observation
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: genesis-seal-digest-${{ github.run_id }}
+          path: artifacts/genesis-seal/receipt.json
+          if-no-files-found: error
+          retention-days: 30
