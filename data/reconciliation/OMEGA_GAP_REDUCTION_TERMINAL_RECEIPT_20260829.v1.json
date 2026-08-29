@@ -1,0 +1,132 @@
+{
+  "schema": "rafaelia.omega-gap-reduction-terminal-receipt.v1",
+  "date_local": "2026-08-29",
+  "timezone": "America/Sao_Paulo",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 461,
+  "base_main": "7b04f38a1239a201691a9b2fb92f691ad1cb13d5",
+  "evaluated_head": "fbe123957358444e4e13196be8d05cbe1699d904",
+  "lineage": {
+    "pr459_merged_head": "e2206a9815f9d4b204c342d61fd0561e8dcfd315",
+    "pr459_merge_commit": "3ec5af84c219764592d8eadb07a6cffb2d1a8164",
+    "pr460_merge_commit": "7b04f38a1239a201691a9b2fb92f691ad1cb13d5",
+    "post_pr459_successor_commits": [
+      "8ce8c0699289286bbcc615c24bf92718236d64c3",
+      "0f21947b9117ed0a1aa22e62f13926d8afcb8011",
+      "51e26cf06ac406b7519993d5d1e58330023c9a82",
+      "551c13a0b5da57c9a01a065edcd93175c95db245",
+      "70410b9ccffcc719ee78b97547f8e46efeb88a73",
+      "9396695e3aa365f631db681fcdf2432c6fe73017",
+      "fbe123957358444e4e13196be8d05cbe1699d904"
+    ]
+  },
+  "receipts": [
+    "data/reconciliation/OMEGA_GAP_REDUCTION_RECEIPT_20260829.v1.json",
+    "data/reconciliation/OMEGA_GAP_REDUCTION_CI_RECEIPT_20260829.v1.json",
+    "data/reconciliation/GENESIS_SEAL_ROOT_CUSTODY_EXCEPTION_20260829.v1.json",
+    "data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v2.json"
+  ],
+  "checks_on_evaluated_head": {
+    "omega_gap_reduction_receipt": {
+      "run_id": 33244545338,
+      "job_id": 99079622997,
+      "conclusion": "success"
+    },
+    "general_ci": {
+      "run_id": 33244545403,
+      "job_id": 99079624770,
+      "conclusion": "success",
+      "genesis_seal_exact_custody_guard": "PASS",
+      "all_repository_structure_steps": "PASS"
+    },
+    "branch_topology": {
+      "run_id": 33244545390,
+      "conclusion": "success"
+    },
+    "promotion_control": {
+      "run_id": 33244545331,
+      "conclusion": "failure_fail_closed",
+      "negative_tests": "PASS",
+      "claim_allowed_false_validation": "PASS",
+      "result": "DENIED",
+      "blocking_reasons": [
+        "PULL_REQUEST_DRAFT_OR_UNKNOWN",
+        "INDEPENDENT_APPROVAL_MISSING"
+      ],
+      "observed_independent_approvals": 0,
+      "required_independent_approvals": 1
+    },
+    "server_merge_enforcement": {
+      "run_id": 33244545399,
+      "conclusion": "failure_fail_closed",
+      "detector_fixtures": "PASS",
+      "live_inspection": "FAIL_OPEN_GATE"
+    },
+    "main_hardening_gate": {
+      "run_id": 33244545370,
+      "conclusion": "failure_fail_closed",
+      "contract_validation": "PASS",
+      "live_server_enforcement_observation": "FAIL_OPEN_GATE"
+    }
+  },
+  "main_live_observation": {
+    "sha": "7b04f38a1239a201691a9b2fb92f691ad1cb13d5",
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks": {
+      "enforcement_level": "off",
+      "contexts": [],
+      "checks": []
+    },
+    "classification": "CODE_HARDENING_MATERIALIZED_SERVER_ENFORCEMENT_OPEN"
+  },
+  "closed_or_narrowed": [
+    "three stale MESSAGES provider-scope placeholders",
+    "MESSAGES provider-scope 19/19 + four output hashes + input_scope_complete",
+    "main protection-state ambiguity",
+    "Genesis Seal semantic-orphan ambiguity",
+    "Genesis Seal byte-size ambiguity",
+    "Genesis Seal root structural CI blocker via exact custody exception",
+    "RAW018 search-space and neighbor provenance",
+    "PLACEHOLDER/STUB/TODO marker classification",
+    "PR459 post-merge lineage ambiguity"
+  ],
+  "preserved_open_gaps": [
+    "TOKEN_VAZIO_EXACT_CANONICAL_EXECUTABLE_FULL_SCOPE_BINDING",
+    "TOKEN_VAZIO_RAW018_CURRENT_PROVIDER",
+    "TOKEN_VAZIO_RAW018_CURRENT_BYTES",
+    "TOKEN_VAZIO_RAW018_CURRENT_SHA256",
+    "TOKEN_VAZIO_RAW018_CURRENT_JSON_PARSE",
+    "TOKEN_VAZIO_RAW018_CURRENT_CARDINALITY",
+    "TOKEN_VAZIO_RAW018_CURRENT_RAW_PID_COMMITMENT_EQUALITY",
+    "TOKEN_VAZIO_EXACT_BINARY_SHA256_GENESIS_SEAL",
+    "SERVER_SIDE_MAIN_ENFORCEMENT_NOT_BOUND",
+    "TOKEN_VAZIO_INDEPENDENT_APPROVAL",
+    "PHYSICAL_ANDROID_RUNTIME_RECEIPT",
+    "DEVICE_PERFORMANCE_CYCLE_COUNTS",
+    "ACTIVE20_EXACT_LICENSE_BLOBS_AND_UPSTREAM_LINEAGE",
+    "TOKEN_VAZIO_MATRIX_C_IDENTITY",
+    "TOKEN_VAZIO_MATRIX_C_FORMULA",
+    "TOKEN_VAZIO_DIALECT_SPECIFIC_IPA_SOURCE_CONTRACTS"
+  ],
+  "urgency": {
+    "P0": [
+      "server-side main enforcement",
+      "independent approval",
+      "exact canonical executable x 19 shards binding",
+      "RAW018 current byte custody",
+      "Android physical runtime receipt"
+    ],
+    "P1": [
+      "Genesis Seal exact SHA256 when full bytes are independently available",
+      "Active20 exact license/upstream provenance",
+      "Matrix C identity/formula and IPA source contracts"
+    ]
+  },
+  "aggregate_state": "STRUCTURE_AND_RECEIPT_GATES_GREEN_GOVERNANCE_FAIL_CLOSED",
+  "merge_recommendation": "DO_NOT_PROMOTE_WHILE_DRAFT_OR_WITHOUT_INDEPENDENT_APPROVAL_AND_SERVER_ENFORCEMENT",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+}
