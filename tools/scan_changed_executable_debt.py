@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Block newly introduced high-confidence executable debt markers.
+"""Block newly introduced high-confidence executable implementation debt.
 
-The scan is delta-scoped: historical debt is not rewritten, while new executable
-TODO/stub/placeholder markers must either be implemented or explicitly justified
-with `DEBT_OK:` on the same line. Test fixtures are outside this gate.
+The scan is delta-scoped: historical debt is not rewritten, while new unresolved
+implementation markers must either be implemented or explicitly justified with
+`DEBT_OK:` on the same line. Test fixtures are outside this gate.
 """
 from __future__ import annotations
 
@@ -21,14 +21,14 @@ EXECUTABLE_SUFFIXES = {
 }
 SUPPRESSION = "DEBT_OK:"
 TOKEN_PARTS = [
-    ("TODO", "TO" + "DO"),
-    ("FIXME", "FIX" + "ME"),
-    ("PLACEHOLDER", "PLACE" + "HOLDER"),
-    ("STUB", "ST" + "UB"),
-    ("NotImplementedError", "NotImplemented" + "Error"),
-    ("todo!", "to" + "do!"),
-    ("unimplemented!", "unimplemented" + "!"),
-    ("UnsupportedOperationException", "UnsupportedOperation" + "Exception"),
+    ("TO" + "DO", "TO" + "DO"),
+    ("FIX" + "ME", "FIX" + "ME"),
+    ("PLACE" + "HOLDER", "PLACE" + "HOLDER"),
+    ("ST" + "UB", "ST" + "UB"),
+    ("NotImplemented" + "Error", "NotImplemented" + "Error"),
+    ("to" + "do!", "to" + "do!"),
+    ("unimplemented" + "!", "unimplemented" + "!"),
+    ("UnsupportedOperation" + "Exception", "UnsupportedOperation" + "Exception"),
 ]
 
 
