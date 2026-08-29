@@ -1,0 +1,98 @@
+name: Omega Operational Work Ledger
+
+on:
+  push:
+    paths:
+      - 'data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json'
+      - 'docs/OMEGA_OPERATIONAL_WORK_20260829.md'
+      - 'scripts/validate_omega_operational_work_ledger.py'
+      - '.github/workflows/omega-operational-work-ledger.yml'
+  pull_request:
+    paths:
+      - 'data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json'
+      - 'docs/OMEGA_OPERATIONAL_WORK_20260829.md'
+      - 'scripts/validate_omega_operational_work_ledger.py'
+      - '.github/workflows/omega-operational-work-ledger.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Validate canonical operational ledger
+        run: python3 scripts/validate_omega_operational_work_ledger.py
+
+      - name: Negative gate — forbid claim promotion
+        run: |
+          cp data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json /tmp/ledger.json
+          python3 - <<'PY'
+          import json
+          p = '/tmp/ledger.json'
+          with open(p, encoding='utf-8') as f:
+              data = json.load(f)
+          data['claim_allowed'] = True
+          with open(p, 'w', encoding='utf-8') as f:
+              json.dump(data, f)
+          PY
+          if python3 scripts/validate_omega_operational_work_ledger.py /tmp/ledger.json; then
+            echo 'FAIL: validator accepted claim_allowed=true' >&2
+            exit 1
+          fi
+
+      - name: Negative gate — forbid release promotion
+        run: |
+          cp data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json /tmp/ledger.json
+          python3 - <<'PY'
+          import json
+          p = '/tmp/ledger.json'
+          with open(p, encoding='utf-8') as f:
+              data = json.load(f)
+          data['release_allowed'] = True
+          with open(p, 'w', encoding='utf-8') as f:
+              json.dump(data, f)
+          PY
+          if python3 scripts/validate_omega_operational_work_ledger.py /tmp/ledger.json; then
+            echo 'FAIL: validator accepted release_allowed=true' >&2
+            exit 1
+          fi
+
+      - name: Negative gate — require falsifier
+        run: |
+          cp data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json /tmp/ledger.json
+          python3 - <<'PY'
+          import json
+          p = '/tmp/ledger.json'
+          with open(p, encoding='utf-8') as f:
+              data = json.load(f)
+          data['observed_fronts'][0]['falsifier'] = ''
+          with open(p, 'w', encoding='utf-8') as f:
+              json.dump(data, f)
+          PY
+          if python3 scripts/validate_omega_operational_work_ledger.py /tmp/ledger.json; then
+            echo 'FAIL: validator accepted empty falsifier' >&2
+            exit 1
+          fi
+
+      - name: Negative gate — open gap cannot be PASS
+        run: |
+          cp data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json /tmp/ledger.json
+          python3 - <<'PY'
+          import json
+          p = '/tmp/ledger.json'
+          with open(p, encoding='utf-8') as f:
+              data = json.load(f)
+          data['observed_fronts'][0]['status'] = 'PASS'
+          with open(p, 'w', encoding='utf-8') as f:
+              json.dump(data, f)
+          PY
+          if python3 scripts/validate_omega_operational_work_ledger.py /tmp/ledger.json; then
+            echo 'FAIL: validator accepted PASS with open gaps' >&2
+            exit 1
+          fi
