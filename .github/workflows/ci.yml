@@ -96,6 +96,7 @@ jobs:
           allowed="./file_000000002e20820ebc7eb4567c469138.png"
           expected_blob="b9d3af394b3f32601c51debf285ee1f627343f14"
           expected_size="3160622"
+          expected_sha256="36efd48e550342d4b8349929bbfdb3ed0727613167071f4a4aeb79d9c0679310"
 
           mapfile -t loose < <(find . -maxdepth 1 -type f -name 'file_*.png' -print | sort)
 
@@ -116,8 +117,11 @@ jobs:
               echo "ERROR: Genesis Seal size drift: expected $expected_size got $size"
               exit 1
             fi
-            echo "OBSERVED_GENESIS_SEAL_SHA256=$sha256"
-            echo "PASS: exact custodied Genesis Seal retained at root ($blob, $size bytes)"
+            if [ "$sha256" != "$expected_sha256" ]; then
+              echo "ERROR: Genesis Seal SHA-256 drift: expected $expected_sha256 got $sha256"
+              exit 1
+            fi
+            echo "PASS: exact custodied Genesis Seal retained at root ($blob, $size bytes, sha256=$sha256)"
           done
 
           if [ "${#loose[@]}" -eq 0 ]; then
