@@ -1,0 +1,193 @@
+{
+  "schema": "rafaelia.omega-uncertainty-risk-ratchet.v1",
+  "date_local": "2026-08-29",
+  "timezone": "America/Sao_Paulo",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_main": "23a17f11c4165593381577d9ee1c15a3c575ac18",
+  "mode": [
+    "APPEND_ONLY",
+    "EVIDENCE_FIRST",
+    "TOKEN_VAZIO_STRICT",
+    "FAIL_CLOSED",
+    "NO_RECENCY_AUTHORITY",
+    "NO_SILENT_GAP_ERASURE"
+  ],
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "core_invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "RECENCY != RELEVANCE != AUTHORITY != EVIDENCE",
+    "ACADEMIC_STYLE != PEER_REVIEW != REPLICATION != PROOF",
+    "TOKEN_VAZIO != 0",
+    "FIXTURE != LIVE",
+    "HEURISTIC != PROOF",
+    "LISTING_MISS != GLOBAL_ABSENCE"
+  ],
+  "successor_contract": {
+    "latest_wins": false,
+    "supersession_requires_all": [
+      "same_or_explicitly_mapped_claim_scope",
+      "durable_provenance_pointer",
+      "evidence_not_weaker_than_predecessor_or_direct_falsification",
+      "declared_falsifier_or_test",
+      "relevance_to_the_claim_being_changed",
+      "no_unresolved_contradiction_hidden_by_the_successor",
+      "consequence_radius_is_explicit_and_justified"
+    ],
+    "otherwise_states": [
+      "NEWER_BUT_NON_AUTHORITATIVE",
+      "IRRELEVANT_SUCCESSOR",
+      "CONTRADICTED",
+      "TOKEN_VAZIO"
+    ]
+  },
+  "state_taxonomy": {
+    "placeholder": [
+      "STALE_PLACEHOLDER",
+      "EPISTEMIC_PLACEHOLDER",
+      "EXECUTABLE_STUB",
+      "TOKEN_VAZIO"
+    ],
+    "absence": [
+      "ABSENCE_NOT_PROVEN",
+      "NOT_OBSERVED_IN_BOUNDED_SCOPE",
+      "WITHHELD_BY_ACCESS_BOUNDARY"
+    ],
+    "pseudo": [
+      "PSEUDO_ACADEMIC_UNVERIFIED",
+      "CITATION_UNVERIFIED",
+      "METAPHOR_ONLY",
+      "HEURISTIC_ONLY"
+    ],
+    "runtime_failure": [
+      "BUG_OBSERVED",
+      "CRASH_OBSERVED",
+      "FAILURE_OBSERVED",
+      "DEADLOCK_RISK",
+      "LIVELOCK_RISK",
+      "ZOMBIE_PROCESS_RISK",
+      "RESOURCE_LEAK_RISK",
+      "UNNECESSARY_LOOP_OR_LOCK_RISK"
+    ],
+    "lifecycle": [
+      "ACTIVE",
+      "DEFERRED",
+      "QUARANTINED",
+      "SUPERSEDED",
+      "ZOMBIE_POINTER",
+      "ORPHANED",
+      "CLOSED_WITH_RECEIPT"
+    ]
+  },
+  "fronts": [
+    {
+      "id": "RAW018_PID_SET_COMMITMENT",
+      "state": "REPRODUCED_COMMITMENT",
+      "evidence": {
+        "pr": 462,
+        "merge_commit": "7657041891775d0e9c878216dc80eba5503cdb81",
+        "historical_generator_merge": "3ab1eb3a596148e616f0e2d134f2cc8b71b0fafe",
+        "historical_generator_blob": "412342d336058b9f3bda73c5ec52070a810df3b7",
+        "pid_count": 100,
+        "set_commitment_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e"
+      },
+      "claim_boundary": "REPRODUCED_COMMITMENT != COMPLETE_CURRENT_RAW_CUSTODY"
+    },
+    {
+      "id": "RAW018_CHRONOLOGICAL_COMMITMENT",
+      "state": "REPRODUCED_COMMITMENT",
+      "evidence": {
+        "pr": 463,
+        "merge_commit": "23a17f11c4165593381577d9ee1c15a3c575ac18",
+        "candidate_chronological_commitment_sha256": "c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706"
+      },
+      "open_gaps": [
+        "TOKEN_VAZIO_RAW018_PER_OBJECT_COVERAGE",
+        "TOKEN_VAZIO_RAW018_LEGACY_MESSAGE_NODE_GENERATOR_BINDING"
+      ]
+    },
+    {
+      "id": "GENESIS_SEAL_ROOT_CUSTODY",
+      "state": "CUSTODY_GUARDED",
+      "evidence": {
+        "path": "file_000000002e20820ebc7eb4567c469138.png",
+        "git_blob": "b9d3af394b3f32601c51debf285ee1f627343f14",
+        "size_bytes": 3160622,
+        "guard": ".github/workflows/ci.yml"
+      },
+      "supersedes": "PENDING_BINARY_PRESERVING_WRITE_AS_ONLY_CI_REMEDIATION",
+      "boundary": "Exact root occurrence is permitted only while blob and size match; all other hash-named root PNGs fail."
+    },
+    {
+      "id": "MARKDOWN_HISTORICAL_DEBT",
+      "state": "LEGACY_NONBLOCKING_DEBT_RATCHET",
+      "baseline": "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json",
+      "observed": {
+        "files_linted": 565,
+        "issues": 890,
+        "files_with_issues": 95,
+        "tool": "markdownlint-cli2@0.23.2",
+        "source_run": 33243989581,
+        "source_job": 99078124795
+      },
+      "rule": "DEBT_MAY_DECREASE_BUT_MAY_NOT_INCREASE"
+    },
+    {
+      "id": "MARKDOWN_TOOLCHAIN_DRIFT",
+      "state": "REMEDIATION_REQUIRED",
+      "observed": "ci.yml installed markdownlint-cli2 without a version pin",
+      "remediation": "pin markdownlint-cli2@0.23.2 and validate the historical-debt ratchet"
+    },
+    {
+      "id": "MAIN_SERVER_ENFORCEMENT",
+      "state": "OPEN_EXTERNAL_GOVERNANCE",
+      "observed": {
+        "branch_protection": false,
+        "required_status_checks_enforcement": "off",
+        "independent_approval_evidence": "not satisfied in prior promotion-control observation"
+      },
+      "risk": "HIGH_GOVERNANCE",
+      "rule": "LOCAL_CI_PASS != SERVER_SIDE_ENFORCEMENT"
+    }
+  ],
+  "protected_unknowns": [
+    "TOKEN_VAZIO_EXACT_CANONICAL_EXECUTABLE_FULL_SCOPE_BINDING",
+    "TOKEN_VAZIO_RAW018_CURRENT_PROVIDER",
+    "TOKEN_VAZIO_RAW018_CURRENT_BYTES",
+    "TOKEN_VAZIO_RAW018_CURRENT_SHA256",
+    "TOKEN_VAZIO_RAW018_CURRENT_JSON_PARSE",
+    "TOKEN_VAZIO_MATRIX_C_IDENTITY",
+    "TOKEN_VAZIO_MATRIX_C_FORMULA",
+    "TOKEN_VAZIO_DIALECT_SPECIFIC_IPA_SOURCE_CONTRACTS",
+    "TOKEN_VAZIO_ANDROID_PHYSICAL_RUNTIME_RECEIPT"
+  ],
+  "academic_evidence_contract": {
+    "citation_presence_is_proof": false,
+    "academic_tone_is_validation": false,
+    "peer_review_is_replication": false,
+    "replication_is_universal_proof": false,
+    "fraud_label_without_specific_evidence_allowed": false,
+    "unsupported_material_state": "PSEUDO_ACADEMIC_UNVERIFIED_OR_TOKEN_VAZIO",
+    "required_for_stronger_state": [
+      "source_identity",
+      "method_or_derivation",
+      "evidence_pointer",
+      "falsifier_or_counterexample_surface",
+      "scope_and_uncertainty",
+      "independent_check_when_claim_requires_it"
+    ]
+  },
+  "anti_regression": [
+    "DO_NOT_CLOSE_A_GAP_BY_RENAMING_IT",
+    "DO_NOT_TREAT_ABSENCE_OF_SEARCH_RESULT_AS_ABSENCE_OF_OBJECT",
+    "DO_NOT_TREAT_RECENCY_AS_RELEVANCE",
+    "DO_NOT_TREAT_RELEVANCE_AS_AUTHORITY",
+    "DO_NOT_TREAT_DOCUMENTATION_AS_RUNTIME",
+    "DO_NOT_TREAT_CITATION_AS_REPLICATION",
+    "DO_NOT_TREAT_ZERO_AS_UNKNOWN",
+    "DO_NOT_HIDE_CRASH_BUG_ZOMBIE_LOCK_LOOP_OR_RESOURCE_RISK_BEHIND_GREEN_DOCS"
+  ],
+  "boundary": "This receipt reduces uncertainty by typing states and binding evidence. It does not certify physical runtime, scientific truth, legal validity, academic validity, or release readiness.",
+  "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+}
