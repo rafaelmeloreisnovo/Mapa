@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.main-hardening-receipt.v1",
+  "receipt_id": "MAIN-HARDENING-20260829-V1",
+  "observed_at": "2026-08-29T08:52:00Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "target_branch": "main",
+  "working_branch": "audit/main-hardening-20260828",
+  "base_main_sha": "53dfc73689e5376498c2fa9a05a73ed4bf95c60f",
+  "materialization": {
+    "contract_path": "governance/main-hardening-contract.v1.json",
+    "contract_commit": "ef6c39ed2cebca99fbe481f98a263405af50e93b",
+    "workflow_path": ".github/workflows/main-hardening-gate.yml",
+    "workflow_commit": "fa10bb66e0442c3e0080cf2a566ec733d2b51890"
+  },
+  "provider_observations_before_materialization": {
+    "rulesets_endpoint": "https://api.github.com/repos/rafaelmeloreisnovo/Mapa/rulesets",
+    "rulesets_observed": [],
+    "branch_protection_endpoint": "https://api.github.com/repos/rafaelmeloreisnovo/Mapa/branches/main/protection",
+    "branch_protection_observation": "HTTP_403_ACCESS_BOUNDARY",
+    "interpretation": "403 is not evidence of absence; empty ruleset collection is observed absence of repository rulesets at observation time"
+  },
+  "state": "MATERIALIZED_PENDING_SERVER_ENFORCEMENT",
+  "append_only": true,
+  "fail_closed": true,
+  "claim_allowed": false,
+  "gates": [
+    {
+      "id": "TV-MAPA-LIVE-MAIN-SERVER-MERGE-ENFORCEMENT-20260829",
+      "severity": "P0",
+      "state": "OPEN",
+      "closure": "Observe server-side GitHub enforcement requiring PR review and main-hardening-gate / contract before merge."
+    },
+    {
+      "id": "TV-MAPA-MAIN-HARDENING-PR-20260829",
+      "severity": "P0",
+      "state": "PENDING_PR_OPEN",
+      "closure": "Open draft PR from audit/main-hardening-20260828 to main and preserve claim_allowed=false until server enforcement is observed."
+    }
+  ],
+  "f_ok": [
+    "hardening contract materialized on isolated branch",
+    "fail-closed workflow materialized on isolated branch",
+    "no direct write to main",
+    "claim_allowed remains false"
+  ],
+  "f_gap": [
+    "server-side required-check enforcement not yet observed",
+    "human review not yet observed",
+    "draft PR not yet opened at receipt write time"
+  ],
+  "f_next": "Open draft PR to main; inspect CI; enable/observe server-side required checks; only then reassess promotion."
+}
