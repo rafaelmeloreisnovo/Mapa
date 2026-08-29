@@ -8,10 +8,14 @@ BASELINE = ROOT / "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json"
 CI = ROOT / ".github/workflows/ci.yml"
 CHECKOUT_SHA = "3d3c42e5aac5ba805825da76410c181273ba90b1"
 LEGACY_CHECKOUT_SHA = "11d5960a326750d5838078e36cf38b85af677262"
+SETUP_PYTHON_SHA = "5fda3b95a4ea91299a34e894583c3862153e4b97"
+LEGACY_SETUP_PYTHON_SHA = "a26af69be951a213d495a4c3e4e4022e16d87065"
+MAIN_HARDENING = ROOT / ".github/workflows/main-hardening-gate.yml"
+SERVER_ENFORCEMENT = ROOT / ".github/workflows/server-merge-enforcement-assurance.yml"
 GOVERNANCE_WORKFLOWS = [
-    ROOT / ".github/workflows/main-hardening-gate.yml",
+    MAIN_HARDENING,
     ROOT / ".github/workflows/promotion-control-v1.yml",
-    ROOT / ".github/workflows/server-merge-enforcement-assurance.yml",
+    SERVER_ENFORCEMENT,
 ]
 
 
@@ -117,6 +121,13 @@ def main() -> None:
         require(CHECKOUT_SHA in text, f"{workflow.name}: checkout v7.0.1 exact pin missing")
         require(LEGACY_CHECKOUT_SHA not in text, f"{workflow.name}: legacy Node-20 checkout pin reintroduced")
         require("actions/checkout@v4" not in text, f"{workflow.name}: floating checkout v4 reintroduced")
+
+    main_hardening = MAIN_HARDENING.read_text(encoding="utf-8")
+    require("persist-credentials: false" in main_hardening, "main-hardening must not persist checkout credentials")
+
+    server = SERVER_ENFORCEMENT.read_text(encoding="utf-8")
+    require(SETUP_PYTHON_SHA in server, "server enforcement setup-python v7 exact pin missing")
+    require(LEGACY_SETUP_PYTHON_SHA not in server, "server enforcement legacy Node-20 setup-python pin reintroduced")
 
     print("PASS: uncertainty/risk/evidence authority ratchet v1")
 
