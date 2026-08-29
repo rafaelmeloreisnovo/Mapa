@@ -1,0 +1,49 @@
+{
+  "schema": "rafaelia.raw018_urgency_supersession.v1",
+  "receipt_id": "RECEIPT-RAW018-URGENCY-SUPERSESSION-20260829",
+  "observed_at": "2026-08-29T07:35:00-03:00",
+  "source_receipt": "data/reconciliation/RAW018_GMAIL_BYTE_WITNESS_20260828T2043_0300.v1.json",
+  "source_receipt_state": "VERIFIED_LIMITED_APPEND_ONLY",
+  "byte_custody_observed": {
+    "provider": "Gmail",
+    "provider_message_id": "1a04ab3abe6e46a2",
+    "attachment_name": "conversations-018.json",
+    "size_bytes": 12115336,
+    "sha256": "3cf4783727feb5c53868af76d6e2de660e2287c2cb075180a6aad2738b10140c",
+    "json_parse": "PASS",
+    "conversation_count": 100,
+    "unique_conversation_ids": 100,
+    "current_shard_custody": "51/51_MIXED_PROVIDER"
+  },
+  "urgency_transition": [
+    {
+      "gap": "TV-RAW-018-CURRENT-LOCATOR-PROVENANCE",
+      "before_priority": "P0",
+      "after_priority": "P2",
+      "after_state": "SUPERSESSION_REVIEW",
+      "reason": "Current byte custody is closed by a direct Gmail attachment witness. Residual uncertainty concerns the original Drive occurrence / move-delete-rename provenance, which no longer blocks current byte-backed shard custody."
+    },
+    {
+      "gap": "TV-RAW-018-PID-COMMITMENT-ALGORITHM-PROVENANCE",
+      "before_priority": "P2_CLASSIFICATION_WAVE1",
+      "after_priority": "P0",
+      "after_state": "ACTIVE",
+      "reason": "The byte witness explicitly identifies canonical serialization/hash algorithm provenance as the successor gap and assigns urgency P0; historical candidate-set equality cannot be reproduced without it."
+    }
+  ],
+  "anti_regression": [
+    "GMAIL_WITNESS_NE_ORIGINAL_DRIVE_OCCURRENCE",
+    "BYTE_CUSTODY_CLOSED_NE_HISTORICAL_PID_EQUALITY_CLOSED",
+    "PRIORITY_RECLASSIFICATION_NE_GAP_DELETION",
+    "SUPERSESSION_REVIEW_NE_RESOLVED"
+  ],
+  "priority_distribution_after": {"P0":2,"P1":19,"P2":14,"P3":6},
+  "claim_allowed": false,
+  "F_ok": "RAW018 urgency now follows the strongest current evidence: byte custody closed; PID commitment algorithm provenance is the active P0 successor.",
+  "F_gap": "Original Drive occurrence provenance remains open at lower priority; historical PID commitment algorithm and chronological rendering still require reproducible evidence.",
+  "F_next": [
+    "recover Wave3 PID commitment generator/procedure or original private hash-set artifact",
+    "recompute candidate_set_sha256 against the current 100 IDs",
+    "close P0 only on digest equality or explicit falsification receipt"
+  ]
+}
