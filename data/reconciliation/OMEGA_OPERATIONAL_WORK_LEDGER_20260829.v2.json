@@ -1,0 +1,96 @@
+{
+  "schema": "rafaelia.omega-operational-work-ledger.v2",
+  "date_local": "2026-08-29",
+  "timezone": "America/Sao_Paulo",
+  "predecessor": "data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json",
+  "successor_receipt": "data/reconciliation/OMEGA_GAP_REDUCTION_RECEIPT_20260829.v1.json",
+  "base_commit": "4af637475beeb083d46e2230d8509f8a1f38e35d",
+  "state": "EVIDENCE_ADVANCED_WITH_EXTERNAL_AND_CUSTODY_GATES",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "fronts": [
+    {
+      "id": "MAPA-MESSAGES-19SHARD",
+      "status": "PROVIDER_SCOPE_REPRODUCTION_EVIDENCE_PASS",
+      "closed_since_v1": [
+        "TOKEN_VAZIO_19_SHARD_TERMINAL_EXECUTION",
+        "TOKEN_VAZIO_4_OUTPUT_HASHES",
+        "TOKEN_VAZIO_INPUT_SCOPE_COMPLETE_TRUE"
+      ],
+      "open_gates": ["TOKEN_VAZIO_EXACT_CANONICAL_EXECUTABLE_FULL_SCOPE_BINDING"],
+      "claim_allowed": false
+    },
+    {
+      "id": "MAPA-MAIN-GOVERNANCE",
+      "status": "OBSERVED_UNPROTECTED_MAIN_WITH_POSTMERGE_CI_FAILURE",
+      "evidence": ["protected=false", "protection.enabled=false", "required_status_checks=enforcement_off", "rulesets=[]", "PR458 reviews=[]"],
+      "open_gates": ["SERVER_SIDE_MAIN_ENFORCEMENT_NOT_BOUND", "TOKEN_VAZIO_INDEPENDENT_APPROVAL"],
+      "risk": "HIGH",
+      "claim_allowed": false
+    },
+    {
+      "id": "MAPA-ROOT-GENESIS-SEAL",
+      "status": "PROVENANCE_NARROWED_SAFE_RELOCATION_PENDING",
+      "path": "file_000000002e20820ebc7eb4567c469138.png",
+      "blob": "b9d3af394b3f32601c51debf285ee1f627343f14",
+      "size_bytes": 3160622,
+      "semantic_role": "PUBLIC_IDENTITY_ANCHOR_GENESIS_SEAL_OBSERVED",
+      "open_gates": ["TOKEN_VAZIO_EXACT_BINARY_SHA256", "PENDING_BINARY_PRESERVING_WRITE", "POINTER_MIGRATION_READBACK", "CI_RERUN"],
+      "risk": "MEDIUM_STRUCTURAL_HIGH_IF_DELETED_WITHOUT_CUSTODY",
+      "claim_allowed": false
+    },
+    {
+      "id": "DRIVE-RAW018",
+      "status": "PATH_SIZE_PID_SET_EVIDENCED_CURRENT_BYTE_CUSTODY_OPEN",
+      "path": "conversations-018.json",
+      "declared_size_bytes": 12115336,
+      "pid_count": 100,
+      "pid_set_commitment": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+      "open_gates": ["CURRENT_PROVIDER", "CURRENT_BYTES", "CURRENT_SHA256", "CURRENT_JSON_PARSE", "CURRENT_CARDINALITY", "CURRENT_RAW_PID_COMMITMENT_EQUALITY"],
+      "risk": "HIGH_CUSTODY",
+      "claim_allowed": false
+    },
+    {
+      "id": "TERMUX-SAFE-CORE",
+      "status": "IMPLEMENTED_CI_EVIDENCE_PHYSICAL_RUNTIME_OPEN",
+      "repository_head": "eab968f59c4c95d7369717f9d92a63657e8b5f44",
+      "open_gates": ["PHYSICAL_ANDROID_RUNTIME_RECEIPT", "DEVICE_PERFORMANCE_CYCLE_COUNTS"],
+      "claim_allowed": false
+    },
+    {
+      "id": "MATRIX-C-IPA",
+      "status": "PROTECTED_EPISTEMIC_PLACEHOLDERS",
+      "open_gates": ["TOKEN_VAZIO_MATRIX_C_IDENTITY", "TOKEN_VAZIO_MATRIX_C_FORMULA", "TOKEN_VAZIO_DIALECT_SPECIFIC_IPA_SOURCE_CONTRACTS"],
+      "rule": "DO_NOT_FILL_FROM_MEMORY_OR_SEMANTIC_AFFINITY",
+      "claim_allowed": false
+    },
+    {
+      "id": "ACTIVE20-LICENSE-PROVENANCE",
+      "status": "HISTORICAL_BACKLOG_REQUIRES_CURRENT_REVALIDATION",
+      "open_gates": ["EXACT_LICENSE_BLOBS", "UPSTREAM_THIRD_PARTY_LINEAGE", "CURRENT_HEAD_CLASSIFICATION_RECEIPTS"],
+      "claim_allowed": false
+    }
+  ],
+  "priority_order": [
+    "P0 MAPA main server governance + independent approval",
+    "P0 Genesis Seal binary-safe relocation + pointer migration + CI rerun",
+    "P0 exact canonical executable x 19 shards binding",
+    "P0 RAW018 current byte custody",
+    "P0 Android physical runtime receipt",
+    "P1 Active20 license/provenance",
+    "P1 Matrix C/IPA source bindings"
+  ],
+  "anti_regression": [
+    "TOKEN_VAZIO != PASS",
+    "MERGED != GOVERNANCE_SATISFIED",
+    "PROVIDER_SCOPE_REPRODUCTION != EXACT_EXECUTABLE_BINDING",
+    "MESSAGES-00018 != conversations-018.json",
+    "LISTING_MISS != GLOBAL_ABSENCE",
+    "PID_SET_EVIDENCE != CURRENT_BYTE_CUSTODY",
+    "GENESIS_SEAL_PUBLIC_ANCHOR != SECRET_KEY",
+    "DO_NOT_DELETE_BINARY_TO_MAKE_CI_GREEN",
+    "PLACEHOLDER_CLASSIFICATION != PLACEHOLDER_FABRICATION",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+  ]
+}
