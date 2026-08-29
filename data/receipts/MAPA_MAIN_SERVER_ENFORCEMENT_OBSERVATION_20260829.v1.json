@@ -1,0 +1,45 @@
+{
+  "schema": "rafaelia.mapa_main_server_enforcement_observation.v1",
+  "receipt_id": "RECEIPT-MAPA-MAIN-SERVER-ENFORCEMENT-20260829",
+  "observed_at": "2026-08-29T07:33:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "main",
+  "observed_head": "2dff19ec61996be19a7074a9242eb6f3d1ad66ab",
+  "branch_metadata": {
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks_enforcement_level": "off",
+    "required_status_check_contexts": [],
+    "required_status_checks": []
+  },
+  "repository_rulesets": [],
+  "branch_protection_detail_endpoint": {
+    "state": "ACCESS_BOUNDARY",
+    "http_status": 403,
+    "message": "Resource not accessible by integration",
+    "interpretation": "The 403 is an integration access boundary and is not itself evidence of absence."
+  },
+  "epistemic_conclusion": {
+    "visible_server_enforcement": "NOT_ENABLED_IN_OBSERVED_BRANCH_METADATA",
+    "visible_repository_rulesets": "NONE_OBSERVED",
+    "detailed_branch_protection_configuration": "NOT_READABLE_BY_CURRENT_INTEGRATION",
+    "gap": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+    "priority": "P0",
+    "state": "CONFIRMED_MISSING_VISIBLE_ENFORCEMENT_WITH_ACCESS_BOUNDARY"
+  },
+  "remediation_capability": "READ_ONLY_FOR_RULESETS_AND_BRANCH_PROTECTION_IN_CURRENT_CONNECTOR",
+  "claim_allowed": false,
+  "guards": [
+    "403_NE_ABSENCE",
+    "BRANCH_METADATA_OBSERVATION_NE_HIDDEN_CONFIGURATION_PROOF",
+    "PROTECTED_FALSE_IS_OBSERVED_PROVIDER_METADATA",
+    "RULESETS_EMPTY_IS_OBSERVED_COLLECTION_STATE"
+  ],
+  "F_ok": "P0 governance uncertainty is narrowed: main is visibly unprotected and repository rulesets collection is empty in accessible provider metadata.",
+  "F_gap": "Detailed protection endpoint is integration-inaccessible and current connector exposes no write action to enable branch protection/rulesets.",
+  "F_next": [
+    "enable server-side branch/ruleset enforcement through a provider-capable administrative surface",
+    "require canonical control-plane and existing critical checks",
+    "re-read provider metadata and record a successor PASS receipt"
+  ]
+}
