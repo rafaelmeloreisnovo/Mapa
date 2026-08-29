@@ -1,0 +1,94 @@
+{
+  "schema_version": "RAFAELIA_FEDERATED_RECEIPT_V1",
+  "cycle_id": "OMEGA-20260828-LIVE-RECONCILE-2011",
+  "observed_at": "2026-08-28T23:11:37Z",
+  "claim_allowed": false,
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "predecessor": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "main_sha": "009d55a91dbcfcee88b8ed9eebacc27646f1e8fa",
+    "merged_pr": 453,
+    "merged_pr_head": "8b8ce953b6f0aefed983c92802657a3cb0d3eacf"
+  },
+  "observations": [
+    {
+      "object_id": "github:rafaelmeloreisnovo/Mapa:branch:main",
+      "state": "OBSERVED",
+      "source_pointer": "https://api.github.com/repos/rafaelmeloreisnovo/Mapa/branches/main",
+      "facts": {
+        "head_sha": "009d55a91dbcfcee88b8ed9eebacc27646f1e8fa",
+        "protected": false,
+        "protection_enabled": false,
+        "required_status_checks_enforcement_level": "off",
+        "required_status_check_contexts": []
+      }
+    },
+    {
+      "object_id": "github:rafaelmeloreisnovo/Mapa:rulesets",
+      "state": "OBSERVED_EMPTY",
+      "source_pointer": "https://api.github.com/repos/rafaelmeloreisnovo/Mapa/rulesets",
+      "facts": {"ruleset_count": 0}
+    },
+    {
+      "object_id": "github:rafaelmeloreisnovo/Mapa:branch-protection-endpoint",
+      "state": "BLOCKED",
+      "source_pointer": "https://api.github.com/repos/rafaelmeloreisnovo/Mapa/branches/main/protection",
+      "facts": {"http_status": 403, "message": "Resource not accessible by integration"},
+      "note": "Endpoint access failure is not evidence of absence; branch summary independently reports protected=false/protection.enabled=false."
+    },
+    {
+      "object_id": "github:rafaelmeloreisnovo/Mapa:commit:6a87d40a11ed4a34c8c8953c89d1015813cbb28f",
+      "state": "CONTRADICTED_POINTER",
+      "source_pointer": "https://api.github.com/repos/rafaelmeloreisnovo/Mapa/commits/6a87d40a11ed4a34c8c8953c89d1015813cbb28f",
+      "facts": {"provider_result": "No commit found for SHA", "http_status": 422}
+    },
+    {
+      "object_id": "github:rafaelmeloreisnovo/Mapa:commit:33977e78e9ab2b0f8c243486318c51fcdfb6910d",
+      "state": "CONTRADICTED_POINTER",
+      "source_pointer": "https://api.github.com/repos/rafaelmeloreisnovo/Mapa/commits/33977e78e9ab2b0f8c243486318c51fcdfb6910d",
+      "facts": {"provider_result": "No commit found for SHA", "http_status": 422}
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-MAPA-LIVE-MAIN-SERVER-MERGE-ENFORCEMENT-20260828",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "github:rafaelmeloreisnovo/Mapa:branch:main",
+      "missing_field": "server-side merge enforcement compatible with assurance contract",
+      "blocking_dependency": "repository governance configuration",
+      "evidence_needed": "provider-observed protected main or ruleset with required checks, followed by assurance rerun",
+      "falsifier": "branch remains protected=false and rulesets remain empty",
+      "next_probe": "derive minimum reversible ruleset/branch-protection delta without applying it automatically",
+      "owner_authority": "repository owner / GitHub governance",
+      "urgency": "P0",
+      "closure_gate": "live provider evidence + Server Merge Enforcement Assurance PASS",
+      "claim_allowed": false,
+      "predecessor_lineage": "PR#453→merge 009d55a91dbcfcee88b8ed9eebacc27646f1e8fa"
+    },
+    {
+      "gap_id": "TV-BIBLIO-LINEAGE-POINTER-RECONCILIATION-20260828",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "claimed SHAs 6a87d40a... and 33977e78...",
+      "missing_field": "provider-verifiable repository/ref/path/commit lineage for prior bibliography implementation claims",
+      "blocking_dependency": "locating actual repository/branch/content identity",
+      "evidence_needed": "provider-resolved SHA or canonical file/content identity with revision lineage",
+      "falsifier": "claimed SHAs resolve in another explicitly identified repository/ref with matching content",
+      "next_probe": "search repository content and PR history for anchor_and_v1, arxiv strategy receipts, and bibliography workflow identifiers",
+      "owner_authority": "source repository containing the actual artifacts",
+      "urgency": "P0",
+      "closure_gate": "canonical locator + content/revision evidence",
+      "claim_allowed": false,
+      "predecessor_lineage": "automation receipts claiming nonexistent Mapa commits"
+    }
+  ],
+  "memory_projection": {
+    "L": ["PR#453 head 8b8ce953 → merge 009d55a91"],
+    "O": ["branch summary", "rulesets collection", "protection endpoint access boundary"],
+    "T": ["GitHub governance ↔ assurance workflow ↔ receipts"],
+    "C": ["main unprotected at observation time", "claim_allowed=false"],
+    "P": ["append-only receipt identity by cycle_id/path"]
+  },
+  "F_ok": ["live main state provider-observed", "ruleset absence provider-observed", "two stale bibliography pointers explicitly contradicted", "append-only receipt materialized"],
+  "F_gap": ["server-side merge enforcement", "bibliography canonical lineage"],
+  "F_next": ["search anchor_and_v1/content identities", "derive non-applied minimum governance delta", "reconcile Drive/Atlas/index pointers"]
+}
