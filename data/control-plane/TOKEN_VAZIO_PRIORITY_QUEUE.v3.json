@@ -1,0 +1,271 @@
+{
+  "schema": "rafaelia.token-vazio-priority-queue.v3",
+  "generated_at": "2026-08-29T11:21:00-03:00",
+  "evidence_updated_at": "2026-08-29T11:41:29-03:00",
+  "source_repository": "rafaelmeloreisnovo/Mapa",
+  "source_main_sha": "23a17f11c4165593381577d9ee1c15a3c575ac18",
+  "supersedes_for_current_routing": "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v2.yaml",
+  "history_policy": "APPEND_ONLY_PRESERVE_PREDECESSOR",
+  "ordering_rule": "dependency_then_risk_then_information_gain_then_latest_evidence",
+  "latest_evidence_wins_for_routing": true,
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "unresolved_untyped_gaps": 0,
+  "active_items": [
+    {
+      "priority": "P0",
+      "id": "P0-MAIN-SERVER-ENFORCEMENT",
+      "state": "TOKEN_VAZIO_PROVIDER_ENFORCEMENT_NOT_BOUND",
+      "scope": ["Mapa", "GitHub provider"],
+      "authority": "GitHub repository administration / branch protection or ruleset",
+      "evidence": [
+        "main@23a17f11c4165593381577d9ee1c15a3c575ac18",
+        "branch.protected=false",
+        "protection.enabled=false",
+        "required_status_checks.enforcement_level=off",
+        "repository_rulesets=[]",
+        "issues/327"
+      ],
+      "uncertainty": "No provider-side rule currently forces the fail-closed promotion decision to govern mergeability.",
+      "falsifier": "A fresh provider read still reports protected=false, required promotion context absent, or an effective ruleset cannot be evidenced.",
+      "closure_gate": [
+        "provider protection or effective ruleset observed",
+        "promotion-control / enforce required server-side",
+        "at least one approving review required server-side",
+        "admin bypass constrained or explicitly governed",
+        "zero-approval PR rejection evidenced without changing main SHA"
+      ],
+      "next_action": "Apply provider-side protection through an authorized admin surface, read it back, then execute the non-destructive zero-approval rejection gate."
+    },
+    {
+      "priority": "P0",
+      "id": "P0-INDEPENDENT-APPROVAL",
+      "state": "HOLD_EXTERNAL_HUMAN_AUTHORITY",
+      "scope": ["promotion control"],
+      "authority": "genuinely independent human reviewer",
+      "evidence": [
+        "promotion-control requires >=1 independent approval",
+        "observed approvals=0 on prior evaluated head"
+      ],
+      "uncertainty": "Approval cannot be synthesized by automation or by the author without defeating independence.",
+      "falsifier": "No valid independent APPROVED review is present under the active promotion policy.",
+      "closure_gate": [
+        "one valid independent APPROVED review",
+        "review applies to the exact promotable head",
+        "no self-approval substitution"
+      ],
+      "next_action": "Keep fail-closed until a genuinely independent reviewer approves the exact head."
+    },
+    {
+      "priority": "P1",
+      "id": "TV-MESSAGES-EXACT-CANONICAL-FULL-SCOPE-BINDING",
+      "state": "TOKEN_VAZIO_EXACT_CANONICAL_EXECUTABLE_FULL_SCOPE_BINDING",
+      "scope": ["MESSAGES 19-shard pipeline"],
+      "authority": "canonical executable + exact input/output custody",
+      "evidence": [
+        "provider-scope 19/19 reproduction PASS",
+        "four output hashes observed",
+        "input_scope_complete=true"
+      ],
+      "uncertainty": "Provider-scope reproduction is not yet equivalent to exact canonical executable full-scope binding.",
+      "falsifier": "Canonical executable/input identity differs from the reproduced provider-scope pipeline or output digests diverge.",
+      "closure_gate": [
+        "canonical executable identity pinned",
+        "full input scope pinned",
+        "reproduction output hashes equal"
+      ],
+      "next_action": "Bind the exact canonical executable and rerun all 19 shards against pinned inputs."
+    },
+    {
+      "priority": "P1",
+      "id": "TV-ANDROID-PHYSICAL-RUNTIME",
+      "state": "TOKEN_VAZIO_PHYSICAL_DEVICE_RECEIPT",
+      "scope": ["Vectras-VM-Android", "termux-app-rafacodephi", "ARMv7", "AArch64"],
+      "authority": "physical device runtime receipt",
+      "evidence": [
+        "host/CI evidence exists",
+        "physical runtime remains unpromoted"
+      ],
+      "uncertainty": "Host and CI execution cannot establish physical-device runtime behavior.",
+      "falsifier": "Nonce-bound physical transaction fails, ABI/output identity diverges, or receipt cannot bind request-artifact-output.",
+      "closure_gate": [
+        "physical device identified",
+        "artifact hashes pinned",
+        "nonce-bound transaction executed",
+        "stdout/stderr/exit status captured",
+        "receipt append-only"
+      ],
+      "next_action": "Execute one bounded ARMv7/AArch64 physical transaction and append its evidence-bound receipt."
+    },
+    {
+      "priority": "P1",
+      "id": "TV-NOVOEXPORT-PER-OBJECT-COVERAGE",
+      "state": "ACTIVE_BOUNDED_CURSOR",
+      "scope": ["NOVOexport"],
+      "authority": "cursor-first per-object disposition ledger",
+      "evidence": [
+        "RAW018 byte custody closed",
+        "RAW018 PID commitment equality PASS",
+        "RAW018 chronological commitment equality PASS",
+        "continuation pointer ordinal=13634"
+      ],
+      "uncertainty": "Shard-level closure does not establish complete per-object coverage of the larger universe.",
+      "falsifier": "An object in the claimed bounded range lacks a typed disposition or evidence pointer.",
+      "closure_gate": [
+        "cursor reaches bounded terminal",
+        "every object typed",
+        "silent_conflicts=0",
+        "claims_without_evidence=0"
+      ],
+      "next_action": "Continue append-only per-object disposition from ordinal 13634 without reprocessing closed RAW018 evidence."
+    },
+    {
+      "priority": "P1",
+      "id": "TV-LEGACY-MESSAGE-NODE-PROJECTION-GENERATOR",
+      "state": "TOKEN_VAZIO_GENERATOR_PROVENANCE",
+      "scope": ["RAW018", "legacy message/node projection"],
+      "authority": "versioned generator/procedure",
+      "evidence": [
+        "RAW018 chronological closure explicitly preserves this successor gap"
+      ],
+      "uncertainty": "Set and chronological commitments do not reproduce the legacy message/node projection generator.",
+      "falsifier": "Recovered generator cannot reproduce the historical projection under pinned inputs.",
+      "closure_gate": [
+        "generator commit/path/blob recovered",
+        "inputs pinned",
+        "reproduction result compared",
+        "equality PASS or falsification receipt"
+      ],
+      "next_action": "Recover the legacy generator/procedure and run a deterministic reproduction."
+    },
+    {
+      "priority": "P1",
+      "id": "TV-ACTIVE20-LICENSE-PROVENANCE",
+      "state": "TOKEN_VAZIO_EXACT_LICENSE_BLOBS_AND_UPSTREAM_LINEAGE",
+      "scope": ["active repository cohort"],
+      "authority": "file/component-level license and upstream provenance evidence",
+      "evidence": [
+        "authorship/provenance governance exists",
+        "exact component lineage remains open in prior receipt"
+      ],
+      "uncertainty": "Repository-level license presence is insufficient for mixed-origin component lineage.",
+      "falsifier": "A distributed component has no attributable upstream/license path or incompatible obligations are detected.",
+      "closure_gate": [
+        "component inventory",
+        "upstream pointer",
+        "license blob/digest",
+        "compatibility decision",
+        "human/legal review boundary preserved"
+      ],
+      "next_action": "Close component-level lineage in small evidence-bound batches; do not infer authorship from repository ownership."
+    },
+    {
+      "priority": "P1",
+      "id": "TV-MATRIX-C-IPA-SOURCE-CONTRACTS",
+      "state": "TOKEN_VAZIO_FORMAL_SOURCE_BINDINGS",
+      "scope": ["Matrix C", "dialect-specific IPA/source contracts"],
+      "authority": "formal definition + citable source contract",
+      "evidence": [
+        "TOKEN_VAZIO_MATRIX_C_IDENTITY",
+        "TOKEN_VAZIO_MATRIX_C_FORMULA",
+        "TOKEN_VAZIO_DIALECT_SPECIFIC_IPA_SOURCE_CONTRACTS"
+      ],
+      "uncertainty": "Symbols/formulas without stable identity and source contracts are not promotable mathematical or linguistic claims.",
+      "falsifier": "Definitions are non-unique, dimensions/units conflict, or cited source does not support the mapping.",
+      "closure_gate": [
+        "identity defined",
+        "formula/domain defined",
+        "units/dimensions checked",
+        "source pointer pinned",
+        "counterexample/falsifier documented"
+      ],
+      "next_action": "Materialize definitions and source contracts before any scientific promotion."
+    },
+    {
+      "priority": "P2",
+      "id": "TV-RAW018-ORIGINAL-DRIVE-OCCURRENCE-PROVENANCE",
+      "state": "SUPERSESSION_REVIEW",
+      "scope": ["RAW018 historical Drive occurrence"],
+      "authority": "historical provider provenance",
+      "evidence": [
+        "current byte custody is closed by Gmail/Drive mirror witness",
+        "original Drive move/delete/rename provenance not proven"
+      ],
+      "uncertainty": "Historical original-location provenance remains open but no longer blocks current byte-backed custody.",
+      "falsifier": "Provider history contradicts the presumed original occurrence chain.",
+      "closure_gate": [
+        "historical provider event or immutable locator witness recovered"
+      ],
+      "next_action": "Investigate only when it has downstream evidentiary value; do not promote it back to P0 without new dependency."
+    }
+  ],
+  "resolved_or_superseded": [
+    {
+      "id": "TV-ROOT-PNG-STRUCTURAL-CI-BLOCKER",
+      "state": "RESOLVED_EVIDENCED",
+      "evidence": [
+        "exact Genesis Seal blob+size+SHA-256 fail-closed guard",
+        "CI run 33248732776 success"
+      ]
+    },
+    {
+      "id": "TV-GENESIS-SEAL-EXACT-SHA256",
+      "state": "RESOLVED_EVIDENCED",
+      "evidence": [
+        "path=file_000000002e20820ebc7eb4567c469138.png",
+        "git_blob_id=b9d3af394b3f32601c51debf285ee1f627343f14",
+        "size_bytes=3160622",
+        "sha256=36efd48e550342d4b8349929bbfdb3ed0727613167071f4a4aeb79d9c0679310",
+        "workflow_run_id=33258257964",
+        "artifact_id=9716471990",
+        "method=sha256sum on exact GitHub Actions checkout bytes"
+      ]
+    },
+    {
+      "id": "TV-RAW018-CURRENT-BYTE-CUSTODY",
+      "state": "RESOLVED_EVIDENCED",
+      "evidence": [
+        "sha256=3cf4783727feb5c53868af76d6e2de660e2287c2cb075180a6aad2738b10140c",
+        "JSON parse PASS",
+        "100 conversations"
+      ]
+    },
+    {
+      "id": "TV-RAW018-PID-COMMITMENT-ALGORITHM-PROVENANCE",
+      "state": "RESOLVED_EVIDENCED",
+      "evidence": [
+        "expected=recomputed=766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e"
+      ]
+    },
+    {
+      "id": "TV-RAW018-CHRONOLOGICAL-COMMITMENT-CURRENT-REPRODUCTION",
+      "state": "RESOLVED_EVIDENCED",
+      "evidence": [
+        "expected=recomputed=c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706"
+      ]
+    },
+    {
+      "id": "TOKEN_VAZIO_RUNNER",
+      "state": "SUPERSEDED_BY_CURRENT_EVIDENCE",
+      "evidence": [
+        "current main CI run 33248732776 success"
+      ]
+    }
+  ],
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "resolved != deleted_history",
+    "latest_evidence_wins_for_current_routing",
+    "provider_scope_reproduction != exact_canonical_binding",
+    "host_runtime != physical_device_runtime",
+    "hash_integrity != authorship_or_scientific_truth",
+    "no_stale_state_may_raise_priority_without_a_current_dependency"
+  ],
+  "r3": {
+    "F_ok": "Current routing removes stale RAW018, runner and Genesis Seal digest gaps from active urgency while preserving their evidence receipts.",
+    "F_gap": "Provider merge enforcement and independent human approval remain P0; physical runtime, exact canonical binding, component provenance and scientific source contracts remain evidence-bound.",
+    "F_next": "Bind GitHub provider enforcement, prove zero-approval rejection, then continue bounded executable/runtime/provenance closures."
+  }
+}

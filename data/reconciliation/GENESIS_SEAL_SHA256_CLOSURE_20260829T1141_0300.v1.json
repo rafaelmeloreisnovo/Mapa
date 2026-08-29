@@ -1,0 +1,49 @@
+{
+  "schema": "rafaelia.genesis-seal-sha256-closure.v1",
+  "observed_at": "2026-08-29T11:41:29-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "audit/risk-gap-convergence-20260829-1121",
+  "gap_id": "TV-GENESIS-SEAL-EXACT-SHA256",
+  "state": "RESOLVED_EVIDENCED",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "artifact": {
+    "path": "file_000000002e20820ebc7eb4567c469138.png",
+    "git_blob_id": "b9d3af394b3f32601c51debf285ee1f627343f14",
+    "size_bytes": 3160622,
+    "sha256": "36efd48e550342d4b8349929bbfdb3ed0727613167071f4a4aeb79d9c0679310"
+  },
+  "observation": {
+    "workflow_run_id": 33258257964,
+    "workflow_artifact_id": 9716471990,
+    "workflow_artifact_name": "genesis-seal-digest-33258257964",
+    "workflow_artifact_zip_sha256": "247f03766efbde125516bd227aa15536c53daff715e9a6c1102a0d852aef79ce",
+    "receipt_json_sha256": "6fd49eab766e0fa48fd7cffe0d39de4022b34db37b9405f7326bb841ac2fd4e1",
+    "receipt_checkout_sha": "9950a78f7a5afa9ab54345799bf70c6d1a68447e",
+    "source_pr_head_when_observer_was_added": "a739fa3d7cad5fc528676d5d04154fbccd714ed2",
+    "method": "sha256sum on exact GitHub Actions checkout bytes after Git blob and byte-size equality checks"
+  },
+  "continuity_checks": [
+    "git_blob_id equality PASS",
+    "size_bytes equality PASS",
+    "SHA-256 computed from exact checked-out bytes",
+    "receipt artifact downloaded and parsed",
+    "artifact ZIP digest matches GitHub artifact digest",
+    "SHA-256 pinned into the permanent CI custody guard"
+  ],
+  "falsifier": "Any future checkout of the custodied path whose Git blob, size, or SHA-256 differs causes the permanent CI guard to fail.",
+  "epistemic_boundary": [
+    "hash proves byte identity/integrity under the observed inputs",
+    "hash does not by itself prove authorship, copyright ownership, scientific truth, or legal exclusivity"
+  ],
+  "temporary_observer_retirement": {
+    "workflow": ".github/workflows/genesis-seal-digest-observation.yml",
+    "action": "DELETE_AFTER_RECEIPT_CAPTURE",
+    "reason": "One-shot observation fulfilled; permanent CI now owns the invariant. Removing it reduces redundant workflow/zombie surface while preserving the run and receipt."
+  },
+  "r3": {
+    "F_ok": "Exact SHA-256 is now evidence-bound to the already pinned Git blob and byte size.",
+    "F_gap": "No remaining Genesis Seal byte-integrity gap in current routing; legal/authorship claims remain separate gates.",
+    "F_next": "Keep permanent fail-closed digest verification and focus P0 effort on provider-side main enforcement."
+  }
+}
