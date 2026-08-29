@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/canonical_control_plane_atlas.v1.schema.json",
+  "title": "RAFAELIA Canonical Control Plane Atlas V1",
+  "type": "object",
+  "required": [
+    "schema",
+    "generated_at",
+    "state",
+    "claim_allowed",
+    "source_mutation_allowed",
+    "authority_model",
+    "predecessors",
+    "master_index",
+    "canonical_node_contract",
+    "contracts",
+    "token_vazio_lifecycle",
+    "urgency_policy",
+    "atlas_planes",
+    "ingestion_order",
+    "closure_contract",
+    "guards",
+    "F_ok",
+    "F_gap",
+    "F_next"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.canonical_control_plane_atlas.v1"},
+    "state": {"enum": ["VERIFIED_LIMITED_APPEND_ONLY", "CLOSED_VERIFIED"]},
+    "claim_allowed": {"type": "boolean"},
+    "source_mutation_allowed": {"const": false},
+    "predecessors": {"type": "array", "minItems": 1},
+    "master_index": {
+      "type": "object",
+      "required": ["spreadsheet_id", "legacy_planes_preserved", "transversal_planes_added", "append_only"],
+      "properties": {
+        "append_only": {"const": true},
+        "legacy_planes_preserved": {"type": "array", "minItems": 1},
+        "transversal_planes_added": {
+          "type": "array",
+          "contains": {"const": "PROVENANCE"}
+        }
+      }
+    },
+    "canonical_node_contract": {
+      "type": "object",
+      "required": ["required_dimensions", "identity_pattern"]
+    },
+    "contracts": {"type": "array", "minItems": 5},
+    "token_vazio_lifecycle": {
+      "type": "object",
+      "required": ["open", "allowed_terminal_states", "forbidden_transition", "closure_definition"],
+      "properties": {
+        "open": {"const": "TOKEN_VAZIO"}
+      }
+    },
+    "atlas_planes": {
+      "type": "object",
+      "required": ["ATLAS", "NOVO", "L", "O", "T", "REL", "SCALE", "EVID", "GAP", "LEARN"]
+    },
+    "ingestion_order": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14
+    },
+    "closure_contract": {
+      "type": "object",
+      "required": ["formula", "closed_verified_requires"]
+    },
+    "guards": {"type": "array", "minItems": 8},
+    "F_next": {"type": "array", "minItems": 1}
+  },
+  "additionalProperties": true
+}
