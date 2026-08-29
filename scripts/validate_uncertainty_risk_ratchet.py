@@ -6,6 +6,13 @@ ROOT = Path(__file__).resolve().parents[1]
 RECEIPT = ROOT / "data/reconciliation/OMEGA_UNCERTAINTY_RISK_RATCHET_20260829.v1.json"
 BASELINE = ROOT / "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json"
 CI = ROOT / ".github/workflows/ci.yml"
+CHECKOUT_SHA = "3d3c42e5aac5ba805825da76410c181273ba90b1"
+LEGACY_CHECKOUT_SHA = "11d5960a326750d5838078e36cf38b85af677262"
+GOVERNANCE_WORKFLOWS = [
+    ROOT / ".github/workflows/main-hardening-gate.yml",
+    ROOT / ".github/workflows/promotion-control-v1.yml",
+    ROOT / ".github/workflows/server-merge-enforcement-assurance.yml",
+]
 
 
 def load(path: Path):
@@ -103,6 +110,13 @@ def main() -> None:
     require("markdownlint-cli2@0.23.2" in ci, "markdownlint dependency is not pinned")
     require("python3 scripts/check_markdown_debt_ratchet.py" in ci, "Markdown debt ratchet is not wired into general CI")
     require("b9d3af394b3f32601c51debf285ee1f627343f14" in ci, "Genesis Seal guard lost")
+    require(CHECKOUT_SHA in ci, "general CI checkout runtime pin drift")
+
+    for workflow in GOVERNANCE_WORKFLOWS:
+        text = workflow.read_text(encoding="utf-8")
+        require(CHECKOUT_SHA in text, f"{workflow.name}: checkout v7.0.1 exact pin missing")
+        require(LEGACY_CHECKOUT_SHA not in text, f"{workflow.name}: legacy Node-20 checkout pin reintroduced")
+        require("actions/checkout@v4" not in text, f"{workflow.name}: floating checkout v4 reintroduced")
 
     print("PASS: uncertainty/risk/evidence authority ratchet v1")
 
