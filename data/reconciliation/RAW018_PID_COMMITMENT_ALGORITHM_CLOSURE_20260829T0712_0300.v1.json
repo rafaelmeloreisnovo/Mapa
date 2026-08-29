@@ -1,0 +1,95 @@
+{
+  "schema": "rafaelia.raw018.pid-commitment-algorithm-closure.v1",
+  "cycle_id": "OMEGA-20260829T0712-0300-RAW018-PID-COMMITMENT-CLOSURE",
+  "observed_at": "2026-08-29T07:12:00-03:00",
+  "state": "REPRODUCED_VERIFIED_LIMITED_APPEND_ONLY",
+  "claim_allowed": false,
+  "source_mutation_allowed": false,
+  "default_branch_write_performed": false,
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "main_sha": "befb358a0e7ca9020c0435b017fadbe5bef56b0d",
+    "receipt": "data/reconciliation/RAW018_GMAIL_BYTE_WITNESS_20260828T2043_0300.v1.json",
+    "successor_gap": "TV-RAW-018-PID-COMMITMENT-ALGORITHM-PROVENANCE"
+  },
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "source_algorithm": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "historical_merge_commit": "3ab1eb3a596148e616f0e2d134f2cc8b71b0fafe",
+    "path": "tools/reconcile_novoexport_raw018_pid_boundary.py",
+    "blob_sha": "412342d336058b9f3bda73c5ec52070a810df3b7",
+    "identity_method": "SHA256_UTF8_CANONICAL_CONVERSATION_ID",
+    "pid_hash_rule": "sha256(conversation_id.encode('utf-8')).hexdigest()",
+    "candidate_set_rule": "sort PID hex digests lexicographically; for each digest append literal newline; SHA256 over concatenated UTF-8 lines",
+    "canonical_source_status": "RECOVERED_FROM_MERGED_WAVE3_GENERATOR"
+  },
+  "current_witness": {
+    "provider": "GoogleDrive custody mirror",
+    "file_id": "1OlI3sq78ZiPtnYNZtsNn0hJNyCJ9jxRa",
+    "name": "conversations-018.gmail-witness-20260828.json",
+    "size_bytes_observed": 12115336,
+    "sha256_reproduced": "3cf4783727feb5c53868af76d6e2de660e2287c2cb075180a6aad2738b10140c",
+    "json_root": "list",
+    "conversation_count": 100,
+    "unique_conversation_ids": 100,
+    "privacy": "RAW_IDS_NOT_PUBLISHED"
+  },
+  "reproduction": {
+    "procedure": [
+      "parse current witness JSON fail-closed",
+      "extract canonical conversation id using id then conversation_id fallback",
+      "compute SHA256 over UTF-8 bytes of each canonical conversation id",
+      "sort the 100 lowercase hexadecimal digests lexicographically",
+      "feed each digest plus newline into one SHA256 stream"
+    ],
+    "expected_candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "recomputed_candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "equality": "PASS",
+    "classification": "REPRODUCED"
+  },
+  "gap_disposition": {
+    "gap_id": "TV-RAW-018-PID-COMMITMENT-ALGORITHM-PROVENANCE",
+    "before": "TOKEN_VAZIO",
+    "after": "CLOSED_BY_VERSIONED_GENERATOR_PLUS_CURRENT_WITNESS_RECOMPUTATION",
+    "closure_gate": "CANONICAL_ALGORITHM_RECOVERED + CURRENT_PID_COMMITMENT_RECOMPUTED + EQUALITY_PASS",
+    "closure_gate_result": "PASS"
+  },
+  "anti_regression": [
+    "PID_COMMITMENT_EQUALITY_NE_RAW_SOURCE_AUTHORITY_REPLACEMENT",
+    "CURRENT_WITNESS_NE_ORIGINAL_DRIVE_SOURCE_OCCURRENCE",
+    "SET_COMMITMENT_EQUALITY_NE_CHRONOLOGICAL_COMMITMENT_REPRODUCTION",
+    "SET_COMMITMENT_EQUALITY_NE_LEGACY_MESSAGES_nodes_GENERATOR_REPRODUCTION",
+    "SHARD_CUSTODY_51_OF_51_NE_NOVOEXPORT_OBJECT_COVERAGE_15439_OF_15439",
+    "CLAIM_ALLOWED_FALSE"
+  ],
+  "successor_gaps": [
+    {
+      "gap_id": "TV-RAW-018-CHRONOLOGICAL-COMMITMENT-CURRENT-REPRODUCTION",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Wave3 generator + current RAW018 witness",
+      "missing_field": "canonical Created UTC rendering/equivalence from current witness sufficient to reproduce candidate_chronological_sha256",
+      "blocking_dependency": "historical Locator Created UTC strings or a proven canonical rendering contract",
+      "evidence_needed": "deterministic reproduction of c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706",
+      "falsifier": "recomputed chronological digest differs under the recovered canonical contract",
+      "next_probe": "recover Locator Created UTC rows or canonical rendering contract and recompute chronological commitment",
+      "owner_authority": "NOVOexport Wave3 identity reconciliation",
+      "urgency": "P1",
+      "closure_gate": "CHRONOLOGICAL_SERIALIZATION_PROVENANCE + RECOMPUTE + EQUALITY_PASS",
+      "claim_allowed": false
+    }
+  ],
+  "memory_projection": {
+    "L": "Wave3 merged generator -> current RAW018 byte witness -> set commitment reproduction -> this closure receipt",
+    "O": "byte SHA256, set identity commitment and chronological commitment are independent validation axes",
+    "T": "GitHub generator <-> Drive custody witness <-> historical Wave3 receipt <-> Master Index",
+    "C": "closure limited to canonical PID set commitment algorithm and equality",
+    "P": "generator commit/path/blob, witness file id/SHA256 and expected/recomputed digest are stable anchors"
+  },
+  "F_ok": "Recovered the exact merged Wave3 PID commitment algorithm and reproduced the historical candidate_set_sha256 exactly from the current 100-ID RAW018 byte witness.",
+  "F_gap": "Chronological commitment reproduction, legacy message projection generator and 15439-object per-object coverage remain open.",
+  "F_next": [
+    "recover canonical chronological serialization and reproduce candidate_chronological_sha256",
+    "continue cursor-first per-object NOVOexport disposition from ordinal 13634",
+    "continue provider/custody bridge work for unresolved asset objects"
+  ]
+}
