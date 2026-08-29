@@ -1,0 +1,53 @@
+{
+  "schema": "rafaelia.provider-merge-protection-plan.v1",
+  "date_local": "2026-08-29",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "main",
+  "observed_main_sha": "8ec1ffce3a0b20c1602a3f9b93f99b49919cbf3c",
+  "source_implementation": "scripts/apply_main_branch_protection.py",
+  "source_blob": "87e98d96ede76d47253326345d03b5769c92fad1",
+  "mode": "PLAN_ONLY_NO_PROVIDER_MUTATION",
+  "claim_allowed": false,
+  "promotion_allowed": false,
+  "observed_live_state": {
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks_enforcement": "off",
+    "required_status_checks": [],
+    "server_side_merge_binding": "NOT_ENFORCED_OBSERVED"
+  },
+  "proposed_minimum_payload": {
+    "required_status_checks": {
+      "strict": true,
+      "contexts": [
+        "promotion-control / enforce"
+      ]
+    },
+    "enforce_admins": true,
+    "required_pull_request_reviews": {
+      "dismiss_stale_reviews": true,
+      "require_code_owner_reviews": false,
+      "required_approving_review_count": 1,
+      "require_last_push_approval": true
+    },
+    "restrictions": null
+  },
+  "safety_properties": [
+    "requires exact promotion-control / enforce context",
+    "requires at least one approving review",
+    "dismisses stale approvals",
+    "requires approval after the last push",
+    "enforces the rule for administrators",
+    "requires branches to be up to date before merge",
+    "does not merge a pull request",
+    "does not set claim_allowed=true"
+  ],
+  "apply_gate": {
+    "allowed_in_current_connector": false,
+    "reason": "No branch-protection mutation action or RAFAELIA_ADMIN_TOKEN is available in the connected execution surface.",
+    "precondition": "Re-read main SHA immediately before provider mutation and refuse if it differs from 8ec1ffce3a0b20c1602a3f9b93f99b49919cbf3c.",
+    "postcondition": "Re-read branch and protection; require protected=true, exact promotion context present, admins enforced, approvals>=1, and unchanged main SHA.",
+    "next_gate": "SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT"
+  },
+  "rollback": "Restore the previous provider protection configuration captured immediately before apply; repository content/main SHA must remain unchanged by configuration-only mutation."
+}
