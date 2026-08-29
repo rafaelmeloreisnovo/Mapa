@@ -1,0 +1,51 @@
+{
+  "schema": "rafaelia.canonical_control_plane_atlas.v1",
+  "generated_at": "2026-08-29T07:20:00-03:00",
+  "state": "CLOSED_VERIFIED",
+  "claim_allowed": true,
+  "source_mutation_allowed": true,
+  "authority_model": {},
+  "predecessors": [],
+  "master_index": {
+    "spreadsheet_id": "invalid",
+    "legacy_planes_preserved": [],
+    "transversal_planes_added": ["PROVENANCE"],
+    "append_only": false
+  },
+  "canonical_node_contract": {
+    "required_dimensions": ["identity"],
+    "identity_pattern": "unstable-title-key"
+  },
+  "contracts": [
+    {
+      "id": "C-TOKEN-001",
+      "invariant": "TOKEN_VAZIO=0",
+      "blocks_claim": false
+    }
+  ],
+  "token_vazio_lifecycle": {
+    "open": "0",
+    "allowed_terminal_states": ["ASSUMED"],
+    "forbidden_transition": "none",
+    "closure_definition": "zero_by_assumption"
+  },
+  "urgency_policy": {},
+  "atlas_planes": {"ATLAS": "only"},
+  "ingestion_order": ["CLOSURE"],
+  "closure_contract": {
+    "formula": "pendencias=0",
+    "closed_verified_requires": []
+  },
+  "seed_routes": [
+    {
+      "object": "BROKEN",
+      "relations": ["GAP:HAS->UNRESOLVED"],
+      "claim_allowed": true
+    }
+  ],
+  "open_priority_gaps": ["UNRESOLVED"],
+  "guards": [],
+  "F_ok": "invalid fixture",
+  "F_gap": "hidden",
+  "F_next": []
+}
