@@ -1,7 +1,7 @@
 # Federated research route — “na verdade → em verdade → com verdade”
 
 **Observed:** 2026-08-29  
-**State:** `ROUTED / CONTENT_MATERIALIZED / RUNTIME_GATES_OPEN`  
+**State:** `ROUTED / CONTENT_MATERIALIZED / MEMORY_AND_RECEIPT_MATERIALIZED / RUNTIME_GATES_OPEN`  
 **claim_allowed:** `false`
 
 ## Purpose
@@ -35,6 +35,29 @@ It does **not** prove that every repository ever owned, deleted, inaccessible, o
 | Acoustics / physical boundaries | `rafaelmeloreisnovo/Fisica` | `docs/acustica/VERDADE_FONETICA_ACUSTICA_QUANTIZACAO_BOUNDARIES_2026-08-29.md` | `f83531dbb02a677128ec43652ebd9e8a8b697a40` | `MATERIALIZED_REFERENCE_HYPOTHESIS` |
 | Transformer / sequence-order design | `rafaelmeloreisnovo/nanoGPT` | `docs/CUSTOMIZACOES_RAFAEL/SEMANTICA/SEQUENCE_ORDER_LANGUAGE_CONTEXT_NOTE_2026-08-29.md` | `08e57e68c0a8ced2514d2e0eb3155f4bcfbaa469` | `MATERIALIZED_DESIGN_NOTE_NO_CODE_CHANGE` |
 | Comparative traditions / parables | `rafaelmeloreisnovo/CientiEspiritual` | `research_papers/linguagem/2026-08-29_verdade_tradicoes_preposicoes_parabolas.md` | `92d6ffde274d90976a1c01cee8e44ea2bca87cbf` | `MATERIALIZED_CONCEPTUAL_REVIEW` |
+| Longitudinal reentry | `rafaelmeloreisnovo/MemRafcode` | `longitudinal_index/records/2026-08-29_truth_operators_crossrepo.md` | `e0d8becf4757b49a903615880482842ee1df91f4` | `MATERIALIZED_APPEND_ONLY_RECORD` |
+| Longitudinal audit index | `rafaelmeloreisnovo/MemRafcode` | `AUDIT_INDEX.md` | `341141441dd0b41d429a0f8af83a913473d64303` | `APPEND_INDEXED` |
+| Existence/custody receipt | `rafaelmeloreisnovo/Recipt` | `receipts/2026-08-29/truth-operators-crossrepo.receipt.md` | `e28847c8ff7d6e7d0d6cbea65e99712e3b72dfb4` | `MATERIALIZED_NON_SCHEMA_MD_RECEIPT` |
+
+## Google Drive materialization
+
+### Detailed editorial node
+
+```yaml
+title: RAFAELIA — Verdade N→E→C — Filologia, Acústica, S₃ e Transformers — 2026-08-29
+document_id: 1j9nBGU3e-S2knTxQ0Wh4GcP7YaqZ-Jm1mEeALghpTOA
+state: MATERIALIZED
+```
+
+### Indexed/ledger pointers
+
+Observed append writes were made to:
+
+- `RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1` — canonical operational memory;
+- `RAFAELIA — Master Navigation Registry V1` — navigation/index route;
+- `RAFAELIA — Ledger de Observações e Redução de Risco — V1` — observation/risk-reduction ledger.
+
+These Drive writes preserve pointers and state; they do not promote scientific claims.
 
 ## Deliberate non-writes
 
@@ -56,18 +79,6 @@ State: `NO_WRITE`
 
 Reason: editorial/platform repository; no justification to inject RAFAELIA research content into infrastructure/upstream material.
 
-### `Recipt`
-
-State at this routing stage: `RECEIPT_PENDING`
-
-A receipt may record existence and commit pointers, but must not pretend that commit existence proves philological correctness, physical measurement, model execution or human-study replication.
-
-### `MemRafcode`
-
-State at this routing stage: `LONGITUDINAL_APPEND_PENDING`
-
-Use for append-only reentry/custody pointer, not for duplicating the full paper.
-
 ## Authority boundaries
 
 ```text
@@ -79,6 +90,7 @@ CientiEspiritual = comparative conceptual/traditional reading and explicitly aut
 Mapa         = routing, provenance, authority and open gates
 MemRafcode   = longitudinal retention/reentry
 Recipt       = evidence envelope / existence receipt
+Drive        = editorial/navigation/longitudinal durable copy
 ```
 
 ## Cross-domain invariants
@@ -105,6 +117,7 @@ local_acoustic_measurement: TOKEN_VAZIO
 human_multilingual_replication: TOKEN_VAZIO
 semantic_quantum_mechanism: TOKEN_VAZIO
 independent_peer_review: TOKEN_VAZIO
+independent_content_digest_set: TOKEN_VAZIO
 claim_allowed: false
 ```
 
@@ -119,4 +132,4 @@ source audit
 → independent review
 ```
 
-No open gate is closed by this routing document.
+No open scientific/runtime gate is closed by the materialization, routing, memory or receipt records.
