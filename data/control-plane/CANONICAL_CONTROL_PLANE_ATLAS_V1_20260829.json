@@ -1,0 +1,173 @@
+{
+  "schema": "rafaelia.canonical_control_plane_atlas.v1",
+  "generated_at": "2026-08-29T07:20:00-03:00",
+  "state": "VERIFIED_LIMITED_APPEND_ONLY",
+  "claim_allowed": false,
+  "source_mutation_allowed": false,
+  "authority_model": {
+    "MAPA": "ontology_router_authority",
+    "MASTER_INDEX": "factual_inventory_and_control_registry",
+    "DRIVE": "custody_longitudinal_memory",
+    "PRODUCER_REPO": "artifact_authority",
+    "RECEIPT": "transition_evidence_bridge"
+  },
+  "predecessors": [
+    {
+      "path": "data/control-plane/federated-reference-matrix.v1.json",
+      "role": "federated_reference_predecessor",
+      "state": "PRESERVED"
+    },
+    {
+      "path": "data/reconciliation/ATLAS_NOVO_INGEST_CONTINUATION_WAVE2_20260828.v1.json",
+      "role": "atlas_novo_ingest_predecessor",
+      "state": "PRESERVED"
+    },
+    {
+      "commit": "befb358a0e7ca9020c0435b017fadbe5bef56b0d",
+      "role": "pre_bootstrap_main_head"
+    }
+  ],
+  "master_index": {
+    "provider": "GOOGLE_DRIVE",
+    "spreadsheet_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+    "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+    "legacy_planes_preserved": [
+      "CONCEITOS", "AREAS", "FORMULAS", "PROGRAMAS", "FONTES_000_050", "RELACOES", "TOKEN_VAZIO", "STATS", "EDICOES_REVISOES", "REVISION_QUEUE_ROOT", "UNIVERSE_OBJECTS", "CONTENT_IDENTITIES", "UNIVERSE_COVERAGE", "UNIVERSE_QUEUE", "SUPERSEDED_SCOPE_20260825", "PARABOLAS_ANCORADAS", "PRANCHA_PEDAGOGICA"
+    ],
+    "transversal_planes_added": [
+      "PROVENANCE", "CUSTODY_CHAIN", "RECEIPTS", "CONTRACTS", "URGENCIES_GATES", "CLAIMS", "RISKS", "ATLAS_ROUTES", "VALIDATIONS", "SUPERSESSION", "CLOSURE_LEDGER"
+    ],
+    "append_only": true
+  },
+  "canonical_node_contract": {
+    "required_dimensions": [
+      "identity", "authority", "source", "provenance", "custody", "epistemic_state", "evidence", "relations", "contracts", "risk", "urgency", "TOKEN_VAZIO", "falsifier", "rollback", "receipt", "ATLAS_routes", "closure"
+    ],
+    "identity_pattern": "RAF:<provider>:<authority>:<object-id>:<revision>",
+    "physical_identity": ["source_locator", "source_revision", "content_sha256"],
+    "logical_identity": ["artifact_id", "semantic_role", "authority"],
+    "event_identity": ["event_id", "previous_event_id", "timestamp"]
+  },
+  "contracts": [
+    {
+      "id": "C-EVIDENCE-001",
+      "invariant": "VISION!=ARTIFACT;ARTIFACT!=EXECUTION;EXECUTION!=EVIDENCE;EVIDENCE!=CLAIM",
+      "blocks_claim": true
+    },
+    {
+      "id": "C-TOKEN-001",
+      "invariant": "TOKEN_VAZIO!=0;MISSING!=INFERRED_VALUE",
+      "blocks_claim": true
+    },
+    {
+      "id": "C-SEARCH-001",
+      "invariant": "SEARCH_MISS!=GLOBAL_ABSENCE",
+      "blocks_claim": true
+    },
+    {
+      "id": "C-RUNTIME-001",
+      "invariant": "CODE_PRESENT!=RUNTIME_VERIFIED;FIXTURE!=LIVE;WORKFLOW_FAILURE_WITH_ZERO_STEPS!=CODE_FAILURE",
+      "blocks_claim": true
+    },
+    {
+      "id": "C-REGRESSION-001",
+      "invariant": "NO_REDUCTION_OF_SOURCE_IDENTITY_OR_PROVENANCE_OR_EVIDENCE_CLASSIFICATION_OR_KNOWN_GAPS_OR_UNCERTAINTY_OR_ROLLBACK_WITHOUT_SUPERSESSION_RECEIPT",
+      "blocks_claim": true
+    }
+  ],
+  "token_vazio_lifecycle": {
+    "open": "TOKEN_VAZIO",
+    "allowed_terminal_states": [
+      "RESOLVED_EVIDENCED", "ACCEPTED_BOUNDARY", "FALSIFIED", "SUPERSEDED", "DEFERRED_WITH_TRIGGER"
+    ],
+    "forbidden_transition": "TOKEN_VAZIO->ASSUMED_VALUE_WITHOUT_EVIDENCE",
+    "closure_definition": "zero_unclassified_token_vazio_not_zero_by_invention"
+  },
+  "urgency_policy": {
+    "P0": "safety_data_loss_corruption_or_invalid_claim",
+    "P1": "blocks_evidence_chain_release_or_reproducibility",
+    "P2": "reduces_quality_or_reproducibility",
+    "P3": "enrichment_or_documentation",
+    "numeric_risk_score": "TOKEN_VAZIO_UNTIL_CALIBRATED_RUBRIC"
+  },
+  "atlas_planes": {
+    "ATLAS": "locate_authority_and_choose_route",
+    "NOVO": "prefer_newest_valid_source_and_NOVOexport_when_applicable",
+    "L": "longitudinal_predecessor_successor",
+    "O": "orthogonal_independent_axis",
+    "T": "transverse_domain_bridge",
+    "REL": "typed_structural_relation",
+    "SCALE": "META_to_macro_to_micro_to_token_to_yocto_when_applicable",
+    "EVID": "evidence_receipt_gate_only",
+    "GAP": "TOKEN_VAZIO_uncertainty_and_blockers",
+    "LEARN": "append_only_learning"
+  },
+  "ingestion_order": [
+    "ENUMERATE", "IDENTIFY", "HASH_REVISION", "PROVENANCE", "RELATIONS", "CONTRACTS", "EVIDENCE", "GAPS_TOKEN_VAZIO", "URGENCY", "VALIDATION", "RECEIPT", "ATLAS_EDGES", "LEARN_APPEND", "CLOSURE"
+  ],
+  "closure_contract": {
+    "formula": "OMEGA_CLOSURE=C_objects&&C_identity&&C_provenance&&C_relations&&C_contracts&&C_evidence&&C_gaps&&C_receipts",
+    "closed_verified_requires": [
+      "all_enumerated_objects_have_identity",
+      "no_unclassified_orphans",
+      "each_transformation_has_provenance",
+      "each_significant_mutation_has_receipt",
+      "all_P0_P1_resolved_or_formally_blocked",
+      "all_required_contracts_pass",
+      "each_TOKEN_VAZIO_resolved_or_explicitly_classified",
+      "each_claim_has_evidence_and_falsifier",
+      "claim_allowed_true_only_after_gate",
+      "queues_reach_stop_condition",
+      "revisions_and_supersessions_are_navigable",
+      "ATLAS_reconstructs_route_to_source"
+    ]
+  },
+  "seed_routes": [
+    {
+      "object": "NEON4096",
+      "relations": [
+        "REL:USES->Q16",
+        "REL:PAPERED_IN->rafaelmeloreisnovo/papers@3d52ac3f366be5e4e243f15adbc59e2586e11df5",
+        "REL:IMPLEMENTED_IN->rafaelmeloreisnovo/ChipQuantum@f9b3d0de3dea0e296f9a4961c275c8cd0b35d4e9",
+        "REL:FORMALIZED_IN->rafaelmeloreisnovo/Matem-tica-@1acbe11a805c1972c1e2848e760cc88f263f4c0d",
+        "EVID:SUPPORTED_BY->RAFAELIA_T7_ARM32_NEON_BATCH4_REPORT",
+        "GAP:HAS->pointer_traversal",
+        "GAP:HAS->Q16_policy",
+        "LEARN:PRODUCED->Q16_constant_audit"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "object": "conversations-018.json",
+      "relations": [
+        "GAP:HAS->TV-RAW-018-CURRENT-LOCATOR-PROVENANCE",
+        "EVID:SUPPORTED_BY->ATLAS_NOVO_INGEST_CONTINUATION_WAVE2_20260828.v1.json"
+      ],
+      "claim_allowed": false
+    }
+  ],
+  "open_priority_gaps": [
+    "TV-RAW-018-CURRENT-LOCATOR-PROVENANCE",
+    "TV-MESSAGES-PROJECTION-GENERATOR",
+    "TV-TOKEN-OCCURRENCE-GENERATOR-PROVENANCE"
+  ],
+  "guards": [
+    "SEARCH_MISS_NE_GLOBAL_ABSENCE",
+    "DERIVED_NE_OBSERVED",
+    "FIXTURE_NE_LIVE",
+    "CODE_PRESENT_NE_RUNTIME_VERIFIED",
+    "TOKEN_VAZIO_NE_ZERO",
+    "FROZEN_HISTORY_NE_DESTRUCTIVE_REWRITE",
+    "SUPERSESSION_REQUIRES_RECEIPT",
+    "CLAIM_ALLOWED_FALSE_BY_DEFAULT"
+  ],
+  "F_ok": "MASTER_INDEX expanded with transversal governance registries and bound to existing Mapa/ATLAS authority model without rewriting predecessors.",
+  "F_gap": "automatic validators, full universe coverage, exact pre/post spreadsheet digests, provider-complete RAW018 custody, projection generator lineage and ALL_TOKEN generator provenance remain open.",
+  "F_next": [
+    "materialize validator for canonical node and contract invariants",
+    "bind MASTER_INDEX rows to stable provider identities and hashes",
+    "continue UNIVERSE_QUEUE until STOP_CONDITION",
+    "resolve or classify all P0/P1 gaps with receipts",
+    "create successor receipt and index entry for this control-plane bootstrap"
+  ]
+}
