@@ -1,0 +1,121 @@
+{
+  "schema": "rafaelia.omega-risk-gap-convergence.v1",
+  "cycle_id": "OMEGA-20260829T1121-0300-RISK-GAP-CONVERGENCE",
+  "observed_at": "2026-08-29T11:21:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_main_sha": "23a17f11c4165593381577d9ee1c15a3c575ac18",
+  "work_branch": "audit/risk-gap-convergence-20260829-1121",
+  "mode": ["APPEND_ONLY", "EVIDENCE_FIRST", "FAIL_CLOSED", "TOKEN_VAZIO_STRICT", "LATEST_EVIDENCE_ROUTING"],
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "observed_current_state": {
+    "main_ci": {
+      "run_id": 33248732776,
+      "conclusion": "success",
+      "head_sha": "23a17f11c4165593381577d9ee1c15a3c575ac18"
+    },
+    "provider_merge_enforcement": {
+      "main_protected": false,
+      "protection_enabled": false,
+      "required_status_checks_enforcement": "off",
+      "required_contexts": [],
+      "repository_rulesets": [],
+      "classification": "P0_OPEN_FAIL_CLOSED"
+    },
+    "genesis_seal": {
+      "path": "file_000000002e20820ebc7eb4567c469138.png",
+      "git_blob_id": "b9d3af394b3f32601c51debf285ee1f627343f14",
+      "size_bytes": 3160622,
+      "structural_ci_blocker": "RESOLVED_BY_EXACT_FAIL_CLOSED_CUSTODY_GUARD",
+      "sha256": "TOKEN_VAZIO_BINARY_BYTES_NOT_EXPOSED_BY_CONNECTED_TEXT_READ"
+    }
+  },
+  "latest_evidence_supersessions": [
+    {
+      "stale_state": "TOKEN_VAZIO_RUNNER",
+      "current_state": "CI_EXECUTION_OBSERVED_SUCCESS",
+      "evidence": "run 33248732776"
+    },
+    {
+      "stale_state": "TOKEN_VAZIO_RAW018_CURRENT_BYTES_SHA_PARSE_CARDINALITY",
+      "current_state": "RESOLVED_EVIDENCED",
+      "evidence": "RAW018 current witness sha256=3cf4783727feb5c53868af76d6e2de660e2287c2cb075180a6aad2738b10140c; parse PASS; 100 conversations"
+    },
+    {
+      "stale_state": "TV-RAW-018-PID-COMMITMENT-ALGORITHM-PROVENANCE",
+      "current_state": "RESOLVED_EVIDENCED",
+      "evidence": "expected=recomputed=766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e"
+    },
+    {
+      "stale_state": "TV-RAW-018-CHRONOLOGICAL-COMMITMENT-CURRENT-REPRODUCTION",
+      "current_state": "RESOLVED_EVIDENCED",
+      "evidence": "expected=recomputed=c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706"
+    }
+  ],
+  "materialized_changes": [
+    "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v3.json",
+    "tools/validate_temporal_priority_queue.py",
+    ".github/workflows/ci.yml temporal gap routing anti-regression step",
+    "data/reconciliation/OMEGA_RISK_GAP_CONVERGENCE_20260829T1121_0300.v1.json"
+  ],
+  "anti_regression_contract": {
+    "every_active_gap_requires": ["priority", "typed state", "scope", "authority", "evidence", "uncertainty", "falsifier", "closure_gate", "next_action"],
+    "resolved_gap_reactivation": "FAIL",
+    "duplicate_gap_id": "FAIL",
+    "untyped_gap": "FAIL",
+    "claim_allowed_true": "FAIL",
+    "history_rewrite": "FORBIDDEN",
+    "stale_state_priority_escalation_without_current_dependency": "FORBIDDEN"
+  },
+  "active_P0": [
+    {
+      "id": "P0-MAIN-SERVER-ENFORCEMENT",
+      "authority": "GitHub provider admin surface",
+      "status": "OPEN",
+      "safe_boundary": "No merge rejection experiment until provider protection/ruleset is actually observed."
+    },
+    {
+      "id": "P0-INDEPENDENT-APPROVAL",
+      "authority": "genuinely independent human reviewer",
+      "status": "HOLD_EXTERNAL_HUMAN_AUTHORITY",
+      "safe_boundary": "Automation and author self-approval cannot satisfy independence."
+    }
+  ],
+  "provider_mutation": {
+    "attempted": false,
+    "reason": "The connected GitHub action surface available in this cycle exposes provider protection reads but no authorized branch-protection/ruleset write operation. Existing repository script requires an admin credential and deliberately refuses unauthenticated apply.",
+    "next_verifiable_step": "Use an authorized provider-admin surface to apply protection, then read back and prove zero-approval rejection without changing main SHA."
+  },
+  "resolved_not_deleted": [
+    "RAW018 byte custody",
+    "RAW018 PID set commitment algorithm/equality",
+    "RAW018 chronological commitment/equality",
+    "Genesis Seal structural CI blocker",
+    "stale remote runner unknown on current main"
+  ],
+  "remaining_evidence_gaps": [
+    "server-side main merge enforcement",
+    "independent human approval",
+    "exact canonical MESSAGES full-scope binding",
+    "physical Android runtime receipt",
+    "NOVOexport per-object bounded coverage from ordinal 13634",
+    "legacy message/node projection generator provenance",
+    "Active20 component-level license/upstream lineage",
+    "Matrix C identity/formula and dialect-specific IPA source contracts",
+    "RAW018 original Drive occurrence provenance",
+    "Genesis Seal exact SHA-256"
+  ],
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "RESOLVED != DELETED_HISTORY",
+    "LATEST_EVIDENCE_WINS_FOR_CURRENT_ROUTING",
+    "FAIL_CLOSED_GATES_MUST_NOT_BE_WEAKENED_TO_GREEN_CI"
+  ],
+  "r3": {
+    "F_ok": "Current evidence is separated from stale historical states and a machine-enforced temporal gap contract is materialized.",
+    "F_gap": "Provider enforcement and independent review remain intentionally outside self-closure; physical/runtime and exact provenance gaps remain typed.",
+    "F_next": "Validate this branch in CI, consolidate duplicate governance tracking, then bind provider-side enforcement through an authorized admin surface."
+  }
+}
