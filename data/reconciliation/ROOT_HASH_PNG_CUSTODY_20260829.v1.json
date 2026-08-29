@@ -1,0 +1,49 @@
+{
+  "schema": "rafaelia.root-binary-custody.v1",
+  "date_local": "2026-08-29",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "path": "file_000000002e20820ebc7eb4567c469138.png",
+  "status": "PROVENANCE_PARTIAL_RELOCATION_BLOCKED",
+  "claim_allowed": false,
+  "observed_git_provenance": {
+    "introduction_commit": "524fba65211062cfb01f41cc4c5a12d122190d48",
+    "introduction_commit_message": "Add files via upload",
+    "introduction_time_utc": "2026-08-28T20:38:26Z",
+    "parent_commit": "a973c2e89dc8454b51f2967786c6704e653eb12b",
+    "commit_verification": "verified",
+    "git_blob_id": "b9d3af394b3f32601c51debf285ee1f627343f14",
+    "commit_file_status": "added"
+  },
+  "observed_references": [
+    "indices/deltas/ATLAS_ARCHAEOASTRONOMY_GEOMETRY_CALENDAR_ROUTE_20260828.md"
+  ],
+  "binary_custody": {
+    "byte_size": "TOKEN_VAZIO_BINARY_BYTES_NOT_EXPOSED_BY_TEXT_CONNECTOR",
+    "sha256": "TOKEN_VAZIO_BINARY_BYTES_NOT_AVAILABLE_FOR_HASH_IN_CURRENT_CONNECTED_READ",
+    "content_semantics": "TOKEN_VAZIO_DO_NOT_INFER_FROM_FILENAME"
+  },
+  "ci_relation": {
+    "workflow_run": 33241286919,
+    "job_id": 99070957707,
+    "failure": "root hash-named PNG structure guard",
+    "delta_causality": "PREEXISTING_FILE_NOT_ADDED_BY_PR457"
+  },
+  "anti_regression": [
+    "do not delete the binary to make CI green",
+    "do not weaken the root-image structure guard",
+    "do not infer image meaning from opaque filename",
+    "preserve the introduction commit and blob identity during any relocation",
+    "update every proven repository reference atomically with relocation"
+  ],
+  "relocation_gate": {
+    "target_directory_candidate": "visual/",
+    "allowed": false,
+    "blocking_gaps": [
+      "TOKEN_VAZIO_EXACT_BINARY_SHA256",
+      "TOKEN_VAZIO_EXACT_BYTE_SIZE",
+      "TOKEN_VAZIO_CANONICAL_SEMANTIC_NAME_OR_KEEP_OPAQUE_NAME",
+      "TOKEN_VAZIO_CONTENT_PRESERVING_BINARY_COPY_WRITE_CAPABILITY"
+    ],
+    "next_verifiable_step": "Obtain exact binary bytes through a binary-capable source, compute byte size and SHA-256, verify all path references, then perform copy+reference-update+hash-readback before deleting the root occurrence."
+  }
+}
