@@ -1,0 +1,111 @@
+{
+  "schema": "rafaelia.omega-operational-work-ci-receipt.v1",
+  "date_local": "2026-08-29",
+  "timezone": "America/Sao_Paulo",
+  "pull_request": 457,
+  "validated_head": "57e364e526ac688bdfa4b483f54327714b66f958",
+  "base_observed": "8ec1ffce3a0b20c1602a3f9b93f99b49919cbf3c",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "primary_gate": {
+    "workflow": "Omega Operational Work Ledger",
+    "run_id": 33241286941,
+    "job_id": 99070957599,
+    "conclusion": "success",
+    "validated_scope": [
+      "canonical operational ledger",
+      "negative claim promotion rejection",
+      "negative release promotion rejection",
+      "required falsifier enforcement",
+      "PASS-with-open-gap rejection"
+    ],
+    "checkout_action": {
+      "repository": "actions/checkout",
+      "version_label": "v7.0.0",
+      "commit": "9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0",
+      "pinning": "exact_commit_sha"
+    }
+  },
+  "sibling_gates": [
+    {
+      "workflow": "Branch Topology Gate",
+      "run_id": 33241286925,
+      "conclusion": "success",
+      "disposition": "PASS_OBSERVED"
+    },
+    {
+      "workflow": "CI",
+      "run_id": 33241286919,
+      "job_id": 99070957707,
+      "conclusion": "failure",
+      "disposition": "PREEXISTING_REPOSITORY_DEBT_OBSERVED_NOT_DELTA_FAILURE",
+      "evidence": [
+        "workflow YAML parse passed including omega-operational-work-ledger.yml",
+        "changed Markdown regression gate passed with 0 issues for docs/OMEGA_OPERATIONAL_WORK_20260829.md",
+        "repository-wide Markdown scan observed historical debt",
+        "structure guard failed on pre-existing root file file_000000002e20820ebc7eb4567c469138.png"
+      ],
+      "open_gap": "TOKEN_VAZIO_ROOT_HASH_NAMED_PNG_PROVENANCE_AND_SAFE_RELOCATION"
+    },
+    {
+      "workflow": "RAFAELIA Promotion Control V1",
+      "run_id": 33241286922,
+      "job_id": 99070971928,
+      "conclusion": "failure",
+      "disposition": "EXPECTED_FAIL_CLOSED_GOVERNANCE_BLOCK",
+      "evidence": [
+        "negative tests passed",
+        "15 invariants gate passed",
+        "claim_allowed=false validation passed",
+        "manual promotion decision denied because INDEPENDENT_APPROVAL_MISSING",
+        "observed independent approvals=0; required=1"
+      ],
+      "open_gap": "TOKEN_VAZIO_INDEPENDENT_APPROVAL"
+    },
+    {
+      "workflow": "Server Merge Enforcement Assurance",
+      "run_id": 33241286913,
+      "job_id": 99070957580,
+      "conclusion": "failure",
+      "disposition": "EXPECTED_FAIL_CLOSED_PROVIDER_GOVERNANCE_BLOCK",
+      "evidence": [
+        "negative and positive detector fixtures passed",
+        "provider protection bootstrap fixtures passed",
+        "live main inspection observed protected=false",
+        "protection_enabled=false",
+        "required status checks enforcement=off",
+        "no required status checks observed"
+      ],
+      "open_gap": "TV-MAPA-MAIN-SERVER-ENFORCEMENT"
+    }
+  ],
+  "non_regression_conclusion": {
+    "operational_ledger_gate": "PASS",
+    "new_markdown_delta": "PASS",
+    "workflow_yaml_delta": "PASS",
+    "branch_topology": "PASS",
+    "overall_merge_readiness": "BLOCKED",
+    "reason": [
+      "independent approval missing",
+      "main server-side merge enforcement not enabled",
+      "pre-existing root PNG structure debt remains"
+    ]
+  },
+  "does_not_close": [
+    "physical Android runtime receipt",
+    "device performance cycle counts",
+    "19-shard exact MESSAGES terminal run",
+    "four canonical MESSAGES output hashes",
+    "RAW018 current provider/bytes/SHA256/parse custody",
+    "GENESIS Matrix C source/formula binding",
+    "IPA/acoustic source and sampling protocol",
+    "N→E→C unsupported physical/philological claims"
+  ],
+  "next_verifiable_steps": [
+    "obtain one independent approval before promotion is reconsidered",
+    "enable and verify main branch server-side protection with required promotion-control context before claiming merge enforcement",
+    "trace the pre-existing root PNG provenance and relocate only with content-preserving evidence; do not delete or weaken the guard",
+    "preserve claim_allowed=false, release_allowed=false and promotion_allowed=false until the corresponding gates close"
+  ]
+}
