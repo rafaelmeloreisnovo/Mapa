@@ -2,7 +2,6 @@
 import json
 import re
 import subprocess
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,17 +17,21 @@ def main() -> None:
     expected_version = baseline["tool"]["version"]
 
     version = subprocess.run(
-        ["markdownlint-cli2", "--version"],
+        ["npm", "list", "-g", "markdownlint-cli2", "--depth=0", "--json"],
         cwd=ROOT,
         text=True,
         capture_output=True,
         check=False,
     )
-    version_text = (version.stdout + "\n" + version.stderr).strip()
     if version.returncode != 0:
-        fail(f"markdownlint-cli2 --version failed: {version_text}")
-    if expected_version not in version_text:
-        fail(f"tool drift: expected markdownlint-cli2 {expected_version}; got {version_text!r}")
+        fail("npm could not resolve installed markdownlint-cli2: " + (version.stderr or version.stdout).strip())
+    try:
+        version_data = json.loads(version.stdout)
+        actual_version = version_data["dependencies"]["markdownlint-cli2"]["version"]
+    except (json.JSONDecodeError, KeyError, TypeError) as exc:
+        fail(f"cannot parse installed markdownlint-cli2 version: {exc}")
+    if actual_version != expected_version:
+        fail(f"tool drift: expected markdownlint-cli2 {expected_version}; got {actual_version}")
 
     proc = subprocess.run(
         ["markdownlint-cli2", "**/*.md", "#node_modules"],
@@ -60,7 +63,7 @@ def main() -> None:
 
     print(
         "MARKDOWN_DEBT "
-        f"tool={expected_version} files_linted={files_linted if files_linted is not None else 'UNKNOWN'} "
+        f"tool={actual_version} files_linted={files_linted if files_linted is not None else 'UNKNOWN'} "
         f"issues={issues}/{ceiling_issues} files_with_issues={files_with_issues}/{ceiling_files}"
     )
 
