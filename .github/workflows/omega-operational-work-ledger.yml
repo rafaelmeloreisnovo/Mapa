@@ -6,12 +6,14 @@ on:
       - 'data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json'
       - 'docs/OMEGA_OPERATIONAL_WORK_20260829.md'
       - 'scripts/validate_omega_operational_work_ledger.py'
+      - 'tests/test_architecture_discovery_fixture_hash_equivalence.py'
       - '.github/workflows/omega-operational-work-ledger.yml'
   pull_request:
     paths:
       - 'data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v1.json'
       - 'docs/OMEGA_OPERATIONAL_WORK_20260829.md'
       - 'scripts/validate_omega_operational_work_ledger.py'
+      - 'tests/test_architecture_discovery_fixture_hash_equivalence.py'
       - '.github/workflows/omega-operational-work-ledger.yml'
 
 permissions:
@@ -28,6 +30,9 @@ jobs:
 
       - name: Validate canonical operational ledger
         run: python3 scripts/validate_omega_operational_work_ledger.py
+
+      - name: Verify canonical architecture fixture hash equivalence
+        run: python3 -m unittest tests.test_architecture_discovery_fixture_hash_equivalence
 
       - name: Negative gate — forbid claim promotion
         run: |
