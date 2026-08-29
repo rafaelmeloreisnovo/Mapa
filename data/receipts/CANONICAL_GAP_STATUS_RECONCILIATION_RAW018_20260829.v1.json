@@ -1,0 +1,46 @@
+{
+  "schema": "rafaelia.canonical_gap_status_reconciliation.v1",
+  "receipt_id": "RECEIPT-CANONICAL-RAW018-GAP-RECONCILIATION-20260829",
+  "observed_at": "2026-08-29T07:37:00-03:00",
+  "authoritative_source_receipt": "data/reconciliation/RAW018_PID_COMMITMENT_ALGORITHM_CLOSURE_20260829T0712_0300.v1.json",
+  "authoritative_source_commit": "7657041891775d0e9c878216dc80eba5503cdb81",
+  "closed_gap": {
+    "gap_id": "TV-RAW-018-PID-COMMITMENT-ALGORITHM-PROVENANCE",
+    "state": "RESOLVED_EVIDENCED",
+    "closure_gate_result": "PASS",
+    "expected_candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "recomputed_candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+    "equality": "PASS",
+    "generator_commit": "3ab1eb3a596148e616f0e2d134f2cc8b71b0fafe",
+    "generator_path": "tools/reconcile_novoexport_raw018_pid_boundary.py",
+    "generator_blob_sha": "412342d336058b9f3bda73c5ec52070a810df3b7"
+  },
+  "successor_gap": {
+    "gap_id": "TV-RAW-018-CHRONOLOGICAL-COMMITMENT-CURRENT-REPRODUCTION",
+    "priority": "P1",
+    "state": "ACTIVE",
+    "evidence_needed": "historical Locator Created UTC rows or proven canonical rendering contract sufficient to recompute c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706"
+  },
+  "canonical_triage_delta": {
+    "active_P0_before": 2,
+    "active_P0_after": 1,
+    "resolved_P0_historical_rows": 1,
+    "active_P1_increment": 1,
+    "interpretation": "Priority history is preserved; active urgency moves to the successor gap."
+  },
+  "claim_allowed": false,
+  "global_closure": "VERIFIED_LIMITED_APPEND_ONLY",
+  "anti_regression": [
+    "RESOLVED_GAP_ROW_NE_DELETED_HISTORY",
+    "SET_COMMITMENT_EQUALITY_NE_CHRONOLOGICAL_COMMITMENT_EQUALITY",
+    "RAW018_CUSTODY_NE_GLOBAL_UNIVERSE_COVERAGE",
+    "SCOPE_CLOSURE_NE_GLOBAL_CLAIM"
+  ],
+  "F_ok": "Canonical urgency/control-plane state is reconciled with the pre-existing verified PID algorithm closure receipt.",
+  "F_gap": "Chronological commitment remains P1; Mapa main server enforcement remains the only active P0 in the visible urgency registry.",
+  "F_next": [
+    "resolve Mapa main enforcement P0 via provider-admin surface",
+    "recover chronological serialization/rendering and recompute RAW018 chronological commitment",
+    "continue remaining P1 evidence queues"
+  ]
+}
