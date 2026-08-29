@@ -4,6 +4,8 @@
   "timezone": "America/Sao_Paulo",
   "state": "DELIVERED_WITH_OPEN_RUNTIME_GATES",
   "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
   "invariants": [
     "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
     "TOKEN_VAZIO != PASS",
@@ -15,6 +17,7 @@
     {
       "id": "TERMUX-SAFE-CORE",
       "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "authority": "runtime producer repository",
       "observed_head": "eab968f59c4c95d7369717f9d92a63657e8b5f44",
       "status": "IMPLEMENTED_AND_LOCAL_GATES_PASS",
       "evidence": [
@@ -28,11 +31,13 @@
         "TOKEN_VAZIO_DEVICE_PERFORMANCE_CYCLE_COUNTS",
         "TOKEN_VAZIO_PREEXISTING_CI_FAILURE_CAUSAL_CLOSURE"
       ],
+      "falsifier": "A physical-device run fails to initialize the merged bootstrap, produces a receipt inconsistent with the exact APK/build identity, or reproduces a critical BUG-01/03/06/08 invariant violation.",
       "next_verifiable_step": "Run the merged APK/runtime on a physical Android target, bind exact APK SHA256 + device/runtime receipt + exit/log evidence, then execute cycle-count benchmark without promoting CI evidence to physical evidence."
     },
     {
       "id": "MAPA-MESSAGES-EXACT",
       "repository": "rafaelmeloreisnovo/Mapa",
+      "authority": "federated routing and evidence control plane",
       "observed_head": "8ec1ffce3a0b20c1602a3f9b93f99b49919cbf3c",
       "status": "RESUMABLE_RUNNER_MATERIALIZED",
       "evidence": [
@@ -47,11 +52,13 @@
         "TOKEN_VAZIO_4_OUTPUT_HASHES",
         "TOKEN_VAZIO_INPUT_SCOPE_COMPLETE_TRUE"
       ],
+      "falsifier": "A resumed execution diverges from the canonical full-run semantics on a bounded fixture, manifest/rules drift is accepted, an incomplete source file is checkpointed as complete, or terminal aggregate hashes are nondeterministic.",
       "next_verifiable_step": "Execute the resumable runner to terminal completion across the 19-shard scope and bind the four canonical output hashes plus input_scope_complete=true."
     },
     {
       "id": "DRIVE-NOVO-UPGRADE",
       "repository": "rafaelmeloreisnovo/Mapa",
+      "authority": "routing layer; provider bytes remain Google Drive authority",
       "status": "APPEND_ONLY_UPGRADE_IN_PROGRESS",
       "evidence": [
         "PR#455 merged: ATLAS/NOVO Drive upgrade gate",
@@ -62,11 +69,13 @@
         "TOKEN_VAZIO_HARD_CUSTODY_RAW018_CURRENT_PROVIDER_BYTES_SHA_PARSE",
         "TOKEN_VAZIO_PROVIDER_OBJECT_DISPOSITION_15439_OF_15439"
       ],
+      "falsifier": "A claimed provider object cannot be read back from the cited Drive identity, its bytes/digest differ from the receipt, or a newer occurrence overwrites rather than appends lineage.",
       "next_verifiable_step": "Continue per-object provider disposition append-only; close RAW018 only with directly addressable provider bytes, digest and parse evidence."
     },
     {
       "id": "GENESIS-8X3",
       "repository": "rafaelmeloreisnovo/Mapa",
+      "authority": "RafPolimata produces CI artifact; Drive persists presentation artifacts; Mapa routes evidence",
       "status": "CI_PASS_OBSERVED_DRIVE_ARTIFACTS_PERSISTED_CLAIMS_BLOCKED",
       "evidence": [
         "RafPolimata GENESIS 8x3 Materializer CI success observed",
@@ -81,11 +90,13 @@
         "QUANTUM_LANGUAGE_METAPHOR_ONLY",
         "DRIVE_DECK_PDF_SHEET_NOT_PHYSICAL_OR_MATHEMATICAL_PROOF"
       ],
+      "falsifier": "Materialized cells fail deterministic regeneration from the cited source inputs, Matrix C cannot be bound to a defined source/formula, or acoustic claims cannot be reproduced from a specified signal and sampling protocol.",
       "next_verifiable_step": "Bind Matrix C source/definition first; then bind IPA/acoustic source and sampling protocol before any phonetic-frequency claim."
     },
     {
       "id": "TRUTH-N-E-C",
       "repository": "Google Drive",
+      "authority": "source-bound philology/acoustics/ML research record",
       "status": "DRAFT_DEFENSAVEL",
       "claim_allowed": false,
       "evidence": [
@@ -96,6 +107,7 @@
         "TOKEN_VAZIO_UNIVERSAL_ANCIENT_TRIAD_EXISTENCE",
         "TOKEN_VAZIO_SEMANTIC_QUANTUM_WAVEFUNCTION_MECHANISM"
       ],
+      "falsifier": "Primary-language sources contradict a proposed exact formulation, acoustic measurements do not support a stated waveform relation under controlled conditions, or the proposed transformer-order effect disappears under a reproducible controlled comparison.",
       "next_verifiable_step": "Separate philological source claims, acoustic equations and transformer-order effects; preserve quantum-wavefunction language as unproven/metaphorical unless a physical protocol is supplied."
     }
   ],
