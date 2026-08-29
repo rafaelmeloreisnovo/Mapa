@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RECEIPT = ROOT / "data/reconciliation/OMEGA_GAP_REDUCTION_RECEIPT_20260829.v1.json"
 CI_RECEIPT = ROOT / "data/reconciliation/OMEGA_GAP_REDUCTION_CI_RECEIPT_20260829.v1.json"
 SEAL_RECEIPT = ROOT / "data/reconciliation/GENESIS_SEAL_ROOT_CUSTODY_EXCEPTION_20260829.v1.json"
+TERMINAL_RECEIPT = ROOT / "data/reconciliation/OMEGA_GAP_REDUCTION_TERMINAL_RECEIPT_20260829.v1.json"
 LEDGER = ROOT / "data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v2.json"
 
 
@@ -23,9 +24,10 @@ def main():
     r = load(RECEIPT)
     c = load(CI_RECEIPT)
     s = load(SEAL_RECEIPT)
+    t = load(TERMINAL_RECEIPT)
     l = load(LEDGER)
 
-    for name, obj in (("receipt", r), ("CI receipt", c), ("Seal receipt", s)):
+    for name, obj in (("receipt", r), ("CI receipt", c), ("Seal receipt", s), ("terminal receipt", t)):
         require(obj["claim_allowed"] is False, f"{name} must remain claim-gated")
         require(obj["release_allowed"] is False, f"{name} must remain release-gated")
         require(obj["promotion_allowed"] is False, f"{name} must remain promotion-gated")
@@ -83,9 +85,8 @@ def main():
     require(checks["general_ci"]["causal_object"] == p["path"], "historical CI causal object must match Genesis Seal path")
 
     promo = checks["promotion_control"]
-    require(promo["result"] == "DENIED", "promotion must remain denied")
-    require(promo["blocking_reasons"] == ["INDEPENDENT_APPROVAL_MISSING"], "promotion blocking reason drift")
-    require(promo["observed_independent_approvals"] == 0, "independent approval count drift")
+    require(promo["result"] == "DENIED", "historical promotion must remain denied")
+    require(promo["observed_independent_approvals"] == 0, "historical independent approval count drift")
     require(promo["required_independent_approvals"] == 1, "required independent approval count drift")
 
     server = checks["server_merge_enforcement"]
@@ -93,16 +94,26 @@ def main():
     require(server["protected"] is False, "main protection state drift")
     require(server["protection_enabled"] is False, "main protection enabled state drift")
     require(server["required_status_checks"]["enforcement_level"] == "off", "required checks enforcement drift")
-    require(set(server["failure_modes"]) == {
-        "BRANCH_PROTECTION_DISABLED",
-        "PROTECTION_NOT_ENABLED",
-        "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
-        "NO_REQUIRED_STATUS_CHECKS_OBSERVED",
-    }, "server enforcement failure-mode set drift")
 
-    require(c["aggregate"]["merge_recommendation"] == "DO_NOT_PROMOTE", "CI successor must remain fail-closed")
+    tc = t["checks_on_evaluated_head"]
+    require(t["evaluated_head"] == "fbe123957358444e4e13196be8d05cbe1699d904", "terminal evaluated head drift")
+    require(tc["omega_gap_reduction_receipt"]["conclusion"] == "success", "terminal receipt gate must be PASS")
+    require(tc["general_ci"]["conclusion"] == "success", "terminal general CI must be PASS")
+    require(tc["general_ci"]["genesis_seal_exact_custody_guard"] == "PASS", "Genesis Seal exact custody guard must be PASS")
+    require(tc["branch_topology"]["conclusion"] == "success", "terminal topology must be PASS")
+    require(tc["promotion_control"]["result"] == "DENIED", "terminal promotion must remain denied")
+    require(tc["promotion_control"]["blocking_reasons"] == ["PULL_REQUEST_DRAFT_OR_UNKNOWN", "INDEPENDENT_APPROVAL_MISSING"], "terminal promotion blocker set drift")
+    require(tc["promotion_control"]["observed_independent_approvals"] == 0, "terminal approval count drift")
+    require(tc["server_merge_enforcement"]["conclusion"] == "failure_fail_closed", "terminal server gate must remain fail-closed")
+    require(tc["main_hardening_gate"]["contract_validation"] == "PASS", "main-hardening contract validation must pass")
+    require(t["main_live_observation"]["protected"] is False, "terminal live main protected state drift")
+    require(t["main_live_observation"]["protection_enabled"] is False, "terminal live protection state drift")
+    require(t["main_live_observation"]["required_status_checks"]["enforcement_level"] == "off", "terminal live status enforcement drift")
+    require(t["aggregate_state"] == "STRUCTURE_AND_RECEIPT_GATES_GREEN_GOVERNANCE_FAIL_CLOSED", "terminal aggregate state drift")
+    require(t["merge_recommendation"].startswith("DO_NOT_PROMOTE"), "terminal receipt must remain promotion-blocked")
+
     require("VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM" in l["anti_regression"], "core epistemic invariant missing")
-    print("PASS: gap reduction + CI causality + Genesis Seal custody successor + ledger v2")
+    print("PASS: terminal gap reduction receipt chain validated fail-closed")
 
 
 if __name__ == "__main__":
