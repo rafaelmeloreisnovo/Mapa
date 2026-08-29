@@ -1,0 +1,239 @@
+{
+  "schema": "rafaelia.atlas_novo_drive_upgrade_gate.v1",
+  "cycle_id": "OMEGA-20260828T2013-0300-ATLAS-NOVO-DRIVE-UPGRADE-GATE",
+  "observed_at": "2026-08-28T20:13:00-03:00",
+  "state": "VERIFIED_LIMITED_APPEND_ONLY",
+  "claim_allowed": false,
+  "source_mutation_allowed": false,
+  "default_branch_write_performed": false,
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "main_sha": "009d55a91dbcfcee88b8ed9eebacc27646f1e8fa",
+    "receipt_path": "data/reconciliation/ATLAS_NOVO_INGEST_RECONCILIATION_20260828.v1.json",
+    "receipt_blob_sha": "9212880102d87424509010c5348c75665ee83b2f"
+  },
+  "route": {
+    "ATLAS:X": "procure_tudo_e_escolha_rota_por_autoridade_e_evidencia",
+    "NOVO:X": "Google_Drive_NOVOexport_primeiro",
+    "L:X": "preservar_linhagem_revisoes_predecessor_successor",
+    "O:X": "validacoes_independentes_sem_colapsar_autoridade",
+    "T:X": "pontes_tipadas_Drive_GitHub_Mapa_Atlas_memorias",
+    "REL:X": "relacao_tipada_direcao_proveniencia_falsificador",
+    "SCALE:X": "meta_para_objeto_shard_token_yocto_somente_quando_definido",
+    "EVID:X": "somente_observacao_execucao_evidencia_gate",
+    "GAP:X": "TOKEN_VAZIO_com_causa_e_closure_gate",
+    "LEARN:X": "append_only_delta_contradicao_supersession_receipt"
+  },
+  "drive_authorities": {
+    "novoexport_root": {
+      "provider_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+      "role": "SOURCE_ROOT"
+    },
+    "physical_route_map": {
+      "provider_id": "1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og",
+      "revision_id": "AIroW35cEoTlGlyndWoZfxfu6ZPzQiHGu747feIgoXyihQ0Vvz8MUH5KGRFRtbP0iFje2w0ybQSIS_mJKr61nlvE4LNXNau4im-7wOqs9yQ",
+      "title": "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT",
+      "state": "OBSERVED"
+    },
+    "custody_index": {
+      "provider_id": "15nuOpMb9L7BvrhwiSh0WicGG1JonXmvKR5fZ-uzy7C0",
+      "revision_id": "AIroW37pX9rm-7TT-TS9vZpU_JHrRPnCIFcZsPU8gf6sZI2BUoyCBMEDdg9Wrc4oGo5t6F6FXwoNT9cVkJYyfA8n7o28xtRJ8AgkqZtw5TU",
+      "title": "NOVOEXPORT_CUSTODY_INDEX_V1",
+      "state": "ACTIVE_APPEND_ONLY"
+    },
+    "master_index": {
+      "provider_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "observed_modified_at": "2026-08-28T09:01:12.003Z",
+      "state": "WORKING_INDEX_OCCURRENCE_NOT_AUTHORITY_BY_TITLE"
+    }
+  },
+  "drive_is_newer_policy": {
+    "rule": "NEWER_DRIVE_OCCURRENCE_DOES_NOT_OVERWRITE_GITHUB; IT CREATES A DELTA, SOURCE POINTER, RECEIPT AND INDEX UPDATE",
+    "allowed_dispositions": [
+      "UPGRADE_INDEX",
+      "LINK_EXTERNAL_AUTHORITY",
+      "KEEP_SOURCE_IMMUTABLE",
+      "MEDIA_METADATA_ONLY",
+      "QUARANTINE_PENDING_SEMANTIC_READ",
+      "TOKEN_VAZIO_HARD_CUSTODY"
+    ],
+    "forbidden": [
+      "silent_source_rewrite",
+      "title_to_identity_merge",
+      "Drive_recency_to_claim_authority",
+      "photo_filename_to_semantic_identity",
+      "missing_search_result_to_absence",
+      "historical_witness_to_current_bytes"
+    ]
+  },
+  "structured_novoexport_snapshot": {
+    "system_root_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+    "conversation_corpus_folder_id": "1S0DaA9ByFeL9wdPmvDgd3CCEe3Jcj7c2",
+    "conversation_shards_declared": 51,
+    "conversation_range": "000..050",
+    "current_physical_shards_observed": 50,
+    "current_physical_missing_shard": "018",
+    "core_files": [
+      {"provider_id":"13xMqjbn1O5nc1Q3gC3ZjnUdLLW5qneWk","name":"export_manifest.json","bytes":3812404,"disposition":"UPGRADE_INDEX"},
+      {"provider_id":"1_K2rfAy46JAzZt3bIWGt9neLxOjgiDcz","name":"library_files.json","bytes":8401843,"disposition":"UPGRADE_INDEX"},
+      {"provider_id":"1MP4yedkHcZdFQ8iSrnCyhPvqTS6cXVaB","name":"message_feedback.json","bytes":17188,"disposition":"UPGRADE_INDEX"},
+      {"provider_id":"1Fz0br6zr066UhA6wxBUrQ8aFXaBA6hiI","name":"shared_conversations.json","bytes":14569,"disposition":"UPGRADE_INDEX"},
+      {"provider_id":"1eyXnRZM-UUTFeODI-mJiSH4fUILIt0ME","name":"user_settings.json","bytes":6501,"disposition":"UPGRADE_INDEX_PRIVATE_FIELDS_GATED"},
+      {"provider_id":"1HmK1EZb7-pTLQZdt9F1K4VBlE0OffW_R","name":"user.json","bytes":137,"disposition":"UPGRADE_INDEX_PRIVATE_FIELDS_GATED"},
+      {"provider_id":"1T_JQw9jCO-m2iS2OZsJp16zDBr_PUK9T","name":"group_chats.json","bytes":280307,"disposition":"UPGRADE_INDEX_PRIVATE_FIELDS_GATED"},
+      {"provider_id":"18Hv8UOPL70HFMXHviW7vHFxPhOoSz7bM","name":"temp.locate.txt","bytes":1396867,"disposition":"UPGRADE_INDEX_LOCATOR_ONLY"},
+      {"provider_id":"1NwPpd_CYpwjrb7qOn8Pqw-d_b4Qmut1D","name":"chat.html","bytes":920728414,"disposition":"KEEP_SOURCE_IMMUTABLE_LARGE_DERIVE_BY_CURSOR"}
+    ]
+  },
+  "raw018_recovery": {
+    "state_before": "COMPOSITE_GAP_CURRENT_RAW018_AND_PID_SET",
+    "state_after": "PID_HASH_SET_CLOSED_CURRENT_BYTE_CUSTODY_OPEN",
+    "pid_hash_set": {
+      "state": "EVIDENCED_RECONCILED_100_PRIVACY_PRESERVING",
+      "candidate_count": 100,
+      "candidate_set_sha256": "766644f8a199de4317500e6f40d44f9187f767e2ea453910ab4a4d0ec8cfc69e",
+      "candidate_chronological_sha256": "c29cbc493b2401d0d875a49a71999f4b32f8b3faab8a86cd2c1d9a4e4ca83706",
+      "historical_object_witness_sha256": "f14cd8767241255d64dba51b818e1bf3d5eefb6af157f1b321199cb102223156"
+    },
+    "current_provider": "TOKEN_VAZIO_HARD_CUSTODY",
+    "current_bytes": "TOKEN_VAZIO_HARD_CUSTODY",
+    "current_sha256": "TOKEN_VAZIO_HARD_CUSTODY",
+    "current_json_parse": "TOKEN_VAZIO_HARD_CUSTODY",
+    "expected_bytes_when_witness_appears": 12115336,
+    "closure_gate": "current provider object -> exactly 12115336 bytes -> SHA256 -> JSON parse fail-closed -> PID hash set == candidate_set_sha256"
+  },
+  "formula_registry_upgrade": {
+    "drive_receipt": {
+      "provider_id": "1c8dXf4BwlwU1JGE8ysJv-L_ETsCmPnwBRMRmDKa-uNU",
+      "revision_id": "ANLCKQkeX_yRbAoOBgnTY-ST0TW4L0H-D-Bl9eAeYXb18gKhzcsaIY7HQFvSF32Qj9BXyhYK8hRM8lS7Psl-98i-y01O9wIxRpk-AZNXV34",
+      "title": "NOVOEXPORT_FORMULA_ADJUDICATION_V1_20260828"
+    },
+    "producer_authority": {
+      "repo": "instituto-Rafael/RAFAELIA_CORE",
+      "merge_sha": "bd33d4c31cd5fcc1d8e9dd31e93f74510d0c7cf1",
+      "merge_message": "Merge PR #5: fail-closed formula conflict adjudication"
+    },
+    "total_conflicting_labels": 3856,
+    "critical_materialized": 5,
+    "remaining_contextual_triage": 3851,
+    "remaining_state": "TOKEN_VAZIO_CONTEXTUAL_CLASSIFICATION",
+    "automatic_replacements": 0,
+    "automatic_promotions": 0,
+    "disposition": "LINK_EXTERNAL_AUTHORITY_NOT_COPY_AS_MAPA_AUTHORITY"
+  },
+  "media_and_asset_gate": {
+    "observation": "NOVOexport root contains JPEG/PNG/WAV/ZIP/sharedlib/octet-stream objects whose filenames often end in .dat",
+    "identity_rule": "provider_id + MIME + bytes + parent + computed digest when available",
+    "content_semantics_rule": "TOKEN_VAZIO_UNTIL_OBJECT_LEVEL_READ_OR_PROVEN_ATTACHMENT_RELATION",
+    "photos": "MEDIA_METADATA_ONLY; linking to conversations/system requires file_id/attachment/relation evidence",
+    "privacy": "do not publish raw personal-media content or infer sensitive attributes from images",
+    "disposition": "INDEX_METADATA_AND_RELATION_EDGES_ONLY"
+  },
+  "upgrade_queue": [
+    {
+      "priority": "P0",
+      "gap_id": "TV-RAW-018-CURRENT-CUSTODY",
+      "source_pointer": "Drive RAW018 Wave3 receipt 1VXRoB8Uw9X8w5vnTjlANhgnelJGApVUPSAvSK-9Dgds",
+      "missing_field": "current provider_id/bytes/sha256/json_parse",
+      "blocking_dependency": "current RAW018 byte-backed witness",
+      "evidence_needed": "provider object + bytes + SHA256 + parse + PID-set equality",
+      "falsifier": "wrong byte count, parse failure, or PID set digest mismatch",
+      "owner_authority": "Google Drive source custody + Mapa routing",
+      "urgency": "P0",
+      "next_probe": "provider-id/manifest/current-root exact lookup without substituting MESSAGES-00018",
+      "closure_gate": "RAW018 current byte custody PASS",
+      "claim_allowed": false
+    },
+    {
+      "priority": "P0",
+      "gap_id": "TV-NOVO-PER-OBJECT-UPGRADE-COVERAGE",
+      "source_pointer": "Drive NOVOexport root + export_manifest.json",
+      "missing_field": "per-object disposition for all 15439 exported objects",
+      "blocking_dependency": "cursor-based metadata/hash enumeration",
+      "evidence_needed": "provider_id, parent, mime, bytes, digest-or-TOKEN_VAZIO, route, receipt",
+      "falsifier": "count mismatch, duplicated provider_id, missing predecessor or silent overwrite",
+      "owner_authority": "Drive source occurrence; Mapa index projection",
+      "urgency": "P0",
+      "next_probe": "bulk-first enumerate structured folders then media/archive classes with resumable cursor",
+      "closure_gate": "15439/15439 provider objects dispositioned without source mutation",
+      "claim_allowed": false
+    },
+    {
+      "priority": "P0",
+      "gap_id": "TV-MESSAGES-FULL-COVERAGE",
+      "source_pointer": "predecessor reconciliation message projection 91232 records / 1000 conversations",
+      "missing_field": "remaining conversations/messages projection",
+      "blocking_dependency": "deterministic cursor + dedup",
+      "evidence_needed": "conversation_id/node_id/message_id counts and content-addressed receipt",
+      "falsifier": "duplicate inflation or cardinality mismatch",
+      "owner_authority": "NOVOexport conversations corpus",
+      "urgency": "P0",
+      "next_probe": "continue after first 1000 conversations",
+      "closure_gate": "full bounded corpus message projection",
+      "claim_allowed": false
+    },
+    {
+      "priority": "P1",
+      "gap_id": "TV-NOVO-MEDIA-SEMANTIC-LINKAGE",
+      "source_pointer": "NOVOexport root media/assets",
+      "missing_field": "proven relation edges to conversation/file/attachment identities",
+      "blocking_dependency": "library_files/export_manifest/conversation attachment references",
+      "evidence_needed": "provider_id relation edge + source pointer + optional digest",
+      "falsifier": "unreferenced media or conflicting attachment identity",
+      "owner_authority": "Drive source occurrence",
+      "urgency": "P1",
+      "next_probe": "join library_files and conversation attachment refs before any image semantic analysis",
+      "closure_gate": "media object is linked, quarantined, or explicitly unlinked with evidence",
+      "claim_allowed": false
+    },
+    {
+      "priority": "P1",
+      "gap_id": "TV-FORMULA-CONTEXTUAL-TRIAGE-3851",
+      "source_pointer": "RAFAELIA_CORE@bd33d4c + Drive formula adjudication receipt",
+      "missing_field": "contextual classification for 3851 labels",
+      "blocking_dependency": "source context, units, semantic identity, quantization policy",
+      "evidence_needed": "producer context + independent recomputation + negative variant explanation",
+      "falsifier": "context contradicts proposed identity/policy",
+      "owner_authority": "instituto-Rafael/RAFAELIA_CORE",
+      "urgency": "P1",
+      "next_probe": "triage by priority without automatic replacement",
+      "closure_gate": "per-label disposition with evidence and claim fence",
+      "claim_allowed": false
+    }
+  ],
+  "atlas_projection": {
+    "L": "Drive route/custody revisions -> Mapa predecessor -> this delta; preserve old states",
+    "O": "Drive source evidence, RAFAELIA_CORE formula authority and GitHub routing remain independent axes",
+    "T": "Drive provider objects <-> content/occurrence identities <-> GitHub producer refs <-> receipts",
+    "C": "newer Drive data updates observation/index state, not scientific truth or authority by recency",
+    "P": "provider_id/revision/commit/digest/receipt remain stable anchors"
+  },
+  "relationships": [
+    {"from":"Drive:NOVOexport","type":"SOURCE_OF","to":"Mapa:ATLAS_NOVO_DRIVE_UPGRADE_GATE"},
+    {"from":"Drive:NOVOEXPORT_FORMULA_ADJUDICATION_V1_20260828","type":"MIRRORS_EVIDENCE_FROM","to":"GitHub:instituto-Rafael/RAFAELIA_CORE@bd33d4c"},
+    {"from":"RAW018_PID_HASH_SET","type":"DOES_NOT_PROVE","to":"RAW018_CURRENT_BYTES"},
+    {"from":"Drive:media_occurrence","type":"REQUIRES_PROVEN_EDGE_BEFORE","to":"conversation_or_attachment_identity"}
+  ],
+  "learning": [
+    "Drive recency is a routing signal, not authority by itself.",
+    "RAW018 PID identity evidence is closed independently from current byte custody.",
+    "The formula adjudication producer authority lives in RAFAELIA_CORE; Mapa should link, not clone authority.",
+    "Media with .dat names must be typed by provider MIME before semantic interpretation.",
+    "Upgrade means append-only disposition and index convergence, not source overwrite."
+  ],
+  "coverage_delta": {
+    "before": "Drive-newer state partially represented by predecessor Mapa receipt",
+    "after": "current Drive route/custody revisions, RAW018 split state, formula authority and media class are explicitly dispositioned",
+    "global_per_object_upgrade": "TOKEN_VAZIO_UNTIL_15439_15439_DISPOSITIONED"
+  },
+  "F_ok": "Applied ATLAS/NOVO recovery gate; current Drive routing and custody are bound to the Mapa lineage; RAW018 composite gap split without regression; formula adjudication linked to producer authority; media/photo objects gated by identity and privacy before semantic linkage.",
+  "F_gap": "Per-object upgrade coverage for 15439 objects, RAW018 current bytes/provider/hash/parse, full message projection, media relation edges and 3851 formula contextual classifications remain open.",
+  "F_next": [
+    "continue cursor-first from structured corpus: export_manifest/library_files -> 51 conversation shard occurrence map -> message projection",
+    "resolve RAW018 current byte custody only with a current provider witness",
+    "join media provider_ids to library_files/conversation attachment refs before any photo semantic processing",
+    "append each completed batch to UNIVERSE_OBJECTS/CONTENT_IDENTITIES/UNIVERSE_COVERAGE/UNIVERSE_QUEUE projections",
+    "preserve claim_allowed=false and no direct default-branch mutation"
+  ]
+}
