@@ -1,0 +1,87 @@
+{
+  "schema": "rafaelia.omega-gap-reduction-ci-receipt.v1",
+  "date_local": "2026-08-29",
+  "timezone": "America/Sao_Paulo",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 459,
+  "evaluated_head": "e2206a9815f9d4b204c342d61fd0561e8dcfd315",
+  "parent_receipt": "data/reconciliation/OMEGA_GAP_REDUCTION_RECEIPT_20260829.v1.json",
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "checks": {
+    "omega_gap_reduction_receipt": {
+      "run_id": 33243989578,
+      "job_id": 99078124728,
+      "conclusion": "success",
+      "classification": "PASS"
+    },
+    "branch_topology_gate": {
+      "run_id": 33243989606,
+      "conclusion": "success",
+      "classification": "PASS"
+    },
+    "general_ci": {
+      "run_id": 33243989581,
+      "job_id": 99078124795,
+      "conclusion": "failure",
+      "failed_step": "Structure guard — no hash-named PNGs at root",
+      "causal_object": "file_000000002e20820ebc7eb4567c469138.png",
+      "classification": "KNOWN_STRUCTURAL_CUSTODY_BLOCKER",
+      "unrelated_prior_steps": "PASS"
+    },
+    "promotion_control": {
+      "run_id": 33244104932,
+      "negative_tests_job_id": 99078431481,
+      "enforce_job_id": 99078449521,
+      "negative_tests": "PASS",
+      "invariants_15": "PASS",
+      "claim_allowed_false_gate": "PASS",
+      "result": "DENIED",
+      "blocking_reasons": ["INDEPENDENT_APPROVAL_MISSING"],
+      "observed_independent_approvals": 0,
+      "required_independent_approvals": 1,
+      "automatic_merge": false,
+      "manual_merge_only": true,
+      "classification": "FAIL_CLOSED_EXPECTED_GOVERNANCE"
+    },
+    "server_merge_enforcement": {
+      "run_id": 33243989590,
+      "job_id": 99078124739,
+      "fixture_tests": "PASS_8_OF_8",
+      "live_inspection": "BLOCKED",
+      "server_side_merge_binding": "NOT_ENFORCED_OBSERVED",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_checks": {
+        "contexts": [],
+        "checks": [],
+        "enforcement_level": "off"
+      },
+      "failure_modes": [
+        "BRANCH_PROTECTION_DISABLED",
+        "PROTECTION_NOT_ENABLED",
+        "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+        "NO_REQUIRED_STATUS_CHECKS_OBSERVED"
+      ],
+      "promotion_control_exact_required_context": "TOKEN_VAZIO_NOT_OBSERVED_BY_THIS_ENDPOINT",
+      "classification": "FAIL_CLOSED_LIVE_GOVERNANCE"
+    }
+  },
+  "aggregate": {
+    "receipt_integrity_gate": "PASS",
+    "branch_topology": "PASS",
+    "repository_structure": "BLOCKED_BY_GENESIS_SEAL_ROOT_LOCATION",
+    "independent_approval": "MISSING_0_OF_1",
+    "server_enforcement": "NOT_ENFORCED_OBSERVED",
+    "state": "DRAFT_EVIDENCE_VALIDATED_PROMOTION_BLOCKED",
+    "merge_recommendation": "DO_NOT_PROMOTE"
+  },
+  "next_verifiable_steps": [
+    "obtain one independent approval without self-satisfaction",
+    "bind server-side main protection and required promotion-control status context",
+    "perform Genesis Seal binary-preserving relocation with pointer migration and readback",
+    "rerun general CI after binary-safe relocation"
+  ],
+  "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+}

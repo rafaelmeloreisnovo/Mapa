@@ -89,15 +89,38 @@ jobs:
           done
           echo "All required root files present."
 
-      - name: Structure guard — no hash-named PNGs at root
+      - name: Structure guard — only exact custodied Genesis Seal may remain at root
+        shell: bash
         run: |
-          loose=$(find . -maxdepth 1 -name "file_*.png" 2>/dev/null || true)
-          if [ -n "$loose" ]; then
-            echo "ERROR: Hash-named PNGs at root (should be in visual/):"
-            echo "$loose"
-            exit 1
+          set -euo pipefail
+          allowed="./file_000000002e20820ebc7eb4567c469138.png"
+          expected_blob="b9d3af394b3f32601c51debf285ee1f627343f14"
+          expected_size="3160622"
+
+          mapfile -t loose < <(find . -maxdepth 1 -type f -name 'file_*.png' -print | sort)
+
+          for path in "${loose[@]}"; do
+            if [ "$path" != "$allowed" ]; then
+              echo "ERROR: unapproved hash-named PNG at root: $path"
+              exit 1
+            fi
+
+            blob=$(git hash-object "$path")
+            size=$(wc -c < "$path" | tr -d '[:space:]')
+            if [ "$blob" != "$expected_blob" ]; then
+              echo "ERROR: Genesis Seal blob drift: expected $expected_blob got $blob"
+              exit 1
+            fi
+            if [ "$size" != "$expected_size" ]; then
+              echo "ERROR: Genesis Seal size drift: expected $expected_size got $size"
+              exit 1
+            fi
+            echo "PASS: exact custodied Genesis Seal retained at root ($blob, $size bytes)"
+          done
+
+          if [ "${#loose[@]}" -eq 0 ]; then
+            echo "PASS: no hash-named PNGs at root"
           fi
-          echo "Root is clean."
 
       - name: M3 — Varredura operacional contract check
         run: |

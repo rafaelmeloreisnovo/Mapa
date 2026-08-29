@@ -1,0 +1,54 @@
+{
+  "schema": "rafaelia.genesis-seal-root-custody-exception.v1",
+  "date_local": "2026-08-29",
+  "timezone": "America/Sao_Paulo",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 461,
+  "path": "file_000000002e20820ebc7eb4567c469138.png",
+  "semantic_role": "PUBLIC_IDENTITY_ANCHOR_GENESIS_SEAL_OBSERVED",
+  "custody": {
+    "git_blob_id": "b9d3af394b3f32601c51debf285ee1f627343f14",
+    "size_bytes": 3160622,
+    "sha256": "TOKEN_VAZIO_BINARY_BYTES_NOT_EXPOSED_BY_CONNECTED_READ",
+    "content_mutated": false,
+    "path_mutated": false
+  },
+  "guard_change_commit": "551c13a0b5da57c9a01a065edcd93175c95db245",
+  "guard_policy": {
+    "root_hash_named_png_default": "DENY",
+    "allowed_paths": ["file_000000002e20820ebc7eb4567c469138.png"],
+    "allowed_only_if": {
+      "git_hash_object_equals": "b9d3af394b3f32601c51debf285ee1f627343f14",
+      "byte_size_equals": 3160622
+    },
+    "additional_file_png": "FAIL",
+    "blob_drift": "FAIL",
+    "size_drift": "FAIL",
+    "missing_anchor": "PASS_ROOT_CLEAN",
+    "mode": "FAIL_CLOSED_EXACT_EXCEPTION"
+  },
+  "supersedes_treatment": "PENDING_BINARY_PRESERVING_WRITE_AS_ONLY_CI_FIX_ROUTE",
+  "new_treatment": "PRESERVE_PUBLIC_ROOT_ANCHOR_WITH_EXACT_CONTENT_ADDRESS_AND_SIZE_GUARD",
+  "remaining_gaps": [
+    "TOKEN_VAZIO_EXACT_BINARY_SHA256",
+    "SERVER_SIDE_MAIN_ENFORCEMENT_NOT_BOUND",
+    "TOKEN_VAZIO_INDEPENDENT_APPROVAL"
+  ],
+  "risk_reduction": {
+    "avoided": [
+      "breaking semantic path pointers by relocation",
+      "deleting public identity anchor merely to satisfy structure CI",
+      "allowing arbitrary hash-named PNGs at repository root"
+    ],
+    "preserved_controls": [
+      "exact git blob identity",
+      "exact byte size",
+      "default deny for all other root file_*.png",
+      "claim_allowed=false"
+    ]
+  },
+  "claim_allowed": false,
+  "release_allowed": false,
+  "promotion_allowed": false,
+  "invariant": "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+}
