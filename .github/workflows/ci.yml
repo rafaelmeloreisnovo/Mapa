@@ -107,6 +107,7 @@ jobs:
 
             blob=$(git hash-object "$path")
             size=$(wc -c < "$path" | tr -d '[:space:]')
+            sha256=$(sha256sum "$path" | awk '{print $1}')
             if [ "$blob" != "$expected_blob" ]; then
               echo "ERROR: Genesis Seal blob drift: expected $expected_blob got $blob"
               exit 1
@@ -115,6 +116,7 @@ jobs:
               echo "ERROR: Genesis Seal size drift: expected $expected_size got $size"
               exit 1
             fi
+            echo "OBSERVED_GENESIS_SEAL_SHA256=$sha256"
             echo "PASS: exact custodied Genesis Seal retained at root ($blob, $size bytes)"
           done
 
