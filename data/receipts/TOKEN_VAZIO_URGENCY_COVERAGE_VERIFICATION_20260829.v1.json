@@ -1,0 +1,56 @@
+{
+  "schema": "rafaelia.token_vazio_urgency_coverage_verification.v1",
+  "receipt_id": "RECEIPT-TOKEN-VAZIO-URGENCY-COVERAGE-20260829",
+  "observed_at": "2026-08-29T07:31:00-03:00",
+  "master_index_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+  "source_scan": {
+    "sheet": "TOKEN_VAZIO",
+    "range": "A1:F1000",
+    "matched_rows": 41,
+    "truncated": false
+  },
+  "urgency_scan": {
+    "sheet": "URGENCIES_GATES",
+    "range": "A1:T200",
+    "matched_gap_rows": 41,
+    "truncated": false
+  },
+  "coverage": {
+    "token_vazio_count": 41,
+    "classified_urgency_count": 41,
+    "unclassified_visible_gap_count": 0,
+    "cardinality_match": true
+  },
+  "priority_distribution": {
+    "P0": 2,
+    "P1": 19,
+    "P2": 14,
+    "P3": 6
+  },
+  "state_distribution": {
+    "ACTIVE": 33,
+    "SUPERSESSION_REVIEW": 3,
+    "ACCEPTED_BOUNDARY": 1,
+    "DEFERRED_WITH_TRIGGER": 4
+  },
+  "interpretation": "Zero unclassified visible gaps has been reached for the current TOKEN_VAZIO registry. This does not mean zero missing evidence and does not authorize global claims.",
+  "claim_allowed": false,
+  "closure_scope": "GAP_TRIAGE_CLASSIFICATION_ONLY",
+  "closure_state": "CLOSED_VERIFIED_SCOPE",
+  "global_closure": "VERIFIED_LIMITED_APPEND_ONLY",
+  "predecessor_receipt": "data/receipts/TOKEN_VAZIO_URGENCY_CLASSIFICATION_WAVE1_20260829.v1.json",
+  "guards": [
+    "TOKEN_VAZIO_NE_ZERO",
+    "CLASSIFIED_NE_RESOLVED",
+    "DEFERRED_NE_RESOLVED",
+    "SUPERSESSION_REVIEW_NE_SUPERSEDED",
+    "SCOPE_CLOSURE_NE_GLOBAL_CLOSURE"
+  ],
+  "F_ok": "41/41 visible TOKEN_VAZIO entries have an operational urgency/state classification.",
+  "F_gap": "33 remain ACTIVE, including two P0; evidence-bound work remains open.",
+  "F_next": [
+    "process P0 by evidence first",
+    "then P1 closure/blocked-state receipts",
+    "keep P2/P3 ordered without hiding uncertainty"
+  ]
+}
