@@ -5,6 +5,7 @@ on:
     paths:
       - 'data/reconciliation/OMEGA_GAP_REDUCTION_RECEIPT_20260829.v1.json'
       - 'data/reconciliation/OMEGA_GAP_REDUCTION_CI_RECEIPT_20260829.v1.json'
+      - 'data/reconciliation/GENESIS_SEAL_ROOT_CUSTODY_EXCEPTION_20260829.v1.json'
       - 'data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v2.json'
       - 'scripts/validate_omega_gap_reduction_receipt.py'
       - '.github/workflows/omega-gap-reduction-receipt.yml'
@@ -12,6 +13,7 @@ on:
     paths:
       - 'data/reconciliation/OMEGA_GAP_REDUCTION_RECEIPT_20260829.v1.json'
       - 'data/reconciliation/OMEGA_GAP_REDUCTION_CI_RECEIPT_20260829.v1.json'
+      - 'data/reconciliation/GENESIS_SEAL_ROOT_CUSTODY_EXCEPTION_20260829.v1.json'
       - 'data/reconciliation/OMEGA_OPERATIONAL_WORK_LEDGER_20260829.v2.json'
       - 'scripts/validate_omega_gap_reduction_receipt.py'
       - '.github/workflows/omega-gap-reduction-receipt.yml'
@@ -25,5 +27,5 @@ jobs:
     steps:
       - name: Checkout exact revision
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
-      - name: Validate typed gaps, provenance, CI causality and anti-regression
+      - name: Validate typed gaps, provenance, CI causality, Genesis Seal custody and anti-regression
         run: python3 scripts/validate_omega_gap_reduction_receipt.py
