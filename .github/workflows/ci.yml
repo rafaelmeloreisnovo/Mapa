@@ -132,6 +132,9 @@ jobs:
           done
           echo "OK: Varredura operacional contract fields present."
 
+      - name: Temporal gap routing anti-regression
+        run: python3 tools/validate_temporal_priority_queue.py
+
       - name: M2 — Auto index generation
         run: |
           python3 scripts/generate_asset_index.py --out indices/ASSET_INDEX_AUTO.yaml
