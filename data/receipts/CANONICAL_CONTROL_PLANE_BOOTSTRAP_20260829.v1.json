@@ -1,0 +1,89 @@
+{
+  "schema": "rafaelia.canonical_control_plane_bootstrap_receipt.v1",
+  "receipt_id": "RECEIPT-CANONICAL-BOOTSTRAP-20260829",
+  "timestamp": "2026-08-29T07:20:00-03:00",
+  "operation": "BOOTSTRAP_TRANSVERSAL_CONTROL_REGISTRIES_AND_ATLAS_SUCCESSOR",
+  "state": "OBSERVED_WRITE_VERIFIED_LIMITED",
+  "claim_allowed_before": false,
+  "claim_allowed_after": false,
+  "source_mutation_allowed": false,
+  "predecessors": {
+    "mapa_main_before": "befb358a0e7ca9020c0435b017fadbe5bef56b0d",
+    "federated_matrix": "data/control-plane/federated-reference-matrix.v1.json",
+    "atlas_wave2": "data/reconciliation/ATLAS_NOVO_INGEST_CONTINUATION_WAVE2_20260828.v1.json",
+    "master_index_spreadsheet": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk"
+  },
+  "writes": [
+    {
+      "provider": "GOOGLE_DRIVE",
+      "object": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "object_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "operation": "ADD_SHEETS_AND_SEED_ROWS",
+      "legacy_sheets_modified": false,
+      "added_sheets": [
+        {"title":"PROVENANCE","sheet_id":576162311},
+        {"title":"CUSTODY_CHAIN","sheet_id":1545102723},
+        {"title":"RECEIPTS","sheet_id":2076061369},
+        {"title":"CONTRACTS","sheet_id":582710699},
+        {"title":"URGENCIES_GATES","sheet_id":1315385085},
+        {"title":"CLAIMS","sheet_id":295732052},
+        {"title":"RISKS","sheet_id":154198198},
+        {"title":"ATLAS_ROUTES","sheet_id":1270005952},
+        {"title":"VALIDATIONS","sheet_id":142246818},
+        {"title":"SUPERSESSION","sheet_id":1459299288},
+        {"title":"CLOSURE_LEDGER","sheet_id":217854092}
+      ],
+      "preimage_digest": "TOKEN_VAZIO_NOT_CAPTURED",
+      "postimage_digest": "TOKEN_VAZIO_NOT_CAPTURED",
+      "digest_gap": "TV-PREPOST-SPREADSHEET-DIGEST"
+    },
+    {
+      "provider": "GITHUB",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "path": "data/control-plane/CANONICAL_CONTROL_PLANE_ATLAS_V1_20260829.json",
+      "commit": "ca7df96770e7d18b9ef4caf70800ee975fa189e3",
+      "operation": "CREATE_APPEND_ONLY_SUCCESSOR"
+    }
+  ],
+  "seeded_contracts": [
+    "C-EVIDENCE-001",
+    "C-TOKEN-001",
+    "C-SEARCH-001",
+    "C-RUNTIME-001",
+    "C-REGRESSION-001"
+  ],
+  "seeded_priority_gaps": [
+    "TV-RAW-018-CURRENT-LOCATOR-PROVENANCE",
+    "TV-MESSAGES-PROJECTION-GENERATOR",
+    "TV-TOKEN-OCCURRENCE-GENERATOR-PROVENANCE"
+  ],
+  "seeded_cross_domain_object": {
+    "object": "NEON4096",
+    "papers_commit": "3d52ac3f366be5e4e243f15adbc59e2586e11df5",
+    "chipquantum_commit": "f9b3d0de3dea0e296f9a4961c275c8cd0b35d4e9",
+    "matematica_commit": "1acbe11a805c1972c1e2848e760cc88f263f4c0d",
+    "full_4k_sweep_claim_allowed": false,
+    "t7_batch4_recorded_equivalence_scope": "VALIDATED_LIMITED_SCOPE"
+  },
+  "anti_regression": {
+    "legacy_planes_preserved": true,
+    "predecessor_control_plane_preserved": true,
+    "known_gaps_preserved": true,
+    "uncertainty_disclosure_preserved": true,
+    "rollback_information_required": true,
+    "destructive_rewrite": false
+  },
+  "closure": {
+    "current_state": "VERIFIED_LIMITED_APPEND_ONLY",
+    "closed_verified": false,
+    "reason": "Universe queues and P0/P1 evidence gaps remain open; validator automation and exact pre/post spreadsheet digests are not yet evidenced.",
+    "claim_allowed": false
+  },
+  "F_ok": "11 transversal registries added and seeded; Atlas successor created; existing authority and evidence boundaries preserved.",
+  "F_gap": "validator automation, exact spreadsheet digests, RAW018 custody, projection generator, ALL_TOKEN generator provenance and remaining universe queues.",
+  "F_next": [
+    "create canonical control-plane navigation index",
+    "add machine validator and negative fixtures",
+    "continue P0/P1 evidence closure without inventing missing values"
+  ]
+}
