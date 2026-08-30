@@ -1,0 +1,31 @@
+{
+  "schema": "rafaelia.stack_merge_projection_receipt.v1",
+  "receipt_id": "SESSION-CONFORMITY-AUDIT-MAPA-MAIN-PROJECTION-20260830-V1",
+  "observed": {
+    "pr467": {
+      "number": 467,
+      "base": "main",
+      "merged": true,
+      "merge_commit": "436a7b2c0e1e30a3239b21e664cd1a04bea45e8d",
+      "projection_state": "VERIFIED_PREDECESSOR_MAIN"
+    },
+    "pr469": {
+      "number": 469,
+      "base": "feat/coherence-ruler-selector-v1-20260830",
+      "merged": true,
+      "merge_commit": "6bf4d1030600c3cb63e6bdd4a24afff8c3e34bfe",
+      "main_readback": "data/sessions/SESSION_CONFORMITY_AUDIT_20260830.v1.json NOT_FOUND",
+      "projection_state": "TOKEN_VAZIO_NOT_PRESENT_ON_MAIN_AT_OBSERVATION"
+    },
+    "pr470": {
+      "number": 470,
+      "base": "main",
+      "head": "feat/session-conformity-audit-ledger-20260830",
+      "state": "OPEN_DRAFT",
+      "purpose": "project complete session custody branch to main"
+    }
+  },
+  "invariant": "PR_MERGED != CONTENT_ON_MAIN when PR.base != main and base was already merged before stacked PR",
+  "next_verifiable_step": "complete PR470 CI; merge only when applicable gates allow; read back exact main session/formula/reconciliation paths",
+  "claim_allowed": false
+}
