@@ -1,0 +1,13 @@
+{
+  "schema": "rafaelia.session_formula_delta.v1",
+  "registry_id": "SESSION-CONFORMITY-AUDIT-FORMULAS-20260830-V3",
+  "predecessor": "data/formulas/SESSION_CONFORMITY_AUDIT_FORMULAS_20260830.v2.json",
+  "append_only": true,
+  "claim_allowed": false,
+  "delta_items": [
+    {"id":"F32","class":"INVARIANT","expression":"DRIVE_BODY != PUBLIC_GITHUB_PROJECTION","meaning":"full narrative custody and public-safe projection are distinct artifacts"},
+    {"id":"F33","class":"INVARIANT","expression":"POINTER != DUPLICATED_PRIVATE_BODY","meaning":"a public pointer must not silently replicate the full private/session body"},
+    {"id":"F34","class":"INVARIANT","expression":"PREDECESSOR_53_REGISTRY != SUCCESSOR_AUDIT_REGISTRY","meaning":"the exact-53 formula registry remains historically fixed while later session layers append independently"},
+    {"id":"F35","class":"INVARIANT","expression":"CLOSED_SESSION_CAPTURE != CLOSED_OPERATIONAL_LEGAL_EXTERNAL_GAPS","meaning":"closing archive/index/custody scope does not close runtime, legal, external-conformance, live-interoperability or certification gaps"}
+  ]
+}

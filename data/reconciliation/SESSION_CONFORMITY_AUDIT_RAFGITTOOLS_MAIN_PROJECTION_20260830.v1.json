@@ -1,0 +1,26 @@
+{
+  "schema": "rafaelia.stack_merge_projection_receipt.v1",
+  "receipt_id": "SESSION-CONFORMITY-AUDIT-RAFGITTOOLS-MAIN-PROJECTION-20260830-V1",
+  "observed": {
+    "pr389": {
+      "number": 389,
+      "base": "main",
+      "merged": true,
+      "merge_commit": "ce6305974fae97a9db97c934516ec0422a25bc69",
+      "main_readback": "configs/coherence-ruler-gate.v1.json PRESENT",
+      "projection_state": "VERIFIED_ON_MAIN"
+    },
+    "pr390": {
+      "number": 390,
+      "base": "feat/ruler-gate-20260830",
+      "merged": true,
+      "merge_commit": "25030531678bcf0e96303170b9ff00a1be4c9a55",
+      "main_readback": "contracts/human_impact_cross_repo.v1.json NOT_FOUND",
+      "projection_state": "TOKEN_VAZIO_NOT_PRESENT_ON_MAIN_AT_OBSERVATION"
+    }
+  },
+  "invariant": "PR_MERGED != CONTENT_ON_MAIN when PR.base != main and base was already merged before stacked PR",
+  "interpretation": "PR390 gate evidence remains evidence for its assessed head; only canonical-main projection is unresolved.",
+  "next_verifiable_step": "open dedicated PR carrying feat/ruler-gate-20260830 successor delta to main; run CI; read back exact main paths and commit",
+  "claim_allowed": false
+}
