@@ -1,27 +1,30 @@
-# This workflow warns and then closes issues and PRs that have had no activity for a specified amount of time.
-#
-# You can adjust the behavior by modifying this file.
-# For more information, see:
-# https://github.com/actions/stale
-name: Mark stale issues and pull requests
+# Governance-sensitive issues must not be closed merely because time passed.
+# This workflow is intentionally non-mutating. It preserves an explicit manual
+# checkpoint until a future reviewed automation can prove safe label-based exclusions.
+name: Governance stale review — non-closing
 
 on:
-  schedule:
-  - cron: '29 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  stale:
-
+  policy:
+    name: Preserve unresolved governance records
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
-
     steps:
-    - uses: actions/stale@v5
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'Stale issue message'
-        stale-pr-message: 'Stale pull request message'
-        stale-issue-label: 'no-issue-activity'
-        stale-pr-label: 'no-pr-activity'
+      - name: Record non-closing policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat <<'EOF'
+          Automatic stale closure is disabled.
+
+          Inactivity is not evidence of resolution. Security, privacy, incident,
+          audit, risk, legal, CAPA, evidence-missing, TOKEN_VAZIO, P0 and P1 records
+          require an explicit closure criterion and evidence of that criterion.
+
+          Future stale automation, if reintroduced, must be fail-safe and exclude
+          governance-sensitive records from automatic closure.
+          EOF
