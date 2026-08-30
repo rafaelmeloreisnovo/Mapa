@@ -1,0 +1,41 @@
+name: Coherence Ruler Selector V1
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/coherence-ruler-selector.v1.json'
+      - 'fixtures/coherence_ruler/session_aggregate.v1.json'
+      - 'scripts/select_coherence_ruler.py'
+      - 'tests/test_coherence_ruler_selector.py'
+      - 'docs/research/COHERENCE_RULER_SELECTOR_V1.md'
+      - '.github/workflows/coherence-ruler-selector-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ruler-selector:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Evaluate smallest justified region
+        run: |
+          python3 scripts/select_coherence_ruler.py \
+            --output artifacts/coherence_ruler/selection_receipt.json
+
+      - name: Run fail-closed tests
+        run: python3 -m unittest tests.test_coherence_ruler_selector -v
+
+      - name: Expose resilience contract
+        run: |
+          echo 'RANDOM_TOTAL_PERMUTATION_SWEEP_REQUIRED=false'
+          echo 'FAIL_SAFE=FAILSAFE_HOLD'
+          echo 'FAILOVER=CONSERVATIVE_HOLD_WITH_TYPED_GAP'
+          echo 'ROLLBACK=OUTPUT_ONLY_NO_AUTONOMOUS_MUTATION'
+          echo 'CLAIM_ALLOWED=false'
