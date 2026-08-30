@@ -1,0 +1,1042 @@
+{
+  "registry_id": "PRODUTO-ECOSYSTEM-REGISTRY-V1",
+  "generated_at": "2026-08-30T00:00:00Z",
+  "observed_at": "2026-08-30T00:00:00Z",
+  "total_repositories": 28,
+  "governance": {
+    "append_only": true,
+    "claim_allowed": false,
+    "immutable_anchors": "GitHub main SHA + Drive fileId + provider hashes",
+    "preservation_principle": "100% content preserved; refactoring = navigation clarity, not deletion"
+  },
+  "repositories": [
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "product_id": "MAPA-001",
+      "layers": [
+        "Biblioteconomic KOS",
+        "Operational Ontology",
+        "Federated Control Plane",
+        "Evidence & Custody",
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "federation + validation authority",
+        "responsibility_scope": "cross-repository routing, state reconciliation, gap documentation, authority pyramid",
+        "authority_boundary": "does not prove individual repo implementation; validates coherence and federation contract"
+      },
+      "epistemic_state": {
+        "state": "VERIFICATION_PENDING",
+        "claim_allowed": false,
+        "open_token_vazio_count": 12,
+        "merged_pr_count": 3
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/Mapa",
+        "main_sha": "eb9cb679d42f64da6e4e4e09abcb96848aae2a8f",
+        "visibility": "private"
+      },
+      "drive_integration": {
+        "novoexport_folder_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+        "novoexport_objects": 15439,
+        "governance_docs": [
+          {
+            "name": "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT",
+            "doc_id": "1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og",
+            "role": "navigation authority"
+          },
+          {
+            "name": "OMEGA-CYCLE-20260826T0013-0300-004",
+            "doc_id": "1yfoLRFe-tfhkBN1zKoysQb6gY69a334THFMwiGs9yv8",
+            "role": "governance receipt"
+          }
+        ]
+      },
+      "token_vazio_catalog": {
+        "tv_code": 2,
+        "tv_test": 2,
+        "tv_data": 2,
+        "tv_independence": 2,
+        "tv_boundary": 1,
+        "tv_access": 1,
+        "total_open_gaps": 12
+      },
+      "next_gates": [
+        "Cycle 4: Implement TV-CODE (DAG causal engine, Bootstrap UQ)",
+        "Cycle 4: Freeze TV-DATA fixtures with SHA-256 checksums",
+        "Cycle 5: Define TV-INDEPENDENCE (lineage authority, dedup rules)",
+        "Cycle 6: Validate 6-repo TOROID topology"
+      ],
+      "preservation_notes": {
+        "immutable_identity": "GitHub SHA + Drive fileId + OMEGA-CYCLE receipts",
+        "lineage_authority": "not yet implemented (TV-INDEPENDENCE)",
+        "cross_surface_identity": "TOKEN_VAZIO until Cycle 5"
+      },
+      "quality_level": "Bom",
+      "refactoring_status": "IN_PROGRESS"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "product_id": "CCPRV-001",
+      "layers": [
+        "Evidence & Custody",
+        "Federated Control Plane"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "conversation archive custody + provider hash binding",
+        "responsibility_scope": "immutable custody records, provider-bound conversation data (900 JSON objects + 145MB aggregate)",
+        "authority_boundary": "does not expose raw conversation content; custody/hashes only"
+      },
+      "epistemic_state": {
+        "state": "VERIFIED_LIMITED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 3,
+        "merged_pr_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+        "main_sha": "b343cac4636f1d100e1ff63d6cc081ffe96411c7",
+        "visibility": "private"
+      },
+      "drive_integration": {
+        "custody_records": [
+          {
+            "name": "conversations-019.json",
+            "provider_id": "1cDWWp9vmRfOXp3nca6le1feiPkk0-vvW",
+            "sha256": "f90bfc11a9088772570c1f81503c1bedcc9bd475c5435ce809d62812ff351436",
+            "bytes": 16440670
+          },
+          {
+            "name": "conversations-020.json",
+            "provider_id": "17hlRdf8JtH6An3gIDDVdfTlpRRPTLGDq",
+            "sha256": "32ad3e5f02f06353280fb41fbb6a320b3cb9e42c841105b95674a6a386d8b6c3",
+            "bytes": 13424077
+          }
+        ],
+        "aggregate_bytes": 145027742,
+        "aggregate_objects": 900
+      },
+      "token_vazio_catalog": {
+        "tv_access": 1,
+        "tv_data": 1,
+        "tv_independence": 1,
+        "total_open_gaps": 3
+      },
+      "next_gates": [
+        "Verify all 9 conversations JSON files hash-match provider",
+        "Bind provider fetch command to CONVERSATIONS_CHUNKS_PRIVATE audit trail",
+        "Cross-export deduplication (second exact export not yet bound)"
+      ],
+      "preservation_notes": {
+        "immutable_identity": "GitHub SHA + Drive provider IDs + SHA-256 hashes",
+        "lineage_authority": "provider-bound; custody records immutable",
+        "cross_surface_identity": "Mapa custody receipt binds GitHub ↔ Drive"
+      },
+      "quality_level": "Expandido",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/recipt",
+      "product_id": "RCPT-001",
+      "layers": [
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "receipt and custody records",
+        "responsibility_scope": "immutable audit trails, execution receipts, operational records",
+        "authority_boundary": "documents what happened; does not execute workflows"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/recipt",
+        "main_sha": "TOKEN_VAZIO_RCPT_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_code": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Implement receipt schema validator",
+        "Bind all Mapa control-plane receipts to RECIPT"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/papers",
+      "product_id": "PAPS-001",
+      "layers": [
+        "Visual Navigation",
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "scientific manuscripts, claims, and references",
+        "responsibility_scope": "falsifiable scientific validation, cross-repo evidence binding",
+        "authority_boundary": "does not prove production readiness or runtime correctness"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/papers",
+        "main_sha": "TOKEN_VAZIO_PAPS_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "tv_data": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Scientific peer review gate",
+        "Falsifier definition per claim"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/ChipQuantum",
+      "product_id": "CHIP-001",
+      "layers": [
+        "Operational Ontology",
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "cryptography, geometry, compiler experiments",
+        "responsibility_scope": "C/ASM correctness, instruction-level validation",
+        "authority_boundary": "does not prove scalability or production performance"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/ChipQuantum",
+        "main_sha": "TOKEN_VAZIO_CHIP_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Compile C source to ASM, verify instruction traces",
+        "Benchmark against reference implementations"
+      ],
+      "quality_level": "Alto",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Matem-tica-",
+      "product_id": "MATEM-001",
+      "layers": [
+        "Operational Ontology"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "mathematical theory and proofs",
+        "responsibility_scope": "theorem statements, proof structures, numerical validation",
+        "authority_boundary": "does not prove engineering implementation or scalability"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/Matem-tica-",
+        "main_sha": "TOKEN_VAZIO_MATEM_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "tv_data": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Formalize proofs in Coq or Lean",
+        "Verify numeric examples"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/MemRafcode",
+      "product_id": "MRAF-001",
+      "layers": [
+        "Evidence & Custody",
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "memory archive, code lineage, 8-stage pipeline",
+        "responsibility_scope": "artifact inventory, custody records, chain invariants",
+        "authority_boundary": "does not execute pipeline; documents structure and state"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/MemRafcode",
+        "main_sha": "TOKEN_VAZIO_MRAF_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Populate 17-file structure table with checksums",
+        "Bind each artifact to upstream producer repo"
+      ],
+      "quality_level": "Expandido",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/CientiEspiritual",
+      "product_id": "CESP-001",
+      "layers": [
+        "Visual Navigation",
+        "Biblioteconomic KOS"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "spiritual/philosophical knowledge organization",
+        "responsibility_scope": "textual synthesis, symbolic interpretation",
+        "authority_boundary": "philosophical framing only; does not prove scientific or engineering facts"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/cientiespiritual",
+        "main_sha": "TOKEN_VAZIO_CESP_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_code": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Separate spiritual/philosophical text into ESPIRITUALIDADE.md",
+        "README = technical navigation to live knowledge base"
+      ],
+      "quality_level": "Refatorado",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Fisica",
+      "product_id": "FISI-001",
+      "layers": [
+        "Operational Ontology",
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "physics theory, relativity, gravitation",
+        "responsibility_scope": "theoretical models, falsifiable predictions, simulation code",
+        "authority_boundary": "does not prove real-world physical laws; supports testability"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/Fisica",
+        "main_sha": "TOKEN_VAZIO_FISI_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "tv_data": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Bind simulations to experimental data",
+        "Define falsifier for each model prediction"
+      ],
+      "quality_level": "Alto",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/relativity-living-light",
+      "product_id": "RLL-001",
+      "layers": [
+        "Operational Ontology",
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "falsifiable scientific validation, living relativity theory",
+        "responsibility_scope": "experimental design, measurement protocols, data reproducibility",
+        "authority_boundary": "validates testability; does not claim universal truth"
+      },
+      "epistemic_state": {
+        "state": "VERIFIED_LIMITED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/relativity-living-light",
+        "main_sha": "TOKEN_VAZIO_RLL_MAIN_SHA",
+        "visibility": "public"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "tv_data": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Replicate Bayes inference on full-covariance frozen dataset",
+        "Independent lab validation"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/LGPD-Constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic",
+      "product_id": "LGPD-001",
+      "layers": [
+        "Biblioteconomic KOS",
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "legal framework, data protection, human rights",
+        "responsibility_scope": "LGPD compliance, constitutional text synthesis, planetary governance",
+        "authority_boundary": "documents legal structure; does not establish legal precedent"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/lgpd-constituicoes-planetaria-paises-onu-direitos-humanos-e-fundamentais-de-cada-continents-geologic",
+        "main_sha": "TOKEN_VAZIO_LGPD_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Catalog all 10 data files with source refs",
+        "Define schema for constitution comparison"
+      ],
+      "quality_level": "Expandido",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafaelIA_Solucoes_Clay",
+      "product_id": "CLAY-001",
+      "layers": [
+        "Operational Ontology"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "clay mathematics, problem formulation",
+        "responsibility_scope": "millenium problem analysis, mathematical structure",
+        "authority_boundary": "proposes problem structures; does not prove solutions"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/RafaelIA_Solucoes_Clay",
+        "main_sha": "TOKEN_VAZIO_CLAY_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_code": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Formalize problem statements",
+        "Bind to peer-reviewed Clay Institute references"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/ESTADO-FRACTAL-HAJA",
+      "product_id": "FRAC-001",
+      "layers": [
+        "Operational Ontology"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "fractal geometry, state representation",
+        "responsibility_scope": "mathematical fractal theory applied to governance",
+        "authority_boundary": "theoretical framework; does not govern actual systems"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/ESTADO-FRACTAL-HAJA",
+        "main_sha": "TOKEN_VAZIO_FRAC_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Generate fractal dimension computation",
+        "Validate against self-similar test cases"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/templo-vivo-arcs",
+      "product_id": "TEMP-001",
+      "layers": [
+        "Visual Navigation",
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "architectural design, living knowledge systems",
+        "responsibility_scope": "design documentation, ceremonial/liturgical records",
+        "authority_boundary": "documents structure; does not construct physical systems"
+      },
+      "epistemic_state": {
+        "state": "VERIFIED_LIMITED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 3
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/templo-vivo-arcs",
+        "main_sha": "TOKEN_VAZIO_TEMP_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_code": 1,
+        "tv_boundary": 1,
+        "tv_access": 1,
+        "total_open_gaps": 3
+      },
+      "next_gates": [
+        "Separate 54KB liturgical prayer to LITURGIA.md",
+        "README = architecture + TOKEN_VAZIO gates",
+        "Define sacred/access boundaries"
+      ],
+      "quality_level": "Refatorado",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/publicacientiespiritual",
+      "product_id": "PUBC-001",
+      "layers": [
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "spiritual/scientific publication synthesis",
+        "responsibility_scope": "interdisciplinary knowledge integration",
+        "authority_boundary": "combines perspectives; does not establish hierarchy of authority"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/publicacientiespiritual",
+        "main_sha": "TOKEN_VAZIO_PUBC_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Catalog publication corpus",
+        "Define integration schema"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/Zrf",
+      "product_id": "ZRF-001",
+      "layers": [
+        "Federated Control Plane",
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "ZRF-C library, cryptographic primitives",
+        "responsibility_scope": "library API, reference implementations",
+        "authority_boundary": "does not guarantee production safety; requires integration testing"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/Zrf",
+        "main_sha": "TOKEN_VAZIO_ZRF_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_code": 1,
+        "tv_test": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Implement library structure validator",
+        "Create benchmark suite"
+      ],
+      "quality_level": "Expandido",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/cienti-espiritual-verbo-vivo",
+      "product_id": "VERB-001",
+      "layers": [
+        "Biblioteconomic KOS",
+        "Operational Ontology"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "spiritual/scientific semantic synthesis",
+        "responsibility_scope": "living word semantics, conceptual mapping",
+        "authority_boundary": "interprets meaning; does not establish truth"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/cienti-espiritual-verbo-vivo",
+        "main_sha": "TOKEN_VAZIO_VERB_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Formalize semantic graph",
+        "Bind to source texts"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Cosmos",
+      "product_id": "COSM-001",
+      "layers": [
+        "Operational Ontology",
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "cosmological theory, transdisciplinary relations",
+        "responsibility_scope": "universal relations map, cross-domain synthesis",
+        "authority_boundary": "conceptual framework; does not dictate experimental outcomes"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/Cosmos",
+        "main_sha": "TOKEN_VAZIO_COSM_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Materialize relation DAG with types and evidence",
+        "Bind to source papers per relation"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca",
+      "product_id": "GEOM-001",
+      "layers": [
+        "Operational Ontology"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "sacred geometry, solar/Mayan/Incan calendrics",
+        "responsibility_scope": "geometric/calendrical analysis, cultural knowledge synthesis",
+        "authority_boundary": "interprets traditions; does not claim astronomical truth without validation"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/GEOMETRIA_SOLAR_Maia_Inca",
+        "main_sha": "TOKEN_VAZIO_GEOM_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Validate geometric predictions against observations",
+        "Cross-check with modern astronomical data"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Catalogo-cosmologico",
+      "product_id": "CATC-001",
+      "layers": [
+        "Biblioteconomic KOS",
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "cosmological catalog, entity taxonomy",
+        "responsibility_scope": "vocabulary control, entity classification, cross-reference mapping",
+        "authority_boundary": "organizes knowledge; does not prove cosmological truth"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/Catalogo-cosmologico",
+        "main_sha": "TOKEN_VAZIO_CATC_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Populate entity table with sources",
+        "Validate taxonomy consistency"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Clima",
+      "product_id": "CLIM-001",
+      "layers": [
+        "Operational Ontology",
+        "Evidence & Custody"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "climate science, environmental data",
+        "responsibility_scope": "climate modeling, data collection protocols",
+        "authority_boundary": "models climate dynamics; does not predict future with certainty"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/Clima",
+        "main_sha": "TOKEN_VAZIO_CLIM_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "tv_data": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Bind data sources to official climate databases",
+        "Validate model outputs against observations"
+      ],
+      "quality_level": "Alto",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafNet-Core",
+      "product_id": "RNET-001",
+      "layers": [
+        "Federated Control Plane"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "network/messaging protocol, distributed coordination",
+        "responsibility_scope": "protocol definition, reference implementation",
+        "authority_boundary": "specifies behavior; does not guarantee network robustness"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/RafNet-Core",
+        "main_sha": "TOKEN_VAZIO_RNET_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_code": 1,
+        "tv_test": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Implement protocol validator",
+        "Create integration test suite"
+      ],
+      "quality_level": "Expandido",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Geral",
+      "product_id": "GRAL-001",
+      "layers": [
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "general/miscellaneous knowledge",
+        "responsibility_scope": "knowledge repository, cross-cutting concerns",
+        "authority_boundary": "organizes general knowledge; does not specialize"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/Geral",
+        "main_sha": "TOKEN_VAZIO_GRAL_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Define subject taxonomy",
+        "Organize by subject area"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/teoremas",
+      "product_id": "TORE-001",
+      "layers": [
+        "Operational Ontology",
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "rafaelmeloreisnovo",
+        "domain": "mathematical theorems, proofs, theories",
+        "responsibility_scope": "theorem statements, proof sketches, numerical evidence",
+        "authority_boundary": "proposes theorems; formal proof by community"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/rafaelmeloreisnovo/teoremas",
+        "main_sha": "TOKEN_VAZIO_TORE_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Separate thesis to TEORIA_ATRACTOR_42.md",
+        "README = navigation to live theorem bank"
+      ],
+      "quality_level": "Refatorado",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/LivroVivo_ThisBookLives",
+      "product_id": "LIVR-001",
+      "layers": [
+        "Visual Navigation",
+        "Biblioteconomic KOS"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "living book, evolving knowledge system",
+        "responsibility_scope": "narrative synthesis, updated knowledge base",
+        "authority_boundary": "documents perspectives; does not impose singular truth"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/LivroVivo_ThisBookLives",
+        "main_sha": "TOKEN_VAZIO_LIVR_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Separate interdimensional parable to PARABOLA.md",
+        "README = navigation index"
+      ],
+      "quality_level": "Refatorado",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/PlamaticGravity-",
+      "product_id": "PLAM-001",
+      "layers": [
+        "Operational Ontology"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "plasma gravity theory",
+        "responsibility_scope": "theoretical plasma dynamics models",
+        "authority_boundary": "theoretical framework; requires experimental validation"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/PlamaticGravity-",
+        "main_sha": "TOKEN_VAZIO_PLAM_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_test": 1,
+        "tv_data": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Separate risk analysis to RISCOS_GRAVIDADE_PLASMATICA.md",
+        "README = physics + TOKEN_VAZIO gates",
+        "Define experimental falsifier"
+      ],
+      "quality_level": "Refatorado",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/Etica-nas-Intelig-ncia-artificial-",
+      "product_id": "ETIC-001",
+      "layers": [
+        "Biblioteconomic KOS",
+        "Visual Navigation"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "AI ethics, governance, policy",
+        "responsibility_scope": "ethical framework, policy documentation",
+        "authority_boundary": "proposes norms; does not enforce them"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 1
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/Etica-nas-Intelig-ncia-artificial-",
+        "main_sha": "TOKEN_VAZIO_ETIC_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_data": 1,
+        "total_open_gaps": 1
+      },
+      "next_gates": [
+        "Define ethical principles clearly",
+        "Bind to real-world policy cases"
+      ],
+      "quality_level": "Bom",
+      "refactoring_status": "PLANNED"
+    },
+    {
+      "repository": "instituto-Rafael/RAFNET_CORE",
+      "product_id": "RNCO-001",
+      "layers": [
+        "Federated Control Plane"
+      ],
+      "authority": {
+        "primary_owner": "instituto-Rafael",
+        "domain": "RAFNET core library",
+        "responsibility_scope": "library implementation, API contracts",
+        "authority_boundary": "specification; integration testing is caller's responsibility"
+      },
+      "epistemic_state": {
+        "state": "IMPLEMENTED",
+        "claim_allowed": false,
+        "open_token_vazio_count": 2
+      },
+      "github_identity": {
+        "repo_url": "https://github.com/instituto-Rafael/RAFNET_CORE",
+        "main_sha": "TOKEN_VAZIO_RNCO_MAIN_SHA",
+        "visibility": "private"
+      },
+      "token_vazio_catalog": {
+        "tv_code": 1,
+        "tv_test": 1,
+        "total_open_gaps": 2
+      },
+      "next_gates": [
+        "Implement unit test coverage",
+        "Create integration examples"
+      ],
+      "quality_level": "Expandido",
+      "refactoring_status": "PLANNED"
+    }
+  ],
+  "metadata": {
+    "total_token_vazio": 40,
+    "repos_with_drive_integration": 2,
+    "repos_requiring_special_refactoring": 7,
+    "quality_distribution": {
+      "Alto": 3,
+      "Bom": 15,
+      "Refatorado": 5,
+      "Expandido": 5
+    }
+  },
+  "f_ok": "Registry created with complete authority pyramid for 28 repositories; GitHub SHAs, Drive integrations, and TOKEN_VAZIO catalogs bound per repository",
+  "f_gap": "Individual repo SHAs mostly TOKEN_VAZIO (to be updated when each repo is read); Drive fileIds for non-Mapa repos remain TOKEN_VAZIO (no public Drive folders for most repos)",
+  "f_next": "Create PRODUTO.json files for each repo and refactor READMEs per Phase 2; verify schema against producto.schema.json"
+}

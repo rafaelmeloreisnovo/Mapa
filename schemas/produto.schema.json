@@ -1,0 +1,227 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PRODUTO — Product Value Codification Schema",
+  "description": "Machine-readable product card for RAFAELIA ecosystem repositories",
+  "type": "object",
+  "required": [
+    "repository",
+    "product_id",
+    "layers",
+    "authority",
+    "epistemic_state",
+    "github_identity",
+    "token_vazio_catalog",
+    "next_gates"
+  ],
+  "properties": {
+    "repository": {
+      "type": "string",
+      "description": "GitHub owner/repo format",
+      "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+$"
+    },
+    "product_id": {
+      "type": "string",
+      "description": "Unique product identifier (e.g., MAPA-001, RCPT-001)",
+      "pattern": "^[A-Z0-9]+-[0-9]{3}$"
+    },
+    "layers": {
+      "type": "array",
+      "description": "Which of the five layers does this repo occupy?",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Biblioteconomic KOS",
+          "Operational Ontology",
+          "Federated Control Plane",
+          "Evidence & Custody",
+          "Visual Navigation"
+        ]
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "primary_owner",
+        "domain",
+        "responsibility_scope",
+        "authority_boundary"
+      ],
+      "properties": {
+        "primary_owner": {
+          "type": "string",
+          "description": "GitHub user or organization that owns this repo"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Technical domain this repo occupies"
+        },
+        "responsibility_scope": {
+          "type": "string",
+          "description": "What is this repo responsible for?"
+        },
+        "authority_boundary": {
+          "type": "string",
+          "description": "What is this repo NOT responsible for? (critical)"
+        }
+      }
+    },
+    "epistemic_state": {
+      "type": "object",
+      "required": [
+        "state",
+        "claim_allowed",
+        "open_token_vazio_count"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "REFERENCE",
+            "IMPLEMENTED",
+            "VERIFICATION_PENDING",
+            "VERIFIED_LIMITED",
+            "FEDERATION_CERTIFIED"
+          ]
+        },
+        "claim_allowed": {
+          "type": "boolean",
+          "description": "Is this repo's claim promoted to federation state?"
+        },
+        "open_token_vazio_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "merged_pr_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "github_identity": {
+      "type": "object",
+      "required": [
+        "repo_url",
+        "main_sha",
+        "visibility"
+      ],
+      "properties": {
+        "repo_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "main_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$",
+          "description": "Observed HEAD of main branch at binding time"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["public", "private"]
+        }
+      }
+    },
+    "drive_integration": {
+      "type": "object",
+      "description": "Google Drive links (only for Mapa, CONVERSATIONS_CHUNKS_PRIVATE, and special repos)",
+      "properties": {
+        "novoexport_folder_id": {
+          "type": "string",
+          "description": "Drive folder ID for NOVOexport or related custody"
+        },
+        "novoexport_objects": {
+          "type": "integer",
+          "description": "Count of objects in custody"
+        },
+        "custody_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "record_id": {
+                "type": "string"
+              },
+              "doc_id": {
+                "type": "string",
+                "description": "Google Doc ID of governance receipt"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      }
+    },
+    "token_vazio_catalog": {
+      "type": "object",
+      "description": "Count of open TOKEN_VAZIO gaps by category",
+      "properties": {
+        "tv_code": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tv_test": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tv_data": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tv_independence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tv_boundary": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tv_access": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_open_gaps": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "next_gates": {
+      "type": "array",
+      "description": "Closure path: which gates must execute before promoting this repo?",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preservation_notes": {
+      "type": "object",
+      "description": "Immutability and identity anchors for this repo",
+      "properties": {
+        "immutable_identity": {
+          "type": "string"
+        },
+        "lineage_authority": {
+          "type": "string"
+        },
+        "cross_surface_identity": {
+          "type": "string"
+        }
+      }
+    },
+    "refactoring_discipline": {
+      "type": "object",
+      "properties": {
+        "rename_safety": {
+          "type": "string"
+        },
+        "move_safety": {
+          "type": "string"
+        },
+        "delete_safety": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

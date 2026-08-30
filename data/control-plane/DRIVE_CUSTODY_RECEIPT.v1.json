@@ -1,0 +1,169 @@
+{
+  "receipt_id": "DRIVE-CUSTODY-RECEIPT-MAPA-20260830",
+  "generated_at": "2026-08-30T00:00:00Z",
+  "binding_type": "NOVOEXPORT_CUSTODY",
+  "governance": {
+    "append_only": true,
+    "claim_allowed": false,
+    "immutable_anchors": "GitHub commit SHA + Drive fileId + provider hashes",
+    "preservation_principle": "fileId preserved; no rename/move without receipt"
+  },
+  "github_anchor": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "repo_url": "https://github.com/rafaelmeloreisnovo/Mapa",
+    "main_sha": "eb9cb679d42f64da6e4e4e09abcb96848aae2a8f",
+    "branch": "claude/refatoracao-documentacao-produtos-czeifu",
+    "refactoring_cycle": "DOCUMENTATION-CODIFICATION-20260830"
+  },
+  "drive_anchors": [
+    {
+      "anchor_type": "NOVOEXPORT_ROOT",
+      "folder_name": "NOVOexport",
+      "folder_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+      "object_count": 15439,
+      "last_observed": "2026-08-25T11:26:56.708Z",
+      "role": "main custody folder for export object inventory"
+    },
+    {
+      "anchor_type": "NOVOEXPORT_NAVIGATION",
+      "doc_name": "00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT",
+      "doc_id": "1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og",
+      "parent_folder": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+      "last_observed": "2026-08-25T11:26:56.708Z",
+      "role": "navigation authority; two root directories (SISTEMA_CORPUS_CUSTODIA + CONVERSAS_SOLTAS_QUARENTENA)"
+    },
+    {
+      "anchor_type": "GOVERNANCE_RECEIPT",
+      "doc_name": "OMEGA-CYCLE-20260826T0013-0300-004",
+      "doc_id": "1yfoLRFe-tfhkBN1zKoysQb6gY69a334THFMwiGs9yv8",
+      "parent_folder": "0ACrT7L6rR_7CUk9PVA",
+      "last_observed": "2026-08-26T03:16:05.217Z",
+      "role": "latest OMEGA-CYCLE governance receipt; binds Mapa PR #416 state + server enforcement + CI status"
+    },
+    {
+      "anchor_type": "OPERATIONAL_DASHBOARD",
+      "doc_name": "RAFAELIA — Mapa Operacional de Pendências Ω",
+      "doc_id": "1JUSbJlHlVWznJJ5O1vzQwdd3yPc_J8faUcXA_ov0kkk",
+      "parent_folder": "0ACrT7L6rR_7CUk9PVA",
+      "last_observed": "2026-08-22T09:12:06.852Z",
+      "role": "work items dashboard; TOKEN_VAZIO tracking, RPN prioritization"
+    },
+    {
+      "anchor_type": "CONVERSATIONS_CUSTODY",
+      "doc_name": "RAFAELIA — APK e Histórico — Mapa Operacional de Receipt",
+      "doc_id": "1opD9sZNyfbWuqChyemIqPmGl13w_rHiQrMTvuvMxKJ4",
+      "parent_folder": "0ACrT7L6rR_7CUk9PVA",
+      "role": "CONVERSATIONS_CHUNKS_PRIVATE custody records; provider-bound conversation hashes (RAW019-027)"
+    }
+  ],
+  "cross_surface_identity": {
+    "invariant": "GitHub commit SHA + Drive fileId form immutable anchor",
+    "reason": "GitHub SHAs are cryptographic; Drive fileIds are stable unless explicitly moved with receipt",
+    "safety": "Identity persists across refactoring; renaming or moving without receipt breaks chain"
+  },
+  "conversations_chunks_integration": {
+    "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+    "role": "bridges Mapa ↔ Google Drive custody",
+    "custody_records": [
+      {
+        "archive_name": "conversations-019.json",
+        "provider_id": "1cDWWp9vmRfOXp3nca6le1feiPkk0-vvW",
+        "sha256": "f90bfc11a9088772570c1f81503c1bedcc9bd475c5435ce809d62812ff351436",
+        "bytes": 16440670
+      },
+      {
+        "archive_name": "conversations-020.json",
+        "provider_id": "17hlRdf8JtH6An3gIDDVdfTlpRRPTLGDq",
+        "sha256": "32ad3e5f02f06353280fb41fbb6a320b3cb9e42c841105b95674a6a386d8b6c3",
+        "bytes": 13424077
+      },
+      {
+        "archive_name": "conversations-021.json",
+        "provider_id": "122bngAutdV8Ru_UnXl-LdYVTbq5QoDP3",
+        "sha256": "3fbbba45decd84af923884a1a2cc27d1dfecb884938624b73da73d6dfbe41aff",
+        "bytes": 21426196
+      },
+      {
+        "archive_name": "conversations-022.json",
+        "provider_id": "17DVZDmc85ZhnoAP-a7_MOJfH14EbaToP",
+        "sha256": "16e55d060d15adde35759ab5ae073a90a7627334c44cdb9c5ee4e2ca19ca9c8c",
+        "bytes": 20765905
+      },
+      {
+        "archive_name": "conversations-023.json",
+        "provider_id": "1ElCvaZs25h7UyyPdorUiJwuaBLUx_uXn",
+        "sha256": "71700f23655850dca7523054f832406bee3645f73c4885a90b8915cd5e47d236",
+        "bytes": 22099004
+      },
+      {
+        "archive_name": "conversations-024.json",
+        "provider_id": "11W_TWthT0He-4SkzVWi0AiJQ_Uffjk7b",
+        "sha256": "18d4a8e3931f6820e8a635748c02ce1677d23f90903278d2e60e5b20548c24d8",
+        "bytes": 17872078
+      },
+      {
+        "archive_name": "conversations-025.json",
+        "provider_id": "1QF2kAxgcgGP39uHOkB0KleMMgFC13ZTt",
+        "sha256": "bb9256b040a16be081d4a601a2ab6e185fa99a404615761c5995d1f0177cbbac",
+        "bytes": 16086399
+      },
+      {
+        "archive_name": "conversations-026.json",
+        "provider_id": "1nWS0zUfFgXRfrjg37FrREh_mPJcUL-BW",
+        "sha256": "2daafaa7652a12269cb3a10816eeec78b5e9843b1caee4736b40c68e8648335d",
+        "bytes": 12815159
+      },
+      {
+        "archive_name": "conversations-027.json",
+        "provider_id": "1i02ona4EPpUszTWXAHnfoUqFGSUJgsPV",
+        "sha256": "32ecf289497a30799358ac53a794c2d198e8449592a28a19bb9bbab6ff254211",
+        "bytes": 4098254
+      }
+    ],
+    "aggregate_bytes": 145027742,
+    "aggregate_objects": 900,
+    "json_parse_status": "9/9 PASS"
+  },
+  "verification_gates": [
+    {
+      "gate_id": "DRIVE_FILEIDS_RESOLVE",
+      "description": "Verify all Drive fileIds are accessible and unchanged",
+      "status": "PENDING",
+      "next_check": "2026-09-15T00:00:00Z"
+    },
+    {
+      "gate_id": "GITHUB_SHA_MATCHES_HEAD",
+      "description": "Verify GitHub SHA matches current main HEAD",
+      "status": "PENDING",
+      "note": "Will drift as new commits land; record drift timestamp"
+    },
+    {
+      "gate_id": "CONVERSATIONS_HASHES_VERIFIED",
+      "description": "Re-verify all 9 conversation JSON provider fetches",
+      "status": "PENDING",
+      "note": "Part of CONVERSATIONS_CHUNKS_PRIVATE verification"
+    },
+    {
+      "gate_id": "NO_FILEIDS_RENAMED_UNMOVED",
+      "description": "Confirm no Drive fileIds were renamed or moved without receipt",
+      "status": "PENDING",
+      "closure_path": "Append new custody receipt if changes occur"
+    }
+  ],
+  "immutability_rules": {
+    "GitHub_SHA": "Immutable; points to exact commit history",
+    "Drive_fileId": "Stable unless explicitly moved with receipt recorded in this document",
+    "Provider_hash": "Immutable; identifies exact bytes at fetch time",
+    "CONVERSATIONS_CHUNKS_PRIVATE": "Custodian of cross-surface binding; append-only ledger",
+    "Refactoring": "Must preserve all fileIds and SHAs; record receipt for any move"
+  },
+  "next_probes": [
+    "Re-read NOVOexport folder and compare object count against 15,439",
+    "Re-fetch all CONVERSATIONS_CHUNKS_PRIVATE provider IDs and verify hashes match",
+    "Read latest OMEGA-CYCLE receipt and reconcile with this binding",
+    "Verify no CONVERSATIONS JSON objects appear on GitHub (private custody only)"
+  ],
+  "f_ok": "GitHub ↔ Drive immutable anchors bound: GitHub main SHA, Drive fileIds, and provider hashes recorded; CONVERSATIONS_CHUNKS_PRIVATE custody table materialized with all 9 JSON objects + aggregates",
+  "f_gap": "Real-time sync between GitHub refactoring branch and Drive custody folder (TOKEN_VAZIO until Cycle 5); cross-export deduplication not yet validated",
+  "f_next": "Refactor Mapa README to reference this receipt; create per-repo PRODUTO.json files and bind to ecosystem registry"
+}
