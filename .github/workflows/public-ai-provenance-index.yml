@@ -1,0 +1,54 @@
+name: Public AI Provenance Index Invariant
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/PUBLIC_AI_PROVENANCE_INDEX_V1_20260829.json'
+      - 'schemas/private_chunk_hash_index_manifest.v1.schema.json'
+      - 'fixtures/private_chunk_hash_index_manifest.sample.v1.json'
+      - 'scripts/validate_public_ai_provenance_index.py'
+      - 'tests/test_public_ai_provenance_index.py'
+      - 'docs/provenance/PUBLIC_AI_PROVENANCE_INDEX_INVARIANT_V1.md'
+      - '.github/workflows/public-ai-provenance-index.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/control-plane/PUBLIC_AI_PROVENANCE_INDEX_V1_20260829.json'
+      - 'schemas/private_chunk_hash_index_manifest.v1.schema.json'
+      - 'fixtures/private_chunk_hash_index_manifest.sample.v1.json'
+      - 'scripts/validate_public_ai_provenance_index.py'
+      - 'tests/test_public_ai_provenance_index.py'
+      - 'docs/provenance/PUBLIC_AI_PROVENANCE_INDEX_INVARIANT_V1.md'
+      - '.github/workflows/public-ai-provenance-index.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-invariant:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact public revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Assert public repository boundary
+        run: test '${{ github.event.repository.private }}' = 'false'
+
+      - name: Validate provenance and hash-index invariants
+        run: python3 scripts/validate_public_ai_provenance_index.py
+
+      - name: Run anti-regression tests
+        run: python3 -m unittest tests.test_public_ai_provenance_index -v
+
+      - name: Expose fail-closed boundary
+        run: |
+          echo 'PUBLIC_CI_ONLY=true'
+          echo 'PRIVATE_RAW_REQUIRED=false'
+          echo 'PRIVATE_BRIDGE=HASH_COMMITMENTS_ONLY'
+          echo 'TEXT_PROVIDER_ATTRIBUTION=HEURISTIC_ONLY_UNLESS_PROVIDER_PROOF_EXISTS'
+          echo 'INDICES=10_ORTHOGONAL_INVARIANTS'
+          echo 'CLAIM_ALLOWED=false'
