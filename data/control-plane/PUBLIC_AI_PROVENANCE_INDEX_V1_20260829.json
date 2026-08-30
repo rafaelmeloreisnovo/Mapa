@@ -1,0 +1,123 @@
+{
+  "schema": "rafaelia.public_ai_provenance_index.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-08-29",
+  "state": "VERIFIED_LIMITED_PUBLIC_OBSERVATION",
+  "claim_allowed": false,
+  "public_ci_only": true,
+  "private_content_access": "FORBIDDEN",
+  "index_invariant": "INDICES_ARE_MULTIPLE_ORTHOGONAL_VIEWS_NOT_ONE_SCORE",
+  "private_bridge": {
+    "mode": "HASH_COMMITMENTS_ONLY",
+    "raw_private_required": false,
+    "raw_private_forbidden_in_public_ci": true,
+    "allowed_commitment_algorithms": [
+      "BLAKE3-256-KEYED",
+      "HMAC-SHA256",
+      "SHA-256"
+    ],
+    "recommended_for_private_conversation_chunks": "BLAKE3-256-KEYED",
+    "public_navigation_root": "SHA-256_OVER_ORDERED_COMMITMENT_STRINGS",
+    "meaning": "The public CI validates the commitment/index graph, not the underlying private text, image, prompt, attachment, or conversation bytes."
+  },
+  "invariant_indices": [
+    {"id": "IDX-IDENTITY", "ordinal": 1, "meaning": "stable opaque object identity"},
+    {"id": "IDX-CONTENT-COMMITMENT", "ordinal": 2, "meaning": "private-side cryptographic commitment, public-side digest only"},
+    {"id": "IDX-TEMPORAL", "ordinal": 3, "meaning": "origin/event ordering without requiring raw content"},
+    {"id": "IDX-PROVIDER-PROVENANCE", "ordinal": 4, "meaning": "provider-visible provenance evidence and its limits"},
+    {"id": "IDX-MODALITY-SIGNATURE", "ordinal": 5, "meaning": "image/audio/text technical features; heuristic unless provider-verified"},
+    {"id": "IDX-RELATION", "ordinal": 6, "meaning": "typed navigation edges between opaque nodes"},
+    {"id": "IDX-EVIDENCE-WEIGHT", "ordinal": 7, "meaning": "evidence strength is separate from semantic similarity"},
+    {"id": "IDX-PRIVACY-BOUNDARY", "ordinal": 8, "meaning": "public artifact must not contain private payloads"},
+    {"id": "IDX-SUPERSESSION", "ordinal": 9, "meaning": "new evidence supersedes state without deleting history"},
+    {"id": "IDX-CLAIM-GATE", "ordinal": 10, "meaning": "claim remains fail-closed unless its required evidence class exists"}
+  ],
+  "public_observations": [
+    {
+      "id": "OBS-OPENAI-IMAGE-PROVENANCE-2026",
+      "provider": "OpenAI",
+      "modality": "image",
+      "observation": "Supported images generated with ChatGPT, Codex, and the OpenAI API include C2PA Content Credentials and SynthID provenance signals.",
+      "source": "https://help.openai.com/en/articles/8912793",
+      "evidence_class": "PROVIDER_DOCUMENTATION",
+      "claim_scope": "SUPPORTED_IMAGES_ONLY"
+    },
+    {
+      "id": "OBS-OPENAI-VERIFY-2026",
+      "provider": "OpenAI",
+      "modality": "image_audio",
+      "observation": "The public OpenAI verification tool currently checks supported image and audio files for OpenAI-associated provenance signals.",
+      "source": "https://openai.com/research/verify/",
+      "evidence_class": "PROVIDER_PUBLIC_VERIFIER",
+      "claim_scope": "SUPPORTED_IMAGE_AUDIO_ONLY"
+    },
+    {
+      "id": "OBS-OPENAI-TEXT-BOUNDARY-2026",
+      "provider": "OpenAI",
+      "modality": "text",
+      "observation": "The public verification surface described above does not provide an equivalent supported provenance-verification claim for text.",
+      "source": "https://openai.com/research/verify/",
+      "evidence_class": "NEGATIVE_SCOPE_BOUNDARY",
+      "claim_scope": "NO_TEXT_PROVIDER_PROOF_FROM_THIS_SURFACE"
+    },
+    {
+      "id": "OBS-PROVENANCE-LOSS-BOUNDARY-2026",
+      "provider": "OpenAI",
+      "modality": "image",
+      "observation": "C2PA metadata can be stripped or lost and watermark signals can degrade; absence of a supported signal is not proof of non-origin.",
+      "source": "https://help.openai.com/en/articles/8912793",
+      "evidence_class": "PROVIDER_DOCUMENTATION",
+      "claim_scope": "NEGATIVE_RESULT_IS_NOT_NON_ORIGIN_PROOF"
+    }
+  ],
+  "attribution_levels": [
+    {"id": "P3", "name": "PROVIDER_VERIFIED", "examples": ["trusted C2PA associated with provider", "supported provider watermark/verifier positive"], "claim_strength": 1.0},
+    {"id": "P2", "name": "PROVENANCE_METADATA", "examples": ["signed/structured provenance metadata not independently reverified in this run"], "claim_strength": 0.75},
+    {"id": "P1", "name": "TECHNICAL_HEURISTIC", "examples": ["dimensions", "MIME", "compression", "filename", "visual style", "text style"], "claim_strength": 0.25},
+    {"id": "P0", "name": "UNKNOWN", "examples": ["no supported signal", "insufficient metadata"], "claim_strength": 0.0}
+  ],
+  "forbidden_promotions": [
+    "TEXT_STYLE_TO_PROVIDER_PROOF",
+    "IMAGE_RESOLUTION_TO_PROVIDER_PROOF",
+    "FILENAME_TO_PROVIDER_PROOF",
+    "VISUAL_STYLE_TO_PROVIDER_PROOF",
+    "NO_SIGNAL_TO_NON_ORIGIN_PROOF",
+    "HASH_TO_AUTHORSHIP_PROOF",
+    "HASH_TO_SEMANTIC_EQUIVALENCE",
+    "SEMANTIC_SIMILARITY_TO_IDENTITY"
+  ],
+  "cross_ai_extension": {
+    "provider_adapter_required_fields": [
+      "provider_id",
+      "public_source_url",
+      "supported_modalities",
+      "provenance_signal_type",
+      "verification_surface",
+      "negative_result_semantics",
+      "observed_at"
+    ],
+    "unknown_provider_state": "TOKEN_VAZIO_PUBLIC_PROVENANCE_ADAPTER",
+    "rule": "A provider is not promoted by analogy to OpenAI; each adapter requires its own public evidence."
+  },
+  "dynamic_weighting": {
+    "rule": "weights may rank navigation candidates but cannot upgrade an evidence class",
+    "features": ["temporal", "semantic", "relation", "modality", "provider_provenance", "evidence", "privacy", "falsifier"],
+    "gate": "ATTRIBUTION_STRENGTH_LE_EVIDENCE_CLASS_CEILING"
+  },
+  "F_ok": [
+    "public OpenAI provenance surfaces can anchor supported image/audio provenance observations",
+    "public CI can validate hash-only private-corpus manifests without reading private bytes",
+    "indices are explicitly plural and orthogonal"
+  ],
+  "F_gap": [
+    "full private Conversations Chunky commitments are not published by this artifact",
+    "text provider attribution remains heuristic unless a provider-supported proof surface is added",
+    "other AI provider adapters remain TOKEN_VAZIO until independently sourced"
+  ],
+  "F_next": [
+    "generate private-side keyed commitments for Conversations Chunky",
+    "publish only the public-safe hash/index manifest",
+    "bind manifest navigation root to a receipt",
+    "add provider-specific public adapters only after source verification"
+  ]
+}
