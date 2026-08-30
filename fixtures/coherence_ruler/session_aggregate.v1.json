@@ -1,0 +1,57 @@
+{
+  "schema": "rafaelia.coherence_ruler_fixture.v1",
+  "session_alias": "CURRENT_SESSION_PUBLIC_SAFE_AGGREGATE",
+  "raw_content_included": false,
+  "relation_edges": 18,
+  "requested_regions": 4,
+  "candidates": [
+    {
+      "id": "R-INDICES-PLURAL-ORTHOGONAL",
+      "priority": 10,
+      "region": "PROVENANCE_INDEX_VECTOR",
+      "support_axes": ["session", "github", "drive", "ci", "provenance"],
+      "evidence_class": "PUBLIC_CI_PASS",
+      "identity_bound": true,
+      "scope_declared": true,
+      "falsifier_defined": true,
+      "privacy_safe": true,
+      "unresolved_contradictions": 0
+    },
+    {
+      "id": "R-SIMILARITY-NE-EVIDENCE",
+      "priority": 20,
+      "region": "PROVENANCE_INDEX_VECTOR",
+      "support_axes": ["session", "github", "ci"],
+      "evidence_class": "PUBLIC_CI_PASS",
+      "identity_bound": true,
+      "scope_declared": true,
+      "falsifier_defined": true,
+      "privacy_safe": true,
+      "unresolved_contradictions": 0
+    },
+    {
+      "id": "R-TOKEN-VAZIO-NE-ZERO",
+      "priority": 30,
+      "region": "MULTIDIM_COHERENCE",
+      "support_axes": ["session", "github", "drive"],
+      "evidence_class": "REPRODUCED",
+      "identity_bound": true,
+      "scope_declared": true,
+      "falsifier_defined": true,
+      "privacy_safe": true,
+      "unresolved_contradictions": 0
+    },
+    {
+      "id": "R-REPRESENTATION-COST-EQUIVALENCE",
+      "priority": 50,
+      "region": "RESIDUE_GRAPH_ARITHMETIC",
+      "support_axes": ["session", "math"],
+      "evidence_class": "FORMAL_CANDIDATE",
+      "identity_bound": true,
+      "scope_declared": true,
+      "falsifier_defined": true,
+      "privacy_safe": true,
+      "unresolved_contradictions": 0
+    }
+  ]
+}
