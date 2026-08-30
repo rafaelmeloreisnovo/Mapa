@@ -25,3 +25,13 @@ jobs:
 
       - name: Validate human dignity ethics ratchet
         run: python3 scripts/validate_human_dignity_ethics_ratchet.py
+
+      - name: Validate external human authority gaps
+        run: python3 scripts/validate_external_human_authority_gaps.py
+
+      - name: Expose non-self-approval boundary
+        run: |
+          echo 'AUTOMATION_MAY_CLOSE_EXTERNAL_GAP=false' >> "$GITHUB_STEP_SUMMARY"
+          echo 'SELF_REVIEW != INDEPENDENT_REVIEW' >> "$GITHUB_STEP_SUMMARY"
+          echo 'BOT_REVIEW != AFFECTED_GROUP_VOICE' >> "$GITHUB_STEP_SUMMARY"
+          echo 'TOKEN_VAZIO != PASS' >> "$GITHUB_STEP_SUMMARY"
