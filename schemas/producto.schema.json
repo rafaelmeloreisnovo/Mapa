@@ -1,0 +1,273 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PRODUTO Product Card Schema",
+  "description": "Machine-readable product card for RAFAELIA ecosystem repositories",
+  "type": "object",
+  "required": [
+    "repository",
+    "product_id",
+    "layers",
+    "authority",
+    "epistemic_state",
+    "github_identity",
+    "token_vazio_catalog",
+    "next_gates"
+  ],
+  "properties": {
+    "repository": {
+      "type": "string",
+      "description": "GitHub repository in owner/repo format",
+      "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+$"
+    },
+    "product_id": {
+      "type": "string",
+      "description": "Unique product identifier (e.g., MAPA-001, CCPRV-001)",
+      "pattern": "^[A-Z0-9]+-[0-9]{3}$"
+    },
+    "layers": {
+      "type": "array",
+      "description": "Five-layer architecture layers this repo occupies",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Biblioteconomic KOS",
+          "Operational Ontology",
+          "Federated Control Plane",
+          "Evidence & Custody",
+          "Visual Navigation"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "authority": {
+      "type": "object",
+      "required": ["primary_owner", "domain", "responsibility_scope", "authority_boundary"],
+      "properties": {
+        "primary_owner": {
+          "type": "string",
+          "description": "GitHub user or organization"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Technical domain (2-3 words)"
+        },
+        "responsibility_scope": {
+          "type": "string",
+          "description": "What this repo IS responsible for"
+        },
+        "authority_boundary": {
+          "type": "string",
+          "description": "What this repo is NOT responsible for (fail-closed)"
+        }
+      }
+    },
+    "epistemic_state": {
+      "type": "object",
+      "required": ["state", "claim_allowed", "open_token_vazio_count"],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "REFERENCE",
+            "IMPLEMENTED",
+            "VERIFICATION_PENDING",
+            "VERIFIED_LIMITED",
+            "FEDERATION_CERTIFIED"
+          ]
+        },
+        "control_plane_state": {
+          "type": "string",
+          "enum": [
+            "REFERENCE",
+            "IMPLEMENTED",
+            "VERIFICATION_PENDING",
+            "VERIFIED_LIMITED",
+            "FEDERATION_CERTIFIED"
+          ]
+        },
+        "claim_allowed": {
+          "type": "boolean",
+          "description": "False by default (fail-closed); true only when all gates close"
+        },
+        "merged_pr_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open_token_vazio_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "closed_token_vazio_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "github_identity": {
+      "type": "object",
+      "required": ["repo_url", "visibility"],
+      "properties": {
+        "repo_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "main_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "refactoring_branch": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["public", "private"]
+        }
+      }
+    },
+    "drive_integration": {
+      "type": "object",
+      "description": "Optional; only for Mapa, CONVERSATIONS_CHUNKS_PRIVATE, and similar custody-bridge repos",
+      "properties": {
+        "novoexport_folder_id": {
+          "type": "string"
+        },
+        "novoexport_objects": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "governance_docs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "doc_id": { "type": "string" },
+              "role": { "type": "string" }
+            }
+          }
+        },
+        "custody_records_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "aggregate_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "aggregate_objects": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "token_vazio_catalog": {
+      "type": "object",
+      "required": ["total_open_gaps"],
+      "properties": {
+        "tv_code": { "type": "integer", "minimum": 0 },
+        "tv_code_items": { "type": "array", "items": { "type": "string" } },
+        "tv_test": { "type": "integer", "minimum": 0 },
+        "tv_test_items": { "type": "array", "items": { "type": "string" } },
+        "tv_data": { "type": "integer", "minimum": 0 },
+        "tv_data_items": { "type": "array", "items": { "type": "string" } },
+        "tv_independence": { "type": "integer", "minimum": 0 },
+        "tv_independence_items": { "type": "array", "items": { "type": "string" } },
+        "tv_boundary": { "type": "integer", "minimum": 0 },
+        "tv_boundary_items": { "type": "array", "items": { "type": "string" } },
+        "tv_access": { "type": "integer", "minimum": 0 },
+        "tv_access_items": { "type": "array", "items": { "type": "string" } },
+        "total_open_gaps": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "closure_sequence": {
+      "type": "object",
+      "description": "Multi-cycle closure roadmap (Cycle 4/5/6)",
+      "properties": {
+        "cycle_4": {
+          "type": "object",
+          "properties": {
+            "deadline": { "type": "string", "format": "date" },
+            "gates": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "cycle_5": {
+          "type": "object",
+          "properties": {
+            "deadline": { "type": "string", "format": "date" },
+            "gates": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "cycle_6": {
+          "type": "object",
+          "properties": {
+            "deadline": { "type": "string", "format": "date" },
+            "gates": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "next_gates": {
+      "type": "array",
+      "description": "Ordered list of gates that must close before FEDERATION_CERTIFIED",
+      "items": { "type": "string" }
+    },
+    "preservation_notes": {
+      "type": "object",
+      "properties": {
+        "immutable_identity": { "type": "string" },
+        "lineage_authority": { "type": "string" },
+        "cross_surface_identity": { "type": "string" },
+        "refactoring_discipline": { "type": "string" }
+      }
+    },
+    "refactoring_discipline": {
+      "type": "object",
+      "properties": {
+        "rename_safety": { "type": "string" },
+        "move_safety": { "type": "string" },
+        "delete_safety": { "type": "string" },
+        "content_preservation": { "type": "string" }
+      }
+    },
+    "cross_surface_binding": {
+      "type": "object",
+      "properties": {
+        "github_repo_url": { "type": "string", "format": "uri" },
+        "drive_custody_receipt": { "type": "string" },
+        "conversations_chunks_private": { "type": "string" },
+        "novoexport_inventory": { "type": "string" }
+      }
+    },
+    "quality_level": {
+      "type": "string",
+      "enum": ["Alto", "Bom", "Refatorado", "Expandido"]
+    },
+    "quality_assessment": {
+      "type": "object",
+      "properties": {
+        "technical_completeness": { "type": "string" },
+        "governance_discipline": { "type": "string" },
+        "cross_repo_coherence": { "type": "string" },
+        "evidence_binding": { "type": "string" }
+      }
+    },
+    "refactoring_status": {
+      "type": "string",
+      "enum": ["NOT_STARTED", "IN_PROGRESS", "COMPLETE"]
+    },
+    "refactoring_phase": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "handoff": {
+      "type": "object",
+      "properties": {
+        "f_ok": { "type": "string" },
+        "f_gap": { "type": "string" },
+        "f_next": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}
