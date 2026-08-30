@@ -1,0 +1,32 @@
+name: Session Formula Registry 53
+
+on:
+  pull_request:
+    paths:
+      - 'data/formulas/SESSION_FORMULA_REGISTRY_53_V1.json'
+      - 'data/integration/SESSION_FORMULAS_53_REPO_ROUTES_V1.json'
+      - 'scripts/validate_session_formula_registry_53.py'
+      - '.github/workflows/session-formula-registry-53.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-53:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Validate exact formula registry and repository routes
+        run: python3 scripts/validate_session_formula_registry_53.py
+      - name: Expose invariants
+        run: |
+          echo 'FORMULA_COUNT=53'
+          echo 'FORMULA_COUNT_INVARIANT=FORMULA_COUNT_MUST_EQUAL_53'
+          echo 'MINIMUM_REPOSITORY_ROUTES=10'
+          echo 'ACTUAL_REPOSITORY_ROUTES=12'
+          echo 'CLAIM_ALLOWED=false'
