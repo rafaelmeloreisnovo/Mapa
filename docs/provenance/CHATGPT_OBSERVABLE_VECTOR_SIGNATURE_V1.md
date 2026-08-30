@@ -46,6 +46,24 @@ This preserves several distinctions:
 - many pages != independent corroboration if they derive from one origin;
 - same domain != same claim or same author.
 
+### Observable statistics
+
+When content is legitimately available to the evaluator, a producer may attach declared statistics such as:
+
+- byte/character/word counts;
+- Unicode/script distribution;
+- sentence and paragraph length distributions;
+- punctuation/symbol/code/math density;
+- vocabulary/type-token ratios;
+- n-gram or MinHash sketches;
+- MIME, dimensions, aspect ratio and codec metadata for images;
+- C2PA/SynthID/provider provenance state when publicly verifiable;
+- publication/update/retrieval timestamps;
+- citation and cross-source relation counts;
+- declared embedding/similarity scores from an explicitly named method.
+
+Every statistic must carry its method and source scope. These observable summaries may support ranking, clustering and anomaly detection, but cannot independently prove authorship or provider origin.
+
 ## Public OpenAI adapters
 
 The first adapters are provider-primary OpenAI pages for:
