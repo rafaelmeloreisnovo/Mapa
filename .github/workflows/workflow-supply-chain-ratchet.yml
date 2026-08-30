@@ -1,0 +1,105 @@
+name: Workflow Supply-Chain Ratchet
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  immutable-action-refs:
+    name: Changed workflows use immutable action refs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Reject new mutable external action references
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            base="origin/$BASE_REF"
+            git cat-file -e "$base^{commit}"
+            range="$base...HEAD"
+          elif [ "$EVENT_NAME" = "push" ]; then
+            zero="0000000000000000000000000000000000000000"
+            if [ -n "${BEFORE_SHA:-}" ] && [ "$BEFORE_SHA" != "$zero" ] && \
+               git cat-file -e "$BEFORE_SHA^{commit}" 2>/dev/null; then
+              range="$BEFORE_SHA..HEAD"
+            else
+              range="HEAD^..HEAD"
+            fi
+          else
+            range="HEAD^..HEAD"
+          fi
+
+          export RANGE="$range"
+          python3 - <<'PY'
+          import os
+          import pathlib
+          import re
+          import subprocess
+          import sys
+
+          sha40 = re.compile(r"^[0-9a-fA-F]{40}$")
+          uses_re = re.compile(r"^\s*-?\s*uses:\s*([^\s#]+)")
+
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", "--diff-filter=ACMR", os.environ["RANGE"], "--", ".github/workflows"],
+              text=True,
+          ).splitlines()
+          changed = sorted(
+              p for p in changed
+              if p.endswith((".yml", ".yaml")) and pathlib.Path(p).is_file()
+          )
+
+          violations = []
+          for name in changed:
+              for lineno, line in enumerate(pathlib.Path(name).read_text(errors="replace").splitlines(), 1):
+                  match = uses_re.match(line)
+                  if not match:
+                      continue
+                  ref = match.group(1).strip("'\"")
+                  if ref.startswith("./"):
+                      continue
+                  if ref.startswith("docker://"):
+                      if "@sha256:" not in ref:
+                          violations.append((name, lineno, ref, "container action is not digest-pinned"))
+                      continue
+                  if "@" not in ref:
+                      violations.append((name, lineno, ref, "missing immutable ref"))
+                      continue
+                  revision = ref.rsplit("@", 1)[1]
+                  if not sha40.fullmatch(revision):
+                      violations.append((name, lineno, ref, "ref is not a full 40-character commit SHA"))
+
+          print(f"Changed workflow files checked: {len(changed)}")
+          for name in changed:
+              print(f"  {name}")
+
+          if violations:
+              print("ERROR: mutable external action references introduced or retained in changed workflows:")
+              for name, lineno, ref, reason in violations:
+                  print(f"  {name}:{lineno}: {ref} — {reason}")
+              print("Pin external GitHub Actions to immutable full commit SHAs.")
+              sys.exit(1)
+
+          print("PASS: changed workflows contain no mutable external action references.")
+          PY
