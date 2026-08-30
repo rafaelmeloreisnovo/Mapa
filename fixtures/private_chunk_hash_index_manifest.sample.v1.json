@@ -1,0 +1,48 @@
+{
+  "schema": "rafaelia.private_chunk_hash_index_manifest.v1",
+  "corpus_alias": "PRIVATE-CONVERSATIONS-CHUNKY-DEMO",
+  "public_safe": true,
+  "raw_content_included": false,
+  "commitment_mode": "BLAKE3-256-KEYED",
+  "leaf_count": 3,
+  "public_navigation_root_sha256": "bc1b8e4a7c0ce3149fb12980544f5bb2118685632b7139bc95edb218f0704a5e",
+  "index_invariants": [
+    "IDX-IDENTITY",
+    "IDX-CONTENT-COMMITMENT",
+    "IDX-TEMPORAL",
+    "IDX-PROVIDER-PROVENANCE",
+    "IDX-MODALITY-SIGNATURE",
+    "IDX-RELATION",
+    "IDX-EVIDENCE-WEIGHT",
+    "IDX-PRIVACY-BOUNDARY",
+    "IDX-SUPERSESSION",
+    "IDX-CLAIM-GATE"
+  ],
+  "chunks": [
+    {
+      "ordinal": 0,
+      "opaque_id": "CHUNK-DEMO_000",
+      "commitment": "1111111111111111111111111111111111111111111111111111111111111111",
+      "temporal_index": "T-DEMO-000",
+      "relation_index": ["REL-DEMO-000-001"],
+      "evidence_state": "COMMITMENT_ONLY"
+    },
+    {
+      "ordinal": 1,
+      "opaque_id": "CHUNK-DEMO_001",
+      "commitment": "2222222222222222222222222222222222222222222222222222222222222222",
+      "temporal_index": "T-DEMO-001",
+      "relation_index": ["REL-DEMO-000-001", "REL-DEMO-001-002"],
+      "evidence_state": "COMMITMENT_ONLY"
+    },
+    {
+      "ordinal": 2,
+      "opaque_id": "CHUNK-DEMO_002",
+      "commitment": "3333333333333333333333333333333333333333333333333333333333333333",
+      "temporal_index": "T-DEMO-002",
+      "relation_index": ["REL-DEMO-001-002"],
+      "evidence_state": "COMMITMENT_ONLY"
+    }
+  ],
+  "claim_allowed": false
+}
