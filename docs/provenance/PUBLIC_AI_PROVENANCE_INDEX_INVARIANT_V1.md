@@ -58,9 +58,9 @@ Observed on 2026-08-29 from public OpenAI surfaces:
 
 Public sources:
 
-- https://openai.com/index/advancing-content-provenance/
-- https://help.openai.com/en/articles/8912793
-- https://openai.com/research/verify/
+- [OpenAI content provenance](https://openai.com/index/advancing-content-provenance/)
+- [OpenAI Help: provenance signals](https://help.openai.com/en/articles/8912793)
+- [OpenAI verification surface](https://openai.com/research/verify/)
 
 These are provider observations, not universal laws. Coverage can vary by product, model, export path, file type, and creation date.
 
@@ -186,20 +186,20 @@ The workflow:
 
 ## F_ok / F_gap / F_next
 
-**F_ok**
+### F_ok
 
 - Public CI can anchor provider-visible provenance boundaries.
 - OpenAI image/audio provenance has a current public verification surface.
 - Hash-only manifests can expose navigable indices without exposing private payloads.
 - `INDICES` is a formal invariant, not a single scalar.
 
-**F_gap**
+### F_gap
 
 - Real private Conversations Chunky commitments are not included here.
 - Text provider attribution has no provider-proof surface in the public OpenAI verifier used for this V1.
 - Other AI provider adapters require independent public evidence.
 
-**F_next**
+### F_next
 
 - Generate keyed commitments privately.
 - Export a minimized public-safe manifest.
