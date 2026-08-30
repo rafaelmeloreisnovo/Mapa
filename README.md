@@ -1,11 +1,53 @@
 # Mapa — RAFAELIA Knowledge Organization & Federated Control Plane
 
+> **Product ID**: MAPA-001  
+> **Domain**: Federation + Validation Authority  
+> **Authority**: Cross-repository routing, state reconciliation, gap documentation  
+> **Status**: Bom (architectural soundness confirmed; TOKEN_VAZIO preserved)  
+> **Claim Gate**: `claim_allowed=false` (until Cycle 6 closure)  
+> **Epistemic State**: VERIFICATION_PENDING (12 TOKEN_VAZIO gaps documented)
+
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Domain](https://img.shields.io/badge/Domain-KOS%20%7C%20Governance%20%7C%20Control%20Plane-purple)](biblioteconomia/)
 [![Research](https://img.shields.io/badge/Research-RAFAELIA%20Ecosystem-orange)](https://github.com/rafaelmeloreisnovo/ChipQuantum)
 
 > Central repository for organization, authority mapping, provenance, epistemic state,
 > operational contracts and cross-repository routing across the RAFAELIA ecosystem.
+
+---
+
+## Product Values — This Repository
+
+**What Mapa produces:**
+- Federated knowledge organization across 28 repositories
+- Immutable cross-surface identity (GitHub ↔ Google Drive) via DRIVE_CUSTODY_RECEIPT
+- TOKEN_VAZIO catalog with closure paths per gap
+- Authority pyramid and responsibility boundaries
+- Append-only governance ledger
+
+**Product layers occupied:**
+- Biblioteconomic KOS (controlled vocabulary, authority control)
+- Operational Ontology (concepts, relations, trajectories)
+- Federated Control Plane (modules, products, procedures, gates)
+- Evidence & Custody (typed pointers, checksums, audit trails)
+- Visual Navigation (diagrams, indices, reports)
+
+**Authority boundary:**
+- ✓ Routes cross-repo claims, validates coherence and contracts
+- ✗ Does NOT prove individual repo implementation
+- ✗ Does NOT execute projects; orchestrates federated authority only
+
+**TOKEN_VAZIO gaps:** 12 open gaps across 6 categories (TV-CODE, TV-TEST, TV-DATA, TV-INDEPENDENCE, TV-BOUNDARY, TV-ACCESS)  
+**Next gates:** [Cycle 4](PRODUTO.json) (implementations), [Cycle 5](PRODUTO.json) (lineage authority), [Cycle 6](PRODUTO.json) (topological validation)
+
+**Cross-surface integration:**
+- GitHub: `rafaelmeloreisnovo/Mapa` (main SHA: `eb9cb679d42f64da6e4e4e09abcb96848aae2a8f`)
+- Google Drive: NOVOexport (15,439 objects) + OMEGA-CYCLE receipts
+- Custody bridge: `CONVERSATIONS_CHUNKS_PRIVATE` (900 JSON objects, 145MB aggregate)
+
+**See:** [PRODUTO.json](PRODUTO.json) (machine-readable product card) | [DRIVE_CUSTODY_RECEIPT.v1.json](data/control-plane/DRIVE_CUSTODY_RECEIPT.v1.json) (GitHub ↔ Drive identity) | [PRODUTO_ECOSYSTEM_REGISTRY.v1.json](data/control-plane/PRODUTO_ECOSYSTEM_REGISTRY.v1.json) (all 28 repos)
+
+---
 
 ## Mission
 
