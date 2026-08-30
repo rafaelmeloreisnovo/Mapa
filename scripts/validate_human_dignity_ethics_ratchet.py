@@ -4,6 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "data/control-plane/HUMAN_DIGNITY_ETHICS_RATCHET_V1.json"
+NORMATIVE = ROOT / "data/control-plane/NORMATIVE_ROUTING_REGISTRY_V1.json"
 DOC = ROOT / "docs/governance/CAMINHOS_DA_LUZ_HUMAN_DIGNITY_ETHICS_BY_DESIGN_V1.md"
 
 
@@ -14,6 +15,7 @@ def require(condition, message):
 
 def main():
     p = json.loads(POLICY.read_text(encoding="utf-8"))
+    n = json.loads(NORMATIVE.read_text(encoding="utf-8"))
     doc = DOC.read_text(encoding="utf-8")
 
     require(p["claim_allowed"] is False, "policy must not self-promote to claim")
@@ -106,6 +108,39 @@ def main():
     require("TOKEN_VAZIO_INDEPENDENT_HUMAN_RIGHTS_REVIEW" in open_gaps, "independent human-rights review gap fabricated closed")
     require("TOKEN_VAZIO_CHILD_SAFETY_DOMAIN_REVIEW_FOR_APPLICABLE_PRODUCTS" in open_gaps, "child-safety domain review gap fabricated closed")
 
+    # Normative routing is versioned, authoritative-source based, and never self-certifying.
+    require(n["schema"] == "rafaelia.normative_routing_registry.v1", "normative registry schema drift")
+    require(n["claim_allowed"] is False, "normative registry self-promoted to claim")
+    require(n["certification_claimed"] is False, "normative registry claims certification")
+    require(n["legal_opinion_claimed"] is False, "normative registry claims legal opinion")
+    require(n["rule"] == "NORMATIVE_ALIGNMENT != CERTIFICATION", "normative alignment/certification boundary weakened")
+
+    entries = n["entries"]
+    ids = {entry["id"] for entry in entries}
+    required_normative_ids = {
+        "NORM-UDHR-1948",
+        "NORM-UNESCO-AI-ETHICS-2021",
+        "NORM-UNICEF-AI-CHILDREN-V3-2025",
+        "NORM-WHO-AI-HEALTH-2021-2025",
+        "NORM-NIST-AI-RMF-1-0",
+        "NORM-ISO-IEC-42001-2023",
+        "NORM-BR-LGPD-COMPILED",
+        "NORM-ANPD-CHILDREN-ENUNCIADO-1-2023",
+    }
+    require(required_normative_ids.issubset(ids), "required normative routing anchor removed")
+    require(len(ids) == len(entries), "duplicate normative registry id")
+    for entry in entries:
+        require(entry.get("authority"), f"missing normative authority: {entry.get('id')}")
+        require(entry.get("instrument"), f"missing normative instrument: {entry.get('id')}")
+        require(entry.get("scope"), f"missing normative scope: {entry.get('id')}")
+        require(entry.get("source", "").startswith("https://"), f"non-https normative source: {entry.get('id')}")
+
+    triggers = set(n["review_triggers"])
+    require("source_reports_revision_or_supersession" in triggers, "normative supersession review trigger removed")
+    require("scope_expands_to_new_jurisdiction" in triggers, "jurisdiction expansion review trigger removed")
+    normative_gaps = set(n["open_gaps"])
+    require("TOKEN_VAZIO_INDEPENDENT_LEGAL_REVIEW_WHEN_REQUIRED" in normative_gaps, "independent legal review gap fabricated closed")
+
     for phrase in (
         "PERSON != RESOURCE != TOKEN != DATASET != COST_FUNCTION",
         "MODEL_RECOMMENDATION != HUMAN_VALUE_DECISION",
@@ -115,7 +150,7 @@ def main():
     ):
         require(phrase in doc, f"documentation invariant missing: {phrase}")
 
-    print("PASS: human dignity ethics-by-design ratchet v1")
+    print("PASS: human dignity ethics-by-design ratchet v1 + normative routing registry v1")
 
 
 if __name__ == "__main__":
