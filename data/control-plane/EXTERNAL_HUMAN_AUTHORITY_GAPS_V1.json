@@ -1,0 +1,69 @@
+{
+  "schema": "rafaelia.external-human-authority-gaps.v1",
+  "version": "1.0.0",
+  "date": "2026-08-30",
+  "scope": "human_dignity_ethics_by_design_external_authority",
+  "claim_allowed": false,
+  "automation_may_close_external_gap": false,
+  "repository_owner_alone_counts_as_independent_review": false,
+  "bot_or_ci_counts_as_affected_group_voice": false,
+  "absence_of_objection_counts_as_approval": false,
+  "gaps": [
+    {
+      "id": "TOKEN_VAZIO_INDEPENDENT_HUMAN_RIGHTS_REVIEW",
+      "state": "TOKEN_VAZIO",
+      "required_when": "material high-impact human-rights scope",
+      "authority_type": "independent_human_rights_reviewer_or_body",
+      "minimum_evidence": ["reviewer_identity_or_role", "independence_basis", "exact_artifact_revision", "scope", "evidence_considered", "findings_and_uncertainty", "dissent_if_any", "conditions_or_remediation", "appeal_path"],
+      "self_closure_allowed": false
+    },
+    {
+      "id": "TOKEN_VAZIO_CHILD_SAFETY_DOMAIN_REVIEW_FOR_APPLICABLE_PRODUCTS",
+      "state": "TOKEN_VAZIO",
+      "required_when": "children_or_adolescents_are_materially_affected",
+      "authority_type": "qualified_child_safety_or_child_rights_domain_review",
+      "minimum_evidence": ["best_interest_assessment", "age_and_context_scope", "risk_and_safeguard_analysis", "data_and_privacy_surface", "human_oversight", "appeal_or_guardian_path_when_applicable"],
+      "self_closure_allowed": false
+    },
+    {
+      "id": "TOKEN_VAZIO_JURISDICTION_SPECIFIC_LEGAL_REVIEW_WHEN_REQUIRED",
+      "state": "TOKEN_VAZIO",
+      "required_when": "a concrete deployment or data practice triggers jurisdiction-specific legal obligations",
+      "authority_type": "qualified_legal_or_regulatory_review",
+      "minimum_evidence": ["jurisdiction", "applicable_scope", "exact_revision_or_practice", "legal_questions_reviewed", "limitations", "date_and_version_of_authority"],
+      "self_closure_allowed": false
+    },
+    {
+      "id": "TOKEN_VAZIO_AFFECTED_COMMUNITY_REPRESENTATION_FOR_HIGH_IMPACT_DEPLOYMENT",
+      "state": "TOKEN_VAZIO",
+      "required_when": "a high-impact deployment materially affects an identifiable community or group",
+      "authority_type": "affected_group_or_legitimate_representative_voice",
+      "minimum_evidence": ["affected_group_definition", "participation_method", "concerns_and_benefits", "dissent", "response_or_remediation", "contestation_path"],
+      "self_closure_allowed": false
+    },
+    {
+      "id": "TOKEN_VAZIO_ENVIRONMENTAL_EXTERNALITY_MEASUREMENT_WHEN_MATERIAL",
+      "state": "TOKEN_VAZIO",
+      "required_when": "environmental externality is material to the decision",
+      "authority_type": "bounded_measurement_and_domain_review",
+      "minimum_evidence": ["measurement_boundary", "method", "uncertainty", "baseline", "observed_effect_or_estimate", "mitigation", "reassessment_trigger"],
+      "self_closure_allowed": false
+    },
+    {
+      "id": "TOKEN_VAZIO_GITHUB_ADMIN_OR_PROVIDER_CAPABLE_SURFACE",
+      "state": "TOKEN_VAZIO",
+      "required_when": "canonical main provider enforcement must be applied or changed",
+      "authority_type": "authorized_repository_administrator_or_provider_capable_surface",
+      "minimum_evidence": ["exact_repository", "branch_or_ruleset_target", "provider_policy_identifier", "required_checks", "review_rule", "readback", "observation_time"],
+      "self_closure_allowed": false
+    }
+  ],
+  "closure_rules": [
+    "TOKEN_VAZIO != PASS",
+    "SELF_REVIEW != INDEPENDENT_REVIEW",
+    "BOT_REVIEW != AFFECTED_GROUP_VOICE",
+    "NO_OBJECTION != CONSENT",
+    "CI_PASS != ETHICAL_CERTIFICATION",
+    "LEGAL_MINIMUM != ETHICAL_SUFFICIENCY"
+  ]
+}

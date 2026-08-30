@@ -1,0 +1,147 @@
+{
+  "version": "1.0.0",
+  "artifact": "HUMAN_DIGNITY_ETHICS_RATCHET_V1",
+  "scope": "cross_repository_control_plane",
+  "date": "2026-08-30",
+  "claim_allowed": false,
+  "promotion_allowed": false,
+  "release_allowed_from_this_artifact_alone": false,
+  "autonomous_human_value_decision_allowed": false,
+  "single_actor_final_authority_for_high_impact": false,
+  "principle": "human_dignity_is_a_hard_constraint_not_a_scalar_weight",
+  "normative_registry": "data/control-plane/NORMATIVE_ROUTING_REGISTRY_V1.json",
+  "core_invariants": [
+    "PERSON != RESOURCE != TOKEN != DATASET != COST_FUNCTION",
+    "HUMAN_DIGNITY > EFFICIENCY",
+    "TOKEN_VAZIO != PASS",
+    "UNKNOWN_RISK != SAFE",
+    "NO_AUDITOR_FINDING != PROVEN_ABSENCE",
+    "NO_HARM_OBSERVED != HARM_IMPOSSIBLE",
+    "HEURISTIC != PROOF",
+    "MODEL_RECOMMENDATION != HUMAN_VALUE_DECISION",
+    "LEGAL_MINIMUM != ETHICAL_SUFFICIENCY",
+    "AVERAGE_WELFARE != PROTECTION_OF_EACH_GROUP",
+    "CONSENT != COERCION",
+    "RECENCY != AUTHORITY",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+  ],
+  "protected_domains": [
+    "children_and_adolescents",
+    "health_and_mental_health",
+    "education",
+    "privacy_and_personal_data",
+    "civil_and_human_rights",
+    "culture_and_belief",
+    "livelihoods_and_essential_resources",
+    "accessibility_and_disability",
+    "environment_and_ecosystem",
+    "public_safety",
+    "humanitarian_contexts"
+  ],
+  "hard_gates": {
+    "child_best_interest": {
+      "required": true,
+      "optimization_weight_allowed": false,
+      "final_exclusively_algorithmic_decision_allowed": false
+    },
+    "high_impact_decision": {
+      "plural_human_review_required": true,
+      "appeal_required": true,
+      "rollback_or_mitigation_required": true,
+      "consequence_radius_required": true,
+      "affected_group_voice_required": true
+    },
+    "privacy": {
+      "data_minimization_required": true,
+      "purpose_limitation_required": true,
+      "sensitive_data_default_hold": true,
+      "retention_must_be_justified": true
+    },
+    "uncertainty": {
+      "unknown_must_remain_typed": true,
+      "unknown_may_not_be_coerced_to_zero_false_or_safe": true,
+      "higher_uncertainty_and_higher_impact_reduces_automation_authority": true
+    },
+    "culture_and_belief": {
+      "identity_ranking_allowed": false,
+      "belief_truth_scoring_for_personal_worth_allowed": false,
+      "local_context_review_required_when_materially_affected": true
+    },
+    "health_education_and_children": {
+      "professional_or_domain_review_required_when_material": true,
+      "experimental_claim_must_be_labeled": true,
+      "evidence_boundary_must_be_explicit": true
+    }
+  },
+  "decision_states": [
+    "ALLOW_LOW_IMPACT",
+    "ALLOW_WITH_MONITORING",
+    "REQUIRE_PLURAL_REVIEW",
+    "REQUIRE_AFFECTED_GROUP_REVIEW",
+    "FAILSAFE_HOLD",
+    "TOKEN_VAZIO",
+    "CONTESTED",
+    "INSUFFICIENT_EVIDENCE",
+    "BLOCKED_BY_RIGHTS",
+    "ROLLBACK_REQUIRED"
+  ],
+  "risk_ratcheting": {
+    "policy": "no_silent_weakening",
+    "supersession_requires_all": [
+      "durable_provenance_pointer",
+      "evidence_not_weaker_than_predecessor_or_direct_falsification",
+      "declared_falsifier_or_test",
+      "human_impact_assessment_when_scope_expands",
+      "consequence_radius_is_explicit",
+      "rollback_or_mitigation_path",
+      "no_loss_of_child_privacy_dignity_or_appeal_protection"
+    ],
+    "latest_wins": false,
+    "silent_default_to_safe": false
+  },
+  "minimum_human_impact_record": [
+    "decision_id",
+    "scope",
+    "affected_people_or_groups",
+    "protected_domains_touched",
+    "known_benefits",
+    "known_harms",
+    "unknown_risks",
+    "distribution_of_benefit_and_harm",
+    "privacy_data_surface",
+    "child_impact",
+    "health_impact",
+    "education_impact",
+    "culture_and_belief_impact",
+    "environmental_impact",
+    "reversibility",
+    "appeal_path",
+    "human_reviewers_or_roles",
+    "evidence_refs",
+    "falsifier",
+    "decision_state"
+  ],
+  "normative_routing_anchors": [
+    "Universal human rights and human dignity principles",
+    "UNESCO Recommendation on the Ethics of Artificial Intelligence",
+    "UNICEF guidance on AI and children",
+    "WHO guidance on ethics and governance of AI for health",
+    "NIST AI Risk Management Framework",
+    "ISO/IEC 42001 AI management systems",
+    "Brazilian LGPD and ANPD guidance applicable to personal data and children"
+  ],
+  "normative_anchor_note": "These anchors are routing references, not a claim of legal compliance, certification or universal jurisdictional sufficiency.",
+  "cross_repo_rule": {
+    "local_pass_implies_human_impact_pass": false,
+    "technical_correctness_implies_ethics": false,
+    "scientific_novelty_implies_social_permission": false,
+    "performance_gain_may_override_hard_rights": false
+  },
+  "open_gaps": [
+    "TOKEN_VAZIO_INDEPENDENT_HUMAN_RIGHTS_REVIEW",
+    "TOKEN_VAZIO_CHILD_SAFETY_DOMAIN_REVIEW_FOR_APPLICABLE_PRODUCTS",
+    "TOKEN_VAZIO_JURISDICTION_SPECIFIC_LEGAL_REVIEW_WHEN_REQUIRED",
+    "TOKEN_VAZIO_AFFECTED_COMMUNITY_REPRESENTATION_FOR_HIGH_IMPACT_DEPLOYMENT",
+    "TOKEN_VAZIO_ENVIRONMENTAL_EXTERNALITY_MEASUREMENT_WHEN_MATERIAL"
+  ]
+}

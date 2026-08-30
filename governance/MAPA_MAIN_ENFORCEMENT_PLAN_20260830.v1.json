@@ -1,0 +1,75 @@
+{
+  "schema": "rafaelia.mapa-main-enforcement-plan.v1",
+  "generated_at": "2026-08-30",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "target_branch": "main",
+  "mode": "PREPARED_NOT_APPLIED",
+  "provider_enforcement_active": false,
+  "provider_enforcement_state": "TOKEN_VAZIO_ADMIN_ACTION_REQUIRED",
+  "claim_allowed": false,
+  "promotion_allowed_from_this_plan_alone": false,
+  "source_contract": "governance/main-hardening-contract.v1.json",
+  "source_gap_issue": 472,
+  "required_policy": {
+    "pull_request_required": true,
+    "direct_main_write_forbidden": true,
+    "force_push_forbidden": true,
+    "branch_deletion_forbidden": true,
+    "conversation_resolution_required_when_supported": true,
+    "human_review_required": true,
+    "minimum_approving_reviews": 1,
+    "dismiss_stale_approvals_on_new_commits": true,
+    "require_latest_reviewable_revision": true
+  },
+  "required_status_checks": [
+    "main-hardening-gate / contract",
+    "Human Dignity Ethics Gate V1 / Human dignity no-regression gate",
+    "CI / Validate Repository Structure",
+    "Branch Topology Gate"
+  ],
+  "additional_fail_closed_checks_when_available": [
+    "Server Merge Enforcement Assurance",
+    "RAFAELIA Promotion Control V1"
+  ],
+  "application_boundary": {
+    "authorized_executor": "TOKEN_VAZIO_GITHUB_ADMIN_OR_PROVIDER_CAPABLE_SURFACE",
+    "current_agent_may_self_approve": false,
+    "current_agent_may_fabricate_applied_state": false,
+    "independent_human_review": "TOKEN_VAZIO",
+    "affected_community_review": "TOKEN_VAZIO_WHEN_APPLICABLE",
+    "specialist_review": "TOKEN_VAZIO_WHEN_APPLICABLE"
+  },
+  "required_provider_readback": {
+    "branch_protected": true,
+    "required_status_checks_enforced": true,
+    "required_checks_include_declared_set": true,
+    "pull_request_rule_observed": true,
+    "review_rule_observed": true,
+    "force_push_block_observed": true,
+    "deletion_block_observed": true,
+    "exact_ruleset_or_protection_identifier_required": true
+  },
+  "negative_assurance_test": {
+    "required": true,
+    "method": "attempt a bounded PR whose required ethics or hardening check intentionally fails; observe provider refusal to merge without bypass",
+    "may_target_main_directly": false,
+    "destructive_test_allowed": false,
+    "success": "provider blocks merge while failing required check remains unresolved",
+    "failure": "merge can complete despite required failing check or review absence"
+  },
+  "exit_criteria": [
+    "authorized admin/provider action applies equivalent or stronger policy",
+    "provider readback is captured against canonical main",
+    "required checks are observed as enforced",
+    "human review requirement is observed",
+    "negative assurance is observed when safely feasible",
+    "successor receipt is append-only and bound to exact repository state"
+  ],
+  "invariants": [
+    "DETECTOR != ENFORCEMENT != PROOF_OF_BLOCKING",
+    "CI_PASS != ETHICAL_CERTIFICATION",
+    "TOKEN_VAZIO != PASS",
+    "SELF_REVIEW != INDEPENDENT_REVIEW",
+    "NORMATIVE_ALIGNMENT != CERTIFICATION"
+  ]
+}

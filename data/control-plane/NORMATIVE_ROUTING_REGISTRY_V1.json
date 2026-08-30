@@ -1,0 +1,97 @@
+{
+  "schema": "rafaelia.normative_routing_registry.v1",
+  "registry_id": "NORMATIVE_ROUTING_REGISTRY_V1",
+  "reviewed_at": "2026-08-30",
+  "claim_allowed": false,
+  "certification_claimed": false,
+  "legal_opinion_claimed": false,
+  "rule": "NORMATIVE_ALIGNMENT != CERTIFICATION",
+  "purpose": "Route human-impact reviews to current authoritative sources without converting structural alignment into legal, ethical, clinical, child-safety, or standards certification.",
+  "entries": [
+    {
+      "id": "NORM-UDHR-1948",
+      "authority": "United Nations",
+      "instrument": "Universal Declaration of Human Rights",
+      "version_or_date": "1948-12-10",
+      "scope": ["human_dignity", "human_rights", "non_discrimination", "life_liberty_security"],
+      "source": "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
+      "status_note": "Global human-rights baseline and routing anchor; not a repository certification mechanism."
+    },
+    {
+      "id": "NORM-UNESCO-AI-ETHICS-2021",
+      "authority": "UNESCO",
+      "instrument": "Recommendation on the Ethics of Artificial Intelligence",
+      "version_or_date": "2021 recommendation; official page reviewed 2026-08-30",
+      "scope": ["human_dignity", "human_rights", "fairness", "human_oversight", "environment", "governance"],
+      "source": "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+      "status_note": "Routing anchor for human-rights-centred AI governance."
+    },
+    {
+      "id": "NORM-UNICEF-AI-CHILDREN-V3-2025",
+      "authority": "UNICEF Innocenti",
+      "instrument": "Guidance on AI and Children",
+      "version_or_date": "Version 3.0 (2025)",
+      "scope": ["children_and_adolescents", "child_rights", "privacy", "safety", "best_interest", "inclusion"],
+      "source": "https://www.unicef.org/innocenti/reports/policy-guidance-ai-children",
+      "status_note": "Current child-centred AI routing anchor observed at review time."
+    },
+    {
+      "id": "NORM-WHO-AI-HEALTH-2021-2025",
+      "authority": "World Health Organization",
+      "instrument": "Ethics and governance of artificial intelligence for health; guidance on large multi-modal models",
+      "version_or_date": "2021 core guidance; 2025 LMM guidance",
+      "scope": ["health", "clinical_governance", "human_rights", "accountability", "equity"],
+      "source": "https://www.who.int/publications/i/item/9789240029200",
+      "supplemental_source": "https://www.who.int/publications/i/item/9789240084759",
+      "status_note": "Any clinical or health deployment still requires applicable qualified and regulatory review."
+    },
+    {
+      "id": "NORM-NIST-AI-RMF-1-0",
+      "authority": "NIST",
+      "instrument": "Artificial Intelligence Risk Management Framework",
+      "version_or_date": "AI RMF 1.0; under revision as observed 2026-08-30",
+      "scope": ["risk_management", "individuals", "organizations", "society", "trustworthiness"],
+      "source": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "status_note": "Do not freeze latest-wins semantics; revision status must trigger registry review rather than automatic control replacement."
+    },
+    {
+      "id": "NORM-ISO-IEC-42001-2023",
+      "authority": "ISO/IEC",
+      "instrument": "ISO/IEC 42001:2023 Artificial intelligence management system",
+      "version_or_date": "2023-12, Edition 1",
+      "scope": ["ai_management_system", "responsible_ai", "continual_improvement", "governance"],
+      "source": "https://www.iso.org/standard/42001",
+      "status_note": "Control mapping may be documented; certification must never be inferred from repository CI."
+    },
+    {
+      "id": "NORM-BR-LGPD-COMPILED",
+      "authority": "Presidência da República do Brasil",
+      "instrument": "Lei nº 13.709/2018 — Lei Geral de Proteção de Dados Pessoais (LGPD), texto compilado",
+      "version_or_date": "Compiled text reviewed 2026-08-30",
+      "scope": ["privacy", "personal_data", "sensitive_data", "security", "impact_assessment", "governance"],
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+      "status_note": "Applicability and lawful basis depend on the actual processing context; this registry is not legal advice."
+    },
+    {
+      "id": "NORM-ANPD-CHILDREN-ENUNCIADO-1-2023",
+      "authority": "Autoridade Nacional de Proteção de Dados (ANPD)",
+      "instrument": "Enunciado nº 1/2023 sobre tratamento de dados pessoais de crianças e adolescentes",
+      "version_or_date": "2023-05",
+      "scope": ["children_and_adolescents", "personal_data", "best_interest"],
+      "source": "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-divulga-enunciado-sobre-o-tratamento-de-dados-pessoais-de-criancas-e-adolescentes",
+      "status_note": "Best interest remains a required case-specific criterion; legal review is separate when applicable."
+    }
+  ],
+  "review_triggers": [
+    "source_reports_revision_or_supersession",
+    "scope_expands_to_new_jurisdiction",
+    "new_child_health_privacy_or_human_rights_use",
+    "material_change_in_processing_or_decision_authority",
+    "control_mapping_changes"
+  ],
+  "open_gaps": [
+    "TOKEN_VAZIO_JURISDICTION_SPECIFIC_REQUIREMENT_MAPPING",
+    "TOKEN_VAZIO_INDEPENDENT_LEGAL_REVIEW_WHEN_REQUIRED",
+    "TOKEN_VAZIO_EXTERNAL_CERTIFICATION_WHEN_CLAIMED_OR_REQUIRED"
+  ]
+}
