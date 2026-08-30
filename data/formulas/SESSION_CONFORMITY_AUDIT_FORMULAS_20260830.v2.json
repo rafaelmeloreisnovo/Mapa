@@ -1,0 +1,21 @@
+{
+  "schema": "rafaelia.session_formula_delta.v1",
+  "registry_id": "SESSION-CONFORMITY-AUDIT-FORMULAS-20260830-V2",
+  "predecessor": "data/formulas/SESSION_CONFORMITY_AUDIT_FORMULAS_20260830.v1.json",
+  "append_only": true,
+  "claim_allowed": false,
+  "delta_items": [
+    {
+      "id": "F31",
+      "class": "INVARIANT",
+      "expression": "PR_MERGED != CONTENT_ON_MAIN when PR.base != main and the base branch was already merged before the stacked PR",
+      "evidence": [
+        "RafGitTools PR389 merged to main",
+        "RafGitTools PR390 merged to feat/ruler-gate-20260830",
+        "configs/coherence-ruler-gate.v1.json present on main",
+        "contracts/human_impact_cross_repo.v1.json absent on main at observation"
+      ],
+      "boundary": "merge status is not deployment/main projection evidence"
+    }
+  ]
+}
