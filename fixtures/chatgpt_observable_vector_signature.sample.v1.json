@@ -1,0 +1,83 @@
+{
+  "schema": "rafaelia.chatgpt_observable_vector_packet.v1",
+  "fixture_only": true,
+  "public_safe": true,
+  "claim_allowed": false,
+  "question_or_hypothesis": "Can two public sources be structurally related without treating similarity as proof of common authorship?",
+  "nodes": [
+    {
+      "node_id": "SRC-DEMO-001",
+      "site_condition": {
+        "canonical_url": "https://help.openai.com/en/articles/9237897",
+        "domain": "help.openai.com",
+        "retrieved_at": "2026-08-29T00:00:00Z",
+        "source_class": "PROVIDER_PRIMARY",
+        "modality": "text/web",
+        "published_at_or_TOKEN_VAZIO": "TOKEN_VAZIO",
+        "updated_at_or_TOKEN_VAZIO": "TOKEN_VAZIO",
+        "citation_available": true,
+        "content_scope": "search/citation behavior",
+        "provenance_signal": "PROVIDER_DOMAIN",
+        "dynamic_content_risk": "MEDIUM",
+        "access_boundary": "PUBLIC_WEB",
+        "source_specific_caveat": "search results and citations can require source-level verification"
+      },
+      "content_vector": {
+        "values": [0.7,0.4,0.5,"TOKEN_VAZIO",0.1,0.0,0.0,1.0,0.8,0.4,0.5,0.1,0.2,0.7,0.1,0.0],
+        "state": "SYNTHETIC_FIXTURE_VALUES",
+        "method": "fixture-only range/shape test"
+      },
+      "evidence_vector": {
+        "values": [0.9,0.9,0.9,0.5,0.8,0.5,0.9,0.2,0.5,0.7],
+        "state": "SYNTHETIC_FIXTURE_VALUES",
+        "method": "fixture-only range/shape test"
+      }
+    },
+    {
+      "node_id": "SRC-DEMO-002",
+      "site_condition": {
+        "canonical_url": "https://help.openai.com/en/articles/8912793-provenance-signals-content-credentials-synthid-in-openai-generated-content",
+        "domain": "help.openai.com",
+        "retrieved_at": "2026-08-29T00:00:00Z",
+        "source_class": "PROVIDER_PRIMARY",
+        "modality": "text/web",
+        "published_at_or_TOKEN_VAZIO": "TOKEN_VAZIO",
+        "updated_at_or_TOKEN_VAZIO": "TOKEN_VAZIO",
+        "citation_available": true,
+        "content_scope": "media provenance",
+        "provenance_signal": "PROVIDER_DOMAIN",
+        "dynamic_content_risk": "MEDIUM",
+        "access_boundary": "PUBLIC_WEB",
+        "source_specific_caveat": "provenance signal does not prove accuracy, ownership, or unedited state"
+      },
+      "content_vector": {
+        "values": [0.7,0.3,0.4,"TOKEN_VAZIO",0.2,0.0,0.0,1.0,0.9,0.4,0.4,0.1,0.2,0.8,0.1,0.0],
+        "state": "SYNTHETIC_FIXTURE_VALUES",
+        "method": "fixture-only range/shape test"
+      },
+      "evidence_vector": {
+        "values": [0.9,0.9,0.9,0.9,0.8,0.5,0.9,0.2,0.6,0.7],
+        "state": "SYNTHETIC_FIXTURE_VALUES",
+        "method": "fixture-only range/shape test"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "from": "SRC-DEMO-001",
+      "to": "SRC-DEMO-002",
+      "relation_axes": ["PROVENANCE","CITATION","SEMANTIC"],
+      "semantic_score": "TOKEN_VAZIO",
+      "semantic_method": "TOKEN_VAZIO_NOT_COMPUTED",
+      "evidence_ceiling": "PROVIDER_PRIMARY_SOURCE_ONLY",
+      "claim": "RELATED_PUBLIC_PROVIDER_DOCUMENTATION_NOT_SAME_AUTHOR_PROOF"
+    }
+  ],
+  "falsifiers": [
+    "same-domain pages may discuss unrelated topics",
+    "high semantic similarity may arise from templates or shared documentation language",
+    "absence of provenance signal cannot establish non-origin"
+  ],
+  "gaps": ["semantic relation score intentionally TOKEN_VAZIO"],
+  "requested_output": ["ranked_relations","contradictions","supporting_evidence","falsifiers","TOKEN_VAZIO_fields","claim_gate"]
+}
