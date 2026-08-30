@@ -1,0 +1,207 @@
+{
+  "schema": "rafaelia.chatgpt_observable_vector_signature.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-08-29",
+  "state": "FORMAL_PUBLIC_EVALUATION_CONTRACT",
+  "claim_allowed": false,
+  "purpose": "Provide a public-safe, transformer-readable feature packet for cross-source analysis without claiming access to hidden model states or private corpus bytes.",
+  "invariant": "SIMILARITY_NE_EVIDENCE_AND_VECTOR_WEIGHT_CANNOT_UPGRADE_EVIDENCE_CLASS",
+  "transformer_boundary": {
+    "hidden_activations_accessible": false,
+    "attention_weights_accessible": false,
+    "provider_internal_logits_accessible": false,
+    "provider_internal_embedding_required": false,
+    "allowed_input": "observable features, retrieved source text/metadata, public provenance signals, declared external similarity metrics, and opaque private commitments",
+    "evaluation_mode": "CONTEXT_PACKET_READABLE_BY_CHATGPT_OR_OTHER_TRANSFORMER"
+  },
+  "vector_contract": {
+    "content_vector_id": "V_CONTENT_16",
+    "evidence_vector_id": "V_EVIDENCE_10",
+    "content_dimensions": [
+      "TEMPORAL_ALIGNMENT",
+      "LEXICAL_OVERLAP",
+      "STRUCTURAL_OVERLAP",
+      "SEMANTIC_RELATION",
+      "NUMERICAL_DENSITY",
+      "SYMBOLIC_MATH_DENSITY",
+      "CODE_DENSITY",
+      "MODALITY_MATCH",
+      "METADATA_MATCH",
+      "RELATION_DENSITY",
+      "CROSS_SOURCE_AGREEMENT",
+      "CONTRADICTION_DENSITY",
+      "NOVELTY",
+      "FALSIFIER_STRENGTH",
+      "HEURISTIC_PENALTY",
+      "PRIVACY_RISK"
+    ],
+    "evidence_dimensions": [
+      "SOURCE_AUTHORITY",
+      "PRIMARY_SOURCE_DIRECTNESS",
+      "CITATION_SUPPORT",
+      "PROVENANCE_STRENGTH",
+      "RETRIEVAL_INTEGRITY",
+      "DATE_VERIFIABILITY",
+      "CLAIM_SOURCE_ALIGNMENT",
+      "INDEPENDENT_CORROBORATION",
+      "NEGATIVE_CONTROL_QUALITY",
+      "REPRODUCIBILITY"
+    ],
+    "range": "0.0..1.0",
+    "missing_value": "TOKEN_VAZIO",
+    "score_state_required": true,
+    "per_dimension_required_metadata": [
+      "value",
+      "state",
+      "method",
+      "source_refs",
+      "falsifier"
+    ],
+    "allowed_states": [
+      "OBSERVED",
+      "DERIVED_DECLARED_METHOD",
+      "HEURISTIC",
+      "TOKEN_VAZIO",
+      "FALSIFIED"
+    ]
+  },
+  "dynamic_weighting": {
+    "content_rule": "w_k(t)=exp(beta*z_k(t))/sum_j exp(beta*z_j(t))",
+    "evidence_rule": "Evidence dimensions remain an orthogonal gate and are not collapsed into content similarity.",
+    "ceiling": "ATTRIBUTION_OR_FACTUAL_CLAIM_STRENGTH_LE_MIN_REQUIRED_EVIDENCE_CLASS",
+    "anti_circularity": "A feature derived from the candidate claim cannot independently corroborate that same claim."
+  },
+  "site_condition_contract": {
+    "required_fields": [
+      "canonical_url",
+      "domain",
+      "retrieved_at",
+      "source_class",
+      "modality",
+      "published_at_or_TOKEN_VAZIO",
+      "updated_at_or_TOKEN_VAZIO",
+      "citation_available",
+      "content_scope",
+      "provenance_signal",
+      "dynamic_content_risk",
+      "access_boundary",
+      "source_specific_caveat"
+    ],
+    "source_classes": [
+      "PROVIDER_PRIMARY",
+      "OFFICIAL_STANDARD",
+      "PEER_REVIEWED",
+      "PREPRINT",
+      "NEWS",
+      "COMMUNITY",
+      "AGGREGATOR",
+      "UNKNOWN"
+    ],
+    "rules": [
+      "PUBLIC_RETRIEVAL_ONLY_IN_PUBLIC_CI",
+      "SOURCE_DATE_MUST_BE_SEPARATE_FROM_RETRIEVAL_DATE",
+      "DYNAMIC_PAGE_NE_STABLE_CLAIM_WITHOUT_CAPTURE_OR_CITATION",
+      "SEARCH_RESULT_NE_SOURCE_PROOF",
+      "CITATION_MUST_SUPPORT_LOCAL_CLAIM",
+      "MULTIPLE_SOURCES_NE_INDEPENDENCE_IF_THEY_SHARE_ONE_ORIGIN"
+    ]
+  },
+  "public_source_adapters": [
+    {
+      "adapter_id": "OPENAI_SEARCH_HELP",
+      "domain": "help.openai.com",
+      "source_class": "PROVIDER_PRIMARY",
+      "purpose": "ChatGPT web-search behavior, citation and source-review boundary",
+      "url": "https://help.openai.com/en/articles/9237897",
+      "public_observation": "ChatGPT search may return cited web sources, and users are advised to verify source support, date, and authority because results can be incomplete, outdated, or incorrect."
+    },
+    {
+      "adapter_id": "OPENAI_PROVENANCE_HELP",
+      "domain": "help.openai.com",
+      "source_class": "PROVIDER_PRIMARY",
+      "purpose": "OpenAI image/audio provenance signals and negative-result boundary",
+      "url": "https://help.openai.com/en/articles/8912793-provenance-signals-content-credentials-synthid-in-openai-generated-content",
+      "public_observation": "Supported OpenAI-generated images can carry C2PA and SynthID signals; provenance signals indicate origin context but do not by themselves establish accuracy, legal ownership, or unedited state."
+    },
+    {
+      "adapter_id": "OPENAI_PLATFORM_DOCS",
+      "domain": "platform.openai.com",
+      "source_class": "PROVIDER_PRIMARY",
+      "purpose": "Optional declared external embedding or grader method reference",
+      "url": "https://platform.openai.com/docs/",
+      "public_observation": "Any external embedding/similarity score must declare the exact method/model and remains a derived feature, not provider-authorship proof."
+    }
+  ],
+  "pairwise_relation_tensor": {
+    "notation": "R[i,j,r,t]",
+    "relation_axes": [
+      "SEMANTIC",
+      "LEXICAL",
+      "TEMPORAL",
+      "CITATION",
+      "PROVENANCE",
+      "CONTRADICTION",
+      "DERIVATION",
+      "FALSIFICATION"
+    ],
+    "rule": "Pairwise relations may rank or cluster nodes but may not merge node identities or erase provenance boundaries."
+  },
+  "private_hash_bridge": {
+    "input": "opaque_id + commitment + temporal_index + relation_index + evidence_state",
+    "raw_private_content": "FORBIDDEN_IN_PUBLIC_ARTIFACT",
+    "recommended_commitment": "BLAKE3-256-KEYED",
+    "semantic_vector_from_private_content": "MUST_BE_COMPUTED_PRIVATE_SIDE_OR_TOKEN_VAZIO",
+    "public_side_allowed": "commitment-derived navigation and explicitly exported aggregate features only",
+    "privacy_invariant": "NO_PRIVATE_PAYLOAD_RECONSTRUCTION_ATTEMPT"
+  },
+  "chatgpt_evaluation_packet": {
+    "required_sections": [
+      "question_or_hypothesis",
+      "nodes",
+      "site_conditions",
+      "content_vectors",
+      "evidence_vectors",
+      "relations",
+      "falsifiers",
+      "gaps",
+      "requested_output"
+    ],
+    "recommended_output": [
+      "ranked_relations",
+      "contradictions",
+      "supporting_evidence",
+      "falsifiers",
+      "TOKEN_VAZIO_fields",
+      "sensitivity_to_weight_changes",
+      "claim_gate"
+    ],
+    "default_claim_gate": false
+  },
+  "forbidden_promotions": [
+    "HIGH_SEMANTIC_SIMILARITY_TO_SAME_AUTHOR",
+    "TEXT_STYLE_TO_PROVIDER_PROOF",
+    "IMAGE_STYLE_TO_PROVIDER_PROOF",
+    "RESOLUTION_TO_PROVIDER_PROOF",
+    "MODEL_GUESS_TO_PROVENANCE",
+    "EMBEDDING_COSINE_TO_CAUSALITY",
+    "CORRELATION_TO_CAUSALITY",
+    "HASH_TO_SEMANTIC_EQUIVALENCE",
+    "PRIVATE_COMMITMENT_TO_PRIVATE_CONTENT_DISCLOSURE"
+  ],
+  "F_ok": [
+    "observable feature vectors can be supplied to ChatGPT as structured context",
+    "site conditions and provenance can be represented orthogonally to semantic similarity",
+    "public and private data can meet through opaque commitments and exported aggregate features"
+  ],
+  "F_gap": [
+    "real Conversations Chunky vector values remain private-side TOKEN_VAZIO in this public artifact",
+    "provider-internal transformer states are not exposed by this contract",
+    "other provider-specific source adapters require independent public evidence"
+  ],
+  "F_next": [
+    "validate this contract in public CI",
+    "create a synthetic fixture with no private content",
+    "export real private-side aggregate vectors only when explicitly authorized",
+    "measure sensitivity and falsification before promoting any attribution claim"
+  ]
+}
