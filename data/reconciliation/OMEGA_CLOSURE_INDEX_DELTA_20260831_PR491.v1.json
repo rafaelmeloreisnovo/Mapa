@@ -1,0 +1,23 @@
+{
+  "schema": "rafaelia.omega_closure_index_delta.v1",
+  "delta_id": "OMEGA-CLOSURE-INDEX-DELTA-20260831-PR491",
+  "applies_to": "data/reconciliation/OMEGA_CLOSURE_INDEX_20260831.v1.json",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 491,
+  "event": "LIVE_ZERO_INDEPENDENT_APPROVAL_PROMOTION_CONTROL_DENIAL",
+  "evidence": "data/receipts/PROMOTION_CONTROL_ZERO_APPROVAL_DENIAL_20260831_PR491.v1.json",
+  "affected_gate": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+  "gate_state_before": "FAIL",
+  "gate_state_after": "FAIL",
+  "predicate_progress": {
+    "internal_promotion_control_zero_approval_denial": "PASS",
+    "provider_ruleset_required_check_binding": "FAIL",
+    "provider_zero_approval_merge_rejection_receipt": "TOKEN_VAZIO",
+    "provider_direct_push_or_bypass_rejection_receipt": "TOKEN_VAZIO"
+  },
+  "claim_allowed": false,
+  "interpretation": "The live workflow control correctly denied a zero-independent-approval promotion attempt. This strengthens the control-plane evidence but does not satisfy the server-side provider enforcement stop condition because the fetched active ruleset does not visibly require the Promotion Control check.",
+  "F_ok": "Zero-approval negative control path was exercised live and denied with required_independent_approvals=1.",
+  "F_gap": "Provider binding and provider rejection receipts remain unproved.",
+  "F_next": "Require Promotion Control in provider rules, then capture provider-side merge/direct-push rejection receipts before promoting the gate to PASS."
+}
