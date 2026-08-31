@@ -1,0 +1,66 @@
+{
+  "schema": "rafaelia.mapa_main_server_enforcement_observation.v1",
+  "receipt_id": "RECEIPT-MAPA-MAIN-SERVER-ENFORCEMENT-20260831",
+  "observed_at": "2026-08-31T10:45:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "main",
+  "observed_head": "1e2a63c62834f8fe4ae342ca487842d27fee0c97",
+  "predecessor": "data/receipts/MAPA_MAIN_SERVER_ENFORCEMENT_OBSERVATION_20260829.v1.json",
+  "branch_metadata": {
+    "protected": true,
+    "legacy_protection_enabled": false,
+    "required_status_checks_enforcement_level": "off",
+    "required_status_check_contexts": [],
+    "required_status_checks": []
+  },
+  "repository_ruleset": {
+    "id": 21909304,
+    "name": "1",
+    "target": "branch",
+    "enforcement": "active",
+    "default_branch_included": true,
+    "rules_observed": [
+      "deletion",
+      "non_fast_forward",
+      "required_linear_history",
+      "required_signatures",
+      "code_quality",
+      "pull_request",
+      "code_scanning",
+      "code_coverage"
+    ],
+    "required_approving_review_count": 0,
+    "required_review_thread_resolution": true,
+    "required_status_checks_rule_observed": false,
+    "promotion_control_required_check_observed": false,
+    "bypass_actor_count": 4,
+    "current_user_can_bypass": "never"
+  },
+  "gate": {
+    "gap_id": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+    "state": "FAIL",
+    "reason": "Server-side enforcement is now partially visible and active, but the closure contract is not met: zero independent approvals are required and no required status-check binding for Promotion Control is observed in the active ruleset."
+  },
+  "epistemic_conclusion": {
+    "visible_server_enforcement": "PARTIALLY_ENABLED_BY_ACTIVE_RULESET",
+    "provider_progress_since_predecessor": "OBSERVED",
+    "closure_condition": "NOT_MET",
+    "priority": "P0"
+  },
+  "claim_allowed": false,
+  "guards": [
+    "PROTECTED_TRUE_NE_FULL_CLOSURE",
+    "ACTIVE_RULESET_NE_REQUIRED_INDEPENDENT_APPROVAL",
+    "ACTIVE_RULESET_NE_PROMOTION_CONTROL_BINDING",
+    "ABSENT_REQUIRED_STATUS_CHECK_RULE_IS_OBSERVED_IN_FETCHED_RULESET_ONLY",
+    "DO_NOT_DELETE_PREDECESSOR_RECEIPT"
+  ],
+  "F_ok": "Provider state advanced from no visible ruleset to an active default-branch ruleset with deletion/non-fast-forward/signature/review-thread controls.",
+  "F_gap": "The active ruleset requires zero approving reviews and exposes no required status-check rule binding Promotion Control; provider-side rejected-merge/direct-push receipts required by issue #327 are not established here.",
+  "F_next": [
+    "bind Promotion Control as a required provider-side status check for main",
+    "require the independent approval count mandated by the issue #327 closure path",
+    "exercise unauthorized/direct-push and zero-approval merge negative paths and capture provider rejection receipts",
+    "re-read provider metadata and append a successor PASS receipt only after all closure predicates are evidenced"
+  ]
+}
