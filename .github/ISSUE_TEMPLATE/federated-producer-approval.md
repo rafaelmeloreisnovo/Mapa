@@ -1,8 +1,10 @@
 ---
 name: Federated Producer Registration & Approval
 about: Lane 00 (Governança) approval workflow for external producer federation
-title: "APPROVAL REQUIRED: Federated Producer Registration — [producer-name]"
-labels: ["lane-00-governance", "federated-producer", "approval-required"]
+title: 'APPROVAL REQUIRED: Federated Producer Registration — [producer-name]'
+labels: ''
+assignees: ''
+
 ---
 
 ## Producer Registration & Federated Receipt Approval
