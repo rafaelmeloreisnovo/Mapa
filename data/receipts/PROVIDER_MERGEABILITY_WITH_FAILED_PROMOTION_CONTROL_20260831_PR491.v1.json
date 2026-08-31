@@ -1,0 +1,44 @@
+{
+  "schema": "rafaelia.provider_mergeability_gap_observation.v1",
+  "receipt_id": "RECEIPT-PROVIDER-MERGEABILITY-WITH-FAILED-PROMOTION-CONTROL-20260831-PR491",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 491,
+  "observed_pr_head": "e87742657677881d5606d7b6707e113e060fdddc",
+  "provider_pr_state": {
+    "state": "open",
+    "merged": false,
+    "mergeable": true
+  },
+  "control_state": {
+    "check_name": "promotion-control / enforce",
+    "prior_live_result": "DENIED",
+    "prior_check_conclusion": "failure",
+    "blocking_reason": "INDEPENDENT_APPROVAL_MISSING",
+    "observed_independent_approvals": 0,
+    "required_independent_approvals": 1,
+    "claim_allowed": false
+  },
+  "ruleset_state": {
+    "ruleset_id": 21909304,
+    "enforcement": "active",
+    "required_approving_review_count": 0,
+    "required_status_checks_rule_observed": false
+  },
+  "gate_relation": {
+    "gap_id": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+    "state": "FAIL",
+    "interpretation": "The provider reports the PR as mergeable while the internal Promotion Control has denied the zero-independent-approval path. This is direct evidence of missing visible provider binding between the control check and merge eligibility."
+  },
+  "merge_attempt_performed": false,
+  "reason_merge_not_attempted": "Fail-closed governance: do not bypass a denied internal promotion control merely to test whether the provider would accept the merge.",
+  "provider_merge_rejection_receipt": "TOKEN_VAZIO",
+  "guards": [
+    "MERGEABLE_TRUE_NE_MERGE_EXECUTED",
+    "DO_NOT_BYPASS_DENIED_PROMOTION_CONTROL",
+    "PROVIDER_BINDING_GAP_IS_OBSERVED",
+    "CLAIM_ALLOWED_REMAINS_FALSE"
+  ],
+  "F_ok": "The provider/control mismatch is now observable without performing an unsafe governance bypass.",
+  "F_gap": "A provider-side rejection receipt remains TOKEN_VAZIO because no merge bypass attempt was performed; the required status check is still not visibly bound in the ruleset.",
+  "F_next": "Configure the ruleset to require Promotion Control and one independent approval, then re-observe mergeability under the same zero-approval negative path."
+}
