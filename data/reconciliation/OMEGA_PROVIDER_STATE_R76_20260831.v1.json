@@ -1,0 +1,55 @@
+{
+  "schema": "rafaelia.provider_state_reconciliation.v1",
+  "route_id": "ATLAS-GITHUB-R76-PROVIDER-READBACK-COMPLETED",
+  "observed_at_utc": "2026-08-31T03:26:00Z",
+  "claim_allowed": false,
+  "longitudinal_predecessor": "ATLAS-GITHUB-R75-RERUN-ATTEMPT2",
+  "state": "OBSERVED_COMPLETED_STARTUP_FAILURE",
+  "mapa": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "main_sha": "aa3aec1fd326dc0f3e8722af62cad99ba307efb7",
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_checks_enforcement": "off",
+    "rulesets": [],
+    "gap": "TV-MAPA-MAIN-SERVER-ENFORCEMENT"
+  },
+  "producer_runs": [
+    {
+      "repository": "rafaelmeloreisnovo/ZIPRAF_CORE",
+      "run_id": 32944272901,
+      "attempt": 2,
+      "job_id": 99359385089,
+      "conclusion": "failure",
+      "steps_count": 0,
+      "runner_id": 0,
+      "runner_name": "",
+      "classification": "EXECUTOR_NOT_STARTED_OBSERVED",
+      "code_failure_evidenced": false
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafNet-Core",
+      "run_id": 31802909105,
+      "attempt": 2,
+      "job_id": 99359416170,
+      "conclusion": "failure",
+      "steps_count": 0,
+      "runner_id": 0,
+      "runner_name": "",
+      "classification": "EXECUTOR_NOT_STARTED_OBSERVED",
+      "code_failure_evidenced": false
+    }
+  ],
+  "cross_repo_assessment": {
+    "same_failure_shape_observed": true,
+    "common_root_cause": "TOKEN_VAZIO_RUNNER_STARTUP_ROOT_CAUSE",
+    "root_cause_proven": false,
+    "safe_next_action": "investigate provider runner admission/startup before mutating producer workflow logic"
+  },
+  "invariants": [
+    "WORKFLOW_FAILURE != CODE_FAILURE",
+    "ZERO_STEPS != TEST_FAILURE",
+    "TOKEN_VAZIO != PASS",
+    "OBSERVATION != ROOT_CAUSE"
+  ]
+}
