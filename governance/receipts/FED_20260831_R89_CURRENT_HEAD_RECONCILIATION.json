@@ -1,0 +1,187 @@
+{
+  "schema": "RAFAELIA_FEDERATED_CYCLE_RECEIPT_V1",
+  "cycle_id": "FED-20260831-R89-CURRENT-HEAD-RECONCILIATION",
+  "observed_at": "2026-08-31T12:26:37Z",
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "predecessor": {
+    "cycle": "R88",
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "previous_head": "eb4e16b2f151a7148a74ab61829e8b987a105e6a"
+  },
+  "cursor": {
+    "before": "Mapa/main@eb4e16b2f151a7148a74ab61829e8b987a105e6a",
+    "after": "Mapa/main@1e2a63c62834f8fe4ae342ca487842d27fee0c97"
+  },
+  "source": {
+    "github_main": {
+      "sha": "1e2a63c62834f8fe4ae342ca487842d27fee0c97",
+      "tree": "7f370fddc18add3bbb8013db95f110469ae084da",
+      "parent": "eb4e16b2f151a7148a74ab61829e8b987a105e6a",
+      "merge_pr": 489,
+      "verified_signature": true
+    },
+    "github_pr_489": {
+      "provider_state": "merged",
+      "merged_at": "2026-08-31T11:26:30Z",
+      "head_sha": "5db205ea421d2d256733590619d7205cdd72d0d8",
+      "merge_commit_sha": "1e2a63c62834f8fe4ae342ca487842d27fee0c97",
+      "body_contains_historical_unmerged_statement": true
+    },
+    "github_checks": {
+      "head_sha": "1e2a63c62834f8fe4ae342ca487842d27fee0c97",
+      "observed_total": 10,
+      "known": {
+        "Human dignity no-regression gate": "success",
+        "Validate Repository Structure": "failure",
+        "build": "failure",
+        "SCS": "failure",
+        "deploy": "skipped"
+      }
+    },
+    "github_ruleset": {
+      "id": 21909304,
+      "enforcement": "active",
+      "target": "~DEFAULT_BRANCH",
+      "required_status_checks_present": false,
+      "bypass_integrations_always": [20150, 29110, 73253, 1144995],
+      "current_user_can_bypass": "never"
+    },
+    "drive": {
+      "master_index_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "master_index_updated_at": "2026-08-31T12:14:23.520Z",
+      "anchor_book_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "anchor_book_updated_at": "2026-08-31T12:16:54.058Z",
+      "atlas_evid_receipt_id": "1U_7CuijRO0pwEATP3h-g4-TGU120rmaCcFNN8OiQfq0"
+    }
+  },
+  "transform": {
+    "action": "RECONCILE_CURRENT_PROVIDER_STATE_WITH_HISTORICAL_DOCUMENTATION",
+    "rules": [
+      "provider state supersedes stale prose for current-state claims",
+      "historical prose is preserved as evidence of prior state",
+      "CI failure does not identify cause without job/step evidence",
+      "ruleset absence of required_status_checks is not repaired implicitly"
+    ]
+  },
+  "findings": [
+    {
+      "id": "F-R89-HEAD-ADVANCED",
+      "state": "OBSERVED",
+      "claim": "Mapa/main advanced from eb4e16b2... to 1e2a63c6... through merged PR 489"
+    },
+    {
+      "id": "F-R89-PR-BODY-STALE",
+      "state": "CONTRADICTED_DOCUMENTATION",
+      "claim": "PR 489 body still says draft/unmerged while provider metadata says merged",
+      "impact": "current-state consumers must use provider metadata, not stale PR prose"
+    },
+    {
+      "id": "F-R89-PROVIDER-PROTECTION-GAP",
+      "state": "OBSERVED_MISSING",
+      "claim": "active ruleset still lacks required_status_checks"
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-MAPA-1E2A63C6-STRUCTURE-FAILURE-CAUSE",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "check-run:99471675829",
+      "missing_field": "exact failing step/rule on current merge commit",
+      "blocking_dependency": "job log or annotation evidence",
+      "evidence_needed": "step-level log/annotation and deterministic rerun if needed",
+      "falsifier": "current-head rerun succeeds or evidence shows expected non-blocking failure",
+      "next_probe": "inspect workflow run 33386972662 and annotation for check-run 99471675829",
+      "owner_authority": "GitHub Actions provider + repository workflow",
+      "urgency": "P0",
+      "closure_gate": "exact cause + current-head revalidation",
+      "claim_allowed": false,
+      "predecessor_lineage": "R82 markdown-debt structural gate family"
+    },
+    {
+      "gap_id": "TV-MAPA-1E2A63C6-SCS-FAILURE-CAUSE",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "check-run:99471675704",
+      "missing_field": "exact SCS failure causes",
+      "blocking_dependency": "four provider annotations/job logs",
+      "evidence_needed": "annotation and step-level evidence",
+      "falsifier": "current-head SCS rerun succeeds under unchanged inputs",
+      "next_probe": "inspect SCS annotations/job 99471675704",
+      "owner_authority": "GitHub Actions provider + SCS workflow",
+      "urgency": "P0",
+      "closure_gate": "all failing SCS annotations classified",
+      "claim_allowed": false,
+      "predecessor_lineage": "current-head check matrix"
+    },
+    {
+      "gap_id": "TV-MAPA-MAIN-REQUIRED-STATUS-CHECKS",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "ruleset:21909304",
+      "missing_field": "required_status_checks rule",
+      "blocking_dependency": "provider-side governance decision/apply",
+      "evidence_needed": "live ruleset readback containing required_status_checks",
+      "falsifier": "authoritative governance decision explicitly rejecting required status checks",
+      "next_probe": "compare repository target JSON with live ruleset and provider-protection gate",
+      "owner_authority": "repository governance/provider ruleset",
+      "urgency": "P0_AUTHORITY",
+      "closure_gate": "live provider readback + negative merge test",
+      "claim_allowed": false,
+      "predecessor_lineage": "R83-R88 provider-protection gap"
+    },
+    {
+      "gap_id": "TV-DRIVE-MASTER-INDEX-COPY-ORIGIN",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk + Drive:1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U",
+      "missing_field": "provider-level creation/copy/import ancestry",
+      "blocking_dependency": "historical provider event/receipt unavailable in inspected surfaces",
+      "evidence_needed": "creation/copy event or receipt explicitly linking the provider IDs",
+      "falsifier": "evidence of independent generation from a third source",
+      "next_probe": "search historical execution/AppScript/API logs for both IDs; otherwise classify UNRESOLVED_PROVIDER_HISTORY without inventing direction",
+      "owner_authority": "Google Drive provider metadata + custody ledger",
+      "urgency": "P1_PROVENANCE",
+      "closure_gate": "provider-bound or receipt-bound ancestry edge",
+      "claim_allowed": false,
+      "predecessor_lineage": "R85-R88 duplicate identity/provenance analysis"
+    }
+  ],
+  "memory_projection": {
+    "L": "eb4e16b2 -> PR489 head 5db205ea -> merge 1e2a63c6; stale PR prose retained historically",
+    "O": "provider metadata, checks, ruleset and Drive freshness are independent validation surfaces",
+    "T": "PR489 Atlas route links Mapa, Drive EVID receipt and papers route",
+    "C": "merged state does not imply scientific promotion or claim authorization",
+    "P": "receipt is append-only on audit branch; no default-branch mutation"
+  },
+  "coverage_delta": {
+    "head_revalidated": true,
+    "checks_observed": 10,
+    "ruleset_revalidated": true,
+    "drive_freshness_revalidated": true,
+    "stale_documentation_contradiction_classified": true
+  },
+  "uncertainty_delta": {
+    "head_identity": "reduced",
+    "pr_current_state": "reduced",
+    "check_failure_causes": "open",
+    "master_index_causal_origin": "open"
+  },
+  "F_ok": [
+    "current Mapa head and predecessor lineage observed",
+    "PR489 provider state reconciled against stale body prose",
+    "10 current-head checks observed",
+    "ruleset revalidated",
+    "Drive master index and anchor-book freshness observed",
+    "append-only receipt materialized on audit branch"
+  ],
+  "F_gap": [
+    "exact causes of current structure/build/SCS failures",
+    "required_status_checks provider rule",
+    "four bypass integration identities/justifications",
+    "Drive duplicate creation ancestry"
+  ],
+  "F_next": [
+    "inspect current-head failing check annotations/jobs",
+    "classify failure causes without generic CI inference",
+    "reconcile provider-protection target versus live ruleset",
+    "continue Master Index ancestry only if provider-bound history exists"
+  ]
+}
