@@ -22,7 +22,7 @@ jobs:
   stdlib-audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Compile auditors
         run: python3 -m py_compile scripts/audit_json_totality_invariants.py scripts/validate_json_totality_scope.py tests/test_json_totality_invariants.py
       - name: Run unit tests

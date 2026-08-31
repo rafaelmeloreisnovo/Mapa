@@ -21,7 +21,7 @@ jobs:
   assurance:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Validate public repository assurance matrix
         run: python3 scripts/validate_public_repository_assurance.py
       - name: Negative gate — claim_allowed must fail closed
