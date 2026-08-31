@@ -3,7 +3,7 @@
   "subject": {
     "repository": "rafaelmeloreisnovo/Mapa",
     "revision": "aa3aec1fd326dc0f3e8722af62cad99ba307efb7",
-    "observed_at_utc": "2026-08-31T03:26:00Z"
+    "observed_at_utc": "2026-08-31T03:34:26Z"
   },
   "non_certification": true,
   "claim_allowed": false,
@@ -75,7 +75,11 @@
       "id": "R10",
       "name": "Bounded audit-ready evidence bundle",
       "state": "BLOCKED",
-      "evidence": ["R1-R9 recognition profile", "R76 provider-state reconciliation receipt"],
+      "evidence": [
+        "R1-R9 recognition profile",
+        "Drive predecessor ATLAS-FED-R76-ACTIONS-LOG-BLOB-RLL-DIVERGENCE",
+        "Drive predecessor ATLAS-FED-R76B-RLL-CANONICAL-PR-SURFACE"
+      ],
       "gaps": ["BLOCKED_BY_R8_R9_AND_PARTIAL_R2_R5_R6"]
     }
   ],
@@ -85,6 +89,7 @@
   ],
   "notes": [
     "Audit-readiness recognition is not certification.",
-    "Mapa remains a federated control plane, not an executor."
+    "Mapa remains a federated control plane, not an executor.",
+    "Current Drive longitudinal head already contains R76 and R76B; this branch does not reuse those route identifiers."
   ]
 }
