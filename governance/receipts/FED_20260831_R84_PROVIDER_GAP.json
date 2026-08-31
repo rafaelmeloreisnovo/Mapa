@@ -1,0 +1,92 @@
+{
+  "schema": "rafaelia.federated_cycle_receipt/v1",
+  "cycle_id": "FED-20260831-R84-PROVIDER-GAP-RECEIPT",
+  "predecessor": "FED-20260831-R83-PROVIDER-PROTECTION-LIVE-DELTA",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "source": {
+    "head_sha": "eb4e16b2f151a7148a74ab61829e8b987a105e6a",
+    "ruleset_id": 21909304,
+    "ruleset_enforcement": "active",
+    "ruleset_condition": "~DEFAULT_BRANCH",
+    "observed_rule_types": [
+      "deletion",
+      "non_fast_forward",
+      "required_linear_history",
+      "required_signatures",
+      "code_quality",
+      "pull_request",
+      "code_scanning",
+      "code_coverage"
+    ],
+    "observed_check_runs": 11
+  },
+  "transform": "provider live readback cross-checked against repository target and current HEAD checks",
+  "claims": [
+    {
+      "claim": "required_status_checks is absent from the live active default-branch ruleset",
+      "state": "OBSERVED",
+      "claim_allowed": false
+    },
+    {
+      "claim": "four Integration actors retain bypass_mode=always and their identity/justification is unresolved",
+      "state": "OBSERVED",
+      "claim_allowed": false
+    },
+    {
+      "claim": "combined commit statuses being empty does not imply absence of CI because 11 check-runs are observable for the same HEAD",
+      "state": "OBSERVED",
+      "claim_allowed": false
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "TV-MAPA-MAIN-REQUIRED-STATUS-CHECKS",
+      "token_state": "TOKEN_VAZIO",
+      "source_pointer": "github:ruleset/21909304",
+      "missing_field": "required_status_checks(provider-protection, strict=true)",
+      "blocking_dependency": "provider-side merge enforcement",
+      "evidence_needed": "live ruleset readback containing required_status_checks with provider-protection context and strict policy",
+      "falsifier": "live provider readback showing the required rule already exists",
+      "next_probe": "re-read ruleset 21909304 after provider-side configuration change; then execute provider-protection gate",
+      "owner_authority": "GitHub provider ruleset",
+      "urgency": "HIGH",
+      "closure_gate": "provider live readback + provider-protection execution evidence",
+      "claim_allowed": false,
+      "lineage": ["d2cedb8c5b7c048a8168c3bc4f78ad9a768743fc", "eb4e16b2f151a7148a74ab61829e8b987a105e6a"]
+    },
+    {
+      "gap_id": "TV-MAPA-RULESET-BYPASS-IDENTITY",
+      "token_state": "TOKEN_VAZIO",
+      "source_pointer": "github:ruleset/21909304:bypass_actors",
+      "missing_field": "identity and justification for Integration actor_ids 20150,29110,73253,1144995",
+      "blocking_dependency": "full bypass governance claim",
+      "evidence_needed": "provider-bound identity plus documented operational necessity for each bypass",
+      "falsifier": "provider evidence that an actor no longer has always bypass or is not an Integration",
+      "next_probe": "resolve each actor identity from provider evidence before any bypass policy change",
+      "owner_authority": "GitHub provider integration/ruleset metadata",
+      "urgency": "HIGH",
+      "closure_gate": "all four identities and justifications observed or bypass removed with provider readback",
+      "claim_allowed": false,
+      "lineage": ["eb4e16b2f151a7148a74ab61829e8b987a105e6a"]
+    }
+  ],
+  "memory_projection": {
+    "L": "d2cedb8c -> eb4e16b2 provider-protection lineage",
+    "O": "repository target versus live provider ruleset versus HEAD check-runs",
+    "T": "GitHub governance linked to Drive master index/book freshness",
+    "C": "default branch main; live ruleset active; enforcement incomplete",
+    "P": "append-only receipt on audit branch"
+  },
+  "drive_observations": {
+    "master_index_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+    "master_index_updated_at": "2026-08-31T10:10:00.105Z",
+    "book_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "book_updated_at": "2026-08-31T10:10:38.371Z"
+  },
+  "coverage_delta": "increased: live ruleset + current HEAD checks + Drive freshness + append-only receipt",
+  "uncertainty_delta": "reduced for presence/absence of required_status_checks; unchanged for bypass actor identity",
+  "claim_allowed": false,
+  "F_ok": ["provider live ruleset revalidated", "11 HEAD check-runs observed", "Drive book/index freshness revalidated", "receipt materialized on audit branch"],
+  "F_gap": ["required_status_checks absent", "four bypass Integration identities/justifications unresolved", "current failing checks not yet causally closed"],
+  "F_next": ["resolve failing HEAD checks to exact step evidence", "identify bypass actors from provider evidence", "revalidate provider required_status_checks after authorized configuration change", "cross-index receipt into canonical Atlas/Drive index when write surface is available"]
+}
