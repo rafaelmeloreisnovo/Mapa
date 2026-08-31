@@ -1,0 +1,69 @@
+{
+  "schema": "rafaelia.provider_ruleset_target/v1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "default_branch": "main",
+  "observed_date": "2026-08-31",
+  "observed_ruleset": {
+    "id": 21909304,
+    "name": "1",
+    "enforcement": "active",
+    "rules": [
+      "deletion",
+      "non_fast_forward",
+      "required_linear_history",
+      "required_signatures",
+      "code_quality"
+    ]
+  },
+  "target": {
+    "ref_condition": "~DEFAULT_BRANCH",
+    "enforcement": "active",
+    "preserve_rules": [
+      "deletion",
+      "non_fast_forward",
+      "required_linear_history",
+      "required_signatures",
+      "code_quality"
+    ],
+    "add_rules": [
+      "pull_request",
+      "required_status_checks"
+    ],
+    "pull_request": {
+      "required_approving_review_count": 0,
+      "require_code_owner_review": false,
+      "required_review_thread_resolution": true,
+      "dismiss_stale_reviews_on_push": false,
+      "require_last_push_approval": false,
+      "allowed_merge_methods": [
+        "squash",
+        "rebase"
+      ],
+      "rationale": "solo-safe baseline; human approval becomes mandatory only after a second independent reviewer is configured"
+    },
+    "required_status_checks": {
+      "strict_required_status_checks_policy": true,
+      "contexts": [
+        "provider-protection"
+      ],
+      "always_run_workflow": ".github/workflows/provider-protection-gate.yml"
+    },
+    "bypass_review": {
+      "observed_integration_ids": [
+        20150,
+        29110,
+        73253,
+        1144995
+      ],
+      "state": "TOKEN_VAZIO_PENDING_IDENTITY_AND_JUSTIFICATION",
+      "policy": "do not expand bypass; identify and justify each always-bypass integration before claiming full enforcement"
+    }
+  },
+  "provider_apply_state": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "invariants": [
+    "FILE != PROVIDER_RULESET",
+    "CI_PASS != PROVIDER_ENFORCEMENT",
+    "TOKEN_VAZIO != PASS"
+  ]
+}
