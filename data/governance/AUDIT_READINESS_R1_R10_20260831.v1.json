@@ -1,0 +1,90 @@
+{
+  "schema": "rafaelia.audit_readiness_profile.v1",
+  "subject": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "revision": "aa3aec1fd326dc0f3e8722af62cad99ba307efb7",
+    "observed_at_utc": "2026-08-31T03:26:00Z"
+  },
+  "non_certification": true,
+  "claim_allowed": false,
+  "recognition": [
+    {
+      "id": "R1",
+      "name": "Identity and exact revision",
+      "state": "PASS",
+      "evidence": ["provider branch readback main@aa3aec1fd326dc0f3e8722af62cad99ba307efb7"],
+      "gaps": []
+    },
+    {
+      "id": "R2",
+      "name": "Provenance, custody and licensing",
+      "state": "PARTIAL",
+      "evidence": ["Master Index/Drive custody model", "repository evidence and receipt directories"],
+      "gaps": ["TOKEN_VAZIO_EXHAUSTIVE_LICENSE_CUSTODY_REVIEW_ALL_ROUTED_OBJECTS"]
+    },
+    {
+      "id": "R3",
+      "name": "Scope, requirements and claim boundary",
+      "state": "PASS",
+      "evidence": ["PR #478 governance hardening", "TOKEN_VAZIO != PASS", "REFERENCE != IMPLEMENTED != EVIDENCED != VERIFIED != CERTIFIED"],
+      "gaps": []
+    },
+    {
+      "id": "R4",
+      "name": "Deterministic build and verification definition",
+      "state": "PASS",
+      "evidence": [".github/workflows/ci.yml", ".github/workflows/branch-topology-gate.yml", "changed-workflow action-pinning ratchet"],
+      "gaps": []
+    },
+    {
+      "id": "R5",
+      "name": "Security, privacy, safety and risk controls",
+      "state": "PARTIAL",
+      "evidence": ["SECURITY.md evidence-first disclosure", "issue #474 residual-state isolation contract", "issue #473 independent human-impact review tracker"],
+      "gaps": ["TOKEN_VAZIO_INDEPENDENT_SECURITY_PRIVACY_HUMAN_IMPACT_REVIEW"]
+    },
+    {
+      "id": "R6",
+      "name": "Supply-chain and reproducibility controls",
+      "state": "PARTIAL",
+      "evidence": ["Dependabot for GitHub Actions", "changed-workflow SHA-pinning ratchet", "external EthicalCheck execution quarantined"],
+      "gaps": ["TOKEN_VAZIO_EXHAUSTIVE_EXISTING_WORKFLOW_PINNING_AND_SUPPLIER_INVENTORY"]
+    },
+    {
+      "id": "R7",
+      "name": "Fail-closed negative gates and typed unknowns",
+      "state": "PASS",
+      "evidence": ["issue #327 stop condition", "issue #472 detector != enforcement invariant", "claim_allowed=false governance boundary"],
+      "gaps": []
+    },
+    {
+      "id": "R8",
+      "name": "Provider-side governance enforcement",
+      "state": "BLOCKED",
+      "evidence": ["main protected=false; protection.enabled=false; required status checks enforcement=off", "repository rulesets readback=[]"],
+      "gaps": ["TV-MAPA-MAIN-SERVER-ENFORCEMENT"]
+    },
+    {
+      "id": "R9",
+      "name": "Independent review or replication",
+      "state": "TOKEN_VAZIO",
+      "evidence": ["issue #473 tracks required independent roles"],
+      "gaps": ["TOKEN_VAZIO_INDEPENDENT_REVIEW_OR_REPLICATION"]
+    },
+    {
+      "id": "R10",
+      "name": "Bounded audit-ready evidence bundle",
+      "state": "BLOCKED",
+      "evidence": ["R1-R9 recognition profile", "R76 provider-state reconciliation receipt"],
+      "gaps": ["BLOCKED_BY_R8_R9_AND_PARTIAL_R2_R5_R6"]
+    }
+  ],
+  "blockers": [
+    "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+    "TOKEN_VAZIO_INDEPENDENT_REVIEW_OR_REPLICATION"
+  ],
+  "notes": [
+    "Audit-readiness recognition is not certification.",
+    "Mapa remains a federated control plane, not an executor."
+  ]
+}
