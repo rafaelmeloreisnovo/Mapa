@@ -1,0 +1,114 @@
+{
+  "schema": "rafaelia.omega_closure_index.v1",
+  "index_id": "OMEGA-CLOSURE-INDEX-20260831",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "created_at": "2026-08-31T10:45:00-03:00",
+  "base_main": "1e2a63c62834f8fe4ae342ca487842d27fee0c97",
+  "mode": "APPEND_ONLY_FAIL_CLOSED",
+  "overall_state": "VERIFIED_LIMITED",
+  "claim_allowed": false,
+  "status_vocabulary": ["PASS", "FAIL", "TOKEN_VAZIO"],
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != PASS",
+    "fixture != live",
+    "heuristic != proof",
+    "predecessor receipts are preserved"
+  ],
+  "predecessors": [
+    {
+      "path": "data/reconciliation/OMEGA_DELIVERY_CLOSURE_ASSESSMENT_20260828.v1.json",
+      "role": "bounded delivery-closure predecessor"
+    },
+    {
+      "path": "data/receipts/MAPA_MAIN_SERVER_ENFORCEMENT_OBSERVATION_20260829.v1.json",
+      "role": "provider enforcement predecessor"
+    },
+    {
+      "path": "data/governance/AUDIT_READINESS_R1_R10_20260831.v1.json",
+      "role": "audit-readiness recognition profile"
+    }
+  ],
+  "longitudinal_contract": {
+    "provider": "Google Drive",
+    "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+    "use": "semantic and longitudinal routing contract; not standalone gate proof"
+  },
+  "closure_vector": {
+    "PASS": 0,
+    "FAIL": 1,
+    "TOKEN_VAZIO": 5,
+    "total": 6
+  },
+  "gates": [
+    {
+      "gap_id": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+      "artifact": "Mapa main provider enforcement",
+      "location": "rafaelmeloreisnovo/Mapa#main + provider ruleset 21909304",
+      "evidence": [
+        "main@1e2a63c62834f8fe4ae342ca487842d27fee0c97 reports protected=true",
+        "ruleset 21909304 is active on the default branch",
+        "ruleset required_approving_review_count=0",
+        "no required_status_checks rule is observed in ruleset 21909304",
+        "data/receipts/MAPA_MAIN_SERVER_ENFORCEMENT_OBSERVATION_20260831.v1.json"
+      ],
+      "status": "FAIL",
+      "next_test": "Require Promotion Control plus the issue #327 independent-approval predicate, then capture provider rejection receipts for unauthorized/direct-push and zero-approval merge paths."
+    },
+    {
+      "gap_id": "TV-TERMUX-PHYSICAL-EXECUTION",
+      "artifact": "Physical Termux execution receipt",
+      "location": "physical Android/Termux runtime",
+      "evidence": [],
+      "status": "TOKEN_VAZIO",
+      "next_test": "Capture exact device/ABI/artifact digest/command/exit/stdout/stderr receipt from the physical Termux runtime."
+    },
+    {
+      "gap_id": "TV-VM-SEMENTE-PHYSICAL-EXECUTION",
+      "artifact": "VM Semente physical execution receipt",
+      "location": "physical VM launch/runtime boundary",
+      "evidence": [],
+      "status": "TOKEN_VAZIO",
+      "next_test": "Capture VM image and configuration digests, launch evidence, guest identity and runtime result receipt."
+    },
+    {
+      "gap_id": "TV-MATH-E1-CURRENT-REPRODUCTION",
+      "artifact": "Current E1 356/356 deterministic reproduction",
+      "location": "bounded mathematical corpus and E1 harness",
+      "evidence": [
+        "predecessor records the historical 356-identity closure target"
+      ],
+      "status": "TOKEN_VAZIO",
+      "next_test": "Freeze provider bytes and produce exactly 356 unique E0 inputs, 356 deterministic dispositions and input/parser/output digests."
+    },
+    {
+      "gap_id": "TV-RMR-SCORE-ENGINE-EXACT-BINDING",
+      "artifact": "RMR score-engine exact source/ABI binding",
+      "location": "selected RMR core and engine integration boundary",
+      "evidence": [],
+      "status": "TOKEN_VAZIO",
+      "next_test": "Bind exact selected source revision, ABI, build artifact and engine call surface; capture deterministic integration receipt."
+    },
+    {
+      "gap_id": "TV-MATH-GLOBAL-UNIVERSE-EXHAUSTIVITY",
+      "artifact": "Global mathematical universe exhaustive enumeration",
+      "location": "Drive + GitHub federated corpus",
+      "evidence": [],
+      "status": "TOKEN_VAZIO",
+      "next_test": "Run an independent exhaustive Drive/GitHub enumeration with immutable scope, counts, digests and reconciliation receipt."
+    }
+  ],
+  "priority_order": [
+    "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+    "TV-TERMUX-PHYSICAL-EXECUTION",
+    "TV-VM-SEMENTE-PHYSICAL-EXECUTION",
+    "TV-MATH-E1-CURRENT-REPRODUCTION",
+    "TV-RMR-SCORE-ENGINE-EXACT-BINDING",
+    "TV-MATH-GLOBAL-UNIVERSE-EXHAUSTIVITY"
+  ],
+  "promotion_rule": "Overall claims remain fail-closed while any required closure gate is FAIL or TOKEN_VAZIO.",
+  "F_ok": "The six high-value closure gates now have one canonical navigable index and the provider enforcement gate has a current successor observation.",
+  "F_gap": "One gate is evidenced as not meeting closure and five remain typed unknowns pending execution/reproduction evidence.",
+  "F_next": "Harden the provider-side main ruleset first, capture negative-path rejection receipts, then append successor gate receipts without rewriting history."
+}
