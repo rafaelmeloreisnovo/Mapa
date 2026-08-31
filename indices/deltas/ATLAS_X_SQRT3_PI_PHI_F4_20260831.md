@@ -165,3 +165,165 @@ Papers branch/commit/PR:
 `VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM`
 
 `TOKEN_VAZIO != 0`
+
+## NOVO:X gap-resolution delta — same round
+
+This block supersedes only the **state labels**, never the historical text above.
+
+### Candidate C — source-aligned
+
+A historical NOVOexport source repeatedly stores the factor
+
+```text
+q=(√3/2)^(πφ)
+```
+
+as a constant block. No inspected predecessor placed `n` inside that exponent for this route. Therefore add:
+
+```text
+Candidate C:
+W4[f]_n = ∏_{j=0}^3 f_(n-j)
+X_n = q · n · W4[f]_n
+J_n = X_n/(n·W4[f]_n) = q      where defined
+X_(n+1)/X_n = ((n+1)/n)·f_(n+1)/f_(n-3)
+```
+
+State transition:
+
+```text
+TOKEN_VAZIO_EXACT_PARENTHESIZATION
+→ PARTIAL_RESOLVED_SOURCE_ALIGNED_CANDIDATE_C
+```
+
+A/B remain predecessor alternatives. The F4 window itself was not localized as an exact old formula, so this is partial rather than CLOSED.
+
+### `f_n` candidate set
+
+NOVOexport contains multiple plausible but non-equivalent families:
+
+```text
+F_R(n)=F(n-1)+F(n-2)+Δ_Rafael
+f_geom(n)=c√n
+F_(n+1)=F_n√3/2−πsin279°
+56-cycle component recursions
+```
+
+State transition:
+
+```text
+TOKEN_VAZIO_F_SEQUENCE
+→ AMBIGUOUS_MULTIPLE_CANDIDATES
+```
+
+`F_INITIAL_CONDITIONS` remains `TOKEN_VAZIO_NOT_LOCALIZED_IN_INSPECTED_BINDING_SOURCES`.
+
+### Poincaré
+
+Existing F03 material provides:
+
+```text
+R_n=1-q^n
+d(0,R_n)=ln((2-q^n)/q^n)
+```
+
+and therefore the derived radial iteration:
+
+```text
+P_q(r)=(1-q)+qr
+```
+
+But the canonical audit enforces:
+
+```text
+Poincare-ball embedding != Poincare return map != Poincare conjecture
+```
+
+Thus:
+
+```text
+POINCARE_RETURN_MAP_BINDING
+→ PARTIAL_FORMAL_RADIAL_BINDING
+TRUE_RETURN_MAP_OR_ORBIT_OBSERVABLE
+= TOKEN_VAZIO
+```
+
+The historical Clay `_poincare_map` is retained as a simulation source, not a true return map.
+
+### Yang–Mills
+
+Historical Clay material contains a `mass_gap=0.05` simulation threshold. Canonical audit UTM-200 remains `TOKEN_VAZIO_QFT` because a classical simulation/Laplacian is not a four-dimensional quantum gauge construction.
+
+```text
+YANG_MILLS_OBSERVABLE_BINDING
+→ PARTIAL_SIMULATION_SOURCE_FOUND
+GAUGE_INVARIANT_QFT4D_BINDING
+= TOKEN_VAZIO
+```
+
+### BSD
+
+Historical Clay material contains the simplified elliptic seed:
+
+```text
+E: y²=x³+7x+13
+```
+
+Canonical UTM-198/239 still requires the arithmetic bridge: `L(E,s)`, rank, determinant identity and demonstrated Mordell–Weil relation.
+
+```text
+BSD_ELLIPTIC_CURVE_BINDING
+→ PARTIAL_ELLIPTIC_SEED_FOUND
+L_FUNCTION_RANK_MORDELL_WEIL_BRIDGE
+= TOKEN_VAZIO
+```
+
+### Q16 conflict
+
+NOVO adjudication/direct recomputation:
+
+```text
+√3/2        -> 56756 Q16 nearest
+φ           -> 106039 Q16 nearest
+|πsin279°|  -> 203353 Q16 nearest
+```
+
+Legacy VECTRA has `203360`; preserve it as provenance only:
+
+```text
+LEGACY_PI_SIN279_Q16_203360
+= CONFLICTING_STALE_CANDIDATE
+```
+
+No silent replacement is permitted.
+
+### Runtime/evidence state
+
+Historical T7 NEON receipts are useful evidence for their exact kernels but do not execute this new X operator. Local synthetic A/B/C parse-discrimination vectors were generated and Candidate C satisfies `J_n=q`; they are model tests only.
+
+```text
+INDEPENDENT_RECOMPUTATION = PARTIAL_LOCAL_DONE / EXTERNAL TOKEN_VAZIO
+RUNTIME_TEST_VECTORS = PARTIAL_LOCAL_MODEL_VECTORS / PROVIDER_RUNTIME TOKEN_VAZIO
+REMOTE_CI = CHECK_CURRENT_PROVIDER_STATE
+```
+
+### Current routed gap vector
+
+```text
+EXACT_PARENTHESIZATION = PARTIAL_RESOLVED_SOURCE_ALIGNED_CANDIDATE_C
+F_SEQUENCE = AMBIGUOUS_MULTIPLE_CANDIDATES
+F_INITIAL_CONDITIONS = TOKEN_VAZIO_NOT_LOCALIZED
+POINCARE = PARTIAL_FORMAL_RADIAL_BINDING / TRUE_RETURN_MAP TOKEN_VAZIO
+YANG_MILLS = PARTIAL_SIMULATION_SOURCE / QFT TOKEN_VAZIO
+BSD = PARTIAL_ELLIPTIC_SEED / ARITHMETIC_BRIDGE TOKEN_VAZIO
+DIMENSIONS_UNITS = PARTIAL_NEGATIVE_CONTROL / X_DIMENSION TOKEN_VAZIO
+INDEPENDENT_RECOMPUTATION = PARTIAL_LOCAL_DONE / EXTERNAL TOKEN_VAZIO
+RUNTIME_TEST_VECTORS = PARTIAL_LOCAL_MODEL_VECTORS / PROVIDER_RUNTIME TOKEN_VAZIO
+```
+
+Formula index successor:
+`MCM:ATLAS:X-SQRT3-PI-PHI-F4:20260831:v2-NOVO-SWEEP`.
+
+NOVOexport coverage is bounded to the inspected/mounted source set. `NOT_LOCALIZED` must not be interpreted as global nonexistence.
+
+`SOURCE_FOUND != GAP_CLOSED`.
+`SIMULATION != QFT_OR_THEOREM_PROOF`.
