@@ -45,6 +45,13 @@ jobs:
                     organization: ${{ secrets.CODESCAN_ORGANIZATION_KEY }}
                     projectKey: ${{ secrets.CODESCAN_PROJECT_KEY }}
                     generateSarifFile: true
+            -   name: Require CodeScan SARIF
+                shell: bash
+                run: |
+                    if [ ! -s codescan.sarif ]; then
+                      echo "::error::CodeScan did not produce a non-empty codescan.sarif; failing closed before upload."
+                      exit 1
+                    fi
             -   name: Upload SARIF file
                 uses: github/codeql-action/upload-sarif@6f5948dfacef28e207b48d0905cf90c03365536d # v3
                 with:
