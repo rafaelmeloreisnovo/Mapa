@@ -21,7 +21,7 @@ jobs:
   SCS:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Detect .NET analysis targets
         id: dotnet-targets
@@ -41,7 +41,7 @@ jobs:
 
       - uses: nuget/setup-nuget@04b0c2b8d1b97922f67eca497d7cf0bf17b8ffe1
         if: steps.dotnet-targets.outputs.has_targets == 'true'
-      - uses: microsoft/setup-msbuild@v1.0.2
+      - uses: microsoft/setup-msbuild@c26a08ba26249b81327e26f6ef381897b6a8754d # v1.0.2
         if: steps.dotnet-targets.outputs.has_targets == 'true'
 
       - name: Set up projects for analysis
@@ -62,4 +62,4 @@ jobs:
 
       - name: Upload sarif
         if: steps.dotnet-targets.outputs.has_targets == 'true'
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@6f5948dfacef28e207b48d0905cf90c03365536d # v3
