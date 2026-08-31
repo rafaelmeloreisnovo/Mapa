@@ -1,0 +1,119 @@
+{
+  "schema": "RAFAELIA_FEDERATED_CYCLE_RECEIPT_V1",
+  "cycle_id": "FED-20260831-R95-PR494-INDEX-RECONCILIATION",
+  "observed_at": "2026-08-31T19:14:37Z",
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "claim_allowed": false,
+  "predecessor": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "ref": "main",
+    "sha": "0e2838c4f9df8460f0fae09716d0060f25bd7c45",
+    "tree": "f64520b8043d9f830e952dbf57efdd72e8ee35f4"
+  },
+  "sources": {
+    "pr": {
+      "number": 494,
+      "state": "open",
+      "draft": true,
+      "base_sha": "0e2838c4f9df8460f0fae09716d0060f25bd7c45",
+      "head_sha": "0f129bcdf40c169768eddc43e3a9d406fe1e3fe2",
+      "changed_files": 1,
+      "commits": 1
+    },
+    "codescan_run": {
+      "run_id": 33424296420,
+      "job_id": 99593987611,
+      "head_sha": "0f129bcdf40c169768eddc43e3a9d406fe1e3fe2",
+      "conclusion": "failure",
+      "steps": {
+        "Run Analysis": "success",
+        "Upload SARIF file": "failure"
+      }
+    },
+    "workflow": {
+      "path": ".github/workflows/codescan.yml",
+      "sarif_file": "codescan.sarif",
+      "codescan_action_sha": "955d3d1b4a9e374064189719484005ce8e08a749",
+      "upload_sarif_sha": "6f5948dfacef28e207b48d0905cf90c03365536d"
+    },
+    "upstream_action": {
+      "runs_using": "node20",
+      "generateReportFile_default": true,
+      "documented_sarif_output": "codescan.sarif"
+    },
+    "drive": {
+      "master_index_file_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "master_index_updated_at": "2026-08-31T19:06:15.649Z",
+      "operational_book_file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "operational_book_updated_at": "2026-08-31T19:07:13.347Z",
+      "universe_objects_scan": "A1:Z2000",
+      "pr494_matches": 0,
+      "head_sha_matches": 0
+    }
+  },
+  "transform": {
+    "codescan_runtime_gap": "REFINED",
+    "previous_state": "REPRODUCED_RUNTIME_INCOMPATIBILITY",
+    "current_state": "ANALYSIS_EXECUTED_SUCCESS__SARIF_UPLOAD_FAILURE",
+    "interpretation": "The Java/classfile incompatibility is no longer the failing boundary on PR #494. The remaining CodeScan failure is isolated to SARIF upload. Exact upload failure payload is not exposed by the currently accessible run-log surface and remains TOKEN_VAZIO.",
+    "index_state": "PR494_AND_HEAD_NOT_FOUND_IN_SCANNED_UNIVERSE_OBJECTS_WINDOW"
+  },
+  "gaps": [
+    {
+      "gap_id": "TV-MAPA-PR494-SARIF-UPLOAD-CAUSE",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "GitHub:Mapa PR#494 / run:33424296420 / job:99593987611 / step:Upload SARIF file",
+      "missing_field": "exact upload-sarif diagnostic payload",
+      "blocking_dependency": "accessible provider surface exposes step conclusion but not diagnostic text",
+      "evidence_needed": "annotation, step log, or equivalent provider-bound diagnostic showing path/format/permission/upload cause",
+      "falsifier": "evidence that Run Analysis did not produce the expected SARIF artifact despite reporting success",
+      "next_probe": "recover upload-sarif diagnostic or artifact-presence evidence for codescan.sarif",
+      "owner_authority": "GitHub Actions + CodeScan action output contract",
+      "urgency": "HIGH",
+      "closure_gate": "exact provider-bound SARIF upload cause and supported corrective test",
+      "claim_allowed": false,
+      "predecessor_lineage": "TV-MAPA-CODESCAN-JAVA-RUNTIME"
+    },
+    {
+      "gap_id": "TV-DRIVE-UNIVERSE-OBJECTS-PR494-INDEXING",
+      "state": "TOKEN_VAZIO",
+      "source_pointer": "Drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk#UNIVERSE_OBJECTS",
+      "missing_field": "PR #494 and exact head SHA object rows",
+      "blocking_dependency": "no matching row observed in A1:Z2000",
+      "evidence_needed": "append-only object/index rows or evidence that the canonical index window resides beyond the scanned range",
+      "falsifier": "provider-bound row containing PR #494 or 0f129bcdf40c169768eddc43e3a9d406fe1e3fe2 outside the scanned window",
+      "next_probe": "continue cursor beyond row 2000 and inspect UNIVERSE_QUEUE/receipts before any indexing claim",
+      "owner_authority": "RAFAELIA Master Index / Google Drive provider",
+      "urgency": "HIGH",
+      "closure_gate": "provider-bound index row with object identity, source pointer, evidence state, and claim_allowed=false",
+      "claim_allowed": false,
+      "predecessor_lineage": "PR494 exact-head validation"
+    }
+  ],
+  "memory_projection": {
+    "L": "main@0e2838c4 → PR494@0f129bcd → run 33424296420",
+    "O": "GitHub job steps cross-checked against upstream action contract and Drive index search",
+    "T": "CodeScan workflow ↔ upstream action ↔ GitHub SARIF ingestion ↔ Master Index",
+    "C": "Run Analysis success does not imply SARIF upload success; index freshness does not imply object coverage",
+    "P": "provider IDs, SHAs, run/job IDs and gap states preserved append-only"
+  },
+  "F_ok": [
+    "PR494 exact-head workflows completed and enumerated",
+    "CodeScan Run Analysis now succeeds",
+    "Java/classfile incompatibility is no longer the observed failing step",
+    "Supply-chain ratchet succeeds on the exact head",
+    "Master Index and operational book freshness revalidated",
+    "absence of PR494/head in scanned UNIVERSE_OBJECTS window recorded without overclaim"
+  ],
+  "F_gap": [
+    "exact SARIF upload failure diagnostic",
+    "PR494/head canonical index row or proof it lies beyond scanned cursor",
+    "provider required_status_checks enforcement",
+    "Drive master-index duplicate causal ancestry"
+  ],
+  "F_next": [
+    "recover SARIF upload diagnostic/artifact-presence evidence",
+    "continue UNIVERSE_OBJECTS cursor beyond row 2000 and inspect UNIVERSE_QUEUE",
+    "reconcile provider enforcement only with live ruleset evidence"
+  ]
+}
