@@ -18,7 +18,7 @@ def emit_debt_diagnostics(output: str) -> None:
     file_counts: Counter[str] = Counter()
     rule_counts: Counter[str] = Counter()
     issue_line = re.compile(
-        r"^(?P<path>.+?):(?P<line>\d+)(?::(?P<column>\d+))?\s+"
+        r"^(?P<path>.+?):(?P<line>\d+)(?::(?P<column>\d+))?\s+error\s+"
         r"(?P<rule>MD\d{3}(?:/[^\s]+)?)\b"
     )
     clean_lines: list[str] = []
