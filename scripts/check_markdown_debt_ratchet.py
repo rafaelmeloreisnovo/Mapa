@@ -21,18 +21,31 @@ def emit_debt_diagnostics(output: str) -> None:
         r"^(?P<path>.+?):(?P<line>\d+)(?::(?P<column>\d+))?\s+"
         r"(?P<rule>MD\d{3}(?:/[^\s]+)?)\b"
     )
+    clean_lines: list[str] = []
     for raw_line in output.splitlines():
         line = re.sub(r"\x1b\[[0-9;]*m", "", raw_line)
+        if line.strip():
+            clean_lines.append(line)
         match = issue_line.match(line)
         if not match:
             continue
         file_counts[match.group("path")] += 1
         rule_counts[match.group("rule").split("/", 1)[0]] += 1
 
+    parsed_issues = sum(file_counts.values())
     print(
         "MARKDOWN_DEBT_DIAGNOSTICS "
-        f"parsed_issues={sum(file_counts.values())} files={len(file_counts)} rules={len(rule_counts)}"
+        f"parsed_issues={parsed_issues} files={len(file_counts)} rules={len(rule_counts)}"
     )
+    if parsed_issues == 0:
+        # Bounded observability probe only: expose the actual formatter shape so the
+        # next parser revision can be evidence-driven. Gate thresholds/semantics are
+        # intentionally unchanged. JSON quoting keeps each sample on one log line.
+        for index, line in enumerate(clean_lines[:12], start=1):
+            print(
+                "MARKDOWN_DEBT_RAW_SAMPLE "
+                f"index={index} value={json.dumps(line[:300], ensure_ascii=True)}"
+            )
     for path, count in sorted(file_counts.items(), key=lambda item: (-item[1], item[0])):
         print(f"MARKDOWN_DEBT_FILE count={count} path={path}")
     for rule, count in sorted(rule_counts.items(), key=lambda item: (-item[1], item[0])):
