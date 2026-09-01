@@ -1,0 +1,57 @@
+{
+  "schema": "rafaelia.federated-cycle-receipt.v1",
+  "cycle_id": "FED-20260831-R99-CI-DEBT-ISOLATION",
+  "predecessor": "FED-20260831-R98-PR492-PR494-INTEGRATION",
+  "source": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "head_sha": "7b113278cd6f6110f57fc04c7760a3cbf93a5bd5",
+    "workflow_run_id": 33444978487,
+    "job_id": 99661916791,
+    "workflow": "CI",
+    "job": "Validate Repository Structure"
+  },
+  "observed": {
+    "yaml_parse": "SUCCESS",
+    "changed_markdown_lint": "SUCCESS",
+    "historical_markdown_debt_ratchet": "FAILURE",
+    "subsequent_structure_checks": "SKIPPED"
+  },
+  "ratchet_contract": {
+    "script": "scripts/check_markdown_debt_ratchet.py",
+    "baseline": "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json",
+    "tool": "markdownlint-cli2",
+    "tool_version": "0.23.2",
+    "ceiling_issues": 890,
+    "ceiling_files_with_issues": 95,
+    "baseline_workflow_run_id": 33243989581,
+    "baseline_job_id": 99078124795
+  },
+  "gap": {
+    "gap_id": "TV-MAPA-CI-HISTORICAL-MARKDOWN-DEBT-EXACT-DELTA",
+    "state": "TOKEN_VAZIO",
+    "source_pointer": "GitHub Actions run 33444978487 / job 99661916791 / step 6",
+    "missing_field": "exact observed issues/files_with_issues values causing the ratchet failure",
+    "blocking_dependency": "provider log text or equivalent execution output",
+    "evidence_needed": "MARKDOWN_DEBT line and FAIL reason from the exact-head execution",
+    "falsifier": "exact-head output showing issues<=890 and files_with_issues<=95",
+    "next_probe": "retrieve exact step/log output; classify whether increase is count, spread, tool drift, or parse failure",
+    "owner_authority": "rafaelmeloreisnovo/Mapa CI policy",
+    "urgency": "HIGH",
+    "closure_gate": "provider-bound exact values plus causal file/delta evidence before any baseline change",
+    "claim_allowed": false
+  },
+  "constraints": [
+    "baseline is a ceiling, not a target",
+    "do not raise baseline without successor receipt and explicit reason",
+    "documentation lint evidence is not runtime/scientific evidence",
+    "absence of exact log values is not evidence that debt increased by a specific amount"
+  ],
+  "memory_projection": {
+    "L": "R98 combined head -> R99 CI causal isolation",
+    "O": "changed-Markdown lint passes while historical-debt ratchet fails",
+    "T": "CI policy links workflow, script, baseline, provider execution and receipt",
+    "C": "exact-head 7b113278; claim remains blocked pending exact debt delta",
+    "P": "append-only receipt preserving source/run/job/baseline lineage"
+  },
+  "claim_allowed": false
+}
