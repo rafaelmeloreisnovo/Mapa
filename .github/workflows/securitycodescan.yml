@@ -21,21 +21,45 @@ jobs:
   SCS:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Detect .NET analysis targets
+        id: dotnet-targets
+        shell: pwsh
+        run: |
+          $targets = @(Get-ChildItem -Path . -Recurse -File -Include *.sln,*.csproj,*.vbproj,*.fsproj)
+          if ($targets.Count -eq 0) {
+            "### SecurityCodeScan applicability" >> $env:GITHUB_STEP_SUMMARY
+            "NOT_APPLICABLE: no .NET solution/project files were observed in this revision." >> $env:GITHUB_STEP_SUMMARY
+            "has_targets=false" >> $env:GITHUB_OUTPUT
+          } else {
+            "### SecurityCodeScan applicability" >> $env:GITHUB_STEP_SUMMARY
+            "Targets observed: $($targets.Count)" >> $env:GITHUB_STEP_SUMMARY
+            $targets | ForEach-Object { "- $($_.FullName.Substring($env:GITHUB_WORKSPACE.Length + 1))" >> $env:GITHUB_STEP_SUMMARY }
+            "has_targets=true" >> $env:GITHUB_OUTPUT
+          }
+
       - uses: nuget/setup-nuget@04b0c2b8d1b97922f67eca497d7cf0bf17b8ffe1
-      - uses: microsoft/setup-msbuild@v1.0.2
+        if: steps.dotnet-targets.outputs.has_targets == 'true'
+      - uses: microsoft/setup-msbuild@c26a08ba26249b81327e26f6ef381897b6a8754d # v1.0.2
+        if: steps.dotnet-targets.outputs.has_targets == 'true'
 
       - name: Set up projects for analysis
+        if: steps.dotnet-targets.outputs.has_targets == 'true'
         uses: security-code-scan/security-code-scan-add-action@f8ff4f2763ed6f229eded80b1f9af82ae7f32a0d
 
       - name: Restore dependencies
+        if: steps.dotnet-targets.outputs.has_targets == 'true'
         run: dotnet restore
 
       - name: Build
+        if: steps.dotnet-targets.outputs.has_targets == 'true'
         run: dotnet build --no-restore
 
       - name: Convert sarif for uploading to GitHub
+        if: steps.dotnet-targets.outputs.has_targets == 'true'
         uses: security-code-scan/security-code-scan-results-action@cdb3d5e639054395e45bf401cba8688fcaf7a687
 
       - name: Upload sarif
-        uses: github/codeql-action/upload-sarif@v3
+        if: steps.dotnet-targets.outputs.has_targets == 'true'
+        uses: github/codeql-action/upload-sarif@6f5948dfacef28e207b48d0905cf90c03365536d # v3
