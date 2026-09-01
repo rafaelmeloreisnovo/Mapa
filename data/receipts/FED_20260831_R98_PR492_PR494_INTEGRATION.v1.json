@@ -1,0 +1,61 @@
+{
+  "schema": "rafaelia.federated_cycle_receipt.v1",
+  "cycle_id": "FED-20260831-R98-PR492-PR494-INTEGRATION",
+  "predecessor": "FED-20260831-R97-PR492-PR494-DIVERGENCE",
+  "observed_at": "2026-08-31T19:09:24-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base": {
+    "branch": "main",
+    "sha": "0e2838c4f9df8460f0fae09716d0060f25bd7c45",
+    "tree": "f64520b8043d9f830e952dbf57efdd72e8ee35f4"
+  },
+  "sources": [
+    {"pull_request": 492, "head_sha": "e294c1265be0565f861532db9a6a2beaff4b1189", "path": ".github/workflows/securitycodescan.yml", "relation": "derived_from"},
+    {"pull_request": 494, "head_sha": "c844be544072d01244615058be572c3d84e81418", "path": ".github/workflows/codescan.yml", "relation": "derived_from"}
+  ],
+  "transform": "Compose the two non-overlapping workflow deltas on their shared base without merging or rebasing either source PR.",
+  "integration_branch": "audit/r98-pr492-pr494-integration",
+  "evidence_state": "ARTIFACT_PREPARED_EXECUTION_PENDING",
+  "claim_allowed": false,
+  "gaps": [
+    {
+      "gap_id": "TV-MAPA-PR492-PR494-CONVERGENCE",
+      "state": "TEST_PREPARED",
+      "source_pointer": "PR492@e294c126 + PR494@c844be54",
+      "missing_field": "combined exact-head workflow outcome",
+      "blocking_dependency": "pull_request workflow execution",
+      "evidence_needed": "combined exact-head SecurityCodeScan and CodeScan jobs plus repository gates",
+      "falsifier": "composition conflict or a combined-head regression not present on either source line",
+      "next_probe": "open draft PR from audit/r98-pr492-pr494-integration to main and enumerate exact-head workflows",
+      "owner_authority": "rafaelmeloreisnovo/Mapa",
+      "urgency": "HIGH",
+      "closure_gate": "combined exact-head workflow evidence",
+      "claim_allowed": false,
+      "predecessor_lineage": ["PR492@e294c1265be0565f861532db9a6a2beaff4b1189", "PR494@c844be544072d01244615058be572c3d84e81418"]
+    },
+    {
+      "gap_id": "TV-MAPA-CODESCAN-AUTH",
+      "state": "BLOCKED",
+      "source_pointer": "PR494@c844be544072d01244615058be572c3d84e81418",
+      "missing_field": "provider-valid CodeScan authentication result",
+      "blocking_dependency": "external CodeScan credential/authority",
+      "evidence_needed": "successful authenticated scanner bootstrap without exposing secret material",
+      "falsifier": "authenticated rerun succeeds and produces a non-empty SARIF artifact",
+      "next_probe": "revalidate secret presence/authority through safe provider evidence and rerun",
+      "owner_authority": "CodeScan/GitHub repository secret administration",
+      "urgency": "HIGH",
+      "closure_gate": "authenticated run + SARIF evidence",
+      "claim_allowed": false
+    }
+  ],
+  "memory_projection": {
+    "L": "shared base main -> PR492/PR494 sibling branches -> integration branch",
+    "O": "SecurityCodeScan and CodeScan remain independently observable checks",
+    "T": "workflow composition links two CI remediation lines without semantic conflation",
+    "C": "integration is test-only; no default-branch promotion",
+    "P": "append-only receipt preserves source heads, base tree and unresolved gates"
+  },
+  "F_ok": ["non-overlapping deltas identified", "shared base verified", "integration artifact prepared"],
+  "F_gap": ["combined exact-head execution", "CodeScan authentication", "required_status_checks provider enforcement", "Drive canonical index materialization"],
+  "F_next": ["create combined commit", "open draft integration PR", "enumerate exact-head workflows", "append successor evidence receipt"]
+}
