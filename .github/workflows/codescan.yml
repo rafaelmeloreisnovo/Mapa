@@ -37,6 +37,26 @@ jobs:
                         ~/.sonar
                     key: ${{ runner.os }}-sonar
                     restore-keys: ${{ runner.os }}-sonar
+            -   name: Verify CodeScan credential presence
+                shell: bash
+                env:
+                    CODESCAN_AUTH_TOKEN: ${{ secrets.CODESCAN_AUTH_TOKEN }}
+                    CODESCAN_ORGANIZATION_KEY: ${{ secrets.CODESCAN_ORGANIZATION_KEY }}
+                    CODESCAN_PROJECT_KEY: ${{ secrets.CODESCAN_PROJECT_KEY }}
+                run: |
+                    missing=0
+                    for name in CODESCAN_AUTH_TOKEN CODESCAN_ORGANIZATION_KEY CODESCAN_PROJECT_KEY; do
+                      if [[ -n "${!name}" ]]; then
+                        echo "$name=PRESENT"
+                      else
+                        echo "$name=MISSING" >&2
+                        missing=1
+                      fi
+                    done
+                    if (( missing != 0 )); then
+                      echo "CodeScan credential preflight failed; secret values were not printed." >&2
+                      exit 1
+                    fi
             -   name: Run Analysis
                 uses: codescan-io/codescan-scanner-action@955d3d1b4a9e374064189719484005ce8e08a749 # upstream master upgrade merge
                 with:
