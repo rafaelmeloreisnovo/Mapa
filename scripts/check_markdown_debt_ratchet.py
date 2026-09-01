@@ -2,6 +2,7 @@
 import json
 import re
 import subprocess
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +11,32 @@ BASELINE = ROOT / "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json"
 
 def fail(message: str) -> None:
     raise SystemExit("FAIL: " + message)
+
+
+def emit_debt_diagnostics(output: str) -> None:
+    """Emit deterministic per-file/per-rule counts without changing gate semantics."""
+    file_counts: Counter[str] = Counter()
+    rule_counts: Counter[str] = Counter()
+    issue_line = re.compile(
+        r"^(?P<path>.+?):(?P<line>\d+)(?::(?P<column>\d+))?\s+"
+        r"(?P<rule>MD\d{3}(?:/[^\s]+)?)\b"
+    )
+    for raw_line in output.splitlines():
+        line = re.sub(r"\x1b\[[0-9;]*m", "", raw_line)
+        match = issue_line.match(line)
+        if not match:
+            continue
+        file_counts[match.group("path")] += 1
+        rule_counts[match.group("rule").split("/", 1)[0]] += 1
+
+    print(
+        "MARKDOWN_DEBT_DIAGNOSTICS "
+        f"parsed_issues={sum(file_counts.values())} files={len(file_counts)} rules={len(rule_counts)}"
+    )
+    for path, count in sorted(file_counts.items(), key=lambda item: (-item[1], item[0])):
+        print(f"MARKDOWN_DEBT_FILE count={count} path={path}")
+    for rule, count in sorted(rule_counts.items(), key=lambda item: (-item[1], item[0])):
+        print(f"MARKDOWN_DEBT_RULE count={count} rule={rule}")
 
 
 def main() -> None:
@@ -66,6 +93,9 @@ def main() -> None:
         f"tool={actual_version} files_linted={files_linted if files_linted is not None else 'UNKNOWN'} "
         f"issues={issues}/{ceiling_issues} files_with_issues={files_with_issues}/{ceiling_files}"
     )
+
+    if issues > ceiling_issues or files_with_issues > ceiling_files:
+        emit_debt_diagnostics(output)
 
     if issues > ceiling_issues:
         fail(f"historical Markdown debt increased: {issues} > {ceiling_issues}")
