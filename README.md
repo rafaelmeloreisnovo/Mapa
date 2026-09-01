@@ -244,6 +244,7 @@ A commit proves existence and history of an artifact. It does not by itself prov
 **Sprint:** 2026-07 · **Branch:** `claude/readme-analise-refatoracao-vl6t6l`
 
 Quality levels:
+
 - **Alto** — Complete, technically precise, no changes needed
 - **Bom** — Good original quality; minor cleanup or no changes required
 - **Refatorado** — Content separated: philosophical/spiritual/legal text moved to dedicated auxiliary files; README = technical entry point
@@ -281,7 +282,7 @@ Quality levels:
 | [home](https://github.com/rafaelmeloreisnovo/home) | Bom | No change |
 | [teoremas](https://github.com/rafaelmeloreisnovo/teoremas) | Refatorado | Full thesis moved to `TEORIA_ATRACTOR_42.md`; README = navigation entry point |
 | [RafGitTools](https://github.com/rafaelmeloreisnovo/RafGitTools) | Refatorado | 80-line philosophy manifesto moved to `MANIFESTO.md` |
-| [Rafaelia_Private](https://github.com/rafaelmeloreisnovo/Rafaelia_Private) | Refatorado | Post-doctoral dissertation moved to `DISSERTATION.md` |
+| [Rafaelia_Private](https://github.com/rafaelmeloreisnovo/Rafaelia_Private) | Refatorado | Post-doctoral dissertation moved to `DISSERTATION.md`; README = navigation entry point |
 | [privadoFazendo](https://github.com/rafaelmeloreisnovo/privadoFazendo) | Refatorado | Theoretical context moved to `CONTEXTO_TEORICO.md`; 18 MVPs in tabular form |
 | [llamaRafaelia](https://github.com/rafaelmeloreisnovo/llamaRafaelia) | Refatorado | Cross-system analysis essay moved to `ANALISE_CRUZADA.md` |
 | [templo-vivo-arcs](https://github.com/rafaelmeloreisnovo/templo-vivo-arcs) | Refatorado | Liturgical prayer (54 KB) moved to `LITURGIA.md`; README = architecture + TOKEN_VAZIO gates |
