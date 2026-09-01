@@ -30,6 +30,7 @@ The RAFAELIA ecosystem operates across two storage surfaces:
 2. **Google Drive**: Custody records, operational dashboards, governance receipts (fileIds stable)
 
 A single claim (e.g., "Mapa aggregates 28 repos") requires evidence from both surfaces:
+
 - GitHub: Commit SHA of PRODUCTO_ECOSYSTEM_REGISTRY.v1.json
 - Drive: fileId of OMEGA-CYCLE receipt + governance dashboard
 
@@ -56,6 +57,7 @@ Without cross-surface binding, these surfaces are isolated. With binding via DRI
 - **Scope**: Governs all files at that commit (including PRODUCTO.json, README, data/control-plane/)
 
 **How it breaks:**
+
 - Force-pushing to rewrite history (extremely rare, requires explicit authorization)
 - Deleting a branch (GitHub keeps deleted commits for 90 days)
 
@@ -78,6 +80,7 @@ Without cross-surface binding, these surfaces are isolated. With binding via DRI
 - **Authority**: Drive API can read, move, delete (but not hide history if audit is enabled)
 
 **How it breaks:**
+
 - Moving folder without recording receipt (identity chain breaks)
 - Overwriting folder contents (fileId stays same, contents change—hard to detect)
 - Deleting and recreating (new fileId)
@@ -103,6 +106,7 @@ Without cross-surface binding, these surfaces are isolated. With binding via DRI
 - **Scope**: Covers exact file contents at fetch time
 
 **How it breaks:**
+
 - File overwritten or truncated (SHA changes, detected immediately)
 - Hash collision attack (astronomically unlikely for SHA-256)
 
@@ -206,6 +210,7 @@ curl -s "https://www.googleapis.com/drive/v3/files/{fileId}?alt=media" | sha256s
 When refactoring across GitHub and Drive simultaneously (e.g., moving files, restructuring):
 
 ### Step 1: Record BEFORE State
+
 ```json
 {
   "action": "PLANNED_MOVE",
@@ -219,10 +224,12 @@ When refactoring across GitHub and Drive simultaneously (e.g., moving files, res
 ```
 
 ### Step 2: Execute Refactoring
+
 - Refactor GitHub branch (new README, new PRODUCTO.json, etc.)
 - Move Drive files via API (preserves fileId, records move)
 
 ### Step 3: Record AFTER State
+
 ```json
 {
   "action": "MOVE_COMPLETED",
@@ -244,6 +251,7 @@ When refactoring across GitHub and Drive simultaneously (e.g., moving files, res
 ```
 
 ### Step 4: Verify Consistency
+
 - GitHub SHA resolves ✓
 - Drive fileIds resolve ✓
 - Provider hashes match ✓
