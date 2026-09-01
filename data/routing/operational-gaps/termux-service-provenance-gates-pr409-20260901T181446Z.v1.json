@@ -1,0 +1,118 @@
+{
+  "schema": "RAFAELIA_OPERATIONAL_GAP_V1",
+  "gap_id": "TERMUX-SERVICE-PROVENANCE-GATES-PR409-20260901T181446Z",
+  "observed_at": "2026-09-01T18:31:42Z",
+  "state": "BLOCKED_BY_PRODUCER_GATES_AND_PHYSICAL_RECEIPTS",
+  "claim_allowed": false,
+  "source_pointer": {
+    "repo": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "pr": 409,
+    "pr_state": "OPEN_DRAFT_UNMERGED",
+    "head_sha": "01f893c48f7501fd6fa1338cba8f4506bdd7c46d",
+    "source_ref": "master",
+    "source_commit": "7c82f57b338ed78a3b6ebb4ec641e90452d0f850",
+    "source_receipt": "docs/assurance/RAFCODEPHI_SERVICE_PROVENANCE_RECEIPT_20260901.v1.json",
+    "source_graph": "docs/assurance/RAFCODEPHI_SERVICE_DEPENDENCY_GRAPH_20260901.v1.json",
+    "source_gate": "tools/validate_rafcodephi_service_provenance_receipt.py"
+  },
+  "owner_authority": "termux-app-rafacodephi",
+  "federated_authority": "rafaelmeloreisnovo/Mapa",
+  "affected_routes": [
+    "TERMUX_PROVIDER_TO_SERVICE",
+    "TERMUX_TO_VECTRAS_CONSUMER",
+    "ANDROID_RUNTIME_EVIDENCE"
+  ],
+  "provenance": "Producer draft PR 409 -> source-bound local static gates -> Mapa receipt and operational gap append",
+  "evidence_for": [
+    "The producer receipt binds eight source inputs by SHA-256 to master commit 7c82f57b338ed78a3b6ebb4ec641e90452d0f850.",
+    "The terminal-service bootstrap structural gate passed in a local source checkout.",
+    "The manifest and RunCommandService source declare a protected dispatch path to TermuxService.",
+    "A private Drive reconstruction document was created; its identifier is intentionally omitted from this public federation record."
+  ],
+  "evidence_against": [
+    "The current Vectras provider static-contract verifier fails with 25 discrepancies.",
+    "Current source-bound CI has failures in side-by-side, native-safety and beta source-build/bootstrap gates.",
+    "The active master ruleset lacks required_status_checks enforcement.",
+    "No exact APK/bootstrap, physical device, Vectras consumer/guest, ARM32 or ARM64 terminal receipt exists."
+  ],
+  "uncertainty_state": {
+    "producer_source_provenance": "EVIDENCED_SCOPED_STATIC",
+    "provider_static_contract": "FAIL_CURRENT_25_DISCREPANCIES",
+    "current_ci": "FAIL_CURRENT_HEAD",
+    "live_ruleset_enforcement": "FAIL_REQUIRED_STATUS_CHECKS_ABSENT",
+    "apk_bootstrap_identity": "TOKEN_VAZIO",
+    "physical_android_service_runtime": "TOKEN_VAZIO",
+    "vectras_consumer_guest_terminal": "TOKEN_VAZIO",
+    "required_abi_receipts": "TOKEN_VAZIO",
+    "lineage_check_interface": "TOKEN_VAZIO_DOCUMENTED_COMMAND_INTERFACE_DRIFT"
+  },
+  "urgency": 3,
+  "necessity": 3,
+  "impact": 3,
+  "detectability": 3,
+  "recurrence_risk": 3,
+  "failure_mode": "SOURCE_OR_CI_OR_GOVERNANCE_EVIDENCE_MISPROMOTED_AS_ANDROID_OR_VECTRAS_RUNTIME",
+  "component_lifecycle_ledger": {
+    "calendar_age": "TOKEN_VAZIO",
+    "execution_hours_runtime_hours": "TOKEN_VAZIO",
+    "cycles": "TOKEN_VAZIO",
+    "starts_stops": "TOKEN_VAZIO",
+    "builds": "TOKEN_VAZIO_CURRENT_BOUND_APK_BUILD",
+    "test_cycles": "ONE_LOCAL_STATIC_GUARD_PASS_AND_ONE_LOCAL_STATIC_CONTRACT_FAILURE",
+    "deployments": "TOKEN_VAZIO",
+    "commits_since_validation": "TOKEN_VAZIO_FUTURE_DRIFT",
+    "dependency_changes": "TOKEN_VAZIO_CAUSAL_RELATION_NOT_ESTABLISHED",
+    "environment_exposure": "Local source checkout and GitHub Actions metadata; no physical Android device asserted",
+    "load_stress_proxy": "TOKEN_VAZIO",
+    "incident_count": 0,
+    "near_miss_count": "TOKEN_VAZIO",
+    "maintenance_actions": 1,
+    "corrective_actions": 0,
+    "software_schema_version": "PR409@01f893c48f7501fd6fa1338cba8f4506bdd7c46d",
+    "evidence_age": "CURRENT_AT_2026-09-01T18:31:42Z",
+    "provenance_age": "CURRENT_AT_2026-09-01T18:31:42Z",
+    "last_verified_at": "2026-09-01T18:14:46Z",
+    "next_review_gate": "PRODUCER_CI_AND_VECTRAS_CONTRACT_RECONCILIATION_AT_EXACT_COMMIT",
+    "retirement_revalidation_criteria": "Supersede only after exact source-to-APK/bootstrap plus redacted physical producer-consumer terminal receipts."
+  },
+  "impact_radius": [
+    {
+      "component": "RunCommandService to TermuxService provider boundary",
+      "direct_exposure": true,
+      "hidden_state_possible": true,
+      "revalidation_required": true
+    },
+    {
+      "component": "Vectras consumer and guest terminal boundary",
+      "direct_exposure": true,
+      "hidden_state_possible": true,
+      "revalidation_required": true
+    },
+    {
+      "component": "master protection and release promotion",
+      "direct_exposure": false,
+      "transmitted_load_or_effect": "blocked by failed CI/ruleset and absent physical receipts",
+      "hidden_state_possible": true,
+      "revalidation_required": true
+    }
+  ],
+  "false_positive_cost": "Additional source and gate reconciliation work before a claim can be promoted.",
+  "false_negative_cost": "Treating source presence, a local structural pass, CI metadata or a graph as physical Android/Vectras runtime and contaminating federation state.",
+  "actions": {
+    "detective": "Preserve exact producer PR, commit, source receipt, graph and local gate outcomes.",
+    "preventive": "Require current CI, live enforcement, source-to-APK/bootstrap binding and redacted terminal receipts before promotion.",
+    "precautionary": "Keep claim_allowed=false and release promotion blocked.",
+    "adaptive": "Use the producer receipt validator to force a new source snapshot when any bound file drifts.",
+    "corrective": "REQUIRED_NOT_EXECUTED_RECONCILE_VECTRAS_CONTRACT_CI_AND_RULESET",
+    "maintenance": "Event-triggered revalidation after any bound source, workflow or ruleset change.",
+    "incident_investigation": "No root-cause claim: the 25 static discrepancies are preserved as a failure signature pending source/contract reconciliation.",
+    "safety_assurance": "No source-only, CI-only or map-only evidence can replace a physical runtime receipt.",
+    "learning_anti_recurrence": "A success in one evidence scope must not erase a failure or TOKEN_VAZIO in another scope."
+  },
+  "falsifier": "If an exact producer commit has green reconciled CI/ruleset gates plus APK/bootstrap and redacted producer-consumer terminal receipts, this blocked classification must be superseded; otherwise it remains open.",
+  "next_probe": "Reconcile the Vectras provider verifier with canonical source APIs and package identity, repair current CI/ruleset enforcement, then emit an exact source-to-APK/bootstrap receipt before device execution.",
+  "mitigation": "Contain at the producer boundary; preserve a receiving-side federation receipt; do not promote Android, Vectras, ABI or release claims.",
+  "closure_gate": "PRODUCER_CI_RULESET_APK_BOOTSTRAP_AND_REDACTED_DEVICE_CONSUMER_TERMINAL_RECEIPTS_PASS",
+  "review_or_expiry": "Re-evaluate immediately after a source-bound correction or a new producer receipt; this record is append-only and must be superseded, not rewritten.",
+  "predecessor_lineage": "TOKEN_VAZIO_NO_EXACT_CURRENT_SERVICE_PROVENANCE_FEDERATION_RECORD"
+}
