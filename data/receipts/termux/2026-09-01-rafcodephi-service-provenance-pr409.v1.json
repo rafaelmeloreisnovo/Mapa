@@ -1,0 +1,88 @@
+{
+  "schema": "rafaelia.federated-service-provenance-reconciliation-receipt.v1",
+  "event_id": "MAPA-TERMUX-SERVICE-PROVENANCE-20260901T183142Z",
+  "parent_event_id": "TOKEN_VAZIO_EXACT_CURRENT_SERVICE_PROVENANCE_FEDERATION_PREDECESSOR",
+  "observed_at": "2026-09-01T18:31:42Z",
+  "actor_role": "federated_control_plane_agent",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "ref": "main",
+  "commit_sha": "0e2838c4f9df8460f0fae09716d0060f25bd7c45",
+  "path_scope": [
+    "data/routing/operational-gaps/termux-service-provenance-gates-pr409-20260901T181446Z.v1.json",
+    "data/receipts/termux/2026-09-01-rafcodephi-service-provenance-pr409.v1.json"
+  ],
+  "authority": {
+    "producer_implementation_build_runtime": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "federated_routing_and_state": "rafaelmeloreisnovo/Mapa",
+    "executor_control_plane": "rafaelmeloreisnovo/RafGitTools",
+    "physical_runtime": "TOKEN_VAZIO_DEVICE_TERMINAL_RECEIPT_AUTHORITY"
+  },
+  "gap_or_goal_ids": [
+    "TERMUX-SERVICE-PROVENANCE-GATES-PR409-20260901T181446Z",
+    "GAP-SVC-VECTRAS-STATIC-CONTRACT",
+    "GAP-SVC-CURRENT-CI",
+    "GAP-SVC-LIVE-RULESET",
+    "GAP-SVC-APK-BOOTSTRAP-BINDING",
+    "GAP-SVC-PHYSICAL-DEVICE-RUNTIME",
+    "GAP-SVC-VECTRAS-CONSUMER-E2E"
+  ],
+  "state_before": "TOKEN_VAZIO_NO_CURRENT_FEDERATED_SERVICE_PROVENANCE_SNAPSHOT",
+  "state_after": "EVIDENCED_SCOPED_PRODUCER_DRAFT_UNMERGED_WITH_BLOCKING_GATES",
+  "urgency": "P0",
+  "risk": "CRITICAL",
+  "governance_class": "FEDERATED_STATE_APPEND_ONLY_PRODUCER_AUTHORITY_PRESERVED",
+  "data_class": "PUBLIC_MINIMUM_METADATA_HASH_AND_TYPED_REFERENCE",
+  "privacy_class": "PUBLIC_REDACTED_NO_DEVICE_IDENTIFIERS_PRIVATE_PATHS_OR_CREDENTIALS",
+  "security_class": "FAIL_CLOSED_PROVIDER_IPC_RUNTIME_AND_PROMOTION_BOUNDARY",
+  "action": "Recorded the producer's draft PR 409 source snapshot, bounded static findings and unresolved promotion gates in a receiving-side Mapa gap record and receipt.",
+  "falsifier": "Any attempted Android, Vectras, ABI or release promotion without a compatible producer receipt and matching physical terminal evidence falsifies this reconciliation scope.",
+  "exit_criterion": "This receiving-side record is complete when all source references, evidence scopes, gaps, privacy controls, rollback and next gate are explicit; it does not close producer runtime gaps.",
+  "evidence_refs": [
+    "producer_pr:https://github.com/rafaelmeloreisnovo/termux-app-rafacodephi/pull/409",
+    "producer_head:01f893c48f7501fd6fa1338cba8f4506bdd7c46d",
+    "producer_source:master@7c82f57b338ed78a3b6ebb4ec641e90452d0f850",
+    "producer_receipt:docs/assurance/RAFCODEPHI_SERVICE_PROVENANCE_RECEIPT_20260901.v1.json",
+    "producer_graph:docs/assurance/RAFCODEPHI_SERVICE_DEPENDENCY_GRAPH_20260901.v1.json",
+    "producer_gate:python3 tools/validate_rafcodephi_service_provenance_receipt.py --self-test => PASS; claim_allowed=false",
+    "producer_static_guard:python3 tools/validate_terminal_service_bootstrap_gap.py => PASS",
+    "producer_vectras_contract:python3 scripts/verify_vectras_termux_provider_v3.py => FAIL; error_count=25",
+    "producer_ci:GitHub Actions runs 33372043490, 33372043049 and 33372043212 => FAIL",
+    "producer_ruleset:GitHub ruleset 21908888 active, required_status_checks absent",
+    "mapa_topology:python3 scripts/validate_federation_topology.py --repos 6 --check => PASS (declared topology only)",
+    "mapa_lineage:python3 scripts/compare_cross_source_evidence.py --lineage-check => TOKEN_VAZIO_COMMAND_INTERFACE_DRIFT"
+  ],
+  "drive_reconstruction": {
+    "state": "PRESENT_PRIVATE",
+    "title": "RAFCODEPHI — Recibo de Proveniência de Serviço — 2026-09-01",
+    "public_reference_policy": "Private Drive identifier intentionally omitted from this public receipt.",
+    "content_boundary": "No device identifiers, private paths, credentials, tokens or application payloads."
+  },
+  "validation": {
+    "federation_topology": "PASS_DECLARED_SCHEMA_AUTHORITY_GRAPH_ONLY",
+    "cross_source_lineage": "TOKEN_VAZIO_DOCUMENTED_COMMAND_INTERFACE_DRIFT",
+    "toroidal_geometry_claim": "NOT_APPLICABLE_NO_SERVICE_STATE_SPACE_MEASUREMENT",
+    "claim_promotion": "BLOCKED"
+  },
+  "F_ok": [
+    "A fresh producer source snapshot is hash-bound, machine-readable and attached to draft PR 409.",
+    "Static bootstrap guard evidence is recorded as local-only and no physical claim is made.",
+    "The public federation record preserves failures, TOKEN_VAZIO and the private-document disclosure boundary."
+  ],
+  "F_gap": [
+    "Current Vectras static-contract, CI and live ruleset enforcement gates fail.",
+    "Current APK/bootstrap, device service, Vectras consumer/guest and ARM32/ARM64 receipts remain TOKEN_VAZIO.",
+    "Mapa's documented --lineage-check invocation does not match the current tool interface."
+  ],
+  "F_next": [
+    "Use the producer as authority to repair its Vectras contract, CI and ruleset gates.",
+    "Bind a current APK/bootstrap receipt before attempting physical Android service evidence.",
+    "Append a compatible producer-consumer terminal receipt and then supersede this Mapa record; do not rewrite it."
+  ],
+  "uncertainty_delta": [
+    "TOKEN_VAZIO_NO_CURRENT_FEDERATED_SERVICE_PROVENANCE_SNAPSHOT -> EVIDENCED_SCOPED_PRODUCER_DRAFT_UNMERGED_WITH_BLOCKING_GATES",
+    "No physical-runtime uncertainty was reduced; it remains TOKEN_VAZIO."
+  ],
+  "rollback_ref": "Close or revert Mapa draft PR and producer draft PR 409; neither mutation touches Android runtime, package identity, signing, bootstrap, device state or secret material.",
+  "stop_reason": "Mapa has recorded the cross-repository state but cannot resolve the producer's implementation, CI, ruleset or physical-runtime gaps by inference.",
+  "claim_allowed": false
+}
