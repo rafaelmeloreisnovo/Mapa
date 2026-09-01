@@ -7,6 +7,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json"
+CAUSAL_MARKDOWN_PATHS = {
+    "README.md",
+    "docs/DRIVE_GITHUB_IDENTITY_MODEL.md",
+    "docs/PRODUTO_CODIFICATION_GUIDE.md",
+    "indices/deltas/ATLAS_X_SQRT3_PI_PHI_F4_20260831.md",
+}
 
 
 def fail(message: str) -> None:
@@ -17,6 +23,7 @@ def emit_debt_diagnostics(output: str) -> None:
     """Emit deterministic per-file/per-rule counts without changing gate semantics."""
     file_counts: Counter[str] = Counter()
     rule_counts: Counter[str] = Counter()
+    causal_lines: list[str] = []
     issue_line = re.compile(
         r"^(?P<path>.+?):(?P<line>\d+)(?::(?P<column>\d+))?\s+error\s+"
         r"(?P<rule>MD\d{3}(?:/[^\s]+)?)\b"
@@ -29,8 +36,11 @@ def emit_debt_diagnostics(output: str) -> None:
         match = issue_line.match(line)
         if not match:
             continue
-        file_counts[match.group("path")] += 1
+        path = match.group("path")
+        file_counts[path] += 1
         rule_counts[match.group("rule").split("/", 1)[0]] += 1
+        if path in CAUSAL_MARKDOWN_PATHS:
+            causal_lines.append(line)
 
     parsed_issues = sum(file_counts.values())
     print(
@@ -38,9 +48,6 @@ def emit_debt_diagnostics(output: str) -> None:
         f"parsed_issues={parsed_issues} files={len(file_counts)} rules={len(rule_counts)}"
     )
     if parsed_issues == 0:
-        # Bounded observability probe only: expose the actual formatter shape so the
-        # next parser revision can be evidence-driven. Gate thresholds/semantics are
-        # intentionally unchanged. JSON quoting keeps each sample on one log line.
         for index, line in enumerate(clean_lines[:12], start=1):
             print(
                 "MARKDOWN_DEBT_RAW_SAMPLE "
@@ -50,6 +57,8 @@ def emit_debt_diagnostics(output: str) -> None:
         print(f"MARKDOWN_DEBT_FILE count={count} path={path}")
     for rule, count in sorted(rule_counts.items(), key=lambda item: (-item[1], item[0])):
         print(f"MARKDOWN_DEBT_RULE count={count} rule={rule}")
+    for line in causal_lines:
+        print("MARKDOWN_DEBT_CAUSAL " + json.dumps(line, ensure_ascii=True))
 
 
 def main() -> None:
