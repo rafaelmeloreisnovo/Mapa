@@ -1,0 +1,36 @@
+{
+  "cycle_id": "FED-20260902-R137-RECEIPT-HASH-WIDTH",
+  "predecessor": "FED-20260902-R136-RECEIPT-HASH-SEMANTICS",
+  "status": "CONTRADICTED_SCOPED",
+  "gap_id": "TV-MAPA-CONNECTOR-RECEIPT-HASH-WIDTH",
+  "source_pointer": "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl@ee32024c4d597433a593b8189851320fc8354273#CONNECTOR_REGISTRY_SYSTEM_BOOTSTRAP_20260902",
+  "observation": {
+    "declared_contract": "immutable_hash = SHA256 of receipt/full receipt",
+    "observed_value": "9ec50e7ee8f1c4d5e3b2a1f8d9c6e7f0a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6",
+    "observed_hex_length": 62,
+    "sha256_hex_expected_length": 64,
+    "conclusion": "The stored immutable_hash cannot be a complete conventional lowercase hexadecimal SHA-256 digest as written. This does not identify the intended digest or canonicalization."
+  },
+  "TOKEN_VAZIO": [
+    "intended_digest",
+    "canonical_serialization",
+    "immutable_hash_field_exclusion_rule",
+    "byte_encoding",
+    "hash_reproduction_receipt"
+  ],
+  "missing_field": "valid reproducible SHA-256 receipt digest and its deterministic derivation",
+  "blocking_dependency": "Mapa federation/custody authority",
+  "evidence_needed": "versioned canonicalization algorithm plus validator and reproduced digest",
+  "falsifier": "authoritative versioned algorithm demonstrates that this 62-character value is intentionally encoded under a different declared representation",
+  "next_probe": "define or locate canonicalization authority; reproduce digest; append a superseding receipt only if proven",
+  "owner_authority": "Mapa federation/custody authority",
+  "urgency": "HIGH",
+  "closure_gate": "algorithm versioned + digest reproduced + validator PASS + append-only superseding receipt if correction is required",
+  "claim_allowed": false,
+  "lineage": "R135→R136→R137",
+  "invariants": [
+    "absence of evidence != evidence of absence",
+    "receipt syntax != cryptographic verification",
+    "append-only: do not rewrite the bootstrap receipt"
+  ]
+}

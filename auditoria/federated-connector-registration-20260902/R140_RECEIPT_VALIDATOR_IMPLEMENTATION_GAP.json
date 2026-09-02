@@ -1,0 +1,92 @@
+{
+  "cycle_id": "FED-20260902-R140-RECEIPT-VALIDATOR-IMPLEMENTATION-GAP",
+  "predecessor": "FED-20260902-R139-COMMIT-IDENTITY-HASH-ALGORITHM-BOUNDARY",
+  "observed_main": "ee32024c4d597433a593b8189851320fc8354273",
+  "classification": "NO_EXECUTABLE_IMPLEMENTATION_OBSERVED_SCOPED",
+  "claim_allowed": false,
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "scope": {
+    "provider": "GitHub connected organization search",
+    "organization": "rafaelmeloreisnovo",
+    "repository_focus": "rafaelmeloreisnovo/Mapa",
+    "queries": [
+      "immutable_hash receipt SHA256 canonical",
+      "prior_receipt_hash hash_value hash_algorithm receipt",
+      "source_commit immutable_hash commit_sha SHA256",
+      "immutable_hash canonical serialization receipt hash validator sha256"
+    ]
+  },
+  "observations": [
+    {
+      "source_pointer": "data/control-plane/CONNECTOR_REGISTRY_REVISION_SYSTEM.v1.json@ee32024c4d597433a593b8189851320fc8354273",
+      "state": "DOCUMENTED_REFERENCE",
+      "evidence": "GC-01 requires commit_sha; GC-02 separately requires hash_algorithm/hash_value; PC-01 labels source_commit as SHA256 and immutable_hash as SHA256 of full receipt; all relevant gates are REFERENCE."
+    },
+    {
+      "source_pointer": "docs/CONNECTOR_REGISTRATION_PROTOCOL.md@ee32024c4d597433a593b8189851320fc8354273",
+      "state": "DOCUMENTED_REFERENCE",
+      "evidence": "Protocol contains hash_algorithm/hash_value and prior_receipt_hash declarations, but organization-wide indexed search did not surface an executable canonicalizer/receipt-digest validator."
+    },
+    {
+      "source_pointer": "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl@ee32024c4d597433a593b8189851320fc8354273",
+      "state": "OBSERVED_CONTRADICTION",
+      "evidence": "Bootstrap source_commit is a 40-hex Git object identity while schema labels source_commit SHA256; immutable_hash remains non-reproduced and malformed for full SHA-256 hexadecimal width as recorded by predecessor cycles."
+    }
+  ],
+  "invariants": [
+    "commit identity ≠ evidence/content digest",
+    "REFERENCE ≠ IMPLEMENTED ≠ EXECUTED ≠ EVIDENCED ≠ VERIFIED",
+    "search no-match ≠ proof of absence",
+    "historical receipts remain append-only"
+  ],
+  "gap": {
+    "gap_id": "TV-MAPA-CONNECTOR-RECEIPT-VALIDATOR-IMPLEMENTATION",
+    "token_vazio": [
+      "canonical_receipt_serialization",
+      "immutable_hash_field_exclusion_rule",
+      "byte_encoding",
+      "commit_identity_schema",
+      "receipt_digest_validator",
+      "positive_fixture",
+      "negative_fixture",
+      "migration_or_supersession_rule"
+    ],
+    "source_pointer": "CONNECTOR_REGISTRY_REVISION_SYSTEM.v1.json + CONNECTOR_REGISTRATION_PROTOCOL.md + CONNECTOR_CUSTODY_CHAIN.jsonl @ ee32024c4d597433a593b8189851320fc8354273",
+    "missing_field": "Executable and versioned receipt canonicalization/validation contract separating Git commit identity from cryptographic evidence digest",
+    "blocking_dependency": "Mapa federation/custody schema authority",
+    "evidence_needed": "Versioned canonicalization algorithm, explicit commit-id representation rule, executable validator, positive and negative fixtures, deterministic reproduction receipt",
+    "falsifier": "An already-versioned authoritative implementation in the searched scope that deterministically reproduces the bootstrap receipt digest and validates commit identity semantics",
+    "next_probe": "Define a superseding schema proposal and executable fixtures on audit branch only; do not mutate ledger or promote claim until deterministic reproduction succeeds",
+    "owner_authority": "Mapa federation + custody authority",
+    "urgency": "HIGH",
+    "closure_gate": "schema semantics explicit + canonicalizer/validator executable + positive/negative fixtures + deterministic digest reproduction + append-only supersession if historical receipt requires correction",
+    "claim_allowed": false,
+    "lineage": "R139→R140"
+  },
+  "projections": {
+    "L": "R139→R140: semantic conflation → executable implementation gap",
+    "O": "schema ⊕ protocol ⊕ custody ledger ⊕ organization-wide code search",
+    "T": "commit identity ↔ custody receipt ↔ evidence digest ↔ validator",
+    "C": "no implementation observed in indexed scope does not prove global absence",
+    "P": "cycle_id + exact refs + append-only audit object"
+  },
+  "f_ok": [
+    "organization-wide indexed search expanded",
+    "declarative-vs-executable boundary localized",
+    "one append-only audit artifact materialized"
+  ],
+  "f_gap": [
+    "canonical receipt serialization",
+    "receipt digest validator",
+    "commit identity schema",
+    "deterministic digest reproduction",
+    "CONN-001 producer binding/evidence scope"
+  ],
+  "f_next": [
+    "superseding schema proposal",
+    "canonicalization validator",
+    "positive/negative fixtures",
+    "reproduce bootstrap receipt digest or preserve contradiction",
+    "only then return to CONN-001 Circle 1"
+  ]
+}
