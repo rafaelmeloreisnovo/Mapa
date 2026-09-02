@@ -1,0 +1,34 @@
+{
+  "cycle_id": "FED-20260902-R144-MERGED-CANDIDATE-AUTHORITY-INDEX",
+  "predecessor": "R143",
+  "observed_main": "ccdea71aa7fb1cbf676b01351e6d954923c9a23f",
+  "gap_id": "TV-MAPA-MERGED-CANDIDATE-NORMATIVE-AUTHORITY",
+  "status": "TOKEN_VAZIO",
+  "claim_allowed": false,
+  "source_pointer": [
+    "github:rafaelmeloreisnovo/Mapa@ccdea71aa7fb1cbf676b01351e6d954923c9a23f",
+    "github:rafaelmeloreisnovo/Mapa@631b7acc6a7d16d2b62aaf7e7e5faf046a2e73c7",
+    "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  ],
+  "missing_field": [
+    "custody_authority_acceptance",
+    "versioned_canonical_receipt_schema",
+    "independent_exact_ref_execution_receipt",
+    "historical_receipt_supersession_rule"
+  ],
+  "blocking_dependency": "Mapa federation/custody authority",
+  "evidence_needed": "Explicit versioned authority decision plus exact-ref execution evidence and append-only supersession semantics if correction is proven.",
+  "falsifier": "An authoritative versioned record already accepting candidate-v2 as canonical with satisfied gates, or an alternative authoritative canonicalizer reproducing the historical receipt.",
+  "next_probe": "Search authority/index surfaces for explicit candidate-v2 acceptance; bind exact blob/ref identities; prepare superseding schema proposal only if no authority record exists.",
+  "owner_authority": "Mapa federation/custody authority",
+  "urgency": "HIGH",
+  "closure_gate": "authority + exact-ref execution + fixtures + deterministic digest semantics + append-only supersession rule",
+  "lineage": "R143->R144",
+  "memory_projection": {
+    "L": "R143->R144",
+    "O": "Git commit lineage x Drive METHOD anchor x candidate self-description",
+    "T": "Mapa<->Drive<->Atlas/index",
+    "C": "merged artifact != normative authority",
+    "P": "append-only gap identity"
+  }
+}
