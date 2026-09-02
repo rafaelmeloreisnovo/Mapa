@@ -1,0 +1,112 @@
+{
+  "schema": "rafaelia_github_drive_provenance_consolidation_v1",
+  "receipt_id": "RCPT-INC-000001-GITHUB-DRIVE-20260902",
+  "observed_at": "2026-09-02T15:41:02Z",
+  "policy": {
+    "append_only": true,
+    "claim_allowed": false,
+    "evidence_state": "VERIFIED_LIMITED",
+    "invariants": [
+      "DOCUMENTED != EXECUTED",
+      "SPECIFIC_WORKFLOW_PASS != GLOBAL_GATE_PASS",
+      "PR_MERGED != ALL_GATES_PASS",
+      "GOOGLE_DOC_REVISION != CANONICAL_FILE_BYTES",
+      "TOKEN_VAZIO != FALSE"
+    ]
+  },
+  "idx": "INC-000001",
+  "relations": [
+    {
+      "type": "EVIDENCED_BY",
+      "target": "github:rafaelmeloreisnovo/Mapa/pull/367"
+    },
+    {
+      "type": "REFERENCES",
+      "target": "drive:1ftNOnbV5Zm-qHzoUlXkLqsOdNWUVbpXw9YOXPaLjd6g"
+    },
+    {
+      "type": "REFERENCES",
+      "target": "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+    },
+    {
+      "type": "SUPERSEDES_OBSERVATION",
+      "target": "TOKEN_VAZIO_CI_NOT_OBSERVED@drive:1ftNOnbV5Zm-qHzoUlXkLqsOdNWUVbpXw9YOXPaLjd6g"
+    }
+  ],
+  "github": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pull_request": 367,
+    "pull_request_url": "https://github.com/rafaelmeloreisnovo/Mapa/pull/367",
+    "state": "closed",
+    "merged": true,
+    "merged_at": "2026-08-23T05:18:07Z",
+    "head_sha": "aaeb182edab1beb0cfe7ec97d2583d8e2e2a7a58",
+    "merge_commit_sha": "8288629c59db0964342f2071160a29f7d02b43e3",
+    "main_readback": [
+      {
+        "path": "data/memory/incremental/INC-000001.yaml",
+        "blob_sha": "4969c2471cba8a6c79ac905791e952a67243ce1a",
+        "state": "VERIFIED"
+      },
+      {
+        "path": "indices/semantic/INCREMENTAL_SEMANTIC_GRAPH_INDEX_V1.yaml",
+        "blob_sha": "978ec6e096c7368cbb936e3d0fa6ded1e55405e2",
+        "state": "VERIFIED"
+      }
+    ],
+    "head_workflow_observation": {
+      "semantic_incremental_index": {
+        "run_id": 32614380493,
+        "conclusion": "success"
+      },
+      "ci": {
+        "run_id": 32614380481,
+        "conclusion": "success"
+      },
+      "branch_topology_gate": {
+        "run_id": 32614380470,
+        "conclusion": "success"
+      },
+      "server_merge_enforcement_assurance": {
+        "run_id": 32614380445,
+        "conclusion": "failure"
+      },
+      "rafaelia_promotion_control_v1": {
+        "run_id": 32614380467,
+        "conclusion": "failure"
+      }
+    },
+    "merge_commit_workflow_runs": "TOKEN_VAZIO_NO_RUNS_RETURNED_AT_OBSERVATION"
+  },
+  "google_drive": {
+    "semantic_graph_registry": {
+      "document_id": "1ftNOnbV5Zm-qHzoUlXkLqsOdNWUVbpXw9YOXPaLjd6g",
+      "title": "RAFAELIA — INCREMENTAL Semantic Graph Registry — Gmail × Calendar × Drive × GitHub — V1 — 2026-08-22",
+      "revision_id_at_observation": "ANLCKQm-4cqoCS5V58ZltvIPBMZXUKTEqiKxUhrlgFxihWndGCTG5dpvWyMGwLShP2Z5eaaLRZGcYJGT25nDfqG7Fqdmv8b4XoTwk15hDIM",
+      "normalized_document_text_sha256": "8abf2095c6b2d898cbe32f478da51e80bcd0ce6517e8aae0f8e069f1f6e48c12",
+      "hash_scope": "trusted-read normalized document-text snapshot, not provider-native canonical bytes"
+    },
+    "method_authority": {
+      "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1"
+    }
+  },
+  "decision": {
+    "state": "VERIFIED_LIMITED",
+    "allowed_claim": "INC-000001 assets exist on Mapa main; PR #367 was merged; the semantic-incremental-index workflow succeeded on the recorded PR head.",
+    "blocked_claims": [
+      "all repository governance gates passed",
+      "server-side merge enforcement is proven",
+      "runtime or physical-device execution is proven",
+      "scientific validity is proven"
+    ],
+    "open_gaps": [
+      "TOKEN_VAZIO_MERGE_COMMIT_WORKFLOW_EVIDENCE",
+      "SERVER_MERGE_ENFORCEMENT_ASSURANCE_FAILED_ON_PR_HEAD",
+      "RAFAELIA_PROMOTION_CONTROL_FAILED_ON_PR_HEAD",
+      "TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST"
+    ]
+  },
+  "falsifier": "Any mismatch in PR identity, recorded SHAs, main blob SHAs, Drive document identity/revision, or workflow run conclusions invalidates this receipt.",
+  "f_next": "Run or observe exact-current-main governance gates and append a successor receipt; do not mutate this snapshot."
+}
