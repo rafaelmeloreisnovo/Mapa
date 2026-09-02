@@ -1,0 +1,43 @@
+{
+  "cycle_id": "FED-20260902-R136-RECEIPT-HASH-SEMANTICS",
+  "predecessor": "R135",
+  "status": "CONTRADICTED_SCHEMA_SCOPED",
+  "claim_allowed": false,
+  "subject": "CONNECTOR_CUSTODY_CHAIN immutable_hash semantics",
+  "source_pointers": {
+    "custody_chain": "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl@ee32024c4d597433a593b8189851320fc8354273",
+    "revision_system": "data/control-plane/CONNECTOR_REGISTRY_REVISION_SYSTEM.v1.json@ee32024c4d597433a593b8189851320fc8354273",
+    "protocol": "docs/CONNECTOR_REGISTRATION_PROTOCOL.md@ee32024c4d597433a593b8189851320fc8354273",
+    "predecessor_audit": "c50c7b3ffa9158ed260300968f66371c0c937b51"
+  },
+  "evidence": {
+    "schema_claim": "immutable_hash = SHA256 of full receipt",
+    "observed_receipt_hash": "9ec50e7ee8f1c4d5e3b2a1f8d9c6e7f0a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6",
+    "boundary": "No canonical serialization, exclusion rule for immutable_hash, byte encoding, or hash-construction algorithm is defined in the observed protocol/revision-system text.",
+    "interpretation": "As written, hashing the full receipt while the receipt contains immutable_hash is self-referential. The observed 64-hex value is syntactically SHA-256-shaped but is not reproducible evidence until canonicalization/input semantics are specified."
+  },
+  "gap": {
+    "gap_id": "TV-MAPA-CONNECTOR-RECEIPT-HASH-CANONICALIZATION",
+    "token_vazio": ["canonical_serialization", "immutable_hash_field_exclusion_rule", "byte_encoding", "hash_reproduction_receipt"],
+    "missing_field": "Deterministic non-self-referential digest construction for custody receipts",
+    "blocking_dependency": "Mapa federation/custody authority",
+    "evidence_needed": "Normative canonicalization plus executable validator and a reproduced digest for the bootstrap receipt",
+    "falsifier": "An already-versioned authoritative algorithm that deterministically reproduces the recorded immutable_hash from the same receipt",
+    "next_probe": "search repository history/code for hash canonicalization or receipt validator; if absent, prepare a minimal versioned canonicalization contract and negative/positive fixtures",
+    "owner_authority": "Mapa federation + custody authority",
+    "urgency": "HIGH",
+    "closure_gate": "canonical algorithm versioned + bootstrap digest reproduced or explicitly superseded + validator PASS + append-only receipt",
+    "claim_allowed": false,
+    "lineage": "R135→R136"
+  },
+  "memory_projection": {
+    "L": "R135→R136",
+    "O": "custody receipt ⊕ schema ⊕ protocol",
+    "T": "receipt hash ↔ provenance ↔ custody validation",
+    "C": "64-hex syntax ≠ reproduced SHA-256 evidence",
+    "P": "original receipt preserved; audit finding append-only"
+  },
+  "f_ok": ["self-referential hash schema boundary identified", "original receipt preserved", "gap materialized on audit branch"],
+  "f_gap": ["canonical serialization", "digest reproduction", "source_commit semantics", "CONN-001 producer binding/evidence_scope"],
+  "f_next": ["repository-wide canonicalization search", "validator/fixture design iff no authoritative implementation exists", "reproduce or supersede bootstrap digest"]
+}
