@@ -20,9 +20,7 @@ State: `INCREMENTAL / UNMERGED / claim_allowed=false`
 
 ## Semantic edges
 
-[
-	ext{PARABLE}	o	ext{FORMALIZATION}	o	ext{HYPOTHESIS}	o	ext{TEST}	o	ext{EVIDENCE}
-]
+`PARABLE → FORMALIZATION → HYPOTHESIS → TEST → EVIDENCE`
 
 - toucan thermal window — `FUNCTIONAL_COMPARATOR` → oral multiphysics;
 - gape thermoregulation — `DOCUMENTED_EXTERNAL_SUPPORT` → oral multiphysics;
