@@ -2,9 +2,10 @@
   "registry_id": "CONNECTORS_UNDER_REVISION",
   "version": "1.0.0",
   "generated_at": "2026-09-02T00:00:00Z",
+  "last_updated": "2026-09-02T05:31:39Z",
   "batch_id": "INITIAL_REGISTRATION_BATCH_20260902",
   "total_connectors_pending": 6,
-  "operational_status": "AWAITING_CIRCLE_1_EXECUTION",
+  "operational_status": "CIRCLE_1_COMPLETE_CONN001 (5 remaining)",
   "authority": {
     "owner": "Mapa (Federation + Validation Authority)",
     "scope": "Cross-repository connector federation",
@@ -19,10 +20,10 @@
       "producer_authority": "RafPolimata (compiler authority)",
       "purpose": "Federated code generation and normalization pipeline",
       "status": "UNDER_REVIEW",
-      "circles_passed": [],
-      "next_circle": 1,
+      "circles_passed": ["Circle 1"],
+      "next_circle": 2,
       "risk_assessment": "LOW (internal, well-scoped)",
-      "notes": "Compiler output; feeds into termux-app and llamaRafaelia"
+      "notes": "Compiler output; feeds into termux-app and llamaRafaelia; Circle 1 gates PASS (RM-01, RM-02, RM-03)"
     },
     {
       "connector_id": "CONN-002",
@@ -116,18 +117,23 @@
     "Risk assessments assigned",
     "Source repositories bound",
     "Producer authorities declared",
-    "Registration sequence planned"
+    "Registration sequence planned",
+    "Circle 1 executed on CONN-001: RM-01 PASS (authority boundary)",
+    "Circle 1 executed on CONN-001: RM-02 PASS (namespace collision)",
+    "Circle 1 executed on CONN-001: RM-03 PASS (evidence scope boundary)",
+    "3 custody receipts appended to immutable chain (positions 18-20)",
+    "Merkle chain integrity validated (each receipt links to prior)"
   ],
   "f_gap": [
-    "Circle 1 gates not yet executed (RM-01, RM-02, RM-03)",
-    "No receipts generated yet",
+    "Circle 1 gates not yet executed on CONN-002, CONN-003, CONN-004, CONN-005, CONN-006",
+    "Circle 2-6 gates not yet executed on any connector",
     "Autonomous processes not deployed",
     "Cross-repo federation integration not yet validated"
   ],
   "f_next": [
-    "Execute Circle 1 on CONN-001 (RafPolimata); validate authority boundary",
-    "If CONN-001 passes Circle 1, proceed to Circle 2 (evidence collection)",
-    "Generate first custody receipt and append to CONNECTOR_CUSTODY_CHAIN.jsonl",
-    "Monitor for Circle 1 failures; escalate per escalation_protocol"
+    "Execute Circle 1 on CONN-002 (TermuxApp); validate authority boundary, namespace, evidence scope",
+    "Continue Circle 1 execution on remaining connectors (CONN-003 through CONN-006)",
+    "For CONN-001: proceed to Circle 2 (evidence collection gates GC-01, GC-02, GC-03)",
+    "Monitor all Circle 1 executions; escalate failures per escalation_protocol"
   ]
 }
