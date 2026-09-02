@@ -1,0 +1,68 @@
+version: 1
+contract_id: FED-EVIDENCE-RECEIPT-V1
+state: CANONICAL_DRAFT
+receipt_required_fields:
+  - cycle_id
+  - event_id
+  - timestamp
+  - predecessor
+  - lineage
+  - source_pointer
+  - source_ref
+  - source_tree
+  - transform
+  - execution_state
+  - claim
+  - claim_allowed
+  - test_evidence
+  - evidence_pointer
+  - reviewer_roles
+  - review_threads
+  - approvals
+  - dissent
+  - risks
+  - gaps
+  - hashes
+  - readback
+  - next_probe
+  - owner_authority
+gap_schema:
+  fields:
+    - gap_id
+    - state
+    - source_pointer
+    - missing_field
+    - blocking_dependency
+    - evidence_needed
+    - falsifier
+    - next_probe
+    - owner_authority
+    - urgency
+    - closure_gate
+    - claim_allowed
+    - predecessor
+    - lineage
+states:
+  - DOCUMENTED
+  - OBSERVED
+  - EXECUTED
+  - MEASURED
+  - REPRODUCED
+  - CONTRADICTED
+  - BLOCKED
+  - TOKEN_VAZIO
+review_contract:
+  machine_gate_is_not_human_approval: true
+  preserve_threads: true
+  preserve_dissent: true
+  preserve_conditions: true
+  approvals_require_role_and_authority: true
+readback_contract:
+  exact_object_identity: required
+  exact_ref_or_revision: required
+  literal_or_provider_readback: required
+  inferred_readback: prohibited
+memory_contract:
+  append_only: true
+  optimistic_concurrency: preferred
+  supersession_instead_of_rewrite: true

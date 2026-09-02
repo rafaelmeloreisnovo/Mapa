@@ -1,0 +1,67 @@
+version: 1
+contract_id: FED-INTEGRITY-CUSTODY-V1
+state: CANONICAL_DRAFT
+claim_allowed: false
+hashes:
+  sha256:
+    role: PORTABLE_PRIMARY_CUSTODY
+    required_for_raw_artifact_claim: true
+  blake3:
+    role: PARALLEL_HIGH_SPEED_CUSTODY
+    required: false
+  md5:
+    role: LEGACY_CORRELATION_ONLY
+    security_authority: false
+    may_close_integrity_gate: false
+  git_object_sha:
+    role: PROVIDER_OBJECT_IDENTITY
+    raw_file_sha256_equivalent: false
+custody_chain:
+  - source_identity
+  - raw_bytes_or_provider_immutable_object
+  - measured_size
+  - sha256
+  - blake3_if_available
+  - container_member_manifest
+  - layer_parent_child_links
+  - receipt
+  - index
+  - memory
+  - readback
+zip_layering:
+  require_member_manifest: true
+  require_member_order_when_semantically_relevant: true
+  require_parent_digest: true
+  nested_archive_max_depth: 16
+  recursive_extraction_default: false
+  path_traversal_reject: true
+  symlink_policy: BLOCK_UNLESS_EXPLICITLY_ALLOWED
+  decompression_bomb_limits_required: true
+layers:
+  fields:
+    - layer_id
+    - parent_layer_id
+    - artifact_id
+    - media_type
+    - byte_size
+    - sha256
+    - blake3
+    - provenance
+    - transform
+    - parity_ecc_metadata
+    - receipt_pointer
+parity_ecc:
+  state: METADATA_ONLY_UNLESS_EXECUTED
+  fields:
+    - scheme_id
+    - data_shards
+    - parity_shards
+    - block_size
+    - matrix_id
+    - vector_id
+    - encoding_parameters
+    - decoder_version
+    - test_vector_pointer
+    - corruption_injection_result
+    - reconstruction_result
+  rule: 'ECC/parity claims require executable test vectors and reproduced reconstruction evidence.'

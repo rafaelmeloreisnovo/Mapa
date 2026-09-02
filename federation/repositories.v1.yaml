@@ -1,0 +1,68 @@
+version: 1
+state: CANONICAL_DRAFT
+claim_allowed: false
+registry_id: FED-REPOSITORIES-V1
+control_repository: rafaelmeloreisnovo/Mapa
+policy:
+  default_sync: disabled
+  default_mirror: disabled
+  destructive_sync: prohibited
+  default_branch_write: prohibited
+  merge_release_autoapproval: prohibited
+  require_exact_ref: true
+  require_ancestry_probe: true
+  require_receipt: true
+  require_readback: true
+repositories:
+  - repo_id: REPO-MAPA-CONTROL
+    full_name: rafaelmeloreisnovo/Mapa
+    role: FEDERATED_CONTROL_PLANE
+    authority: PROVIDER_OBSERVED
+    sync_enabled: false
+    mirror_enabled: false
+    exact_ref: TOKEN_VAZIO
+    tree_sha: TOKEN_VAZIO
+    last_verified_receipt: TOKEN_VAZIO
+  - repo_id: REPO-RLL-CANONICAL-CANDIDATE
+    full_name: instituto-Rafael/relativity-living-light
+    role: SCIENTIFIC_CANONICAL_CANDIDATE
+    authority: REGISTRY_DECLARED_REQUIRES_CURRENT_READBACK
+    sync_enabled: false
+    mirror_enabled: false
+    exact_ref: TOKEN_VAZIO
+    tree_sha: TOKEN_VAZIO
+    last_verified_receipt: TOKEN_VAZIO
+  - repo_id: REPO-RLL-PERSONAL-CANDIDATE
+    full_name: rafaelmeloreisnovo/relativity-living-light
+    role: PARALLEL_TREE_CANDIDATE
+    authority: TOKEN_VAZIO
+    sync_enabled: false
+    mirror_enabled: false
+    exact_ref: TOKEN_VAZIO
+    tree_sha: TOKEN_VAZIO
+    last_verified_receipt: TOKEN_VAZIO
+  - repo_id: REPO-PLACEHOLDER
+    full_name: TOKEN_VAZIO
+    role: UNCLASSIFIED
+    authority: TOKEN_VAZIO
+    sync_enabled: false
+    mirror_enabled: false
+    exact_ref: TOKEN_VAZIO
+    tree_sha: TOKEN_VAZIO
+    last_verified_receipt: TOKEN_VAZIO
+required_fields:
+  - repo_id
+  - full_name
+  - provider
+  - authority
+  - default_branch
+  - exact_ref
+  - tree_sha
+  - visibility_class
+  - data_class
+  - mirror_direction
+  - sync_mode
+  - conflict_policy
+  - owner_authority
+  - receipt_pointer
+  - claim_allowed

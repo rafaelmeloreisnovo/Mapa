@@ -1,0 +1,51 @@
+version: 1
+contract_id: FED-RISK-REVIEW-V1
+state: CANONICAL_DRAFT
+claim_allowed: false
+risk_vector:
+  dimensions:
+    - security
+    - privacy
+    - child_safety
+    - dignity
+    - discrimination
+    - cultural_harm
+    - indigenous_community
+    - operational_integrity
+    - supply_chain
+    - provenance
+    - irreversibility
+    - operator_welfare
+review_surfaces:
+  - pull_request_reviews
+  - review_threads
+  - codeowners_or_role_authority
+  - privacy_review
+  - child_safety_review
+  - cultural_community_review_when_applicable
+  - accessibility_review_when_applicable
+  - security_review
+  - provider_enforcement_readback
+urgent_states:
+  P0:
+    meaning: provider/authority/safety gate can invalidate promotion
+    default_action: BLOCK_PROMOTION
+  P1:
+    meaning: actionable evidence/provenance/runtime gap
+    default_action: PRIORITIZE_NEXT_CYCLE
+  P2:
+    meaning: bounded improvement or nonblocking debt
+    default_action: TRACK
+forgotten_stakeholder_probe: required_for_high_impact
+provider_gates:
+  required_status_checks: TOKEN_VAZIO
+  independent_approval: TOKEN_VAZIO
+  bypass_governance: TOKEN_VAZIO
+  negative_rejection_receipt: TOKEN_VAZIO
+codescan_gate:
+  binding_metadata_nonsecret: TOKEN_VAZIO
+  preflight: TOKEN_VAZIO
+  analysis_executed: TOKEN_VAZIO
+  sarif_nonempty: TOKEN_VAZIO
+  upload_pass: TOKEN_VAZIO
+  rule: 'No secret value may be logged or copied into receipts.'
