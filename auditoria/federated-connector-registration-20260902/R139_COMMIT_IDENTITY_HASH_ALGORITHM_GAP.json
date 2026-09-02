@@ -1,0 +1,43 @@
+{
+  "cycle_id": "FED-20260902-R139-COMMIT-IDENTITY-HASH-ALGORITHM-BOUNDARY",
+  "predecessor": "FED-20260902-R138-SOURCE-COMMIT-LINEAGE-SEMANTICS-REFINED",
+  "gap_id": "TV-MAPA-CONNECTOR-COMMIT-ID-HASH-ALGORITHM",
+  "state": "CONTRADICTED_SCOPED",
+  "claim_allowed": false,
+  "source_pointer": [
+    "docs/CONNECTOR_REGISTRATION_PROTOCOL.md@ee32024c4d597433a593b8189851320fc8354273",
+    "data/control-plane/CONNECTOR_REGISTRY_REVISION_SYSTEM.v1.json@ee32024c4d597433a593b8189851320fc8354273",
+    "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl@ee32024c4d597433a593b8189851320fc8354273"
+  ],
+  "observation": {
+    "protocol_circle2_commit_sha_type": "SHA256",
+    "protocol_circle4_source_commit_type": "SHA256",
+    "revision_system_source_commit_type": "string (SHA256)",
+    "observed_source_commit": "8159e27f319d152081b9baa17b6b582511d4e585",
+    "observed_source_commit_hex_width": 40,
+    "observed_artifact_introduction_commit": "ee32024c4d597433a593b8189851320fc8354273",
+    "observed_artifact_introduction_commit_hex_width": 40
+  },
+  "finding": "The connector protocol/schema labels commit identity fields as SHA256 while the actual Git refs bound into the same custody system are 40-hex commit identifiers. Therefore the field semantics conflate repository commit identity with evidence/content digest semantics unless an explicit alternate encoding or algorithm rule exists.",
+  "missing_field": [
+    "normative commit identifier algorithm/format",
+    "separation between commit_id and content/evidence_digest",
+    "validator for allowed commit-id width/algorithm",
+    "migration rule for existing receipts if schema label is corrected"
+  ],
+  "blocking_dependency": "Mapa federation/custody schema authority",
+  "evidence_needed": "Versioned schema defining commit identity independently from evidence hash, plus executable validation against exact refs.",
+  "falsifier": "An already-versioned authoritative rule demonstrating that source_commit/commit_sha intentionally carries a 40-hex repository object ID while the string SHA256 label refers to another explicitly defined representation.",
+  "next_probe": "Search for authoritative commit-id normalization/validation; if absent, prepare a schema-only superseding clarification that preserves historical receipts and separates commit_id from digest fields.",
+  "owner_authority": "Mapa federation + custody authority",
+  "urgency": "HIGH",
+  "closure_gate": "Explicit versioned commit-id semantics + executable validator + append-only migration/supersession rule; no historical receipt rewrite.",
+  "lineage": ["R138", "R139"],
+  "memory_projection": {
+    "L": "R138→R139",
+    "O": "protocol⊕revision-system⊕custody-ledger⊕exact Git refs",
+    "T": "commit identity ↔ provenance ↔ receipt digest",
+    "C": "commit ID is not automatically an evidence/content digest",
+    "P": "append-only audit object; historical receipts preserved"
+  }
+}
