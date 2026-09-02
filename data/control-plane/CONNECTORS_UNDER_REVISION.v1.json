@@ -1,0 +1,133 @@
+{
+  "registry_id": "CONNECTORS_UNDER_REVISION",
+  "version": "1.0.0",
+  "generated_at": "2026-09-02T00:00:00Z",
+  "batch_id": "INITIAL_REGISTRATION_BATCH_20260902",
+  "total_connectors_pending": 6,
+  "operational_status": "AWAITING_CIRCLE_1_EXECUTION",
+  "authority": {
+    "owner": "Mapa (Federation + Validation Authority)",
+    "scope": "Cross-repository connector federation",
+    "enforcement": "FAIL_CLOSED until all circles complete"
+  },
+  "connectors": [
+    {
+      "connector_id": "CONN-001",
+      "name": "RafPolimata_CodeGeneration",
+      "alias": "polimata-codegen",
+      "source_repository": "rafaelmeloreisnovo/RafPolimata",
+      "producer_authority": "RafPolimata (compiler authority)",
+      "purpose": "Federated code generation and normalization pipeline",
+      "status": "UNDER_REVIEW",
+      "circles_passed": [],
+      "next_circle": 1,
+      "risk_assessment": "LOW (internal, well-scoped)",
+      "notes": "Compiler output; feeds into termux-app and llamaRafaelia"
+    },
+    {
+      "connector_id": "CONN-002",
+      "name": "TermuxApp_RuntimeValidation",
+      "alias": "termux-runtime-valid",
+      "source_repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "producer_authority": "termux-app-rafacodephi (build + runtime authority)",
+      "purpose": "Android runtime execution validation and evidence collection",
+      "status": "UNDER_REVIEW",
+      "circles_passed": [],
+      "next_circle": 1,
+      "risk_assessment": "MEDIUM (device-dependent, cross-architecture)",
+      "notes": "Critical for federated device evidence; requires physical device integration"
+    },
+    {
+      "connector_id": "CONN-003",
+      "name": "LlamaRafaelia_ContextRetrieval",
+      "alias": "llama-context-retrieval",
+      "source_repository": "rafaelmeloreisnovo/llamaRafaelia",
+      "producer_authority": "llamaRafaelia (model authority)",
+      "purpose": "Contextual retrieval and interpretation of federated knowledge",
+      "status": "UNDER_REVIEW",
+      "circles_passed": [],
+      "next_circle": 1,
+      "risk_assessment": "MEDIUM (model-dependent, non-deterministic)",
+      "notes": "Non-deterministic model output; requires blinded benchmark gates"
+    },
+    {
+      "connector_id": "CONN-004",
+      "name": "RafGitTools_VersionControl",
+      "alias": "rafgit-version-control",
+      "source_repository": "rafaelmeloreisnovo/RafGitTools",
+      "producer_authority": "RafGitTools (versioning authority)",
+      "purpose": "Federated version control and branching governance",
+      "status": "UNDER_REVIEW",
+      "circles_passed": [],
+      "next_circle": 1,
+      "risk_assessment": "LOW-MEDIUM (well-established, but critical path)",
+      "notes": "Versioning backbone; affects all other connectors"
+    },
+    {
+      "connector_id": "CONN-005",
+      "name": "RelivityLivingLight_ScientificValidation",
+      "alias": "relativity-sci-validation",
+      "source_repository": "instituto-Rafael/relativity-living-light",
+      "producer_authority": "relativity-living-light (scientific validation authority)",
+      "purpose": "Falsifiable scientific validation gates across ecosystem",
+      "status": "UNDER_REVIEW",
+      "circles_passed": [],
+      "next_circle": 1,
+      "risk_assessment": "HIGH (falsifier gates; reputational impact)",
+      "notes": "Falsifier role; must be aggressive; feeds back into all circles"
+    },
+    {
+      "connector_id": "CONN-006",
+      "name": "TermuxPackages_SourceAuthority",
+      "alias": "termux-packages-source",
+      "source_repository": "rafaelmeloreisnovo/termux-packages",
+      "producer_authority": "termux-packages (source authority)",
+      "purpose": "Source package verification and recipe correctness validation",
+      "status": "UNDER_REVIEW",
+      "circles_passed": [],
+      "next_circle": 1,
+      "risk_assessment": "HIGH (upstream; all downstream depends on correctness)",
+      "notes": "Source of truth; blocks all build pipelines if compromised"
+    }
+  ],
+  "registration_sequence": {
+    "phase": "CIRCLE_1_PENDING",
+    "expected_duration_circles": "6 circles × 2-4 hours each = 12-24 hours total",
+    "parallelization": "Circles 1-5 can run in parallel per connector; Circle 6 runs continuously",
+    "coordination": "Mapa orchestrates; each producer repo retains authority over its implementation"
+  },
+  "operational_contracts": {
+    "contract_1": "No connector advances past Circle 1 without authority boundary validation",
+    "contract_2": "Zero TOKEN_VAZIO erased; all gaps documented with closure paths",
+    "contract_3": "All receipts immutable; ledger is append-only",
+    "contract_4": "Autonomous processes (Circle 6) run continuously; escalate anomalies",
+    "contract_5": "Cross-repo dependencies validated; cyclic dependencies cause FAIL_CLOSED",
+    "contract_6": "Evidence scope (local/federated/third-party) declared for every claim"
+  },
+  "escalation_protocol": {
+    "authority_conflict": "Escalate to RafGitTools (versioning authority); Mapa mediates",
+    "circular_dependency": "Detected by AT-02; fail registration; document in audit trail",
+    "stale_evidence": "AE-02 flags; suggest re-validation; do not auto-promote stale receipts",
+    "device_failure": "TermuxApp connector fails; revert to local-only scope; flag TOKEN_VAZIO_RUNNER",
+    "producer_divergence": "PC-03 cross-repo audit detects divergence; notify producer authority"
+  },
+  "f_ok": [
+    "6 connectors identified and documented",
+    "Risk assessments assigned",
+    "Source repositories bound",
+    "Producer authorities declared",
+    "Registration sequence planned"
+  ],
+  "f_gap": [
+    "Circle 1 gates not yet executed (RM-01, RM-02, RM-03)",
+    "No receipts generated yet",
+    "Autonomous processes not deployed",
+    "Cross-repo federation integration not yet validated"
+  ],
+  "f_next": [
+    "Execute Circle 1 on CONN-001 (RafPolimata); validate authority boundary",
+    "If CONN-001 passes Circle 1, proceed to Circle 2 (evidence collection)",
+    "Generate first custody receipt and append to CONNECTOR_CUSTODY_CHAIN.jsonl",
+    "Monitor for Circle 1 failures; escalate per escalation_protocol"
+  ]
+}
