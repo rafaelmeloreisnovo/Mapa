@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafs://federation/event.v1",
+  "title": "RAFAELIA Federated Audit Event V1",
+  "type": "object",
+  "required": ["event_id", "cycle_id", "timestamp", "type", "state", "source_pointer", "claim_allowed"],
+  "properties": {
+    "event_id": {"type": "string"},
+    "cycle_id": {"type": "string"},
+    "matrix_id": {"type": ["string", "null"]},
+    "vector_id": {"type": ["string", "null"]},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "type": {"type": "string"},
+    "state": {"enum": ["DOCUMENTED", "OBSERVED", "EXECUTED", "MEASURED", "REPRODUCED", "CONTRADICTED", "BLOCKED", "TOKEN_VAZIO"]},
+    "source_pointer": {"type": "string"},
+    "predecessor": {"type": ["string", "null"]},
+    "lineage": {"type": "array", "items": {"type": "string"}},
+    "syslog": {
+      "type": "object",
+      "properties": {
+        "facility": {"type": ["integer", "null"], "minimum": 0, "maximum": 23},
+        "severity": {"type": ["integer", "null"], "minimum": 0, "maximum": 7},
+        "message_id": {"type": ["string", "null"]}
+      }
+    },
+    "hashes": {
+      "type": "object",
+      "properties": {
+        "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "blake3": {"type": ["string", "null"]},
+        "md5_legacy": {"type": ["string", "null"], "pattern": "^[0-9a-f]{32}$"}
+      }
+    },
+    "claim_allowed": {"type": "boolean", "const": false},
+    "receipt_pointer": {"type": ["string", "null"]},
+    "readback_pointer": {"type": ["string", "null"]},
+    "risk_ids": {"type": "array", "items": {"type": "string"}},
+    "gap_ids": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

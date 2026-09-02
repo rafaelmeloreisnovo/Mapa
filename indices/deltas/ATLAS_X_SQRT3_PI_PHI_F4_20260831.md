@@ -149,6 +149,7 @@ Formula memory index:
 `MCM:ATLAS:X-SQRT3-PI-PHI-F4:20260831:v1`
 
 Papers branch/commit/PR:
+
 - `research/atlas-x-sqrt3-piphi-f4-20260831`
 - `3392275defe93b571898e8653acb4c09b88d1443`
 - draft PR `rafaelmeloreisnovo/papers#64`

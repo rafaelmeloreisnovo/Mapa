@@ -19,6 +19,7 @@
 ## Product Values — This Repository
 
 **What Mapa produces:**
+
 - Federated knowledge organization across 28 repositories
 - Immutable cross-surface identity (GitHub ↔ Google Drive) via DRIVE_CUSTODY_RECEIPT
 - TOKEN_VAZIO catalog with closure paths per gap
@@ -26,6 +27,7 @@
 - Append-only governance ledger
 
 **Product layers occupied:**
+
 - Biblioteconomic KOS (controlled vocabulary, authority control)
 - Operational Ontology (concepts, relations, trajectories)
 - Federated Control Plane (modules, products, procedures, gates)
@@ -33,6 +35,7 @@
 - Visual Navigation (diagrams, indices, reports)
 
 **Authority boundary:**
+
 - ✓ Routes cross-repo claims, validates coherence and contracts
 - ✗ Does NOT prove individual repo implementation
 - ✗ Does NOT execute projects; orchestrates federated authority only
@@ -41,6 +44,7 @@
 **Next gates:** [Cycle 4](PRODUTO.json) (implementations), [Cycle 5](PRODUTO.json) (lineage authority), [Cycle 6](PRODUTO.json) (topological validation)
 
 **Cross-surface integration:**
+
 - GitHub: `rafaelmeloreisnovo/Mapa` (main SHA: `eb9cb679d42f64da6e4e4e09abcb96848aae2a8f`)
 - Google Drive: NOVOexport (15,439 objects) + OMEGA-CYCLE receipts
 - Custody bridge: `CONVERSATIONS_CHUNKS_PRIVATE` (900 JSON objects, 145MB aggregate)
@@ -240,6 +244,7 @@ A commit proves existence and history of an artifact. It does not by itself prov
 **Sprint:** 2026-07 · **Branch:** `claude/readme-analise-refatoracao-vl6t6l`
 
 Quality levels:
+
 - **Alto** — Complete, technically precise, no changes needed
 - **Bom** — Good original quality; minor cleanup or no changes required
 - **Refatorado** — Content separated: philosophical/spiritual/legal text moved to dedicated auxiliary files; README = technical entry point

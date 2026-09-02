@@ -47,6 +47,7 @@ Each repository has one PRODUTO.json at its root, following the schema in `schem
 Which of the five RAFAELIA layers does this repo occupy? Choose 1–5 from the enum.
 
 **Meanings:**
+
 - **Biblioteconomic KOS**: Controlled vocabulary, authority control, semantic cataloging
 - **Operational Ontology**: Concepts, relations, trajectories, epistemic gaps
 - **Federated Control Plane**: Modules, products, procedures, gates, workflows
@@ -83,6 +84,7 @@ Which of the five RAFAELIA layers does this repo occupy? Choose 1–5 from the e
 ```
 
 **state** must be one of:
+
 - **REFERENCE**: Specification/explanatory material only
 - **IMPLEMENTED**: Code or data exists
 - **VERIFICATION_PENDING**: Work in progress; claim not yet promoted
@@ -90,6 +92,7 @@ Which of the five RAFAELIA layers does this repo occupy? Choose 1–5 from the e
 - **FEDERATION_CERTIFIED**: All cross-repo gates pass; ready for federation
 
 **claim_allowed**:
+
 - `false` (default): Do NOT promote this repo's claims to federation state yet
 - `true` (rare): This repo's claims are promoted to federation state
 
@@ -126,6 +129,7 @@ Which of the five RAFAELIA layers does this repo occupy? Choose 1–5 from the e
 ```
 
 Count of open TOKEN_VAZIO gaps by category:
+
 - **tv_code**: Missing implementations
 - **tv_test**: Missing tests or fixtures
 - **tv_data**: Missing data or datasets
@@ -146,6 +150,7 @@ Count of open TOKEN_VAZIO gaps by category:
 ```
 
 Ordered list of gates that must close before this repo reaches FEDERATION_CERTIFIED state. Each gate should:
+
 1. Name the cycle or milestone
 2. State what must be implemented/validated
 3. Link to the TOKEN_VAZIO gap(s) it closes
@@ -246,6 +251,7 @@ Each repository's refactoring should end with:
 ---
 
 **See also:**
+
 - [DRIVE_GITHUB_IDENTITY_MODEL.md](DRIVE_GITHUB_IDENTITY_MODEL.md) — Cross-surface binding
 - [TOKEN_VAZIO_CATALOG.md](TOKEN_VAZIO_CATALOG.md) — Gap definitions and closure paths
 - [PRODUTO_ECOSYSTEM_REGISTRY.v1.json](../data/control-plane/PRODUTO_ECOSYSTEM_REGISTRY.v1.json) — All 28 repos
