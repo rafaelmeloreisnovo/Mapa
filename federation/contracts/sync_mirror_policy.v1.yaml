@@ -1,0 +1,57 @@
+version: 1
+contract_id: FED-SYNC-MIRROR-POLICY-V1
+state: CANONICAL_DRAFT
+claim_allowed: false
+modes:
+  observation_only:
+    writes: false
+  one_way_mirror:
+    writes: bounded
+    direction_required: true
+    source_authority_required: true
+  bidirectional_sync:
+    allowed: false
+    reason: requires explicit conflict/authority design and independent review
+preflight_gates:
+  - provider_authority
+  - exact_source_ref
+  - exact_destination_ref
+  - source_tree_sha
+  - destination_tree_sha
+  - ancestry_relation
+  - divergence_assessment
+  - privacy_data_class
+  - child_human_impact_applicability
+  - secrets_scan_boundary
+  - review_status
+  - rollback_plan
+  - receipt_destination
+ancestry_states:
+  - SAME_COMMIT
+  - EQUIVALENT_TREE
+  - SOURCE_ANCESTOR
+  - DESTINATION_ANCESTOR
+  - DIVERGED
+  - UNRELATED
+  - TOKEN_VAZIO
+conflict_policy:
+  default: BLOCK
+  auto_force_push: prohibited
+  auto_delete: prohibited
+  unknown_ancestry: BLOCK
+  protected_branch: NEVER_WRITE_DIRECTLY
+execution_contract:
+  source_pointer: required
+  transform_id: required
+  dry_run: required_before_first_write
+  max_commits_per_repo_per_cycle: 1
+  idempotency_key: required
+  precondition_ref: required
+  post_write_readback: required
+  rollback_pointer: required
+  receipt: required
+promotion:
+  claim_allowed_default: false
+  require_independent_review_for_nontrivial_change: true
+  require_ci_evidence: true
+  require_provider_enforcement_evidence_when_claim_depends_on_enforcement: true
