@@ -1,0 +1,71 @@
+{
+  "cycle_id": "FED-20260902-R135-CONNECTOR-BOOTSTRAP-PROVENANCE-MISMATCH",
+  "predecessor": "R134",
+  "observed_at": "2026-09-02T08:11:26Z",
+  "status": "CONTRADICTED_PROVENANCE_SCOPED",
+  "claim_allowed": false,
+  "subject": "CONNECTOR_REGISTRY_SYSTEM_BOOTSTRAP_20260902",
+  "source_pointers": {
+    "mapa_head": "ee32024c4d597433a593b8189851320fc8354273",
+    "custody_chain_path": "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl",
+    "receipt_declared_source_commit": "8159e27f319d152081b9baa17b6b582511d4e585",
+    "actual_connector_system_introduction_commit": "ee32024c4d597433a593b8189851320fc8354273",
+    "compare_base": "8159e27f319d152081b9baa17b6b582511d4e585",
+    "compare_head": "ee32024c4d597433a593b8189851320fc8354273"
+  },
+  "evidence": {
+    "receipt_claim": "SYSTEM_INITIALIZATION receipt points source_commit to 8159e27f...",
+    "compare_result": "ee32024c is exactly one commit ahead of 8159e27f",
+    "files_added_in_ee32024c": [
+      "auditoria/federated-connector-registration-20260902/SESSION_REPORT.md",
+      "data/control-plane/CONNECTORS_UNDER_REVISION.v1.json",
+      "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl",
+      "data/control-plane/CONNECTOR_REGISTRY_REVISION_SYSTEM.v1.json",
+      "docs/CONNECTOR_REGISTRATION_PROTOCOL.md",
+      "scripts/validate_connector_authority.py"
+    ],
+    "interpretation": "The receipt's declared source_commit predates the commit that actually introduced the connector registration system files. This is a scoped provenance mismatch; it does not prove intent or invalidate file contents."
+  },
+  "gap": {
+    "gap_id": "TV-MAPA-CONNECTOR-BOOTSTRAP-SOURCE-COMMIT-PROVENANCE",
+    "token_vazio": [
+      "canonical_bootstrap_source_commit",
+      "immutable_hash_derivation_method",
+      "predecessor_receipt_if_any"
+    ],
+    "source_pointer": "CONNECTOR_CUSTODY_CHAIN.jsonl@ee32024c + compare 8159e27f...ee32024c",
+    "missing_field": "A provenance-correct bootstrap receipt whose source_commit binds to the commit that actually contains the registered artifacts, with a reproducible digest derivation",
+    "blocking_dependency": "Mapa federation/custody authority",
+    "evidence_needed": "append-only corrective receipt referencing the original receipt, exact artifact commit/blob SHAs, digest algorithm/input canonicalization, and predecessor lineage",
+    "falsifier": "authoritative evidence that the 8159e27f commit already contained the six connector-system artifacts or that source_commit intentionally means another precisely documented predecessor semantic",
+    "next_probe": "inspect receipt schema/protocol semantics for source_commit and immutable_hash; if semantics confirm artifact-source meaning, append a corrective superseding receipt without deleting the original",
+    "owner_authority": "Mapa federation + custody authority",
+    "urgency": "HIGH",
+    "closure_gate": "semantics resolved + exact artifact refs + reproducible digest + append-only corrective/superseding receipt + index projection",
+    "claim_allowed": false,
+    "lineage": "R134→R135"
+  },
+  "memory_projection": {
+    "L": "R134→R135; bootstrap receipt lineage preserved",
+    "O": "custody receipt ⊕ commit graph ⊕ changed-file comparison",
+    "T": "connector registry ↔ custody chain ↔ Git history",
+    "C": "declared source_commit ≠ observed introduction commit; mismatch ≠ intent",
+    "P": "original receipt preserved; this audit record is append-only"
+  },
+  "f_ok": [
+    "bootstrap receipt source_commit independently checked",
+    "actual introduction commit bounded by one-commit compare",
+    "six added connector-system artifacts enumerated",
+    "provenance mismatch recorded without mutating canonical ledger"
+  ],
+  "f_gap": [
+    "source_commit semantic unresolved",
+    "immutable_hash derivation not reproducible from observed data",
+    "CONN-001 producer binding/evidence_scope remains open"
+  ],
+  "f_next": [
+    "inspect connector protocol/schema definitions of source_commit and immutable_hash",
+    "prepare append-only corrective receipt only if semantic mismatch is confirmed",
+    "continue CONN-001 Circle 1 only after producer binding/evidence_scope gates are satisfied"
+  ]
+}
