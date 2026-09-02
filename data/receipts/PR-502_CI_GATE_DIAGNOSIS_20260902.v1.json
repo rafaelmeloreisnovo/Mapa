@@ -1,0 +1,108 @@
+{
+  "schema": "rafaelia_ci_gate_diagnosis_receipt_v1",
+  "receipt_id": "RCPT-PR-502-CI-DIAGNOSIS-20260902",
+  "predecessor_receipt": "RCPT-INC-000001-GITHUB-DRIVE-20260902",
+  "observed_at": "2026-09-02T15:51:20Z",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 502,
+  "head_sha": "b7956e0ff93c216ee8504b029dccf4ce2b98154d",
+  "state": "BLOCKED_WITH_CAUSES_RESOLVED",
+  "claim_allowed": false,
+  "scope_analysis": {
+    "changed_files": [
+      "data/receipts/INC-000001_GITHUB_DRIVE_PROVENANCE_CONSOLIDATION_20260902.v1.json"
+    ],
+    "receipt_content_failure_observed": false,
+    "note": "No failing job identified the new JSON receipt as its failure cause."
+  },
+  "gates": [
+    {
+      "workflow": "Provider Protection Gate",
+      "run_id": 33650257033,
+      "job_id": 100315175945,
+      "state": "FAIL_EXTERNAL_PROVIDER_CONFIGURATION",
+      "observed": [
+        "active ruleset 21909304 applies to main",
+        "required_status_checks rule type absent",
+        "provider-protection required context absent"
+      ],
+      "safe_resolution": "Configure the GitHub provider ruleset for main with strict required status checks including provider-protection, then rerun.",
+      "local_code_change_authorized": false
+    },
+    {
+      "workflow": "Server Merge Enforcement Assurance",
+      "run_id": 33650257082,
+      "job_id": 100315175937,
+      "state": "FAIL_EXTERNAL_PROVIDER_CONFIGURATION",
+      "observed": [
+        "protected=true",
+        "protection_enabled=false",
+        "required status checks empty",
+        "server_side_merge_binding=NOT_ENFORCED_OBSERVED"
+      ],
+      "safe_resolution": "Bind the exact required promotion/status context server-side and capture a rejected invalid-merge receipt.",
+      "local_code_change_authorized": false
+    },
+    {
+      "workflow": "RAFAELIA Promotion Control V1",
+      "run_id": 33650257209,
+      "job_id": 100315222056,
+      "state": "EXPECTED_POLICY_DENIAL",
+      "observed": [
+        "pull request is draft",
+        "zero independent approvals",
+        "required independent approvals=1",
+        "result=DENIED"
+      ],
+      "safe_resolution": "Keep draft until reviewable; obtain one genuine independent approval. Do not synthesize approval.",
+      "local_code_change_authorized": false
+    },
+    {
+      "workflow": "CI",
+      "run_id": 33650257111,
+      "job_id": 100315176701,
+      "state": "FAIL_PREEXISTING_BASELINE_DRIFT",
+      "observed": [
+        "historical Markdown debt=936",
+        "recorded threshold=890",
+        "PR changed only one JSON receipt at the diagnosed head"
+      ],
+      "safe_resolution": "Reconcile the main-branch Markdown debt baseline in a separately reviewed scope or reduce actual debt; do not hide it in this provenance PR.",
+      "local_code_change_authorized": false
+    },
+    {
+      "workflow": "CodeScan",
+      "run_id": 33650257188,
+      "job_id": 100315176486,
+      "state": "FAIL_MISSING_EXTERNAL_CREDENTIALS",
+      "observed": [
+        "CODESCAN_AUTH_TOKEN missing",
+        "CODESCAN_ORGANIZATION_KEY missing",
+        "CODESCAN_PROJECT_KEY missing"
+      ],
+      "safe_resolution": "Configure repository or organization secrets with least privilege, or explicitly revise workflow policy in a separate governance change.",
+      "local_code_change_authorized": false
+    }
+  ],
+  "passing_gates": [
+    {"workflow": "Branch Topology Gate", "run_id": 33650257073},
+    {"workflow": "Human Dignity Ethics Gate V1", "run_id": 33650257064},
+    {"workflow": "main-hardening-gate", "run_id": 33650257233},
+    {"workflow": "SecurityCodeScan", "run_id": 33650257046}
+  ],
+  "in_progress_at_observation": [
+    {"workflow": "CodeQL Advanced", "run_id": 33650257258}
+  ],
+  "decision": {
+    "merge_allowed": false,
+    "safe_local_fix_available_in_this_pr": false,
+    "reason": "Remaining blockers require provider configuration, genuine independent review, secrets, or separately scoped baseline reconciliation.",
+    "forbidden_shortcuts": [
+      "lower gate requirements to manufacture PASS",
+      "invent independent approval",
+      "store secrets in repository content",
+      "raise Markdown debt threshold inside this provenance-only PR"
+    ]
+  },
+  "f_next": "Configure provider-required checks first; then obtain independent review and rerun exact-head CI. Keep unrelated baseline and credential repairs in separate reviewed changes."
+}
