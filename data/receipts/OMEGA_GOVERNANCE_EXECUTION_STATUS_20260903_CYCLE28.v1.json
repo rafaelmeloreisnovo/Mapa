@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "OMEGA_GOVERNANCE_EXECUTION_STATUS_20260903_CYCLE28",
+  "observed_at": "2026-09-03T02:14:00-03:00",
+  "scope": "Mapa provider governance recovery gate",
+  "predecessor": "MAPA_MAIN_SERVER_ENFORCEMENT_REGRESSION_20260903.v1",
+  "source": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "main_sha_observed": "a7bcc8c16f4ce3a97fb50a30fd94c58f1731a340",
+    "audit_pr": 509,
+    "audit_branch": "audit/provider-regression-receipt-20260903-cycle27",
+    "ruleset_id": 21909304
+  },
+  "observations": {
+    "main_protected": false,
+    "ruleset_enforcement": "disabled",
+    "legacy_status_check_enforcement": "off",
+    "recovery_spec_present": true,
+    "provider_ruleset_write_surface_available_in_current_connector": false
+  },
+  "execution": {
+    "ruleset_mutation_attempted": false,
+    "default_branch_mutation_attempted": false,
+    "merge_test_attempted": false,
+    "secret_mutation_attempted": false,
+    "append_only_audit_receipt_written": true
+  },
+  "gates": {
+    "provider_enforcement_active": "FAIL_OBSERVED",
+    "zero_approval_rejection_test": "TOKEN_VAZIO_BLOCKED_UNTIL_ENFORCEMENT_ACTIVE",
+    "codescan_authorized_binding": "TOKEN_VAZIO_PROVIDER_SECRET_WRITE_SURFACE",
+    "postmerge_revalidation": "TOKEN_VAZIO",
+    "claim_allowed": false
+  },
+  "next_verifiable_action": "Apply provider-side main protection/ruleset enforcement through an authorized write surface, then fresh-read ruleset and branch protection before any zero-approval rejection test.",
+  "invariants": [
+    "TOKEN_VAZIO != PASS",
+    "PROPOSED_CONFIG != PROVIDER_STATE != TEST_EXECUTION != EVIDENCE != CLAIM",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+  ]
+}
