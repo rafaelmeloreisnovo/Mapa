@@ -1,0 +1,48 @@
+{
+  "schema": "rafaelia.mapa.server_enforcement_regression_receipt.v1",
+  "cycle_id": "OMEGA-FED-20260903T-CYCLE27",
+  "predecessor": "RECEIPT_OMEGA_FED_20260903T0404Z_PROVIDER_REGRESSION_GATE_26",
+  "source_pointer": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "main_sha": "a7bcc8c16f4ce3a97fb50a30fd94c58f1731a340",
+    "main_tree": "947ee83127c6c5302178bd9355ebe9774e43d5f9",
+    "ruleset_id": 21909304,
+    "issue": 327
+  },
+  "observed": {
+    "main_protected": false,
+    "legacy_protection_enabled": false,
+    "required_status_checks_enforcement_level": "off",
+    "required_contexts": [],
+    "ruleset_enforcement": "disabled"
+  },
+  "gap": {
+    "gap_id": "TV-MAPA-MAIN-SERVER-ENFORCEMENT",
+    "state": "CONTRADICTED_REGRESSED_PROVIDER_BOUND",
+    "missing_field": [
+      "active authoritative provider-side enforcement",
+      "required Promotion Control or equivalent check binding",
+      ">=1 independent approval requirement",
+      "zero-approval server rejection receipt"
+    ],
+    "blocking_dependency": "provider administration/ruleset configuration",
+    "evidence_needed": "fresh ruleset and main readback followed by safe rejection evidence with main SHA unchanged",
+    "falsifier": "provider readback showing active enforcement plus required check and approval gates, followed by a zero-approval rejection receipt",
+    "next_probe": "provider-admin enforcement -> ruleset/main readback -> synthetic zero-approval PR -> observe rejection without mutating main",
+    "owner_authority": "repository administrator/provider",
+    "urgency": "P0",
+    "closure_gate": "issue #327 closure gate",
+    "claim_allowed": false
+  },
+  "safety": {
+    "merge_attempted": false,
+    "default_branch_mutated": false,
+    "ruleset_mutated": false,
+    "reason": "Issue #327 stop condition forbids merge testing while server-side enforcement is absent."
+  },
+  "lineage": [
+    "MAPA_MAIN_SERVER_ENFORCEMENT_OBSERVATION_20260831.v1.json",
+    "RECEIPT_OMEGA_FED_20260903T0404Z_PROVIDER_REGRESSION_GATE_26"
+  ],
+  "claim_allowed": false
+}
