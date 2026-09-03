@@ -1,0 +1,63 @@
+{
+  "cycle_id": "FED-20260903-R154-CODESCAN-LOG-SURFACE-BOUNDARY",
+  "predecessor": "FED-20260902-R153-PR504-EXACT-HEAD-STABILITY",
+  "observed_at": "2026-09-03T03:09:39Z",
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "claim_allowed": false,
+  "source_pointer": {
+    "repo": "rafaelmeloreisnovo/Mapa",
+    "main_sha": "ccdea71aa7fb1cbf676b01351e6d954923c9a23f",
+    "pr": 504,
+    "pr_head_sha": "e952dc1056a2e7692eccc18d67828d8305e359f8",
+    "workflow_path": ".github/workflows/codescan.yml",
+    "workflow_blob_sha": "c1c20b58a6985d5dc592018dafb46bfa4f8af2f7",
+    "workflow_run": 33651888457,
+    "job": 100320689851,
+    "drive_method_provider_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "observation": {
+    "required_inputs": [
+      "CODESCAN_AUTH_TOKEN",
+      "CODESCAN_ORGANIZATION_KEY",
+      "CODESCAN_PROJECT_KEY"
+    ],
+    "preflight_behavior": "For each required input the workflow emits NAME=PRESENT or NAME=MISSING without printing secret values, then exits nonzero if any required input is missing.",
+    "job_state": "BLOCKED",
+    "failed_step": "Verify CodeScan credential presence",
+    "analysis_state": "NOT_EXECUTED",
+    "sarif_state": "NOT_EXECUTED",
+    "exact_missing_subset": "TOKEN_VAZIO"
+  },
+  "gap": {
+    "gap_id": "TV-MAPA-PR504-CODESCAN-PREFLIGHT-LOG-RETRIEVAL-SURFACE",
+    "TOKEN_VAZIO": [
+      "exact_missing_subset",
+      "authorized_binding_evidence",
+      "successful_exact_head_codescan_execution",
+      "sarif_result"
+    ],
+    "missing_field": "Readable non-secret output of the already-existing CodeScan preflight for exact job 100320689851, or equivalent authorized presence metadata.",
+    "blocking_dependency": "Accessible GitHub Actions job-log or annotation retrieval surface; secret values are neither required nor permitted.",
+    "evidence_needed": "Only the emitted PRESENT/MISSING names, followed by authorized binding/provisioning evidence and an exact-head rerun that executes CodeScan/SARIF.",
+    "falsifier": "Evidence that all three names were PRESENT in the exact job while the same preflight still failed for another cause.",
+    "next_probe": "Retrieve exact job preflight output through an authorized non-secret log/annotation surface; do not modify secrets or weaken the gate merely to obtain diagnostics.",
+    "owner_authority": "Mapa governance + GitHub Actions administrators + CodeScan project authority",
+    "urgency": "HIGH",
+    "closure_gate": "Observe exact missing subset or equivalent authorized presence metadata, then resolve binding under authority and obtain successful exact-head CodeScan/SARIF receipt.",
+    "claim_allowed": false
+  },
+  "memory_projection": {
+    "L": "R149->R150->R151->R152->R153->R154; R154 narrows the blocker from unknown preflight evidence to log-retrieval surface because the workflow already emits safe diagnostics.",
+    "O": "Workflow source and job-step metadata independently agree on the preflight boundary; exact subset remains unobserved.",
+    "T": "Connects GitHub Actions execution evidence, repository governance, CodeScan authority, Drive METHOD identity, and federated receipt/index semantics.",
+    "C": "No secret value read/write; no main/default-branch mutation; no merge/approval/release; diagnostic-only branch artifact.",
+    "P": "Append-only object identity anchored by cycle_id, source pointers, exact refs, and predecessor lineage."
+  },
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "filename/title != identity",
+    "absence of evidence != evidence of absence",
+    "required_set=3 does not imply exact_missing_subset=3",
+    "secret values must not be captured in receipts"
+  ]
+}
