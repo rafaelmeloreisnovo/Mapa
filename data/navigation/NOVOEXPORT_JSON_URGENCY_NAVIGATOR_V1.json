@@ -1,0 +1,171 @@
+{
+  "$schema": "RAFAELIA/NOVOEXPORT_JSON_URGENCY_NAVIGATOR/V1",
+  "record_id": "NAV-NOVOEXPORT-JSON-URGENCY-20260904-0001",
+  "status": "DRAFT_EVIDENCE_SCOPED",
+  "mode": "APPEND_ONLY",
+  "claim_allowed": false,
+  "publication_effect": "NONE",
+  "scope": "Prioritize JSON-corpus recovery while preventing identity loss, source mutation, false joins and unsafe promotion.",
+  "authority": {
+    "routing": "rafaelmeloreisnovo/Mapa",
+    "raw_corpus": "Google Drive NOVOexport",
+    "memory_index": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+    "semantic_derivatives": "derived ledgers only; never a replacement for raw source"
+  },
+  "baseline_sources": [
+    {
+      "kind": "github",
+      "path": "data/gap-atlas/RAFAELIA_GAP_ATLAS_V1.json",
+      "blob_sha": "45f5430fca1173cd8dcf9be4ed726a63a1a85eba",
+      "state": "DOCUMENTED"
+    },
+    {
+      "kind": "github",
+      "path": "data/memory/RAFAELIA_LONGITUDINAL_ORTHOGONAL_INDEX_20260814.v1.json",
+      "blob_sha": "d53585591c7e12956ff4ff72f2111be29dafaf8e",
+      "state": "DOCUMENTED"
+    },
+    {
+      "kind": "github",
+      "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "path": "auditoria/RAFAELIA_RAW_CONVERSATIONS_019_027_PROVIDER_SHA_CLOSURE_20260814.md",
+      "blob_sha": "952e0608dc5c917d0aa39ddb32939c8a85a8ae39",
+      "state": "DOCUMENTED"
+    },
+    {
+      "kind": "drive",
+      "logical_source": "NOVOEXPORT_CUSTODY_INDEX_V1; Raw 018 Wave 2/3; CHECKPOINT_0085",
+      "state": "DOCUMENTED",
+      "privacy": "PRIVATE_REFERENCE_ONLY"
+    }
+  ],
+  "invariants": [
+    "RAW_SOURCE != DERIVED_SHARD",
+    "FILE_IDENTITY != SEMANTIC_IDENTITY",
+    "HASH_EQUALITY != SEMANTIC_EQUIVALENCE",
+    "DOCUMENTED != EXECUTED",
+    "TOKEN_VAZIO is a valid state and is never filled by inference",
+    "No rename, move, overwrite, deduplication or semantic promotion without BEFORE -> ACTION -> AFTER -> RECEIPT"
+  ],
+  "priority_lanes": [
+    {
+      "id": "P0-A-RAW018-HARD-CUSTODY",
+      "priority": "P0",
+      "risk_class": ["IDENTITY", "PROVENANCE", "INTEGRITY"],
+      "state": "PARTIAL_EVIDENCED_PHYSICAL_INVENTORY_PROVIDER_UNBOUND",
+      "known": {
+        "logical_name": "conversations-018.json",
+        "historical_size_bytes": 12115336,
+        "historical_path_evidenced": true
+      },
+      "unknown": [
+        "current_provider_id",
+        "current_raw_bytes",
+        "current_sha256",
+        "current_json_parse",
+        "current_pid_set"
+      ],
+      "safe_action": "Locate the original container or immutable historical byte stream; stream exact bytes without mutation.",
+      "gate": "size=12115336 AND SHA256 computed over exact bytes AND fail-closed JSON parse AND PID-set comparison receipt",
+      "blocked_actions": [
+        "substitute MESSAGES-00018 for raw 018",
+        "reconstruct by chronology, adjacency or candidate cardinality",
+        "rename/move any source JSON"
+      ],
+      "falsifier": "Any candidate whose exact bytes, SHA256, parse or PID-set fails the declared gate.",
+      "rollback": "Read-only recovery; no source mutation."
+    },
+    {
+      "id": "P0-B-RAW048-050-CURRENT-METADATA-RECONCILIATION",
+      "priority": "P0",
+      "risk_class": ["STALE_STATE", "PROVENANCE", "INTEGRITY"],
+      "state": "DOCUMENTED_CURRENT_METADATA_REQUIRES_SUCCESSOR_RECEIPT",
+      "known": {
+        "logical_names": ["conversations-048.json", "conversations-049.json", "conversations-050.json"],
+        "current_stream_metadata_observed": true,
+        "sizes_bytes": [36771626, 47806754, 17115060]
+      },
+      "unknown": ["current_sha256", "current_json_parse", "current_pid_sets", "receipt_binding"],
+      "safe_action": "Generate a private successor receipt binding current provider metadata, byte stream, SHA256, parse and PID set.",
+      "gate": "provider identity + exact bytes + SHA256 + JSON parse + PID count are all bound in one receipt",
+      "blocked_actions": [
+        "treat older provider-gap text as current truth without revalidation",
+        "promote metadata-only observation to full custody"
+      ],
+      "falsifier": "Fetch, bytes, hash, parse or PID evidence conflicts with the current metadata.",
+      "rollback": "Supersede stale classification append-only; do not erase it."
+    },
+    {
+      "id": "P1-C-RAW-DERIVED-LINEAGE-019-027",
+      "priority": "P1",
+      "risk_class": ["LINEAGE", "FALSE_JOIN"],
+      "state": "RAW_CUSTODY_VERIFIED_DERIVATION_JOIN_OPEN",
+      "known": {
+        "raw_019_027": "provider/bytes/SHA256/JSON parse documented",
+        "raw_files": 9,
+        "raw_conversation_objects": 900
+      },
+      "unknown": ["raw_to_MESSAGES_NODES transformation mapping", "producer batching/range rule"],
+      "safe_action": "Read producer manifest/code and bind each derived record through source_path or a deterministic transform receipt.",
+      "gate": "source pointer/generator evidence + deterministic range rule + negative control",
+      "blocked_actions": ["infer linkage from matching ordinal alone"],
+      "falsifier": "A derived record conflicts with the claimed raw source or generator range."
+    },
+    {
+      "id": "P1-D-MANIFEST-HASH-PARSE-COVERAGE",
+      "priority": "P1",
+      "risk_class": ["INTEGRITY", "RECOVERY"],
+      "state": "BOUNDED_COVERAGE_NOT_TERMINAL",
+      "safe_action": "Process only manifest-addressable JSON objects in small batches: metadata -> stream -> hash -> parse -> receipt -> index.",
+      "gate": "Each batch has denominator, successes, failures, unavailable providers and a stable receipt.",
+      "blocked_actions": ["whole-corpus semantic processing before custody coverage", "aggressive deduplication"],
+      "falsifier": "A batch receipt omits a manifest member in its declared scope."
+    },
+    {
+      "id": "P2-E-SEMANTIC-NAVIGATION",
+      "priority": "P2",
+      "risk_class": ["SEMANTIC_OVERREACH", "PRIVACY"],
+      "state": "OPTIONAL_AFTER_CUSTODY",
+      "safe_action": "Create topic, relation and retrieval projections only as derived append-only objects with source_ref.",
+      "gate": "Every semantic edge declares evidence type, scope, confidence class and source reference.",
+      "blocked_actions": ["semantic merge of different occurrences", "rapport as proof or independent corroboration"],
+      "falsifier": "A relation cannot return to a raw source or an explicit hypothesis label."
+    },
+    {
+      "id": "P2-F-LARGE-OBJECT-TOOL-BOUNDARY",
+      "priority": "P2",
+      "risk_class": ["TOOL_LIMIT", "INTEGRITY"],
+      "state": "TOKEN_VAZIO_TOOL_LIMIT",
+      "known": {"object": "chat.html", "sha256": "not established through the current connector path"},
+      "safe_action": "Use a byte-preserving stream or local verified command; log the tool boundary separately from source absence.",
+      "gate": "full byte count + SHA256 + receipt from an approved capable environment",
+      "blocked_actions": ["claim object absence or integrity merely because one connector cannot hash it"]
+    }
+  ],
+  "edges": [
+    {"from": "P0-A-RAW018-HARD-CUSTODY", "to": "P1-D-MANIFEST-HASH-PARSE-COVERAGE", "type": "BLOCKS"},
+    {"from": "P0-B-RAW048-050-CURRENT-METADATA-RECONCILIATION", "to": "P1-D-MANIFEST-HASH-PARSE-COVERAGE", "type": "UNBLOCKS_AFTER_RECEIPT"},
+    {"from": "P1-C-RAW-DERIVED-LINEAGE-019-027", "to": "P2-E-SEMANTIC-NAVIGATION", "type": "REQUIRED_FOR_STRONGER_PROVENANCE"},
+    {"from": "P1-D-MANIFEST-HASH-PARSE-COVERAGE", "to": "P2-E-SEMANTIC-NAVIGATION", "type": "PRECEDES"}
+  ],
+  "execution_policy": {
+    "batch_order": ["P0-A", "P0-B", "P1-C", "P1-D", "P2-E", "P2-F"],
+    "default_action": "READ_ONLY",
+    "write_boundary": "Only append-only receipt/index on non-default branch or private custody ledger after its gate.",
+    "failure_policy": "Preserve failure, classify it, stop the affected lane and continue only independent lanes.",
+    "dedup_policy": "Use provider identity for occurrence; use hash only for byte-identity; retain both provenance paths."
+  },
+  "R3": {
+    "F_ok": [
+      "Risk navigator materialized without changing raw corpus.",
+      "RAW018 remains correctly isolated as hard custody.",
+      "RAW048-050 current metadata is separated from the older unresolved classification."
+    ],
+    "F_gap": [
+      "No current raw bytes/SHA/parse for RAW018.",
+      "No successor full-custody receipt for RAW048-050.",
+      "Raw-to-derived lineage and global terminal inventory remain open."
+    ],
+    "F_next": "Execute one private, read-only P0-B receipt for RAW048-050; then return to P0-A original-container recovery for RAW018."
+  }
+}
