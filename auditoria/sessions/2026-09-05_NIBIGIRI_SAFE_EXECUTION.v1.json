@@ -1,0 +1,26 @@
+{
+  "schema":"rafaelia.nibigiri.safe_execution.v1",
+  "timestamp":"2026-09-05T16:57:00-03:00",
+  "mode":"APPEND_ONLY_REVERSIBLE_FAIL_CLOSED",
+  "authorization_scope":"Implement low-risk findings raised across the session with audit trail and rollback; do not silently promote claims.",
+  "epistemic_invariant":"VISAO != ARTEFATO != EXECUCAO != EVIDENCIA != CLAIM",
+  "baseline":{"repo":"rafaelmeloreisnovo/Mapa","branch":"main","sha":"1ddf6d5847320264414a3e5eb4600b5ba19bf5ca"},
+  "work_branch":"rafaelia/session-nibigiri-safe-20260905",
+  "rollback":{"type":"branch_delete_or_ref_reset","baseline_sha":"1ddf6d5847320264414a3e5eb4600b5ba19bf5ca","main_mutated":false},
+  "syslog_policy":{"append_only":true,"record_before_after_sha":true,"record_operation_result":true,"record_token_vazio":true},
+  "safe_actions":[
+    "materialize session-wide NIBIGIRI inventory",
+    "index verified gaps and next falsifiable steps",
+    "preserve provider-enforcement gap as open",
+    "preserve unsigned HEAD observation without treating it as invalidity",
+    "create rollback and custody manifest",
+    "avoid destructive edits and avoid direct main writes"
+  ],
+  "blocked_or_deferred":[
+    {"item":"provider branch/ruleset enforcement mutation","state":"TOKEN_VAZIO","reason":"administrative/provider mutation requires separate exact write surface and negative-test custody"},
+    {"item":"zero-approval destructive merge test","state":"TOKEN_VAZIO","reason":"blocked until enforcement is authoritatively active"},
+    {"item":"scientific/physical universal claims","state":"BLOCKED","reason":"artifact or analogy is not empirical/formal proof"},
+    {"item":"physical Android/VM runtime claims","state":"TOKEN_VAZIO","reason":"requires device-bound execution receipt"}
+  ],
+  "claim_allowed":false
+}
