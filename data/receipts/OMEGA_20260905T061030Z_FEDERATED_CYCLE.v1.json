@@ -1,0 +1,145 @@
+{
+  "schema": "rafaelia_federated_cycle_receipt_v1",
+  "cycle_id": "OMEGA-20260905T061030Z",
+  "append_only": true,
+  "idempotency_key": "OMEGA-20260905T061030Z",
+  "claim_allowed": false,
+  "predecessor": {
+    "cycle_id": "OMEGA-20260905T051343Z",
+    "path": "data/receipts/OMEGA_20260905T051343Z_FEDERATED_CYCLE.v1.json",
+    "branch": "audit/omega-20260905t041039z"
+  },
+  "cursor": {
+    "before": "GITHUB_JOB_101232724138:FAILED_STEP_SETUP_PAGES + DRIVE_AUTHORITY_METADATA_REVALIDATED",
+    "after": "GITHUB_HEAD_1ddf6d5847320264414a3e5eb4600b5ba19bf5ca:CI_MARKDOWN_GATE_LOCALIZED + DRIVE_ATLAS_DELTA76_IDENTITY_OBSERVED + DRIVE_AUTHORITY_REFRESHED"
+  },
+  "sources": [
+    {
+      "type": "GITHUB_HEAD",
+      "pointer": "github:rafaelmeloreisnovo/Mapa/commit/1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "tree_sha": "9e0de44f26bff161379864fac9299d6a820b87d3",
+      "changed_path": "auditoria/research_routes/2026-09-04_seven_direction_xyz_route.md",
+      "change": "added 129 lines"
+    },
+    {
+      "type": "GITHUB_ACTION_JOB",
+      "pointer": "github:rafaelmeloreisnovo/Mapa/actions/runs/33939064535/jobs#101232713790",
+      "workflow": "CI",
+      "job": "Validate Repository Structure",
+      "head_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "conclusion": "failure",
+      "failed_step": "Lint changed Markdown — blocking regression gate",
+      "downstream_structure_checks": "skipped_after_failure"
+    },
+    {
+      "type": "GOOGLE_DRIVE_DOCUMENT",
+      "pointer": "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "mime_type": "application/vnd.google-apps.document",
+      "provider_updated_at": "2026-09-05T06:02:03.016Z",
+      "native_byte_digest": null
+    },
+    {
+      "type": "GOOGLE_DRIVE_ATLAS",
+      "pointer": "drive:1t9w_dw9hnGYXAQtK3SqQBBlotm0Ionmj2L0JYV5nL10",
+      "title": "RAFAELIA — Atlas Δ76 — Six Sigma Exact Payload + Helper Surface — 2026-09-05",
+      "relation": "transversal_projection_candidate_not_merged_by_title"
+    },
+    {
+      "type": "GOOGLE_DRIVE_NAVIGATION_INDEX",
+      "pointer": "drive:1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "title": "RAFAELIA — Master Navigation Registry V1",
+      "provider_updated_at": "2026-09-05T06:02:19.799Z"
+    }
+  ],
+  "evidence_classification": {
+    "github_head": "OBSERVED",
+    "ci_job": "EXECUTED_BY_PROVIDER_AND_OBSERVED",
+    "markdown_regression_gate": "FAILED_LOCALIZED_STEP",
+    "exact_markdownlint_rule_and_line": "TOKEN_VAZIO",
+    "drive_authority_identity": "OBSERVED",
+    "atlas_delta76_identity": "OBSERVED",
+    "drive_native_byte_digest": "TOKEN_VAZIO"
+  },
+  "gap_updates": [
+    {
+      "gap_id": "GAP-MAPA-CI-CHANGED-MARKDOWN-LINT-20260905",
+      "status": "NEW_LOCALIZED_OPEN",
+      "source_pointer": "github:rafaelmeloreisnovo/Mapa/actions/runs/33939064535/jobs#101232713790",
+      "missing_field": "exact markdownlint rule/file-line diagnostic",
+      "blocking_dependency": "provider job annotation/log detail",
+      "evidence_needed": "exact diagnostic or reproducible local lint result against the exact changed file and pinned configuration",
+      "falsifier": "exact-head rerun passes the blocking changed-Markdown gate without content/config change",
+      "next_probe": "retrieve/reproduce markdownlint diagnostics for auditoria/research_routes/2026-09-04_seven_direction_xyz_route.md against .markdownlint-cli2.jsonc",
+      "owner_authority": "rafaelmeloreisnovo/Mapa CI",
+      "urgency": "P0",
+      "closure_gate": "diagnostic identified, minimal correction prepared on non-default branch, exact gate rerun passes",
+      "claim_allowed": false,
+      "predecessor_lineage": "GAP-MAPA-CURRENT-MAIN-CHECKS-NOT-ALL-PASS-20260905"
+    },
+    {
+      "gap_id": "TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST",
+      "status": "SEARCHED_NOT_CLOSED",
+      "source_pointer": "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "missing_field": "provider-native canonical byte digest tied to revision/export identity",
+      "blocking_dependency": "authoritative revision/export byte representation",
+      "evidence_needed": "digest plus revision/source pointer and explicit digest scope",
+      "falsifier": "pre-existing receipt/index evidence ties such digest to the same authoritative revision",
+      "next_probe": "enumerate revision/export evidence surfaces rather than infer digest from title, size or hydrated text",
+      "owner_authority": "Google Drive source authority",
+      "urgency": "P1",
+      "closure_gate": "canonical representation, revision identity and digest are evidenced together",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-20260905T051343Z:TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST"
+    }
+  ],
+  "convergence_updates": [
+    "Atlas Delta76 is preserved as a distinct Drive object by provider_id and related transversally; no title-based merge was performed.",
+    "Canonical Drive authority and Master Navigation Registry both show newer provider timestamps than the predecessor observation and are retained as separate authority/index objects.",
+    "The generic CI failure is narrowed to the blocking changed-Markdown regression gate; downstream structure gates were not executed in that job and therefore are not treated as failed evidence."
+  ],
+  "memory_projection": {
+    "L": "OMEGA-20260905T051343Z -> exact-head CI gate localization -> OMEGA-20260905T061030Z",
+    "O": "GitHub commit delta + GitHub Actions job steps + Drive provider identities/timestamps",
+    "T": "Mapa exact-head CI <-> canonical Drive authority <-> Atlas Delta76 <-> Master Navigation Registry",
+    "C": "valid for observed GitHub head 1ddf6d5847320264414a3e5eb4600b5ba19bf5ca and listed provider timestamps",
+    "P": "append-only successor receipt with provider IDs, SHA/tree/path and predecessor pointer"
+  },
+  "uncertainty_delta": {
+    "before": "CI_FAILURE_PRESENT_BUT_NOT_DECOMPOSED",
+    "after": "BLOCKING_CHANGED_MARKDOWN_LINT_STEP_IDENTIFIED; EXACT_RULE_LINE_TOKEN_VAZIO"
+  },
+  "coverage_delta": {
+    "before": "Pages failure localized; generic CI failure remained coarse; Atlas Delta76 not included in this receipt lineage.",
+    "after": "CI failure decomposed to blocking Markdown gate; exact changed artifact linked; Atlas Delta76 and refreshed Drive navigation authority added by provider identity.",
+    "global_percentage": null
+  },
+  "top_urgencies": [
+    "P0: recover/reproduce exact markdownlint diagnostic and prepare minimal reversible correction",
+    "P0: preserve distinction between skipped downstream CI gates and failed gates; rerun after minimal fix",
+    "P0: server-side merge enforcement remains an open predecessor gap until independently revalidated/remediated",
+    "P1: resolve Drive canonical revision/digest provenance without substituting normalized text"
+  ],
+  "f_ok": [
+    "predecessor receipt re-read and lineage resumed",
+    "current GitHub HEAD reobserved unchanged",
+    "CI failure localized to blocking changed-Markdown lint step",
+    "exact changed Markdown artifact linked to HEAD/tree lineage",
+    "Atlas Delta76 indexed as distinct provider object in this cycle receipt",
+    "canonical Drive authority and Master Navigation Registry freshness reobserved",
+    "successor receipt persisted on non-default audit branch"
+  ],
+  "f_gap": [
+    "exact markdownlint rule and line remain TOKEN_VAZIO",
+    "downstream CI gates remain NOT_EXECUTED in the failed CI job",
+    "Drive canonical-byte digest/revision coupling remains TOKEN_VAZIO",
+    "global universe cardinality/coverage percentage remains unclaimed"
+  ],
+  "f_next": [
+    "fetch or reproduce exact markdownlint diagnostic against the one changed Markdown file and pinned repository lint configuration",
+    "prepare only the minimal lint correction on an audit branch and rerun the exact blocking gate before any claim promotion",
+    "enumerate Drive revision/export provenance surfaces for the canonical authority document and link any found digest by revision identity",
+    "reobserve main HEAD and server-side governance before successor promotion"
+  ]
+}
