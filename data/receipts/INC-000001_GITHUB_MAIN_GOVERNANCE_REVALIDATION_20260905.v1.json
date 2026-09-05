@@ -1,0 +1,151 @@
+{
+  "schema": "rafaelia_github_main_governance_revalidation_v1",
+  "receipt_id": "RCPT-INC-000001-GITHUB-MAIN-20260905T041039Z",
+  "cycle_id": "OMEGA-20260905T041039Z",
+  "observed_at": "2026-09-05T04:10:39Z",
+  "append_only": true,
+  "claim_allowed": false,
+  "predecessor": {
+    "path": "data/receipts/INC-000001_GITHUB_DRIVE_PROVENANCE_CONSOLIDATION_20260902.v1.json",
+    "blob_sha": "6345d5796150dcd761ef00055e368dee38f3ac4c",
+    "receipt_id": "RCPT-INC-000001-GITHUB-DRIVE-20260902"
+  },
+  "source": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "main",
+    "head_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+    "tree_sha": "9e0de44f26bff161379864fac9299d6a820b87d3",
+    "parent_sha": "7e9880f8051ac92051b5b4607a11d3c4b7b7c48f",
+    "head_commit_date": "2026-09-05T02:26:12Z",
+    "head_commit_message": "audit: register seven-direction XYZ federated research route",
+    "commit_signature_verified": false,
+    "commit_signature_reason": "unsigned",
+    "branch_protected": false,
+    "required_status_checks_enforcement": "off"
+  },
+  "evidence": {
+    "actions_runs_for_exact_head": {
+      "head_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "total_count": 8,
+      "observed_examples": [
+        {
+          "run_id": 33939064544,
+          "name": "Deploy static content to Pages",
+          "status": "completed",
+          "conclusion": "cancelled"
+        }
+      ]
+    },
+    "check_runs_for_exact_head": {
+      "total_count": 11,
+      "observed_examples": [
+        {
+          "check_run_id": 101232724138,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "failure",
+          "annotations_count": 2
+        },
+        {
+          "check_run_id": 101232714212,
+          "name": "Human dignity no-regression gate",
+          "status": "completed",
+          "conclusion": "success",
+          "annotations_count": 0
+        },
+        {
+          "check_run_id": 101232713924,
+          "name": "Analyze (c-cpp)",
+          "status": "completed",
+          "conclusion": "success",
+          "annotations_count": 0
+        }
+      ]
+    }
+  },
+  "transform": "Read exact-current-main branch metadata, exact-head Actions runs and exact-head check runs; preserve observed states without treating partial CI success as global governance proof.",
+  "decision": {
+    "state": "CONTRADICTED_LIMITED",
+    "allowed_claim": "Exact-current Mapa main at 1ddf6d5847320264414a3e5eb4600b5ba19bf5ca was observed; main is unprotected with required-status-check enforcement off; exact-head checks include both successes and at least one build failure.",
+    "blocked_claims": [
+      "all current-main governance gates pass",
+      "server-side merge enforcement is proven",
+      "all exact-head workflows pass",
+      "runtime or physical-device execution is proven",
+      "scientific validity is proven"
+    ],
+    "gap_updates": [
+      {
+        "gap_id": "SERVER_MERGE_ENFORCEMENT_ASSURANCE_FAILED_ON_PR_HEAD",
+        "status": "SUPERSEDED_BY_CURRENT_OBSERVATION",
+        "new_gap_id": "GAP-MAPA-MAIN-BRANCH-PROTECTION-OFF-20260905",
+        "source_pointer": "github:rafaelmeloreisnovo/Mapa/branches/main@1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+        "missing_field": "enforced server-side branch protection / required status checks",
+        "blocking_dependency": "repository governance configuration and independent readback",
+        "evidence_needed": "branch/ruleset readback showing enforcement enabled and required gates configured",
+        "falsifier": "Current branch or applicable ruleset already enforces equivalent controls despite branch endpoint reporting protection disabled",
+        "next_probe": "Read repository rulesets and exact-current-main required checks before any governance claim promotion",
+        "owner_authority": "rafaelmeloreisnovo/Mapa repository governance",
+        "urgency": "P0",
+        "closure_gate": "server-side enforcement observed enabled with required checks and no contradictory applicable ruleset evidence",
+        "claim_allowed": false
+      },
+      {
+        "gap_id": "TOKEN_VAZIO_MERGE_COMMIT_WORKFLOW_EVIDENCE",
+        "status": "PARTIALLY_SUPERSEDED_NOT_CLOSED",
+        "new_gap_id": "GAP-MAPA-CURRENT-MAIN-CHECKS-NOT-ALL-PASS-20260905",
+        "source_pointer": "github:rafaelmeloreisnovo/Mapa/commits/1ddf6d5847320264414a3e5eb4600b5ba19bf5ca/check-runs",
+        "missing_field": "all required exact-head gates passing",
+        "blocking_dependency": "failed build check and complete required-gate classification",
+        "evidence_needed": "successful rerun/fix plus complete mapping of required governance checks to exact head",
+        "falsifier": "The failed build is non-required and all actual governance gates independently pass; this would narrow but not erase the branch-protection gap",
+        "next_probe": "Inspect build annotations and enumerate workflow/check names and conclusions for exact head",
+        "owner_authority": "rafaelmeloreisnovo/Mapa CI/governance",
+        "urgency": "P0",
+        "closure_gate": "required exact-head gates identified and passing; failures resolved or explicitly classified non-gating with evidence",
+        "claim_allowed": false
+      },
+      {
+        "gap_id": "TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST",
+        "status": "UNCHANGED",
+        "source_pointer": "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+        "missing_field": "provider-native canonical byte digest",
+        "blocking_dependency": "provider-native byte export/read with canonical byte identity",
+        "evidence_needed": "provider-native bytes or authoritative export plus digest scope",
+        "falsifier": "An existing receipt already provides a provider-native canonical-byte digest with matching revision identity",
+        "next_probe": "Search Drive receipts/indexes for provider-native digest before generating a new normalized-text digest",
+        "owner_authority": "Google Drive source authority",
+        "urgency": "P1",
+        "closure_gate": "native/export byte identity and digest recorded with revision/source pointer",
+        "claim_allowed": false
+      }
+    ]
+  },
+  "relations": [
+    {
+      "type": "SUCCESSOR_OF",
+      "target": "RCPT-INC-000001-GITHUB-DRIVE-20260902"
+    },
+    {
+      "type": "OBSERVES",
+      "target": "github:rafaelmeloreisnovo/Mapa@1ddf6d5847320264414a3e5eb4600b5ba19bf5ca"
+    },
+    {
+      "type": "REFERENCES_AUTHORITY",
+      "target": "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+    }
+  ],
+  "memory_projection": {
+    "L": "predecessor receipt -> exact-current-main governance observation",
+    "O": "branch metadata + Actions runs + check-runs are independent projections of current GitHub state",
+    "T": "Drive method authority linked to GitHub governance evidence",
+    "C": "valid only for exact head 1ddf6d5847320264414a3e5eb4600b5ba19bf5ca and observed provider responses",
+    "P": "append-only receipt identity and predecessor lineage"
+  },
+  "f_next": [
+    "Inspect build check annotations for check_run_id 101232724138",
+    "Read applicable repository rulesets to test whether branch-protection=false is offset by ruleset enforcement",
+    "Enumerate exact-head workflow/check names and conclusions and classify required vs informational",
+    "Search Drive receipts for provider-native digest evidence before creating any replacement digest"
+  ]
+}
