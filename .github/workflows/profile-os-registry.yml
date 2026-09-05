@@ -1,0 +1,29 @@
+name: PROFILE OS Registry Gate
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/PROFILE_OS_**'
+      - 'schemas/profile_os_registry.v1.schema.json'
+      - 'scripts/validate_profile_os_registry.py'
+      - 'tests/test_profile_os_registry.py'
+      - 'docs/canonical/2026-09-05/PROFILE_OS_**'
+      - 'indices/RAFAELIA_PROFILE_OS_DRIVE_BRIDGE.v1.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate registry invariants
+        run: |
+          python scripts/validate_profile_os_registry.py --registry data/control-plane/PROFILE_OS_REGISTRY.v1.json --supersession data/control-plane/PROFILE_OS_SUPERSESSION.v1.jsonl --gaps data/control-plane/PROFILE_OS_GAPS.v1.jsonl
+      - name: Run negative and regression tests
+        run: python -m unittest tests/test_profile_os_registry.py

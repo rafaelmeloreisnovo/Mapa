@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/profile_os_registry.v1.schema.json",
+  "title": "RAFAELIA PROFILE OS Registry V1",
+  "type": "object",
+  "required": ["schema","mode","delete_policy","claim_allowed","identity_contract","drive_root","folders","objects","provider_anchors","invariants","promotion_pipeline"],
+  "properties": {
+    "schema": {"const":"RAFAELIA_PROFILE_OS_REGISTRY_V1"},
+    "mode": {"const":"APPEND_ONLY"},
+    "delete_policy": {"const":"NO_DELETE"},
+    "claim_allowed": {"const":false},
+    "identity_contract": {"type":"object","required":["identity_key","dedup_key","same_title_is_identity"],"properties":{"identity_key":{"type":"string","minLength":1},"dedup_key":{"type":"string","minLength":1},"same_title_is_identity":{"const":false}},"additionalProperties":true},
+    "drive_root": {"type":"object","required":["provider","provider_id","title"]},
+    "folders": {"type":"array","minItems":8},
+    "objects": {"type":"array"},
+    "provider_anchors": {"type":"object"},
+    "invariants": {"type":"array","minItems":5},
+    "promotion_pipeline": {"type":"array","minItems":7}
+  },
+  "additionalProperties": true
+}

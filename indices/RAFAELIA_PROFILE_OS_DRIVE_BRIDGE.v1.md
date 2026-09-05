@@ -25,7 +25,6 @@ Preserve:
 
 - Root folder: `00_RAFAELIA_PROFILE_OS — Estratégia→Tática→Ciclos`
 - Drive folder ID: `1hBGmocMIvWbMdSga3j4rlMGWp3N54y_8`
-- Locator: https://drive.google.com/drive/folders/1hBGmocMIvWbMdSga3j4rlMGWp3N54y_8
 
 ### Subfolders
 
@@ -41,53 +40,36 @@ Preserve:
 ## Native Drive objects
 
 - Architecture Doc ID: `1qgAo7SwfhGPyssYNThfrwXgoJOq8wp5byRAn8aQS2m8`
+- Strategy Doc ID: `16GDThsOeQdQrNtpuovsa84CNYqmU4ZZEb-H7oKzsO8c`
+- Tactics Doc ID: `1rZIvII75dduQ51iYnVDwjAkY9wTUTfv5lfyvfitxIYs`
 - Cycle Template Doc ID: `1JLFl4op0rT6mj1rim0YGsU6kcct91t2ih-TKoO7u0vs`
 - Inventory Sheet ID: `1soYdtdfdLlbzX1esHaFh5rr1Ew-DzvzDfiNNJ5A8IbU`
-
-The inventory projects objects into L/O/T/C/P without duplicating content:
-
-- **L** — longitudinal lineage/revisions.
-- **O** — independent validations.
-- **T** — cross-domain/provider relations.
-- **C** — validity context and scope.
-- **P** — stable identity/append-only ledger.
 
 ## Provider roles
 
 | Provider | Role | Canonical anchor | Write policy |
 |---|---|---|---|
 | Google Drive | operational memory, navigation, receipts | root folder ID above | ID-first, append-only where applicable |
-| Gmail | signal inbox / triage | label `RAFAELIA/Profile-OS/Inbox` (`Label_7`) | label-first; no indiscriminate bulk mutation |
-| Google Calendar | review cadence | event `j3156kcp55s348js1ud3s8mae0` | points to Drive; does not replicate memory |
+| Gmail | signal inbox / triage | `Label_7` | label-first; no indiscriminate bulk mutation |
+| Google Calendar | review cadence | `j3156kcp55s348js1ud3s8mae0` | points to Drive; does not replicate memory |
 | GitHub | execution/versioning bridge | this file on audit branch | branch-first; no direct default/protected write |
 
-## Calendar cadence
+## Operational consolidation R4 — provider-bound
 
-Weekly review: Mondays, 18:30–19:00, `America/Sao_Paulo`, starting 2026-09-07.
+- Strategy/Tactics are materialized as native Google Docs in folders 01/02.
+- Machine registry: `data/control-plane/PROFILE_OS_REGISTRY.v1.json`.
+- Supersession ledger: `data/control-plane/PROFILE_OS_SUPERSESSION.v1.jsonl`.
+- Gap ledger: `data/control-plane/PROFILE_OS_GAPS.v1.jsonl`.
+- Schema: `schemas/profile_os_registry.v1.schema.json`.
+- Validator: `scripts/validate_profile_os_registry.py`.
+- Regression tests: `tests/test_profile_os_registry.py`.
+- CI gate: `.github/workflows/profile-os-registry.yml`.
+- Receipt: `receipts/PROFILE_OS_CONSOLIDATION_R4_20260905.md`.
 
-Review gates:
-
-1. new gaps and receipts;
-2. candidate custom-instruction deltas;
-3. tests, falsifiers and side effects;
-4. promotion / deprecation / rollback decisions;
-5. refresh L/O/T/C/P inventory.
-
-The account does not expose Google Calendar Focus Time for this organizer; the cadence is therefore represented as a standard private recurring event. This is a provider-capability distinction, not an execution failure.
-
-## Custom instruction surgery
-
-The profile is treated as a compact kernel, not a warehouse.
-
-Promotion pipeline:
-
-`OBSERVE → CLASSIFY → EVIDENCE → PROPOSE_DELTA → TEST → PROMOTE → REVIEW/DEPRECATE`
-
-Promote only durable, transversal, low-conflict rules with evidence and rollback. Keep project state, commit/PR status, large locators/hashes, and provisional tactics in Drive/GitHub instead of inflating profile instructions.
+Dedup relation: baseline Sheet `1sHO6_VCwIx0UozZU0h5ziBU0B7-hmLUQBNlsx3TIt2U` `SUPERSEDED_BY` expanded Sheet `1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk`; both preserved, no delete.
 
 ## Governance
 
 - No merge or release is authorized by this bridge.
 - No automatic promotion of custom-instruction claims.
-- Non-trivial changes remain proposed/tested until human review or an explicit closure gate.
-- `claim_allowed=false` remains the fail-closed default for this bridge.
+- `claim_allowed=false` remains the fail-closed default.

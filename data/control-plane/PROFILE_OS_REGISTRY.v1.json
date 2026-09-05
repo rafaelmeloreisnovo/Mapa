@@ -1,0 +1,57 @@
+{
+  "schema": "RAFAELIA_PROFILE_OS_REGISTRY_V1",
+  "generated_at": "2026-09-05T17:12:00-03:00",
+  "mode": "APPEND_ONLY",
+  "delete_policy": "NO_DELETE",
+  "claim_allowed": false,
+  "identity_contract": {
+    "identity_key": "provider + provider_id + repository + commit + path",
+    "dedup_key": "provider_id when available; otherwise content_hash + canonical_path",
+    "same_title_is_identity": false
+  },
+  "drive_root": {
+    "provider": "google_drive",
+    "provider_id": "1hBGmocMIvWbMdSga3j4rlMGWp3N54y_8",
+    "title": "00_RAFAELIA_PROFILE_OS — Estratégia→Tática→Ciclos"
+  },
+  "folders": [
+    {"ordinal":"00","provider_id":"1xKP24ExovK2Oaha6ATcHGSkBE9Ac71h5","title":"00_INDEX_E_MAPA","state":"MATERIALIZED"},
+    {"ordinal":"01","provider_id":"1DEHFV-74AOhBSoja8G5Cb1Uy25CmEPIn","title":"01_ESTRATEGIA_DO_PERFIL","state":"MATERIALIZED"},
+    {"ordinal":"02","provider_id":"1cj8RlUrdd9KBwUj3dv6FFLQhX5yBx-1q","title":"02_TATICAS_OPERACIONAIS","state":"MATERIALIZED"},
+    {"ordinal":"03","provider_id":"1MGWVstxZW35cez3JjiTQhjDZGzmebm9Q","title":"03_CICLOS_E_RECEIPTS","state":"MATERIALIZED"},
+    {"ordinal":"04","provider_id":"1aKaJ48Yaq-Gi2w_TyqiM-DGWLnTM4KHm","title":"04_BIBLIOTECA_E_BIBLIOTECARIA","state":"MATERIALIZED"},
+    {"ordinal":"05","provider_id":"1JqIyQ6zIWbEa8Ngwm80McJyuy_hd8V5l","title":"05_INVENTARIO_E_MEMORIA_LOTCP","state":"MATERIALIZED"},
+    {"ordinal":"06","provider_id":"1XGxEy1VjL1f8EgWwJ0kT5CX_jVYMQX16","title":"06_INTEGRACOES_GMAIL_CALENDAR_GITHUB","state":"MATERIALIZED"},
+    {"ordinal":"07","provider_id":"1QRZ3DFPmDi3V4rbnc0uam5u1OziR-U3u","title":"07_CIRURGIA_INSTRUCOES_PERSONALIZADAS","state":"MATERIALIZED"}
+  ],
+  "objects": [
+    {"provider":"google_drive","provider_id":"1FQMPS8mNVwf1QEwj2aUMPm1QBs8ia-M4oy2b4bPnomc","title":"RAFAELIA — Modular Addressing 2×3×7×13 — Canonical Contract V1","object_type":"GoogleDoc","route":"00_INDEX_E_MAPA","claim_allowed":false},
+    {"provider":"google_drive","provider_id":"1qgAo7SwfhGPyssYNThfrwXgoJOq8wp5byRAn8aQS2m8","title":"RAFAELIA PROFILE OS — Arquitetura e Protocolo de Evolução V1","object_type":"GoogleDoc","route":"00_INDEX_E_MAPA","claim_allowed":false},
+    {"provider":"google_drive","provider_id":"1JLFl4op0rT6mj1rim0YGsU6kcct91t2ih-TKoO7u0vs","title":"TEMPLATE — Ciclo de Evolução Profile OS V1","object_type":"GoogleDoc","route":"03_CICLOS_E_RECEIPTS","claim_allowed":false},
+    {"provider":"google_drive","provider_id":"1UtiHIRF-7lt7LiHsfjcoDg_umJEC_cP_K8s4b_KSktw","title":"RAFAELIA PROFILE OS — Bibliotecária Operacional V1","object_type":"GoogleDoc","route":"04_BIBLIOTECA_E_BIBLIOTECARIA","claim_allowed":false},
+    {"provider":"google_drive","provider_id":"1soYdtdfdLlbzX1esHaFh5rr1Ew-DzvzDfiNNJ5A8IbU","title":"RAFAELIA PROFILE OS — Inventário e Ciclos V1","object_type":"GoogleSheet","route":"05_INVENTARIO_E_MEMORIA_LOTCP","claim_allowed":false},
+    {"provider":"google_drive","provider_id":"1_zg3bPUFuYUl2E45XtdNcQDiT1sma9FPFgv6aNz1UCQ","title":"RAFAELIA PROFILE OS — Cirurgia das Instruções — CHG-20260905-001","object_type":"GoogleDoc","route":"07_CIRURGIA_INSTRUCOES_PERSONALIZADAS","claim_allowed":false},
+    {"provider":"google_drive","provider_id":"16GDThsOeQdQrNtpuovsa84CNYqmU4ZZEb-H7oKzsO8c","title":"RAFAELIA PROFILE OS — Estratégia V1","object_type":"GoogleDoc","route":"01_ESTRATEGIA_DO_PERFIL","claim_allowed":false},
+    {"provider":"google_drive","provider_id":"1rZIvII75dduQ51iYnVDwjAkY9wTUTfv5lfyvfitxIYs","title":"RAFAELIA PROFILE OS — Táticas Operacionais V1","object_type":"GoogleDoc","route":"02_TATICAS_OPERACIONAIS","claim_allowed":false}
+  ],
+  "provider_anchors": {
+    "gmail": {"id":"Label_7","name":"RAFAELIA/Profile-OS/Inbox","role":"SIGNAL_TRIAGE"},
+    "calendar": {"id":"j3156kcp55s348js1ud3s8mae0","name":"RAFAELIA — Revisão do Profile OS","role":"CADENCE_POINTER"},
+    "github": {"repository":"rafaelmeloreisnovo/Mapa","branch":"audit/profile-os-20260905","role":"EXECUTION_VERSIONING"}
+  },
+  "invariants": [
+    "TOKEN_VAZIO != 0",
+    "filename/title != identity",
+    "index != authority",
+    "absence_of_evidence != evidence_of_absence",
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM"
+  ],
+  "promotion_pipeline": ["OBSERVE","CLASSIFY","EVIDENCE","PROPOSE_DELTA","TEST","PROMOTE","REVIEW_OR_DEPRECATE"],
+  "drive_materialization": {
+    "strategy_doc_id":"16GDThsOeQdQrNtpuovsa84CNYqmU4ZZEb-H7oKzsO8c",
+    "strategy_parent_id":"1DEHFV-74AOhBSoja8G5Cb1Uy25CmEPIn",
+    "tactics_doc_id":"1rZIvII75dduQ51iYnVDwjAkY9wTUTfv5lfyvfitxIYs",
+    "tactics_parent_id":"1cj8RlUrdd9KBwUj3dv6FFLQhX5yBx-1q",
+    "state":"F_OK_PROVIDER_BOUND"
+  }
+}
