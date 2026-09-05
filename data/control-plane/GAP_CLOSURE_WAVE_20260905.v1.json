@@ -1,0 +1,28 @@
+{
+  "schema": "rafaelia.gap-closure-wave/v1",
+  "wave_id": "GAP-CLOSURE-20260905",
+  "status": "IN_PROGRESS_BOUNDED",
+  "claim_allowed": false,
+  "principles": [
+    "VISÃO != CÓDIGO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != zero",
+    "Do not synthesize physical-runtime or scientific evidence",
+    "Close only gaps whose producer authority is available in source/CI"
+  ],
+  "repositories": {
+    "Mapa": {"role": "federated gap registry and transition authority", "state": "WIRED"},
+    "RafGitTools": {"role": "control-plane routing and policy", "state": "BRANCH_READY"},
+    "Vectras-VM-Android": {"role": "Android/QEMU runtime evidence producer", "state": "BRANCH_READY"},
+    "termux-app-rafacodephi": {"role": "Termux/Android runtime evidence producer", "state": "BRANCH_READY"},
+    "papers": {"role": "claim/falsifier/publication boundary", "state": "BRANCH_READY"},
+    "Rafaelia_Private": {"role": "longitudinal memory/index boundary", "state": "BRANCH_READY"}
+  },
+  "gap_classes": [
+    {"id": "GAP-CONTRACT", "closable_in_repo": true},
+    {"id": "GAP-CODE", "closable_in_repo": true},
+    {"id": "GAP-CI", "closable_in_repo": true, "qualification": "workflow execution receipt may remain TOKEN_VAZIO until run"},
+    {"id": "GAP-PHYSICAL-RUNTIME", "closable_in_repo": false, "state": "TOKEN_VAZIO"},
+    {"id": "GAP-SCIENTIFIC-PROOF", "closable_in_repo": false, "state": "TOKEN_VAZIO"}
+  ],
+  "closure_rule": "A gap may move to CLOSED only when its declared producer emits evidence and the validator accepts it; otherwise preserve TOKEN_VAZIO or a bounded intermediate state."
+}
