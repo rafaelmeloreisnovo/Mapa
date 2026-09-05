@@ -1,0 +1,78 @@
+{
+  "schema": "rafaelia.fiat-lux-database-route-registry.v1",
+  "generated_at": "2026-09-05",
+  "state": "IMPLEMENTED_PARTIAL",
+  "claim_allowed": false,
+  "history_policy": "APPEND_ONLY_PRESERVE_PREDECESSOR",
+  "root_authorities": {
+    "drive_atlas": "drive:1yqrafV9KvQ2C-wz8nDCrYeVEyQo_TdQZ",
+    "drive_data_navigator": "drive:1cwL1d-4KpVHkbYDtZwCyDzExOYYOFxzV",
+    "mapa": "github:rafaelmeloreisnovo/Mapa",
+    "executor": "github:rafaelmeloreisnovo/RafGitTools/tools/rafaelia_navigator/fiat_lux_evidence_db_v1.py"
+  },
+  "logical_databases": [
+    {"name":"databaseroot","role":"roots/providers/authority"},
+    {"name":"databaseStarthere","role":"canonical ATLAS route entry"},
+    {"name":"database_∅","role":"typed TOKEN_VAZIO/gaps"},
+    {"name":"database_evidencias","role":"evidence observations and measurements"},
+    {"name":"database_gates","role":"promotion/falsification gates"},
+    {"name":"database_receipts","role":"append-only evidence receipts"},
+    {"name":"database_invariants","role":"invariants and falsifiers"},
+    {"name":"database_memory_axes","role":"L/O/T projections"},
+    {"name":"database_routes","role":"typed route steps"},
+    {"name":"database_hot_pathway","role":"bounded hot path"},
+    {"name":"database_one_hot_binding","role":"MOD9 one-hot binding"},
+    {"name":"databaseSTEPStoDo&done","role":"event-sourced TODO/DONE ledger"},
+    {"name":"roadmapDatabase","role":"ordered roadmap events"},
+    {"name":"atlas_urgency_queue","role":"imported Mapa urgency snapshots"}
+  ],
+  "canonical_route": ["ATLAS","NOVO","L","O","T","REL","SCALE","EVID","DELTA"],
+  "mod9": {
+    "slots": 9,
+    "banks": [[0,1,2],[3,4,5],[6,7,8]],
+    "forward": "(i+1)%9",
+    "reverse": "(i+8)%9",
+    "bank_next": "(i+3)%9",
+    "runtime_binding_default": "TOKEN_VAZIO_RUNTIME_BINDING"
+  },
+  "urgency_source": "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v3.json",
+  "urgency_ordering_rule": "dependency_then_risk_then_information_gain_then_latest_evidence",
+  "current_p0": [
+    "P0-MAIN-SERVER-ENFORCEMENT",
+    "P0-INDEPENDENT-APPROVAL"
+  ],
+  "current_p1": [
+    "TV-MESSAGES-EXACT-CANONICAL-FULL-SCOPE-BINDING",
+    "TV-ANDROID-PHYSICAL-RUNTIME",
+    "TV-NOVOEXPORT-PER-OBJECT-COVERAGE",
+    "TV-LEGACY-MESSAGE-NODE-PROJECTION-GENERATOR",
+    "TV-ACTIVE20-LICENSE-PROVENANCE",
+    "TV-MATRIX-C-IPA-SOURCE-CONTRACTS"
+  ],
+  "invariants": [
+    "VISÃO != ARTEFATO != EXECUÇÃO != EVIDÊNCIA != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "resolved != deleted_history",
+    "latest_evidence_wins_for_current_routing",
+    "provider_scope_reproduction != exact_canonical_binding",
+    "host_runtime != physical_device_runtime",
+    "hash_integrity != authorship_or_scientific_truth",
+    "analogy != identity",
+    "symbol != evidence",
+    "cooccurrence != causality"
+  ],
+  "closure_gate": [
+    "RafGitTools Python syntax PASS",
+    "SQLite schema/selftest PASS",
+    "append-only mutation rejection PASS",
+    "MOD9 walk PASS",
+    "real urgency import PASS",
+    "receipt links commit and CI",
+    "source corpora remain immutable"
+  ],
+  "r3": {
+    "F_ok": "Database planes, canonical routes and urgency bindings materialized in code/spec.",
+    "F_gap": "CI and physical runtime receipts are not yet proven by this registry.",
+    "F_next": "Run CI, append receipt, import current urgency queue, then close only evidence-backed items."
+  }
+}
