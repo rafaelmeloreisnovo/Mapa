@@ -1,0 +1,27 @@
+{
+  "schema":"rafaelia.seven_direction_xyz_matrix.v1",
+  "mode":"APPEND_ONLY_FAIL_CLOSED",
+  "source_session":"2026-09-05 NIBIGIRI safe execution",
+  "invariant":"VISAO != ARTEFATO != EXECUCAO != EVIDENCIA != CLAIM",
+  "axes":{"X":"formal_or_mathematical_validity","Y":"empirical_or_physical_support","Z":"computational_reproducibility"},
+  "directions":[
+    {"id":"D1_FORMAL","authority":"domain_specific","status":"TOKEN_VAZIO","falsifier":"counterexample_or_failed_proof_obligation"},
+    {"id":"D2_EMPIRICAL","authority":"domain_specific","status":"TOKEN_VAZIO","falsifier":"measurement_incompatible_with_prediction"},
+    {"id":"D3_COMPUTATIONAL","authority":"producer_repo_plus_runtime_receipt","status":"TOKEN_VAZIO","falsifier":"non_reproducible_exact_sha_execution"},
+    {"id":"D4_PROVENANCE","authority":"custody_chain","status":"TOKEN_VAZIO","falsifier":"broken_repo_ref_path_sha_lineage"},
+    {"id":"D5_INTEROP","authority":"cross_repo_live_receipt","status":"TOKEN_VAZIO","falsifier":"producer_consumer_contract_failure"},
+    {"id":"D6_GOVERNANCE","authority":"provider_readback","status":"FAIL_OBSERVED","falsifier":"required_policy_not_server_enforced"},
+    {"id":"D7_CLAIM_BOUNDARY","authority":"evidence_gate","status":"ACTIVE","falsifier":"claim_promoted_without_matching_evidence_class"}
+  ],
+  "rows":[
+    {"subject":"PHYSICAL_BITRAF_CHIP","X":"TOKEN_VAZIO","Y":"TOKEN_VAZIO","Z":"TOKEN_VAZIO","claim_allowed":false},
+    {"subject":"BITRAF_POST_QUANTUM_SECURITY","X":"TOKEN_VAZIO","Y":"N_A","Z":"TOKEN_VAZIO","claim_allowed":false},
+    {"subject":"TAG14_MEASURED_ERROR_CORRECTION","X":"TOKEN_VAZIO","Y":"TOKEN_VAZIO","Z":"TOKEN_VAZIO","claim_allowed":false},
+    {"subject":"COSMOLOGICAL_BITRAF_VALIDATION","X":"TOKEN_VAZIO","Y":"TOKEN_VAZIO","Z":"TOKEN_VAZIO","claim_allowed":false},
+    {"subject":"BIOLOGICAL_BITRAF_VALIDATION","X":"TOKEN_VAZIO","Y":"TOKEN_VAZIO","Z":"TOKEN_VAZIO","claim_allowed":false},
+    {"subject":"GEOMETRIC_TRANSFORMER_TRAINING","X":"TOKEN_VAZIO","Y":"N_A","Z":"TOKEN_VAZIO","claim_allowed":false},
+    {"subject":"CLAY_PROBLEM_PROOF","X":"TOKEN_VAZIO","Y":"N_A","Z":"TOKEN_VAZIO","claim_allowed":false}
+  ],
+  "promotion_rule":"A row can advance only when authority + exact evidence + falsifier result are bound to an immutable receipt.",
+  "claim_allowed":false
+}
