@@ -1,0 +1,30 @@
+name: Gap Closure Wave
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/GAP_CLOSURE_WAVE_20260905.v1.json'
+      - 'schemas/gap-closure-manifest.schema.json'
+      - 'scripts/validate_gap_closure_manifest.py'
+      - '.github/workflows/gap-closure-wave.yml'
+  push:
+    paths:
+      - 'data/control-plane/GAP_CLOSURE_WAVE_20260905.v1.json'
+      - 'schemas/gap-closure-manifest.schema.json'
+      - 'scripts/validate_gap_closure_manifest.py'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-gap-closure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate bounded gap closure manifest
+        run: |
+          python3 scripts/validate_gap_closure_manifest.py \
+            data/control-plane/GAP_CLOSURE_WAVE_20260905.v1.json
