@@ -1,0 +1,161 @@
+{
+  "schema": "rafaelia.federated-cycle-receipt.v1",
+  "cycle_id": "OMEGA-20260905T121435Z",
+  "predecessor": "OMEGA-20260905T1110Z",
+  "observed_interval": {
+    "ended_at_utc": "2026-09-05T12:14:35Z"
+  },
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "repository": {
+    "full_name": "rafaelmeloreisnovo/Mapa",
+    "repo_id": 1267885874,
+    "pr": 518,
+    "base_ref": "main",
+    "base_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+    "head_ref_before_receipt": "audit/omega-20260905t041039z",
+    "head_sha_before_receipt": "9a07d24bf2d7221ef8d6bfc6d86307f9162fe7c3",
+    "pr_state": "OPEN_DRAFT_NOT_MERGED"
+  },
+  "cursor": {
+    "before": "RATCHET_936_ISSUES_96_FILES_DELTA_PLUS46_PLUS1_ATTRIBUTION_UNKNOWN",
+    "after": "PR_DELTA_PROVEN_NON_CAUSAL_FOR_MARKDOWN_DEBT_INCREASE__INHERITED_BASE_DEBT_REQUIRES_BASELINE_TO_MAIN_DIFFERENTIAL"
+  },
+  "sources": [
+    {
+      "type": "github_pr",
+      "pointer": "rafaelmeloreisnovo/Mapa#518",
+      "observed": {
+        "draft": true,
+        "merged": false,
+        "base_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+        "head_sha": "9a07d24bf2d7221ef8d6bfc6d86307f9162fe7c3",
+        "commits": 5,
+        "changed_files": 6
+      }
+    },
+    {
+      "type": "github_compare",
+      "pointer": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca...9a07d24bf2d7221ef8d6bfc6d86307f9162fe7c3",
+      "observed": {
+        "status": "ahead",
+        "ahead_by": 5,
+        "behind_by": 0,
+        "markdown_changed": [
+          "auditoria/research_routes/2026-09-04_seven_direction_xyz_route.md"
+        ],
+        "non_markdown_added": 5,
+        "non_markdown_kind": "data/receipts/*.json"
+      }
+    },
+    {
+      "type": "github_ci",
+      "pointer": "workflow_run:33954597708",
+      "observed": {
+        "historical_markdown_debt": {
+          "files_linted": 583,
+          "issues": 936,
+          "files_with_issues": 96,
+          "baseline_issues": 890,
+          "baseline_files_with_issues": 95
+        },
+        "changed_markdown_incremental_gate": "PASS_0_ISSUES"
+      }
+    },
+    {
+      "type": "github_baseline",
+      "pointer": "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json@1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "observed": {
+        "workflow_run_id": 33243989581,
+        "job_id": 99078124795,
+        "tool": "markdownlint-cli2@0.23.2",
+        "files_linted": 565,
+        "issues": 890,
+        "files_with_issues": 95,
+        "policy": "RATCHET_NO_INCREASE"
+      }
+    },
+    {
+      "type": "google_drive",
+      "pointer": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "identity": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "updated_at": "2026-09-05T12:04:43.101Z"
+    },
+    {
+      "type": "google_drive",
+      "pointer": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "identity": "RAFAELIA — Master Navigation Registry V1",
+      "updated_at": "2026-09-05T12:04:51.607Z"
+    },
+    {
+      "type": "google_drive",
+      "pointer": "1t9w_dw9hnGYXAQtK3SqQBBlotm0Ionmj2L0JYV5nL10",
+      "identity": "RAFAELIA — Atlas Δ76 — Six Sigma Exact Payload + Helper Surface — 2026-09-05"
+    }
+  ],
+  "transform": {
+    "method": "attribute debt increase only to files capable of affecting markdownlint scope, then compare PR file delta with independently observed changed-Markdown gate",
+    "result": "PR #518 contains one Markdown change and five JSON receipts; the Markdown change passes the changed-file lint gate with zero issues. Therefore the observed global +46 issues/+1 file above the historical baseline is not introduced by this PR delta and must be treated as inherited base/main debt until baseline→main provenance is reconstructed."
+  },
+  "claims": [
+    {
+      "claim": "PR #518 introduced the +46/+1 Markdown debt increase",
+      "status": "FALSIFIED_FOR_CURRENT_PR_DELTA",
+      "claim_allowed": false
+    },
+    {
+      "claim": "The +46/+1 debt is inherited from repository evolution between the 2026-08-29 baseline observation and current main",
+      "status": "SUPPORTED_BOUNDARY_NOT_YET_PATH_ATTRIBUTED",
+      "claim_allowed": false
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-MAPA-MARKDOWN-DEBT-BASELINE-TO-MAIN-LINEAGE-20260905",
+      "state": "OPEN_NARROWED",
+      "source_pointer": "baseline workflow_run 33243989581 → main 1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "missing_field": "exact commits/files/rules responsible for inherited delta",
+      "blocking_dependency": "baseline-to-main markdown history and reproducible lint snapshots",
+      "evidence_needed": "same markdownlint-cli2@0.23.2 results at baseline source ref and successive/main refs, or equivalent provider logs with path+line+rule",
+      "falsifier": "evidence that a PR #518 changed file other than the already-clean Markdown can affect markdownlint **/*.md scope",
+      "next_probe": "resolve baseline source commit/ref from workflow_run 33243989581, compare Markdown additions/changes baseline→main, prioritize commits adding the 18 extra linted Markdown files",
+      "owner_authority": "rafaelmeloreisnovo/Mapa repository governance",
+      "urgency": "P0",
+      "closure_gate": "exact differential path+rule attribution reconciles 890/95/565 to current main debt",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST",
+      "state": "OPEN",
+      "source_pointer": "Drive document 1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "missing_field": "provider-native canonical byte digest",
+      "blocking_dependency": "canonical export/byte representation with provider provenance",
+      "evidence_needed": "provider-native digest or exported bytes with revision-bound receipt",
+      "falsifier": "provider exposes authoritative digest bound to the same revision/content identity",
+      "next_probe": "inspect revision/export metadata without substituting size/title/hydrated text for digest",
+      "owner_authority": "Google Drive provider",
+      "urgency": "P1",
+      "closure_gate": "revision-bound canonical digest evidence",
+      "claim_allowed": false
+    }
+  ],
+  "memory_projection": {
+    "L": "baseline 2026-08-29 → current main → PR #518 lineage separated",
+    "O": "PR diff and changed-Markdown CI independently constrain causality",
+    "T": "Drive authority ↔ Navigation Registry ↔ Atlas Δ76 ↔ GitHub Mapa",
+    "C": "global ratchet failure is inherited context, not evidence that PR #518 adds Markdown debt",
+    "P": "repo_id+PR+base_sha+head_sha+Drive provider IDs retained as stable identity pointers"
+  },
+  "uncertainty": {
+    "before": "delta +46/+1 measured but causal ownership ambiguous",
+    "after": "PR #518 excluded as source of increase; baseline→main lineage remains TOKEN_VAZIO at commit/path granularity"
+  },
+  "coverage": {
+    "before": "global debt magnitude and aggregate distribution known",
+    "after": "causal boundary narrowed to repository evolution before PR #518; exact baseline→main contributors pending",
+    "global_percentage": null
+  },
+  "claim_allowed": false,
+  "F_ok": "PR delta causality narrowed; inherited-debt boundary established; Drive/Navigation/Atlas identities revalidated",
+  "F_gap": "exact baseline source ref and baseline→main path/rule differential; provider-native Drive digest",
+  "F_next": "resolve workflow_run 33243989581 head SHA/ref → compare Markdown history baseline→main → map added 18 Markdown files and +46/+1 debt → fix only evidenced regressions without raising baseline"
+}
