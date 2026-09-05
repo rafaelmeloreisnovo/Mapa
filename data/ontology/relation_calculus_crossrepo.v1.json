@@ -1,0 +1,196 @@
+{
+  "schema": "rafaelia.relation-calculus-crossrepo.v1",
+  "date": "2026-09-05",
+  "claim_allowed": false,
+  "purpose": "Federated routing for direct, inverse, derivative, antiderivative, exclusive, heuristic, correlation and meta-relations without promoting analogy to proof.",
+  "relation_types": [
+    "DERIVES",
+    "INVERTS",
+    "DIFFERENTIATES",
+    "INTEGRATES",
+    "DISCRETE_ANTIDERIVATIVE",
+    "QUOTIENTS",
+    "EXCLUSIVE_BRANCH",
+    "COMPOSES",
+    "GENERALIZES",
+    "SPECIALIZES",
+    "APPROXIMATES",
+    "CORRELATES",
+    "CONTRADICTS",
+    "IMPLEMENTS",
+    "VERIFIES",
+    "FALSIFIES",
+    "ROUTES"
+  ],
+  "authorities": [
+    {
+      "repo": "rafaelmeloreisnovo/Matem-tica-",
+      "role": "FORMAL_MATHEMATICS_AUTHORITY",
+      "branch": "research/geodesic-pi-phi-mod7-20260905",
+      "path": "docs/formal/RELATION_CALCULUS_DIRECT_INVERSE_DERIVATIVE_META_V1.md",
+      "observed_commit": "d04b5d9c07c567ae425f2b66b0757596c4291ec6"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/papers",
+      "role": "RESEARCH_SYNTHESIS_AND_PAPER_DECOMPOSITION",
+      "branch": "research/geodesic-pi-phi-mod7-20260905",
+      "path": "research_notes/2026-09-05_RELATION_CALCULUS_HEURISTICS_META_RELATIONS.md",
+      "observed_commit": "70cdc0a818d7dbcd91b23e30fd475971ae87acf3"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/ChipQuantum",
+      "role": "EXECUTABLE_MATH_WITNESS",
+      "branch": "research/geodesic-pi-phi-mod7-20260905",
+      "path": "src/geometry/sqrt3_geometry_matrix/relation_calculus.py",
+      "observed_commit": "dd151a71d0f91cdfe6d90eb8767104f64e799ef9",
+      "test_path": "tests/test_relation_calculus.py",
+      "test_commit": "ce4d4376a751a359eab1d6d50c22f5b578120fef",
+      "local_test_state": "15_PASS_PRE_MATERIALIZATION"
+    },
+    {
+      "repo": "instituto-Rafael/relativity-living-light",
+      "role": "RLL_SCIENTIFIC_INTEGRATION_AUTHORITY",
+      "branch": "research/relation-calculus-meta-20260905",
+      "path": "docs/canonicos/24_CALCULO_RELACIONAL_DERIVADAS_ANTIDERIVADAS_INVERSAS_RLL.md",
+      "observed_commit": "be4d7021bb6e0b2b0fbba9220d1182d0424a8092"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/TeoremasTesesTeorias",
+      "role": "THEOREM_CATALOG_AND_PRIOR_ART_GATE",
+      "branch": "research/relation-calculus-meta-20260905",
+      "path": "theorems/06-relation-calculus-midpoint-fold-antiderivative.md",
+      "observed_commit": "331834d421e929f263982b5c543dba25cb67f7db"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "role": "FEDERATED_ROUTE_AND_EPISTEMIC_STATE",
+      "branch": "research/relation-calculus-route-20260905",
+      "path": "data/ontology/relation_calculus_crossrepo.v1.json"
+    }
+  ],
+  "objects": [
+    {
+      "id": "RC-MIDPOINT-T",
+      "formula": "T(c)=(1+3c)/(2(1+c))",
+      "state": "FORMAL",
+      "novelty": "TOKEN_VAZIO_PRIOR_ART"
+    },
+    {
+      "id": "RC-PROJECTIVE-Z",
+      "formula": "z(c)=(c-1)/(c+1/2)",
+      "state": "FORMAL"
+    },
+    {
+      "id": "RC-PROJECTIVE-CONTRACTION",
+      "formula": "z(T(c))=z(c)/4",
+      "state": "FORMAL",
+      "novelty": "TOKEN_VAZIO_PRIOR_ART"
+    },
+    {
+      "id": "RC-ANGLE-HALVING",
+      "formula": "lim theta_(n+1)/theta_n=1/2",
+      "state": "FORMAL_DERIVED"
+    },
+    {
+      "id": "RC-ARC-CHORD-QUARTERING",
+      "formula": "lim (Q_(n+1)-1)/(Q_n-1)=1/4",
+      "state": "FORMAL_DERIVED"
+    },
+    {
+      "id": "RC-FOLD",
+      "formula": "q_m(r)=min(r,m-r)",
+      "state": "FORMAL_CLASSICAL"
+    },
+    {
+      "id": "RC-FOLD-LAPLACIAN",
+      "formula": "kappa_m(r)=q_m(r+1)-2q_m(r)+q_m(r-1)",
+      "state": "FORMAL_DERIVED",
+      "novelty": "TOKEN_VAZIO_PRIOR_ART"
+    },
+    {
+      "id": "RC-RAFAELIANA-ANTIDERIVATIVE",
+      "formula": "R_n=sum_(k=0)^(n+1) F_k",
+      "state": "FORMAL_CLASSICAL_DERIVATION",
+      "novelty": "DO_NOT_CLAIM_IDENTITY_NOVELTY"
+    },
+    {
+      "id": "RC-MULTIBASE-420",
+      "formula": "Pi(n)=(n mod 7,n mod 10,n mod 12,n mod 20); period=420",
+      "state": "FORMAL_CLASSICAL",
+      "guard": "period 420 does not imply 420 physical attractors"
+    },
+    {
+      "id": "RC-RLL-G",
+      "formula": "g(a)=f(a)+(1-f(a))a^-3",
+      "state": "RLL_CANONICAL"
+    },
+    {
+      "id": "RC-RLL-WEFF-INVERSE",
+      "formula": "g(a)=g(a0) exp[-3 integral_(a0)^a (1+w_eff(u))/u du]",
+      "state": "FORMAL_DERIVED"
+    },
+    {
+      "id": "RC-RLL-DISTANCE-INVERSE",
+      "formula": "H(z)=c/[d/dz(D_L(z)/(1+z))]",
+      "state": "FORMAL_WITH_NUMERICAL_ILL_POSEDNESS_GUARD"
+    },
+    {
+      "id": "RC-AFFINE-FIXED-POINT",
+      "formula": "x*=(-pi sin 279deg)/(1-sqrt(3)/2)=23.16046864479797...",
+      "state": "FORMAL_CORRECTION",
+      "contradicts_legacy_exactness": "23.158"
+    },
+    {
+      "id": "RC-POINCARE-42",
+      "formula": "N_source=N_sink=21 under explicit 42-zero source/sink hypotheses",
+      "state": "CONDITIONAL_THEOREM"
+    }
+  ],
+  "edges": [
+    {"from": "RC-MIDPOINT-T", "type": "INVERTS", "to": "T^-1(y)=(2y-1)/(3-2y)"},
+    {"from": "RC-MIDPOINT-T", "type": "DIFFERENTIATES", "to": "T'(c)=1/(1+c)^2"},
+    {"from": "RC-MIDPOINT-T", "type": "INTEGRATES", "to": "3c/2-ln|1+c|+C"},
+    {"from": "RC-MIDPOINT-T", "type": "DERIVES", "to": "RC-PROJECTIVE-CONTRACTION"},
+    {"from": "RC-PROJECTIVE-CONTRACTION", "type": "DERIVES", "to": "RC-ANGLE-HALVING"},
+    {"from": "RC-ANGLE-HALVING", "type": "DERIVES", "to": "RC-ARC-CHORD-QUARTERING"},
+    {"from": "RC-FOLD", "type": "DIFFERENTIATES", "to": "RC-FOLD-LAPLACIAN"},
+    {"from": "RC-RAFAELIANA-ANTIDERIVATIVE", "type": "DIFFERENTIATES", "to": "Delta R_n=F_(n+1)"},
+    {"from": "RC-RLL-WEFF-INVERSE", "type": "INVERTS", "to": "w_eff(a)=-1-(a/3)g'(a)/g(a)"},
+    {"from": "RC-RLL-DISTANCE-INVERSE", "type": "INVERTS", "to": "D_L=(1+z)c integral dz/H(z)"},
+    {"from": "RC-AFFINE-FIXED-POINT", "type": "CONTRADICTS", "to": "LEGACY_23.158_AS_EXACT_REAL_VALUE"}
+  ],
+  "heuristic_edges": [
+    {
+      "from": "RC-PROJECTIVE-CONTRACTION",
+      "to": "RLL_RENORMALIZATION_KERNEL_CANDIDATE",
+      "type": "HEURISTIC",
+      "claim_state": "TOKEN_VAZIO_OBSERVABLE_BINDING"
+    },
+    {
+      "from": "RC-MULTIBASE-420",
+      "to": "420_ATTRACTOR_INTERPRETATION",
+      "type": "HEURISTIC",
+      "claim_state": "TOKEN_VAZIO_DYNAMICAL_PROOF"
+    }
+  ],
+  "exclusive_gates": [
+    "same_numeric_constant != same_mathematical_object",
+    "correlation != derivation",
+    "inverse_relation != causal_reversal",
+    "integral_representation != physical_accumulation_law",
+    "phi_icosahedral_geometry != Fibonacci_causation",
+    "42_f2_vertices != 42_physical_attractors",
+    "420_modular_period != 420_physical_attractors",
+    "T2 != T7",
+    "finite_witness != novelty",
+    "commit != execution"
+  ],
+  "token_vazio": [
+    "TOKEN_VAZIO_PRIOR_ART_MIDPOINT_PROJECTIVE_PACKAGE",
+    "TOKEN_VAZIO_Q16_CANONICAL_RECONCILIATION_23_158",
+    "TOKEN_VAZIO_FREQUENCY_F_FACE_CLASSIFICATION",
+    "TOKEN_VAZIO_RULER_OPTIMALITY",
+    "TOKEN_VAZIO_RLL_OBSERVABLE_BINDING_FOR_GEOMETRIC_HEURISTICS",
+    "TOKEN_VAZIO_INDEPENDENT_REPRODUCTION"
+  ]
+}
