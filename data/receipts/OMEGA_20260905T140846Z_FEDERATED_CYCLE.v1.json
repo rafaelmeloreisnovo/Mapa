@@ -1,0 +1,178 @@
+{
+  "schema": "rafaelia.federated-cycle-receipt.v1",
+  "cycle_id": "OMEGA-20260905T140846Z",
+  "predecessor": "OMEGA-20260905T1308Z",
+  "predecessor_receipt_observed": "data/receipts/OMEGA_20260905T121435Z_FEDERATED_CYCLE.v1.json",
+  "predecessor_receipt_gap": "NO_PERSISTED_OMEGA_20260905T1308Z_RECEIPT_LOCATED_BY_CURRENT_GITHUB_SEARCH",
+  "observed_interval": {
+    "started_at_utc": "2026-09-05T14:08:46Z"
+  },
+  "contract": "SOURCE→TRANSFORM→CLAIM→TEST/EVIDENCE→RECEIPT→INDEX→MEMORY",
+  "repository": {
+    "full_name": "rafaelmeloreisnovo/Mapa",
+    "repo_id": 1267885874,
+    "pr": 518,
+    "pr_state": "OPEN_DRAFT_NOT_MERGED",
+    "base_ref": "main",
+    "base_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+    "head_ref_before_receipt": "audit/omega-20260905t041039z",
+    "head_sha_before_receipt": "378744d54c4a6945c81ec44d186dd394761ec320"
+  },
+  "cursor": {
+    "before": "BASELINE_EXACT_77a4023_TO_MAIN_DIFFERENTIAL_OPEN__ROOT_PNG_CURRENT_PRESENCE_UNKNOWN_IN_LAST_OBSERVATIONAL_SUMMARY",
+    "after": "ROOT_PNG_CURRENT_IDENTITY_AND_FAIL_CLOSED_EXCEPTION_RECONCILED__MARKDOWN_PATH_RULE_DIFFERENTIAL_STILL_OPEN"
+  },
+  "sources": [
+    {
+      "type": "github_snapshot",
+      "pointer": "rafaelmeloreisnovo/Mapa@77a4023afa130b5aa4615ff22b5c7f63c6fa78d5",
+      "role": "historical_markdown_baseline_merge_ref"
+    },
+    {
+      "type": "github_snapshot",
+      "pointer": "rafaelmeloreisnovo/Mapa@1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "role": "current_main_exact_snapshot"
+    },
+    {
+      "type": "github_artifact_identity",
+      "path": "file_000000002e20820ebc7eb4567c469138.png",
+      "baseline_blob": "b9d3af394b3f32601c51debf285ee1f627343f14",
+      "current_main_blob": "b9d3af394b3f32601c51debf285ee1f627343f14",
+      "size_bytes": 3160622,
+      "sha256": "36efd48e550342d4b8349929bbfdb3ed0727613167071f4a4aeb79d9c0679310",
+      "introduction_date_utc": "2026-08-28T20:38:26Z",
+      "identity_state": "BLOB_STABLE_BASELINE_TO_CURRENT_MAIN"
+    },
+    {
+      "type": "github_policy",
+      "pointer": "data/reconciliation/GENESIS_SEAL_ROOT_CUSTODY_EXCEPTION_20260829.v1.json@1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "observed": "FAIL_CLOSED_EXACT_EXCEPTION"
+    },
+    {
+      "type": "github_control_plane",
+      "pointer": "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v3.json@1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "observed": {
+        "TV-ROOT-PNG-STRUCTURAL-CI-BLOCKER": "RESOLVED_EVIDENCED",
+        "TV-GENESIS-SEAL-EXACT-SHA256": "RESOLVED_EVIDENCED"
+      }
+    },
+    {
+      "type": "github_workflow",
+      "pointer": ".github/workflows/ci.yml@1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "observed": "root structure guard pins exact path+blob+size+sha256 and rejects any other root file_*.png"
+    },
+    {
+      "type": "google_drive",
+      "pointer": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "identity": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "updated_at": "2026-09-05T14:06:00.304Z"
+    },
+    {
+      "type": "google_drive",
+      "pointer": "1x_5x3_NdSaHtPLF9hbu8M1i0kvza_MnhtWeZycav19Y",
+      "identity": "RAFAELIA — Master Navigation Registry V1",
+      "updated_at": "2026-09-05T14:06:09.362Z"
+    },
+    {
+      "type": "google_drive",
+      "pointer": "1t9w_dw9hnGYXAQtK3SqQBBlotm0Ionmj2L0JYV5nL10",
+      "identity": "RAFAELIA — Atlas Δ76 — Six Sigma Exact Payload + Helper Surface — 2026-09-05"
+    }
+  ],
+  "transform": {
+    "method": "reconcile historical blocker with current artifact identity, current fail-closed policy, current control-plane disposition, and exact baseline/current Git blob identity before proposing relocation",
+    "result": "The historical root-PNG failure is superseded by a later exact fail-closed custody exception. The artifact is intentionally retained at root only while path, Git blob, byte size and SHA-256 match the pinned Genesis Seal identity; arbitrary root hash-named PNGs remain denied. No relocation is justified by current evidence."
+  },
+  "claims": [
+    {
+      "claim": "The root PNG is an unresolved current structural blocker that should be moved to visual/",
+      "status": "FALSIFIED_BY_NEWER_CURRENT_CONTROL_PLANE_AND_WORKFLOW_POLICY",
+      "claim_allowed": false
+    },
+    {
+      "claim": "The exact Genesis Seal artifact identity is stable between historical baseline merge-ref and current main",
+      "status": "SUPPORTED_BY_EQUAL_GIT_BLOB_ID",
+      "claim_allowed": false
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-MAPA-MARKDOWN-DEBT-BASELINE-TO-MAIN-LINEAGE-20260905",
+      "state": "OPEN_NARROWED",
+      "source_pointer": "77a4023afa130b5aa4615ff22b5c7f63c6fa78d5→1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "missing_field": "exact added/removed markdownlint occurrences by path+line+rule and introducing commit",
+      "blocking_dependency": "reproducible same-version markdownlint snapshots or complete occurrence ledgers for both exact trees",
+      "evidence_needed": "markdownlint-cli2@0.23.2 occurrence sets on exact baseline and main snapshots, reconciled to aggregate 890/95/565 and 936/96/583",
+      "falsifier": "computed occurrence sets fail to reconcile the known aggregate counts",
+      "next_probe": "derive exact added/removed occurrence set by path+rule, then map only newly added occurrences to introducing commits",
+      "owner_authority": "rafaelmeloreisnovo/Mapa repository governance",
+      "urgency": "P0",
+      "closure_gate": "path+rule differential fully reconciles aggregate delta +46 issues/+1 affected file without raising baseline",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-20260905T1308Z"
+    },
+    {
+      "gap_id": "TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST",
+      "state": "OPEN",
+      "source_pointer": "Drive document 1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "missing_field": "provider-native canonical byte digest",
+      "blocking_dependency": "canonical export/byte representation with provider provenance",
+      "evidence_needed": "provider-native digest or exported bytes with revision-bound receipt",
+      "falsifier": "provider exposes authoritative digest bound to the same revision/content identity",
+      "next_probe": "inspect revision/export metadata without substituting title, size, hydrated text or revision ID for a byte digest",
+      "owner_authority": "Google Drive provider",
+      "urgency": "P1",
+      "closure_gate": "revision-bound canonical digest evidence",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-20260905T121435Z"
+    },
+    {
+      "gap_id": "TOKEN_VAZIO_CYCLE_1308_PERSISTED_RECEIPT",
+      "state": "OPEN_PROVENANCE_DEBT",
+      "source_pointer": "GitHub default-branch code search for OMEGA-20260905T1308Z returned no result in this cycle",
+      "missing_field": "persisted receipt locator or explicit evidence that the prior observational cycle was intentionally non-persisted",
+      "blocking_dependency": "branch-wide receipt enumeration beyond default-branch code search",
+      "evidence_needed": "exact receipt path/blob or explicit supersession record",
+      "falsifier": "receipt is recovered on audit branch or another indexed authority",
+      "next_probe": "enumerate audit-branch data/receipts paths cursor-first and reconcile missing cycle IDs",
+      "owner_authority": "Mapa audit receipt ledger",
+      "urgency": "P1",
+      "closure_gate": "cycle 1308 receipt recovered/indexed or explicit non-persistence receipt appended",
+      "claim_allowed": false,
+      "predecessor_lineage": "OMEGA-20260905T1308Z"
+    }
+  ],
+  "resolved_or_superseded": [
+    {
+      "gap_id": "GAP-MAPA-ROOT-HASH-NAMED-PNG-20260829",
+      "state": "SUPERSEDED_BY_FAIL_CLOSED_CUSTODY_EXCEPTION",
+      "evidence": [
+        "blob=b9d3af394b3f32601c51debf285ee1f627343f14 stable baseline→main",
+        "size=3160622",
+        "sha256=36efd48e550342d4b8349929bbfdb3ed0727613167071f4a4aeb79d9c0679310",
+        "current CI policy exact exception; default deny for all other root file_*.png",
+        "TOKEN_VAZIO_PRIORITY_QUEUE.v3 marks structural blocker RESOLVED_EVIDENCED"
+      ]
+    }
+  ],
+  "memory_projection": {
+    "L": "historical root blocker → fail-closed custody exception → current stable blob identity; baseline Markdown merge-ref → current main differential remains open",
+    "O": "contents API blob identity, control-plane ledger and workflow policy independently agree on Genesis Seal custody",
+    "T": "Drive authority ↔ Navigation Registry ↔ Atlas Δ76 ↔ GitHub Mapa receipts/control plane",
+    "C": "historical CI failure is not current blocker because later policy explicitly supersedes it without mutating artifact/path",
+    "P": "repo_id + exact SHAs + Drive provider IDs + Genesis Seal blob/SHA-256 retained as stable identity pointers"
+  },
+  "uncertainty": {
+    "before": "root PNG treated as possibly current structural blocker; Markdown aggregate delta known but path/rule attribution open",
+    "after": "root PNG blocker reconciled as already resolved/superseded by exact fail-closed custody; Markdown path/rule attribution remains the P0 technical gap"
+  },
+  "coverage": {
+    "before": "historical root PNG observation plus exact Markdown baseline snapshot",
+    "after": "root artifact current identity+policy+control-plane status reconciled across independent sources; Drive/Navigation/Atlas IDs revalidated",
+    "global_percentage": null
+  },
+  "claim_allowed": false,
+  "F_ok": "Genesis Seal current identity and superseding custody policy reconciled; stale root-PNG gap removed from active urgency; Drive/Navigation/Atlas identities revalidated; successor receipt appended",
+  "F_gap": "exact Markdown baseline→main occurrence differential; provider-native Drive byte digest; persisted locator for observational cycle 1308",
+  "F_next": "enumerate audit receipt ledger for missing 1308 locator → compute markdownlint occurrence-set diff 77a4023→1ddf6d5 by path+line+rule → map only new occurrences to commits → correct only evidenced regressions without raising baseline"
+}

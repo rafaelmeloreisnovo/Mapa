@@ -1,0 +1,152 @@
+{
+  "cycle_id": "OMEGA-20260905T081002Z",
+  "predecessor": {
+    "cycle_id": "OMEGA-20260905T071126Z",
+    "branch": "audit/omega-20260905t041039z",
+    "commit_sha": "a6acc6904593061604971c4cbe1652b1304f69f2"
+  },
+  "contract": "SOURCE->TRANSFORM->CLAIM->TEST/EVIDENCE->RECEIPT->INDEX->MEMORY",
+  "observed_interval": {
+    "start": "2026-09-05T08:06:39Z",
+    "end": "2026-09-05T08:10:02Z"
+  },
+  "sources": [
+    {
+      "provider": "github",
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 518,
+      "base": "main",
+      "base_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "head": "audit/omega-20260905t041039z",
+      "head_sha": "a6acc6904593061604971c4cbe1652b1304f69f2"
+    },
+    {
+      "provider": "github_actions",
+      "workflow_run_id": 33951968230,
+      "job_id": 101268340493,
+      "workflow": "CI",
+      "job": "Validate Repository Structure"
+    },
+    {
+      "provider": "google_drive",
+      "file_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "current_revision_id": "506",
+      "previous_revision_id": "505",
+      "current_revision_modified_at": "2026-09-05T08:06:39.337Z"
+    }
+  ],
+  "cursor": {
+    "before": "PR518_HEAD_A6ACC690_PROVIDER_PASS_TOKEN_VAZIO + DRIVE_REVISION_ORIGIN_TOKEN_VAZIO",
+    "after": "PR518_MD047_GATE_PASS_OBSERVED + HISTORICAL_MARKDOWN_DEBT_FAIL_LOCALIZED + DRIVE_REVISION_506_PREDECESSOR_505_OBSERVED"
+  },
+  "evidence": {
+    "github_pr": {
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true
+    },
+    "ci": {
+      "run_id": 33951968230,
+      "run_conclusion": "failure",
+      "changed_markdown_gate": {
+        "step": "Lint changed Markdown — blocking regression gate",
+        "conclusion": "success"
+      },
+      "next_blocking_gate": {
+        "step": "Historical Markdown debt — blocking no-increase ratchet",
+        "conclusion": "failure"
+      },
+      "downstream_steps": "skipped_after_step_6"
+    },
+    "drive_revision_lineage": {
+      "current_revision_id": "506",
+      "previous_revision_id": "505",
+      "provider_revision_identity_observed": true,
+      "provider_native_byte_digest_observed": false
+    }
+  },
+  "gap_updates": [
+    {
+      "gap_id": "GAP-MAPA-MD047-20260905",
+      "status_before": "CORRECTION_PREPARED_NOT_CLOSED",
+      "status_after": "CLOSED_FOR_EXACT_PR_HEAD",
+      "source_pointer": "github:rafaelmeloreisnovo/Mapa/actions/runs/33951968230/job/101268340493#step5",
+      "missing_field": null,
+      "blocking_dependency": null,
+      "evidence_needed": "provider CI success on exact head",
+      "falsifier": "same exact head fails changed-Markdown gate",
+      "next_probe": "none_for_MD047; move to next blocking gate",
+      "owner_authority": "GitHub Actions provider evidence",
+      "urgency": "P0",
+      "closure_gate": "step5 success on head a6acc6904593061604971c4cbe1652b1304f69f2",
+      "claim_allowed": false,
+      "lineage": "MD047 observed -> newline correction -> provider CI success"
+    },
+    {
+      "gap_id": "GAP-MAPA-HISTORICAL-MARKDOWN-DEBT-RATCHET-20260905",
+      "status_after": "OPEN",
+      "source_pointer": "github:rafaelmeloreisnovo/Mapa/actions/runs/33951968230/job/101268340493#step6",
+      "missing_field": "exact debt delta/rule/file set causing no-increase ratchet failure",
+      "blocking_dependency": "job output/annotations or deterministic local reproduction",
+      "evidence_needed": "exact provider diagnostic and baseline/current counts",
+      "falsifier": "step6 passes on same head without further change",
+      "next_probe": "recover step6 diagnostic or reproduce ratchet deterministically from workflow/script",
+      "owner_authority": "GitHub Actions CI + repository ratchet implementation",
+      "urgency": "P0",
+      "closure_gate": "step6 success with non-increasing historical Markdown debt",
+      "claim_allowed": false,
+      "lineage": "previous CI blocked at step5 -> step5 passed -> step6 became first observed blocker"
+    },
+    {
+      "gap_id": "TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST",
+      "status_after": "OPEN_NARROWED",
+      "source_pointer": "drive:file=1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88;revision=506;predecessor=505",
+      "missing_field": "provider-native canonical byte digest",
+      "blocking_dependency": "native byte/export digest surface not observed",
+      "evidence_needed": "provider-native checksum or explicitly defined exported-representation digest with MIME and revision binding",
+      "falsifier": "Drive provider exposes a canonical checksum for this native Google Doc revision",
+      "next_probe": "inspect export/revision metadata for a canonical digest surface; otherwise preserve revision IDs as identity anchors",
+      "owner_authority": "Google Drive provider",
+      "urgency": "P1",
+      "closure_gate": "digest explicitly bound to file_id + revision_id + representation",
+      "claim_allowed": false,
+      "lineage": "file identity known -> revision lineage now known 505->506 -> byte digest still absent"
+    }
+  ],
+  "memory_projection": {
+    "L": "PR518 correction lineage plus Drive revision 505->506",
+    "O": "GitHub CI provider evidence orthogonal to repository content; Drive revision provider metadata orthogonal to title",
+    "T": "Drive canonical document -> GitHub Mapa operational index/receipts -> CI gate state",
+    "C": "all closures are scoped to exact PR head and observed provider revision",
+    "P": "append-only receipt identity and immutable provider IDs/SHA anchors"
+  },
+  "uncertainty": {
+    "before": "MD047 provider pass unknown; Drive revision origin unknown",
+    "after": "MD047 provider pass observed; next blocker localized to historical debt ratchet; Drive revision 506 predecessor 505 observed; exact ratchet diagnostic and native byte digest remain unknown"
+  },
+  "coverage": {
+    "before": "correction prepared; revision identity incomplete",
+    "after": "exact-head correction validated by provider CI; next blocker surfaced; canonical Drive revision lineage anchored"
+  },
+  "claim_allowed_changes": [],
+  "claim_allowed": false,
+  "F_ok": [
+    "MD047 changed-Markdown regression gate passed on exact PR head",
+    "next CI blocker localized to Historical Markdown debt no-increase ratchet",
+    "Drive current revision 506 and immediate predecessor 505 observed from provider",
+    "PR remains draft/open/unmerged"
+  ],
+  "F_gap": [
+    "exact historical Markdown debt ratchet diagnostic is not yet recovered",
+    "downstream CI gates remain skipped in this run",
+    "provider-native Drive byte digest remains TOKEN_VAZIO"
+  ],
+  "F_next": [
+    "recover or deterministically reproduce step6 historical Markdown debt ratchet diagnostic",
+    "classify exact files/count delta responsible before any correction",
+    "after step6 is addressed, require provider rerun and inspect newly unblocked downstream gates",
+    "preserve Drive revision 506/505 lineage and continue digest-surface probe without substituting title/size/text hydration for native digest"
+  ]
+}

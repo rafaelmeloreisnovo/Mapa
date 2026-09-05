@@ -1,0 +1,167 @@
+{
+  "schema": "rafaelia_federated_cycle_receipt_v1",
+  "cycle_id": "OMEGA-20260905T051343Z",
+  "observed_interval": {
+    "start": "2026-09-05T05:13:43Z",
+    "end": "2026-09-05T05:13:43Z",
+    "note": "Provider observations in this cycle; timestamps of source objects preserved separately."
+  },
+  "append_only": true,
+  "idempotency_key": "OMEGA-20260905T051343Z",
+  "claim_allowed": false,
+  "predecessor": {
+    "receipt_id": "RCPT-INC-000001-GITHUB-MAIN-20260905T041039Z",
+    "path": "data/receipts/INC-000001_GITHUB_MAIN_GOVERNANCE_REVALIDATION_20260905.v1.json",
+    "branch": "audit/omega-20260905t041039z"
+  },
+  "sources": [
+    {
+      "type": "GITHUB_BRANCH",
+      "pointer": "github:rafaelmeloreisnovo/Mapa/branches/main",
+      "observed_head": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "tree_sha": "9e0de44f26bff161379864fac9299d6a820b87d3",
+      "protected": false,
+      "required_status_checks_enforcement": "off"
+    },
+    {
+      "type": "GITHUB_RULESET",
+      "pointer": "github:rafaelmeloreisnovo/Mapa/rulesets/21909304",
+      "target": "branch",
+      "enforcement": "disabled",
+      "updated_at": "2026-09-03T00:47:00.917-03:00"
+    },
+    {
+      "type": "GITHUB_ACTION_JOB",
+      "pointer": "github:rafaelmeloreisnovo/Mapa/actions/runs/33939064579/jobs#101232724138",
+      "head_sha": "1ddf6d5847320264414a3e5eb4600b5ba19bf5ca",
+      "workflow": "Deploy mdBook site to Pages",
+      "job": "build",
+      "conclusion": "failure",
+      "failed_step": "Setup Pages",
+      "failed_step_number": 4,
+      "downstream_steps": {
+        "Build with mdBook": "skipped",
+        "Package Pages artifact": "skipped",
+        "Upload Pages artifact": "skipped"
+      }
+    },
+    {
+      "type": "GOOGLE_DRIVE_DOCUMENT",
+      "pointer": "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1",
+      "mime_type": "application/vnd.google-apps.document",
+      "provider_reported_size": "519270",
+      "provider_updated_at": "2026-09-05T05:10:11.204Z",
+      "native_byte_digest": null
+    },
+    {
+      "type": "GOOGLE_DRIVE_INDEX",
+      "pointer": "drive:1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+      "title": "RAFAELIA — MASTER_INDEX_CORPUS_000_050 — V1 — 2026-08-23",
+      "provider_updated_at": "2026-09-02T03:02:46.044Z"
+    }
+  ],
+  "cursor": {
+    "before": "RCPT-INC-000001-GITHUB-MAIN-20260905T041039Z:f_next",
+    "after": "GITHUB_JOB_101232724138:FAILED_STEP_SETUP_PAGES + DRIVE_AUTHORITY_METADATA_REVALIDATED"
+  },
+  "transform": "Resume predecessor probes; read exact-head Pages workflow job steps, revalidate main branch protection and repository ruleset enforcement, and search Drive for the canonical authority and digest-related evidence without conflating metadata size or hydrated text with canonical provider bytes.",
+  "evidence_classification": {
+    "github_main": "OBSERVED",
+    "ruleset_enforcement": "OBSERVED",
+    "pages_job": "EXECUTED_BY_PROVIDER_AND_OBSERVED",
+    "mdbook_content_build": "NOT_EXECUTED_IN_FAILED_JOB",
+    "drive_authority_identity": "OBSERVED",
+    "drive_native_byte_digest": "TOKEN_VAZIO"
+  },
+  "gap_updates": [
+    {
+      "gap_id": "GAP-MAPA-CURRENT-MAIN-CHECKS-NOT-ALL-PASS-20260905",
+      "status": "NARROWED_NOT_CLOSED",
+      "source_pointer": "github:rafaelmeloreisnovo/Mapa/actions/runs/33939064579/jobs#101232724138",
+      "missing_field": "successful exact-head Pages setup/build gate or evidence that the failed Pages workflow is explicitly non-gating",
+      "blocking_dependency": "Setup Pages failure and gate classification",
+      "evidence_needed": "specific Setup Pages failure cause plus required/informational classification and successful rerun if gating",
+      "falsifier": "Evidence shows this Pages workflow is informational/non-required and all actual required gates pass",
+      "next_probe": "Read workflow definition and Pages configuration context for Setup Pages failure; classify the workflow as required or informational using server-side rules",
+      "owner_authority": "rafaelmeloreisnovo/Mapa CI/governance",
+      "urgency": "P0",
+      "closure_gate": "failure cause resolved or workflow proven non-gating, with exact-head required checks independently identified",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "GAP-MAPA-MAIN-BRANCH-PROTECTION-OFF-20260905",
+      "status": "CONFIRMED_OPEN",
+      "source_pointer": "github:rafaelmeloreisnovo/Mapa/branches/main + rulesets/21909304",
+      "missing_field": "active server-side merge enforcement",
+      "blocking_dependency": "repository governance configuration",
+      "evidence_needed": "branch protection or applicable ruleset readback with enforcement enabled and required checks configured",
+      "falsifier": "Another applicable active server-side control is observed and proves equivalent enforcement",
+      "next_probe": "Enumerate any additional applicable rules/control surfaces before proposing governance remediation",
+      "owner_authority": "rafaelmeloreisnovo/Mapa repository governance",
+      "urgency": "P0",
+      "closure_gate": "active enforcement independently read back from provider",
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "TOKEN_VAZIO_PROVIDER_NATIVE_DRIVE_BYTE_DIGEST",
+      "status": "SEARCHED_NOT_CLOSED",
+      "source_pointer": "drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+      "missing_field": "provider-native canonical byte digest tied to a revision/export identity",
+      "blocking_dependency": "authoritative provider-native/export byte representation",
+      "evidence_needed": "canonical export bytes or provider-native digest with revision identity and digest scope",
+      "falsifier": "A pre-existing receipt/index entry is found containing a digest over canonical provider bytes for the same revision",
+      "next_probe": "Search exact receipt/index corpus for this Drive file ID plus sha256|blake3|md5Checksum|digest and revision identifiers",
+      "owner_authority": "Google Drive source authority",
+      "urgency": "P1",
+      "closure_gate": "digest scope, revision/source pointer and canonical byte representation are all evidenced",
+      "claim_allowed": false
+    }
+  ],
+  "new_verified_information": [
+    "The failing Pages job stops at Setup Pages; Build with mdBook was skipped, so the observed failure is not evidence that mdBook content compilation failed.",
+    "Main remains unprotected with required status checks off, and the observed repository branch ruleset remains disabled.",
+    "The canonical Drive authority file was reobserved with provider ID and updated_at 2026-09-05T05:10:11.204Z; no canonical-byte digest was promoted."
+  ],
+  "coverage_delta": {
+    "before": "Exact-head failure known but failure stage unresolved; Drive authority linked but digest unresolved.",
+    "after": "Exact failure stage localized to Setup Pages; mdBook build distinguished as not executed; branch/ruleset enforcement revalidated; Drive authority metadata refreshed.",
+    "global_percentage": null,
+    "reason_global_percentage_null": "Full universe cardinality was not enumerated in this invocation."
+  },
+  "uncertainty_delta": {
+    "before": "BUILD_CHECK_FAILURE_CAUSE_PARTIALLY_UNKNOWN",
+    "after": "SETUP_PAGES_STEP_FAILURE_LOCALIZED; ROOT_CAUSE_STILL_TOKEN_VAZIO"
+  },
+  "memory_projection": {
+    "L": "predecessor receipt -> localized Pages failure -> successor receipt",
+    "O": "branch readback + ruleset readback + workflow job steps + Drive metadata",
+    "T": "GitHub governance/CI linked to Drive method authority and master index",
+    "C": "valid for exact main head 1ddf6d5847320264414a3e5eb4600b5ba19bf5ca and provider observations recorded here",
+    "P": "append-only receipt with predecessor lineage and immutable provider IDs/SHA pointers"
+  },
+  "top_urgencies": [
+    "P0: determine Setup Pages failure cause and whether the workflow is gating",
+    "P0: restore/prove server-side merge enforcement only through reviewed governance change",
+    "P1: resolve canonical Drive byte digest provenance without hashing normalized text as a substitute"
+  ],
+  "f_ok": [
+    "Localized failed exact-head workflow stage to Setup Pages",
+    "Revalidated main branch protection=false and required status checks=off",
+    "Revalidated repository ruleset enforcement=disabled",
+    "Reobserved canonical Drive authority identity and freshness metadata",
+    "Persisted successor receipt append-only on audit branch"
+  ],
+  "f_gap": [
+    "Root error message/annotation for Setup Pages not retrievable through current annotation endpoint",
+    "Required-vs-informational classification remains incomplete because enforcement is currently off",
+    "Provider-native Drive canonical-byte digest remains TOKEN_VAZIO",
+    "Global universe coverage percentage remains unclaimed"
+  ],
+  "f_next": [
+    "Fetch the exact workflow YAML used by run 33939064579 and inspect Setup Pages inputs/permissions/configuration",
+    "Inspect repository Pages-related configuration evidence reachable through repository/workflow resources",
+    "Search Drive and GitHub receipts for exact Drive ID 1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88 with sha256|blake3|md5Checksum|digest|revision",
+    "Reobserve main HEAD before any next claim promotion and preserve a successor receipt only if state or evidence changes"
+  ]
+}
