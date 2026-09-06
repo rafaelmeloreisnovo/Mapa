@@ -1,0 +1,35 @@
+{
+  "schema": "rafaelia.atlas_mission_execution_pointer/v1",
+  "route_id": "ATLAS:X-MISSION-EXECUTION-BOUNDARY-20260906",
+  "predecessor": "ATLAS:X-FEDERATION-RECONCILE-20260906",
+  "state": "CONTRACT_BOUND_OPEN_REMOTE_GATES",
+  "claim_allowed": false,
+  "mission_contract": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "pull_request": 425,
+    "head": "a13b04693428d21bf9bf411b353f6a79c835afe7",
+    "human_path": "docs/contracts/MISSION_EXECUTION_BOUNDARY_V1.md",
+    "machine_path": "docs/contracts/mission_execution_boundary.v1.json"
+  },
+  "bindings": {
+    "routing": "Mapa",
+    "orchestration": "termux-app-rafacodephi",
+    "retrieval_model": "llamaRafaelia/rmrCti",
+    "gaia_adapter": "GAIA_phi",
+    "runtime_backend": "Vectras-VM-Android",
+    "protected_implementation": "Rafaelia_Private",
+    "longitudinal": "MemRafcode + Drive custody"
+  },
+  "invariants": [
+    "DATASET_INFORMS!=MISSION_AUTHORITY",
+    "RETRIEVAL_CONTEXT!=WEIGHT_UPDATE",
+    "LEARN_APPEND_ONLY!=ONLINE_SELF_TRAINING",
+    "CONTINUE_APPROVED_SCOPE!=AUTONOMOUS_GOAL_CREATION",
+    "SOURCE!=DERIVED_INDEX!=EXECUTION!=EVIDENCE!=CLAIM",
+    "TOKEN_VAZIO!=0",
+    "EXTERNAL_AUTHORITY_REQUIRED!=ORCHESTRATOR_PERMISSION",
+    "GREEN_GATE_PROMOTES_ONLY_MEASURED_SCOPE"
+  ],
+  "transverse_open_gate": "TV-ACTIONS-PRESTEP-ROOT-CAUSE",
+  "completion_state": "FINISHED_WITH_EXTERNAL_GATES_WHEN_ALL_AVAILABLE_SAFE_ACTIONS_ARE_PROVEN_OR_TYPED_BLOCKED"
+}
