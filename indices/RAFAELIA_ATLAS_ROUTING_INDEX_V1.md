@@ -84,3 +84,22 @@ Open `TOKEN_VAZIO` nodes:
 - specific `7D Sasakian / 3-Sasakian` tensor and integrability conditions.
 
 Next gates: `AGC-G1..AGC-G7`.
+
+## Route append — `ATLAS:X-ZIPRAF-BITRAF-BITOMEGA-42-20260906`
+
+State: `EVIDENCE_FIRST / APPEND_ONLY / claim_allowed=false`
+
+| Axis | Route |
+|---|---|
+| Atlas delta | `indices/deltas/ATLAS_X_ZIPRAF_BITRAF_BITOMEGA_42_STRUCTURED_STORAGE_20260906.md` |
+| Receipt | `receipts/2026-09-06_ATLAS_X_ZIPRAF_BITRAF_BITOMEGA_42_STRUCTURED_STORAGE.md` |
+| Producer | `rafaelmeloreisnovo/papers/research/storage_hardware_software_protocols/ZIPRAF_CROSS_REPO_LOCATION_INDEX_V1.md` |
+| Longitudinal | `L:ZIPRAF-BITRAF-BITOMEGA-42-20260906` |
+| Orthogonal | `O:ZIPRAF-BITRAF-BITOMEGA-42-20260906` |
+| Transversal | `T:ZIPRAF-BITRAF-BITOMEGA-42-20260906` |
+
+Core boundary: `ZIPRAF != compression`; logical relation density is not physical-capacity gain.
+
+Cross-repo route: `Vectras ↔ Termux RAFCODEPHI ↔ Rafaelia_Private ↔ GAIA_phi ↔ publicacientiespiritual ↔ X0/Home ↔ CientiEspiritual/ZRF provenance`.
+
+Open gates: `ZBG-G1..ZBG-G7`; unresolved claims remain `TOKEN_VAZIO`.
