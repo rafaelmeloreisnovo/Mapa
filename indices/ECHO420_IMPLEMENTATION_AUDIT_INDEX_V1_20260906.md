@@ -31,6 +31,8 @@ Created:
 docs/echo420/ECHO420_FORMAL_SPEC_V1.md
 src/omega/echo420.py
 tests/test_echo420.py
+.github/workflows/validate-echo420.yml
+docs/echo420/ECHO420_CI_RECEIPT_20260906.md
 ```
 
 Commits on the work branch:
@@ -39,6 +41,9 @@ Commits on the work branch:
 b5563c338c0faa7b063c311911d0c6bdfa97698b  formal specification
 6a716d51f779d2e6d83831a2eebf1e3c23f743d0  executable reference
 494aa32f5e0387badaf29e5db7135b9d70688b7a  tests
+0e83e010504c74c566593ec58706db1417078df7  initial isolated CI gate
+cdcef1975b221a95e086ce541231490e9bb1e4e3  stdlib-only deterministic CI gate
+379fed0ca9b166ac891d4c6a8ce51e1478ff190d  passing CI receipt
 ```
 
 Implemented mathematics:
@@ -50,7 +55,7 @@ Implemented mathematics:
 - 92 reserved 9-bit codes;
 - 604 reserved BITRAF10 codes;
 - Fibonacci, Lucas and Pisano functions;
-- exact verification target `pi(13)=28`, `pi(20)=60`, `pi(260)=420`;
+- exact verification `pi(13)=28`, `pi(20)=60`, `pi(260)=420`;
 - linear/Fibonacci/Lucas/prime-step/seeded-random order controls;
 - cosine retention, Euclidean drift, Shannon entropy;
 - DFT power and reference spectral coherence;
@@ -63,7 +68,21 @@ Implemented mathematics:
 - exponential temporal memory;
 - contraction ratios and preliminary attractor-candidate gate.
 
-Status: `IMPLEMENTED_REFERENCE`.
+Isolated CI receipt:
+
+```yaml
+workflow: Validate ECHO420
+run_id: 34016135380
+job_id: 101440113183
+validated_head_sha: cdcef1975b221a95e086ce541231490e9bb1e4e3
+compile: PASS
+tests: PASS
+self_check_receipt: PASS
+```
+
+The first isolated run `34016049153` remains preserved as a negative receipt: compile passed and its test invocation failed. The CI gate was then made stdlib-only and deterministic; the next run passed all ECHO420 steps. No negative receipt was deleted.
+
+Status: `IMPLEMENTED_REFERENCE / CI_REFERENCE_PASS`.
 
 ### Rafaelia_Private — Voynich binding
 
@@ -117,13 +136,13 @@ Status: `INDEXED_30_FORMULA_FAMILIES`.
 
 ### Mapa — federation/audit layer
 
-Created:
+Created/updated:
 
 ```text
 indices/ECHO420_IMPLEMENTATION_AUDIT_INDEX_V1_20260906.md
 ```
 
-Status: `FEDERATED_AUDIT_INDEX`.
+Status: `FEDERATED_AUDIT_INDEX / CI_RECEIPT_BOUND`.
 
 ## 3. Review of pre-existing implementation
 
@@ -145,7 +164,7 @@ Status: `FEDERATED_AUDIT_INDEX`.
 - append-only/replay methodology;
 - `A_42` explicitly typed as a deterministic reference set rather than universal attractors.
 
-Source review also confirms the existing V1.1 gates:
+Source review confirms the existing V1.1 gates:
 
 ```text
 portable_c11_host_pass=true
@@ -209,14 +228,17 @@ The new work adds the missing explicit 42×10 experimental product and its binar
 | “attractor” naming ambiguity | promotion state machine added |
 | Ga-Sur/Gigas/Einstein/Voynich mixed semantically | typed comparison axes added |
 | No cross-repo formula index | Mathematics + Mapa registries added |
+| No isolated ECHO420 CI gate | stdlib-only compile/test/self-check workflow added and PASS |
+| No execution receipt for reference layer | append-only CI receipt added |
 
 ## 5. Remaining gaps — not silently closed
 
 ### Runtime/evidence gaps
 
 ```yaml
-CHIPQUANTUM_TEST_RUN_RECEIPT: TOKEN_VAZIO
-CHIPQUANTUM_CI_BRANCH_RESULT: TOKEN_VAZIO
+CHIPQUANTUM_TEST_RUN_RECEIPT: PASS
+CHIPQUANTUM_CI_BRANCH_RESULT: PASS
+CHIPQUANTUM_CI_RUN_ID: 34016135380
 ARM32_ECHO420_EXECUTION: TOKEN_VAZIO
 ARM64_ECHO420_EXECUTION: TOKEN_VAZIO
 REAL_ECHO_DATASET: TOKEN_VAZIO
@@ -260,13 +282,13 @@ The following remain blocked:
 
 ## 6. Required next executable gates
 
-1. Execute `tests/test_echo420.py` under the repository test harness and capture a receipt.
-2. Run the same code on ARM32/Termux and ARM64 with environment/build hashes.
-3. Freeze one real input manifest for each manuscript/control corpus.
-4. Produce 10-echo traces for all 42 centers under all five orderings.
-5. Run null/permutation and ablation analyses.
-6. Lock the coherence window/overlap policy before looking for favorable peaks.
-7. Apply multiple-comparison correction.
+1. Reproduce the passing isolated ECHO420 receipt on ARM32/Termux and ARM64 with environment/build hashes.
+2. Freeze one real input manifest for each manuscript/control corpus.
+3. Produce 10-echo traces for all 42 centers under all five orderings.
+4. Run null/permutation and ablation analyses.
+5. Lock the coherence window/overlap policy before looking for favorable peaks.
+6. Apply multiple-comparison correction and declare effect-size criteria.
+7. Reproduce independently in a second environment.
 8. Promote no attractor beyond `REFERENCE_POINT` until basin and perturbation criteria pass.
 
 ## 7. Rollback map
@@ -275,6 +297,6 @@ Rollback is branch-level and file-local. Main branches were not rewritten by thi
 
 ## R3
 
-`F_ok`: formulas, executable reference, tests, Voynich binding, academic note, formula registry and audit index now exist on reversible branches.  
-`F_gap`: runtime receipts, real-corpus experiments, null-model statistics, independent reproduction and attractor basins remain open.  
-`F_next`: execute the branch test suite and generate append-only receipts before any scientific promotion.
+`F_ok`: formulas, executable reference, tests, isolated CI PASS, receipt, Voynich binding, academic note, formula registry and federated audit index now exist on reversible branches.  
+`F_gap`: ARM32/ARM64 receipts, real-corpus experiments, null-model statistics, independent reproduction and attractor basins remain open.  
+`F_next`: bind real manuscript manifests and execute the 42×10×5-control experiment without promoting scientific claims prematurely.
