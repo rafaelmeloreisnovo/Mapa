@@ -5,6 +5,7 @@
 This repository is the RAFAELIA **federated control plane & knowledge organization**. Enter through authority mapping and contracts, not through repository crawl or broad search.
 
 Federated role: **authority mapper, state curator, and cross-repository router** for 6 producer repositories:
+
 1. termux-packages (source authority)
 2. termux-app-rafacodephi (build + runtime authority)
 3. rafpolimata (compiler authority)
@@ -72,11 +73,13 @@ TV-ACCESS:       1  # Vector corpus access control
 ```
 
 **Do NOT:**
+
 - Erase TOKEN_VAZIO without implementing + executing the corresponding gate
 - Promote stale producer evidence to federation state without reconciliation
 - Hide dependencies between repos to make topology look complete
 
 **DO:**
+
 - Preserve all TOKEN_VAZIO with closure path/cycle/owner
 - Link every federation claim to source repo + commit + gate that produced it
 - Record deltas when producer evidence is younger/older than federation snapshot
@@ -96,17 +99,20 @@ local execution: this machine
 ### Authority boundaries
 
 Each repository owns its domain:
+
 - **termux-packages:** source verification, recipe correctness, package handoff
 - **termux-app-rafacodephi:** build artifact, binary correctness, runtime behavior
 - **rafpolimata:** compiler validation, AArch64 instruction correctness
 - **Mapa:** federation routing, authority coherence, cross-repo validation
 
 Do NOT:
+
 - Promote producer implementation detail into federation claim (e.g., "42 fixed-point attractors" from implementation parameter)
 - Bypass producer authority to directly validate internal implementation
 - Claim evidence when producer has TOKEN_VAZIO on that same claim
 
 DO:
+
 - Link federation claim to producer's gate that closes it
 - Respect producer's TOKEN_VAZIO — inherit it into federation state
 - Record producer dependencies explicitly (e.g., "termux-app BUG-02 decision blocks Mapa TV-CODE closure")
@@ -167,11 +173,13 @@ Identify:
 Read `data/ontology/rafaelia-operational-ontology.v1.json` before editing concepts, relations, or epistemic states.
 
 Preserve semantic distinctions:
+
 - `similar_to` ≠ `depends_on` ≠ `implements` ≠ `tests` ≠ `falsifies`
 
 ### Cross-repo tracing
 
 Before linking producer evidence to federation claim, verify:
+
 - Producer repo + commit present
 - Gate that produced evidence documented + exit code recorded
 - Scope (local/physical/third-party) explicit
@@ -180,6 +188,7 @@ Before linking producer evidence to federation claim, verify:
 ### Lineage authority (TV-INDEPENDENCE)
 
 When defining deduplication rules or source independence, consult:
+
 - Each repo's authority pyramid
 - Producer handoff contracts
 - Federated topology (6 repos in TOROID)
@@ -190,21 +199,31 @@ Run federation coherence checks:
 
 ```sh
 python3 scripts/validate_federation_topology.py --repos 6 --check
-python3 scripts/compare_cross_source_evidence.py --lineage-check
+python3 scripts/compare_cross_source_evidence.py --help
 ```
+
+The cross-source comparator requires `--left-bundle`, `--right-bundle`, and
+`--floor` pointing to two sealed evidence bundles and their pinned quality-floor
+JSON. `--lineage-check` is not a supported argument. Help output only checks the
+CLI contract; record `TOKEN_VAZIO` until both real bundles and the floor are
+available and the comparison passes. Never substitute a topology pass for that
+cross-source gate.
 
 ## Gates and closure sequence
 
 ### Cycle 4 (Implementations + fixtures)
+
 - Close TV-CODE (DAG causal, Bootstrap UQ)
 - Freeze TV-DATA fixtures (4 files with SHA-256)
 - Implement TV-TEST gates
 
 ### Cycle 5 (Federation backbone)
+
 - Define TV-INDEPENDENCE (lineage authority + dedup rules)
 - Validate cross-repo deduplication
 
 ### Cycle 6 (Topological certification)
+
 - Validate 6-repo TOROID topology
 - Cross-repo tracing complete
 - Promote VERIFICATION_PENDING → FEDERATION_CERTIFIED
