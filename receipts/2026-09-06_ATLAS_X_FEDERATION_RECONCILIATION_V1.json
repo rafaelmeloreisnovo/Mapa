@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "ATLAS-X-FEDERATION-RECONCILIATION-20260906-V1",
+  "route_id": "ATLAS:X-FEDERATION-RECONCILE-20260906",
+  "date": "2026-09-06",
+  "mode": ["APPEND_ONLY", "SOURCE_FIRST", "ANTI_REGRESSION", "EVIDENCE_FIRST"],
+  "claim_allowed": false,
+  "predecessors": [
+    "ATLAS:X-NOVO-RMRCTI-LLM-NAV-20260906",
+    "ATLAS:X-NOVO-CTI-LOCAL-20260906"
+  ],
+  "mapa_baseline": "6821086f1d299fb440325e31744bce91e33fc0a8",
+  "producer_heads": {
+    "termux_app_rafacodephi": "607137eb50b0b0e4c4d80c20f37f2eaf5827e30f",
+    "llamaRafaelia": "7a667531b3411c63349a22b24ed5a7d7a314f79a",
+    "GAIA_phi": "c4c85bf31d694029fb318c9134587b75933eb6e9",
+    "Vectras_VM_Android": "c98e5a79f70f6fd1316cad26faf328a725b8a792",
+    "Rafaelia_Private": "094da97b3aa69ce2258f764a1d0303943c693932",
+    "MemRafcode": "5c59a034159e05f699a8c92cec1b7bee1b7aee9b"
+  },
+  "drive_custody": {
+    "novoexport_folder_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+    "custody_folder_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+    "route_inventory_document_id": "1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og",
+    "longitudinal_book_document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "raw_originals_mutated": false
+  },
+  "evidence": {
+    "termux": {
+      "state": "CI_SCOPE_SUCCESS",
+      "boundary": "CI_NE_PHYSICAL_ANDROID_RUNTIME"
+    },
+    "llama": {
+      "state": "MIXED",
+      "provider_gate": "SUCCESS",
+      "full_tree_flake8": "FAIL",
+      "full_tree_editorconfig": "FAIL",
+      "safety_and_determinism": "PARTIAL_FAIL"
+    },
+    "llama_pr_121": {
+      "head": "2e7f68a914ff98a6d9c815f23c1e80d9e0e92707",
+      "state": "IMPLEMENTED_PENDING_REMOTE_EXECUTION_EVIDENCE",
+      "remote_jobs_steps": "TOKEN_VAZIO"
+    },
+    "gaia": {
+      "state": "CURRENT_HEAD_RUNS_NO_OBSERVED_FAILURE",
+      "boundary": "ADAPTER_CI_NE_MODEL_INFERENCE"
+    },
+    "vectras": {
+      "state": "CURRENT_HEAD_RUNS_NO_OBSERVED_FAILURE",
+      "boundary": "BOOTSTRAP_NE_QEMU_PROCESS_NE_GUEST_BOOT_NE_DEVICE_PROOF"
+    },
+    "rafaelia_private": {
+      "state": "BUILD_TEST_PASS_CODE_QUALITY_GLOBAL_FAIL",
+      "boundary": "BUILD_PROVEN_NE_STATIC_ANALYSIS_CLEAN"
+    }
+  },
+  "continuity_rings": [
+    "SCOPE_LOCK",
+    "BASELINE_BIND",
+    "PROVENANCE_RECEIPT",
+    "APPEND_ONLY_IDEMPOTENCY",
+    "CI_RATCHET",
+    "ROLLBACK_REF"
+  ],
+  "token_vazio": [
+    "TV-LLAMA-PR121-REMOTE-EXECUTION-EVIDENCE",
+    "TV-RMRCTI-AARCH64-GCC-ENTRY-HOTFIX",
+    "TV-RMRCTI-HOST-GCC-WRITE-RESULT-HOTFIX",
+    "TV-RMRCTI-FULL-TREE-FLAKE8-DEBT",
+    "TV-RMRCTI-FULL-TREE-EDITORCONFIG-DEBT",
+    "TV-PRIVATE-CODE-QUALITY-GLOBAL-DEBT",
+    "TV-TERMUX-PHYSICAL-ANDROID-EXECUTION",
+    "TV-VECTRAS-QEMU-PROCESS-AND-GUEST-BOOT-PHYSICAL",
+    "TV-GAIA-MODEL-INFERENCE-PROOF",
+    "TV-LLAMA-LOCAL-MODEL-RUNTIME",
+    "TV-INDEPENDENT-REPRODUCTION"
+  ],
+  "invariants": [
+    "SOURCE_PRESENT != BUILD_PROVEN != RUNTIME_PROVEN != DEVICE_PROVEN",
+    "BUILD_PROVEN != CODE_QUALITY_GLOBAL_PROVEN",
+    "RETRIEVAL != TRAINING",
+    "MODEL_OUTPUT != EVIDENCE",
+    "TOKEN_VAZIO != 0"
+  ],
+  "next_verifiable_steps": [
+    "append successor to MemRafcode",
+    "append Drive custody successor",
+    "close only isolated LLaMA GCC defects in separate hotfix",
+    "rerun exact safety gate before state promotion"
+  ]
+}
