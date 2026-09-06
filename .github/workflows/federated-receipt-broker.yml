@@ -116,6 +116,31 @@ jobs:
           print('PASS immutability markers:', ','.join(required))
           PY
 
+      - name: "GATE 5b: Additive reversibility boundary"
+        env:
+          RECEIPT_PATH: ${{ inputs.receipt_url || 'tests/fixtures/federated/self-test-receipt.json' }}
+        run: |
+          set -euo pipefail
+          python3 - "$RECEIPT_PATH" <<'PY'
+          import json, sys
+          from pathlib import Path
+          r=json.load(open(sys.argv[1], encoding='utf-8'))
+          out={'claim_allowed':False}
+          rev=r.get('reversibility')
+          if rev is None:
+              out.update(state='LEGACY_RECEIPT_REVERSIBILITY_TOKEN_VAZIO', token_vazio=True)
+          else:
+              required=['event_id','before_ref','after_ref','rollback_ref','evidence_ref','reversibility_state','risk_class','claim_allowed']
+              missing=[k for k in required if k not in rev]
+              if missing:
+                  raise SystemExit('reversibility block missing: '+','.join(missing))
+              if rev.get('claim_allowed') is not False:
+                  raise SystemExit('reversibility claim_allowed must be false at broker boundary')
+              out.update(state='REVERSIBILITY_METADATA_PRESENT', token_vazio=False, event_id=rev.get('event_id'))
+          Path('build/federated-broker/reversibility.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print(json.dumps(out,sort_keys=True))
+          PY
+
       - name: "LANE 04/06 bounded decision receipt"
         if: success()
         run: |
@@ -141,7 +166,7 @@ jobs:
 
       - name: Store broker evidence artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
         with:
           name: federated-receipt-broker-${{ steps.receive.outputs.receipt_id }}
           path: build/federated-broker/
