@@ -1,0 +1,64 @@
+{
+  "schema": "RAFAELIA_PROFILE_OS_CI_POLICY_V1",
+  "mode": "APPEND_ONLY",
+  "delete_policy": "NO_DELETE",
+  "claim_allowed": false,
+  "source_authority": "git_tracked_files_at_exact_commit",
+  "composition": [
+    ".github/workflows/profile-os-registry.yml",
+    "data/control-plane/PROFILE_OS_CI_POLICY.v1.json",
+    "data/control-plane/PROFILE_OS_GAPS.v1.jsonl",
+    "data/control-plane/PROFILE_OS_REGISTRY.v1.json",
+    "data/control-plane/PROFILE_OS_SUPERSESSION.v1.jsonl",
+    "docs/canonical/2026-09-05/PROFILE_OS_STRATEGY_V1.md",
+    "docs/canonical/2026-09-05/PROFILE_OS_TACTICS_V1.md",
+    "indices/RAFAELIA_MODULAR_ADDRESSING_2X3X7X13_FEDERATION_V1.jsonl",
+    "indices/RAFAELIA_PROFILE_OS_DRIVE_BRIDGE.v1.md",
+    "indices/RAFAELIA_PROFILE_OS_PRODUCT_TOKEN_CYCLES_20260905.v1.jsonl",
+    "receipts/PROFILE_OS_CENSUS_DEDUP_R3_20260905.md",
+    "receipts/PROFILE_OS_CONSOLIDATION_R4_20260905.md",
+    "receipts/PROFILE_OS_CI_R5_SOURCE_IMPLEMENTATION_20260906.md",
+    "schemas/profile_os_registry.v1.schema.json",
+    "scripts/profile_os_ci_gate.py",
+    "scripts/validate_profile_os_registry.py",
+    "tests/test_profile_os_ci_gate.py",
+    "tests/test_profile_os_registry.py"
+  ],
+  "runtime_tokens": [
+    {"id":"TV-PROFILE-OS-REMOTE-CI-EXECUTION","gate_policy":"BLOCKING_RUNTIME","resolved_by":"validator_and_tests_execute_on_runner"},
+    {"id":"TV-PROFILE-OS-CI-HASH-CUSTODY","gate_policy":"BLOCKING_RUNTIME","resolved_by":"composition_and_repository_sha256_manifests"},
+    {"id":"TV-PROFILE-OS-CI-ZIP-INTEGRITY","gate_policy":"BLOCKING_RUNTIME","resolved_by":"deterministic_zip_round_trip_and_digest"},
+    {"id":"TV-PROFILE-OS-CI-ARTIFACT-CUSTODY","gate_policy":"POST_RUN_BLOCKING_FOR_CLAIM","resolved_by":"provider_artifact_id_digest_and_download_readback"}
+  ],
+  "outputs": {
+    "root":"build/profile-os-evidence",
+    "source_tree":"build/profile-os-evidence/source",
+    "tree_text":"build/profile-os-evidence/TREE.txt",
+    "tree_json":"build/profile-os-evidence/TREE.json",
+    "composition_hashes":"build/profile-os-evidence/COMPOSITION_SHA256SUMS.txt",
+    "repository_hashes":"build/profile-os-evidence/REPOSITORY_TRACKED_SHA256SUMS.txt",
+    "token_resolution":"build/profile-os-evidence/token-resolution.jsonl",
+    "gate_result":"build/profile-os-evidence/gate-result.json",
+    "stage_chain":"build/profile-os-evidence/STAGE_CHAIN.jsonl",
+    "inner_zip":"build/profile-os-evidence/PROFILE_OS_EVIDENCE.zip",
+    "inner_zip_sha256":"build/profile-os-evidence/PROFILE_OS_EVIDENCE.zip.sha256"
+  },
+  "pass_contract": [
+    "all composition paths exist and are git-tracked",
+    "registry validator returns zero",
+    "unit tests return zero",
+    "repository tracked tree is enumerated and hashed",
+    "composition is copied byte-for-byte and hashed",
+    "all BLOCKING_RUNTIME tokens resolve to F_OK_RUNTIME_EVIDENCED",
+    "deterministic evidence ZIP round-trip verifies every member",
+    "claim_allowed remains false"
+  ],
+  "fail_contract": [
+    "missing or untracked composition path",
+    "validator failure",
+    "test failure",
+    "hash mismatch",
+    "ZIP member mismatch or integrity error",
+    "unresolved BLOCKING_RUNTIME token"
+  ]
+}
