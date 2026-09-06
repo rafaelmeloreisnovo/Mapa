@@ -4,7 +4,7 @@
   "formula_id": "PBIP-L1",
   "object_type": "FEDERATED_FORMULA_INDEX",
   "date": "2026-09-06",
-  "state": "WIRED_DOCUMENTALLY_EVIDENCE_PENDING",
+  "state": "IMPLEMENTED_CONSUMER_EVIDENCE_PENDING",
   "claim_allowed": false,
   "formula": {
     "domain": "Euclidean line-circle intersection with unit line direction",
@@ -52,9 +52,12 @@
     {
       "id": "VECTRAS_BINDING",
       "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
-      "ref": "6aef4d3f292b5a5d8916abc775975feb85d5622a",
+      "ref": "19dc97709ece76d3dd8bc3396f9ce73b810b57d4",
       "path": "docs/rafaelia/PBIP_L1_FEDERATED_BINDING_V1.md",
-      "role": "EXECUTABLE_CONSUMER_CANDIDATE"
+      "implementation_path": "app/src/main/java/com/vectras/vm/core/PbipL1.java",
+      "test_path": "app/src/test/java/com/vectras/vm/core/PbipL1Test.java",
+      "evidence_workflow": ".github/workflows/pbip-l1-evidence.yml",
+      "role": "EXECUTABLE_CONSUMER"
     },
     {
       "id": "PRIVATE_BINDING",
@@ -75,7 +78,7 @@
     ["FORMAL_MATH", "GEOMETRY_REFERENCE", "IMPLEMENTS_OR_REFERENCES"],
     ["FORMAL_MATH", "ACADEMIC_LEDGER", "SUPPORTS"],
     ["FORMAL_MATH", "RLL_BINDING", "TYPED_REFERENCE_ONLY"],
-    ["FORMAL_MATH", "VECTRAS_BINDING", "CONSUMER_CONTRACT"],
+    ["FORMAL_MATH", "VECTRAS_BINDING", "EXECUTABLE_CONSUMER"],
     ["FORMAL_MATH", "PRIVATE_BINDING", "CONSUMER_CONTRACT"],
     ["VECTRAS_BINDING", "EVIDENCE_ROUTE", "MUST_EMIT_RECEIPT"],
     ["PRIVATE_BINDING", "EVIDENCE_ROUTE", "MUST_EMIT_RECEIPT"],
@@ -84,7 +87,9 @@
   "evidence_state": {
     "source_observed": true,
     "wired_documentally": true,
-    "implemented_pbip_consumer": false,
+    "implemented_pbip_consumer": true,
+    "pbip_unit_build_proven": false,
+    "unit_test_execution_proven": false,
     "build_proven": false,
     "runtime_proven": false,
     "device_proven": false,
