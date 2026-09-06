@@ -9,10 +9,12 @@
 ## Execution Summary
 
 ### 5.1 — Lineage Authority Validation
+
 **Command**: `python3 scripts/validate_lineage_authority.py --check`  
 **Exit Code**: 0 (PASS)
 
 **Results**:
+
 - ✓ Authority pyramid: 6 repos (termux-packages, termux-app-rafacodephi, mapa, rafpolimata, rafgittools, llamarafaelia)
 - ✓ Dedup rules: 4 classes (identical_artifact, upstream_sync, independent_derivation, cross_repo_evidence_chain)
 - ✓ Lineage ID schema: {repo}:{branch}:{commit}:{path}:{artifact_hash} (immutable, globally unique)
@@ -31,10 +33,12 @@
 | llamarafaelia | model authority | model_output, inference_state | model semantic correctness |
 
 ### 5.2 — Federation Topology Validation
+
 **Command**: `python3 scripts/validate_federation_topology.py --repos 6 --check`  
 **Exit Code**: 0 (PASS)
 
 **Results**:
+
 - ✓ Repository count: 6 (exactly as specified)
 - ✓ Role non-overlap: 6 distinct roles (no duplication)
 - ✓ Responsibility coverage: 6 domains (source, build, compiler, version, federation, model)
@@ -53,10 +57,12 @@
 | independence_proof | ✓ | Duplicates correctly classified (identical=non-independent, cross-repo=independent) |
 
 ### 5.3 — Cross-Repo Deduplication Audit
+
 **Command**: `python3 scripts/compare_cross_source_evidence.py --lineage-check`  
 **Exit Code**: 0 (PASS)
 
 **Results**:
+
 - ✓ Dedup rules consistency: identical_artifact and upstream_sync require proof_required fields
 - ✓ Producer authority hierarchy: 6 repos in strict ordering (source→build→compiler→federation→version→model)
 - ✓ Independence proof flow: cross_repo_evidence_chain requires all critical proofs (producer_commit_hash, handoff_schema_match, consumer_receipt, timestamp_continuity, pipeline_divergence)
@@ -97,7 +103,7 @@
 
 ### Complete Flow: Package → Build → Validation
 
-```
+```text
 1. termux-packages (source authority)
    ├─ TV-01 (SOURCE_FETCH): ✓ PASS
    │  └─ Input: URL + expected SHA-256
@@ -148,6 +154,7 @@
 ## Federation State Update
 
 ### Before FASE 5
+
 ```yaml
 state: VERIFICATION_PENDING
 tv_independence: TOKEN_VAZIO (12 gaps)
@@ -157,6 +164,7 @@ claim_allowed: false
 ```
 
 ### After FASE 5
+
 ```yaml
 state: VERIFICATION_PENDING  # still pending device receipt (FASE 6)
 tv_independence: CLOSED  # lineage authority defined + dedup rules validated
@@ -166,6 +174,7 @@ claim_allowed: false  # waiting for physical device validation
 ```
 
 ### Remaining for FEDERATION_CERTIFIED
+
 - ✓ TV-CODE: implementations complete
 - ✓ TV-DATA: fixtures frozen
 - ✓ TV-INDEPENDENCE: lineage authority defined
@@ -177,14 +186,17 @@ claim_allowed: false  # waiting for physical device validation
 ## Created Artifacts
 
 ### 1. Validation Scripts
+
 - `scripts/validate_lineage_authority.py` — Lineage schema + authority pyramid validation
 - `scripts/validate_federation_topology.py` — 6-repo TOROID topology coherence
 - `scripts/compare_cross_source_evidence.py` — Cross-repo deduplication audit
 
 ### 2. Updated Configuration
+
 - `data/control-plane/lineage_authority_v1.json` — Updated with clean validation_gates and proof_required
 
 ### 3. Test Results
+
 - All 3 federation gates: ✓ PASS
 - All dedup rules: ✓ validated
 - All authority roles: ✓ non-overlapping
@@ -195,6 +207,7 @@ claim_allowed: false  # waiting for physical device validation
 ## F_ok, F_gap, F_next
 
 ### F_ok ✓
+
 - ✓ Lineage authority schema defined (6-repo pyramid)
 - ✓ Deduplication rules enumerated (4 classes, independence validated)
 - ✓ Federation topology validated (6 repos, acyclic DAG)
@@ -204,12 +217,14 @@ claim_allowed: false  # waiting for physical device validation
 - ✓ TV-INDEPENDENCE closure complete
 
 ### F_gap ⏳
+
 - TV-06/07 (ARMV7_ELF, AARCH64_ELF): Physical device builds not yet executed (FASE 6)
 - BUG-02 (termux-app-rafacodephi): VOID paradox decision still pending (blocks FASE 3/4 closure)
 - Device receipts: Moto E7 (ARM32) and Realme (ARM64) not yet allocated
 - CI observability: GitHub Actions not yet configured with observable steps
 
 ### F_next 🌀
+
 1. **FASE 6 (Physical Device Validation)**:
    - Allocate ARM32 (Moto E7) + ARM64 (Realme) devices
    - Execute D8 gate: `make device-d8-gate` on physical hardware
@@ -231,7 +246,8 @@ claim_allowed: false  # waiting for physical device validation
 ## Gate Receipts
 
 ### Receipt 1: Lineage Authority
-```
+
+```text
 Gate: validate_lineage_authority.py --check
 Exit: 0 (PASS)
 Timestamp: 2026-08-22T01:55:00Z
@@ -241,7 +257,8 @@ Dedup Rules: 4
 ```
 
 ### Receipt 2: Federation Topology
-```
+
+```text
 Gate: validate_federation_topology.py --repos 6 --check
 Exit: 0 (PASS)
 Timestamp: 2026-08-22T01:56:00Z
@@ -251,7 +268,8 @@ Independence Claims: validated
 ```
 
 ### Receipt 3: Deduplication Audit
-```
+
+```text
 Gate: compare_cross_source_evidence.py --lineage-check
 Exit: 0 (PASS)
 Timestamp: 2026-08-22T01:57:00Z
