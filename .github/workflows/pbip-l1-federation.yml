@@ -1,0 +1,50 @@
+name: PBIP-L1 Federation Gate
+
+on:
+  pull_request:
+    paths:
+      - 'data/control-plane/PBIP_L1_FEDERATED_INDEX.v1.json'
+      - 'scripts/validate_pbip_l1_federated_index.py'
+      - 'docs/canonical/2026-09-06/PBIP_L1_FEDERATED_INDEX.md'
+      - '.github/workflows/pbip-l1-federation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pbip-l1-federation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-pbip-l1-federation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate PBIP-L1 federated lifecycle
+        run: |
+          set -euo pipefail
+          python3 scripts/validate_pbip_l1_federated_index.py \
+            data/control-plane/PBIP_L1_FEDERATED_INDEX.v1.json
+
+      - name: Verify provider-independent gate remains open
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('data/control-plane/PBIP_L1_FEDERATED_INDEX.v1.json')
+          x = json.loads(p.read_text(encoding='utf-8'))
+          e = x['evidence_state']
+          assert e['cross_implementation_reproduction_proven'] is True
+          assert e['independent_ci_provider'] is False
+          assert e['runtime_proven'] is False
+          assert e['device_proven'] is False
+          assert e['reproduced'] is False
+          assert x['claim_allowed'] is False
+          assert 'TOKEN_VAZIO_PBIP_PROVIDER_INDEPENDENT_REPRODUCTION' in x['gates']
+          print('PASS: cross-implementation proven; provider/device/runtime gates remain closed')
+          PY
