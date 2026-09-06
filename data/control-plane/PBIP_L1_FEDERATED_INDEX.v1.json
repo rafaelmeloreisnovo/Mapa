@@ -4,7 +4,7 @@
   "formula_id": "PBIP-L1",
   "object_type": "FEDERATED_FORMULA_INDEX",
   "date": "2026-09-06",
-  "state": "IMPLEMENTED_CONSUMER_EVIDENCE_PENDING",
+  "state": "PBIP_UNIT_EVIDENCE_OBSERVED_RUNTIME_PENDING",
   "claim_allowed": false,
   "formula": {
     "domain": "Euclidean line-circle intersection with unit line direction",
@@ -52,11 +52,15 @@
     {
       "id": "VECTRAS_BINDING",
       "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
-      "ref": "19dc97709ece76d3dd8bc3396f9ce73b810b57d4",
+      "ref": "836569a69c69b9b5d194108d0079a4a593b9f5d4",
       "path": "docs/rafaelia/PBIP_L1_FEDERATED_BINDING_V1.md",
       "implementation_path": "app/src/main/java/com/vectras/vm/core/PbipL1.java",
+      "implementation_sha256": "1119f44f78f6fe3e2abc3540414522106a92b3570b55cd20808ba147385055a9",
       "test_path": "app/src/test/java/com/vectras/vm/core/PbipL1Test.java",
+      "test_sha256": "2eb4f2d2ceeb587bcdfc19aec45ddfb220397bfdad5d5bb60864415bf2c8a6af",
       "evidence_workflow": ".github/workflows/pbip-l1-evidence.yml",
+      "workflow_run_id": 34025698586,
+      "workflow_job_id": 101466152645,
       "role": "EXECUTABLE_CONSUMER"
     },
     {
@@ -69,8 +73,12 @@
     {
       "id": "EVIDENCE_ROUTE",
       "repo": "rafaelmeloreisnovo/RafPolimata",
-      "ref": "453c1fa370d92bdac50f12af32d522874c3e1156",
+      "ref": "5edf77877be664af716ba6366d39ee749f1c4890",
       "path": "docs/evidence/PBIP_L1_EVIDENCE_ROUTE_V1.md",
+      "receipt_path": "evidence/pbip/PBIP_L1_CI_RECEIPT_20260906_RUN34025698586.v1.json",
+      "receipt_sha256": "2077b4674e263338da12d8d78a312744e01d2f3ba44561cfb61cb848aa551c6b",
+      "artifact_id": 9987007149,
+      "artifact_zip_sha256": "7c569d05c58bbbfd240d1263b7c40546a57ed58367d5facbeb7409469ef5130b",
       "role": "EVIDENCE_ORCHESTRATION"
     }
   ],
@@ -80,7 +88,7 @@
     ["FORMAL_MATH", "RLL_BINDING", "TYPED_REFERENCE_ONLY"],
     ["FORMAL_MATH", "VECTRAS_BINDING", "EXECUTABLE_CONSUMER"],
     ["FORMAL_MATH", "PRIVATE_BINDING", "CONSUMER_CONTRACT"],
-    ["VECTRAS_BINDING", "EVIDENCE_ROUTE", "MUST_EMIT_RECEIPT"],
+    ["VECTRAS_BINDING", "EVIDENCE_ROUTE", "EMITTED_EXECUTED_RECEIPT"],
     ["PRIVATE_BINDING", "EVIDENCE_ROUTE", "MUST_EMIT_RECEIPT"],
     ["EVIDENCE_ROUTE", "ACADEMIC_LEDGER", "MAY_PROMOTE_ONLY_AFTER_REVIEW"]
   ],
@@ -88,25 +96,30 @@
     "source_observed": true,
     "wired_documentally": true,
     "implemented_pbip_consumer": true,
-    "pbip_unit_build_proven": false,
-    "unit_test_execution_proven": false,
+    "pbip_unit_build_proven": true,
+    "unit_test_execution_proven": true,
+    "provider_receipt_observed": true,
+    "artifact_hash_observed": true,
     "build_proven": false,
     "runtime_proven": false,
     "device_proven": false,
     "reproduced": false
   },
   "gates": [
-    "TOKEN_VAZIO_CI_BINDING_PBIP_L1",
     "TOKEN_VAZIO_POLY3_CANONICAL",
     "TOKEN_VAZIO_PHYSICAL_VORTEX_MODEL",
     "TOKEN_VAZIO_RLL_PBIP_PHYSICAL_BINDING",
     "TOKEN_VAZIO_PRIVATE_PBIP_IMPLEMENTATION",
-    "TOKEN_VAZIO_PRIVATE_PBIP_RECEIPT"
+    "TOKEN_VAZIO_PRIVATE_PBIP_RECEIPT",
+    "TOKEN_VAZIO_PBIP_INDEPENDENT_REPRODUCTION",
+    "TOKEN_VAZIO_PBIP_ANDROID_RUNTIME",
+    "TOKEN_VAZIO_PBIP_DEVICE_PROOF"
   ],
   "invariants": [
     "TOKEN_VAZIO != 0",
     "FORMULA != IMPLEMENTATION",
     "IMPLEMENTATION != BUILD_PROVEN",
+    "PBIP_UNIT_BUILD_PROVEN != ANDROID_RUNTIME_PROVEN",
     "BUILD_PROVEN != RUNTIME_PROVEN",
     "RUNTIME_PROVEN != DEVICE_PROVEN",
     "EVIDENCE != CLAIM",
