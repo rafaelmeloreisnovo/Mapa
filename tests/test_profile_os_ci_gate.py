@@ -32,6 +32,9 @@ class ProfileOSCiGateTests(unittest.TestCase):
         text=WF.read_text(encoding="utf-8")
         self.assertIn("if: always()", text)
         self.assertIn("profile-os-evidence-${{ github.run_id }}", text)
+    def test_workflow_preserves_hidden_composition(self):
+        text=WF.read_text(encoding="utf-8")
+        self.assertIn("include-hidden-files: true", text)
     def test_claim_remains_closed(self):
         self.assertIs(POL["claim_allowed"], False)
 
