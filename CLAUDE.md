@@ -1,12 +1,12 @@
 # CLAUDE.md — Claude Code adapter for Mapa
 
-@AGENTS.md (to be created)
-@docs/AGENTES.md (reference: RafPolimata)
+@AGENTS.md
+@docs/AGENTES.md (local entry protocol)
 @README.md
 @auditoria/federated-doctor-pass-20260821/OBSERVACAO-FINAL.md
 
 This file is a Claude Code adapter, not a second source of architectural truth.
-The repository-wide contract is `AGENTS.md` (federated governance); detailed protocol is in `docs/AGENTES.md` (from RafPolimata).
+The repository-wide contract is `AGENTS.md` (federated governance); its local entry route is in `docs/AGENTES.md`.
 
 ## Session start
 
@@ -15,11 +15,13 @@ Before editing:
 1. Read `AGENTS.md` and `README.md` for repository mission and five-layer architecture.
 2. Read `auditoria/federated-doctor-pass-20260821/OBSERVACAO-FINAL.md` for current TOKEN_VAZIO state.
 3. Inspect branch, HEAD and working tree:
+
    ```sh
    git branch --show-current
    git rev-parse HEAD
    git status --short
    ```
+
 4. Identify TOKEN_VAZIO gaps (12 documented in audit trail) and their dependency chains.
 5. Do not merge without explicit human authorization.
 
@@ -35,6 +37,7 @@ Mapa is the federated knowledge organization and control plane for the RAFAELIA 
 6. **llamarafaelia** — model authority
 
 **Five-layer architecture:**
+
 - Layer 1: Biblioteconomic KOS (cataloging, vocabulary, authority control)
 - Layer 2: Operational ontology (concepts, relations, trajectories, gaps)
 - Layer 3: Federated control plane (modules, products, procedures, gates)
@@ -66,6 +69,7 @@ claim_allowed: false                       # fail-closed by default
 | **TV-ACCESS** | 1 | Vector corpus access control | 4 |
 
 **Closure path to FEDERATION_CERTIFIED:**
+
 1. **Cycle 4:** Implement TV-CODE (DAG causal, Bootstrap UQ), freeze TV-DATA fixtures
 2. **Cycle 5:** Define TV-INDEPENDENCE (lineage authority, dedup rules)
 3. **Cycle 6:** Cross-repo tracing + topological validation (6 repos in TOROID)
@@ -125,6 +129,7 @@ When editing prose:
 ## Federation gates (reference)
 
 ### Cycle 4 (Implementations + frozen fixtures)
+
 ```sh
 python3 -m unittest tests.test_dag_causal               # TV-CODE: DAG engine
 python3 -m unittest tests.test_bootstrap_uq             # TV-CODE: Bootstrap UQ
@@ -132,12 +137,14 @@ python3 scripts/validate_fixtures.py --check            # TV-DATA: frozen checks
 ```
 
 ### Cycle 5 (Cross-repo federation)
+
 ```sh
 python3 scripts/validate_lineage_authority.py --check   # TV-INDEPENDENCE: lineage
 python3 scripts/compare_cross_source_evidence.py        # Dedup validation
 ```
 
 ### Cycle 6 (Topological validation)
+
 ```sh
 python3 scripts/validate_federation_topology.py --repos 6 --check
 ```

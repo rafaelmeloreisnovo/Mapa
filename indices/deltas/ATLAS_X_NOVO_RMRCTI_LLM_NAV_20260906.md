@@ -47,6 +47,7 @@ LEARN:X
 ## Source observations supporting the route
 
 ### Termux
+
 Existing vertical slice defines:
 
 ```text
@@ -55,6 +56,7 @@ ConversationChunk -> ContextBundle -> IntentIR -> Governance Gate
 ```
 
 ### llamaRafaelia / rmrCti
+
 Source-observed canonical chain:
 
 ```text
@@ -70,6 +72,7 @@ raw / zip / conversations.json
 `RAFAELIA_RUN_TERMUX.md` documents the local Termux route. `CTI_MEMORY_INTEGRATION.md` explicitly distinguishes long-term retrieval from KV-cache and from semantic-search claims.
 
 ### NOVOexport / Drive
+
 Existing Drive bridge:
 
 - `RAFAELIA — Assistant Bridge RMRCTI NOVOexport — Ledger V1 — 2026-08-10`
@@ -79,9 +82,11 @@ Existing Drive bridge:
 This route reuses those authorities rather than creating a parallel corpus.
 
 ### RMRCTI ΔP
+
 `ΔP ≈ 0.18` is routed only as a measured-association candidate with explicit falsifier/report provenance. Repetition is not promoted to causality, universality or attractor status.
 
 ### Voynich
+
 Existing Mapa Three-Pillars route remains authoritative:
 
 ```text
@@ -93,9 +98,11 @@ P3 INTERPRETATION_CLAIM_BOUNDARY
 Protected body remains in `Rafaelia_Private`.
 
 ### RLL image method
+
 The RLL side contributes image provenance, repeat/replay and falsification boundaries. Visual similarity/classification is not promoted directly to a physical/scientific claim.
 
 ### GAIA
+
 `GAIA_phi/gaia_nanogpt.c` exposes the candidate retrieval chain:
 
 ```text

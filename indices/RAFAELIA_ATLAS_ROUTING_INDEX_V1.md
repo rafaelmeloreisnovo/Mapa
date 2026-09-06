@@ -43,6 +43,7 @@ Drive ID: `1yqrafV9KvQ2C-wz8nDCrYeVEyQo_TdQZ`
 ## Compatibility
 
 This index augments, not replaces:
+
 - `bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md`
 - `RAFAELIA_RELATIONSHIP_HOUSE_V1/06_INDICES/MASTER_INDEX.md`
 - `data/memory/RAFAELIA_LONGITUDINAL_ORTHOGONAL_INDEX_20260814.v1.json`
