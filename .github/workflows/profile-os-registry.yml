@@ -6,24 +6,45 @@ on:
       - 'data/control-plane/PROFILE_OS_**'
       - 'schemas/profile_os_registry.v1.schema.json'
       - 'scripts/validate_profile_os_registry.py'
+      - 'scripts/profile_os_ci_gate.py'
       - 'tests/test_profile_os_registry.py'
+      - 'tests/test_profile_os_ci_gate.py'
       - 'docs/canonical/2026-09-05/PROFILE_OS_**'
       - 'indices/RAFAELIA_PROFILE_OS_DRIVE_BRIDGE.v1.md'
+      - 'indices/RAFAELIA_PROFILE_OS_PRODUCT_TOKEN_CYCLES_20260905.v1.jsonl'
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: profile-os-registry-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PROFILE_OS_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout exact PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Set up Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.12'
-      - name: Validate registry invariants
-        run: |
-          python scripts/validate_profile_os_registry.py --registry data/control-plane/PROFILE_OS_REGISTRY.v1.json --supersession data/control-plane/PROFILE_OS_SUPERSESSION.v1.jsonl --gaps data/control-plane/PROFILE_OS_GAPS.v1.jsonl
-      - name: Run negative and regression tests
-        run: python -m unittest tests/test_profile_os_registry.py
+      - name: Build and verify PROFILE OS evidence
+        run: python scripts/profile_os_ci_gate.py
+      - name: Upload PROFILE OS evidence
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
+        with:
+          name: profile-os-evidence-${{ github.run_id }}
+          path: build/profile-os-evidence/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
