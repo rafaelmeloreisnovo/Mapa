@@ -1,0 +1,66 @@
+name: Reversibility Catalog Gate
+
+on:
+  pull_request:
+    paths:
+      - "auditoria/reversibility/**"
+      - "tools/validate_reversibility_catalog.py"
+      - "docs/governance/REVERSIBILITY_FEDERATION_V1.md"
+      - ".github/workflows/reversibility-catalog-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reversibility-catalog-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@751276eafca55f10f252026015f43c488f2322ba
+        with:
+          python-version: "3.12"
+
+      - name: Compile validator
+        run: python3 -m py_compile tools/validate_reversibility_catalog.py
+
+      - name: Validate append-only catalog and federation pointers
+        run: |
+          mkdir -p build/reversibility-catalog
+          python3 tools/validate_reversibility_catalog.py | tee build/reversibility-catalog/validation.json
+
+      - name: Syntax-check machine-readable contracts
+        run: |
+          python3 -m json.tool auditoria/reversibility/schema.v1.json >/dev/null
+          python3 -m json.tool auditoria/reversibility/federation/registry.v1.json >/dev/null
+          python3 -m json.tool auditoria/reversibility/federation/receipt-extension.v1.json >/dev/null
+
+      - name: Create custody checksums
+        run: |
+          sha256sum \
+            auditoria/reversibility/index.jsonl \
+            auditoria/reversibility/schema.v1.json \
+            auditoria/reversibility/federation/registry.v1.json \
+            auditoria/reversibility/federation/receipt-extension.v1.json \
+            tools/validate_reversibility_catalog.py \
+            > build/reversibility-catalog/SHA256SUMS
+
+      - name: Store bounded validation evidence
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
+        with:
+          name: reversibility-catalog-${{ github.run_id }}
+          path: build/reversibility-catalog/
+          if-no-files-found: error
+          retention-days: 90
