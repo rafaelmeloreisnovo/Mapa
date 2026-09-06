@@ -8,6 +8,9 @@ on:
       - "protocolos/CLAIM_SYNC_CONTRACT.md"
       - "protocolos/LEGACY_RUNTIME_SECURITY_BOUNDARY.md"
       - "scripts/validate_federated_registry.py"
+      - "auditoria/reversibility/**"
+      - "tools/validate_reversibility_catalog.py"
+      - "docs/governance/REVERSIBILITY_FEDERATION_V1.md"
       - ".github/workflows/federated-registry.yml"
   workflow_dispatch:
 
@@ -24,18 +27,26 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout without persisted credentials
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
 
-      - name: Compile validator
-        run: python3 -m py_compile scripts/validate_federated_registry.py
+      - name: Compile validators
+        run: |
+          python3 -m py_compile scripts/validate_federated_registry.py
+          python3 -m py_compile tools/validate_reversibility_catalog.py
 
-      - name: Validate registry
+      - name: Validate authority registry
         run: python3 scripts/validate_federated_registry.py | tee federated-registry-validation.json
 
+      - name: Validate reversibility catalog binding
+        run: python3 tools/validate_reversibility_catalog.py | tee reversibility-catalog-validation.json
+
       - name: Check JSON syntax
-        run: python3 -m json.tool indices/repository_authority_registry.json >/dev/null
+        run: |
+          python3 -m json.tool indices/repository_authority_registry.json >/dev/null
+          python3 -m json.tool auditoria/reversibility/federation/registry.v1.json >/dev/null
+          python3 -m json.tool auditoria/reversibility/federation/receipt-extension.v1.json >/dev/null
 
       - name: Create checksums
         run: |
@@ -45,14 +56,19 @@ jobs:
             protocolos/CLAIM_SYNC_CONTRACT.md \
             protocolos/LEGACY_RUNTIME_SECURITY_BOUNDARY.md \
             scripts/validate_federated_registry.py \
+            auditoria/reversibility/index.jsonl \
+            auditoria/reversibility/federation/registry.v1.json \
+            auditoria/reversibility/federation/receipt-extension.v1.json \
+            tools/validate_reversibility_catalog.py \
             > CHECKSUMS.sha256
 
       - name: Upload audit artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
         with:
           name: federated-authority-registry
           path: |
             federated-registry-validation.json
+            reversibility-catalog-validation.json
             CHECKSUMS.sha256
           if-no-files-found: error
           retention-days: 30
