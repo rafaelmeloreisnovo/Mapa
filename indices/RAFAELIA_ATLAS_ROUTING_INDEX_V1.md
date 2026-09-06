@@ -43,6 +43,7 @@ Drive ID: `1yqrafV9KvQ2C-wz8nDCrYeVEyQo_TdQZ`
 ## Compatibility
 
 This index augments, not replaces:
+
 - `bootstrap/RAFAELIA_CHATGPT_BOOTSTRAP_V1.md`
 - `RAFAELIA_RELATIONSHIP_HOUSE_V1/06_INDICES/MASTER_INDEX.md`
 - `data/memory/RAFAELIA_LONGITUDINAL_ORTHOGONAL_INDEX_20260814.v1.json`
@@ -103,3 +104,33 @@ Core boundary: `ZIPRAF != compression`; logical relation density is not physical
 Cross-repo route: `Vectras ↔ Termux RAFCODEPHI ↔ Rafaelia_Private ↔ GAIA_phi ↔ publicacientiespiritual ↔ X0/Home ↔ CientiEspiritual/ZRF provenance`.
 
 Open gates: `ZBG-G1..ZBG-G7`; unresolved claims remain `TOKEN_VAZIO`.
+
+## Route append — `ATLAS:X-NOVO-RMRCTI-LLM-NAV-20260906`
+
+State: `CONTRACT_MATERIALIZED / RUNTIME_BINDING_PENDING / APPEND_ONLY / claim_allowed=false`
+
+| Axis | Route |
+|---|---|
+| Atlas delta | `indices/deltas/ATLAS_X_NOVO_RMRCTI_LLM_NAV_20260906.md` |
+| Receipt | `receipts/2026-09-06_ATLAS_NOVO_RMRCTI_LLM_NAV_V1.md` |
+| Producer | `rafaelmeloreisnovo/termux-app-rafacodephi@rafaelia/atlas-novo-llm-navigation-contract-v1` |
+| Dataset source | Google Drive `NOVOexport` — source-first/read-only |
+| LLM memory | `rafaelmeloreisnovo/llamaRafaelia/rmrCti` |
+| Longitudinal | `L:ATLAS-NOVO-RMRCTI-LLM-NAV-20260906` |
+| Learning | `LEARN:ATLAS-NOVO-RMRCTI-LLM-NAV-20260906` |
+
+Canonical route:
+
+`ATLAS:X -> NOVO:X -> L:X -> {RMRCTI, Voynich_Private, RLL_Image, GAIA, optional Vectras} -> AtlasLLMContextEnvelope -> ContextBundle -> IntentIR -> Governance Gate -> local LLM -> LEARN:X`.
+
+Authority decision: Termux owns orchestration; `llamaRafaelia/rmrCti` owns CTI long-term retrieval; Vectras is optional runtime/VM; Rafaelia_Private protects Voynich source; GAIA is a candidate read-only retrieval adapter; RLL supplies image provenance/falsification boundaries.
+
+Hard boundaries:
+
+- `retrieval != training`;
+- `model_output != evidence`;
+- `measured ΔP ~= 0.18 != attractor`;
+- `visual_similarity != physical_equivalence`;
+- `private_pointer != public_disclosure`.
+
+Next gate: live read-only adapter + rare-fact CTI positive control + no-hit negative control + append-only learning receipt. Missing runtime evidence remains `TOKEN_VAZIO`.
