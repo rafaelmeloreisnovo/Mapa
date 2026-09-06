@@ -1,0 +1,26 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"rafaelia.reversibility.event.v1",
+  "title":"RAFAELIA Reversibility Event",
+  "type":"object",
+  "required":["event_id","timestamp","scope","operation","before_ref","after_ref","rollback_ref","evidence_ref","result","reversibility_state","risk_class","token_vazio","claim_allowed"],
+  "properties":{
+    "event_id":{"type":"string","pattern":"^REV-[0-9]{8}-[0-9]{4}$"},
+    "timestamp":{"type":"string"},
+    "scope":{"type":"string"},
+    "operation":{"type":"string"},
+    "before_ref":{"type":["string","null"]},
+    "after_ref":{"type":["string","null"]},
+    "rollback_ref":{"type":["string","null"]},
+    "evidence_ref":{"type":["string","null"]},
+    "result":{"type":"string"},
+    "reversibility_state":{"enum":["PLANNED","EXECUTED_REVERSIBLE","ROLLBACK_AVAILABLE","ROLLED_BACK","SUPERSEDED","TOKEN_VAZIO"]},
+    "risk_class":{"enum":["LOW","MEDIUM","HIGH","UNKNOWN"]},
+    "token_vazio":{"type":"boolean"},
+    "claim_allowed":{"type":"boolean"},
+    "predecessor_event_id":{"type":["string","null"]},
+    "human_summary":{"type":"string"},
+    "eia_tags":{"type":"array","items":{"type":"string"},"uniqueItems":true}
+  },
+  "additionalProperties":true
+}
