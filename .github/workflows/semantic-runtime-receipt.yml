@@ -35,7 +35,7 @@ jobs:
             --previous-index artifacts/semantic-runtime/index.json \
             --out-index artifacts/semantic-runtime/index.incremental.json \
             --receipt artifacts/semantic-runtime/receipt.incremental.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: semantic-runtime-receipt
           path: artifacts/semantic-runtime/

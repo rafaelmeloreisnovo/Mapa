@@ -68,7 +68,7 @@ jobs:
 
       - name: Upload contract evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: semantic-carrier-index-${{ github.run_id }}
           path: build/semantic-carrier/

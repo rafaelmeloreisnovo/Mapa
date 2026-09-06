@@ -50,7 +50,7 @@ jobs:
             tests/test_evidence_receipt.py \
             $(find data/routing/evidence -type f -name '*.json' -print | sort) \
             > build/evidence-receipts/SHA256SUMS
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: evidence-receipt-gate
           path: build/evidence-receipts/

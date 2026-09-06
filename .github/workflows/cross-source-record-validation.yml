@@ -150,7 +150,7 @@ jobs:
             --report "$RUNNER_TEMP/cross-source-local/directive-event-validation.json"
 
       - name: Upload validation evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cross-source-validation
           path: ${{ runner.temp }}/cross-source-local/

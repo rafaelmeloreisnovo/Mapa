@@ -42,7 +42,7 @@ jobs:
           echo "expected=$expected"
           echo "actual=$actual"
           test "$actual" = "$expected"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: math-memory-e2-finite-gates
           path: build/math-memory/e2-finite-gates.json

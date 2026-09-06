@@ -48,7 +48,7 @@ jobs:
             build/semantic-support/report.json \
             build/semantic-support/stdout.json \
             > build/semantic-support/SHA256SUMS
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: semantic-support-gate-v1
           path: build/semantic-support/
