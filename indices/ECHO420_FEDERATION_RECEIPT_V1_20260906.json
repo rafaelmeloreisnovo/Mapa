@@ -1,0 +1,95 @@
+{
+  "schema": "rafaelia-echo420-federation-receipt-v1",
+  "date": "2026-09-06",
+  "mode": "APPEND_ONLY_REVERSIBLE",
+  "claim_allowed": false,
+  "branch": "rafaelia/echo420-formalization-20260906",
+  "repositories": [
+    {
+      "repo": "rafaelmeloreisnovo/ChipQuantum",
+      "pr": 64,
+      "pr_state": "open_draft",
+      "mergeable_observed": true,
+      "files": [
+        "docs/echo420/ECHO420_FORMAL_SPEC_V1.md",
+        "src/omega/echo420.py",
+        "tests/test_echo420.py",
+        ".github/workflows/validate-echo420.yml",
+        "docs/echo420/ECHO420_CI_RECEIPT_20260906.md"
+      ],
+      "reference_ci": {
+        "workflow": "Validate ECHO420",
+        "run_id": 34016135380,
+        "validated_head_sha": "cdcef1975b221a95e086ce541231490e9bb1e4e3",
+        "compile": "PASS",
+        "tests": "PASS",
+        "self_check": "PASS"
+      }
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Rafaelia_Private",
+      "pr": 210,
+      "pr_state": "open_draft",
+      "files": ["native/voynich_impl/echo420.v1.json"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/papers",
+      "pr": 70,
+      "pr_state": "open_draft",
+      "files": ["papers/technical/ECHO420_SEMANTIC_ECHO_42X10_20260906.md"]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Matem-tica-",
+      "pr": 20,
+      "pr_state": "open_draft",
+      "files": [
+        "A_raf/ECHO420_FORMULA_INDEX_V1_20260906.md",
+        "A_raf/ECHO420_FORMULA_INDEX_V1_20260906.json"
+      ]
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "pr": 525,
+      "pr_state": "open_draft",
+      "files": [
+        "indices/ECHO420_IMPLEMENTATION_AUDIT_INDEX_V1_20260906.md",
+        "indices/ECHO420_FEDERATION_RECEIPT_V1_20260906.json"
+      ]
+    }
+  ],
+  "google_drive": {
+    "document_id": "11X47ZJJe3obO5E5Yo_AUuf54bQ2S7yTNargFHY7n9x4",
+    "title": "RAFAELIA — ECHO420 — Índice de Fórmulas, Implementação e Auditoria — 2026-09-06",
+    "parent_folder_id": "1xjQWd87BWRIilWmk7_30wpsqWwm2eKPs",
+    "parent_folder_title": "matematica",
+    "status": "CREATED_AND_POPULATED"
+  },
+  "counts": {
+    "mathematical_formula_families": 30,
+    "formal_spec_indexed_objects": 32,
+    "typed_comparison_axes": 5,
+    "repositories_touched": 5,
+    "draft_pull_requests": 5
+  },
+  "gates": {
+    "FORMULAS_INDEXED_HUMAN": "PASS",
+    "FORMULAS_INDEXED_MACHINE": "PASS",
+    "REFERENCE_CODE_PRESENT": "PASS",
+    "REFERENCE_TESTS_PRESENT": "PASS",
+    "REFERENCE_CI": "PASS",
+    "DRIVE_CANONICAL_RECORD": "PASS",
+    "ARM32_ECHO420_EXECUTION": "TOKEN_VAZIO",
+    "ARM64_ECHO420_EXECUTION": "TOKEN_VAZIO",
+    "REAL_VOYNICH_ECHO_RUN": "TOKEN_VAZIO",
+    "CODEX_GIGAS_CONTROL_RUN": "TOKEN_VAZIO",
+    "TONALAMATL_CONTROL_RUN": "TOKEN_VAZIO",
+    "NULL_MODEL_STATISTICAL_COMPARISON": "TOKEN_VAZIO",
+    "INDEPENDENT_REPRODUCTION": "TOKEN_VAZIO",
+    "ATTRACTOR_BASIN_PROVEN": "TOKEN_VAZIO",
+    "CLAIM_ALLOWED": false
+  },
+  "rollback": {
+    "pre_merge": "close PRs and delete work branches; main remains unchanged",
+    "post_merge": "revert the corresponding merge commits/file additions; no history rewrite required"
+  }
+}
