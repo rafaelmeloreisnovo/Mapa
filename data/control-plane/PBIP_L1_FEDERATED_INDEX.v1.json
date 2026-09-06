@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "federation_id": "PBIP-L1-FED-V1",
+  "formula_id": "PBIP-L1",
+  "object_type": "FEDERATED_FORMULA_INDEX",
+  "date": "2026-09-06",
+  "state": "WIRED_DOCUMENTALLY_EVIDENCE_PENDING",
+  "claim_allowed": false,
+  "formula": {
+    "domain": "Euclidean line-circle intersection with unit line direction",
+    "pythagorean_form": "q^2 = r^2 - d_perp^2",
+    "quadratic_form": "Delta_B = 4(r^2 - d_perp^2) = 4q^2",
+    "classification": {
+      "Delta_B>0": "SECANT",
+      "Delta_B=0": "TANGENT",
+      "Delta_B<0": "NO_REAL_INTERSECTION"
+    }
+  },
+  "nodes": [
+    {
+      "id": "FORMAL_MATH",
+      "repo": "rafaelmeloreisnovo/Matem-tica-",
+      "ref": "e1f5e3dbaaec3c9e7fb38824c368682e740ac117",
+      "path": "docs/formal/PITAGORAS_BHASKARA_ISOSCELES_POINCARE_CROSSWALK_V1.md",
+      "review": "PR#23",
+      "role": "FORMAL_MATH_AUTHORITY"
+    },
+    {
+      "id": "GEOMETRY_REFERENCE",
+      "repo": "rafaelmeloreisnovo/ChipQuantum",
+      "ref": "4838bc4e7a42396fbf35b12093f060590304da95",
+      "path": "src/geometry/sqrt3_geometry_matrix/PITAGORAS_BHASKARA_ISOSCELES_POINCARE_CROSSWALK_V1.md",
+      "review": "PR#68",
+      "role": "GEOMETRY_IMPLEMENTATION_REFERENCE"
+    },
+    {
+      "id": "ACADEMIC_LEDGER",
+      "repo": "rafaelmeloreisnovo/papers",
+      "ref": "df9a8fc0fa3be109027d8d81fc1457ea70cf6472",
+      "path": "research_notes/2026-09-06_PITAGORAS_BHASKARA_ISOSCELES_POINCARE_CROSSREPO_LEDGER_V1.md",
+      "review": "PR#73",
+      "role": "ACADEMIC_CLAIM_LEDGER"
+    },
+    {
+      "id": "RLL_BINDING",
+      "repo": "instituto-Rafael/relativity-living-light",
+      "ref": "64e3ad2b1b0796c9c94a63ab89b7ac279b8bbc5a",
+      "path": "docs/federation/PBIP_L1_FEDERATED_BINDING_V1.md",
+      "role": "RLL_CROSS_DOMAIN_REFERENCE",
+      "physical_equivalence": false
+    },
+    {
+      "id": "VECTRAS_BINDING",
+      "repo": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "ref": "6aef4d3f292b5a5d8916abc775975feb85d5622a",
+      "path": "docs/rafaelia/PBIP_L1_FEDERATED_BINDING_V1.md",
+      "role": "EXECUTABLE_CONSUMER_CANDIDATE"
+    },
+    {
+      "id": "PRIVATE_BINDING",
+      "repo": "rafaelmeloreisnovo/Rafaelia_Private",
+      "ref": "f8572609e3ea9370b034ac8df89c016d507ec4a2",
+      "path": "docs/rafaelia/PBIP_L1_FEDERATED_BINDING_V1.md",
+      "role": "PRIVATE_KERNEL_CONSUMER_REFERENCE"
+    },
+    {
+      "id": "EVIDENCE_ROUTE",
+      "repo": "rafaelmeloreisnovo/RafPolimata",
+      "ref": "7d9cf028cddb1e3c537e8bf0dc8b1f77263eb19e",
+      "path": "docs/evidence/PBIP_L1_EVIDENCE_ROUTE_V1.md",
+      "role": "EVIDENCE_ORCHESTRATION"
+    }
+  ],
+  "edges": [
+    ["FORMAL_MATH", "GEOMETRY_REFERENCE", "IMPLEMENTS_OR_REFERENCES"],
+    ["FORMAL_MATH", "ACADEMIC_LEDGER", "SUPPORTS"],
+    ["FORMAL_MATH", "RLL_BINDING", "TYPED_REFERENCE_ONLY"],
+    ["FORMAL_MATH", "VECTRAS_BINDING", "CONSUMER_CONTRACT"],
+    ["FORMAL_MATH", "PRIVATE_BINDING", "CONSUMER_CONTRACT"],
+    ["VECTRAS_BINDING", "EVIDENCE_ROUTE", "MUST_EMIT_RECEIPT"],
+    ["PRIVATE_BINDING", "EVIDENCE_ROUTE", "MUST_EMIT_RECEIPT"],
+    ["EVIDENCE_ROUTE", "ACADEMIC_LEDGER", "MAY_PROMOTE_ONLY_AFTER_REVIEW"]
+  ],
+  "evidence_state": {
+    "source_observed": true,
+    "wired_documentally": true,
+    "implemented_pbip_consumer": false,
+    "build_proven": false,
+    "runtime_proven": false,
+    "device_proven": false,
+    "reproduced": false
+  },
+  "gates": [
+    "TOKEN_VAZIO_CI_BINDING_PBIP_L1",
+    "TOKEN_VAZIO_POLY3_CANONICAL",
+    "TOKEN_VAZIO_PHYSICAL_VORTEX_MODEL",
+    "TOKEN_VAZIO_RLL_PBIP_PHYSICAL_BINDING",
+    "TOKEN_VAZIO_PRIVATE_PBIP_IMPLEMENTATION",
+    "TOKEN_VAZIO_PRIVATE_PBIP_RECEIPT"
+  ],
+  "invariants": [
+    "TOKEN_VAZIO != 0",
+    "FORMULA != IMPLEMENTATION",
+    "IMPLEMENTATION != BUILD_PROVEN",
+    "BUILD_PROVEN != RUNTIME_PROVEN",
+    "RUNTIME_PROVEN != DEVICE_PROVEN",
+    "EVIDENCE != CLAIM",
+    "Poincare_return_map != Poincare_conjecture",
+    "H_RADIAL_30 != H_MAX_EQUILATERAL_MERIDIAN"
+  ]
+}
