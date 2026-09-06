@@ -1,0 +1,42 @@
+{
+  "schema": "RAFAELIA_PROFILE_OS_R6_CI_CLASSIFICATION_V1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pr": 528,
+  "base_sha": "0209437b7a8b480728daeca7542bb8a441c33ffc",
+  "head_before_classification": "74cfac815f207cd610e0eda5d5a48f0bac1e7784",
+  "scope": "post-merge evidence/custody only",
+  "profile_os_gate_rerun": false,
+  "profile_os_gate_rerun_reason": "R6 changes only receipts/profile-os-r6 paths; PROFILE OS Registry Gate path filter did not match. R6 binds the already provider-validated R5 run 34016118690.",
+  "changed_markdown": {
+    "state": "PASS",
+    "issues": 0,
+    "files": [
+      "receipts/profile-os-r6/INDEX.md",
+      "receipts/profile-os-r6/PROFILE_OS_REMOTE_CI_R6_PROVIDER_BOUND_RECEIPT.md"
+    ]
+  },
+  "historical_markdown_debt": {
+    "state": "FAIL_GLOBAL_RATCHET",
+    "tool": "markdownlint-cli2@0.23.2",
+    "observed_issues": 948,
+    "ceiling_issues": 890,
+    "observed_files_with_issues": 100,
+    "ceiling_files_with_issues": 95,
+    "baseline_file": "data/quality/MARKDOWN_DEBT_BASELINE_20260829.v1.json",
+    "r6_delta_attribution": "ZERO_CHANGED_MARKDOWN_ISSUES",
+    "reason": "The R6 diff adds two Markdown files and both pass the blocking changed-Markdown lint with zero issues; the remaining four files are non-Markdown, and R6 changes no lint configuration or ratchet script. Therefore R6 contributes zero Markdown lint issues. The failing count is repository-wide historical debt relative to the static 2026-08-29 ceiling."
+  },
+  "parallel_gates": {
+    "human_dignity_ethics": "PASS",
+    "main_hardening": "PASS",
+    "security_code_scan": "PASS",
+    "branch_topology": "PASS",
+    "code_scan": "FAIL_PROVIDER_CREDENTIAL_GAP",
+    "server_merge_enforcement": "FAIL_LIVE_SERVER_SIDE_ENFORCEMENT",
+    "provider_protection": "FAIL_LIVE_DEFAULT_BRANCH_RULESET",
+    "promotion_control": "FAIL_CLOSED_MANUAL_PROMOTION_GUARD"
+  },
+  "claim_allowed": false,
+  "decision": "R6_CUSTODY_CONTENT_VALID__REPOSITORY_WIDE_GATES_REMAIN_OPEN",
+  "mode": ["APPEND_ONLY", "PROVENANCE_FIRST", "NO_DELETE"]
+}
