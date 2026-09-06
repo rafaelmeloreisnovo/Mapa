@@ -1,0 +1,92 @@
+{
+  "schema": "rafaelia.atlas_ci_postflight.v1",
+  "id": "EVID:ATLAS-NOVO-CTI-CI-POSTFLIGHT-20260906",
+  "observed_at": "2026-09-06T18:13:14.441552Z",
+  "claim_allowed": false,
+  "predecessor": {
+    "mapa_commit": "320dde96bbceea942330e57e6d7b96a62a5a5f56",
+    "receipt": "receipts/2026-09-06_ATLAS_NOVO_CTI_LOCAL_ADAPTER_V1.json",
+    "sha256": "84d5c872c651a85453956e891944cd8ef615b3cf70275a59f87c50102bf3f3c0"
+  },
+  "termux": {
+    "adapter_commit": "1161f49de0ab0635420bab82144b7303c1e1a487",
+    "subsequent_asm_hotfix_commit": "950bfd09edff5cbe7cdfa267469d607120fd0b22",
+    "hotfix_receipt": "docs/receipts/ATLAS_NDK_ASM_HEADER_HOTFIX_20260906.v1.json",
+    "hotfix_receipt_sha256": "1fb03885216a2d6520898e980015d8ef7d75bef13cafbad6a021ed6326536020",
+    "reason": "Remote ARM64 assembler received C intrinsics header via LOCAL_CFLAGS.",
+    "fix": "Only forced C header moved to LOCAL_CONLYFLAGS, preserving shared assembly macro and effective C flags.",
+    "make_evaluation_cases": 12,
+    "make_evaluation_exit": 0,
+    "ndk_build_local": false,
+    "current_envelope_ci_run": 34050897344,
+    "current_envelope_ci": "PASS",
+    "android_rebuild": "PENDING_AT_THIS_RECEIPT",
+    "source_documentation": "https://developer.android.com/ndk/guides/android_mk#local_conlyflags"
+  },
+  "mapa_ci": {
+    "baseline_run": 34050556347,
+    "baseline_job": 101533279972,
+    "changed_markdown": "PASS",
+    "historical_debt_before": {
+      "issues": 924,
+      "files": 98,
+      "issue_ceiling": 890,
+      "file_ceiling": 95
+    },
+    "historical_debt_after": {
+      "exit_code": 0,
+      "issues": 792,
+      "issue_ceiling": 890,
+      "files_with_issues": 95,
+      "file_ceiling": 95,
+      "tool": "markdownlint-cli2@0.23.2",
+      "baseline_modified": false,
+      "log_sha256": "8bd1f31b04d28d73f48973444bb35f123bf1dd68e89e14142f75ff78df75ecc4",
+      "claim_allowed": false
+    },
+    "changed_file_lint_exit": 0,
+    "content_preservation": [
+      {
+        "path": "docs/PHASE_0_FOUNDATION_CHECKLIST.md",
+        "before_sha256": "072ce2800fd625f32e13d696f8d42bbe0d7d3ab0126123fd6611854053b2f2fc",
+        "after_sha256": "31228ca0a1bb5bbeaee1acdef153beafc5b3369c65a3d900cef6f42e0438f786",
+        "non_whitespace_content_preserved_except_text_fence_labels": true
+      },
+      {
+        "path": "audit/PHASE_0_AUDIT_SUMMARY_20260821.md",
+        "before_sha256": "1c394d84e248a72ccba07fb21c2fd5acef93cb61428144976167646921b23e1e",
+        "after_sha256": "73df14397cbbe588def40ca69142c108025363748f1348199f32c974bf6deaf8",
+        "non_whitespace_content_preserved_except_text_fence_labels": true
+      },
+      {
+        "path": "auditoria/FASE_5_FEDERATION_TRACE_20260822.md",
+        "before_sha256": "b001df509479b457ac0550ea1b0496be0b01524915298834dfd6acacc1cffeb1",
+        "after_sha256": "ba55a25ad97c7079b18c260bfe439064fa9179a529ee7b50020e64035967f98a",
+        "non_whitespace_content_preserved_except_text_fence_labels": true
+      }
+    ],
+    "quality_baseline_modified": false,
+    "ci_not_promoted_from_local": true
+  },
+  "drive_append_verification": {
+    "L:ATLAS-NOVO-CTI-LOCAL-20260906": {
+      "write_succeeded": true,
+      "readback_succeeded": true,
+      "previous_paragraphs_unchanged": true
+    },
+    "LEARN:ATLAS-NOVO-CTI-LOCAL-20260906": {
+      "write_succeeded": true,
+      "readback_succeeded": true,
+      "previous_paragraphs_unchanged": true
+    },
+    "raw_export_changed": false,
+    "weights_modified": false
+  },
+  "remaining_ci_blockers": [
+    "Provider protection configuration does not satisfy its existing contract.",
+    "Mapa CodeScan credential presence gate failed; no credential created or gate disabled.",
+    "Server merge-enforcement and promotion gates did not pass in the observed Mapa run.",
+    "Current complete Android build and physical runtime still require their own receipts."
+  ],
+  "rollback": "Revert scoped flag/formatting commits; retain receipts and prior document contents. No quality ceiling, protection setting or model weight changed."
+}

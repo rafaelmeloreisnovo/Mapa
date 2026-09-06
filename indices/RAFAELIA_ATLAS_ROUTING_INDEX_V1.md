@@ -134,3 +134,29 @@ Hard boundaries:
 - `private_pointer != public_disclosure`.
 
 Next gate: live read-only adapter + rare-fact CTI positive control + no-hit negative control + append-only learning receipt. Missing runtime evidence remains `TOKEN_VAZIO`.
+
+## Route append — `ATLAS:X-NOVO-CTI-LOCAL-20260906`
+
+State: `IMPLEMENTED / MEASURED_LOCAL / APPEND_ONLY / claim_allowed=false`.
+Predecessor: `ATLAS:X-NOVO-RMRCTI-LLM-NAV-20260906`.
+
+| Axis | Route |
+|---|---|
+| Atlas delta | [Local adapter delta](deltas/ATLAS_X_NOVO_CTI_LOCAL_ADAPTER_20260906.md) |
+| Receipt | [Federated local receipt](../receipts/2026-09-06_ATLAS_NOVO_CTI_LOCAL_ADAPTER_V1.json) |
+| Orchestrator | `termux-app-rafacodephi@1161f49de0ab0635420bab82144b7303c1e1a487`, draft PR #423 |
+| CTI producer | `llamaRafaelia@3dac5fd2c23a9c55361672d5d593d3e875146da3` |
+| Source actually tested | One bounded conversation from user-uploaded export; provider-current binding remains open |
+| Longitudinal | `L:ATLAS-NOVO-CTI-LOCAL-20260906` |
+| Learning | `LEARN:ATLAS-NOVO-CTI-LOCAL-20260906` |
+
+Observed: 18 tests passed; real-source CTI on/off/no-hit yielded 1/0/0 hits;
+the envelope CI gate passed. No model generation or device execution was performed.
+Next gate: pinned LLaMA consumes ContextBundle and produces measured off/on/no-hit
+responses. Existing NOVOexport, private, visual, Vectras and provider-protection
+gaps remain independent and open.
+
+Postflight: [CI reconciliation receipt](../receipts/2026-09-06_ATLAS_NOVO_CTI_CI_POSTFLIGHT_V1.json)
+records verified L/LEARN appends, the subsequent Termux ARM assembly-header fix
+at `950bfd09edff5cbe7cdfa267469d607120fd0b22`, and the historical Markdown debt
+reduction from 924 to 792 issues without changing the 890-issue ceiling.

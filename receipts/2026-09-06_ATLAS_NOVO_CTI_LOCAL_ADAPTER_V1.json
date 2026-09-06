@@ -1,0 +1,223 @@
+{
+  "schema": "rafaelia.federated_adapter_receipt.v1",
+  "id": "EVID:ATLAS-NOVO-CTI-LOCAL-20260906",
+  "observed_at": "2026-09-06T18:03:44.454382Z",
+  "state": "IMPLEMENTED_MEASURED_LOCAL",
+  "claim_allowed": false,
+  "federation_certified": false,
+  "model_executed": false,
+  "weights_modified": false,
+  "route_id": "ATLAS:X-NOVO-CTI-LOCAL-20260906",
+  "predecessor_route_id": "ATLAS:X-NOVO-RMRCTI-LLM-NAV-20260906",
+  "producer": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "commit": "1161f49de0ab0635420bab82144b7303c1e1a487",
+    "hotfix_commit": "2ba17355776b6c974252e4f9c78fb2d220944444",
+    "pr": 423,
+    "draft_at_creation": true,
+    "receipt_path": "docs/receipts/ATLAS_NOVO_CTI_LOCAL_20260906.v1.json",
+    "receipt_sha256": "afede51cc44188886a1c90bb5f82bef0a6f13620d1bc2ca33b5c0e2298f97153"
+  },
+  "cti_producer": {
+    "commit": "3dac5fd2c23a9c55361672d5d593d3e875146da3",
+    "git_blobs": {
+      "common/cti_layersbit.h": "dafa7c72263478a3662b43d21d8f48c0a6444d49",
+      "common/cti_lb_tables.h": "2f1daa06135b9d24999e8887c6a0d18d835e49ff",
+      "common/cti_memory.cpp": "34380acf6c1451aeade27d7472346d7bc00b3b9b",
+      "common/cti_memory.h": "f810ab85230181de40f016b2f1f875aae9aa9ae0",
+      "common/cti_privacy.cpp": "283207e0afd24258699122983ed3e1a1becd6daa",
+      "common/cti_privacy.h": "3ec5b5da2189b97d63f12893c1f6fcef44c45319",
+      "rmrCti/novoexport_chat_adapter_v2.py": "c70d7a396cc23b407234919b9e5b289d9f1b8929",
+      "vendor/nlohmann/json.hpp": "82d69f7c5d044c9887c96b90c97f5639083ecd14"
+    },
+    "repository": "rafaelmeloreisnovo/llamaRafaelia"
+  },
+  "mapa": {
+    "original_baseline": "b7a155d00e8309a4f51aa6f8c6c3eb9a3b6f199c",
+    "documentation_repair": "9535ca98c8d87a35ac97f87283014b1ea5179078",
+    "publication_base": "717ea78995f57dfaccb6ed8c4a61c4e16812a76f",
+    "publication_base_tree": "65dc8c4b045444c678f7fd4a6d404255c3c8e518",
+    "document_sha256": {
+      "AGENTS.md": "d43d1fc8ad38f178c569cd31aa847810ff3a6d4e1d1f7a0d13708d61abc8c91b",
+      "indices/deltas/ATLAS_X_NOVO_CTI_LOCAL_ADAPTER_20260906.md": "abbcb18aa9146264e48672595a62af7ee2e06c891a0da32d19e6b0cad30fa97f",
+      "indices/RAFAELIA_ATLAS_ROUTING_INDEX_V1.md": "1dade1f357a3c0c5e1c749623f2d52b6bc30ced06f3a40928903f87c7a96afcd"
+    }
+  },
+  "scope": {
+    "repository_inventory_count": 86,
+    "full_repository_audit": false,
+    "source_first_implementation_paths": [
+      "Mapa/AGENTS.md and routed indices",
+      "termux-app-rafacodephi/tools and existing orchestrator contracts",
+      "llamaRafaelia/common/cti_memory and cti_privacy",
+      "llamaRafaelia/rmrCti/novoexport_chat_adapter_v2.py"
+    ],
+    "additional_pointer_checks": [
+      "RafGitTools/configs/agent-entry-kernel.v1.json",
+      "instituto-Rafael/relativity-living-light"
+    ],
+    "raw_export_coverage": "One conversation, not whole NOVOexport",
+    "host": "Linux x86_64; Python 3.12.13 and GCC 13.3; hosted, not freestanding"
+  },
+  "local_gates": {
+    "unit_and_integration": {
+      "tests_run": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "python": "3.12.13",
+      "machine": "x86_64",
+      "log_sha256": "f073f1b8723aa640af505b8bf4f75b948d4cd85e7ac744cfe165bb4d7105c63d",
+      "claim_allowed": false
+    },
+    "native_build_binary_sha256": "152da492a0e1c8649f09052ab301302c8956f28bf126ac7d3d7d84ea94e91929",
+    "contract_validator_exit": 0,
+    "changed_markdown_lint": {
+      "version": "markdownlint-cli2@0.23.2",
+      "files": [
+        "AGENTS.md",
+        "indices/deltas/ATLAS_X_NOVO_CTI_LOCAL_ADAPTER_20260906.md",
+        "indices/RAFAELIA_ATLAS_ROUTING_INDEX_V1.md"
+      ],
+      "exit_code": 0,
+      "issues": 0
+    },
+    "topology": {
+      "command": "python3 scripts/validate_federation_topology.py --repos 6 --check",
+      "exit_code": 0,
+      "repositories": 6,
+      "edges": 5,
+      "scope": "Declared schema/authority graph only; connected DAG"
+    },
+    "cross_source_comparison": {
+      "state": "TOKEN_VAZIO",
+      "reason": "Two sealed independent bundles and their quality floor were not supplied; obsolete CLI pointer corrected, no comparison PASS invented."
+    }
+  },
+  "real_custody": {
+    "source_class": "USER_UPLOADED_EXPORT",
+    "archive_sha256": "53fbfbc52d110d5815024ca851868555d23c3180cd73bb5433dd5f5bade9d93f",
+    "member": "conversations.json",
+    "member_bytes": 792693581,
+    "member_sha256": "d2db8b130ed968b1b94768d98f6e1fcdba52233dc846b9b94a63749cee14b7cf",
+    "selection": {
+      "array_index": 0,
+      "byte_offset": 1,
+      "byte_length": 1707369,
+      "sha256": "88f7109075f16ad8293db210d36a82c3c82bd5463f73ad2ab9f86d830fa5a051"
+    },
+    "crc_read_completed": true,
+    "provider_binding": "TOKEN_VAZIO",
+    "claim_allowed": false
+  },
+  "real_controls": [
+    {
+      "control": "cti_on",
+      "run_id": "78ed8a9e4230a28a3f38dfb2e25a170b2cb2330b4a63c0283511a189de451911",
+      "message_count": 312,
+      "hit_count": 1,
+      "status": "ok",
+      "bundle_emitted": true,
+      "context_bytes": 451,
+      "inputs_unchanged": true,
+      "privacy_redacted_hits": 1
+    },
+    {
+      "control": "cti_off",
+      "run_id": "b1282f58c037a912e63f4e5af521d65fab5e1fbb8dcd3a5c7cfdcad090f40493",
+      "message_count": 312,
+      "hit_count": 0,
+      "status": "disabled",
+      "bundle_emitted": false,
+      "context_bytes": 0,
+      "inputs_unchanged": true,
+      "privacy_redacted_hits": 0
+    },
+    {
+      "control": "negative_no_hit",
+      "run_id": "9a0765e6753aaf72b5be33cc722593dc581881e352e58d2dc6c3f11070b3b303",
+      "message_count": 312,
+      "hit_count": 0,
+      "status": "no_hits",
+      "bundle_emitted": false,
+      "context_bytes": 0,
+      "inputs_unchanged": true,
+      "privacy_redacted_hits": 0
+    }
+  ],
+  "remote_ci": {
+    "termux_commit": "1161f49de0ab0635420bab82144b7303c1e1a487",
+    "envelope_gate": {
+      "run": 34050254430,
+      "job": 101532468014,
+      "state": "PASS",
+      "scope": "Contract validator and 8 public envelope tests"
+    },
+    "provider_protection": {
+      "run": 34050254402,
+      "job": 101532467895,
+      "state": "FAIL",
+      "exit_code": 4,
+      "failures": [
+        "missing rule types: required_status_checks",
+        "pull_request rule is not solo-safe + thread-resolution enforced",
+        "required status context provider-protection is absent"
+      ],
+      "configuration_changed": false
+    },
+    "all_ci_passed": false,
+    "android_pipeline": "NOT_CERTIFIED_BY_THIS_RECEIPT"
+  },
+  "reconciliation": {
+    "guard_detected_original_prs_merged": true,
+    "this_work_performed_merge": false,
+    "termux_original_pr": 422,
+    "termux_external_merge": "5b2e32c35227fdc781544b6f9d7bf2f6c40f2012",
+    "mapa_original_pr": 533,
+    "mapa_external_merge": "717ea78995f57dfaccb6ed8c4a61c4e16812a76f",
+    "both_default_trees_equal_tested_baselines": true,
+    "action": "Successor draft branches; no force-push to old refs",
+    "original_receipt_preserved": true
+  },
+  "requested_skills_applied": [
+    "rafaelia-query-system",
+    "evoluidor-sistema",
+    "rafaelia-evidence-gate",
+    "mestre-zen",
+    "roteador-universo-rafaelia",
+    "rafaelia-omega-orchestrator",
+    "rafaelia-master-architecture",
+    "rafaelia-toroidal-geometry",
+    "rastreador-origem"
+  ],
+  "longitudinal": {
+    "predecessors": [
+      "ATLAS:X-NOVO-RMRCTI-LLM-NAV-20260906",
+      "L:ATLAS-NOVO-RMRCTI-LLM-NAV-20260906",
+      "LEARN:ATLAS-NOVO-RMRCTI-LLM-NAV-20260906"
+    ],
+    "append_targets": [
+      "L:ATLAS-NOVO-CTI-LOCAL-20260906",
+      "LEARN:ATLAS-NOVO-CTI-LOCAL-20260906"
+    ],
+    "drive_write_receipt": "APPEND_AFTER_THIS_COMMIT_IS_PUBLISHED"
+  },
+  "token_vazio": [
+    "TV-CTI-UPSTREAM-RENDER-UTF8",
+    "TV-GAIA-RMRCTI-ADAPTER-RUNTIME",
+    "TV-LLAMA-GENERATION-CAUSAL-USE",
+    "TV-MAPA-CROSS-SOURCE-SEALED-BUNDLES",
+    "TV-NOVO-CURRENT-MANIFEST-EXACT-SCOPE",
+    "TV-NOVO-PROVIDER-BINDING",
+    "TV-PERMANENT-MEMORY-BOOTSTRAP-PATHS",
+    "TV-PHYSICAL-TERMUX-RUNTIME",
+    "TV-PRIVATE-BOUNDED-ADAPTER-RUNTIME",
+    "TV-PROVIDER-PROTECTION-CONTRACT",
+    "TV-RLL-IMAGE-ADAPTER-REPLAY",
+    "TV-VECTRAS-OPTIONAL-BACKEND-DEVICE-PROOF"
+  ],
+  "rollback": "Revert this successor documentation commit and the two scoped Termux commits; retain immutable predecessors and execution receipts. Raw export and private producer files unchanged.",
+  "promotion_limit": "Context retrieval and assembly measured locally; no LLaMA generation/device/attractor/visual equivalence promotion.",
+  "public_disclosure": "No raw query, corpus text, private producer source or image payload."
+}
