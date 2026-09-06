@@ -37,7 +37,15 @@
   "provider_anchors": {
     "gmail": {"id":"Label_7","name":"RAFAELIA/Profile-OS/Inbox","role":"SIGNAL_TRIAGE"},
     "calendar": {"id":"j3156kcp55s348js1ud3s8mae0","name":"RAFAELIA — Revisão do Profile OS","role":"CADENCE_POINTER"},
-    "github": {"repository":"rafaelmeloreisnovo/Mapa","branch":"audit/profile-os-20260905","role":"EXECUTION_VERSIONING"}
+    "github": {
+      "repository":"rafaelmeloreisnovo/Mapa",
+      "branch":"audit/profile-os-20260905",
+      "source_branch":"audit/profile-os-20260905",
+      "canonical_branch":"main",
+      "r4_merge_commit":"48d6274f221c0dc63242ef4d0918d4dc84b5b829",
+      "r5_base_commit":"6fc97abea62c38d1b94ca9533446d425366e2099",
+      "role":"EXECUTION_VERSIONING"
+    }
   },
   "invariants": [
     "TOKEN_VAZIO != 0",
@@ -53,5 +61,7 @@
     "tactics_doc_id":"1rZIvII75dduQ51iYnVDwjAkY9wTUTfv5lfyvfitxIYs",
     "tactics_parent_id":"1cj8RlUrdd9KBwUj3dv6FFLQhX5yBx-1q",
     "state":"F_OK_PROVIDER_BOUND"
-  }
+  },
+  "ci_policy":"data/control-plane/PROFILE_OS_CI_POLICY.v1.json",
+  "ci_evidence_contract":"validator+tests+tracked_tree_hashes+composition_copy+deterministic_zip+artifact_readback"
 }
