@@ -26,6 +26,10 @@ def run_capture(cmd: list[str], log: pathlib.Path) -> int:
     return p.returncode
 
 
+def git_output(*args: str) -> str:
+    return subprocess.run(["git", *args], cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True).stdout.strip()
+
+
 def git_tracked() -> list[str]:
     p = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, stdout=subprocess.PIPE, check=True)
     return sorted(x.decode("utf-8") for x in p.stdout.split(b"\0") if x)
@@ -100,6 +104,18 @@ def main() -> int:
     policy = json.loads((ROOT / args.policy).read_text(encoding="utf-8"))
     errors: list[str] = []
 
+    checked_out_sha = git_output("rev-parse", "HEAD")
+    expected_sha = os.getenv("PROFILE_OS_EXPECTED_SHA", checked_out_sha).strip() or checked_out_sha
+    event_sha = os.getenv("GITHUB_SHA", "").strip() or None
+    identity_ok = checked_out_sha == expected_sha
+    if not identity_ok:
+        errors.append(f"source identity mismatch: checked_out={checked_out_sha} expected={expected_sha}")
+    stage(chain, "00_SOURCE_IDENTITY", "PASS" if identity_ok else "FAIL", {
+        "checked_out_sha": checked_out_sha,
+        "expected_sha": expected_sha,
+        "event_sha": event_sha,
+    })
+
     tracked = git_tracked()
     tracked_set = set(tracked)
     composition = policy["composition"]
@@ -165,7 +181,7 @@ def main() -> int:
     stage(chain, "04_ZIP_ROUND_TRIP", "PASS" if zip_ok else "FAIL", {"zip_sha256": zip_digest, "errors": zip_errors})
 
     token_states = [
-      {"id":"TV-PROFILE-OS-REMOTE-CI-EXECUTION","from":"TOKEN_VAZIO_PENDING","to":"F_OK_RUNTIME_EVIDENCED" if validator_rc == tests_rc == 0 else "F_FAIL_RUNTIME","evidence":["validator.log","tests.log"],"claim_allowed":False},
+      {"id":"TV-PROFILE-OS-REMOTE-CI-EXECUTION","from":"TOKEN_VAZIO_PENDING","to":"F_OK_RUNTIME_EVIDENCED" if identity_ok and validator_rc == tests_rc == 0 else "F_FAIL_RUNTIME","evidence":["STAGE_CHAIN.jsonl","validator.log","tests.log"],"claim_allowed":False},
       {"id":"TV-PROFILE-OS-CI-HASH-CUSTODY","from":"TOKEN_VAZIO_PENDING","to":"F_OK_RUNTIME_EVIDENCED" if len(composition_rows) == len(composition) and not missing and not untracked else "F_FAIL_RUNTIME","evidence":["COMPOSITION_SHA256SUMS.txt","REPOSITORY_TRACKED_SHA256SUMS.txt","TREE.json"],"claim_allowed":False},
       {"id":"TV-PROFILE-OS-CI-ZIP-INTEGRITY","from":"TOKEN_VAZIO_PENDING","to":"F_OK_RUNTIME_EVIDENCED" if zip_ok else "F_FAIL_RUNTIME","evidence":["PROFILE_OS_EVIDENCE.zip","PROFILE_OS_EVIDENCE.zip.sha256"],"claim_allowed":False},
       {"id":"TV-PROFILE-OS-CI-ARTIFACT-CUSTODY","from":"TOKEN_VAZIO_POST_RUN","to":"TOKEN_VAZIO_POST_RUN","evidence":[],"reason":"provider artifact ID/digest requires post-upload external readback","claim_allowed":False}
@@ -178,7 +194,11 @@ def main() -> int:
     result = {
         "schema":"RAFAELIA_PROFILE_OS_CI_GATE_RESULT_V1",
         "state":"PASS" if passed else "FAIL",
-        "git_sha": os.getenv("GITHUB_SHA", subprocess.run(["git","rev-parse","HEAD"],cwd=ROOT,text=True,capture_output=True).stdout.strip()),
+        "git_sha": checked_out_sha,
+        "checked_out_sha": checked_out_sha,
+        "expected_sha": expected_sha,
+        "event_sha": event_sha,
+        "source_identity_match": identity_ok,
         "run_id": os.getenv("GITHUB_RUN_ID", "LOCAL"),
         "run_attempt": os.getenv("GITHUB_RUN_ATTEMPT", "LOCAL"),
         "validator_exit": validator_rc,
@@ -191,7 +211,7 @@ def main() -> int:
         "claim_allowed": False
     }
     write_json(out / "gate-result.json", result)
-    stage(chain, "05_GATE_DECISION", result["state"], {"errors": errors, "claim_allowed": False})
+    stage(chain, "05_GATE_DECISION", result["state"], {"errors": errors, "checked_out_sha": checked_out_sha, "claim_allowed": False})
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0 if passed else 1
 
