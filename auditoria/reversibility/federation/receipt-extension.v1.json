@@ -1,0 +1,32 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"rafaelia.federated-receipt.reversibility-extension.v1",
+  "title":"RAFAELIA Federated Receipt Reversibility Extension",
+  "type":"object",
+  "required":["reversibility"],
+  "properties":{
+    "reversibility":{
+      "type":"object",
+      "required":["event_id","before_ref","after_ref","rollback_ref","evidence_ref","reversibility_state","risk_class","claim_allowed"],
+      "properties":{
+        "event_id":{"type":"string"},
+        "before_ref":{"type":["string","null"]},
+        "after_ref":{"type":["string","null"]},
+        "rollback_ref":{"type":["string","null"]},
+        "evidence_ref":{"type":["string","null"]},
+        "local_index_ref":{"type":["string","null"]},
+        "predecessor_event_id":{"type":["string","null"]},
+        "reversibility_state":{"enum":["PLANNED","EXECUTED_REVERSIBLE","ROLLBACK_AVAILABLE","ROLLED_BACK","SUPERSEDED","TOKEN_VAZIO"]},
+        "risk_class":{"enum":["LOW","MEDIUM","HIGH","UNKNOWN"]},
+        "claim_allowed":{"const":false}
+      },
+      "additionalProperties":true
+    }
+  },
+  "additionalProperties":true,
+  "notes":[
+    "This is an additive extension; legacy receipts remain readable.",
+    "A missing extension on legacy receipts is migration debt, not evidence of irreversibility.",
+    "Rollback must append a successor event and must not rewrite the original receipt."
+  ]
+}

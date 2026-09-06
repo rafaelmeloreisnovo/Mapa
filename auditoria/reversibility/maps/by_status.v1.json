@@ -1,0 +1,23 @@
+{
+  "schema":"rafaelia.reversibility.map.by_status.v1",
+  "generated_from":"auditoria/reversibility/index.jsonl",
+  "derivation":"REBUILDABLE_VIEW_NOT_AUTHORITY",
+  "statuses":{
+    "ROLLBACK_AVAILABLE":["REV-20260905-0001","REV-20260905-0002","REV-20260905-0003","REV-20260905-0004","REV-20260905-0005","REV-20260906-0008","REV-20260906-0009","REV-20260906-0010","REV-20260906-0011","REV-20260906-0012","REV-20260906-0013","REV-20260906-0014","REV-20260906-0017","REV-20260906-0018","REV-20260906-0019"],
+    "EXECUTED_REVERSIBLE":["REV-20260906-0015","REV-20260906-0016"],
+    "TOKEN_VAZIO":["REV-20260905-0006","REV-20260905-0007"]
+  },
+  "epistemic_views":{
+    "artifact_present":["REV-20260906-0008","REV-20260906-0009","REV-20260906-0010","REV-20260906-0011","REV-20260906-0013","REV-20260906-0014","REV-20260906-0018"],
+    "observed_history":["REV-20260906-0015","REV-20260906-0016"],
+    "open_recovery_pr":["REV-20260906-0019"],
+    "blocked_or_unknown":["REV-20260905-0006","REV-20260905-0007"],
+    "ci_execution_receipt":"TOKEN_VAZIO"
+  },
+  "human_navigation":{
+    "safe_reversible":"all ROLLBACK_AVAILABLE entries",
+    "historical_backfill":["REV-20260906-0015","REV-20260906-0016"],
+    "current_recovery_chain":["REV-20260906-0017","REV-20260906-0018","REV-20260906-0019"]
+  },
+  "claim_allowed":false
+}

@@ -1,0 +1,30 @@
+{
+  "schema":"rafaelia.reversibility.federation.registry.v1",
+  "status":"FRAMEWORK_PRESENT",
+  "control_plane":"rafaelmeloreisnovo/Mapa",
+  "source_authority_registry":"indices/repository_authority_registry.json",
+  "invariant":"VISAO != ARTEFATO != EXECUCAO != EVIDENCIA != CLAIM",
+  "mode":"POINTER_ONLY_NO_AUTHORITY_COPY",
+  "repositories":[
+    {"repository":"rafaelmeloreisnovo/Mapa","role":"control_plane","local_reversibility_index":"auditoria/reversibility/index.jsonl","state":"LOCAL_INDEX_PRESENT"},
+    {"repository":"rafaelmeloreisnovo/MemRafcode","role":"memory_custody","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/papers","role":"research_formulation","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/Cosmos","role":"relational_knowledge","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"instituto-Rafael/relativity-living-light","role":"rll_scientific_validation","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/RafGitTools","role":"git_tooling_runtime","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/RafPolimata","role":"polimata_compiler_research","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/termux-packages","role":"rafcodephi_package_delivery","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/llamaRafaelia","role":"inference_consumer","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/termux-app-rafacodephi","role":"android_runtime_evidence","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/Rafaelia_Core","role":"deterministic_kernel","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/ChipQuantum","role":"low_level_research_lab","local_reversibility_index":null,"state":"TOKEN_VAZIO"},
+    {"repository":"rafaelmeloreisnovo/CientiEspiritual","role":"didactic_translation","local_reversibility_index":null,"state":"TOKEN_VAZIO"}
+  ],
+  "rules":[
+    "global registry stores pointers, not copied authority",
+    "missing local index is TOKEN_VAZIO, not FAIL and not PASS",
+    "rollback is represented by successor events; history is never erased",
+    "remote execution or receipt transport is not inferred from repository presence"
+  ],
+  "claim_allowed":false
+}
