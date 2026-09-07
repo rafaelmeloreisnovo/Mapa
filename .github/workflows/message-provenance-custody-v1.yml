@@ -1,0 +1,19 @@
+name: Message Provenance Custody V1
+on:
+  pull_request:
+    paths:
+      - 'indices/ATLAS_X_MESSAGE_PROVENANCE_CURRENT_V1.json'
+      - 'indices/deltas/ATLAS_X_MESSAGE_PROVENANCE_CUSTODY_20260907.md'
+      - 'receipts/2026-09-07_ATLAS_MESSAGE_PROVENANCE_CUSTODY_V1.json'
+      - 'scripts/validate_message_provenance_custody_v1.py'
+      - '.github/workflows/message-provenance-custody-v1.yml'
+permissions:
+  contents: read
+jobs:
+  provenance-custody:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Validate append-only message provenance state
+        run: python3 scripts/validate_message_provenance_custody_v1.py

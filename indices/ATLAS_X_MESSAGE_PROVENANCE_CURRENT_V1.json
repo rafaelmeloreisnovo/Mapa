@@ -1,0 +1,108 @@
+{
+  "schema": "rafaelia.atlas_message_provenance_pointer/v1",
+  "route_id": "ATLAS:X-MESSAGE-PROVENANCE-CUSTODY-20260907",
+  "date": "2026-09-07",
+  "state": "TERMUX_MERGED_LLAMA_SOURCE_READY_REMOTE_EXECUTION_GATED",
+  "claim_allowed": false,
+  "weight_training_authorized": false,
+  "scientific_claim_promotion": false,
+  "mission_invariants": [
+    "DATASET_INFORMS != MISSION_AUTHORITY",
+    "RETRIEVAL_CONTEXT != WEIGHT_UPDATE",
+    "LEARN_APPEND_ONLY != ONLINE_SELF_TRAINING",
+    "MODEL_PROPOSAL != EXECUTION_PERMISSION",
+    "CONTINUE_APPROVED_SCOPE != AUTONOMOUS_GOAL_CREATION",
+    "MESSAGE_ROLE_PROVENANCE != LEXICAL_AUTHORSHIP",
+    "TOKEN_VAZIO != 0"
+  ],
+  "route": [
+    "ATLAS:X",
+    "NOVO:X",
+    "L:X",
+    "O:X",
+    "T:X",
+    "REL:X",
+    "SCALE:X",
+    "EVID:X",
+    "GAP:X",
+    "LEARN:X"
+  ],
+  "contract": {
+    "id": "MESSAGE_ROLE_BOUND_V1",
+    "semantics": {
+      "user": "USER_SOURCE",
+      "assistant": "MODEL_OUTPUT",
+      "system": "SYSTEM_SOURCE",
+      "tool": "TOOL_SOURCE"
+    },
+    "lexical_origin_inferred": false,
+    "unresolved_content_classes": {
+      "USER_RETRANSMISSION": "TOKEN_VAZIO_CONTENT_CLASSIFICATION",
+      "THIRD_PARTY_CODE": "TOKEN_VAZIO_CONTENT_CLASSIFICATION",
+      "MODEL_LABEL": "TOKEN_VAZIO_CONTENT_CLASSIFICATION"
+    }
+  },
+  "termux_evidence": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "pull_request": 435,
+    "source_head": "214f74f72f930bd253c72cf60b4235e9785af0ba",
+    "merge_commit": "82e71419d606428e75279d6e6b545f4497de3de7",
+    "merge_state": "MERGED",
+    "gates": {
+      "atlas_novo_context_contract": {"run_id": 34109877217, "conclusion": "SUCCESS"},
+      "atlas_llama_governance": {"run_id": 34109877108, "conclusion": "SUCCESS"},
+      "rafaelia_native_safety": {"run_id": 34109877177, "conclusion": "SUCCESS"},
+      "safety_gates_ci": {"run_id": 34109877280, "conclusion": "SUCCESS"},
+      "rafaelia_pipeline": {"run_id": 34109877394, "conclusion": "SUCCESS"}
+    },
+    "orthogonal_external_gate": {
+      "provider_protection_gate": {"run_id": 34109877071, "conclusion": "FAILURE", "promotion": "DENIED"}
+    }
+  },
+  "llama_evidence": {
+    "repository": "rafaelmeloreisnovo/llamaRafaelia",
+    "pull_request": 125,
+    "source_head": "9dbf2d55555ccae62aa5aa1a53ec4d18a0a95281",
+    "merge_state": "OPEN_UNMERGED",
+    "source_state": "IMPLEMENTED_WITH_FALSIFIERS",
+    "remote_execution_state": "TOKEN_VAZIO_REMOTE_EXECUTION",
+    "targeted_run": {
+      "run_id": 34109852213,
+      "workflow": "atlas-intent-provider-v1",
+      "observations": [
+        "initial contract job completed failure with steps=[]",
+        "targeted rerun accepted and successor contract job again completed failure with steps=[]",
+        "job log retrieval returned BlobNotFound on initial attempt"
+      ]
+    },
+    "orthogonal_correlation": {
+      "python_type_check_run": 34109852181,
+      "rmrcti_safety_run": 34109852183,
+      "observed_pattern": "MULTIPLE_INDEPENDENT_JOBS_STEPS_EMPTY"
+    },
+    "gap": "TV-LLAMA-ACTIONS-PRESTEP-REMOTE-EXECUTION",
+    "root_cause": "TOKEN_VAZIO"
+  },
+  "pipeline_binding": [
+    "NOVOexport message role",
+    "RMRCTI hit role",
+    "ConversationChunk source_role/provenance_class",
+    "ContextBundle MESSAGE_ROLE_BOUND_V1",
+    "IntentIR evidence_refs",
+    "Governance provenance anti-downgrade"
+  ],
+  "evidence_boundaries": {
+    "termux_source_lane": "SOURCE_MERGED_CI_PROVEN",
+    "llama_provider_lane": "SOURCE_READY_REMOTE_EXECUTION_NOT_PROVEN",
+    "physical_runtime": "TOKEN_VAZIO",
+    "lexical_authorship": "TOKEN_VAZIO",
+    "model_weight_update": "NOT_AUTHORIZED"
+  },
+  "learn": {
+    "mode": "APPEND_ONLY",
+    "observation": "message role must survive retrieval wrapping to prevent source-role ambiguity",
+    "correction": "bind source_role and deterministic message-level provenance across context and governance",
+    "contradiction_guard": "USER_SOURCE does not prove original authorship of every token",
+    "next_verifiable_step": "obtain executed atlas-intent-provider-v1 evidence on llamaRafaelia PR #125 or preserve TOKEN_VAZIO_REMOTE_EXECUTION"
+  }
+}
