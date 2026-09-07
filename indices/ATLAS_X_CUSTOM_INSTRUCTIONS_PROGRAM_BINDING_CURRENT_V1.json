@@ -1,0 +1,104 @@
+{
+  "schema": "rafaelia.atlas.custom-instructions-program-binding.v1",
+  "binding_id": "ATLAS-X-CUSTOM-INSTRUCTIONS-PROGRAM-BINDING-20260907-V1",
+  "date": "2026-09-07",
+  "append_only": true,
+  "claim_allowed": false,
+  "operator_intent": {
+    "role": "CURRENT_SESSION_SCOPE_AND_EXECUTION_DIRECTION",
+    "can_refine_execution_route": true,
+    "can_create_program_mission_authority": false,
+    "can_authorize_model_weight_training": false
+  },
+  "program_mission_authority": {
+    "repository": "rafaelmeloreisnovo/Rafaelia_Private",
+    "branch": "main",
+    "merge_commit": "e7fe94f1394df54b0c62a1bf0bf7bb753c7e78d4",
+    "path": "docs/audit/MISSION_COHESION_SUCCESSOR_RECEIPT_20260907.v1.json",
+    "receipt_id": "MISSION-COHESION-SUCCESSOR-20260907-V1",
+    "state": "PROGRAM_MISSION_SOURCE_COHESION_CLOSED_EXTERNAL_EXECUTION_EVIDENCE_OPEN"
+  },
+  "current_execution_receipt": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "branch": "audit/custom-instructions-execution-20260907",
+    "path": "receipts/custom-instructions/2026-09-07/RAFAELIA_CUSTOM_INSTRUCTIONS_EXECUTION_RECEIPT.v1.json",
+    "commit": "f29a675ad190c5f68ee77e4b2b044ebc69d438a2"
+  },
+  "semantics": {
+    "dataset_informs_mission": true,
+    "dataset_creates_mission_authority": false,
+    "retrieval_context_updates_model_weights": false,
+    "model_output_is_proposal": true,
+    "model_output_grants_execution": false,
+    "learn_is_append_only_program_memory": true,
+    "learn_updates_model_weights": false,
+    "training_or_finetune_authorized": false,
+    "continue_approved_scope_creates_new_goal": false,
+    "continue_approved_scope_iterates_f_next": true
+  },
+  "authority_classes": [
+    "OPERATOR_INTENT",
+    "PROGRAM_MISSION",
+    "DATASET_CONTEXT",
+    "MODEL_PROPOSAL",
+    "GOVERNANCE_GATE",
+    "AUTHORIZED_ACTION",
+    "EXECUTION_RESULT",
+    "PROVENANCE_RECEIPT",
+    "LEARN_APPEND_ONLY"
+  ],
+  "route": [
+    "PROGRAM_MISSION",
+    "ATLAS:X",
+    "NOVO:X",
+    "L:X",
+    "O:X",
+    "T:X",
+    "REL:X",
+    "EVID:X",
+    "GAP:X",
+    "ContextBundle",
+    "IntentIR",
+    "Governance",
+    "ExecutionPlan",
+    "AuthorizedAction",
+    "ExecutionResult",
+    "ProvenanceReceipt",
+    "LEARN:X",
+    "F_next"
+  ],
+  "forbidden_promotions": [
+    "DATASET_CONTEXT->PROGRAM_MISSION_AUTHORITY",
+    "MODEL_PROPOSAL->EXECUTION_PERMISSION",
+    "RETRIEVAL_CONTEXT->WEIGHT_UPDATE",
+    "LEARN_APPEND_ONLY->ONLINE_SELF_TRAINING",
+    "CONTINUE_APPROVED_SCOPE->AUTONOMOUS_GOAL_CREATION",
+    "TOKEN_VAZIO->EVIDENCE",
+    "SOURCE_CHECK->SCIENTIFIC_CLAIM"
+  ],
+  "observed_federation_scope": {
+    "bound": [
+      "rafaelmeloreisnovo/Mapa",
+      "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "rafaelmeloreisnovo/llamaRafaelia",
+      "rafaelmeloreisnovo/GAIA_phi",
+      "rafaelmeloreisnovo/Rafaelia_Private",
+      "rafaelmeloreisnovo/RafNet-Core",
+      "rafaelmeloreisnovo/Cosmos",
+      "rafaelmeloreisnovo/Rafaelia_Core"
+    ],
+    "source_declared_runtime_unverified": [
+      "rafaelmeloreisnovo/Vectras-VM-Android",
+      "MemRafcode+GoogleDrive"
+    ],
+    "all_other_repositories": "TOKEN_VAZIO_SCOPE_NOT_OBSERVED"
+  },
+  "execution_boundary": {
+    "background_execution_asserted": false,
+    "execution_must_be_tool_backed_or_receipted": true,
+    "physical_android_termux_execution": "TOKEN_VAZIO_DEVICE",
+    "external_provider_authority": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+    "model_weight_training": "TOKEN_VAZIO_SEPARATE_EXPLICIT_CONTRACT_REQUIRED"
+  },
+  "result": "BOUND_FAIL_CLOSED"
+}
