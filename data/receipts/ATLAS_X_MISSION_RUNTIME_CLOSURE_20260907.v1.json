@@ -1,0 +1,102 @@
+{
+  "schema": "rafaelia.atlas_mission_runtime_closure_receipt/v1",
+  "receipt_id": "ATLAS-X-MISSION-RUNTIME-CLOSURE-20260907",
+  "route_id": "ATLAS:X-MISSION-RUNTIME-CLOSURE-20260907",
+  "predecessor": "ATLAS:X-MISSION-EXECUTION-BOUNDARY-20260906",
+  "observed_at_utc": "2026-09-07T08:24:00Z",
+  "claim_allowed": false,
+  "scientific_claim_promotion": false,
+  "weight_training_authorized": false,
+  "source_state": "SOURCE_READY_EXTERNAL_GATES_ONLY",
+  "program_terminal_state_reached": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "mission_boundary_pr": 425,
+    "mission_boundary_merge": "db95f0a64b1d28d1d50b70ab44bc2571fabef29d",
+    "runtime_closure_pr": 431,
+    "runtime_closure_head": "68f012dc7c6cb7721792ab5bf4c67b9ff9a09091",
+    "runtime_closure_merge": "2346363809c7381b904822596cd52c172ded14de",
+    "contract_path": "docs/contracts/mission_runtime_evidence_closure.v1.json",
+    "validator_path": "scripts/validate_mission_runtime_evidence_closure.py",
+    "workflow_path": ".github/workflows/mission-runtime-evidence-closure-v1.yml"
+  },
+  "targeted_source_validation": {
+    "workflow_run_id": 34100074268,
+    "workflow_name": "Mission Runtime Evidence Closure V1",
+    "conclusion": "success",
+    "promotion_scope": "source contract + fail-closed validator only"
+  },
+  "prestep_reconciliation": {
+    "predecessor_gate": "TV-ACTIONS-PRESTEP-ROOT-CAUSE",
+    "new_state": "SUPERSEDED_BY_OBSERVED_EXECUTED_STEPS",
+    "evidence_ref": {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "pull_request": 544,
+      "head": "0b61df211387c505a0b086f9ba64dcd0602d7703"
+    },
+    "successful_workflows": [
+      "CI",
+      "CodeQL Advanced",
+      "SecurityCodeScan",
+      "main-hardening-gate",
+      "Human Dignity Ethics Gate V1",
+      "Branch Topology Gate"
+    ],
+    "typed_failures": [
+      {
+        "workflow": "Server Merge Enforcement Assurance",
+        "run_id": 34098792919,
+        "failed_step": 6,
+        "failed_step_name": "Inspect live main branch server-side enforcement",
+        "classification": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"
+      },
+      {
+        "workflow": "CodeScan",
+        "run_id": 34098792877,
+        "failed_step": 4,
+        "failed_step_name": "Verify CodeScan credential presence",
+        "classification": "TOKEN_VAZIO_SECRET"
+      },
+      {
+        "workflow": "Provider Protection Gate",
+        "run_id": 34098793042,
+        "failed_step": 2,
+        "failed_step_name": "Verify live default-branch ruleset",
+        "classification": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"
+      },
+      {
+        "workflow": "RAFAELIA Promotion Control V1",
+        "run_id": 34098792845,
+        "failed_step": 5,
+        "failed_step_name": "Enforce manual promotion decision",
+        "classification": "TOKEN_VAZIO_MANUAL_AUTHORITY"
+      }
+    ]
+  },
+  "open_gates": [
+    {"gate_id": "physical_android_termux_execution", "state": "TOKEN_VAZIO_DEVICE"},
+    {"gate_id": "exact_multi_repository_runtime_execution", "state": "TOKEN_VAZIO_EXECUTION"},
+    {"gate_id": "remote_network_identity", "state": "TOKEN_VAZIO_RUNTIME"},
+    {"gate_id": "provider_or_legal_authorization", "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"},
+    {"gate_id": "live_default_branch_ruleset", "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"},
+    {"gate_id": "server_merge_enforcement", "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"},
+    {"gate_id": "manual_promotion_decision", "state": "TOKEN_VAZIO_MANUAL_AUTHORITY"},
+    {"gate_id": "codescan_credentialed_analysis", "state": "TOKEN_VAZIO_SECRET"}
+  ],
+  "invariants": [
+    "DATASET_INFORMS!=MISSION_AUTHORITY",
+    "RETRIEVAL_CONTEXT!=WEIGHT_UPDATE",
+    "LEARN_APPEND_ONLY!=ONLINE_SELF_TRAINING",
+    "MODEL_PROPOSAL!=EXECUTION_PERMISSION",
+    "CONTINUE_APPROVED_SCOPE!=AUTONOMOUS_GOAL_CREATION",
+    "SOURCE!=EXECUTION!=EVIDENCE!=CLAIM",
+    "TOKEN_VAZIO!=0",
+    "STATIC_OR_CI_PASS!=PHYSICAL_DEVICE_PROOF",
+    "SIMULATION!=EXTERNAL_AUTHORITY",
+    "GREEN_GATE_PROMOTES_ONLY_MEASURED_SCOPE"
+  ],
+  "non_gates": {
+    "model_weight_training": "NOT_AUTHORIZED",
+    "scientific_claim_promotion": "BLOCKED"
+  }
+}
