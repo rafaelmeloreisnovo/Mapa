@@ -1,0 +1,82 @@
+{
+  "schema": "rafaelia.novoexport-full-recount-successor.v1",
+  "date": "2026-09-07",
+  "state": "STRUCTURAL_CARDINALITY_BOUND_SEMANTIC_INGEST_OPEN",
+  "claim_allowed": false,
+  "predecessor": {
+    "object": "data/evidence/novoexport_active_v2_source_universe_20260907.v1.json",
+    "mapa_merge_commit": "c262a8ae1fec1a1004c93b33b68af589104a0127",
+    "relation": "APPEND_ONLY_SUCCESSOR"
+  },
+  "source_scope": {
+    "range": "conversations-000..050",
+    "source_shards": 51,
+    "source_bytes": 1107289897,
+    "source_set_digest_sha256": "ba27012377c5ec7d3603a8c0eb42f12c83ac700c85b9d2b2ef9ff514860b122d",
+    "root_conversations_observed": 5054,
+    "unique_conversation_ids": 5054,
+    "mapping_nodes_observed": 307043,
+    "message_bearing_nodes_observed": 301991,
+    "unique_effective_message_ids": 296794,
+    "distinct_duplicated_effective_message_ids": 2988,
+    "duplicate_effective_message_id_observations": 5197,
+    "duplicates_same_conversation_excess": 0,
+    "duplicates_cross_conversation_excess": 5197,
+    "parse_errors": 0
+  },
+  "structural_reuse": {
+    "classification": "SHARED_MESSAGE_SUBGRAPH_ACROSS_DISTINCT_CONVERSATION_IDS",
+    "same_node_id": {"observed": 2988, "total": 2988},
+    "same_role": {"observed": 2988, "total": 2988},
+    "same_content": {"observed": 2986, "total": 2988},
+    "same_full_message_object": {"observed": 2859, "total": 2988},
+    "linked_conversations": 140,
+    "connected_components": 56,
+    "max_component_size": 10,
+    "provider_origin_state": "TOKEN_VAZIO",
+    "provider_origin_gap": "TV-MESSAGE-ID-PROVIDER-ORIGIN-CAUSE-20260907"
+  },
+  "external_evidence": {
+    "full_recount_receipt_sha256": "8345707415e4195ad1c18706cd22e34255d09a5847a0eac300709bd7d0fac8ff",
+    "duplicate_relation_receipt_sha256": "4688e3e35c27d6ab43b77194fb20e23b82008ace9ba2123cbc112ac90f7282c9",
+    "topology_private_receipt_sha256": "86ffd013d3c8ae84437b1cbd186d37a8208cd1b99220b567d8356dc67804c1ba",
+    "topology_safe_receipt_sha256": "5a88ea5325f2b53cc754c1950aa9653c3422ca9d50ab93cdad07658e355a417a"
+  },
+  "rafgittools_binding": {
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "pull_request": 430,
+    "head_sha": "5f8d977fea6f42879e1cd30196fac4b7caa17efe",
+    "state": "VALIDATED_PENDING_MERGE",
+    "canonical_coherence_gate": "PASS",
+    "federation_audit": "PASS",
+    "navigator_selftest": "PASS",
+    "merge_commit": "TOKEN_VAZIO"
+  },
+  "semantic_ingest": {
+    "structural_cardinality_proven": true,
+    "semantic_exhaustivity_proven": false,
+    "state": "TOKEN_VAZIO_PARTIAL",
+    "open_gaps": [
+      "TV-INDEX-INGEST-000-050",
+      "TV-MESSAGES-FULL-COVERAGE-SEMANTIC",
+      "TV-MESSAGE-ID-PROVIDER-ORIGIN-CAUSE-20260907"
+    ]
+  },
+  "authority": {
+    "dataset_informs": true,
+    "dataset_is_mission_authority": false,
+    "model_self_authority": false,
+    "training_executed": false,
+    "weight_update_executed": false,
+    "learn_append_only": true
+  },
+  "invariants": [
+    "DATASET_INFORMS != MISSION_AUTHORITY",
+    "MODEL_PROPOSAL != EXECUTION_AUTHORITY",
+    "LEARN_APPEND_ONLY != ONLINE_SELF_TRAINING",
+    "STRUCTURAL_CARDINALITY != SEMANTIC_EXHAUSTIVITY",
+    "STRUCTURAL_REUSE_CLASS != PROVIDER_ORIGIN_CAUSE",
+    "SOURCE != DERIVED_INDEX != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != PASS"
+  ]
+}
