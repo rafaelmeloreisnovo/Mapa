@@ -1,0 +1,70 @@
+{
+  "schema": "rafaelia.atlas_mission_runtime_evidence_receipt/v1",
+  "receipt_id": "ATLAS-MISSION-RUNTIME-EVIDENCE-CLOSURE-20260907-V1",
+  "date": "2026-09-07",
+  "mode": "APPEND_ONLY_SOURCE_FIRST_FAIL_CLOSED",
+  "claim_allowed": false,
+  "scientific_claim_promotion": false,
+  "weight_training_authorized": false,
+  "mapa_preflight_head": "dd24856a1cf46114aa9d40c076e26e013d7d800a",
+  "pointer": {
+    "path": "indices/ATLAS_X_MISSION_RUNTIME_CURRENT_V1.json",
+    "git_blob_sha1": "f2e323fa264f84bdb6809584a14b26e6d1dff66d",
+    "route_id": "ATLAS:X-MISSION-RUNTIME-EVIDENCE-CLOSURE-20260907"
+  },
+  "producer": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "branch": "master",
+    "pull_request": 431,
+    "merge_commit": "2346363809c7381b904822596cd52c172ded14de",
+    "contract_blob": "f8d47130b951bd88745c5a61ea64e9d6492550e4",
+    "validator_blob": "5b316f9ca685f10b8da04f6f28955ecc24c85185",
+    "workflow_run_id": 34100074268,
+    "workflow_result": "SUCCESS",
+    "workflow_scope": "SOURCE_CONTRACT_AND_SYNTHETIC_FAIL_CLOSED_TESTS_ONLY",
+    "physical_or_external_execution_proven": false
+  },
+  "federation_decision": {
+    "program_mission_source_side_closure": "CLOSED",
+    "external_execution_closure": "OPEN_TYPED_GATES",
+    "open_gate_count": 8,
+    "open_gates": [
+      "TOKEN_VAZIO_DEVICE",
+      "TOKEN_VAZIO_EXECUTION",
+      "TOKEN_VAZIO_RUNTIME",
+      "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "TOKEN_VAZIO_MANUAL_AUTHORITY",
+      "TOKEN_VAZIO_SECRET"
+    ],
+    "model_weight_training": "NOT_AUTHORIZED",
+    "scientific_claim_promotion": "BLOCKED"
+  },
+  "invariants": [
+    "PRODUCER_SOURCE_GATE_SUCCESS!=PHYSICAL_EXECUTION",
+    "ATLAS_ROUTING!=PRODUCER_RUNTIME_AUTHORITY",
+    "TOKEN_VAZIO!=0",
+    "NO_EXTERNAL_AUTHORITY_IS_INFERRED",
+    "NO_SECRET_IS_PERSISTED",
+    "TERMINAL_RUNTIME_STATE!=SCIENTIFIC_CLAIM_ALLOWED"
+  ],
+  "F_ok": [
+    "Termux runtime-evidence closure contract is merged on master",
+    "Termux source validator and fail-closed CI executed successfully",
+    "Atlas successor preserves producer authority and exact commit/blob/run pointers",
+    "all remaining program gates are typed by their real evidence owner",
+    "training and scientific promotion remain outside runtime closure"
+  ],
+  "F_gap": [
+    "physical Android/Termux receipt",
+    "exact eight-repository MissionExecution runtime receipt",
+    "remote identity verification",
+    "provider/legal authorization evidence",
+    "live ruleset evidence",
+    "server merge enforcement evidence",
+    "manual promotion decision",
+    "credentialed CodeScan analysis"
+  ],
+  "F_next": "execute only the owning external/device probe; append a successor receipt for that exact gate; never substitute CI or simulation"
+}
