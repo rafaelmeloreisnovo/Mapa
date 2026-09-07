@@ -45,12 +45,32 @@
       "proves_physical_or_external_execution": false
     }
   },
+  "external_provider_observations": {
+    "live_default_branch_ruleset": {
+      "provider": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "ruleset_id": 21909304,
+      "ruleset_name": "1",
+      "target": "branch",
+      "condition": "~DEFAULT_BRANCH",
+      "enforcement": "disabled",
+      "observed_state": "FAIL_PROVIDER_OBSERVED_DISABLED",
+      "observation_scope": "repository rulesets API",
+      "promotion": "DENIED"
+    },
+    "branch_protection_detail": {
+      "endpoint": "branches/main/protection",
+      "provider_result": "403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
+      "observed_state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "promotion": "DENIED"
+    }
+  },
   "open_evidence_gates": {
     "physical_android_termux_execution": "TOKEN_VAZIO_DEVICE",
     "exact_multi_repository_runtime_execution": "TOKEN_VAZIO_EXECUTION",
     "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
     "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
-    "live_default_branch_ruleset": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+    "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
     "server_merge_enforcement": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
     "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
     "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET"
@@ -82,8 +102,8 @@
     "Q04_boundary": "Mapa does not execute producer code and does not convert CI into runtime evidence",
     "Q05_local_indices": "ATLAS_X_MISSION_EXECUTION_CURRENT_V1.json + RAFAELIA_ATLAS_ROUTING_INDEX_V1.md",
     "Q06_producer_route": "Mission runtime evidence closure contract + fail-closed validator",
-    "Q07_open_gaps": "exactly eight typed external/device/runtime evidence gates",
-    "Q08_current_evidence": "source gate run 34100074268 SUCCESS; physical/external evidence remains absent",
+    "Q07_open_gaps": "seven typed TOKEN_VAZIO gates plus one provider-observed failing ruleset gate",
+    "Q08_current_evidence": "source gate run 34100074268 SUCCESS; GitHub ruleset 21909304 observed disabled; remaining physical/external evidence absent",
     "Q09_local_gate": "pointer/lineage/coherence validation only",
     "Q10_stop_condition": "stop at physical device, external provider/admin/legal/manual/secret authority boundaries",
     "Q11_delta_destination": "Atlas delta + pointer + receipt; predecessor preserved",
