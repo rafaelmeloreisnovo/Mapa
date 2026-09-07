@@ -1,0 +1,38 @@
+{
+  "schema": "RAFAELIA_CUSTOM_INSTRUCTIONS_EXECUTION_RECEIPT.v1",
+  "event_date": "2026-09-07",
+  "event_time_local": "2026-09-07T15:17:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "branch": "audit/custom-instructions-execution-20260907",
+  "state": "SOURCE_OBSERVED -> EXECUTION_ROUTED",
+  "drive_anchor": {
+    "title": "RAFAELIA — Implementação Latentes e Papers — Drive GitHub V1.txt",
+    "document_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "observed": true
+  },
+  "github_anchor": {
+    "path": "indices/RAFAELIA_IMPLEMENTACAO_LATENTES_PAPERS_V1.md",
+    "ref": "main",
+    "observed": true
+  },
+  "previous_receipt": "receipts/custom-instructions/2026-08-22/RAFAELIA_CUSTOM_INSTRUCTIONS_EXECUTION_RECEIPT.v1.json",
+  "delta_artifact": {
+    "path": "docs/canonical/2026-09-07/RAFAELIA_CUSTOM_INSTRUCTIONS_EXECUTION_DELTA_V1.md",
+    "commit_sha": "fa75f7d671459cac836705a80e9643f0f0efd018"
+  },
+  "invariants": [
+    "TOKEN_VAZIO != 0",
+    "evidence != inference",
+    "append-only custody",
+    "historical records are not retroactively rewritten",
+    "repository writes use reversible branch/PR routing",
+    "no unsupported scientific-claim promotion",
+    "no assertion of background/autonomous execution"
+  ],
+  "gaps": {
+    "drive_vs_all_github_mirrors_semantic_diff": "TOKEN_VAZIO",
+    "all_repositories_propagation_state": "TOKEN_VAZIO",
+    "scientific_claim_validation": "TOKEN_VAZIO"
+  },
+  "result": "PASS_WITH_EXPLICIT_GAPS"
+}
