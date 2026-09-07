@@ -17,7 +17,7 @@ EXPECTED_GATES = {
     "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
     "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
     "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
-    "server_merge_enforcement": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+    "server_merge_enforcement": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
     "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
     "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET",
 }
@@ -57,8 +57,8 @@ def main():
         require(producer["source_gate"]["proves_physical_or_external_execution"] is False, "scope promotion")
 
         require(p["open_evidence_gates"] == EXPECTED_GATES, "gate set/state mismatch")
-        require(sum(str(v).startswith("TOKEN_VAZIO") for v in EXPECTED_GATES.values()) == 7, "expected TOKEN_VAZIO count")
-        require(sum(str(v).startswith("FAIL_") for v in EXPECTED_GATES.values()) == 1, "expected FAIL count")
+        require(sum(str(v).startswith("TOKEN_VAZIO") for v in EXPECTED_GATES.values()) == 6, "expected TOKEN_VAZIO count")
+        require(sum(str(v).startswith("FAIL_") for v in EXPECTED_GATES.values()) == 2, "expected FAIL count")
 
         provider = p["external_provider_observations"]
         ruleset = provider["live_default_branch_ruleset"]
@@ -69,6 +69,17 @@ def main():
         require(ruleset["enforcement"] == "disabled", "ruleset must remain observed disabled")
         require(ruleset["observed_state"] == "FAIL_PROVIDER_OBSERVED_DISABLED", "ruleset observed state")
         require(ruleset["promotion"] == "DENIED", "ruleset promotion")
+
+        branch = provider["default_branch_summary"]
+        require(branch["provider"] == "GitHub", "branch provider")
+        require(branch["repository"] == "rafaelmeloreisnovo/Mapa", "branch repository")
+        require(branch["branch"] == "main", "branch name")
+        require(branch["protected"] is False, "branch protected summary")
+        require(branch["protection_enabled"] is False, "branch protection summary")
+        require(branch["required_status_check_enforcement"] == "off", "status check enforcement")
+        require(branch["observed_state"] == "FAIL_PROVIDER_OBSERVED_UNENFORCED", "server enforcement observed state")
+        require(branch["promotion"] == "DENIED", "server enforcement promotion")
+
         protection = provider["branch_protection_detail"]
         require(protection["provider_result"] == "403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION", "branch protection provider result")
         require(protection["observed_state"] == "TOKEN_VAZIO_EXTERNAL_AUTHORITY", "branch protection detail state")
@@ -87,7 +98,7 @@ def main():
         require(r["scientific_claim_promotion"] is False, "receipt scientific claim")
         require(r["weight_training_authorized"] is False, "receipt weight training")
         require(r["pointer"]["route_id"] == p["route_id"], "receipt pointer route")
-        require(r["pointer"]["git_blob_sha1"] == "5d44e53827009c0033bb44123033f496786d5bcc", "receipt pointer blob")
+        require(r["pointer"]["git_blob_sha1"] == "bc4e5247c6b1b81978f9afe02cab7894b2f86646", "receipt pointer blob")
         require(r["producer"]["merge_commit"] == producer["merge_commit"], "receipt producer merge")
         require(r["producer"]["workflow_run_id"] == producer["source_gate"]["run_id"], "receipt workflow run")
         require(r["producer"]["workflow_result"] == "SUCCESS", "receipt workflow result")
@@ -97,12 +108,17 @@ def main():
         require(rr["ruleset_id"] == ruleset["ruleset_id"], "receipt ruleset id")
         require(rr["enforcement"] == "disabled", "receipt ruleset enforcement")
         require(rr["state"] == "FAIL_PROVIDER_OBSERVED_DISABLED", "receipt ruleset state")
+        rb = r["provider_observations"]["default_branch_summary"]
+        require(rb["protected"] is False, "receipt branch protected")
+        require(rb["protection_enabled"] is False, "receipt protection enabled")
+        require(rb["required_status_check_enforcement"] == "off", "receipt enforcement off")
+        require(rb["state"] == "FAIL_PROVIDER_OBSERVED_UNENFORCED", "receipt server enforcement state")
         require(r["provider_observations"]["branch_protection_detail"]["state"] == "TOKEN_VAZIO_EXTERNAL_AUTHORITY", "receipt branch protection detail")
 
         decision = r["federation_decision"]
         require(decision["required_gate_count"] == 8, "receipt required gate count")
-        require(decision["token_vazio_gate_count"] == 7, "receipt TOKEN_VAZIO count")
-        require(decision["observed_failing_gate_count"] == 1, "receipt FAIL count")
+        require(decision["token_vazio_gate_count"] == 6, "receipt TOKEN_VAZIO count")
+        require(decision["observed_failing_gate_count"] == 2, "receipt FAIL count")
         require(decision["gate_states"] == EXPECTED_GATES, "receipt gate state map")
         require(decision["model_weight_training"] == "NOT_AUTHORIZED", "receipt training")
         require(decision["scientific_claim_promotion"] == "BLOCKED", "receipt science")
@@ -112,7 +128,7 @@ def main():
             require(forbidden not in raw.lower(), f"forbidden secret field persisted: {forbidden}")
 
         print("PASS Atlas MissionExecution runtime pointer/receipt fail-closed")
-        print("state=SOURCE_READY_EXTERNAL_GATES_ONLY required_gates=8 token_vazio=7 observed_fail=1 claim_allowed=false")
+        print("state=SOURCE_READY_EXTERNAL_GATES_ONLY required_gates=8 token_vazio=6 observed_fail=2 claim_allowed=false")
         return 0
     except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
         print(f"FAIL_CLOSED: {exc}", file=sys.stderr)
