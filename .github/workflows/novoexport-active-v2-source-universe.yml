@@ -1,0 +1,40 @@
+name: NOVOexport ACTIVE_V2 Source Universe
+
+on:
+  pull_request:
+    paths:
+      - 'data/evidence/novoexport_active_v2_source_universe_20260907.v1.json'
+      - 'tools/validate_novoexport_active_v2_source_universe.py'
+      - 'tests/test_validate_novoexport_active_v2_source_universe.py'
+      - 'indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md'
+      - 'data/receipts/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907.v1.json'
+      - '.github/workflows/novoexport-active-v2-source-universe.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/evidence/novoexport_active_v2_source_universe_20260907.v1.json'
+      - 'tools/validate_novoexport_active_v2_source_universe.py'
+      - 'tests/test_validate_novoexport_active_v2_source_universe.py'
+      - 'indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md'
+      - 'data/receipts/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907.v1.json'
+      - '.github/workflows/novoexport-active-v2-source-universe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-source-universe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: python3 -m py_compile tools/validate_novoexport_active_v2_source_universe.py tests/test_validate_novoexport_active_v2_source_universe.py
+      - name: Unit tests
+        run: python3 -m unittest tests/test_validate_novoexport_active_v2_source_universe.py -v
+      - name: Validate ACTIVE_V2 source universe
+        run: python3 tools/validate_novoexport_active_v2_source_universe.py
