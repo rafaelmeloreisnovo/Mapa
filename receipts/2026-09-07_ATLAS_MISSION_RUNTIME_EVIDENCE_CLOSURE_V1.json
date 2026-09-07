@@ -1,0 +1,103 @@
+{
+  "schema": "rafaelia.atlas_mission_runtime_evidence_receipt/v1",
+  "receipt_id": "ATLAS-MISSION-RUNTIME-EVIDENCE-CLOSURE-20260907-V1",
+  "date": "2026-09-07",
+  "mode": "APPEND_ONLY_SOURCE_FIRST_FAIL_CLOSED",
+  "claim_allowed": false,
+  "scientific_claim_promotion": false,
+  "weight_training_authorized": false,
+  "mapa_preflight_head": "dd24856a1cf46114aa9d40c076e26e013d7d800a",
+  "pointer": {
+    "path": "indices/ATLAS_X_MISSION_RUNTIME_CURRENT_V1.json",
+    "git_blob_sha1": "bc4e5247c6b1b81978f9afe02cab7894b2f86646",
+    "route_id": "ATLAS:X-MISSION-RUNTIME-EVIDENCE-CLOSURE-20260907"
+  },
+  "producer": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "branch": "master",
+    "pull_request": 431,
+    "merge_commit": "2346363809c7381b904822596cd52c172ded14de",
+    "contract_blob": "f8d47130b951bd88745c5a61ea64e9d6492550e4",
+    "validator_blob": "5b316f9ca685f10b8da04f6f28955ecc24c85185",
+    "workflow_run_id": 34100074268,
+    "workflow_result": "SUCCESS",
+    "workflow_scope": "SOURCE_CONTRACT_AND_SYNTHETIC_FAIL_CLOSED_TESTS_ONLY",
+    "physical_or_external_execution_proven": false
+  },
+  "provider_observations": {
+    "live_default_branch_ruleset": {
+      "provider": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "ruleset_id": 21909304,
+      "target": "branch",
+      "condition": "~DEFAULT_BRANCH",
+      "enforcement": "disabled",
+      "state": "FAIL_PROVIDER_OBSERVED_DISABLED",
+      "promotion": "DENIED"
+    },
+    "default_branch_summary": {
+      "provider": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "main",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_check_enforcement": "off",
+      "state": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+      "promotion": "DENIED"
+    },
+    "branch_protection_detail": {
+      "provider_result": "403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
+      "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "promotion": "DENIED"
+    }
+  },
+  "federation_decision": {
+    "program_mission_source_side_closure": "CLOSED",
+    "external_execution_closure": "OPEN_TYPED_GATES",
+    "required_gate_count": 8,
+    "token_vazio_gate_count": 6,
+    "observed_failing_gate_count": 2,
+    "gate_states": {
+      "physical_android_termux_execution": "TOKEN_VAZIO_DEVICE",
+      "exact_multi_repository_runtime_execution": "TOKEN_VAZIO_EXECUTION",
+      "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
+      "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
+      "server_merge_enforcement": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+      "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
+      "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET"
+    },
+    "model_weight_training": "NOT_AUTHORIZED",
+    "scientific_claim_promotion": "BLOCKED"
+  },
+  "invariants": [
+    "PRODUCER_SOURCE_GATE_SUCCESS!=PHYSICAL_EXECUTION",
+    "ATLAS_ROUTING!=PRODUCER_RUNTIME_AUTHORITY",
+    "FAIL!=TOKEN_VAZIO!=PASS",
+    "TOKEN_VAZIO!=0",
+    "NO_EXTERNAL_AUTHORITY_IS_INFERRED",
+    "NO_SECRET_IS_PERSISTED",
+    "TERMINAL_RUNTIME_STATE!=SCIENTIFIC_CLAIM_ALLOWED"
+  ],
+  "F_ok": [
+    "Termux runtime-evidence closure contract is merged on master",
+    "Termux source validator and fail-closed CI executed successfully",
+    "Atlas successor preserves producer authority and exact commit/blob/run pointers",
+    "GitHub live ruleset 21909304 was observed disabled and classified FAIL rather than TOKEN_VAZIO",
+    "GitHub main branch summary was observed protected=false with protection/status-check enforcement off and classified FAIL in observable server-enforcement scope",
+    "all remaining program gates are typed by their real evidence owner",
+    "training and scientific promotion remain outside runtime closure"
+  ],
+  "F_gap": [
+    "physical Android/Termux receipt",
+    "exact eight-repository MissionExecution runtime receipt",
+    "remote identity verification",
+    "provider/legal authorization evidence",
+    "live default-branch ruleset is disabled and requires external enablement plus re-observation",
+    "observable server merge enforcement is off and requires external enablement plus re-observation",
+    "branch protection detail endpoint is inaccessible to this integration",
+    "manual promotion decision",
+    "credentialed CodeScan analysis"
+  ],
+  "F_next": "execute only the owning external/device probe or authority action; provider/admin must enable protection/enforcement before re-observation; never substitute CI or simulation"
+}

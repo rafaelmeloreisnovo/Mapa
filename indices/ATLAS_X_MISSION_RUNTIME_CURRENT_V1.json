@@ -1,0 +1,130 @@
+{
+  "schema": "rafaelia.atlas_mission_runtime_evidence_pointer/v1",
+  "route_id": "ATLAS:X-MISSION-RUNTIME-EVIDENCE-CLOSURE-20260907",
+  "date": "2026-09-07",
+  "predecessor": {
+    "route_id": "ATLAS:X-MISSION-EXECUTION-BOUNDARY-20260906",
+    "path": "indices/ATLAS_X_MISSION_EXECUTION_CURRENT_V1.json",
+    "git_blob_sha1": "1a4188069073d6f2ae91be0c63ae8d8f9e72c3d3"
+  },
+  "state": "SOURCE_READY_EXTERNAL_GATES_ONLY",
+  "claim_allowed": false,
+  "scientific_claim_promotion": false,
+  "weight_training_authorized": false,
+  "authority": {
+    "Mapa": "FEDERATED_ROUTING_STATE_ONLY",
+    "termux-app-rafacodephi": "MISSION_EXECUTION_ORCHESTRATION_AND_RUNTIME_EVIDENCE_CONTRACT",
+    "producer_implementation_claims_stay_with_producers": true
+  },
+  "producer_evidence": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "branch": "master",
+    "pull_request": 431,
+    "merge_commit": "2346363809c7381b904822596cd52c172ded14de",
+    "contract": {
+      "path": "docs/contracts/mission_runtime_evidence_closure.v1.json",
+      "git_blob_sha1": "f8d47130b951bd88745c5a61ea64e9d6492550e4",
+      "contract_id": "RAFAELIA-MISSION-RUNTIME-EVIDENCE-CLOSURE-V1"
+    },
+    "validator": {
+      "path": "scripts/validate_mission_runtime_evidence_closure.py",
+      "git_blob_sha1": "5b316f9ca685f10b8da04f6f28955ecc24c85185"
+    },
+    "source_gate": {
+      "workflow": "Mission Runtime Evidence Closure V1",
+      "run_id": 34100074268,
+      "head_sha": "68f012dc7c6cb7721792ab5bf4c67b9ff9a09091",
+      "conclusion": "SUCCESS",
+      "scope": [
+        "source_contract_validation",
+        "synthetic_positive_receipt_shape",
+        "negative_missing_gate_rejection",
+        "negative_TOKEN_VAZIO_as_PASS_rejection",
+        "negative_secret_field_rejection"
+      ],
+      "proves_physical_or_external_execution": false
+    }
+  },
+  "external_provider_observations": {
+    "live_default_branch_ruleset": {
+      "provider": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "ruleset_id": 21909304,
+      "ruleset_name": "1",
+      "target": "branch",
+      "condition": "~DEFAULT_BRANCH",
+      "enforcement": "disabled",
+      "observed_state": "FAIL_PROVIDER_OBSERVED_DISABLED",
+      "observation_scope": "repository rulesets API",
+      "promotion": "DENIED"
+    },
+    "default_branch_summary": {
+      "provider": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "main",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_check_enforcement": "off",
+      "observed_state": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+      "observation_scope": "branches/main API summary",
+      "promotion": "DENIED"
+    },
+    "branch_protection_detail": {
+      "endpoint": "branches/main/protection",
+      "provider_result": "403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
+      "observed_state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "promotion": "DENIED"
+    }
+  },
+  "open_evidence_gates": {
+    "physical_android_termux_execution": "TOKEN_VAZIO_DEVICE",
+    "exact_multi_repository_runtime_execution": "TOKEN_VAZIO_EXECUTION",
+    "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
+    "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+    "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
+    "server_merge_enforcement": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+    "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
+    "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET"
+  },
+  "non_gates": {
+    "model_weight_training": "NOT_AUTHORIZED",
+    "scientific_claim_promotion": "BLOCKED"
+  },
+  "runtime_route": [
+    "DATASET/NOVOexport",
+    "ContextBundle",
+    "llamaRafaelia/RMRCTI",
+    "IntentIR",
+    "Mapa/ATLAS:X",
+    "Termux/MissionExecution",
+    "Governance",
+    "ExecutionPlan",
+    "AuthorizedAction",
+    "RafNet/adapters",
+    "Cosmos/Rafaelia_Core/RAIAREIS",
+    "ExecutionResult",
+    "ProvenanceReceipt",
+    "LEARN:X"
+  ],
+  "q01_q12": {
+    "Q01_object": "MissionExecution runtime evidence closure federation successor",
+    "Q02_exact_source": "termux-app-rafacodephi@2346363809c7381b904822596cd52c172ded14de, PR #431, workflow run 34100074268",
+    "Q03_authority": "Mapa routes state; Termux owns orchestration/runtime evidence contract",
+    "Q04_boundary": "Mapa does not execute producer code and does not convert CI into runtime evidence",
+    "Q05_local_indices": "ATLAS_X_MISSION_EXECUTION_CURRENT_V1.json + RAFAELIA_ATLAS_ROUTING_INDEX_V1.md",
+    "Q06_producer_route": "Mission runtime evidence closure contract + fail-closed validator",
+    "Q07_open_gaps": "six typed TOKEN_VAZIO gates plus two provider-observed failing protection/enforcement gates",
+    "Q08_current_evidence": "source gate run 34100074268 SUCCESS; GitHub ruleset 21909304 observed disabled; default branch observed protected=false/protection off",
+    "Q09_local_gate": "pointer/lineage/coherence validation only",
+    "Q10_stop_condition": "stop at physical device, external provider/admin/legal/manual/secret authority boundaries",
+    "Q11_delta_destination": "Atlas delta + pointer + receipt; predecessor preserved",
+    "Q12_security_privacy": "no credentials, raw secrets, personal/device identifiers, or private corpus payloads persisted"
+  },
+  "completion": {
+    "source_side_program_closure": true,
+    "external_execution_closure": false,
+    "terminal_state_when_all_eight_real_gates_pass": "FINISHED_WITH_EXTERNAL_GATES",
+    "terminal_state_promotes_scientific_claim": false,
+    "terminal_state_authorizes_weight_training": false
+  }
+}
