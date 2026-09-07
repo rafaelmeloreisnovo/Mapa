@@ -1,15 +1,25 @@
 {
   "schema": "rafaelia.atlas_mission_execution_pointer/v1",
-  "route_id": "ATLAS:X-MISSION-EXECUTION-BOUNDARY-20260906",
-  "predecessor": "ATLAS:X-FEDERATION-RECONCILE-20260906",
-  "state": "CONTRACT_BOUND_OPEN_REMOTE_GATES",
+  "route_id": "ATLAS:X-MISSION-RUNTIME-CLOSURE-20260907",
+  "predecessor": "ATLAS:X-MISSION-EXECUTION-BOUNDARY-20260906",
+  "state": "SOURCE_READY_EXTERNAL_GATES_ONLY",
   "claim_allowed": false,
   "mission_contract": {
     "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
     "pull_request": 425,
-    "head": "a13b04693428d21bf9bf411b353f6a79c835afe7",
+    "merge_commit": "db95f0a64b1d28d1d50b70ab44bc2571fabef29d",
     "human_path": "docs/contracts/MISSION_EXECUTION_BOUNDARY_V1.md",
     "machine_path": "docs/contracts/mission_execution_boundary.v1.json"
+  },
+  "runtime_closure": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "pull_request": 431,
+    "head": "68f012dc7c6cb7721792ab5bf4c67b9ff9a09091",
+    "merge_commit": "2346363809c7381b904822596cd52c172ded14de",
+    "contract_path": "docs/contracts/mission_runtime_evidence_closure.v1.json",
+    "validator_path": "scripts/validate_mission_runtime_evidence_closure.py",
+    "workflow_run_id": 34100074268,
+    "workflow_conclusion": "success"
   },
   "bindings": {
     "routing": "Mapa",
@@ -24,12 +34,34 @@
     "DATASET_INFORMS!=MISSION_AUTHORITY",
     "RETRIEVAL_CONTEXT!=WEIGHT_UPDATE",
     "LEARN_APPEND_ONLY!=ONLINE_SELF_TRAINING",
+    "MODEL_PROPOSAL!=EXECUTION_PERMISSION",
     "CONTINUE_APPROVED_SCOPE!=AUTONOMOUS_GOAL_CREATION",
-    "SOURCE!=DERIVED_INDEX!=EXECUTION!=EVIDENCE!=CLAIM",
+    "SOURCE!=EXECUTION!=EVIDENCE!=CLAIM",
     "TOKEN_VAZIO!=0",
+    "STATIC_OR_CI_PASS!=PHYSICAL_DEVICE_PROOF",
     "EXTERNAL_AUTHORITY_REQUIRED!=ORCHESTRATOR_PERMISSION",
     "GREEN_GATE_PROMOTES_ONLY_MEASURED_SCOPE"
   ],
-  "transverse_open_gate": "TV-ACTIONS-PRESTEP-ROOT-CAUSE",
-  "completion_state": "FINISHED_WITH_EXTERNAL_GATES_WHEN_ALL_AVAILABLE_SAFE_ACTIONS_ARE_PROVEN_OR_TYPED_BLOCKED"
+  "superseded_gate": {
+    "gate_id": "TV-ACTIONS-PRESTEP-ROOT-CAUSE",
+    "state": "SUPERSEDED_BY_OBSERVED_EXECUTED_STEPS",
+    "evidence": "Mapa PR #544 head 0b61df211387c505a0b086f9ba64dcd0602d7703"
+  },
+  "open_gates": [
+    {"gate_id": "physical_android_termux_execution", "state": "TOKEN_VAZIO_DEVICE"},
+    {"gate_id": "exact_multi_repository_runtime_execution", "state": "TOKEN_VAZIO_EXECUTION"},
+    {"gate_id": "remote_network_identity", "state": "TOKEN_VAZIO_RUNTIME"},
+    {"gate_id": "provider_or_legal_authorization", "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"},
+    {"gate_id": "live_default_branch_ruleset", "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"},
+    {"gate_id": "server_merge_enforcement", "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY"},
+    {"gate_id": "manual_promotion_decision", "state": "TOKEN_VAZIO_MANUAL_AUTHORITY"},
+    {"gate_id": "codescan_credentialed_analysis", "state": "TOKEN_VAZIO_SECRET"}
+  ],
+  "source_completion_state": "SOURCE_READY_EXTERNAL_GATES_ONLY",
+  "program_terminal_state": "NOT_REACHED",
+  "terminal_state_when_all_required_external_gates_pass": "FINISHED_WITH_EXTERNAL_GATES",
+  "model_weight_training": "NOT_AUTHORIZED",
+  "scientific_claim_promotion": "BLOCKED",
+  "receipt": "data/receipts/ATLAS_X_MISSION_RUNTIME_CLOSURE_20260907.v1.json",
+  "delta": "indices/deltas/ATLAS_X_MISSION_RUNTIME_CLOSURE_20260907.md"
 }
