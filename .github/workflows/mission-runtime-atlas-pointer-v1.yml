@@ -1,0 +1,19 @@
+name: Mission Runtime Atlas Pointer V1
+on:
+  pull_request:
+    paths:
+      - 'indices/ATLAS_X_MISSION_RUNTIME_CURRENT_V1.json'
+      - 'indices/deltas/ATLAS_X_MISSION_RUNTIME_EVIDENCE_CLOSURE_20260907.md'
+      - 'receipts/2026-09-07_ATLAS_MISSION_RUNTIME_EVIDENCE_CLOSURE_V1.json'
+      - 'scripts/validate_mission_runtime_atlas_pointer_v1.py'
+      - '.github/workflows/mission-runtime-atlas-pointer-v1.yml'
+permissions:
+  contents: read
+jobs:
+  atlas-runtime-pointer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - name: Validate exact producer binding and typed external gates
+        run: python3 scripts/validate_mission_runtime_atlas_pointer_v1.py
