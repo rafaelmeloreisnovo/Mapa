@@ -1,0 +1,87 @@
+{
+  "schema": "rafaelia.novoexport-active-v2-source-universe.v1",
+  "date": "2026-09-07",
+  "state": "ACTIVE_V2_PHYSICAL_UNIVERSE_BOUND_SEMANTIC_INGEST_OPEN",
+  "claim_allowed": false,
+  "source": {
+    "provider": "GOOGLE_DRIVE",
+    "novoexport_root_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+    "system_corpus_custody_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+    "conversations_corpus_id": "1S0DaA9ByFeL9wdPmvDgd3CCEe3Jcj7c2",
+    "export_manifest_file_id": "13xMqjbn1O5nc1Q3gC3ZjnUdLLW5qneWk",
+    "export_manifest_size_bytes": 3812404,
+    "export_manifest_sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a"
+  },
+  "active_navigation": {
+    "hub_id": "1QqwzIWJO1J3BkOjDnUp37JjOtuMF2iCNxyhCG6Vn4xc",
+    "master_index_id": "1-13h93Q_iOyuuGvrMNt5AG4-vYWPLux2UIWbk8khaLk",
+    "maps_relations_context_active_v2_id": "1s54c6R4R6MT-Ralb4gCx1ez_pl2AMSFq",
+    "inventory_accounting_active_v2_id": "1Os_nj7GdSd86SC5wVXjMPl9Wjc6xjCBA",
+    "operational_book_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88"
+  },
+  "physical_universe": {
+    "export_files": 15439,
+    "logical_files": 15369,
+    "declared_total_bytes": 25132295924,
+    "category_counts": {
+      "dat": 15358,
+      "conversations_json": 51,
+      "codex_json": 21,
+      "core_json": 8,
+      "chat_html": 1
+    },
+    "conversations_shards": {"first": 0, "last": 50, "count": 51, "missing": []},
+    "codex_shards": {"first": 0, "last": 20, "count": 21, "missing": []},
+    "canonical_path_size_lines_sha256": "0c43be312e8ccb0a68ded11ee0e3c7d2454c8a2495241861df36ef4ea51b4f5f",
+    "merkle_sha256_path_nul_size": "7f336dd32119afe1c10eb0e816fd72839cad2092e934eb19afd883a761821286",
+    "merkle_leaf_count": 15439
+  },
+  "route_drift": [{
+    "route": "01_EXPORT_CORE_JSON",
+    "previous_provider_id": "1ILDwi_A3r_93OyMiQW-BKKOu5hVVeV74",
+    "readback": "NOT_FOUND",
+    "state": "SUPERSEDED_OR_PROVIDER_UNRESOLVED",
+    "replacement": "TOKEN_VAZIO",
+    "rule": "DO_NOT_INFER_REPLACEMENT_ID"
+  }],
+  "producer_snapshot": {
+    "Mapa": {"branch": "main", "sha": "3a6f1b691609d5644b47d8f1debb483fc84c6c98"},
+    "RafGitTools": {"branch": "main", "sha": "c6cc175ab050c8c72526311a2dcb10753d3a2ee9"},
+    "termux-app-rafacodephi": {"branch": "master", "sha": "768fe095b669b7afebe2673e9bca20f8be72f973"},
+    "llamaRafaelia": {"branch": "master", "sha": "72ef4abdb887146f055ad9ac457c84950f99c0c4"},
+    "GAIA_phi": {"branch": "main", "sha": "fdcf3f367cf8c22850199478fac4f5de62e381f4"},
+    "Vectras-VM-Android": {"branch": "master", "sha": "9b6af6a61245261e230965031902119a163ee01a"},
+    "RafPolimata": {"branch": "main", "sha": "50b076191c7feadeaa0937a64c472ac1cca43c24"},
+    "Rafaelia_Private": {"branch": "main", "sha": "31e7dcde8c001ffc23938021309dd9a4d8abda8d"},
+    "MemRafcode": {"branch": "main", "sha": "eab446e4bfe7c14f6fd3679a4d5357af177a7def"}
+  },
+  "planes": {
+    "ATLAS:X": "route from current provider identities",
+    "NOVO:X": "raw Drive JSON/shards are source authority",
+    "L:X": "successors are append-only",
+    "O:X": "producer roles remain independent",
+    "T:X": "bindings are pointers, not copied raw corpus",
+    "REL:X": "relation/rapport never promotes evidence",
+    "SCALE:X": "manifest→logical file→shard→object→token when evidenced",
+    "EVID:X": "hashes, provider IDs, exact refs, CI receipts only",
+    "GAP:X": ["TV-INDEX-INGEST-000-050", "TV-MESSAGES-FULL-COVERAGE"],
+    "LEARN:X": "operational learning is append-only and not weight update"
+  },
+  "invariants": [
+    "DATASET_INFORMS != MISSION_AUTHORITY",
+    "RETRIEVAL_CONTEXT != WEIGHT_UPDATE",
+    "LEARN_APPEND_ONLY != ONLINE_SELF_TRAINING",
+    "SOURCE != DERIVED_INDEX != EXECUTION != EVIDENCE != CLAIM",
+    "RAPPORT != PROOF",
+    "TOKEN_VAZIO != 0",
+    "PHYSICAL_UNIVERSE_BOUND != SEMANTIC_EXHAUSTIVITY",
+    "DEFAULT_BRANCH_PROVIDER > BRANCH_NAME_ASSUMPTION",
+    "NOT_FOUND_ROUTE != DATA_LOSS"
+  ],
+  "semantic_ingest": {
+    "state": "TOKEN_VAZIO_PARTIAL",
+    "physical_manifest_complete": true,
+    "semantic_exhaustivity_proven": false,
+    "next": "incrementally bind MASTER_INDEX rows to source_ref/fileId/shard and close only evidence-backed coverage"
+  }
+}
