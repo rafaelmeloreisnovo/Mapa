@@ -1,0 +1,62 @@
+{
+  "schema": "rafaelia.atlas_message_provenance_receipt/v1",
+  "receipt_id": "ATLAS-MESSAGE-PROVENANCE-CUSTODY-20260907-V1",
+  "route_id": "ATLAS:X-MESSAGE-PROVENANCE-CUSTODY-20260907",
+  "observed_at": "2026-09-07T10:15:00Z",
+  "evidence_state": "SOURCE_MERGED_PARTIAL_PROVIDER_EXECUTION_GATED",
+  "claim_allowed": false,
+  "weights_modified": false,
+  "weight_training_authorized": false,
+  "raw_novoexport_mutated": false,
+  "termux": {
+    "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+    "pull_request": 435,
+    "merge_commit": "82e71419d606428e75279d6e6b545f4497de3de7",
+    "blobs": {
+      "tools/atlas_novo_context_adapter.py": "a6ad892b170d86d15c8dc426a4ed194b73ba7741",
+      "tools/atlas_llama_governance_bridge.py": "e107e2c48e851b2c3ee736e5a2557ed31d269104",
+      "docs/contracts/conversation_chunk.schema.json": "91715df6fddba1d702aeaa17c53278a786388850",
+      "docs/contracts/context_bundle.schema.json": "b184d03cd01d0bddcf322c85b9be1b7d0662a08d",
+      "docs/contracts/intent_ir.schema.json": "c4458596d3b1abe34807e8696c70b9a5d1d61483"
+    },
+    "passed_runs": [34109877217, 34109877108, 34109877177, 34109877280, 34109877394],
+    "external_failed_run": 34109877071
+  },
+  "llama": {
+    "repository": "rafaelmeloreisnovo/llamaRafaelia",
+    "pull_request": 125,
+    "head": "9dbf2d55555ccae62aa5aa1a53ec4d18a0a95281",
+    "merged": false,
+    "targeted_run": 34109852213,
+    "initial_job_steps": 0,
+    "rerun_job_steps": 0,
+    "log_state": "BLOB_NOT_FOUND_INITIAL_ATTEMPT",
+    "remote_execution": "TOKEN_VAZIO_REMOTE_EXECUTION",
+    "gap": "TV-LLAMA-ACTIONS-PRESTEP-REMOTE-EXECUTION",
+    "root_cause": "TOKEN_VAZIO"
+  },
+  "contract": {
+    "id": "MESSAGE_ROLE_BOUND_V1",
+    "message_role_mapping": {
+      "user": "USER_SOURCE",
+      "assistant": "MODEL_OUTPUT",
+      "system": "SYSTEM_SOURCE",
+      "tool": "TOOL_SOURCE"
+    },
+    "lexical_origin_inferred": false,
+    "content_level_classes": {
+      "USER_RETRANSMISSION": "TOKEN_VAZIO_CONTENT_CLASSIFICATION",
+      "THIRD_PARTY_CODE": "TOKEN_VAZIO_CONTENT_CLASSIFICATION",
+      "MODEL_LABEL": "TOKEN_VAZIO_CONTENT_CLASSIFICATION"
+    }
+  },
+  "non_equivalences": [
+    "MESSAGE_ROLE_PROVENANCE != LEXICAL_AUTHORSHIP",
+    "DATASET_INFORMS != MISSION_AUTHORITY",
+    "RETRIEVAL_CONTEXT != WEIGHT_UPDATE",
+    "MODEL_PROPOSAL != EXECUTION_PERMISSION",
+    "LEARN_APPEND_ONLY != ONLINE_SELF_TRAINING"
+  ],
+  "rollback": "Mapa successor files are append-only; producer source rollback remains repository-specific. Raw NOVOexport was not changed.",
+  "next_verifiable_step": "Execute atlas-intent-provider-v1 on llamaRafaelia PR #125 with observable steps and a passing result, or preserve TOKEN_VAZIO_REMOTE_EXECUTION."
+}
