@@ -14,6 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Validate append-only message provenance state
         run: python3 scripts/validate_message_provenance_custody_v1.py
