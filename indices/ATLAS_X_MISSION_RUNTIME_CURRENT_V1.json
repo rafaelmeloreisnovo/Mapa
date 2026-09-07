@@ -58,6 +58,17 @@
       "observation_scope": "repository rulesets API",
       "promotion": "DENIED"
     },
+    "default_branch_summary": {
+      "provider": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "main",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_check_enforcement": "off",
+      "observed_state": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+      "observation_scope": "branches/main API summary",
+      "promotion": "DENIED"
+    },
     "branch_protection_detail": {
       "endpoint": "branches/main/protection",
       "provider_result": "403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
@@ -71,7 +82,7 @@
     "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
     "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
     "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
-    "server_merge_enforcement": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+    "server_merge_enforcement": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
     "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
     "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET"
   },
@@ -102,8 +113,8 @@
     "Q04_boundary": "Mapa does not execute producer code and does not convert CI into runtime evidence",
     "Q05_local_indices": "ATLAS_X_MISSION_EXECUTION_CURRENT_V1.json + RAFAELIA_ATLAS_ROUTING_INDEX_V1.md",
     "Q06_producer_route": "Mission runtime evidence closure contract + fail-closed validator",
-    "Q07_open_gaps": "seven typed TOKEN_VAZIO gates plus one provider-observed failing ruleset gate",
-    "Q08_current_evidence": "source gate run 34100074268 SUCCESS; GitHub ruleset 21909304 observed disabled; remaining physical/external evidence absent",
+    "Q07_open_gaps": "six typed TOKEN_VAZIO gates plus two provider-observed failing protection/enforcement gates",
+    "Q08_current_evidence": "source gate run 34100074268 SUCCESS; GitHub ruleset 21909304 observed disabled; default branch observed protected=false/protection off",
     "Q09_local_gate": "pointer/lineage/coherence validation only",
     "Q10_stop_condition": "stop at physical device, external provider/admin/legal/manual/secret authority boundaries",
     "Q11_delta_destination": "Atlas delta + pointer + receipt; predecessor preserved",
