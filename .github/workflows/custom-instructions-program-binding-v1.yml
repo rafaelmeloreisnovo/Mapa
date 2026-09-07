@@ -1,0 +1,34 @@
+name: Custom Instructions Program Binding V1
+
+on:
+  pull_request:
+    paths:
+      - 'indices/ATLAS_X_CUSTOM_INSTRUCTIONS_PROGRAM_BINDING_CURRENT_V1.json'
+      - 'scripts/validate_custom_instructions_program_binding_v1.py'
+      - 'receipts/custom-instructions/**'
+      - 'docs/canonical/2026-09-07/**'
+      - '.github/workflows/custom-instructions-program-binding-v1.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'indices/ATLAS_X_CUSTOM_INSTRUCTIONS_PROGRAM_BINDING_CURRENT_V1.json'
+      - 'scripts/validate_custom_instructions_program_binding_v1.py'
+      - 'receipts/custom-instructions/**'
+      - '.github/workflows/custom-instructions-program-binding-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-program-binding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact event source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Validate fail-closed program binding
+        run: python3 scripts/validate_custom_instructions_program_binding_v1.py
