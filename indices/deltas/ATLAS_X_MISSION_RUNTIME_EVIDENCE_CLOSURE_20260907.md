@@ -27,13 +27,13 @@ source gate: Mission Runtime Evidence Closure V1 / run 34100074268 / SUCCESS
 
 The producer gate proves contract shape and fail-closed behavior only. It does **not**
 prove physical Android execution, eight-repository runtime execution, remote identity,
-provider/legal authority, server-side enforcement, manual promotion, or credentialed
-CodeScan analysis.
+provider/legal authority, manual promotion, or credentialed CodeScan analysis.
 
 ## Provider observation delta
 
-A live GitHub repository-ruleset query was available to the connected integration and
-therefore supersedes the previous absence state for this specific gate:
+Two formerly unknown provider gates now have live negative evidence.
+
+### Default-branch ruleset
 
 ```text
 repository = rafaelmeloreisnovo/Mapa
@@ -45,14 +45,25 @@ enforcement= disabled
 state      = FAIL_PROVIDER_OBSERVED_DISABLED
 ```
 
-This is real provider state and is deliberately recorded as `FAIL`, not
-`TOKEN_VAZIO` and not `PASS`. The branch-protection detail endpoint separately
-returned `403 Resource not accessible by integration`; that narrower observation
-remains `TOKEN_VAZIO_EXTERNAL_AUTHORITY`.
+### Observable server-side branch enforcement
+
+The GitHub branch summary for `main` reports:
+
+```text
+protected                         = false
+protection.enabled                = false
+required_status_checks.enforcement= off
+state                             = FAIL_PROVIDER_OBSERVED_UNENFORCED
+```
+
+The detailed `branches/main/protection` endpoint separately returned
+`403 Resource not accessible by integration`, so fine-grained protection detail is
+still `TOKEN_VAZIO_EXTERNAL_AUTHORITY`. That missing detail does not erase the live
+negative summary already observed.
 
 ```text
 FAIL != TOKEN_VAZIO != PASS
-provider observation != permission to modify provider policy
+provider observation != permission to change provider policy
 ```
 
 ## Final program route
@@ -97,12 +108,12 @@ TOKEN_VAZIO                  != 0
 | remote network identity | `TOKEN_VAZIO_RUNTIME` | cryptographic/declared identity verification evidence |
 | provider/legal authorization | `TOKEN_VAZIO_EXTERNAL_AUTHORITY` | external authority decision scoped and referenced |
 | live default-branch ruleset | `FAIL_PROVIDER_OBSERVED_DISABLED` | external admin enablement + subsequent provider-side live observation |
-| server merge enforcement | `TOKEN_VAZIO_EXTERNAL_AUTHORITY` | server-side enforcement observation |
+| server merge enforcement | `FAIL_PROVIDER_OBSERVED_UNENFORCED` | external admin enablement + subsequent provider-side live observation |
 | manual promotion | `TOKEN_VAZIO_MANUAL_AUTHORITY` | explicit authority decision |
 | CodeScan | `TOKEN_VAZIO_SECRET` | credentialed analysis result/report digest, never the credential itself |
 
-Seven gates therefore remain evidence-absent; one is evidence-present and failing.
-No source-only substitute can close any of them.
+Six gates therefore remain evidence-absent; two are evidence-present and failing.
+No source-only substitute can close any row.
 
 ## What is not a gate
 
@@ -122,8 +133,8 @@ not turn execution into scientific evidence.
 4. **Boundary:** Mapa does not execute producer code or infer device/external truth.
 5. **Local indices:** predecessor MissionExecution pointer + Atlas Routing Index.
 6. **Producer route:** runtime-evidence contract + fail-closed validator.
-7. **Known gates:** seven typed `TOKEN_VAZIO` states plus one provider-observed ruleset failure.
-8. **Current evidence:** source contract gate SUCCESS in scope; GitHub ruleset `21909304` observed `disabled`.
+7. **Known gates:** six typed `TOKEN_VAZIO` states plus two provider-observed protection/enforcement failures.
+8. **Current evidence:** source contract gate SUCCESS in scope; ruleset disabled; main protected=false/protection off.
 9. **Local gate:** lineage/pointer/coherence validation only.
 10. **Stop condition:** physical device and external provider/admin/legal/manual/secret authorities.
 11. **Delta:** this file + machine pointer + receipt; predecessor remains immutable.
@@ -150,6 +161,6 @@ unless separate, claim-specific or training-specific authorities explicitly chan
 
 ## R3
 
-`F_ok` = source-side MissionExecution closure is executable as an evidence contract; Atlas is bound to exact producer evidence; live ruleset evidence is now classified correctly as a provider-observed failure.  
-`F_gap` = seven evidence-absent gates remain plus one disabled ruleset requiring external admin action.  
+`F_ok` = source-side MissionExecution closure is executable as an evidence contract; Atlas is bound to exact producer evidence; both observable provider protection gates are now classified as live failures rather than unknowns.  
+`F_gap` = six evidence-absent gates remain plus two disabled/unprotected provider gates requiring external admin action.  
 `F_next` = execute only the owning real-world probe/authority action and append one successor receipt per observed gate.
