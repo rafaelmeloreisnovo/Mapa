@@ -9,7 +9,7 @@
   "mapa_preflight_head": "dd24856a1cf46114aa9d40c076e26e013d7d800a",
   "pointer": {
     "path": "indices/ATLAS_X_MISSION_RUNTIME_CURRENT_V1.json",
-    "git_blob_sha1": "5d44e53827009c0033bb44123033f496786d5bcc",
+    "git_blob_sha1": "bc4e5247c6b1b81978f9afe02cab7894b2f86646",
     "route_id": "ATLAS:X-MISSION-RUNTIME-EVIDENCE-CLOSURE-20260907"
   },
   "producer": {
@@ -35,6 +35,16 @@
       "state": "FAIL_PROVIDER_OBSERVED_DISABLED",
       "promotion": "DENIED"
     },
+    "default_branch_summary": {
+      "provider": "GitHub",
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "branch": "main",
+      "protected": false,
+      "protection_enabled": false,
+      "required_status_check_enforcement": "off",
+      "state": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+      "promotion": "DENIED"
+    },
     "branch_protection_detail": {
       "provider_result": "403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
       "state": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
@@ -45,15 +55,15 @@
     "program_mission_source_side_closure": "CLOSED",
     "external_execution_closure": "OPEN_TYPED_GATES",
     "required_gate_count": 8,
-    "token_vazio_gate_count": 7,
-    "observed_failing_gate_count": 1,
+    "token_vazio_gate_count": 6,
+    "observed_failing_gate_count": 2,
     "gate_states": {
       "physical_android_termux_execution": "TOKEN_VAZIO_DEVICE",
       "exact_multi_repository_runtime_execution": "TOKEN_VAZIO_EXECUTION",
       "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
       "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
       "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
-      "server_merge_enforcement": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+      "server_merge_enforcement": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
       "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
       "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET"
     },
@@ -73,7 +83,8 @@
     "Termux runtime-evidence closure contract is merged on master",
     "Termux source validator and fail-closed CI executed successfully",
     "Atlas successor preserves producer authority and exact commit/blob/run pointers",
-    "GitHub live ruleset 21909304 was observed directly and classified as disabled rather than TOKEN_VAZIO",
+    "GitHub live ruleset 21909304 was observed disabled and classified FAIL rather than TOKEN_VAZIO",
+    "GitHub main branch summary was observed protected=false with protection/status-check enforcement off and classified FAIL in observable server-enforcement scope",
     "all remaining program gates are typed by their real evidence owner",
     "training and scientific promotion remain outside runtime closure"
   ],
@@ -82,11 +93,11 @@
     "exact eight-repository MissionExecution runtime receipt",
     "remote identity verification",
     "provider/legal authorization evidence",
-    "live default-branch ruleset is observed disabled and requires external enablement plus re-observation",
+    "live default-branch ruleset is disabled and requires external enablement plus re-observation",
+    "observable server merge enforcement is off and requires external enablement plus re-observation",
     "branch protection detail endpoint is inaccessible to this integration",
-    "server merge enforcement evidence",
     "manual promotion decision",
     "credentialed CodeScan analysis"
   ],
-  "F_next": "execute only the owning external/device probe or authority action; for ruleset, external admin must enable enforcement before provider re-observation; never substitute CI or simulation"
+  "F_next": "execute only the owning external/device probe or authority action; provider/admin must enable protection/enforcement before re-observation; never substitute CI or simulation"
 }
