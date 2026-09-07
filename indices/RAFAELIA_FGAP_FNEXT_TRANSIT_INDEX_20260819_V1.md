@@ -229,3 +229,21 @@ F_ok   = contrato federado de serviço e trânsito F_gap→F_next materializado 
 F_gap  = exaustividade global, reconciliação de todos AGENTS, runtime físico, HMAC/proveniência e classificação dataset-wide permanecem bounded TOKEN_VAZIO/open
 F_next = materializar executor/validador no RafGitTools, aplicar o contrato aos adaptadores AGENTS locais e emitir receipt de transição sem reescrever histórico
 ```
+
+## 11. Transição — validação do fluxo de missão / RafGitTools PR #431
+
+Evento: `RAFGITTOOLS-MISSION-FLOW-VALIDATION-20260907T181831Z`. Registro de rota, com `claim_allowed=false`.
+
+- Produtor: [RafGitTools PR #431](https://github.com/rafaelmeloreisnovo/RafGitTools/pull/431), fonte `4fa51f3624ae783e1af564170b2bc1c7eb37c9e6`; baseline `c6cc175ab050c8c72526311a2dcb10753d3a2ee9`.
+- Gap: `TV-RAFGITTOOLS-MISSION-FLOW-VALIDATION-20260907`. O validador original aceitava `flow` ausente ou com relações diretas de dataset/modelo para execução e de LEARN para atualização de pesos.
+- Delta: o validador exige uma lista com as oito relações canônicas, sem faltas, extras ou duplicatas; a ordem de relações equivalentes não muda a autoridade.
+- Evidência local: Linux x86_64 / Python 3.12.13; 15 métodos de teste; 21 assertions de fixtures inválidas falham antes da correção e são rejeitadas depois; saída 0 após a correção. O contrato original permanece inalterado.
+- Receipt do produtor: [program-mission-flow-validation-20260907.v1.json](https://github.com/rafaelmeloreisnovo/RafGitTools/blob/4fa51f3624ae783e1af564170b2bc1c7eb37c9e6/data/evidence/github/program-mission-flow-validation-20260907.v1.json).
+- Fonte/teste: blobs `94556f94e409aa86063932dd8bb4465c29f55943` / `bae5ce67d849d4e3b7fdb7c52b84620d951f8d0c`, conferidos localmente.
+- Gate remoto observado: [CI run 34151243902](https://github.com/rafaelmeloreisnovo/RafGitTools/actions/runs/34151243902), job `101833811234` — `RAFAELIA coherence / anti-regression` com steps reais concluídos e `success`. O conjunto completo de builds ainda estava em execução nessa observação.
+- Integração observada no provider: merge `30e4fdf05c86b6b2b30bc136d720436f31eaef74`, ator `rafaelmeloreisnovo`, em `2026-09-07T18:23:04Z`. Este ciclo criou o draft; não chamou a operação de merge.
+- Limite: `MEASURED_LOCAL` + gate remoto específico. Não demonstra execução Android, mudança de pesos, segurança global ou enforcement do provider.
+- Rollback: reverter o commit da correção apenas sob a política do produtor e registrar sucessor; isso reabre a lacuna conhecida de validação. Não apagar o receipt original.
+- F_ok: fluxo de autoridade validado; falso PASS reproduzido e corrigido; rota para a evidência preservada.
+- F_gap: demais builds e checks no commit; enforcement administrativo; autoridade privada; dispositivo e integração física.
+- F_next: consumir resultados terminais no commit exato e preservar separadamente cada gate externo.
