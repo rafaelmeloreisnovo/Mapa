@@ -66,6 +66,114 @@ Possible transferable mechanisms include event-conditioned activation, transacti
 
 Do not turn every event into an implicit trigger. The local subsystem must own the event, state transition and rollback semantics.
 
+## Reusable geometry families
+
+Historical machine and database architectures may carry useful geometry beyond their original syntax. Normalize them into the following families before adapting them.
+
+### Event and persistence geometry
+
+```text
+request/event
+-> validate
+-> append or stage
+-> durable commit
+-> sequence/hash identity
+-> index
+-> derived current view
+```
+
+Treat create/add, update, delete and commit as distinct transitions. An update or delete may be represented as a successor event instead of destructive mutation when the local contract is append-only.
+
+The important questions are where identity is created, when state becomes durable, what can be rolled back, and which artifact proves the transition.
+
+### Allocation and identifier geometry
+
+Extract rules for:
+
+- identifier generation point and ownership;
+- explicit integer width/range and conversion policy;
+- auto-number or sequence allocation;
+- logical key layout versus physical placement;
+- collision, overflow, wrap and reuse behavior;
+- per-user/per-domain partitioning only when local authority requires it.
+
+Do not confuse a convenient physical layout with identity semantics.
+
+### Storage locality geometry
+
+Normalize old disk/page/block reasoning as a cost model:
+
+```text
+logical record
+-> page/block
+-> allocation unit
+-> physical medium locality
+-> access latency / transfer cost
+-> fragmentation / compaction state
+```
+
+Sector, track, head, page, erase block, cache line and extent are technology-specific instances of a broader locality/allocation model.
+
+Historical latency values, media classes or controller timings are measurement inputs, not universal constants. Re-measure on the current target before using them for optimization claims.
+
+### Memory and bus geometry
+
+Translate conventional/high-memory maps, banked windows, DMA/IRQ, ISA-like buses, north/south bridge separation, MMIO and address ranges into:
+
+- address-space ownership;
+- capability/resource discovery;
+- alignment and width constraints;
+- interrupt/event routing;
+- transfer ownership;
+- voltage/electrical constraints only at the hardware boundary.
+
+Never copy a historical address, interrupt or voltage into a modern target without an owning hardware contract.
+
+### Protocol-stack geometry
+
+Keep layers distinct:
+
+```text
+physical medium
+!= link framing
+!= network protocol
+!= transport/session
+!= application command
+```
+
+A cable/termination rule, a network protocol, and a modem command set are separate pattern families even if they were used in the same historical installation.
+
+Transfer state machines, framing, capability negotiation, retry, timeout and integrity behavior only at the layer that owns them.
+
+### Binary and OS-layout geometry
+
+Executable headers, partition tables, filesystem metadata, registry/config trees, service state, file alignment and loader-visible flags can be normalized as:
+
+```text
+header/schema
+-> validated offsets/lengths
+-> mapped objects
+-> activation/load order
+-> visible state
+-> recovery/failure path
+```
+
+A historical binary or OS structure is a reference model; exact offsets and magic values require current-source evidence before reuse.
+
+### Device-control geometry
+
+Serial, parallel, GPIO-like signaling, relays, sensors and discrete components reduce to a boundary model:
+
+```text
+command
+-> encoded signal
+-> electrical interface
+-> device transition
+-> observed feedback
+```
+
+Software state never proves the electrical transition. Hardware voltage/current/noise constraints require a hardware-specific falsifier and safety boundary.
+
 ## Leaf adaptation
 
 Before applying a pattern, answer:
