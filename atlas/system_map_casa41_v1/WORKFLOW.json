@@ -1,0 +1,30 @@
+{
+  "schema":"RAFAELIA_KNOWLEDGE_HOUSE_WORKFLOW_V1",
+  "metaphor":"House/doors: a photo or object opens a governed route to a service, never a permission bypass.",
+  "steps":[
+    "CAPTURE_REFERENCE",
+    "CLASSIFY_PRIVACY",
+    "RESOLVE_ROUTE",
+    "CHECK_RIGHTS",
+    "OPEN_GOVERNED_DOOR",
+    "EXECUTE_SERVICE",
+    "VERIFY_RESULT",
+    "APPEND_RECEIPT",
+    "UPDATE_KNOWLEDGE",
+    "OPTIONAL_SHARE_WITH_EXPLICIT_APPROVAL"
+  ],
+  "invariants":[
+    "CAPTURE_REFERENCE!=PUBLICATION",
+    "OPEN_DOOR_REQUIRES_RIGHTS",
+    "EXECUTION_REQUIRES_AUTHORITY",
+    "SHARING_REQUIRES_EXPLICIT_DESTINATION_AND_CLASSIFICATION",
+    "RAW_PRIVATE_PHOTO_NEVER_AUTO_SHARED",
+    "EVERY_MUTATING_ACTION_EMITS_RECEIPT"
+  ],
+  "example_luxury_car_service":{
+    "photo_reference":"F38/FOTOS object reference",
+    "route":"Fotos -> Servicos -> Trabalho -> Scripts/PROGRAMAS -> Auditoria -> Receipts",
+    "share":"optional governed derivative/reference via Compartilhado",
+    "claim_allowed":false
+  }
+}
