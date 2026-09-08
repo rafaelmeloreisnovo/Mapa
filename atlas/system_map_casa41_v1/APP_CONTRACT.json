@@ -1,0 +1,30 @@
+{
+  "schema":"RAFAELIA_CASA41_MOBILE_GITHUB_APP_CONTRACT_V1",
+  "surfaces":["ANDROID_LOCAL","GITHUB_PROVIDER","OPTIONAL_SHARED_EXPORT"],
+  "local_first":true,
+  "github_token_storage":"NEVER_IN_REPOSITORY",
+  "photo_strategy":"content-addressed reference + metadata; raw binary remains private unless explicitly exported",
+  "required_actions":[
+    "browse_41_rooms",
+    "browse_7_directions",
+    "resolve_virtual_drive",
+    "inspect_rights",
+    "capture_photo_reference",
+    "create_service_task",
+    "append_receipt",
+    "prepare_share_manifest"
+  ],
+  "provider_gates":{
+    "github_authenticated_write":"TOKEN_VAZIO_APP_AUTH",
+    "android_storage_access":"TOKEN_VAZIO_ANDROID_RUNTIME",
+    "photo_permission":"TOKEN_VAZIO_ANDROID_RUNTIME",
+    "provider_acl_enforcement":"TOKEN_VAZIO_PROVIDER_ENFORCEMENT"
+  },
+  "privacy":{
+    "default_share":"DENY",
+    "raw_photo_auto_upload":false,
+    "private_memory_auto_export":false,
+    "dataset_auto_export":false,
+    "receipt_required_for_mutation":true
+  }
+}
