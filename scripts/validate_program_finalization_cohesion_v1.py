@@ -16,7 +16,7 @@ EXPECTED_GATES = {
     "codescan_credentialed_analysis",
 }
 
-FORBIDDEN_PASS_VALUES = {"TOKEN_VAZIO", "UNKNOWN", "UNVERIFIED", "PENDING"}
+ALLOWED_OPEN_PREFIXES = ("TOKEN_VAZIO", "FAIL_")
 
 
 def fail(message: str) -> None:
@@ -72,10 +72,14 @@ def main() -> None:
         if not isinstance(value, str) or not value:
             fail(f"gate {name} has invalid state")
         upper = value.upper()
-        if upper != "PASS":
-            unresolved.append(name)
-        if any(token in upper for token in FORBIDDEN_PASS_VALUES) and upper == "PASS":
-            fail(f"gate {name} promoted unsupported state to PASS")
+        if upper == "PASS":
+            continue
+        if not upper.startswith(ALLOWED_OPEN_PREFIXES):
+            fail(
+                f"gate {name} has unrecognized non-PASS state {value!r}; "
+                "expected PASS, TOKEN_VAZIO*, or FAIL_*"
+            )
+        unresolved.append(name)
 
     if completion.get("source_side_program_closure") is not True:
         fail("source-side program closure must be true")
@@ -88,6 +92,8 @@ def main() -> None:
         if completion.get("terminal_allowed_now") is not False:
             fail("terminal state cannot be allowed while gates are unresolved")
     else:
+        if completion.get("external_execution_closure") is not True:
+            fail("all external gates PASS but external execution closure is not true")
         if completion.get("terminal_allowed_now") is not True:
             fail("all gates PASS but terminal_allowed_now is not true")
 
