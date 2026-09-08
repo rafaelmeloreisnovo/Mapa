@@ -1,0 +1,21 @@
+{
+  "schema": "RAFAELIA_SYSTEM_RIGHTS_V1",
+  "inspiration": "Novell NetWare RIGHTS letter semantics; RAFAELIA profiles are a new policy layer.",
+  "legacy_letters": {"S":"Supervisor","R":"Read","W":"Write","C":"Create","E":"Erase","M":"Modify","F":"File Scan","A":"Access Control","N":"No Rights"},
+  "profiles": {
+    "OWNER":["S"],
+    "STEWARD":["R","W","C","M","F","A"],
+    "CONTRIBUTOR":["R","W","C","F"],
+    "VIEWER":["R","F"],
+    "APPEND_ONLY_WRITER":["R","W","C","F"],
+    "SHARE_VIEWER":["R","F"],
+    "PRIVATE_OWNER":["S"],
+    "DENY":["N"]
+  },
+  "enforcement": {
+    "source_contract":"IMPLEMENTED",
+    "provider_filesystem_acl":"TOKEN_VAZIO_PROVIDER_ENFORCEMENT",
+    "github_branch_rules":"SEPARATE_PROVIDER_GATE",
+    "note":"APPEND_ONLY_WRITER omits E/M/A/S, but immutability still requires provider-side enforcement."
+  }
+}
