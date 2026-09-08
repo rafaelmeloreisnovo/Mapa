@@ -1,0 +1,15 @@
+{
+  "schema": "RAFAELIA_7_DIRECTIONS_XYZ_360_V1",
+  "claim": "Six signed Cartesian directions plus one rotation/origin operator cover navigation over X/Y/Z orientations.",
+  "mathematical_boundary": "OMEGA360 is a navigation/rotation operator, not a fourth independent Euclidean spatial axis.",
+  "directions": [
+    {"id":"D1","code":"X+","vector":[1,0,0],"role":"positive X / forward sequence"},
+    {"id":"D2","code":"X-","vector":[-1,0,0],"role":"negative X / reverse-history"},
+    {"id":"D3","code":"Y+","vector":[0,1,0],"role":"positive Y / value-coherence"},
+    {"id":"D4","code":"Y-","vector":[0,-1,0],"role":"negative Y / gap-entropy"},
+    {"id":"D5","code":"Z+","vector":[0,0,1],"role":"positive Z / deeper layer"},
+    {"id":"D6","code":"Z-","vector":[0,0,-1],"role":"negative Z / projection-outward"},
+    {"id":"D7","code":"OMEGA360","operator":"Rz(gamma) * Ry(beta) * Rx(alpha)","domain_degrees":{"alpha":"[0,360)","beta":"[0,360)","gamma":"[0,360)"},"role":"rotation/origin sweep across X/Y/Z"}
+  ],
+  "invariants": ["norm(R*v)=norm(v)","R^T*R=I","det(R)=1","angles are modulo 360 degrees"]
+}

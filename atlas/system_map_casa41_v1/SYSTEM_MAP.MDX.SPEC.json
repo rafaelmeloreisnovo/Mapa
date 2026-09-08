@@ -1,0 +1,13 @@
+{
+  "schema":"RAFAELIA_DBASE_MDX_INDEX_SPEC_V1",
+  "native_mdx_binary":"TOKEN_VAZIO_NATIVE_MDX_BINARY",
+  "source_dbf":"SYSTEM_MAP.DBF",
+  "desired_tags":[
+    {"tag":"BY_ID","expression":"ID","unique":true},
+    {"tag":"BY_ALIAS","expression":"ALIAS","unique":true},
+    {"tag":"BY_PATH","expression":"PATH","unique":true},
+    {"tag":"BY_CLASS","expression":"CLASS","unique":false},
+    {"tag":"BY_PROFILE","expression":"PROFILE","unique":false}
+  ],
+  "gate":"Do not call native dBASE indexing PASS until an MDX is generated, opened and read back by a dBASE-compatible engine."
+}

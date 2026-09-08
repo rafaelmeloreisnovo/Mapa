@@ -1,0 +1,34 @@
+{
+  "schema":"RAFAELIA_SYSTEM_MAP_ROUTING_V1",
+  "virtual_drive_semantics":"Inspired by NetWare MAP/search-drive concepts. These are capability views, not OS-mounted drives until a provider adapter enforces them.",
+  "mappings":[
+    {"letter":"M","name":"ROOT","target":"atlas/system_map_casa41_v1","profile":"VIEWER"},
+    {"letter":"S","name":"SHARE","target":"atlas/system_map_casa41_v1/29_compartilhado","profile":"SHARE_VIEWER"},
+    {"letter":"K","name":"MEMORY","target":"atlas/system_map_casa41_v1/06_memoria","profile":"VIEWER"},
+    {"letter":"D","name":"DATASET","target":"atlas/system_map_casa41_v1/28_dataset","profile":"VIEWER"},
+    {"letter":"P","name":"PROGRAMS","target":"atlas/system_map_casa41_v1/16_programas","profile":"VIEWER"},
+    {"letter":"T","name":"WORK","target":"atlas/system_map_casa41_v1/15_trabalho","profile":"CONTRIBUTOR"},
+    {"letter":"R","name":"ROUTES","target":"atlas/system_map_casa41_v1/33_rotas","profile":"VIEWER"},
+    {"letter":"I","name":"INDEX","target":"atlas/system_map_casa41_v1/32_indices","profile":"VIEWER"},
+    {"letter":"G","name":"GOV","target":"atlas/system_map_casa41_v1/30_governanca","profile":"VIEWER"},
+    {"letter":"A","name":"AUDIT","target":"atlas/system_map_casa41_v1/35_auditoria","profile":"VIEWER"},
+    {"letter":"C","name":"CUSTODY","target":"atlas/system_map_casa41_v1/36_cadeia_de_custodia","profile":"VIEWER"},
+    {"letter":"F","name":"PHOTOS","target":"atlas/system_map_casa41_v1/38_fotos","profile":"PRIVATE_OWNER"},
+    {"letter":"V","name":"PRIVACY","target":"atlas/system_map_casa41_v1/41_privacidade","profile":"PRIVATE_OWNER"},
+    {"letter":"H","name":"HISTORY","target":"atlas/system_map_casa41_v1/25_historia","profile":"VIEWER"},
+    {"letter":"J","name":"JOURNAL","target":"atlas/system_map_casa41_v1/26_diariodebordo","profile":"VIEWER"},
+    {"letter":"Q","name":"GAPS","target":"atlas/system_map_casa41_v1/19_lacuna","profile":"VIEWER"},
+    {"letter":"X","name":"X_AXIS","target":"atlas/system_map_casa41_v1/24_as_direcoes/X","profile":"VIEWER"},
+    {"letter":"Y","name":"Y_AXIS","target":"atlas/system_map_casa41_v1/24_as_direcoes/Y","profile":"VIEWER"},
+    {"letter":"Z","name":"Z_AXIS","target":"atlas/system_map_casa41_v1/24_as_direcoes/Z","profile":"VIEWER"},
+    {"letter":"O","name":"OMEGA360","target":"atlas/system_map_casa41_v1/24_as_direcoes/OMEGA360","profile":"VIEWER"}
+  ],
+  "search_routes":[
+    {"search":"S1","target":"14_scripts","purpose":"scripts"},
+    {"search":"S2","target":"17_todos_scripts_que_firmaram_operacoes","purpose":"attested operation scripts"},
+    {"search":"S3","target":"16_programas","purpose":"program mission"},
+    {"search":"S4","target":"33_rotas","purpose":"route lookup"},
+    {"search":"S5","target":"32_indices","purpose":"index lookup"}
+  ],
+  "resolution_order":["explicit_folder_id","legacy_alias","virtual_drive","search_routes","TOKEN_VAZIO_NOT_FOUND"]
+}

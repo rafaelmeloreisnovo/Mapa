@@ -1,0 +1,31 @@
+name: CASA41 System Map V1
+
+on:
+  pull_request:
+    paths:
+      - "atlas/system_map_casa41_v1/**"
+      - ".github/workflows/casa41-system-map-v1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "atlas/system_map_casa41_v1/**"
+      - ".github/workflows/casa41-system-map-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Setup Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+      - name: Validate CASA41
+        run: python3 atlas/system_map_casa41_v1/validate_casa41.py
