@@ -1,0 +1,29 @@
+name: Program Finalization Cohesion V1
+
+on:
+  pull_request:
+    paths:
+      - 'indices/ATLAS_X_PROGRAM_FINALIZATION_CURRENT_V1.json'
+      - 'scripts/validate_program_finalization_cohesion_v1.py'
+      - '.github/workflows/program-finalization-cohesion-v1.yml'
+      - 'docs/canonical/2026-09-08/RAFAELIA_PROGRAM_FINALIZATION_COHESION_DELTA_V1.md'
+      - 'receipts/program-finalization/2026-09-08/RAFAELIA_PROGRAM_FINALIZATION_COHESION_RECEIPT.v1.json'
+  push:
+    branches: [main]
+    paths:
+      - 'indices/ATLAS_X_PROGRAM_FINALIZATION_CURRENT_V1.json'
+      - 'scripts/validate_program_finalization_cohesion_v1.py'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Validate fail-closed program cohesion
+        run: python scripts/validate_program_finalization_cohesion_v1.py
