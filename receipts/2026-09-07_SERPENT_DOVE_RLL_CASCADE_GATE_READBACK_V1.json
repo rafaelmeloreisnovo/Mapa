@@ -1,0 +1,64 @@
+{
+  "schema_version": "rafaelia.atlas-serpent-dove-rll-cascade-gate-readback/v1",
+  "receipt_id": "ATLAS-X-SERPENT-DOVE-RLL-CASCADE-GATE-READBACK-20260907-V1",
+  "append_only": true,
+  "claim_allowed": false,
+  "predecessor_receipt": "receipts/2026-09-07_SERPENT_DOVE_RLL_CASCADE_RECONCILIATION_V1.json",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pr": 556,
+  "head": "e4d60b51379f781410d1ad482b64926ba3def015",
+  "scoped_success": [
+    {"workflow": "CI", "run_id": 34171692680, "conclusion": "success"},
+    {"workflow": "CodeQL Advanced", "run_id": 34171692647, "conclusion": "success"},
+    {"workflow": "SecurityCodeScan", "run_id": 34171692701, "conclusion": "success"},
+    {"workflow": "main-hardening-gate", "run_id": 34171692681, "conclusion": "success"},
+    {"workflow": "Human Dignity Ethics Gate V1", "run_id": 34171692692, "conclusion": "success"},
+    {"workflow": "Branch Topology Gate", "run_id": 34171692645, "conclusion": "success"}
+  ],
+  "fail_closed_noncompensatory": [
+    {
+      "workflow": "Provider Protection Gate",
+      "run_id": 34171692659,
+      "conclusion": "failure",
+      "observed_failure_step": "Verify live default-branch ruleset",
+      "classification": "EXTERNAL_PROVIDER_ENFORCEMENT_P0"
+    },
+    {
+      "workflow": "Server Merge Enforcement Assurance",
+      "run_id": 34171692734,
+      "conclusion": "failure",
+      "observed_failure_step": "Inspect live main branch server-side enforcement",
+      "detector_fixtures": "success",
+      "bootstrap_fixtures": "success",
+      "classification": "EXTERNAL_SERVER_ENFORCEMENT_P0"
+    },
+    {
+      "workflow": "RAFAELIA Promotion Control V1",
+      "run_id": 34171692674,
+      "conclusion": "failure",
+      "negative_tests": "success",
+      "invariant_validation": "success",
+      "claim_allowed_validation": "success",
+      "observed_failure_step": "Enforce manual promotion decision",
+      "classification": "PROMOTION_AUTHORITY_HOLD"
+    },
+    {
+      "workflow": "CodeScan",
+      "run_id": 34171692668,
+      "conclusion": "failure",
+      "observed_failure_step": "Verify CodeScan credential presence",
+      "analysis_executed": false,
+      "sarif_produced": false,
+      "classification": "EXTERNAL_CREDENTIAL_TOKEN_VAZIO"
+    }
+  ],
+  "serpent_dove_interpretation": {
+    "do_not_overreact": "red external/authority gates are not reclassified as source regression",
+    "do_not_underreact": "green scoped checks do not override external/authority failures",
+    "minimum_intervention": "keep PR draft; preserve gates; continue independent safe scientific lane",
+    "state": "WISE_SAFE_SCOPED_HOLD"
+  },
+  "F_ok": "Changed-surface CI, CodeQL, SecurityCodeScan, hardening, ethics and topology are observed successful on the PR line.",
+  "F_gap": "Live provider/server enforcement, manual promotion authority and CodeScan credential remain open/fail-closed.",
+  "F_next": "Do not bypass. Continue RLL #840 evidence collection independently; promotion of this Mapa delta remains HOLD until its non-compensatory gates close through their proper authorities."
+}
