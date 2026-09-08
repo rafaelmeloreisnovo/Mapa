@@ -1,0 +1,81 @@
+{
+  "schema": "rafaelia.program_finalization_ci_readback_receipt/v1",
+  "receipt_id": "PROGRAM-FINALIZATION-CI-READBACK-20260908-V1",
+  "date": "2026-09-08",
+  "append_only": true,
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 557,
+  "branch": "atlas/program-finalization-cohesion-20260908",
+  "head_before_receipt": "2f3a154b90c7da6bac2153beb12427ee60210f92",
+  "base_main_observed": "e6084d218c082c2f0233ab8f4e31aa4ed3944dd0",
+  "readback_scope": "GITHUB_CHECK_RUNS_FOR_HEAD_BEFORE_RECEIPT",
+  "check_runs_total_observed": 17,
+  "source_side_successes_observed": [
+    {"name": "Program Finalization Cohesion V1 / validate", "conclusion": "success", "check_run_id": 101935063180},
+    {"name": "CodeQL", "conclusion": "success", "check_run_id": 101935163918},
+    {"name": "SCS", "conclusion": "success", "check_run_id": 101935063627},
+    {"name": "Validate Repository Structure", "conclusion": "success", "check_run_id": 101935063582},
+    {"name": "Analyze (actions)", "conclusion": "success", "check_run_id": 101935063503},
+    {"name": "Analyze (c-cpp)", "conclusion": "success", "check_run_id": 101935063502},
+    {"name": "Analyze (python)", "conclusion": "success", "check_run_id": 101935063353},
+    {"name": "branch-topology / validate", "conclusion": "success", "check_run_id": 101935063284},
+    {"name": "contract", "conclusion": "success", "check_run_id": 101935063161},
+    {"name": "workflow-graph", "conclusion": "success", "check_run_id": 101935063107},
+    {"name": "promotion-control / negative-tests", "conclusion": "success", "check_run_id": 101935063086},
+    {"name": "Human dignity no-regression gate", "conclusion": "success", "check_run_id": 101935062980},
+    {"name": "Changed workflows use immutable action refs", "conclusion": "success", "check_run_id": 101935062973}
+  ],
+  "external_or_authority_gates_observed": [
+    {
+      "name": "promotion-control / enforce",
+      "check_run_id": 101935089180,
+      "conclusion": "failure",
+      "classification": "PROMOTION_AUTHORITY_HOLD",
+      "meaning": "independent GitHub approval is required by the existing fail-closed promotion policy; this receipt does not fabricate or substitute that reviewer"
+    },
+    {
+      "name": "provider-protection",
+      "check_run_id": 101935063601,
+      "conclusion": "failure",
+      "classification": "FAIL_PROVIDER_OBSERVED_DISABLED",
+      "meaning": "live default-branch provider protection remains disabled"
+    },
+    {
+      "name": "server-merge-enforcement",
+      "check_run_id": 101935062992,
+      "conclusion": "failure",
+      "classification": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+      "meaning": "server-side merge enforcement remains absent/unproven"
+    },
+    {
+      "name": "CodeScan",
+      "check_run_id": 101935063425,
+      "conclusion": "failure",
+      "classification": "TOKEN_VAZIO_SECRET",
+      "meaning": "credential presence gate stopped the job before credentialed CodeScan analysis; no scan result is inferred"
+    }
+  ],
+  "authority_boundaries": {
+    "dataset_is_mission_authority": false,
+    "model_output_is_execution_permission": false,
+    "model_can_create_independent_goal": false,
+    "learn_updates_model_weights": false,
+    "retrieval_updates_model_weights": false,
+    "training_or_finetune_authorized": false,
+    "independent_review_can_be_synthesized_by_chat": false
+  },
+  "closure": {
+    "source_side_patch_validation": "PASS_FOR_OBSERVED_CHECKS",
+    "source_side_program_cohesion": "CLOSED_FOR_OBSERVED_SCOPE",
+    "promotion_authority": "HOLD",
+    "provider_protection": "FAIL_OBSERVED",
+    "server_merge_enforcement": "FAIL_OBSERVED",
+    "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET",
+    "physical_runtime": "TOKEN_VAZIO_DEVICE",
+    "global_finished": false,
+    "merge_authorized_by_this_receipt": false
+  },
+  "next_observable_step": "OBTAIN_ONE_REAL_INDEPENDENT_GITHUB_APPROVAL_OR_CLOSE_ANOTHER_EXTERNAL_RUNTIME_GATE_WITH ITS OWN EVIDENCE; DO_NOT_BYPASS_PROMOTION_CONTROL",
+  "result": "SOURCE_SIDE_GREEN_OBSERVED_EXTERNAL_GATES_REMAIN_FAIL_CLOSED"
+}
