@@ -8,6 +8,7 @@ on:
       - '.github/workflows/program-finalization-cohesion-v1.yml'
       - 'docs/canonical/2026-09-08/RAFAELIA_PROGRAM_FINALIZATION_COHESION_DELTA_V1.md'
       - 'receipts/program-finalization/2026-09-08/RAFAELIA_PROGRAM_FINALIZATION_COHESION_RECEIPT.v1.json'
+      - 'receipts/program-finalization/2026-09-08/RAFAELIA_PROGRAM_FINALIZATION_CI_READBACK_RECEIPT.v1.json'
   push:
     branches: [main]
     paths:
@@ -20,10 +21,15 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout pinned source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          python-version: '3.x'
+          persist-credentials: false
+      - name: Set up pinned Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
       - name: Validate fail-closed program cohesion
         run: python scripts/validate_program_finalization_cohesion_v1.py
