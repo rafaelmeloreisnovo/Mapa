@@ -1,0 +1,29 @@
+name: omega36h-reconciliation-v1
+
+on:
+  pull_request:
+    paths:
+      - 'indices/ATLAS_X_OMEGA36H_RECONCILIATION_CURRENT_V1.json'
+      - 'docs/canonical/2026-09-08/RAFAELIA_OMEGA36H_RECONCILIATION_V1.md'
+      - 'scripts/validate_omega36h_reconciliation_v1.py'
+      - '.github/workflows/omega36h-reconciliation-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Setup Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Validate Ω36h reconciliation
+        run: python scripts/validate_omega36h_reconciliation_v1.py
