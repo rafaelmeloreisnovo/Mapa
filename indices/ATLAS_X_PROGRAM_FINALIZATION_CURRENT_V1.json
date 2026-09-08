@@ -1,0 +1,105 @@
+{
+  "schema": "rafaelia.atlas_program_finalization_cohesion/v1",
+  "route_id": "ATLAS:X-PROGRAM-FINALIZATION-COHESION-20260908",
+  "date": "2026-09-08",
+  "append_only": true,
+  "state": "SOURCE_SIDE_PROGRAM_COHESION_FINALIZED_EXTERNAL_GATES_OPEN",
+  "claim_allowed": false,
+  "scientific_claim_promotion": false,
+  "weight_training_authorized": false,
+  "autonomous_goal_creation": false,
+  "predecessors": [
+    {
+      "path": "indices/ATLAS_X_CUSTOM_INSTRUCTIONS_PROGRAM_BINDING_CURRENT_V1.json",
+      "git_blob_sha1": "7250bc4fe332c6f53ce66da9cd9e39c1a79db1ee",
+      "role": "OPERATOR_INTENT_TO_CANONICAL_PROGRAM_MISSION_BINDING"
+    },
+    {
+      "path": "indices/ATLAS_X_MISSION_RUNTIME_CURRENT_V1.json",
+      "git_blob_sha1": "bc4e5247c6b1b81978f9afe02cab7894b2f86646",
+      "role": "MISSION_RUNTIME_EVIDENCE_BOUNDARY"
+    }
+  ],
+  "canonical_program_mission": {
+    "repository": "rafaelmeloreisnovo/Rafaelia_Private",
+    "branch": "main",
+    "merge_commit": "e7fe94f1394df54b0c62a1bf0bf7bb753c7e78d4",
+    "path": "docs/audit/MISSION_COHESION_SUCCESSOR_RECEIPT_20260907.v1.json",
+    "receipt_id": "MISSION-COHESION-SUCCESSOR-20260907-V1",
+    "state": "PROGRAM_MISSION_SOURCE_COHESION_CLOSED_EXTERNAL_EXECUTION_EVIDENCE_OPEN"
+  },
+  "program_contract": {
+    "dataset_role": "INFORMS_CONTEXT_RETRIEVAL_AND_EVIDENCE_ONLY",
+    "dataset_creates_mission_authority": false,
+    "operator_intent_role": "CURRENT_APPROVED_SCOPE_AND_EXECUTION_DIRECTION",
+    "operator_intent_can_refine_route": true,
+    "operator_intent_can_replace_canonical_program_mission": false,
+    "model_role": "SYNTHESIS_PROPOSAL_VALIDATION_AND_COHERENCE_ENGINE",
+    "model_output_grants_execution": false,
+    "model_can_create_independent_goal": false,
+    "program_role": "EXECUTE_APPROVED_SCOPE_ONLY_THROUGH_GOVERNED_AUTHORIZED_ACTION",
+    "learn_role": "APPEND_ONLY_EVIDENCE_BACKED_PROGRAM_DELTA",
+    "learn_updates_model_weights": false,
+    "retrieval_updates_model_weights": false,
+    "training_or_finetune_authorized": false
+  },
+  "invariants": [
+    "DATASET_CONTEXT!=PROGRAM_MISSION_AUTHORITY",
+    "MODEL_PROPOSAL!=EXECUTION_PERMISSION",
+    "RETRIEVAL_CONTEXT!=WEIGHT_UPDATE",
+    "LEARN_APPEND_ONLY!=ONLINE_SELF_TRAINING",
+    "CONTINUE_APPROVED_SCOPE!=AUTONOMOUS_GOAL_CREATION",
+    "TOKEN_VAZIO!=EVIDENCE",
+    "CI_SUCCESS!=PHYSICAL_RUNTIME_PROOF",
+    "SOURCE_CHECK!=SCIENTIFIC_CLAIM"
+  ],
+  "runtime_route": [
+    "DATASET/NOVOexport",
+    "ContextBundle",
+    "llamaRafaelia/RMRCTI",
+    "IntentIR",
+    "Mapa/ATLAS:X",
+    "Termux/MissionExecution",
+    "Governance",
+    "ExecutionPlan",
+    "AuthorizedAction",
+    "RafNet/adapters",
+    "Cosmos/Rafaelia_Core/RAIAREIS",
+    "ExecutionResult",
+    "ProvenanceReceipt",
+    "LEARN:X",
+    "F_next"
+  ],
+  "external_evidence_gates": {
+    "physical_android_termux_execution": "TOKEN_VAZIO_DEVICE",
+    "exact_multi_repository_runtime_execution": "TOKEN_VAZIO_EXECUTION",
+    "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
+    "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+    "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
+    "server_merge_enforcement": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+    "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
+    "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET"
+  },
+  "provider_observation": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "default_branch": "main",
+    "observed_main_sha": "e6084d218c082c2f0233ab8f4e31aa4ed3944dd0",
+    "protected": false,
+    "protection_enabled": false,
+    "required_status_check_enforcement": "off",
+    "ruleset_id": 21909304,
+    "ruleset_enforcement": "disabled"
+  },
+  "completion": {
+    "source_side_program_closure": true,
+    "source_side_cohesion_closure": true,
+    "external_execution_closure": false,
+    "terminal_allowed_now": false,
+    "terminal_condition": "ALL_EIGHT_EXTERNAL_GATES_PASS_WITH_SEPARATE_EVIDENCE_AND_REQUIRED_MANUAL_OR_EXTERNAL_AUTHORITY",
+    "terminal_state_when_condition_met": "FINISHED_WITH_EXTERNAL_GATES",
+    "terminal_state_promotes_scientific_claim": false,
+    "terminal_state_authorizes_weight_training": false
+  },
+  "next_observable_step": "KEEP_ITERATING_F_next_INSIDE_APPROVED_PROGRAM_SCOPE; CLOSE_ONLY_THE_NEXT_REAL_GATE_WITH_PROVIDER_OR_RUNTIME_RECEIPT; DO_NOT_CREATE_NEW_MISSION_AUTHORITY",
+  "result": "PROGRAM_COHESION_SUCCESSOR_MATERIALIZED_FAIL_CLOSED"
+}
