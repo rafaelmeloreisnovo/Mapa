@@ -1,0 +1,73 @@
+{
+  "schema": "rafaelia.program_finalization_cohesion_receipt/v1",
+  "receipt_id": "PROGRAM-FINALIZATION-COHESION-20260908-V1",
+  "date": "2026-09-08",
+  "append_only": true,
+  "claim_allowed": false,
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "base_branch": "main",
+  "base_observed_sha": "e6084d218c082c2f0233ab8f4e31aa4ed3944dd0",
+  "working_branch": "atlas/program-finalization-cohesion-20260908",
+  "observed_sources": [
+    {
+      "path": "indices/ATLAS_X_CUSTOM_INSTRUCTIONS_PROGRAM_BINDING_CURRENT_V1.json",
+      "blob_sha1": "7250bc4fe332c6f53ce66da9cd9e39c1a79db1ee",
+      "state": "BOUND_FAIL_CLOSED"
+    },
+    {
+      "path": "indices/ATLAS_X_MISSION_RUNTIME_CURRENT_V1.json",
+      "blob_sha1": "bc4e5247c6b1b81978f9afe02cab7894b2f86646",
+      "state": "SOURCE_READY_EXTERNAL_GATES_ONLY"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Rafaelia_Private",
+      "branch": "main",
+      "merge_commit": "e7fe94f1394df54b0c62a1bf0bf7bb753c7e78d4",
+      "path": "docs/audit/MISSION_COHESION_SUCCESSOR_RECEIPT_20260907.v1.json",
+      "state": "PROGRAM_MISSION_SOURCE_COHESION_CLOSED_EXTERNAL_EXECUTION_EVIDENCE_OPEN"
+    }
+  ],
+  "materialized_artifacts": [
+    "indices/ATLAS_X_PROGRAM_FINALIZATION_CURRENT_V1.json",
+    "scripts/validate_program_finalization_cohesion_v1.py",
+    ".github/workflows/program-finalization-cohesion-v1.yml",
+    "docs/canonical/2026-09-08/RAFAELIA_PROGRAM_FINALIZATION_COHESION_DELTA_V1.md",
+    "receipts/program-finalization/2026-09-08/RAFAELIA_PROGRAM_FINALIZATION_COHESION_RECEIPT.v1.json"
+  ],
+  "materialization_commits_before_receipt": [
+    "4154dac31d69a79e34211cff64de8e4dab167630",
+    "b4a067ac2584b6991618020236395a1f9796f370",
+    "bfc483ef21699a8749dbb9efecd0c6dc1be57446",
+    "fc4237320246cb3583517797855f6d87f2b063f8"
+  ],
+  "semantics": {
+    "dataset_informs_program": true,
+    "dataset_is_program_mission_authority": false,
+    "model_is_autonomous_goal_authority": false,
+    "model_output_is_execution_permission": false,
+    "learn_is_append_only_program_memory": true,
+    "learn_is_weight_training": false,
+    "training_or_finetune_authorized": false
+  },
+  "external_gate_snapshot": {
+    "physical_android_termux_execution": "TOKEN_VAZIO_DEVICE",
+    "exact_multi_repository_runtime_execution": "TOKEN_VAZIO_EXECUTION",
+    "remote_network_identity": "TOKEN_VAZIO_RUNTIME",
+    "provider_or_legal_authorization": "TOKEN_VAZIO_EXTERNAL_AUTHORITY",
+    "live_default_branch_ruleset": "FAIL_PROVIDER_OBSERVED_DISABLED",
+    "server_merge_enforcement": "FAIL_PROVIDER_OBSERVED_UNENFORCED",
+    "manual_promotion_decision": "TOKEN_VAZIO_MANUAL_AUTHORITY",
+    "codescan_credentialed_analysis": "TOKEN_VAZIO_SECRET"
+  },
+  "closure": {
+    "source_side_program_cohesion": "CLOSED_FOR_OBSERVED_SCOPE",
+    "external_execution": "OPEN",
+    "physical_runtime": "OPEN",
+    "provider_enforcement": "FAIL_OBSERVED",
+    "scientific_claim_promotion": "BLOCKED",
+    "model_weight_training": "NOT_AUTHORIZED",
+    "global_finished": false
+  },
+  "next_observable_step": "CLOSE_THE_NEXT_REAL_EXTERNAL_OR_RUNTIME_GATE_WITH_SEPARATE_EVIDENCE_THEN_APPEND_SUCCESSOR_RECEIPT",
+  "result": "RECEIPT_APPENDED_SOURCE_SIDE_COHESION_FAIL_CLOSED"
+}
