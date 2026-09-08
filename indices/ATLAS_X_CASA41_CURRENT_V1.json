@@ -1,0 +1,18 @@
+{
+  "schema":"RAFAELIA_ATLAS_X_CASA41_CURRENT_V1",
+  "object":"CASA41_SYSTEM_MAP",
+  "route":"ATLAS:X -> CASA41 -> SYSTEM_MAP -> folder/drive/index -> rights -> service -> receipt -> LEARN:X",
+  "source":"atlas/system_map_casa41_v1/SYSTEM_MAP.json",
+  "directions":"atlas/system_map_casa41_v1/DIRECTIONS_7.json",
+  "rights":"atlas/system_map_casa41_v1/SYSTEM_RIGHTS.json",
+  "routes":"atlas/system_map_casa41_v1/ROUTES.json",
+  "workflow":"atlas/system_map_casa41_v1/WORKFLOW.json",
+  "mobile_contract":"atlas/system_map_casa41_v1/APP_CONTRACT.json",
+  "evidence":"data/reconciliation/CASA41_SYSTEM_MAP_RECEIPT_20260908.v1.json",
+  "state":"SOURCE_CONTRACT_VALIDATED_EXTERNAL_GATES_OPEN",
+  "invariants":["DATASET!=MISSION_AUTHORITY","ROUTE!=RIGHT","INDEX!=EVIDENCE","PHOTO_OBJECT!=SHARE_OBJECT","TOKEN_VAZIO!=0"],
+  "F_ok":["41_FOLDERS","7_DIRECTIONS","DBF_41","IDX_41","RIGHTS_PROFILES","VIRTUAL_MAPS","SHARE_FAIL_CLOSED"],
+  "F_gap":["TOKEN_VAZIO_NATIVE_MDX_BINARY","TOKEN_VAZIO_PROVIDER_ADAPTER","TOKEN_VAZIO_PROVIDER_ENFORCEMENT","TOKEN_VAZIO_ANDROID_RUNTIME","TOKEN_VAZIO_APP_AUTH"],
+  "F_next":"Bind one physical Android-local navigator to this read-only map, then test an explicit photo-reference -> service-task -> receipt flow without auto-sharing raw media.",
+  "claim_allowed":false
+}
