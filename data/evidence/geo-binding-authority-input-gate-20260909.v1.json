@@ -1,0 +1,50 @@
+{
+  "schema_version": "rafaelia.geo-binding-authority-input-gate/v1",
+  "date": "2026-09-09",
+  "schema": "schemas/rafaelia_geo_binding_authority_v1.schema.json",
+  "validator": "tools/validate_geo_binding_authority.py",
+  "token_vazio_fixture": "data/fixtures/geo_binding_authority_token_vazio_v1.json",
+  "bitomega_canonical_source": "rafaelmeloreisnovo/Vectras-VM-Android:engine/rmr/include/zero.h@1330d75ec9c5a4b8c5a76933db1ac26bfd579b90",
+  "bitomega_codes": {
+    "0": "NEG",
+    "1": "ZERO",
+    "2": "POS",
+    "3": "MIX",
+    "4": "VOID",
+    "5": "EDGE",
+    "6": "FLOW",
+    "7": "LOCK",
+    "8": "NOISE",
+    "9": "META"
+  },
+  "local_controls": {
+    "token_vazio_fixture": {
+      "status": "PASS",
+      "classification": "VALID_TOKEN_VAZIO_NO_RUNTIME_BINDING",
+      "runtime_binding_allowed": false,
+      "mapping_rows": 0
+    },
+    "bad_evidenced_empty_mapping": {
+      "status": "FAIL_EXPECTED",
+      "exit_code": 1,
+      "error": "EVIDENCED authority requires exact 10x10 bijection"
+    }
+  },
+  "local_sha256": {
+    "validator_reconstructed_for_execution": "653540454fe089807b34bde82a7c3b46ac90c839408449a6bfbf4439e9b05e20",
+    "token_vazio_fixture_simplified_local": "276371fbcb76f1e7b88b6250a54fe84f09df0a41d5dc580293a468d11c434057",
+    "token_vazio_receipt": "53ae71c15f258992fdf395281fc98fb73c109a8a723f02e86dc8f72da670f2f5"
+  },
+  "gap_delta": {
+    "GF006_AUTHORITY_INPUT_SCHEMA": "CLOSED_IMPLEMENTED_TESTED",
+    "GF006_SEMANTIC_AUTHORITY": "TOKEN_VAZIO_SEMANTIC_AUTHORITY"
+  },
+  "invariants": [
+    "TOKEN_VAZIO input is valid but non-promotable",
+    "EVIDENCED requires exact 10x10 bijection",
+    "BitOmega code/symbol must match canonical 0..9 tags",
+    "mapping evidence is external to runtime mechanism",
+    "claim_allowed remains false"
+  ],
+  "claim_allowed": false
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafaelia.geo-binding-authority/v1",
+  "title": "RAFAELIA Geo Binding Semantic Authority V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authority_id",
+    "status",
+    "source_refs",
+    "mapping",
+    "exact",
+    "authority_receipt_ref",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "rafaelia.geo-binding-authority/v1"},
+    "authority_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["TOKEN_VAZIO", "EVIDENCED", "REJECTED"]},
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "mapping": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rafbit_state",
+          "rafbit_label",
+          "bitomega_code",
+          "bitomega_symbol",
+          "semantic_basis",
+          "evidence_refs"
+        ],
+        "properties": {
+          "rafbit_state": {"type": "integer", "minimum": 0, "maximum": 9},
+          "rafbit_label": {"type": "string", "minLength": 1},
+          "bitomega_code": {"type": "integer", "minimum": 0, "maximum": 9},
+          "bitomega_symbol": {
+            "enum": ["NEG", "ZERO", "POS", "MIX", "VOID", "EDGE", "FLOW", "LOCK", "NOISE", "META"]
+          },
+          "semantic_basis": {"type": "string", "minLength": 1},
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "exact": {"type": "boolean"},
+    "authority_receipt_ref": {"type": "string", "minLength": 1},
+    "claim_allowed": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "EVIDENCED"}}, "required": ["status"]},
+      "then": {
+        "properties": {
+          "mapping": {"minItems": 10, "maxItems": 10},
+          "exact": {"const": true}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "TOKEN_VAZIO"}}, "required": ["status"]},
+      "then": {
+        "properties": {
+          "exact": {"const": false}
+        }
+      }
+    }
+  ]
+}
