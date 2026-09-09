@@ -1,0 +1,14 @@
+{
+  "schema_version": "rafaelia.binary-endian-vectors/v1",
+  "vectors": [
+    {"id":"U16-1","width_bits":16,"hex_le":"3412","unsigned_value":4660},
+    {"id":"U32-1","width_bits":32,"hex_le":"78563412","unsigned_value":305419896},
+    {"id":"U64-1","width_bits":64,"hex_le":"efcdab8967452301","unsigned_value":81985529216486895}
+  ],
+  "invariants": [
+    "serialization is explicitly little-endian for these vectors",
+    "byte width is part of the contract",
+    "unaligned access safety must be implemented by byte reconstruction or target-safe loads"
+  ],
+  "claim_allowed": false
+}
