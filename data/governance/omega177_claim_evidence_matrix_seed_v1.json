@@ -1,0 +1,40 @@
+{
+  "schema_version": "rafaelia.claim-evidence-matrix/v1",
+  "claims": [
+    {
+      "claim_id": "C-OMEGA177-001",
+      "text": "The local Atlas staleness detector rejects divergent provider semantic state.",
+      "source_refs": ["GITHUB:MAPA:PR-581:tools/check_atlas_staleness.py"],
+      "artifact_refs": ["GITHUB:MAPA:PR-581"],
+      "execution_refs": ["LOCAL_CONTROL:2026-09-09:STALE_FIXTURE"],
+      "evidence_refs": ["GITHUB:MAPA:PR-581:data/evidence/omega177_foundation_gates_20260909.v1.json"],
+      "review_state": "SELF_REVIEWED",
+      "promotion_state": "BOUNDED",
+      "scope": "local reference control"
+    },
+    {
+      "claim_id": "C-OMEGA177-002",
+      "text": "A complete finalized Global Corpus Root exists for all RAFAELIA providers.",
+      "source_refs": ["GITHUB:MAPA:PR-581:docs/custody/RAFAELIA_GLOBAL_CORPUS_ROOT_V1.md"],
+      "artifact_refs": [],
+      "execution_refs": [],
+      "evidence_refs": [],
+      "review_state": "TOKEN_VAZIO",
+      "promotion_state": "BLOCKED",
+      "scope": ""
+    },
+    {
+      "claim_id": "C-OMEGA177-003",
+      "text": "The current Ω177 topology contains canonical gap IDs G001 through G098.",
+      "source_refs": ["DRIVE:OMEGA173:GAP-LEDGER", "GITHUB:MAPA:PR-581"],
+      "artifact_refs": ["DRIVE:OMEGA177:CURRENT-GAP-LEDGER"],
+      "execution_refs": ["GOOGLE_DRIVE:APPEND:2026-09-09"],
+      "evidence_refs": ["DRIVE:OMEGA177:CURRENT-GAP-LEDGER"],
+      "review_state": "SELF_REVIEWED",
+      "promotion_state": "BOUNDED",
+      "scope": "Ω177 current ledger"
+    }
+  ],
+  "validation_observed": {"status":"PASS","claims":3,"rc":0},
+  "claim_allowed": false
+}
