@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafaelia.claim-evidence-matrix/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "claims", "claim_allowed"],
+  "properties": {
+    "schema_version": {"const": "rafaelia.claim-evidence-matrix/v1"},
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim_id", "text", "source_refs", "artifact_refs", "execution_refs", "evidence_refs", "review_state", "promotion_state"],
+        "properties": {
+          "claim_id": {"type": "string", "minLength": 1},
+          "text": {"type": "string", "minLength": 1},
+          "source_refs": {"type": "array", "items": {"type": "string"}},
+          "artifact_refs": {"type": "array", "items": {"type": "string"}},
+          "execution_refs": {"type": "array", "items": {"type": "string"}},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "review_state": {"enum": ["TOKEN_VAZIO", "SELF_REVIEWED", "INDEPENDENT_REVIEWED", "REJECTED"]},
+          "promotion_state": {"enum": ["BLOCKED", "BOUNDED", "ALLOWED_SCOPED", "REJECTED"]},
+          "scope": {"type": "string"}
+        }
+      }
+    },
+    "claim_allowed": {"const": false}
+  }
+}

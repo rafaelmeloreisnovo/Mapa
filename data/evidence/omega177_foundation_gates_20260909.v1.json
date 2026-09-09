@@ -1,0 +1,68 @@
+{
+  "schema_version": "rafaelia.omega177-foundation-gates/v1",
+  "object_id": "ATLAS-X-OMEGA177-CURRENT-GAP-LEDGER-20260909",
+  "date": "2026-09-09",
+  "execution_scope": "LOCAL_REFERENCE_CONTROLS_BEFORE_PROVIDER_POPULATION",
+  "controls": [
+    {
+      "gap": "G066",
+      "tool": "tools/build_global_corpus_root.py",
+      "positive": {"rc": 0, "status": "PASS", "object_count": 2, "root_sha256": "b65699c1192dd826ec290f302de2341bd49e743559f71a4a866d832823c151dd"},
+      "negative": {"rc": 1, "status": "FAIL", "reason": "unobserved bytes cannot enter finalized root"},
+      "world_state": "ROOT_POPULATION_OPEN"
+    },
+    {
+      "gap": "G067",
+      "tool": "tools/validate_canonical_object_registry.py",
+      "positive": {"rc": 0, "status": "PASS", "objects": 2, "aliases": 2},
+      "negative": {"rc": 1, "status": "FAIL", "reason": "alias collision"},
+      "world_state": "REGISTRY_POPULATION_OPEN"
+    },
+    {
+      "gap": "G089",
+      "tool": "tools/validate_semantic_namespace.py",
+      "positive": {"rc": 0, "status": "PASS", "semantic_collapses": 0},
+      "negative": {"rc": 1, "status": "FAIL", "reason": "forbidden core semantic collapse ZERO -> NOOP"},
+      "world_state": "GLOBAL_ADOPTION_OPEN"
+    },
+    {
+      "gap": "G087",
+      "tool": "tools/validate_claim_evidence_matrix.py",
+      "positive": {"rc": 0, "status": "PASS", "claims": 1},
+      "negative": {"rc": 1, "status": "FAIL", "reason": "ALLOWED_SCOPED claim missing execution"},
+      "world_state": "MATRIX_POPULATION_OPEN"
+    },
+    {
+      "gap": "G098",
+      "tool": "tools/validate_minimal_rebuild_receipt.py",
+      "positive": {"rc": 0, "status": "PASS", "required_classes": 10, "clean_room_rebuild_closed": true},
+      "negative": {"rc": 1, "status": "FAIL", "reason": "missing rebuild classes"},
+      "world_state": "CLEAN_ROOM_REBUILD_RECEIPT_OPEN"
+    },
+    {
+      "gap": "G095",
+      "tool": "tools/check_atlas_staleness.py",
+      "positive": {"rc": 0, "status": "PASS", "stale": 0},
+      "negative": {"rc": 2, "status": "STALE_DETECTED", "reason": "provider semantic hash/state version divergence"},
+      "world_state": "LIVE_PROVIDER_SCAN_OPEN"
+    }
+  ],
+  "bounded_closures": {
+    "G066_ROOT_BUILDER": "CLOSED_IMPLEMENTED_TESTED_LOCAL",
+    "G067_REGISTRY_VALIDATOR": "CLOSED_IMPLEMENTED_TESTED_LOCAL",
+    "G087_CLAIM_MATRIX_VALIDATOR": "CLOSED_IMPLEMENTED_TESTED_LOCAL",
+    "G089_NAMESPACE_VALIDATOR": "CLOSED_IMPLEMENTED_TESTED_LOCAL",
+    "G095_STALENESS_DETECTOR": "CLOSED_IMPLEMENTED_TESTED_LOCAL",
+    "G098_REBUILD_RECEIPT_VALIDATOR": "CLOSED_IMPLEMENTED_TESTED_LOCAL"
+  },
+  "invariants": [
+    "CONTRACT_CLOSED != WORLD_STATE_CLOSED",
+    "TOKEN_VAZIO bytes cannot enter finalized corpus root",
+    "alias collision fails closed",
+    "core semantic tokens are not collapsed",
+    "ALLOWED_SCOPED requires execution plus independent review",
+    "clean-room rebuild closure requires all ten required classes PASS",
+    "staleness detector does not claim a live provider scan until observations are supplied"
+  ],
+  "claim_allowed": false
+}

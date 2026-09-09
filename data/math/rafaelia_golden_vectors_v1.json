@@ -1,0 +1,17 @@
+{
+  "schema_version": "rafaelia.golden-math-vectors/v1",
+  "vectors": [
+    {"id":"RAF-R-2-5","type":"rafaelian_recurrence","a":2,"b":5,"expected":8},
+    {"id":"FOLD-M7-1-6","type":"toroidal_fold_distance","m":7,"a":1,"b":6,"expected":2},
+    {"id":"DECAY-N4","type":"planning_decay","sigma0_num":12,"sigma0_den":5,"phi_num":7,"phi_den":10,"n":4,"expected_num":7203,"expected_den":12500},
+    {"id":"DECAY-N5","type":"planning_decay","sigma0_num":12,"sigma0_den":5,"phi_num":7,"phi_den":10,"n":5,"expected_num":50421,"expected_den":125000},
+    {"id":"SHRINK-N4","type":"custom_shrink_score","sigma0_num":12,"sigma0_den":5,"sigman_num":7203,"sigman_den":12500,"expected_num":94235199,"expected_den":100000000}
+  ],
+  "notes": [
+    "Rafaeliana recurrence vector uses R_next=R_a+R_b+1",
+    "fold distance uses min(|a-b|,m-|a-b|)",
+    "planning decay and shrink-score values are exact rationals, not binary floats",
+    "custom shrink score is not promoted to statistical R2/confidence"
+  ],
+  "claim_allowed": false
+}

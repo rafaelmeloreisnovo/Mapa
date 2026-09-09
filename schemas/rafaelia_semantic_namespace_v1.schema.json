@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafaelia.semantic-namespace/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "terms", "claim_allowed"],
+  "properties": {
+    "schema_version": {"const": "rafaelia.semantic-namespace/v1"},
+    "terms": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["token", "domain", "meaning", "mutation_semantics"],
+        "properties": {
+          "token": {"enum": ["ZERO", "NOOP", "VOID", "TOKEN_VAZIO", "EMPTY", "NULL"]},
+          "domain": {"type": "string", "minLength": 1},
+          "meaning": {"type": "string", "minLength": 1},
+          "mutation_semantics": {"enum": ["MUTATES", "NO_MUTATION", "NOT_APPLICABLE", "TOKEN_VAZIO"]},
+          "equivalent_to": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "invariants": {"type": "array", "items": {"type": "string"}},
+    "claim_allowed": {"const": false}
+  }
+}

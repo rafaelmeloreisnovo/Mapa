@@ -1,0 +1,53 @@
+{
+  "schema_version": "rafaelia.semantic-namespace/v1",
+  "terms": [
+    {
+      "token": "ZERO",
+      "domain": "core",
+      "meaning": "Numeric/logical value zero; valid observed value.",
+      "mutation_semantics": "NOT_APPLICABLE",
+      "equivalent_to": []
+    },
+    {
+      "token": "NOOP",
+      "domain": "execution",
+      "meaning": "Valid operation that intentionally causes no state mutation.",
+      "mutation_semantics": "NO_MUTATION",
+      "equivalent_to": []
+    },
+    {
+      "token": "VOID",
+      "domain": "state",
+      "meaning": "Named semantic state indicating void/absence-space where explicitly defined by the producer.",
+      "mutation_semantics": "TOKEN_VAZIO",
+      "equivalent_to": []
+    },
+    {
+      "token": "TOKEN_VAZIO",
+      "domain": "epistemology",
+      "meaning": "Information or evidence not observed/proven; never coerced to zero or false.",
+      "mutation_semantics": "NOT_APPLICABLE",
+      "equivalent_to": []
+    },
+    {
+      "token": "EMPTY",
+      "domain": "container",
+      "meaning": "Observed container with cardinality zero.",
+      "mutation_semantics": "NOT_APPLICABLE",
+      "equivalent_to": []
+    },
+    {
+      "token": "NULL",
+      "domain": "representation",
+      "meaning": "Explicit null pointer/value/field according to the representation schema.",
+      "mutation_semantics": "NOT_APPLICABLE",
+      "equivalent_to": []
+    }
+  ],
+  "invariants": [
+    "ZERO != NOOP != VOID != TOKEN_VAZIO != EMPTY != NULL",
+    "same no-mutation effect does not imply same semantics",
+    "TOKEN_VAZIO != 0 != false"
+  ],
+  "claim_allowed": false
+}
