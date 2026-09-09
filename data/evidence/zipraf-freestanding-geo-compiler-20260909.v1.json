@@ -1,0 +1,66 @@
+{
+  "schema_version": "rafaelia.zipraf-freestanding-geo-compiler.v1",
+  "cycle": "OMEGA-FED-20260909-GEOFS-001",
+  "mode": ["APPEND_ONLY", "SOURCE_FIRST", "FAIL_CLOSED"],
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/ZIPRAF_CORE",
+    "pull_request": 9,
+    "head": "cca249347a711d78074ebc83d73dbfecaf80bb07",
+    "branch": "feat/freestanding-geo-turing-profile-20260909"
+  },
+  "carrier": {
+    "name": "GeoWord64",
+    "logical_payload_bits": 42,
+    "group_bits": 8,
+    "epistemic_bits": 6,
+    "witness_bits": 8,
+    "witness_cryptographic": false,
+    "native_cpu_word_claim": false
+  },
+  "epistemic_states": ["ZERO", "NOOP", "TOKEN_VAZIO", "VOID", "VALID", "REJECT"],
+  "module_groups": ["PRE", "GEO", "VOID", "BIT", "STACK", "STATE", "ZIP", "LINK", "ADAPTER", "EVIDENCE"],
+  "bounded_evidence": {
+    "host_kat": "PASS",
+    "host_object_text_bytes": 854,
+    "host_object_data_bytes": 0,
+    "host_object_bss_bytes": 0,
+    "host_object_undefined_symbols": 0,
+    "host_object_sha256": "3a469f33dbb2237ab3ef9f51c81c748c1cde3f5e25c9696751159ff0fc950c3d",
+    "armv7_compile_only": "PASS",
+    "armv7_object_sha256": "f51639ea1b29bfa43e6c2c2484a93f594b1e6fc1265a572c28fbe18b13a4fe30",
+    "aarch64_compile_only": "PASS",
+    "aarch64_object_sha256": "8d0d3c0a9268f58e14f7e6f389fe282d1f92b52b0ea41ba27ca69710de4c0899",
+    "physical_device_execution": "TOKEN_VAZIO_DEVICE"
+  },
+  "source_anchors": [
+    "rafaelmeloreisnovo/termux-app-rafacodephi:docs/RAFCODEPHI_COMPILER_CONTRACT.md",
+    "rafaelmeloreisnovo/termux-app-rafacodephi:asm/RAFAELIA_ISA_BITRAF.md",
+    "rafaelmeloreisnovo/RafGitTools:native/rafcode_federation_v1/README.md",
+    "rafaelmeloreisnovo/Vectras-VM-Android:engine/rmr/include/bitomega.h",
+    "rafaelmeloreisnovo/Vectras-VM-Android:engine/rmr/include/bitraf.h",
+    "rafaelmeloreisnovo/Vectras-VM-Android:tools/baremetal/rafcode_phi/asm/rafcode_phi_emit_word.S",
+    "rafaelmeloreisnovo/llamaRafaelia:rmrCti/rf_core.c",
+    "rafaelmeloreisnovo/Rafaelia_Private:Low-level/rafcode_phi_core.h",
+    "rafaelmeloreisnovo/GAIA_phi:FCEA_ABSENCE_INDEX.sh"
+  ],
+  "gap_state": {
+    "GF001_NOOP_TOKEN_VOID_COLLAPSE": "CLOSED_SOURCE_CONTRACT",
+    "GF002_LOGICAL42_NATIVEWORD_AMBIGUITY": "CLOSED_BOUNDARY",
+    "GF003_KERNEL_ADAPTER_DEPENDENCY_COLLAPSE": "CLOSED_ARCHITECTURE",
+    "GF004_WARNING_AUTODELETION_AMBIGUITY": "CLOSED_ROUTED_EXISTING_CONTRACT",
+    "GF005_CROSS_ABI_SOURCE_PORTABILITY": "CLOSED_COMPILE_ONLY",
+    "GF006_BITRAF_BITOMEGA_EXACT_STATE_BINDING": "TOKEN_VAZIO",
+    "GF007_GEOWORD_AUTHENTICITY": "TOKEN_VAZIO",
+    "GF008_GEOWORD_DEVICE_RUNTIME": "TOKEN_VAZIO_DEVICE",
+    "G015": "OPEN_EXTERNAL_GATE",
+    "G016": "OPEN_EXTERNAL_GATE",
+    "G017": "OPEN_TOKEN_VAZIO",
+    "G018": "OPEN_TOKEN_VAZIO"
+  },
+  "tracking": {
+    "mapa_issue": 573,
+    "zipraf_core_issue": 8,
+    "memrafcode_issue": 13
+  }
+}
