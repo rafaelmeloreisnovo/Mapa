@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafaelia.canonical-object-registry/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "objects", "claim_allowed"],
+  "properties": {
+    "schema_version": {"const": "rafaelia.canonical-object-registry/v1"},
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["object_id", "aliases", "kind", "authority_state"],
+        "properties": {
+          "object_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._:-]+$"},
+          "aliases": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "kind": {"enum": ["SOURCE", "ARTIFACT", "EXECUTION", "EVIDENCE", "CLAIM", "MEMORY", "INDEX", "DATASET", "RECEIPT", "GOVERNANCE"]},
+          "authority_state": {"enum": ["AUTHORITATIVE", "OBSERVED", "TOKEN_VAZIO", "SUPERSEDED"]},
+          "supersedes": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "claim_allowed": {"const": false}
+  }
+}
