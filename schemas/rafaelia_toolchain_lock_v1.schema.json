@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafaelia.toolchain-lock/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["compiler","compiler_version","linker","linker_version","target","abi","flags","source_date_epoch","claim_allowed"],
+  "properties": {
+    "compiler": {"type":"string","minLength":1},
+    "compiler_version": {"type":"string","minLength":1},
+    "linker": {"type":"string","minLength":1},
+    "linker_version": {"type":"string","minLength":1},
+    "target": {"type":"string","minLength":1},
+    "abi": {"type":"string","minLength":1},
+    "sysroot": {"type":"string"},
+    "flags": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},
+    "source_date_epoch": {"type":"string","pattern":"^[0-9]+$"},
+    "container_digest": {"type":"string"},
+    "claim_allowed": {"const":false}
+  }
+}
