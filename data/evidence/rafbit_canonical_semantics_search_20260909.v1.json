@@ -1,0 +1,64 @@
+{
+  "schema_version": "rafaelia.rafbit-canonical-semantics-search/v1",
+  "date": "2026-09-09",
+  "search_scope": {
+    "github": [
+      "rafaelmeloreisnovo/* RafBit code/doc search",
+      "RafaelIA_Solucoes_Clay contextual RafBit labels",
+      "Vectras-VM-Android RafBit/BitOmega definitions",
+      "X0 operational RafBit classifier"
+    ],
+    "drive": [
+      "query:RafBit BitOmega",
+      "query:Bitraf-Bit-quantum",
+      "query:estado RafBit",
+      "Bitraf-Bit-quantum folder id 1I2gbjeUmct-AcBkb4iMr44wAn4lPUC5f",
+      "IGC family sweep doc id 1ZK4nfS8LupSFHGRUSPJBWtdECUMUhvcLWdOaXe_aBlk"
+    ]
+  },
+  "observed": [
+    {
+      "source":"Vectras docs/33.md",
+      "finding":"RafBit domain 0..9 and parity extension to 20 states",
+      "authority_class":"DOMAIN_CARDINALITY_ONLY"
+    },
+    {
+      "source":"Rafaelianos/Rafaelianos.md",
+      "finding":"contextual many-to-many labels/hyperedges covering all digits 0..9",
+      "authority_class":"CONTEXTUAL_RELATIONS_NOT_CANONICAL_ONTOLOGY"
+    },
+    {
+      "source":"X0/rafbit_monitor.py",
+      "finding":"3/7/9 suspicious operational classifier derived from packet-size plus time modulo 10",
+      "authority_class":"OPERATIONAL_HEURISTIC_NOT_ONTOLOGY"
+    },
+    {
+      "source":"Drive IGC family sweep 2026-08-14",
+      "finding":"RAFBIT described as precursor/contextual state; relation with BITRAF still to be proven; TOKEN_VAZIO_MODEL / TOKEN_VAZIO_RELATION",
+      "authority_class":"HISTORICAL_GOVERNANCE_CONFIRMATION"
+    },
+    {
+      "source":"Drive cross-repo location index",
+      "finding":"BitOmega documented as implemented 10-state deterministic state machine",
+      "authority_class":"BITOMEGA_ONLY"
+    }
+  ],
+  "result": {
+    "explicit_canonical_rafbit_state_table_observed": false,
+    "explicit_rafbit_to_bitomega_bijection_observed": false,
+    "search_miss_means_absence": false,
+    "classification":"SEARCH_CYCLE_CLOSED_WITHOUT_AUTHORITY"
+  },
+  "gap_delta": {
+    "GF006_CANONICAL_AUTHORITY_SEARCH_CYCLE":"CLOSED_SEARCHED_SET_NO_AUTHORITY_OBSERVED",
+    "GF006_RAFBIT_CANONICAL_STATE_SEMANTICS":"TOKEN_VAZIO_CONTEXT_DEPENDENT",
+    "GF006_SEMANTIC_AUTHORITY":"TOKEN_VAZIO_SEMANTIC_AUTHORITY"
+  },
+  "invariants":[
+    "SEARCH_MISS != ABSENCE",
+    "CONTEXT != ONTOLOGY",
+    "BITOMEGA_ONLY_SOURCE != RAFBIT_TO_BITOMEGA_AUTHORITY",
+    "claim_allowed remains false"
+  ],
+  "claim_allowed": false
+}
