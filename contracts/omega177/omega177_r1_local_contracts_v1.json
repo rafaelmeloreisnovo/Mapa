@@ -1,0 +1,64 @@
+{
+  "schema": "rafaelia.omega177.r1-local-contracts/v1",
+  "generated_at": "2026-09-09",
+  "claim_allowed": false,
+  "gaps": {
+    "G074": {
+      "name": "NUMERIC_SEMANTICS_PRECISION_POLICY",
+      "state": "CONTRACT_IMPLEMENTED_LOCAL",
+      "integer": {
+        "signed_overflow": "FORBIDDEN",
+        "unsigned_overflow": "EXPLICIT_MODULO_ONLY",
+        "shift_count_rule": "0 <= shift < bit_width",
+        "narrowing_conversion": "EXPLICIT_RANGE_CHECK"
+      },
+      "fixed_point": {
+        "required_metadata": ["storage_bits", "fraction_bits", "rounding", "saturation"],
+        "rounding_allowed": ["TOWARD_ZERO", "NEAREST_EVEN", "FLOOR", "CEIL"],
+        "default_saturation": "REJECT_ON_OVERFLOW"
+      },
+      "floating_point": {
+        "comparison": "ABS_OR_REL_TOLERANCE_REQUIRED",
+        "nan_policy": "REJECT_UNLESS_EXPLICIT",
+        "inf_policy": "REJECT_UNLESS_EXPLICIT",
+        "default_abs_tol": "TOKEN_VAZIO_CONTEXT_REQUIRED",
+        "default_rel_tol": "TOKEN_VAZIO_CONTEXT_REQUIRED"
+      },
+      "rational": {
+        "canonical_form": "gcd(|num|,den)=1 and den>0",
+        "zero": "0/1"
+      }
+    },
+    "G094": {
+      "name": "PAPER_CODE_DATA_SYNC",
+      "state": "CONTRACT_IMPLEMENTED_LOCAL",
+      "required_binding_fields": [
+        "claim_id", "paper_ref", "code_ref", "data_ref", "receipt_ref", "version_or_hash", "sync_state"
+      ],
+      "sync_states": ["BOUND", "PARTIAL", "TOKEN_VAZIO"],
+      "promotion_rule": "BOUND only when every required ref is non-empty and version_or_hash is non-empty",
+      "mismatch_rule": "mismatch => CLAIM_BLOCKED"
+    },
+    "G097": {
+      "name": "SUPERSESSION_RETENTION_POLICY",
+      "state": "CONTRACT_IMPLEMENTED_LOCAL",
+      "history": "IMMUTABLE_APPEND_ONLY",
+      "supersession_edge_required": ["predecessor", "successor", "reason", "observed_at", "authority"],
+      "deletion_policy": "NO_DESTRUCTIVE_DELETE_OF_SOURCE_EVIDENCE_RECEIPT",
+      "retention_action": "TOMBSTONE_OR_SUPERSESSION_EDGE",
+      "duplicate_policy": "DEDUP_VIEW_MAY_COLLAPSE; PHYSICAL_HISTORY_PRESERVED"
+    }
+  },
+  "rounds": {
+    "R1": {
+      "focus": "Contracts + local gates",
+      "promotion_rule": "contract closed != population closed",
+      "state": "READY_TO_CONSOLIDATE_AFTER_LOCAL_VALIDATION"
+    },
+    "R2": {
+      "focus": "Corpus + custody",
+      "promotion_rule": "bytes observed before cryptographic root",
+      "state": "NEXT_AFTER_R1_RECEIPT"
+    }
+  }
+}
