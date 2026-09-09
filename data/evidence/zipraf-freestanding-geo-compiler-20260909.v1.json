@@ -1,0 +1,99 @@
+{
+  "schema_version": "rafaelia.zipraf-freestanding-geo-compiler.v1",
+  "cycle": "OMEGA-FED-20260909-GEOFS-001",
+  "mode": ["APPEND_ONLY", "SOURCE_FIRST", "FAIL_CLOSED"],
+  "claim_allowed": false,
+  "producer": {
+    "repository": "rafaelmeloreisnovo/ZIPRAF_CORE",
+    "pull_request": 9,
+    "branch": "feat/freestanding-geo-turing-profile-20260909"
+  },
+  "carrier": {
+    "name": "GeoWord64",
+    "logical_payload_bits": 42,
+    "group_bits": 8,
+    "epistemic_bits": 6,
+    "witness_bits": 8,
+    "witness_cryptographic": false,
+    "native_cpu_word_claim": false,
+    "authentication_scope": "DELEGATED_TO_EXTERNAL_EVIDENCE_ENVELOPE"
+  },
+  "epistemic_states": ["ZERO", "NOOP", "TOKEN_VAZIO", "VOID", "VALID", "REJECT"],
+  "module_groups": ["PRE", "GEO", "VOID", "BIT", "STACK", "STATE", "ZIP", "LINK", "ADAPTER", "EVIDENCE"],
+  "bounded_evidence": {
+    "host_semantic_kat": "PASS",
+    "source_profile_text_bytes": {"O0":999,"Os":854,"Oz":448,"O2":878},
+    "source_profiles_data_bytes": 0,
+    "source_profiles_bss_bytes": 0,
+    "source_profiles_undefined_symbols": 0,
+    "compact_profile": "Oz_WITH_FINAL_LINK_AUDIT",
+    "x86_64_loaderless": {
+      "run": "PASS_RC_0",
+      "text_bytes": 471,
+      "data_bytes": 0,
+      "bss_bytes": 0,
+      "undefined_symbols": 0,
+      "runtime_relocations": 0,
+      "dynamic_dependencies": 0,
+      "sha256": "fa857179d9c656819a323537875fa5cb4427a8b659c3ebbed2bcf87b50dc8753"
+    },
+    "armv7_final_link": {
+      "status": "PASS_COMPILE_LINK_ONLY",
+      "text_bytes": 496,
+      "data_bytes": 0,
+      "bss_bytes": 0,
+      "undefined_symbols": 0,
+      "runtime_relocations": 0,
+      "dynamic_dependencies": 0,
+      "sha256": "283f41e972c64be2cfd143d80866bd3d120733c3a6e741090ad952663b0f76fc",
+      "physical_execution": "TOKEN_VAZIO_DEVICE"
+    },
+    "aarch64_final_link": {
+      "status": "PASS_COMPILE_LINK_ONLY",
+      "text_bytes": 460,
+      "data_bytes": 0,
+      "bss_bytes": 0,
+      "undefined_symbols": 0,
+      "runtime_relocations": 0,
+      "dynamic_dependencies": 0,
+      "sha256": "42f7cea091c8c700fde4d7e9a8f42c7d3b61d646d596b790b1216f32b48084a8",
+      "physical_execution": "TOKEN_VAZIO_DEVICE"
+    }
+  },
+  "source_anchors": [
+    "rafaelmeloreisnovo/termux-app-rafacodephi:docs/RAFCODEPHI_COMPILER_CONTRACT.md",
+    "rafaelmeloreisnovo/termux-app-rafacodephi:asm/RAFAELIA_ISA_BITRAF.md",
+    "rafaelmeloreisnovo/RafGitTools:native/rafcode_federation_v1/README.md",
+    "rafaelmeloreisnovo/Vectras-VM-Android:engine/rmr/include/bitomega.h",
+    "rafaelmeloreisnovo/Vectras-VM-Android:engine/rmr/include/bitraf.h",
+    "rafaelmeloreisnovo/Vectras-VM-Android:tools/baremetal/rafcode_phi/asm/rafcode_phi_emit_word.S",
+    "rafaelmeloreisnovo/llamaRafaelia:rmrCti/rf_core.c",
+    "rafaelmeloreisnovo/Rafaelia_Private:Low-level/rafcode_phi_core.h",
+    "rafaelmeloreisnovo/GAIA_phi:FCEA_ABSENCE_INDEX.sh",
+    "instituto-Rafael/publicacientiespiritual:bitrafmd.md",
+    "instituto-Rafael/publicacientiespiritual:bitraf_especificacao.md"
+  ],
+  "gap_state": {
+    "GF001_NOOP_TOKEN_VOID_COLLAPSE": "CLOSED_SOURCE_CONTRACT",
+    "GF002_LOGICAL42_NATIVEWORD_AMBIGUITY": "CLOSED_BOUNDARY",
+    "GF003_KERNEL_ADAPTER_DEPENDENCY_COLLAPSE": "CLOSED_ARCHITECTURE",
+    "GF004_WARNING_AUTODELETION_AMBIGUITY": "CLOSED_ROUTED_EXISTING_CONTRACT",
+    "GF005_CROSS_ABI_SOURCE_PORTABILITY": "CLOSED_CROSS_ABI_FINAL_LINK",
+    "GF006_BITRAF_BITOMEGA_EXACT_STATE_BINDING": "TOKEN_VAZIO_SEMANTIC_AUTHORITY",
+    "GF007_GEOWORD_SELF_AUTHENTICATION": "NOT_A_CARRIER_REQUIREMENT_DELEGATED_TO_EVIDENCE_ENVELOPE",
+    "GF008_GEOWORD_DEVICE_RUNTIME": "TOKEN_VAZIO_DEVICE",
+    "G015": "OPEN_EXTERNAL_GATE",
+    "G016": "OPEN_EXTERNAL_GATE",
+    "G017": "OPEN_TOKEN_VAZIO_EVIDENCE_PROTOCOL_DEFINED",
+    "G018": "OPEN_TOKEN_VAZIO_VALIDATION_PROTOCOL_DEFINED"
+  },
+  "protocols": {
+    "GF006": "receipts/2026-09-09_BITRAF_BITOMEGA_BINDING_BOUNDARY.md",
+    "G017_G018": "docs/research/ZIPRAF_G017_G018_CLOSURE_PROTOCOL_V1.md"
+  },
+  "tracking": {
+    "mapa_issue": 573,
+    "zipraf_core_issue": 8,
+    "memrafcode_issue": 13
+  }
+}
