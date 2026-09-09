@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafaelia.global-corpus-root-manifest/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "root_id", "objects", "claim_allowed"],
+  "properties": {
+    "schema_version": {"const": "rafaelia.global-corpus-root-manifest/v1"},
+    "root_id": {"type": "string", "minLength": 1},
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["object_id", "provider", "locator", "sha256", "size", "role", "provenance_state"],
+        "properties": {
+          "object_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._:-]+$"},
+          "provider": {"enum": ["github", "google_drive", "library", "conversation", "local", "external"]},
+          "locator": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "size": {"type": "integer", "minimum": 0},
+          "role": {"enum": ["SOURCE", "ARTIFACT", "EXECUTION", "EVIDENCE", "MEMORY", "INDEX", "GOVERNANCE", "DATASET", "RECEIPT"]},
+          "provenance_state": {"enum": ["OBSERVED", "VERIFIED", "TOKEN_VAZIO", "EXTERNAL"]},
+          "supersedes": {"type": "array", "items": {"type": "string"}},
+          "license_ref": {"type": "string"},
+          "sensitivity": {"enum": ["PUBLIC", "INTERNAL", "RESTRICTED", "TOKEN_VAZIO"]}
+        }
+      }
+    },
+    "claim_allowed": {"const": false}
+  }
+}
