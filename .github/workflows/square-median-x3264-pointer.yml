@@ -51,7 +51,7 @@ jobs:
             'claim_allowed=false' \
             > artifacts/square-median-x3264/BOUNDARY.txt
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: square-median-x3264-pointer-${{ github.sha }}
           path: artifacts/square-median-x3264/

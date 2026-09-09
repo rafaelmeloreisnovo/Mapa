@@ -324,7 +324,7 @@ jobs:
           } | LC_ALL=C sort | xargs sha256sum > STRUCTURAL_CHECKSUMS.sha256
 
       - name: Upload structural audit
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: mapa-structural-validation
           path: |

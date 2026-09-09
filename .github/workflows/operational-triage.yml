@@ -54,7 +54,7 @@ jobs:
             tests/test_operational_triage.py \
             build/operational-triage/report.json \
             > build/operational-triage/SHA256SUMS
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: mapa-operational-triage-${{ github.run_id }}
           path: build/operational-triage/

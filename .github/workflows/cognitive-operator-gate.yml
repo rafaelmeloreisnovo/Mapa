@@ -38,7 +38,7 @@ jobs:
           python scripts/validate_cognitive_operators.py \
             --manifest data/ontology/cognitive-operators.v1.json \
             --output build/cognitive-operators/audit.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: cognitive-operator-audit
           path: build/cognitive-operators/audit.json

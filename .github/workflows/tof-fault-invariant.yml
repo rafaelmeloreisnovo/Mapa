@@ -43,7 +43,7 @@ jobs:
             data/control-plane/tof-namespace-allocation-fault.v1.json \
             --write-report build/tof-fault-invariant/report.json
       - name: Upload bounded evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: tof-fault-invariant-report
           path: build/tof-fault-invariant/report.json
