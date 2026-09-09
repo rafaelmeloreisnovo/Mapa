@@ -1,0 +1,111 @@
+{
+  "schema": "rafaelia.omega177.r2-corpus-custody-entry/v1",
+  "generated_at": "2026-09-09",
+  "claim_allowed": false,
+  "promotion_rule": "bytes observed before cryptographic root",
+  "root_state": "TOKEN_VAZIO_UNTIL_SCOPE_COMPLETE",
+  "required_object_fields": [
+    "object_id",
+    "source_provider",
+    "source_id",
+    "path_or_title",
+    "observed_bytes",
+    "size_bytes",
+    "sha256",
+    "blake3",
+    "git_commit_or_drive_id",
+    "object_class",
+    "canonical_authority",
+    "canonical_reason",
+    "duplicate_of",
+    "supersedes",
+    "sensitive",
+    "sanitization_state",
+    "executable",
+    "build_proof",
+    "runtime_proof",
+    "epistemic_class",
+    "token_vazio_reason"
+  ],
+  "hash_policy": {
+    "sha256": "required_when_observed_bytes_true",
+    "blake3": "required_when_observed_bytes_true",
+    "global_root": "forbidden_until_input_scope_complete_true"
+  },
+  "dedup_policy": {
+    "digest_equality_required": true,
+    "canonicality_not_implied_by_digest_equality": true,
+    "physical_history_preserved": true,
+    "destructive_delete": false
+  },
+  "snapshot_policy": {
+    "canonical_decision_requires": [
+      "canonical_authority",
+      "canonical_reason"
+    ],
+    "recency_alone_sufficient": false,
+    "supersession_edge_fields": [
+      "predecessor",
+      "successor",
+      "reason",
+      "observed_at",
+      "authority"
+    ]
+  },
+  "sanitization_policy": {
+    "states": [
+      "UNSCANNED",
+      "PASS_SANITIZED",
+      "REJECT_SENSITIVE",
+      "TOKEN_VAZIO"
+    ],
+    "forbidden_template_material": [
+      "secrets",
+      "tokens",
+      "credentials",
+      "private_keys",
+      "runtime_state",
+      "swap_files",
+      "locks",
+      "raw_dotfiles_without_review"
+    ],
+    "template_reference_requires": "PASS_SANITIZED"
+  },
+  "template_package": {
+    "state": "TOKEN_VAZIO_UNTIL_SANITIZED_REFERENCES",
+    "supported_reference_classes": [
+      "GOOGLE_DOC",
+      "GOOGLE_SLIDE",
+      "GOOGLE_SHEET",
+      "DOCX",
+      "PPTX",
+      "XLSX",
+      "PNG",
+      "PLAIN_TEXT",
+      "MARKDOWN"
+    ],
+    "raw_runtime_code_is_source_only": true
+  },
+  "population": {
+    "input_scope_complete": false,
+    "corpus_population_state": "OPEN",
+    "canonical_snapshots_state": "OPEN_AUTHORITY_BINDING",
+    "sanitization_population_state": "OPEN"
+  },
+  "initial_focus": [
+    "X0_HOME_DRIVE_GLOBAL_DEDUP",
+    "MULTI_SNAPSHOT_CANONICALITY",
+    "FORMAL_SANITIZATION",
+    "TEMPLATE_CREATOR_PACKAGE"
+  ],
+  "external_gates_unchanged": [
+    "ANDROID_ARM_PHYSICAL",
+    "SECOND_PHYSICAL_ARCHITECTURE",
+    "RAFBIT_BITOMEGA_SEMANTIC_AUTHORITY",
+    "INDEPENDENT_EXTERNAL_AUDIT",
+    "G017_EMPIRICAL",
+    "G018_STATISTICAL",
+    "RLL_MEASUREMENTS",
+    "OTHER_EXTERNAL_PROVIDERS"
+  ]
+}

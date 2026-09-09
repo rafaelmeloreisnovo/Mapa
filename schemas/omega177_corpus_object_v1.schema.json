@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/omega177_corpus_object_v1.schema.json",
+  "title": "RAFAELIA Ω177 Corpus Object v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "object_id",
+    "source_provider",
+    "source_id",
+    "path_or_title",
+    "observed_bytes",
+    "size_bytes",
+    "sha256",
+    "blake3",
+    "git_commit_or_drive_id",
+    "object_class",
+    "canonical_authority",
+    "canonical_reason",
+    "duplicate_of",
+    "supersedes",
+    "sensitive",
+    "sanitization_state",
+    "executable",
+    "build_proof",
+    "runtime_proof",
+    "epistemic_class",
+    "token_vazio_reason"
+  ],
+  "properties": {
+    "object_id": {"type": "string", "minLength": 1},
+    "source_provider": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "path_or_title": {"type": "string", "minLength": 1},
+    "observed_bytes": {"type": "boolean"},
+    "size_bytes": {"type": ["integer", "null"], "minimum": 0},
+    "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "blake3": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "git_commit_or_drive_id": {"type": ["string", "null"]},
+    "object_class": {"type": "string", "minLength": 1},
+    "canonical_authority": {"type": ["string", "null"]},
+    "canonical_reason": {"type": ["string", "null"]},
+    "duplicate_of": {"type": ["string", "null"]},
+    "supersedes": {"type": ["string", "null"]},
+    "sensitive": {"type": ["boolean", "null"]},
+    "sanitization_state": {"enum": ["UNSCANNED", "PASS_SANITIZED", "REJECT_SENSITIVE", "TOKEN_VAZIO"]},
+    "executable": {"type": ["boolean", "null"]},
+    "build_proof": {"type": ["string", "null"]},
+    "runtime_proof": {"type": ["string", "null"]},
+    "epistemic_class": {"type": "string", "minLength": 1},
+    "token_vazio_reason": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"observed_bytes": {"const": true}}, "required": ["observed_bytes"]},
+      "then": {
+        "properties": {
+          "size_bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "blake3": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"sanitization_state": {"const": "PASS_SANITIZED"}}, "required": ["sanitization_state"]},
+      "then": {"properties": {"sensitive": {"const": false}}}
+    }
+  ]
+}
