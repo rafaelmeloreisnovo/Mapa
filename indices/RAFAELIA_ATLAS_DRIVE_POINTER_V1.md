@@ -11,6 +11,7 @@ Compact router:
 `ATLAS:X | NOVO:X | L:X | O:X | T:X | REL:X | SCALE:X | EVID:X | GAP:X | LEARN:X`
 
 Federation:
+
 - Mapa PR `#377`
 - private memory bridge PR `rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE#48`
 

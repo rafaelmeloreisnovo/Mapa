@@ -5,6 +5,7 @@ State: EVIDENCED_STATIC_METHOD_LEVEL
 claim_allowed: false
 
 ## Scope
+
 Pinned producer: `rafaelmeloreisnovo/Vectras-VM-Android@21ad17f89ce2bf29cb0d8c184c612d76a99a9b3d`
 Source: `app/src/main/java/com/vectras/vm/benchmark/VectraBenchmark.java`
 Blob: `e86c56e7f6b3680cf37e20a9f3b78ef1bf12b5e5`

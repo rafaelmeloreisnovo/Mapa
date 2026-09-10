@@ -25,6 +25,7 @@ script_content != execution_evidence
 
 Do not repeat exhausted negative probes without a new provider pointer.
 Eligible probes only:
+
 1. G030: new provider-preserved execution/log/custodian pointer with dated command→object/hash binding.
 2. G029: new byte-distinct archive/revision or authenticated suffix capable of gzip/tar PASS.
 3. G031: new authoritative GitHub/provider ref-event source establishing the historical→current transition event.
