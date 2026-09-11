@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-10T15:07:00-03:00",
+  "generated_at": "2026-09-10T20:58:42-03:00",
   "control_plane": "rafaelmeloreisnovo/Mapa",
   "claim_allowed": false,
   "state": "DRAFT_AUDITABLE",
@@ -115,6 +115,22 @@
       "canonical_for": ["parabolic_didactics", "cross_cultural_explanation"],
       "consumes": ["bounded_results", "method_documents"],
       "produces": ["parables", "human_readable_explanations"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Geral",
+      "role": "runtime_maintainer",
+      "canonical_for": ["vectra_freestanding_core"],
+      "consumes": ["runtime_contracts", "geometry_invariants"],
+      "produces": ["vectra_core", "freestanding_tests", "rollback_checkpoints"],
+      "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "role": "app_maintainer",
+      "canonical_for": ["vectras_android_app", "vectras_android_engine", "vectras_ci_release", "vectras_current_documentation"],
+      "consumes": ["native_engine", "android_toolchain", "release_signing_contracts"],
+      "produces": ["android_app", "native_engine", "ci_release_evidence", "current_vectras_docs"],
       "evidence_state": "VERIFIED_LIMITED"
     }
   ],
