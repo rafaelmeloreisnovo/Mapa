@@ -9,6 +9,7 @@ Drive root: `RAFAELIA_ATLAS_ROTAS_CATALOGO_OMEGA` (`1yqrafV9KvQ2C-wz8nDCrYeVEyQo
 `ATLAS <tema>` = resolver tema → fontes → memórias → relações → escalas → evidência → gaps → próxima rota.
 
 Atalhos:
+
 - `L:X` memória longitudinal;
 - `O:X` memória ortogonal;
 - `T:X` memória transversal;

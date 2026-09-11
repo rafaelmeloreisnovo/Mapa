@@ -13,6 +13,7 @@ This index binds governance artifacts for authorship/licensing review.
 - examination matrix: `governance/authorship/EXAMINATION_MATRIX_V1.md`
 
 Per-component examination receipts:
+
 - Termux/RAFCODEPHI: `governance/authorship/exams/TERMUX_RAFACODEPHI_EXAM_V1.json`
 - QEMU/RMR: `governance/authorship/exams/QEMU_RMR_EXAM_V1.json`
 - Vectras/RVR: `governance/authorship/exams/VECTRAS_RVR_EXAM_V1.json`

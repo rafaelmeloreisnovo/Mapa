@@ -3,6 +3,7 @@
 Predecessor: Ω185 / PR #592
 
 Evidence delta:
+
 - `87`: A=B=C at local leaf-set level; one leaf `875ccf5bc736c74de6c1f6cd91c7d2bebb94f828` (215 B). A bytes canonically re-hashed to same Git SHA-1.
 - `82`: A=B=C; one leaf `8231ba55546cc68a69d23a772578e46869e020bb` (178 B). A bytes canonically re-hashed.
 - `81`: A=B=C; one leaf `8150e5b1862e6cab85fecc192271f1fb89c94ac7` (226 B). A bytes canonically re-hashed.

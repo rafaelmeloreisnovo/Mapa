@@ -3,6 +3,7 @@
 Predecessor: Ω182 / PR #589.
 
 Evidence delta:
+
 - A `9e`: exactly one leaf `c81352d16a3f97eeb8ae0c8f0d70c34760c35e`, 171 B.
 - B `9e`: exactly the same single leaf, 171 B.
 - C `9e`: exactly the same single leaf, 171 B.

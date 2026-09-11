@@ -16,6 +16,7 @@ Canônico:
 `docs/canonical/2026-08-15/RAF_HW_STAGE7_VA_COLOR_ALIAS_ISOLATION_CHECKPOINT_V1.md`
 
 Evidência:
+
 - `data/evidence/hardware/raf_hw_stage7_va_color_alias_isolation_analysis_20260815.v1.txt`
 - `data/evidence/hardware/raf_hw_stage7_va_color_alias_isolation_receipt_20260815.v1.txt`
 

@@ -44,6 +44,7 @@ The repository-local broker states that remote receipt transport is not implemen
 ## Human/EIA navigation
 
 Canonical local entry points:
+
 - `auditoria/reversibility/README.md`
 - `auditoria/reversibility/index.jsonl`
 - `auditoria/reversibility/schema.v1.json`
