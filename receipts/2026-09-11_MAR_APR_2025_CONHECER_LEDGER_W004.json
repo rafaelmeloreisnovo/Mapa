@@ -1,0 +1,37 @@
+{
+  "receipt_id": "REC-MARAPR-CONHECER-W004-20260911",
+  "timestamp": "2026-09-11T23:49:14-03:00",
+  "predecessor": "REC-MARAPR-CONHECER-W003-20260911",
+  "state": "CONTROL_RECONCILED",
+  "incident": {
+    "kind": "INTERRUPTED_TRANSACTION_DUPLICATE_EVENT_IDS",
+    "artifacts": [
+      {
+        "path": "data/knowledge-ledger/mar-apr-2025/window-002.events.jsonl",
+        "blob_sha": "7322050bf8ef54400f08ee099b31c9318b7bb14e"
+      },
+      {
+        "path": "data/knowledge-ledger/mar-apr-2025/events/window-002.events.jsonl",
+        "blob_sha": "636a60d754ede31baea48a7570189c074b1ebadf"
+      }
+    ],
+    "delete_performed": false,
+    "overwrite_performed": false
+  },
+  "validation": {
+    "schema_path": "schemas/knowledge-ledger-event.v1.schema.json",
+    "schema_blob_sha": "e0e06ab549d7043e910a0a3bc49a1707f9781489",
+    "events_path": "data/knowledge-ledger/mar-apr-2025/window-003.events.jsonl",
+    "events_blob_sha": "91557631c73ce1bf4eabe117581660959a06b795",
+    "event_count": 5,
+    "validation_errors": 0
+  },
+  "current_evidence_predecessor": "REC-MARAPR-CONHECER-W003-20260911",
+  "gaps": [
+    "GAP:MARAPR:LENS_LUNETA_LITERAL_BINDING",
+    "GAP:MARAPR:MARCH_CONTENT_BINDING",
+    "GAP:MARAPR:CROSS_EXPORT_IDENTITY"
+  ],
+  "claim_allowed": false,
+  "f_next": "Probe one exact March source/provider identity with content-level evidence; append W005 only on material state change."
+}
