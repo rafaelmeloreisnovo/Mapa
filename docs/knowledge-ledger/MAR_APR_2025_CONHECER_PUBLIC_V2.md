@@ -80,3 +80,15 @@ Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W006-20260912.md`
 - `TOKEN_VAZIO` remains valid and `claim_allowed=false`.
 
 Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W007-20260912.md`
+
+
+## W008 — bounded user-literal probe
+
+- Authoritative March source shards covering 2025-03-01..13 UTC were checked with a user-role-only literal detector.
+- Measured surface: **5,648 user-authored text messages** across 3 bounded shards.
+- Exact `luneta` / `convexo|convexa|convexos|convexas` matches: **0**.
+- State: `TOKEN_VAZIO_BOUNDED_NOT_OBSERVED`, not global absence.
+- W007 remains intact: user Newton+lenses/light+knowledge relation and assistant luneta/convex-lens continuation are source-bound with role provenance.
+- Next useful operation is cross-export reconciliation; do not rescan the same bounded window.
+
+Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W008-20260912.md`
