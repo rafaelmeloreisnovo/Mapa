@@ -66,4 +66,3 @@ A public repository being owned by the author does not prove that every file is 
 ## Legal review gate
 
 Before production adoption or commercial contracting, review is required by qualified intellectual-property counsel in the relevant jurisdiction.
-
