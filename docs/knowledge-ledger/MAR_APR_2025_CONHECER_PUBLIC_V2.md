@@ -50,3 +50,18 @@ Detailed evidence remains in private Drive custody.
 `PRIVATE_SOURCE_ID != PUBLIC_ALIAS`
 
 `SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM`
+
+
+## W006 — controlled continuation
+
+- Successor of W005; PR #607 remains historical/closed.
+- Eight-module route is unchanged.
+- Public/private provenance boundary remains fail-closed.
+- Active gap ceiling remains 3:
+  1. `GAP:MARAPR:LENS_LUNETA_LITERAL_BINDING`
+  2. `GAP:MARAPR:MARCH_OPTICS_METHOD_BINDING`
+  3. `GAP:MARAPR:CROSS_EXPORT_IDENTITY`
+- Next probe: one authoritative exact-source binding for early March optics/method or literal luneta/convexo.
+- `TOKEN_VAZIO` is preserved on miss; `claim_allowed=false`.
+
+Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W006-20260912.md`
