@@ -174,4 +174,3 @@ commercial_template
 ```
 
 Sem essa revisão, o estado permanece `DRAFT_COUNSEL_REVIEW_REQUIRED`.
-
