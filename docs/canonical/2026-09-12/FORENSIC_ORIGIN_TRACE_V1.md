@@ -46,7 +46,7 @@ The traceback step asks, for every unresolved record:
 5. what discriminating test could show that the apparent blocker is only a symptom?
 6. what alternative explanation remains?
 
-## Current root-origin map
+## Historical root-origin map
 
 | Record | Historical status | First observed blocker | Root cause state |
 |---|---|---|---|
@@ -61,7 +61,89 @@ The traceback step asks, for every unresolved record:
 | R-FRACTAL-DIMENSION | IGNORED | measurement protocol missing | ROOT_CAUSE_NOT_PROVEN |
 | R-EXTERNAL-VALIDATION | SUGGESTED | no independent run / third-party evidence | ROOT_CAUSE_NOT_PROVEN |
 
-This table does not claim ten root causes. It identifies ten **first observed blockers** from the canonical ontology.
+This table does not claim ten root causes. It identifies ten **historical first blockers** from the canonical ontology. Later evidence must be reconciled by scope before the row is treated as current.
+
+## Scope reconciliation — V1.1
+
+A second traceback found that several ontology gaps were later closed at a
+narrow scope and then reused by a stricter successor contract. Reusing the same
+broad record ID can make a scope expansion look like regression.
+
+The stable identity is therefore:
+
+```text
+GapKey = (record_id, scope_id, contract_version, evidence_cutoff)
+```
+
+New invariants:
+
+```text
+GAP_ID_WITHOUT_SCOPE != STABLE_STATE_ID
+PASS_SCOPE_A != PASS_SCOPE_B
+CLOSED_SCOPE_A + EXPANDED_SCOPE_B -> NEW_SCOPED_GAP
+LOCKED_WEIGHTS != CALIBRATED_WEIGHTS
+FROZEN_FIXTURE != COMPLETE_CORPUS
+DETERMINISTIC_BENCHMARK != MODEL_COMPETITION
+INTERNAL_FEDERATION_PASS != INDEPENDENT_EXTERNAL_VALIDATION
+```
+
+The machine-readable lineage is
+`data/contracts/gap-scope-lineage.v1.json`.
+
+| Record | Earlier evidence | Current reconciliation |
+|---|---|---|
+| R-DAG-CAUSAL | DAG engine + 15 tests reported PASS | original TV-CODE gap resolved at engine/test scope; no domain causal claim promoted |
+| R-BOOTSTRAP-UQ | fixed-seed Bootstrap engine + 17 tests reported PASS | engine scope preserved; replay-specific deterministic fixture remains open |
+| R-ANTIDERIVATIVE-BOUNDARY | boundary schema/examples reported PASS | schema scope preserved; boundary-sensitive replay execution remains open |
+| R-SOURCE-INDEPENDENCE | six-repo lineage/dedup validation reported PASS | six-repo scope preserved; replay widened lineage to all referenced sources |
+| R-WEIGHTS-CALIBRATION | fixed 0.3/0.4/0.3 weights serialized, normalized and locked | artifact freeze is closed; blinded calibration remains open |
+| R-LOGLOG-COMPETITION | seed-42 log-log determinism/shape/coverage reported PASS | determinism is closed; model-competition execution is not bound by that gate |
+| R-FRACTAL-DIMENSION | null fixture frozen | estimator falsifier failed the declared tolerance; failure remains evidence |
+| R-VECTOR-CORPUS | federation vector fixture frozen | complete authorized corpus remains access/privacy bounded |
+| R-SEMANTIC-HUMAN-STUDY | historical abort preserved | ethics/privacy/consent remains the current prerequisite |
+| R-EXTERNAL-VALIDATION | internal six-repo federation validation reported PASS | independent external reproduction remains open |
+
+### Source-supported systemic pattern
+
+The strongest current pattern is:
+
+```text
+STALE_ONTOLOGY_SNAPSHOT
++ UNSCOPED_GAP_IDENTIFIER_REUSE
++ CLOSURE_LABEL_SEMANTIC_OVERLOAD
+-> APPARENT_REGRESSION
+```
+
+This is not yet promoted to a universal root cause. It is a source-supported
+mechanism explaining multiple observed contradictions in the current records.
+
+### Important examples
+
+`TV-DATA-2 Calibration` validated deterministic serialization, a locked flag
+and normalization of hard-coded weights. Its source explicitly says those
+weights would normally come from a calibration run. Therefore the correct
+relation is:
+
+```text
+WEIGHTS_LOCKED = true
+CALIBRATION_EXECUTED = false
+```
+
+The log-log gate validates seed determinism, approximate shape and size
+coverage. A frozen comparison fixture also exists, but the gate script does not
+load that fixture. Therefore:
+
+```text
+LOGLOG_DETERMINISM_PASS != MODEL_COMPETITION_PASS
+```
+
+The August six-repository lineage authority can also remain valid while the
+September replay contract asks for complete lineage across a larger source
+population:
+
+```text
+SIX_REPO_LINEAGE_PASS != ALL_REFERENCED_SOURCES_LINEAGE_COMPLETE
+```
 
 ## First higher-order diagnosis
 
@@ -73,7 +155,7 @@ The ten unresolved records collapse into fewer upstream families:
 - R-BOOTSTRAP-UQ
 - R-LOGLOG-COMPETITION
 
-The current problem is not yet a failed scientific hypothesis. The executable discrimination machinery is incomplete.
+The historical ontology recorded incomplete discrimination machinery. Scope reconciliation now shows that DAG and Bootstrap implementation gaps were later closed at their engine/test scopes, while successor replay/model-competition scopes remain separate.
 
 ### B. Calibration target deficit
 
@@ -85,14 +167,14 @@ Weights cannot be judged before ground truth or blinded benchmark exists.
 
 - R-ANTIDERIVATIVE-BOUNDARY
 
-The inverse reconstruction is underdetermined until boundary/origin assumptions are explicit.
+The boundary schema was later materialized; the remaining current gap is execution of a deterministic boundary-sensitive replay under the successor reconstruction contract.
 
 ### D. Lineage/independence deficit
 
 - R-SOURCE-INDEPENDENCE
 - R-EXTERNAL-VALIDATION
 
-Replication strength cannot be computed safely until shared ancestry and independent execution are separated.
+Six-repository lineage/dedup rules were later validated. The current replay gap is broader source coverage plus genuinely independent external reproduction, not absence of the six-repository schema.
 
 ### E. Access/governance prerequisite
 
@@ -105,7 +187,7 @@ These are not evidence of censorship or scientific failure. One is access/privac
 
 - R-FRACTAL-DIMENSION
 
-The term cannot become empirical until estimator, null, scale interval and replicated measurement exist.
+A null-model fixture exists, but the estimator falsifier failed its declared tolerance. The current question is estimator accuracy/acceptance policy and replicated measurement, not absence of a null fixture.
 
 ## Why this is non-regressive
 
@@ -158,9 +240,9 @@ F_ok:
 
 F_gap:
 
-- no discriminating test has yet been executed for the ten blockers;
-- causal ancestry across repositories remains incomplete;
-- several gaps require new evidence, not more labeling.
+- historical gaps have different successor scopes and cannot be treated as one flat state;
+- replay-wide lineage, blinded weight calibration, model-competition execution, privacy-safe corpus access, fractal estimator acceptance and external reproduction remain open;
+- repository/provider governance gates remain fail-closed and must not be bypassed.
 
 F_next:
-resolve the earliest dependency with the highest downstream fan-out: lineage authority and boundary/replay prerequisites, then rerun the forensic trace before calibrating weights or interpreting frontier-science patterns.
+run the scoped trace first; preserve closed engine/schema scopes; address only the active successor gaps. Highest-value current work is replay-wide lineage plus deterministic boundary/replay fixture, followed by blinded calibration and model-competition binding.
