@@ -1,8 +1,8 @@
 # Receipt — Project Recurrence Manifold V1 — 2026-09-12
 
-state: IMPLEMENTED_VERIFIED_LIMITED_STRUCTURE
-claim_allowed: false
-pr: #606
+state: IMPLEMENTED_VERIFIED_LIMITED_STRUCTURE  
+claim_allowed: false  
+pr: #606  
 branch: feat/mu-semantic-event-v1-20260911
 
 ## Source authority
@@ -43,21 +43,23 @@ Blob SHAs:
 
 ## Gates
 
-G-PROVENANCE = PASS for canonical routing references.
-G-PRIVACY = PASS for current public alias-only seed.
-G-CAUSALITY = PASS as a governance prohibition: semantic recurrence was not promoted to causality.
-G-IDENTITY = TOKEN_VAZIO until exact provider/export occurrence binding.
-G-RUNTIME = TOKEN_VAZIO until repository validator/tests are executed by CI or a reproducible local checkout.
+G-PROVENANCE = PASS for canonical routing references.  
+G-PRIVACY = PASS for current public alias-only seed.  
+G-CAUSALITY = PASS as a governance prohibition: semantic recurrence was not promoted to causality.  
+G-IDENTITY = TOKEN_VAZIO until exact provider/export occurrence binding.  
+G-RUNTIME = TOKEN_VAZIO until repository validator/tests are executed by CI or a reproducible local checkout.  
 G-CLAIM = BLOCKED; recurrence alone cannot promote scientific/physical/operational claims.
 
 ## Urgency
 
 P0:
+
 1. predecessor/lineage before reopening an old gap;
 2. execution receipt before implementation-state promotion;
 3. gap-specific evidence before TOKEN_VAZIO closure.
 
 P1:
+
 1. exact provider/export occurrence identity;
 2. cross-layer bridge tests;
 3. alias→sense binding;
@@ -66,17 +68,20 @@ P1:
 ## R3
 
 F_ok:
+
 - existing semantic branch extended instead of creating a competing subsystem;
 - multidimensional L9 recurrence structure materialized;
 - Ω7 kept canonical and extra lenses kept explicitly proposed;
 - public privacy boundary maintained.
 
 F_gap:
+
 - exact project-session/provider identity;
 - CI/runtime execution of validator/tests;
 - formal semantics for proposed extra lenses.
 
 F_next:
+
 - run repository validator/tests;
 - bind one high-information recurrence to exact export/provider coordinates;
 - append successor μWRITE only on material evidence/state delta.
