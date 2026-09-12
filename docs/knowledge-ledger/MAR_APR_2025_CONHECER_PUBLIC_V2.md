@@ -92,3 +92,16 @@ Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W007-20260912.md`
 - Next useful operation is cross-export reconciliation; do not rescan the same bounded window.
 
 Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W008-20260912.md`
+
+
+## W009 — cumulative lineage reconciliation
+
+- Two private cumulative materializations were compared under the same privacy boundary.
+- Their source manifests preserve identical bytes, mtime_ns, and SHA-256 values for conversations-003.json through conversations-007.json.
+- The bounded conversation identity used in W007 is discoverable in normalized derivatives under both cumulative roots.
+- Therefore GAP:MARAPR:CROSS_EXPORT_IDENTITY is promoted only to PARTIAL_CLOSED_CUMULATIVE_LINEAGE.
+- This is not proof of identity across two independent OpenAI exports.
+- Residual state: TOKEN_VAZIO_DISTINCT_EXPORT_NOT_PROVEN.
+- The eight-module route remains unchanged; active gap families remain 2; claim_allowed=false.
+
+Receipt: docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W009-20260912.md
