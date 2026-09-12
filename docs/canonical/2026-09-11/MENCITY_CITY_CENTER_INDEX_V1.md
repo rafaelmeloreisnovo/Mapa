@@ -30,10 +30,10 @@ Single navigation hub for the semantic-event work created in the 2026-09-11 sess
 
 ## Drive routes
 
-- Folder: https://drive.google.com/drive/folders/1-MxPfULH8iSdQ3JZQe6S2RVSt16Own6F
-- Documento-Mestre: https://docs.google.com/document/d/1gZ0raDFk2u--En8-Q2MlJrBtV6M1gKAlJD82TEipZsc/edit
-- Mapa de Rotas: https://docs.google.com/spreadsheets/d/1IcALrmqohnLt-xOYtOlTnB5DITLXHrYIz2JHsDQ1BkY/edit
-- Visão do Coração: https://docs.google.com/presentation/d/1qfzt38piR3NAdtnqlgwQQVBQ5LYxwfr9OW58wUa-gF0/edit
+- [Folder](https://drive.google.com/drive/folders/1-MxPfULH8iSdQ3JZQe6S2RVSt16Own6F)
+- [Documento-Mestre](https://docs.google.com/document/d/1gZ0raDFk2u--En8-Q2MlJrBtV6M1gKAlJD82TEipZsc/edit)
+- [Mapa de Rotas](https://docs.google.com/spreadsheets/d/1IcALrmqohnLt-xOYtOlTnB5DITLXHrYIz2JHsDQ1BkY/edit)
+- [Visão do Coração](https://docs.google.com/presentation/d/1qfzt38piR3NAdtnqlgwQQVBQ5LYxwfr9OW58wUa-gF0/edit)
 
 ## Current state
 
@@ -46,11 +46,13 @@ Single navigation hub for the semantic-event work created in the 2026-09-11 sess
 IMPLEMENTED_DRAFT != PASS.
 
 F_gap:
+
 - deterministic REPLAY not yet executed;
 - semantic-support workflow debt remains separate;
 - Calendar time is TOKEN_VAZIO_TIME.
 
 F_next:
+
 1. validate schema + JSONL;
 2. add USER→AI→correction→fork→REPLAY fixtures;
 3. observe successor CI;
