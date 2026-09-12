@@ -1,6 +1,6 @@
 {
   "schema": "rafaelia.forensic-origin-trace/v1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "IMPLEMENTED_DRAFT",
   "claim_allowed": false,
   "purpose": "Trace the first source-supported blocker before editorial or scientific promotion.",
@@ -11,7 +11,11 @@
     "FIRST_OBSERVED_BLOCKER != ROOT_CAUSE_PROVEN",
     "NOT_FOUND != CENSORED",
     "SHARED_LINEAGE != INDEPENDENT_REPLICATION",
-    "NO_PROMOTION_BEFORE_TRACEBACK"
+    "NO_PROMOTION_BEFORE_TRACEBACK",
+    "GAP_ID_WITHOUT_SCOPE != STABLE_STATE_ID",
+    "PASS_SCOPE_A != PASS_SCOPE_B",
+    "LOCKED_WEIGHTS != CALIBRATED_WEIGHTS",
+    "FROZEN_FIXTURE != COMPLETE_CORPUS"
   ],
   "phases": [
     "READINESS",
@@ -107,5 +111,6 @@
     "venue": "DFRWS USA 2004",
     "use": "methodological inspiration for separation, traceback and reconstruction only",
     "code_copied": false
-  }
+  },
+  "scope_lineage_contract": "data/contracts/gap-scope-lineage.v1.json"
 }
