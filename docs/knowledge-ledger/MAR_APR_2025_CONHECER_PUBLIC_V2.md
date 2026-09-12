@@ -50,3 +50,45 @@ Detailed evidence remains in private Drive custody.
 `PRIVATE_SOURCE_ID != PUBLIC_ALIAS`
 
 `SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM`
+
+
+## W006 — controlled continuation
+
+- Successor of W005; PR #607 remains historical/closed.
+- Eight-module route is unchanged.
+- Public/private provenance boundary remains fail-closed.
+- Active gap ceiling remains 3:
+  1. `GAP:MARAPR:LENS_LUNETA_LITERAL_BINDING`
+  2. `GAP:MARAPR:MARCH_OPTICS_METHOD_BINDING`
+  3. `GAP:MARAPR:CROSS_EXPORT_IDENTITY`
+- Next probe: one authoritative exact-source binding for early March optics/method or literal luneta/convexo.
+- `TOKEN_VAZIO` is preserved on miss; `claim_allowed=false`.
+
+Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W006-20260912.md`
+
+
+## W007 — scoped role-typed March binding
+
+- A 2025-03-07 private source object is matched to privacy-preserving PID `70b5c1896db82f57b92d083a2c72df70b3477d0ca77aaa02eab485682054d27c`.
+- User-authored material binds knowledge-organization framing with Newton and lenses/light in the same conversation.
+- Assistant-authored continuation adds optics/telescope/luneta/refraction/prism/astronomy/convex-lens detail.
+- Role provenance is preserved; assistant language is not attributed to the user.
+- `GAP:MARAPR:MARCH_OPTICS_METHOD_BINDING = CLOSED_SCOPED_ROLE_TYPED`.
+- Active gaps are reduced to 2:
+  1. `GAP:MARAPR:LENS_LUNETA_USER_LITERAL_BINDING`
+  2. `GAP:MARAPR:CROSS_EXPORT_IDENTITY`
+- `TOKEN_VAZIO` remains valid and `claim_allowed=false`.
+
+Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W007-20260912.md`
+
+
+## W008 — bounded user-literal probe
+
+- Authoritative March source shards covering 2025-03-01..13 UTC were checked with a user-role-only literal detector.
+- Measured surface: **5,648 user-authored text messages** across 3 bounded shards.
+- Exact `luneta` / `convexo|convexa|convexos|convexas` matches: **0**.
+- State: `TOKEN_VAZIO_BOUNDED_NOT_OBSERVED`, not global absence.
+- W007 remains intact: user Newton+lenses/light+knowledge relation and assistant luneta/convex-lens continuation are source-bound with role provenance.
+- Next useful operation is cross-export reconciliation; do not rescan the same bounded window.
+
+Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W008-20260912.md`
