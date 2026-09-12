@@ -75,4 +75,3 @@ Toda adaptação deve declarar de forma inequívoca:
 ## 7. Base autoral
 
 O padrão é coerente com o direito moral de reivindicar autoria e de ter o nome do autor indicado na utilização da obra, sem pretender ampliar por contrato direitos que a lei não permita ampliar.
-
