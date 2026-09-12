@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/license-scope-record.v1.schema.json",
+  "title": "RAFAELIA License Scope Record V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scope_id",
+    "repository",
+    "path_scope",
+    "observed_license",
+    "rights_authority",
+    "commercial_rights_current",
+    "custom_rnc_allowed",
+    "state",
+    "evidence",
+    "gaps",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.license-scope-record/v1"
+    },
+    "scope_id": {
+      "type": "string",
+      "pattern": "^LIC-SCOPE-[A-Z0-9_-]{3,64}$"
+    },
+    "repository": {
+      "type": "string",
+      "minLength": 3
+    },
+    "path_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed_license": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rights_authority": {
+      "enum": [
+        "OBSERVED_UPSTREAM_LICENSE",
+        "AUTHORIAL_CONTROL_PROVEN",
+        "MIXED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "commercial_rights_current": {
+      "enum": [
+        "PERMITTED_BY_CURRENT_LICENSE",
+        "REQUIRES_SEPARATE_LICENSE",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "custom_rnc_allowed": {
+      "enum": [
+        "YES_AFTER_FILE_SCOPE_AUDIT",
+        "NO_INCOMPATIBLE",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "state": {
+      "enum": [
+        "OBSERVED",
+        "REVIEW_REQUIRED",
+        "BLOCKED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "claim_allowed": {
+      "const": false
+    }
+  }
+}
