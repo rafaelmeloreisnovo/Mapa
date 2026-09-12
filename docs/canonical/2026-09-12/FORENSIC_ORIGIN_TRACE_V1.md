@@ -68,6 +68,7 @@ This table does not claim ten root causes. It identifies ten **first observed bl
 The ten unresolved records collapse into fewer upstream families:
 
 ### A. Preparation/fixture deficit
+
 - R-DAG-CAUSAL
 - R-BOOTSTRAP-UQ
 - R-LOGLOG-COMPETITION
@@ -75,28 +76,33 @@ The ten unresolved records collapse into fewer upstream families:
 The current problem is not yet a failed scientific hypothesis. The executable discrimination machinery is incomplete.
 
 ### B. Calibration target deficit
+
 - R-WEIGHTS-CALIBRATION
 
 Weights cannot be judged before ground truth or blinded benchmark exists.
 
 ### C. Boundary/inverse-problem deficit
+
 - R-ANTIDERIVATIVE-BOUNDARY
 
 The inverse reconstruction is underdetermined until boundary/origin assumptions are explicit.
 
 ### D. Lineage/independence deficit
+
 - R-SOURCE-INDEPENDENCE
 - R-EXTERNAL-VALIDATION
 
 Replication strength cannot be computed safely until shared ancestry and independent execution are separated.
 
 ### E. Access/governance prerequisite
+
 - R-VECTOR-CORPUS
 - R-SEMANTIC-HUMAN-STUDY
 
 These are not evidence of censorship or scientific failure. One is access/privacy bounded; the other is correctly halted before an ethics-approved human protocol exists.
 
 ### F. Measurement-definition deficit
+
 - R-FRACTAL-DIMENSION
 
 The term cannot become empirical until estimator, null, scale interval and replicated measurement exist.
@@ -143,6 +149,7 @@ claim_allowed=false
 ## R3
 
 F_ok:
+
 - all 10 unresolved ontology records receive a source-bound origin trace;
 - editorial states remain preserved;
 - no automatic POTENTIAL/SUGGESTED promotion;
@@ -150,6 +157,7 @@ F_ok:
 - first blocker is separated from proven root cause.
 
 F_gap:
+
 - no discriminating test has yet been executed for the ten blockers;
 - causal ancestry across repositories remains incomplete;
 - several gaps require new evidence, not more labeling.
