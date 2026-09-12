@@ -131,7 +131,7 @@ H(operatorname{Replay}(cdot)) = H(X_n)
 If the required boundary, source, operator version or event is missing:
 
 [
-operatorname{Replay} = 	exttt{TOKEN\_VAZIO}
+operatorname{Replay} =     exttt{TOKEN\_VAZIO}
 ]
 
 ## Files
