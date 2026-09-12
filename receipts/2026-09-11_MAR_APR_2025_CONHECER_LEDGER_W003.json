@@ -1,0 +1,43 @@
+{
+  "receipt_id": "REC-MARAPR-CONHECER-W003-20260911",
+  "timestamp": "2026-09-11T23:50:56-03:00",
+  "predecessor": "REC-MARAPR-CONHECER-W002-20260911",
+  "state": "DRAFT_EVIDENCE_BOUND_CORRECTED",
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "USER_INPUT != ASSISTANT_GENERATION != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "SEARCH_MISS != GLOBAL_ABSENCE",
+    "correction = append successor; do not erase predecessor"
+  ],
+  "observed": {
+    "detector_correction": "substring 'lente' false positives removed; exact word/controlled variants used",
+    "march_fine_binding": "CLOSED_SCOPED_2025-03-14_THROUGH_2025-03-31",
+    "march_01_13": "TOKEN_VAZIO_SOURCE_NOT_OBSERVED",
+    "mar19_conversation": "67da3820-6bbc-800d-8763-48a7d8c0d944",
+    "mar25_26_conversation": "67e2c37e-9ca4-800d-b47d-460cbfbc9ad3",
+    "luneta_exact_bounded_scan": 0,
+    "convexo_family_bounded_scan": 0,
+    "optics_variants_observed": [
+      "lente(s)",
+      "telescopio",
+      "refracao",
+      "optica",
+      "prisma"
+    ],
+    "role_boundary": "optics/history terms may be assistant-generated; preserve role provenance"
+  },
+  "gap_changes": {
+    "GAP:MARAPR:MARCH_CONTENT_BINDING": "SUPERSEDED_BY_GAP:MARAPR:MARCH_01_13_CONTENT_BINDING",
+    "GAP:MARAPR:SAME_CONVERSATION_LUNETA_LENTE_CONVEXO": "SUPERSEDED_BY_GAP:MARAPR:LUNETA_CONVEXO_EXACT_SOURCE"
+  },
+  "gaps": [
+    "GAP:MARAPR:MARCH_01_13_CONTENT_BINDING",
+    "GAP:MARAPR:LUNETA_CONVEXO_EXACT_SOURCE"
+  ],
+  "f_ok": "March 14-31 has exact conversation/message/provider binding; two exact March conversations connect physics/optics/astronomy with life/knowing/knowledge-method themes under role-typed provenance.",
+  "f_gap": "March 1-13 source identity not observed; literal luneta/convexo not observed in bounded MESSAGES-00001..00006.",
+  "f_next": "Probe only authoritative source coverage for March 1-13 or exact luneta/convexo; otherwise preserve TOKEN_VAZIO and continue indexing the evidenced role-typed relations.",
+  "raw_source_mutated": false,
+  "claim_allowed": false
+}
