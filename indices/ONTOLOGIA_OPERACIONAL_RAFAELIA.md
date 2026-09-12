@@ -56,3 +56,15 @@ silenciosamente apagados.
 3. registrar resultados negativos como evidência;
 4. implementar DAG causal separado;
 5. calibrar prioridades somente em benchmark bloqueado.
+
+## Forensic origin trace — 2026-09-12
+
+Before any new editorial/scientific promotion, unresolved records are traced through:
+
+`data/contracts/forensic-origin-trace.v1.json` → `tools/forensic_origin_trace.py` → `tests/test_forensic_origin_trace.py`.
+
+The overlay preserves historical states and distinguishes first observed blocker from proven root cause:
+
+`EDITORIAL_STATUS != ROOT_CAUSE` and `FIRST_OBSERVED_BLOCKER != ROOT_CAUSE_PROVEN`.
+
+Canonical method note: `docs/canonical/2026-09-12/FORENSIC_ORIGIN_TRACE_V1.md`.
