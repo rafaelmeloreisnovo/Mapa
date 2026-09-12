@@ -226,4 +226,3 @@ lei cogente
 ## 23. Referências
 
 A fundamentação jurídica e bibliográfica desta licença está em `LEGAL_BASIS_AND_REFERENCES_V1.md`.
-
