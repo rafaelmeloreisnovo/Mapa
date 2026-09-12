@@ -1,0 +1,404 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/project-recurrence-manifold.v1.schema.json",
+  "title": "RAFAELIA Project Recurrence Manifold v1",
+  "description": "Alias-only, append-oriented recurrence record over project sessions. Extends the Session Semantic Ledger/Chain and μ semantic events without copying raw chats or promoting semantic recurrence to causality.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "recurrence_id",
+    "pattern_key",
+    "state",
+    "public_privacy",
+    "source_scope",
+    "observations",
+    "recurrence",
+    "relations",
+    "omega7",
+    "lenses",
+    "gates",
+    "token_vazio",
+    "r3",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.project-recurrence-manifold/v1"
+    },
+    "recurrence_id": {
+      "type": "string",
+      "pattern": "^REC-[0-9]{3,6}$"
+    },
+    "pattern_key": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]{3,96}$"
+    },
+    "state": {
+      "enum": [
+        "OBSERVED_PROJECT_CONTEXT",
+        "DERIVED_INDEX",
+        "VERIFIED_LIMITED",
+        "CONTRADICTED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "public_privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alias_only",
+        "raw_session_ids",
+        "raw_message_ids",
+        "raw_content"
+      ],
+      "properties": {
+        "alias_only": {
+          "const": true
+        },
+        "raw_session_ids": {
+          "const": false
+        },
+        "raw_message_ids": {
+          "const": false
+        },
+        "raw_content": {
+          "const": false
+        }
+      }
+    },
+    "source_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority",
+        "refs",
+        "coverage"
+      ],
+      "properties": {
+        "authority": {
+          "enum": [
+            "PROJECT_CONTEXT",
+            "DRIVE_CANONICAL",
+            "GITHUB_CANONICAL",
+            "NOVOEXPORT_BOUND",
+            "MIXED"
+          ]
+        },
+        "refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "coverage": {
+          "enum": [
+            "BOUNDED",
+            "PARTIAL",
+            "TOKEN_VAZIO_RAW_EXPORT"
+          ]
+        }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "axis",
+          "state",
+          "summary"
+        ],
+        "properties": {
+          "axis": {
+            "enum": [
+              "L",
+              "O",
+              "T",
+              "P",
+              "C",
+              "R",
+              "I",
+              "E",
+              "A"
+            ]
+          },
+          "state": {
+            "enum": [
+              "OBSERVED",
+              "DERIVED",
+              "VERIFIED_LIMITED",
+              "TOKEN_VAZIO"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      }
+    },
+    "recurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum_occurrences",
+        "aliases",
+        "semantic_modes",
+        "basis"
+      ],
+      "properties": {
+        "minimum_occurrences": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
+        },
+        "semantic_modes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "LITERAL",
+              "SYMBOLIC",
+              "MATHEMATICAL",
+              "COMPUTATIONAL",
+              "GOVERNANCE",
+              "EPISTEMIC",
+              "PARABOLIC"
+            ]
+          }
+        },
+        "basis": {
+          "enum": [
+            "PROJECT_CONTEXT_OBSERVED",
+            "CANONICAL_SOURCE_BOUND",
+            "DERIVED_FROM_BOUND_SOURCES",
+            "TOKEN_VAZIO_IDENTITY"
+          ]
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "to",
+          "type",
+          "direction",
+          "validity",
+          "basis"
+        ],
+        "properties": {
+          "to": {
+            "type": "string",
+            "minLength": 3
+          },
+          "type": {
+            "enum": [
+              "SEMANTIC_RECURRENCE",
+              "METHOD_REUSE",
+              "SUPERSESSION",
+              "CONTRADICTION",
+              "ANALOGY",
+              "DEPENDENCY",
+              "GAP_TO_RESOLUTION",
+              "CROSS_DOMAIN_BRIDGE"
+            ]
+          },
+          "direction": {
+            "enum": [
+              "FORWARD",
+              "REVERSE",
+              "BIDIRECTIONAL",
+              "ORDERED_PAIR",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "validity": {
+            "enum": [
+              "INDEXED_SEMANTIC",
+              "VERIFIED_LIMITED",
+              "CONTRADICTED",
+              "TOKEN_VAZIO",
+              "CAUSAL_PROVEN"
+            ]
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      }
+    },
+    "omega7": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "DIRECT",
+          "INVERSE",
+          "DERIVATIVE",
+          "ANTIDERIVATIVE",
+          "RECURSIVE",
+          "ORTHOGONAL",
+          "INTEGRATIVE"
+        ]
+      }
+    },
+    "lenses": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "HEURISTIC",
+          "CORRELATIVE",
+          "LOGARITHMIC",
+          "RECLUSIVE",
+          "REVERSAL",
+          "EXPLORATORY",
+          "RESEARCH",
+          "ANOMALY",
+          "PARADOX",
+          "RAPPORT",
+          "ATTRACTOR_VECTORING_CANDIDATE"
+        ]
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gate_id",
+          "status",
+          "criterion",
+          "evidence_refs"
+        ],
+        "properties": {
+          "gate_id": {
+            "type": "string",
+            "pattern": "^G-[A-Z0-9_-]{2,64}$"
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "BLOCKED",
+              "TOKEN_VAZIO",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "criterion": {
+            "type": "string",
+            "minLength": 3
+          },
+          "evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 3
+            }
+          }
+        }
+      }
+    },
+    "token_vazio": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gap_id",
+          "class",
+          "missing_field",
+          "closure_test",
+          "urgency"
+        ],
+        "properties": {
+          "gap_id": {
+            "type": "string",
+            "pattern": "^TV-[A-Z0-9_-]{2,64}$"
+          },
+          "class": {
+            "enum": [
+              "TV-SOURCE",
+              "TV-IDENTITY",
+              "TV-RELATION",
+              "TV-EVIDENCE",
+              "TV-OPERATOR",
+              "TV-EXECUTION",
+              "TV-CONTEXT",
+              "TV-CLAIM"
+            ]
+          },
+          "missing_field": {
+            "type": "string",
+            "minLength": 3
+          },
+          "closure_test": {
+            "type": "string",
+            "minLength": 3
+          },
+          "urgency": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2",
+              "P3"
+            ]
+          }
+        }
+      }
+    },
+    "r3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "f_ok",
+        "f_gap",
+        "f_next"
+      ],
+      "properties": {
+        "f_ok": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "f_gap": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "f_next": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "claim_allowed": {
+      "const": false
+    }
+  }
+}
