@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/knowledge-ledger-event.public.v1.schema.json",
+  "title": "RAFAELIA Public Knowledge Ledger Event V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "seq",
+    "observed_at",
+    "source_alias",
+    "module",
+    "kind",
+    "summary",
+    "evidence_state",
+    "gaps",
+    "next_probe",
+    "claim_allowed"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_alias": {
+      "type": "string",
+      "pattern": "^PUB-[A-Z0-9_-]+$"
+    },
+    "predecessor": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "module": {
+      "type": "string",
+      "pattern": "^(00|01|02|03|04|05|06|07)_"
+    },
+    "kind": {
+      "enum": [
+        "SOURCE_OBSERVATION",
+        "RELATION",
+        "STATE_TRANSITION",
+        "GAP",
+        "RECEIPT",
+        "INDEX_POINTER",
+        "PRIVACY_CONTROL"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_state": {
+      "enum": [
+        "SOURCE_OBSERVED",
+        "EVIDENCED_SCOPED",
+        "TOKEN_VAZIO",
+        "SUPERSEDED",
+        "PRIVACY_REDACTED"
+      ]
+    },
+    "gaps": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_probe": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_allowed": {
+      "type": "boolean"
+    }
+  }
+}
