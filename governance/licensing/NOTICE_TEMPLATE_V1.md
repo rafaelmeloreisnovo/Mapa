@@ -60,4 +60,3 @@ Commercial rights require separate written authorization unless a specific compo
 ## F. No endorsement
 
 Attribution does not imply endorsement, sponsorship, partnership, certification, or approval by Rafael Melo Reis or RAFAELIA.
-
