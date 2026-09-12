@@ -92,3 +92,30 @@ Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W007-20260912.md`
 - Next useful operation is cross-export reconciliation; do not rescan the same bounded window.
 
 Receipt: `docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W008-20260912.md`
+
+
+## W009 — cumulative lineage reconciliation
+
+- Two private cumulative materializations were compared under the same privacy boundary.
+- Their source manifests preserve identical bytes, mtime_ns, and SHA-256 values for conversations-003.json through conversations-007.json.
+- The bounded conversation identity used in W007 is discoverable in normalized derivatives under both cumulative roots.
+- Therefore GAP:MARAPR:CROSS_EXPORT_IDENTITY is promoted only to PARTIAL_CLOSED_CUMULATIVE_LINEAGE.
+- This is not proof of identity across two independent OpenAI exports.
+- Residual state: TOKEN_VAZIO_DISTINCT_EXPORT_NOT_PROVEN.
+- The eight-module route remains unchanged; active gap families remain 2; claim_allowed=false.
+
+Receipt: docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W009-20260912.md
+
+
+## W010 — exact scoped cross-export identity
+
+- Historical Locator custody and current RAW000..050 are explicitly documented as different export materializations.
+- The privacy-preserving identity bridge uses PID = SHA256(UTF-8 canonical conversation_id).
+- Checkpoint 0078 reports 1800/1800 exact historical PID matches for RAW000..017.
+- The bounded Mar–Apr evidence used here is sourced from conversations-001 and conversations-005, both inside that proven range.
+- Therefore GAP:MARAPR:CROSS_EXPORT_IDENTITY is CLOSED_SCOPED_EXACT for the Mar–Apr source set used by this ledger.
+- This must not be generalized to global cross-export identity for the full corpus.
+- Active gap families reduce to 1: the bounded user-literal luneta/convex* question remains TOKEN_VAZIO_BOUNDED_NOT_OBSERVED.
+- claim_allowed=false remains unchanged.
+
+Receipt: docs/knowledge-ledger/receipts/REC-MARAPR-CONHECER-W010-20260912.md
