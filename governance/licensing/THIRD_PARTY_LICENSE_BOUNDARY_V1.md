@@ -73,4 +73,3 @@ A proibição comercial RAFAELIA não pode ser usada para retirar permissões co
 De modo inverso, uma licença permissiva de terceiro não concede automaticamente direitos comerciais sobre contribuições originais RAFAELIA separadamente licenciadas.
 
 O produto combinado deverá ser analisado por compatibilidade antes de distribuição.
-
