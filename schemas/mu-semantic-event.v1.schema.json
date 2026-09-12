@@ -1,0 +1,500 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rafaelmeloreisnovo/Mapa/schemas/mu-semantic-event.v1.schema.json",
+  "title": "RAFAELIA μ Semantic Event v1",
+  "description": "Append-only event envelope for reconstructing token occurrences, context-bound senses, semantic deltas, corrections, anomalies, and prompt/response lineage without rewriting prior history.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "sequence",
+    "observed_at",
+    "event_kind",
+    "actor",
+    "source",
+    "turn",
+    "lexemes",
+    "context",
+    "transition",
+    "provenance",
+    "reconstruction",
+    "epistemic_state",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.mu-semantic-event/v1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^MU-EVT-[0-9]{8}T[0-9]{6}Z-[A-Z0-9][A-Z0-9._-]{2,63}$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_kind": {
+      "enum": [
+        "PROMPT_OBSERVED",
+        "RESPONSE_OBSERVED",
+        "TOKEN_OCCURRENCE",
+        "SENSE_BINDING",
+        "SENSE_DELTA",
+        "SENSE_FORK",
+        "CORRECTION",
+        "ANOMALY",
+        "RECONSTRUCTION_CHECK"
+      ]
+    },
+    "actor": {
+      "enum": [
+        "USER",
+        "ASSISTANT",
+        "TOOL",
+        "SYSTEM",
+        "UNKNOWN"
+      ]
+    },
+    "pair_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_event_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "prev_event_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "locator",
+        "content_sha256",
+        "byte_length",
+        "raw_content_embedded"
+      ],
+      "properties": {
+        "system": {
+          "enum": [
+            "SESSION",
+            "GOOGLE_DRIVE",
+            "GITHUB",
+            "NOVOEXPORT",
+            "FILE",
+            "DATASET",
+            "OTHER"
+          ]
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 3
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byte_length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "raw_content_embedded": {
+          "const": false
+        }
+      }
+    },
+    "turn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "session_ref",
+        "turn_ordinal",
+        "role"
+      ],
+      "properties": {
+        "session_ref": {
+          "type": "string",
+          "minLength": 3
+        },
+        "turn_ordinal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "role": {
+          "enum": [
+            "USER",
+            "ASSISTANT",
+            "TOOL",
+            "SYSTEM",
+            "UNKNOWN"
+          ]
+        },
+        "prompt_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "response_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "lexemes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "token_id",
+          "surface",
+          "semantic_state"
+        ],
+        "properties": {
+          "token_id": {
+            "type": "string",
+            "pattern": "^TOK:[A-Za-z0-9._:-]{2,128}$"
+          },
+          "surface": {
+            "type": "string",
+            "minLength": 1
+          },
+          "normalized": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "span_start": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "span_end": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "sense_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "semantic_state": {
+            "enum": [
+              "BOUND",
+              "DECLARED_BY_AUTHOR",
+              "PROVISIONAL",
+              "TOKEN_VAZIO_SEMANTIC",
+              "CONTRADICTED",
+              "SUPERSEDED"
+            ]
+          },
+          "parse_only": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intent_ref",
+        "l9_routes",
+        "local_context_hash"
+      ],
+      "properties": {
+        "intent_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "l9_routes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "L",
+              "O",
+              "T",
+              "P",
+              "C",
+              "R",
+              "I",
+              "E",
+              "A"
+            ]
+          }
+        },
+        "local_context_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "expression_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "expression_ast_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "delta_kind",
+        "ordered",
+        "before_ref",
+        "after_ref",
+        "supersedes_event_id",
+        "commutativity"
+      ],
+      "properties": {
+        "delta_kind": {
+          "enum": [
+            "NONE",
+            "BIND",
+            "REFINE",
+            "FORK",
+            "CORRECT",
+            "CONTRADICT",
+            "DEPRECATE",
+            "RECONSTRUCT"
+          ]
+        },
+        "ordered": {
+          "type": "boolean"
+        },
+        "before_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "after_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "supersedes_event_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inverse_candidate_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "commutativity": {
+          "enum": [
+            "NOT_APPLICABLE",
+            "PROVEN",
+            "DISPROVEN",
+            "TOKEN_VAZIO"
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "reference"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "session",
+              "drive",
+              "github",
+              "file",
+              "dataset",
+              "receipt",
+              "other"
+            ]
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 3
+          },
+          "revision_or_hash": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "reconstruction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_ref",
+        "event_chain_refs",
+        "result",
+        "missing"
+      ],
+      "properties": {
+        "base_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "event_chain_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "expected_state_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "observed_state_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "result": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "TOKEN_VAZIO"
+          ]
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "anomaly": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "class",
+        "description",
+        "resolution_state"
+      ],
+      "properties": {
+        "class": {
+          "enum": [
+            "NONE",
+            "AMBIGUITY",
+            "CONTRADICTION",
+            "ORDER_REVERSAL",
+            "PARSE_COLLISION",
+            "SEMANTIC_DRIFT",
+            "UTOPIC_PARADOX_TAG",
+            "OTHER"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "resolution_state": {
+          "enum": [
+            "NOT_APPLICABLE",
+            "OPEN",
+            "RESOLVED",
+            "TOKEN_VAZIO"
+          ]
+        }
+      }
+    },
+    "epistemic_state": {
+      "enum": [
+        "OBSERVED",
+        "DECLARED_BY_AUTHOR",
+        "PROVISIONAL",
+        "VERIFIED_LIMITED",
+        "CONTRADICTED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "f_gap": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "f_next": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
