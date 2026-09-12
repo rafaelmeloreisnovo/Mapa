@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/knowledge-ledger-event.v1.schema.json",
+  "title": "RAFAELIA Knowledge Ledger Event V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id","seq","observed_at","source_ref","module","time_bucket","kind","summary","relations","evidence_state","gaps","next_probe","claim_allowed","hash_ref"],
+  "properties": {
+    "event_id":{"type":"string","minLength":1},
+    "seq":{"type":"integer","minimum":1},
+    "observed_at":{"type":"string","format":"date-time"},
+    "source_ref":{"type":"string","minLength":1},
+    "predecessor":{"type":["string","null"]},
+    "supersedes":{"type":["string","null"]},
+    "module":{"type":"string","pattern":"^(00|01|02|03|04|05|06|07)_"},
+    "time_bucket":{"type":"string","pattern":"^2025-(03|04)$|^2026-09$"},
+    "kind":{"enum":["SOURCE_OBSERVATION","RELATION","STATE_TRANSITION","GAP","RECEIPT","INDEX_POINTER"]},
+    "summary":{"type":"string","minLength":1},
+    "relations":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["type","target"],"properties":{"type":{"enum":["DERIVED_FROM","OBSERVED_IN","PRECEDES","SUCCEEDS","SAME_CONVERSATION_IF_EVIDENCED","SAME_TIME_BUCKET","RELATES_TO","INDEXES","EVIDENCES","SUPERSEDES","BLOCKS","ROUTES_TO"]},"target":{"type":"string","minLength":1}}}},
+    "evidence_state":{"enum":["SOURCE_OBSERVED","EVIDENCED_SCOPED","TOKEN_VAZIO","SUPERSEDED"]},
+    "gaps":{"type":"array","maxItems":3,"items":{"type":"string"}},
+    "next_probe":{"type":"string","minLength":1},
+    "claim_allowed":{"type":"boolean"},
+    "hash_ref":{"type":"string","minLength":1}
+  }
+}
