@@ -79,4 +79,3 @@ Se a auditoria comprovar violação material, o contrato poderá alocar ao infra
 O limite de US$ 1 da licença gratuita **não é automaticamente transportado** para contratos comerciais.
 
 Cada contrato comercial deverá definir limite de responsabilidade adequado ao valor, risco, seguro e natureza do negócio.
-
