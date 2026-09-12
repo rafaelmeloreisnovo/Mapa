@@ -1,0 +1,254 @@
+{
+  "schema_version": "rafaelia.replay-contract/v1",
+  "contract_id": "REPLAY-CONTRACT-V1-20260912",
+  "state": "IMPLEMENTED_DRAFT",
+  "claim_allowed": false,
+  "boundary": {
+    "base_state_ref": "START_HERE@current + Mapa/main + NOVOexport manifest/receipts",
+    "boundary_kind": "HYBRID",
+    "constants": [
+      {
+        "name": "TOKEN_VAZIO_NEVER_ZERO",
+        "value_state": "BOUND",
+        "value": true
+      },
+      {
+        "name": "REPLAY_BASE_HASH",
+        "value_state": "TOKEN_VAZIO",
+        "value": null
+      }
+    ],
+    "assumptions": [
+      "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+      "search miss does not imply source absence",
+      "historical snapshot state must not be silently interpreted as current state"
+    ],
+    "unresolved": [
+      "exact replay base hash for the chosen fixture",
+      "complete provider lineage for all NOVOexport shards"
+    ]
+  },
+  "reconstruction": {
+    "requested_level": "STRUCTURAL",
+    "metric": "STRUCTURE_EQUIVALENCE",
+    "result": "TOKEN_VAZIO",
+    "expected_hash": null,
+    "observed_hash": null,
+    "tolerance": 0,
+    "missing": [
+      "deterministic replay fixture",
+      "operator-version-locked execution receipt"
+    ]
+  },
+  "operator_versions": [
+    {
+      "operator_id": "DELTA",
+      "version": "semantic-dictionary/v1",
+      "binding_state": "BOUND",
+      "formal_binding": true,
+      "source_ref": "START_HERE + data/semantics/semantic-dictionary.v1.jsonl",
+      "semantics_hash": null,
+      "test_refs": []
+    },
+    {
+      "operator_id": "MU_EVENT",
+      "version": "rafaelia.mu-semantic-event/v1",
+      "binding_state": "BOUND",
+      "formal_binding": true,
+      "source_ref": "schemas/mu-semantic-event.v1.schema.json",
+      "semantics_hash": null,
+      "test_refs": []
+    },
+    {
+      "operator_id": "PLECT",
+      "version": "historical-drive-2025-11-23",
+      "binding_state": "PROVISIONAL_SOURCE_BOUND",
+      "formal_binding": false,
+      "source_ref": "Drive:1gTaV0QecNjsm53GSpLPQPhlKlcCCnXWt",
+      "semantics_hash": null,
+      "test_refs": []
+    }
+  ],
+  "event_order": {
+    "model": "CAUSAL_DAG",
+    "orphan_policy": "TOKEN_VAZIO",
+    "events": [
+      {
+        "event_id": "EV-START-HERE",
+        "parents": [],
+        "source_system": "GOOGLE_DRIVE",
+        "sequence": 0
+      },
+      {
+        "event_id": "EV-MU-SEMANTIC",
+        "parents": [
+          "EV-START-HERE"
+        ],
+        "source_system": "GITHUB_MAPA",
+        "sequence": 1
+      },
+      {
+        "event_id": "EV-REPLAY-CONTRACT",
+        "parents": [
+          "EV-MU-SEMANTIC"
+        ],
+        "source_system": "GITHUB_MAPA",
+        "sequence": 2
+      }
+    ]
+  },
+  "unicode_policy": {
+    "normalization": "PRESERVE_RAW_PLUS_NFC_INDEX",
+    "preserve_raw": true,
+    "codepoints_required": true,
+    "confusable_policy": "DISTINCT_UNLESS_ALIAS_PROVEN",
+    "alias_requires_evidence": true
+  },
+  "token_vazio_policy": {
+    "forbidden_coercions": [
+      "0",
+      "false",
+      "null",
+      "empty_string",
+      "missing",
+      "default"
+    ],
+    "search_miss_is_absence": false,
+    "missing_field_behavior": "TOKEN_VAZIO_OR_VALIDATION_ERROR"
+  },
+  "source_lineage": {
+    "lineage_id_required": true,
+    "dedupe_required": true,
+    "independence_rule": "ALIASES_OR_SHARED_ANCESTRY_DO_NOT_COUNT_AS_INDEPENDENT_EVIDENCE"
+  },
+  "dictionary_policy": {
+    "append_only": true,
+    "sense_version_required": true,
+    "correction_policy": "APPEND_PLUS_SUPERSEDES",
+    "conflict_policy": "FORK_UNTIL_RESOLVED"
+  },
+  "snapshot_policy": {
+    "canonical_source_ref": "START_HERE + canonical producer repository",
+    "source_revision_ref": null,
+    "snapshot_hash_required": true,
+    "stale_behavior": "MARK_STALE_DO_NOT_PROMOTE"
+  },
+  "exit_criteria": {
+    "max_active_gap_families": 3,
+    "stop_conditions": [
+      "requested reconstruction level reached with matching metric",
+      "next missing input is external/provider-controlled and explicitly TOKEN_VAZIO",
+      "no material delta after authoritative probe",
+      "safety/privacy gate blocks further retention"
+    ]
+  },
+  "falsification": {
+    "negative_controls_required": true,
+    "counterexample_policy": "PRESERVE_AND_DOWNGRADE_OR_REFUTE"
+  },
+  "privacy": {
+    "raw_content_default": false,
+    "pointer_hash_allowed": true,
+    "reconstructibility_does_not_imply_raw_retention": true
+  },
+  "cultural_provenance": {
+    "parable_role": "PEDAGOGICAL_LENS_NOT_TRADITIONAL_AUTHORITY",
+    "official_tradition_claim": false
+  },
+  "uncertainty": {
+    "weighted_paths_state": "TOKEN_VAZIO_CALIBRATION",
+    "calibration_required_before_weights": true
+  },
+  "human_validation": {
+    "state": "ABORTED_UNTIL_ETHICS",
+    "ethics_review_required": true,
+    "consent_required": true
+  },
+  "operator_observations": [
+    {
+      "operator_id": "PLECT",
+      "historical_name": "Permutation-Linked Correlated Topology",
+      "source_ref": "Drive:1gTaV0QecNjsm53GSpLPQPhlKlcCCnXWt",
+      "source_bound": true,
+      "formal_binding": false,
+      "candidate_semantics": "weighted aggregation of topology-defined permutations; historical conceptual formulation only"
+    }
+  ],
+  "source_observations": [
+    {
+      "source_id": "START-HERE",
+      "role": "canonical router and append-only receipts",
+      "locator": "Drive:1rczmzAyJfKbh_hf1eRqnM9_v4VIqS4RwA1RrbwyZzr4",
+      "state": "OBSERVED"
+    },
+    {
+      "source_id": "NOVOEXPORT-RECEIPT-000-020",
+      "role": "anti-promotion and raw-shard lineage rules",
+      "locator": "file_library:codex_000_020_ingestion_receipt.v1.json",
+      "state": "OBSERVED_PARTIAL"
+    },
+    {
+      "source_id": "MAPA-OP-ONTOLOGY",
+      "role": "gap classes and unresolved editorial records",
+      "locator": "data/ontology/rafaelia-operational-ontology.v1.json",
+      "state": "OBSERVED"
+    },
+    {
+      "source_id": "PLECT-HISTORICAL",
+      "role": "historical operator formulation",
+      "locator": "Drive:1gTaV0QecNjsm53GSpLPQPhlKlcCCnXWt",
+      "state": "SOURCE_BOUND_NOT_FORMALLY_BOUND"
+    }
+  ],
+  "application_status": [
+    {
+      "target_record": "R-ANTIDERIVATIVE-BOUNDARY",
+      "prior_editorial_state": "IGNORED",
+      "overlay_state": "CONTRACT_MATERIALIZED_DRAFT",
+      "epistemic_state": "TOKEN_VAZIO",
+      "remaining_gate": "execute deterministic boundary-sensitive replay fixture"
+    },
+    {
+      "target_record": "R-SOURCE-INDEPENDENCE",
+      "prior_editorial_state": "SUGGESTED",
+      "overlay_state": "CONTRACT_MATERIALIZED_DRAFT",
+      "epistemic_state": "TOKEN_VAZIO",
+      "remaining_gate": "complete lineage_id authority across sources"
+    },
+    {
+      "target_record": "R-VECTOR-CORPUS",
+      "prior_editorial_state": "WITHHELD",
+      "overlay_state": "ACCESS_BOUND_CONTRACT_APPLIED",
+      "epistemic_state": "TOKEN_VAZIO",
+      "remaining_gate": "authorized chunk manifest without raw private publication"
+    },
+    {
+      "target_record": "R-SEMANTIC-HUMAN-STUDY",
+      "prior_editorial_state": "ABORTED",
+      "overlay_state": "ABORTED_PRESERVED",
+      "epistemic_state": "TOKEN_VAZIO",
+      "remaining_gate": "independent ethics/privacy review + consent protocol"
+    },
+    {
+      "target_record": "R-WEIGHTS-CALIBRATION",
+      "prior_editorial_state": "POTENTIAL",
+      "overlay_state": "WEIGHTS_DISABLED_PENDING_CALIBRATION",
+      "epistemic_state": "TOKEN_VAZIO",
+      "remaining_gate": "blinded benchmark and ground truth"
+    },
+    {
+      "target_record": "R-BOOTSTRAP-UQ",
+      "prior_editorial_state": "SUGGESTED",
+      "overlay_state": "UNCERTAINTY_GATE_DECLARED",
+      "epistemic_state": "TOKEN_VAZIO",
+      "remaining_gate": "deterministic fixed-seed fixture"
+    },
+    {
+      "target_record": "R-FRACTAL-DIMENSION",
+      "prior_editorial_state": "IGNORED",
+      "overlay_state": "FRONTIER_HYPOTHESIS_PRESERVED",
+      "epistemic_state": "TOKEN_VAZIO",
+      "remaining_gate": "estimator + surrogate null + preregistered scale interval"
+    }
+  ]
+}

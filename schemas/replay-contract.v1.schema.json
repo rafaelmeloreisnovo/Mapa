@@ -1,0 +1,619 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/replay-contract.v1.schema.json",
+  "title": "RAFAELIA Replay Contract V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "state",
+    "claim_allowed",
+    "boundary",
+    "reconstruction",
+    "operator_versions",
+    "event_order",
+    "unicode_policy",
+    "token_vazio_policy",
+    "source_lineage",
+    "dictionary_policy",
+    "snapshot_policy",
+    "exit_criteria",
+    "falsification",
+    "privacy",
+    "cultural_provenance",
+    "uncertainty",
+    "human_validation",
+    "operator_observations",
+    "source_observations",
+    "application_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.replay-contract/v1"
+    },
+    "contract_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "IMPLEMENTED_DRAFT",
+        "VERIFIED_LIMITED",
+        "PASS"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_state_ref",
+        "boundary_kind",
+        "constants",
+        "assumptions",
+        "unresolved"
+      ],
+      "properties": {
+        "base_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boundary_kind": {
+          "enum": [
+            "SESSION_ORIGIN",
+            "SNAPSHOT",
+            "COMMIT",
+            "DATASET",
+            "HYBRID"
+          ]
+        },
+        "constants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "value_state"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value_state": {
+                "enum": [
+                  "BOUND",
+                  "TOKEN_VAZIO"
+                ]
+              },
+              "value": {}
+            }
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unresolved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "reconstruction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested_level",
+        "metric",
+        "result",
+        "expected_hash",
+        "observed_hash",
+        "tolerance",
+        "missing"
+      ],
+      "properties": {
+        "requested_level": {
+          "enum": [
+            "EXACT_BYTES",
+            "STRUCTURAL",
+            "SEMANTIC",
+            "PROVENANCE_ONLY"
+          ]
+        },
+        "metric": {
+          "enum": [
+            "SHA256_EQUALITY",
+            "STRUCTURE_EQUIVALENCE",
+            "SEMANTIC_EQUIVALENCE",
+            "LINEAGE_RESOLUTION"
+          ]
+        },
+        "result": {
+          "enum": [
+            "PASS_EXACT",
+            "PASS_STRUCTURAL",
+            "PASS_SEMANTIC",
+            "PASS_PROVENANCE",
+            "PARTIAL",
+            "FAIL",
+            "TOKEN_VAZIO"
+          ]
+        },
+        "expected_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observed_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tolerance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "operator_versions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "operator_id",
+          "version",
+          "binding_state",
+          "formal_binding",
+          "source_ref"
+        ],
+        "properties": {
+          "operator_id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "binding_state": {
+            "enum": [
+              "BOUND",
+              "PROVISIONAL_SOURCE_BOUND",
+              "TOKEN_VAZIO_FORMAL_BINDING"
+            ]
+          },
+          "formal_binding": {
+            "type": "boolean"
+          },
+          "source_ref": {
+            "type": "string"
+          },
+          "semantics_hash": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "test_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "event_order": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "events",
+        "orphan_policy"
+      ],
+      "properties": {
+        "model": {
+          "enum": [
+            "TOTAL_ORDER",
+            "PARTIAL_ORDER",
+            "CAUSAL_DAG"
+          ]
+        },
+        "orphan_policy": {
+          "enum": [
+            "REJECT",
+            "TOKEN_VAZIO"
+          ]
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "event_id",
+              "parents",
+              "source_system"
+            ],
+            "properties": {
+              "event_id": {
+                "type": "string"
+              },
+              "parents": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_system": {
+                "type": "string"
+              },
+              "sequence": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "unicode_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "normalization",
+        "preserve_raw",
+        "codepoints_required",
+        "confusable_policy",
+        "alias_requires_evidence"
+      ],
+      "properties": {
+        "normalization": {
+          "const": "PRESERVE_RAW_PLUS_NFC_INDEX"
+        },
+        "preserve_raw": {
+          "const": true
+        },
+        "codepoints_required": {
+          "const": true
+        },
+        "confusable_policy": {
+          "const": "DISTINCT_UNLESS_ALIAS_PROVEN"
+        },
+        "alias_requires_evidence": {
+          "const": true
+        }
+      }
+    },
+    "token_vazio_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "forbidden_coercions",
+        "search_miss_is_absence",
+        "missing_field_behavior"
+      ],
+      "properties": {
+        "forbidden_coercions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "0",
+              "false",
+              "null",
+              "empty_string",
+              "missing",
+              "default"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "search_miss_is_absence": {
+          "const": false
+        },
+        "missing_field_behavior": {
+          "enum": [
+            "TOKEN_VAZIO",
+            "VALIDATION_ERROR",
+            "TOKEN_VAZIO_OR_VALIDATION_ERROR"
+          ]
+        }
+      }
+    },
+    "source_lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lineage_id_required",
+        "dedupe_required",
+        "independence_rule"
+      ],
+      "properties": {
+        "lineage_id_required": {
+          "const": true
+        },
+        "dedupe_required": {
+          "const": true
+        },
+        "independence_rule": {
+          "const": "ALIASES_OR_SHARED_ANCESTRY_DO_NOT_COUNT_AS_INDEPENDENT_EVIDENCE"
+        }
+      }
+    },
+    "dictionary_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "append_only",
+        "sense_version_required",
+        "correction_policy",
+        "conflict_policy"
+      ],
+      "properties": {
+        "append_only": {
+          "const": true
+        },
+        "sense_version_required": {
+          "const": true
+        },
+        "correction_policy": {
+          "const": "APPEND_PLUS_SUPERSEDES"
+        },
+        "conflict_policy": {
+          "const": "FORK_UNTIL_RESOLVED"
+        }
+      }
+    },
+    "snapshot_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_source_ref",
+        "source_revision_ref",
+        "snapshot_hash_required",
+        "stale_behavior"
+      ],
+      "properties": {
+        "canonical_source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_revision_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "snapshot_hash_required": {
+          "const": true
+        },
+        "stale_behavior": {
+          "const": "MARK_STALE_DO_NOT_PROMOTE"
+        }
+      }
+    },
+    "exit_criteria": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_active_gap_families",
+        "stop_conditions"
+      ],
+      "properties": {
+        "max_active_gap_families": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stop_conditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "falsification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "negative_controls_required",
+        "counterexample_policy"
+      ],
+      "properties": {
+        "negative_controls_required": {
+          "const": true
+        },
+        "counterexample_policy": {
+          "const": "PRESERVE_AND_DOWNGRADE_OR_REFUTE"
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_content_default",
+        "pointer_hash_allowed",
+        "reconstructibility_does_not_imply_raw_retention"
+      ],
+      "properties": {
+        "raw_content_default": {
+          "const": false
+        },
+        "pointer_hash_allowed": {
+          "const": true
+        },
+        "reconstructibility_does_not_imply_raw_retention": {
+          "const": true
+        }
+      }
+    },
+    "cultural_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parable_role",
+        "official_tradition_claim"
+      ],
+      "properties": {
+        "parable_role": {
+          "const": "PEDAGOGICAL_LENS_NOT_TRADITIONAL_AUTHORITY"
+        },
+        "official_tradition_claim": {
+          "const": false
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "weighted_paths_state",
+        "calibration_required_before_weights"
+      ],
+      "properties": {
+        "weighted_paths_state": {
+          "enum": [
+            "DISABLED",
+            "TOKEN_VAZIO_CALIBRATION",
+            "CALIBRATED"
+          ]
+        },
+        "calibration_required_before_weights": {
+          "const": true
+        }
+      }
+    },
+    "human_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "ethics_review_required",
+        "consent_required"
+      ],
+      "properties": {
+        "state": {
+          "const": "ABORTED_UNTIL_ETHICS"
+        },
+        "ethics_review_required": {
+          "const": true
+        },
+        "consent_required": {
+          "const": true
+        }
+      }
+    },
+    "operator_observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "operator_id",
+          "historical_name",
+          "source_ref",
+          "source_bound",
+          "formal_binding"
+        ],
+        "properties": {
+          "operator_id": {
+            "type": "string"
+          },
+          "historical_name": {
+            "type": "string"
+          },
+          "source_ref": {
+            "type": "string"
+          },
+          "source_bound": {
+            "type": "boolean"
+          },
+          "formal_binding": {
+            "type": "boolean"
+          },
+          "candidate_semantics": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "role",
+          "locator",
+          "state"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "application_status": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "target_record",
+          "prior_editorial_state",
+          "overlay_state",
+          "epistemic_state",
+          "remaining_gate"
+        ],
+        "properties": {
+          "target_record": {
+            "type": "string"
+          },
+          "prior_editorial_state": {
+            "type": "string"
+          },
+          "overlay_state": {
+            "type": "string"
+          },
+          "epistemic_state": {
+            "type": "string"
+          },
+          "remaining_gate": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
