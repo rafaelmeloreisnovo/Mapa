@@ -10,7 +10,7 @@
 A Constituição brasileira reconhece ao autor direito exclusivo de utilização, publicação ou reprodução e assegura fiscalização do aproveitamento econômico da obra.
 
 Fonte oficial:  
-https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+<https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm>
 
 ### Art. 60, § 4º, IV
 
@@ -31,7 +31,7 @@ Pontos centrais:
 - arts. 101-108: sanções civis, suspensão, apreensão, indenização e correção de omissão de autoria.
 
 Fonte oficial:  
-https://www.planalto.gov.br/ccivil_03/leis/l9610.htm
+<https://www.planalto.gov.br/ccivil_03/leis/l9610.htm>
 
 ## 3. Lei nº 9.609/1998 — Software
 
@@ -40,7 +40,7 @@ O art. 9º estabelece que o uso de programa de computador no Brasil será objeto
 O art. 12 tipifica violações de direito autoral de software e agrava situações de reprodução/comercialização não autorizada.
 
 Fonte oficial:  
-https://www.planalto.gov.br/ccivil_03/leis/l9609.htm
+<https://www.planalto.gov.br/ccivil_03/leis/l9609.htm>
 
 ## 4. Código Civil
 
@@ -57,14 +57,14 @@ Pontos usados no desenho contratual:
 - art. 422: probidade e boa-fé.
 
 Fonte oficial:  
-https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm
+<https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm>
 
 ## 5. Código de Processo Civil
 
 O art. 85 disciplina honorários sucumbenciais e os atribui por decisão judicial ao advogado da parte vencedora, segundo os critérios legais.
 
 Fonte oficial:  
-https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm
+<https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm>
 
 ## 6. STJ — honorários privados e custos de enforcement
 
@@ -73,7 +73,7 @@ https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm
 REsp 1.134.725/MG, Terceira Turma, 2011, admitiu em contexto específico honorários contratuais como perdas e danos.
 
 Fonte oficial STJ:  
-https://www.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ITA?dt=20110624&formato=HTML&nreg=200900671480&salvar=false&seq=1069449&tipo=0
+<https://www.stj.jus.br/websecstj/cgi/revista/REJ.cgi/ITA?dt=20110624&formato=HTML&nreg=200900671480&salvar=false&seq=1069449&tipo=0>
 
 ### Posição recente relevante
 
@@ -108,8 +108,8 @@ O art. 6bis da Convenção de Berna reconhece, independentemente dos direitos ec
 
 Fontes:
 
-- WIPO Lex — Berne Convention, Art. 6bis: https://www.wipo.int/wipolex/en/text/577519
-- WIPO — Summary of the Berne Convention: https://www.wipo.int/en/web/treaties/ip/berne/summary_berne
+- WIPO Lex — Berne Convention, Art. 6bis: <https://www.wipo.int/wipolex/en/text/577519>
+- WIPO — Summary of the Berne Convention: <https://www.wipo.int/en/web/treaties/ip/berne/summary_berne>
 
 ## 9. Microsoft — referência estrutural, não fonte normativa
 
@@ -129,9 +129,9 @@ Em Termos Padrão de Aplicativos Microsoft, há exemplo estrutural de limite de 
 
 Fontes oficiais:
 
-- Microsoft Services Agreement (Brasil): https://www.microsoft.com/pt-BR/servicesagreement
-- Microsoft Developer Agreement: https://learn.microsoft.com/pt-br/legal/mdsa
-- Microsoft Product Terms: https://www.microsoft.com/licensing/terms/
+- Microsoft Services Agreement (Brasil): <https://www.microsoft.com/pt-BR/servicesagreement>
+- Microsoft Developer Agreement: <https://learn.microsoft.com/pt-br/legal/mdsa>
+- Microsoft Product Terms: <https://www.microsoft.com/licensing/terms/>
 
 A RAFAELIA não copia os termos Microsoft; usa somente padrões abstratos de organização contratual.
 
