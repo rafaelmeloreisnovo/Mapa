@@ -1,0 +1,111 @@
+{
+  "schema": "rafaelia.forensic-origin-trace/v1",
+  "version": "1.0.0",
+  "status": "IMPLEMENTED_DRAFT",
+  "claim_allowed": false,
+  "purpose": "Trace the first source-supported blocker before editorial or scientific promotion.",
+  "invariants": [
+    "SOURCE != ARTEFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != ZERO",
+    "EDITORIAL_STATUS != ROOT_CAUSE",
+    "FIRST_OBSERVED_BLOCKER != ROOT_CAUSE_PROVEN",
+    "NOT_FOUND != CENSORED",
+    "SHARED_LINEAGE != INDEPENDENT_REPLICATION",
+    "NO_PROMOTION_BEFORE_TRACEBACK"
+  ],
+  "phases": [
+    "READINESS",
+    "SCENE_SEPARATION",
+    "TRACEBACK",
+    "TIMELINE_NORMALIZATION",
+    "CONFLICT_TREATMENT",
+    "RECONSTRUCTION",
+    "CORROBORATION",
+    "REVIEW"
+  ],
+  "overlay_states": [
+    "SOURCE_BOUNDED",
+    "FIRST_BLOCKER_IDENTIFIED",
+    "ROOT_CAUSE_NOT_PROVEN",
+    "ROOT_CAUSE_SUPPORTED",
+    "CONFOUNDED",
+    "BLOCKED_BY_ACCESS",
+    "BLOCKED_BY_GOVERNANCE"
+  ],
+  "gap_root_map": {
+    "TV-CODE": "MISSING_EXECUTABLE_PREREQUISITE",
+    "TV-DATA": "MISSING_OBSERVATION_OR_PREREQUISITE",
+    "TV-BOUNDARY": "MISSING_BOUNDARY_CONTRACT",
+    "TV-TEST": "MISSING_DISCRIMINATING_TEST",
+    "TV-INDEPENDENCE": "MISSING_LINEAGE_OR_REPLICATION_AUTHORITY",
+    "TV-ACCESS": "ACCESS_BOUNDARY_UNRESOLVED",
+    "TV-PROVENANCE": "MISSING_SOURCE_CHAIN",
+    "TV-DEF": "MISSING_DEFINITION",
+    "TV-RECON": "MISSING_RECONSTRUCTION_METRIC",
+    "TV-LOOP": "MISSING_STOP_CONDITION",
+    "TV-DOMAIN": "MISSING_DOMAIN",
+    "TV-IRREDUCIBLE": "CURRENTLY_IRREDUCIBLE"
+  },
+  "record_overrides": {
+    "R-DAG-CAUSAL": {
+      "first_blocker": "NO_EXECUTABLE_CAUSAL_DAG_REGISTERED",
+      "required_evidence": "versioned DAG schema plus negative-control fixture",
+      "discriminating_test": "engine distinguishes observed association from intervention"
+    },
+    "R-WEIGHTS-CALIBRATION": {
+      "first_blocker": "NO_BLINDED_BENCHMARK_OR_GROUND_TRUTH",
+      "required_evidence": "blinded benchmark, baseline models and pre-registered target metric",
+      "discriminating_test": "weights retain performance outside calibration set"
+    },
+    "R-BOOTSTRAP-UQ": {
+      "first_blocker": "NO_CANONICAL_FIXED_SEED_FIXTURE",
+      "required_evidence": "deterministic bootstrap implementation and frozen fixture",
+      "discriminating_test": "coverage remains within pre-registered tolerance"
+    },
+    "R-ANTIDERIVATIVE-BOUNDARY": {
+      "first_blocker": "NO_CANONICAL_BOUNDARY_CONTRACT",
+      "required_evidence": "boundary schema, constants, origin and ambiguity report",
+      "discriminating_test": "incompatible admissible boundaries cannot be promoted as same reconstruction"
+    },
+    "R-LOGLOG-COMPETITION": {
+      "first_blocker": "NO_OUT_OF_SAMPLE_MODEL_COMPETITION_FIXTURE",
+      "required_evidence": "frozen synthetic/real fixtures with power-law alternatives",
+      "discriminating_test": "compare power-law against exponential, lognormal and segmented alternatives"
+    },
+    "R-SOURCE-INDEPENDENCE": {
+      "first_blocker": "INCOMPLETE_LINEAGE_IDENTIFIERS",
+      "required_evidence": "lineage_id authority and deduplication rules across repositories",
+      "discriminating_test": "known shared dataset is never counted as independent replication"
+    },
+    "R-VECTOR-CORPUS": {
+      "first_blocker": "AUTHORIZED_CHUNK_MANIFEST_MISSING",
+      "required_evidence": "privacy-preserving authorized manifest with order and hash chain",
+      "discriminating_test": "declared corpus reconstructs from authorized chunks without exposing private content"
+    },
+    "R-SEMANTIC-HUMAN-STUDY": {
+      "first_blocker": "ETHICS_CONSENT_PRIVACY_PREREQUISITES_MISSING",
+      "required_evidence": "independent ethics/privacy approval plus consent flow before participant data",
+      "discriminating_test": "do not execute study until governance prerequisite is satisfied"
+    },
+    "R-FRACTAL-DIMENSION": {
+      "first_blocker": "MEASUREMENT_PROTOCOL_MISSING",
+      "required_evidence": "estimator, surrogate null, pre-registered scale interval and replicated measurement",
+      "discriminating_test": "scaling survives surrogate data and alternative estimator comparison"
+    },
+    "R-EXTERNAL-VALIDATION": {
+      "first_blocker": "NO_INDEPENDENT_RUN_OR_THIRD_PARTY_EVIDENCE",
+      "required_evidence": "frozen reproduction bundle with acceptance criteria",
+      "discriminating_test": "independent run reproduces the pre-registered effect"
+    }
+  },
+  "external_method_reference": {
+    "name": "The Enhanced Digital Investigation Process Model",
+    "authors": [
+      "Venansius Baryamureeba",
+      "Florence Tushabe"
+    ],
+    "venue": "DFRWS USA 2004",
+    "use": "methodological inspiration for separation, traceback and reconstruction only",
+    "code_copied": false
+  }
+}
