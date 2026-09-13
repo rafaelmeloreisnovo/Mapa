@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "service_id": "RAFAELIA-KNOWLEDGE-WORK-HOUSE-V1",
+  "generated_at": "2026-09-13T00:05:00-03:00",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "state": "DRAFT_AUDITABLE",
+  "claim_allowed": false,
+  "route": ["START_HERE","READ","INDEX","CONTEXT","ROUTE","ACT","RECEIPT","LEARN"],
+  "guards": [
+    "reconstructibility",
+    "provenance",
+    "context",
+    "evidence",
+    "contradiction",
+    "uncertainty",
+    "reproduction",
+    "rollback"
+  ],
+  "invariants": [
+    "SOURCE!=ARTIFACT",
+    "ARTIFACT!=EXECUTION",
+    "EXECUTION!=EVIDENCE",
+    "EVIDENCE!=CLAIM",
+    "TOKEN_VAZIO!=0",
+    "REPRODUCED!=UNIVERSAL_TRUTH",
+    "ROLLBACK_READY!=ROLLBACK_EXECUTED"
+  ],
+  "promotion_policy": "FAIL_CLOSED",
+  "human_surface": {
+    "intake": "intent/question/task/material",
+    "source_shelf": "typed pointers only",
+    "workbench": "active bounded work unit",
+    "evidence_room": "tests/runs/data/hashes/receipts",
+    "conflict_room": "contradictions/supersession",
+    "uncertainty_room": "TOKEN_VAZIO/BLOCKED/PARTIAL",
+    "reproduction_lab": "procedure/environment/replay",
+    "rollback_archive": "predecessor/successor/supersedes",
+    "house_map": "cross-repo index and routes"
+  },
+  "next": "validate units with scripts/validate_knowledge_work_house.py and append receipt only on material delta"
+}
