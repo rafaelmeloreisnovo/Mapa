@@ -1,0 +1,56 @@
+{
+  "schema": "rafaelia.forensic-origin-ci-receipt/v1",
+  "observed_at": "2026-09-12",
+  "pr": 617,
+  "head_before_fix": "fe1e34f36b4367e3712e1d7c06ea22c661e57120",
+  "claim_allowed": false,
+  "findings": [
+    {
+      "workflow": "CI",
+      "run_id": 34718476025,
+      "classification": "DELTA_CAUSED_FORMATTING_REGRESSION",
+      "first_observed_blocker": "markdownlint MD022/MD032 in FORENSIC_ORIGIN_TRACE_V1.md",
+      "action": "fixed blank-line formatting only",
+      "root_cause_state": "SOURCE_SUPPORTED_LOCAL_CAUSE"
+    },
+    {
+      "workflow": "Provider Protection Gate",
+      "run_id": 34718475968,
+      "classification": "EXTERNAL_PROVIDER_CONFIGURATION_BLOCKER",
+      "first_observed_blocker": "no active ruleset applies to default branch main",
+      "action": "do not bypass; preserve fail-closed gate",
+      "root_cause_state": "ROOT_CAUSE_NOT_PROVEN"
+    },
+    {
+      "workflow": "Server Merge Enforcement Assurance",
+      "run_id": 34718475963,
+      "classification": "EXTERNAL_SERVER_ENFORCEMENT_BLOCKER",
+      "first_observed_blocker": "required status checks not enforced / none observed server-side",
+      "action": "do not alter forensic code to mask provider state",
+      "root_cause_state": "ROOT_CAUSE_NOT_PROVEN"
+    },
+    {
+      "workflow": "CodeScan",
+      "run_id": 34718475975,
+      "classification": "EXTERNAL_CREDENTIAL_BLOCKER",
+      "first_observed_blocker": "CODESCAN_AUTH_TOKEN, CODESCAN_ORGANIZATION_KEY and CODESCAN_PROJECT_KEY missing",
+      "action": "do not fabricate or expose credentials",
+      "root_cause_state": "ROOT_CAUSE_NOT_PROVEN"
+    },
+    {
+      "workflow": "RAFAELIA Promotion Control V1",
+      "run_id": 34718475995,
+      "classification": "EXPECTED_GOVERNANCE_BLOCK",
+      "first_observed_blocker": "draft PR and independent approval missing",
+      "action": "keep draft; no promotion",
+      "root_cause_state": "EXPECTED_POLICY_BEHAVIOR"
+    }
+  ],
+  "invariants": [
+    "DELTA_CAUSED_FAILURE must be fixed",
+    "EXTERNAL_CONFIGURATION_FAILURE must not be hidden by code change",
+    "EXPECTED_GOVERNANCE_BLOCK is not a regression",
+    "TOKEN_VAZIO != ZERO",
+    "claim_allowed=false"
+  ]
+}

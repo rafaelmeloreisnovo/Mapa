@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.gap-scope-lineage-receipt/v1",
+  "date": "2026-09-12",
+  "pr": 617,
+  "claim_allowed": false,
+  "finding_state": "SOURCE_SUPPORTED_PATTERN_NOT_GLOBAL_ROOT_CAUSE",
+  "systemic_pattern": [
+    "STALE_ONTOLOGY_SNAPSHOT",
+    "UNSCOPED_GAP_IDENTIFIER_REUSE",
+    "CLOSURE_LABEL_SEMANTIC_OVERLOAD"
+  ],
+  "source_refs": [
+    {
+      "path": "auditoria/FASE_4_COMPLETION_REPORT_20260822.md",
+      "sha": "f3b730e0ed9d71acf92a7dfe9565b2f6df530872"
+    },
+    {
+      "path": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+      "sha": "980985f6bdcdcb24682c82adf2a1711f465eacbb"
+    },
+    {
+      "path": "docs/canonical/2026-09-12/REPLAY_CONTRACT_V1.md",
+      "sha": "327ecef09eb2fae62b101c1b2945f0c3db2eebc4"
+    },
+    {
+      "path": "scripts/freeze_calibration_weights.py",
+      "sha": "1a28fa9cc97c34102ade609225fa74c48941fa01"
+    },
+    {
+      "path": "scripts/test_loglog_benchmark.py",
+      "sha": "aa115c06fb60819fd0908c4551b18eadf45ade55"
+    },
+    {
+      "path": "data/control-plane/lineage_authority_v1.json",
+      "sha": "cca25fad2467c75413fb7eac3cf85752bea7db71"
+    },
+    {
+      "path": "data/fixtures/FIXTURE_MANIFEST_v1.json",
+      "sha": "12aca39ac7ab39946baadcde1383c2659254a80c"
+    }
+  ],
+  "reconciliations": {
+    "R-DAG-CAUSAL": "original implementation gap resolved at engine/test scope",
+    "R-BOOTSTRAP-UQ": "engine scope PASS; replay reconstruction fixture open",
+    "R-ANTIDERIVATIVE-BOUNDARY": "boundary schema PASS; replay execution open",
+    "R-SOURCE-INDEPENDENCE": "six-repo scope PASS; all-referenced-source replay scope open",
+    "R-WEIGHTS-CALIBRATION": "weight artifact freeze PASS; blinded calibration open",
+    "R-LOGLOG-COMPETITION": "determinism gate PASS; broader competition execution open",
+    "R-FRACTAL-DIMENSION": "null fixture present; estimator falsifier failed tolerance",
+    "R-VECTOR-CORPUS": "federation fixture present; authorized corpus access remains open",
+    "R-SEMANTIC-HUMAN-STUDY": "governance block preserved",
+    "R-EXTERNAL-VALIDATION": "internal federation PASS does not equal independent external reproduction"
+  },
+  "invariants": [
+    "PASS_SCOPE_A != PASS_SCOPE_B",
+    "LOCKED_WEIGHTS != CALIBRATED_WEIGHTS",
+    "FROZEN_FIXTURE != COMPLETE_CORPUS",
+    "DETERMINISTIC_BENCHMARK != MODEL_COMPETITION",
+    "INTERNAL_FEDERATION_PASS != INDEPENDENT_EXTERNAL_VALIDATION",
+    "TOKEN_VAZIO != ZERO"
+  ],
+  "f_next": "execute scoped trace; preserve narrow PASS states; work only successor open scopes"
+}

@@ -1,0 +1,336 @@
+{
+  "schema": "rafaelia.gap-scope-lineage/v1",
+  "version": "1.0.0",
+  "generated_at": "2026-09-12",
+  "status": "IMPLEMENTED_DRAFT",
+  "claim_allowed": false,
+  "purpose": "Prevent apparent epistemic regression by separating historical gap IDs into versioned scopes.",
+  "gap_key": "(record_id, scope_id, contract_version, evidence_cutoff)",
+  "invariants": [
+    "GAP_ID_WITHOUT_SCOPE != STABLE_STATE_ID",
+    "PASS_SCOPE_A != PASS_SCOPE_B",
+    "CLOSED_SCOPE_A + EXPANDED_SCOPE_B -> NEW_SCOPED_GAP_NOT_REOPENED_OLD_GAP",
+    "LOCKED_WEIGHTS != CALIBRATED_WEIGHTS",
+    "FROZEN_FIXTURE != COMPLETE_CORPUS",
+    "DETERMINISTIC_BENCHMARK != MODEL_COMPETITION",
+    "INTERNAL_FEDERATION_PASS != INDEPENDENT_EXTERNAL_VALIDATION",
+    "SOURCE != ARTEFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != ZERO"
+  ],
+  "systemic_pattern": {
+    "state": "SOURCE_SUPPORTED_PATTERN_NOT_GLOBAL_ROOT_CAUSE",
+    "components": [
+      "STALE_ONTOLOGY_SNAPSHOT",
+      "UNSCOPED_GAP_IDENTIFIER_REUSE",
+      "CLOSURE_LABEL_SEMANTIC_OVERLOAD"
+    ],
+    "explanation": "Historical records remained append-only while later closures and stricter successor contracts reused broad gap names. Without a scope key, a valid PASS at one scope can look like a later regression at another scope."
+  },
+  "records": [
+    {
+      "record_id": "R-DAG-CAUSAL",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_CODE",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "ENGINE_SYNTHETIC_FIXTURE",
+          "evidence_cutoff": "2026-08-24",
+          "state": "PASS",
+          "source_refs": [
+            "data/analysis/dag_causal_engine.py",
+            "tests/test_dag_causal.py",
+            "auditoria/FASE_4_COMPLETION_REPORT_20260822.md",
+            "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md"
+          ],
+          "evidence": "15 unit tests plus standalone gate reported PASS"
+        }
+      ],
+      "current_scope_state": "RESOLVED_AT_ENGINE_TEST_SCOPE",
+      "current_blocker": null,
+      "reconciliation": "The original missing-code gap is resolved at engine/test scope. This does not promote any domain-specific causal claim.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-BOOTSTRAP-UQ",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_CODE",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "BOOTSTRAP_ENGINE",
+          "evidence_cutoff": "2026-08-24",
+          "state": "PASS",
+          "source_refs": [
+            "data/analysis/bootstrap_uq.py",
+            "tests/test_bootstrap_uq.py",
+            "auditoria/FASE_4_COMPLETION_REPORT_20260822.md"
+          ],
+          "evidence": "17 unit tests, deterministic fixed-seed behavior and standalone gate reported PASS"
+        },
+        {
+          "scope_id": "REPLAY_RECONSTRUCTION_UQ",
+          "evidence_cutoff": "2026-09-12",
+          "state": "OPEN",
+          "source_ref": "data/contracts/replay-contract.v1.json",
+          "evidence": "Replay contract still requires deterministic replay fixture and operator-version-locked execution receipt"
+        }
+      ],
+      "current_scope_state": "OPEN_AT_REPLAY_RECONSTRUCTION_SCOPE",
+      "current_blocker": "REPLAY_SPECIFIC_DETERMINISTIC_FIXTURE_MISSING",
+      "reconciliation": "Bootstrap engine closure is preserved; the replay-specific uncertainty/reconstruction fixture is a new scoped gap.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-ANTIDERIVATIVE-BOUNDARY",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_BOUNDARY",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "BOUNDARY_SCHEMA",
+          "evidence_cutoff": "2026-08-24",
+          "state": "PASS",
+          "source_refs": [
+            "scripts/validate_boundary_conditions.py",
+            "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md"
+          ],
+          "evidence": "4 boundary types and examples reported valid"
+        },
+        {
+          "scope_id": "REPLAY_BOUNDARY_EXECUTION",
+          "evidence_cutoff": "2026-09-12",
+          "state": "OPEN",
+          "source_ref": "data/contracts/replay-contract.v1.json",
+          "evidence": "Boundary-sensitive deterministic replay has not been executed"
+        }
+      ],
+      "current_scope_state": "OPEN_AT_REPLAY_EXECUTION_SCOPE",
+      "current_blocker": "BOUNDARY_SENSITIVE_REPLAY_NOT_EXECUTED",
+      "reconciliation": "Boundary schema closure is preserved; replay execution is a stricter successor scope.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-SOURCE-INDEPENDENCE",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_INDEPENDENCE",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "SIX_REPO_TOROID",
+          "evidence_cutoff": "2026-08-22",
+          "state": "PASS",
+          "source_refs": [
+            "data/control-plane/lineage_authority_v1.json",
+            "scripts/validate_lineage_authority.py",
+            "auditoria/FASE_5_FEDERATION_TRACE_20260822.md"
+          ],
+          "evidence": "Six-repository authority/dedup schema and validation gates reported PASS"
+        },
+        {
+          "scope_id": "REPLAY_ALL_REFERENCED_SOURCES",
+          "evidence_cutoff": "2026-09-12",
+          "state": "OPEN",
+          "source_ref": "data/contracts/replay-contract.v1.json",
+          "evidence": "Replay boundary lists complete provider lineage for all NOVOexport shards as unresolved"
+        }
+      ],
+      "current_scope_state": "OPEN_AT_EXPANDED_SOURCE_SCOPE",
+      "current_blocker": "LINEAGE_SCOPE_EXPANDED_BEYOND_SIX_REPO_TOROID",
+      "reconciliation": "Six-repo independence closure is preserved; replay expanded the population of sources that must carry lineage.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-WEIGHTS-CALIBRATION",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_DATA",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "WEIGHT_ARTIFACT_FREEZE",
+          "evidence_cutoff": "2026-08-24",
+          "state": "PASS",
+          "source_refs": [
+            "scripts/freeze_calibration_weights.py",
+            "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md"
+          ],
+          "evidence": "Deterministic serialization, locked flag and normalization reported PASS; generator hardcodes 0.3/0.4/0.3 and states weights would normally come from a calibration run"
+        },
+        {
+          "scope_id": "BLINDED_CALIBRATION",
+          "evidence_cutoff": "2026-09-12",
+          "state": "OPEN",
+          "source_ref": "data/contracts/replay-contract.v1.json",
+          "evidence": "Weighted paths remain TOKEN_VAZIO_CALIBRATION pending calibration"
+        }
+      ],
+      "current_scope_state": "OPEN_AT_CALIBRATION_SCOPE",
+      "current_blocker": "BLINDED_CALIBRATION_NOT_EXECUTED",
+      "reconciliation": "Artifact immutability was closed; scientific/operational calibration was not.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-LOGLOG-COMPETITION",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_TEST",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "LOGLOG_DETERMINISM",
+          "evidence_cutoff": "2026-08-24",
+          "state": "PASS",
+          "source_refs": [
+            "scripts/test_loglog_benchmark.py",
+            "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md"
+          ],
+          "evidence": "Seed=42 determinism, shape and size coverage reported PASS"
+        },
+        {
+          "scope_id": "FROZEN_COMPARISON_FIXTURE",
+          "evidence_cutoff": "2026-08-22",
+          "state": "AVAILABLE_NOT_BOUND_TO_TV_TEST_1",
+          "source_ref": "data/fixtures/FIXTURE_MANIFEST_v1.json",
+          "evidence": "log_log_comparison_v1 frozen for power-law vs linear validation; TV-TEST-1 script does not load this fixture"
+        }
+      ],
+      "current_scope_state": "PARTIAL_SCOPE_PASS_MODEL_COMPETITION_OPEN",
+      "current_blocker": "MODEL_COMPETITION_EXECUTION_NOT_BOUND_TO_FROZEN_FIXTURE",
+      "reconciliation": "Determinism is closed; the broader competition record is not closed by a seed/shape test alone.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-FRACTAL-DIMENSION",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_TEST",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "NULL_MODEL_FIXTURE",
+          "evidence_cutoff": "2026-08-22",
+          "state": "PASS_FIXTURE_FROZEN",
+          "source_ref": "data/fixtures/FIXTURE_MANIFEST_v1.json",
+          "evidence": "1D/2D/3D null-model fixture frozen"
+        },
+        {
+          "scope_id": "ESTIMATOR_FALSIFIER",
+          "evidence_cutoff": "2026-08-24",
+          "state": "FAIL_LEGITIMATE",
+          "source_ref": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+          "evidence": "Box-counting estimator failed ±0.05 tolerance; failure preserved as legitimate finding"
+        }
+      ],
+      "current_scope_state": "OPEN_AFTER_FALSIFIER",
+      "current_blocker": "ESTIMATOR_ACCURACY_OR_ACCEPTANCE_POLICY_UNRESOLVED",
+      "reconciliation": "The null fixture exists; the estimator/acceptance decision remains unresolved. The FAIL is evidence, not regression.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-VECTOR-CORPUS",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "WITHHELD_TV_ACCESS",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "FEDERATION_VECTOR_FIXTURE",
+          "evidence_cutoff": "2026-08-24",
+          "state": "PASS_FIXTURE_FROZEN",
+          "source_ref": "data/fixtures/FIXTURE_MANIFEST_v1.json",
+          "evidence": "Frozen vector fixture exists for federation validation"
+        },
+        {
+          "scope_id": "CORPUS_ACCESS_CONTROL",
+          "evidence_cutoff": "2026-08-24",
+          "state": "FAIL_LEGITIMATE",
+          "source_ref": "auditoria/federated-doctor-pass-20260824/PHASE-4-CLOSURE-SUMMARY.md",
+          "evidence": "Security falsifier detected sensitive data"
+        },
+        {
+          "scope_id": "REPLAY_AUTHORIZED_CORPUS",
+          "evidence_cutoff": "2026-09-12",
+          "state": "OPEN",
+          "source_ref": "data/contracts/replay-contract.v1.json",
+          "evidence": "Authorized chunk manifest remains incomplete"
+        }
+      ],
+      "current_scope_state": "BLOCKED_BY_ACCESS_AND_PRIVACY_SCOPE",
+      "current_blocker": "PRIVACY_SAFE_AUTHORIZED_MANIFEST_INCOMPLETE",
+      "reconciliation": "A frozen validation fixture is not the complete authorized vector corpus.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-SEMANTIC-HUMAN-STUDY",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "ABORTED",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "ETHICS_CONSENT",
+          "evidence_cutoff": "2026-09-12",
+          "state": "BLOCKED",
+          "source_ref": "data/contracts/replay-contract.v1.json",
+          "evidence": "Independent ethics/privacy review and consent are required"
+        }
+      ],
+      "current_scope_state": "BLOCKED_BY_GOVERNANCE",
+      "current_blocker": "ETHICS_CONSENT_PRIVACY_PREREQUISITES_MISSING",
+      "reconciliation": "The abort remains correct and preserved; no technical workaround may close a governance prerequisite.",
+      "scientific_claim_allowed": false
+    },
+    {
+      "record_id": "R-EXTERNAL-VALIDATION",
+      "scopes": [
+        {
+          "scope_id": "ONTOLOGY_ORIGINAL",
+          "evidence_cutoff": "2026-07-23",
+          "state": "OPEN_TV_INDEPENDENCE",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json"
+        },
+        {
+          "scope_id": "INTERNAL_SIX_REPO_FEDERATION",
+          "evidence_cutoff": "2026-08-22",
+          "state": "PASS_INTERNAL",
+          "source_ref": "auditoria/FASE_5_FEDERATION_TRACE_20260822.md",
+          "evidence": "Internal cross-repo federation gates reported PASS"
+        },
+        {
+          "scope_id": "INDEPENDENT_EXTERNAL_REPRODUCTION",
+          "evidence_cutoff": "2026-09-12",
+          "state": "OPEN",
+          "source_ref": "data/ontology/rafaelia-operational-ontology.v1.json",
+          "evidence": "No third-party independent reproduction evidence is bound to this record"
+        }
+      ],
+      "current_scope_state": "OPEN_AT_INDEPENDENT_EXTERNAL_SCOPE",
+      "current_blocker": "INDEPENDENT_THIRD_PARTY_REPRODUCTION_MISSING",
+      "reconciliation": "Internal federation validation does not satisfy independent external validation.",
+      "scientific_claim_allowed": false
+    }
+  ]
+}
