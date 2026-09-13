@@ -52,3 +52,47 @@ PR#81 CI
 ```
 
 No physical promotion follows automatically.
+
+
+## Control update — exact-head execution state
+
+Federation PRs:
+
+```text
+ChipQuantum #81 @ 4fa4b43d495db03353b4d86f94513143e46f1fb2
+Matem-tica- #29 @ 4bbf52deec827c6cd8e18960f60ed41f9367b20a
+Mapa #618 @ current branch
+papers #85 @ ba9f61f839690beb227f6057e8f2605f31242e0a
+```
+
+Paper6 exact-head execution attempts:
+
+```text
+run 34731835457
+job 103655922818 -> failure / steps=[]
+rerun job 103656215334 -> failure / steps=[]
+```
+
+The producer branch now contains:
+
+```text
+receipts/2026-09-12_PAPER6_C120_TRINITY10_LOCAL_FORMAL_RECEIPT_V1.md
+```
+
+Classification:
+
+```text
+LOCAL_FORMAL_PASS
+REMOTE_CI_PASS = TOKEN_VAZIO
+REMOTE_ROOT_CAUSE = TOKEN_VAZIO_PROVIDER_DIAGNOSTIC
+```
+
+Calendar control:
+
+```text
+event_id=fuk1or1e4l6j4r6s05poa5f2ko
+2026-09-13 09:00-10:00 America/Sao_Paulo
+purpose=provider/exact-head evidence review; no blind rerun
+```
+
+No claim promotion is allowed from the local finite pass alone.
