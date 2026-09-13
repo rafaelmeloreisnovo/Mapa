@@ -101,4 +101,3 @@ No integrated biological claim is promoted beyond external-literature support un
 **F_ok:** typed physical boundaries, literature anchors, claims ledger and falsifiers defined.  
 **F_gap:** no new wet-lab/human dataset; manifold coupling remains hypothesis; person/work attribution unresolved.  
 **F_next:** validate the claims ledger; run a synthetic typed-vs-collapsed model; only then bind a public sleep/respiration/EEG dataset.
-
