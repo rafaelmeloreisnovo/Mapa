@@ -39,7 +39,7 @@ jobs:
             "has_targets=true" >> $env:GITHUB_OUTPUT
           }
 
-      - uses: nuget/setup-nuget@04b0c2b8d1b97922f67eca497d7cf0bf17b8ffe1
+      - uses: nuget/setup-nuget@b26b823c478ee115be5c9403e62c90b0bf943843
         if: steps.dotnet-targets.outputs.has_targets == 'true'
       - uses: microsoft/setup-msbuild@30375c66a4eea26614e0d39710365f22f8b0af57 # v3.0.0
         if: steps.dotnet-targets.outputs.has_targets == 'true'
