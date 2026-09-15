@@ -14,6 +14,10 @@
     "parents",
     "genotype",
     "phenotype",
+    "knowledge_graph",
+    "trait_registry",
+    "quiescent_bank",
+    "noise_model",
     "operator_set",
     "scale_contract",
     "environment",
@@ -70,6 +74,8 @@
       "items": {
         "enum": [
           "DIRECT",
+          "INDIRECT",
+          "DERIVATIVE",
           "INVERSE",
           "REVERSE",
           "ANTIDERIVATIVE",
@@ -83,6 +89,11 @@
           "RECURSIVE",
           "RECOMBINE",
           "PERMUTE",
+          "BACKCROSS",
+          "QUIESCE",
+          "REACTIVATE",
+          "LATENT_RELATION_PROBE",
+          "NOISE_RECLASSIFY",
           "GEODESIC_STEP"
         ]
       }
@@ -114,7 +125,9 @@
       "type": "object",
       "required": [
         "append_only",
-        "preserve_ancestors"
+        "preserve_ancestors",
+        "topology",
+        "backcross_allowed"
       ],
       "properties": {
         "append_only": {
@@ -128,6 +141,12 @@
             "string",
             "null"
           ]
+        },
+        "topology": {
+          "const": "TEMPORAL_DAG_WITH_MULTIPARENT_HYPEREDGES"
+        },
+        "backcross_allowed": {
+          "const": true
         }
       }
     },
@@ -192,6 +211,110 @@
         },
         "F_next": {
           "type": "string"
+        }
+      }
+    },
+    "knowledge_graph": {
+      "type": "object",
+      "required": [
+        "topology",
+        "relation_types",
+        "projection_rule"
+      ],
+      "properties": {
+        "topology": {
+          "const": "TEMPORAL_TYPED_HYPERGRAPH"
+        },
+        "relation_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "CONNECTION",
+              "INTEGRATION",
+              "RELATION",
+              "INTERCONNECTION",
+              "ANOMALY",
+              "PARADOX",
+              "FORMULATION",
+              "DERIVABLE_LATENT",
+              "CONTRADICTION",
+              "EVIDENCE",
+              "HEURISTIC"
+            ]
+          }
+        },
+        "projection_rule": {
+          "const": "HIDDEN_IN_VIEW_DOES_NOT_IMPLY_ABSENT_FROM_GRAPH"
+        }
+      }
+    },
+    "trait_registry": {
+      "type": "object",
+      "required": [
+        "preserve_lost_traits",
+        "backcross_policy"
+      ],
+      "properties": {
+        "preserve_lost_traits": {
+          "const": true
+        },
+        "backcross_policy": {
+          "const": "EXPLICIT_ANCESTOR_PLUS_TRAIT_MASK"
+        }
+      }
+    },
+    "quiescent_bank": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "deletion_policy",
+        "activity_range"
+      ],
+      "properties": {
+        "enabled": {
+          "const": true
+        },
+        "deletion_policy": {
+          "const": "NO_SILENT_DELETE"
+        },
+        "activity_range": {
+          "const": "0<=activity<=1; quiescent ~= low activity, not zero existence"
+        }
+      }
+    },
+    "noise_model": {
+      "type": "object",
+      "required": [
+        "residual_definition",
+        "initial_owner",
+        "allowed_reclassifications"
+      ],
+      "properties": {
+        "residual_definition": {
+          "const": "Delta_PT=d(practice_observation,theory_prediction)"
+        },
+        "initial_owner": {
+          "const": "TOKEN_VAZIO_RESIDUAL_OWNER"
+        },
+        "allowed_reclassifications": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "MEASUREMENT_NOISE",
+              "MODEL_MISSPECIFICATION",
+              "DISCRETIZATION_ARTIFACT",
+              "UNMODELED_STRUCTURE",
+              "IMPLEMENTATION_GAP",
+              "THEORY_ONLY_PREDICTION",
+              "PRACTICE_ONLY_EFFECT",
+              "CONTRADICTION",
+              "ANOMALY"
+            ]
+          }
         }
       }
     }
