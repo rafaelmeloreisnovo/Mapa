@@ -1,0 +1,74 @@
+name: SUSTENTO T observation gate
+
+on:
+  pull_request:
+    paths:
+      - "docs/canonical/2026-09-16/SUSTENTO_T_OBSERVATION_GEOMETRY_V1.md"
+      - "indices/deltas/ATLAS_X_SUSTENTO_T_OBS345_20260916.md"
+      - "schemas/sustento-t-observation-gate.schema.json"
+      - "tools/sustento_t_observation.py"
+      - "tests/geometry/test_sustento_t_observation.py"
+      - "data/geometry/sustento_t_vectors.v1.json"
+      - ".github/workflows/sustento-t-observation-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+
+      - name: Syntax
+        run: |
+          python -m py_compile tools/sustento_t_observation.py tests/geometry/test_sustento_t_observation.py
+          python -m json.tool schemas/sustento-t-observation-gate.schema.json >/dev/null
+          python -m json.tool data/geometry/sustento_t_vectors.v1.json >/dev/null
+
+      - name: Unit tests
+        run: python tests/geometry/test_sustento_t_observation.py -v
+
+      - name: Execute deterministic receipt
+        run: |
+          mkdir -p artifacts/sustento-t
+          python tools/sustento_t_observation.py \
+            --vectors data/geometry/sustento_t_vectors.v1.json \
+            --out artifacts/sustento-t/receipt.json
+
+      - name: Verify boundaries and exact identities
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path("artifacts/sustento-t/receipt.json").read_text())
+          assert r["claim_allowed"] is False
+          assert r["promotion_allowed"] is False
+          assert r["physical_detector"] == "TOKEN_VAZIO"
+          assert r["quantum_causal_binding"] == "TOKEN_VAZIO"
+          assert r["frida_physical_runtime"] == "TOKEN_VAZIO"
+          assert r["geometry"]["exact"]["r6"] == "27/64"
+          assert r["geometry"]["exact"]["one_minus_r6"] == "37/64"
+          assert r["geometry"]["exact"]["difference"] == "5/32"
+          assert r["examples"]["u4_0011"] == "TOKEN_VAZIO_TIE"
+          print("SUSTENTO_T_REFERENCE=PASS")
+          PY
+
+      - name: Upload receipt
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: sustento-t-${{ github.run_id }}
+          path: artifacts/sustento-t/receipt.json
+          if-no-files-found: error
+          retention-days: 90
