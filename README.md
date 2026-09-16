@@ -7,7 +7,7 @@
 > **Claim Gate**: `claim_allowed=false` (until Cycle 6 closure)  
 > **Epistemic State**: VERIFICATION_PENDING (12 TOKEN_VAZIO gaps documented)
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Domain](https://img.shields.io/badge/Domain-KOS%20%7C%20Governance%20%7C%20Control%20Plane-purple)](biblioteconomia/)
 [![Research](https://img.shields.io/badge/Research-RAFAELIA%20Ecosystem-orange)](https://github.com/rafaelmeloreisnovo/ChipQuantum)
 
