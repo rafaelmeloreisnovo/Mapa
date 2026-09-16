@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.example/schemas/seed-omega-evolution.v1.schema.json",
+  "title": "RAFAELIA SEED_OMEGA_EVOLUTION_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "seed_id",
+    "generated_at",
+    "state",
+    "claim_allowed",
+    "generation",
+    "parents",
+    "genotype",
+    "phenotype",
+    "knowledge_graph",
+    "trait_registry",
+    "quiescent_bank",
+    "noise_model",
+    "operator_set",
+    "scale_contract",
+    "environment",
+    "lineage",
+    "evaluation",
+    "provenance",
+    "gaps",
+    "r3"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.seed_omega_evolution.v1"
+    },
+    "seed_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "state": {
+      "enum": [
+        "CANONICAL_DRAFT",
+        "MODEL_DEFINED",
+        "VERIFIED_LIMITED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "parents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "genotype": {
+      "type": "object"
+    },
+    "phenotype": {
+      "type": "object"
+    },
+    "operator_set": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "DIRECT",
+          "INDIRECT",
+          "DERIVATIVE",
+          "INVERSE",
+          "REVERSE",
+          "ANTIDERIVATIVE",
+          "RECLUSIVE_CLOSURE",
+          "LOG",
+          "ITERATED_LOG",
+          "TANGENTIAL",
+          "ORTHOGONAL",
+          "TRANSVERSAL",
+          "LATERAL",
+          "RECURSIVE",
+          "RECOMBINE",
+          "PERMUTE",
+          "BACKCROSS",
+          "QUIESCE",
+          "REACTIVATE",
+          "LATENT_RELATION_PROBE",
+          "NOISE_RECLASSIFY",
+          "GEODESIC_STEP"
+        ]
+      }
+    },
+    "scale_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "q",
+        "formula",
+        "boundary"
+      ],
+      "properties": {
+        "q": {
+          "const": "sqrt(3)/2"
+        },
+        "formula": {
+          "const": "a_n=a_0*(sqrt(3)/2)^n"
+        },
+        "boundary": {
+          "const": "EUCLIDEAN_SCALE_NOT_AUTOMATIC_HYPERBOLIC_GEODESIC"
+        }
+      }
+    },
+    "environment": {
+      "type": "object"
+    },
+    "lineage": {
+      "type": "object",
+      "required": [
+        "append_only",
+        "preserve_ancestors",
+        "topology",
+        "backcross_allowed"
+      ],
+      "properties": {
+        "append_only": {
+          "const": true
+        },
+        "preserve_ancestors": {
+          "const": true
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "topology": {
+          "const": "TEMPORAL_DAG_WITH_MULTIPARENT_HYPEREDGES"
+        },
+        "backcross_allowed": {
+          "const": true
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "required": [
+        "dimensions",
+        "selection_rule"
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "coherence",
+              "novelty",
+              "reconstruction",
+              "evidence",
+              "robustness",
+              "cost"
+            ]
+          }
+        },
+        "selection_rule": {
+          "enum": [
+            "PARETO_FRONT",
+            "EXPLICIT_RULE",
+            "TOKEN_VAZIO"
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "r3": {
+      "type": "object",
+      "required": [
+        "F_ok",
+        "F_gap",
+        "F_next"
+      ],
+      "properties": {
+        "F_ok": {
+          "type": "string"
+        },
+        "F_gap": {
+          "type": "string"
+        },
+        "F_next": {
+          "type": "string"
+        }
+      }
+    },
+    "knowledge_graph": {
+      "type": "object",
+      "required": [
+        "topology",
+        "relation_types",
+        "projection_rule"
+      ],
+      "properties": {
+        "topology": {
+          "const": "TEMPORAL_TYPED_HYPERGRAPH"
+        },
+        "relation_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "CONNECTION",
+              "INTEGRATION",
+              "RELATION",
+              "INTERCONNECTION",
+              "ANOMALY",
+              "PARADOX",
+              "FORMULATION",
+              "DERIVABLE_LATENT",
+              "CONTRADICTION",
+              "EVIDENCE",
+              "HEURISTIC"
+            ]
+          }
+        },
+        "projection_rule": {
+          "const": "HIDDEN_IN_VIEW_DOES_NOT_IMPLY_ABSENT_FROM_GRAPH"
+        }
+      }
+    },
+    "trait_registry": {
+      "type": "object",
+      "required": [
+        "preserve_lost_traits",
+        "backcross_policy"
+      ],
+      "properties": {
+        "preserve_lost_traits": {
+          "const": true
+        },
+        "backcross_policy": {
+          "const": "EXPLICIT_ANCESTOR_PLUS_TRAIT_MASK"
+        }
+      }
+    },
+    "quiescent_bank": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "deletion_policy",
+        "activity_range"
+      ],
+      "properties": {
+        "enabled": {
+          "const": true
+        },
+        "deletion_policy": {
+          "const": "NO_SILENT_DELETE"
+        },
+        "activity_range": {
+          "const": "0<=activity<=1; quiescent ~= low activity, not zero existence"
+        }
+      }
+    },
+    "noise_model": {
+      "type": "object",
+      "required": [
+        "residual_definition",
+        "initial_owner",
+        "allowed_reclassifications"
+      ],
+      "properties": {
+        "residual_definition": {
+          "const": "Delta_PT=d(practice_observation,theory_prediction)"
+        },
+        "initial_owner": {
+          "const": "TOKEN_VAZIO_RESIDUAL_OWNER"
+        },
+        "allowed_reclassifications": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "MEASUREMENT_NOISE",
+              "MODEL_MISSPECIFICATION",
+              "DISCRETIZATION_ARTIFACT",
+              "UNMODELED_STRUCTURE",
+              "IMPLEMENTATION_GAP",
+              "THEORY_ONLY_PREDICTION",
+              "PRACTICE_ONLY_EFFECT",
+              "CONTRADICTION",
+              "ANOMALY"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
