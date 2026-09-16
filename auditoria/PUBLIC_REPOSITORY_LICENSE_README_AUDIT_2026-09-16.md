@@ -78,7 +78,7 @@ TOKEN_VAZIO > invented permission
 | 42 | templo-vivo-arcs | historical root LICENSE is manifesto; `LICENSE_POLICY.md`; software decision gate | FIXED + TOKEN_VAZIO | README now exposes policy authority. Software license remains `TOKEN_VAZIO / DECISION_REQUIRED`; no invented SPDX choice. |
 | 43 | TeoremasTesesTeorias | README said MIT; LICENSE contained a research paper | FIXED | Research paper preserved under docs; root LICENSE restored to canonical MIT. |
 | 44 | termux-api_rafcodephi | GPLv3 fork + `LICENSE.md`; complete `COPYING` now present | FIXED | Upstream Termux attribution preserved; component/file terms still control. |
-| 45 | termux-app-rafacodephi | GPLv3 fork + component exceptions; missing complete root GPL copy | PR_PENDING | PR #449 adds complete `COPYING`; protected branch/signature rules correctly prevent direct bypass. |
+| 45 | termux-app-rafacodephi | GPLv3 fork + component exceptions; complete GPL text now present as `COPYING` | FIXED | PR #449 merged by allowed squash route; final commit `834d79608536fc5628f54855b0bfccbcdae14d44`. |
 | 46 | termux-packages | per-package licenses + Apache-2.0 build infrastructure | OK_UPSTREAM/MULTI | README already states not to flatten the tree into a single RAFCODEPHI license. |
 | 47 | TinyGPT | MIT upstream | OK_UPSTREAM/MULTI | Preserve keith2018 copyright and dependency licenses. |
 | 48 | TRABALHO_ROADMAP_AUDIT_GOV_DATA_ROTA_MAPwithCHAIN_security | no root license located | TOKEN_VAZIO | No blanket reuse grant inferred. |
@@ -103,7 +103,7 @@ TOKEN_VAZIO > invented permission
 - `Judicial-`: legal/privacy/evidence notice distinguishes allegations from adjudicated facts and flags public-data/secrecy risks.
 - `myCat-iahelpsus`: upstream no-license risk explicitly documented.
 - `RafGitTools` and `termux-api_rafcodephi`: complete GPLv3 text available as `COPYING`.
-- `termux-app-rafacodephi`: protected-branch PR #449 proposes the same `COPYING` addition.
+- `termux-app-rafacodephi`: protected-branch PR #449 merged by the repository-allowed squash method; complete `COPYING` is now on the default branch.
 
 ## Owner decisions that remain intentionally open
 
@@ -145,11 +145,21 @@ compatibility of every dependency, trademark/patent clearance, privacy
 compliance, or jurisdiction-specific enforceability. Several repos correctly
 remain `TOKEN_VAZIO` pending owner license choice or provenance inventory.
 
-`F_next`: merge protected PR #449 only after repository rules/checks permit;
-then, for each `TOKEN_VAZIO` repository where public reuse is desired, perform
+`F_next`: for each `TOKEN_VAZIO` repository where public reuse is desired, perform
 component inventory -> owner license decision -> SPDX/file notices ->
 third-party compatibility check -> README alignment -> receipt.
 
 ---
 Audit receipt: `PUBLIC-LEGAL-README-20260916`  
 Mode: append-only correction; no upstream license replacement; no invented rights.
+
+
+## Δ receipt — protected Termux merge closure
+
+`μID=PUBLIC-LEGAL-README-20260916-TERMUX449`  
+`parent=PUBLIC-LEGAL-README-20260916`  
+`kind=STATE_CLOSURE`  
+`source=termux-app-rafcodephi#449`  
+`evidence=merged:true; method=squash; commit=834d79608536fc5628f54855b0bfccbcdae14d44`  
+`gap=TOKEN_VAZIO`  
+`next=continue owner decisions only for repositories/scopes still marked TOKEN_VAZIO`
