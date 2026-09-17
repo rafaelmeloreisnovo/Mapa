@@ -1,0 +1,37 @@
+{
+  "receipt_id": "OECG-FIXTURE-VALID",
+  "timestamp": "2026-09-17T19:47:00Z",
+  "objective": "test fail-closed governance fixture",
+  "source_refs": ["fixture"],
+  "authority": {"control_plane": "Mapa", "human_authorized": true},
+  "baseline": {"state": "fixture"},
+  "change": ["fixture"],
+  "seven_guards": {
+    "PROVENANCE": "BOUND",
+    "CONTEXT": "BOUND",
+    "EVIDENCE": "BOUND",
+    "CONTRADICTION": "BOUND",
+    "UNCERTAINTY": "BOUND",
+    "REPRODUCTION": "BOUND",
+    "ROLLBACK": "BOUND"
+  },
+  "gates": {
+    "DIGNITY": "PASS",
+    "CHILD_SAFETY": "NOT_APPLICABLE",
+    "PRIVACY": "PASS",
+    "AUTHORITY": "PASS",
+    "TRUTH_GAP": "PASS"
+  },
+  "evidence": ["fixture:test"],
+  "contradictions": [],
+  "uncertainty": [],
+  "reproduction": "DETERMINISTIC_FIXTURE",
+  "rollback": "discard fixture",
+  "nibiguiri_delta": "none",
+  "f_ok": ["fixture valid"],
+  "f_gap": [],
+  "f_next": [],
+  "hash_ref": "fixture",
+  "claim_allowed": false,
+  "promotion_requested": false
+}
