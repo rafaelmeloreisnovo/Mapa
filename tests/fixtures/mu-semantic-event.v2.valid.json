@@ -1,0 +1,96 @@
+{
+  "schema_version": "rafaelia.mu-semantic-event/v2",
+  "event_id": "MU-EVT-20260917T194700Z-OECG001",
+  "sequence": 1,
+  "observed_at": "2026-09-17T19:47:00Z",
+  "event_kind": "TOKEN_OCCURRENCE",
+  "actor": "USER",
+  "authority": {
+    "authorship_authority": {
+      "state": "DECLARED_BY_AUTHOR",
+      "subject_ref": "CURRENT_USER",
+      "evidence_refs": ["SESSION:2026-09-17:current:user"]
+    },
+    "sense_authority": {
+      "state": "DECLARED_BY_AUTHOR",
+      "namespace": "RAFAELIA",
+      "authority_ref": "SESSION:2026-09-17:current:user",
+      "evidence_refs": ["SESSION:2026-09-17:current:user"]
+    },
+    "claim_authority": {
+      "state": "BLOCKED",
+      "gate_refs": ["data/contracts/operational-excellence-gate.v1.json"],
+      "evidence_refs": []
+    },
+    "privacy_class": "INTERNAL",
+    "minor_related": "NO",
+    "authorization_ref": "SESSION:2026-09-17:current:user"
+  },
+  "pair_id": null,
+  "parent_event_ids": [],
+  "prev_event_hash": null,
+  "source": {
+    "system": "SESSION",
+    "locator": "SESSION:2026-09-17:current:user",
+    "revision": null,
+    "content_sha256": "b6f68c5efc7903a7a35cda67a938a12f0f8f014d83f523c9c9f8d8c0a6e0b7a1",
+    "byte_length": 1,
+    "raw_content_embedded": false
+  },
+  "turn": {
+    "session_ref": "SESSION:2026-09-17:current",
+    "turn_ordinal": 1,
+    "role": "USER",
+    "prompt_ref": null,
+    "response_ref": null
+  },
+  "lexemes": [
+    {
+      "token_id": "TOK:FIAT.VERBUM",
+      "surface": "FIAT VERBUM",
+      "normalized": "FIAT VERBUM",
+      "span_start": 0,
+      "span_end": 11,
+      "sense_ref": "SESSION:2026-09-17:current:user",
+      "semantic_state": "DECLARED_BY_AUTHOR",
+      "parse_only": false
+    }
+  ],
+  "context": {
+    "intent_ref": "continuous-improvement-operational-governance",
+    "l9_routes": ["L", "P", "C", "R", "I", "E", "A"],
+    "local_context_hash": "dfe1f5c62e4a311d4512dc94f0f62cfa1c7ff743bb1a8b2ae775eebddc64ea46",
+    "expression_raw": "FIAT VERBUM",
+    "expression_ast_ref": null,
+    "notes": "Fixture proves field separation only; not truth or legal-authorship proof."
+  },
+  "transition": {
+    "delta_kind": "NONE",
+    "ordered": true,
+    "before_ref": null,
+    "after_ref": null,
+    "supersedes_event_id": null,
+    "inverse_candidate_ref": null,
+    "commutativity": "NOT_APPLICABLE"
+  },
+  "provenance": [
+    {
+      "kind": "session",
+      "reference": "SESSION:2026-09-17:current:user",
+      "revision_or_hash": null
+    }
+  ],
+  "reconstruction": {
+    "base_ref": "tests/fixtures/mu-semantic-event.v2.valid.json",
+    "event_chain_refs": [],
+    "expected_state_hash": null,
+    "observed_state_hash": null,
+    "result": "TOKEN_VAZIO",
+    "missing": ["operator-version-locked execution receipt"]
+  },
+  "anomaly": null,
+  "epistemic_state": "DECLARED_BY_AUTHOR",
+  "claim_allowed": false,
+  "f_gap": ["independent authorship evidence not asserted by this fixture"],
+  "f_next": ["validate schema and deterministic canonicalization"]
+}

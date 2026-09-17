@@ -1,0 +1,102 @@
+{
+  "schema_version": "rafaelia.operational-excellence-gate/v1",
+  "contract_id": "OECG-V1-20260917",
+  "state": "IMPLEMENTED_DRAFT",
+  "claim_allowed": false,
+  "objective_boundary": {
+    "human_authorized_objective_required": true,
+    "autonomous_goal_creation_allowed": false,
+    "training_claim": false,
+    "dataset_role": "CONTEXT_OR_SOURCE_ONLY_NOT_AUTHORITY_BY_ITSELF"
+  },
+  "first_line": {
+    "policy": "HOLD_FAIL_CLOSED_ON_APPLICABLE_UNKNOWN",
+    "gates": [
+      {"id": "DIGNITY", "required": true, "unknown_state": "TOKEN_VAZIO_DIGNITY"},
+      {"id": "CHILD_SAFETY", "required": "WHEN_APPLICABLE", "unknown_state": "TOKEN_VAZIO_CHILD_SAFETY"},
+      {"id": "PRIVACY", "required": "WHEN_APPLICABLE", "unknown_state": "TOKEN_VAZIO_PRIVACY"},
+      {"id": "AUTHORITY", "required": true, "unknown_state": "TOKEN_VAZIO_AUTHORITY"},
+      {"id": "TRUTH_GAP", "required": true, "unknown_state": "TOKEN_VAZIO_TRUTH_GAP"}
+    ]
+  },
+  "seven_guards": [
+    {"id": "PROVENANCE", "unknown_state": "TOKEN_VAZIO_PROVENANCE"},
+    {"id": "CONTEXT", "unknown_state": "TOKEN_VAZIO_CONTEXT"},
+    {"id": "EVIDENCE", "unknown_state": "TOKEN_VAZIO_EVIDENCE"},
+    {"id": "CONTRADICTION", "unknown_state": "TOKEN_VAZIO_CONTRADICTION_SCAN"},
+    {"id": "UNCERTAINTY", "unknown_state": "TOKEN_VAZIO_UNCERTAINTY"},
+    {"id": "REPRODUCTION", "unknown_state": "TOKEN_VAZIO_REPRODUCTION"},
+    {"id": "ROLLBACK", "unknown_state": "TOKEN_VAZIO_ROLLBACK"}
+  ],
+  "identity_separation": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_ID != OCCURRENCE_ID != SENSE_VERSION != CLAIM",
+    "SOURCE_ACTOR != AUTHORSHIP_AUTHORITY != SENSE_AUTHORITY != CLAIM_AUTHORITY",
+    "TOKEN_VAZIO != 0",
+    "RECOVERY_CANDIDATE != TRUTH != AUTHORSHIP != CLAIM"
+  ],
+  "semantic_authority": {
+    "source_actor_values": ["USER", "ASSISTANT", "TOOL", "SYSTEM", "UNKNOWN"],
+    "authorship_authority_required_for_authorship_claim": true,
+    "sense_authority_required_for_binding": true,
+    "claim_authority_requires_evidence_gate": true,
+    "cross_field_inference_default": "FORBIDDEN"
+  },
+  "nibiguiri": {
+    "allowed_states": [
+      "IGNORADO",
+      "ESQUECIDO_OU_DESINDEXADO",
+      "ABORTADO",
+      "CENSURA_EVIDENCIADA",
+      "FILTRO_PESO_EVIDENCIADO",
+      "OBVIO_NAO_INDEXADO",
+      "CAUSA_DESCONHECIDA"
+    ],
+    "cause_without_evidence": "CAUSA_DESCONHECIDA",
+    "absence_implies_censorship": false,
+    "not_selected_implies_hidden_weight": false
+  },
+  "dmaic": {
+    "define": ["objective", "human_authorization", "source_authority", "destination_authority", "privacy_boundary", "ctq"],
+    "measure": ["baseline", "source_revisions", "gaps", "gates", "receipts"],
+    "analyze": ["cause", "contradiction", "uncertainty", "dependencies", "provider_vs_content_gap"],
+    "improve": ["smallest_reversible_material_delta"],
+    "control": ["readback_or_test", "receipt", "hash_or_ref", "index_pointer", "rollback_or_supersedes"]
+  },
+  "promotion": {
+    "OBSERVED": false,
+    "DECLARED_BY_AUTHOR": false,
+    "PROVISIONAL": false,
+    "VERIFIED_LIMITED": "EXACT_SCOPE_ONLY",
+    "CONTRADICTED": false,
+    "TOKEN_VAZIO": false
+  },
+  "receipt_required_fields": [
+    "receipt_id",
+    "timestamp",
+    "objective",
+    "source_refs",
+    "authority",
+    "baseline",
+    "change",
+    "seven_guards",
+    "gates",
+    "evidence",
+    "contradictions",
+    "uncertainty",
+    "reproduction",
+    "rollback",
+    "nibiguiri_delta",
+    "f_ok",
+    "f_gap",
+    "f_next",
+    "hash_ref"
+  ],
+  "exit_conditions": [
+    "AUTHORIZED_OBJECTIVE_SATISFIED",
+    "EXPLICIT_EXTERNAL_GAP",
+    "ETHICS_OR_PRIVACY_BLOCK",
+    "NO_MATERIAL_DELTA_AFTER_AUTHORITATIVE_PROBE"
+  ],
+  "six_sigma_boundary": "NO_STATISTICAL_SIGMA_CLAIM_WITHOUT_DEFECT_OPPORTUNITY_METRICS"
+}
