@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.json-identity-commitment-contract.v1",
+  "version": "1.0.0",
+  "status": "IMPLEMENTED_DRAFT",
+  "claim_allowed": false,
+  "purpose": "Bind JSON/JSONL source occurrences to exact-byte identities, canonical-record identities and ordered hash commitments without copying payloads or inferring semantics.",
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "OCCURRENCE_ID != BYTE_ID != CONTENT_ID != SEMANTIC_ID",
+    "HASH_EQUALITY != AUTHORSHIP",
+    "HASH_EQUALITY != SEMANTIC_EQUIVALENCE",
+    "TOKEN_VAZIO != ZERO",
+    "RAW_SOURCE_IS_READ_ONLY",
+    "DERIVED_OUTPUT_IS_APPEND_ONLY_BY_DESTINATION"
+  ],
+  "algorithms": {
+    "digest": "SHA-256",
+    "canonical_json": "UTF-8; object keys sorted; separators comma/colon; ensure_ascii=false; non-finite numbers rejected",
+    "occurrence_id": "SHA256(domain || source_id || relative_path || optional ordinal)",
+    "byte_id": "SHA256(exact file bytes)",
+    "content_id": "SHA256(canonical JSON record)",
+    "record_leaf": "SHA256(domain || canonical record identity metadata)",
+    "merkle_node": "SHA256(domain || left_hash || right_hash)",
+    "merkle_odd": "SHA256(domain || only_child_hash)",
+    "hash_chain": "SHA256(domain || previous_hash? || current_commitment)"
+  },
+  "hierarchy": [
+    "record_content_id",
+    "record_leaf_commitment",
+    "file_record_merkle_root",
+    "file_commitment",
+    "corpus_merkle_root",
+    "manifest_commitment"
+  ],
+  "privacy": {
+    "raw_values_in_index": false,
+    "raw_payloads_in_index": false,
+    "relative_paths_present": true,
+    "credentials_allowed": false
+  },
+  "authority": {
+    "source_bytes": "SOURCE_AUTHORITY",
+    "mapa": "INDEX_CONTRACT_AND_VALIDATION_AUTHORITY",
+    "semantic_meaning": "TOKEN_VAZIO_UNLESS_SEPARATELY_AUTHORIZED",
+    "authorship": "TOKEN_VAZIO_UNLESS_SEPARATELY_EVIDENCED"
+  },
+  "promotion": {
+    "automatic_merge": false,
+    "automatic_publication": false,
+    "semantic_claim_from_hash": false
+  }
+}
