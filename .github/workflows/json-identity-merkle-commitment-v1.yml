@@ -1,0 +1,72 @@
+name: JSON Identity Merkle Commitment V1
+
+"on":
+  pull_request:
+    paths:
+      - "scripts/build_json_identity_commitments.py"
+      - "tests/test_json_identity_commitments.py"
+      - "schemas/json-identity-commitment.v1.schema.json"
+      - "data/contracts/json-identity-commitment.v1.json"
+      - "docs/architecture/JSON_IDENTITY_MERKLE_COMMITMENT_V1.md"
+      - ".github/workflows/json-identity-merkle-commitment-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: json-identity-merkle-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+
+      - name: Compile and validate machine-readable contracts
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/build_json_identity_commitments.py tests/test_json_identity_commitments.py
+          python -m json.tool schemas/json-identity-commitment.v1.schema.json >/dev/null
+          python -m json.tool data/contracts/json-identity-commitment.v1.json >/dev/null
+
+      - name: Run deterministic identity tests
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p "test_json_identity_commitments.py" -v
+
+      - name: Execute positive and negative controls
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          mkdir -p "$tmp/src"
+          printf '%s\n' '[{"id":"a","x":1},{"id":"b","x":2}]' > "$tmp/src/a.json"
+          printf '%s\n' '{"k":"v"}' > "$tmp/src/b.jsonl"
+
+          python scripts/build_json_identity_commitments.py \
+            "$tmp/src" --source-id CI-FIXTURE --out-dir "$tmp/out1"
+          python scripts/build_json_identity_commitments.py \
+            "$tmp/src" --source-id CI-FIXTURE --out-dir "$tmp/out2"
+
+          cmp "$tmp/out1/records.index.jsonl" "$tmp/out2/records.index.jsonl"
+          cmp "$tmp/out1/files.index.jsonl" "$tmp/out2/files.index.jsonl"
+          cmp "$tmp/out1/manifest.json" "$tmp/out2/manifest.json"
+
+          mkdir -p "$tmp/bad"
+          printf '%s\n' '{"broken":' > "$tmp/bad/bad.json"
+          if python scripts/build_json_identity_commitments.py \
+            "$tmp/bad" --source-id CI-NEGATIVE --out-dir "$tmp/bad-out"; then
+            echo "negative control unexpectedly passed"
+            exit 1
+          fi
+          test ! -e "$tmp/bad-out/manifest.json"

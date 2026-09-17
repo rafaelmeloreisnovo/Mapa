@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/json-identity-commitment.v1.schema.json",
+  "title": "RAFAELIA JSON Identity Commitment V1",
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nullableSha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+  },
+  "type": "object",
+  "oneOf": [
+    {
+      "properties": {
+        "schema": {"const": "rafaelia.json-identity-record.v1"},
+        "source_id": {"type": "string", "minLength": 1},
+        "relative_path": {"type": "string", "minLength": 1},
+        "file_occurrence_id": {"type": "string", "pattern": "^occ:v1:sha256:[0-9a-f]{64}$"},
+        "record_ordinal": {"type": "integer", "minimum": 1},
+        "record_occurrence_id": {"type": "string", "pattern": "^occ:v1:sha256:[0-9a-f]{64}$"},
+        "record_content_id": {"type": "string", "pattern": "^cid:json-c14n-v1:sha256:[0-9a-f]{64}$"},
+        "canonical_sha256": {"$ref": "#/$defs/sha256"},
+        "canonical_bytes": {"type": "integer", "minimum": 0},
+        "value_type": {"enum": ["null", "boolean", "object", "array", "string", "number"]},
+        "leaf_commitment_sha256": {"$ref": "#/$defs/sha256"},
+        "previous_chain_sha256": {"$ref": "#/$defs/nullableSha256"},
+        "chain_sha256": {"$ref": "#/$defs/sha256"},
+        "claim_allowed": {"const": false}
+      },
+      "required": [
+        "schema", "source_id", "relative_path", "file_occurrence_id",
+        "record_ordinal", "record_occurrence_id", "record_content_id",
+        "canonical_sha256", "canonical_bytes", "value_type",
+        "leaf_commitment_sha256", "previous_chain_sha256", "chain_sha256",
+        "claim_allowed"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "properties": {
+        "schema": {"const": "rafaelia.json-identity-file.v1"},
+        "source_id": {"type": "string", "minLength": 1},
+        "relative_path": {"type": "string", "minLength": 1},
+        "file_occurrence_id": {"type": "string", "pattern": "^occ:v1:sha256:[0-9a-f]{64}$"},
+        "file_content_id": {"type": "string", "pattern": "^bid:sha256:[0-9a-f]{64}$"},
+        "size_bytes": {"type": "integer", "minimum": 0},
+        "raw_sha256": {"$ref": "#/$defs/sha256"},
+        "record_count": {"type": "integer", "minimum": 1},
+        "record_sequence_sha256": {"$ref": "#/$defs/sha256"},
+        "record_merkle_root_sha256": {"$ref": "#/$defs/sha256"},
+        "terminal_chain_sha256": {"$ref": "#/$defs/sha256"},
+        "file_commitment_sha256": {"$ref": "#/$defs/sha256"},
+        "claim_allowed": {"const": false}
+      },
+      "required": [
+        "schema", "source_id", "relative_path", "file_occurrence_id",
+        "file_content_id", "size_bytes", "raw_sha256", "record_count",
+        "record_sequence_sha256", "record_merkle_root_sha256",
+        "terminal_chain_sha256", "file_commitment_sha256", "claim_allowed"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "properties": {
+        "schema": {"const": "rafaelia.json-identity-manifest.v1"},
+        "schema_version": {"const": "1.0.0"},
+        "source_id": {"type": "string", "minLength": 1},
+        "file_count": {"type": "integer", "minimum": 1},
+        "record_count": {"type": "integer", "minimum": 1},
+        "corpus_merkle_root_sha256": {"$ref": "#/$defs/sha256"},
+        "corpus_terminal_chain_sha256": {"$ref": "#/$defs/sha256"},
+        "manifest_commitment_sha256": {"$ref": "#/$defs/sha256"},
+        "source_modified": {"const": false},
+        "claim_allowed": {"const": false}
+      },
+      "required": [
+        "schema", "schema_version", "source_id", "file_count", "record_count",
+        "corpus_merkle_root_sha256", "corpus_terminal_chain_sha256",
+        "manifest_commitment_sha256", "source_modified", "claim_allowed"
+      ]
+    }
+  ]
+}
