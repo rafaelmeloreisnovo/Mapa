@@ -1,0 +1,70 @@
+name: Operational Excellence Gate V1
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "data/contracts/operational-excellence-gate.v1.json"
+      - "data/receipts/operational-excellence/**"
+      - "docs/governance/OPERATIONAL_EXCELLENCE_CONTROL_PLANE_V1.md"
+      - "docs/governance/README_OECG_V1.md"
+      - "docs/governance/OECG_V1_*.md"
+      - "schemas/mu-semantic-event.v2.schema.json"
+      - "scripts/governance/**"
+      - "tests/governance/**"
+      - "tests/fixtures/mu-semantic-event.v2.valid.json"
+      - "tests/fixtures/operational-excellence.receipt.*.json"
+      - ".github/workflows/operational-excellence-gate-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oecg-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-gate:
+    name: OECG exact fail-closed gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Validate machine-readable contract
+        run: python3 scripts/governance/validate_operational_excellence_gate.py
+
+      - name: Positive receipt fixture must pass
+        run: >-
+          python3 scripts/governance/validate_operational_excellence_gate.py
+          --receipt tests/fixtures/operational-excellence.receipt.valid.json
+
+      - name: Unresolved authority negative control must fail closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if python3 scripts/governance/validate_operational_excellence_gate.py \
+            --receipt tests/fixtures/operational-excellence.receipt.invalid-authority.json; then
+            echo "FAIL: invalid-authority fixture unexpectedly passed"
+            exit 1
+          fi
+          echo "PASS: unresolved authority was rejected as expected"
+
+      - name: Semantic event v2 deterministic replay fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          fixture="tests/fixtures/mu-semantic-event.v2.valid.json"
+          a=$(python3 scripts/governance/check_semantic_event_v2.py "$fixture" | sed -n 's/^PASS sha256=//p')
+          b=$(python3 scripts/governance/check_semantic_event_v2.py "$fixture" | sed -n 's/^PASS sha256=//p')
+          [ -n "$a" ]
+          [ "$a" = "$b" ]
+          echo "PASS: deterministic semantic fixture sha256=$a"
+
+      - name: Governance unit and CLI tests
+        run: python3 -m unittest discover tests/governance -p 'test_*.py' -v
