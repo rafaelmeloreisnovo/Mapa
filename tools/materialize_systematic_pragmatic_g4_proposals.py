@@ -51,6 +51,19 @@ def state_value(obj: dict[str, Any]) -> Any:
     return first_value(obj, ("status", "state", "uncertainty_state"))
 
 
+def string_leaves(value: Any) -> list[str]:
+    out: list[str] = []
+    if isinstance(value, str) and value:
+        out.append(value)
+    elif isinstance(value, dict):
+        for child in value.values():
+            out.extend(string_leaves(child))
+    elif isinstance(value, list):
+        for child in value:
+            out.extend(string_leaves(child))
+    return out
+
+
 def next_gate_values(obj: dict[str, Any]) -> list[str]:
     wanted = {
         "closure_gate",
@@ -61,14 +74,8 @@ def next_gate_values(obj: dict[str, Any]) -> list[str]:
     }
     out: list[str] = []
     for key, value in walk_items(obj):
-        if key not in wanted:
-            continue
-        if isinstance(value, str) and value:
-            out.append(value)
-        elif isinstance(value, dict):
-            criterion = value.get("criterion")
-            if isinstance(criterion, str) and criterion:
-                out.append(criterion)
+        if key in wanted:
+            out.extend(string_leaves(value))
     return sorted(set(out))
 
 
