@@ -20,6 +20,9 @@ class SystematicPragmaticMappingServiceTest(unittest.TestCase):
         (root / "README.md").write_text(
             "TOKEN_VAZIO: runtime evidence\n", encoding="utf-8"
         )
+        (root / "NOTES.md").write_text(
+            "TODO: bind this operational note\n", encoding="utf-8"
+        )
         atlas = {
             "schema": "RAFAELIA_GAP_ATLAS_V1",
             "claim_allowed": False,
@@ -92,17 +95,23 @@ class SystematicPragmaticMappingServiceTest(unittest.TestCase):
             self.assertEqual(loose[0]["effort"], "TOKEN_VAZIO_UNMEASURED")
 
             readme = [
+                row for row in action_map["actions"] if row["path"] == "README.md"
+            ]
+            self.assertEqual(readme, [])
+            self.assertGreaterEqual(
+                action_map["summary"]["preserved_token_vazio_observations"], 1
+            )
+
+            notes = [
                 row
                 for row in action_map["actions"]
-                if row["path"] == "README.md"
-                and row["gap"] in {"UNRESOLVED_MARKERS", "DOCUMENT_INCOMPLETE"}
+                if row["path"] == "NOTES.md"
+                and row["gap"] == "UNRESOLVED_MARKERS"
             ]
-            self.assertTrue(readme)
-            self.assertTrue(
-                all(
-                    row["nibiguiri_state"] == "NIBIGUIRI:OBVIO_NAO_INDEXADO"
-                    for row in readme
-                )
+            self.assertEqual(len(notes), 1)
+            self.assertEqual(
+                notes[0]["nibiguiri_state"],
+                "NIBIGUIRI:OBVIO_NAO_INDEXADO",
             )
 
     def test_fail_on_unmapped_is_enforceable(self):
