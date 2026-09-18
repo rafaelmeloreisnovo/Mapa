@@ -17,15 +17,18 @@ on:
       - "tools/materialize_systematic_pragmatic_routing_bindings.py"
       - "tools/reconcile_systematic_pragmatic_source_gaps.py"
       - "tools/materialize_systematic_pragmatic_g4_proposals.py"
+      - "tools/materialize_systematic_pragmatic_canonical_completion.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_probe_systematic_pragmatic_routing.py"
       - "tests/test_materialize_systematic_pragmatic_routing_bindings.py"
       - "tests/test_reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_materialize_systematic_pragmatic_g4_proposals.py"
+      - "tests/test_materialize_systematic_pragmatic_canonical_completion.py"
       - "tests/test_systematic_pragmatic_g3_decisions.py"
       - "scripts/validate_systematic_pragmatic_g3_decisions.py"
       - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
+      - "data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -33,7 +36,6 @@ on:
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
       - "docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md"
-      - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
       - ".github/workflows/rafaelia-gap-atlas.yml"
   push:
     branches: [main]
@@ -51,12 +53,14 @@ on:
       - "tools/materialize_systematic_pragmatic_routing_bindings.py"
       - "tools/reconcile_systematic_pragmatic_source_gaps.py"
       - "tools/materialize_systematic_pragmatic_g4_proposals.py"
+      - "tools/materialize_systematic_pragmatic_canonical_completion.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_probe_systematic_pragmatic_routing.py"
       - "tests/test_materialize_systematic_pragmatic_routing_bindings.py"
       - "tests/test_reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_materialize_systematic_pragmatic_g4_proposals.py"
+      - "tests/test_materialize_systematic_pragmatic_canonical_completion.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -65,6 +69,7 @@ on:
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
       - "docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md"
       - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
+      - "data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl"
       - ".github/workflows/rafaelia-gap-atlas.yml"
 
 permissions:
@@ -98,12 +103,14 @@ jobs:
           python3 -m py_compile tools/materialize_systematic_pragmatic_routing_bindings.py
           python3 -m py_compile tools/reconcile_systematic_pragmatic_source_gaps.py
           python3 -m py_compile tools/materialize_systematic_pragmatic_g4_proposals.py
+          python3 -m py_compile tools/materialize_systematic_pragmatic_canonical_completion.py
           python3 -m py_compile tests/test_systematic_pragmatic_mapping_service.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_children.py
           python3 -m py_compile tests/test_probe_systematic_pragmatic_routing.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_routing_bindings.py
           python3 -m py_compile tests/test_reconcile_systematic_pragmatic_source_gaps.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_g4_proposals.py
+          python3 -m py_compile tests/test_materialize_systematic_pragmatic_canonical_completion.py
           python3 -m py_compile tests/test_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile scripts/validate_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
@@ -128,6 +135,9 @@ jobs:
           while IFS= read -r line; do
             [ -z "$line" ] || printf '%s\n' "$line" | python3 -m json.tool >/dev/null
           done < data/triage/systematic-pragmatic-g3-decisions.v1.jsonl
+          while IFS= read -r line; do
+            [ -z "$line" ] || printf '%s\n' "$line" | python3 -m json.tool >/dev/null
+          done < data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl
 
       - name: Validate federated authority registry
         run: python3 scripts/validate_federated_registry.py | tee federated-authority-validation.json
@@ -156,6 +166,7 @@ jobs:
           python3 -m unittest -v tests/test_materialize_systematic_pragmatic_routing_bindings.py
           python3 -m unittest -v tests/test_reconcile_systematic_pragmatic_source_gaps.py
           python3 -m unittest -v tests/test_materialize_systematic_pragmatic_g4_proposals.py
+          python3 -m unittest -v tests/test_materialize_systematic_pragmatic_canonical_completion.py
           python3 -m unittest -v tests/test_systematic_pragmatic_g3_decisions.py
 
       - name: Validate evidence-backed G3 decisions
@@ -232,8 +243,17 @@ jobs:
           python3 tools/materialize_systematic_pragmatic_g4_proposals.py \
             --reconciliation artifacts/systematic-pragmatic-map/source_gap_reconciliation.json \
             --repo-root . \
+            --authority-resolutions data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl \
             --output artifacts/systematic-pragmatic-map/g4_proposals.json \
             | tee systematic-pragmatic-g4-proposals-summary.json
+
+      - name: Materialize evidence-typed canonical completion
+        run: |
+          python3 tools/materialize_systematic_pragmatic_canonical_completion.py \
+            --proposals artifacts/systematic-pragmatic-map/g4_proposals.json \
+            --repo-root . \
+            --output artifacts/systematic-pragmatic-map/canonical_completion.json \
+            | tee systematic-pragmatic-canonical-completion-summary.json
 
       - name: Guard coverage, effective state and claim boundary
         run: |
@@ -252,6 +272,7 @@ jobs:
           routing_bindings = json.loads(Path('artifacts/systematic-pragmatic-map/routing_bindings.json').read_text())
           source_gap_reconciliation = json.loads(Path('artifacts/systematic-pragmatic-map/source_gap_reconciliation.json').read_text())
           g4_proposals = json.loads(Path('artifacts/systematic-pragmatic-map/g4_proposals.json').read_text())
+          canonical_completion = json.loads(Path('artifacts/systematic-pragmatic-map/canonical_completion.json').read_text())
           coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
           adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
           overrides = json.loads(Path('data/gap-atlas/GAP_STATE_OVERRIDES_V1.json').read_text())
@@ -337,10 +358,23 @@ jobs:
           assert g4_proposals['policy']['proposal_is_not_binding'] is True
           assert g4_proposals['policy']['proposal_is_not_append'] is True
           assert g4_proposals['summary']['proposals'] == 35
+          assert g4_proposals['summary']['by_action'].get('PROPOSE_APPEND_NEW') == 35
+          assert g4_proposals['summary']['by_action'].get('NEEDS_MORE_EVIDENCE', 0) == 0
+          assert g4_proposals['summary']['authority_resolutions_applied'] == 1
           assert sum(g4_proposals['summary']['by_action'].values()) == 35
           assert all(row['proposed_atlas_gap_id'] == 'TOKEN_VAZIO' for row in g4_proposals['proposals'])
           assert all(row['g4']['atlas_mutation_allowed'] is False for row in g4_proposals['proposals'])
           assert all(row['g4']['auto_create_gap_id'] is False for row in g4_proposals['proposals'])
+          assert canonical_completion['claim_allowed'] is False
+          assert canonical_completion['atlas_mutation_allowed'] is False
+          assert canonical_completion['policy']['canonical_completion_is_not_atlas_record'] is True
+          assert canonical_completion['policy']['alias_is_not_equivalence'] is True
+          assert canonical_completion['summary']['completion_candidates'] == 35
+          assert canonical_completion['summary']['baseline_existing_proposals'] == 34
+          assert canonical_completion['summary']['newly_unblocked_by_authority'] == 1
+          assert all(row['proposed_atlas_gap_id'] == 'TOKEN_VAZIO' for row in canonical_completion['completions'])
+          assert all(row['g4']['atlas_mutation_allowed'] is False for row in canonical_completion['completions'])
+          assert all(row['g4']['auto_create_gap_id'] is False for row in canonical_completion['completions'])
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
           assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
@@ -378,7 +412,11 @@ jobs:
             artifacts/systematic-pragmatic-map/routing_semantic_probe.json \
             artifacts/systematic-pragmatic-map/routing_bindings.json \
             artifacts/systematic-pragmatic-map/source_gap_reconciliation.json \
+            data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl \
+            tools/materialize_systematic_pragmatic_canonical_completion.py \
+            tests/test_materialize_systematic_pragmatic_canonical_completion.py \
             artifacts/systematic-pragmatic-map/g4_proposals.json \
+            artifacts/systematic-pragmatic-map/canonical_completion.json \
             artifacts/systematic-pragmatic-map/g3_decision_validation.json \
             artifacts/systematic-pragmatic-map/receipt.json \
             docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md \
@@ -399,6 +437,7 @@ jobs:
             systematic-pragmatic-routing-bindings-summary.json
             systematic-pragmatic-g4-reconciliation-summary.json
             systematic-pragmatic-g4-proposals-summary.json
+            systematic-pragmatic-canonical-completion-summary.json
             effective-gap-atlas-counts.json
             artifacts/gap-atlas/
             artifacts/systematic-pragmatic-map/
