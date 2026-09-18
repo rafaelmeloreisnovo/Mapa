@@ -82,6 +82,24 @@ def rows_for_top_cluster(
     ]
 
 
+def g4_state_for(decision_state: str, decision: dict[str, Any] | None) -> str:
+    if decision_state == "SPLIT_REQUIRED":
+        return "BLOCKED_BY_G3_SPLIT"
+    if decision_state == "DISTINCT_GAP":
+        return "REQUIRES_PER_ITEM_BINDING"
+    if decision_state == "SAME_FAMILY":
+        return "READY_FOR_AUTHORITY_BIND"
+    if decision_state == "DUPLICATE":
+        return "READY_FOR_EXISTING_BINDING"
+    if decision_state == "FALSE_POSITIVE":
+        return "NOT_APPLICABLE_FALSE_POSITIVE"
+    if decision_state == "ACCEPTED_LIMITATION":
+        return "NOT_APPLICABLE_ACCEPTED_LIMITATION"
+    if decision:
+        return "BLOCKED_PENDING_AUTHORITY_BIND"
+    return "BLOCKED_BY_G3"
+
+
 def split_rows(
     *,
     parent_cluster_id: str,
@@ -128,12 +146,12 @@ def split_rows(
 
         decision = decisions.get(cid)
         decision_state = decision.get("decision") if decision else "REVIEW_REQUIRED"
-        if decision_state == "SPLIT_REQUIRED":
-            g4_state = "BLOCKED_BY_G3_SPLIT"
-        elif decision:
-            g4_state = "BLOCKED_PENDING_AUTHORITY_BIND"
-        else:
-            g4_state = "BLOCKED_BY_G3"
+        split_strategy = (
+            decision.get("split_strategy", "PATH_SEGMENT")
+            if decision_state == "SPLIT_REQUIRED" and decision
+            else None
+        )
+        g4_state = g4_state_for(decision_state, decision)
 
         child = {
             "cluster_id": cid,
@@ -157,6 +175,8 @@ def split_rows(
             "g3": {
                 "state": decision_state,
                 "decision_id": decision.get("decision_id") if decision else None,
+                "split_strategy": split_strategy,
+                "binding_strategy": decision.get("binding_strategy") if decision else None,
                 "automatic_decision": False,
             },
             "g4": {
@@ -168,7 +188,7 @@ def split_rows(
         }
         children.append(child)
 
-        if decision_state == "SPLIT_REQUIRED":
+        if decision_state == "SPLIT_REQUIRED" and split_strategy == "PATH_SEGMENT":
             children.extend(
                 split_rows(
                     parent_cluster_id=cid,
@@ -240,6 +260,13 @@ def materialize(
     roots = [row for row in children if row["level"] == 1]
     review_required = sum(1 for row in children if row["g3"]["state"] == "REVIEW_REQUIRED")
     split_required = sum(1 for row in children if row["g3"]["state"] == "SPLIT_REQUIRED")
+    deferred_semantic_splits = sum(
+        1
+        for row in children
+        if row["g3"]["state"] == "SPLIT_REQUIRED"
+        and row["g3"].get("split_strategy") == "SEMANTIC_SCHEMA"
+    )
+    distinct_gap = sum(1 for row in children if row["g3"]["state"] == "DISTINCT_GAP")
 
     payload = {
         "schema": SCHEMA,
@@ -256,6 +283,8 @@ def materialize(
             "level1_children": len(roots),
             "review_required": review_required,
             "split_required": split_required,
+            "deferred_semantic_splits": deferred_semantic_splits,
+            "distinct_gap": distinct_gap,
             "max_level": max((row["level"] for row in children), default=0),
         },
         "children": sorted(
