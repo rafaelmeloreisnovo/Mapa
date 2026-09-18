@@ -11,12 +11,15 @@ on:
       - "tools/rafaelia_specialized_ledger_adapter.py"
       - "tools/materialize_effective_gap_atlas.py"
       - "tools/repository_gap_mapper.py"
+      - "tools/systematic_pragmatic_mapping_service.py"
+      - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
       - "indices/repository_authority_registry.json"
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
+      - "docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md"
       - ".github/workflows/rafaelia-gap-atlas.yml"
   push:
     branches: [main]
@@ -28,12 +31,15 @@ on:
       - "tools/rafaelia_specialized_ledger_adapter.py"
       - "tools/materialize_effective_gap_atlas.py"
       - "tools/repository_gap_mapper.py"
+      - "tools/systematic_pragmatic_mapping_service.py"
+      - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
       - "indices/repository_authority_registry.json"
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
+      - "docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md"
       - ".github/workflows/rafaelia-gap-atlas.yml"
 
 permissions:
@@ -50,7 +56,7 @@ jobs:
 
     steps:
       - name: Checkout without persisted credentials
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
 
@@ -61,6 +67,8 @@ jobs:
           python3 -m py_compile tools/rafaelia_specialized_ledger_adapter.py
           python3 -m py_compile tools/materialize_effective_gap_atlas.py
           python3 -m py_compile tools/repository_gap_mapper.py
+          python3 -m py_compile tools/systematic_pragmatic_mapping_service.py
+          python3 -m py_compile tests/test_systematic_pragmatic_mapping_service.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
           python3 -m py_compile tests/test_rafaelia_specialized_ledger_adapter.py
           python3 -m py_compile tests/test_materialize_effective_gap_atlas.py
@@ -102,6 +110,7 @@ jobs:
           python3 -m unittest -v tests/test_rafaelia_gap_atlas.py
           python3 -m unittest -v tests/test_rafaelia_specialized_ledger_adapter.py
           python3 -m unittest -v tests/test_materialize_effective_gap_atlas.py
+          python3 -m unittest -v tests/test_systematic_pragmatic_mapping_service.py
 
       - name: Generate bounded repository gap map
         run: |
@@ -121,6 +130,16 @@ jobs:
             --output artifacts/gap-atlas/discovery_candidates.json \
             | tee gap-discovery-summary.json
 
+      - name: Generate systematic pragmatic action map
+        run: |
+          python3 tools/systematic_pragmatic_mapping_service.py \
+            --root Mapa=. \
+            --exclude generated \
+            --exclude artifacts \
+            --output-dir artifacts/systematic-pragmatic-map \
+            --fail-on none \
+            | tee systematic-pragmatic-summary.json
+
       - name: Guard coverage, effective state and claim boundary
         run: |
           python3 - <<'PY'
@@ -130,6 +149,8 @@ jobs:
           report = json.loads(Path('artifacts/gap-atlas/validation_report.json').read_text())
           effective = json.loads(Path('artifacts/gap-atlas/effective_gap_atlas.json').read_text())
           discovery = json.loads(Path('artifacts/gap-atlas/discovery_candidates.json').read_text())
+          pragmatic = json.loads(Path('artifacts/systematic-pragmatic-map/pragmatic_action_map.json').read_text())
+          pragmatic_receipt = json.loads(Path('artifacts/systematic-pragmatic-map/receipt.json').read_text())
           coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
           adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
           overrides = json.loads(Path('data/gap-atlas/GAP_STATE_OVERRIDES_V1.json').read_text())
@@ -150,6 +171,18 @@ jobs:
           assert by_id['GAP-DRIVE-GITHUB-PROVENANCE-001']['effective_state'] == 'TOKEN_VAZIO'
           assert by_id['GAP-TRAINING-EVIDENCE-001']['effective_state'] == 'NOT_MEASURED'
           assert discovery['claim_allowed'] is False
+          assert pragmatic['claim_allowed'] is False
+          assert pragmatic_receipt['claim_allowed'] is False
+          assert pragmatic['flow'] == ['SCAN', 'BIND', 'NIBIGUIRI', 'PRIORIZE', 'SERVICE', 'GATE', 'RECEIPT']
+          assert pragmatic['summary']['clusters'] == len(pragmatic['clusters'])
+          assert pragmatic['summary']['largest_cluster_actions'] >= 0
+          assert all(
+              row['nibiguiri_state'] != 'NIBIGUIRI:OBVIO_NAO_INDEXADO'
+              for row in pragmatic['actions']
+              if not row['mapped_gap_ids']
+          )
+          assert all(cluster['claim_allowed'] is False for cluster in pragmatic['clusters'])
+          assert pragmatic_receipt['cluster_digest_sha256']
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
           assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
@@ -181,19 +214,24 @@ jobs:
             artifacts/gap-atlas/effective_gap_atlas.json \
             artifacts/gap-atlas/repository_gap_map.json \
             artifacts/gap-atlas/discovery_candidates.json \
+            artifacts/systematic-pragmatic-map/pragmatic_action_map.json \
+            artifacts/systematic-pragmatic-map/receipt.json \
+            docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md \
             > GAP_ATLAS_CHECKSUMS.sha256
 
       - name: Upload audit evidence
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: rafaelia-gap-atlas-${{ github.sha }}
           path: |
             gap-atlas-validation.json
             federated-authority-validation.json
             gap-discovery-summary.json
+            systematic-pragmatic-summary.json
             effective-gap-atlas-counts.json
             artifacts/gap-atlas/
+            artifacts/systematic-pragmatic-map/
             GAP_ATLAS_CHECKSUMS.sha256
           if-no-files-found: warn
           retention-days: 30
