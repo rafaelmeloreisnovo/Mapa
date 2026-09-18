@@ -309,3 +309,42 @@ PROBE != G3_DECISION
 
 O resultado entra no artifact/checksum do Gap Atlas e serve como evidência para o
 próximo ledger G3.
+
+
+## 15. G3 routing decisions from bounded probe
+
+O probe do Gap Atlas run #51 sustenta duas decisões distintas.
+
+### `data/routing/cycles`
+
+Observado: 75 ações, 25 famílias de schema, 69 registros com
+`claim_allowed=false`, 71 com contexto estruturado de lacuna/incerteza e 74 com
+closure/next gate.
+
+```text
+G3 = SPLIT_REQUIRED
+split_strategy = SEMANTIC_SCHEMA
+G4 = BLOCKED_BY_G3_SPLIT
+```
+
+O split por schema produz famílias para revisão; schema comum não implica
+`SAME_SITUATION`.
+
+### `data/routing/operational-gaps`
+
+Observado: 36 registros selecionados, todos parseáveis, todos com `gap_id`, 35
+identidades únicas, um grupo com dois registros para
+`BOOTSTRAP_CROSS_STORE_PARITY_20260819T2044BRT`, 36/36 com
+`claim_allowed=false` e 36/36 com closure/next gate.
+
+```text
+G3 = DISTINCT_GAP
+binding_strategy = PER_EXISTING_GAP_ID
+G4 = REQUIRES_PER_ITEM_BINDING
+Atlas binding = TOKEN_VAZIO
+auto_create_gap_id = false
+```
+
+`tools/materialize_systematic_pragmatic_routing_bindings.py` transforma essas
+decisões em famílias de schema e candidatos de binding por `source_gap_id`, sem
+criar IDs do Atlas.
