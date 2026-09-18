@@ -1,0 +1,21 @@
+{
+  "schema": "rafaelia.receipt-correction/v1",
+  "correction_id": "SPMS-ROUTING-PROBE-20260918-CORR-001",
+  "parent_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_ROUTING_PROBE_20260918_PASS.json",
+  "reason": "The parent receipt recorded cycles.schema_families=26. Direct inspection of routing_semantic_probe.json from artifact 10556951157 shows 25 schema_counts keys summing to 75 selected cycle records.",
+  "corrected_fields": {
+    "cycles.schema_families": {
+      "before": 26,
+      "after": 25
+    }
+  },
+  "evidence": {
+    "workflow_run_id": 35367255593,
+    "artifact_id": 10556951157,
+    "artifact_digest": "sha256:7a3773975f7852adfd938da55b0028c66a4c4bc20d3c77f88a1ab5923d452b62",
+    "report_path": "artifacts/systematic-pragmatic-map/routing_semantic_probe.json",
+    "schema_count_sum": 75
+  },
+  "preservation": "Parent receipt is not rewritten; this correction supersedes only the stated count.",
+  "claim_allowed": false
+}
