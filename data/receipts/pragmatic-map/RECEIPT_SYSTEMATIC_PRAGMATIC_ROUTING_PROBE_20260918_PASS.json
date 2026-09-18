@@ -1,0 +1,56 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-routing-probe-receipt/v1",
+  "receipt_id": "SPMS-ROUTING-PROBE-20260918-PASS",
+  "tested_head": "379627929b58689f6818f5359d293293f8662e58",
+  "pr": "rafaelmeloreisnovo/Mapa#643",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 51,
+    "run_id": 35367255593,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10556951157,
+    "name": "rafaelia-gap-atlas-f9c2a045c994e16c766465b071837976228b8b0d",
+    "digest": "sha256:7a3773975f7852adfd938da55b0028c66a4c4bc20d3c77f88a1ab5923d452b62",
+    "size_bytes": 916339
+  },
+  "cycles": {
+    "selected_actions": 75,
+    "parseable_json": 75,
+    "claim_allowed_false": 69,
+    "structured_open_context": 71,
+    "closure_or_next_gate": 74,
+    "token_vazio_occurrences": 1830,
+    "schema_families": 26
+  },
+  "operational_gaps": {
+    "selected_actions": 36,
+    "parseable_json": 36,
+    "with_gap_id": 36,
+    "unique_gap_ids": 35,
+    "duplicate_gap_id_groups": {
+      "BOOTSTRAP_CROSS_STORE_PARITY_20260819T2044BRT": 2
+    },
+    "claim_allowed_false": 36,
+    "owner_present": 35,
+    "closure_or_next_gate": 36,
+    "token_vazio_occurrences": 327
+  },
+  "interpretation": [
+    "cycles are heterogeneous and cannot be globally classified as false positives",
+    "operational-gaps are already explicit typed gap records, but one gap_id has multiple records",
+    "probe is evidence only and does not assign G3/G4"
+  ],
+  "f_ok": [
+    "routing semantic probe PASS",
+    "report checksum-bound",
+    "no automatic decision"
+  ],
+  "f_gap": [
+    "cycles need semantic/schema-family split decision",
+    "operational-gaps need per-gap-id binding semantics"
+  ],
+  "f_next": "Record explicit G3 decisions using the probe evidence.",
+  "claim_allowed": false
+}
