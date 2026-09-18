@@ -166,7 +166,7 @@ G3=REVIEW_REQUIRED
 A decisão deve ser uma entre:
 
 ```text
-DUPLICATE | SAME_FAMILY | DISTINCT_GAP | FALSE_POSITIVE | ACCEPTED_LIMITATION
+DUPLICATE | SAME_FAMILY | DISTINCT_GAP | SPLIT_REQUIRED | FALSE_POSITIVE | ACCEPTED_LIMITATION
 ```
 
 e exige amostra representativa, comparação de invariantes e razão explícita.
@@ -218,3 +218,25 @@ F_ok   = scanner + Atlas + Nibiguiri convertidos em fila operacional executável
 F_gap  = execução federada e métricas reais de esforço ainda precisam receipt; ruído TOKEN_VAZIO é preservado sem virar fila artificial
 F_next = executar teste/CI; depois aplicar o serviço aos repositórios autorizados e triar unmapped
 ```
+
+
+## 12. Primeiro G3 executado
+
+O primeiro cluster revisado foi `CL-e005a14253d55a76`, observado no Gap Atlas
+run #43. Ele continha 681 ações do domínio `data`, todas com marcador
+`TOKEN_VAZIO`, mas distribuídas por 58 subdomínios distintos, incluindo
+`routing`, `receipts`, `control-plane`, `catalog_runs`,
+`reconciliation`, `evidence`, `governance` e `audits`.
+
+Decisão:
+
+```text
+G3 = SPLIT_REQUIRED
+G4 = BLOCKED_BY_G3_SPLIT
+binding = TOKEN_VAZIO
+auto_create_gap_id = false
+```
+
+A decisão está registrada em
+`data/triage/systematic-pragmatic-g3-decisions.v1.jsonl` e é validada por
+`scripts/validate_systematic_pragmatic_g3_decisions.py`.
