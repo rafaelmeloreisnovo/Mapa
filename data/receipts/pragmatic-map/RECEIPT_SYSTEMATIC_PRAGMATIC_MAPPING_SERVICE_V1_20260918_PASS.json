@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-map-implementation-receipt/v1",
+  "receipt_id": "SPMS-V1-20260918-PASS",
+  "parent": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1_20260918.json",
+  "supersedes_state": "IMPLEMENTED_UNTESTED",
+  "timestamp": "2026-09-18T12:29:00-03:00",
+  "branch": "feat/systematic-pragmatic-mapping-service-v1",
+  "pr": "rafaelmeloreisnovo/Mapa#639",
+  "tested_head": "47f03791b7ee25255db0a62feb5497530960ea9e",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 36,
+    "run_id": 35362644886,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10555486485,
+    "name": "rafaelia-gap-atlas-a87ca9ae2bf25107379fb651c552ad24440a861a",
+    "digest": "sha256:e862dc09cf55a5bcd3eda63334b76e46c2705722ee6408b5709bd3ef1ef92a89",
+    "size_bytes": 864522
+  },
+  "observed_mapping": {
+    "scanned_artifacts": 2966,
+    "raw_gap_instances": 2387,
+    "raw_unmapped": 2387,
+    "pragmatic_actions": 1311,
+    "p0_blockers": 0,
+    "preserved_token_vazio_observations": 504,
+    "coalesced_document_duplicate_actions": 68,
+    "services": {
+      "SEMANTIC_TRIAGE": 1311
+    },
+    "pragmatic_unmapped": 1311
+  },
+  "evidence": [
+    "compile step PASS",
+    "fail-closed regression tests PASS",
+    "bounded repository gap map PASS",
+    "discovery adapter PASS",
+    "systematic pragmatic action map PASS",
+    "claim-boundary guard PASS",
+    "checksum receipt PASS",
+    "artifact upload PASS"
+  ],
+  "interpretation": [
+    "TOKEN_VAZIO-only documents remain observable in repository_gap_map but do not become artificial work items",
+    "DOCUMENT_INCOMPLETE duplicate signal is coalesced when the same document already has UNRESOLVED_MARKERS",
+    "all surviving actions in this bounded self-scan are P2 semantic triage and remain unbound to Atlas gap_ids",
+    "PASS validates service structure and execution, not resolution of the 1311 actions"
+  ],
+  "claim_allowed": false,
+  "f_ok": [
+    "systematic pragmatic mapping service structurally validated in CI",
+    "anti-noise rule reduced raw gap signals into a smaller actionable queue without erasing source observations",
+    "receipt artifact is checksum-bound"
+  ],
+  "f_gap": [
+    "1311 surviving actions still require binding/triage",
+    "federated multi-repository scan not executed in this run",
+    "effort/time per action remains TOKEN_VAZIO_UNMEASURED"
+  ],
+  "f_next": "Run the same service across authorized producer repositories, then cluster the 1311 semantic-triage actions by marker/path/domain before creating new gap_ids."
+}
