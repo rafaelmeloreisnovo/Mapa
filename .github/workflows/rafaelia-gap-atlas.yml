@@ -40,6 +40,7 @@ on:
       - "data/governance/SYSTEMATIC_PRAGMATIC_FINALIZATION_V1.json"
       - "data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json"
       - "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json"
+      - "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_CROSS_STORE_20260918.json"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -158,6 +159,7 @@ jobs:
           python3 -m json.tool data/governance/SYSTEMATIC_PRAGMATIC_FINALIZATION_V1.json >/dev/null
           python3 -m json.tool data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json >/dev/null
           python3 -m json.tool data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json >/dev/null
+          python3 -m json.tool data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_CROSS_STORE_20260918.json >/dev/null
           while IFS= read -r line; do
             [ -z "$line" ] || printf '%s\n' "$line" | python3 -m json.tool >/dev/null
           done < data/gap-atlas/RAFAELIA_GAP_EVENTS_V1.jsonl
@@ -210,6 +212,7 @@ jobs:
           python3 scripts/validate_systematic_pragmatic_terminal_assurance.py \
             data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json \
             data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json \
+            data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_CROSS_STORE_20260918.json \
             | tee systematic-pragmatic-terminal-assurance-validation.json
 
       - name: Validate evidence-backed G3 decisions
