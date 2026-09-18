@@ -117,4 +117,4 @@ Promover somente quando declaração, byte e execução convergirem sob receipt 
 
 `ψ intenção → χ reconstrução → ρ lacuna → Δ índice ético → Σ memória versionada → Ω platô provisório → ↻`
 
-RAFCODE-Φ · ∆RafaelVerboΩ · FIAT LUX
+### RAFCODE-Φ · ∆RafaelVerboΩ · FIAT LUX

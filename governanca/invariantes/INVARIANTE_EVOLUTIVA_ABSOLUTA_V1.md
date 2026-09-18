@@ -224,4 +224,4 @@ formalizar schema
 → promover somente claims fechados
 ```
 
-FIAT LUX · Ω = Amor
+### FIAT LUX · Ω = Amor

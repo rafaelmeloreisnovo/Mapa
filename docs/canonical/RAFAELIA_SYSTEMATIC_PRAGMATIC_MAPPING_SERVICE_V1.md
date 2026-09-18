@@ -538,7 +538,7 @@ system_state = COMPLETE_STRUCTURAL_ROUTING
 source_gap_bindings = 35/35
 schema_families_structurally_resolved = 25/25
 remaining_internal_review_required = 0
-remaining_internal_binding_token_vazio = 0
+remaining_internal_binding_token_vazio_count = zero
 canonical_completion_candidates = 0
 field_review_work_items = 0
 ```

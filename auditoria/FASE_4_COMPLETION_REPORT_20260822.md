@@ -25,6 +25,7 @@ FASE 4 of the RAFAELIA ecosystem integration has been completed successfully. Al
 **Closure Criteria Met**: ✓ Engine can distinguish association from intervention
 
 **Implementation**:
+
 - 400 lines of production code
 - Classes: `RelationType`, `EpistemicState`, `Node`, `Edge`, `CausalDAG`
 - Core methods:
@@ -34,6 +35,7 @@ FASE 4 of the RAFAELIA ecosystem integration has been completed successfully. Al
   - `to_dict()` — serialization
 
 **Epistemic Semantics**:
+
 - ASSOCIATION_ONLY: Observational correlation (undirected)
 - MECHANISM_CANDIDATE: Proposed causal mechanism
 - MECHANISM_HYPOTHETICAL: Requires intervention test
@@ -42,7 +44,8 @@ FASE 4 of the RAFAELIA ecosystem integration has been completed successfully. Al
 - TOKEN_VAZIO: Unproven
 
 **Example DAG** (validation example):
-```
+
+```text
 Nodes: x (treatment), z (confounder), y (outcome)
 Edges: z→x (confounder), z→y (confounder), x→y (direct)
 Confounders: {z}
@@ -51,6 +54,7 @@ Outcomes: {y}
 ```
 
 **Test Results** (15 unit tests):
+
 - `test_dag_creation` ✅
 - `test_d_separation_unconditioned` ✅ (returns False; unblocked path exists)
 - `test_d_separation_conditioned` ✅ (direct edge x→y remains unblocked)
@@ -68,6 +72,7 @@ Outcomes: {y}
 - `test_falsifier_intervention_removes_causality` ✅
 
 **Falsifiers Validated**:
+
 - Uncontrolled confounder must break causal claim
 - Conditioning on confounder must allow causal claim
 - Intervention must remove incoming edges
@@ -83,6 +88,7 @@ Outcomes: {y}
 **Closure Criteria Met**: ✓ Deterministic bootstrap with coverage, error propagation, model comparison
 
 **Implementation**:
+
 - 450 lines of production code
 - Classes: `ModelType`, `UQStatus`, `BootstrapSample`, `ConfidenceInterval`, `ModelComparison`, `BootstrapEngine`
 - Core methods:
@@ -93,27 +99,32 @@ Outcomes: {y}
   - `compare_models()` — AIC-based model comparison
 
 **Deterministic RNG**:
+
 - Linear Congruential Generator: `rng_state = (1103515245 * rng_state + 12345) & 0x7fffffff`
 - Fixed seed = reproducible sequences
 - Validated with identical seeds producing identical sequences
 
 **Confidence Interval Methods**:
+
 - **Percentile**: Direct quantile-based bounds (2.5th, 97.5th)
 - **Basic**: Reflection around point estimate
 - **BCa**: Bias-corrected + acceleration (simplified implementation)
 
 **Error Propagation**:
+
 - Formula: `Var(Y) ≈ (df/dX)² * Var(X)`
 - Derivative-aware uncertainty amplification
 - Tested with power-law transformation (y = x²)
 
 **Model Comparison**:
+
 - Log-likelihood calculation (normal error assumption)
 - AIC computation: `AIC = 2k - 2*LL`
 - Winner selection: Model with lower AIC wins
 - Confidence mapping: |AIC_diff| > 10 → high confidence
 
 **Test Results** (17 unit tests):
+
 - `test_engine_initialization` ✅
 - `test_deterministic_random` ✅ (same seed → same sequence)
 - `test_different_seeds_different_sequences` ✅
@@ -133,6 +144,7 @@ Outcomes: {y}
 - `test_falsifier_model_comparison_decisive` ✅
 
 **Falsifiers Validated**:
+
 - CI must bracket true mean (property of 95% CI)
 - Propagated uncertainty must be positive
 - Model with lower residuals must win comparison
@@ -148,6 +160,7 @@ Outcomes: {y}
 **4 Fixtures Created and Versioned**:
 
 #### Fixture 1: Vector Corpus (`vector_corpus_v1.jsonl.gz.json`)
+
 - **Hash**: `7e9ae12b630587ca8abb680dcc785440bb0ac1eaf4f533c430d8972437ae74c5`
 - **Size**: 783 bytes
 - **Purpose**: Federated validation, cross-repository evidence
@@ -155,6 +168,7 @@ Outcomes: {y}
 - **Immutable**: ✓
 
 #### Fixture 2: Calibration Benchmark (`calibration_benchmark_v1.json`)
+
 - **Hash**: `67547c166847924bc3c5ac4e8d98e2a21acde88984913c4192df59987242b1cd`
 - **Size**: 746 bytes
 - **Purpose**: Bootstrap UQ validation ground truth
@@ -163,6 +177,7 @@ Outcomes: {y}
 - **Immutable**: ✓
 
 #### Fixture 3: Log-Log Model Comparison (`log_log_comparison_v1.json`)
+
 - **Hash**: `9262abe325bdee5df4005e5d395086b2ab3ec4c68d3281a5fb19d06b48286613`
 - **Size**: 1053 bytes
 - **Purpose**: Model comparison validation (power-law vs linear)
@@ -171,6 +186,7 @@ Outcomes: {y}
 - **Immutable**: ✓
 
 #### Fixture 4: Fractal Dimension Null Models (`fractal_dimension_null_v1.json`)
+
 - **Hash**: `1fa5a2fc2d4992052db22f7e5a875079bee0bbbd1ddaae99a2492bcaca3134ca`
 - **Size**: 1838 bytes
 - **Purpose**: Null model validation (dimension estimator ground truth)
@@ -179,6 +195,7 @@ Outcomes: {y}
 - **Immutable**: ✓
 
 **Manifest File** (`FIXTURE_MANIFEST_v1.json`):
+
 - Centralized hash registry
 - Schema versions recorded
 - Lifecycle states documented
@@ -219,18 +236,21 @@ Outcomes: {y}
    - Reason: Handoff chain creates distinct evidence link
 
 **Lineage ID Structure**:
+
 - Format: `{repo}:{branch}:{commit}:{path}:{artifact_hash}`
 - Example: `termux-packages:main:a1b2c3d:packages/curl/build.sh:sha256:abc123`
 - Properties: Immutable, globally unique, append-only versioning
 - Authority binding: Repo owner
 
 **Cross-Repo Validation** (6-repo TOROID):
+
 - Topology: All 6 repos validated as connected graph
 - Authority non-overlap: Roles are distinct and non-overlapping
 - Dedup consistency: Rules applied uniformly across repos
 - Independence proof: Duplicates correctly classified
 
 **Validation Gates for Federation Certification**:
+
 1. Lineage chain closure (all artifacts linked)
 2. Authority non-overlap (roles distinct)
 3. Dedup consistency (rules uniform)
@@ -286,12 +306,14 @@ TV-TEST: PENDING (next phase: full federation topology validation)
 ## Artifacts Produced
 
 **Code Files** (2 commits):
+
 - `data/analysis/dag_causal_engine.py` (400 lines)
 - `data/analysis/bootstrap_uq.py` (450 lines)
 - `tests/test_dag_causal.py` (120 lines)
 - `tests/test_bootstrap_uq.py` (275 lines)
 
 **Data Files**:
+
 - `data/fixtures/vector_corpus_v1.jsonl.gz.json` (783 bytes)
 - `data/fixtures/calibration_benchmark_v1.json` (746 bytes)
 - `data/fixtures/log_log_comparison_v1.json` (1053 bytes)
@@ -299,9 +321,11 @@ TV-TEST: PENDING (next phase: full federation topology validation)
 - `data/fixtures/FIXTURE_MANIFEST_v1.json` (manifest)
 
 **Governance Files**:
+
 - `data/control-plane/lineage_authority_v1.json` (authority pyramid + dedup rules)
 
 **Documentation**:
+
 - This report (`FASE_4_COMPLETION_REPORT_20260822.md`)
 
 ---
@@ -331,12 +355,14 @@ TV-TEST: PENDING (next phase: full federation topology validation)
 ### F_next 🌀 (Next Actions)
 
 **Immediate (FASE 5):**
+
 1. Execute `python3 scripts/validate_lineage_authority.py --check` (when available)
 2. Validate 6-repo TOROID topology coherence
 3. Cross-repo deduplication audit (ensure rules applied uniformly)
 4. Trace complete evidence chain from termux-packages → Mapa
 
 **Near-term (FASE 6):**
+
 1. Allocate physical devices (ARM32: Moto E7, ARM64: Realme)
 2. Execute device validation gates
 3. Collect device receipts (logcat, exit codes, photos)
@@ -363,6 +389,7 @@ TV-TEST: PENDING (next phase: full federation topology validation)
 ## Relationship to Plan
 
 **PLANO UNIFICADO Progress**:
+
 - **FASE 1** (Bootstrap & Governance) — COMPLETE
 - **FASE 2** (Cycle 2 termux-packages) — COMPLETE (5/5 gates TV-01..05 PASS)
 - **FASE 3** (BUG Resolution termux-app) — BLOCKED (awaiting BUG-02 human decision)
@@ -371,6 +398,7 @@ TV-TEST: PENDING (next phase: full federation topology validation)
 - **FASE 6** (Physical Validation) — PENDING (awaiting device allocation)
 
 **Estimated Timeline to FEDERATION_CERTIFIED**:
+
 - FASE 5: 3-5 days (cross-repo validation)
 - FASE 6: 5-7 days (device receipts)
 - **Total**: ~10-15 days from FASE 4 completion

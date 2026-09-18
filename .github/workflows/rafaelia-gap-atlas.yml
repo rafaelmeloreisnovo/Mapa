@@ -31,11 +31,16 @@ on:
       - "tests/test_enrich_systematic_pragmatic_identity_semantics.py"
       - "tests/test_materialize_systematic_pragmatic_field_review_queue.py"
       - "tests/test_finalize_systematic_pragmatic_routing.py"
+      - "tests/test_systematic_pragmatic_terminal_assurance.py"
       - "tests/test_systematic_pragmatic_g3_decisions.py"
       - "scripts/validate_systematic_pragmatic_g3_decisions.py"
+      - "scripts/validate_systematic_pragmatic_terminal_assurance.py"
       - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
       - "data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl"
       - "data/governance/SYSTEMATIC_PRAGMATIC_FINALIZATION_V1.json"
+      - "data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json"
+      - "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json"
+      - "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_CROSS_STORE_20260918.json"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -74,6 +79,7 @@ on:
       - "tests/test_enrich_systematic_pragmatic_identity_semantics.py"
       - "tests/test_materialize_systematic_pragmatic_field_review_queue.py"
       - "tests/test_finalize_systematic_pragmatic_routing.py"
+      - "tests/test_systematic_pragmatic_terminal_assurance.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -84,6 +90,8 @@ on:
       - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
       - "data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl"
       - "data/governance/SYSTEMATIC_PRAGMATIC_FINALIZATION_V1.json"
+      - "data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json"
+      - "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json"
       - ".github/workflows/rafaelia-gap-atlas.yml"
 
 permissions:
@@ -121,6 +129,7 @@ jobs:
           python3 -m py_compile tools/enrich_systematic_pragmatic_identity_semantics.py
           python3 -m py_compile tools/materialize_systematic_pragmatic_field_review_queue.py
           python3 -m py_compile tools/finalize_systematic_pragmatic_routing.py
+          python3 -m py_compile scripts/validate_systematic_pragmatic_terminal_assurance.py
           python3 -m py_compile tests/test_systematic_pragmatic_mapping_service.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_children.py
           python3 -m py_compile tests/test_probe_systematic_pragmatic_routing.py
@@ -131,6 +140,7 @@ jobs:
           python3 -m py_compile tests/test_enrich_systematic_pragmatic_identity_semantics.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_field_review_queue.py
           python3 -m py_compile tests/test_finalize_systematic_pragmatic_routing.py
+          python3 -m py_compile tests/test_systematic_pragmatic_terminal_assurance.py
           python3 -m py_compile tests/test_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile scripts/validate_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
@@ -147,6 +157,9 @@ jobs:
           python3 -m json.tool schemas/rafaelia_gap_atlas.v1.schema.json >/dev/null
           python3 -m json.tool indices/repository_authority_registry.json >/dev/null
           python3 -m json.tool data/governance/SYSTEMATIC_PRAGMATIC_FINALIZATION_V1.json >/dev/null
+          python3 -m json.tool data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json >/dev/null
+          python3 -m json.tool data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json >/dev/null
+          python3 -m json.tool data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_CROSS_STORE_20260918.json >/dev/null
           while IFS= read -r line; do
             [ -z "$line" ] || printf '%s\n' "$line" | python3 -m json.tool >/dev/null
           done < data/gap-atlas/RAFAELIA_GAP_EVENTS_V1.jsonl
@@ -191,7 +204,16 @@ jobs:
           python3 -m unittest -v tests/test_enrich_systematic_pragmatic_identity_semantics.py
           python3 -m unittest -v tests/test_materialize_systematic_pragmatic_field_review_queue.py
           python3 -m unittest -v tests/test_finalize_systematic_pragmatic_routing.py
+          python3 -m unittest -v tests/test_systematic_pragmatic_terminal_assurance.py
           python3 -m unittest -v tests/test_systematic_pragmatic_g3_decisions.py
+
+      - name: Validate terminal assurance boundary
+        run: |
+          python3 scripts/validate_systematic_pragmatic_terminal_assurance.py \
+            data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json \
+            data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json \
+            data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_CROSS_STORE_20260918.json \
+            | tee systematic-pragmatic-terminal-assurance-validation.json
 
       - name: Validate evidence-backed G3 decisions
         run: |
@@ -499,6 +521,9 @@ jobs:
             artifacts/systematic-pragmatic-map/routing_bindings.json \
             artifacts/systematic-pragmatic-map/source_gap_reconciliation.json \
             data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl \
+            data/governance/SYSTEMATIC_PRAGMATIC_TERMINAL_ASSURANCE_V1.json \
+            scripts/validate_systematic_pragmatic_terminal_assurance.py \
+            tests/test_systematic_pragmatic_terminal_assurance.py \
             tools/materialize_systematic_pragmatic_canonical_completion.py \
             tools/enrich_systematic_pragmatic_identity_semantics.py \
             tests/test_materialize_systematic_pragmatic_canonical_completion.py \
@@ -532,6 +557,7 @@ jobs:
             systematic-pragmatic-identity-semantics-summary.json
             systematic-pragmatic-field-review-summary.json
             systematic-pragmatic-finalization-summary.json
+            systematic-pragmatic-terminal-assurance-validation.json
             effective-gap-atlas-counts.json
             artifacts/gap-atlas/
             artifacts/systematic-pragmatic-map/

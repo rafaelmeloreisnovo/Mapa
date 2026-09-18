@@ -25,7 +25,7 @@ Estado desta passagem: `M4=0`, `M3=0`. A sessão tratou 13 famílias em nível d
 
 ## 2. Resultados matemáticos preservados
 
-### 2.1 Recorrência Rafaeliana da sequência iniciada por 2,4,7,12,20,33,54
+### 2.1 Recorrência Rafaeliana da sequência 2,4,7,12,20,33,54
 
 A recorrência observada é
 
