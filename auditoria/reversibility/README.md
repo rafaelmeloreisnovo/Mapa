@@ -23,6 +23,7 @@ This directory is the canonical catalog for reversible operations. Every reversi
 Each event records: event_id, timestamp, scope, operation, before_ref, after_ref, rollback_ref, evidence_ref, result, reversibility_state, risk_class, token_vazio, claim_allowed.
 
 Allowed reversibility states:
+
 - PLANNED
 - EXECUTED_REVERSIBLE
 - ROLLBACK_AVAILABLE
@@ -31,6 +32,7 @@ Allowed reversibility states:
 - TOKEN_VAZIO
 
 Rules:
+
 1. Never edit historical events in place; append a successor event.
 2. Rollback does not erase history; append a ROLLED_BACK event pointing to the original event.
 3. Derived maps/indexes are rebuildable from `index.jsonl`.

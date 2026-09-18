@@ -53,7 +53,6 @@ PR#81 CI
 
 No physical promotion follows automatically.
 
-
 ## Control update — exact-head execution state
 
 Federation PRs:

@@ -131,4 +131,3 @@ F_ok: taxonomia tipada de TOKEN_VAZIO, anomalia com sinal, Nibiguiri e âncoras 
 F_gap: regra exata de 15/45/50/150 e “variação de 1”; qualquer alegação sobre pesos internos/censura sem receipt; calibração empírica de anomalia sistêmica.
 
 F_next: criar fixtures determinísticos para classificação Nibiguiri e anomalia signed; validar que censura/peso desconhecidos caem em TOKEN_VAZIO e que a geometria 30-60-90 reproduz identidades formais.
-
