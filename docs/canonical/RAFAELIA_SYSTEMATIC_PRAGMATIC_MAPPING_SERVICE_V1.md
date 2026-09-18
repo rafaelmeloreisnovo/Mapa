@@ -431,3 +431,62 @@ auto_create_gap_id = false
 
 Campos canônicos ainda não sustentados por evidência, como `gap_class`,
 `priority`, `scope` ou novo ID do Atlas, permanecem `TOKEN_VAZIO`.
+
+
+## 18. Scoped authority resolution + canonical-field completion
+
+A lacuna de autoridade do source gap
+`TOKEN_VAZIO_INVALID_CLOSURE_RECEIPT_PROVENANCE_20260819T2207BRT`
+é resolvida somente para roteamento governado por um ledger append-only:
+
+`data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl`
+
+Evidência vinculada:
+
+- `indices/repository_authority_registry.json`: `rafaelmeloreisnovo/Mapa`
+  é `control_plane`, canônico para `gap_atlas` e `federation_audit`;
+- `tools/resolve_token_vazio.py`: Lane 04 coleta/valida, Lane 00 autoriza
+  closure/preservation;
+- `TOKEN_VAZIO_APPROVAL_WORKFLOWS_V1.md`: Lane 06 integra antes da promoção.
+
+A resolução é escopada:
+
+```text
+AUTHORITY_RESOLVED_SCOPED
+!= GAP_RESOLVED
+!= CLOSURE_VALIDATED
+!= ATLAS_BINDING
+```
+
+O source record histórico não é reescrito.
+
+### Canonical completion worksheet
+
+`tools/materialize_systematic_pragmatic_canonical_completion.py` transforma
+cada `PROPOSE_APPEND_NEW` em um worksheet de campos candidatos:
+
+```text
+EXACT_SOURCE_FIELD
+SOURCE_ALIAS_CANDIDATE
+MULTI_SOURCE_REVIEW
+TOKEN_VAZIO
+```
+
+Campos avaliados:
+
+`artifact_id, provider, scope, gap_class, priority, known, unknown,
+authority_required, evidence_required, next_gate`.
+
+Regras:
+
+```text
+alias != equivalence
+completion != Atlas record
+unsupported field => TOKEN_VAZIO
+proposed_atlas_gap_id = TOKEN_VAZIO
+atlas_mutation_allowed = false
+auto_create_gap_id = false
+```
+
+A contagem preserva a linhagem operacional: 34 proposals já elegíveis no gate
+anterior + 1 identidade recém-desbloqueada por resolução de autoridade.
