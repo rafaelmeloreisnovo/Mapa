@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-map-implementation-receipt/v1",
+  "receipt_id": "SPMS-V1-20260918",
+  "timestamp": "2026-09-18T12:24:27-03:00",
+  "intent": "Materialize an executable systematic and pragmatic mapping service over the existing Repository Gap Mapper + Gap Atlas + Nibiguiri semantics.",
+  "source_refs": [
+    "Mapa:tools/repository_gap_mapper.py@f6f3f5fcce965022c6b66e3c2aa4efcdba882d6d",
+    "Mapa:tools/rafaelia_gap_discovery_adapter.py@1559c8168f460a80028f807ccb8625f3de698bfa",
+    "Mapa:docs/canonical/RAFAELIA_GAP_ATLAS_V1.md@e46878e1ccc7000fd2d36794b3c334717a7c9680",
+    "Mapa:docs/canonical/2026-09-13/TYPED_TOKEN_VAZIO_ANOMALIA_NIBIGUIRI_V1.md@a18a0e63d822d0e71f380ab09d8802e5bdd7b643"
+  ],
+  "authority": {
+    "control_plane": "rafaelmeloreisnovo/Mapa",
+    "producer_authority": "unchanged",
+    "human_objective": "current user request",
+    "autonomous_goal_creation": false
+  },
+  "branch": "feat/systematic-pragmatic-mapping-service-v1",
+  "pr": "rafaelmeloreisnovo/Mapa#639",
+  "implementation_head_before_receipt": "9820edb5fcfe6d2bef9b4d8edfd1cb2b0a6e3266",
+  "changes": [
+    "tools/systematic_pragmatic_mapping_service.py",
+    "tests/test_systematic_pragmatic_mapping_service.py",
+    "docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md",
+    ".github/workflows/rafaelia-gap-atlas.yml"
+  ],
+  "flow": [
+    "SCAN",
+    "BIND",
+    "NIBIGUIRI",
+    "PRIORIZE",
+    "SERVICE",
+    "GATE",
+    "RECEIPT"
+  ],
+  "evidence": {
+    "repository_diff": "4 files changed before receipt; 726 additions; 0 deletions",
+    "pull_request_created": true,
+    "ci_execution": "TOKEN_VAZIO_NOT_OBSERVED",
+    "local_execution": "NOT_RUN_IN_CONNECTOR_CONTEXT"
+  },
+  "constraints": [
+    "claim_allowed=false",
+    "no auto-close",
+    "no autonomous goal creation",
+    "effort remains TOKEN_VAZIO_UNMEASURED",
+    "unmapped scanner observation becomes NIBIGUIRI:OBVIO_NAO_INDEXADO, not proof of cause",
+    "censorship/filter states require direct evidence"
+  ],
+  "f_ok": [
+    "service implementation materialized",
+    "unit tests materialized",
+    "Gap Atlas workflow wired",
+    "draft PR opened"
+  ],
+  "f_gap": [
+    "CI run not yet observable",
+    "runtime output not yet attached",
+    "federated multi-repository execution not yet performed"
+  ],
+  "f_next": "Observe an actual CI/test receipt; only then promote IMPLEMENTED_UNTESTED to PASS for the structural service.",
+  "claim_allowed": false
+}
