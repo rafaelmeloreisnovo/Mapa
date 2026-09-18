@@ -106,6 +106,50 @@ class G4ProposalTest(unittest.TestCase):
             self.assertEqual(row["source_evidence"]["closure_or_next_gate_records"], 1)
             self.assertTrue(row["source_evidence"]["source_next_gates"])
 
+    def test_scoped_authority_resolution_unblocks_missing_owner_without_closing_gap(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self._source(root, "resolved", owner=False)
+            reconciliation = {
+                "schema": "rafaelia.systematic-pragmatic-g4-reconciliation/v1",
+                "claim_allowed": False,
+                "reconciliation": [
+                    {
+                        "source_gap_id": "RESOLVED",
+                        "source_paths": [source],
+                        "status": "NO_EXACT_EVIDENCE",
+                        "candidate_atlas_gap_ids": [],
+                    }
+                ],
+            }
+            resolutions = {
+                "RESOLVED": {
+                    "schema": mod.AUTH_SCHEMA,
+                    "resolution_id": "AUTH-1",
+                    "subject_gap_id": "RESOLVED",
+                    "source_path": source,
+                    "decision": "AUTHORITY_RESOLVED_SCOPED",
+                    "owner_repository": "rafaelmeloreisnovo/Mapa",
+                    "lanes": {
+                        "evidence_and_validation": "04_validacao",
+                        "approval": "00_governanca",
+                    },
+                    "atlas_mutation_allowed": False,
+                    "claim_allowed": False,
+                }
+            }
+            out = mod.build_proposals(reconciliation, root, resolutions)
+            row = out["proposals"][0]
+            self.assertEqual(row["proposal_action"], "PROPOSE_APPEND_NEW")
+            self.assertTrue(row["source_evidence"]["authority_resolution_applied"])
+            self.assertEqual(row["source_evidence"]["authority_resolution_id"], "AUTH-1")
+            self.assertIn(
+                "rafaelmeloreisnovo/Mapa",
+                row["source_evidence"]["effective_authority_values"],
+            )
+            self.assertEqual(row["proposed_atlas_gap_id"], "TOKEN_VAZIO")
+            self.assertFalse(row["g4"]["atlas_mutation_allowed"])
+
     def test_exact_match_proposes_link_but_does_not_bind(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
