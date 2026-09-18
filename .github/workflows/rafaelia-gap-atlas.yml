@@ -18,6 +18,7 @@ on:
       - "tools/reconcile_systematic_pragmatic_source_gaps.py"
       - "tools/materialize_systematic_pragmatic_g4_proposals.py"
       - "tools/materialize_systematic_pragmatic_canonical_completion.py"
+      - "tools/enrich_systematic_pragmatic_identity_semantics.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_probe_systematic_pragmatic_routing.py"
@@ -25,6 +26,7 @@ on:
       - "tests/test_reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_materialize_systematic_pragmatic_g4_proposals.py"
       - "tests/test_materialize_systematic_pragmatic_canonical_completion.py"
+      - "tests/test_enrich_systematic_pragmatic_identity_semantics.py"
       - "tests/test_systematic_pragmatic_g3_decisions.py"
       - "scripts/validate_systematic_pragmatic_g3_decisions.py"
       - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
@@ -54,6 +56,7 @@ on:
       - "tools/reconcile_systematic_pragmatic_source_gaps.py"
       - "tools/materialize_systematic_pragmatic_g4_proposals.py"
       - "tools/materialize_systematic_pragmatic_canonical_completion.py"
+      - "tools/enrich_systematic_pragmatic_identity_semantics.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_probe_systematic_pragmatic_routing.py"
@@ -61,6 +64,7 @@ on:
       - "tests/test_reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_materialize_systematic_pragmatic_g4_proposals.py"
       - "tests/test_materialize_systematic_pragmatic_canonical_completion.py"
+      - "tests/test_enrich_systematic_pragmatic_identity_semantics.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -104,6 +108,7 @@ jobs:
           python3 -m py_compile tools/reconcile_systematic_pragmatic_source_gaps.py
           python3 -m py_compile tools/materialize_systematic_pragmatic_g4_proposals.py
           python3 -m py_compile tools/materialize_systematic_pragmatic_canonical_completion.py
+          python3 -m py_compile tools/enrich_systematic_pragmatic_identity_semantics.py
           python3 -m py_compile tests/test_systematic_pragmatic_mapping_service.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_children.py
           python3 -m py_compile tests/test_probe_systematic_pragmatic_routing.py
@@ -111,6 +116,7 @@ jobs:
           python3 -m py_compile tests/test_reconcile_systematic_pragmatic_source_gaps.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_g4_proposals.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_canonical_completion.py
+          python3 -m py_compile tests/test_enrich_systematic_pragmatic_identity_semantics.py
           python3 -m py_compile tests/test_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile scripts/validate_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
@@ -167,6 +173,7 @@ jobs:
           python3 -m unittest -v tests/test_reconcile_systematic_pragmatic_source_gaps.py
           python3 -m unittest -v tests/test_materialize_systematic_pragmatic_g4_proposals.py
           python3 -m unittest -v tests/test_materialize_systematic_pragmatic_canonical_completion.py
+          python3 -m unittest -v tests/test_enrich_systematic_pragmatic_identity_semantics.py
           python3 -m unittest -v tests/test_systematic_pragmatic_g3_decisions.py
 
       - name: Validate evidence-backed G3 decisions
@@ -255,6 +262,14 @@ jobs:
             --output artifacts/systematic-pragmatic-map/canonical_completion.json \
             | tee systematic-pragmatic-canonical-completion-summary.json
 
+      - name: Enrich identity and semantics from structured source evidence
+        run: |
+          python3 tools/enrich_systematic_pragmatic_identity_semantics.py \
+            --completion artifacts/systematic-pragmatic-map/canonical_completion.json \
+            --repo-root . \
+            --output artifacts/systematic-pragmatic-map/identity_semantics_enrichment.json \
+            | tee systematic-pragmatic-identity-semantics-summary.json
+
       - name: Guard coverage, effective state and claim boundary
         run: |
           python3 - <<'PY'
@@ -273,6 +288,7 @@ jobs:
           source_gap_reconciliation = json.loads(Path('artifacts/systematic-pragmatic-map/source_gap_reconciliation.json').read_text())
           g4_proposals = json.loads(Path('artifacts/systematic-pragmatic-map/g4_proposals.json').read_text())
           canonical_completion = json.loads(Path('artifacts/systematic-pragmatic-map/canonical_completion.json').read_text())
+          identity_semantics = json.loads(Path('artifacts/systematic-pragmatic-map/identity_semantics_enrichment.json').read_text())
           coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
           adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
           overrides = json.loads(Path('data/gap-atlas/GAP_STATE_OVERRIDES_V1.json').read_text())
@@ -375,6 +391,15 @@ jobs:
           assert all(row['proposed_atlas_gap_id'] == 'TOKEN_VAZIO' for row in canonical_completion['completions'])
           assert all(row['g4']['atlas_mutation_allowed'] is False for row in canonical_completion['completions'])
           assert all(row['g4']['auto_create_gap_id'] is False for row in canonical_completion['completions'])
+          assert identity_semantics['claim_allowed'] is False
+          assert identity_semantics['atlas_mutation_allowed'] is False
+          assert identity_semantics['summary']['records'] == 35
+          assert identity_semantics['policy']['same_key_structured_evidence_is_not_auto_promotion'] is True
+          assert identity_semantics['policy']['provider_normalization_is_candidate_not_binding'] is True
+          assert identity_semantics['policy']['artifact_identity_requires_explicit_source_evidence'] is True
+          assert all(row['proposed_atlas_gap_id'] == 'TOKEN_VAZIO' for row in identity_semantics['enrichments'])
+          assert all(row['g4']['atlas_mutation_allowed'] is False for row in identity_semantics['enrichments'])
+          assert all(row['g4']['auto_create_gap_id'] is False for row in identity_semantics['enrichments'])
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
           assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
@@ -414,9 +439,12 @@ jobs:
             artifacts/systematic-pragmatic-map/source_gap_reconciliation.json \
             data/triage/systematic-pragmatic-authority-resolutions.v1.jsonl \
             tools/materialize_systematic_pragmatic_canonical_completion.py \
+            tools/enrich_systematic_pragmatic_identity_semantics.py \
             tests/test_materialize_systematic_pragmatic_canonical_completion.py \
+            tests/test_enrich_systematic_pragmatic_identity_semantics.py \
             artifacts/systematic-pragmatic-map/g4_proposals.json \
             artifacts/systematic-pragmatic-map/canonical_completion.json \
+            artifacts/systematic-pragmatic-map/identity_semantics_enrichment.json \
             artifacts/systematic-pragmatic-map/g3_decision_validation.json \
             artifacts/systematic-pragmatic-map/receipt.json \
             docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md \
@@ -438,6 +466,7 @@ jobs:
             systematic-pragmatic-g4-reconciliation-summary.json
             systematic-pragmatic-g4-proposals-summary.json
             systematic-pragmatic-canonical-completion-summary.json
+            systematic-pragmatic-identity-semantics-summary.json
             effective-gap-atlas-counts.json
             artifacts/gap-atlas/
             artifacts/systematic-pragmatic-map/
