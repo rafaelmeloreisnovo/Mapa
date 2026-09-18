@@ -240,3 +240,47 @@ auto_create_gap_id = false
 A decisão está registrada em
 `data/triage/systematic-pragmatic-g3-decisions.v1.jsonl` e é validada por
 `scripts/validate_systematic_pragmatic_g3_decisions.py`.
+
+
+## 13. Recursive child materialization
+
+A decisão `SPLIT_REQUIRED` deixa de ser uma anotação terminal. O materializador
+`tools/materialize_systematic_pragmatic_children.py` lê o mapa pragmático atual
+mais o ledger G3 e produz filhos determinísticos por próximo segmento de caminho.
+
+Regra:
+
+```text
+PARENT SPLIT_REQUIRED
+→ child candidates
+→ each child starts REVIEW_REQUIRED
+→ child SPLIT_REQUIRED
+→ recursive descendants
+→ G4 stays blocked until an evidence-backed non-split G3 decision
+```
+
+O identificador de filho é derivado de `parent_cluster_id × segment` por SHA-256.
+Nenhum filho recebe `gap_id` automaticamente.
+
+### Segundo G3 executado
+
+O filho determinístico `data/routing` é
+`CL-ecc6eb2c44bd5b05`. No artifact do Gap Atlas run #43 ele continha 113 ações
+distribuídas por 9 próximos segmentos:
+
+- `cycles`: 74;
+- `operational-gaps`: 32;
+- sete segmentos adicionais com uma ocorrência cada.
+
+Decisão:
+
+```text
+G3(data/routing) = SPLIT_REQUIRED
+G4 = BLOCKED_BY_G3_SPLIT
+binding = TOKEN_VAZIO
+auto_create_gap_id = false
+```
+
+O próximo materializador deve, portanto, produzir pelo menos os descendentes
+`data/routing/cycles` e `data/routing/operational-gaps`, preservando ambos
+como `REVIEW_REQUIRED` até uma decisão G3 própria.

@@ -12,7 +12,9 @@ on:
       - "tools/materialize_effective_gap_atlas.py"
       - "tools/repository_gap_mapper.py"
       - "tools/systematic_pragmatic_mapping_service.py"
+      - "tools/materialize_systematic_pragmatic_children.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
+      - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_systematic_pragmatic_g3_decisions.py"
       - "scripts/validate_systematic_pragmatic_g3_decisions.py"
       - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
@@ -23,6 +25,7 @@ on:
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
       - "docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md"
+      - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
       - ".github/workflows/rafaelia-gap-atlas.yml"
   push:
     branches: [main]
@@ -35,7 +38,9 @@ on:
       - "tools/materialize_effective_gap_atlas.py"
       - "tools/repository_gap_mapper.py"
       - "tools/systematic_pragmatic_mapping_service.py"
+      - "tools/materialize_systematic_pragmatic_children.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
+      - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -43,6 +48,7 @@ on:
       - "scripts/validate_federated_registry.py"
       - "docs/canonical/RAFAELIA_GAP_ATLAS_V1.md"
       - "docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md"
+      - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
       - ".github/workflows/rafaelia-gap-atlas.yml"
 
 permissions:
@@ -71,7 +77,9 @@ jobs:
           python3 -m py_compile tools/materialize_effective_gap_atlas.py
           python3 -m py_compile tools/repository_gap_mapper.py
           python3 -m py_compile tools/systematic_pragmatic_mapping_service.py
+          python3 -m py_compile tools/materialize_systematic_pragmatic_children.py
           python3 -m py_compile tests/test_systematic_pragmatic_mapping_service.py
+          python3 -m py_compile tests/test_materialize_systematic_pragmatic_children.py
           python3 -m py_compile tests/test_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile scripts/validate_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
@@ -119,6 +127,7 @@ jobs:
           python3 -m unittest -v tests/test_rafaelia_specialized_ledger_adapter.py
           python3 -m unittest -v tests/test_materialize_effective_gap_atlas.py
           python3 -m unittest -v tests/test_systematic_pragmatic_mapping_service.py
+          python3 -m unittest -v tests/test_materialize_systematic_pragmatic_children.py
           python3 -m unittest -v tests/test_systematic_pragmatic_g3_decisions.py
 
       - name: Validate evidence-backed G3 decisions
@@ -157,6 +166,14 @@ jobs:
             --fail-on none \
             | tee systematic-pragmatic-summary.json
 
+      - name: Materialize recursive G3 child clusters
+        run: |
+          python3 tools/materialize_systematic_pragmatic_children.py \
+            --action-map artifacts/systematic-pragmatic-map/pragmatic_action_map.json \
+            --decisions data/triage/systematic-pragmatic-g3-decisions.v1.jsonl \
+            --output artifacts/systematic-pragmatic-map/child_clusters.json \
+            | tee systematic-pragmatic-children-summary.json
+
       - name: Guard coverage, effective state and claim boundary
         run: |
           python3 - <<'PY'
@@ -169,6 +186,7 @@ jobs:
           pragmatic = json.loads(Path('artifacts/systematic-pragmatic-map/pragmatic_action_map.json').read_text())
           pragmatic_review = json.loads(Path('artifacts/systematic-pragmatic-map/cluster_review_queue.json').read_text())
           pragmatic_receipt = json.loads(Path('artifacts/systematic-pragmatic-map/receipt.json').read_text())
+          pragmatic_children = json.loads(Path('artifacts/systematic-pragmatic-map/child_clusters.json').read_text())
           coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
           adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
           overrides = json.loads(Path('data/gap-atlas/GAP_STATE_OVERRIDES_V1.json').read_text())
@@ -213,6 +231,19 @@ jobs:
           assert pragmatic_receipt['g4_state'] in {'BLOCKED_BY_G3', 'NOT_APPLICABLE'}
           assert pragmatic_receipt['cluster_digest_sha256']
           assert pragmatic_receipt['cluster_review_digest_sha256']
+          assert pragmatic_children['claim_allowed'] is False
+          assert pragmatic_children['policy']['child_is_not_equivalence'] is True
+          assert pragmatic_children['policy']['auto_create_gap_id'] is False
+          assert pragmatic_children['summary']['level1_children'] > 0
+          assert pragmatic_children['summary']['max_level'] >= 2
+          by_scope = {row['scope_prefix']: row for row in pragmatic_children['children']}
+          assert by_scope['data/routing']['g3']['state'] == 'SPLIT_REQUIRED'
+          assert by_scope['data/routing']['g4']['state'] == 'BLOCKED_BY_G3_SPLIT'
+          assert by_scope['data/routing']['g4']['binding'] == 'TOKEN_VAZIO'
+          assert by_scope['data/routing']['g4']['auto_create_gap_id'] is False
+          assert 'data/routing/cycles' in by_scope
+          assert 'data/routing/operational-gaps' in by_scope
+          assert all(row['claim_allowed'] is False for row in pragmatic_children['children'])
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
           assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
@@ -246,6 +277,7 @@ jobs:
             artifacts/gap-atlas/discovery_candidates.json \
             artifacts/systematic-pragmatic-map/pragmatic_action_map.json \
             artifacts/systematic-pragmatic-map/cluster_review_queue.json \
+            artifacts/systematic-pragmatic-map/child_clusters.json \
             artifacts/systematic-pragmatic-map/g3_decision_validation.json \
             artifacts/systematic-pragmatic-map/receipt.json \
             docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md \
@@ -261,6 +293,7 @@ jobs:
             federated-authority-validation.json
             gap-discovery-summary.json
             systematic-pragmatic-summary.json
+            systematic-pragmatic-children-summary.json
             effective-gap-atlas-counts.json
             artifacts/gap-atlas/
             artifacts/systematic-pragmatic-map/

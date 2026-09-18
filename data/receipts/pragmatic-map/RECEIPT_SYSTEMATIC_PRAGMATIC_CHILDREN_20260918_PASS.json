@@ -1,0 +1,50 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-child-materialization-receipt/v1",
+  "receipt_id": "SPMS-CHILDREN-20260918-PASS",
+  "tested_head": "2d6dfacb3844d9b112a7bca31462b73415c4892e",
+  "pr": "rafaelmeloreisnovo/Mapa#642",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 48,
+    "run_id": 35366863432,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10556766931,
+    "name": "rafaelia-gap-atlas-bc1c4083518c60ae276028e712cedf3a15483d7e",
+    "digest": "sha256:c1d6eabced613c411cc76486bf43d8499ee4b9b3a3575c2889d8eae5b6ad2447",
+    "size_bytes": 911375
+  },
+  "observed": {
+    "actions": 1318,
+    "top_clusters": 79,
+    "child_candidates_total": 67,
+    "level1_children": 58,
+    "recursive_descendants": 9,
+    "max_level": 2,
+    "review_required": 66,
+    "split_required": 1,
+    "routing_child_id": "CL-ecc6eb2c44bd5b05",
+    "routing_action_count": 113
+  },
+  "gates": {
+    "parent_data": "SPLIT_REQUIRED",
+    "child_data_routing": "SPLIT_REQUIRED",
+    "g4_routing": "BLOCKED_BY_G3_SPLIT",
+    "gap_id_autocreation": false
+  },
+  "f_ok": [
+    "recursive materializer PASS",
+    "orphan SPLIT_REQUIRED decisions fail closed",
+    "58 level-1 children materialized",
+    "9 routing descendants materialized",
+    "checksum artifact uploaded"
+  ],
+  "f_gap": [
+    "66 child candidates remain REVIEW_REQUIRED",
+    "routing/cycles and routing/operational-gaps require independent semantic review",
+    "no G4 binding completed"
+  ],
+  "f_next": "Audit routing/cycles and routing/operational-gaps against source semantics before any authority binding.",
+  "claim_allowed": false
+}
