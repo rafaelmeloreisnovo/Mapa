@@ -8,7 +8,7 @@ Target fields:
 - evidence_required
 
 This tool is evidence-only. It never mutates the Atlas, never allocates gap IDs,
-and never treats an alias as canonical equivalence.
+and never treats an alias or a structured derivation as canonical equivalence.
 """
 
 from __future__ import annotations
@@ -24,6 +24,7 @@ STATES = {
     "EXACT_STRUCTURED",
     "NORMALIZED_ENUM_CANDIDATE",
     "ALIAS_CANDIDATE",
+    "STRUCTURED_DERIVATION_CANDIDATE",
     "CONFLICT",
     "TOKEN_VAZIO",
 }
@@ -58,6 +59,9 @@ ALIASES = {
         "archive_digest",
         "receipt_id",
         "receipt",
+        "target_path",
+        "source_artifact",
+        "output_artifact",
     ),
     "provider": (
         "source_provider",
@@ -109,12 +113,12 @@ def normalize_string_list(value: Any) -> list[str]:
         out: list[str] = []
         for item in value:
             if isinstance(item, str) and item.strip():
-                out.append(item)
+                out.append(item.strip())
             elif isinstance(item, dict):
                 for key in ("criterion", "evidence_needed", "value", "description"):
                     child = item.get(key)
                     if isinstance(child, str) and child.strip():
-                        out.append(child)
+                        out.append(child.strip())
         return out
     if isinstance(value, dict):
         out: list[str] = []
@@ -140,6 +144,33 @@ def canonical_key(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
+def looks_like_repository(value: Any) -> bool:
+    if not isinstance(value, str):
+        return False
+    text = value.strip()
+    if not text or " " in text or text.startswith(("http://", "https://")):
+        return False
+    parts = text.split("/")
+    return len(parts) == 2 and all(parts)
+
+
+def flatten_strings(value: Any) -> list[str]:
+    out: list[str] = []
+    if isinstance(value, str) and value.strip():
+        out.append(value.strip())
+    elif isinstance(value, list):
+        for child in value:
+            out.extend(flatten_strings(child))
+    elif isinstance(value, dict):
+        for key, child in value.items():
+            vals = flatten_strings(child)
+            if vals:
+                out.extend(f"{key}:{v}" for v in vals)
+            elif child not in (None, "", [], {}):
+                out.append(f"{key}:{child}")
+    return out
+
+
 def collect_field(
     field: str,
     records: list[tuple[str, dict[str, Any]]],
@@ -147,6 +178,7 @@ def collect_field(
     exact: list[dict[str, Any]] = []
     normalized: list[dict[str, Any]] = []
     aliases: list[dict[str, Any]] = []
+    derived: list[dict[str, Any]] = []
 
     for source_path, obj in records:
         for object_path, key, value in walk(obj):
@@ -251,9 +283,84 @@ def collect_field(
                             }
                         )
 
-    def reduce_items(items: list[dict[str, Any]], state: str) -> dict[str, Any] | None:
+            if (
+                field == "provider"
+                and key in {"owner", "repository", "repository_full_name", "repo"}
+                and looks_like_repository(value)
+            ):
+                derived.append(
+                    {
+                        "source_path": source_path,
+                        "object_path": object_path,
+                        "source_key": key,
+                        "raw_value": value,
+                        "value": "GitHub",
+                        "relation": "REPOSITORY_IDENTITY_IMPLIES_GITHUB_PROVIDER_CANDIDATE",
+                    }
+                )
+
+            if field == "scope" and key in {
+                "affected_routes",
+                "affected_components",
+                "impact_radius",
+                "affected_scope",
+                "components",
+                "targets",
+            }:
+                vals = flatten_strings(value)
+                if vals:
+                    derived.append(
+                        {
+                            "source_path": source_path,
+                            "object_path": object_path,
+                            "source_key": key,
+                            "raw_value": value,
+                            "value": vals,
+                            "relation": "STRUCTURED_AFFECTED_SURFACE_CANDIDATE",
+                        }
+                    )
+
+    def reduce_items(
+        items: list[dict[str, Any]],
+        state: str,
+    ) -> dict[str, Any] | None:
         if not items:
             return None
+
+        if field == "evidence_required":
+            combined: list[str] = []
+            seen: set[str] = set()
+            for item in items:
+                for value in normalize_string_list(item["value"]):
+                    if value not in seen:
+                        seen.add(value)
+                        combined.append(value)
+            if combined:
+                return {
+                    "state": state,
+                    "value": combined,
+                    "evidence": items,
+                    "combination": "UNION_OF_COMPLEMENTARY_REQUIREMENTS",
+                    "governed_review_required": True,
+                }
+
+        if field == "scope" and state == "STRUCTURED_DERIVATION_CANDIDATE":
+            combined: list[str] = []
+            seen: set[str] = set()
+            for item in items:
+                for value in flatten_strings(item["value"]):
+                    if value not in seen:
+                        seen.add(value)
+                        combined.append(value)
+            if combined:
+                return {
+                    "state": state,
+                    "value": combined,
+                    "evidence": items,
+                    "combination": "BOUNDED_AFFECTED_SURFACE",
+                    "governed_review_required": True,
+                }
+
         unique: dict[str, Any] = {}
         for item in items:
             unique[canonical_key(item["value"])] = item["value"]
@@ -276,6 +383,7 @@ def collect_field(
         (exact, "EXACT_STRUCTURED"),
         (normalized, "NORMALIZED_ENUM_CANDIDATE"),
         (aliases, "ALIAS_CANDIDATE"),
+        (derived, "STRUCTURED_DERIVATION_CANDIDATE"),
     ):
         reduced = reduce_items(items, state)
         if reduced is not None:
@@ -357,6 +465,7 @@ def build(
         "policy": {
             "same_key_structured_evidence_is_not_auto_promotion": True,
             "provider_normalization_is_candidate_not_binding": True,
+            "structured_derivation_is_candidate_not_binding": True,
             "alias_is_not_equivalence": True,
             "artifact_identity_requires_explicit_source_evidence": True,
             "auto_create_gap_id": False,
@@ -393,8 +502,13 @@ def validate(payload: dict[str, Any]) -> None:
         for field, item in fields.items():
             if item.get("state") not in STATES:
                 raise ValueError(f"{row.get('source_gap_id')}:{field}: invalid state")
-            if item.get("state") in {"TOKEN_VAZIO", "CONFLICT"} and item.get("value") != "TOKEN_VAZIO":
-                raise ValueError(f"{row.get('source_gap_id')}:{field}: unsupported value promoted")
+            if (
+                item.get("state") in {"TOKEN_VAZIO", "CONFLICT"}
+                and item.get("value") != "TOKEN_VAZIO"
+            ):
+                raise ValueError(
+                    f"{row.get('source_gap_id')}:{field}: unsupported value promoted"
+                )
 
 
 def main() -> int:
