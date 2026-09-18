@@ -33,14 +33,15 @@ Para cada gap observado:
 - `effort=TOKEN_VAZIO_UNMEASURED` enquanto não houver medição;
 - `claim_allowed=false`.
 
-Um achado sem vínculo no Atlas recebe:
+Um achado sem vínculo no Atlas recebe automaticamente:
 
 ```text
-NIBIGUIRI:OBVIO_NAO_INDEXADO
+NIBIGUIRI:CAUSA_DESCONHECIDA
 ```
 
-Isso significa apenas que um scanner bounded observou uma condição de gap e não
-encontrou binding no Atlas. Não significa erro confirmado, censura ou novidade.
+A ausência de binding não prova que algo seja "óbvio", esquecido, censurado ou
+filtrado. `NIBIGUIRI:OBVIO_NAO_INDEXADO` fica reservado para relação formal
+independentemente demonstrada e explicitamente ausente do índice.
 
 ## 3. Serviços pragmáticos
 
@@ -132,7 +133,26 @@ O serviço não:
 - declara censura sem evidência;
 - altera o Atlas automaticamente.
 
-## 8. Gates
+## 8. Clusterização determinística
+
+Depois da tipagem, as ações são agrupadas por:
+
+```text
+root × domínio de caminho × serviço × marcadores × estado Nibiguiri
+```
+
+Cada grupo recebe `cluster_id` derivado por SHA-256, contagem, amostras e
+`cluster_digest_sha256` no receipt. O cluster não cria equivalência semântica;
+ele é apenas uma unidade de triagem para reduzir trabalho repetitivo.
+
+Regra:
+
+```text
+MESMO_CLUSTER != MESMO_SIGNIFICADO
+CLUSTER != GAP_RESOLVIDO
+```
+
+## 9. Gates
 
 `--fail-on`:
 
@@ -143,20 +163,22 @@ O serviço não:
 
 Isso permite uso tanto exploratório quanto fail-closed em CI.
 
-## 9. Relação com Nibiguiri
+## 10. Relação com Nibiguiri
 
 ```text
 SOURCE OBSERVED + NO ATLAS BINDING
-→ NIBIGUIRI:OBVIO_NAO_INDEXADO
+→ NIBIGUIRI:CAUSA_DESCONHECIDA
+→ DETERMINISTIC CLUSTER
 → TRIAGE
 → EXISTING GAP | NEW TYPED GAP | FALSE POSITIVE | ACCEPTED LIMITATION
+→ [OBVIO_NAO_INDEXADO only with formal demonstration]
 → RECEIPT
 ```
 
 `NIBIGUIRI:CENSURA_EVIDENCIADA` e `NIBIGUIRI:FILTRO_PESO_EVIDENCIADO` não são
 inferidos por este serviço.
 
-## 10. R3
+## 11. R3
 
 ```text
 F_ok   = scanner + Atlas + Nibiguiri convertidos em fila operacional executável
