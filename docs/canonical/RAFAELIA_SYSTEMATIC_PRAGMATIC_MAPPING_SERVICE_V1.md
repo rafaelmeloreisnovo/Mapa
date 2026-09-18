@@ -348,3 +348,46 @@ auto_create_gap_id = false
 `tools/materialize_systematic_pragmatic_routing_bindings.py` transforma essas
 decisões em famílias de schema e candidatos de binding por `source_gap_id`, sem
 criar IDs do Atlas.
+
+
+## 16. G4 exact-evidence source-gap reconciliation
+
+Depois de G3 classificar `data/routing/operational-gaps` como
+`DISTINCT_GAP/PER_EXISTING_GAP_ID`, o reconciliador
+`tools/reconcile_systematic_pragmatic_source_gaps.py` compara as identidades
+de origem com o Atlas efetivo.
+
+Somente três classes de evidência são aceitas:
+
+```text
+source_gap_id == atlas.gap_id
+source_path == explicit Atlas source_ref path
+source_gap_id == exact predecessor/successor id
+```
+
+Nenhuma similaridade textual, fuzzy match ou aproximação semântica cria
+correspondência.
+
+Estados de saída:
+
+```text
+CANDIDATE_EXACT_MATCH
+NO_EXACT_EVIDENCE
+AMBIGUOUS_EXACT_EVIDENCE
+```
+
+Mesmo `CANDIDATE_EXACT_MATCH` mantém:
+
+```text
+atlas_gap_id = TOKEN_VAZIO
+auto_create_gap_id = false
+human_or_governed_confirmation_required = true
+```
+
+Portanto:
+
+```text
+EXACT_EVIDENCE != BINDING
+SOURCE_GAP_ID != ATLAS_GAP_ID_BY_ASSUMPTION
+NO_MATCH != DOES_NOT_EXIST
+```
