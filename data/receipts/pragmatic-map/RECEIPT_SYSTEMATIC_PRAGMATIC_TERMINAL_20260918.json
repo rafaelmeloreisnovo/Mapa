@@ -1,0 +1,194 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-terminal-receipt/v1",
+  "receipt_id": "SPMS-TERMINAL-20260918-PASS_LOCAL_BLOCKED_EXTERNAL",
+  "parent_structural_closure": {
+    "pr": 649,
+    "merge_sha": "051defa8a54efc736edc40cdda4f1b9d2489cf31",
+    "tested_head": "659cc5a02c4a3f42fd132534e5888c29c26bc561",
+    "gap_atlas_run": {
+      "run_number": 80,
+      "run_id": 35372786971,
+      "conclusion": "success"
+    },
+    "artifact": {
+      "id": 10558124425,
+      "digest": "sha256:781160919830a417b7bbd38b0f47fad72dd13951d87ba7102f471f59fd1e1c19"
+    }
+  },
+  "terminal_assurance": {
+    "pr": 651,
+    "tested_head": "273fd6ef780fadde2e398078d5d85a9869963503",
+    "state": "COMPLETE_STRUCTURAL_ROUTING_LOCAL_ASSURANCE_PASS_EXTERNAL_GATES_OPEN",
+    "claim_allowed": false,
+    "publication_ready": false,
+    "autonomous_objective_creation": false
+  },
+  "structural_closure": {
+    "source_gap_bindings": "35/35",
+    "schema_families_structurally_resolved": "25/25",
+    "remaining_internal_review_required": 0,
+    "remaining_internal_binding_debt": 0,
+    "canonical_completion_candidates": 0,
+    "field_review_work_items": 0,
+    "subject_level_closure": false
+  },
+  "local_assurance": {
+    "ci": {
+      "run_number": 2722,
+      "run_id": 35374675349,
+      "conclusion": "success",
+      "changed_markdown": "PASS",
+      "historical_markdown_debt": {
+        "issues": 833,
+        "issue_ceiling": 890,
+        "files_with_issues": 95,
+        "file_ceiling": 95
+      },
+      "temporal_gap_routing": "PASS queue v5",
+      "executable_debt_guard": "PASS",
+      "auto_index": "PASS",
+      "link_verification": "PASS"
+    },
+    "gap_atlas": {
+      "run_number": 112,
+      "run_id": 35374675418,
+      "conclusion": "success",
+      "artifact_id": 10559638319,
+      "artifact_digest": "sha256:0e029ac7a818c7e7a81781283ecac891aa9621e998f82d04aa0ac96ffd4a1838",
+      "artifact_size_bytes": 972943
+    },
+    "main_hardening": {
+      "run_number": 630,
+      "run_id": 35374675649,
+      "conclusion": "success"
+    },
+    "live_control_plane": {
+      "run_number": 344,
+      "run_id": 35374675390,
+      "conclusion": "success"
+    },
+    "security_codescan": {
+      "run_number": 597,
+      "run_id": 35374675481,
+      "conclusion": "success"
+    },
+    "codeql": {
+      "run_number": 599,
+      "run_id": 35374675437,
+      "conclusion": "success"
+    },
+    "branch_topology": {
+      "run_number": 1523,
+      "run_id": 35374675429,
+      "conclusion": "success"
+    },
+    "workflow_graph": {
+      "run_number": 144,
+      "run_id": 35374675409,
+      "conclusion": "success"
+    },
+    "workflow_supply_chain_ratchet": {
+      "run_number": 211,
+      "run_id": 35374675443,
+      "conclusion": "success"
+    },
+    "human_dignity_ethics": {
+      "run_number": 616,
+      "run_id": 35374675374,
+      "conclusion": "success"
+    }
+  },
+  "temporal_routing": {
+    "queue": "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v5.json",
+    "source_main_sha": "051defa8a54efc736edc40cdda4f1b9d2489cf31",
+    "provider_observed_at": "2026-09-18T17:27:51+00:00",
+    "state": "FRESH_FAIL_CLOSED",
+    "evidence": [
+      "Provider Protection Gate run 35374401043 observed default_branch=main and no active ruleset applicable",
+      "Server Merge Enforcement Assurance run 35374401036 observed protected=false and required checks not enforced",
+      "Live Control Plane Reconciliation run 35374675390 PASS"
+    ]
+  },
+  "external_gates": [
+    {
+      "id": "INDEPENDENT_REVIEW",
+      "run_number": 1905,
+      "run_id": 35374675417,
+      "state": "BLOCKED_EXTERNAL",
+      "observed": [
+        "PULL_REQUEST_DRAFT_OR_UNKNOWN",
+        "INDEPENDENT_APPROVAL_MISSING",
+        "observed_independent_approvals=0",
+        "required_independent_approvals=1",
+        "result=DENIED"
+      ],
+      "authority": "genuinely independent reviewer",
+      "next": "Approve the exact promotable head genuinely; no self-approval substitution."
+    },
+    {
+      "id": "PROVIDER_RULESET",
+      "run_number": 401,
+      "run_id": 35374675507,
+      "state": "BLOCKED_EXTERNAL",
+      "observed": [
+        "no active ruleset applies to the default branch"
+      ],
+      "authority": "GitHub repository/organization ruleset administration",
+      "next": "Activate governed default-branch ruleset and capture provider read-back."
+    },
+    {
+      "id": "SERVER_MERGE_BINDING",
+      "run_number": 926,
+      "run_id": 35374675571,
+      "state": "BLOCKED_EXTERNAL",
+      "observed": [
+        "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+        "NO_REQUIRED_STATUS_CHECKS_OBSERVED",
+        "server_side_merge_binding=NOT_ENFORCED_OBSERVED"
+      ],
+      "authority": "GitHub repository/organization branch/ruleset administration",
+      "next": "Bind exact required checks server-side and capture rejected invalid-merge receipt with unchanged main SHA."
+    },
+    {
+      "id": "CODESCAN_CREDENTIALS",
+      "run_number": 598,
+      "run_id": 35374675385,
+      "state": "BLOCKED_EXTERNAL",
+      "observed": [
+        "CODESCAN_AUTH_TOKEN=MISSING",
+        "CODESCAN_ORGANIZATION_KEY=MISSING",
+        "CODESCAN_PROJECT_KEY=MISSING"
+      ],
+      "authority": "repository/organization secret owner and CodeScan account authority",
+      "next": "Configure least-privilege credentials out-of-band or explicitly revise policy; never fabricate or expose secret values."
+    }
+  ],
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "STRUCTURAL_ROUTING_COMPLETE != EXTERNAL_PROVIDER_READY",
+    "LOCAL_ASSURANCE_PASS != PUBLICATION_READY",
+    "SOURCE_RECORD_BINDING != SUBJECT_LEVEL_CLOSURE",
+    "NO_AUTONOMOUS_GOAL_CREATION",
+    "NO_FAKE_APPROVAL",
+    "NO_FAKE_CREDENTIAL",
+    "NO_FAKE_RULESET"
+  ],
+  "r3": {
+    "F_ok": [
+      "35/35 governed source-record bindings",
+      "25/25 structural schema families",
+      "zero internal SPMS routing/review/binding debt",
+      "CI, Gap Atlas, main-hardening and live control-plane local assurance PASS",
+      "temporal routing refreshed with provider-backed queue v5"
+    ],
+    "F_gap": [
+      "one genuine independent approval",
+      "active applicable provider ruleset",
+      "server-side required status checks/enforcement",
+      "CodeScan external credentials"
+    ],
+    "F_next": "Only external authorities remain: independent reviewer, GitHub provider administration and CodeScan secret/account authority. After those change, rerun provider/promotion/CodeScan gates and append a successor external-closure receipt; do not reopen SPMS structural routing."
+  },
+  "claim_allowed": false
+}
