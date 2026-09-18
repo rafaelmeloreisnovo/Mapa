@@ -1,0 +1,61 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-g3-g4-receipt/v1",
+  "receipt_id": "SPMS-G3-G4-20260918-PASS",
+  "parent_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1_20260918_PASS.json",
+  "tested_head": "b43d545d088c5f7d84d6af97aadf2f30ef46b271",
+  "pr": "rafaelmeloreisnovo/Mapa#640",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 43,
+    "run_id": 35364543721,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10555353911,
+    "name": "rafaelia-gap-atlas-699b2120e382ba5e4597990f3f79e94223bf5d41",
+    "digest": "sha256:8aba46f0a4fc4a7587e118330cef592e8a40cddc63ef9699854397163944bd8b",
+    "size_bytes": 885152
+  },
+  "observed": {
+    "actions": 1313,
+    "clusters": 79,
+    "largest_cluster_actions": 681,
+    "p0_blockers": 0,
+    "preserved_token_vazio_observations": 503,
+    "coalesced_document_duplicate_actions": 69,
+    "nibiguiri_state": "NIBIGUIRI:CAUSA_DESCONHECIDA",
+    "priority": "P2",
+    "service": "SEMANTIC_TRIAGE"
+  },
+  "gates": {
+    "G1_TYPE_GATE": "PASS",
+    "G2_CLUSTER_GATE": "PASS",
+    "G3_SEMANTIC_SPLIT": "PASS_STRUCTURAL_REVIEW_REQUIRED_PER_CLUSTER",
+    "G4_AUTHORITY_BIND": "PASS_STRUCTURAL_BLOCKED_BY_G3_PER_CLUSTER",
+    "G5_EXECUTION_GATE": "TOKEN_VAZIO_PER_SELECTED_CLUSTER",
+    "G6_RECEIPT_PROMOTION": "TOKEN_VAZIO_PER_SELECTED_CLUSTER"
+  },
+  "invariants": [
+    "NO_BINDING => NIBIGUIRI:CAUSA_DESCONHECIDA",
+    "OBVIO_NAO_INDEXADO requires separate formal demonstration",
+    "SAME_CLUSTER != SAME_MEANING",
+    "G4 cannot bind before G3 evidence",
+    "auto_create_gap_id=false",
+    "claim_allowed=false"
+  ],
+  "f_ok": [
+    "deterministic fixture regression repaired",
+    "cluster review queue materialized",
+    "G3 semantic split gate enforced",
+    "G4 authority bind blocked until G3 evidence",
+    "Gap Atlas workflow completed successfully"
+  ],
+  "f_gap": [
+    "79 clusters still require semantic decisions",
+    "1313 actions remain unresolved",
+    "federated producer-repository execution remains open",
+    "effort remains TOKEN_VAZIO_UNMEASURED"
+  ],
+  "f_next": "Select the highest-impact cluster, perform evidence-backed G3 decision, then bind through G4 before any execution/promotion.",
+  "claim_allowed": false
+}

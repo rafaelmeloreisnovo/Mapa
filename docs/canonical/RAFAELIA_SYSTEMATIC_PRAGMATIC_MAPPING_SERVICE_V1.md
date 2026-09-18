@@ -103,6 +103,7 @@ artifacts/systematic-pragmatic-map/
 ├── repository_gap_map.md
 ├── pragmatic_action_map.json
 ├── pragmatic_action_map.md
+├── cluster_review_queue.json
 └── receipt.json
 ```
 
@@ -153,6 +154,38 @@ CLUSTER != GAP_RESOLVIDO
 ```
 
 ## 9. Gates
+
+### G3 — Semantic Split Gate
+
+Todo cluster nasce com:
+
+```text
+G3=REVIEW_REQUIRED
+```
+
+A decisão deve ser uma entre:
+
+```text
+DUPLICATE | SAME_FAMILY | DISTINCT_GAP | FALSE_POSITIVE | ACCEPTED_LIMITATION
+```
+
+e exige amostra representativa, comparação de invariantes e razão explícita.
+O serviço não escolhe automaticamente.
+
+### G4 — Authority Bind Gate
+
+Todo cluster não resolvido nasce com:
+
+```text
+G4=BLOCKED_BY_G3
+binding=TOKEN_VAZIO
+auto_create_gap_id=false
+```
+
+Somente após G3 com evidência pode haver binding a `gap_id` existente ou proposta
+governada de novo gap, sempre com autoridade e evidência requeridas.
+
+### Fail modes
 
 `--fail-on`:
 
