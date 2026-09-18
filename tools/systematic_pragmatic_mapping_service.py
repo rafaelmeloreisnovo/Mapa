@@ -142,6 +142,16 @@ def build_clusters(actions: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
             key=lambda value: PRIORITY_ORDER.get(value, 9),
         )
         cid = cluster_id(root, domain, service, markers, state)
+        authority_required = unique(
+            str(value)
+            for row in rows
+            for value in row.get("authority_required", [])
+        )
+        evidence_required = unique(
+            str(value)
+            for row in rows
+            for value in row.get("evidence_required", [])
+        )
         clusters.append(
             {
                 "cluster_id": cid,
@@ -153,15 +163,90 @@ def build_clusters(actions: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
                 "action_count": len(rows),
                 "priorities": priorities,
                 "sample_paths": sorted(str(row.get("path", "")) for row in rows)[:10],
+                "authority_required": authority_required,
+                "evidence_required": evidence_required,
+                "g3_semantic_split_gate": {
+                    "state": "REVIEW_REQUIRED",
+                    "allowed_decisions": [
+                        "DUPLICATE",
+                        "SAME_FAMILY",
+                        "DISTINCT_GAP",
+                        "FALSE_POSITIVE",
+                        "ACCEPTED_LIMITATION",
+                    ],
+                    "automatic_decision": False,
+                    "evidence_required": [
+                        "Representative source sample",
+                        "Invariant comparison",
+                        "Reason for merge/split/closure classification",
+                    ],
+                },
+                "g4_authority_bind_gate": {
+                    "state": "BLOCKED_BY_G3",
+                    "binding": "TOKEN_VAZIO",
+                    "auto_create_gap_id": False,
+                    "authority_required": authority_required,
+                    "evidence_required": evidence_required,
+                },
                 "next_gate": (
-                    "Review one representative sample plus cluster counts; split the "
-                    "cluster if semantics differ, otherwise bind the cluster to an "
-                    "existing/new gap family with authority and evidence requirements."
+                    "G3: review representative samples and decide DUPLICATE, SAME_FAMILY, "
+                    "DISTINCT_GAP, FALSE_POSITIVE or ACCEPTED_LIMITATION. G4 remains "
+                    "blocked until that decision has evidence."
                 ),
                 "claim_allowed": False,
             }
         )
     return clusters
+
+
+def build_cluster_review_queue(
+    clusters: Sequence[dict[str, Any]],
+) -> dict[str, Any]:
+    return {
+        "schema": "rafaelia.systematic-pragmatic-cluster-review/v1",
+        "claim_allowed": False,
+        "policy": {
+            "cluster_is_not_equivalence": True,
+            "unknown_cause_is_default": True,
+            "obvious_unindexed_requires_formal_demonstration": True,
+            "authority_binding_requires_g3_evidence": True,
+            "auto_create_gap_id": False,
+        },
+        "gates": {
+            "G3_SEMANTIC_SPLIT": {
+                "pass_requires": [
+                    "explicit decision",
+                    "representative source evidence",
+                    "invariant comparison",
+                    "reason",
+                ]
+            },
+            "G4_AUTHORITY_BIND": {
+                "blocked_until": "G3_SEMANTIC_SPLIT=PASS",
+                "pass_requires": [
+                    "existing gap_id or governed new gap proposal",
+                    "authority_required",
+                    "evidence_required",
+                ],
+            },
+        },
+        "clusters": [
+            {
+                "cluster_id": cluster["cluster_id"],
+                "root": cluster["root"],
+                "domain": cluster["domain"],
+                "service": cluster["service"],
+                "action_count": cluster["action_count"],
+                "markers": cluster["markers"],
+                "nibiguiri_state": cluster["nibiguiri_state"],
+                "sample_paths": cluster["sample_paths"],
+                "g3_semantic_split_gate": cluster["g3_semantic_split_gate"],
+                "g4_authority_bind_gate": cluster["g4_authority_bind_gate"],
+                "claim_allowed": False,
+            }
+            for cluster in clusters
+        ],
+    }
 
 
 def pragmatic_filter_stats(gap_map: dict[str, Any]) -> dict[str, int]:
@@ -472,6 +557,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     actions = build_actions(gap_map, atlas)
     clusters = build_clusters(actions)
+    cluster_review = build_cluster_review_queue(clusters)
     generated_at = utc_now()
     action_summary = summarize(actions)
     action_summary.update(pragmatic_filter_stats(gap_map))
@@ -505,6 +591,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     gap_md = output_dir / "repository_gap_map.md"
     map_json = output_dir / "pragmatic_action_map.json"
     map_md = output_dir / "pragmatic_action_map.md"
+    review_json = output_dir / "cluster_review_queue.json"
     receipt_json = output_dir / "receipt.json"
 
     write_json(gap_json, gap_map)
@@ -512,6 +599,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     gap_md.write_text(rgm.render_markdown(gap_map), encoding="utf-8")
     write_json(map_json, action_map)
     map_md.write_text(render_markdown(action_map, args.top), encoding="utf-8")
+    write_json(review_json, cluster_review)
 
     receipt = {
         "schema": RECEIPT_SCHEMA,
@@ -523,7 +611,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         "pragmatic_action_map_sha256": canonical_sha256(action_map),
         "summary": action_map["summary"],
         "cluster_digest_sha256": canonical_sha256(action_map["clusters"]),
-        "f_ok": ["bounded scan", "atlas binding", "Nibiguiri classification", "action queue"],
+        "cluster_review_digest_sha256": canonical_sha256(cluster_review),
+        "g3_state": "REVIEW_REQUIRED" if clusters else "NOT_APPLICABLE",
+        "g4_state": "BLOCKED_BY_G3" if clusters else "NOT_APPLICABLE",
+        "f_ok": [
+            "bounded scan",
+            "atlas binding",
+            "Nibiguiri classification",
+            "deterministic clusters",
+            "G3 review queue",
+        ],
         "f_gap": [
             "unmapped observations require human/governed binding",
             "effort remains TOKEN_VAZIO until measured",
