@@ -490,3 +490,45 @@ auto_create_gap_id = false
 
 A contagem preserva a linhagem operacional: 34 proposals já elegíveis no gate
 anterior + 1 identidade recém-desbloqueada por resolução de autoridade.
+
+
+## 19. Identity + semantics enrichment for canonical G4 fields
+
+After canonical completion identifies unresolved fields, the service
+`tools/enrich_systematic_pragmatic_identity_semantics.py` performs a bounded
+structured-source scan for:
+
+`artifact_id, provider, scope, evidence_required`.
+
+Evidence states:
+
+```text
+EXACT_STRUCTURED
+NORMALIZED_ENUM_CANDIDATE
+ALIAS_CANDIDATE
+CONFLICT
+TOKEN_VAZIO
+```
+
+Rules:
+
+- a matching structured key is evidence, not automatic Atlas promotion;
+- provider values may only normalize into the six provider values allowed by
+  `rafaelia_gap_atlas.v1.schema.json`;
+- repository names remain provenance and are not provider values;
+- `evidence_needed` and related producer fields are aliases for review, not
+  silent equivalence to `evidence_required`;
+- receipt/artifact aliases do not become canonical `artifact_id` without
+  governed review;
+- conflicting structured values fail closed to `CONFLICT/TOKEN_VAZIO`.
+
+Boundary:
+
+```text
+structured evidence != promoted canonical field
+normalization != binding
+alias != equivalence
+enrichment != Atlas record
+proposed_atlas_gap_id = TOKEN_VAZIO
+atlas_mutation_allowed = false
+```
