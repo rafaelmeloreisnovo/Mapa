@@ -1,0 +1,51 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-finalization-policy/v1",
+  "policy_id": "SPMS-FINAL-CLOSURE-20260918",
+  "mode": "APPEND_ONLY_GOVERNED_SOURCE_BINDING",
+  "claim_allowed": false,
+  "atlas_mutation_authorized_for": "governed source-record append only",
+  "source_record_binding": {
+    "artifact_id_template": "OPG_SOURCE::{source_gap_id}",
+    "provider": "GitHub",
+    "scope_semantics": "The canonical artifact is the operational-gap source record in rafaelmeloreisnovo/Mapa, not the external/runtime/scientific subject described by that record.",
+    "gap_id_strategy": "GAP-G4SRC-{SHA256(source_gap_id)[0:16].upper()}",
+    "gap_class": "GOVERNANCE",
+    "priority": "P1",
+    "state": "TOKEN_VAZIO",
+    "known_rule": "Use source evidence_for/proven_scoped when present; otherwise assert only source-record presence at exact source_refs.",
+    "unknown_rule": "Always preserve that subject-level closure is unproven until evidence_required is satisfied.",
+    "authority_rule": "Use explicit owner/owner_authority/authority values when present; otherwise Mapa control_plane governance.",
+    "evidence_required_rule": "Union all evidence_needed values; if absent, use closure/next-gate evidence; never infer external success.",
+    "next_gate_rule": "Use exact next_probe/next_verifiable_step/next_review_gate/closure_gate evidence; fallback only to governed evidence review.",
+    "source_refs_rule": "Exact source_paths plus this policy path."
+  },
+  "schema_family_resolution": {
+    "exact_schema_string_defines_structural_family": true,
+    "same_schema_does_not_imply_same_situation": true,
+    "same_schema_does_not_imply_semantic_equivalence": true,
+    "g3_state": "STRUCTURAL_FAMILY_ACCEPTED",
+    "g4_state": "NOT_APPLICABLE_SCHEMA_FAMILY",
+    "auto_create_gap_id": false
+  },
+  "binding_resolution": {
+    "exact_source_path_match_required": true,
+    "exactly_one_atlas_target_required": true,
+    "generated_record_prefix": "GAP-G4SRC-",
+    "binding_state": "BOUND_GOVERNED_SOURCE_RECORD",
+    "source_gap_id_is_not_atlas_gap_id_by_assumption": true,
+    "claim_allowed": false
+  },
+  "stop_condition": {
+    "internal_routing_debt_zero": true,
+    "source_gap_bindings_required": 35,
+    "schema_families_structurally_resolved_required": 25,
+    "external_gaps_may_remain_open": true,
+    "publication_ready": false
+  },
+  "boundaries": [
+    "SOURCE_RECORD_BINDING != EXTERNAL_CONDITION_CLOSURE",
+    "STRUCTURAL_FAMILY != SEMANTIC_EQUIVALENCE",
+    "ATLAS_APPEND != SCIENTIFIC_OR_RUNTIME_PROOF",
+    "TOKEN_VAZIO != 0"
+  ]
+}

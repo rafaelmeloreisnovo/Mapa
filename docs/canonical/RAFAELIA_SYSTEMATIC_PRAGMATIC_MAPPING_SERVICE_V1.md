@@ -532,3 +532,91 @@ enrichment != Atlas record
 proposed_atlas_gap_id = TOKEN_VAZIO
 atlas_mutation_allowed = false
 ```
+
+
+## 20. Final structural routing closure
+
+The systematic/pragmatic service reaches a terminal **internal routing** state when
+all bounded source identities are represented by governed Atlas source-record
+bindings and all schema families are structurally classified.
+
+The terminal state is:
+
+```text
+system_state = COMPLETE_STRUCTURAL_ROUTING
+source_gap_bindings = 35/35
+schema_families_structurally_resolved = 25/25
+remaining_internal_review_required = 0
+remaining_internal_binding_token_vazio = 0
+canonical_completion_candidates = 0
+field_review_work_items = 0
+```
+
+This state is produced under
+`data/governance/SYSTEMATIC_PRAGMATIC_FINALIZATION_V1.json`.
+
+Each bounded operational-gap source identity is assigned a deterministic
+source-artifact identity:
+
+```text
+artifact_id = OPG_SOURCE::<source_gap_id>
+gap_id      = GAP-G4SRC-<SHA256(source_gap_id)[0:16].upper()>
+provider    = GitHub
+gap_class   = GOVERNANCE
+state       = TOKEN_VAZIO
+```
+
+The provider refers to the canonical **source record** stored in
+`rafaelmeloreisnovo/Mapa`. It does not assert that the subject described by
+the record is a GitHub-hosted phenomenon.
+
+The source paths are preserved as exact `source_refs`. Reconciliation therefore
+requires a one-to-one exact path match and never fuzzy name similarity.
+
+Cycle records with the same explicit schema string may be accepted as members of
+one **structural representation family**. This is not semantic equivalence:
+
+```text
+same_schema => same_structural_family
+same_schema != same_event
+same_schema != same_cause
+same_schema != same_claim
+```
+
+The terminal receipt is
+`data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_FINAL_CLOSURE_20260918_PASS.json`.
+
+Observed closure run:
+
+```text
+Gap Atlas run #78
+effective records = 66
+CANDIDATE_EXACT_MATCH = 35
+PROPOSE_LINK_EXISTING = 35
+PROPOSE_APPEND_NEW = 0
+source_gap_bindings = 35
+schema_families_structurally_resolved = 25
+internal routing debt = 0
+```
+
+### Stop condition
+
+`COMPLETE_STRUCTURAL_ROUTING` means that the internal system can be rebuilt from
+repository sources without conversation memory and without an unresolved routing,
+identity, canonical-field, or schema-family review queue.
+
+It does **not** mean that every represented external condition is resolved.
+
+At terminal structural closure, open external/runtime/scientific records continue
+to use their own `state`, `evidence_required`, `next_gate`, and receipts.
+
+The final invariant remains:
+
+```text
+SOURCE_RECORD_BINDING != EXTERNAL_CONDITION_CLOSURE
+STRUCTURAL_FAMILY != SEMANTIC_EQUIVALENCE
+ATLAS_APPEND != SCIENTIFIC_OR_RUNTIME_PROOF
+TOKEN_VAZIO != 0
+claim_allowed = false
+publication_ready = false
+```

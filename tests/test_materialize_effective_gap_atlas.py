@@ -16,7 +16,7 @@ OVERRIDES = ROOT / "data/gap-atlas/GAP_STATE_OVERRIDES_V1.json"
 
 
 class EffectiveAtlasTests(unittest.TestCase):
-    def test_current_materialization_has_31_records_and_reductions(self):
+    def test_current_materialization_has_66_records_and_reductions(self):
         with tempfile.TemporaryDirectory() as td:
             out = Path(td) / "effective.json"
             proc = subprocess.run(
@@ -28,8 +28,8 @@ class EffectiveAtlasTests(unittest.TestCase):
             self.assertEqual(proc.returncode, 0, proc.stderr)
             data = json.loads(out.read_text(encoding="utf-8"))
             self.assertEqual(data["counts"]["seed_records"], 26)
-            self.assertEqual(data["counts"]["appended_records"], 5)
-            self.assertEqual(data["counts"]["effective_records"], 31)
+            self.assertEqual(data["counts"]["appended_records"], 40)
+            self.assertEqual(data["counts"]["effective_records"], 66)
             self.assertFalse(data["claim_allowed"])
             self.assertFalse(data["publication_ready"])
             by_id = {record["gap_id"]: record for record in data["records"]}
@@ -41,6 +41,12 @@ class EffectiveAtlasTests(unittest.TestCase):
             self.assertEqual(by_id["GAP-CONVERSATIONS-ASSET-JOIN-001"]["effective_state"], "TOKEN_VAZIO")
             self.assertEqual(by_id["GAP-DRIVE-GITHUB-PROVENANCE-001"]["effective_state"], "TOKEN_VAZIO")
             self.assertEqual(by_id["GAP-TRAINING-EVIDENCE-001"]["effective_state"], "NOT_MEASURED")
+            g4src = [r for r in data["records"] if str(r["gap_id"]).startswith("GAP-G4SRC-")]
+            self.assertEqual(len(g4src), 35)
+            self.assertTrue(all(r["provider"] == "GitHub" for r in g4src))
+            self.assertTrue(all(r["gap_class"] == "GOVERNANCE" for r in g4src))
+            self.assertTrue(all(r["state"] == "TOKEN_VAZIO" for r in g4src))
+            self.assertTrue(all(r["claim_allowed"] is False for r in g4src))
 
     def test_duplicate_appended_gap_fails_closed(self):
         with tempfile.TemporaryDirectory() as td:
