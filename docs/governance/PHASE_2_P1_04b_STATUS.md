@@ -59,7 +59,7 @@
 - Audit trail with governance flow
 - Privacy & security markings (no PII, GDPR/LGPD compliant)
 
-**Use Case**: 
+**Use Case**:
 
 - Test broker workflow locally
 - Validate receipt structure for producers
@@ -179,7 +179,7 @@
 
 ## Gap Reduction (TOKEN_VAZIO Resolution)
 
-### Reduced Uncertainty in Phase 2-P1-04b:
+### Reduced Uncertainty in Phase 2-P1-04b
 
 | Gap | Status | Resolution |
 |-----|--------|-----------|
@@ -190,7 +190,7 @@
 | **Approval workflow missing** | ✅ CLOSED | Issue template with governance SLA & audit trail |
 | **Security requirements vague** | ✅ CLOSED | Explicit GDPR/LGPD/FIPS compliance documented |
 
-### Remaining TOKEN_VAZIO Entries (for P1-04c):
+### Remaining TOKEN_VAZIO Entries (for P1-04c)
 
 1. **CROSS_REPO_PROVENANCE_VERIFIER_MISSING** (new in P1-04c)
    - Tool: `tools/verify_cross_repo_provenance.py`
@@ -245,7 +245,7 @@ All Phase 2-P1-04b deliverables are:
 
 ## Next Steps (Phase 2-P1-04c)
 
-### Scheduled for Week 4+ (2026-09-09+):
+### Scheduled for Week 4+ (2026-09-09+)
 
 1. **Cross-Repo Provenance Verifier** (P1-04c task 1)
    - Tool: `tools/verify_cross_repo_provenance.py`
