@@ -17,12 +17,12 @@ assert spec and spec.loader
 spec.loader.exec_module(mod)
 
 
-def action(path: str):
+def action(path: str, markers=None):
     return {
         "path": path,
         "service": "SEMANTIC_TRIAGE",
         "nibiguiri_state": "NIBIGUIRI:CAUSA_DESCONHECIDA",
-        "markers": ["TOKEN_VAZIO"],
+        "markers": markers or ["TOKEN_VAZIO"],
     }
 
 
@@ -72,7 +72,10 @@ class RoutingBindingsTest(unittest.TestCase):
                     action("data/routing/cycles/c.json"),
                     action("data/routing/operational-gaps/g1.json"),
                     action("data/routing/operational-gaps/g1-delta.json"),
-                    action("data/routing/operational-gaps/g2.json"),
+                    action(
+                        "data/routing/operational-gaps/g2.json",
+                        ["TOKEN_VAZIO", "TODO"],
+                    ),
                 ],
             }
             decisions = [
@@ -103,6 +106,10 @@ class RoutingBindingsTest(unittest.TestCase):
             self.assertFalse(result["claim_allowed"])
             self.assertEqual(result["summary"]["schema_families"], 2)
             self.assertEqual(result["summary"]["source_gap_binding_candidates"], 2)
+            self.assertEqual(
+                sum(row["record_count"] for row in result["gap_binding_candidates"]),
+                3,
+            )
             self.assertEqual(result["summary"]["multi_record_gap_ids"], 1)
 
             families = {row["schema_family"]: row for row in result["schema_families"]}
