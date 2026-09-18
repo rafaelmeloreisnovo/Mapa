@@ -219,7 +219,6 @@ F_gap  = execução federada e métricas reais de esforço ainda precisam receip
 F_next = executar teste/CI; depois aplicar o serviço aos repositórios autorizados e triar unmapped
 ```
 
-
 ## 12. Primeiro G3 executado
 
 O primeiro cluster revisado foi `CL-e005a14253d55a76`, observado no Gap Atlas
@@ -240,7 +239,6 @@ auto_create_gap_id = false
 A decisão está registrada em
 `data/triage/systematic-pragmatic-g3-decisions.v1.jsonl` e é validada por
 `scripts/validate_systematic_pragmatic_g3_decisions.py`.
-
 
 ## 13. Recursive child materialization
 
@@ -285,7 +283,6 @@ O próximo materializador deve, portanto, produzir pelo menos os descendentes
 `data/routing/cycles` e `data/routing/operational-gaps`, preservando ambos
 como `REVIEW_REQUIRED` até uma decisão G3 própria.
 
-
 ## 14. Routing semantic probe
 
 Antes de decidir G3 para `data/routing/cycles` ou
@@ -309,7 +306,6 @@ PROBE != G3_DECISION
 
 O resultado entra no artifact/checksum do Gap Atlas e serve como evidência para o
 próximo ledger G3.
-
 
 ## 15. G3 routing decisions from bounded probe
 
@@ -348,7 +344,6 @@ auto_create_gap_id = false
 `tools/materialize_systematic_pragmatic_routing_bindings.py` transforma essas
 decisões em famílias de schema e candidatos de binding por `source_gap_id`, sem
 criar IDs do Atlas.
-
 
 ## 16. G4 exact-evidence source-gap reconciliation
 
@@ -392,7 +387,6 @@ SOURCE_GAP_ID != ATLAS_GAP_ID_BY_ASSUMPTION
 NO_MATCH != DOES_NOT_EXIST
 ```
 
-
 ## 17. Governed G4 append/link proposal queue
 
 Quando a reconciliação exata termina, o serviço
@@ -431,7 +425,6 @@ auto_create_gap_id = false
 
 Campos canônicos ainda não sustentados por evidência, como `gap_class`,
 `priority`, `scope` ou novo ID do Atlas, permanecem `TOKEN_VAZIO`.
-
 
 ## 18. Scoped authority resolution + canonical-field completion
 
@@ -491,7 +484,6 @@ auto_create_gap_id = false
 A contagem preserva a linhagem operacional: 34 proposals já elegíveis no gate
 anterior + 1 identidade recém-desbloqueada por resolução de autoridade.
 
-
 ## 19. Identity + semantics enrichment for canonical G4 fields
 
 After canonical completion identifies unresolved fields, the service
@@ -533,7 +525,6 @@ proposed_atlas_gap_id = TOKEN_VAZIO
 atlas_mutation_allowed = false
 ```
 
-
 ## 20. Final structural routing closure
 
 The systematic/pragmatic service reaches a terminal **internal routing** state when
@@ -547,7 +538,7 @@ system_state = COMPLETE_STRUCTURAL_ROUTING
 source_gap_bindings = 35/35
 schema_families_structurally_resolved = 25/25
 remaining_internal_review_required = 0
-remaining_internal_binding_token_vazio = 0
+remaining_internal_binding_token_vazio_count = zero
 canonical_completion_candidates = 0
 field_review_work_items = 0
 ```
