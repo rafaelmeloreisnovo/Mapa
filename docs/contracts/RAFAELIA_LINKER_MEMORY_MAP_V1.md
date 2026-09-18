@@ -4,6 +4,7 @@ Gap: `G071`
 State: `SPEC_DEFINED_LOCAL / PER-TARGET_MAP_RECEIPTS_OPEN / claim_allowed=false`
 
 For strict freestanding targets, each final ELF receipt must state:
+
 - entry point;
 - target architecture/ABI;
 - section virtual/file sizes;
@@ -16,6 +17,7 @@ For strict freestanding targets, each final ELF receipt must state:
 - linker script or linker flag identity.
 
 Baseline strict profile used by the Geo/ZIPRAF line:
+
 - no undeclared dynamic loader dependency;
 - no undefined symbols at final link;
 - runtime relocations = 0 where static loaderless profile is claimed;
