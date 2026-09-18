@@ -70,6 +70,42 @@ class G4ProposalTest(unittest.TestCase):
             )
             self.assertFalse(by_id["COMPLETE"]["g4"]["atlas_mutation_allowed"])
 
+    def test_structured_and_list_valued_gates_count_as_closure_evidence(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / "data/routing/operational-gaps/structured.json"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(
+                json.dumps(
+                    {
+                        "gap_id": "STRUCTURED",
+                        "claim_allowed": False,
+                        "owner": "producer",
+                        "next_probe": ["run A", "run B"],
+                        "closure_gate": {"one": "receipt A", "two": "receipt B"},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            rel = str(path.relative_to(root))
+            reconciliation = {
+                "schema": "rafaelia.systematic-pragmatic-g4-reconciliation/v1",
+                "claim_allowed": False,
+                "reconciliation": [
+                    {
+                        "source_gap_id": "STRUCTURED",
+                        "source_paths": [rel],
+                        "status": "NO_EXACT_EVIDENCE",
+                        "candidate_atlas_gap_ids": [],
+                    }
+                ],
+            }
+            out = mod.build_proposals(reconciliation, root)
+            row = out["proposals"][0]
+            self.assertEqual(row["proposal_action"], "PROPOSE_APPEND_NEW")
+            self.assertEqual(row["source_evidence"]["closure_or_next_gate_records"], 1)
+            self.assertTrue(row["source_evidence"]["source_next_gates"])
+
     def test_exact_match_proposes_link_but_does_not_bind(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
