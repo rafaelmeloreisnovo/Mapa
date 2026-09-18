@@ -284,3 +284,28 @@ auto_create_gap_id = false
 O próximo materializador deve, portanto, produzir pelo menos os descendentes
 `data/routing/cycles` e `data/routing/operational-gaps`, preservando ambos
 como `REVIEW_REQUIRED` até uma decisão G3 própria.
+
+
+## 14. Routing semantic probe
+
+Antes de decidir G3 para `data/routing/cycles` ou
+`data/routing/operational-gaps`, o checkout executa
+`tools/probe_systematic_pragmatic_routing.py`.
+
+O probe mede, sem decidir:
+
+- nos ciclos: JSON válido, `claim_allowed=false`, contexto estruturado de lacuna/
+  incerteza e presença de closure/next gate;
+- nos operational-gaps: `gap_id`, unicidade, owner/authority, estado,
+  closure/next gate e duplicidades de `gap_id`.
+
+Fronteiras:
+
+```text
+TOKEN_VAZIO_PRESENT != DOCUMENT_DEFECT
+OPERATIONAL_GAP_RECORD != GAP_ATLAS_BINDING
+PROBE != G3_DECISION
+```
+
+O resultado entra no artifact/checksum do Gap Atlas e serve como evidência para o
+próximo ledger G3.
