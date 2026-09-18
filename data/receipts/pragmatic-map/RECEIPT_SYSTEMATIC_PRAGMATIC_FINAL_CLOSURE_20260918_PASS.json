@@ -1,0 +1,74 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-final-closure-receipt/v1",
+  "receipt_id": "SPMS-FINAL-CLOSURE-20260918-PASS",
+  "parent_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_G4_IDENTITY_SEMANTICS_20260918_PASS.json",
+  "pr": "rafaelmeloreisnovo/Mapa#649",
+  "tested_head": "590e05531186807aa54dacd2d074e9a020f9b8ea",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 78,
+    "run_id": 35372676199,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10558839900,
+    "name": "rafaelia-gap-atlas-dd9c05c163eda5ef889d7c8202e90c1b8efd9aca",
+    "digest": "sha256:8fb97ff9c03239418778087e7af8c7a34601a8bc29563a2f8847ecc2966c1d29",
+    "size_bytes": 971087
+  },
+  "final_state": {
+    "system_state": "COMPLETE_STRUCTURAL_ROUTING",
+    "seed_records": 26,
+    "appended_records": 40,
+    "effective_records": 66,
+    "source_gap_candidates": 35,
+    "exact_matches": 35,
+    "ambiguous_matches": 0,
+    "missing_exact_matches": 0,
+    "propose_link_existing": 35,
+    "propose_append_new": 0,
+    "canonical_completion_candidates": 0,
+    "field_review_work_items": 0,
+    "source_gap_bindings": 35,
+    "schema_families_structurally_resolved": 25,
+    "remaining_internal_review_required": 0,
+    "remaining_internal_binding_token_vazio": 0
+  },
+  "open_external_state": {
+    "p0_open": 18,
+    "effective_token_vazio_records": 48,
+    "publication_ready": false,
+    "external_subjects_may_remain_open": true
+  },
+  "invariants": [
+    "SOURCE_RECORD_BINDING != EXTERNAL_CONDITION_CLOSURE",
+    "STRUCTURAL_FAMILY != SEMANTIC_EQUIVALENCE",
+    "ATLAS_APPEND != SCIENTIFIC_OR_RUNTIME_PROOF",
+    "TOKEN_VAZIO != 0",
+    "claim_allowed=false"
+  ],
+  "reconstruction": {
+    "finalization_policy": "data/governance/SYSTEMATIC_PRAGMATIC_FINALIZATION_V1.json",
+    "finalizer": "tools/finalize_systematic_pragmatic_routing.py",
+    "append_ledger": "data/gap-atlas/RAFAELIA_GAP_RECORD_APPEND_V1.jsonl",
+    "effective_materializer": "tools/materialize_effective_gap_atlas.py",
+    "ci": ".github/workflows/rafaelia-gap-atlas.yml",
+    "meaning": "A fresh run rebuilds the effective Atlas, exact source-path reconciliation, link proposals, zero-sized obsolete completion queues, and final structural bindings from repository sources."
+  },
+  "f_ok": [
+    "35/35 bounded source identities have deterministic governed Atlas source-record bindings",
+    "35/35 reconciliation results are unique exact matches",
+    "25/25 cycle schema families are resolved structurally without semantic equivalence",
+    "canonical completion and field-review backlogs are zero after binding",
+    "finalizer independently regenerates committed records and fails closed on drift",
+    "Gap Atlas run #78 terminal SUCCESS"
+  ],
+  "f_gap": [
+    "Underlying external/runtime/scientific conditions represented by open Atlas records remain evidence-gated",
+    "18 P0 records remain open",
+    "48 effective records remain TOKEN_VAZIO",
+    "publication_ready remains false"
+  ],
+  "f_next": "Operate from the effective Atlas and each record's own next_gate. Do not reopen structural routing/canonical-field work unless a new source identity appears or a committed binding drifts.",
+  "claim_allowed": false
+}
