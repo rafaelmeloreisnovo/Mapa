@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-g4-reconciliation-receipt/v1",
+  "receipt_id": "SPMS-G4-RECONCILIATION-20260918-PASS",
+  "parent_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_ROUTING_G3_20260918_PASS.json",
+  "tested_head": "ba3d970da0dfeadb3724c0c4e1bd7f051172a4c1",
+  "pr": "rafaelmeloreisnovo/Mapa#645",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 59,
+    "run_id": 35368272948,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10556499093,
+    "name": "rafaelia-gap-atlas-090c2ad37dfe3fc8c965d37358d3cb6c96c2b24f",
+    "digest": "sha256:7b4bebaab43b7e1df0a47c629b292355b392c6f3a2a7a7e0e8d92d4f373b35d0",
+    "size_bytes": 927571
+  },
+  "observed": {
+    "source_gap_candidates": 35,
+    "effective_atlas_records": 31,
+    "candidate_exact_match": 0,
+    "ambiguous_exact_evidence": 0,
+    "no_exact_evidence": 35
+  },
+  "interpretation": [
+    "No exact source-gap-to-Atlas correspondence is currently encoded by exact gap_id, exact source path reference, or exact predecessor/successor id.",
+    "NO_EXACT_EVIDENCE does not establish semantic absence from the Atlas.",
+    "No source gap was bound or appended automatically."
+  ],
+  "gates": {
+    "G4_exact_reconciliation": "PASS",
+    "source_gap_bindings": "BLOCKED_NO_EXACT_EVIDENCE",
+    "fuzzy_matching": false,
+    "atlas_gap_id_autocreation": false,
+    "governed_confirmation_required": true,
+    "claim_allowed": false
+  },
+  "f_ok": [
+    "all 35 source gap identities evaluated against 31 effective Atlas records",
+    "exact-only evidence policy enforced",
+    "zero automatic bindings",
+    "Gap Atlas run #59 terminal SUCCESS"
+  ],
+  "f_gap": [
+    "35 source gap identities require explicit mapping evidence or governed append proposal",
+    "25 cycle schema families remain independent REVIEW_REQUIRED work",
+    "semantic correspondence beyond exact evidence remains TOKEN_VAZIO"
+  ],
+  "f_next": "Materialize governed append-or-link proposals for the 35 NO_EXACT_EVIDENCE identities; proposals must not mutate the Atlas and must preserve TOKEN_VAZIO for unresolved required fields.",
+  "claim_allowed": false
+}
