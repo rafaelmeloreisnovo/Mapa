@@ -15,7 +15,7 @@ SERVICE = REPO_ROOT / "tools" / "systematic_pragmatic_mapping_service.py"
 
 class SystematicPragmaticMappingServiceTest(unittest.TestCase):
     def make_fixture(self, root: Path) -> Path:
-        (root / "src").mkdir()
+        (root / "src").mkdir(exist_ok=True)
         (root / "src" / "loose.S").write_text(".text\n", encoding="utf-8")
         (root / "README.md").write_text(
             "TOKEN_VAZIO: runtime evidence\n", encoding="utf-8"
