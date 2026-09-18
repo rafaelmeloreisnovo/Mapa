@@ -58,7 +58,10 @@ def selected_actions(
             if str(row.get("path", "")).startswith(prefix)
             and (service is None or row.get("service") == service)
             and (nib is None or row.get("nibiguiri_state") == nib)
-            and (not markers or list(row.get("markers") or []) == markers)
+            and (
+                not markers
+                or set(markers).issubset(set(row.get("markers") or []))
+            )
         ],
         key=lambda row: str(row.get("path", "")),
     )
