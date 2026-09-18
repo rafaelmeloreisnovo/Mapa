@@ -111,7 +111,30 @@ class SystematicPragmaticMappingServiceTest(unittest.TestCase):
             self.assertEqual(len(notes), 1)
             self.assertEqual(
                 notes[0]["nibiguiri_state"],
+                "NIBIGUIRI:CAUSA_DESCONHECIDA",
+            )
+            self.assertNotEqual(
+                notes[0]["nibiguiri_state"],
                 "NIBIGUIRI:OBVIO_NAO_INDEXADO",
+            )
+            self.assertGreaterEqual(action_map["summary"]["clusters"], 1)
+            self.assertEqual(
+                action_map["summary"]["clusters"],
+                len(action_map["clusters"]),
+            )
+            self.assertTrue(
+                all(cluster["claim_allowed"] is False for cluster in action_map["clusters"])
+            )
+
+    def test_cluster_digest_is_deterministic_for_same_fixture(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _, action_map_a, receipt_a = self.run_service(root)
+            _, action_map_b, receipt_b = self.run_service(root)
+            self.assertEqual(action_map_a["clusters"], action_map_b["clusters"])
+            self.assertEqual(
+                receipt_a["cluster_digest_sha256"],
+                receipt_b["cluster_digest_sha256"],
             )
 
     def test_fail_on_unmapped_is_enforceable(self):
