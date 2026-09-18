@@ -104,6 +104,26 @@ def action_id(root: str, path: str, gap: str) -> str:
     return hashlib.sha256(f"{root}\0{path}\0{gap}".encode("utf-8")).hexdigest()[:24]
 
 
+def pragmatic_filter_stats(gap_map: dict[str, Any]) -> dict[str, int]:
+    preserved = 0
+    coalesced = 0
+    for artifact in gap_map.get("artifacts", []):
+        gaps = set(artifact.get("gaps") or [])
+        markers = set(artifact.get("unresolved_markers") or [])
+        if (
+            artifact.get("kind") == "DOCUMENT"
+            and markers
+            and markers.issubset({"TOKEN_VAZIO"})
+        ):
+            preserved += 1
+        elif "UNRESOLVED_MARKERS" in gaps and "DOCUMENT_INCOMPLETE" in gaps:
+            coalesced += 1
+    return {
+        "preserved_token_vazio_observations": preserved,
+        "coalesced_document_duplicate_actions": coalesced,
+    }
+
+
 def build_actions(gap_map: dict[str, Any], atlas: dict[str, Any]) -> list[dict[str, Any]]:
     if gap_map.get("schema") != rgm.SCHEMA:
         raise ValueError(f"unsupported gap map schema: {gap_map.get('schema')}")
@@ -117,7 +137,26 @@ def build_actions(gap_map: dict[str, Any], atlas: dict[str, Any]) -> list[dict[s
         root = str(artifact.get("root", ""))
         path = str(artifact.get("path", ""))
         artifact_id = str(artifact.get("artifact_id", ""))
-        for gap in sorted(set(artifact.get("gaps") or [])):
+        gaps = sorted(set(artifact.get("gaps") or []))
+        markers = set(artifact.get("unresolved_markers") or [])
+
+        # TOKEN_VAZIO is a valid epistemic state. A document containing only
+        # TOKEN_VAZIO markers is preserved as an observation in the source gap
+        # map and must not become artificial work in the pragmatic queue.
+        if (
+            artifact.get("kind") == "DOCUMENT"
+            and markers
+            and markers.issubset({"TOKEN_VAZIO"})
+        ):
+            continue
+
+        # repository_gap_mapper emits DOCUMENT_INCOMPLETE in addition to
+        # UNRESOLVED_MARKERS for the same document. One root cause should create
+        # one pragmatic action, not two.
+        if "UNRESOLVED_MARKERS" in gaps and "DOCUMENT_INCOMPLETE" in gaps:
+            gaps = [gap for gap in gaps if gap != "DOCUMENT_INCOMPLETE"]
+
+        for gap in gaps:
             matched = match_atlas_records(records, artifact_id, path)
             gap_ids = unique(str(record.get("gap_id", "")) for record in matched)
             priority = record_priority(matched, gap)
@@ -220,6 +259,8 @@ def render_markdown(payload: dict[str, Any], top: int) -> str:
         f"- Actions: **{summary['actions']}**",
         f"- P0 blockers: **{summary['blocking_p0']}**",
         f"- Nibiguiri/unmapped: **{summary['unmapped']}**",
+        f"- TOKEN_VAZIO preserved as observation: **{summary.get('preserved_token_vazio_observations', 0)}**",
+        f"- Duplicate document actions coalesced: **{summary.get('coalesced_document_duplicate_actions', 0)}**",
         "- Claim boundary: `claim_allowed=false`",
         "",
         "## Operational flow",
@@ -364,6 +405,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     actions = build_actions(gap_map, atlas)
     generated_at = utc_now()
+    action_summary = summarize(actions)
+    action_summary.update(pragmatic_filter_stats(gap_map))
     action_map = {
         "schema": SCHEMA,
         "generated_at": generated_at,
@@ -380,7 +423,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "GATE",
             "RECEIPT",
         ],
-        "summary": summarize(actions),
+        "summary": action_summary,
         "actions": actions,
     }
 
