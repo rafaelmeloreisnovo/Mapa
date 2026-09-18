@@ -150,6 +150,7 @@ jobs:
           effective = json.loads(Path('artifacts/gap-atlas/effective_gap_atlas.json').read_text())
           discovery = json.loads(Path('artifacts/gap-atlas/discovery_candidates.json').read_text())
           pragmatic = json.loads(Path('artifacts/systematic-pragmatic-map/pragmatic_action_map.json').read_text())
+          pragmatic_review = json.loads(Path('artifacts/systematic-pragmatic-map/cluster_review_queue.json').read_text())
           pragmatic_receipt = json.loads(Path('artifacts/systematic-pragmatic-map/receipt.json').read_text())
           coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
           adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
@@ -173,6 +174,7 @@ jobs:
           assert discovery['claim_allowed'] is False
           assert pragmatic['claim_allowed'] is False
           assert pragmatic_receipt['claim_allowed'] is False
+          assert pragmatic_review['claim_allowed'] is False
           assert pragmatic['flow'] == ['SCAN', 'BIND', 'NIBIGUIRI', 'PRIORIZE', 'SERVICE', 'GATE', 'RECEIPT']
           assert pragmatic['summary']['clusters'] == len(pragmatic['clusters'])
           assert pragmatic['summary']['largest_cluster_actions'] >= 0
@@ -182,7 +184,18 @@ jobs:
               if not row['mapped_gap_ids']
           )
           assert all(cluster['claim_allowed'] is False for cluster in pragmatic['clusters'])
+          assert all(
+              cluster['g3_semantic_split_gate']['state'] == 'REVIEW_REQUIRED'
+              and cluster['g4_authority_bind_gate']['state'] == 'BLOCKED_BY_G3'
+              and cluster['g4_authority_bind_gate']['auto_create_gap_id'] is False
+              for cluster in pragmatic_review['clusters']
+          )
+          assert pragmatic_review['policy']['cluster_is_not_equivalence'] is True
+          assert pragmatic_review['policy']['authority_binding_requires_g3_evidence'] is True
+          assert pragmatic_receipt['g3_state'] in {'REVIEW_REQUIRED', 'NOT_APPLICABLE'}
+          assert pragmatic_receipt['g4_state'] in {'BLOCKED_BY_G3', 'NOT_APPLICABLE'}
           assert pragmatic_receipt['cluster_digest_sha256']
+          assert pragmatic_receipt['cluster_review_digest_sha256']
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
           assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
@@ -215,6 +228,7 @@ jobs:
             artifacts/gap-atlas/repository_gap_map.json \
             artifacts/gap-atlas/discovery_candidates.json \
             artifacts/systematic-pragmatic-map/pragmatic_action_map.json \
+            artifacts/systematic-pragmatic-map/cluster_review_queue.json \
             artifacts/systematic-pragmatic-map/receipt.json \
             docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md \
             > GAP_ATLAS_CHECKSUMS.sha256
