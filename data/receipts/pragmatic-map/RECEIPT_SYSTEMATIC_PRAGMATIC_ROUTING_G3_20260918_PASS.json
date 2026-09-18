@@ -1,0 +1,75 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-routing-g3-receipt/v1",
+  "receipt_id": "SPMS-ROUTING-G3-20260918-PASS",
+  "parent_probe_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_ROUTING_PROBE_20260918_PASS.json",
+  "correction_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_ROUTING_PROBE_20260918_CORR001.json",
+  "tested_head": "99a5801e05a7ba7688a2794242318f20a92ac091",
+  "pr": "rafaelmeloreisnovo/Mapa#644",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 56,
+    "run_id": 35367953211,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10557352079,
+    "name": "rafaelia-gap-atlas-21546ebf949e354d0c7696b4884406149a5f55f2",
+    "digest": "sha256:b06c2b0f6e3a5e2748cc564eccaf8b2aa27c4640459dee741e42a7aefad30897",
+    "size_bytes": 923223
+  },
+  "observed": {
+    "pragmatic_actions": 1322,
+    "top_clusters": 79,
+    "child_candidates_total": 67,
+    "level1_children": 58,
+    "max_level": 2,
+    "review_required_children": 64,
+    "split_required_children": 2,
+    "deferred_semantic_splits": 1,
+    "distinct_gap_children": 1,
+    "cycles": {
+      "selected_records": 75,
+      "schema_families": 25,
+      "decision": "SPLIT_REQUIRED",
+      "split_strategy": "SEMANTIC_SCHEMA"
+    },
+    "operational_gaps": {
+      "selected_records": 36,
+      "source_gap_ids": 36,
+      "unique_source_gap_ids": 35,
+      "multi_record_gap_ids": 1,
+      "decision": "DISTINCT_GAP",
+      "binding_strategy": "PER_EXISTING_GAP_ID"
+    }
+  },
+  "correction": {
+    "failure_run": 54,
+    "failure_mechanism": "routing binding materializer required exact marker-list equality",
+    "effect": "four valid records containing TOKEN_VAZIO plus additional markers were excluded, producing 31 instead of 35 source-gap binding candidates",
+    "fix": "required decision markers are matched as a subset of observed markers",
+    "regression_test": "records with TOKEN_VAZIO plus an additional marker remain selected"
+  },
+  "gates": {
+    "G3_cycles": "PASS_SPLIT_REQUIRED_SEMANTIC_SCHEMA",
+    "G3_operational_gaps": "PASS_DISTINCT_GAP",
+    "G4_cycles": "BLOCKED_BY_G3_SPLIT",
+    "G4_operational_gaps": "REQUIRES_PER_ITEM_BINDING",
+    "atlas_gap_id_autocreation": false,
+    "claim_allowed": false
+  },
+  "f_ok": [
+    "25 cycle schema-family review candidates materialized",
+    "35 operational source-gap binding candidates materialized from 36 records",
+    "one two-record source-gap lineage preserved",
+    "marker subset bug reproduced and corrected without weakening guard",
+    "Gap Atlas run #56 terminal SUCCESS"
+  ],
+  "f_gap": [
+    "25 cycle schema families remain REVIEW_REQUIRED",
+    "35 source gap identities remain unbound to Atlas gap_ids",
+    "64 child candidates remain REVIEW_REQUIRED overall",
+    "federated producer scans remain separate work"
+  ],
+  "f_next": "Review source-gap identities for existing Atlas correspondence and review cycle schema families for SAME_FAMILY/DISTINCT/FALSE_POSITIVE decisions; do not auto-create Atlas ids.",
+  "claim_allowed": false
+}
