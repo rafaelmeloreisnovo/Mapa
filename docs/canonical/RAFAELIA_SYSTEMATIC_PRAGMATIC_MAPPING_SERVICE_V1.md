@@ -55,6 +55,22 @@ encontrou binding no Atlas. Não significa erro confirmado, censura ou novidade.
 
 Esses rótulos são roteamento de trabalho, não prova de causa ou resolução.
 
+### Regra anti-ruído
+
+`TOKEN_VAZIO` é um estado válido. Se um documento contém somente marcador
+`TOKEN_VAZIO`, o serviço preserva a observação no gap map, mas não cria uma ação
+pragmática artificial. Se o mesmo documento recebe simultaneamente
+`UNRESOLVED_MARKERS` e `DOCUMENT_INCOMPLETE` pela mesma causa, o serviço coalesce
+os dois em uma única ação.
+
+Isso mantém:
+
+```text
+OBSERVAÇÃO != TRABALHO
+TOKEN_VAZIO != BUG
+UM FATO GERADOR != DUAS AÇÕES DUPLICADAS
+```
+
 ## 4. Execução
 
 No repositório Mapa:
@@ -144,6 +160,6 @@ inferidos por este serviço.
 
 ```text
 F_ok   = scanner + Atlas + Nibiguiri convertidos em fila operacional executável
-F_gap  = CI remoto, execução federada e métricas reais de esforço ainda precisam receipt
+F_gap  = execução federada e métricas reais de esforço ainda precisam receipt; ruído TOKEN_VAZIO é preservado sem virar fila artificial
 F_next = executar teste/CI; depois aplicar o serviço aos repositórios autorizados e triar unmapped
 ```
