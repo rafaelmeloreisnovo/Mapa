@@ -15,10 +15,12 @@ on:
       - "tools/materialize_systematic_pragmatic_children.py"
       - "tools/probe_systematic_pragmatic_routing.py"
       - "tools/materialize_systematic_pragmatic_routing_bindings.py"
+      - "tools/reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_probe_systematic_pragmatic_routing.py"
       - "tests/test_materialize_systematic_pragmatic_routing_bindings.py"
+      - "tests/test_reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_systematic_pragmatic_g3_decisions.py"
       - "scripts/validate_systematic_pragmatic_g3_decisions.py"
       - "data/triage/systematic-pragmatic-g3-decisions.v1.jsonl"
@@ -45,10 +47,12 @@ on:
       - "tools/materialize_systematic_pragmatic_children.py"
       - "tools/probe_systematic_pragmatic_routing.py"
       - "tools/materialize_systematic_pragmatic_routing_bindings.py"
+      - "tools/reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_systematic_pragmatic_mapping_service.py"
       - "tests/test_materialize_systematic_pragmatic_children.py"
       - "tests/test_probe_systematic_pragmatic_routing.py"
       - "tests/test_materialize_systematic_pragmatic_routing_bindings.py"
+      - "tests/test_reconcile_systematic_pragmatic_source_gaps.py"
       - "tests/test_rafaelia_gap_atlas.py"
       - "tests/test_rafaelia_specialized_ledger_adapter.py"
       - "tests/test_materialize_effective_gap_atlas.py"
@@ -88,10 +92,12 @@ jobs:
           python3 -m py_compile tools/materialize_systematic_pragmatic_children.py
           python3 -m py_compile tools/probe_systematic_pragmatic_routing.py
           python3 -m py_compile tools/materialize_systematic_pragmatic_routing_bindings.py
+          python3 -m py_compile tools/reconcile_systematic_pragmatic_source_gaps.py
           python3 -m py_compile tests/test_systematic_pragmatic_mapping_service.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_children.py
           python3 -m py_compile tests/test_probe_systematic_pragmatic_routing.py
           python3 -m py_compile tests/test_materialize_systematic_pragmatic_routing_bindings.py
+          python3 -m py_compile tests/test_reconcile_systematic_pragmatic_source_gaps.py
           python3 -m py_compile tests/test_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile scripts/validate_systematic_pragmatic_g3_decisions.py
           python3 -m py_compile tests/test_rafaelia_gap_atlas.py
@@ -142,6 +148,7 @@ jobs:
           python3 -m unittest -v tests/test_materialize_systematic_pragmatic_children.py
           python3 -m unittest -v tests/test_probe_systematic_pragmatic_routing.py
           python3 -m unittest -v tests/test_materialize_systematic_pragmatic_routing_bindings.py
+          python3 -m unittest -v tests/test_reconcile_systematic_pragmatic_source_gaps.py
           python3 -m unittest -v tests/test_systematic_pragmatic_g3_decisions.py
 
       - name: Validate evidence-backed G3 decisions
@@ -205,6 +212,14 @@ jobs:
             --output artifacts/systematic-pragmatic-map/routing_bindings.json \
             | tee systematic-pragmatic-routing-bindings-summary.json
 
+      - name: Reconcile source gap identities to effective Atlas
+        run: |
+          python3 tools/reconcile_systematic_pragmatic_source_gaps.py \
+            --routing-bindings artifacts/systematic-pragmatic-map/routing_bindings.json \
+            --effective-atlas artifacts/gap-atlas/effective_gap_atlas.json \
+            --output artifacts/systematic-pragmatic-map/source_gap_reconciliation.json \
+            | tee systematic-pragmatic-g4-reconciliation-summary.json
+
       - name: Guard coverage, effective state and claim boundary
         run: |
           python3 - <<'PY'
@@ -220,6 +235,7 @@ jobs:
           pragmatic_children = json.loads(Path('artifacts/systematic-pragmatic-map/child_clusters.json').read_text())
           routing_probe = json.loads(Path('artifacts/systematic-pragmatic-map/routing_semantic_probe.json').read_text())
           routing_bindings = json.loads(Path('artifacts/systematic-pragmatic-map/routing_bindings.json').read_text())
+          source_gap_reconciliation = json.loads(Path('artifacts/systematic-pragmatic-map/source_gap_reconciliation.json').read_text())
           coverage = json.loads(Path('data/gap-atlas/PROVIDER_COVERAGE_V1.json').read_text())
           adapters = json.loads(Path('data/gap-atlas/SOURCE_ADAPTER_REGISTRY_V1.json').read_text())
           overrides = json.loads(Path('data/gap-atlas/GAP_STATE_OVERRIDES_V1.json').read_text())
@@ -292,6 +308,14 @@ jobs:
           assert all(row['g3']['state'] == 'REVIEW_REQUIRED' for row in routing_bindings['schema_families'])
           assert all(row['g4']['atlas_gap_id'] == 'TOKEN_VAZIO' for row in routing_bindings['gap_binding_candidates'])
           assert all(row['g4']['auto_create_gap_id'] is False for row in routing_bindings['gap_binding_candidates'])
+          assert source_gap_reconciliation['claim_allowed'] is False
+          assert source_gap_reconciliation['policy']['fuzzy_matching_forbidden'] is True
+          assert source_gap_reconciliation['policy']['exact_evidence_is_candidate_not_binding'] is True
+          assert source_gap_reconciliation['summary']['source_gap_candidates'] == 35
+          assert sum(source_gap_reconciliation['summary']['by_status'].values()) == 35
+          assert all(row['g4']['atlas_gap_id'] == 'TOKEN_VAZIO' for row in source_gap_reconciliation['reconciliation'])
+          assert all(row['g4']['auto_create_gap_id'] is False for row in source_gap_reconciliation['reconciliation'])
+          assert all(row['g4']['human_or_governed_confirmation_required'] is True for row in source_gap_reconciliation['reconciliation'])
           assert coverage['claim_allowed'] is False
           assert coverage['github_authority_registry']['observed'] == coverage['github_authority_registry']['expected'] == 14
           assert coverage['drive_branch_registry']['observed_scopes'] == coverage['drive_branch_registry']['expected_scopes'] == 7
@@ -328,6 +352,7 @@ jobs:
             artifacts/systematic-pragmatic-map/child_clusters.json \
             artifacts/systematic-pragmatic-map/routing_semantic_probe.json \
             artifacts/systematic-pragmatic-map/routing_bindings.json \
+            artifacts/systematic-pragmatic-map/source_gap_reconciliation.json \
             artifacts/systematic-pragmatic-map/g3_decision_validation.json \
             artifacts/systematic-pragmatic-map/receipt.json \
             docs/canonical/RAFAELIA_SYSTEMATIC_PRAGMATIC_MAPPING_SERVICE_V1.md \
@@ -346,6 +371,7 @@ jobs:
             systematic-pragmatic-children-summary.json
             systematic-pragmatic-routing-summary.json
             systematic-pragmatic-routing-bindings-summary.json
+            systematic-pragmatic-g4-reconciliation-summary.json
             effective-gap-atlas-counts.json
             artifacts/gap-atlas/
             artifacts/systematic-pragmatic-map/
