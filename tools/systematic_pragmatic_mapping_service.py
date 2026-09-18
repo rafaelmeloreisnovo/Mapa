@@ -110,6 +110,11 @@ def path_domain(path: str) -> str:
     return parts[0] if parts else "__root__"
 
 
+def path_subdomain(path: str) -> str:
+    parts = [part for part in Path(path).parts if part not in {".", ""}]
+    return parts[1] if len(parts) > 1 else "__root__"
+
+
 def cluster_id(
     root: str,
     domain: str,
@@ -142,6 +147,11 @@ def build_clusters(actions: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
             key=lambda value: PRIORITY_ORDER.get(value, 9),
         )
         cid = cluster_id(root, domain, service, markers, state)
+        subdomain_counts: dict[str, int] = {}
+        for row in rows:
+            subdomain = path_subdomain(str(row.get("path", "")))
+            subdomain_counts[subdomain] = subdomain_counts.get(subdomain, 0) + 1
+
         authority_required = unique(
             str(value)
             for row in rows
@@ -163,6 +173,7 @@ def build_clusters(actions: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
                 "action_count": len(rows),
                 "priorities": priorities,
                 "sample_paths": sorted(str(row.get("path", "")) for row in rows)[:10],
+                "subdomain_counts": dict(sorted(subdomain_counts.items())),
                 "authority_required": authority_required,
                 "evidence_required": evidence_required,
                 "g3_semantic_split_gate": {
@@ -171,6 +182,7 @@ def build_clusters(actions: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
                         "DUPLICATE",
                         "SAME_FAMILY",
                         "DISTINCT_GAP",
+                        "SPLIT_REQUIRED",
                         "FALSE_POSITIVE",
                         "ACCEPTED_LIMITATION",
                     ],
@@ -240,6 +252,7 @@ def build_cluster_review_queue(
                 "markers": cluster["markers"],
                 "nibiguiri_state": cluster["nibiguiri_state"],
                 "sample_paths": cluster["sample_paths"],
+                "subdomain_counts": cluster["subdomain_counts"],
                 "g3_semantic_split_gate": cluster["g3_semantic_split_gate"],
                 "g4_authority_bind_gate": cluster["g4_authority_bind_gate"],
                 "claim_allowed": False,
