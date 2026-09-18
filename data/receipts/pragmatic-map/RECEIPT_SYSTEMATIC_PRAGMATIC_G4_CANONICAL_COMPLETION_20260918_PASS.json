@@ -1,0 +1,139 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-canonical-completion-receipt/v1",
+  "receipt_id": "SPMS-G4-CANONICAL-COMPLETION-20260918-PASS",
+  "parent_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_G4_PROPOSALS_20260918_PASS.json",
+  "tested_head": "617e91026ec12b6e24c101bd96a5c8dfdf49ccc1",
+  "pr": "rafaelmeloreisnovo/Mapa#647",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 67,
+    "run_id": 35369826330,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10557860882,
+    "name": "rafaelia-gap-atlas-3f2eaa72d43851f2fe158c5c53c6055f3dfba9d7",
+    "digest": "sha256:d9a64b663a3f9b9bce2e143e4b30b67737f15c240157a0486c11ea0a1894f9e9",
+    "size_bytes": 963858
+  },
+  "authority_resolution": {
+    "subject_gap_id": "TOKEN_VAZIO_INVALID_CLOSURE_RECEIPT_PROVENANCE_20260819T2207BRT",
+    "resolution_id": "AUTH-TOKEN-VAZIO-INVALID-CLOSURE-20260918",
+    "decision": "AUTHORITY_RESOLVED_SCOPED",
+    "owner_repository": "rafaelmeloreisnovo/Mapa",
+    "lanes": {
+      "evidence_and_validation": "04_validacao",
+      "integration": "06_integracao",
+      "approval": "00_governanca"
+    },
+    "does_not_resolve": [
+      "invalid historical closure receipt",
+      "gap closure",
+      "Atlas binding",
+      "scientific/runtime claim"
+    ]
+  },
+  "observed": {
+    "proposals_total": 35,
+    "propose_append_new": 35,
+    "authority_resolutions_applied": 1,
+    "baseline_existing_proposals": 34,
+    "newly_unblocked_by_authority": 1,
+    "canonical_completion_candidates": 35,
+    "field_state_counts": {
+      "artifact_id": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 0,
+        "TOKEN_VAZIO": 35
+      },
+      "provider": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 0,
+        "TOKEN_VAZIO": 35
+      },
+      "scope": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 0,
+        "TOKEN_VAZIO": 35
+      },
+      "gap_class": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 1,
+        "TOKEN_VAZIO": 34
+      },
+      "priority": {
+        "EXACT_SOURCE_FIELD": 1,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 33,
+        "TOKEN_VAZIO": 1
+      },
+      "known": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 35,
+        "TOKEN_VAZIO": 0
+      },
+      "unknown": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 1,
+        "TOKEN_VAZIO": 34
+      },
+      "authority_required": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 35,
+        "TOKEN_VAZIO": 0
+      },
+      "evidence_required": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 0,
+        "TOKEN_VAZIO": 35
+      },
+      "next_gate": {
+        "EXACT_SOURCE_FIELD": 0,
+        "MULTI_SOURCE_REVIEW": 0,
+        "SOURCE_ALIAS_CANDIDATE": 35,
+        "TOKEN_VAZIO": 0
+      }
+    }
+  },
+  "interpretation": [
+    "The previously missing authority is now resolved only for governed routing, using existing Mapa/Lane authority evidence.",
+    "All 35 source identities now qualify as governed append proposals, but none is an Atlas record.",
+    "Canonical-field completion preserves unsupported fields as TOKEN_VAZIO and treats aliases as non-equivalent candidates."
+  ],
+  "gates": {
+    "scoped_authority": "PASS",
+    "proposal_queue": "35_PROPOSE_APPEND_NEW",
+    "canonical_completion": "PASS_EVIDENCE_TYPED",
+    "atlas_mutation_allowed": false,
+    "proposed_atlas_gap_ids": "TOKEN_VAZIO",
+    "auto_create_gap_id": false,
+    "claim_allowed": false
+  },
+  "f_ok": [
+    "one scoped authority gap resolved without rewriting source history",
+    "35/35 proposal identities eligible for governed append review",
+    "34 baseline proposals plus one authority-unblocked proposal preserved in lineage",
+    "canonical completion worksheet materialized for all 35",
+    "Gap Atlas run #67 terminal SUCCESS"
+  ],
+  "f_gap": [
+    "artifact_id remains TOKEN_VAZIO for 35/35",
+    "provider remains TOKEN_VAZIO for 35/35",
+    "scope remains TOKEN_VAZIO for 35/35",
+    "evidence_required remains TOKEN_VAZIO for 35/35",
+    "gap_class remains TOKEN_VAZIO for 34/35",
+    "unknown remains TOKEN_VAZIO for 34/35",
+    "priority remains TOKEN_VAZIO for 1/35",
+    "25 cycle schema families remain REVIEW_REQUIRED"
+  ],
+  "f_next": "Resolve canonical identity/provider/scope/evidence fields from explicit producer evidence or governed declarations; review aliases before promotion; do not allocate Atlas IDs or append records until those gates are completed.",
+  "claim_allowed": false
+}
