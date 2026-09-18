@@ -391,3 +391,43 @@ EXACT_EVIDENCE != BINDING
 SOURCE_GAP_ID != ATLAS_GAP_ID_BY_ASSUMPTION
 NO_MATCH != DOES_NOT_EXIST
 ```
+
+
+## 17. Governed G4 append/link proposal queue
+
+Quando a reconciliação exata termina, o serviço
+`tools/materialize_systematic_pragmatic_g4_proposals.py` produz somente
+propostas de governança.
+
+Estados:
+
+```text
+CANDIDATE_EXACT_MATCH + one target
+→ PROPOSE_LINK_EXISTING
+
+NO_EXACT_EVIDENCE + bounded source identity complete
+→ PROPOSE_APPEND_NEW
+
+AMBIGUOUS or incomplete bounded source evidence
+→ NEEDS_MORE_EVIDENCE
+```
+
+A completude mínima para `PROPOSE_APPEND_NEW` exige, dentro do conjunto
+bounded observado:
+
+- todos os source records com `claim_allowed=false`;
+- owner/authority observável;
+- closure/next gate em todos os source records.
+
+Mesmo assim:
+
+```text
+proposal != binding
+proposal != append
+proposed_atlas_gap_id = TOKEN_VAZIO
+atlas_mutation_allowed = false
+auto_create_gap_id = false
+```
+
+Campos canônicos ainda não sustentados por evidência, como `gap_class`,
+`priority`, `scope` ou novo ID do Atlas, permanecem `TOKEN_VAZIO`.
