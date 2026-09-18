@@ -128,6 +128,7 @@ next
 ## Critério de fechamento
 
 Uma rodada fecha quando:
+
 - objetivo ficou determinado;
 - fontes e autoridade estão pinadas;
 - delta material foi registrado;
