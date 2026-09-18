@@ -81,6 +81,64 @@ class IdentitySemanticsEnrichmentTest(unittest.TestCase):
             )
             self.assertEqual(fields["artifact_id"]["state"], "TOKEN_VAZIO")
 
+    def test_repository_owner_derives_github_candidate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            rel = self._write(
+                root,
+                "repo-owner",
+                {
+                    "claim_allowed": False,
+                    "owner": "rafaelmeloreisnovo/RafGitTools",
+                },
+            )
+            out = mod.build(self._completion("GAP-REPO", [rel]), root)
+            field = out["enrichments"][0]["target_fields"]["provider"]
+            self.assertEqual(
+                field["state"], "STRUCTURED_DERIVATION_CANDIDATE"
+            )
+            self.assertEqual(field["value"], "GitHub")
+
+    def test_multiple_evidence_needed_are_unioned_not_conflicted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            rel = self._write(
+                root,
+                "evidence",
+                {
+                    "claim_allowed": False,
+                    "detector": {"evidence_needed": "run + job"},
+                    "closure_gate": {"evidence_needed": "artifact + digest"},
+                },
+            )
+            out = mod.build(self._completion("GAP-EVIDENCE", [rel]), root)
+            field = out["enrichments"][0]["target_fields"]["evidence_required"]
+            self.assertEqual(field["state"], "ALIAS_CANDIDATE")
+            self.assertEqual(
+                field["value"], ["run + job", "artifact + digest"]
+            )
+            self.assertEqual(
+                field["combination"], "UNION_OF_COMPLEMENTARY_REQUIREMENTS"
+            )
+
+    def test_affected_routes_derive_scope_candidate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            rel = self._write(
+                root,
+                "scope",
+                {
+                    "claim_allowed": False,
+                    "affected_routes": ["MAPA_TO_RGT", "RGT_TO_TERMUX"],
+                },
+            )
+            out = mod.build(self._completion("GAP-SCOPE", [rel]), root)
+            field = out["enrichments"][0]["target_fields"]["scope"]
+            self.assertEqual(
+                field["state"], "STRUCTURED_DERIVATION_CANDIDATE"
+            )
+            self.assertEqual(field["value"], ["MAPA_TO_RGT", "RGT_TO_TERMUX"])
+
     def test_exact_provider_enum_wins(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
