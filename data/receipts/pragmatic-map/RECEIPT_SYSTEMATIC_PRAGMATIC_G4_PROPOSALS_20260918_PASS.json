@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-g4-proposals-receipt/v1",
+  "receipt_id": "SPMS-G4-PROPOSALS-20260918-PASS",
+  "parent_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_G4_RECONCILIATION_20260918_PASS.json",
+  "tested_head": "94c1717ab6d21a41aa3979e6ca04af0c6b197a55",
+  "pr": "rafaelmeloreisnovo/Mapa#646",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 64,
+    "run_id": 35368768575,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10556724630,
+    "name": "rafaelia-gap-atlas-85bc3d8453c415037d47ab7787a2544ed7c9e927",
+    "digest": "sha256:bfdce0266d5e27492367d63e0f5fda7d78723ca4fc7d39084fbbe761f35ac089",
+    "size_bytes": 941574
+  },
+  "observed": {
+    "source_gap_candidates": 35,
+    "propose_append_new": 34,
+    "propose_link_existing": 0,
+    "needs_more_evidence": 1,
+    "remaining_gap_id": "TOKEN_VAZIO_INVALID_CLOSURE_RECEIPT_PROVENANCE_20260819T2207BRT",
+    "remaining_missing_evidence": [
+      "owner_or_authority"
+    ]
+  },
+  "correction": {
+    "initial_run": 62,
+    "initial_result": {
+      "propose_append_new": 33,
+      "needs_more_evidence": 2
+    },
+    "parser_gap": "list-valued next_probe and object-valued closure_gate were not flattened into gate evidence",
+    "affected_source_gap_id": "RGT-PR365-COVERAGE-NODE24-20260819T1642BRT",
+    "fix": "recursively collect string leaves from structured/list-valued gate fields",
+    "final_result": {
+      "propose_append_new": 34,
+      "needs_more_evidence": 1
+    }
+  },
+  "gates": {
+    "proposal_queue": "PASS",
+    "atlas_mutation_allowed": false,
+    "proposed_atlas_gap_ids": "TOKEN_VAZIO",
+    "auto_create_gap_id": false,
+    "claim_allowed": false
+  },
+  "f_ok": [
+    "34 bounded identities have minimum source evidence for governed append proposals",
+    "structured closure-gate aliases are recognized",
+    "one true missing-authority case remains blocked",
+    "no Atlas mutation or automatic id allocation occurred"
+  ],
+  "f_gap": [
+    "34 proposals still require governed canonical field completion and approval",
+    "one source record lacks explicit owner/authority",
+    "25 cycle schema families remain REVIEW_REQUIRED"
+  ],
+  "f_next": "Repair or explicitly classify the missing owner/authority record, then build governed canonical-field completion for the 34 append proposals without mutating the Atlas.",
+  "claim_allowed": false
+}
