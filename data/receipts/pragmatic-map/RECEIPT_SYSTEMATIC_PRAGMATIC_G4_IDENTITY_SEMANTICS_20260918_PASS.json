@@ -1,0 +1,105 @@
+{
+  "schema": "rafaelia.systematic-pragmatic-identity-semantics-receipt/v1",
+  "receipt_id": "SPMS-G4-IDENTITY-SEMANTICS-20260918-PASS",
+  "parent_receipt": "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_G4_CANONICAL_COMPLETION_20260918_PASS.json",
+  "tested_head": "0ebd97cf48a7fca756f07acb144bbe508a70198c",
+  "pr": "rafaelmeloreisnovo/Mapa#648",
+  "workflow": {
+    "name": "RAFAELIA Gap Atlas V1",
+    "run_number": 75,
+    "run_id": 35371323927,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10558168547,
+    "name": "rafaelia-gap-atlas-d07dff99f1fbd9bb238497d4ec60aebcefb28566",
+    "digest": "sha256:8617ec7fb0f02724261f64cbc6c57c3ee3b77b608467ca06ac64f58692ce21c5",
+    "size_bytes": 999624
+  },
+  "observed": {
+    "source_identities": 35,
+    "target_fields_per_identity": 4,
+    "work_items": 140,
+    "field_state_counts": {
+      "artifact_id": {
+        "EXACT_STRUCTURED": 0,
+        "NORMALIZED_ENUM_CANDIDATE": 0,
+        "ALIAS_CANDIDATE": 1,
+        "STRUCTURED_DERIVATION_CANDIDATE": 0,
+        "CONFLICT": 0,
+        "TOKEN_VAZIO": 34
+      },
+      "provider": {
+        "EXACT_STRUCTURED": 0,
+        "NORMALIZED_ENUM_CANDIDATE": 1,
+        "ALIAS_CANDIDATE": 1,
+        "STRUCTURED_DERIVATION_CANDIDATE": 16,
+        "CONFLICT": 0,
+        "TOKEN_VAZIO": 17
+      },
+      "scope": {
+        "EXACT_STRUCTURED": 0,
+        "NORMALIZED_ENUM_CANDIDATE": 0,
+        "ALIAS_CANDIDATE": 0,
+        "STRUCTURED_DERIVATION_CANDIDATE": 35,
+        "CONFLICT": 0,
+        "TOKEN_VAZIO": 0
+      },
+      "evidence_required": {
+        "EXACT_STRUCTURED": 0,
+        "NORMALIZED_ENUM_CANDIDATE": 0,
+        "ALIAS_CANDIDATE": 23,
+        "STRUCTURED_DERIVATION_CANDIDATE": 0,
+        "CONFLICT": 0,
+        "TOKEN_VAZIO": 12
+      }
+    },
+    "work_queue": {
+      "ACQUIRE_EXPLICIT_EVIDENCE": 63,
+      "REVIEW_ALIAS_MAPPING": 25,
+      "REVIEW_NORMALIZATION": 1,
+      "REVIEW_STRUCTURED_DERIVATION": 51
+    },
+    "priority_queue": {
+      "P0": 70,
+      "P1": 70
+    }
+  },
+  "corrections": [
+    "Multiple evidence_needed values are complementary requirements and are now unioned rather than classified as conflicts.",
+    "Repository owner/repository identity may support GitHub only as STRUCTURED_DERIVATION_CANDIDATE, never automatic provider promotion.",
+    "Affected routes/components/impact radius may support scope only as STRUCTURED_DERIVATION_CANDIDATE."
+  ],
+  "interpretation": [
+    "Scope now has bounded structured candidates for all 35 identities but zero canonical promotions.",
+    "Evidence-required has reviewable aliases for 23 identities and remains TOKEN_VAZIO for 12.",
+    "Provider has 18 reviewable candidates and remains TOKEN_VAZIO for 17.",
+    "Artifact identity remains the hardest field: only one alias candidate and 34 TOKEN_VAZIO."
+  ],
+  "gates": {
+    "identity_semantics_enrichment": "PASS",
+    "field_review_queue": "PASS_140_ITEMS",
+    "canonical_field_promotion_allowed": false,
+    "atlas_mutation_allowed": false,
+    "proposed_atlas_gap_ids": "TOKEN_VAZIO",
+    "auto_create_gap_id": false,
+    "claim_allowed": false
+  },
+  "f_ok": [
+    "35 identities scanned for four canonical target fields",
+    "140 deterministic field-level work items materialized",
+    "63 explicit-evidence acquisition tasks separated from 77 candidate-review tasks",
+    "evidence requirement conflicts reduced to complementary unions",
+    "Gap Atlas run #75 terminal SUCCESS"
+  ],
+  "f_gap": [
+    "artifact_id explicit evidence missing for 34/35",
+    "provider explicit/candidate evidence still missing for 17/35",
+    "evidence_required evidence still missing for 12/35",
+    "35 scope candidates require governed review before canonical promotion",
+    "77 observed candidates require governed review",
+    "25 cycle schema families remain REVIEW_REQUIRED"
+  ],
+  "f_next": "Execute P0 field queue first: acquire artifact identity evidence for 34 cases and provider evidence for 17 cases; then review P1 scope/evidence candidates. Preserve all unresolved fields as TOKEN_VAZIO and do not append Atlas records.",
+  "claim_allowed": false
+}
