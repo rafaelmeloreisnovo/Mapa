@@ -92,16 +92,76 @@ def next_gate_for(
     if records:
         gates = unique(str(record.get("next_gate", "")) for record in records)
         return gates or ["Review mapped Atlas record and execute its evidence gate."]
-    if nibiguiri_state == "NIBIGUIRI:OBVIO_NAO_INDEXADO":
+    if nibiguiri_state == "NIBIGUIRI:CAUSA_DESCONHECIDA":
         return [
-            "Bind this observation to an existing gap_id, append a new typed gap record, "
-            "or record an explicit false-positive/accepted-limitation event."
+            "Determine whether this observation is a real gap, accepted limitation, "
+            "false positive, duplicate, or formally demonstrable unindexed relation; "
+            "only then bind/promote its Nibiguiri subtype."
         ]
     return ["Preserve TOKEN_VAZIO and obtain source/evidence before promotion."]
 
 
 def action_id(root: str, path: str, gap: str) -> str:
     return hashlib.sha256(f"{root}\0{path}\0{gap}".encode("utf-8")).hexdigest()[:24]
+
+
+def path_domain(path: str) -> str:
+    parts = [part for part in Path(path).parts if part not in {".", ""}]
+    return parts[0] if parts else "__root__"
+
+
+def cluster_id(
+    root: str,
+    domain: str,
+    service: str,
+    markers: Sequence[str],
+    nibiguiri_state: str,
+) -> str:
+    raw = "\0".join(
+        [root, domain, service, ",".join(sorted(markers)), nibiguiri_state]
+    ).encode("utf-8")
+    return "CL-" + hashlib.sha256(raw).hexdigest()[:16]
+
+
+def build_clusters(actions: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str, str, tuple[str, ...], str], list[dict[str, Any]]] = {}
+    for action in actions:
+        key = (
+            str(action.get("root", "")),
+            path_domain(str(action.get("path", ""))),
+            str(action.get("service", "GAP_TRIAGE")),
+            tuple(sorted(str(x) for x in action.get("markers", []))),
+            str(action.get("nibiguiri_state", "TOKEN_VAZIO")),
+        )
+        grouped.setdefault(key, []).append(action)
+
+    clusters: list[dict[str, Any]] = []
+    for (root, domain, service, markers, state), rows in sorted(grouped.items()):
+        priorities = sorted(
+            {str(row.get("priority", "TOKEN_VAZIO")) for row in rows},
+            key=lambda value: PRIORITY_ORDER.get(value, 9),
+        )
+        cid = cluster_id(root, domain, service, markers, state)
+        clusters.append(
+            {
+                "cluster_id": cid,
+                "root": root,
+                "domain": domain,
+                "service": service,
+                "markers": list(markers),
+                "nibiguiri_state": state,
+                "action_count": len(rows),
+                "priorities": priorities,
+                "sample_paths": sorted(str(row.get("path", "")) for row in rows)[:10],
+                "next_gate": (
+                    "Review one representative sample plus cluster counts; split the "
+                    "cluster if semantics differ, otherwise bind the cluster to an "
+                    "existing/new gap family with authority and evidence requirements."
+                ),
+                "claim_allowed": False,
+            }
+        )
+    return clusters
 
 
 def pragmatic_filter_stats(gap_map: dict[str, Any]) -> dict[str, int]:
@@ -164,7 +224,10 @@ def build_actions(gap_map: dict[str, Any], atlas: dict[str, Any]) -> list[dict[s
                 nibiguiri_state = "INDEXED"
                 atlas_state = unique(str(record.get("state", "")) for record in matched)
             else:
-                nibiguiri_state = "NIBIGUIRI:OBVIO_NAO_INDEXADO"
+                # Absence of an Atlas binding proves only that the cause/class is
+                # unresolved. OBVIO_NAO_INDEXADO is reserved for a separately
+                # demonstrated formal relation, never inferred from scanner absence.
+                nibiguiri_state = "NIBIGUIRI:CAUSA_DESCONHECIDA"
                 atlas_state = ["TOKEN_VAZIO_NOT_INDEXED"]
 
             authority = unique(
@@ -197,6 +260,7 @@ def build_actions(gap_map: dict[str, Any], atlas: dict[str, Any]) -> list[dict[s
                     "priority": priority,
                     "blocking": priority == "P0",
                     "service": SERVICE_BY_GAP.get(gap, "GAP_TRIAGE"),
+                    "markers": sorted(markers),
                     "nibiguiri_state": nibiguiri_state,
                     "mapped_gap_ids": gap_ids,
                     "atlas_state": atlas_state,
@@ -259,6 +323,8 @@ def render_markdown(payload: dict[str, Any], top: int) -> str:
         f"- Actions: **{summary['actions']}**",
         f"- P0 blockers: **{summary['blocking_p0']}**",
         f"- Nibiguiri/unmapped: **{summary['unmapped']}**",
+        f"- Deterministic clusters: **{summary.get('clusters', 0)}**",
+        f"- Largest cluster: **{summary.get('largest_cluster_actions', 0)}** actions",
         f"- TOKEN_VAZIO preserved as observation: **{summary.get('preserved_token_vazio_observations', 0)}**",
         f"- Duplicate document actions coalesced: **{summary.get('coalesced_document_duplicate_actions', 0)}**",
         "- Claim boundary: `claim_allowed=false`",
@@ -289,7 +355,8 @@ def render_markdown(payload: dict[str, Any], top: int) -> str:
             "## Interpretation",
             "",
             "- `INDEXED` means the observation is already bound to at least one Atlas gap.",
-            "- `NIBIGUIRI:OBVIO_NAO_INDEXADO` means a bounded scanner observed a gap-like condition but no Atlas binding was found.",
+            "- `NIBIGUIRI:CAUSA_DESCONHECIDA` is the automatic state for an unbound scanner observation.",
+            "- `NIBIGUIRI:OBVIO_NAO_INDEXADO` requires a separate formal demonstration and is never inferred from missing binding.",
             "- Priority is an operational triage heuristic, not scientific truth or business value.",
             "- `effort=TOKEN_VAZIO_UNMEASURED` until measured execution data exist.",
             "- No action auto-closes a gap or promotes a claim.",
@@ -404,9 +471,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     }
 
     actions = build_actions(gap_map, atlas)
+    clusters = build_clusters(actions)
     generated_at = utc_now()
     action_summary = summarize(actions)
     action_summary.update(pragmatic_filter_stats(gap_map))
+    action_summary["clusters"] = len(clusters)
+    action_summary["largest_cluster_actions"] = max(
+        (cluster["action_count"] for cluster in clusters), default=0
+    )
     action_map = {
         "schema": SCHEMA,
         "generated_at": generated_at,
@@ -424,6 +496,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "RECEIPT",
         ],
         "summary": action_summary,
+        "clusters": clusters,
         "actions": actions,
     }
 
@@ -449,6 +522,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "source_gap_map_sha256": action_map["source_gap_map_sha256"],
         "pragmatic_action_map_sha256": canonical_sha256(action_map),
         "summary": action_map["summary"],
+        "cluster_digest_sha256": canonical_sha256(action_map["clusters"]),
         "f_ok": ["bounded scan", "atlas binding", "Nibiguiri classification", "action queue"],
         "f_gap": [
             "unmapped observations require human/governed binding",
