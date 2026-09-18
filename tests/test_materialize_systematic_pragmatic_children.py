@@ -53,6 +53,8 @@ class ChildMaterializerTest(unittest.TestCase):
         }
         routing_id = mod.child_cluster_id(self.parent_id, "routing")
         self.routing_id = routing_id
+        self.cycles_id = mod.child_cluster_id(routing_id, "cycles")
+        self.operational_gaps_id = mod.child_cluster_id(routing_id, "operational-gaps")
         self.decisions = {
             self.parent_id: {
                 "schema": mod.DECISION_SCHEMA,
@@ -64,6 +66,20 @@ class ChildMaterializerTest(unittest.TestCase):
                 "schema": mod.DECISION_SCHEMA,
                 "cluster_id": routing_id,
                 "decision": "SPLIT_REQUIRED",
+                "claim_allowed": False,
+            },
+            self.cycles_id: {
+                "schema": mod.DECISION_SCHEMA,
+                "cluster_id": self.cycles_id,
+                "decision": "SPLIT_REQUIRED",
+                "split_strategy": "SEMANTIC_SCHEMA",
+                "claim_allowed": False,
+            },
+            self.operational_gaps_id: {
+                "schema": mod.DECISION_SCHEMA,
+                "cluster_id": self.operational_gaps_id,
+                "decision": "DISTINCT_GAP",
+                "binding_strategy": "PER_EXISTING_GAP_ID",
                 "claim_allowed": False,
             },
         }
@@ -86,6 +102,25 @@ class ChildMaterializerTest(unittest.TestCase):
         self.assertFalse(
             scopes["data/routing/cycles"]["g4"]["auto_create_gap_id"]
         )
+        self.assertEqual(
+            scopes["data/routing/cycles"]["g3"]["split_strategy"],
+            "SEMANTIC_SCHEMA",
+        )
+        self.assertEqual(
+            scopes["data/routing/cycles"]["g4"]["state"],
+            "BLOCKED_BY_G3_SPLIT",
+        )
+        self.assertEqual(
+            scopes["data/routing/operational-gaps"]["g3"]["state"],
+            "DISTINCT_GAP",
+        )
+        self.assertEqual(
+            scopes["data/routing/operational-gaps"]["g4"]["state"],
+            "REQUIRES_PER_ITEM_BINDING",
+        )
+        self.assertNotIn("data/routing/cycles/a.json", scopes)
+        self.assertGreaterEqual(result["summary"]["deferred_semantic_splits"], 1)
+        self.assertGreaterEqual(result["summary"]["distinct_gap"], 1)
 
     def test_ids_are_deterministic(self):
         first = mod.materialize(self.action_map, self.decisions)

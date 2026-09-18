@@ -80,7 +80,56 @@ class G3DecisionValidationTest(unittest.TestCase):
         row["observed"]["action_count"] = 4
         report = mod.validate([row])
         self.assertEqual(report["status"], "FAIL")
-        self.assertTrue(any("subdomain_counts sum" in e for e in report["errors"]))
+        self.assertTrue(any("partition count sum" in e for e in report["errors"]))
+
+    def test_semantic_schema_split_passes_without_path_semantics(self):
+        row = base_row()
+        row["split_strategy"] = "SEMANTIC_SCHEMA"
+        row["observed"].pop("subdomain_counts")
+        row["observed"].pop("distinct_subdomains")
+        row["observed"]["partition_counts"] = {"schema-a": 2, "schema-b": 1}
+        row["observed"]["distinct_partitions"] = 2
+        report = mod.validate([row])
+        self.assertEqual(report["status"], "PASS")
+
+    def test_distinct_gap_requires_per_existing_gap_id_binding(self):
+        row = base_row()
+        row["decision"] = "DISTINCT_GAP"
+        row["binding_strategy"] = "PER_EXISTING_GAP_ID"
+        row["evidence_refs"] = ["RUN-1"]
+        row["observed"] = {
+            "action_count": 3,
+            "with_gap_id": 3,
+            "unique_gap_ids": 2,
+            "duplicate_gap_id_groups": {"GAP-A": 2},
+        }
+        row["g4_authority_bind_gate"] = {
+            "state": "REQUIRES_PER_ITEM_BINDING",
+            "binding": "TOKEN_VAZIO",
+            "auto_create_gap_id": False,
+        }
+        report = mod.validate([row])
+        self.assertEqual(report["status"], "PASS")
+
+    def test_distinct_gap_cannot_collapse_to_one_binding(self):
+        row = base_row()
+        row["decision"] = "DISTINCT_GAP"
+        row["binding_strategy"] = "PER_EXISTING_GAP_ID"
+        row["evidence_refs"] = ["RUN-1"]
+        row["observed"] = {
+            "action_count": 2,
+            "with_gap_id": 2,
+            "unique_gap_ids": 2,
+        }
+        row["g4_authority_bind_gate"] = {
+            "state": "READY_FOR_AUTHORITY_BIND",
+            "binding": "GAP-SINGLE",
+            "auto_create_gap_id": False,
+        }
+        report = mod.validate([row])
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("per-item" in e for e in report["errors"]))
+        self.assertTrue(any("TOKEN_VAZIO" in e for e in report["errors"]))
 
 
 if __name__ == "__main__":
