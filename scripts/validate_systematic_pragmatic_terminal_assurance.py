@@ -103,6 +103,33 @@ def validate_receipt(r, assurance):
     return r
 
 
+
+def validate_cross_store(x):
+    assert x["schema"] == "rafaelia.systematic-pragmatic-terminal-cross-store-receipt/v1"
+    assert x["claim_allowed"] is False
+    assert x["publication_ready"] is False
+    assert x["terminal_state"] == "COMPLETE_STRUCTURAL_ROUTING_LOCAL_ASSURANCE_PASS_EXTERNAL_GATES_OPEN"
+    github = x["github"]
+    assert github["repository"] == "rafaelmeloreisnovo/Mapa"
+    assert github["pr"] == 651
+    assert github["state"] == "READY_FOR_INDEPENDENT_REVIEW_NOT_MERGED"
+    drive = x["drive"]
+    assert drive["start_here"]["document_id"]
+    assert drive["start_here"]["revision_id"]
+    assert drive["canonical_predecessor"]["append_result"] == "FAILED_PRECONDITION"
+    assert drive["canonical_predecessor"]["disposition"] == "PRESERVED_NO_OVERWRITE"
+    assert drive["canonical_predecessor"]["cause"].startswith("TOKEN_VAZIO")
+    assert drive["canonical_successor"]["document_id"]
+    assert drive["canonical_successor"]["revision_id"]
+    assert drive["canonical_successor"]["state"] == "WRITTEN"
+    custody = x["custody"]
+    assert custody["predecessor_preserved"] is True
+    assert custody["overwrite_performed"] is False
+    assert custody["destructive_edit_performed"] is False
+    assert custody["bidirectional_route_materialized"] is True
+    assert len(x["external_gates_remain_open"]) == 4
+    return x
+
 def main():
     assurance_path = Path(
         sys.argv[1]
@@ -114,14 +141,21 @@ def main():
         if len(sys.argv) > 2
         else "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_20260918.json"
     )
+    cross_store_path = Path(
+        sys.argv[3]
+        if len(sys.argv) > 3
+        else "data/receipts/pragmatic-map/RECEIPT_SYSTEMATIC_PRAGMATIC_TERMINAL_CROSS_STORE_20260918.json"
+    )
     assurance = validate_assurance(load(assurance_path))
     receipt = validate_receipt(load(receipt_path), assurance)
+    cross_store = validate_cross_store(load(cross_store_path))
     print(json.dumps({
         "status": "PASS",
         "structural_routing": "COMPLETE",
         "local_assurance": "PASS",
         "external_gates": len(receipt["external_gates"]),
         "external_state": "BLOCKED_EXTERNAL",
+        "cross_store": "PASS" if cross_store else "FAIL",
         "claim_allowed": False,
     }, sort_keys=True))
 
