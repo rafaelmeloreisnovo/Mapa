@@ -28,6 +28,27 @@ Nothing in this legal package removes commercial or other rights already granted
 14. [License scope tests](tests/test_license_scope_registry.py)
 15. [Implementation Receipt](receipts/2026-09-12_RAFAELIA_LICENSING_FRAMEWORK_V1.md)
 
+16. [Humanity Protection and Access Covenant V1](docs/legal/HUMANITY_PROTECTION_AND_ACCESS_COVENANT_V1.md)
+17. [Humanity policy — machine readable](data/legal/humanity-protection-access.v1.json)
+18. [Humanity policy schema](schemas/humanity-protection-access.v1.schema.json)
+19. [Humanity policy validator](tools/validate_humanity_protection_access.py)
+20. [Humanity policy tests](tests/test_humanity_protection_access.py)
+21. [Humanity Protection/Access Receipt](receipts/2026-09-19_HUMANITY_PROTECTION_ACCESS_V1.md)
+
+## Humanity protection/access overlay
+
+The project-level humanity covenant protects authorship/provenance for human creators while routing public access through explicit, rights-cleared licenses.
+
+It does **not** itself relicense GPL, MIT, RAFAELIA-RNC, third-party, private, sensitive, patent, or trademark material.
+
+```text
+BERNE_PROTECTION != LICENSE_GRANT
+HUMAN_AUTHOR_PROTECTION != FORCED_PUBLICATION
+HUMANITY_INTENT != AUTHORITY_TO_RELICENSE_THIRD_PARTY_MATERIAL
+```
+
+See `docs/legal/HUMANITY_PROTECTION_AND_ACCESS_COVENANT_V1.md`.
+
 ## Scope rule
 
 ```text

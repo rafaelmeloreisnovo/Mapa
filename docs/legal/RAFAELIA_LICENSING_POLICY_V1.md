@@ -180,3 +180,22 @@ Canonical legal package:
 F_ok: scope-safe licensing architecture defined without overwriting GPL/MIT rights.  
 F_gap: file-level rights ownership, contribution grants, and third-party inventory remain repository-specific.  
 F_next: complete file-level license scope audit before changing any root LICENSE or applying the custom license to existing code.
+
+## 12. Humanity protection/access overlay
+
+The governance intent adopted on 2026-09-19 is routed through `HUMANITY_PROTECTION_AND_ACCESS_COVENANT_V1.md`.
+
+It adds two controls without silently replacing this policy or any valid license:
+
+1. protect human authorship/provenance and upstream rights for all contributors;
+2. prefer broad public access for rights-cleared RAFAELIA-original material through explicit standard licenses selected by material class and compatibility.
+
+```text
+BERNE_PROTECTION != LICENSE_GRANT
+EXISTING_LICENSE_GRANT != REVOCABLE_BY_NEW_NOTICE
+HUMANITY_INTENT != BLANKET_RELICENSE
+```
+
+This overlay does not change the root GPL license, does not revoke MIT/GPL/other grants, does not automatically replace RAFAELIA-RNC, and does not publish private/sensitive material.
+
+F_gap remains file-level rights authority, contributor grants, privacy/security classification, and patent/trademark scope.
