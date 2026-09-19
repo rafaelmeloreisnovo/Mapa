@@ -181,7 +181,6 @@ F_ok: scope-safe licensing architecture defined without overwriting GPL/MIT righ
 F_gap: file-level rights ownership, contribution grants, and third-party inventory remain repository-specific.  
 F_next: complete file-level license scope audit before changing any root LICENSE or applying the custom license to existing code.
 
-
 ## 12. Humanity protection/access overlay
 
 The governance intent adopted on 2026-09-19 is routed through `HUMANITY_PROTECTION_AND_ACCESS_COVENANT_V1.md`.
