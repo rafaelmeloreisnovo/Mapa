@@ -1,0 +1,71 @@
+{
+  "schema_version": "rafaelia.humanity-protection-access/v1",
+  "status": "DRAFT_IMPLEMENTED_LEGAL_REVIEW_REQUIRED",
+  "adopted_at": "2026-09-19T03:42:00-03:00",
+  "authorial_intent": "protect human authorship/provenance universally and maximize lawful access to eligible RAFAELIA-original knowledge",
+  "claim_allowed": false,
+  "invariants": [
+    "BERNE_PROTECTION != LICENSE_GRANT",
+    "LICENSE_GRANT != PUBLIC_DOMAIN",
+    "COPYRIGHT != PATENT != TRADEMARK != PRIVACY_RIGHT",
+    "REPOSITORY_OWNERSHIP != COPYRIGHT_OWNERSHIP_OF_ALL_CONTENT",
+    "HUMANITY_INTENT != AUTHORITY_TO_RELICENSE_THIRD_PARTY_MATERIAL",
+    "TOKEN_VAZIO != CLEARED"
+  ],
+  "protection": {
+    "preserve_human_authorship": true,
+    "preserve_upstream_notices": true,
+    "preserve_provenance": true,
+    "forbid_false_authorship": true,
+    "nationality_neutral": true
+  },
+  "access": {
+    "blanket_relicense": false,
+    "existing_grants_preserved": true,
+    "commercial_use_policy": "APPLICABLE_LICENSE_OR_SIGNED_INSTRUMENT",
+    "software_license_policy": "STANDARD_SOFTWARE_LICENSE_AFTER_SCOPE_REVIEW",
+    "documentation_license_candidate": "CC-BY-4.0_AFTER_SCOPE_REVIEW",
+    "research_license_candidate": "CC-BY-4.0_AFTER_PUBLISHER_AND_RIGHTS_REVIEW",
+    "dataset_policy": "RIGHTS_PRIVACY_CONTRACT_AUDIT_REQUIRED"
+  },
+  "blocked_by_default": [
+    "THIRD_PARTY_RIGHTS_UNRESOLVED",
+    "CONTRIBUTOR_RIGHTS_UNRESOLVED",
+    "PERSONAL_OR_SENSITIVE_DATA_UNCLEARED",
+    "CONFIDENTIAL_INFORMATION",
+    "CREDENTIALS_OR_SECRETS",
+    "PATENT_OR_TRADEMARK_GRANT_NOT_EXPLICIT"
+  ],
+  "release_gate": [
+    "RIGHTS_AUDIT",
+    "MATERIAL_CLASS",
+    "THIRD_PARTY_BOUNDARY",
+    "PRIVACY_SECURITY_GATE",
+    "LICENSE_COMPATIBILITY",
+    "EXPLICIT_LICENSE_NOTICE",
+    "EFFECTIVE_REF",
+    "RECEIPT"
+  ],
+  "sources": [
+    {
+      "id": "WIPO-BERNE-SUMMARY",
+      "locator": "https://www.wipo.int/en/web/treaties/ip/berne/summary_berne",
+      "supports": ["national_treatment", "automatic_protection", "independence_of_protection"]
+    },
+    {
+      "id": "BR-L9610-1998",
+      "locator": "https://www.planalto.gov.br/ccivil_03/leis/l9610.htm",
+      "supports": ["copyright", "moral_rights", "economic_rights", "no_registration_requirement", "ideas_methods_boundary"]
+    },
+    {
+      "id": "BR-L9609-1998",
+      "locator": "https://www.planalto.gov.br/ccivil_03/leis/l9609.htm",
+      "supports": ["software_copyright", "software_authorship", "software_registration_optional"]
+    },
+    {
+      "id": "CC-FAQ-SOFTWARE-BOUNDARY",
+      "locator": "https://creativecommons.org/faq/",
+      "supports": ["creative_commons_not_recommended_for_software"]
+    }
+  ]
+}
