@@ -10,7 +10,22 @@ The repository root `LICENSE` remains GNU GPL v3.
 
 Nothing in this legal package removes commercial or other rights already granted by GPLv3, MIT, or any third-party license.
 
+## Current governance priority
+
+The canonical authorial/provenance route is now `docs/legal/BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md`.
+
+This is a governance rollback, not a revocation of valid prior license grants. The Humanity Protection/Access Covenant remains historical and subordinate for rights-cleared access decisions.
+
+```text
+BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2 -> PRIMARY_AUTHORIAL_ROUTE
+HUMANITY_PROTECTION_AND_ACCESS_COVENANT_V1 -> SUBORDINATE_ACCESS_OVERLAY
+EXISTING_VALID_LICENSE_GRANT -> PRESERVED
+```
+
 ## Legal package
+
+0. [Berne Authorial Scope Rollback V2](docs/legal/BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md)
+0.1 [Rollback Receipt](receipts/2026-09-20_BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md)
 
 1. [Licensing Policy](docs/legal/RAFAELIA_LICENSING_POLICY_V1.md)
 2. [RAFAELIA Research and Non-Commercial License](LICENSES/LicenseRef-RAFAELIA-RNC-1.0.txt)
