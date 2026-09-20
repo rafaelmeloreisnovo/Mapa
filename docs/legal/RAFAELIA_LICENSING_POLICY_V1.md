@@ -199,3 +199,16 @@ HUMANITY_INTENT != BLANKET_RELICENSE
 This overlay does not change the root GPL license, does not revoke MIT/GPL/other grants, does not automatically replace RAFAELIA-RNC, and does not publish private/sensitive material.
 
 F_gap remains file-level rights authority, contributor grants, privacy/security classification, and patent/trademark scope.
+
+
+## 13. Berne authorial rollback priority — 2026-09-20
+
+The authorial/provenance priority is governed by `BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md`.
+
+The Humanity Protection/Access Covenant remains a subordinate rights-cleared access overlay and does not infer any new public grant.
+
+```text
+BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2 = PRIMARY_AUTHORIAL_ROUTE
+HUMANITY_ACCESS_COVENANT_V1 = SUBORDINATE_OVERLAY
+EXISTING_VALID_LICENSES = UNCHANGED
+```
