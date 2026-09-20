@@ -1,5 +1,9 @@
 # RAFAELIA Humanity Protection and Access Covenant V1
 
+**Lifecycle:** `SUPERSEDED_FOR_AUTHORIAL_SCOPE_BY_BERNE_ROLLBACK_V2`  
+**Successor:** `docs/legal/BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md`  
+**Boundary:** historical covenant preserved; it no longer sets the primary direction for opening RAFAELIA-original material. Existing valid license grants remain unchanged.
+
 Status: DRAFT_IMPLEMENTED / LEGAL_REVIEW_REQUIRED  
 Adopted as governance intent: 2026-09-19  
 claim_allowed: false
