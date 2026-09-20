@@ -1,6 +1,6 @@
 {
   "schema_version": "rafaelia.humanity-protection-access/v1",
-  "status": "DRAFT_IMPLEMENTED_LEGAL_REVIEW_REQUIRED",
+  "status": "SUPERSEDED_FOR_AUTHORIAL_SCOPE_BY_BERNE_ROLLBACK_V2",
   "adopted_at": "2026-09-19T03:42:00-03:00",
   "authorial_intent": "protect human authorship/provenance universally and maximize lawful access to eligible RAFAELIA-original knowledge",
   "claim_allowed": false,
@@ -26,7 +26,8 @@
     "software_license_policy": "STANDARD_SOFTWARE_LICENSE_AFTER_SCOPE_REVIEW",
     "documentation_license_candidate": "CC-BY-4.0_AFTER_SCOPE_REVIEW",
     "research_license_candidate": "CC-BY-4.0_AFTER_PUBLISHER_AND_RIGHTS_REVIEW",
-    "dataset_policy": "RIGHTS_PRIVACY_CONTRACT_AUDIT_REQUIRED"
+    "dataset_policy": "RIGHTS_PRIVACY_CONTRACT_AUDIT_REQUIRED",
+    "rollback_boundary": "NO_NEW_BLANKET_OPENING; EXISTING_VALID_LICENSE_GRANTS_UNCHANGED"
   },
   "blocked_by_default": [
     "THIRD_PARTY_RIGHTS_UNRESOLVED",
@@ -50,22 +51,41 @@
     {
       "id": "WIPO-BERNE-SUMMARY",
       "locator": "https://www.wipo.int/en/web/treaties/ip/berne/summary_berne",
-      "supports": ["national_treatment", "automatic_protection", "independence_of_protection"]
+      "supports": [
+        "national_treatment",
+        "automatic_protection",
+        "independence_of_protection"
+      ]
     },
     {
       "id": "BR-L9610-1998",
       "locator": "https://www.planalto.gov.br/ccivil_03/leis/l9610.htm",
-      "supports": ["copyright", "moral_rights", "economic_rights", "no_registration_requirement", "ideas_methods_boundary"]
+      "supports": [
+        "copyright",
+        "moral_rights",
+        "economic_rights",
+        "no_registration_requirement",
+        "ideas_methods_boundary"
+      ]
     },
     {
       "id": "BR-L9609-1998",
       "locator": "https://www.planalto.gov.br/ccivil_03/leis/l9609.htm",
-      "supports": ["software_copyright", "software_authorship", "software_registration_optional"]
+      "supports": [
+        "software_copyright",
+        "software_authorship",
+        "software_registration_optional"
+      ]
     },
     {
       "id": "CC-FAQ-SOFTWARE-BOUNDARY",
       "locator": "https://creativecommons.org/faq/",
-      "supports": ["creative_commons_not_recommended_for_software"]
+      "supports": [
+        "creative_commons_not_recommended_for_software"
+      ]
     }
-  ]
+  ],
+  "superseded_at": "2026-09-20T02:19:00-03:00",
+  "superseded_by": "docs/legal/BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md",
+  "governance_priority": "SUBORDINATE_ACCESS_OVERLAY"
 }
