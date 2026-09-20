@@ -26,6 +26,7 @@ EXISTING_VALID_LICENSE_GRANT -> PRESERVED
 
 0. [Berne Authorial Scope Rollback V2](docs/legal/BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md)
 0.1 [Rollback Receipt](receipts/2026-09-20_BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md)
+0.2 [Berne rollback provenance registry V2](data/legal/berne-authorial-provenance-registry.v2.json)
 
 1. [Licensing Policy](docs/legal/RAFAELIA_LICENSING_POLICY_V1.md)
 2. [RAFAELIA Research and Non-Commercial License](LICENSES/LicenseRef-RAFAELIA-RNC-1.0.txt)
