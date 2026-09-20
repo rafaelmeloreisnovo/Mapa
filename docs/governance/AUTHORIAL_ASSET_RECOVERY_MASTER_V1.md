@@ -28,7 +28,9 @@ DISCOVER
 - GitHub institutional namespace: **47 repositories**
 - Total observed repository surface: **133 repositories**
 - Drive canonical navigator: `RAFAELIA_DATA_NAVIGATOR`, 15 first-level control folders observed
-- Drive exhaustive total: `TOKEN_VAZIO_PENDING_RECURSIVE_INVENTORY`
+- Drive census: **154 folder nodes / 893 entries observed** across the governed Navigator/NOVOexport route
+- Three private directories hit the connector cap of 100 entries and remain `TOKEN_VAZIO_PAGINATION_PENDING`
+- NOVOexport manifest denominator: **15,439 physical files / 15,369 logical files / 25,132,295,924 declared bytes**
 
 ## What is being restored
 
@@ -63,5 +65,5 @@ TOKEN_VAZIO != CLEARED
 ## R3
 
 **F_ok:** 133 repository surfaces reattached to the authorial recovery graph; Drive canonical navigator and primary indexes reattached; universal declaration restored as an active author statement subordinate to artifact-specific rights.  
-**F_gap:** exhaustive Drive recursion, deduplication, file-level copyright/contributor evidence and personal-data classification remain incomplete.  
-**F_next:** recursively enumerate Drive control tree and promote assets one-by-one from candidate → evidenced state, preserving upstream boundaries.
+**F_gap:** pagination of three 100-item private folders, cross-provider deduplication and file-level copyright/contributor evidence remain incomplete; private corpus bodies stay restricted.  
+**F_next:** resolve the three pagination-bounded private folders through manifest/provider IDs, then promote assets one-by-one from candidate → evidenced state, preserving upstream boundaries.
