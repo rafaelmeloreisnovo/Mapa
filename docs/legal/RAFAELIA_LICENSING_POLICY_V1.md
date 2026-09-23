@@ -200,7 +200,6 @@ This overlay does not change the root GPL license, does not revoke MIT/GPL/other
 
 F_gap remains file-level rights authority, contributor grants, privacy/security classification, and patent/trademark scope.
 
-
 ## 13. Berne authorial rollback priority — 2026-09-20
 
 The authorial/provenance priority is governed by `BERNE_AUTHORIAL_SCOPE_ROLLBACK_V2.md`.
