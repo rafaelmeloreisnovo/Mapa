@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/manifold-edge-v1.schema.json",
+  "title": "RAFAELIA Manifold Edge V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "edge_id",
+    "source_id",
+    "relation_type",
+    "target_id",
+    "scope",
+    "evidence_ref",
+    "state",
+    "contradiction",
+    "gap"
+  ],
+  "properties": {
+    "edge_id": {
+      "type": "string",
+      "pattern": "^E[0-9]{4,}$"
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_type": {
+      "type": "string",
+      "enum": [
+        "ROUTES_TO",
+        "INDEXES",
+        "RECONSTRUCTS_FROM",
+        "POINTS_TO",
+        "DEPENDS_ON",
+        "EVIDENCES",
+        "GATES",
+        "RECEIPTS",
+        "SUPERSEDES",
+        "ROLLBACK_TO",
+        "CONTEXTUALIZES",
+        "RELATES_TO",
+        "EXPANDS_TO",
+        "SOURCE_OF",
+        "CROSS_PROVIDER_BRIDGE",
+        "RESOLVES_TO",
+        "VALIDATED_BY"
+      ]
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "OBSERVED_SOURCE",
+        "OBSERVED_SOURCE_ROLE",
+        "OBSERVED_CONCEPTUAL_ROUTE",
+        "MATERIALIZED",
+        "OPERATIONAL_ROUTE_DEFINED",
+        "VALIDATED_BOUNDED",
+        "TOKEN_VAZIO",
+        "SUPERSEDED"
+      ]
+    },
+    "contradiction": {
+      "type": "string"
+    },
+    "gap": {
+      "type": "string"
+    },
+    "supersedes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

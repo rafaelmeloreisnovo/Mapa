@@ -1,0 +1,69 @@
+{
+  "schema": "rafaelia.manifold.route-resolver-fixtures.v1",
+  "positives": [
+    {
+      "query": "analise a geometria do octogono e formula",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0002"
+    },
+    {
+      "query": "recalibrar RLL com DESI e Pantheon",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0005"
+    },
+    {
+      "query": "validar runtime ARM32 do RAFCODEPHI",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0004"
+    },
+    {
+      "query": "recall prior session conversation lineage",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0003"
+    },
+    {
+      "query": "ATLAS: geometria e RLL",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0007"
+    },
+    {
+      "query": "NOVO: reconstruir corpus grande",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0006"
+    },
+    {
+      "query": "GAP: Pantheon covariance",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0008"
+    },
+    {
+      "query": "EVID: prova do RLL",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0009"
+    },
+    {
+      "query": "LEARN: registrar delta verificado",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0010"
+    },
+    {
+      "query": "default continuity",
+      "expect_status": "ROUTE_RESOLVED",
+      "expect_route": "R0001"
+    }
+  ],
+  "negatives": [
+    {
+      "query": "banana azul",
+      "expect_status": "TOKEN_VAZIO_NO_ROUTE"
+    },
+    {
+      "query": "math code",
+      "expect_status": "TOKEN_VAZIO_AMBIGUOUS_ROUTE",
+      "expect_candidates": [
+        "R0002",
+        "R0004"
+      ]
+    }
+  ]
+}
