@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/manifold-route-v1.schema.json",
+  "title": "RAFAELIA Manifold Route V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "route_id",
+    "trigger",
+    "path",
+    "minimum_sources",
+    "expansion_condition",
+    "evidence_gate",
+    "rollback",
+    "state"
+  ],
+  "properties": {
+    "route_id": {
+      "type": "string",
+      "pattern": "^R[0-9]{4,}$"
+    },
+    "trigger": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "path": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "minimum_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "expansion_condition": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_gate": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rollback": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "ROUTE_DEFINED",
+        "VALIDATED_BOUNDED",
+        "SUPERSEDED"
+      ]
+    },
+    "fixture_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}
