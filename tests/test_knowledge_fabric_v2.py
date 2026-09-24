@@ -74,6 +74,20 @@ class KnowledgeFabricV2Test(unittest.TestCase):
         data["objects"][1]["id"] = data["objects"][0]["id"]
         self.assertIn("duplicate_object_id", MOD.validate(data))
 
+    def test_delta_is_append_only_and_creates_successor(self):
+        data = copy.deepcopy(self.valid)
+        data["deltas"][0]["append_only"] = False
+        data["deltas"][0]["successor_state_id"] = data["deltas"][0]["parent_state_id"]
+        defects = MOD.validate(data)
+        self.assertIn("delta_must_be_append_only:delta-pr-state", defects)
+        self.assertIn("delta_must_create_successor_state:delta-pr-state", defects)
+
+    def test_gap_requires_exact_next_probe(self):
+        data = copy.deepcopy(self.valid)
+        data["gaps"][0]["next_probe"] = ""
+        self.assertIn("gap_reason_and_next_probe_required:gap-pr-browser", MOD.validate(data)
+
+
     def test_claim_requires_evidence_not_execution_artifact(self):
         data = copy.deepcopy(self.valid)
         data["objects"][-1]["evidence_refs"] = ["execution-1"]
