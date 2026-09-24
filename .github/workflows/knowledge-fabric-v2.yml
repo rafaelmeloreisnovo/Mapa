@@ -1,0 +1,55 @@
+name: Knowledge Fabric V2 Contract
+
+on:
+  pull_request:
+    paths:
+      - "schemas/knowledge-fabric-v2.schema.json"
+      - "scripts/validate_knowledge_fabric_v2.py"
+      - "tests/fixtures/knowledge_fabric_v2.valid.json"
+      - "tests/test_knowledge_fabric_v2.py"
+      - "docs/architecture/KNOWLEDGE_FABRIC_V2.md"
+      - ".github/workflows/knowledge-fabric-v2.yml"
+  push:
+    branches: [main]
+    paths:
+      - "schemas/knowledge-fabric-v2.schema.json"
+      - "scripts/validate_knowledge_fabric_v2.py"
+      - "tests/fixtures/knowledge_fabric_v2.valid.json"
+      - "tests/test_knowledge_fabric_v2.py"
+      - "docs/architecture/KNOWLEDGE_FABRIC_V2.md"
+      - ".github/workflows/knowledge-fabric-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: knowledge-fabric-v2-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Validate syntax and adversarial fixtures
+        run: |
+          python3 -m py_compile scripts/validate_knowledge_fabric_v2.py tests/test_knowledge_fabric_v2.py
+          python3 -m json.tool schemas/knowledge-fabric-v2.schema.json >/dev/null
+          python3 -m json.tool tests/fixtures/knowledge_fabric_v2.valid.json >/dev/null
+          python3 -m unittest tests/test_knowledge_fabric_v2.py -v
+      - name: Validate pilot and write deterministic receipt
+        run: |
+          mkdir -p build/knowledge-fabric-v2
+          python3 scripts/validate_knowledge_fabric_v2.py tests/fixtures/knowledge_fabric_v2.valid.json --report build/knowledge-fabric-v2/receipt.json
+          sha256sum schemas/knowledge-fabric-v2.schema.json scripts/validate_knowledge_fabric_v2.py tests/fixtures/knowledge_fabric_v2.valid.json tests/test_knowledge_fabric_v2.py build/knowledge-fabric-v2/receipt.json > build/knowledge-fabric-v2/SHA256SUMS
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: knowledge-fabric-v2-receipt-${{ github.run_id }}
+          path: build/knowledge-fabric-v2/
+          if-no-files-found: error
+          retention-days: 30
