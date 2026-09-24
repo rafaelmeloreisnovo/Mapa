@@ -15,7 +15,7 @@ class ManifoldRegistryTests(unittest.TestCase):
     def test_repository_seeds(self):
         self.assertEqual(
             validate_edges(ROOT / "data/manifold/edges_omega_v1.jsonl"),
-            35,
+            40,
         )
         self.assertEqual(
             validate_routes(ROOT / "data/manifold/routes_omega_v1.jsonl"),
