@@ -5,149 +5,83 @@
     {
       "id": "formula-1",
       "object_type": "formula",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-formula-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "public",
-      "semantic_state": "FORMALIZED"
+      "semantic_state": "FORMALIZED",
+      "identity_ref": "identity-formula-1"
     },
     {
       "id": "image-1",
       "object_type": "image",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-image-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "public",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-image-1"
     },
     {
       "id": "dat-1",
       "object_type": "dat",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-dat-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "restricted",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-dat-1"
     },
     {
       "id": "conversation-1",
       "object_type": "conversation",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-conversation-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "private",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-conversation-1"
     },
     {
       "id": "unknown-token",
       "object_type": "token",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-token-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "TOKEN_VAZIO",
       "semantic_state": "TOKEN_VAZIO",
-      "literal_surface": "Ω"
+      "literal_surface": "Ω",
+      "identity_ref": "identity-unknown-token"
     },
     {
       "id": "commit-1",
       "object_type": "commit",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-commit-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "public",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-commit-1"
     },
     {
       "id": "pull-request-661",
       "object_type": "pull_request",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-pr-661",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "public",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-pull-request-661"
     },
     {
       "id": "execution-1",
       "object_type": "execution",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-execution-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "private",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-execution-1"
     },
     {
       "id": "private-file",
       "object_type": "private_file",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-private-file-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "private",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-private-file"
     },
     {
       "id": "artifact-1",
       "object_type": "artifact",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-artifact-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "public",
-      "semantic_state": "OBSERVED"
+      "semantic_state": "OBSERVED",
+      "identity_ref": "identity-artifact-1"
     },
     {
       "id": "claim-1",
       "object_type": "claim",
-      "source_identity": {
-        "surface": "fixture",
-        "provider_id": "source-claim-1",
-        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
-        "hash": null,
-        "hash_scope": null
-      },
       "access_class": "public",
       "semantic_state": "CANDIDATE",
       "evidence_refs": [
         "evidence-1"
-      ]
+      ],
+      "identity_ref": "identity-claim-1"
     }
   ],
   "relations": [
@@ -282,6 +216,126 @@
       "reason": "external browser rendering not checked",
       "next_probe": "fetch provider status and compare timestamp",
       "status": "TOKEN_VAZIO"
+    }
+  ],
+  "identities": [
+    {
+      "id": "identity-formula-1",
+      "surface": "fixture",
+      "provider_id": "source-formula-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-image-1",
+      "surface": "fixture",
+      "provider_id": "source-image-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-dat-1",
+      "surface": "fixture",
+      "provider_id": "source-dat-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-conversation-1",
+      "surface": "fixture",
+      "provider_id": "source-conversation-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-unknown-token",
+      "surface": "fixture",
+      "provider_id": "source-token-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-commit-1",
+      "surface": "fixture",
+      "provider_id": "source-commit-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-pull-request-661",
+      "surface": "fixture",
+      "provider_id": "source-pr-661",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-execution-1",
+      "surface": "fixture",
+      "provider_id": "source-execution-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-private-file",
+      "surface": "fixture",
+      "provider_id": "source-private-file-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-artifact-1",
+      "surface": "fixture",
+      "provider_id": "source-artifact-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    },
+    {
+      "id": "identity-claim-1",
+      "surface": "fixture",
+      "provider_id": "source-claim-1",
+      "canonical_ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+      "hash": null,
+      "hash_scope": null
+    }
+  ],
+  "contexts": [
+    {
+      "id": "context-public",
+      "purpose": "bounded public retrieval",
+      "assembled_at": "2026-09-24T00:00:02Z",
+      "member_refs": [
+        "formula-1",
+        "artifact-1"
+      ],
+      "source_refs": [
+        "fixture://formula",
+        "fixture://artifact"
+      ],
+      "access_class": "public",
+      "derived": true
+    },
+    {
+      "id": "context-private",
+      "purpose": "private pointer packet",
+      "assembled_at": "2026-09-24T00:00:03Z",
+      "member_refs": [
+        "private-file"
+      ],
+      "source_refs": [
+        "fixture://private-file"
+      ],
+      "access_class": "private",
+      "derived": true
     }
   ]
 }
