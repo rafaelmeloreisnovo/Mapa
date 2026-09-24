@@ -6,10 +6,11 @@ Status: implementation candidate on a feature branch; CI and merge are pending. 
 
 The bundle keeps distinct collections for:
 
-- **Object** — stable catalog identity plus exact source surface, provider ID, ref, access class, and semantic state.
+- **Identity** — source surface/provider ID and current canonical locator, with hash scope only when observed.
+- **Object** — stable catalog entity referring to an Identity by ID; identity and location are separately represented.
 - **Relation** — directed typed edge with scope, source reference, evidence effect, promotion ceiling, guard, and supersession pointer.
 - **Event** — observed transition or snapshot for mutable external records such as pull requests.
-- **Context** — assembled retrieval context remains a derived view and is not persisted as source evidence.
+- **Context** — assembled retrieval context is explicitly typed as a derived view, references bounded members, and may not weaken the access class of those members.
 - **Authority** — explicit actor × target × operation decision for DISCOVER, READ, EXECUTE, WRITE, and PUBLISH. Missing grants deny.
 - **Evidence** — scoped test, observation, measurement, or proof pointer.
 - **Receipt** — append-only record that points to evidence and a parent; it is not evidence itself.
@@ -23,7 +24,7 @@ TOKEN_VAZIO remains an explicit epistemic/access state. It does not coerce to 0,
 
 The dependency-free Python validator rejects duplicate object IDs, missing source identity, out-of-graph relation endpoints, under-specified edge contracts, receipts that collide with evidence IDs or do not point to evidence, claims without evidence, private publication without an explicit allow grant, attempts to read unknown tokens, pull-request objects without time-stamped source events, non-append-only deltas, and gaps without a next probe.
 
-The fixture contains bounded synthetic examples for formula, image, DAT, conversation, unresolved token, commit, PR, execution, private file, artifact, claim, event, evidence, receipt, authority, state, delta, and gap. It does not contain user corpus content.
+The fixture contains bounded synthetic examples for formula, image, DAT, conversation, unresolved token, commit, PR, execution, private file, artifact, claim, event, evidence, receipt, authority, state, delta, gap, source identities, and public/private contexts. It does not contain user corpus content.
 
 ## Run locally
 
