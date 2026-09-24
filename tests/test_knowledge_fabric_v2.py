@@ -74,6 +74,16 @@ class KnowledgeFabricV2Test(unittest.TestCase):
         data["objects"][1]["id"] = data["objects"][0]["id"]
         self.assertIn("duplicate_object_id", MOD.validate(data))
 
+    def test_typed_identity_cannot_alias_artifact_and_execution(self):
+        data = copy.deepcopy(self.valid)
+        data["objects"][7]["id"] = data["objects"][9]["id"]
+        self.assertTrue(any(x.startswith("typed_id_collision:artifact-1:") for x in MOD.validate(data)))
+
+    def test_authority_grant_requires_source_pointer(self):
+        data = copy.deepcopy(self.valid)
+        data["authorities"][0]["source_ref"] = ""
+        self.assertIn("authority_source_ref_required:authority-fixture-1", MOD.validate(data))
+
     def test_delta_is_append_only_and_creates_successor(self):
         data = copy.deepcopy(self.valid)
         data["deltas"][0]["append_only"] = False
