@@ -47,14 +47,12 @@ class ManifoldGapRegistryTests(unittest.TestCase):
         self.assertIsNone(out["noise"]["delta_section_noise"])
 
     def test_runtime_relecture_gaps_are_fail_closed(self):
-        for gid in ("G0013", "G0014", "G0015", "G0016", "G0017", "G0018", "G0019", "G0020"):
-            self.assertIn(gid, self.by_id)
+        for gid in ("G0013", "G0014", "G0015", "G0016", "G0017", "G0018", "G0019", "G0020", "G0021", "G0022", "G0023", "G0024", "G0025"):\n            self.assertIn(gid, self.by_id)
             self.assertFalse(self.by_id[gid]["claim_allowed"])
         self.assertEqual(self.by_id["G0013"]["parent_gap_id"], "G0010")
         self.assertEqual(self.by_id["G0016"]["kind"], "MISSING_MAPPING")
         self.assertEqual(self.by_id["G0018"]["kind"], "MISSING_MAPPING")
         self.assertEqual(self.by_id["G0019"]["state"], "PARTIAL_BOUNDED")
-        self.assertEqual(self.by_id["G0020"]["state"], "PARTIAL_BOUNDED")
-
+        self.assertEqual(self.by_id["G0020"]["state"], "PARTIAL_BOUNDED")\n        self.assertEqual(self.by_id["G0020"]["child_gap_refs"], ["G0021", "G0022", "G0023", "G0024"])\n        self.assertEqual(self.by_id["G0025"]["state"], "TOKEN_VAZIO_AMBIGUOUS")\n
 if __name__ == "__main__":
     unittest.main()
