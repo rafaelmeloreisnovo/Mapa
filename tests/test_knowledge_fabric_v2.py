@@ -65,9 +65,9 @@ class KnowledgeFabricV2Test(unittest.TestCase):
 
     def test_hash_requires_scope(self):
         data = copy.deepcopy(self.valid)
-        data["objects"][0]["source_identity"]["hash"] = "abc"
-        data["objects"][0]["source_identity"]["hash_scope"] = None
-        self.assertIn("hash_scope_required:formula-1", MOD.validate(data))
+        data["identities"][0]["hash"] = "abc"
+        data["identities"][0]["hash_scope"] = None
+        self.assertIn("hash_scope_required:identity-formula-1", MOD.validate(data))
 
     def test_duplicate_identity_rejected(self):
         data = copy.deepcopy(self.valid)
@@ -83,6 +83,16 @@ class KnowledgeFabricV2Test(unittest.TestCase):
         data = copy.deepcopy(self.valid)
         data["authorities"][0]["source_ref"] = ""
         self.assertIn("authority_source_ref_required:authority-fixture-1", MOD.validate(data))
+
+    def test_object_requires_separate_identity(self):
+        data = copy.deepcopy(self.valid)
+        data["objects"][0]["identity_ref"] = "missing-identity"
+        self.assertIn("object_identity_ref_missing:formula-1", MOD.validate(data))
+
+    def test_context_cannot_weaken_member_access(self):
+        data = copy.deepcopy(self.valid)
+        data["contexts"][1]["access_class"] = "public"
+        self.assertIn("context_access_broader_than_members:context-private", MOD.validate(data))
 
     def test_delta_is_append_only_and_creates_successor(self):
         data = copy.deepcopy(self.valid)
