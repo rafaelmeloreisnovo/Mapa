@@ -15,7 +15,7 @@ class ManifoldRegistryTests(unittest.TestCase):
     def test_repository_seeds(self):
         self.assertEqual(
             validate_edges(ROOT / "data/manifold/edges_omega_v1.jsonl"),
-            27,
+            35,
         )
         self.assertEqual(
             validate_routes(ROOT / "data/manifold/routes_omega_v1.jsonl"),
@@ -27,10 +27,7 @@ class ManifoldRegistryTests(unittest.TestCase):
             ROOT / "data/manifold/edges_omega_v1.jsonl",
             ROOT / "data/manifold/gaps_omega_v1.jsonl",
         )
-        self.assertEqual(out["has_gap"], 11)
-        self.assertEqual(out["gap_of"], 1)
-        self.assertEqual(out["bound_gaps"], 12)
-
+        self.assertEqual(out["has_gap"], 16)\n        self.assertEqual(out["gap_of"], 4)\n        self.assertEqual(out["bound_gaps"], 20)\n
     def test_duplicate_edge_rejected(self):
         row = {
             "edge_id": "E9999",
