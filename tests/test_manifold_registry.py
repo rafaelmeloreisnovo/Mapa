@@ -11,11 +11,12 @@ from tools.validate_manifold_registry import (
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
 class ManifoldRegistryTests(unittest.TestCase):
     def test_repository_seeds(self):
         self.assertEqual(
             validate_edges(ROOT / "data/manifold/edges_omega_v1.jsonl"),
-            27,
+            40,
         )
         self.assertEqual(
             validate_routes(ROOT / "data/manifold/routes_omega_v1.jsonl"),
@@ -27,9 +28,9 @@ class ManifoldRegistryTests(unittest.TestCase):
             ROOT / "data/manifold/edges_omega_v1.jsonl",
             ROOT / "data/manifold/gaps_omega_v1.jsonl",
         )
-        self.assertEqual(out["has_gap"], 11)
-        self.assertEqual(out["gap_of"], 1)
-        self.assertEqual(out["bound_gaps"], 12)
+        self.assertEqual(out["has_gap"], 17)
+        self.assertEqual(out["gap_of"], 8)
+        self.assertEqual(out["bound_gaps"], 25)
 
     def test_duplicate_edge_rejected(self):
         row = {
@@ -68,6 +69,7 @@ class ManifoldRegistryTests(unittest.TestCase):
             path.write_text(json.dumps(row) + "\n", encoding="utf-8")
             with self.assertRaises(SystemExit):
                 validate_routes(path)
+
 
 if __name__ == "__main__":
     unittest.main()
