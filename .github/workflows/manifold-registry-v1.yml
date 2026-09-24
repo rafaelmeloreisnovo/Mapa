@@ -5,7 +5,9 @@ on:
       - 'schemas/manifold-*.json'
       - 'data/manifold/**'
       - 'tools/validate_manifold_registry.py'
+      - 'tools/validate_manifold_gap_registry.py'
       - 'tools/resolve_manifold_route.py'
+      - 'tools/resolve_manifold_gap.py'
       - 'tests/test_manifold*.py'
       - 'tests/fixtures/manifold_route_resolver_cases.json'
       - '.github/workflows/manifold-registry-v1.yml'
@@ -24,5 +26,7 @@ jobs:
           python-version: '3.12'
       - name: Validate registry
         run: python tools/validate_manifold_registry.py data/manifold/edges_omega_v1.jsonl data/manifold/routes_omega_v1.jsonl
+      - name: Validate recursive gap registry
+        run: python tools/validate_manifold_gap_registry.py data/manifold/gaps_omega_v1.jsonl
       - name: Run manifold tests
-        run: python -m unittest tests.test_manifold_registry tests.test_manifold_route_resolver
+        run: python -m unittest discover -s tests -p 'test_manifold*.py'
