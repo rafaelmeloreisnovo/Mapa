@@ -47,6 +47,18 @@ def validate(bundle: dict) -> list[str]:
         errors.append("duplicate_object_id")
     object_by_id = {x["id"]: x for x in objects if isinstance(x, dict) and isinstance(x.get("id"), str)}
 
+    # Globally disjoint typed IDs prevent an artifact, execution, evidence, receipt, or claim
+    # from being silently treated as the same entity.
+    typed_ids: dict[str, str] = {}
+    for collection in ("objects", "relations", "events", "evidence", "receipts", "authorities", "actions", "states", "deltas", "gaps"):
+        for item in bundle[collection]:
+            if isinstance(item, dict) and isinstance(item.get("id"), str):
+                item_id = item["id"]
+                if item_id in typed_ids:
+                    errors.append(f"typed_id_collision:{item_id}:{typed_ids[item_id]}:{collection}")
+                else:
+                    typed_ids[item_id] = collection
+
     for obj in objects:
         if not isinstance(obj, dict):
             continue
@@ -199,7 +211,7 @@ def validate(bundle: dict) -> list[str]:
         if not isinstance(authority, dict):
             errors.append("authority_must_be_object")
             continue
-        for grant in authority.get("grants", []):
+        if not authority.get("source_ref"):\n            errors.append(f"authority_source_ref_required:{authority.get('id')}")\n        for grant in authority.get("grants", []):
             if not isinstance(grant, dict):
                 errors.append("grant_must_be_object")
                 continue
