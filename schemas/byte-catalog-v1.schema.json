@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/byte-catalog-v1.schema.json",
+  "title": "RAFAELIA BYTE_CATALOG_V1 row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "byte_dec",
+    "byte_hex",
+    "bits",
+    "popcount",
+    "ascii_class",
+    "ascii_symbol",
+    "latin1_codepoint",
+    "utf8_role",
+    "standalone_utf8",
+    "semantic_state",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.byte-catalog.v1"},
+    "byte_dec": {"type": "integer", "minimum": 0, "maximum": 255},
+    "byte_hex": {"type": "string", "pattern": "^0x[0-9A-F]{2}$"},
+    "bits": {"type": "string", "pattern": "^[01]{8}$"},
+    "popcount": {"type": "integer", "minimum": 0, "maximum": 8},
+    "ascii_class": {
+      "type": "string",
+      "enum": ["CONTROL", "PRINTABLE", "DEL", "NON_ASCII"]
+    },
+    "ascii_symbol": {"type": ["string", "null"]},
+    "latin1_codepoint": {"type": "string", "pattern": "^U\\+[0-9A-F]{4}$"},
+    "utf8_role": {
+      "type": "string",
+      "enum": [
+        "SINGLE_BYTE_ASCII",
+        "CONTINUATION",
+        "LEAD_2",
+        "LEAD_3",
+        "LEAD_4",
+        "INVALID_LEAD"
+      ]
+    },
+    "standalone_utf8": {"type": "boolean"},
+    "semantic_state": {"const": "TOKEN_VAZIO_UNBOUND"},
+    "claim_allowed": {"const": false}
+  }
+}
