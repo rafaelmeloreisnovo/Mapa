@@ -1,0 +1,30 @@
+name: BYTE Catalog V1
+on:
+  pull_request:
+    paths:
+      - 'schemas/byte-catalog-v1.schema.json'
+      - 'data/catalog/byte_catalog_v1.jsonl'
+      - 'tools/generate_byte_catalog_v1.py'
+      - 'tools/catalog_zip_bytes_v1.py'
+      - 'tests/test_byte_catalog_v1.py'
+      - 'docs/BYTE_CATALOG_V1.md'
+      - '.github/workflows/byte-catalog-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Regenerate BYTE_CATALOG deterministically
+        run: |
+          python tools/generate_byte_catalog_v1.py --output /tmp/byte_catalog_v1.jsonl
+          cmp /tmp/byte_catalog_v1.jsonl data/catalog/byte_catalog_v1.jsonl
+      - name: Run BYTE catalog tests
+        run: python -m unittest tests.test_byte_catalog_v1
