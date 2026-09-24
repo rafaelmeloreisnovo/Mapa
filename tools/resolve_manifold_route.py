@@ -21,6 +21,14 @@ def load_routes(path):
             rows.append(json.loads(line))
     return rows
 
+def _catalog_reduction(resolved: bool, method: str):
+    return {
+        "before": "NP_CATALOG",
+        "after": "P_CATALOG" if resolved else "NP_CATALOG",
+        "method": method,
+        "complexity_claim": False,
+    }
+
 def _score(query, route):
     q=norm(query)
     score=0
@@ -43,8 +51,22 @@ def resolve(query, routes):
         if q.startswith(prefix):
             route=next((r for r in routes if r["route_id"]==rid),None)
             if route is None:
-                return {"status":"TOKEN_VAZIO_ROUTE_NOT_MATERIALIZED","route_id":rid,"claim_allowed":False}
-            return {"status":"ROUTE_RESOLVED","route_id":rid,"reason":"explicit_command_prefix","path":route["path"],"evidence_gate":route["evidence_gate"],"rollback":route["rollback"],"claim_allowed":False}
+                return {
+                    "status":"TOKEN_VAZIO_ROUTE_NOT_MATERIALIZED",
+                    "route_id":rid,
+                    "catalog_reduction":_catalog_reduction(False,"explicit command prefix points to a non-materialized route"),
+                    "claim_allowed":False,
+                }
+            return {
+                "status":"ROUTE_RESOLVED",
+                "route_id":rid,
+                "reason":"explicit_command_prefix",
+                "path":route["path"],
+                "evidence_gate":route["evidence_gate"],
+                "rollback":route["rollback"],
+                "catalog_reduction":_catalog_reduction(True,"explicit command prefix plus stable route registry"),
+                "claim_allowed":False,
+            }
 
     scored=[]
     for route in routes:
@@ -52,14 +74,35 @@ def resolve(query, routes):
         if score>0:
             scored.append((score,route,hits))
     if not scored:
-        return {"status":"TOKEN_VAZIO_NO_ROUTE","candidates":[],"claim_allowed":False}
+        return {
+            "status":"TOKEN_VAZIO_NO_ROUTE",
+            "candidates":[],
+            "catalog_reduction":_catalog_reduction(False,"no stable trigger matched"),
+            "claim_allowed":False,
+        }
     scored.sort(key=lambda x:(-x[0],x[1]["route_id"]))
     top=scored[0][0]
     tied=[x for x in scored if x[0]==top]
     if len(tied)>1:
-        return {"status":"TOKEN_VAZIO_AMBIGUOUS_ROUTE","candidates":[x[1]["route_id"] for x in tied],"score":top,"claim_allowed":False}
+        return {
+            "status":"TOKEN_VAZIO_AMBIGUOUS_ROUTE",
+            "candidates":[x[1]["route_id"] for x in tied],
+            "score":top,
+            "catalog_reduction":_catalog_reduction(False,"candidate set remains ambiguous"),
+            "claim_allowed":False,
+        }
     _,route,hits=scored[0]
-    return {"status":"ROUTE_RESOLVED","route_id":route["route_id"],"reason":"trigger_match","matched_triggers":hits,"path":route["path"],"evidence_gate":route["evidence_gate"],"rollback":route["rollback"],"claim_allowed":False}
+    return {
+        "status":"ROUTE_RESOLVED",
+        "route_id":route["route_id"],
+        "reason":"trigger_match",
+        "matched_triggers":hits,
+        "path":route["path"],
+        "evidence_gate":route["evidence_gate"],
+        "rollback":route["rollback"],
+        "catalog_reduction":_catalog_reduction(True,"unique best trigger under the fixed route registry"),
+        "claim_allowed":False,
+    }
 
 def main():
     ap=argparse.ArgumentParser()
