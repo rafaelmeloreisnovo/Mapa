@@ -247,5 +247,40 @@
       "operation": "READ",
       "expected_decision": "DENY"
     }
+  ],
+  "states": [
+    {
+      "id": "state-pr-open",
+      "target_id": "pull-request-661",
+      "value": "open",
+      "observed_at": "2026-09-23T23:00:00Z",
+      "source_ref": "fixture://pr-open"
+    },
+    {
+      "id": "state-pr-merged",
+      "target_id": "pull-request-661",
+      "value": "merged",
+      "observed_at": "2026-09-24T00:00:00Z",
+      "source_ref": "fixture://pr-merged"
+    }
+  ],
+  "deltas": [
+    {
+      "id": "delta-pr-state",
+      "parent_state_id": "state-pr-open",
+      "successor_state_id": "state-pr-merged",
+      "summary": "PR lifecycle advanced",
+      "source_ref": "fixture://pr-history",
+      "append_only": true
+    }
+  ],
+  "gaps": [
+    {
+      "id": "gap-pr-browser",
+      "target_id": "pull-request-661",
+      "reason": "external browser rendering not checked",
+      "next_probe": "fetch provider status and compare timestamp",
+      "status": "TOKEN_VAZIO"
+    }
   ]
 }
