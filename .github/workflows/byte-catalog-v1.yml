@@ -3,11 +3,15 @@ on:
   pull_request:
     paths:
       - 'schemas/byte-catalog-v1.schema.json'
+      - 'schemas/state-tape-v1.schema.json'
       - 'data/catalog/byte_catalog_v1.jsonl'
       - 'tools/generate_byte_catalog_v1.py'
       - 'tools/catalog_zip_bytes_v1.py'
+      - 'tools/state_tape_v1.py'
       - 'tests/test_byte_catalog_v1.py'
+      - 'tests/test_state_tape_v1.py'
       - 'docs/BYTE_CATALOG_V1.md'
+      - 'docs/SPARSE_STATE_TAPE_V1.md'
       - '.github/workflows/byte-catalog-v1.yml'
   workflow_dispatch:
 
@@ -26,5 +30,5 @@ jobs:
         run: |
           python tools/generate_byte_catalog_v1.py --output /tmp/byte_catalog_v1.jsonl
           cmp /tmp/byte_catalog_v1.jsonl data/catalog/byte_catalog_v1.jsonl
-      - name: Run BYTE catalog tests
-        run: python -m unittest tests.test_byte_catalog_v1
+      - name: Run BYTE and state-tape tests
+        run: python -m unittest tests.test_byte_catalog_v1 tests.test_state_tape_v1
