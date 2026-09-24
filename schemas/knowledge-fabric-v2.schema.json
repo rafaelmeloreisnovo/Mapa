@@ -4,6 +4,7 @@
   "title": "RAFAELIA Knowledge Fabric V2 bundle",
   "type": "object",
   "required": [
+    "identities",
     "schema",
     "claim_allowed",
     "objects",
@@ -15,7 +16,8 @@
     "actions",
     "states",
     "deltas",
-    "gaps"
+    "gaps",
+    "contexts"
   ],
   "properties": {
     "schema": {
@@ -83,6 +85,18 @@
       "items": {
         "$ref": "#/$defs/gap"
       }
+    },
+    "identities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identity"
+      }
+    },
+    "contexts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/context"
+      }
     }
   },
   "$defs": {
@@ -91,9 +105,9 @@
       "required": [
         "id",
         "object_type",
-        "source_identity",
         "access_class",
-        "semantic_state"
+        "semantic_state",
+        "identity_ref"
       ],
       "properties": {
         "id": {
@@ -115,37 +129,6 @@
             "claim"
           ]
         },
-        "source_identity": {
-          "type": "object",
-          "required": [
-            "surface",
-            "provider_id",
-            "ref"
-          ],
-          "properties": {
-            "surface": {
-              "type": "string"
-            },
-            "provider_id": {
-              "type": "string"
-            },
-            "ref": {
-              "type": "string"
-            },
-            "hash": {
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "hash_scope": {
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          }
-        },
         "access_class": {
           "enum": [
             "public",
@@ -155,6 +138,9 @@
           ]
         },
         "semantic_state": {
+          "type": "string"
+        },
+        "identity_ref": {
           "type": "string"
         }
       }
@@ -499,6 +485,88 @@
             "PENDING",
             "FAIL"
           ]
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "id",
+        "surface",
+        "provider_id",
+        "canonical_ref"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "surface": {
+          "type": "string"
+        },
+        "provider_id": {
+          "type": "string"
+        },
+        "canonical_ref": {
+          "type": "string"
+        },
+        "hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hash_scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": [
+        "id",
+        "purpose",
+        "assembled_at",
+        "member_refs",
+        "access_class",
+        "derived"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "assembled_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "member_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "access_class": {
+          "enum": [
+            "public",
+            "restricted",
+            "private",
+            "TOKEN_VAZIO"
+          ]
+        },
+        "derived": {
+          "const": true
         }
       }
     }
