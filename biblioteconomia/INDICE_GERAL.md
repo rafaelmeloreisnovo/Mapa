@@ -39,6 +39,7 @@
 | `16_VARREDURA_CONTEUDO.md` | hashing triplo + evidência código/prosa + métricas |
 | `17_AVALIACAO_CONTEUDO.md` | leitura real dos arquivos (7 nós avaliados) |
 | `18_ROADMAP_ESTADO.md` | contabilidade dos passos (feito × LACUNA) |
+| `23_NOVOEXPORT_BIBLIOTECA_SEMANTICA.md` | integração biblioteconômica do NOVOexport: catálogo, dicionário, biblioflow, manifold, atlas e scaffold |
 | `SEMENTE_BIBLIOTECA_VIVA.md` | parábola de alinhamento para outra IA (texto do autor) |
 | `BACKLOG_ACERVO.md` | acervo real enumerado (111 conhecidos) |
 | `INDICE_GERAL.md` | **este guia** |

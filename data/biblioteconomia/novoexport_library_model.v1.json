@@ -1,0 +1,234 @@
+{
+  "schema": "rafaelia.novoexport.library-model/v1",
+  "model_id": "NOVOEXPORT_BIBLIO_LIBRARY_MODEL_V1",
+  "state": "ACTIVE_SEED",
+  "authority": "MAPA_ROUTING_AND_CATALOG_ONLY",
+  "claim_allowed": false,
+  "source_boundary": {
+    "drive_root_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+    "system_custody_id": "1T41msBTBXITyd_NEOEKVfq2miVwqGQ1O",
+    "quarantine_id": "1q7NThjg5FBiVB8L2wNspijef25kDRCFi",
+    "active_maps_id": "1s54c6R4R6MT-Ralb4gCx1ez_pl2AMSFq",
+    "source_manifest_id": "13xMqjbn1O5nc1Q3gC3ZjnUdLLW5qneWk"
+  },
+  "observed_source_universe": {
+    "declared_physical_entries": 15439,
+    "declared_logical_files": 15369,
+    "declared_dat_entries": 15358,
+    "conversation_shards": "conversations-000..050 (51)",
+    "codex_shards": "codex-000..020 (21)",
+    "observation_ref": "Mapa:indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md",
+    "scope_note": "Inherited manifest-level observation; not proof of current full provider listing or semantic/message exhaustivity."
+  },
+  "open_gates": [
+    "TV-INDEX-INGEST-000-050",
+    "TV-MESSAGES-FULL-COVERAGE"
+  ],
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "catalog_record != evidence",
+    "typed_relation != proof",
+    "not_found != does_not_exist",
+    "title_match != identity"
+  ],
+  "lifecycle": [
+    "DISCOVER",
+    "IDENTITY_BIND",
+    "DESCRIBE",
+    "CLASSIFY",
+    "AUTHORITY_CHECK",
+    "INDEX",
+    "RELATE",
+    "ROUTE",
+    "EVIDENCE_CHECK",
+    "RECEIPT",
+    "LEARN"
+  ],
+  "facets": {
+    "domain": [
+      "corpus",
+      "conversation",
+      "code",
+      "mathematics",
+      "science",
+      "runtime",
+      "governance",
+      "law",
+      "symbolic"
+    ],
+    "carrier": [
+      "export",
+      "file",
+      "shard",
+      "conversation",
+      "message",
+      "asset",
+      "term",
+      "expression",
+      "dataset",
+      "memory_event",
+      "relation",
+      "route",
+      "receipt"
+    ],
+    "operation": [
+      "discover",
+      "identify",
+      "describe",
+      "classify",
+      "normalize",
+      "index",
+      "relate",
+      "retrieve",
+      "verify",
+      "supersede"
+    ],
+    "scale": [
+      "corpus",
+      "project",
+      "file",
+      "shard",
+      "object",
+      "message",
+      "token"
+    ],
+    "temporal": [
+      "source_time",
+      "observation_time",
+      "event_time"
+    ],
+    "provenance": [
+      "drive_file_id",
+      "github_repo_ref_path_commit",
+      "producer_authority",
+      "custody_receipt"
+    ],
+    "epistemic": [
+      "observed",
+      "asserted",
+      "candidate",
+      "tested",
+      "supported",
+      "contradicted",
+      "gap",
+      "symbolic"
+    ],
+    "access": [
+      "public",
+      "private",
+      "restricted",
+      "TOKEN_VAZIO"
+    ],
+    "L9": [
+      "L",
+      "O",
+      "T",
+      "P",
+      "C",
+      "R",
+      "I",
+      "E",
+      "A"
+    ]
+  },
+  "record_required_fields": [
+    "library_id",
+    "source_surface",
+    "source_ref",
+    "source_identity",
+    "object_type",
+    "descriptive_metadata",
+    "facets",
+    "access_class",
+    "semantic_state",
+    "relations",
+    "evidence_refs",
+    "gap_refs",
+    "route_ref",
+    "predecessor_or_supersedes"
+  ],
+  "record_example": {
+    "library_id": "LIB-NOVO-EXAMPLE-000001",
+    "source_surface": "Google Drive",
+    "source_ref": "Drive file ID or canonical GitHub repository/ref/path/commit",
+    "source_identity": {
+      "provider_id": "TOKEN_VAZIO",
+      "hash": {
+        "algorithm": "TOKEN_VAZIO",
+        "value": "TOKEN_VAZIO",
+        "scope": "TOKEN_VAZIO"
+      }
+    },
+    "object_type": "TOKEN_VAZIO",
+    "descriptive_metadata": {
+      "title": "TOKEN_VAZIO",
+      "literal_surface": "TOKEN_VAZIO",
+      "language": "TOKEN_VAZIO",
+      "media_type": "TOKEN_VAZIO"
+    },
+    "facets": {
+      "domain": [],
+      "carrier": [],
+      "operation": [],
+      "scale": [],
+      "temporal": [],
+      "provenance": [],
+      "epistemic": [],
+      "access": [],
+      "L9": []
+    },
+    "access_class": "TOKEN_VAZIO",
+    "semantic_state": "PENDING",
+    "relations": [],
+    "evidence_refs": [],
+    "gap_refs": [],
+    "route_ref": "TOKEN_VAZIO",
+    "predecessor_or_supersedes": "TOKEN_VAZIO",
+    "claim_allowed": false
+  },
+  "relation_types": [
+    "same_as",
+    "alias_of",
+    "part_of",
+    "derived_from",
+    "co_occurs_with",
+    "implements",
+    "evidences",
+    "contradicts",
+    "supersedes",
+    "routes_to"
+  ],
+  "semantic_token_policy": {
+    "literal_preservation": true,
+    "unresolved_state": "TOKEN_VAZIO_SEMANTIC",
+    "may_infer_definition": false,
+    "may_coerce_to_zero_false_or_absence": false,
+    "version_sense_changes": true
+  },
+  "projection_roles": {
+    "dictionary": "term authority and sense/version lookup",
+    "map": "bounded relation neighborhood",
+    "atlas": "curated read-only views over registries",
+    "scaffold": "minimal reconstructible retrieval context with source pointers and gaps",
+    "biblioflow": "ordered lifecycle",
+    "biblio_manifold": "typed entity relation graph"
+  },
+  "privacy": {
+    "raw_conversation_text_in_github": false,
+    "private_asset_content_in_public_indexes": false,
+    "unknown_access_blocks_content_publication": true
+  },
+  "source_refs": [
+    "Drive:00_MAPA_ROTAS_INVENTARIO_NOVOEXPORT#1iaUnAFbsPBO3dZtEQk40i13ZPOmhPd7d81Ujhf4O8Og",
+    "Drive:NOVOexport_Navigation_Hub#1QqwzIWJO1J3BkOjDnUp37JjOtuMF2iCNxyhCG6Vn4xc",
+    "Drive:NOVOexport_Inventory#1-2Kg5km6EgbjLKhSGf1lMMY0OVJk3eUGDewlIk1le80",
+    "Mapa:indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md",
+    "Mapa:biblioteconomia/INDICE_GERAL.md",
+    "Mapa:data/semantics/semantic-dictionary.v1.jsonl",
+    "Mapa:data/manifold/edges_omega_v1.jsonl"
+  ],
+  "F_ok": "Existing catalog, vocabulary, semantic dictionary, manifold, Drive route map, and inventory are bound by this model.",
+  "F_gap": "Source re-enumeration and full semantic/message coverage remain open.",
+  "F_next": "Validate against current Drive inventory and pilot source-bound records; append validated deltas only."
+}
