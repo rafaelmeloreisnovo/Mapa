@@ -32,7 +32,7 @@ def validate(bundle: dict) -> list[str]:
     if bundle.get("claim_allowed") is not False:
         errors.append("claim_allowed_must_remain_false")
 
-    collections = ("objects", "relations", "events", "evidence", "receipts", "authorities", "actions")
+    collections = ("objects", "relations", "events", "evidence", "receipts", "authorities", "actions", "states", "deltas", "gaps")
     for name in collections:
         if not isinstance(bundle.get(name), list):
             errors.append(f"{name}_must_be_array")
@@ -105,6 +105,57 @@ def validate(bundle: dict) -> list[str]:
     for oid, obj in object_by_id.items():
         if obj.get("object_type") == "pull_request" and not events_by_target.get(oid):
             errors.append(f"mutable_pull_request_requires_event:{oid}")
+
+    state_ids = set()
+    for state in bundle["states"]:
+        if not isinstance(state, dict):
+            errors.append("state_must_be_object")
+            continue
+        sid = state.get("id")
+        if not sid or sid in state_ids:
+            errors.append("state_id_missing_or_duplicate")
+        state_ids.add(sid)
+        if state.get("target_id") not in object_by_id:
+            errors.append(f"state_target_missing:{sid}")
+        if not _iso(state.get("observed_at")):
+            errors.append(f"state_observed_at_invalid:{sid}")
+        if not state.get("source_ref") or not isinstance(state.get("value"), str):
+            errors.append(f"state_source_or_value_missing:{sid}")
+
+    delta_ids = set()
+    for delta in bundle["deltas"]:
+        if not isinstance(delta, dict):
+            errors.append("delta_must_be_object")
+            continue
+        did = delta.get("id")
+        if not did or did in delta_ids:
+            errors.append("delta_id_missing_or_duplicate")
+        delta_ids.add(did)
+        parent, successor = delta.get("parent_state_id"), delta.get("successor_state_id")
+        if parent not in state_ids or successor not in state_ids:
+            errors.append(f"delta_state_reference_missing:{did}")
+        if parent == successor:
+            errors.append(f"delta_must_create_successor_state:{did}")
+        if delta.get("append_only") is not True:
+            errors.append(f"delta_must_be_append_only:{did}")
+        if not delta.get("summary") or not delta.get("source_ref"):
+            errors.append(f"delta_provenance_required:{did}")
+
+    gap_ids = set()
+    for gap in bundle["gaps"]:
+        if not isinstance(gap, dict):
+            errors.append("gap_must_be_object")
+            continue
+        gid = gap.get("id")
+        if not gid or gid in gap_ids:
+            errors.append("gap_id_missing_or_duplicate")
+        gap_ids.add(gid)
+        if gap.get("target_id") not in object_by_id:
+            errors.append(f"gap_target_missing:{gid}")
+        if not gap.get("reason") or not gap.get("next_probe"):
+            errors.append(f"gap_reason_and_next_probe_required:{gid}")
+        if gap.get("status") not in {"TOKEN_VAZIO", "PENDING", "FAIL"}:
+            errors.append(f"gap_status_invalid:{gid}")
 
     evidence = bundle["evidence"]
     evidence_ids = set()
