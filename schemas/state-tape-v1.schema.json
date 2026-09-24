@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/state-tape-v1.schema.json",
+  "title": "RAFAELIA Sparse State Tape V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "before_size",
+    "after_size",
+    "changed_bytes",
+    "changed_bits",
+    "unchanged_bytes",
+    "page_size",
+    "block_size",
+    "activity",
+    "state",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.state-tape.v1"},
+    "before_size": {"type": "integer", "minimum": 0},
+    "after_size": {"type": "integer", "minimum": 0},
+    "changed_bytes": {"type": "integer", "minimum": 0},
+    "changed_bits": {"type": "integer", "minimum": 0},
+    "unchanged_bytes": {"type": "integer", "minimum": 0},
+    "page_size": {"type": "integer", "minimum": 1},
+    "block_size": {"type": "integer", "minimum": 1},
+    "activity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "block_index",
+          "offset",
+          "length",
+          "changed_bytes",
+          "changed_bits",
+          "changed",
+          "xor_mask_hex",
+          "before_crc32",
+          "after_crc32"
+        ],
+        "properties": {
+          "block_index": {"type": "integer", "minimum": 0},
+          "offset": {"type": "integer", "minimum": 0},
+          "length": {"type": "integer", "minimum": 0},
+          "changed_bytes": {"type": "integer", "minimum": 0},
+          "changed_bits": {"type": "integer", "minimum": 0},
+          "changed": {"type": "boolean"},
+          "xor_mask_hex": {"type": "string"},
+          "before_crc32": {"type": "string", "pattern": "^[0-9a-f]{8}$"},
+          "after_crc32": {"type": "string", "pattern": "^[0-9a-f]{8}$"}
+        }
+      }
+    },
+    "state": {
+      "type": "string",
+      "enum": ["SPARSE_DELTA_OBSERVED", "NO_DELTA", "SIZE_CHANGED"]
+    },
+    "claim_allowed": {"const": false}
+  }
+}
