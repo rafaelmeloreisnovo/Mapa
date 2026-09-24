@@ -211,7 +211,9 @@ def validate(bundle: dict) -> list[str]:
         if not isinstance(authority, dict):
             errors.append("authority_must_be_object")
             continue
-        if not authority.get("source_ref"):\n            errors.append(f"authority_source_ref_required:{authority.get('id')}")\n        for grant in authority.get("grants", []):
+        if not authority.get("source_ref"):
+            errors.append(f"authority_source_ref_required:{authority.get('id')}")
+        for grant in authority.get("grants", []):
             if not isinstance(grant, dict):
                 errors.append("grant_must_be_object")
                 continue
