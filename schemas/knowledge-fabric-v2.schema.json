@@ -1,56 +1,501 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"https://rafaelia.invalid/schemas/knowledge-fabric-v2.schema.json",
-  "title":"RAFAELIA Knowledge Fabric V2 bundle",
-  "type":"object",
-  "required":["schema","claim_allowed","objects","relations","events","evidence","receipts","authorities","actions"],
-  "properties":{
-    "schema":{"const":"rafaelia.knowledge-fabric/v2"},
-    "claim_allowed":{"const":false},
-    "objects":{"type":"array","items":{"$ref":"#/$defs/object"}},
-    "relations":{"type":"array","items":{"$ref":"#/$defs/relation"}},
-    "events":{"type":"array","items":{"$ref":"#/$defs/event"}},
-    "evidence":{"type":"array","items":{"$ref":"#/$defs/evidence"}},
-    "receipts":{"type":"array","items":{"$ref":"#/$defs/receipt"}},
-    "authorities":{"type":"array","items":{"$ref":"#/$defs/authority"}},
-    "actions":{"type":"array","items":{"$ref":"#/$defs/action"}}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.invalid/schemas/knowledge-fabric-v2.schema.json",
+  "title": "RAFAELIA Knowledge Fabric V2 bundle",
+  "type": "object",
+  "required": [
+    "schema",
+    "claim_allowed",
+    "objects",
+    "relations",
+    "events",
+    "evidence",
+    "receipts",
+    "authorities",
+    "actions",
+    "states",
+    "deltas",
+    "gaps"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.knowledge-fabric/v2"
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/object"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "receipts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/receipt"
+      }
+    },
+    "authorities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/authority"
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/action"
+      }
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/state"
+      }
+    },
+    "deltas": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/delta"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    }
   },
-  "$defs":{
-    "object":{
-      "type":"object",
-      "required":["id","object_type","source_identity","access_class","semantic_state"],
-      "properties":{
-        "id":{"type":"string","minLength":1},
-        "object_type":{"enum":["formula","image","dat","conversation","token","commit","pull_request","execution","private_file","artifact","claim"]},
-        "source_identity":{
-          "type":"object","required":["surface","provider_id","ref"],
-          "properties":{"surface":{"type":"string"},"provider_id":{"type":"string"},"ref":{"type":"string"},"hash":{"type":["string","null"]},"hash_scope":{"type":["string","null"]}}
+  "$defs": {
+    "object": {
+      "type": "object",
+      "required": [
+        "id",
+        "object_type",
+        "source_identity",
+        "access_class",
+        "semantic_state"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
         },
-        "access_class":{"enum":["public","private","restricted","TOKEN_VAZIO"]},
-        "semantic_state":{"type":"string"}
+        "object_type": {
+          "enum": [
+            "formula",
+            "image",
+            "dat",
+            "conversation",
+            "token",
+            "commit",
+            "pull_request",
+            "execution",
+            "private_file",
+            "artifact",
+            "claim"
+          ]
+        },
+        "source_identity": {
+          "type": "object",
+          "required": [
+            "surface",
+            "provider_id",
+            "ref"
+          ],
+          "properties": {
+            "surface": {
+              "type": "string"
+            },
+            "provider_id": {
+              "type": "string"
+            },
+            "ref": {
+              "type": "string"
+            },
+            "hash": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "hash_scope": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "access_class": {
+          "enum": [
+            "public",
+            "private",
+            "restricted",
+            "TOKEN_VAZIO"
+          ]
+        },
+        "semantic_state": {
+          "type": "string"
+        }
       }
     },
-    "relation":{
-      "type":"object",
-      "required":["id","source_id","relation_type","target_id","direction","scope","source_ref","evidence_effect","promotion_cap","guard","supersession_ref"],
-      "properties":{
-        "id":{"type":"string"},"source_id":{"type":"string"},"relation_type":{"type":"string"},"target_id":{"type":"string"},
-        "direction":{"enum":["forward","inverse","symmetric"]},"scope":{"type":"string","minLength":1},"source_ref":{"type":"string","minLength":1},
-        "evidence_effect":{"enum":["none","supports","contradicts"]},"promotion_cap":{"enum":["catalog_only","tested_scope","claim_review_required"]},
-        "guard":{"type":"string","minLength":1},"supersession_ref":{"type":"string"}
+    "relation": {
+      "type": "object",
+      "required": [
+        "id",
+        "source_id",
+        "relation_type",
+        "target_id",
+        "direction",
+        "scope",
+        "source_ref",
+        "evidence_effect",
+        "promotion_cap",
+        "guard",
+        "supersession_ref"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source_id": {
+          "type": "string"
+        },
+        "relation_type": {
+          "type": "string"
+        },
+        "target_id": {
+          "type": "string"
+        },
+        "direction": {
+          "enum": [
+            "forward",
+            "inverse",
+            "symmetric"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_effect": {
+          "enum": [
+            "none",
+            "supports",
+            "contradicts"
+          ]
+        },
+        "promotion_cap": {
+          "enum": [
+            "catalog_only",
+            "tested_scope",
+            "claim_review_required"
+          ]
+        },
+        "guard": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supersession_ref": {
+          "type": "string"
+        }
       }
     },
-    "event":{"type":"object","required":["id","event_type","target_id","observed_at","source_ref"],"properties":{"id":{"type":"string"},"event_type":{"type":"string"},"target_id":{"type":"string"},"observed_at":{"type":"string","format":"date-time"},"source_ref":{"type":"string"}}},
-    "evidence":{"type":"object","required":["id","evidence_type","scope","source_ref","result"],"properties":{"id":{"type":"string"},"evidence_type":{"type":"string"},"scope":{"type":"string"},"source_ref":{"type":"string"},"result":{"enum":["PASS","FAIL","OBSERVED","TOKEN_VAZIO"]}}},
-    "receipt":{"type":"object","required":["id","evidence_refs","parent_ref","timestamp"],"properties":{"id":{"type":"string"},"evidence_refs":{"type":"array","items":{"type":"string","minLength":1},"minItems":1},"parent_ref":{"type":"string"},"timestamp":{"type":"string","format":"date-time"}}},
-    "authority":{
-      "type":"object","required":["id","grants"],
-      "properties":{"id":{"type":"string"},"grants":{"type":"array","items":{
-        "type":"object","required":["actor","target_id","operation","decision"],
-        "properties":{"actor":{"type":"string"},"target_id":{"type":"string"},"operation":{"enum":["DISCOVER","READ","EXECUTE","WRITE","PUBLISH"]},"decision":{"enum":["ALLOW","DENY"]}}
-      }}}
+    "event": {
+      "type": "object",
+      "required": [
+        "id",
+        "event_type",
+        "target_id",
+        "observed_at",
+        "source_ref"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "target_id": {
+          "type": "string"
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_ref": {
+          "type": "string"
+        }
+      }
     },
-    "action":{"type":"object","required":["id","actor","target_id","operation","expected_decision"],"properties":{"id":{"type":"string"},"actor":{"type":"string"},"target_id":{"type":"string"},"operation":{"enum":["DISCOVER","READ","EXECUTE","WRITE","PUBLISH"]},"expected_decision":{"enum":["ALLOW","DENY"]}}},
-    "TOKEN_VAZIO":{"const":"TOKEN_VAZIO","description":"Typed absence; never coerced to numeric zero, false, deletion, PASS, or a guessed value."}
+    "evidence": {
+      "type": "object",
+      "required": [
+        "id",
+        "evidence_type",
+        "scope",
+        "source_ref",
+        "result"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "evidence_type": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "source_ref": {
+          "type": "string"
+        },
+        "result": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "OBSERVED",
+            "TOKEN_VAZIO"
+          ]
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "required": [
+        "id",
+        "evidence_refs",
+        "parent_ref",
+        "timestamp"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "parent_ref": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "id",
+        "grants"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "grants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "actor",
+              "target_id",
+              "operation",
+              "decision"
+            ],
+            "properties": {
+              "actor": {
+                "type": "string"
+              },
+              "target_id": {
+                "type": "string"
+              },
+              "operation": {
+                "enum": [
+                  "DISCOVER",
+                  "READ",
+                  "EXECUTE",
+                  "WRITE",
+                  "PUBLISH"
+                ]
+              },
+              "decision": {
+                "enum": [
+                  "ALLOW",
+                  "DENY"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "required": [
+        "id",
+        "actor",
+        "target_id",
+        "operation",
+        "expected_decision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "target_id": {
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "DISCOVER",
+            "READ",
+            "EXECUTE",
+            "WRITE",
+            "PUBLISH"
+          ]
+        },
+        "expected_decision": {
+          "enum": [
+            "ALLOW",
+            "DENY"
+          ]
+        }
+      }
+    },
+    "TOKEN_VAZIO": {
+      "const": "TOKEN_VAZIO",
+      "description": "Typed absence; never coerced to numeric zero, false, deletion, PASS, or a guessed value."
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "id",
+        "target_id",
+        "value",
+        "observed_at",
+        "source_ref"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "target_id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_ref": {
+          "type": "string"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "delta": {
+      "type": "object",
+      "required": [
+        "id",
+        "parent_state_id",
+        "successor_state_id",
+        "summary",
+        "source_ref",
+        "append_only"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "parent_state_id": {
+          "type": "string"
+        },
+        "successor_state_id": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "source_ref": {
+          "type": "string"
+        },
+        "append_only": {
+          "const": true
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "required": [
+        "id",
+        "target_id",
+        "reason",
+        "next_probe",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "target_id": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "next_probe": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "TOKEN_VAZIO",
+            "PENDING",
+            "FAIL"
+          ]
+        }
+      }
+    }
   }
 }
