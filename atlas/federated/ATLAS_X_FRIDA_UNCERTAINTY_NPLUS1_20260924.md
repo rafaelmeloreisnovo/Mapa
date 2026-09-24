@@ -1,6 +1,7 @@
 # ATLAS X — FRIDA UNCERTAINTY N+1 — 2026-09-24
 
 Authority:
+
 - implementation: rafaelmeloreisnovo/frida-desktop
 - cross-source governance: rafaelmeloreisnovo/Mapa
 - documentary memory: canonical RAFAELIA Drive routes
@@ -9,11 +10,13 @@ Cycle:
 N -> alpha/internal falsifiers -> delta/hotfix -> sigma/exact-head CI -> omega/cross-source reconciliation -> alpha-prime/residual gaps -> N+1.
 
 Operational interpretation:
+
 - META/MULTI branches = alternative hypothesis/model branches.
 - Tesseract/hypercube/hyperform = optional state-space visualization/scaffold.
 - These symbols do not create physical claims without separate evidence.
 
 Uncertainty family:
+
 - U-ACTIONABILITY-HEURISTIC: hotfixed, CI pending.
 - U-OPTIMIZER-DIRECTION: hotfixed, CI pending.
 - U-INTEGRITY-HASH-SEMANTICS: hotfixed, CI pending.
