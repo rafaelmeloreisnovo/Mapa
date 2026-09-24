@@ -17,6 +17,9 @@ class RouteResolverTests(unittest.TestCase):
                 out=resolve(case["query"],self.routes)
                 self.assertEqual(out["status"],case["expect_status"])
                 self.assertEqual(out["route_id"],case["expect_route"])
+                self.assertEqual(out["catalog_reduction"]["before"],"NP_CATALOG")
+                self.assertEqual(out["catalog_reduction"]["after"],"P_CATALOG")
+                self.assertFalse(out["catalog_reduction"]["complexity_claim"])
                 self.assertFalse(out["claim_allowed"])
 
     def test_negative_fixtures(self):
@@ -24,6 +27,9 @@ class RouteResolverTests(unittest.TestCase):
             with self.subTest(case=case):
                 out=resolve(case["query"],self.routes)
                 self.assertEqual(out["status"],case["expect_status"])
+                self.assertEqual(out["catalog_reduction"]["before"],"NP_CATALOG")
+                self.assertEqual(out["catalog_reduction"]["after"],"NP_CATALOG")
+                self.assertFalse(out["catalog_reduction"]["complexity_claim"])
                 self.assertFalse(out["claim_allowed"])
                 if "expect_candidates" in case:
                     self.assertEqual(sorted(out["candidates"]),sorted(case["expect_candidates"]))
