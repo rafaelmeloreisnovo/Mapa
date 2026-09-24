@@ -85,7 +85,7 @@ class KnowledgeFabricV2Test(unittest.TestCase):
     def test_gap_requires_exact_next_probe(self):
         data = copy.deepcopy(self.valid)
         data["gaps"][0]["next_probe"] = ""
-        self.assertIn("gap_reason_and_next_probe_required:gap-pr-browser", MOD.validate(data)
+        self.assertIn("gap_reason_and_next_probe_required:gap-pr-browser", MOD.validate(data))
 
 
     def test_claim_requires_evidence_not_execution_artifact(self):
