@@ -6,7 +6,7 @@ This contract measures only the route resolver's own search reduction. It does n
 
 For a fixed registry with `|R|` routes:
 
-```
+```text
 ΔNP_catalog = |R| - |C_after|
 ΔP_catalog  = 1 if a unique deterministic route is resolved, else 0
 Δ§RUIDO     = count(normalized query tokens not covered by matched route triggers)
@@ -28,7 +28,7 @@ Interpretation:
 
 Therefore:
 
-```
+```text
 measured catalog delta != proof
 measured lexical noise != semantic meaning
 NP_CATALOG -> P_CATALOG != P = NP
