@@ -14,9 +14,12 @@ class ManifoldGapRegistryTests(unittest.TestCase):
         cls.by_id = {row["gap_id"]: row for row in cls.rows}
 
     def test_seed_count_and_unique_ids(self):
-        self.assertEqual(len(self.rows), 20)\n        self.assertEqual(len(self.by_id), 20)\n
+        self.assertEqual(len(self.rows), 20)
+        self.assertEqual(len(self.by_id), 20)\n
     def test_gap_of_gap_is_explicit(self):
-        self.assertEqual(self.by_id["G0002"]["child_gap_refs"], ["G0011"])\n        self.assertEqual(self.by_id["G0010"]["child_gap_refs"], ["G0013", "G0014", "G0015"])\n        self.assertEqual(self.by_id["G0011"]["parent_gap_id"], "G0002")
+        self.assertEqual(self.by_id["G0002"]["child_gap_refs"], ["G0011"])
+        self.assertEqual(self.by_id["G0010"]["child_gap_refs"], ["G0013", "G0014", "G0015"])
+        self.assertEqual(self.by_id["G0011"]["parent_gap_id"], "G0002")
         self.assertEqual(self.by_id["G0011"]["state"], "TOKEN_VAZIO_NESTED")
 
     def test_known_gap_is_navigable_without_becoming_filled(self):
@@ -47,12 +50,15 @@ class ManifoldGapRegistryTests(unittest.TestCase):
         self.assertIsNone(out["noise"]["delta_section_noise"])
 
     def test_runtime_relecture_gaps_are_fail_closed(self):
-        for gid in ("G0013", "G0014", "G0015", "G0016", "G0017", "G0018", "G0019", "G0020", "G0021", "G0022", "G0023", "G0024", "G0025"):\n            self.assertIn(gid, self.by_id)
+        for gid in ("G0013", "G0014", "G0015", "G0016", "G0017", "G0018", "G0019", "G0020", "G0021", "G0022", "G0023", "G0024", "G0025"):
+            self.assertIn(gid, self.by_id)
             self.assertFalse(self.by_id[gid]["claim_allowed"])
         self.assertEqual(self.by_id["G0013"]["parent_gap_id"], "G0010")
         self.assertEqual(self.by_id["G0016"]["kind"], "MISSING_MAPPING")
         self.assertEqual(self.by_id["G0018"]["kind"], "MISSING_MAPPING")
         self.assertEqual(self.by_id["G0019"]["state"], "PARTIAL_BOUNDED")
-        self.assertEqual(self.by_id["G0020"]["state"], "PARTIAL_BOUNDED")\n        self.assertEqual(self.by_id["G0020"]["child_gap_refs"], ["G0021", "G0022", "G0023", "G0024"])\n        self.assertEqual(self.by_id["G0025"]["state"], "TOKEN_VAZIO_AMBIGUOUS")\n
+        self.assertEqual(self.by_id["G0020"]["state"], "PARTIAL_BOUNDED")
+        self.assertEqual(self.by_id["G0020"]["child_gap_refs"], ["G0021", "G0022", "G0023", "G0024"])
+        self.assertEqual(self.by_id["G0025"]["state"], "TOKEN_VAZIO_AMBIGUOUS")\n
 if __name__ == "__main__":
     unittest.main()
