@@ -1,7 +1,7 @@
 {
   "schema": "rafaelia.frida-uncertainty-cross-source-reconciliation/v1",
   "id": "FRIDA_UNCERTAINTY_NPLUS1_20260924",
-  "status": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+  "status": "IMPLEMENTED_PENDING_CURRENT_HEAD_CI",
   "claim_allowed": false,
   "canonical_owner": "rafaelmeloreisnovo/Mapa",
   "producer_authority": "rafaelmeloreisnovo/frida-desktop",
@@ -50,27 +50,27 @@
   "drive_routes": [
     {
       "role": "START_LITE",
-      "file_id": "1l2hhCHYFBouU4qNU-WFY3kqI1wEzfJ64EDvi2iH1mbI"
+      "ref": "OPAQUE_PRIVATE_REFERENCE"
     },
     {
       "role": "MANIFOLD_NAVIGATOR",
-      "file_id": "1R3IVTIg2vUFUidBBgwU2Q0HU51it0UYt5213nm0SAO0"
+      "ref": "OPAQUE_PRIVATE_REFERENCE"
     },
     {
       "role": "CONTEXT_SCAFFOLD",
-      "file_id": "1gkLIipCRbc6U5G6DuKJNip74eX3TlxgnwLHwpIPC7w8"
+      "ref": "OPAQUE_PRIVATE_REFERENCE"
     },
     {
       "role": "ROUTES_OMEGA",
-      "file_id": "1fPelyCM24WCmfZDs1wjz7MWRW2q6ww44hcPuTEu5k2g"
+      "ref": "OPAQUE_PRIVATE_REFERENCE"
     },
     {
       "role": "LONGITUDINAL_MEMORY",
-      "file_id": "1wgMrDNHf9sASCdNPa4JTvxBeJtbKbeFXfMBRx-gMAIs"
+      "ref": "OPAQUE_PRIVATE_REFERENCE"
     },
     {
       "role": "RISK_LEDGER",
-      "file_id": "1zQCOyMR9UeuaqA7qW4xA7ltEqdKd7Py5LavMwxA6mRM"
+      "ref": "OPAQUE_PRIVATE_REFERENCE"
     }
   ],
   "two_cycles": {
@@ -153,5 +153,6 @@
     "FRACTAL_UNTIL_OMEGA_BACK_TO_ALPHA": "iterate bounded falsification cycles until stop condition, then successor N+1; no infinite background process",
     "N+1": "append-only successor state after evidence-producing cycle"
   },
-  "f_next": "consume exact-head PR72 CI; if PASS, append cross-source receipt; then physical ARM32 HyperMemory restart/reattach/restore gate; then staged upstream core->gum->bindings reconciliation"
+  "f_next": "consume exact-head PR72 CI; if PASS, append cross-source receipt; then physical ARM32 HyperMemory restart/reattach/restore gate; then staged upstream core->gum->bindings reconciliation",
+  "private_provenance_policy": "Public Mapa records expose semantic Drive aliases only; provider file IDs and locators remain in Drive-side/private custody."
 }
