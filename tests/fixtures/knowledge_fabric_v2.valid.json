@@ -1,0 +1,251 @@
+{
+  "schema": "rafaelia.knowledge-fabric/v2",
+  "claim_allowed": false,
+  "objects": [
+    {
+      "id": "formula-1",
+      "object_type": "formula",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-formula-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "public",
+      "semantic_state": "FORMALIZED"
+    },
+    {
+      "id": "image-1",
+      "object_type": "image",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-image-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "public",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "dat-1",
+      "object_type": "dat",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-dat-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "restricted",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "conversation-1",
+      "object_type": "conversation",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-conversation-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "private",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "unknown-token",
+      "object_type": "token",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-token-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "TOKEN_VAZIO",
+      "semantic_state": "TOKEN_VAZIO",
+      "literal_surface": "Ω"
+    },
+    {
+      "id": "commit-1",
+      "object_type": "commit",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-commit-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "public",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "pull-request-661",
+      "object_type": "pull_request",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-pr-661",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "public",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "execution-1",
+      "object_type": "execution",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-execution-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "private",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "private-file",
+      "object_type": "private_file",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-private-file-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "private",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "artifact-1",
+      "object_type": "artifact",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-artifact-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "public",
+      "semantic_state": "OBSERVED"
+    },
+    {
+      "id": "claim-1",
+      "object_type": "claim",
+      "source_identity": {
+        "surface": "fixture",
+        "provider_id": "source-claim-1",
+        "ref": "tests/fixtures/knowledge_fabric_v2.valid.json",
+        "hash": null,
+        "hash_scope": null
+      },
+      "access_class": "public",
+      "semantic_state": "CANDIDATE",
+      "evidence_refs": [
+        "evidence-1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel-1",
+      "source_id": "formula-1",
+      "relation_type": "implemented_by",
+      "target_id": "artifact-1",
+      "direction": "forward",
+      "scope": "fixture-only",
+      "source_ref": "fixture://rel-1",
+      "evidence_effect": "none",
+      "promotion_cap": "catalog_only",
+      "guard": "does_not_promote_claim",
+      "supersession_ref": "TOKEN_VAZIO"
+    }
+  ],
+  "events": [
+    {
+      "id": "event-pr-1",
+      "event_type": "state_snapshot",
+      "target_id": "pull-request-661",
+      "observed_at": "2026-09-24T00:00:00Z",
+      "source_ref": "fixture://pr-state"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence-1",
+      "evidence_type": "validator_test",
+      "scope": "fixture-only",
+      "source_ref": "fixture://test-run",
+      "result": "PASS"
+    }
+  ],
+  "receipts": [
+    {
+      "id": "receipt-1",
+      "evidence_refs": [
+        "evidence-1"
+      ],
+      "parent_ref": "fixture://source",
+      "timestamp": "2026-09-24T00:00:01Z"
+    }
+  ],
+  "authorities": [
+    {
+      "id": "authority-fixture-1",
+      "grants": [
+        {
+          "actor": "operator",
+          "target_id": "formula-1",
+          "operation": "READ",
+          "decision": "ALLOW"
+        },
+        {
+          "actor": "operator",
+          "target_id": "private-file",
+          "operation": "READ",
+          "decision": "ALLOW"
+        },
+        {
+          "actor": "operator",
+          "target_id": "private-file",
+          "operation": "PUBLISH",
+          "decision": "DENY"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "read-formula",
+      "actor": "operator",
+      "target_id": "formula-1",
+      "operation": "READ",
+      "expected_decision": "ALLOW"
+    },
+    {
+      "id": "read-private",
+      "actor": "operator",
+      "target_id": "private-file",
+      "operation": "READ",
+      "expected_decision": "ALLOW"
+    },
+    {
+      "id": "publish-private",
+      "actor": "operator",
+      "target_id": "private-file",
+      "operation": "PUBLISH",
+      "expected_decision": "DENY"
+    },
+    {
+      "id": "read-unknown-token",
+      "actor": "operator",
+      "target_id": "unknown-token",
+      "operation": "READ",
+      "expected_decision": "DENY"
+    }
+  ]
+}
