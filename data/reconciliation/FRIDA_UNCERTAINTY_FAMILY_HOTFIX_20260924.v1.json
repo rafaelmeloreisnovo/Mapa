@@ -1,0 +1,157 @@
+{
+  "schema": "rafaelia.frida-uncertainty-cross-source-reconciliation/v1",
+  "id": "FRIDA_UNCERTAINTY_NPLUS1_20260924",
+  "status": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+  "claim_allowed": false,
+  "canonical_owner": "rafaelmeloreisnovo/Mapa",
+  "producer_authority": "rafaelmeloreisnovo/frida-desktop",
+  "producer": {
+    "base_main": "73a4f536fcde0368c8f3c89b0db8264ab01de5d3",
+    "pr": 72,
+    "exact_head": "fd0c2bb2a506c68e83281f4e25f986e5cb705bee",
+    "branch": "hotfix/frida-uncertainty-risk-ratchet-v1-20260924",
+    "ci": [
+      {
+        "name": "Runtime Learning Engine Integration Gate",
+        "run_id": 36074376052,
+        "state": "QUEUED_AT_OBSERVATION"
+      },
+      {
+        "name": "RAFAELIA Provenance Non-Regression Gate",
+        "run_id": 36074375992,
+        "state": "QUEUED_AT_OBSERVATION"
+      },
+      {
+        "name": "Android runtime stability dump",
+        "run_id": 36074375987,
+        "state": "QUEUED_AT_OBSERVATION"
+      },
+      {
+        "name": "0000 · OMEGA Integrator",
+        "run_id": 36074376396,
+        "state": "QUEUED_AT_OBSERVATION"
+      }
+    ]
+  },
+  "mapa_sources": [
+    {
+      "path": "data/control-plane/omega-assurance/risk-vector.v1.json",
+      "blob_sha": "a0e85af394ca05a8c289642c4c999d3b7ea2cab4"
+    },
+    {
+      "path": "arquitetura/00_ARQUITETURA_RELACIONAL_GITHUB_DRIVE_MEMORIA.md",
+      "blob_sha": "5ae06566d2e68afb763d00253940bff1d53999ac"
+    },
+    {
+      "path": "data/semantics/semantic-dictionary.v1.jsonl",
+      "predecessor_blob_sha": "5bda339ccf5140c5f0da8089db2ce6ee11d40654"
+    }
+  ],
+  "drive_routes": [
+    {
+      "role": "START_LITE",
+      "file_id": "1l2hhCHYFBouU4qNU-WFY3kqI1wEzfJ64EDvi2iH1mbI"
+    },
+    {
+      "role": "MANIFOLD_NAVIGATOR",
+      "file_id": "1R3IVTIg2vUFUidBBgwU2Q0HU51it0UYt5213nm0SAO0"
+    },
+    {
+      "role": "CONTEXT_SCAFFOLD",
+      "file_id": "1gkLIipCRbc6U5G6DuKJNip74eX3TlxgnwLHwpIPC7w8"
+    },
+    {
+      "role": "ROUTES_OMEGA",
+      "file_id": "1fPelyCM24WCmfZDs1wjz7MWRW2q6ww44hcPuTEu5k2g"
+    },
+    {
+      "role": "LONGITUDINAL_MEMORY",
+      "file_id": "1wgMrDNHf9sASCdNPa4JTvxBeJtbKbeFXfMBRx-gMAIs"
+    },
+    {
+      "role": "RISK_LEDGER",
+      "file_id": "1zQCOyMR9UeuaqA7qW4xA7ltEqdKd7Py5LavMwxA6mRM"
+    }
+  ],
+  "two_cycles": {
+    "alpha": {
+      "purpose": "internal falsification",
+      "survived": [
+        "heuristic signals are typed OBSERVATION_ONLY and blocked from automatic mutation",
+        "worsening success/rollback can only tighten automatic optimizer thresholds",
+        "IntegrityVerifier evidence-facing digest is SHA-256"
+      ],
+      "negative_evidence": [
+        "pre-PR readback found an incomplete size field introduced during SHA-256 edit; corrected by successor commit fd0c2bb2..."
+      ]
+    },
+    "omega": {
+      "purpose": "cross-source authority reconciliation",
+      "rules": [
+        "producer repo governs implementation",
+        "Mapa governs cross-source routing/risk semantics",
+        "Drive records memory/routes/receipts",
+        "hosted CI cannot close physical-device gates",
+        "symbols/hyperforms are state-space/scaffold notation unless separately evidenced as physical claims"
+      ]
+    }
+  },
+  "uncertainty_family": [
+    {
+      "id": "U-ACTIONABILITY-HEURISTIC",
+      "risk_vector": {
+        "C": "P0_IF_BYPASSED",
+        "U": "P0_IF_BYPASSED"
+      },
+      "state": "HOTFIX_PENDING_CI"
+    },
+    {
+      "id": "U-OPTIMIZER-DIRECTION",
+      "risk_vector": {
+        "C": "P1",
+        "U": "P1"
+      },
+      "state": "HOTFIX_PENDING_CI"
+    },
+    {
+      "id": "U-INTEGRITY-HASH-SEMANTICS",
+      "risk_vector": {
+        "I": "P1",
+        "U": "WATCH"
+      },
+      "state": "HOTFIX_PENDING_CI"
+    },
+    {
+      "id": "U-PHYSICAL-HYPERMEMORY",
+      "risk_vector": {
+        "I": "P0_EVIDENCE",
+        "U": "P0"
+      },
+      "state": "TOKEN_VAZIO"
+    },
+    {
+      "id": "U-UPSTREAM-DRIFT",
+      "risk_vector": {
+        "I": "P1",
+        "V": "P1",
+        "U": "P1"
+      },
+      "state": "OPEN"
+    },
+    {
+      "id": "U-CAUSALITY",
+      "risk_vector": {
+        "I": "P0_IF_PROMOTED",
+        "U": "P0_IF_PROMOTED"
+      },
+      "state": "CONTROLLED_TOKEN_VAZIO"
+    }
+  ],
+  "symbolic_projection": {
+    "META/MULTI_VERSOS": "alternative hypothesis/model branches; not a physical parallel-universe claim",
+    "TESSERACT/HYPERCUBE/HYPERFORM": "optional multidimensional state-space projection/scaffold",
+    "FRACTAL_UNTIL_OMEGA_BACK_TO_ALPHA": "iterate bounded falsification cycles until stop condition, then successor N+1; no infinite background process",
+    "N+1": "append-only successor state after evidence-producing cycle"
+  },
+  "f_next": "consume exact-head PR72 CI; if PASS, append cross-source receipt; then physical ARM32 HyperMemory restart/reattach/restore gate; then staged upstream core->gum->bindings reconciliation"
+}
