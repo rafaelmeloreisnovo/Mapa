@@ -32,7 +32,7 @@ def validate(bundle: dict) -> list[str]:
     if bundle.get("claim_allowed") is not False:
         errors.append("claim_allowed_must_remain_false")
 
-    collections = ("objects", "relations", "events", "evidence", "receipts", "authorities", "actions", "states", "deltas", "gaps")
+    collections = ("identities", "objects", "relations", "events", "evidence", "receipts", "authorities", "actions", "states", "deltas", "gaps", "contexts")
     for name in collections:
         if not isinstance(bundle.get(name), list):
             errors.append(f"{name}_must_be_array")
@@ -45,6 +45,7 @@ def validate(bundle: dict) -> list[str]:
         errors.append("object_identity_required")
     if len(set(object_ids)) != len(object_ids):
         errors.append("duplicate_object_id")
+    identity_by_id = {x.get("id"): x for x in bundle["identities"] if isinstance(x, dict) and isinstance(x.get("id"), str)}
     object_by_id = {x["id"]: x for x in objects if isinstance(x, dict) and isinstance(x.get("id"), str)}
 
     # Globally disjoint typed IDs prevent an artifact, execution, evidence, receipt, or claim
@@ -59,16 +60,28 @@ def validate(bundle: dict) -> list[str]:
                 else:
                     typed_ids[item_id] = collection
 
+    identity_keys = set()
+    for ident in bundle["identities"]:
+        if not isinstance(ident, dict):
+            errors.append("identity_must_be_object")
+            continue
+        iid = ident.get("id")
+        if not iid or any(not isinstance(ident.get(k), str) or not ident[k] for k in ("surface", "provider_id", "canonical_ref")):
+            errors.append(f"identity_fields_required:{iid}")
+        key = (ident.get("surface"), ident.get("provider_id"))
+        if key in identity_keys:
+            errors.append(f"duplicate_provider_identity:{key}")
+        identity_keys.add(key)
+        if ident.get("hash") and not ident.get("hash_scope"):
+            errors.append(f"hash_scope_required:{iid}")
+
     for obj in objects:
         if not isinstance(obj, dict):
             continue
         if not obj.get("object_type"):
             errors.append(f"object_type_required:{obj.get('id')}")
-        ident = obj.get("source_identity")
-        if not isinstance(ident, dict) or any(not isinstance(ident.get(k), str) or not ident[k] for k in ("surface", "provider_id", "ref")):
-            errors.append(f"source_identity_incomplete:{obj.get('id')}")
-        elif ident.get("hash") and not ident.get("hash_scope"):
-            errors.append(f"hash_scope_required:{obj.get('id')}")
+        if obj.get("identity_ref") not in identity_by_id:
+            errors.append(f"object_identity_ref_missing:{obj.get('id')}")
         if obj.get("access_class") not in ACCESS_CLASSES:
             errors.append(f"invalid_access_class:{obj.get('id')}")
         if obj.get("object_type") == "token" and obj.get("semantic_state") == "TOKEN_VAZIO":
@@ -168,6 +181,32 @@ def validate(bundle: dict) -> list[str]:
             errors.append(f"gap_reason_and_next_probe_required:{gid}")
         if gap.get("status") not in {"TOKEN_VAZIO", "PENDING", "FAIL"}:
             errors.append(f"gap_status_invalid:{gid}")
+
+    access_rank = {"public": 0, "restricted": 1, "private": 2, "TOKEN_VAZIO": 3}
+    context_ids = set()
+    known_refs = set(typed_ids)
+    for context in bundle["contexts"]:
+        if not isinstance(context, dict):
+            errors.append("context_must_be_object")
+            continue
+        cid = context.get("id")
+        if not cid or cid in context_ids:
+            errors.append("context_id_missing_or_duplicate")
+        context_ids.add(cid)
+        if context.get("derived") is not True:
+            errors.append(f"context_must_be_derived:{cid}")
+        if not _iso(context.get("assembled_at")):
+            errors.append(f"context_timestamp_invalid:{cid}")
+        members = context.get("member_refs")
+        if not isinstance(members, list) or not members:
+            errors.append(f"context_members_required:{cid}")
+            continue
+        if any(ref not in known_refs for ref in members):
+            errors.append(f"context_member_missing:{cid}")
+        member_access = [object_by_id[ref].get("access_class") for ref in members if ref in object_by_id]
+        required_rank = max((access_rank.get(value, 3) for value in member_access), default=0)
+        if access_rank.get(context.get("access_class"), -1) < required_rank:
+            errors.append(f"context_access_broader_than_members:{cid}")
 
     evidence = bundle["evidence"]
     evidence_ids = set()
