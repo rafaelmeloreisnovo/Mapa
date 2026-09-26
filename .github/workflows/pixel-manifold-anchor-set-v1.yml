@@ -1,0 +1,27 @@
+name: Pixel Manifold Anchor Set V1
+
+on:
+  pull_request:
+    paths:
+      - 'data/multimodal/pixel_manifold_anchor_set.v1.json'
+      - 'schemas/pixel-manifold-anchor-set.v1.schema.json'
+      - 'scripts/validate_pixel_manifold_anchor_set.py'
+      - 'indices/PIXEL_MANIFOLD_ANCHOR_SET_V1_20260926.md'
+      - '.github/workflows/pixel-manifold-anchor-set-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Compile validator
+        run: python -m py_compile scripts/validate_pixel_manifold_anchor_set.py
+      - name: Validate fixture and adversarial guards
+        run: python scripts/validate_pixel_manifold_anchor_set.py --artifact data/multimodal/pixel_manifold_anchor_set.v1.json --self-test
