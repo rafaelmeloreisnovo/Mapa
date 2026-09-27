@@ -16,7 +16,7 @@ class ManifoldRegistryTests(unittest.TestCase):
     def test_repository_seeds(self):
         self.assertEqual(
             validate_edges(ROOT / "data/manifold/edges_omega_v1.jsonl"),
-            40,
+            43,
         )
         self.assertEqual(
             validate_routes(ROOT / "data/manifold/routes_omega_v1.jsonl"),
@@ -28,9 +28,35 @@ class ManifoldRegistryTests(unittest.TestCase):
             ROOT / "data/manifold/edges_omega_v1.jsonl",
             ROOT / "data/manifold/gaps_omega_v1.jsonl",
         )
-        self.assertEqual(out["has_gap"], 17)
+        self.assertEqual(out["has_gap"], 18)
         self.assertEqual(out["gap_of"], 8)
-        self.assertEqual(out["bound_gaps"], 25)
+        self.assertEqual(out["bound_gaps"], 26)
+
+    def test_eight_directions_bridge_preserves_cultural_provenance_gap(self):
+        edges = [
+            json.loads(line)
+            for line in (ROOT / "data/manifold/edges_omega_v1.jsonl")
+            .read_text(encoding="utf-8")
+            .splitlines()
+            if line.strip()
+        ]
+        gaps = [
+            json.loads(line)
+            for line in (ROOT / "data/manifold/gaps_omega_v1.jsonl")
+            .read_text(encoding="utf-8")
+            .splitlines()
+            if line.strip()
+        ]
+
+        edge = next(row for row in edges if row["edge_id"] == "E0043")
+        gap = next(row for row in gaps if row["gap_id"] == "G0026")
+
+        self.assertEqual(edge["relation_type"], "HAS_GAP")
+        self.assertEqual(edge["target_id"], "gap:G0026")
+        self.assertEqual(gap["kind"], "MISSING_SOURCE")
+        self.assertEqual(gap["state"], "TOKEN_VAZIO_NAVIGABLE")
+        self.assertFalse(gap["claim_allowed"])
+        self.assertIn("CULTURAL_PROVENANCE", gap["markers"])
 
     def test_duplicate_edge_rejected(self):
         row = {
