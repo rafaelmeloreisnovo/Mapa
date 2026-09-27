@@ -1,0 +1,35 @@
+name: Custody Chain Federation V1
+
+on:
+  pull_request:
+    paths:
+      - "schemas/custody-chain-type-registry.schema.json"
+      - "data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json"
+      - "scripts/validate_custody_chain_type_registry.py"
+      - "tests/test_custody_chain_type_registry.py"
+      - "docs/governance/CUSTODY_CHAIN_FEDERATION_V1.md"
+      - ".github/workflows/custody-chain-federation-v1.yml"
+  push:
+    paths:
+      - "schemas/custody-chain-type-registry.schema.json"
+      - "data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json"
+      - "scripts/validate_custody_chain_type_registry.py"
+      - "tests/test_custody_chain_type_registry.py"
+      - "docs/governance/CUSTODY_CHAIN_FEDERATION_V1.md"
+      - ".github/workflows/custody-chain-federation-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate registry
+        run: python3 scripts/validate_custody_chain_type_registry.py
+      - name: Unit tests
+        run: python3 -m unittest tests.test_custody_chain_type_registry -v
