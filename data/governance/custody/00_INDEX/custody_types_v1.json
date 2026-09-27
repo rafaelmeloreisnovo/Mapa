@@ -106,7 +106,12 @@
   "F_gap": [
     "Legacy connector receipt digest/canonicalization semantics remain AUDIT until reproduced.",
     "Provider/server enforcement is independent of this taxonomy.",
-    "Drive content-digest parity is TOKEN_VAZIO unless explicitly derived."
+    "Drive content-digest parity is TOKEN_VAZIO unless explicitly derived.",
+    "C09_CREDENTIAL_AUTHORITY has no direct canonical custody profile and remains an explicit local extension/gap."
   ],
-  "F_next": "Adopt taxonomy in successor custody receipts and validators without rewriting legacy history."
+  "F_next": "Use the canonical mapping for every C01..C09 event; never promote a local class into a new federated profile by inference.",
+  "authority_status": "LOCAL_TYPED_PROJECTION",
+  "canonical_registry_ref": "data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json",
+  "canonical_mapping_ref": "data/governance/custody/01_ATLAS/CUSTODY_TYPES_V1_CANONICAL_MAPPING.json",
+  "canonical_precedence": "Federated custody profile authority is defined by CUSTODY_CHAIN_TYPE_REGISTRY.v1.json; this C01..C09 taxonomy is a local classification/compatibility layer only."
 }
