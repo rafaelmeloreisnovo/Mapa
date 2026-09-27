@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/manifold-dispatch-v1.schema.json",
+  "title": "RAFAELIA START HERE Dispatch V2.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dispatch_version",
+    "canonical_boot",
+    "roots",
+    "mu_read",
+    "gates",
+    "fail_closed",
+    "superseded",
+    "route_registry",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "dispatch_version": {"const": "V2.1"},
+    "canonical_boot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "state"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "state": {"const": "ACTIVE"}
+      }
+    },
+    "roots": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "required"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "required": {"type": "boolean"}
+        }
+      }
+    },
+    "mu_read": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default_roots", "default_depth", "expand_if"],
+      "properties": {
+        "default_roots": {"type": "integer", "minimum": 1, "maximum": 3},
+        "default_depth": {"const": 1},
+        "expand_if": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "missing_source",
+              "contradiction",
+              "unresolved_authority",
+              "missing_evidence",
+              "explicit_request"
+            ]
+          }
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "fail_closed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "blocked_state", "token_empty"],
+      "properties": {
+        "required_fields": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "blocked_state": {"const": "ROUTE_STATE_BLOCKED"},
+        "token_empty": {"const": "TOKEN_VAZIO"}
+      }
+    },
+    "superseded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "by", "reason"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "by": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "route_registry": {"type": "string", "minLength": 1},
+    "claim_allowed": {"const": false}
+  }
+}
