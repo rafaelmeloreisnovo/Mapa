@@ -1,0 +1,24 @@
+{
+  "schema": "rafaelia.custody.module.v1",
+  "version": "1.0.0",
+  "authority": {
+    "drive": "documentary_state,indexes,receipts",
+    "github": "schemas,validators,tests,implementation",
+    "runtime": "execution_evidence",
+    "human_domain": "claim_promotion"
+  },
+  "directories": {
+    "00_INDEX": "taxonomy and module index",
+    "01_ATLAS": "cross-provider locators",
+    "02_ROUTES": "deterministic custody routes",
+    "03_MANIFOLD": "typed relation model",
+    "04_SCAFFOLDS": "event templates",
+    "05_EDGES": "typed edges",
+    "06_GAPS": "open custody gaps",
+    "07_EVIDENCE": "observations/evidence",
+    "08_RECEIPTS": "append-only successor receipts"
+  },
+  "legacy_chain": "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl",
+  "legacy_policy": "preserve; do not rewrite; successor receipts may supersede semantics with explicit parent/ref",
+  "claim_allowed": false
+}
