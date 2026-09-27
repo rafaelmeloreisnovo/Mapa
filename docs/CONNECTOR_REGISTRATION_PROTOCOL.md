@@ -1,5 +1,7 @@
 # Connector Registration Protocol — Federated Authority
 
+> **Custody semantics successor:** `docs/governance/CUSTODY_MODEL_V1.md`. Where this legacy protocol used generic SHA256 wording for Git identities or called a predecessor-linked receipt chain a Merkle chain, the typed successor semantics govern. Existing ledger history is preserved.
+
 **Document ID**: CONNECTOR_REGISTRATION_PROTOCOL.v1  
 **Date**: 2026-09-02  
 **Authority**: Mapa (Federation + Validation Authority)  
@@ -63,7 +65,7 @@ python3 scripts/validate_connector_authority.py \
 ```json
 {
   "repository_ref": "owner/repo",
-  "commit_sha": "SHA256",
+  "commit_sha": "provider-native Git commit OID; algorithm not inferred",
   "gate_name": "CONNECTOR_VALIDATION_GATE.v1",
   "exit_code": 0,
   "hash_algorithm": "SHA256",
@@ -117,7 +119,7 @@ python3 scripts/validate_connector_versioning.py \
   "receipt_id": "string (CONNECTOR_<name>_<timestamp>)",
   "timestamp": "ISO8601",
   "repository_ref": "owner/repo",
-  "source_commit": "SHA256",
+  "source_commit": "provider-native Git commit OID; algorithm not inferred",
   "gate_identifier": "CONNECTOR_REGISTRATION_PROTOCOL.v1",
   "execution_timestamp": "ISO8601",
   "executor_identity": "email or session_id",
@@ -134,7 +136,7 @@ python3 scripts/validate_connector_versioning.py \
 - **Location**: `data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl`
 - **Format**: One receipt per line (JSONL)
 - **Immutability**: Append-only; no deletion or reordering
-- **Validation**: Each receipt includes hash of prior receipt (merkle chain)
+- **Validation**: Successor receipts may bind a verified predecessor receipt digest as a **linear hash chain**. This is not a Merkle tree unless an explicit tree/root/inclusion-proof construction exists.
 
 **Execution**:
 ```bash
