@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rafaelia.custody.event.v1",
+  "title": "RAFAELIA Custody Event V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "event_id",
+    "timestamp",
+    "custody_class",
+    "subject",
+    "actors",
+    "authority",
+    "integrity",
+    "state",
+    "claim_allowed",
+    "gap",
+    "rollback"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.custody.event.v1"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1
+    },
+    "custody_class": {
+      "type": "string",
+      "pattern": "^C0[1-9]_[A-Z0-9_]+$"
+    },
+    "subject": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "source_type",
+        "locator"
+      ]
+    },
+    "actors": {
+      "type": "object",
+      "required": [
+        "authorized_by",
+        "executed_by",
+        "custodied_by"
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "provider",
+        "domain"
+      ]
+    },
+    "integrity": {
+      "type": "object",
+      "required": [
+        "identity_kind",
+        "value"
+      ]
+    },
+    "state": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NOT_RUN",
+        "PENDING",
+        "AUDIT",
+        "TOKEN_VAZIO",
+        "IMPLEMENTED_UNTESTED",
+        "OBSERVED_UNPROMOTED",
+        "ROUTE_STATE_BLOCKED"
+      ]
+    },
+    "claim_allowed": {
+      "type": "boolean"
+    },
+    "gap": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rollback": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "rafaelia.custody.edges.v1",
+  "edge_types": [
+    {
+      "type": "AUTHORIZED_BY",
+      "from": "action",
+      "to": "human_or_delegated_authority"
+    },
+    {
+      "type": "EXECUTED_BY",
+      "from": "action",
+      "to": "connector_ci_runtime_provider"
+    },
+    {
+      "type": "CUSTODIED_BY",
+      "from": "artifact_state",
+      "to": "provider_repository_storage_runtime"
+    },
+    {
+      "type": "BRIDGES_TO",
+      "from": "provider_ref",
+      "to": "provider_ref"
+    },
+    {
+      "type": "EVIDENCE_FOR",
+      "from": "evidence",
+      "to": "subject_or_gate"
+    }
+  ],
+  "claim_allowed": false
+}
