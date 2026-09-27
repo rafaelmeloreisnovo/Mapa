@@ -1,0 +1,55 @@
+{
+  "schema": "rafaelia.custody.event.v1",
+  "event_id": "CUSTODY-REFACTOR-V1-GITHUB-PROPOSAL",
+  "timestamp": "2026-09-27T17:57:00-03:00",
+  "custody_class": "C06_TRANSFER_HANDOFF",
+  "subject": {
+    "artifact_id": "RAFAELIA_CUSTODY_TYPES_V1",
+    "source_type": "github_repository_delta",
+    "locator": "rafaelmeloreisnovo/Mapa"
+  },
+  "actors": {
+    "authorized_by": {
+      "type": "human_user",
+      "ref": "CURRENT_TURN_AUTHORIZATION"
+    },
+    "planned_by": {
+      "type": "assistant_session",
+      "ref": "CURRENT_CONVERSATION"
+    },
+    "executed_by": {
+      "type": "connector",
+      "ref": "GITHUB_CONNECTOR"
+    },
+    "custodied_by": {
+      "type": "repository",
+      "ref": "rafaelmeloreisnovo/Mapa"
+    },
+    "observed_by": {
+      "type": "connector",
+      "ref": "GITHUB_CONNECTOR_READBACK"
+    },
+    "promoted_by": "TOKEN_VAZIO"
+  },
+  "authority": {
+    "provider": "GitHub",
+    "domain": "federation_governance",
+    "repository": "rafaelmeloreisnovo/Mapa"
+  },
+  "before_ref": "main@2b8c5941065d63ec999077d38edf9303dabeeb34",
+  "after_ref": "TOKEN_VAZIO_PENDING_FINAL_HEAD",
+  "integrity": {
+    "identity_kind": "git_commit_oid",
+    "value": "2b8c5941065d63ec999077d38edf9303dabeeb34",
+    "algorithm": null,
+    "canonicalization": null
+  },
+  "evidence_refs": [
+    "Drive:41_CUSTODY_CHAIN@1qIdW6uZGUmMUFTcGucPv_8QQ6ud79QMF"
+  ],
+  "relation": "PROPOSES_SUCCESSOR_WITHOUT_REWRITING_LEGACY_CHAIN",
+  "state": "IMPLEMENTED_UNTESTED",
+  "claim_allowed": false,
+  "gap": "Provider CI and final PR head remain pending until all writes and readback complete.",
+  "rollback": "Close/drop proposal branch; main and legacy custody ledger remain unchanged."
+}

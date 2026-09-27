@@ -1,0 +1,30 @@
+{
+  "schema": "rafaelia.custody.gaps.v1",
+  "gaps": [
+    {
+      "id": "CUST-G001",
+      "state": "AUDIT",
+      "subject": "legacy receipt digest canonicalization",
+      "evidence_required": "versioned canonicalization + reproduced digest"
+    },
+    {
+      "id": "CUST-G002",
+      "state": "AUDIT",
+      "subject": "legacy source_commit algorithm semantics",
+      "evidence_required": "provider-native identity semantics + exact commit/blob refs"
+    },
+    {
+      "id": "CUST-G003",
+      "state": "TOKEN_VAZIO",
+      "subject": "Drive content digest parity",
+      "evidence_required": "explicit bytes + declared digest algorithm if needed"
+    },
+    {
+      "id": "CUST-G004",
+      "state": "FAIL_CLOSED",
+      "subject": "provider/server governance enforcement",
+      "evidence_required": "authoritative provider policy/ruleset readback"
+    }
+  ],
+  "claim_allowed": false
+}
