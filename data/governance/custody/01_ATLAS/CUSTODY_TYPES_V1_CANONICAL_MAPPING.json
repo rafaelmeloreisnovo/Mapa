@@ -1,0 +1,96 @@
+{
+  "schema": "rafaelia.custody.projection-map.v1",
+  "version": "1.0.0",
+  "authority_status": "CANONICAL_REGISTRY_PRECEDENCE",
+  "projection_ref": "data/governance/custody/00_INDEX/custody_types_v1.json",
+  "canonical_registry_ref": "data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json",
+  "relation": "LOCAL_CLASSIFICATION_PROJECTS_TO_CANONICAL_PROFILES",
+  "invariant": "Projection may classify a local event but MUST NOT create, rename, replace, or promote a canonical federated profile.",
+  "actor_mapping": {
+    "authorized_by": "HUMAN_AUTHORITY",
+    "planned_by": "ASSISTANT_ORCHESTRATOR",
+    "executed_by_connector": "CONNECTOR_PROVIDER",
+    "executed_by_runtime": "RUNTIME_EXECUTOR",
+    "independent_review": "INDEPENDENT_REVIEWER",
+    "unknown_actor": "TOKEN_VAZIO_ACTOR",
+    "custodied_by": "SURFACE_AUTHORITY_NOT_ACTOR_CLASS"
+  },
+  "class_mapping": [
+    {
+      "local_class": "C01_SOURCE_ORIGIN",
+      "canonical_profiles": [
+        "GITHUB_SOURCE_CODE_CUSTODY",
+        "DRIVE_DOCUMENT_REVISION_CUSTODY",
+        "EVIDENCE_CUSTODY"
+      ],
+      "mapping_state": "CONDITIONAL",
+      "selection_rule": "Choose only the profile matching the evidenced source surface/kind."
+    },
+    {
+      "local_class": "C02_DOCUMENT_STATE",
+      "canonical_profiles": [
+        "DRIVE_DOCUMENT_REVISION_CUSTODY",
+        "DRIVE_MOVE_RENAME_CUSTODY",
+        "DRIVE_CONTENT_MATERIALIZATION_CUSTODY"
+      ],
+      "mapping_state": "CONDITIONAL",
+      "selection_rule": "Revision, move/rename, and byte materialization are distinct custody events."
+    },
+    {
+      "local_class": "C03_CODE_STATE",
+      "canonical_profiles": [
+        "GITHUB_SOURCE_CODE_CUSTODY"
+      ],
+      "mapping_state": "DIRECT"
+    },
+    {
+      "local_class": "C04_EXECUTION",
+      "canonical_profiles": [
+        "GITHUB_ACTIONS_EXECUTION_CUSTODY",
+        "TRANSFORMATION_LINEAGE_CUSTODY"
+      ],
+      "mapping_state": "CONDITIONAL",
+      "selection_rule": "Use Actions profile for GitHub Actions observations; transformation profile for input→tool→output lineage."
+    },
+    {
+      "local_class": "C05_EVIDENCE",
+      "canonical_profiles": [
+        "EVIDENCE_CUSTODY",
+        "RECEIPT_CHAIN_CUSTODY"
+      ],
+      "mapping_state": "CONDITIONAL",
+      "selection_rule": "Evidence identity and receipt-ledger transition are separate profiles."
+    },
+    {
+      "local_class": "C06_TRANSFER_HANDOFF",
+      "canonical_profiles": [
+        "AGENT_ACTION_CUSTODY",
+        "CROSS_SURFACE_BINDING_CUSTODY"
+      ],
+      "mapping_state": "CONDITIONAL",
+      "selection_rule": "Agent-action profile governs human→assistant→connector roles; add cross-surface binding only when multiple surfaces participate."
+    },
+    {
+      "local_class": "C07_CLAIM_PROMOTION",
+      "canonical_profiles": [
+        "GITHUB_REVIEW_PROMOTION_CUSTODY"
+      ],
+      "mapping_state": "CONDITIONAL",
+      "selection_rule": "Direct only for GitHub review/merge promotion. Non-GitHub claim promotion remains governed by human/domain authority plus evidence gate; do not invent a profile."
+    },
+    {
+      "local_class": "C08_CROSS_PROVIDER_BRIDGE",
+      "canonical_profiles": [
+        "CROSS_SURFACE_BINDING_CUSTODY"
+      ],
+      "mapping_state": "DIRECT"
+    },
+    {
+      "local_class": "C09_CREDENTIAL_AUTHORITY",
+      "canonical_profiles": [],
+      "mapping_state": "TOKEN_VAZIO_NO_DIRECT_CANONICAL_PROFILE",
+      "gap": "Credential/permission custody is an authority/security boundary in this local taxonomy; canonical registry has no direct credential profile. Represent provider permission evidence through AGENT_ACTION_CUSTODY/EVIDENCE_CUSTODY only when actually observed, without treating secrets as receipts."
+    }
+  ],
+  "claim_allowed": false
+}
