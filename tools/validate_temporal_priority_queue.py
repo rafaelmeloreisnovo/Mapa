@@ -19,7 +19,7 @@ def parse_iso(value:Any):
     return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
 def validate(data:dict[str,Any],now:datetime|None=None)->list[str]:
     errors=[]
-    if data.get("schema")!="rafaelia.token-vazio-priority-queue.v5": fail(errors,"SCHEMA_MISMATCH")
+    if data.get("schema")!="rafaelia.token-vazio-priority-queue.v6": fail(errors,"SCHEMA_MISMATCH")
     if data.get("claim_allowed") is not False: fail(errors,"CLAIM_ALLOWED_MUST_BE_FALSE")
     if data.get("release_allowed") is not False: fail(errors,"RELEASE_ALLOWED_MUST_BE_FALSE")
     if data.get("promotion_allowed") is not False: fail(errors,"PROMOTION_ALLOWED_MUST_BE_FALSE")
