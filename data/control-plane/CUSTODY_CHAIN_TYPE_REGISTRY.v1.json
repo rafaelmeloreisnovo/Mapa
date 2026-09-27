@@ -1,0 +1,308 @@
+{
+  "schema_version": "rafaelia.custody-chain-type-registry.v1",
+  "registry_id": "CUSTODY-CHAIN-TYPE-REGISTRY-V1",
+  "state": "SPEC",
+  "claim_allowed": false,
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "AUTHORSHIP != AUTHORIZATION != ORCHESTRATION != PROVIDER_EXECUTION != RUNTIME_EXECUTION != REVIEW",
+    "A stable locator is not a content digest",
+    "A commit or Drive revision is not by itself scientific or runtime proof",
+    "Cross-surface byte identity requires independently comparable content digests"
+  ],
+  "surface_authority": {
+    "github": "Producer repository governs code, schemas, tests, CI definitions and implementation history.",
+    "drive": "Google Drive governs documentary memory, CURRENT_STATE, indexes, receipts and documentary custody.",
+    "runtime": "Termux, CI or another declared runtime governs only the execution observations it actually produced.",
+    "cross_surface": "Federation binds identities and relations by pointers; it does not duplicate the underlying corpus."
+  },
+  "actor_classes": [
+    {
+      "actor_class": "HUMAN_AUTHORITY",
+      "role": "Human principal who authorizes intent, scope or a promotion decision within provider policy.",
+      "can_authorize_scope": true,
+      "can_execute_mutation": true,
+      "can_satisfy_independent_review": false,
+      "can_self_authorize_promotion": true,
+      "evidence_required": [
+        "authorization_ref_or_explicit_instruction",
+        "scope",
+        "timestamp_or_provider_event"
+      ]
+    },
+    {
+      "actor_class": "ASSISTANT_ORCHESTRATOR",
+      "role": "Assistant that analyzes, routes and requests connector actions under the human-authorized scope.",
+      "can_authorize_scope": false,
+      "can_execute_mutation": false,
+      "can_satisfy_independent_review": false,
+      "can_self_authorize_promotion": false,
+      "evidence_required": [
+        "user_authority_ref",
+        "requested_action",
+        "connector_or_tool_result_ref"
+      ]
+    },
+    {
+      "actor_class": "CONNECTOR_PROVIDER",
+      "role": "Provider/API/service that applies an external mutation or read and returns the provider result.",
+      "can_authorize_scope": false,
+      "can_execute_mutation": true,
+      "can_satisfy_independent_review": false,
+      "can_self_authorize_promotion": false,
+      "evidence_required": [
+        "provider_action_type",
+        "target_identity",
+        "provider_result_ref"
+      ]
+    },
+    {
+      "actor_class": "RUNTIME_EXECUTOR",
+      "role": "Declared runtime that executes build, test, benchmark or validation commands.",
+      "can_authorize_scope": false,
+      "can_execute_mutation": true,
+      "can_satisfy_independent_review": false,
+      "can_self_authorize_promotion": false,
+      "evidence_required": [
+        "exact_source_ref",
+        "runtime_identity",
+        "command_or_workflow",
+        "exit_state",
+        "receipt_or_log_ref"
+      ]
+    },
+    {
+      "actor_class": "INDEPENDENT_REVIEWER",
+      "role": "Reviewer whose approval is distinct from authorship and execution when an independent review gate is required.",
+      "can_authorize_scope": false,
+      "can_execute_mutation": false,
+      "can_satisfy_independent_review": true,
+      "can_self_authorize_promotion": false,
+      "evidence_required": [
+        "reviewer_identity",
+        "reviewed_exact_ref",
+        "review_decision",
+        "review_receipt"
+      ]
+    },
+    {
+      "actor_class": "TOKEN_VAZIO_ACTOR",
+      "role": "Explicit placeholder when the responsible actor or principal is not evidenced.",
+      "can_authorize_scope": false,
+      "can_execute_mutation": false,
+      "can_satisfy_independent_review": false,
+      "can_self_authorize_promotion": false,
+      "evidence_required": [
+        "gap_id",
+        "closure_path"
+      ]
+    }
+  ],
+  "custody_profiles": [
+    {
+      "profile_id": "GITHUB_SOURCE_CODE_CUSTODY",
+      "surface": "GITHUB",
+      "purpose": "Preserve exact implementation lineage for repository objects.",
+      "authority": "Producer repository.",
+      "required_anchors": [
+        "repository",
+        "path",
+        "blob_sha_or_content_digest",
+        "commit_or_ref"
+      ],
+      "evidence_rule": "Readback must resolve the exact path at the recorded ref; content digest is required when byte identity matters.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Commit presence proves versioned history, not successful execution or correctness."
+    },
+    {
+      "profile_id": "GITHUB_REVIEW_PROMOTION_CUSTODY",
+      "surface": "GITHUB",
+      "purpose": "Preserve PR, review, status-check, protection and merge promotion history.",
+      "authority": "GitHub provider state plus the declared human/provider approval policy.",
+      "required_anchors": [
+        "pr_number",
+        "head_sha",
+        "base_ref",
+        "review_or_approval_state",
+        "required_checks_state",
+        "merge_sha_or_TOKEN_VAZIO"
+      ],
+      "evidence_rule": "Promotion is evidenced only against the exact reviewed head and provider-observed gate state.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Open PR or green partial CI does not equal authorized merge or canonical promotion."
+    },
+    {
+      "profile_id": "GITHUB_ACTIONS_EXECUTION_CUSTODY",
+      "surface": "RUNTIME",
+      "purpose": "Bind GitHub Actions execution to the exact source revision.",
+      "authority": "GitHub Actions runtime for the observed run only.",
+      "required_anchors": [
+        "repository",
+        "head_sha",
+        "workflow",
+        "run_id",
+        "job_or_check_state",
+        "logs_or_artifact_ref"
+      ],
+      "evidence_rule": "PASS requires provider-observed successful run at the exact head and declared applicable checks.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Workflow definition is IMPLEMENTED_UNTESTED until an applicable run is observed."
+    },
+    {
+      "profile_id": "DRIVE_DOCUMENT_REVISION_CUSTODY",
+      "surface": "GOOGLE_DRIVE",
+      "purpose": "Track documentary identity and revision history without claiming byte immutability from fileId alone.",
+      "authority": "Google Drive documentary surface.",
+      "required_anchors": [
+        "file_id",
+        "revision_id_or_modified_time",
+        "parent_ids_or_location",
+        "mime_type"
+      ],
+      "evidence_rule": "Readback must resolve the same fileId and observed revision/modified state.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Drive fileId is a stable locator, not a cryptographic content identity."
+    },
+    {
+      "profile_id": "DRIVE_CONTENT_MATERIALIZATION_CUSTODY",
+      "surface": "GOOGLE_DRIVE",
+      "purpose": "Bind a Drive object or exported native document to exact materialized bytes.",
+      "authority": "Drive source plus the declared materialization process.",
+      "required_anchors": [
+        "file_id",
+        "revision_or_modified_state",
+        "export_or_download_mode",
+        "media_type",
+        "content_digest",
+        "byte_count"
+      ],
+      "evidence_rule": "Digest must be computed over the exact materialized bytes; native document representation differences must be declared.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Native revision and exported bytes are related representations, not automatically byte-identical objects."
+    },
+    {
+      "profile_id": "DRIVE_MOVE_RENAME_CUSTODY",
+      "surface": "GOOGLE_DRIVE",
+      "purpose": "Preserve traceability when names or parents change while identity may remain stable.",
+      "authority": "Google Drive metadata and append-only receipt.",
+      "required_anchors": [
+        "file_id",
+        "before_name_or_parent",
+        "after_name_or_parent",
+        "provider_update_result",
+        "receipt_id"
+      ],
+      "evidence_rule": "Before and after metadata must be observed; unchanged fileId does not prove unchanged content.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Rename/move continuity is identity continuity only at the locator level unless content is independently hashed."
+    },
+    {
+      "profile_id": "TRANSFORMATION_LINEAGE_CUSTODY",
+      "surface": "RUNTIME",
+      "purpose": "Track derivation from inputs to outputs through a declared tool or command.",
+      "authority": "The runtime that executed the transformation.",
+      "required_anchors": [
+        "input_ids_or_digests",
+        "tool_or_program_version",
+        "command_or_operation",
+        "output_ids_or_digests",
+        "execution_receipt"
+      ],
+      "evidence_rule": "Every derived output must point to evidenced inputs and an observed transformation event.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "A documented transformation that was not executed remains IMPLEMENTED_UNTESTED."
+    },
+    {
+      "profile_id": "EVIDENCE_CUSTODY",
+      "surface": "CROSS_SURFACE",
+      "purpose": "Preserve the identity and provenance of measurements, tests, checks, receipts and external anchors.",
+      "authority": "The producer of the evidence plus its exact source/runtime reference.",
+      "required_anchors": [
+        "evidence_id",
+        "evidence_kind",
+        "source_or_subject_ref",
+        "producer_or_runtime",
+        "digest_or_provider_ref",
+        "state"
+      ],
+      "evidence_rule": "Evidence must be bound to the exact subject and scope it supports; promotion across scale requires an explicit bridge.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Evidence for one artifact, scale or run does not automatically support another."
+    },
+    {
+      "profile_id": "AGENT_ACTION_CUSTODY",
+      "surface": "CROSS_SURFACE",
+      "purpose": "Separate human authorization, assistant orchestration, connector execution and provider result.",
+      "authority": "Human-authorized scope plus provider-observed execution.",
+      "required_anchors": [
+        "human_authority_ref",
+        "assistant_orchestrator_ref",
+        "connector_provider",
+        "target_identity",
+        "requested_action",
+        "provider_result_ref",
+        "result_state"
+      ],
+      "evidence_rule": "The assistant may route and request actions but cannot satisfy human authorization, independent review or self-promote a claim.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Assistant text is neither provider execution nor independent evidence unless linked to an observed tool/provider result."
+    },
+    {
+      "profile_id": "CROSS_SURFACE_BINDING_CUSTODY",
+      "surface": "CROSS_SURFACE",
+      "purpose": "Bind one logical artifact across Drive and GitHub without duplicating corpus.",
+      "authority": "Federated relation record; implementation authority remains with the producer repo and documentary authority remains with Drive.",
+      "required_anchors": [
+        "artifact_id",
+        "relation",
+        "drive_file_id_or_TOKEN_VAZIO",
+        "drive_revision_or_TOKEN_VAZIO",
+        "github_repository_or_TOKEN_VAZIO",
+        "github_ref_or_TOKEN_VAZIO",
+        "github_path_or_TOKEN_VAZIO",
+        "content_digest_if_byte_equivalence_claimed"
+      ],
+      "evidence_rule": "At least one stable identity anchor per participating surface is required; byte-equivalence claims additionally require comparable digests.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "Pointer linkage proves relation, not byte identity, semantic identity or execution success."
+    },
+    {
+      "profile_id": "RECEIPT_CHAIN_CUSTODY",
+      "surface": "CROSS_SURFACE",
+      "purpose": "Preserve append-only state transitions and corrections.",
+      "authority": "Declared receipt ledger.",
+      "required_anchors": [
+        "receipt_id",
+        "timestamp",
+        "parent_or_previous_receipt",
+        "delta_summary",
+        "evidence_refs",
+        "gap",
+        "next",
+        "receipt_hash_or_provider_revision"
+      ],
+      "evidence_rule": "Corrections append successor/supersedes records; historical records are not silently rewritten.",
+      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
+      "claim_boundary": "A receipt records an observed transition; it does not by itself promote the underlying claim."
+    }
+  ],
+  "cross_surface_binding": {
+    "identity_fields": [
+      "artifact_id",
+      "repository_or_drive_file_id",
+      "commit_or_revision",
+      "timestamp",
+      "relation"
+    ],
+    "byte_equivalence_requires": [
+      "materialized_bytes_on_both_sides",
+      "same_digest_algorithm",
+      "matching_digest",
+      "representation_mode_recorded"
+    ],
+    "relation_required": true,
+    "duplication_rule": "Drive keeps map/index/receipts; GitHub keeps schemas/validators/tests/implementation. Cross-reference by ID/ref/hash instead of copying the corpus."
+  }
+}
