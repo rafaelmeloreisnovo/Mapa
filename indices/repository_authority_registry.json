@@ -4,6 +4,7 @@
   "control_plane": "rafaelmeloreisnovo/Mapa",
   "claim_allowed": false,
   "state": "DRAFT_AUDITABLE",
+  "successor_update": "2026-09-26_PRIVATE_CORPUS_PUBLIC_RISK_V1",
   "repositories": [
     {
       "repository": "rafaelmeloreisnovo/Mapa",
@@ -56,10 +57,18 @@
     {
       "repository": "rafaelmeloreisnovo/RafGitTools",
       "role": "git_tooling_runtime",
-      "canonical_for": ["rafgittools_runtime_state", "typed_git_jobs"],
-      "consumes": ["github_api", "git_repositories", "termux_runtime"],
-      "produces": ["git_operations", "runtime_state", "typed_jobs"],
+      "canonical_for": ["rafgittools_runtime_state", "typed_git_jobs", "private_corpus_intake_client", "sanitized_risk_projection_candidate"],
+      "consumes": ["github_api", "git_repositories", "termux_runtime", "local_or_saf_documents", "private_corpus_intake_contracts"],
+      "produces": ["git_operations", "runtime_state", "typed_jobs", "private_catalog_receipts", "sanitized_risk_candidates"],
       "evidence_state": "VERIFIED_LIMITED"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Rafaelia_Private",
+      "role": "private_integration_control",
+      "canonical_for": ["private_corpus_intake_policy", "private_provider_bindings", "private_risk_review"],
+      "consumes": ["private_catalog_receipts", "typed_void_contracts", "provider_state"],
+      "produces": ["private_intake_envelopes", "private_risk_reviews", "sanitized_risk_projection_candidates"],
+      "evidence_state": "SOURCE_OBSERVED"
     },
     {
       "repository": "rafaelmeloreisnovo/RafPolimata",
@@ -143,6 +152,8 @@
     "runtime_presence_is_not_runtime_execution",
     "prototype_is_not_production",
     "gap_resolution_must_preserve_predecessor_and_successor_lineage",
-    "unmapped_discovery_must_create_or_link_a_gap_id"
+    "unmapped_discovery_must_create_or_link_a_gap_id",
+    "private_corpus_identity_must_not_enter_public_control_plane",
+    "public_private_risk_projection_must_be_sanitized_and_opaque"
   ]
 }
