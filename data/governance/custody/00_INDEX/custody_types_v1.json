@@ -1,0 +1,112 @@
+{
+  "schema": "rafaelia.custody.types.v1",
+  "version": "1.0.0",
+  "state": "IMPLEMENTED_LOCAL_VALIDATED",
+  "purpose": "Differentiate custody classes without conflating provider identity, cryptographic digest, execution evidence, or claim authority.",
+  "invariants": [
+    "SOURCE!=ARTIFACT!=EXECUTION!=EVIDENCE!=CLAIM",
+    "TOKEN_VAZIO!=0",
+    "IMPLEMENTED_UNTESTED!=PASS",
+    "AUTHORIZATION!=EXECUTION!=CUSTODY!=OBSERVATION!=PROMOTION",
+    "PROVIDER_REVISION_ID!=CONTENT_DIGEST",
+    "GIT_OBJECT_ID!=RECEIPT_DIGEST",
+    "HASH_CHAIN!=MERKLE_TREE"
+  ],
+  "actor_roles": {
+    "authorized_by": "Human or delegated authority that permits the action.",
+    "planned_by": "Planner/assistant session that proposes or orchestrates within granted scope; not automatically custodian or claim authority.",
+    "executed_by": "Connector, CI, runtime, tool, or provider operation that performs the mutation/execution.",
+    "custodied_by": "Provider/repository/storage/runtime that holds the authoritative resulting state.",
+    "observed_by": "Actor/tool that performs readback or observes execution evidence.",
+    "promoted_by": "Human/domain authority that may promote a claim after its evidence gate."
+  },
+  "classes": [
+    {
+      "id": "C01_SOURCE_ORIGIN",
+      "name": "Source/origin custody",
+      "authority": "source_owner_or_origin_provider"
+    },
+    {
+      "id": "C02_DOCUMENT_STATE",
+      "name": "Document/state custody",
+      "authority": "document_provider_and_user_authorized_workspace"
+    },
+    {
+      "id": "C03_CODE_STATE",
+      "name": "Code/repository custody",
+      "authority": "producer_repository"
+    },
+    {
+      "id": "C04_EXECUTION",
+      "name": "Execution custody",
+      "authority": "execution_environment"
+    },
+    {
+      "id": "C05_EVIDENCE",
+      "name": "Evidence/receipt custody",
+      "authority": "evidence_producer"
+    },
+    {
+      "id": "C06_TRANSFER_HANDOFF",
+      "name": "Authorization and handoff custody",
+      "authority": "human_authorizer_plus_executing_provider"
+    },
+    {
+      "id": "C07_CLAIM_PROMOTION",
+      "name": "Claim-promotion custody",
+      "authority": "human_or_domain_claim_authority"
+    },
+    {
+      "id": "C08_CROSS_PROVIDER_BRIDGE",
+      "name": "Cross-provider bridge custody",
+      "authority": "federation_index_with_sources_authoritative_in_place"
+    },
+    {
+      "id": "C09_CREDENTIAL_AUTHORITY",
+      "name": "Credential/permission custody",
+      "authority": "credential_owner_and_provider_permission_system"
+    }
+  ],
+  "identity_kinds": {
+    "git_commit_oid": {
+      "semantic": "provider_native_object_identity",
+      "digest_algorithm_field": "FORBIDDEN_UNLESS_OBJECT_FORMAT_IS_PROVEN"
+    },
+    "git_blob_oid": {
+      "semantic": "provider_native_object_identity",
+      "digest_algorithm_field": "FORBIDDEN_UNLESS_OBJECT_FORMAT_IS_PROVEN"
+    },
+    "drive_revision_id": {
+      "semantic": "provider_revision_identity",
+      "digest_algorithm_field": "FORBIDDEN"
+    },
+    "provider_request_id": {
+      "semantic": "provider_operation_identity",
+      "digest_algorithm_field": "FORBIDDEN"
+    },
+    "content_digest": {
+      "semantic": "cryptographic_digest_of_declared_bytes",
+      "digest_algorithm_field": "REQUIRED"
+    },
+    "receipt_digest": {
+      "semantic": "cryptographic_digest_of_declared_canonical_receipt_bytes",
+      "digest_algorithm_field": "REQUIRED",
+      "canonicalization_field": "REQUIRED"
+    }
+  },
+  "chain_models": {
+    "linear_hash_chain": {
+      "merkle_claim_allowed": false
+    },
+    "merkle_tree": {
+      "merkle_claim_allowed": true
+    }
+  },
+  "claim_allowed": false,
+  "F_gap": [
+    "Legacy connector receipt digest/canonicalization semantics remain AUDIT until reproduced.",
+    "Provider/server enforcement is independent of this taxonomy.",
+    "Drive content-digest parity is TOKEN_VAZIO unless explicitly derived."
+  ],
+  "F_next": "Adopt taxonomy in successor custody receipts and validators without rewriting legacy history."
+}
