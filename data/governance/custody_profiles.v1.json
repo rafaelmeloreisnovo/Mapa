@@ -1,0 +1,327 @@
+{
+  "schema_version": "mapa.custody-profiles.v1",
+  "generated_at": "2026-09-27T20:57:00Z",
+  "claim_allowed_default": false,
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "provider_presence_does_not_imply_authority",
+    "cross_provider_transfer_does_not_imply_byte_identity",
+    "assistant_execution_does_not_imply_human_authorization"
+  ],
+  "providers": [
+    {
+      "id": "GOOGLE_DRIVE",
+      "durable": true,
+      "primary_authority": [
+        "DOCUMENT_MEMORY",
+        "CORPUS",
+        "INDEX",
+        "CURRENT_STATE",
+        "RECEIPT",
+        "DOCUMENTARY_EVIDENCE",
+        "CUSTODY_RECORD"
+      ],
+      "not_authority": [
+        "CODE_IMPLEMENTATION",
+        "CI_EXECUTION",
+        "RUNTIME_RESULT"
+      ]
+    },
+    {
+      "id": "GITHUB",
+      "durable": true,
+      "primary_authority": [
+        "CODE",
+        "SCHEMA",
+        "SPEC",
+        "TEST",
+        "CI",
+        "COMMIT_IDENTITY",
+        "IMPLEMENTATION_HISTORY"
+      ],
+      "not_authority": [
+        "HUMAN_INTENT",
+        "PRIVATE_MEMORY",
+        "DOCUMENTARY_CORPUS_BY_DEFAULT"
+      ]
+    },
+    {
+      "id": "CHATGPT_SESSION",
+      "durable": false,
+      "primary_authority": [
+        "DELEGATED_CONTEXT",
+        "OPERATION_REQUEST_CONTEXT"
+      ],
+      "not_authority": [
+        "DURABLE_SOURCE",
+        "CLAIM_PROMOTION",
+        "HUMAN_AUTHORIZATION",
+        "CODE_PROVIDER_OF_RECORD",
+        "DOCUMENT_PROVIDER_OF_RECORD"
+      ]
+    }
+  ],
+  "actors": [
+    {
+      "id": "HUMAN_OWNER",
+      "example": "Rafael",
+      "may_define_objective": true,
+      "may_authorize_claim_promotion": true,
+      "may_authorize_merge_or_destructive_change": true,
+      "evidence_requirement": "explicit_request_or_provider_record"
+    },
+    {
+      "id": "ASSISTANT_SERVICE",
+      "example": "ChatGPT connector session",
+      "may_define_objective": false,
+      "may_authorize_claim_promotion": false,
+      "may_authorize_merge_or_destructive_change": false,
+      "evidence_requirement": "tool_receipt_plus_delegated_scope"
+    },
+    {
+      "id": "PROVIDER_AUTOMATION",
+      "example": "GitHub Actions or Drive API automation",
+      "may_define_objective": false,
+      "may_authorize_claim_promotion": false,
+      "may_authorize_merge_or_destructive_change": false,
+      "evidence_requirement": "provider_run_id_log_or_mutation_receipt"
+    },
+    {
+      "id": "DEVICE_RUNTIME",
+      "example": "Termux/Android/local runtime",
+      "may_define_objective": false,
+      "may_authorize_claim_promotion": false,
+      "may_authorize_merge_or_destructive_change": false,
+      "evidence_requirement": "environment_identity_command_exit_and_output_binding"
+    }
+  ],
+  "custody_types": [
+    {
+      "id": "C0_SOURCE_ORIGIN",
+      "object_of_custody": "original source identity and acquisition context",
+      "authority_rule": "source provider or verified external locator governs origin",
+      "minimum_evidence": [
+        "provider_id_or_locator",
+        "observed_at",
+        "source_ref_or_TOKEN_VAZIO"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB",
+        "CHATGPT_SESSION"
+      ],
+      "claim_effect": "NO_PROMOTION"
+    },
+    {
+      "id": "C1_IDENTITY_AUTHORITY",
+      "object_of_custody": "actor, repository/file identity, permission and delegated authority",
+      "authority_rule": "authority must be observed from provider metadata or explicit human authorization",
+      "minimum_evidence": [
+        "actor_id",
+        "authority_scope",
+        "provider_metadata_or_explicit_request"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB",
+        "CHATGPT_SESSION"
+      ],
+      "claim_effect": "NO_PROMOTION"
+    },
+    {
+      "id": "C2_ARTIFACT_INTEGRITY",
+      "object_of_custody": "artifact content/version identity",
+      "authority_rule": "producer/provider of record governs artifact identity",
+      "minimum_evidence": [
+        "artifact_id",
+        "provider_ref",
+        "hash_or_provider_version"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB"
+      ],
+      "claim_effect": "NO_PROMOTION"
+    },
+    {
+      "id": "C3_TRANSFORMATION_DERIVATION",
+      "object_of_custody": "parent to child derivation",
+      "authority_rule": "derivation is valid only when parent, tool/operation and child are bound",
+      "minimum_evidence": [
+        "parent_ref",
+        "operation_or_tool_ref",
+        "child_ref",
+        "timestamp"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB",
+        "CHATGPT_SESSION"
+      ],
+      "claim_effect": "NO_PROMOTION"
+    },
+    {
+      "id": "C4_EXECUTION_RUNTIME",
+      "object_of_custody": "execution event and runtime state",
+      "authority_rule": "runtime evidence governs what actually executed",
+      "minimum_evidence": [
+        "artifact_or_commit_ref",
+        "environment_identity",
+        "command_or_entrypoint",
+        "exit_state",
+        "log_or_output_ref"
+      ],
+      "allowed_primary_providers": [
+        "GITHUB",
+        "CHATGPT_SESSION"
+      ],
+      "claim_effect": "MAY_FEED_GATE"
+    },
+    {
+      "id": "C5_EVIDENCE_MEASUREMENT",
+      "object_of_custody": "observation, test, measurement or validation result",
+      "authority_rule": "evidence must bind to exact execution/artifact/source scope",
+      "minimum_evidence": [
+        "evidence_kind",
+        "reference",
+        "scope_binding",
+        "state"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB",
+        "CHATGPT_SESSION"
+      ],
+      "claim_effect": "MAY_FEED_GATE"
+    },
+    {
+      "id": "C6_TRANSFER_CROSS_PROVIDER",
+      "object_of_custody": "handoff of identity/provenance between providers",
+      "authority_rule": "transfer must preserve a typed bridge; provider co-presence is insufficient",
+      "minimum_evidence": [
+        "artifact_id",
+        "from_provider",
+        "to_provider",
+        "source_ref",
+        "destination_ref",
+        "relation",
+        "observed_at",
+        "identity_rule"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB",
+        "CHATGPT_SESSION"
+      ],
+      "claim_effect": "NO_PROMOTION"
+    },
+    {
+      "id": "C7_DECISION_CLAIM_GATE",
+      "object_of_custody": "decision, approval, promotion or claim gate",
+      "authority_rule": "claim promotion requires sufficient evidence plus human-authorized gate when human authorization is required",
+      "minimum_evidence": [
+        "decision_actor",
+        "gate_rule",
+        "evidence_refs",
+        "decision_state"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB",
+        "CHATGPT_SESSION"
+      ],
+      "claim_effect": "GATE_ONLY"
+    },
+    {
+      "id": "C8_RECEIPT_AUDIT",
+      "object_of_custody": "append-only record of mutation, observation and next gap",
+      "authority_rule": "receipt records what occurred; it cannot retroactively create missing execution or evidence",
+      "minimum_evidence": [
+        "receipt_id",
+        "timestamp",
+        "source_refs",
+        "execution_or_observation_state",
+        "gap",
+        "next"
+      ],
+      "allowed_primary_providers": [
+        "GOOGLE_DRIVE",
+        "GITHUB"
+      ],
+      "claim_effect": "NO_PROMOTION"
+    }
+  ],
+  "transition_rules": [
+    {
+      "from": "C0_SOURCE_ORIGIN",
+      "to": "C2_ARTIFACT_INTEGRITY",
+      "requires": [
+        "source_ref",
+        "artifact_id",
+        "provider_ref"
+      ]
+    },
+    {
+      "from": "C2_ARTIFACT_INTEGRITY",
+      "to": "C3_TRANSFORMATION_DERIVATION",
+      "requires": [
+        "parent_ref",
+        "operation_or_tool_ref",
+        "child_ref"
+      ]
+    },
+    {
+      "from": "C3_TRANSFORMATION_DERIVATION",
+      "to": "C4_EXECUTION_RUNTIME",
+      "requires": [
+        "exact_artifact_or_commit_ref",
+        "environment_identity"
+      ]
+    },
+    {
+      "from": "C4_EXECUTION_RUNTIME",
+      "to": "C5_EVIDENCE_MEASUREMENT",
+      "requires": [
+        "exit_state",
+        "log_or_output_ref",
+        "scope_binding"
+      ]
+    },
+    {
+      "from": "C5_EVIDENCE_MEASUREMENT",
+      "to": "C7_DECISION_CLAIM_GATE",
+      "requires": [
+        "gate_rule",
+        "evidence_refs",
+        "decision_actor"
+      ],
+      "automatic_promotion": false
+    },
+    {
+      "from": "ANY",
+      "to": "C8_RECEIPT_AUDIT",
+      "requires": [
+        "append_only_record",
+        "gap",
+        "next"
+      ]
+    }
+  ],
+  "cross_provider_bridge": {
+    "required_fields": [
+      "artifact_id",
+      "from_provider",
+      "to_provider",
+      "source_ref",
+      "destination_ref",
+      "relation",
+      "observed_at",
+      "identity_rule"
+    ],
+    "byte_identity_rule": "assert byte identity only when the same immutable bytes are actually hashed on both sides",
+    "native_document_rule": "for native Google Workspace documents, use provider revision plus an explicitly defined semantic/export hash rule; never infer byte identity from title or content similarity",
+    "session_rule": "CHATGPT_SESSION may create or relay a bridge only through observed tool receipts; durable custody begins at the durable provider"
+  }
+}
