@@ -1,0 +1,36 @@
+name: RAFAELIA Custody Profiles Gate
+
+on:
+  pull_request:
+    paths:
+      - "docs/governance/CUSTODY_PROFILES_CROSS_PROVIDER_V1.md"
+      - "schemas/custody_profiles_registry.v1.schema.json"
+      - "data/governance/custody_profiles.v1.json"
+      - "tools/validate_custody_profiles.py"
+      - "tests/test_custody_profiles.py"
+      - ".github/workflows/custody-profiles-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-custody-profiles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/validate_custody_profiles.py
+          python -m py_compile tests/test_custody_profiles.py
+      - name: Parse registry and schema
+        run: |
+          python -m json.tool data/governance/custody_profiles.v1.json >/dev/null
+          python -m json.tool schemas/custody_profiles_registry.v1.schema.json >/dev/null
+      - name: Run custody regression suite
+        run: python tests/test_custody_profiles.py
+      - name: Validate canonical custody registry
+        run: python tools/validate_custody_profiles.py data/governance/custody_profiles.v1.json
