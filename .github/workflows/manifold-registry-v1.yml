@@ -6,6 +6,7 @@ on:
       - 'data/manifold/**'
       - 'tools/validate_manifold_registry.py'
       - 'tools/validate_manifold_gap_registry.py'
+      - 'tools/validate_manifold_dispatch.py'
       - 'tools/resolve_manifold_route.py'
       - 'tools/resolve_manifold_gap.py'
       - 'tests/test_manifold*.py'
@@ -28,5 +29,7 @@ jobs:
         run: python tools/validate_manifold_registry.py data/manifold/edges_omega_v1.jsonl data/manifold/routes_omega_v1.jsonl data/manifold/gaps_omega_v1.jsonl
       - name: Validate recursive gap registry
         run: python tools/validate_manifold_gap_registry.py data/manifold/gaps_omega_v1.jsonl
+      - name: Validate START HERE V2.1 dispatch
+        run: python tools/validate_manifold_dispatch.py data/manifold/dispatch_omega_v1.json data/manifold/routes_omega_v1.jsonl
       - name: Run manifold tests
         run: python -m unittest discover -s tests -p 'test_manifold*.py'

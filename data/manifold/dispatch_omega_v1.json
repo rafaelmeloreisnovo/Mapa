@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "dispatch_version": "V2.1",
+  "canonical_boot": {
+    "id": "1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+    "state": "ACTIVE"
+  },
+  "roots": {
+    "canonical_index": {
+      "id": "1lAQgsWnKEsNgKeKNK-f5GEKgr1IpkfS0p_svzEWr-dA",
+      "required": true
+    },
+    "routes": {
+      "id": "1fPelyCM24WCmfZDs1wjz7MWRW2q6ww44hcPuTEu5k2g",
+      "required": true
+    },
+    "manifold": {
+      "id": "1R3IVTIg2vUFUidBBgwU2Q0HU51it0UYt5213nm0SAO0",
+      "required": false
+    },
+    "invariants": {
+      "id": "1G20pRX_hojvzoYTUoBixKVArBpyNYwcjtkcBaPQFFwo",
+      "required": false
+    },
+    "ledger": {
+      "id": "1NEU7lg7iUZf1u7lX-SEKuc-knSDGlF5gOx7qzXcJ1yc",
+      "required": true
+    },
+    "current_state": {
+      "id": "1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ",
+      "required": true
+    }
+  },
+  "mu_read": {
+    "default_roots": 3,
+    "default_depth": 1,
+    "expand_if": [
+      "missing_source",
+      "contradiction",
+      "unresolved_authority",
+      "missing_evidence",
+      "explicit_request"
+    ]
+  },
+  "gates": [
+    "source_resolved",
+    "authority_resolved",
+    "state_resolved",
+    "evidence_resolved"
+  ],
+  "fail_closed": {
+    "required_fields": [
+      "SOURCE",
+      "AUTHORITY",
+      "EXECUTION_TARGET",
+      "EVIDENCE_RULE"
+    ],
+    "blocked_state": "ROUTE_STATE_BLOCKED",
+    "token_empty": "TOKEN_VAZIO"
+  },
+  "superseded": [
+    {
+      "id": "1l2hhCHYFBouU4qNU-WFY3kqI1wEzfJ64EDvi2iH1mbI",
+      "by": "1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+      "reason": "START HERE LITE is historical/rollback only"
+    }
+  ],
+  "route_registry": "data/manifold/routes_omega_v1.jsonl",
+  "claim_allowed": false
+}
