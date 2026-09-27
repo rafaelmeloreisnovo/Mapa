@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/custody_profiles_registry.v1.schema.json",
+  "title": "RAFAELIA Custody Profiles Registry V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "claim_allowed_default",
+    "invariants",
+    "providers",
+    "actors",
+    "custody_types",
+    "transition_rules",
+    "cross_provider_bridge"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "mapa.custody-profiles.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "claim_allowed_default": {
+      "const": false
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "providers": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "durable",
+          "primary_authority",
+          "not_authority"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "GOOGLE_DRIVE",
+              "GITHUB",
+              "CHATGPT_SESSION"
+            ]
+          },
+          "durable": {
+            "type": "boolean"
+          },
+          "primary_authority": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "not_authority": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "example",
+          "may_define_objective",
+          "may_authorize_claim_promotion",
+          "may_authorize_merge_or_destructive_change",
+          "evidence_requirement"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "HUMAN_OWNER",
+              "ASSISTANT_SERVICE",
+              "PROVIDER_AUTOMATION",
+              "DEVICE_RUNTIME"
+            ]
+          },
+          "example": {
+            "type": "string",
+            "minLength": 1
+          },
+          "may_define_objective": {
+            "type": "boolean"
+          },
+          "may_authorize_claim_promotion": {
+            "type": "boolean"
+          },
+          "may_authorize_merge_or_destructive_change": {
+            "type": "boolean"
+          },
+          "evidence_requirement": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "custody_types": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "object_of_custody",
+          "authority_rule",
+          "minimum_evidence",
+          "allowed_primary_providers",
+          "claim_effect"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^C[0-8]_[A-Z0-9_]+$"
+          },
+          "object_of_custody": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authority_rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minimum_evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "allowed_primary_providers": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "GOOGLE_DRIVE",
+                "GITHUB",
+                "CHATGPT_SESSION"
+              ]
+            }
+          },
+          "claim_effect": {
+            "enum": [
+              "NO_PROMOTION",
+              "MAY_FEED_GATE",
+              "GATE_ONLY"
+            ]
+          }
+        }
+      }
+    },
+    "transition_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "requires"
+        ],
+        "properties": {
+          "from": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requires": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "automatic_promotion": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "cross_provider_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_fields",
+        "byte_identity_rule",
+        "native_document_rule",
+        "session_rule"
+      ],
+      "properties": {
+        "required_fields": {
+          "type": "array",
+          "minItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "byte_identity_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "native_document_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "session_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
