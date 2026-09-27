@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/custody-chain-type-registry.schema.json",
+  "title": "RAFAELIA Federated Custody Chain Type Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "registry_id",
+    "state",
+    "claim_allowed",
+    "invariants",
+    "surface_authority",
+    "actor_classes",
+    "custody_profiles",
+    "cross_surface_binding"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.custody-chain-type-registry.v1"
+    },
+    "registry_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "SPEC",
+        "IMPLEMENTED_UNTESTED",
+        "PASS",
+        "FAIL",
+        "AUDIT",
+        "PENDING",
+        "TOKEN_VAZIO"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "surface_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "github",
+        "drive",
+        "runtime",
+        "cross_surface"
+      ],
+      "properties": {
+        "github": {
+          "type": "string",
+          "minLength": 1
+        },
+        "drive": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cross_surface": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "actor_classes": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "actor_class",
+          "role",
+          "can_authorize_scope",
+          "can_execute_mutation",
+          "can_satisfy_independent_review",
+          "can_self_authorize_promotion",
+          "evidence_required"
+        ],
+        "properties": {
+          "actor_class": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "can_authorize_scope": {
+            "type": "boolean"
+          },
+          "can_execute_mutation": {
+            "type": "boolean"
+          },
+          "can_satisfy_independent_review": {
+            "type": "boolean"
+          },
+          "can_self_authorize_promotion": {
+            "type": "boolean"
+          },
+          "evidence_required": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "custody_profiles": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile_id",
+          "surface",
+          "purpose",
+          "authority",
+          "required_anchors",
+          "evidence_rule",
+          "missing_behavior",
+          "claim_boundary"
+        ],
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          },
+          "surface": {
+            "enum": [
+              "GITHUB",
+              "GOOGLE_DRIVE",
+              "RUNTIME",
+              "CROSS_SURFACE"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_anchors": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "evidence_rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "missing_behavior": {
+            "const": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED"
+          },
+          "claim_boundary": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "cross_surface_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity_fields",
+        "byte_equivalence_requires",
+        "relation_required",
+        "duplication_rule"
+      ],
+      "properties": {
+        "identity_fields": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "byte_equivalence_requires": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "relation_required": {
+          "type": "boolean"
+        },
+        "duplication_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
