@@ -20,5 +20,11 @@
   },
   "legacy_chain": "data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl",
   "legacy_policy": "preserve; do not rewrite; successor receipts may supersede semantics with explicit parent/ref",
-  "claim_allowed": false
+  "claim_allowed": false,
+  "federated_authority": {
+    "canonical_registry": "data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json",
+    "canonical_schema": "schemas/custody-chain-type-registry.schema.json",
+    "local_projection": "data/governance/custody/00_INDEX/custody_types_v1.json",
+    "crosswalk": "data/governance/custody/01_ATLAS/CUSTODY_TYPES_V1_CANONICAL_MAPPING.json"
+  }
 }
