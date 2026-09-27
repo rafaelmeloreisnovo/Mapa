@@ -39,3 +39,17 @@ Drive governs documentary state/indexes/receipts. GitHub producer repos govern c
 `data/control-plane/CONNECTOR_CUSTODY_CHAIN.jsonl` remains historical and is not rewritten. Its bootstrap digest semantics remain AUDIT until a successor binds reproducible canonicalization and exact identities.
 
 `claim_allowed=false`: taxonomy/documentation alone does not prove historical custody integrity.
+
+
+## Canonical federation relationship
+
+This C01..C09 vocabulary is a **local typed projection**, not a second federated registry.
+
+Federated authority remains `data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json`.
+The crosswalk is `data/governance/custody/01_ATLAS/CUSTODY_TYPES_V1_CANONICAL_MAPPING.json`.
+
+The projection is intentionally many-to-one/conditional where one local shorthand spans several canonical events. A local class may select a canonical profile only when the observed surface and event semantics match that profile.
+
+`C09_CREDENTIAL_AUTHORITY` has no direct canonical custody profile. It therefore remains `TOKEN_VAZIO_NO_DIRECT_CANONICAL_PROFILE` at the profile-mapping layer; permission evidence may be referenced through agent-action/evidence custody when actually observed, but credentials/secrets never become receipts.
+
+Canonical profile IDs, actor classes and claim boundaries take precedence over this convenience vocabulary.
