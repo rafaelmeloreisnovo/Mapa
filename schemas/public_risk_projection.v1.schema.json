@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rafaelia:mapa:public-risk-projection:v1",
+  "title": "Mapa Public Risk Projection V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "risk_handle", "risk_classes", "mitigation_state",
+    "evidence_state", "private_evidence_pointer", "raw_corpus_exposed",
+    "source_name_exposed", "source_hash_exposed", "provider_id_exposed",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "risk_handle": {"type": "string", "pattern": "^RISK-[A-Za-z0-9-]+$"},
+    "risk_classes": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "mitigation_state": {
+      "type": "string",
+      "enum": ["REVIEW_REQUIRED", "MITIGATING", "MITIGATED", "BLOCKED", "TOKEN_VAZIO"]
+    },
+    "evidence_state": {
+      "type": "string",
+      "enum": ["PRIVATE_EVIDENCE_BOUND", "PRIVATE_EVIDENCE_PENDING", "TOKEN_VAZIO"]
+    },
+    "private_evidence_pointer": {
+      "oneOf": [
+        {"const": "PRIVATE_CUSTODY_RECEIPT_REQUIRED"},
+        {"type": "string", "pattern": "^PRIVREF-[A-Za-z0-9-]+$"}
+      ]
+    },
+    "summary": {"type": ["string", "null"], "maxLength": 280},
+    "raw_corpus_exposed": {"const": false},
+    "source_name_exposed": {"const": false},
+    "source_hash_exposed": {"const": false},
+    "provider_id_exposed": {"const": false},
+    "claim_allowed": {"const": false}
+  }
+}
