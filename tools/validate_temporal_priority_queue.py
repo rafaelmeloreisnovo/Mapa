@@ -94,7 +94,7 @@ def validate(data:dict[str,Any],now:datetime|None=None)->list[str]:
         for invariant in sorted(required-set(invariants)): fail(errors,f"REQUIRED_INVARIANT_MISSING:{invariant}")
     return errors
 def main()->int:
-    parser=argparse.ArgumentParser(); parser.add_argument("path",nargs="?",default="data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v5.json"); args=parser.parse_args(); path=Path(args.path)
+    parser=argparse.ArgumentParser(); parser.add_argument("path",nargs="?",default="data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v6.json"); args=parser.parse_args(); path=Path(args.path)
     try: data=json.loads(path.read_text(encoding="utf-8"))
     except (OSError,json.JSONDecodeError) as exc: print(f"FAIL: unable to read/parse {path}: {exc}",file=sys.stderr); return 2
     if not isinstance(data,dict): print("FAIL: queue root must be an object",file=sys.stderr); return 2
