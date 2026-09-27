@@ -17,14 +17,33 @@ on:
       - "tests/test_custody_chain_type_registry.py"
       - "docs/governance/CUSTODY_CHAIN_FEDERATION_V1.md"
       - ".github/workflows/custody-chain-federation-v1.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: custody-chain-federation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
+      - name: Checkout exact source head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Set up Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile scripts/validate_custody_chain_type_registry.py
+          python -m py_compile tests/test_custody_chain_type_registry.py
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
@@ -32,6 +51,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Validate registry
-        run: python3 scripts/validate_custody_chain_type_registry.py
+        run: python scripts/validate_custody_chain_type_registry.py
       - name: Unit tests
-        run: python3 -m unittest tests.test_custody_chain_type_registry -v
+        run: python -m unittest tests.test_custody_chain_type_registry -v
