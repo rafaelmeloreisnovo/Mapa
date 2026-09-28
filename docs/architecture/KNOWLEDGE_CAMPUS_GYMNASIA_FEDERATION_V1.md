@@ -48,4 +48,8 @@ Default query starts with at most three roots and depth one. Expansion happens o
 
 ## Activation gate
 
-RafGitTools PR #558 @ e3756a4052e07e4a578052e41be981da9672b879 and private-library PR #61 @ b3e8206a2c01b4322c35a0d7b411eb26013f5e1a are unmerged at creation. This federation therefore remains PENDING_SOURCE_MERGES and claim_allowed=false until exact merged-main readback.
+RafGitTools PR #558 @ e3756a4052e07e4a578052e41be981da9672b879 and private-library PR #61 @ 6c5a6aa0fc1e631bcb2ab5d851a7f75e1785c78b are unmerged at creation. This federation therefore remains PENDING_SOURCE_MERGES and claim_allowed=false until exact merged-main readback.
+
+## Engineering dynamics gymnasium
+
+`GYM-ENGINEERING-DYNAMICS` routes mechanism/component/rotation/torque/moment/thrust/control-axis records. Cross-domain mechanical/aerospace comparisons remain `ANALOGY_TO` until independently evidenced.
