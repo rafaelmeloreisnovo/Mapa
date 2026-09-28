@@ -257,3 +257,14 @@ F_next = smallest reproducible next action
 ```
 
 **Important:** Preserve all TOKEN_VAZIO and federation blockers. Do not invent merit to make F_ok look complete.
+
+
+## Current AI architecture manifold
+
+Before broad repository search for cross-repository work, open:
+
+- `data/manifold/ai_architecture_current_v1.json` — bounded current architecture snapshot;
+- `docs/AI_ARCHITECTURE_MANIFOLD_CURRENT_V1.md` — human/AI reading guide;
+- `tools/validate_ai_architecture_current_v1.py` — structural validator.
+
+The manifold is a router/state snapshot, not a substitute for producer-local evidence. If it disagrees with a fresher exact producer HEAD, classify the snapshot as stale and emit a successor rather than forcing the producer to match documentation.
