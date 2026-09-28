@@ -1,0 +1,39 @@
+{
+  "schema": "rafaelia.session-ai-work-dispatch-baseline.v1",
+  "observed_at": "2026-09-28",
+  "claim_allowed": false,
+  "current_heads": {
+    "Mapa": "7853f23053044c9b69d6b81f7f5f71fa285f864c",
+    "RafGitTools": "606525722624116c7d7f750f08c59f9462d619f8",
+    "Rafaelia_Private": "8a3dbb7f8ad586c059d3f6687e9d92623a0c98cd"
+  },
+  "source_blobs": {
+    "practice_atlas": "e93c915fa6ddc73b85f0bd934af508e2627a9994",
+    "practice_router": "a43e229b19f5dc01b109301f7c15f75f23d7c91a",
+    "active_work_ledger_v2": "c610030f3aeb73ef02b12b34804d2c8ed845a2bb"
+  },
+  "drive_ids": {
+    "active_boot": "1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+    "current_state": "1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+    "muwrite_ledger": "1NEU7lg7iUZf1u7lX-SEKuc-knSDGlF5gOx7qzXcJ1yc",
+    "atlas_folder": "14eeJ9W8XsnSXrtryAIwqMxMIgPysOi6n",
+    "routes_folder": "13xho8rcCljH5EpMcjdtZA2esQFEx1CP3",
+    "edges_folder": "1fPV_go4pcfvO478HhX0LKN2IUUuTSEHJ",
+    "evidence_folder": "1hgdUlqm9rjp8XHa3UIyE7923ls10tteg",
+    "receipts_folder": "1J_snVtxYk_LFuRwHb6ozpLt0NYlI4wJ7"
+  },
+  "session_source_state": "SOURCE_OBSERVED_IN_CURRENT_CHAT_BUT_PROVIDER_ID_TOKEN_VAZIO",
+  "before_state": "session intent distributed across chat + existing Practice ATLAS/Practice Router/Active Work Ledger",
+  "expected_after_state": "single pointer-only session dispatcher + executor adapter + Drive documentary mirror",
+  "evidence_rule": "repository/Drive materialization receipts supersede chat-only descriptions for durable reconstruction",
+  "falsifier": "packet lacks source/authority/execution/evidence rule; private body copied; assignment claimed as execution without run/receipt",
+  "rollback": "drop draft branches; mark Drive session docs superseded; leave existing authorities untouched",
+  "reconstruction_minimum": [
+    "PRACTICE_ATLAS_V1 exact source",
+    "active-work-ledger.v2 exact source",
+    "practice-router.v1 exact source",
+    "SESSION_AI_WORK_DISPATCH_V1",
+    "routes JSONL",
+    "Drive pointer docs/receipt"
+  ]
+}
