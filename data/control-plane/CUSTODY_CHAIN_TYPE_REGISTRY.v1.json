@@ -268,24 +268,6 @@
       "claim_boundary": "A configured secret name does not prove a secret value exists, is valid, has the declared scope, or was successfully used."
     },
     {
-      "profile_id": "CREDENTIAL_PERMISSION_CUSTODY",
-      "surface": "CROSS_SURFACE",
-      "purpose": "Bind non-secret credential and permission authority state without storing or exposing secret values.",
-      "authority": "Credential owner plus the provider permission system for the observed scope.",
-      "required_anchors": [
-        "provider",
-        "principal_or_subject_ref",
-        "target_resource",
-        "permission_scope",
-        "credential_locator_or_secret_name_without_value",
-        "observed_state",
-        "provider_result_or_readback_ref"
-      ],
-      "evidence_rule": "Record only non-secret metadata and provider-observed permission state. Secret values, tokens, passwords and private key material are never receipt content. Presence, validity, scope and successful use are distinct observations.",
-      "missing_behavior": "TOKEN_VAZIO_OR_ROUTE_STATE_BLOCKED",
-      "claim_boundary": "A configured secret name does not prove a secret value exists, is valid, has the declared scope, or was successfully used."
-    },
-    {
       "profile_id": "CROSS_SURFACE_BINDING_CUSTODY",
       "surface": "CROSS_SURFACE",
       "purpose": "Bind one logical artifact across Drive and GitHub without duplicating corpus.",
