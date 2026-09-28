@@ -13,7 +13,28 @@ class ManifoldModelGapMatrixTests(unittest.TestCase):
         self.assertEqual(out["status"],"PASS")
         self.assertEqual(out["models"],15)
         self.assertFalse(out["claim_allowed"])
-        self.assertGreaterEqual(out["token_vazio"],15)
+        self.assertGreaterEqual(out["token_vazio"],14)
+
+    def test_closed_model_can_have_no_token_vazio(self):
+        import json, tempfile
+        source=json.loads((ROOT/"data"/"manifold"/"model_gap_matrix_v1.json").read_text(encoding="utf-8"))
+        source["models"][0]["state"]="PASS_BOUNDED"
+        source["models"][0]["token_vazio"]=[]
+        with tempfile.TemporaryDirectory() as td:
+            p=pathlib.Path(td)/"matrix.json"
+            p.write_text(json.dumps(source),encoding="utf-8")
+            out=MOD.validate(p)
+            self.assertEqual(out["status"],"PASS")
+
+    def test_open_model_without_token_vazio_fails_closed(self):
+        import json, tempfile
+        source=json.loads((ROOT/"data"/"manifold"/"model_gap_matrix_v1.json").read_text(encoding="utf-8"))
+        source["models"][0]["token_vazio"]=[]
+        with tempfile.TemporaryDirectory() as td:
+            p=pathlib.Path(td)/"matrix.json"
+            p.write_text(json.dumps(source),encoding="utf-8")
+            with self.assertRaises(SystemExit):
+                MOD.validate(p)
 
 if __name__=="__main__":
     unittest.main()
