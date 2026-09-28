@@ -1,6 +1,6 @@
 # RAFAELIA — Session AI Work Dispatch V1
 
-State: `IMPLEMENTED_UNTESTED`
+State: `IMPLEMENTED_UNTESTED`  
 claim_allowed: `false`
 
 ## Purpose
@@ -8,6 +8,7 @@ claim_allowed: `false`
 This is a session-level overlay. It converts the current conversation into typed work packets without copying the underlying corpus.
 
 Canonical sources remain:
+
 - `Mapa:data/control-plane/PRACTICE_ATLAS_V1.json` — federated routing authority.
 - `Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json` — current private workstream authority.
 - `RafGitTools:configs/practice-router.v1.json` — local executor adapter.
