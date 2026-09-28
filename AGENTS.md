@@ -258,7 +258,6 @@ F_next = smallest reproducible next action
 
 **Important:** Preserve all TOKEN_VAZIO and federation blockers. Do not invent merit to make F_ok look complete.
 
-
 ## Current AI architecture manifold
 
 Before broad repository search for cross-repository work, open:
