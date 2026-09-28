@@ -40,7 +40,7 @@ def validate_dispatch(manifest_path, routes_path):
     obj = load_json(manifest_path)
     required = {
         "schema_version", "dispatch_version", "canonical_boot", "roots",
-        "mu_read", "gates", "fail_closed", "superseded",
+        "mu_read", "gates", "fail_closed", "hotstate_policy", "superseded",
         "route_registry", "claim_allowed",
     }
     missing = sorted(required - set(obj))
@@ -82,10 +82,29 @@ def validate_dispatch(manifest_path, routes_path):
     if fc.get("token_empty") != "TOKEN_VAZIO":
         fail("dispatch: empty token mismatch")
 
+    hot = obj["hotstate_policy"]
+    if hot.get("mode") != "HOTSTATE_O1":
+        fail("dispatch: hotstate mode mismatch")
+    if not 1 <= hot.get("max_lines", 0) <= 80:
+        fail("dispatch: hotstate max_lines out of budget")
+    if not 1 <= hot.get("max_active_nodes", 0) <= 3:
+        fail("dispatch: hotstate max_active_nodes out of budget")
+    if hot.get("history_sink") != "LEDGER_OR_SNAPSHOT":
+        fail("dispatch: hotstate history sink mismatch")
+    if hot.get("mutation_rule") != "REPLACE_ACTIVE_SNAPSHOT_NOT_APPEND_HISTORY":
+        fail("dispatch: hotstate mutation rule mismatch")
+    if hot.get("predecessor_required") is not True:
+        fail("dispatch: hotstate predecessor must be preserved")
+
+    current_state_id = roots["current_state"]["id"]
+    predecessor_id = "1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ"
+
     superseded = obj["superseded"]
     old_id = "1l2hhCHYFBouU4qNU-WFY3kqI1wEzfJ64EDvi2iH1mbI"
     if not any(row.get("id") == old_id and row.get("by") == obj["canonical_boot"]["id"] for row in superseded):
         fail("dispatch: START_LITE supersession missing")
+    if not any(row.get("id") == predecessor_id and row.get("by") == current_state_id for row in superseded):
+        fail("dispatch: CURRENT_STATE predecessor supersession missing")
 
     routes = read_jsonl(routes_path)
     active = [row for row in routes if row.get("state") != "SUPERSEDED"]
@@ -111,6 +130,8 @@ def validate_dispatch(manifest_path, routes_path):
         "legacy_active_routes": 0,
         "mu_read_roots": mu["default_roots"],
         "mu_read_depth": mu["default_depth"],
+        "hotstate_max_lines": hot["max_lines"],
+        "hotstate_max_active_nodes": hot["max_active_nodes"],
         "claim_allowed": False,
     }
 

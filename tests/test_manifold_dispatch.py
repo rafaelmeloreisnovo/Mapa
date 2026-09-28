@@ -18,6 +18,8 @@ class ManifoldDispatchTests(unittest.TestCase):
         self.assertEqual(out["legacy_active_routes"], 0)
         self.assertEqual(out["mu_read_roots"], 3)
         self.assertEqual(out["mu_read_depth"], 1)
+        self.assertEqual(out["hotstate_max_lines"], 80)
+        self.assertEqual(out["hotstate_max_active_nodes"], 3)
         self.assertFalse(out["claim_allowed"])
 
     def test_active_start_lite_route_fails_closed(self):
@@ -43,6 +45,38 @@ class ManifoldDispatchTests(unittest.TestCase):
             (ROOT / "data/manifold/dispatch_omega_v1.json").read_text(encoding="utf-8")
         )
         source["gates"] = [g for g in source["gates"] if g != "authority_resolved"]
+        with tempfile.TemporaryDirectory() as td:
+            manifest = Path(td) / "dispatch.json"
+            manifest.write_text(json.dumps(source), encoding="utf-8")
+            with self.assertRaises(SystemExit):
+                validate_dispatch(
+                    manifest,
+                    ROOT / "data/manifold/routes_omega_v1.jsonl",
+                )
+
+    def test_hotstate_budget_fails_closed(self):
+        source = json.loads(
+            (ROOT / "data/manifold/dispatch_omega_v1.json").read_text(encoding="utf-8")
+        )
+        source["hotstate_policy"]["max_lines"] = 81
+        with tempfile.TemporaryDirectory() as td:
+            manifest = Path(td) / "dispatch.json"
+            manifest.write_text(json.dumps(source), encoding="utf-8")
+            with self.assertRaises(SystemExit):
+                validate_dispatch(
+                    manifest,
+                    ROOT / "data/manifold/routes_omega_v1.jsonl",
+                )
+
+    def test_current_state_predecessor_must_be_preserved(self):
+        source = json.loads(
+            (ROOT / "data/manifold/dispatch_omega_v1.json").read_text(encoding="utf-8")
+        )
+        source["superseded"] = [
+            row
+            for row in source["superseded"]
+            if row["id"] != "1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ"
+        ]
         with tempfile.TemporaryDirectory() as td:
             manifest = Path(td) / "dispatch.json"
             manifest.write_text(json.dumps(source), encoding="utf-8")
