@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "registry_id": "RAFAELIA_MODEL_GAP_MATRIX_V1",
   "generated_from": {
-    "current_state": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+    "current_state": "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
     "canonical_boot": "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
     "canonical_gap_registry": "data/manifold/gaps_omega_v1.jsonl@e4fb3de76912a7a64cbe04f740b559e104e7bb15",
     "dispatch_evidence": "commit:ffddbad3abf789eae716aba0b397d76237a0f464",
@@ -34,20 +34,20 @@
     {
       "model_id": "M01",
       "model": "BOOTSTRAP_CANONICO",
-      "state": "PARTIAL_BOUNDED",
+      "state": "READY_TO_TEST",
       "gap_kind": "MISSING_PROMOTION",
-      "gap": "START HERE V2.1 esta integrado no Mapa main e no Drive, mas o machine-dispatch main ainda aponta para o CURRENT_STATE predecessor; PR#688 implementa HOTSTATE V2 binding e permanece pendente de exact-head CI/merge.",
+      "gap": "Drive START HERE and Canonical Index now point to HOTSTATE V3; this candidate updates the Mapa machine dispatch and human-entry current_state binding to V3. Merge/main readback remains the closure gate.",
       "token_vazio": [
-        "TOKEN_VAZIO_MACHINE_DISPATCH_HOTSTATE_BINDING"
+        "TOKEN_VAZIO_MACHINE_DISPATCH_V3_MERGE"
       ],
       "linked_gap_refs": [],
       "evidence_needed": [
-        "PR #688 exact-head manifold/CI terminal",
-        "machine-dispatch main readback apontando CURRENT_STATE HOTSTATE V2",
-        "successor receipt apos merge autorizado"
+        "exact-head CI/manifold validation for the HOTSTATE V3 machine successor",
+        "merged main readback with dispatch current_state == HOTSTATE V3",
+        "successor receipt binding the merged commit"
       ],
-      "closure_criterion": "fechar somente quando o machine dispatch no main apontar para HOTSTATE V2 e o main readback estiver registrado; bootstrap documental ja integrado nao deve ser rebaixado",
-      "next": "acompanhar PR#688; nao duplicar successor"
+      "closure_criterion": "close only after this successor is merged and main readback resolves HOTSTATE V3; Drive pointer promotion alone is documentary evidence",
+      "next": "observe exact-head candidate gates; merge/promotion remains human/provider controlled"
     },
     {
       "model_id": "M02",
