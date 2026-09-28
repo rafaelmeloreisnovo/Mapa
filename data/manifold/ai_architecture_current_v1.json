@@ -1,8 +1,8 @@
 {
   "schema": "rafaelia.ai-architecture-manifold-current.v1",
   "version": "1.0.0",
-  "observed_at": "2026-09-28T08:56:00-03:00",
-  "state": "IMPLEMENTED_UNTESTED",
+  "observed_at": "2026-09-28T14:25:00-03:00",
+  "state": "STRUCTURAL_PASS_MERGED",
   "claim_allowed": false,
   "purpose": "Bounded reconstructible view of current RAFAELIA architecture for humans and AIs: entry, authority, state, execution planes, agent roles, work packets, stale evidence, gaps and next route.",
   "invariants": [
@@ -35,14 +35,12 @@
       "relation": "canonical_boot"
     },
     "drive_current_state": {
-      "id": "1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
-      "title": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V2",
-      "updated_at": "2026-09-28T05:15:17-03:00",
-      "observed_mapa_main": "959a64d497c87bc84b35b70dc6918fe036f79147",
-      "observed_rafgittools_main": "ad4966029bd71a330a3d58fee3c642e2de56c983",
-      "current_mapa_main": "f17c98eff399710ff09725fa311e9cfe3fee3acc",
-      "current_rafgittools_main": "a81f0d9ddaae532cf26e4ba23651c4704abd8fc4",
-      "staleness": "STALE_BOUNDED_SUCCESSOR_REQUIRED"
+      "id": "1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+      "title": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V3",
+      "updated_at": "2026-09-28T14:25:00-03:00",
+      "architecture_authority_commit": "56dca415e7a6a460b70fda4f59a320fe1b5198ba",
+      "rafgittools_authority_commit": "a81f0d9ddaae532cf26e4ba23651c4704abd8fc4",
+      "staleness": "CURRENT_FOR_PINNED_ARCHITECTURE_AUTHORITY"
     },
     "mapa_practice_atlas": {
       "path": "data/control-plane/PRACTICE_ATLAS_V1.json",
@@ -51,6 +49,10 @@
     "mapa_session_dispatch": {
       "path": "data/control-plane/SESSION_AI_WORK_DISPATCH_V1.json",
       "blob_sha": "c1d1d8f1692c74957f8b70968fa863f855d93cb0"
+    },
+    "gap_of_gaps_drive": {
+      "id": "13odI4uadwvLuIrXUMOGo3inPSSQq0WVWiBLZQ9Mwpnw",
+      "relation": "RELATED_GAP_INDEX_NOT_ARCHITECTURE_PROOF"
     }
   },
   "authorities": [
@@ -73,7 +75,10 @@
       "id": "AUTH_PRIVATE",
       "authority": "rafaelmeloreisnovo/Rafaelia_Private",
       "scope": "private payload, authorship/provenance and approved opaque pointers",
-      "fresh_read": "TOKEN_VAZIO_NOT_READ_IN_THIS_PASS"
+      "fresh_read": "FRESH_METADATA_POINTER_SCOPE",
+      "active_work_ledger_blob": "c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "interrepo_gap_register_blob": "0e3bd175ad5565ea622a2dc272fdfe410eec15a8",
+      "body_policy": "metadata/status/gap pointers only; private payload not copied"
     },
     {
       "id": "AUTH_PRODUCER",
@@ -94,17 +99,17 @@
       "id": "N01_DRIVE_HOTSTATE",
       "kind": "mutable_hotstate",
       "authority": "AUTH_DOCUMENTARY",
-      "state": "STALE_BOUNDED_SUCCESSOR_REQUIRED",
-      "ref": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
-      "summary": "O(1) active-state router; history belongs in ledger/snapshot."
+      "state": "ACTIVE_CURRENT",
+      "ref": "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+      "summary": "HOTSTATE V3 is the active O(1) documentary router; HOTSTATE V2 is preserved as predecessor."
     },
     {
       "id": "N02_MAPA_FEDERATED_CONTROL",
       "kind": "federated_control_plane",
       "authority": "AUTH_FEDERATED",
-      "state": "CURRENT_HEAD_OBSERVED",
-      "ref": "GitHub:rafaelmeloreisnovo/Mapa@f17c98eff399710ff09725fa311e9cfe3fee3acc",
-      "summary": "Federated authority for routes, reconciliation, manifold, governance and cross-repo boundaries."
+      "state": "PINNED_ARCHITECTURE_AUTHORITY",
+      "ref": "GitHub:rafaelmeloreisnovo/Mapa@56dca415e7a6a460b70fda4f59a320fe1b5198ba",
+      "summary": "Merged architecture authority for this manifold; moving main may advance independently."
     },
     {
       "id": "N03_RAFGITTOOLS_EXECUTOR",
@@ -118,9 +123,9 @@
       "id": "N04_PRIVATE_CUSTODY",
       "kind": "private_custody",
       "authority": "AUTH_PRIVATE",
-      "state": "REFERENCED_NOT_REFRESHED",
+      "state": "FRESH_METADATA_POINTER_SCOPE",
       "ref": "GitHub:rafaelmeloreisnovo/Rafaelia_Private",
-      "summary": "Private custody and pointer export; no fresh private read in this pass."
+      "summary": "Private custody metadata/gap pointers freshly read at exact blobs; private payload not copied."
     },
     {
       "id": "N05_DRIVE_CUSTODY_CHAIN",
@@ -540,48 +545,75 @@
   ],
   "current_observations": [
     {
-      "id": "OBS_MAPA_HEAD",
-      "state": "OBSERVED",
-      "evidence": "GitHub:rafaelmeloreisnovo/Mapa@f17c98eff399710ff09725fa311e9cfe3fee3acc",
-      "note": "Mapa current head observed in this pass."
+      "id": "OBS_MAPA_ARCHITECTURE_AUTHORITY",
+      "state": "PINNED_MERGED",
+      "evidence": "GitHub:rafaelmeloreisnovo/Mapa@56dca415e7a6a460b70fda4f59a320fe1b5198ba",
+      "note": "PR#701 architecture manifold is merged; this immutable commit is the architecture authority for this state transition."
     },
     {
       "id": "OBS_RAFGITTOOLS_HEAD",
       "state": "OBSERVED",
       "evidence": "GitHub:rafaelmeloreisnovo/RafGitTools@a81f0d9ddaae532cf26e4ba23651c4704abd8fc4",
-      "note": "RafGitTools current head observed in this pass."
+      "note": "RafGitTools executor head observed in the bounded architecture pass."
     },
     {
-      "id": "OBS_DRIVE_HOTSTATE_STALENESS",
-      "state": "OBSERVED_STALE",
-      "evidence": "Drive CURRENT_STATE readback versus GitHub current heads",
-      "note": "HOTSTATE needs successor when repository heads materially advance."
+      "id": "OBS_DRIVE_HOTSTATE_SUCCESSOR",
+      "state": "RESOLVED_BY_SUCCESSOR",
+      "evidence": "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+      "note": "HOTSTATE V3 supersedes 1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc; START HERE and Canonical Index readbacks point to V3."
+    },
+    {
+      "id": "OBS_PRIVATE_METADATA_REFRESH",
+      "state": "EVIDENCED_SCOPED",
+      "evidence": [
+        "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+        "Rafaelia_Private:results/interrepo_gap_register.jsonl@0e3bd175ad5565ea622a2dc272fdfe410eec15a8"
+      ],
+      "note": "Freshness applies to metadata/status/gap pointer scope only."
     }
   ],
   "gaps": [
     {
       "id": "G_ARCH_001",
-      "state": "READY_TO_RECONCILE",
-      "gap": "Drive CURRENT_STATE is behind one or more observed repository heads.",
-      "next": "Append successor μWRITE and refresh HOTSTATE without erasing predecessor."
+      "state": "RESOLVED",
+      "gap": "Drive HOTSTATE V3 exists and canonical START HERE / minimum index point to it.",
+      "evidence_refs": [
+        "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+        "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+        "Drive:1lAQgsWnKEsNgKeKNK-f5GEKgr1IpkfS0p_svzEWr-dA"
+      ],
+      "next": "Reopen only when a material routing/topology change makes V3 stale."
     },
     {
       "id": "G_ARCH_002",
-      "state": "TOKEN_VAZIO",
-      "gap": "Rafaelia_Private fresh head and active-work ledger were not read in this bounded three-root pass.",
-      "next": "Read private authority only when a private work packet is selected."
+      "state": "EVIDENCED_SCOPED",
+      "gap": "Rafaelia_Private authority was refreshed only at metadata/status/gap-pointer scope.",
+      "evidence_refs": [
+        "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+        "Rafaelia_Private:results/interrepo_gap_register.jsonl@0e3bd175ad5565ea622a2dc272fdfe410eec15a8"
+      ],
+      "next": "Read private body only for a specifically authorized private packet; do not broaden by default."
     },
     {
       "id": "G_ARCH_003",
-      "state": "TOKEN_VAZIO",
-      "gap": "Provider protection/server enforcement was not freshly re-probed in this pass.",
-      "next": "Re-probe only before a governance mutation or provider-enforcement claim."
+      "state": "BLOCKED_EXTERNAL_CONFIGURATION",
+      "gap": "Mapa provider protection/server-required promotion context remains unenforced; CodeScan credentials remain external.",
+      "evidence_refs": [
+        "Mapa:run:36420125486",
+        "Mapa:run:36420125520",
+        "Mapa:run:36420125376",
+        "Mapa:run:36420125513"
+      ],
+      "next": "Route to provider/admin authority; architecture state remains independent."
     },
     {
       "id": "G_ARCH_004",
       "state": "OPEN",
       "gap": "Downstream session packets remain heterogeneous; routing/materialization does not imply completion.",
-      "next": "Choose one READY_TO_ROUTE packet by dependency/risk/information gain and execute its producer-local gate."
+      "evidence_refs": [
+        "Drive:13odI4uadwvLuIrXUMOGo3inPSSQq0WVWiBLZQ9Mwpnw"
+      ],
+      "next": "Select one READY_TO_ROUTE/source-specific packet and execute its producer-local gate."
     }
   ],
   "ai_entry_protocol": [
@@ -597,8 +629,8 @@
     "Stop when next action would cross an unresolved authority/evidence boundary"
   ],
   "R3": {
-    "F_ok": "Canonical three-plane architecture is reconstructible: Drive documentary state, Mapa federated authority, RafGitTools executor; 12 ATLAS areas, 11 AI roles and 8 session packets inventoried.",
-    "F_gap": "Drive HOTSTATE is stale against current repository heads; private authority and provider enforcement were intentionally not freshly expanded; downstream packets are not all executed.",
-    "F_next": "Publish this manifold via draft PR, validate structure, then append a Drive successor pointer/HOTSTATE refresh without duplicating the manifest body."
+    "F_ok": "Architecture manifold is merged and structurally validated; HOTSTATE V3 is active in Drive; private metadata freshness is evidenced at pointer scope.",
+    "F_gap": "Provider/server enforcement, CodeScan credentials, physical/runtime/source-specific gaps and downstream work packets remain separate and evidence-bound.",
+    "F_next": "Use HOTSTATE V3 as machine/documentary current state; route provider governance through its own authority; close individual gaps only by exact gate receipts."
   }
 }
