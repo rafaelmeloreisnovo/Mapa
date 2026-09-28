@@ -1,0 +1,214 @@
+{
+  "schema": "RAFAELIA_PRACTICE_ATLAS_V1",
+  "version": "1.0.0",
+  "state": "IMPLEMENTED_UNTESTED",
+  "claim_allowed": false,
+  "purpose": "Shortest auditable route from human/AI intent to authority, source, execution, evidence, gap and next action.",
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "sqrt(3/2) != sqrt(3)/2",
+    "ANALOGY != CLAIM"
+  ],
+  "read_policy": {
+    "roots_max": 3,
+    "depth_default": 1,
+    "expand_only_on": [
+      "missing_source",
+      "contradiction",
+      "unresolved_authority",
+      "missing_evidence",
+      "explicit_request"
+    ]
+  },
+  "areas": [
+    {
+      "id": "A01_CONTROL_ROUTING",
+      "intent": "route work across repositories without duplicating authority",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "source_min": [
+        "AGENTS.md",
+        "data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json",
+        "data/ontology/rafaelia-operational-ontology.v1.json"
+      ],
+      "implementation_refs": [
+        "rafaelmeloreisnovo/RafGitTools@main:AGENTS.md"
+      ],
+      "evidence_rule": "cross-repository promotion requires producer evidence plus Mapa reconciliation",
+      "gap": "TOKEN_VAZIO until producer commit/gate is bound",
+      "next": "resolve the producer route and exact commit before mutation"
+    },
+    {
+      "id": "A02_RAFGITTOOLS_EXECUTOR",
+      "intent": "versioning, deterministic routing, ledgers, gates and developer-facing execution",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "source_min": [
+        "AGENTS.md",
+        "configs/agent-entry-kernel.v1.json",
+        "configs/workflow-master-index.json"
+      ],
+      "implementation_refs": [],
+      "evidence_rule": "local validator PASS does not promote device/runtime/scientific claims",
+      "gap": "TOKEN_VAZIO_RUNTIME where execution is not receipt-bound",
+      "next": "run the smallest local gate named by the touched subsystem"
+    },
+    {
+      "id": "A03_RAFPOLIMATA_MATH_ABI",
+      "intent": "own mathematical/spec/ABI implementation contracts and evidence producers",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "source_min": [
+        "AGENTS.md",
+        "docs/AGENTES.md",
+        "docs/INDEX.md"
+      ],
+      "implementation_refs": [],
+      "evidence_rule": "formula/spec presence is REFERENCE until an implementation and named gate execute",
+      "gap": "TOKEN_VAZIO for unbound formula producer/runtime",
+      "next": "bind formula identifier to implementation path and falsifier"
+    },
+    {
+      "id": "A04_ZIPRAF_BIT_LAYER",
+      "intent": "preserve ZIPRAF bit-layer/raster semantics without redefining container/runtime authority",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "source_min": [
+        "Drive canonical note: ZIPRAF Bit Layer Progressive Raster V1",
+        "Drive formula registry: ZIPRAF Bit Layer Progressive Raster V1",
+        "RafPolimata local ZIPRAF implementation/tests"
+      ],
+      "implementation_refs": [
+        "rafaelmeloreisnovo/RafGitTools@main:AGENTS.md"
+      ],
+      "evidence_rule": "parity requires deterministic vectors across canonical reference and adapters",
+      "gap": "GAIA/Rafaelia_Private binding and physical ARM32/ARM64 execution remain evidence-bound",
+      "next": "execute deterministic W={30,60}, q={1,2,4,8} vector parity"
+    },
+    {
+      "id": "A05_SPIRAL_SQRT3_OVER_2",
+      "intent": "separate the radial sqrt(3)/2 recurrence from independent angular laws",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "source_min": [
+        "indices/SEED_OMEGA_EVOLUTION_V1.md",
+        "tools/audit/verify_spiral_route_v1.py",
+        "data/formulas/SESSION_FORMULA_REGISTRY_53_V1.json"
+      ],
+      "implementation_refs": [
+        "rafaelmeloreisnovo/GAIA_phi:dados/RAFAELIA_TRIG_CORE2.py",
+        "rafaelmeloreisnovo/papers:src/asm/rmr_spiral.S",
+        "rafaelmeloreisnovo/ChipQuantum:experiments/math_only_validation/q16_spiral_verify.c"
+      ],
+      "evidence_rule": "radial recurrence PASS does not establish angular equivalence or physical meaning",
+      "gap": "angular equivalence remains unresolved where pi/phi and implementation step differ",
+      "next": "split radial and angular variants or bind a producer for theta[n+1]=theta[n]+pi/phi"
+    },
+    {
+      "id": "A06_FIBONACCI_TRIBONACCI_MATRIX",
+      "intent": "route Fibonacci/Tribonacci matrix work to formal source and executable producers",
+      "authority": "TOKEN_VAZIO_AUTHORITY",
+      "source_min": [
+        "rafaelmeloreisnovo/Matem-tica-:docs/formal/FIBONACCI_INVERSE_REVERSE_JUMP_RULER_V1.md",
+        "rafaelmeloreisnovo/Mapa:indices/FIBONACCI_INVERSE_REVERSE_JUMP_RULER_CROSSREPO_V1.md",
+        "rafaelmeloreisnovo/Rafaelia_Private:Anews/RAFAELIA_SPIRAL_FIBONACCI_Version2.py"
+      ],
+      "implementation_refs": [
+        "rafaelmeloreisnovo/UserLAnd:add2/RAFAELIA_CORE_MATRIX_lowlevel.c",
+        "rafaelmeloreisnovo/GAIA_phi:COGNITIO_GEOMETRICA.py"
+      ],
+      "evidence_rule": "do not merge Fibonacci and Tribonacci semantics without an explicit matrix definition and test vectors",
+      "gap": "canonical producer authority for the combined matrix family is TOKEN_VAZIO",
+      "next": "select one formal definition and freeze reference vectors before cross-repo comparison"
+    },
+    {
+      "id": "A07_TRINITY633",
+      "intent": "route Trinity/633 references without treating symbolic labels as proof",
+      "authority": "TOKEN_VAZIO_AUTHORITY",
+      "source_min": [
+        "rafaelmeloreisnovo/ZIPRAF_OMEGA_FULL:RAFAELIA_CORE_equations_v1_3.md",
+        "rafaelmeloreisnovo/Vectras-VM-Android:engine/rmr/include/rafaelia_formulas_core.h",
+        "rafaelmeloreisnovo/Vectras-VM-Android:engine/rmr/src/rafaelia_formulas_core.c"
+      ],
+      "implementation_refs": [],
+      "evidence_rule": "symbolic recurrence/constant names require exact executable semantics before promotion",
+      "gap": "formal Trinity633 contract and falsifier are TOKEN_VAZIO",
+      "next": "extract exact inputs, recurrence, units and expected vectors into a canonical contract"
+    },
+    {
+      "id": "A08_ANDROID_TOOLCHAIN",
+      "intent": "route Gradle/SDK/NDK/JNI/DEX/APK work to implementation without hiding host/runtime boundaries",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "source_min": [
+        "AGENTS.md",
+        "docs/BUILD.md",
+        "docs/RAFGITTOOLS_CURRENT_STATE.md"
+      ],
+      "implementation_refs": [
+        "rafaelmeloreisnovo/termux-app-rafacodephi"
+      ],
+      "evidence_rule": "source/build existence is not install/launch/device proof",
+      "gap": "physical-device and exact-current-head gates remain per-revision",
+      "next": "bind target ABI/environment and run the corresponding build/runtime gate"
+    },
+    {
+      "id": "A09_FREESTANDING_LOW_LEVEL",
+      "intent": "preserve no-libc/no-heap freestanding boundaries and multi-ISA testability",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "source_min": [
+        "freestanding/AGENTS.md",
+        "freestanding/ARCH_CONTRACT.md",
+        "freestanding/COMMENT_CONTRACT.md"
+      ],
+      "implementation_refs": [
+        "syscall/"
+      ],
+      "evidence_rule": "hosted success cannot weaken the freestanding contract",
+      "gap": "device/runtime closure remains separate from structural closure",
+      "next": "run verify_contract.sh and verify_matrix.sh for the touched ISA/path"
+    },
+    {
+      "id": "A10_CRYPTO_PROVENANCE",
+      "intent": "route cryptographic work through exact upstream/fork provenance and reproducible evidence",
+      "authority": "producer repository",
+      "source_min": [
+        "exact upstream commit/ref",
+        "exact fork commit/ref",
+        "named KAT/ABI/supply-chain gate"
+      ],
+      "implementation_refs": [
+        "rafaelmeloreisnovo/blake3"
+      ],
+      "evidence_rule": "hash identity proves artifact identity, not cryptographic/security superiority",
+      "gap": "TOKEN_VAZIO where toolchain/dependency digest or independent replay is missing",
+      "next": "freeze one execution_id and compare upstream pure vs fork vs runtime"
+    },
+    {
+      "id": "A11_EVIDENCE_GOVERNANCE",
+      "intent": "keep receipts, claims, gaps and current state fail-closed",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "source_min": [
+        "AGENTS.md",
+        "data/ontology/rafaelia-operational-ontology.v1.json",
+        "producer receipt bound to exact commit"
+      ],
+      "implementation_refs": [
+        "rafaelmeloreisnovo/RafGitTools:scripts/rafaelia_receipt_validator.py"
+      ],
+      "evidence_rule": "PASS is scoped to the gate that actually ran",
+      "gap": "TOKEN_VAZIO is preserved until a closing gate executes",
+      "next": "append a receipt and reconcile federated state only after evidence exists"
+    },
+    {
+      "id": "A12_DOC_NAVIGATION",
+      "intent": "let humans and agents reconstruct a task with few reads and no corpus duplication",
+      "authority": "local repository for local docs; Mapa for cross-repo routing",
+      "source_min": [
+        "nearest AGENTS.md",
+        "repository README/START HERE",
+        "subsystem contract/test named by the route"
+      ],
+      "implementation_refs": [],
+      "evidence_rule": "documentation points to code/evidence; it does not replace them",
+      "gap": "TOKEN_VAZIO if a route cannot name source, authority, execution target and evidence rule",
+      "next": "add a typed route instead of copying the underlying corpus"
+    }
+  ]
+}
