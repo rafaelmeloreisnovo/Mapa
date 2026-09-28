@@ -19,6 +19,7 @@ STATES = {
 }
 CANONICAL_REGISTRY = "data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json"
 MAPPING = "data/governance/custody/01_ATLAS/CUSTODY_TYPES_V1_CANONICAL_MAPPING.json"
+CANONICAL_CREDENTIAL_PROFILE = "CREDENTIAL_PERMISSION_CUSTODY"
 
 def load(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -90,9 +91,10 @@ def validate_projection(taxonomy, canonical, mapping):
                 f"{cid}: mapped class requires DIRECT or CONDITIONAL state")
 
     c09=next((x for x in rows if x.get("local_class")=="C09_CREDENTIAL_AUTHORITY"),{})
-    req(c09.get("canonical_profiles")==[],"C09 must not invent a direct canonical credential profile")
-    req(str(c09.get("mapping_state","")).startswith("TOKEN_VAZIO"),
-        "C09 must remain explicit TOKEN_VAZIO without direct canonical profile")
+    req(c09.get("canonical_profiles")==[CANONICAL_CREDENTIAL_PROFILE],
+        "C09 must map only to the explicit canonical credential permission profile")
+    req(c09.get("mapping_state")=="DIRECT",
+        "C09 must be DIRECT once the canonical credential permission profile exists")
 
     actor_map=mapping.get("actor_mapping",{})
     for key in ("authorized_by","planned_by","executed_by_connector","executed_by_runtime","independent_review","unknown_actor"):
@@ -166,7 +168,7 @@ def main():
     print("PASS: local custody taxonomy")
     print("PASS: canonical federation registry precedence")
     print("PASS: C01..C09 crosswalk uses only evidenced canonical profiles")
-    print("PASS: C09 remains TOKEN_VAZIO where no direct canonical profile exists")
+    print("PASS: C09 maps to explicit non-secret credential permission custody")
     print("PASS: authorization/execution/custody separation")
     print("PASS: provider identity/digest separation")
     print("PASS: hash-chain/Merkle separation")
