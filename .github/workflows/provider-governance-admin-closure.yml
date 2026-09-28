@@ -1,0 +1,98 @@
+name: Provider Governance Admin Closure
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_main_sha:
+        description: 'Exact current main SHA; mutation refuses drift'
+        required: true
+        type: string
+      operation:
+        description: 'Provider operation'
+        required: true
+        default: preflight
+        type: choice
+        options:
+          - preflight
+          - apply
+
+permissions:
+  contents: read
+
+concurrency:
+  group: provider-governance-admin-closure
+  cancel-in-progress: false
+
+jobs:
+  provider-governance:
+    runs-on: ubuntu-latest
+    env:
+      RAFAELIA_ADMIN_TOKEN: ${{ secrets.RAFAELIA_ADMIN_TOKEN }}
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Validate bootstrap fixtures
+        run: python3 -m unittest -v tests.test_apply_main_branch_protection
+
+      - name: Fail closed on absent admin credential
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${RAFAELIA_ADMIN_TOKEN:-}" ]]; then
+            echo '::error::TOKEN_VAZIO_RAFAELIA_ADMIN_TOKEN'
+            exit 20
+          fi
+
+      - name: Verify exact main precondition
+        shell: bash
+        env:
+          EXPECTED: ${{ inputs.expected_main_sha }}
+        run: |
+          set -euo pipefail
+          [[ "$EXPECTED" =~ ^[0-9a-f]{40}$ ]] || {
+            echo '::error::expected_main_sha must be exact lowercase SHA'
+            exit 22
+          }
+
+      - name: Provider preflight or apply
+        shell: bash
+        env:
+          EXPECTED: ${{ inputs.expected_main_sha }}
+          OPERATION: ${{ inputs.operation }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/provider-governance
+          args=(
+            --repo "${GITHUB_REPOSITORY}"
+            --branch main
+            --expected-main-sha "$EXPECTED"
+            --write-receipt artifacts/provider-governance/provider-protection.json
+          )
+          if [[ "$OPERATION" == apply ]]; then
+            args+=(--apply)
+          fi
+          python3 scripts/apply_main_branch_protection.py "${args[@]}"
+
+      - name: Re-read server enforcement after apply
+        if: ${{ inputs.operation == 'apply' }}
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.RAFAELIA_ADMIN_TOKEN }}
+        run: |
+          set -euo pipefail
+          python3 scripts/check_server_merge_enforcement.py \
+            --repo "${GITHUB_REPOSITORY}" \
+            --branch main \
+            --write-report artifacts/provider-governance/server-enforcement.json
+
+      - name: Upload bounded receipts
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: provider-governance-admin-${{ github.run_id }}
+          path: artifacts/provider-governance/
+          if-no-files-found: warn
+          retention-days: 90
