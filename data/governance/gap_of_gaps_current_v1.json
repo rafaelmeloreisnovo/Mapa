@@ -1,0 +1,1975 @@
+{
+  "schema": "rafaelia.gap-of-gaps-current.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-09-28T14:25:00-03:00",
+  "authority": "rafaelmeloreisnovo/Mapa for federation/index only; each source authority owns closure",
+  "claim_allowed": false,
+  "completeness_boundary": "Complete for the canonical registries and current-state sources enumerated below; NOT a claim that every historical conversation/file in the entire corpus has been exhaustively scanned.",
+  "invariants": [
+    "TOKEN_VAZIO != 0",
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "READY_TO_TEST != RESOLVED",
+    "STALENESS != FAILURE",
+    "INDEX != SOURCE",
+    "A gap may be useful without being filled"
+  ],
+  "architecture_state": {
+    "state": "STRUCTURAL_PASS_MERGED",
+    "mapa_main": "56dca415e7a6a460b70fda4f59a320fe1b5198ba",
+    "architecture_manifest": "data/manifold/ai_architecture_current_v1.json",
+    "architecture_blob": "1bdb5075486225118e23f545a7b02d1cfb41d537",
+    "source_pr": "PR#701",
+    "source_pr_head": "7fe33d62e5478de430861717a707ceb231550bab",
+    "evidence": [
+      "CI PASS",
+      "Manifold Registry V1 PASS",
+      "Branch Topology Gate PASS",
+      "main-hardening-gate PASS",
+      "SecurityCodeScan PASS",
+      "CodeQL Advanced PASS"
+    ],
+    "provider_governance_is_separate": true
+  },
+  "sources": [
+    {
+      "id": "MAPA_GAPS_OMEGA",
+      "ref": "github:rafaelmeloreisnovo/Mapa@56dca415e7a6a460b70fda4f59a320fe1b5198ba:data/manifold/gaps_omega_v1.jsonl",
+      "blob_sha": "e4fb3de76912a7a64cbe04f740b559e104e7bb15",
+      "count": 26
+    },
+    {
+      "id": "MAPA_MODEL_MATRIX",
+      "ref": "github:rafaelmeloreisnovo/Mapa@56dca415e7a6a460b70fda4f59a320fe1b5198ba:data/manifold/model_gap_matrix_v1.json",
+      "blob_sha": "4cbef8725a8cb54b6cd423294bc7e610bab0532c",
+      "count": 15
+    },
+    {
+      "id": "RAFGITTOOLS_GAP_LEDGER",
+      "ref": "github:rafaelmeloreisnovo/RafGitTools:main:data/evidence/github/cross-repo-gap-closure-20260819.v1.json",
+      "blob_sha": "9282ab86d656bac01ce6945bc1887103c547eb1d",
+      "count": 9
+    },
+    {
+      "id": "RAFGITTOOLS_CURRENT_STATE",
+      "ref": "github:rafaelmeloreisnovo/RafGitTools:main:docs/RAFGITTOOLS_CURRENT_STATE.md",
+      "blob_sha": "66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "count": 9
+    },
+    {
+      "id": "DRIVE_LEGACY_GAP_LEDGER",
+      "ref": "drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "count": 19
+    },
+    {
+      "id": "DRIVE_HOTSTATE_PREDECESSOR",
+      "ref": "drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "count": 7
+    },
+    {
+      "id": "PRIVATE_ACTIVE_WORK_LEDGER",
+      "ref": "github:rafaelmeloreisnovo/Rafaelia_Private:main:data/governance/rafaelia_active_work_ledger.v2.json",
+      "blob_sha": "c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "count": 15,
+      "body_policy": "pointer/status only; no private payload copied"
+    },
+    {
+      "id": "PRIVATE_INTERREPO_GAPS",
+      "ref": "github:rafaelmeloreisnovo/Rafaelia_Private:main:results/interrepo_gap_register.jsonl",
+      "blob_sha": "0e3bd175ad5565ea622a2dc272fdfe410eec15a8",
+      "count": 8,
+      "body_policy": "metadata/gap fields only"
+    }
+  ],
+  "counts": {
+    "source_counts": {
+      "mapa_gap_registry": 26,
+      "mapa_model_matrix": 15,
+      "rafgittools_gap_ledger": 9,
+      "drive_legacy_gap_ledger": 19,
+      "private_interrepo_gap_register": 8,
+      "private_open_or_partial_workstreams": 15,
+      "rafgittools_current_open_gates": 9,
+      "current_governance": 5,
+      "hotstate_predecessor_gaps": 7,
+      "current_hotstate_gap": 1
+    },
+    "indexed_entries": 114,
+    "token_vazio_entries": 41,
+    "blocked_entries": 5,
+    "partial_entries": 33
+  },
+  "current_priority": [
+    "STATE-HOTSTATE-SUCCESSOR",
+    "GOV-MAPA-PROVIDER-RULESET",
+    "GOV-MAPA-SERVER-MERGE-ENFORCEMENT",
+    "GOV-MAPA-PROMOTION-CONTROL",
+    "GOV-MAPA-CODESCAN-CREDENTIALS",
+    "GOV-MAPA-ZERO-APPROVAL-REJECTION-RECEIPT"
+  ],
+  "entries": [
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0001",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0001",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "formula-item completeness remains source-scoped",
+      "provenance": "edge:E0005",
+      "evidence_refs": [
+        "item-level source locators and bounded completeness states"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "enumerate formula items with source locator and explicit completeness state, or preserve bounded scope"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0002",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0002",
+      "state": "TOKEN_VAZIO_NOT_RUN",
+      "authority": "Mapa federated gap registry",
+      "summary": "full shard TieGrid NOT_RUN",
+      "provenance": "edge:E0006",
+      "evidence_refs": [
+        "full-shard execution identity",
+        "exit/result receipt",
+        "source-shard provenance"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "execute the full-shard TieGrid under an identified environment and bind a receipt"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0003",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0003",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "global full-corpus merge open",
+      "provenance": "edge:E0007",
+      "evidence_refs": [
+        "explicit corpus boundary",
+        "merge/reconciliation receipt"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "materialize a bounded global merge or explicitly supersede with a narrower documented scope"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0004",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0004",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "automation total open",
+      "provenance": "edge:E0008",
+      "evidence_refs": [
+        "automation inventory",
+        "observed execution receipts"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "define bounded automation coverage and attach observed receipts without promoting unexecuted paths"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0005",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0005",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "cost metrics open",
+      "provenance": "edge:E0009",
+      "evidence_refs": [
+        "metric definition",
+        "unit",
+        "measurement procedure",
+        "receipt"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "materialize at least one reproducible cost metric with unit, scale, input identity and receipt"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0006",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0006",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "item-level equivalence still gated",
+      "provenance": "edge:E0010",
+      "evidence_refs": [
+        "item identity",
+        "derivation or source equivalence evidence",
+        "falsifier"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "bind each promoted equivalence to explicit evidence; otherwise retain TOKEN_VAZIO"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0007",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0007",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "not all append events normalized",
+      "provenance": "edge:E0012",
+      "evidence_refs": [
+        "append event identities",
+        "predecessor/successor references"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "normalize remaining observed append events or mark bounded coverage explicitly"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0008",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0008",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "WG250 crosswalk not exhaustive",
+      "provenance": "edge:E0013",
+      "evidence_refs": [
+        "WG250 item locators",
+        "cross-provider identity/provenance links"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "complete the crosswalk or publish an explicit bounded coverage fraction and remaining TOKEN_VAZIO items"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0009",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0009",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "Pantheon+/CLASS-CAMB gaps remain",
+      "provenance": "edge:E0014",
+      "evidence_refs": [
+        "claim-specific dataset/covariance or solver evidence",
+        "execution receipt",
+        "falsifier"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "close each named scientific gap independently; route PASS must not promote scientific claim PASS"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0010",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0010",
+      "state": "TOKEN_VAZIO_NOT_RUN",
+      "authority": "Mapa federated gap registry",
+      "summary": "physical ARM32/ARM64 remain TOKEN_VAZIO",
+      "provenance": "edge:E0015",
+      "evidence_refs": [
+        "device identity",
+        "binary/artifact identity",
+        "exit/result",
+        "receipt"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "observe physical ARM32 and ARM64 runs separately; do not infer physical execution from CI or emulation"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0011",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0011",
+      "state": "TOKEN_VAZIO_NESTED",
+      "authority": "Mapa federated gap registry",
+      "summary": "the concrete shard-level blockers beneath the full-shard TieGrid gap are not yet enumerated",
+      "provenance": "gap:G0002",
+      "evidence_refs": [
+        "shard inventory or bounded audit of execution prerequisites"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "enumerate concrete child gaps with stable IDs, or close this decomposition gap with an evidence-bound audit"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0012",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0012",
+      "state": "TOKEN_VAZIO_NESTED",
+      "authority": "Mapa federated gap registry",
+      "summary": "the symbolic envelope is preserved but its operator semantics are not yet formally bound",
+      "provenance": "session:2026-09-24:user-provided-symbolic-envelope",
+      "evidence_refs": [
+        "declared grammar",
+        "operator meanings",
+        "layer/reference rules",
+        "positive and adversarial examples"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "bind the marker to a versioned grammar without retrospectively assigning meanings not supplied by the source"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0013",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0013",
+      "state": "TOKEN_VAZIO_NOT_RUN",
+      "authority": "Mapa federated gap registry",
+      "summary": "scalar-to-NEON equivalence remains unproved on physical ARMv7 and ARM64 devices",
+      "provenance": "gap:G0010",
+      "evidence_refs": [
+        "ARMv7 device identity and artifact hash",
+        "ARM64 device identity and artifact hash",
+        "same-input scalar and NEON outputs",
+        "CRC/state equivalence receipt"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "run scalar and NEON paths separately on physical ARMv7 and ARM64 and bind bit-equivalent outputs without inferring one ABI from the other"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0014",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0014",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "hardware CRC32C instruction emission and runtime use are not yet bound to physical receipts",
+      "provenance": "gap:G0010",
+      "evidence_refs": [
+        "exact binary hash",
+        "disassembly showing crc32c instruction when enabled",
+        "runtime capability detection",
+        "known-vector result on device"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "bind instruction-level evidence and device execution to the same artifact; software fallback must remain separately identified"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0015",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0015",
+      "state": "TOKEN_VAZIO_NOT_RUN",
+      "authority": "Mapa federated gap registry",
+      "summary": "cache-orchestrated dual-view reading and effective bandwidth uplift remain unmeasured on physical hardware",
+      "provenance": "gap:G0010",
+      "evidence_refs": [
+        "declared input and working-set size",
+        "PMU/cache-miss counters where available",
+        "single-view baseline",
+        "dual-view/cache-reuse path",
+        "p50/p95 throughput and bytes transferred"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "measure physical and useful bandwidth separately; do not label logical reuse as doubled physical bus bandwidth without counters"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0016",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0016",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "the relationship between NEON 128-bit execution quanta, the 32x128-bit register plane and the 4096-bit LayersBit logical state is observed but not bound by one versioned canonical adapter",
+      "provenance": "github:rafaelmeloreisnovo/Vectras-VM-Android@f67632f23af9397608c5af78f603e9ee720f94bf:Incluir/omega_layersbit.h",
+      "evidence_refs": [
+        "NEON lane/order authority",
+        "LayersBit 16x256 layout authority",
+        "adapter mapping definition",
+        "scalar-vs-vector equivalence tests"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "materialize one adapter that maps explicit 128-bit lanes into the 4096-bit state without conflating register capacity with a single-instruction transform"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0017",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0017",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "hot operational kernel residence in registers/cache is plausible from bounded state size and no-heap paths but not directly measured",
+      "provenance": "session:2026-09-24:kernel-hotset-cache-residency",
+      "evidence_refs": [
+        "text/data/BSS working-set sizes",
+        "hot-path instruction footprint",
+        "cache geometry",
+        "miss-rate or PMU receipt",
+        "workload boundary"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "show the bounded hot set fits and remains resident to a declared degree; do not promote this to the literal whole OS residing in processor state"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0018",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0018",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "P0.2 receipt sealing functions are present as an authority but no active bootstrap caller or canonical append-only persistence sink was found in the default-branch code search",
+      "provenance": "github:rafaelmeloreisnovo/termux-app-rafacodephi@5cd6d1e1cbd20dee462925857c4e47626e365a2f:src/bootstrap/receipt_sealer_real.c",
+      "evidence_refs": [
+        "active caller of seal_receipt_complete or successor API",
+        "append-only writer identity",
+        "restart/replay verifier",
+        "receipt sequence/ordering rule"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "wire the current P0.2 authority into the active bootstrap path and prove append-only replay; source presence or documentation alone is insufficient"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0019",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0019",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "P0.2 SHA-256 final padding and CRC32C correctness defects are repaired on draft PR #458 but exact-head CI and main integration are not yet closed",
+      "provenance": "github:rafaelmeloreisnovo/termux-app-rafacodephi@5cd6d1e1cbd20dee462925857c4e47626e365a2f:src/bootstrap/receipt_sealer_real.c",
+      "evidence_refs": [
+        "PR #458 exact-head Receipt Sealer Real V1 PASS",
+        "SHA-256 empty/abc/56-byte boundary vectors",
+        "CRC32C 123456789 vector",
+        "main merge identity"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "dedicated exact-head test passes and the corrected source is integrated to main without regression"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0020",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0020",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "LayersBit correctness remediation is in draft PR #1145 and decomposes into four independently testable defects",
+      "provenance": "github:rafaelmeloreisnovo/Vectras-VM-Android@f67632f23af9397608c5af78f603e9ee720f94bf:Incluir/omega_layersbit.h",
+      "evidence_refs": [
+        "child gap receipts G0021-G0024",
+        "PR #1145 exact-head Omega LayersBit Safety PASS",
+        "main merge identity"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "close every child independently, then integrate the exact tested successor to main"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0021",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0021",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "LayersBit lb_zero wrote 576 bytes into the current 560-byte object and requires bound-safe exact-size zeroing proof",
+      "provenance": "gap:G0020",
+      "evidence_refs": [
+        "guard values before and after LayersBit",
+        "all object bytes zero after lb_zero",
+        "ASan/UBSan exact-head result"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "exact-head safety gate passes with zero writes outside sizeof(LayersBit), then merged successor identity is recorded"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0022",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0022",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "LayersBit lb_omega used 2731>>17 while claiming exact modulo 42, producing wrong residues in the bounded popcount domain",
+      "provenance": "gap:G0020",
+      "evidence_refs": [
+        "test for ones=0..256",
+        "counterexample preservation for predecessor constant",
+        "exact-head result"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "all 257 popcount states match reference modulo 42 on the corrected head and merged successor is recorded"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0023",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0023",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "LayersBit tested only whether __STDC_HOSTED__ was defined, so a freestanding compiler with __STDC_HOSTED__=0 entered the hosted-header branch",
+      "provenance": "gap:G0020",
+      "evidence_refs": [
+        "compile with -ffreestanding -nostdinc",
+        "no hosted-header dependency",
+        "required primitive typedefs present"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "exact-head freestanding compile succeeds without hosted headers and merged successor is recorded"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0024",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0024",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa federated gap registry",
+      "summary": "LayersBit Q16 phi multiplication used uint32_t and overflowed at the valid H=0, ones=256 endpoint",
+      "provenance": "gap:G0020",
+      "evidence_refs": [
+        "H=0 and ones=256 boundary case",
+        "uint64 intermediate or equivalent proof",
+        "exact-head result"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "corrected exact-head returns Q16_ONE at the endpoint and merged successor is recorded"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0025",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0025",
+      "state": "TOKEN_VAZIO_AMBIGUOUS",
+      "authority": "Mapa federated gap registry",
+      "summary": "LayersBit documentation describes each byte as routing to a unique global bit 0..4095, while lb_push discards the global layer component and selects layer independently from tick and prime",
+      "provenance": "github:rafaelmeloreisnovo/Vectras-VM-Android@f67632f23af9397608c5af78f603e9ee720f94bf:Incluir/omega_layersbit.h",
+      "evidence_refs": [
+        "historical/canonical intended routing rule",
+        "LB_ROUTE generation authority",
+        "collision/coverage analysis",
+        "positive and adversarial tests"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "bind one explicit global-to-layer/local mapping semantics without silently rewriting historical behavior"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_GAPS_OMEGA:G0026",
+      "namespace": "MAPA_GAPS_OMEGA",
+      "source_id": "G0026",
+      "state": "TOKEN_VAZIO_NAVIGABLE",
+      "authority": "Mapa federated gap registry",
+      "summary": "Eight Directions cultural labels are declared inspirations in an original didactic composition; historical or ethnographic provenance for each tradition is not established by the source capture",
+      "provenance": "edge:E0042",
+      "evidence_refs": [
+        "independent authoritative source for each culture-specific attribution",
+        "explicit distinction between original composition and attested traditional narrative",
+        "translation, date, edition or field-source provenance when applicable"
+      ],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": [
+        "bind each culture-specific inspiration to independent historical or ethnographic evidence, or retain the attribution explicitly as original didactic inspiration without tradition-authenticity claim"
+      ],
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M00",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M00",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Aderencia global aos invariantes nao esta medida em todos os executores, repositorios e sessoes.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "inventario de executores/rotas",
+        "testes de invariantes por executor",
+        "receipt de cobertura limitada"
+      ],
+      "next_action": "ligar invariantes quentes a validadores executaveis por superficie",
+      "closure_criterion": "publicar cobertura por executor e preservar TOKEN_VAZIO onde nao houver observacao",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M01",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M01",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "START HERE V2.1 esta integrado no Mapa main e no Drive, mas o machine-dispatch main ainda aponta para o CURRENT_STATE predecessor; PR#688 implementa HOTSTATE V2 binding e permanece pendente de exact-head CI/merge.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "PR #688 exact-head manifold/CI terminal",
+        "machine-dispatch main readback apontando CURRENT_STATE HOTSTATE V2",
+        "successor receipt apos merge autorizado"
+      ],
+      "next_action": "acompanhar PR#688; nao duplicar successor",
+      "closure_criterion": "fechar somente quando o machine dispatch no main apontar para HOTSTATE V2 e o main readback estiver registrado; bootstrap documental ja integrado nao deve ser rebaixado",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M02",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M02",
+      "state": "SPEC_IMPLEMENTED_UNTESTED_GLOBAL",
+      "authority": "Mapa model-gap registry",
+      "summary": "Budget roots<=3/depth=1 esta especificado; enforcement transversal em todos os fluxos nao foi medido.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "traces de roteamento",
+        "contador roots/depth por execucao",
+        "casos de expansao autorizada"
+      ],
+      "next_action": "adicionar fixture de violacao de budget e expansao legitima",
+      "closure_criterion": "validar amostra declarada e reportar cobertura sem inferir totalidade",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M03",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M03",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Contrato SOURCE|AUTHORITY|EXECUTION_TARGET|EVIDENCE_RULE existe, mas cobertura de enforcement entre ferramentas nao e exaustiva.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "negative tests por ferramenta",
+        "blocked-state receipts",
+        "prova de ausencia de fallback inferido"
+      ],
+      "next_action": "criar matriz executor x required_field",
+      "closure_criterion": "cada executor relevante demonstra bloqueio quando um campo obrigatorio falta",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M04",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M04",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Fronteira Drive/GitHub esta definida, mas mapa de autoridade por artefato/projeto nao e exaustivo.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "registry artifact_id->authority",
+        "crosswalk Drive<->GitHub",
+        "conflitos/supersedes"
+      ],
+      "next_action": "materializar authority-map incremental por active_node",
+      "closure_criterion": "resolver autoridade por objeto ativo ou manter explicitamente TOKEN_VAZIO",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M05",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M05",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Estruturas 00_INDEX..08_RECEIPTS existem em escopos; paridade canonica Drive/GitHub para todos os active_nodes nao esta provada.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "root registry",
+        "path crosswalk",
+        "source pointer por no",
+        "validator de nao duplicacao"
+      ],
+      "next_action": "criar scaffold registry por ponteiro, nao por duplicacao",
+      "closure_criterion": "cada active_node resolve uma raiz canonica e seus ponteiros sem copiar corpus",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M06",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M06",
+      "state": "SPEC_ONLY_PARTIAL_VALIDATION",
+      "authority": "Mapa model-gap registry",
+      "summary": "Taxonomias estao definidas, mas aplicabilidade/omissao TOKEN_VAZIO por dimensao nao possui cobertura de validator completa.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "fixtures com dimensoes aplicaveis e nao aplicaveis",
+        "validator que proiba preenchimento artificial",
+        "bridge de escala"
+      ],
+      "next_action": "tipar applicability + evidence_bridge",
+      "closure_criterion": "fixtures positivos/negativos provam selecao util e TOKEN_VAZIO para dimensoes nao sustentadas",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M07",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M07",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Edges/routes/gaps sao tipados; exaustividade relacional e calibracao de evidencia/confianca permanecem abertas.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "coverage boundary",
+        "edge source locator",
+        "negative relation cases",
+        "confidence semantics versionadas"
+      ],
+      "next_action": "adicionar coverage envelope ao registry",
+      "closure_criterion": "declarar cobertura limitada e provar cada aresta promovida por locator/evidence",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M08",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M08",
+      "state": "SPEC_PARTIAL",
+      "authority": "Mapa model-gap registry",
+      "summary": "Principio de deduplicacao/referencia esta definido; decoder/dictionary versionados e testes de reconstruibilidade nao cobrem o ecossistema.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "codec_version",
+        "dictionary_hash",
+        "source_hash",
+        "round-trip fixtures"
+      ],
+      "next_action": "materializar pequeno codec fixture antes de ampliar corpus",
+      "closure_criterion": "round-trip reproduz fontes declaradas e falha fechada em dicionario/hash incorreto",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M09",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M09",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Ledger append-only existe; nem todos os eventos append observados estao normalizados.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "event identities",
+        "parent/supersedes refs",
+        "coverage boundary"
+      ],
+      "next_action": "resolver G0007 por active_node, sem full-scan",
+      "closure_criterion": "normalizar eventos do escopo ativo ou declarar cobertura limitada",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M10",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M10",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Estados e claim_allowed existem, mas registry de gates por dominio/claim nao e exaustivo.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "claim_id->gate map",
+        "promotion authority",
+        "falsifier",
+        "evidence scale bridge"
+      ],
+      "next_action": "introduzir claim-gate crosswalk incremental",
+      "closure_criterion": "cada claim promovivel resolve gate e autoridade; demais ficam claim_allowed=false",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M11",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M11",
+      "state": "METHOD_ONLY",
+      "authority": "Mapa model-gap registry",
+      "summary": "DMAIC e disciplina operacional; nivel sigma, CTQs e distribuicoes nao estao medidos globalmente.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "CTQ",
+        "unidade",
+        "baseline",
+        "defeito/oportunidade quando aplicavel",
+        "procedimento reproducivel"
+      ],
+      "next_action": "escolher um CTQ operacional pequeno e medir",
+      "closure_criterion": "calcular apenas metricas com denominador e unidade declarados; caso contrario manter TOKEN_VAZIO",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M12",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M12",
+      "state": "SPEC_ONLY",
+      "authority": "Mapa model-gap registry",
+      "summary": "psi->chi->rho->Delta->Sigma->Omega->psi' e modelo conceitual; state machine executavel e receipts de transicao nao estao demonstrados.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "state machine versionada",
+        "transition tests",
+        "human objective boundary",
+        "receipts"
+      ],
+      "next_action": "formalizar automato minimo somente se houver uso runtime",
+      "closure_criterion": "executar fixture deterministica sem criar objetivo autonomo",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M13",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M13",
+      "state": "PARTIAL_BOUNDED",
+      "authority": "Mapa model-gap registry",
+      "summary": "Condicao de parada/R3 e regra normativa; cobertura em todos os trabalhos significativos nao esta medida.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "receipts com F_ok/F_gap/F_next",
+        "campos de parada resolvidos",
+        "amostra de runs"
+      ],
+      "next_action": "adicionar validator de receipt para trabalhos significativos",
+      "closure_criterion": "validar cobertura no escopo declarado e bloquear R3 incompleto quando exigido",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "MAPA_MODEL_MATRIX:M14",
+      "namespace": "MAPA_MODEL_MATRIX",
+      "source_id": "M14",
+      "state": "NORMATIVE",
+      "authority": "Mapa model-gap registry",
+      "summary": "Regra 'emoji/simbolo somente quando aumenta informacao' nao possui metrica objetiva global.",
+      "provenance": "TOKEN_VAZIO_PROVENANCE",
+      "evidence_refs": [
+        "criterio operacional opcional",
+        "comparacao com/sem simbolo quando relevante"
+      ],
+      "next_action": "nenhuma execucao obrigatoria; usar julgamento editorial",
+      "closure_criterion": "manter como regra editorial, sem converter preferencia em claim quantitativo sem metrica",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-TERMUX-MANIFEST-ACTIVITY-UNIQUENESS",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-TERMUX-MANIFEST-ACTIVITY-UNIQUENESS",
+      "state": "READY_TO_TEST",
+      "authority": "termux-app-rafacodephi source + CI",
+      "summary": "app/src/main/AndroidManifest.xml + tests/test_settings_manifest_activity_contract.py",
+      "provenance": "master blob 89b281d4f3517cd8d12f44e90a7dea1e3e50d1b6 contained two BetaOrchestratorActivity declarations; fix branch removes the duplicate and strengthens the contract test",
+      "evidence_refs": [
+        "termux-app-rafacodephi:fix/manifest-activity-uniqueness-20260819@1f8ee693918717cbe95d591ec973624415fdcdd8",
+        "termux-app-rafacodephi:fix/manifest-activity-uniqueness-20260819@48a0e94399e5db846072667ff0fe88853d57d011"
+      ],
+      "next_action": "Run the branch CI and require the manifest/settings contract plus Android build gates to pass for the exact branch head.",
+      "closure_criterion": "Exactly one BetaOrchestratorActivity declaration exists, exported=false, theme is Theme.TermuxApp.DayNight.DarkActionBar, the contract test passes, and the same commit passes the relevant Android build gate.",
+      "falsifier": "Any duplicate BetaOrchestratorActivity declaration, theme drift, missing settings target, failed contract test, or failed Android build keeps this item unresolved.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-RAFGITTOOLS-CURRENT-RUNTIME-SNAPSHOT",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-RAFGITTOOLS-CURRENT-RUNTIME-SNAPSHOT",
+      "state": "TOKEN_VAZIO",
+      "authority": "current GitHub commit/workflow metadata + physical runtime receipts",
+      "summary": "ECOSYSTEM_RUNTIME_STATE.json",
+      "provenance": "The checked runtime-state document was observed_at 2026-08-14 while main contains later governance/coherence commits from 2026-08-17.",
+      "evidence_refs": [],
+      "next_action": "Generate a successor runtime snapshot from current repository metadata and exact workflow/artifact receipts without rewriting the historical 2026-08-14 observation.",
+      "closure_criterion": "A successor snapshot identifies the exact current commit, its own CI/build receipts, inherited evidence boundaries, remaining physical-device TOKEN_VAZIO states, and explicit supersession linkage.",
+      "falsifier": "If the successor snapshot silently reuses a prior commit's VERIFIED status, lacks exact commit binding, or rewrites the historical receipt, the gap remains open.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-VECTRA-TERMUX-PHYSICAL-E2E",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-VECTRA-TERMUX-PHYSICAL-E2E",
+      "state": "TOKEN_VAZIO",
+      "authority": "physical Android runtime receipt",
+      "summary": "VectrasTermuxBridge + VectrasTermuxResultReceiver + com.termux.rafacodephi RunCommandService",
+      "provenance": "Static source implements bounded dispatch, request SHA-256 and pending receipt, but dispatch acceptance explicitly does not prove QEMU execution, exit code, guest boot or VM correctness.",
+      "evidence_refs": [],
+      "next_action": "Execute one bounded physical-device fixture from Vectra through Termux RunCommandService and preserve transaction id, request SHA-256, result bundle, exitCode, binary identity and safe-state receipt.",
+      "closure_criterion": "One exact transaction links Vectra request SHA-256 to Termux result receipt and observed QEMU process/exit outcome on the target physical Android device; guest-boot claims require their own additional receipt.",
+      "falsifier": "Dispatch-only evidence, emulator-only evidence, missing transaction/hash binding, timeout, permission mismatch or absent exit receipt leaves the claim TOKEN_VAZIO.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-RAFGITTOOLS-SOURCE-MISSING-REFERENCES",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-RAFGITTOOLS-SOURCE-MISSING-REFERENCES",
+      "state": "BLOCKED",
+      "authority": "GitHub Actions Source Gap Audit scanner",
+      "summary": "Source Gap Audit exact-head inventory",
+      "provenance": "Exact-head run 32216219552 scanned 52,590 files / 45,752 source files and reported 82 blocking missing_reference findings plus 34 warnings: 9 placeholder_stub and 25 stale_deprecated; artifact 10489368710 preserves the audit output.",
+      "evidence_refs": [
+        "RafGitTools:workflow-run:32216219552",
+        "RafGitTools:workflow-job:95958134265",
+        "RafGitTools:artifact:10489368710"
+      ],
+      "next_action": "Expand the audit artifact into a finding-by-finding queue, classify each missing reference by source owner and dependency, then fix or prove obsolescence without broad silent waivers.",
+      "closure_criterion": "The same deterministic Source Gap Audit reports zero blocking missing_reference findings for the candidate head, or each intentionally retained reference is covered by an explicit scoped governance decision that does not weaken unrelated findings.",
+      "falsifier": "Any unclassified blocker, global ignore, wildcard waiver, or scanner bypass leaves this item BLOCKED.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-RAFGITTOOLS-FEDERATION-STATE-AXES",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-RAFGITTOOLS-FEDERATION-STATE-AXES",
+      "state": "UNCERTAIN",
+      "authority": "Federation Audit exact-head projection contract",
+      "summary": "configs/workflow-master-index.json + epistemic-runtime federation profile",
+      "provenance": "Exact-head Federation Audit run 32216219557 failed all 15 master-index nodes with state axes mismatch. The profile requires operational_state, runtime_state, evidence_state, claim_state and epistemic_status; node-local states expose four axes while defaults contain epistemic_status.",
+      "evidence_refs": [
+        "RafGitTools:workflow-run:32216219557",
+        "RafGitTools:workflow-job:95958134511",
+        "RafGitTools:configs/workflow-master-index.json",
+        "RafGitTools:configs/federation/epistemic-interop.v1.json",
+        "RafGitTools:scripts/federation/epistemic_interop.py"
+      ],
+      "next_action": "Resolve the semantic contract explicitly: either materialize epistemic_status on every node or define and test default-state expansion before projection. Preserve the existing negative test that rejects genuinely incomplete state vectors.",
+      "closure_criterion": "Federation Audit passes all 15 nodes under one documented state-resolution rule and regression tests prove that missing mandatory axes still fail when no authoritative default applies.",
+      "falsifier": "Silently dropping epistemic_status, weakening required_state_axes, or accepting arbitrary partial state maps keeps the item unresolved.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-TERMUX-VECTRAS-PROVIDER-V3-STATIC-CONTRACT",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-TERMUX-VECTRAS-PROVIDER-V3-STATIC-CONTRACT",
+      "state": "UNCERTAIN",
+      "authority": "Vectras Termux Provider v3 static workflow",
+      "summary": "scripts/verify_vectras_termux_provider_v3.py + build/package/constants/result delivery",
+      "provenance": "Exact-head run 32216210498 failed static provider checks. At least one failure is verifier drift: app/build.gradle defines the default package through getenv(TERMUX_PACKAGE_NAME) ?: com.termux.rafacodephi while the verifier expects a literal def assignment. Other findings concern expected constant aliases and visible result bounding/fail-closed metadata and require implementation-level adjudication.",
+      "evidence_refs": [
+        "termux-app-rafacodephi:workflow-run:32216210498",
+        "termux-app-rafacodephi:workflow-job:95958109858",
+        "termux-app-rafacodephi:scripts/verify_vectras_termux_provider_v3.py",
+        "termux-app-rafacodephi:app/build.gradle",
+        "termux-app-rafacodephi:termux-shared/src/main/java/com/termux/shared/termux/TermuxConstants.java"
+      ],
+      "next_action": "Split verifier-drift findings from implementation findings; update the verifier only where equivalent semantics are provable, then implement or expose bounded deterministic result delivery where genuinely absent and rerun the same provider-v3 gate.",
+      "closure_criterion": "Provider v3 static gate passes without weakening package/permission/action/result invariants, and each formerly failing assertion has a source-backed explanation or implementation change.",
+      "falsifier": "Regex relaxation that accepts a different package/protocol, unbounded result delivery, missing deterministic oversized-output metadata, or bypassing the provider-v3 workflow leaves this item unresolved.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-VECTRA-TERMUX-PROTOCOL-TOPOLOGY",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-VECTRA-TERMUX-PROTOCOL-TOPOLOGY",
+      "state": "EVIDENCED_SCOPED",
+      "authority": "cross-repository source contracts",
+      "summary": "discovery v2 + execution v3",
+      "provenance": "Vectra discovery reads protocolVersion >=2 and Termux VectrasIntegrationReceiver advertises protocol 2; execution is separately governed by raf.vectras-termux-ipc.v3.",
+      "evidence_refs": [
+        "Vectras-VM-Android:app/src/main/java/com/vectras/vm/integration/CrossRepoIntegrationManager.kt",
+        "Vectras-VM-Android:app/src/main/java/com/vectras/vm/integration/VectrasTermuxIpcContract.kt",
+        "termux-app-rafacodephi:app/src/main/java/com/termux/app/integration/VectrasIntegrationReceiver.kt"
+      ],
+      "next_action": "Document and test the state transition DISCOVER_V2 -> CAPABILITY_ACCEPTED -> EXECUTION_V3 -> PENDING_RECEIPT so future changes cannot conflate discovery and execution versions.",
+      "closure_criterion": "Static cross-repo contract confirms the same package, permission, action/result names where shared, and explicitly models v2 as discovery and v3 as execution.",
+      "falsifier": "Any shared constant mismatch, version conflation, private-path exposure, or execution path bypassing the bounded v3 contract invalidates this scoped evidence.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-TERMUX-PACKAGES-HANDOFF-SCHEMAS",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-TERMUX-PACKAGES-HANDOFF-SCHEMAS",
+      "state": "UNCERTAIN",
+      "authority": "termux-packages executable build contracts",
+      "summary": "REAL -> BITRAF64 -> PHASE9 -> RAFCODEPHI package handoff",
+      "provenance": "The 2026-08-17 documentation audit records missing REAL-to-PHASE9 handoff mapping, PHASE9 output schemas, error decision matrix and end-to-end ground-truth example.",
+      "evidence_refs": [],
+      "next_action": "Convert the documented handoff into machine-validated schemas and one reproducible package fixture that emits hashes/receipts at each boundary.",
+      "closure_criterion": "Each transition has a versioned schema, producer/consumer validation, fail-closed error semantics and one reproducible end-to-end fixture bound to source and output hashes.",
+      "falsifier": "A stage output that is accepted without schema validation or a documentation-only example without executable receipt keeps this item unresolved.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_GAP_LEDGER:GAP-LLAMA-ONES-V3-SEMANTIC-EVAL",
+      "namespace": "RAFGITTOOLS_GAP_LEDGER",
+      "source_id": "GAP-LLAMA-ONES-V3-SEMANTIC-EVAL",
+      "state": "TOKEN_VAZIO",
+      "authority": "adversarial retrieval evaluation",
+      "summary": "rmrCti RMRCTI JSONL ONES V3 retrieval",
+      "provenance": "ONES V3 explicitly reserves embedding_ref, semantic_cluster_id, topic_vector_ref and rerank_receipt as TOKEN_VAZIO and forbids semantic-memory claims before adversarial evaluation.",
+      "evidence_refs": [],
+      "next_action": "Implement RMRCTI_ONES_V3_ADVERSARIAL_EVAL comparing keyword CTI v1, deterministic ONES V3 and any future semantic adapter on gold questions, rare queries, negatives and shuffled controls.",
+      "closure_criterion": "A versioned evaluation dataset and deterministic report publish retrieval metrics, failure cases, privacy-gate result and exact artifact hashes; only scoped claims supported by those metrics may be promoted.",
+      "falsifier": "No gold set, no negative controls, privacy gate failure, non-deterministic results without explanation, or ranking-only evidence presented as semantic truth keeps semantic_memory_claim=false.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0001",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0001",
+      "state": "OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "regra exata para 15/45/50/150 + variação1",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "fonte original + regra explícita + exemplos/contraexemplos",
+      "next_action": "recuperar ocorrência-fonte antes de formalizar",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0002",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0002",
+      "state": "OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "enumeração completa de todas as linhas, interseções, paralelas, inclinações, ângulos e formas internas do octógono totalmente conectado",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "coordenatizar vértices e gerar tabela de pares/interseções/classes",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0003",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0003",
+      "state": "OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "centro/raio/ângulo da rotação e matriz de projeção que produz a elipse específica",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "fixar coordenadas e transformação",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0004",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0004",
+      "state": "OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "ponte quantitativa entre geometria de arcos/camadas e distribuição eletrônica",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "dados/teoria de referência + teste comparativo",
+      "next_action": "formular hipótese matemática sem afirmar equivalência física",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0005",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0005",
+      "state": "OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "levantamento exaustivo, item a item, de todas as fórmulas e relações históricas ainda não migradas para este novo mundo",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "extrair por sessões/fontes relevantes em lotes, deduplicando por expressão+significado+proveniênci",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0006",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0006",
+      "state": "OPEN_SAFE",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "μWRITE de ponte WORLD69 no livro-memória central",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "refazer append somente sobre revisão estável/fresca; START HERE já contém ponte canônica",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-OCT-K8-COMPOSITE-POLYGONS",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-OCT-K8-COMPOSITE-POLYGONS",
+      "state": "TOKEN_VAZIO_STATE_NOT_PARSED",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_PARSED",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-OCT-K8-SPATIAL-VERIFIER",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-OCT-K8-SPATIAL-VERIFIER",
+      "state": "TOKEN_VAZIO_STATE_NOT_PARSED",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_PARSED",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-OCT-K8-PHYSICAL-BINDING",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-OCT-K8-PHYSICAL-BINDING",
+      "state": "TOKEN_VAZIO_STATE_NOT_PARSED",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_PARSED",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0007",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0007",
+      "state": "OPEN_TYPED",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "whether each conversational use of “base” means numeral base or circular subdivision count",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "require explicit numeral notation b or angular n before cross-interpreting",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0008",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0008",
+      "state": "OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "mass distribution,radius,axis,angular velocity,units,dynamical law",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "define physical variables and dimensional model before associating n-grids with L",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0009",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0009",
+      "state": "OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "projection choice radial/orthographic/stereographic/other and exact source surface",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "select projection and derive map explicitly",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0010",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0010",
+      "state": "NOT_MATERIALIZED",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "single visual triangle→circle→refinement→sphere requested/identified as useful",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "generate only when visual artifact is explicitly executed",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0011",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0011",
+      "state": "REPRODUCED_HOST",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "physical ARMv7 rebuild/run of hardened V2, then boundary/domain sweep",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0012",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0012",
+      "state": "NOT_RUN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "rebuild on same Termux ARMv7 with Clang/LLD 21.1.8 -> audit ELF -> execute -> receipt V",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-SUPERSESSION",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-SUPERSESSION",
+      "state": "FORMALIZED + LOCAL_DETERMINISTIC_PASS + PROVIDER_READBACK_PASS",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "D6 orbit enumeration -> composite cycles -> incidence-preserving 2D→3D candidate",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MATH-0013",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MATH-0013",
+      "state": "DELTA_GLYPH_COLLISION_CLOSED + AUTHORIAL_SEMANTICS_OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "authorial Delta semantics; intended n domain; emoji/operator grammar; lunar ephemeris theta(t); terminator projection; typed bridge among eclipse/Venturi/plume cones",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "classify bare-Delta occurrences source-by-source; ambiguous remains TOKEN_VAZIO",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-MACRO-MU-PI-OMEGA-INF-PI-20260924",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-MACRO-MU-PI-OMEGA-INF-PI-20260924",
+      "state": "OPEN_TYPED",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "declare stop_condition + terminal codomain + Pi instance signatures before registering executable macro",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "DRIVE_LEGACY_GAP_LEDGER:GAP-HIPERMEMORY-CRF-V2",
+      "namespace": "DRIVE_LEGACY_GAP_LEDGER",
+      "source_id": "GAP-HIPERMEMORY-CRF-V2",
+      "state": "PASS_EXACT_GITHUB_READBACK_STRUCTURAL + DRAFT_PR46_OPEN",
+      "authority": "TOKEN_VAZIO_AUTHORITY_LEGACY",
+      "summary": "TOKEN_VAZIO_MISSING_FIELD_NOT_PARSED",
+      "provenance": "Drive:1KREWj0Y0uSEdH3Oa9w1rr7geVFD5G9J0ggRe8xOOyRs",
+      "evidence_refs": "TOKEN_VAZIO_EVIDENCE_RULE_NOT_PARSED",
+      "next_action": "benchmark-preserving SHAPE_DESC_V2, then route runtime only after producer AGENTS preflight.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-INTERREPO-MANIFEST-001",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-INTERREPO-MANIFEST-001",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "generated interrepo JSONL manifest over the four-repository orchestration scope",
+      "provenance": "docs/RAFAELIA_INTERREPO_ORCHESTRATION_MAP.md#10-f_ok--f_gap--f_next@6f6c0b80d57abe27fab67e2c6ee46e0c8e146bd9",
+      "evidence_refs": [],
+      "next_action": "enumerate the declared repositories, emit deterministic manifest JSONL, hash it, and append a resolution event referencing this id",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-GLOBAL-CLAIM-TABLE-002",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-GLOBAL-CLAIM-TABLE-002",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "global claim table binding each promoted claim to source/code/test/status",
+      "provenance": "docs/RAFAELIA_INTERREPO_ORCHESTRATION_MAP.md#10-f_ok--f_gap--f_next@6f6c0b80d57abe27fab67e2c6ee46e0c8e146bd9",
+      "evidence_refs": [],
+      "next_action": "extract claims into a deterministic table and reject promotion for rows without evidence links",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-CONVERSATION-TOTALS-003",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-CONVERSATION-TOTALS-003",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "verified conversation chunk totals derived from manifest/report",
+      "provenance": "docs/RAFAELIA_INTERREPO_ORCHESTRATION_MAP.md#10-f_ok--f_gap--f_next@6f6c0b80d57abe27fab67e2c6ee46e0c8e146bd9",
+      "evidence_refs": [],
+      "next_action": "count chunks from the private memory bridge manifest and record count plus manifest hash",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-CROSSREPO-CI-004",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-CROSSREPO-CI-004",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "unified cross-repository CI governance gates",
+      "provenance": "docs/RAFAELIA_INTERREPO_ORCHESTRATION_MAP.md#10-f_ok--f_gap--f_next@6f6c0b80d57abe27fab67e2c6ee46e0c8e146bd9",
+      "evidence_refs": [],
+      "next_action": "define a minimal machine gate for provenance, protected TOKEN_VAZIO, claim boundary and reconstruction reachability; execute it against a pinned repository set",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-TAU-OMEGA-METRIC-001",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-TAU-OMEGA-METRIC-001",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "empirical baseline and falsifiable metric for any numeric structural amplification factor, including 100000000x",
+      "provenance": "docs/TOKENIZATION_TAU_OMEGA_V1.md#5-structural-amplification-boundary@d10a091f090e704f0827a0763f5ce02734b35344",
+      "evidence_refs": [],
+      "next_action": "define baseline, measurement protocol, observable components and falsifier before permitting a quantitative amplification claim",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-Z0-AUTHORIAL-SEMANTICS-001",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-Z0-AUTHORIAL-SEMANTICS-001",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "canonical authorial semantics of Z0 beyond the provisional zero-assumption baseline",
+      "provenance": "docs/TOKENIZATION_TAU_OMEGA_V1.md#z0@d10a091f090e704f0827a0763f5ce02734b35344",
+      "evidence_refs": [],
+      "next_action": "recover an authorial source/revision explicitly defining Z0 and append a superseding resolution event",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-TAU-OMEGA-EXEC-002",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-TAU-OMEGA-EXEC-002",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "CI or Termux execution receipt for tau-omega registry validation and adversarial tests on the repository branch",
+      "provenance": "scripts/validate_tau_omega.py@776c16c2be00c0b64bf7bbe285b928970c1db317",
+      "evidence_refs": [],
+      "next_action": "execute validator and unit tests in a pinned repository environment, then append command, exit status, commit SHA and receipt",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_INTERREPO_GAPS:GAP-TAU-OMEGA-RUNTIME-003",
+      "namespace": "PRIVATE_INTERREPO_GAPS",
+      "source_id": "GAP-TAU-OMEGA-RUNTIME-003",
+      "state": "TOKEN_VAZIO",
+      "authority": "Rafaelia_Private gap registry",
+      "summary": "evidence that any model runtime uses tau-omega as its native tokenizer or internal representation",
+      "provenance": "docs/TOKENIZATION_TAU_OMEGA_V1.md#8-ledger@d10a091f090e704f0827a0763f5ce02734b35344",
+      "evidence_refs": [],
+      "next_action": "provide an implementation plus direct runtime evidence, otherwise preserve tau-omega strictly as a governance descriptor",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W04",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W04",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W05",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W05",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W06",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W06",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W07",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W07",
+      "state": "DECLARED_PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W08",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W08",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W09",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W09",
+      "state": "PARTIAL_FAIL_CLOSED",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W10",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W10",
+      "state": "DECLARED_PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W11",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W11",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W12",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W12",
+      "state": "PARTIAL_TOKEN_VAZIO_LIVE_PARITY",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W13",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W13",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W14",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W14",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W15",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W15",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W16",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W16",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W17",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W17",
+      "state": "IN_PROGRESS",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "PRIVATE_ACTIVE_WORKSTREAM:MC-W18",
+      "namespace": "PRIVATE_ACTIVE_WORKSTREAM",
+      "source_id": "MC-W18",
+      "state": "PARTIAL",
+      "authority": "Rafaelia_Private local workstream authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json@c610030f3aeb73ef02b12b34804d2c8ed845a2bb",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT_NOT_EXPOSED_IN_LEDGER",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-01",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-01",
+      "state": "TOKEN_VAZIO until individually provider-bound",
+      "authority": "RafGitTools current-state authority",
+      "summary": "exact-current-head complete CI/build receipt",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-02",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-02",
+      "state": "TOKEN_VAZIO_PHYSICAL_DEVICE_REQUIRED",
+      "authority": "RafGitTools current-state authority",
+      "summary": "physical install/launch/restart receipt",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-03",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-03",
+      "state": "TOKEN_VAZIO_RUNTIME",
+      "authority": "RafGitTools current-state authority",
+      "summary": "real Git/provider/auth fixture matrix",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-04",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-04",
+      "state": "TOKEN_VAZIO_PTY",
+      "authority": "RafGitTools current-state authority",
+      "summary": "PTY/VT100",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-05",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-05",
+      "state": "TOKEN_VAZIO_RUNTIME",
+      "authority": "RafGitTools current-state authority",
+      "summary": "external LLaMA/model runtime",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-06",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-06",
+      "state": "TOKEN_VAZIO_RELEASE",
+      "authority": "RafGitTools current-state authority",
+      "summary": "signed release provenance",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-07",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-07",
+      "state": "TOKEN_VAZIO until authoritative readback proves it",
+      "authority": "RafGitTools current-state authority",
+      "summary": "provider governance enforcement",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-08",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-08",
+      "state": "false",
+      "authority": "RafGitTools current-state authority",
+      "summary": "claim_allowed",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "RAFGITTOOLS_CURRENT_STATE:RGT-CURRENT-09",
+      "namespace": "RAFGITTOOLS_CURRENT_STATE",
+      "source_id": "RGT-CURRENT-09",
+      "state": "false",
+      "authority": "RafGitTools current-state authority",
+      "summary": "release_allowed",
+      "provenance": "RafGitTools:docs/RAFGITTOOLS_CURRENT_STATE.md@66b53ea3730ad8a7aba4661b4695347a15917b26",
+      "evidence_refs": [],
+      "next_action": "Use the exact evidence boundary stated in RAFGITTOOLS_CURRENT_STATE; do not inherit predecessor evidence.",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_GOVERNANCE:GOV-MAPA-PROVIDER-RULESET",
+      "namespace": "CURRENT_GOVERNANCE",
+      "source_id": "GOV-MAPA-PROVIDER-RULESET",
+      "state": "BLOCKED",
+      "authority": "GitHub provider repository settings / admin write",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "PR#701 exact-head Provider Protection Gate run 36420125486",
+      "evidence_refs": [
+        "Mapa:run:36420125486",
+        "Mapa:job:provider-protection",
+        "Mapa:scripts/apply_main_branch_protection.py"
+      ],
+      "next_action": "Apply an active protection/ruleset to main with exact SHA guard and re-read provider state.",
+      "closure_criterion": "Provider readback proves main protected, promotion-control / enforce required, admins enforced, approvals>=1, strict status policy active.",
+      "falsifier": "No active ruleset/protection, missing promotion context, admins not enforced, approvals<1, or main SHA drift.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_GOVERNANCE:GOV-MAPA-SERVER-MERGE-ENFORCEMENT",
+      "namespace": "CURRENT_GOVERNANCE",
+      "source_id": "GOV-MAPA-SERVER-MERGE-ENFORCEMENT",
+      "state": "BLOCKED",
+      "authority": "GitHub provider repository settings",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "PR#701 exact-head Server Merge Enforcement Assurance run 36420125520",
+      "evidence_refs": [
+        "Mapa:run:36420125520"
+      ],
+      "next_action": "After provider protection is applied, verify a zero-approval/failed-required-check merge is rejected server-side without changing main.",
+      "closure_criterion": "Dedicated rejection receipt demonstrates provider rejects an invalid merge attempt.",
+      "falsifier": "Merge remains possible without required context/approval or no rejection receipt exists.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_GOVERNANCE:GOV-MAPA-CODESCAN-CREDENTIALS",
+      "namespace": "CURRENT_GOVERNANCE",
+      "source_id": "GOV-MAPA-CODESCAN-CREDENTIALS",
+      "state": "BLOCKED",
+      "authority": "Repository/organization secret administrator + CodeScan provider",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "PR#701 exact-head CodeScan run 36420125376",
+      "evidence_refs": [
+        "Mapa:run:36420125376",
+        "Mapa:.github/workflows/codescan.yml"
+      ],
+      "next_action": "Provision CODESCAN_AUTH_TOKEN, CODESCAN_ORGANIZATION_KEY and CODESCAN_PROJECT_KEY with least privilege, or explicitly supersede the CodeScan policy.",
+      "closure_criterion": "CodeScan credential preflight observes all three inputs present and the scan terminates with its own provider result.",
+      "falsifier": "Any required credential remains missing or scan does not execute.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_GOVERNANCE:GOV-MAPA-PROMOTION-CONTROL",
+      "namespace": "CURRENT_GOVERNANCE",
+      "source_id": "GOV-MAPA-PROMOTION-CONTROL",
+      "state": "BLOCKED",
+      "authority": "GitHub provider + independent reviewer",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "PR#701 promotion-control / enforce denied at exact PR head; PR later merged while provider enforcement was absent.",
+      "evidence_refs": [
+        "Mapa:run:36420125513",
+        "Mapa:PR#701",
+        "Mapa:merge:56dca415e7a6a460b70fda4f59a320fe1b5198ba"
+      ],
+      "next_action": "Bind promotion-control / enforce as a server-required context and require one genuine independent approval.",
+      "closure_criterion": "Provider configuration requires the context and approval; a deliberately noncompliant merge is rejected.",
+      "falsifier": "A PR can merge while promotion-control / enforce is failed or independent approval is absent.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_GOVERNANCE:GOV-MAPA-ZERO-APPROVAL-REJECTION-RECEIPT",
+      "namespace": "CURRENT_GOVERNANCE",
+      "source_id": "GOV-MAPA-ZERO-APPROVAL-REJECTION-RECEIPT",
+      "state": "TOKEN_VAZIO",
+      "authority": "GitHub provider",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Required by scripts/apply_main_branch_protection.py epistemic boundary.",
+      "evidence_refs": [
+        "Mapa:scripts/apply_main_branch_protection.py"
+      ],
+      "next_action": "After protection is active, execute a safe negative merge test and preserve provider rejection evidence.",
+      "closure_criterion": "SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT exists and is bound to provider state.",
+      "falsifier": "No provider rejection is observed.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_STATE:STATE-HOTSTATE-SUCCESSOR",
+      "namespace": "CURRENT_STATE",
+      "source_id": "STATE-HOTSTATE-SUCCESSOR",
+      "state": "READY_TO_CLOSE_IN_DRIVE",
+      "authority": "Google Drive documentary authority",
+      "summary": "TOKEN_VAZIO_SUMMARY",
+      "provenance": "Drive CURRENT_STATE still predates Mapa merge 56dca415e7a6a460b70fda4f59a320fe1b5198ba; architecture PR#701 is now merged.",
+      "evidence_refs": [
+        "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+        "Mapa:56dca415e7a6a460b70fda4f59a320fe1b5198ba"
+      ],
+      "next_action": "Snapshot predecessor, replace mutable HOTSTATE body with merged architecture authority + separated provider gaps + GAP_OF_GAPS pointer.",
+      "closure_criterion": "Drive readback shows Mapa main exact merge SHA and separate ARCHITECTURE_STATE / PROVIDER_GOVERNANCE_STATE.",
+      "falsifier": "HOTSTATE continues to point to pre-701 Mapa head or conflates provider configuration with structural architecture PASS.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "HOTSTATE_PREDECESSOR:G1",
+      "namespace": "HOTSTATE_PREDECESSOR",
+      "source_id": "G1",
+      "state": "PREDECESSOR_GAP",
+      "authority": "Drive historical HOTSTATE",
+      "summary": "Mapa provider enforcement absent | P0 | provider authority required",
+      "provenance": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "HOTSTATE_PREDECESSOR:G2",
+      "namespace": "HOTSTATE_PREDECESSOR",
+      "source_id": "G2",
+      "state": "PREDECESSOR_GAP",
+      "authority": "Drive historical HOTSTATE",
+      "summary": "Mapa provider/server enforcement and independent promotion authority remain fail-closed",
+      "provenance": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "HOTSTATE_PREDECESSOR:G3",
+      "namespace": "HOTSTATE_PREDECESSOR",
+      "source_id": "G3",
+      "state": "PREDECESSOR_GAP",
+      "authority": "Drive historical HOTSTATE",
+      "summary": "RafGitTools PR#537 terminal exact-head CI pending",
+      "provenance": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "HOTSTATE_PREDECESSOR:G4",
+      "namespace": "HOTSTATE_PREDECESSOR",
+      "source_id": "G4",
+      "state": "PREDECESSOR_GAP",
+      "authority": "Drive historical HOTSTATE",
+      "summary": "rollback drill TOKEN_VAZIO_RECONSTRUCTION",
+      "provenance": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "HOTSTATE_PREDECESSOR:G5",
+      "namespace": "HOTSTATE_PREDECESSOR",
+      "source_id": "G5",
+      "state": "PREDECESSOR_GAP",
+      "authority": "Drive historical HOTSTATE",
+      "summary": "WS05 language/origin/license custody remains source-specific",
+      "provenance": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "HOTSTATE_PREDECESSOR:G6",
+      "namespace": "HOTSTATE_PREDECESSOR",
+      "source_id": "G6",
+      "state": "PREDECESSOR_GAP",
+      "authority": "Drive historical HOTSTATE",
+      "summary": "WS06 CORE_FREESTANDING substitution requires measured equivalence/benchmark/rollback",
+      "provenance": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "HOTSTATE_PREDECESSOR:G7",
+      "namespace": "HOTSTATE_PREDECESSOR",
+      "source_id": "G7",
+      "state": "PREDECESSOR_GAP",
+      "authority": "Drive historical HOTSTATE",
+      "summary": "downstream work orders ROUTED_NOT_COMPLETED",
+      "provenance": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "evidence_refs": [],
+      "next_action": "TOKEN_VAZIO_NEXT",
+      "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
+      "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    }
+  ]
+}
