@@ -93,16 +93,16 @@
       "hotstate_predecessor_gaps": 7,
       "current_hotstate_gap": 1
     },
-    "indexed_entries": 114,
+    "indexed_entries": 115,
     "token_vazio_entries": 41,
     "blocked_entries": 5,
     "partial_entries": 33
   },
   "current_priority": [
-    "STATE-HOTSTATE-SUCCESSOR",
     "GOV-MAPA-PROVIDER-RULESET",
     "GOV-MAPA-SERVER-MERGE-ENFORCEMENT",
     "GOV-MAPA-PROMOTION-CONTROL",
+    "STATE-MACHINE-HOTSTATE-V3-BINDING",
     "GOV-MAPA-CODESCAN-CREDENTIALS",
     "GOV-MAPA-ZERO-APPROVAL-REJECTION-RECEIPT"
   ],
@@ -1828,16 +1828,15 @@
       "source_id": "GOV-MAPA-PROMOTION-CONTROL",
       "state": "BLOCKED",
       "authority": "GitHub provider + independent reviewer",
-      "summary": "TOKEN_VAZIO_SUMMARY",
-      "provenance": "PR#701 promotion-control / enforce denied at exact PR head; PR later merged while provider enforcement was absent.",
+      "summary": "PR#703 is ready-for-review and structurally green; Promotion Control rerun now reports only INDEPENDENT_APPROVAL_MISSING (0/1). Provider-required-context enforcement remains a separate blocker.",
+      "provenance": "PR#703 ready-for-review + promotion-control rerun 36460227708",
       "evidence_refs": [
-        "Mapa:run:36420125513",
-        "Mapa:PR#701",
-        "Mapa:merge:56dca415e7a6a460b70fda4f59a320fe1b5198ba"
+        "Mapa:run:36460227708",
+        "Mapa:PR#703@3c4e35941fdbe04f81b9c452784ffd887188433a"
       ],
-      "next_action": "Bind promotion-control / enforce as a server-required context and require one genuine independent approval.",
-      "closure_criterion": "Provider configuration requires the context and approval; a deliberately noncompliant merge is rejected.",
-      "falsifier": "A PR can merge while promotion-control / enforce is failed or independent approval is absent.",
+      "next_action": "Obtain one genuine independent approval; do not synthesize reviewer identity or approval.",
+      "closure_criterion": "Observed independent approvals >=1 and provider-side promotion context enforcement independently verified.",
+      "falsifier": "Independent approvals remain 0 or provider does not require the promotion context.",
       "claim_allowed": false
     },
     {
@@ -1860,17 +1859,18 @@
       "uid": "CURRENT_STATE:STATE-HOTSTATE-SUCCESSOR",
       "namespace": "CURRENT_STATE",
       "source_id": "STATE-HOTSTATE-SUCCESSOR",
-      "state": "READY_TO_CLOSE_IN_DRIVE",
+      "state": "RESOLVED",
       "authority": "Google Drive documentary authority",
-      "summary": "TOKEN_VAZIO_SUMMARY",
-      "provenance": "Drive CURRENT_STATE still predates Mapa merge 56dca415e7a6a460b70fda4f59a320fe1b5198ba; architecture PR#701 is now merged.",
+      "summary": "Drive HOTSTATE V3 is materialized and canonical START HERE / minimum index readbacks point to it; HOTSTATE V2 remains predecessor.",
+      "provenance": "Drive HOTSTATE V3 + START HERE/index targeted pointer readbacks",
       "evidence_refs": [
-        "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
-        "Mapa:56dca415e7a6a460b70fda4f59a320fe1b5198ba"
+        "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+        "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+        "Drive:1lAQgsWnKEsNgKeKNK-f5GEKgr1IpkfS0p_svzEWr-dA"
       ],
-      "next_action": "Snapshot predecessor, replace mutable HOTSTATE body with merged architecture authority + separated provider gaps + GAP_OF_GAPS pointer.",
-      "closure_criterion": "Drive readback shows Mapa main exact merge SHA and separate ARCHITECTURE_STATE / PROVIDER_GOVERNANCE_STATE.",
-      "falsifier": "HOTSTATE continues to point to pre-701 Mapa head or conflates provider configuration with structural architecture PASS.",
+      "next_action": "Reopen only if a later material topology/routing change makes V3 stale.",
+      "closure_criterion": "Satisfied for documentary HOTSTATE succession; machine-dispatch promotion is tracked separately.",
+      "falsifier": "Canonical pointer readback no longer resolves V3 or V3 is superseded by a later valid state.",
       "claim_allowed": false
     },
     {
@@ -1969,6 +1969,28 @@
       "next_action": "TOKEN_VAZIO_NEXT",
       "closure_criterion": "TOKEN_VAZIO_CLOSURE_CRITERION",
       "falsifier": "TOKEN_VAZIO_FALSIFIER",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_STATE:STATE-MACHINE-HOTSTATE-V3-BINDING",
+      "namespace": "CURRENT_STATE",
+      "source_id": "STATE-MACHINE-HOTSTATE-V3-BINDING",
+      "state": "BLOCKED",
+      "authority": "Mapa merge authority + genuine independent reviewer",
+      "summary": "PR#703 binds machine dispatch/human entry/architecture manifest to Drive HOTSTATE V3. Exact-head structural gates pass; merge/main readback remains blocked by independent approval.",
+      "provenance": "Mapa:PR#703@3c4e35941fdbe04f81b9c452784ffd887188433a",
+      "evidence_refs": [
+        "CI:PASS",
+        "Manifold Registry V1:PASS",
+        "Branch Topology Gate:PASS",
+        "main-hardening-gate:PASS",
+        "SecurityCodeScan:PASS",
+        "CodeQL Advanced:PASS",
+        "Promotion Control run 36460227708: INDEPENDENT_APPROVAL_MISSING"
+      ],
+      "next_action": "One genuine independent approval → authorized merge → main readback dispatch current_state == HOTSTATE V3 → successor receipt.",
+      "closure_criterion": "Merged main readback resolves current_state to Drive V3 and exact merge commit is receipt-bound.",
+      "falsifier": "PR remains unmerged, approval is non-independent/absent, or main readback still points to V2.",
       "claim_allowed": false
     }
   ]
