@@ -1,0 +1,99 @@
+{
+  "schema": "rafaelia.provider-governance-closure.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-09-28T14:25:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "target_branch": "main",
+  "architecture_authority_commit": "56dca415e7a6a460b70fda4f59a320fe1b5198ba",
+  "claim_allowed": false,
+  "separation": {
+    "architecture_state": "STRUCTURAL_PASS_MERGED",
+    "provider_state": "BLOCKED_EXTERNAL_CONFIGURATION",
+    "invariant": "ARCHITECTURE_PASS != PROVIDER_CONFIGURED"
+  },
+  "gaps": [
+    {
+      "id": "GOV-MAPA-PROVIDER-RULESET",
+      "state": "BLOCKED",
+      "authority": "GitHub repository administration",
+      "evidence": [
+        "run:36420125486",
+        "ERROR: no active ruleset applies to the default branch"
+      ],
+      "executable": "scripts/apply_main_branch_protection.py",
+      "required_secret": "RAFAELIA_ADMIN_TOKEN",
+      "secret_state": "TOKEN_VAZIO_NOT_OBSERVABLE_IN_CURRENT_CONNECTOR",
+      "next_gate": "ADMIN_CAPABILITY_PREFLIGHT_THEN_APPLY_WITH_EXACT_SHA"
+    },
+    {
+      "id": "GOV-MAPA-SERVER-MERGE-ENFORCEMENT",
+      "state": "BLOCKED",
+      "authority": "GitHub repository administration",
+      "evidence": [
+        "run:36420125520",
+        "REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
+        "NO_REQUIRED_STATUS_CHECKS_OBSERVED"
+      ],
+      "dependency": [
+        "GOV-MAPA-PROVIDER-RULESET"
+      ],
+      "next_gate": "SERVER_SIDE_ZERO_APPROVAL_REJECTED_MERGE_RECEIPT"
+    },
+    {
+      "id": "GOV-MAPA-CODESCAN-CREDENTIALS",
+      "state": "BLOCKED",
+      "authority": "secret administrator + CodeScan provider",
+      "evidence": [
+        "run:36420125376"
+      ],
+      "required_inputs": [
+        "CODESCAN_AUTH_TOKEN",
+        "CODESCAN_ORGANIZATION_KEY",
+        "CODESCAN_PROJECT_KEY"
+      ],
+      "values": "TOKEN_VAZIO_SECRET_VALUES_NEVER_INFER",
+      "next_gate": "CREDENTIAL_PREFLIGHT_THEN_PROVIDER_SCAN"
+    },
+    {
+      "id": "GOV-MAPA-PROMOTION-CONTROL",
+      "state": "BLOCKED",
+      "authority": "GitHub provider + genuine independent reviewer",
+      "evidence": [
+        "run:36420125513",
+        "PR#701 later merged while server enforcement absent"
+      ],
+      "required_context": "promotion-control / enforce",
+      "required_independent_approvals": 1,
+      "next_gate": "REQUIRE_CONTEXT_SERVER_SIDE_PLUS_REAL_INDEPENDENT_APPROVAL"
+    },
+    {
+      "id": "GOV-MAPA-ZERO-APPROVAL-REJECTION-RECEIPT",
+      "state": "TOKEN_VAZIO",
+      "authority": "GitHub provider",
+      "dependency": [
+        "GOV-MAPA-PROVIDER-RULESET",
+        "GOV-MAPA-SERVER-MERGE-ENFORCEMENT"
+      ],
+      "next_gate": "SAFE_NEGATIVE_MERGE_ATTEMPT_AFTER_PROTECTION_IS_ACTIVE"
+    }
+  ],
+  "apply_contract": {
+    "payload_source": "scripts/apply_main_branch_protection.py",
+    "required_context": "promotion-control / enforce",
+    "strict_status_checks": true,
+    "enforce_admins": true,
+    "minimum_approvals": 1,
+    "dismiss_stale_reviews": true,
+    "require_last_push_approval": true,
+    "no_merge_endpoint": true,
+    "expected_main_sha_required": true,
+    "reobserve_after_apply": true,
+    "rollback_preimage_required": true
+  },
+  "current_execution_surface": {
+    "branch_protection_mutation_action": "TOKEN_VAZIO_NOT_AVAILABLE",
+    "secret_value_access": "FORBIDDEN_NOT_REQUIRED",
+    "workflow_dispatch_action": "TOKEN_VAZIO_NOT_AVAILABLE",
+    "conclusion": "MATERIALIZE_EXECUTABLE_ROUTE_ONLY; DO_NOT_CLAIM_PROVIDER_CONFIGURED"
+  }
+}
