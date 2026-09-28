@@ -1,0 +1,604 @@
+{
+  "schema": "rafaelia.ai-architecture-manifold-current.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-09-28T08:56:00-03:00",
+  "state": "IMPLEMENTED_UNTESTED",
+  "claim_allowed": false,
+  "purpose": "Bounded reconstructible view of current RAFAELIA architecture for humans and AIs: entry, authority, state, execution planes, agent roles, work packets, stale evidence, gaps and next route.",
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "AGENT_ASSIGNMENT != AGENT_EXECUTION",
+    "DOCUMENTATION != RUNTIME_EVIDENCE",
+    "LOCAL_AUTHORITY != FEDERATED_AUTHORITY"
+  ],
+  "read_policy": {
+    "roots_max": 3,
+    "depth_default": 1,
+    "roots": [
+      "Drive:START_HERE_OMEGA_V2_1",
+      "GitHub:rafaelmeloreisnovo/Mapa",
+      "GitHub:rafaelmeloreisnovo/RafGitTools"
+    ],
+    "expand_only_on": [
+      "missing_source",
+      "contradiction",
+      "unresolved_authority",
+      "missing_evidence",
+      "explicit_request"
+    ]
+  },
+  "source_bindings": {
+    "drive_boot": {
+      "id": "1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+      "relation": "canonical_boot"
+    },
+    "drive_current_state": {
+      "id": "1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "title": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V2",
+      "updated_at": "2026-09-28T05:15:17-03:00",
+      "observed_mapa_main": "959a64d497c87bc84b35b70dc6918fe036f79147",
+      "observed_rafgittools_main": "ad4966029bd71a330a3d58fee3c642e2de56c983",
+      "current_mapa_main": "f17c98eff399710ff09725fa311e9cfe3fee3acc",
+      "current_rafgittools_main": "a81f0d9ddaae532cf26e4ba23651c4704abd8fc4",
+      "staleness": "STALE_BOUNDED_SUCCESSOR_REQUIRED"
+    },
+    "mapa_practice_atlas": {
+      "path": "data/control-plane/PRACTICE_ATLAS_V1.json",
+      "blob_sha": "e93c915fa6ddc73b85f0bd934af508e2627a9994"
+    },
+    "mapa_session_dispatch": {
+      "path": "data/control-plane/SESSION_AI_WORK_DISPATCH_V1.json",
+      "blob_sha": "c1d1d8f1692c74957f8b70968fa863f855d93cb0"
+    }
+  },
+  "authorities": [
+    {
+      "id": "AUTH_FEDERATED",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "scope": "federated routing, state reconciliation, relation graph, gaps and claim boundaries"
+    },
+    {
+      "id": "AUTH_EXECUTOR",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "scope": "deterministic execution routing, branch/PR/test/receipt operations and local control-plane validation"
+    },
+    {
+      "id": "AUTH_DOCUMENTARY",
+      "authority": "Google Drive",
+      "scope": "documentary memory, indices, HOTSTATE, ATLAS/ROUTES/EDGES/EVIDENCE/RECEIPTS"
+    },
+    {
+      "id": "AUTH_PRIVATE",
+      "authority": "rafaelmeloreisnovo/Rafaelia_Private",
+      "scope": "private payload, authorship/provenance and approved opaque pointers",
+      "fresh_read": "TOKEN_VAZIO_NOT_READ_IN_THIS_PASS"
+    },
+    {
+      "id": "AUTH_PRODUCER",
+      "authority": "producer repository",
+      "scope": "implementation, build/test contracts and domain runtime behavior"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "N00_DRIVE_BOOT",
+      "kind": "bootstrap",
+      "authority": "AUTH_DOCUMENTARY",
+      "state": "ACTIVE",
+      "ref": "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+      "summary": "START HERE Ω V2.1 Dispatch."
+    },
+    {
+      "id": "N01_DRIVE_HOTSTATE",
+      "kind": "mutable_hotstate",
+      "authority": "AUTH_DOCUMENTARY",
+      "state": "STALE_BOUNDED_SUCCESSOR_REQUIRED",
+      "ref": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+      "summary": "O(1) active-state router; history belongs in ledger/snapshot."
+    },
+    {
+      "id": "N02_MAPA_FEDERATED_CONTROL",
+      "kind": "federated_control_plane",
+      "authority": "AUTH_FEDERATED",
+      "state": "CURRENT_HEAD_OBSERVED",
+      "ref": "GitHub:rafaelmeloreisnovo/Mapa@f17c98eff399710ff09725fa311e9cfe3fee3acc",
+      "summary": "Federated authority for routes, reconciliation, manifold, governance and cross-repo boundaries."
+    },
+    {
+      "id": "N03_RAFGITTOOLS_EXECUTOR",
+      "kind": "executor_control_plane",
+      "authority": "AUTH_EXECUTOR",
+      "state": "CURRENT_HEAD_OBSERVED",
+      "ref": "GitHub:rafaelmeloreisnovo/RafGitTools@a81f0d9ddaae532cf26e4ba23651c4704abd8fc4",
+      "summary": "Local executor/tool-router; exact-head gates and receipts."
+    },
+    {
+      "id": "N04_PRIVATE_CUSTODY",
+      "kind": "private_custody",
+      "authority": "AUTH_PRIVATE",
+      "state": "REFERENCED_NOT_REFRESHED",
+      "ref": "GitHub:rafaelmeloreisnovo/Rafaelia_Private",
+      "summary": "Private custody and pointer export; no fresh private read in this pass."
+    },
+    {
+      "id": "N05_DRIVE_CUSTODY_CHAIN",
+      "kind": "documentary_scaffold",
+      "authority": "AUTH_DOCUMENTARY",
+      "state": "ACTIVE_REFERENCED",
+      "ref": "Drive:41_CUSTODY_CHAIN",
+      "summary": "Pointer-only ATLAS/ROUTES/MANIFOLD/EDGES/EVIDENCE/RECEIPTS."
+    },
+    {
+      "id": "N06_PRODUCER_REPOSITORIES",
+      "kind": "producer_federation",
+      "authority": "AUTH_PRODUCER",
+      "state": "ROUTE_DEPENDENT",
+      "ref": "Mapa:PRACTICE_ATLAS_V1.areas",
+      "summary": "Domain producers; producer repo governs implementation."
+    },
+    {
+      "id": "N07_EVIDENCE_RECEIPT_PLANE",
+      "kind": "evidence_plane",
+      "authority": "AUTH_FEDERATED",
+      "state": "ACTIVE",
+      "ref": "Drive μWRITE ledger + repository-local receipts",
+      "summary": "Execution-bound evidence, rollback and append-only transitions."
+    },
+    {
+      "id": "N08_AGENT_DISPATCH",
+      "kind": "agent_work_plane",
+      "authority": "AUTH_FEDERATED",
+      "state": "IMPLEMENTED_UNTESTED",
+      "ref": "Mapa:data/control-plane/SESSION_AI_WORK_DISPATCH_V1.json",
+      "summary": "11 typed AI roles and 8 bounded packets; assignment is not execution proof."
+    }
+  ],
+  "edges": [
+    {
+      "from": "N00_DRIVE_BOOT",
+      "to": "N01_DRIVE_HOTSTATE",
+      "type": "ROUTES_TO"
+    },
+    {
+      "from": "N01_DRIVE_HOTSTATE",
+      "to": "N02_MAPA_FEDERATED_CONTROL",
+      "type": "RESOLVES_FEDERATED_STATE_VIA"
+    },
+    {
+      "from": "N02_MAPA_FEDERATED_CONTROL",
+      "to": "N03_RAFGITTOOLS_EXECUTOR",
+      "type": "DISPATCHES_AUTHORIZED_WORK_TO"
+    },
+    {
+      "from": "N02_MAPA_FEDERATED_CONTROL",
+      "to": "N06_PRODUCER_REPOSITORIES",
+      "type": "ROUTES_TO_PRODUCER_AUTHORITY"
+    },
+    {
+      "from": "N03_RAFGITTOOLS_EXECUTOR",
+      "to": "N07_EVIDENCE_RECEIPT_PLANE",
+      "type": "EMITS_LOCAL_EXECUTION_EVIDENCE"
+    },
+    {
+      "from": "N06_PRODUCER_REPOSITORIES",
+      "to": "N07_EVIDENCE_RECEIPT_PLANE",
+      "type": "EMITS_PRODUCER_EVIDENCE"
+    },
+    {
+      "from": "N07_EVIDENCE_RECEIPT_PLANE",
+      "to": "N01_DRIVE_HOTSTATE",
+      "type": "PROMOTES_BOUNDED_STATE_AFTER_GATE"
+    },
+    {
+      "from": "N07_EVIDENCE_RECEIPT_PLANE",
+      "to": "N05_DRIVE_CUSTODY_CHAIN",
+      "type": "DOCUMENTS_MATERIAL_DELTA"
+    },
+    {
+      "from": "N04_PRIVATE_CUSTODY",
+      "to": "N02_MAPA_FEDERATED_CONTROL",
+      "type": "EXPORTS_APPROVED_OPAQUE_POINTERS"
+    },
+    {
+      "from": "N08_AGENT_DISPATCH",
+      "to": "N02_MAPA_FEDERATED_CONTROL",
+      "type": "USES_FEDERATED_ROUTING"
+    },
+    {
+      "from": "N08_AGENT_DISPATCH",
+      "to": "N03_RAFGITTOOLS_EXECUTOR",
+      "type": "USES_LOCAL_EXECUTOR"
+    },
+    {
+      "from": "N08_AGENT_DISPATCH",
+      "to": "N05_DRIVE_CUSTODY_CHAIN",
+      "type": "USES_DOCUMENTARY_MEMORY"
+    }
+  ],
+  "atlas_areas": [
+    {
+      "id": "A01_CONTROL_ROUTING",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "intent": "route work across repositories without duplicating authority",
+      "gap": "TOKEN_VAZIO until producer commit/gate is bound",
+      "next": "resolve the producer route and exact commit before mutation"
+    },
+    {
+      "id": "A02_RAFGITTOOLS_EXECUTOR",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "intent": "versioning, deterministic routing, ledgers, gates and developer-facing execution",
+      "gap": "TOKEN_VAZIO_RUNTIME where execution is not receipt-bound",
+      "next": "run the smallest local gate named by the touched subsystem"
+    },
+    {
+      "id": "A03_RAFPOLIMATA_MATH_ABI",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "intent": "own mathematical/spec/ABI implementation contracts and evidence producers",
+      "gap": "TOKEN_VAZIO for unbound formula producer/runtime",
+      "next": "bind formula identifier to implementation path and falsifier"
+    },
+    {
+      "id": "A04_ZIPRAF_BIT_LAYER",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "intent": "preserve ZIPRAF bit-layer/raster semantics without redefining container/runtime authority",
+      "gap": "GAIA/Rafaelia_Private binding and physical ARM32/ARM64 execution remain evidence-bound",
+      "next": "execute deterministic W={30,60}, q={1,2,4,8} vector parity"
+    },
+    {
+      "id": "A05_SPIRAL_SQRT3_OVER_2",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "intent": "separate the radial sqrt(3)/2 recurrence from independent angular laws",
+      "gap": "angular equivalence remains unresolved where pi/phi and implementation step differ",
+      "next": "split radial and angular variants or bind a producer for theta[n+1]=theta[n]+pi/phi"
+    },
+    {
+      "id": "A06_FIBONACCI_TRIBONACCI_MATRIX",
+      "authority": "TOKEN_VAZIO_AUTHORITY",
+      "intent": "route Fibonacci/Tribonacci matrix work to formal source and executable producers",
+      "gap": "canonical producer authority for the combined matrix family is TOKEN_VAZIO",
+      "next": "select one formal definition and freeze reference vectors before cross-repo comparison"
+    },
+    {
+      "id": "A07_TRINITY633",
+      "authority": "TOKEN_VAZIO_AUTHORITY",
+      "intent": "route Trinity/633 references without treating symbolic labels as proof",
+      "gap": "formal Trinity633 contract and falsifier are TOKEN_VAZIO",
+      "next": "extract exact inputs, recurrence, units and expected vectors into a canonical contract"
+    },
+    {
+      "id": "A08_ANDROID_TOOLCHAIN",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "intent": "route Gradle/SDK/NDK/JNI/DEX/APK work to implementation without hiding host/runtime boundaries",
+      "gap": "physical-device and exact-current-head gates remain per-revision",
+      "next": "bind target ABI/environment and run the corresponding build/runtime gate"
+    },
+    {
+      "id": "A09_FREESTANDING_LOW_LEVEL",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "intent": "preserve no-libc/no-heap freestanding boundaries and multi-ISA testability",
+      "gap": "device/runtime closure remains separate from structural closure",
+      "next": "run verify_contract.sh and verify_matrix.sh for the touched ISA/path"
+    },
+    {
+      "id": "A10_CRYPTO_PROVENANCE",
+      "authority": "producer repository",
+      "intent": "route cryptographic work through exact upstream/fork provenance and reproducible evidence",
+      "gap": "TOKEN_VAZIO where toolchain/dependency digest or independent replay is missing",
+      "next": "freeze one execution_id and compare upstream pure vs fork vs runtime"
+    },
+    {
+      "id": "A11_EVIDENCE_GOVERNANCE",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "intent": "keep receipts, claims, gaps and current state fail-closed",
+      "gap": "TOKEN_VAZIO is preserved until a closing gate executes",
+      "next": "append a receipt and reconcile federated state only after evidence exists"
+    },
+    {
+      "id": "A12_DOC_NAVIGATION",
+      "authority": "local repository for local docs; Mapa for cross-repo routing",
+      "intent": "let humans and agents reconstruct a task with few reads and no corpus duplication",
+      "gap": "TOKEN_VAZIO if a route cannot name source, authority, execution target and evidence rule",
+      "next": "add a typed route instead of copying the underlying corpus"
+    }
+  ],
+  "agent_roles": [
+    {
+      "id": "AI01_FEDERATED_ROUTER",
+      "node": "N02_MAPA_FEDERATED_CONTROL",
+      "locality": "GitHub/Mapa",
+      "owner": "rafaelmeloreisnovo/Mapa",
+      "mission": "Resolve cross-repo authority and minimum route.",
+      "execution_target": "session dispatch validator",
+      "evidence_rule": "structural routing evidence only"
+    },
+    {
+      "id": "AI02_CONTROL_EXECUTOR",
+      "node": "N03_RAFGITTOOLS_EXECUTOR",
+      "locality": "GitHub/RafGitTools",
+      "owner": "rafaelmeloreisnovo/RafGitTools",
+      "mission": "Convert authorized packet into deterministic branch/PR/test/receipt operations.",
+      "execution_target": "repository-local named gate",
+      "evidence_rule": "exact-head gate only"
+    },
+    {
+      "id": "AI03_PRIVATE_CUSTODIAN",
+      "node": "N04_PRIVATE_CUSTODY",
+      "locality": "GitHub/Rafaelia_Private",
+      "owner": "rafaelmeloreisnovo/Rafaelia_Private",
+      "mission": "Protect private payload/authorship/provenance and export only approved pointers.",
+      "execution_target": "private local validators",
+      "evidence_rule": "private access is not publication permission"
+    },
+    {
+      "id": "AI04_DRIVE_LIBRARIAN",
+      "node": "N05_DRIVE_CUSTODY_CHAIN",
+      "locality": "Drive/41_CUSTODY_CHAIN",
+      "owner": "Google Drive documentary authority",
+      "mission": "Materialize pointer-only ATLAS/ROUTES/EDGES/EVIDENCE/RECEIPTS.",
+      "execution_target": "Drive create/update + readback",
+      "evidence_rule": "Drive readback proves documentary materialization only"
+    },
+    {
+      "id": "AI05_PROVIDER_CI_STEWARD",
+      "node": "N03_RAFGITTOOLS_EXECUTOR",
+      "locality": "RafGitTools CI/provider",
+      "owner": "rafaelmeloreisnovo/RafGitTools",
+      "mission": "Isolate terminal defects and apply smallest branch-only reversible correction.",
+      "execution_target": "existing/successor branch only",
+      "evidence_rule": "queued/skipped/cancelled != PASS; provider claim needs readback"
+    },
+    {
+      "id": "AI06_VISUAL_PRIVACY_INTAKE",
+      "node": "N08_AGENT_DISPATCH",
+      "locality": "RafGitTools + Rafaelia_Private",
+      "owner": "split authority",
+      "mission": "Preserve visual provenance while privacy depends on redaction/encryption/private storage, not OCR resistance.",
+      "execution_target": "Templo Vivo validator/scheduler",
+      "evidence_rule": "digest vector is identity metadata, not encryption"
+    },
+    {
+      "id": "AI07_LANGUAGE_CUSTODY",
+      "node": "N06_PRODUCER_REPOSITORIES",
+      "locality": "producer repos",
+      "owner": "producer repository",
+      "mission": "Record Rust/C++/Kotlin/Java/C/Assembly custody, TAIL/SHADOW/FRICTION, ABI and FFI/JNI.",
+      "execution_target": "producer-specific audit",
+      "evidence_rule": "unobserved fields remain TOKEN_VAZIO"
+    },
+    {
+      "id": "AI08_FREESTANDING_ENGINEER",
+      "node": "N06_PRODUCER_REPOSITORIES",
+      "locality": "producer low-level repo",
+      "owner": "producer repository",
+      "mission": "Find measurable CORE_FREESTANDING C/ASM opportunities while platform integrations stay ADAPTER_PLATFORM.",
+      "execution_target": "named freestanding+ABI gate",
+      "evidence_rule": "replacement requires parity + measurable gain + rollback"
+    },
+    {
+      "id": "AI09_REPRODUCIBILITY_STEWARD",
+      "node": "N07_EVIDENCE_RECEIPT_PLANE",
+      "locality": "producer + Drive",
+      "owner": "producer execution / Drive receipt",
+      "mission": "Bind before/after, exact refs, falsifier, replay, rollback and reconstruction.",
+      "execution_target": "second-environment replay when available",
+      "evidence_rule": "same-run repetition is not independent reproduction"
+    },
+    {
+      "id": "AI10_STANDARDS_RIGHTS_STEWARD",
+      "node": "N02_MAPA_FEDERATED_CONTROL",
+      "locality": "Mapa/Private governance + Drive",
+      "owner": "governance/documentary; human legal review external",
+      "mission": "Attach applicable standards/rights references without certification/legal-opinion claims.",
+      "execution_target": "documentary applicability gate",
+      "evidence_rule": "reference mapping != compliance/certification"
+    },
+    {
+      "id": "AI11_SEMANTIC_TRANSLATOR",
+      "node": "N03_RAFGITTOOLS_EXECUTOR",
+      "locality": "RafGitTools semantic/context",
+      "owner": "RafGitTools local semantics; Mapa cross-repo routing",
+      "mission": "Translate nonlinear/symbolic requests into typed work packets without treating symbols as proof.",
+      "execution_target": "semantic context exam + practice router validation",
+      "evidence_rule": "semantic coherence routes work; it does not prove runtime/domain claims"
+    }
+  ],
+  "session_packets": [
+    {
+      "id": "SP01_TEMPLO_VISUAL_PRIVACY",
+      "status": "PARTIAL_MATERIALIZED",
+      "authority": "RafGitTools adapter + Rafaelia_Private custody",
+      "agents": [
+        "AI06_VISUAL_PRIVACY_INTAKE",
+        "AI03_PRIVATE_CUSTODIAN",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W11",
+        "MC-W12",
+        "MC-W17",
+        "MC-W18"
+      ],
+      "omega_exit": "synthetic pointer passes privacy gate with no plaintext leak",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP02_CI_PROVIDER_PROBLEM_LOOP",
+      "status": "ACTIVE_RECURRING",
+      "authority": "RafGitTools",
+      "agents": [
+        "AI05_PROVIDER_CI_STEWARD",
+        "AI02_CONTROL_EXECUTOR",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W03",
+        "MC-W17"
+      ],
+      "omega_exit": "cause + correction + rerun + readback + rollback receipt",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP03_BODY_SOUL_SPIRIT_ARCH_PIN",
+      "status": "IMPLEMENTED_IN_THIS_DISPATCH",
+      "authority": "Mapa routing; producer implementation",
+      "agents": [
+        "AI01_FEDERATED_ROUTER",
+        "AI02_CONTROL_EXECUTOR",
+        "AI10_STANDARDS_RIGHTS_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W03",
+        "MC-W17",
+        "MC-W18"
+      ],
+      "omega_exit": "all packets have classification/authority/evidence rule",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP04_LANGUAGE_CUSTODY",
+      "status": "ROUTED_NOT_EXHAUSTIVE",
+      "authority": "producer repository",
+      "agents": [
+        "AI07_LANGUAGE_CUSTODY",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W02",
+        "MC-W04",
+        "MC-W05",
+        "MC-W06",
+        "MC-W16"
+      ],
+      "omega_exit": "component-level custody pin with direct/transitive edges",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP05_CORE_FREESTANDING",
+      "status": "ROUTED",
+      "authority": "producer repository / Practice ATLAS low-level route",
+      "agents": [
+        "AI08_FREESTANDING_ENGINEER",
+        "AI07_LANGUAGE_CUSTODY"
+      ],
+      "workstreams": [
+        "MC-W04",
+        "MC-W05"
+      ],
+      "omega_exit": "measured gain + parity + rollback",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP06_ATLAS_ROUTES_RECEIPTS",
+      "status": "IMPLEMENTED_IN_THIS_DISPATCH",
+      "authority": "Mapa routes + Drive documentary custody",
+      "agents": [
+        "AI01_FEDERATED_ROUTER",
+        "AI04_DRIVE_LIBRARIAN",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W12",
+        "MC-W18"
+      ],
+      "omega_exit": "every material delta has route/evidence/receipt + rollback",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP07_STANDARDS_DIGNITY",
+      "status": "ROUTED",
+      "authority": "governance docs + human review where required",
+      "agents": [
+        "AI10_STANDARDS_RIGHTS_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W17"
+      ],
+      "omega_exit": "standard/version/applicability/evidence/gap/status + rights refs",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP08_SESSION_TO_WORK_PACKETS",
+      "status": "IMPLEMENTED_UNTESTED",
+      "authority": "Mapa route / RafGitTools execution / Drive memory",
+      "agents": [
+        "AI11_SEMANTIC_TRANSLATOR",
+        "AI01_FEDERATED_ROUTER",
+        "AI02_CONTROL_EXECUTOR",
+        "AI04_DRIVE_LIBRARIAN"
+      ],
+      "workstreams": [
+        "MC-W03",
+        "MC-W12",
+        "MC-W17",
+        "MC-W18"
+      ],
+      "omega_exit": "validated registry + adapter + Drive mirror + receipts",
+      "claim_allowed": false
+    }
+  ],
+  "current_observations": [
+    {
+      "id": "OBS_MAPA_HEAD",
+      "state": "OBSERVED",
+      "evidence": "GitHub:rafaelmeloreisnovo/Mapa@f17c98eff399710ff09725fa311e9cfe3fee3acc",
+      "note": "Mapa current head observed in this pass."
+    },
+    {
+      "id": "OBS_RAFGITTOOLS_HEAD",
+      "state": "OBSERVED",
+      "evidence": "GitHub:rafaelmeloreisnovo/RafGitTools@a81f0d9ddaae532cf26e4ba23651c4704abd8fc4",
+      "note": "RafGitTools current head observed in this pass."
+    },
+    {
+      "id": "OBS_DRIVE_HOTSTATE_STALENESS",
+      "state": "OBSERVED_STALE",
+      "evidence": "Drive CURRENT_STATE readback versus GitHub current heads",
+      "note": "HOTSTATE needs successor when repository heads materially advance."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "G_ARCH_001",
+      "state": "READY_TO_RECONCILE",
+      "gap": "Drive CURRENT_STATE is behind one or more observed repository heads.",
+      "next": "Append successor μWRITE and refresh HOTSTATE without erasing predecessor."
+    },
+    {
+      "id": "G_ARCH_002",
+      "state": "TOKEN_VAZIO",
+      "gap": "Rafaelia_Private fresh head and active-work ledger were not read in this bounded three-root pass.",
+      "next": "Read private authority only when a private work packet is selected."
+    },
+    {
+      "id": "G_ARCH_003",
+      "state": "TOKEN_VAZIO",
+      "gap": "Provider protection/server enforcement was not freshly re-probed in this pass.",
+      "next": "Re-probe only before a governance mutation or provider-enforcement claim."
+    },
+    {
+      "id": "G_ARCH_004",
+      "state": "OPEN",
+      "gap": "Downstream session packets remain heterogeneous; routing/materialization does not imply completion.",
+      "next": "Choose one READY_TO_ROUTE packet by dependency/risk/information gain and execute its producer-local gate."
+    }
+  ],
+  "ai_entry_protocol": [
+    "Read Drive START HERE Ω V2.1",
+    "Read Drive CURRENT_STATE Ω HOTSTATE V2 and assess staleness",
+    "Read this manifold snapshot",
+    "Resolve one Practice ATLAS area / route",
+    "Open nearest repository AGENTS.md and <=3 source_min files",
+    "Bind exact ref/path/hash and authority",
+    "Execute smallest named gate",
+    "Emit evidence + rollback + receipt",
+    "Update Mapa/Drive only for material state delta",
+    "Stop when next action would cross an unresolved authority/evidence boundary"
+  ],
+  "R3": {
+    "F_ok": "Canonical three-plane architecture is reconstructible: Drive documentary state, Mapa federated authority, RafGitTools executor; 12 ATLAS areas, 11 AI roles and 8 session packets inventoried.",
+    "F_gap": "Drive HOTSTATE is stale against current repository heads; private authority and provider enforcement were intentionally not freshly expanded; downstream packets are not all executed.",
+    "F_next": "Publish this manifold via draft PR, validate structure, then append a Drive successor pointer/HOTSTATE refresh without duplicating the manifest body."
+  }
+}
