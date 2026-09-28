@@ -71,5 +71,13 @@
     }
   ],
   "route_registry": "data/manifold/routes_omega_v1.jsonl",
-  "claim_allowed": false
+  "claim_allowed": false,
+  "hotstate_policy": {
+    "mode": "HOTSTATE_O1",
+    "max_lines": 80,
+    "max_active_nodes": 3,
+    "history_sink": "LEDGER_OR_SNAPSHOT",
+    "mutation_rule": "REPLACE_ACTIVE_SNAPSHOT_NOT_APPEND_HISTORY",
+    "predecessor_required": true
+  }
 }
