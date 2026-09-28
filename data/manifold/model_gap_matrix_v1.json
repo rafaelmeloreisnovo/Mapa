@@ -1,0 +1,317 @@
+{
+  "schema_version": "1.0",
+  "registry_id": "RAFAELIA_MODEL_GAP_MATRIX_V1",
+  "generated_from": {
+    "current_state": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
+    "canonical_boot": "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+    "canonical_gap_registry": "data/manifold/gaps_omega_v1.jsonl@e4fb3de76912a7a64cbe04f740b559e104e7bb15",
+    "dispatch_evidence": "commit:ffddbad3abf789eae716aba0b397d76237a0f464",
+    "current_state_predecessor": "Drive:1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ"
+  },
+  "invariant": "SOURCE!=ARTIFACT!=EXECUTION!=EVIDENCE!=CLAIM; TOKEN_VAZIO!=0; IMPLEMENTED_UNTESTED!=PASS",
+  "claim_allowed": false,
+  "models": [
+    {
+      "model_id": "M00",
+      "model": "PRINCIPIO_MESTRE",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "MISSING_EVIDENCE",
+      "gap": "Aderencia global aos invariantes nao esta medida em todos os executores, repositorios e sessoes.",
+      "token_vazio": [
+        "TOKEN_VAZIO_GLOBAL_CONFORMANCE"
+      ],
+      "linked_gap_refs": [
+        "G0012"
+      ],
+      "evidence_needed": [
+        "inventario de executores/rotas",
+        "testes de invariantes por executor",
+        "receipt de cobertura limitada"
+      ],
+      "closure_criterion": "publicar cobertura por executor e preservar TOKEN_VAZIO onde nao houver observacao",
+      "next": "ligar invariantes quentes a validadores executaveis por superficie"
+    },
+    {
+      "model_id": "M01",
+      "model": "BOOTSTRAP_CANONICO",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "MISSING_PROMOTION",
+      "gap": "START HERE V2.1 esta integrado no Mapa main e no Drive, mas o machine-dispatch main ainda aponta para o CURRENT_STATE predecessor; PR#688 implementa HOTSTATE V2 binding e permanece pendente de exact-head CI/merge.",
+      "token_vazio": [
+        "TOKEN_VAZIO_MACHINE_DISPATCH_HOTSTATE_BINDING"
+      ],
+      "linked_gap_refs": [],
+      "evidence_needed": [
+        "PR #688 exact-head manifold/CI terminal",
+        "machine-dispatch main readback apontando CURRENT_STATE HOTSTATE V2",
+        "successor receipt apos merge autorizado"
+      ],
+      "closure_criterion": "fechar somente quando o machine dispatch no main apontar para HOTSTATE V2 e o main readback estiver registrado; bootstrap documental ja integrado nao deve ser rebaixado",
+      "next": "acompanhar PR#688; nao duplicar successor"
+    },
+    {
+      "model_id": "M02",
+      "model": "MU_READ",
+      "state": "SPEC_IMPLEMENTED_UNTESTED_GLOBAL",
+      "gap_kind": "OPEN_COVERAGE",
+      "gap": "Budget roots<=3/depth=1 esta especificado; enforcement transversal em todos os fluxos nao foi medido.",
+      "token_vazio": [
+        "TOKEN_VAZIO_MUREAD_GLOBAL_ENFORCEMENT"
+      ],
+      "linked_gap_refs": [
+        "G0004"
+      ],
+      "evidence_needed": [
+        "traces de roteamento",
+        "contador roots/depth por execucao",
+        "casos de expansao autorizada"
+      ],
+      "closure_criterion": "validar amostra declarada e reportar cobertura sem inferir totalidade",
+      "next": "adicionar fixture de violacao de budget e expansao legitima"
+    },
+    {
+      "model_id": "M03",
+      "model": "FAIL_CLOSED",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "OPEN_COVERAGE",
+      "gap": "Contrato SOURCE|AUTHORITY|EXECUTION_TARGET|EVIDENCE_RULE existe, mas cobertura de enforcement entre ferramentas nao e exaustiva.",
+      "token_vazio": [
+        "TOKEN_VAZIO_FAIL_CLOSED_CROSS_TOOL_COVERAGE"
+      ],
+      "linked_gap_refs": [],
+      "evidence_needed": [
+        "negative tests por ferramenta",
+        "blocked-state receipts",
+        "prova de ausencia de fallback inferido"
+      ],
+      "closure_criterion": "cada executor relevante demonstra bloqueio quando um campo obrigatorio falta",
+      "next": "criar matriz executor x required_field"
+    },
+    {
+      "model_id": "M04",
+      "model": "AUTORIDADE",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "MISSING_MAPPING",
+      "gap": "Fronteira Drive/GitHub esta definida, mas mapa de autoridade por artefato/projeto nao e exaustivo.",
+      "token_vazio": [
+        "TOKEN_VAZIO_AUTHORITY_MAP_COVERAGE"
+      ],
+      "linked_gap_refs": [
+        "G0008"
+      ],
+      "evidence_needed": [
+        "registry artifact_id->authority",
+        "crosswalk Drive<->GitHub",
+        "conflitos/supersedes"
+      ],
+      "closure_criterion": "resolver autoridade por objeto ativo ou manter explicitamente TOKEN_VAZIO",
+      "next": "materializar authority-map incremental por active_node"
+    },
+    {
+      "model_id": "M05",
+      "model": "SCAFFOLD_MANIFOLD_ATLAS",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "MISSING_MAPPING",
+      "gap": "Estruturas 00_INDEX..08_RECEIPTS existem em escopos; paridade canonica Drive/GitHub para todos os active_nodes nao esta provada.",
+      "token_vazio": [
+        "TOKEN_VAZIO_SCAFFOLD_PARITY",
+        "TOKEN_VAZIO_CANONICAL_ROOT_PER_ACTIVE_NODE"
+      ],
+      "linked_gap_refs": [],
+      "evidence_needed": [
+        "root registry",
+        "path crosswalk",
+        "source pointer por no",
+        "validator de nao duplicacao"
+      ],
+      "closure_criterion": "cada active_node resolve uma raiz canonica e seus ponteiros sem copiar corpus",
+      "next": "criar scaffold registry por ponteiro, nao por duplicacao"
+    },
+    {
+      "model_id": "M06",
+      "model": "L9_OMEGA7_S7",
+      "state": "SPEC_ONLY_PARTIAL_VALIDATION",
+      "gap_kind": "MISSING_EVIDENCE",
+      "gap": "Taxonomias estao definidas, mas aplicabilidade/omissao TOKEN_VAZIO por dimensao nao possui cobertura de validator completa.",
+      "token_vazio": [
+        "TOKEN_VAZIO_DIMENSION_APPLICABILITY_VALIDATION"
+      ],
+      "linked_gap_refs": [],
+      "evidence_needed": [
+        "fixtures com dimensoes aplicaveis e nao aplicaveis",
+        "validator que proiba preenchimento artificial",
+        "bridge de escala"
+      ],
+      "closure_criterion": "fixtures positivos/negativos provam selecao util e TOKEN_VAZIO para dimensoes nao sustentadas",
+      "next": "tipar applicability + evidence_bridge"
+    },
+    {
+      "model_id": "M07",
+      "model": "MANIFOLD_OMEGA",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "OPEN_COVERAGE",
+      "gap": "Edges/routes/gaps sao tipados; exaustividade relacional e calibracao de evidencia/confianca permanecem abertas.",
+      "token_vazio": [
+        "TOKEN_VAZIO_EDGE_COVERAGE",
+        "TOKEN_VAZIO_CONFIDENCE_CALIBRATION"
+      ],
+      "linked_gap_refs": [
+        "G0001",
+        "G0006"
+      ],
+      "evidence_needed": [
+        "coverage boundary",
+        "edge source locator",
+        "negative relation cases",
+        "confidence semantics versionadas"
+      ],
+      "closure_criterion": "declarar cobertura limitada e provar cada aresta promovida por locator/evidence",
+      "next": "adicionar coverage envelope ao registry"
+    },
+    {
+      "model_id": "M08",
+      "model": "OMEGAZIP",
+      "state": "SPEC_PARTIAL",
+      "gap_kind": "MISSING_EVIDENCE",
+      "gap": "Principio de deduplicacao/referencia esta definido; decoder/dictionary versionados e testes de reconstruibilidade nao cobrem o ecossistema.",
+      "token_vazio": [
+        "TOKEN_VAZIO_DECODER_COVERAGE",
+        "TOKEN_VAZIO_DICTIONARY_HASH_COVERAGE",
+        "TOKEN_VAZIO_RECONSTRUCTION_RATE"
+      ],
+      "linked_gap_refs": [],
+      "evidence_needed": [
+        "codec_version",
+        "dictionary_hash",
+        "source_hash",
+        "round-trip fixtures"
+      ],
+      "closure_criterion": "round-trip reproduz fontes declaradas e falha fechada em dicionario/hash incorreto",
+      "next": "materializar pequeno codec fixture antes de ampliar corpus"
+    },
+    {
+      "model_id": "M09",
+      "model": "MUWRITE",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "OPEN_COVERAGE",
+      "gap": "Ledger append-only existe; nem todos os eventos append observados estao normalizados.",
+      "token_vazio": [
+        "TOKEN_VAZIO_APPEND_EVENT_COVERAGE"
+      ],
+      "linked_gap_refs": [
+        "G0007"
+      ],
+      "evidence_needed": [
+        "event identities",
+        "parent/supersedes refs",
+        "coverage boundary"
+      ],
+      "closure_criterion": "normalizar eventos do escopo ativo ou declarar cobertura limitada",
+      "next": "resolver G0007 por active_node, sem full-scan"
+    },
+    {
+      "model_id": "M10",
+      "model": "CLAIM_GATE",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "MISSING_MAPPING",
+      "gap": "Estados e claim_allowed existem, mas registry de gates por dominio/claim nao e exaustivo.",
+      "token_vazio": [
+        "TOKEN_VAZIO_CLAIM_GATE_REGISTRY_COVERAGE",
+        "TOKEN_VAZIO_PROMOTION_AUTHORITY_PER_CLAIM"
+      ],
+      "linked_gap_refs": [
+        "G0006",
+        "G0009"
+      ],
+      "evidence_needed": [
+        "claim_id->gate map",
+        "promotion authority",
+        "falsifier",
+        "evidence scale bridge"
+      ],
+      "closure_criterion": "cada claim promovivel resolve gate e autoridade; demais ficam claim_allowed=false",
+      "next": "introduzir claim-gate crosswalk incremental"
+    },
+    {
+      "model_id": "M11",
+      "model": "SIX_SIGMA_DMAIC",
+      "state": "METHOD_ONLY",
+      "gap_kind": "MISSING_METRIC",
+      "gap": "DMAIC e disciplina operacional; nivel sigma, CTQs e distribuicoes nao estao medidos globalmente.",
+      "token_vazio": [
+        "TOKEN_VAZIO_SIGMA_LEVEL",
+        "TOKEN_VAZIO_GLOBAL_CTQ_BASELINE"
+      ],
+      "linked_gap_refs": [
+        "G0005"
+      ],
+      "evidence_needed": [
+        "CTQ",
+        "unidade",
+        "baseline",
+        "defeito/oportunidade quando aplicavel",
+        "procedimento reproducivel"
+      ],
+      "closure_criterion": "calcular apenas metricas com denominador e unidade declarados; caso contrario manter TOKEN_VAZIO",
+      "next": "escolher um CTQ operacional pequeno e medir"
+    },
+    {
+      "model_id": "M12",
+      "model": "CICLO_COGNITIVO",
+      "state": "SPEC_ONLY",
+      "gap_kind": "MISSING_EXECUTION",
+      "gap": "psi->chi->rho->Delta->Sigma->Omega->psi' e modelo conceitual; state machine executavel e receipts de transicao nao estao demonstrados.",
+      "token_vazio": [
+        "TOKEN_VAZIO_CYCLE_RUNTIME",
+        "TOKEN_VAZIO_TRANSITION_RECEIPTS"
+      ],
+      "linked_gap_refs": [],
+      "evidence_needed": [
+        "state machine versionada",
+        "transition tests",
+        "human objective boundary",
+        "receipts"
+      ],
+      "closure_criterion": "executar fixture deterministica sem criar objetivo autonomo",
+      "next": "formalizar automato minimo somente se houver uso runtime"
+    },
+    {
+      "model_id": "M13",
+      "model": "PARADA_R3",
+      "state": "PARTIAL_BOUNDED",
+      "gap_kind": "OPEN_COVERAGE",
+      "gap": "Condicao de parada/R3 e regra normativa; cobertura em todos os trabalhos significativos nao esta medida.",
+      "token_vazio": [
+        "TOKEN_VAZIO_R3_COVERAGE",
+        "TOKEN_VAZIO_STOP_CONDITION_COVERAGE"
+      ],
+      "linked_gap_refs": [],
+      "evidence_needed": [
+        "receipts com F_ok/F_gap/F_next",
+        "campos de parada resolvidos",
+        "amostra de runs"
+      ],
+      "closure_criterion": "validar cobertura no escopo declarado e bloquear R3 incompleto quando exigido",
+      "next": "adicionar validator de receipt para trabalhos significativos"
+    },
+    {
+      "model_id": "M14",
+      "model": "ESTILO_SEMANTICO",
+      "state": "NORMATIVE",
+      "gap_kind": "MISSING_METRIC",
+      "gap": "Regra 'emoji/simbolo somente quando aumenta informacao' nao possui metrica objetiva global.",
+      "token_vazio": [
+        "TOKEN_VAZIO_SYMBOL_INFORMATION_GAIN_METRIC"
+      ],
+      "linked_gap_refs": [
+        "G0012"
+      ],
+      "evidence_needed": [
+        "criterio operacional opcional",
+        "comparacao com/sem simbolo quando relevante"
+      ],
+      "closure_criterion": "manter como regra editorial, sem converter preferencia em claim quantitativo sem metrica",
+      "next": "nenhuma execucao obrigatoria; usar julgamento editorial"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ on:
       - 'tools/validate_manifold_registry.py'
       - 'tools/validate_manifold_gap_registry.py'
       - 'tools/validate_manifold_dispatch.py'
+      - 'tools/validate_model_gap_matrix.py'
       - 'tools/resolve_manifold_route.py'
       - 'tools/resolve_manifold_gap.py'
       - 'tests/test_manifold*.py'
@@ -31,5 +32,7 @@ jobs:
         run: python tools/validate_manifold_gap_registry.py data/manifold/gaps_omega_v1.jsonl
       - name: Validate START HERE V2.1 dispatch
         run: python tools/validate_manifold_dispatch.py data/manifold/dispatch_omega_v1.json data/manifold/routes_omega_v1.jsonl
+      - name: Validate model gap/TOKEN_VAZIO matrix
+        run: python tools/validate_model_gap_matrix.py data/manifold/model_gap_matrix_v1.json
       - name: Run manifold tests
         run: python -m unittest discover -s tests -p 'test_manifold*.py'
