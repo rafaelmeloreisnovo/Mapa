@@ -4,7 +4,8 @@ from pathlib import Path
 
 ALLOWED_STATES = {
     "PARTIAL_BOUNDED","OBSERVED_UNPROMOTED","SPEC_IMPLEMENTED_UNTESTED_GLOBAL",
-    "SPEC_ONLY_PARTIAL_VALIDATION","SPEC_PARTIAL","METHOD_ONLY","SPEC_ONLY","NORMATIVE"
+    "SPEC_ONLY_PARTIAL_VALIDATION","SPEC_PARTIAL","METHOD_ONLY","SPEC_ONLY","NORMATIVE",
+    "PASS_BOUNDED"
 }
 
 def fail(msg):
@@ -25,8 +26,12 @@ def validate(path):
         ids.add(mid)
         if row.get("state") not in ALLOWED_STATES: fail(f"unsupported state {mid}: {row.get('state')}")
         tv=row.get("token_vazio")
-        if not isinstance(tv,list) or not tv or any(not isinstance(x,str) or not x.startswith("TOKEN_VAZIO") for x in tv):
+        if not isinstance(tv,list) or any(not isinstance(x,str) or not x.startswith("TOKEN_VAZIO") for x in tv):
             fail(f"invalid token_vazio: {mid}")
+        if row.get("state") != "PASS_BOUNDED" and not tv:
+            fail(f"open model without TOKEN_VAZIO: {mid}")
+        if row.get("state") == "PASS_BOUNDED" and tv:
+            fail(f"closed model retains TOKEN_VAZIO: {mid}")
         if not row.get("gap") or not row.get("gap_kind"): fail(f"missing gap: {mid}")
         if not row.get("evidence_needed") or not row.get("closure_criterion") or not row.get("next"):
             fail(f"incomplete closure contract: {mid}")
