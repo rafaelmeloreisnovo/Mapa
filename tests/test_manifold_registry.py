@@ -20,7 +20,7 @@ class ManifoldRegistryTests(unittest.TestCase):
         )
         self.assertEqual(
             validate_routes(ROOT / "data/manifold/routes_omega_v1.jsonl"),
-            10,
+            11,
         )
 
     def test_gap_subgraph_is_complete_and_bounded(self):
