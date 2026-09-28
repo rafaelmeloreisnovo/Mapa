@@ -1,6 +1,6 @@
 # RAFAELIA — AI Architecture Manifold Current V1
 
-Status: `IMPLEMENTED_UNTESTED`  
+Status: `STRUCTURAL_PASS_MERGED`  
 Claim gate: `false`
 
 ## Function
@@ -12,7 +12,7 @@ Machine-readable authority: `data/manifold/ai_architecture_current_v1.json`.
 ## Current three-root view
 
 1. **Drive / START HERE Ω V2.1** — documentary bootstrap, HOTSTATE and receipts.
-2. **Mapa @ `f17c98eff399710ff09725fa311e9cfe3fee3acc`** — federated control/knowledge plane and manifold authority.
+2. **Mapa @ `56dca415e7a6a460b70fda4f59a320fe1b5198ba`** — pinned merged architecture authority; later moving-main commits are separate state.
 3. **RafGitTools @ `a81f0d9ddaae532cf26e4ba23651c4704abd8fc4`** — executor/control-plane/tool-router.
 
 Drive HOTSTATE reported Mapa `959a64d497c87bc84b35b70dc6918fe036f79147` and RafGitTools `ad4966029bd71a330a3d58fee3c642e2de56c983`. Current GitHub readback differs, so HOTSTATE is `STALE_BOUNDED_SUCCESSOR_REQUIRED`.
@@ -78,6 +78,6 @@ This snapshot is navigation and state reconciliation. It is not runtime proof, s
 
 **F_ok** — Drive ↔ Mapa ↔ RafGitTools architecture, ATLAS areas, agent roles and work packets are inventoried in one typed graph.
 
-**F_gap** — Drive HOTSTATE is behind current GitHub heads; private authority and provider enforcement were not freshly expanded; downstream packets are not all executed.
+**F_gap** — Provider/server enforcement, CodeScan credentials, physical/runtime/source-specific gaps and downstream packets remain independently evidence-bound.
 
-**F_next** — validate this manifest on the PR branch, then append a Drive successor pointer/HOTSTATE refresh rather than copying the whole manifest into Drive.
+**F_next** — Enter through HOTSTATE V3, then route to the owning authority and smallest named gate; preserve TOKEN_VAZIO when closure evidence is absent.

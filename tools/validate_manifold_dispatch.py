@@ -97,14 +97,31 @@ def validate_dispatch(manifest_path, routes_path):
         fail("dispatch: hotstate predecessor must be preserved")
 
     current_state_id = roots["current_state"]["id"]
-    predecessor_id = "1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ"
 
     superseded = obj["superseded"]
     old_id = "1l2hhCHYFBouU4qNU-WFY3kqI1wEzfJ64EDvi2iH1mbI"
     if not any(row.get("id") == old_id and row.get("by") == obj["canonical_boot"]["id"] for row in superseded):
         fail("dispatch: START_LITE supersession missing")
-    if not any(row.get("id") == predecessor_id and row.get("by") == current_state_id for row in superseded):
-        fail("dispatch: CURRENT_STATE predecessor supersession missing")
+
+    # CURRENT_STATE is an append-only successor chain. Do not require a
+    # historical V1 node to point directly at the newest HOTSTATE: V1→V2→V3
+    # is valid, while a missing edge or cycle must still fail closed.
+    lineage_anchor = "1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ"
+    successor_of = {
+        row.get("id"): row.get("by")
+        for row in superseded
+        if row.get("id") and row.get("by")
+    }
+    cursor = lineage_anchor
+    seen = set()
+    while cursor != current_state_id:
+        if cursor in seen:
+            fail("dispatch: CURRENT_STATE supersession cycle")
+        seen.add(cursor)
+        nxt = successor_of.get(cursor)
+        if not nxt:
+            fail("dispatch: CURRENT_STATE predecessor supersession missing")
+        cursor = nxt
 
     routes = read_jsonl(routes_path)
     active = [row for row in routes if row.get("state") != "SUPERSEDED"]
