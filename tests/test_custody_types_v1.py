@@ -30,12 +30,17 @@ class CustodyTypesTests(unittest.TestCase):
         m["class_mapping"][0]["canonical_profiles"].append("INVENTED_PROFILE")
         self.assertTrue(any("unknown canonical profiles" in x for x in M.validate_projection(self.tax,self.can,m)))
 
-    def test_c09_cannot_invent_direct_profile(self):
+    def test_c09_maps_to_explicit_canonical_credential_profile(self):
+        row=next(x for x in self.map["class_mapping"] if x["local_class"]=="C09_CREDENTIAL_AUTHORITY")
+        self.assertEqual(row["canonical_profiles"],["CREDENTIAL_PERMISSION_CUSTODY"])
+        self.assertEqual(row["mapping_state"],"DIRECT")
+        self.assertEqual(M.validate_projection(self.tax,self.can,self.map),[])
+
+    def test_c09_rejects_wrong_canonical_profile(self):
         m=json.loads(json.dumps(self.map))
         row=next(x for x in m["class_mapping"] if x["local_class"]=="C09_CREDENTIAL_AUTHORITY")
         row["canonical_profiles"]=["AGENT_ACTION_CUSTODY"]
-        row["mapping_state"]="DIRECT"
-        self.assertTrue(any("C09 must not invent" in x for x in M.validate_projection(self.tax,self.can,m)))
+        self.assertTrue(any("C09 must map only" in x for x in M.validate_projection(self.tax,self.can,m)))
 
     def test_git_oid_not_sha256_label(self):
         e=json.loads(json.dumps(self.ev))
