@@ -1,0 +1,75 @@
+{
+  "schema": "rafaelia.pat-capability-federation.v1",
+  "version": "1.0.0",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "executor": "rafaelmeloreisnovo/RafGitTools",
+  "claim_allowed": false,
+  "state": "PENDING_EXECUTOR_SOURCE_MERGE",
+  "executor_source": {
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "pull_request": 556,
+    "head": "b4d21f79988b60d6d2179caf4e173e61045eb235",
+    "contract_path": "contracts/PAT_CAPABILITY_MATRIX_V1.json",
+    "documentation_path": "docs/governance/PAT_CAPABILITY_ROUTING_V1.md",
+    "relation": "FEDERATED_ROUTING_CONSUMES_EXECUTOR_CONTRACT",
+    "merge_state": "UNMERGED_AT_PROJECTION_CREATION"
+  },
+  "canonical_secret_ids": [
+    "PAT_ACTIONS",
+    "PAT_AGENTS",
+    "PAT_CODESPACES",
+    "PAT_DEPENDABOT",
+    "PAT_ENV"
+  ],
+  "canonical_environment_display": "PAT_ENVIRONMENTS",
+  "capability_routes": [
+    {
+      "secret_id": "PAT_ACTIONS",
+      "executor_state": "WIRED_MAIN_ONESHOT_READ_ONLY",
+      "route": "RafGitTools/provider_actions",
+      "evidence_rule": "exact target SHA + read-only checkout + provider receipt",
+      "claim_effect": "NO_AUTOMATIC_PROMOTION"
+    },
+    {
+      "secret_id": "PAT_AGENTS",
+      "executor_state": "REGISTERED_NOT_WIRED",
+      "route": "RafGitTools/TOKEN_VAZIO_PERMISSION_PROBE_REQUIRED",
+      "evidence_rule": "provider permission probe before wiring",
+      "claim_effect": "NO_AUTOMATIC_PROMOTION"
+    },
+    {
+      "secret_id": "PAT_CODESPACES",
+      "executor_state": "REGISTERED_NOT_WIRED",
+      "route": "RafGitTools/TOKEN_VAZIO_PERMISSION_PROBE_REQUIRED",
+      "evidence_rule": "provider permission probe before wiring",
+      "claim_effect": "NO_AUTOMATIC_PROMOTION"
+    },
+    {
+      "secret_id": "PAT_DEPENDABOT",
+      "executor_state": "REGISTERED_NOT_WIRED",
+      "route": "RafGitTools/TOKEN_VAZIO_PERMISSION_PROBE_REQUIRED",
+      "evidence_rule": "provider permission probe before wiring",
+      "claim_effect": "NO_AUTOMATIC_PROMOTION"
+    },
+    {
+      "secret_id": "PAT_ENV",
+      "executor_state": "WIRED_MANUAL_ONLY",
+      "route": "RafGitTools/provider_environments",
+      "evidence_rule": "manual dispatch + environment gate + exact main SHA + readback + rollback",
+      "claim_effect": "NO_AUTOMATIC_PROMOTION"
+    }
+  ],
+  "federation_invariants": [
+    "MAPA_STORES_POINTERS_NOT_SECRET_VALUES",
+    "RAFGITTOOLS_IS_PAT_BACKED_EXECUTOR",
+    "SECRET_IDENTIFIER_IS_UPPERCASE",
+    "CAPABILITY != PERMISSION",
+    "REGISTERED != WIRED",
+    "WIRED != EXECUTED",
+    "TOKEN_VAZIO != PASS",
+    "NO_PAT_FALLBACK",
+    "SOURCE_PR_UNMERGED != FEDERATED_ACTIVE"
+  ],
+  "secret_values": "FORBIDDEN",
+  "next": "Merge/validate RafGitTools PR#556, then update executor_source to merged main commit and promote this projection only with provider evidence."
+}
