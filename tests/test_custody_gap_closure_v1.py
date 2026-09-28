@@ -45,6 +45,33 @@ class CustodyGapClosureTests(unittest.TestCase):
         errors = module.validate(data)
         self.assertTrue(any("unknown dependency UNKNOWN-GAP" in e for e in errors))
 
+    def test_unknown_gap_class_rejected(self) -> None:
+        data = copy.deepcopy(self.data)
+        data["gaps"][0]["class"] = "UNKNOWN_CLASS"
+        errors = module.validate(data)
+        self.assertTrue(any("invalid class" in e for e in errors))
+
+    def test_model_state_is_validated(self) -> None:
+        data = copy.deepcopy(self.data)
+        data["state"] = "MAGIC_PASS"
+        errors = module.validate(data)
+        self.assertIn("model state invalid", errors)
+
+    def test_required_now_must_be_boolean(self) -> None:
+        data = copy.deepcopy(self.data)
+        data["gaps"][0]["required_now"] = "true"
+        errors = module.validate(data)
+        self.assertTrue(any("required_now must be boolean" in e for e in errors))
+
+    def test_dependency_cycle_rejected(self) -> None:
+        data = copy.deepcopy(self.data)
+        g3 = next(g for g in data["gaps"] if g["gap_id"] == "CUST-20260927-003")
+        g4 = next(g for g in data["gaps"] if g["gap_id"] == "CUST-20260927-004")
+        g3["depends_on"] = ["CUST-20260927-004"]
+        g4["depends_on"] = ["CUST-20260927-003"]
+        errors = module.validate(data)
+        self.assertTrue(any("dependency cycle detected" in e for e in errors))
+
 
 if __name__ == "__main__":
     unittest.main()
