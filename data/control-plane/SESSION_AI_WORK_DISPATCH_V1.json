@@ -1,0 +1,606 @@
+{
+  "schema": "RAFAELIA_SESSION_AI_WORK_DISPATCH_V1",
+  "version": "1.0.0",
+  "generated_on": "2026-09-28",
+  "state": "IMPLEMENTED_UNTESTED",
+  "claim_allowed": false,
+  "purpose": "Transform current-session alpha/raw requests into bounded agent work packets routed to existing authorities; Omega is materialized only after evidence.",
+  "source_authority": {
+    "federated_router": "rafaelmeloreisnovo/Mapa",
+    "executor": "rafaelmeloreisnovo/RafGitTools",
+    "private_work_ledger": "rafaelmeloreisnovo/Rafaelia_Private:data/governance/rafaelia_active_work_ledger.v2.json",
+    "drive_memory": "Google Drive START HERE Ω V2.1 DISPATCH + 41_CUSTODY_CHAIN",
+    "chat_session": {
+      "ref": "CHAT_SESSION_CURRENT_CONTEXT",
+      "provider_id": "TOKEN_VAZIO_SESSION_PROVIDER_ID",
+      "rule": "chat intent may seed work; durable evidence requires repository/Drive receipt"
+    }
+  },
+  "exact_sources": [
+    {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "ref": "main@7853f23053044c9b69d6b81f7f5f71fa285f864c",
+      "path": "data/control-plane/PRACTICE_ATLAS_V1.json",
+      "blob_sha": "e93c915fa6ddc73b85f0bd934af508e2627a9994"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/RafGitTools",
+      "ref": "main@606525722624116c7d7f750f08c59f9462d619f8",
+      "path": "configs/practice-router.v1.json",
+      "blob_sha": "a43e229b19f5dc01b109301f7c15f75f23d7c91a"
+    },
+    {
+      "repo": "rafaelmeloreisnovo/Rafaelia_Private",
+      "ref": "main@8a3dbb7f8ad586c059d3f6687e9d92623a0c98cd",
+      "path": "data/governance/rafaelia_active_work_ledger.v2.json",
+      "blob_sha": "c610030f3aeb73ef02b12b34804d2c8ed845a2bb"
+    }
+  ],
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "AGENT_ASSIGNMENT != AGENT_EXECUTION",
+    "SYMBOLIC_TOKEN != TECHNICAL_PROOF",
+    "DRIVE_MEMORY != PRODUCER_IMPLEMENTATION_AUTHORITY",
+    "NO_RAW_PRIVATE_BODY_IN_PUBLIC_ROUTER"
+  ],
+  "semantic_tokens": {
+    "α": "raw human request / unnormalized intent",
+    "∆": "bounded delta candidate",
+    "Π": "provenance/source binding",
+    "‡": "evidence or falsifier gate",
+    "†": "human dignity/ethics/privacy/safety gate",
+    "Ω": "materialized deliverable with explicit evidence state",
+    "BODY": "implementation/build/runtime/binary/ABI",
+    "SOUL": "semantics/contracts/provenance/authorship/custody",
+    "SPIRIT": "human-authorized intent/safety/reversibility/dignity/non-regression/cultural respect"
+  },
+  "transform": "α -> normalize -> BODY/SOUL/SPIRIT -> authority -> <=3 sources -> smallest reversible packet -> evidence -> receipt -> Ω",
+  "drive_localities": {
+    "atlas": {
+      "id": "14eeJ9W8XsnSXrtryAIwqMxMIgPysOi6n",
+      "name": "41_CUSTODY_CHAIN/01_ATLAS"
+    },
+    "routes": {
+      "id": "13xho8rcCljH5EpMcjdtZA2esQFEx1CP3",
+      "name": "41_CUSTODY_CHAIN/02_ROUTES"
+    },
+    "edges": {
+      "id": "1fPV_go4pcfvO478HhX0LKN2IUUuTSEHJ",
+      "name": "41_CUSTODY_CHAIN/05_EDGES"
+    },
+    "evidence": {
+      "id": "1hgdUlqm9rjp8XHa3UIyE7923ls10tteg",
+      "name": "41_CUSTODY_CHAIN/07_EVIDENCE"
+    },
+    "receipts": {
+      "id": "1J_snVtxYk_LFuRwHb6ozpLt0NYlI4wJ7",
+      "name": "41_CUSTODY_CHAIN/08_RECEIPTS"
+    }
+  },
+  "agent_roles": [
+    {
+      "id": "AI01_FEDERATED_ROUTER",
+      "locality": "GitHub/Mapa",
+      "owner": "rafaelmeloreisnovo/Mapa",
+      "mission": "Resolve cross-repo authority and minimum route.",
+      "source_min": [
+        "data/control-plane/PRACTICE_ATLAS_V1.json",
+        "data/control-plane/RAFAELIA_FEDERATED_WORK_SERVICE_CONTRACT.v1.json",
+        "indices/PRACTICE_ATLAS_V1.md"
+      ],
+      "outputs": [
+        "route_id",
+        "authority",
+        "source_min",
+        "dependency_edges",
+        "gap",
+        "next"
+      ],
+      "execution_target": "session dispatch validator",
+      "evidence_rule": "structural routing evidence only"
+    },
+    {
+      "id": "AI02_CONTROL_EXECUTOR",
+      "locality": "GitHub/RafGitTools",
+      "owner": "rafaelmeloreisnovo/RafGitTools",
+      "mission": "Convert authorized packet into deterministic branch/PR/test/receipt operations.",
+      "source_min": [
+        "AGENTS.md",
+        "configs/agent-entry-kernel.v1.json",
+        "configs/practice-router.v1.json"
+      ],
+      "outputs": [
+        "branch_delta",
+        "gate",
+        "receipt",
+        "rollback_ref"
+      ],
+      "execution_target": "repository-local named gate",
+      "evidence_rule": "exact-head gate only"
+    },
+    {
+      "id": "AI03_PRIVATE_CUSTODIAN",
+      "locality": "GitHub/Rafaelia_Private",
+      "owner": "rafaelmeloreisnovo/Rafaelia_Private",
+      "mission": "Protect private payload/authorship/provenance and export only approved pointers.",
+      "source_min": [
+        "data/governance/rafaelia_active_work_ledger.v2.json",
+        "docs/PRIVATE_ACADEMIC_CUSTODY_AND_KEYS_V1.md",
+        "docs/federation/REPOSITORY_CONTRACT_V1.md"
+      ],
+      "outputs": [
+        "opaque_pointer",
+        "classification",
+        "authorization_ref",
+        "retention",
+        "private_receipt"
+      ],
+      "execution_target": "private local validators",
+      "evidence_rule": "private access is not publication permission"
+    },
+    {
+      "id": "AI04_DRIVE_LIBRARIAN",
+      "locality": "Drive/41_CUSTODY_CHAIN",
+      "owner": "Google Drive documentary authority",
+      "mission": "Materialize pointer-only ATLAS/ROUTES/EDGES/EVIDENCE/RECEIPTS.",
+      "source_min": [
+        "START HERE Ω V2.1 DISPATCH",
+        "CURRENT_STATE Ω HOTSTATE V2",
+        "START HERE μWRITE LEDGER Ω V2"
+      ],
+      "outputs": [
+        "ATLAS_POINTER",
+        "ROUTE_POINTER",
+        "EDGE_POINTER",
+        "EVIDENCE_POINTER",
+        "RECEIPT_POINTER"
+      ],
+      "execution_target": "Drive create/update + readback",
+      "evidence_rule": "Drive readback proves documentary materialization only"
+    },
+    {
+      "id": "AI05_PROVIDER_CI_STEWARD",
+      "locality": "RafGitTools CI/provider",
+      "owner": "rafaelmeloreisnovo/RafGitTools",
+      "mission": "Isolate terminal defects and apply smallest branch-only reversible correction.",
+      "source_min": [
+        ".github/workflows/START.yml",
+        "docs/audit/",
+        "data/evidence/github/"
+      ],
+      "outputs": [
+        "problem_report",
+        "cause_or_TOKEN_VAZIO",
+        "fix_commit",
+        "rerun_ref"
+      ],
+      "execution_target": "existing/successor branch only",
+      "evidence_rule": "queued/skipped/cancelled != PASS; provider claim needs readback"
+    },
+    {
+      "id": "AI06_VISUAL_PRIVACY_INTAKE",
+      "locality": "RafGitTools + Rafaelia_Private",
+      "owner": "split authority",
+      "mission": "Preserve visual provenance while privacy depends on redaction/encryption/private storage, not OCR resistance.",
+      "source_min": [
+        "RafGitTools:orchestration/templo_vivo_arc/README.md",
+        "RafGitTools:orchestration/templo_vivo_arc/config.v1.json",
+        "Rafaelia_Private:inputs/templo_vivo_arc/README.md"
+      ],
+      "outputs": [
+        "opaque_visual_anchor",
+        "pointer_manifest",
+        "privacy_gate",
+        "cadence_state"
+      ],
+      "execution_target": "Templo Vivo validator/scheduler",
+      "evidence_rule": "digest vector is identity metadata, not encryption"
+    },
+    {
+      "id": "AI07_LANGUAGE_CUSTODY",
+      "locality": "producer repos",
+      "owner": "producer repository",
+      "mission": "Record Rust/C++/Kotlin/Java/C/Assembly custody, TAIL/SHADOW/FRICTION, ABI and FFI/JNI.",
+      "source_min": [
+        "producer AGENTS/README",
+        "producer build/lock",
+        "touched source/ABI contract"
+      ],
+      "outputs": [
+        "language_custody_pin",
+        "dependency_edges",
+        "tail",
+        "shadow",
+        "friction",
+        "origin_state"
+      ],
+      "execution_target": "producer-specific audit",
+      "evidence_rule": "unobserved fields remain TOKEN_VAZIO"
+    },
+    {
+      "id": "AI08_FREESTANDING_ENGINEER",
+      "locality": "producer low-level repo",
+      "owner": "producer repository",
+      "mission": "Find measurable CORE_FREESTANDING C/ASM opportunities while platform integrations stay ADAPTER_PLATFORM.",
+      "source_min": [
+        "freestanding contract",
+        "exact C/ASM implementation",
+        "equivalence/ABI test"
+      ],
+      "outputs": [
+        "core_adapter_split",
+        "equivalence_vectors",
+        "benchmark",
+        "rollback"
+      ],
+      "execution_target": "named freestanding+ABI gate",
+      "evidence_rule": "replacement requires parity + measurable gain + rollback"
+    },
+    {
+      "id": "AI09_REPRODUCIBILITY_STEWARD",
+      "locality": "producer + Drive",
+      "owner": "producer execution / Drive receipt",
+      "mission": "Bind before/after, exact refs, falsifier, replay, rollback and reconstruction.",
+      "source_min": [
+        "exact producer ref",
+        "named receipt",
+        "rollback contract"
+      ],
+      "outputs": [
+        "replay_recipe",
+        "rollback_test",
+        "reconstruction_state",
+        "receipt"
+      ],
+      "execution_target": "second-environment replay when available",
+      "evidence_rule": "same-run repetition is not independent reproduction"
+    },
+    {
+      "id": "AI10_STANDARDS_RIGHTS_STEWARD",
+      "locality": "Mapa/Private governance + Drive",
+      "owner": "governance/documentary; human legal review external",
+      "mission": "Attach applicable standards/rights references without certification/legal-opinion claims.",
+      "source_min": [
+        "Rafaelia_Private:data/governance/privacy-standards-map.v1.json",
+        "Mapa:docs/legal/GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_V1.md",
+        "producer privacy/threat model"
+      ],
+      "outputs": [
+        "standards_refs",
+        "human_rights_refs",
+        "applicability",
+        "gap",
+        "human_review_route"
+      ],
+      "execution_target": "documentary applicability gate",
+      "evidence_rule": "reference mapping != compliance/certification"
+    },
+    {
+      "id": "AI11_SEMANTIC_TRANSLATOR",
+      "locality": "RafGitTools semantic/context",
+      "owner": "RafGitTools local semantics; Mapa cross-repo routing",
+      "mission": "Translate nonlinear/symbolic requests into typed work packets without treating symbols as proof.",
+      "source_min": [
+        "scripts/semantic_context_exam.py",
+        "configs/practice-router.v1.json",
+        "docs/AI_HUMAN_FAST_ROUTE_V1.md"
+      ],
+      "outputs": [
+        "intent_normalization",
+        "typed_tokens",
+        "uncertainty",
+        "route_candidate"
+      ],
+      "execution_target": "semantic context exam + practice router validation",
+      "evidence_rule": "semantic coherence routes work; it does not prove runtime/domain claims"
+    }
+  ],
+  "session_packets": [
+    {
+      "id": "SP01_TEMPLO_VISUAL_PRIVACY",
+      "alpha_summary": "pixel/vector marking, private original-content custody and adaptive cadence",
+      "delta": "preserve visual identity/provenance with pointer-only private body",
+      "layer_class": [
+        "BODY",
+        "SOUL",
+        "SPIRIT"
+      ],
+      "agents": [
+        "AI06_VISUAL_PRIVACY_INTAKE",
+        "AI03_PRIVATE_CUSTODIAN",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W11",
+        "MC-W12",
+        "MC-W17",
+        "MC-W18"
+      ],
+      "authority": "RafGitTools adapter + Rafaelia_Private custody",
+      "source_min": [
+        "RafGitTools:orchestration/templo_vivo_arc/",
+        "Rafaelia_Private:inputs/templo_vivo_arc/",
+        "Rafaelia_Private:active-work-ledger.v2"
+      ],
+      "execution_target": "existing Templo Vivo gates",
+      "evidence_rule": "no privacy claim from pixel obfuscation; exact receipt required",
+      "status": "PARTIAL_MATERIALIZED",
+      "omega_exit": "synthetic pointer passes privacy gate with no plaintext leak",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP02_CI_PROVIDER_PROBLEM_LOOP",
+      "alpha_summary": "continuous correction of CI/provider/problem reports",
+      "delta": "terminal defect -> bounded branch-only repair -> rerun",
+      "layer_class": [
+        "BODY",
+        "SOUL",
+        "SPIRIT"
+      ],
+      "agents": [
+        "AI05_PROVIDER_CI_STEWARD",
+        "AI02_CONTROL_EXECUTOR",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W03",
+        "MC-W17"
+      ],
+      "authority": "RafGitTools",
+      "source_min": [
+        "RafGitTools:.github/workflows/START.yml",
+        "RafGitTools:docs/audit/",
+        "RafGitTools:data/evidence/github/"
+      ],
+      "execution_target": "existing or successor branch, not default direct",
+      "evidence_rule": "terminal exact-head CI + provider readback for provider claims",
+      "status": "ACTIVE_RECURRING",
+      "omega_exit": "cause + correction + rerun + readback + rollback receipt",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP03_BODY_SOUL_SPIRIT_ARCH_PIN",
+      "alpha_summary": "classify every material delta",
+      "delta": "emit BODY/SOUL/SPIRIT + ARCH_PIN metadata",
+      "layer_class": [
+        "BODY",
+        "SOUL",
+        "SPIRIT"
+      ],
+      "agents": [
+        "AI01_FEDERATED_ROUTER",
+        "AI02_CONTROL_EXECUTOR",
+        "AI10_STANDARDS_RIGHTS_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W03",
+        "MC-W17",
+        "MC-W18"
+      ],
+      "authority": "Mapa routing; producer implementation",
+      "source_min": [
+        "Mapa:PRACTICE_ATLAS_V1",
+        "Rafaelia_Private:active-work-ledger.v2",
+        "producer receipt"
+      ],
+      "execution_target": "dispatch validator + producer gate",
+      "evidence_rule": "classification metadata != PASS",
+      "status": "IMPLEMENTED_IN_THIS_DISPATCH",
+      "omega_exit": "all packets have classification/authority/evidence rule",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP04_LANGUAGE_CUSTODY",
+      "alpha_summary": "Rust/C++/Kotlin/Java/C/Assembly custody with TAIL/SHADOW/FRICTION",
+      "delta": "generate custody only for actually touched components",
+      "layer_class": [
+        "BODY",
+        "SOUL"
+      ],
+      "agents": [
+        "AI07_LANGUAGE_CUSTODY",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W02",
+        "MC-W04",
+        "MC-W05",
+        "MC-W06",
+        "MC-W16"
+      ],
+      "authority": "producer repository",
+      "source_min": [
+        "producer source",
+        "producer build/lock",
+        "producer ABI/FFI contract"
+      ],
+      "execution_target": "producer-specific audit",
+      "evidence_rule": "unobserved fields stay TOKEN_VAZIO",
+      "status": "ROUTED_NOT_EXHAUSTIVE",
+      "omega_exit": "component-level custody pin with direct/transitive edges",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP05_CORE_FREESTANDING",
+      "alpha_summary": "low-friction C/ASM core opportunities without hiding platform boundaries",
+      "delta": "separate CORE_FREESTANDING from ADAPTER_PLATFORM",
+      "layer_class": [
+        "BODY",
+        "SOUL"
+      ],
+      "agents": [
+        "AI08_FREESTANDING_ENGINEER",
+        "AI07_LANGUAGE_CUSTODY"
+      ],
+      "workstreams": [
+        "MC-W04",
+        "MC-W05"
+      ],
+      "authority": "producer repository / Practice ATLAS low-level route",
+      "source_min": [
+        "freestanding contract",
+        "exact implementation",
+        "equivalence test"
+      ],
+      "execution_target": "producer freestanding/ABI gate",
+      "evidence_rule": "system-wide no-dependency/no-syscall claims forbidden unless separately proven",
+      "status": "ROUTED",
+      "omega_exit": "measured gain + parity + rollback",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP06_ATLAS_ROUTES_RECEIPTS",
+      "alpha_summary": "navigable ATLAS/ROUTES/EDGES/EVIDENCE/RECEIPTS",
+      "delta": "pointer-only route pins in GitHub + documentary mirror in Drive",
+      "layer_class": [
+        "SOUL",
+        "SPIRIT"
+      ],
+      "agents": [
+        "AI01_FEDERATED_ROUTER",
+        "AI04_DRIVE_LIBRARIAN",
+        "AI09_REPRODUCIBILITY_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W12",
+        "MC-W18"
+      ],
+      "authority": "Mapa routes + Drive documentary custody",
+      "source_min": [
+        "Mapa Practice ATLAS",
+        "Drive START HERE Ω V2.1",
+        "Drive CURRENT_STATE Ω"
+      ],
+      "execution_target": "route validator + Drive readback",
+      "evidence_rule": "pointer/readback proves navigation materialization only",
+      "status": "IMPLEMENTED_IN_THIS_DISPATCH",
+      "omega_exit": "every material delta has route/evidence/receipt + rollback",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP07_STANDARDS_DIGNITY",
+      "alpha_summary": "quality/privacy/security/accessibility/dignity/child-safety gates",
+      "delta": "map applicable standards/rights without compliance claims",
+      "layer_class": [
+        "SOUL",
+        "SPIRIT"
+      ],
+      "agents": [
+        "AI10_STANDARDS_RIGHTS_STEWARD"
+      ],
+      "workstreams": [
+        "MC-W17"
+      ],
+      "authority": "governance docs + human review where required",
+      "source_min": [
+        "privacy-standards-map.v1.json",
+        "GLOBAL_DATA_PRIVACY_GNSS_AI_GOVERNANCE_V1.md",
+        "producer threat/privacy model"
+      ],
+      "execution_target": "documentary applicability gate",
+      "evidence_rule": "reference mapping != certification",
+      "status": "ROUTED",
+      "omega_exit": "standard/version/applicability/evidence/gap/status + rights refs",
+      "claim_allowed": false
+    },
+    {
+      "id": "SP08_SESSION_TO_WORK_PACKETS",
+      "alpha_summary": "compose the whole session into tokenized assignments across GitHub and Drive",
+      "delta": "materialize non-duplicating overlay on Practice ATLAS + Active Work Ledger V2",
+      "layer_class": [
+        "BODY",
+        "SOUL",
+        "SPIRIT"
+      ],
+      "agents": [
+        "AI11_SEMANTIC_TRANSLATOR",
+        "AI01_FEDERATED_ROUTER",
+        "AI02_CONTROL_EXECUTOR",
+        "AI04_DRIVE_LIBRARIAN"
+      ],
+      "workstreams": [
+        "MC-W03",
+        "MC-W12",
+        "MC-W17",
+        "MC-W18"
+      ],
+      "authority": "Mapa route / RafGitTools execution / Drive memory",
+      "source_min": [
+        "Mapa:PRACTICE_ATLAS_V1",
+        "Rafaelia_Private:active-work-ledger.v2",
+        "RafGitTools:practice-router.v1.json"
+      ],
+      "execution_target": "dispatch validator + executor adapter + Drive readback",
+      "evidence_rule": "agent assignment is contract, not execution proof",
+      "status": "IMPLEMENTED_UNTESTED",
+      "omega_exit": "validated registry + adapter + Drive mirror + receipts",
+      "claim_allowed": false
+    }
+  ],
+  "arch_pin_template": {
+    "layer_class": [
+      "BODY",
+      "SOUL",
+      "SPIRIT"
+    ],
+    "language": "TOKEN_VAZIO_UNTIL_COMPONENT_BOUND",
+    "source_ref": "required",
+    "owner": "required",
+    "runtime_boundary": "required",
+    "dependency_edges": [],
+    "tail": "TOKEN_VAZIO",
+    "shadow": "TOKEN_VAZIO",
+    "friction": "TOKEN_VAZIO",
+    "freestanding_status": "TOKEN_VAZIO",
+    "native_boundary": "TOKEN_VAZIO",
+    "authorship_status": "TOKEN_VAZIO_ORIGIN",
+    "route_id": "required",
+    "standards_refs": [],
+    "human_rights_refs": [],
+    "evidence_ref": "TOKEN_VAZIO_EVIDENCE",
+    "claim_allowed": false
+  },
+  "route_pin_required": [
+    "route_id",
+    "source_ref",
+    "target_ref",
+    "relation_type",
+    "owner",
+    "authority",
+    "predecessor",
+    "successor",
+    "dependency_edges",
+    "evidence_ref",
+    "receipt_ref",
+    "rollback_ref",
+    "replay_recipe",
+    "reproduction_state",
+    "privacy_class",
+    "retention_class",
+    "claim_allowed",
+    "hash_ref"
+  ],
+  "standards_reference_pool": [
+    "ISO/IEC 27001:2022",
+    "ISO/IEC 27002:2022",
+    "ISO 8000-series (part-specific applicability required)",
+    "NIST Cybersecurity Framework 2.0 (2024)",
+    "NIST SP 800-37 Rev.2",
+    "NIST Privacy Framework 1.0",
+    "W3C WCAG 2.2",
+    "IETF RFC 8446 (TLS 1.3)"
+  ],
+  "human_rights_reference_pool": [
+    "Universal Declaration of Human Rights (1948)",
+    "Convention on the Rights of the Child (1989)",
+    "UNESCO/UNICEF/WHO references only when applicable to the touched domain"
+  ],
+  "stop_conditions": [
+    "missing SOURCE/AUTHORITY/EXECUTION_TARGET/EVIDENCE_RULE => BLOCKED + TOKEN_VAZIO",
+    "producer authority boundary => route instead of substitute",
+    "critical privacy/security/child-safety failure => fail closed",
+    "exit criterion observed => receipt and stop auto scope expansion"
+  ]
+}
