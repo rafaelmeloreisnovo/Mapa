@@ -1,0 +1,355 @@
+{
+  "schema": "rafaelia.agent-work-orders.v1",
+  "atlas_ref": "data/dispatch/session_full_20260928/atlas.v1.json",
+  "weight_semantics": "routing/work-allocation only; never confidence, truth, authorship, merit or model-weight claims",
+  "agents": [
+    {
+      "id": "AI_ROUTER_OMEGA",
+      "token": "ΔROUTEΩ",
+      "workstream": "WS00",
+      "alpha_intent": "reconstruct the current session into a bounded, navigable execution graph",
+      "omega_delivery": "machine-readable Mapa atlas/routes/work orders plus Drive reconstruction pointers",
+      "locality": [
+        "rafaelmeloreisnovo/Mapa",
+        "Google Drive"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 3,
+        "routing": 3,
+        "privacy": 2,
+        "runtime": 1,
+        "human_context": 2
+      },
+      "prerequisites": [
+        "SOURCE",
+        "AUTHORITY",
+        "EXECUTION_TARGET",
+        "EVIDENCE_RULE"
+      ],
+      "outputs": [
+        "ATLAS",
+        "ROUTE_PIN",
+        "WORK_ORDER",
+        "RECEIPT"
+      ],
+      "stop_when": "minimum route is reconstructible and another history read would not change authority/evidence/gap",
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_CI_DELTA",
+      "token": "ΔCIΩ",
+      "workstream": "WS01",
+      "alpha_intent": "turn CI/provider/problem-report observations into the smallest reversible corrections",
+      "omega_delivery": "branch-only fix + exact-head gate + problem report + receipt",
+      "locality": [
+        "rafaelmeloreisnovo/RafGitTools"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 3,
+        "routing": 2,
+        "privacy": 2,
+        "runtime": 3,
+        "human_context": 1
+      },
+      "prerequisites": [
+        "terminal or actionable run/job evidence",
+        "clear rollback"
+      ],
+      "outputs": [
+        "before_after",
+        "commit_ref",
+        "run_job_ref",
+        "rollback",
+        "F_ok_F_gap_F_next"
+      ],
+      "forbidden": [
+        "weaken tests",
+        "hide failure",
+        "direct main mutation",
+        "automatic merge/release"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_PRIVATE_PHI",
+      "token": "ΔPRIVATEΦ",
+      "workstream": "WS02",
+      "alpha_intent": "keep original/private bodies, authorization, retention and key governance inside the private authority",
+      "omega_delivery": "pointer-only intake and custody receipts without secret material in public surfaces",
+      "locality": [
+        "rafaelmeloreisnovo/Rafaelia_Private"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 2,
+        "routing": 2,
+        "privacy": 3,
+        "runtime": 1,
+        "human_context": 3
+      },
+      "outputs": [
+        "opaque_pointer",
+        "authorization_ref",
+        "privacy_class",
+        "retention",
+        "key_id_only",
+        "custody_receipt"
+      ],
+      "forbidden": [
+        "PAT/password/private-key/seed/plaintext dictionary in Git",
+        "implicit consent"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_PIXEL_PI",
+      "token": "ΔPIXELΠ",
+      "workstream": "WS03",
+      "alpha_intent": "preserve visual/pixel identity and provenance without treating visual obfuscation as confidentiality",
+      "omega_delivery": "no-OCR visual anchor + private original-content pointer + explicit privacy boundary",
+      "locality": [
+        "RafGitTools orchestration/templo_vivo_arc",
+        "Rafaelia_Private inputs/templo_vivo_arc"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 2,
+        "routing": 1,
+        "privacy": 3,
+        "runtime": 1,
+        "human_context": 2
+      },
+      "evidence_refs": [
+        "RafGitTools PR#522",
+        "Rafaelia_Private PR#254"
+      ],
+      "outputs": [
+        "sha256",
+        "blake2b_256",
+        "dimensions",
+        "opaque_digest_vector",
+        "ocr_performed=false"
+      ],
+      "falsifier": "any claim that human-readable visible text is reliably AI/OCR unreadable",
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_ATLAS_SIGMA",
+      "token": "ΔATLASΣ",
+      "workstream": "WS04",
+      "alpha_intent": "make every material delta navigable, append-only and reconstructible",
+      "omega_delivery": "01_ATLAS/02_ROUTES/05_EDGES/07_EVIDENCE/08_RECEIPTS pointers",
+      "locality": [
+        "Google Drive 41_CUSTODY_CHAIN",
+        "Mapa"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 3,
+        "routing": 3,
+        "privacy": 2,
+        "runtime": 1,
+        "human_context": 2
+      },
+      "outputs": [
+        "ROUTE_PIN",
+        "EDGE",
+        "EVIDENCE_POINTER",
+        "RECEIPT"
+      ],
+      "no_corpus_duplication": true,
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_CUSTODY_LAMBDA",
+      "token": "ΔLANGΛ",
+      "workstream": "WS05",
+      "alpha_intent": "build explicit custody records for Rust, C++, Kotlin, Java, C and Assembly only where source evidence exists",
+      "omega_delivery": "component ledger with language/owner/ref/license/build/ABI/FFI/dependencies/generators/post-build/C-ASM-entry",
+      "locality": [
+        "producer repository selected by route"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 3,
+        "routing": 2,
+        "privacy": 1,
+        "runtime": 3,
+        "human_context": 1
+      },
+      "labels": {
+        "TAIL": "transitive dependency or post-step",
+        "SHADOW": "implicit, duplicated or unobserved implementation/path",
+        "FRICTION": "required external toolchain/runtime/network/provider boundary"
+      },
+      "origin_states": [
+        "CLEAN_AUTHORIAL_COMPONENT_VERIFIED",
+        "THIRD_PARTY_DERIVED",
+        "MIXED_ORIGIN",
+        "TOKEN_VAZIO_ORIGIN"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_CORE_C11",
+      "token": "ΔC11",
+      "workstream": "WS06",
+      "alpha_intent": "identify real CORE_FREESTANDING candidates in C/ASM without moving platform obligations into a false system-wide claim",
+      "omega_delivery": "CORE_FREESTANDING vs ADAPTER_PLATFORM split with behavior contract, equivalence tests, benchmark and rollback",
+      "locality": [
+        "producer repository selected by evidence"
+      ],
+      "dimensions": {
+        "provenance": 2,
+        "evidence": 3,
+        "routing": 1,
+        "privacy": 1,
+        "runtime": 3,
+        "human_context": 1
+      },
+      "core_constraints": [
+        "no libc",
+        "no malloc",
+        "no exceptions",
+        "no RTTI",
+        "no GC",
+        "no platform functions in CORE when feasible"
+      ],
+      "platform_edges": [
+        "Android",
+        "JVM",
+        "JNI",
+        "Bionic",
+        "Gradle",
+        "SDK",
+        "NDK",
+        "OS/toolchain/network as applicable"
+      ],
+      "replacement_gate": "measurable gain + behavior equivalence + provenance + rollback",
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_STANDARDS_E8",
+      "token": "ΔETHICA8",
+      "workstream": "WS07",
+      "alpha_intent": "cross-reference applicable engineering controls and dignity/rights sources without claiming certification",
+      "omega_delivery": "standard_id/version/control/applicability/evidence/gap/status plus human_rights_refs when people/data are touched",
+      "locality": [
+        "Drive documentary memory",
+        "producer docs"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 2,
+        "routing": 1,
+        "privacy": 3,
+        "runtime": 1,
+        "human_context": 3
+      },
+      "source_families": [
+        "ISO/IEC 27000-series",
+        "ISO 8000-series",
+        "NIST CSF/RMF/Privacy Framework",
+        "IEEE/W3C/IETF/ICT when relevant",
+        "UDHR",
+        "CRC",
+        "UNESCO",
+        "UNICEF",
+        "WHO"
+      ],
+      "nonbinding_lenses": [
+        "ICRC",
+        "MSF",
+        "WWF",
+        "Greenpeace when relevant"
+      ],
+      "forbidden": [
+        "claim certification/conformance without competent audit"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_REPRO_R3",
+      "token": "ΔREPRO_R3",
+      "workstream": "WS08",
+      "alpha_intent": "bind every change to before/after, falsifier, rollback and replay",
+      "omega_delivery": "reproduction and rollback receipt",
+      "locality": [
+        "all touched repositories",
+        "Drive receipts"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 3,
+        "routing": 2,
+        "privacy": 2,
+        "runtime": 3,
+        "human_context": 1
+      },
+      "required_fields": [
+        "before_state",
+        "after_state",
+        "command_or_action",
+        "exact_ref",
+        "expected_observable",
+        "actual_observable",
+        "falsifier",
+        "rollback_procedure",
+        "rollback_test",
+        "replay_recipe",
+        "reconstruction_minimum"
+      ],
+      "missing_reconstruction_state": "TOKEN_VAZIO_RECONSTRUCTION",
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_HUMAN_HEART",
+      "token": "ΔHUMAN_HEART",
+      "workstream": "WS09",
+      "alpha_intent": "translate the architecture into clear human-facing documents while protecting dignity, culture, belief freedom and appeal",
+      "omega_delivery": "plain-language navigation that points to technical sources instead of replacing them",
+      "locality": [
+        "Google Drive human-entry/docs"
+      ],
+      "dimensions": {
+        "provenance": 2,
+        "evidence": 1,
+        "routing": 2,
+        "privacy": 3,
+        "runtime": 0,
+        "human_context": 3
+      },
+      "invariant": "METAPHOR != TECHNICAL_PROOF",
+      "claim_allowed": false
+    },
+    {
+      "id": "AI_EXEC_RGT",
+      "token": "ΔEXEC_RGT",
+      "workstream": "WS10",
+      "alpha_intent": "consume Mapa-authoritative work orders and expose a local executor adapter without creating a competing authority",
+      "omega_delivery": "RafGitTools adapter + validator + local route to problem/CI/runtime gates",
+      "locality": [
+        "rafaelmeloreisnovo/RafGitTools"
+      ],
+      "dimensions": {
+        "provenance": 3,
+        "evidence": 3,
+        "routing": 3,
+        "privacy": 2,
+        "runtime": 3,
+        "human_context": 1
+      },
+      "upstream_authority": "rafaelmeloreisnovo/Mapa",
+      "outputs": [
+        "adapter_config",
+        "validator",
+        "tests",
+        "local documentation"
+      ],
+      "claim_allowed": false
+    }
+  ],
+  "claim_allowed": false
+}
