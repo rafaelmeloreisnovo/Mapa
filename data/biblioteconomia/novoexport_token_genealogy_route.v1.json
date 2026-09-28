@@ -1,0 +1,58 @@
+{
+  "schema": "RAFAELIA_ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_V1",
+  "date": "2026-09-28",
+  "state": "ROUTED_IMPLEMENTED_SCOPED",
+  "claim_allowed": false,
+  "authorities": {
+    "raw_source": {
+      "surface": "Google Drive NOVOexport",
+      "folder_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+      "role": "CURRENT_RAW_SOURCE"
+    },
+    "private_genealogy": {
+      "repo": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "branch": "codex/novoexport-token-genealogy-v1-20260928",
+      "role": "PRIVATE_DERIVED_INDEX"
+    },
+    "router": {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "role": "PUBLIC_SAFE_ROUTE_AND_GAPS"
+    }
+  },
+  "route": [
+    "ATLAS:TOKEN",
+    "NOVO:TOKEN",
+    "SOURCE",
+    "MSG",
+    "L",
+    "O",
+    "T",
+    "REL",
+    "EVID",
+    "GAP",
+    "NEXT"
+  ],
+  "producer_paths": [
+    "scripts/novoexport_token_genealogy.py",
+    "memory_bridge/token_genealogy/README.md",
+    "memory_bridge/token_genealogy/token_family_catalog.v1.json",
+    "memory_bridge/token_genealogy/seed_shard_045.v1.json",
+    "memory_bridge/receipts/2026-09-28_NOVOEXPORT_TOKEN_GENEALOGY_V1.json"
+  ],
+  "execution": {
+    "unit_test": "PASS_LOCAL",
+    "seed": "PASS_SCOPED_SHARD_045_ONLY",
+    "full_000_050": "PENDING"
+  },
+  "invariants": [
+    "USER_INPUT!=ASSISTANT_OUTPUT",
+    "MESSAGE_ROLE_PROVENANCE!=LEXICAL_AUTHORSHIP",
+    "LITERAL_OCCURRENCE!=SEMANTIC_EQUIVALENCE",
+    "TEMPORAL_PRECEDENCE!=CAUSAL_USE",
+    "RECURRENCE!=TRAINING_EVIDENCE",
+    "RAW_SOURCE!=DERIVED_INDEX",
+    "TOKEN_VAZIO!=0"
+  ],
+  "privacy": "POINTER_ONLY_PUBLIC_SAFE; NO_RAW_PRIVATE_MESSAGE_BODY",
+  "next": "full 000..050 scan -> provider-id binding -> full receipt -> per-token reconstructive proofs"
+}
