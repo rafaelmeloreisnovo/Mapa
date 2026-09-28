@@ -25,7 +25,7 @@ RafGitTools owns the bounded execution lanes. A PAT-backed state may be promoted
 
 ## Current source
 
-Executor source is RafGitTools PR #556 at `b4d21f79988b60d6d2179caf4e173e61045eb235`.
+Executor source is RafGitTools PR #556 at `363008c7555ea090243e3232483510c754cdb5a6`.
 
 Because that source is not merged at projection creation, this Mapa projection remains `PENDING_EXECUTOR_SOURCE_MERGE`.
 
