@@ -34,6 +34,7 @@ REQUIRED_PROFILES = {
     "TRANSFORMATION_LINEAGE_CUSTODY",
     "EVIDENCE_CUSTODY",
     "AGENT_ACTION_CUSTODY",
+    "CREDENTIAL_PERMISSION_CUSTODY",
     "CROSS_SURFACE_BINDING_CUSTODY",
     "RECEIPT_CHAIN_CUSTODY",
 }
@@ -129,6 +130,15 @@ def validate_registry(data: dict[str, Any]) -> list[str]:
     for required in ("human_authority_ref", "assistant_orchestrator_ref", "connector_provider", "provider_result_ref"):
         if required not in anchors:
             errors.append(f"AGENT_ACTION_CUSTODY missing anchor: {required}")
+
+    credential = profiles.get("CREDENTIAL_PERMISSION_CUSTODY", {})
+    credential_anchors = set(credential.get("required_anchors", [])) if isinstance(credential.get("required_anchors"), list) else set()
+    for required in ("provider", "principal_or_subject_ref", "target_resource", "permission_scope", "credential_locator_or_secret_name_without_value", "observed_state", "provider_result_or_readback_ref"):
+        if required not in credential_anchors:
+            errors.append(f"CREDENTIAL_PERMISSION_CUSTODY missing anchor: {required}")
+    boundary = credential.get("claim_boundary", "")
+    if isinstance(boundary, str) and "secret value" not in boundary.lower():
+        errors.append("CREDENTIAL_PERMISSION_CUSTODY must distinguish configured names from secret-value evidence")
 
     binding = data.get("cross_surface_binding")
     if not isinstance(binding, dict):
