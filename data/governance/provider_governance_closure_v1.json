@@ -97,5 +97,14 @@
     "conclusion": "MATERIALIZE_EXECUTABLE_ROUTE_ONLY; DO_NOT_CLAIM_PROVIDER_CONFIGURED",
     "environment_binding": "TOKEN_VAZIO_NOT_REQUIRED_BY_WORKFLOW",
     "admin_credential_source": "RAFAELIA_ADMIN_TOKEN repository-or-organization secret; existence/permissions TOKEN_VAZIO until dispatch"
+  },
+  "promotion_freshness": {
+    "observed_contradiction": "PR#702 provider readback draft=false while promotion-control run 36460700905 reported PULL_REQUEST_DRAFT_OR_UNKNOWN",
+    "remediation": "promotion-control-v1 now captures live PR metadata through GitHub API and verifies promotion-event-live.json",
+    "workflow_blob": "2c36078806bd92c3364d1a3f2cd8bc88dec0fc83",
+    "state": "IMPLEMENTED_UNTESTED",
+    "evidence_needed": "exact-head promotion-control run must omit PULL_REQUEST_DRAFT_OR_UNKNOWN when PR readback is draft=false",
+    "invariant": "freshness remediation must not remove the independent-approval floor",
+    "claim_allowed": false
   }
 }
