@@ -2,10 +2,11 @@
   "schema_version": "1.0",
   "registry_id": "RAFAELIA_MODEL_GAP_MATRIX_V1",
   "generated_from": {
-    "current_state": "Drive:1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ",
+    "current_state": "Drive:1vrtTKW1DMgoC_YsIshxzo5XwuyW2AF7IkcbpBZAwFxc",
     "canonical_boot": "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
     "canonical_gap_registry": "data/manifold/gaps_omega_v1.jsonl@e4fb3de76912a7a64cbe04f740b559e104e7bb15",
-    "dispatch_evidence": "commit:ffddbad3abf789eae716aba0b397d76237a0f464"
+    "dispatch_evidence": "commit:ffddbad3abf789eae716aba0b397d76237a0f464",
+    "current_state_predecessor": "Drive:1KHzF3yA8B5RSLiTAGnbJ9lVmEc5rn-l6gOcsdmT5YwQ"
   },
   "invariant": "SOURCE!=ARTIFACT!=EXECUTION!=EVIDENCE!=CLAIM; TOKEN_VAZIO!=0; IMPLEMENTED_UNTESTED!=PASS",
   "claim_allowed": false,
@@ -33,21 +34,20 @@
     {
       "model_id": "M01",
       "model": "BOOTSTRAP_CANONICO",
-      "state": "OBSERVED_UNPROMOTED",
+      "state": "PARTIAL_BOUNDED",
       "gap_kind": "MISSING_PROMOTION",
-      "gap": "V2.1 Dispatch esta evidenciado em branch/CI, mas promocao e enforcement de provider permanecem fail-closed no CURRENT_STATE.",
+      "gap": "START HERE V2.1 esta integrado no Mapa main e no Drive, mas o machine-dispatch main ainda aponta para o CURRENT_STATE predecessor; PR#688 implementa HOTSTATE V2 binding e permanece pendente de exact-head CI/merge.",
       "token_vazio": [
-        "TOKEN_VAZIO_MAIN_INTEGRATION",
-        "TOKEN_VAZIO_PROVIDER_PROMOTION_AUTHORITY"
+        "TOKEN_VAZIO_MACHINE_DISPATCH_HOTSTATE_BINDING"
       ],
       "linked_gap_refs": [],
       "evidence_needed": [
-        "decisao humana/provider",
-        "main readback do dispatch promovido",
-        "receipt sucessor"
+        "PR #688 exact-head manifold/CI terminal",
+        "machine-dispatch main readback apontando CURRENT_STATE HOTSTATE V2",
+        "successor receipt apos merge autorizado"
       ],
-      "closure_criterion": "promocao autorizada seguida de readback do main e receipt",
-      "next": "manter draft enquanto governanca nao fechar"
+      "closure_criterion": "fechar somente quando o machine dispatch no main apontar para HOTSTATE V2 e o main readback estiver registrado; bootstrap documental ja integrado nao deve ser rebaixado",
+      "next": "acompanhar PR#688; nao duplicar successor"
     },
     {
       "model_id": "M02",
