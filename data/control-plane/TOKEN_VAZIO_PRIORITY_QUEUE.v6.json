@@ -1,9 +1,9 @@
 {
   "schema": "rafaelia.token-vazio-priority-queue.v6",
-  "generated_at": "2026-09-27T00:17:10+00:00",
-  "evidence_updated_at": "2026-09-27T00:17:10+00:00",
+  "generated_at": "2026-09-28T08:08:31+00:00",
+  "evidence_updated_at": "2026-09-28T08:08:31+00:00",
   "source_repository": "rafaelmeloreisnovo/Mapa",
-  "source_main_sha": "09b1cfa678957d4abb713f264bdf3ac629fdad46",
+  "source_main_sha": "c0591a6dc4257a59947a93ce8820c0a466ff3bb7",
   "supersedes_for_current_routing": "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v5.json",
   "history_policy": "APPEND_ONLY_PRESERVE_PREDECESSOR",
   "ordering_rule": "dependency_then_risk_then_information_gain_then_latest_evidence",
@@ -13,8 +13,8 @@
   "promotion_allowed": false,
   "unresolved_untyped_gaps": 0,
   "provider_snapshot": {
-    "observed_at": "2026-09-27T00:17:10+00:00",
-    "main_sha": "09b1cfa678957d4abb713f264bdf3ac629fdad46",
+    "observed_at": "2026-09-28T08:08:31+00:00",
+    "main_sha": "c0591a6dc4257a59947a93ce8820c0a466ff3bb7",
     "branch_protected": false,
     "required_status_checks_enforcement": "off",
     "repository_rulesets": [
@@ -27,9 +27,9 @@
     "authority": "GitHub provider live reads",
     "freshness_max_hours": 24,
     "evidence_refs": [
-      "GitHub provider read 2026-09-27T00:17:10Z: default_branch=main; permissions.admin=true",
-      "GitHub main branch read: sha=09b1cfa678957d4abb713f264bdf3ac629fdad46; protected=false; required_status_checks.enforcement_level=off",
-      "GitHub repository rulesets read: id=21909304; enforcement=disabled"
+      "GitHub provider read 2026-09-28T08:08:31+00:00: default_branch=main",
+      "GitHub main branch read 2026-09-28T08:08:31+00:00: sha=c0591a6dc4257a59947a93ce8820c0a466ff3bb7; protected=false; required_status_checks.enforcement_level=off",
+      "GitHub repository rulesets read 2026-09-28T08:08:31+00:00: id=21909304; enforcement=disabled"
     ]
   },
   "active_items": [
@@ -48,7 +48,8 @@
         "Server Merge Enforcement Assurance run 35374401036: protected=false",
         "Server Merge Enforcement Assurance run 35374401036: REQUIRED_STATUS_CHECKS_NOT_ENFORCED",
         "Server Merge Enforcement Assurance run 35374401036: NO_REQUIRED_STATUS_CHECKS_OBSERVED",
-        "server_side_merge_binding=NOT_ENFORCED_OBSERVED"
+        "server_side_merge_binding=NOT_ENFORCED_OBSERVED",
+        "Fresh provider read 2026-09-28T08:08:31+00:00: main=c0591a6dc4257a59947a93ce8820c0a466ff3bb7; protected=false; required_status_checks=off; ruleset 21909304 enforcement=disabled"
       ],
       "uncertainty": "Fresh provider reads do not evidence effective fail-closed merge enforcement on main.",
       "falsifier": "A fresh provider read shows effective required status/review enforcement governing main.",
@@ -309,8 +310,8 @@
     "freshness is a routing gate, not proof of enforcement"
   ],
   "r3": {
-    "F_ok": "Fresh provider read binds current main SHA, branch protection=false, required checks=off, and ruleset 21909304 disabled.",
-    "F_gap": "Provider-side merge enforcement and independent human approval remain open; fresh observation does not equal protection.",
-    "F_next": "Keep P0 enforcement fail-closed; apply/enable an authorized provider rule only through the provider administration surface, then read back and execute the zero-approval rejection gate."
+    "F_ok": "Fresh provider read at 2026-09-28T08:08:31+00:00 binds current main c0591a6dc4257a59947a93ce8820c0a466ff3bb7, branch protection=false, required checks=off, and ruleset 21909304 disabled.",
+    "F_gap": "Provider-side merge enforcement and independent human approval remain open; refreshed observation is routing evidence, not protection.",
+    "F_next": "Keep P0 enforcement fail-closed; establish authorized provider enforcement through the provider administration surface, then read back and execute the zero-approval rejection gate."
   }
 }
