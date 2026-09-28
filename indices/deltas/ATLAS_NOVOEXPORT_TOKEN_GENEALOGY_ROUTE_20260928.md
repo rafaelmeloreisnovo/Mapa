@@ -28,12 +28,14 @@ ATLAS:NOVO:TOKEN
 ## Authority pointers
 
 ### Raw source
+
 - Drive folder: `NOVOexport`
 - Drive ID: `1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv`
 - Raw shards: `conversations-000..050`
 - Raw mutation policy: forbidden for derived indexing work.
 
 ### Drive reconstruction topology
+
 - `00_INDEX`: `1C5XGG92HY3_QvEbuGYLStMdHBvCIPzUv`
 - `01_ATLAS`: `1Rfj6cb_ItIAWFj9_VR3GocMiTNHJAeBe`
 - `02_ROUTES`: `15EsVIToWrbL1d-yPv7ezMXaDrKZBWIKi`
@@ -46,6 +48,7 @@ ATLAS:NOVO:TOKEN
 - `09_CONVERSATION_CHUNKS`: `1cv8r6PDtjOQk2-yAhLS3J4CfjVMt4gIW`
 
 ### Private derived registry
+
 - repo: `rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE`
 - Wave 1 PR: `#58`
 - branch: `work/novoexport-token-reconstruction-v1-20260928`
