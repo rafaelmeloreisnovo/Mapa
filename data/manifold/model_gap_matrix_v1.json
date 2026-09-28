@@ -34,20 +34,20 @@
     {
       "model_id": "M01",
       "model": "BOOTSTRAP_CANONICO",
-      "state": "READY_TO_TEST",
+      "state": "PARTIAL_BOUNDED",
       "gap_kind": "MISSING_PROMOTION",
-      "gap": "Drive START HERE and Canonical Index now point to HOTSTATE V3; this candidate updates the Mapa machine dispatch and human-entry current_state binding to V3. Merge/main readback remains the closure gate.",
+      "gap": "Drive START HERE and Canonical Index point to HOTSTATE V3; the machine-dispatch/human-entry V3 binding is implemented in PR#703 but remains unmerged, so machine-side closure is partial and bounded.",
       "token_vazio": [
         "TOKEN_VAZIO_MACHINE_DISPATCH_V3_MERGE"
       ],
       "linked_gap_refs": [],
       "evidence_needed": [
-        "exact-head CI/manifold validation for the HOTSTATE V3 machine successor",
+        "PR#703 exact-head CI/manifold validation",
         "merged main readback with dispatch current_state == HOTSTATE V3",
-        "successor receipt binding the merged commit"
+        "successor receipt bound to the merged commit"
       ],
-      "closure_criterion": "close only after this successor is merged and main readback resolves HOTSTATE V3; Drive pointer promotion alone is documentary evidence",
-      "next": "observe exact-head candidate gates; merge/promotion remains human/provider controlled"
+      "closure_criterion": "close only after PR#703 is merged and main readback resolves HOTSTATE V3; Drive pointer promotion alone is documentary evidence",
+      "next": "observe exact-head PR#703 gates; preserve PARTIAL_BOUNDED until merge/main readback"
     },
     {
       "model_id": "M02",
