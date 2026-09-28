@@ -1,0 +1,67 @@
+{
+  "schema": "RAFAELIA_ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_RECEIPT_V1R1",
+  "date": "2026-09-28",
+  "parent": "receipts/2026-09-28_ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_V1.json",
+  "claim_allowed": false,
+  "pull_requests": {
+    "private_producer": {
+      "repo": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "number": 57,
+      "state": "OPEN_DRAFT"
+    },
+    "atlas_route": {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "number": 699,
+      "state": "OPEN_DRAFT"
+    }
+  },
+  "route_fix_commit": "f5639fea9c7904f63dfea9275de6e4f508cdc9da",
+  "observed_runs": {
+    "ci": {
+      "id": 36411248595,
+      "conclusion": "success",
+      "note": "repository structure + changed Markdown gate passed after fix"
+    },
+    "securitycodescan": {
+      "id": 36411248458,
+      "conclusion": "success"
+    },
+    "main_hardening": {
+      "id": 36411248573,
+      "conclusion": "success"
+    },
+    "branch_topology": {
+      "id": 36411248363,
+      "conclusion": "success"
+    },
+    "human_dignity": {
+      "id": 36411248501,
+      "conclusion": "success"
+    },
+    "codeql": {
+      "id": 36411248527,
+      "state": "in_progress_at_observation"
+    },
+    "provider_protection": {
+      "id": 36411248546,
+      "conclusion": "failure"
+    },
+    "server_merge_enforcement": {
+      "id": 36411248749,
+      "conclusion": "failure"
+    },
+    "codescan": {
+      "id": 36411248440,
+      "conclusion": "failure"
+    },
+    "promotion_control": {
+      "id": 36411248447,
+      "conclusion": "failure"
+    }
+  },
+  "classification": "ROUTE_STRUCTURE_CI_PASS_EXTERNAL_GATES_MIXED",
+  "boundary": "passing route/structure gates do not promote full private genealogy or unrelated repository governance gates",
+  "F_ok": "Mapa route, machine contract and changed-Markdown/structure CI are green",
+  "F_gap": "private full 000..050 scan remains pending; CodeQL terminal state not observed here; independent governance gates remain red",
+  "F_next": "consume full private genealogy receipt when produced; append per-token reconstructive route proofs without raw message bodies"
+}
