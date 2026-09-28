@@ -40,7 +40,6 @@ Drive governs documentary state/indexes/receipts. GitHub producer repos govern c
 
 `claim_allowed=false`: taxonomy/documentation alone does not prove historical custody integrity.
 
-
 ## Canonical federation relationship
 
 This C01..C09 vocabulary is a **local typed projection**, not a second federated registry.
@@ -50,6 +49,6 @@ The crosswalk is `data/governance/custody/01_ATLAS/CUSTODY_TYPES_V1_CANONICAL_MA
 
 The projection is intentionally many-to-one/conditional where one local shorthand spans several canonical events. A local class may select a canonical profile only when the observed surface and event semantics match that profile.
 
-`C09_CREDENTIAL_AUTHORITY` has no direct canonical custody profile. It therefore remains `TOKEN_VAZIO_NO_DIRECT_CANONICAL_PROFILE` at the profile-mapping layer; permission evidence may be referenced through agent-action/evidence custody when actually observed, but credentials/secrets never become receipts.
+`C09_CREDENTIAL_AUTHORITY` maps directly to `CREDENTIAL_PERMISSION_CUSTODY`. The profile records only non-secret permission metadata and provider-observed authority state. Secret values, passwords, private keys and token material never become custody receipts; configured name, present value, valid value, effective scope and successful use remain distinct observations.
 
 Canonical profile IDs, actor classes and claim boundaries take precedence over this convenience vocabulary.

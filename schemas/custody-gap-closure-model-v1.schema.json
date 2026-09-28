@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/custody-gap-closure-model-v1.schema.json",
+  "title": "RAFAELIA Custody Gap Closure Model V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "model_id",
+    "subject",
+    "state",
+    "claim_allowed",
+    "invariants",
+    "gaps",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "rafaelia.custody-gap-closure-model/v1"
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "IMPLEMENTED_UNTESTED",
+        "PASS",
+        "FAIL",
+        "AUDIT",
+        "PENDING"
+      ]
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gap_id",
+          "class",
+          "required_now",
+          "state",
+          "closure_authority",
+          "known",
+          "evidence_required",
+          "closure_action",
+          "source_refs",
+          "claim_allowed"
+        ],
+        "properties": {
+          "gap_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "class": {
+            "enum": [
+              "MODEL_AUTHORITY",
+              "CODE_DEFECT",
+              "PROVIDER_CONFIGURATION",
+              "SERVER_ENFORCEMENT",
+              "SECRET_BOUND",
+              "HUMAN_REVIEW",
+              "HISTORICAL_EVIDENCE"
+            ]
+          },
+          "required_now": {
+            "type": "boolean"
+          },
+          "state": {
+            "enum": [
+              "IMPLEMENTED_UNTESTED",
+              "PASS",
+              "FAIL",
+              "ROUTE_STATE_BLOCKED",
+              "TOKEN_VAZIO",
+              "NOT_RUN",
+              "AUDIT"
+            ]
+          },
+          "closure_authority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "known": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "evidence_required": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "closure_action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "source_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "claim_allowed": {
+            "const": false
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "internal_fixable",
+        "external_blocked",
+        "historical_nonretroactive",
+        "next_gate"
+      ],
+      "properties": {
+        "internal_fixable": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "external_blocked": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "historical_nonretroactive": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "next_gate": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

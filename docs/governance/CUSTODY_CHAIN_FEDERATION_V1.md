@@ -87,8 +87,9 @@ O registry machine-readable define:
 7. `TRANSFORMATION_LINEAGE_CUSTODY`
 8. `EVIDENCE_CUSTODY`
 9. `AGENT_ACTION_CUSTODY`
-10. `CROSS_SURFACE_BINDING_CUSTODY`
-11. `RECEIPT_CHAIN_CUSTODY`
+10. `CREDENTIAL_PERMISSION_CUSTODY`
+11. `CROSS_SURFACE_BINDING_CUSTODY`
+12. `RECEIPT_CHAIN_CUSTODY`
 
 ## 6. Compatibilidade
 
@@ -147,5 +148,5 @@ claim_allowed remains false for broader ecosystem claims
 ## R3
 
 **F_ok:** taxonomia separa superfície, ator, transformação, execução, evidência, receipt e promoção.  
-**F_gap:** até CI do exact-head, implementação permanece `IMPLEMENTED_UNTESTED`; merge continua decisão humana/provider.  
+**F_gap:** cada sucessor permanece `IMPLEMENTED_UNTESTED` até CI no exact-head; gates de provider, segredo e revisão humana permanecem independentes.  
 **F_next:** observar CI do PR, registrar ponte no Drive `41_CUSTODY_CHAIN` e μWRITE do delta.

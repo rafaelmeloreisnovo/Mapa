@@ -45,6 +45,15 @@ class CustodyChainTypeRegistryTests(unittest.TestCase):
         errors = module.validate_registry(data)
         self.assertTrue(any(".surface is invalid" in e for e in errors))
 
+    def test_credential_permission_profile_requires_nonsecret_authority_anchors(self) -> None:
+        data = copy.deepcopy(self.data)
+        for profile in data["custody_profiles"]:
+            if profile["profile_id"] == "CREDENTIAL_PERMISSION_CUSTODY":
+                profile["required_anchors"].remove("permission_scope")
+                break
+        errors = module.validate_registry(data)
+        self.assertIn("CREDENTIAL_PERMISSION_CUSTODY missing anchor: permission_scope", errors)
+
     def test_agent_action_requires_human_and_provider_anchors(self) -> None:
         data = copy.deepcopy(self.data)
         for profile in data["custody_profiles"]:

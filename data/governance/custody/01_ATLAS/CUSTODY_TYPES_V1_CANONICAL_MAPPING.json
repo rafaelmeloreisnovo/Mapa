@@ -87,9 +87,11 @@
     },
     {
       "local_class": "C09_CREDENTIAL_AUTHORITY",
-      "canonical_profiles": [],
-      "mapping_state": "TOKEN_VAZIO_NO_DIRECT_CANONICAL_PROFILE",
-      "gap": "Credential/permission custody is an authority/security boundary in this local taxonomy; canonical registry has no direct credential profile. Represent provider permission evidence through AGENT_ACTION_CUSTODY/EVIDENCE_CUSTODY only when actually observed, without treating secrets as receipts."
+      "canonical_profiles": [
+        "CREDENTIAL_PERMISSION_CUSTODY"
+      ],
+      "mapping_state": "DIRECT",
+      "selection_rule": "Record only non-secret credential/permission metadata and provider-observed authority state; never place secret values in custody receipts."
     }
   ],
   "claim_allowed": false
