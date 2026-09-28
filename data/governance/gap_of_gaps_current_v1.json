@@ -89,11 +89,11 @@
       "private_interrepo_gap_register": 8,
       "private_open_or_partial_workstreams": 15,
       "rafgittools_current_open_gates": 9,
-      "current_governance": 5,
+      "current_governance": 6,
       "hotstate_predecessor_gaps": 7,
       "current_hotstate_gap": 1
     },
-    "indexed_entries": 115,
+    "indexed_entries": 116,
     "token_vazio_entries": 41,
     "blocked_entries": 5,
     "partial_entries": 33
@@ -102,6 +102,7 @@
     "GOV-MAPA-PROVIDER-RULESET",
     "GOV-MAPA-SERVER-MERGE-ENFORCEMENT",
     "GOV-MAPA-PROMOTION-CONTROL",
+    "GOV-MAPA-PROMOTION-METADATA-FRESHNESS",
     "STATE-MACHINE-HOTSTATE-V3-BINDING",
     "GOV-MAPA-CODESCAN-CREDENTIALS",
     "GOV-MAPA-ZERO-APPROVAL-REJECTION-RECEIPT"
@@ -1991,6 +1992,23 @@
       "next_action": "One genuine independent approval → authorized merge → main readback dispatch current_state == HOTSTATE V3 → successor receipt.",
       "closure_criterion": "Merged main readback resolves current_state to Drive V3 and exact merge commit is receipt-bound.",
       "falsifier": "PR remains unmerged, approval is non-independent/absent, or main readback still points to V2.",
+      "claim_allowed": false
+    },
+    {
+      "uid": "CURRENT_GOVERNANCE:GOV-MAPA-PROMOTION-METADATA-FRESHNESS",
+      "namespace": "CURRENT_GOVERNANCE",
+      "source_id": "GOV-MAPA-PROMOTION-METADATA-FRESHNESS",
+      "state": "OBSERVED_CONTRADICTION",
+      "authority": "Mapa promotion-control workflow + GitHub provider PR metadata",
+      "summary": "PR#702 provider metadata reports draft=false, while promotion-control run 36460700905 reported PULL_REQUEST_DRAFT_OR_UNKNOWN together with INDEPENDENT_APPROVAL_MISSING.",
+      "provenance": "GitHub PR#702 readback + Mapa promotion-control run 36460700905",
+      "evidence_refs": [
+        "Mapa:PR#702 draft=false",
+        "Mapa:run:36460700905 blocking_reasons=PULL_REQUEST_DRAFT_OR_UNKNOWN,INDEPENDENT_APPROVAL_MISSING"
+      ],
+      "next_action": "Reconcile promotion-control PR-state freshness so the gate validates current provider PR metadata; do not remove the independent-approval floor.",
+      "closure_criterion": "On an exact ready-for-review PR, promotion-control omits PULL_REQUEST_DRAFT_OR_UNKNOWN while still denying when independent approvals are below policy.",
+      "falsifier": "Provider readback says draft=false but promotion-control still reports draft/unknown.",
       "claim_allowed": false
     }
   ]
