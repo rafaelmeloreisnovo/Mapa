@@ -1,0 +1,177 @@
+{
+  "schema_version": "rafaelia.custody-gap-closure-model/v1",
+  "model_id": "CUSTODY-GAP-CLOSURE-20260927-V1",
+  "subject": "rafaelmeloreisnovo/Mapa custody authority reconciliation after PR684 merge",
+  "state": "IMPLEMENTED_UNTESTED",
+  "claim_allowed": false,
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "A blocked external authority gap is not closed by local code",
+    "Secret values are never receipt content",
+    "Historical non-execution is not retroactively promoted"
+  ],
+  "gaps": [
+    {
+      "gap_id": "CUST-20260927-001",
+      "class": "MODEL_AUTHORITY",
+      "required_now": true,
+      "state": "IMPLEMENTED_UNTESTED",
+      "closure_authority": "Mapa producer repository + exact-head CI",
+      "known": [
+        "C09_CREDENTIAL_AUTHORITY had no direct canonical profile on main at a19013ea.",
+        "This successor adds CREDENTIAL_PERMISSION_CUSTODY and a direct non-secret C09 mapping."
+      ],
+      "evidence_required": [
+        "canonical registry validator PASS",
+        "projection validator PASS",
+        "unit tests PASS on exact branch head"
+      ],
+      "closure_action": "Validate the new canonical profile, direct C09 mapping, non-secret boundaries and anti-regression tests.",
+      "source_refs": [
+        "data/control-plane/CUSTODY_CHAIN_TYPE_REGISTRY.v1.json",
+        "data/governance/custody/01_ATLAS/CUSTODY_TYPES_V1_CANONICAL_MAPPING.json",
+        "tools/validate_custody_types_v1.py"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "CUST-20260927-002",
+      "class": "CODE_DEFECT",
+      "required_now": true,
+      "state": "IMPLEMENTED_UNTESTED",
+      "closure_authority": "Mapa producer repository + CI",
+      "known": [
+        "PR684 aggregate CI failed at docs/governance/CUSTODY_MODEL_V1.md:43 with MD012 multiple consecutive blank lines.",
+        "The successor removes the duplicate blank line."
+      ],
+      "evidence_required": [
+        "aggregate CI Markdown regression gate PASS on successor head"
+      ],
+      "closure_action": "Run aggregate CI and require changed-Markdown lint to pass.",
+      "source_refs": [
+        "run:36351289522/job:108710338281",
+        "docs/governance/CUSTODY_MODEL_V1.md"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "CUST-20260927-003",
+      "class": "PROVIDER_CONFIGURATION",
+      "required_now": true,
+      "state": "ROUTE_STATE_BLOCKED",
+      "closure_authority": "GitHub repository administrator/provider settings",
+      "known": [
+        "Ruleset 21909304 targets the default branch but provider readback reports enforcement=disabled.",
+        "Provider Protection Gate failed at live default-branch ruleset verification."
+      ],
+      "evidence_required": [
+        "provider readback with enforcement active",
+        "required status-check/review rules observed for main",
+        "provider gate PASS"
+      ],
+      "closure_action": "Enable and configure the default-branch ruleset through authorized GitHub administration, then rerun the provider protection gate.",
+      "source_refs": [
+        "GitHub:ruleset/21909304",
+        "run:36351289581/job:108710338273",
+        "governance/provider/PROVIDER_RULESET_TARGET_20260831.v1.json"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "CUST-20260927-004",
+      "class": "SERVER_ENFORCEMENT",
+      "required_now": true,
+      "state": "ROUTE_STATE_BLOCKED",
+      "closure_authority": "GitHub provider enforcement + repository administrator",
+      "known": [
+        "Server Merge Enforcement Assurance observed protected=false, protection_enabled=false and no required status checks.",
+        "Local fixtures passed; live server enforcement did not."
+      ],
+      "evidence_required": [
+        "CUST-20260927-003 closed",
+        "server-side required context observed",
+        "negative invalid-promotion attempt rejected by provider and receipted"
+      ],
+      "closure_action": "After provider protection is active, rerun server enforcement assurance and capture a provider-rejected invalid promotion receipt.",
+      "depends_on": [
+        "CUST-20260927-003"
+      ],
+      "source_refs": [
+        "run:36351289490/job:108710337800",
+        ".github/workflows/server-merge-enforcement-assurance.yml"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "CUST-20260927-005",
+      "class": "SECRET_BOUND",
+      "required_now": true,
+      "state": "ROUTE_STATE_BLOCKED",
+      "closure_authority": "Credential owner + GitHub secret store + CodeScan provider",
+      "known": [
+        "CodeScan preflight reports required credential variables missing.",
+        "The workflow intentionally does not print or infer secret values."
+      ],
+      "evidence_required": [
+        "non-secret presence preflight PASS",
+        "credentialed CodeScan analysis executed",
+        "SARIF/report produced and bound to exact head"
+      ],
+      "closure_action": "Configure the required CodeScan credentials with least privilege through the provider secret store, then rerun; never record secret values in receipts.",
+      "source_refs": [
+        "run:36351289473/job:108710337855",
+        ".github/workflows/codescan.yml"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "CUST-20260927-006",
+      "class": "HUMAN_REVIEW",
+      "required_now": true,
+      "state": "ROUTE_STATE_BLOCKED",
+      "closure_authority": "Genuine independent reviewer + human/provider promotion policy",
+      "known": [
+        "Promotion Control negative tests passed but enforcement denied because observed independent approvals=0 and required=1.",
+        "An assistant or connector cannot synthesize independent approval."
+      ],
+      "evidence_required": [
+        "approval by an independent reviewer on the exact reviewed head",
+        "promotion-control provider evidence for that head"
+      ],
+      "closure_action": "Keep promotion fail-closed until a genuine independent reviewer approves the exact head or the human authority explicitly changes the policy in a separately evidenced governance delta.",
+      "source_refs": [
+        "run:36351638216/job:108711355496",
+        "data/control-plane/promotion-control.v1.json"
+      ],
+      "claim_allowed": false
+    },
+    {
+      "gap_id": "CUST-20260927-007",
+      "class": "HISTORICAL_EVIDENCE",
+      "required_now": false,
+      "state": "NOT_RUN",
+      "closure_authority": "Observed runtime only",
+      "known": [
+        "PR684 head had custody-specific exact-head PASS before merge.",
+        "No distinct post-merge execution on merge commit 12b00f5a was observed in the current evidence chain."
+      ],
+      "evidence_required": [
+        "a runtime execution explicitly bound to the historical merge commit, if such evidence is ever produced"
+      ],
+      "closure_action": "Do not retroactively assert historical execution. Use exact-head successor CI for new deltas and keep the historical gap explicit.",
+      "source_refs": [
+        "merge:12b00f5a359553f6dc406bc2d91a35cfb4fb5ac9",
+        "run:36351289488"
+      ],
+      "claim_allowed": false
+    }
+  ],
+  "summary": {
+    "internal_fixable": 2,
+    "external_blocked": 4,
+    "historical_nonretroactive": 1,
+    "next_gate": "Run successor exact-head CI; promote only the internal fixes that pass. External provider, secret and independent-review gaps remain fail-closed until their own authorities produce evidence."
+  }
+}
