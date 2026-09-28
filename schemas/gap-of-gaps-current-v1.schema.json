@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/gap-of-gaps-current-v1.schema.json",
+  "type": "object",
+  "required": [
+    "schema",
+    "version",
+    "authority",
+    "claim_allowed",
+    "completeness_boundary",
+    "invariants",
+    "architecture_state",
+    "sources",
+    "counts",
+    "current_priority",
+    "entries"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.gap-of-gaps-current.v1"
+    },
+    "version": {
+      "const": "1.0.0"
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "uid",
+          "namespace",
+          "source_id",
+          "state",
+          "authority",
+          "summary",
+          "provenance",
+          "evidence_refs",
+          "next_action",
+          "closure_criterion",
+          "falsifier",
+          "claim_allowed"
+        ]
+      }
+    }
+  }
+}
