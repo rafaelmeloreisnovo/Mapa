@@ -48,4 +48,4 @@ Default query starts with at most three roots and depth one. Expansion happens o
 
 ## Activation gate
 
-RafGitTools PR #558 @ 880eb0594b89c194068bd00cdf319d80b4f03bc8 and private-library PR #61 @ b3e8206a2c01b4322c35a0d7b411eb26013f5e1a are unmerged at creation. This federation therefore remains PENDING_SOURCE_MERGES and claim_allowed=false until exact merged-main readback.
+RafGitTools PR #558 @ e3756a4052e07e4a578052e41be981da9672b879 and private-library PR #61 @ b3e8206a2c01b4322c35a0d7b411eb26013f5e1a are unmerged at creation. This federation therefore remains PENDING_SOURCE_MERGES and claim_allowed=false until exact merged-main readback.
