@@ -21,7 +21,11 @@ Mapa#690 -> Mapa#691 -> this delta
 - research synthesis: `papers/research_notes/2026-09-28_RIVER7_BURST_ERASURE_DELTA_V3.md`
 - independent executor: `RafGitTools#529`
 - RafGitTools merged executor revision: `8af97a580e535d2015e8211000850e282b031763`
-- exact-SHA V3 run: `PENDING_QUEUE`
+- exact-SHA V3 run: `36386997540` — `PASS`
+- provider-actions job: `108814836601` — `SUCCESS`
+- evidence artifact: `10955280614`
+- artifact digest: `sha256:5f923492c37e51e5da45b3d0047cc43141f1f70727049e8a022e6ba23f42f8ef`
+- ChipQuantum merge commit: `cc01ac9fa063d9120fea4f111303a6def0e1fc02`
 
 ## Material state
 
@@ -64,7 +68,7 @@ rewrite that fact.
 | RIVER7-BURST3-PLACEMENT | PROVED_FINITE_MODEL |
 | RIVER7-BURST4 | EXPLICIT_LIMIT |
 | RIVER7-CROSSREPO-V2 | PASS |
-| RIVER7-CROSSREPO-V3 | PENDING_QUEUE |
+| RIVER7-CROSSREPO-V3 | PASS_EXACT_SHA |
 | RIVER7-NATIVE-CI | PRE_RUNNER_EXECUTION_BLOCKED |
 | RIVER7-NATIVE-CI-ADMIN-CAUSE | TOKEN_VAZIO |
 | RIVER7-MULTI-BURST | OPEN |
