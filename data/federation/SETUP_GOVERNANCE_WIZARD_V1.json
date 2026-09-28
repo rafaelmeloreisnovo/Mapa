@@ -25,7 +25,11 @@
     "REVIEW_AND_ROLLBACK",
     "FINAL_REVIEW"
   ],
-  "decision_states": ["AGREE","DISAGREE","LATER"],
+  "decision_states": [
+    "AGREE",
+    "DISAGREE",
+    "LATER"
+  ],
   "custody": {
     "storage": "APP_PRIVATE",
     "ledger": "setup_wizard/custody.jsonl",
@@ -41,7 +45,8 @@
     "ROLLBACK_LOCAL != ROLLBACK_REMOTE",
     "USER_DECISION_REVIEWABLE_ANY_TIME",
     "MAPA_STORES_POINTERS_NOT_SECRET_VALUES",
-    "SOURCE_IMPLEMENTED != RUNTIME_PASS"
+    "SOURCE_IMPLEMENTED != RUNTIME_PASS",
+    "EVERY_STEP_REQUIRES_EXPLICIT_DECISION_BEFORE_COMPLETION"
   ],
   "evidence_required_for_promotion": [
     "RafGitTools exact-head deterministic tests PASS",
@@ -51,5 +56,13 @@
     "first-launch behavior observed",
     "local decision/ledger behavior verified without secret values"
   ],
-  "next": "Wait for RafGitTools PR#557 exact-head CI; only after build/runtime evidence update this projection."
+  "next": "Wait for RafGitTools PR#557 exact-head CI; only after build/runtime evidence update this projection.",
+  "effective_capabilities_explained": [
+    "PAT_ACTIONS",
+    "PAT_AGENTS",
+    "PAT_CODESPACES",
+    "PAT_DEPENDABOT",
+    "PAT_ENV"
+  ],
+  "completion_rule": "AGREE|DISAGREE|LATER required for every wizard step before completion."
 }
