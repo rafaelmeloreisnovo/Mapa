@@ -1,34 +1,27 @@
 {
-  "schema": "RAFAELIA_ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_RECEIPT_V1",
+  "schema": "rafaelia.atlas.novoexport-token-route-receipt.v1",
   "date": "2026-09-28",
+  "mode": "POINTER_ONLY",
   "claim_allowed": false,
-  "producer": {
-    "repo": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
-    "branch": "codex/novoexport-token-genealogy-v1-20260928",
-    "current_delta_commit": "2999f5668c7490933f39a29718a64708f27103ce",
-    "state": "IMPLEMENTED_TESTED_SCOPED",
-    "full_000_050_execution": "PENDING"
+  "raw_source": {
+    "surface": "Google Drive",
+    "folder_id": "1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv",
+    "mutated": false
   },
-  "mapa_delta": {
-    "branch": "codex/atlas-novoexport-token-genealogy-v1-20260928",
-    "files": [
-      "indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md",
-      "data/biblioteconomia/novoexport_token_genealogy_route.v1.json"
-    ],
-    "commits": [
-      "4b4a9bf55170e5319f0a3c3d4d2026e6b3e472c0",
-      "64d7315f9c43c1412e2f5c03996cfd1ced9dce94"
-    ]
+  "derived_private": {
+    "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+    "pr": 58,
+    "head": "038b6b1beec49bebefbeb71254437fd046ffd241"
   },
-  "evidence": {
-    "source_coverage_predecessor": "indices/NOVOEXPORT_LONGITUDINAL_USAGE_COHERENCE_MAP_20260915_V1.md",
-    "shard_045_drive_file_id": "1POpVeIOZNuuS2hEGj1HB_j4FvturdFo2",
-    "shard_045_sha256": "a490e4c7ad6f79f5f3f3eae2336fe87faf20a006df806173f0f4280eaf2039f2",
-    "unit_test": "PASS_LOCAL",
-    "seed_scan": "PASS_SCOPED_SHARD_045_ONLY"
-  },
-  "privacy": "NO_PRIVATE_MESSAGE_BODY_COPIED_TO_MAPA",
-  "F_ok": "public-safe route and machine contract created",
-  "F_gap": "global 000..050 token genealogy execution and per-token typed relations pending",
-  "F_next": "run full private scan; append receipt; create per-token reconstructive routes by pointer"
+  "route": "indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md",
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "USER_INPUT != ASSISTANT_OUTPUT",
+    "RAW_SOURCE != DERIVED_INDEX",
+    "FIRST_IN_SHARD != FIRST_IN_CORPUS",
+    "TOKEN_VAZIO != 0"
+  ],
+  "f_ok": "Drive and private derived registry federated through pointer route",
+  "f_gap": "51-shard exhaustive token genealogy pending",
+  "f_next": "append source-bound earlier/later occurrences and explicit work/formula/repository edges"
 }

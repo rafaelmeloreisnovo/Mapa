@@ -1,96 +1,82 @@
-# ATLAS — NOVOexport Token Genealogy Route — 2026-09-28
+# ATLAS — NOVOexport Token Genealogy Reconstruction Route — 2026-09-28
 
-State: ROUTED_IMPLEMENTED_SCOPED / claim_allowed=false
+**State:** POINTER_ONLY | APPEND_ONLY | claim_allowed=false  
+**Authority:** Mapa routes; Drive NOVOexport remains raw-source authority; CONVERSATIONS_CHUNKS_PRIVATE owns private derived chunks/edges.
 
 ## Intent
 
-Provide the public-safe ATLAS route for reconstructing RAFAELIA token genealogy from the private current-source NOVOexport corpus without copying private message bodies into Mapa.
+Provide a reconstructible route from raw NOVOexport conversation shards to private role-bound chunks, token genealogy, formulas/works and evidence without copying private conversation text into Mapa.
 
-## Authority split
+## Route
 
-- Google Drive NOVOexport: raw current-source authority for conversations-000.json..conversations-050.json.
-- CONVERSATIONS_CHUNKS_PRIVATE: private parser, occurrence identity, role-separated genealogy and private locators.
-- Mapa: pointer-only routing, semantic state, typed relation boundary, gaps and receipts.
-- producer repositories: implementation/domain authority for any token-to-code/project relation.
+```text
+ATLAS:NOVO:TOKEN
+  -> Drive NOVOexport
+  -> conversations-000..050
+  -> conversation_id
+  -> message_id
+  -> role/timestamp
+  -> CONVERSATIONS_CHUNKS_PRIVATE::memory_bridge/data/novoexport_token_chunks_*.jsonl
+  -> typed edges
+  -> token/concept/formula/work
+  -> producer repository/file
+  -> execution/evidence
+  -> receipt
+  -> gap / next
+```
 
-## Predecessor evidence
+## Authority pointers
 
-- indices/NOVOEXPORT_LONGITUDINAL_USAGE_COHERENCE_MAP_20260915_V1.md
-- CONVERSATIONS_CHUNKS_PRIVATE/docs/NOVOEXPORT_JSON_ACTIVE_SOURCE_V3.md
-- CONVERSATIONS_CHUNKS_PRIVATE/memory_bridge/reports/SEMANTIC_EXHAUSTIVITY_MATRIX_20260919_V2.md
-- CONVERSATIONS_CHUNKS_PRIVATE/memory_bridge/indexes/ATLAS_COMPACT_ROUTER_V1.md
+### Raw source
 
-Existing source evidence closes the exact 000..050 SOURCE_COVERAGE plane. TOKEN_TEXT and global semantic exhaustivity remain partial/open.
+- Drive folder: `NOVOexport`
+- Drive ID: `1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv`
+- Raw shards: `conversations-000..050`
+- Raw mutation policy: forbidden for derived indexing work.
 
-## New producer delta
+### Drive reconstruction topology
 
-Private branch: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE@codex/novoexport-token-genealogy-v1-20260928
+- `00_INDEX`: `1C5XGG92HY3_QvEbuGYLStMdHBvCIPzUv`
+- `01_ATLAS`: `1Rfj6cb_ItIAWFj9_VR3GocMiTNHJAeBe`
+- `02_ROUTES`: `15EsVIToWrbL1d-yPv7ezMXaDrKZBWIKi`
+- `03_MANIFOLD`: `1vIXXMdxORWl5TqRzSfySdMy9YrdzYQiv`
+- `04_SCAFFOLDS`: `1FoJUzsTHA1SQwRnZs1syw61OXklR5pkX`
+- `05_EDGES`: `1ICdebJ7-j111tO7_G6BImLYY0JzCI_cW`
+- `06_GAPS`: `1uDuU71EGBAM9V_mwUo9WjLZGNUFv66v4`
+- `07_EVIDENCE`: `1iRetxfJjJV7_y6yrxsD3Mn2gM_vjWg1v`
+- `08_RECEIPTS`: `1sEPDyyapkNrVASliV2oScmJUBstkOUY6`
+- `09_CONVERSATION_CHUNKS`: `1cv8r6PDtjOQk2-yAhLS3J4CfjVMt4gIW`
 
-Materialized surfaces:
+### Private derived registry
 
-- scripts/novoexport_token_genealogy.py
-- tests/test_novoexport_token_genealogy.py
-- memory_bridge/token_genealogy/README.md
-- memory_bridge/token_genealogy/token_family_catalog.v1.json
-- memory_bridge/token_genealogy/seed_shard_045.v1.json
-- memory_bridge/receipts/2026-09-28_NOVOEXPORT_TOKEN_GENEALOGY_V1.json
+- repo: `rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE`
+- Wave 1 PR: `#58`
+- branch: `work/novoexport-token-reconstruction-v1-20260928`
+- head observed when route created: `038b6b1beec49bebefbeb71254437fd046ffd241`
 
-Local unit test state: PASS.
-Seed execution state: PASS_SCOPED_SHARD_045_ONLY.
-Full 000..050 genealogy execution: PENDING.
+## Invariants
 
-## Route grammar
+`SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM`  
+`USER_INPUT != ASSISTANT_OUTPUT`  
+`RAW_SOURCE != DERIVED_INDEX`  
+`FIRST_IN_SHARD != FIRST_IN_CORPUS`  
+`CO_OCCURRENCE != EQUIVALENCE != CAUSALITY`  
+`TOKEN_VAZIO != 0`
 
-ATLAS:TOKEN:{literal}
- -> NOVO:TOKEN:{literal}
- -> SOURCE:{shard/fileId/hash}
- -> MSG:{conversation_id/message_id/node_id/role/time}
- -> L:{first/last/recurrence chronology}
- -> O:{same-period neighboring concepts}
- -> T:{cross-project/repository candidate}
- -> REL:{typed evidence-backed edge}
- -> EVID:{source/code/test/receipt}
- -> GAP:{unresolved sense/authority/causal edge}
- -> NEXT:{smallest verifiable action}
+## Current evidence state
 
-## Token families currently routed
+Wave 1 is bound to `conversations-045.json`. It contains role-separated literal token counts and exact source IDs for three anchor chains. It does **not** establish corpus-wide first occurrence.
 
-RAFAELIA; Bitraf64; RAFCODE-Φ; ZIPRAFΩ; ♥φ; Ethica[8]; fΩ; Spiral√3/2; Trinity633; ToroidΔπφ; E↔C; OWLψ; Stack42H; FIAT LUX; 144.000hz; 963↔999; ψ→χ→ρ→Δ→Σ→Ω; ΣΩΔΦBITRAF.
+Important correction preserved by route: the `ψ χ ρ Δ Σ Ω` semantic definitions in “Tokens de início RAFAELIA” are `ASSISTANT_OUTPUT` responding to a user question; they are not promoted as user lexical authorship.
 
-These names are index addresses. Their appearance in text does not by itself establish physical meaning, novelty, authorship of quoted/retransmitted content, causal influence, model training, or implementation.
+## Promotion rule
 
-## Reconstruction contract
+`OBSERVED -> SOURCE_BOUND -> CONTEXT_BOUND -> RELATION_BOUND -> EVIDENCE_BOUND -> VERIFIED_SCOPE`.
 
-For a query such as ATLAS:TOKEN:Trinity633:
-
-1. resolve private occurrence set in CONVERSATIONS_CHUNKS_PRIVATE;
-2. separate user and assistant observations;
-3. order by source timestamp while preserving shard/message identity;
-4. review bounded context privately to disambiguate sense;
-5. attach only evidence-backed typed relations to formulas/projects/repos;
-6. emit public-safe pointer/count/state here;
-7. leave unsupported edges TOKEN_VAZIO.
-
-## Seed witness
-
-Shard 045 was executed against the current source file conversations-045.json (Drive fileId 1POpVeIOZNuuS2hEGj1HB_j4FvturdFo2; 22,452,249 bytes; SHA-256 a490e4c7ad6f79f5f3f3eae2336fe87faf20a006df806173f0f4280eaf2039f2). The scoped scan observed 100 conversation objects, 4,109 message objects and all 18 configured token families.
-
-High-value scoped user-source anchors include Trinity633 and E↔C in the 2026-05-29 Portal Andino Teorias message. This is not promoted as the global first occurrence until the exact 000..050 scan executes.
-
-## Privacy and epistemic boundary
-
-Mapa stores no raw private conversation body in this route. message_id/conversation_id may remain private-side when disclosure is unnecessary. Public projection should prefer opaque/private pointers plus counts/state.
-
-USER_INPUT != ASSISTANT_OUTPUT
-MESSAGE_ROLE_PROVENANCE != LEXICAL_AUTHORSHIP
-LITERAL_OCCURRENCE != SEMANTIC_EQUIVALENCE
-TEMPORAL_PRECEDENCE != CAUSAL_USE
-RECURRENCE != TRAINING_EVIDENCE
-RAW_SOURCE != DERIVED_INDEX
-TOKEN_VAZIO != 0
+Token-to-formula, token-to-work and token-to-repository edges remain `TOKEN_VAZIO` until an explicit source bridge exists.
 
 ## R3
 
-F_ok = token-genealogy producer and public-safe ATLAS route materialized; scoped executable proof exists.
-F_gap = 51-shard genealogy execution and token->project typed relation closure are not yet complete.
-F_next = execute canonical 000..050 set, bind provider fileIds and derived hashes, then append one reconstruction proof per token family.
+`F_ok`: Drive topology + private schema/chunks/edges + Mapa route are federated by pointer.  
+`F_gap`: exhaustive 51-shard genealogy and corpus-wide first-seen are open.  
+`F_next`: scan remaining shards, append predecessor/successor evidence, then create work/formula/repository edges only where demonstrable.
