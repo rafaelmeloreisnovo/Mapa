@@ -27,6 +27,7 @@ Existing source evidence closes the exact 000..050 SOURCE_COVERAGE plane. TOKEN_
 Private branch: rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE@codex/novoexport-token-genealogy-v1-20260928
 
 Materialized surfaces:
+
 - scripts/novoexport_token_genealogy.py
 - tests/test_novoexport_token_genealogy.py
 - memory_bridge/token_genealogy/README.md
@@ -40,17 +41,17 @@ Full 000..050 genealogy execution: PENDING.
 
 ## Route grammar
 
-ATLAS:TOKEN:<literal>
- -> NOVO:TOKEN:<literal>
- -> SOURCE:<shard/fileId/hash>
- -> MSG:<conversation_id/message_id/node_id/role/time>
- -> L:<first/last/recurrence chronology>
- -> O:<same-period neighboring concepts>
- -> T:<cross-project/repository candidate>
- -> REL:<typed evidence-backed edge>
- -> EVID:<source/code/test/receipt>
- -> GAP:<unresolved sense/authority/causal edge>
- -> NEXT:<smallest verifiable action>
+ATLAS:TOKEN:{literal}
+ -> NOVO:TOKEN:{literal}
+ -> SOURCE:{shard/fileId/hash}
+ -> MSG:{conversation_id/message_id/node_id/role/time}
+ -> L:{first/last/recurrence chronology}
+ -> O:{same-period neighboring concepts}
+ -> T:{cross-project/repository candidate}
+ -> REL:{typed evidence-backed edge}
+ -> EVID:{source/code/test/receipt}
+ -> GAP:{unresolved sense/authority/causal edge}
+ -> NEXT:{smallest verifiable action}
 
 ## Token families currently routed
 
@@ -61,6 +62,7 @@ These names are index addresses. Their appearance in text does not by itself est
 ## Reconstruction contract
 
 For a query such as ATLAS:TOKEN:Trinity633:
+
 1. resolve private occurrence set in CONVERSATIONS_CHUNKS_PRIVATE;
 2. separate user and assistant observations;
 3. order by source timestamp while preserving shard/message identity;
