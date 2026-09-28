@@ -1,0 +1,133 @@
+{
+  "schema": "rafaelia.knowledge-campus-federation.v1",
+  "version": "1.0.0",
+  "authority": "rafaelmeloreisnovo/Mapa",
+  "executor_source": {
+    "repository": "rafaelmeloreisnovo/RafGitTools",
+    "pull_request": 558,
+    "head": "e1a798234c4ae977518a7e2502b0b9f923b19e77",
+    "state": "UNMERGED"
+  },
+  "private_library_source": {
+    "repository": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+    "pull_request": 61,
+    "head": "564830123d38b56c8decf15fb9d51e7369bf1f1b",
+    "state": "UNMERGED"
+  },
+  "claim_allowed": false,
+  "state": "PENDING_SOURCE_MERGES",
+  "topology": [
+    "CAMPUS",
+    "GYMNASIUM",
+    "LAB",
+    "AISLE",
+    "SHELF",
+    "BOOK",
+    "SESSION",
+    "CHUNK",
+    "TOKEN"
+  ],
+  "relation_dimensions": {
+    "structural": [
+      "CONTAINS",
+      "COMPONENT_OF",
+      "CHARACTERISTIC_OF"
+    ],
+    "semantic": [
+      "RELATES_TO",
+      "CORRELATES_WITH",
+      "ANALOGY_TO"
+    ],
+    "causal_candidate": [
+      "DERIVES_FROM",
+      "PRODUCES",
+      "REQUIRES",
+      "BLOCKS"
+    ],
+    "epistemic": [
+      "EVIDENCED_BY",
+      "CONTRADICTS",
+      "SUPERSEDES"
+    ],
+    "navigational": [
+      "NEXT",
+      "PREVIOUS"
+    ]
+  },
+  "component_axes": [
+    "materialization_state",
+    "characteristics",
+    "source_authority",
+    "evidence_state",
+    "privacy_class",
+    "reversibility",
+    "retrieval_tier",
+    "gaps",
+    "dependencies",
+    "downstream_effects"
+  ],
+  "tiers": {
+    "authority": "data/indexes/semantic-carrier-policy.v1.json",
+    "allowed": [
+      "HOT",
+      "WARM",
+      "COLD",
+      "ARCHIVE"
+    ],
+    "epistemic_effect": "NONE"
+  },
+  "gymnasia": [
+    {
+      "id": "GYM-CORPUS-MEMORY",
+      "route": "corpus/memory",
+      "state": "MATERIALIZED"
+    },
+    {
+      "id": "GYM-MATHEMATICS",
+      "route": "mathematics/geometry",
+      "state": "PARTIAL"
+    },
+    {
+      "id": "GYM-SYSTEMS",
+      "route": "systems/components",
+      "state": "PARTIAL"
+    },
+    {
+      "id": "GYM-GOVERNANCE",
+      "route": "governance/evidence",
+      "state": "MATERIALIZED"
+    },
+    {
+      "id": "GYM-PARABLES",
+      "route": "parables/analogies",
+      "state": "MATERIALIZED",
+      "evidence_effect": "NONE"
+    },
+    {
+      "id": "GYM-CORTEX",
+      "route": "TOKEN_VAZIO",
+      "state": "TOKEN_VAZIO"
+    }
+  ],
+  "campus_query_rule": {
+    "start": "minimum sufficient roots",
+    "roots_max": 3,
+    "depth_default": 1,
+    "expand_only": [
+      "missing_source",
+      "contradiction",
+      "unresolved_authority",
+      "missing_evidence",
+      "explicit_request"
+    ]
+  },
+  "invariants": [
+    "MAPA_ROUTES_DO_NOT_STORE_SECRET_VALUES",
+    "ANALOGY_TO != EVIDENCED_BY",
+    "CORRELATES_WITH != CAUSES",
+    "TIER != TRUTH",
+    "MATERIALIZED != VALIDATED",
+    "SOURCE_PR_UNMERGED != ACTIVE_AUTHORITY",
+    "TOKEN_VAZIO != 0"
+  ]
+}
