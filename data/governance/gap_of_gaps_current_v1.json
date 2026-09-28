@@ -102,7 +102,6 @@
     "GOV-MAPA-PROVIDER-RULESET",
     "GOV-MAPA-SERVER-MERGE-ENFORCEMENT",
     "GOV-MAPA-PROMOTION-CONTROL",
-    "GOV-MAPA-PROMOTION-METADATA-FRESHNESS",
     "STATE-MACHINE-HOTSTATE-V3-BINDING",
     "GOV-MAPA-CODESCAN-CREDENTIALS",
     "GOV-MAPA-ZERO-APPROVAL-REJECTION-RECEIPT"
@@ -1998,17 +1997,18 @@
       "uid": "CURRENT_GOVERNANCE:GOV-MAPA-PROMOTION-METADATA-FRESHNESS",
       "namespace": "CURRENT_GOVERNANCE",
       "source_id": "GOV-MAPA-PROMOTION-METADATA-FRESHNESS",
-      "state": "IMPLEMENTED_UNTESTED",
+      "state": "RESOLVED",
       "authority": "Mapa promotion-control workflow + GitHub provider PR metadata",
-      "summary": "Promotion workflow now captures live PR metadata via provider API before the existing verifier; exact-head run is required to prove PULL_REQUEST_DRAFT_OR_UNKNOWN disappears when draft=false.",
-      "provenance": "Mapa:.github/workflows/promotion-control-v1.yml@2c36078806bd92c3364d1a3f2cd8bc88dec0fc83 + prior contradiction run 36460700905",
+      "summary": "Promotion Control now verifies live PR metadata. Exact run 36461140241 omitted PULL_REQUEST_DRAFT_OR_UNKNOWN and retained INDEPENDENT_APPROVAL_MISSING (0/1).",
+      "provenance": "Mapa:run:36461140241 job:109059743290 using promotion-event-live.json",
       "evidence_refs": [
-        "Mapa:PR#702 draft=false",
-        "Mapa:run:36460700905 blocking_reasons=PULL_REQUEST_DRAFT_OR_UNKNOWN,INDEPENDENT_APPROVAL_MISSING"
+        "Mapa:run:36461140241",
+        "Mapa:job:109059743290",
+        "blocking_reasons=[INDEPENDENT_APPROVAL_MISSING]"
       ],
-      "next_action": "Observe exact-head Promotion Control after the live-metadata workflow change; preserve independent approval requirement.",
-      "closure_criterion": "On an exact ready-for-review PR, promotion-control omits PULL_REQUEST_DRAFT_OR_UNKNOWN while still denying when independent approvals are below policy.",
-      "falsifier": "Provider readback says draft=false but promotion-control still reports draft/unknown.",
+      "next_action": "No freshness action; independent approval and provider enforcement remain separate gaps.",
+      "closure_criterion": "SATISFIED: ready-for-review PR evaluated without draft/unknown while approval floor remained enforced.",
+      "falsifier": "Reopen if a future exact provider readback says draft=false but live-metadata promotion gate reports draft/unknown.",
       "claim_allowed": false
     }
   ]
