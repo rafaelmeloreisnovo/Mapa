@@ -22,8 +22,8 @@
 | Drive bridge artifact | `1TulThGJys7tJ2A8NGoqV7YbW2VYGlLN0` | This map in Drive `01_ATLAS`; uploaded as a linked successor artifact |
 | GitHub repository | `rafaelmeloreisnovo/Mapa` | Cross-surface map, provenance, routes, gates |
 | GitHub branch origin | `main@21c2f9aefab86cd31b8ea7da22533452690fd087` | Main head used when this branch was created; current merge base |
-| Pull request | `#708` | Open PR; head `48034845d3d1645b8fa972fab290f33b847f600c`; current base `main@6e705d38bedd352b97be7c8c2c8924f3bdabed54` |
-| PR comparison | `main...atlas/novoexport-drive-github-bridge-20260929` | Diverged: branch 2 commits ahead and 12 behind; GitHub reported `mergeable=true` at inspection |
+| Pull request | `#708` | Open PR; branch `atlas/novoexport-drive-github-bridge-20260929`; current base at inspection `main@6e705d38bedd352b97be7c8c2c8924f3bdabed54` |
+| PR comparison | `main...atlas/novoexport-drive-github-bridge-20260929` | Diverged from its creation base; GitHub reported `mergeable=true` at readback. Recheck before merge |
 | Existing source-universe index | `indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md` | Historical manifest-scope evidence and open gaps |
 | Existing reconstruction route | `indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md` | Drive-to-private-chunks route and authority boundary |
 | This bridge delta | `indices/deltas/ATLAS_NOVOEXPORT_DRIVE_GITHUB_BRIDGE_20260929.md` | This map's GitHub-side record |
