@@ -1,0 +1,34 @@
+name: Empty State Ontology V1
+
+on:
+  pull_request:
+    paths:
+      - 'schemas/empty-state-ontology-v1.schema.json'
+      - 'data/semantics/empty-state-ontology.v1.json'
+      - 'tools/validate_empty_state_ontology.py'
+      - 'tests/test_empty_state_ontology.py'
+      - 'docs/EMPTY_STATE_ONTOLOGY_V1.md'
+      - '.github/workflows/empty-state-ontology-v1.yml'
+      - 'data/manifold/edges_omega_v1.jsonl'
+      - 'data/manifold/gaps_omega_v1.jsonl'
+      - 'tests/test_manifold_registry.py'
+      - 'tests/test_manifold_gap_registry.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate ontology
+        run: python3 tools/validate_empty_state_ontology.py | tee /tmp/empty-state-ontology.json
+      - name: Validate JSON output
+        run: python3 -m json.tool /tmp/empty-state-ontology.json >/dev/null
+      - name: Run adversarial tests
+        run: python3 -m unittest tests.test_empty_state_ontology
+      - name: Compile validator
+        run: python3 -m py_compile tools/validate_empty_state_ontology.py
