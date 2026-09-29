@@ -1,0 +1,39 @@
+{
+  "schema": "rafaelia.session-full-gap-fnext-pr711-evidence.v4",
+  "event_id": "SFGF-20260929-004",
+  "parent_event_id": "SFGF-20260929-003",
+  "observed_at": "2026-09-29T10:34:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "claim_allowed": false,
+  "source": {
+    "pr": 711,
+    "head": "28824f1887fb51d8f400c0b97b82e11749bf7e06",
+    "ci_run": 36555902311,
+    "ci_job": 109364870744
+  },
+  "before_state": "Markdown debt source correction IMPLEMENTED_UNTESTED",
+  "after_state": "MARKDOWN_DEBT_CORRECTION_EVIDENCED_SCOPED; CI remains failed on separate provider freshness gate",
+  "actual_observable": {
+    "changed_markdown_lint": "SUCCESS",
+    "historical_markdown_debt_ratchet": "SUCCESS",
+    "temporal_gap_routing": "FAIL PROVIDER_SNAPSHOT_STALE:26.36h>24h"
+  },
+  "causal_split": {
+    "source_document_defect": "CLOSED_BOUNDED_BY_RATCHET_PASS",
+    "provider_snapshot_freshness": "OPEN_EXTERNAL_EVIDENCE_GATE",
+    "server_merge_enforcement": "OPEN_EXTERNAL_GOVERNANCE",
+    "codescan_credential": "OPEN_EXTERNAL_CREDENTIAL_GATE"
+  },
+  "falsifier": "A future run on the same corrected source reintroduces Markdown debt spread attributable to the corrected file.",
+  "rollback_procedure": "revert 27ee95c064c90ccff32e7d502ee3b0ddc5e7b5b7 (and this evidence commit); do not alter ratchet baseline",
+  "rollback_test": "TOKEN_VAZIO_RECONSTRUCTION",
+  "replay_recipe": "PR#711 -> CI 36555902311 -> job 109364870744 -> verify Markdown gates SUCCESS -> observe temporal provider snapshot failure separately",
+  "F_ok": [
+    "source Markdown debt correction passed both changed-file lint and historical no-increase ratchet"
+  ],
+  "F_gap": [
+    "provider snapshot freshness blocks full CI",
+    "provider/server enforcement and credential gates remain separate"
+  ],
+  "F_next": "Do not change source formatting further. Refresh provider snapshot on its separate evidence track; re-run after dependency order permits."
+}

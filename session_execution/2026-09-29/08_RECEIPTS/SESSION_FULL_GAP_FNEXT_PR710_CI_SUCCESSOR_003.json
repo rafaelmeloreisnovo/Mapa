@@ -1,0 +1,52 @@
+{
+  "schema": "rafaelia.session-full-gap-fnext-ci-successor.v3",
+  "event_id": "SFGF-20260929-003",
+  "parent_event_id": "SFGF-20260929-002",
+  "observed_at": "2026-09-29T10:30:00-03:00",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "claim_allowed": false,
+  "source": {
+    "merged_pr": 710,
+    "merge_commit": "87a8441258a5265187bb947dc9ab66a190d043bb",
+    "pr_head": "c67010dcb6ad908b3e878c57742a78e9e993cf03",
+    "ci_run": 36555406675,
+    "ci_job": 109363239397
+  },
+  "before_state": "PR#710 route overlay materialized with exact-head CI failure",
+  "failure": {
+    "gate": "Historical Markdown debt — blocking no-increase ratchet",
+    "observed": "MARKDOWN_DEBT files_with_issues=96/95",
+    "changed_markdown_gate": "PASS",
+    "concrete_source_file": "06_GAPS/SESSION_FGAP_FNEXT_20260929.md",
+    "classification": "SOURCE_DOCUMENT_FORMAT_DEBT",
+    "separate_external_failures": [
+      "Provider Protection Gate",
+      "Server Merge Enforcement Assurance",
+      "Promotion Control manual decision",
+      "CodeScan credential presence"
+    ]
+  },
+  "correction": {
+    "successor_pr": 711,
+    "branch": "fix/session-gap-markdown-debt-20260929",
+    "commit": "27ee95c064c90ccff32e7d502ee3b0ddc5e7b5b7",
+    "action": "format only the surfaced session gap document; preserve SG-001..SG-012 semantics; no ratchet/test weakening",
+    "state": "IMPLEMENTED_UNTESTED"
+  },
+  "expected_observable": "Markdown debt files_with_issues returns to <=95 and changed Markdown remains PASS",
+  "actual_observable": "TOKEN_VAZIO_CI_IN_PROGRESS",
+  "falsifier": "same exact-head successor still reports markdown debt spread caused by the corrected file",
+  "rollback_procedure": "close PR#711 or revert 27ee95c064c90ccff32e7d502ee3b0ddc5e7b5b7; PR#710 merge remains historical",
+  "rollback_test": "TOKEN_VAZIO_RECONSTRUCTION",
+  "replay_recipe": "run 36555406675 -> job 109363239397 -> read debt diagnostics -> checkout PR#711 -> rerun CI ratchet",
+  "F_ok": [
+    "concrete source/document defect isolated",
+    "smallest reversible correction applied on successor branch",
+    "provider failures kept separate"
+  ],
+  "F_gap": [
+    "PR#711 exact-head CI still running",
+    "provider/server/credential governance gaps remain open"
+  ],
+  "F_next": "observe PR#711 CI; if markdown ratchet passes, close only this formatting defect and leave external gates independent."
+}
