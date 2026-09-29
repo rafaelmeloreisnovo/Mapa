@@ -1,0 +1,40 @@
+{
+  "schema": "rafaelia.session-full-gap-fnext-receipt.v1",
+  "event_id": "SFGF-20260929-001",
+  "observed_at": "2026-09-29T10:20:00-03:00",
+  "parent_event_id": "MU-SESSION-FULL-FRACTAL-DISPATCH-20260928-003",
+  "claim_allowed": false,
+  "before_state": "session gaps distributed across V2 private ledger, 2026-09-28 Drive successors and current chat",
+  "after_state": "all 18 workstreams routed from one private successor overlay into a pointer-only Mapa ATLAS/ROUTES/EDGES/EVIDENCE/RECEIPT set; Drive parity registry materialized in source",
+  "command_or_action": "create branch-only append-only session execution overlay; no default-branch direct write",
+  "exact_refs": {
+    "Mapa_base": "97b07d3f773454b290af05618311ad619bde814a",
+    "Rafaelia_Private_PR263_head": "d861c87dbb8706dc7c2f4efaf50185f0af9fb648",
+    "RafGitTools": "3a17a81ea20ca4462bceb1c3279c6aae245fc264"
+  },
+  "expected_observable": "18 route pins resolve to private ledger workstream IDs; no private body appears; parity registry contains only IDs/status; claim_allowed remains false",
+  "actual_observable": "files materialized on review branch; CI/readback pending",
+  "falsifier": "validator/CI failure, stale/mismatched source pointer, private-body leakage, or claim promotion",
+  "rollback_procedure": "close PR/revert branch; all predecessors remain intact",
+  "rollback_test": "TOKEN_VAZIO_RECONSTRUCTION until deliberate rollback drill",
+  "replay_recipe": "Private V2 -> PR#263 overlay -> Session AI Dispatch V1 -> this Mapa route set -> Drive documentary successor -> RafGitTools read-only collector",
+  "reconstruction_minimum": [
+    "private overlay exact ref",
+    "Session AI Dispatch V1 blob",
+    "current Mapa/RafGitTools refs",
+    "Drive START HERE revision",
+    "route/evidence/receipt paths"
+  ],
+  "F_ok": [
+    "18 workstream route pins materialized",
+    "Drive folder IDs consolidated into parity registry",
+    "private/public authority split preserved"
+  ],
+  "F_gap": [
+    "exact-head CI pending",
+    "Drive successor document IDs pending",
+    "RafGitTools collector not yet updated to consume this registry",
+    "source-byte hashes/full inventory/semantic coverage remain open"
+  ],
+  "F_next": "materialize Drive successor docs, bind their IDs in a successor receipt, then add RafGitTools read-only collector/validator and run exact-head CI."
+}
