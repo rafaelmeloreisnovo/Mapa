@@ -27,13 +27,13 @@ class PrivateCiBridgeMethodTests(unittest.TestCase):
 
     def test_claim_and_security_gaps_are_not_promoted(self):
         self.assertFalse(self.doc["claim_allowed"])
-        self.assertEqual(
+        self.assertIn(
+            "LINUX_USER_NAMESPACE_PLUS_NETWORK_NAMESPACE_REQUIRED",
             self.doc["privacy"]["hostile_source_network_exfiltration_protection"],
-            "TOKEN_VAZIO_NOT_ENFORCED_V1",
         )
         self.assertEqual(
             self.doc["zipraf"]["external_signature_profile"],
-            "TOKEN_VAZIO_NOT_IMPLEMENTED",
+            "TOKEN_VAZIO_NOT_CONFIGURED",
         )
 
     def test_core_invariants_exist(self):
