@@ -1,0 +1,116 @@
+{
+  "schema": "rafaelia.private-ci-bridge-method.v1",
+  "version": "1.0.0",
+  "observed_at": "2026-09-29",
+  "intent": "Reproduce allowlisted CI checks for exact commits of private repositories through the public RafGitTools control plane without publishing private source or credential values.",
+  "authority": {
+    "methodology_and_routing": "rafaelmeloreisnovo/Mapa",
+    "executor": "rafaelmeloreisnovo/RafGitTools",
+    "source_and_replay_manifest": "target private repository",
+    "credential_custody": "GitHub Actions secret store in RafGitTools",
+    "execution_evidence": "sanitized RafGitTools Actions receipt",
+    "claim_promotion": "human review"
+  },
+  "implementation_refs": {
+    "rafgittools_branch": "delta/private-ci-bridge-v1-20260929",
+    "public_registry": "configs/private-ci/execution-registry.v1.json",
+    "private_catalog_index": "configs/private-ci/catalog/index.v1.json",
+    "executor": "scripts/private_ci_bridge.py",
+    "workflow": ".github/workflows/START.yml",
+    "private_manifest_example_repo": "rafaelmeloreisnovo/Rafaelia_Private",
+    "private_manifest_path": ".rafaelia/private-ci/manifest.v1.json"
+  },
+  "route": [
+    {
+      "stage": "DISCOVER",
+      "input": "private repository default-branch workflow metadata",
+      "output": "bounded catalog",
+      "secret_access": false
+    },
+    {
+      "stage": "ALLOWLIST",
+      "input": "public target/workflow registry + private manifest",
+      "output": "intersection-approved replay id",
+      "secret_access": false
+    },
+    {
+      "stage": "EXACT_SHA_ACCESS",
+      "input": "target repository + exact 40-hex commit",
+      "output": "access receipt + exact checkout",
+      "secret_access": true
+    },
+    {
+      "stage": "SECRETLESS_REPLAY",
+      "input": "validated private manifest argv",
+      "output": "in-memory stdout/stderr + return codes",
+      "secret_access": false
+    },
+    {
+      "stage": "SANITIZE",
+      "input": "execution observations",
+      "output": "hash-only public receipt",
+      "secret_access": false
+    },
+    {
+      "stage": "REVIEW",
+      "input": "receipt + gaps",
+      "output": "PASS|FAIL|IMPLEMENTED_UNTESTED|TOKEN_VAZIO",
+      "secret_access": false
+    }
+  ],
+  "gates": {
+    "source_gate": "exact lowercase 40-hex target commit",
+    "authority_gate": "public allowlist AND target-private manifest",
+    "command_gate": "argv array + executable allowlist + shell=false",
+    "secret_gate": "PAT_ACTIONS only in provider access/checkout steps; absent from replay subprocess",
+    "path_gate": "source/workdir/artifact paths remain within exact checkout root",
+    "evidence_gate": "public artifact contains sanitized receipts only; no private source or raw private stdout/stderr",
+    "claim_gate": "claim_allowed=false until exact execution receipt is reviewed"
+  },
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != PASS",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "PRIVATE_SOURCE != PUBLIC_ARTIFACT",
+    "SECRET_REFERENCE != SECRET_VALUE",
+    "ZIPRAF_CONTAINER != ENCRYPTION",
+    "MAPA == METHOD_AND_ROUTE_AUTHORITY",
+    "RAFGITTOOLS == EXECUTION_CONTROL_PLANE",
+    "PRIVATE_REPOSITORY == SOURCE_AND_MANIFEST_AUTHORITY"
+  ],
+  "privacy": {
+    "credential_values_in_map": false,
+    "private_source_in_map": false,
+    "raw_private_logs_in_map": false,
+    "public_metadata_allowed": [
+      "repository locator",
+      "workflow id",
+      "exact commit identity in receipt",
+      "hashes",
+      "states",
+      "gaps"
+    ],
+    "hostile_source_network_exfiltration_protection": "TOKEN_VAZIO_NOT_ENFORCED_V1"
+  },
+  "zipraf": {
+    "role": "OPTIONAL_FUTURE_SANITIZED_RECEIPT_CONTAINER",
+    "encryption_claim": false,
+    "external_signature_profile": "TOKEN_VAZIO_NOT_IMPLEMENTED",
+    "confidential_raw_log_profile": "TOKEN_VAZIO_NOT_IMPLEMENTED"
+  },
+  "rollback": [
+    "Disable/remove RafGitTools private_ci START lane.",
+    "Remove target/workflow from public execution registry.",
+    "Remove or supersede target-private replay manifest.",
+    "Preserve historical receipts as append-only evidence; do not rewrite PASS/FAIL history."
+  ],
+  "current_state": "IMPLEMENTED_UNTESTED_CROSS_REPO",
+  "gaps": [
+    "No exact-SHA private replay receipt has yet been observed for the new generic lane.",
+    "Outbound network isolation for replayed private code is not enforced in V1.",
+    "Catalog discovery is search-bounded and not exhaustive.",
+    "ZIPRAF signed sanitized-receipt profile is not implemented."
+  ],
+  "next": "Run one exact-SHA low-risk replay (documentation-std-mil) after both implementation PRs are available, then compare receipt and source command equivalence before promoting that workflow to PASS.",
+  "claim_allowed": false
+}
