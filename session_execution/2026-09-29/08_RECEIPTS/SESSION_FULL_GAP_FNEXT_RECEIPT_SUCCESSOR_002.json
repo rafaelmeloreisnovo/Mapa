@@ -1,0 +1,56 @@
+{
+  "schema": "rafaelia.session-full-gap-fnext-receipt.v2",
+  "event_id": "SFGF-20260929-002",
+  "parent_event_id": "SFGF-20260929-001",
+  "observed_at": "2026-09-29T10:25:00-03:00",
+  "kind": "DRIVE_SUCCESSOR_READBACK",
+  "claim_allowed": false,
+  "before_state": "Mapa routing materialized; Drive successor IDs pending",
+  "after_state": "Drive ATLAS/ROUTES/EDGES/EVIDENCE/RECEIPT successor documents materialized and exact IDs/revisions bound",
+  "exact_refs": {
+    "Mapa_branch": "session-full-gap-fnext-20260929",
+    "Rafaelia_Private_PR263": "d861c87dbb8706dc7c2f4efaf50185f0af9fb648",
+    "drive": {
+      "atlas": {
+        "id": "1AmZnBB4AQGutT5Iknj06cFklhWv4fYxNtw6lMVPbf3Q",
+        "revision": "ANLCKQnhOgicxfYmmdm6hf-SXJd29Jd_tsTOuT5DTJT013Uk1fywtczOKvNljP8ZVyYA69GdGR4Dik4rdZbdnZiT8RgJheEDHtomVJmNbMQ"
+      },
+      "routes": {
+        "id": "13b98yZInsTvN8PTHJTztMzSRuZ-aFjsefci2Chv7eGE",
+        "revision": "ANLCKQn7Krm9I-4unMd0kMoS6izi_X8wgzsAPqaZLz8NYH8CKT2G76Ype1A0qodf2UUmrvsq8Ve1cLsAq1tYwI-sOQ2sAniw-kwYEMyaTD0"
+      },
+      "edges": {
+        "id": "1tzRKMbL0AWT4YgWMRUtYqHtf0tC4h3SHlZGPgiBOjXk",
+        "revision": "ANLCKQkusRP6hGFnX1YLpHZu4LnBD66h6tRFm45nPz-pm5L6mftCFr41JOd0jSIDR2PgYlo4U9S4SM8glq0AP9GJQkAjKPRSHoCUPx__gc8"
+      },
+      "evidence": {
+        "id": "1jhtQeeOK1FayDbr4aJuQvZhswe522b3e9G-o2jMVaNg",
+        "revision": "ANLCKQla0fCxux1iqF22LAYYCVU6zDjOp4QFl-xK8YRq5pvKpf1iWJ19usyUSJDsuWDrqrOwogHkcipPadS8E-G0rbX0HCz6NTxgJCLnUfk"
+      },
+      "receipt": {
+        "id": "1yWoouH6_XtCv-32DA-oWsOos9OZILXipk2cB9jM3g8w",
+        "revision": "ANLCKQkw3x-2y0lC6Ivf0MuiTHp8SvTVeVCL2463EUMVDTYRy7hy8CQPiPCz_3HjQ66zRRBhDN-fL3t2jKudypSm6iBlPyxRX-sGX52Fr44"
+      }
+    }
+  },
+  "expected_observable": "five docs exist in canonical folders and are readable",
+  "actual_observable": "PASS_SCOPED_DOCUMENTARY_READBACK",
+  "falsifier": "missing document, wrong folder, readback failure, or content promoting execution/claim",
+  "rollback_procedure": "append a superseding Drive receipt and revert this Mapa branch commit; do not delete historical Drive docs",
+  "rollback_test": "TOKEN_VAZIO_RECONSTRUCTION",
+  "replay_recipe": "open each exact Drive ID -> compare title/content/revision -> resolve Mapa routing paths -> continue to RafGitTools collector",
+  "reconstruction_minimum": [
+    "Mapa routing branch",
+    "Private PR#263 overlay",
+    "five Drive document IDs/revisions",
+    "Session AI Dispatch V1 blob"
+  ],
+  "F_ok": [
+    "Drive documentary layer completed for this session overlay"
+  ],
+  "F_gap": [
+    "RafGitTools collector + exact-head CI pending",
+    "producer workstreams beyond Wave0 remain routed, not executed"
+  ],
+  "F_next": "implement RafGitTools read-only collector against exact Mapa branch head and validate 18 route pins."
+}
