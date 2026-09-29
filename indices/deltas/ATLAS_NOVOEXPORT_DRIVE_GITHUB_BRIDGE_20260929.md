@@ -21,13 +21,15 @@
 | Drive START HERE Ω | `1HWse8jj9PAz1zMFv2KW6Qv5-mfk8iBkNBQopmBAcook` | Reconstruction router; records the shard/message baseline and next route |
 | Drive bridge artifact | `1TulThGJys7tJ2A8NGoqV7YbW2VYGlLN0` | This map in Drive `01_ATLAS`; uploaded as a linked successor artifact |
 | GitHub repository | `rafaelmeloreisnovo/Mapa` | Cross-surface map, provenance, routes, gates |
-| GitHub base observed | `main@21c2f9aefab86cd31b8ea7da22533452690fd087` | Exact base for this append-only successor |
+| GitHub branch origin | `main@21c2f9aefab86cd31b8ea7da22533452690fd087` | Main head used when this branch was created; current merge base |
+| Pull request | `#708` | Open PR; head `48034845d3d1645b8fa972fab290f33b847f600c`; current base `main@6e705d38bedd352b97be7c8c2c8924f3bdabed54` |
+| PR comparison | `main...atlas/novoexport-drive-github-bridge-20260929` | Diverged: branch 2 commits ahead and 12 behind; GitHub reported `mergeable=true` at inspection |
 | Existing source-universe index | `indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md` | Historical manifest-scope evidence and open gaps |
 | Existing reconstruction route | `indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md` | Drive-to-private-chunks route and authority boundary |
 | This bridge delta | `indices/deltas/ATLAS_NOVOEXPORT_DRIVE_GITHUB_BRIDGE_20260929.md` | This map's GitHub-side record |
 
 Drive links: [NOVOexport folder](https://drive.google.com/drive/folders/1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv) · [START HERE Ω](https://docs.google.com/document/d/1HWse8jj9PAz1zMFv2KW6Qv5-mfk8iBkNBQopmBAcook/edit) · [this Drive bridge artifact](https://drive.google.com/file/d/1TulThGJys7tJ2A8NGoqV7YbW2VYGlLN0/view)  
-GitHub links: [Mapa](https://github.com/rafaelmeloreisnovo/Mapa) · [source-universe index](https://github.com/rafaelmeloreisnovo/Mapa/blob/main/indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md) · [reconstruction route](https://github.com/rafaelmeloreisnovo/Mapa/blob/main/indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md)
+GitHub links: [Mapa](https://github.com/rafaelmeloreisnovo/Mapa) · [this bridge PR](https://github.com/rafaelmeloreisnovo/Mapa/pull/708) · [source-universe index](https://github.com/rafaelmeloreisnovo/Mapa/blob/main/indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md) · [reconstruction route](https://github.com/rafaelmeloreisnovo/Mapa/blob/main/indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md)
 
 ## Drive navigation topology observed
 
@@ -89,7 +91,6 @@ Invariants:
 - Drive inspection: direct folder listing, capped at 100 items; START HERE Ω text read.
 - GitHub inspection: exact repository, `main` head, and the two existing NOVOexport route documents.
 - Search and cache behavior: no corpus-wide content query, cache implementation, cache hit-rate, or performance experiment was part of this map. Cache/performance lane: `NOT_NEEDED` for pointer-only indexing.
-- No Calendar events, jobs, or reminders were created or changed in this corrected scope.
 
 ## Evolution gate
 
@@ -97,17 +98,16 @@ Invariants:
 - **H1:** one append-only bridge improves navigation if Drive IDs, GitHub paths, and authority boundaries resolve.
 - **H0:** the bridge adds no value if it duplicates a current canonical route or introduces stale/ambiguous pointers.
 - **Acceptance:** confirm both pointers resolve and preserve the source/derived/evidence boundaries.
-- **Rollback:** close/revert this PR and remove only this new Drive map artifact; do not modify raw source shards or historical records.
+- **Rollback:** revert this PR and record a Drive map successor if correction is needed; do not delete historical records or modify raw source shards.
 
 ## Open gaps and next probe
 
 - `TOKEN_VAZIO_CURRENT_SOURCE_HASH`: re-read the exact current export manifest and bind its provider file ID, byte scope, and digest to a new receipt.
 - `TOKEN_VAZIO_FULL_INVENTORY`: paginate or otherwise verify the complete direct-child/member inventory; the 100-item listing is bounded.
 - `TOKEN_VAZIO_SEMANTIC_COVERAGE`: validate shard/message coverage independently before promoting corpus-wide genealogy.
-- `TOKEN_VAZIO_DRIVE_ARTIFACT_BACKLINK`: after this Drive map is uploaded, add its returned file ID/URL to this GitHub delta.
 
 ## R3
 
-- **F_ok:** exact Drive folder and START HERE pointers observed; canonical numbered hierarchy observed; GitHub repository and base commit observed.
+- **F_ok:** exact Drive folder, START HERE, and uploaded map artifact pointers resolved; canonical numbered hierarchy observed; PR #708 is open and reported mergeable.
 - **F_gap:** full current member inventory and exact current source-manifest hash remain unresolved; prior counts are documented, not remeasured.
-- **F_next:** verify the uploaded Drive artifact and repository pointers; then retain the PR review/CI outcome as a successor receipt.
+- **F_next:** obtain the PR review/CI result, then revalidate the current manifest hash and full inventory in a successor receipt.
