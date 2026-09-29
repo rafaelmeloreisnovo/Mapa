@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Validate ontology
         run: python3 tools/validate_empty_state_ontology.py | tee /tmp/empty-state-ontology.json
       - name: Validate JSON output
