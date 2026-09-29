@@ -90,13 +90,16 @@
       "states",
       "gaps"
     ],
-    "hostile_source_network_exfiltration_protection": "TOKEN_VAZIO_NOT_ENFORCED_V1"
+    "hostile_source_network_exfiltration_protection": "LINUX_USER_NAMESPACE_PLUS_NETWORK_NAMESPACE_REQUIRED; RUNTIME_RECEIPT_PENDING"
   },
   "zipraf": {
-    "role": "OPTIONAL_FUTURE_SANITIZED_RECEIPT_CONTAINER",
+    "role": "IMPLEMENTED_SANITIZED_RECEIPT_INTEGRITY_CONTAINER",
     "encryption_claim": false,
-    "external_signature_profile": "TOKEN_VAZIO_NOT_IMPLEMENTED",
-    "confidential_raw_log_profile": "TOKEN_VAZIO_NOT_IMPLEMENTED"
+    "external_signature_profile": "TOKEN_VAZIO_NOT_CONFIGURED",
+    "confidential_raw_log_profile": "NOT_IN_SCOPE_RAW_LOGS_NOT_PERSISTED",
+    "receipt_profile": "PRIVATE_CI_SANITIZED_RECEIPT_V1",
+    "encryption": false,
+    "container_integrity_state": "IMPLEMENTED_TESTING"
   },
   "rollback": [
     "Disable/remove RafGitTools private_ci START lane.",
@@ -104,13 +107,14 @@
     "Remove or supersede target-private replay manifest.",
     "Preserve historical receipts as append-only evidence; do not rewrite PASS/FAIL history."
   ],
-  "current_state": "IMPLEMENTED_UNTESTED_CROSS_REPO",
+  "current_state": "IMPLEMENTED_TESTING_CROSS_REPO",
   "gaps": [
     "No exact-SHA private replay receipt has yet been observed for the new generic lane.",
-    "Outbound network isolation for replayed private code is not enforced in V1.",
     "Catalog discovery is search-bounded and not exhaustive.",
-    "ZIPRAF signed sanitized-receipt profile is not implemented."
+    "The first generic exact-SHA private replay receipt has not yet been observed.",
+    "Network namespace isolation and ZIPRAF integrity profile are implemented but require fresh runner/replay evidence before promotion.",
+    "External authenticity signature remains TOKEN_VAZIO_NOT_CONFIGURED."
   ],
-  "next": "Run one exact-SHA low-risk replay (documentation-std-mil) after both implementation PRs are available, then compare receipt and source command equivalence before promoting that workflow to PASS.",
+  "next": "Merge the green RafGitTools control-plane delta so its owner-main one-shot runs documentation-std-mil at the exact private SHA; review network-isolation + ZIPRAF receipt before promotion.",
   "claim_allowed": false
 }
