@@ -16,7 +16,7 @@ class ManifoldRegistryTests(unittest.TestCase):
     def test_repository_seeds(self):
         self.assertEqual(
             validate_edges(ROOT / "data/manifold/edges_omega_v1.jsonl"),
-            43,
+            46,
         )
         self.assertEqual(
             validate_routes(ROOT / "data/manifold/routes_omega_v1.jsonl"),
@@ -28,9 +28,9 @@ class ManifoldRegistryTests(unittest.TestCase):
             ROOT / "data/manifold/edges_omega_v1.jsonl",
             ROOT / "data/manifold/gaps_omega_v1.jsonl",
         )
-        self.assertEqual(out["has_gap"], 18)
+        self.assertEqual(out["has_gap"], 19)
         self.assertEqual(out["gap_of"], 8)
-        self.assertEqual(out["bound_gaps"], 26)
+        self.assertEqual(out["bound_gaps"], 27)
 
     def test_eight_directions_bridge_preserves_cultural_provenance_gap(self):
         edges = [
@@ -57,6 +57,35 @@ class ManifoldRegistryTests(unittest.TestCase):
         self.assertEqual(gap["state"], "TOKEN_VAZIO_NAVIGABLE")
         self.assertFalse(gap["claim_allowed"])
         self.assertIn("CULTURAL_PROVENANCE", gap["markers"])
+
+    def test_empty_state_ontology_bridge_preserves_metaphysical_gap(self):
+        edges = [
+            json.loads(line)
+            for line in (ROOT / "data/manifold/edges_omega_v1.jsonl")
+            .read_text(encoding="utf-8")
+            .splitlines()
+            if line.strip()
+        ]
+        gaps = [
+            json.loads(line)
+            for line in (ROOT / "data/manifold/gaps_omega_v1.jsonl")
+            .read_text(encoding="utf-8")
+            .splitlines()
+            if line.strip()
+        ]
+        bridge = next(row for row in edges if row["edge_id"] == "E0044")
+        validator = next(row for row in edges if row["edge_id"] == "E0045")
+        gap_edge = next(row for row in edges if row["edge_id"] == "E0046")
+        gap = next(row for row in gaps if row["gap_id"] == "G0027")
+
+        self.assertEqual(bridge["relation_type"], "CONTEXTUALIZES")
+        self.assertEqual(validator["relation_type"], "VALIDATED_BY")
+        self.assertEqual(gap_edge["source_id"], "edge:E0044")
+        self.assertEqual(gap_edge["target_id"], "gap:G0027")
+        self.assertEqual(gap["kind"], "MISSING_EVIDENCE")
+        self.assertEqual(gap["state"], "TOKEN_VAZIO_NAVIGABLE")
+        self.assertFalse(gap["claim_allowed"])
+        self.assertIn("NOTHING_ABSOLUTE", gap["markers"])
 
     def test_duplicate_edge_rejected(self):
         row = {

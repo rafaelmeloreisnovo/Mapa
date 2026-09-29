@@ -1,0 +1,419 @@
+{
+  "schema": "rafaelia.empty-state-ontology.v1",
+  "version": "1.0.0",
+  "date": "2026-09-29",
+  "state": "MATERIALIZED_UNTESTED",
+  "authority": "Mapa semantic/manifold control-plane; does not override producer-domain evidence",
+  "claim_allowed": false,
+  "invariants": [
+    "SOURCE!=ARTIFACT!=EXECUTION!=EVIDENCE!=CLAIM",
+    "TOKEN_VAZIO!=0",
+    "UNOBSERVED!=ABSENT",
+    "INVISIBLE!=NONEXISTENT",
+    "SILENCE!=NO_SOURCE",
+    "SHADOW!=UNIQUE_CAUSE",
+    "LIMIT!=ABSENCE",
+    "NULL!=EMPTY_SET",
+    "VOID!=NOTHING_ABSOLUTE",
+    "UNKNOWN!=UNOBSERVED"
+  ],
+  "center_binding": {
+    "source": "github:rafaelmeloreisnovo/Matem-tica-@011a9c2b9d4a52accf32ed8739bfc3c1ab1d834a:data/registries/OCTAGON_8_DIRECTIONS_SEMANTIC_MAP_V1.json",
+    "legacy_expression": "CENTER=TOKEN_VAZIO",
+    "refined_semantic_type": "VOID",
+    "representation_marker": "TOKEN_VAZIO",
+    "rule": "refinement only: the marker remains TOKEN_VAZIO; VOID names the intentional unassigned structural state and is not a numeric or metaphysical value"
+  },
+  "coercion_policy": {
+    "mode": "EXPLICIT_ONLY",
+    "default": "DENY",
+    "rule": "No state may be silently coerced into another. Any conversion requires an explicit domain rule, source, evidence scope, and reversible provenance."
+  },
+  "states": [
+    {
+      "id": "TOKEN_VAZIO",
+      "class": "EPISTEMIC_MARKER",
+      "definition": "Marker that preserves an unresolved, unavailable, unassigned, or intentionally unpromoted field without inventing a value.",
+      "requires_context": [
+        "field",
+        "reason"
+      ],
+      "evidence_rule": "The marker records non-promotion; it is not evidence for any candidate value.",
+      "forbidden_inferences": [
+        "equals ZERO",
+        "equals NULL",
+        "equals EMPTY_SET",
+        "proves absence",
+        "proves nonexistence"
+      ],
+      "promotable": false
+    },
+    {
+      "id": "VOID",
+      "class": "STRUCTURAL_STATE",
+      "definition": "A declared structural position exists but intentionally has no assigned content in the current model.",
+      "requires_context": [
+        "structure_id",
+        "slot_id",
+        "assignment_policy"
+      ],
+      "evidence_rule": "Requires evidence that the position exists and is intentionally unassigned.",
+      "forbidden_inferences": [
+        "equals NOTHING_ABSOLUTE",
+        "equals ZERO",
+        "implies unknown cause"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "NOTHING_ABSOLUTE",
+      "class": "METAPHYSICAL_LIMIT_CONCEPT",
+      "definition": "Concept of absolute absence of entities, fields, relations, observers, frames, and predicates; not operationally instantiated by this ontology.",
+      "requires_context": [
+        "philosophical_scope"
+      ],
+      "evidence_rule": "No empirical promotion is defined. Operational empty states must use another typed state.",
+      "forbidden_inferences": [
+        "derived from VOID",
+        "derived from EMPTY_SET",
+        "derived from SILENCE",
+        "derived from UNOBSERVED"
+      ],
+      "promotable": false
+    },
+    {
+      "id": "INVISIBLE",
+      "class": "OBSERVABILITY_STATE",
+      "definition": "A candidate entity or process is not directly observable through the declared channel, while indirect evidence may or may not exist.",
+      "requires_context": [
+        "channel",
+        "observation_model",
+        "window"
+      ],
+      "evidence_rule": "Indirect evidence may support a bounded hypothesis but cannot identify a unique cause without a discriminating bridge.",
+      "forbidden_inferences": [
+        "equals nonexistent",
+        "effect implies unique cause",
+        "equals UNOBSERVED"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "ABSENCE",
+      "class": "SCOPE_BOUND_STATE",
+      "definition": "An expected item was not detected within a declared scope under a method whose detection conditions are explicitly stated.",
+      "requires_context": [
+        "scope",
+        "method",
+        "detection_threshold",
+        "window"
+      ],
+      "evidence_rule": "Absence claims are bounded to the declared scope and method; they do not imply global nonexistence.",
+      "forbidden_inferences": [
+        "global nonexistence",
+        "equals UNOBSERVED",
+        "equals SILENCE"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "SILENCE",
+      "class": "CHANNEL_STATE",
+      "definition": "No qualifying signal, message, or event was detected in a declared channel during a declared window.",
+      "requires_context": [
+        "channel",
+        "window",
+        "threshold"
+      ],
+      "evidence_rule": "Silence is a measurement result about a channel/window, not proof that no source exists.",
+      "forbidden_inferences": [
+        "no source exists",
+        "equals ABSENCE",
+        "equals NOTHING_ABSOLUTE"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "ZERO",
+      "class": "NUMERIC_VALUE",
+      "definition": "The numeric value 0 in a declared numeric domain.",
+      "requires_context": [
+        "numeric_domain"
+      ],
+      "evidence_rule": "Requires an observed, computed, or defined numeric value whose domain semantics admit zero.",
+      "forbidden_inferences": [
+        "equals TOKEN_VAZIO",
+        "equals NULL",
+        "equals EMPTY_SET"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "EMPTY_SET",
+      "class": "MATHEMATICAL_OBJECT",
+      "definition": "The mathematical set with cardinality zero.",
+      "requires_context": [
+        "set_domain"
+      ],
+      "evidence_rule": "Requires set semantics and proof or definition that cardinality is zero.",
+      "forbidden_inferences": [
+        "equals ZERO",
+        "equals NULL",
+        "equals VOID"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "NULL",
+      "class": "DATA_MODEL_SENTINEL",
+      "definition": "An explicit null sentinel whose meaning is defined by a schema, language, protocol, or provider.",
+      "requires_context": [
+        "schema_or_provider",
+        "field_semantics"
+      ],
+      "evidence_rule": "Interpretation must come from the governing schema/provider; null does not automatically mean missing, empty, zero, or unknown.",
+      "forbidden_inferences": [
+        "equals ZERO",
+        "equals EMPTY_SET",
+        "equals UNKNOWN",
+        "equals ABSENCE"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "UNKNOWN",
+      "class": "EPISTEMIC_STATE",
+      "definition": "A value or truth status is not currently determined.",
+      "requires_context": [
+        "question_or_field"
+      ],
+      "evidence_rule": "Unknown preserves unresolved knowledge; it does not state whether observation occurred.",
+      "forbidden_inferences": [
+        "equals UNOBSERVED",
+        "equals ABSENCE",
+        "equals TOKEN_VAZIO"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "UNOBSERVED",
+      "class": "OBSERVATION_STATE",
+      "definition": "The relevant observation or measurement is not available or was not performed for the declared target and window.",
+      "requires_context": [
+        "target",
+        "observation_method",
+        "window"
+      ],
+      "evidence_rule": "Lack of observation cannot be promoted to absence without an observation/detection bridge.",
+      "forbidden_inferences": [
+        "equals ABSENCE",
+        "proves absence",
+        "proves nonexistence"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "SHADOW",
+      "class": "INDIRECT_EVIDENCE_STATE",
+      "definition": "An observable proxy, occlusion, trace, or effect that may constrain hidden causes without uniquely identifying one.",
+      "requires_context": [
+        "observable_effect",
+        "candidate_cause_set",
+        "measurement_context"
+      ],
+      "evidence_rule": "A shadow may narrow hypotheses; causal uniqueness requires independent discriminating evidence.",
+      "forbidden_inferences": [
+        "unique cause",
+        "equals INVISIBLE",
+        "proves hidden entity"
+      ],
+      "promotable": true
+    },
+    {
+      "id": "LIMIT",
+      "class": "BOUNDARY_STATE",
+      "definition": "A declared mathematical, observational, computational, or epistemic boundary beyond which the current operation or inference is not licensed.",
+      "requires_context": [
+        "boundary_type",
+        "boundary_definition"
+      ],
+      "evidence_rule": "A limit constrains inference or operation; it is not evidence that content beyond the boundary is absent.",
+      "forbidden_inferences": [
+        "equals ABSENCE",
+        "equals VOID",
+        "proves nonexistence"
+      ],
+      "promotable": true
+    }
+  ],
+  "hard_distinctions": [
+    [
+      "TOKEN_VAZIO",
+      "ZERO"
+    ],
+    [
+      "TOKEN_VAZIO",
+      "NULL"
+    ],
+    [
+      "TOKEN_VAZIO",
+      "EMPTY_SET"
+    ],
+    [
+      "VOID",
+      "NOTHING_ABSOLUTE"
+    ],
+    [
+      "VOID",
+      "EMPTY_SET"
+    ],
+    [
+      "ZERO",
+      "EMPTY_SET"
+    ],
+    [
+      "ZERO",
+      "NULL"
+    ],
+    [
+      "NULL",
+      "EMPTY_SET"
+    ],
+    [
+      "UNKNOWN",
+      "UNOBSERVED"
+    ],
+    [
+      "UNOBSERVED",
+      "ABSENCE"
+    ],
+    [
+      "SILENCE",
+      "ABSENCE"
+    ],
+    [
+      "INVISIBLE",
+      "UNOBSERVED"
+    ],
+    [
+      "INVISIBLE",
+      "ABSENCE"
+    ],
+    [
+      "SHADOW",
+      "INVISIBLE"
+    ],
+    [
+      "LIMIT",
+      "ABSENCE"
+    ],
+    [
+      "NOTHING_ABSOLUTE",
+      "ABSENCE"
+    ]
+  ],
+  "omega8_projection": [
+    {
+      "direction": "N",
+      "operator": "invariant",
+      "rule": "Preserve each state's identity and forbidden coercions across transformations."
+    },
+    {
+      "direction": "NE",
+      "operator": "adaptation",
+      "rule": "Permit state transition only through an explicit evidence-bearing conversion rule."
+    },
+    {
+      "direction": "E",
+      "operator": "function",
+      "rule": "Use the state's operational semantics in the correct domain instead of substituting a visually similar empty value."
+    },
+    {
+      "direction": "SE",
+      "operator": "connection",
+      "rule": "Connect state to source, schema, observation channel, or evidence bridge with typed provenance."
+    },
+    {
+      "direction": "S",
+      "operator": "sharing",
+      "rule": "Serialize and transmit the state without semantic collapse so another agent can reconstruct the same distinction."
+    },
+    {
+      "direction": "SW",
+      "operator": "evidence",
+      "rule": "Require the evidence gate specific to the state before promoting any domain claim."
+    },
+    {
+      "direction": "W",
+      "operator": "context",
+      "rule": "Carry scope, method, channel, window, schema, and boundary context required by the state."
+    },
+    {
+      "direction": "NW",
+      "operator": "ecosystem",
+      "rule": "Propagate typed empty-state semantics across systems while preserving producer authority and rollback."
+    }
+  ],
+  "transitions": [
+    {
+      "from": "UNOBSERVED",
+      "to": "ABSENCE",
+      "allowed": "CONDITIONAL",
+      "requires": [
+        "observation_performed",
+        "declared_detection_model",
+        "negative_result",
+        "bounded_scope"
+      ]
+    },
+    {
+      "from": "INVISIBLE",
+      "to": "SHADOW",
+      "allowed": "CONDITIONAL",
+      "requires": [
+        "observable_indirect_effect",
+        "provenance"
+      ]
+    },
+    {
+      "from": "UNKNOWN",
+      "to": "ZERO",
+      "allowed": "CONDITIONAL",
+      "requires": [
+        "numeric_domain",
+        "measurement_or_derivation",
+        "evidence"
+      ]
+    },
+    {
+      "from": "TOKEN_VAZIO",
+      "to": "NULL",
+      "allowed": "CONDITIONAL",
+      "requires": [
+        "governing_schema_explicitly_assigns_null"
+      ]
+    },
+    {
+      "from": "VOID",
+      "to": "TOKEN_VAZIO",
+      "allowed": "REPRESENTATION_ONLY",
+      "requires": [
+        "serialization_rule"
+      ]
+    },
+    {
+      "from": "NOTHING_ABSOLUTE",
+      "to": "ABSENCE",
+      "allowed": "DENY",
+      "requires": []
+    }
+  ],
+  "gaps": [
+    {
+      "id": "ONTO-GAP-001",
+      "state": "TOKEN_VAZIO",
+      "summary": "No operational evidence bridge is defined from NOTHING_ABSOLUTE to an empirical or computational domain claim.",
+      "closure": "No automatic closure. A future proposal would require a separately governed philosophical/empirical bridge and cannot be inferred from empty data states."
+    }
+  ]
+}

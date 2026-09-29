@@ -15,8 +15,8 @@ class ManifoldGapRegistryTests(unittest.TestCase):
         cls.by_id = {row["gap_id"]: row for row in cls.rows}
 
     def test_seed_count_and_unique_ids(self):
-        self.assertEqual(len(self.rows), 26)
-        self.assertEqual(len(self.by_id), 26)
+        self.assertEqual(len(self.rows), 27)
+        self.assertEqual(len(self.by_id), 27)
 
     def test_gap_of_gap_is_explicit(self):
         self.assertEqual(self.by_id["G0002"]["child_gap_refs"], ["G0011"])
@@ -62,7 +62,7 @@ class ManifoldGapRegistryTests(unittest.TestCase):
         for gid in (
             "G0013", "G0014", "G0015", "G0016", "G0017", "G0018",
             "G0019", "G0020", "G0021", "G0022", "G0023", "G0024", "G0025",
-            "G0026",
+            "G0026", "G0027",
         ):
             self.assertIn(gid, self.by_id)
             self.assertFalse(self.by_id[gid]["claim_allowed"])
@@ -74,6 +74,8 @@ class ManifoldGapRegistryTests(unittest.TestCase):
         self.assertEqual(self.by_id["G0025"]["state"], "TOKEN_VAZIO_AMBIGUOUS")
         self.assertEqual(self.by_id["G0026"]["kind"], "MISSING_SOURCE")
         self.assertEqual(self.by_id["G0026"]["state"], "TOKEN_VAZIO_NAVIGABLE")
+        self.assertEqual(self.by_id["G0027"]["kind"], "MISSING_EVIDENCE")
+        self.assertEqual(self.by_id["G0027"]["state"], "TOKEN_VAZIO_NAVIGABLE")
 
 
 if __name__ == "__main__":
