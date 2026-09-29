@@ -103,9 +103,10 @@ Ele não publica:
 ZIPRAF entra como possível envelope futuro do **receipt sanitizado**. Container não equivale a criptografia.
 
 ```text
-ZIPRAF_RECEIPT_PROFILE = TOKEN_VAZIO_NOT_IMPLEMENTED
-EXTERNAL_SIGNATURE = TOKEN_VAZIO_NOT_IMPLEMENTED
-RAW_PRIVATE_LOG_CONTAINER = TOKEN_VAZIO_NOT_IMPLEMENTED
+ZIPRAF_RECEIPT_PROFILE = IMPLEMENTED_INTEGRITY_ONLY
+ZIPRAF_ENCRYPTION = false
+EXTERNAL_SIGNATURE = TOKEN_VAZIO_NOT_CONFIGURED
+RAW_PRIVATE_LOG_CONTAINER = NOT_IN_SCOPE
 ```
 
 Se houver assinatura, a chave privada fica fora do objeto. O PAT não é reaproveitado como chave criptográfica do ZIPRAF.
@@ -115,7 +116,7 @@ Se houver assinatura, a chave privada fica fora do objeto. O PAT não é reaprov
 A remoção da credencial do subprocesso reduz a exposição do PAT. Porém V1 ainda não impõe isolamento de saída de rede ao código privado. Portanto não se afirma proteção contra uma fonte privada deliberadamente hostil que tente exfiltrar o próprio conteúdo por rede:
 
 ```text
-NETWORK_EGRESS_ISOLATION = TOKEN_VAZIO_NOT_ENFORCED
+NETWORK_EGRESS_ISOLATION = IMPLEMENTED_AWAITING_PRIVATE_REPLAY_RECEIPT
 ```
 
 Esse limite é deliberadamente público no receipt.
@@ -131,6 +132,8 @@ METHOD = MATERIALIZED
 RAFGITTOOLS_IMPLEMENTATION = IMPLEMENTED_UNTESTED
 PRIVATE_MANIFEST = IMPLEMENTED_UNTESTED
 GENERIC_PRIVATE_REPLAY = NOT_RUN
+NETWORK_NAMESPACE_GATE = IMPLEMENTED_TESTING
+ZIPRAF_INTEGRITY_PROFILE = IMPLEMENTED_TESTING
 CLAIM_ALLOWED = false
 ```
 
@@ -138,6 +141,6 @@ CLAIM_ALLOWED = false
 
 **F_ok:** método, dupla autorização, exact-SHA, fronteira do PAT, execução sem segredo e receipt hash-only estão definidos e materializados.
 
-**F_gap:** replay genérico real ainda não foi executado; isolamento de egress e perfil ZIPRAF assinado continuam abertos.
+**F_gap:** o replay genérico real ainda não foi executado; isolamento de rede e ZIPRAF de integridade precisam do receipt fresco; assinatura externa continua `TOKEN_VAZIO_NOT_CONFIGURED`.
 
 **F_next:** executar primeiro `documentation-std-mil` em um SHA exato do `Rafaelia_Private`; comparar o receipt com os comandos-fonte e só então promover essa rota específica.
