@@ -19,17 +19,19 @@
 | Google Drive source folder `NOVOexport` | `1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv` | Raw corpus/source boundary |
 | Drive `00_INDEX` | `1C5XGG92HY3_QvEbuGYLStMdHBvCIPzUv` | Canonical navigation directory |
 | Drive START HERE Ω | `1HWse8jj9PAz1zMFv2KW6Qv5-mfk8iBkNBQopmBAcook` | Reconstruction router; records the shard/message baseline and next route |
+| Drive bridge artifact | `1TulThGJys7tJ2A8NGoqV7YbW2VYGlLN0` | This map in Drive `01_ATLAS`; uploaded as a linked successor artifact |
 | GitHub repository | `rafaelmeloreisnovo/Mapa` | Cross-surface map, provenance, routes, gates |
 | GitHub base observed | `main@21c2f9aefab86cd31b8ea7da22533452690fd087` | Exact base for this append-only successor |
 | Existing source-universe index | `indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md` | Historical manifest-scope evidence and open gaps |
 | Existing reconstruction route | `indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md` | Drive-to-private-chunks route and authority boundary |
+| This bridge delta | `indices/deltas/ATLAS_NOVOEXPORT_DRIVE_GITHUB_BRIDGE_20260929.md` | This map's GitHub-side record |
 
-Drive links: [NOVOexport folder](https://drive.google.com/drive/folders/1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv) · [START HERE Ω](https://docs.google.com/document/d/1HWse8jj9PAz1zMFv2KW6Qv5-mfk8iBkNBQopmBAcook/edit)  
+Drive links: [NOVOexport folder](https://drive.google.com/drive/folders/1P7hJq5R4fgYGEQIVNgRvllAad2lGxWEv) · [START HERE Ω](https://docs.google.com/document/d/1HWse8jj9PAz1zMFv2KW6Qv5-mfk8iBkNBQopmBAcook/edit) · [this Drive bridge artifact](https://drive.google.com/file/d/1TulThGJys7tJ2A8NGoqV7YbW2VYGlLN0/view)  
 GitHub links: [Mapa](https://github.com/rafaelmeloreisnovo/Mapa) · [source-universe index](https://github.com/rafaelmeloreisnovo/Mapa/blob/main/indices/NOVOEXPORT_ACTIVE_V2_SOURCE_UNIVERSE_20260907_V1.md) · [reconstruction route](https://github.com/rafaelmeloreisnovo/Mapa/blob/main/indices/deltas/ATLAS_NOVOEXPORT_TOKEN_GENEALOGY_ROUTE_20260928.md)
 
 ## Drive navigation topology observed
 
-The folder listing returned 100 direct items. The canonical numbered navigation folders below were present; this bounded listing is not a complete inventory of the 15,000+ source objects.
+The folder listing returned 100 direct items. The canonical numbered navigation folders below were present. The listed responsibilities are routing labels; folder contents were not audited here. This bounded listing is not a complete inventory of the 15,000+ source objects.
 
 | Folder | Drive ID | Navigation responsibility |
 |---|---|---|
@@ -42,7 +44,7 @@ The folder listing returned 100 direct items. The canonical numbered navigation 
 | `06_GAPS` | `1uDuU71EGBAM9V_mwUo9WjLZGNUFv66v4` | Open questions and exact next probes |
 | `07_EVIDENCE` | `1iRetxfJjJV7_y6yrxsD3Mn2gM_vjWg1v` | Evidence pointers and bounded results |
 | `08_RECEIPTS` | `1sEPDyyapkNrVASliV2oScmJUBstkOUY6` | Execution and change receipts |
-| `09_CONVERSATION_CHUNKS` | `1cv8r6PDtjOQk2-yAhLS3J4CfjVMt4gIW` | Derived, role-separated conversation chunks |
+| `09_CONVERSATION_CHUNKS` | `1cv8r6PDtjOQk2-yAhLS3J4CfjVMt4gIW` | Derived chunk storage; check its access contract before processing |
 
 Other direct folders were also observed, including `RAFAELIA_CONVERSATION_MANIFOLD_V1`, `03_ATLAS_DAT_SEMANTIC_VOID_V1`, `02_CONVERSAS_SOLTAS_QUARENTENA`, `01_SISTEMA_CORPUS_CUSTODIA`, `NOVOEXPORT_CUSTODY_LEDGER_OMEGA`, and `AUDIT_NOVOexport_Temporal_Varredura_20260822`. They remain adjacent source/support directories; this map does not move, merge, or reclassify their contents.
 
@@ -108,4 +110,4 @@ Invariants:
 
 - **F_ok:** exact Drive folder and START HERE pointers observed; canonical numbered hierarchy observed; GitHub repository and base commit observed.
 - **F_gap:** full current member inventory and exact current source-manifest hash remain unresolved; prior counts are documented, not remeasured.
-- **F_next:** create the Drive map artifact, record its returned ID in this delta, then validate the pointers and retain the resulting PR/receipt.
+- **F_next:** verify the uploaded Drive artifact and repository pointers; then retain the PR review/CI outcome as a successor receipt.
