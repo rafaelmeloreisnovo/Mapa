@@ -1,0 +1,62 @@
+{
+  "schema": "rafaelia.pr-validation-receipt/v2",
+  "receipt_id": "MAPA-PR719-HOTFIX-20260930T1311BRT-V2",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 719,
+  "validated_predecessor_head": "b2442993eaffb4db111560205ccd4e9709d77e4a",
+  "base_observed": "a6ae5a6dfd93299314c81a4407e6fcd2ca82d4e8",
+  "classification": {
+    "source_delta": "JSON_ROUTING_AND_RECEIPT_ONLY",
+    "claim_allowed": false,
+    "runtime_execution": "NOT_RUN",
+    "merge_authorization": "NOT_GRANTED"
+  },
+  "materialized": [
+    "data/routes/hourly/RAFAELIA_HOURLY_CYCLE_20260930T1230_BRT_V1.json",
+    "data/receipts/PR-719_VALIDATION_20260930.v1.json"
+  ],
+  "latest_observed_gates": [
+    {"workflow":"SecurityCodeScan","run_id":36740167106,"state":"PASS"},
+    {"workflow":"main-hardening-gate","run_id":36740167218,"state":"PASS"},
+    {"workflow":"CodeQL Advanced","run_id":36740167184,"state":"PASS"},
+    {"workflow":"Branch Topology Gate","run_id":36740167119,"state":"PASS"},
+    {"workflow":"Human Dignity Ethics Gate V1","run_id":36740167324,"state":"PASS"},
+    {"workflow":"CI","run_id":36740167168,"state":"FAIL_INHERITED_MARKDOWN_DEBT_RATCHET","cause":"changed files are JSON; changed-Markdown lint passed; historical no-increase ratchet failed before downstream structural steps"},
+    {"workflow":"RAFAELIA Promotion Control V1","run_id":36740167115,"state":"FAIL_CLOSED_MANUAL_PROMOTION","detail":"negative tests and invariants PASS; enforce step denied manual promotion"},
+    {"workflow":"Provider Protection Gate","run_id":36740167271,"state":"FAIL_EXTERNAL_PROVIDER_CONFIGURATION","cause":"live default-branch ruleset not conformant"},
+    {"workflow":"Server Merge Enforcement Assurance","run_id":36740167182,"state":"FAIL_EXTERNAL_PROVIDER_CONFIGURATION","cause":"live main enforcement not sufficient"},
+    {"workflow":"CodeScan","run_id":36740167260,"state":"FAIL_MISSING_EXTERNAL_CREDENTIALS","cause":"credential presence gate failed before analysis"}
+  ],
+  "errors": [
+    {
+      "id":"E-PR719-RECEIPT-STALE",
+      "state":"HOTFIXED_BY_SUCCESSOR",
+      "detail":"v1 validated c3afbded while branch advanced to b2442993; this v2 freezes the later observed gate matrix"
+    }
+  ],
+  "urgencies": [
+    {"priority":"P0","id":"U-PROVIDER-ENFORCEMENT","state":"BLOCKED_EXTERNAL"},
+    {"priority":"P1","id":"U-MARKDOWN-DEBT-LINEAGE","state":"OPEN_BASELINE_RECONCILIATION"},
+    {"priority":"P1","id":"U-CODESCAN-CREDENTIALS","state":"BLOCKED_EXTERNAL"},
+    {"priority":"P1","id":"U-INDEPENDENT-APPROVAL","state":"OPEN_HUMAN_GATE"}
+  ],
+  "token_vazio": [
+    "zero-approval rejected-merge receipt after provider protection is actually enforced",
+    "CodeScan analysis/SARIF while required credentials are absent",
+    "physical/runtime evidence because this PR is routing metadata only"
+  ],
+  "provisions": [
+    "do not raise Markdown baseline inside PR719",
+    "do not weaken provider/promotion/credential gates",
+    "treat external failures as external until source causality is evidenced",
+    "keep PR draft/HOLD_NO_MERGE"
+  ],
+  "rollback": {
+    "branch": "close PR719 and discard delta/rafaelia-hourly-cycle-20260930t1230-brt",
+    "main": "unchanged by this receipt",
+    "history": "v1 remains predecessor evidence; v2 is successor-only"
+  },
+  "decision": "HOLD_NO_MERGE",
+  "next": "reconcile inherited Markdown debt separately; configure provider enforcement and CodeScan credentials through their owner authorities; obtain genuine review before promotion",
+  "claim_allowed": false
+}
