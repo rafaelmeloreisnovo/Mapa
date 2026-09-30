@@ -1,0 +1,592 @@
+{
+  "schema": "rafaelia.authorial-omega-hypervisor-federation.v1",
+  "version": "1.0.0",
+  "state": "IMPLEMENTED_UNTESTED",
+  "claim_allowed": false,
+  "observed_at": "2026-09-29",
+  "purpose": "Federated state-machine/hypervisor control plane that uses Vectra only as a structural model, PCR only as a custody-cycle model, and admits executable payload only through path-level authorship/provenance gates.",
+  "theme": "typed multidimensional relations: direct, indirect, inverse, reverse, parallel, lateral, transversal, orthogonal, derivational, antiderivational/reconstructive, inclusive, exclusive and latent-candidate",
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "REPOSITORY_OWNERSHIP != WHOLE_REPOSITORY_AUTHORSHIP",
+    "FORK != AUTHORIAL_CLEAN",
+    "STRUCTURAL_MODEL_REFERENCE != CODE_INHERITANCE",
+    "AUTHORSHIP_UNCERTAIN => UPSTREAM_REFERENCE_ONLY_OR_TOKEN_VAZIO",
+    "PRIVATE_PAYLOAD != PUBLIC_CONTROL_PLANE",
+    "AGENT_ASSIGNMENT != AGENT_EXECUTION",
+    "C08_REENTRY_REQUIRES_ALL_MANDATORY_GATES"
+  ],
+  "authorship_states": [
+    "AUTHORIAL_PROVEN",
+    "PATH_LEVEL_REQUIRED",
+    "UPSTREAM_REFERENCE_ONLY",
+    "MIXED_DERIVATIVE_REFERENCE_ONLY",
+    "TOKEN_VAZIO_AUTHORSHIP"
+  ],
+  "relation_vocabulary": [
+    "DIRECT",
+    "INDIRECT",
+    "INVERSE",
+    "REVERSE",
+    "PARALLEL",
+    "LATERAL",
+    "TRANSVERSAL",
+    "ORTHOGONAL",
+    "DERIVATIONAL",
+    "RECONSTRUCTIVE",
+    "INCLUSIVE",
+    "EXCLUSIVE",
+    "LATENT_CANDIDATE",
+    "BYTE_IDENTITY",
+    "CUSTODY_OF",
+    "DISPATCHES_TO",
+    "DOCUMENTS",
+    "REFERENCES_MODEL"
+  ],
+  "cycle": {
+    "source_model": "PCR_Rafaelia_Code_seed README custody 8-cycle method; no PCR inherited code imported",
+    "mapping": "psi->chi->rho->Delta->Sigma->Omega->psi_prime with explicit execute/test split",
+    "states": [
+      {
+        "id": "C01_INTENT",
+        "semantic": "psi",
+        "requires": [
+          "intent",
+          "scope",
+          "termination_rule"
+        ],
+        "next": "C02_AUTHORSHIP"
+      },
+      {
+        "id": "C02_AUTHORSHIP",
+        "semantic": "chi",
+        "requires": [
+          "source_identity",
+          "path_level_authorship_or_reference_boundary"
+        ],
+        "next": "C03_GAPS"
+      },
+      {
+        "id": "C03_GAPS",
+        "semantic": "rho",
+        "requires": [
+          "contradictions",
+          "TOKEN_VAZIO",
+          "risk"
+        ],
+        "next": "C04_MOUNT"
+      },
+      {
+        "id": "C04_MOUNT",
+        "semantic": "Delta",
+        "requires": [
+          "authority",
+          "relation_type",
+          "mount_policy"
+        ],
+        "next": "C05_EXECUTE"
+      },
+      {
+        "id": "C05_EXECUTE",
+        "semantic": "ACT",
+        "requires": [
+          "execution_target",
+          "rollback",
+          "input_identity"
+        ],
+        "next": "C06_VERIFY"
+      },
+      {
+        "id": "C06_VERIFY",
+        "semantic": "TEST",
+        "requires": [
+          "falsifier",
+          "gate",
+          "result"
+        ],
+        "next": "C07_CUSTODY"
+      },
+      {
+        "id": "C07_CUSTODY",
+        "semantic": "Sigma",
+        "requires": [
+          "receipt",
+          "hash_refs",
+          "evidence_refs"
+        ],
+        "next": "C08_OMEGA"
+      },
+      {
+        "id": "C08_OMEGA",
+        "semantic": "Omega",
+        "requires": [
+          "integrity",
+          "provenance",
+          "semantic_consistency",
+          "risk_review",
+          "repository_heads",
+          "provider_revision_if_used",
+          "human_checkpoint_if_promotion",
+          "unresolved_gap_register"
+        ],
+        "next": "C01_INTENT"
+      }
+    ],
+    "reentry_rule": "C08 may return to C01 only for a new cycle; missing mandatory gate => ROUTE_STATE_BLOCKED + TOKEN_VAZIO"
+  },
+  "proven_authorial_assets": [
+    {
+      "artifact_id": "RAF_BL0_V0",
+      "classification": "AUTHORIAL_PROVEN",
+      "path_semantics": "freestanding RGB8 bit-layer column raster reference primitive",
+      "blob_git_sha1": "132f948d199f6679fcae4f33912e0a3ad69691a3",
+      "proof": {
+        "vectra_introduction": {
+          "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+          "pr": 1149,
+          "head": "047aad0ab2ab6aa22bcfc957bff5d6d6e6999b4b",
+          "path": "engine/rmr/raf_bl0.c",
+          "change": "ADD_87_LINES_FROM_ZERO",
+          "author_login": "rafaelmeloreisnovo"
+        },
+        "termux_introduction": {
+          "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+          "pr": 470,
+          "head": "001eb5442e8650602def1e040ef8180688c3ec67",
+          "path": "rmr/Rrr/raf_bl0.c",
+          "change": "ADD_87_LINES_FROM_ZERO",
+          "author_login": "rafaelmeloreisnovo"
+        },
+        "byte_identical_mirrors": [
+          {
+            "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+            "path": "engine/rmr/raf_bl0.c",
+            "blob": "132f948d199f6679fcae4f33912e0a3ad69691a3"
+          },
+          {
+            "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+            "path": "rmr/Rrr/raf_bl0.c",
+            "blob": "132f948d199f6679fcae4f33912e0a3ad69691a3"
+          },
+          {
+            "repository": "rafaelmeloreisnovo/RafGitTools",
+            "path": "rafaelia/raf_bl0.c",
+            "blob": "132f948d199f6679fcae4f33912e0a3ad69691a3"
+          },
+          {
+            "repository": "rafaelmeloreisnovo/Rafaelia_Private",
+            "path": "framework/core/raf_bl0/raf_bl0.c",
+            "blob": "132f948d199f6679fcae4f33912e0a3ad69691a3"
+          }
+        ]
+      },
+      "claim_boundary": "Path-level provenance and byte identity are established; patentability, novelty outside the repository history, and exclusive legal ownership are separate gates."
+    }
+  ],
+  "model_references": [
+    {
+      "id": "VECTRA_STRUCTURAL_MODEL",
+      "repository": "rafaelmeloreisnovo/Vectras-VM-Android",
+      "commit": "8d7126e2aea89a4226b7df32d79bdd98a265c8f3",
+      "repository_classification": "MIXED_THIRD_PARTY_AND_AUTHORIAL",
+      "authorship_state": "UPSTREAM_REFERENCE_ONLY",
+      "allowed_use": [
+        "VM_lifecycle_pattern",
+        "supervision_pattern",
+        "mount/runtime separation",
+        "proven_authorial_paths_only"
+      ],
+      "code_import": false,
+      "whole_repo_authorial": false,
+      "authority_note": "THIRD_PARTY_NOTICES_RAFAELIA.md states Vectras legacy/QEMU/dependencies remain third-party; RAFAELIA modules require path/commit/blob proof."
+    },
+    {
+      "id": "PCR_CUSTODY_CYCLE_MODEL",
+      "repository": "rafaelmeloreisnovo/PCR_Rafaelia_Code_seed",
+      "commit": "6e15628b8382f832de08f3f08b2cab216b81ccaf",
+      "repository_classification": "MIXED_DERIVATIVE",
+      "authorship_state": "MIXED_DERIVATIVE_REFERENCE_ONLY",
+      "allowed_use": [
+        "C01_to_C08_documentary_cycle",
+        "C08_to_C01_reentry_gate",
+        "receipt_chain_pattern"
+      ],
+      "code_import": false,
+      "whole_repo_authorial": false,
+      "authority_note": "PCR README is used as custody/reconstruction method only; derivative upstream code is excluded from authorial payload."
+    }
+  ],
+  "mounts": [
+    {
+      "id": "M00_MAPA_CONTROL",
+      "kind": "FEDERATED_CONTROL",
+      "authority": "rafaelmeloreisnovo/Mapa",
+      "ref": "08521bb3a26e7676a61fc508043d65c40d900254",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "READ_WRITE_BRANCH_ONLY",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M01_RAFGITTOOLS_EXECUTOR",
+      "kind": "EXECUTOR",
+      "authority": "rafaelmeloreisnovo/RafGitTools",
+      "ref": "81ade5f9ce75f084ede7c638fd7cae34eb9dab3f",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "READ_WRITE_BRANCH_ONLY",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M02_RAFPOLIMATA_ASSURANCE",
+      "kind": "ASSURANCE_BENCHMARK",
+      "authority": "rafaelmeloreisnovo/RafPolimata",
+      "ref": "0c8a3dcbc2dfeda86b3e1d139dbe44a6e6f4bcb7",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "READ_ONLY_REFERENCE_UNTIL_ROUTE",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M03_PRIVATE_CUSTODY",
+      "kind": "PRIVATE_CUSTODY",
+      "authority": "rafaelmeloreisnovo/Rafaelia_Private",
+      "ref": "a71be795d20588472bcd7cc6ac4a086a7af628b5",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "PRIVATE_POINTERS_ONLY",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M04_CONVERSATION_CHAIN_PRIVATE",
+      "kind": "PRIVATE_LONGITUDINAL_MEMORY",
+      "authority": "rafaelmeloreisnovo/CONVERSATIONS_CHUNKS_PRIVATE",
+      "ref": "7413469736bad11e4902b48da8daf6e850102bf7",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "PRIVATE_POINTERS_ONLY",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M05_DRIVE_DOCUMENTARY",
+      "kind": "DOCUMENTARY_MEMORY",
+      "authority": "Google Drive",
+      "ref": "START_HERE=1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8;CURRENT_STATE=1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+      "authorship_state": "UPSTREAM_REFERENCE_ONLY",
+      "mode": "READ_WRITE_DOCUMENTARY_BY_AUTHORIZED_CONNECTOR",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M06_TERMUX_APP_RUNTIME",
+      "kind": "ANDROID_RUNTIME_ADAPTER",
+      "authority": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "ref": "9e7b3b1ad2ed3b924f1b4b82a8696b3b027c0587",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "PRODUCER_AUTHORITY",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M07_TERMUX_API",
+      "kind": "ANDROID_API_ADAPTER",
+      "authority": "rafaelmeloreisnovo/termux-api_rafcodephi",
+      "ref": "6e1156b58e05f6286af62724e7744407387cf4e4",
+      "authorship_state": "TOKEN_VAZIO_AUTHORSHIP",
+      "mode": "UPSTREAM_REFERENCE_ONLY_UNTIL_PATH_PROOF",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M08_TERMUX_PACKAGES",
+      "kind": "PACKAGE_ADAPTER",
+      "authority": "rafaelmeloreisnovo/termux-packages",
+      "ref": "5e6c7ead2fbc941f96fbdfebb9b7167852d28487",
+      "authorship_state": "TOKEN_VAZIO_AUTHORSHIP",
+      "mode": "UPSTREAM_REFERENCE_ONLY_UNTIL_PATH_PROOF",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M09_PAPERS",
+      "kind": "RESEARCH_PRODUCER",
+      "authority": "rafaelmeloreisnovo/papers",
+      "ref": "38c395612f730c74977be5dd8ca7d82167b243ff",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "READ_ONLY_UNTIL_EXPLICIT_WORK_PACKET",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M10_MATHEMATICS",
+      "kind": "FORMAL_PRODUCER",
+      "authority": "rafaelmeloreisnovo/Matem-tica-",
+      "ref": "fa10f9e5d091ebf04826eb873bd140f26037f798",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "READ_ONLY_UNTIL_EXPLICIT_WORK_PACKET",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M11_CHIP_QUANTUM",
+      "kind": "RESEARCH_PRODUCER",
+      "authority": "rafaelmeloreisnovo/ChipQuantum",
+      "ref": "cc01ac9fa063d9120fea4f111303a6def0e1fc02",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "READ_ONLY_UNTIL_EXPLICIT_WORK_PACKET",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M12_AUDIO_STUDIO",
+      "kind": "AUDIO_PRODUCER",
+      "authority": "rafaelmeloreisnovo/Est-dio-de-udio",
+      "ref": "1a1b00bb93b0988224d8b24085a82029d1228c45",
+      "authorship_state": "PATH_LEVEL_REQUIRED",
+      "mode": "READ_ONLY_UNTIL_EXPLICIT_WORK_PACKET",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M13_GMAIL",
+      "kind": "EXTERNAL_PROVIDER_SURFACE",
+      "authority": "Gmail provider",
+      "ref": "TOKEN_VAZIO_CONNECTION_NOT_PROBED",
+      "authorship_state": "UPSTREAM_REFERENCE_ONLY",
+      "mode": "READ_ONLY_WHEN_TASK_REQUIRES",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M14_CALENDAR",
+      "kind": "EXTERNAL_PROVIDER_SURFACE",
+      "authority": "Google Calendar provider",
+      "ref": "TOKEN_VAZIO_CONNECTION_NOT_PROBED",
+      "authorship_state": "UPSTREAM_REFERENCE_ONLY",
+      "mode": "READ_ONLY_WHEN_TASK_REQUIRES",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M15_DOCS_SHEETS_LIBRARY",
+      "kind": "EXTERNAL_PROVIDER_SURFACE",
+      "authority": "Google Drive/Docs/Sheets + Project Library",
+      "ref": "Drive canonical IDs + TOKEN_VAZIO_PROJECT_LIBRARY_BINDING",
+      "authorship_state": "UPSTREAM_REFERENCE_ONLY",
+      "mode": "READ_ONLY_DEFAULT_DOCUMENTARY_WRITE_BY_EXPLICIT_DELTA",
+      "raw_payload_publication": false
+    },
+    {
+      "id": "M16_GITHUB_PROVIDER",
+      "kind": "EXTERNAL_PROVIDER_SURFACE",
+      "authority": "GitHub provider",
+      "ref": "exact repository commit per work packet",
+      "authorship_state": "UPSTREAM_REFERENCE_ONLY",
+      "mode": "PROVIDER_ACTIONS_WITH_REPO_AUTHORITY",
+      "raw_payload_publication": false
+    }
+  ],
+  "relations": [
+    {
+      "from": "M00_MAPA_CONTROL",
+      "to": "M01_RAFGITTOOLS_EXECUTOR",
+      "type": "DISPATCHES_TO",
+      "geometry": "DIRECT"
+    },
+    {
+      "from": "M01_RAFGITTOOLS_EXECUTOR",
+      "to": "M03_PRIVATE_CUSTODY",
+      "type": "CUSTODY_OF",
+      "geometry": "DIRECT"
+    },
+    {
+      "from": "M04_CONVERSATION_CHAIN_PRIVATE",
+      "to": "M01_RAFGITTOOLS_EXECUTOR",
+      "type": "DOCUMENTS",
+      "geometry": "TRANSVERSAL"
+    },
+    {
+      "from": "M05_DRIVE_DOCUMENTARY",
+      "to": "M00_MAPA_CONTROL",
+      "type": "DOCUMENTS",
+      "geometry": "ORTHOGONAL"
+    },
+    {
+      "from": "VECTRA_STRUCTURAL_MODEL",
+      "to": "M00_MAPA_CONTROL",
+      "type": "REFERENCES_MODEL",
+      "geometry": "ORTHOGONAL"
+    },
+    {
+      "from": "PCR_CUSTODY_CYCLE_MODEL",
+      "to": "M00_MAPA_CONTROL",
+      "type": "REFERENCES_MODEL",
+      "geometry": "TRANSVERSAL"
+    },
+    {
+      "from": "RAF_BL0_V0",
+      "to": "M06_TERMUX_APP_RUNTIME",
+      "type": "BYTE_IDENTITY",
+      "geometry": "DIRECT"
+    },
+    {
+      "from": "RAF_BL0_V0",
+      "to": "M01_RAFGITTOOLS_EXECUTOR",
+      "type": "BYTE_IDENTITY",
+      "geometry": "PARALLEL"
+    },
+    {
+      "from": "M09_PAPERS",
+      "to": "M10_MATHEMATICS",
+      "type": "DOCUMENTS",
+      "geometry": "LATERAL"
+    },
+    {
+      "from": "M10_MATHEMATICS",
+      "to": "M11_CHIP_QUANTUM",
+      "type": "DERIVATIONAL",
+      "geometry": "TRANSVERSAL"
+    },
+    {
+      "from": "M13_GMAIL",
+      "to": "M03_PRIVATE_CUSTODY",
+      "type": "CUSTODY_OF",
+      "geometry": "INDIRECT",
+      "activation": "explicit task only"
+    },
+    {
+      "from": "M14_CALENDAR",
+      "to": "M00_MAPA_CONTROL",
+      "type": "DOCUMENTS",
+      "geometry": "LATERAL",
+      "activation": "explicit temporal task only"
+    }
+  ],
+  "execution_planes": [
+    {
+      "id": "P0_CONTROL",
+      "mount": "M00_MAPA_CONTROL",
+      "role": "route/authority/gap/claim-boundary"
+    },
+    {
+      "id": "P1_EXECUTOR",
+      "mount": "M01_RAFGITTOOLS_EXECUTOR",
+      "role": "branch/PR/test/receipt and low-level dispatch"
+    },
+    {
+      "id": "P2_ASSURANCE",
+      "mount": "M02_RAFPOLIMATA_ASSURANCE",
+      "role": "benchmarks/falsifiers/measurement"
+    },
+    {
+      "id": "P3_PRIVATE",
+      "mount": "M03_PRIVATE_CUSTODY",
+      "role": "private payload/authorship/provenance"
+    },
+    {
+      "id": "P4_MEMORY",
+      "mount": "M04_CONVERSATION_CHAIN_PRIVATE",
+      "role": "longitudinal conversation chain"
+    },
+    {
+      "id": "P5_DOCUMENTARY",
+      "mount": "M05_DRIVE_DOCUMENTARY",
+      "role": "indices/current state/receipts"
+    },
+    {
+      "id": "P6_RUNTIME",
+      "mount": "M06_TERMUX_APP_RUNTIME",
+      "role": "physical Android/Termux runtime when separately evidenced"
+    },
+    {
+      "id": "P7_RESEARCH",
+      "mounts": [
+        "M09_PAPERS",
+        "M10_MATHEMATICS",
+        "M11_CHIP_QUANTUM",
+        "M12_AUDIO_STUDIO"
+      ],
+      "role": "domain producers"
+    }
+  ],
+  "external_primitive_policy": {
+    "rule": "Non-authorial infrastructure/algorithms are never rebranded. If required, use the official/upstream authority and record it as an external primitive.",
+    "examples": [
+      "Git object identity",
+      "SHA-256",
+      "BLAKE3 official when explicitly selected",
+      "compiler/linker",
+      "Android/Linux/provider APIs"
+    ],
+    "default_import_policy": "REFERENCE_OR_LINK_ONLY",
+    "custom_crypto_claim": "FORBIDDEN_WITHOUT_SEPARATE_REVIEW"
+  },
+  "receipt_contract": {
+    "required_fields": [
+      "mu_id",
+      "parent",
+      "sequence",
+      "source_refs",
+      "state_before",
+      "state_after",
+      "input_identity",
+      "artifact_identity",
+      "execution_identity",
+      "evidence_refs",
+      "gaps",
+      "next",
+      "rollback",
+      "previous_receipt_ref",
+      "receipt_digest_or_provider_revision"
+    ],
+    "append_only": true,
+    "correction": "successor/supersedes",
+    "public_private_rule": "public receipt stores only approved metadata/digests; raw private payload remains private"
+  },
+  "gaps": [
+    {
+      "id": "OH-G001",
+      "state": "TOKEN_VAZIO_AUTHORSHIP",
+      "subject": "tools/baremetal/rafcode_phi/*",
+      "reason": "authorial notices exist but path-level introduction/history proof has not been bound in this federation yet",
+      "next": "bind introduction commit/blob/license for each executable path before mounting as payload"
+    },
+    {
+      "id": "OH-G002",
+      "state": "TOKEN_VAZIO_AUTHORSHIP",
+      "subject": "termux-api_rafcodephi and termux-packages authorial deltas",
+      "reason": "fork ownership is not sufficient",
+      "next": "extract only proven authorial paths or keep upstream reference-only"
+    },
+    {
+      "id": "OH-G003",
+      "state": "NOT_RUN",
+      "subject": "new hypervisor state machine",
+      "reason": "registry/validator not yet run in provider CI",
+      "next": "run manifold exact-head tests"
+    },
+    {
+      "id": "OH-G004",
+      "state": "NOT_RUN",
+      "subject": "RafGitTools executable adapter",
+      "reason": "control-plane contract must land before executor binding",
+      "next": "create executor adapter pinned to accepted Mapa manifest after structural PASS"
+    },
+    {
+      "id": "OH-G005",
+      "state": "TOKEN_VAZIO",
+      "subject": "physical bare-metal/device closure",
+      "reason": "no new exact-head device receipt exists for this federation",
+      "next": "device execution only after structural+executor gates"
+    },
+    {
+      "id": "OH-G006",
+      "state": "TOKEN_VAZIO",
+      "subject": "Gmail/Calendar/Project Library live bindings",
+      "reason": "not needed for control-plane construction and therefore not probed",
+      "next": "probe only on a work packet that materially requires those sources"
+    }
+  ],
+  "F_ok": [
+    "authorial gate defined",
+    "RAF_BL0_V0 path-level introduction and four-repo byte identity bound",
+    "Vectra/PCR model-reference boundaries defined",
+    "federated mounts and 8-cycle state machine specified"
+  ],
+  "F_gap": [
+    "OH-G001",
+    "OH-G002",
+    "OH-G003",
+    "OH-G004",
+    "OH-G005",
+    "OH-G006"
+  ],
+  "F_next": "Run exact-head Mapa structural validation; on PASS create the RafGitTools executable adapter pinned to this manifest blob/commit without importing Vectra/PCR inherited code."
+}
