@@ -52,7 +52,7 @@ def validate(obj):
     assets={a["artifact_id"]:a for a in obj.get("proven_authorial_assets",[])}
     bl0=assets.get("RAF_BL0_V0")
     req(bl0 is not None, "RAF_BL0_V0")
-    req(bl0["classification"]=="AUTHORIAL_PROVEN", "RAF_BL0 classification")
+    req(bl0["classification"]=="AUTHORIAL_PATH_PROVEN_IN_REPOSITORY_HISTORY", "RAF_BL0 classification scope")
     blobs={x["blob"] for x in bl0["proof"]["byte_identical_mirrors"]}
     req(blobs=={"132f948d199f6679fcae4f33912e0a3ad69691a3"}, "RAF_BL0 mirror identity")
     req(bl0["proof"]["vectra_introduction"]["change"]=="ADD_87_LINES_FROM_ZERO", "Vectra introduction")
