@@ -1,0 +1,34 @@
+{
+  "schema": "rafaelia.novoexport-range-disposition-receipt.v1",
+  "receipt_id": "NOVOEXPORT-MANIFEST-RANGE-DISPOSITION-20260929",
+  "observed_at": "2026-09-29T13:37:00-03:00",
+  "claim_allowed": false,
+  "source_ref": "GoogleDrive:13xMqjbn1O5nc1Q3gC3ZjnUdLLW5qneWk",
+  "source_sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+  "action": "compressive append-only range disposition for export_files[13634..15438]",
+  "evidence": {
+    "source_total": 15439,
+    "new_range_count": 1805,
+    "unique_paths": 1805,
+    "duplicate_paths": 0,
+    "aggregate_manifest_bytes": 1692927918,
+    "terminal_index": 15438
+  },
+  "interpretation": {
+    "manifest_disposition_cursor_terminal": true,
+    "provider_verification_complete": false,
+    "provider_coverage_claim_allowed": false
+  },
+  "anti_regression": [
+    "RANGE_TEMPLATE_IS_RECONSTRUCTIBLE_LEDGER_NOT_SOURCE_DUPLICATION",
+    "MANIFEST_DISPOSITION != PROVIDER_READBACK",
+    "TOKEN_VAZIO != 0",
+    "CURSOR_TERMINAL != GLOBAL_CLAIM"
+  ],
+  "rollback_procedure": "revert the PR; predecessor state remains in Git history",
+  "rollback_test": "TOKEN_VAZIO_RECONSTRUCTION",
+  "replay_recipe": "exact Drive manifest -> SHA256 -> cardinality -> 13634..15438 range mapping -> uniqueness/aggregate checks",
+  "F_ok": "Manifest disposition cursor reaches the bounded terminal with all residual entries typed by a reconstructible rule.",
+  "F_gap": "Provider IDs/parents/MIME/content digests remain TOKEN_VAZIO until actual provider readback.",
+  "F_next": "Resolve provider fields through the Android queue executor and append per-object receipts."
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "rafaelia.novoexport-range-disposition.v1",
+  "observed_at": "2026-09-29T13:37:00-03:00",
+  "claim_allowed": false,
+  "compression_model": "REFERENCE_PLUS_RANGE_TEMPLATE_NO_SOURCE_DUPLICATION",
+  "source": {
+    "provider": "GoogleDrive",
+    "file_id": "13xMqjbn1O5nc1Q3gC3ZjnUdLLW5qneWk",
+    "name": "export_manifest.json",
+    "size_bytes": 3812404,
+    "sha256": "38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+    "root_key": "export_files",
+    "observed_cardinality": 15439
+  },
+  "predecessor": {
+    "gap_id": "TV-NOVOEXPORT-PER-OBJECT-COVERAGE",
+    "state": "ACTIVE_BOUNDED_CURSOR",
+    "continuation_pointer_manifest_index": 13634
+  },
+  "range": {
+    "start_manifest_index": 13634,
+    "end_manifest_index": 15438,
+    "inclusive": true,
+    "object_count": 1805,
+    "observed_unique_paths": 1805,
+    "duplicate_paths": 0,
+    "aggregate_manifest_bytes": 1692927918,
+    "first_object": {
+      "path": "file_00000000d2d4720e906e40a1d467fe2e.dat",
+      "size_bytes": 618871
+    },
+    "last_object": {
+      "path": "user_settings.json",
+      "size_bytes": 6501
+    }
+  },
+  "per_object_template": {
+    "identity": "source.export_files[manifest_index].path",
+    "bytes": "source.export_files[manifest_index].size_bytes",
+    "provider_id": "TOKEN_VAZIO_PROVIDER_ID",
+    "provider_parent": "TOKEN_VAZIO_PROVIDER_PARENT",
+    "provider_mime": "TOKEN_VAZIO_PROVIDER_MIME",
+    "content_digest": "TOKEN_VAZIO_CONTENT_DIGEST",
+    "disposition": "MANIFEST_IDENTIFIED_PROVIDER_VERIFICATION_PENDING",
+    "route": "NOVOEXPORT_SOURCE_OBJECT_CUSTODY_QUEUE",
+    "receipt_ref": "data/receipts/NOVOEXPORT_MANIFEST_RANGE_DISPOSITION_20260929.v1.json",
+    "claim_allowed": false
+  },
+  "reconstruction_contract": [
+    "fetch exact Drive file_id",
+    "require sha256 38bb97724a432420328a322eb27ff1af9de28201c2857448e62d2b2e3a36df4a",
+    "parse JSON fail-closed",
+    "require len(export_files)==15439",
+    "for each manifest_index 13634..15438 materialize the per_object_template using path and size from source",
+    "require 1805 rows, 1805 unique paths and aggregate size 1692927918",
+    "do not replace TOKEN_VAZIO provider fields without provider evidence"
+  ],
+  "gate_state": {
+    "manifest_cursor_terminal": "PASS_SCOPED",
+    "remaining_manifest_objects_typed": "PASS_BY_RECONSTRUCTIBLE_RANGE_TEMPLATE",
+    "silent_conflicts": 0,
+    "claims_without_evidence": 0,
+    "provider_object_verification": "OPEN",
+    "global_15439_provider_coverage": "NOT_PROVEN"
+  },
+  "before_state": "continuation pointer manifest_index=13634",
+  "after_state": "MANIFEST_RANGE_DISPOSITION_TERMINAL_15438_PROVIDER_VERIFICATION_OPEN",
+  "falsifier": "exact source hash/cardinality/path uniqueness/aggregate bytes differs on replay",
+  "rollback_procedure": "revert this branch/PR; Drive source and predecessor queue remain unchanged",
+  "rollback_test": "TOKEN_VAZIO_RECONSTRUCTION",
+  "F_ok": [
+    "the remaining 1805 manifest entries are represented by an exact reconstructible typed range",
+    "no source object is duplicated into Mapa",
+    "no provider identity, MIME or digest is invented"
+  ],
+  "F_gap": [
+    "provider readback fields for the residual range",
+    "physical Android full-corpus run",
+    "semantic/vector/reconstruction quality measurements"
+  ],
+  "F_next": "Use RafGitTools Android SAF inventory + resumable one-at-a-time executor to resolve TOKEN_VAZIO provider fields and append evidence object-by-object."
+}
