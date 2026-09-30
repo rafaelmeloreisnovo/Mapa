@@ -1,0 +1,85 @@
+{
+  "schema": "rafaelia.reconstruction-v3-route/v1",
+  "artifact_id": "ROUTE-RV3-20260930-01",
+  "observed_at": "2026-09-30T09:34:28.529279+00:00",
+  "status": "FOUNDATION_LOCAL_FIXTURE_PASS_CORPUS_NOT_RUN",
+  "claim_allowed": false,
+  "federation_authority": "rafaelmeloreisnovo/Mapa",
+  "producer": {
+    "repository": "instituto-Rafael/relativity-living-light",
+    "commit": "7f9923ec8f82af2e690e01ffebf052761114d4fa",
+    "branch": "codex/reconstruction-v3-freestanding",
+    "pull_request": 1022,
+    "merged": false,
+    "paths": {
+      "kernel": "native/reconstruction_v3/rv3.c",
+      "contract": "native/reconstruction_v3/rv3.h",
+      "hosted_scanner": "tools/reconstruction_v3/scan.c",
+      "hosted_database": "tools/reconstruction_v3/ingest.py",
+      "gate": "tests/reconstruction_v3/test_reconstruction.py",
+      "receipt": "receipts/reconstruction_v3/20260930-foundation.json"
+    },
+    "source_sha256": {
+      "native/reconstruction_v3/README.md": "b675b064ab42005f9b45586b68d5a51b16c2e5a936125611eb1b963325aa0333",
+      "native/reconstruction_v3/rv3.c": "7c4969d5f9b5bece9a02dba7b826c5f1a7926766442cee255186ed1102e534ec",
+      "native/reconstruction_v3/rv3.h": "b9678a82569bd4dfcdce899246f02c3c6b5bd0e426ef286751ecd8aee3dcbf60",
+      "tests/reconstruction_v3/boundaries.c": "71c66743da618a374031a81abbd775623097b46873d5ebd202b47855e9279a66",
+      "tests/reconstruction_v3/test_reconstruction.py": "eb0fdcc270b946a8ff167f6ccc09e320857bedecd408e448bc3672d4b8a27d0c",
+      "tools/reconstruction_v3/ingest.py": "acdd08bda5fec2ce3d0a89698fa2f0456a559754cdc962fe46e105d4ac00bcb2",
+      "tools/reconstruction_v3/scan.c": "ee47fdf9470e1492d084ab450161a80dac8b55b73aedd14b633e6494f0bd329a"
+    },
+    "receipt_sha256": "453a0994300fad0b7e6ed306993a805a817d627c56e88e353d0453755af4bd02"
+  },
+  "evidence": {
+    "gate": "python3 -m unittest discover -s tests/reconstruction_v3 -v",
+    "status": "PASS",
+    "exit_code": 0,
+    "timestamp": "2026-09-30T09:32:32.329231+00:00",
+    "environment": {
+      "machine": "x86_64",
+      "system": "Linux",
+      "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+    },
+    "scope": "producer-local native synthetic fixtures only; five test methods plus C boundary checks and undefined-symbol gate",
+    "corpus_execution": "NOT_RUN",
+    "device_execution": "NOT_RUN",
+    "remote_ci": "PENDING"
+  },
+  "boundaries": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "Duplicate JSON pointers do not merge token identities",
+    "Snapshot begins at line 1 does not establish completeness",
+    "External diff reference does not contain the original patch",
+    "Literal predecessor reference does not establish resolved ancestry",
+    "Formula extraction does not prove semantic equivalence or authorship",
+    "Fixture PASS does not close existing federation or scientific gaps"
+  ],
+  "gaps": [
+    {
+      "id": "RV3-GAP-CORPUS",
+      "state": "TOKEN_VAZIO",
+      "next": "Bind authorized real JSON schemas and ingest a private sample."
+    },
+    {
+      "id": "RV3-GAP-STREAM",
+      "state": "PENDING",
+      "next": "Implement incremental bounded-memory parser before claiming support for gigabyte documents."
+    },
+    {
+      "id": "RV3-GAP-GRAPH",
+      "state": "PENDING",
+      "next": "Resolve explicit IDs with scope and ambiguous/unresolved edge reporting."
+    },
+    {
+      "id": "RV3-GAP-SEMANTICS",
+      "state": "PENDING",
+      "next": "Implement code parsers, concepts, claims, decision extraction and mathematical equivalence gates."
+    },
+    {
+      "id": "RV3-GAP-ARM",
+      "state": "NOT_RUN",
+      "next": "Cross-compile, inspect undefined symbols and execute on the authorized ARM target."
+    }
+  ],
+  "next": "Run real-schema/sample binding and inventory gate privately; append successor receipt; do not replace original observations."
+}

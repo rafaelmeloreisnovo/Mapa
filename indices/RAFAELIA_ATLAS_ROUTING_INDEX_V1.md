@@ -1,5 +1,13 @@
 # RAFAELIA — Atlas Routing Index V1
 
+## Route append — `ATLAS:RECONSTRUCTION-V3-20260930`
+
+Producer: RLL; federation: Mapa. See
+[`RECONSTRUCTION_V3_RLL_ROUTE`](../docs/RECONSTRUCTION_V3_RLL_ROUTE.md) and
+[`pinned route`](../data/control-plane/RECONSTRUCTION_V3_RLL_ROUTE.v1.json).
+Scope: bounded freestanding JSON foundation with local fixtures; corpus and
+semantic reconstruction remain pending. `claim_allowed=false`.
+
 Status: `EXECUTED_STRUCTURE / claim_allowed=false`
 Date: `2026-08-24`
 

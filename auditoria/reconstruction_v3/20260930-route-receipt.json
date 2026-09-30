@@ -1,0 +1,70 @@
+{
+  "muID": "MU-MAPA-RV3-20260930-01",
+  "timestamp": "2026-09-30T09:34:28.529279+00:00",
+  "source_ref": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "base_commit": "b174409279bd97803fc44bcccee910cd13c78da6"
+  },
+  "parent": "TOKEN_VAZIO",
+  "kind": "FEDERATION_ROUTE_APPEND",
+  "delta_summary": "Route bounded RLL reconstruction kernel and fixture receipt; preserve all existing federation gaps.",
+  "preflight": {
+    "Q01": "Federated control-plane curator",
+    "Q02": "Mapa@b174409279bd97803fc44bcccee910cd13c78da6; RLL@7f9923ec8f82af2e690e01ffebf052761114d4fa",
+    "Q03": "User request: no rll e mapa; Mapa root AGENTS.md authority",
+    "Q04": "Mapa routes; RLL implements; no scientific/corpus promotion",
+    "Q05": [
+      "AGENTS.md",
+      "README.md",
+      "data/control-plane/RAFAELIA_AUTHORITY_PYRAMID_FAIL_CLOSED_V1.json",
+      "data/ontology/rafaelia-operational-ontology.v1.json",
+      "data/manifold/ai_architecture_current_v1.json",
+      "auditoria/federated-doctor-pass-20260821/OBSERVACAO-FINAL.md"
+    ],
+    "Q06": "RLL@7f9923ec8f82af2e690e01ffebf052761114d4fa:native/reconstruction_v3; local fixture gate in producer receipt",
+    "Q07": "Existing federation gaps preserved; new route gaps listed in route JSON",
+    "Q08": "Pinned RLL source hashes and dated local fixture receipt; remote CI pending",
+    "Q09": "Route structure, pinned source hash matching, declared topology validator",
+    "Q10": "Stop at absence of real corpus; draft branches; no merge",
+    "Q11": "auditoria/reconstruction_v3/20260930-route-receipt.json",
+    "Q12": "Public code and metadata only; private corpus/database not published"
+  },
+  "routes": {
+    "P": "pinned RLL commit/hash",
+    "R": "routes_to_producer",
+    "I": "ROUTE-RV3-20260930-01",
+    "E": "local fixtures only",
+    "L": "TOKEN_VAZIO",
+    "O": "implementation vs federation",
+    "T": "RLL↔Mapa",
+    "C": "JSON reconstruction",
+    "A": "new scoped route"
+  },
+  "claim_allowed": false,
+  "evidence": [
+    {
+      "gate": "python3 scripts/validate_federation_topology.py --repos 6 --check",
+      "exit_code": 0,
+      "state": "PASS",
+      "scope": "declared schema/authority graph only"
+    },
+    {
+      "gate": "python3 tools/validate_reconstruction_v3_route.py --producer-root ../rll",
+      "exit_code": 0,
+      "state": "PASS",
+      "scope": "route structure and pinned producer bytes; not ancestry/device/corpus"
+    },
+    {
+      "gate": "route negative controls: promoted claim, wrong receipt hash, escaping path",
+      "exit_code": 0,
+      "state": "PASS",
+      "scope": "three rejection controls"
+    }
+  ],
+  "gap": "Corpus unavailable; no lineage or scientific/federation closure",
+  "next": "Run real-schema/sample binding and inventory gate privately; append successor receipt; do not replace original observations.",
+  "hash_ref": {
+    "path": "data/control-plane/RECONSTRUCTION_V3_RLL_ROUTE.v1.json",
+    "sha256": "0b349abb666220804409e19c7615d289fcec28a00a919083f6b76f46c0ae32d3"
+  }
+}
