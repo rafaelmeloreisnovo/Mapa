@@ -9,7 +9,7 @@ This control plane preserves the session theme: typed multidimensional relations
 
 - **Vectra** is a structural model only. Its own provenance notice classifies Vectras legacy, QEMU/Android and dependencies as third-party.
 - **PCR** is a custody-cycle model only. C01..C08 and the 8→1 reentry gate are reused as a method; mixed/derivative PCR code is not mounted as authorial payload.
-- **RAF_BL0_V0** is the first path-level authorial primitive. It was added from zero in Vectra PR #1149 and Termux-app PR #470 under the rafaelmeloreisnovo account. Vectra, Termux-app, RafGitTools and Rafaelia_Private expose the identical Git blob `132f948d199f6679fcae4f33912e0a3ad69691a3`.
+- **RAF_BL0_V0** is the first path with strong repository-history introduction evidence. It was added from zero in Vectra PR #1149 and Termux-app PR #470 under the `rafaelmeloreisnovo` account. Vectra, Termux-app, RafGitTools and Rafaelia_Private expose the identical Git blob `132f948d199f6679fcae4f33912e0a3ad69691a3`. This supports path-level Git provenance; it does not by itself prove exclusive legal authorship, independent originality, patentability, or absence of AI assistance.
 
 ## Fail-closed authorship gate
 
@@ -79,6 +79,6 @@ Git object identity, SHA-256/BLAKE3 when selected, compilers, linkers, Android/L
 
 ## R3
 
-- **F_ok:** authorship gate, Vectra/PCR reference boundaries, eight-state cycle, mount table, relation algebra and RAF_BL0 cross-repository byte identity are materialized.
+- **F_ok:** authorship gate, Vectra/PCR reference boundaries, eight-state cycle, mount table, relation algebra and RAF_BL0 repository-history introduction + cross-repository byte identity are materialized.
 - **F_gap:** RAFCODEphi path-level proof, Termux API/packages authorial deltas, exact-head provider CI, executor adapter and physical runtime remain open.
 - **F_next:** pass exact-head Mapa structural CI, then bind RafGitTools to this manifest by exact commit/blob and implement the freestanding state executor.
