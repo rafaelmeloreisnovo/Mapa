@@ -1,0 +1,42 @@
+{
+  "schema": "rafaelia.pr-validation-receipt/v1",
+  "receipt_id": "MAPA-PR719-VALIDATION-20260930T1250BRT-V1",
+  "repository": "rafaelmeloreisnovo/Mapa",
+  "pull_request": 719,
+  "validated_head": "c3afbdede861537d2da0621072d9119fc923a728",
+  "base": "main",
+  "changed_files": [
+    "data/routes/hourly/RAFAELIA_HOURLY_CYCLE_20260930T1230_BRT_V1.json"
+  ],
+  "content_review": {
+    "state": "PASS_SCOPE_ONLY",
+    "observed": [
+      "append-only routing metadata",
+      "claim_allowed=false",
+      "no runtime execution claimed",
+      "no implementation/language migration claimed"
+    ]
+  },
+  "gates": [
+    {"workflow":"main-hardening-gate","run_id":36737490715,"state":"PASS"},
+    {"workflow":"Human Dignity Ethics Gate V1","run_id":36737490572,"state":"PASS"},
+    {"workflow":"SecurityCodeScan","run_id":36737490433,"state":"PASS"},
+    {"workflow":"CodeQL Advanced","run_id":36737490561,"state":"PASS"},
+    {"workflow":"Branch Topology Gate","run_id":36737490258,"state":"PASS"},
+    {"workflow":"CI","run_id":36737490543,"state":"FAIL","cause":"historical Markdown debt ratchet failed; changed file is JSON; no source fix inferred"},
+    {"workflow":"Provider Protection Gate","run_id":36737490459,"state":"FAIL_EXTERNAL_PROVIDER_CONFIGURATION","cause":"no active ruleset applies to default branch"},
+    {"workflow":"RAFAELIA Promotion Control V1","run_id":36737490388,"state":"FAIL_EXPECTED_MANUAL_GATE","detail":"negative tests PASS; enforce fails at manual promotion decision"},
+    {"workflow":"Server Merge Enforcement Assurance","run_id":36737490243,"state":"FAIL"},
+    {"workflow":"CodeScan","run_id":36737490502,"state":"FAIL"}
+  ],
+  "decision": "HOLD_NO_MERGE",
+  "decision_reasons": [
+    "pull request is draft",
+    "provider protection is not enforced on default branch",
+    "CI is not green",
+    "manual promotion gate is intentionally unsatisfied"
+  ],
+  "claim_allowed": false,
+  "rollback": "close PR or revert this successor receipt; predecessor routing state remains",
+  "next": "resolve provider/default-branch enforcement and CI debt classification, then validate the new exact head"
+}
