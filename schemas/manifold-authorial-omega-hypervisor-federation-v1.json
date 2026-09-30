@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/manifold-authorial-omega-hypervisor-federation-v1.json",
+  "title": "RAFAELIA Authorial Omega Hypervisor Federation V1",
+  "type": "object",
+  "required": [
+    "schema",
+    "version",
+    "state",
+    "claim_allowed",
+    "invariants",
+    "authorship_states",
+    "relation_vocabulary",
+    "cycle",
+    "proven_authorial_assets",
+    "model_references",
+    "mounts",
+    "relations",
+    "gaps",
+    "F_ok",
+    "F_gap",
+    "F_next"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rafaelia.authorial-omega-hypervisor-federation.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "claim_allowed": {
+      "const": false
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string"
+      }
+    },
+    "authorship_states": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "relation_vocabulary": {
+      "type": "array",
+      "minItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "cycle": {
+      "type": "object",
+      "required": [
+        "states",
+        "reentry_rule"
+      ]
+    },
+    "proven_authorial_assets": {
+      "type": "array",
+      "minItems": 1
+    },
+    "model_references": {
+      "type": "array",
+      "minItems": 2
+    },
+    "mounts": {
+      "type": "array",
+      "minItems": 10
+    },
+    "relations": {
+      "type": "array",
+      "minItems": 8
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 1
+    },
+    "F_ok": {
+      "type": "array"
+    },
+    "F_gap": {
+      "type": "array"
+    },
+    "F_next": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
+}
