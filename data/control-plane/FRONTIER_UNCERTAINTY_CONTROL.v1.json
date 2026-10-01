@@ -1,0 +1,184 @@
+{
+  "schema": "rafaelia.frontier-uncertainty-control/v1",
+  "state": "MATERIALIZED_UNTESTED",
+  "claim_allowed": false,
+  "cut": "2026-10-01T17:30:00-03:00",
+  "purpose": "Prioritize the smallest evidence-producing action that maximizes uncertainty reduction, risk reduction, dependency unlock, and academic reproducibility without claim promotion.",
+  "epistemic_invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "LIVE_PAGE != SCIENTIFIC_VALIDATION",
+    "MERGED != VERIFIED",
+    "SAME_HASH != AUTHORITY"
+  ],
+  "decision_model": {
+    "name": "FRONTIER_LEVERAGE_SCORE",
+    "type": "operational_heuristic_not_truth_score",
+    "factors": {
+      "uncertainty_reduction": "integer 0..5",
+      "risk_reduction": "integer 0..5",
+      "dependency_unlock": "integer 0..5",
+      "academic_reproducibility_gain": "integer 0..5",
+      "evidence_readiness": "integer 0..5",
+      "effort": "integer 1..5"
+    },
+    "formula": "((U + R + D + A) * E) / C",
+    "max_score": 100,
+    "rule": "If a required factor is not grounded, score_state=TOKEN_VAZIO_SCORE and no ranking promotion is allowed."
+  },
+  "standards_operationalization": {
+    "RFC_BCP14": "Use uppercase MUST/SHOULD/MAY only for explicit normative requirements.",
+    "IEEE_1012": "Separate verification of conformance from validation of intended use; use analysis, review, inspection, assessment and testing as evidence classes.",
+    "IEEE_ISO_IEC_29148": "Requirements MUST be explicit, attributable, testable, and traceable through lifecycle changes.",
+    "ISO_IEC_27001_27005": "Treat integrity, availability, confidentiality and security-risk treatment as controls around evidence and execution surfaces.",
+    "ISO_8000": "Data quality MUST be measurable; raw, normalized and semantic forms remain distinguishable.",
+    "ISO_9001": "Use process approach, risk-based thinking, documented information, measurement and continual improvement.",
+    "SIX_SIGMA_DMAIC": "DEFINE->MEASURE->ANALYZE->IMPROVE->CONTROL; no IMPROVE before MEASURE/ANALYZE evidence."
+  },
+  "current_cut": {
+    "Mapa": {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "head": "8b6bea18d0ffd23e17781b5f7152967daaa990db",
+      "observed": "Jekyll workflow added; repository policy rejects tag-pinned Actions because full commit SHA pinning is required.",
+      "state": "OBSERVED"
+    },
+    "BLAKE3": {
+      "repo": "rafaelmeloreisnovo/BLAKE3",
+      "head": "990e3d5a5153c0a3448b633ddaed199d9e6fff18",
+      "observed": "Jekyll Pages build and deploy succeeded on run 36921898866.",
+      "state": "PASS_SCOPED_DEPLOYMENT"
+    },
+    "RLL": {
+      "repo": "instituto-Rafael/relativity-living-light",
+      "head": "4308b1b7670176e449239b4b17681e728c66b9a3",
+      "observed": "Jekyll deployment workflow added; workflow matrix changed and requires scope-specific revalidation.",
+      "state": "OBSERVED"
+    },
+    "Drive": {
+      "artifact": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V4.2",
+      "id": "1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+      "observed": "Document still records older Mapa state, therefore current GitHub↔Drive parity is stale.",
+      "state": "FAIL_STALE_STATE"
+    }
+  },
+  "frontier": [
+    {
+      "id": "FUC-001",
+      "title": "Federated current-state and deployment-authority reconciliation",
+      "scope": ["Mapa", "BLAKE3", "RLL", "Drive"],
+      "U": 5,
+      "R": 5,
+      "D": 5,
+      "A": 4,
+      "E": 5,
+      "C": 1,
+      "score": 95.0,
+      "evidence_needed": ["exact repository head", "workflow producer inventory", "policy/pinning constraints", "run/job conclusions", "Drive successor readback"],
+      "falsifier": "A newer authoritative source proves the recorded head, deployment authority, or policy state is stale or incorrect.",
+      "closure_criterion": "Exactly one authoritative publication producer per surface OR an explicit namespaced multi-producer contract; Drive successor records exact heads and scoped run evidence.",
+      "rollback": "successor receipt/revision only; no force push or history rewrite",
+      "claim_allowed": false
+    },
+    {
+      "id": "FUC-002",
+      "title": "RMR auxiliary parser fail-closed hardening with negative fixtures",
+      "scope": ["BLAKE3/RMR"],
+      "U": 3,
+      "R": 4,
+      "D": 3,
+      "A": 3,
+      "E": 5,
+      "C": 2,
+      "score": 32.5,
+      "evidence_needed": ["malformed PGM fixtures", "truncation fixture", "overflow/size fixture", "read/write return-value assertions"],
+      "falsifier": "Negative fixtures demonstrate current implementation already rejects all bounded malformed cases.",
+      "closure_criterion": "All bounded negative fixtures fail closed and positive fixtures round-trip without changing BLAKE3 core.",
+      "rollback": "revert auxiliary-parser commit only",
+      "claim_allowed": false
+    },
+    {
+      "id": "FUC-003",
+      "title": "SYMBOL_GRAMMAR_V2 with Unicode and namespace adversarial tests",
+      "scope": ["Mapa", "RAFAELIA"],
+      "U": 4,
+      "R": 4,
+      "D": 4,
+      "A": 3,
+      "E": 4,
+      "C": 2,
+      "score": 30.0,
+      "evidence_needed": ["glyph+codepoint registry", "namespace", "sense_version", "domain", "arity", "type", "direction", "unit", "tolerance", "provenance", "evidence_rule"],
+      "falsifier": "Existing canonical registry already binds each targeted symbol unambiguously with equivalent fields and tests.",
+      "closure_criterion": "Round-trip preserves raw glyph/codepoint and adversarial cases distinguish Δ/∆, ∅/0/TOKEN_VAZIO/NULL, μ namespaces and Ω sense collisions.",
+      "rollback": "append-only successor; no retroactive semantic rewrite",
+      "claim_allowed": false
+    },
+    {
+      "id": "FUC-004",
+      "title": "RLL research-artifact reproducibility package and independent reproduction boundary",
+      "scope": ["RLL", "Papers"],
+      "U": 5,
+      "R": 5,
+      "D": 4,
+      "A": 5,
+      "E": 3,
+      "C": 4,
+      "score": 14.25,
+      "evidence_needed": ["frozen data manifest", "environment manifest", "one-command analysis", "figure/table scripts", "claim-to-result map", "independent run receipt"],
+      "falsifier": "An independent reproducer cannot obtain the scoped results from the frozen artifact under the documented environment.",
+      "closure_criterion": "Artifact is documented, complete for scope, exercisable and independently reproduces declared scoped results; scientific claims remain separately gated.",
+      "rollback": "supersede artifact release; preserve prior DOI/hash lineage",
+      "claim_allowed": false
+    },
+    {
+      "id": "FUC-005",
+      "title": "Isolated HASH→ERASURE→RIVER7→RECONSTRUCT→HASH experiment",
+      "scope": ["BITRAF", "RIVER7", "BLAKE3/RMR"],
+      "U": 3,
+      "R": 3,
+      "D": 3,
+      "A": 4,
+      "E": 4,
+      "C": 4,
+      "score": 13.0,
+      "evidence_needed": ["known-erasure detector contract", "2-erasure exhaustive receipt", "final digest verification", "fail-closed >2/unknown-error cases"],
+      "falsifier": "Any <=2 known-erasure case fails reconstruction+digest verification in the defined finite model.",
+      "closure_criterion": "Finite-model experiment passes exhaustive <=2 erasures and fails closed outside supported conditions; no physical/storage claim.",
+      "rollback": "lab-only removal; no production path replacement",
+      "claim_allowed": false
+    },
+    {
+      "id": "FUC-006",
+      "title": "Physical ARM32/ARM64 artifact→device receipts",
+      "scope": ["termux-packages", "termux-app-rafacodephi", "Android"],
+      "U": 5,
+      "R": 5,
+      "D": 5,
+      "A": 4,
+      "E": 3,
+      "C": 5,
+      "score": 11.4,
+      "evidence_needed": ["exact artifact hash", "ABI metadata", "install receipt", "execution receipt", "hardware/device identity", "scalar↔NEON/CRC checks where applicable"],
+      "falsifier": "Exact artifact does not install or execute on the claimed ABI/device, or output diverges from bounded reference tests.",
+      "closure_criterion": "Exact-hash artifacts execute on physical ARM32 and ARM64 with scoped receipts and no backfill from emulation.",
+      "rollback": "per-repo/per-artifact rollback; no global history rewrite",
+      "claim_allowed": false
+    }
+  ],
+  "false_gold_filters": [
+    {"pattern": "LIVE_PAGE", "not_equal": "CODE_CORRECTNESS_OR_SCIENTIFIC_VALIDITY"},
+    {"pattern": "MERGED_PR", "not_equal": "VERIFIED_RESULT"},
+    {"pattern": "GREEN_CI", "not_equal": "UNIVERSAL_PASS"},
+    {"pattern": "SAME_HASH", "not_equal": "PRODUCER_AUTHORITY"},
+    {"pattern": "SYMBOLIC_COHERENCE", "not_equal": "EMPIRICAL_EVIDENCE"},
+    {"pattern": "BENCHMARK_WIN", "not_equal": "UNIVERSAL_SUPERIORITY"},
+    {"pattern": "FINITE_MODEL_PROOF", "not_equal": "PHYSICAL_IMPLEMENTATION"},
+    {"pattern": "MORE_PERMUTATIONS", "not_equal": "MORE_KNOWLEDGE"}
+  ],
+  "selection": {
+    "controller_step": "Materialize this frontier control and use it to select one evidence-producing delta at a time.",
+    "first_selected_frontier": "FUC-001",
+    "reason": "Highest grounded leverage score and prerequisite for trustworthy cross-repository progression."
+  }
+}
