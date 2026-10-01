@@ -1,0 +1,87 @@
+{
+  "schema": "rafaelia.route_pin.v1",
+  "route_id": "ALMA-MAPA-PAGES-20261001-01",
+  "source_ref": "rafaelmeloreisnovo/Mapa@8b6bea18d0ffd23e17781b5f7152967daaa990db:.github/workflows/jekyll-gh-pages.yml",
+  "target_ref": "GitHub Pages deployment workflow",
+  "relation_type": "DEPLOYMENT_ADAPTER_INTRODUCED",
+  "owner": "rafaelmeloreisnovo",
+  "authority": "Mapa repository producer",
+  "predecessor": "03ed3dd2e282fab722cfa239744b624327b227dc",
+  "supersedes": "TOKEN_VAZIO",
+  "dependency_edges": [
+    "actions/checkout@v4",
+    "actions/configure-pages@v5",
+    "actions/jekyll-build-pages@v1",
+    "actions/upload-pages-artifact@v3",
+    "actions/deploy-pages@v5",
+    "github-pages environment"
+  ],
+  "evidence_ref": "git-compare:03ed3dd2e282fab722cfa239744b624327b227dc...8b6bea18d0ffd23e17781b5f7152967daaa990db; workflow source inspected",
+  "receipt_ref": "TOKEN_VAZIO_EXECUTION_RECEIPT",
+  "replay_recipe": [
+    "checkout 8b6bea18d0ffd23e17781b5f7152967daaa990db",
+    "inspect .github/workflows/jekyll-gh-pages.yml",
+    "trigger workflow_dispatch or push only under authorized human decision",
+    "capture workflow run id, build/deploy job conclusions and resulting page URL"
+  ],
+  "rollback_ref": "03ed3dd2e282fab722cfa239744b624327b227dc",
+  "reconstruction_minimum": [
+    "exact_commit=8b6bea18d0ffd23e17781b5f7152967daaa990db",
+    "path=.github/workflows/jekyll-gh-pages.yml",
+    "GitHub Actions runner/provider",
+    "GitHub Pages environment"
+  ],
+  "privacy_class": "PUBLIC_REPOSITORY_METADATA",
+  "retention_class": "GIT_APPEND_ONLY_REFERENCE",
+  "standards_refs": [
+    "TOKEN_VAZIO_NORMATIVE"
+  ],
+  "rights_refs": [
+    "TOKEN_VAZIO_RIGHTS_DIRECT_APPLICABILITY"
+  ],
+  "hash_ref": "git_commit:8b6bea18d0ffd23e17781b5f7152967daaa990db",
+  "claim_allowed": false,
+  "before_state": "no .github/workflows/jekyll-gh-pages.yml at predecessor",
+  "after_state": "workflow source present on main",
+  "expected_observable": "authorized workflow run builds _site artifact and deploy job returns page_url",
+  "actual_observable": "TOKEN_VAZIO_EXECUTION",
+  "falsifier": "workflow run fails, required Pages environment/configuration is absent, or deployed output is not produced",
+  "rollback_test": "reconstruct predecessor and verify workflow path absent",
+  "arch_pin": {
+    "layer_class": [
+      "BODY",
+      "SOUL",
+      "SPIRIT"
+    ],
+    "semantic_role": "ADAPTER_PLATFORM_GITHUB_PAGES_DEPLOYMENT",
+    "language": "YAML",
+    "provenance": "direct commit 8b6bea18d0ffd23e17781b5f7152967daaa990db; Signed-off-by trailer observed; authorship/legal-origin not independently verified",
+    "relation_ids": [
+      "MAPA_MAIN->GITHUB_ACTIONS->GITHUB_PAGES"
+    ],
+    "runtime_boundary": "GitHub-hosted ubuntu runner / GitHub Actions / GitHub Pages",
+    "tail": [
+      "Jekyll build",
+      "artifact upload",
+      "Pages deploy"
+    ],
+    "shadow": "TOKEN_VAZIO",
+    "friction": [
+      "GitHub Actions provider",
+      "GitHub Pages environment"
+    ],
+    "freestanding_status": "NOT_APPLICABLE_ADAPTER_PLATFORM",
+    "authorship_status": "TOKEN_VAZIO_ORIGIN",
+    "gap_ids": [
+      "EXECUTION_RECEIPT",
+      "PAGES_CONFIGURATION",
+      "NORMATIVE_MAPPING"
+    ],
+    "claim_allowed": false
+  },
+  "states": {
+    "BODY": "IMPLEMENTED_UNTESTED",
+    "SOUL": "PASS_SCOPED",
+    "SPIRIT": "PASS_SCOPED"
+  }
+}
