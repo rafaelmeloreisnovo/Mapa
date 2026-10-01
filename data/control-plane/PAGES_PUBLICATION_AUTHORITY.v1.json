@@ -1,0 +1,51 @@
+{
+  "schema": "rafaelia.pages-publication-authority/v1",
+  "state": "PROVISIONAL_OPERATIONAL_AUTHORITY",
+  "claim_allowed": false,
+  "effective_from_base": "d93e4d8ff27644f190830a976b42f2839177557c",
+  "surface": "github-pages",
+  "automatic_producer": ".github/workflows/static.yml",
+  "selection_basis": [
+    "static.yml is fully pinned to full-length Action commit SHAs",
+    "static.yml has observed scoped successful Pages execution on the predecessor cut",
+    "mdbook.yml, nextjs.yml and jekyll-gh-pages.yml self-identify as sample workflows",
+    "the predecessor cut demonstrated policy rejection of tag-pinned Actions for automatic execution",
+    "one automatic producer removes cross-workflow concurrency ambiguity on the same Pages environment"
+  ],
+  "alternatives": {
+    ".github/workflows/mdbook.yml": {
+      "mode": "MANUAL_ONLY",
+      "authority": "NON_AUTHORITATIVE_EXPERIMENT",
+      "preserved": true
+    },
+    ".github/workflows/jekyll-gh-pages.yml": {
+      "mode": "MANUAL_ONLY",
+      "authority": "NON_AUTHORITATIVE_EXPERIMENT",
+      "preserved": true,
+      "known_gap": "tag-pinned Actions are incompatible with the observed full-SHA policy until explicitly hardened"
+    },
+    ".github/workflows/nextjs.yml": {
+      "mode": "MANUAL_ONLY",
+      "authority": "NON_AUTHORITATIVE_EXPERIMENT",
+      "preserved": true,
+      "known_gap": "tag-pinned Actions are incompatible with the observed full-SHA policy until explicitly hardened"
+    }
+  },
+  "invariants": [
+    "Exactly one Pages workflow MAY auto-trigger from push(main)",
+    "The automatic producer MUST use full-length Action commit SHA pins",
+    "Alternative producers MUST remain manual-only until this contract is explicitly superseded",
+    "LIVE_PAGE != CODE_CORRECTNESS_OR_SCIENTIFIC_VALIDITY",
+    "PUBLICATION_AUTHORITY != SCIENTIFIC_CLAIM_AUTHORITY"
+  ],
+  "verification": {
+    "test": "tests/test_pages_publication_authority.py",
+    "workflow": ".github/workflows/pages-authority-integrity.yml"
+  },
+  "supersession_rule": "Any change of automatic producer requires an explicit successor of this contract, evidence for the replacement workflow, and a rollback path.",
+  "rollback": "Revert the authority-binding commit; preserved manual workflows retain their previous content except trigger scope.",
+  "residual_token_vazio": [
+    "long-term product intent for mdBook/Next.js/Jekyll alternatives",
+    "formal owner-declared permanent publication architecture"
+  ]
+}
