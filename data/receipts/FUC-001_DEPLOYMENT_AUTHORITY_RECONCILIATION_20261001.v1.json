@@ -1,0 +1,101 @@
+{
+  "schema": "rafaelia.frontier-receipt/fuc-001/v1",
+  "state": "PARTIAL_EVIDENCE_BOUND",
+  "claim_allowed": false,
+  "frontier_id": "FUC-001",
+  "purpose": "Reconcile exact current state, effective publication producers, declared publication authority, and Drive parity without treating successful deployment as scientific validation.",
+  "epistemic_invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "LIVE_PAGE != SCIENTIFIC_VALIDATION",
+    "EFFECTIVE_PRODUCER != DECLARED_AUTHORITY"
+  ],
+  "surfaces": {
+    "Mapa": {
+      "repo": "rafaelmeloreisnovo/Mapa",
+      "head": "8b6bea18d0ffd23e17781b5f7152967daaa990db",
+      "publication_surface": "github-pages",
+      "producer_candidates": [
+        ".github/workflows/static.yml",
+        ".github/workflows/mdbook.yml",
+        ".github/workflows/jekyll-gh-pages.yml",
+        ".github/workflows/nextjs.yml"
+      ],
+      "observed_execution": {
+        "static": "PASS_SCOPED",
+        "jekyll": "FAIL_SOURCE_POLICY_FULL_SHA_PIN_REQUIRED",
+        "nextjs": "CANCELLED",
+        "mdbook": "CANCELLED"
+      },
+      "declared_authority": "TOKEN_VAZIO",
+      "gap": "Four workflows can target the same Pages surface; successful execution alone does not bind publication authority.",
+      "closure_criterion": "Bind one authoritative producer OR explicitly namespace a multi-producer publication contract, then demonstrate scoped execution under repository policy."
+    },
+    "BLAKE3": {
+      "repo": "rafaelmeloreisnovo/BLAKE3",
+      "head": "990e3d5a5153c0a3448b633ddaed199d9e6fff18",
+      "publication_surface": "github-pages",
+      "observed_producer": ".github/workflows/jekyll-gh-pages.yml",
+      "run_id": 36921898866,
+      "build": "PASS",
+      "deploy": "PASS",
+      "effective_last_successful_producer": "jekyll-gh-pages.yml",
+      "declared_authority": "TOKEN_VAZIO",
+      "gap": "Deployment success and a live page prove scoped publication for this head, not formal producer authority or cryptographic/RMR validity.",
+      "closure_criterion": "Bind the publication authority to a source-controlled contract and retain exact-head run evidence."
+    },
+    "RLL": {
+      "repo": "instituto-Rafael/relativity-living-light",
+      "head": "4308b1b7670176e449239b4b17681e728c66b9a3",
+      "publication_surface": "github-pages",
+      "observed_producer": ".github/workflows/jekyll-gh-pages.yml",
+      "run_id": 36922511924,
+      "build": "FAIL",
+      "deploy": "SKIPPED",
+      "failure_class": "FAIL_CONTENT_FILESYSTEM_REFERENCE",
+      "failure_evidence": "Jekyll raised Errno::ENOENT for /github/workspace/figs/conceptual/concept_mock_hubble_fit_v02.png during Build with Jekyll.",
+      "actions_policy": "TAG_REFERENCES_ACCEPTED_IN_OBSERVED_RUN",
+      "declared_authority": "TOKEN_VAZIO",
+      "gap": "Producer exists but current source cannot complete Jekyll build because a referenced filesystem target is absent; scientific claim gates are unaffected.",
+      "closure_criterion": "Resolve the source/reference defect with provenance, rerun exact successor, and separately bind publication authority."
+    },
+    "Drive": {
+      "current_state_artifact": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V4.2",
+      "current_state_id": "1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+      "frontier_control_artifact": "RAFAELIA — FRONTIER UNCERTAINTY CONTROL Ω V1 — 2026-10-01",
+      "frontier_control_id": "1Dazo2XmrVSvFaPcPYiqBBzMTxB6MRMbQTZxJFmgBj3o",
+      "parity": "FAIL_STALE_STATE",
+      "rule": "The frontier control complements but does not supersede HOTSTATE until publication authority and exact-head evidence are reconciled."
+    }
+  },
+  "causal_separation": [
+    {
+      "surface": "Mapa",
+      "result": "FAIL",
+      "cause": "repository Actions pinning policy",
+      "not_proven": ["Jekyll content defect", "Pages platform defect"]
+    },
+    {
+      "surface": "BLAKE3",
+      "result": "PASS_SCOPED_DEPLOYMENT",
+      "cause": "workflow completed build and deploy",
+      "not_proven": ["cryptographic correctness", "RMR superiority", "scientific validity"]
+    },
+    {
+      "surface": "RLL",
+      "result": "FAIL",
+      "cause": "missing filesystem target during Jekyll build",
+      "not_proven": ["Actions pinning-policy failure", "scientific-model failure"]
+    }
+  ],
+  "falsifier": "Any newer authoritative repository/Drive state that changes the exact head, run conclusion, producer inventory, failure cause, or explicit publication authority supersedes this receipt.",
+  "fuc_001_state": "OPEN_PARTIAL",
+  "fuc_001_closed": false,
+  "remaining_token_vazio": [
+    "Mapa declared publication authority",
+    "BLAKE3 declared publication authority",
+    "RLL declared publication authority",
+    "current-state Drive successor after authority reconciliation"
+  ],
+  "rollback": "Delete/revert this additive receipt only; do not rewrite repository or Drive history."
+}
