@@ -4,6 +4,38 @@
 **Machine source of truth:** `rafaelmeloreisnovo/RafGitTools/configs/rafaelia-federation.json`.  
 **Rule:** this map may explain routes; it must not override repository-local status or the control-plane manifest.
 
+## Authority split — reconciled 2026-10-02
+
+The federation has scoped authorities rather than one repository owning every plane:
+
+- **Mapa** — ontology/navigation authority for catalog, atlas, relationships and federated audit.
+- **RafGitTools** — operational control-plane for executable routing, gates, workflow topology and federation runtime contracts.
+- **Google Drive / NOVOexport** — longitudinal documentary custody and append-only μWRITE/receipt memory.
+- **RafPolimata** — evidence/claim classification, falsifiers and semantic governance.
+- **termux-packages** — package producer and package/toolchain provenance.
+- **termux-app-rafacodephi** — Android shell/runtime provider consuming package outputs.
+- **Vectras-VM-Android** — VM/Android runtime consumer.
+- **Producer repository** — remains authority for its own implementation/artifact.
+
+This split preserves the Mapa canonical atlas contract (`MAPA=ontology_router_authority`) while respecting RafGitTools as the machine operational control-plane. `SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM`.
+
+## Current anchors — 2026-10-02
+
+| Plane | Current anchor | State |
+|---|---|---|
+| Mapa | `main@0d7ae3df173c9dae7639a9dd9e1eefaf788fbe62` | ontology/navigation source |
+| RafGitTools | `main@bd008f5d66ae095c5a2a6e33539142a7f32bc3b7` | operational control-plane |
+| RafPolimata | `main@39c6279c84792bac5e425bdd192fba70d233b978` | evidence/semantic layer |
+| termux-packages | `main@68862d2608fa57f4745ffdea8bb9e30e25438404` | package/provenance producer |
+| termux-app-rafacodephi | `master@3dea538c975178857c8e93fbe33af8f61f58c238` | Android runtime provider |
+| Vectras-VM-Android | `master@20bd7f66acab6e6592ab82173dba975f35fdee53` | VM/runtime consumer |
+| Drive custody | `NOVOexport / 1NIv_E2NdtdLaKi3dWTwqPVl7B9zIKrRk` | canonical custody folder |
+| Drive federation ledger | `1n7ZiUL8gpVr0cZe1NDXCxXdyXK5lgoEk2jk9uHWWQ0o` | append-only μWRITE ledger |
+
+The older Drive locators `1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88` and `1HlBedJvhjj1WO4yQszwcSRRlHY7lhSgt` returned `NOT_FOUND` from the canonical Drive account during the 2026-10-02 reconciliation. They are historical pointers, not current custody authority.
+
+A second folder named `NOVOexport` (`19zVJ_zTOzTsUq0ax7SQwMb1Y1WckeSXX`) was observed. Its only receipt was moved into the canonical `1NIv...` folder; the duplicate folder is preserved as non-authoritative history rather than deleted.
+
 ## Sustaining path
 
 ```text
@@ -23,8 +55,10 @@ expression
 | Need | Enter through | Then route to | Exit evidence |
 |---|---|---|---|
 | Operate GitHub/Android app | `RafGitTools` | repository-specific contract | PR, commit, CI/test artifact |
+| Navigate ontology/atlas | `Mapa` | owner repository / Drive custody | typed route + authority pointer |
+| Build/package Termux runtime | `termux-packages` | `termux-app-rafacodephi` | package/toolchain provenance + artifact hash |
 | Boot VM on Android | `Vectras-VM-Android` | `termux-app-rafacodephi`, `qemu_rafaelia` | preflight + guest boot evidence |
-| Local shell/runtime | `termux-app-rafacodephi` | `UserLAnd` only as bounded availability failover | device smoke + package/backend gates |
+| Local shell/runtime | `termux-app-rafacodephi` | `termux-packages`; `UserLAnd` only as bounded availability failover | device smoke + package/backend gates |
 | Classify a broad statement | `RafPolimata` | exact owner repository | atomic claim record |
 | Index/store evidence | `GAIA_phi` | `ZIPRAF_OMEGA_FULL` for bounded serialization | manifest digest + source commit |
 | Run local model | `llamaRafaelia` | `TinyGPT` only as interface failover | runtime/model/tokenizer/config hashes |
@@ -59,6 +93,7 @@ No numeric baseline is assigned by documentation reading alone. Every coordinate
 |---|---|---|---|---|---|---|
 | RafGitTools | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
 | Vectras-VM-Android | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
+| termux-packages | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
 | termux-app-rafacodephi | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
 | RafPolimata | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
 | GAIA_phi | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO | TOKEN_VAZIO |
@@ -103,6 +138,8 @@ reviewer_or_runner: human, CI runner or device identity
 5. Missing source path/command/artifact is `TOKEN_VAZIO`.
 6. Public navigation never exposes private payloads.
 7. No coordinate receives a numeric weight from README language alone.
+8. Package/build evidence does not promote physical-device or guest-boot claims.
+9. A stale or inaccessible Drive locator is historical/TOKEN_VAZIO until a current provider readback resolves it.
 
 ## Friendly operator path
 
@@ -114,6 +151,7 @@ reviewer_or_runner: human, CI runner or device identity
 5. Record F_ok, F_gap, F_next and rollback_anchor.
 6. Create the measurement record.
 7. Update the control-plane status and regenerate this projection.
+8. Append the custody receipt to canonical NOVOexport.
 ```
 
 ## Rollback
