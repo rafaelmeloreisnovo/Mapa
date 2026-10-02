@@ -26,5 +26,23 @@ class TestFederatedReferenceMatrix(unittest.TestCase):
     def test_reject_evidence_without_receipt(self):
         d=json.loads(MATRIX.read_text()); d['edges'][0]['receipt_locator']=None
         self.assertNotEqual(self.run_case(d).returncode,0)
+    def test_scoped_authority_split_and_runtime_chain(self):
+        d=json.loads(MATRIX.read_text())
+        nodes={n['id']:n for n in d['nodes']}
+        edges={e['id']:e for e in d['edges']}
+        self.assertEqual(nodes['N-MAPA']['authority_role'],'ONTOLOGY')
+        self.assertEqual(nodes['N-RAFGITTOOLS']['authority_role'],'CONTROL_PLANE')
+        self.assertEqual(nodes['N-TERMUX-PACKAGES']['locator'],'rafaelmeloreisnovo/termux-packages')
+        self.assertEqual(edges['E-MAPA-RGT']['relation'],'REFERENCES')
+        self.assertEqual(edges['E-RGT-MAPA']['relation'],'GOVERNS')
+        self.assertEqual(edges['E-PKG-TERMUX']['relation'],'PRODUCES')
+        self.assertEqual(edges['E-TERMUX-PKG']['relation'],'CONSUMES')
+    def test_current_drive_custody_replaces_dead_locators(self):
+        d=json.loads(MATRIX.read_text())
+        locators={n['locator'] for n in d['nodes']}
+        self.assertIn('drive:1NIv_E2NdtdLaKi3dWTwqPVl7B9zIKrRk',locators)
+        self.assertIn('drive:1n7ZiUL8gpVr0cZe1NDXCxXdyXK5lgoEk2jk9uHWWQ0o',locators)
+        self.assertNotIn('drive:1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88',locators)
+        self.assertNotIn('drive:1HlBedJvhjj1WO4yQszwcSRRlHY7lhSgt',locators)
 
 if __name__=='__main__': unittest.main()
