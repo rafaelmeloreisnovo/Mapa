@@ -1,0 +1,28 @@
+name: Pages publication authority integrity
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "data/control-plane/PAGES_PUBLICATION_AUTHORITY.v1.json"
+      - "tests/test_pages_publication_authority.py"
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/**"
+      - "data/control-plane/PAGES_PUBLICATION_AUTHORITY.v1.json"
+      - "tests/test_pages_publication_authority.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Verify single automatic Pages producer
+        run: python3 tests/test_pages_publication_authority.py
