@@ -34,7 +34,7 @@ This split preserves the Mapa canonical atlas contract (`MAPA=ontology_router_au
 
 The older Drive locators `1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88` and `1HlBedJvhjj1WO4yQszwcSRRlHY7lhSgt` returned `NOT_FOUND` from the canonical Drive account during the 2026-10-02 reconciliation. They are historical pointers, not current custody authority.
 
-A second folder named `NOVOexport` (`19zVJ_zTOzTsUq0ax7SQwMb1Y1WckeSXX`) was observed. Its only receipt was moved into the canonical `1NIv...` folder; the duplicate folder is preserved as non-authoritative history rather than deleted.
+A second folder with the same name `NOVOexport` (`19zVJ_zTOzTsUq0ax7SQwMb1Y1WckeSXX`) received two later receipts during reconciliation. Both receipts were moved to the canonical `1NIv...` folder. The duplicate was then renamed `NOVOexport__SUPERSEDED_DUPLICATE_20261002` and verified empty; it was not deleted. No textual reference to that duplicate ID was found in Mapa, RafGitTools or Est-dio-de-udio during the bounded search, so the writer that targeted it remains `TOKEN_VAZIO` if recurrence occurs.
 
 ## Sustaining path
 
