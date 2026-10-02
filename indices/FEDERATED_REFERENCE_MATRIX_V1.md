@@ -52,18 +52,23 @@ Mapa (ontologia / índice / atlas)
 ## Contextos de leitura
 
 ### Humano
+
 Começar no `Mapa`, localizar a autoridade e abrir a fonte original. Não assumir que o índice contém o payload completo.
 
 ### IA
+
 Selecionar a rota por `authority_role`. Antes de responder como fato, exigir `evidence_state`, `receipt_locator` e limite epistemológico.
 
 ### Engenharia
+
 Usar a sequência `fonte → hash → package/build → artifact → handoff → quarantine → runtime → receipt → decisão`.
 
 ### Pesquisa
+
 Usar `hipótese → dataset → método → falsificador → incerteza → resultado → replicação → publicação`.
 
 ### Auditoria
+
 Comparar IDs, revisões, commits, hashes, receipts, autoria, licença, ambiente e ações não executadas.
 
 ## Artefatos machine-readable
