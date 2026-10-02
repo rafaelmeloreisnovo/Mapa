@@ -47,7 +47,7 @@ Mapa (ontologia / índice / atlas)
 - Custódia canônica: `NOVOexport / 1NIv_E2NdtdLaKi3dWTwqPVl7B9zIKrRk`.
 - Ledger de federação/orquestração: `1n7ZiUL8gpVr0cZe1NDXCxXdyXK5lgoEk2jk9uHWWQ0o`.
 - Locators antigos `1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88` e `1HlBedJvhjj1WO4yQszwcSRRlHY7lhSgt` retornaram `NOT_FOUND` no readback de 2026-10-02 e permanecem apenas como referências históricas.
-- O folder duplicado `NOVOexport / 19zVJ_zTOzTsUq0ax7SQwMb1Y1WckeSXX` foi esvaziado por movimentação do seu único receipt para o folder canônico; não foi apagado.
+- O folder duplicado `19zVJ_zTOzTsUq0ax7SQwMb1Y1WckeSXX` recebeu dois receipts durante a reconciliação. Ambos foram movidos para o folder canônico; o duplicado foi renomeado `NOVOexport__SUPERSEDED_DUPLICATE_20261002`, verificado vazio e preservado sem exclusão. O escritor que voltou a selecionar esse ID permanece `TOKEN_VAZIO` caso a recorrência reapareça.
 
 ## Contextos de leitura
 
