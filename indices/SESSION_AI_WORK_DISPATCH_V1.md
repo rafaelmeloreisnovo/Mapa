@@ -82,3 +82,16 @@ Drive stores the map/pointers/receipts, not a duplicate of producer source.
 - F_ok: session intent decomposed into 11 executor roles and 8 bounded packets while preserving existing authorities.
 - F_gap: current chat provider ID/hash remains TOKEN_VAZIO; exact-head validation and Drive mirror readback are not yet attached.
 - F_next: validate registry, materialize RafGitTools consumer adapter, then write Drive pointer documents.
+
+
+## Route delta — MSPA / START HERE — 2026-10-03
+
+- μID: `MSPA-START-20261003-001`; route index: `data/routes/SESSION_AI_WORK_ROUTES_V1.jsonl`, record `SDR-09`.
+- Current documentary anchor: [START HERE Ω V2.1](https://drive.google.com/file/d/1ZXFaDPkjevae2mhTwXDLtYTXsH9dtCNv/view?usp=drivesdk), in `/NOVOexport` folder `1NIv_E2NdtdLaKi3dWTwqPVl7B9zIKrRk`.
+- The older Drive locality pointers under `41_CUSTODY_CHAIN` are predecessor references for this route. The canonical Drive folder for this dispatch is `/NOVOexport`.
+- Current route state: `ROUTE_STATE=BLOCKED_MSPA_SCOPE`; “mspa” remains the literal user token. Its expansion, authoritative source, repository/ref, producer authority, execution target, and evidence rule are `TOKEN_VAZIO`.
+- The previous manifold HOTSTATE V3 locator `1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI` returned Drive HTTP 404 on 2026-10-03; it is not a valid bootstrap pointer.
+- Urgency: `P1` for the requested route only. Gate sequence: (1) bind exact MSPA identity/source; (2) resolve authority and execution target; (3) define evidence rule; (4) run route validation and exact-head CI. Gates 1–3 are blocked; gate 4 is not run.
+- Stop condition: do not mutate any MSPA producer or infer a repository while a required binding is `TOKEN_VAZIO`. This delta changes routing metadata only; `claim_allowed=false`.
+- Rollback: close the candidate PR or revert its branch commits; keep predecessor entries and Drive receipts intact, then append a superseding receipt if corrected.
+
