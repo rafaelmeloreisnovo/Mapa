@@ -1,0 +1,35 @@
+name: repository-exposure-matrix
+
+on:
+  push:
+    branches:
+      - main
+      - governance/repo-exposure-freestanding-v1
+    paths:
+      - "docs/governance/REPOSITORY_EXPOSURE_FREESTANDING_V1.md"
+      - "data/control-plane/repository_exposure_freestanding.v1.json"
+      - "docs/governance/AUTHORSHIP_PROVENANCE_INVARIANT_V1.md"
+      - "scripts/validate_repository_exposure_matrix.py"
+      - ".github/workflows/repository-exposure-matrix.yml"
+  pull_request:
+    paths:
+      - "docs/governance/REPOSITORY_EXPOSURE_FREESTANDING_V1.md"
+      - "data/control-plane/repository_exposure_freestanding.v1.json"
+      - "docs/governance/AUTHORSHIP_PROVENANCE_INVARIANT_V1.md"
+      - "scripts/validate_repository_exposure_matrix.py"
+      - ".github/workflows/repository-exposure-matrix.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate repository exposure matrix
+        run: python3 scripts/validate_repository_exposure_matrix.py
