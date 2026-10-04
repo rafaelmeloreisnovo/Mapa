@@ -1,0 +1,54 @@
+{
+  "schema": "rafaelia.repository-exposure-freestanding/v1",
+  "owner": "rafaelmeloreisnovo",
+  "observed_at": "2026-10-04",
+  "scope": {
+    "repositories_observed": 90,
+    "public": 30,
+    "private": 60,
+    "source": "connected GitHub owner-affiliation listing"
+  },
+  "authority": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "human_policy": "docs/governance/REPOSITORY_EXPOSURE_FREESTANDING_V1.md",
+    "machine_matrix": "data/control-plane/repository_exposure_freestanding.v1.json",
+    "authorship_invariant": "docs/governance/AUTHORSHIP_PROVENANCE_INVARIANT_V1.md"
+  },
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "PUBLIC != AUTHORIAL",
+    "AUTHORIAL != FREESTANDING",
+    "FREESTANDING_PASS requires evidence, not naming or intent"
+  ],
+  "freestanding_gate": {
+    "required": [
+      "authorial_core_provenance",
+      "no_runtime_or_link_time_dependency_on_libc_jvm_python_android_node_or_third_party_runtime",
+      "no_required_external_service_for_core_execution",
+      "deterministic_build_or_reproduction_recipe",
+      "tests_or_execution_receipt",
+      "license_and_provenance_clear",
+      "secret_scan_default_branch",
+      "secret_scan_git_history_releases_nondefault_branches"
+    ],
+    "build_toolchain_note": "Compiler/linker may be build-time tools; the resulting core must remain runtime/link-time independent within the declared freestanding scope.",
+    "inventory_result": "NO_REPOSITORY_PROMOTED_TO_FREESTANDING_PASS_BY_METADATA_ONLY"
+  },
+  "groups": {
+    "KEEP_PUBLIC": ["actions", "linuxkernel", "relativity-living-light"],
+    "KEEP_PUBLIC_REVIEW_PROVENANCE": ["BLAKE3", "CryptoSwift_RmR", "LuaJIT", "Shizuku", "UserLAnd2", "Vectras-VM-Android", "androidRom", "android_frameworks_base_rafaelia", "androidx_RmR", "arxiv-docs", "florisboard", "frida-desktop", "gradle", "llvm-project_rafcode", "openssl", "termux-api_rafcodephi", "termux-app-rafacodephi", "termux-packages"],
+    "KEEP_PUBLIC_LOW_RISK": ["Vazio", "myCat-iahelpsus"],
+    "REVIEW_PUBLIC": ["DeepSeek-RafCoder", "ROM-emulator", "TeoremasTesesTeorias", "TinyGPT", "runner-images_RAFCODE", "treinarModelos"],
+    "CLOSE_PENDING_SANITIZED_EXPORT": ["TRABALHO_ROADMAP_AUDIT_GOV_DATA_ROTA_MAPwithCHAIN_security"],
+    "KEEP_PRIVATE": ["CONVERSATIONS_CHUNKS_PRIVATE", "GAIA-PDS-PHI", "Geral", "IaFcea", "Img", "Judicial-", "Mapa", "MemRa", "MemRafcode", "OMEGAGIT", "PCR_Rafaelia_Code_seed", "RAFNATIONS_CORE", "RAIAREIS_FRAMEWORK", "RafGitTools", "Rafaelia_Private", "Recipt", "Seguran-a-informacional-", "Semente", "Tora", "X0", "ZIPRAF_CORE", "ZIPRAF_OMEGA_FULL", "home", "llamaRafaelia", "privadoFazendo", "rafaelia-core-enterprise", "rafaelia_privado", "templo-vivo-arcs"],
+    "SPLIT_PUBLIC_CORE_PRIVATE_CONTROL": ["RafNet-Core"],
+    "PUBLIC_AFTER_GATE": ["Catalogo-cosmologico", "ChipQuantum", "CientiEspiritual", "CientiEspiritual-tiEs-", "Clima", "Cosmos", "CreFeBerna", "Espiritual-espirualidade", "Est-dio-de-udio", "Fisica", "GAIA_phi", "GEOMETRIA_SOLAR_Maia_Inca", "GaiaPhiRafcode", "Graditao", "IA_nist", "Matem-tica-", "RafPolimata", "RafaelCiencias", "RafaelIA_Solucoes_Clay", "Rafaelia", "Rafaelia_Core", "Rafcodephi_Sdk_ndkJni_c_py_sh_asm_lua_rs_go_swift_perl_yml_", "UserLAnd", "V79-1", "fcea-originum", "nanoGPT", "new", "papers", "qemu_rafaelia", "teoremas", "verbum-vivo"]
+  },
+  "current_visibility": {
+    "public": ["BLAKE3", "CryptoSwift_RmR", "DeepSeek-RafCoder", "LuaJIT", "ROM-emulator", "Shizuku", "TRABALHO_ROADMAP_AUDIT_GOV_DATA_ROTA_MAPwithCHAIN_security", "TeoremasTesesTeorias", "TinyGPT", "UserLAnd2", "Vazio", "Vectras-VM-Android", "actions", "androidRom", "android_frameworks_base_rafaelia", "androidx_RmR", "arxiv-docs", "florisboard", "frida-desktop", "gradle", "linuxkernel", "llvm-project_rafcode", "myCat-iahelpsus", "openssl", "relativity-living-light", "runner-images_RAFCODE", "termux-api_rafcodephi", "termux-app-rafacodephi", "termux-packages", "treinarModelos"],
+    "private": ["CONVERSATIONS_CHUNKS_PRIVATE", "Catalogo-cosmologico", "ChipQuantum", "CientiEspiritual", "CientiEspiritual-tiEs-", "Clima", "Cosmos", "CreFeBerna", "Espiritual-espirualidade", "Est-dio-de-udio", "Fisica", "GAIA-PDS-PHI", "GAIA_phi", "GEOMETRIA_SOLAR_Maia_Inca", "GaiaPhiRafcode", "Geral", "Graditao", "IA_nist", "IaFcea", "Img", "Judicial-", "Mapa", "Matem-tica-", "MemRa", "MemRafcode", "OMEGAGIT", "PCR_Rafaelia_Code_seed", "RAFNATIONS_CORE", "RAIAREIS_FRAMEWORK", "RafGitTools", "RafNet-Core", "RafPolimata", "RafaelCiencias", "RafaelIA_Solucoes_Clay", "Rafaelia", "Rafaelia_Core", "Rafaelia_Private", "Rafcodephi_Sdk_ndkJni_c_py_sh_asm_lua_rs_go_swift_perl_yml_", "Recipt", "Seguran-a-informacional-", "Semente", "Tora", "UserLAnd", "V79-1", "X0", "ZIPRAF_CORE", "ZIPRAF_OMEGA_FULL", "fcea-originum", "home", "llamaRafaelia", "nanoGPT", "new", "papers", "privadoFazendo", "qemu_rafaelia", "rafaelia-core-enterprise", "rafaelia_privado", "templo-vivo-arcs", "teoremas", "verbum-vivo"]
+  },
+  "next_gate_order": ["CLOSE_PENDING_SANITIZED_EXPORT", "SPLIT_PUBLIC_CORE_PRIVATE_CONTROL", "REVIEW_PUBLIC", "PUBLIC_AFTER_GATE", "KEEP_PRIVATE", "KEEP_PUBLIC_REVIEW_PROVENANCE", "KEEP_PUBLIC", "KEEP_PUBLIC_LOW_RISK"]
+}
