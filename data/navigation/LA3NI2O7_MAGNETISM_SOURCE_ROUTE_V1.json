@@ -1,0 +1,75 @@
+{
+  "schema": "rafaelia.atlas-source-route.v1",
+  "route_id": "ATLAS:LA3NI2O7-MAGNETISM-20261004",
+  "date": "2026-10-04",
+  "mode": [
+    "POINTER_ONLY",
+    "APPEND_ONLY",
+    "SOURCE_FIRST",
+    "FAIL_CLOSED"
+  ],
+  "authority": {
+    "routing": "rafaelmeloreisnovo/Mapa",
+    "scientific_synthesis": "rafaelmeloreisnovo/papers"
+  },
+  "producer": {
+    "repo": "rafaelmeloreisnovo/papers",
+    "pr": 125,
+    "branch": "research/la3ni2o7-magnetism-bridge-20261004",
+    "observed_head": "3d7074b3d2878a6d202667c6b65c62b0a0ef1592",
+    "human_artifact": "research_notes/2026-10-04_LA3NI2O7_SINGLE_STRIPE_BILAYER_SPIN_DYNAMICS_V1.md",
+    "machine_artifact": "data/registries/LA3NI2O7_MAGNETISM_SOURCE_GATE_V1.json"
+  },
+  "sources": [
+    {
+      "id": "DOI:10.1038/s41563-026-02768-3",
+      "role": "PRIMARY_VERSION_OF_RECORD",
+      "state": "VERIFIED_SOURCE_METADATA"
+    },
+    {
+      "id": "ARXIV:2605.03448V1",
+      "role": "SAME_STUDY_MATCHED_PREPRINT",
+      "state": "ALPHAXIV_RESOLVED"
+    },
+    {
+      "id": "ARXIV:2610.01757V1",
+      "role": "RECENT_THIN_FILM_REGIME_CONSTRAINT",
+      "state": "ALPHAXIV_REVIEWED"
+    }
+  ],
+  "epistemic_partition": {
+    "MEASURED": [
+      "single_stripe_magnetic_order",
+      "finite_spin_gap",
+      "anisotropic_in_plane_spin_excitations",
+      "bilayer_modulation"
+    ],
+    "MODEL_CONSTRAINED": [
+      "strong_antiferromagnetic_interlayer_coupling",
+      "competing_in_plane_couplings",
+      "bilayer_heisenberg_type_fit"
+    ],
+    "INTERPRETIVE": [
+      "mid_energy_spin_fluctuations_relevant_to_superconductivity"
+    ],
+    "TOKEN_VAZIO_CAUSAL": [
+      "unique_superconducting_pairing_mechanism"
+    ]
+  },
+  "forbidden_promotions": [
+    "MAGNETISM_PROVES_RLL_COSMOLOGY",
+    "SPIN_FLUCTUATIONS_EQUAL_UNIQUE_PAIRING_GLUE",
+    "BULK_PARENT_STATE_EQUALS_SUPERCONDUCTING_THIN_FILM_STATE",
+    "HEISENBERG_FIT_EQUALS_UNIQUE_MICROSCOPIC_HAMILTONIAN"
+  ],
+  "gaps": [
+    "GAP:NI-SOURCE-DATA-FREEZE",
+    "GAP:NI-FIG3-REFIT",
+    "GAP:NI-FIG5-ABSOLUTE",
+    "GAP:NI-PAIRING-CAUSALITY",
+    "GAP:NI-INDEPENDENT-REPRODUCTION"
+  ],
+  "next": "FREEZE_HASH_AND_REPRODUCE_ONE_PUBLISHER_SOURCE_DATA_OBSERVABLE",
+  "rollback": "REVERT_POINTER_DELTA_WITHOUT_DELETING_SOURCE_OR_HISTORY",
+  "claim_allowed": false
+}
