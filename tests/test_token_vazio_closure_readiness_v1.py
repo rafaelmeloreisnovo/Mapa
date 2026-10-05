@@ -1,13 +1,22 @@
 import copy
 import importlib.util
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
-MODULE = Path(__file__).resolve().parents[1] / "tools" / "validate_token_vazio_closure_readiness_v1.py"
+ROOT = Path(__file__).resolve().parents[1]
+MODULE = ROOT / "tools" / "validate_token_vazio_closure_readiness_v1.py"
 SPEC = importlib.util.spec_from_file_location("validate_token_vazio_closure_readiness_v1", MODULE)
 assert SPEC and SPEC.loader
 mod = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(mod)
+
+LEGACY_MODULE = ROOT / "tools" / "resolve_token_vazio.py"
+LEGACY_SPEC = importlib.util.spec_from_file_location("resolve_token_vazio", LEGACY_MODULE)
+assert LEGACY_SPEC and LEGACY_SPEC.loader
+legacy = importlib.util.module_from_spec(LEGACY_SPEC)
+LEGACY_SPEC.loader.exec_module(legacy)
 
 
 class TokenVazioClosureReadinessTests(unittest.TestCase):
@@ -92,6 +101,42 @@ class TokenVazioClosureReadinessTests(unittest.TestCase):
         self.assertEqual(
             receipt["unprofiled_token_vazio_count"], len(receipt["unprofiled_token_vazio"])
         )
+
+    def test_legacy_direct_close_is_blocked_without_writing(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "decisions.jsonl"
+            ok = legacy.record_decision(
+                "TV-DEMO", "APPROVED_CLOSED", path, "authorized-human", {"evidence": "demo"}
+            )
+            self.assertFalse(ok)
+            self.assertFalse(path.exists())
+
+    def test_legacy_nonclosing_decision_requires_explicit_authority(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "decisions.jsonl"
+            ok = legacy.record_decision(
+                "TV-DEMO", "APPROVED_PRESERVED", path, "", None, "preserve uncertainty"
+            )
+            self.assertFalse(ok)
+            self.assertFalse(path.exists())
+
+    def test_legacy_preserved_decision_is_append_only_and_claim_false(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "decisions.jsonl"
+            ok = legacy.record_decision(
+                "TV-DEMO",
+                "APPROVED_PRESERVED",
+                path,
+                "authorized-human",
+                {"evidence_ref": "receipt:demo"},
+                "preserve until falsifier runs",
+            )
+            self.assertTrue(ok)
+            rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual(1, len(rows))
+            self.assertEqual("APPROVED_PRESERVED", rows[0]["decision"])
+            self.assertFalse(rows[0]["claim_allowed"])
+            self.assertEqual("authorized-human", rows[0]["approved_by"])
 
 
 if __name__ == "__main__":
