@@ -1,0 +1,49 @@
+{
+  "schema_version": "rafaelia.reproducibility-seed/v1",
+  "gate_id": "REPRODUCIBILITY_SEED_V1",
+  "seed": 1748365262,
+  "seed_identity": "RAFAELIA_SEED_1748365262_a6a1f608-b889-4803-8f59-d57ce00dba1b",
+  "source": {
+    "repository": "rafaelmeloreisnovo/home",
+    "path": ".rafaelia/core/id_seed.lock",
+    "commit": "d5e32a4c07c5f0c328a8dd85d1b3302e930dae47",
+    "blob_sha": "8c04ed93932d00efff94c03d98bc572b8cff9afe",
+    "authority_state": "OBSERVED_LOCKFILE"
+  },
+  "deterministic_derivation": {
+    "algorithm": "SHA-256",
+    "domain": "RAFAELIA_SEED_V1",
+    "input_encoding": "UTF-8",
+    "input_format": "RAFAELIA_SEED_V1\\0{seed}\\0{label}",
+    "output": "first_64_bits_big_endian",
+    "purpose": "Stable experiment/case ordering and receipt identity without depending on a library PRNG implementation."
+  },
+  "mutation_falsifier": {
+    "operator": "N_TO_N_PLUS_1",
+    "requirement": "A controlled seed mutation from N to N+1 must be detected by the reproducibility-seed gate before promotion.",
+    "baseline_seed": 1748365262,
+    "mutant_seed": 1748365263
+  },
+  "method_anchors": [
+    {
+      "ref": "arXiv:2609.26461",
+      "title": "Reproducible AI Requires Reproducible Randomness",
+      "use": "Seed equality alone does not guarantee identical streams across implementations; implementation fidelity and generator state matter."
+    },
+    {
+      "ref": "arXiv:2608.27100",
+      "title": "Mutation Testing for Reproducibility Safeguards in Machine Learning Research Software: An Empirical Study",
+      "use": "Random-seed changes are reproducibility-relevant mutations; validation should explicitly detect experimentally important configuration drift."
+    }
+  ],
+  "boundaries": [
+    "SEED_IDENTITY != FULL_PRNG_STATE",
+    "SEED_EQUALITY != CROSS_LIBRARY_STREAM_IDENTITY",
+    "FIXED_SEED != SCIENTIFIC_REPLICATION",
+    "DETERMINISTIC_DERIVATION != CRYPTOGRAPHIC_SECRET",
+    "GATE_PASS != SCIENTIFIC_VALIDATION",
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM"
+  ],
+  "claim_allowed": false,
+  "closure_is_automatic": false
+}
