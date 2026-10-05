@@ -6,10 +6,15 @@ on:
       - 'schemas/omega-assurance/serpent-dove-transition.v1.schema.json'
       - 'data/control-plane/omega-assurance/serpent-dove-conduct.v1.json'
       - 'data/control-plane/omega-assurance/gap-metabolism-registry.v1.json'
+      - 'data/control-plane/omega-assurance/token-vazio-closure-readiness.v1.json'
       - 'data/fixtures/omega-assurance/serpent-dove-negative-cases.v1.json'
       - 'tools/validate_serpent_dove_gap_metabolism_v1.py'
+      - 'tools/validate_token_vazio_closure_readiness_v1.py'
+      - 'tools/resolve_token_vazio.py'
       - 'tests/test_serpent_dove_gap_metabolism_v1.py'
+      - 'tests/test_token_vazio_closure_readiness_v1.py'
       - 'indices/SERPENT_DOVE_GAP_METABOLISM_V1.md'
+      - 'indices/TOKEN_VAZIO_CLOSURE_READINESS_V1.md'
       - 'data/receipts/SERPENT_DOVE_GAP_METABOLISM_*.json'
       - '.github/workflows/serpent-dove-gap-metabolism-v1.yml'
   workflow_dispatch:
@@ -24,14 +29,21 @@ jobs:
     steps:
       - name: Checkout pinned action
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - name: Compile new validator and tests
+      - name: Compile validators and tests
         run: |
           python3 -m py_compile tools/validate_serpent_dove_gap_metabolism_v1.py
           python3 -m py_compile tests/test_serpent_dove_gap_metabolism_v1.py
+          python3 -m py_compile tools/validate_token_vazio_closure_readiness_v1.py
+          python3 -m py_compile tools/resolve_token_vazio.py
+          python3 -m py_compile tests/test_token_vazio_closure_readiness_v1.py
       - name: Run Serpent-Dove tests
         run: python3 -m unittest tests/test_serpent_dove_gap_metabolism_v1.py
       - name: Validate conduct and gap metabolism
         run: python3 tools/validate_serpent_dove_gap_metabolism_v1.py
+      - name: Run TOKEN_VAZIO closure readiness tests
+        run: python3 -m unittest tests/test_token_vazio_closure_readiness_v1.py
+      - name: Validate TOKEN_VAZIO closure readiness
+        run: python3 tools/validate_token_vazio_closure_readiness_v1.py
       - name: Revalidate Omega Mesh V1
         run: |
           python3 -m unittest tests/test_omega_assurance_mesh_v1.py

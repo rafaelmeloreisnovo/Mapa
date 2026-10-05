@@ -1,31 +1,32 @@
 #!/usr/bin/env python3
-"""
-TOKEN_VAZIO Approval Decision Tool
+"""TOKEN_VAZIO legacy decision tool, hardened fail-closed.
 
-Manages the 3-gate approval workflow for closing documented gaps (TOKEN_VAZIO entries).
+This tool may list/show gaps and append PRESERVED or
+REJECTED_INSUFFICIENT_EVIDENCE decisions. Direct APPROVED_CLOSED is blocked:
+closure now requires a dedicated falsifiable readiness/evidence path and an
+explicit independent approval boundary.
 
-Phases:
-  GATE 1: Evidence Gathering (Lane 04 prepares artifacts)
-  GATE 2: Validation (Lane 04 confirms falsifiers pass)
-  GATE 3: Approval (Lane 00 authorizes closure or preservation)
-
-Usage:
-  python tools/resolve_token_vazio.py --action list
-  python tools/resolve_token_vazio.py --action show --gap-id TOKEN_VAZIO_ID
-  python tools/resolve_token_vazio.py --action approve --gap-id TOKEN_VAZIO_ID --decision APPROVED_CLOSED
+The block is intentional. CONTRACT_READY != EXECUTED != CLOSED.
 """
 
 import argparse
 import json
-import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
 
+DIRECT_CLOSE_BLOCK_REASON = (
+    "APPROVED_CLOSED is disabled in this legacy tool. "
+    "Use the TOKEN_VAZIO closure-readiness/evidence gate; preserve the gap "
+    "until source, authority, execution, evidence, uncertainty and independent "
+    "approval are explicitly bound."
+)
+
+
 def load_registry(registry_path: Path) -> List[Dict]:
-    """Load TOKEN_VAZIO_REGISTRY.jsonl"""
+    """Load TOKEN_VAZIO_REGISTRY.jsonl."""
     entries = []
     if not registry_path.exists():
         print(f"ERROR: Registry not found: {registry_path}", file=sys.stderr)
@@ -39,12 +40,11 @@ def load_registry(registry_path: Path) -> List[Dict]:
                     entries.append(json.loads(line))
                 except json.JSONDecodeError:
                     pass
-
     return entries
 
 
 def load_decisions(decisions_path: Path) -> Dict[str, Dict]:
-    """Load TOKEN_VAZIO_APPROVAL_DECISIONS.jsonl into dict keyed by gap_id"""
+    """Load append-only decisions, keyed by TOKEN_VAZIO id."""
     decisions = {}
     if not decisions_path.exists():
         return decisions
@@ -60,12 +60,11 @@ def load_decisions(decisions_path: Path) -> Dict[str, Dict]:
                         decisions[gap_id] = entry
                 except json.JSONDecodeError:
                     pass
-
     return decisions
 
 
 def list_gaps(registry: List[Dict]) -> None:
-    """List all TOKEN_VAZIO entries with status"""
+    """List documented TOKEN_VAZIO entries."""
     print("\n" + "=" * 80)
     print("TOKEN_VAZIO REGISTRY - All Documented Gaps")
     print("=" * 80)
@@ -73,9 +72,7 @@ def list_gaps(registry: List[Dict]) -> None:
     by_priority = {}
     for entry in registry:
         priority = entry.get("priority", "UNKNOWN")
-        if priority not in by_priority:
-            by_priority[priority] = []
-        by_priority[priority].append(entry)
+        by_priority.setdefault(priority, []).append(entry)
 
     for priority in ["P0", "P1", "P2"]:
         if priority in by_priority:
@@ -84,19 +81,14 @@ def list_gaps(registry: List[Dict]) -> None:
                 gap_id = entry.get("id", "UNKNOWN")
                 status = entry.get("current_status", "UNKNOWN")
                 severity = entry.get("severity", "unknown")
-                print(f"  ✓ {gap_id}")
+                print(f"  - {gap_id}")
                 print(f"    Status: {status}")
                 print(f"    Severity: {severity}")
 
 
 def show_gap(gap_id: str, registry: List[Dict], decisions: Dict[str, Dict]) -> None:
-    """Show detailed information about a specific gap"""
-    gap = None
-    for entry in registry:
-        if entry.get("id") == gap_id:
-            gap = entry
-            break
-
+    """Show detailed information about a specific gap."""
+    gap = next((entry for entry in registry if entry.get("id") == gap_id), None)
     if not gap:
         print(f"ERROR: Gap not found: {gap_id}", file=sys.stderr)
         return
@@ -110,24 +102,25 @@ def show_gap(gap_id: str, registry: List[Dict], decisions: Dict[str, Dict]) -> N
     print(f"Current Status: {gap.get('current_status', 'UNKNOWN')}")
     print(f"Approval Gate: {gap.get('approval_gate', 'N/A')}")
     print(f"Resolution Date Estimate: {gap.get('resolution_date_estimate', 'N/A')}")
-    print(f"\nAffected Components:")
+    print("\nAffected Components:")
     for component in gap.get("affected_components", []):
         print(f"  - {component}")
 
-    # Show approval decision if exists
     if gap_id in decisions:
         decision = decisions[gap_id]
-        print(f"\n** APPROVAL DECISION RECORDED **")
+        print("\n** APPROVAL DECISION RECORDED **")
         print(f"Decision: {decision.get('decision', 'UNKNOWN')}")
         print(f"Approved by: {decision.get('approved_by', 'N/A')}")
         print(f"Timestamp: {decision.get('timestamp', 'N/A')}")
         print(f"Phase: {decision.get('phase', 'N/A')}")
     else:
-        print(f"\n** NO APPROVAL DECISION YET **")
+        print("\n** NO APPROVAL DECISION YET **")
         print("This gap requires:")
-        print("  1. GATE 1: Evidence gathering (Lane 04 prepares artifacts)")
-        print("  2. GATE 2: Validation (Lane 04 confirms falsifiers pass)")
-        print("  3. GATE 3: Approval (Lane 00 authorizes closure)")
+        print("  1. explicit closure-readiness contract")
+        print("  2. source-bound evidence and falsifier execution")
+        print("  3. uncertainty/reproducibility boundary")
+        print("  4. independent authorized approval")
+        print("Direct closure through this legacy tool is disabled.")
 
 
 def record_decision(
@@ -138,68 +131,68 @@ def record_decision(
     evidence_package: Optional[Dict] = None,
     notes: Optional[str] = None,
 ) -> bool:
-    """Record approval decision (append-only)"""
+    """Append a non-closing governance decision.
 
+    APPROVED_CLOSED is deliberately rejected here so a legacy convenience path
+    cannot bypass the closure-readiness and evidence boundaries.
+    """
     valid_decisions = [
         "APPROVED_CLOSED",
         "APPROVED_PRESERVED",
         "REJECTED_INSUFFICIENT_EVIDENCE",
     ]
-
     if decision not in valid_decisions:
         print(f"ERROR: Invalid decision. Must be one of: {valid_decisions}", file=sys.stderr)
+        return False
+    if decision == "APPROVED_CLOSED":
+        print(f"ERROR: {DIRECT_CLOSE_BLOCK_REASON}", file=sys.stderr)
+        return False
+    if not approved_by or not approved_by.strip():
+        print("ERROR: --approved-by must be explicit; no automated default approver is allowed", file=sys.stderr)
+        return False
+    if notes and len(notes) > 500:
+        print("ERROR: --notes exceeds 500 characters", file=sys.stderr)
         return False
 
     record = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "token_vazio_id": gap_id,
         "decision": decision,
-        "approved_by": approved_by,
+        "approved_by": approved_by.strip(),
         "evidence_package": evidence_package or {},
         "resolution_notes": notes or "",
-        "phase": "Phase 2-P1-03",
+        "phase": "TOKEN_VAZIO_LEGACY_FAIL_CLOSED_V1",
+        "claim_allowed": False,
     }
 
-    # Append to JSONL (append-only)
     decisions_path.parent.mkdir(parents=True, exist_ok=True)
     with open(decisions_path, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, sort_keys=True) + "\n")
 
-    print(f"✓ Decision recorded for {gap_id}: {decision}")
+    print(f"Decision recorded for {gap_id}: {decision}")
     return True
 
 
 def main(argv=None):
     p = argparse.ArgumentParser(
-        description="TOKEN_VAZIO Approval Decision Tool - Manage documented gaps"
+        description="TOKEN_VAZIO legacy decision tool - fail-closed for direct closure"
     )
     p.add_argument(
-        "--action",
-        required=True,
-        choices=["list", "show", "approve"],
-        help="Action to perform",
+        "--action", required=True, choices=["list", "show", "approve"], help="Action to perform"
     )
-    p.add_argument(
-        "--gap-id",
-        help="TOKEN_VAZIO gap identifier (for show/approve actions)",
-    )
+    p.add_argument("--gap-id", help="TOKEN_VAZIO gap identifier (for show/approve actions)")
     p.add_argument(
         "--decision",
-        help="Approval decision (APPROVED_CLOSED, APPROVED_PRESERVED, REJECTED_INSUFFICIENT_EVIDENCE)",
+        help="Decision (APPROVED_PRESERVED or REJECTED_INSUFFICIENT_EVIDENCE; direct APPROVED_CLOSED is blocked)",
     )
     p.add_argument(
         "--approved-by",
-        help="Identity of approver (e.g., Lane 00 / Governance)",
-        default="Claude Code (Rafaelia Framework Validator)",
+        help="Explicit identity/authority recording the non-closing decision",
+        default=None,
     )
+    p.add_argument("--notes", help="Decision notes (max 500 chars)")
     p.add_argument(
-        "--notes",
-        help="Decision notes (max 500 chars)",
-    )
-    p.add_argument(
-        "--repo-root",
-        default="/home/user/Mapa",
-        help="Repository root directory",
+        "--repo-root", default="/home/user/Mapa", help="Repository root directory"
     )
 
     ns = p.parse_args(argv)
@@ -217,33 +210,31 @@ def main(argv=None):
         list_gaps(registry)
         return 0
 
-    elif ns.action == "show":
+    if ns.action == "show":
         if not ns.gap_id:
             print("ERROR: --gap-id required for show action", file=sys.stderr)
             return 1
         show_gap(ns.gap_id, registry, decisions)
         return 0
 
-    elif ns.action == "approve":
+    if ns.action == "approve":
         if not ns.gap_id or not ns.decision:
             print("ERROR: --gap-id and --decision required for approve action", file=sys.stderr)
             return 1
+        if not ns.approved_by:
+            print("ERROR: --approved-by is required; automated default approval is forbidden", file=sys.stderr)
+            return 1
 
-        evidence_package = None
-        if ns.notes:
-            evidence_package = {"notes": ns.notes}
-
-        if record_decision(
+        evidence_package = {"notes": ns.notes} if ns.notes else None
+        ok = record_decision(
             ns.gap_id,
             ns.decision,
             decisions_path,
             ns.approved_by,
             evidence_package,
             ns.notes,
-        ):
-            return 0
-        else:
-            return 3
+        )
+        return 0 if ok else 3
 
     return 0
 
