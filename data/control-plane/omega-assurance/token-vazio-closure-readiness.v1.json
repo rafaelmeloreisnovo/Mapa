@@ -1,0 +1,127 @@
+{
+  "schema_version": "rafaelia.token-vazio-closure-readiness/v1",
+  "gate_id": "TOKEN_VAZIO_CLOSURE_READINESS_V1",
+  "implementation_state": "IMPLEMENTED_UNTESTED_CI",
+  "claim_allowed": false,
+  "closure_is_automatic": false,
+  "append_only_evidence_required": true,
+  "source_registry": {
+    "path": "data/control-plane/omega-assurance/gap-metabolism-registry.v1.json",
+    "base_ref": "main@293a450d6946961c5cb3d79d7a5b59349652bcfd"
+  },
+  "purpose": "Convert a known TOKEN_VAZIO/gap into an explicit, falsifiable closure contract without inventing the missing value and without allowing structural or CI success to become scientific or governance closure by implication.",
+  "method_anchors": [
+    {
+      "ref": "NASEM-2019-REPRODUCIBILITY-REPLICABILITY",
+      "doi": "10.17226/25303",
+      "use": "Keep computational reproducibility distinct from replication with new data and require uncertainty to accompany claims."
+    }
+  ],
+  "invariants": [
+    "TOKEN_VAZIO != NUMERIC_ZERO",
+    "MISSING_FIELD != INFERRED_VALUE",
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "CONTRACT_READY != EXECUTED",
+    "EXECUTED != CLOSED",
+    "CI_PASS != SCIENTIFIC_VALIDATION",
+    "REPRODUCIBLE_SAME_DATA != REPLICATED_NEW_DATA",
+    "IMPLEMENTER != SOLE_INDEPENDENT_APPROVER",
+    "P0_BLOCKER_IS_NON_COMPENSATORY",
+    "DEPENDENCY_OR_VERSION_BUMP_REQUIRES_EXPLICIT_NECESSITY_EVIDENCE"
+  ],
+  "required_dimensions": [
+    "source_refs",
+    "authority_ref",
+    "execution_target",
+    "execution_path_state",
+    "evidence_rule",
+    "falsifier",
+    "decision_rule",
+    "uncertainty_rule",
+    "reproducibility_rule",
+    "independence_rule",
+    "rollback_rule",
+    "dependency_policy",
+    "fan_out_class",
+    "uncertainty_reduction_class",
+    "information_gain_class",
+    "effort_class",
+    "next_gate"
+  ],
+  "priority_contract": {
+    "mode": "LEXICOGRAPHIC_NON_COMPENSATORY",
+    "no_scalar_score": true,
+    "order": [
+      "urgency:P0>P1>P2>P3",
+      "authority_or_safety_blocker:first",
+      "fan_out:GLOBAL>CROSS_REPO>REPO>LOCAL>TOKEN_VAZIO",
+      "uncertainty_reduction:HIGH>MEDIUM>LOW>TOKEN_VAZIO",
+      "information_gain:HIGH>MEDIUM>LOW>TOKEN_VAZIO",
+      "effort:LOW>MEDIUM>HIGH>TOKEN_VAZIO"
+    ],
+    "rule": "Unknown calibration remains TOKEN_VAZIO; never manufacture numeric weights to force a ranking."
+  },
+  "dependency_default": {
+    "external_runtime_dependencies": false,
+    "version_bumps": false,
+    "exception_requires": [
+      "necessity_evidence",
+      "bounded_scope",
+      "impact",
+      "rollback",
+      "exact_version_or_source_ref"
+    ]
+  },
+  "profiles": [
+    {
+      "gap_id": "GAP-MAPA-SERVER-ENFORCEMENT",
+      "source_refs": ["MAPA_MAIN"],
+      "authority_ref": "REPOSITORY_ADMIN_OR_PLATFORM_GOVERNANCE",
+      "execution_target": "GitHub server-side protection/ruleset state for refs/heads/main",
+      "execution_path_state": "TOKEN_VAZIO",
+      "evidence_rule": "Authoritative provider readback must show server-side protection or ruleset enforcement enabled and the required promotion checks enforced on the observed main ref; repository-local policy files and CI success cannot substitute.",
+      "falsifier": "Authoritative provider observation of enabled server-side protection/ruleset and required checks on main.",
+      "decision_rule": "If enforcement is absent, partial, stale, or not independently read back, preserve HOLD. If enabled and independently observed on the exact current ref, advance only to explicit human/provider approval; never auto-close.",
+      "uncertainty_rule": "Provider governance state is time-varying. Evidence is current-state only and must bind repository, branch/ref, observed head when available, and observation time.",
+      "reproducibility_rule": "Repeat the provider readback through the same authoritative surface and require a second independent observation before promotion semantics rely on it.",
+      "independence_rule": "The implementation actor cannot be the sole reviewer/approver of the same enforcement change; exact-state readback must come from an independent governance observation or authorized human review.",
+      "rollback_rule": "Provider policy mutation must be reversible without rewriting prior evidence; any reversal produces a new append-only governance observation.",
+      "dependency_policy": {
+        "external_runtime_dependencies": false,
+        "version_bumps": false,
+        "exception_ref": "TOKEN_VAZIO"
+      },
+      "fan_out_class": "GLOBAL",
+      "uncertainty_reduction_class": "HIGH",
+      "information_gain_class": "HIGH",
+      "effort_class": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "next_gate": "Resolve the authorized provider execution path for main protection/ruleset enforcement; execute only if authority and rollback are explicit; then perform exact-state independent readback."
+    },
+    {
+      "gap_id": "GAP-MAPA-INDEPENDENT-REVIEW-WAVE",
+      "source_refs": ["MAPA_MAIN"],
+      "authority_ref": "TOKEN_VAZIO_REVIEWER",
+      "execution_target": "Exact-head independent review for the scoped implementation branch/PR",
+      "execution_path_state": "TOKEN_VAZIO",
+      "evidence_rule": "A review event must bind an independent reviewer, exact PR head SHA, disposition, and timestamp. Self-review or an unbound narrative is not evidence of independent review.",
+      "falsifier": "An independent review attached to the exact head approves or rejects the scoped changes.",
+      "decision_rule": "Without an identified independent reviewer and exact-head review event, preserve HOLD. A review may advance governance state but does not by itself validate scientific claims.",
+      "uncertainty_rule": "Review becomes stale when the head changes; a changed head reopens the review requirement.",
+      "reproducibility_rule": "The review evidence must be re-readable from the provider and deterministically bind the same head and disposition.",
+      "independence_rule": "Reviewer identity/authority must be distinct from the implementation lineage or explicitly governed by an approved independent-review policy.",
+      "rollback_rule": "Do not merge while review is unresolved; superseded reviews remain append-only evidence and a new head requires a new review.",
+      "dependency_policy": {
+        "external_runtime_dependencies": false,
+        "version_bumps": false,
+        "exception_ref": "TOKEN_VAZIO"
+      },
+      "fan_out_class": "GLOBAL",
+      "uncertainty_reduction_class": "HIGH",
+      "information_gain_class": "MEDIUM",
+      "effort_class": "TOKEN_VAZIO",
+      "claim_allowed": false,
+      "next_gate": "Bind an authorized independent reviewer and exact-head review route; until then preserve TOKEN_VAZIO and keep the implementation unmerged."
+    }
+  ]
+}
