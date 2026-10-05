@@ -1,0 +1,95 @@
+{
+  "schema_version": "rafaelia.global-reconciliation/v1",
+  "gate_id": "GLOBAL_RECONCILIATION_V1",
+  "generated_at": "2026-10-05T14:24:00-03:00",
+  "authority": {
+    "implementation_repo": "rafaelmeloreisnovo/Mapa",
+    "base_main": "dae0865c28ac1f32c53f60ba46608bfb6de9f01c",
+    "drive_hotstate_id": "1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+    "drive_hotstate_revision": "ANLCKQkwaErBV4ghUQJMTBzy4uePGZBoqEdwjC642WBDEhAnjWR53RTDeXZTeA68k5hTkwPc4BJm4bQ-0biNYLmcdptEZFIEe-uj2zqVa98"
+  },
+  "seed_gate": {
+    "seed": 1748365262,
+    "pr": 731,
+    "tested_head": "4d036f0ab8472c3688d4b4bf260ea7bacba1233d",
+    "dedicated_run": 37340489362,
+    "dedicated_run_state": "PASS_EXACT_HEAD",
+    "merge_commit": "dae0865c28ac1f32c53f60ba46608bfb6de9f01c",
+    "merge_state": "MERGED",
+    "post_merge_ci": "TOKEN_VAZIO_NOT_OBSERVED",
+    "claim_allowed": false
+  },
+  "provider_gate": {
+    "main_protected": false,
+    "required_status_enforcement": "OFF",
+    "global_promotion": false,
+    "state": "FAIL_CLOSED_PROVIDER_ENFORCEMENT"
+  },
+  "supersession_policy": {
+    "predecessors_preserved": true,
+    "routing_rule": "LATEST_EVIDENCED_SUCCESSOR_WINS_FOR_CURRENT_STATE",
+    "historical_records_may_support_history_but_not_current_state": true,
+    "unknown_successor_order": "TOKEN_VAZIO_BLOCKED"
+  },
+  "typed_absence": [
+    {"type": "NUMERIC_ZERO", "numeric_payload": 0, "means_missing": false},
+    {"type": "NULL", "numeric_payload": null, "means_missing": true},
+    {"type": "EMPTY_SET", "numeric_payload": null, "means_missing": false},
+    {"type": "TOKEN_VAZIO", "numeric_payload": null, "means_missing": true},
+    {"type": "NOT_RUN", "numeric_payload": null, "means_missing": true},
+    {"type": "UNDEFINED", "numeric_payload": null, "means_missing": true}
+  ],
+  "representation_semantics": [
+    {
+      "left": "7/3",
+      "right": "77/33",
+      "relation": "VALUE_EQ_AND_REPRESENTATION_NEQ",
+      "canonical_value": "7/3",
+      "provenance_note": "77/33 contains a removable common factor 11; equality of value does not erase representation history."
+    },
+    {"left": "999/969", "relation": "CANONICAL_REDUCTION", "canonical_value": "333/323"},
+    {"left": "777/555", "relation": "CANONICAL_REDUCTION", "canonical_value": "7/5"}
+  ],
+  "formal_boundaries": {
+    "prime_set_graphs": {
+      "state": "FORMAL_CANDIDATE",
+      "claim_allowed": false,
+      "gap": "TOKEN_VAZIO_GRAPH_DEFINITION_UNLESS_VERTICES_EDGES_INVARIANTS_ARE_EXPLICIT"
+    },
+    "fluid_wave_energy": {
+      "state": "FORMAL_ANALOGY",
+      "claim_allowed": false,
+      "physical_binding": "TOKEN_VAZIO_PHYSICAL_BINDING",
+      "promotion_requires": ["units", "mechanism", "observable", "falsifier"]
+    },
+    "emitter_receiver": {
+      "state": "INFORMATION_MODEL_CANDIDATE",
+      "claim_allowed": false,
+      "required_roles": ["source", "channel", "receiver", "noise_or_uncertainty", "observation"]
+    },
+    "shannon": {
+      "state": "BOUNDARY",
+      "claim": "NO_SHANNON_VIOLATION_CLAIM",
+      "compression_semantics": "dictionary/reference/deduplication only"
+    }
+  },
+  "local_input_custody": [
+    {"name": "ativar.txt", "sha256": "4eb59e7224cfa18b8060ea82e166a0debccefaa96e805f3318341d3be1ba5353"},
+    {"name": "RAFAELIA — Materialização Verificável da Sessão Ω V1.docx", "sha256": "b40d787d52bb7b0c1f3acf9c12111fce4b736ba62a29dde71101b52247944b16"},
+    {"name": "RAFAELIA — Registro de Riscos, Claims e Gates Ω V1.xlsx", "sha256": "b6d99ef9ee3d89bc4a283887883934d85e0a2450a2338601ea58e0b2d9e01325"},
+    {"name": "START HERE μWRITE LEDGER Ω V2.docx", "sha256": "fbc651e8f85b71444d1566713624c9e2bce504f93743e4ece36d248cd2021428"},
+    {"name": "START HERE — RAFAELIA Ω CANONICAL V2.1 DISPATCH.docx", "sha256": "17e73b9546110c2a5214f735ad864ceae9339af5ff28fab1a8a718afc8b404f2"},
+    {"name": "RAFAELIA — Relatório Integral da Sessão e Máquina Matemática — Ω V1 — 2026-10-05.docx", "sha256": "6823c207b2fc5fb2aa3ae75f40b2f8b11299d29fb3a63aeac6dc7531967a70f0"},
+    {"name": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V4.4.docx", "sha256": "3880787dde0360c70e9f6912426ea1c5f8bdf524f4a0a5345ff4af9d4d33871c"}
+  ],
+  "boundaries": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != 0",
+    "MERGED != POST_MERGE_CI_PASS",
+    "DEDICATED_GATE_PASS != GLOBAL_REPO_PASS",
+    "VALUE_EQUALITY != REPRESENTATION_IDENTITY",
+    "FORMAL_ANALOGY != PHYSICAL_EVIDENCE",
+    "STORED_HISTORY != CURRENT_STATE"
+  ],
+  "claim_allowed": false
+}
