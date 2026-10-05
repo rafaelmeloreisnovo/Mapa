@@ -8,17 +8,21 @@ on:
       - 'data/control-plane/omega-assurance/gap-metabolism-registry.v1.json'
       - 'data/control-plane/omega-assurance/token-vazio-closure-readiness.v1.json'
       - 'data/control-plane/omega-assurance/reproducibility-seed.v1.json'
+      - 'data/control-plane/omega-assurance/global-reconciliation.v1.json'
       - 'data/fixtures/omega-assurance/serpent-dove-negative-cases.v1.json'
       - 'tools/validate_serpent_dove_gap_metabolism_v1.py'
       - 'tools/validate_token_vazio_closure_readiness_v1.py'
       - 'tools/validate_reproducibility_seed_v1.py'
+      - 'tools/validate_global_reconciliation_v1.py'
       - 'tools/resolve_token_vazio.py'
       - 'tests/test_serpent_dove_gap_metabolism_v1.py'
       - 'tests/test_token_vazio_closure_readiness_v1.py'
       - 'tests/test_reproducibility_seed_v1.py'
+      - 'tests/test_global_reconciliation_v1.py'
       - 'indices/SERPENT_DOVE_GAP_METABOLISM_V1.md'
       - 'indices/TOKEN_VAZIO_CLOSURE_READINESS_V1.md'
       - 'indices/REPRODUCIBILITY_SEED_V1.md'
+      - 'indices/GLOBAL_RECONCILIATION_V1.md'
       - 'data/receipts/SERPENT_DOVE_GAP_METABOLISM_*.json'
       - '.github/workflows/serpent-dove-gap-metabolism-v1.yml'
   workflow_dispatch:
@@ -39,9 +43,11 @@ jobs:
           python3 -m py_compile tests/test_serpent_dove_gap_metabolism_v1.py
           python3 -m py_compile tools/validate_token_vazio_closure_readiness_v1.py
           python3 -m py_compile tools/validate_reproducibility_seed_v1.py
+          python3 -m py_compile tools/validate_global_reconciliation_v1.py
           python3 -m py_compile tools/resolve_token_vazio.py
           python3 -m py_compile tests/test_token_vazio_closure_readiness_v1.py
           python3 -m py_compile tests/test_reproducibility_seed_v1.py
+          python3 -m py_compile tests/test_global_reconciliation_v1.py
       - name: Run Serpent-Dove tests
         run: python3 -m unittest tests/test_serpent_dove_gap_metabolism_v1.py
       - name: Validate conduct and gap metabolism
@@ -54,6 +60,10 @@ jobs:
         run: python3 -m unittest tests/test_reproducibility_seed_v1.py
       - name: Validate reproducibility seed contract
         run: python3 tools/validate_reproducibility_seed_v1.py
+      - name: Run global reconciliation falsifiers
+        run: python3 -m unittest tests/test_global_reconciliation_v1.py
+      - name: Validate global reconciliation contract
+        run: python3 tools/validate_global_reconciliation_v1.py
       - name: Revalidate Omega Mesh V1
         run: |
           python3 -m unittest tests/test_omega_assurance_mesh_v1.py
