@@ -9,7 +9,8 @@ HEX40=re.compile(r"^[0-9a-f]{40}$")
 PRIORITIES={"P0","P1","P2","P3"}
 REQUIRED_OPEN_FIELDS={"priority","id","state","scope","authority","evidence","uncertainty","falsifier","closure_gate","next_action"}
 FORBIDDEN_ACTIVE_IDS={"TV-ROOT-PNG-STRUCTURAL-CI-BLOCKER","TV-GENESIS-SEAL-EXACT-SHA256","TV-RAW018-CURRENT-BYTE-CUSTODY","TV-RAW018-PID-COMMITMENT-ALGORITHM-PROVENANCE","TV-RAW018-CHRONOLOGICAL-COMMITMENT-CURRENT-REPRODUCTION","TOKEN_VAZIO_RUNNER"}
-MANDATORY_ACTIVE_IDS={"P0-MAIN-SERVER-ENFORCEMENT","P0-INDEPENDENT-APPROVAL"}\nSUPPORTED_SCHEMAS={"rafaelia.token-vazio-priority-queue.v6","rafaelia.token-vazio-priority-queue.v7","rafaelia.token-vazio-priority-queue.v8"}
+MANDATORY_ACTIVE_IDS={"P0-MAIN-SERVER-ENFORCEMENT","P0-INDEPENDENT-APPROVAL"}
+SUPPORTED_SCHEMAS={"rafaelia.token-vazio-priority-queue.v6","rafaelia.token-vazio-priority-queue.v7","rafaelia.token-vazio-priority-queue.v8"}
 def fail(errors:list[str],message:str)->None: errors.append(message)
 def nonempty_list(value:Any)->bool: return isinstance(value,list) and bool(value) and all(isinstance(item,str) and item.strip() for item in value)
 def parse_iso(value:Any):
