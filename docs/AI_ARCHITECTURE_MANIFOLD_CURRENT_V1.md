@@ -1,83 +1,63 @@
 # RAFAELIA — AI Architecture Manifold Current V1
 
-Status: `STRUCTURAL_PASS_MERGED`  
+Status: `STRUCTURAL_UPDATE_CANDIDATE`  
 Claim gate: `false`
 
 ## Function
 
-Bounded architecture inventory for humans and AIs. It answers where to enter, which source is authoritative, what is current versus stale, which plane routes or executes, which AI role owns a packet, what remains `TOKEN_VAZIO`, and what comes next.
+Bounded current architecture for humans and AIs. It binds the canonical Drive bootstrap/state to the federated `Mapa`, keeps producer authority separate, and exposes memory as typed projections rather than duplicated corpus.
 
 Machine-readable authority: `data/manifold/ai_architecture_current_v1.json`.
 
 ## Current three-root view
 
-1. **Drive / START HERE Ω V2.1** — documentary bootstrap, HOTSTATE and receipts.
-2. **Mapa @ `56dca415e7a6a460b70fda4f59a320fe1b5198ba`** — pinned merged architecture authority; later moving-main commits are separate state.
-3. **RafGitTools @ `a81f0d9ddaae532cf26e4ba23651c4704abd8fc4`** — executor/control-plane/tool-router.
+1. **Drive / START HERE Ω V2.2** — short documentary bootstrap and canonical pointers.
+2. **Drive / CURRENT_STATE Ω HOTSTATE V4.5** — current documentary state; ledger/history remain separate.
+3. **GitHub / Mapa** — federated ATLAS, routes, manifold, gaps and evidence boundaries. Producer repositories still govern implementation.
 
-Drive HOTSTATE reported Mapa `959a64d497c87bc84b35b70dc6918fe036f79147` and RafGitTools `ad4966029bd71a330a3d58fee3c642e2de56c983`. Current GitHub readback differs, so HOTSTATE is `STALE_BOUNDED_SUCCESSOR_REQUIRED`.
+The pre-patch main observed for this successor is `c200dbf1c124b1a59ac0186ebe68ae108637e845`. The exact branch/PR head is the evidence ref for this update after commit.
 
-## Architecture
+## Memory projection
 
-```text
-Drive START HERE
-    |
-    v
-Drive HOTSTATE ---- documentary memory / indices / receipts
-    |
-    v
-Mapa ---------------- federated routing / authority / manifold / gaps
- |  \
- |   +----> producer repositories ----> producer-local gates
- |
- +-------> RafGitTools -------------> deterministic local execution / CI / receipts
- |
- +-------> Agent Dispatch ----------> 11 typed AI roles / 8 bounded packets
- |
- +-------> Rafaelia_Private --------> private custody / approved opaque pointers
+One source identity can be projected without copying the source:
 
-producer + executor evidence
-    |
-    v
-receipt / rollback / exact refs
-    |
-    +----> Mapa reconciliation
-    +----> Drive μWRITE / HOTSTATE successor when material
-```
+- **L — longitudinal:** predecessors, revisions, commits, receipts, timestamps, supersessions, drift.
+- **O — orthogonal:** independent authorities, replications, falsifiers and non-aliased validation axes.
+- **T — transversal:** typed bridges across repositories, Drive, datasets, formulas, code, documents and ATLAS.
+- **C — contextual:** validity scope, version, dataset, jurisdiction, hardware/runtime and limits.
+- **persistent documentary retention:** stable IDs, provider IDs, hashes/refs, append-only lineage, rollback and canonical locators.
 
-## AI entry rule
+Important: persistent/permanent retention is **not** `L9.P`; in L9, `P = provenance`. Documentary persistence also does not claim model-internal permanent memory.
+
+## Entry route
 
 ```text
-START HERE Ω V2.1
-→ CURRENT_STATE Ω
+START HERE Ω V2.2
+→ CURRENT_STATE Ω HOTSTATE V4.5
 → ai_architecture_current_v1.json
-→ one Practice ATLAS area
+→ one ATLAS/route or memory projection
 → nearest AGENTS.md
 → <=3 source_min files
-→ exact ref/path/hash
-→ smallest named gate
-→ evidence + rollback + receipt
+→ exact ref/path/hash + authority
+→ smallest named gate when execution is required
+→ evidence or TOKEN_VAZIO + rollback + receipt
 → R3
 ```
 
-Do not crawl the whole corpus. Stop if SOURCE, AUTHORITY, EXECUTION_TARGET or EVIDENCE_RULE is unresolved; preserve `TOKEN_VAZIO`.
-
-## Inventory
-
-- Practice ATLAS areas: **12**
-- Typed AI roles: **11**
-- Session packets: **8**
-- Architecture nodes: **9**
-- Claim promotion from this document: **not allowed**
+Do not crawl the whole corpus. If SOURCE, AUTHORITY, EXECUTION_TARGET or EVIDENCE_RULE is unresolved, stop fail-closed and preserve `TOKEN_VAZIO`.
 
 ## Boundary
 
-This snapshot is navigation and state reconciliation. It is not runtime proof, scientific validation, release proof, privacy certification, legal opinion, or independent reproduction.
+`SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM`  
+`SESSION != LONGITUDINAL_MEMORY != EVIDENCE`  
+`TOKEN_VAZIO != 0`
+
+This snapshot proves routing/documentary structure only. It is not runtime proof, scientific validation, legal opinion, independent reproduction, or evidence of model-internal memory.
 
 ## R3
 
-**F_ok** — Drive ↔ Mapa ↔ RafGitTools architecture, ATLAS areas, agent roles and work packets are inventoried in one typed graph.
+**F_ok** — V2.2/V4.5 is rebound into the current manifold candidate and L/O/T/C + documentary persistence are explicit.
 
-**F_gap** — Provider/server enforcement, CodeScan credentials, physical/runtime/source-specific gaps and downstream packets remain independently evidence-bound.
+**F_gap** — provider enforcement/protection, physical execution, independent scientific validation and exhaustive/internal-memory claims remain evidence-bound.
 
-**F_next** — Enter through HOTSTATE V3, then route to the owning authority and smallest named gate; preserve TOKEN_VAZIO when closure evidence is absent.
+**F_next** — validate the exact branch head; if green, review without implicit merge and append a Drive μWRITE/HOTSTATE receipt for this topology delta.
