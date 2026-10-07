@@ -1,0 +1,100 @@
+{
+  "schema": "rafaelia.typed-void-fusion-fixtures/v1",
+  "claim_allowed": false,
+  "order_invariance_required": true,
+  "bounded_exhaustive_max_fragments": 7,
+  "cases": [
+    {
+      "id": "FUSION-ZERO-PLUS-VOID",
+      "observations": [
+        {"fragment_id":"a","kind":"NUMERIC_ZERO","value":0},
+        {"fragment_id":"b","kind":"TOKEN_VAZIO","reason":"missing observation"}
+      ],
+      "expected": {
+        "state":"PARTIAL_SUPPORT",
+        "concrete_kinds":["NUMERIC_ZERO"],
+        "void_kinds":["TOKEN_VAZIO"]
+      },
+      "forbidden": ["TOKEN_VAZIO_COERCED_TO_ZERO","ZERO_DROPPED_AS_EMPTY"]
+    },
+    {
+      "id": "FUSION-FALSE-CONSENSUS",
+      "observations": [
+        {"fragment_id":"a","kind":"BOOLEAN_FALSE","value":false},
+        {"fragment_id":"b","kind":"BOOLEAN_FALSE","value":false}
+      ],
+      "expected": {
+        "state":"CONSENSUS_PRESENT",
+        "concrete_kinds":["BOOLEAN_FALSE"],
+        "void_kinds":[]
+      },
+      "forbidden": ["FALSE_COERCED_TO_VOID"]
+    },
+    {
+      "id": "FUSION-EMPTY-STRING-VS-NULL",
+      "observations": [
+        {"fragment_id":"a","kind":"EMPTY_STRING","value":""},
+        {"fragment_id":"b","kind":"NULL_LITERAL"}
+      ],
+      "expected": {
+        "state":"PARTIAL_SUPPORT",
+        "concrete_kinds":["EMPTY_STRING"],
+        "void_kinds":["NULL_LITERAL"]
+      },
+      "forbidden": ["EMPTY_STRING_EQUALS_NULL"]
+    },
+    {
+      "id": "FUSION-MISSING-VS-NULL",
+      "observations": [
+        {"fragment_id":"a","kind":"MISSING_FIELD"},
+        {"fragment_id":"b","kind":"NULL_LITERAL"}
+      ],
+      "expected": {
+        "state":"HETEROGENEOUS_ABSENCE",
+        "concrete_kinds":[],
+        "void_kinds":["MISSING_FIELD","NULL_LITERAL"]
+      },
+      "forbidden": ["MISSING_FIELD_EQUALS_NULL_LITERAL"]
+    },
+    {
+      "id": "FUSION-CONTRADICTION-NOT-WEIGHTED-AWAY",
+      "observations": [
+        {"fragment_id":"a","kind":"PRESENT","value":"A","routing_weight":999999},
+        {"fragment_id":"b","kind":"PRESENT","value":"B","routing_weight":1}
+      ],
+      "expected": {
+        "state":"CONTRADICTION",
+        "concrete_values":["A","B"]
+      },
+      "forbidden": ["HIGHER_WEIGHT_DECLARED_TRUE"]
+    },
+    {
+      "id": "FUSION-SYMBOLIC-TOKEN-ZERO",
+      "observations": [
+        {"fragment_id":"a","surface":"tokens⁰","kind":"TOKEN_VAZIO"}
+      ],
+      "expected": {
+        "state":"TOKEN_VAZIO",
+        "numeric_value":"TOKEN_VAZIO"
+      },
+      "forbidden": ["SYMBOLIC_SUPERSCRIPT_ZERO_COERCED_TO_NUMERIC_ZERO"]
+    },
+    {
+      "id": "FUSION-TEMPORAL-UNBOUND",
+      "observations": [
+        {"fragment_id":"a","kind":"TEMPORAL_UNBOUND"}
+      ],
+      "expected": {
+        "state":"TEMPORAL_UNBOUND"
+      },
+      "forbidden": ["INFER_TIME_DOES_NOT_EXIST"]
+    }
+  ],
+  "metamorphic_rules": [
+    "For every case with n<=7, every permutation of observations MUST preserve the expected canonical state and preserved kind sets.",
+    "Fragment arrival order MUST NOT alter source identity, contradiction set, void-kind set, or claim_allowed.",
+    "Sampling or seeded ordering MAY change inspection order only.",
+    "Any implementation that changes canonical fusion under permutation emits ORDER_SENSITIVE and claim_allowed=false."
+  ],
+  "execution_state": "TOKEN_VAZIO_EXECUTABLE_VALIDATOR_NOT_MATERIALIZED_ON_CURRENT_WRITE_SURFACE"
+}
