@@ -10,6 +10,7 @@ PRIORITIES={"P0","P1","P2","P3"}
 REQUIRED_OPEN_FIELDS={"priority","id","state","scope","authority","evidence","uncertainty","falsifier","closure_gate","next_action"}
 FORBIDDEN_ACTIVE_IDS={"TV-ROOT-PNG-STRUCTURAL-CI-BLOCKER","TV-GENESIS-SEAL-EXACT-SHA256","TV-RAW018-CURRENT-BYTE-CUSTODY","TV-RAW018-PID-COMMITMENT-ALGORITHM-PROVENANCE","TV-RAW018-CHRONOLOGICAL-COMMITMENT-CURRENT-REPRODUCTION","TOKEN_VAZIO_RUNNER"}
 MANDATORY_ACTIVE_IDS={"P0-MAIN-SERVER-ENFORCEMENT","P0-INDEPENDENT-APPROVAL"}
+SUPPORTED_SCHEMAS={"rafaelia.token-vazio-priority-queue.v6","rafaelia.token-vazio-priority-queue.v7","rafaelia.token-vazio-priority-queue.v8"}
 def fail(errors:list[str],message:str)->None: errors.append(message)
 def nonempty_list(value:Any)->bool: return isinstance(value,list) and bool(value) and all(isinstance(item,str) and item.strip() for item in value)
 def parse_iso(value:Any):
@@ -19,7 +20,7 @@ def parse_iso(value:Any):
     return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
 def validate(data:dict[str,Any],now:datetime|None=None)->list[str]:
     errors=[]
-    if data.get("schema")!="rafaelia.token-vazio-priority-queue.v6": fail(errors,"SCHEMA_MISMATCH")
+    if data.get("schema") not in SUPPORTED_SCHEMAS: fail(errors,"SCHEMA_MISMATCH")
     if data.get("claim_allowed") is not False: fail(errors,"CLAIM_ALLOWED_MUST_BE_FALSE")
     if data.get("release_allowed") is not False: fail(errors,"RELEASE_ALLOWED_MUST_BE_FALSE")
     if data.get("promotion_allowed") is not False: fail(errors,"PROMOTION_ALLOWED_MUST_BE_FALSE")
@@ -94,7 +95,7 @@ def validate(data:dict[str,Any],now:datetime|None=None)->list[str]:
         for invariant in sorted(required-set(invariants)): fail(errors,f"REQUIRED_INVARIANT_MISSING:{invariant}")
     return errors
 def main()->int:
-    parser=argparse.ArgumentParser(); parser.add_argument("path",nargs="?",default="data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v6.json"); args=parser.parse_args(); path=Path(args.path)
+    parser=argparse.ArgumentParser(); parser.add_argument("path",nargs="?",default="data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v8.json"); args=parser.parse_args(); path=Path(args.path)
     try: data=json.loads(path.read_text(encoding="utf-8"))
     except (OSError,json.JSONDecodeError) as exc: print(f"FAIL: unable to read/parse {path}: {exc}",file=sys.stderr); return 2
     if not isinstance(data,dict): print("FAIL: queue root must be an object",file=sys.stderr); return 2
