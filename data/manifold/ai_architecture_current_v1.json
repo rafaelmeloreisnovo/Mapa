@@ -1,8 +1,8 @@
 {
   "schema": "rafaelia.ai-architecture-manifold-current.v1",
   "version": "1.0.0",
-  "observed_at": "2026-09-28T14:25:00-03:00",
-  "state": "STRUCTURAL_PASS_MERGED",
+  "observed_at": "2026-10-07T14:36:00-03:00",
+  "state": "STRUCTURAL_UPDATE_CANDIDATE",
   "claim_allowed": false,
   "purpose": "Bounded reconstructible view of current RAFAELIA architecture for humans and AIs: entry, authority, state, execution planes, agent roles, work packets, stale evidence, gaps and next route.",
   "invariants": [
@@ -17,7 +17,7 @@
     "roots_max": 3,
     "depth_default": 1,
     "roots": [
-      "Drive:START_HERE_OMEGA_V2_1",
+      "Drive:START_HERE_OMEGA_V2_2",
       "GitHub:rafaelmeloreisnovo/Mapa",
       "GitHub:rafaelmeloreisnovo/RafGitTools"
     ],
@@ -32,15 +32,17 @@
   "source_bindings": {
     "drive_boot": {
       "id": "1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
-      "relation": "canonical_boot"
+      "relation": "canonical_boot",
+      "title": "START HERE — RAFAELIA Ω CANONICAL V2.2 DISPATCH",
+      "version": "V2.2"
     },
     "drive_current_state": {
       "id": "1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
-      "title": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V3",
-      "updated_at": "2026-09-28T14:25:00-03:00",
+      "title": "RAFAELIA — CURRENT_STATE Ω — HOTSTATE V4.5",
+      "updated_at": "2026-10-07T17:08:00.687Z",
       "architecture_authority_commit": "56dca415e7a6a460b70fda4f59a320fe1b5198ba",
       "rafgittools_authority_commit": "a81f0d9ddaae532cf26e4ba23651c4704abd8fc4",
-      "staleness": "CURRENT_FOR_PINNED_ARCHITECTURE_AUTHORITY"
+      "staleness": "CURRENT_DRIVE_BINDING"
     },
     "mapa_practice_atlas": {
       "path": "data/control-plane/PRACTICE_ATLAS_V1.json",
@@ -53,6 +55,11 @@
     "gap_of_gaps_drive": {
       "id": "13odI4uadwvLuIrXUMOGo3inPSSQq0WVWiBLZQ9Mwpnw",
       "relation": "RELATED_GAP_INDEX_NOT_ARCHITECTURE_PROOF"
+    },
+    "mapa_current_observed": {
+      "ref": "GitHub:rafaelmeloreisnovo/Mapa@c200dbf1c124b1a59ac0186ebe68ae108637e845",
+      "relation": "observed_pre_patch_main",
+      "note": "Current main observed before the V2.2/V4.5 routing-memory successor; exact PR head is evidence-bound after commit."
     }
   },
   "authorities": [
@@ -93,7 +100,7 @@
       "authority": "AUTH_DOCUMENTARY",
       "state": "ACTIVE",
       "ref": "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
-      "summary": "START HERE Ω V2.1 Dispatch."
+      "summary": "START HERE Ω V2.2 Dispatch; short canonical bootstrap."
     },
     {
       "id": "N01_DRIVE_HOTSTATE",
@@ -101,7 +108,7 @@
       "authority": "AUTH_DOCUMENTARY",
       "state": "ACTIVE_CURRENT",
       "ref": "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
-      "summary": "HOTSTATE V3 is the active O(1) documentary router; HOTSTATE V2 is preserved as predecessor."
+      "summary": "HOTSTATE V4.5 is the active documentary current-state router at the stable Drive ID; history/receipts remain separate."
     },
     {
       "id": "N02_MAPA_FEDERATED_CONTROL",
@@ -614,23 +621,62 @@
         "Drive:13odI4uadwvLuIrXUMOGo3inPSSQq0WVWiBLZQ9Mwpnw"
       ],
       "next": "Select one READY_TO_ROUTE/source-specific packet and execute its producer-local gate."
+    },
+    {
+      "id": "G_ARCH_005",
+      "state": "TOKEN_VAZIO",
+      "gap": "Exhaustive persistent capture of every corpus/body and model-internal permanent memory are not established by documentary routing.",
+      "evidence_refs": [
+        "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+        "Mapa:receipts/2026-09-08_ATLAS_MEMORY_LOTCP_RIEA_ACTIVATION_V1.json"
+      ],
+      "next": "Preserve pointer-based documentary persistence; expand only for an explicit source/evidence need and never infer internal model memory."
     }
   ],
   "ai_entry_protocol": [
-    "Read Drive START HERE Ω V2.1",
-    "Read Drive CURRENT_STATE Ω HOTSTATE V2 and assess staleness",
+    "Read Drive START HERE Ω V2.2",
+    "Read Drive CURRENT_STATE Ω HOTSTATE V4.5",
     "Read this manifold snapshot",
-    "Resolve one Practice ATLAS area / route",
+    "Resolve one ATLAS/route or memory projection",
     "Open nearest repository AGENTS.md and <=3 source_min files",
     "Bind exact ref/path/hash and authority",
-    "Execute smallest named gate",
-    "Emit evidence + rollback + receipt",
+    "Execute smallest named gate only when execution is required",
+    "Emit evidence or typed TOKEN_VAZIO + rollback + receipt",
     "Update Mapa/Drive only for material state delta",
-    "Stop when next action would cross an unresolved authority/evidence boundary"
+    "Stop when the next action would cross an unresolved authority/evidence boundary"
   ],
   "R3": {
-    "F_ok": "Architecture manifold is merged and structurally validated; HOTSTATE V3 is active in Drive; private metadata freshness is evidenced at pointer scope.",
-    "F_gap": "Provider/server enforcement, CodeScan credentials, physical/runtime/source-specific gaps and downstream work packets remain separate and evidence-bound.",
-    "F_next": "Use HOTSTATE V3 as machine/documentary current state; route provider governance through its own authority; close individual gaps only by exact gate receipts."
+    "F_ok": "Drive V2.2/HOTSTATE V4.5 is rebound into the current manifold candidate; L/O/T/C plus documentary persistent retention are explicit without duplicating identity or colliding with L9 provenance.",
+    "F_gap": "Provider protection/enforcement, physical execution, independent scientific validation and exhaustive/internal-memory claims remain separately evidence-bound or TOKEN_VAZIO.",
+    "F_next": "Validate this exact branch head; if green, open review without implicit merge, then append a Drive μWRITE/HOTSTATE receipt for the documentary topology delta."
+  },
+  "memory_projection": {
+    "schema": "rafaelia.memory-projection-current.v1",
+    "identity_policy": "one shared object_id may be projected into multiple views without duplicating source identity",
+    "invariants": [
+      "SESSION != LONGITUDINAL_MEMORY != EVIDENCE",
+      "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+      "TOKEN_VAZIO != 0"
+    ],
+    "axes": {
+      "L": "longitudinal: predecessors, revisions, commits, receipts, timestamps, supersessions and drift",
+      "O": "orthogonal: independent authorities, replications, falsifiers and non-aliased validation axes",
+      "T": "transversal: typed bridges across repositories, Drive, datasets, formulas, code, documents and ATLAS",
+      "C": "contextual: scope, environment, version, jurisdiction, dataset, hardware/runtime limits and validity conditions"
+    },
+    "persistence": {
+      "mode": "DOCUMENTARY_PERSISTENT_APPEND_ONLY",
+      "authority": "Google Drive documentary memory plus repository-local receipts and immutable refs",
+      "semantics": "stable IDs, provider IDs, hashes/refs, append-only lineage, supersedes/rollback and canonical locators",
+      "l9_p_is_provenance": true,
+      "anti_collision": "persistent/permanent retention is not L9.P; L9.P remains provenance"
+    },
+    "source_refs": [
+      "Drive:1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",
+      "Drive:1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+      "Mapa:receipts/2026-09-08_ATLAS_MEMORY_LOTCP_RIEA_ACTIVATION_V1.json",
+      "Mapa:data/reconciliation/OMEGA_SESSION_GAP_EVOLUTION_LEDGER_20260827.v1.json"
+    ],
+    "boundary": "documentary persistence and reconstructibility do not assert model-internal permanent memory, exhaustive corpus capture, runtime execution, or domain truth"
   }
 }

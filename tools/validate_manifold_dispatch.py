@@ -47,7 +47,7 @@ def validate_dispatch(manifest_path, routes_path):
     if missing:
         fail(f"dispatch: missing {missing}")
 
-    if obj["schema_version"] != "1.0" or obj["dispatch_version"] != "V2.1":
+    if obj["schema_version"] != "1.0" or obj["dispatch_version"] != "V2.2":
         fail("dispatch: unsupported version")
     if obj["canonical_boot"] != {
         "id": "1T4OIN2RC1I-KFsdaQTCqieeZUGYBXissWrdrZMG0DN8",

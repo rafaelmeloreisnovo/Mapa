@@ -14,7 +14,7 @@ class ManifoldDispatchTests(unittest.TestCase):
             ROOT / "data/manifold/routes_omega_v1.jsonl",
         )
         self.assertEqual(out["status"], "PASS")
-        self.assertEqual(out["dispatch_version"], "V2.1")
+        self.assertEqual(out["dispatch_version"], "V2.2")
         self.assertEqual(out["legacy_active_routes"], 0)
         self.assertEqual(out["mu_read_roots"], 3)
         self.assertEqual(out["mu_read_depth"], 1)
