@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.semantic-fusion-permutation-contract/v1",
+  "contract_id": "SEMANTIC_FUSION_PERMUTATION_OMEGA_V1",
+  "state": "ACTIVE_BOUNDED",
+  "claim_allowed": false,
+  "purpose": "Fuse source-bound fragments from multiple models or agents without allowing order, scoring, consensus, or sampling to manufacture evidence.",
+  "mother_invariant": "fragment != candidate != canonical_candidate != evidence != claim",
+  "hard_gates": [
+    {"id":"G0_SOURCE_IDENTITY","rule":"Every fragment carries stable identity plus source/ref or explicit TOKEN_VAZIO provenance."},
+    {"id":"G1_LITERAL_PRESERVATION","rule":"Source literal is immutable; normalization is derived."},
+    {"id":"G2_TYPED_VOID","rule":"Every absent, empty, null, or unknown state uses the typed-void lattice; no coercion to zero, false, empty string, null, or empty set."},
+    {"id":"G3_CONTRADICTION_QUARANTINE","rule":"Conflicting concrete values produce CONTRADICTION unless an explicit authority rule resolves them; ranking weights alone cannot resolve truth."},
+    {"id":"G4_ORDER_INVARIANCE","rule":"Canonical fusion must be invariant to bounded permutations of the same fragment multiset; otherwise emit ORDER_SENSITIVE and cap promotion."},
+    {"id":"G5_SAMPLING_CAP","rule":"Seeded or sampled order may schedule search only; it has zero automatic evidence effect."},
+    {"id":"G6_DEDUP_IDENTITY","rule":"Deduplicate by source-bound identity or canonical payload, never by semantic similarity alone."},
+    {"id":"G7_PROMOTION","rule":"All generated compositions remain CANDIDATE with claim_allowed=false until independent evidence gates pass."}
+  ],
+  "candidate_heads": [
+    {"id":"PROVENANCE","role":"routing_priority","may_promote_truth":false},
+    {"id":"AUTHORITY","role":"routing_priority","may_promote_truth":false},
+    {"id":"FRESHNESS","role":"routing_priority","may_promote_truth":false},
+    {"id":"INDEPENDENCE","role":"routing_priority","may_promote_truth":false},
+    {"id":"REPRODUCIBILITY","role":"routing_priority","may_promote_truth":false},
+    {"id":"SEMANTIC_FIT","role":"candidate_ranking","may_promote_truth":false},
+    {"id":"CONTRADICTION_LOAD","role":"candidate_penalty","may_promote_truth":false},
+    {"id":"VOID_LOAD","role":"candidate_penalty","may_promote_truth":false}
+  ],
+  "weight_policy": {
+    "state": "TASK_BOUND_TOKEN_VAZIO_BY_DEFAULT",
+    "rule": "Weights may rank which candidate to inspect first, but must not resolve contradiction or replace evidence.",
+    "default_weights": "TOKEN_VAZIO"
+  },
+  "permutation_policy": {
+    "bounded_exhaustive_max_fragments": 7,
+    "bounded_exhaustive_rule": "For n<=7, test canonical fusion across every permutation when computationally feasible.",
+    "large_n_rule": "For n>7, canonical order is authoritative; deterministic sampled permutations are metamorphic probes only and exhaustive invariance remains TOKEN_VAZIO unless proven.",
+    "sampling_rule": "Sampling order is never a proof source and never changes canonical identity."
+  },
+  "combination_policy": {
+    "rule": "Subsets and combinations may generate hypotheses or candidates; omitted fragments remain explicit in candidate coverage.",
+    "no_silent_completion": true
+  },
+  "output_states": [
+    "CONSENSUS_PRESENT",
+    "PARTIAL_SUPPORT",
+    "HETEROGENEOUS_ABSENCE",
+    "CONTRADICTION",
+    "ORDER_SENSITIVE",
+    "TOKEN_VAZIO"
+  ],
+  "required_candidate_fields": [
+    "candidate_id",
+    "input_fragment_ids",
+    "canonical_fragment_ids",
+    "coverage",
+    "value_state",
+    "void_states",
+    "contradictions",
+    "head_scores",
+    "claim_allowed",
+    "next_gate"
+  ]
+}
