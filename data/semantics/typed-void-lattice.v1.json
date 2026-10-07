@@ -1,0 +1,286 @@
+{
+  "schema": "rafaelia.typed-void-lattice/v1",
+  "contract_id": "TYPED_VOID_LATTICE_OMEGA_V1",
+  "state": "ACTIVE_BOUNDED",
+  "claim_allowed": false,
+  "mother_invariants": [
+    "TOKEN_VAZIO != NUMERIC_ZERO",
+    "TOKEN_VAZIO != BOOLEAN_FALSE",
+    "TOKEN_VAZIO != EMPTY_STRING",
+    "TOKEN_VAZIO != NULL_LITERAL",
+    "TOKEN_VAZIO != EMPTY_SET",
+    "MISSING_FIELD != NULL_LITERAL",
+    "NULL_POINTER_SENTINEL != NULL_LITERAL",
+    "UNKNOWN != IMPOSSIBLE",
+    "TEMPORAL_UNBOUND != CLAIM_THAT_TIME_DOES_NOT_EXIST",
+    "RANDOM_OR_PERMUTED_ORDER != EVIDENCE"
+  ],
+  "void_vector_dimensions": [
+    {
+      "id": "slot",
+      "values": [
+        "EXPECTED",
+        "NOT_EXPECTED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "source_explicitness",
+      "values": [
+        "EXPLICIT",
+        "IMPLICIT",
+        "ABSENT",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "value_materialization",
+      "values": [
+        "MATERIALIZED",
+        "NOT_MATERIALIZED",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "domain_definition",
+      "values": [
+        "DEFINED",
+        "UNDEFINED",
+        "NOT_APPLICABLE",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "observation",
+      "values": [
+        "OBSERVED",
+        "NOT_OBSERVED",
+        "NOT_OBSERVABLE_IN_SCOPE",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "provenance",
+      "values": [
+        "BOUND",
+        "UNBOUND",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "temporal_binding",
+      "values": [
+        "BOUND",
+        "UNBOUND",
+        "NOT_APPLICABLE",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "id": "consistency",
+      "values": [
+        "CONSISTENT",
+        "CONTRADICTORY",
+        "UNTESTED",
+        "TOKEN_VAZIO"
+      ]
+    }
+  ],
+  "kinds": [
+    {
+      "id": "PRESENT",
+      "family": "value",
+      "meaning": "A value is materially present and typed in the declared domain.",
+      "promotion": "SOURCE_OR_EVIDENCE_BOUND"
+    },
+    {
+      "id": "NUMERIC_ZERO",
+      "family": "value",
+      "meaning": "Exact numeric additive zero in a declared numeric domain.",
+      "promotion": "NEVER_AS_ABSENCE"
+    },
+    {
+      "id": "BOOLEAN_FALSE",
+      "family": "value",
+      "meaning": "Explicit boolean false.",
+      "promotion": "NEVER_AS_ABSENCE"
+    },
+    {
+      "id": "EMPTY_STRING",
+      "family": "value",
+      "meaning": "Explicit string of length zero.",
+      "promotion": "NEVER_AS_MISSING"
+    },
+    {
+      "id": "EMPTY_SET",
+      "family": "mathematical",
+      "meaning": "Valid mathematical empty set with cardinality zero.",
+      "promotion": "NEVER_AS_NULL"
+    },
+    {
+      "id": "NULL_LITERAL",
+      "family": "serialization",
+      "meaning": "Explicit null literal supplied by the source/schema.",
+      "promotion": "PRESERVE_EXPLICITNESS"
+    },
+    {
+      "id": "MISSING_FIELD",
+      "family": "structure",
+      "meaning": "Expected structural field is absent from the observed object.",
+      "promotion": "REQUIRES_SOURCE_OR_SCHEMA_READBACK"
+    },
+    {
+      "id": "NULL_POINTER_SENTINEL",
+      "family": "runtime",
+      "meaning": "Pointer/address sentinel interpreted as null only under an explicit ABI/runtime contract.",
+      "promotion": "REQUIRES_RUNTIME_ABI"
+    },
+    {
+      "id": "UNINITIALIZED",
+      "family": "runtime",
+      "meaning": "Storage exists but initialization is not established.",
+      "promotion": "FAIL_CLOSED"
+    },
+    {
+      "id": "UNDEFINED_SYMBOL",
+      "family": "formal",
+      "meaning": "Symbol/operator/domain lacks a definition sufficient for evaluation.",
+      "promotion": "REQUIRES_DEFINITION"
+    },
+    {
+      "id": "MISSING_OBSERVATION",
+      "family": "evidence",
+      "meaning": "Observable is defined but no observation is available in scope.",
+      "promotion": "REQUIRES_MEASUREMENT"
+    },
+    {
+      "id": "NOT_APPLICABLE",
+      "family": "schema",
+      "meaning": "Slot is intentionally outside the domain of this object.",
+      "promotion": "PRESERVE_REASON"
+    },
+    {
+      "id": "NO_REAL_SOLUTION",
+      "family": "mathematical",
+      "meaning": "Under the declared equation/domain there is no real solution.",
+      "promotion": "REQUIRES_FORMAL_WITNESS"
+    },
+    {
+      "id": "INDETERMINATE",
+      "family": "formal",
+      "meaning": "Expression is not determined under current definitions/limits.",
+      "promotion": "REQUIRES_DOMAIN_OR_LIMIT_RESOLUTION"
+    },
+    {
+      "id": "IEEE_NAN",
+      "family": "runtime",
+      "meaning": "Observed IEEE floating-point NaN payload/classification.",
+      "promotion": "REQUIRES_RUNTIME_REPRESENTATION"
+    },
+    {
+      "id": "APPROX_ZERO",
+      "family": "numeric",
+      "meaning": "Magnitude is within an explicitly declared tolerance around zero.",
+      "promotion": "REQUIRES_TOLERANCE"
+    },
+    {
+      "id": "TOKEN_VAZIO",
+      "family": "epistemic",
+      "meaning": "A required semantic/evidential slot is intentionally unresolved; reason and next gate must remain explicit.",
+      "promotion": "NEVER_BY_INFERENCE"
+    },
+    {
+      "id": "CONTRADICTION",
+      "family": "epistemic",
+      "meaning": "Two or more source-bound observations cannot be jointly accepted under the current contract.",
+      "promotion": "QUARANTINE_UNTIL_RESOLVED"
+    },
+    {
+      "id": "TEMPORAL_UNBOUND",
+      "family": "temporal",
+      "meaning": "Value or relation lacks a sufficient time binding.",
+      "promotion": "REQUIRES_TEMPORAL_SOURCE"
+    },
+    {
+      "id": "REDACTED",
+      "family": "governance",
+      "meaning": "Value is intentionally withheld under a privacy/security authority.",
+      "promotion": "DO_NOT_RECONSTRUCT_FROM_GUESSES"
+    }
+  ],
+  "symbolic_aliases": [
+    {
+      "alias": "TOKENS_NULL",
+      "maps_to": "NULL_LITERAL",
+      "guard": "only when source explicitly uses null semantics"
+    },
+    {
+      "alias": "token=''",
+      "maps_to": "EMPTY_STRING",
+      "guard": "only for an observed literal empty string"
+    },
+    {
+      "alias": "token=\"\"",
+      "maps_to": "EMPTY_STRING",
+      "guard": "only for an observed literal empty string"
+    },
+    {
+      "alias": "tokens⁰",
+      "maps_to": "TOKEN_VAZIO",
+      "guard": "symbolic address only; superscript zero MUST NOT coerce to NUMERIC_ZERO"
+    },
+    {
+      "alias": "tokens√-∅",
+      "maps_to": "UNDEFINED_SYMBOL",
+      "guard": "symbolic address only; no arithmetic evaluation is implied"
+    },
+    {
+      "alias": "tokens[√(≈-∞)]",
+      "maps_to": "UNDEFINED_SYMBOL",
+      "guard": "symbolic address only; no real/complex value is implied without a declared domain"
+    },
+    {
+      "alias": "∅",
+      "maps_to": "EMPTY_SET",
+      "guard": "only inside an explicit set-theoretic context"
+    }
+  ],
+  "invalid_collapses": [
+    [
+      "TOKEN_VAZIO",
+      "NUMERIC_ZERO"
+    ],
+    [
+      "TOKEN_VAZIO",
+      "BOOLEAN_FALSE"
+    ],
+    [
+      "TOKEN_VAZIO",
+      "EMPTY_STRING"
+    ],
+    [
+      "TOKEN_VAZIO",
+      "NULL_LITERAL"
+    ],
+    [
+      "TOKEN_VAZIO",
+      "EMPTY_SET"
+    ],
+    [
+      "MISSING_FIELD",
+      "NULL_LITERAL"
+    ],
+    [
+      "NULL_POINTER_SENTINEL",
+      "NULL_LITERAL"
+    ],
+    [
+      "NO_REAL_SOLUTION",
+      "MISSING_OBSERVATION"
+    ],
+    [
+      "TEMPORAL_UNBOUND",
+      "TOKEN_VAZIO"
+    ]
+  ]
+}
