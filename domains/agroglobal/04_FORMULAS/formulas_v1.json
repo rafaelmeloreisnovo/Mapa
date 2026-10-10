@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "dataset_state": "SCHEMA_ONLY_NO_MARKET_SNAPSHOTS",
+  "precision_policy": "retain source precision; round only for display",
+  "expressions": [
+    {
+      "id": "YIELD_KG_HA",
+      "expr": "production_tonnes*1000/harvested_area_ha",
+      "unit": "kg/ha",
+      "preconditions": [
+        "harvested_area_ha>0",
+        "same crop/season/location"
+      ]
+    },
+    {
+      "id": "YIELD_SC60_HA",
+      "expr": "yield_kg_ha/60",
+      "unit": "60kg_sacks/ha",
+      "preconditions": [
+        "sack_size_kg=60"
+      ]
+    },
+    {
+      "id": "USD_PER_SC60_FUTURE",
+      "expr": "(futures_us_cents_per_bushel/100)*(60/bushel_weight_kg)",
+      "unit": "USD/60kg_sack",
+      "preconditions": [
+        "commodity-specific legal bushel weight known",
+        "contract month retained"
+      ]
+    },
+    {
+      "id": "BRL_PER_SC60_FUTURE",
+      "expr": "usd_per_sc60_future*brl_per_usd",
+      "unit": "BRL/60kg_sack",
+      "preconditions": [
+        "same FX reference date declared",
+        "futures not cash prices"
+      ]
+    },
+    {
+      "id": "EXPORT_PARITY",
+      "expr": "(usd_future_per_sc60+usd_basis_per_sc60)*brl_per_usd-costs_brl_per_sc60",
+      "unit": "BRL/60kg_sack",
+      "preconditions": [
+        "identical grade/location/incoterm",
+        "all costs geographically scoped"
+      ]
+    },
+    {
+      "id": "FX_PRICE_INTERACTION",
+      "expr": "(p_usd_t1*fx_t1)/(p_usd_t0*fx_t0)-1",
+      "unit": "dimensionless_change",
+      "preconditions": [
+        "same commodity contract/grade basis"
+      ]
+    },
+    {
+      "id": "PRODUCTION_LOSS_PCT",
+      "expr": "100*(expected_yield-observed_yield)/expected_yield",
+      "unit": "percent",
+      "preconditions": [
+        "expected_yield>0",
+        "forecast vintage retained"
+      ]
+    },
+    {
+      "id": "LAND_EQUIVALENT_RATIO",
+      "expr": "yield_A_intercrop/yield_A_monocrop+yield_B_intercrop/yield_B_monocrop",
+      "unit": "dimensionless",
+      "preconditions": [
+        "monocrop denominators positive",
+        "same time period/comparable plot conditions"
+      ],
+      "interpretation": "LER>1 indicates relative land-equivalence advantage, not net-profit proof"
+    },
+    {
+      "id": "ECONOMIC_MARGIN",
+      "expr": "quantity_sacks_per_ha*price_brl_per_sack-total_cost_brl_per_ha",
+      "unit": "BRL/ha",
+      "preconditions": [
+        "same season and unit",
+        "cost scope stated"
+      ],
+      "interpretation": "simplified margin, not audited net profit"
+    }
+  ],
+  "conversion_constants": [
+    {
+      "commodity": "soybean",
+      "bushel_kg": 27.2155422,
+      "origin": "60 lb/bushel weight equivalence; 1 lb = 0.45359237 kg exact"
+    },
+    {
+      "commodity": "wheat",
+      "bushel_kg": 27.2155422,
+      "origin": "60 lb/bushel"
+    },
+    {
+      "commodity": "corn",
+      "bushel_kg": 25.40117272,
+      "origin": "56 lb/bushel"
+    }
+  ],
+  "uncertainty": "Uncertainties of yields, quotes, FX, logistics and certification are not assumed zero."
+}
