@@ -1,0 +1,81 @@
+{
+  "id": "RAFAELIA_PHASE_INTEGRATION_ATLAS_GATES_20261010",
+  "version": 1,
+  "status": "DOCUMENTED_ROUTE",
+  "claim_allowed": false,
+  "created_at": "2026-10-10T20:29:59-03:00",
+  "scope": "Materializar rota federada entre GitHub Mapa, alphaXiv e Google Drive para Atlas/Leaders/Gates/Start Here/Hotstate, sem promover evidencia alem do observado.",
+  "source_of_truth": {
+    "github_mapa_repository": "rafaelmeloreisnovo/Mapa",
+    "github_mapa_base_ref": "main",
+    "github_mapa_base_head": "b9025e6e665220bba379f14b8cabc6dbfb31895d",
+    "github_route_branch": "route/rafaelia-phase-integration-atlas-gates-20261010",
+    "github_route_file": "data/routes/RAFAELIA_PHASE_INTEGRATION_ATLAS_GATES_20261010.json",
+    "drive_ledger_document_id": "1NEU7lg7iUZf1u7lX-SEKuc-knSDGlF5gOx7qzXcJ1yc",
+    "drive_hotstate_document_id": "1d0J5SkF2S2emBq6jLuTkhYVaSOQiWazJWyRCTMJ-iRI",
+    "alphaxiv_parent_folder_id": "01a0f894-6ac4-76b9-91e2-14eb4119b7f8",
+    "alphaxiv_phase_folder_id": "01a12827-da49-723a-bc53-f5560366b3a4"
+  },
+  "phase_contract": {
+    "L0_intent": "Reduzir incerteza por rotas tipadas, recibos e gates explicitos.",
+    "L1_registry": "GitHub Mapa recebe o artefato navegavel da rota em branch isolada.",
+    "L2_longitudinal_memory": "Google Drive Ledger e Hotstate recebem sucessores append-only com leitura de retorno.",
+    "L3_research_backbone": "alphaXiv recebe pasta de intake bibliografico/proveniencia, sem equivaler a prova.",
+    "handoff_rule": "Um filho semantico herda referencias de proveniencia, mas nao herda automaticamente a verdade das conclusoes do pai.",
+    "rollback_rule": "Enquanto nao houver merge, fechar a rota por abandono/reversao de branch. Se houver merge autorizado, reverter por PR sucessora; nunca apagar historico ou evidencia."
+  },
+  "federated_routes": [
+    {
+      "from": "START_HERE",
+      "to": "CURRENT_STATE_HOTSTATE",
+      "relation": "BOOT_TO_HOTSTATE",
+      "gate": "DOCUMENTED_READBACK"
+    },
+    {
+      "from": "CURRENT_STATE_HOTSTATE",
+      "to": "GITHUB_MAPA_ROUTE",
+      "relation": "HOTSTATE_TO_ROUTE_ARTIFACT",
+      "gate": "SOURCE_READBACK"
+    },
+    {
+      "from": "GITHUB_MAPA_ROUTE",
+      "to": "ALPHAXIV_PHASE_FOLDER",
+      "relation": "ROUTE_TO_RESEARCH_INTAKE",
+      "gate": "BIBLIOGRAPHY_NOT_EVIDENCE"
+    },
+    {
+      "from": "GITHUB_MAPA_ROUTE",
+      "to": "DRIVE_LEDGER",
+      "relation": "ROUTE_TO_RECEIPT",
+      "gate": "APPEND_ONLY_READBACK"
+    },
+    {
+      "from": "DRIVE_LEDGER",
+      "to": "F_NEXT",
+      "relation": "RECEIPT_TO_NEXT_PROBE",
+      "gate": "TOKEN_VAZIO_TYPED"
+    }
+  ],
+  "gates": {
+    "G0_scope": "PASS_SCOPED",
+    "G1_github_source_readback": "PENDING_AFTER_CREATE",
+    "G2_drive_successor_readback": "PENDING_AFTER_APPEND",
+    "G3_alphaxiv_folder": "CREATED_EMPTY_INTAKE",
+    "G4_ci_execution": "NOT_RUN",
+    "G5_independent_review": "TOKEN_VAZIO",
+    "G6_physical_or_scientific_claim": "NOT_IN_SCOPE",
+    "G7_branch_protection": "UNVERIFIED"
+  },
+  "known_gaps": [
+    "Criacao da rota nao implica CI executado.",
+    "Pasta alphaXiv e bibliografia nao provam claims sem leitura, citacao e vinculo claim-a-claim.",
+    "Registros no Drive sao recibos longitudinais, nao validacao de runtime, dispositivo, assinatura ou ciencia.",
+    "Branch protection e revisao independente seguem TOKEN_VAZIO/UNVERIFIED ate leitura especifica de enforcement."
+  ],
+  "F_next": [
+    "Ler de volta este arquivo na branch criada e atualizar G1.",
+    "Registrar sucessores no Ledger e Hotstate com commit, branch, arquivo e pasta alphaXiv.",
+    "Executar validadores de grafo/rota se o Mapa expuser workflow adequado.",
+    "Vincular papers alphaXiv a claims somente depois de leitura e evidenciacao especifica."
+  ]
+}
