@@ -61,26 +61,34 @@ jobs:
           PY
 
       - name: Contract tests
-        run: python -m unittest -v tests.test_branch_topology
+        run: python -m unittest -v tests.test_branch_topology tests.test_branch_topology_workflow_shell_boundary
 
       - name: Validate manifest and event
+        env:
+          DEFAULT_BRANCH: ${{ steps.event.outputs.default_branch }}
+          BASE_REF: ${{ steps.event.outputs.base_ref }}
+          HEAD_REF: ${{ steps.event.outputs.head_ref }}
         run: |
           python scripts/validate_branch_topology.py \
-            --default-branch "${{ steps.event.outputs.default_branch }}" \
-            --base-ref "${{ steps.event.outputs.base_ref }}" \
-            --head-ref "${{ steps.event.outputs.head_ref }}" \
+            --default-branch "$DEFAULT_BRANCH" \
+            --base-ref "$BASE_REF" \
+            --head-ref "$HEAD_REF" \
             --pr-body-file artifacts/branch-topology/pr_body.txt
 
       - name: Emit audit summary
         if: always()
         shell: bash
+        env:
+          DEFAULT_BRANCH: ${{ steps.event.outputs.default_branch }}
+          BASE_REF: ${{ steps.event.outputs.base_ref }}
+          HEAD_REF: ${{ steps.event.outputs.head_ref }}
         run: |
           {
             echo "## Branch Topology Gate"
             echo
-            echo "- Default branch: \`${{ steps.event.outputs.default_branch }}\`"
-            echo "- Base: \`${{ steps.event.outputs.base_ref }}\`"
-            echo "- Head: \`${{ steps.event.outputs.head_ref }}\`"
+            echo "- Default branch: \`$DEFAULT_BRANCH\`"
+            echo "- Base: \`$BASE_REF\`"
+            echo "- Head: \`$HEAD_REF\`"
             echo "- Automatic merge: disabled by contract"
             echo "- Main rename: forbidden by contract"
           } >> "$GITHUB_STEP_SUMMARY"
