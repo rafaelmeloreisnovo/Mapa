@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rafaelia:atlas:project-session-knowledge-artifact-evidence:v1",
+  "title": "RAFAELIA Federated Project→Session→Knowledge→Artifact→Evidence Index V1",
+  "description": "Referential record only; no corpus storage; SOURCE≠ARTIFACT≠EXECUTION≠EVIDENCE≠CLAIM. TOKEN_VAZIO is a typed unresolved fact, not zero.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "node_id",
+    "projeto_territorio",
+    "project_ui_id",
+    "sessao_documento_ref",
+    "chatgpt_session_id",
+    "conhecimento_atomo",
+    "artefato_ref",
+    "execucao_ref",
+    "evidencia_ref_e_escopo",
+    "estado_epistemico",
+    "tipo_relacao",
+    "lacuna_tipificada",
+    "controle_de_risco",
+    "proxima_sondagem",
+    "source_min"
+  ],
+  "properties": {
+    "node_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projeto_territorio": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_ui_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sessao_documento_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "chatgpt_session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conhecimento_atomo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artefato_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execucao_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidencia_ref_e_escopo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "estado_epistemico": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tipo_relacao": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lacuna_tipificada": {
+      "type": "string",
+      "minLength": 1
+    },
+    "controle_de_risco": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proxima_sondagem": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_min": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "allOf": [
+    {
+      "properties": {
+        "node_id": {
+          "pattern": "^PSE-[0-9]{3,}$"
+        },
+        "estado_epistemico": {
+          "pattern": "claim_allowed=false"
+        }
+      }
+    }
+  ],
+  "x-canonical-sheet": {
+    "url": "https://docs.google.com/spreadsheets/d/1ZQrlxrACB67cdQ7I24FE4z44nFWf8tDxdxo3Xm5YucQ/edit",
+    "tab": "PROJECT_SESSION_INDEX_V1",
+    "range": "A1:O11",
+    "rows_first_cut": 10,
+    "custodian": "Google Drive oficial"
+  },
+  "x-precedence": [
+    "producer_repo_for_code",
+    "original_session_document_for_session_claims",
+    "Drive_for_index",
+    "CI_execution_receipt_for_test_state",
+    "physical_witness_for_runtime"
+  ],
+  "x-boundaries": [
+    "INDEX_IS_NOT_EXECUTION",
+    "DOC_IS_NOT_PHYSICAL_EVIDENCE",
+    "CANDIDATE_ANALOGY_IS_NOT_CAUSATION",
+    "NO_AUTOMATIC_PROJECT_MEMORY_DISCOVERY",
+    "MISSING_ID_IS_TYPED_TOKEN_VAZIO",
+    "CORRECTION_IS_APPEND_ONLY_SUCCESSOR",
+    "NO_CORPUS_COPY"
+  ],
+  "x-index-policy": {
+    "mutation": "append_only_successor",
+    "dedup_key": "source_locator + record_kind + original_object_id; do not dedup by similarity alone",
+    "read_depth": 1,
+    "root_budget": 3,
+    "promotion_gate": [
+      "SOURCE",
+      "AUTHORITY",
+      "EXECUTION_TARGET",
+      "EVIDENCE_RULE",
+      "RECEIPT_READBACK"
+    ]
+  },
+  "x-epistemic-state": "DOCUMENTED_INDEX / claim_allowed=false / physical_and_scientific_tests_unasserted"
+}
