@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_kind",
+    "actor",
+    "observed_at_utc",
+    "provider_time_source",
+    "source_ref",
+    "parent_event_id",
+    "parent_event_sha256",
+    "action",
+    "output_ref",
+    "sha256_bytes",
+    "git_commit_sha",
+    "evidence_status",
+    "rollback",
+    "claim_allowed"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "event_kind": {
+      "type": "string"
+    },
+    "actor": {
+      "type": "string"
+    },
+    "observed_at_utc": {
+      "type": "string"
+    },
+    "provider_time_source": {
+      "type": "string"
+    },
+    "source_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_event_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_event_sha256": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "action": {
+      "type": "string"
+    },
+    "output_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sha256_bytes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "git_blob_sha1": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "git_commit_sha": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "drive_file_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "alphaxiv_folder_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_status": {
+      "enum": [
+        "SOURCE_OBSERVED",
+        "ARTIFACT_CREATED",
+        "READBACK_PASS",
+        "NOT_TESTED",
+        "BLOCKED"
+      ]
+    },
+    "rollback": {
+      "type": "string"
+    },
+    "claim_allowed": {
+      "type": "boolean"
+    },
+    "gap": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
