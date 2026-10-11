@@ -98,6 +98,7 @@ O triângulo `(3,6√2,9)` é válido. O que gira são as coordenadas vetoriais;
 `3,6,9` pode ser mantido como **namespace simbólico/projeto** ou como classes aritméticas declaradas.
 
 Não promover automaticamente:
+
 - múltiplo de 3 -> simetria geométrica 3-fold;
 - múltiplo de 9 -> propriedade física/frequencial;
 - autoria/proveniência Tesla sem fonte primária.
@@ -157,6 +158,7 @@ Logo uma malha triangular de toro não converge topologicamente a uma esfera ape
 ### 2.11 Matriz 10x10 em toro discreto
 
 Wraparound define a topologia periódica. O número de vizinhos depende da regra de adjacência:
+
 - von Neumann -> 4;
 - Moore -> 8.
 
