@@ -142,5 +142,63 @@ class ObserverPathTests(unittest.TestCase):
 
 
 
+    # Metafalsification: require the validator to reject unauthorized schema growth.
+    # Each negative test targets a different trust boundary without private data.
+    def test_no_undeclared_global_proof(self):
+        d = copy.deepcopy(DATA)
+        d["independent_review"] = "APPROVED"
+        self.assertIn("UNDECLARED_ROOT_FIELD", validate(d))
+
+    def test_no_undeclared_event_proof(self):
+        d = mutated(0, "physical_device_pass", True)
+        self.assertIn("event[1]:UNDECLARED_EVENT_FIELD", validate(d))
+
+    def test_no_undeclared_edge_weight_as_causality(self):
+        d = copy.deepcopy(DATA)
+        d["events"][4]["links"].append(
+            {"to": "OBS-SYN-001", "type": "CAUSE_CANDIDATE", "proof": "PROVEN"})
+        self.assertIn("event[5]:UNDECLARED_EDGE_FIELD", validate(d))
+
+    def test_no_synthetic_gate_upgrade(self):
+        for field, value in (
+            ("independent_review", "APPROVED"),
+            ("provider_enforcement", "ENFORCED"),
+            ("codescan", "PASS"),
+            ("unauthorized_extra", "PASS"),
+        ):
+            with self.subTest(field=field):
+                d = copy.deepcopy(DATA)
+                d["gates"][field] = value
+                self.assertIn("SYNTHETIC_GATE_AUTHORITY_DRIFT", validate(d))
+
+    def test_no_empty_observer_or_forged_authority(self):
+        for forged in ("SYNTH-", "SYNTH-OBSERVER-A"):
+            d = copy.deepcopy(DATA)
+            d["events"][0]["observer"]["id"] = forged
+            if forged == "SYNTH-":
+                self.assertIn("event[1]:SYNTHETIC_OBSERVER_AUTHORITY_INVALID", validate(d))
+            else:
+                d["events"][0]["observer"]["approval"] = "APPROVED"
+                self.assertIn("event[1]:SYNTHETIC_OBSERVER_AUTHORITY_INVALID", validate(d))
+
+    def test_no_empty_fixture_locator_or_shadowed_revision(self):
+        d = copy.deepcopy(DATA)
+        d["events"][0]["source"]["locator"] = "fixture://"
+        self.assertIn("event[1]:REAL_PROVENANCE_FABRICATION_OR_MISSING_FIXTURE", validate(d))
+        d = copy.deepcopy(DATA)
+        d["events"][0]["source"]["sha256"] = "0" * 64
+        self.assertIn("event[1]:REAL_PROVENANCE_FABRICATION_OR_MISSING_FIXTURE", validate(d))
+
+    def test_fail_closed_is_monotone_under_unauthorized_claim_mutations(self):
+        # Deterministic mutation suite: no mutation may silently turn a synthetic
+        # observation into an approved source, device receipt, or independent review.
+        for field in ("independent_review", "execution_receipt", "scientific_claim",
+                      "validated_by", "provider_settings", "deployment"):
+            with self.subTest(extra_field=field):
+                d = copy.deepcopy(DATA)
+                d["events"][0][field] = {"claim_allowed": True}
+                self.assertTrue(validate(d), "claim-laundering mutation must fail")
+
+
 if __name__ == "__main__":
     unittest.main()
