@@ -1,0 +1,29 @@
+name: RAFAELIA Typed Void Lexical Falsifiers
+
+"on":
+  pull_request:
+    paths:
+      - 'data/semantics/typed-void-lexical-fixtures.v1.json'
+      - 'tools/validate_typed_void_lexemes.py'
+      - 'tests/test_typed_void_lexemes.py'
+      - '.github/workflows/typed-void-lexical-fixtures.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lexical-negative-fixtures:
+    name: typed-void-lexical-kat
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout pinned action without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Falsify semantic collapse and witness explicit lexemes
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v tests.test_typed_void_lexemes
+          python3 tools/validate_typed_void_lexemes.py
