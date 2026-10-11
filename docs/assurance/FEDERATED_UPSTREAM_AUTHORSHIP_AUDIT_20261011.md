@@ -9,6 +9,7 @@ o índice/rota federada; RLL governa a formulação e seus falsificadores cient�
 apenas por nome de arquivo, licença-raiz, autodeclaração, DOI ou hash Git.
 
 ## Prioridade de leitura e classificação
+
 1. `UPSTREAM_DERIVED` / `UPSTREAM_MODIFIED`: autoria original e licença
    do autor oficial; apenas o diferencial comprovado pode ser contribuição local.
 2. `PROJECT_LOCAL_TRACEABLE_AI_ASSISTED`: primeiro aparecimento verificável
@@ -55,6 +56,7 @@ a xoureldeen e aos contribuidores.
   assets, notices e proveniência sem fechar; esta auditoria não revoga o HOLD.
 
 ## Llama, GAIA, Rafaelia_Private, Termux, Packet
+
 - `llamaRafaelia`: ggml-org/llama.cpp é upstream MIT; root LICENSE
   blob `acb96ce78e0486e9dc7602cdcdd2f491c34f335a`.
   `rafaelia-baremetal/LICENSE` blob `74efcc46f821d64496b0141749be42bd0d773b51`
@@ -99,6 +101,7 @@ a xoureldeen e aos contribuidores.
   fonte da Vectras GPLv2-only para este produto requer autoridade específica.
 
 ## Critério de transposição
+
 `source origin + exact blob + authorship span + applicable per-file rights +
 dependency closure + independent review + tests at exact head +
 security/privacy scope -> governed integration decision`.
@@ -109,6 +112,7 @@ Nenhuma passagem é promovida por licença MIT presumida, pela tag
 bibliotecas e símbolos indefinidos **deve ser testada**, não inferida do README.
 
 ## R3
+
 F_ok = catálogo federado tipado, evidências e falsificadores negativos; a
 diferença Vectras original vs fork e os riscos MIT/GPL foram registrados.
 F_gap = prova global de autoria/novidade, merge-base Vectras, revisão jurídica,
