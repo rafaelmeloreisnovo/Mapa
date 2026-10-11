@@ -1,9 +1,9 @@
 {
   "schema": "rafaelia.token-vazio-priority-queue.v8",
-  "generated_at": "2026-10-07T06:59:00-03:00",
-  "evidence_updated_at": "2026-10-07T06:59:00-03:00",
+  "generated_at": "2026-10-11T14:02:21.345Z",
+  "evidence_updated_at": "2026-10-11T14:02:21.345Z",
   "source_repository": "rafaelmeloreisnovo/Mapa",
-  "source_main_sha": "abbf6ae30522612c7c7de0f429b9d26339869165",
+  "source_main_sha": "db7db652fa6e0c79f94027cf4dbffcb248a886d7",
   "supersedes_for_current_routing": "data/control-plane/TOKEN_VAZIO_PRIORITY_QUEUE.v7.json",
   "history_policy": "APPEND_ONLY_PRESERVE_PREDECESSOR",
   "ordering_rule": "dependency_then_risk_then_information_gain_then_latest_evidence",
@@ -13,18 +13,25 @@
   "promotion_allowed": false,
   "unresolved_untyped_gaps": 0,
   "provider_snapshot": {
-    "observed_at": "2026-10-07T06:59:00-03:00",
-    "main_sha": "abbf6ae30522612c7c7de0f429b9d26339869165",
+    "observed_at": "2026-10-11T14:02:21.345Z",
+    "main_sha": "db7db652fa6e0c79f94027cf4dbffcb248a886d7",
     "branch_protected": false,
     "required_status_checks_enforcement": "off",
-    "repository_rulesets": [],
-    "active_default_branch_ruleset_state": "RULESET_FEATURE_UNAVAILABLE_PRIVATE_REPO_PROVIDER_403",
-    "authority": "GitHub provider live reads",
+    "repository_rulesets": [
+      {
+        "id": 21909304,
+        "name": "1",
+        "enforcement": "disabled",
+        "target": "branch"
+      }
+    ],
+    "active_default_branch_ruleset_state": "NO_ACTIVE_RULESET_OBSERVED",
+    "authority": "GitHub provider live read; no administrative mutation",
     "freshness_max_hours": 24,
     "evidence_refs": [
-      "GitHub GET /repos/rafaelmeloreisnovo/Mapa/branches/main at 2026-10-07T06:59:00-03:00: sha=abbf6ae30522612c7c7de0f429b9d26339869165; protected=false; required_status_checks.enforcement_level=off",
-      "GitHub GET /repos/rafaelmeloreisnovo/Mapa/rulesets at 2026-10-07T06:59:00-03:00: HTTP 403; provider message='Upgrade to GitHub Pro or make this repository public to enable this feature.'",
-      "GitHub GET /repos/rafaelmeloreisnovo/Mapa/branches/main/protection at 2026-10-07T06:59:00-03:00: HTTP 403 Resource not accessible by integration; detailed protection object remains TOKEN_VAZIO_CURRENT_CONNECTOR"
+      "GET /repos/rafaelmeloreisnovo/Mapa/branches/main readback at 2026-10-11T14:02:21.345Z: sha=db7db652fa6e0c79f94027cf4dbffcb248a886d7; protected=false; required_status_checks.enforcement_level=off",
+      "GET /repos/rafaelmeloreisnovo/Mapa/rulesets readback at 2026-10-11T14:02:21.345Z: id=21909304,enforcement=disabled",
+      "PR#743 exact-head CI run38145349953: Temporal gap routing failed PROVIDER_SNAPSHOT_STALE:100.01h>24h"
     ]
   },
   "active_items": [
@@ -48,9 +55,11 @@
         "Fresh provider read 2026-09-29T10:30:00+00:00: main=87a8441258a5265187bb947dc9ab66a190d043bb; protected=false; required_status_checks=off; ruleset 21909304 enforcement=disabled",
         "Fresh provider read 2026-10-07T06:59:00-03:00: main=abbf6ae30522612c7c7de0f429b9d26339869165; protected=false; required_status_checks=off",
         "Rulesets read 2026-10-07T06:59:00-03:00: HTTP403 feature unavailable for current private-repository/provider plan surface",
-        "Detailed branch protection read 2026-10-07T06:59:00-03:00: HTTP403 Resource not accessible by integration"
+        "Detailed branch protection read 2026-10-07T06:59:00-03:00: HTTP403 Resource not accessible by integration",
+        "GET /repos/rafaelmeloreisnovo/Mapa/branches/main readback at 2026-10-11T14:02:21.345Z: sha=db7db652fa6e0c79f94027cf4dbffcb248a886d7; protected=false; required_status_checks.enforcement_level=off",
+        "GET /repos/rafaelmeloreisnovo/Mapa/rulesets readback at 2026-10-11T14:02:21.345Z: id=21909304,enforcement=disabled"
       ],
-      "uncertainty": "Current live provider read directly observes main as unprotected with required status-check enforcement off. Rulesets are unavailable on the current private-repository provider surface; detailed branch-protection policy fields remain unreadable through this integration.",
+      "uncertainty": "Live provider API: main protected=false, checks enforcement=off; ruleset 21909304 exists but is disabled. Independent review, applicable rules and rejection of zero-approval merges not demonstrated.",
       "falsifier": "A fresh provider read shows effective required status/review enforcement governing main.",
       "closure_gate": [
         "provider protection or effective ruleset observed",
@@ -59,7 +68,7 @@
         "admin bypass constrained or explicitly governed",
         "zero-approval PR rejection evidenced without changing main SHA"
       ],
-      "next_action": "Use an authorized GitHub provider-administration surface to establish effective main enforcement if the account/plan supports it; then read back protected=true plus required checks/review semantics and execute a zero-approval rejection proof. If provider capability is unavailable, keep HOLD/TOKEN_VAZIO rather than weakening source gates."
+      "next_action": "Configure effective GitHub main protection through explicitly authorized administrative interface and read back required checks plus independent review. Prove zero-approval PR cannot merge. Keep HOLD meanwhile."
     },
     {
       "priority": "P0",
@@ -318,8 +327,37 @@
     "freshness is a routing gate, not proof of enforcement"
   ],
   "r3": {
-    "F_ok": "Fresh provider read 2026-10-07T06:59:00-03:00 binds main@abbf6ae30522612c7c7de0f429b9d26339869165; protected=false and required status checks enforcement=off are directly observed; rulesets capability failure is explicitly typed instead of inferred.",
-    "F_gap": "Effective server-side main enforcement is absent in the observable branch state; rulesets endpoint is unavailable for the current private-repository provider surface; detailed branch-protection read is blocked to this integration; independent approval remains external.",
-    "F_next": "Keep fail-closed. Establish provider-side enforcement through an authorized administration surface/capability, then read back and run the negative merge-rejection proof before promotion."
-  }
+    "F_ok": "Provider read 2026-10-11T14:02:21.345Z main@db7db652fa6e0c79f94027cf4dbffcb248a886d7: protected=false, required_status_checks enforcement=off, ruleset 21909304 disabled; historical snapshot preserved.",
+    "F_gap": "Provider server-side enforcement still absent; independent review and CodeScan credentials missing. Snapshot timeliness does not prove protected main.",
+    "F_next": "Retest exact-head temporal freshness and preserve separate provider/approval/credential gates for authorized closure."
+  },
+  "provider_snapshot_history": [
+    {
+      "source_file_blob_sha": "e2812d72d59100add09103bfb261dd5d62a32004",
+      "source_main_sha": "abbf6ae30522612c7c7de0f429b9d26339869165",
+      "evidence_updated_at": "2026-10-07T06:59:00-03:00",
+      "provider_snapshot": {
+        "observed_at": "2026-10-07T06:59:00-03:00",
+        "main_sha": "abbf6ae30522612c7c7de0f429b9d26339869165",
+        "branch_protected": false,
+        "required_status_checks_enforcement": "off",
+        "repository_rulesets": [],
+        "active_default_branch_ruleset_state": "RULESET_FEATURE_UNAVAILABLE_PRIVATE_REPO_PROVIDER_403",
+        "authority": "GitHub provider live reads",
+        "freshness_max_hours": 24,
+        "evidence_refs": [
+          "GitHub GET /repos/rafaelmeloreisnovo/Mapa/branches/main at 2026-10-07T06:59:00-03:00: sha=abbf6ae30522612c7c7de0f429b9d26339869165; protected=false; required_status_checks.enforcement_level=off",
+          "GitHub GET /repos/rafaelmeloreisnovo/Mapa/rulesets at 2026-10-07T06:59:00-03:00: HTTP 403; provider message='Upgrade to GitHub Pro or make this repository public to enable this feature.'",
+          "GitHub GET /repos/rafaelmeloreisnovo/Mapa/branches/main/protection at 2026-10-07T06:59:00-03:00: HTTP 403 Resource not accessible by integration; detailed protection object remains TOKEN_VAZIO_CURRENT_CONNECTOR"
+        ]
+      }
+    }
+  ],
+  "r3_history": [
+    {
+      "F_ok": "Fresh provider read 2026-10-07T06:59:00-03:00 binds main@abbf6ae30522612c7c7de0f429b9d26339869165; protected=false and required status checks enforcement=off are directly observed; rulesets capability failure is explicitly typed instead of inferred.",
+      "F_gap": "Effective server-side main enforcement is absent in the observable branch state; rulesets endpoint is unavailable for the current private-repository provider surface; detailed branch-protection read is blocked to this integration; independent approval remains external.",
+      "F_next": "Keep fail-closed. Establish provider-side enforcement through an authorized administration surface/capability, then read back and run the negative merge-rejection proof before promotion."
+    }
+  ]
 }
