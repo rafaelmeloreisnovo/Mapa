@@ -7,7 +7,7 @@ this route and its bounded federation record.
 - Route: `data/control-plane/RECONSTRUCTION_V3_RLL_ROUTE.v1.json`
 - Producer: `instituto-Rafael/relativity-living-light`
 - Pinned producer commit: `7f9923ec8f82af2e690e01ffebf052761114d4fa`
-- Producer review: https://github.com/instituto-Rafael/relativity-living-light/pull/1022
+- Producer review: [RLL PR #1022](https://github.com/instituto-Rafael/relativity-living-light/pull/1022)
 - Kernel: `native/reconstruction_v3/rv3.c` and `rv3.h`
 - Hosted adapters: `tools/reconstruction_v3/scan.c` and `ingest.py`
 - Producer receipt: `receipts/reconstruction_v3/20260930-foundation.json`
