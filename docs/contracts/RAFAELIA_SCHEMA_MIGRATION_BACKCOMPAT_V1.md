@@ -8,6 +8,7 @@ Every migration edge is a versioned object:
 `FROM_SCHEMA → TRANSFORM → TO_SCHEMA → INVARIANTS → POSITIVE_KAT → NEGATIVE_KAT → RECEIPT`.
 
 Required fields per edge:
+
 - source schema/version/hash;
 - target schema/version/hash;
 - deterministic transform identity/hash;
@@ -18,6 +19,7 @@ Required fields per edge:
 - failure behavior.
 
 Rules:
+
 1. Same field name does not imply same semantics.
 2. Lossy migration must declare the lost information and cannot advertise round-trip identity.
 3. Unknown future fields fail closed unless the schema explicitly declares safe ignore semantics.
