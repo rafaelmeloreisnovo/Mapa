@@ -38,6 +38,13 @@ def validate(data: dict[str, Any]) -> list[str]:
     if not isinstance(data, dict):
         return ["INVALID_ROOT_OBJECT"]
     errors: list[str] = []
+    # Schema closure protects against claim laundering through ignored keys.
+    # Do not mistake a synthetic fixture for a real-world evidence envelope.
+    root_keys = {"schema", "state", "claim_allowed", "authority", "source_contracts",
+                 "approved_conduct_areas", "approved_uncertainty_markers", "scope",
+                 "events", "gates", "invariants"}
+    if set(data) - root_keys:
+        errors.append("UNDECLARED_ROOT_FIELD")
     if data.get("schema") != SCHEMA or data.get("state") != "SYNTHETIC_ROUTING_FIXTURES_ONLY":
         errors.append("INVALID_SYNTHETIC_SCHEMA")
     if data.get("claim_allowed") is not False:
@@ -45,6 +52,13 @@ def validate(data: dict[str, Any]) -> list[str]:
     gates = data.get("gates")
     if not isinstance(gates, dict) or gates.get("promotion") != "HOLD":
         errors.append("PROMOTION_MUST_REMAIN_HOLD")
+    if isinstance(gates, dict) and (
+        set(gates) - {"promotion", "independent_review", "provider_enforcement", "codescan"} or
+        gates.get("independent_review") != "TOKEN_VAZIO_UNOBSERVED" or
+        gates.get("provider_enforcement") != "OBSERVED_DISABLED" or
+        gates.get("codescan") != "FAIL_OBSERVED_AT_LAST_READBACK"
+    ):
+        errors.append("SYNTHETIC_GATE_AUTHORITY_DRIFT")
 
     areas = data.get("approved_conduct_areas")
     markers = data.get("approved_uncertainty_markers")
@@ -71,6 +85,14 @@ def validate(data: dict[str, Any]) -> list[str]:
         if not isinstance(item, dict):
             errors.append(prefix + ":NOT_OBJECT")
             continue
+        # Unexpected evidence/reviewer fields are NOT harmless if consumers differ.
+        event_keys = {"event_id", "sequence", "observed_at", "effective_at",
+                      "observer", "conduct_areas", "uncertainty_markers", "modality",
+                      "epistemic_state", "event_kind", "observation_text", "source",
+                      "evidence_refs", "falsifier", "next_gate", "gap_reason",
+                      "receipt_state", "claim_allowed", "links"}
+        if set(item) - event_keys:
+            errors.append(prefix + ":UNDECLARED_EVENT_FIELD")
         ident = item.get("event_id")
         if not isinstance(ident, str) or not ident or ident in seen:
             errors.append(prefix + ":DUPLICATE_OR_INVALID_ID")
@@ -98,10 +120,20 @@ def validate(data: dict[str, Any]) -> list[str]:
             conduct = []
         used_areas.update(conduct)
         obs = item.get("observer")
-        if not isinstance(obs, dict) or obs.get("mode") != "SYNTHETIC" or obs.get("authority_state") != "NOT_A_REAL_REVIEWER" or not str(obs.get("id", "")).startswith("SYNTH-"):
+        if (not isinstance(obs, dict) or set(obs) != {"id", "mode", "authority_state"} or
+                obs.get("mode") != "SYNTHETIC" or obs.get("authority_state") != "NOT_A_REAL_REVIEWER" or
+                not isinstance(obs.get("id"), str) or len(obs["id"]) <= len("SYNTH-") or
+                not obs["id"].startswith("SYNTH-")):
             errors.append(prefix + ":SYNTHETIC_OBSERVER_AUTHORITY_INVALID")
         source = item.get("source")
-        if not isinstance(source, dict) or source.get("system") != "SYNTHETIC_FIXTURE" or not str(source.get("locator", "")).startswith("fixture://") or source.get("content_sha256_state") != "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES":
+        if (not isinstance(source, dict) or
+                set(source) != {"system", "locator", "revision", "content_sha256_state"} or
+                source.get("system") != "SYNTHETIC_FIXTURE" or
+                not isinstance(source.get("locator"), str) or
+                not source["locator"].startswith("fixture://observer-paths/OBS-SYN-") or
+                len(source["locator"]) <= len("fixture://observer-paths/OBS-SYN-") or
+                source.get("revision") != "scenario-v1" or
+                source.get("content_sha256_state") != "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"):
             errors.append(prefix + ":REAL_PROVENANCE_FABRICATION_OR_MISSING_FIXTURE")
         if item.get("evidence_refs") != [] or item.get("receipt_state") != "NOT_RUN_REAL_WORLD":
             errors.append(prefix + ":REAL_EVIDENCE_MUST_NOT_BE_CLAIMED")
@@ -132,6 +164,8 @@ def validate(data: dict[str, Any]) -> list[str]:
             if not isinstance(edge, dict):
                 errors.append(prefix + ":EDGE_NOT_OBJECT")
                 continue
+            if set(edge) != {"to", "type"}:
+                errors.append(prefix + ":UNDECLARED_EDGE_FIELD")
             target, kind = edge.get("to"), edge.get("type")
             if (not isinstance(target, str) or target not in seen or target == ident or
                     not isinstance(kind, str) or kind not in LINKS):
