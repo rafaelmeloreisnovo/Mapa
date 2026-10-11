@@ -1,0 +1,394 @@
+{
+  "schema": "rafaelia.observer-paths-synthetic/v1",
+  "state": "SYNTHETIC_ROUTING_FIXTURES_ONLY",
+  "claim_allowed": false,
+  "authority": "Mapa observer routing extension to existing risk-ledger, feedback-event and typed-void contracts; not a replacement",
+  "source_contracts": [
+    "indices/RAFAELIA_RISK_OBSERVATION_LEDGER_V1.md",
+    "docs/FEEDBACK_EVENT_NO_REGRESSION_V1.md",
+    "data/semantics/typed-void-lattice.v1.json",
+    "schemas/proof-custody-receipt.schema.json"
+  ],
+  "approved_conduct_areas": [
+    "atencao",
+    "atendimento",
+    "atuacao",
+    "atualizacao",
+    "revisao",
+    "recusa",
+    "bug",
+    "erro",
+    "edicao",
+    "pensamento",
+    "permutacao",
+    "anomalia"
+  ],
+  "approved_uncertainty_markers": [
+    "POSSIBLE",
+    "VERBAL",
+    "ATEMPORAL",
+    "IGNORED",
+    "NONVERBAL",
+    "INCONSISTENT",
+    "FORGOTTEN",
+    "PARADOX",
+    "NONLINEAR",
+    "MULTIFILAMENT",
+    "NEWLY_OBSERVED",
+    "TOKEN_VAZIO",
+    "UNKNOWN"
+  ],
+  "scope": "No personal corpus, no provider secrets, no real review claims, no scientific causal equivalence",
+  "events": [
+    {
+      "event_id": "OBS-SYN-001",
+      "sequence": 1,
+      "observed_at": "2026-01-01T00:00:00Z",
+      "effective_at": "2026-01-01T00:00:00Z",
+      "observer": {
+        "id": "SYNTH-OBSERVER-A",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "atencao",
+        "atendimento"
+      ],
+      "uncertainty_markers": [
+        "VERBAL",
+        "POSSIBLE"
+      ],
+      "modality": "VERBAL",
+      "epistemic_state": "UNVERIFIED",
+      "event_kind": "OBSERVATION_CANDIDATE",
+      "observation_text": "Synthetic attention report; interpretation not validated",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-001",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "EXACT_SOURCE_OBSERVATION_GATE",
+      "gap_reason": "Synthetic fixture does not constitute a real-world source observation",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": []
+    },
+    {
+      "event_id": "OBS-SYN-002",
+      "sequence": 2,
+      "observed_at": "2026-01-01T00:01:00Z",
+      "effective_at": "2026-01-01T00:01:00Z",
+      "observer": {
+        "id": "SYNTH-OBSERVER-A",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "atuacao",
+        "bug"
+      ],
+      "uncertainty_markers": [
+        "NONVERBAL",
+        "UNKNOWN",
+        "TOKEN_VAZIO"
+      ],
+      "modality": "NONVERBAL",
+      "epistemic_state": "TOKEN_VAZIO",
+      "event_kind": "HYPOTHESIS",
+      "observation_text": "Synthetic bug report with no reproduced execution",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-002",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "EXACT_SOURCE_OBSERVATION_GATE",
+      "gap_reason": "Missing real execution, source bytes and reproducible falsifier",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": [
+        {
+          "to": "OBS-SYN-001",
+          "type": "BRANCHES_FROM"
+        }
+      ]
+    },
+    {
+      "event_id": "OBS-SYN-003",
+      "sequence": 3,
+      "observed_at": "2026-01-01T00:02:00Z",
+      "effective_at": "2026-01-01T00:02:00Z",
+      "observer": {
+        "id": "SYNTH-OBSERVER-B",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "erro",
+        "anomalia"
+      ],
+      "uncertainty_markers": [
+        "INCONSISTENT",
+        "PARADOX"
+      ],
+      "modality": "UNDETERMINED",
+      "epistemic_state": "CONTRADICTION",
+      "event_kind": "CONTRADICTION",
+      "observation_text": "Synthetic conflicting observer account retained without choosing a winner",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-003",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "EXACT_SOURCE_OBSERVATION_GATE",
+      "gap_reason": "Synthetic fixture does not constitute a real-world source observation",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": [
+        {
+          "to": "OBS-SYN-002",
+          "type": "CONTRADICTS"
+        }
+      ]
+    },
+    {
+      "event_id": "OBS-SYN-004",
+      "sequence": 4,
+      "observed_at": "2026-01-01T00:03:00Z",
+      "effective_at": "2026-01-01T00:03:00Z",
+      "observer": {
+        "id": "SYNTH-OBSERVER-A",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "atualizacao",
+        "edicao"
+      ],
+      "uncertainty_markers": [
+        "NEWLY_OBSERVED"
+      ],
+      "modality": "UNDETERMINED",
+      "epistemic_state": "UNVERIFIED",
+      "event_kind": "CORRECTION_CANDIDATE",
+      "observation_text": "Synthetic correction routes a successor while preserving predecessor",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-004",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "EXACT_SOURCE_OBSERVATION_GATE",
+      "gap_reason": "Synthetic fixture does not constitute a real-world source observation",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": [
+        {
+          "to": "OBS-SYN-002",
+          "type": "SUPERSEDES"
+        }
+      ]
+    },
+    {
+      "event_id": "OBS-SYN-005",
+      "sequence": 5,
+      "observed_at": "2026-01-01T00:04:00Z",
+      "effective_at": "2026-01-01T00:04:00Z",
+      "observer": {
+        "id": "SYNTH-OBSERVER-A",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "revisao",
+        "permutacao"
+      ],
+      "uncertainty_markers": [
+        "NONLINEAR",
+        "MULTIFILAMENT"
+      ],
+      "modality": "UNDETERMINED",
+      "epistemic_state": "UNVERIFIED",
+      "event_kind": "GRAPH_FORK",
+      "observation_text": "Synthetic fork links independent paths without causal promotion",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-005",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "EXACT_SOURCE_OBSERVATION_GATE",
+      "gap_reason": "Synthetic fixture does not constitute a real-world source observation",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": [
+        {
+          "to": "OBS-SYN-003",
+          "type": "BRANCHES_FROM"
+        },
+        {
+          "to": "OBS-SYN-004",
+          "type": "BRANCHES_FROM"
+        },
+        {
+          "to": "OBS-SYN-003",
+          "type": "PARALLEL_WITH"
+        }
+      ]
+    },
+    {
+      "event_id": "OBS-SYN-006",
+      "sequence": 6,
+      "observed_at": "2026-01-01T00:05:00Z",
+      "effective_at": null,
+      "observer": {
+        "id": "SYNTH-OBSERVER-A",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "pensamento"
+      ],
+      "uncertainty_markers": [
+        "ATEMPORAL",
+        "FORGOTTEN",
+        "TOKEN_VAZIO"
+      ],
+      "modality": "UNDETERMINED",
+      "epistemic_state": "TOKEN_VAZIO",
+      "event_kind": "TEMPORAL_GAP",
+      "observation_text": "Synthetic event whose effective instant is unknown",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-006",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "EXACT_SOURCE_OBSERVATION_GATE",
+      "gap_reason": "Effective time not observed; observation sequence is not event time",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": [
+        {
+          "to": "OBS-SYN-005",
+          "type": "FOLLOWS"
+        }
+      ]
+    },
+    {
+      "event_id": "OBS-SYN-007",
+      "sequence": 7,
+      "observed_at": "2026-01-01T00:06:00Z",
+      "effective_at": "2026-01-01T00:06:00Z",
+      "observer": {
+        "id": "SYNTH-OBSERVER-A",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "recusa"
+      ],
+      "uncertainty_markers": [
+        "IGNORED",
+        "UNKNOWN"
+      ],
+      "modality": "UNDETERMINED",
+      "epistemic_state": "HOLD",
+      "event_kind": "REFUSAL",
+      "observation_text": "Synthetic refusal of unsupported promotion due to unresolved authority",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-007",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "AUTHORITY_GATE",
+      "gap_reason": "Authority for promoted claim unavailable",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": [
+        {
+          "to": "OBS-SYN-006",
+          "type": "BLOCKED_BY"
+        }
+      ]
+    },
+    {
+      "event_id": "OBS-SYN-008",
+      "sequence": 8,
+      "observed_at": "2026-01-01T00:07:00Z",
+      "effective_at": "2026-01-01T00:07:00Z",
+      "observer": {
+        "id": "SYNTH-OBSERVER-A",
+        "mode": "SYNTHETIC",
+        "authority_state": "NOT_A_REAL_REVIEWER"
+      },
+      "conduct_areas": [
+        "revisao",
+        "atualizacao"
+      ],
+      "uncertainty_markers": [
+        "NEWLY_OBSERVED",
+        "POSSIBLE"
+      ],
+      "modality": "UNDETERMINED",
+      "epistemic_state": "UNVERIFIED",
+      "event_kind": "LATE_SIGNAL",
+      "observation_text": "Synthetic late signal observed after fork; causality is only candidate",
+      "source": {
+        "system": "SYNTHETIC_FIXTURE",
+        "locator": "fixture://observer-paths/OBS-SYN-008",
+        "revision": "scenario-v1",
+        "content_sha256_state": "TOKEN_VAZIO_NO_EXTERNAL_SOURCE_BYTES"
+      },
+      "evidence_refs": [],
+      "falsifier": "Reproduce source-specific observation using independent timestamp and exact-source receipt before any factual promotion",
+      "next_gate": "EXACT_SOURCE_OBSERVATION_GATE",
+      "gap_reason": "Synthetic fixture does not constitute a real-world source observation",
+      "receipt_state": "NOT_RUN_REAL_WORLD",
+      "claim_allowed": false,
+      "links": [
+        {
+          "to": "OBS-SYN-005",
+          "type": "CAUSE_CANDIDATE"
+        },
+        {
+          "to": "OBS-SYN-007",
+          "type": "FOLLOWS"
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "promotion": "HOLD",
+    "independent_review": "TOKEN_VAZIO_UNOBSERVED",
+    "provider_enforcement": "OBSERVED_DISABLED",
+    "codescan": "FAIL_OBSERVED_AT_LAST_READBACK"
+  },
+  "invariants": [
+    "OBSERVED_SYNTHETIC!=OBSERVED_REAL",
+    "UNKNOWN!=ZERO",
+    "CONTRADICTION!=MISTAKE_TO_DELETE",
+    "SUPERSEDES!=DELETE",
+    "MULTIFILAMENT!=PROVEN_CAUSAL_GRAPH",
+    "ATEMPORAL!=TIMESTAMPLESS_OBSERVATION",
+    "GAP!=CLAIM",
+    "SELF_REVIEW!=INDEPENDENT_REVIEW"
+  ]
+}
