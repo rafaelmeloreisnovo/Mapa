@@ -112,5 +112,35 @@ class ObserverPathTests(unittest.TestCase):
         self.assertIn("event[8]:EVENT_CLAIM_MUST_REMAIN_FALSE", validate(d))
 
 
+    def test_nonobject_root_is_typed_error(self):
+        self.assertIn("INVALID_ROOT_OBJECT", validate([]))
+
+    def test_nondict_gate_is_typed_hold(self):
+        d = copy.deepcopy(DATA)
+        d["gates"] = []
+        self.assertIn("PROMOTION_MUST_REMAIN_HOLD", validate(d))
+
+    def test_unhashable_vocabulary_is_rejected_without_exception(self):
+        d = copy.deepcopy(DATA)
+        d["approved_conduct_areas"][0] = {"not": "a string"}
+        self.assertIn("AREA_VOCABULARY_INVALID", validate(d))
+        d = copy.deepcopy(DATA)
+        d["approved_uncertainty_markers"][0] = ["not", "a marker"]
+        self.assertIn("UNCERTAINTY_MARKER_VOCABULARY_INVALID", validate(d))
+
+    def test_nested_unhashable_event_values_fail_closed(self):
+        d = mutated(0, "uncertainty_markers", [{"nested": 1}])
+        self.assertIn("event[1]:MARKERS_INVALID", validate(d))
+        d = mutated(0, "conduct_areas", [["nested"]])
+        self.assertIn("event[1]:CONDUCT_INVALID", validate(d))
+        d = copy.deepcopy(DATA)
+        d["events"][1]["links"].append({"to": ["not", "an id"], "type": {"invalid": 1}})
+        self.assertIn("event[2]:DANGLING_FORWARD_OR_INVALID_EDGE", validate(d))
+
+    def test_boolean_sequence_cannot_impersonate_first_index(self):
+        self.assertIn("event[1]:SEQUENCE_DRIFT", validate(mutated(0, "sequence", True)))
+
+
+
 if __name__ == "__main__":
     unittest.main()
