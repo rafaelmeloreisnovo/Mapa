@@ -1,0 +1,195 @@
+{
+  "schema": "rafaelia.typed-void-lexical-fixtures/v1",
+  "state": "SYNTHETIC_TEST_VECTORS_NOT_USER_CORPUS",
+  "claim_allowed": false,
+  "upstream_contracts": [
+    "data/semantics/typed-void-lattice.v1.json",
+    "data/semantics/empty-state-ontology.v1.json"
+  ],
+  "privacy": "Synthetic literals only; no conversation content, credentials, or private sources.",
+  "invariants": [
+    "raw_lexeme != parsed_value",
+    "ABSENT_KEY != PRESENT_NULL != PRESENT_EMPTY_STRING",
+    "WHITESPACE_STRING != EMPTY_STRING",
+    "SUPER_ZERO_MARK != NUMERIC_ZERO",
+    "EMPTY_SET_REQUIRES_SET_DOMAIN",
+    "TOKEN_VAZIO != 0",
+    "DECLARED_DELIMITER_SLOT != MISSING_FIELD",
+    "NO_TYPE_WITHOUT_GRAMMAR"
+  ],
+  "cases": [
+    {
+      "id": "SET-EMPTY",
+      "raw": "∅",
+      "syntax": "set_theory",
+      "domain": "set",
+      "expected_kind": "EMPTY_SET",
+      "expected_length": 0
+    },
+    {
+      "id": "SYMBOL-EMPTY-UNBOUND",
+      "raw": "∅",
+      "syntax": "free_text",
+      "domain": "unbound",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 1
+    },
+    {
+      "id": "PY-SINGLE-EMPTY",
+      "raw": "''",
+      "syntax": "python_string",
+      "domain": "text",
+      "expected_kind": "EMPTY_STRING",
+      "expected_length": 0
+    },
+    {
+      "id": "JSON-DOUBLE-EMPTY",
+      "raw": "\"\"",
+      "syntax": "json_string",
+      "domain": "text",
+      "expected_kind": "EMPTY_STRING",
+      "expected_length": 0
+    },
+    {
+      "id": "PY-QUOTED-QUOTES",
+      "raw": "'\"\"'",
+      "syntax": "python_string",
+      "domain": "text",
+      "expected_kind": "PRESENT",
+      "expected_length": 2,
+      "expected_value": "\"\""
+    },
+    {
+      "id": "PY-SPACE",
+      "raw": "' '",
+      "syntax": "python_string",
+      "domain": "text",
+      "expected_kind": "PRESENT",
+      "expected_length": 1,
+      "expected_value": " "
+    },
+    {
+      "id": "JSON-SPACE",
+      "raw": "\" \"",
+      "syntax": "json_string",
+      "domain": "text",
+      "expected_kind": "PRESENT",
+      "expected_length": 1,
+      "expected_value": " "
+    },
+    {
+      "id": "OBSERVED-EMPTY-VALUE",
+      "raw": "",
+      "syntax": "observed_string",
+      "domain": "text",
+      "expected_kind": "EMPTY_STRING",
+      "expected_length": 0
+    },
+    {
+      "id": "SEPARATOR-DOUBLE",
+      "raw": ";;",
+      "syntax": "semicolon_fields",
+      "domain": "delimited_text",
+      "expected_kind": "PRESENT",
+      "expected_length": 3,
+      "expected_value": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": "SEPARATOR-INTERNAL",
+      "raw": "a;;b",
+      "syntax": "semicolon_fields",
+      "domain": "delimited_text",
+      "expected_kind": "PRESENT",
+      "expected_length": 3,
+      "expected_value": [
+        "a",
+        "",
+        "b"
+      ]
+    },
+    {
+      "id": "TEXT-CAPITAL-NULL",
+      "raw": "Null",
+      "syntax": "free_text",
+      "domain": "unbound",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 4
+    },
+    {
+      "id": "JSON-EXPLICIT-NULL",
+      "raw": "null",
+      "syntax": "json_null",
+      "domain": "json",
+      "expected_kind": "NULL_LITERAL",
+      "expected_length": 4
+    },
+    {
+      "id": "TEXT-LOWER-NULL",
+      "raw": "null",
+      "syntax": "free_text",
+      "domain": "unbound",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 4
+    },
+    {
+      "id": "NUMERIC-ZERO",
+      "raw": "0",
+      "syntax": "json_number",
+      "domain": "number",
+      "expected_kind": "NUMERIC_ZERO",
+      "expected_length": 1,
+      "expected_value": 0
+    },
+    {
+      "id": "TEXT-ZERO-UNBOUND",
+      "raw": "0",
+      "syntax": "free_text",
+      "domain": "unbound",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 1
+    },
+    {
+      "id": "SUPERSCRIPT-ZERO",
+      "raw": "⁰",
+      "syntax": "symbolic",
+      "domain": "symbolic",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 1
+    },
+    {
+      "id": "MISSING-OBJECT-KEY",
+      "syntax": "object_key",
+      "domain": "object",
+      "expected_kind": "MISSING_FIELD",
+      "expected_length": null
+    },
+    {
+      "id": "JSON-NULL-NOT-SINGLE-QUOTED",
+      "raw": "'null'",
+      "syntax": "json_null",
+      "domain": "json",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 6
+    },
+    {
+      "id": "INVALID-JSON-SINGLE-QUOTE",
+      "raw": "''",
+      "syntax": "json_string",
+      "domain": "text",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 2
+    },
+    {
+      "id": "INVALID-NUMERIC-LETTER-O",
+      "raw": "O",
+      "syntax": "json_number",
+      "domain": "number",
+      "expected_kind": "TOKEN_VAZIO",
+      "expected_length": 1
+    }
+  ]
+}
