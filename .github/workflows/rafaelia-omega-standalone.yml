@@ -1,0 +1,162 @@
+name: RAFAELIA Omega Evidence Standalone
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["evidence/omega-compositor-20261010"]
+    paths:
+      - ".github/workflows/rafaelia-omega-standalone.yml"
+  pull_request:
+    paths:
+      - ".github/workflows/rafaelia-omega-standalone.yml"
+      - "data/gap-atlas/GAP_ATLAS_OMEGA3_20261010.json"
+      - "data/routes/RAFAELIA_PHASE_INTEGRATION_ATLAS_GATES_20261010.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafaelia-omega-standalone-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact source head without persisted credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Validate Atlas and produce fail-closed evidence ZIP
+        shell: bash
+        run: |
+          mkdir -p artifacts/rafaelia-omega
+          python3 - <<'PY'
+          import copy, hashlib, json, os, pathlib, re, subprocess, sys, zipfile
+          paths = ["data/gap-atlas/GAP_ATLAS_OMEGA3_20261010.json", "data/routes/RAFAELIA_PHASE_INTEGRATION_ATLAS_GATES_20261010.json"]
+          required = {"id","priority","domain","semantic_type","gap","risk","source_now","owner","minimum_proof","experiment","falsifier","promotion_gate","privacy_legal_zerotrust","rollback","state","next_action"}
+          allowed = {"NOT_RUN","TOKEN_VAZIO","UNVERIFIED","PARTIAL","BLOCKED","FAIL","PENDING","HOLD","PASS_SCOPED"}
+          digest = lambda data: hashlib.sha256(data).hexdigest()
+          errors, docs, source_refs = [], {}, []
+
+          def unique_pairs(pairs):
+              obj = {}
+              for key, value in pairs:
+                  if key in obj: raise ValueError("DUPLICATE_JSON_KEY:"+key)
+                  obj[key] = value
+              return obj
+
+          def nonfinite(value):
+              raise ValueError("NONFINITE_JSON:"+value)
+
+          def validate(atlas, route):
+              issues = []
+              if not isinstance(atlas,dict) or not isinstance(route,dict): return ["INVALID_ROOTS"]
+              if atlas.get("id") != "GAP_ATLAS_OMEGA3_20261010": issues.append("ATLAS_ID")
+              if route.get("id") != "RAFAELIA_PHASE_INTEGRATION_ATLAS_GATES_20261010": issues.append("ROUTE_ID")
+              if atlas.get("claim_allowed") is not False or route.get("claim_allowed") is not False: issues.append("CLAIM_BOUNDARY")
+              baseline = atlas.get("baseline")
+              if not isinstance(baseline,dict) or baseline.get("route") != route.get("id"): issues.append("BROKEN_ROUTE_BINDING")
+              gaps = atlas.get("gaps")
+              if not isinstance(gaps,list) or not gaps: return issues+["GAPS_ABSENT"]
+              seen = set()
+              for index, gap in enumerate(gaps):
+                  if not isinstance(gap,dict) or not required.issubset(gap) or not all(isinstance(gap[k],str) and gap[k].strip() for k in required if k in gap):
+                      issues.append("GAP_FIELDS:"+str(index)); continue
+                  if not re.fullmatch(r"GAP-OMEGA3-[0-9]{3}",gap["id"]): issues.append("GAP_ID:"+str(index))
+                  if gap["id"] in seen: issues.append("GAP_DUPLICATE:"+gap["id"])
+                  seen.add(gap["id"])
+                  if gap["priority"] not in ("P0","P1","P2","P3"): issues.append("PRIORITY:"+str(index))
+                  if gap["state"] not in allowed: issues.append("STATE:"+str(index))
+              edges = route.get("federated_routes")
+              if not isinstance(edges,list) or not edges: return issues+["EDGES_ABSENT"]
+              adjacency, seen_edges = {}, set()
+              for edge in edges:
+                  if not isinstance(edge,dict) or not all(isinstance(edge.get(k),str) and edge[k].strip() for k in ("from","to","relation","gate")):
+                      issues.append("BAD_EDGE"); continue
+                  key = (edge["from"],edge["to"],edge["relation"])
+                  if key in seen_edges: issues.append("DUPLICATE_EDGE")
+                  seen_edges.add(key)
+                  adjacency.setdefault(edge["from"],set()).add(edge["to"])
+              frontier, reached = ["START_HERE"], set()
+              while frontier:
+                  node = frontier.pop()
+                  if node in reached: continue
+                  reached.add(node)
+                  frontier.extend(adjacency.get(node,()))
+              if not {"CURRENT_STATE_HOTSTATE","GITHUB_MAPA_ROUTE","DRIVE_LEDGER"}.issubset(reached): issues.append("LEDGER_NOT_REACHABLE")
+              return sorted(set(issues))
+
+          for path in paths:
+              file = pathlib.Path(path)
+              try:
+                  if file.is_symlink() or not file.is_file() or file.stat().st_size>524288: raise ValueError("MISSING_SYMLINK_OR_OVERSIZE")
+                  content = file.read_bytes()
+                  docs[path] = json.loads(content.decode("utf-8-sig"),object_pairs_hook=unique_pairs,parse_constant=nonfinite)
+                  source_refs.append({"path":path,"sha256":digest(content),"bytes":len(content),"identity":"CHECKED_OUT_BYTES"})
+              except (ValueError,OSError,UnicodeError) as exc:
+                  errors.append("SOURCE_INVALID:"+path+":"+type(exc).__name__+":"+str(exc)[:90])
+
+          atlas, route = {}, {}
+          if len(docs)==2:
+              atlas,route = (docs[p] for p in paths)
+              errors += validate(atlas,route)
+              if isinstance(atlas,dict) and isinstance(atlas.get("gaps"),list) and atlas["gaps"] and isinstance(atlas["gaps"][0],dict):
+                  mutated = copy.deepcopy(atlas)
+                  mutated["gaps"].append(copy.deepcopy(mutated["gaps"][0]))
+                  if not any(s.startswith("GAP_DUPLICATE:") for s in validate(mutated,route)): errors.append("NEGATIVE_DUPLICATE_FAILED")
+                  mutated = copy.deepcopy(atlas)
+                  mutated["claim_allowed"] = True
+                  if "CLAIM_BOUNDARY" not in validate(mutated,route): errors.append("NEGATIVE_CLAIM_FAILED")
+                  mutated = copy.deepcopy(atlas)
+                  mutated["baseline"]["route"] = "INVALID"
+                  if "BROKEN_ROUTE_BINDING" not in validate(mutated,route): errors.append("NEGATIVE_ROUTE_FAILED")
+              else:
+                  errors.append("FALSIFIERS_NOT_EXECUTED")
+          else:
+              errors.append("INPUT_SOURCE_BLOCKED")
+
+          try: exact_head = subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          except Exception: exact_head = "TOKEN_VAZIO"
+          status = "PASS_SCOPED_SOURCE_STRUCTURE" if not errors else "BLOCKED_FAIL_CLOSED"
+          gaps = atlas.get("gaps",[]) if isinstance(atlas,dict) else []
+          typed = [{"id":g.get("id"),"priority":g.get("priority"),"state":g.get("state"),"owner":g.get("owner"),"falsifier":g.get("falsifier"),"next_action":g.get("next_action")} for g in gaps if isinstance(g,dict)]
+          receipt = {
+              "scope":"MAPA_ATLAS_OMEGA3_ONLY","status":status,"checkout_git_head":exact_head,
+              "event_head":os.getenv("GITHUB_SHA","TOKEN_VAZIO"),
+              "sources":source_refs,"validation_issues":errors,"gap_count":len(typed),
+              "claims":{"structural_only":not errors,"global":False,"device":False,"science":False,"security":False},
+              "gates":{"source_structure":status,"provider_terminal":"NOT_ATTESTED_IN_RECEIPT",
+                       "human_review":"TOKEN_VAZIO","provider_enforcement":"UNVERIFIED",
+                       "physical_runtime":"NOT_RUN","rollback_drill":"NOT_RUN"},
+              "boundary":"SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+              "rollback":"isolated branch or authorized successor PR; never delete original evidence"
+          }
+          serialize=lambda o:(json.dumps(o,sort_keys=True,indent=2,ensure_ascii=False)+"\n").encode("utf-8")
+          files={"receipt.json":serialize(receipt),"gap_register.json":serialize(typed),
+                 "route_edges.json":serialize(route.get("federated_routes",[]) if isinstance(route,dict) else [])}
+          files["MANIFEST.sha256.json"]=serialize({"algorithm":"sha256","files":{k:digest(v) for k,v in sorted(files.items())},"claim_allowed":False})
+          output=pathlib.Path("artifacts/rafaelia-omega/RAFAELIA_OMEGA_EVIDENCE.zip")
+          with zipfile.ZipFile(output,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
+              for name,content in sorted(files.items()):
+                  item=zipfile.ZipInfo(name,(2026,10,10,0,0,0))
+                  item.compress_type=zipfile.ZIP_DEFLATED
+                  item.external_attr=0o644<<16
+                  archive.writestr(item,content)
+          with zipfile.ZipFile(output) as archive:
+              assert archive.testzip() is None
+              for name,content in files.items(): assert archive.read(name)==content
+          print(json.dumps({"status":status,"head":exact_head,"zip_sha256":digest(output.read_bytes()),
+                            "gap_count":len(typed),"issues":errors},ensure_ascii=False))
+          sys.exit(2 if errors else 0)
+          PY
+      - name: Upload scoped evidence even after validation failure
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: rafaelia-omega-${{ github.sha }}
+          path: artifacts/rafaelia-omega/RAFAELIA_OMEGA_EVIDENCE.zip
+          if-no-files-found: warn
+          retention-days: 30
