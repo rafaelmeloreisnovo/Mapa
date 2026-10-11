@@ -16,6 +16,7 @@ Status: `DOCUMENTED_INDEX / claim_allowed=false / DRAFT_NOT_MERGED`
 ## Read-only first cut
 
 10 metadata/route nodes, 15 columns. No original ChatGPT conversation was replicated. Two *document proxies* of sessions were read directly:
+
 1. [2026-09-21 · Angular overlays, √3/2, geodesics](https://docs.google.com/document/d/1Wrkcwhf7YRDCbcG5biP1DDqLI43CtuMzlb-yknIicJk/edit).
 2. [2026-09-12 · Mathematics, languages, phonetics, acoustics](https://docs.google.com/document/d/1rgvae5tdgtZGxRD-6D-wHQDxD-xwXgUDYTScqMixO_w/edit).
 
