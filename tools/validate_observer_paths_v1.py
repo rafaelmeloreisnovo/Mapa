@@ -35,20 +35,27 @@ def iso_time(value: Any) -> bool:
 
 
 def validate(data: dict[str, Any]) -> list[str]:
+    if not isinstance(data, dict):
+        return ["INVALID_ROOT_OBJECT"]
     errors: list[str] = []
     if data.get("schema") != SCHEMA or data.get("state") != "SYNTHETIC_ROUTING_FIXTURES_ONLY":
         errors.append("INVALID_SYNTHETIC_SCHEMA")
     if data.get("claim_allowed") is not False:
         errors.append("GLOBAL_CLAIM_MUST_REMAIN_FALSE")
-    if data.get("gates", {}).get("promotion") != "HOLD":
+    gates = data.get("gates")
+    if not isinstance(gates, dict) or gates.get("promotion") != "HOLD":
         errors.append("PROMOTION_MUST_REMAIN_HOLD")
 
     areas = data.get("approved_conduct_areas")
     markers = data.get("approved_uncertainty_markers")
-    if not isinstance(areas, list) or len(areas) != 12 or len(set(areas)) != len(areas):
+    if (not isinstance(areas, list) or len(areas) != 12 or
+            any(not isinstance(area, str) or not area for area in areas) or
+            len(set(areas)) != len(areas)):
         errors.append("AREA_VOCABULARY_INVALID")
         areas = []
-    if not isinstance(markers, list) or len(markers) < 10 or len(set(markers)) != len(markers):
+    if (not isinstance(markers, list) or len(markers) < 10 or
+            any(not isinstance(marker, str) or not marker for marker in markers) or
+            len(set(markers)) != len(markers)):
         errors.append("UNCERTAINTY_MARKER_VOCABULARY_INVALID")
         markers = []
     events = data.get("events")
@@ -67,12 +74,13 @@ def validate(data: dict[str, Any]) -> list[str]:
         ident = item.get("event_id")
         if not isinstance(ident, str) or not ident or ident in seen:
             errors.append(prefix + ":DUPLICATE_OR_INVALID_ID")
-        if item.get("sequence") != index:
+        if type(item.get("sequence")) is not int or item["sequence"] != index:
             errors.append(prefix + ":SEQUENCE_DRIFT")
         if not iso_time(item.get("observed_at")):
             errors.append(prefix + ":OBSERVATION_TIME_MISSING")
         tags = item.get("uncertainty_markers")
-        if not isinstance(tags, list) or not tags or any(t not in markers for t in tags):
+        if (not isinstance(tags, list) or not tags or
+                any(not isinstance(t, str) or t not in markers for t in tags)):
             errors.append(prefix + ":MARKERS_INVALID")
             tags = []
         if len(tags) != len(set(tags)):
@@ -84,7 +92,8 @@ def validate(data: dict[str, Any]) -> list[str]:
         elif not iso_time(item.get("effective_at")):
             errors.append(prefix + ":EFFECTIVE_TIME_INVALID")
         conduct = item.get("conduct_areas")
-        if not isinstance(conduct, list) or not conduct or any(a not in areas for a in conduct):
+        if (not isinstance(conduct, list) or not conduct or
+                any(not isinstance(a, str) or a not in areas for a in conduct)):
             errors.append(prefix + ":CONDUCT_INVALID")
             conduct = []
         used_areas.update(conduct)
@@ -124,11 +133,13 @@ def validate(data: dict[str, Any]) -> list[str]:
                 errors.append(prefix + ":EDGE_NOT_OBJECT")
                 continue
             target, kind = edge.get("to"), edge.get("type")
-            if target not in seen or target == ident or kind not in LINKS:
+            if (not isinstance(target, str) or target not in seen or target == ident or
+                    not isinstance(kind, str) or kind not in LINKS):
                 errors.append(prefix + ":DANGLING_FORWARD_OR_INVALID_EDGE")
-            if (target, kind) in edge_keys:
-                errors.append(prefix + ":DUPLICATE_EDGE")
-            edge_keys.add((target, kind))
+            if isinstance(target, str) and isinstance(kind, str):
+                if (target, kind) in edge_keys:
+                    errors.append(prefix + ":DUPLICATE_EDGE")
+                edge_keys.add((target, kind))
             if kind == "SUPERSEDES" and item.get("event_kind") != "CORRECTION_CANDIDATE":
                 errors.append(prefix + ":SILENT_OR_UNJUSTIFIED_SUPERSESSION")
             if kind == "CONTRADICTS" and item.get("epistemic_state") != "CONTRADICTION":
