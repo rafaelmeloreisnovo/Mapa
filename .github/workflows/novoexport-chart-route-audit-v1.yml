@@ -1,0 +1,26 @@
+name: NOVOexport Chart Route Audit V1
+on:
+  pull_request:
+    paths:
+      - 'data/assurance/novoexport-chart-route-audit.v1.json'
+      - 'tools/validate_novoexport_chart_routes_v1.py'
+      - 'tests/test_novoexport_chart_routes_v1.py'
+      - 'docs/assurance/NOVOEXPORT_CHARTS_ROUTES_RECONSTRUCTION_20261011.md'
+      - '.github/workflows/novoexport-chart-route-audit-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-metadata-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Validate no private payload nor phantom chart promotion
+        run: |
+          python3 -m unittest -v tests.test_novoexport_chart_routes_v1
+          python3 tools/validate_novoexport_chart_routes_v1.py
+      - name: Validate no LIVE/provider claim or private link
+        run: |
+          grep -Fq '"all_chart_data_ingested": false' data/assurance/novoexport-chart-route-audit.v1.json
+          grep -Fq '"all_claims_blocked": true' data/assurance/novoexport-chart-route-audit.v1.json
