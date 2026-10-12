@@ -140,4 +140,3 @@ Sem consentimento e direitos, G011/G012 permanecem abertos.
 As seis amostras são **out-of-scope de NOVOexport** salvo novo
 `source_ref` independente e verificável. `GLOBAL_SEARCH !=
 NOVOEXPORT_MEMBERSHIP`.
-
