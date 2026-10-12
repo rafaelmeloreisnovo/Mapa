@@ -128,6 +128,24 @@ class UnifiedInteractionAdversarialTests(unittest.TestCase):
         assert_reject(self,["logical_interaction","definition"],"https://drive.google.com/file/d/secret","PRIVATE_LINK_OR_SECRET_IN_PUBLIC_MANIFEST")
     def test_no_tokens_or_secrets(self):
         assert_reject(self,["logical_interaction","definition"],"sk-supersecretkeywithlength1234","PRIVATE_LINK_OR_SECRET_IN_PUBLIC_MANIFEST")
+    def test_office_security_fixture_is_not_novoexport(self):
+        assert_reject(self,["discovery_provenance","office_xml","source_bucket"],
+            "NOVOEXPORT_SOURCE_PROVEN","EXTERNAL_CHART_ORIGIN_GATE:office_xml")
+    def test_office_folder_ancestry_is_enforced(self):
+        assert_reject(self,["discovery_provenance","office_xml","not_within_verified_novoexport_subtree"],
+            False,"EXTERNAL_CHART_ORIGIN_GATE:office_xml")
+    def test_flutter_upstream_not_own_math_core(self):
+        assert_reject(self,["discovery_provenance","dart_charts","source_bucket"],
+            "AUTHORIAL_KERNEL","EXTERNAL_CHART_ORIGIN_GATE:dart_charts")
+    def test_rafaelia_upload_not_novoexport_shard(self):
+        assert_reject(self,["discovery_provenance","graphviz","source_bucket"],
+            "RAW_NOVOEXPORT_SHARD","EXTERNAL_CHART_ORIGIN_GATE:graphviz")
+    def test_correction_is_append_only(self):
+        assert_reject(self,["discovery_provenance","predecessor_retain"],
+            False,"MISSING_PROVENANCE_CORRECTION")
+    def test_chart_cache_security_source_not_a_real_sample(self):
+        assert_reject(self,["formal_falsification_fixtures","office_chart_xml","origin_class"],
+            "OBSERVATIONAL_DATA","SECURITY_FIXTURE_MISATTRIBUTED_NOVOEXPORT")
     def test_predecessor_is_not_deleted(self):
         assert_reject(self,["predecessor","relation"],"REPLACES_ERASES","LOSS_OF_PREDECESSOR")
 
