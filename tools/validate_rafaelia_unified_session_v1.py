@@ -131,6 +131,20 @@ def validate(v):
     chart=topo.get("office_chart_xml",{})
     if not isinstance(chart,dict) or chart.get("count")!=6 or chart.get("source_workbook")!="TOKEN_VAZIO_UNBOUND" or chart.get("chart_cache_not_observational_data") is not True:
         issues.append("UNSOURCED_OFFICE_CHART_PROMOTION")
+    # Provider readback traced the global Drive chart results outside NOVOexport.
+    # Keep the correction machine-enforced: external samples are NOT corpus proof.
+    if not isinstance(chart,dict) or chart.get("origin_class")!="THIRD_PARTY_SECURITY_TEST_FIXTURE" or chart.get("not_verified_novoexport_member") is not True:
+        issues.append("SECURITY_FIXTURE_MISATTRIBUTED_NOVOEXPORT")
+    disc=v.get("discovery_provenance",{})
+    if not isinstance(disc,dict) or disc.get("search_scope")!="GLOBAL_DRIVE_SEARCH_NOT_SUBTREE_BOUND" or disc.get("correction")!="PRIOR_CHART_ATTRIBUTION_TO_NOVOEXPORT_UNSUPPORTED_AND_SUPERSEDED" or disc.get("predecessor_retain") is not True:
+        issues.append("MISSING_PROVENANCE_CORRECTION")
+    for k,expected,source in [
+        ("office_xml","THIRD_PARTY_SECURITY_TEST_FIXTURE","DRIVE_METADATA_ANCESTRY_ONLY"),
+        ("dart_charts","UPSTREAM_FLUTTER_INTEGRATION_TESTS","DRIVE_METADATA_ANCESTRY_ONLY"),
+        ("graphviz","RAFAELIA_UPLOAD_DIAGRAMS","DRIVE_METADATA_ANCESTRY_ONLY")]:
+        item=disc.get(k,{}) if isinstance(disc,dict) else {}
+        if not isinstance(item,dict) or item.get("source_bucket")!=expected or item.get("not_within_verified_novoexport_subtree") is not True or item.get("source_evidence_scope")!=source or not str(item.get("novorelation","")).startswith("TOKEN_VAZIO_"):
+            issues.append("EXTERNAL_CHART_ORIGIN_GATE:"+k)
     graph=v.get("semantic_graph",{})
     nodes=graph.get("nodes") if isinstance(graph,dict) else None
     edges=graph.get("edges") if isinstance(graph,dict) else None
