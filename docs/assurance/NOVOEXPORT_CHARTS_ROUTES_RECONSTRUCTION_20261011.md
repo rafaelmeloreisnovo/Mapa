@@ -81,6 +81,7 @@ similaridade não é igualdade de bytes, autoria nem fórmula.
 ## 5. Falsificadores novos
 
 Validador/tabela sintética (não leitor de Drive):
+
 - impede promover gráfico Office cache sem workbook;
 - impede rotular RLL robusta/posterior a partir de manifesto ou smoke;
 - impede confundir C42 e icosfera F2;
