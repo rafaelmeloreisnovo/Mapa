@@ -65,6 +65,31 @@ class SourceAttributionFalsifiers(unittest.TestCase):
     def test_no_policy_waiver(self):
         d=copy.deepcopy(BASE);d["policy"]["no_private_payload"]=False
         self.assertIn("POLICY_INVARIANT_DISABLED",verify(d))
+    def test_lama_barro_is_not_llama_cpp(self):
+        d=copy.deepcopy(BASE)
+        d["namespace_boundaries"]["LAMA_BARRO_PLUGIN"]["may_alias_llama_cpp"]=True
+        self.assertIn("LAMA_LLAMA_NAMESPACE_OR_AUTHORITY_CONFLATION",verify(d))
+
+    def test_no_fabricated_lama_plugin_path(self):
+        d=copy.deepcopy(BASE)
+        d["namespace_boundaries"]["LAMA_BARRO_PLUGIN"]["implementation_file"]="src/llama.cpp"
+        self.assertIn("LAMA_LLAMA_NAMESPACE_OR_AUTHORITY_CONFLATION",verify(d))
+
+    def test_no_false_standalone_lama_engine(self):
+        d=copy.deepcopy(BASE)
+        d["namespace_boundaries"]["LAMA_BARRO_PLUGIN"]["may_claim_standalone_engine"]=True
+        self.assertIn("LAMA_LLAMA_NAMESPACE_OR_AUTHORITY_CONFLATION",verify(d))
+
+    def test_opt_in_extension_not_the_model(self):
+        d=copy.deepcopy(BASE)
+        d["namespace_boundaries"]["LLAMARAFAELIA_EXTENSION"]["default_feature_state"]="ON"
+        self.assertIn("LAMA_LLAMA_NAMESPACE_OR_AUTHORITY_CONFLATION",verify(d))
+
+    def test_no_unaudited_missing_namespace(self):
+        d=copy.deepcopy(BASE)
+        del d["namespace_boundaries"]["LAMA_BARRO_PLUGIN"]
+        self.assertIn("LAMA_LLAMA_NAMESPACE_OR_AUTHORITY_CONFLATION",verify(d))
+
     def test_non_object_input(self):
         self.assertEqual(["INVALID_ROOT"],verify([]))
 
