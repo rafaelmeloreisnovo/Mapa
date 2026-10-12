@@ -100,6 +100,33 @@ a xoureldeen e aos contribuidores.
   `f0433f024df053a0e11a5b8eac35a9d73da99b70`. Copiar
   fonte da Vectras GPLv2-only para este produto requer autoridade específica.
 
+## Correção terminológica — LAMA (barro) não é LLaMA
+
+**LAMA** é descrito pelo proponente como plugin de barro, não como nome do
+motor `llama.cpp`, como fork do LLaMA nem como uma nova implementação
+autônoma de inferência. A árvore/caminho da implementação específica do
+plugin **ainda não foi localizada e verificada**: manter
+`TOKEN_VAZIO_NOT_IDENTIFIED`, nunca inventar um arquivo.
+
+Já `ggml-org/llama.cpp` é o motor externo MIT. O repositório distinto
+`rafaelmeloreisnovo/llamaRafaelia` incorpora extensões RAFAELIA opt-in,
+**não** uma implementação freestanding independente de todo o motor:
+`CMakeLists.txt` blob `4ea45cb2dc953a472df184bd63e0657257d42fb2`
+define cinco recursos `LLAMA_RAF_*` inicialmente OFF. Em
+`common/raf_inference.h` blob
+`50a76fdcda88020f7fd751ee149506ca8ffb084e`, o caminho sem
+`LLAMA_RAF_CONTRACTS` contém funções inline no-op/pass-through.
+`rafaelia-baremetal/bitstack/raf_bitstack.c` depende de malloc/calloc,
+e `raf_rafaelia_core.c` de funções de matemática hospedadas:
+essas extensões não satisfazem automaticamente L0 de dependência zero.
+
+O arquivo histórico `docs/RAFAELIA_VECTRA_LAMA_CONNECTOR_BRIDGE.md`
+trata "Lama Rafael IA / llamaRafaelia" como equivalentes conceituais;
+é uma **conflation documental não comprovada por código**. Não rebatizar
+LAMA nem inferir que o motor `llama.cpp` lhe pertence. A nova matriz
+`namespace_boundaries` valida somente a separação semântica, não autentica
+autoria nem a identidade ainda ausente do plugin.
+
 ## Critério de transposição
 
 `source origin + exact blob + authorship span + applicable per-file rights +
