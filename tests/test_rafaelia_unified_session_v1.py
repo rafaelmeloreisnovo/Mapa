@@ -188,6 +188,10 @@ class UnifiedInteractionAdversarialTests(unittest.TestCase):
         d=copy.deepcopy(BASE)
         d["receipts"][0]["signature_valid"]=True
         self.assertIn("RECEIPT_SCHEMA_DRIFT",validate(d))
+    def test_rollback_receipt_must_keep_action_scope(self):
+        d=copy.deepcopy(BASE)
+        d["receipts"][1]["signature_valid"]=True
+        self.assertIn("RECEIPT_SCHEMA_DRIFT",validate(d))
     def test_promotion_extra_scope_rejected(self):
         d=copy.deepcopy(BASE)
         d["promotion"]["auto_promote"]=True
