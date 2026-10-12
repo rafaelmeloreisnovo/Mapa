@@ -1,0 +1,30 @@
+name: RAFAELIA Observer Paths Epistemic Gate
+
+"on":
+  pull_request:
+    paths:
+      - 'data/observations/observer-paths-synthetic.v1.json'
+      - 'tools/validate_observer_paths_v1.py'
+      - 'tests/test_observer_paths_v1.py'
+      - 'docs/observations/OBSERVER_PATHS_ROUTING_V1.md'
+      - '.github/workflows/observer-paths-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-graph-kat:
+    name: observer-paths-synthetic-kat
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout pinned action without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Falsify observer, temporal, contradictory and graph-route collapse
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v tests.test_observer_paths_v1
+          python3 tools/validate_observer_paths_v1.py
