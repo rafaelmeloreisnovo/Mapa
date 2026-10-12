@@ -43,7 +43,7 @@ def verify(doc: Any) -> list[str]:
         issues.append("GLOBAL_PROMOTION_OR_SCHEMA_DRIFT")
     if set(doc) != {"schema","as_of_date","scope","source_authority","decision",
                     "claim_allowed","scientific_novelty_proven",
-                    "all_entries_copy_blocked","policy","entries"}:
+                    "all_entries_copy_blocked","policy","entries","namespace_boundaries"}:
         issues.append("UNKNOWN_OR_MISSING_ROOT_FIELDS")
     policy=doc.get("policy")
     if not isinstance(policy,dict) or set(policy)!={
@@ -55,6 +55,37 @@ def verify(doc: Any) -> list[str]:
         issues.append("POLICY_INVARIANT_DISABLED")
     if doc.get("source_authority")!="INDIVIDUAL_PRODUCER_REPOSITORY":
         issues.append("AUTHORITY_LAUNDERING")
+    # Disallow false identity between LAMA (mud/plugin) and LLaMA (upstream).
+    # Code readback proves an optional RAFAELIA extension, not the location
+    # or full implementation of the separately named LAMA-barro plugin.
+    names=doc.get("namespace_boundaries")
+    expected={
+        "LAMA_BARRO_PLUGIN":{
+            "role":"PLUGIN_ONLY_AS_USER_DEFINED",
+            "implementation_file":"TOKEN_VAZIO_NOT_IDENTIFIED",
+            "repo":"TOKEN_VAZIO_NOT_IDENTIFIED",
+            "may_alias_llama_cpp":False,
+            "may_claim_standalone_engine":False,
+            "claim_allowed":False,
+        },
+        "LLAMA_CPP_UPSTREAM":{
+            "role":"EXTERNAL_LLM_INFERENCE_ENGINE",
+            "producer":"ggml-org/llama.cpp",
+            "license":"MIT",
+            "distinct_from_lama_barro":True,
+        },
+        "LLAMARAFAELIA_EXTENSION":{
+            "role":"OPT_IN_EXTENSIONS_OF_LLAMA_CPP",
+            "repo":"rafaelmeloreisnovo/llamaRafaelia",
+            "cmake_source_blob":"4ea45cb2dc953a472df184bd63e0657257d42fb2",
+            "inference_header_blob":"50a76fdcda88020f7fd751ee149506ca8ffb084e",
+            "default_feature_state":"OFF",
+            "hosted_external_runtime":True,
+            "not_a_pure_freestanding_plugin":True,
+        },
+    }
+    if not isinstance(names,dict) or names!=expected:
+        issues.append("LAMA_LLAMA_NAMESPACE_OR_AUTHORITY_CONFLATION")
     entries=doc.get("entries")
     if not isinstance(entries,list) or len(entries)!=15:
         return issues+["SOURCE_CARDINALITY_DRIFT"]
