@@ -146,6 +146,53 @@ class UnifiedInteractionAdversarialTests(unittest.TestCase):
     def test_chart_cache_security_source_not_a_real_sample(self):
         assert_reject(self,["formal_falsification_fixtures","office_chart_xml","origin_class"],
             "OBSERVATIONAL_DATA","SECURITY_FIXTURE_MISATTRIBUTED_NOVOEXPORT")
+    def test_extra_root_promotion_field_rejected(self):
+        d=copy.deepcopy(BASE)
+        d["provider_approved"]=True
+        self.assertIn("ROOT_UNKNOWN_FIELDS",validate(d))
+    def test_extra_gap_false_sealed_field_rejected(self):
+        d=copy.deepcopy(BASE)
+        d["gaps"][0]["proof"]=True
+        self.assertIn("GAP_SCHEMA_DRIFT:G001",validate(d))
+    def test_extra_vector_runtime_claim_rejected(self):
+        d=copy.deepcopy(BASE)
+        d["vectors"][1]["runtime_approved"]=True
+        self.assertIn("VECTOR_SCHEMA_DRIFT:F02",validate(d))
+    def test_gap_owner_requires_canonical_producer(self):
+        assert_reject(self,["gaps",10,"authority"],"Mapa","GAP_OWNER_TAMPER:G011")
+    def test_vector_owner_cannot_shift_with_valid_repo_name(self):
+        assert_reject(self,["vectors",6,"producer"],"Mapa","VECTOR_OWNER_TAMPER:F07")
+    def test_graph_node_extra_confidence_rejected(self):
+        d=copy.deepcopy(BASE)
+        d["semantic_graph"]["nodes"][0]["confidence"]=1.0
+        self.assertIn("NODE_SCHEMA_DRIFT",validate(d))
+    def test_producer_node_ownership_cannot_be_reassigned(self):
+        d=copy.deepcopy(BASE)
+        d["semantic_graph"]["nodes"][1]["owner"]="RafGitTools"
+        self.assertIn("PRODUCER_NODE_TAMPER:Mapa",validate(d))
+    def test_edge_cannot_assert_causality(self):
+        assert_reject(self,["semantic_graph","edges",0,"epistemic"],
+            "PROVEN_CAUSAL","EDGE_FALSE_PROVENANCE_OR_CAUSALITY")
+    def test_edge_cannot_invent_provider_provenance(self):
+        assert_reject(self,["semantic_graph","edges",0,"provenance"],
+            "SIGNED_PROVIDER_READBACK","EDGE_FALSE_PROVENANCE_OR_CAUSALITY")
+    def test_edge_cannot_hide_approval_field(self):
+        d=copy.deepcopy(BASE)
+        d["semantic_graph"]["edges"][0]["approved"]=True
+        self.assertIn("EDGE_SCHEMA_DRIFT",validate(d))
+    def test_evidence_extra_promotion_field_rejected(self):
+        d=copy.deepcopy(BASE)
+        d["evidence_register"][0]["provider_success"]=True
+        self.assertIn("EVIDENCE_SCHEMA_DRIFT",validate(d))
+    def test_receipt_tamper_proof_field_rejected(self):
+        d=copy.deepcopy(BASE)
+        d["receipts"][0]["signature_valid"]=True
+        self.assertIn("RECEIPT_SCHEMA_DRIFT",validate(d))
+    def test_promotion_extra_scope_rejected(self):
+        d=copy.deepcopy(BASE)
+        d["promotion"]["auto_promote"]=True
+        self.assertIn("PROMOTION_SCHEMA_DRIFT",validate(d))
+
     def test_predecessor_is_not_deleted(self):
         assert_reject(self,["predecessor","relation"],"REPLACES_ERASES","LOSS_OF_PREDECESSOR")
 
