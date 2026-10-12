@@ -56,6 +56,7 @@ STRICT_FIELDS_S1={
     "edge":{"from","relation","to","provenance","epistemic"},
     "evidence":{"id","scope","provenance","state","claim_allowed"},
     "receipt":{"id","trigger","mandatory","state"},
+    "receipt_rollback":{"id","trigger","action","state"},
     "promotion":{"claim_allowed","repo_merge_allowed",
                  "source_code_promotion_allowed","reason"},
 }
@@ -260,7 +261,11 @@ def validate(v):
     if not isinstance(evid,list) or len(evid)!=3 or any(r.get("state")!="PRIOR_OBSERVATION_NEEDS_CURRENT_HEAD_RECHECK" or r.get("claim_allowed") is not False or not _not_blank(r.get("provenance")) for r in evid):
         issues.append("PRIOR_CI_FALSE_PROMOTION")
     receipts=v.get("receipts")
-    if not isinstance(receipts,list) or any(not _fields(x,STRICT_FIELDS_S1["receipt"]) for x in receipts):
+    if not isinstance(receipts,list) or any(
+            not isinstance(x,dict) or not _fields(
+                x,STRICT_FIELDS_S1["receipt_rollback"] if
+                x.get("id")=="ROLLBACK_SESSION_S1" else STRICT_FIELDS_S1["receipt"])
+            for x in receipts):
         issues.append("RECEIPT_SCHEMA_DRIFT")
     if not isinstance(receipts,list) or len(receipts)!=2 or any(r.get("state") not in {"TEMPLATE_NOT_EXECUTION","REVERT_PLAN_AVAILABLE_NOT_EXERCISED"} for r in receipts):
         issues.append("RECEIPT_FAKE_EXECUTION")
