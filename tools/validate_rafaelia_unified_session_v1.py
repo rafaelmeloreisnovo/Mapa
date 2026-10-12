@@ -40,10 +40,62 @@ ESSENTIAL = {
 def _not_blank(x):
     return isinstance(x,str) and bool(x.strip()) and len(x)<768
 
+# STRICT_FIELDS_S1: Prevent unvalidated status/approval channels.
+STRICT_FIELDS_S1={
+    "root":{"schema","version","logical_interaction","read_model","axes",
+            "typed_null_discriminants","critical_invariants","producers",
+            "semantic_graph","vectors","gaps","formal_falsification_fixtures",
+            "evidence_register","receipts","promotion","predecessor",
+            "discovery_provenance"},
+    "vector":{"id","family","subtypes","boundary","producer","gaps",
+              "source_evidence_state","runtime_evidence_state","claim_allowed"},
+    "gap":{"id","token_type","missing_reason","priority","authority",
+           "next_action","falsifier","evidence_required","state",
+           "receipt_state","rollback","claim_allowed"},
+    "node":{"id","type","owner"},
+    "edge":{"from","relation","to","provenance","epistemic"},
+    "evidence":{"id","scope","provenance","state","claim_allowed"},
+    "receipt":{"id","trigger","mandatory","state"},
+    "promotion":{"claim_allowed","repo_merge_allowed",
+                 "source_code_promotion_allowed","reason"},
+}
+VECTOR_OWNER={
+    "F01":"Mapa","F02":"Mapa","F03":"RafPolimata","F04":"RafPolimata",
+    "F05":"RafPolimata","F06":"RafGitTools","F07":"RafGitTools",
+    "F08":"RafGitTools","F09":"Mapa","F10":"RafPolimata",
+    "F11":"RafPolimata","F12":"RafPolimata","F13":"Mapa",
+    "F14":"RafGitTools","F15":"Mapa","F16":"Mapa",
+    "F17":"RafGitTools","F18":"RafPolimata","F19":"RafGitTools",
+    "F20":"Mapa","F21":"RafPolimata","F22":"RafGitTools",
+    "F23":"Mapa","F24":"Mapa","F25":"RafGitTools",
+    "F26":"RafPolimata"
+}
+GAP_OWNER={
+    "G001":"RafGitTools","G002":"RafGitTools","G003":"RafGitTools",
+    "G004":"Mapa","G005":"RafPolimata","G006":"Mapa",
+    "G007":"RafPolimata","G008":"RafGitTools","G009":"RafGitTools",
+    "G010":"Mapa","G011":"RafGitTools","G012":"RafGitTools",
+    "G013":"Mapa","G014":"Mapa","G015":"RafPolimata",
+    "G016":"RafPolimata","G017":"RafPolimata",
+    "G018":"RafGitTools","G019":"Mapa","G020":"RafGitTools",
+    "G021":"RafPolimata","G022":"Mapa","G023":"RafGitTools",
+    "G024":"Mapa","G025":"RafGitTools"
+}
+EDGE_EPISTEMIC={
+    "HAS_VECTOR":("SESSION_TOPIC_INDEX","ROUTE_DEFINED_NOT_CAUSAL"),
+    "ROUTES_TO":("PRODUCER_AUTHORITY_CONTRACT","ROUTE_DEFINED_NOT_EXECUTED"),
+    "BLOCKED_BY":("GAP_REGISTER_THIS_MANIFEST","GAP_NOT_INFERRED_CLOSED")
+}
+
+def _fields(data,expected):
+    return isinstance(data,dict) and set(data)==expected
+
 def validate(v):
     issues=[]
     if not isinstance(v,dict):
         return ["ROOT_NOT_OBJECT"]
+    if not _fields(v,STRICT_FIELDS_S1["root"]):
+        issues.append("ROOT_UNKNOWN_FIELDS")
     if v.get("schema")!="rafaelia.unified-session-audit/v1":
         issues.append("SCHEMA_VERSION")
     if v.get("version")!="S1":
@@ -77,6 +129,10 @@ def validate(v):
     gap_map={x["id"]:x for x in gaps}
     for g in gaps:
         i=g["id"]
+        if not _fields(g,STRICT_FIELDS_S1["gap"]):
+            issues.append("GAP_SCHEMA_DRIFT:"+i)
+        if g.get("authority")!=GAP_OWNER.get(i):
+            issues.append("GAP_OWNER_TAMPER:"+i)
         if g.get("token_type")!="TOKEN_VAZIO" or not str(g.get("missing_reason","")).startswith("TOKEN_VAZIO_"):
             issues.append("GAP_TYPE_LOSS:"+i)
         if g.get("authority") not in OWNERS or g.get("state") not in STATES:
@@ -93,6 +149,10 @@ def validate(v):
     indexed=set()
     for f in vectors:
         i=f["id"]
+        if not _fields(f,STRICT_FIELDS_S1["vector"]):
+            issues.append("VECTOR_SCHEMA_DRIFT:"+i)
+        if f.get("producer")!=VECTOR_OWNER.get(i):
+            issues.append("VECTOR_OWNER_TAMPER:"+i)
         indexed.add(i)
         if f.get("producer") not in OWNERS or not _not_blank(f.get("family")) or not _not_blank(f.get("subtypes")) or not _not_blank(f.get("boundary")):
             issues.append("VECTOR_INCOMPLETE:"+i)
@@ -154,6 +214,12 @@ def validate(v):
     expected_nodes={"SESSION_COMPOSITE_OMEGA"} | {"P_"+o for o in OWNERS} | FAMILIES | GAPS
     if set(by_id)!=expected_nodes or len(nodes)!=len(expected_nodes):
         issues.append("NODE_MISSING_OR_DUPLICATE")
+    if any(not _fields(x,STRICT_FIELDS_S1["node"]) for x in nodes):
+        issues.append("NODE_SCHEMA_DRIFT")
+    for o in OWNERS:
+        item=by_id.get("P_"+o,{})
+        if item.get("type")!="PRODUCER" or item.get("owner")!=o:
+            issues.append("PRODUCER_NODE_TAMPER:"+o)
     if by_id.get("SESSION_COMPOSITE_OMEGA",{}).get("type")!="COMPOSITE_VIEW":
         issues.append("GRAPH_FALSE_SESSION_EVENT")
     for f in vectors:
@@ -174,6 +240,11 @@ def validate(v):
             issues.append("INVALID_EDGE")
             continue
         t=(e.get("from"),e.get("relation"),e.get("to"))
+        if not _fields(e,STRICT_FIELDS_S1["edge"]):
+            issues.append("EDGE_SCHEMA_DRIFT")
+        expected=EDGE_EPISTEMIC.get(e.get("relation"))
+        if expected is None or (e.get("provenance"),e.get("epistemic"))!=expected:
+            issues.append("EDGE_FALSE_PROVENANCE_OR_CAUSALITY")
         if e.get("relation") not in RELATIONS or t[0] not in by_id or t[2] not in by_id:
             issues.append("DANGLING_OR_UNTYPED_EDGE")
         if not _not_blank(e.get("provenance")) or not _not_blank(e.get("epistemic")):
@@ -181,10 +252,16 @@ def validate(v):
         actual_edges.add(t)
     if len(actual_edges)!=len(edges) or actual_edges!=expected_edges:
         issues.append("GRAPH_EDGE_BIJECTION_MISSING")
+    if not _fields(v.get("promotion"),STRICT_FIELDS_S1["promotion"]):
+        issues.append("PROMOTION_SCHEMA_DRIFT")
     evid=v.get("evidence_register")
+    if not isinstance(evid,list) or any(not _fields(x,STRICT_FIELDS_S1["evidence"]) for x in evid):
+        issues.append("EVIDENCE_SCHEMA_DRIFT")
     if not isinstance(evid,list) or len(evid)!=3 or any(r.get("state")!="PRIOR_OBSERVATION_NEEDS_CURRENT_HEAD_RECHECK" or r.get("claim_allowed") is not False or not _not_blank(r.get("provenance")) for r in evid):
         issues.append("PRIOR_CI_FALSE_PROMOTION")
     receipts=v.get("receipts")
+    if not isinstance(receipts,list) or any(not _fields(x,STRICT_FIELDS_S1["receipt"]) for x in receipts):
+        issues.append("RECEIPT_SCHEMA_DRIFT")
     if not isinstance(receipts,list) or len(receipts)!=2 or any(r.get("state") not in {"TEMPLATE_NOT_EXECUTION","REVERT_PLAN_AVAILABLE_NOT_EXERCISED"} for r in receipts):
         issues.append("RECEIPT_FAKE_EXECUTION")
     gate=v.get("promotion",{})
