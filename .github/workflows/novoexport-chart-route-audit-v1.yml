@@ -3,9 +3,13 @@ on:
   pull_request:
     paths:
       - 'data/assurance/novoexport-chart-route-audit.v1.json'
+      - 'data/assurance/rafaelia-unified-session-audit.v1.json'
       - 'tools/validate_novoexport_chart_routes_v1.py'
+      - 'tools/validate_rafaelia_unified_session_v1.py'
       - 'tests/test_novoexport_chart_routes_v1.py'
+      - 'tests/test_rafaelia_unified_session_v1.py'
       - 'docs/assurance/NOVOEXPORT_CHARTS_ROUTES_RECONSTRUCTION_20261011.md'
+      - 'docs/assurance/RAFAELIA_UNIFIED_SESSION_MATRIX_S1_20261011.md'
       - '.github/workflows/novoexport-chart-route-audit-v1.yml'
   workflow_dispatch:
 permissions:
@@ -18,8 +22,9 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Validate no private payload nor phantom chart promotion
         run: |
-          python3 -m unittest -v tests.test_novoexport_chart_routes_v1
+          python3 -m unittest -v tests.test_novoexport_chart_routes_v1 tests.test_rafaelia_unified_session_v1
           python3 tools/validate_novoexport_chart_routes_v1.py
+          python3 tools/validate_rafaelia_unified_session_v1.py
       - name: Validate no LIVE/provider claim or private link
         run: |
           grep -Fq '"all_chart_data_ingested": false' data/assurance/novoexport-chart-route-audit.v1.json
