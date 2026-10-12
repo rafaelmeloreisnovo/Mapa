@@ -122,7 +122,7 @@ def validate(v):
         topo={}
     c=topo.get("circulant_C42_pm6_pm7",{})
     ico=topo.get("icosphere_f2",{})
-    if not isinstance(c,dict) or not isinstance(ico,dict) or any((c.get("v")!=42,c.get("e")!=84,c.get("degree")!=4,ico.get("v")!=42,ico.get("e")!=120,ico.get("f")!=80,ico.get("euler")!=2,c.get("namespace")==ico.get("namespace")):
+    if not isinstance(c,dict) or not isinstance(ico,dict) or any((c.get("v")!=42,c.get("e")!=84,c.get("degree")!=4,ico.get("v")!=42,ico.get("e")!=120,ico.get("f")!=80,ico.get("euler")!=2,c.get("namespace")==ico.get("namespace"))):
         issues.append("GRAPH42_FALSE_ISOMORPHISM")
     z=topo.get("physical_zones",{})
     m=topo.get("historical_zone_metric_rows",{})
