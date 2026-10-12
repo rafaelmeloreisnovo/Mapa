@@ -257,5 +257,30 @@
       "physical_runtime_proof": "NOT_RUN",
       "personal_data_included": false
     }
-  ]
+  ],
+  "namespace_boundaries": {
+    "LAMA_BARRO_PLUGIN": {
+      "role": "PLUGIN_ONLY_AS_USER_DEFINED",
+      "implementation_file": "TOKEN_VAZIO_NOT_IDENTIFIED",
+      "repo": "TOKEN_VAZIO_NOT_IDENTIFIED",
+      "may_alias_llama_cpp": false,
+      "may_claim_standalone_engine": false,
+      "claim_allowed": false
+    },
+    "LLAMA_CPP_UPSTREAM": {
+      "role": "EXTERNAL_LLM_INFERENCE_ENGINE",
+      "producer": "ggml-org/llama.cpp",
+      "license": "MIT",
+      "distinct_from_lama_barro": true
+    },
+    "LLAMARAFAELIA_EXTENSION": {
+      "role": "OPT_IN_EXTENSIONS_OF_LLAMA_CPP",
+      "repo": "rafaelmeloreisnovo/llamaRafaelia",
+      "cmake_source_blob": "4ea45cb2dc953a472df184bd63e0657257d42fb2",
+      "inference_header_blob": "50a76fdcda88020f7fd751ee149506ca8ffb084e",
+      "default_feature_state": "OFF",
+      "hosted_external_runtime": true,
+      "not_a_pure_freestanding_plugin": true
+    }
+  }
 }
