@@ -1,0 +1,26 @@
+name: Authorial Source Intake Falsifiers
+on:
+  pull_request:
+    paths:
+      - 'data/assurance/federated-authorship-intake-20261011.v1.json'
+      - 'tools/validate_federated_authorship_intake_v1.py'
+      - 'tests/test_federated_authorship_intake_v1.py'
+      - 'docs/assurance/FEDERATED_UPSTREAM_AUTHORSHIP_AUDIT_20261011.md'
+      - '.github/workflows/authorial-source-intake.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  metadata-only-fail-closed:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Verify upstream and project authorship metadata without code import
+        run: |
+          python3 -m unittest -v tests.test_federated_authorship_intake_v1
+          python3 tools/validate_federated_authorship_intake_v1.py
+      - name: Reject synthetic promotion claims
+        run: |
+          grep -Fq 'HOLD_NO_PROMOTION' data/assurance/federated-authorship-intake-20261011.v1.json
+          grep -Fq 'NO_SOURCE_TRANSPLANT_METADATA_POINTER_ONLY' data/assurance/federated-authorship-intake-20261011.v1.json
