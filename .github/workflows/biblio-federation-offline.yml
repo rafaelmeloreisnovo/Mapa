@@ -4,7 +4,9 @@ on:
     paths:
       - 'biblioteconomia/24_BIBLIOFLOW_FEDERATED_51SHARDS_SYMBOLS_ARM32_V1.md'
       - 'data/biblioteconomia/federated_biblio_contract.v1.json'
-      - 'tests/test_federated_biblio_contract.py'
+      - 'tests/*biblio*.py'
+      - 'tools/check_biblio_semantics_v1.py'
+      - 'data/semantics/semantic-dictionary.v1.jsonl'
       - '.github/workflows/biblio-federation-offline.yml'
   workflow_dispatch:
 permissions:
@@ -20,6 +22,8 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate source-side biblio contract and negative falsifiers
-        run: python3 -m unittest discover -s tests -p 'test_federated_biblio_contract.py' -v
+        run: python3 -m unittest discover -s tests -p 'test_*biblio*.py' -v
+      - name: Reconcile live source dictionary without network or provider writes
+        run: python3 tools/check_biblio_semantics_v1.py
       - name: Declare proof scope
         run: echo "PASS here means offline JSON/Unicode/negative contract checks only; not Drive, alphaXiv, provider enforcement, human review, or ARM32 runtime."
