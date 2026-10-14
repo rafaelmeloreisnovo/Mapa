@@ -1,0 +1,25 @@
+name: Biblio Federation (offline source contract)
+on:
+  pull_request:
+    paths:
+      - 'biblioteconomia/24_BIBLIOFLOW_FEDERATED_51SHARDS_SYMBOLS_ARM32_V1.md'
+      - 'data/biblioteconomia/federated_biblio_contract.v1.json'
+      - 'tests/test_federated_biblio_contract.py'
+      - '.github/workflows/biblio-federation-offline.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract_negative_falsifiers:
+    name: deterministic-plan-tests-only
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Validate source-side biblio contract and negative falsifiers
+        run: python3 -m unittest discover -s tests -p 'test_federated_biblio_contract.py' -v
+      - name: Declare proof scope
+        run: echo "PASS here means offline JSON/Unicode/negative contract checks only; not Drive, alphaXiv, provider enforcement, human review, or ARM32 runtime."
