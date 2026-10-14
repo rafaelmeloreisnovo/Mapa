@@ -289,5 +289,38 @@
     "F_gap": "provider enforcement, physical APK and operational parity proof not asserted",
     "F_next": "readback, tests, human privacy review, separate device receipts",
     "claim_allowed": false
+  },
+  "semantic_scope_collisions": [
+    {
+      "literal_utf8": "∅",
+      "legacy_dictionary_id": "SEM-EMPTY-001",
+      "legacy_scope": "RAFAELIA operational semantics",
+      "legacy_alias": "TOKEN_VAZIO",
+      "new_scope": "mathematics/set theory",
+      "state": "POLYSEMY_TYPED_HOLD",
+      "resolution": "REQUIRE_CONTEXT_AND_SOURCE",
+      "do_not_merge_senses": true,
+      "claim_allowed": false
+    },
+    {
+      "literal_utf8": "∆",
+      "legacy_dictionary_id": "SEM-DELTA-001",
+      "legacy_surface": "Δ",
+      "legacy_scope": "RAFAELIA operational semantics",
+      "new_scope": "exact Unicode lexical identity",
+      "state": "DISTINCT_CODEPOINTS_AUTHORIAL_ALIAS",
+      "resolution": "PRESERVE_BOTH_UTF8_AND_ALIAS_PROVENANCE",
+      "do_not_normalize_without_evidence": true,
+      "claim_allowed": false
+    }
+  ],
+  "operational_state_boundaries": {
+    "source_of_truth": "producer_repository_or_private_Drive",
+    "ci_pass_scope": "OFFLINE_MODEL_ONLY",
+    "provider_enforcement": "HOLD_UNTIL_ACTUAL_PROVIDER_READBACK",
+    "apk_arm32": "MISSING_PHYSICAL_EXECUTION_RECEIPT",
+    "privacy": "NO_PUBLISHED_PRIVATE_LOCATORS",
+    "promotion": "EXTERNAL_PROVIDER_AUTHORITY_REQUIRED",
+    "claim_allowed": false
   }
 }
