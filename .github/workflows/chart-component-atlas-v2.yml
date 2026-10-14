@@ -1,0 +1,23 @@
+name: chart-component-atlas-v2
+on:
+  pull_request:
+    paths:
+      - 'data/assurance/chart_component_atlas_20261014.v2.json'
+      - 'tools/validate_chart_component_atlas_v2.py'
+      - '.github/workflows/chart-component-atlas-v2.yml'
+  push:
+    branches: [audit/chart-component-atlas-20261014]
+    paths:
+      - 'data/assurance/chart_component_atlas_20261014.v2.json'
+      - 'tools/validate_chart_component_atlas_v2.py'
+      - '.github/workflows/chart-component-atlas-v2.yml'
+permissions:
+  contents: read
+jobs:
+  chart-metadata-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate scoped chart source and negative mutations
+        run: python3 tools/validate_chart_component_atlas_v2.py --self-test
