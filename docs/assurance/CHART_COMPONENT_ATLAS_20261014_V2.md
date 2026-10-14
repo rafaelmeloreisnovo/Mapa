@@ -59,6 +59,7 @@ Source-only gate: `python3 tools/validate_chart_component_atlas_v2.py --self-tes
 **F_next:** per producer, test one authorized chart **with its real inputs**: source bytes SHA, parent chain, data range/units, transform, independent golden result, renderer output, gate and receipt. Prefer first-party SVG and a source-valid synthetic model; **do not run Metasploit fixtures**. Expand only with proven publisher rights and a new source-bound successor registry; never rewrite this v2.
 
 Source references:
+
 - `data/assurance/novoexport-chart-route-audit.v1.json`
 - `docs/assurance/NOVOEXPORT_CHARTS_ROUTES_RECONSTRUCTION_20261011.md`
 - `visual/` at Mapa current source head

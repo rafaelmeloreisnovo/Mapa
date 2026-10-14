@@ -1,0 +1,293 @@
+{
+  "schema": "rafaelia.biblioteconomia.federated-biblio-contract/v1",
+  "state": "DRAFT_SOURCE_BOUND",
+  "claim_allowed": false,
+  "predecessor": "data/biblioteconomia/novoexport_library_model.v1.json",
+  "docs": [
+    "biblioteconomia/23_NOVOEXPORT_BIBLIOTECA_SEMANTICA.md",
+    "biblioteconomia/24_BIBLIOFLOW_FEDERATED_51SHARDS_SYMBOLS_ARM32_V1.md"
+  ],
+  "invariants": [
+    "SOURCE != ARTIFACT != EXECUTION != EVIDENCE != CLAIM",
+    "TOKEN_VAZIO != NUMERIC_ZERO",
+    "IMPLEMENTED_UNTESTED != PASS",
+    "TITLE_MATCH != IDENTITY",
+    "CO_OCCURRENCE != IMPLEMENTS",
+    "PUBLICATION != PROMOTION",
+    "NO_RAW_PRIVATE_DATA_IN_PUBLIC_REPOSITORY"
+  ],
+  "providers": [
+    {
+      "surface": "GITHUB_PUBLIC",
+      "purpose": "catalog_contract_tests_ci",
+      "access": "public",
+      "authority": "repository_producer_or_mapa_router",
+      "write_guard": "EXACT_HEAD_AND_REVIEW",
+      "private_payload_allowed": false
+    },
+    {
+      "surface": "GITHUB_PRIVATE",
+      "purpose": "private_producer_code_and_evidence",
+      "access": "private",
+      "authority": "respective_producer",
+      "write_guard": "PER_REPO_AUTHORIZED_SCOPED",
+      "private_payload_allowed": false,
+      "public_metadata": "opaque_only"
+    },
+    {
+      "surface": "GOOGLE_DRIVE_PUBLIC",
+      "purpose": "approved_published_descriptions",
+      "access": "restricted_publication",
+      "authority": "drive_file_owner",
+      "write_guard": "EXPLICIT_DISCLOSURE_REVIEW",
+      "private_payload_allowed": false
+    },
+    {
+      "surface": "GOOGLE_DRIVE_PRIVATE",
+      "purpose": "NOVOexport_custody_catalog_receipts",
+      "access": "private",
+      "authority": "drive_file_owner",
+      "write_guard": "APPEND_ONLY_READBACK_SHA256",
+      "private_payload_allowed": true,
+      "metadata_in_public": "NO_IDS_OR_PRIVATE_HASHES"
+    },
+    {
+      "surface": "ALPHAXIV",
+      "purpose": "paper_bibliography_private_notes",
+      "access": "PER_FOLDER_SHARING_STATUS",
+      "authority": "alphaxiv_account",
+      "write_guard": "PRIVATE_DEFAULT_NO_AUTOPUBLISH",
+      "private_payload_allowed": false,
+      "public_metadata": "paper_ids_only_if_public_verified"
+    },
+    {
+      "surface": "ANDROID_ARM32",
+      "purpose": "local_offline_index_and_proof_capture",
+      "access": "device_local",
+      "authority": "device_owner",
+      "write_guard": "EXACT_APK_HASH_AND_PHYSICAL_RECEIPT",
+      "private_payload_allowed": true,
+      "network_boundary": "host_OAuth_TLS_SAF_not_L0"
+    }
+  ],
+  "existing_drives": [
+    "biblioteca_semantica_NOVOexport",
+    "NOVOexport_51_original_shards",
+    "derived_private_term_genealogy_20261014"
+  ],
+  "source_binding_required": [
+    "provider",
+    "account_alias",
+    "provider_object_id",
+    "source_revision_or_exact_commit",
+    "source_time",
+    "observed_time",
+    "access_class"
+  ],
+  "private_catalog_record_required": [
+    "library_id",
+    "literal_utf8",
+    "source_locator",
+    "speaker_role",
+    "first_observed_event_time",
+    "semantic_state",
+    "source_digest_algorithm",
+    "source_digest_scope",
+    "evidence_refs",
+    "gap_refs",
+    "receipt_ref",
+    "rollback_ref"
+  ],
+  "publishing_policy": {
+    "public_repo_source_ids": "never_for_private_assets",
+    "hashes": "public_only_if_not_identifying_private_person_or_record",
+    "raw_conversations": false,
+    "private_folder_names": false,
+    "oauth_tokens": false,
+    "private_annotation_text": false
+  },
+  "lexical_types": [
+    {
+      "literal_utf8": "§",
+      "unicode_codepoints": [
+        "U+00A7"
+      ],
+      "kind": "LEGAL_OR_TYPOGRAPHIC_LITERAL",
+      "semantics": "TOKEN_VAZIO_UNTIL_CONTEXT",
+      "scope": "jurisdiction_and_language"
+    },
+    {
+      "literal_utf8": "∆",
+      "unicode_codepoints": [
+        "U+2206"
+      ],
+      "kind": "MATHEMATICAL_OR_SYMBOLIC_LITERAL",
+      "semantics": "TOKEN_VAZIO_UNTIL_CONTEXT",
+      "note": "not same byte sequence as Greek capital Delta U+0394"
+    },
+    {
+      "literal_utf8": "∅",
+      "unicode_codepoints": [
+        "U+2205"
+      ],
+      "kind": "SET_SYMBOL",
+      "semantics": "EMPTY_SET_IF_MATH_CONTEXT",
+      "not_equal_to": [
+        "JSON null",
+        "empty string",
+        "numeric zero",
+        "TOKEN_VAZIO"
+      ]
+    },
+    {
+      "literal_utf8": "Π",
+      "unicode_codepoints": [
+        "U+03A0"
+      ],
+      "kind": "MATHEMATICAL_OR_SYMBOLIC_LITERAL",
+      "semantics": "TOKEN_VAZIO_UNTIL_CONTEXT"
+    },
+    {
+      "literal_utf8": "Ω",
+      "unicode_codepoints": [
+        "U+03A9"
+      ],
+      "kind": "MATHEMATICAL_OR_SYMBOLIC_LITERAL",
+      "semantics": "TOKEN_VAZIO_UNTIL_CONTEXT"
+    },
+    {
+      "literal_utf8": "★",
+      "unicode_codepoints": [
+        "U+2605"
+      ],
+      "kind": "SYMBOLIC_LITERAL",
+      "semantics": "TOKEN_VAZIO_UNTIL_CONTEXT"
+    },
+    {
+      "literal_utf8": "†",
+      "unicode_codepoints": [
+        "U+2020"
+      ],
+      "kind": "SYMBOLIC_LITERAL",
+      "semantics": "TOKEN_VAZIO_UNTIL_CONTEXT"
+    },
+    {
+      "literal_utf8": "‡",
+      "unicode_codepoints": [
+        "U+2021"
+      ],
+      "kind": "SYMBOLIC_LITERAL",
+      "semantics": "TOKEN_VAZIO_UNTIL_CONTEXT"
+    },
+    {
+      "literal_utf8": "4bit|4bit",
+      "kind": "DESIGN_NOTATION",
+      "semantics": "8_BIT_BYTE_IF_CONCATENATION_CONFIRMED",
+      "proof": "4+4=8 arithmetic only"
+    },
+    {
+      "literal_utf8": "2⅓+2⅓1⅓",
+      "kind": "UNRESOLVED_GRAMMAR",
+      "semantics": "TOKEN_VAZIO_SEMANTIC",
+      "warning": "juxtaposition does not select multiplication or concatenation"
+    }
+  ],
+  "mathematical_checks": [
+    {
+      "literal": "10*10*10=1000",
+      "expect": "TRUE",
+      "scope": "finite_grid_capacity"
+    },
+    {
+      "literal": "ceil(log2(1000))=10",
+      "expect": "TRUE",
+      "scope": "binary_address_width"
+    },
+    {
+      "literal": "10+8+2=20",
+      "expect": "TRUE_ARITHMETIC_ONLY",
+      "scope": "format_hypothesis_without_defined_parity"
+    },
+    {
+      "literal": "21*2=42",
+      "expect": "TRUE",
+      "scope": "integer_arithmetic"
+    },
+    {
+      "literal": "70*7=14",
+      "expect": "CONTRADICTION_490_NOT_14",
+      "scope": "integer_arithmetic",
+      "do_not_silently_correct": true
+    }
+  ],
+  "edge_types": [
+    "appears_in",
+    "defined_by",
+    "similar_literal",
+    "co_occurs_with",
+    "derived_from",
+    "implements",
+    "tested_by",
+    "evidenced_by",
+    "supersedes",
+    "routes_to",
+    "contradicts"
+  ],
+  "gates": [
+    "SOURCE_IDENTITY",
+    "ACCESS",
+    "LITERAL",
+    "SEMANTIC",
+    "CODE",
+    "CI_PROVIDER",
+    "DEVICE_ARM32",
+    "PRIVACY",
+    "ALPHAXIV",
+    "ROLLBACK"
+  ],
+  "gate_values": [
+    "PASS_SCOPED",
+    "FAIL",
+    "HOLD",
+    "TOKEN_VAZIO",
+    "NOT_APPLICABLE",
+    "IMPLEMENTED_UNTESTED"
+  ],
+  "operation_log_required": {
+    "entry_a": [
+      "provider",
+      "surface",
+      "authority",
+      "source_identity",
+      "source_digest_scope",
+      "source_time",
+      "observed_time",
+      "access"
+    ],
+    "entry_b": [
+      "operation",
+      "edge_type",
+      "from_state",
+      "to_state",
+      "evidence_refs",
+      "receipt_id",
+      "actor_authority",
+      "priority",
+      "rollback",
+      "next_probe"
+    ]
+  },
+  "promotion": {
+    "auto_merge": false,
+    "require_exact_SHA": true,
+    "require_distinct_reviewer": true,
+    "require_provider_enforcement": true,
+    "require_artifact_attestation_for_device": true
+  },
+  "r3": {
+    "F_ok": "public contract bridges existing KOS to provider typed-route design",
+    "F_gap": "provider enforcement, physical APK and operational parity proof not asserted",
+    "F_next": "readback, tests, human privacy review, separate device receipts",
+    "claim_allowed": false
+  }
+}

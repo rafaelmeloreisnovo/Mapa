@@ -40,6 +40,7 @@
 | `17_AVALIACAO_CONTEUDO.md` | leitura real dos arquivos (7 nós avaliados) |
 | `18_ROADMAP_ESTADO.md` | contabilidade dos passos (feito × LACUNA) |
 | `23_NOVOEXPORT_BIBLIOTECA_SEMANTICA.md` | integração biblioteconômica do NOVOexport: catálogo, dicionário, biblioflow, manifold, atlas e scaffold |
+| `24_BIBLIOFLOW_FEDERATED_51SHARDS_SYMBOLS_ARM32_V1.md` | sucessor DRAFT do 23: rotas público/privado, tipagem de Unicode/sentidos, gate ARM32, dupla entrada e recibos, sem corpus bruto |
 | `SEMENTE_BIBLIOTECA_VIVA.md` | parábola de alinhamento para outra IA (texto do autor) |
 | `BACKLOG_ACERVO.md` | acervo real enumerado (111 conhecidos) |
 | `INDICE_GERAL.md` | **este guia** |
