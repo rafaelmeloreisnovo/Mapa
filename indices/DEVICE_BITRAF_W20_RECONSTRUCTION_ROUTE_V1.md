@@ -1,3 +1,11 @@
+# Correção de escopo — rota secundária W20
+
+**Leitura prioritária:** [BitRafa geométrico-vetorial, senoides e organização da entropia](BITRAF_GEOMETRIC_WAVE_ENTROPY_PRIMARY_ROUTE_V1.md). A partir da explicação posterior do autor em 14/10/2026, **esta página W20 não representa o objetivo principal**. É um experimento separado de empacotamento e paridade, com CI no produtor, sem ponte comprovada para a geometria ondulatória de oito pontos.
+
+Para a arquitetura autoral original, as fontes devem ser percorridas como `Matem-tica-/PG-Ω7 → termux-app-rafacodephi/rafaelia_bitraf.c → rafaelia_b8.S → mapa de incidências/ondas/entropia`. A fonte original e o trabalho W20 são preservados por anterioridade, sem promoção indevida.
+
+---
+
 # Dispositivo RAFAELIA — rota de reconstrução BITRAF8000 → W20 → ARM32
 
 **Status:** `ROUTE_SOURCE_BOUND / NÃO PROMOVER` · 2026-10-14 · `claim_allowed=false`.
