@@ -128,9 +128,12 @@ class TestGeometricWaveIntent(unittest.TestCase):
         self.assertIn("ENTROPY_GAIN_UNPROVED", errors)
 
     def test_invalid_coordinates_fail_closed(self):
-        for value in ((1, 0, 1), (0, 1), (0, 0, 2), (0, 1, 1, 0)):
+        for bits in ((0, 1), (0, 2, 1), (0, 1, 1, 0)):
             with self.assertRaises(ValueError):
-                decode(value) if any(x not in (0, 1) for x in value) else vertex(value)
+                vertex(bits)
+        for signs in ((1, 0, 1), (0, 1), (2, 1, 1)):
+            with self.assertRaises(ValueError):
+                decode(signs)
 
 
 if __name__ == "__main__":
