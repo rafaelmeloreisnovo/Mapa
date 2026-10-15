@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'data/devices/mobile_bitraf_w20_reconstruction_route.v1.json'
+      - 'data/geometry/bitraf_geometric_wave_entropy_route.v1.json'
+      - 'indices/BITRAF_GEOMETRIC_WAVE_ENTROPY_PRIMARY_ROUTE_V1.md'
+      - 'tests/test_bitraf_geometric_wave_entropy.py'
       - 'indices/DEVICE_BITRAF_W20_RECONSTRUCTION_ROUTE_V1.md'
       - 'tests/test_device_bitraf_w20_route.py'
       - '.github/workflows/device-bitraf-w20-route.yml'
@@ -23,6 +26,8 @@ jobs:
           persist-credentials: false
       - name: Execute source-only negative route tests
         run: python3 -m unittest discover -s tests -p 'test_device_bitraf_w20_route.py' -v
+      - name: Falsify dual tetrahedra, bit labels and false entropy claims
+        run: python3 -m unittest discover -s tests -p 'test_bitraf_geometric_wave_entropy.py' -v
       - name: State non-promotion and unobserved hardware boundary
         run: |
           echo 'PASS is restricted to source routing schema, not W20 producer runtime or Android physical device'
