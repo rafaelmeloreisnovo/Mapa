@@ -47,6 +47,7 @@ Preferir `ATLAS:X`, `L:X`, `O:X`, `T:X`, `REL:X`, `EVID:X`, `GAP:X`; consulta `N
 `node_id | owner | source_ref | observer | value_type | semantic_domain | units | clock | location_scope | error_kind | noise_kind | latency_window | recurrence_rule | geometry | source_context | L/O/T/C/P | independent_evidence | baseline | falsifier | claim_state | gap_id | next | receipt | rollback`
 
 Bloquear `merge/promote` quando:
+
 - ausência de origem, unidade, clock, evidência ou falsificador exigidos;
 - ruído sintético apresentado como fonte física;
 - endereço lógico apresentado como célula física;
