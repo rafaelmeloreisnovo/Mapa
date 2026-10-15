@@ -1,0 +1,34 @@
+name: Mobile BITRAF W20 Reconstruction Route (offline)
+
+on:
+  pull_request:
+    paths:
+      - 'data/devices/mobile_bitraf_w20_reconstruction_route.v1.json'
+      - 'data/geometry/bitraf_geometric_wave_entropy_route.v1.json'
+      - 'indices/BITRAF_GEOMETRIC_WAVE_ENTROPY_PRIMARY_ROUTE_V1.md'
+      - 'tests/test_bitraf_geometric_wave_entropy.py'
+      - 'indices/DEVICE_BITRAF_W20_RECONSTRUCTION_ROUTE_V1.md'
+      - 'tests/test_device_bitraf_w20_route.py'
+      - '.github/workflows/device-bitraf-w20-route.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source_route_falsifiers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact source without persistent credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Execute source-only negative route tests
+        run: python3 -m unittest discover -s tests -p 'test_device_bitraf_w20_route.py' -v
+      - name: Falsify dual tetrahedra, bit labels and false entropy claims
+        run: python3 -m unittest discover -s tests -p 'test_bitraf_geometric_wave_entropy.py' -v
+      - name: State non-promotion and unobserved hardware boundary
+        run: |
+          echo 'PASS is restricted to source routing schema, not W20 producer runtime or Android physical device'
+          echo 'DEVICE=TOKEN_VAZIO PROVIDER_ENFORCEMENT=HOLD CLAIM_ALLOWED=false'

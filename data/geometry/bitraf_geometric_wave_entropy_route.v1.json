@@ -1,0 +1,197 @@
+{
+  "schema": "rafaelia.bitraf.geometry-wave-entropy-route/v1",
+  "title": "BITRAF multi-geometry / sinusoidal directional field, distinct from compression or W20 serialization",
+  "interpretation_status": "SOURCE_BOUND_CORRECTION_CANDIDATE",
+  "claim_allowed": false,
+  "source_motivated_by": "author's clarification on 2026-10-14: bits as directional vectors, sinusoids/wavefunction, entropy organization; geometric chain from point to dual pyramids",
+  "primary_source_refs": [
+    {
+      "repository": "rafaelmeloreisnovo/Matem-tica-",
+      "commit": "555a6974c2a9646fe2ca9b58f303c528ae8b83b2",
+      "path": "docs/PG_OMEGA7_PIRAMIDE_TRIEDRICA_DUPLA_E_ESTRANGULAMENTO_V1.md",
+      "scope": "3 distinct glue-map constructions, square/triangles/circle/sphere/cube/torus/two tetrahedra; Giza analogy"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "commit": "82a47784fbe52ed10170e8a1c9124fa111af4212",
+      "path": "rmr/Rrr/rafaelia_bitraf.c",
+      "scope": "1000 volume points +8 extras; 42 bits/point in uint64_t, 7 semantic slices, 7 traversal stride, hosted POSIX, not complete free-standing codec"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/termux-app-rafacodephi",
+      "commit": "82a47784fbe52ed10170e8a1c9124fa111af4212",
+      "path": "rmr/Rrr/rafaelia_b8.S",
+      "scope": "seven sinusoidal layers harmonic phase Q16.16, adaptive weights and CRC chained; ARM32 assembly with Linux syscall, not physical signal proof"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/Mapa",
+      "commit": "9c6fb0abad0ba747632fa4d25b50e09a49a0526b",
+      "path": "docs/canonical/2026-08-02/INVARIANTE_GEOMETRICA_COERENTE_E_COESAO_REAL_V1.md",
+      "scope": "must specify object, transformation family, invariant, epsilon"
+    },
+    {
+      "repository": "rafaelmeloreisnovo/RafPolimata",
+      "commit": "8d0fb29904b0bbd990b8fec08c57e5ab05db42dd",
+      "path": "rafaelia/bitraf_matrix.h",
+      "scope": "separate 8000-state coordinate+vertex+parity geometry carrier, not equal to 1008 or eight tetrahedral corners"
+    }
+  ],
+  "core_intent": {
+    "is_compression": false,
+    "purpose": "typed geometric/spectral indexing and directional association of binary states",
+    "signal_kind": "MATHEMATICAL_EMBEDDING_CANDIDATE",
+    "information_preservation": "INJECTIVE_OR_KEEPS_RAW_BITS_REQUIRED",
+    "scientific_entropy_claim": "NOT_DEMONSTRATED_REDUCTION"
+  },
+  "geometric_chain": [
+    "POINT",
+    "LINE_SEGMENT",
+    "SQUARE",
+    "TWO_EQUILATERAL_TRIANGLES",
+    "CIRCLE_S1",
+    "CUBE",
+    "SPHERE_S2",
+    "TETRAHEDRON_PAIR",
+    "TORUS_T2_OPTIONAL"
+  ],
+  "tetra_pair_candidates": [
+    {
+      "id": "OVERLAPPING_REGULAR_TETRA_CUBE8",
+      "state": "MATHEMATICAL_EXAMPLE_NOT_AUTHOR_CONFIRMED",
+      "distinct_vertices": 8,
+      "bit_labels": [
+        "000",
+        "011",
+        "101",
+        "110",
+        "001",
+        "010",
+        "100",
+        "111"
+      ],
+      "vertices_per_tetra": 4,
+      "triangular_faces_per_tetra": 4,
+      "shared_vertices": 0,
+      "interpretation": "two interpenetrating regular tetrahedra partition the eight cube vertices by parity (even/odd number of minus signs); this is compound geometry, not same solid as a single octahedron",
+      "octahedron_not_equivalent": true
+    },
+    {
+      "id": "TETRA_FACE_GLUE",
+      "state": "SOURCE_DOCUMENTED_ALTERNATIVE",
+      "distinct_vertices": 5,
+      "triangular_outer_faces": 6,
+      "interpretation": "two tetrahedra joined on a common triangular base"
+    },
+    {
+      "id": "TETRA_APEX_GLUE",
+      "state": "SOURCE_DOCUMENTED_ALTERNATIVE",
+      "distinct_vertices": 7,
+      "interpretation": "two tetrahedra share one tip; pinched complex"
+    },
+    {
+      "id": "SQUARE_PYRAMID_MEDIAN_FOLDS",
+      "state": "SOURCE_DOCUMENTED_ALTERNATIVE",
+      "distinct_vertices": 5,
+      "triangular_surface_panels": 8,
+      "interpretation": "four square-pyramid side faces each represented by two triangular panels; analogous to a debated visual feature of Giza, not eight geometric vertices"
+    }
+  ],
+  "binary_cube8_candidate": {
+    "bit_width": 3,
+    "vertices": 8,
+    "encoding": "three bits b0,b1,b2 to signs s_i=1-2*b_i; tetra index = (b0 XOR b1 XOR b2); even parity/odd parity each four cube corners",
+    "side_squared": 8,
+    "coordinate_scale": "cube corners ±1, one tetrahedron edge length sqrt(8); not a literal 8-bit word",
+    "faces_union_count": 8,
+    "faces_scope": "sum of 4 faces of each intersecting tetrahedron; NOT convex-hull exterior faces",
+    "typed_equivalence": "BIJECTION_3BIT_LABELS_TO_CUBE_CORNERS_ONLY"
+  },
+  "wave_candidate": {
+    "formula": "R(b,t)=V(b)+sum_{k=1..7} a[b,k]*sin(omega[k]*t+phi[b,k])*u[b,k]",
+    "status": "FORMAL_CANDIDATE_NOT_CODE_EXACT",
+    "wave_class": "CLASSICAL_SINUSOIDAL_SIGNAL_OR_MATHEMATICAL_PHASE; NOT QUANTUM_WAVEFUNCTION",
+    "amplitude_phase_weight_direction": {
+      "amplitude": "TOKEN_VAZIO_CALIBRATION",
+      "frequency": "SOURCE_ASM_Q16_HARMONICS_CANDIDATE",
+      "phase": "TOKEN_VAZIO_MAPPING",
+      "direction": "TOKEN_VAZIO_VERTEX_TO_VECTOR_OPERATOR",
+      "strain": "TOKEN_VAZIO_PHYSICAL_MEASUREMENT"
+    },
+    "entropy_policy": "A bijective relabeling preserves the joint Shannon entropy of a distribution. Geometric layout may improve retrieval, adjacency or conditional modeling only if benchmarks show it.",
+    "raw_bit_preservation": "BIT_ORIGINAL_ID_REQUIRED_FOR_ROUNDTRIP"
+  },
+  "non_equivalence": [
+    "8 tetrahedron geometric vertices != 8 BitRAF extra registers (4 isosceles, 2 attractors, 2 integrity fields)",
+    "8 vertices != 8 independent bit values; 8 corners can be labeled with 3 bits",
+    "42 BitRAF semantic slots != 42 f=2 icosphere vertices without a verified typed mapping",
+    "W20 bridge from RafPolimata PR #436 != the canonical vector-wave operator",
+    "regular triangular pyramid (tetrahedron) != conventional square pyramid at Giza",
+    "amplitude/phase/gradient in bit embedding != measured mechanical tensile stress",
+    "sinusoidal layer computation != proven digital-to-analog waveform or sound"
+  ],
+  "observable_code_gaps": [
+    {
+      "type": "CODE_SEMANTICS",
+      "observation": "rafaelia_bitraf.c allocates uint64_t per 42-bit logical point; comment about six-byte storage does not define actual packing; no proof of zero-overhead storage"
+    },
+    {
+      "type": "INTEGRITY",
+      "observation": "bf_write assigns CRC32C to par_xor field, replacing XOR parity meaning; rollback handler recalculates instead of restoring prior bytes"
+    },
+    {
+      "type": "BOUNDARY",
+      "observation": "rafaelia_bitraf.c includes string.h/unistd.h and uses POSIX write, so not a pure L0 freestanding implementation"
+    },
+    {
+      "type": "REAL_WORLD",
+      "observation": "no measured physical vector tension/thermal/electromagnetic wave or independent entropy gain established"
+    }
+  ],
+  "seven_directed_gates": [
+    {
+      "id": "D1",
+      "intent": "SOURCE_PROVENANCE",
+      "falsifier": "which original file and SHA has actual geometric operator; forbid transferring W20 code proof"
+    },
+    {
+      "id": "D2",
+      "intent": "GEOMETRY_INCIDENCE",
+      "falsifier": "eight different vertices vs five face-glued vs seven apex-glued, and exact tetrahedron edge equality"
+    },
+    {
+      "id": "D3",
+      "intent": "BIT_IDENTITY_INJECTIVITY",
+      "falsifier": "two binary states collapse onto same vertex/state without preserved source label"
+    },
+    {
+      "id": "D4",
+      "intent": "SINE_PHASE_MODEL",
+      "falsifier": "undefined or aliased phase/amplitude/direction or numeric overflow"
+    },
+    {
+      "id": "D5",
+      "intent": "ENTROPY_AND_PERFORMANCE",
+      "falsifier": "declaring compressive or entropy gain without before/after distribution and baselines"
+    },
+    {
+      "id": "D6",
+      "intent": "DATA_PRIVACY_AND_CUSTODY",
+      "falsifier": "private Drive conversation content or identifier leaks into GitHub or public logs"
+    },
+    {
+      "id": "D7",
+      "intent": "RUNTIME_CI_PROMOTION",
+      "falsifier": "declaring physical or runtime PASS from docs/host CI; protect branch and keep review independent"
+    }
+  ],
+  "status": {
+    "source_ontology": "FOUND",
+    "geometric_example": "FORMAL_EXACT_TEST_CANDIDATE",
+    "authorial_glue_map": "TOKEN_VAZIO_SELECT_VARIANT",
+    "phase_to_bit_morphism": "TOKEN_VAZIO_FORMULA",
+    "entropy_benefit": "TOKEN_VAZIO_BENCHMARK",
+    "physical_tension": "NOT_OBSERVED",
+    "promotion": "HOLD_NO_MERGE"
+  },
+  "rollback": "append-only corrective scope in Draft Mapa PR #757; W20 code PR #436 preserved as independent candidate, not redefined or merged"
+}
